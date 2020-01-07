@@ -28,3 +28,32 @@ Returns the main Registeration component from Pelcro's Main UI.
 
 Returns the main Dashboard component from Pelcro's Main UI.
 
+
+### Subcomponents
+
+#### `<LoginContainer onSubmit={() => {}} onSuccess={() => {}} onError={() => {}}> Subcomponents </LoginContainer>`
+
+You can use these subcomponents inside it
+
+- `<Email styles={stylesObject} classNames={classNamesString} />`
+
+- `<Password styles={stylesObject} classNames={classNamesString} />`
+
+#### `<RegisterContainer onSubmit={() => {}} onSuccess={() => {}} onError={() => {}}> Subcomponents </RegisterContainer>`
+
+You can use these subcomponents inside it
+
+- `<FirstName styles={stylesObject} classNames={classNamesString} />`
+
+- `<LastName styles={stylesObject} classNames={classNamesString} />`
+
+- `<Email styles={stylesObject} classNames={classNamesString} />`
+
+- `<Password styles={stylesObject} classNames={classNamesString} />`
+
+- `<ConfirmPassword styles={stylesObject} classNames={classNamesString} />`
+
+- `<TermsOfService styles={stylesObject} classNames={classNamesString} />`
+
+- `<PrivacyPolicy styles={stylesObject} classNames={classNamesString} />`
+
