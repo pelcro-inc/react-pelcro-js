@@ -28,6 +28,9 @@ Returns the main Registeration component from Pelcro's Main UI.
 
 Returns the main Dashboard component from Pelcro's Main UI.
 
+#### `<Subscribe classNames={classNamesString} onSubmit={() => {}} onSuccess={() => {}} onError={() => {}}>`
+
+Opens the select subscription viwe, which is the main Select component from Pelcro's Main UI.
 
 ### Subcomponents
 
@@ -56,4 +59,14 @@ You can use these subcomponents inside it
 - `<TermsOfService styles={stylesObject} classNames={classNamesString} />`
 
 - `<PrivacyPolicy styles={stylesObject} classNames={classNamesString} />`
+
+#### `<DashboardContainer> Subcomponents </DashboardContainer>`
+
+You can use these subcomponents inside it
+
+- `<UpdatePaymentMethod styles={stylesObject} classNames={classNamesString} onSubmit={() => {}} onSuccess={() => {}} onError={() => {} />`
+
+- `<UpdateAddress styles={stylesObject} classNames={classNamesString} onSubmit={() => {}} onSuccess={() => {}} onError={() => {} />`
+
+- `<UpdateSubscription styles={stylesObject} classNames={classNamesString} onSubmit={() => {}} onSuccess={() => {}} onError={() => {} />`
 
