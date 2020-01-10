@@ -3,6 +3,7 @@ import "./App.css";
 import LoginContainer from "./Components/Login/LoginContainer";
 import Email from "./SubComponents/Email";
 import Password from "./SubComponents/Password";
+import LoginButton from "./SubComponents/LoginButton";
 
 function App() {
   return (
@@ -13,11 +14,12 @@ function App() {
         <label htmlFor="email">Email: </label>
         <Email
           placeholder="Email Address"
-          styles={{ color: "red" }}
+          style={{ color: "red" }}
           id="email"
         />
         <label htmlFor="password">Password: </label>
         <Password id="password" />
+        <LoginButton style={{ width: 150, marginLeft: 20 }} name="Login here" />
       </LoginContainer>
     </div>
   );
