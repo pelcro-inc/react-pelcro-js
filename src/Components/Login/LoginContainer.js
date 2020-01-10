@@ -4,7 +4,7 @@ const initialState = { email: "", password: "" };
 const store = createContext(initialState);
 const { Provider } = store;
 
-const LoginContainer = ({ styles, classNames, children }) => {
+const LoginContainer = ({ style, className, children }) => {
   const [state, dispatch] = useReducer((state, action) => {
     switch (action.type) {
       case "setEmail":
@@ -19,7 +19,7 @@ const LoginContainer = ({ styles, classNames, children }) => {
   }, initialState);
 
   return (
-    <div style={{ ...styles }} className={classNames}>
+    <div style={{ ...style }} className={className}>
       <Provider value={{ state, dispatch }}>
         {children.length
           ? children.map((child, i) =>

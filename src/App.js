@@ -10,13 +10,9 @@ function App() {
     <div className="App">
       <h2>Pelcro Elements Demo</h2>
       <h3>Login Component</h3>
-      <LoginContainer styles={{ border: "1px solid blue" }}>
+      <LoginContainer>
         <label htmlFor="email">Email: </label>
-        <Email
-          placeholder="Email Address"
-          style={{ color: "red" }}
-          id="email"
-        />
+        <Email placeholder="Email Address" id="email" />
         <label htmlFor="password">Password: </label>
         <Password id="password" />
         <LoginButton style={{ width: 150, marginLeft: 20 }} name="Login here" />

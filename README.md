@@ -16,57 +16,70 @@ Users are able to use our Main UI components directly as they are, e.g. `The log
 
 ### Main Components
 
-#### `<Login styles={stylesObject} classNames={classNamesString} onSubmit={() => {}} onSuccess={() => {}} onError={() => {}} />`
+#### `<Login style={stylesObject} className={classNamesString} onSuccess={() => {}} onError={() => {}} />`
 
 Returns the main Login component from Pelcro's Main UI.
 
-#### `<Register styles={stylesObject} classNames={classNamesString} onSubmit={() => {}} onSuccess={() => {}} onError={() => {}} />`
+#### `<Register style={stylesObject} className={classNamesString} onSuccess={() => {}} onError={() => {}} />`
 
 Returns the main Registeration component from Pelcro's Main UI.
 
-#### `<Dashboard styles={stylesObject} classNames={classNamesString} />`
+#### `<Dashboard style={stylesObject} className={classNamesString} />`
 
 Returns the main Dashboard component from Pelcro's Main UI.
 
-#### `<Subscribe classNames={classNamesString} onSubmit={() => {}} onSuccess={() => {}} onError={() => {}}>`
+#### `<Subscribe className={classNamesString} onSuccess={() => {}} onError={() => {}}>`
 
 Opens the select subscription viwe, which is the main Select component from Pelcro's Main UI.
 
 ### Subcomponents
 
-#### `<LoginContainer onSubmit={() => {}} onSuccess={() => {}} onError={() => {}}> Subcomponents </LoginContainer>`
+#### `<LoginContainer style={stylesObject} className={classNamesString} onSuccess={() => {}} onError={() => {}}> Subcomponents </LoginContainer>`
 
 You can use these subcomponents inside it
 
-- `<Email styles={stylesObject} classNames={classNamesString} />`
+- `<Email style={stylesObject} className={classNamesString} />`
 
-- `<Password styles={stylesObject} classNames={classNamesString} />`
+- `<Password style={stylesObject} className={classNamesString} />`
 
-#### `<RegisterContainer onSubmit={() => {}} onSuccess={() => {}} onError={() => {}}> Subcomponents </RegisterContainer>`
+- `<LoginButton style={stylesObject} className={classNamesString} name="button name [Login]" />`
+
+#### Example
+
+```
+<LoginContainer onSuccess={() => {}} onError={() => {}}>
+    <label htmlFor="email">Email: </label>
+    <Email placeholder="Email Address" id="email" />
+    <label htmlFor="password">Password: </label>
+    <Password id="password" />
+    <LoginButton name="Login here" />
+</LoginContainer>
+```
+
+#### `<RegisterContainer onSuccess={() => {}} onError={() => {}}> Subcomponents </RegisterContainer>`
 
 You can use these subcomponents inside it
 
-- `<FirstName styles={stylesObject} classNames={classNamesString} />`
+- `<FirstName style={stylesObject} className={classNamesString} />`
 
-- `<LastName styles={stylesObject} classNames={classNamesString} />`
+- `<LastName style={stylesObject} className={classNamesString} />`
 
-- `<Email styles={stylesObject} classNames={classNamesString} />`
+- `<Email style={stylesObject} className={classNamesString} />`
 
-- `<Password styles={stylesObject} classNames={classNamesString} />`
+- `<Password style={stylesObject} className={classNamesString} />`
 
-- `<ConfirmPassword styles={stylesObject} classNames={classNamesString} />`
+- `<ConfirmPassword style={stylesObject} className={classNamesString} />`
 
-- `<TermsOfService styles={stylesObject} classNames={classNamesString} />`
+- `<TermsOfService style={stylesObject} className={classNamesString} />`
 
-- `<PrivacyPolicy styles={stylesObject} classNames={classNamesString} />`
+- `<PrivacyPolicy style={stylesObject} className={classNamesString} />`
 
 #### `<DashboardContainer> Subcomponents </DashboardContainer>`
 
 You can use these subcomponents inside it
 
-- `<UpdatePaymentMethod styles={stylesObject} classNames={classNamesString} onSubmit={() => {}} onSuccess={() => {}} onError={() => {} />`
+- `<UpdatePaymentMethod style={stylesObject} className={classNamesString} onSuccess={() => {}} onError={() => {} />`
 
-- `<UpdateAddress styles={stylesObject} classNames={classNamesString} onSubmit={() => {}} onSuccess={() => {}} onError={() => {} />`
+- `<UpdateAddress style={stylesObject} className={classNamesString} onSuccess={() => {}} onError={() => {} />`
 
-- `<UpdateSubscription styles={stylesObject} classNames={classNamesString} onSubmit={() => {}} onSuccess={() => {}} onError={() => {} />`
-
+- `<UpdateSubscription style={stylesObject} className={classNamesString} onSuccess={() => {}} onError={() => {} />`

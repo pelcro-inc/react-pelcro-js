@@ -12,7 +12,7 @@ const LoginButton = props => {
     isDisabled = true;
     window.Pelcro.user.login({ email, password }, (err, res) => {
       if (!err) {
-        alert("Logged In! ", res);
+        alert("Logged In! ", err);
       } else {
         console.log("Error! ", err);
       }
