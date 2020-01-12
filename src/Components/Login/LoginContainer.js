@@ -31,4 +31,4 @@ const LoginContainer = ({ style, className, children }) => {
   );
 };
 
-export default LoginContainer;
+export { LoginContainer, store };
