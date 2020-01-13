@@ -4,7 +4,7 @@ import { store } from "./LoginContainer";
 const LoginWrapper = ({ children }, props) => {
   return (
     <React.Fragment>
-      {React.cloneElement(children, { store, ...props })}}
+      {React.cloneElement(children, { store, ...props })}
     </React.Fragment>
   );
 };

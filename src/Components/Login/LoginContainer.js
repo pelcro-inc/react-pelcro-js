@@ -8,10 +8,8 @@ const LoginContainer = ({ style, className, children }) => {
   const [state, dispatch] = useReducer((state, action) => {
     switch (action.type) {
       case "setEmail":
-        console.log({ email: action.payload });
         return { ...state, email: action.payload };
       case "setPassword":
-        console.log({ password: action.payload });
         return { ...state, password: action.payload };
       default:
         throw new Error();
