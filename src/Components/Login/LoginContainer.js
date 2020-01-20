@@ -24,9 +24,9 @@ const LoginContainer = ({ style, className, children }) => {
         return { ...state, password: action.payload, passwordError: null };
       case SET_EMAIL_ERROR:
         console.log("error: ", action.payload);
-        return { ...state, emailError: action.payload };
+        return { ...state, emailError: action.payload, email: "" };
       case SET_PASSWORD_ERROR:
-        return { ...state, passwordError: action.payload };
+        return { ...state, passwordError: action.payload, password: "" };
       default:
         throw new Error();
     }

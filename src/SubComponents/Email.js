@@ -11,12 +11,19 @@ export default function Email({ placeholder, style, className, id, store }) {
       setEmail(value);
 
       if (validateEmail(email)) {
-        dispatch({ type: SET_EMAIL, payload: value });
+        dispatch({ type: SET_EMAIL, payload: email });
       } else if (finishedTyping) {
-        dispatch({
-          type: SET_EMAIL_ERROR,
-          payload: "Please enter a valid email."
-        });
+        if (email.length) {
+          dispatch({
+            type: SET_EMAIL_ERROR,
+            payload: "Please enter a valid email."
+          });
+        } else {
+          dispatch({
+            type: SET_EMAIL_ERROR,
+            payload: "Email address is required."
+          });
+        }
       }
     },
     [dispatch, email, finishedTyping]
