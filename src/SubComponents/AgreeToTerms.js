@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 
-const AgreeToTerms = props => {
+export const AgreeToTerms = props => {
   const { dispatch, state } = useContext(props.store);
 
   const handleInputChange = value => {
@@ -25,5 +25,3 @@ const AgreeToTerms = props => {
     </div>
   );
 };
-
-export default AgreeToTerms;

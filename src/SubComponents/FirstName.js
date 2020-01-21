@@ -1,12 +1,6 @@
 import React, { useContext } from "react";
 
-export default function FirstName({
-  placeholder,
-  style,
-  className,
-  id,
-  store
-}) {
+export function FirstName({ placeholder, style, className, id, store }) {
   const { dispatch, state } = useContext(store);
 
   const handleInputChange = value => {

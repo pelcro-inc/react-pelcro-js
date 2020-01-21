@@ -7,7 +7,7 @@ import {
   LoginWrapper
 } from "../../components";
 
-export default function Login(props) {
+export function Login(props) {
   return (
     <LoginContainer {...props}>
       <label htmlFor="email">Email: </label>

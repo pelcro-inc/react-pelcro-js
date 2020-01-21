@@ -1,9 +1,9 @@
 import React, { useContext, useState, useEffect, useCallback } from "react";
 import { SET_EMAIL, SET_EMAIL_ERROR } from "../utils/action-types";
 
-export default function Email({ placeholder, style, className, id, store }) {
-  const { dispatch } = useContext(store);
-  const [email, setEmail] = useState("");
+export function Email({ placeholder, style, className, id, store }) {
+  const { dispatch, state } = useContext(store);
+  const [email, setEmail] = useState(state.email);
   const [finishedTyping, setFinishedTyping] = useState(false);
 
   const handleInputChange = useCallback(
@@ -34,7 +34,7 @@ export default function Email({ placeholder, style, className, id, store }) {
   }, [finishedTyping, email, handleInputChange]);
 
   const validateEmail = email => {
-    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
   };
 

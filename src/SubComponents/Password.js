@@ -1,9 +1,9 @@
 import React, { useContext, useState, useEffect, useCallback } from "react";
 import { SET_PASSWORD, SET_PASSWORD_ERROR } from "../utils/action-types";
 
-export default function Password({ placeholder, style, className, id, store }) {
+export function Password({ placeholder, style, className, id, store }) {
   const { dispatch, state } = useContext(store);
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState(state.password);
   const [finishedTyping, setFinishedTyping] = useState(false);
 
   const handleInputChange = useCallback(
@@ -32,7 +32,7 @@ export default function Password({ placeholder, style, className, id, store }) {
       id={id}
       style={{ ...style }}
       className={className}
-      value={state.password}
+      value={password}
       onChange={e => handleInputChange(e.target.value)}
       placeholder={placeholder || "Enter Your Password"}
       onBlur={() => setFinishedTyping(true)}

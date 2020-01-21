@@ -3,7 +3,8 @@ import {
   SET_EMAIL,
   SET_PASSWORD,
   SET_EMAIL_ERROR,
-  SET_PASSWORD_ERROR
+  SET_PASSWORD_ERROR,
+  RESET_LOGIN_FORM
 } from "../../utils/action-types";
 
 const initialState = {
@@ -23,10 +24,11 @@ const LoginContainer = ({ style, className, children }) => {
       case SET_PASSWORD:
         return { ...state, password: action.payload, passwordError: null };
       case SET_EMAIL_ERROR:
-        console.log("error: ", action.payload);
         return { ...state, emailError: action.payload, email: "" };
       case SET_PASSWORD_ERROR:
         return { ...state, passwordError: action.payload, password: "" };
+      case RESET_LOGIN_FORM:
+        return initialState;
       default:
         throw new Error();
     }
