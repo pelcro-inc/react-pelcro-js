@@ -11,8 +11,10 @@ export const LoginButton = props => {
   const [isDisabled, setDisabled] = useState(true);
 
   useEffect(() => {
-    setDisabled(emailError || passwordError);
-  }, [emailError, passwordError]);
+    setDisabled(
+      emailError || passwordError || !email.length || !password.length
+    );
+  }, [emailError, passwordError, email, password]);
 
   const handleLogin = () => {
     setDisabled(true);
