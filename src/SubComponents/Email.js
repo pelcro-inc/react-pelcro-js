@@ -2,8 +2,11 @@ import React, { useContext, useState, useEffect, useCallback } from "react";
 import { SET_EMAIL, SET_EMAIL_ERROR } from "../utils/action-types";
 
 export function Email({ placeholder, style, className, id, store }) {
-  const { dispatch, state } = useContext(store);
-  const [email, setEmail] = useState(state.email);
+  const {
+    dispatch,
+    state: { email: stateEmail, emailError }
+  } = useContext(store);
+  const [email, setEmail] = useState(stateEmail);
   const [finishedTyping, setFinishedTyping] = useState(false);
 
   const handleInputChange = useCallback(
@@ -39,16 +42,19 @@ export function Email({ placeholder, style, className, id, store }) {
   };
 
   return (
-    <input
-      type="email"
-      id={id}
-      style={{ ...style }}
-      className={state.emailError ? "input-error " : "" + className}
-      value={email}
-      onChange={e => handleInputChange(e.target.value)}
-      placeholder={placeholder || "Enter Your Email"}
-      onBlur={() => setFinishedTyping(true)}
-      onFocus={() => setFinishedTyping(false)}
-    ></input>
+    <React.Fragment>
+      <input
+        type="email"
+        id={id}
+        style={{ ...style }}
+        className={emailError ? "input-error " : "" + className}
+        value={email}
+        onChange={e => handleInputChange(e.target.value)}
+        placeholder={placeholder || "Enter Your Email"}
+        onBlur={() => setFinishedTyping(true)}
+        onFocus={() => setFinishedTyping(false)}
+      ></input>
+      <div>{emailError}</div>
+    </React.Fragment>
   );
 }
