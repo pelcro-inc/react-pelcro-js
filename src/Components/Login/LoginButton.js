@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
-import { Button } from "./Button";
-import { RESET_LOGIN_FORM } from "../utils/action-types";
+import { Button } from "../../SubComponents/Button";
+import { RESET_LOGIN_FORM } from "../../utils/action-types";
 
 export const LoginButton = props => {
   const {
@@ -22,7 +22,7 @@ export const LoginButton = props => {
       setDisabled(false);
 
       if (!err) {
-        alert("Logged In! ", err);
+        alert("Logged In! ", res);
       } else {
         dispatch({ type: RESET_LOGIN_FORM });
         console.log("Error! ", err);
