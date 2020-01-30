@@ -1,23 +1,27 @@
 import { LoginContainer } from "./Components/Login/LoginContainer";
 import { Email } from "./SubComponents/Email";
 import { Password } from "./SubComponents/Password";
+import { ConfirmPassword } from "./SubComponents/ConfirmPassword";
 import { LoginButton } from "./Components/Login/LoginButton";
-import { LoginWrapper } from "./Components/Login/LoginWrapper";
-import { Login } from "./Components/Login/Login";
+import { LoginEmail } from "./Components/Login/LoginEmail";
+import { LoginView } from "./Components/Login/LoginView";
 import { RegisterContainer } from "./Components/Register/RegisterContainer";
-import { Register } from "./Components/Register/Register";
-import { RegisterWrapper } from "./Components/Register/RegisterWrapper";
+import { RegisterView } from "./Components/Register/RegisterView";
+import { RegisterEmail } from "./Components/Register/RegisterEmail";
+import { RegisterPassword } from "./Components/Register/RegisterPassword";
 import { RegisterButton } from "./Components/Register/RegisterButton";
 
 export {
   LoginContainer,
   Email,
   Password,
+  ConfirmPassword,
   LoginButton,
-  LoginWrapper,
-  Login,
+  LoginEmail,
+  LoginView,
   RegisterContainer,
-  Register,
-  RegisterWrapper,
-  RegisterButton
+  RegisterView,
+  RegisterButton,
+  RegisterEmail,
+  RegisterPassword
 };

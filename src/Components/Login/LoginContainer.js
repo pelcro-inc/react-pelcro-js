@@ -11,7 +11,8 @@ const initialState = {
   email: "",
   password: "",
   emailError: null,
-  passwordError: null
+  passwordError: null,
+  buttonDisabled: true
 };
 const store = createContext(initialState);
 const { Provider } = store;

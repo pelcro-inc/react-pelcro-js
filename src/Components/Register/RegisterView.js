@@ -1,21 +1,18 @@
 import React from "react";
 import {
   RegisterContainer,
-  Email,
-  Password,
-  RegisterButton,
-  RegisterWrapper
+  RegisterEmail,
+  RegisterPassword,
+  RegisterButton
 } from "../../components";
 
-export function Register(props) {
+export function RegisterView(props) {
   return (
     <RegisterContainer {...props}>
       <label htmlFor="email">Email: </label>
-      <RegisterWrapper>
-        <Email placeholder="Email Address" id="email" />
-      </RegisterWrapper>
+      <RegisterEmail placeholder="Email Address" id="email" />
       <label htmlFor="password">Password: </label>
-      <Password id="password" />
+      <RegisterPassword id="password" />
       <RegisterButton
         style={{ width: 150, marginLeft: 20 }}
         name="Register here"
