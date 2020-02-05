@@ -10,9 +10,9 @@ export function RegisterView(props) {
   return (
     <RegisterContainer {...props}>
       <label htmlFor="email">Email: </label>
-      <RegisterEmail placeholder="Email Address" id="email" />
+      <RegisterEmail placeholder="Email Address" />
       <label htmlFor="password">Password: </label>
-      <RegisterPassword id="password" />
+      <RegisterPassword />
       <RegisterButton
         style={{ width: 150, marginLeft: 20 }}
         name="Register here"

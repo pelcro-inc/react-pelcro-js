@@ -56,7 +56,7 @@ const RegisterContainer = ({ style, className, children }) => {
   }, initialState);
 
   return (
-    <div style={{ ...style }} className={className}>
+    <form style={{ ...style }} className={className}>
       <Provider value={{ state, dispatch }}>
         {children.length
           ? children.map((child, i) =>
@@ -64,7 +64,7 @@ const RegisterContainer = ({ style, className, children }) => {
             )
           : React.cloneElement(children, { store })}
       </Provider>
-    </div>
+    </form>
   );
 };
 

@@ -1,20 +1,24 @@
 import React from "react";
 import {
   LoginContainer,
-  Password,
+  LoginPassword,
   LoginButton,
   LoginEmail
 } from "../../components";
 
 export function LoginView(props) {
   return (
-    <LoginContainer {...props}>
-      <label htmlFor="email">Email: </label>
-      <LoginEmail placeholder="Email Address" id="email" />
-      <label htmlFor="password">Password: </label>
-      <Password id="password" />
-      <LoginButton style={{ width: 150, marginLeft: 20 }} name="Login here" />
-    </LoginContainer>
+    <form>
+      <LoginContainer {...props}>
+        <label htmlFor="email">Email: </label>
+        <div>
+          <LoginEmail placeholder="Email Address" />
+        </div>
+        <label htmlFor="password">Password: </label>
+        <LoginPassword />
+        <LoginButton style={{ width: 150, marginLeft: 20 }} name="Login here" />
+      </LoginContainer>
+    </form>
   );
 }
 
