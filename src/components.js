@@ -2,6 +2,7 @@ import { LoginContainer } from "./Components/Login/LoginContainer";
 import { Email } from "./SubComponents/Email";
 import { Password } from "./SubComponents/Password";
 import { ConfirmPassword } from "./SubComponents/ConfirmPassword";
+import { Logout } from "./SubComponents/Logout";
 import { LoginButton } from "./Components/Login/LoginButton";
 import { LoginEmail } from "./Components/Login/LoginEmail";
 import { LoginPassword } from "./Components/Login/LoginPassword";
@@ -12,6 +13,7 @@ import { RegisterEmail } from "./Components/Register/RegisterEmail";
 import { RegisterPassword } from "./Components/Register/RegisterPassword";
 import { RegisterButton } from "./Components/Register/RegisterButton";
 import { PelcroContainer } from "./Components/PelcroContainer";
+import { DashboardModal } from "./Components/Dashboard/DashboardModal";
 
 export {
   LoginContainer,
@@ -27,5 +29,7 @@ export {
   RegisterButton,
   RegisterEmail,
   RegisterPassword,
-  PelcroContainer
+  PelcroContainer,
+  DashboardModal,
+  Logout
 };

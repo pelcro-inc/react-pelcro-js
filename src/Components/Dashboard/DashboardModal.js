@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { Addresses } from "./Addresses";
-import { Subscriptions } from "./Subscriptios";
+import { Subscriptions } from "./Subscriptions";
+import { Logout } from "../../SubComponents/Logout";
 
 export const DashboardModal = props => {
   const site = window.Pelcro.site.read();
@@ -142,14 +143,7 @@ export const DashboardModal = props => {
             </div>
           </div>
 
-          <button
-            name="logout"
-            className="pelcro-prefix-btn pelcro-prefix-logout-btn"
-            onClick={props.logout}
-            disabled={false}
-          >
-            Logout
-          </button>
+          <Logout ReactGA={props.ReactGA} />
         </div>
       </div>
     </div>
