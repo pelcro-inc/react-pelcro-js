@@ -12,7 +12,7 @@ function App() {
     <PelcroContainer>
       <div id="pelcro-app">
         <div id="list">
-          <h2>Pelcro Elements Demo</h2>{" "}
+          <h2>Pelcro Elements Demo</h2> <br />
           <span>{window.Pelcro.user.isAuthenticated() && "Authenticated"}</span>
           <div style={{ border: "1px solid black" }}>
             <h3>Login Component</h3>
