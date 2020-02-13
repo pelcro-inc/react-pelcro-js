@@ -2,14 +2,15 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8" />
-  <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#000000" />
-  <meta name="description" content="Web site created using create-react-app" />
-  <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pelcro Examples</title>
+</head>
 
+<body>
+  <noscript>
+    You need to enable JavaScript to run this app.
+  </noscript>
   <script>
     var Pelcro = window.Pelcro || (window.Pelcro = {});
     Pelcro.siteid = "%REACT_APP_SITEID%";
@@ -19,23 +20,103 @@
     Pelcro.environment.ui = "%REACT_APP_UI%";
   </script>
   <script src="https://js.pelcro.com/sdk/main.min.js"></script>
+  <div>
+    <h2>ID Buttons</h2>
+    <button id="login-button" class="btn">Login</button>
+    <button id="subscribe-button" class="btn">Subscribe</button>
+    <button id="register-button" class="btn">Register</button>
+    <button id="cart-button" class="btn">Cart</button>
 
-  <title>Pelcro React Elements</title>
-</head>
+  </div>
 
-<body>
-  <noscript>You need to enable JavaScript to run this app.</noscript>
-  <div id="root"></div>
-  <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
+  <div>
+    <h2>Class Buttons</h2>
+    <button class="login-button">Login</button>
+    <button class="pelcro-login-button">Login</button>
+    <button class="subscribe-button">Subscribe</button>
+    <button class="pelcro-subscribe-button">Subscribe</button>
+    <button class="register-button">Register</button>
+    <button class="pelcro-register-button">Register</button>
+    <button class="pelcro-product-button" data-product-id="84" class="btn">Product ID = 84</button>
+    <button class="pelcro-product-button" data-product-id="83" class="btn">Product ID = 83</button>
+    <button class="pelcro-product-button" data-is-gift=true data-product-id="47" class="btn">Product ID = 47 (GIFT =
+      TRUE)</button>
+    <button class="pelcro-subscribe-button" data-product-id="83">Product ID = 83</button>
+    <button class="pelcro-gift-button" data-is-gift=true>GIFT</button>
+    <br />
+    <br />
+    <button class="pelcro-plan-button" data-product-id="84" data-plan-id="1204">PLAN ID = 1204</button>
+    <button class="pelcro-plan-button" data-product-id="84" data-plan-id="2102">PLAN ID = 2102</button>
+    <button class="pelcro-plan-button" data-product-id="83" data-plan-id="1200">PLAN ID = 1200</button>
+    <button class="pelcro-plan-button" data-product-id="83" data-plan-id="1199">PLAN ID = 1199</button>
+    <button class="pelcro-subscribe-button" data-product-id="83" data-plan-id="1199">PLAN ID = 1199</button>
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
+    <p>1</p>
+    <p>1</p>
+    <p>1</p>
+    <p>1</p>
+    <p>1</p>
+    <p>1</p>
+    <p>1</p>
+    <p>1</p>
+    <p>1</p>
+    <p>1</p>
+    <p>1</p>
+    <p>1</p>
+    <p>1</p>
+    <p>1</p>
+  </div>
 
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
+  <div id="pelcro-shop">
+
+  </div>
+
+  <script>
+    window.Pelcro.product.listGoods = function () {
+      return [{
+        id: 'sku_EwF96jbPeqykko',
+        name: 'Product 1',
+        image: 'https://www.safepub.com/app/webroot/images/comicbooks.jpg',
+        description: 'Suspendisse dictum est quis arcu tempus malesuada. Etiam in cursus lacus. Maecenas aliquet dolor sed leo auctor, id bibendum mauris pretium. Duis nisl nunc, placerat eu maximus in, mollis tincidunt mi.',
+        sku: [{
+          price: 9.99
+        }],
+        quantity: 0
+      }, {
+        id: 'sku_EwFDX3jXoBFpzo',
+        name: 'Product 2',
+        image: 'https://www.safepub.com/app/webroot/images/comicbooks.jpg',
+        sku: [{
+          price: 10.99
+        }],
+        quantity: 0
+      }, {
+        id: 'sku_EweKK425n9RpzV',
+        name: 'Product 3',
+        image: 'https://www.safepub.com/app/webroot/images/comicbooks.jpg',
+        description: 'Sed libero tortor, convallis quis consectetur vitae, tristique ac justo. ',
+        sku: [{
+          price: 25.99
+        }],
+        quantity: 0
+
+      }, {
+
+        id: 'sku_EweNGj362tkYrD',
+        name: 'Product 4',
+        image: null,
+        description: 'Donec elementum massa vitae varius finibus. Aenean finibus suscipit risus, eget bibendum urna sagittis ut. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vitae dapibus felis.',
+        sku: [{
+          price: 2.99
+        }],
+        quantity: 0
+
+      }
+
+      ];
+    }
+  </script>
+
 </body>
 
 </html>

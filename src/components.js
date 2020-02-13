@@ -14,6 +14,9 @@ import { RegisterPassword } from "./Components/Register/RegisterPassword";
 import { RegisterButton } from "./Components/Register/RegisterButton";
 import { PelcroContainer } from "./Components/PelcroContainer";
 import { DashboardModal } from "./Components/Dashboard/DashboardModal";
+import { LoginModal } from "./Components/Login/LoginModal";
+import { RegisterModal } from "./Components/Register/RegisterModal";
+import { SelectModal } from "./Components/Select/SelectModal";
 
 export {
   LoginContainer,
@@ -31,5 +34,8 @@ export {
   RegisterPassword,
   PelcroContainer,
   DashboardModal,
-  Logout
+  Logout,
+  RegisterModal,
+  LoginModal,
+  SelectModal
 };
