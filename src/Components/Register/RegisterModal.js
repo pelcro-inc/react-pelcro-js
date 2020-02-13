@@ -189,11 +189,6 @@ export class RegisterModal extends Component {
                       * {this.locale.labels.required}
                     </small>
 
-                    <Submit
-                      onClick={this.register}
-                      text={this.locale.messages.createAccount}
-                      disabled={this.state.disableSubmit}
-                    ></Submit>
                     <p className="pelcro-prefix-small-text">
                       {this.locale.messages.iAgree.iAgree + " "}
                       <a
