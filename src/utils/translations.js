@@ -1,5 +1,9 @@
 export default {
   en_US: {
+    buttons: {
+      account: "My account",
+      login: "Login"
+    },
     "password-forgot": {
       title: "Forgot your password?",
       subtitle: "Enter your email below to reset your password",
@@ -168,11 +172,6 @@ export default {
           nov: "November",
           dec: "December"
         },
-        addCode: "Add coupon code",
-        hideCode: "Hide",
-        code: "Coupon code",
-        codePlaceholder: "Enter your coupon code",
-        applyCouponCode: "Apply coupon",
         checkout: {
           title: "Payment Information"
         }
@@ -275,7 +274,7 @@ export default {
     },
     newsletter: {
       labels: {
-        submit: "Read Article!",
+        submit: "Submit",
         firstName: "First name",
         lastName: "Last name",
         email: "Email",
@@ -284,7 +283,9 @@ export default {
       },
       messages: {
         alreadyHaveAccount: "Already have an account?",
-        loginHere: "Login here"
+        loginHere: "Login here.",
+        createAnAccount: " Create an account by clicking ",
+        here: "here"
       },
       errors: {
         "": ""
@@ -321,7 +322,12 @@ export default {
         date: "Expiration date",
         CVC: "CVC",
         required: "required",
-        submit: "Submit"
+        submit: "Submit",
+        addCode: "Add coupon code",
+        hideCode: "Hide",
+        codePlaceholder: "Enter your coupon code",
+        applyCouponCode: "Apply coupon",
+        code: "Coupon code"
       }
     },
     userEdit: {
@@ -370,6 +376,10 @@ export default {
   },
 
   fr_CA: {
+    buttons: {
+      account: "Accès abonné(e)s",
+      login: "Se connecter"
+    },
     "password-forgot": {
       title: "Mot de passe oublié ?",
       subtitle:
@@ -537,11 +547,6 @@ export default {
           nov: "Novembre",
           dec: "Décembre"
         },
-        addCode: "Ajouter un code promo",
-        hideCode: "Cacher",
-        code: "Code promo",
-        codePlaceholder: "Entrez votre code de coupon",
-        applyCouponCode: "Appliquer code de coupon",
         checkout: {
           title: "Informations de paiement"
         }
@@ -654,7 +659,9 @@ export default {
       },
       messages: {
         alreadyHaveAccount: "Vous avez déjà un compte ?",
-        loginHere: "Connectez-vous ici"
+        loginHere: "Connectez-vous ici",
+        createAnAccount: " Créez un compte en cliquant ",
+        here: "ici"
       },
       errors: {
         "": ""
@@ -693,7 +700,12 @@ export default {
         date: "Date d'expiration",
         CVC: "CVC",
         required: "Champs obligatoires",
-        submit: "Soumettre"
+        submit: "Soumettre",
+        addCode: "Ajouter un code promo",
+        hideCode: "Cacher",
+        codePlaceholder: "Entrez votre code de coupon",
+        applyCouponCode: "Appliquer code de coupon",
+        code: "Code promo"
       }
     },
     userEdit: {
