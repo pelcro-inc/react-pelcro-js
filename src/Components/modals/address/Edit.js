@@ -1,6 +1,7 @@
-// Address view.
-// Address form which is displayed after the Payment view if the plan requires user address.
-// The user should fill all the fields to submit.
+// We should have an address view component to integrate this with a page.
+// And this should be the main modal.
+// Demo #1 integrate this with the main UI/Plugin.
+// Demo #2 how the styles should be customizable.
 
 import React, { Component } from "react";
 import ErrMessage from "../../common/ErrMessage";
@@ -10,10 +11,7 @@ import { getErrorMessages } from "../../common/Helpers";
 import { sortCountries } from "../../../utils/utils";
 
 import localisation from "../../../utils/localisation";
-import {
-  showError,
-  showSuccess
-} from "../../../utils/showing-error";
+import { showError, showSuccess } from "../../../utils/showing-error";
 
 import Header from "../../common/Header";
 import Authorship from "../../common/Authorship";
@@ -79,8 +77,7 @@ class Edit extends Component {
   setCountries = (error, tmp) => {
     if (error) {
       this.props.showError(error.message);
-    } else if (tmp)
-      this.setState({ countries: sortCountries(tmp.countries) });
+    } else if (tmp) this.setState({ countries: sortCountries(tmp.countries) });
   };
 
   setStates = (error, tmp) => {
@@ -111,9 +108,7 @@ class Edit extends Component {
     const items = [];
 
     for (const stateItem in allStates) {
-      if (
-        allStates[stateItem].selected_country === this.state.country
-      ) {
+      if (allStates[stateItem].selected_country === this.state.country) {
         for (const key in allStates[stateItem].states) {
           items.push(
             <option key={key} value={key}>
@@ -380,10 +375,7 @@ class Edit extends Component {
                         autoComplete="country"
                         id="pelcro-input-country"
                       >
-                        <option>
-                          {" "}
-                          {this.locale.labels.country}{" "}
-                        </option>
+                        <option> {this.locale.labels.country} </option>
                         {this.createCountryItems()}
                       </select>
                     </div>

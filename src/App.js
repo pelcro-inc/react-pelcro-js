@@ -6,8 +6,13 @@ import {
   SelectModal,
   LoginModal,
   RegisterModal,
-  DashboardModal
+  DashboardModal,
+  PaymentModal,
+  PaymentView
 } from "./components";
+
+// refactor this then integrate it with the main UI ASAP.
+import AddressEdit from "./Components/modals/address/Edit";
 
 // to be refactored
 import Gift from "./Components/modals/Gift";
@@ -15,13 +20,12 @@ import Redeem from "./Components/modals/Redeem";
 import Payment from "./Components/modals/Payment";
 import Success from "./Components/modals/Success";
 import AddressCreate from "./Components/modals/address/Create";
-import AddressEdit from "./Components/modals/address/Edit";
 import NewsLetter from "./Components/modals/NewsLetter";
 import Meter from "./Components/modals/Meter";
 import Menu from "./Components/Dashboard/Menu";
 import PasswordForgot from "./Components/modals/password/Forgot";
 import PasswordReset from "./Components/modals/password/Reset";
-import SourceCreate from "./Components/modals/source/Create";
+// import SourceCreate from "./Components/modals/source/Create";
 import UserEdit from "./Components/modals/user/Edit";
 
 import Shop from "./Components/shop/Shop";
@@ -321,8 +325,6 @@ class App extends Component {
           )}
           {this.state.view === "login" && (
             <LoginModal
-              plan={this.state.plan}
-              product={this.state.product}
               resetView={this.resetView}
               setView={this.setView}
               loggedIn={this.loggedIn}
@@ -432,7 +434,7 @@ class App extends Component {
           )}
 
           {this.state.view === "source-create" && (
-            <SourceCreate
+            <PaymentModal
               resetView={this.resetView}
               ReactGA={ReactGA}
               setView={this.setView}
