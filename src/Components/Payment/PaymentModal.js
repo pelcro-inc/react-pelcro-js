@@ -20,7 +20,7 @@ export const PaymentModal = props => (
           <Header
             closeButton={true}
             resetView={this.props.resetView}
-            site={this.site}
+            site={window.Pelcro.site.read()}
           ></Header>
           <div className="pelcro-prefix-modal-body">
             <PaymentView {...props} />
