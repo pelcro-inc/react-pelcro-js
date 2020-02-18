@@ -22,16 +22,7 @@ module.exports = {
         loader: "babel-loader",
         exclude: /(node_modules)/,
         options: {
-          presets: [
-            [
-              "@babel/preset-env",
-              {
-                targets: {
-                  browsers: ["ie 9"]
-                }
-              }
-            ]
-          ]
+          presets: ["@babel/preset-react", "@babel/preset-env"]
         }
       },
       // {
@@ -82,5 +73,6 @@ module.exports = {
   performance: {
     maxEntrypointSize: 400000,
     maxAssetSize: 650000
-  }
+  },
+  externals: "react"
 };

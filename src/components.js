@@ -45,4 +45,4 @@ export const Components = {
   PaymentView
 };
 
-export default Components;
+export default PaymentModal;
