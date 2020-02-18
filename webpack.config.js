@@ -74,5 +74,8 @@ module.exports = {
     maxEntrypointSize: 400000,
     maxAssetSize: 650000
   },
-  externals: "react"
+  externals: "react",
+  optimization: {
+    minimize: false
+  }
 };
