@@ -21,7 +21,7 @@ import { SelectModal } from "./Components/Select/SelectModal";
 import { PaymentModal } from "./Components/Payment/PaymentModal";
 import { PaymentView } from "./Components/Payment/PaymentView";
 
-export {
+export const Components = {
   LoginContainer,
   Email,
   Password,
@@ -44,3 +44,5 @@ export {
   PaymentModal,
   PaymentView
 };
+
+export default Components;
