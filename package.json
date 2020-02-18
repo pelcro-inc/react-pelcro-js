@@ -1,9 +1,12 @@
 {
   "name": "test-pelcro-react-elements",
   "description": "Pelcro's React UI Elements",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": false,
   "main": "dist/main.min.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "start": "react-scripts start",
     "dev": "webpack --mode development",
