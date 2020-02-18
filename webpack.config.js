@@ -12,7 +12,7 @@ module.exports = {
   entry: [path.join(__dirname, "src/components.js")],
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: "main.min.js",
+    filename: "index.js",
     libraryTarget: "commonjs2"
   },
   module: {

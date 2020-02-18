@@ -1,9 +1,9 @@
 {
   "name": "test-pelcro-react-elements",
   "description": "Pelcro's React UI Elements",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "private": false,
-  "main": "dist/main.min.js",
+  "main": "dist/index.js",
   "files": [
     "dist"
   ],
