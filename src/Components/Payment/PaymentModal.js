@@ -5,7 +5,7 @@ import Authorship from "../common/Authorship";
 import styles from "./styles.module.scss";
 
 export const PaymentModal = props => {
-  const [site, setSite] = useState(0);
+  const [site, setSite] = useState({});
 
   useEffect(() => {
     setSite(window.Pelcro.site.read());
