@@ -13,7 +13,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "main.min.js",
-    libraryTarget: "commonjs2"
+    libraryTarget: "umd"
   },
   module: {
     rules: [
