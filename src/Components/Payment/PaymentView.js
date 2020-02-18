@@ -1,24 +1,22 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Elements, StripeProvider } from "react-stripe-elements";
+import { withTranslation } from "react-i18next";
 
 import ErrMessage from "../common/ErrMessage";
 import AlertSuccess from "../common/AlertSuccess";
 import { getErrorMessages } from "../common/Helpers";
-import localisation from "../../utils/localisation";
 import { showError, showSuccess } from "../../utils/showing-error";
 
 import CheckoutForm from "../form/CheckoutForm";
 
-export class PaymentView extends Component {
+class DefaultPaymentView extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       disableSubmit: false
     };
-
-    this.locale = localisation("payment-create").getLocaleData();
 
     this.site = window.Pelcro.site.read();
 
@@ -57,7 +55,7 @@ export class PaymentView extends Component {
           nonInteraction: true
         });
 
-        this.showSuccess(this.locale.success);
+        this.showSuccess(this.props.t("success"));
       }
     );
 
@@ -66,11 +64,13 @@ export class PaymentView extends Component {
   };
 
   render() {
+    const { t } = this.props;
+
     return (
       <React.Fragment>
         <div className="pelcro-prefix-title-block">
-          <h4>{this.locale.title}</h4>
-          <p>{this.locale.subtitle}</p>
+          <h4>{t("title")}</h4>
+          <p>{t("subtitle")}</p>
         </div>
 
         <ErrMessage name="payment-create" />
@@ -80,7 +80,7 @@ export class PaymentView extends Component {
           <div className="pelcro-prefix-alert pelcro-prefix-alert-success">
             <div className="pelcro-prefix-payment-message">
               <span>
-                {this.locale.secure}{" "}
+                {t("secure")}{" "}
                 <a
                   className="pelcro-prefix-link"
                   rel="nofollow"
@@ -114,7 +114,9 @@ export class PaymentView extends Component {
   }
 }
 
-PaymentView.propTypes = {
+DefaultPaymentView.propTypes = {
   setView: PropTypes.func,
   resetView: PropTypes.func
 };
+
+export const PaymentView = withTranslation("paymentCreate")(DefaultPaymentView);

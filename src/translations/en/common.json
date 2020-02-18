@@ -1,0 +1,359 @@
+{
+    "buttons": {
+        "account": "My account",
+        "login": "Login"
+    },
+    "password-forgot": {
+        "title": "Forgot your password?",
+        "subtitle": "Enter your email below to reset your password",
+        "email": "Email",
+        "password": "Password",
+        "submit": "Submit",
+        "required": "Required",
+        "passwordResetEmailSent": "Password reset instructions have been sent to your email",
+        "messages": {
+            "alreadyHaveAccount": "Already have an account?",
+            "loginHere": "login here."
+        }
+    },
+    "password-reset": {
+        "title": "Reset your password",
+        "subtitle": "Enter a new password below",
+        "email": "Email",
+        "password": "Password",
+        "confirmPassword": "Confirm password",
+        "submit": "Submit",
+        "required": "Required",
+        "passwordUpdated": "Password has been updated, please login with the new password"
+    },
+    "register": {
+        "title": "Create an account",
+        "subtitle": "Enter your email and password below",
+        "labels": {
+            "signUpFacebook": "Sign up with Facebook",
+            "signUpGoogle": "Sign up with Google",
+            "signUpEmail": "Sign up with Email",
+            "password": "Create password",
+            "email": "Enter email",
+            "passwordPlaceholder": "Create password",
+            "emailPlaceholder": "Enter email",
+            "required": "required"
+        },
+        "messages": {
+            "alreadyHaveAccount": "Already have an account?",
+            "createAccount": "Create account",
+            "loginHere": "login here. ",
+            "selectPlan": "Select a different plan ",
+            "here": "here",
+            "iAgree": {
+                "iAgree": "I agree to the",
+                "terms": "Terms of Service",
+                "and": "and",
+                "privacy": "Privacy Policy."
+            },
+            "preferDisable": {
+                "click": "Click",
+                "here": "here",
+                "ifPrefer": "if you prefer to disable your Ad blocker."
+            }
+        },
+        "errors": {
+            "": ""
+        },
+        "gift": {
+            "titles": {
+                "firstTitle": "Gift this subscription",
+                "secondTitle": "Enter the recipients information below"
+            },
+            "labels": {
+                "firstName": "First name",
+                "lastName": "Last name",
+                "email": "Enter email",
+                "required": "required",
+                "firstNamePlaceholder": "First name",
+                "lastNamePlaceholder": "Last name",
+                "emailPlaceholder": "Email Address"
+            },
+            "buttons": {
+                "gift": "gift"
+            },
+            "messages": {
+                "enterEmail": "Please enter the gift recepients email."
+            }
+        },
+        "redeem": {
+            "titles": {
+                "firstTitle": "Redeem your gift",
+                "secondTitle": "Enter the gift code below"
+            },
+            "labels": {
+                "code": "Enter gift code",
+                "codePlaceholder": "Gift code",
+                "required": "required"
+            },
+            "buttons": {
+                "redeem": "Redeem gift"
+            },
+            "footer": {
+                "click": "Click",
+                "here": "here",
+                "toAdd": "to add an address"
+            }
+        }
+    },
+    "login": {
+        "labels": {
+            "email": "Enter email",
+            "password": "Enter password",
+            "required": "required",
+            "emailPlaceholder": "Email",
+            "passwordPlaceholder": "Password",
+            "login": "Login"
+        },
+        "messages": {
+            "loginTo": "Login to your account",
+            "welcome": "Welcome back, sign in with your existing account.",
+            "dontHaveAccount": "Dont have an account yet?",
+            "createAccount": "Create account.",
+            "forgotPassword": "Forgot your password?",
+            "reset": {
+                "click": "Click",
+                "here": "here",
+                "toReset": "to reset it."
+            }
+        },
+        "errors": {
+            "": ""
+        }
+    },
+    "meter": {
+        "messages": {
+            "freeVisits": "Free visits left:",
+            "subscribeNow": "Subscribe now!",
+            "alreadyHaveAccount": "Already have an account?",
+            "loginHere": "Login here"
+        },
+        "errors": {
+            "": ""
+        }
+    },
+    "payment": {
+        "labels": {
+            "cardNumber": "Card number",
+            "securityCode": "Security Code",
+            "submit": "Submit",
+            "months": {
+                "jan": "January",
+                "feb": "February",
+                "mar": "March",
+                "apr": "April",
+                "may": "May",
+                "jun": "June",
+                "jul": "July",
+                "aug": "August",
+                "sep": "September",
+                "oct": "October",
+                "nov": "November",
+                "dec": "December"
+            },
+            "checkout": {
+                "title": "Payment Information"
+            }
+        },
+        "messages": {
+            "youAreSafe": "You're safe - PCI compliant 128 SSL by",
+            "haveQuestion": "Have questions?",
+            "visitOurWebsite": {
+                "visitTo": "Visit our website to",
+                "learnMore": "learn more"
+            },
+            "visitOurFaq": {
+                "visitOur": "Visit our",
+                "faq": "FAQ"
+            },
+            "cancel": "Cancel your subscription online at anytime.",
+            "logout": {
+                "logout": "Logout",
+                "here": "here"
+            },
+            "giftSent": "Subscription gift has been sent to",
+            "successfully": "successfully"
+        },
+        "errors": {
+            "": ""
+        }
+    },
+    "address": {
+        "title": "Please enter your address",
+        "labels": {
+            "address": "Address",
+            "code": "Postal Code/Zip",
+            "city": "City",
+            "region": "Two letter Province/State",
+            "country": "Country",
+            "firstName": "First name",
+            "lastName": "Last name",
+            "required": "required"
+        },
+        "buttons": {
+            "submit": "submit"
+        },
+        "messages": {
+            "addressUpdated": "The address was successfully updated!"
+        }
+    },
+    "dashboard": {
+        "labels": {
+            "menu": "Pelcro Menu",
+            "name": "Name",
+            "email": "Email",
+            "plan": "Plan",
+            "description": "Description",
+            "expiry": "Expiry",
+            "status": "Status",
+            "logout": "Logout",
+            "dashboard": "Dashboard",
+            "unsubscribe": "Unsubscribe",
+            "reactivate": "Reactivate",
+            "renew": "Renew",
+            "support": "Support",
+            "account": "Account",
+            "subscriptions": "Subscriptions",
+            "updatePaymentSource": "Update",
+            "updateProfile": "Update",
+            "updateAddress": "Update",
+            "redeemGift": "Redeem gift",
+            "address": "Address",
+            "paymentSource": "Payment card",
+            "actions": "Actions",
+            "expiresOn": "Expires on",
+            "renewsOn": "Renews on",
+            "isSureToCancel": "Are you sure you want to cancel your subscription?"
+        },
+        "messages": {
+            "yourDashboard": "Your Pelcro Dashboard"
+        },
+        "errors": {
+            "": ""
+        }
+    },
+    "success": {
+        "labels": {
+            "continue": "Continue to content"
+        },
+        "messages": {
+            "yourFreeTrial": "Subscription successful!",
+            "youHaveAccess": "Hope you enjoy the subscription. Please contact us if you have any questions or concerns.",
+            "clickToLearn": {
+                "click": "Click",
+                "here": "here",
+                "toLearn": "to learn more or contact us at",
+                "forQuestion": "for any questions."
+            }
+        },
+        "errors": {
+            "": ""
+        }
+    },
+    "newsletter": {
+        "labels": {
+            "submit": "Submit",
+            "firstName": "First name",
+            "lastName": "Last name",
+            "email": "Email",
+            "postalCode": "Postal code",
+            "required": "required"
+        },
+        "messages": {
+            "alreadyHaveAccount": "Already have an account?",
+            "loginHere": "Login here.",
+            "createAnAccount": " Create an account by clicking ",
+            "here": "here"
+        },
+        "errors": {
+            "": ""
+        }
+    },
+    "select": {
+        "messages": {
+            "alreadyHaveAccount": "Already have an account?",
+            "loginHere": "Login here",
+            "checkbox": "Check this box to gift this subscription"
+        },
+        "labels": {
+            "plan": {
+                "title": "Subscribe to a plan",
+                "subtitle": "Select one of the plans below and click on next."
+            },
+            "product": {
+                "title": "Subscribe to a product",
+                "subtitle": "Select one of the products below and click on next."
+            },
+            "selectProduct": "Select a product",
+            "selectPlan": "Select a plan",
+            "startingAt": "Starting at"
+        },
+        "buttons": {
+            "next": "Next",
+            "select": "Select",
+            "back": "Back"
+        }
+    },
+    "checkoutForm": {
+        "labels": {
+            "card": "Enter card number",
+            "date": "Expiration date",
+            "CVC": "CVC",
+            "required": "required",
+            "submit": "Submit",
+            "addCode": "Add coupon code",
+            "hideCode": "Hide",
+            "codePlaceholder": "Enter your coupon code",
+            "applyCouponCode": "Apply coupon",
+            "code": "Coupon code"
+        }
+    },
+    "userEdit": {
+        "labels": {
+            "title": "Want to update your profile?",
+            "subtitle": "Enter your information below to update your profile",
+            "email": "Email",
+            "firstName": "First name",
+            "lastName": "Last name",
+            "phone": "Phone",
+            "submit": "Submit",
+            "required": "Required"
+        },
+        "messages": {
+            "userUpdated": "Thanks! Your profile was updated successfully."
+        }
+    },
+    "cart": {
+        "title": "Your shopping cart",
+        "subtitle": "Comple your purchase below",
+        "name": "Name",
+        "quantity": "Quantity",
+        "price": "Price",
+        "actions": "Actions",
+        "remove": "Remove",
+        "total": "Total",
+        "confirm": "Checkout",
+        "empty": "Your cart is empty.",
+        "removeAll": "Remove all"
+    },
+    "products": {
+        "buttons": {
+            "select": "Select",
+            "added": "Added to cart"
+        }
+    },
+    "confirm": {
+        "buttons": {
+            "continue": "Continue to content"
+        },
+        "labels": {
+            "title": "Thanks for your order!",
+            "subtitle": "Your items will be on their way shortly."
+        }
+    }
+}

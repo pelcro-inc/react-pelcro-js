@@ -1,0 +1,359 @@
+{
+    "buttons": {
+        "account": "Accès abonné(e)s",
+        "login": "Se connecter"
+    },
+    "password-forgot": {
+        "title": "Mot de passe oublié ?",
+        "subtitle": "Entrez votre email ci-dessous pour réinitialiser votre mot de passe",
+        "email": "Courriel",
+        "password": "Mot de passe",
+        "submit": "Soumettre",
+        "required": "Champs obligatoires",
+        "passwordResetEmailSent": "Des instructions de réinitialisation du mot de passe ont été envoyées à votre adresse email",
+        "messages": {
+            "alreadyHaveAccount": "Vous avez déjà un compte ?",
+            "loginHere": "Connectez-vous ici"
+        }
+    },
+    "password-reset": {
+        "title": "Réinitialiser votre mot de passe",
+        "subtitle": "Entrez un nouveau mot de passe ci-dessous",
+        "email": "Courriel",
+        "password": "mot de passe",
+        "confirmPassword": "Confirmer le mot de passe",
+        "submit": "Soumettre",
+        "required": "Champs obligatoires",
+        "passwordUpdated": "Le mot de passe a été mis à jour, veuillez vous connecter avec le nouveau mot de passe"
+    },
+    "register": {
+        "title": "Créer un compte",
+        "subtitle": "Entrez votre courriel et votre mot de passe ci-dessous",
+        "labels": {
+            "signUpFacebook": "Inscrivez-vous avec Facebook",
+            "signUpGoogle": "Inscrivez-vous avec Google",
+            "signUpEmail": "S'enregistrer avec courrier électronique",
+            "password": "Créer un mot de passe",
+            "email": "Courriel",
+            "passwordPlaceholder": "Créer un mot de passe",
+            "emailPlaceholder": "Courriel",
+            "required": "Champs obligatoires"
+        },
+        "messages": {
+            "alreadyHaveAccount": "Vous avez déjà un compte ?",
+            "createAccount": "Créer un compte",
+            "loginHere": "Connectez-vous ici",
+            "selectPlan": "Sélectionnez un autre plan ",
+            "here": "ici",
+            "iAgree": {
+                "iAgree": "J'accepte",
+                "terms": "les conditions d'utilisation",
+                "and": "et",
+                "privacy": "la politique de confidentialité."
+            },
+            "preferDisable": {
+                "click": "Cliquez",
+                "here": "ici",
+                "ifPrefer": "si vous préférez désactiver votre bloqueur de publicités."
+            }
+        },
+        "errors": {
+            "": ""
+        },
+        "gift": {
+            "titles": {
+                "firstTitle": "Offrir cet abonnement",
+                "secondTitle": "Entrez les informations du destinataire ci-dessous"
+            },
+            "labels": {
+                "firstName": "Prénom",
+                "lastName": "Nom de famille",
+                "email": "Adresse courriel",
+                "required": "Champs obligatoires",
+                "firstNamePlaceholder": "Prénom",
+                "lastNamePlaceholder": "Nom de famille",
+                "emailPlaceholder": "Adresse courriel"
+            },
+            "buttons": {
+                "gift": "cadeau"
+            },
+            "messages": {
+                "enterEmail": "Veuillez entrer l'adresse courriel du destinataire du cadeau."
+            }
+        },
+        "redeem": {
+            "titles": {
+                "firstTitle": "Échangez votre cadeau",
+                "secondTitle": "Entrez le code cadeau ci-dessous"
+            },
+            "labels": {
+                "code": "Entrez le code du cadeau",
+                "codePlaceholder": "Code cadeau",
+                "required": "Champs obligatoires"
+            },
+            "buttons": {
+                "redeem": "Échanger un cadeau"
+            },
+            "footer": {
+                "click": "Cliquez",
+                "here": "ici",
+                "toAdd": "pour ajouter une adresse"
+            }
+        }
+    },
+    "login": {
+        "labels": {
+            "email": "Entrer email",
+            "password": "Entrer le mot de passe",
+            "required": "Champs obligatoires",
+            "emailPlaceholder": "Adresse courriel",
+            "passwordPlaceholder": "Mot de passe",
+            "login": "Connexion"
+        },
+        "messages": {
+            "loginTo": "Connectez-vous à votre compte",
+            "welcome": "Bienvenue, connectez-vous avec votre compte existant.",
+            "dontHaveAccount": "Vous n'avez pas encore de compte ?",
+            "createAccount": "Créer un compte",
+            "forgotPassword": "Mot de passe oublié ?",
+            "reset": {
+                "click": "Cliquez",
+                "here": "ici",
+                "toReset": "pour le réinitialiser."
+            }
+        },
+        "errors": {
+            "": ""
+        }
+    },
+    "meter": {
+        "messages": {
+            "freeVisits": "Visites gratuites restantes:",
+            "subscribeNow": "Abonnez-vous maintenant !",
+            "alreadyHaveAccount": "Vous avez déjà un compte ?",
+            "loginHere": "Connectez-vous ici"
+        },
+        "errors": {
+            "": ""
+        }
+    },
+    "payment": {
+        "labels": {
+            "cardNumber": "Numéro de carte",
+            "securityCode": "Code de sécurité",
+            "submit": "Soumettre",
+            "months": {
+                "jan": "Janvier",
+                "feb": "Février",
+                "mar": "Mars",
+                "apr": "Avril",
+                "may": "Mai",
+                "jun": "Juin",
+                "jul": "Juillet",
+                "aug": "Août",
+                "sep": "Septembre",
+                "oct": "Octobre",
+                "nov": "Novembre",
+                "dec": "Décembre"
+            },
+            "checkout": {
+                "title": "Informations de paiement"
+            }
+        },
+        "messages": {
+            "youAreSafe": "Vous êtes en sécurité - PCI conforme 128 SSL par",
+            "haveQuestion": "Des questions?",
+            "visitOurWebsite": {
+                "visitTo": "Visitez notre site Web pour",
+                "learnMore": "en savoir plus"
+            },
+            "visitOurFaq": {
+                "visitOur": "Visitez notre",
+                "faq": "FAQ"
+            },
+            "cancel": "Annuler votre abonnement en ligne à tout moment.",
+            "logout": {
+                "logout": "Déconnexion",
+                "here": "ici"
+            },
+            "giftSent": "Le cadeau d'abonnement a été envoyé à",
+            "successfully": "avec succès."
+        },
+        "errors": {
+            "": ""
+        }
+    },
+    "address": {
+        "title": "Veuillez entrer votre adresse",
+        "labels": {
+            "address": "Adresse",
+            "code": "Code postal / Zip",
+            "city": "Ville",
+            "region": "Province / Région",
+            "country": "Pays",
+            "firstName": "Prénom",
+            "lastName": "Nom de famille",
+            "required": "Champs obligatoires"
+        },
+        "buttons": {
+            "submit": "Valider"
+        },
+        "messages": {
+            "addressUpdated": "L'adresse a été mise à jour avec succès!"
+        }
+    },
+    "dashboard": {
+        "labels": {
+            "menu": "Menu Pelcro",
+            "name": "Nom",
+            "email": "Courriel",
+            "plan": "Plan",
+            "description": "Description",
+            "expiry": "Expiration",
+            "status": "Statut",
+            "logout": "Déconnexion",
+            "dashboard": "Tableau de bord",
+            "unsubscribe": "Se désabonner",
+            "reactivate": "Réactiver",
+            "renew": "Renouveler",
+            "support": "Soutien",
+            "account": "Compte",
+            "subscriptions": "Abonnements",
+            "updatePaymentSource": "Mettre à jour la source de paiement",
+            "updateProfile": "Mettre à jour le profil",
+            "updateAddress": "Modifier",
+            "redeemGift": "Échanger un cadeau",
+            "address": "Adresse",
+            "paymentSource": "Source de paiement",
+            "actions": "Actes",
+            "expiresOn": "Expire le",
+            "renewsOn": "Renouvelle le",
+            "isSureToCancel": "Êtes-vous certain de vouloir annuler votre abonnement ?"
+        },
+        "messages": {
+            "yourDashboard": "Votre tableau de bord Pelcro"
+        },
+        "errors": {
+            "": ""
+        }
+    },
+    "success": {
+        "labels": {
+            "continue": "Abonnement réussi !"
+        },
+        "messages": {
+            "yourFreeTrial": "Votre essai gratuit vient de commencer",
+            "youHaveAccess": "J'espère que vous appréciez l'abonnement. Veuillez nous contacter si vous avez des questions ou des préoccupations.",
+            "clickToLearn": {
+                "click": "cliquez",
+                "here": "ici",
+                "toLearn": "pour en savoir plus ou contactez-nous à",
+                "forQuestion": "pour toute question."
+            }
+        },
+        "errors": {
+            "": ""
+        }
+    },
+    "newsletter": {
+        "labels": {
+            "submit": "Lire l'article !",
+            "firstName": "Prénom",
+            "lastName": "Nom de famille",
+            "email": "Courrier électronique",
+            "postalCode": "Code postal",
+            "required": "Champs obligatoires"
+        },
+        "messages": {
+            "alreadyHaveAccount": "Vous avez déjà un compte ?",
+            "loginHere": "Connectez-vous ici",
+            "createAnAccount": " Créez un compte en cliquant ",
+            "here": "ici"
+        },
+        "errors": {
+            "": ""
+        }
+    },
+    "select": {
+        "messages": {
+            "alreadyHaveAccount": "Vous avez déjà un compte ?",
+            "loginHere": "Connectez-vous ici",
+            "checkbox": "Cochez cette case pour offrir cet abonnement"
+        },
+        "labels": {
+            "plan": {
+                "title": "Abonnez-vous à un plan",
+                "subtitle": "Sélectionnez l'un des plans ci-dessous et cliquez sur suivant."
+            },
+            "product": {
+                "title": "Abonnez-vous à un produit",
+                "subtitle": "Sélectionnez l'un des produits ci-dessous et cliquez sur suivant."
+            },
+            "selectProduct": "Sélectionnez un produit",
+            "selectPlan": "Sélectionnez un plan",
+            "starningAt": "À partir de"
+        },
+        "buttons": {
+            "next": "Prochain",
+            "select": "Choisir",
+            "back": "Retour"
+        }
+    },
+    "checkoutForm": {
+        "labels": {
+            "card": "Entrez le numéro de carte",
+            "date": "Date d'expiration",
+            "CVC": "CVC",
+            "required": "Champs obligatoires",
+            "submit": "Soumettre",
+            "addCode": "Ajouter un code promo",
+            "hideCode": "Cacher",
+            "codePlaceholder": "Entrez votre code de coupon",
+            "applyCouponCode": "Appliquer code de coupon",
+            "code": "Code promo"
+        }
+    },
+    "userEdit": {
+        "labels": {
+            "title": "Voulez-vous mettre à jour votre profil?",
+            "subtitle": "Entrez vos informations ci-dessous pour mettre à jour votre profil",
+            "email": "Email",
+            "firstName": "Prénom",
+            "lastName": "Nom de famille",
+            "phone": "Numéro de téléphone",
+            "submit": "Soumettre",
+            "required": "Champs obligatoires"
+        },
+        "messages": {
+            "userUpdated": "Merci! Votre profil a été mis à jour avec succès."
+        }
+    },
+    "cart": {
+        "title": "Votre Panier",
+        "subtitle": "Terminez votre achat ci-dessous",
+        "name": "Produit",
+        "quantity": "Quantité",
+        "price": "Prix",
+        "actions": "Actes",
+        "remove": "Retirer",
+        "total": "Total",
+        "confirm": "Check-out",
+        "empty": "Votre panier est vide.",
+        "removeAll": "Enlever tout"
+    },
+    "products": {
+        "buttons": {
+            "select": "Choisir",
+            "added": "Ajouté au panier"
+        }
+    },
+    "confirm": {
+        "buttons": {
+            "continue": "Continuer au contenu"
+        },
+        "labels": {
+            "title": "Merci pour votre commande!",
+            "subtitle": "Vos articles seront bientôt en route."
+        }
+    }
+}
