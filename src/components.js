@@ -1,3 +1,4 @@
+import "./i18n";
 import { LoginContainer } from "./Components/Login/LoginContainer";
 import { Email } from "./SubComponents/Email";
 import { Password } from "./SubComponents/Password";
