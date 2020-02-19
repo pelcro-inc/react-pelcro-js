@@ -8,6 +8,7 @@ import {
 import Submit from "../common/Submit";
 import PropTypes from "prop-types";
 import localisation from "../../utils/localisation";
+import styles from "../Payment/styles.module.scss";
 
 class CheckoutForm extends Component {
   constructor(props) {
@@ -75,7 +76,7 @@ class CheckoutForm extends Component {
             />
             <img
               alt="credit_cards"
-              className="pelcro-prefix-payment-icons"
+              className={`${styles["pelcro-prefix-payment-icons"]} pelcro-prefix-payment-icons`}
               src="https://js.pelcro.com/ui/plugin/main/images/credit_cards.png"
             />
           </div>

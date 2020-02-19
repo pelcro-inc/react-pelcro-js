@@ -19,12 +19,37 @@ module.exports = {
           presets: ["@babel/preset-react", "@babel/preset-env"]
         }
       },
+      // {
+      //   test: /\.scss$/,
+      //   loader: "css-loader",
+      //   options: {
+      //     modules: true
+      //   }
+      // },
       {
         test: /\.scss$/,
-        loader: "css-loader",
-        options: {
-          modules: true
-        }
+        use: [
+          "style-loader",
+          {
+            loader: "css-loader",
+            options: {
+              modules: true
+            }
+          },
+          "cssimportant-loader",
+          {
+            loader: "postcss-loader",
+            options: {
+              plugins: () => [require("autoprefixer")]
+            }
+          },
+          {
+            loader: "sass-loader",
+            options: {
+              modules: true
+            }
+          }
+        ]
       },
       {
         test: /\.css$/i,

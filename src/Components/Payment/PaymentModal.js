@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { PaymentView } from "./PaymentView";
 import Header from "../common/Header";
 import Authorship from "../common/Authorship";
-import styles from "./styles.module.scss";
 
 export const PaymentModal = props => {
   const [site, setSite] = useState({});

@@ -9,6 +9,7 @@ import { getErrorMessages } from "../common/Helpers";
 import { showError, showSuccess } from "../../utils/showing-error";
 
 import CheckoutForm from "../form/CheckoutForm";
+import styles from "./styles.module.scss";
 
 class DefaultPaymentView extends Component {
   constructor(props) {
@@ -76,7 +77,9 @@ class DefaultPaymentView extends Component {
         <ErrMessage name="payment-create" />
         <AlertSuccess name="payment-create" />
 
-        <div className="pelcro-prefix-payment-block">
+        <div
+          className={`${styles["pelcro-prefix-payment-block"]} pelcro-prefix-payment-block`}
+        >
           <div className="pelcro-prefix-alert pelcro-prefix-alert-success">
             <div className="pelcro-prefix-payment-message">
               <span>

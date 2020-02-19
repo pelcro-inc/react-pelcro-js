@@ -1,4 +1,5 @@
 import "./i18n";
+import "./scss/index.scss";
 import { LoginContainer } from "./Components/Login/LoginContainer";
 import { Email } from "./SubComponents/Email";
 import { Password } from "./SubComponents/Password";
