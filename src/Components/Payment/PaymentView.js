@@ -66,54 +66,57 @@ class DefaultPaymentView extends Component {
 
   render() {
     const { t } = this.props;
+    if (window.Stripe) {
+      return (
+        <React.Fragment>
+          <div className="pelcro-prefix-title-block">
+            <h4>{t("title")}</h4>
+            <p>{t("subtitle")}</p>
+          </div>
 
-    return (
-      <React.Fragment>
-        <div className="pelcro-prefix-title-block">
-          <h4>{t("title")}</h4>
-          <p>{t("subtitle")}</p>
-        </div>
+          <ErrMessage name="payment-create" />
+          <AlertSuccess name="payment-create" />
 
-        <ErrMessage name="payment-create" />
-        <AlertSuccess name="payment-create" />
+          <div
+            className={`${styles["pelcro-prefix-payment-block"]} pelcro-prefix-payment-block`}
+          >
+            <div className="pelcro-prefix-alert pelcro-prefix-alert-success">
+              <div className="pelcro-prefix-payment-message">
+                <span>
+                  {t("secure")}{" "}
+                  <a
+                    className="pelcro-prefix-link"
+                    rel="nofollow"
+                    target="new"
+                    href="https://www.stripe.com/us/customers"
+                  >
+                    Stripe
+                  </a>{" "}
+                </span>
+              </div>
+            </div>
 
-        <div
-          className={`${styles["pelcro-prefix-payment-block"]} pelcro-prefix-payment-block`}
-        >
-          <div className="pelcro-prefix-alert pelcro-prefix-alert-success">
-            <div className="pelcro-prefix-payment-message">
-              <span>
-                {t("secure")}{" "}
-                <a
-                  className="pelcro-prefix-link"
-                  rel="nofollow"
-                  target="new"
-                  href="https://www.stripe.com/us/customers"
-                >
-                  Stripe
-                </a>{" "}
-              </span>
+            <div className="pelcro-prefix-form">
+              <StripeProvider
+                apiKey={window.Pelcro.environment.stripe}
+                stripeAccount={this.site.account_id}
+              >
+                <Elements>
+                  <CheckoutForm
+                    callback={this.create}
+                    disableSubmit={this.state.disableSubmit}
+                    showError={this.showError}
+                    setDisableSubmitState={this.setDisableSubmitState}
+                  />
+                </Elements>
+              </StripeProvider>
             </div>
           </div>
-
-          <div className="pelcro-prefix-form">
-            <StripeProvider
-              apiKey={window.Pelcro.environment.stripe}
-              stripeAccount={this.site.account_id}
-            >
-              <Elements>
-                <CheckoutForm
-                  callback={this.create}
-                  disableSubmit={this.state.disableSubmit}
-                  showError={this.showError}
-                  setDisableSubmitState={this.setDisableSubmitState}
-                />
-              </Elements>
-            </StripeProvider>
-          </div>
-        </div>
-      </React.Fragment>
-    );
+        </React.Fragment>
+      );
+    } else {
+      return null;
+    }
   }
 }
 
