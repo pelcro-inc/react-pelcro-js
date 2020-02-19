@@ -10,9 +10,10 @@
   "scripts": {
     "start": "react-scripts start",
     "dev": "webpack --mode development",
-    "prod": "webpack --mode production",
+    "prod": "webpack --config webpack.config.prod --mode production",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "prepublish": "yarn run prod"
   },
   "eslintConfig": {
     "extends": "react-app"
