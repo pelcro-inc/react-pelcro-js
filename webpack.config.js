@@ -1,12 +1,6 @@
 const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CompressionPlugin = require("compression-webpack-plugin");
 const BrotliPlugin = require("brotli-webpack-plugin");
-
-const htmlWebpackPlugin = new HtmlWebpackPlugin({
-  template: path.join(__dirname, "public/index.html"),
-  filename: "./index.html"
-});
 
 module.exports = {
   entry: [path.join(__dirname, "src/components.js")],
@@ -25,16 +19,6 @@ module.exports = {
           presets: ["@babel/preset-react", "@babel/preset-env"]
         }
       },
-      // {
-      //   test: /\.scss$/,
-      //   use: [
-      //     "style-loader",
-      //     "css-loader",
-      //     "cssimportant-loader",
-      //     "postcss-loader",
-      //     "sass-loader"
-      //   ]
-      // },
       {
         test: /\.scss$/,
         loader: "css-loader",
