@@ -13,7 +13,7 @@ import Header from "../common/Header";
 import Authorship from "../common/Authorship";
 import Submit from "../common/Submit";
 
-class NewsLetter extends Component {
+class DefaultNewsLetter extends Component {
   constructor(props) {
     super(props);
 
@@ -259,11 +259,11 @@ class NewsLetter extends Component {
   }
 }
 
-NewsLetter.propTypes = {
+DefaultNewsLetter.propTypes = {
   plan: PropTypes.object,
   product: PropTypes.object,
   setView: PropTypes.func,
   resetView: PropTypes.func
 };
 
-export default withTranslation("newsletter")(NewsLetter);
+export const NewsLetter = withTranslation("newsletter")(DefaultNewsLetter);

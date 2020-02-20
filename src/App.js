@@ -9,7 +9,7 @@ import {
   DashboardModal,
   PaymentModal,
   PaymentView,
-  Newsletter
+  NewsLetter
 } from "./components";
 
 // refactor this then integrate it with the main UI ASAP.

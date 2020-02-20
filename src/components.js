@@ -21,7 +21,7 @@ import { RegisterModal } from "./Components/Register/RegisterModal";
 import { SelectModal } from "./Components/Select/SelectModal";
 import { PaymentModal } from "./Components/Payment/PaymentModal";
 import { PaymentView } from "./Components/Payment/PaymentView";
-import { Newsletter } from "./Components/Newsletter/NewsLetter";
+import { NewsLetter } from "./Components/NewsLetter/NewsLetter";
 
 export {
   LoginContainer,
@@ -45,5 +45,5 @@ export {
   SelectModal,
   PaymentModal,
   PaymentView,
-  Newsletter
+  NewsLetter
 };
