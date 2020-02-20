@@ -1,0 +1,19 @@
+{
+    "labels": {
+        "submit": "Submit",
+        "firstName": "First name",
+        "lastName": "Last name",
+        "email": "Email",
+        "postalCode": "Postal code",
+        "required": "required"
+    },
+    "messages": {
+        "alreadyHaveAccount": "Already have an account?",
+        "loginHere": "Login here.",
+        "createAnAccount": " Create an account by clicking ",
+        "here": "here"
+    },
+    "errors": {
+        "": ""
+    }
+}

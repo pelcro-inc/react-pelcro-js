@@ -1,0 +1,19 @@
+{
+    "labels": {
+        "submit": "Lire l'article !",
+        "firstName": "Prénom",
+        "lastName": "Nom de famille",
+        "email": "Courrier électronique",
+        "postalCode": "Code postal",
+        "required": "Champs obligatoires"
+    },
+    "messages": {
+        "alreadyHaveAccount": "Vous avez déjà un compte ?",
+        "loginHere": "Connectez-vous ici",
+        "createAnAccount": " Créez un compte en cliquant ",
+        "here": "ici"
+    },
+    "errors": {
+        "": ""
+    }
+}

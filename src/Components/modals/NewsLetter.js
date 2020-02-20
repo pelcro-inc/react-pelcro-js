@@ -2,9 +2,9 @@
 // The emaill form. Allows users to get free articles by entering their email.
 
 import React, { Component } from "react";
+import { withTranslation } from "react-i18next";
 import ErrMessage from "../common/ErrMessage";
 import PropTypes from "prop-types";
-import localisation from "../../utils/localisation";
 import { getErrorMessages } from "../common/Helpers";
 
 import { showError } from "../../utils/showing-error";
@@ -25,12 +25,9 @@ class NewsLetter extends Component {
       postalCode: ""
     };
 
-    this.plan =
-      this.props.plan || window.Pelcro.paywall.getProduct().plans[0];
-    this.product =
-      this.props.product || window.Pelcro.paywall.getProduct();
+    this.plan = this.props.plan || window.Pelcro.paywall.getProduct().plans[0];
+    this.product = this.props.product || window.Pelcro.paywall.getProduct();
 
-    this.locale = localisation("newsletter").getLocaleData();
     this.site = window.Pelcro.site.read();
     this.closeButton = window.Pelcro.paywall.displayCloseButton();
 
@@ -57,8 +54,7 @@ class NewsLetter extends Component {
   };
 
   handleSubmit = e => {
-    if (e.key === "Enter" && !this.state.disableSubmit)
-      this.submitNewsletter();
+    if (e.key === "Enter" && !this.state.disableSubmit) this.submitNewsletter();
   };
 
   // inserting error message into modal window
@@ -124,6 +120,8 @@ class NewsLetter extends Component {
   }
 
   render() {
+    const { t } = this.props;
+
     return (
       <div className="pelcro-prefix-view">
         <div
@@ -157,7 +155,7 @@ class NewsLetter extends Component {
                         className="pelcro-prefix-label"
                         htmlFor="pelcro-input-first_name"
                       >
-                        {this.locale.labels.firstName}
+                        {t("firstName")}
                       </label>
                       <input
                         value={this.state.first_name}
@@ -166,7 +164,7 @@ class NewsLetter extends Component {
                         autoComplete="first-name"
                         id="pelcro-input-first_name"
                         type="text"
-                        placeholder={this.locale.labels.firstName}
+                        placeholder={t("firstName")}
                       ></input>
                     </div>
                     <div className="col-sm-6">
@@ -174,7 +172,7 @@ class NewsLetter extends Component {
                         className="pelcro-prefix-label"
                         htmlFor="pelcro-input-last_name"
                       >
-                        {this.locale.labels.lastName}
+                        {t("lastName")}
                       </label>
                       <input
                         value={this.state.last_name}
@@ -183,7 +181,7 @@ class NewsLetter extends Component {
                         autoComplete="last-name"
                         id="pelcro-input-last_name"
                         type="text"
-                        placeholder={this.locale.labels.lastName}
+                        placeholder={t("lastName")}
                       ></input>
                     </div>
                   </div>
@@ -193,14 +191,14 @@ class NewsLetter extends Component {
                       htmlFor="pelcro-input-email"
                       className="pelcro-prefix-label"
                     >
-                      {this.locale.labels.email} *
+                      {t("email")} *
                     </label>
                     <input
                       id="pelcro-input-email"
                       onChange={this.onEmailChange}
                       type="text"
                       className="pelcro-prefix-input pelcro-prefix-form-control"
-                      placeholder={this.locale.labels.email}
+                      placeholder={t("email")}
                     ></input>
                   </div>
 
@@ -210,7 +208,7 @@ class NewsLetter extends Component {
                         className="pelcro-prefix-label"
                         htmlFor="pelcro-input-postal_code"
                       >
-                        {this.locale.labels.postalCode}
+                        {t("postalCode")}
                       </label>
                       <input
                         value={this.state.postal_code}
@@ -219,36 +217,36 @@ class NewsLetter extends Component {
                         autoComplete="postal-code"
                         id="pelcro-input-postal_code"
                         type="text"
-                        placeholder={this.locale.labels.postalCode}
+                        placeholder={t("postalCode")}
                       ></input>
                     </div>
                   </div>
 
                   <Submit
                     onClick={this.submitNewsletter}
-                    text={this.locale.labels.submit}
+                    text={t("submit")}
                     disabled={this.state.disableSubmit}
                   ></Submit>
                   <small className="pelcro-prefix-footnote pelcro-prefix-form-text">
-                    * {this.locale.labels.required}
+                    * {t("required")}
                   </small>
                 </div>
               </div>
               <div className="pelcro-prefix-modal-footer">
                 <small>
-                  {this.locale.messages.alreadyHaveAccount + " "}
+                  {t("alreadyHaveAccount") + " "}
                   <button
                     className="pelcro-prefix-link "
                     onClick={this.displayLoginView}
                   >
-                    {this.locale.messages.loginHere}
+                    {t("loginHere")}
                   </button>
-                  {this.locale.messages.createAnAccount}
+                  {t("createAnAccount")}
                   <button
                     className="pelcro-prefix-link "
                     onClick={this.displaySelectView}
                   >
-                    {this.locale.messages.here}
+                    {t("here")}
                   </button>
                 </small>
                 <Authorship></Authorship>
@@ -268,4 +266,4 @@ NewsLetter.propTypes = {
   resetView: PropTypes.func
 };
 
-export default NewsLetter;
+export default withTranslation("newsletter")(NewsLetter);
