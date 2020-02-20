@@ -8,7 +8,8 @@ import {
   RegisterModal,
   DashboardModal,
   PaymentModal,
-  PaymentView
+  PaymentView,
+  Newsletter
 } from "./components";
 
 // refactor this then integrate it with the main UI ASAP.
@@ -20,7 +21,7 @@ import Redeem from "./Components/modals/Redeem";
 import Payment from "./Components/modals/Payment";
 import Success from "./Components/modals/Success";
 import AddressCreate from "./Components/modals/address/Create";
-import NewsLetter from "./Components/modals/NewsLetter";
+// import NewsLetter from "./Components/modals/NewsLetter";
 import Meter from "./Components/modals/Meter";
 import Menu from "./Components/Dashboard/Menu";
 import PasswordForgot from "./Components/modals/password/Forgot";
