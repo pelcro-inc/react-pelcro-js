@@ -1,7 +1,7 @@
 {
   "name": "@pelcro/pelcro-react-elements",
   "description": "Pelcro's React UI Elements",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "private": false,
   "main": "dist/index.js",
   "files": [
@@ -13,7 +13,8 @@
     "prod": "webpack --config webpack.config.prod --mode production",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "prepublish": "yarn run prod"
+    "prepublish": "yarn run prod",
+    "deploy": "yarn run prepublish && yarn publish"
   },
   "eslintConfig": {
     "extends": "react-app"
