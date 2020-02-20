@@ -37,7 +37,7 @@ export const DashboardModal = props => {
           type="button"
           className="pelcro-prefix-dashboard-close pelcro-prefix-close"
           aria-label="Close"
-          onClick={props.onClose}
+          onClick={props.resetView}
         >
           <span>&times;</span>
         </button>
