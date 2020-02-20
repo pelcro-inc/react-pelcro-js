@@ -1,0 +1,18 @@
+{
+    "labels": {
+        "continue": "Continue to content"
+    },
+    "messages": {
+        "yourFreeTrial": "Subscription successful!",
+        "youHaveAccess": "Hope you enjoy the subscription. Please contact us if you have any questions or concerns.",
+        "clickToLearn": {
+            "click": "Click",
+            "here": "here",
+            "toLearn": "to learn more or contact us at",
+            "forQuestion": "for any questions."
+        }
+    },
+    "errors": {
+        "": ""
+    }
+}

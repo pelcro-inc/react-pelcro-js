@@ -4,15 +4,23 @@ import common_fr from "./translations/fr/common.json";
 import common_en from "./translations/en/common.json";
 import paymentCreate_en from "./translations/en/paymentCreate.json";
 import paymentCreate_fr from "./translations/fr/paymentCreate.json";
+import newsletter_en from "./translations/en/newsletter.json";
+import newsletter_fr from "./translations/fr/newsletter.json";
+import success_en from "./translations/en/success.json";
+import success_fr from "./translations/fr/success.json";
 
 const resources = {
   en_US: {
     common: common_en,
-    paymentCreate: paymentCreate_en
+    paymentCreate: paymentCreate_en,
+    newsletter: newsletter_en,
+    success: success_en
   },
   fr_CA: {
     common: common_fr,
-    paymentCreate: paymentCreate_fr
+    paymentCreate: paymentCreate_fr,
+    newsletter: newsletter_fr,
+    success: success_fr
   }
 };
 

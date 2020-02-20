@@ -21,10 +21,14 @@ import { RegisterModal } from "./Components/Register/RegisterModal";
 import { SelectModal } from "./Components/Select/SelectModal";
 import { PaymentModal } from "./Components/Payment/PaymentModal";
 import { PaymentView } from "./Components/Payment/PaymentView";
+import { PaymentSuccessModal } from "./Components/Payment/PaymentSuccessModal";
+import { PaymentSuccessView } from "./Components/Payment/PaymentSuccessView";
 import { NewsLetter } from "./Components/NewsLetter/NewsLetter";
 
 export {
   LoginContainer,
+  PaymentSuccessView,
+  PaymentSuccessModal,
   Email,
   Password,
   ConfirmPassword,

@@ -237,24 +237,6 @@
             "": ""
         }
     },
-    "success": {
-        "labels": {
-            "continue": "Abonnement réussi !"
-        },
-        "messages": {
-            "yourFreeTrial": "Votre essai gratuit vient de commencer",
-            "youHaveAccess": "J'espère que vous appréciez l'abonnement. Veuillez nous contacter si vous avez des questions ou des préoccupations.",
-            "clickToLearn": {
-                "click": "cliquez",
-                "here": "ici",
-                "toLearn": "pour en savoir plus ou contactez-nous à",
-                "forQuestion": "pour toute question."
-            }
-        },
-        "errors": {
-            "": ""
-        }
-    },
     "select": {
         "messages": {
             "alreadyHaveAccount": "Vous avez déjà un compte ?",
