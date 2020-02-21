@@ -8,19 +8,23 @@ import newsletter_en from "./translations/en/newsletter.json";
 import newsletter_fr from "./translations/fr/newsletter.json";
 import success_en from "./translations/en/success.json";
 import success_fr from "./translations/fr/success.json";
+import meter_en from "./translations/en/meter.json";
+import meter_fr from "./translations/fr/meter.json";
 
 const resources = {
   en_US: {
     common: common_en,
     paymentCreate: paymentCreate_en,
     newsletter: newsletter_en,
-    success: success_en
+    success: success_en,
+    meter: meter_en
   },
   fr_CA: {
     common: common_fr,
     paymentCreate: paymentCreate_fr,
     newsletter: newsletter_fr,
-    success: success_fr
+    success: success_fr,
+    meter: meter_fr
   }
 };
 

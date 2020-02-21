@@ -10,7 +10,8 @@ import {
   PaymentModal,
   PaymentView,
   NewsLetter,
-  PaymentSuccessModal
+  PaymentSuccessModal,
+  MeterModal
 } from "./components";
 
 // refactor this then integrate it with the main UI ASAP.
@@ -23,7 +24,6 @@ import Payment from "./Components/modals/Payment";
 // import Success from "./Components/modals/Success";
 import AddressCreate from "./Components/modals/address/Create";
 // import NewsLetter from "./Components/modals/NewsLetter";
-import Meter from "./Components/modals/Meter";
 import Menu from "./Components/Dashboard/Menu";
 import PasswordForgot from "./Components/modals/password/Forgot";
 import PasswordReset from "./Components/modals/password/Reset";
@@ -411,7 +411,7 @@ class App extends Component {
             />
           )}
           {this.state.view === "meter" && (
-            <Meter
+            <MeterModal
               plan={this.state.plan}
               product={this.state.product}
               resetView={this.resetView}

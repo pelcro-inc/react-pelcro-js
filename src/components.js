@@ -24,6 +24,8 @@ import { PaymentView } from "./Components/Payment/PaymentView";
 import { PaymentSuccessModal } from "./Components/Payment/PaymentSuccessModal";
 import { PaymentSuccessView } from "./Components/Payment/PaymentSuccessView";
 import { NewsLetter } from "./Components/NewsLetter/NewsLetter";
+import { MeterModal } from "./Components/Meter/MeterModal";
+import { MeterView } from "./Components/Meter/MeterView";
 
 export {
   LoginContainer,
@@ -49,5 +51,7 @@ export {
   SelectModal,
   PaymentModal,
   PaymentView,
-  NewsLetter
+  NewsLetter,
+  MeterView,
+  MeterModal
 };

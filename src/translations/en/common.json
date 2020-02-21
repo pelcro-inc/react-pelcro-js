@@ -126,17 +126,6 @@
             "": ""
         }
     },
-    "meter": {
-        "messages": {
-            "freeVisits": "Free visits left:",
-            "subscribeNow": "Subscribe now!",
-            "alreadyHaveAccount": "Already have an account?",
-            "loginHere": "Login here"
-        },
-        "errors": {
-            "": ""
-        }
-    },
     "payment": {
         "labels": {
             "cardNumber": "Card number",
