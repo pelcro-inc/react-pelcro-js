@@ -26,6 +26,7 @@ import { PaymentSuccessView } from "./Components/Payment/PaymentSuccessView";
 import { NewsLetter } from "./Components/NewsLetter/NewsLetter";
 import { MeterModal } from "./Components/Meter/MeterModal";
 import { MeterView } from "./Components/Meter/MeterView";
+import { DashboardMenu } from "./Components/Dashboard/DashboardMenu";
 
 export {
   LoginContainer,
@@ -53,5 +54,6 @@ export {
   PaymentView,
   NewsLetter,
   MeterView,
-  MeterModal
+  MeterModal,
+  DashboardMenu
 };

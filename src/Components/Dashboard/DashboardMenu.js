@@ -2,7 +2,7 @@
 
 import React from "react";
 
-const Menu = props => {
+export const DashboardMenu = props => {
   const { openDashboard } = props;
   return (
     <div className="pelcro-prefix-pelcro-view">
@@ -12,5 +12,3 @@ const Menu = props => {
     </div>
   );
 };
-
-export default Menu;

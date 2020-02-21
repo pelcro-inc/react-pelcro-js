@@ -11,7 +11,8 @@ import {
   PaymentView,
   NewsLetter,
   PaymentSuccessModal,
-  MeterModal
+  MeterModal,
+  DashboardMenu
 } from "./components";
 
 // refactor this then integrate it with the main UI ASAP.
@@ -24,7 +25,7 @@ import Payment from "./Components/modals/Payment";
 // import Success from "./Components/modals/Success";
 import AddressCreate from "./Components/modals/address/Create";
 // import NewsLetter from "./Components/modals/NewsLetter";
-import Menu from "./Components/Dashboard/Menu";
+// import Menu from "./Components/Dashboard/Menu";
 import PasswordForgot from "./Components/modals/password/Forgot";
 import PasswordReset from "./Components/modals/password/Reset";
 // import SourceCreate from "./Components/modals/source/Create";
@@ -307,7 +308,7 @@ class App extends Component {
       <div id="pelcro-app">
         <div id="list">
           {this.state.isAuthenticated && (
-            <Menu openDashboard={this.displayDashboardView} />
+            <DashboardMenu openDashboard={this.displayDashboardView} />
           )}
 
           {this.state.isAuthenticated && authenticatedButtons()}
