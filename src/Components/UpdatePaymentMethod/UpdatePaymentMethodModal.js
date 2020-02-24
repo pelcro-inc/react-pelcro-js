@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { PaymentView } from "./PaymentView";
+import { PaymentView } from "./UpdatePaymentMethodView";
 import Header from "../common/Header";
 import Authorship from "../common/Authorship";
 

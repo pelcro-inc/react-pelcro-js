@@ -19,14 +19,19 @@ import { DashboardModal } from "./Components/Dashboard/DashboardModal";
 import { LoginModal } from "./Components/Login/LoginModal";
 import { RegisterModal } from "./Components/Register/RegisterModal";
 import { SelectModal } from "./Components/Select/SelectModal";
-import { PaymentModal } from "./Components/Payment/PaymentModal";
-import { PaymentView } from "./Components/Payment/PaymentView";
+import { PaymentModal } from "./Components/UpdatePaymentMethod/UpdatePaymentMethodModal";
+import { PaymentView } from "./Components/UpdatePaymentMethod/UpdatePaymentMethodView";
 import { PaymentSuccessModal } from "./Components/PaymentSuccess/PaymentSuccessModal";
 import { PaymentSuccessView } from "./Components/PaymentSuccess/PaymentSuccessView";
 import { NewsLetter } from "./Components/NewsLetter/NewsLetter";
 import { MeterModal } from "./Components/Meter/MeterModal";
 import { MeterView } from "./Components/Meter/MeterView";
 import { DashboardMenu } from "./Components/Dashboard/DashboardMenu";
+import {
+  init as initButtons,
+  authenticatedButtons,
+  unauthenticatedButtons
+} from "./Components/common/Buttons";
 
 export {
   LoginContainer,
@@ -55,5 +60,8 @@ export {
   NewsLetter,
   MeterView,
   MeterModal,
-  DashboardMenu
+  DashboardMenu,
+  initButtons,
+  authenticatedButtons,
+  unauthenticatedButtons
 };

@@ -12,7 +12,10 @@ import {
   NewsLetter,
   PaymentSuccessModal,
   MeterModal,
-  DashboardMenu
+  DashboardMenu,
+  initButtons,
+  authenticatedButtons,
+  unauthenticatedButtons
 } from "./components";
 
 // refactor this then integrate it with the main UI ASAP.
@@ -24,23 +27,14 @@ import Redeem from "./Components/modals/Redeem";
 import Payment from "./Components/modals/Payment";
 // import Success from "./Components/modals/Success";
 import AddressCreate from "./Components/modals/address/Create";
-// import NewsLetter from "./Components/modals/NewsLetter";
-// import Menu from "./Components/Dashboard/Menu";
 import PasswordForgot from "./Components/modals/password/Forgot";
 import PasswordReset from "./Components/modals/password/Reset";
-// import SourceCreate from "./Components/modals/source/Create";
 import UserEdit from "./Components/modals/user/Edit";
 
 import Shop from "./Components/shop/Shop";
 import Cart from "./Components/shop/Cart";
 import Checkout from "./Components/shop/Checkout";
 import Confirm from "./Components/shop/Confirm";
-
-import {
-  init as initButtons,
-  authenticatedButtons,
-  unauthenticatedButtons
-} from "./Components/common/Buttons";
 
 class App extends Component {
   constructor(props) {
