@@ -8,7 +8,7 @@ import AlertSuccess from "../common/AlertSuccess";
 import CheckoutFormView from "../CheckoutForm/CheckoutFormView";
 import styles from "./styles.module.scss";
 
-export function UpdatePaymentMethodView() {
+export function UpdatePaymentMethodView(props) {
   const [t] = useTranslation("paymentCreate");
 
   if (window.Stripe) {
@@ -47,7 +47,10 @@ export function UpdatePaymentMethodView() {
               stripeAccount={window.Pelcro.site.read().account_id}
             >
               <Elements>
-                <CheckoutFormView successMessage={t("message")} />
+                <CheckoutFormView
+                  ReactGA={props.ReactGA}
+                  successMessage={t("message")}
+                />
               </Elements>
             </StripeProvider>
           </div>

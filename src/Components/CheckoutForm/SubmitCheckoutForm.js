@@ -10,6 +10,7 @@ export const SubmitCheckoutForm = ({ stripe, disableSubmit, name }) => {
   } = useContext(store);
 
   useEffect(() => {
+    console.log({ token });
     if (token) {
       return dispatch({ actionType: CREATE_PAYMENT, payload: token });
     }
