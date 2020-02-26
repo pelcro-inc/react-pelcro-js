@@ -13,7 +13,7 @@ import Header from "../common/Header";
 import Authorship from "../common/Authorship";
 
 import { Elements, StripeProvider } from "react-stripe-elements";
-import CheckoutForm from "../form/CheckoutForm";
+import CheckoutForm from "../CheckoutForm/CheckoutFormView";
 import { formatDiscountedPrice } from "../../utils/utils";
 
 class Payment extends Component {
@@ -38,9 +38,7 @@ class Payment extends Component {
     this.closeButton = window.Pelcro.paywall.displayCloseButton();
 
     this.subscribe = this.subscribe.bind(this);
-    this.setDisableSubmitState = this.setDisableSubmitState.bind(
-      this
-    );
+    this.setDisableSubmitState = this.setDisableSubmitState.bind(this);
     this.showCouponField = this.showCouponField.bind(this);
     this.onCouponCodeChange = this.onCouponCodeChange.bind(this);
   }
@@ -57,13 +55,10 @@ class Payment extends Component {
     });
 
     if (window.Pelcro.coupon.getFromUrl()) {
-      this.setState(
-        { couponCode: window.Pelcro.coupon.getFromUrl() },
-        () => {
-          this.showCouponField();
-          this.onApplyCouponCode();
-        }
-      );
+      this.setState({ couponCode: window.Pelcro.coupon.getFromUrl() }, () => {
+        this.showCouponField();
+        this.onApplyCouponCode();
+      });
     }
   };
 
@@ -288,16 +283,10 @@ class Payment extends Component {
                         <CheckoutForm
                           callback={this.subscribe}
                           disableSubmit={this.state.disableSubmit}
-                          disableCouponButton={
-                            this.state.disableCouponButton
-                          }
+                          disableCouponButton={this.state.disableCouponButton}
                           showError={this.showError}
-                          setDisableSubmitState={
-                            this.setDisableSubmitState
-                          }
-                          enableCouponField={
-                            this.state.enableCouponField
-                          }
+                          setDisableSubmitState={this.setDisableSubmitState}
+                          enableCouponField={this.state.enableCouponField}
                           showCouponField={this.showCouponField}
                           couponCode={this.state.couponCode}
                           onCouponCodeChange={this.onCouponCodeChange}

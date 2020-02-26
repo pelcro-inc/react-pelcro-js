@@ -12,7 +12,7 @@ import Header from "../common/Header";
 import Authorship from "../common/Authorship";
 
 import { Elements, StripeProvider } from "react-stripe-elements";
-import CheckoutForm from "../form/CheckoutForm";
+import CheckoutForm from "../CheckoutForm/CheckoutFormView";
 import { getErrorMessages } from "../common/Helpers";
 
 class Checkout extends Component {
@@ -39,9 +39,7 @@ class Checkout extends Component {
     this.closeButton = window.Pelcro.paywall.displayCloseButton();
 
     this.subscribe = this.subscribe.bind(this);
-    this.setDisableSubmitState = this.setDisableSubmitState.bind(
-      this
-    );
+    this.setDisableSubmitState = this.setDisableSubmitState.bind(this);
   }
 
   componentDidMount = () => {
@@ -148,9 +146,7 @@ class Checkout extends Component {
                           callback={this.subscribe}
                           disableSubmit={this.state.disableSubmit}
                           showError={this.showError}
-                          setDisableSubmitState={
-                            this.setDisableSubmitState
-                          }
+                          setDisableSubmitState={this.setDisableSubmitState}
                         />
                       </Elements>
                     </StripeProvider>

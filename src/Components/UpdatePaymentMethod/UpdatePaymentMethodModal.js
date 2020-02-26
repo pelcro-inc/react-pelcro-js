@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { PaymentView } from "./UpdatePaymentMethodView";
+import { UpdatePaymentMethodView } from "./UpdatePaymentMethodView";
 import Header from "../common/Header";
 import Authorship from "../common/Authorship";
 
-export const PaymentModal = props => {
+export const UpdatePaymentMethodModal = props => {
   const [site, setSite] = useState({});
 
   useEffect(() => {
@@ -30,7 +30,7 @@ export const PaymentModal = props => {
               site={site}
             ></Header>
             <div className="pelcro-prefix-modal-body">
-              <PaymentView {...props} />
+              <UpdatePaymentMethodView {...props} />
             </div>
             <div className="pelcro-prefix-modal-footer">
               <Authorship></Authorship>

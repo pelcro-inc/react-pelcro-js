@@ -7,8 +7,8 @@ import {
   LoginModal,
   RegisterModal,
   DashboardModal,
-  PaymentModal,
-  PaymentView,
+  UpdatePaymentMethodModal,
+  UpdatePaymentMethodView,
   NewsLetter,
   PaymentSuccessModal,
   MeterModal,
@@ -431,7 +431,7 @@ class App extends Component {
           )}
 
           {this.state.view === "source-create" && (
-            <PaymentModal
+            <UpdatePaymentMethodModal
               resetView={this.resetView}
               ReactGA={ReactGA}
               setView={this.setView}
@@ -502,7 +502,7 @@ class App extends Component {
             />
           )}
 
-          <PaymentView
+          <UpdatePaymentMethodView
             resetView={this.resetView}
             ReactGA={ReactGA}
             setView={this.setView}

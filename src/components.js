@@ -19,8 +19,8 @@ import { DashboardModal } from "./Components/Dashboard/DashboardModal";
 import { LoginModal } from "./Components/Login/LoginModal";
 import { RegisterModal } from "./Components/Register/RegisterModal";
 import { SelectModal } from "./Components/Select/SelectModal";
-import { PaymentModal } from "./Components/UpdatePaymentMethod/UpdatePaymentMethodModal";
-import { PaymentView } from "./Components/UpdatePaymentMethod/UpdatePaymentMethodView";
+import { UpdatePaymentMethodModal } from "./Components/UpdatePaymentMethod/UpdatePaymentMethodModal";
+import { UpdatePaymentMethodView } from "./Components/UpdatePaymentMethod/UpdatePaymentMethodView";
 import { PaymentSuccessModal } from "./Components/PaymentSuccess/PaymentSuccessModal";
 import { PaymentSuccessView } from "./Components/PaymentSuccess/PaymentSuccessView";
 import { NewsLetter } from "./Components/NewsLetter/NewsLetter";
@@ -55,8 +55,8 @@ export {
   RegisterModal,
   LoginModal,
   SelectModal,
-  PaymentModal,
-  PaymentView,
+  UpdatePaymentMethodModal,
+  UpdatePaymentMethodView,
   NewsLetter,
   MeterView,
   MeterModal,
