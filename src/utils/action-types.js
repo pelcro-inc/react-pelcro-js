@@ -10,3 +10,4 @@ export const SET_VIEW = "SET_VIEW";
 export const DISABLE_SUBMIT = "DISABLE_SUBMIT";
 export const CREATE_PAYMENT = "CREATE_PAYMENT";
 export const SUBMIT_PAYMENT = "SUBMIT_PAYMENT";
+export const SET_TOKEN = "SET_TOKEN";

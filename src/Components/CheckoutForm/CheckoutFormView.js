@@ -2,13 +2,13 @@ import React, { Component } from "react";
 import {
   CardNumberElement,
   CardExpiryElement,
-  CardCVCElement,
-  injectStripe
+  CardCVCElement
 } from "react-stripe-elements";
 import localisation from "../../utils/localisation";
 import styles from "../UpdatePaymentMethod/styles.module.scss";
 import { CheckoutFormContainer } from "./CheckoutFormContainer";
 import { SubmitCheckoutForm } from "./SubmitCheckoutForm";
+import { ApplyCouponButton } from "./ApplyCouponButton";
 
 class CheckoutFormView extends Component {
   constructor(props) {
@@ -39,13 +39,13 @@ class CheckoutFormView extends Component {
       showCouponField,
       couponCode,
       onCouponCodeChange,
-      onApplyCouponCode,
       disableCouponButton,
-      successMessage
+      successMessage,
+      ReactGA
     } = this.props;
 
     return (
-      <CheckoutFormContainer successMessage={successMessage}>
+      <CheckoutFormContainer successMessage={successMessage} ReactGA={ReactGA}>
         <div className="pelcro-prefix-form" ref="form">
           <div className="pelcro-prefix-row">
             <div className="col-md-12">
@@ -112,24 +112,23 @@ class CheckoutFormView extends Component {
                     </div>
                     <div className="col-sm-12 apply-coupon-button">
                       <div className="pelcro-prefix-input-wrapper">
-                        <button
-                          className="pelcro-prefix-link"
-                          type="button"
-                          onClick={onApplyCouponCode}
-                          disabled={
-                            !couponCode ||
+                        <ApplyCouponButton
+                          couponCode={couponCode}
+                          disableCouponButton={
                             this.state.disableCouponButton ||
                             disableCouponButton
                           }
-                        >
-                          {this.locale.labels.applyCouponCode}
-                        </button>
+                          name={this.locale.labels.applyCouponCode}
+                        />
                       </div>
                     </div>
                   </div>
                 )}
               </div>
-              <SubmitCheckoutForm name={this.locale.labels.submit} />
+              <SubmitCheckoutForm
+                name={this.locale.labels.submit}
+                stripe={this.props.stripe}
+              />
             </div>
           </div>
         </div>
@@ -138,4 +137,4 @@ class CheckoutFormView extends Component {
   }
 }
 
-export default injectStripe(CheckoutFormView);
+export default CheckoutFormView;

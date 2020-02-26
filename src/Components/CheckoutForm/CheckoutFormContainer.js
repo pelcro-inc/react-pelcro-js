@@ -1,14 +1,17 @@
 import React, { createContext, useReducer } from "react";
+import { injectStripe } from "react-stripe-elements";
 import {
   DISABLE_SUBMIT,
   CREATE_PAYMENT,
-  SUBMIT_PAYMENT
+  SUBMIT_PAYMENT,
+  SET_TOKEN
 } from "../../utils/action-types";
 import { getErrorMessages } from "../common/Helpers";
 import { showError, showSuccess } from "../../utils/showing-error";
 
 const initialState = {
-  disableSubmit: false
+  disableSubmit: false,
+  token: null
 };
 const store = createContext(initialState);
 const { Provider } = store;
@@ -18,15 +21,17 @@ const displayError = message => {
 };
 
 const displaySuccess = message => {
+  console.log("will show success message: ", message);
   showSuccess(message, "pelcro-success-payment-create");
 };
 
-const CheckoutFormContainer = ({
+const CheckoutFormContainerWithoutStripe = ({
   style,
   className,
   children,
   ReactGA,
-  successMessage
+  successMessage,
+  stripe
 }) => {
   const [state, dispatch] = useReducer((state, action) => {
     switch (action.type) {
@@ -42,30 +47,29 @@ const CheckoutFormContainer = ({
           err => {
             if (err) return displayError(getErrorMessages(err));
 
+            console.log("will display success message");
+
             ReactGA.event({
               category: "ACTIONS",
               action: "Updated Payment",
               nonInteraction: true
             });
-
             displaySuccess(successMessage);
-            return { ...state, disableSubmit: false };
+            return { ...state, disableSubmit: true };
           }
         );
         return { ...state, disableSubmit: true };
 
       case SUBMIT_PAYMENT:
-        this.props.setDisableSubmitState(true);
-
-        this.props.stripe.createToken().then(({ token, error }) => {
+        stripe.createToken().then(({ token, error }) => {
           if (error) {
-            this.props.showError(error.message);
-            this.props.setDisableSubmitState(false);
+            showError(error.message);
+            return { ...state, disableSubmit: false };
           } else if (token) {
-            this.props.callback(token);
+            return { ...state, token, disableSubmit: false };
           }
         });
-        return state;
+        return { ...state, disableSubmit: true };
 
       default:
         throw new Error();
@@ -84,5 +88,7 @@ const CheckoutFormContainer = ({
     </div>
   );
 };
+
+const CheckoutFormContainer = injectStripe(CheckoutFormContainerWithoutStripe);
 
 export { CheckoutFormContainer, store };
