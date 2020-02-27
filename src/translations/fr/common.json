@@ -251,20 +251,6 @@
             "back": "Retour"
         }
     },
-    "checkoutForm": {
-        "labels": {
-            "card": "Entrez le numéro de carte",
-            "date": "Date d'expiration",
-            "CVC": "CVC",
-            "required": "Champs obligatoires",
-            "submit": "Soumettre",
-            "addCode": "Ajouter un code promo",
-            "hideCode": "Cacher",
-            "codePlaceholder": "Entrez votre code de coupon",
-            "applyCouponCode": "Appliquer code de coupon",
-            "code": "Code promo"
-        }
-    },
     "userEdit": {
         "labels": {
             "title": "Voulez-vous mettre à jour votre profil?",

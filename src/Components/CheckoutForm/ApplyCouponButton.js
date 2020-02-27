@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Button } from "../../SubComponents/Button";
+import { store } from "./CheckoutFormContainer";
 
 export const ApplyCouponButton = ({
   onApplyCouponCode,
@@ -7,12 +8,16 @@ export const ApplyCouponButton = ({
   disableCouponButton,
   name
 }) => {
+  const {
+    state: { disableCouponButton: disableCouponButtonState }
+  } = useContext(store);
+
   return (
     <Button
       className="pelcro-prefix-link"
       type="button"
       onClick={onApplyCouponCode}
-      disabled={!couponCode || disableCouponButton}
+      disabled={!couponCode || disableCouponButton || disableCouponButtonState}
     >
       {name}
     </Button>

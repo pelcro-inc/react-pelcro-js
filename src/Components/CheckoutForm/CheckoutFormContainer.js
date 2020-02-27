@@ -3,15 +3,14 @@ import { injectStripe } from "react-stripe-elements";
 import {
   DISABLE_SUBMIT,
   CREATE_PAYMENT,
-  SUBMIT_PAYMENT,
-  SET_TOKEN
+  SUBMIT_PAYMENT
 } from "../../utils/action-types";
 import { getErrorMessages } from "../common/Helpers";
 import { showError, showSuccess } from "../../utils/showing-error";
 
 const initialState = {
   disableSubmit: false,
-  token: null
+  disableCouponButton: false
 };
 const store = createContext(initialState);
 const { Provider } = store;
@@ -29,7 +28,6 @@ const CheckoutFormContainerWithoutStripe = ({
   style,
   className,
   children,
-  ReactGA,
   successMessage,
   stripe
 }) => {
@@ -43,16 +41,7 @@ const CheckoutFormContainerWithoutStripe = ({
         console.log("err is: ", err);
         if (err) return displayError(getErrorMessages(err));
 
-        console.log("will display success message");
-
-        // ReactGA.event({
-        //   category: "ACTIONS",
-        //   action: "Updated Payment",
-        //   nonInteraction: true
-        // });
-
         displaySuccess(successMessage);
-        // return { ...state, disableSubmit: true };
       }
     );
   };
@@ -61,7 +50,6 @@ const CheckoutFormContainerWithoutStripe = ({
     stripe.createToken().then(({ token, error }) => {
       if (error) {
         showError(error.message);
-        // return { ...state, disableSubmit: false };
       } else if (token) {
         createPayment(token);
       }
@@ -74,11 +62,11 @@ const CheckoutFormContainerWithoutStripe = ({
         return { ...state, disableSubmit: action.payload };
 
       case CREATE_PAYMENT:
-        createPayment(action);
+        createPayment(action.payload);
         return { ...state, disableSubmit: false };
 
       case SUBMIT_PAYMENT:
-        submitPayment(action);
+        submitPayment();
         return { ...state, disableSubmit: false };
 
       default:

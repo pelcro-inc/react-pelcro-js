@@ -10,6 +10,8 @@ import success_en from "./translations/en/success.json";
 import success_fr from "./translations/fr/success.json";
 import meter_en from "./translations/en/meter.json";
 import meter_fr from "./translations/fr/meter.json";
+import checkoutForm_en from "./translations/en/checkoutForm.json";
+import checkoutForm_fr from "./translations/fr/checkoutForm.json";
 
 const resources = {
   en_US: {
@@ -17,14 +19,16 @@ const resources = {
     paymentCreate: paymentCreate_en,
     newsletter: newsletter_en,
     success: success_en,
-    meter: meter_en
+    meter: meter_en,
+    checkoutForm: checkoutForm_en
   },
   fr_CA: {
     common: common_fr,
     paymentCreate: paymentCreate_fr,
     newsletter: newsletter_fr,
     success: success_fr,
-    meter: meter_fr
+    meter: meter_fr,
+    checkoutForm: checkoutForm_fr
   }
 };
 
