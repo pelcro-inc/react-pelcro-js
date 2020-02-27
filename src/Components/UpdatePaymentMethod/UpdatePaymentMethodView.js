@@ -49,7 +49,7 @@ export function UpdatePaymentMethodView(props) {
               <Elements>
                 <CheckoutFormView
                   ReactGA={props.ReactGA}
-                  successMessage={t("message")}
+                  successMessage={t("success")}
                 />
               </Elements>
             </StripeProvider>
