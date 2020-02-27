@@ -11,7 +11,6 @@ import { showError } from "../../utils/showing-error";
 import Header from "../common/Header";
 import Authorship from "../common/Authorship";
 
-import { Elements } from "react-stripe-elements";
 import { CheckoutFormView } from "../CheckoutForm/CheckoutFormView";
 import { getErrorMessages } from "../common/Helpers";
 
@@ -137,14 +136,12 @@ class Checkout extends Component {
                   </div>
 
                   <div className="pelcro-prefix-form">
-                    <Elements>
-                      <CheckoutFormView
-                        callback={this.subscribe}
-                        disableSubmit={this.state.disableSubmit}
-                        showError={this.showError}
-                        setDisableSubmitState={this.setDisableSubmitState}
-                      />
-                    </Elements>
+                    <CheckoutFormView
+                      callback={this.subscribe}
+                      disableSubmit={this.state.disableSubmit}
+                      showError={this.showError}
+                      setDisableSubmitState={this.setDisableSubmitState}
+                    />
                   </div>
                 </div>
               </div>

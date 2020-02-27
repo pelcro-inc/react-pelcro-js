@@ -1,5 +1,5 @@
 import React, { createContext, useReducer } from "react";
-import { injectStripe } from "react-stripe-elements";
+import { injectStripe, Elements } from "react-stripe-elements";
 import {
   DISABLE_SUBMIT,
   CREATE_PAYMENT,
@@ -90,6 +90,12 @@ const CheckoutFormContainerWithoutStripe = ({
   );
 };
 
-const CheckoutFormContainer = injectStripe(CheckoutFormContainerWithoutStripe);
+const UnwrappedForm = injectStripe(CheckoutFormContainerWithoutStripe);
+
+const CheckoutFormContainer = props => (
+  <Elements>
+    <UnwrappedForm {...props} />
+  </Elements>
+);
 
 export { CheckoutFormContainer, store };

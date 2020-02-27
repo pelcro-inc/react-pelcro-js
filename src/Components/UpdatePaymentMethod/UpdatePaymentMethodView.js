@@ -46,13 +46,11 @@ export function UpdatePaymentMethodView(props) {
               apiKey={window.Pelcro.environment.stripe}
               stripeAccount={window.Pelcro.site.read().account_id}
             >
-              <Elements>
-                <CheckoutFormView
-                  ReactGA={props.ReactGA}
-                  successMessage={t("success")}
-                  showCoupon={false}
-                />
-              </Elements>
+              <CheckoutFormView
+                ReactGA={props.ReactGA}
+                successMessage={t("success")}
+                showCoupon={false}
+              />
             </StripeProvider>
           </div>
         </div>
