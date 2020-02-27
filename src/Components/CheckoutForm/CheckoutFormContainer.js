@@ -32,12 +32,14 @@ const CheckoutFormContainerWithoutStripe = ({
   stripe
 }) => {
   const createPayment = token => {
+    dispatch({ type: DISABLE_SUBMIT, payload: true });
     window.Pelcro.source.create(
       {
         auth_token: window.Pelcro.user.read().auth_token,
         token: token.id
       },
       err => {
+        dispatch({ type: DISABLE_SUBMIT, payload: false });
         console.log("err is: ", err);
         if (err) return displayError(getErrorMessages(err));
 
@@ -48,6 +50,7 @@ const CheckoutFormContainerWithoutStripe = ({
 
   const submitPayment = () => {
     stripe.createToken().then(({ token, error }) => {
+      dispatch({ type: DISABLE_SUBMIT, payload: false });
       if (error) {
         showError(error.message);
       } else if (token) {
@@ -63,11 +66,11 @@ const CheckoutFormContainerWithoutStripe = ({
 
       case CREATE_PAYMENT:
         createPayment(action.payload);
-        return { ...state, disableSubmit: false };
+        return { ...state, disableSubmit: true };
 
       case SUBMIT_PAYMENT:
         submitPayment();
-        return { ...state, disableSubmit: false };
+        return { ...state, disableSubmit: true };
 
       default:
         throw new Error();

@@ -3,8 +3,11 @@ import Submit from "../common/Submit";
 import { store } from "./CheckoutFormContainer";
 import { SUBMIT_PAYMENT } from "../../utils/action-types";
 
-export const SubmitCheckoutForm = ({ disableSubmit, name }) => {
-  const { dispatch } = useContext(store);
+export const SubmitCheckoutForm = ({ name }) => {
+  const {
+    dispatch,
+    state: { disableSubmit }
+  } = useContext(store);
 
   return (
     <Submit
