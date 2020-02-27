@@ -1,29 +1,21 @@
-// Shows submit button on the modal window.
-
 import React from "react";
-import PropTypes from "prop-types";
 
-const Submit = props => {
+const Submit = ({ disabled, id, text, onClick, style = {}, className }) => {
   return (
     <div className="submit">
       <button
-        disabled={props.disabled}
+        disabled={disabled}
         name="submit"
-        className="pelcro-prefix-btn"
-        id={props.id}
+        style={style}
+        className={`pelcro-prefix-btn ${className}`}
+        id={id}
         type="submit"
-        onClick={props.onClick}
+        onClick={onClick}
       >
-        {props.text}
+        {text}
       </button>
     </div>
   );
-};
-
-Submit.propTypes = {
-  onClick: PropTypes.func,
-  text: PropTypes.string,
-  id: PropTypes.string
 };
 
 export default Submit;

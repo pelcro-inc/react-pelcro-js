@@ -27,6 +27,11 @@ import { NewsLetter } from "./Components/NewsLetter/NewsLetter";
 import { MeterModal } from "./Components/Meter/MeterModal";
 import { MeterView } from "./Components/Meter/MeterView";
 import { DashboardMenu } from "./Components/Dashboard/DashboardMenu";
+import { CheckoutFormContainer } from "./Components/CheckoutForm/CheckoutFormContainer";
+import { CheckoutFormView } from "./Components/CheckoutForm/CheckoutFormView";
+import { ApplyCouponButton } from "./Components/CheckoutForm/ApplyCouponButton";
+import { SubmitCheckoutForm } from "./Components/CheckoutForm/SubmitCheckoutForm";
+
 import {
   init as initButtons,
   authenticatedButtons,
@@ -34,6 +39,10 @@ import {
 } from "./Components/common/Buttons";
 
 export {
+  CheckoutFormContainer,
+  CheckoutFormView,
+  ApplyCouponButton,
+  SubmitCheckoutForm,
   LoginContainer,
   PaymentSuccessView,
   PaymentSuccessModal,

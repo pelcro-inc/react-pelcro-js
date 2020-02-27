@@ -36,6 +36,8 @@ import Cart from "./Components/shop/Cart";
 import Checkout from "./Components/shop/Checkout";
 import Confirm from "./Components/shop/Confirm";
 
+import { CustomUpdatePayment } from "./demos/CustomUpdatePayment";
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -307,6 +309,8 @@ class App extends Component {
 
           {this.state.isAuthenticated && authenticatedButtons()}
           {!this.state.isAuthenticated && unauthenticatedButtons()}
+
+          <CustomUpdatePayment ReactGA={ReactGA} />
 
           {this.state.view === "select" && (
             <SelectModal

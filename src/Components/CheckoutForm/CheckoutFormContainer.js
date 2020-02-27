@@ -92,15 +92,20 @@ const CheckoutFormContainerWithoutStripe = ({
 
 const UnwrappedForm = injectStripe(CheckoutFormContainerWithoutStripe);
 
-const CheckoutFormContainer = props => (
-  <StripeProvider
-    apiKey={window.Pelcro.environment.stripe}
-    stripeAccount={window.Pelcro.site.read().account_id}
-  >
-    <Elements>
-      <UnwrappedForm {...props} />
-    </Elements>
-  </StripeProvider>
-);
+const CheckoutFormContainer = props => {
+  if (window.Stripe) {
+    return (
+      <StripeProvider
+        apiKey={window.Pelcro.environment.stripe}
+        stripeAccount={window.Pelcro.site.read().account_id}
+      >
+        <Elements>
+          <UnwrappedForm {...props} />
+        </Elements>
+      </StripeProvider>
+    );
+  }
+  return null;
+};
 
 export { CheckoutFormContainer, store };
