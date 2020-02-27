@@ -40,6 +40,7 @@
     "eslint-plugin-react": "^7.18.0",
     "html-webpack-inline-source-plugin": "0.0.10",
     "html-webpack-plugin": "^3.2.0",
+    "remove-files-webpack-plugin": "^1.4.0",
     "travis-ci-cloudfront-invalidation": "^1.1.0",
     "webpack-cli": "^3.2.3"
   },
