@@ -1,7 +1,7 @@
 {
   "name": "@pelcro/pelcro-react-elements",
   "description": "Pelcro's React UI Elements",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "private": false,
   "main": "dist/index.js",
   "files": [
