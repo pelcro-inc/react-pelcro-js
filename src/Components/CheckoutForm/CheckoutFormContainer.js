@@ -1,5 +1,5 @@
 import React, { createContext, useReducer } from "react";
-import { injectStripe, Elements } from "react-stripe-elements";
+import { injectStripe, Elements, StripeProvider } from "react-stripe-elements";
 import {
   DISABLE_SUBMIT,
   CREATE_PAYMENT,
@@ -93,9 +93,14 @@ const CheckoutFormContainerWithoutStripe = ({
 const UnwrappedForm = injectStripe(CheckoutFormContainerWithoutStripe);
 
 const CheckoutFormContainer = props => (
-  <Elements>
-    <UnwrappedForm {...props} />
-  </Elements>
+  <StripeProvider
+    apiKey={window.Pelcro.environment.stripe}
+    stripeAccount={window.Pelcro.site.read().account_id}
+  >
+    <Elements>
+      <UnwrappedForm {...props} />
+    </Elements>
+  </StripeProvider>
 );
 
 export { CheckoutFormContainer, store };

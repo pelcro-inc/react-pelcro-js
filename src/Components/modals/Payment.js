@@ -12,7 +12,6 @@ import { showError, hideError } from "../../utils/showing-error";
 import Header from "../common/Header";
 import Authorship from "../common/Authorship";
 
-import { StripeProvider } from "react-stripe-elements";
 import { CheckoutFormView } from "../CheckoutForm/CheckoutFormView";
 import { formatDiscountedPrice } from "../../utils/utils";
 
@@ -273,27 +272,21 @@ class Payment extends Component {
                       </span>
                     </div>
                   </div>
-
                   <div className="pelcro-prefix-form">
-                    <StripeProvider
-                      apiKey={window.Pelcro.environment.stripe}
-                      stripeAccount={this.site.account_id}
-                    >
-                      <CheckoutFormView
-                        callback={this.subscribe}
-                        disableSubmit={this.state.disableSubmit}
-                        disableCouponButton={this.state.disableCouponButton}
-                        showError={this.showError}
-                        setDisableSubmitState={this.setDisableSubmitState}
-                        enableCouponField={this.state.enableCouponField}
-                        showCouponField={this.showCouponField}
-                        couponCode={this.state.couponCode}
-                        onCouponCodeChange={this.onCouponCodeChange}
-                        onApplyCouponCode={this.onApplyCouponCode}
-                        plan={this.props.plan}
-                        coupon={this.state.coupon}
-                      />
-                    </StripeProvider>
+                    <CheckoutFormView
+                      callback={this.subscribe}
+                      disableSubmit={this.state.disableSubmit}
+                      disableCouponButton={this.state.disableCouponButton}
+                      showError={this.showError}
+                      setDisableSubmitState={this.setDisableSubmitState}
+                      enableCouponField={this.state.enableCouponField}
+                      showCouponField={this.showCouponField}
+                      couponCode={this.state.couponCode}
+                      onCouponCodeChange={this.onCouponCodeChange}
+                      onApplyCouponCode={this.onApplyCouponCode}
+                      plan={this.props.plan}
+                      coupon={this.state.coupon}
+                    />
                   </div>
                 </div>
               </div>

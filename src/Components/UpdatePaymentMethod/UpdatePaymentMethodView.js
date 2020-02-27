@@ -1,5 +1,4 @@
 import React from "react";
-import { Elements, StripeProvider } from "react-stripe-elements";
 import { useTranslation } from "react-i18next";
 
 import ErrMessage from "../common/ErrMessage";
@@ -42,16 +41,11 @@ export function UpdatePaymentMethodView(props) {
           </div>
 
           <div className="pelcro-prefix-form">
-            <StripeProvider
-              apiKey={window.Pelcro.environment.stripe}
-              stripeAccount={window.Pelcro.site.read().account_id}
-            >
-              <CheckoutFormView
-                ReactGA={props.ReactGA}
-                successMessage={t("success")}
-                showCoupon={false}
-              />
-            </StripeProvider>
+            <CheckoutFormView
+              ReactGA={props.ReactGA}
+              successMessage={t("success")}
+              showCoupon={false}
+            />
           </div>
         </div>
       </React.Fragment>
