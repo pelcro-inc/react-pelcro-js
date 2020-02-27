@@ -52,7 +52,7 @@ const CheckoutFormContainerWithoutStripe = ({
     stripe.createToken().then(({ token, error }) => {
       dispatch({ type: DISABLE_SUBMIT, payload: false });
       if (error) {
-        showError(error.message);
+        showError(error.message, "pelcro-error-payment-create");
       } else if (token) {
         createPayment(token);
       }

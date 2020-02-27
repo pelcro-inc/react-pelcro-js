@@ -505,12 +505,12 @@ class App extends Component {
               ReactGA={ReactGA}
             />
           )}
-
+          {/* 
           <UpdatePaymentMethodView
             resetView={this.resetView}
             ReactGA={ReactGA}
             setView={this.setView}
-          />
+          /> */}
         </div>
       </div>
     );

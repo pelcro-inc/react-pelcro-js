@@ -31,6 +31,8 @@ import { CheckoutFormContainer } from "./Components/CheckoutForm/CheckoutFormCon
 import { CheckoutFormView } from "./Components/CheckoutForm/CheckoutFormView";
 import { ApplyCouponButton } from "./Components/CheckoutForm/ApplyCouponButton";
 import { SubmitCheckoutForm } from "./Components/CheckoutForm/SubmitCheckoutForm";
+import ErrMessage from "./Components/common/ErrMessage";
+import AlertSuccess from "./Components/common/AlertSuccess";
 
 import {
   init as initButtons,
@@ -40,6 +42,8 @@ import {
 
 export {
   CheckoutFormContainer,
+  ErrMessage,
+  AlertSuccess,
   CheckoutFormView,
   ApplyCouponButton,
   SubmitCheckoutForm,

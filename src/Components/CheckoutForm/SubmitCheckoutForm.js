@@ -3,7 +3,7 @@ import Submit from "../common/Submit";
 import { store } from "./CheckoutFormContainer";
 import { SUBMIT_PAYMENT } from "../../utils/action-types";
 
-export const SubmitCheckoutForm = ({ name, style, classNames }) => {
+export const SubmitCheckoutForm = ({ name, style, className }) => {
   const {
     dispatch,
     state: { disableSubmit }
@@ -14,8 +14,8 @@ export const SubmitCheckoutForm = ({ name, style, classNames }) => {
       onClick={() => dispatch({ type: SUBMIT_PAYMENT })}
       text={name}
       disabled={disableSubmit}
-      styles={style}
-      classNames={classNames}
+      style={style}
+      className={className}
     />
   );
 };
