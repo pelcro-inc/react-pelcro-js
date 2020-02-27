@@ -13,7 +13,7 @@ import Header from "../common/Header";
 import Authorship from "../common/Authorship";
 
 import { Elements, StripeProvider } from "react-stripe-elements";
-import CheckoutForm from "../CheckoutForm/CheckoutFormView";
+import { CheckoutFormView } from "../CheckoutForm/CheckoutFormView";
 import { formatDiscountedPrice } from "../../utils/utils";
 
 class Payment extends Component {
@@ -280,7 +280,7 @@ class Payment extends Component {
                       stripeAccount={this.site.account_id}
                     >
                       <Elements>
-                        <CheckoutForm
+                        <CheckoutFormView
                           callback={this.subscribe}
                           disableSubmit={this.state.disableSubmit}
                           disableCouponButton={this.state.disableCouponButton}

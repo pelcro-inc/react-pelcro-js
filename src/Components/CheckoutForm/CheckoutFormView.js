@@ -35,7 +35,7 @@ export function CheckoutFormView({
 
   return (
     <CheckoutFormContainer successMessage={successMessage} ReactGA={ReactGA}>
-      <div className="pelcro-prefix-form" ref="form">
+      <div className="pelcro-prefix-form">
         <div className="pelcro-prefix-row">
           <div className="col-md-12">
             <label className="pelcro-prefix-label">{t("labels.card")} *</label>

@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import ErrMessage from "../common/ErrMessage";
 import AlertSuccess from "../common/AlertSuccess";
 
-import CheckoutFormView from "../CheckoutForm/CheckoutFormView";
+import { CheckoutFormView } from "../CheckoutForm/CheckoutFormView";
 import styles from "./styles.module.scss";
 
 export function UpdatePaymentMethodView(props) {

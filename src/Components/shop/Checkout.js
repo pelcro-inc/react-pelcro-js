@@ -11,8 +11,8 @@ import { showError } from "../../utils/showing-error";
 import Header from "../common/Header";
 import Authorship from "../common/Authorship";
 
-import { Elements, StripeProvider } from "react-stripe-elements";
-import CheckoutForm from "../CheckoutForm/CheckoutFormView";
+import { Elements } from "react-stripe-elements";
+import { CheckoutFormView } from "../CheckoutForm/CheckoutFormView";
 import { getErrorMessages } from "../common/Helpers";
 
 class Checkout extends Component {
@@ -137,19 +137,14 @@ class Checkout extends Component {
                   </div>
 
                   <div className="pelcro-prefix-form">
-                    <StripeProvider
-                      apiKey={window.Pelcro.environment.stripe}
-                      stripeAccount={this.site.account_id}
-                    >
-                      <Elements>
-                        <CheckoutForm
-                          callback={this.subscribe}
-                          disableSubmit={this.state.disableSubmit}
-                          showError={this.showError}
-                          setDisableSubmitState={this.setDisableSubmitState}
-                        />
-                      </Elements>
-                    </StripeProvider>
+                    <Elements>
+                      <CheckoutFormView
+                        callback={this.subscribe}
+                        disableSubmit={this.state.disableSubmit}
+                        showError={this.showError}
+                        setDisableSubmitState={this.setDisableSubmitState}
+                      />
+                    </Elements>
                   </div>
                 </div>
               </div>
