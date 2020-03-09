@@ -3,6 +3,7 @@
 
 import React, { Component } from "react";
 import ErrMessage from "../common/ErrMessage";
+import AlertSuccess from "../common/AlertSuccess";
 import PropTypes from "prop-types";
 import { getErrorMessages } from "../common/Helpers";
 
@@ -36,7 +37,6 @@ class Payment extends Component {
     this.site = window.Pelcro.site.read();
     this.closeButton = window.Pelcro.paywall.displayCloseButton();
 
-    this.subscribe = this.subscribe.bind(this);
     this.setDisableSubmitState = this.setDisableSubmitState.bind(this);
     this.showCouponField = this.showCouponField.bind(this);
     this.onCouponCodeChange = this.onCouponCodeChange.bind(this);
@@ -74,85 +74,6 @@ class Payment extends Component {
 
   setDisableSubmitState = state => {
     this.setState({ disableSubmit: state });
-  };
-
-  subscribe = token => {
-    if (!this.props.subscriptionIdToRenew) {
-      window.Pelcro.subscription.create(
-        {
-          stripe_token: token.id,
-          auth_token: window.Pelcro.user.read().auth_token,
-          plan_id: this.plan.id,
-          coupon_code: this.state.couponCode,
-          gift_recipient_email: this.props.giftRecipient
-            ? this.props.giftRecipient.email
-            : null,
-          address_id: this.product.address_required
-            ? window.Pelcro.user.read().addresses[
-                window.Pelcro.user.read().addresses.length - 1
-              ].id
-            : null
-        },
-        (err, res) => {
-          this.setState({ disableSubmit: false });
-
-          if (err) return this.showError(getErrorMessages(err));
-
-          this.props.ReactGA.event({
-            category: "ACTIONS",
-            action: "Subscribed",
-            nonInteraction: true
-          });
-
-          if (this.props.giftRecipient) {
-            window.alert(
-              `${this.locale.messages.giftSent} ${this.props.giftRecipient.email} ${this.locale.messages.successfully}`
-            );
-            this.props.resetView();
-          } else {
-            this.props.setView("success");
-          }
-        }
-      );
-    } else {
-      window.Pelcro.subscription.renew(
-        {
-          stripe_token: token.id,
-          auth_token: window.Pelcro.user.read().auth_token,
-          plan_id: this.plan.id,
-          coupon_code: this.state.couponCode,
-          subscription_id: this.props.subscriptionIdToRenew,
-          address_id: this.product.address_required
-            ? window.Pelcro.user.read().addresses[
-                window.Pelcro.user.read().addresses.length - 1
-              ]
-            : null
-        },
-        (err, res) => {
-          this.setState({ disableSubmit: false });
-
-          if (err) return this.showError(getErrorMessages(err));
-
-          this.props.ReactGA.event({
-            category: "ACTIONS",
-            action: "Reactivated",
-            nonInteraction: true
-          });
-
-          if (this.props.giftRecipient) {
-            this.props.resetView();
-            window.alert(
-              `${this.locale.messages.giftSent} ${this.props.giftRecipient.email} ${this.locale.messages.successfully}`
-            );
-          } else {
-            this.props.setView("success");
-          }
-        }
-      );
-    }
-
-    // Prevent the form from being submitted:
-    return false;
   };
 
   getMonthsOptions = () => {
@@ -254,7 +175,8 @@ class Payment extends Component {
                   </p>
                 </div>
 
-                <ErrMessage name="payment" />
+                <ErrMessage name="payment-create" />
+                <AlertSuccess name="payment-create" />
 
                 <div className="pelcro-prefix-payment-block">
                   <div className="pelcro-prefix-alert pelcro-prefix-alert-success">
@@ -275,6 +197,7 @@ class Payment extends Component {
                   <div className="pelcro-prefix-form">
                     <CheckoutFormView
                       callback={this.subscribe}
+                      type="createPayment"
                       disableSubmit={this.state.disableSubmit}
                       disableCouponButton={this.state.disableCouponButton}
                       showError={this.showError}
@@ -286,6 +209,11 @@ class Payment extends Component {
                       onApplyCouponCode={this.onApplyCouponCode}
                       plan={this.props.plan}
                       coupon={this.state.coupon}
+                      subscriptionIdToRenew={this.props.subscriptionIdToRenew}
+                      giftRecipient={this.props.giftRecipient}
+                      product={this.props.product}
+                      setView={this.props.setView}
+                      resetView={this.props.resetView}
                     />
                   </div>
                 </div>

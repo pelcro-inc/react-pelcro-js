@@ -18,7 +18,14 @@ export function CheckoutFormView({
   disableCouponButton,
   successMessage,
   ReactGA,
-  showCoupon
+  showCoupon,
+  type,
+  subscriptionIdToRenew,
+  giftRecipient,
+  plan,
+  product,
+  setView,
+  resetView
 }) {
   // componentDidUpdate(prevProps) {
   //   if (prevProps.coupon !== this.props.coupon)
@@ -35,7 +42,18 @@ export function CheckoutFormView({
   const { t } = useTranslation("checkoutForm");
 
   return (
-    <CheckoutFormContainer successMessage={successMessage} ReactGA={ReactGA}>
+    <CheckoutFormContainer
+      type={type}
+      successMessage={successMessage}
+      ReactGA={ReactGA}
+      subscriptionIdToRenew={subscriptionIdToRenew}
+      giftRecipient={giftRecipient}
+      plan={plan}
+      product={product}
+      couponCode={couponCode}
+      setView={setView}
+      resetView={resetView}
+    >
       <div className="pelcro-prefix-form">
         <div className="pelcro-prefix-row">
           <div className="col-md-12">
