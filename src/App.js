@@ -141,6 +141,8 @@ class App extends Component {
   };
 
   setView = view => {
+    console.log("App -> view", view);
+
     this.setState({ view: view });
 
     if (view !== "meter") this.disableScroll();

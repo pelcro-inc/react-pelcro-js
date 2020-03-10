@@ -84,13 +84,13 @@ const CheckoutFormContainerWithoutStripe = ({
         (err, res) => {
           dispatch({ type: DISABLE_SUBMIT, payload: false });
 
-          if (err) return displayError(getErrorMessages(err));
+          if (err) return showError(err.message, "pelcro-error-payment-create");
 
-          ReactGA.event({
-            category: "ACTIONS",
-            action: "Subscribed",
-            nonInteraction: true
-          });
+          // ReactGA.event({
+          //   category: "ACTIONS",
+          //   action: "Subscribed",
+          //   nonInteraction: true
+          // });
 
           if (giftRecipient) {
             window.alert(
@@ -99,6 +99,7 @@ const CheckoutFormContainerWithoutStripe = ({
             resetView();
           } else {
             setView("success");
+            console.log("subscribe -> success");
           }
         }
       );
@@ -121,11 +122,11 @@ const CheckoutFormContainerWithoutStripe = ({
 
           if (err) return displayError(getErrorMessages(err));
 
-          ReactGA.event({
-            category: "ACTIONS",
-            action: "Reactivated",
-            nonInteraction: true
-          });
+          // ReactGA.event({
+          //   category: "ACTIONS",
+          //   action: "Reactivated",
+          //   nonInteraction: true
+          // });
 
           if (giftRecipient) {
             resetView();
@@ -134,6 +135,7 @@ const CheckoutFormContainerWithoutStripe = ({
             );
           } else {
             setView("success");
+            console.log("subscribe renew -> success");
           }
         }
       );
