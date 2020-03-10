@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useMemo } from "react";
 import Submit from "../common/Submit";
 import { store } from "./CheckoutFormContainer";
 import { SUBMIT_PAYMENT } from "../../utils/action-types";
@@ -9,13 +9,18 @@ export const SubmitCheckoutForm = ({ name, style, className }) => {
     state: { disableSubmit }
   } = useContext(store);
 
-  return (
-    <Submit
-      onClick={() => dispatch({ type: SUBMIT_PAYMENT })}
-      text={name}
-      disabled={disableSubmit}
-      style={style}
-      className={className}
-    />
+  useEffect(() => console.log("SubmitCheckoutForm mounted"), []);
+
+  return useMemo(
+    () => (
+      <Submit
+        onClick={() => dispatch({ type: SUBMIT_PAYMENT })}
+        text={name}
+        disabled={disableSubmit}
+        style={style}
+        className={className}
+      />
+    ),
+    [className, name, disableSubmit, style]
   );
 };

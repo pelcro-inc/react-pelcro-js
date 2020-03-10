@@ -1,5 +1,10 @@
-import React, { createContext, useReducer } from "react";
+import React, { createContext, useReducer, useMemo, useEffect } from "react";
 import { injectStripe, Elements, StripeProvider } from "react-stripe-elements";
+import useReducerWithSideEffects, {
+  UpdateWithSideEffect,
+  Update
+} from "use-reducer-with-side-effects";
+
 import {
   DISABLE_SUBMIT,
   CREATE_PAYMENT,
@@ -40,7 +45,11 @@ const CheckoutFormContainerWithoutStripe = ({
   setView,
   resetView
 }) => {
-  const createPayment = token => {
+  useEffect(() => {
+    console.log("checkoutFormContainer got mounted");
+  }, []);
+
+  const createPayment = (token, state, dispatch) => {
     dispatch({ type: DISABLE_SUBMIT, payload: true });
     window.Pelcro.source.create(
       {
@@ -56,7 +65,7 @@ const CheckoutFormContainerWithoutStripe = ({
     );
   };
 
-  const subscribe = token => {
+  const subscribe = (token, state, dispatch) => {
     console.log("subscribe to plan");
     if (!subscriptionIdToRenew) {
       window.Pelcro.subscription.create(
@@ -75,7 +84,7 @@ const CheckoutFormContainerWithoutStripe = ({
         (err, res) => {
           dispatch({ type: DISABLE_SUBMIT, payload: false });
 
-          if (err) return showError(getErrorMessages(err));
+          if (err) return displayError(getErrorMessages(err));
 
           ReactGA.event({
             category: "ACTIONS",
@@ -110,7 +119,7 @@ const CheckoutFormContainerWithoutStripe = ({
         (err, res) => {
           dispatch({ type: DISABLE_SUBMIT, payload: false });
 
-          if (err) return showError(getErrorMessages(err));
+          if (err) return displayError(getErrorMessages(err));
 
           ReactGA.event({
             category: "ACTIONS",
@@ -134,48 +143,58 @@ const CheckoutFormContainerWithoutStripe = ({
     return false;
   };
 
-  const submitPayment = () => {
-    stripe.createToken().then(({ token, error }) => {
-      dispatch({ type: DISABLE_SUBMIT, payload: false });
+  const submitPayment = (state, dispatch) => {
+    console.log("submit payment!!");
+    return stripe.createToken().then(({ token, error }) => {
       if (error) {
         showError(error.message, "pelcro-error-payment-create");
+        dispatch({ type: DISABLE_SUBMIT, payload: false });
       } else if (token && type === "createPayment") {
         dispatch({ type: DISABLE_SUBMIT, payload: true });
-        subscribe(token);
+        subscribe(token, state, dispatch);
       } else if (token) {
-        createPayment(token);
+        createPayment(token, state, dispatch);
       }
     });
   };
 
-  const [state, dispatch] = useReducer((state, action) => {
+  const [state, dispatch] = useReducerWithSideEffects((state, action) => {
+    console.log("state, action", state, action);
     switch (action.type) {
       case DISABLE_SUBMIT:
-        return { ...state, disableSubmit: action.payload };
+        return Update({ ...state, disableSubmit: action.payload });
 
       case CREATE_PAYMENT:
-        createPayment(action.payload);
-        return { ...state, disableSubmit: true };
+        return UpdateWithSideEffect(
+          { ...state, disableSubmit: true },
+          (state, dispatch) => createPayment(action.payload, state, dispatch)
+        );
 
       case SUBMIT_PAYMENT:
-        submitPayment();
-        return { ...state, disableSubmit: true };
+        console.log("SUBMIT_PAYMENT");
+        return UpdateWithSideEffect(
+          { ...state, disableSubmit: true },
+          (state, dispatch) => submitPayment(state, dispatch)
+        );
 
       default:
         throw new Error();
     }
   }, initialState);
 
-  return (
-    <div style={{ ...style }} className={className}>
-      <Provider value={{ state, dispatch }}>
-        {children.length
-          ? children.map((child, i) =>
-              React.cloneElement(child, { store, key: i })
-            )
-          : React.cloneElement(children, { store })}
-      </Provider>
-    </div>
+  return useMemo(
+    () => (
+      <div style={{ ...style }} className={className}>
+        <Provider value={{ state, dispatch }}>
+          {children.length
+            ? children.map((child, i) =>
+                React.cloneElement(child, { store, key: i })
+              )
+            : React.cloneElement(children, { store })}
+        </Provider>
+      </div>
+    ),
+    [style, className, children]
   );
 };
 
