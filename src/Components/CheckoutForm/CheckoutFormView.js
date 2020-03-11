@@ -15,6 +15,7 @@ export function CheckoutFormView({
   showCouponField,
   couponCode,
   onCouponCodeChange,
+  onApplyCouponCode,
   disableCouponButton,
   successMessage,
   ReactGA,
@@ -115,6 +116,7 @@ export function CheckoutFormView({
                     <div className="col-sm-12 apply-coupon-button">
                       <div className="pelcro-prefix-input-wrapper">
                         <ApplyCouponButton
+                          onApplyCouponCode={onApplyCouponCode}
                           couponCode={couponCode}
                           disableCouponButton={disableCouponButton}
                           name={t("labels.applyCouponCode")}

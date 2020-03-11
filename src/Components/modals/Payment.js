@@ -205,6 +205,7 @@ class Payment extends Component {
                       enableCouponField={this.state.enableCouponField}
                       showCouponField={this.showCouponField}
                       couponCode={this.state.couponCode}
+                      showCoupon={true}
                       onCouponCodeChange={this.onCouponCodeChange}
                       onApplyCouponCode={this.onApplyCouponCode}
                       plan={this.props.plan}

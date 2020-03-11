@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Button } from "../../SubComponents/Button";
 import { store } from "./CheckoutFormContainer";
+import {} from "../../utils/action-types";
 
 export const ApplyCouponButton = ({
   onApplyCouponCode,
@@ -9,7 +10,8 @@ export const ApplyCouponButton = ({
   name
 }) => {
   const {
-    state: { disableCouponButton: disableCouponButtonState }
+    state: { disableCouponButton: disableCouponButtonState },
+    dispatch
   } = useContext(store);
 
   return (
