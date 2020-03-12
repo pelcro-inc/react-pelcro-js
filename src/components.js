@@ -33,6 +33,8 @@ import { ApplyCouponButton } from "./Components/CheckoutForm/ApplyCouponButton";
 import { SubmitCheckoutForm } from "./Components/CheckoutForm/SubmitCheckoutForm";
 import ErrMessage from "./Components/common/ErrMessage";
 import AlertSuccess from "./Components/common/AlertSuccess";
+import { CreatePaymentModal } from "./Components/CreatePayment/CreatePaymentModal";
+import { CreatePaymentView } from "./Components/CreatePayment/CreatePaymentView";
 
 import {
   init as initButtons,
@@ -76,5 +78,7 @@ export {
   DashboardMenu,
   initButtons,
   authenticatedButtons,
-  unauthenticatedButtons
+  unauthenticatedButtons,
+  CreatePaymentModal,
+  CreatePaymentView
 };

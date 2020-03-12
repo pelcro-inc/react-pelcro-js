@@ -15,7 +15,7 @@ import Authorship from "../common/Authorship";
 import { formatDiscountedPrice } from "../../utils/utils";
 import { CreatePaymentView } from "./CreatePaymentView";
 
-class Payment extends Component {
+export class CreatePaymentModal extends Component {
   constructor(props) {
     super(props);
 
@@ -193,15 +193,3 @@ class Payment extends Component {
     );
   }
 }
-
-Payment.propTypes = {
-  plan: PropTypes.object,
-  product: PropTypes.object,
-  giftRecipient: PropTypes.object,
-  setView: PropTypes.func,
-  resetView: PropTypes.func,
-  logout: PropTypes.func,
-  subscriptionIdToRenew: PropTypes.number
-};
-
-export default Payment;

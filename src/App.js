@@ -9,6 +9,8 @@ import {
   DashboardModal,
   UpdatePaymentMethodModal,
   UpdatePaymentMethodView,
+  CreatePaymentModal,
+  CreatePaymentView,
   NewsLetter,
   PaymentSuccessModal,
   MeterModal,
@@ -24,7 +26,6 @@ import AddressEdit from "./Components/modals/address/Edit";
 // to be refactored
 import Gift from "./Components/modals/Gift";
 import Redeem from "./Components/modals/Redeem";
-import Payment from "./Components/modals/Payment";
 // import Success from "./Components/modals/Success";
 import AddressCreate from "./Components/modals/address/Create";
 import PasswordForgot from "./Components/modals/password/Forgot";
@@ -370,7 +371,7 @@ class App extends Component {
             />
           )}
           {this.state.view === "payment" && (
-            <Payment
+            <CreatePaymentModal
               subscriptionIdToRenew={this.state.subscriptionIdToRenew}
               giftRecipient={this.state.giftRecipient}
               isGift={this.state.isGift}
