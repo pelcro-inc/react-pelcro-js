@@ -63,7 +63,7 @@ class Payment extends Component {
 
   // inserting error message into modal window
   showError = message => {
-    showError(message, "pelcro-error-payment");
+    showError(message, "pelcro-error-payment-create");
   };
 
   showCouponField = () => {
@@ -107,7 +107,7 @@ class Payment extends Component {
   }
 
   onApplyCouponCode = () => {
-    this.setState({ disableSubmit: true, disableCouponButton: true });
+    this.setState({ disableCouponButton: true });
 
     window.Pelcro.order.create(
       {
@@ -117,15 +117,15 @@ class Payment extends Component {
       },
       (err, res) => {
         this.setState({
-          disableSubmit: false,
           disableCouponButton: false
         });
 
         if (err) {
+          console.log({ err });
           this.setState({ percentOff: "" });
           return this.showError(getErrorMessages(err));
         } else {
-          hideError("pelcro-error-payment");
+          hideError("pelcro-error-payment-create");
         }
         // @FIXME: remove manually entered $ sign
         this.setState({
