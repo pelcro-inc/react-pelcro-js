@@ -8,21 +8,9 @@ import Authorship from "../common/Authorship";
 import { PaymentSuccessView } from "./PaymentSuccessView";
 
 export class PaymentSuccessModal extends Component {
-  constructor(props) {
-    super(props);
-    this.site = window.Pelcro.site.read();
-    this.closeButton = window.Pelcro.paywall.displayCloseButton();
-  }
-
   componentDidMount = () => {
     window.Pelcro.insight.track("Modal Displayed", {
       name: "success"
-    });
-
-    this.props.ReactGA.event({
-      category: "VIEWS",
-      action: "Success Modal Viewed",
-      nonInteraction: true
     });
 
     document.addEventListener("keydown", this.handleSubmit);
@@ -52,9 +40,9 @@ export class PaymentSuccessModal extends Component {
           >
             <div className="pelcro-prefix-modal-content">
               <Header
-                closeButton={this.closeButton}
+                closeButton={window.Pelcro.paywall.displayCloseButton()}
                 resetView={this.props.resetView}
-                site={this.site}
+                site={window.Pelcro.site.read()}
               ></Header>
               <div className="pelcro-prefix-modal-body">
                 <PaymentSuccessView

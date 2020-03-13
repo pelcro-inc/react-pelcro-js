@@ -1,5 +1,7 @@
 import React, { createContext, useReducer, useMemo, useEffect } from "react";
 import { injectStripe, Elements, StripeProvider } from "react-stripe-elements";
+import { useTranslation } from "react-i18next";
+import { formatDiscountedPrice } from "../../utils/utils";
 import useReducerWithSideEffects, {
   UpdateWithSideEffect,
   Update
@@ -8,14 +10,22 @@ import useReducerWithSideEffects, {
 import {
   DISABLE_SUBMIT,
   CREATE_PAYMENT,
-  SUBMIT_PAYMENT
+  SUBMIT_PAYMENT,
+  DISABLE_COUPON_BUTTON,
+  APPLY_COUPON_CODE,
+  SET_PERCENT_OFF,
+  SET_COUPON
 } from "../../utils/action-types";
 import { getErrorMessages } from "../common/Helpers";
-import { showError, showSuccess } from "../../utils/showing-error";
+import { showError, showSuccess, hideError } from "../../utils/showing-error";
 
 const initialState = {
   disableSubmit: false,
-  disableCouponButton: false
+  disableCouponButton: false,
+  couponCode: "",
+  enableCouponField: false,
+  percentOff: "",
+  coupon: null
 };
 const store = createContext(initialState);
 const { Provider } = store;
@@ -45,8 +55,20 @@ const CheckoutFormContainerWithoutStripe = ({
   setView,
   resetView
 }) => {
+  const { t } = useTranslation("paymentCreate");
+
   useEffect(() => {
     console.log("checkoutFormContainer got mounted");
+    window.Pelcro.insight.track("Modal Displayed", {
+      name: "payment"
+    });
+
+    if (window.Pelcro.coupon.getFromUrl()) {
+      this.setState({ couponCode: window.Pelcro.coupon.getFromUrl() }, () => {
+        this.showCouponField();
+        this.onApplyCouponCode();
+      });
+    }
   }, []);
 
   const createPayment = (token, state, dispatch) => {
@@ -61,6 +83,36 @@ const CheckoutFormContainerWithoutStripe = ({
         if (err) return displayError(getErrorMessages(err));
 
         displaySuccess(successMessage);
+      }
+    );
+  };
+
+  const onApplyCouponCode = (state, dispatch) => {
+    dispatch({ type: DISABLE_COUPON_BUTTON, payload: true });
+
+    window.Pelcro.order.create(
+      {
+        auth_token: window.Pelcro.user.read().auth_token,
+        plan_id: plan.id,
+        coupon_code: state.couponCode
+      },
+      (err, res) => {
+        dispatch({ type: DISABLE_COUPON_BUTTON, payload: false });
+
+        if (err) {
+          dispatch({ type: SET_PERCENT_OFF, payload: "" });
+          return showError(getErrorMessages(err));
+        } else {
+          hideError("pelcro-error-payment-create");
+        }
+        dispatch({
+          type: SET_PERCENT_OFF,
+          payload:
+            "Discounted price: $" +
+            formatDiscountedPrice(plan.amount, res.data.coupon.percent_off)
+        });
+
+        dispatch({ type: SET_COUPON, payload: res.data.coupon });
       }
     );
   };
@@ -166,6 +218,9 @@ const CheckoutFormContainerWithoutStripe = ({
       case DISABLE_SUBMIT:
         return Update({ ...state, disableSubmit: action.payload });
 
+      case DISABLE_COUPON_BUTTON:
+        return Update({ ...state, disableCouponButton: action.payload });
+
       case CREATE_PAYMENT:
         return UpdateWithSideEffect(
           { ...state, disableSubmit: true },
@@ -177,6 +232,11 @@ const CheckoutFormContainerWithoutStripe = ({
         return UpdateWithSideEffect(
           { ...state, disableSubmit: true },
           (state, dispatch) => submitPayment(state, dispatch)
+        );
+
+      case APPLY_COUPON_CODE:
+        return UpdateWithSideEffect({ ...state }, (state, dispatch) =>
+          onApplyCouponCode(state, dispatch)
         );
 
       default:
