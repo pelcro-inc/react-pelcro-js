@@ -1,0 +1,18 @@
+{
+    "alreadyHaveAccount": "Vous avez déjà un compte ?",
+    "createAccount": "Créer un compte",
+    "loginHere": "Connectez-vous ici",
+    "selectPlan": "Sélectionnez un autre plan ",
+    "here": "ici",
+    "iAgree": {
+        "iAgree": "J'accepte",
+        "terms": "les conditions d'utilisation",
+        "and": "et",
+        "privacy": "la politique de confidentialité."
+    },
+    "preferDisable": {
+        "click": "Cliquez",
+        "here": "ici",
+        "ifPrefer": "si vous préférez désactiver votre bloqueur de publicités."
+    }
+}

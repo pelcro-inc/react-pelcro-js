@@ -12,6 +12,8 @@ import meter_en from "./translations/en/meter.json";
 import meter_fr from "./translations/fr/meter.json";
 import checkoutForm_en from "./translations/en/checkoutForm.json";
 import checkoutForm_fr from "./translations/fr/checkoutForm.json";
+import messages_en from "./translations/en/messages.json";
+import messages_fr from "./translations/fr/messages.json";
 
 const resources = {
   en_US: {
@@ -20,7 +22,8 @@ const resources = {
     newsletter: newsletter_en,
     success: success_en,
     meter: meter_en,
-    checkoutForm: checkoutForm_en
+    checkoutForm: checkoutForm_en,
+    messages: messages_en
   },
   fr_CA: {
     common: common_fr,
@@ -28,7 +31,8 @@ const resources = {
     newsletter: newsletter_fr,
     success: success_fr,
     meter: meter_fr,
-    checkoutForm: checkoutForm_fr
+    checkoutForm: checkoutForm_fr,
+    messages: messages_fr
   }
 };
 

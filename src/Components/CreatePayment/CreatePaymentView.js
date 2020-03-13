@@ -1,9 +1,11 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { CheckoutFormView } from "../CheckoutForm/CheckoutFormView";
 import ErrMessage from "../common/ErrMessage";
 import AlertSuccess from "../common/AlertSuccess";
 
 export const CreatePaymentView = () => {
+  const { t } = useTranslation("messages");
   return (
     <div>
       <div className="pelcro-prefix-title-block">
@@ -25,7 +27,7 @@ export const CreatePaymentView = () => {
         <div className="pelcro-prefix-alert pelcro-prefix-alert-success">
           <div className="pelcro-prefix-payment-message">
             <span>
-              {this.locale.messages.youAreSafe}{" "}
+              {t("youAreSafe")}{" "}
               <a
                 className="pelcro-prefix-link"
                 rel="nofollow"
@@ -39,12 +41,7 @@ export const CreatePaymentView = () => {
         </div>
         <div className="pelcro-prefix-form">
           <CheckoutFormView
-            callback={this.subscribe}
             type="createPayment"
-            disableSubmit={this.state.disableSubmit}
-            disableCouponButton={this.state.disableCouponButton}
-            showError={this.showError}
-            setDisableSubmitState={this.setDisableSubmitState}
             enableCouponField={this.state.enableCouponField}
             showCouponField={this.showCouponField}
             couponCode={this.state.couponCode}

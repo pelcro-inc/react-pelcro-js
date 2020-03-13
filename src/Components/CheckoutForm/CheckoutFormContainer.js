@@ -55,7 +55,7 @@ const CheckoutFormContainerWithoutStripe = ({
   setView,
   resetView
 }) => {
-  const { t } = useTranslation("paymentCreate");
+  const { t } = useTranslation("messages");
 
   useEffect(() => {
     console.log("checkoutFormContainer got mounted");
@@ -146,7 +146,7 @@ const CheckoutFormContainerWithoutStripe = ({
 
           if (giftRecipient) {
             window.alert(
-              `${this.locale.messages.giftSent} ${giftRecipient.email} ${this.locale.messages.successfully}`
+              `${t("giftSent")} ${giftRecipient.email} ${t("successfully")}`
             );
             resetView();
           } else {
@@ -183,7 +183,7 @@ const CheckoutFormContainerWithoutStripe = ({
           if (giftRecipient) {
             resetView();
             window.alert(
-              `${this.locale.messages.giftSent} ${giftRecipient.email} ${this.locale.messages.successfully}`
+              `${t("giftSent")} ${giftRecipient.email} ${t("successfully")}`
             );
           } else {
             setView("success");
