@@ -14,7 +14,8 @@ import {
   DISABLE_COUPON_BUTTON,
   APPLY_COUPON_CODE,
   SET_PERCENT_OFF,
-  SET_COUPON
+  SET_COUPON,
+  UPDATE_COUPON_CODE
 } from "../../utils/action-types";
 import { getErrorMessages } from "../common/Helpers";
 import { showError, showSuccess, hideError } from "../../utils/showing-error";
@@ -238,6 +239,12 @@ const CheckoutFormContainerWithoutStripe = ({
         return UpdateWithSideEffect({ ...state }, (state, dispatch) =>
           onApplyCouponCode(state, dispatch)
         );
+
+      case SET_COUPON:
+        return Update({ ...state, coupon: action.payload });
+
+      case UPDATE_COUPON_CODE:
+        return Update({ ...state, couponCode: action.payload });
 
       default:
         throw new Error();
