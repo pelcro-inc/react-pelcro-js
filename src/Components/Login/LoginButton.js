@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Button } from "../../SubComponents/Button";
-import { RESET_LOGIN_FORM } from "../../utils/action-types";
+import { getErrorMessages } from "../common/Helpers";
+import { showError } from "../../utils/showing-error";
 
 export const LoginButton = props => {
   const {
@@ -21,11 +22,11 @@ export const LoginButton = props => {
     window.Pelcro.user.login({ email, password }, (err, res) => {
       setDisabled(false);
 
-      if (!err) {
-        alert("Logged In! ", res);
+      if (err) {
+        return showError(getErrorMessages(err), "pelcro-error-login");
       } else {
-        dispatch({ type: RESET_LOGIN_FORM });
-        console.log("Error! ", err);
+        props.resetView();
+        props.onSuccess();
       }
     });
   };
