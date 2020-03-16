@@ -42,7 +42,7 @@ export function Password({
         type="password"
         id={id}
         style={{ ...style }}
-        className={passwordError ? "input-error " : "" + className}
+        className={(passwordError ? "input-error " : "") + className}
         value={password}
         onChange={e => handleInputChange(e.target.value)}
         placeholder={placeholder || "Enter Your Password"}

@@ -54,7 +54,7 @@ export function Email({
         type="email"
         id={id}
         style={{ ...style }}
-        className={emailError ? "input-error " : "" + className}
+        className={(emailError ? "input-error " : "") + className}
         value={email}
         onChange={e => handleInputChange(e.target.value)}
         placeholder={placeholder || "Enter Your Email"}
