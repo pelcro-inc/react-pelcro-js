@@ -1,7 +1,14 @@
 import React, { useContext, useState, useEffect, useCallback } from "react";
 import { SET_PASSWORD, SET_PASSWORD_ERROR } from "../utils/action-types";
 
-export function Password({ placeholder, style, className, id, store }) {
+export function Password({
+  placeholder,
+  style,
+  className,
+  id,
+  store,
+  ...otherProps
+}) {
   const {
     dispatch,
     state: { password: statePassword, passwordError }
@@ -41,6 +48,7 @@ export function Password({ placeholder, style, className, id, store }) {
         placeholder={placeholder || "Enter Your Password"}
         onBlur={() => setFinishedTyping(true)}
         onFocus={() => setFinishedTyping(false)}
+        {...otherProps}
       ></input>
       <div>{passwordError}</div>
     </React.Fragment>

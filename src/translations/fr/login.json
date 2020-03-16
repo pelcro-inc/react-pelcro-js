@@ -1,0 +1,25 @@
+{
+    "labels": {
+        "email": "Entrer email",
+        "password": "Entrer le mot de passe",
+        "required": "Champs obligatoires",
+        "emailPlaceholder": "Adresse courriel",
+        "passwordPlaceholder": "Mot de passe",
+        "login": "Connexion"
+    },
+    "messages": {
+        "loginTo": "Connectez-vous à votre compte",
+        "welcome": "Bienvenue, connectez-vous avec votre compte existant.",
+        "dontHaveAccount": "Vous n'avez pas encore de compte ?",
+        "createAccount": "Créer un compte",
+        "forgotPassword": "Mot de passe oublié ?",
+        "reset": {
+            "click": "Cliquez",
+            "here": "ici",
+            "toReset": "pour le réinitialiser."
+        }
+    },
+    "errors": {
+        "": ""
+    }
+}

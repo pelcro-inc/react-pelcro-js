@@ -101,31 +101,6 @@
             }
         }
     },
-    "login": {
-        "labels": {
-            "email": "Enter email",
-            "password": "Enter password",
-            "required": "required",
-            "emailPlaceholder": "Email",
-            "passwordPlaceholder": "Password",
-            "login": "Login"
-        },
-        "messages": {
-            "loginTo": "Login to your account",
-            "welcome": "Welcome back, sign in with your existing account.",
-            "dontHaveAccount": "Dont have an account yet?",
-            "createAccount": "Create account.",
-            "forgotPassword": "Forgot your password?",
-            "reset": {
-                "click": "Click",
-                "here": "here",
-                "toReset": "to reset it."
-            }
-        },
-        "errors": {
-            "": ""
-        }
-    },
     "payment": {
         "labels": {
             "cardNumber": "Card number",

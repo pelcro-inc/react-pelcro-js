@@ -1,7 +1,14 @@
 import React, { useContext, useState, useEffect, useCallback } from "react";
 import { SET_EMAIL, SET_EMAIL_ERROR } from "../utils/action-types";
 
-export function Email({ placeholder, style, className, id, store }) {
+export function Email({
+  placeholder,
+  style,
+  className,
+  id,
+  store,
+  ...otherProps
+}) {
   const {
     dispatch,
     state: { email: stateEmail, emailError }
@@ -53,6 +60,7 @@ export function Email({ placeholder, style, className, id, store }) {
         placeholder={placeholder || "Enter Your Email"}
         onBlur={() => setFinishedTyping(true)}
         onFocus={() => setFinishedTyping(false)}
+        {...otherProps}
       ></input>
       <div>{emailError}</div>
     </React.Fragment>

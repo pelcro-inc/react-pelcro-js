@@ -14,6 +14,8 @@ import checkoutForm_en from "./translations/en/checkoutForm.json";
 import checkoutForm_fr from "./translations/fr/checkoutForm.json";
 import messages_en from "./translations/en/messages.json";
 import messages_fr from "./translations/fr/messages.json";
+import login_en from "./translations/en/login.json";
+import login_fr from "./translations/fr/login.json";
 
 const resources = {
   en_US: {
@@ -23,7 +25,8 @@ const resources = {
     success: success_en,
     meter: meter_en,
     checkoutForm: checkoutForm_en,
-    messages: messages_en
+    messages: messages_en,
+    login: login_en
   },
   fr_CA: {
     common: common_fr,
@@ -32,7 +35,8 @@ const resources = {
     success: success_fr,
     meter: meter_fr,
     checkoutForm: checkoutForm_fr,
-    messages: messages_fr
+    messages: messages_fr,
+    login: login_fr
   }
 };
 
