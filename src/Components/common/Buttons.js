@@ -1,10 +1,4 @@
-import localisation from "../../services/localisation";
-
-const locale = localisation("buttons").getLocaleData();
-
 export const init = app => {
-  // if there are Login and Subscribe buttons on the page, we add event listeners which open modal windows
-
   const pelcroLoginButtonsByClass = document.getElementsByClassName(
     "pelcro-login-button"
   );
@@ -87,7 +81,7 @@ export const authenticatedButtons = id => {
 
   if (pelcroLoginByClass) {
     for (let i = 0; i < pelcroLoginByClass.length; i++) {
-      pelcroLoginByClass.item(i).innerHTML = locale.account;
+      pelcroLoginByClass.item(i).innerHTML = "My account";
     }
   }
 };
@@ -99,7 +93,7 @@ export const unauthenticatedButtons = id => {
 
   if (pelcroLoginByClass) {
     for (let i = 0; i < pelcroLoginByClass.length; i++) {
-      pelcroLoginByClass.item(i).innerHTML = locale.login;
+      pelcroLoginByClass.item(i).innerHTML = "Login";
     }
   }
 };

@@ -1,11 +1,22 @@
-import React, { Component } from "react";
+import React from "react";
+import { useTranslation } from "react-i18next";
 
 import Header from "../common/Header";
 import Authorship from "../common/Authorship";
 
 import { CreatePaymentView } from "./CreatePaymentView";
 
-export function CreatePaymentModal() {
+export function CreatePaymentModal({
+  resetView,
+  logout,
+  plan,
+  subscriptionIdToRenew,
+  giftRecipient,
+  product,
+  setView,
+  isGift
+}) {
+  const { t } = useTranslation("messages");
   // showCouponField = () => {
   //   this.setState({
   //     enableCouponField: !this.state.enableCouponField
@@ -32,31 +43,35 @@ export function CreatePaymentModal() {
           <div className="pelcro-prefix-modal-content">
             <Header
               closeButton={window.Pelcro.paywall.displayCloseButton()}
-              resetView={this.props.resetView}
+              resetView={resetView}
               site={window.Pelcro.site.read()}
             ></Header>
 
             <div className="pelcro-prefix-modal-body">
-              <CreatePaymentView />
+              <CreatePaymentView
+                plan={plan}
+                subscriptionIdToRenew={subscriptionIdToRenew}
+                giftRecipient={giftRecipient}
+                product={product}
+                setView={setView}
+                resetView={resetView}
+                isGift={isGift}
+              />
             </div>
             <div className="pelcro-prefix-modal-footer">
               <small>
-                {this.locale.messages.haveQuestion}{" "}
-                {this.locale.messages.visitOurFaq.visitOur}{" "}
+                {t("haveQuestion")} {t("visitOurFaq.visitOur")}{" "}
                 <a
                   className="pelcro-prefix-link"
                   target="new"
                   href="https://www.pelcro.com/faq/user"
                 >
-                  {this.locale.messages.visitOurFaq.faq}
+                  {t("visitOurFaq.faq")}
                 </a>
-                . {this.locale.messages.cancel}
-                {" " + this.locale.messages.logout.logout}{" "}
-                <button
-                  className="pelcro-prefix-link"
-                  onClick={this.props.logout}
-                >
-                  {this.locale.messages.logout.here}
+                . {t("cancel")}
+                {" " + t("logout.logout")}{" "}
+                <button className="pelcro-prefix-link" onClick={logout}>
+                  {t("logout.here")}
                 </button>
               </small>
               <Authorship></Authorship>

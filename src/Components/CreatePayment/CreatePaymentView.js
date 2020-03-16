@@ -3,20 +3,25 @@ import { useTranslation } from "react-i18next";
 import { CheckoutFormView } from "../CheckoutForm/CheckoutFormView";
 import ErrMessage from "../common/ErrMessage";
 import AlertSuccess from "../common/AlertSuccess";
+import { PercentOff } from "./PercentOff";
 
-export const CreatePaymentView = () => {
+export const CreatePaymentView = ({
+  product,
+  plan,
+  setView,
+  resetView,
+  giftRecipient,
+  subscriptionIdToRenew
+}) => {
   const { t } = useTranslation("messages");
   return (
     <div>
       <div className="pelcro-prefix-title-block">
-        <h4>{this.product.paywall.subscribe_title}</h4>
+        <h4>{product.paywall.subscribe_title}</h4>
         <p>
-          {this.product.paywall.subscribe_subtitle} -{" "}
-          {this.plan.amount_formatted}
-          {this.plan.auto_renew && (
-            <span>/({this.plan.interval_count})</span>
-          )}{" "}
-          {this.plan.interval}. {this.state.percentOff}
+          {product.paywall.subscribe_subtitle} - {plan.amount_formatted}
+          {plan.auto_renew && <span>/({plan.interval_count})</span>}{" "}
+          {plan.interval}. <PercentOff />
         </p>
       </div>
 
@@ -42,19 +47,13 @@ export const CreatePaymentView = () => {
         <div className="pelcro-prefix-form">
           <CheckoutFormView
             type="createPayment"
-            enableCouponField={this.state.enableCouponField}
-            showCouponField={this.showCouponField}
-            couponCode={this.state.couponCode}
             showCoupon={true}
-            onCouponCodeChange={this.onCouponCodeChange}
-            onApplyCouponCode={this.onApplyCouponCode}
-            plan={this.props.plan}
-            coupon={this.state.coupon}
-            subscriptionIdToRenew={this.props.subscriptionIdToRenew}
-            giftRecipient={this.props.giftRecipient}
-            product={this.props.product}
-            setView={this.props.setView}
-            resetView={this.props.resetView}
+            plan={plan}
+            subscriptionIdToRenew={subscriptionIdToRenew}
+            giftRecipient={giftRecipient}
+            product={product}
+            setView={setView}
+            resetView={resetView}
           />
         </div>
       </div>
