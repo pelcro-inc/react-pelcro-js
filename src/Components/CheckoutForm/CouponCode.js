@@ -1,17 +1,27 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { ApplyCouponButton } from "./ApplyCouponButton";
+import { store } from "./CheckoutFormContainer";
+import { SHOW_COUPON_FIELD } from "../../utils/action-types";
 
 export const CouponCode = ({
-  showCouponField,
-  enableCouponField,
   couponCode,
   onCouponCodeChange,
   onApplyCouponCode,
   disableCouponButton,
   showCoupon
 }) => {
+  const {
+    dispatch,
+    state: { enableCouponField }
+  } = useContext(store);
+
+  console.log({ enableCouponField });
+
   const { t } = useTranslation("checkoutForm");
+
+  const showCouponField = () =>
+    dispatch({ type: SHOW_COUPON_FIELD, payload: true });
 
   if (showCoupon) {
     return (

@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, useMemo, useEffect } from "react";
+import React, { createContext, useEffect } from "react";
 import { injectStripe, Elements, StripeProvider } from "react-stripe-elements";
 import { useTranslation } from "react-i18next";
 import { formatDiscountedPrice } from "../../utils/utils";
@@ -15,7 +15,8 @@ import {
   APPLY_COUPON_CODE,
   SET_PERCENT_OFF,
   SET_COUPON,
-  UPDATE_COUPON_CODE
+  UPDATE_COUPON_CODE,
+  SHOW_COUPON_FIELD
 } from "../../utils/action-types";
 import { getErrorMessages } from "../common/Helpers";
 import { showError, showSuccess, hideError } from "../../utils/showing-error";
@@ -219,6 +220,9 @@ const CheckoutFormContainerWithoutStripe = ({
       case DISABLE_SUBMIT:
         return Update({ ...state, disableSubmit: action.payload });
 
+      case SHOW_COUPON_FIELD:
+        return Update({ ...state, enableCouponField: action.payload });
+
       case DISABLE_COUPON_BUTTON:
         return Update({ ...state, disableCouponButton: action.payload });
 
@@ -251,19 +255,16 @@ const CheckoutFormContainerWithoutStripe = ({
     }
   }, initialState);
 
-  return useMemo(
-    () => (
-      <div style={{ ...style }} className={className}>
-        <Provider value={{ state, dispatch }}>
-          {children.length
-            ? children.map((child, i) =>
-                React.cloneElement(child, { store, key: i })
-              )
-            : React.cloneElement(children, { store })}
-        </Provider>
-      </div>
-    ),
-    [style, className, children]
+  return (
+    <div style={{ ...style }} className={className}>
+      <Provider value={{ state, dispatch }}>
+        {children.length
+          ? children.map((child, i) =>
+              React.cloneElement(child, { store, key: i })
+            )
+          : React.cloneElement(children, { store })}
+      </Provider>
+    </div>
   );
 };
 

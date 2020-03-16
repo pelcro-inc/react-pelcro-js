@@ -82,7 +82,7 @@ export function CheckoutFormView({
               * {t("labels.required")}
             </small>
 
-            <CouponCode />
+            <CouponCode showCoupon={showCoupon} />
 
             <SubmitCheckoutForm name={t("labels.submit")} />
           </div>
