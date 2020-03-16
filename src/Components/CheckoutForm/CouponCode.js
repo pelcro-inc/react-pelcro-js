@@ -2,18 +2,15 @@ import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { ApplyCouponButton } from "./ApplyCouponButton";
 import { store } from "./CheckoutFormContainer";
-import { SHOW_COUPON_FIELD } from "../../utils/action-types";
+import {
+  SHOW_COUPON_FIELD,
+  UPDATE_COUPON_CODE
+} from "../../utils/action-types";
 
-export const CouponCode = ({
-  couponCode,
-  onCouponCodeChange,
-  onApplyCouponCode,
-  disableCouponButton,
-  showCoupon
-}) => {
+export const CouponCode = ({ showCoupon }) => {
   const {
     dispatch,
-    state: { enableCouponField }
+    state: { enableCouponField, couponCode, disableCouponButton }
   } = useContext(store);
 
   console.log({ enableCouponField });
@@ -22,6 +19,9 @@ export const CouponCode = ({
 
   const showCouponField = () =>
     dispatch({ type: SHOW_COUPON_FIELD, payload: true });
+
+  const onCouponCodeChange = e =>
+    dispatch({ type: UPDATE_COUPON_CODE, payload: e.target.value });
 
   if (showCoupon) {
     return (
@@ -56,12 +56,9 @@ export const CouponCode = ({
             </div>
             <div className="col-sm-12 apply-coupon-button">
               <div className="pelcro-prefix-input-wrapper">
-                <ApplyCouponButton
-                  onApplyCouponCode={onApplyCouponCode}
-                  couponCode={couponCode}
-                  disableCouponButton={disableCouponButton}
-                  name={t("labels.applyCouponCode")}
-                />
+                <ApplyCouponButton disableCouponButton={disableCouponButton}>
+                  {t("labels.applyCouponCode")}
+                </ApplyCouponButton>
               </div>
             </div>
           </div>

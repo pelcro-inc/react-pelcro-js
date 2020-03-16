@@ -240,8 +240,9 @@ const CheckoutFormContainerWithoutStripe = ({
         );
 
       case APPLY_COUPON_CODE:
-        return UpdateWithSideEffect({ ...state }, (state, dispatch) =>
-          onApplyCouponCode(state, dispatch)
+        return UpdateWithSideEffect(
+          { ...state, disableCouponButton: true },
+          (state, dispatch) => onApplyCouponCode(state, dispatch)
         );
 
       case SET_COUPON:
