@@ -13,8 +13,6 @@ export const CouponCode = ({ showCoupon }) => {
     state: { enableCouponField, couponCode, disableCouponButton }
   } = useContext(store);
 
-  console.log({ enableCouponField });
-
   const { t } = useTranslation("checkoutForm");
 
   const showCouponField = () =>

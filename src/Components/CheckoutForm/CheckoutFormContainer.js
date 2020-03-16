@@ -53,7 +53,6 @@ const CheckoutFormContainerWithoutStripe = ({
   product,
   giftRecipient,
   couponCode,
-  ReactGA,
   setView,
   resetView
 }) => {
@@ -66,9 +65,9 @@ const CheckoutFormContainerWithoutStripe = ({
     });
 
     if (window.Pelcro.coupon.getFromUrl()) {
-      this.setState({ couponCode: window.Pelcro.coupon.getFromUrl() }, () => {
-        this.showCouponField();
-        this.onApplyCouponCode();
+      dispatch({
+        type: UPDATE_COUPON_CODE,
+        payload: window.Pelcro.coupon.getFromUrl()
       });
     }
   }, []);
@@ -103,7 +102,8 @@ const CheckoutFormContainerWithoutStripe = ({
 
         if (err) {
           dispatch({ type: SET_PERCENT_OFF, payload: "" });
-          return showError(getErrorMessages(err));
+
+          return showError(err, "pelcro-error-payment-create");
         } else {
           hideError("pelcro-error-payment-create");
         }
@@ -139,12 +139,6 @@ const CheckoutFormContainerWithoutStripe = ({
           dispatch({ type: DISABLE_SUBMIT, payload: false });
 
           if (err) return showError(err.message, "pelcro-error-payment-create");
-
-          // ReactGA.event({
-          //   category: "ACTIONS",
-          //   action: "Subscribed",
-          //   nonInteraction: true
-          // });
 
           if (giftRecipient) {
             window.alert(
@@ -250,6 +244,9 @@ const CheckoutFormContainerWithoutStripe = ({
 
       case UPDATE_COUPON_CODE:
         return Update({ ...state, couponCode: action.payload });
+
+      case SET_PERCENT_OFF:
+        return Update({ ...state, percentOff: action.payload });
 
       default:
         throw new Error();
