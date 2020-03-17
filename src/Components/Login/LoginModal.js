@@ -3,9 +3,6 @@
 
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { getErrorMessages } from "../common/Helpers";
-
-import { showError } from "../../utils/showing-error";
 
 import Header from "../common/Header";
 import Authorship from "../common/Authorship";

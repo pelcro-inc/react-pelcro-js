@@ -8,15 +8,22 @@ import Header from "../common/Header";
 import Authorship from "../common/Authorship";
 import { RegisterView } from "./RegisterView";
 
-export function RegisterModal(props) {
+export function RegisterModal({
+  resetView,
+  onSuccess,
+  setView,
+  site,
+  product,
+  ...otherProps
+}) {
   const { t } = useTranslation("register");
 
   const displayLoginView = () => {
-    props.setView("login");
+    setView("login");
   };
 
   const displaySelectView = () => {
-    props.setView("select");
+    setView("select");
   };
 
   return (
@@ -32,53 +39,25 @@ export function RegisterModal(props) {
           <div className="pelcro-prefix-modal-content" role="document">
             <Header
               closeButton={window.Pelcro.paywall.displayCloseButton()}
-              resetView={props.resetView}
-              site={props.site}
+              resetView={resetView}
+              site={site}
             ></Header>
             <div className="pelcro-prefix-modal-body">
               <div className="pelcro-prefix-title-block">
-                <h4>
-                  {props.product
-                    ? props.product.paywall.register_title
-                    : t("title")}
-                </h4>
+                <h4>{product ? product.paywall.register_title : t("title")}</h4>
                 <p>
-                  {props.product
-                    ? props.product.paywall.register_subtitle
-                    : t("subtitle")}
+                  {product ? product.paywall.register_subtitle : t("subtitle")}
                 </p>
               </div>
 
               <ErrMessage name="register" />
 
-              <div className="pelcro-prefix-form">
-                <div className="pelcro-prefix-row">
-                  <RegisterView />
+              <RegisterView
+                resetView={resetView}
+                onSuccess={onSuccess}
+                {...otherProps}
+              />
 
-                  <small className="pelcro-prefix-footnote pelcro-prefix-form-text">
-                    * {t("labels.required")}
-                  </small>
-
-                  <p className="pelcro-prefix-small-text">
-                    {t("messages.iAgree.iAgree") + " "}
-                    <a
-                      className="pelcro-prefix-link"
-                      target="new"
-                      href="https://www.pelcro.com/terms"
-                    >
-                      {t("messages.iAgree.terms")}
-                    </a>{" "}
-                    {t("messages.iAgree.and")}{" "}
-                    <a
-                      className="pelcro-prefix-link"
-                      target="new"
-                      href="https://www.pelcro.com/privacy"
-                    >
-                      {t("messages.iAgree.privacy")}
-                    </a>
-                  </p>
-                </div>
-              </div>
               <div className="pelcro-prefix-modal-footer">
                 <small>
                   {t("messages.alreadyHaveAccount") + " "}
