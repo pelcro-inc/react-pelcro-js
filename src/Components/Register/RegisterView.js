@@ -46,6 +46,8 @@ export function RegisterView(props) {
         <RegisterButton
           className="pelcro-prefix-btn"
           name={t("messages.createAccount")}
+          onSuccess={props.onSuccess}
+          resetView={props.resetView}
         />
       </RegisterContainer>
     </div>

@@ -1,19 +1,19 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Button } from "../../SubComponents/Button";
-import { RESET_LOGIN_FORM } from "../../utils/action-types";
 import { showError } from "../../utils/showing-error";
+import { getErrorMessages } from "../common/Helpers";
 
-export const RegisterButton = props => {
+export const RegisterButton = ({
+  store,
+  resetView,
+  onSuccess = () => {},
+  ...otherProps
+}) => {
   const {
-    state: { emailError, passwordError, email, password },
-    dispatch
-  } = useContext(props.store);
+    state: { emailError, passwordError, email, password }
+  } = useContext(store);
 
   const [isDisabled, setDisabled] = useState(true);
-
-  const showError = message => {
-    showError(message, "pelcro-error-register");
-  };
 
   useEffect(() => {
     setDisabled(
@@ -26,18 +26,22 @@ export const RegisterButton = props => {
     window.Pelcro.user.register({ email, password }, (err, res) => {
       setDisabled(false);
 
-      if (!err) {
-        alert("User Registered! ", res);
+      if (err) {
+        return showError(getErrorMessages(err), "pelcro-error-register");
       } else {
-        dispatch({ type: RESET_LOGIN_FORM });
-        console.log("Error! ", err);
+        resetView();
+        onSuccess();
       }
     });
   };
 
   return (
-    <Button {...props} onClick={() => handleRegister()} disabled={isDisabled}>
-      {props.name || "Register"}
+    <Button
+      {...otherProps}
+      onClick={() => handleRegister()}
+      disabled={isDisabled}
+    >
+      {otherProps.name || "Register"}
     </Button>
   );
 };
