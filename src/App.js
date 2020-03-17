@@ -333,6 +333,7 @@ class App extends Component {
               setView={this.setView}
               loggedIn={this.loggedIn}
               ReactGA={ReactGA}
+              onSuccess={() => this.loggedIn()}
             />
           )}
           {this.state.view === "register" && (
