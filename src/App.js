@@ -346,7 +346,6 @@ class App extends Component {
               product={this.state.product}
               resetView={this.resetView}
               setView={this.setView}
-              loggedIn={this.loggedIn}
               ReactGA={ReactGA}
               onSuccess={() => this.loggedIn()}
             />
