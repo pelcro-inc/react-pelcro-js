@@ -12,6 +12,14 @@ export const init = app => {
     }
   }
 
+  const pelcroRegisterButton = document.getElementById(
+    "pelcro-register-button"
+  );
+
+  if (pelcroRegisterButton) {
+    pelcroRegisterButton.addEventListener("click", app.displayRegisterView);
+  }
+
   const cartButton = document.getElementById("pelcro-cart-button");
 
   if (cartButton) {

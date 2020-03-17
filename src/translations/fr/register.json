@@ -1,0 +1,57 @@
+{
+    "title": "Créer un compte",
+    "subtitle": "Entrez votre courriel et votre mot de passe ci-dessous",
+    "labels": {
+        "signUpFacebook": "Inscrivez-vous avec Facebook",
+        "signUpGoogle": "Inscrivez-vous avec Google",
+        "signUpEmail": "S'enregistrer avec courrier électronique",
+        "password": "Créer un mot de passe",
+        "email": "Courriel",
+        "passwordPlaceholder": "Créer un mot de passe",
+        "emailPlaceholder": "Courriel",
+        "required": "Champs obligatoires"
+    },
+    "errors": {
+        "": ""
+    },
+    "gift": {
+        "titles": {
+            "firstTitle": "Offrir cet abonnement",
+            "secondTitle": "Entrez les informations du destinataire ci-dessous"
+        },
+        "labels": {
+            "firstName": "Prénom",
+            "lastName": "Nom de famille",
+            "email": "Adresse courriel",
+            "required": "Champs obligatoires",
+            "firstNamePlaceholder": "Prénom",
+            "lastNamePlaceholder": "Nom de famille",
+            "emailPlaceholder": "Adresse courriel"
+        },
+        "buttons": {
+            "gift": "cadeau"
+        },
+        "messages": {
+            "enterEmail": "Veuillez entrer l'adresse courriel du destinataire du cadeau."
+        }
+    },
+    "redeem": {
+        "titles": {
+            "firstTitle": "Échangez votre cadeau",
+            "secondTitle": "Entrez le code cadeau ci-dessous"
+        },
+        "labels": {
+            "code": "Entrez le code du cadeau",
+            "codePlaceholder": "Code cadeau",
+            "required": "Champs obligatoires"
+        },
+        "buttons": {
+            "redeem": "Échanger un cadeau"
+        },
+        "footer": {
+            "click": "Cliquez",
+            "here": "ici",
+            "toAdd": "pour ajouter une adresse"
+        }
+    }
+}

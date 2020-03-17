@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Button } from "../../SubComponents/Button";
 import { RESET_LOGIN_FORM } from "../../utils/action-types";
+import { showError } from "../../utils/showing-error";
 
 export const RegisterButton = props => {
   const {
@@ -9,6 +10,10 @@ export const RegisterButton = props => {
   } = useContext(props.store);
 
   const [isDisabled, setDisabled] = useState(true);
+
+  const showError = message => {
+    showError(message, "pelcro-error-register");
+  };
 
   useEffect(() => {
     setDisabled(

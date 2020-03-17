@@ -13,7 +13,7 @@ import Authorship from "../common/Authorship";
 import { LoginView } from "./LoginView";
 
 export function LoginModal({ setView, resetView, onSuccess, ...otherProps }) {
-  const { t } = useTranslation("messages");
+  const { t } = useTranslation("login");
 
   const showError = message => {
     showError(message, "pelcro-error-login");
@@ -55,21 +55,22 @@ export function LoginModal({ setView, resetView, onSuccess, ...otherProps }) {
 
             <div className="pelcro-prefix-modal-footer">
               <small>
-                {t("dontHaveAccount") + " "}
+                {t("messages.dontHaveAccount") + " "}
                 <button
                   className="pelcro-prefix-link"
                   onClick={onCreateAccountClick}
                 >
-                  {t("createAccount")}
+                  {t("messages.createAccount")}
                 </button>
-                {" " + t("forgotPassword") + " "} {t("reset.click") + " "}
+                {" " + t("messages.forgotPassword") + " "}{" "}
+                {t("messages.reset.click") + " "}
                 <button
                   className="pelcro-prefix-link"
                   onClick={onForgotPassword}
                 >
-                  {t("reset.here")}
+                  {t("messages.reset.here")}
                 </button>
-                {" " + t("reset.toReset")}
+                {" " + t("messages.reset.toReset")}
               </small>
               <Authorship></Authorship>
             </div>

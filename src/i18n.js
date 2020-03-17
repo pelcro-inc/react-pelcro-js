@@ -16,6 +16,8 @@ import messages_en from "./translations/en/messages.json";
 import messages_fr from "./translations/fr/messages.json";
 import login_en from "./translations/en/login.json";
 import login_fr from "./translations/fr/login.json";
+import register_en from "./translations/en/register.json";
+import register_fr from "./translations/fr/register.json";
 
 const resources = {
   en_US: {
@@ -26,7 +28,8 @@ const resources = {
     meter: meter_en,
     checkoutForm: checkoutForm_en,
     messages: messages_en,
-    login: login_en
+    login: login_en,
+    register: register_en
   },
   fr_CA: {
     common: common_fr,
@@ -36,7 +39,8 @@ const resources = {
     meter: meter_fr,
     checkoutForm: checkoutForm_fr,
     messages: messages_fr,
-    login: login_fr
+    login: login_fr,
+    register: register_fr
   }
 };
 
