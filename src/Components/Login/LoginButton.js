@@ -3,11 +3,15 @@ import { Button } from "../../SubComponents/Button";
 import { getErrorMessages } from "../common/Helpers";
 import { showError } from "../../utils/showing-error";
 
-export const LoginButton = props => {
+export const LoginButton = ({
+  store,
+  resetView,
+  onSuccess = () => {},
+  ...otherProps
+}) => {
   const {
-    state: { emailError, passwordError, email, password },
-    dispatch
-  } = useContext(props.store);
+    state: { emailError, passwordError, email, password }
+  } = useContext(store);
 
   const [isDisabled, setDisabled] = useState(true);
 
@@ -25,15 +29,15 @@ export const LoginButton = props => {
       if (err) {
         return showError(getErrorMessages(err), "pelcro-error-login");
       } else {
-        props.resetView();
-        props.onSuccess();
+        resetView();
+        onSuccess();
       }
     });
   };
 
   return (
-    <Button {...props} onClick={() => handleLogin()} disabled={isDisabled}>
-      {props.name || "Login"}
+    <Button {...otherProps} onClick={() => handleLogin()} disabled={isDisabled}>
+      {otherProps.name || "Login"}
     </Button>
   );
 };
