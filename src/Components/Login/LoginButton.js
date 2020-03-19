@@ -1,16 +1,11 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Button } from "../../SubComponents/Button";
-import { getErrorMessages } from "../common/Helpers";
-import { showError } from "../../utils/showing-error";
+import { HANDLE_LOGIN } from "../../utils/action-types";
 
-export const LoginButton = ({
-  store,
-  resetView,
-  onSuccess = () => {},
-  ...otherProps
-}) => {
+export const LoginButton = ({ store, ...otherProps }) => {
   const {
-    state: { emailError, passwordError, email, password }
+    state: { emailError, passwordError, email, password },
+    dispatch
   } = useContext(store);
 
   const [isDisabled, setDisabled] = useState(true);
@@ -21,22 +16,12 @@ export const LoginButton = ({
     );
   }, [emailError, passwordError, email, password]);
 
-  const handleLogin = () => {
-    setDisabled(true);
-    window.Pelcro.user.login({ email, password }, (err, res) => {
-      setDisabled(false);
-
-      if (err) {
-        return showError(getErrorMessages(err), "pelcro-error-login");
-      } else {
-        resetView();
-        onSuccess();
-      }
-    });
-  };
-
   return (
-    <Button {...otherProps} onClick={() => handleLogin()} disabled={isDisabled}>
+    <Button
+      {...otherProps}
+      onClick={() => dispatch({ type: HANDLE_LOGIN })}
+      disabled={isDisabled}
+    >
       {otherProps.name || "Login"}
     </Button>
   );

@@ -1,11 +1,19 @@
-import React, { createContext, useReducer } from "react";
+import React, { createContext } from "react";
+import useReducerWithSideEffects, {
+  UpdateWithSideEffect,
+  Update
+} from "use-reducer-with-side-effects";
 import {
   SET_EMAIL,
   SET_PASSWORD,
   SET_EMAIL_ERROR,
   SET_PASSWORD_ERROR,
-  RESET_LOGIN_FORM
+  RESET_LOGIN_FORM,
+  HANDLE_LOGIN,
+  DISABLE_LOGIN_BUTTON
 } from "../../utils/action-types";
+import { getErrorMessages } from "../common/Helpers";
+import { showError } from "../../utils/showing-error";
 
 const initialState = {
   email: "",
@@ -17,19 +25,53 @@ const initialState = {
 const store = createContext(initialState);
 const { Provider } = store;
 
-const LoginContainer = ({ style, className, children }) => {
-  const [state, dispatch] = useReducer((state, action) => {
+const LoginContainer = ({
+  style,
+  className,
+  resetView,
+  onSuccess = () => {},
+  children
+}) => {
+  const handleLogin = ({ email, password }, dispatch) => {
+    window.Pelcro.user.login({ email, password }, (err, res) => {
+      dispatch({ type: DISABLE_LOGIN_BUTTON, payload: false });
+
+      if (err) {
+        return showError(getErrorMessages(err), "pelcro-error-login");
+      } else {
+        resetView();
+        onSuccess();
+      }
+    });
+  };
+
+  const [state, dispatch] = useReducerWithSideEffects((state, action) => {
     switch (action.type) {
       case SET_EMAIL:
-        return { ...state, email: action.payload, emailError: null };
+        return Update({ ...state, email: action.payload, emailError: null });
       case SET_PASSWORD:
-        return { ...state, password: action.payload, passwordError: null };
+        return Update({
+          ...state,
+          password: action.payload,
+          passwordError: null
+        });
       case SET_EMAIL_ERROR:
-        return { ...state, emailError: action.payload, email: "" };
+        return Update({ ...state, emailError: action.payload, email: "" });
       case SET_PASSWORD_ERROR:
-        return { ...state, passwordError: action.payload, password: "" };
+        return Update({
+          ...state,
+          passwordError: action.payload,
+          password: ""
+        });
       case RESET_LOGIN_FORM:
         return initialState;
+      case DISABLE_LOGIN_BUTTON:
+        return Update({ ...state, buttonDisabled: action.payload });
+      case HANDLE_LOGIN:
+        return UpdateWithSideEffect(
+          { ...state, buttonDisabled: true },
+          (state, dispatch) => handleLogin(state, dispatch)
+        );
       default:
         throw new Error();
     }

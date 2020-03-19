@@ -55,8 +55,6 @@ export function LoginView(props) {
             name={t("labels.login")}
             id="login-submit"
             className="pelcro-prefix-btn"
-            onSuccess={props.onSuccess}
-            resetView={props.resetView}
           />
         </LoginContainer>
       </div>
