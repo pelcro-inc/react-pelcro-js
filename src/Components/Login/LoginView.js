@@ -53,7 +53,7 @@ export function LoginView(props) {
           </small>
           <LoginButton
             name={t("labels.login")}
-            id="login-submit"
+            id="pelcro-login-submit"
             className="pelcro-prefix-btn"
           />
         </LoginContainer>

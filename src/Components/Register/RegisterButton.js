@@ -1,16 +1,11 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Button } from "../../SubComponents/Button";
-import { showError } from "../../utils/showing-error";
-import { getErrorMessages } from "../common/Helpers";
+import { HANDLE_REGISTRATION } from "../../utils/action-types";
 
-export const RegisterButton = ({
-  store,
-  resetView,
-  onSuccess = () => {},
-  ...otherProps
-}) => {
+export const RegisterButton = ({ store, ...otherProps }) => {
   const {
-    state: { emailError, passwordError, email, password }
+    state: { emailError, passwordError, email, password },
+    dispatch
   } = useContext(store);
 
   const [isDisabled, setDisabled] = useState(true);
@@ -21,24 +16,10 @@ export const RegisterButton = ({
     );
   }, [emailError, passwordError, email, password]);
 
-  const handleRegister = () => {
-    setDisabled(true);
-    window.Pelcro.user.register({ email, password }, (err, res) => {
-      setDisabled(false);
-
-      if (err) {
-        return showError(getErrorMessages(err), "pelcro-error-register");
-      } else {
-        resetView();
-        onSuccess();
-      }
-    });
-  };
-
   return (
     <Button
       {...otherProps}
-      onClick={() => handleRegister()}
+      onClick={() => dispatch({ type: HANDLE_REGISTRATION })}
       disabled={isDisabled}
     >
       {otherProps.name || "Register"}

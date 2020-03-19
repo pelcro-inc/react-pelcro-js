@@ -1,4 +1,4 @@
-import React, { createContext, useReducer } from "react";
+import React, { createContext } from "react";
 import {
   SET_EMAIL,
   SET_PASSWORD,
@@ -7,8 +7,16 @@ import {
   RESET_LOGIN_FORM,
   SET_CONFIRM_PASSWORD,
   CONFIRM_PASSWORD_USED,
-  SET_CONFIRM_PASSWORD_ERROR
+  SET_CONFIRM_PASSWORD_ERROR,
+  HANDLE_REGISTRATION,
+  DISABLE_REGISTRATION_BUTTON
 } from "../../utils/action-types";
+import useReducerWithSideEffects, {
+  UpdateWithSideEffect,
+  Update
+} from "use-reducer-with-side-effects";
+import { showError } from "../../utils/showing-error";
+import { getErrorMessages } from "../common/Helpers";
 
 const initialState = {
   email: "",
@@ -17,38 +25,75 @@ const initialState = {
   passwordError: null,
   confirmPassword: "",
   confirmPasswordError: null,
-  confirmPasswordUsed: false
+  confirmPasswordUsed: false,
+  buttonDisabled: true
 };
 const store = createContext(initialState);
 const { Provider } = store;
 
-const RegisterContainer = ({ style, className, children }) => {
-  const [state, dispatch] = useReducer((state, action) => {
+const RegisterContainer = ({
+  style,
+  className,
+  resetView,
+  onSuccess = () => {},
+  children
+}) => {
+  const handleRegister = ({ email, password }, dispatch) => {
+    window.Pelcro.user.register({ email, password }, (err, res) => {
+      dispatch({ type: DISABLE_REGISTRATION_BUTTON, payload: false });
+
+      if (err) {
+        return showError(getErrorMessages(err), "pelcro-error-register");
+      } else {
+        resetView();
+        onSuccess();
+      }
+    });
+  };
+
+  const [state, dispatch] = useReducerWithSideEffects((state, action) => {
     switch (action.type) {
       case SET_EMAIL:
-        return { ...state, email: action.payload, emailError: null };
+        return Update({ ...state, email: action.payload, emailError: null });
       case SET_PASSWORD:
-        return { ...state, password: action.payload, passwordError: null };
+        return Update({
+          ...state,
+          password: action.payload,
+          passwordError: null
+        });
       case SET_CONFIRM_PASSWORD:
-        return {
+        return Update({
           ...state,
           confirmPassword: action.payload,
           confirmPasswordError: null
-        };
+        });
       case SET_EMAIL_ERROR:
-        return { ...state, emailError: action.payload, email: "" };
+        return Update({ ...state, emailError: action.payload, email: "" });
       case SET_PASSWORD_ERROR:
-        return { ...state, passwordError: action.payload, password: "" };
+        return Update({
+          ...state,
+          passwordError: action.payload,
+          password: ""
+        });
       case SET_CONFIRM_PASSWORD_ERROR:
-        return {
+        return Update({
           ...state,
           confirmPasswordError: action.payload,
           confirmPassword: ""
-        };
+        });
       case CONFIRM_PASSWORD_USED:
-        return { ...state, confirmPasswordUsed: action.payload };
+        return Update({ ...state, confirmPasswordUsed: action.payload });
       case RESET_LOGIN_FORM:
         return initialState;
+
+      case DISABLE_REGISTRATION_BUTTON:
+        return Update({ ...state, buttonDisabled: action.payload });
+
+      case HANDLE_REGISTRATION:
+        return UpdateWithSideEffect(
+          { ...state, buttonDisabled: true },
+          (state, dispatch) => handleRegister(state, dispatch)
+        );
 
       default:
         throw new Error();
@@ -56,7 +101,7 @@ const RegisterContainer = ({ style, className, children }) => {
   }, initialState);
 
   return (
-    <form style={{ ...style }} className={className}>
+    <div style={{ ...style }} className={className}>
       <Provider value={{ state, dispatch }}>
         {children.length
           ? children.map((child, i) =>
@@ -64,7 +109,7 @@ const RegisterContainer = ({ style, className, children }) => {
             )
           : React.cloneElement(children, { store })}
       </Provider>
-    </form>
+    </div>
   );
 };
 
