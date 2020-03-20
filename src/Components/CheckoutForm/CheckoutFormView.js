@@ -5,6 +5,7 @@ import {
   CardCVCElement
 } from "react-stripe-elements";
 import { useTranslation } from "react-i18next";
+import { DiscountedPrice } from "./DiscountedPrice";
 import styles from "../UpdatePaymentMethod/styles.module.scss";
 import { CheckoutFormContainer } from "./CheckoutFormContainer";
 import { SubmitCheckoutForm } from "./SubmitCheckoutForm";
@@ -83,6 +84,7 @@ export function CheckoutFormView({
             </small>
 
             <CouponCode showCoupon={showCoupon} />
+            <DiscountedPrice />
 
             <SubmitCheckoutForm name={t("labels.submit")} />
           </div>

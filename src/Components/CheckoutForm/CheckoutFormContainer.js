@@ -1,7 +1,6 @@
 import React, { createContext, useEffect } from "react";
 import { injectStripe, Elements, StripeProvider } from "react-stripe-elements";
 import { useTranslation } from "react-i18next";
-import { formatDiscountedPrice } from "../../utils/utils";
 import useReducerWithSideEffects, {
   UpdateWithSideEffect,
   Update
@@ -26,7 +25,7 @@ const initialState = {
   disableCouponButton: false,
   couponCode: "",
   enableCouponField: false,
-  percentOff: "",
+  percentOff: null,
   coupon: null
 };
 const store = createContext(initialState);
@@ -109,9 +108,7 @@ const CheckoutFormContainerWithoutStripe = ({
         }
         dispatch({
           type: SET_PERCENT_OFF,
-          payload:
-            "Discounted price: $" +
-            formatDiscountedPrice(plan.amount, res.data.coupon.percent_off)
+          payload: "Discounted price: $" + res.data.total
         });
 
         dispatch({ type: SET_COUPON, payload: res.data.coupon });

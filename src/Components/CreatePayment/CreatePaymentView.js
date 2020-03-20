@@ -3,7 +3,6 @@ import { useTranslation } from "react-i18next";
 import { CheckoutFormView } from "../CheckoutForm/CheckoutFormView";
 import ErrMessage from "../common/ErrMessage";
 import AlertSuccess from "../common/AlertSuccess";
-import { PercentOff } from "./PercentOff";
 
 export const CreatePaymentView = ({
   product,
@@ -21,7 +20,7 @@ export const CreatePaymentView = ({
         <p>
           {product.paywall.subscribe_subtitle} - {plan.amount_formatted}
           {plan.auto_renew && <span>/({plan.interval_count})</span>}{" "}
-          {plan.interval}. <PercentOff />
+          {plan.interval}.
         </p>
       </div>
 
