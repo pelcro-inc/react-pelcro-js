@@ -24,8 +24,8 @@ export const CreatePaymentView = ({
         </p>
       </div>
 
-      <ErrMessage name="payment-create" />
-      <AlertSuccess name="payment-create" />
+      <ErrMessage name="payment" />
+      <AlertSuccess name="payment" />
 
       <div className="pelcro-prefix-payment-block">
         <div className="pelcro-prefix-alert pelcro-prefix-alert-success">

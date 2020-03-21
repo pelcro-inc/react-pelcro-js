@@ -79,6 +79,7 @@ const CheckoutFormContainerWithoutStripe = ({
         token: token.id
       },
       err => {
+        console.log("createPayment -> err", err);
         dispatch({ type: DISABLE_SUBMIT, payload: false });
         if (err) return displayError(getErrorMessages(err));
 
@@ -102,9 +103,9 @@ const CheckoutFormContainerWithoutStripe = ({
         if (err) {
           dispatch({ type: SET_PERCENT_OFF, payload: "" });
 
-          return showError(err, "pelcro-error-payment-create");
+          return showError(getErrorMessages(err), "pelcro-error-payment");
         } else {
-          hideError("pelcro-error-payment-create");
+          hideError("pelcro-error-payment");
         }
         dispatch({
           type: SET_PERCENT_OFF,
@@ -135,7 +136,8 @@ const CheckoutFormContainerWithoutStripe = ({
         (err, res) => {
           dispatch({ type: DISABLE_SUBMIT, payload: false });
 
-          if (err) return showError(err.message, "pelcro-error-payment-create");
+          if (err)
+            return showError(getErrorMessages(err), "pelcro-error-payment");
 
           if (giftRecipient) {
             window.alert(
@@ -194,7 +196,7 @@ const CheckoutFormContainerWithoutStripe = ({
     console.log("submit payment!!");
     return stripe.createToken().then(({ token, error }) => {
       if (error) {
-        showError(error.message, "pelcro-error-payment-create");
+        showError(getErrorMessages(error), "pelcro-error-payment-create");
         dispatch({ type: DISABLE_SUBMIT, payload: false });
       } else if (token && type === "createPayment") {
         dispatch({ type: DISABLE_SUBMIT, payload: true });
