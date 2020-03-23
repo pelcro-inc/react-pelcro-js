@@ -34,7 +34,7 @@ const { Provider } = store;
 const RegisterContainer = ({
   style,
   className,
-  resetView,
+  setView,
   onSuccess = () => {},
   children
 }) => {
@@ -45,7 +45,7 @@ const RegisterContainer = ({
       if (err) {
         return showError(getErrorMessages(err), "pelcro-error-register");
       } else {
-        resetView();
+        setView();
         onSuccess();
       }
     });

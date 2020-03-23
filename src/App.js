@@ -329,25 +329,20 @@ class App extends Component {
           )}
           {this.state.view === "login" && (
             <LoginModal
-              resetView={this.resetView}
               setView={this.setView}
-              loggedIn={this.loggedIn}
-              ReactGA={ReactGA}
-              onSuccess={() => this.loggedIn()}
+              onSuccess={() => {
+                this.setView("");
+                this.loggedIn();
+              }}
             />
           )}
           {this.state.view === "register" && (
             <RegisterModal
-              order={this.state.order}
-              giftCode={this.state.giftCode}
-              site={this.state.site}
-              isGift={this.state.isGift}
-              plan={this.state.plan}
-              product={this.state.product}
-              resetView={this.resetView}
               setView={this.setView}
-              ReactGA={ReactGA}
-              onSuccess={() => this.loggedIn()}
+              onSuccess={() => {
+                this.setView("");
+                this.loggedIn();
+              }}
             />
           )}
           {this.state.view === "gift" && (

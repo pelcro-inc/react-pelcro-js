@@ -28,7 +28,7 @@ const { Provider } = store;
 const LoginContainer = ({
   style,
   className,
-  resetView,
+  setView,
   onSuccess = () => {},
   children
 }) => {
@@ -39,7 +39,7 @@ const LoginContainer = ({
       if (err) {
         return showError(getErrorMessages(err), "pelcro-error-login");
       } else {
-        resetView();
+        setView("");
         onSuccess();
       }
     });
