@@ -1,6 +1,5 @@
 const path = require("path");
-const CompressionPlugin = require("compression-webpack-plugin");
-const BrotliPlugin = require("brotli-webpack-plugin");
+const EsmWebpackPlugin = require("@purtuga/esm-webpack-plugin");
 
 module.exports = {
   entry: [path.join(__dirname, "src/components.js")],
@@ -19,13 +18,6 @@ module.exports = {
           presets: ["@babel/preset-react", "@babel/preset-env"]
         }
       },
-      // {
-      //   test: /\.scss$/,
-      //   loader: "css-loader",
-      //   options: {
-      //     modules: true
-      //   }
-      // },
       {
         test: /\.scss$/,
         use: [
@@ -57,22 +49,7 @@ module.exports = {
       }
     ]
   },
-  plugins: [
-    // htmlWebpackPlugin,
-    new CompressionPlugin({
-      filename: "[path].gz[query]",
-      algorithm: "gzip",
-      test: /\.js$|\.css$|\.html$/,
-      threshold: 10240,
-      minRatio: 0.7
-    }),
-    new BrotliPlugin({
-      asset: "[path].br[query]",
-      test: /\.js$|\.css$|\.html$/,
-      threshold: 10240,
-      minRatio: 0.7
-    })
-  ],
+  plugins: [new EsmWebpackPlugin()],
   resolve: {
     extensions: [".js", ".jsx"]
   },
