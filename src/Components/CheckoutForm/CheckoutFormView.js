@@ -26,8 +26,7 @@ export function CheckoutFormView({
   giftRecipient,
   plan,
   product,
-  setView,
-  resetView
+  setView
 }) {
   // componentDidUpdate(prevProps) {
   //   if (prevProps.coupon !== this.props.coupon)
@@ -54,7 +53,6 @@ export function CheckoutFormView({
       product={product}
       couponCode={couponCode}
       setView={setView}
-      resetView={resetView}
     >
       <div className="pelcro-prefix-form">
         <div className="pelcro-prefix-row">

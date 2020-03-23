@@ -52,8 +52,7 @@ const CheckoutFormContainerWithoutStripe = ({
   product,
   giftRecipient,
   couponCode,
-  setView,
-  resetView
+  setView
 }) => {
   const { t } = useTranslation("messages");
 
@@ -143,7 +142,7 @@ const CheckoutFormContainerWithoutStripe = ({
             window.alert(
               `${t("giftSent")} ${giftRecipient.email} ${t("successfully")}`
             );
-            resetView();
+            setView("");
           } else {
             setView("success");
             console.log("subscribe -> success");
@@ -176,7 +175,7 @@ const CheckoutFormContainerWithoutStripe = ({
           // });
 
           if (giftRecipient) {
-            resetView();
+            setView("");
             window.alert(
               `${t("giftSent")} ${giftRecipient.email} ${t("successfully")}`
             );

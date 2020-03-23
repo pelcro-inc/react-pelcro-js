@@ -40,11 +40,7 @@ export function UpdatePaymentMethodView(props) {
         </div>
 
         <div className="pelcro-prefix-form">
-          <CheckoutFormView
-            ReactGA={props.ReactGA}
-            successMessage={t("success")}
-            showCoupon={false}
-          />
+          <CheckoutFormView successMessage={t("success")} showCoupon={false} />
         </div>
       </div>
     </React.Fragment>

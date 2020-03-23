@@ -26,7 +26,7 @@ export const UpdatePaymentMethodModal = props => {
           <div className="pelcro-prefix-modal-content">
             <Header
               closeButton={true}
-              resetView={props.resetView}
+              resetView={() => props.setView("")}
               site={site}
             ></Header>
             <div className="pelcro-prefix-modal-body">

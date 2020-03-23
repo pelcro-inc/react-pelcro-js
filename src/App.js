@@ -436,7 +436,6 @@ class App extends Component {
           {this.state.view === "source-create" && (
             <UpdatePaymentMethodModal
               resetView={this.resetView}
-              ReactGA={ReactGA}
               setView={this.setView}
             />
           )}
