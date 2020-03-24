@@ -3,7 +3,7 @@
   "description": "Pelcro's React UI Elements",
   "version": "0.1.13",
   "private": false,
-  "main": "dist/components.js",
+  "main": "src/components.js",
   "files": [
     "src"
   ],
