@@ -1,11 +1,11 @@
 {
   "name": "@pelcro/pelcro-react-elements",
   "description": "Pelcro's React UI Elements",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "private": false,
   "main": "dist/components.js",
   "files": [
-    "dist"
+    "src"
   ],
   "scripts": {
     "start": "react-scripts start",
@@ -14,7 +14,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "prepare": "yarn babel src --out-dir dist --copy-files",
-    "deploy": "yarn run prepare && yarn publish"
+    "deploy": "yarn publish"
   },
   "eslintConfig": {
     "extends": "react-app"
