@@ -3,7 +3,7 @@
   "description": "Pelcro's React UI Elements",
   "version": "0.1.6",
   "private": false,
-  "main": "dist/index.js",
+  "main": "src/components.js",
   "files": [
     "dist"
   ],
@@ -13,8 +13,8 @@
     "prod": "webpack --config webpack.config.prod --mode production",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "prepublish": "yarn run prod",
-    "deploy": "yarn run prepublish && yarn publish"
+    "prepare": "yarn babel src --out-dir dist",
+    "deploy": "yarn run prepare && yarn publish"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -26,13 +26,16 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "@babel/core": "^7.2.2",
-    "@babel/plugin-proposal-class-properties": "^7.3.0",
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.0",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/polyfill": "^7.2.5",
-    "@babel/preset-env": "^7.3.1",
-    "@babel/preset-react": "^7.0.0",
+    "@babel/preset-env": "^7.9.0",
+    "@babel/preset-react": "^7.9.4",
     "@purtuga/esm-webpack-plugin": "^1.2.1",
-    "babel-loader": "^8.0.5",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-loader": "^8.1.0",
+    "babel-preset-es2015": "^6.24.1",
     "brotli-webpack-plugin": "^1.1.0",
     "compression-webpack-plugin": "^3.0.0",
     "css-loader": "^3.2.0",
