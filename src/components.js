@@ -35,6 +35,8 @@ import ErrMessage from "./Components/common/ErrMessage";
 import AlertSuccess from "./Components/common/AlertSuccess";
 import { CreatePaymentModal } from "./Components/CreatePayment/CreatePaymentModal";
 import { CreatePaymentView } from "./Components/CreatePayment/CreatePaymentView";
+import { CouponCode } from "./Components/CheckoutForm/CouponCode";
+import { DiscountedPrice } from "./Components/CheckoutForm/DiscountedPrice";
 
 import {
   init as initButtons,
@@ -52,6 +54,8 @@ export {
   LoginContainer,
   PaymentSuccessView,
   PaymentSuccessModal,
+  DiscountedPrice,
+  CouponCode,
   Email,
   Password,
   ConfirmPassword,
