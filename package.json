@@ -3,9 +3,9 @@
   "description": "Pelcro's React UI Elements",
   "version": "0.1.17",
   "private": false,
-  "main": "src/components.js",
+  "main": "dist/index.js",
   "files": [
-    "src"
+    "dist"
   ],
   "scripts": {
     "start": "react-scripts start",
@@ -13,7 +13,7 @@
     "prod": "webpack --config webpack.config.prod --mode production",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "prepare": "yarn babel src --out-dir dist --copy-files",
+    "prepare": "yarn run prod",
     "deploy": "yarn publish"
   },
   "eslintConfig": {
@@ -25,10 +25,6 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "peerDependencies": {
-    "react": "16.6.1",
-    "react-dom": "16.6.1"
-  },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
     "@babel/core": "^7.9.0",
