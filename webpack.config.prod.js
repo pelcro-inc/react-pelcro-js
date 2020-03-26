@@ -1,12 +1,12 @@
 const path = require("path");
-const EsmWebpackPlugin = require("@purtuga/esm-webpack-plugin");
+const CompressionPlugin = require("compression-webpack-plugin");
+const BrotliPlugin = require("brotli-webpack-plugin");
 
 module.exports = {
   entry: [path.join(__dirname, "src/components.js")],
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "index.js",
-    library: "PelcroReactElements",
     libraryTarget: "umd"
   },
   module: {
@@ -19,6 +19,13 @@ module.exports = {
           presets: ["@babel/preset-react", "@babel/preset-env"]
         }
       },
+      // {
+      //   test: /\.scss$/,
+      //   loader: "css-loader",
+      //   options: {
+      //     modules: true
+      //   }
+      // },
       {
         test: /\.scss$/,
         use: [
@@ -50,7 +57,22 @@ module.exports = {
       }
     ]
   },
-  plugins: [new EsmWebpackPlugin()],
+  plugins: [
+    // htmlWebpackPlugin,
+    new CompressionPlugin({
+      filename: "[path].gz[query]",
+      algorithm: "gzip",
+      test: /\.js$|\.css$|\.html$/,
+      threshold: 10240,
+      minRatio: 0.7
+    }),
+    new BrotliPlugin({
+      asset: "[path].br[query]",
+      test: /\.js$|\.css$|\.html$/,
+      threshold: 10240,
+      minRatio: 0.7
+    })
+  ],
   resolve: {
     extensions: [".js", ".jsx"]
   },
