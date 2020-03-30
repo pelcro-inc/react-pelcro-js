@@ -45,6 +45,7 @@ import { UserUpdateModal } from "./Components/UserUpdate/UserUpdateModal";
 import { UserUpdateFirstName } from "./Components/UserUpdate/UserUpdateFirstName";
 import { UserUpdateLastName } from "./Components/UserUpdate/UserUpdateLastName";
 import { UserUpdatePhone } from "./Components/UserUpdate/UserUpdatePhone";
+import { UserUpdateTextInput } from "./Components/UserUpdate/UserUpdateTextInput";
 
 import {
   init as initButtons,
@@ -54,6 +55,7 @@ import {
 
 export {
   UserUpdateEmail,
+  UserUpdateTextInput,
   UserUpdateModal,
   UserUpdateButton,
   UserUpdateContainer,

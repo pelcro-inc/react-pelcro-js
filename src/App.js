@@ -442,8 +442,12 @@ class App extends Component {
           )}
 
           {this.state.view === "user-edit" && (
-            <UserUpdateModal setView={this.setView} />
+            <UserUpdateModal
+              setView={this.setView}
+              onSuccess={() => console.log("User Updated")}
+            />
           )}
+
           {this.state.view === "address-edit" && (
             <AddressEdit
               addressId={this.state.addressId}
