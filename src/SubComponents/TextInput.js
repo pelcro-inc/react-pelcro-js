@@ -1,18 +1,19 @@
 import React, { useContext } from "react";
-import { SET_FIRST_NAME } from "../utils/action-types";
+import { SET_TEXT_FIELD } from "../utils/action-types";
 
-export function FirstName({
+export function TextInput({
   placeholder,
   style,
   className,
   id,
   store,
+  fieldName,
   ...otherProps
 }) {
   const { dispatch, state } = useContext(store);
 
   const handleInputChange = value => {
-    dispatch({ type: SET_FIRST_NAME, payload: value });
+    dispatch({ type: SET_TEXT_FIELD, payload: { [fieldName]: value } });
   };
 
   return (
@@ -21,9 +22,9 @@ export function FirstName({
       id={id}
       style={{ ...style }}
       className={className}
-      value={state.firstName || window.Pelcro.user.read().first_name}
+      value={state[fieldName] || window.Pelcro.user.read().metadata[fieldName]}
       onChange={e => handleInputChange(e.target.value)}
-      placeholder={placeholder || "Enter Your First Name"}
+      placeholder={placeholder || fieldName}
       {...otherProps}
     ></input>
   );

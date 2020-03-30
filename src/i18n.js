@@ -18,6 +18,8 @@ import login_en from "./translations/en/login.json";
 import login_fr from "./translations/fr/login.json";
 import register_en from "./translations/en/register.json";
 import register_fr from "./translations/fr/register.json";
+import userEdit_en from "./translations/en/userEdit.json";
+import userEdit_fr from "./translations/fr/userEdit.json";
 
 const resources = {
   en_US: {
@@ -29,7 +31,8 @@ const resources = {
     checkoutForm: checkoutForm_en,
     messages: messages_en,
     login: login_en,
-    register: register_en
+    register: register_en,
+    userEdit: userEdit_en
   },
   fr_CA: {
     common: common_fr,
@@ -40,7 +43,8 @@ const resources = {
     checkoutForm: checkoutForm_fr,
     messages: messages_fr,
     login: login_fr,
-    register: register_fr
+    register: register_fr,
+    userEdit: userEdit_fr
   }
 };
 

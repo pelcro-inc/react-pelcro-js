@@ -1,0 +1,15 @@
+{
+    "labels": {
+        "title": "Voulez-vous mettre à jour votre profil?",
+        "subtitle": "Entrez vos informations ci-dessous pour mettre à jour votre profil",
+        "email": "Email",
+        "firstName": "Prénom",
+        "lastName": "Nom de famille",
+        "phone": "Numéro de téléphone",
+        "submit": "Soumettre",
+        "required": "Champs obligatoires"
+    },
+    "messages": {
+        "userUpdated": "Merci! Votre profil a été mis à jour avec succès."
+    }
+}

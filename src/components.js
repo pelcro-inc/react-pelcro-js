@@ -37,6 +37,14 @@ import { CreatePaymentModal } from "./Components/CreatePayment/CreatePaymentModa
 import { CreatePaymentView } from "./Components/CreatePayment/CreatePaymentView";
 import { CouponCode } from "./Components/CheckoutForm/CouponCode";
 import { DiscountedPrice } from "./Components/CheckoutForm/DiscountedPrice";
+import { UserUpdateEmail } from "./Components/UserUpdate/UserUpdateEmail";
+import { UserUpdateButton } from "./Components/UserUpdate/UserUpdateButton";
+import { UserUpdateContainer } from "./Components/UserUpdate/UserUpdateContainer";
+import { UserUpdateView } from "./Components/UserUpdate/UserUpdateView";
+import { UserUpdateModal } from "./Components/UserUpdate/UserUpdateModal";
+import { UserUpdateFirstName } from "./Components/UserUpdate/UserUpdateFirstName";
+import { UserUpdateLastName } from "./Components/UserUpdate/UserUpdateLastName";
+import { UserUpdatePhone } from "./Components/UserUpdate/UserUpdatePhone";
 
 import {
   init as initButtons,
@@ -45,6 +53,14 @@ import {
 } from "./Components/common/Buttons";
 
 export {
+  UserUpdateEmail,
+  UserUpdateModal,
+  UserUpdateButton,
+  UserUpdateContainer,
+  UserUpdateView,
+  UserUpdateFirstName,
+  UserUpdateLastName,
+  UserUpdatePhone,
   CheckoutFormContainer,
   ErrMessage,
   AlertSuccess,

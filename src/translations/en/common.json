@@ -132,21 +132,6 @@
             "back": "Back"
         }
     },
-    "userEdit": {
-        "labels": {
-            "title": "Want to update your profile?",
-            "subtitle": "Enter your information below to update your profile",
-            "email": "Email",
-            "firstName": "First name",
-            "lastName": "Last name",
-            "phone": "Phone",
-            "submit": "Submit",
-            "required": "Required"
-        },
-        "messages": {
-            "userUpdated": "Thanks! Your profile was updated successfully."
-        }
-    },
     "cart": {
         "title": "Your shopping cart",
         "subtitle": "Comple your purchase below",

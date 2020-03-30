@@ -17,7 +17,8 @@ import {
   DashboardMenu,
   initButtons,
   authenticatedButtons,
-  unauthenticatedButtons
+  unauthenticatedButtons,
+  UserUpdateModal
 } from "./components";
 
 // refactor this then integrate it with the main UI ASAP.
@@ -441,11 +442,7 @@ class App extends Component {
           )}
 
           {this.state.view === "user-edit" && (
-            <UserEdit
-              resetView={this.resetView}
-              ReactGA={ReactGA}
-              setView={this.setView}
-            />
+            <UserUpdateModal setView={this.setView} />
           )}
           {this.state.view === "address-edit" && (
             <AddressEdit
