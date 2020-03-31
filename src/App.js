@@ -10,6 +10,7 @@ import {
   UpdatePaymentMethodModal,
   UpdatePaymentMethodView,
   CreatePaymentModal,
+  UserUpdateView,
   CreatePaymentView,
   NewsLetter,
   PaymentSuccessModal,
@@ -47,7 +48,8 @@ class App extends Component {
       site: window.Pelcro.site.read(),
       isAuthenticated: window.Pelcro.user.isAuthenticated(), // controls menu button displaying
       isGift: false,
-      order: null
+      order: null,
+      showUpdateUserView: false
     };
 
     this.initUI = this.initUI.bind(this);
@@ -86,6 +88,10 @@ class App extends Component {
 
   initUI = () => {
     if (this.state.site.settings === "subscription") this.initViews();
+  };
+
+  handleShowUpdateUserViewClick = () => {
+    this.setState({ showUpdateUserView: true });
   };
 
   initViewFromUrl = () => {
@@ -435,7 +441,7 @@ class App extends Component {
           )}
 
           {this.state.view === "source-create" && (
-            <UpdatePaymentMethodModal
+            <UpdatePaymentMethodView
               resetView={this.resetView}
               setView={this.setView}
             />
@@ -443,6 +449,17 @@ class App extends Component {
 
           {this.state.view === "user-edit" && (
             <UserUpdateModal
+              setView={this.setView}
+              onSuccess={() => console.log("User Updated")}
+            />
+          )}
+
+          <button onClick={this.handleShowUpdateUserViewClick}>
+            Update User
+          </button>
+
+          {this.state.showUpdateUserView && (
+            <UserUpdateView
               setView={this.setView}
               onSuccess={() => console.log("User Updated")}
             />
