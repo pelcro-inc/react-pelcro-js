@@ -22,7 +22,11 @@ export function TextInput({
       id={id}
       style={{ ...style }}
       className={className}
-      value={state[fieldName] || window.Pelcro.user.read().metadata[fieldName]}
+      value={
+        state[fieldName] ||
+        (window.Pelcro.user.read().metadata &&
+          window.Pelcro.user.read().metadata[fieldName])
+      }
       onChange={e => handleInputChange(e.target.value)}
       placeholder={placeholder || fieldName}
       {...otherProps}
