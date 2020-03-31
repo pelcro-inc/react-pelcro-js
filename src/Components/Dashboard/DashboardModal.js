@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Addresses } from "./Addresses";
+import { AddressesListView } from "../AddressesList/AddressesListView";
 import { Subscriptions } from "./Subscriptions";
 import { Logout } from "../../SubComponents/Logout";
 
@@ -94,7 +94,7 @@ export const DashboardModal = props => {
                   Addresses
                 </span>
                 <span className="col-8">
-                  <Addresses />
+                  <AddressesListView setView={props.setView} />
                 </span>
               </div>
 
