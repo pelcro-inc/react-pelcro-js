@@ -27,7 +27,7 @@ export class SelectModal extends Component {
       isGift: props.isGift,
       disabled: true,
       mode: "product",
-      productList: window.Pelcro.product.list()
+      productList: window.Pelcro.product.list(),
     };
 
     this.product = this.props.product || window.Pelcro.paywall.getProduct();
@@ -51,11 +51,11 @@ export class SelectModal extends Component {
       this.setState({
         product: this.state.productList[0],
         planList: this.state.productList[0].plans,
-        mode: "plan"
+        mode: "plan",
       });
     }
     window.Pelcro.insight.track("Modal Displayed", {
-      name: "select"
+      name: "select",
     });
 
     document.addEventListener("keydown", this.handleSubmit);
@@ -65,26 +65,27 @@ export class SelectModal extends Component {
     document.removeEventListener("keydown", this.handleSubmit);
   };
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     if (e.key === "Enter" && !this.state.disabled) this.submitOption();
   };
 
-  onProductChange = e => {
+  onProductChange = (e) => {
     const product = window.Pelcro.product.list()[e.target.selectedIndex];
     this.setState({ product: product, plan: product.plans[0] });
   };
 
-  onPlanChange = e => {
+  onPlanChange = (e) => {
     this.setState({
-      plan: this.state.product.plans[e.target.selectedIndex]
+      plan: this.state.product.plans[e.target.selectedIndex],
     });
   };
 
-  onIsGiftChange = e => {
+  onIsGiftChange = (e) => {
     this.setState({ isGift: e.target.checked });
   };
 
-  countStartPrice = arr => {
+  countStartPrice = (arr) => {
+    console.log("SelectModal -> arr", arr);
     let startingPlan = arr[0];
     for (const plan of arr) {
       if (plan.amount < startingPlan.amount) {
@@ -95,7 +96,7 @@ export class SelectModal extends Component {
   };
 
   renderProducts = () => {
-    return this.state.productList.map(product => {
+    return this.state.productList.map((product) => {
       return (
         <div key={`product-${product.id}`}>
           <div className="pelcro-prefix-product-container pelcro-prefix-gradient-border row">
@@ -142,7 +143,7 @@ export class SelectModal extends Component {
   };
 
   renderPlans = () => {
-    return this.state.planList.map(plan => {
+    return this.state.planList.map((plan) => {
       const isChecked = this.state.plan.id === plan.id ? true : false;
       return (
         <div
@@ -178,7 +179,7 @@ export class SelectModal extends Component {
     });
   };
 
-  selectProduct = e => {
+  selectProduct = (e) => {
     const id = e.target.dataset.key;
     for (const product of this.state.productList) {
       if (+product.id === +id) {
@@ -189,7 +190,7 @@ export class SelectModal extends Component {
     }
   };
 
-  selectPlan = e => {
+  selectPlan = (e) => {
     const id = e.target.dataset.key;
     for (const plan of this.state.planList) {
       if (+plan.id === +id) {
@@ -236,7 +237,7 @@ export class SelectModal extends Component {
   };
 
   // inserting error message into modal window
-  showError = message => {
+  showError = (message) => {
     showError(message, "pelcro-error-select");
   };
 
@@ -250,7 +251,7 @@ export class SelectModal extends Component {
       this.props.ReactGA.event({
         category: "VIEWS",
         action: "Product Modal Viewed",
-        nonInteraction: true
+        nonInteraction: true,
       });
 
       return (
@@ -321,7 +322,7 @@ export class SelectModal extends Component {
       this.props.ReactGA.event({
         category: "VIEWS",
         action: "Plan Modal Viewed",
-        nonInteraction: true
+        nonInteraction: true,
       });
 
       return (
@@ -470,5 +471,5 @@ SelectModal.propTypes = {
   iaGift: PropTypes.bool,
   setView: PropTypes.func,
   resetView: PropTypes.func,
-  subscribe: PropTypes.func
+  subscribe: PropTypes.func,
 };

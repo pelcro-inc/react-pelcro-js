@@ -1,9 +1,15 @@
 import React, { createContext, useReducer } from "react";
-import { SET_VIEW } from "../utils/action-types";
+import {
+  SET_PRODUCT_AND_PLAN,
+  SET_SUBSCRIPTION_TO_RENEW,
+} from "../utils/action-types";
 
 const initialState = {
   selectedAddress: null,
-  view: null
+  product: null,
+  plan: null,
+  isGift: false,
+  subscriptionIdToRenew: null,
 };
 
 const store = createContext(initialState);
@@ -12,8 +18,11 @@ const { Provider } = store;
 const PelcroContainer = ({ children }) => {
   const [state, dispatch] = useReducer((state, action) => {
     switch (action.type) {
-      case SET_VIEW:
+      case SET_PRODUCT_AND_PLAN:
         return { ...state, ...action.payload };
+
+      case SET_SUBSCRIPTION_TO_RENEW:
+        return { ...state, subscriptionIdToRenew: action.payload };
 
       default:
         throw new Error();

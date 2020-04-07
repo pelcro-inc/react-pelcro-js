@@ -1,20 +1,20 @@
 import React, { useEffect } from "react";
 import { AddressesListView } from "../AddressesList/AddressesListView";
-import { Subscriptions } from "./Subscriptions";
 import { Logout } from "../../SubComponents/Logout";
+import { SubscriptionsListView } from "../Subscriptions/SubscriptionsListView";
 
-export const DashboardModal = props => {
+export const DashboardModal = (props) => {
   const site = window.Pelcro.site.read();
   const user = window.Pelcro.user.read();
 
   useEffect(() => {
     window.Pelcro.insight.track("Modal Displayed", {
-      name: "dashboard"
+      name: "dashboard",
     });
     props.ReactGA.event({
       category: "VIEWS",
       action: "Dashboard Modal Viewed",
-      nonInteraction: true
+      nonInteraction: true,
     });
   }, [props.ReactGA]);
 
@@ -128,7 +128,7 @@ export const DashboardModal = props => {
               <h4>Subscriptions</h4>
             </div>
             <div className="pelcro-prefix-dashboard-block">
-              <Subscriptions />
+              <SubscriptionsListView setView={props.setView} />
               <div className="pelcro-prefix-dashboard-text">
                 <div className="redeem-gift">
                   <button
