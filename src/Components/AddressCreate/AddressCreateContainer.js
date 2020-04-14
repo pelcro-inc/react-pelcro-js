@@ -46,8 +46,8 @@ const AddressCreateContainer = ({
     window.Pelcro.insight.track("Modal Displayed", {
       name: "address"
     });
-    getCountryList();
-    getStateList();
+    // getCountryList();
+    // getStateList();
 
     // document.addEventListener("keydown", submitAddress);
 
@@ -61,6 +61,7 @@ const AddressCreateContainer = ({
   };
 
   const setCountries = (error, tmp) => {
+    console.log("setCountries -> error, tmp", error, tmp);
     if (error) {
       showError(error.message, "pelcro-error-address");
     } else if (tmp)
