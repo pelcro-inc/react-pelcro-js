@@ -72,25 +72,6 @@
             "": ""
         }
     },
-    "address": {
-        "title": "Veuillez entrer votre adresse",
-        "labels": {
-            "address": "Adresse",
-            "code": "Code postal / Zip",
-            "city": "Ville",
-            "region": "Province / Région",
-            "country": "Pays",
-            "firstName": "Prénom",
-            "lastName": "Nom de famille",
-            "required": "Champs obligatoires"
-        },
-        "buttons": {
-            "submit": "Valider"
-        },
-        "messages": {
-            "addressUpdated": "L'adresse a été mise à jour avec succès!"
-        }
-    },
     "dashboard": {
         "labels": {
             "menu": "Menu Pelcro",

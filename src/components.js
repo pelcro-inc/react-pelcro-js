@@ -51,14 +51,26 @@ import { PlanName } from "./Components/Subscriptions/PlanName";
 import { ShipmentsRemaining } from "./Components/Subscriptions/ShipmentsRemaining";
 import { SubscriptionsListView } from "./Components/Subscriptions/SubscriptionsListView";
 import { SubscriptionStatus } from "./Components/Subscriptions/SubscriptionStatus";
+import { AddressCreateContainer } from "./Components/AddressCreate/AddressCreateContainer";
+import { AddressCreateModal } from "./Components/AddressCreate/AddressCreateModal";
+import { AddressCreateSubmit } from "./Components/AddressCreate/AddressCreateSubmit";
+import { AddressFirstName } from "./Components/AddressCreate/AddressFirstName";
+import { AddressLastName } from "./Components/AddressCreate/AddressLastName";
+import { AddressCreateView } from "./Components/AddressCreate/AddressCreateView";
 
 import {
   init as initButtons,
   authenticatedButtons,
-  unauthenticatedButtons,
+  unauthenticatedButtons
 } from "./Components/common/Buttons";
 
 export {
+  AddressCreateContainer,
+  AddressCreateView,
+  AddressCreateModal,
+  AddressCreateSubmit,
+  AddressFirstName,
+  AddressLastName,
   SubscriptionActionButton,
   PlanName,
   ShipmentsRemaining,
@@ -112,5 +124,5 @@ export {
   authenticatedButtons,
   unauthenticatedButtons,
   CreatePaymentModal,
-  CreatePaymentView,
+  CreatePaymentView
 };

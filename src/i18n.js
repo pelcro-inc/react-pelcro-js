@@ -20,6 +20,8 @@ import register_en from "./translations/en/register.json";
 import register_fr from "./translations/fr/register.json";
 import userEdit_en from "./translations/en/userEdit.json";
 import userEdit_fr from "./translations/fr/userEdit.json";
+import address_en from "./translations/en/address.json";
+import address_fr from "./translations/fr/address.json";
 
 const resources = {
   en_US: {
@@ -32,7 +34,8 @@ const resources = {
     messages: messages_en,
     login: login_en,
     register: register_en,
-    userEdit: userEdit_en
+    userEdit: userEdit_en,
+    address: address_en
   },
   fr_CA: {
     common: common_fr,
@@ -44,7 +47,8 @@ const resources = {
     messages: messages_fr,
     login: login_fr,
     register: register_fr,
-    userEdit: userEdit_fr
+    userEdit: userEdit_fr,
+    address: address_fr
   }
 };
 

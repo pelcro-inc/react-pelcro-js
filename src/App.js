@@ -19,7 +19,8 @@ import {
   initButtons,
   authenticatedButtons,
   unauthenticatedButtons,
-  UserUpdateModal
+  UserUpdateModal,
+  AddressCreateModal
 } from "./components";
 
 // refactor this then integrate it with the main UI ASAP.
@@ -29,7 +30,7 @@ import AddressEdit from "./Components/modals/address/Edit";
 import Gift from "./Components/modals/Gift";
 import Redeem from "./Components/modals/Redeem";
 // import Success from "./Components/modals/Success";
-import AddressCreate from "./Components/modals/address/Create";
+// import AddressCreate from "./Components/modals/address/Create";
 import PasswordForgot from "./Components/modals/password/Forgot";
 import PasswordReset from "./Components/modals/password/Reset";
 import UserEdit from "./Components/modals/user/Edit";
@@ -397,14 +398,14 @@ class App extends Component {
             />
           )}
           {this.state.view === "address" && (
-            <AddressCreate
+            <AddressCreateModal
               giftCode={this.state.giftCode}
               plan={this.state.plan}
               product={this.state.product}
               resetView={this.resetView}
               setView={this.setView}
               ReactGA={ReactGA}
-            ></AddressCreate>
+            ></AddressCreateModal>
           )}
           {this.state.view === "newsletter" && (
             <NewsLetter
