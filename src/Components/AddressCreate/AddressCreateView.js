@@ -2,6 +2,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import ErrMessage from "../common/ErrMessage";
 import { AddressFirstName } from "./AddressFirstName";
+import { AddressLastName } from "./AddressLastName";
 import { AddressTextInput } from "./AddressTextInput";
 import { AddressCreateSubmit } from "./AddressCreateSubmit";
 import { AddressCreateContainer } from "./AddressCreateContainer";
@@ -41,7 +42,7 @@ export const AddressCreateView = props => {
             >
               {t("labels.lastName")} *
             </label>
-            <AddressFirstName
+            <AddressLastName
               className="pelcro-prefix-input pelcro-prefix-form-control"
               autoComplete="last-name"
               id="pelcro-input-last_name"
