@@ -57,6 +57,7 @@ import { AddressCreateSubmit } from "./Components/AddressCreate/AddressCreateSub
 import { AddressFirstName } from "./Components/AddressCreate/AddressFirstName";
 import { AddressLastName } from "./Components/AddressCreate/AddressLastName";
 import { AddressCreateView } from "./Components/AddressCreate/AddressCreateView";
+import { AddressTextInput } from "./Components/AddressCreate/AddressTextInput";
 
 import {
   init as initButtons,
@@ -67,6 +68,7 @@ import {
 export {
   AddressCreateContainer,
   AddressCreateView,
+  AddressTextInput,
   AddressCreateModal,
   AddressCreateSubmit,
   AddressFirstName,
