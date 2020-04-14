@@ -31,8 +31,6 @@ import { CheckoutFormContainer } from "./Components/CheckoutForm/CheckoutFormCon
 import { CheckoutFormView } from "./Components/CheckoutForm/CheckoutFormView";
 import { ApplyCouponButton } from "./Components/CheckoutForm/ApplyCouponButton";
 import { SubmitCheckoutForm } from "./Components/CheckoutForm/SubmitCheckoutForm";
-import ErrMessage from "./Components/common/ErrMessage";
-import AlertSuccess from "./Components/common/AlertSuccess";
 import { CreatePaymentModal } from "./Components/CreatePayment/CreatePaymentModal";
 import { CreatePaymentView } from "./Components/CreatePayment/CreatePaymentView";
 import { CouponCode } from "./Components/CheckoutForm/CouponCode";
@@ -58,16 +56,20 @@ import { AddressFirstName } from "./Components/AddressCreate/AddressFirstName";
 import { AddressLastName } from "./Components/AddressCreate/AddressLastName";
 import { AddressCreateView } from "./Components/AddressCreate/AddressCreateView";
 import { AddressTextInput } from "./Components/AddressCreate/AddressTextInput";
+import { AlertSuccess } from "./Components/Alerts/AlertSuccess";
+import { AlertDanger } from "./Components/Alerts/AlertDanger";
 
 import {
   init as initButtons,
   authenticatedButtons,
-  unauthenticatedButtons
+  unauthenticatedButtons,
 } from "./Components/common/Buttons";
 
 export {
   AddressCreateContainer,
   AddressCreateView,
+  AlertDanger,
+  AlertSuccess,
   AddressTextInput,
   AddressCreateModal,
   AddressCreateSubmit,
@@ -88,8 +90,6 @@ export {
   UserUpdateLastName,
   UserUpdatePhone,
   CheckoutFormContainer,
-  ErrMessage,
-  AlertSuccess,
   CheckoutFormView,
   ApplyCouponButton,
   SubmitCheckoutForm,
@@ -126,5 +126,5 @@ export {
   authenticatedButtons,
   unauthenticatedButtons,
   CreatePaymentModal,
-  CreatePaymentView
+  CreatePaymentView,
 };
