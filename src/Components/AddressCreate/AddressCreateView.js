@@ -123,7 +123,7 @@ export const AddressCreateView = props => {
           * {t("labels.required")}
         </small>
         <AddressCreateSubmit
-          text={t("buttons.submit")}
+          name={t("buttons.submit")}
           id="address-submit"
         ></AddressCreateSubmit>
       </div>
