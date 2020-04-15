@@ -1,7 +1,7 @@
 import React, { createContext, useEffect } from "react";
 import useReducerWithSideEffects, {
   UpdateWithSideEffect,
-  Update
+  Update,
 } from "use-reducer-with-side-effects";
 import {
   SET_COUNTRY,
@@ -11,11 +11,10 @@ import {
   SET_STATES,
   SET_FIRST_NAME,
   SET_LAST_NAME,
-  SET_TEXT_FIELD
+  SET_TEXT_FIELD,
 } from "../../utils/action-types";
 import { getErrorMessages } from "../common/Helpers";
 import { showError } from "../../utils/showing-error";
-import { sortCountries } from "../../utils/utils";
 
 const initialState = {
   type: "shipping",
@@ -28,7 +27,7 @@ const initialState = {
   country: "",
   postalCode: "",
   states: [],
-  countries: []
+  countries: [],
 };
 const store = createContext(initialState);
 const { Provider } = store;
@@ -40,14 +39,12 @@ const AddressCreateContainer = ({
   giftCode = false,
   product = null,
   onSuccess = () => {},
-  children
+  children,
 }) => {
   useEffect(() => {
     window.Pelcro.insight.track("Modal Displayed", {
-      name: "address"
+      name: "address",
     });
-    // getCountryList();
-    // getStateList();
 
     // document.addEventListener("keydown", submitAddress);
 
@@ -55,30 +52,6 @@ const AddressCreateContainer = ({
       //   document.removeEventListener("keydown", submitAddress);
     };
   }, []);
-
-  const getCountryList = () => {
-    window.Pelcro.geolocation.getCountryList(setCountries);
-  };
-
-  const setCountries = (error, tmp) => {
-    console.log("setCountries -> error, tmp", error, tmp);
-    if (error) {
-      showError(error.message, "pelcro-error-address");
-    } else if (tmp)
-      dispatch({ type: SET_COUNTRIES, payload: sortCountries(tmp.countries) });
-  };
-
-  const getStateList = () => {
-    window.Pelcro.geolocation.getStateList(setStates);
-  };
-
-  const setStates = (error, tmp) => {
-    if (error) {
-      showError(error.message, "pelcro-error-address");
-    } else if (tmp) {
-      dispatch({ type: SET_COUNTRIES, payload: tmp });
-    }
-  };
 
   const submitAddress = (
     {
@@ -92,7 +65,7 @@ const AddressCreateContainer = ({
       city,
       state,
       country,
-      postalCode
+      postalCode,
     },
     dispatch
   ) => {
@@ -108,7 +81,7 @@ const AddressCreateContainer = ({
         city: city,
         state: state,
         country: country,
-        postal_code: postalCode
+        postal_code: postalCode,
       },
       (err, res) => {
         if (err) {
@@ -127,7 +100,7 @@ const AddressCreateContainer = ({
             {
               auth_token: window.Pelcro.user.read().auth_token,
               gift_code: giftCode,
-              address_id: addressId
+              address_id: addressId,
             },
             (err, res) => {
               dispatch({ type: DISABLE_SUBMIT, payload: false });
@@ -171,7 +144,7 @@ const AddressCreateContainer = ({
       case SET_TEXT_FIELD:
         return Update({
           ...state,
-          ...action.payload
+          ...action.payload,
         });
 
       case HANDLE_SUBMIT:
