@@ -12,6 +12,7 @@ import {
   SET_FIRST_NAME,
   SET_LAST_NAME,
   SET_TEXT_FIELD,
+  SET_STATE,
 } from "../../utils/action-types";
 import { getErrorMessages } from "../common/Helpers";
 import { showError } from "../../utils/showing-error";
@@ -124,6 +125,10 @@ const AddressCreateContainer = ({
     switch (action.type) {
       case SET_COUNTRY:
         return Update({ ...state, country: action.payload });
+
+      case SET_STATE:
+        return Update({ ...state, state: action.payload });
+
       case DISABLE_SUBMIT:
         return Update({ ...state, DISABLE_SUBMIT: action.payload });
 

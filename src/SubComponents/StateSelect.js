@@ -26,7 +26,6 @@ export function StateSelect({
   };
 
   const setStates = (error, tmp) => {
-    console.log("createStateItems -> states", tmp);
     if (error) {
       showError(error.message, "pelcro-error-address");
     } else if (tmp) {
@@ -36,37 +35,37 @@ export function StateSelect({
 
   const createStateItems = () => {
     const items = [];
-    for (const stateItem in states) {
-      if (states[stateItem].selected_country === country) {
-        if (Array.isArray(states[stateItem].states)) {
-          for (const state in states[stateItem].states) {
-            const tmp = states[stateItem].states[state];
-            items.push(
-              <option key={tmp.code} value={tmp.code}>
-                {tmp.name}
-              </option>
-            );
-          }
-          return items;
-        } else {
-          for (const key in states[stateItem].states) {
-            items.push(
-              <option key={key} value={key}>
-                {states[stateItem].states[key]}
-              </option>
-            );
-          }
-          return items;
+    console.log("createStateItems -> stateItem", states);
+    if (states.selected_country === country) {
+      if (Array.isArray(states.states)) {
+        for (const state in states.states) {
+          const tmp = states.states[state];
+          items.push(
+            <option key={tmp.code} value={tmp.code}>
+              {tmp.name}
+            </option>
+          );
         }
+        return items;
+      } else {
+        for (const key in states.states) {
+          items.push(
+            <option key={key} value={key}>
+              {states.states[key]}
+            </option>
+          );
+        }
+        return items;
       }
     }
   };
 
   const onStateChange = (e) => {
     dispatch({ type: SET_STATE, payload: e.target.value });
+    console.log("onStateChange -> e.target.value", e.target.value);
   };
 
-  if (states && states.states && states.states.length) {
+  if (states.states && states.selected_country === country) {
     return (
       <select
         value={state}
