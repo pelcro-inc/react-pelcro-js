@@ -23,35 +23,34 @@ export function CountrySelect({
   };
 
   const setCountries = (error, tmp) => {
-    console.log("setCountries -> error, tmp", error, tmp);
     if (error) {
       showError(error.message, "pelcro-error-address");
-    } else if (tmp)
+    } else if (tmp) {
       dispatch({ type: SET_COUNTRIES, payload: sortCountries(tmp.countries) });
-  };
-
-  useEffect(() => {
-    getCountryList();
-  }, []);
-
-  const createCountryItems = () => {
-    if (countries && countries.length) {
-      const items = [];
-
-      countries.forEach(([abbr, country]) =>
-        items.push(
-          <option key={abbr} value={abbr}>
-            {country}
-          </option>
-        )
-      );
-
-      return items;
     }
   };
 
-  const onCountryChange = (e) =>
+  useEffect(() => {
+    if (!countries.length) {
+      getCountryList();
+    }
+  }, []);
+
+  const createCountryItems = () => {
+    if (countries.length) {
+      console.log("createCountryItems -> countries", countries);
+
+      return countries.map(([abbr, country]) => (
+        <option key={abbr} value={abbr}>
+          {country}
+        </option>
+      ));
+    }
+  };
+
+  const onCountryChange = (e) => {
     dispatch({ type: SET_COUNTRY, payload: e.target.value });
+  };
 
   return (
     <React.Fragment>

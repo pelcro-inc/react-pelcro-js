@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { SET_STATE, SET_COUNTRIES } from "../utils/action-types";
+import { SET_STATE, SET_STATES } from "../utils/action-types";
 import { showError } from "../utils/showing-error";
 
 export function StateSelect({
@@ -19,23 +19,23 @@ export function StateSelect({
 
   useEffect(() => {
     getStateList();
-  }, []);
+  }, [country]);
 
   const getStateList = () => {
     window.Pelcro.geolocation.getStateList(setStates);
   };
 
   const setStates = (error, tmp) => {
+    console.log("createStateItems -> states", tmp);
     if (error) {
       showError(error.message, "pelcro-error-address");
     } else if (tmp) {
-      dispatch({ type: SET_COUNTRIES, payload: tmp });
+      dispatch({ type: SET_STATES, payload: tmp });
     }
   };
 
   const createStateItems = () => {
     const items = [];
-
     for (const stateItem in states) {
       if (states[stateItem].selected_country === country) {
         if (Array.isArray(states[stateItem].states)) {
@@ -62,10 +62,11 @@ export function StateSelect({
     }
   };
 
-  const onStateChange = (e) =>
+  const onStateChange = (e) => {
     dispatch({ type: SET_STATE, payload: e.target.value });
+  };
 
-  if (countries && countries.length && countries.includes(country)) {
+  if (states && states.states && states.states.length) {
     return (
       <select
         value={state}

@@ -55,8 +55,6 @@ const AddressCreateContainer = ({
 
   const submitAddress = (
     {
-      email,
-      password,
       type,
       firstName,
       lastName,
