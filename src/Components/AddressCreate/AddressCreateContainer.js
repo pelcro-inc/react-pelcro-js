@@ -18,7 +18,6 @@ import { getErrorMessages } from "../common/Helpers";
 import { showError } from "../../utils/showing-error";
 
 const initialState = {
-  type: "shipping",
   disableSubmit: false,
   firstName: "",
   lastName: "",
@@ -37,6 +36,7 @@ const AddressCreateContainer = ({
   style,
   className,
   setView,
+  type = "shipping",
   giftCode = false,
   product = null,
   onSuccess = () => {},
@@ -55,17 +55,7 @@ const AddressCreateContainer = ({
   }, []);
 
   const submitAddress = (
-    {
-      type,
-      firstName,
-      lastName,
-      line1,
-      line2,
-      city,
-      state,
-      country,
-      postalCode,
-    },
+    { firstName, lastName, line1, line2, city, state, country, postalCode },
     dispatch
   ) => {
     dispatch({ type: DISABLE_SUBMIT, payload: true });
