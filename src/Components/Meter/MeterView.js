@@ -1,10 +1,13 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-export const MeterView = props => {
+export const MeterView = (props) => {
   const { t } = useTranslation("meter");
 
-  const plan = props.plan || window.Pelcro.paywall.getProduct().plans[0];
+  const plan =
+    props.plan ||
+    (window.Pelcro.paywall.getProduct() &&
+      window.Pelcro.paywall.getProduct().plans[0]);
   const product = props.product || window.Pelcro.paywall.getProduct();
   const visitsLeft = window.Pelcro.paywall.freeVisitsLeft();
   const site = window.Pelcro.site.read();

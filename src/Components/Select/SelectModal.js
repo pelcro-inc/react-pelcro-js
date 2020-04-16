@@ -286,11 +286,14 @@ export class SelectModal extends Component {
                   <div className="pelcro-prefix-title-block">
                     <h4>
                       {(this.product && this.product.paywall.select_title) ||
-                        window.Pelcro.product.list()[0].paywall.select_title}
+                        (window.Pelcro.product.list()[0] &&
+                          window.Pelcro.product.list()[0].paywall.select_title)}
                     </h4>
                     <p>
                       {(this.product && this.product.paywall.select_subtitle) ||
-                        window.Pelcro.product.list()[0].paywall.select_subtitle}
+                        (window.Pelcro.product.list()[0] &&
+                          window.Pelcro.product.list()[0].paywall
+                            .select_subtitle)}
                     </p>
                   </div>
 
@@ -357,11 +360,14 @@ export class SelectModal extends Component {
                   <div className="pelcro-prefix-title-block">
                     <h4>
                       {(this.product && this.product.paywall.select_title) ||
-                        window.Pelcro.product.list()[0].paywall.select_title}
+                        (window.Pelcro.product.list()[0] &&
+                          window.Pelcro.product.list()[0].paywall.select_title)}
                     </h4>
                     <p>
                       {(this.product && this.product.paywall.select_subtitle) ||
-                        window.Pelcro.product.list()[0].paywall.select_subtitle}
+                        (window.Pelcro.product.list()[0] &&
+                          window.Pelcro.product.list()[0].paywall
+                            .select_subtitle)}
                     </p>
                   </div>
 

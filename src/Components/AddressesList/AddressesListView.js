@@ -2,16 +2,13 @@ import React, { useContext } from "react";
 import { AddressesListContainer, store } from "./AddressesListContainer";
 import { SET_ADDRESS_ID } from "../../utils/action-types";
 
-export const AddressesListView = props => {
+export const AddressesListView = (props) => {
   const { dispatch } = useContext(store);
   const { addresses } = window.Pelcro.user.read();
 
-  const displayAddressEdit = e => {
+  const displayAddressEdit = (e) => {
     const selectedAddress = e.target.dataset.key;
-    return dispatch({
-      type: SET_ADDRESS_ID,
-      payload: selectedAddress
-    });
+    props.getAddressId(selectedAddress);
   };
 
   if (!addresses) {
@@ -30,7 +27,7 @@ export const AddressesListView = props => {
 
   return (
     <AddressesListContainer setView={props.setView}>
-      {addresses.map(address => (
+      {addresses.map((address) => (
         <div key={"dashboard-address-" + address.id}>
           <span className="pelcro-prefix-dashboard-value">
             {address.line1} {address.line2}, {address.city}, {address.state},{" "}

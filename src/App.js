@@ -20,7 +20,7 @@ import {
   authenticatedButtons,
   unauthenticatedButtons,
   UserUpdateModal,
-  AddressCreateModal
+  AddressCreateModal,
 } from "./components";
 
 // refactor this then integrate it with the main UI ASAP.
@@ -50,7 +50,8 @@ class App extends Component {
       isAuthenticated: window.Pelcro.user.isAuthenticated(), // controls menu button displaying
       isGift: false,
       order: null,
-      showUpdateUserView: false
+      showUpdateUserView: false,
+      addressId: null,
     };
 
     this.initUI = this.initUI.bind(this);
@@ -75,7 +76,7 @@ class App extends Component {
     initButtons(this);
   }
 
-  removeHTMLButton = buttonClass => {
+  removeHTMLButton = (buttonClass) => {
     const elements = document.getElementsByClassName(buttonClass);
     while (elements.length > 0) {
       elements[0].parentNode.removeChild(elements[0]);
@@ -149,7 +150,7 @@ class App extends Component {
     }, 500);
   };
 
-  setView = view => {
+  setView = (view) => {
     console.log("App -> view", view);
 
     this.setState({ view: view });
@@ -205,7 +206,7 @@ class App extends Component {
     ReactGA.event({
       category: "ACTIONS",
       action: "Logged out",
-      nonInteraction: true
+      nonInteraction: true,
     });
 
     this.resetView();
@@ -230,19 +231,15 @@ class App extends Component {
     this.setState({ product, plan, isGift });
   };
 
-  setAddress = addressId => {
-    this.setState({ addressId });
-  };
-
-  setSubscriptionIdToRenew = subscriptionIdToRenew => {
+  setSubscriptionIdToRenew = (subscriptionIdToRenew) => {
     this.setState({ subscriptionIdToRenew });
   };
 
-  setGiftRecipient = giftRecipient => {
+  setGiftRecipient = (giftRecipient) => {
     this.setState({ giftRecipient });
   };
 
-  setGiftCode = giftCode => {
+  setGiftCode = (giftCode) => {
     this.setState({ giftCode });
   };
 
@@ -261,18 +258,18 @@ class App extends Component {
       );
   };
 
-  setProductsForCart = products => {
+  setProductsForCart = (products) => {
     this.setState({ products: products });
   };
 
-  setOrder = items => {
+  setOrder = (items) => {
     const { order } = this.state;
     order.currency = window.Pelcro.site.read().default_currency;
     order.items = items;
     this.setState({ order: order });
   };
 
-  setProduct = e => {
+  setProduct = (e) => {
     const products = window.Pelcro.product.list();
     for (const product of products) {
       if (+product.id === +e.target.dataset.productId) {
@@ -285,13 +282,13 @@ class App extends Component {
     this.setView("select");
   };
 
-  setGift = e => {
+  setGift = (e) => {
     if (e.target.dataset.isGift === "true") {
       this.setState({ isGift: true });
     }
     this.setView("select");
   };
-  setProductAndPlanByButton = e => {
+  setProductAndPlanByButton = (e) => {
     let product = {};
     let plan = {};
     const products = window.Pelcro.product.list();
@@ -520,6 +517,10 @@ class App extends Component {
               setView={this.setView}
               setProductAndPlan={this.setProductAndPlan}
               ReactGA={ReactGA}
+              getAddressId={(addressId) => {
+                this.setState({ addressId });
+                this.setView("address-edit");
+              }}
             />
           )}
           {/* 

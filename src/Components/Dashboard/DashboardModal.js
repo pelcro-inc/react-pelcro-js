@@ -94,7 +94,10 @@ export const DashboardModal = (props) => {
                   Addresses
                 </span>
                 <span className="col-8">
-                  <AddressesListView setView={props.setView} />
+                  <AddressesListView
+                    setView={props.setView}
+                    getAddressId={props.getAddressId}
+                  />
                 </span>
               </div>
 
