@@ -1,9 +1,9 @@
 import React from "react";
 import {
-  CardNumberElement,
-  CardExpiryElement,
-  CardCVCElement
-} from "react-stripe-elements";
+  PelcroCardNumber,
+  PelcroCardExpiry,
+  PelcroCardCVC,
+} from "../../components";
 import { useTranslation } from "react-i18next";
 import { DiscountedPrice } from "./DiscountedPrice";
 import styles from "../UpdatePaymentMethod/styles.module.scss";
@@ -26,7 +26,7 @@ export function CheckoutFormView({
   giftRecipient,
   plan,
   product,
-  setView
+  setView,
 }) {
   // componentDidUpdate(prevProps) {
   //   if (prevProps.coupon !== this.props.coupon)
@@ -58,7 +58,7 @@ export function CheckoutFormView({
         <div className="pelcro-prefix-row">
           <div className="col-md-12">
             <label className="pelcro-prefix-label">{t("labels.card")} *</label>
-            <CardNumberElement />
+            <PelcroCardNumber />
             <img
               alt="credit_cards"
               className={`${styles["pelcro-prefix-payment-icons"]} pelcro-prefix-payment-icons`}
@@ -68,12 +68,12 @@ export function CheckoutFormView({
 
           <div className="col-md-6">
             <label className="pelcro-prefix-label">{t("labels.date")} *</label>
-            <CardExpiryElement />
+            <PelcroCardExpiry />
           </div>
 
           <div className="col-md-6">
             <label className="pelcro-prefix-label">{t("labels.CVC")} *</label>
-            <CardCVCElement />
+            <PelcroCardCVC />
           </div>
 
           <div className="col-md-12">

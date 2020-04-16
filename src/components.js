@@ -60,6 +60,9 @@ import { AddressCreateCountrySelect } from "./Components/AddressCreate/AddressCr
 import { AddressCreateStateSelect } from "./Components/AddressCreate/AddressCreateStateSelect";
 import { AlertSuccess } from "./Components/Alerts/AlertSuccess";
 import { AlertDanger } from "./Components/Alerts/AlertDanger";
+import { PelcroCardCVC } from "./SubComponents/PelcroCardCVC";
+import { PelcroCardExpiry } from "./SubComponents/PelcroCardExpiry";
+import { PelcroCardNumber } from "./SubComponents/PelcroCardNumber";
 
 import {
   init as initButtons,
@@ -69,6 +72,9 @@ import {
 
 export {
   AddressCreateContainer,
+  PelcroCardNumber,
+  PelcroCardExpiry,
+  PelcroCardCVC,
   AddressCreateView,
   AlertDanger,
   AddressCreateStateSelect,
