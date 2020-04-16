@@ -104,8 +104,7 @@ const AddressCreateContainer = ({
           );
         } else {
           dispatch({ type: DISABLE_SUBMIT, payload: false });
-          if (!product) setView("checkout");
-          else setView("payment");
+          onSuccess();
         }
       }
     );
