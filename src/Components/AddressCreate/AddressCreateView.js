@@ -1,15 +1,15 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import ErrMessage from "../common/ErrMessage";
-import { AddressFirstName } from "./AddressFirstName";
-import { AddressLastName } from "./AddressLastName";
-import { AddressTextInput } from "./AddressTextInput";
+import { AddressFirstName } from "./AddressCreateFirstName";
+import { AddressCreateLastName } from "./AddressCreateLastName";
+import { AddressCreateTextInput } from "./AddressCreateTextInput";
 import { AddressCreateSubmit } from "./AddressCreateSubmit";
 import { AddressCreateContainer } from "./AddressCreateContainer";
-import { AddressCountrySelect } from "./AddressCountrySelect";
-import { AddressStateSelect } from "./AddressStateSelect";
+import { AddressCreateCountrySelect } from "./AddressCreateCountrySelect";
+import { AddressCreateStateSelect } from "./AddressCreateStateSelect";
 
-export const AddressCreateView = props => {
+export const AddressCreateView = (props) => {
   const { t } = useTranslation("address");
   return (
     <AddressCreateContainer {...props}>
@@ -42,7 +42,7 @@ export const AddressCreateView = props => {
             >
               {t("labels.lastName")} *
             </label>
-            <AddressLastName
+            <AddressCreateLastName
               className="pelcro-prefix-input pelcro-prefix-form-control"
               autoComplete="last-name"
               id="pelcro-input-last_name"
@@ -55,14 +55,14 @@ export const AddressCreateView = props => {
             <label className="pelcro-prefix-label" htmlFor="pelcro-input-line1">
               {t("labels.address")} *
             </label>
-            <AddressTextInput
+            <AddressCreateTextInput
               fieldName="line1"
               className="pelcro-prefix-input pelcro-prefix-form-control"
               autoComplete="street-address"
               id="pelcro-input-line1"
               type="text"
               placeholder={t("labels.address")}
-            ></AddressTextInput>
+            />
           </div>
         </div>
         <div className="pelcro-prefix-row">
@@ -73,27 +73,27 @@ export const AddressCreateView = props => {
             >
               {t("labels.code")} *
             </label>
-            <AddressTextInput
+            <AddressCreateTextInput
               fieldName="postalCode"
               className="pelcro-prefix-input pelcro-prefix-form-control"
               autoComplete="postal-code"
               id="pelcro-input-postal_code"
               type="text"
               placeholder={t("labels.code")}
-            ></AddressTextInput>
+            />
           </div>
           <div className="col-md-6">
             <label className="pelcro-prefix-label" htmlFor="pelcro-input-city">
               {t("labels.city")} *
             </label>
-            <AddressTextInput
+            <AddressCreateTextInput
               fieldName="city"
               className="pelcro-prefix-input pelcro-prefix-form-control"
               autoComplete="address-level2"
               id="pelcro-input-city"
               type="text"
               placeholder={t("labels.city")}
-            ></AddressTextInput>
+            />
           </div>
         </div>
         <div className="pelcro-prefix-row">
@@ -104,7 +104,7 @@ export const AddressCreateView = props => {
             >
               {t("labels.country")} *
             </label>
-            <AddressCountrySelect
+            <AddressCreateCountrySelect
               className="pelcro-prefix-select pelcro-prefix-form-control"
               id="pelcro-input-country"
             />
@@ -116,7 +116,7 @@ export const AddressCreateView = props => {
             >
               {t("labels.region")} *
             </label>
-            <AddressStateSelect className="pelcro-prefix-select pelcro-prefix-form-control" />
+            <AddressCreateStateSelect className="pelcro-prefix-select pelcro-prefix-form-control" />
           </div>
         </div>
         <small className="pelcro-prefix-footnote pelcro-prefix-form-text">
