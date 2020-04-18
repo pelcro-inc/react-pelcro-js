@@ -7,7 +7,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "index.js",
-    libraryTarget: "umd"
+    libraryTarget: "commonjs2",
   },
   module: {
     rules: [
@@ -16,8 +16,8 @@ module.exports = {
         loader: "babel-loader",
         exclude: /(node_modules)/,
         options: {
-          presets: ["@babel/preset-react", "@babel/preset-env"]
-        }
+          presets: ["@babel/preset-react", "@babel/preset-env"],
+        },
       },
       // {
       //   test: /\.scss$/,
@@ -33,29 +33,29 @@ module.exports = {
           {
             loader: "css-loader",
             options: {
-              modules: true
-            }
+              modules: true,
+            },
           },
           "cssimportant-loader",
           {
             loader: "postcss-loader",
             options: {
-              plugins: () => [require("autoprefixer")]
-            }
+              plugins: () => [require("autoprefixer")],
+            },
           },
           {
             loader: "sass-loader",
             options: {
-              modules: true
-            }
-          }
-        ]
+              modules: true,
+            },
+          },
+        ],
       },
       {
         test: /\.css$/i,
-        use: ["style-loader", "css-loader", "cssimportant-loader"]
-      }
-    ]
+        use: ["style-loader", "css-loader", "cssimportant-loader"],
+      },
+    ],
   },
   plugins: [
     // htmlWebpackPlugin,
@@ -64,27 +64,27 @@ module.exports = {
       algorithm: "gzip",
       test: /\.js$|\.css$|\.html$/,
       threshold: 10240,
-      minRatio: 0.7
+      minRatio: 0.7,
     }),
     new BrotliPlugin({
       asset: "[path].br[query]",
       test: /\.js$|\.css$|\.html$/,
       threshold: 10240,
-      minRatio: 0.7
-    })
+      minRatio: 0.7,
+    }),
   ],
   resolve: {
-    extensions: [".js", ".jsx"]
+    extensions: [".js", ".jsx"],
   },
   node: {
-    fs: "empty"
+    fs: "empty",
   },
   performance: {
     maxEntrypointSize: 400000,
-    maxAssetSize: 650000
+    maxAssetSize: 650000,
   },
   externals: "react",
   optimization: {
-    minimize: false
-  }
+    minimize: false,
+  },
 };

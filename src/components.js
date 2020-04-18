@@ -1,140 +1,71 @@
 import "./i18n";
 import "./scss/index.scss";
-import { LoginContainer } from "./Components/Login/LoginContainer";
-import { Email } from "./SubComponents/Email";
-import { Password } from "./SubComponents/Password";
-import { ConfirmPassword } from "./SubComponents/ConfirmPassword";
-import { Logout } from "./SubComponents/Logout";
-import { LoginButton } from "./Components/Login/LoginButton";
-import { LoginEmail } from "./Components/Login/LoginEmail";
-import { LoginPassword } from "./Components/Login/LoginPassword";
-import { LoginView } from "./Components/Login/LoginView";
-import { RegisterContainer } from "./Components/Register/RegisterContainer";
-import { RegisterView } from "./Components/Register/RegisterView";
-import { RegisterEmail } from "./Components/Register/RegisterEmail";
-import { RegisterPassword } from "./Components/Register/RegisterPassword";
-import { RegisterButton } from "./Components/Register/RegisterButton";
-import { PelcroContainer } from "./Components/PelcroContainer";
-import { DashboardModal } from "./Components/Dashboard/DashboardModal";
-import { LoginModal } from "./Components/Login/LoginModal";
-import { RegisterModal } from "./Components/Register/RegisterModal";
-import { SelectModal } from "./Components/Select/SelectModal";
-import { UpdatePaymentMethodModal } from "./Components/UpdatePaymentMethod/UpdatePaymentMethodModal";
-import { UpdatePaymentMethodView } from "./Components/UpdatePaymentMethod/UpdatePaymentMethodView";
-import { PaymentSuccessModal } from "./Components/PaymentSuccess/PaymentSuccessModal";
-import { PaymentSuccessView } from "./Components/PaymentSuccess/PaymentSuccessView";
-import { NewsLetter } from "./Components/NewsLetter/NewsLetter";
-import { MeterModal } from "./Components/Meter/MeterModal";
-import { MeterView } from "./Components/Meter/MeterView";
-import { DashboardMenu } from "./Components/Dashboard/DashboardMenu";
-import { CheckoutFormContainer } from "./Components/CheckoutForm/CheckoutFormContainer";
-import { CheckoutFormView } from "./Components/CheckoutForm/CheckoutFormView";
-import { ApplyCouponButton } from "./Components/CheckoutForm/ApplyCouponButton";
-import { SubmitCheckoutForm } from "./Components/CheckoutForm/SubmitCheckoutForm";
-import { CreatePaymentModal } from "./Components/CreatePayment/CreatePaymentModal";
-import { CreatePaymentView } from "./Components/CreatePayment/CreatePaymentView";
-import { CouponCode } from "./Components/CheckoutForm/CouponCode";
-import { DiscountedPrice } from "./Components/CheckoutForm/DiscountedPrice";
-import { UserUpdateEmail } from "./Components/UserUpdate/UserUpdateEmail";
-import { UserUpdateButton } from "./Components/UserUpdate/UserUpdateButton";
-import { UserUpdateContainer } from "./Components/UserUpdate/UserUpdateContainer";
-import { UserUpdateView } from "./Components/UserUpdate/UserUpdateView";
-import { UserUpdateModal } from "./Components/UserUpdate/UserUpdateModal";
-import { UserUpdateFirstName } from "./Components/UserUpdate/UserUpdateFirstName";
-import { UserUpdateLastName } from "./Components/UserUpdate/UserUpdateLastName";
-import { UserUpdatePhone } from "./Components/UserUpdate/UserUpdatePhone";
-import { UserUpdateTextInput } from "./Components/UserUpdate/UserUpdateTextInput";
-import { SubscriptionActionButton } from "./Components/Subscriptions/SubscriptionActionButton";
-import { PlanName } from "./Components/Subscriptions/PlanName";
-import { ShipmentsRemaining } from "./Components/Subscriptions/ShipmentsRemaining";
-import { SubscriptionsListView } from "./Components/Subscriptions/SubscriptionsListView";
-import { SubscriptionStatus } from "./Components/Subscriptions/SubscriptionStatus";
-import { AddressCreateContainer } from "./Components/AddressCreate/AddressCreateContainer";
-import { AddressCreateModal } from "./Components/AddressCreate/AddressCreateModal";
-import { AddressCreateSubmit } from "./Components/AddressCreate/AddressCreateSubmit";
-import { AddressCreateFirstName } from "./Components/AddressCreate/AddressCreateFirstName";
-import { AddressCreateLastName } from "./Components/AddressCreate/AddressCreateLastName";
-import { AddressCreateView } from "./Components/AddressCreate/AddressCreateView";
-import { AddressCreateTextInput } from "./Components/AddressCreate/AddressCreateTextInput";
-import { AddressCreateCountrySelect } from "./Components/AddressCreate/AddressCreateCountrySelect";
-import { AddressCreateStateSelect } from "./Components/AddressCreate/AddressCreateStateSelect";
-import { AlertSuccess } from "./Components/Alerts/AlertSuccess";
-import { AlertDanger } from "./Components/Alerts/AlertDanger";
-import { PelcroCardCVC } from "./SubComponents/PelcroCardCVC";
-import { PelcroCardExpiry } from "./SubComponents/PelcroCardExpiry";
-import { PelcroCardNumber } from "./SubComponents/PelcroCardNumber";
+export { LoginContainer } from "./Components/Login/LoginContainer";
+export { Email } from "./SubComponents/Email";
+export { Password } from "./SubComponents/Password";
+export { ConfirmPassword } from "./SubComponents/ConfirmPassword";
+export { Logout } from "./SubComponents/Logout";
+export { LoginButton } from "./Components/Login/LoginButton";
+export { LoginEmail } from "./Components/Login/LoginEmail";
+export { LoginPassword } from "./Components/Login/LoginPassword";
+export { LoginView } from "./Components/Login/LoginView";
+export { RegisterContainer } from "./Components/Register/RegisterContainer";
+export { RegisterView } from "./Components/Register/RegisterView";
+export { RegisterEmail } from "./Components/Register/RegisterEmail";
+export { RegisterPassword } from "./Components/Register/RegisterPassword";
+export { RegisterButton } from "./Components/Register/RegisterButton";
+export { PelcroContainer } from "./Components/PelcroContainer";
+export { DashboardModal } from "./Components/Dashboard/DashboardModal";
+export { LoginModal } from "./Components/Login/LoginModal";
+export { RegisterModal } from "./Components/Register/RegisterModal";
+export { SelectModal } from "./Components/Select/SelectModal";
+export { UpdatePaymentMethodModal } from "./Components/UpdatePaymentMethod/UpdatePaymentMethodModal";
+export { UpdatePaymentMethodView } from "./Components/UpdatePaymentMethod/UpdatePaymentMethodView";
+export { PaymentSuccessModal } from "./Components/PaymentSuccess/PaymentSuccessModal";
+export { PaymentSuccessView } from "./Components/PaymentSuccess/PaymentSuccessView";
+export { NewsLetter } from "./Components/NewsLetter/NewsLetter";
+export { MeterModal } from "./Components/Meter/MeterModal";
+export { MeterView } from "./Components/Meter/MeterView";
+export { DashboardMenu } from "./Components/Dashboard/DashboardMenu";
+export { CheckoutFormContainer } from "./Components/CheckoutForm/CheckoutFormContainer";
+export { CheckoutFormView } from "./Components/CheckoutForm/CheckoutFormView";
+export { ApplyCouponButton } from "./Components/CheckoutForm/ApplyCouponButton";
+export { SubmitCheckoutForm } from "./Components/CheckoutForm/SubmitCheckoutForm";
+export { CreatePaymentModal } from "./Components/CreatePayment/CreatePaymentModal";
+export { CreatePaymentView } from "./Components/CreatePayment/CreatePaymentView";
+export { CouponCode } from "./Components/CheckoutForm/CouponCode";
+export { DiscountedPrice } from "./Components/CheckoutForm/DiscountedPrice";
+export { UserUpdateEmail } from "./Components/UserUpdate/UserUpdateEmail";
+export { UserUpdateButton } from "./Components/UserUpdate/UserUpdateButton";
+export { UserUpdateContainer } from "./Components/UserUpdate/UserUpdateContainer";
+export { UserUpdateView } from "./Components/UserUpdate/UserUpdateView";
+export { UserUpdateModal } from "./Components/UserUpdate/UserUpdateModal";
+export { UserUpdateFirstName } from "./Components/UserUpdate/UserUpdateFirstName";
+export { UserUpdateLastName } from "./Components/UserUpdate/UserUpdateLastName";
+export { UserUpdatePhone } from "./Components/UserUpdate/UserUpdatePhone";
+export { UserUpdateTextInput } from "./Components/UserUpdate/UserUpdateTextInput";
+export { SubscriptionActionButton } from "./Components/Subscriptions/SubscriptionActionButton";
+export { PlanName } from "./Components/Subscriptions/PlanName";
+export { ShipmentsRemaining } from "./Components/Subscriptions/ShipmentsRemaining";
+export { SubscriptionsListView } from "./Components/Subscriptions/SubscriptionsListView";
+export { SubscriptionStatus } from "./Components/Subscriptions/SubscriptionStatus";
+export { AddressCreateContainer } from "./Components/AddressCreate/AddressCreateContainer";
+export { AddressCreateModal } from "./Components/AddressCreate/AddressCreateModal";
+export { AddressCreateSubmit } from "./Components/AddressCreate/AddressCreateSubmit";
+export { AddressCreateFirstName } from "./Components/AddressCreate/AddressCreateFirstName";
+export { AddressCreateLastName } from "./Components/AddressCreate/AddressCreateLastName";
+export { AddressCreateView } from "./Components/AddressCreate/AddressCreateView";
+export { AddressCreateTextInput } from "./Components/AddressCreate/AddressCreateTextInput";
+export { AddressCreateCountrySelect } from "./Components/AddressCreate/AddressCreateCountrySelect";
+export { AddressCreateStateSelect } from "./Components/AddressCreate/AddressCreateStateSelect";
+export { AlertSuccess } from "./Components/Alerts/AlertSuccess";
+export { AlertDanger } from "./Components/Alerts/AlertDanger";
+export { PelcroCardCVC } from "./SubComponents/PelcroCardCVC";
+export { PelcroCardExpiry } from "./SubComponents/PelcroCardExpiry";
+export { PelcroCardNumber } from "./SubComponents/PelcroCardNumber";
 
-import {
+export {
   init as initButtons,
   authenticatedButtons,
   unauthenticatedButtons,
 } from "./Components/common/Buttons";
-
-export {
-  AddressCreateContainer,
-  PelcroCardNumber,
-  PelcroCardExpiry,
-  PelcroCardCVC,
-  AddressCreateView,
-  AlertDanger,
-  AddressCreateStateSelect,
-  AddressCreateCountrySelect,
-  AlertSuccess,
-  AddressCreateTextInput,
-  AddressCreateModal,
-  AddressCreateSubmit,
-  AddressCreateFirstName,
-  AddressCreateLastName,
-  SubscriptionActionButton,
-  PlanName,
-  ShipmentsRemaining,
-  SubscriptionsListView,
-  SubscriptionStatus,
-  UserUpdateEmail,
-  UserUpdateTextInput,
-  UserUpdateModal,
-  UserUpdateButton,
-  UserUpdateContainer,
-  UserUpdateView,
-  UserUpdateFirstName,
-  UserUpdateLastName,
-  UserUpdatePhone,
-  CheckoutFormContainer,
-  CheckoutFormView,
-  ApplyCouponButton,
-  SubmitCheckoutForm,
-  LoginContainer,
-  PaymentSuccessView,
-  PaymentSuccessModal,
-  DiscountedPrice,
-  CouponCode,
-  Email,
-  Password,
-  ConfirmPassword,
-  LoginButton,
-  LoginEmail,
-  LoginPassword,
-  LoginView,
-  RegisterContainer,
-  RegisterView,
-  RegisterButton,
-  RegisterEmail,
-  RegisterPassword,
-  PelcroContainer,
-  DashboardModal,
-  Logout,
-  RegisterModal,
-  LoginModal,
-  SelectModal,
-  UpdatePaymentMethodModal,
-  UpdatePaymentMethodView,
-  NewsLetter,
-  MeterView,
-  MeterModal,
-  DashboardMenu,
-  initButtons,
-  authenticatedButtons,
-  unauthenticatedButtons,
-  CreatePaymentModal,
-  CreatePaymentView,
-};
