@@ -3,7 +3,8 @@
   "description": "Pelcro's React UI Elements",
   "version": "0.1.38",
   "private": false,
-  "main": "dist/index.js",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.esm.js",
   "files": [
     "dist"
   ],
@@ -13,8 +14,8 @@
     "prod": "webpack --config webpack.config.prod --mode production",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "prepare": "yarn run prod",
-    "deploy": "yarn publish"
+    "generateFiles": "rollup -c",
+    "deploy": "NODE_ENV=production yarn generateFiles && yarn publish"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -33,6 +34,8 @@
     "@babel/preset-env": "^7.9.0",
     "@babel/preset-react": "^7.9.4",
     "@purtuga/esm-webpack-plugin": "^1.2.1",
+    "@rollup/plugin-commonjs": "^11.1.0",
+    "@rollup/plugin-json": "^4.0.3",
     "babel-core": "^7.0.0-bridge.0",
     "babel-esm-plugin": "^0.8.0",
     "babel-loader": "^8.1.0",
@@ -45,7 +48,14 @@
     "eslint-plugin-react": "^7.18.0",
     "html-webpack-inline-source-plugin": "0.0.10",
     "html-webpack-plugin": "^3.2.0",
+    "postcss-modules": "^2.0.0",
     "remove-files-webpack-plugin": "^1.4.0",
+    "rollup": "^2.6.1",
+    "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-delete": "^1.2.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-postcss": "^2.8.1",
+    "rollup-plugin-terser": "^5.3.0",
     "travis-ci-cloudfront-invalidation": "^1.1.0",
     "webpack-cli": "^3.2.3"
   },

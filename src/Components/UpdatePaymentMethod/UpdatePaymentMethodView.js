@@ -5,7 +5,6 @@ import ErrMessage from "../common/ErrMessage";
 import AlertSuccess from "../common/AlertSuccess";
 
 import { CheckoutFormView } from "../CheckoutForm/CheckoutFormView";
-import styles from "./styles.module.scss";
 
 export function UpdatePaymentMethodView(props) {
   const [t] = useTranslation("paymentCreate");
@@ -20,9 +19,7 @@ export function UpdatePaymentMethodView(props) {
       <ErrMessage name="payment-create" />
       <AlertSuccess name="payment-create" />
 
-      <div
-        className={`${styles["pelcro-prefix-payment-block"]} pelcro-prefix-payment-block`}
-      >
+      <div className={`pelcro-prefix-payment-block`}>
         <div className="pelcro-prefix-alert pelcro-prefix-alert-success">
           <div className="pelcro-prefix-payment-message">
             <span>

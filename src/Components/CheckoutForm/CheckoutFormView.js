@@ -6,7 +6,6 @@ import {
 } from "../../components";
 import { useTranslation } from "react-i18next";
 import { DiscountedPrice } from "./DiscountedPrice";
-import styles from "../UpdatePaymentMethod/styles.module.scss";
 import { CheckoutFormContainer } from "./CheckoutFormContainer";
 import { SubmitCheckoutForm } from "./SubmitCheckoutForm";
 import { CouponCode } from "./CouponCode";
@@ -61,7 +60,7 @@ export function CheckoutFormView({
             <PelcroCardNumber />
             <img
               alt="credit_cards"
-              className={`${styles["pelcro-prefix-payment-icons"]} pelcro-prefix-payment-icons`}
+              className={`pelcro-prefix-payment-icons`}
               src="https://js.pelcro.com/ui/plugin/main/images/credit_cards.png"
             />
           </div>
