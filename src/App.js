@@ -22,10 +22,11 @@ import {
   UserUpdateModal,
   AddressCreateModal,
   PelcroContainer,
+  AddressUpdateModal,
 } from "./components";
 
 // refactor this then integrate it with the main UI ASAP.
-import AddressEdit from "./Components/modals/address/Edit";
+// import AddressEdit from "./Components/modals/address/Edit";
 
 // to be refactored
 import Gift from "./Components/modals/Gift";
@@ -466,11 +467,10 @@ class App extends Component {
             )}
 
             {this.state.view === "address-edit" && (
-              <AddressEdit
+              <AddressUpdateModal
                 addressId={this.state.addressId}
-                resetView={this.resetView}
                 setView={this.setView}
-                ReactGA={ReactGA}
+                onSuccess={() => this.setView("")}
               />
             )}
 

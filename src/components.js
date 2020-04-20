@@ -62,6 +62,15 @@ export { AlertDanger } from "./Components/Alerts/AlertDanger";
 export { PelcroCardCVC } from "./SubComponents/PelcroCardCVC";
 export { PelcroCardExpiry } from "./SubComponents/PelcroCardExpiry";
 export { PelcroCardNumber } from "./SubComponents/PelcroCardNumber";
+export { AddressUpdateContainer } from "./Components/AddressUpdate/AddressUpdateContainer";
+export { AddressUpdateCountrySelect } from "./Components/AddressUpdate/AddressUpdateCountrySelect";
+export { AddressUpdateFirstName } from "./Components/AddressUpdate/AddressUpdateFirstName";
+export { AddressUpdateLastName } from "./Components/AddressUpdate/AddressUpdateLastName";
+export { AddressUpdateModal } from "./Components/AddressUpdate/AddressUpdateModal";
+export { AddressUpdateStateSelect } from "./Components/AddressUpdate/AddressUpdateStateSelect";
+export { AddressUpdateSubmit } from "./Components/AddressUpdate/AddressUpdateSubmit";
+export { AddressUpdateTextInput } from "./Components/AddressUpdate/AddressUpdateTextInput";
+export { AddressUpdateView } from "./Components/AddressUpdate/AddressUpdateView";
 
 export {
   init as initButtons,
