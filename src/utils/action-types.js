@@ -35,3 +35,4 @@ export const SET_COUNTRIES = "SET_COUNTRIES";
 export const SET_STATES = "SET_STATES";
 export const SET_STATE = "SET_STATE";
 export const HANDLE_SUBMIT = "HANDLE_SUBMIT";
+export const SET_USER_LOADED = "SET_USER_LOADED";

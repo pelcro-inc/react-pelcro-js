@@ -1,7 +1,8 @@
-import React, { createContext, useReducer } from "react";
+import React, { createContext, useReducer, useEffect } from "react";
 import {
   SET_PRODUCT_AND_PLAN,
   SET_SUBSCRIPTION_TO_RENEW,
+  SET_USER_LOADED,
 } from "../utils/action-types";
 
 const initialState = {
@@ -10,6 +11,7 @@ const initialState = {
   plan: null,
   isGift: false,
   subscriptionIdToRenew: null,
+  pelcroUserLoaded: false,
 };
 
 const store = createContext(initialState);
@@ -24,10 +26,19 @@ const PelcroContainer = ({ children }) => {
       case SET_SUBSCRIPTION_TO_RENEW:
         return { ...state, subscriptionIdToRenew: action.payload };
 
+      case SET_USER_LOADED:
+        return { ...state, pelcroUserLoaded: action.payload };
+
       default:
         throw new Error();
     }
   }, initialState);
+
+  useEffect(() => {
+    document.addEventListener("PelcroUserLoaded", function(e) {
+      dispatch({ type: SET_USER_LOADED, payload: true });
+    });
+  }, []);
 
   return (
     <Provider value={{ state, dispatch }}>

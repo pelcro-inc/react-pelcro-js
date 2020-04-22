@@ -459,12 +459,10 @@ class App extends Component {
               Update User
             </button>
 
-            {this.state.showUpdateUserView && (
-              <UserUpdateView
-                setView={this.setView}
-                onSuccess={() => console.log("User Updated")}
-              />
-            )}
+            <UserUpdateView
+              setView={this.setView}
+              onSuccess={() => console.log("User Updated")}
+            />
 
             {this.state.view === "address-edit" && (
               <AddressUpdateModal

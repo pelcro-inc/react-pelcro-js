@@ -1,8 +1,9 @@
-import React, { createContext } from "react";
+import React, { createContext, useContext } from "react";
 import { useTranslation } from "react-i18next";
+import { store as pelcroStore } from "../PelcroContainer";
 import useReducerWithSideEffects, {
   UpdateWithSideEffect,
-  Update
+  Update,
 } from "use-reducer-with-side-effects";
 import {
   SET_FIRST_NAME,
@@ -10,7 +11,7 @@ import {
   SET_PHONE,
   SET_TEXT_FIELD,
   HANDLE_USER_UPDATE,
-  DISABLE_USER_UPDATE_BUTTON
+  DISABLE_USER_UPDATE_BUTTON,
 } from "../../utils/action-types";
 import { getErrorMessages } from "../common/Helpers";
 import { showError, showSuccess } from "../../utils/showing-error";
@@ -21,7 +22,7 @@ const initialState = {
   lastName: window.Pelcro.user.read().last_name,
   phone: window.Pelcro.user.read().phone,
   buttonDisabled: false,
-  textFields: {}
+  textFields: {},
 };
 const store = createContext(initialState);
 const { Provider } = store;
@@ -30,8 +31,11 @@ const UserUpdateContainer = ({
   style,
   className,
   onSuccess = () => {},
-  children
+  children,
 }) => {
+  const {
+    state: { pelcroUserLoaded },
+  } = useContext(pelcroStore);
   const { t } = useTranslation("userEdit");
   const handleUpdateUser = (
     { firstName, lastName, phone, textFields },
@@ -43,7 +47,7 @@ const UserUpdateContainer = ({
         first_name: firstName,
         last_name: lastName,
         phone: phone,
-        metadata: { updated: "updated", ...textFields }
+        metadata: { updated: "updated", ...textFields },
       },
       (err, res) => {
         dispatch({ type: DISABLE_USER_UPDATE_BUTTON, payload: false });
@@ -63,25 +67,25 @@ const UserUpdateContainer = ({
       case SET_TEXT_FIELD:
         return Update({
           ...state,
-          textFields: { ...state.textFields, ...action.payload }
+          textFields: { ...state.textFields, ...action.payload },
         });
 
       case SET_FIRST_NAME:
         return Update({
           ...state,
-          firstName: action.payload
+          firstName: action.payload,
         });
 
       case SET_LAST_NAME:
         return Update({
           ...state,
-          lastName: action.payload
+          lastName: action.payload,
         });
 
       case SET_PHONE:
         return Update({
           ...state,
-          phone: action.payload
+          phone: action.payload,
         });
 
       case DISABLE_USER_UPDATE_BUTTON:
@@ -97,17 +101,21 @@ const UserUpdateContainer = ({
     }
   }, initialState);
 
-  return (
-    <div style={{ ...style }} className={className}>
-      <Provider value={{ state, dispatch }}>
-        {children.length
-          ? children.map((child, i) =>
-              React.cloneElement(child, { store, key: i })
-            )
-          : React.cloneElement(children, { store })}
-      </Provider>
-    </div>
-  );
+  if (pelcroUserLoaded) {
+    return (
+      <div style={{ ...style }} className={className}>
+        <Provider value={{ state, dispatch }}>
+          {children.length
+            ? children.map((child, i) =>
+                React.cloneElement(child, { store, key: i })
+              )
+            : React.cloneElement(children, { store })}
+        </Provider>
+      </div>
+    );
+  }
+
+  return null;
 };
 
 export { UserUpdateContainer, store };
