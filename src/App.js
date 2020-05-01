@@ -309,6 +309,7 @@ class App extends Component {
     this.setState({ product, plan });
     this.setView("select");
   };
+
   render() {
     return (
       <PelcroContainer>
@@ -400,12 +401,8 @@ class App extends Component {
             {this.state.view === "address" && (
               <AddressCreateModal
                 giftCode={this.state.giftCode}
-                plan={this.state.plan}
-                product={this.state.product}
-                resetView={this.resetView}
                 setView={this.setView}
-                ReactGA={ReactGA}
-              ></AddressCreateModal>
+              />
             )}
             {this.state.view === "newsletter" && (
               <NewsLetter

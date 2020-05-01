@@ -1,4 +1,4 @@
-export const init = app => {
+export const init = (app) => {
   const pelcroLoginButtonsByClass = document.getElementsByClassName(
     "pelcro-login-button"
   );
@@ -58,6 +58,40 @@ export const init = app => {
     }
   }
 
+  const pelcroSaveButtonsByClass = document.getElementsByClassName(
+    "pelcro-save-button"
+  );
+
+  const saveToMetadataByButton = (e) => {
+    const key = e.target.dataset.key;
+    const value = e.target.dataset.value;
+    window.Pelcro.user.saveToMetaData(
+      {
+        key,
+        value,
+        auth_token: window.Pelcro.user.read().auth_token,
+      },
+      (err, resp) => {
+        console.log("resp", resp);
+      }
+    );
+  };
+
+  if (pelcroSaveButtonsByClass.length !== 0) {
+    for (let j = 0; j < pelcroSaveButtonsByClass.length; j++) {
+      if (
+        pelcroSaveButtonsByClass[j].dataset &&
+        "key" in pelcroSaveButtonsByClass[j].dataset &&
+        "value" in pelcroSaveButtonsByClass[j].dataset
+      ) {
+        pelcroSaveButtonsByClass[j].addEventListener(
+          "click",
+          saveToMetadataByButton
+        );
+      }
+    }
+  }
+
   const pelcroRegisterButtonsByClass = document.getElementsByClassName(
     "pelcro-register-button"
   );
@@ -82,7 +116,7 @@ export const init = app => {
   }
 };
 
-export const authenticatedButtons = id => {
+export const authenticatedButtons = (id) => {
   const pelcroLoginByClass = document.getElementsByClassName(
     "pelcro-login-button"
   );
@@ -94,7 +128,7 @@ export const authenticatedButtons = id => {
   }
 };
 
-export const unauthenticatedButtons = id => {
+export const unauthenticatedButtons = (id) => {
   const pelcroLoginByClass = document.getElementsByClassName(
     "pelcro-login-button"
   );
