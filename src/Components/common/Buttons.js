@@ -63,8 +63,8 @@ export const init = (app) => {
   );
 
   const saveToMetadataByButton = (e) => {
-    const key = e.target.dataset.key;
-    const value = e.target.dataset.value;
+    const key = e.currentTarget.dataset.key;
+    const value = e.currentTarget.dataset.value;
     window.Pelcro.user.saveToMetaData(
       {
         key,
