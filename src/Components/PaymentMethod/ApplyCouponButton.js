@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Button } from "../../SubComponents/Button";
-import { store } from "./PaymentMethodViewContainer";
+import { store } from "./PaymentMethodContainer";
 import { APPLY_COUPON_CODE } from "../../utils/action-types";
 
 export const ApplyCouponButton = ({ children }) => {

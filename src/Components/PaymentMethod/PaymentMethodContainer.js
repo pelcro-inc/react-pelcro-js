@@ -40,7 +40,7 @@ const displaySuccess = (message) => {
   showSuccess(message, "pelcro-success-payment-create");
 };
 
-const PaymentMethodViewContainerWithoutStripe = ({
+const PaymentMethodContainerWithoutStripe = ({
   style,
   className,
   children,
@@ -263,9 +263,9 @@ const PaymentMethodViewContainerWithoutStripe = ({
   );
 };
 
-const UnwrappedForm = injectStripe(PaymentMethodViewContainerWithoutStripe);
+const UnwrappedForm = injectStripe(PaymentMethodContainerWithoutStripe);
 
-const PaymentMethodViewContainer = (props) => {
+const PaymentMethodContainer = (props) => {
   if (window.Stripe) {
     return (
       <StripeProvider
@@ -281,4 +281,4 @@ const PaymentMethodViewContainer = (props) => {
   return null;
 };
 
-export { PaymentMethodViewContainer, store };
+export { PaymentMethodContainer, store };

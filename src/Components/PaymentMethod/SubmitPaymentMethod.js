@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useMemo } from "react";
 import Submit from "../common/Submit";
-import { store } from "./PaymentMethodViewContainer";
+import { store } from "./PaymentMethodContainer";
 import { SUBMIT_PAYMENT } from "../../utils/action-types";
 
 export const SubmitPaymentMethod = ({ name, style, className }) => {

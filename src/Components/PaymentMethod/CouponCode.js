@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { ApplyCouponButton } from "./ApplyCouponButton";
-import { store } from "./PaymentMethodViewContainer";
+import { store } from "./PaymentMethodContainer";
 import {
   SHOW_COUPON_FIELD,
   UPDATE_COUPON_CODE,

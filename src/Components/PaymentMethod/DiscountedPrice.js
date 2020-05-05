@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { store } from "./PaymentMethodViewContainer";
+import { store } from "./PaymentMethodContainer";
 
 export const DiscountedPrice = () => {
   const {

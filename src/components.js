@@ -26,7 +26,7 @@ export { NewsLetter } from "./Components/NewsLetter/NewsLetter";
 export { MeterModal } from "./Components/Meter/MeterModal";
 export { MeterView } from "./Components/Meter/MeterView";
 export { DashboardMenu } from "./Components/Dashboard/DashboardMenu";
-export { PaymentMethodViewContainer } from "./Components/PaymentMethod/PaymentMethodViewContainer";
+export { PaymentMethodContainer } from "./Components/PaymentMethod/PaymentMethodContainer";
 export { PaymentMethodView } from "./Components/PaymentMethod/PaymentMethodView";
 export { ApplyCouponButton } from "./Components/PaymentMethod/ApplyCouponButton";
 export { SubmitPaymentMethod } from "./Components/PaymentMethod/SubmitPaymentMethod";

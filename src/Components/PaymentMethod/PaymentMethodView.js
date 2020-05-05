@@ -6,7 +6,7 @@ import {
 } from "../../components";
 import { useTranslation } from "react-i18next";
 import { DiscountedPrice } from "./DiscountedPrice";
-import { PaymentMethodViewContainer } from "./PaymentMethodViewContainer";
+import { PaymentMethodContainer } from "./PaymentMethodContainer";
 import { SubmitPaymentMethod } from "./SubmitPaymentMethod";
 import { CouponCode } from "./CouponCode";
 
@@ -42,7 +42,7 @@ export function PaymentMethodView({
   const { t } = useTranslation("checkoutForm");
 
   return (
-    <PaymentMethodViewContainer
+    <PaymentMethodContainer
       type={type}
       successMessage={successMessage}
       ReactGA={ReactGA}
@@ -87,6 +87,6 @@ export function PaymentMethodView({
           </div>
         </div>
       </div>
-    </PaymentMethodViewContainer>
+    </PaymentMethodContainer>
   );
 }
