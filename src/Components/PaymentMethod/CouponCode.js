@@ -1,16 +1,16 @@
 import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { ApplyCouponButton } from "./ApplyCouponButton";
-import { store } from "./CheckoutFormContainer";
+import { store } from "./PaymentMethodViewContainer";
 import {
   SHOW_COUPON_FIELD,
-  UPDATE_COUPON_CODE
+  UPDATE_COUPON_CODE,
 } from "../../utils/action-types";
 
 export const CouponCode = ({ showCoupon }) => {
   const {
     dispatch,
-    state: { enableCouponField, couponCode, disableCouponButton }
+    state: { enableCouponField, couponCode, disableCouponButton },
   } = useContext(store);
 
   const { t } = useTranslation("checkoutForm");
@@ -18,7 +18,7 @@ export const CouponCode = ({ showCoupon }) => {
   const showCouponField = () =>
     dispatch({ type: SHOW_COUPON_FIELD, payload: true });
 
-  const onCouponCodeChange = e =>
+  const onCouponCodeChange = (e) =>
     dispatch({ type: UPDATE_COUPON_CODE, payload: e.target.value });
 
   if (showCoupon) {

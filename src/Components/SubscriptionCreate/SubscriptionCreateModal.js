@@ -4,9 +4,9 @@ import { useTranslation } from "react-i18next";
 import Header from "../common/Header";
 import Authorship from "../common/Authorship";
 
-import { CreatePaymentView } from "./CreatePaymentView";
+import { SubscriptionCreateView } from "./SubscriptionCreateView";
 
-export function CreatePaymentModal({
+export function SubscriptionCreateModal({
   resetView,
   logout,
   plan,
@@ -14,7 +14,7 @@ export function CreatePaymentModal({
   giftRecipient,
   product,
   setView,
-  isGift
+  isGift,
 }) {
   const { t } = useTranslation("messages");
   // showCouponField = () => {
@@ -48,7 +48,7 @@ export function CreatePaymentModal({
             ></Header>
 
             <div className="pelcro-prefix-modal-body">
-              <CreatePaymentView
+              <SubscriptionCreateView
                 plan={plan}
                 subscriptionIdToRenew={subscriptionIdToRenew}
                 giftRecipient={giftRecipient}

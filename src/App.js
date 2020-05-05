@@ -7,11 +7,11 @@ import {
   LoginModal,
   RegisterModal,
   DashboardModal,
-  UpdatePaymentMethodModal,
-  UpdatePaymentMethodView,
-  CreatePaymentModal,
+  SubscriptionUpdateView,
+  SubscriptionUpdateModal,
+  SubscriptionCreateModal,
   UserUpdateView,
-  CreatePaymentView,
+  SubscriptionCreateView,
   NewsLetter,
   PaymentSuccessModal,
   MeterModal,
@@ -39,7 +39,7 @@ import UserEdit from "./Components/modals/user/Edit";
 
 import Shop from "./Components/shop/Shop";
 import Cart from "./Components/shop/Cart";
-import Checkout from "./Components/shop/Checkout";
+import OrderCreate from "./Components/shop/OrderCreate";
 import Confirm from "./Components/shop/Confirm";
 
 // import { CustomUpdatePayment } from "./demos/CustomUpdatePayment";
@@ -376,7 +376,7 @@ class App extends Component {
               />
             )}
             {this.state.view === "payment" && (
-              <CreatePaymentModal
+              <SubscriptionCreateModal
                 subscriptionIdToRenew={this.state.subscriptionIdToRenew}
                 giftRecipient={this.state.giftRecipient}
                 isGift={this.state.isGift}
@@ -439,7 +439,7 @@ class App extends Component {
             )}
 
             {this.state.view === "source-create" && (
-              <UpdatePaymentMethodView
+              <SubscriptionUpdateModal
                 resetView={this.resetView}
                 setView={this.setView}
               />
@@ -482,7 +482,7 @@ class App extends Component {
               />
             )}
             {this.state.view === "checkout" && (
-              <Checkout
+              <OrderCreate
                 products={this.state.products}
                 setProductsForCart={this.setProductsForCart}
                 order={this.state.order}

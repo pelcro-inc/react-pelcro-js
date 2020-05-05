@@ -6,11 +6,11 @@ import {
 } from "../../components";
 import { useTranslation } from "react-i18next";
 import { DiscountedPrice } from "./DiscountedPrice";
-import { CheckoutFormContainer } from "./CheckoutFormContainer";
-import { SubmitCheckoutForm } from "./SubmitCheckoutForm";
+import { PaymentMethodViewContainer } from "./PaymentMethodViewContainer";
+import { SubmitPaymentMethod } from "./SubmitPaymentMethod";
 import { CouponCode } from "./CouponCode";
 
-export function CheckoutFormView({
+export function PaymentMethodView({
   enableCouponField,
   showCouponField,
   couponCode,
@@ -42,7 +42,7 @@ export function CheckoutFormView({
   const { t } = useTranslation("checkoutForm");
 
   return (
-    <CheckoutFormContainer
+    <PaymentMethodViewContainer
       type={type}
       successMessage={successMessage}
       ReactGA={ReactGA}
@@ -83,10 +83,10 @@ export function CheckoutFormView({
             <CouponCode showCoupon={showCoupon} />
             <DiscountedPrice />
 
-            <SubmitCheckoutForm name={t("labels.submit")} />
+            <SubmitPaymentMethod name={t("labels.submit")} />
           </div>
         </div>
       </div>
-    </CheckoutFormContainer>
+    </PaymentMethodViewContainer>
   );
 }

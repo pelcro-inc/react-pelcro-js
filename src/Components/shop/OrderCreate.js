@@ -11,17 +11,17 @@ import { showError } from "../../utils/showing-error";
 import Header from "../common/Header";
 import Authorship from "../common/Authorship";
 
-import { CheckoutFormView } from "../CheckoutForm/CheckoutFormView";
+import { PaymentMethodView } from "../PaymentMethod/PaymentMethodView";
 import { getErrorMessages } from "../common/Helpers";
 
-class Checkout extends Component {
+class OrderCreate extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       disableSubmit: false,
       order: this.props.order,
-      products: this.props.products
+      products: this.props.products,
     };
 
     this.locale = localisation("payment").getLocaleData();
@@ -43,22 +43,22 @@ class Checkout extends Component {
 
   componentDidMount = () => {
     window.Pelcro.insight.track("Modal Displayed", {
-      name: "payment"
+      name: "payment",
     });
 
     this.setState({ couponCode: window.Pelcro.coupon.getFromUrl() });
   };
 
   // inserting error message into modal window
-  showError = message => {
+  showError = (message) => {
     showError(message, "pelcro-error-payment");
   };
 
-  setDisableSubmitState = state => {
+  setDisableSubmitState = (state) => {
     this.setState({ disableSubmit: state });
   };
 
-  subscribe = token => {
+  subscribe = (token) => {
     const { order } = this.props;
     order.email = this.user.email;
 
@@ -70,15 +70,15 @@ class Checkout extends Component {
         city: this.address.city,
         state: this.address.state,
         country: this.address.country,
-        postal_code: this.address.postal_code
-      }
+        postal_code: this.address.postal_code,
+      },
     };
 
     window.Pelcro.checkout.purchase(
       {
         order: order,
         source: token.id,
-        auth_token: window.Pelcro.user.read().auth_token
+        auth_token: window.Pelcro.user.read().auth_token,
       },
       (err, res) => {
         this.setState({ disableSubmit: false });
@@ -136,7 +136,7 @@ class Checkout extends Component {
                   </div>
 
                   <div className="pelcro-prefix-form">
-                    <CheckoutFormView
+                    <PaymentMethodView
                       callback={this.subscribe}
                       disableSubmit={this.state.disableSubmit}
                       showError={this.showError}
@@ -156,14 +156,14 @@ class Checkout extends Component {
   }
 }
 
-Checkout.propTypes = {
+OrderCreate.propTypes = {
   plan: PropTypes.object,
   product: PropTypes.object,
   giftRecipient: PropTypes.object,
   setView: PropTypes.func,
   resetView: PropTypes.func,
   logout: PropTypes.func,
-  subscriptionIdToRenew: PropTypes.number
+  subscriptionIdToRenew: PropTypes.number,
 };
 
-export default Checkout;
+export default OrderCreate;

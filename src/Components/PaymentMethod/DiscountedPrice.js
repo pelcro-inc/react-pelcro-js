@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
-import { store } from "./CheckoutFormContainer";
+import { store } from "./PaymentMethodViewContainer";
 
 export const DiscountedPrice = () => {
   const {
-    state: { percentOff }
+    state: { percentOff },
   } = useContext(store);
 
   if (percentOff) {

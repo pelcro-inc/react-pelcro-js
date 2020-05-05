@@ -1,16 +1,16 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { CheckoutFormView } from "../CheckoutForm/CheckoutFormView";
+import { PaymentMethodView } from "../PaymentMethod/PaymentMethodView";
 import ErrMessage from "../common/ErrMessage";
 import AlertSuccess from "../common/AlertSuccess";
 
-export const CreatePaymentView = ({
+export const SubscriptionCreateView = ({
   product,
   plan,
   setView,
   resetView,
   giftRecipient,
-  subscriptionIdToRenew
+  subscriptionIdToRenew,
 }) => {
   const { t } = useTranslation("messages");
   return (
@@ -44,7 +44,7 @@ export const CreatePaymentView = ({
           </div>
         </div>
         <div className="pelcro-prefix-form">
-          <CheckoutFormView
+          <PaymentMethodView
             type="createPayment"
             showCoupon={true}
             plan={plan}

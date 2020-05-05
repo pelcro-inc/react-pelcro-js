@@ -3,7 +3,7 @@ import { injectStripe, Elements, StripeProvider } from "react-stripe-elements";
 import { useTranslation } from "react-i18next";
 import useReducerWithSideEffects, {
   UpdateWithSideEffect,
-  Update
+  Update,
 } from "use-reducer-with-side-effects";
 
 import {
@@ -15,7 +15,7 @@ import {
   SET_PERCENT_OFF,
   SET_COUPON,
   UPDATE_COUPON_CODE,
-  SHOW_COUPON_FIELD
+  SHOW_COUPON_FIELD,
 } from "../../utils/action-types";
 import { getErrorMessages } from "../common/Helpers";
 import { showError, showSuccess, hideError } from "../../utils/showing-error";
@@ -26,21 +26,21 @@ const initialState = {
   couponCode: "",
   enableCouponField: false,
   percentOff: null,
-  coupon: null
+  coupon: null,
 };
 const store = createContext(initialState);
 const { Provider } = store;
 
-const displayError = message => {
+const displayError = (message) => {
   showError(message, "pelcro-error-payment-create");
 };
 
-const displaySuccess = message => {
+const displaySuccess = (message) => {
   console.log("will show success message: ", message);
   showSuccess(message, "pelcro-success-payment-create");
 };
 
-const CheckoutFormContainerWithoutStripe = ({
+const PaymentMethodViewContainerWithoutStripe = ({
   style,
   className,
   children,
@@ -52,20 +52,19 @@ const CheckoutFormContainerWithoutStripe = ({
   product,
   giftRecipient,
   couponCode,
-  setView
+  setView,
 }) => {
   const { t } = useTranslation("messages");
 
   useEffect(() => {
-    console.log("checkoutFormContainer got mounted");
     window.Pelcro.insight.track("Modal Displayed", {
-      name: "payment"
+      name: "payment",
     });
 
     if (window.Pelcro.coupon.getFromUrl()) {
       dispatch({
         type: UPDATE_COUPON_CODE,
-        payload: window.Pelcro.coupon.getFromUrl()
+        payload: window.Pelcro.coupon.getFromUrl(),
       });
     }
   }, []);
@@ -75,9 +74,9 @@ const CheckoutFormContainerWithoutStripe = ({
     window.Pelcro.source.create(
       {
         auth_token: window.Pelcro.user.read().auth_token,
-        token: token.id
+        token: token.id,
       },
-      err => {
+      (err) => {
         console.log("createPayment -> err", err);
         dispatch({ type: DISABLE_SUBMIT, payload: false });
         if (err) return displayError(getErrorMessages(err));
@@ -94,7 +93,7 @@ const CheckoutFormContainerWithoutStripe = ({
       {
         auth_token: window.Pelcro.user.read().auth_token,
         plan_id: plan.id,
-        coupon_code: state.couponCode
+        coupon_code: state.couponCode,
       },
       (err, res) => {
         dispatch({ type: DISABLE_COUPON_BUTTON, payload: false });
@@ -108,7 +107,7 @@ const CheckoutFormContainerWithoutStripe = ({
         }
         dispatch({
           type: SET_PERCENT_OFF,
-          payload: "Discounted price: $" + res.data.total
+          payload: "Discounted price: $" + res.data.total,
         });
 
         dispatch({ type: SET_COUPON, payload: res.data.coupon });
@@ -130,7 +129,7 @@ const CheckoutFormContainerWithoutStripe = ({
             ? window.Pelcro.user.read().addresses[
                 window.Pelcro.user.read().addresses.length - 1
               ].id
-            : null
+            : null,
         },
         (err, res) => {
           dispatch({ type: DISABLE_SUBMIT, payload: false });
@@ -161,7 +160,7 @@ const CheckoutFormContainerWithoutStripe = ({
             ? window.Pelcro.user.read().addresses[
                 window.Pelcro.user.read().addresses.length - 1
               ]
-            : null
+            : null,
         },
         (err, res) => {
           dispatch({ type: DISABLE_SUBMIT, payload: false });
@@ -264,9 +263,9 @@ const CheckoutFormContainerWithoutStripe = ({
   );
 };
 
-const UnwrappedForm = injectStripe(CheckoutFormContainerWithoutStripe);
+const UnwrappedForm = injectStripe(PaymentMethodViewContainerWithoutStripe);
 
-const CheckoutFormContainer = props => {
+const PaymentMethodViewContainer = (props) => {
   if (window.Stripe) {
     return (
       <StripeProvider
@@ -282,4 +281,4 @@ const CheckoutFormContainer = props => {
   return null;
 };
 
-export { CheckoutFormContainer, store };
+export { PaymentMethodViewContainer, store };

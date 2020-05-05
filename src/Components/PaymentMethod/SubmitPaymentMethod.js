@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useMemo } from "react";
 import Submit from "../common/Submit";
-import { store } from "./CheckoutFormContainer";
+import { store } from "./PaymentMethodViewContainer";
 import { SUBMIT_PAYMENT } from "../../utils/action-types";
 
-export const SubmitCheckoutForm = ({ name, style, className }) => {
+export const SubmitPaymentMethod = ({ name, style, className }) => {
   const {
     dispatch,
-    state: { disableSubmit }
+    state: { disableSubmit },
   } = useContext(store);
 
   useEffect(() => console.log("SubmitCheckoutForm mounted"), []);

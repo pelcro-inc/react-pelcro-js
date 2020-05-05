@@ -4,9 +4,9 @@ import { useTranslation } from "react-i18next";
 import ErrMessage from "../common/ErrMessage";
 import AlertSuccess from "../common/AlertSuccess";
 
-import { CheckoutFormView } from "../CheckoutForm/CheckoutFormView";
+import { PaymentMethodView } from "../PaymentMethod/PaymentMethodView";
 
-export function UpdatePaymentMethodView(props) {
+export function SubscriptionUpdateView(props) {
   const [t] = useTranslation("paymentCreate");
 
   return (
@@ -37,7 +37,7 @@ export function UpdatePaymentMethodView(props) {
         </div>
 
         <div className="pelcro-prefix-form">
-          <CheckoutFormView successMessage={t("success")} showCoupon={false} />
+          <PaymentMethodView successMessage={t("success")} showCoupon={false} />
         </div>
       </div>
     </React.Fragment>
