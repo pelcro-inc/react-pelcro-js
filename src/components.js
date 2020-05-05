@@ -73,6 +73,10 @@ export { AddressUpdateTextInput } from "./Components/AddressUpdate/AddressUpdate
 export { AddressUpdateView } from "./Components/AddressUpdate/AddressUpdateView";
 export { SubscriptionCreateContainer } from "./Components/SubscriptionCreate/SubscriptionCreateContainer";
 export { SubscriptionUpdateContainer } from "./Components/SubscriptionUpdate/SubscriptionUpdateContainer";
+export { PaymentCreateContainer } from "./Components/PaymentCreate/PaymentCreateContainer";
+export { PaymentCreateView } from "./Components/PaymentCreate/PaymentCreateView";
+export { PaymentUpdateContainer } from "./Components/PaymentUpdate/PaymentUpdateContainer";
+export { PaymentUpdateView } from "./Components/PaymentUpdate/PaymentUpdateView";
 
 export {
   init as initButtons,
