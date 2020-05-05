@@ -71,6 +71,8 @@ export { AddressUpdateStateSelect } from "./Components/AddressUpdate/AddressUpda
 export { AddressUpdateSubmit } from "./Components/AddressUpdate/AddressUpdateSubmit";
 export { AddressUpdateTextInput } from "./Components/AddressUpdate/AddressUpdateTextInput";
 export { AddressUpdateView } from "./Components/AddressUpdate/AddressUpdateView";
+export { SubscriptionCreateContainer } from "./Components/SubscriptionCreate/SubscriptionCreateContainer";
+export { SubscriptionUpdateContainer } from "./Components/SubscriptionUpdate/SubscriptionUpdateContainer";
 
 export {
   init as initButtons,
