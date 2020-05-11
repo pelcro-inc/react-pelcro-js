@@ -64,11 +64,26 @@ export const init = (app) => {
 
   const saveToMetadataByButton = (e) => {
     const key = e.currentTarget.dataset.key;
-    const value = e.currentTarget.dataset.value;
+    const value = e.currentTarget.dataset;
+    delete value.key;
+    console.log("saveToMetadataByButton -> value", value);
+    let newVal = "";
+    const pelcroUser = window.Pelcro.user.read();
+    if (pelcroUser.metadata && pelcroUser.metadata[`metadata_${key}`]) {
+      const oldValue = pelcroUser.metadata[`metadata_${key}`];
+      if (typeof oldValue === "object" && oldValue.length) {
+        newVal = [...oldValue, value];
+      } else {
+        newVal = [oldValue, value];
+      }
+    } else {
+      newVal = value;
+    }
+
     window.Pelcro.user.saveToMetaData(
       {
         key,
-        value,
+        value: newVal,
         auth_token: window.Pelcro.user.read().auth_token,
       },
       (err, resp) => {
@@ -81,8 +96,7 @@ export const init = (app) => {
     for (let j = 0; j < pelcroSaveButtonsByClass.length; j++) {
       if (
         pelcroSaveButtonsByClass[j].dataset &&
-        "key" in pelcroSaveButtonsByClass[j].dataset &&
-        "value" in pelcroSaveButtonsByClass[j].dataset
+        "key" in pelcroSaveButtonsByClass[j].dataset
       ) {
         pelcroSaveButtonsByClass[j].addEventListener(
           "click",

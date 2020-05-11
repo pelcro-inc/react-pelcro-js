@@ -11,12 +11,7 @@ import { SubmitPaymentMethod } from "./SubmitPaymentMethod";
 import { CouponCode } from "./CouponCode";
 
 export function PaymentMethodView({
-  enableCouponField,
-  showCouponField,
   couponCode,
-  onCouponCodeChange,
-  onApplyCouponCode,
-  disableCouponButton,
   successMessage,
   ReactGA,
   showCoupon,
@@ -27,18 +22,6 @@ export function PaymentMethodView({
   product,
   setView,
 }) {
-  // componentDidUpdate(prevProps) {
-  //   if (prevProps.coupon !== this.props.coupon)
-  //     if (
-  //       this.props.coupon.duration === "forever" &&
-  //       this.props.coupon.percent_off === 100
-  //     ) {
-  //       this.setState({ disableCouponButton: true });
-  //       this.props.setDisableSubmitState(true);
-  //       this.props.callback({});
-  //     }
-  // }
-
   const { t } = useTranslation("checkoutForm");
 
   return (
