@@ -1,3 +1,5 @@
+import cloneDeep from "lodash/cloneDeep";
+
 export const init = (app) => {
   const pelcroLoginButtonsByClass = document.getElementsByClassName(
     "pelcro-login-button"
@@ -64,9 +66,8 @@ export const init = (app) => {
 
   const saveToMetadataByButton = (e) => {
     const key = e.currentTarget.dataset.key;
-    const value = e.currentTarget.dataset;
+    const value = cloneDeep(e.currentTarget.dataset);
     delete value.key;
-    console.log("saveToMetadataByButton -> value", value);
     let newVal = "";
     const pelcroUser = window.Pelcro.user.read();
     if (pelcroUser.metadata && pelcroUser.metadata[`metadata_${key}`]) {
@@ -77,7 +78,7 @@ export const init = (app) => {
         newVal = [oldValue, value];
       }
     } else {
-      newVal = value;
+      newVal = [value];
     }
 
     window.Pelcro.user.saveToMetaData(
