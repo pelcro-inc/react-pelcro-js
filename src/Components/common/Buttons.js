@@ -1,5 +1,3 @@
-import cloneDeep from "lodash/cloneDeep";
-
 export const init = (app) => {
   const pelcroLoginButtonsByClass = document.getElementsByClassName(
     "pelcro-login-button"
@@ -66,7 +64,8 @@ export const init = (app) => {
 
   const saveToMetadataByButton = (e) => {
     const key = e.currentTarget.dataset.key;
-    const value = cloneDeep(e.currentTarget.dataset);
+    const value = JSON.parse(JSON.stringify(e.currentTarget.dataset));
+    console.log("saveToMetadataByButton -> value", value);
     delete value.key;
     let newVal = "";
     const pelcroUser = window.Pelcro.user.read();
