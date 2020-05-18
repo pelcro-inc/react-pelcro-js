@@ -402,6 +402,7 @@ class App extends Component {
               <AddressCreateModal
                 giftCode={this.state.giftCode}
                 setView={this.setView}
+                onFailure={(error) => console.log(error)}
               />
             )}
             {this.state.view === "newsletter" && (
