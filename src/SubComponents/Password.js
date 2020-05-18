@@ -1,6 +1,17 @@
-import React, { useContext, useState, useEffect, useCallback } from "react";
-import { SET_PASSWORD, SET_PASSWORD_ERROR } from "../utils/action-types";
+import React, {
+  useContext,
+  useState,
+  useEffect,
+  useCallback
+} from "react";
+import {
+  SET_PASSWORD,
+  SET_PASSWORD_ERROR
+} from "../utils/action-types";
 
+/**
+ *
+ */
 export function Password({
   placeholder,
   style,

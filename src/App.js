@@ -22,7 +22,7 @@ import {
   UserUpdateModal,
   AddressCreateModal,
   PelcroContainer,
-  AddressUpdateModal,
+  AddressUpdateModal
 } from "./components";
 
 // refactor this then integrate it with the main UI ASAP.
@@ -53,7 +53,7 @@ class App extends Component {
       isGift: false,
       order: null,
       showUpdateUserView: false,
-      addressId: null,
+      addressId: null
     };
 
     this.initUI = this.initUI.bind(this);
@@ -78,7 +78,7 @@ class App extends Component {
     initButtons(this);
   }
 
-  removeHTMLButton = (buttonClass) => {
+  removeHTMLButton = buttonClass => {
     const elements = document.getElementsByClassName(buttonClass);
     while (elements.length > 0) {
       elements[0].parentNode.removeChild(elements[0]);
@@ -152,7 +152,7 @@ class App extends Component {
     }, 500);
   };
 
-  setView = (view) => {
+  setView = view => {
     console.log("App -> view", view);
 
     this.setState({ view: view });
@@ -168,14 +168,17 @@ class App extends Component {
   };
 
   disableScroll = () => {
-    if (!document.body.classList.contains("pelcro-prefix-modal-open")) {
+    if (
+      !document.body.classList.contains("pelcro-prefix-modal-open")
+    ) {
       document.body.className += " pelcro-prefix-modal-open";
     }
   };
 
   resetView = () => {
     this.setState({ product: null, plan: null, isGift: false });
-    if (this.state.giftRecipient) this.setState({ giftRecipient: null });
+    if (this.state.giftRecipient)
+      this.setState({ giftRecipient: null });
     this.setView(null);
     this.enableScroll();
   };
@@ -208,7 +211,7 @@ class App extends Component {
     ReactGA.event({
       category: "ACTIONS",
       action: "Logged out",
-      nonInteraction: true,
+      nonInteraction: true
     });
 
     this.resetView();
@@ -226,22 +229,23 @@ class App extends Component {
   };
 
   displayDashboardView = () => {
-    if (window.Pelcro.paywall.displayCloseButton()) this.setView("dashboard");
+    if (window.Pelcro.paywall.displayCloseButton())
+      this.setView("dashboard");
   };
 
   setProductAndPlan = (product, plan, isGift) => {
     this.setState({ product, plan, isGift });
   };
 
-  setSubscriptionIdToRenew = (subscriptionIdToRenew) => {
+  setSubscriptionIdToRenew = subscriptionIdToRenew => {
     this.setState({ subscriptionIdToRenew });
   };
 
-  setGiftRecipient = (giftRecipient) => {
+  setGiftRecipient = giftRecipient => {
     this.setState({ giftRecipient });
   };
 
-  setGiftCode = (giftCode) => {
+  setGiftCode = giftCode => {
     this.setState({ giftCode });
   };
 
@@ -260,18 +264,18 @@ class App extends Component {
       );
   };
 
-  setProductsForCart = (products) => {
+  setProductsForCart = products => {
     this.setState({ products: products });
   };
 
-  setOrder = (items) => {
+  setOrder = items => {
     const { order } = this.state;
     order.currency = window.Pelcro.site.read().default_currency;
     order.items = items;
     this.setState({ order: order });
   };
 
-  setProduct = (e) => {
+  setProduct = e => {
     const products = window.Pelcro.product.list();
     for (const product of products) {
       if (+product.id === +e.target.dataset.productId) {
@@ -284,13 +288,13 @@ class App extends Component {
     this.setView("select");
   };
 
-  setGift = (e) => {
+  setGift = e => {
     if (e.target.dataset.isGift === "true") {
       this.setState({ isGift: true });
     }
     this.setView("select");
   };
-  setProductAndPlanByButton = (e) => {
+  setProductAndPlanByButton = e => {
     let product = {};
     let plan = {};
     const products = window.Pelcro.product.list();
@@ -316,7 +320,9 @@ class App extends Component {
         <div id="pelcro-app">
           <div id="list">
             {this.state.isAuthenticated && (
-              <DashboardMenu openDashboard={this.displayDashboardView} />
+              <DashboardMenu
+                openDashboard={this.displayDashboardView}
+              />
             )}
 
             {this.state.isAuthenticated && authenticatedButtons()}
@@ -377,7 +383,9 @@ class App extends Component {
             )}
             {this.state.view === "payment" && (
               <SubscriptionCreateModal
-                subscriptionIdToRenew={this.state.subscriptionIdToRenew}
+                subscriptionIdToRenew={
+                  this.state.subscriptionIdToRenew
+                }
                 giftRecipient={this.state.giftRecipient}
                 isGift={this.state.isGift}
                 plan={this.state.plan}
@@ -386,6 +394,7 @@ class App extends Component {
                 setView={this.setView}
                 logout={this.logout}
                 ReactGA={ReactGA}
+                onFailure={error => console.log(error)}
               />
             )}
             {this.state.view === "success" && (
@@ -402,7 +411,7 @@ class App extends Component {
               <AddressCreateModal
                 giftCode={this.state.giftCode}
                 setView={this.setView}
-                onFailure={(error) => console.log(error)}
+                onFailure={error => console.log(error)}
               />
             )}
             {this.state.view === "newsletter" && (
@@ -443,6 +452,7 @@ class App extends Component {
               <SubscriptionUpdateModal
                 resetView={this.resetView}
                 setView={this.setView}
+                onFailure={error => console.log(error)}
               />
             )}
 
@@ -450,6 +460,7 @@ class App extends Component {
               <UserUpdateModal
                 setView={this.setView}
                 onSuccess={() => console.log("User Updated")}
+                onFailure={error => console.log(error)}
               />
             )}
 
@@ -460,6 +471,7 @@ class App extends Component {
             <UserUpdateView
               setView={this.setView}
               onSuccess={() => console.log("User Updated")}
+              onFailure={error => console.log(error)}
             />
 
             {this.state.view === "address-edit" && (
@@ -467,6 +479,7 @@ class App extends Component {
                 addressId={this.state.addressId}
                 setView={this.setView}
                 onSuccess={() => this.setView("")}
+                onFailure={error => console.log(error)}
               />
             )}
 
@@ -509,13 +522,15 @@ class App extends Component {
             {this.state.view === "dashboard" && (
               <DashboardModal
                 setAddress={this.setAddress}
-                setSubscriptionIdToRenew={this.setSubscriptionIdToRenew}
+                setSubscriptionIdToRenew={
+                  this.setSubscriptionIdToRenew
+                }
                 resetView={this.resetView}
                 logout={this.logout}
                 setView={this.setView}
                 setProductAndPlan={this.setProductAndPlan}
                 ReactGA={ReactGA}
-                getAddressId={(addressId) => {
+                getAddressId={addressId => {
                   this.setState({ addressId });
                   this.setView("address-edit");
                 }}

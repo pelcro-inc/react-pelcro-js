@@ -1,21 +1,39 @@
-import React, { useContext, useState, useEffect, useCallback } from "react";
+import React, {
+  useContext,
+  useState,
+  useEffect,
+  useCallback
+} from "react";
 import {
   SET_CONFIRM_PASSWORD,
   SET_CONFIRM_PASSWORD_ERROR,
   CONFIRM_PASSWORD_USED
 } from "../utils/action-types";
 
-export function ConfirmPassword({ placeholder, style, className, id, store }) {
+/**
+ *
+ */
+export function ConfirmPassword({
+  placeholder,
+  style,
+  className,
+  id,
+  store
+}) {
   const {
     dispatch,
-    state: { confirmPassword: stateConfirmPassword, confirmPasswordError }
+    state: {
+      confirmPassword: stateConfirmPassword,
+      confirmPasswordError
+    }
   } = useContext(store);
   const [password, setPassword] = useState(stateConfirmPassword);
   const [finishedTyping, setFinishedTyping] = useState(false);
 
-  useEffect(() => dispatch({ type: CONFIRM_PASSWORD_USED, payload: true }), [
-    dispatch
-  ]);
+  useEffect(
+    () => dispatch({ type: CONFIRM_PASSWORD_USED, payload: true }),
+    [dispatch]
+  );
 
   const handleInputChange = useCallback(
     value => {
@@ -43,7 +61,9 @@ export function ConfirmPassword({ placeholder, style, className, id, store }) {
         type="password"
         id={id}
         style={{ ...style }}
-        className={confirmPasswordError ? "input-error " : "" + className}
+        className={
+          confirmPasswordError ? "input-error " : "" + className
+        }
         value={password}
         onChange={e => handleInputChange(e.target.value)}
         placeholder={placeholder || "Enter Your Password again"}

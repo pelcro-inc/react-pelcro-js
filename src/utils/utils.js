@@ -1,7 +1,8 @@
 export const formatDiscountedPrice = (planAmount, percentageOff) =>
   parseFloat(
     parseFloat(
-      (parseInt(planAmount) / 100) * (1 - parseInt(percentageOff) / 100)
+      (parseInt(planAmount) / 100) *
+        (1 - parseInt(percentageOff) / 100)
     )
       .toString()
       .match(/^-?\d+(?:\.\d{0,2})?/)[0]

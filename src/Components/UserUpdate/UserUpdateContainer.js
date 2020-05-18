@@ -31,6 +31,7 @@ const UserUpdateContainer = ({
   style,
   className,
   onSuccess = () => {},
+  onFailure = () => {},
   children,
 }) => {
   const {
@@ -53,6 +54,7 @@ const UserUpdateContainer = ({
         dispatch({ type: DISABLE_USER_UPDATE_BUTTON, payload: false });
 
         if (err) {
+          onFailure(err);
           return showError(getErrorMessages(err), "pelcro-error-user-edit");
         } else {
           showSuccess(t("messages.userUpdated"), "pelcro-success-user-edit");

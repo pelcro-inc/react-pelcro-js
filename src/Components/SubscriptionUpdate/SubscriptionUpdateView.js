@@ -37,7 +37,11 @@ export function SubscriptionUpdateView(props) {
         </div>
 
         <div className="pelcro-prefix-form">
-          <PaymentMethodView successMessage={t("success")} showCoupon={false} />
+          <PaymentMethodView
+            successMessage={t("success")}
+            showCoupon={false}
+            onFailure={props.onFailure}
+          />
         </div>
       </div>
     </React.Fragment>

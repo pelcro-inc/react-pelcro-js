@@ -21,6 +21,7 @@ export function PaymentMethodView({
   plan,
   product,
   setView,
+  onFailure
 }) {
   const { t } = useTranslation("checkoutForm");
 
@@ -35,6 +36,7 @@ export function PaymentMethodView({
       product={product}
       couponCode={couponCode}
       setView={setView}
+      onFailure={onFailure}
     >
       <div className="pelcro-prefix-form">
         <div className="pelcro-prefix-row">

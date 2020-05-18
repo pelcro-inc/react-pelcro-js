@@ -4,6 +4,9 @@ import { SET_COUNTRY, SET_COUNTRIES } from "../utils/action-types";
 import { sortCountries } from "../utils/utils";
 import { showError } from "../utils/showing-error";
 
+/**
+ *
+ */
 export function CountrySelect({
   placeholder,
   style,
@@ -14,7 +17,7 @@ export function CountrySelect({
 }) {
   const {
     dispatch,
-    state: { country, countries },
+    state: { country, countries }
   } = useContext(store);
   const { t } = useTranslation("address");
 
@@ -26,7 +29,10 @@ export function CountrySelect({
     if (error) {
       showError(error.message, "pelcro-error-address");
     } else if (tmp) {
-      dispatch({ type: SET_COUNTRIES, payload: sortCountries(tmp.countries) });
+      dispatch({
+        type: SET_COUNTRIES,
+        payload: sortCountries(tmp.countries)
+      });
     }
   };
 
@@ -38,8 +44,6 @@ export function CountrySelect({
 
   const createCountryItems = () => {
     if (countries.length) {
-      console.log("createCountryItems -> countries", countries);
-
       return countries.map(([abbr, country]) => (
         <option key={abbr} value={abbr}>
           {country}
@@ -48,7 +52,7 @@ export function CountrySelect({
     }
   };
 
-  const onCountryChange = (e) => {
+  const onCountryChange = e => {
     dispatch({ type: SET_COUNTRY, payload: e.target.value });
   };
 

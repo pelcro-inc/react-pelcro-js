@@ -11,6 +11,9 @@ import {
   AlertSuccess
 } from "../components";
 
+/**
+ *
+ */
 export function CustomUpdatePayment({ ReactGA }) {
   return (
     <div style={{ marginTop: 200, marginBottom: 200 }}>
@@ -27,7 +30,9 @@ export function CustomUpdatePayment({ ReactGA }) {
         <div className="pelcro-prefix-form">
           <div className="pelcro-prefix-row">
             <div className="col-md-6">
-              <label className="pelcro-prefix-label">Credit Card Type*</label>
+              <label className="pelcro-prefix-label">
+                Credit Card Type*
+              </label>
               <div>
                 <select>
                   <option>Select One</option>
@@ -36,17 +41,23 @@ export function CustomUpdatePayment({ ReactGA }) {
             </div>
 
             <div className="col-md-6">
-              <label className="pelcro-prefix-label">Credit Card Number*</label>
+              <label className="pelcro-prefix-label">
+                Credit Card Number*
+              </label>
               <CardNumberElement />
             </div>
 
             <div className="col-md-6">
-              <label className="pelcro-prefix-label">Expiration Date*</label>
+              <label className="pelcro-prefix-label">
+                Expiration Date*
+              </label>
               <CardExpiryElement />
             </div>
 
             <div className="col-md-6">
-              <label className="pelcro-prefix-label">Card Security Code*</label>
+              <label className="pelcro-prefix-label">
+                Card Security Code*
+              </label>
               <CardCVCElement />
             </div>
 

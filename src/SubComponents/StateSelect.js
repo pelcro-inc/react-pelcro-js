@@ -3,6 +3,9 @@ import { useTranslation } from "react-i18next";
 import { SET_STATE, SET_STATES } from "../utils/action-types";
 import { showError } from "../utils/showing-error";
 
+/**
+ *
+ */
 export function StateSelect({
   placeholder,
   style,
@@ -13,7 +16,7 @@ export function StateSelect({
 }) {
   const {
     dispatch,
-    state: { country, countries, state, states },
+    state: { country, state, states }
   } = useContext(store);
   const { t } = useTranslation("address");
 
@@ -35,7 +38,6 @@ export function StateSelect({
 
   const createStateItems = () => {
     const items = [];
-    console.log("createStateItems -> stateItem", states);
     if (states.selected_country === country) {
       if (Array.isArray(states.states)) {
         for (const state in states.states) {
@@ -60,9 +62,8 @@ export function StateSelect({
     }
   };
 
-  const onStateChange = (e) => {
+  const onStateChange = e => {
     dispatch({ type: SET_STATE, payload: e.target.value });
-    console.log("onStateChange -> e.target.value", e.target.value);
   };
 
   if (states.states && states.selected_country === country) {

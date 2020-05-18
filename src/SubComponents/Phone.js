@@ -1,6 +1,9 @@
 import React, { useContext, useState, useCallback } from "react";
 import { SET_PHONE } from "../utils/action-types";
 
+/**
+ *
+ */
 export function Phone({
   placeholder,
   style,

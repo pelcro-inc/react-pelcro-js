@@ -1,0 +1,55 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "google",
+    "prettier"
+  ],
+  "plugins": ["prettier", "jsdoc"],
+  "parser": "babel-eslint",
+  "rules": {
+    "prettier/prettier": ["error"],
+    "jsdoc/valid-types": "warn",
+    "jsdoc/require-jsdoc": "warn",
+    "require-jsdoc": "off",
+    "valid-jsdoc": "warn",
+    "guard-for-in": "off",
+    "camelcase": "warn",
+    "no-extend-native": "off",
+    "no-inner-declarations": "warn",
+    "no-invalid-this": "off",
+    "react/prop-types": "warn",
+    "prefer-destructuring": "warn",
+    "react/no-unescaped-entities": "warn"
+  },
+  "env": {
+    "browser": true,
+    "jest": true
+  },
+  "globals": {
+    "Pelcro": true,
+    "require": true,
+    "exports": true,
+    "process": true
+  },
+  "settings": {
+    "react": {
+      "pragma": "React", // Pragma to use, default to "React"
+      "version": "detect" // React version. "detect" automatically picks the version you have installed.
+      // You can also use `16.0`, `16.3`, etc, if you want to override the detected value.
+      // default to latest and warns if missing
+      // It will default to "detect" in the future
+    },
+    "propWrapperFunctions": [
+      // The names of any function used to wrap propTypes, e.g. `forbidExtraProps`. If this isn't set, any propTypes wrapped in a function will be skipped.
+      "forbidExtraProps",
+      {
+        "property": "freeze",
+        "object": "Object"
+      },
+      {
+        "property": "myFavoriteWrapper"
+      }
+    ]
+  }
+}

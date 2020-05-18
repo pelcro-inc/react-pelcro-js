@@ -15,6 +15,7 @@ export function SubscriptionCreateModal({
   product,
   setView,
   isGift,
+  onFailure
 }) {
   const { t } = useTranslation("messages");
   // showCouponField = () => {
@@ -56,6 +57,7 @@ export function SubscriptionCreateModal({
                 setView={setView}
                 resetView={resetView}
                 isGift={isGift}
+                onFailure={onFailure}
               />
             </div>
             <div className="pelcro-prefix-modal-footer">
@@ -70,7 +72,10 @@ export function SubscriptionCreateModal({
                 </a>
                 . {t("cancel")}
                 {" " + t("logout.logout")}{" "}
-                <button className="pelcro-prefix-link" onClick={logout}>
+                <button
+                  className="pelcro-prefix-link"
+                  onClick={logout}
+                >
                   {t("logout.here")}
                 </button>
               </small>

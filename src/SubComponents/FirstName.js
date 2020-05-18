@@ -1,6 +1,9 @@
 import React, { useContext } from "react";
 import { SET_FIRST_NAME } from "../utils/action-types";
 
+/**
+ *
+ */
 export function FirstName({
   placeholder,
   style,

@@ -31,7 +31,8 @@ export default {
     },
     "payment-create": {
       title: "Update your payment information",
-      subtitle: "Enter the fields below to update your credit card information",
+      subtitle:
+        "Enter the fields below to update your credit card information",
       required: "Required",
       success: "Your payment information has been updated",
       secure: "You're safe - PCI compliant 128 SSL by"
@@ -244,7 +245,8 @@ export default {
         actions: "Actions",
         expiresOn: "Expires on",
         renewsOn: "Renews on",
-        isSureToCancel: "Are you sure you want to cancel your subscription?"
+        isSureToCancel:
+          "Are you sure you want to cancel your subscription?"
       },
       messages: {
         yourDashboard: "Your Pelcro Dashboard"
@@ -304,7 +306,8 @@ export default {
         },
         product: {
           title: "Subscribe to a product",
-          subtitle: "Select one of the products below and click on next."
+          subtitle:
+            "Select one of the products below and click on next."
         },
         selectProduct: "Select a product",
         selectPlan: "Select a plan",
@@ -333,7 +336,8 @@ export default {
     userEdit: {
       labels: {
         title: "Want to update your profile?",
-        subtitle: "Enter your information below to update your profile",
+        subtitle:
+          "Enter your information below to update your profile",
         email: "Email",
         firstName: "First name",
         lastName: "Last name",
@@ -412,11 +416,13 @@ export default {
         "Entrez les champs ci-dessous pour mettre à jour les informations de votre carte de crédit",
       required: "Champs obligatoires",
       success: "Vos informations de paiement ont été mises à jour",
-      secure: "Vous êtes en sécurité - 128 SSL conforme à la norme PCI"
+      secure:
+        "Vous êtes en sécurité - 128 SSL conforme à la norme PCI"
     },
     register: {
       title: "Créer un compte",
-      subtitle: "Entrez votre courriel et votre mot de passe ci-dessous",
+      subtitle:
+        "Entrez votre courriel et votre mot de passe ci-dessous",
       labels: {
         signUpFacebook: "Inscrivez-vous avec Facebook",
         signUpGoogle: "Inscrivez-vous avec Google",
@@ -442,7 +448,8 @@ export default {
         preferDisable: {
           click: "Cliquez",
           here: "ici",
-          ifPrefer: "si vous préférez désactiver votre bloqueur de publicités."
+          ifPrefer:
+            "si vous préférez désactiver votre bloqueur de publicités."
         }
       },
       errors: {
@@ -451,7 +458,8 @@ export default {
       gift: {
         titles: {
           firstTitle: "Offrir cet abonnement",
-          secondTitle: "Entrez les informations du destinataire ci-dessous"
+          secondTitle:
+            "Entrez les informations du destinataire ci-dessous"
         },
         labels: {
           firstName: "Prénom",
@@ -503,7 +511,8 @@ export default {
       },
       messages: {
         loginTo: "Connectez-vous à votre compte",
-        welcome: "Bienvenue, connectez-vous avec votre compte existant.",
+        welcome:
+          "Bienvenue, connectez-vous avec votre compte existant.",
         dontHaveAccount: "Vous n'avez pas encore de compte ?",
         createAccount: "Créer un compte",
         forgotPassword: "Mot de passe oublié ?",
@@ -552,7 +561,8 @@ export default {
         }
       },
       messages: {
-        youAreSafe: "Vous êtes en sécurité - PCI conforme 128 SSL par",
+        youAreSafe:
+          "Vous êtes en sécurité - PCI conforme 128 SSL par",
         haveQuestion: "Des questions?",
         visitOurWebsite: {
           visitTo: "Visitez notre site Web pour",
@@ -721,7 +731,8 @@ export default {
         required: "Champs obligatoires"
       },
       messages: {
-        userUpdated: "Merci! Votre profil a été mis à jour avec succès."
+        userUpdated:
+          "Merci! Votre profil a été mis à jour avec succès."
       }
     },
     cart: {

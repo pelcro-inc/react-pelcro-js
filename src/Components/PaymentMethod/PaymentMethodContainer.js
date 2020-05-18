@@ -1,9 +1,13 @@
 import React, { createContext, useEffect } from "react";
-import { injectStripe, Elements, StripeProvider } from "react-stripe-elements";
+import {
+  injectStripe,
+  Elements,
+  StripeProvider
+} from "react-stripe-elements";
 import { useTranslation } from "react-i18next";
 import useReducerWithSideEffects, {
   UpdateWithSideEffect,
-  Update,
+  Update
 } from "use-reducer-with-side-effects";
 
 import {
@@ -15,10 +19,14 @@ import {
   SET_PERCENT_OFF,
   SET_COUPON,
   UPDATE_COUPON_CODE,
-  SHOW_COUPON_FIELD,
+  SHOW_COUPON_FIELD
 } from "../../utils/action-types";
 import { getErrorMessages } from "../common/Helpers";
-import { showError, showSuccess, hideError } from "../../utils/showing-error";
+import {
+  showError,
+  showSuccess,
+  hideError
+} from "../../utils/showing-error";
 
 const initialState = {
   disableSubmit: false,
@@ -26,16 +34,16 @@ const initialState = {
   couponCode: "",
   enableCouponField: false,
   percentOff: null,
-  coupon: null,
+  coupon: null
 };
 const store = createContext(initialState);
 const { Provider } = store;
 
-const displayError = (message) => {
+const displayError = message => {
   showError(message, "pelcro-error-payment-create");
 };
 
-const displaySuccess = (message) => {
+const displaySuccess = message => {
   console.log("will show success message: ", message);
   showSuccess(message, "pelcro-success-payment-create");
 };
@@ -53,18 +61,19 @@ const PaymentMethodContainerWithoutStripe = ({
   giftRecipient,
   couponCode,
   setView,
+  onFailure
 }) => {
   const { t } = useTranslation("messages");
 
   useEffect(() => {
     window.Pelcro.insight.track("Modal Displayed", {
-      name: "payment",
+      name: "payment"
     });
 
     if (window.Pelcro.coupon.getFromUrl()) {
       dispatch({
         type: UPDATE_COUPON_CODE,
-        payload: window.Pelcro.coupon.getFromUrl(),
+        payload: window.Pelcro.coupon.getFromUrl()
       });
     }
   }, []);
@@ -74,12 +83,15 @@ const PaymentMethodContainerWithoutStripe = ({
     window.Pelcro.source.create(
       {
         auth_token: window.Pelcro.user.read().auth_token,
-        token: token.id,
+        token: token.id
       },
-      (err) => {
+      err => {
         console.log("createPayment -> err", err);
         dispatch({ type: DISABLE_SUBMIT, payload: false });
-        if (err) return displayError(getErrorMessages(err));
+        if (err) {
+          onFailure(err);
+          return displayError(getErrorMessages(err));
+        }
 
         displaySuccess(successMessage);
       }
@@ -93,21 +105,24 @@ const PaymentMethodContainerWithoutStripe = ({
       {
         auth_token: window.Pelcro.user.read().auth_token,
         plan_id: plan.id,
-        coupon_code: state.couponCode,
+        coupon_code: state.couponCode
       },
       (err, res) => {
         dispatch({ type: DISABLE_COUPON_BUTTON, payload: false });
 
         if (err) {
           dispatch({ type: SET_PERCENT_OFF, payload: "" });
-
-          return showError(getErrorMessages(err), "pelcro-error-payment");
+          onFailure(err);
+          return showError(
+            getErrorMessages(err),
+            "pelcro-error-payment"
+          );
         } else {
           hideError("pelcro-error-payment");
         }
         dispatch({
           type: SET_PERCENT_OFF,
-          payload: "Discounted price: $" + res.data.total,
+          payload: "Discounted price: $" + res.data.total
         });
 
         dispatch({ type: SET_COUPON, payload: res.data.coupon });
@@ -124,22 +139,31 @@ const PaymentMethodContainerWithoutStripe = ({
           auth_token: window.Pelcro.user.read().auth_token,
           plan_id: plan.id,
           coupon_code: couponCode,
-          gift_recipient_email: giftRecipient ? giftRecipient.email : null,
+          gift_recipient_email: giftRecipient
+            ? giftRecipient.email
+            : null,
           address_id: product.address_required
             ? window.Pelcro.user.read().addresses[
                 window.Pelcro.user.read().addresses.length - 1
               ].id
-            : null,
+            : null
         },
         (err, res) => {
           dispatch({ type: DISABLE_SUBMIT, payload: false });
 
-          if (err)
-            return showError(getErrorMessages(err), "pelcro-error-payment");
+          if (err) {
+            onFailure(err);
+            return showError(
+              getErrorMessages(err),
+              "pelcro-error-payment"
+            );
+          }
 
           if (giftRecipient) {
             window.alert(
-              `${t("giftSent")} ${giftRecipient.email} ${t("successfully")}`
+              `${t("giftSent")} ${giftRecipient.email} ${t(
+                "successfully"
+              )}`
             );
             setView("");
           } else {
@@ -160,13 +184,15 @@ const PaymentMethodContainerWithoutStripe = ({
             ? window.Pelcro.user.read().addresses[
                 window.Pelcro.user.read().addresses.length - 1
               ]
-            : null,
+            : null
         },
         (err, res) => {
           dispatch({ type: DISABLE_SUBMIT, payload: false });
 
-          if (err) return displayError(getErrorMessages(err));
-
+          if (err) {
+            onFailure(err);
+            return displayError(getErrorMessages(err));
+          }
           // ReactGA.event({
           //   category: "ACTIONS",
           //   action: "Reactivated",
@@ -176,7 +202,9 @@ const PaymentMethodContainerWithoutStripe = ({
           if (giftRecipient) {
             setView("");
             window.alert(
-              `${t("giftSent")} ${giftRecipient.email} ${t("successfully")}`
+              `${t("giftSent")} ${giftRecipient.email} ${t(
+                "successfully"
+              )}`
             );
           } else {
             setView("success");
@@ -194,7 +222,11 @@ const PaymentMethodContainerWithoutStripe = ({
     console.log("submit payment!!");
     return stripe.createToken().then(({ token, error }) => {
       if (error) {
-        showError(getErrorMessages(error), "pelcro-error-payment-create");
+        onFailure(error);
+        showError(
+          getErrorMessages(error),
+          "pelcro-error-payment-create"
+        );
         dispatch({ type: DISABLE_SUBMIT, payload: false });
       } else if (token && type === "createPayment") {
         dispatch({ type: DISABLE_SUBMIT, payload: true });
@@ -205,50 +237,60 @@ const PaymentMethodContainerWithoutStripe = ({
     });
   };
 
-  const [state, dispatch] = useReducerWithSideEffects((state, action) => {
-    console.log("state, action", state, action);
-    switch (action.type) {
-      case DISABLE_SUBMIT:
-        return Update({ ...state, disableSubmit: action.payload });
+  const [state, dispatch] = useReducerWithSideEffects(
+    (state, action) => {
+      console.log("state, action", state, action);
+      switch (action.type) {
+        case DISABLE_SUBMIT:
+          return Update({ ...state, disableSubmit: action.payload });
 
-      case SHOW_COUPON_FIELD:
-        return Update({ ...state, enableCouponField: action.payload });
+        case SHOW_COUPON_FIELD:
+          return Update({
+            ...state,
+            enableCouponField: action.payload
+          });
 
-      case DISABLE_COUPON_BUTTON:
-        return Update({ ...state, disableCouponButton: action.payload });
+        case DISABLE_COUPON_BUTTON:
+          return Update({
+            ...state,
+            disableCouponButton: action.payload
+          });
 
-      case CREATE_PAYMENT:
-        return UpdateWithSideEffect(
-          { ...state, disableSubmit: true },
-          (state, dispatch) => createPayment(action.payload, state, dispatch)
-        );
+        case CREATE_PAYMENT:
+          return UpdateWithSideEffect(
+            { ...state, disableSubmit: true },
+            (state, dispatch) =>
+              createPayment(action.payload, state, dispatch)
+          );
 
-      case SUBMIT_PAYMENT:
-        console.log("SUBMIT_PAYMENT");
-        return UpdateWithSideEffect(
-          { ...state, disableSubmit: true },
-          (state, dispatch) => submitPayment(state, dispatch)
-        );
+        case SUBMIT_PAYMENT:
+          console.log("SUBMIT_PAYMENT");
+          return UpdateWithSideEffect(
+            { ...state, disableSubmit: true },
+            (state, dispatch) => submitPayment(state, dispatch)
+          );
 
-      case APPLY_COUPON_CODE:
-        return UpdateWithSideEffect(
-          { ...state, disableCouponButton: true },
-          (state, dispatch) => onApplyCouponCode(state, dispatch)
-        );
+        case APPLY_COUPON_CODE:
+          return UpdateWithSideEffect(
+            { ...state, disableCouponButton: true },
+            (state, dispatch) => onApplyCouponCode(state, dispatch)
+          );
 
-      case SET_COUPON:
-        return Update({ ...state, coupon: action.payload });
+        case SET_COUPON:
+          return Update({ ...state, coupon: action.payload });
 
-      case UPDATE_COUPON_CODE:
-        return Update({ ...state, couponCode: action.payload });
+        case UPDATE_COUPON_CODE:
+          return Update({ ...state, couponCode: action.payload });
 
-      case SET_PERCENT_OFF:
-        return Update({ ...state, percentOff: action.payload });
+        case SET_PERCENT_OFF:
+          return Update({ ...state, percentOff: action.payload });
 
-      default:
-        throw new Error();
-    }
-  }, initialState);
+        default:
+          throw new Error();
+      }
+    },
+    initialState
+  );
 
   return (
     <div style={{ ...style }} className={className}>
@@ -263,9 +305,11 @@ const PaymentMethodContainerWithoutStripe = ({
   );
 };
 
-const UnwrappedForm = injectStripe(PaymentMethodContainerWithoutStripe);
+const UnwrappedForm = injectStripe(
+  PaymentMethodContainerWithoutStripe
+);
 
-const PaymentMethodContainer = (props) => {
+const PaymentMethodContainer = props => {
   if (window.Stripe) {
     return (
       <StripeProvider

@@ -11,6 +11,7 @@ export const SubscriptionCreateView = ({
   resetView,
   giftRecipient,
   subscriptionIdToRenew,
+  onFailure
 }) => {
   const { t } = useTranslation("messages");
   return (
@@ -18,8 +19,11 @@ export const SubscriptionCreateView = ({
       <div className="pelcro-prefix-title-block">
         <h4>{product.paywall.subscribe_title}</h4>
         <p>
-          {product.paywall.subscribe_subtitle} - {plan.amount_formatted}
-          {plan.auto_renew && <span>/({plan.interval_count})</span>}{" "}
+          {product.paywall.subscribe_subtitle} -{" "}
+          {plan.amount_formatted}
+          {plan.auto_renew && (
+            <span>/({plan.interval_count})</span>
+          )}{" "}
           {plan.interval}.
         </p>
       </div>
@@ -53,6 +57,7 @@ export const SubscriptionCreateView = ({
             product={product}
             setView={setView}
             resetView={resetView}
+            onFailure={onFailure}
           />
         </div>
       </div>

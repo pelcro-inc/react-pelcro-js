@@ -2,7 +2,7 @@ import React, { createContext, useReducer, useEffect } from "react";
 import {
   SET_PRODUCT_AND_PLAN,
   SET_SUBSCRIPTION_TO_RENEW,
-  SET_USER_LOADED,
+  SET_USER_LOADED
 } from "../utils/action-types";
 
 const initialState = {
@@ -11,7 +11,7 @@ const initialState = {
   plan: null,
   isGift: false,
   subscriptionIdToRenew: null,
-  pelcroUserLoaded: false,
+  pelcroUserLoaded: false
 };
 
 const store = createContext(initialState);

@@ -1,6 +1,9 @@
 import React, { useContext } from "react";
 import { SET_TEXT_FIELD } from "../utils/action-types";
 
+/**
+ *
+ */
 export function TextInput({
   placeholder,
   style,
@@ -13,7 +16,10 @@ export function TextInput({
   const { dispatch, state } = useContext(store);
 
   const handleInputChange = value => {
-    dispatch({ type: SET_TEXT_FIELD, payload: { [fieldName]: value } });
+    dispatch({
+      type: SET_TEXT_FIELD,
+      payload: { [fieldName]: value }
+    });
   };
 
   return (

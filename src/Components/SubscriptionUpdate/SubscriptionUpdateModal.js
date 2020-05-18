@@ -3,7 +3,7 @@ import { SubscriptionUpdateView } from "./SubscriptionUpdateView";
 import Header from "../common/Header";
 import Authorship from "../common/Authorship";
 
-export const SubscriptionUpdateModal = (props) => {
+export const SubscriptionUpdateModal = props => {
   const [site, setSite] = useState({});
 
   useEffect(() => {
