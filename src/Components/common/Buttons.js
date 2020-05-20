@@ -1,5 +1,3 @@
-import { createCustomEvent } from "../../utils/utils";
-
 export const init = app => {
   const pelcroLoginButtonsByClass = document.getElementsByClassName(
     "pelcro-login-button"
@@ -98,7 +96,6 @@ export const init = app => {
           "window.Pelcro.user.saveToMetaData -> resp",
           resp
         );
-        createCustomEvent("PelcroSaveButtonClicked", resp);
       }
     );
   };

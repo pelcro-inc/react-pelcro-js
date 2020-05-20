@@ -1,29 +1,3 @@
-// Polyfill
-(() => {
-  if (typeof window.CustomEvent === "function") return false;
-
-  /**
-   *
-   */
-  function CustomEvent(
-    event,
-    params = { bubbles: false, cancelable: false, detail: undefined }
-  ) {
-    const evt = document.createEvent("CustomEvent");
-    evt.initCustomEvent(
-      event,
-      params.bubbles,
-      params.cancelable,
-      params.detail
-    );
-    return evt;
-  }
-
-  CustomEvent.prototype = window.Event.prototype;
-
-  window.CustomEvent = CustomEvent;
-})();
-
 export const formatDiscountedPrice = (planAmount, percentageOff) =>
   parseFloat(
     parseFloat(
@@ -52,11 +26,3 @@ export const sortCountries = countries => {
 
   return sortable;
 };
-
-export function createCustomEvent(name, detail) {
-  try {
-    return new CustomEvent(name, { detail });
-  } catch (e) {
-    console.warn("Pelcro - Events are not supported in the browser");
-  }
-}
