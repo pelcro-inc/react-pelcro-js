@@ -70,7 +70,6 @@ export const init = app => {
   const saveToMetadataByButton = e => {
     const key = e.currentTarget.dataset.key;
     const value = JSON.parse(JSON.stringify(e.currentTarget.dataset));
-    createCustomEvent("PelcroSaveButtonClicked", value);
     delete value.key;
     let newVal = "";
     const pelcroUser = window.Pelcro.user.read();
@@ -95,7 +94,7 @@ export const init = app => {
         auth_token: window.Pelcro.user.read().auth_token
       },
       (err, resp) => {
-        console.log("resp", resp);
+        createCustomEvent("PelcroSaveButtonClicked", value);
       }
     );
   };
