@@ -26,3 +26,11 @@ export const sortCountries = countries => {
 
   return sortable;
 };
+
+export function createCustomEvent(name, detail) {
+  try {
+    return new CustomEvent(name, { detail });
+  } catch (e) {
+    console.warn("Pelcro - Events are not supported in the browser");
+  }
+}

@@ -22,7 +22,7 @@ export { SubscriptionUpdateModal } from "./Components/SubscriptionUpdate/Subscri
 export { SubscriptionUpdateView } from "./Components/SubscriptionUpdate/SubscriptionUpdateView";
 export { PaymentSuccessModal } from "./Components/PaymentSuccess/PaymentSuccessModal";
 export { PaymentSuccessView } from "./Components/PaymentSuccess/PaymentSuccessView";
-export { NewsLetter } from "./Components/Newsletter/NewsLetter";
+export { NewsLetter } from "./Components/NewsLetter/NewsLetter";
 export { MeterModal } from "./Components/Meter/MeterModal";
 export { MeterView } from "./Components/Meter/MeterView";
 export { DashboardMenu } from "./Components/Dashboard/DashboardMenu";
@@ -81,5 +81,5 @@ export { PaymentUpdateView } from "./Components/PaymentUpdate/PaymentUpdateView"
 export {
   init as initButtons,
   authenticatedButtons,
-  unauthenticatedButtons,
+  unauthenticatedButtons
 } from "./Components/common/Buttons";

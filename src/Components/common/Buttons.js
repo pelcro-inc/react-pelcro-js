@@ -1,4 +1,6 @@
-export const init = (app) => {
+import { createCustomEvent } from "../../utils/utils";
+
+export const init = app => {
   const pelcroLoginButtonsByClass = document.getElementsByClassName(
     "pelcro-login-button"
   );
@@ -17,7 +19,10 @@ export const init = (app) => {
   );
 
   if (pelcroRegisterButton) {
-    pelcroRegisterButton.addEventListener("click", app.displayRegisterView);
+    pelcroRegisterButton.addEventListener(
+      "click",
+      app.displayRegisterView
+    );
   }
 
   const cartButton = document.getElementById("pelcro-cart-button");
@@ -62,14 +67,17 @@ export const init = (app) => {
     "pelcro-save-button"
   );
 
-  const saveToMetadataByButton = (e) => {
+  const saveToMetadataByButton = e => {
     const key = e.currentTarget.dataset.key;
     const value = JSON.parse(JSON.stringify(e.currentTarget.dataset));
-    console.log("saveToMetadataByButton -> value", value);
+    createCustomEvent("PelcroSaveButtonClicked", value);
     delete value.key;
     let newVal = "";
     const pelcroUser = window.Pelcro.user.read();
-    if (pelcroUser.metadata && pelcroUser.metadata[`metadata_${key}`]) {
+    if (
+      pelcroUser.metadata &&
+      pelcroUser.metadata[`metadata_${key}`]
+    ) {
       const oldValue = pelcroUser.metadata[`metadata_${key}`];
       if (typeof oldValue === "object" && oldValue.length) {
         newVal = [...oldValue, value];
@@ -84,7 +92,7 @@ export const init = (app) => {
       {
         key,
         value: newVal,
-        auth_token: window.Pelcro.user.read().auth_token,
+        auth_token: window.Pelcro.user.read().auth_token
       },
       (err, resp) => {
         console.log("resp", resp);
@@ -130,7 +138,7 @@ export const init = (app) => {
   }
 };
 
-export const authenticatedButtons = (id) => {
+export const authenticatedButtons = id => {
   const pelcroLoginByClass = document.getElementsByClassName(
     "pelcro-login-button"
   );
@@ -142,7 +150,7 @@ export const authenticatedButtons = (id) => {
   }
 };
 
-export const unauthenticatedButtons = (id) => {
+export const unauthenticatedButtons = id => {
   const pelcroLoginByClass = document.getElementsByClassName(
     "pelcro-login-button"
   );
