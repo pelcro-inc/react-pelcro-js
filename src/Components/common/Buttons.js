@@ -94,7 +94,11 @@ export const init = app => {
         auth_token: window.Pelcro.user.read().auth_token
       },
       (err, resp) => {
-        createCustomEvent("PelcroSaveButtonClicked", value);
+        console.log(
+          "window.Pelcro.user.saveToMetaData -> resp",
+          resp
+        );
+        createCustomEvent("PelcroSaveButtonClicked", resp);
       }
     );
   };
