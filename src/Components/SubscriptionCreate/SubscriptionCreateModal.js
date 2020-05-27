@@ -18,15 +18,6 @@ export function SubscriptionCreateModal({
   onFailure
 }) {
   const { t } = useTranslation("messages");
-  // showCouponField = () => {
-  //   this.setState({
-  //     enableCouponField: !this.state.enableCouponField
-  //   });
-  // };
-
-  // onCouponCodeChange(event) {
-  //   this.setState({ couponCode: event.target.value });
-  // }
 
   return (
     <div className="pelcro-prefix-view">

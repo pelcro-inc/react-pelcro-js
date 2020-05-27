@@ -77,6 +77,9 @@ export { PaymentCreateContainer } from "./Components/PaymentCreate/PaymentCreate
 export { PaymentCreateView } from "./Components/PaymentCreate/PaymentCreateView";
 export { PaymentUpdateContainer } from "./Components/PaymentUpdate/PaymentUpdateContainer";
 export { PaymentUpdateView } from "./Components/PaymentUpdate/PaymentUpdateView";
+export { PaymentMethodUpdateContainer } from "./Components/PaymentMethodUpdate/PaymentMethodUpdateContainer";
+export { PaymentMethodUpdateModal } from "./Components/PaymentMethodUpdate/PaymentMethodUpdateModal";
+export { PaymentMethodUpdateView } from "./Components/PaymentMethodUpdate/PaymentMethodUpdateView";
 
 export {
   init as initButtons,
