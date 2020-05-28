@@ -60,8 +60,8 @@ const PaymentMethodContainerWithoutStripe = ({
   product,
   giftRecipient,
   couponCode,
-  setView,
-  onFailure
+  onSuccess = () => {},
+  onFailure = () => {}
 }) => {
   const { t } = useTranslation("messages");
 
@@ -160,15 +160,9 @@ const PaymentMethodContainerWithoutStripe = ({
           }
 
           if (giftRecipient) {
-            window.alert(
-              `${t("giftSent")} ${giftRecipient.email} ${t(
-                "successfully"
-              )}`
-            );
-            setView("");
+            onSuccess();
           } else {
-            setView("success");
-            console.log("subscribe -> success");
+            onSuccess();
           }
         }
       );
@@ -200,15 +194,9 @@ const PaymentMethodContainerWithoutStripe = ({
           // });
 
           if (giftRecipient) {
-            setView("");
-            window.alert(
-              `${t("giftSent")} ${giftRecipient.email} ${t(
-                "successfully"
-              )}`
-            );
+            onSuccess();
           } else {
-            setView("success");
-            console.log("subscribe renew -> success");
+            onSuccess();
           }
         }
       );

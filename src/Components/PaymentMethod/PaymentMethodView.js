@@ -2,7 +2,7 @@ import React from "react";
 import {
   PelcroCardNumber,
   PelcroCardExpiry,
-  PelcroCardCVC,
+  PelcroCardCVC
 } from "../../components";
 import { useTranslation } from "react-i18next";
 import { DiscountedPrice } from "./DiscountedPrice";
@@ -20,7 +20,7 @@ export function PaymentMethodView({
   giftRecipient,
   plan,
   product,
-  setView,
+  onSuccess,
   onFailure
 }) {
   const { t } = useTranslation("checkoutForm");
@@ -35,13 +35,15 @@ export function PaymentMethodView({
       plan={plan}
       product={product}
       couponCode={couponCode}
-      setView={setView}
+      onSuccess={onSuccess}
       onFailure={onFailure}
     >
       <div className="pelcro-prefix-form">
         <div className="pelcro-prefix-row">
           <div className="col-md-12">
-            <label className="pelcro-prefix-label">{t("labels.card")} *</label>
+            <label className="pelcro-prefix-label">
+              {t("labels.card")} *
+            </label>
             <PelcroCardNumber />
             <img
               alt="credit_cards"
@@ -51,12 +53,16 @@ export function PaymentMethodView({
           </div>
 
           <div className="col-md-6">
-            <label className="pelcro-prefix-label">{t("labels.date")} *</label>
+            <label className="pelcro-prefix-label">
+              {t("labels.date")} *
+            </label>
             <PelcroCardExpiry />
           </div>
 
           <div className="col-md-6">
-            <label className="pelcro-prefix-label">{t("labels.CVC")} *</label>
+            <label className="pelcro-prefix-label">
+              {t("labels.CVC")} *
+            </label>
             <PelcroCardCVC />
           </div>
 

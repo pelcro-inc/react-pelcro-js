@@ -4,17 +4,18 @@ import { useTranslation } from "react-i18next";
 import Header from "../common/Header";
 import Authorship from "../common/Authorship";
 
-import { SubscriptionCreateView } from "./SubscriptionCreateView";
+import { SubscriptionRenewView } from "./SubscriptionRenewView";
 
-export function SubscriptionCreateModal({
+export function SubscriptionRenewModal({
   logout,
   plan,
+  subscriptionIdToRenew,
   giftRecipient,
   product,
   isGift,
-  setView,
-  onFailure = () => {},
-  onSuccess = () => {}
+  onFailure,
+  onSuccess,
+  setView
 }) {
   const { t } = useTranslation("messages");
 
@@ -39,8 +40,9 @@ export function SubscriptionCreateModal({
             ></Header>
 
             <div className="pelcro-prefix-modal-body">
-              <SubscriptionCreateView
+              <SubscriptionRenewView
                 plan={plan}
+                subscriptionIdToRenew={subscriptionIdToRenew}
                 giftRecipient={giftRecipient}
                 product={product}
                 isGift={isGift}

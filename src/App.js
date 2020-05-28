@@ -7,8 +7,7 @@ import {
   LoginModal,
   RegisterModal,
   DashboardModal,
-  SubscriptionUpdateView,
-  SubscriptionUpdateModal,
+  PaymentMethodUpdateModal,
   SubscriptionCreateModal,
   UserUpdateView,
   SubscriptionCreateView,
@@ -449,7 +448,7 @@ class App extends Component {
             )}
 
             {this.state.view === "source-create" && (
-              <SubscriptionUpdateModal
+              <PaymentMethodUpdateModal
                 resetView={this.resetView}
                 setView={this.setView}
                 onFailure={error => console.log(error)}
