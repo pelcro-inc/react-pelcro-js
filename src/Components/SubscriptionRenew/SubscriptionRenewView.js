@@ -4,12 +4,13 @@ import { PaymentMethodView } from "../PaymentMethod/PaymentMethodView";
 import ErrMessage from "../common/ErrMessage";
 import AlertSuccess from "../common/AlertSuccess";
 
-export const SubscriptionCreateView = ({
+export const SubscriptionRenewView = ({
   product,
   plan,
   giftRecipient,
-  onSuccess = () => {},
-  onFailure = () => {}
+  subscriptionIdToRenew,
+  onFailure,
+  onSuccess
 }) => {
   const { t } = useTranslation("messages");
   return (
@@ -50,6 +51,7 @@ export const SubscriptionCreateView = ({
             type="createPayment"
             showCoupon={true}
             plan={plan}
+            subscriptionIdToRenew={subscriptionIdToRenew}
             giftRecipient={giftRecipient}
             product={product}
             onFailure={onFailure}

@@ -6,7 +6,7 @@ import AlertSuccess from "../common/AlertSuccess";
 
 import { PaymentMethodView } from "../PaymentMethod/PaymentMethodView";
 
-export function SubscriptionUpdateView(props) {
+export function PaymentMethodUpdateView(props) {
   const [t] = useTranslation("paymentCreate");
 
   return (

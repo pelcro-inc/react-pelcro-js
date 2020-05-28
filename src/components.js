@@ -18,8 +18,8 @@ export { DashboardModal } from "./Components/Dashboard/DashboardModal";
 export { LoginModal } from "./Components/Login/LoginModal";
 export { RegisterModal } from "./Components/Register/RegisterModal";
 export { SelectModal } from "./Components/Select/SelectModal";
-export { SubscriptionUpdateModal } from "./Components/SubscriptionUpdate/SubscriptionUpdateModal";
-export { SubscriptionUpdateView } from "./Components/SubscriptionUpdate/SubscriptionUpdateView";
+export { SubscriptionRenewModal } from "./Components/SubscriptionRenew/SubscriptionRenewModal";
+export { SubscriptionRenewView } from "./Components/SubscriptionRenew/SubscriptionRenewView";
 export { PaymentSuccessModal } from "./Components/PaymentSuccess/PaymentSuccessModal";
 export { PaymentSuccessView } from "./Components/PaymentSuccess/PaymentSuccessView";
 export { NewsLetter } from "./Components/NewsLetter/NewsLetter";
@@ -72,11 +72,14 @@ export { AddressUpdateSubmit } from "./Components/AddressUpdate/AddressUpdateSub
 export { AddressUpdateTextInput } from "./Components/AddressUpdate/AddressUpdateTextInput";
 export { AddressUpdateView } from "./Components/AddressUpdate/AddressUpdateView";
 export { SubscriptionCreateContainer } from "./Components/SubscriptionCreate/SubscriptionCreateContainer";
-export { SubscriptionUpdateContainer } from "./Components/SubscriptionUpdate/SubscriptionUpdateContainer";
+export { SubscriptionRenewContainer } from "./Components/SubscriptionRenew/SubscriptionRenewContainer";
 export { PaymentCreateContainer } from "./Components/PaymentCreate/PaymentCreateContainer";
 export { PaymentCreateView } from "./Components/PaymentCreate/PaymentCreateView";
 export { PaymentUpdateContainer } from "./Components/PaymentUpdate/PaymentUpdateContainer";
 export { PaymentUpdateView } from "./Components/PaymentUpdate/PaymentUpdateView";
+export { PaymentMethodUpdateContainer } from "./Components/PaymentMethodUpdate/PaymentMethodUpdateContainer";
+export { PaymentMethodUpdateModal } from "./Components/PaymentMethodUpdate/PaymentMethodUpdateModal";
+export { PaymentMethodUpdateView } from "./Components/PaymentMethodUpdate/PaymentMethodUpdateView";
 
 export {
   init as initButtons,
