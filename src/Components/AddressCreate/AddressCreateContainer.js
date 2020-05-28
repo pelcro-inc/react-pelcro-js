@@ -1,7 +1,7 @@
 import React, { createContext, useEffect } from "react";
 import useReducerWithSideEffects, {
   UpdateWithSideEffect,
-  Update,
+  Update
 } from "use-reducer-with-side-effects";
 import {
   SET_COUNTRY,
@@ -12,7 +12,7 @@ import {
   SET_FIRST_NAME,
   SET_LAST_NAME,
   SET_TEXT_FIELD,
-  SET_STATE,
+  SET_STATE
 } from "../../utils/action-types";
 import { getErrorMessages } from "../common/Helpers";
 import { showError } from "../../utils/showing-error";
@@ -27,7 +27,7 @@ const initialState = {
   country: "",
   postalCode: "",
   states: [],
-  countries: [],
+  countries: []
 };
 const store = createContext(initialState);
 const { Provider } = store;
@@ -35,17 +35,16 @@ const { Provider } = store;
 const AddressCreateContainer = ({
   style,
   className,
-  setView,
   type = "shipping",
   giftCode = false,
   product = null,
   onSuccess = () => {},
   onFailure = () => {},
-  children,
+  children
 }) => {
   useEffect(() => {
     window.Pelcro.insight.track("Modal Displayed", {
-      name: "address",
+      name: "address"
     });
 
     // document.addEventListener("keydown", submitAddress);
@@ -56,7 +55,16 @@ const AddressCreateContainer = ({
   }, []);
 
   const submitAddress = (
-    { firstName, lastName, line1, line2, city, state, country, postalCode },
+    {
+      firstName,
+      lastName,
+      line1,
+      line2,
+      city,
+      state,
+      country,
+      postalCode
+    },
     dispatch
   ) => {
     dispatch({ type: DISABLE_SUBMIT, payload: true });
@@ -71,13 +79,16 @@ const AddressCreateContainer = ({
         city: city,
         state: state,
         country: country,
-        postal_code: postalCode,
+        postal_code: postalCode
       },
       (err, res) => {
         if (err) {
           onFailure(err);
           dispatch({ type: DISABLE_SUBMIT, payload: false });
-          return showError(getErrorMessages(err), "pelcro-error-address");
+          return showError(
+            getErrorMessages(err),
+            "pelcro-error-address"
+          );
         }
 
         if (giftCode) {
@@ -91,18 +102,21 @@ const AddressCreateContainer = ({
             {
               auth_token: window.Pelcro.user.read().auth_token,
               gift_code: giftCode,
-              address_id: addressId,
+              address_id: addressId
             },
             (err, res) => {
               dispatch({ type: DISABLE_SUBMIT, payload: false });
 
               if (err) {
                 onFailure(err);
-                return showError(getErrorMessages(err), "pelcro-error-address");
+                return showError(
+                  getErrorMessages(err),
+                  "pelcro-error-address"
+                );
               }
 
               alert("You've subscription has been redeeemed.");
-              return setView("");
+              return onSuccess();
             }
           );
         } else {
@@ -113,44 +127,47 @@ const AddressCreateContainer = ({
     );
   };
 
-  const [state, dispatch] = useReducerWithSideEffects((state, action) => {
-    switch (action.type) {
-      case SET_COUNTRY:
-        return Update({ ...state, country: action.payload });
+  const [state, dispatch] = useReducerWithSideEffects(
+    (state, action) => {
+      switch (action.type) {
+        case SET_COUNTRY:
+          return Update({ ...state, country: action.payload });
 
-      case SET_STATE:
-        return Update({ ...state, state: action.payload });
+        case SET_STATE:
+          return Update({ ...state, state: action.payload });
 
-      case DISABLE_SUBMIT:
-        return Update({ ...state, DISABLE_SUBMIT: action.payload });
+        case DISABLE_SUBMIT:
+          return Update({ ...state, DISABLE_SUBMIT: action.payload });
 
-      case SET_COUNTRIES:
-        return Update({ ...state, countries: action.payload });
+        case SET_COUNTRIES:
+          return Update({ ...state, countries: action.payload });
 
-      case SET_FIRST_NAME:
-        return Update({ ...state, firstName: action.payload });
+        case SET_FIRST_NAME:
+          return Update({ ...state, firstName: action.payload });
 
-      case SET_LAST_NAME:
-        return Update({ ...state, lastName: action.payload });
+        case SET_LAST_NAME:
+          return Update({ ...state, lastName: action.payload });
 
-      case SET_STATES:
-        return Update({ ...state, states: action.payload });
+        case SET_STATES:
+          return Update({ ...state, states: action.payload });
 
-      case SET_TEXT_FIELD:
-        return Update({
-          ...state,
-          ...action.payload,
-        });
+        case SET_TEXT_FIELD:
+          return Update({
+            ...state,
+            ...action.payload
+          });
 
-      case HANDLE_SUBMIT:
-        return UpdateWithSideEffect(
-          { ...state, disableSubmit: true },
-          (state, dispatch) => submitAddress(state, dispatch)
-        );
-      default:
-        throw new Error();
-    }
-  }, initialState);
+        case HANDLE_SUBMIT:
+          return UpdateWithSideEffect(
+            { ...state, disableSubmit: true },
+            (state, dispatch) => submitAddress(state, dispatch)
+          );
+        default:
+          throw new Error();
+      }
+    },
+    initialState
+  );
 
   return (
     <div style={{ ...style }} className={className}>
