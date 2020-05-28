@@ -9,7 +9,9 @@ import {
   CONFIRM_PASSWORD_USED,
   SET_CONFIRM_PASSWORD_ERROR,
   HANDLE_REGISTRATION,
-  DISABLE_REGISTRATION_BUTTON
+  DISABLE_REGISTRATION_BUTTON,
+  SET_FIRST_NAME,
+  SET_LAST_NAME
 } from "../../utils/action-types";
 import useReducerWithSideEffects, {
   UpdateWithSideEffect,
@@ -26,7 +28,9 @@ const initialState = {
   confirmPassword: "",
   confirmPasswordError: null,
   confirmPasswordUsed: false,
-  buttonDisabled: true
+  buttonDisabled: true,
+  firstName: null,
+  lastName: null
 };
 const store = createContext(initialState);
 const { Provider } = store;
@@ -38,20 +42,29 @@ const RegisterContainer = ({
   onFailure = () => {},
   children
 }) => {
-  const handleRegister = ({ email, password }, dispatch) => {
-    window.Pelcro.user.register({ email, password }, (err, res) => {
-      dispatch({ type: DISABLE_REGISTRATION_BUTTON, payload: false });
+  const handleRegister = (
+    { email, password, firstName, lastName },
+    dispatch
+  ) => {
+    window.Pelcro.user.register(
+      { email, password, first_name: firstName, last_name: lastName },
+      (err, res) => {
+        dispatch({
+          type: DISABLE_REGISTRATION_BUTTON,
+          payload: false
+        });
 
-      if (err) {
-        onFailure(err);
-        return showError(
-          getErrorMessages(err),
-          "pelcro-error-register"
-        );
-      } else {
-        onSuccess();
+        if (err) {
+          onFailure(err);
+          return showError(
+            getErrorMessages(err),
+            "pelcro-error-register"
+          );
+        } else {
+          onSuccess();
+        }
       }
-    });
+    );
   };
 
   const [state, dispatch] = useReducerWithSideEffects(
@@ -69,6 +82,19 @@ const RegisterContainer = ({
             password: action.payload,
             passwordError: null
           });
+
+        case SET_FIRST_NAME:
+          return Update({
+            ...state,
+            firstName: action.payload
+          });
+
+        case SET_LAST_NAME:
+          return Update({
+            ...state,
+            lastName: action.payload
+          });
+
         case SET_CONFIRM_PASSWORD:
           return Update({
             ...state,

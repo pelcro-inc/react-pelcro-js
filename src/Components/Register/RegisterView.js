@@ -4,7 +4,9 @@ import {
   RegisterContainer,
   RegisterEmail,
   RegisterPassword,
-  RegisterButton
+  RegisterButton,
+  RegisterFirstName,
+  RegisterLastName
 } from "../../components";
 
 export function RegisterView(props) {
@@ -15,13 +17,26 @@ export function RegisterView(props) {
       <RegisterContainer {...props}>
         <div className="pelcro-prefix-row">
           <div className="col-md-12">
-            <label className="pelcro-prefix-label" htmlFor="pelcro-input-email">
+            <label
+              className="pelcro-prefix-label"
+              htmlFor="pelcro-input-email"
+            >
               {t("labels.email")} *
             </label>
             <RegisterEmail
               className="pelcro-prefix-input pelcro-prefix-form-control"
               id="pelcro-input-email"
               placeholder={t("labels.emailPlaceholder")}
+            />
+
+            <RegisterFirstName
+              className="pelcro-prefix-input pelcro-prefix-form-control"
+              placeholder="First name"
+            />
+
+            <RegisterLastName
+              className="pelcro-prefix-input pelcro-prefix-form-control"
+              placeholder="Last name"
             />
           </div>
           <div className="col-md-12">
