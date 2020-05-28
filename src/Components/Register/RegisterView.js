@@ -6,7 +6,9 @@ import {
   RegisterPassword,
   RegisterButton,
   RegisterFirstName,
-  RegisterLastName
+  RegisterLastName,
+  RegisterCompany,
+  RegisterJobTitle
 } from "../../components";
 
 export function RegisterView(props) {
@@ -37,6 +39,16 @@ export function RegisterView(props) {
             <RegisterLastName
               className="pelcro-prefix-input pelcro-prefix-form-control"
               placeholder="Last name"
+            />
+
+            <RegisterCompany
+              className="pelcro-prefix-input pelcro-prefix-form-control"
+              placeholder="Company name"
+            />
+
+            <RegisterJobTitle
+              className="pelcro-prefix-input pelcro-prefix-form-control"
+              placeholder="Job Title"
             />
           </div>
           <div className="col-md-12">

@@ -11,7 +11,8 @@ import {
   HANDLE_REGISTRATION,
   DISABLE_REGISTRATION_BUTTON,
   SET_FIRST_NAME,
-  SET_LAST_NAME
+  SET_LAST_NAME,
+  SET_TEXT_FIELD
 } from "../../utils/action-types";
 import useReducerWithSideEffects, {
   UpdateWithSideEffect,
@@ -43,11 +44,24 @@ const RegisterContainer = ({
   children
 }) => {
   const handleRegister = (
-    { email, password, firstName, lastName },
+    {
+      email,
+      password,
+      firstName,
+      lastName,
+      organization = "",
+      jobTitle = ""
+    },
     dispatch
   ) => {
     window.Pelcro.user.register(
-      { email, password, first_name: firstName, last_name: lastName },
+      {
+        email,
+        password,
+        first_name: firstName,
+        last_name: lastName,
+        metadata: { organization, jobTitle }
+      },
       (err, res) => {
         dispatch({
           type: DISABLE_REGISTRATION_BUTTON,
@@ -93,6 +107,12 @@ const RegisterContainer = ({
           return Update({
             ...state,
             lastName: action.payload
+          });
+
+        case SET_TEXT_FIELD:
+          return Update({
+            ...state,
+            ...action.payload
           });
 
         case SET_CONFIRM_PASSWORD:

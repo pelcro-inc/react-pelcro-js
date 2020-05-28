@@ -15,6 +15,8 @@ export { RegisterPassword } from "./Components/Register/RegisterPassword";
 export { RegisterFirstName } from "./Components/Register/RegisterFirstName";
 export { RegisterLastName } from "./Components/Register/RegisterLastName";
 export { RegisterButton } from "./Components/Register/RegisterButton";
+export { RegisterJobTitle } from "./Components/Register/RegisterJobTitle";
+export { RegisterCompany } from "./Components/Register/RegisterCompany";
 export { PelcroContainer } from "./Components/PelcroContainer";
 export { DashboardModal } from "./Components/Dashboard/DashboardModal";
 export { LoginModal } from "./Components/Login/LoginModal";
