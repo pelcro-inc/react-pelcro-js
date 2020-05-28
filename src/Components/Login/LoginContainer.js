@@ -28,8 +28,8 @@ const { Provider } = store;
 const LoginContainer = ({
   style,
   className,
-  setView,
   onSuccess = () => {},
+  onFailure = () => {},
   children
 }) => {
   const handleLogin = ({ email, password }, dispatch) => {
@@ -37,45 +37,56 @@ const LoginContainer = ({
       dispatch({ type: DISABLE_LOGIN_BUTTON, payload: false });
 
       if (err) {
-        return showError(getErrorMessages(err), "pelcro-error-login");
+        showError(getErrorMessages(err), "pelcro-error-login");
+        return onFailure(err);
       } else {
-        setView("");
         onSuccess();
       }
     });
   };
 
-  const [state, dispatch] = useReducerWithSideEffects((state, action) => {
-    switch (action.type) {
-      case SET_EMAIL:
-        return Update({ ...state, email: action.payload, emailError: null });
-      case SET_PASSWORD:
-        return Update({
-          ...state,
-          password: action.payload,
-          passwordError: null
-        });
-      case SET_EMAIL_ERROR:
-        return Update({ ...state, emailError: action.payload, email: "" });
-      case SET_PASSWORD_ERROR:
-        return Update({
-          ...state,
-          passwordError: action.payload,
-          password: ""
-        });
-      case RESET_LOGIN_FORM:
-        return initialState;
-      case DISABLE_LOGIN_BUTTON:
-        return Update({ ...state, buttonDisabled: action.payload });
-      case HANDLE_LOGIN:
-        return UpdateWithSideEffect(
-          { ...state, buttonDisabled: true },
-          (state, dispatch) => handleLogin(state, dispatch)
-        );
-      default:
-        throw new Error();
-    }
-  }, initialState);
+  const [state, dispatch] = useReducerWithSideEffects(
+    (state, action) => {
+      switch (action.type) {
+        case SET_EMAIL:
+          return Update({
+            ...state,
+            email: action.payload,
+            emailError: null
+          });
+        case SET_PASSWORD:
+          return Update({
+            ...state,
+            password: action.payload,
+            passwordError: null
+          });
+        case SET_EMAIL_ERROR:
+          return Update({
+            ...state,
+            emailError: action.payload,
+            email: ""
+          });
+        case SET_PASSWORD_ERROR:
+          return Update({
+            ...state,
+            passwordError: action.payload,
+            password: ""
+          });
+        case RESET_LOGIN_FORM:
+          return initialState;
+        case DISABLE_LOGIN_BUTTON:
+          return Update({ ...state, buttonDisabled: action.payload });
+        case HANDLE_LOGIN:
+          return UpdateWithSideEffect(
+            { ...state, buttonDisabled: true },
+            (state, dispatch) => handleLogin(state, dispatch)
+          );
+        default:
+          throw new Error();
+      }
+    },
+    initialState
+  );
 
   return (
     <div style={{ ...style }} className={className}>

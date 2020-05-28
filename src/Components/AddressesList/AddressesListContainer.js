@@ -13,23 +13,25 @@ const { Provider } = store;
 const AddressesListContainer = ({
   style,
   className,
-  setView,
   onSuccess = () => {},
   children
 }) => {
-  const [state, dispatch] = useReducerWithSideEffects((state, action) => {
-    switch (action.type) {
-      case SET_ADDRESS_ID:
-        setView("address-edit");
-        return Update({
-          ...state,
-          addressId: action.payload
-        });
+  const [state, dispatch] = useReducerWithSideEffects(
+    (state, action) => {
+      switch (action.type) {
+        case SET_ADDRESS_ID:
+          onSuccess();
+          return Update({
+            ...state,
+            addressId: action.payload
+          });
 
-      default:
-        throw new Error();
-    }
-  }, initialState);
+        default:
+          throw new Error();
+      }
+    },
+    initialState
+  );
 
   return (
     <div style={{ ...style }} className={className}>

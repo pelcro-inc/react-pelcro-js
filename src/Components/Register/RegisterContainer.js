@@ -34,8 +34,8 @@ const { Provider } = store;
 const RegisterContainer = ({
   style,
   className,
-  setView,
   onSuccess = () => {},
+  onFailure = () => {},
   children
 }) => {
   const handleRegister = ({ email, password }, dispatch) => {
@@ -43,62 +43,79 @@ const RegisterContainer = ({
       dispatch({ type: DISABLE_REGISTRATION_BUTTON, payload: false });
 
       if (err) {
-        return showError(getErrorMessages(err), "pelcro-error-register");
+        onFailure(err);
+        return showError(
+          getErrorMessages(err),
+          "pelcro-error-register"
+        );
       } else {
-        setView();
         onSuccess();
       }
     });
   };
 
-  const [state, dispatch] = useReducerWithSideEffects((state, action) => {
-    switch (action.type) {
-      case SET_EMAIL:
-        return Update({ ...state, email: action.payload, emailError: null });
-      case SET_PASSWORD:
-        return Update({
-          ...state,
-          password: action.payload,
-          passwordError: null
-        });
-      case SET_CONFIRM_PASSWORD:
-        return Update({
-          ...state,
-          confirmPassword: action.payload,
-          confirmPasswordError: null
-        });
-      case SET_EMAIL_ERROR:
-        return Update({ ...state, emailError: action.payload, email: "" });
-      case SET_PASSWORD_ERROR:
-        return Update({
-          ...state,
-          passwordError: action.payload,
-          password: ""
-        });
-      case SET_CONFIRM_PASSWORD_ERROR:
-        return Update({
-          ...state,
-          confirmPasswordError: action.payload,
-          confirmPassword: ""
-        });
-      case CONFIRM_PASSWORD_USED:
-        return Update({ ...state, confirmPasswordUsed: action.payload });
-      case RESET_LOGIN_FORM:
-        return initialState;
+  const [state, dispatch] = useReducerWithSideEffects(
+    (state, action) => {
+      switch (action.type) {
+        case SET_EMAIL:
+          return Update({
+            ...state,
+            email: action.payload,
+            emailError: null
+          });
+        case SET_PASSWORD:
+          return Update({
+            ...state,
+            password: action.payload,
+            passwordError: null
+          });
+        case SET_CONFIRM_PASSWORD:
+          return Update({
+            ...state,
+            confirmPassword: action.payload,
+            confirmPasswordError: null
+          });
+        case SET_EMAIL_ERROR:
+          return Update({
+            ...state,
+            emailError: action.payload,
+            email: ""
+          });
+        case SET_PASSWORD_ERROR:
+          return Update({
+            ...state,
+            passwordError: action.payload,
+            password: ""
+          });
+        case SET_CONFIRM_PASSWORD_ERROR:
+          return Update({
+            ...state,
+            confirmPasswordError: action.payload,
+            confirmPassword: ""
+          });
+        case CONFIRM_PASSWORD_USED:
+          return Update({
+            ...state,
+            confirmPasswordUsed: action.payload
+          });
+        case RESET_LOGIN_FORM:
+          return initialState;
 
-      case DISABLE_REGISTRATION_BUTTON:
-        return Update({ ...state, buttonDisabled: action.payload });
+        case DISABLE_REGISTRATION_BUTTON:
+          return Update({ ...state, buttonDisabled: action.payload });
 
-      case HANDLE_REGISTRATION:
-        return UpdateWithSideEffect(
-          { ...state, buttonDisabled: true },
-          (state, dispatch) => handleRegister(state, dispatch)
-        );
+        case HANDLE_REGISTRATION:
+          return UpdateWithSideEffect(
+            { ...state, buttonDisabled: true },
+            (state, dispatch) => handleRegister(state, dispatch)
+          );
 
-      default:
-        throw new Error();
-    }
-  }, initialState);
+        default:
+          throw new Error();
+      }
+    },
+    initialState
+  );
 
   return (
     <div style={{ ...style }} className={className}>
