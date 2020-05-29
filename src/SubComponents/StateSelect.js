@@ -25,7 +25,11 @@ export function StateSelect({
   }, [country]);
 
   const getStateList = () => {
-    window.Pelcro.geolocation.getStateList(setStates);
+    const selectedCountry = country ? country : "CA";
+    window.Pelcro.geolocation.getStatesForCountry(
+      selectedCountry,
+      setStates
+    );
   };
 
   const setStates = (error, tmp) => {
@@ -66,31 +70,17 @@ export function StateSelect({
     dispatch({ type: SET_STATE, payload: e.target.value });
   };
 
-  if (states.states && states.selected_country === country) {
-    return (
-      <select
-        value={state}
-        onChange={onStateChange}
-        className={className}
-        autoComplete="state"
-        id="pelcro-input-state"
-        {...otherProps}
-      >
-        <option>{t("region")}</option>
-        {createStateItems()}
-      </select>
-    );
-  } else
-    return (
-      <input
-        type="text"
-        value={state}
-        onChange={onStateChange}
-        className={className}
-        autoComplete="country"
-        id="pelcro-input-country"
-        placeholder={t("labels.region")}
-        {...otherProps}
-      />
-    );
+  return (
+    <select
+      value={state}
+      onChange={onStateChange}
+      className={className}
+      autoComplete="state"
+      id="pelcro-input-state"
+      {...otherProps}
+    >
+      <option>{t("region")}</option>
+      {createStateItems()}
+    </select>
+  );
 }
