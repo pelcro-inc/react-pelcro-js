@@ -1,8 +1,16 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { PaymentMethodView } from "../PaymentMethod/PaymentMethodView";
 import ErrMessage from "../common/ErrMessage";
 import AlertSuccess from "../common/AlertSuccess";
+import {
+  PelcroCardNumber,
+  PelcroCardExpiry,
+  PelcroCardCVC
+} from "../../components";
+import { DiscountedPrice } from "../PaymentMethod/DiscountedPrice";
+import { SubscriptionCreateContainer } from "./SubscriptionCreateContainer";
+import { SubmitPaymentMethod } from "../PaymentMethod/SubmitPaymentMethod";
+import { CouponCode } from "../PaymentMethod/CouponCode";
 
 export const SubscriptionCreateView = ({
   product,
@@ -12,6 +20,8 @@ export const SubscriptionCreateView = ({
   onFailure = () => {}
 }) => {
   const { t } = useTranslation("messages");
+  const [ct] = useTranslation("checkoutForm");
+
   return (
     <div>
       <div className="pelcro-prefix-title-block">
@@ -46,15 +56,54 @@ export const SubscriptionCreateView = ({
           </div>
         </div>
         <div className="pelcro-prefix-form">
-          <PaymentMethodView
-            type="createPayment"
-            showCoupon={true}
+          <SubscriptionCreateContainer
             plan={plan}
             giftRecipient={giftRecipient}
             product={product}
             onFailure={onFailure}
             onSuccess={onSuccess}
-          />
+          >
+            <div className="pelcro-prefix-form">
+              <div className="pelcro-prefix-row">
+                <div className="col-md-12">
+                  <label className="pelcro-prefix-label">
+                    {ct("labels.card")} *
+                  </label>
+                  <PelcroCardNumber />
+                  <img
+                    alt="credit_cards"
+                    className={`pelcro-prefix-payment-icons`}
+                    src="https://js.pelcro.com/ui/plugin/main/images/credit_cards.png"
+                  />
+                </div>
+
+                <div className="col-md-6">
+                  <label className="pelcro-prefix-label">
+                    {ct("labels.date")} *
+                  </label>
+                  <PelcroCardExpiry />
+                </div>
+
+                <div className="col-md-6">
+                  <label className="pelcro-prefix-label">
+                    {ct("labels.CVC")} *
+                  </label>
+                  <PelcroCardCVC />
+                </div>
+
+                <div className="col-md-12">
+                  <small className="pelcro-footnote form-text">
+                    * {ct("labels.required")}
+                  </small>
+
+                  <CouponCode showCoupon={true} />
+                  <DiscountedPrice />
+
+                  <SubmitPaymentMethod name={ct("labels.submit")} />
+                </div>
+              </div>
+            </div>
+          </SubscriptionCreateContainer>
         </div>
       </div>
     </div>
