@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import ErrMessage from "../common/ErrMessage";
+import { AlertDanger, AlertSuccess } from "../../components";
 import { AddressUpdateFirstName } from "./AddressUpdateFirstName";
 import { AddressUpdateLastName } from "./AddressUpdateLastName";
 import { AddressUpdateTextInput } from "./AddressUpdateTextInput";
@@ -9,7 +9,7 @@ import { AddressUpdateContainer } from "./AddressUpdateContainer";
 import { AddressUpdateCountrySelect } from "./AddressUpdateCountrySelect";
 import { AddressUpdateStateSelect } from "./AddressUpdateStateSelect";
 
-export const AddressUpdateView = (props) => {
+export const AddressUpdateView = props => {
   const { t } = useTranslation("address");
   return (
     <AddressUpdateContainer {...props}>
@@ -17,7 +17,8 @@ export const AddressUpdateView = (props) => {
         <h4>{t("title")}</h4>
       </div>
 
-      <ErrMessage name="address" />
+      <AlertDanger name="address" />
+      <AlertSuccess name="address" />
 
       <div className="pelcro-prefix-form">
         <div className="pelcro-prefix-row">
@@ -52,7 +53,10 @@ export const AddressUpdateView = (props) => {
         </div>
         <div className="pelcro-prefix-row">
           <div className="col-md-12">
-            <label className="pelcro-prefix-label" htmlFor="pelcro-input-line1">
+            <label
+              className="pelcro-prefix-label"
+              htmlFor="pelcro-input-line1"
+            >
               {t("labels.address")} *
             </label>
             <AddressUpdateTextInput
@@ -83,7 +87,10 @@ export const AddressUpdateView = (props) => {
             />
           </div>
           <div className="col-md-6">
-            <label className="pelcro-prefix-label" htmlFor="pelcro-input-city">
+            <label
+              className="pelcro-prefix-label"
+              htmlFor="pelcro-input-city"
+            >
               {t("labels.city")} *
             </label>
             <AddressUpdateTextInput

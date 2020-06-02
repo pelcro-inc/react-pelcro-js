@@ -1,4 +1,5 @@
 import React, { createContext, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import useReducerWithSideEffects, {
   UpdateWithSideEffect,
   Update
@@ -15,7 +16,7 @@ import {
   SET_STATE
 } from "../../utils/action-types";
 import { getErrorMessages } from "../common/Helpers";
-import { showError } from "../../utils/showing-error";
+import { showError, showSuccess } from "../../utils/showing-error";
 
 const initialState = {
   disableSubmit: false,
@@ -43,18 +44,13 @@ const AddressUpdateContainer = ({
   children,
   addressId
 }) => {
+  const [t] = useTranslation("address");
   useEffect(() => {
     window.Pelcro.insight.track("Modal Displayed", {
       name: "address"
     });
 
     getAddressData();
-
-    // document.addEventListener("keydown", submitAddress);
-
-    return () => {
-      //   document.removeEventListener("keydown", submitAddress);
-    };
   }, []);
 
   const getAddressData = () => {
@@ -105,47 +101,20 @@ const AddressUpdateContainer = ({
         postal_code: postalCode
       },
       (err, res) => {
+        dispatch({ type: DISABLE_SUBMIT, payload: false });
         if (err) {
           onFailure(err);
-          dispatch({ type: DISABLE_SUBMIT, payload: false });
           return showError(
             getErrorMessages(err),
             "pelcro-error-address"
           );
         }
 
-        if (giftCode) {
-          let addressId = null;
-
-          if (window.Pelcro.user.read().addresses) {
-            addressId = window.Pelcro.user.read().addresses[0].id;
-          }
-
-          window.Pelcro.subscription.redeemGift(
-            {
-              auth_token: window.Pelcro.user.read().auth_token,
-              gift_code: giftCode,
-              address_id: addressId
-            },
-            (err, res) => {
-              dispatch({ type: DISABLE_SUBMIT, payload: false });
-
-              if (err) {
-                onFailure(err);
-                return showError(
-                  getErrorMessages(err),
-                  "pelcro-error-address"
-                );
-              }
-
-              alert("You've subscription has been redeeemed.");
-              return onSuccess();
-            }
-          );
-        } else {
-          dispatch({ type: DISABLE_SUBMIT, payload: false });
-          onSuccess();
-        }
+        onSuccess();
+        return showSuccess(
+          t("messages.addressUpdated"),
+          "pelcro-success-address"
+        );
       }
     );
   };

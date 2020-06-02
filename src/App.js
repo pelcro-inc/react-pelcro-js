@@ -477,7 +477,7 @@ class App extends Component {
               <AddressUpdateModal
                 addressId={this.state.addressId}
                 setView={this.setView}
-                onSuccess={() => this.setView("")}
+                onSuccess={() => null}
                 onFailure={error => console.log(error)}
               />
             )}
