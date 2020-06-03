@@ -414,8 +414,8 @@ class App extends Component {
                   if (!this.state.product) {
                     this.setView("checkout");
                   } else {
+                    this.setView("payment");
                   }
-                  this.setView("payment");
                 }}
                 onFailure={error => console.log(error)}
               />
