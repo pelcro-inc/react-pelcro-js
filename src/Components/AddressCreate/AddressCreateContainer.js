@@ -37,7 +37,7 @@ const AddressCreateContainer = ({
   className,
   type = "shipping",
   giftCode = false,
-  product = null,
+  onGiftRedemptionSuccess = () => {},
   onSuccess = () => {},
   onFailure = () => {},
   children
@@ -116,12 +116,12 @@ const AddressCreateContainer = ({
               }
 
               alert("You've subscription has been redeeemed.");
-              return onSuccess();
+              return onGiftRedemptionSuccess();
             }
           );
         } else {
           dispatch({ type: DISABLE_SUBMIT, payload: false });
-          onSuccess();
+          return onSuccess();
         }
       }
     );

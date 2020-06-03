@@ -410,6 +410,13 @@ class App extends Component {
               <AddressCreateModal
                 giftCode={this.state.giftCode}
                 setView={this.setView}
+                onSuccess={() => {
+                  if (!this.state.product) {
+                    this.setView("checkout");
+                  } else {
+                  }
+                  this.setView("payment");
+                }}
                 onFailure={error => console.log(error)}
               />
             )}
