@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from "react";
+import { DotLoader } from "react-fancy-loader";
 import { useTranslation } from "react-i18next";
 import { SET_COUNTRY, SET_COUNTRIES } from "../utils/action-types";
 import { sortCountries } from "../utils/utils";
@@ -17,7 +18,7 @@ export function CountrySelect({
 }) {
   const {
     dispatch,
-    state: { country, countries }
+    state: { country, countries, loading }
   } = useContext(store);
   const { t } = useTranslation("address");
 
@@ -55,6 +56,14 @@ export function CountrySelect({
   const onCountryChange = e => {
     dispatch({ type: SET_COUNTRY, payload: e.target.value });
   };
+
+  if (loading) {
+    return (
+      <div style={{ marginTop: 20 }}>
+        <DotLoader size={4} />
+      </div>
+    );
+  }
 
   return (
     <React.Fragment>

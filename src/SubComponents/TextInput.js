@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { DotLoader } from "react-fancy-loader";
 import { SET_TEXT_FIELD } from "../utils/action-types";
 
 /**
@@ -21,6 +22,14 @@ export function TextInput({
       payload: { [fieldName]: value }
     });
   };
+
+  if (state.loading) {
+    return (
+      <div style={{ marginTop: 20 }}>
+        <DotLoader size={4} />
+      </div>
+    );
+  }
 
   return (
     <input

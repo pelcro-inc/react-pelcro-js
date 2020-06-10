@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { DotLoader } from "react-fancy-loader";
 import { SET_STATE, SET_STATES } from "../utils/action-types";
 import { showError } from "../utils/showing-error";
 
@@ -16,7 +17,7 @@ export function StateSelect({
 }) {
   const {
     dispatch,
-    state: { country, state, states }
+    state: { country, state, states, loading }
   } = useContext(store);
   const { t } = useTranslation("address");
 
@@ -69,6 +70,14 @@ export function StateSelect({
   const onStateChange = e => {
     dispatch({ type: SET_STATE, payload: e.target.value });
   };
+
+  if (loading) {
+    return (
+      <div style={{ marginTop: 20 }}>
+        <DotLoader size={4} />
+      </div>
+    );
+  }
 
   return (
     <select
