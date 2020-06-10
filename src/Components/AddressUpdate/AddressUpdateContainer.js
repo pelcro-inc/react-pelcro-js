@@ -28,7 +28,8 @@ const initialState = {
   country: "",
   postalCode: "",
   states: [],
-  countries: []
+  countries: [],
+  loading: true
 };
 const store = createContext(initialState);
 const { Provider } = store;
@@ -68,6 +69,7 @@ const AddressUpdateContainer = ({
         initialState["state"] = thisAddress.state;
         initialState["country"] = thisAddress.country;
         initialState["postalCode"] = thisAddress.postal_code;
+        initialState.loading = false;
       }
     }
   };

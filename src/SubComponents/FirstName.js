@@ -1,4 +1,5 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
+import { DotLoader } from "react-fancy-loader";
 import { SET_FIRST_NAME } from "../utils/action-types";
 
 /**
@@ -17,6 +18,14 @@ export function FirstName({
   const handleInputChange = value => {
     dispatch({ type: SET_FIRST_NAME, payload: value });
   };
+
+  if (state.loading) {
+    return (
+      <div style={{ marginTop: 20 }}>
+        <DotLoader size={4} />
+      </div>
+    );
+  }
 
   return (
     <input
