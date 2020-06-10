@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { SET_FIRST_NAME } from "../utils/action-types";
 
 /**
@@ -24,7 +24,7 @@ export function FirstName({
       id={id}
       style={{ ...style }}
       className={className}
-      value={state.firstName || window.Pelcro.user.read().first_name}
+      value={state.firstName || null}
       onChange={e => handleInputChange(e.target.value)}
       placeholder={placeholder || "Enter Your First Name"}
       {...otherProps}

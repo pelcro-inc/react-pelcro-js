@@ -79,7 +79,7 @@ export function StateSelect({
       id="pelcro-input-state"
       {...otherProps}
     >
-      <option>{t("region")}</option>
+      <option></option>
       {createStateItems()}
     </select>
   );

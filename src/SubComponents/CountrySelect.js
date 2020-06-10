@@ -65,7 +65,7 @@ export function CountrySelect({
         autoComplete="country"
         {...otherProps}
       >
-        <option> {t("country")} </option>
+        <option></option>
         {createCountryItems()}
       </select>
     </React.Fragment>
