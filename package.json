@@ -86,6 +86,7 @@
     "reset-css": "^4.0.1",
     "sass-loader": "^7.1.0",
     "scss-loader": "0.0.1",
+    "styled-components": "^5.1.1",
     "use-reducer-with-side-effects": "^2.2.0"
   },
   "babel": {
