@@ -10884,10 +10884,10 @@ react-error-overlay@^5.1.0:
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-5.1.6.tgz#0cd73407c5d141f9638ae1e0c63e7b2bf7e9929d"
   integrity sha512-X1Y+0jR47ImDVr54Ab6V9eGk0Hnu7fVWGeHQSOXHf/C2pF9c6uy3gef8QUeuUiWlNb0i08InPSE5a/KJzNzw1Q==
 
-react-fancy-loader@^0.1.14:
-  version "0.1.14"
-  resolved "https://registry.yarnpkg.com/react-fancy-loader/-/react-fancy-loader-0.1.14.tgz#000a5ab041872486cb2a46c7fe712f0de2e5d6b2"
-  integrity sha512-CvaL/4JOpDUPrxp1OjrjjN+Vt1p+QCfXQkE0ys+sBN6us1uoGObj6FcH0vxu9RiShSv5TEyI2fO5GYhNaYBzbQ==
+react-fancy-loader@^0.2.17:
+  version "0.2.17"
+  resolved "https://registry.yarnpkg.com/react-fancy-loader/-/react-fancy-loader-0.2.17.tgz#8cd7572ce7ba3447908da9dfee66a5b2f8c243b4"
+  integrity sha512-3W8XDpri9b0OKB+uVeSqImXVJSCwG080vt/sH8J9H6g2BpfIEOc3OryGWwq3NP/Z4Uw+G7zcRFhr639TzgbQAg==
   dependencies:
     styled-components "^5.1.1"
 
