@@ -47,16 +47,14 @@ const AddressUpdateContainer = ({
 }) => {
   const [t] = useTranslation("address");
   useEffect(() => {
+    getAddressData();
     window.Pelcro.insight.track("Modal Displayed", {
       name: "address"
     });
-
-    getAddressData();
   }, []);
 
   const getAddressData = () => {
     const addresses = window.Pelcro.address.list();
-
     for (const address in addresses) {
       const thisAddress = addresses[address];
 
@@ -70,6 +68,7 @@ const AddressUpdateContainer = ({
         initialState["country"] = thisAddress.country;
         initialState["postalCode"] = thisAddress.postal_code;
         initialState.loading = false;
+        dispatch({ type: SET_TEXT_FIELD, payload: initialState });
       }
     }
   };
@@ -154,6 +153,7 @@ const AddressUpdateContainer = ({
             { ...state, disableSubmit: true },
             (state, dispatch) => submitAddress(state, dispatch)
           );
+
         default:
           throw new Error();
       }
