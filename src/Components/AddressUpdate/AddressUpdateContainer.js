@@ -87,8 +87,6 @@ const AddressUpdateContainer = ({
     },
     dispatch
   ) => {
-    dispatch({ type: DISABLE_SUBMIT, payload: true });
-
     window.Pelcro.address.update(
       {
         address_id: addressId,
@@ -131,7 +129,7 @@ const AddressUpdateContainer = ({
           return Update({ ...state, state: action.payload });
 
         case DISABLE_SUBMIT:
-          return Update({ ...state, DISABLE_SUBMIT: action.payload });
+          return Update({ ...state, disableSubmit: action.payload });
 
         case SET_COUNTRIES:
           return Update({ ...state, countries: action.payload });

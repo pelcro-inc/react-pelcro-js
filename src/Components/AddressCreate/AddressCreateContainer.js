@@ -67,8 +67,6 @@ const AddressCreateContainer = ({
     },
     dispatch
   ) => {
-    dispatch({ type: DISABLE_SUBMIT, payload: true });
-
     window.Pelcro.address.create(
       {
         auth_token: window.Pelcro.user.read().auth_token,
@@ -137,7 +135,7 @@ const AddressCreateContainer = ({
           return Update({ ...state, state: action.payload });
 
         case DISABLE_SUBMIT:
-          return Update({ ...state, DISABLE_SUBMIT: action.payload });
+          return Update({ ...state, disableSubmit: action.payload });
 
         case SET_COUNTRIES:
           return Update({ ...state, countries: action.payload });
