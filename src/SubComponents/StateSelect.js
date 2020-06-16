@@ -71,7 +71,7 @@ export function StateSelect({
     dispatch({ type: SET_STATE, payload: e.target.value });
   };
 
-  if (loading) {
+  if (loading || (!createStateItems() && country)) {
     return (
       <div style={{ marginTop: 20 }}>
         <DotLoader size={4} />
