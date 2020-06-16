@@ -113,7 +113,7 @@ const AddressCreateContainer = ({
                 );
               }
 
-              alert("You've subscription has been redeeemed.");
+              alert("Your subscription has been redeemed.");
               return onGiftRedemptionSuccess();
             }
           );
