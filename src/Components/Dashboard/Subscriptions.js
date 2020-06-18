@@ -83,6 +83,7 @@ export const Subscriptions = props => {
 
       props.setProductAndPlan(product, plan);
       props.setSubscriptionIdToRenew(sub.id);
+      console.log("onRenewClick -> sub.id", sub.id);
       props.setView("select");
     };
 
@@ -98,7 +99,9 @@ export const Subscriptions = props => {
         <div>
           {sub.plan.nickname && (
             <div className="pelcro-prefix-dashboard-text row">
-              <span className="pelcro-prefix-dashboard-label col-4">Plan</span>
+              <span className="pelcro-prefix-dashboard-label col-4">
+                Plan
+              </span>
               <span className="pelcro-prefix-dashboard-value col-8">
                 {sub.plan.nickname}
               </span>
@@ -131,7 +134,9 @@ export const Subscriptions = props => {
         </div>
         <div>
           <div className="pelcro-prefix-dashboard-text row">
-            <span className="pelcro-prefix-dashboard-label col-4">Actions</span>
+            <span className="pelcro-prefix-dashboard-label col-4">
+              Actions
+            </span>
             <div className="col-8">
               {sub.cancel_at_period_end === 0 && (
                 <button

@@ -7,14 +7,12 @@ import Authorship from "../common/Authorship";
 import { SubscriptionRenewView } from "./SubscriptionRenewView";
 
 export function SubscriptionRenewModal({
-  logout,
+  product,
   plan,
   subscriptionIdToRenew,
-  giftRecipient,
-  product,
-  isGift,
   onFailure,
   onSuccess,
+  logout,
   setView
 }) {
   const { t } = useTranslation("messages");
@@ -43,9 +41,7 @@ export function SubscriptionRenewModal({
               <SubscriptionRenewView
                 plan={plan}
                 subscriptionIdToRenew={subscriptionIdToRenew}
-                giftRecipient={giftRecipient}
                 product={product}
-                isGift={isGift}
                 onFailure={onFailure}
                 onSuccess={onSuccess}
               />

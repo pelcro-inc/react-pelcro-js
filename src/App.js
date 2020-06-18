@@ -10,7 +10,7 @@ import {
   PaymentMethodUpdateModal,
   SubscriptionCreateModal,
   UserUpdateView,
-  SubscriptionCreateView,
+  SubscriptionRenewModal,
   NewsLetter,
   PaymentSuccessModal,
   MeterModal,
@@ -237,6 +237,10 @@ class App extends Component {
   };
 
   setSubscriptionIdToRenew = subscriptionIdToRenew => {
+    console.log(
+      "App -> subscriptionIdToRenew",
+      subscriptionIdToRenew
+    );
     this.setState({ subscriptionIdToRenew });
   };
 
@@ -382,20 +386,33 @@ class App extends Component {
             )}
             {this.state.view === "payment" && (
               <SubscriptionCreateModal
-                subscriptionIdToRenew={
-                  this.state.subscriptionIdToRenew
-                }
                 giftRecipient={this.state.giftRecipient}
-                isGift={this.state.isGift}
                 plan={this.state.plan}
                 product={this.state.product}
-                resetView={this.resetView}
                 setView={this.setView}
                 logout={this.logout}
-                ReactGA={ReactGA}
+                onSuccess={() => {
+                  this.setView("success");
+                }}
                 onFailure={error => console.log(error)}
               />
             )}
+            {this.state.view === "payment" &&
+              this.state.subscriptionIdToRenew && (
+                <SubscriptionRenewModal
+                  subscriptionIdToRenew={
+                    this.state.subscriptionIdToRenew
+                  }
+                  plan={this.state.plan}
+                  product={this.state.product}
+                  setView={this.setView}
+                  logout={this.logout}
+                  onSuccess={() =>
+                    console.log("Subscription renewed!")
+                  }
+                  onFailure={error => console.log(error)}
+                />
+              )}
             {this.state.view === "success" && (
               <PaymentSuccessModal
                 order={this.state.order}

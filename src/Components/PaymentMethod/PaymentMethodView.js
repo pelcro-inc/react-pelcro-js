@@ -17,7 +17,7 @@ export function PaymentMethodView({
   showCoupon,
   type,
   subscriptionIdToRenew,
-  giftRecipient,
+  giftRecipient = null,
   plan,
   product,
   onSuccess,

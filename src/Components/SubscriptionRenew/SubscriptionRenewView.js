@@ -7,7 +7,6 @@ import AlertSuccess from "../common/AlertSuccess";
 export const SubscriptionRenewView = ({
   product,
   plan,
-  giftRecipient,
   subscriptionIdToRenew,
   onFailure,
   onSuccess
@@ -52,7 +51,6 @@ export const SubscriptionRenewView = ({
             showCoupon={true}
             plan={plan}
             subscriptionIdToRenew={subscriptionIdToRenew}
-            giftRecipient={giftRecipient}
             product={product}
             onFailure={onFailure}
             onSuccess={onSuccess}

@@ -11,7 +11,6 @@ export function SubscriptionCreateModal({
   plan,
   giftRecipient,
   product,
-  isGift,
   setView,
   onFailure = () => {},
   onSuccess = () => {}
@@ -43,7 +42,6 @@ export function SubscriptionCreateModal({
                 plan={plan}
                 giftRecipient={giftRecipient}
                 product={product}
-                isGift={isGift}
                 onFailure={onFailure}
                 onSuccess={onSuccess}
               />

@@ -58,7 +58,7 @@ const PaymentMethodContainerWithoutStripe = ({
   subscriptionIdToRenew,
   plan,
   product,
-  giftRecipient,
+  giftRecipient = null,
   couponCode,
   onSuccess = () => {},
   onFailure = () => {}
@@ -131,7 +131,6 @@ const PaymentMethodContainerWithoutStripe = ({
   };
 
   const subscribe = (token, state, dispatch) => {
-    console.log("subscribe to plan");
     if (!subscriptionIdToRenew) {
       window.Pelcro.subscription.create(
         {
@@ -207,7 +206,6 @@ const PaymentMethodContainerWithoutStripe = ({
   };
 
   const submitPayment = (state, dispatch) => {
-    console.log("submit payment!!");
     return stripe.createToken().then(({ token, error }) => {
       if (error) {
         onFailure(error);
@@ -227,7 +225,6 @@ const PaymentMethodContainerWithoutStripe = ({
 
   const [state, dispatch] = useReducerWithSideEffects(
     (state, action) => {
-      console.log("state, action", state, action);
       switch (action.type) {
         case DISABLE_SUBMIT:
           return Update({ ...state, disableSubmit: action.payload });
