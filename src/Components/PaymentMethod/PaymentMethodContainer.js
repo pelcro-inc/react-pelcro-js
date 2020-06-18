@@ -44,7 +44,6 @@ const displayError = message => {
 };
 
 const displaySuccess = message => {
-  console.log("will show success message: ", message);
   showSuccess(message, "pelcro-success-payment-create");
 };
 
@@ -63,8 +62,6 @@ const PaymentMethodContainerWithoutStripe = ({
   onSuccess = () => {},
   onFailure = () => {}
 }) => {
-  const { t } = useTranslation("messages");
-
   useEffect(() => {
     window.Pelcro.insight.track("Modal Displayed", {
       name: "payment"
@@ -86,7 +83,6 @@ const PaymentMethodContainerWithoutStripe = ({
         token: token.id
       },
       err => {
-        console.log("createPayment -> err", err);
         dispatch({ type: DISABLE_SUBMIT, payload: false });
         if (err) {
           onFailure(err);
@@ -94,6 +90,7 @@ const PaymentMethodContainerWithoutStripe = ({
         }
 
         displaySuccess(successMessage);
+        onSuccess();
       }
     );
   };
@@ -186,11 +183,6 @@ const PaymentMethodContainerWithoutStripe = ({
             onFailure(err);
             return displayError(getErrorMessages(err));
           }
-          // ReactGA.event({
-          //   category: "ACTIONS",
-          //   action: "Reactivated",
-          //   nonInteraction: true
-          // });
 
           if (giftRecipient) {
             onSuccess();
@@ -249,7 +241,6 @@ const PaymentMethodContainerWithoutStripe = ({
           );
 
         case SUBMIT_PAYMENT:
-          console.log("SUBMIT_PAYMENT");
           return UpdateWithSideEffect(
             { ...state, disableSubmit: true },
             (state, dispatch) => submitPayment(state, dispatch)

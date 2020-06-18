@@ -473,7 +473,6 @@ class App extends Component {
 
             {this.state.view === "source-create" && (
               <PaymentMethodUpdateModal
-                resetView={this.resetView}
                 setView={this.setView}
                 onFailure={error => console.log(error)}
                 onSuccess={() => this.setView("")}

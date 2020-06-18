@@ -41,6 +41,7 @@ export function PaymentMethodUpdateView(props) {
             successMessage={t("success")}
             showCoupon={false}
             onFailure={props.onFailure}
+            onSuccess={props.onSuccess}
           />
         </div>
       </div>
