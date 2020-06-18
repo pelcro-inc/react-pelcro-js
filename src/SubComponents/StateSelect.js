@@ -73,7 +73,7 @@ export function StateSelect({
 
   if (loading || (!createStateItems() && country)) {
     return (
-      <div style={{ marginTop: 20 }}>
+      <div className="state-select-loader" style={{ marginTop: 20 }}>
         <DotLoader size={4} />
       </div>
     );
