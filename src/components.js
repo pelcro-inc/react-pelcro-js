@@ -74,6 +74,10 @@ export { AddressUpdateContainer } from "./Components/AddressUpdate/AddressUpdate
 export { AddressUpdateCountrySelect } from "./Components/AddressUpdate/AddressUpdateCountrySelect";
 export { AddressUpdateFirstName } from "./Components/AddressUpdate/AddressUpdateFirstName";
 export { AddressUpdateLastName } from "./Components/AddressUpdate/AddressUpdateLastName";
+export { AddressUpdateLine1 } from "./Components/AddressUpdate/AddressUpdateLine1";
+export { AddressUpdateLine2 } from "./Components/AddressUpdate/AddressUpdateLine2";
+export { AddressUpdateCity } from "./Components/AddressUpdate/AddressUpdateCity";
+export { AddressUpdatePostalCode } from "./Components/AddressUpdate/AddressUpdatePostalCode";
 export { AddressUpdateModal } from "./Components/AddressUpdate/AddressUpdateModal";
 export { AddressUpdateStateSelect } from "./Components/AddressUpdate/AddressUpdateStateSelect";
 export { AddressUpdateSubmit } from "./Components/AddressUpdate/AddressUpdateSubmit";
