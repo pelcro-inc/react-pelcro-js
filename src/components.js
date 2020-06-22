@@ -59,6 +59,10 @@ export { AddressCreateFirstName } from "./Components/AddressCreate/AddressCreate
 export { AddressCreateLastName } from "./Components/AddressCreate/AddressCreateLastName";
 export { AddressCreateView } from "./Components/AddressCreate/AddressCreateView";
 export { AddressCreateTextInput } from "./Components/AddressCreate/AddressCreateTextInput";
+export { AddressCreateLine1 } from "./Components/AddressCreate/AddressCreateLine1";
+export { AddressCreateLine2 } from "./Components/AddressCreate/AddressCreateLine2";
+export { AddressCreateCity } from "./Components/AddressCreate/AddressCreateCity";
+export { AddressCreatePostalCode } from "./Components/AddressCreate/AddressCreatePostalCode";
 export { AddressCreateCountrySelect } from "./Components/AddressCreate/AddressCreateCountrySelect";
 export { AddressCreateStateSelect } from "./Components/AddressCreate/AddressCreateStateSelect";
 export { AlertSuccess } from "./Components/Alerts/AlertSuccess";

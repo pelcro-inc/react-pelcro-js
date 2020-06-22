@@ -3,13 +3,15 @@ import { useTranslation } from "react-i18next";
 import ErrMessage from "../common/ErrMessage";
 import { AddressCreateFirstName } from "./AddressCreateFirstName";
 import { AddressCreateLastName } from "./AddressCreateLastName";
-import { AddressCreateTextInput } from "./AddressCreateTextInput";
+import { AddressCreateLine1 } from "./AddressCreateLine1";
+import { AddressCreateCity } from "./AddressCreateCity";
+import { AddressCreatePostalCode } from "./AddressCreatePostalCode";
 import { AddressCreateSubmit } from "./AddressCreateSubmit";
 import { AddressCreateContainer } from "./AddressCreateContainer";
 import { AddressCreateCountrySelect } from "./AddressCreateCountrySelect";
 import { AddressCreateStateSelect } from "./AddressCreateStateSelect";
 
-export const AddressCreateView = (props) => {
+export const AddressCreateView = props => {
   const { t } = useTranslation("address");
   return (
     <AddressCreateContainer {...props}>
@@ -52,15 +54,16 @@ export const AddressCreateView = (props) => {
         </div>
         <div className="pelcro-prefix-row">
           <div className="col-md-12">
-            <label className="pelcro-prefix-label" htmlFor="pelcro-input-line1">
+            <label
+              className="pelcro-prefix-label"
+              htmlFor="pelcro-input-line1"
+            >
               {t("labels.address")} *
             </label>
-            <AddressCreateTextInput
-              fieldName="line1"
+            <AddressCreateLine1
               className="pelcro-prefix-input pelcro-prefix-form-control"
               autoComplete="street-address"
               id="pelcro-input-line1"
-              type="text"
               placeholder={t("labels.address")}
             />
           </div>
@@ -73,25 +76,24 @@ export const AddressCreateView = (props) => {
             >
               {t("labels.code")} *
             </label>
-            <AddressCreateTextInput
-              fieldName="postalCode"
+            <AddressCreatePostalCode
               className="pelcro-prefix-input pelcro-prefix-form-control"
               autoComplete="postal-code"
               id="pelcro-input-postal_code"
-              type="text"
               placeholder={t("labels.code")}
             />
           </div>
           <div className="col-md-6">
-            <label className="pelcro-prefix-label" htmlFor="pelcro-input-city">
+            <label
+              className="pelcro-prefix-label"
+              htmlFor="pelcro-input-city"
+            >
               {t("labels.city")} *
             </label>
-            <AddressCreateTextInput
-              fieldName="city"
+            <AddressCreateCity
               className="pelcro-prefix-input pelcro-prefix-form-control"
               autoComplete="address-level2"
               id="pelcro-input-city"
-              type="text"
               placeholder={t("labels.city")}
             />
           </div>

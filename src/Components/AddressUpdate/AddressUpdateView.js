@@ -3,7 +3,9 @@ import { useTranslation } from "react-i18next";
 import { AlertDanger, AlertSuccess } from "../../components";
 import { AddressUpdateFirstName } from "./AddressUpdateFirstName";
 import { AddressUpdateLastName } from "./AddressUpdateLastName";
-import { AddressUpdateTextInput } from "./AddressUpdateTextInput";
+import { AddressUpdateLine1 } from "./AddressUpdateLine1";
+import { AddressUpdateCity } from "./AddressUpdateCity";
+import { AddressUpdatePostalCode } from "./AddressUpdatePostalCode";
 import { AddressUpdateSubmit } from "./AddressUpdateSubmit";
 import { AddressUpdateContainer } from "./AddressUpdateContainer";
 import { AddressUpdateCountrySelect } from "./AddressUpdateCountrySelect";
@@ -59,12 +61,10 @@ export const AddressUpdateView = props => {
             >
               {t("labels.address")} *
             </label>
-            <AddressUpdateTextInput
-              fieldName="line1"
+            <AddressUpdateLine1
               className="pelcro-prefix-input pelcro-prefix-form-control"
               autoComplete="street-address"
               id="pelcro-input-line1"
-              type="text"
               placeholder={t("labels.address")}
             />
           </div>
@@ -77,12 +77,10 @@ export const AddressUpdateView = props => {
             >
               {t("labels.code")} *
             </label>
-            <AddressUpdateTextInput
-              fieldName="postalCode"
+            <AddressUpdatePostalCode
               className="pelcro-prefix-input pelcro-prefix-form-control"
               autoComplete="postal-code"
               id="pelcro-input-postal_code"
-              type="text"
               placeholder={t("labels.code")}
             />
           </div>
@@ -93,7 +91,7 @@ export const AddressUpdateView = props => {
             >
               {t("labels.city")} *
             </label>
-            <AddressUpdateTextInput
+            <AddressUpdateCity
               fieldName="city"
               className="pelcro-prefix-input pelcro-prefix-form-control"
               autoComplete="address-level2"
