@@ -92,11 +92,9 @@ export const AddressUpdateView = props => {
               {t("labels.city")} *
             </label>
             <AddressUpdateCity
-              fieldName="city"
               className="pelcro-prefix-input pelcro-prefix-form-control"
               autoComplete="address-level2"
               id="pelcro-input-city"
-              type="text"
               placeholder={t("labels.city")}
             />
           </div>
