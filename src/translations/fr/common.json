@@ -16,16 +16,6 @@
             "loginHere": "Connectez-vous ici"
         }
     },
-    "password-reset": {
-        "title": "Réinitialiser votre mot de passe",
-        "subtitle": "Entrez un nouveau mot de passe ci-dessous",
-        "email": "Courriel",
-        "password": "mot de passe",
-        "confirmPassword": "Confirmer le mot de passe",
-        "submit": "Soumettre",
-        "required": "Champs obligatoires",
-        "passwordUpdated": "Le mot de passe a été mis à jour, veuillez vous connecter avec le nouveau mot de passe"
-    },
     "payment": {
         "labels": {
             "cardNumber": "Numéro de carte",

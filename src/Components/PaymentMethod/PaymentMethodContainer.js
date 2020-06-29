@@ -82,7 +82,7 @@ const PaymentMethodContainerWithoutStripe = ({
         auth_token: window.Pelcro.user.read().auth_token,
         token: token.id
       },
-      err => {
+      (err, res) => {
         dispatch({ type: DISABLE_SUBMIT, payload: false });
         if (err) {
           onFailure(err);
@@ -90,7 +90,7 @@ const PaymentMethodContainerWithoutStripe = ({
         }
 
         displaySuccess(successMessage);
-        onSuccess();
+        onSuccess(res);
       }
     );
   };
@@ -155,11 +155,7 @@ const PaymentMethodContainerWithoutStripe = ({
             );
           }
 
-          if (giftRecipient) {
-            onSuccess();
-          } else {
-            onSuccess();
-          }
+          onSuccess(res);
         }
       );
     } else {
@@ -184,11 +180,7 @@ const PaymentMethodContainerWithoutStripe = ({
             return displayError(getErrorMessages(err));
           }
 
-          if (giftRecipient) {
-            onSuccess();
-          } else {
-            onSuccess();
-          }
+          onSuccess(res);
         }
       );
     }

@@ -21,7 +21,8 @@ import {
   UserUpdateModal,
   AddressCreateModal,
   PelcroContainer,
-  AddressUpdateModal
+  AddressUpdateModal,
+  PasswordResetModal
 } from "./components";
 
 // refactor this then integrate it with the main UI ASAP.
@@ -33,7 +34,6 @@ import Redeem from "./Components/modals/Redeem";
 // import Success from "./Components/modals/Success";
 // import AddressCreate from "./Components/modals/address/Create";
 import PasswordForgot from "./Components/modals/password/Forgot";
-import PasswordReset from "./Components/modals/password/Reset";
 import UserEdit from "./Components/modals/user/Edit";
 
 import Shop from "./Components/shop/Shop";
@@ -90,7 +90,9 @@ class App extends Component {
   };
 
   initUI = () => {
-    if (this.state.site.settings === "subscription") this.initViews();
+    if (this.state.site.settings === "subscription") {
+    }
+    this.initViews();
   };
 
   handleShowUpdateUserViewClick = () => {
@@ -152,8 +154,6 @@ class App extends Component {
   };
 
   setView = view => {
-    console.log("App -> view", view);
-
     this.setState({ view: view });
 
     if (view !== "meter") this.disableScroll();
@@ -237,10 +237,6 @@ class App extends Component {
   };
 
   setSubscriptionIdToRenew = subscriptionIdToRenew => {
-    console.log(
-      "App -> subscriptionIdToRenew",
-      subscriptionIdToRenew
-    );
     this.setState({ subscriptionIdToRenew });
   };
 
@@ -464,11 +460,7 @@ class App extends Component {
               />
             )}
             {this.state.view === "password-reset" && (
-              <PasswordReset
-                resetView={this.resetView}
-                ReactGA={ReactGA}
-                setView={this.setView}
-              />
+              <PasswordResetModal setView={this.setView} />
             )}
 
             {this.state.view === "source-create" && (

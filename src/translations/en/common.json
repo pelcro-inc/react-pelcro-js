@@ -16,16 +16,6 @@
             "loginHere": "login here."
         }
     },
-    "password-reset": {
-        "title": "Reset your password",
-        "subtitle": "Enter a new password below",
-        "email": "Email",
-        "password": "Password",
-        "confirmPassword": "Confirm password",
-        "submit": "Submit",
-        "required": "Required",
-        "passwordUpdated": "Password has been updated, please login with the new password"
-    },
     "payment": {
         "labels": {
             "cardNumber": "Card number",

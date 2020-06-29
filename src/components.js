@@ -93,6 +93,7 @@ export { PaymentUpdateView } from "./Components/PaymentUpdate/PaymentUpdateView"
 export { PaymentMethodUpdateContainer } from "./Components/PaymentMethodUpdate/PaymentMethodUpdateContainer";
 export { PaymentMethodUpdateModal } from "./Components/PaymentMethodUpdate/PaymentMethodUpdateModal";
 export { PaymentMethodUpdateView } from "./Components/PaymentMethodUpdate/PaymentMethodUpdateView";
+export { PasswordResetModal } from "./Components/PasswordReset/PasswordResetModal";
 
 export {
   init as initButtons,

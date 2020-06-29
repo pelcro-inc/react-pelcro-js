@@ -22,6 +22,8 @@ import userEdit_en from "./translations/en/userEdit.json";
 import userEdit_fr from "./translations/fr/userEdit.json";
 import address_en from "./translations/en/address.json";
 import address_fr from "./translations/fr/address.json";
+import passwordReset_en from "./translations/en/passwordReset.json";
+import passwordReset_fr from "./translations/fr/passwordReset.json";
 
 const resources = {
   en_US: {
@@ -35,7 +37,8 @@ const resources = {
     login: login_en,
     register: register_en,
     userEdit: userEdit_en,
-    address: address_en
+    address: address_en,
+    passwordReset: passwordReset_en
   },
   fr_CA: {
     common: common_fr,
@@ -48,7 +51,8 @@ const resources = {
     login: login_fr,
     register: register_fr,
     userEdit: userEdit_fr,
-    address: address_fr
+    address: address_fr,
+    passwordReset: passwordReset_fr
   }
 };
 
