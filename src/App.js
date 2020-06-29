@@ -315,251 +315,245 @@ class App extends Component {
 
   render() {
     return (
-      <PelcroContainer>
-        <div id="pelcro-app">
-          <div id="list">
-            {this.state.isAuthenticated && (
-              <DashboardMenu
-                openDashboard={this.displayDashboardView}
-              />
-            )}
+      <div id="pelcro-app">
+        <div id="list">
+          {this.state.isAuthenticated && (
+            <DashboardMenu
+              openDashboard={this.displayDashboardView}
+            />
+          )}
 
-            {this.state.isAuthenticated && authenticatedButtons()}
-            {!this.state.isAuthenticated && unauthenticatedButtons()}
+          {this.state.isAuthenticated && authenticatedButtons()}
+          {!this.state.isAuthenticated && unauthenticatedButtons()}
 
-            {/* <CustomUpdatePayment ReactGA={ReactGA} /> */}
+          {/* <CustomUpdatePayment ReactGA={ReactGA} /> */}
 
-            {this.state.view === "select" && (
-              <SelectModal
-                isGift={this.state.isGift}
-                plan={this.state.plan}
-                product={this.state.product}
-                resetView={this.resetView}
-                setProductAndPlan={this.setProductAndPlan}
-                setView={this.setView}
-                subscribe={this.subscribe}
-                ReactGA={ReactGA}
-              />
-            )}
-            {this.state.view === "login" && (
-              <LoginModal
-                setView={this.setView}
-                onSuccess={() => {
-                  this.setView("");
-                  this.loggedIn();
-                }}
-              />
-            )}
-            {this.state.view === "register" && (
-              <RegisterModal
-                setView={this.setView}
-                onSuccess={() => {
-                  this.setView("");
-                  this.loggedIn();
-                }}
-              />
-            )}
-            {this.state.view === "gift" && (
-              <Gift
-                site={this.state.site}
-                isGift={this.state.isGift}
-                setGiftRecipient={this.setGiftRecipient}
-                plan={this.state.plan}
-                product={this.state.product}
-                resetView={this.resetView}
-                setView={this.setView}
-                ReactGA={ReactGA}
-              />
-            )}
-            {this.state.view === "redeem" && (
-              <Redeem
-                site={this.state.site}
-                setGiftCode={this.setGiftCode}
-                resetView={this.resetView}
-                setView={this.setView}
-                ReactGA={ReactGA}
-              />
-            )}
-            {this.state.view === "payment" && (
-              <SubscriptionCreateModal
-                giftRecipient={this.state.giftRecipient}
+          {this.state.view === "select" && (
+            <SelectModal
+              isGift={this.state.isGift}
+              plan={this.state.plan}
+              product={this.state.product}
+              resetView={this.resetView}
+              setProductAndPlan={this.setProductAndPlan}
+              setView={this.setView}
+              subscribe={this.subscribe}
+              ReactGA={ReactGA}
+            />
+          )}
+          {this.state.view === "login" && (
+            <LoginModal
+              setView={this.setView}
+              onSuccess={() => {
+                this.setView("");
+                this.loggedIn();
+              }}
+            />
+          )}
+          {this.state.view === "register" && (
+            <RegisterModal
+              setView={this.setView}
+              onSuccess={() => {
+                this.setView("");
+                this.loggedIn();
+              }}
+            />
+          )}
+          {this.state.view === "gift" && (
+            <Gift
+              site={this.state.site}
+              isGift={this.state.isGift}
+              setGiftRecipient={this.setGiftRecipient}
+              plan={this.state.plan}
+              product={this.state.product}
+              resetView={this.resetView}
+              setView={this.setView}
+              ReactGA={ReactGA}
+            />
+          )}
+          {this.state.view === "redeem" && (
+            <Redeem
+              site={this.state.site}
+              setGiftCode={this.setGiftCode}
+              resetView={this.resetView}
+              setView={this.setView}
+              ReactGA={ReactGA}
+            />
+          )}
+          {this.state.view === "payment" && (
+            <SubscriptionCreateModal
+              giftRecipient={this.state.giftRecipient}
+              plan={this.state.plan}
+              product={this.state.product}
+              setView={this.setView}
+              logout={this.logout}
+              onSuccess={() => {
+                this.setView("success");
+              }}
+              onFailure={error => console.log(error)}
+            />
+          )}
+          {this.state.view === "payment" &&
+            this.state.subscriptionIdToRenew && (
+              <SubscriptionRenewModal
+                subscriptionIdToRenew={
+                  this.state.subscriptionIdToRenew
+                }
                 plan={this.state.plan}
                 product={this.state.product}
                 setView={this.setView}
                 logout={this.logout}
-                onSuccess={() => {
-                  this.setView("success");
-                }}
+                onSuccess={() => console.log("Subscription renewed!")}
                 onFailure={error => console.log(error)}
               />
             )}
-            {this.state.view === "payment" &&
-              this.state.subscriptionIdToRenew && (
-                <SubscriptionRenewModal
-                  subscriptionIdToRenew={
-                    this.state.subscriptionIdToRenew
-                  }
-                  plan={this.state.plan}
-                  product={this.state.product}
-                  setView={this.setView}
-                  logout={this.logout}
-                  onSuccess={() =>
-                    console.log("Subscription renewed!")
-                  }
-                  onFailure={error => console.log(error)}
-                />
-              )}
-            {this.state.view === "success" && (
-              <PaymentSuccessModal
-                order={this.state.order}
-                plan={this.state.plan}
-                product={this.state.product}
-                resetView={this.resetView}
-                setView={this.setView}
-                ReactGA={ReactGA}
-              />
-            )}
-            {this.state.view === "address" && (
-              <AddressCreateModal
-                giftCode={this.state.giftCode}
-                setView={this.setView}
-                onSuccess={() => {
-                  if (!this.state.product) {
-                    this.setView("checkout");
-                  } else {
-                    this.setView("payment");
-                  }
-                }}
-                onFailure={error => console.log(error)}
-              />
-            )}
-            {this.state.view === "newsletter" && (
-              <NewsLetter
-                plan={this.state.plan}
-                product={this.state.product}
-                resetView={this.resetView}
-                setView={this.setView}
-                ReactGA={ReactGA}
-              />
-            )}
-            {this.state.view === "meter" && (
-              <MeterModal
-                plan={this.state.plan}
-                product={this.state.product}
-                resetView={this.resetView}
-                setView={this.setView}
-                ReactGA={ReactGA}
-              />
-            )}
+          {this.state.view === "success" && (
+            <PaymentSuccessModal
+              order={this.state.order}
+              plan={this.state.plan}
+              product={this.state.product}
+              resetView={this.resetView}
+              setView={this.setView}
+              ReactGA={ReactGA}
+            />
+          )}
+          {this.state.view === "address" && (
+            <AddressCreateModal
+              giftCode={this.state.giftCode}
+              setView={this.setView}
+              onSuccess={() => {
+                if (!this.state.product) {
+                  this.setView("checkout");
+                } else {
+                  this.setView("payment");
+                }
+              }}
+              onFailure={error => console.log(error)}
+            />
+          )}
+          {this.state.view === "newsletter" && (
+            <NewsLetter
+              plan={this.state.plan}
+              product={this.state.product}
+              resetView={this.resetView}
+              setView={this.setView}
+              ReactGA={ReactGA}
+            />
+          )}
+          {this.state.view === "meter" && (
+            <MeterModal
+              plan={this.state.plan}
+              product={this.state.product}
+              resetView={this.resetView}
+              setView={this.setView}
+              ReactGA={ReactGA}
+            />
+          )}
 
-            {this.state.view === "password-forgot" && (
-              <PasswordForgot
-                resetView={this.resetView}
-                ReactGA={ReactGA}
-                setView={this.setView}
-              />
-            )}
-            {this.state.view === "password-reset" && (
-              <PasswordResetModal setView={this.setView} />
-            )}
+          {this.state.view === "password-forgot" && (
+            <PasswordForgot
+              resetView={this.resetView}
+              ReactGA={ReactGA}
+              setView={this.setView}
+            />
+          )}
+          {this.state.view === "password-reset" && (
+            <PasswordResetModal setView={this.setView} />
+          )}
 
-            {this.state.view === "source-create" && (
-              <PaymentMethodUpdateModal
-                setView={this.setView}
-                onFailure={error => console.log(error)}
-                onSuccess={() => this.setView("")}
-              />
-            )}
+          {this.state.view === "source-create" && (
+            <PaymentMethodUpdateModal
+              setView={this.setView}
+              onFailure={error => console.log(error)}
+              onSuccess={() => this.setView("")}
+            />
+          )}
 
-            {this.state.view === "user-edit" && (
-              <UserUpdateModal
-                setView={this.setView}
-                onSuccess={() => console.log("User Updated")}
-                onFailure={error => console.log(error)}
-              />
-            )}
-
-            <button onClick={this.handleShowUpdateUserViewClick}>
-              Update User
-            </button>
-
-            <UserUpdateView
+          {this.state.view === "user-edit" && (
+            <UserUpdateModal
               setView={this.setView}
               onSuccess={() => console.log("User Updated")}
               onFailure={error => console.log(error)}
             />
+          )}
 
-            {this.state.view === "address-edit" && (
-              <AddressUpdateModal
-                addressId={this.state.addressId}
-                setView={this.setView}
-                onSuccess={() => null}
-                onFailure={error => console.log(error)}
-              />
-            )}
+          <button onClick={this.handleShowUpdateUserViewClick}>
+            Update User
+          </button>
 
-            {this.state.view === "cart" && (
-              <Cart
-                setOrder={this.setOrder}
-                setProductsForCart={this.setProductsForCart}
-                site={this.state.site}
-                isGift={this.state.isGift}
-                products={this.state.products}
-                resetView={this.resetView}
-                setView={this.setView}
-                ReactGA={ReactGA}
-              />
-            )}
-            {this.state.view === "checkout" && (
-              <OrderCreate
-                products={this.state.products}
-                setProductsForCart={this.setProductsForCart}
-                order={this.state.order}
-                resetView={this.resetView}
-                setView={this.setView}
-                logout={this.logout}
-                ReactGA={ReactGA}
-              />
-            )}
-            {this.state.view === "confirm" && (
-              <Confirm
-                products={this.state.products}
-                setProductsForCart={this.setProductsForCart}
-                order={this.state.order}
-                plan={this.state.plan}
-                product={this.state.product}
-                resetView={this.resetView}
-                ReactGA={ReactGA}
-                setView={this.setView}
-              />
-            )}
+          <UserUpdateView
+            setView={this.setView}
+            onSuccess={() => console.log("User Updated")}
+            onFailure={error => console.log(error)}
+          />
 
-            {this.state.view === "dashboard" && (
-              <DashboardModal
-                setAddress={this.setAddress}
-                setSubscriptionIdToRenew={
-                  this.setSubscriptionIdToRenew
-                }
-                resetView={this.resetView}
-                logout={this.logout}
-                setView={this.setView}
-                setProductAndPlan={this.setProductAndPlan}
-                ReactGA={ReactGA}
-                getAddressId={addressId => {
-                  this.setState({ addressId });
-                  this.setView("address-edit");
-                }}
-              />
-            )}
-            {/* 
+          {this.state.view === "address-edit" && (
+            <AddressUpdateModal
+              addressId={this.state.addressId}
+              setView={this.setView}
+              onSuccess={() => null}
+              onFailure={error => console.log(error)}
+            />
+          )}
+
+          {this.state.view === "cart" && (
+            <Cart
+              setOrder={this.setOrder}
+              setProductsForCart={this.setProductsForCart}
+              site={this.state.site}
+              isGift={this.state.isGift}
+              products={this.state.products}
+              resetView={this.resetView}
+              setView={this.setView}
+              ReactGA={ReactGA}
+            />
+          )}
+          {this.state.view === "checkout" && (
+            <OrderCreate
+              products={this.state.products}
+              setProductsForCart={this.setProductsForCart}
+              order={this.state.order}
+              resetView={this.resetView}
+              setView={this.setView}
+              logout={this.logout}
+              ReactGA={ReactGA}
+            />
+          )}
+          {this.state.view === "confirm" && (
+            <Confirm
+              products={this.state.products}
+              setProductsForCart={this.setProductsForCart}
+              order={this.state.order}
+              plan={this.state.plan}
+              product={this.state.product}
+              resetView={this.resetView}
+              ReactGA={ReactGA}
+              setView={this.setView}
+            />
+          )}
+
+          {this.state.view === "dashboard" && (
+            <DashboardModal
+              setAddress={this.setAddress}
+              setSubscriptionIdToRenew={this.setSubscriptionIdToRenew}
+              resetView={this.resetView}
+              logout={this.logout}
+              setView={this.setView}
+              setProductAndPlan={this.setProductAndPlan}
+              ReactGA={ReactGA}
+              getAddressId={addressId => {
+                this.setState({ addressId });
+                this.setView("address-edit");
+              }}
+            />
+          )}
+          {/* 
           <UpdatePaymentMethodView
             resetView={this.resetView}
             ReactGA={ReactGA}
             setView={this.setView}
           /> */}
-          </div>
         </div>
-      </PelcroContainer>
+      </div>
     );
   }
 }

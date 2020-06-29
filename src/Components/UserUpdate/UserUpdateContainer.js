@@ -1,9 +1,9 @@
-import React, { createContext, useContext } from "react";
+import React, { createContext, useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { store as pelcroStore } from "../PelcroContainer";
 import useReducerWithSideEffects, {
   UpdateWithSideEffect,
-  Update,
+  Update
 } from "use-reducer-with-side-effects";
 import {
   SET_FIRST_NAME,
@@ -11,7 +11,7 @@ import {
   SET_PHONE,
   SET_TEXT_FIELD,
   HANDLE_USER_UPDATE,
-  DISABLE_USER_UPDATE_BUTTON,
+  DISABLE_USER_UPDATE_BUTTON
 } from "../../utils/action-types";
 import { getErrorMessages } from "../common/Helpers";
 import { showError, showSuccess } from "../../utils/showing-error";
@@ -22,7 +22,7 @@ const initialState = {
   lastName: window.Pelcro.user.read().last_name,
   phone: window.Pelcro.user.read().phone,
   buttonDisabled: false,
-  textFields: {},
+  textFields: {}
 };
 const store = createContext(initialState);
 const { Provider } = store;
@@ -32,12 +32,18 @@ const UserUpdateContainer = ({
   className,
   onSuccess = () => {},
   onFailure = () => {},
-  children,
+  children
 }) => {
-  const {
-    state: { pelcroUserLoaded },
-  } = useContext(pelcroStore);
+  // const {
+  //   state: { pelcroUserLoaded },
+  // } = useContext(pelcroStore);
+  const [pelcroUserLoaded, setUserLoaded] = useState(false);
   const { t } = useTranslation("userEdit");
+
+  setTimeout(() => {
+    setUserLoaded(true);
+  }, 2000);
+
   const handleUpdateUser = (
     { firstName, lastName, phone, textFields },
     dispatch
@@ -48,60 +54,72 @@ const UserUpdateContainer = ({
         first_name: firstName,
         last_name: lastName,
         phone: phone,
-        metadata: { updated: "updated", ...textFields },
+        metadata: { updated: "updated", ...textFields }
       },
       (err, res) => {
-        dispatch({ type: DISABLE_USER_UPDATE_BUTTON, payload: false });
+        dispatch({
+          type: DISABLE_USER_UPDATE_BUTTON,
+          payload: false
+        });
 
         if (err) {
           onFailure(err);
-          return showError(getErrorMessages(err), "pelcro-error-user-edit");
+          return showError(
+            getErrorMessages(err),
+            "pelcro-error-user-edit"
+          );
         } else {
-          showSuccess(t("messages.userUpdated"), "pelcro-success-user-edit");
+          showSuccess(
+            t("messages.userUpdated"),
+            "pelcro-success-user-edit"
+          );
           onSuccess();
         }
       }
     );
   };
 
-  const [state, dispatch] = useReducerWithSideEffects((state, action) => {
-    switch (action.type) {
-      case SET_TEXT_FIELD:
-        return Update({
-          ...state,
-          textFields: { ...state.textFields, ...action.payload },
-        });
+  const [state, dispatch] = useReducerWithSideEffects(
+    (state, action) => {
+      switch (action.type) {
+        case SET_TEXT_FIELD:
+          return Update({
+            ...state,
+            textFields: { ...state.textFields, ...action.payload }
+          });
 
-      case SET_FIRST_NAME:
-        return Update({
-          ...state,
-          firstName: action.payload,
-        });
+        case SET_FIRST_NAME:
+          return Update({
+            ...state,
+            firstName: action.payload
+          });
 
-      case SET_LAST_NAME:
-        return Update({
-          ...state,
-          lastName: action.payload,
-        });
+        case SET_LAST_NAME:
+          return Update({
+            ...state,
+            lastName: action.payload
+          });
 
-      case SET_PHONE:
-        return Update({
-          ...state,
-          phone: action.payload,
-        });
+        case SET_PHONE:
+          return Update({
+            ...state,
+            phone: action.payload
+          });
 
-      case DISABLE_USER_UPDATE_BUTTON:
-        return Update({ ...state, buttonDisabled: action.payload });
-      case HANDLE_USER_UPDATE:
-        return UpdateWithSideEffect(
-          { ...state, buttonDisabled: true },
-          (state, dispatch) => handleUpdateUser(state, dispatch)
-        );
+        case DISABLE_USER_UPDATE_BUTTON:
+          return Update({ ...state, buttonDisabled: action.payload });
+        case HANDLE_USER_UPDATE:
+          return UpdateWithSideEffect(
+            { ...state, buttonDisabled: true },
+            (state, dispatch) => handleUpdateUser(state, dispatch)
+          );
 
-      default:
-        throw new Error();
-    }
-  }, initialState);
+        default:
+          throw new Error();
+      }
+    },
+    initialState
+  );
 
   if (pelcroUserLoaded) {
     return (
