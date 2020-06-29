@@ -1,4 +1,9 @@
-import React, { createContext, useContext, useState } from "react";
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect
+} from "react";
 import { useTranslation } from "react-i18next";
 import { store as pelcroStore } from "../PelcroContainer";
 import useReducerWithSideEffects, {
@@ -40,9 +45,23 @@ const UserUpdateContainer = ({
   const [pelcroUserLoaded, setUserLoaded] = useState(false);
   const { t } = useTranslation("userEdit");
 
-  setTimeout(() => {
-    setUserLoaded(true);
-  }, 2000);
+  useEffect(() => {
+    setTimeout(() => {
+      dispatch({
+        type: SET_FIRST_NAME,
+        payload: window.Pelcro.user.read().first_name
+      });
+      dispatch({
+        type: SET_LAST_NAME,
+        payload: window.Pelcro.user.read().last_name
+      });
+      dispatch({
+        type: SET_PHONE,
+        payload: window.Pelcro.user.read().phone
+      });
+      setUserLoaded(true);
+    }, 3000);
+  }, []);
 
   const handleUpdateUser = (
     { firstName, lastName, phone, textFields },
