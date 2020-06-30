@@ -134,7 +134,7 @@ const UserUpdateContainer = ({
           );
 
         default:
-          throw new Error();
+          return state;
       }
     },
     initialState

@@ -27,7 +27,7 @@ const AddressesListContainer = ({
           });
 
         default:
-          throw new Error();
+          return state;
       }
     },
     initialState

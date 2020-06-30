@@ -161,7 +161,7 @@ const AddressCreateContainer = ({
             (state, dispatch) => submitAddress(state, dispatch)
           );
         default:
-          throw new Error();
+          return state;
       }
     },
     initialState

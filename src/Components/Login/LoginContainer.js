@@ -82,7 +82,7 @@ const LoginContainer = ({
             (state, dispatch) => handleLogin(state, dispatch)
           );
         default:
-          throw new Error();
+          return state;
       }
     },
     initialState

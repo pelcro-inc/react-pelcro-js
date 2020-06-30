@@ -30,7 +30,7 @@ const PelcroContainer = ({ children }) => {
         return { ...state, pelcroUserLoaded: action.payload };
 
       default:
-        throw new Error();
+        return state;
     }
   }, initialState);
 

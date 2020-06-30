@@ -254,7 +254,7 @@ const PaymentMethodContainerWithoutStripe = ({
           return Update({ ...state, percentOff: action.payload });
 
         default:
-          throw new Error();
+          return state;
       }
     },
     initialState

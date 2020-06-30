@@ -157,7 +157,7 @@ const RegisterContainer = ({
           );
 
         default:
-          throw new Error();
+          return state;
       }
     },
     initialState

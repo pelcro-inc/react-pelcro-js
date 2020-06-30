@@ -155,7 +155,7 @@ const AddressUpdateContainer = ({
           );
 
         default:
-          throw new Error();
+          return state;
       }
     },
     initialState
