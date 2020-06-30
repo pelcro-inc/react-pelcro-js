@@ -1,11 +1,11 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import ErrMessage from "../common/ErrMessage";
-import AlertSuccess from "../common/AlertSuccess";
 import {
   PelcroCardNumber,
   PelcroCardExpiry,
-  PelcroCardCVC
+  PelcroCardCVC,
+  AlertDanger,
+  AlertSuccess
 } from "../../components";
 import { DiscountedPrice } from "../PaymentMethod/DiscountedPrice";
 import { SubscriptionCreateContainer } from "./SubscriptionCreateContainer";
@@ -36,7 +36,7 @@ export const SubscriptionCreateView = ({
         </p>
       </div>
 
-      <ErrMessage name="payment" />
+      <AlertDanger name="payment" />
       <AlertSuccess name="payment" />
 
       <div className="pelcro-prefix-payment-block">
