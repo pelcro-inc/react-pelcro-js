@@ -63,7 +63,7 @@ export function Email({
         id={id}
         style={{ ...style }}
         className={(emailError ? "input-error " : "") + className}
-        value={email}
+        value={email || stateEmail}
         onChange={e => handleInputChange(e.target.value)}
         placeholder={placeholder || "Enter Your Email"}
         onBlur={() => setFinishedTyping(true)}

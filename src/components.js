@@ -94,6 +94,12 @@ export { PaymentMethodUpdateContainer } from "./Components/PaymentMethodUpdate/P
 export { PaymentMethodUpdateModal } from "./Components/PaymentMethodUpdate/PaymentMethodUpdateModal";
 export { PaymentMethodUpdateView } from "./Components/PaymentMethodUpdate/PaymentMethodUpdateView";
 export { PasswordResetModal } from "./Components/PasswordReset/PasswordResetModal";
+export { PasswordResetView } from "./Components/PasswordReset/PasswordResetView";
+export { PasswordResetContainer } from "./Components/PasswordReset/PasswordResetContainer";
+export { PasswordResetEmail } from "./Components/PasswordReset/PasswordResetEmail";
+export { PasswordResetConfirmPassword } from "./Components/PasswordReset/PasswordResetConfirmPassword";
+export { PasswordResetPassword } from "./Components/PasswordReset/PasswordResetPassword";
+export { PasswordResetButton } from "./Components/PasswordReset/PasswordResetButton";
 
 export {
   init as initButtons,
