@@ -68,7 +68,10 @@ export const PasswordResetView = props => {
           />
         </div>
 
-        <PasswordResetButton text={t("submit")} />
+        <PasswordResetButton
+          className="pelcro-prefix-btn"
+          name={t("submit")}
+        />
         <small className="pelcro-prefix-footnote pelcro-prefix-form-text">
           * {t("required")}
         </small>

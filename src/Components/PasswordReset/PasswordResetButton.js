@@ -12,22 +12,22 @@ export const PasswordResetButton = ({ ...otherProps }) => {
     dispatch
   } = useContext(store);
 
-  const [isDisabled, setDisabled] = useState(buttonDisabled);
+  // const [isDisabled, setDisabled] = useState(buttonDisabled);
 
-  useEffect(() => {
-    setDisabled(
-      buttonDisabled ||
-        !email.length ||
-        !password.length ||
-        !passwordConfirmation.length
-    );
-  }, [email, password]);
+  // useEffect(() => {
+  //   setDisabled(
+  //     buttonDisabled ||
+  //       !email.length ||
+  //       !password.length ||
+  //       !passwordConfirmation.length
+  //   );
+  // }, [email, password]);
 
   return (
     <Button
       {...otherProps}
       onClick={() => dispatch({ type: HANDLE_SUBMIT })}
-      disabled={isDisabled}
+      disabled={buttonDisabled}
     >
       {otherProps.name || "Reset Password"}
     </Button>

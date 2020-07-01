@@ -20,7 +20,7 @@ const initialState = {
   password: "",
   confirmPassword: "",
   token: "",
-  buttonDisabled: true
+  buttonDisabled: false
 };
 const store = createContext(initialState);
 const { Provider } = store;
