@@ -22,26 +22,19 @@ import {
   AddressCreateModal,
   PelcroContainer,
   AddressUpdateModal,
-  PasswordResetModal
+  PasswordResetModal,
+  PasswordForgotModal
 } from "./components";
-
-// refactor this then integrate it with the main UI ASAP.
-// import AddressEdit from "./Components/modals/address/Edit";
 
 // to be refactored
 import Gift from "./Components/modals/Gift";
 import Redeem from "./Components/modals/Redeem";
-// import Success from "./Components/modals/Success";
-// import AddressCreate from "./Components/modals/address/Create";
-import PasswordForgot from "./Components/modals/password/Forgot";
 import UserEdit from "./Components/modals/user/Edit";
 
 import Shop from "./Components/shop/Shop";
 import Cart from "./Components/shop/Cart";
 import OrderCreate from "./Components/shop/OrderCreate";
 import Confirm from "./Components/shop/Confirm";
-
-// import { CustomUpdatePayment } from "./demos/CustomUpdatePayment";
 
 class App extends Component {
   constructor(props) {
@@ -450,11 +443,7 @@ class App extends Component {
           )}
 
           {this.state.view === "password-forgot" && (
-            <PasswordForgot
-              resetView={this.resetView}
-              ReactGA={ReactGA}
-              setView={this.setView}
-            />
+            <PasswordForgotModal setView={this.setView} />
           )}
           {this.state.view === "password-reset" && (
             <PasswordResetModal setView={this.setView} />
@@ -546,12 +535,6 @@ class App extends Component {
               }}
             />
           )}
-          {/* 
-          <UpdatePaymentMethodView
-            resetView={this.resetView}
-            ReactGA={ReactGA}
-            setView={this.setView}
-          /> */}
         </div>
       </div>
     );

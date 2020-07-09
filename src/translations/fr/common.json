@@ -3,19 +3,6 @@
         "account": "Accès abonné(e)s",
         "login": "Se connecter"
     },
-    "password-forgot": {
-        "title": "Mot de passe oublié ?",
-        "subtitle": "Entrez votre email ci-dessous pour réinitialiser votre mot de passe",
-        "email": "Courriel",
-        "password": "Mot de passe",
-        "submit": "Soumettre",
-        "required": "Champs obligatoires",
-        "passwordResetEmailSent": "Des instructions de réinitialisation du mot de passe ont été envoyées à votre adresse email",
-        "messages": {
-            "alreadyHaveAccount": "Vous avez déjà un compte ?",
-            "loginHere": "Connectez-vous ici"
-        }
-    },
     "payment": {
         "labels": {
             "cardNumber": "Numéro de carte",

@@ -100,6 +100,11 @@ export { PasswordResetEmail } from "./Components/PasswordReset/PasswordResetEmai
 export { PasswordResetConfirmPassword } from "./Components/PasswordReset/PasswordResetConfirmPassword";
 export { PasswordResetPassword } from "./Components/PasswordReset/PasswordResetPassword";
 export { PasswordResetButton } from "./Components/PasswordReset/PasswordResetButton";
+export { PasswordForgotButton } from "./Components/PasswordForgot/PasswordForgotButton";
+export { PasswordForgotContainer } from "./Components/PasswordForgot/PasswordForgotContainer";
+export { PasswordForgotEmail } from "./Components/PasswordForgot/PasswordForgotEmail";
+export { PasswordForgotModal } from "./Components/PasswordForgot/PasswordForgotModal";
+export { PasswordForgotView } from "./Components/PasswordForgot/PasswordForgotView";
 
 export {
   init as initButtons,
