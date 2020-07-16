@@ -69,7 +69,8 @@ const PaymentMethodContainerWithoutStripe = ({
   giftRecipient = null,
   couponCode,
   onSuccess = () => {},
-  onFailure = () => {}
+  onFailure = () => {},
+  onLoading = () => {}
 }) => {
   useEffect(() => {
     window.Pelcro.insight.track("Modal Displayed", {
@@ -98,6 +99,8 @@ const PaymentMethodContainerWithoutStripe = ({
 
       paymentRequest.on("token", ({ complete, token, ...data }) => {
         dispatch({ type: DISABLE_COUPON_BUTTON, payload: true });
+        dispatch({ type: DISABLE_SUBMIT, payload: true });
+        onLoading();
         subscribe(token, state, dispatch);
         complete("success");
       });
