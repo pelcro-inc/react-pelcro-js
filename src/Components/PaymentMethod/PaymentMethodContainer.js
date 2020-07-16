@@ -13,13 +13,18 @@ import useReducerWithSideEffects, {
 import {
   DISABLE_SUBMIT,
   CREATE_PAYMENT,
+  SET_FORMATTED_PRICE,
   SUBMIT_PAYMENT,
   DISABLE_COUPON_BUTTON,
   APPLY_COUPON_CODE,
   SET_PERCENT_OFF,
   SET_COUPON,
   UPDATE_COUPON_CODE,
-  SHOW_COUPON_FIELD
+  SHOW_COUPON_FIELD,
+  SET_CAN_MAKE_PAYMENT,
+  SET_PAYMENT_REQUEST,
+  INIT_CONTAINER,
+  UPDATE_PAYMENT_REQUEST
 } from "../../utils/action-types";
 import { getErrorMessages } from "../common/Helpers";
 import {
@@ -34,7 +39,10 @@ const initialState = {
   couponCode: "",
   enableCouponField: false,
   percentOff: null,
-  coupon: null
+  coupon: null,
+  canMakePayment: false,
+  paymentRequest: null,
+  formattedPrice: null
 };
 const store = createContext(initialState);
 const { Provider } = store;
@@ -57,6 +65,7 @@ const PaymentMethodContainerWithoutStripe = ({
   subscriptionIdToRenew,
   plan,
   product,
+  store,
   giftRecipient = null,
   couponCode,
   onSuccess = () => {},
@@ -73,7 +82,40 @@ const PaymentMethodContainerWithoutStripe = ({
         payload: window.Pelcro.coupon.getFromUrl()
       });
     }
+    dispatch({ type: INIT_CONTAINER });
   }, []);
+
+  const initPaymentRequest = (state, dispatch) => {
+    try {
+      const paymentRequest = stripe.paymentRequest({
+        country: window.Pelcro.user.location.countryCode || "US",
+        currency: window.Pelcro.user.read().currency || "usd",
+        total: {
+          label: plan.nickname || plan.description,
+          amount: state.formattedPrice || plan.amount
+        }
+      });
+
+      paymentRequest.on("token", ({ complete, token, ...data }) => {
+        dispatch({ type: DISABLE_COUPON_BUTTON, payload: true });
+        subscribe(token, state, dispatch);
+        complete("success");
+      });
+
+      paymentRequest.canMakePayment().then(result => {
+        dispatch({ type: SET_CAN_MAKE_PAYMENT, payload: !!result });
+      });
+
+      dispatch({
+        type: SET_PAYMENT_REQUEST,
+        payload: paymentRequest
+      });
+    } catch {
+      console.log(
+        "Google Pay/Apple pay isn't available in this country"
+      );
+    }
+  };
 
   const createPayment = (token, state, dispatch) => {
     dispatch({ type: DISABLE_SUBMIT, payload: true });
@@ -120,6 +162,11 @@ const PaymentMethodContainerWithoutStripe = ({
         dispatch({
           type: SET_PERCENT_OFF,
           payload: "Discounted price: $" + res.data.total
+        });
+
+        dispatch({
+          type: SET_FORMATTED_PRICE,
+          payload: res.data.total
         });
 
         dispatch({ type: SET_COUPON, payload: res.data.coupon });
@@ -189,6 +236,15 @@ const PaymentMethodContainerWithoutStripe = ({
     return false;
   };
 
+  const updatePaymentRequest = state => {
+    state.paymentRequest.update({
+      total: {
+        label: plan.nickname || plan.description,
+        amount: state.formattedPrice
+      }
+    });
+  };
+
   const submitPayment = (state, dispatch) => {
     return stripe.createToken().then(({ token, error }) => {
       if (error) {
@@ -232,11 +288,30 @@ const PaymentMethodContainerWithoutStripe = ({
               createPayment(action.payload, state, dispatch)
           );
 
+        case INIT_CONTAINER:
+          return UpdateWithSideEffect(state, (state, dispatch) =>
+            initPaymentRequest(state, dispatch)
+          );
+
+        case UPDATE_PAYMENT_REQUEST:
+          return UpdateWithSideEffect(state, (state, dispatch) =>
+            updatePaymentRequest(state, dispatch)
+          );
+
         case SUBMIT_PAYMENT:
           return UpdateWithSideEffect(
             { ...state, disableSubmit: true },
             (state, dispatch) => submitPayment(state, dispatch)
           );
+
+        case SET_FORMATTED_PRICE:
+          return Update({ ...state, formattedPrice: action.payload });
+
+        case SET_CAN_MAKE_PAYMENT:
+          return Update({ ...state, canMakePayment: action.payload });
+
+        case SET_PAYMENT_REQUEST:
+          return Update({ ...state, paymentRequest: action.payload });
 
         case APPLY_COUPON_CODE:
           return UpdateWithSideEffect(
@@ -285,7 +360,7 @@ const PaymentMethodContainer = props => {
         stripeAccount={window.Pelcro.site.read().account_id}
       >
         <Elements>
-          <UnwrappedForm {...props} />
+          <UnwrappedForm store={store} {...props} />
         </Elements>
       </StripeProvider>
     );

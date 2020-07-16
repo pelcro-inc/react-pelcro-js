@@ -9,8 +9,6 @@ export const AddressCreateSubmit = ({ name, style, className }) => {
     state: { disableSubmit }
   } = useContext(store);
 
-  useEffect(() => console.log("SubmitCheckoutForm mounted"), []);
-
   return useMemo(
     () => (
       <Submit

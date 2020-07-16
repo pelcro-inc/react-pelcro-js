@@ -5,7 +5,8 @@ import {
   PelcroCardExpiry,
   PelcroCardCVC,
   AlertDanger,
-  AlertSuccess
+  AlertSuccess,
+  PelcroPaymentRequestButton
 } from "../../components";
 import { DiscountedPrice } from "../PaymentMethod/DiscountedPrice";
 import { SubscriptionCreateContainer } from "./SubscriptionCreateContainer";
@@ -100,6 +101,8 @@ export const SubscriptionCreateView = ({
                   <DiscountedPrice />
 
                   <SubmitPaymentMethod name={ct("labels.submit")} />
+
+                  <PelcroPaymentRequestButton />
                 </div>
               </div>
             </div>

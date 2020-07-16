@@ -27,10 +27,11 @@ export class SelectModal extends Component {
       isGift: props.isGift,
       disabled: true,
       mode: "product",
-      productList: window.Pelcro.product.list(),
+      productList: window.Pelcro.product.list()
     };
 
-    this.product = this.props.product || window.Pelcro.paywall.getProduct();
+    this.product =
+      this.props.product || window.Pelcro.paywall.getProduct();
     this.locale = localisation("select").getLocaleData();
     this.site = window.Pelcro.site.read();
     this.closeButton = window.Pelcro.paywall.displayCloseButton();
@@ -51,11 +52,11 @@ export class SelectModal extends Component {
       this.setState({
         product: this.state.productList[0],
         planList: this.state.productList[0].plans,
-        mode: "plan",
+        mode: "plan"
       });
     }
     window.Pelcro.insight.track("Modal Displayed", {
-      name: "select",
+      name: "select"
     });
 
     document.addEventListener("keydown", this.handleSubmit);
@@ -65,27 +66,29 @@ export class SelectModal extends Component {
     document.removeEventListener("keydown", this.handleSubmit);
   };
 
-  handleSubmit = (e) => {
-    if (e.key === "Enter" && !this.state.disabled) this.submitOption();
+  handleSubmit = e => {
+    if (e.key === "Enter" && !this.state.disabled)
+      this.submitOption();
   };
 
-  onProductChange = (e) => {
-    const product = window.Pelcro.product.list()[e.target.selectedIndex];
+  onProductChange = e => {
+    const product = window.Pelcro.product.list()[
+      e.target.selectedIndex
+    ];
     this.setState({ product: product, plan: product.plans[0] });
   };
 
-  onPlanChange = (e) => {
+  onPlanChange = e => {
     this.setState({
-      plan: this.state.product.plans[e.target.selectedIndex],
+      plan: this.state.product.plans[e.target.selectedIndex]
     });
   };
 
-  onIsGiftChange = (e) => {
+  onIsGiftChange = e => {
     this.setState({ isGift: e.target.checked });
   };
 
-  countStartPrice = (arr) => {
-    console.log("SelectModal -> arr", arr);
+  countStartPrice = arr => {
     let startingPlan = arr[0];
     for (const plan of arr) {
       if (plan.amount < startingPlan.amount) {
@@ -96,7 +99,7 @@ export class SelectModal extends Component {
   };
 
   renderProducts = () => {
-    return this.state.productList.map((product) => {
+    return this.state.productList.map(product => {
       return (
         <div key={`product-${product.id}`}>
           <div className="pelcro-prefix-product-container pelcro-prefix-gradient-border row">
@@ -108,7 +111,9 @@ export class SelectModal extends Component {
               />
             )}
 
-            <div className={`row ${product.image ? "col-9" : "col-12"}`}>
+            <div
+              className={`row ${product.image ? "col-9" : "col-12"}`}
+            >
               <div className="pelcro-prefix-product-block col-12">
                 <div className="pelcro-prefix-product-title">
                   {product.name}
@@ -143,7 +148,7 @@ export class SelectModal extends Component {
   };
 
   renderPlans = () => {
-    return this.state.planList.map((plan) => {
+    return this.state.planList.map(plan => {
       const isChecked = this.state.plan.id === plan.id ? true : false;
       return (
         <div
@@ -164,7 +169,9 @@ export class SelectModal extends Component {
               onChange={this.selectPlan}
             ></input>
             <div className="control-indicator"></div>
-            <div className="pelcro-prefix-plan-title">{plan.nickname}</div>
+            <div className="pelcro-prefix-plan-title">
+              {plan.nickname}
+            </div>
             <div className="row">
               <div className="col-12 pelcro-prefix-plan-description">
                 {plan.description}
@@ -179,7 +186,7 @@ export class SelectModal extends Component {
     });
   };
 
-  selectProduct = (e) => {
+  selectProduct = e => {
     const id = e.target.dataset.key;
     for (const product of this.state.productList) {
       if (+product.id === +id) {
@@ -190,7 +197,7 @@ export class SelectModal extends Component {
     }
   };
 
-  selectPlan = (e) => {
+  selectPlan = e => {
     const id = e.target.dataset.key;
     for (const plan of this.state.planList) {
       if (+plan.id === +id) {
@@ -219,7 +226,8 @@ export class SelectModal extends Component {
     if (window.Pelcro.user.isAuthenticated()) {
       if (!this.state.isGift) {
         if (
-          (this.state.product.address_required || this.site.taxes_enabled) &&
+          (this.state.product.address_required ||
+            this.site.taxes_enabled) &&
           !window.Pelcro.user.read().addresses
         ) {
           return this.props.setView("address");
@@ -237,7 +245,7 @@ export class SelectModal extends Component {
   };
 
   // inserting error message into modal window
-  showError = (message) => {
+  showError = message => {
     showError(message, "pelcro-error-select");
   };
 
@@ -251,7 +259,7 @@ export class SelectModal extends Component {
       this.props.ReactGA.event({
         category: "VIEWS",
         action: "Product Modal Viewed",
-        nonInteraction: true,
+        nonInteraction: true
       });
 
       return (
@@ -285,12 +293,15 @@ export class SelectModal extends Component {
                 <div className="pelcro-prefix-modal-body">
                   <div className="pelcro-prefix-title-block">
                     <h4>
-                      {(this.product && this.product.paywall.select_title) ||
+                      {(this.product &&
+                        this.product.paywall.select_title) ||
                         (window.Pelcro.product.list()[0] &&
-                          window.Pelcro.product.list()[0].paywall.select_title)}
+                          window.Pelcro.product.list()[0].paywall
+                            .select_title)}
                     </h4>
                     <p>
-                      {(this.product && this.product.paywall.select_subtitle) ||
+                      {(this.product &&
+                        this.product.paywall.select_subtitle) ||
                         (window.Pelcro.product.list()[0] &&
                           window.Pelcro.product.list()[0].paywall
                             .select_subtitle)}
@@ -325,7 +336,7 @@ export class SelectModal extends Component {
       this.props.ReactGA.event({
         category: "VIEWS",
         action: "Plan Modal Viewed",
-        nonInteraction: true,
+        nonInteraction: true
       });
 
       return (
@@ -359,12 +370,15 @@ export class SelectModal extends Component {
                 <div className="pelcro-prefix-modal-body">
                   <div className="pelcro-prefix-title-block">
                     <h4>
-                      {(this.product && this.product.paywall.select_title) ||
+                      {(this.product &&
+                        this.product.paywall.select_title) ||
                         (window.Pelcro.product.list()[0] &&
-                          window.Pelcro.product.list()[0].paywall.select_title)}
+                          window.Pelcro.product.list()[0].paywall
+                            .select_title)}
                     </h4>
                     <p>
-                      {(this.product && this.product.paywall.select_subtitle) ||
+                      {(this.product &&
+                        this.product.paywall.select_subtitle) ||
                         (window.Pelcro.product.list()[0] &&
                           window.Pelcro.product.list()[0].paywall
                             .select_subtitle)}
@@ -404,7 +418,9 @@ export class SelectModal extends Component {
                                 {" "}
                                 <p>
                                   {this.locale.labels.startingAt}{" "}
-                                  {this.countStartPrice(product.plans)}
+                                  {this.countStartPrice(
+                                    product.plans
+                                  )}
                                 </p>
                               </div>
                               <button
@@ -477,5 +493,5 @@ SelectModal.propTypes = {
   iaGift: PropTypes.bool,
   setView: PropTypes.func,
   resetView: PropTypes.func,
-  subscribe: PropTypes.func,
+  subscribe: PropTypes.func
 };

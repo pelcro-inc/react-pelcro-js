@@ -6,10 +6,8 @@ import { SUBMIT_PAYMENT } from "../../utils/action-types";
 export const SubmitPaymentMethod = ({ name, style, className }) => {
   const {
     dispatch,
-    state: { disableSubmit },
+    state: { disableSubmit }
   } = useContext(store);
-
-  useEffect(() => console.log("SubmitCheckoutForm mounted"), []);
 
   return useMemo(
     () => (
