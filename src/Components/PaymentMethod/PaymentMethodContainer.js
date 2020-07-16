@@ -169,6 +169,10 @@ const PaymentMethodContainerWithoutStripe = ({
           payload: res.data.total
         });
 
+        if (state.canMakePayment) {
+          dispatch({ type: UPDATE_PAYMENT_REQUEST });
+        }
+
         dispatch({ type: SET_COUPON, payload: res.data.coupon });
       }
     );
