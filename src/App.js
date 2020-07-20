@@ -43,24 +43,10 @@ class App extends Component {
       site: window.Pelcro.site.read(),
       isAuthenticated: window.Pelcro.user.isAuthenticated(), // controls menu button displaying
       isGift: false,
-      order: null,
+      order: {},
       showUpdateUserView: false,
       addressId: null
     };
-
-    this.initUI = this.initUI.bind(this);
-    this.initViews = this.initViews.bind(this);
-    this.setView = this.setView.bind(this);
-    this.resetView = this.resetView.bind(this);
-    this.displayLoginView = this.displayLoginView.bind(this);
-    this.logout = this.logout.bind(this);
-    this.displaySelectView = this.displaySelectView.bind(this);
-    this.displayDashboardView = this.displayDashboardView.bind(this);
-    this.setProductAndPlan = this.setProductAndPlan.bind(this);
-    this.setGiftCode = this.setGiftCode.bind(this);
-    this.setGiftRecipient = this.setGiftRecipient.bind(this);
-
-    this.loggedIn = this.loggedIn.bind(this);
 
     window.Pelcro.helpers.loadSDK(
       "https://js.stripe.com/v3/",
@@ -78,14 +64,8 @@ class App extends Component {
   };
 
   componentDidMount = () => {
-    this.initUI();
-    ReactGA.initialize(window.Pelcro.site.read().google_analytics_id);
-  };
-
-  initUI = () => {
-    if (this.state.site.settings === "subscription") {
-    }
     this.initViews();
+    ReactGA.initialize(window.Pelcro.site.read().google_analytics_id);
   };
 
   handleShowUpdateUserViewClick = () => {
@@ -143,7 +123,7 @@ class App extends Component {
       } else if (window.Pelcro.paywall.displayPaywall()) {
         this.setView("select");
       }
-    }, 500);
+    }, 1000);
   };
 
   setView = view => {

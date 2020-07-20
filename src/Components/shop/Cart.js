@@ -4,7 +4,6 @@ import localisation from "../../utils/localisation";
 
 import Header from "../common/Header";
 import Authorship from "../common/Authorship";
-// import Submit from '../common/Submit';
 
 class Cart extends Component {
   constructor(props) {
