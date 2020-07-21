@@ -1,4 +1,4 @@
-import React, { createContext, useEffect } from "react";
+import React, { createContext } from "react";
 import useReducerWithSideEffects, {
   UpdateWithSideEffect,
   Update
@@ -12,7 +12,7 @@ import { getErrorMessages } from "../common/Helpers";
 import { showError } from "../../utils/showing-error";
 
 const initialState = {
-  products: [],
+  products: window.Pelcro.product.listGoods(),
   isEmpty: true
 };
 const store = createContext(initialState);
@@ -21,7 +21,6 @@ const { Provider } = store;
 const CartContainer = ({
   style,
   className,
-  products = [],
   onSuccess = () => {},
   onFailure = () => {},
   getProducts = () => {},

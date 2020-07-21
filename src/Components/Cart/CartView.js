@@ -17,14 +17,11 @@ export const CartView = props => {
     <div className="pelcro-prefix-modal-content">
       <Header
         closeButton={window.Pelcro.paywall.displayCloseButton()}
-        resetView={props.setView("")}
+        resetView={() => props.setView("")}
         site={window.Pelcro.site.read()}
       ></Header>
 
-      <CartContainer
-        setProducts={props.setProducts}
-        products={props.products}
-      >
+      <CartContainer setProducts={props.setProducts}>
         <div className="pelcro-prefix-modal-body">
           <div className="pelcro-prefix-title-block">
             <h4>{t("title")}</h4>
