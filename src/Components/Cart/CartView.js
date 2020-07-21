@@ -11,7 +11,7 @@ import {
 
 export const CartView = props => {
   const { t } = useTranslation("cart");
-  let isEmpty = props.products.filter(product => product.quantity)
+  let isEmpty = !props.products.filter(product => product.quantity)
     .length;
   return (
     <div className="pelcro-prefix-modal-content">
@@ -21,7 +21,10 @@ export const CartView = props => {
         site={window.Pelcro.site.read()}
       ></Header>
 
-      <CartContainer setProducts={props.setProducts}>
+      <CartContainer
+        setProducts={props.setProducts}
+        products={props.products}
+      >
         <div className="pelcro-prefix-modal-body">
           <div className="pelcro-prefix-title-block">
             <h4>{t("title")}</h4>
@@ -30,7 +33,6 @@ export const CartView = props => {
           <div className="pelcro-prefix-cart-field">
             {props.products.map(product => {
               if (product.quantity > 0) {
-                isEmpty = false;
                 return (
                   <div key={`product-${product.id}`}>
                     <div

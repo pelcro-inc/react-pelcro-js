@@ -474,6 +474,7 @@ class App extends Component {
               setView={this.setView}
             />
           )}
+
           {this.state.view === "checkout" && (
             <OrderCreate
               products={this.state.products}

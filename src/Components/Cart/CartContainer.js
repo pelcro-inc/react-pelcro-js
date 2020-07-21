@@ -12,10 +12,8 @@ import { getErrorMessages } from "../common/Helpers";
 import { showError } from "../../utils/showing-error";
 
 const initialState = {
-  products: window.Pelcro.product.listGoods(),
-  isEmpty: !window.Pelcro.product
-    .listGoods()
-    .filter(product => product.quantity).length
+  products: [],
+  isEmpty: true
 };
 const store = createContext(initialState);
 const { Provider } = store;
@@ -23,6 +21,7 @@ const { Provider } = store;
 const CartContainer = ({
   style,
   className,
+  products = [],
   onSuccess = () => {},
   onFailure = () => {},
   getProducts = () => {},
