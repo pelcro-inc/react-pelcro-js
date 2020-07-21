@@ -13,7 +13,9 @@ import { showError } from "../../utils/showing-error";
 
 const initialState = {
   products: window.Pelcro.product.listGoods(),
-  isEmpty: true
+  isEmpty: window.Pelcro.product
+    .listGoods()
+    .filter(product => product.quantity).length
 };
 const store = createContext(initialState);
 const { Provider } = store;
@@ -40,33 +42,6 @@ const CartContainer = ({
     onSuccess(items);
   };
 
-  const removeProduct = (state, dispatch, e) => {
-    let productContainer = {};
-    const id = e.target.dataset.key;
-    const productArr = state.products.slice();
-    for (const product of productArr) {
-      if (product.id === id) {
-        if (product.quantity === 1) {
-          product.quantity -= 1;
-
-          dispatch({ type: SET_PRODUCTS, payload: productArr });
-
-          productContainer = document.getElementById(
-            `pelcro-prefix-container-product-${product.id}`
-          );
-          if (productContainer)
-            productContainer.classList.add(
-              "pelcro-prefix-product-container-wrapper"
-            );
-        } else {
-          product.quantity -= 1;
-
-          dispatch({ type: SET_PRODUCTS, payload: productArr });
-        }
-      }
-    }
-  };
-
   const [state, dispatch] = useReducerWithSideEffects(
     (state, action) => {
       switch (action.type) {
@@ -80,10 +55,10 @@ const CartContainer = ({
             ).length
           });
 
-        case HANDLE_REMOVE_PRODUCT:
-          return UpdateWithSideEffect(state, (state, dispatch) =>
-            removeProduct(state, dispatch, action.payload)
-          );
+        // case HANDLE_REMOVE_PRODUCT:
+        //   return UpdateWithSideEffect(state, (state, dispatch) =>
+        //     removeProduct(state, dispatch, action.payload)
+        //   );
 
         case HANDLE_SUBMIT:
           return UpdateWithSideEffect(

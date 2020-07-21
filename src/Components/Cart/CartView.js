@@ -66,7 +66,7 @@ export const CartView = props => {
                           })}{" "}
                         </div>
                         <div className="col-5">
-                          <CartRemoveProductButton>
+                          <CartRemoveProductButton product={product}>
                             <div className="remove-icon">
                               <svg
                                 version="1.1"
