@@ -11,7 +11,7 @@ import {
 
 export const CartView = props => {
   const { t } = useTranslation("cart");
-  const isEmpty = props.products.filter(product => product.quantity)
+  let isEmpty = props.products.filter(product => product.quantity)
     .length;
   return (
     <div className="pelcro-prefix-modal-content">
