@@ -109,19 +109,6 @@
             "back": "Retour"
         }
     },
-    "cart": {
-        "title": "Votre Panier",
-        "subtitle": "Terminez votre achat ci-dessous",
-        "name": "Produit",
-        "quantity": "Quantité",
-        "price": "Prix",
-        "actions": "Actes",
-        "remove": "Retirer",
-        "total": "Total",
-        "confirm": "Check-out",
-        "empty": "Votre panier est vide.",
-        "removeAll": "Enlever tout"
-    },
     "products": {
         "buttons": {
             "select": "Choisir",

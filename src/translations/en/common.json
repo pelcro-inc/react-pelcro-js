@@ -90,19 +90,6 @@
             "back": "Back"
         }
     },
-    "cart": {
-        "title": "Your shopping cart",
-        "subtitle": "Comple your purchase below",
-        "name": "Name",
-        "quantity": "Quantity",
-        "price": "Price",
-        "actions": "Actions",
-        "remove": "Remove",
-        "total": "Total",
-        "confirm": "Checkout",
-        "empty": "Your cart is empty.",
-        "removeAll": "Remove all"
-    },
     "products": {
         "buttons": {
             "select": "Select",

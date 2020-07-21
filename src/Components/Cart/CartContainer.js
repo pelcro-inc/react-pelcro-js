@@ -3,14 +3,19 @@ import useReducerWithSideEffects, {
   UpdateWithSideEffect,
   Update
 } from "use-reducer-with-side-effects";
-import { SET_PRODUCTS } from "../../utils/action-types";
+import {
+  SET_PRODUCTS,
+  HANDLE_REMOVE_PRODUCT,
+  HANDLE_SUBMIT
+} from "../../utils/action-types";
 import { getErrorMessages } from "../common/Helpers";
 import { showError } from "../../utils/showing-error";
 
 const initialState = {
   products: window.Pelcro.product.listGoods(),
-  isEmpty: !initialState.products.filter(product => product.quantity)
-    .length
+  isEmpty: !window.Pelcro.product
+    .listGoods()
+    .filter(product => product.quantity).length
 };
 const store = createContext(initialState);
 const { Provider } = store;
@@ -20,7 +25,7 @@ const CartContainer = ({
   className,
   onSuccess = () => {},
   onFailure = () => {},
-  setProducts,
+  getProducts = () => {},
   children
 }) => {
   const submit = (state, dispatch) => {
@@ -34,23 +39,53 @@ const CartContainer = ({
         };
       });
 
-    // setOrder(items);
-
     onSuccess(items);
+  };
+
+  const removeProduct = (state, dispatch, e) => {
+    let productContainer = {};
+    const id = e.target.dataset.key;
+    const productArr = state.products.slice();
+    for (const product of productArr) {
+      if (product.id === id) {
+        if (product.quantity === 1) {
+          product.quantity -= 1;
+
+          dispatch({ type: SET_PRODUCTS, payload: productArr });
+
+          productContainer = document.getElementById(
+            `pelcro-prefix-container-product-${product.id}`
+          );
+          if (productContainer)
+            productContainer.classList.add(
+              "pelcro-prefix-product-container-wrapper"
+            );
+        } else {
+          product.quantity -= 1;
+
+          dispatch({ type: SET_PRODUCTS, payload: productArr });
+        }
+      }
+    }
   };
 
   const [state, dispatch] = useReducerWithSideEffects(
     (state, action) => {
       switch (action.type) {
         case SET_PRODUCTS:
-          setProducts(action.payload);
+          getProducts(action.payload);
           return Update({
             ...state,
             products: action.payload,
-            isEmpty: !state.products.filter(
+            isEmpty: !action.payload.filter(
               product => product.quantity
             ).length
           });
+
+        case HANDLE_REMOVE_PRODUCT:
+          return UpdateWithSideEffect(state, (state, dispatch) =>
+            removeProduct(state, dispatch, action.payload)
+          );
 
         case HANDLE_SUBMIT:
           return UpdateWithSideEffect(

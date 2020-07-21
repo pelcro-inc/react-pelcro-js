@@ -107,6 +107,13 @@ export { PasswordForgotEmail } from "./Components/PasswordForgot/PasswordForgotE
 export { PasswordForgotModal } from "./Components/PasswordForgot/PasswordForgotModal";
 export { PasswordForgotView } from "./Components/PasswordForgot/PasswordForgotView";
 
+export { CartContainer } from "./Components/Cart/CartContainer";
+export { CartModal } from "./Components/Cart/CartModal";
+export { CartView } from "./Components/Cart/CartView";
+export { CartRemoveProductButton } from "./Components/Cart/CartRemoveProductButton";
+export { CartSubmit } from "./Components/Cart/CartSubmit";
+export { CartTotalPrice } from "./Components/Cart/CartTotalPrice";
+
 export {
   init as initButtons,
   authenticatedButtons,

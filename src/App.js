@@ -23,7 +23,8 @@ import {
   PelcroContainer,
   AddressUpdateModal,
   PasswordResetModal,
-  PasswordForgotModal
+  PasswordForgotModal,
+  CartModal
 } from "./components";
 
 // to be refactored
@@ -239,6 +240,8 @@ class App extends Component {
   setProductsForCart = products => {
     this.setState({ products: products });
   };
+
+  getProducts = products => this.setState({ products });
 
   setOrder = items => {
     const { order } = this.state;
@@ -465,15 +468,10 @@ class App extends Component {
           )}
 
           {this.state.view === "cart" && (
-            <Cart
-              setOrder={this.setOrder}
-              setProductsForCart={this.setProductsForCart}
-              site={this.state.site}
-              isGift={this.state.isGift}
+            <CartModal
+              getProducts={this.getProducts}
               products={this.state.products}
-              resetView={this.resetView}
               setView={this.setView}
-              ReactGA={ReactGA}
             />
           )}
           {this.state.view === "checkout" && (
