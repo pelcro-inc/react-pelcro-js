@@ -114,6 +114,10 @@ export { CartRemoveProductButton } from "./Components/Cart/CartRemoveProductButt
 export { CartSubmit } from "./Components/Cart/CartSubmit";
 export { CartTotalPrice } from "./Components/Cart/CartTotalPrice";
 
+export { ShopContainer } from "./Components/Shop/ShopContainer";
+export { ShopSelectProductButton } from "./Components/Shop/ShopSelectProductButton";
+export { ShopView } from "./Components/Shop/ShopView";
+
 export {
   init as initButtons,
   authenticatedButtons,

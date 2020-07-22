@@ -9,6 +9,7 @@ export const CartTotalPrice = () => {
 
   const countTotal = () => {
     const productArr = products.slice();
+    console.log("countTotal -> productArr", productArr);
     let total = 0;
     for (const product of productArr) {
       total += parseFloat(

@@ -90,12 +90,6 @@
             "back": "Back"
         }
     },
-    "products": {
-        "buttons": {
-            "select": "Select",
-            "added": "Added to cart"
-        }
-    },
     "confirm": {
         "buttons": {
             "continue": "Continue to content"

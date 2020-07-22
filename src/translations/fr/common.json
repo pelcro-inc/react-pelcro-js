@@ -109,12 +109,6 @@
             "back": "Retour"
         }
     },
-    "products": {
-        "buttons": {
-            "select": "Choisir",
-            "added": "Ajouté au panier"
-        }
-    },
     "confirm": {
         "buttons": {
             "continue": "Continuer au contenu"

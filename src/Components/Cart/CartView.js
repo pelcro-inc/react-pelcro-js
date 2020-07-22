@@ -21,7 +21,7 @@ export const CartView = props => {
         site={window.Pelcro.site.read()}
       ></Header>
 
-      <CartContainer setProducts={props.setProducts}>
+      <CartContainer getProducts={props.getProducts}>
         <div className="pelcro-prefix-modal-body">
           <div className="pelcro-prefix-title-block">
             <h4>{t("title")}</h4>
