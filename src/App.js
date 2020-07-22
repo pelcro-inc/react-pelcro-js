@@ -24,7 +24,8 @@ import {
   AddressUpdateModal,
   PasswordResetModal,
   PasswordForgotModal,
-  CartModal
+  CartModal,
+  ShopView
 } from "./components";
 
 // to be refactored
@@ -46,7 +47,8 @@ class App extends Component {
       isGift: false,
       order: {},
       showUpdateUserView: false,
-      addressId: null
+      addressId: null,
+      products: window.Pelcro.product.listGoods()
     };
 
     window.Pelcro.helpers.loadSDK(
@@ -232,7 +234,7 @@ class App extends Component {
 
     if (products)
       ReactDOM.render(
-        <Shop setProductsForCart={this.setProductsForCart} />,
+        <ShopView products={this.state.products} />,
         products
       );
   };

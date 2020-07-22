@@ -55,11 +55,6 @@ const CartContainer = ({
             ).length
           });
 
-        // case HANDLE_REMOVE_PRODUCT:
-        //   return UpdateWithSideEffect(state, (state, dispatch) =>
-        //     removeProduct(state, dispatch, action.payload)
-        //   );
-
         case HANDLE_SUBMIT:
           return UpdateWithSideEffect(
             { ...state, disableSubmit: true },
