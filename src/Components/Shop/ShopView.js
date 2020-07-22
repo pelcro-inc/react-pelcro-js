@@ -9,7 +9,7 @@ export const ShopView = props => {
   const { t } = useTranslation("shop");
 
   return (
-    <ShopContainer>
+    <ShopContainer {...props}>
       <div id="products">
         <div className="pelcro-prefix-product-field">
           {props.products.map(product => {

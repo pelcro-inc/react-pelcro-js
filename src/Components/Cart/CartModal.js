@@ -1,4 +1,5 @@
 import React from "react";
+import Header from "../common/Header";
 import { CartView } from "./CartView";
 
 export const CartModal = props => {
@@ -15,7 +16,14 @@ export const CartModal = props => {
           className="pelcro-prefix-modal-dialog pelcro-prefix-modal-dialog-centered"
           role="document"
         >
-          <CartView {...props} />
+          <div className="pelcro-prefix-modal-content">
+            <Header
+              closeButton={true}
+              resetView={() => props.setView("")}
+              site={window.Pelcro.site.read()}
+            ></Header>
+            <CartView {...props} />
+          </div>
         </div>
       </div>
     </div>

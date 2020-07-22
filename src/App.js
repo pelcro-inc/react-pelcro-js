@@ -234,7 +234,10 @@ class App extends Component {
 
     if (products)
       ReactDOM.render(
-        <ShopView products={this.state.products} />,
+        <ShopView
+          getProducts={this.getProducts}
+          products={this.state.products}
+        />,
         products
       );
   };
