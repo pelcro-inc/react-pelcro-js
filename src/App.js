@@ -33,10 +33,8 @@ import Gift from "./Components/modals/Gift";
 import Redeem from "./Components/modals/Redeem";
 import UserEdit from "./Components/modals/user/Edit";
 
-import Shop from "./Components/shop/Shop";
-import Cart from "./Components/shop/Cart";
-import OrderCreate from "./Components/shop/OrderCreate";
-import Confirm from "./Components/shop/Confirm";
+import OrderCreate from "./Components/shop-old/OrderCreate";
+import Confirm from "./Components/shop-old/Confirm";
 
 class App extends Component {
   constructor(props) {
