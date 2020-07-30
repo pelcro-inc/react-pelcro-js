@@ -3,6 +3,8 @@ import { useTranslation } from "react-i18next";
 import { store } from "./ShopContainer";
 import { SET_PRODUCTS } from "../../utils/action-types";
 
+let selectProduct;
+
 export const ShopSelectProductButton = ({
   style,
   className,
@@ -15,9 +17,9 @@ export const ShopSelectProductButton = ({
   } = useContext(store);
   const { t } = useTranslation("shop");
 
-  const selectProduct = e => {
+  selectProduct = e => {
     let productButton = {};
-    const id = e.target.dataset.key;
+    const id = e.target.dataset.skuId;
     const productArr = products.slice();
 
     // Display added to cart message
@@ -44,7 +46,7 @@ export const ShopSelectProductButton = ({
   return useMemo(
     () => (
       <button
-        data-key={product.id}
+        data-sku-id={product.id}
         id={`pelcro-prefix-btn-for-${product.id}`}
         style={style}
         className={className}
@@ -56,3 +58,5 @@ export const ShopSelectProductButton = ({
     [className, style]
   );
 };
+
+export { selectProduct };

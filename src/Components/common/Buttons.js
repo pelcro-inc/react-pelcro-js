@@ -1,3 +1,5 @@
+import { selectProduct } from "../Shop/ShopSelectProductButton";
+
 export const init = app => {
   const pelcroLoginButtonsByClass = document.getElementsByClassName(
     "pelcro-login-button"
@@ -21,6 +23,19 @@ export const init = app => {
       "click",
       app.displayRegisterView
     );
+  }
+
+  const pelcroCartButtonsByClass = document.getElementsByClassName(
+    "pelcro-cart-button"
+  );
+
+  if (pelcroCartButtonsByClass.length !== 0) {
+    for (let i = 0; i < pelcroCartButtonsByClass.length; i++) {
+      pelcroCartButtonsByClass[i].addEventListener(
+        "click",
+        app.displayCartView
+      );
+    }
   }
 
   const cartButton = document.getElementById("pelcro-cart-button");
@@ -161,3 +176,15 @@ export const unauthenticatedButtons = id => {
     }
   }
 };
+
+const pelcroAddToCartButtonsByClass = document.getElementsByClassName(
+  "pelcro-add-to-cart-button"
+);
+
+if (pelcroAddToCartButtonsByClass.length !== 0) {
+  for (let i = 0; i < pelcroAddToCartButtonsByClass.length; i++) {
+    pelcroAddToCartButtonsByClass[i].addEventListener("click", e => {
+      selectProduct(e);
+    });
+  }
+}
