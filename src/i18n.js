@@ -30,6 +30,8 @@ import cart_fr from "./translations/fr/cart.json";
 import cart_en from "./translations/en/cart.json";
 import shop_en from "./translations/en/shop.json";
 import shop_fr from "./translations/fr/shop.json";
+import payment_fr from "./translations/fr/payment.json";
+import payment_en from "./translations/en/payment.json";
 
 const resources = {
   en_US: {
@@ -47,7 +49,8 @@ const resources = {
     passwordReset: passwordReset_en,
     passwordForgot: passwordForgot_en,
     cart: cart_en,
-    shop: shop_en
+    shop: shop_en,
+    payment: payment_en
   },
   fr_CA: {
     common: common_fr,
@@ -64,7 +67,8 @@ const resources = {
     passwordReset: passwordReset_fr,
     passwordForgot: passwordForgot_fr,
     cart: cart_fr,
-    shop: shop_fr
+    shop: shop_fr,
+    payment: payment_fr
   }
 };
 

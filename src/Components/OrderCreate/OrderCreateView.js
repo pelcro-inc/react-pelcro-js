@@ -2,14 +2,22 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { OrderCreateContainer } from "./OrderCreateContainer";
 import { OrderCraeteSubmitButton } from "./OrderCraeteSubmitButton";
-import { AlertDanger } from "../../components";
+import {
+  PelcroCardNumber,
+  PelcroCardExpiry,
+  PelcroCardCVC,
+  AlertDanger,
+  CouponCode,
+  DiscountedPrice
+} from "../../components";
 
 export const OrderCreateView = props => {
   const { t } = useTranslation("checkoutForm");
+  const { t: tPayment } = useTranslation("payment");
   return (
     <div>
       <div className="pelcro-prefix-title-block">
-        <h4>{this.locale.labels.checkout.title}</h4>
+        <h4>{tPayment("labels.checkout.title")}</h4>
       </div>
 
       <AlertDanger name="payment" />
@@ -18,7 +26,7 @@ export const OrderCreateView = props => {
         <div className="pelcro-prefix-alert pelcro-prefix-alert-success">
           <div className="pelcro-prefix-payment-message">
             <span>
-              {this.locale.messages.youAreSafe}{" "}
+              {tPayment("messages.youAreSafe")}{" "}
               <a
                 className="pelcro-prefix-link"
                 rel="nofollow"
@@ -66,7 +74,7 @@ export const OrderCreateView = props => {
                     * {t("labels.required")}
                   </small>
 
-                  <CouponCode showCoupon={showCoupon} />
+                  <CouponCode showCoupon={true} />
                   <DiscountedPrice />
 
                   <OrderCraeteSubmitButton

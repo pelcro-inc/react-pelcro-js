@@ -25,7 +25,8 @@ import {
   PasswordResetModal,
   PasswordForgotModal,
   CartModal,
-  ShopView
+  ShopView,
+  OrderCreateModal
 } from "./components";
 
 // to be refactored
@@ -33,7 +34,6 @@ import Gift from "./Components/modals/Gift";
 import Redeem from "./Components/modals/Redeem";
 import UserEdit from "./Components/modals/user/Edit";
 
-import OrderCreate from "./Components/shop-old/OrderCreate";
 import Confirm from "./Components/shop-old/Confirm";
 
 class App extends Component {
@@ -492,13 +492,7 @@ class App extends Component {
           )}
 
           {this.state.view === "orderCreate" && (
-            <OrderCreate
-              order={this.state.order}
-              resetView={this.resetView}
-              setView={this.setView}
-              logout={this.logout}
-              ReactGA={ReactGA}
-            />
+            <OrderCreateModal setView={this.setView} />
           )}
           {this.state.view === "confirm" && (
             <Confirm

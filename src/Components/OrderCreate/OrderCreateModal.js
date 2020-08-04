@@ -1,10 +1,9 @@
 import React from "react";
 import Authorship from "../common/Authorship";
+import Header from "../common/Header";
 import { OrderCreateView } from "./OrderCreateView";
 
 export const OrderCreateModal = props => {
-  // this.locale = localisation("payment").getLocaleData();
-
   //   showError = message => {
   //     showError(message, "pelcro-error-payment");
   //   };
@@ -30,7 +29,7 @@ export const OrderCreateModal = props => {
             ></Header>
 
             <div className="pelcro-prefix-modal-body">
-              <OrderCreateView />
+              <OrderCreateView {...props} />
             </div>
           </div>
         </div>

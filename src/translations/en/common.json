@@ -3,33 +3,6 @@
         "account": "My account",
         "login": "Login"
     },
-    "payment": {
-        "labels": {
-            "cardNumber": "Card number",
-            "securityCode": "Security Code",
-            "submit": "Submit",
-            "months": {
-                "jan": "January",
-                "feb": "February",
-                "mar": "March",
-                "apr": "April",
-                "may": "May",
-                "jun": "June",
-                "jul": "July",
-                "aug": "August",
-                "sep": "September",
-                "oct": "October",
-                "nov": "November",
-                "dec": "December"
-            },
-            "checkout": {
-                "title": "Payment Information"
-            }
-        },
-        "errors": {
-            "": ""
-        }
-    },
     "dashboard": {
         "labels": {
             "menu": "Pelcro Menu",
