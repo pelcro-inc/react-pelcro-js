@@ -256,10 +256,13 @@ const PaymentMethodContainerWithoutStripe = ({
   };
 
   const purchase = (token, state, dispatch) => {
-    console.log("purchase -> order", state.order);
     const order = state.order;
     order.email = window.Pelcro.user.read().email;
-    const address = window.Pelcro.user.read().addresses[0];
+    const address = window.Pelcro.user.read().addresses
+      ? window.Pelcro.user.read().addresses[
+          window.Pelcro.user.read().addresses.length - 1
+        ]
+      : null;
 
     order.shipping = {
       name: `${address.first_name} ${address.last_name}`,
