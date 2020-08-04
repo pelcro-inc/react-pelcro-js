@@ -6,7 +6,7 @@ import { HANDLE_SUBMIT } from "../../utils/action-types";
 export const CartSubmit = ({ name, style, className }) => {
   const {
     dispatch,
-    state: { products, isEmpty }
+    state: { products, isEmpty, disableSubmit }
   } = useContext(store);
   const { t } = useTranslation("cart");
 
@@ -21,6 +21,7 @@ export const CartSubmit = ({ name, style, className }) => {
           style={style}
           className={className}
           onClick={() => dispatch({ type: HANDLE_SUBMIT })}
+          disabled={disableSubmit}
         >
           {t("confirm")} with {countProducts()}{" "}
           {countProducts() % 10 === 1 ? "item" : "items"}{" "}

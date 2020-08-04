@@ -24,7 +24,8 @@ import {
   SET_CAN_MAKE_PAYMENT,
   SET_PAYMENT_REQUEST,
   INIT_CONTAINER,
-  UPDATE_PAYMENT_REQUEST
+  UPDATE_PAYMENT_REQUEST,
+  SET_ORDER
 } from "../../utils/action-types";
 import { getErrorMessages } from "../common/Helpers";
 import {
@@ -42,7 +43,8 @@ const initialState = {
   coupon: null,
   canMakePayment: false,
   paymentRequest: null,
-  formattedPrice: null
+  formattedPrice: null,
+  order: {}
 };
 const store = createContext(initialState);
 const { Provider } = store;
@@ -66,11 +68,13 @@ const PaymentMethodContainerWithoutStripe = ({
   plan,
   product,
   store,
+  order = {},
   giftRecipient = null,
   couponCode,
   onSuccess = () => {},
   onFailure = () => {},
-  onLoading = () => {}
+  onLoading = () => {},
+  ...props
 }) => {
   useEffect(() => {
     window.Pelcro.insight.track("Modal Displayed", {
@@ -81,6 +85,12 @@ const PaymentMethodContainerWithoutStripe = ({
       dispatch({
         type: UPDATE_COUPON_CODE,
         payload: window.Pelcro.coupon.getFromUrl()
+      });
+    }
+    if (order) {
+      dispatch({
+        type: SET_ORDER,
+        payload: order
       });
     }
     dispatch({ type: INIT_CONTAINER });
@@ -128,8 +138,10 @@ const PaymentMethodContainerWithoutStripe = ({
         token: token.id
       },
       (err, res) => {
+        console.log("createPayment -> err, res", err, res);
         dispatch({ type: DISABLE_SUBMIT, payload: false });
         if (err) {
+          console.log("createPayment -> err", err);
           onFailure(err);
           return displayError(getErrorMessages(err));
         }
@@ -243,6 +255,38 @@ const PaymentMethodContainerWithoutStripe = ({
     return false;
   };
 
+  const purchase = (token, state, dispatch) => {
+    console.log("purchase -> order", state.order);
+    const order = state.order;
+    order.email = window.Pelcro.user.read().email;
+    const address = window.Pelcro.user.read().addresses[0];
+
+    order.shipping = {
+      name: `${address.first_name} ${address.last_name}`,
+      address: {
+        line1: address.line1,
+        line2: address.line2,
+        city: address.city,
+        state: address.state,
+        country: address.country,
+        postal_code: address.postal_code
+      }
+    };
+
+    window.Pelcro.checkout.purchase(
+      {
+        order: order,
+        source: token.id,
+        auth_token: window.Pelcro.user.read().auth_token
+      },
+      (err, res) => {
+        if (err) return showError(getErrorMessages(err));
+
+        onSuccess();
+      }
+    );
+  };
+
   const updatePaymentRequest = state => {
     state.paymentRequest.update({
       total: {
@@ -264,6 +308,9 @@ const PaymentMethodContainerWithoutStripe = ({
       } else if (token && type === "createPayment") {
         dispatch({ type: DISABLE_SUBMIT, payload: true });
         subscribe(token, state, dispatch);
+      } else if (token && type === "orderCreate") {
+        dispatch({ type: DISABLE_SUBMIT, payload: true });
+        purchase(token, state, dispatch);
       } else if (token) {
         createPayment(token, state, dispatch);
       }
@@ -319,6 +366,9 @@ const PaymentMethodContainerWithoutStripe = ({
 
         case SET_PAYMENT_REQUEST:
           return Update({ ...state, paymentRequest: action.payload });
+
+        case SET_ORDER:
+          return Update({ ...state, order: action.payload });
 
         case APPLY_COUPON_CODE:
           return UpdateWithSideEffect(

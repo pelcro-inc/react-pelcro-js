@@ -401,7 +401,7 @@ class App extends Component {
               setView={this.setView}
               onSuccess={() => {
                 if (!this.state.product) {
-                  this.setView("checkout");
+                  this.setView("orderCreate");
                 } else {
                   this.setView("payment");
                 }
@@ -475,13 +475,24 @@ class App extends Component {
               getProducts={this.getProducts}
               products={this.state.products}
               setView={this.setView}
+              onSuccess={items => {
+                this.setOrder(items);
+
+                if (window.Pelcro.user.isAuthenticated()) {
+                  if (!window.Pelcro.user.read().addresses.length) {
+                    return this.setView("address");
+                  } else {
+                    this.setView("orderCreate");
+                  }
+                } else {
+                  this.setView("register");
+                }
+              }}
             />
           )}
 
-          {this.state.view === "checkout" && (
+          {this.state.view === "orderCreate" && (
             <OrderCreate
-              products={this.state.products}
-              setProductsForCart={this.setProductsForCart}
               order={this.state.order}
               resetView={this.resetView}
               setView={this.setView}

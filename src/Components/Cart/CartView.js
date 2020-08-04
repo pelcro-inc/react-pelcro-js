@@ -13,7 +13,7 @@ export const CartView = props => {
   let isEmpty = !props.products.filter(product => product.quantity)
     .length;
   return (
-    <CartContainer getProducts={props.getProducts}>
+    <CartContainer {...props}>
       <div className="pelcro-prefix-modal-body">
         <div className="pelcro-prefix-title-block">
           <h4>{t("title")}</h4>
