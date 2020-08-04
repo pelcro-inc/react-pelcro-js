@@ -1,4 +1,4 @@
-import React, { createContext } from "react";
+import React, { createContext, useEffect } from "react";
 import useReducerWithSideEffects, {
   UpdateWithSideEffect,
   Update
@@ -28,6 +28,19 @@ const CartContainer = ({
   getProducts = () => {},
   children
 }) => {
+  useEffect(() => {
+    dispatch({
+      type: SET_PRODUCTS,
+      payload: window.Pelcro.product.listGoods().map(product => {
+        if (window.Pelcro.cartProducts) {
+          product.quantity = window.Pelcro.cartProducts.filter(
+            productId => productId === product.id
+          ).length;
+        }
+        return product;
+      })
+    });
+  }, []);
   const submit = (state, dispatch) => {
     const items = state.products
       .filter(product => product.quantity)

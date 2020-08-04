@@ -233,7 +233,6 @@ class App extends Component {
     if (products)
       ReactDOM.render(
         <ShopView
-          style={{ visibility: "hidden" }}
           getProducts={this.getProducts}
           products={this.state.products}
         />,
