@@ -284,7 +284,7 @@ const PaymentMethodContainerWithoutStripe = ({
       },
       (err, res) => {
         if (err) {
-          onFailure();
+          onFailure(err);
           return showError(
             getErrorMessages(err),
             "pelcro-error-payment"
