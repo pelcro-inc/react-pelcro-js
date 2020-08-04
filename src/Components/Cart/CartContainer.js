@@ -29,17 +29,25 @@ const CartContainer = ({
   children
 }) => {
   useEffect(() => {
-    dispatch({
-      type: SET_PRODUCTS,
-      payload: window.Pelcro.product.listGoods().map(product => {
-        if (window.Pelcro.cartProducts) {
-          product.quantity = window.Pelcro.cartProducts.filter(
-            productId => productId === product.id
-          ).length;
-        }
-        return product;
-      })
-    });
+    if (
+      window.Pelcro.cartProducts &&
+      window.Pelcro.cartProducts.length
+    ) {
+      dispatch({
+        type: SET_PRODUCTS,
+        payload: window.Pelcro.product.listGoods().map(product => {
+          if (
+            window.Pelcro.cartProducts &&
+            window.Pelcro.cartProducts.length
+          ) {
+            product.quantity = window.Pelcro.cartProducts.filter(
+              productId => productId === product.id
+            ).length;
+          }
+          return product;
+        })
+      });
+    }
   }, []);
   const submit = (state, dispatch) => {
     const items = state.products
