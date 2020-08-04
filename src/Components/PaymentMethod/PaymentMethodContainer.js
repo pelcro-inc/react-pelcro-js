@@ -283,7 +283,13 @@ const PaymentMethodContainerWithoutStripe = ({
         auth_token: window.Pelcro.user.read().auth_token
       },
       (err, res) => {
-        if (err) return showError(getErrorMessages(err));
+        if (err) {
+          onFailure();
+          return showError(
+            getErrorMessages(err),
+            "pelcro-error-payment"
+          );
+        }
 
         onSuccess();
       }

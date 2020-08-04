@@ -477,6 +477,7 @@ class App extends Component {
               setView={this.setView}
               onSuccess={items => {
                 this.setOrder(items);
+                console.log("App -> render -> items", items);
 
                 if (window.Pelcro.user.isAuthenticated()) {
                   if (!window.Pelcro.user.read().addresses.length) {
@@ -492,7 +493,10 @@ class App extends Component {
           )}
 
           {this.state.view === "orderCreate" && (
-            <OrderCreateModal setView={this.setView} />
+            <OrderCreateModal
+              order={this.state.order}
+              setView={this.setView}
+            />
           )}
           {this.state.view === "confirm" && (
             <Confirm
