@@ -184,7 +184,10 @@ const pelcroAddToCartButtonsByClass = document.getElementsByClassName(
 if (pelcroAddToCartButtonsByClass.length !== 0) {
   for (let i = 0; i < pelcroAddToCartButtonsByClass.length; i++) {
     pelcroAddToCartButtonsByClass[i].addEventListener("click", e => {
-      selectProduct(e);
+      window.Pelcro.cartProducts = window.Pelcro.cartProducts
+        ? window.Pelcro.cartProducts
+        : [];
+      window.Pelcro.cartProducts.push(e.target.dataset.skuId);
     });
   }
 }

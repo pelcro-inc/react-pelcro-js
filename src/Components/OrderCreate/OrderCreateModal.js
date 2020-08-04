@@ -4,10 +4,6 @@ import Header from "../common/Header";
 import { OrderCreateView } from "./OrderCreateView";
 
 export const OrderCreateModal = props => {
-  //   showError = message => {
-  //     showError(message, "pelcro-error-payment");
-  //   };
-
   return (
     <div className="pelcro-prefix-view">
       <div
