@@ -478,7 +478,9 @@ class App extends Component {
                 this.setOrder(items);
 
                 if (window.Pelcro.user.isAuthenticated()) {
-                  if (!window.Pelcro.user.read().addresses.length) {
+                  if (
+                    !window?.Pelcro?.user?.read()?.addresses?.length
+                  ) {
                     return this.setView("address");
                   } else {
                     this.setView("orderCreate");

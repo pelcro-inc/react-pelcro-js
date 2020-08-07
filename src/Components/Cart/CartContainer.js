@@ -65,7 +65,7 @@ const CartContainer = ({
       .filter((product) => product.quantity)
       .map((product) => {
         return {
-          product_sku_id: product.id,
+          sku_id: product.id,
           quantity: product.quantity
         };
       });
