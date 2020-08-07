@@ -8,9 +8,9 @@ import {
   CartTotalPrice
 } from "../../components";
 
-export const CartView = props => {
+export const CartView = (props) => {
   const { t } = useTranslation("cart");
-  let isEmpty = !props.products.filter(product => product.quantity)
+  let isEmpty = !props.products.filter((product) => product.quantity)
     .length;
   return (
     <CartContainer {...props}>
@@ -20,7 +20,7 @@ export const CartView = props => {
         </div>
 
         <div className="pelcro-prefix-cart-field">
-          {props.products.map(product => {
+          {props.products.map((product) => {
             if (product.quantity > 0) {
               return (
                 <div key={`product-${product.id}`}>
@@ -51,7 +51,7 @@ export const CartView = props => {
                       <div className="col-7 pelcro-prefix-cart-product-price pelcro-prefix-price">
                         {" "}
                         {parseFloat(
-                          product.sku[0].price * product.quantity
+                          (product?.price / 100) * product.quantity
                         ).toLocaleString("fr-CA", {
                           style: "currency",
                           currency: "CAD"

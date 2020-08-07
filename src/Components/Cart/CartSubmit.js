@@ -11,10 +11,11 @@ export const CartSubmit = ({ name, style, className }) => {
   const { t } = useTranslation("cart");
 
   const countProducts = () => {
-    return products.filter(product => product.quantity).length;
+    return products.filter((product) => product.quantity).length;
   };
 
   if (!isEmpty) {
+    // eslint-disable-next-line
     return useMemo(
       () => (
         <button

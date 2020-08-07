@@ -18,6 +18,7 @@
     Pelcro.environment.stripe = "%REACT_APP_STRIPE%";
     Pelcro.environment.domain = "%REACT_APP_DOMAIN%";
     Pelcro.environment.ui = "%REACT_APP_UI%";
+    window.Pelcro.ENABLE_ECOMMERCE = true;
   </script>
   <script src="https://js.pelcro.com/sdk/staging/main.min.js"></script>
 
@@ -46,8 +47,9 @@
 
     <button class="pelcro-cart-button" class="btn">View Cart</button>
 
-    <button class="pelcro-add-to-cart-button" data-sku-id="sku_HX2P38D8qi5s4A">Add to cart</button>
-    <button class="pelcro-add-to-cart-button" data-sku-id="sku_HX2VHUE0HKzWV3">Add to cart</button>
+    <button class="pelcro-add-to-cart-button" data-sku-id="4">Add to cart</button>
+    <button class="pelcro-add-to-cart-button" data-sku-id="3">Add to cart</button>
+    <button class="pelcro-add-to-cart-button" data-sku-id="2">Add to cart</button>
 
     <br>
     <br>
@@ -65,7 +67,7 @@
   </div>
 
 
-  <script>
+  <!-- <script>
     window.Pelcro.product.listGoods = function () {
       return [{
         id: 'sku_HX2P38D8qi5s4A',
@@ -110,7 +112,7 @@
 
       ];
     }
-  </script>
+  </script> -->
 
 
 </body>

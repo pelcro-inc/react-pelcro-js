@@ -13,13 +13,13 @@ export const CartRemoveProductButton = ({
     state: { isEmpty, products }
   } = useContext(store);
 
-  const removeProduct = e => {
+  const removeProduct = (e) => {
     let productContainer = {};
     const id = e.target.dataset.key;
     const productArr = products.slice();
 
     for (const product of productArr) {
-      if (product.id === id) {
+      if (+product.id === +id) {
         if (product.quantity === 1) {
           product.quantity -= 1;
 
@@ -52,6 +52,7 @@ export const CartRemoveProductButton = ({
   };
 
   if (!isEmpty) {
+    // eslint-disable-next-line
     return useMemo(
       () => (
         <button

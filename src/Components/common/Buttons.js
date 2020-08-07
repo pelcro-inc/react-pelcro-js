@@ -1,6 +1,6 @@
 import { selectProduct } from "../Shop/ShopSelectProductButton";
 
-export const init = app => {
+export const init = (app) => {
   const pelcroLoginButtonsByClass = document.getElementsByClassName(
     "pelcro-login-button"
   );
@@ -80,7 +80,7 @@ export const init = app => {
     "pelcro-save-button"
   );
 
-  const saveToMetadataByButton = e => {
+  const saveToMetadataByButton = (e) => {
     const key = e.currentTarget.dataset.key;
     const value = JSON.parse(JSON.stringify(e.currentTarget.dataset));
     delete value.key;
@@ -153,7 +153,7 @@ export const init = app => {
   }
 };
 
-export const authenticatedButtons = id => {
+export const authenticatedButtons = (id) => {
   const pelcroLoginByClass = document.getElementsByClassName(
     "pelcro-login-button"
   );
@@ -165,7 +165,7 @@ export const authenticatedButtons = id => {
   }
 };
 
-export const unauthenticatedButtons = id => {
+export const unauthenticatedButtons = (id) => {
   const pelcroLoginByClass = document.getElementsByClassName(
     "pelcro-login-button"
   );
@@ -183,11 +183,13 @@ const pelcroAddToCartButtonsByClass = document.getElementsByClassName(
 
 if (pelcroAddToCartButtonsByClass.length !== 0) {
   for (let i = 0; i < pelcroAddToCartButtonsByClass.length; i++) {
-    pelcroAddToCartButtonsByClass[i].addEventListener("click", e => {
-      window.Pelcro.cartProducts = window.Pelcro.cartProducts
-        ? window.Pelcro.cartProducts
-        : [];
-      window.Pelcro.cartProducts.push(e.target.dataset.skuId);
-    });
+    pelcroAddToCartButtonsByClass[i].addEventListener(
+      "click",
+      (e) => {
+        window.Pelcro.cartProducts =
+          window.Pelcro?.cartProducts || [];
+        window.Pelcro.cartProducts.push(e.target.dataset.skuId);
+      }
+    );
   }
 }

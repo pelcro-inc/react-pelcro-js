@@ -12,7 +12,7 @@ export const CartTotalPrice = () => {
     let total = 0;
     for (const product of productArr) {
       total += parseFloat(
-        (product.sku[0].price * product.quantity).toFixed(2)
+        ((product?.price / 100) * product.quantity).toFixed(2)
       );
     }
     return parseFloat(total).toLocaleString("fr-CA", {

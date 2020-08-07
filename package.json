@@ -62,6 +62,7 @@
     "rollup-plugin-postcss": "^2.8.1",
     "rollup-plugin-terser": "^5.3.0",
     "travis-ci-cloudfront-invalidation": "^1.1.0",
+    "webpack": "^4.44.1",
     "webpack-cli": "^3.2.3"
   },
   "dependencies": {
@@ -70,8 +71,8 @@
     "copy-webpack-plugin": "^4.6.0",
     "dotenv": "^6.1.0",
     "i18next": "^19.1.0",
-    "lodash": "^4.17.11",
-    "node-sass": "^4.10.0",
+    "lodash": "^4.17.19",
+    "node-sass": "^4.14.1",
     "postcss-loader": "^3.0.0",
     "react": "^16.6.1",
     "react-datepicker": "^2.9.6",
@@ -79,7 +80,7 @@
     "react-fancy-loader": "^0.2.17",
     "react-ga": "^2.7.0",
     "react-i18next": "^11.3.3",
-    "react-scripts": "2.1.1",
+    "react-scripts": "^3.4.1",
     "react-stripe-elements": "^2.0.3",
     "redux": "^4.0.1",
     "reset-css": "^4.0.1",

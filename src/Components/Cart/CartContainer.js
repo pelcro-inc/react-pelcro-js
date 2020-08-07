@@ -12,10 +12,8 @@ import { getErrorMessages } from "../common/Helpers";
 import { showError } from "../../utils/showing-error";
 
 const initialState = {
-  products: window.Pelcro.product.listGoods(),
-  isEmpty: window.Pelcro.product
-    .listGoods()
-    .filter(product => product.quantity).length
+  products: [],
+  isEmpty: true
 };
 const store = createContext(initialState);
 const { Provider } = store;
@@ -29,30 +27,43 @@ const CartContainer = ({
   children
 }) => {
   useEffect(() => {
+    console.log(
+      "fdsklgnsdgkldsnvkldsgjdsg",
+
+      window.Pelcro.ecommerce.products
+        .read()
+        .map((prod) => prod.skus.map((sku) => sku))
+        .flat()
+    );
     if (
       window.Pelcro.cartProducts &&
       window.Pelcro.cartProducts.length
     ) {
       dispatch({
         type: SET_PRODUCTS,
-        payload: window.Pelcro.product.listGoods().map(product => {
-          if (
-            window.Pelcro.cartProducts &&
-            window.Pelcro.cartProducts.length
-          ) {
-            product.quantity = window.Pelcro.cartProducts.filter(
-              productId => productId === product.id
-            ).length;
-          }
-          return product;
-        })
+        payload: window.Pelcro.ecommerce.products
+          .read()
+          .map((prod) => prod.skus.map((sku) => sku))
+          .flat()
+          .map((product) => {
+            if (
+              window.Pelcro.cartProducts &&
+              window.Pelcro.cartProducts.length
+            ) {
+              product.quantity = window.Pelcro.cartProducts.filter(
+                (productId) => +productId === +product.id
+              ).length;
+            }
+
+            return product;
+          })
       });
     }
   }, []);
   const submit = (state, dispatch) => {
     const items = state.products
-      .filter(product => product.quantity)
-      .map(product => {
+      .filter((product) => product.quantity)
+      .map((product) => {
         return {
           type: "sku",
           parent: product.id,
@@ -72,7 +83,7 @@ const CartContainer = ({
             ...state,
             products: action.payload,
             isEmpty: !action.payload.filter(
-              product => product.quantity
+              (product) => product.quantity
             ).length
           });
 

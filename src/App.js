@@ -46,7 +46,7 @@ class App extends Component {
       order: {},
       showUpdateUserView: false,
       addressId: null,
-      products: window.Pelcro.product.listGoods()
+      products: []
     };
 
     window.Pelcro.helpers.loadSDK(
@@ -57,7 +57,7 @@ class App extends Component {
     initButtons(this);
   }
 
-  removeHTMLButton = buttonClass => {
+  removeHTMLButton = (buttonClass) => {
     const elements = document.getElementsByClassName(buttonClass);
     while (elements.length > 0) {
       elements[0].parentNode.removeChild(elements[0]);
@@ -127,7 +127,7 @@ class App extends Component {
     }, 1000);
   };
 
-  setView = view => {
+  setView = (view) => {
     this.setState({ view: view });
 
     if (view !== "meter") this.disableScroll();
@@ -210,15 +210,15 @@ class App extends Component {
     this.setState({ product, plan, isGift });
   };
 
-  setSubscriptionIdToRenew = subscriptionIdToRenew => {
+  setSubscriptionIdToRenew = (subscriptionIdToRenew) => {
     this.setState({ subscriptionIdToRenew });
   };
 
-  setGiftRecipient = giftRecipient => {
+  setGiftRecipient = (giftRecipient) => {
     this.setState({ giftRecipient });
   };
 
-  setGiftCode = giftCode => {
+  setGiftCode = (giftCode) => {
     this.setState({ giftCode });
   };
 
@@ -230,30 +230,30 @@ class App extends Component {
   renderShop = () => {
     const products = document.getElementById("pelcro-shop");
 
-    if (products)
-      ReactDOM.render(
-        <ShopView
-          getProducts={this.getProducts}
-          products={this.state.products}
-        />,
-        products
-      );
+    // if (products)
+    //   ReactDOM.render(
+    //     <ShopView
+    //       getProducts={this.getProducts}
+    //       products={this.state.products}
+    //     />,
+    //     products
+    //   );
   };
 
-  setProductsForCart = products => {
+  setProductsForCart = (products) => {
     this.setState({ products: products });
   };
 
-  getProducts = products => this.setState({ products });
+  getProducts = (products) => this.setState({ products });
 
-  setOrder = items => {
+  setOrder = (items) => {
     const { order } = this.state;
     order.currency = window.Pelcro.site.read().default_currency;
     order.items = items;
     this.setState({ order: order });
   };
 
-  setProduct = e => {
+  setProduct = (e) => {
     const products = window.Pelcro.product.list();
     for (const product of products) {
       if (+product.id === +e.target.dataset.productId) {
@@ -266,13 +266,13 @@ class App extends Component {
     this.setView("select");
   };
 
-  setGift = e => {
+  setGift = (e) => {
     if (e.target.dataset.isGift === "true") {
       this.setState({ isGift: true });
     }
     this.setView("select");
   };
-  setProductAndPlanByButton = e => {
+  setProductAndPlanByButton = (e) => {
     let product = {};
     let plan = {};
     const products = window.Pelcro.product.list();
@@ -368,7 +368,7 @@ class App extends Component {
               onSuccess={() => {
                 this.setView("success");
               }}
-              onFailure={error => console.log(error)}
+              onFailure={(error) => console.log(error)}
             />
           )}
           {this.state.view === "payment" &&
@@ -382,7 +382,7 @@ class App extends Component {
                 setView={this.setView}
                 logout={this.logout}
                 onSuccess={() => console.log("Subscription renewed!")}
-                onFailure={error => console.log(error)}
+                onFailure={(error) => console.log(error)}
               />
             )}
           {this.state.view === "success" && (
@@ -406,7 +406,7 @@ class App extends Component {
                   this.setView("payment");
                 }
               }}
-              onFailure={error => console.log(error)}
+              onFailure={(error) => console.log(error)}
             />
           )}
           {this.state.view === "newsletter" && (
@@ -438,7 +438,7 @@ class App extends Component {
           {this.state.view === "source-create" && (
             <PaymentMethodUpdateModal
               setView={this.setView}
-              onFailure={error => console.log(error)}
+              onFailure={(error) => console.log(error)}
               onSuccess={() => this.setView("")}
             />
           )}
@@ -447,7 +447,7 @@ class App extends Component {
             <UserUpdateModal
               setView={this.setView}
               onSuccess={() => console.log("User Updated")}
-              onFailure={error => console.log(error)}
+              onFailure={(error) => console.log(error)}
             />
           )}
 
@@ -458,7 +458,7 @@ class App extends Component {
           <UserUpdateView
             setView={this.setView}
             onSuccess={() => console.log("User Updated")}
-            onFailure={error => console.log(error)}
+            onFailure={(error) => console.log(error)}
           />
 
           {this.state.view === "address-edit" && (
@@ -466,7 +466,7 @@ class App extends Component {
               addressId={this.state.addressId}
               setView={this.setView}
               onSuccess={() => null}
-              onFailure={error => console.log(error)}
+              onFailure={(error) => console.log(error)}
             />
           )}
 
@@ -475,7 +475,7 @@ class App extends Component {
               getProducts={this.getProducts}
               products={this.state.products}
               setView={this.setView}
-              onSuccess={items => {
+              onSuccess={(items) => {
                 this.setOrder(items);
                 console.log("App -> render -> items", items);
 
@@ -497,7 +497,7 @@ class App extends Component {
               order={this.state.order}
               setView={this.setView}
               onSuccess={() => this.setView("confirm")}
-              onFailure={err => console.log(err)}
+              onFailure={(err) => console.log(err)}
             />
           )}
           {this.state.view === "confirm" && (
@@ -522,7 +522,7 @@ class App extends Component {
               setView={this.setView}
               setProductAndPlan={this.setProductAndPlan}
               ReactGA={ReactGA}
-              getAddressId={addressId => {
+              getAddressId={(addressId) => {
                 this.setState({ addressId });
                 this.setView("address-edit");
               }}
