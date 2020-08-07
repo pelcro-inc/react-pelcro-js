@@ -248,9 +248,8 @@ class App extends Component {
 
   setOrder = (items) => {
     const { order } = this.state;
-    order.currency = window.Pelcro.site.read().default_currency;
     order.items = items;
-    this.setState({ order: order });
+    this.setState({ order });
   };
 
   setProduct = (e) => {
@@ -477,7 +476,6 @@ class App extends Component {
               setView={this.setView}
               onSuccess={(items) => {
                 this.setOrder(items);
-                console.log("App -> render -> items", items);
 
                 if (window.Pelcro.user.isAuthenticated()) {
                   if (!window.Pelcro.user.read().addresses.length) {
@@ -500,6 +498,7 @@ class App extends Component {
               onFailure={(err) => console.log(err)}
             />
           )}
+
           {this.state.view === "confirm" && (
             <Confirm
               products={this.state.products}

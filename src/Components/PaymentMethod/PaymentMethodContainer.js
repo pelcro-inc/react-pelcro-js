@@ -49,11 +49,11 @@ const initialState = {
 const store = createContext(initialState);
 const { Provider } = store;
 
-const displayError = message => {
+const displayError = (message) => {
   showError(message, "pelcro-error-payment-create");
 };
 
-const displaySuccess = message => {
+const displaySuccess = (message) => {
   showSuccess(message, "pelcro-success-payment-create");
 };
 
@@ -115,7 +115,7 @@ const PaymentMethodContainerWithoutStripe = ({
         complete("success");
       });
 
-      paymentRequest.canMakePayment().then(result => {
+      paymentRequest.canMakePayment().then((result) => {
         dispatch({ type: SET_CAN_MAKE_PAYMENT, payload: !!result });
       });
 
@@ -264,23 +264,11 @@ const PaymentMethodContainerWithoutStripe = ({
         ]
       : null;
 
-    order.shipping = {
-      name: `${address.first_name} ${address.last_name}`,
-      address: {
-        line1: address.line1,
-        line2: address.line2,
-        city: address.city,
-        state: address.state,
-        country: address.country,
-        postal_code: address.postal_code
-      }
-    };
-
-    window.Pelcro.checkout.purchase(
+    window.Pelcro.ecommerce.order.create(
       {
-        order: order,
-        source: token.id,
-        auth_token: window.Pelcro.user.read().auth_token
+        items: order.items,
+        stripe_token: token.id,
+        address_id: address.id
       },
       (err, res) => {
         if (err) {
@@ -296,7 +284,7 @@ const PaymentMethodContainerWithoutStripe = ({
     );
   };
 
-  const updatePaymentRequest = state => {
+  const updatePaymentRequest = (state) => {
     state.paymentRequest.update({
       total: {
         label: plan.nickname || plan.description,
@@ -418,7 +406,7 @@ const UnwrappedForm = injectStripe(
   PaymentMethodContainerWithoutStripe
 );
 
-const PaymentMethodContainer = props => {
+const PaymentMethodContainer = (props) => {
   if (window.Stripe) {
     return (
       <StripeProvider
