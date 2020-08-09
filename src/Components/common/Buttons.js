@@ -151,6 +151,42 @@ export const init = (app) => {
       giftButtonsByClass[j].addEventListener("click", app.setGift);
     }
   }
+
+  const pelcroAddToCartButtonsByClass = document.getElementsByClassName(
+    "pelcro-add-to-cart-button"
+  );
+
+  if (pelcroAddToCartButtonsByClass.length !== 0) {
+    for (let i = 0; i < pelcroAddToCartButtonsByClass.length; i++) {
+      pelcroAddToCartButtonsByClass[i].addEventListener(
+        "click",
+        (e) => {
+          window.Pelcro.cartProducts =
+            window.Pelcro?.cartProducts || [];
+          window.Pelcro.cartProducts.push(e.target.dataset.skuId);
+        }
+      );
+    }
+  }
+
+  const pelcroPurchaseButtonsByClass = document.getElementsByClassName(
+    "pelcro-purchase-button"
+  );
+
+  if (pelcroPurchaseButtonsByClass.length !== 0) {
+    for (let i = 0; i < pelcroPurchaseButtonsByClass.length; i++) {
+      pelcroPurchaseButtonsByClass[i].addEventListener(
+        "click",
+        (e) => {
+          app.setOrder({
+            sku_id: e.target.dataset.skuId,
+            quantity: 1
+          });
+          app.setView("orderCreate");
+        }
+      );
+    }
+  }
 };
 
 export const authenticatedButtons = (id) => {
@@ -176,20 +212,3 @@ export const unauthenticatedButtons = (id) => {
     }
   }
 };
-
-const pelcroAddToCartButtonsByClass = document.getElementsByClassName(
-  "pelcro-add-to-cart-button"
-);
-
-if (pelcroAddToCartButtonsByClass.length !== 0) {
-  for (let i = 0; i < pelcroAddToCartButtonsByClass.length; i++) {
-    pelcroAddToCartButtonsByClass[i].addEventListener(
-      "click",
-      (e) => {
-        window.Pelcro.cartProducts =
-          window.Pelcro?.cartProducts || [];
-        window.Pelcro.cartProducts.push(e.target.dataset.skuId);
-      }
-    );
-  }
-}
