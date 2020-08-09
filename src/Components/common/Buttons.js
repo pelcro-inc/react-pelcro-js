@@ -178,10 +178,12 @@ export const init = (app) => {
       pelcroPurchaseButtonsByClass[i].addEventListener(
         "click",
         (e) => {
-          app.setOrder({
-            sku_id: e.target.dataset.skuId,
-            quantity: 1
-          });
+          app.setOrder([
+            {
+              sku_id: e.target.dataset.skuId,
+              quantity: "1"
+            }
+          ]);
           app.setView("orderCreate");
         }
       );
