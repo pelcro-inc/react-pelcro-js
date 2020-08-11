@@ -8,7 +8,12 @@ import Header from "../common/Header";
 import Authorship from "../common/Authorship";
 import { RegisterView } from "./RegisterView";
 
-export function RegisterModal({ onSuccess, setView, product, ...otherProps }) {
+export function RegisterModal({
+  onSuccess,
+  setView,
+  product,
+  ...otherProps
+}) {
   const { t } = useTranslation("register");
 
   const displayLoginView = () => {
@@ -29,7 +34,10 @@ export function RegisterModal({ onSuccess, setView, product, ...otherProps }) {
         aria-hidden="true"
       >
         <div className="pelcro-prefix-modal-dialog pelcro-prefix-modal-dialog-centered">
-          <div className="pelcro-prefix-modal-content" role="document">
+          <div
+            className="pelcro-prefix-modal-content"
+            role="document"
+          >
             <Header
               closeButton={window.Pelcro.paywall.displayCloseButton()}
               resetView={() => setView("")}
@@ -43,11 +51,7 @@ export function RegisterModal({ onSuccess, setView, product, ...otherProps }) {
 
               <ErrMessage name="register" />
 
-              <RegisterView
-                setView={setView}
-                onSuccess={onSuccess}
-                {...otherProps}
-              />
+              <RegisterView onSuccess={onSuccess} {...otherProps} />
 
               <div className="pelcro-prefix-modal-footer">
                 <small>

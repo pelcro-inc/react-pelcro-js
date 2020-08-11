@@ -12,7 +12,7 @@ import { LoginView } from "./LoginView";
 export function LoginModal({ setView, onSuccess, ...otherProps }) {
   const { t } = useTranslation("login");
 
-  const showError = message => {
+  const showError = (message) => {
     showError(message, "pelcro-error-login");
   };
 
@@ -44,11 +44,7 @@ export function LoginModal({ setView, onSuccess, ...otherProps }) {
               site={window.Pelcro.site.read()}
             ></Header>
 
-            <LoginView
-              setView={setView}
-              onSuccess={onSuccess}
-              {...otherProps}
-            />
+            <LoginView onSuccess={onSuccess} {...otherProps} />
 
             <div className="pelcro-prefix-modal-footer">
               <small>
