@@ -26,6 +26,7 @@ import {
   PasswordForgotModal,
   CartModal,
   ShopView,
+  OrderConfirmModal,
   OrderCreateModal
 } from "./components";
 
@@ -33,8 +34,6 @@ import {
 import Gift from "./Components/modals/Gift";
 import Redeem from "./Components/modals/Redeem";
 import UserEdit from "./Components/modals/user/Edit";
-
-import Confirm from "./Components/shop-old/Confirm";
 
 class App extends Component {
   constructor(props) {
@@ -108,7 +107,6 @@ class App extends Component {
   // displays required view
   initViews = () => {
     setTimeout(() => {
-      this.renderShop();
       this.removeHTMLButton("pelcro-register-button");
 
       if (
@@ -230,14 +228,14 @@ class App extends Component {
   renderShop = () => {
     const products = document.getElementById("pelcro-shop");
 
-    // if (products)
-    //   ReactDOM.render(
-    //     <ShopView
-    //       getProducts={this.getProducts}
-    //       products={this.state.products}
-    //     />,
-    //     products
-    //   );
+    if (products)
+      ReactDOM.render(
+        <ShopView
+          getProducts={this.getProducts}
+          products={this.state.products}
+        />,
+        products
+      );
   };
 
   setProductsForCart = (products) => {
@@ -502,7 +500,7 @@ class App extends Component {
           )}
 
           {this.state.view === "confirm" && (
-            <Confirm
+            <OrderConfirmModal
               products={this.state.products}
               setProductsForCart={this.setProductsForCart}
               order={this.state.order}
@@ -530,6 +528,7 @@ class App extends Component {
             />
           )}
         </div>
+        {this.renderShop()}
       </div>
     );
   }

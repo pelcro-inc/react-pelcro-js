@@ -27,18 +27,7 @@ const CartContainer = ({
   children
 }) => {
   useEffect(() => {
-    console.log(
-      "fdsklgnsdgkldsnvkldsgjdsg",
-
-      window.Pelcro.ecommerce.products
-        .read()
-        .map((prod) => prod.skus.map((sku) => sku))
-        .flat()
-    );
-    if (
-      window.Pelcro.cartProducts &&
-      window.Pelcro.cartProducts.length
-    ) {
+    if (window.Pelcro.ecommerce.products.read().length) {
       dispatch({
         type: SET_PRODUCTS,
         payload: window.Pelcro.ecommerce.products
@@ -58,6 +47,28 @@ const CartContainer = ({
             return product;
           })
       });
+    } else {
+      setTimeout(() => {
+        dispatch({
+          type: SET_PRODUCTS,
+          payload: window.Pelcro.ecommerce.products
+            .read()
+            .map((prod) => prod.skus.map((sku) => sku))
+            .flat()
+            .map((product) => {
+              if (
+                window.Pelcro.cartProducts &&
+                window.Pelcro.cartProducts.length
+              ) {
+                product.quantity = window.Pelcro.cartProducts.filter(
+                  (productId) => +productId === +product.id
+                ).length;
+              }
+
+              return product;
+            })
+        });
+      }, 1500);
     }
   }, []);
   const submit = (state, dispatch) => {

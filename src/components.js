@@ -121,6 +121,7 @@ export { OrderCraeteSubmitButton } from "./Components/OrderCreate/OrderCraeteSub
 export { OrderCreateContainer } from "./Components/OrderCreate/OrderCreateContainer";
 export { OrderCreateModal } from "./Components/OrderCreate/OrderCreateModal";
 export { OrderCreateView } from "./Components/OrderCreate/OrderCreateView";
+export { OrderConfirmModal } from "./Components/OrderConfirm/OrderConfirmModal";
 
 export {
   init as initButtons,

@@ -15,20 +15,16 @@ export const CartSubmit = ({ name, style, className }) => {
   };
 
   if (!isEmpty) {
-    // eslint-disable-next-line
-    return useMemo(
-      () => (
-        <button
-          style={style}
-          className={className}
-          onClick={() => dispatch({ type: HANDLE_SUBMIT })}
-          disabled={disableSubmit}
-        >
-          {t("confirm")} with {countProducts()}{" "}
-          {countProducts() % 10 === 1 ? "item" : "items"}{" "}
-        </button>
-      ),
-      [className, style]
+    return (
+      <button
+        style={style}
+        className={className}
+        onClick={() => dispatch({ type: HANDLE_SUBMIT })}
+        disabled={disableSubmit}
+      >
+        {t("confirm")} with {countProducts()}{" "}
+        {countProducts() % 10 === 1 ? "item" : "items"}{" "}
+      </button>
     );
   }
   return null;
