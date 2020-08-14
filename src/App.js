@@ -107,8 +107,6 @@ class App extends Component {
   // displays required view
   initViews = () => {
     setTimeout(() => {
-      this.removeHTMLButton("pelcro-register-button");
-
       if (
         this.initViewFromUrl() ||
         window.Pelcro.subscription.isSubscribedToSite()
