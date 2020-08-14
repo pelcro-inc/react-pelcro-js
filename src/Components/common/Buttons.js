@@ -152,7 +152,7 @@ export const init = (app) => {
     }
   }
 
-  setTimeout(() => {
+  if (window.Pelcro.ecommerce?.products?.read()?.length) {
     const pelcroAddToCartButtonsByClass = document.getElementsByClassName(
       "pelcro-add-to-cart-button"
     );
@@ -169,7 +169,36 @@ export const init = (app) => {
         );
       }
     }
-  }, 2000);
+  } else {
+    document.addEventListener("ecommerceProductsLoaded", function (
+      e
+    ) {
+      setTimeout(() => {
+        const pelcroAddToCartButtonsByClass = document.getElementsByClassName(
+          "pelcro-add-to-cart-button"
+        );
+
+        if (pelcroAddToCartButtonsByClass.length !== 0) {
+          for (
+            let i = 0;
+            i < pelcroAddToCartButtonsByClass.length;
+            i++
+          ) {
+            pelcroAddToCartButtonsByClass[i].addEventListener(
+              "click",
+              (e) => {
+                window.Pelcro.cartProducts =
+                  window.Pelcro?.cartProducts || [];
+                window.Pelcro.cartProducts.push(
+                  e.target.dataset.skuId
+                );
+              }
+            );
+          }
+        }
+      }, 500);
+    });
+  }
 
   const pelcroPurchaseButtonsByClass = document.getElementsByClassName(
     "pelcro-purchase-button"

@@ -48,7 +48,9 @@ const CartContainer = ({
           })
       });
     } else {
-      setTimeout(() => {
+      document.addEventListener("ecommerceProductsLoaded", function (
+        e
+      ) {
         dispatch({
           type: SET_PRODUCTS,
           payload: window.Pelcro.ecommerce.products
@@ -68,7 +70,7 @@ const CartContainer = ({
               return product;
             })
         });
-      }, 1500);
+      });
     }
   }, []);
   const submit = (state, dispatch) => {
