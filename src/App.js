@@ -492,7 +492,10 @@ class App extends Component {
             <OrderCreateModal
               order={this.state.order}
               setView={this.setView}
-              onSuccess={() => this.setView("confirm")}
+              onSuccess={(res) => {
+                this.setView("confirm");
+                console.log(res);
+              }}
               onFailure={(err) => console.log(err)}
             />
           )}
