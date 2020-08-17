@@ -226,7 +226,7 @@ class App extends Component {
   renderShop = () => {
     const products = document.getElementById("pelcro-shop");
 
-    if (products)
+    if (products) {
       ReactDOM.render(
         <ShopView
           getProducts={this.getProducts}
@@ -234,6 +234,7 @@ class App extends Component {
         />,
         products
       );
+    }
   };
 
   setProductsForCart = (products) => {

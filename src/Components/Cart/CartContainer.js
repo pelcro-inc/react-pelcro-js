@@ -48,29 +48,30 @@ const CartContainer = ({
           })
       });
     } else {
-      document.addEventListener("ecommerceProductsLoaded", function (
-        e
-      ) {
-        dispatch({
-          type: SET_PRODUCTS,
-          payload: window.Pelcro.ecommerce.products
-            .read()
-            .map((prod) => prod.skus.map((sku) => sku))
-            .flat()
-            .map((product) => {
-              if (
-                window.Pelcro.cartProducts &&
-                window.Pelcro.cartProducts.length
-              ) {
-                product.quantity = window.Pelcro.cartProducts.filter(
-                  (productId) => +productId === +product.id
-                ).length;
-              }
+      document.addEventListener(
+        "PelcroEcommerceProductsLoaded",
+        function (e) {
+          dispatch({
+            type: SET_PRODUCTS,
+            payload: window.Pelcro.ecommerce.products
+              .read()
+              .map((prod) => prod.skus.map((sku) => sku))
+              .flat()
+              .map((product) => {
+                if (
+                  window.Pelcro.cartProducts &&
+                  window.Pelcro.cartProducts.length
+                ) {
+                  product.quantity = window.Pelcro.cartProducts.filter(
+                    (productId) => +productId === +product.id
+                  ).length;
+                }
 
-              return product;
-            })
-        });
-      });
+                return product;
+              })
+          });
+        }
+      );
     }
   }, []);
   const submit = (state, dispatch) => {
