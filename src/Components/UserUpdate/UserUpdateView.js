@@ -6,13 +6,14 @@ import {
   UserUpdateEmail,
   UserUpdateFirstName,
   UserUpdateLastName,
+  UserUpdateDisplayName,
   UserUpdatePhone,
   UserUpdateButton,
   UserUpdateContainer,
   UserUpdateTextInput
 } from "../../components";
 
-export const UserUpdateView = props => {
+export const UserUpdateView = (props) => {
   const { t } = useTranslation("userEdit");
 
   return (
@@ -28,7 +29,10 @@ export const UserUpdateView = props => {
       <div className="pelcro-prefix-form">
         <div className="pelcro-prefix-row">
           <div className="col-md-12">
-            <label className="pelcro-prefix-label" htmlFor="pelcro-input-email">
+            <label
+              className="pelcro-prefix-label"
+              htmlFor="pelcro-input-email"
+            >
               {t("labels.email")}{" "}
             </label>
             <UserUpdateEmail
@@ -68,6 +72,19 @@ export const UserUpdateView = props => {
           <div className="col-md-6">
             <label
               className="pelcro-prefix-label"
+              htmlFor="pelcro-input-first_name"
+            >
+              {t("labels.firstName")}{" "}
+            </label>
+            <UserUpdateDisplayName
+              className="pelcro-prefix-input pelcro-prefix-form-control"
+              placeholder="Display Name"
+            />
+          </div>
+
+          <div className="col-md-6">
+            <label
+              className="pelcro-prefix-label"
               htmlFor="pelcro-input-last_name"
             >
               Organization Name
@@ -83,7 +100,10 @@ export const UserUpdateView = props => {
 
         <div className="pelcro-prefix-row">
           <div className="col-md-12">
-            <label className="pelcro-prefix-label" htmlFor="pelcro-input-phone">
+            <label
+              className="pelcro-prefix-label"
+              htmlFor="pelcro-input-phone"
+            >
               {t("labels.phone")}{" "}
             </label>
             <UserUpdatePhone

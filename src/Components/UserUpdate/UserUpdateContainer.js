@@ -5,7 +5,6 @@ import React, {
   useEffect
 } from "react";
 import { useTranslation } from "react-i18next";
-import { store as pelcroStore } from "../PelcroContainer";
 import useReducerWithSideEffects, {
   UpdateWithSideEffect,
   Update
@@ -13,6 +12,7 @@ import useReducerWithSideEffects, {
 import {
   SET_FIRST_NAME,
   SET_LAST_NAME,
+  SET_DISPLAY_NAME,
   SET_PHONE,
   SET_TEXT_FIELD,
   HANDLE_USER_UPDATE,
@@ -22,10 +22,11 @@ import { getErrorMessages } from "../common/Helpers";
 import { showError, showSuccess } from "../../utils/showing-error";
 
 const initialState = {
-  email: window.Pelcro.user.read().email,
-  firstName: window.Pelcro.user.read().first_name,
-  lastName: window.Pelcro.user.read().last_name,
-  phone: window.Pelcro.user.read().phone,
+  email: window.Pelcro.user.read()?.email,
+  firstName: window.Pelcro.user.read()?.first_name,
+  lastName: window.Pelcro.user.read()?.last_name,
+  displayName: window.Pelcro.user.read()?.display_name,
+  phone: window.Pelcro.user.read()?.phone,
   buttonDisabled: false,
   textFields: {}
 };
@@ -49,22 +50,26 @@ const UserUpdateContainer = ({
     setTimeout(() => {
       dispatch({
         type: SET_FIRST_NAME,
-        payload: window.Pelcro.user.read().first_name
+        payload: window.Pelcro.user.read()?.first_name
       });
       dispatch({
         type: SET_LAST_NAME,
-        payload: window.Pelcro.user.read().last_name
+        payload: window.Pelcro.user.read()?.last_name
+      });
+      dispatch({
+        type: SET_DISPLAY_NAME,
+        payload: window.Pelcro.user.read()?.display_name
       });
       dispatch({
         type: SET_PHONE,
-        payload: window.Pelcro.user.read().phone
+        payload: window.Pelcro.user.read()?.phone
       });
       setUserLoaded(true);
     }, 3000);
   }, []);
 
   const handleUpdateUser = (
-    { firstName, lastName, phone, textFields },
+    { firstName, lastName, phone, textFields, displayName },
     dispatch
   ) => {
     window.Pelcro.user.update(
@@ -72,6 +77,7 @@ const UserUpdateContainer = ({
         auth_token: window.Pelcro.user.read().auth_token,
         first_name: firstName,
         last_name: lastName,
+        display_name: displayName,
         phone: phone,
         metadata: { updated: "updated", ...textFields }
       },
@@ -111,6 +117,12 @@ const UserUpdateContainer = ({
           return Update({
             ...state,
             firstName: action.payload
+          });
+
+        case SET_DISPLAY_NAME:
+          return Update({
+            ...state,
+            displayName: action.payload
           });
 
         case SET_LAST_NAME:

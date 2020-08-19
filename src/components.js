@@ -45,6 +45,7 @@ export { UserUpdateContainer } from "./Components/UserUpdate/UserUpdateContainer
 export { UserUpdateView } from "./Components/UserUpdate/UserUpdateView";
 export { UserUpdateModal } from "./Components/UserUpdate/UserUpdateModal";
 export { UserUpdateFirstName } from "./Components/UserUpdate/UserUpdateFirstName";
+export { UserUpdateDisplayName } from "./Components/UserUpdate/UserUpdateDisplayName";
 export { UserUpdateLastName } from "./Components/UserUpdate/UserUpdateLastName";
 export { UserUpdatePhone } from "./Components/UserUpdate/UserUpdatePhone";
 export { UserUpdateTextInput } from "./Components/UserUpdate/UserUpdateTextInput";
