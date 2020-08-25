@@ -216,7 +216,11 @@ export const init = (app) => {
               quantity: "1"
             }
           ]);
-          app.setView("orderCreate");
+          if (window.Pelcro.user.isAuthenticated()) {
+            app.setView("orderCreate");
+          } else {
+            app.setView("login");
+          }
         }
       );
     }

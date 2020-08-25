@@ -1944,3 +1944,19 @@ body.pelcro-prefix-modal-open {
 .custom-submit-button {
   max-width: 300px;
 }
+
+.pelcro-prefix-payment-block {
+  background: #fafafa;
+  border: 1px solid #ececec;
+  border-radius: 6px;
+  padding: 26px;
+  font-size: 14px;
+}
+
+.pelcro-prefix-payment-icons {
+  height: 15px;
+}
+
+#pelcro-app .pelcro-prefix-form .pelcro-prefix-form .pelcro-prefix-row .col-md-12 .pelcro-payment-request {
+  padding: 0 !important;
+}
