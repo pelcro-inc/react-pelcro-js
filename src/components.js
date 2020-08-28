@@ -124,6 +124,14 @@ export { OrderCreateModal } from "./Components/OrderCreate/OrderCreateModal";
 export { OrderCreateView } from "./Components/OrderCreate/OrderCreateView";
 export { OrderConfirmModal } from "./Components/OrderConfirm/OrderConfirmModal";
 
+export { GiftCreateModal } from "./Components/GiftCreate/GiftCreateModal";
+export { GiftCreateView } from "./Components/GiftCreate/GiftCreateView";
+export { GiftCreateContainer } from "./Components/GiftCreate/GiftCreateContainer";
+export { GiftCreateSubmitButton } from "./Components/GiftCreate/GiftCreateSubmitButton";
+export { GiftCreateFirstName } from "./Components/GiftCreate/GiftCreateFirstName";
+export { GiftCreateLastName } from "./Components/GiftCreate/GiftCreateLastName";
+export { GiftCreateEmail } from "./Components/GiftCreate/GiftCreateEmail";
+
 export {
   init as initButtons,
   authenticatedButtons,

@@ -20,20 +20,19 @@ import {
   unauthenticatedButtons,
   UserUpdateModal,
   AddressCreateModal,
-  PelcroContainer,
   AddressUpdateModal,
   PasswordResetModal,
   PasswordForgotModal,
   CartModal,
   ShopView,
   OrderConfirmModal,
-  OrderCreateModal
+  OrderCreateModal,
+  GiftCreateModal
 } from "./components";
 
 // to be refactored
 import Gift from "./Components/modals/Gift";
 import Redeem from "./Components/modals/Redeem";
-import UserEdit from "./Components/modals/user/Edit";
 
 class App extends Component {
   constructor(props) {
@@ -333,7 +332,7 @@ class App extends Component {
               }}
             />
           )}
-          {this.state.view === "gift" && (
+          {/* {this.state.view === "gift" && (
             <Gift
               site={this.state.site}
               isGift={this.state.isGift}
@@ -343,6 +342,27 @@ class App extends Component {
               resetView={this.resetView}
               setView={this.setView}
               ReactGA={ReactGA}
+            />
+          )} */}
+          {this.state.view === "gift" && (
+            <GiftCreateModal
+              plan={this.state.plan}
+              product={this.state.product}
+              setView={this.setView}
+              onSuccess={(giftRecipient) => {
+                this.setGiftRecipient({
+                  email: giftRecipient.email,
+                  firstName: giftRecipient.firstName,
+                  lastName: giftRecipient.lastName
+                });
+
+                if (
+                  this.state.product.address_required ||
+                  this.state.site.taxes_enabled
+                )
+                  return this.setView("address");
+                else this.setView("payment");
+              }}
             />
           )}
           {this.state.view === "redeem" && (
