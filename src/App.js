@@ -31,7 +31,6 @@ import {
 } from "./components";
 
 // to be refactored
-import Gift from "./Components/modals/Gift";
 import Redeem from "./Components/modals/Redeem";
 
 class App extends Component {
@@ -332,18 +331,7 @@ class App extends Component {
               }}
             />
           )}
-          {/* {this.state.view === "gift" && (
-            <Gift
-              site={this.state.site}
-              isGift={this.state.isGift}
-              setGiftRecipient={this.setGiftRecipient}
-              plan={this.state.plan}
-              product={this.state.product}
-              resetView={this.resetView}
-              setView={this.setView}
-              ReactGA={ReactGA}
-            />
-          )} */}
+
           {this.state.view === "gift" && (
             <GiftCreateModal
               plan={this.state.plan}
@@ -365,6 +353,7 @@ class App extends Component {
               }}
             />
           )}
+
           {this.state.view === "redeem" && (
             <Redeem
               site={this.state.site}
