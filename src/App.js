@@ -27,11 +27,9 @@ import {
   ShopView,
   OrderConfirmModal,
   OrderCreateModal,
-  GiftCreateModal
+  GiftCreateModal,
+  GiftRedeemModal
 } from "./components";
-
-// to be refactored
-import Redeem from "./Components/modals/Redeem";
 
 class App extends Component {
   constructor(props) {
@@ -355,12 +353,14 @@ class App extends Component {
           )}
 
           {this.state.view === "redeem" && (
-            <Redeem
-              site={this.state.site}
-              setGiftCode={this.setGiftCode}
-              resetView={this.resetView}
-              setView={this.setView}
-              ReactGA={ReactGA}
+            <GiftRedeemModal
+              onSuccess={(giftCode) => {
+                this.setGiftCode(giftCode);
+
+                if (window.Pelcro.user.isAuthenticated()) {
+                  this.setView("address");
+                } else this.setView("register");
+              }}
             />
           )}
           {this.state.view === "payment" && (

@@ -132,6 +132,12 @@ export { GiftCreateFirstName } from "./Components/GiftCreate/GiftCreateFirstName
 export { GiftCreateLastName } from "./Components/GiftCreate/GiftCreateLastName";
 export { GiftCreateEmail } from "./Components/GiftCreate/GiftCreateEmail";
 
+export { GiftRedeemCode } from "./Components/GiftRedeem/GiftRedeemCode";
+export { GiftRedeemContainer } from "./Components/GiftRedeem/GiftRedeemContainer";
+export { GiftRedeemModal } from "./Components/GiftRedeem/GiftRedeemModal";
+export { GiftRedeemView } from "./Components/GiftRedeem/GiftRedeemView";
+export { GiftRedeemSubmitButton } from "./Components/GiftRedeem/GiftRedeemSubmitButton";
+
 export {
   init as initButtons,
   authenticatedButtons,
