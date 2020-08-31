@@ -9,7 +9,7 @@ import { showError } from "../utils/showing-error";
  *
  */
 export function CountrySelect({
-  placeholder,
+  placeholder = "",
   style,
   className,
   id,
@@ -53,7 +53,7 @@ export function CountrySelect({
     }
   };
 
-  const onCountryChange = e => {
+  const onCountryChange = (e) => {
     dispatch({ type: SET_COUNTRY, payload: e.target.value });
   };
 
@@ -74,7 +74,9 @@ export function CountrySelect({
         autoComplete="country"
         {...otherProps}
       >
-        <option></option>
+        <option value="" disabled selected>
+          {placeholder}
+        </option>
         {createCountryItems()}
       </select>
     </React.Fragment>

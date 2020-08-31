@@ -8,7 +8,7 @@ import { showError } from "../utils/showing-error";
  *
  */
 export function StateSelect({
-  placeholder,
+  placeholder = "",
   style,
   className,
   id,
@@ -67,7 +67,7 @@ export function StateSelect({
     }
   };
 
-  const onStateChange = e => {
+  const onStateChange = (e) => {
     dispatch({ type: SET_STATE, payload: e.target.value });
   };
 
@@ -88,7 +88,9 @@ export function StateSelect({
       id="pelcro-input-state"
       {...otherProps}
     >
-      <option></option>
+      <option value="" disabled selected>
+        {placeholder}
+      </option>
       {createStateItems()}
     </select>
   );
