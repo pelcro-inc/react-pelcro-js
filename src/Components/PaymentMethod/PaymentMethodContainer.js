@@ -264,11 +264,13 @@ const PaymentMethodContainerWithoutStripe = ({
         ]
       : null;
 
+    const addressId = address?.id;
+
     window.Pelcro.ecommerce.order.create(
       {
         items: order.items,
         stripe_token: token.id,
-        address_id: address.id
+        ...(addressId && { address_id: addressId })
       },
       (err, res) => {
         if (err) {
