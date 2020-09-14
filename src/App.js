@@ -6,7 +6,6 @@ import {
   SelectModal,
   LoginModal,
   RegisterModal,
-  DashboardModal,
   PaymentMethodUpdateModal,
   SubscriptionCreateModal,
   UserUpdateView,
@@ -14,7 +13,6 @@ import {
   NewsLetter,
   PaymentSuccessModal,
   MeterModal,
-  DashboardMenu,
   initButtons,
   authenticatedButtons,
   unauthenticatedButtons,
@@ -30,6 +28,9 @@ import {
   GiftCreateModal,
   GiftRedeemModal
 } from "./components";
+
+import DashboardModal from "./Components/dashboard/Dashboard";
+import DashboardMenu from "./Components/dashboard/Menu";
 
 class App extends Component {
   constructor(props) {
@@ -532,10 +533,6 @@ class App extends Component {
               setView={this.setView}
               setProductAndPlan={this.setProductAndPlan}
               ReactGA={ReactGA}
-              getAddressId={(addressId) => {
-                this.setState({ addressId });
-                this.setView("address-edit");
-              }}
             />
           )}
         </div>

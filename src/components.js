@@ -19,7 +19,6 @@ export { RegisterJobTitle } from "./Components/Register/RegisterJobTitle";
 export { RegisterCompany } from "./Components/Register/RegisterCompany";
 export { RegisterSelect } from "./Components/Register/RegisterSelect";
 export { PelcroContainer } from "./Components/PelcroContainer";
-export { DashboardModal } from "./Components/Dashboard/DashboardModal";
 export { LoginModal } from "./Components/Login/LoginModal";
 export { RegisterModal } from "./Components/Register/RegisterModal";
 export { SelectModal } from "./Components/Select/SelectModal";
@@ -30,7 +29,6 @@ export { PaymentSuccessView } from "./Components/PaymentSuccess/PaymentSuccessVi
 export { NewsLetter } from "./Components/NewsLetter/NewsLetter";
 export { MeterModal } from "./Components/Meter/MeterModal";
 export { MeterView } from "./Components/Meter/MeterView";
-export { DashboardMenu } from "./Components/Dashboard/DashboardMenu";
 export { PaymentMethodContainer } from "./Components/PaymentMethod/PaymentMethodContainer";
 export { PaymentMethodView } from "./Components/PaymentMethod/PaymentMethodView";
 export { ApplyCouponButton } from "./Components/PaymentMethod/ApplyCouponButton";

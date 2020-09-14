@@ -2,13 +2,19 @@
 
 import React from "react";
 
-export const DashboardMenu = props => {
+const Menu = props => {
   const { openDashboard } = props;
   return (
     <div className="pelcro-prefix-pelcro-view">
-      <button name="menu" id="pelcro-view-menu" onClick={openDashboard}>
+      <button
+        name="menu"
+        id="pelcro-view-menu"
+        onClick={openDashboard}
+      >
         <div className="pelcro-prefix-menu-arrow">{"\u003C"}</div>
       </button>
     </div>
   );
 };
+
+export default Menu;
