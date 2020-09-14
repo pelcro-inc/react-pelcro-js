@@ -8,7 +8,8 @@ import {
   RegisterFirstName,
   RegisterLastName,
   RegisterCompany,
-  RegisterJobTitle
+  RegisterJobTitle,
+  RegisterSelect
 } from "../../components";
 
 export function RegisterView(props) {
@@ -44,6 +45,15 @@ export function RegisterView(props) {
             <RegisterCompany
               className="pelcro-prefix-input pelcro-prefix-form-control"
               placeholder="Company name"
+            />
+
+            <RegisterSelect
+              fieldName="userSelectTest"
+              options={[
+                { key: 1, value: "test 1" },
+                { key: 2, value: "test 2" }
+              ]}
+              placeholder="-"
             />
 
             <RegisterJobTitle

@@ -49,3 +49,4 @@ export const SET_PRODUCTS = "SET_PRODUCTS";
 export const HANDLE_REMOVE_PRODUCT = "HANDLE_REMOVE_PRODUCT";
 export const SET_ORDER = "SET_ORDER";
 export const SET_DISPLAY_NAME = "SET_DISPLAY_NAME";
+export const SET_SELECT = "SET_SELECT";

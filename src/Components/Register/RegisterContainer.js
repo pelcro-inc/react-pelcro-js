@@ -12,7 +12,8 @@ import {
   DISABLE_REGISTRATION_BUTTON,
   SET_FIRST_NAME,
   SET_LAST_NAME,
-  SET_TEXT_FIELD
+  SET_TEXT_FIELD,
+  SET_SELECT
 } from "../../utils/action-types";
 import useReducerWithSideEffects, {
   UpdateWithSideEffect,
@@ -31,7 +32,8 @@ const initialState = {
   confirmPasswordUsed: false,
   buttonDisabled: true,
   firstName: null,
-  lastName: null
+  lastName: null,
+  selectFields: {}
 };
 const store = createContext(initialState);
 const { Provider } = store;
@@ -50,7 +52,8 @@ const RegisterContainer = ({
       firstName,
       lastName,
       organization = "",
-      jobTitle = ""
+      jobTitle = "",
+      selectFields
     },
     dispatch
   ) => {
@@ -60,7 +63,7 @@ const RegisterContainer = ({
         password,
         first_name: firstName,
         last_name: lastName,
-        metadata: { organization, jobTitle }
+        metadata: { organization, jobTitle, ...selectFields }
       },
       (err, res) => {
         dispatch({
@@ -84,6 +87,12 @@ const RegisterContainer = ({
   const [state, dispatch] = useReducerWithSideEffects(
     (state, action) => {
       switch (action.type) {
+        case SET_SELECT:
+          return Update({
+            ...state,
+            selectFields: { ...state.selectFields, ...action.payload }
+          });
+
         case SET_EMAIL:
           return Update({
             ...state,
