@@ -6,11 +6,9 @@ import {
   UserUpdateEmail,
   UserUpdateFirstName,
   UserUpdateLastName,
-  UserUpdateDisplayName,
   UserUpdatePhone,
   UserUpdateButton,
-  UserUpdateContainer,
-  UserUpdateTextInput
+  UserUpdateContainer
 } from "../../components";
 
 export const UserUpdateView = (props) => {
@@ -66,34 +64,6 @@ export const UserUpdateView = (props) => {
               className="pelcro-prefix-input pelcro-prefix-form-control"
               id="pelcro-input-last_name"
               placeholder={t("labels.lastName")}
-            />
-          </div>
-
-          <div className="col-md-6">
-            <label
-              className="pelcro-prefix-label"
-              htmlFor="pelcro-input-first_name"
-            >
-              {t("labels.firstName")}{" "}
-            </label>
-            <UserUpdateDisplayName
-              className="pelcro-prefix-input pelcro-prefix-form-control"
-              placeholder="Display Name"
-            />
-          </div>
-
-          <div className="col-md-6">
-            <label
-              className="pelcro-prefix-label"
-              htmlFor="pelcro-input-last_name"
-            >
-              Organization Name
-            </label>
-            <UserUpdateTextInput
-              fieldName="organization"
-              className="pelcro-prefix-input pelcro-prefix-form-control"
-              id="pelcro-input-organization"
-              placeholder={"organization"}
             />
           </div>
         </div>
