@@ -31,7 +31,7 @@ const GiftCreateContainer = ({
   children
 }) => {
   const { t } = useTranslation("register");
-  const handleLogin = ({ email, firstName, lastName }, dispatch) => {
+  const handleSubmit = ({ email, firstName, lastName }, dispatch) => {
     if (!email) {
       return showError(
         t("gift.messages.enterEmail"),
@@ -72,7 +72,7 @@ const GiftCreateContainer = ({
         case HANDLE_SUBMIT:
           return UpdateWithSideEffect(
             { ...state, buttonDisabled: true },
-            (state, dispatch) => handleLogin(state, dispatch)
+            (state, dispatch) => handleSubmit(state, dispatch)
           );
         default:
           return state;
