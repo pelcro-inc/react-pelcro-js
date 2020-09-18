@@ -26,14 +26,14 @@ export const SubscriptionCreateView = ({
   return (
     <div>
       <div className="pelcro-prefix-title-block">
-        <h4>{product.paywall.subscribe_title}</h4>
+        <h4>{product?.paywall?.subscribe_title}</h4>
         <p>
-          {product.paywall.subscribe_subtitle} -{" "}
-          {plan.amount_formatted}
-          {plan.auto_renew && (
-            <span>/({plan.interval_count})</span>
+          {product?.paywall?.subscribe_subtitle} -{" "}
+          {plan?.amount_formatted}
+          {plan?.auto_renew && (
+            <span>/({plan?.interval_count})</span>
           )}{" "}
-          {plan.interval}.
+          {plan?.interval}.
         </p>
       </div>
 

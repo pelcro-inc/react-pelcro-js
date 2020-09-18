@@ -1,7 +1,7 @@
 import values from "lodash/values";
 import get from "lodash/get";
 
-export const getErrorMessages = error => {
+export const getErrorMessages = (error) => {
   if (get(error, "error.message")) {
     return get(error, "error.message");
   }
@@ -12,7 +12,7 @@ export const getErrorMessages = error => {
 
   const messages = [];
 
-  values(error.response.data.errors).forEach(message => {
+  values(error?.response?.data?.errors).forEach((message) => {
     messages.push(message[0]);
   });
 
