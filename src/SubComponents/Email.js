@@ -25,22 +25,26 @@ export function Email({
   const [finishedTyping, setFinishedTyping] = useState(false);
 
   const handleInputChange = useCallback(
-    value => {
+    (value) => {
       setEmail(value);
 
-      if (validateEmail(email)) {
+      if (otherProps.disableEmailValidation) {
         dispatch({ type: SET_EMAIL, payload: email });
-      } else if (finishedTyping) {
-        if (email.length) {
-          dispatch({
-            type: SET_EMAIL_ERROR,
-            payload: "Please enter a valid email."
-          });
-        } else {
-          dispatch({
-            type: SET_EMAIL_ERROR,
-            payload: "Email address is required."
-          });
+      } else {
+        if (validateEmail(email)) {
+          dispatch({ type: SET_EMAIL, payload: email });
+        } else if (finishedTyping) {
+          if (email.length) {
+            dispatch({
+              type: SET_EMAIL_ERROR,
+              payload: "Please enter a valid email."
+            });
+          } else {
+            dispatch({
+              type: SET_EMAIL_ERROR,
+              payload: "Email address is required."
+            });
+          }
         }
       }
     },
@@ -51,7 +55,7 @@ export function Email({
     handleInputChange(email);
   }, [finishedTyping, email, handleInputChange]);
 
-  const validateEmail = email => {
+  const validateEmail = (email) => {
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
   };
@@ -63,8 +67,12 @@ export function Email({
         id={id}
         style={{ ...style }}
         className={(emailError ? "input-error " : "") + className}
-        value={email || stateEmail}
-        onChange={e => handleInputChange(e.target.value)}
+        value={
+          otherProps?.disableEmailValidation
+            ? stateEmail
+            : email || stateEmail
+        }
+        onChange={(e) => handleInputChange(e.target.value)}
         placeholder={placeholder || "Enter Your Email"}
         onBlur={() => setFinishedTyping(true)}
         onFocus={() => setFinishedTyping(false)}
