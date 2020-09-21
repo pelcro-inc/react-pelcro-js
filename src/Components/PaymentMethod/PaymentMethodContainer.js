@@ -204,6 +204,8 @@ const PaymentMethodContainerWithoutStripe = ({
           gift_recipient_email: giftRecipient
             ? giftRecipient.email
             : null,
+          gift_recipient_first_name: giftRecipient?.firstName,
+          gift_recipient_last_name: giftRecipient?.lastName,
           address_id: product.address_required
             ? window.Pelcro.user.read().addresses[
                 window.Pelcro.user.read().addresses.length - 1
