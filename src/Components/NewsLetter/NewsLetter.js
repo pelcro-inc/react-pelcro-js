@@ -25,20 +25,19 @@ class DefaultNewsLetter extends Component {
       postalCode: ""
     };
 
-    this.plan = this.props.plan || window.Pelcro.paywall.getProduct().plans[0];
-    this.product = this.props.product || window.Pelcro.paywall.getProduct();
+    this.product =
+      this.props.product || window.Pelcro.paywall.getProduct();
 
     this.site = window.Pelcro.site.read();
     this.closeButton = window.Pelcro.paywall.displayCloseButton();
 
-    this.submitNewsletter = this.submitNewsletter.bind(this);
-    this.displayLoginView = this.displayLoginView.bind(this);
-    this.postSubmit = this.postSubmit.bind(this);
-
-    this.onEmailChange = this.onEmailChange.bind(this);
-    this.onFirstNameChange = this.onFirstNameChange.bind(this);
-    this.onLastNameChange = this.onLastNameChange.bind(this);
-    this.onPostalCodeChange = this.onPostalCodeChange.bind(this);
+    const { t } = this.props;
+    this.title = this.props.product
+      ? this.props.product.paywall.newsletter_title
+      : t("title");
+    this.subtitle = this.props.product
+      ? this.props.product.paywall.newsletter_subtitle
+      : t("subtitle");
   }
 
   componentDidMount = () => {
@@ -53,12 +52,13 @@ class DefaultNewsLetter extends Component {
     document.removeEventListener("keydown", this.handleSubmit);
   };
 
-  handleSubmit = e => {
-    if (e.key === "Enter" && !this.state.disableSubmit) this.submitNewsletter();
+  handleSubmit = (e) => {
+    if (e.key === "Enter" && !this.state.disableSubmit)
+      this.submitNewsletter();
   };
 
   // inserting error message into modal window
-  showError = message => {
+  showError = (message) => {
     showError(message, "pelcro-error-newsletter");
   };
 
@@ -70,7 +70,7 @@ class DefaultNewsLetter extends Component {
     this.props.setView("select");
   };
 
-  submitNewsletter = function() {
+  submitNewsletter = () => {
     this.setState({ disableSubmit: true });
 
     window.Pelcro.newsletter.create(
@@ -82,7 +82,7 @@ class DefaultNewsLetter extends Component {
         source: "web",
         lists: "default",
         consent_url: window.location.href,
-        consent_text: this.product.paywall.newsletter_subtitle,
+        consent_text: this.subtitle,
         consent_type: "explicit"
       },
       (err, res) => {
@@ -95,7 +95,7 @@ class DefaultNewsLetter extends Component {
     );
   };
 
-  postSubmit = function() {
+  postSubmit = () => {
     window.Pelcro.paywall.decrementPageViewFrequency(
       this.product.paywall.newsletter_extra_visits,
       this.product.paywall.frequency_limit
@@ -103,21 +103,21 @@ class DefaultNewsLetter extends Component {
     this.props.setView("meter");
   };
 
-  onEmailChange(event) {
+  onEmailChange = (event) => {
     this.setState({ email: event.target.value });
-  }
+  };
 
-  onFirstNameChange(event) {
+  onFirstNameChange = (event) => {
     this.setState({ firstName: event.target.value });
-  }
+  };
 
-  onLastNameChange(event) {
+  onLastNameChange = (event) => {
     this.setState({ lastName: event.target.value });
-  }
+  };
 
-  onPostalCodeChange(event) {
+  onPostalCodeChange = (event) => {
     this.setState({ postalCode: event.target.value });
-  }
+  };
 
   render() {
     const { t } = this.props;
@@ -143,8 +143,8 @@ class DefaultNewsLetter extends Component {
               ></Header>
               <div className="pelcro-prefix-modal-body">
                 <div className="pelcro-prefix-title-block">
-                  <h4>{this.product.paywall.newsletter_title}</h4>
-                  <p>{this.product.paywall.newsletter_subtitle}</p>
+                  <h4>{this.title}</h4>
+                  <p>{this.subtitle}</p>
                 </div>
 
                 <ErrMessage name="newsletter" />
@@ -155,7 +155,7 @@ class DefaultNewsLetter extends Component {
                         className="pelcro-prefix-label"
                         htmlFor="pelcro-input-first_name"
                       >
-                        {t("firstName")}
+                        {t("labels.firstName")}
                       </label>
                       <input
                         value={this.state.first_name}
@@ -164,7 +164,7 @@ class DefaultNewsLetter extends Component {
                         autoComplete="first-name"
                         id="pelcro-input-first_name"
                         type="text"
-                        placeholder={t("firstName")}
+                        placeholder={t("labels.firstName")}
                       ></input>
                     </div>
                     <div className="col-sm-6">
@@ -172,7 +172,7 @@ class DefaultNewsLetter extends Component {
                         className="pelcro-prefix-label"
                         htmlFor="pelcro-input-last_name"
                       >
-                        {t("lastName")}
+                        {t("labels.lastName")}
                       </label>
                       <input
                         value={this.state.last_name}
@@ -181,7 +181,7 @@ class DefaultNewsLetter extends Component {
                         autoComplete="last-name"
                         id="pelcro-input-last_name"
                         type="text"
-                        placeholder={t("lastName")}
+                        placeholder={t("labels.lastName")}
                       ></input>
                     </div>
                   </div>
@@ -191,14 +191,14 @@ class DefaultNewsLetter extends Component {
                       htmlFor="pelcro-input-email"
                       className="pelcro-prefix-label"
                     >
-                      {t("email")} *
+                      {t("labels.email")} *
                     </label>
                     <input
                       id="pelcro-input-email"
                       onChange={this.onEmailChange}
                       type="text"
                       className="pelcro-prefix-input pelcro-prefix-form-control"
-                      placeholder={t("email")}
+                      placeholder={t("labels.email")}
                     ></input>
                   </div>
 
@@ -208,7 +208,7 @@ class DefaultNewsLetter extends Component {
                         className="pelcro-prefix-label"
                         htmlFor="pelcro-input-postal_code"
                       >
-                        {t("postalCode")}
+                        {t("labels.postalCode")}
                       </label>
                       <input
                         value={this.state.postal_code}
@@ -217,36 +217,36 @@ class DefaultNewsLetter extends Component {
                         autoComplete="postal-code"
                         id="pelcro-input-postal_code"
                         type="text"
-                        placeholder={t("postalCode")}
+                        placeholder={t("labels.postalCode")}
                       ></input>
                     </div>
                   </div>
 
                   <Submit
                     onClick={this.submitNewsletter}
-                    text={t("submit")}
+                    text={t("labels.submit")}
                     disabled={this.state.disableSubmit}
                   ></Submit>
                   <small className="pelcro-prefix-footnote pelcro-prefix-form-text">
-                    * {t("required")}
+                    * {t("labels.required")}
                   </small>
                 </div>
               </div>
               <div className="pelcro-prefix-modal-footer">
                 <small>
-                  {t("alreadyHaveAccount") + " "}
+                  {t("messages.alreadyHaveAccount") + " "}
                   <button
                     className="pelcro-prefix-link "
                     onClick={this.displayLoginView}
                   >
-                    {t("loginHere")}
+                    {t("messages.loginHere")}
                   </button>
-                  {t("createAnAccount")}
+                  {t("messages.createAnAccount")}
                   <button
                     className="pelcro-prefix-link "
                     onClick={this.displaySelectView}
                   >
-                    {t("here")}
+                    {t("messages.here")}
                   </button>
                 </small>
                 <Authorship></Authorship>
@@ -260,10 +260,11 @@ class DefaultNewsLetter extends Component {
 }
 
 DefaultNewsLetter.propTypes = {
-  plan: PropTypes.object,
   product: PropTypes.object,
   setView: PropTypes.func,
   resetView: PropTypes.func
 };
 
-export const NewsLetter = withTranslation("newsletter")(DefaultNewsLetter);
+export const NewsLetter = withTranslation("newsletter")(
+  DefaultNewsLetter
+);
