@@ -33,10 +33,10 @@ class DefaultNewsLetter extends Component {
 
     const { t } = this.props;
     this.title = this.props.product
-      ? this.props.product.paywall.newsletter_title
+      ? this.props.product?.paywall?.newsletter_title
       : t("title");
     this.subtitle = this.props.product
-      ? this.props.product.paywall.newsletter_subtitle
+      ? this.props.product?.paywall?.newsletter_subtitle
       : t("subtitle");
   }
 
@@ -100,8 +100,8 @@ class DefaultNewsLetter extends Component {
 
   postSubmit = () => {
     window.Pelcro.paywall.decrementPageViewFrequency(
-      this.product.paywall.newsletter_extra_visits,
-      this.product.paywall.frequency_limit
+      this.product?.paywall?.newsletter_extra_visits,
+      this.product?.paywall?.frequency_limit
     );
     this.props.setView("meter");
   };
