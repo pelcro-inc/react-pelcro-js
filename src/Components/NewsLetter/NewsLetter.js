@@ -87,10 +87,13 @@ class DefaultNewsLetter extends Component {
       },
       (err, res) => {
         this.setState({ disableSubmit: false });
-
         if (err) return this.showError(getErrorMessages(err));
 
-        this.postSubmit();
+        try {
+          this.postSubmit();
+        } catch {
+          this.props.setView("meter");
+        }
       }
     );
   };
