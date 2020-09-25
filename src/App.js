@@ -96,6 +96,12 @@ class App extends Component {
     } else if (view === "user-edit") {
       this.setView("user-edit");
       return true;
+    } else if (view === "register") {
+      this.displayRegisterView();
+      return true;
+    } else if (view === "newsletter") {
+      this.setView("newsletter");
+      return true;
     } else {
       return false;
     }
