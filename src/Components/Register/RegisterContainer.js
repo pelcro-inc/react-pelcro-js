@@ -21,6 +21,7 @@ import useReducerWithSideEffects, {
 } from "use-reducer-with-side-effects";
 import { showError } from "../../utils/showing-error";
 import { getErrorMessages } from "../common/Helpers";
+import { cleanObjectNullValues } from "../../utils/utils";
 
 const initialState = {
   email: "",
@@ -45,18 +46,18 @@ const RegisterContainer = ({
   onFailure = () => {},
   children
 }) => {
-  const handleRegister = (
-    {
+  const handleRegister = (userData, dispatch) => {
+    const filteredData = cleanObjectNullValues(userData);
+    const {
       email,
       password,
       firstName,
       lastName,
-      organization = "",
-      jobTitle = "",
+      organization,
+      jobTitle,
       selectFields
-    },
-    dispatch
-  ) => {
+    } = filteredData;
+
     window.Pelcro.user.register(
       {
         email,
