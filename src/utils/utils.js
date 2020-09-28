@@ -8,7 +8,7 @@ export const formatDiscountedPrice = (planAmount, percentageOff) =>
       .match(/^-?\d+(?:\.\d{0,2})?/)[0]
   );
 
-export const sortCountries = countries => {
+export const sortCountries = (countries) => {
   const sortable = [];
   delete countries.CA;
   delete countries.US;
@@ -26,3 +26,23 @@ export const sortCountries = countries => {
 
   return sortable;
 };
+
+/**
+ * Recursively filters out null values (null, undefined)
+ * @param {object} obj
+ * @return {object} filtered object
+ * @example
+ *  cleanObjectNullValues({one: "not empty", two: null, three: {nested: null}})
+ *
+ *  {
+ *    one: "not empty",
+ *    three: {}
+ *  }
+ */
+export const cleanObjectNullValues = (obj) =>
+  Object.entries(obj)
+    .map(([k, v]) => [
+      k,
+      v && typeof v === "object" ? cleanObjectNullValues(v) : v
+    ])
+    .reduce((a, [k, v]) => (v == null ? a : ((a[k] = v), a)), {});
