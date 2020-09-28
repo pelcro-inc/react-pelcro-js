@@ -24,6 +24,10 @@ export function RegisterModal({
     setView("select");
   };
 
+  const title = product?.paywall?.register_title ?? t("title");
+  const subtitle =
+    product?.paywall?.register_subtitle ?? t("subtitle");
+
   return (
     <div className="pelcro-prefix-view">
       <div
@@ -45,8 +49,8 @@ export function RegisterModal({
             ></Header>
             <div className="pelcro-prefix-modal-body">
               <div className="pelcro-prefix-title-block">
-                <h4>{t("title")}</h4>
-                <p>{t("subtitle")}</p>
+                <h4>{title}</h4>
+                <p>{subtitle}</p>
               </div>
 
               <ErrMessage name="register" />
