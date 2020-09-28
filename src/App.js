@@ -329,6 +329,7 @@ class App extends Component {
           )}
           {this.state.view === "register" && (
             <RegisterModal
+              product={this.state.product}
               setView={this.setView}
               onSuccess={() => {
                 this.setView("");
