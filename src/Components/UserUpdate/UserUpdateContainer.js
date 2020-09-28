@@ -1,9 +1,4 @@
-import React, {
-  createContext,
-  useContext,
-  useState,
-  useEffect
-} from "react";
+import React, { createContext, useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import useReducerWithSideEffects, {
   UpdateWithSideEffect,
@@ -30,6 +25,7 @@ const initialState = {
   buttonDisabled: false,
   textFields: {}
 };
+
 const store = createContext(initialState);
 const { Provider } = store;
 
@@ -40,30 +36,36 @@ const UserUpdateContainer = ({
   onFailure = () => {},
   children
 }) => {
-  // const {
-  //   state: { pelcroUserLoaded },
-  // } = useContext(pelcroStore);
   const [pelcroUserLoaded, setUserLoaded] = useState(false);
   const { t } = useTranslation("userEdit");
 
   useEffect(() => {
     setTimeout(() => {
-      dispatch({
-        type: SET_FIRST_NAME,
-        payload: window.Pelcro.user.read()?.first_name
-      });
-      dispatch({
-        type: SET_LAST_NAME,
-        payload: window.Pelcro.user.read()?.last_name
-      });
-      dispatch({
-        type: SET_DISPLAY_NAME,
-        payload: window.Pelcro.user.read()?.display_name
-      });
-      dispatch({
-        type: SET_PHONE,
-        payload: window.Pelcro.user.read()?.phone
-      });
+      const fields = [
+        {
+          type: SET_FIRST_NAME,
+          payload: window.Pelcro.user.read()?.first_name
+        },
+        {
+          type: SET_LAST_NAME,
+          payload: window.Pelcro.user.read()?.last_name
+        },
+        {
+          type: SET_DISPLAY_NAME,
+          payload: window.Pelcro.user.read()?.display_name
+        },
+        {
+          type: SET_PHONE,
+          payload: window.Pelcro.user.read()?.phone
+        }
+      ];
+
+      fields
+        .filter((field) => Boolean(field.payload))
+        .forEach((field) => {
+          dispatch(field);
+        });
+
       setUserLoaded(true);
     }, 3000);
   }, []);
