@@ -4,7 +4,13 @@ import { HANDLE_LOGIN } from "../../utils/action-types";
 
 export const LoginButton = ({ store, ...otherProps }) => {
   const {
-    state: { emailError, passwordError, email, password },
+    state: {
+      emailError,
+      passwordError,
+      email,
+      password,
+      buttonDisabled
+    },
     dispatch
   } = useContext(store);
 
@@ -12,9 +18,13 @@ export const LoginButton = ({ store, ...otherProps }) => {
 
   useEffect(() => {
     setDisabled(
-      emailError || passwordError || !email.length || !password.length
+      emailError ||
+        passwordError ||
+        !email.length ||
+        !password.length ||
+        buttonDisabled
     );
-  }, [emailError, passwordError, email, password]);
+  }, [emailError, passwordError, email, password, buttonDisabled]);
 
   return (
     <Button

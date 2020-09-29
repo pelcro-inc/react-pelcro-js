@@ -1,9 +1,7 @@
 import React from "react";
-import {
-  PelcroCardNumber,
-  PelcroCardExpiry,
-  PelcroCardCVC
-} from "../../components";
+import { PelcroCardNumber } from "../../SubComponents/PelcroCardNumber";
+import { PelcroCardCVC } from "../../SubComponents/PelcroCardCVC";
+import { PelcroCardExpiry } from "../../SubComponents/PelcroCardExpiry";
 import { useTranslation } from "react-i18next";
 import { DiscountedPrice } from "./DiscountedPrice";
 import { PaymentMethodContainer } from "./PaymentMethodContainer";

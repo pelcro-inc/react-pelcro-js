@@ -1,13 +1,11 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import {
-  PelcroCardNumber,
-  PelcroCardExpiry,
-  PelcroCardCVC,
-  AlertDanger,
-  AlertSuccess,
-  PelcroPaymentRequestButton
-} from "../../components";
+import { PelcroCardCVC } from "../../SubComponents/PelcroCardCVC";
+import { PelcroCardNumber } from "../../SubComponents/PelcroCardNumber";
+import { PelcroCardExpiry } from "../../SubComponents/PelcroCardExpiry";
+import { AlertDanger } from "../Alerts/AlertDanger";
+import { AlertSuccess } from "../Alerts/AlertSuccess";
+import { PelcroPaymentRequestButton } from "../../SubComponents/PelcroPaymentRequestButton";
 import { DiscountedPrice } from "../PaymentMethod/DiscountedPrice";
 import { SubscriptionCreateContainer } from "./SubscriptionCreateContainer";
 import { SubmitPaymentMethod } from "../PaymentMethod/SubmitPaymentMethod";
@@ -36,6 +34,9 @@ export const SubscriptionCreateView = ({
           {plan?.interval}.
         </p>
       </div>
+
+      <AlertDanger name="payment-create" />
+      <AlertSuccess name="payment-create" />
 
       <AlertDanger name="payment" />
       <AlertSuccess name="payment" />

@@ -1,17 +1,15 @@
 import React from "react";
-import {
-  PasswordResetContainer,
-  PasswordResetPassword,
-  PasswordResetButton,
-  PasswordResetEmail,
-  PasswordResetConfirmPassword,
-  AlertDanger,
-  AlertSuccess
-} from "../../components";
+import { PasswordResetContainer } from "./PasswordResetContainer";
+import { PasswordResetPassword } from "./PasswordResetPassword";
+import { PasswordResetButton } from "./PasswordResetButton";
+import { PasswordResetEmail } from "./PasswordResetEmail";
+import { PasswordResetConfirmPassword } from "./PasswordResetConfirmPassword";
+import { AlertDanger } from "../Alerts/AlertDanger";
+import { AlertSuccess } from "../Alerts/AlertSuccess";
 import { useTranslation } from "react-i18next";
 import Authorship from "../common/Authorship";
 
-export const PasswordResetView = props => {
+export const PasswordResetView = (props) => {
   const { t } = useTranslation("passwordReset");
   return (
     <PasswordResetContainer {...props}>

@@ -1,6 +1,6 @@
 import React from "react";
-import { PaymentMethodContainer } from "../../components";
+import { PaymentMethodContainer } from "../PaymentMethod/PaymentMethodContainer";
 
-export const PaymentMethodUpdateContainer = props => {
+export const PaymentMethodUpdateContainer = (props) => {
   return <PaymentMethodContainer {...props} />;
 };

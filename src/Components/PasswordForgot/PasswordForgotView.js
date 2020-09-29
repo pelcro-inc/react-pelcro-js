@@ -1,15 +1,13 @@
 import React from "react";
-import {
-  PasswordForgotContainer,
-  PasswordForgotButton,
-  PasswordForgotEmail,
-  AlertDanger,
-  AlertSuccess
-} from "../../components";
+import { PasswordForgotContainer } from "./PasswordForgotContainer";
+import { PasswordForgotButton } from "./PasswordForgotButton";
+import { PasswordForgotEmail } from "./PasswordForgotEmail";
+import { AlertDanger } from "../Alerts/AlertDanger";
+import { AlertSuccess } from "../Alerts/AlertSuccess";
 import { useTranslation } from "react-i18next";
 import Authorship from "../common/Authorship";
 
-export const PasswordForgotView = props => {
+export const PasswordForgotView = (props) => {
   const { t } = useTranslation("passwordForgot");
   return (
     <PasswordForgotContainer {...props}>
