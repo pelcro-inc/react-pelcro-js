@@ -20,7 +20,7 @@ const initialState = {
   password: "",
   emailError: null,
   passwordError: null,
-  buttonDisabled: true
+  buttonDisabled: false
 };
 const store = createContext(initialState);
 const { Provider } = store;
