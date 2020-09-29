@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { AlertDanger } from "../../components";
+import { AlertDanger } from "../Alerts/AlertDanger";
 
 import Header from "../common/Header";
 import Authorship from "../common/Authorship";

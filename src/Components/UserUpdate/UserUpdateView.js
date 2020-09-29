@@ -2,14 +2,12 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import ErrMessage from "../common/ErrMessage";
 import AlertSuccess from "../common/AlertSuccess";
-import {
-  UserUpdateEmail,
-  UserUpdateFirstName,
-  UserUpdateLastName,
-  UserUpdatePhone,
-  UserUpdateButton,
-  UserUpdateContainer
-} from "../../components";
+import { UserUpdateEmail } from "./UserUpdateEmail";
+import { UserUpdateFirstName } from "./UserUpdateFirstName";
+import { UserUpdateLastName } from "./UserUpdateLastName";
+import { UserUpdatePhone } from "./UserUpdatePhone";
+import { UserUpdateButton } from "./UserUpdateButton";
+import { UserUpdateContainer } from "./UserUpdateContainer";
 
 export const UserUpdateView = (props) => {
   const { t } = useTranslation("userEdit");

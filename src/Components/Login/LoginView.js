@@ -1,12 +1,10 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import ErrMessage from "../common/ErrMessage";
-import {
-  LoginContainer,
-  LoginPassword,
-  LoginButton,
-  LoginEmail
-} from "../../components";
+import { LoginContainer } from "./LoginContainer";
+import { LoginPassword } from "./LoginPassword";
+import { LoginButton } from "./LoginButton";
+import { LoginEmail } from "./LoginEmail";
 
 export function LoginView(props) {
   const { t } = useTranslation("login");
@@ -23,7 +21,10 @@ export function LoginView(props) {
       <div className="pelcro-prefix-form">
         <LoginContainer {...props}>
           <div className="pelcro-prefix-form-group">
-            <label className="pelcro-prefix-label" htmlFor="pelcro-input-email">
+            <label
+              className="pelcro-prefix-label"
+              htmlFor="pelcro-input-email"
+            >
               {t("labels.email")} *
             </label>
 

@@ -1,18 +1,16 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import {
-  ShopContainer,
-  ShopSelectProductButton
-} from "../../components";
+import { ShopContainer } from "./ShopContainer";
+import { ShopSelectProductButton } from "./ShopSelectProductButton";
 
-export const ShopView = props => {
+export const ShopView = (props) => {
   const { t } = useTranslation("shop");
 
   return (
     <ShopContainer {...props}>
       <div id="products">
         <div className="pelcro-prefix-product-field">
-          {props.products.map(product => {
+          {props.products.map((product) => {
             return (
               <div
                 key={`product-${product.id}`}

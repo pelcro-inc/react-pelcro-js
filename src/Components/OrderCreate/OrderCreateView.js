@@ -2,16 +2,14 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { OrderCreateContainer } from "./OrderCreateContainer";
 import { OrderCraeteSubmitButton } from "./OrderCraeteSubmitButton";
-import {
-  PelcroCardNumber,
-  PelcroCardExpiry,
-  PelcroCardCVC,
-  AlertDanger,
-  CouponCode,
-  DiscountedPrice
-} from "../../components";
+import { PelcroCardNumber } from "../../SubComponents/PelcroCardNumber";
+import { PelcroCardCVC } from "../../SubComponents/PelcroCardCVC";
+import { PelcroCardExpiry } from "../../SubComponents/PelcroCardExpiry";
+import { AlertDanger } from "../Alerts/AlertDanger";
+import { CouponCode } from "../PaymentMethod/CouponCode";
+import { DiscountedPrice } from "../PaymentMethod/DiscountedPrice";
 
-export const OrderCreateView = props => {
+export const OrderCreateView = (props) => {
   const { t } = useTranslation("checkoutForm");
   const { t: tPayment } = useTranslation("payment");
   return (

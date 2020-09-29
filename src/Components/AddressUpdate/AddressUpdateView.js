@@ -1,6 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { AlertDanger, AlertSuccess } from "../../components";
+import { AlertDanger } from "../Alerts/AlertDanger";
+import { AlertSuccess } from "../Alerts/AlertSuccess";
 import { AddressUpdateFirstName } from "./AddressUpdateFirstName";
 import { AddressUpdateLastName } from "./AddressUpdateLastName";
 import { AddressUpdateLine1 } from "./AddressUpdateLine1";
@@ -11,7 +12,7 @@ import { AddressUpdateContainer } from "./AddressUpdateContainer";
 import { AddressUpdateCountrySelect } from "./AddressUpdateCountrySelect";
 import { AddressUpdateStateSelect } from "./AddressUpdateStateSelect";
 
-export const AddressUpdateView = props => {
+export const AddressUpdateView = (props) => {
   const { t } = useTranslation("address");
   return (
     <AddressUpdateContainer {...props}>

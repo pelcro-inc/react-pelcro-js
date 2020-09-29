@@ -1,6 +1,6 @@
 import React from "react";
-import { SubmitPaymentMethod } from "../../components";
+import { SubmitPaymentMethod } from "../PaymentMethod/SubmitPaymentMethod";
 
-export const OrderCraeteSubmitButton = props => {
+export const OrderCraeteSubmitButton = (props) => {
   return <SubmitPaymentMethod {...props} />;
 };

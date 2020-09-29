@@ -1,11 +1,9 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import {
-  RegisterContainer,
-  RegisterEmail,
-  RegisterPassword,
-  RegisterButton
-} from "../../components";
+import { RegisterContainer } from "./RegisterContainer";
+import { RegisterEmail } from "./RegisterEmail";
+import { RegisterPassword } from "./RegisterPassword";
+import { RegisterButton } from "./RegisterButton";
 
 export function RegisterView(props) {
   const { t } = useTranslation("register");

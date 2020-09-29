@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { GiftRedeemContainer } from "./GiftRedeemContainer";
-import { AlertDanger } from "../../components";
+import { AlertDanger } from "../Alerts/AlertDanger";
 import { GiftRedeemCode } from "./GiftRedeemCode";
 import { GiftRedeemSubmitButton } from "./GiftRedeemSubmitButton";
 

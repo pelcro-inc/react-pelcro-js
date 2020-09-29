@@ -1,12 +1,10 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import Authorship from "../common/Authorship";
-import {
-  CartContainer,
-  CartRemoveProductButton,
-  CartSubmit,
-  CartTotalPrice
-} from "../../components";
+import { CartContainer } from "./CartContainer";
+import { CartRemoveProductButton } from "./CartRemoveProductButton";
+import { CartSubmit } from "./CartSubmit";
+import { CartTotalPrice } from "./CartTotalPrice";
 
 export const CartView = (props) => {
   const { t } = useTranslation("cart");
