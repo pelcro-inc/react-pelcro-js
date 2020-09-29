@@ -381,7 +381,9 @@ class App extends Component {
               onSuccess={() => {
                 this.setView("success");
               }}
-              onFailure={(error) => console.log(error)}
+              onFailure={(error) => {
+                console.log(error);
+              }}
             />
           )}
           {this.state.view === "payment" &&
@@ -451,8 +453,12 @@ class App extends Component {
           {this.state.view === "source-create" && (
             <PaymentMethodUpdateModal
               setView={this.setView}
-              onFailure={(error) => console.log(error)}
-              onSuccess={() => this.setView("")}
+              onFailure={(error) => {
+                console.log(error);
+              }}
+              onSuccess={() => {
+                this.setView("");
+              }}
             />
           )}
 

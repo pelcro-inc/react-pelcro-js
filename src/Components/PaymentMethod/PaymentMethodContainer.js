@@ -301,10 +301,7 @@ const PaymentMethodContainerWithoutStripe = ({
     return stripe.createToken().then(({ token, error }) => {
       if (error) {
         onFailure(error);
-        showError(
-          getErrorMessages(error),
-          "pelcro-error-payment-create"
-        );
+        showError(error?.message, "pelcro-error-payment-create");
         dispatch({ type: DISABLE_SUBMIT, payload: false });
       } else if (token && type === "createPayment") {
         dispatch({ type: DISABLE_SUBMIT, payload: true });

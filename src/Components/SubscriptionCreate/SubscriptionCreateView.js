@@ -37,6 +37,9 @@ export const SubscriptionCreateView = ({
         </p>
       </div>
 
+      <AlertDanger name="payment-create" />
+      <AlertSuccess name="payment-create" />
+
       <AlertDanger name="payment" />
       <AlertSuccess name="payment" />
 
