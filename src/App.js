@@ -369,6 +369,13 @@ class App extends Component {
 
           {this.state.view === "redeem" && (
             <GiftRedeemModal
+              onDisplay={() => {
+                ReactGA.event({
+                  category: "VIEWS",
+                  action: "Redeem Gift Modal Viewed",
+                  nonInteraction: true
+                });
+              }}
               onSuccess={(giftCode) => {
                 this.setGiftCode(giftCode);
 
