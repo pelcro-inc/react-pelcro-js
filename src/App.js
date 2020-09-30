@@ -402,12 +402,15 @@ class App extends Component {
             )}
           {this.state.view === "success" && (
             <PaymentSuccessModal
-              order={this.state.order}
-              plan={this.state.plan}
               product={this.state.product}
               resetView={this.resetView}
-              setView={this.setView}
-              ReactGA={ReactGA}
+              onDisplay={() => {
+                ReactGA.event({
+                  category: "VIEWS",
+                  action: "Success Modal Viewed",
+                  nonInteraction: true
+                });
+              }}
             />
           )}
           {this.state.view === "address" && (

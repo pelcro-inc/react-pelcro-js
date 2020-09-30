@@ -13,6 +13,10 @@ export class PaymentSuccessModal extends Component {
       name: "success"
     });
 
+    if (this.props.onDisplay) {
+      this.props.onDisplay();
+    }
+
     document.addEventListener("keydown", this.handleSubmit);
   };
 
@@ -20,7 +24,7 @@ export class PaymentSuccessModal extends Component {
     document.removeEventListener("keydown", this.handleSubmit);
   };
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     if (e.key === "Enter") this.props.resetView();
   };
 
@@ -63,5 +67,6 @@ export class PaymentSuccessModal extends Component {
 
 PaymentSuccessModal.propTypes = {
   product: PropTypes.object,
-  resetView: PropTypes.func
+  resetView: PropTypes.func,
+  onDisplay: PropTypes.func
 };
