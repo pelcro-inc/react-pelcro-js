@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { AlertDanger } from "../Alerts/AlertDanger";
 
@@ -8,6 +8,11 @@ import { GiftCreateView } from "./GiftCreateView";
 
 export const GiftCreateModal = (props) => {
   const { t } = useTranslation("register");
+
+  useEffect(() => {
+    if (props.onDisplay) props.onDisplay();
+  }, []);
+
   return (
     <div className="pelcro-prefix-view">
       <div

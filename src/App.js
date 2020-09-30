@@ -343,6 +343,13 @@ class App extends Component {
               plan={this.state.plan}
               product={this.state.product}
               setView={this.setView}
+              onDisplay={() => {
+                ReactGA.event({
+                  category: "VIEWS",
+                  action: "Gift Modal Viewed",
+                  nonInteraction: true
+                });
+              }}
               onSuccess={(giftRecipient) => {
                 this.setGiftRecipient({
                   email: giftRecipient.email,
