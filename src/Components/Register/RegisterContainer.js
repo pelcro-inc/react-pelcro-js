@@ -1,4 +1,4 @@
-import React, { createContext } from "react";
+import React, { createContext, useEffect } from "react";
 import {
   SET_EMAIL,
   SET_PASSWORD,
@@ -44,8 +44,13 @@ const RegisterContainer = ({
   className,
   onSuccess = () => {},
   onFailure = () => {},
+  onDisplay = () => {},
   children
 }) => {
+  useEffect(() => {
+    onDisplay();
+  }, []);
+
   const handleRegister = (userData, dispatch) => {
     const filteredData = cleanObjectNullValues(userData);
     const {

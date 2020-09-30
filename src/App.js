@@ -331,6 +331,13 @@ class App extends Component {
             <RegisterModal
               product={this.state.product}
               setView={this.setView}
+              onDisplay={() => {
+                ReactGA.event({
+                  category: "VIEWS",
+                  action: "Register Modal Viewed",
+                  nonInteraction: true
+                });
+              }}
               onSuccess={() => {
                 this.setView("");
                 this.loggedIn();
