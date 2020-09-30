@@ -399,6 +399,13 @@ class App extends Component {
               product={this.state.product}
               setView={this.setView}
               logout={this.logout}
+              onDisplay={() => {
+                ReactGA.event({
+                  category: "VIEWS",
+                  action: "Payment Modal Viewed",
+                  nonInteraction: true
+                });
+              }}
               onSuccess={() => {
                 this.setView("success");
               }}
@@ -417,6 +424,13 @@ class App extends Component {
                 product={this.state.product}
                 setView={this.setView}
                 logout={this.logout}
+                onDisplay={() => {
+                  ReactGA.event({
+                    category: "VIEWS",
+                    action: "Payment Modal Viewed",
+                    nonInteraction: true
+                  });
+                }}
                 onSuccess={() => console.log("Subscription renewed!")}
                 onFailure={(error) => console.log(error)}
               />
@@ -477,6 +491,13 @@ class App extends Component {
           {this.state.view === "source-create" && (
             <PaymentMethodUpdateModal
               setView={this.setView}
+              onDisplay={() => {
+                ReactGA.event({
+                  category: "VIEWS",
+                  action: "Payment Modal Viewed",
+                  nonInteraction: true
+                });
+              }}
               onFailure={(error) => {
                 console.log(error);
               }}
@@ -540,6 +561,13 @@ class App extends Component {
             <OrderCreateModal
               order={this.state.order}
               setView={this.setView}
+              onDisplay={() => {
+                ReactGA.event({
+                  category: "VIEWS",
+                  action: "Payment Modal Viewed",
+                  nonInteraction: true
+                });
+              }}
               onSuccess={(res) => {
                 this.setView("confirm");
                 console.log(res);

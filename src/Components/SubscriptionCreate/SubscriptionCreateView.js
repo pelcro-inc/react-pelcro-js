@@ -16,7 +16,8 @@ export const SubscriptionCreateView = ({
   plan,
   giftRecipient,
   onSuccess = () => {},
-  onFailure = () => {}
+  onFailure = () => {},
+  onDisplay = () => {}
 }) => {
   const { t } = useTranslation("messages");
   const [ct] = useTranslation("checkoutForm");
@@ -62,6 +63,7 @@ export const SubscriptionCreateView = ({
             plan={plan}
             giftRecipient={giftRecipient}
             product={product}
+            onDisplay={onDisplay}
             onFailure={onFailure}
             onSuccess={onSuccess}
           >

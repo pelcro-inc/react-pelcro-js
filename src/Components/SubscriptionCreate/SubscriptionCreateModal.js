@@ -13,7 +13,8 @@ export function SubscriptionCreateModal({
   product,
   setView,
   onFailure = () => {},
-  onSuccess = () => {}
+  onSuccess = () => {},
+  onDisplay = () => {}
 }) {
   const { t } = useTranslation("messages");
 
@@ -42,6 +43,7 @@ export function SubscriptionCreateModal({
                 plan={plan}
                 giftRecipient={giftRecipient}
                 product={product}
+                onDisplay={onDisplay}
                 onFailure={onFailure}
                 onSuccess={onSuccess}
               />

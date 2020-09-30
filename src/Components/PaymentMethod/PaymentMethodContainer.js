@@ -4,7 +4,6 @@ import {
   Elements,
   StripeProvider
 } from "react-stripe-elements";
-import { useTranslation } from "react-i18next";
 import useReducerWithSideEffects, {
   UpdateWithSideEffect,
   Update
@@ -74,9 +73,11 @@ const PaymentMethodContainerWithoutStripe = ({
   onSuccess = () => {},
   onFailure = () => {},
   onLoading = () => {},
-  ...props
+  onDisplay = () => {}
 }) => {
   useEffect(() => {
+    onDisplay();
+
     window.Pelcro.insight.track("Modal Displayed", {
       name: "payment"
     });

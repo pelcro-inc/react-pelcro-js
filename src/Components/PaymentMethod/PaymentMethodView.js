@@ -20,6 +20,7 @@ export function PaymentMethodView({
   product,
   onSuccess,
   onFailure,
+  onDisplay,
   order = {}
 }) {
   const { t } = useTranslation("checkoutForm");
@@ -34,6 +35,7 @@ export function PaymentMethodView({
       plan={plan}
       product={product}
       couponCode={couponCode}
+      onDisplay={onDisplay}
       onSuccess={onSuccess}
       onFailure={onFailure}
       order={order}
