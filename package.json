@@ -1,7 +1,7 @@
 {
   "name": "@pelcro/pelcro-react-elements",
   "description": "Pelcro's React UI Elements",
-  "version": "2.9.0",
+  "version": "2.9.1",
   "private": false,
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
@@ -14,8 +14,8 @@
     "prod": "webpack --config webpack.config.prod --mode production",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "generateFiles": "NODE_ENV=production&&rollup -c",
-    "deploy": "NODE_ENV=production yarn generateFiles && yarn publish",
+    "generateFiles": "SET NODE_ENV=production&&rollup -c",
+    "deploy": "SET NODE_ENV=production&&yarn generateFiles && yarn publish",
     "lint": "eslint ./src/**/*.js --fix"
   },
   "eslintConfig": {
