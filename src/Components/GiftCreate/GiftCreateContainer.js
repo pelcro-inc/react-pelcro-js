@@ -11,7 +11,6 @@ import {
   HANDLE_SUBMIT,
   DISABLE_SUBMIT
 } from "../../utils/action-types";
-import { getErrorMessages } from "../common/Helpers";
 import { showError } from "../../utils/showing-error";
 
 const initialState = {
@@ -33,6 +32,7 @@ const GiftCreateContainer = ({
   const { t } = useTranslation("register");
   const handleSubmit = ({ email, firstName, lastName }, dispatch) => {
     if (!email) {
+      onFailure();
       return showError(
         t("gift.messages.enterEmail"),
         "pelcro-error-gift"

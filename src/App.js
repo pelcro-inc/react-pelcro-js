@@ -347,8 +347,6 @@ class App extends Component {
 
           {this.state.view === "gift" && (
             <GiftCreateModal
-              plan={this.state.plan}
-              product={this.state.product}
               setView={this.setView}
               onDisplay={() => {
                 ReactGA.event({
@@ -367,15 +365,18 @@ class App extends Component {
                 if (
                   this.state.product.address_required ||
                   this.state.site.taxes_enabled
-                )
-                  return this.setView("address");
-                else this.setView("payment");
+                ) {
+                  this.setView("address");
+                } else {
+                  this.setView("payment");
+                }
               }}
             />
           )}
 
           {this.state.view === "redeem" && (
             <GiftRedeemModal
+              setView={this.setView}
               onDisplay={() => {
                 ReactGA.event({
                   category: "VIEWS",
