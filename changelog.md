@@ -10,6 +10,12 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Released]
 
+## [2.9.2] - 2020-10-05
+
+### Added
+
+- Added gift recipients subsriptions renewal support
+
 ## [2.9.1] - 2020-10-01
 
 ### Added
