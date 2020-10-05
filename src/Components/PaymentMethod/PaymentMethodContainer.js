@@ -1,4 +1,4 @@
-import React, { createContext, useEffect } from "react";
+import React, { createContext, useEffect, useRef } from "react";
 import {
   injectStripe,
   Elements,
@@ -8,6 +8,7 @@ import useReducerWithSideEffects, {
   UpdateWithSideEffect,
   Update
 } from "use-reducer-with-side-effects";
+import debounce from "lodash/debounce";
 
 import {
   DISABLE_SUBMIT,
@@ -155,44 +156,50 @@ const PaymentMethodContainerWithoutStripe = ({
 
   const onApplyCouponCode = (state, dispatch) => {
     dispatch({ type: DISABLE_COUPON_BUTTON, payload: true });
+    const { couponCode } = state;
+    if (couponCode) {
+      window.Pelcro.order.create(
+        {
+          auth_token: window.Pelcro.user.read().auth_token,
+          plan_id: plan.id,
+          coupon_code: state.couponCode
+        },
+        (err, res) => {
+          dispatch({ type: DISABLE_COUPON_BUTTON, payload: false });
 
-    window.Pelcro.order.create(
-      {
-        auth_token: window.Pelcro.user.read().auth_token,
-        plan_id: plan.id,
-        coupon_code: state.couponCode
-      },
-      (err, res) => {
-        dispatch({ type: DISABLE_COUPON_BUTTON, payload: false });
+          if (err) {
+            dispatch({ type: SET_PERCENT_OFF, payload: "" });
+            onFailure(err);
+            return showError(
+              getErrorMessages(err),
+              "pelcro-error-payment"
+            );
+          } else {
+            hideError("pelcro-error-payment");
+          }
+          dispatch({
+            type: SET_PERCENT_OFF,
+            payload: "Discounted price: $" + res.data.total
+          });
 
-        if (err) {
-          dispatch({ type: SET_PERCENT_OFF, payload: "" });
-          onFailure(err);
-          return showError(
-            getErrorMessages(err),
-            "pelcro-error-payment"
-          );
-        } else {
-          hideError("pelcro-error-payment");
+          dispatch({
+            type: SET_FORMATTED_PRICE,
+            payload: res.data.total
+          });
+
+          if (state.canMakePayment) {
+            dispatch({ type: UPDATE_PAYMENT_REQUEST });
+          }
+
+          dispatch({ type: SET_COUPON, payload: res.data.coupon });
         }
-        dispatch({
-          type: SET_PERCENT_OFF,
-          payload: "Discounted price: $" + res.data.total
-        });
-
-        dispatch({
-          type: SET_FORMATTED_PRICE,
-          payload: res.data.total
-        });
-
-        if (state.canMakePayment) {
-          dispatch({ type: UPDATE_PAYMENT_REQUEST });
-        }
-
-        dispatch({ type: SET_COUPON, payload: res.data.coupon });
-      }
-    );
+      );
+    }
   };
+
+  const debouncedApplyCouponCode = useRef(
+    debounce(onApplyCouponCode, 1000)
+  ).current;
 
   const subscribe = (token, state, dispatch) => {
     if (!subscriptionIdToRenew) {
@@ -379,8 +386,11 @@ const PaymentMethodContainerWithoutStripe = ({
           return Update({ ...state, coupon: action.payload });
 
         case UPDATE_COUPON_CODE:
-          return Update({ ...state, couponCode: action.payload });
-
+          return UpdateWithSideEffect(
+            { ...state, couponCode: action.payload },
+            (state, dispatch) =>
+              debouncedApplyCouponCode(state, dispatch)
+          );
         case SET_PERCENT_OFF:
           return Update({ ...state, percentOff: action.payload });
 
