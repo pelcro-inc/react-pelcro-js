@@ -256,54 +256,113 @@ class Dashboard extends Component {
   renderGiftRecipients = () => {
     const { giftRecipients } = this.state;
 
-    return giftRecipients.map((recipient) => (
-      <div
-        key={"dashboard-gift-recipients-" + recipient.id}
-        className="pelcro-prefix-dashboard-block__item"
-      >
-        {/* Plan info section */}
-        <div>
-          {recipient.plan.nickname && (
-            <div className="pelcro-prefix-dashboard-text row">
-              <span className="pelcro-prefix-dashboard-label col-4">
-                {this.locale.labels.plan}
-              </span>
-              <span className="pelcro-prefix-dashboard-value col-8">
-                {recipient.plan.nickname}
-              </span>
+    return giftRecipients.map((recipient) => {
+      // Renew click
+      const onRenewClick = () => {
+        const productId = recipient.plan?.product?.id;
+        const planId = recipient.plan?.id;
+        const product = window.Pelcro.product.getById(productId);
+        const plan = window.Pelcro.plan.getById(planId);
+        this.props.setProductAndPlan(product, plan);
+        this.props.setSubscriptionIdToRenew(recipient.id);
+        this.props.setIsRenewingGift(true);
+        this.props.setView("select");
+      };
+
+      return (
+        <div
+          key={"dashboard-gift-recipients-" + recipient.id}
+          className="pelcro-prefix-dashboard-block__item"
+        >
+          {/* User info section */}
+          {(recipient.first_name || recipient.last_name) && (
+            <div>
+              <div className="pelcro-prefix-dashboard-text row">
+                <span className="pelcro-prefix-dashboard-label col-4">
+                  {this.locale.labels.name}
+                </span>
+                <span className="pelcro-prefix-dashboard-value col-8">
+                  {recipient.first_name} {recipient.last_name}
+                </span>
+              </div>
             </div>
           )}
-        </div>
-        <div>
+          <div>
+            <div className="pelcro-prefix-dashboard-text row">
+              <span className="pelcro-prefix-dashboard-label col-4">
+                {this.locale.labels.email}
+              </span>
+              <span className="pelcro-prefix-dashboard-value col-8">
+                {recipient.email}
+              </span>
+            </div>
+          </div>
+
+          {/* Plan info section */}
+          <div>
+            {recipient.plan.nickname && (
+              <div className="pelcro-prefix-dashboard-text row">
+                <span className="pelcro-prefix-dashboard-label col-4">
+                  {this.locale.labels.plan}
+                </span>
+                <span className="pelcro-prefix-dashboard-value col-8">
+                  {recipient.plan.nickname}
+                </span>
+              </div>
+            )}
+          </div>
+
           {/* Subscription status section */}
-          {recipient.status && (
-            <div className="pelcro-prefix-dashboard-text row">
-              <span className="pelcro-prefix-dashboard-label col-4">
-                {this.locale.labels.status}
-              </span>
-              <span className="pelcro-prefix-dashboard-value col-8">
-                {recipient.cancel_at_period_end
-                  ? `${this.locale.labels.expiresOn} ${recipient.current_period_end}`
-                  : `${this.locale.labels.renewsOn} ${recipient.current_period_end}`}
-              </span>
-            </div>
-          )}
-        </div>
-        <div>
+          <div>
+            {recipient.status && (
+              <div className="pelcro-prefix-dashboard-text row">
+                <span className="pelcro-prefix-dashboard-label col-4">
+                  {this.locale.labels.status}
+                </span>
+                <span className="pelcro-prefix-dashboard-value col-8">
+                  {recipient.cancel_at_period_end
+                    ? `${this.locale.labels.expiresOn} ${recipient.current_period_end}`
+                    : `${this.locale.labels.renewsOn} ${recipient.current_period_end}`}
+                </span>
+              </div>
+            )}
+          </div>
+
           {/* shipments section */}
-          {recipient.shipments_remaining && (
+          <div>
+            {recipient.shipments_remaining && (
+              <div className="pelcro-prefix-dashboard-text row">
+                <span className="pelcro-prefix-dashboard-label col-4">
+                  {this.locale.labels.shipments}
+                </span>
+                <span className="pelcro-prefix-dashboard-value col-8">
+                  {recipient.shipments_remaining}
+                </span>
+              </div>
+            )}
+          </div>
+
+          {/* Recipient sub renew section */}
+          {recipient.cancel_at_period_end === 1 && (
             <div className="pelcro-prefix-dashboard-text row">
               <span className="pelcro-prefix-dashboard-label col-4">
-                {this.locale.labels.shipments}
+                {this.locale.labels.actions}
               </span>
-              <span className="pelcro-prefix-dashboard-value col-8">
-                {recipient.shipments_remaining}
-              </span>
+              <div className="col-8">
+                <button
+                  className="pelcro-prefix-link pelcro-prefix-renew-btn"
+                  type="button"
+                  onClick={onRenewClick}
+                  disabled={this.state.disableSubmit}
+                >
+                  {this.locale.labels.renew}
+                </button>
+              </div>
             </div>
           )}
         </div>
-      </div>
-    ));
+      );
+    });
   };
 
   getAddresses = () => {
@@ -487,7 +546,8 @@ Dashboard.propTypes = {
   logout: PropTypes.func,
   setProductAndPlan: PropTypes.func,
   setSubscriptionIdToRenew: PropTypes.func,
-  setAddress: PropTypes.func
+  setAddress: PropTypes.func,
+  setIsRenewingGift: PropTypes.func
 };
 
 export default Dashboard;

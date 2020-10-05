@@ -11,7 +11,6 @@ import { showError } from "../../utils/showing-error";
 import Submit from "../common/Submit";
 import Header from "../common/Header";
 import Authorship from "../common/Authorship";
-import { SelectView } from "./SelectView";
 
 export class SelectModal extends Component {
   constructor(props) {
@@ -66,29 +65,29 @@ export class SelectModal extends Component {
     document.removeEventListener("keydown", this.handleSubmit);
   };
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     if (e.key === "Enter" && !this.state.disabled)
       this.submitOption();
   };
 
-  onProductChange = e => {
+  onProductChange = (e) => {
     const product = window.Pelcro.product.list()[
       e.target.selectedIndex
     ];
     this.setState({ product: product, plan: product.plans[0] });
   };
 
-  onPlanChange = e => {
+  onPlanChange = (e) => {
     this.setState({
       plan: this.state.product.plans[e.target.selectedIndex]
     });
   };
 
-  onIsGiftChange = e => {
+  onIsGiftChange = (e) => {
     this.setState({ isGift: e.target.checked });
   };
 
-  countStartPrice = arr => {
+  countStartPrice = (arr) => {
     let startingPlan = arr[0];
     for (const plan of arr) {
       if (plan.amount < startingPlan.amount) {
@@ -99,7 +98,7 @@ export class SelectModal extends Component {
   };
 
   renderProducts = () => {
-    return this.state.productList.map(product => {
+    return this.state.productList.map((product) => {
       return (
         <div key={`product-${product.id}`}>
           <div className="pelcro-prefix-product-container pelcro-prefix-gradient-border row">
@@ -148,7 +147,7 @@ export class SelectModal extends Component {
   };
 
   renderPlans = () => {
-    return this.state.planList.map(plan => {
+    return this.state.planList.map((plan) => {
       const isChecked = this.state.plan.id === plan.id ? true : false;
       return (
         <div
@@ -186,7 +185,7 @@ export class SelectModal extends Component {
     });
   };
 
-  selectProduct = e => {
+  selectProduct = (e) => {
     const id = e.target.dataset.key;
     for (const product of this.state.productList) {
       if (+product.id === +id) {
@@ -197,7 +196,7 @@ export class SelectModal extends Component {
     }
   };
 
-  selectPlan = e => {
+  selectPlan = (e) => {
     const id = e.target.dataset.key;
     for (const plan of this.state.planList) {
       if (+plan.id === +id) {
@@ -245,7 +244,7 @@ export class SelectModal extends Component {
   };
 
   // inserting error message into modal window
-  showError = message => {
+  showError = (message) => {
     showError(message, "pelcro-error-select");
   };
 
@@ -255,6 +254,8 @@ export class SelectModal extends Component {
 
   render() {
     const { product } = this.state;
+    const { disableGifting } = this.props;
+
     if (this.state.mode === "product") {
       this.props.ReactGA.event({
         category: "VIEWS",
@@ -295,16 +296,14 @@ export class SelectModal extends Component {
                     <h4>
                       {(this.product &&
                         this.product.paywall.select_title) ||
-                        (window.Pelcro.product.list()[0] &&
-                          window.Pelcro.product.list()[0].paywall
-                            .select_title)}
+                        window.Pelcro.product.list()[0]?.paywall
+                          .select_title}
                     </h4>
                     <p>
                       {(this.product &&
                         this.product.paywall.select_subtitle) ||
-                        (window.Pelcro.product.list()[0] &&
-                          window.Pelcro.product.list()[0].paywall
-                            .select_subtitle)}
+                        window.Pelcro.product.list()[0]?.paywall
+                          .select_subtitle}
                     </p>
                   </div>
 
@@ -316,15 +315,17 @@ export class SelectModal extends Component {
                   </div>
                 </div>
                 <div className="pelcro-prefix-modal-footer">
-                  <small>
-                    {this.locale.messages.alreadyHaveAccount + " "}
-                    <button
-                      className="pelcro-prefix-link"
-                      onClick={this.displayLoginView}
-                    >
-                      {this.locale.messages.loginHere}
-                    </button>
-                  </small>
+                  {!window.Pelcro.user.isAuthenticated() && (
+                    <small>
+                      {this.locale.messages.alreadyHaveAccount + " "}
+                      <button
+                        className="pelcro-prefix-link"
+                        onClick={this.displayLoginView}
+                      >
+                        {this.locale.messages.loginHere}
+                      </button>
+                    </small>
+                  )}
                   <Authorship></Authorship>
                 </div>
               </div>
@@ -372,16 +373,14 @@ export class SelectModal extends Component {
                     <h4>
                       {(this.product &&
                         this.product.paywall.select_title) ||
-                        (window.Pelcro.product.list()[0] &&
-                          window.Pelcro.product.list()[0].paywall
-                            .select_title)}
+                        window.Pelcro.product.list()[0]?.paywall
+                          ?.select_title}
                     </h4>
                     <p>
                       {(this.product &&
                         this.product.paywall.select_subtitle) ||
-                        (window.Pelcro.product.list()[0] &&
-                          window.Pelcro.product.list()[0].paywall
-                            .select_subtitle)}
+                        window.Pelcro.product.list()[0]?.paywall
+                          ?.select_subtitle}
                     </p>
                   </div>
 
@@ -442,23 +441,23 @@ export class SelectModal extends Component {
                       {this.renderPlans()}
                     </div>
                   </div>
-
-                  <div className="pelcro-prefix-center-text">
-                    <label
-                      className="pelcro-prefix-form-check-label control control-checkbox"
-                      htmlFor="pelcro-input-is_gift"
-                    >
-                      {this.locale.messages.checkbox}
-                      <input
-                        onChange={this.onIsGiftChange}
-                        checked={this.state.isGift}
-                        type="checkbox"
-                        id="pelcro-input-is_gift"
-                      />
-                      <div className="control-indicator"></div>
-                    </label>
-                  </div>
-
+                  {!disableGifting && (
+                    <div className="pelcro-prefix-center-text">
+                      <label
+                        className="pelcro-prefix-form-check-label control control-checkbox"
+                        htmlFor="pelcro-input-is_gift"
+                      >
+                        {this.locale.messages.checkbox}
+                        <input
+                          onChange={this.onIsGiftChange}
+                          checked={this.state.isGift}
+                          type="checkbox"
+                          id="pelcro-input-is_gift"
+                        />
+                        <div className="control-indicator"></div>
+                      </label>
+                    </div>
+                  )}
                   <Submit
                     disabled={this.state.disabled}
                     onClick={this.submitOption}
@@ -466,17 +465,18 @@ export class SelectModal extends Component {
                     id="select-submit"
                   ></Submit>
                 </div>
-
                 <div className="pelcro-prefix-modal-footer">
-                  <small>
-                    {this.locale.messages.alreadyHaveAccount + " "}
-                    <button
-                      className="pelcro-prefix-link"
-                      onClick={this.displayLoginView}
-                    >
-                      {this.locale.messages.loginHere}
-                    </button>
-                  </small>
+                  {!window.Pelcro.user.isAuthenticated() && (
+                    <small>
+                      {this.locale.messages.alreadyHaveAccount + " "}
+                      <button
+                        className="pelcro-prefix-link"
+                        onClick={this.displayLoginView}
+                      >
+                        {this.locale.messages.loginHere}
+                      </button>
+                    </small>
+                  )}
                   <Authorship></Authorship>
                 </div>
               </div>
@@ -491,6 +491,7 @@ SelectModal.propTypes = {
   plan: PropTypes.object,
   product: PropTypes.object,
   iaGift: PropTypes.bool,
+  disableGifting: PropTypes.bool,
   setView: PropTypes.func,
   resetView: PropTypes.func,
   subscribe: PropTypes.func
