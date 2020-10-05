@@ -11,6 +11,7 @@ export const SubscriptionRenewView = ({
   isRenewingGift,
   onFailure,
   onSuccess,
+  onDisplay,
   onGiftRenewalSuccess
 }) => {
   const { t } = useTranslation("messages");
@@ -57,6 +58,7 @@ export const SubscriptionRenewView = ({
             product={product}
             onFailure={onFailure}
             onSuccess={onSuccess}
+            onDisplay={onDisplay}
             onGiftRenewalSuccess={onGiftRenewalSuccess}
           />
         </div>

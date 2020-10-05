@@ -13,6 +13,7 @@ export function SubscriptionRenewModal({
   isRenewingGift,
   onFailure,
   onSuccess,
+  onDisplay,
   onGiftRenewalSuccess,
   logout,
   resetView
@@ -47,6 +48,7 @@ export function SubscriptionRenewModal({
                 product={product}
                 onFailure={onFailure}
                 onSuccess={onSuccess}
+                onDisplay={onDisplay}
                 onGiftRenewalSuccess={onGiftRenewalSuccess}
               />
             </div>
