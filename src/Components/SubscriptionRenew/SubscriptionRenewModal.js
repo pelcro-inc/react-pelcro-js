@@ -10,10 +10,12 @@ export function SubscriptionRenewModal({
   product,
   plan,
   subscriptionIdToRenew,
+  isRenewingGift,
   onFailure,
   onSuccess,
+  onGiftRenewalSuccess,
   logout,
-  setView
+  resetView
 }) {
   const { t } = useTranslation("messages");
 
@@ -33,7 +35,7 @@ export function SubscriptionRenewModal({
           <div className="pelcro-prefix-modal-content">
             <Header
               closeButton={window.Pelcro.paywall.displayCloseButton()}
-              resetView={() => setView("")}
+              resetView={resetView}
               site={window.Pelcro.site.read()}
             ></Header>
 
@@ -41,9 +43,11 @@ export function SubscriptionRenewModal({
               <SubscriptionRenewView
                 plan={plan}
                 subscriptionIdToRenew={subscriptionIdToRenew}
+                isRenewingGift={isRenewingGift}
                 product={product}
                 onFailure={onFailure}
                 onSuccess={onSuccess}
+                onGiftRenewalSuccess={onGiftRenewalSuccess}
               />
             </div>
             <div className="pelcro-prefix-modal-footer">

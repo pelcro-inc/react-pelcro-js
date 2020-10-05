@@ -65,6 +65,7 @@ const PaymentMethodContainerWithoutStripe = ({
   stripe,
   type,
   subscriptionIdToRenew,
+  isRenewingGift,
   plan,
   product,
   store,
@@ -72,6 +73,7 @@ const PaymentMethodContainerWithoutStripe = ({
   giftRecipient = null,
   couponCode,
   onSuccess = () => {},
+  onGiftRenewalSuccess = () => {},
   onFailure = () => {},
   onLoading = () => {},
   onDisplay = () => {}
@@ -235,30 +237,52 @@ const PaymentMethodContainerWithoutStripe = ({
         }
       );
     } else {
-      window.Pelcro.subscription.renew(
-        {
-          stripe_token: token.id,
-          auth_token: window.Pelcro.user.read().auth_token,
-          plan_id: plan.id,
-          coupon_code: couponCode,
-          subscription_id: subscriptionIdToRenew,
-          address_id: product.address_required
-            ? window.Pelcro.user.read().addresses[
-                window.Pelcro.user.read().addresses.length - 1
-              ]
-            : null
-        },
-        (err, res) => {
-          dispatch({ type: DISABLE_SUBMIT, payload: false });
+      if (isRenewingGift) {
+        window.Pelcro.subscription.renewGift(
+          {
+            stripe_token: token.id,
+            auth_token: window.Pelcro.user.read().auth_token,
+            plan_id: plan.id,
+            coupon_code: couponCode,
+            subscription_id: subscriptionIdToRenew
+          },
+          (err, res) => {
+            dispatch({ type: DISABLE_SUBMIT, payload: false });
 
-          if (err) {
-            onFailure(err);
-            return displayError(getErrorMessages(err));
+            if (err) {
+              onFailure(err);
+              return displayError(getErrorMessages(err));
+            }
+
+            onGiftRenewalSuccess(res);
           }
+        );
+      } else {
+        window.Pelcro.subscription.renew(
+          {
+            stripe_token: token.id,
+            auth_token: window.Pelcro.user.read().auth_token,
+            plan_id: plan.id,
+            coupon_code: couponCode,
+            subscription_id: subscriptionIdToRenew,
+            address_id: product.address_required
+              ? window.Pelcro.user.read().addresses[
+                  window.Pelcro.user.read().addresses.length - 1
+                ]
+              : null
+          },
+          (err, res) => {
+            dispatch({ type: DISABLE_SUBMIT, payload: false });
 
-          onSuccess(res);
-        }
-      );
+            if (err) {
+              onFailure(err);
+              return displayError(getErrorMessages(err));
+            }
+
+            onSuccess(res);
+          }
+        );
+      }
     }
 
     // Prevent the form from being submitted:

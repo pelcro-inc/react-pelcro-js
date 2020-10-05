@@ -8,8 +8,10 @@ export const SubscriptionRenewView = ({
   product,
   plan,
   subscriptionIdToRenew,
+  isRenewingGift,
   onFailure,
-  onSuccess
+  onSuccess,
+  onGiftRenewalSuccess
 }) => {
   const { t } = useTranslation("messages");
   return (
@@ -51,9 +53,11 @@ export const SubscriptionRenewView = ({
             showCoupon={true}
             plan={plan}
             subscriptionIdToRenew={subscriptionIdToRenew}
+            isRenewingGift={isRenewingGift}
             product={product}
             onFailure={onFailure}
             onSuccess={onSuccess}
+            onGiftRenewalSuccess={onGiftRenewalSuccess}
           />
         </div>
       </div>

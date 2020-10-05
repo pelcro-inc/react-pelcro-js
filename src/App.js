@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import ReactGA from "react-ga";
 import ReactDOM from "react-dom";
+import { getCurrentLocale } from "./utils/localisation";
 
 import {
   SelectModal,
@@ -42,8 +43,11 @@ class App extends Component {
       order: {},
       showUpdateUserView: false,
       addressId: null,
-      products: []
+      products: [],
+      isRenewingGift: false
     };
+
+    this.locale = getCurrentLocale();
 
     window.Pelcro.helpers.loadSDK(
       "https://js.stripe.com/v3/",
@@ -148,7 +152,13 @@ class App extends Component {
   };
 
   resetView = () => {
-    this.setState({ product: null, plan: null, isGift: false });
+    this.setState({
+      product: null,
+      plan: null,
+      isGift: false,
+      isRenewingGift: false
+    });
+
     if (this.state.giftRecipient)
       this.setState({ giftRecipient: null });
     this.setView(null);
@@ -221,6 +231,10 @@ class App extends Component {
     this.setState({ giftCode });
   };
 
+  setIsRenewingGift = (isRenewingGift) => {
+    this.setState({ isRenewingGift });
+  };
+
   loggedIn = () => {
     this.setState({ isAuthenticated: true });
     this.removeHTMLButton("pelcro-register-button");
@@ -291,6 +305,78 @@ class App extends Component {
     this.setView("select");
   };
 
+  trackPurchaseOnGA = (res) => {
+    ReactGA.set({
+      currencyCode:
+        window.Pelcro.user.read() &&
+        window.Pelcro.user.read().currency
+          ? window.Pelcro.user.read().currency
+          : !!this.state.plan && this.state.plan.currency
+    });
+
+    ReactGA.plugin.execute("ecommerce", "addItem", {
+      id: this.state.product.id,
+      name: this.state.product.name,
+      category: this.state.product.description,
+      variant: this.state.plan.nickname,
+      price:
+        !!this.state.plan && this.state.plan.amount
+          ? this.state.plan.amount / 100
+          : 0,
+      quantity: 1
+    });
+
+    const { subscriptions } = res.data;
+
+    ReactGA.plugin.execute("ecommerce", "addTransaction", {
+      id:
+        subscriptions &&
+        subscriptions[
+          subscriptions.length ? subscriptions.length - 1 : 0
+        ].id,
+      affiliation: "Pelcro",
+      revenue:
+        !!this.state.plan && this.state.plan.amount
+          ? this.state.plan.amount / 100
+          : 0,
+      coupon: this.state.couponCode
+    });
+    ReactGA.plugin.execute("ecommerce", "send");
+
+    ReactGA.event({
+      category: "ACTIONS",
+      action: "Subscribed",
+      nonInteraction: true
+    });
+  };
+
+  onSubscriptionCreateSuccess = (res) => {
+    try {
+      this.trackPurchaseOnGA(res);
+    } catch {
+      console.error("Caught error on GA");
+    }
+
+    if (this.state.giftRecipient) {
+      window.alert(
+        `${this.locale.payment.messages.giftSent} ${this.state.giftRecipient.email} ${this.locale.payment.messages.successfully}`
+      );
+      this.resetView();
+    } else {
+      this.setView("success");
+    }
+  };
+
+  onSubscriptionRenewSuccess = () => {
+    ReactGA.event({
+      category: "ACTIONS",
+      action: "Renewed",
+      nonInteraction: true
+    });
+
+    this.setView("success");
+  };
+
   render() {
     return (
       <div id="pelcro-app">
@@ -309,6 +395,7 @@ class App extends Component {
           {this.state.view === "select" && (
             <SelectModal
               isGift={this.state.isGift}
+              disableGifting={this.state.isRenewingGift}
               plan={this.state.plan}
               product={this.state.product}
               resetView={this.resetView}
@@ -393,37 +480,13 @@ class App extends Component {
               }}
             />
           )}
-          {this.state.view === "payment" && (
-            <SubscriptionCreateModal
-              giftRecipient={this.state.giftRecipient}
-              plan={this.state.plan}
-              product={this.state.product}
-              setView={this.setView}
-              logout={this.logout}
-              onDisplay={() => {
-                ReactGA.event({
-                  category: "VIEWS",
-                  action: "Payment Modal Viewed",
-                  nonInteraction: true
-                });
-              }}
-              onSuccess={() => {
-                this.setView("success");
-              }}
-              onFailure={(error) => {
-                console.log(error);
-              }}
-            />
-          )}
           {this.state.view === "payment" &&
-            this.state.subscriptionIdToRenew && (
-              <SubscriptionRenewModal
-                subscriptionIdToRenew={
-                  this.state.subscriptionIdToRenew
-                }
+            !this.state.subscriptionIdToRenew && (
+              <SubscriptionCreateModal
+                giftRecipient={this.state.giftRecipient}
                 plan={this.state.plan}
                 product={this.state.product}
-                setView={this.setView}
+                resetView={this.resetView}
                 logout={this.logout}
                 onDisplay={() => {
                   ReactGA.event({
@@ -432,8 +495,38 @@ class App extends Component {
                     nonInteraction: true
                   });
                 }}
-                onSuccess={() => console.log("Subscription renewed!")}
-                onFailure={(error) => console.log(error)}
+                onSuccess={this.onSubscriptionCreateSuccess}
+              />
+            )}
+          {this.state.view === "payment" &&
+            this.state.subscriptionIdToRenew && (
+              <SubscriptionRenewModal
+                subscriptionIdToRenew={
+                  this.state.subscriptionIdToRenew
+                }
+                isRenewingGift={this.state.isRenewingGift}
+                plan={this.state.plan}
+                product={this.state.product}
+                resetView={this.resetView}
+                logout={this.logout}
+                onDisplay={() => {
+                  ReactGA.event({
+                    category: "VIEWS",
+                    action: "Payment Modal Viewed",
+                    nonInteraction: true
+                  });
+                }}
+                onSuccess={this.onSubscriptionRenewSuccess}
+                onGiftRenewalSuccess={() => {
+                  ReactGA.event({
+                    category: "ACTIONS",
+                    action: "Renewed Gift",
+                    nonInteraction: true
+                  });
+
+                  this.setIsRenewingGift(false);
+                  this.setView("success");
+                }}
               />
             )}
           {this.state.view === "success" && (
@@ -460,6 +553,7 @@ class App extends Component {
                   this.setView("payment");
                 }
               }}
+              onGiftRedemptionSuccess={this.resetView}
               onFailure={(error) => console.log(error)}
             />
           )}
@@ -594,6 +688,7 @@ class App extends Component {
             <DashboardModal
               setAddress={this.setAddress}
               setSubscriptionIdToRenew={this.setSubscriptionIdToRenew}
+              setIsRenewingGift={this.setIsRenewingGift}
               resetView={this.resetView}
               logout={this.logout}
               setView={this.setView}

@@ -15,10 +15,12 @@ export function PaymentMethodView({
   showCoupon,
   type,
   subscriptionIdToRenew,
+  isRenewingGift,
   giftRecipient = null,
   plan,
   product,
   onSuccess,
+  onGiftRenewalSuccess,
   onFailure,
   onDisplay,
   order = {}
@@ -31,12 +33,14 @@ export function PaymentMethodView({
       successMessage={successMessage}
       ReactGA={ReactGA}
       subscriptionIdToRenew={subscriptionIdToRenew}
+      isRenewingGift={isRenewingGift}
       giftRecipient={giftRecipient}
       plan={plan}
       product={product}
       couponCode={couponCode}
       onDisplay={onDisplay}
       onSuccess={onSuccess}
+      onGiftRenewalSuccess={onGiftRenewalSuccess}
       onFailure={onFailure}
       order={order}
     >
