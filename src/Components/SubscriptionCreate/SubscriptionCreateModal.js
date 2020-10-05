@@ -11,7 +11,7 @@ export function SubscriptionCreateModal({
   plan,
   giftRecipient,
   product,
-  setView,
+  resetView,
   onFailure = () => {},
   onSuccess = () => {},
   onDisplay = () => {}
@@ -34,7 +34,7 @@ export function SubscriptionCreateModal({
           <div className="pelcro-prefix-modal-content">
             <Header
               closeButton={window.Pelcro.paywall.displayCloseButton()}
-              resetView={() => setView("")}
+              resetView={resetView}
               site={window.Pelcro.site.read()}
             ></Header>
 
