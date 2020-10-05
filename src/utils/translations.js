@@ -12,7 +12,7 @@ export default {
       submit: "Submit",
       required: "Required",
       passwordResetEmailSent:
-        "Password reset instructions have been sent to your email",
+        "Password reset instructions have been sent to your email.  If the e-mail is not in your inbox, please check your junk mail or spam folders.",
       messages: {
         alreadyHaveAccount: "Already have an account?",
         loginHere: "login here."
@@ -56,6 +56,8 @@ export default {
       messages: {
         alreadyHaveAccount: "Already have an account?",
         createAccount: "Create account",
+        signUpWithSocial:
+          "You can also use social logins to pre-fill your information.",
         loginHere: "login here. ",
         selectPlan: "Select a different plan ",
         here: "here",
@@ -204,7 +206,7 @@ export default {
       title: "Please enter your address",
       labels: {
         address: "Address",
-        code: "Postal Code/Zip",
+        code: "Postal Code/ZIP Code",
         city: "City",
         region: "Two letter Province/State",
         country: "Country",
@@ -228,6 +230,7 @@ export default {
         description: "Description",
         expiry: "Expiry",
         status: "Status",
+        shipments: "Shipments remaining",
         logout: "Logout",
         dashboard: "Dashboard",
         unsubscribe: "Unsubscribe",
@@ -246,7 +249,10 @@ export default {
         expiresOn: "Expires on",
         renewsOn: "Renews on",
         isSureToCancel:
-          "Are you sure you want to cancel your subscription?"
+          "Are you sure you want to cancel your subscription?",
+        giftRecipients: {
+          title: "Gift recipients"
+        }
       },
       messages: {
         yourDashboard: "Your Pelcro Dashboard"
@@ -275,12 +281,15 @@ export default {
       }
     },
     newsletter: {
+      title: "Enter your email to subscribe to our newsletter",
+      subtitle:
+        "We may use your email for other marketing communication",
       labels: {
         submit: "Submit",
         firstName: "First name",
         lastName: "Last name",
         email: "Email",
-        postalCode: "Postal code",
+        postalCode: "Postal Code/ZIP Code",
         required: "required"
       },
       messages: {
@@ -329,7 +338,7 @@ export default {
         addCode: "Add coupon code",
         hideCode: "Hide",
         codePlaceholder: "Enter your coupon code",
-        applyCouponCode: "Apply coupon",
+        applyCouponCode: "Apply",
         code: "Coupon code"
       }
     },
@@ -393,7 +402,7 @@ export default {
       submit: "Soumettre",
       required: "Champs obligatoires",
       passwordResetEmailSent:
-        "Des instructions de réinitialisation du mot de passe ont été envoyées à votre adresse email",
+        "Des instructions de réinitialisation du mot de passe ont été envoyées à votre adresse email. Si l'e-mail n'est pas dans votre boîte de réception, veuillez vérifier votre courrier indésirable ou vos dossiers de spam.",
       messages: {
         alreadyHaveAccount: "Vous avez déjà un compte ?",
         loginHere: "Connectez-vous ici"
@@ -436,6 +445,8 @@ export default {
       messages: {
         alreadyHaveAccount: "Vous avez déjà un compte ?",
         createAccount: "Créer un compte",
+        signUpWithSocial:
+          "Vous pouvez également vous connecter à l'aide de votre compte Google ou Facebook en pré-populant vos informations.",
         loginHere: "Connectez-vous ici",
         selectPlan: "Sélectionnez un autre plan ",
         here: "ici",
@@ -612,6 +623,7 @@ export default {
         description: "Description",
         expiry: "Expiration",
         status: "Statut",
+        shipments: "Expéditions restantes",
         logout: "Déconnexion",
         dashboard: "Tableau de bord",
         unsubscribe: "Se désabonner",
@@ -630,7 +642,10 @@ export default {
         expiresOn: "Expire le",
         renewsOn: "Renouvelle le",
         isSureToCancel:
-          "Êtes-vous certain de vouloir annuler votre abonnement ?"
+          "Êtes-vous certain de vouloir annuler votre abonnement ?",
+        giftRecipients: {
+          title: "Destinataires du cadeau"
+        }
       },
       messages: {
         yourDashboard: "Votre tableau de bord Pelcro"
@@ -659,6 +674,10 @@ export default {
       }
     },
     newsletter: {
+      title:
+        "Entrez votre email pour vous abonner à notre newsletter",
+      subtitle:
+        "Nous pouvons utiliser votre e-mail pour d'autres communications marketing",
       labels: {
         submit: "Lire l'article !",
         firstName: "Prénom",
@@ -714,7 +733,7 @@ export default {
         addCode: "Ajouter un code promo",
         hideCode: "Cacher",
         codePlaceholder: "Entrez votre code de coupon",
-        applyCouponCode: "Appliquer code de coupon",
+        applyCouponCode: "Appliquer",
         code: "Code promo"
       }
     },
