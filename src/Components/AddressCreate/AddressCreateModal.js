@@ -3,7 +3,7 @@ import Header from "../common/Header";
 import Authorship from "../common/Authorship";
 import { AddressCreateView } from "./AddressCreateView";
 
-export const AddressCreateModal = props => {
+export const AddressCreateModal = (props) => {
   return (
     <div className="pelcro-prefix-view">
       <div
@@ -20,7 +20,7 @@ export const AddressCreateModal = props => {
           <div className="pelcro-prefix-modal-content">
             <Header
               closeButton={window.Pelcro.paywall.displayCloseButton()}
-              resetView={() => props.setView("")}
+              resetView={props.resetView()}
               site={window.Pelcro.site.read()}
             ></Header>
             <div className="pelcro-prefix-modal-body">

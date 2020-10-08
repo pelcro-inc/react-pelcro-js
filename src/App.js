@@ -545,7 +545,7 @@ class App extends Component {
           {this.state.view === "address" && (
             <AddressCreateModal
               giftCode={this.state.giftCode}
-              setView={this.setView}
+              resetView={this.resetView}
               onSuccess={() => {
                 if (!this.state.product) {
                   this.setView("orderCreate");
