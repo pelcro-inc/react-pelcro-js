@@ -1,9 +1,6 @@
 $primary-color: #32aea1;
 $secondary-color: #3bc5b6;
-$primary-font: "Open Sans",
-Helvetica,
-Arial,
-sans-serif;
+$primary-font: "Open Sans", Helvetica, Arial, sans-serif;
 
 body.pelcro-prefix-modal-open {
   // Kill the scroll on the body
@@ -53,9 +50,25 @@ body.pelcro-prefix-modal-open {
     font: inherit;
   }
 
-  .apply-coupon-button {
-    margin-top: 2px;
-    margin-bottom: 10px;
+  div.pelcro-apply-coupon-container {
+    display: flex;
+    border-radius: 6px;
+    margin: 4px 0 4px 0;
+    padding: 10px 14px;
+    box-shadow: rgba(50, 50, 93, 0.14902) 0px 1px 3px,
+      rgba(0, 0, 0, 0.0196078) 0px 1px 0px;
+    background: white;
+
+    > input {
+      flex-grow: 1;
+      border: none;
+      background: #fff;
+
+      &:focus {
+        outline: none;
+        box-shadow: none;
+      }
+    }
   }
 
   .pelcro-prefix-link {
@@ -565,6 +578,18 @@ body.pelcro-prefix-modal-open {
     outline: 0;
   }
 
+  /** Payment View **/
+  .pelcro-prefix-payment-block {
+    background: #fafafa;
+    border: 1px solid #ececec;
+    border-radius: 6px;
+    padding: 26px;
+    font-size: 14px;
+  }
+
+  .pelcro-prefix-payment-icons {
+    height: 15px;
+  }
 
   .pelcro-prefix-options-btn {
     background: $primary-color;
@@ -635,6 +660,10 @@ body.pelcro-prefix-modal-open {
     box-shadow: 0 7px 7px -5px #0000001a;
     border: 12px solid white;
     border-radius: 5px;
+
+    &__item {
+      font-size: 0.8em;
+    }
   }
 
   .pelcro-prefix-dashboard-text {
@@ -662,10 +691,6 @@ body.pelcro-prefix-modal-open {
 
   .pelcro-prefix-dashboard-value {
     display: block;
-  }
-
-  .pelcro-prefix-dashboard-subscriptions {
-    font-size: 0.8em;
   }
 
   .pelcro-prefix-dashboard-close {
@@ -758,7 +783,7 @@ body.pelcro-prefix-modal-open {
     width: fit-content;
   }
 
-  #pelcro-view-dashboard .pelcro-prefix-dashboard-subscriptions {
+  #pelcro-view-dashboard .pelcro-prefix-dashboard-block__item {
     padding-top: 10px;
     padding-bottom: 10px;
 
@@ -794,7 +819,8 @@ body.pelcro-prefix-modal-open {
     margin-top: 0;
   }
 
-  #pelcro-view-dashboard .pelcro-prefix-dashboard-block:nth-last-child(1) {
+  #pelcro-view-dashboard
+    .pelcro-prefix-dashboard-block:nth-last-child(1) {
     border: none;
   }
 
@@ -852,12 +878,12 @@ body.pelcro-prefix-modal-open {
       margin: auto;
       object-fit: cover;
       object-position: center;
-      height: 100px;
-      width: 100px;
+      width: 90px;
+      height: 90px;
+      flex: none;
     }
 
     .pelcro-prefix-product-container {
-
       .col-3,
       .col-6,
       .col-9,
@@ -916,46 +942,44 @@ body.pelcro-prefix-modal-open {
     $first-color: gray;
     $second-color: gray;
 
-    @mixin gradient-border($color1,
+    @mixin gradient-border(
+      $color1,
       $color2,
       $border-width,
-      $direction) {
+      $direction
+    ) {
       border: none;
       background-repeat: no-repeat;
-      background-image: linear-gradient(#{$direction},
-        $color1 0%,
-        $color2 100%),
-      linear-gradient(#{$direction}, $color1 0%, $color2 100%);
+      background-image: linear-gradient(
+          #{$direction},
+          $color1 0%,
+          $color2 100%
+        ),
+        linear-gradient(#{$direction}, $color1 0%, $color2 100%);
 
-      @if $direction=="to right"or $direction=="to left" {
-        @if $direction=="to right" {
+      @if $direction== "to right" or $direction== "to left" {
+        @if $direction== "to right" {
           border-left: $border-width solid $color1;
           border-right: $border-width solid $color2;
-        }
-
-        @else {
+        } @else {
           border-left: $border-width solid $color2;
           border-right: $border-width solid $color1;
         }
 
-        background-position: 0 0,
-        0 100%;
+        background-position: 0 0, 0 100%;
         background-size: 100% $border-width;
       }
 
-      @if $direction=="to top"or $direction=="to bottom" {
-        @if $direction=="to top" {
+      @if $direction== "to top" or $direction== "to bottom" {
+        @if $direction== "to top" {
           border-top: $border-width solid $color2;
           border-bottom: $border-width solid $color1;
-        }
-
-        @else {
+        } @else {
           border-top: $border-width solid $color1;
           border-bottom: $border-width solid $color2;
         }
 
-        background-position: 0 0,
-        100% 0;
+        background-position: 0 0, 100% 0;
         background-size: $border-width 100%;
       }
     }
@@ -966,7 +990,8 @@ body.pelcro-prefix-modal-open {
       line-height: 1.4;
       -webkit-appearance: none;
       border-radius: 2px;
-      @include gradient-border($first-color,
+      @include gradient-border(
+        $first-color,
         $second-color,
         1px,
         "to right"
@@ -986,7 +1011,7 @@ body.pelcro-prefix-modal-open {
           color: white;
         }
 
-        ~.gradient-bg {
+        ~ .gradient-bg {
           opacity: 1;
         }
       }
@@ -1001,9 +1026,11 @@ body.pelcro-prefix-modal-open {
       left: 0;
       width: 100%;
       height: 100%;
-      background-image: linear-gradient(to right,
+      background-image: linear-gradient(
+          to right,
           $first-color 0%,
-          $second-color 100%),
+          $second-color 100%
+        ),
         linear-gradient(to right, $first-color 0%, $second-color 100%);
       transition: all 0.3s ease-out;
     }
@@ -1061,22 +1088,22 @@ body.pelcro-prefix-modal-open {
       border-radius: 50%;
     }
 
-    .control:hover input~.control-indicator,
-    .control input:focus~.control-indicator {
+    .control:hover input ~ .control-indicator,
+    .control input:focus ~ .control-indicator {
       background: #ccc;
     }
 
-    .control input:checked~.control-indicator {
+    .control input:checked ~ .control-indicator {
       background: #848484;
     }
 
-    .control:hover input:not([disabled]):checked~.control-indicator,
-    .control input:checked:focus~.control-indicator {
+    .control:hover input:not([disabled]):checked ~ .control-indicator,
+    .control input:checked:focus ~ .control-indicator {
       background: #848484;
       box-shadow: 0px 0px 0px 3px #cccccc8f;
     }
 
-    .control input:disabled~.control-indicator {
+    .control input:disabled ~ .control-indicator {
       background: #e6e6e6;
       opacity: 0.6;
       pointer-events: none;
@@ -1088,7 +1115,7 @@ body.pelcro-prefix-modal-open {
       display: none;
     }
 
-    .control input:checked~.control-indicator:after {
+    .control input:checked ~ .control-indicator:after {
       display: block;
     }
 
@@ -1102,7 +1129,7 @@ body.pelcro-prefix-modal-open {
       transform: rotate(45deg);
     }
 
-    .control-checkbox input:disabled~.control-indicator:after {
+    .control-checkbox input:disabled ~ .control-indicator:after {
       border-color: #7b7b7b;
     }
 
@@ -1115,7 +1142,7 @@ body.pelcro-prefix-modal-open {
       background: #fff;
     }
 
-    .control-radio input:disabled~.control-indicator:after {
+    .control-radio input:disabled ~ .control-indicator:after {
       background: #7b7b7b;
       border: 1px solid #7b7b7b;
     }
@@ -1176,26 +1203,24 @@ body.pelcro-prefix-modal-open {
       max-height: 270px;
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 450px) {
       .pelcro-prefix-product-img {
-        // width: 50%;
+        width: 60px;
+        height: 60px;
       }
+    }
 
-      .pelcro-prefix-product-img.col-3 {
-        flex: none;
-        // max-width: 100%;
+    @media (max-width: 320px) {
+      .pelcro-prefix-product-img {
+        width: 40px;
+        height: 50px;
       }
     }
 
     @media (max-width: 430px) {
-      .pelcro-prefix-product-container .col-9.pelcro-prefix-product-cost {
+      .pelcro-prefix-product-container
+        .col-9.pelcro-prefix-product-cost {
         width: auto;
-      }
-    }
-
-    @media (max-width: 400px) {
-      .pelcro-prefix-product-img {
-        height: 80%;
       }
     }
   }
@@ -1433,7 +1458,8 @@ body.pelcro-prefix-modal-open {
     }
 
     .wrapper-ready .check {
-      animation: check 0.6s cubic-bezier(0.87, -0.41, 0.19, 1.44) 0.6s forwards;
+      animation: check 0.6s cubic-bezier(0.87, -0.41, 0.19, 1.44) 0.6s
+        forwards;
     }
 
     .wrapper-ready .spinner {
@@ -1477,7 +1503,8 @@ body.pelcro-prefix-modal-open {
     }
 
     .animate-check {
-      animation: check 0.7s cubic-bezier(0.87, -0.41, 0.19, 1.44) 0.7s forwards;
+      animation: check 0.7s cubic-bezier(0.87, -0.41, 0.19, 1.44) 0.7s
+        forwards;
     }
 
     .animate-spinner {
@@ -1743,7 +1770,7 @@ body.pelcro-prefix-modal-open {
     .cross-container {
       width: 100%;
 
-      &:hover>.remove-icon svg {
+      &:hover > .remove-icon svg {
         fill: #2d2d2d;
         stroke: #2d2d2d;
       }
@@ -1800,6 +1827,10 @@ body.pelcro-prefix-modal-open {
         max-width: 70%;
       }
     }
+  }
+
+  .state-select-loader {
+    margin-top: 20px !important;
   }
 }
 
@@ -1932,31 +1963,29 @@ body.pelcro-prefix-modal-open {
   background-color: #afafaf;
 }
 
-*:focus {
-  outline: none;
-}
-
-.input-error {
-  border-color: red !important;
-}
-
-
-.custom-submit-button {
-  max-width: 300px;
-}
-
-.pelcro-prefix-payment-block {
-  background: #fafafa;
-  border: 1px solid #ececec;
-  border-radius: 6px;
-  padding: 26px;
-  font-size: 14px;
-}
-
-.pelcro-prefix-payment-icons {
-  height: 15px;
-}
-
-#pelcro-app .pelcro-prefix-form .pelcro-prefix-form .pelcro-prefix-row .col-md-12 .pelcro-payment-request {
+#pelcro-app
+  .pelcro-prefix-form
+  .pelcro-prefix-form
+  .pelcro-prefix-row
+  .col-md-12
+  .pelcro-payment-request {
   padding: 0 !important;
+}
+
+#pelcro-app
+  .pelcro-prefix-modal
+  .pelcro-prefix-modal-dialog
+  .pelcro-prefix-modal-content
+  .pelcro-prefix-modal-body
+  .pelcro-prefix-payment-block
+  .pelcro-prefix-form
+  .spinner-wrapper
+  .no-border-spinner
+  .no-border-spinner-2
+  .no-border-spinner-3
+  div {
+  margin: auto !important;
+  margin-top: 30px !important;
+  margin-bottom: 20px !important;
+  border-top: 4px solid #009688 !important;
 }

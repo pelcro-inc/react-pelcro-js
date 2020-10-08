@@ -42,16 +42,14 @@ export const CouponCode = ({ showCoupon }) => {
                 >
                   {t("labels.code")}
                 </label>
-                <CouponCodeField />
-              </div>
-            </div>
-            <div className="col-sm-12 apply-coupon-button">
-              <div className="pelcro-prefix-input-wrapper">
-                <ApplyCouponButton
-                  disableCouponButton={disableCouponButton}
-                >
-                  {t("labels.applyCouponCode")}
-                </ApplyCouponButton>
+                <div className="pelcro-prefix-input pelcro-apply-coupon-container">
+                  <CouponCodeField />
+                  <ApplyCouponButton
+                    disableCouponButton={disableCouponButton}
+                  >
+                    {t("labels.applyCouponCode")}
+                  </ApplyCouponButton>
+                </div>
               </div>
             </div>
           </div>
