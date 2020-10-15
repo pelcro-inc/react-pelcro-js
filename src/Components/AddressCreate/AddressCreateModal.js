@@ -20,7 +20,7 @@ export const AddressCreateModal = (props) => {
           <div className="pelcro-prefix-modal-content">
             <Header
               closeButton={window.Pelcro.paywall.displayCloseButton()}
-              resetView={props.resetView()}
+              resetView={props.resetView}
               site={window.Pelcro.site.read()}
             ></Header>
             <div className="pelcro-prefix-modal-body">
