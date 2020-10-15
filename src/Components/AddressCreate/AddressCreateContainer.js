@@ -1,4 +1,5 @@
 import React, { createContext, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import useReducerWithSideEffects, {
   UpdateWithSideEffect,
   Update
@@ -42,6 +43,8 @@ const AddressCreateContainer = ({
   onFailure = () => {},
   children
 }) => {
+  const { t } = useTranslation("address");
+
   useEffect(() => {
     window.Pelcro.insight.track("Modal Displayed", {
       name: "address"
@@ -113,7 +116,7 @@ const AddressCreateContainer = ({
                 );
               }
 
-              alert("Your subscription has been redeemed.");
+              alert(t("messages.subRedeemed"));
               return onGiftRedemptionSuccess();
             }
           );

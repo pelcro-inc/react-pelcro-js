@@ -1,19 +1,20 @@
 {
-    "title": "Please enter your address",
-    "labels": {
-        "address": "Address",
-        "code": "Postal Code/Zip",
-        "city": "City",
-        "region": "State/Province/Region",
-        "country": "Country",
-        "firstName": "First name",
-        "lastName": "Last name",
-        "required": "required"
-    },
-    "buttons": {
-        "submit": "submit"
-    },
-    "messages": {
-        "addressUpdated": "The address was successfully updated!"
-    }
+  "title": "Please enter your address",
+  "labels": {
+    "address": "Address",
+    "code": "Postal Code/Zip",
+    "city": "City",
+    "region": "State/Province/Region",
+    "country": "Country",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "required": "required"
+  },
+  "buttons": {
+    "submit": "submit"
+  },
+  "messages": {
+    "addressUpdated": "The address was successfully updated!",
+    "subRedeemed": "Your subscription has been redeemed."
+  }
 }

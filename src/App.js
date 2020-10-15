@@ -235,6 +235,10 @@ class App extends Component {
     this.setState({ isRenewingGift });
   };
 
+  setAddress = (addressId) => {
+    this.setState({ addressId });
+  };
+
   loggedIn = () => {
     this.setState({ isAuthenticated: true });
     this.removeHTMLButton("pelcro-register-button");
