@@ -22,7 +22,23 @@
     }
   },
   "messages": {
-    "youAreSafe": "You're safe - PCI compliant 128 SSL by"
+    "youAreSafe": "You're safe - PCI compliant 128 SSL by",
+    "haveQuestion": "Des questions?",
+    "visitOurWebsite": {
+      "visitTo": "Visitez notre site Web pour",
+      "learnMore": "en savoir plus"
+    },
+    "visitOurFaq": {
+      "visitOur": "Visitez notre",
+      "faq": "FAQ"
+    },
+    "cancel": "Annuler votre abonnement en ligne à tout moment.",
+    "logout": {
+      "logout": "Déconnexion",
+      "here": "ici"
+    },
+    "giftSent": "Le cadeau d'abonnement a été envoyé à",
+    "successfully": "avec succès."
   },
   "errors": {
     "": ""
