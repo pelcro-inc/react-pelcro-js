@@ -1,27 +1,30 @@
 {
-    "labels": {
-        "cardNumber": "Card number",
-        "securityCode": "Security Code",
-        "submit": "Submit",
-        "months": {
-            "jan": "January",
-            "feb": "February",
-            "mar": "March",
-            "apr": "April",
-            "may": "May",
-            "jun": "June",
-            "jul": "July",
-            "aug": "August",
-            "sep": "September",
-            "oct": "October",
-            "nov": "November",
-            "dec": "December"
-        },
-        "checkout": {
-            "title": "Payment Information"
-        }
+  "labels": {
+    "cardNumber": "Card number",
+    "securityCode": "Security Code",
+    "submit": "Submit",
+    "months": {
+      "jan": "January",
+      "feb": "February",
+      "mar": "March",
+      "apr": "April",
+      "may": "May",
+      "jun": "June",
+      "jul": "July",
+      "aug": "August",
+      "sep": "September",
+      "oct": "October",
+      "nov": "November",
+      "dec": "December"
     },
-    "errors": {
-        "": ""
+    "checkout": {
+      "title": "Payment Information"
     }
+  },
+  "messages": {
+    "youAreSafe": "You're safe - PCI compliant 128 SSL by"
+  },
+  "errors": {
+    "": ""
+  }
 }
