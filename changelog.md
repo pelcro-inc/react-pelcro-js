@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Unreleased]
 
+### Fixed
+
+- Initialize firstName and lastName elements with empty strings.
+
 ---
 
 ## [Released]
