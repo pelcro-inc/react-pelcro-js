@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Unreleased]
 
+### Fixed
+
+- Fixed User update modal from being slow on load time.
+
 ---
 
 ## [Released]

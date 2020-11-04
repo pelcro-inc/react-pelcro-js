@@ -36,39 +36,42 @@ const UserUpdateContainer = ({
   onFailure = () => {},
   children
 }) => {
-  const [pelcroUserLoaded, setUserLoaded] = useState(false);
   const { t } = useTranslation("userEdit");
 
   useEffect(() => {
-    setTimeout(() => {
-      const fields = [
-        {
-          type: SET_FIRST_NAME,
-          payload: window.Pelcro.user.read()?.first_name
-        },
-        {
-          type: SET_LAST_NAME,
-          payload: window.Pelcro.user.read()?.last_name
-        },
-        {
-          type: SET_DISPLAY_NAME,
-          payload: window.Pelcro.user.read()?.display_name
-        },
-        {
-          type: SET_PHONE,
-          payload: window.Pelcro.user.read()?.phone
-        }
-      ];
+    document.addEventListener("PelcroUserLoaded", () => {
+      loadUserDataIntoFields();
+    });
 
-      fields
-        .filter((field) => Boolean(field.payload))
-        .forEach((field) => {
-          dispatch(field);
-        });
-
-      setUserLoaded(true);
-    }, 3000);
+    loadUserDataIntoFields();
   }, []);
+
+  const loadUserDataIntoFields = () => {
+    const fields = [
+      {
+        type: SET_FIRST_NAME,
+        payload: window.Pelcro.user.read()?.first_name
+      },
+      {
+        type: SET_LAST_NAME,
+        payload: window.Pelcro.user.read()?.last_name
+      },
+      {
+        type: SET_DISPLAY_NAME,
+        payload: window.Pelcro.user.read()?.display_name
+      },
+      {
+        type: SET_PHONE,
+        payload: window.Pelcro.user.read()?.phone
+      }
+    ];
+
+    fields
+      .filter((field) => Boolean(field.payload))
+      .forEach((field) => {
+        dispatch(field);
+      });
+  };
 
   const handleUpdateUser = (
     { firstName, lastName, phone, textFields, displayName },
@@ -154,21 +157,17 @@ const UserUpdateContainer = ({
     initialState
   );
 
-  if (pelcroUserLoaded) {
-    return (
-      <div style={{ ...style }} className={className}>
-        <Provider value={{ state, dispatch }}>
-          {children.length
-            ? children.map((child, i) =>
-                React.cloneElement(child, { store, key: i })
-              )
-            : React.cloneElement(children, { store })}
-        </Provider>
-      </div>
-    );
-  }
-
-  return null;
+  return (
+    <div style={{ ...style }} className={className}>
+      <Provider value={{ state, dispatch }}>
+        {children.length
+          ? children.map((child, i) =>
+              React.cloneElement(child, { store, key: i })
+            )
+          : React.cloneElement(children, { store })}
+      </Provider>
+    </div>
+  );
 };
 
 export { UserUpdateContainer, store };
