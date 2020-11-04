@@ -15,7 +15,7 @@ export function LastName({
 }) {
   const { dispatch, state } = useContext(store);
 
-  const handleInputChange = value => {
+  const handleInputChange = (value) => {
     dispatch({ type: SET_LAST_NAME, payload: value });
   };
 
@@ -33,8 +33,8 @@ export function LastName({
       id={id}
       style={{ ...style }}
       className={className}
-      value={state.lastName || null}
-      onChange={e => handleInputChange(e.target.value)}
+      value={state.lastName || ""}
+      onChange={(e) => handleInputChange(e.target.value)}
       placeholder={placeholder || "Enter Your Last Name"}
       {...otherProps}
     ></input>

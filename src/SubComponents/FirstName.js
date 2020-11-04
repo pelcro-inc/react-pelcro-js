@@ -15,7 +15,7 @@ export function FirstName({
 }) {
   const { dispatch, state } = useContext(store);
 
-  const handleInputChange = value => {
+  const handleInputChange = (value) => {
     dispatch({ type: SET_FIRST_NAME, payload: value });
   };
 
@@ -33,8 +33,8 @@ export function FirstName({
       id={id}
       style={{ ...style }}
       className={className}
-      value={state.firstName || null}
-      onChange={e => handleInputChange(e.target.value)}
+      value={state.firstName || ""}
+      onChange={(e) => handleInputChange(e.target.value)}
       placeholder={placeholder || "Enter Your First Name"}
       {...otherProps}
     ></input>
