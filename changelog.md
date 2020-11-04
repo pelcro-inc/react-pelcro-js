@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 ### Fixed
 
 - Initialize firstName and lastName elements with empty strings.
+- Fixed User update modal from being slow on load time.
 
 ---
 

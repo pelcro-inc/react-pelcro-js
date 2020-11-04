@@ -34,7 +34,7 @@ export function Email({
         if (validateEmail(email)) {
           dispatch({ type: SET_EMAIL, payload: email });
         } else if (finishedTyping) {
-          if (email.length) {
+          if (email?.length) {
             dispatch({
               type: SET_EMAIL_ERROR,
               payload: "Please enter a valid email."
@@ -55,6 +55,24 @@ export function Email({
     handleInputChange(email);
   }, [finishedTyping, email, handleInputChange]);
 
+  // Initialize email field with user's email
+  const loadEmailIntoField = () => {
+    handleInputChange(window.Pelcro.user.read().email);
+  };
+
+  useEffect(() => {
+    document.addEventListener("PelcroUserLoaded", () => {
+      loadEmailIntoField();
+    });
+    loadEmailIntoField();
+
+    return () => {
+      document.removeEventListener(
+        "PelcroUserLoaded",
+        handleInputChange
+      );
+    };
+  }, []);
   const validateEmail = (email) => {
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
@@ -68,9 +86,9 @@ export function Email({
         style={{ ...style }}
         className={(emailError ? "input-error " : "") + className}
         value={
-          otherProps?.disableEmailValidation
+          (otherProps?.disableEmailValidation
             ? stateEmail
-            : email || stateEmail
+            : email || stateEmail) ?? ""
         }
         onChange={(e) => handleInputChange(e.target.value)}
         placeholder={placeholder || "Enter Your Email"}
