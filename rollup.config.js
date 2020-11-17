@@ -2,6 +2,7 @@ import del from "rollup-plugin-delete";
 import resolve from "rollup-plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 import external from "rollup-plugin-peer-deps-external";
+import visualizer from "rollup-plugin-visualizer";
 import babel from "rollup-plugin-babel";
 import json from "@rollup/plugin-json";
 import { terser } from "rollup-plugin-terser";
@@ -45,8 +46,11 @@ export default [
       }),
       terser(),
       del({ targets: ["dist/*", "playground/src/component-lib"] }),
-
-      json()
+      json(),
+      visualizer({
+        gzipSize: true,
+        open: true
+      })
     ]
   }
 ];
