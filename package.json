@@ -71,6 +71,7 @@
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-postcss": "^2.8.1",
     "rollup-plugin-terser": "^5.3.0",
+    "rollup-plugin-visualizer": "^4.2.0",
     "sass-loader": "^7.1.0",
     "travis-ci-cloudfront-invalidation": "^1.1.0",
     "webpack": "^4.44.1",
