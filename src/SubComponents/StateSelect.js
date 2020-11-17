@@ -71,7 +71,7 @@ export function StateSelect({
     dispatch({ type: SET_STATE, payload: e.target.value });
   };
 
-  if (!loading || (!createStateItems() && country)) {
+  if (loading || (!createStateItems() && country)) {
     return (
       <div className="state-select-loader">
         <Loader />
