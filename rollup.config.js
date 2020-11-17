@@ -1,6 +1,7 @@
 import del from "rollup-plugin-delete";
 import resolve from "rollup-plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
+import external from "rollup-plugin-peer-deps-external";
 import babel from "rollup-plugin-babel";
 import json from "@rollup/plugin-json";
 import { terser } from "rollup-plugin-terser";
@@ -15,6 +16,7 @@ export default [
     ],
     plugins: [
       resolve(),
+      external(),
       babel({
         presets: ["react-app"],
         plugins: [
@@ -33,13 +35,6 @@ export default [
         // relative to the current directory, or the name
         // of a module in node_modules
         namedExports: {
-          "node_modules/react/index.js": [
-            "cloneElement",
-            "createContext",
-            "Component",
-            "createElement"
-          ],
-          "node_modules/react-dom/index.js": ["render", "hydrate"],
           "node_modules/react-is/index.js": [
             "isElement",
             "isValidElementType",
@@ -52,8 +47,6 @@ export default [
       del({ targets: ["dist/*", "playground/src/component-lib"] }),
 
       json()
-    ],
-    external: ["react", "prop-types"],
-    globals: { "styled-components": "styled" }
+    ]
   }
 ];
