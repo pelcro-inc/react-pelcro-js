@@ -80,16 +80,15 @@
     "bootstrap": "^4.4.1",
     "i18next": "^19.1.0",
     "lodash": "^4.17.19",
-    "react-fancy-loader": "^0.2.17",
     "react-i18next": "^11.3.3",
     "react-stripe-elements": "^2.0.3",
     "reset-css": "^4.0.1",
     "use-reducer-with-side-effects": "^2.2.0"
   },
   "peerDependencies": {
+    "prop-types": "^15.0.0",
     "react": "^16.6.1",
-    "react-dom": "^16.6.1",
-    "prop-types": "^15.0.0"
+    "react-dom": "^16.6.1"
   },
   "babel": {
     "presets": [

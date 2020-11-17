@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { DotLoader } from "react-fancy-loader";
+import { Loader } from "../SubComponents/Loader";
 import { SET_GIFT_CODE } from "../utils/action-types";
 
 /**
@@ -31,8 +31,8 @@ export function GiftCode({
 
   if (state.loading) {
     return (
-      <div style={{ marginTop: 20 }}>
-        <DotLoader size={4} />
+      <div className="state-select-loader">
+        <Loader />
       </div>
     );
   }

@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { DotLoader } from "react-fancy-loader";
+import { Loader } from "../SubComponents/Loader";
 import { SET_DISPLAY_NAME } from "../utils/action-types";
 
 /**
@@ -21,8 +21,8 @@ export function DisplayName({
 
   if (state.loading) {
     return (
-      <div style={{ marginTop: 20 }}>
-        <DotLoader size={4} />
+      <div className="state-select-loader">
+        <Loader />
       </div>
     );
   }

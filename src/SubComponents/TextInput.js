@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { DotLoader } from "react-fancy-loader";
+import { Loader } from "../SubComponents/Loader";
 import { SET_TEXT_FIELD } from "../utils/action-types";
 
 /**
@@ -16,7 +16,7 @@ export function TextInput({
 }) {
   const { dispatch, state } = useContext(store);
 
-  const handleInputChange = value => {
+  const handleInputChange = (value) => {
     dispatch({
       type: SET_TEXT_FIELD,
       payload: { [fieldName]: value }
@@ -25,8 +25,8 @@ export function TextInput({
 
   if (state.loading) {
     return (
-      <div style={{ marginTop: 20 }}>
-        <DotLoader size={4} />
+      <div className="state-select-loader">
+        <Loader />
       </div>
     );
   }
@@ -42,7 +42,7 @@ export function TextInput({
         window.Pelcro.user.read().metadata &&
         window.Pelcro.user.read().metadata[fieldName]
       }
-      onChange={e => handleInputChange(e.target.value)}
+      onChange={(e) => handleInputChange(e.target.value)}
       placeholder={placeholder || fieldName}
       {...otherProps}
     ></input>
