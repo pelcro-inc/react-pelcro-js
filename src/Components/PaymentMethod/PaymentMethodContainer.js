@@ -8,7 +8,6 @@ import useReducerWithSideEffects, {
   UpdateWithSideEffect,
   Update
 } from "use-reducer-with-side-effects";
-import debounce from "lodash/debounce";
 
 import {
   DISABLE_SUBMIT,
@@ -27,7 +26,7 @@ import {
   UPDATE_PAYMENT_REQUEST,
   SET_ORDER
 } from "../../utils/action-types";
-import { getErrorMessages } from "../common/Helpers";
+import { getErrorMessages, debounce } from "../common/Helpers";
 import {
   showError,
   showSuccess,
