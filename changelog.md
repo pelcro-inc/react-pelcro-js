@@ -6,10 +6,20 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Unreleased]
 
+### Added
+
+- Added bundle visualizer at build time [private]
+
 ### Fixed
 
 - Initialize firstName and lastName elements with empty strings.
 - Fixed User update modal from being slow on load time.
+- Organized dev-dependencies and external ones [private]
+- React and react-dom as peer dependencies [private]
+
+### Changed
+
+- Replaced react-fancy-loader with an in-house loader
 
 ---
 
