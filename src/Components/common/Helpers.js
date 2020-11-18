@@ -1,16 +1,29 @@
-import values from "lodash/values";
-import get from "lodash/get";
-
+/**
+ * Extracts error message from the response error object
+ * @param {Object} error Error object
+ */
 export const getErrorMessages = (error) => {
-  if (get(error, "error.message")) {
-    return get(error, "error.message");
+  if (error?.error?.message) {
+    return error.message;
   }
 
-  if (get(error, "response.data.error.message")) {
-    return get(error, "response.data.error.message");
+  if (error?.response?.data?.error?.message) {
+    return error?.response?.data?.error?.message;
   }
 
-  const messages = [];
+  const errorMessages = [];
+
+  // enumerable error (ex: validation errors)
+  Object.values(error?.response?.data?.errors).forEach(
+    ([errorMessage]) => {
+      errorMessages.push(errorMessage);
+    }
+  );
+
+  // convert to multiline string
+  return errorMessages.join("\n");
+};
+
 
   values(error?.response?.data?.errors).forEach((message) => {
     messages.push(message[0]);
