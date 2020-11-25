@@ -6,9 +6,41 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Unreleased]
 
+### Added
+
+- Added bundle visualizer at build time [private]
+
+### Fixed
+
+- Initialize firstName and lastName elements with empty strings.
+- Fixed User update modal from being slow on load time.
+- Organized dev-dependencies and external ones [private]
+- React and react-dom as peer dependencies [private]
+
+### Changed
+
+- Replaced react-fancy-loader with an in-house loader
+- Removed lodash as a dependency and replaced with in-house functions.
+
 ---
 
 ## [Released]
+
+## [2.9.5] - 2020-10-20
+
+### Added
+
+- Add missing translation property in french.
+
+### Fixed
+
+- Use resetView instead of setView in address modal header.
+
+## [2.9.4] - 2020-10-15
+
+### Fixed
+
+- Use resetView instead of setView in address modal header
 
 ## [2.9.2] - 2020-10-05
 

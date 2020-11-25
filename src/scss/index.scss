@@ -1830,7 +1830,9 @@ body.pelcro-prefix-modal-open {
   }
 
   .state-select-loader {
-    margin-top: 20px !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }
 

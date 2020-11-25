@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { DotLoader } from "react-fancy-loader";
+import { Loader } from "../SubComponents/Loader";
 import { useTranslation } from "react-i18next";
 import { SET_COUNTRY, SET_COUNTRIES } from "../utils/action-types";
 import { sortCountries } from "../utils/utils";
@@ -59,8 +59,8 @@ export function CountrySelect({
 
   if (loading) {
     return (
-      <div style={{ marginTop: 20 }}>
-        <DotLoader size={4} />
+      <div className="state-select-loader">
+        <Loader />
       </div>
     );
   }
