@@ -26,6 +26,22 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Released]
 
+## [2.9.5] - 2020-10-20
+
+### Added
+
+- Add missing translation property in french.
+
+### Fixed
+
+- Use resetView instead of setView in address modal header.
+
+## [2.9.4] - 2020-10-15
+
+### Fixed
+
+- Use resetView instead of setView in address modal header
+
 ## [2.9.2] - 2020-10-05
 
 ### Added
