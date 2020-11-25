@@ -20,6 +20,7 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 ### Changed
 
 - Replaced react-fancy-loader with an in-house loader
+- Removed lodash as a dependency and replaced with in-house functions.
 
 ---
 
