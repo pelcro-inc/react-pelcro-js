@@ -4,7 +4,13 @@ import { HANDLE_REGISTRATION } from "../../utils/action-types";
 
 export const RegisterButton = ({ store, ...otherProps }) => {
   const {
-    state: { emailError, passwordError, email, password },
+    state: {
+      emailError,
+      passwordError,
+      email,
+      password,
+      buttonDisabled
+    },
     dispatch
   } = useContext(store);
 
@@ -12,9 +18,13 @@ export const RegisterButton = ({ store, ...otherProps }) => {
 
   useEffect(() => {
     setDisabled(
-      emailError || passwordError || !email.length || !password.length
+      buttonDisabled ||
+        emailError ||
+        passwordError ||
+        !email.length ||
+        !password.length
     );
-  }, [emailError, passwordError, email, password]);
+  }, [buttonDisabled, emailError, passwordError, email, password]);
 
   return (
     <Button

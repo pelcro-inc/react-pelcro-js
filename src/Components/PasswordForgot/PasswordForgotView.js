@@ -46,7 +46,7 @@ export const PasswordForgotView = (props) => {
 
       <div className="pelcro-prefix-modal-footer">
         <small>
-          {t("messages.alreadyHaveAccount")}
+          {t("messages.alreadyHaveAccount") + " "}
           <button
             className="pelcro-prefix-link"
             onClick={() => props.setView("login")}

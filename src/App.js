@@ -581,10 +581,10 @@ class App extends Component {
           )}
 
           {this.state.view === "password-forgot" && (
-            <PasswordForgotModal setView={this.setView} />
+            <PasswordForgotModal resetView={this.resetView} />
           )}
           {this.state.view === "password-reset" && (
-            <PasswordResetModal setView={this.setView} />
+            <PasswordResetModal resetView={this.resetView} />
           )}
 
           {this.state.view === "source-create" && (
