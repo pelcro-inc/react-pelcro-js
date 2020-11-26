@@ -31,7 +31,7 @@ const initialState = {
   confirmPassword: "",
   confirmPasswordError: null,
   confirmPasswordUsed: false,
-  buttonDisabled: true,
+  buttonDisabled: false,
   firstName: null,
   lastName: null,
   selectFields: {}
