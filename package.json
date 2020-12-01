@@ -9,6 +9,7 @@
     "dist"
   ],
   "scripts": {
+    "preinstall": "git config core.hooksPath qa/hooks",
     "start": "react-scripts start",
     "dev": "webpack --mode development",
     "prod": "webpack --config webpack.config.prod --mode production",
