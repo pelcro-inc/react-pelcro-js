@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Unreleased]
 
+## [Released]
+
+## [2.9.7] - 2020-11-26
+
 ### Added
 
 - Added bundle visualizer at build time [private]
@@ -21,10 +25,6 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 - Replaced react-fancy-loader with an in-house loader
 - Removed lodash as a dependency and replaced with in-house functions.
-
----
-
-## [Released]
 
 ## [2.9.5] - 2020-10-20
 
