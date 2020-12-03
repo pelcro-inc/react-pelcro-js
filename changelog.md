@@ -15,6 +15,7 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 - Gift flow i18n wording issues.
 - Scrolling issues after password reset flow.
 - Password reset success message showing in error alert.
+- After registeration payment redirection issue.
 
 ## [2.9.7] - 2020-11-26
 

@@ -40,7 +40,7 @@ class App extends Component {
       site: window.Pelcro.site.read(),
       isAuthenticated: window.Pelcro.user.isAuthenticated(), // controls menu button displaying
       isGift: false,
-      order: {},
+      order: null,
       showUpdateUserView: false,
       addressId: null,
       products: [],
@@ -265,7 +265,7 @@ class App extends Component {
   getProducts = (products) => this.setState({ products });
 
   setOrder = (items) => {
-    const { order } = this.state;
+    const { order = {} } = this.state;
     order.items = items;
     this.setState({ order });
   };
@@ -307,6 +307,47 @@ class App extends Component {
     }
     this.setState({ product, plan });
     this.setView("select");
+  };
+
+  handleAfterRegistrationLogic = () => {
+    const { product, order, giftCode, isGift, site } = this.state;
+
+    ReactGA.event({
+      category: "ACTIONS",
+      action: "Registered",
+      nonInteraction: true
+    });
+
+    this.loggedIn();
+
+    // If product and plan are not selected
+    if (!product && !order && !giftCode) {
+      return this.resetView();
+    }
+
+    // If this is a redeem gift
+    if (giftCode) {
+      return this.setView("address");
+    }
+
+    // Check if the subscription is meant as a gift (if so, gather recipients info)
+    if (isGift) {
+      return this.setView("gift");
+    }
+
+    if (order) {
+      return this.setView("address");
+    }
+
+    if (product) {
+      if (product.address_required || site.taxes_enabled) {
+        return this.setView("address");
+      } else {
+        return this.setView("payment");
+      }
+    }
+
+    return this.resetView();
   };
 
   trackPurchaseOnGA = (res) => {
@@ -429,10 +470,7 @@ class App extends Component {
                   nonInteraction: true
                 });
               }}
-              onSuccess={() => {
-                this.setView("");
-                this.loggedIn();
-              }}
+              onSuccess={this.handleAfterRegistrationLogic}
             />
           )}
 
