@@ -16,7 +16,7 @@ export function SubscriptionCreateModal({
   onSuccess = () => {},
   onDisplay = () => {}
 }) {
-  const { t } = useTranslation("messages");
+  const { t } = useTranslation("payment");
 
   return (
     <div className="pelcro-prefix-view">
@@ -50,21 +50,22 @@ export function SubscriptionCreateModal({
             </div>
             <div className="pelcro-prefix-modal-footer">
               <small>
-                {t("haveQuestion")} {t("visitOurFaq.visitOur")}{" "}
+                {t("messages.haveQuestion")}{" "}
+                {t("messages.visitOurFaq.visitOur")}{" "}
                 <a
                   className="pelcro-prefix-link"
                   target="new"
                   href="https://www.pelcro.com/faq/user"
                 >
-                  {t("visitOurFaq.faq")}
+                  {t("messages.visitOurFaq.faq")}
                 </a>
-                . {t("cancel")}
-                {" " + t("logout.logout")}{" "}
+                . {t("messages.cancel")}
+                {" " + t("messages.logout.logout")}{" "}
                 <button
                   className="pelcro-prefix-link"
                   onClick={logout}
                 >
-                  {t("logout.here")}
+                  {t("messages.logout.here")}
                 </button>
               </small>
               <Authorship></Authorship>
