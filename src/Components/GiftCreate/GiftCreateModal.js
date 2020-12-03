@@ -35,7 +35,6 @@ export const GiftCreateModal = (props) => {
             <div className="pelcro-prefix-modal-body">
               <div className="pelcro-prefix-title-block">
                 <h4>{t("gift.titles.firstTitle")}</h4>
-                <p>{t("gift.titles.secondTitle")}</p>
               </div>
 
               <AlertDanger name="gift" />
