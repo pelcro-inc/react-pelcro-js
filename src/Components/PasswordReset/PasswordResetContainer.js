@@ -57,7 +57,7 @@ const PasswordResetContainer = ({
         } else {
           showSuccess(
             t("passwordUpdated"),
-            "pelcro-error-password-reset"
+            "pelcro-success-password-reset"
           );
           onSuccess();
         }

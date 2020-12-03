@@ -19,8 +19,8 @@ export const SubscriptionCreateView = ({
   onFailure = () => {},
   onDisplay = () => {}
 }) => {
-  const { t } = useTranslation("messages");
-  const [ct] = useTranslation("checkoutForm");
+  const { t } = useTranslation("checkoutForm");
+  const { t: tPayment } = useTranslation("payment");
 
   return (
     <div>
@@ -50,7 +50,7 @@ export const SubscriptionCreateView = ({
         <div className="pelcro-prefix-alert pelcro-prefix-alert-success">
           <div className="pelcro-prefix-payment-message">
             <span>
-              {t("youAreSafe")}{" "}
+              {tPayment("messages.youAreSafe")}{" "}
               <a
                 className="pelcro-prefix-link"
                 rel="nofollow"
@@ -75,7 +75,7 @@ export const SubscriptionCreateView = ({
               <div className="pelcro-prefix-row">
                 <div className="col-md-12">
                   <label className="pelcro-prefix-label">
-                    {ct("labels.card")} *
+                    {t("labels.card")} *
                   </label>
                   <PelcroCardNumber />
                   <img
@@ -87,27 +87,27 @@ export const SubscriptionCreateView = ({
 
                 <div className="col-md-6">
                   <label className="pelcro-prefix-label">
-                    {ct("labels.date")} *
+                    {t("labels.date")} *
                   </label>
                   <PelcroCardExpiry />
                 </div>
 
                 <div className="col-md-6">
                   <label className="pelcro-prefix-label">
-                    {ct("labels.CVC")} *
+                    {t("labels.CVC")} *
                   </label>
                   <PelcroCardCVC />
                 </div>
 
                 <div className="col-md-12">
                   <small className="pelcro-footnote form-text">
-                    * {ct("labels.required")}
+                    * {t("labels.required")}
                   </small>
 
                   <CouponCode showCoupon={true} />
                   <DiscountedPrice />
 
-                  <SubmitPaymentMethod name={ct("labels.submit")} />
+                  <SubmitPaymentMethod name={t("labels.submit")} />
 
                   <PelcroPaymentRequestButton />
                 </div>
