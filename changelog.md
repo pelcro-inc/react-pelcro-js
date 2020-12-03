@@ -6,13 +6,15 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Unreleased]
 
+## [Released]
+
+## [2.9.8] - 2020-12-03
+
 ### Fixed
 
 - Gift flow i18n wording issues.
 - Scrolling issues after password reset flow.
 - Password reset success message showing in error alert.
-
-## [Released]
 
 ## [2.9.7] - 2020-11-26
 
