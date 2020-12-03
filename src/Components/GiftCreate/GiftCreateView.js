@@ -52,6 +52,7 @@ export const GiftCreateView = (props) => {
             className="pelcro-prefix-input pelcro-prefix-form-control"
             id="pelcro-gift-create-input-email"
             placeholder={t("gift.labels.emailPlaceholder")}
+            autocomplete="off"
           ></GiftCreateEmail>
         </div>
       </div>
@@ -64,25 +65,6 @@ export const GiftCreateView = (props) => {
         name={t("gift.buttons.gift")}
         className="pelcro-prefix-btn"
       ></GiftCreateSubmitButton>
-
-      <p className="pelcro-prefix-small-text">
-        {t("messages.iAgree.iAgree") + " "}
-        <a
-          className="pelcro-prefix-link pelcro-prefix-terms-link"
-          target="new"
-          href="https://www.pelcro.com/terms"
-        >
-          {t("messages.iAgree.terms")}
-        </a>{" "}
-        {t("messages.iAgree.and")}{" "}
-        <a
-          className="pelcro-prefix-link pelcro-prefix-terms-link"
-          target="new"
-          href="https://www.pelcro.com/privacy"
-        >
-          {t("messages.iAgree.privacy")}
-        </a>
-      </p>
     </GiftCreateContainer>
   );
 };

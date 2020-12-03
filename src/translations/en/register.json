@@ -1,75 +1,74 @@
 {
-    "title": "Create an account",
-    "subtitle": "Enter your email and password below",
+  "title": "Create an account",
+  "subtitle": "Enter your email and password below",
+  "labels": {
+    "signUpFacebook": "Sign up with Facebook",
+    "signUpGoogle": "Sign up with Google",
+    "signUpEmail": "Sign up with Email",
+    "password": "Create password",
+    "email": "Enter email",
+    "passwordPlaceholder": "Create password",
+    "emailPlaceholder": "Enter email",
+    "required": "required"
+  },
+  "messages": {
+    "alreadyHaveAccount": "Already have an account?",
+    "createAccount": "Create account",
+    "loginHere": "login here. ",
+    "selectPlan": "Select a different plan ",
+    "here": "here",
+    "iAgree": {
+      "iAgree": "I agree to the",
+      "terms": "Terms of Service",
+      "and": "and",
+      "privacy": "Privacy Policy."
+    },
+    "preferDisable": {
+      "click": "Click",
+      "here": "here",
+      "ifPrefer": "if you prefer to disable your Ad blocker."
+    }
+  },
+  "errors": {
+    "": ""
+  },
+  "gift": {
+    "titles": {
+      "firstTitle": "Enter the recipient's information below"
+    },
     "labels": {
-        "signUpFacebook": "Sign up with Facebook",
-        "signUpGoogle": "Sign up with Google",
-        "signUpEmail": "Sign up with Email",
-        "password": "Create password",
-        "email": "Enter email",
-        "passwordPlaceholder": "Create password",
-        "emailPlaceholder": "Enter email",
-        "required": "required"
+      "firstName": "First name",
+      "lastName": "Last name",
+      "email": "Email",
+      "required": "required",
+      "firstNamePlaceholder": "First name",
+      "lastNamePlaceholder": "Last name",
+      "emailPlaceholder": "Email Address"
+    },
+    "buttons": {
+      "gift": "gift"
     },
     "messages": {
-        "alreadyHaveAccount": "Already have an account?",
-        "createAccount": "Create account",
-        "loginHere": "login here. ",
-        "selectPlan": "Select a different plan ",
-        "here": "here",
-        "iAgree": {
-            "iAgree": "I agree to the",
-            "terms": "Terms of Service",
-            "and": "and",
-            "privacy": "Privacy Policy."
-        },
-        "preferDisable": {
-            "click": "Click",
-            "here": "here",
-            "ifPrefer": "if you prefer to disable your Ad blocker."
-        }
-    },
-    "errors": {
-        "": ""
-    },
-    "gift": {
-        "titles": {
-            "firstTitle": "Gift this subscription",
-            "secondTitle": "Enter the recipients information below"
-        },
-        "labels": {
-            "firstName": "First name",
-            "lastName": "Last name",
-            "email": "Enter email",
-            "required": "required",
-            "firstNamePlaceholder": "First name",
-            "lastNamePlaceholder": "Last name",
-            "emailPlaceholder": "Email Address"
-        },
-        "buttons": {
-            "gift": "gift"
-        },
-        "messages": {
-            "enterEmail": "Please enter the gift recepients email."
-        }
-    },
-    "redeem": {
-        "titles": {
-            "firstTitle": "Redeem your gift",
-            "secondTitle": "Enter the gift code below"
-        },
-        "labels": {
-            "code": "Enter gift code",
-            "codePlaceholder": "Gift code",
-            "required": "required"
-        },
-        "buttons": {
-            "redeem": "Redeem gift"
-        },
-        "footer": {
-            "click": "Click",
-            "here": "here",
-            "toAdd": "to add an address"
-        }
+      "enterEmail": "Please enter the gift recepients email."
     }
+  },
+  "redeem": {
+    "titles": {
+      "firstTitle": "Redeem your gift",
+      "secondTitle": "Enter the gift code below"
+    },
+    "labels": {
+      "code": "Enter gift code",
+      "codePlaceholder": "Gift code",
+      "required": "required"
+    },
+    "buttons": {
+      "redeem": "Redeem gift"
+    },
+    "footer": {
+      "click": "Click",
+      "here": "here",
+      "toAdd": "to add an address"
+    }
+  }
 }
