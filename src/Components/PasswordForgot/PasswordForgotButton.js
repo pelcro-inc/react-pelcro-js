@@ -6,7 +6,7 @@ import {
 } from "../../utils/action-types";
 import { store } from "./PasswordForgotContainer";
 
-export const PasswordForgotButton = ({ ...otherProps }) => {
+export const PasswordForgotButton = ({ name, ...otherProps }) => {
   const {
     state: { buttonDisabled },
     dispatch
@@ -18,7 +18,7 @@ export const PasswordForgotButton = ({ ...otherProps }) => {
       onClick={() => dispatch({ type: HANDLE_SUBMIT })}
       disabled={buttonDisabled}
     >
-      {otherProps.name || "Submit"}
+      {name || "Submit"}
     </Button>
   );
 };
