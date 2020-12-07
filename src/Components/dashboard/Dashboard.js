@@ -368,7 +368,7 @@ class Dashboard extends Component {
   getAddresses = () => {
     const addresses =
       this.state.addresses &&
-      this.state.addresses.map((address) => {
+      this.state.addresses.map((address, index) => {
         return (
           <div key={"dashboard-address-" + address.id}>
             <span className="pelcro-prefix-dashboard-value">
@@ -377,6 +377,7 @@ class Dashboard extends Component {
             </span>
             <div className="pelcro-prefix-dashboard-value">
               <button
+                id={"pelcro-button-update-address-" + index}
                 data-key={address.id}
                 className="pelcro-prefix-link"
                 type="button"
@@ -446,6 +447,7 @@ class Dashboard extends Component {
                       <div className="pelcro-prefix-dashboard-link">
                         <button
                           className="pelcro-prefix-link"
+                          id="pelcro-button-update-email"
                           type="button"
                           onClick={this.displayUserEdit}
                         >
@@ -504,6 +506,7 @@ class Dashboard extends Component {
                   <div className="redeem-gift">
                     <button
                       className="pelcro-prefix-link"
+                      id="pelcro-button-redeem-gift"
                       type="button"
                       onClick={this.onSubmitGiftCode}
                     >

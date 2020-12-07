@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Unreleased]
 
+### Added
+
+- Add missing id selectors for QA requirements [PRIVATE]
+
 ## [Released]
 
 ## [2.9.8] - 2020-12-03
