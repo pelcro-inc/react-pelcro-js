@@ -51,6 +51,7 @@ export function LoginModal({ setView, onSuccess, ...otherProps }) {
                 {t("messages.dontHaveAccount") + " "}
                 <button
                   className="pelcro-prefix-link"
+                  id="pelcro-link-create-account"
                   onClick={onCreateAccountClick}
                 >
                   {t("messages.createAccount")}
@@ -59,6 +60,7 @@ export function LoginModal({ setView, onSuccess, ...otherProps }) {
                 {t("messages.reset.click") + " "}
                 <button
                   className="pelcro-prefix-link"
+                  id="pelcro-link-forget-password"
                   onClick={onForgotPassword}
                 >
                   {t("messages.reset.here")}
