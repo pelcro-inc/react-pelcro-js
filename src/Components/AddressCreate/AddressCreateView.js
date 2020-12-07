@@ -11,7 +11,7 @@ import { AddressCreateContainer } from "./AddressCreateContainer";
 import { AddressCreateCountrySelect } from "./AddressCreateCountrySelect";
 import { AddressCreateStateSelect } from "./AddressCreateStateSelect";
 
-export const AddressCreateView = props => {
+export const AddressCreateView = (props) => {
   const { t } = useTranslation("address");
   return (
     <AddressCreateContainer {...props}>
@@ -118,7 +118,10 @@ export const AddressCreateView = props => {
             >
               {t("labels.region")} *
             </label>
-            <AddressCreateStateSelect className="pelcro-prefix-select pelcro-prefix-form-control" />
+            <AddressCreateStateSelect
+              className="pelcro-prefix-select pelcro-prefix-form-control"
+              id="pelcro-input-state"
+            />
           </div>
         </div>
         <small className="pelcro-prefix-footnote pelcro-prefix-form-text">

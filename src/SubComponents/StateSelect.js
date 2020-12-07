@@ -11,7 +11,6 @@ export function StateSelect({
   placeholder = "",
   style,
   className,
-  id,
   store,
   ...otherProps
 }) {
@@ -85,7 +84,6 @@ export function StateSelect({
       onChange={onStateChange}
       className={className}
       autoComplete="state"
-      id="pelcro-input-state"
       {...otherProps}
     >
       <option value="" disabled selected>
