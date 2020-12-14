@@ -46,3 +46,12 @@ export const cleanObjectNullValues = (obj) =>
       v && typeof v === "object" ? cleanObjectNullValues(v) : v
     ])
     .reduce((a, [k, v]) => (v == null ? a : ((a[k] = v), a)), {});
+
+/**
+ * Gets user last submited pelcro shipping address
+ * @return {object?} User address
+ */
+export const getUserLatestAddress = () => {
+  const addressesLength = window.Pelcro.address.list()?.length;
+  return window.Pelcro.address.list()?.[addressesLength - 1];
+};
