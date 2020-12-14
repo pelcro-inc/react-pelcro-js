@@ -20,10 +20,15 @@ import { getUserLatestAddress } from "../../utils/utils";
 export class Subscription {
   /**
    * Subscription service  constructor
-   * @param {("PayPal"|"stripe")} paymentGateway
+   * @param {("paypal"|"stripe")} paymentGateway
    */
   constructor(paymentGateway) {
-    this.paymentGateway = paymentGateway;
+    const PAYMENT_GATEWAYS_ENUM = {
+      stripe: "stripe",
+      paypal: "braintree"
+    };
+
+    this.paymentGateway = PAYMENT_GATEWAYS_ENUM[paymentGateway];
   }
 
   /**

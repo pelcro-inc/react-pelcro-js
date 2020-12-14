@@ -299,7 +299,7 @@ const PaymentMethodContainerWithoutStripe = ({
    * @return {void}
    */
   const handlePaypalSubscription = (paypalNonce) => {
-    const subscription = new Subscription("PayPal");
+    const subscription = new Subscription("paypal");
 
     /**
      * @TODO: Add flags for types instead of testing by properties
