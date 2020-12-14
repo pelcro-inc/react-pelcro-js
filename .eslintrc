@@ -8,7 +8,7 @@
   "plugins": ["prettier", "jsdoc"],
   "parser": "babel-eslint",
   "rules": {
-    "prettier/prettier": ["error"],
+    "prettier/prettier": ["warn"],
     "jsdoc/valid-types": "warn",
     "jsdoc/require-jsdoc": "warn",
     "require-jsdoc": "off",
@@ -21,7 +21,9 @@
     "react/prop-types": "off",
     "prefer-destructuring": "warn",
     "react/no-unescaped-entities": "warn",
-    "new-cap": "off"
+    "new-cap": "off",
+    "no-unused-vars": "warn",
+    "prefer-const": "warn"
   },
   "env": {
     "browser": true,
