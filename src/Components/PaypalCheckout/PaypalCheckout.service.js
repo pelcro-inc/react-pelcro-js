@@ -4,6 +4,7 @@ import { getUserLatestAddress } from "../../utils/utils";
  * @typedef {Object} paypalConstructorOptions
  * @property {string} [buttonElementID=pelcro-paypal-button] element for paypal button to mount on
  * @property {boolean} [enableShippingAddress=true] enable using user shipping address
+ * @property {boolean} [shippingAddressEditable=true] enable user to edit address
  * @property {string} [displayName] merchant display name,  default is client's site name
  * @property {string} [locale] flow locale, default is client's default locale
  * @property {string} [billingAgreementDescription] agreement paragraph shown to user, max 255 chars
@@ -215,7 +216,7 @@ export class PaypalClient {
             line2: address.line2,
             city: address.city,
             countryCode: address.country,
-            postalCode: address.postalCode,
+            postalCode: address.postal_code,
             state: address.state,
             phone: address.phone
           }
