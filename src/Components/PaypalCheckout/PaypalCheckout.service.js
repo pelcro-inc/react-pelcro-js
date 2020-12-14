@@ -15,7 +15,8 @@ export class PaypalClient {
    * @static
    * @return {boolean}
    */
-  static isPaypalEnabled = () => Boolean(this.braintreeToken);
+  static isPaypalEnabled = () =>
+    Boolean(window.Pelcro.site.read().braintree_tokenization);
 
   /**
    * Paypal client constructor
