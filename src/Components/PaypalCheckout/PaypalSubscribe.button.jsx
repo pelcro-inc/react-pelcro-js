@@ -2,32 +2,44 @@ import React, { useEffect, useContext } from "react";
 import PropTypes from "prop-types";
 import { store } from "../PaymentMethod/PaymentMethodContainer";
 import {
-  CREATE_PAYPAL_SUBSCRIPTION,
+  HANDLE_PAYPAL_SUBSCRIPTION,
   DISABLE_SUBMIT
 } from "../../utils/action-types";
 import { PaypalClient } from "./PaypalCheckout.service";
 
-export const PaypalSubscribeButton = ({ product, plan }) => {
+/**
+ * PaypalSubscribeButton component
+ * @param {PaypalSubscribeButton.propTypes} props
+ * @return {JSX}
+ */
+export const PaypalSubscribeButton = (props) => {
   const { dispatch } = useContext(store);
 
   useEffect(() => {
     // initialize paypal client, then render paypal button.
     const initializePaypal = async () => {
       const paypalCheckoutInstance = new PaypalClient({
-        buttonElementID: "pelcro-paypal-button",
-        enableShippingAddress: product.address_required
+        buttonElementID:
+          props.buttonElementID ?? "pelcro-paypal-button",
+        style: props.buttonStyle,
+        enableShippingAddress: props.product.address_required,
+        shippingAddressEditable: props.makeAddressEditable,
+        displayName: props.merchantDisplayName,
+        locale: props.locale,
+        billingAgreementDescription: props.billingDescription
       });
 
+      // Await building paypal instance
       await paypalCheckoutInstance.build();
-
+      // Create paypal payment
       paypalCheckoutInstance.createPayment({
-        product: plan,
+        product: props.plan,
         onButtonClick: () => {
           dispatch({ type: DISABLE_SUBMIT, payload: true });
         },
         onPaymentApprove: ({ nonce }) => {
           dispatch({
-            type: CREATE_PAYPAL_SUBSCRIPTION,
+            type: HANDLE_PAYPAL_SUBSCRIPTION,
             payload: nonce
           });
         },
@@ -36,6 +48,7 @@ export const PaypalSubscribeButton = ({ product, plan }) => {
         }
       });
 
+      // Render paypal button
       paypalCheckoutInstance.render();
     };
 
@@ -46,6 +59,12 @@ export const PaypalSubscribeButton = ({ product, plan }) => {
 };
 
 PaypalSubscribeButton.propTypes = {
-  enableShippingAddress: PropTypes.bool,
-  product: PropTypes.object
+  product: PropTypes.object,
+  plan: PropTypes.object,
+  makeAddressEditable: PropTypes.bool,
+  merchantDisplayName: PropTypes.string,
+  locale: PropTypes.string,
+  billingDescription: PropTypes.string,
+  buttonElementID: PropTypes.string,
+  buttonStyle: PropTypes.object
 };
