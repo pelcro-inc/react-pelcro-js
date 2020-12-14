@@ -14,6 +14,7 @@ import {
   CREATE_PAYMENT,
   SET_FORMATTED_PRICE,
   SUBMIT_PAYMENT,
+  HANDLE_PAYPAL_SUBSCRIPTION,
   DISABLE_COUPON_BUTTON,
   APPLY_COUPON_CODE,
   SET_PERCENT_OFF,
@@ -32,6 +33,10 @@ import {
   showSuccess,
   hideError
 } from "../../utils/showing-error";
+import {
+  Subscription,
+  SUBSCRIPTION_TYPES
+} from "./Subscription.service";
 
 const initialState = {
   disableSubmit: false,
@@ -288,8 +293,117 @@ const PaymentMethodContainerWithoutStripe = ({
     return false;
   };
 
+  /**
+   * Handles subscriptions from PayPal gateway
+   * @param {string} paypalNonce
+   * @return {void}
+   */
+  const handlePaypalSubscription = (paypalNonce) => {
+    const subscription = new Subscription("PayPal");
+
+    /**
+     * @TODO: Add flags for types instead of testing by properties
+     */
+    if (isRenewingGift && subscriptionIdToRenew) {
+      return subscription.execute(
+        {
+          type: SUBSCRIPTION_TYPES.RENEW_GIFTED_SUBSCRIPTION,
+          token: paypalNonce,
+          subscriptionIdToRenew,
+          plan,
+          couponCode
+        },
+
+        (err, res) => {
+          dispatch({ type: DISABLE_SUBMIT, payload: false });
+
+          if (err) {
+            onFailure(err);
+            return displayError(getErrorMessages(err));
+          }
+
+          onGiftRenewalSuccess(res);
+        }
+      );
+    }
+
+    if (subscriptionIdToRenew) {
+      return subscription.execute(
+        {
+          type: SUBSCRIPTION_TYPES.RENEW_SUBSCRIPTION,
+          token: paypalNonce,
+          subscriptionIdToRenew,
+          plan,
+          couponCode,
+          product
+        },
+
+        (err, res) => {
+          dispatch({ type: DISABLE_SUBMIT, payload: false });
+
+          if (err) {
+            onFailure(err);
+            return displayError(getErrorMessages(err));
+          }
+
+          onSuccess(res);
+        }
+      );
+    }
+
+    if (giftRecipient) {
+      return subscription.execute(
+        {
+          type: SUBSCRIPTION_TYPES.CREATE_GIFTED_SUBSCRIPTION,
+          token: paypalNonce,
+          plan,
+          couponCode,
+          product,
+          giftRecipient
+        },
+
+        (err, res) => {
+          dispatch({ type: DISABLE_SUBMIT, payload: false });
+
+          if (err) {
+            onFailure(err);
+            return showError(
+              getErrorMessages(err),
+              "pelcro-error-payment"
+            );
+          }
+
+          onSuccess(res);
+        }
+      );
+    }
+
+    return subscription.execute(
+      {
+        type: SUBSCRIPTION_TYPES.CREATE_SUBSCRIPTION,
+        token: paypalNonce,
+        plan,
+        couponCode,
+        product
+      },
+      (err, res) => {
+        dispatch({ type: DISABLE_SUBMIT, payload: false });
+
+        if (err) {
+          onFailure(err);
+          return showError(
+            getErrorMessages(err),
+            "pelcro-error-payment"
+          );
+        }
+
+        onSuccess(res);
+      }
+    );
+  };
+
   const purchase = (token, state, dispatch) => {
-    const order = state.order;
+    const { order } = state;
     order.email = window.Pelcro.user.read().email;
     const address = window.Pelcro.user.read().addresses
       ? window.Pelcro.user.read().addresses[
@@ -385,6 +499,11 @@ const PaymentMethodContainerWithoutStripe = ({
           return UpdateWithSideEffect(
             { ...state, disableSubmit: true },
             (state, dispatch) => submitPayment(state, dispatch)
+          );
+
+        case HANDLE_PAYPAL_SUBSCRIPTION:
+          return UpdateWithSideEffect(state, () =>
+            handlePaypalSubscription(action.payload)
           );
 
         case SET_FORMATTED_PRICE:
