@@ -167,7 +167,6 @@ export class PaypalClient {
    */
   #onPaymentApprove = (data, callback) => {
     return this.client.tokenizePayment(data).then((payload) => {
-      console.log(payload);
       callback?.(payload);
     });
   };
@@ -259,96 +258,3 @@ export class PaypalClient {
     return priceFormatted;
   };
 }
-
-export const initiatePaypalClient = () => {
-  window.braintree.client
-    .create({
-      authorization: "sandbox_38ksghrh_jq3yssjrg22xkxfc"
-    })
-    .then(function (clientInstance) {
-      // window.braintree.dataCollector
-      //   .create({
-      //     client: clientInstance,
-      //     kount: true,
-      //     paypal: true
-      //   })
-      //   .then(function (dataCollectorInstance) {
-      //     var deviceDataInput = dataCollectorInstance.deviceData;
-      //     console.log(deviceDataInput);
-      //   })
-      //   .catch(function (err) {
-      //     console.log("Error on collecting Data " + err);
-      //     // Handle error in data collector creation
-      //   });
-      // Create a PayPal Checkout component.
-      return window.braintree.paypalCheckout.create({
-        client: clientInstance
-      });
-    })
-    .then(function (paypalCheckoutInstance) {
-      return paypalCheckoutInstance.loadPayPalSDK({
-        vault: true
-      });
-    })
-    .then(function (paypalCheckoutInstance) {
-      console.log(
-        "🚀 ~ file: PaypalCheckout.service.js ~ line 120 ~ paypalCheckoutInstance",
-        paypalCheckoutInstance
-      );
-      return window.paypal
-        .Buttons({
-          fundingSource: window.paypal.FUNDING.PAYPAL,
-
-          createBillingAgreement: function () {
-            const address = window.Pelcro.user.read().addresses?.[0];
-            return paypalCheckoutInstance.createPayment({
-              flow: "vault",
-              // The following are optional params
-              billingAgreementDescription:
-                "Your agreement description",
-              enableShippingAddress: true,
-              shippingAddressOverride: {
-                recipientName: address.first_name + address.last_name,
-                line1: address.line1,
-                line2: address.line2,
-                city: address.city,
-                countryCode: address.country,
-                postalCode: address.postalCode,
-                state: address.state,
-                phone: address.phone
-              }
-            });
-          },
-
-          onApprove: function (data, actions) {
-            return paypalCheckoutInstance
-              .tokenizePayment(data)
-              .then(function (payload) {
-                // Submit `payload.nonce` to your server
-                alert(payload.nonce);
-                console.log(payload.nonce);
-              });
-          },
-
-          onCancel: function (data) {
-            console.log(
-              "PayPal payment cancelled",
-              JSON.stringify(data, 0, 2)
-            );
-          },
-
-          onError: function (err) {
-            console.error("PayPal error", err);
-          }
-        })
-        .render("#paypal-button");
-    })
-    .then(function () {
-      // The PayPal button will be rendered in an html element with the ID
-      // `paypal-button`. This function will be called when the PayPal button
-      // is set up and ready to be used
-    })
-    .catch(function (err) {
-      // Handle component creation error
-    });
-};
