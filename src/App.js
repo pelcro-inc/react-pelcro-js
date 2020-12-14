@@ -54,6 +54,16 @@ class App extends Component {
       "pelcro-sdk-stripe-id"
     );
 
+    window.Pelcro.helpers.loadSDK(
+      "https://js.braintreegateway.com/web/3.69.0/js/client.min.js",
+      "braintree-sdk"
+    );
+
+    window.Pelcro.helpers.loadSDK(
+      "https://js.braintreegateway.com/web/3.69.0/js/paypal-checkout.min.js",
+      "braintree-paypal-sdk"
+    );
+
     initButtons(this);
   }
 
@@ -80,6 +90,7 @@ class App extends Component {
       this.displayLoginView();
       return true;
     } else if (view === "select") {
+      this.setProductAndPlanFromUrl();
       this.displaySelectView();
       return true;
     } else if (view === "redeem") {
@@ -109,6 +120,30 @@ class App extends Component {
     } else {
       return false;
     }
+  };
+
+  setProductAndPlanFromUrl = () => {
+    const productsList = window.Pelcro.product.list();
+    if (!productsList?.length) return;
+
+    const [productId, planId, isGift] = [
+      window.Pelcro.helpers.getURLParameter("product_id"),
+      window.Pelcro.helpers.getURLParameter("plan_id"),
+      window.Pelcro.helpers.getURLParameter("is_gift")
+    ];
+
+    const selectedProduct = productsList.find(
+      (product) => product.id === Number(productId)
+    );
+    const selectedPlan = selectedProduct?.plans?.find(
+      (plan) => plan.id === Number(planId)
+    );
+
+    this.setProductAndPlan(
+      selectedProduct,
+      selectedPlan,
+      Boolean(isGift)
+    );
   };
 
   // displays required view
@@ -203,6 +238,7 @@ class App extends Component {
 
   displaySelectView = () => {
     this.setState({ subscriptionIdToRenew: null });
+    if (!window.Pelcro.site.read().products) return;
     this.setView("select");
   };
 
