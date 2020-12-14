@@ -52,7 +52,9 @@ export const PaypalSubscribeButton = (props) => {
       paypalCheckoutInstance.render();
     };
 
-    initializePaypal();
+    if (PaypalClient.isPaypalEnabled()) {
+      initializePaypal();
+    }
   }, []);
 
   return <div id="pelcro-paypal-button"></div>;

@@ -12,6 +12,12 @@ import { getUserLatestAddress } from "../../utils/utils";
  */
 export class PaypalClient {
   /**
+   * @static
+   * @return {boolean}
+   */
+  static isPaypalEnabled = () => Boolean(this.braintreeToken);
+
+  /**
    * Paypal client constructor
    * @param {paypalConstructorOptions} paypalClientConfig
    */
@@ -21,7 +27,7 @@ export class PaypalClient {
     this.product = null;
     this.config = paypalClientConfig;
     this.braintreeToken = window.Pelcro.site.read().braintree_tokenization;
-    this.isPaypalEnabled = Boolean(this.braintreeToken);
+    this.isPaypalEnabled = PaypalClient.isPaypalEnabled();
   }
 
   /**
