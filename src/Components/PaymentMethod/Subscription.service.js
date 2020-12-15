@@ -216,8 +216,7 @@ export class StripeGateway {
 
     window.Pelcro.subscription.renew(
       {
-        gateway_token: token,
-        payment_gateway: this.#paymentGateway,
+        stripe_token: token,
         auth_token: window.Pelcro.user.read().auth_token,
         plan_id: plan.id,
         coupon_code: couponCode,
@@ -248,8 +247,7 @@ export class StripeGateway {
 
     window.Pelcro.subscription.renewGift(
       {
-        gateway_token: token,
-        payment_gateway: this.#paymentGateway,
+        stripe_token: token,
         auth_token: window.Pelcro.user.read().auth_token,
         plan_id: plan.id,
         coupon_code: couponCode,
