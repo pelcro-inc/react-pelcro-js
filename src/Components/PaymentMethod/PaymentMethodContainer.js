@@ -35,6 +35,7 @@ import {
 } from "../../utils/showing-error";
 import {
   Subscription,
+  PaypalGateWay,
   SUBSCRIPTION_TYPES
 } from "./Subscription.service";
 
@@ -299,57 +300,11 @@ const PaymentMethodContainerWithoutStripe = ({
    * @return {void}
    */
   const handlePaypalSubscription = (paypalNonce) => {
-    const subscription = new Subscription("paypal");
+    const subscription = new Subscription(new PaypalGateWay());
 
     /**
      * @TODO: Add flags for types instead of testing by properties
      */
-    if (isRenewingGift && subscriptionIdToRenew) {
-      return subscription.execute(
-        {
-          type: SUBSCRIPTION_TYPES.RENEW_GIFTED_SUBSCRIPTION,
-          token: paypalNonce,
-          subscriptionIdToRenew,
-          plan,
-          couponCode
-        },
-
-        (err, res) => {
-          dispatch({ type: DISABLE_SUBMIT, payload: false });
-
-          if (err) {
-            onFailure(err);
-            return displayError(getErrorMessages(err));
-          }
-
-          onGiftRenewalSuccess(res);
-        }
-      );
-    }
-
-    if (subscriptionIdToRenew) {
-      return subscription.execute(
-        {
-          type: SUBSCRIPTION_TYPES.RENEW_SUBSCRIPTION,
-          token: paypalNonce,
-          subscriptionIdToRenew,
-          plan,
-          couponCode,
-          product
-        },
-
-        (err, res) => {
-          dispatch({ type: DISABLE_SUBMIT, payload: false });
-
-          if (err) {
-            onFailure(err);
-            return displayError(getErrorMessages(err));
-          }
-
-          onSuccess(res);
-        }
-      );
-    }
 
     if (giftRecipient) {
       return subscription.execute(
@@ -388,10 +343,7 @@ const PaymentMethodContainerWithoutStripe = ({
 
         if (err) {
           onFailure(err);
-          return showError(
-            getErrorMessages(err),
-            "pelcro-error-payment"
-          );
+          return displayError(getErrorMessages(err));
         }
 
         onSuccess(res);

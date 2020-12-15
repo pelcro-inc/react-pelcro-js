@@ -20,15 +20,15 @@ import { getUserLatestAddress } from "../../utils/utils";
 export class Subscription {
   /**
    * Subscription service  constructor
-   * @param {("paypal"|"stripe")} paymentGateway
+   * @param {(StripeGateway|PaypalGateWay)} paymentGateway
    */
   constructor(paymentGateway) {
-    const PAYMENT_GATEWAYS_ENUM = {
-      stripe: "stripe",
-      paypal: "braintree"
-    };
-
-    this.paymentGateway = PAYMENT_GATEWAYS_ENUM[paymentGateway];
+    if (this.#isPaymentGatewayInvalid(paymentGateway)) {
+      this.paymentGateway = null;
+      console.error("Incompatible subscription gateway");
+    } else {
+      this.paymentGateway = paymentGateway;
+    }
   }
 
   /**
@@ -66,6 +66,59 @@ export class Subscription {
       return console.error("No subscription type provided");
     }
 
+    // delegate execution to paymentgateway
+    return this.paymentGateway.execute(options, callback);
+  };
+
+  /**
+   * Check if payment gateway is valid
+   * @param {any} gateway
+   * @return {boolean}
+   */
+  #isPaymentGatewayInvalid = (gateway) => {
+    return (
+      gateway &&
+      !(gateway instanceof StripeGateway) &&
+      gateway &&
+      !(gateway instanceof PaypalGateWay)
+    );
+  };
+
+  /**
+   * Generates a generic error for payment modal
+   * @return {Object} error object
+   */
+  #generateUserError = () => {
+    return {
+      error: new Error(
+        "An error has occured in the subscription service, please try again later"
+      )
+    };
+  };
+}
+
+const PAYMENT_GATEWAYS_ENUM = {
+  stripe: "stripe",
+  paypal: "braintree"
+};
+
+/**
+ * Subscription Strategies
+ */
+
+/**
+ * Stripe gateway strategy
+ */
+export class StripeGateway {
+  #paymentGateway = PAYMENT_GATEWAYS_ENUM["stripe"];
+
+  /**
+   * Subscription execution method
+   * @param {subscriptionOptions} options subscription options
+   * @param {executeCallback} callback
+   * @return {void}
+   */
+  execute = (options, callback) => {
     const types = SUBSCRIPTION_TYPES;
 
     switch (options.type) {
@@ -79,7 +132,9 @@ export class Subscription {
         return this.#renewGiftedSubscription(options, callback);
 
       default:
-        console.error("Invalid subscription type given");
+        console.error(
+          "Unsupported subscriptiion method: Stripe Gateway"
+        );
     }
   };
 
@@ -95,7 +150,7 @@ export class Subscription {
     window.Pelcro.subscription.create(
       {
         gateway_token: token,
-        payment_gateway: this.paymentGateway,
+        payment_gateway: this.#paymentGateway,
         auth_token: window.Pelcro.user.read().auth_token,
         plan_id: plan.id,
         coupon_code: couponCode,
@@ -127,7 +182,7 @@ export class Subscription {
     window.Pelcro.subscription.create(
       {
         gateway_token: token,
-        payment_gateway: this.paymentGateway,
+        payment_gateway: this.#paymentGateway,
         auth_token: window.Pelcro.user.read().auth_token,
         plan_id: plan.id,
         coupon_code: couponCode,
@@ -162,7 +217,7 @@ export class Subscription {
     window.Pelcro.subscription.renew(
       {
         gateway_token: token,
-        payment_gateway: this.paymentGateway,
+        payment_gateway: this.#paymentGateway,
         auth_token: window.Pelcro.user.read().auth_token,
         plan_id: plan.id,
         coupon_code: couponCode,
@@ -194,7 +249,7 @@ export class Subscription {
     window.Pelcro.subscription.renewGift(
       {
         gateway_token: token,
-        payment_gateway: this.paymentGateway,
+        payment_gateway: this.#paymentGateway,
         auth_token: window.Pelcro.user.read().auth_token,
         plan_id: plan.id,
         coupon_code: couponCode,
@@ -205,16 +260,94 @@ export class Subscription {
       }
     );
   };
+}
+
+/**
+ * Paypal gateway strategy
+ */
+export class PaypalGateWay {
+  #paymentGateway = PAYMENT_GATEWAYS_ENUM["paypal"];
 
   /**
-   * Generates a generic error for payment modal
-   * @return {Object} error object
+   * Subscription execution method
+   * @param {subscriptionOptions} options subscription options
+   * @param {executeCallback} callback
+   * @return {void}
    */
-  #generateUserError = () => {
-    return {
-      error: new Error(
-        "An error has occured in the subscription service, please try again later"
-      )
-    };
+  execute = (options, callback) => {
+    const types = SUBSCRIPTION_TYPES;
+
+    switch (options.type) {
+      case types.CREATE_SUBSCRIPTION:
+        return this.#createSubscription(options, callback);
+      case types.CREATE_GIFTED_SUBSCRIPTION:
+        return this.#createGiftedSubscription(options, callback);
+
+      default:
+        console.error(
+          "Unsupported subscriptiion method: PayPal Gateway"
+        );
+    }
+  };
+
+  /**
+   * Create a new subscription
+   * @param {subscriptionOptions} options subscription options
+   * @param {executeCallback} callback
+   * @return {void}
+   */
+  #createSubscription = (options, callback) => {
+    const { token, plan, couponCode, product } = options;
+
+    window.Pelcro.subscription.create(
+      {
+        gateway_token: token,
+        payment_gateway: this.#paymentGateway,
+        auth_token: window.Pelcro.user.read().auth_token,
+        plan_id: plan.id,
+        coupon_code: couponCode,
+        address_id: product.address_required
+          ? getUserLatestAddress().id
+          : null
+      },
+      (err, res) => {
+        callback(err, res);
+      }
+    );
+  };
+
+  /**
+   * Create a new gifted subscription
+   * @param {subscriptionOptions} options subscription options
+   * @param {executeCallback} callback
+   * @return {void}
+   */
+  #createGiftedSubscription = (options, callback) => {
+    const {
+      token,
+      plan,
+      couponCode,
+      product,
+      giftRecipient
+    } = options;
+
+    window.Pelcro.subscription.create(
+      {
+        gateway_token: token,
+        payment_gateway: this.#paymentGateway,
+        auth_token: window.Pelcro.user.read().auth_token,
+        plan_id: plan.id,
+        coupon_code: couponCode,
+        gift_recipient_email: giftRecipient.email,
+        gift_recipient_first_name: giftRecipient?.firstName,
+        gift_recipient_last_name: giftRecipient?.lastName,
+        address_id: product.address_required
+          ? getUserLatestAddress().id
+          : null
+      },
+      (err, res) => {
+        callback(err, res);
+      }
+    );
   };
 }
