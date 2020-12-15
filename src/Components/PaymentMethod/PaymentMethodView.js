@@ -7,7 +7,6 @@ import { DiscountedPrice } from "./DiscountedPrice";
 import { PaymentMethodContainer } from "./PaymentMethodContainer";
 import { SubmitPaymentMethod } from "./SubmitPaymentMethod";
 import { CouponCode } from "./CouponCode";
-import { PaypalSubscribeButton } from "../PaypalCheckout/PaypalSubscribe.button";
 
 export function PaymentMethodView({
   couponCode,
@@ -82,11 +81,6 @@ export function PaymentMethodView({
             <DiscountedPrice />
 
             <SubmitPaymentMethod name={t("labels.submit")} />
-
-            {/* Render only on subscription views */}
-            {type === "createPayment" && (
-              <PaypalSubscribeButton product={product} plan={plan} />
-            )}
           </div>
         </div>
       </div>
