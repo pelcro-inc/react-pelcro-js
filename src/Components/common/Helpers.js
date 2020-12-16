@@ -1,10 +1,11 @@
 /**
  * Extracts error message from the response error object
  * @param {Object} error Error object
+ * @return {string}
  */
 export const getErrorMessages = (error) => {
   if (error?.error?.message) {
-    return error.message;
+    return error.error.message;
   }
 
   if (error?.response?.data?.error?.message) {

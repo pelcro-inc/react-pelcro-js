@@ -10,6 +10,7 @@ import { DiscountedPrice } from "../PaymentMethod/DiscountedPrice";
 import { SubscriptionCreateContainer } from "./SubscriptionCreateContainer";
 import { SubmitPaymentMethod } from "../PaymentMethod/SubmitPaymentMethod";
 import { CouponCode } from "../PaymentMethod/CouponCode";
+import { PaypalSubscribeButton } from "../PaypalButtons/PaypalSubscribeButton";
 
 export const SubscriptionCreateView = ({
   product,
@@ -110,6 +111,11 @@ export const SubscriptionCreateView = ({
                   <SubmitPaymentMethod name={t("labels.submit")} />
 
                   <PelcroPaymentRequestButton />
+
+                  <PaypalSubscribeButton
+                    product={product}
+                    plan={plan}
+                  />
                 </div>
               </div>
             </div>

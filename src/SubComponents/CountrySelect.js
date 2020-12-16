@@ -12,7 +12,6 @@ export function CountrySelect({
   placeholder = "",
   style,
   className,
-  id,
   store,
   ...otherProps
 }) {
