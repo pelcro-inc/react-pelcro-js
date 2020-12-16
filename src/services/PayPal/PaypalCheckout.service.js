@@ -113,10 +113,7 @@ export class PaypalClient {
       },
       // payment approved callback
       onApprove: (data) => {
-        this.#onPaymentApprove(
-          data,
-          options?.onPaymentApprove?.(data)
-        );
+        this.#onPaymentApprove(data, options?.onPaymentApprove);
       },
       // payment canceled callback
       onCancel: (data) => {
