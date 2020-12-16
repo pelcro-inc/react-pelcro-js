@@ -5,7 +5,7 @@ import {
   HANDLE_PAYPAL_SUBSCRIPTION,
   DISABLE_SUBMIT
 } from "../../utils/action-types";
-import { PaypalClient } from "./PaypalCheckout.service";
+import { PaypalClient } from "../../services/PayPal/PaypalCheckout.service";
 
 /**
  * PaypalSubscribeButton component

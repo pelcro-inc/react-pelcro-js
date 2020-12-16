@@ -10,7 +10,7 @@ import { DiscountedPrice } from "../PaymentMethod/DiscountedPrice";
 import { SubscriptionCreateContainer } from "./SubscriptionCreateContainer";
 import { SubmitPaymentMethod } from "../PaymentMethod/SubmitPaymentMethod";
 import { CouponCode } from "../PaymentMethod/CouponCode";
-import { PaypalSubscribeButton } from "../PaypalCheckout/PaypalSubscribeButton";
+import { PaypalSubscribeButton } from "../PaypalButtons/PaypalSubscribeButton";
 
 export const SubscriptionCreateView = ({
   product,
