@@ -37,7 +37,7 @@ import {
   Subscription,
   PaypalGateWay,
   SUBSCRIPTION_TYPES
-} from "./Subscription.service";
+} from "../../services/Subscription/Subscription.service";
 
 const initialState = {
   disableSubmit: false,
