@@ -32,6 +32,7 @@ import {
 
 import DashboardModal from "./Components/dashboard/Dashboard";
 import DashboardMenu from "./Components/dashboard/Menu";
+import { PaypalClient } from "./services/PayPal/PaypalCheckout.service";
 
 class App extends Component {
   constructor(props) {
@@ -49,13 +50,32 @@ class App extends Component {
 
     this.locale = getCurrentLocale();
 
+    this.loadPaymentSDKs();
+    initButtons(this);
+  }
+
+  loadPaymentSDKs = () => {
+    // Load stripe's SDK
     window.Pelcro.helpers.loadSDK(
       "https://js.stripe.com/v3/",
       "pelcro-sdk-stripe-id"
     );
 
-    initButtons(this);
-  }
+    // Load PayPal SDK's
+    document.addEventListener("PelcroSiteLoaded", () => {
+      if (PaypalClient.isPaypalEnabled()) {
+        window.Pelcro.helpers.loadSDK(
+          "https://js.braintreegateway.com/web/3.69.0/js/client.min.js",
+          "braintree-sdk"
+        );
+
+        window.Pelcro.helpers.loadSDK(
+          "https://js.braintreegateway.com/web/3.69.0/js/paypal-checkout.min.js",
+          "braintree-paypal-sdk"
+        );
+      }
+    });
+  };
 
   removeHTMLButton = (buttonClass) => {
     const elements = document.getElementsByClassName(buttonClass);
@@ -80,6 +100,7 @@ class App extends Component {
       this.displayLoginView();
       return true;
     } else if (view === "select") {
+      this.setProductAndPlanFromUrl();
       this.displaySelectView();
       return true;
     } else if (view === "redeem") {
@@ -109,6 +130,30 @@ class App extends Component {
     } else {
       return false;
     }
+  };
+
+  setProductAndPlanFromUrl = () => {
+    const productsList = window.Pelcro.product.list();
+    if (!productsList?.length) return;
+
+    const [productId, planId, isGift] = [
+      window.Pelcro.helpers.getURLParameter("product_id"),
+      window.Pelcro.helpers.getURLParameter("plan_id"),
+      window.Pelcro.helpers.getURLParameter("is_gift")
+    ];
+
+    const selectedProduct = productsList.find(
+      (product) => product.id === Number(productId)
+    );
+    const selectedPlan = selectedProduct?.plans?.find(
+      (plan) => plan.id === Number(planId)
+    );
+
+    this.setProductAndPlan(
+      selectedProduct,
+      selectedPlan,
+      Boolean(isGift)
+    );
   };
 
   // displays required view
@@ -203,6 +248,7 @@ class App extends Component {
 
   displaySelectView = () => {
     this.setState({ subscriptionIdToRenew: null });
+    if (!window.Pelcro.site.read().products) return;
     this.setView("select");
   };
 

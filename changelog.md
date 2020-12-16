@@ -8,7 +8,11 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ### Added
 
-- Add missing id selectors for QA requirements [PRIVATE]
+- Add missing id selectors for QA requirements. [PRIVATE]
+- Add PayPal checkout service to integrate paypal payment gateway. [PRIVATE]
+- Add subscription service class to contain all subscription business logic [PRIVATE]
+- Add new PaypalSubscribeButton component to pelcro-react-elements.
+- Add PaypalSubscribeButton to subscription modals
 
 ## [Released]
 
