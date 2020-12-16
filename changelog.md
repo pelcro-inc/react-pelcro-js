@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Unreleased]
 
+## [Released]
+
+## [2.9.9] - 2020-12-16
+
 ### Added
 
 - Add missing id selectors for QA requirements. [PRIVATE]
@@ -13,8 +17,6 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 - Add subscription service class to contain all subscription business logic [PRIVATE]
 - Add new PaypalSubscribeButton component to pelcro-react-elements.
 - Add PaypalSubscribeButton to subscription modals
-
-## [Released]
 
 ## [2.9.8] - 2020-12-03
 
