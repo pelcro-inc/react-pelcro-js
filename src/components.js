@@ -72,7 +72,7 @@ export { PelcroCardCVC } from "./SubComponents/PelcroCardCVC";
 export { PelcroCardExpiry } from "./SubComponents/PelcroCardExpiry";
 export { PelcroCardNumber } from "./SubComponents/PelcroCardNumber";
 export { PelcroPaymentRequestButton } from "./SubComponents/PelcroPaymentRequestButton";
-export { PaypalSubscribeButton } from "./Components/PaypalCheckout/PaypalSubscribe.button";
+export { PaypalSubscribeButton } from "./Components/PaypalCheckout/PaypalSubscribeButton";
 export { AddressUpdateContainer } from "./Components/AddressUpdate/AddressUpdateContainer";
 export { AddressUpdateCountrySelect } from "./Components/AddressUpdate/AddressUpdateCountrySelect";
 export { AddressUpdateFirstName } from "./Components/AddressUpdate/AddressUpdateFirstName";
