@@ -2,7 +2,7 @@ import React from "react";
 import Header from "../common/Header";
 import { CartView } from "./CartView";
 
-export const CartModal = props => {
+export const CartModal = (props) => {
   return (
     <div className="pelcro-prefix-view">
       <div
@@ -19,7 +19,7 @@ export const CartModal = props => {
           <div className="pelcro-prefix-modal-content">
             <Header
               closeButton={true}
-              resetView={() => props.setView("")}
+              resetView={props.resetView}
               site={window.Pelcro.site.read()}
             ></Header>
             <CartView {...props} />
