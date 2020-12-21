@@ -10,8 +10,8 @@
     "messages": {
         "loginTo": "Login to your account",
         "welcome": "Welcome back, sign in with your existing account.",
-        "dontHaveAccount": "Dont have an account yet?",
-        "createAccount": "Create account.",
+        "dontHaveAccount": "Don't have an account yet?",
+        "createAccount": "Create an account.",
         "forgotPassword": "Forgot your password?",
         "reset": {
             "click": "Click",
