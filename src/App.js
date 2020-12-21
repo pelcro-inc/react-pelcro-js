@@ -311,7 +311,7 @@ class App extends Component {
   getProducts = (products) => this.setState({ products });
 
   setOrder = (items) => {
-    const { order = {} } = this.state;
+    const order = this.state.order ?? {};
     order.items = items;
     this.setState({ order });
   };
