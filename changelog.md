@@ -8,6 +8,13 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Released]
 
+## [2.10.0] - 2020-12-23
+
+### Fixed
+
+- Cart modal not exiting.
+- Translation wording typo.
+
 ## [2.9.9] - 2020-12-16
 
 ### Added
