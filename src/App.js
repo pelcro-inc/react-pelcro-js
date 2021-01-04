@@ -665,7 +665,10 @@ class App extends Component {
           )}
 
           {this.state.view === "password-forgot" && (
-            <PasswordForgotModal resetView={this.resetView} />
+            <PasswordForgotModal
+              resetView={this.resetView}
+              setView={this.setView}
+            />
           )}
           {this.state.view === "password-reset" && (
             <PasswordResetModal resetView={this.resetView} />
