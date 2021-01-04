@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Unreleased]
 
+### Fixed
+
+- Login button not clickable in password forget modal.
+
 ## [Released]
 
 ## [2.9.9] - 2020-12-16
