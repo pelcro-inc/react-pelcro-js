@@ -499,6 +499,7 @@ class App extends Component {
           {this.state.view === "login" && (
             <LoginModal
               setView={this.setView}
+              resetView={this.resetView}
               onSuccess={() => {
                 this.setView("");
                 this.loggedIn();
@@ -509,6 +510,7 @@ class App extends Component {
             <RegisterModal
               product={this.state.product}
               setView={this.setView}
+              resetView={this.resetView}
               onDisplay={() => {
                 ReactGA.event({
                   category: "VIEWS",
@@ -523,6 +525,7 @@ class App extends Component {
           {this.state.view === "gift" && (
             <GiftCreateModal
               setView={this.setView}
+              resetView={this.resetView}
               onDisplay={() => {
                 ReactGA.event({
                   category: "VIEWS",
@@ -552,6 +555,7 @@ class App extends Component {
           {this.state.view === "redeem" && (
             <GiftRedeemModal
               setView={this.setView}
+              resetView={this.resetView}
               onDisplay={() => {
                 ReactGA.event({
                   category: "VIEWS",
@@ -676,7 +680,7 @@ class App extends Component {
 
           {this.state.view === "source-create" && (
             <PaymentMethodUpdateModal
-              setView={this.setView}
+              resetView={this.resetView}
               onDisplay={() => {
                 ReactGA.event({
                   category: "VIEWS",
@@ -687,15 +691,13 @@ class App extends Component {
               onFailure={(error) => {
                 console.log(error);
               }}
-              onSuccess={() => {
-                this.setView("");
-              }}
+              onSuccess={this.resetView}
             />
           )}
 
           {this.state.view === "user-edit" && (
             <UserUpdateModal
-              setView={this.setView}
+              resetView={this.resetView}
               onSuccess={() => console.log("User Updated")}
               onFailure={(error) => console.log(error)}
             />
@@ -714,7 +716,7 @@ class App extends Component {
           {this.state.view === "address-edit" && (
             <AddressUpdateModal
               addressId={this.state.addressId}
-              setView={this.setView}
+              resetView={this.resetView}
               onSuccess={() => null}
               onFailure={(error) => console.log(error)}
             />
@@ -747,6 +749,7 @@ class App extends Component {
             <OrderCreateModal
               order={this.state.order}
               setView={this.setView}
+              resetView={this.resetView}
               onDisplay={() => {
                 ReactGA.event({
                   category: "VIEWS",
