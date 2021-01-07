@@ -9,7 +9,7 @@ import Authorship from "../common/Authorship";
 
 import { LoginView } from "./LoginView";
 
-export function LoginModal({ setView, onSuccess, ...otherProps }) {
+export function LoginModal({ setView, resetView, onSuccess, ...otherProps }) {
   const { t } = useTranslation("login");
 
   const onCreateAccountClick = () => {
@@ -36,7 +36,7 @@ export function LoginModal({ setView, onSuccess, ...otherProps }) {
           <div className="pelcro-prefix-modal-content">
             <Header
               closeButton={window.Pelcro.paywall.displayCloseButton()}
-              resetView={() => setView("")}
+              resetView={resetView}
               site={window.Pelcro.site.read()}
             ></Header>
 
