@@ -12,10 +12,6 @@ import { LoginView } from "./LoginView";
 export function LoginModal({ setView, onSuccess, ...otherProps }) {
   const { t } = useTranslation("login");
 
-  const showError = (message) => {
-    showError(message, "pelcro-error-login");
-  };
-
   const onCreateAccountClick = () => {
     setView("select");
   };
