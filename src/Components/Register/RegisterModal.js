@@ -11,6 +11,7 @@ import { RegisterView } from "./RegisterView";
 export function RegisterModal({
   onSuccess,
   setView,
+  resetView,
   product,
   ...otherProps
 }) {
@@ -44,7 +45,7 @@ export function RegisterModal({
           >
             <Header
               closeButton={window.Pelcro.paywall.displayCloseButton()}
-              resetView={() => setView("")}
+              resetView={resetView}
               site={window.Pelcro.site.read()}
             ></Header>
             <div className="pelcro-prefix-modal-body">
