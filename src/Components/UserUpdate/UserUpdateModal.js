@@ -21,7 +21,7 @@ export function UserUpdateModal(props) {
           <div className="pelcro-prefix-modal-content">
             <Header
               closeButton={window.Pelcro.paywall.displayCloseButton()}
-              resetView={() => props.setView("")}
+              resetView={props.resetView}
               site={window.Pelcro.site.read()}
             ></Header>
             <div className="pelcro-prefix-modal-body">
