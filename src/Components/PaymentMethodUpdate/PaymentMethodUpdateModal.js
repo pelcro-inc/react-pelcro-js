@@ -3,13 +3,7 @@ import { PaymentMethodUpdateView } from "./PaymentMethodUpdateView";
 import Header from "../common/Header";
 import Authorship from "../common/Authorship";
 
-export const PaymentMethodUpdateModal = props => {
-  const [site, setSite] = useState({});
-
-  useEffect(() => {
-    setSite(window.Pelcro.site.read());
-  }, []);
-
+export const PaymentMethodUpdateModal = (props) => {
   return (
     <div className="pelcro-prefix-view">
       <div
@@ -26,8 +20,8 @@ export const PaymentMethodUpdateModal = props => {
           <div className="pelcro-prefix-modal-content">
             <Header
               closeButton={true}
-              resetView={() => props.setView("")}
-              site={site}
+              resetView={props.resetView}
+              site={window.Pelcro.site.read()}
             ></Header>
             <div className="pelcro-prefix-modal-body">
               <PaymentMethodUpdateView {...props} />
