@@ -40,20 +40,19 @@ import {
 } from "../../services/Subscription/Subscription.service";
 
 /**
- * @typedef {Object} PaymentState
+ * @typedef {Object} PaymentStateType
  * @property {boolean} disableSubmit
  * @property {boolean} disableCouponButton
  * @property {string} couponCode
  * @property {boolean} enableCouponField
  * @property {string} percentOff
- * @property {string} coupon
  * @property {unknown} canMakePayment
  * @property {unknown} paymentRequest
  * @property {string} formattedPrice
  * @property {object} order
  */
 
-/** @type {PaymentState} */
+/** @type {PaymentStateType} */
 const initialState = {
   disableSubmit: false,
   disableCouponButton: false,
@@ -312,7 +311,7 @@ const PaymentMethodContainerWithoutStripe = ({
 
   /**
    * Handles subscriptions from PayPal gateway
-   * @param {PaymentState} state
+   * @param {PaymentStateType} state
    * @param {string} paypalNonce
    * @return {void}
    */
