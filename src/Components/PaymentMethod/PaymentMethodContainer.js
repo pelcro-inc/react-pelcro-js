@@ -39,6 +39,21 @@ import {
   SUBSCRIPTION_TYPES
 } from "../../services/Subscription/Subscription.service";
 
+/**
+ * @typedef {Object} PaymentState
+ * @property {boolean} disableSubmit
+ * @property {boolean} disableCouponButton
+ * @property {string} couponCode
+ * @property {boolean} enableCouponField
+ * @property {string} percentOff
+ * @property {string} coupon
+ * @property {unknown} canMakePayment
+ * @property {unknown} paymentRequest
+ * @property {string} formattedPrice
+ * @property {object} order
+ */
+
+/** @type {PaymentState} */
 const initialState = {
   disableSubmit: false,
   disableCouponButton: false,
