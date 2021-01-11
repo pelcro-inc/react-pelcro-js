@@ -520,6 +520,22 @@ body.pelcro-prefix-modal-open {
     line-height: 1.5;
   }
 
+  .pelcro-prefix-payment_vendors {
+    display: grid;
+    row-gap: 0.4em;
+
+    .stripe-payment-request-btn {
+      background: transparent;
+      height: auto;
+      box-shadow: none;
+      padding: 0;
+    }
+
+    &:empty {
+      display: none;
+    }
+  }
+
   .pelcro-prefix-input,
   .StripeElement {
     height: 39px;

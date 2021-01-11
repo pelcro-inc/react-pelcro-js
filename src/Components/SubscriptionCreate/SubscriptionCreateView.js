@@ -110,12 +110,14 @@ export const SubscriptionCreateView = ({
 
                   <SubmitPaymentMethod name={t("labels.submit")} />
 
-                  <PelcroPaymentRequestButton />
+                  <div className="pelcro-prefix-payment_vendors ">
+                    <PelcroPaymentRequestButton />
 
-                  <PaypalSubscribeButton
-                    product={product}
-                    plan={plan}
-                  />
+                    <PaypalSubscribeButton
+                      product={product}
+                      plan={plan}
+                    />
+                  </div>
                 </div>
               </div>
             </div>
