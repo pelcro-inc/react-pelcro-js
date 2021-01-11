@@ -15,6 +15,7 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 - Login button not clickable in password forget modal.
 - Use reset view instead of an empty setView when exiting modals. [PRIVATE]
 - Styling conflict among payment vendors' buttons.
+- Coupon codes not being applied.
 
 ## [Released]
 
