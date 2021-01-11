@@ -6,12 +6,15 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Unreleased]
 
+### Added
+
 - Add missing update payment button selector. [private]
 
 ### Fixed
 
 - Login button not clickable in password forget modal.
 - Use reset view instead of an empty setView when exiting modals. [PRIVATE]
+- Styling conflict among payment vendors' buttons.
 
 ## [Released]
 
