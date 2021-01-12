@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 ### Added
 
 - Add missing update payment button selector. [private]
+- PayPal dynamic pricing.
 
 ### Fixed
 
