@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Unreleased]
 
+## [Released]
+
+## [2.10.1] - 2021-01-12
+
 ### Added
 
 - Add missing update payment button selector. [private]
@@ -18,8 +22,6 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 - Styling conflict among payment vendors' buttons.
 - Coupon codes not being applied.
 - Discount amount not displayed properly.
-
-## [Released]
 
 ## [2.10.0] - 2020-12-23
 
