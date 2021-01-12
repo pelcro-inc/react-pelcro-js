@@ -39,13 +39,26 @@ import {
   SUBSCRIPTION_TYPES
 } from "../../services/Subscription/Subscription.service";
 
+/**
+ * @typedef {Object} PaymentStateType
+ * @property {boolean} disableSubmit
+ * @property {boolean} disableCouponButton
+ * @property {string} couponCode
+ * @property {boolean} enableCouponField
+ * @property {string} percentOff
+ * @property {unknown} canMakePayment
+ * @property {unknown} paymentRequest
+ * @property {string} formattedPrice
+ * @property {object} order
+ */
+
+/** @type {PaymentStateType} */
 const initialState = {
   disableSubmit: false,
   disableCouponButton: false,
   couponCode: "",
   enableCouponField: false,
   percentOff: null,
-  coupon: null,
   canMakePayment: false,
   paymentRequest: null,
   formattedPrice: null,
@@ -76,7 +89,6 @@ const PaymentMethodContainerWithoutStripe = ({
   store,
   order = {},
   giftRecipient = null,
-  couponCode,
   onSuccess = () => {},
   onGiftRenewalSuccess = () => {},
   onFailure = () => {},
@@ -163,19 +175,21 @@ const PaymentMethodContainerWithoutStripe = ({
 
   const onApplyCouponCode = (state, dispatch) => {
     dispatch({ type: DISABLE_COUPON_BUTTON, payload: true });
-    const { couponCode } = state;
+    const { couponCode, canMakePayment } = state;
+
     if (couponCode) {
       window.Pelcro.order.create(
         {
           auth_token: window.Pelcro.user.read().auth_token,
           plan_id: plan.id,
-          coupon_code: state.couponCode
+          coupon_code: couponCode
         },
         (err, res) => {
           dispatch({ type: DISABLE_COUPON_BUTTON, payload: false });
 
           if (err) {
             dispatch({ type: SET_PERCENT_OFF, payload: "" });
+
             onFailure(err);
             return showError(
               getErrorMessages(err),
@@ -184,6 +198,7 @@ const PaymentMethodContainerWithoutStripe = ({
           } else {
             hideError("pelcro-error-payment");
           }
+
           dispatch({
             type: SET_PERCENT_OFF,
             payload: "Discounted price: $" + res.data.total
@@ -194,11 +209,9 @@ const PaymentMethodContainerWithoutStripe = ({
             payload: res.data.total
           });
 
-          if (state.canMakePayment) {
+          if (canMakePayment) {
             dispatch({ type: UPDATE_PAYMENT_REQUEST });
           }
-
-          dispatch({ type: SET_COUPON, payload: res.data.coupon });
         }
       );
     }
@@ -209,6 +222,8 @@ const PaymentMethodContainerWithoutStripe = ({
   ).current;
 
   const subscribe = (token, state, dispatch) => {
+    const { couponCode } = state;
+
     if (!subscriptionIdToRenew) {
       window.Pelcro.subscription.create(
         {
@@ -296,11 +311,13 @@ const PaymentMethodContainerWithoutStripe = ({
 
   /**
    * Handles subscriptions from PayPal gateway
+   * @param {PaymentStateType} state
    * @param {string} paypalNonce
    * @return {void}
    */
-  const handlePaypalSubscription = (paypalNonce) => {
+  const handlePaypalSubscription = (state, paypalNonce) => {
     const subscription = new Subscription(new PaypalGateWay());
+    const { couponCode } = state;
 
     /**
      * @TODO: Add flags for types instead of testing by properties
@@ -452,7 +469,7 @@ const PaymentMethodContainerWithoutStripe = ({
 
         case HANDLE_PAYPAL_SUBSCRIPTION:
           return UpdateWithSideEffect(state, () =>
-            handlePaypalSubscription(action.payload)
+            handlePaypalSubscription(state, action.payload)
           );
 
         case SET_FORMATTED_PRICE:
