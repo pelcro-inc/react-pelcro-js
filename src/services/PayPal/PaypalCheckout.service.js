@@ -1,4 +1,7 @@
-import { getUserLatestAddress } from "../../utils/utils";
+import {
+  getFormattedPriceByLocal,
+  getUserLatestAddress
+} from "../../utils/utils";
 
 /**
  * @typedef {Object} paypalConstructorOptions
@@ -26,6 +29,7 @@ export class PaypalClient {
     this.client = null;
     this.paypalButton = null;
     this.product = null;
+    this.amount = null;
     this.config = paypalClientConfig;
     this.braintreeToken = window.Pelcro.site.read().braintree_tokenization;
     this.isPaypalEnabled = PaypalClient.isPaypalEnabled();
@@ -65,6 +69,7 @@ export class PaypalClient {
   /**
    * @typedef {Object} paymentCreationOptions
    * @property {object} product e-commerce product / plan to checkout
+   * @property {number} amount optional amount (has higher precidence over "amount" in product object)
    * @property {() => void} onButtonClick paypal button click callback
    * @property {(data: object) => void} onPaymentApprove payment approved callback
    * @property {(data: object) => void} onPaymentCancel payment cancelled callback
@@ -89,9 +94,10 @@ export class PaypalClient {
       );
     }
 
+    this.siteInfo = window.Pelcro.site.read();
     this.product = options.product;
+    this.amount = options.amount;
 
-    const siteInfo = window.Pelcro.site.read();
     const defaultButtonStyle = {
       layout: "vertical",
       color: "gold",
@@ -102,7 +108,7 @@ export class PaypalClient {
     this.paypalButton = window.paypal.Buttons({
       fundingSource: window.paypal.FUNDING.PAYPAL,
       // button locale
-      locale: this.config.locale ?? siteInfo.default_locale,
+      locale: this.config.locale ?? this.siteInfo.default_locale,
       // button style
       style: this.config.style ?? defaultButtonStyle,
       // create payment handler
@@ -197,11 +203,9 @@ export class PaypalClient {
    * @return {object} payment options
    */
   #computePaymentOptions = () => {
-    const siteInfo = window.Pelcro.site.read();
-
     // get user's shipping address
     const address = getUserLatestAddress();
-    const billingWording = this.#getFormattedAmount(this.product);
+    const billingWording = this.#getFormattedAmount();
 
     return {
       flow: "vault",
@@ -226,23 +230,27 @@ export class PaypalClient {
         : undefined,
 
       shippingAddressEditable: this.config.shippingAddressEditable,
-      displayName: this.config.displayName ?? siteInfo.name,
-      locale: this.config.locale ?? siteInfo.default_locale
+      displayName: this.config.displayName ?? this.siteInfo.name,
+      locale: this.config.locale ?? this.siteInfo.default_locale
     };
   };
 
   /**
    * Returns formatted billing amount text to a product/plan
-   * @param {object} product pelcro product/plan
    * @return {string} formatted string
    * @example auto_renew === true => "CA$ 10.00 per 1 month"
    * @example auto_renew === false => "CA$ 10.00"
    */
-  #getFormattedAmount = (product) => {
-    const priceFormatted = product.amount_formatted;
-    const autoRenewed = product.auto_renew;
-    const { interval } = product;
-    const intervalCount = product.interval_count;
+  #getFormattedAmount = () => {
+    const priceFormatted = getFormattedPriceByLocal(
+      Number(this.amount),
+      this.product.currency,
+      this.siteInfo.default_locale
+    );
+
+    const autoRenewed = this.product.auto_renew;
+    const { interval, intervalCount } = this.product;
+
     const formattedInterval =
       intervalCount > 1
         ? `${intervalCount} ${interval}s`
