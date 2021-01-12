@@ -72,7 +72,7 @@ export const getCanonicalLocaleFormat = (localeName) =>
  * @param {string} currency
  * @param {string} locale
  * @return {string}
- * @example getFormattedPriceByLocal(10, 'en_US') => "$10.00"
+ * @example getFormattedPriceByLocal(10, 'USD', 'en-US') => "$10.00"
  */
 export const getFormattedPriceByLocal = (
   amount,
