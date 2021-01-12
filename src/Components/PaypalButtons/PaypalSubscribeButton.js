@@ -13,9 +13,12 @@ import { PaypalClient } from "../../services/PayPal/PaypalCheckout.service";
  * @return {JSX}
  */
 export const PaypalSubscribeButton = (props) => {
-  const { dispatch } = useContext(store);
+  const { dispatch, state } = useContext(store);
 
   useEffect(() => {
+    // sometimes, price is updated. eg. Coupon codes.
+    const updatedPrice = state.updatedPrice ?? props.plan.amount;
+
     // initialize paypal client, then render paypal button.
     const initializePaypal = async () => {
       const paypalCheckoutInstance = new PaypalClient({
@@ -34,6 +37,7 @@ export const PaypalSubscribeButton = (props) => {
       // Create paypal payment
       paypalCheckoutInstance.createPayment({
         product: props.plan,
+        amount: updatedPrice,
         onButtonClick: () => {
           dispatch({ type: DISABLE_SUBMIT, payload: true });
         },
@@ -55,7 +59,7 @@ export const PaypalSubscribeButton = (props) => {
     if (PaypalClient.isPaypalEnabled()) {
       initializePaypal();
     }
-  }, []);
+  }, [state.updatedPrice]);
 
   return <div id="pelcro-paypal-button"></div>;
 };

@@ -483,6 +483,7 @@ class Dashboard extends Component {
                       <div className="pelcro-prefix-dashboard-link">
                         <button
                           className="pelcro-prefix-link"
+                          id="pelcro-button-update-payment"
                           type="button"
                           onClick={this.displaySourceCreate}
                         >

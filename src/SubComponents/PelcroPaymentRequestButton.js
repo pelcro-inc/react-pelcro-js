@@ -10,6 +10,7 @@ export const PelcroPaymentRequestButton = (props) => {
   if (canMakePayment) {
     return (
       <PaymentRequestButtonElement
+        className="StripeElement stripe-payment-request-btn"
         paymentRequest={paymentRequest}
         style={{
           paymentRequestButton: {

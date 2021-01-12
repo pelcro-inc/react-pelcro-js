@@ -6,6 +6,19 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Unreleased]
 
+### Added
+
+- Add missing update payment button selector. [private]
+- PayPal dynamic pricing.
+
+### Fixed
+
+- Login button not clickable in password forget modal.
+- Use reset view instead of an empty setView when exiting modals. [PRIVATE]
+- Styling conflict among payment vendors' buttons.
+- Coupon codes not being applied.
+- Discount amount not displayed properly.
+
 ## [Released]
 
 ## [2.10.0] - 2020-12-23

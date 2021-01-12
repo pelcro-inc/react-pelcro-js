@@ -12,7 +12,7 @@ import useReducerWithSideEffects, {
 import {
   DISABLE_SUBMIT,
   CREATE_PAYMENT,
-  SET_FORMATTED_PRICE,
+  SET_UPDATED_PRICE,
   SUBMIT_PAYMENT,
   HANDLE_PAYPAL_SUBSCRIPTION,
   DISABLE_COUPON_BUTTON,
@@ -39,16 +39,29 @@ import {
   SUBSCRIPTION_TYPES
 } from "../../services/Subscription/Subscription.service";
 
+/**
+ * @typedef {Object} PaymentStateType
+ * @property {boolean} disableSubmit
+ * @property {boolean} disableCouponButton
+ * @property {string} couponCode
+ * @property {boolean} enableCouponField
+ * @property {string} percentOff
+ * @property {unknown} canMakePayment
+ * @property {unknown} paymentRequest
+ * @property {number} updatedPrice
+ * @property {object} order
+ */
+
+/** @type {PaymentStateType} */
 const initialState = {
   disableSubmit: false,
   disableCouponButton: false,
   couponCode: "",
   enableCouponField: false,
-  percentOff: null,
-  coupon: null,
+  percentOff: "",
   canMakePayment: false,
   paymentRequest: null,
-  formattedPrice: null,
+  updatedPrice: null,
   order: {}
 };
 const store = createContext(initialState);
@@ -76,7 +89,6 @@ const PaymentMethodContainerWithoutStripe = ({
   store,
   order = {},
   giftRecipient = null,
-  couponCode,
   onSuccess = () => {},
   onGiftRenewalSuccess = () => {},
   onFailure = () => {},
@@ -112,7 +124,7 @@ const PaymentMethodContainerWithoutStripe = ({
         currency: window.Pelcro.user.read().currency || "usd",
         total: {
           label: plan.nickname || plan.description,
-          amount: state.formattedPrice || plan.amount
+          amount: state.updatedPrice || plan.amount
         }
       });
 
@@ -163,19 +175,21 @@ const PaymentMethodContainerWithoutStripe = ({
 
   const onApplyCouponCode = (state, dispatch) => {
     dispatch({ type: DISABLE_COUPON_BUTTON, payload: true });
-    const { couponCode } = state;
+    const { couponCode, canMakePayment } = state;
+
     if (couponCode) {
       window.Pelcro.order.create(
         {
           auth_token: window.Pelcro.user.read().auth_token,
           plan_id: plan.id,
-          coupon_code: state.couponCode
+          coupon_code: couponCode
         },
         (err, res) => {
           dispatch({ type: DISABLE_COUPON_BUTTON, payload: false });
 
           if (err) {
             dispatch({ type: SET_PERCENT_OFF, payload: "" });
+
             onFailure(err);
             return showError(
               getErrorMessages(err),
@@ -184,21 +198,20 @@ const PaymentMethodContainerWithoutStripe = ({
           } else {
             hideError("pelcro-error-payment");
           }
+
           dispatch({
             type: SET_PERCENT_OFF,
-            payload: "Discounted price: $" + res.data.total
+            payload: `${res.data.coupon?.percent_off}%`
           });
 
           dispatch({
-            type: SET_FORMATTED_PRICE,
+            type: SET_UPDATED_PRICE,
             payload: res.data.total
           });
 
-          if (state.canMakePayment) {
+          if (canMakePayment) {
             dispatch({ type: UPDATE_PAYMENT_REQUEST });
           }
-
-          dispatch({ type: SET_COUPON, payload: res.data.coupon });
         }
       );
     }
@@ -209,6 +222,8 @@ const PaymentMethodContainerWithoutStripe = ({
   ).current;
 
   const subscribe = (token, state, dispatch) => {
+    const { couponCode } = state;
+
     if (!subscriptionIdToRenew) {
       window.Pelcro.subscription.create(
         {
@@ -296,11 +311,13 @@ const PaymentMethodContainerWithoutStripe = ({
 
   /**
    * Handles subscriptions from PayPal gateway
+   * @param {PaymentStateType} state
    * @param {string} paypalNonce
    * @return {void}
    */
-  const handlePaypalSubscription = (paypalNonce) => {
+  const handlePaypalSubscription = (state, paypalNonce) => {
     const subscription = new Subscription(new PaypalGateWay());
+    const { couponCode } = state;
 
     /**
      * @TODO: Add flags for types instead of testing by properties
@@ -386,7 +403,7 @@ const PaymentMethodContainerWithoutStripe = ({
     state.paymentRequest.update({
       total: {
         label: plan.nickname || plan.description,
-        amount: state.formattedPrice
+        amount: state.updatedPrice
       }
     });
   };
@@ -452,11 +469,11 @@ const PaymentMethodContainerWithoutStripe = ({
 
         case HANDLE_PAYPAL_SUBSCRIPTION:
           return UpdateWithSideEffect(state, () =>
-            handlePaypalSubscription(action.payload)
+            handlePaypalSubscription(state, action.payload)
           );
 
-        case SET_FORMATTED_PRICE:
-          return Update({ ...state, formattedPrice: action.payload });
+        case SET_UPDATED_PRICE:
+          return Update({ ...state, updatedPrice: action.payload });
 
         case SET_CAN_MAKE_PAYMENT:
           return Update({ ...state, canMakePayment: action.payload });

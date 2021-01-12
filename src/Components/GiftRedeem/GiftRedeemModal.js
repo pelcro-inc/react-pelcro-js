@@ -22,7 +22,7 @@ export const GiftRedeemModal = (props) => {
           >
             <Header
               closeButton={window.Pelcro.paywall.displayCloseButton()}
-              resetView={() => props.setView("")}
+              resetView={props.resetView}
               site={window.Pelcro.site.read()}
             ></Header>
             <div className="pelcro-prefix-modal-body">
