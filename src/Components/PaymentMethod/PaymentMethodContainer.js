@@ -12,7 +12,7 @@ import useReducerWithSideEffects, {
 import {
   DISABLE_SUBMIT,
   CREATE_PAYMENT,
-  SET_FORMATTED_PRICE,
+  SET_UPDATED_PRICE,
   SUBMIT_PAYMENT,
   HANDLE_PAYPAL_SUBSCRIPTION,
   DISABLE_COUPON_BUTTON,
@@ -48,7 +48,7 @@ import {
  * @property {string} percentOff
  * @property {unknown} canMakePayment
  * @property {unknown} paymentRequest
- * @property {string} formattedPrice
+ * @property {number} updatedPrice
  * @property {object} order
  */
 
@@ -58,10 +58,10 @@ const initialState = {
   disableCouponButton: false,
   couponCode: "",
   enableCouponField: false,
-  percentOff: null,
+  percentOff: "",
   canMakePayment: false,
   paymentRequest: null,
-  formattedPrice: null,
+  updatedPrice: null,
   order: {}
 };
 const store = createContext(initialState);
@@ -124,7 +124,7 @@ const PaymentMethodContainerWithoutStripe = ({
         currency: window.Pelcro.user.read().currency || "usd",
         total: {
           label: plan.nickname || plan.description,
-          amount: state.formattedPrice || plan.amount
+          amount: state.updatedPrice || plan.amount
         }
       });
 
@@ -201,11 +201,11 @@ const PaymentMethodContainerWithoutStripe = ({
 
           dispatch({
             type: SET_PERCENT_OFF,
-            payload: "Discounted price: $" + res.data.total
+            payload: `${res.data.coupon?.percent_off}%`
           });
 
           dispatch({
-            type: SET_FORMATTED_PRICE,
+            type: SET_UPDATED_PRICE,
             payload: res.data.total
           });
 
@@ -403,7 +403,7 @@ const PaymentMethodContainerWithoutStripe = ({
     state.paymentRequest.update({
       total: {
         label: plan.nickname || plan.description,
-        amount: state.formattedPrice
+        amount: state.updatedPrice
       }
     });
   };
@@ -472,8 +472,8 @@ const PaymentMethodContainerWithoutStripe = ({
             handlePaypalSubscription(state, action.payload)
           );
 
-        case SET_FORMATTED_PRICE:
-          return Update({ ...state, formattedPrice: action.payload });
+        case SET_UPDATED_PRICE:
+          return Update({ ...state, updatedPrice: action.payload });
 
         case SET_CAN_MAKE_PAYMENT:
           return Update({ ...state, canMakePayment: action.payload });
