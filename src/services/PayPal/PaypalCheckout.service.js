@@ -243,7 +243,7 @@ export class PaypalClient {
    */
   #getFormattedAmount = () => {
     const priceFormatted = getFormattedPriceByLocal(
-      Number(this.amount),
+      this.amount,
       this.product.currency,
       this.siteInfo.default_locale
     );
