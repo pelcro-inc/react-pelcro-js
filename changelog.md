@@ -16,6 +16,7 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 - Use reset view instead of an empty setView when exiting modals. [PRIVATE]
 - Styling conflict among payment vendors' buttons.
 - Coupon codes not being applied.
+- Discount amount not displayed properly.
 
 ## [Released]
 

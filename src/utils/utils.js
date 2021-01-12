@@ -55,3 +55,37 @@ export const getUserLatestAddress = () => {
   const addressesLength = window.Pelcro.address.list()?.length;
   return window.Pelcro.address.list()?.[addressesLength - 1];
 };
+
+/**
+ * Transforms locale names stored in our backend like
+ * "en_US" into the standerd accepted in core i18n methods: "en-US"
+ * @param {string} localeName
+ * @return {string}
+ * @example getCanonicalLocaleFormat("en_US") => "en-US"
+ */
+export const getCanonicalLocaleFormat = (localeName) =>
+  localeName.replace("_", "-");
+
+/**
+ * Returns a formatted price string depending on locale
+ * @param {number} amount
+ * @param {string} currency
+ * @param {string} locale
+ * @return {string}
+ * @example getFormattedPriceByLocal(10, 'USD', 'en-US') => "$10.00"
+ */
+export const getFormattedPriceByLocal = (
+  amount,
+  currency = "USD",
+  locale = "en-US"
+) => {
+  const formatter = new Intl.NumberFormat(
+    getCanonicalLocaleFormat(locale),
+    {
+      style: "currency",
+      currency
+    }
+  );
+
+  return formatter.format(amount / 100);
+};
