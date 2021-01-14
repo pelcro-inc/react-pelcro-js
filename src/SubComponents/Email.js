@@ -10,6 +10,7 @@ import { SET_EMAIL, SET_EMAIL_ERROR } from "../utils/action-types";
  *
  */
 export function Email({
+  initWithUserEmail = true,
   placeholder,
   style,
   className,
@@ -61,18 +62,21 @@ export function Email({
   };
 
   useEffect(() => {
-    document.addEventListener("PelcroUserLoaded", () => {
+    if (initWithUserEmail) {
+      document.addEventListener("PelcroUserLoaded", () => {
+        loadEmailIntoField();
+      });
       loadEmailIntoField();
-    });
-    loadEmailIntoField();
 
-    return () => {
-      document.removeEventListener(
-        "PelcroUserLoaded",
-        handleInputChange
-      );
-    };
+      return () => {
+        document.removeEventListener(
+          "PelcroUserLoaded",
+          handleInputChange
+        );
+      };
+    }
   }, []);
+
   const validateEmail = (email) => {
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
