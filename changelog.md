@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Unreleased]
 
+### Fixed
+
+- Remove coupon field from e-commerce flow.
+
 ## [Released]
 
 ## [2.10.1] - 2021-01-12
