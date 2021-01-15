@@ -6,8 +6,6 @@ import { PelcroCardNumber } from "../../SubComponents/PelcroCardNumber";
 import { PelcroCardCVC } from "../../SubComponents/PelcroCardCVC";
 import { PelcroCardExpiry } from "../../SubComponents/PelcroCardExpiry";
 import { AlertDanger } from "../Alerts/AlertDanger";
-import { CouponCode } from "../PaymentMethod/CouponCode";
-import { DiscountedPrice } from "../PaymentMethod/DiscountedPrice";
 
 export const OrderCreateView = (props) => {
   const { t } = useTranslation("checkoutForm");
@@ -18,7 +16,7 @@ export const OrderCreateView = (props) => {
         <h4>{tPayment("labels.checkout.title")}</h4>
       </div>
 
-      <AlertDanger name="payment" />
+      <AlertDanger name="payment-create" />
 
       <div className="pelcro-prefix-payment-block">
         <div className="pelcro-prefix-alert pelcro-prefix-alert-success">
