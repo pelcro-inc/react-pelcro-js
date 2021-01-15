@@ -72,9 +72,6 @@ export const OrderCreateView = (props) => {
                     * {t("labels.required")}
                   </small>
 
-                  <CouponCode showCoupon={true} />
-                  <DiscountedPrice />
-
                   <OrderCraeteSubmitButton
                     name={t("labels.submit")}
                   />
