@@ -91,7 +91,7 @@ export const CartView = (props) => {
                 <CartTotalPrice />
               </div>
             </div>
-            <CartSubmit />
+            <CartSubmit className="pelcro-prefix-btn" />
           </div>
         )}
       </div>
