@@ -60,7 +60,7 @@ const gitJokes = [
 const message = fs.readFileSync(process.argv[2], "utf8").trim();
 if (
   message.match(
-    /^\[(FEAT|TEST|CI\/CD|REFACTOR|STYLE|DOCS|FIX)\]+ .*/gm
+    /^\[(FEAT|TEST|CHORE|REFACTOR|STYLE|DOCS|FIX)\]+ .*/gm
   )
 ) {
   console.log(
@@ -94,7 +94,7 @@ if (
 
   console.log(
     "\x1b[31m",
-    "Please use a message that starts with [FEAT|TEST|CI/CD|REFACTOR|STYLE|DOCS|FIX]. And don't forget a space after",
+    "Please use a message that starts with [FEAT|TEST|CHORE|REFACTOR|STYLE|DOCS|FIX]. And don't forget a space after",
     "\x1b[0m"
   );
 
