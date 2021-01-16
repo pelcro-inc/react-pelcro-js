@@ -1774,6 +1774,8 @@ body.pelcro-prefix-modal-open {
     .remove-btn-icon {
       width: 15px;
       height: 15px;
+      // to let the parent button handle the click events
+      pointer-events: none;
     }
 
     .remove-btn {
