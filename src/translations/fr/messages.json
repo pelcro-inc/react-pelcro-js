@@ -1,18 +1,19 @@
 {
-    "alreadyHaveAccount": "Vous avez déjà un compte ?",
-    "createAccount": "Créer un compte",
-    "loginHere": "Connectez-vous ici",
-    "selectPlan": "Sélectionnez un autre plan ",
-    "here": "ici",
-    "iAgree": {
-        "iAgree": "J'accepte",
-        "terms": "les conditions d'utilisation",
-        "and": "et",
-        "privacy": "la politique de confidentialité."
-    },
-    "preferDisable": {
-        "click": "Cliquez",
-        "here": "ici",
-        "ifPrefer": "si vous préférez désactiver votre bloqueur de publicités."
-    }
+  "youAreSafe": "Vous êtes en sécurité - PCI conforme 128 SSL par",
+  "haveQuestion": "Des questions?",
+  "visitOurWebsite": {
+    "visitTo": "Visitez notre site Web pour",
+    "learnMore": "en savoir plus"
+  },
+  "visitOurFaq": {
+    "visitOur": "Visitez notre",
+    "faq": "FAQ"
+  },
+  "cancel": "Annuler votre abonnement en ligne à tout moment.",
+  "logout": {
+    "logout": "Déconnexion",
+    "here": "ici"
+  },
+  "giftSent": "Le cadeau d'abonnement a été envoyé à",
+  "successfully": "avec succès."
 }
