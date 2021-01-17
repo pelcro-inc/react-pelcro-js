@@ -757,9 +757,9 @@ class App extends Component {
                   nonInteraction: true
                 });
               }}
-              onSuccess={(res) => {
+              onSuccess={() => {
+                this.setOrder(null);
                 this.setView("confirm");
-                console.log(res);
               }}
               onFailure={(err) => console.log(err)}
             />
