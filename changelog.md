@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 ### Added
 
 - Add optional initWithUserEmail prop to Email sub-component.
+- Allow leaving card info empty when plan is free.
 
 ### Fixed
 

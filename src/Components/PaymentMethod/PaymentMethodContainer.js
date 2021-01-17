@@ -405,6 +405,18 @@ const PaymentMethodContainerWithoutStripe = ({
   const submitPayment = (state, dispatch) => {
     return stripe.createToken().then(({ token, error }) => {
       if (error) {
+        if (
+          error.type === "validation_error" &&
+          // Subscription creation & renewal
+          type === "createPayment"
+        ) {
+          const { updatedPrice } = state;
+          // When price is 0, we allow submitting without card info
+          if (updatedPrice === 0) {
+            return subscribe({}, state, dispatch);
+          }
+        }
+
         onFailure(error);
         displayError(error?.message);
         dispatch({ type: DISABLE_SUBMIT, payload: false });
