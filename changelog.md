@@ -16,6 +16,7 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 - Remove coupon field from e-commerce flow.
 - Use same error elements' names for payment modals.
 - Re-enable submit when e-commerce checkout fails.
+- Reset cart items after succesful order.
 
 ## [Released]
 
