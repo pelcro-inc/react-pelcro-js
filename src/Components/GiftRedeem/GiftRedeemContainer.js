@@ -1,4 +1,5 @@
 import React, { createContext, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import useReducerWithSideEffects, {
   UpdateWithSideEffect,
   Update
@@ -25,6 +26,8 @@ const GiftRedeemContainer = ({
   onDisplay = () => {},
   children
 }) => {
+  const { t } = useTranslation("register");
+
   useEffect(() => {
     onDisplay();
   }, []);
@@ -33,7 +36,7 @@ const GiftRedeemContainer = ({
     if (!giftCode) {
       onFailure();
       return showError(
-        "Please enter a gift code.",
+        t("redeem.messages.enterGiftCode"),
         "pelcro-error-redeem"
       );
     }
