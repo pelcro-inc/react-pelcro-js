@@ -384,11 +384,15 @@ const PaymentMethodContainerWithoutStripe = ({
         ...(addressId && { address_id: addressId })
       },
       (err, res) => {
+        dispatch({ type: DISABLE_SUBMIT, payload: false });
+
         if (err) {
           onFailure(err);
           return displayError(getErrorMessages(err));
         }
 
+        // Reset cart products
+        window.Pelcro.cartProducts = [];
         onSuccess(res);
       }
     );
