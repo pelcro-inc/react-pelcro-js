@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Unreleased]
 
+## [Released]
+
+## [2.10.1] - 2021-01-18
+
 ### Added
 
 - Add optional initWithUserEmail prop to Email sub-component.
@@ -18,8 +22,6 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 - Use translation files instead of hardcoded strings for validation errors
 - Re-enable submit when e-commerce checkout fails.
 - Reset cart items after successful order.
-
-## [Released]
 
 ## [2.10.1] - 2021-01-12
 
