@@ -44,9 +44,6 @@ export const SubscriptionCreateView = ({
       <AlertDanger name="payment-create" />
       <AlertSuccess name="payment-create" />
 
-      <AlertDanger name="payment" />
-      <AlertSuccess name="payment" />
-
       <div className="pelcro-prefix-payment-block">
         <div className="pelcro-prefix-alert pelcro-prefix-alert-success">
           <div className="pelcro-prefix-payment-message">

@@ -56,6 +56,7 @@ export const CartRemoveProductButton = ({
     return useMemo(
       () => (
         <button
+          aria-label="remove item from cart"
           id={`cart-btn-for-${product.id}`}
           data-key={product.id}
           style={style}

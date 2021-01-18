@@ -38,6 +38,7 @@ import {
   PaypalGateWay,
   SUBSCRIPTION_TYPES
 } from "../../services/Subscription/Subscription.service";
+import { getCanonicalLocaleFormat } from "../../utils/utils";
 
 /**
  * @typedef {Object} PaymentStateType
@@ -69,6 +70,10 @@ const { Provider } = store;
 
 const displayError = (message) => {
   showError(message, "pelcro-error-payment-create");
+};
+
+const removeErrorElement = () => {
+  hideError("pelcro-error-payment-create");
 };
 
 const displaySuccess = (message) => {
@@ -151,7 +156,7 @@ const PaymentMethodContainerWithoutStripe = ({
     }
   };
 
-  const createPayment = (token, state, dispatch) => {
+  const updatePaymentSource = (token, state, dispatch) => {
     dispatch({ type: DISABLE_SUBMIT, payload: true });
     window.Pelcro.source.create(
       {
@@ -191,14 +196,10 @@ const PaymentMethodContainerWithoutStripe = ({
             dispatch({ type: SET_PERCENT_OFF, payload: "" });
 
             onFailure(err);
-            return showError(
-              getErrorMessages(err),
-              "pelcro-error-payment"
-            );
-          } else {
-            hideError("pelcro-error-payment");
+            return displayError(getErrorMessages(err));
           }
 
+          removeErrorElement();
           dispatch({
             type: SET_PERCENT_OFF,
             payload: `${res.data.coupon?.percent_off}%`
@@ -247,10 +248,7 @@ const PaymentMethodContainerWithoutStripe = ({
 
           if (err) {
             onFailure(err);
-            return showError(
-              getErrorMessages(err),
-              "pelcro-error-payment"
-            );
+            return displayError(getErrorMessages(err));
           }
 
           onSuccess(res);
@@ -386,14 +384,15 @@ const PaymentMethodContainerWithoutStripe = ({
         ...(addressId && { address_id: addressId })
       },
       (err, res) => {
+        dispatch({ type: DISABLE_SUBMIT, payload: false });
+
         if (err) {
           onFailure(err);
-          return showError(
-            getErrorMessages(err),
-            "pelcro-error-payment"
-          );
+          return displayError(getErrorMessages(err));
         }
 
+        // Reset cart products
+        window.Pelcro.cartProducts = [];
         onSuccess(res);
       }
     );
@@ -411,8 +410,20 @@ const PaymentMethodContainerWithoutStripe = ({
   const submitPayment = (state, dispatch) => {
     return stripe.createToken().then(({ token, error }) => {
       if (error) {
+        if (
+          error.type === "validation_error" &&
+          // Subscription creation & renewal
+          type === "createPayment"
+        ) {
+          const { updatedPrice } = state;
+          // When price is 0, we allow submitting without card info
+          if (updatedPrice === 0) {
+            return subscribe({}, state, dispatch);
+          }
+        }
+
         onFailure(error);
-        showError(error?.message, "pelcro-error-payment-create");
+        displayError(error?.message);
         dispatch({ type: DISABLE_SUBMIT, payload: false });
       } else if (token && type === "createPayment") {
         dispatch({ type: DISABLE_SUBMIT, payload: true });
@@ -421,7 +432,7 @@ const PaymentMethodContainerWithoutStripe = ({
         dispatch({ type: DISABLE_SUBMIT, payload: true });
         purchase(token, state, dispatch);
       } else if (token) {
-        createPayment(token, state, dispatch);
+        updatePaymentSource(token, state, dispatch);
       }
     });
   };
@@ -448,7 +459,7 @@ const PaymentMethodContainerWithoutStripe = ({
           return UpdateWithSideEffect(
             { ...state, disableSubmit: true },
             (state, dispatch) =>
-              createPayment(action.payload, state, dispatch)
+              updatePaymentSource(action.payload, state, dispatch)
           );
 
         case INIT_CONTAINER:
@@ -532,6 +543,9 @@ const PaymentMethodContainer = (props) => {
       <StripeProvider
         apiKey={window.Pelcro.environment.stripe}
         stripeAccount={window.Pelcro.site.read().account_id}
+        locale={getCanonicalLocaleFormat(
+          window.Pelcro.site.read().default_locale
+        )}
       >
         <Elements>
           <UnwrappedForm store={store} {...props} />

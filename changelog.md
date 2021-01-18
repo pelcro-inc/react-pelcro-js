@@ -6,6 +6,19 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Unreleased]
 
+### Added
+
+- Add optional initWithUserEmail prop to Email sub-component.
+- Allow leaving card info empty when plan is free.
+
+### Fixed
+
+- Remove coupon field from e-commerce flow.
+- Use same error elements' names for payment modals.
+- Use translation files instead of hardcoded strings for validation errors
+- Re-enable submit when e-commerce checkout fails.
+- Reset cart items after successful order.
+
 ## [Released]
 
 ## [2.10.1] - 2021-01-12

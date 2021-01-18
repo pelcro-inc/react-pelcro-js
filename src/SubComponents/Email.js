@@ -4,12 +4,15 @@ import React, {
   useEffect,
   useCallback
 } from "react";
+import { useTranslation } from "react-i18next";
 import { SET_EMAIL, SET_EMAIL_ERROR } from "../utils/action-types";
 
 /**
  *
  */
 export function Email({
+  initWithUserEmail = true,
+  disableEmailValidation,
   placeholder,
   style,
   className,
@@ -17,6 +20,8 @@ export function Email({
   store,
   ...otherProps
 }) {
+  const { t } = useTranslation("common");
+
   const {
     dispatch,
     state: { email: stateEmail, emailError }
@@ -28,23 +33,25 @@ export function Email({
     (value) => {
       setEmail(value);
 
-      if (otherProps.disableEmailValidation) {
-        dispatch({ type: SET_EMAIL, payload: email });
-      } else {
-        if (validateEmail(email)) {
-          dispatch({ type: SET_EMAIL, payload: email });
-        } else if (finishedTyping) {
-          if (email?.length) {
-            dispatch({
-              type: SET_EMAIL_ERROR,
-              payload: "Please enter a valid email."
-            });
-          } else {
-            dispatch({
-              type: SET_EMAIL_ERROR,
-              payload: "Email address is required."
-            });
-          }
+      if (disableEmailValidation) {
+        return dispatch({ type: SET_EMAIL, payload: email });
+      }
+
+      if (isEmailValid(email)) {
+        return dispatch({ type: SET_EMAIL, payload: email });
+      }
+
+      if (finishedTyping) {
+        if (email?.length) {
+          dispatch({
+            type: SET_EMAIL_ERROR,
+            payload: t("validation.validEmail")
+          });
+        } else {
+          dispatch({
+            type: SET_EMAIL_ERROR,
+            payload: t("validation.enterEmail")
+          });
         }
       }
     },
@@ -61,19 +68,22 @@ export function Email({
   };
 
   useEffect(() => {
-    document.addEventListener("PelcroUserLoaded", () => {
+    if (initWithUserEmail) {
+      document.addEventListener("PelcroUserLoaded", () => {
+        loadEmailIntoField();
+      });
       loadEmailIntoField();
-    });
-    loadEmailIntoField();
 
-    return () => {
-      document.removeEventListener(
-        "PelcroUserLoaded",
-        handleInputChange
-      );
-    };
+      return () => {
+        document.removeEventListener(
+          "PelcroUserLoaded",
+          handleInputChange
+        );
+      };
+    }
   }, []);
-  const validateEmail = (email) => {
+
+  const isEmailValid = (email) => {
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
   };
@@ -86,7 +96,7 @@ export function Email({
         style={{ ...style }}
         className={(emailError ? "input-error " : "") + className}
         value={
-          (otherProps?.disableEmailValidation
+          (disableEmailValidation
             ? stateEmail
             : email || stateEmail) ?? ""
         }

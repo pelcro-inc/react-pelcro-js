@@ -1,4 +1,9 @@
 {
+    "validation": {
+        "validEmail": "le courriel n'est pas valide",
+        "enterEmail": "Une courriel est requise.",
+        "enterPassword": "Mot de passe requis."
+    },
     "buttons": {
         "account": "Accès abonné(e)s",
         "login": "Se connecter"

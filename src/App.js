@@ -9,7 +9,6 @@ import {
   RegisterModal,
   PaymentMethodUpdateModal,
   SubscriptionCreateModal,
-  UserUpdateView,
   SubscriptionRenewModal,
   NewsLetter,
   PaymentSuccessModal,
@@ -30,29 +29,26 @@ import {
   GiftRedeemModal
 } from "./components";
 
-import DashboardModal from "./Components/dashboard/Dashboard";
+import Dashboard from "./Components/dashboard/Dashboard";
 import DashboardMenu from "./Components/dashboard/Menu";
-import { PaypalClient } from "./services/PayPal/PaypalCheckout.service";
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      site: window.Pelcro.site.read(),
-      isAuthenticated: window.Pelcro.user.isAuthenticated(), // controls menu button displaying
-      isGift: false,
-      order: null,
-      showUpdateUserView: false,
-      addressId: null,
-      products: [],
-      isRenewingGift: false
-    };
-
     this.locale = getCurrentLocale();
-
     this.loadPaymentSDKs();
     initButtons(this);
   }
+
+  state = {
+    site: window.Pelcro.site.read(),
+    isAuthenticated: window.Pelcro.user.isAuthenticated(), // controls menu button displaying
+    order: null,
+    products: [],
+    isRenewingGift: false,
+    isGift: false,
+    giftCode: ""
+  };
 
   loadPaymentSDKs = () => {
     // Load stripe's SDK
@@ -62,19 +58,34 @@ class App extends Component {
     );
 
     // Load PayPal SDK's
-    document.addEventListener("PelcroSiteLoaded", () => {
-      if (PaypalClient.isPaypalEnabled()) {
-        window.Pelcro.helpers.loadSDK(
-          "https://js.braintreegateway.com/web/3.69.0/js/client.min.js",
-          "braintree-sdk"
-        );
+    if (
+      window.Pelcro.site.read() &&
+      window.Pelcro.site.read().settings
+    ) {
+      this.loadPaypalSDKs();
+    } else {
+      document.addEventListener("PelcroSiteLoaded", () => {
+        this.loadPaypalSDKs();
+      });
+    }
+  };
 
-        window.Pelcro.helpers.loadSDK(
-          "https://js.braintreegateway.com/web/3.69.0/js/paypal-checkout.min.js",
-          "braintree-paypal-sdk"
-        );
-      }
-    });
+  loadPaypalSDKs = () => {
+    const supportsPaypal = Boolean(
+      window.Pelcro.site.read().braintree_tokenization
+    );
+
+    if (supportsPaypal) {
+      window.Pelcro.helpers.loadSDK(
+        "https://js.braintreegateway.com/web/3.69.0/js/client.min.js",
+        "braintree-sdk"
+      );
+
+      window.Pelcro.helpers.loadSDK(
+        "https://js.braintreegateway.com/web/3.69.0/js/paypal-checkout.min.js",
+        "braintree-paypal-sdk"
+      );
+    }
   };
 
   removeHTMLButton = (buttonClass) => {
@@ -85,12 +96,31 @@ class App extends Component {
   };
 
   componentDidMount = () => {
-    this.initViews();
-    ReactGA.initialize(window.Pelcro.site.read().google_analytics_id);
+    if (
+      window.Pelcro.site.read() &&
+      window.Pelcro.site.read().settings
+    ) {
+      this.initSite();
+    } else {
+      window.document.addEventListener("PelcroSiteLoaded", (e) => {
+        this.initSite();
+      });
+    }
   };
 
-  handleShowUpdateUserViewClick = () => {
-    this.setState({ showUpdateUserView: true });
+  initSite = () => {
+    this.setState({ site: window.Pelcro.site.read() }, () =>
+      this.initUI()
+    );
+
+    ReactGA.initialize(window.Pelcro.site.read().google_analytics_id);
+    ReactGA.plugin.require("ecommerce");
+  };
+
+  initUI = () => {
+    if (this.state.site.settings === "subscription") {
+      this.initViews();
+    }
   };
 
   initViewFromUrl = () => {
@@ -116,9 +146,11 @@ class App extends Component {
       this.setView("password-reset");
       return true;
     } else if (view === "source-create") {
+      // @FIXME - implement a redirect to login first
       this.setView("source-create");
       return true;
     } else if (view === "user-edit") {
+      // @FIXME - implement a redirect to login first
       this.setView("user-edit");
       return true;
     } else if (view === "register") {
@@ -132,47 +164,23 @@ class App extends Component {
     }
   };
 
-  setProductAndPlanFromUrl = () => {
-    const productsList = window.Pelcro.product.list();
-    if (!productsList?.length) return;
-
-    const [productId, planId, isGift] = [
-      window.Pelcro.helpers.getURLParameter("product_id"),
-      window.Pelcro.helpers.getURLParameter("plan_id"),
-      window.Pelcro.helpers.getURLParameter("is_gift")
-    ];
-
-    const selectedProduct = productsList.find(
-      (product) => product.id === Number(productId)
-    );
-    const selectedPlan = selectedProduct?.plans?.find(
-      (plan) => plan.id === Number(planId)
-    );
-
-    this.setProductAndPlan(
-      selectedProduct,
-      selectedPlan,
-      Boolean(isGift)
-    );
-  };
+  getProducts = (products) => this.setState({ products });
 
   // displays required view
   initViews = () => {
-    setTimeout(() => {
-      if (
-        this.initViewFromUrl() ||
-        window.Pelcro.subscription.isSubscribedToSite()
-      )
-        return;
+    if (
+      this.initViewFromUrl() ||
+      window.Pelcro.subscription.isSubscribedToSite()
+    )
+      return;
 
-      if (window.Pelcro.paywall.displayMeterPaywall()) {
-        this.setView("meter");
-      } else if (window.Pelcro.paywall.displayNewsletterPaywall()) {
-        this.setView("newsletter");
-      } else if (window.Pelcro.paywall.displayPaywall()) {
-        this.setView("select");
-      }
-    }, 1000);
+    if (window.Pelcro.paywall.displayMeterPaywall()) {
+      this.setView("meter");
+    } else if (window.Pelcro.paywall.displayNewsletterPaywall()) {
+      this.setView("newsletter");
+    } else if (window.Pelcro.paywall.displayPaywall()) {
+      this.setView("select");
+    }
   };
 
   setView = (view) => {
@@ -201,7 +209,8 @@ class App extends Component {
       product: null,
       plan: null,
       isGift: false,
-      isRenewingGift: false
+      isRenewingGift: false,
+      giftCode: ""
     });
 
     if (this.state.giftRecipient)
@@ -252,6 +261,30 @@ class App extends Component {
     this.setView("select");
   };
 
+  setProductAndPlanFromUrl = () => {
+    const productsList = window.Pelcro.product.list();
+    if (!productsList?.length) return;
+
+    const [productId, planId, isGift] = [
+      window.Pelcro.helpers.getURLParameter("product_id"),
+      window.Pelcro.helpers.getURLParameter("plan_id"),
+      window.Pelcro.helpers.getURLParameter("is_gift")
+    ];
+
+    const selectedProduct = productsList.find(
+      (product) => product.id === Number(productId)
+    );
+    const selectedPlan = selectedProduct?.plans?.find(
+      (plan) => plan.id === Number(planId)
+    );
+
+    this.setProductAndPlan(
+      selectedProduct,
+      selectedPlan,
+      Boolean(isGift)
+    );
+  };
+
   displayCartView = () => {
     this.setView("cart");
   };
@@ -263,6 +296,10 @@ class App extends Component {
 
   setProductAndPlan = (product, plan, isGift) => {
     this.setState({ product, plan, isGift });
+  };
+
+  setAddress = (addressId) => {
+    this.setState({ addressId });
   };
 
   setSubscriptionIdToRenew = (subscriptionIdToRenew) => {
@@ -279,10 +316,6 @@ class App extends Component {
 
   setIsRenewingGift = (isRenewingGift) => {
     this.setState({ isRenewingGift });
-  };
-
-  setAddress = (addressId) => {
-    this.setState({ addressId });
   };
 
   loggedIn = () => {
@@ -307,8 +340,6 @@ class App extends Component {
   setProductsForCart = (products) => {
     this.setState({ products: products });
   };
-
-  getProducts = (products) => this.setState({ products });
 
   setOrder = (items) => {
     const order = this.state.order ?? {};
@@ -335,24 +366,67 @@ class App extends Component {
     }
     this.setView("select");
   };
+
   setProductAndPlanByButton = (e) => {
-    let product = {};
-    let plan = {};
-    const products = window.Pelcro.product.list();
-    for (const productItem of products) {
-      if (+productItem.id === +e.target.dataset.productId) {
-        product = productItem;
+    const productsList = window.Pelcro.product.list();
+    if (!productsList?.length) return;
+
+    const [productId, planId, isGift] = [
+      e.target.dataset.productId,
+      e.target.dataset.planId,
+      e.target.dataset.isGift
+    ];
+
+    const selectedProduct = productsList.find(
+      (product) => product.id === Number(productId)
+    );
+
+    const selectedPlan = selectedProduct?.plans?.find(
+      (plan) => plan.id === Number(planId)
+    );
+
+    this.setProductAndPlan(
+      selectedProduct,
+      selectedPlan,
+      Boolean(isGift)
+    );
+
+    this.setView("select");
+  };
+
+  setOfflineProductAndPlanByButton = (e) => {
+    this.setState({
+      product: {
+        id: e.target.dataset.productId,
+        address_required: true
+      },
+      plan: {
+        product_id: e.target.dataset.productId,
+        id: e.target.dataset.planId
       }
-    }
-    if (product) {
-      for (const planItem of product.plans) {
-        if (+planItem.id === +e.target.dataset.planId) {
-          plan = planItem;
+    });
+    window.Pelcro.plan.getPlan(
+      {
+        plan_id: e.target.dataset.planId
+      },
+      (error, response) => {
+        if (error) {
+          return;
+        }
+        this.setState({
+          plan: response.data.plan
+        });
+        const addresses = window.Pelcro.address.list();
+        const isAuthenticated = window.Pelcro.user.isAuthenticated();
+        if (!isAuthenticated) {
+          this.setView("register");
+        } else if (addresses && addresses.length) {
+          this.setView("payment");
+        } else {
+          this.setView("address");
         }
       }
-    }
-    this.setState({ product, plan });
-    this.setView("select");
+    );
   };
 
   handleAfterRegistrationLogic = () => {
@@ -481,8 +555,6 @@ class App extends Component {
           {this.state.isAuthenticated && authenticatedButtons()}
           {!this.state.isAuthenticated && unauthenticatedButtons()}
 
-          {/* <CustomUpdatePayment ReactGA={ReactGA} /> */}
-
           {this.state.view === "select" && (
             <SelectModal
               isGift={this.state.isGift}
@@ -521,7 +593,6 @@ class App extends Component {
               onSuccess={this.handleAfterRegistrationLogic}
             />
           )}
-
           {this.state.view === "gift" && (
             <GiftCreateModal
               setView={this.setView}
@@ -551,7 +622,6 @@ class App extends Component {
               }}
             />
           )}
-
           {this.state.view === "redeem" && (
             <GiftRedeemModal
               setView={this.setView}
@@ -568,7 +638,9 @@ class App extends Component {
 
                 if (window.Pelcro.user.isAuthenticated()) {
                   this.setView("address");
-                } else this.setView("register");
+                } else {
+                  this.setView("register");
+                }
               }}
             />
           )}
@@ -623,8 +695,6 @@ class App extends Component {
             )}
           {this.state.view === "success" && (
             <PaymentSuccessModal
-              product={this.state.product}
-              resetView={this.resetView}
               onDisplay={() => {
                 ReactGA.event({
                   category: "VIEWS",
@@ -632,6 +702,8 @@ class App extends Component {
                   nonInteraction: true
                 });
               }}
+              product={this.state.product}
+              resetView={this.resetView}
             />
           )}
           {this.state.view === "address" && (
@@ -646,16 +718,13 @@ class App extends Component {
                 }
               }}
               onGiftRedemptionSuccess={this.resetView}
-              onFailure={(error) => console.log(error)}
             />
           )}
           {this.state.view === "newsletter" && (
             <NewsLetter
-              plan={this.state.plan}
               product={this.state.product}
               resetView={this.resetView}
               setView={this.setView}
-              ReactGA={ReactGA}
             />
           )}
           {this.state.view === "meter" && (
@@ -664,7 +733,6 @@ class App extends Component {
               product={this.state.product}
               resetView={this.resetView}
               setView={this.setView}
-              ReactGA={ReactGA}
             />
           )}
 
@@ -688,37 +756,24 @@ class App extends Component {
                   nonInteraction: true
                 });
               }}
-              onFailure={(error) => {
-                console.log(error);
+              onSuccess={() => {
+                ReactGA.event({
+                  category: "ACTIONS",
+                  action: "Updated Payment",
+                  nonInteraction: true
+                });
               }}
-              onSuccess={this.resetView}
             />
           )}
 
           {this.state.view === "user-edit" && (
-            <UserUpdateModal
-              resetView={this.resetView}
-              onSuccess={() => console.log("User Updated")}
-              onFailure={(error) => console.log(error)}
-            />
+            <UserUpdateModal resetView={this.resetView} />
           )}
-
-          <button onClick={this.handleShowUpdateUserViewClick}>
-            Update User
-          </button>
-
-          <UserUpdateView
-            setView={this.setView}
-            onSuccess={() => console.log("User Updated")}
-            onFailure={(error) => console.log(error)}
-          />
-
           {this.state.view === "address-edit" && (
             <AddressUpdateModal
               addressId={this.state.addressId}
               resetView={this.resetView}
               onSuccess={() => null}
-              onFailure={(error) => console.log(error)}
             />
           )}
 
@@ -757,14 +812,12 @@ class App extends Component {
                   nonInteraction: true
                 });
               }}
-              onSuccess={(res) => {
+              onSuccess={() => {
+                this.setOrder(null);
                 this.setView("confirm");
-                console.log(res);
               }}
-              onFailure={(err) => console.log(err)}
             />
           )}
-
           {this.state.view === "confirm" && (
             <OrderConfirmModal
               products={this.state.products}
@@ -779,7 +832,7 @@ class App extends Component {
           )}
 
           {this.state.view === "dashboard" && (
-            <DashboardModal
+            <Dashboard
               setAddress={this.setAddress}
               setSubscriptionIdToRenew={this.setSubscriptionIdToRenew}
               setIsRenewingGift={this.setIsRenewingGift}

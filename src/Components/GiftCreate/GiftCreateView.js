@@ -52,7 +52,7 @@ export const GiftCreateView = (props) => {
             className="pelcro-prefix-input pelcro-prefix-form-control"
             id="pelcro-gift-create-input-email"
             placeholder={t("gift.labels.emailPlaceholder")}
-            autocomplete="off"
+            autoComplete="off"
           ></GiftCreateEmail>
         </div>
       </div>

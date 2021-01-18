@@ -71,6 +71,9 @@
       "click": "Cliquez",
       "here": "ici",
       "toAdd": "pour ajouter une adresse"
+    },
+    "messages": {
+      "enterGiftCode": "Veuillez entrer un code cadeau."
     }
   }
 }
