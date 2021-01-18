@@ -390,6 +390,8 @@ const PaymentMethodContainerWithoutStripe = ({
           return displayError(getErrorMessages(err));
         }
 
+        // Reset cart products
+        window.Pelcro.cartProducts = [];
         onSuccess(res);
       }
     );
