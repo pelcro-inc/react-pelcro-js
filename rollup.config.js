@@ -7,6 +7,8 @@ import babel from "rollup-plugin-babel";
 import json from "@rollup/plugin-json";
 import { terser } from "rollup-plugin-terser";
 import pkg from "./package.json";
+import url from "@rollup/plugin-url";
+import svgr from "@svgr/rollup";
 
 export default [
   {
@@ -16,6 +18,8 @@ export default [
       { file: pkg.module, format: "esm" }
     ],
     plugins: [
+      url(),
+      svgr(),
       resolve(),
       external(),
       babel({

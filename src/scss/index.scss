@@ -1771,16 +1771,17 @@ body.pelcro-prefix-modal-open {
       text-align: right;
     }
 
-    .remove-icon svg {
-      width: 20px;
-      height: 20px;
-      fill: #757575;
-      stroke: #757575;
-      stroke-width: 4px;
+    .remove-btn-icon {
+      width: 15px;
+      height: 15px;
+      // to let the parent button handle the click events
+      pointer-events: none;
     }
 
-    .remove-icon {
-      pointer-events: none;
+    .remove-btn {
+      padding: 3px;
+      border: 0;
+      border-radius: 50%;
     }
 
     .cross-container {

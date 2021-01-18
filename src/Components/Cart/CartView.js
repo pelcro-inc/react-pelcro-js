@@ -5,6 +5,7 @@ import { CartContainer } from "./CartContainer";
 import { CartRemoveProductButton } from "./CartRemoveProductButton";
 import { CartSubmit } from "./CartSubmit";
 import { CartTotalPrice } from "./CartTotalPrice";
+import { ReactComponent as RemoveIcon } from "../../assets/x-icon.svg";
 
 export const CartView = (props) => {
   const { t } = useTranslation("cart");
@@ -56,12 +57,16 @@ export const CartView = (props) => {
                         })}{" "}
                       </div>
                       <div className="col-5">
-                        <CartRemoveProductButton product={product}>
-                          <div className="remove-icon">
-                            <svg version="1.1" viewBox="-5 -5 70 70">
-                              <path d="M28.228,23.986L47.092,5.122c1.172-1.171,1.172-3.071,0-4.242c-1.172-1.172-3.07-1.172-4.242,0L23.986,19.744L5.121,0.88   c-1.172-1.172-3.07-1.172-4.242,0c-1.172,1.171-1.172,3.071,0,4.242l18.865,18.864L0.879,42.85c-1.172,1.171-1.172,3.071,0,4.242   C1.465,47.677,2.233,47.97,3,47.97s1.535-0.293,2.121-0.879l18.865-18.864L42.85,47.091c0.586,0.586,1.354,0.879,2.121,0.879   s1.535-0.293,2.121-0.879c1.172-1.171,1.172-3.071,0-4.242L28.228,23.986z" />
-                            </svg>
-                          </div>
+                        <CartRemoveProductButton
+                          product={product}
+                          className="pelcro-prefix-btn-dark remove-btn"
+                        >
+                          <RemoveIcon
+                            fill="white"
+                            className="remove-btn-icon"
+                            aria-hidden="true"
+                            focusable="false"
+                          />
                         </CartRemoveProductButton>
                       </div>
                     </div>
@@ -86,7 +91,7 @@ export const CartView = (props) => {
                 <CartTotalPrice />
               </div>
             </div>
-            <CartSubmit />
+            <CartSubmit className="pelcro-prefix-btn" />
           </div>
         )}
       </div>
