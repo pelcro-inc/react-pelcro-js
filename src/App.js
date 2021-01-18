@@ -366,23 +366,31 @@ class App extends Component {
     }
     this.setView("select");
   };
+
   setProductAndPlanByButton = (e) => {
-    let product = null;
-    let plan = null;
-    const products = window.Pelcro.product.list();
-    for (const productItem of products) {
-      if (+productItem.id === +e.target.dataset.productId) {
-        product = productItem;
-      }
-    }
-    if (product) {
-      for (const planItem of product.plans) {
-        if (+planItem.id === +e.target.dataset.planId) {
-          plan = planItem;
-        }
-      }
-    }
-    this.setState({ product, plan });
+    const productsList = window.Pelcro.product.list();
+    if (!productsList?.length) return;
+
+    const [productId, planId, isGift] = [
+      e.target.dataset.productId,
+      e.target.dataset.planId,
+      e.target.dataset.isGift
+    ];
+
+    const selectedProduct = productsList.find(
+      (product) => product.id === Number(productId)
+    );
+
+    const selectedPlan = selectedProduct?.plans?.find(
+      (plan) => plan.id === Number(planId)
+    );
+
+    this.setProductAndPlan(
+      selectedProduct,
+      selectedPlan,
+      Boolean(isGift)
+    );
+
     this.setView("select");
   };
 
