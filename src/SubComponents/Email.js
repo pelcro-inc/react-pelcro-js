@@ -4,6 +4,7 @@ import React, {
   useEffect,
   useCallback
 } from "react";
+import { useTranslation } from "react-i18next";
 import { SET_EMAIL, SET_EMAIL_ERROR } from "../utils/action-types";
 
 /**
@@ -19,6 +20,8 @@ export function Email({
   store,
   ...otherProps
 }) {
+  const { t } = useTranslation("common");
+
   const {
     dispatch,
     state: { email: stateEmail, emailError }
@@ -42,12 +45,12 @@ export function Email({
         if (email?.length) {
           dispatch({
             type: SET_EMAIL_ERROR,
-            payload: "Please enter a valid email."
+            payload: t("validation.validEmail")
           });
         } else {
           dispatch({
             type: SET_EMAIL_ERROR,
-            payload: "Email address is required."
+            payload: t("validation.enterEmail")
           });
         }
       }

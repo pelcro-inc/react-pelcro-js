@@ -45,7 +45,7 @@ export function GiftCode({
       className={className}
       value={state.giftCode || null}
       onChange={(e) => handleInputChange(e.target.value)}
-      placeholder={placeholder || "Enter Your Gift Code"}
+      placeholder={placeholder}
       {...otherProps}
     ></input>
   );

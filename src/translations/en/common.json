@@ -1,4 +1,9 @@
 {
+    "validation": {
+        "validEmail": "Email address is not valid.",
+        "enterEmail": "Email address is required.",
+        "enterPassword": "Password is required."
+    },
     "buttons": {
         "account": "My account",
         "login": "Login"

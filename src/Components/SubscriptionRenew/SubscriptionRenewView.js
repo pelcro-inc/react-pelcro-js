@@ -14,7 +14,7 @@ export const SubscriptionRenewView = ({
   onDisplay,
   onGiftRenewalSuccess
 }) => {
-  const { t } = useTranslation("messages");
+  const { t } = useTranslation("payment");
   return (
     <div>
       <div className="pelcro-prefix-title-block">
@@ -29,14 +29,13 @@ export const SubscriptionRenewView = ({
         </p>
       </div>
 
-      <ErrMessage name="payment" />
-      <AlertSuccess name="payment" />
+      <ErrMessage name="payment-create" />
 
       <div className="pelcro-prefix-payment-block">
         <div className="pelcro-prefix-alert pelcro-prefix-alert-success">
           <div className="pelcro-prefix-payment-message">
             <span>
-              {t("youAreSafe")}{" "}
+              {t("messages.youAreSafe")}{" "}
               <a
                 className="pelcro-prefix-link"
                 rel="nofollow"
