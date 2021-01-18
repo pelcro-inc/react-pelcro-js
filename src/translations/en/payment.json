@@ -23,22 +23,22 @@
   },
   "messages": {
     "youAreSafe": "You're safe - PCI compliant 128 SSL by",
-    "haveQuestion": "Des questions?",
+    "haveQuestion": "Have questions?",
     "visitOurWebsite": {
-      "visitTo": "Visitez notre site Web pour",
-      "learnMore": "en savoir plus"
+      "visitTo": "Visit our website to",
+      "learnMore": "learn more"
     },
     "visitOurFaq": {
-      "visitOur": "Visitez notre",
+      "visitOur": "Visit our",
       "faq": "FAQ"
     },
-    "cancel": "Annuler votre abonnement en ligne à tout moment.",
+    "cancel": "Cancel your subscription online at anytime.",
     "logout": {
-      "logout": "Déconnexion",
-      "here": "ici"
+      "logout": "Logout",
+      "here": "here"
     },
-    "giftSent": "Le cadeau d'abonnement a été envoyé à",
-    "successfully": "avec succès."
+    "giftSent": "Subscription gift has been sent to",
+    "successfully": "successfully"
   },
   "errors": {
     "": ""

@@ -14,6 +14,8 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 - Add optional initWithUserEmail prop to Email sub-component.
 - Allow leaving card info empty when plan is free.
+- Allow using SVGs as React components [PRIVATE]
+- Style cart item remove button in the cart view [PRIVATE]
 
 ### Fixed
 
@@ -22,6 +24,12 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 - Use translation files instead of hardcoded strings for validation errors
 - Re-enable submit when e-commerce checkout fails.
 - Reset cart items after successful order.
+
+### Changed
+
+- Remove items count from checkout button label in cart modal.
+
+## [Released]
 
 ## [2.10.1] - 2021-01-12
 
