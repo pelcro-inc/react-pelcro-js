@@ -32,7 +32,6 @@ import {
 
 import DashboardModal from "./Components/dashboard/Dashboard";
 import DashboardMenu from "./Components/dashboard/Menu";
-import { PaypalClient } from "./services/PayPal/PaypalCheckout.service";
 
 class App extends Component {
   constructor(props) {
@@ -62,19 +61,34 @@ class App extends Component {
     );
 
     // Load PayPal SDK's
-    document.addEventListener("PelcroSiteLoaded", () => {
-      if (PaypalClient.isPaypalEnabled()) {
-        window.Pelcro.helpers.loadSDK(
-          "https://js.braintreegateway.com/web/3.69.0/js/client.min.js",
-          "braintree-sdk"
-        );
+    if (
+      window.Pelcro.site.read() &&
+      window.Pelcro.site.read().settings
+    ) {
+      this.loadPaypalSDKs();
+    } else {
+      document.addEventListener("PelcroSiteLoaded", () => {
+        this.loadPaypalSDKs();
+      });
+    }
+  };
 
-        window.Pelcro.helpers.loadSDK(
-          "https://js.braintreegateway.com/web/3.69.0/js/paypal-checkout.min.js",
-          "braintree-paypal-sdk"
-        );
-      }
-    });
+  loadPaypalSDKs = () => {
+    const supportsPaypal = Boolean(
+      window.Pelcro.site.read().braintree_tokenization
+    );
+
+    if (supportsPaypal) {
+      window.Pelcro.helpers.loadSDK(
+        "https://js.braintreegateway.com/web/3.69.0/js/client.min.js",
+        "braintree-sdk"
+      );
+
+      window.Pelcro.helpers.loadSDK(
+        "https://js.braintreegateway.com/web/3.69.0/js/paypal-checkout.min.js",
+        "braintree-paypal-sdk"
+      );
+    }
   };
 
   removeHTMLButton = (buttonClass) => {
