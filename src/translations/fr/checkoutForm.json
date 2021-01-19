@@ -1,7 +1,7 @@
 {
     "labels": {
         "card": "Entrez le numéro de carte",
-        "date": "Date d'expiration",
+        "date": "Date d’expiration",
         "CVC": "CVC",
         "required": "Champs obligatoires",
         "submit": "Soumettre",
