@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Unreleased]
 
+## [Released]
+
+## [2.10.2] - 2021-01-18
+
 ### Added
 
 - Add optional initWithUserEmail prop to Email sub-component.
