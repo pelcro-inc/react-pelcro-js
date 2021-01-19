@@ -1,5 +1,5 @@
 {
-    "title": "Votre Panier",
+    "title": "Votre panier",
     "subtitle": "Terminez votre achat ci-dessous",
     "name": "Produit",
     "quantity": "Quantité",
@@ -7,7 +7,7 @@
     "actions": "Actes",
     "remove": "Retirer",
     "total": "Total",
-    "confirm": "Check-out",
+    "confirm": "Passer à la caisse",
     "empty": "Votre panier est vide.",
-    "removeAll": "Enlever tout"
+    "removeAll": "Vider"
 }

@@ -1,7 +1,7 @@
 {
     "labels": {
-        "email": "Entrer email",
-        "password": "Entrer le mot de passe",
+        "email": "Entrez votre adresse courriel",
+        "password": "Entrez votre mot de passe",
         "required": "Champs obligatoires",
         "emailPlaceholder": "Adresse courriel",
         "passwordPlaceholder": "Mot de passe",
@@ -10,7 +10,7 @@
     "messages": {
         "loginTo": "Connectez-vous à votre compte",
         "welcome": "Bienvenue, connectez-vous avec votre compte existant.",
-        "dontHaveAccount": "Vous n'avez pas encore de compte ?",
+        "dontHaveAccount": "Vous n’avez pas encore de compte ?",
         "createAccount": "Créer un compte",
         "forgotPassword": "Mot de passe oublié ?",
         "reset": {

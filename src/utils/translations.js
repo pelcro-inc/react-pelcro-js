@@ -396,13 +396,13 @@ export default {
     "password-forgot": {
       title: "Mot de passe oublié ?",
       subtitle:
-        "Entrez votre email ci-dessous pour réinitialiser votre mot de passe",
+        "Entrez votre adresse courriel ci-dessous pour réinitialiser votre mot de passe",
       email: "Courriel",
       password: "Mot de passe",
       submit: "Soumettre",
       required: "Champs obligatoires",
       passwordResetEmailSent:
-        "Des instructions de réinitialisation du mot de passe ont été envoyées à votre adresse email. Si l'e-mail n'est pas dans votre boîte de réception, veuillez vérifier votre courrier indésirable ou vos dossiers de spam.",
+        "Un lien pour réinitialiser votre mot de passe vous a été envoyé. Si vous ne le recevez pas, vérifier votre courrier indésirable.",
       messages: {
         alreadyHaveAccount: "Vous avez déjà un compte ?",
         loginHere: "Connectez-vous ici"
@@ -417,7 +417,7 @@ export default {
       submit: "Soumettre",
       required: "Champs obligatoires",
       passwordUpdated:
-        "Le mot de passe a été mis à jour, veuillez vous connecter avec le nouveau mot de passe"
+        "Votre mot de passe a été mis à jour, veuillez vous connecter avec celui-ci"
     },
     "payment-create": {
       title: "Mettre à jour vos informations de paiement",
@@ -435,7 +435,7 @@ export default {
       labels: {
         signUpFacebook: "Inscrivez-vous avec Facebook",
         signUpGoogle: "Inscrivez-vous avec Google",
-        signUpEmail: "S'enregistrer avec courrier électronique",
+        signUpEmail: "Inscrivez-vous avec votre courriel",
         password: "Créer un mot de passe",
         email: "Courriel",
         passwordPlaceholder: "Créer un mot de passe",
@@ -446,13 +446,13 @@ export default {
         alreadyHaveAccount: "Vous avez déjà un compte ?",
         createAccount: "Créer un compte",
         signUpWithSocial:
-          "Vous pouvez également vous connecter à l'aide de votre compte Google ou Facebook en pré-populant vos informations.",
+          "Vous pouvez également vous connecter à l’aide de votre compte Google ou Facebook en pré-populant vos informations.",
         loginHere: "Connectez-vous ici",
         selectPlan: "Sélectionnez un autre plan ",
         here: "ici",
         iAgree: {
-          iAgree: "J'accepte",
-          terms: "les conditions d'utilisation",
+          iAgree: "J’accepte",
+          terms: "les conditions d’utilisation",
           and: "et",
           privacy: "la politique de confidentialité."
         },
@@ -486,7 +486,7 @@ export default {
         },
         messages: {
           enterEmail:
-            "Veuillez entrer l'adresse courriel du destinataire du cadeau."
+            "Veuillez entrer l’adresse courriel du destinataire du cadeau."
         }
       },
       redeem: {
@@ -512,8 +512,8 @@ export default {
     },
     login: {
       labels: {
-        email: "Entrer email",
-        password: "Entrer le mot de passe",
+        email: "Entrez votre adresse courriel",
+        password: "Entrez votre mot de passe",
         required: "Champs obligatoires",
 
         emailPlaceholder: "Adresse courriel",
@@ -524,7 +524,7 @@ export default {
         loginTo: "Connectez-vous à votre compte",
         welcome:
           "Bienvenue, connectez-vous avec votre compte existant.",
-        dontHaveAccount: "Vous n'avez pas encore de compte ?",
+        dontHaveAccount: "Vous n’avez pas encore de compte ?",
         createAccount: "Créer un compte",
         forgotPassword: "Mot de passe oublié ?",
         reset: {
@@ -588,7 +588,7 @@ export default {
           logout: "Déconnexion",
           here: "ici"
         },
-        giftSent: "Le cadeau d'abonnement a été envoyé à",
+        giftSent: "Le cadeau d’abonnement a été envoyé à",
         successfully: "avec succès."
       },
       errors: {
@@ -611,7 +611,8 @@ export default {
         submit: "Valider"
       },
       messages: {
-        addressUpdated: "L'adresse a été mise à jour avec succès!"
+        addressUpdated: "Votre adresse a été mise à jour avec succès",
+        subRedeemed: "Votre abonnement a bien été activé."
       }
     },
     dashboard: {
@@ -659,9 +660,9 @@ export default {
         continue: "Abonnement réussi !"
       },
       messages: {
-        yourFreeTrial: "Votre essai gratuit vient de commencer",
+        yourFreeTrial: "Votre essai gratuit vient de débuter",
         youHaveAccess:
-          "J'espère que vous appréciez l'abonnement. Veuillez nous contacter si vous avez des questions ou des préoccupations.",
+          "Nous espérons que vous allez apprécier votre abonnement. Veuillez nous contacter si vous avez des questions ou des préoccupations.",
         clickToLearn: {
           click: "cliquez",
           here: "ici",
@@ -675,11 +676,11 @@ export default {
     },
     newsletter: {
       title:
-        "Entrez votre email pour vous abonner à notre newsletter",
+        "Entrez votre adresse courriel pour vous abonner à notre infolettre",
       subtitle:
-        "Nous pouvons utiliser votre e-mail pour d'autres communications marketing",
+        "Nous pouvons utiliser votre adresse courriel pour d’autres communications marketing",
       labels: {
-        submit: "Lire l'article !",
+        submit: "Lire l’article !",
         firstName: "Prénom",
         lastName: "Nom de famille",
         email: "Courrier électronique",
@@ -706,12 +707,12 @@ export default {
         plan: {
           title: "Abonnez-vous à un plan",
           subtitle:
-            "Sélectionnez l'un des plans ci-dessous et cliquez sur suivant."
+            "Sélectionnez l’un des plans ci-dessous et cliquez sur suivant."
         },
         product: {
           title: "Abonnez-vous à un produit",
           subtitle:
-            "Sélectionnez l'un des produits ci-dessous et cliquez sur suivant."
+            "Sélectionnez l’un des produits ci-dessous et cliquez sur suivant."
         },
         selectProduct: "Sélectionnez un produit",
         selectPlan: "Sélectionnez un plan",
@@ -726,7 +727,7 @@ export default {
     checkoutForm: {
       labels: {
         card: "Entrez le numéro de carte",
-        date: "Date d'expiration",
+        date: "Date d’expiration",
         CVC: "CVC",
         required: "Champs obligatoires",
         submit: "Soumettre",
@@ -739,7 +740,7 @@ export default {
     },
     userEdit: {
       labels: {
-        title: "Voulez-vous mettre à jour votre profil?",
+        title: "Voulez-vous mettre à jour votre profil ?",
         subtitle:
           "Entrez vos informations ci-dessous pour mettre à jour votre profil",
         email: "Email",
@@ -751,7 +752,7 @@ export default {
       },
       messages: {
         userUpdated:
-          "Merci! Votre profil a été mis à jour avec succès."
+          "Votre profil a été mis à jour avec succès."
       }
     },
     cart: {
@@ -763,9 +764,9 @@ export default {
       actions: "Actes",
       remove: "Retirer",
       total: "Total",
-      confirm: "Check-out",
+      confirm: "Passer à la caisse",
       empty: "Votre panier est vide.",
-      removeAll: "Enlever tout"
+      removeAll: "Vider"
     },
     products: {
       buttons: {

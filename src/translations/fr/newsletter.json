@@ -1,11 +1,11 @@
 {
-  "title": "Entrez votre email pour vous abonner à notre newsletter",
-  "subtitle": "Nous pouvons utiliser votre e-mail pour d'autres communications marketing",
+  "title": "Entrez votre adresse courriel pour vous abonner à notre infolettre",
+  "subtitle": "Nous pouvons utiliser votre adresse courriel pour d’autres communications marketing",
   "labels": {
-    "submit": "Lire l'article !",
+    "submit": "Lire l’article !",
     "firstName": "Prénom",
     "lastName": "Nom de famille",
-    "email": "Courrier électronique",
+    "email": "Adresse courriel",
     "postalCode": "Code postal",
     "required": "Champs obligatoires"
   },

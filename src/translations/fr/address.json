@@ -14,7 +14,7 @@
     "submit": "Valider"
   },
   "messages": {
-    "addressUpdated": "L'adresse a été mise à jour avec succès!",
+    "addressUpdated": "Votre adresse a été mise à jour avec succès",
     "subRedeemed": "Votre abonnement a bien été activé."
   }
 }
