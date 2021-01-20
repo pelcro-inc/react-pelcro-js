@@ -63,6 +63,9 @@ body.pelcro-prefix-modal-open {
       flex-grow: 1;
       border: none;
       background: #fff;
+      box-shadow: none !important;
+      width: auto !important;
+      height: auto !important;
 
       &:focus {
         outline: none;
