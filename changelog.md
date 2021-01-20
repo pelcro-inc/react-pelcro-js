@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 ### Fixed
 
 - Coupon field styling issues in some production environments.
+- Translation improvements.
 
 ## [Released]
 
