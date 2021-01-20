@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Unreleased]
 
+### Fixed
+
+- Coupon field styling issues in some production environments.
+
 ## [Released]
 
 ## [2.10.2] - 2021-01-18
