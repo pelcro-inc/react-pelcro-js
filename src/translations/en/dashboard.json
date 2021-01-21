@@ -1,0 +1,36 @@
+{
+  "labels": {
+    "menu": "Pelcro Menu",
+    "name": "Name",
+    "email": "Email",
+    "plan": "Plan",
+    "description": "Description",
+    "expiry": "Expiry",
+    "status": "Status",
+    "shipments": "Shipments remaining",
+    "logout": "Logout",
+    "dashboard": "Dashboard",
+    "unsubscribe": "Unsubscribe",
+    "reactivate": "Reactivate",
+    "renew": "Renew",
+    "support": "Support",
+    "account": "Account",
+    "subscriptions": "Subscriptions",
+    "updatePaymentSource": "Update",
+    "updateProfile": "Update",
+    "updateAddress": "Update",
+    "redeemGift": "Redeem gift",
+    "address": "Address",
+    "paymentSource": "Payment card",
+    "actions": "Actions",
+    "expiresOn": "Expires on",
+    "renewsOn": "Renews on",
+    "isSureToCancel": "Are you sure you want to cancel your subscription?",
+    "giftRecipients": {
+      "title": "Gift recipients"
+    }
+  },
+  "messages": {
+    "yourDashboard": "Your Pelcro Dashboard"
+  }
+}

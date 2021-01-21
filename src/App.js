@@ -4,6 +4,8 @@ import ReactDOM from "react-dom";
 import { getCurrentLocale } from "./utils/localisation";
 
 import {
+  Dashboard,
+  DashboardOpenButton,
   SelectModal,
   LoginModal,
   RegisterModal,
@@ -28,9 +30,6 @@ import {
   GiftCreateModal,
   GiftRedeemModal
 } from "./components";
-
-import Dashboard from "./Components/dashboard/Dashboard";
-import DashboardMenu from "./Components/dashboard/Menu";
 
 class App extends Component {
   constructor(props) {
@@ -547,7 +546,7 @@ class App extends Component {
       <div id="pelcro-app">
         <div id="list">
           {this.state.isAuthenticated && (
-            <DashboardMenu
+            <DashboardOpenButton
               openDashboard={this.displayDashboardView}
             />
           )}

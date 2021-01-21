@@ -138,6 +138,9 @@ export { GiftRedeemModal } from "./Components/GiftRedeem/GiftRedeemModal";
 export { GiftRedeemView } from "./Components/GiftRedeem/GiftRedeemView";
 export { GiftRedeemSubmitButton } from "./Components/GiftRedeem/GiftRedeemSubmitButton";
 
+export { DashboardWithTrans as Dashboard } from "./Components/dashboard/Dashboard";
+export { DashboardOpenButton } from "./Components/dashboard/DashboardOpenButton";
+
 export {
   init as initButtons,
   authenticatedButtons,
