@@ -6,10 +6,9 @@
 import React, { Component } from "react";
 import ErrMessage from "../common/ErrMessage";
 import PropTypes from "prop-types";
-
-import localisation from "../../utils/localisation";
 import { showError } from "../../utils/showing-error";
 import { getErrorMessages } from "../common/Helpers";
+import { withTranslation } from "react-i18next";
 
 class Dashboard extends Component {
   constructor(props) {
@@ -26,7 +25,7 @@ class Dashboard extends Component {
     };
 
     this.site = window.Pelcro.site.read();
-    this.locale = localisation("dashboard").getLocaleData();
+    this.locale = this.props.t;
     this.user = window.Pelcro.user.read();
     this.address = window.Pelcro.user.read().addresses
       ? window.Pelcro.user.read().addresses[
@@ -136,7 +135,7 @@ class Dashboard extends Component {
         // Cancel button click handlers
         const onCancelClick = () => {
           const confirmation = window.confirm(
-            this.locale.labels.isSureToCancel
+            this.locale("labels.isSureToCancel")
           );
 
           if (confirmation === true) {
@@ -163,8 +162,12 @@ class Dashboard extends Component {
         };
 
         const status = sub.cancel_at_period_end
-          ? `${this.locale.labels.expiresOn} ${sub.current_period_end}`
-          : `${this.locale.labels.renewsOn} ${sub.current_period_end}`;
+          ? `${this.locale("labels.expiresOn")} ${
+              sub.current_period_end
+            }`
+          : `${this.locale("labels.renewsOn")} ${
+              sub.current_period_end
+            }`;
 
         return (
           <div
@@ -175,7 +178,7 @@ class Dashboard extends Component {
               {sub.plan.nickname && (
                 <div className="pelcro-prefix-dashboard-text row">
                   <span className="pelcro-prefix-dashboard-label col-4">
-                    {this.locale.labels.plan}
+                    {this.locale("labels.plan")}
                   </span>
                   <span className="pelcro-prefix-dashboard-value col-8">
                     {sub.plan.nickname}
@@ -187,7 +190,7 @@ class Dashboard extends Component {
               {sub.status && (
                 <div className="pelcro-prefix-dashboard-text row">
                   <span className="pelcro-prefix-dashboard-label col-4">
-                    {this.locale.labels.status}
+                    {this.locale("labels.status")}
                   </span>
                   <span className="pelcro-prefix-dashboard-value col-8">
                     {status}
@@ -199,7 +202,7 @@ class Dashboard extends Component {
               {sub.shipments_remaining && (
                 <div className="pelcro-prefix-dashboard-text row">
                   <span className="pelcro-prefix-dashboard-label col-4">
-                    {this.locale.labels.shipments}
+                    {this.locale("labels.shipments")}
                   </span>
                   <span className="pelcro-prefix-dashboard-value col-8">
                     {sub.shipments_remaining}
@@ -210,7 +213,7 @@ class Dashboard extends Component {
             <div>
               <div className="pelcro-prefix-dashboard-text row">
                 <span className="pelcro-prefix-dashboard-label col-4">
-                  {this.locale.labels.actions}
+                  {this.locale("labels.actions")}
                 </span>
                 <div className="col-8">
                   {sub.cancel_at_period_end === 0 && (
@@ -220,7 +223,7 @@ class Dashboard extends Component {
                       onClick={onCancelClick}
                       disabled={this.state.disableSubmit}
                     >
-                      {this.locale.labels.unsubscribe}
+                      {this.locale("labels.unsubscribe")}
                     </button>
                   )}
                   {sub.cancel_at_period_end === 1 &&
@@ -231,7 +234,7 @@ class Dashboard extends Component {
                         onClick={onReactivateClick}
                         disabled={this.state.disableSubmit}
                       >
-                        {this.locale.labels.reactivate}
+                        {this.locale("labels.reactivate")}
                       </button>
                     )}
                   {sub.cancel_at_period_end === 1 && (
@@ -241,7 +244,7 @@ class Dashboard extends Component {
                       onClick={onRenewClick}
                       disabled={this.state.disableSubmit}
                     >
-                      {this.locale.labels.renew}
+                      {this.locale("labels.renew")}
                     </button>
                   )}
                 </div>
@@ -279,7 +282,7 @@ class Dashboard extends Component {
             <div>
               <div className="pelcro-prefix-dashboard-text row">
                 <span className="pelcro-prefix-dashboard-label col-4">
-                  {this.locale.labels.name}
+                  {this.locale("labels.name")}
                 </span>
                 <span className="pelcro-prefix-dashboard-value col-8">
                   {recipient.first_name} {recipient.last_name}
@@ -290,7 +293,7 @@ class Dashboard extends Component {
           <div>
             <div className="pelcro-prefix-dashboard-text row">
               <span className="pelcro-prefix-dashboard-label col-4">
-                {this.locale.labels.email}
+                {this.locale("labels.email")}
               </span>
               <span className="pelcro-prefix-dashboard-value col-8">
                 {recipient.email}
@@ -303,7 +306,7 @@ class Dashboard extends Component {
             {recipient.plan.nickname && (
               <div className="pelcro-prefix-dashboard-text row">
                 <span className="pelcro-prefix-dashboard-label col-4">
-                  {this.locale.labels.plan}
+                  {this.locale("labels.plan")}
                 </span>
                 <span className="pelcro-prefix-dashboard-value col-8">
                   {recipient.plan.nickname}
@@ -317,12 +320,16 @@ class Dashboard extends Component {
             {recipient.status && (
               <div className="pelcro-prefix-dashboard-text row">
                 <span className="pelcro-prefix-dashboard-label col-4">
-                  {this.locale.labels.status}
+                  {this.locale("labels.status")}
                 </span>
                 <span className="pelcro-prefix-dashboard-value col-8">
                   {recipient.cancel_at_period_end
-                    ? `${this.locale.labels.expiresOn} ${recipient.current_period_end}`
-                    : `${this.locale.labels.renewsOn} ${recipient.current_period_end}`}
+                    ? `${this.locale("labels.expiresOn")} ${
+                        recipient.current_period_end
+                      }`
+                    : `${this.locale("labels.renewsOn")} ${
+                        recipient.current_period_end
+                      }`}
                 </span>
               </div>
             )}
@@ -333,7 +340,7 @@ class Dashboard extends Component {
             {recipient.shipments_remaining && (
               <div className="pelcro-prefix-dashboard-text row">
                 <span className="pelcro-prefix-dashboard-label col-4">
-                  {this.locale.labels.shipments}
+                  {this.locale("labels.shipments")}
                 </span>
                 <span className="pelcro-prefix-dashboard-value col-8">
                   {recipient.shipments_remaining}
@@ -346,7 +353,7 @@ class Dashboard extends Component {
           {recipient.cancel_at_period_end === 1 && (
             <div className="pelcro-prefix-dashboard-text row">
               <span className="pelcro-prefix-dashboard-label col-4">
-                {this.locale.labels.actions}
+                {this.locale("labels.actions")}
               </span>
               <div className="col-8">
                 <button
@@ -355,7 +362,7 @@ class Dashboard extends Component {
                   onClick={onRenewClick}
                   disabled={this.state.disableSubmit}
                 >
-                  {this.locale.labels.renew}
+                  {this.locale("labels.renew")}
                 </button>
               </div>
             </div>
@@ -384,7 +391,7 @@ class Dashboard extends Component {
                 onClick={this.displayAddressEdit}
               >
                 {" "}
-                {this.locale.labels.updateAddress}
+                {this.locale("labels.updateAddress")}
               </button>
             </div>
           </div>
@@ -420,14 +427,14 @@ class Dashboard extends Component {
 
             <div className="border-block">
               <div className="subscriptions-header border-text">
-                <h4> {this.locale.labels.account}</h4>
+                <h4> {this.locale("labels.account")}</h4>
               </div>
 
               <div className="pelcro-prefix-dashboard-block">
                 {(this.user.first_name || this.user.last_name) && (
                   <div className="pelcro-prefix-dashboard-text row">
                     <span className="pelcro-prefix-dashboard-label col-4">
-                      {this.locale.labels.name}
+                      {this.locale("labels.name")}
                     </span>
                     <span className="pelcro-prefix-dashboard-value col-8">
                       {this.user.first_name} {this.user.last_name}
@@ -438,7 +445,7 @@ class Dashboard extends Component {
                 {this.user.email && (
                   <div className="pelcro-prefix-dashboard-text row">
                     <span className="pelcro-prefix-dashboard-label col-4">
-                      {this.locale.labels.email}
+                      {this.locale("labels.email")}
                     </span>
                     <div className="pelcro-prefix-dashboard-value col-8">
                       <span className="dashboard-email">
@@ -452,7 +459,7 @@ class Dashboard extends Component {
                           onClick={this.displayUserEdit}
                         >
                           {" "}
-                          {this.locale.labels.updateProfile}
+                          {this.locale("labels.updateProfile")}
                         </button>
                       </div>
                     </div>
@@ -462,7 +469,7 @@ class Dashboard extends Component {
                 {this.user.addresses && (
                   <div className="pelcro-prefix-dashboard-text row">
                     <span className="pelcro-prefix-dashboard-label col-4">
-                      {this.locale.labels.address}
+                      {this.locale("labels.address")}
                     </span>
                     <span className="col-8">
                       {this.getAddresses()}
@@ -473,7 +480,7 @@ class Dashboard extends Component {
                 {this.user.source && (
                   <div className="pelcro-prefix-dashboard-text row">
                     <span className="pelcro-prefix-dashboard-label col-4">
-                      {this.locale.labels.paymentSource}
+                      {this.locale("labels.paymentSource")}
                     </span>
                     <div className="pelcro-prefix-dashboard-value col-8">
                       <span className="dashboard-email">
@@ -488,7 +495,7 @@ class Dashboard extends Component {
                           onClick={this.displaySourceCreate}
                         >
                           {" "}
-                          {this.locale.labels.updatePaymentSource}
+                          {this.locale("labels.updatePaymentSource")}
                         </button>
                       </div>
                     </div>
@@ -499,7 +506,7 @@ class Dashboard extends Component {
 
             <div className="border-block">
               <div className="subscriptions-header border-text">
-                <h4>{this.locale.labels.subscriptions}</h4>
+                <h4>{this.locale("labels.subscriptions")}</h4>
               </div>
               <div className="pelcro-prefix-dashboard-block">
                 {this.getSubsctiptions()}
@@ -511,7 +518,7 @@ class Dashboard extends Component {
                       type="button"
                       onClick={this.onSubmitGiftCode}
                     >
-                      {this.locale.labels.redeemGift}
+                      {this.locale("labels.redeemGift")}
                     </button>
                   </div>
                 </div>
@@ -521,7 +528,9 @@ class Dashboard extends Component {
             {Boolean(this.state.giftRecipients.length) && (
               <div className="border-block">
                 <div className="border-text">
-                  <h4>{this.locale.labels.giftRecipients.title}</h4>
+                  <h4>
+                    {this.locale("labels.giftRecipients").title}
+                  </h4>
                 </div>
                 <div className="pelcro-prefix-dashboard-block">
                   {this.renderGiftRecipients()}
@@ -535,7 +544,7 @@ class Dashboard extends Component {
               onClick={this.props.logout}
               disabled={this.state.disableSubmit}
             >
-              {this.locale.labels.logout}
+              {this.locale("labels.logout")}
             </button>
           </div>
         </div>
@@ -554,4 +563,6 @@ Dashboard.propTypes = {
   setIsRenewingGift: PropTypes.func
 };
 
-export default Dashboard;
+export const DashboardWithTrans = withTranslation("dashboard")(
+  Dashboard
+);

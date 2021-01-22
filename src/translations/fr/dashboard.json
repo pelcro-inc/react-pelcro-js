@@ -1,0 +1,36 @@
+{
+  "labels": {
+    "menu": "Menu Pelcro",
+    "name": "Nom",
+    "email": "Courriel",
+    "plan": "Plan",
+    "description": "Description",
+    "expiry": "Expiration",
+    "status": "Statut",
+    "shipments": "Expéditions restantes",
+    "logout": "Déconnexion",
+    "dashboard": "Tableau de bord",
+    "unsubscribe": "Se désabonner",
+    "reactivate": "Réactiver",
+    "renew": "Renouveler",
+    "support": "Soutien",
+    "account": "Compte",
+    "subscriptions": "Abonnements",
+    "updatePaymentSource": "Mettre à jour la source de paiement",
+    "updateProfile": "Mettre à jour le profil",
+    "updateAddress": "Modifier",
+    "redeemGift": "Échanger un cadeau",
+    "address": "Adresse",
+    "paymentSource": "Source de paiement",
+    "actions": "Actes",
+    "expiresOn": "Expire le",
+    "renewsOn": "Renouvelle le",
+    "isSureToCancel": "Êtes-vous certain de vouloir annuler votre abonnement ?",
+    "giftRecipients": {
+      "title": "Destinataires du cadeau"
+    }
+  },
+  "messages": {
+    "yourDashboard": "Votre tableau de bord Pelcro"
+  }
+}
