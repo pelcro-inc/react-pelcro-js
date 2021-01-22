@@ -4,15 +4,13 @@
 import React, { Component } from "react";
 import ErrMessage from "../common/ErrMessage";
 import PropTypes from "prop-types";
-
-import localisation from "../../utils/localisation";
 import { showError } from "../../utils/showing-error";
-
 import Submit from "../common/Submit";
 import Header from "../common/Header";
 import Authorship from "../common/Authorship";
+import { withTranslation } from "react-i18next";
 
-export class SelectModal extends Component {
+class SelectModal extends Component {
   constructor(props) {
     super(props);
 
@@ -31,7 +29,7 @@ export class SelectModal extends Component {
 
     this.product =
       this.props.product || window.Pelcro.paywall.getProduct();
-    this.locale = localisation("select").getLocaleData();
+    this.locale = this.props.t;
     this.site = window.Pelcro.site.read();
     this.closeButton = window.Pelcro.paywall.displayCloseButton();
   }
@@ -126,7 +124,7 @@ export class SelectModal extends Component {
                 <div className="pelcro-prefix-product-cost col-6">
                   {" "}
                   <p>
-                    {this.locale.labels.startingAt}{" "}
+                    {this.locale("labels.startingAt")}{" "}
                     {this.countStartPrice(product.plans)}
                   </p>
                 </div>
@@ -135,7 +133,7 @@ export class SelectModal extends Component {
                   onClick={this.selectProduct}
                   className="pelcro-prefix-btn pelcro-prefix-product-button col-6"
                 >
-                  {this.locale.buttons.select}
+                  {this.locale("buttons.select")}
                 </button>
               </div>
             </div>
@@ -317,12 +315,13 @@ export class SelectModal extends Component {
                 <div className="pelcro-prefix-modal-footer">
                   {!window.Pelcro.user.isAuthenticated() && (
                     <small>
-                      {this.locale.messages.alreadyHaveAccount + " "}
+                      {this.locale("messages.alreadyHaveAccount") +
+                        " "}
                       <button
                         className="pelcro-prefix-link"
                         onClick={this.displayLoginView}
                       >
-                        {this.locale.messages.loginHere}
+                        {this.locale("messages.loginHere")}
                       </button>
                     </small>
                   )}
@@ -416,7 +415,7 @@ export class SelectModal extends Component {
                               <div className="pelcro-prefix-product-cost col-6">
                                 {" "}
                                 <p>
-                                  {this.locale.labels.startingAt}{" "}
+                                  {this.locale("labels.startingAt")}{" "}
                                   {this.countStartPrice(
                                     product.plans
                                   )}
@@ -426,7 +425,7 @@ export class SelectModal extends Component {
                                 onClick={this.goBack}
                                 className="pelcro-prefix-btn pelcro-prefix-product-button col-6"
                               >
-                                {this.locale.buttons.back}
+                                {this.locale("buttons.back")}
                               </button>
                             </div>
                           </div>
@@ -447,7 +446,7 @@ export class SelectModal extends Component {
                         className="pelcro-prefix-form-check-label control control-checkbox"
                         htmlFor="pelcro-input-is_gift"
                       >
-                        {this.locale.messages.checkbox}
+                        {this.locale("messages.checkbox")}
                         <input
                           onChange={this.onIsGiftChange}
                           checked={this.state.isGift}
@@ -461,19 +460,20 @@ export class SelectModal extends Component {
                   <Submit
                     disabled={this.state.disabled}
                     onClick={this.submitOption}
-                    text={this.locale.buttons.next}
+                    text={this.locale("buttons.next")}
                     id="select-submit"
                   ></Submit>
                 </div>
                 <div className="pelcro-prefix-modal-footer">
                   {!window.Pelcro.user.isAuthenticated() && (
                     <small>
-                      {this.locale.messages.alreadyHaveAccount + " "}
+                      {this.locale("messages.alreadyHaveAccount") +
+                        " "}
                       <button
                         className="pelcro-prefix-link"
                         onClick={this.displayLoginView}
                       >
-                        {this.locale.messages.loginHere}
+                        {this.locale("messages.loginHere")}
                       </button>
                     </small>
                   )}
@@ -496,3 +496,7 @@ SelectModal.propTypes = {
   resetView: PropTypes.func,
   subscribe: PropTypes.func
 };
+
+export const SelectModalWithTrans = withTranslation("select")(
+  SelectModal
+);

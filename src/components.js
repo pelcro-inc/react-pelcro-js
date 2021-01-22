@@ -21,7 +21,7 @@ export { RegisterSelect } from "./Components/Register/RegisterSelect";
 export { PelcroContainer } from "./Components/PelcroContainer";
 export { LoginModal } from "./Components/Login/LoginModal";
 export { RegisterModal } from "./Components/Register/RegisterModal";
-export { SelectModal } from "./Components/Select/SelectModal";
+export { SelectModalWithTrans as SelectModal } from "./Components/Select/SelectModal";
 export { SubscriptionRenewModal } from "./Components/SubscriptionRenew/SubscriptionRenewModal";
 export { SubscriptionRenewView } from "./Components/SubscriptionRenew/SubscriptionRenewView";
 export { PaymentSuccessModal } from "./Components/PaymentSuccess/PaymentSuccessModal";
