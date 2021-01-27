@@ -21,7 +21,7 @@ export { RegisterSelect } from "./Components/Register/RegisterSelect";
 export { PelcroContainer } from "./Components/PelcroContainer";
 export { LoginModal } from "./Components/Login/LoginModal";
 export { RegisterModal } from "./Components/Register/RegisterModal";
-export { SelectModal } from "./Components/Select/SelectModal";
+export { SelectModalWithTrans as SelectModal } from "./Components/Select/SelectModal";
 export { SubscriptionRenewModal } from "./Components/SubscriptionRenew/SubscriptionRenewModal";
 export { SubscriptionRenewView } from "./Components/SubscriptionRenew/SubscriptionRenewView";
 export { PaymentSuccessModal } from "./Components/PaymentSuccess/PaymentSuccessModal";
@@ -122,7 +122,7 @@ export { OrderCraeteSubmitButton } from "./Components/OrderCreate/OrderCraeteSub
 export { OrderCreateContainer } from "./Components/OrderCreate/OrderCreateContainer";
 export { OrderCreateModal } from "./Components/OrderCreate/OrderCreateModal";
 export { OrderCreateView } from "./Components/OrderCreate/OrderCreateView";
-export { OrderConfirmModal } from "./Components/OrderConfirm/OrderConfirmModal";
+export { OrderConfirmModalWithTrans as OrderConfirmModal } from "./Components/OrderConfirm/OrderConfirmModal";
 
 export { GiftCreateModal } from "./Components/GiftCreate/GiftCreateModal";
 export { GiftCreateView } from "./Components/GiftCreate/GiftCreateView";
@@ -137,6 +137,9 @@ export { GiftRedeemContainer } from "./Components/GiftRedeem/GiftRedeemContainer
 export { GiftRedeemModal } from "./Components/GiftRedeem/GiftRedeemModal";
 export { GiftRedeemView } from "./Components/GiftRedeem/GiftRedeemView";
 export { GiftRedeemSubmitButton } from "./Components/GiftRedeem/GiftRedeemSubmitButton";
+
+export { DashboardWithTrans as Dashboard } from "./Components/dashboard/Dashboard";
+export { DashboardOpenButton } from "./Components/dashboard/DashboardOpenButton";
 
 export {
   init as initButtons,

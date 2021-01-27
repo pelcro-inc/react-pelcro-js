@@ -75,6 +75,8 @@
         "labels": {
             "title": "Thanks for your order!",
             "subtitle": "Your items will be on their way shortly."
-        }
+        },
+        "giftSent": "Subscription gift has been sent to",
+        "successfully": "successfully"
     }
 }

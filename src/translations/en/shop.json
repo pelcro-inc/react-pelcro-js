@@ -1,6 +1,14 @@
 {
-    "buttons": {
-        "select": "Select",
-        "added": "Added to cart"
-    }
+  "buttons": {
+    "select": "Select",
+    "added": "Added to cart",
+    "continue": "Continue to content"
+  },
+  "messages": {
+    "orderConfirmed": {
+      "title": "Order confirmed!",
+      "body": "Your order has been confirmed and will be shipped within the next few days. You'll shortly receive an email confirmation of this order."
+    },
+    "haveQuestions": "If you have any queries please don't hesitate to contact us!"
+  }
 }

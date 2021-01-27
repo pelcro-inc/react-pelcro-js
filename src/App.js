@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import ReactGA from "react-ga";
 import ReactDOM from "react-dom";
-import { getCurrentLocale } from "./utils/localisation";
 
 import {
+  Dashboard,
+  DashboardOpenButton,
   SelectModal,
   LoginModal,
   RegisterModal,
@@ -29,13 +30,10 @@ import {
   GiftRedeemModal
 } from "./components";
 
-import Dashboard from "./Components/dashboard/Dashboard";
-import DashboardMenu from "./Components/dashboard/Menu";
-
 class App extends Component {
   constructor(props) {
     super(props);
-    this.locale = getCurrentLocale();
+    this.locale = props.t;
     this.loadPaymentSDKs();
     initButtons(this);
   }
@@ -524,7 +522,9 @@ class App extends Component {
 
     if (this.state.giftRecipient) {
       window.alert(
-        `${this.locale.payment.messages.giftSent} ${this.state.giftRecipient.email} ${this.locale.payment.messages.successfully}`
+        `${this.locale("confirm.giftSent")} ${
+          this.state.giftRecipient.email
+        } ${this.locale("confirm.successfully")}`
       );
       this.resetView();
     } else {
@@ -547,7 +547,7 @@ class App extends Component {
       <div id="pelcro-app">
         <div id="list">
           {this.state.isAuthenticated && (
-            <DashboardMenu
+            <DashboardOpenButton
               openDashboard={this.displayDashboardView}
             />
           )}
