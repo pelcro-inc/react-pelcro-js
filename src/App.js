@@ -27,7 +27,8 @@ import {
   OrderConfirmModal,
   OrderCreateModal,
   GiftCreateModal,
-  GiftRedeemModal
+  GiftRedeemModal,
+  PasswordChangeModal
 } from "./components";
 
 class App extends Component {
@@ -142,6 +143,9 @@ class App extends Component {
       return true;
     } else if (view === "password-reset") {
       this.setView("password-reset");
+      return true;
+    } else if (view === "password-change") {
+      this.setView("password-change");
       return true;
     } else if (view === "source-create") {
       // @FIXME - implement a redirect to login first
@@ -744,6 +748,9 @@ class App extends Component {
           )}
           {this.state.view === "password-reset" && (
             <PasswordResetModal resetView={this.resetView} />
+          )}
+          {this.state.view === "password-change" && (
+            <PasswordChangeModal resetView={this.resetView} />
           )}
 
           {this.state.view === "source-create" && (
