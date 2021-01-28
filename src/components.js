@@ -108,6 +108,14 @@ export { PasswordForgotEmail } from "./Components/PasswordForgot/PasswordForgotE
 export { PasswordForgotModal } from "./Components/PasswordForgot/PasswordForgotModal";
 export { PasswordForgotView } from "./Components/PasswordForgot/PasswordForgotView";
 
+export { PasswordChangeView } from "./Components/PasswordChange/PasswordChangeView";
+export { PasswordChangeContainer } from "./Components/PasswordChange/PasswordChangeContainer";
+export { PasswordChangeModal } from "./Components/PasswordChange/PasswordChangeModal";
+export { PasswordChangeCurrentPassword } from "./Components/PasswordChange/PasswordChangeCurrentPassword";
+export { PasswordChangeNewPassword } from "./Components/PasswordChange/PasswordChangeNewPassword";
+export { PasswordChangeConfirmNewPassword } from "./Components/PasswordChange/PasswordChangeConfirmNewPassword";
+export { PasswordChangeButton } from "./Components/PasswordChange/PasswordChangeButton";
+
 export { CartContainer } from "./Components/Cart/CartContainer";
 export { CartModal } from "./Components/Cart/CartModal";
 export { CartView } from "./Components/Cart/CartView";
