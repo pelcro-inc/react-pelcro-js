@@ -1,13 +1,13 @@
 import React from "react";
-import { PasswordResetView } from "./PasswordResetView";
+import { PasswordChangeView } from "./PasswordChangeView";
 import Header from "../common/Header";
 
-export const PasswordResetModal = (props) => {
+export const PasswordChangeModal = (props) => {
   return (
     <div className="pelcro-prefix-view">
       <div
         className="pelcro-prefix-modal pelcro-prefix-fade pelcro-prefix-show"
-        id="pelcro-view-password-reset"
+        id="pelcro-view-password-change"
         tabIndex="-1"
         role="dialog"
         aria-hidden="true"
@@ -21,9 +21,9 @@ export const PasswordResetModal = (props) => {
               closeButton={true}
               resetView={props.resetView}
               site={window.Pelcro.site.read()}
-            ></Header>
+            />
             <div className="pelcro-prefix-modal-body">
-              <PasswordResetView {...props} />
+              <PasswordChangeView {...props} />
             </div>
           </div>
         </div>
