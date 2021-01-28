@@ -4,7 +4,7 @@
   "labels": {
     "signUpFacebook": "Inscrivez-vous avec Facebook",
     "signUpGoogle": "Inscrivez-vous avec Google",
-    "signUpEmail": "S'enregistrer avec courrier électronique",
+    "signUpEmail": "Inscrivez-vous avec votre courriel",
     "password": "Créer un mot de passe",
     "email": "Courriel",
     "passwordPlaceholder": "Créer un mot de passe",
@@ -18,8 +18,8 @@
     "selectPlan": "Sélectionnez un plan",
     "here": "ici",
     "iAgree": {
-      "iAgree": "J'accepte",
-      "terms": "les conditions d'utilisation",
+      "iAgree": "J’accepte",
+      "terms": "les conditions d’utilisation",
       "and": "et",
       "privacy": "la politique de confidentialité."
     },
@@ -51,7 +51,7 @@
       "gift": "cadeau"
     },
     "messages": {
-      "enterEmail": "Veuillez entrer l'adresse courriel du destinataire du cadeau."
+      "enterEmail": "Veuillez entrer l’adresse courriel du destinataire du cadeau."
     }
   },
   "redeem": {

@@ -1,8 +1,8 @@
 {
   "youAreSafe": "Vous êtes en sécurité - PCI conforme 128 SSL par",
-  "haveQuestion": "Des questions?",
+  "haveQuestion": "Des questions ?",
   "visitOurWebsite": {
-    "visitTo": "Visitez notre site Web pour",
+    "visitTo": "Visitez notre site web pour",
     "learnMore": "en savoir plus"
   },
   "visitOurFaq": {
@@ -14,6 +14,6 @@
     "logout": "Déconnexion",
     "here": "ici"
   },
-  "giftSent": "Le cadeau d'abonnement a été envoyé à",
+  "giftSent": "Le cadeau d’abonnement a été envoyé à",
   "successfully": "avec succès."
 }

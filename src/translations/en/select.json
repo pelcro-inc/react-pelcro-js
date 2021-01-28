@@ -1,0 +1,25 @@
+{
+  "messages": {
+    "alreadyHaveAccount": "Already have an account?",
+    "loginHere": "Login here",
+    "checkbox": "Check this box to gift this subscription"
+  },
+  "labels": {
+    "plan": {
+      "title": "Subscribe to a plan",
+      "subtitle": "Select one of the plans below and click on next."
+    },
+    "product": {
+      "title": "Subscribe to a product",
+      "subtitle": "Select one of the products below and click on next."
+    },
+    "selectProduct": "Select a product",
+    "selectPlan": "Select a plan",
+    "startingAt": "Starting at"
+  },
+  "buttons": {
+    "next": "Next",
+    "select": "Select",
+    "back": "Back"
+  }
+}

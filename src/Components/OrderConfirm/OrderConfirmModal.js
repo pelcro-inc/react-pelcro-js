@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import localisation from "../../utils/localisation";
-
 import Header from "../common/Header";
 import Authorship from "../common/Authorship";
 import Submit from "../common/Submit";
+import { withTranslation } from "react-i18next";
 
 export class OrderConfirmModal extends Component {
   constructor(props) {
@@ -17,7 +16,7 @@ export class OrderConfirmModal extends Component {
     this.plan = this.props.plan;
     this.product = this.props.product;
 
-    this.locale = localisation("confirm").getLocaleData();
+    this.locale = this.props.t;
     this.site = window.Pelcro.site.read();
     this.closeButton = window.Pelcro.paywall.displayCloseButton();
   }
@@ -88,21 +87,16 @@ export class OrderConfirmModal extends Component {
                 </div>
 
                 <div className="pelcro-prefix-title-block">
-                  <h4>Order confirmed!</h4>
-                  <p>
-                    Your order has been confirmed and will be shipped
-                    within the next few days. You'll shortly receive
-                    an email confirmation of this order.
-                  </p>
-                  <p>
-                    If you have any queries please don't hestigate to
-                    contact us!
-                  </p>
+                  <h4>
+                    {this.locale("messages.orderConfirmed.title")}
+                  </h4>
+                  <p>{this.locale("messages.orderConfirmed.body")}</p>
+                  <p>{this.locale("messages.haveQuestions")}</p>
                 </div>
 
                 <Submit
                   onClick={this.props.resetView}
-                  text={this.locale.buttons.continue}
+                  text={this.locale("buttons.continue")}
                 ></Submit>
 
                 <div className="pelcro-prefix-cart-field">
@@ -190,3 +184,7 @@ OrderConfirmModal.propTypes = {
   product: PropTypes.object,
   resetView: PropTypes.func
 };
+
+export const OrderConfirmModalWithTrans = withTranslation("shop")(
+  OrderConfirmModal
+);

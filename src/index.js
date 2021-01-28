@@ -3,9 +3,11 @@ import ReactDOM from "react-dom";
 import "./scss/index.scss";
 import App from "./App";
 import "./i18n";
+import { withTranslation } from "react-i18next";
 
 const root = document.createElement("div");
 root.id = "root";
 document.body.appendChild(root);
 
-ReactDOM.render(<App />, root);
+const AppWithTrans = withTranslation("common")(App);
+ReactDOM.render(<AppWithTrans />, root);
