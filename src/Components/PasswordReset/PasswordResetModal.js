@@ -1,6 +1,3 @@
-// Newsletter view.
-// The emaill form. Allows users to get free articles by entering their email.
-
 import React from "react";
 import { PasswordResetView } from "./PasswordResetView";
 import Header from "../common/Header";
