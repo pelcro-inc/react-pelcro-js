@@ -6,19 +6,6 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Unreleased]
 
-### Added
-
-- Add user dashboard component and button to library exports.
-
-### Fixed
-
-- Coupon field styling issues in some production environments.
-- Translation improvements.
-
-### Changed
-
-- Moved out of old translation service into i18n, improving bundle size [PRIVATE]
-
 ## [Released]
 
 ## [2.10.3] - 2021-01-28
