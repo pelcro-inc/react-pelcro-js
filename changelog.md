@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 ### Added
 
 - Add user dashboard component and button to library exports.
+- Add user password change modal
 
 ### Fixed
 
