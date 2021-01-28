@@ -6,7 +6,6 @@ import useReducerWithSideEffects, {
 } from "use-reducer-with-side-effects";
 import {
   SET_PASSWORD,
-  SET_TOKEN,
   HANDLE_SUBMIT,
   DISABLE_SUBMIT,
   SET_NEW_PASSWORD,
@@ -28,7 +27,6 @@ const initialState = {
   currentPasswordError: "",
   newPasswordError: "",
   confirmNewPasswordError: "",
-  token: "",
   buttonDisabled: false
 };
 export const store = createContext(initialState);
@@ -72,13 +70,6 @@ export const PasswordChangeContainer = ({
       }
     );
   };
-
-  useEffect(() => {
-    dispatch({
-      type: SET_TOKEN,
-      payload: window.Pelcro.helpers.getURLParameter("token")
-    });
-  }, []);
 
   const [state, dispatch] = useReducerWithSideEffects(
     (state, action) => {
@@ -157,11 +148,6 @@ export const PasswordChangeContainer = ({
           return Update({
             ...state,
             confirmNewPasswordError: ""
-          });
-        case SET_TOKEN:
-          return Update({
-            ...state,
-            token: action.payload
           });
         case DISABLE_SUBMIT:
           return Update({ ...state, buttonDisabled: action.payload });
