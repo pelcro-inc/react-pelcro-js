@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Unreleased]
 
+### Added
+
+- Add user password change modal
+
 ## [Released]
 
 ## [2.10.3] - 2021-01-28
@@ -13,7 +17,6 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 ### Added
 
 - Add user dashboard component and button to library exports.
-- Add user password change modal
 
 ### Fixed
 
