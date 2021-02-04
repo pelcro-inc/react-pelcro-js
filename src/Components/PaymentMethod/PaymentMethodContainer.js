@@ -38,7 +38,10 @@ import {
   PaypalGateWay,
   SUBSCRIPTION_TYPES
 } from "../../services/Subscription/Subscription.service";
-import { getCanonicalLocaleFormat } from "../../utils/utils";
+import {
+  getCanonicalLocaleFormat,
+  getUserLatestAddress
+} from "../../utils/utils";
 
 /**
  * @typedef {Object} PaymentStateType
@@ -180,6 +183,7 @@ const PaymentMethodContainerWithoutStripe = ({
 
   const onApplyCouponCode = (state, dispatch) => {
     dispatch({ type: DISABLE_COUPON_BUTTON, payload: true });
+    const addressId = getUserLatestAddress()?.id;
     const { couponCode, canMakePayment } = state;
 
     if (couponCode) {
@@ -187,7 +191,8 @@ const PaymentMethodContainerWithoutStripe = ({
         {
           auth_token: window.Pelcro.user.read().auth_token,
           plan_id: plan.id,
-          coupon_code: couponCode
+          coupon_code: couponCode,
+          address_id: addressId
         },
         (err, res) => {
           dispatch({ type: DISABLE_COUPON_BUTTON, payload: false });

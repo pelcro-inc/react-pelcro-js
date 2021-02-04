@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Unreleased]
 
+### Added
+
+- Add address id param to coupon submision. [PRIVATE]
+
 ## [Released]
 
 ## [2.11.0] = 2021-01-29
