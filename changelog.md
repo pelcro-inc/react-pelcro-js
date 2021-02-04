@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 ### Added
 
 - Add address id param to coupon submision. [PRIVATE]
+- Consider quantity of plan when subscribing.
 
 ## [Released]
 

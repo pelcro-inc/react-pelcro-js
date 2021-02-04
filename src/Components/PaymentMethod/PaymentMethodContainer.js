@@ -236,6 +236,7 @@ const PaymentMethodContainerWithoutStripe = ({
           stripe_token: token.id,
           auth_token: window.Pelcro.user.read().auth_token,
           plan_id: plan.id,
+          quantity: plan.quantity,
           coupon_code: couponCode,
           gift_recipient_email: giftRecipient
             ? giftRecipient.email
@@ -266,6 +267,7 @@ const PaymentMethodContainerWithoutStripe = ({
             stripe_token: token.id,
             auth_token: window.Pelcro.user.read().auth_token,
             plan_id: plan.id,
+            quantity: plan.quantity,
             coupon_code: couponCode,
             subscription_id: subscriptionIdToRenew
           },
