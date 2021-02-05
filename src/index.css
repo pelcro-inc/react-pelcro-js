@@ -1,0 +1,4 @@
+@import "./css/normalize.css";
+@import "./css/forms.css";
+@tailwind components;
+@tailwind utilities;
