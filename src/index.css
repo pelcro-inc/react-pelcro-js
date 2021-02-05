@@ -2,7 +2,3 @@
 @import "./css/forms.css";
 @tailwind components;
 @tailwind utilities;
-
-.pelcro-prefix-modal-open {
-  overflow: hidden;
-}
