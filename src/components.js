@@ -1,4 +1,6 @@
 import "./i18n";
+import "./index.css";
+
 export { LoginContainer } from "./Components/Login/LoginContainer";
 export { Email } from "./SubComponents/Email";
 export { Password } from "./SubComponents/Password";
