@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./scss/index.scss";
+import "./index.css";
 import App from "./App";
 import "./i18n";
 import { withTranslation } from "react-i18next";
