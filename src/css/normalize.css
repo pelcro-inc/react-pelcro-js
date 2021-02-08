@@ -189,9 +189,9 @@ Correct the inability to style clickable types in iOS and Safari.
 */
 
   #pelcro-app button,
-  [type="button"],
-  [type="reset"],
-  [type="submit"] {
+  #pelcro-app [type="button"],
+  #pelcro-app [type="reset"],
+  #pelcro-app [type="submit"] {
     appearance: button;
   }
 
