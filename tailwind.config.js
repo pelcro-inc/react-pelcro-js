@@ -16,7 +16,6 @@ module.exports = {
     colors: {
       transparent: "transparent",
       current: "currentColor",
-
       black: colors.black,
       white: colors.white,
       gray: colors.coolGray,
@@ -733,7 +732,8 @@ module.exports = {
       20: "20",
       30: "30",
       40: "40",
-      50: "50"
+      50: "50",
+      max: "999999"
     }
   },
   variantOrder: [
