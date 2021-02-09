@@ -1,51 +1,42 @@
-import React, { useContext, useEffect } from "react";
-import { SET_SELECT } from "../utils/action-types";
+import React from "react";
 
-/**
- *
- */
 export function Select({
-  options = [],
-  fieldName,
-  placeholder = "",
-  style,
-  className,
+  label = "",
+  required,
   id,
-  store,
+  errorId,
+  error = "",
+  className = "",
+  labelClassName = "",
+  errorClassName = "",
+  children,
   ...otherProps
 }) {
-  const { dispatch, state } = useContext(store);
-
-  const createSelectItems = () => {
-    return options.map((option) => (
-      <option key={option.key} value={option.value}>
-        {option.value}
-      </option>
-    ));
-  };
-
-  const onSelect = (e) => {
-    dispatch({
-      type: SET_SELECT,
-      payload: { [fieldName]: e.target.value }
-    });
-  };
-
   return (
-    <select
-      value={state[fieldName]}
-      onChange={onSelect}
-      className={className}
-      autoComplete="state"
-      id="pelcro-input-state"
-      {...otherProps}
-    >
-      {" "}
-      (placeholder &&
-      <option value="" disabled selected>
-        {placeholder}
-      </option>
-      ){createSelectItems()}
-    </select>
+    <div className="w-full">
+      <label
+        htmlFor={id}
+        className={`text-gray-700 text-xs pelcro-prefix-label ${labelClassName}`}
+      >
+        {`${label}${required ? "*" : ""}`}
+      </label>
+      <select
+        id={id}
+        className={`mt-1 w-full border border-gray-300 bg-gray-50 p-3 text-sm appearance-none outline-none rounded-sm focus:ring-1 focus:ring-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed pelcro-select ${className} ${
+          error ? "ring-1 ring-red-600 input-error" : ""
+        }`}
+        aria-describedby={errorId}
+        aria-invalid={Boolean(error)}
+        {...otherProps}
+      >
+        {children}
+      </select>
+      <p
+        id={errorId}
+        className="h-4 my-2 text-red-600 normal-case pelcro-field-error"
+      >
+        {error}
+      </p>
+    </div>
   );
 }
