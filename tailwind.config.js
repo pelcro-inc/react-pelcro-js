@@ -16,6 +16,8 @@ module.exports = {
     colors: {
       transparent: "transparent",
       current: "currentColor",
+      primary: colors.emerald,
+
       black: colors.black,
       white: colors.white,
       gray: colors.coolGray,
@@ -25,6 +27,7 @@ module.exports = {
       blue: colors.blue,
       indigo: colors.indigo,
       purple: colors.violet,
+      orange: colors.orange,
       pink: colors.pink
     },
     spacing: {
@@ -659,6 +662,7 @@ module.exports = {
     transitionProperty: {
       none: "none",
       all: "all",
+      height: "height",
       DEFAULT:
         "background-color, border-color, color, fill, stroke, opacity, box-shadow, transform",
       colors: "background-color, border-color, color, fill, stroke",
@@ -749,7 +753,8 @@ module.exports = {
     "hover",
     "focus",
     "focus-visible",
-    "active"
+    "active",
+    "disabled"
   ],
   variants: {
     accessibility: ["responsive", "focus-within", "focus"],
@@ -766,7 +771,8 @@ module.exports = {
       "group-hover",
       "focus-within",
       "hover",
-      "focus"
+      "focus",
+      "checked"
     ],
     backgroundImage: ["responsive"],
     backgroundOpacity: [
@@ -786,7 +792,8 @@ module.exports = {
       "group-hover",
       "focus-within",
       "hover",
-      "focus"
+      "focus",
+      "checked"
     ],
     borderOpacity: [
       "responsive",
@@ -841,7 +848,7 @@ module.exports = {
     gridTemplateColumns: ["responsive"],
     gridTemplateRows: ["responsive"],
     height: ["responsive"],
-    inset: ["responsive"],
+    inset: ["responsive", "checked"],
     justifyContent: ["responsive"],
     justifyItems: ["responsive"],
     justifySelf: ["responsive"],
@@ -919,7 +926,7 @@ module.exports = {
     transitionDuration: ["responsive"],
     transitionProperty: ["responsive"],
     transitionTimingFunction: ["responsive"],
-    translate: ["responsive", "hover", "focus"],
+    translate: ["responsive", "hover", "group-hover", "focus"],
     userSelect: ["responsive"],
     verticalAlign: ["responsive"],
     visibility: ["responsive"],

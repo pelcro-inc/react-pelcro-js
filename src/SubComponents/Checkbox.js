@@ -11,7 +11,7 @@ export function Checkbox({
       <input
         type="checkbox"
         id={id}
-        className={`text-green-500 checked:border-transparent rounded focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-300 text-md disabled:cursor-not-allowed disabled:text-gray-300 pelcro-checkbox-input ${className}`}
+        className={`text-primary-500 checked:border-transparent rounded focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-300 text-md disabled:cursor-not-allowed disabled:text-gray-300 pelcro-checkbox-input ${className}`}
         {...otherProps}
       />
       <label htmlFor={id} className="ml-2 pelcro-checkbox-label">
