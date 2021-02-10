@@ -242,8 +242,9 @@ export class PaypalClient {
    * @example auto_renew === false => "CA$ 10.00"
    */
   #getFormattedAmount = () => {
+    const totalAmount = (this.product.quantity || 1) * this.amount;
     const priceFormatted = getFormattedPriceByLocal(
-      this.amount,
+      totalAmount,
       this.product.currency,
       this.siteInfo.default_locale
     );

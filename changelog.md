@@ -8,10 +8,16 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ### Added
 
-- Add address id param to coupon submision. [PRIVATE]
-- Consider quantity of plan when subscribing.
+- Consider quantity of plan on paypal & subscription service.
 
 ## [Released]
+
+## [2.11.1] - 2021-02-04
+
+### Added
+
+- Add address id param to coupon submision. [PRIVATE]
+- Consider quantity of plan when subscribing.
 
 ## [2.11.0] = 2021-01-29
 

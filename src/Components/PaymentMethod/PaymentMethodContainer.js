@@ -333,6 +333,7 @@ const PaymentMethodContainerWithoutStripe = ({
         {
           type: SUBSCRIPTION_TYPES.CREATE_GIFTED_SUBSCRIPTION,
           token: paypalNonce,
+          quantity: plan.quantity,
           plan,
           couponCode,
           product,
@@ -356,6 +357,7 @@ const PaymentMethodContainerWithoutStripe = ({
       {
         type: SUBSCRIPTION_TYPES.CREATE_SUBSCRIPTION,
         token: paypalNonce,
+        quantity: plan.quantity,
         plan,
         couponCode,
         product
