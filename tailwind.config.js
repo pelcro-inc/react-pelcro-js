@@ -16,6 +16,7 @@ module.exports = {
     colors: {
       transparent: "transparent",
       current: "currentColor",
+      primary: colors.emerald,
 
       black: colors.black,
       white: colors.white,
@@ -26,6 +27,7 @@ module.exports = {
       blue: colors.blue,
       indigo: colors.indigo,
       purple: colors.violet,
+      orange: colors.orange,
       pink: colors.pink
     },
     spacing: {
@@ -660,6 +662,7 @@ module.exports = {
     transitionProperty: {
       none: "none",
       all: "all",
+      height: "height",
       DEFAULT:
         "background-color, border-color, color, fill, stroke, opacity, box-shadow, transform",
       colors: "background-color, border-color, color, fill, stroke",
@@ -733,7 +736,8 @@ module.exports = {
       20: "20",
       30: "30",
       40: "40",
-      50: "50"
+      50: "50",
+      max: "999999"
     }
   },
   variantOrder: [
@@ -749,7 +753,8 @@ module.exports = {
     "hover",
     "focus",
     "focus-visible",
-    "active"
+    "active",
+    "disabled"
   ],
   variants: {
     accessibility: ["responsive", "focus-within", "focus"],
@@ -929,9 +934,11 @@ module.exports = {
     zIndex: ["responsive", "focus-within", "focus"],
     extend: {
       textColor: ["disabled"],
-      backgroundColor: ["disabled"],
+      backgroundColor: ["disabled", "checked"],
       borderColor: ["disabled", "checked"],
-      cursor: ["disabled"]
+      cursor: ["disabled"],
+      inset: ["checked"],
+      translate: ["group-hover"]
     }
   },
   plugins: []
