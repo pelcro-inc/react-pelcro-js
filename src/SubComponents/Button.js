@@ -17,7 +17,7 @@ export function Button({
         variant,
         isFullWidth,
         disabled
-      )} pelcro-prefix-btn pelcro-button ${className}`}
+      )} pelcro-button-${variant} ${className}`}
       disabled={disabled}
       {...otherProps}
     >

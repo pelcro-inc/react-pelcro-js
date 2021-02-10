@@ -16,14 +16,14 @@ export function Select({
     <div className="w-full">
       <label
         htmlFor={id}
-        className={`text-gray-700 text-xs pelcro-prefix-label pelcro-select-label ${labelClassName}`}
+        className={`text-gray-700 pelcro-select-label ${labelClassName}`}
       >
         {`${label}${required ? "*" : ""}`}
       </label>
       <select
         id={id}
         className={`mt-1 w-full border border-gray-300 bg-gray-50 p-3 text-sm appearance-none outline-none rounded-sm focus:ring-1 focus:ring-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed pelcro-select-select ${className} ${
-          error ? "ring-1 ring-red-600 input-error" : ""
+          error ? "ring-1 ring-red-600 pelcro-input-invalid" : ""
         }`}
         aria-describedby={errorId}
         aria-invalid={Boolean(error)}

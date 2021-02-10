@@ -15,15 +15,15 @@ export function Input({
     <div className="w-full">
       <label
         htmlFor={id}
-        className={`text-gray-700 pelcro-prefix-label pelcro-input-label ${labelClassName}`}
+        className={`text-gray-700 pelcro-input-label ${labelClassName}`}
       >
         {`${label}${required ? "*" : ""}`}
       </label>
       <input
         type="text"
         id={id}
-        className={`mt-1 w-full border border-gray-300 bg-gray-50 p-3 appearance-none outline-none rounded-sm focus:ring-1 focus:ring-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed pelcro-prefix-input pelcro-prefix-form-control pelcro-input-input ${className} ${
-          error ? "ring-1 ring-red-600 input-error" : ""
+        className={`mt-1 w-full border border-gray-300 bg-gray-50 p-3 appearance-none outline-none rounded-sm focus:ring-1 focus:ring-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed pelcro-input-input ${className} ${
+          error ? "ring-1 ring-red-600 pelcro-input-invalid" : ""
         }`}
         aria-describedby={errorId}
         aria-invalid={Boolean(error)}
