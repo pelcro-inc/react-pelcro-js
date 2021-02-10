@@ -6,11 +6,13 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Unreleased]
 
+## [Released]
+
+## [2.11.2] - 2021-02-10
+
 ### Added
 
 - Consider quantity of plan on paypal & subscription service.
-
-## [Released]
 
 ## [2.11.1] - 2021-02-04
 
