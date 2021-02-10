@@ -771,8 +771,7 @@ module.exports = {
       "group-hover",
       "focus-within",
       "hover",
-      "focus",
-      "checked"
+      "focus"
     ],
     backgroundImage: ["responsive"],
     backgroundOpacity: [
@@ -792,8 +791,7 @@ module.exports = {
       "group-hover",
       "focus-within",
       "hover",
-      "focus",
-      "checked"
+      "focus"
     ],
     borderOpacity: [
       "responsive",
@@ -848,7 +846,7 @@ module.exports = {
     gridTemplateColumns: ["responsive"],
     gridTemplateRows: ["responsive"],
     height: ["responsive"],
-    inset: ["responsive", "checked"],
+    inset: ["responsive"],
     justifyContent: ["responsive"],
     justifyItems: ["responsive"],
     justifySelf: ["responsive"],
@@ -926,7 +924,7 @@ module.exports = {
     transitionDuration: ["responsive"],
     transitionProperty: ["responsive"],
     transitionTimingFunction: ["responsive"],
-    translate: ["responsive", "hover", "group-hover", "focus"],
+    translate: ["responsive", "hover", "focus"],
     userSelect: ["responsive"],
     verticalAlign: ["responsive"],
     visibility: ["responsive"],
@@ -936,9 +934,11 @@ module.exports = {
     zIndex: ["responsive", "focus-within", "focus"],
     extend: {
       textColor: ["disabled"],
-      backgroundColor: ["disabled"],
+      backgroundColor: ["disabled", "checked"],
       borderColor: ["disabled", "checked"],
-      cursor: ["disabled"]
+      cursor: ["disabled"],
+      inset: ["checked"],
+      translate: ["group-hover"]
     }
   },
   plugins: []
