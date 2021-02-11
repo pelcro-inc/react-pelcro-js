@@ -575,7 +575,7 @@ class App extends Component {
           {this.state.view === "login" && (
             <LoginModal
               setView={this.setView}
-              resetView={this.resetView}
+              onClose={this.resetView}
               onSuccess={() => {
                 this.setView("");
                 this.loggedIn();
