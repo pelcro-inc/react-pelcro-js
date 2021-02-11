@@ -192,17 +192,14 @@ class App extends Component {
   };
 
   enableScroll = () => {
-    document.body.className = document.body.className.replace(
-      "pelcro-prefix-modal-open",
-      ""
-    );
+    document.body.classList.remove("pelcro-prefix-modal-open");
   };
 
   disableScroll = () => {
     if (
       !document.body.classList.contains("pelcro-prefix-modal-open")
     ) {
-      document.body.className += " pelcro-prefix-modal-open";
+      document.body.classList.add("pelcro-prefix-modal-open");
     }
   };
 
@@ -742,7 +739,7 @@ class App extends Component {
 
           {this.state.view === "password-forgot" && (
             <PasswordForgotModal
-              resetView={this.resetView}
+              onClose={this.resetView}
               setView={this.setView}
             />
           )}
