@@ -1,19 +1,9 @@
 import React, { useContext } from "react";
 import { Loader } from "../SubComponents/Loader";
 import { SET_TEXT_FIELD } from "../utils/action-types";
+import { Input } from "./Input";
 
-/**
- *
- */
-export function TextInput({
-  placeholder,
-  style,
-  className,
-  id,
-  store,
-  fieldName,
-  ...otherProps
-}) {
+export function TextInput({ store, fieldName, ...otherProps }) {
   const { dispatch, state } = useContext(store);
 
   const handleInputChange = (value) => {
@@ -32,19 +22,12 @@ export function TextInput({
   }
 
   return (
-    <input
+    <Input
       type="text"
-      id={id}
-      style={{ ...style }}
-      className={className}
       value={state[fieldName]}
-      defaultValue={
-        window.Pelcro.user.read().metadata &&
-        window.Pelcro.user.read().metadata[fieldName]
-      }
+      defaultValue={window.Pelcro.user.read()?.metadata[fieldName]}
       onChange={(e) => handleInputChange(e.target.value)}
-      placeholder={placeholder || fieldName}
       {...otherProps}
-    ></input>
+    />
   );
 }
