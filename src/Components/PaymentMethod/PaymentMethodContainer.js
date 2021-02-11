@@ -53,6 +53,7 @@ import {
  * @property {unknown} canMakePayment
  * @property {unknown} paymentRequest
  * @property {number} updatedPrice
+ * @property {object} currentPlan
  * @property {object} order
  */
 
@@ -66,6 +67,7 @@ const initialState = {
   canMakePayment: false,
   paymentRequest: null,
   updatedPrice: null,
+  currentPlan: null,
   order: {}
 };
 const store = createContext(initialState);
@@ -472,8 +474,9 @@ const PaymentMethodContainerWithoutStripe = ({
           );
 
         case INIT_CONTAINER:
-          return UpdateWithSideEffect(state, (state, dispatch) =>
-            initPaymentRequest(state, dispatch)
+          return UpdateWithSideEffect(
+            { ...state, currentPlan: plan },
+            (state, dispatch) => initPaymentRequest(state, dispatch)
           );
 
         case UPDATE_PAYMENT_REQUEST:

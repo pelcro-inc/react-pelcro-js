@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Unreleased]
 
+### Fixed
+
+- Use plan currency instead of default currency for discounted amount.
+
 ## [Released]
 
 ## [2.11.2] - 2021-02-10
