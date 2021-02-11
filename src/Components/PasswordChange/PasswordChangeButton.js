@@ -1,9 +1,12 @@
 import React, { useContext } from "react";
 import { Button } from "../../SubComponents/Button";
 import { HANDLE_SUBMIT } from "../../utils/action-types";
-import { store } from "./PasswordChangeContainer";
 
-export const PasswordChangeButton = ({ name, ...otherProps }) => {
+export const PasswordChangeButton = ({
+  store,
+  name,
+  ...otherProps
+}) => {
   const {
     state: {
       buttonDisabled,
@@ -24,8 +27,9 @@ export const PasswordChangeButton = ({ name, ...otherProps }) => {
       {...otherProps}
       onClick={() => dispatch({ type: HANDLE_SUBMIT })}
       disabled={buttonDisabled || hasInvalidField}
+      isFullWidth={true}
     >
-      {name ?? "SUBMIT"}
+      {name}
     </Button>
   );
 };

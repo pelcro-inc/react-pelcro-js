@@ -4,80 +4,46 @@ import { PasswordChangeCurrentPassword } from "./PasswordChangeCurrentPassword";
 import { PasswordChangeNewPassword } from "./PasswordChangeNewPassword";
 import { PasswordChangeConfirmNewPassword } from "./PasswordChangeConfirmNewPassword";
 import { PasswordChangeButton } from "./PasswordChangeButton";
-import { AlertDanger } from "../Alerts/AlertDanger";
-import { AlertSuccess } from "../Alerts/AlertSuccess";
 import { useTranslation } from "react-i18next";
-import Authorship from "../common/Authorship";
+import { AlertWithContext } from "../../SubComponents/AlertWithContext";
 
 export const PasswordChangeView = (props) => {
   const { t } = useTranslation("passwordChange");
 
   return (
-    <PasswordChangeContainer {...props}>
-      <div className="pelcro-prefix-title-block">
+    <div id="pelcro-password-change-view">
+      <div className="pelcro-title-container">
         <h4>{t("title")}</h4>
         <p>{t("subtitle")}</p>
       </div>
-      <AlertDanger name="password-change" />
-      <AlertSuccess name="password-change" />
-      <div className="pelcro-prefix-form">
-        <div className="pelcro-prefix-form-group">
-          <label
-            htmlFor="pelcro-input-password"
-            className="pelcro-prefix-label"
-          >
-            {t("currentPassword")} *
-          </label>
+      <PasswordChangeContainer {...props}>
+        <AlertWithContext />
+        <div className="pelcro-form">
           <PasswordChangeCurrentPassword
             id="pelcro-input-password"
-            className="pelcro-prefix-input pelcro-prefix-form-control"
+            errorId="pelcro-input-password-error"
             placeholder={t("currentPassword")}
+            label={t("currentPassword")}
             required
           />
-        </div>
-
-        <div className="pelcro-prefix-form-group">
-          <label
-            htmlFor="pelcro-input-new_password"
-            className="pelcro-prefix-label"
-          >
-            {t("newPassword")} *
-          </label>
           <PasswordChangeNewPassword
-            id="pelcro-input-new_password"
-            className="pelcro-prefix-input pelcro-prefix-form-control"
+            id="pelcro-input-new-password"
+            errorId="pelcro-input-new-password-error"
             placeholder={t("newPassword")}
+            label={t("newPassword")}
             required
           />
-        </div>
-
-        <div className="pelcro-prefix-form-group">
-          <label
-            htmlFor="pelcro-input-confirm_new_password"
-            className="pelcro-prefix-label"
-          >
-            {t("confirmNewPassword")} *
-          </label>
           <PasswordChangeConfirmNewPassword
-            id="pelcro-input-confirm_new_password"
-            className="pelcro-prefix-input pelcro-prefix-form-control"
+            id="pelcro-input-confirm-password"
+            errorId="pelcro-input-confirm-password-error"
             placeholder={t("confirmNewPassword")}
+            label={t("confirmNewPassword")}
             required
           />
+          <PasswordChangeButton name={t("submit")} />
+          <small className="pelcro-footnote">* {t("required")}</small>
         </div>
-
-        <PasswordChangeButton
-          className="pelcro-prefix-btn"
-          name={t("submit")}
-        />
-        <small className="pelcro-prefix-footnote pelcro-prefix-form-text">
-          * {t("required")}
-        </small>
-      </div>
-
-      <div className="pelcro-prefix-modal-footer">
-        <Authorship />
-      </div>
-    </PasswordChangeContainer>
+      </PasswordChangeContainer>
+    </div>
   );
 };

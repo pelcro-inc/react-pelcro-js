@@ -1,4 +1,4 @@
-import React, { createContext, useEffect } from "react";
+import React, { createContext } from "react";
 import { useTranslation } from "react-i18next";
 import useReducerWithSideEffects, {
   UpdateWithSideEffect,
@@ -15,10 +15,10 @@ import {
   VALIDATE_CONFIRM_NEW_PASSWORD,
   RESET_PASSWORD_ERROR,
   RESET_NEW_PASSWORD_ERROR,
-  RESET_CONFIRM_NEW_PASSWORD_ERROR
+  RESET_CONFIRM_NEW_PASSWORD_ERROR,
+  SHOW_ALERT
 } from "../../utils/action-types";
 import { getErrorMessages } from "../common/Helpers";
-import { showError, showSuccess } from "../../utils/showing-error";
 
 const initialState = {
   currentPassword: "",
@@ -27,7 +27,11 @@ const initialState = {
   currentPasswordError: "",
   newPasswordError: "",
   confirmNewPasswordError: "",
-  buttonDisabled: false
+  buttonDisabled: false,
+  alert: {
+    type: "error",
+    content: ""
+  }
 };
 export const store = createContext(initialState);
 const { Provider } = store;
@@ -55,16 +59,22 @@ export const PasswordChangeContainer = ({
         dispatch({ type: DISABLE_SUBMIT, payload: false });
 
         if (err) {
-          showError(
-            getErrorMessages(err),
-            "pelcro-error-password-change"
-          );
-          return onFailure(err);
+          dispatch({
+            type: SHOW_ALERT,
+            payload: {
+              type: "error",
+              content: getErrorMessages(err)
+            }
+          });
+          onFailure(err);
         } else {
-          showSuccess(
-            t("passwordChanged"),
-            "pelcro-success-password-change"
-          );
+          dispatch({
+            type: SHOW_ALERT,
+            payload: {
+              type: "success",
+              content: t("passwordChanged")
+            }
+          });
           onSuccess();
         }
       }
@@ -88,6 +98,11 @@ export const PasswordChangeContainer = ({
           return Update({
             ...state,
             confirmNewPassword: action.payload
+          });
+        case SHOW_ALERT:
+          return Update({
+            ...state,
+            alert: action.payload
           });
         case VALIDATE_PASSWORD:
           if (!state.currentPassword.length) {
