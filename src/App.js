@@ -586,7 +586,7 @@ class App extends Component {
             <RegisterModal
               product={this.state.product}
               setView={this.setView}
-              resetView={this.resetView}
+              onClose={this.resetView}
               onDisplay={() => {
                 ReactGA.event({
                   category: "VIEWS",

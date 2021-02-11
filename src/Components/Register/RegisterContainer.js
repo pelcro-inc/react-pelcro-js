@@ -13,13 +13,13 @@ import {
   SET_FIRST_NAME,
   SET_LAST_NAME,
   SET_TEXT_FIELD,
-  SET_SELECT
+  SET_SELECT,
+  SHOW_ALERT
 } from "../../utils/action-types";
 import useReducerWithSideEffects, {
   UpdateWithSideEffect,
   Update
 } from "use-reducer-with-side-effects";
-import { showError } from "../../utils/showing-error";
 import { getErrorMessages } from "../common/Helpers";
 import { cleanObjectNullValues } from "../../utils/utils";
 
@@ -34,7 +34,11 @@ const initialState = {
   buttonDisabled: false,
   firstName: null,
   lastName: null,
-  selectFields: {}
+  selectFields: {},
+  alert: {
+    type: "error",
+    content: ""
+  }
 };
 const store = createContext(initialState);
 const { Provider } = store;
@@ -78,11 +82,11 @@ const RegisterContainer = ({
         });
 
         if (err) {
+          dispatch({
+            type: SHOW_ALERT,
+            payload: { type: "error", content: getErrorMessages(err) }
+          });
           onFailure(err);
-          return showError(
-            getErrorMessages(err),
-            "pelcro-error-register"
-          );
         } else {
           onSuccess();
         }
@@ -158,6 +162,11 @@ const RegisterContainer = ({
           return Update({
             ...state,
             confirmPasswordUsed: action.payload
+          });
+        case SHOW_ALERT:
+          return Update({
+            ...state,
+            alert: action.payload
           });
         case RESET_LOGIN_FORM:
           return initialState;
