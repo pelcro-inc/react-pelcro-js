@@ -747,7 +747,7 @@ class App extends Component {
             />
           )}
           {this.state.view === "password-reset" && (
-            <PasswordResetModal resetView={this.resetView} />
+            <PasswordResetModal onClose={this.resetView} />
           )}
           {this.state.view === "password-change" && (
             <PasswordChangeModal onClose={this.resetView} />

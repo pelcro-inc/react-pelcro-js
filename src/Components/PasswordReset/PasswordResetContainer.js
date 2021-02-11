@@ -10,17 +10,21 @@ import {
   SET_TOKEN,
   SET_CONFIRM_PASSWORD,
   HANDLE_SUBMIT,
-  DISABLE_SUBMIT
+  DISABLE_SUBMIT,
+  SHOW_ALERT
 } from "../../utils/action-types";
 import { getErrorMessages } from "../common/Helpers";
-import { showError, showSuccess } from "../../utils/showing-error";
 
 const initialState = {
   email: "",
   password: "",
   confirmPassword: "",
   token: "",
-  buttonDisabled: false
+  buttonDisabled: false,
+  alert: {
+    type: "error",
+    content: ""
+  }
 };
 const store = createContext(initialState);
 const { Provider } = store;
@@ -49,16 +53,19 @@ const PasswordResetContainer = ({
         dispatch({ type: DISABLE_SUBMIT, payload: false });
 
         if (err) {
-          showError(
-            getErrorMessages(err),
-            "pelcro-error-password-reset"
-          );
-          return onFailure(err);
+          dispatch({
+            type: SHOW_ALERT,
+            payload: { type: "error", content: getErrorMessages(err) }
+          });
+          onFailure(err);
         } else {
-          showSuccess(
-            t("passwordUpdated"),
-            "pelcro-success-password-reset"
-          );
+          dispatch({
+            type: SHOW_ALERT,
+            payload: {
+              type: "success",
+              content: t("passwordUpdated")
+            }
+          });
           onSuccess();
         }
       }
@@ -98,6 +105,11 @@ const PasswordResetContainer = ({
             confirmPassword: action.payload
           });
         case SET_TOKEN:
+          return Update({
+            ...state,
+            token: action.payload
+          });
+        case SHOW_ALERT:
           return Update({
             ...state,
             token: action.payload
