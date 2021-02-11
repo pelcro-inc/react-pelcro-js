@@ -33,6 +33,7 @@ export function Select({
       </select>
       <p
         id={errorId}
+        aria-live="assertive"
         className="h-4 my-2 text-red-600 normal-case pelcro-field-error"
       >
         {error}
