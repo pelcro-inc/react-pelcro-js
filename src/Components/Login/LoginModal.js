@@ -10,13 +10,7 @@ import {
 } from "../../SubComponents/Modal";
 import { Link } from "../../SubComponents/Link";
 
-export function LoginModal({
-  setView,
-  onClose,
-  resetView,
-  onSuccess,
-  ...otherProps
-}) {
+export function LoginModal({ setView, onClose, ...otherProps }) {
   const { t } = useTranslation("login");
 
   const onCreateAccountClick = () => {
@@ -38,7 +32,7 @@ export function LoginModal({
         title={site.name}
       />
       <ModalBody>
-        <LoginView onSuccess={onSuccess} {...otherProps} />
+        <LoginView {...otherProps} />
       </ModalBody>
       <ModalFooter>
         <div>
