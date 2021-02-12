@@ -9,7 +9,7 @@ export const AlertWithContext = ({ store, ...otherProps }) => {
   return (
     alert.content && (
       <Alert type={alert.type} {...otherProps}>
-        {alert}
+        {alert.content}
       </Alert>
     )
   );
