@@ -36,9 +36,7 @@ export function RegisterView(props) {
             label={t("labels.password")}
             required
           />
-          <small className="pelcro-prefix-footnote pelcro-prefix-form-text">
-            * {t("labels.required")}
-          </small>
+          <p className="pelcro-footnote">* {t("labels.required")}</p>
           <RegisterButton
             id="pelcro-submit"
             name={t("messages.createAccount")}

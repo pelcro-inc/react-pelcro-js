@@ -44,7 +44,7 @@ export const PasswordResetView = (props) => {
             name={t("submit")}
             id="pelcro-submit"
           />
-          <small className="pelcro-footnote">* {t("required")}</small>
+          <p className="pelcro-footnote">* {t("required")}</p>
         </PasswordResetContainer>
       </div>
     </div>

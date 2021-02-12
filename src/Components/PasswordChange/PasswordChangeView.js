@@ -41,7 +41,7 @@ export const PasswordChangeView = (props) => {
             required
           />
           <PasswordChangeButton name={t("submit")} />
-          <small className="pelcro-footnote">* {t("required")}</small>
+          <p className="pelcro-footnote">* {t("required")}</p>
         </PasswordChangeContainer>
       </div>
     </div>

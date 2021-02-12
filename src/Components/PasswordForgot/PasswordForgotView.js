@@ -26,7 +26,7 @@ export const PasswordForgotView = (props) => {
             name={t("submit")}
             id="pelcro-submit"
           />
-          <small className="pelcro-footnote">* {t("required")}</small>
+          <p className="pelcro-footnote">* {t("required")}</p>
         </PasswordForgotContainer>
       </div>
     </div>
