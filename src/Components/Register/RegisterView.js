@@ -19,9 +19,9 @@ export function RegisterView(props) {
         <h4>{title}</h4>
         <p>{subtitle}</p>
       </div>
-      <RegisterContainer {...props}>
-        <AlertWithContext />
-        <div className="pelcro-form">
+      <div className="pelcro-form">
+        <RegisterContainer {...props}>
+          <AlertWithContext />
           <RegisterEmail
             id="pelcro-input-email"
             errorId="pelcro-input-email-error"
@@ -43,8 +43,8 @@ export function RegisterView(props) {
             id="pelcro-submit"
             name={t("messages.createAccount")}
           />
-        </div>
-      </RegisterContainer>
+        </RegisterContainer>
+      </div>
     </div>
   );
 }

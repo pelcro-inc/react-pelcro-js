@@ -15,9 +15,9 @@ export function LoginView(props) {
         <h4>{t("messages.loginTo")}</h4>
         <p>{t("messages.welcome")}</p>
       </div>
-      <LoginContainer {...props}>
-        <AlertWithContext />
-        <div className="pelcro-form">
+      <div className="pelcro-form">
+        <LoginContainer {...props}>
+          <AlertWithContext />
           <LoginEmail
             id="pelcro-input-email"
             errorId="pelcro-input-email-error"
@@ -34,8 +34,8 @@ export function LoginView(props) {
           />
           <p className="pelcro-footnote">* {t("labels.required")}</p>
           <LoginButton name={t("labels.login")} id="pelcro-submit" />
-        </div>
-      </LoginContainer>
+        </LoginContainer>
+      </div>
     </div>
   );
 }

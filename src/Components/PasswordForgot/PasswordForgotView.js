@@ -13,9 +13,9 @@ export const PasswordForgotView = (props) => {
         <h4>{t("title")}</h4>
         <p>{t("subtitle")}</p>
       </div>
-      <PasswordForgotContainer {...props}>
-        <AlertWithContext />
-        <div className="pelcro-form">
+      <div className="pelcro-form">
+        <PasswordForgotContainer {...props}>
+          <AlertWithContext />
           <PasswordForgotEmail
             id="pelcro-input-email"
             required
@@ -27,8 +27,8 @@ export const PasswordForgotView = (props) => {
             id="pelcro-submit"
           />
           <small className="pelcro-footnote">* {t("required")}</small>
-        </div>
-      </PasswordForgotContainer>
+        </PasswordForgotContainer>
+      </div>
     </div>
   );
 };

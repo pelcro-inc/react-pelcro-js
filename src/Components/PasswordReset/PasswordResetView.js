@@ -15,9 +15,9 @@ export const PasswordResetView = (props) => {
         <h4>{t("title")}</h4>
         <p>{t("subtitle")}</p>
       </div>
-      <PasswordResetContainer {...props}>
-        <AlertWithContext />
-        <div className="pelcro-form">
+      <div className="pelcro-form">
+        <PasswordResetContainer {...props}>
+          <AlertWithContext />
           <PasswordResetEmail
             id="pelcro-input-email"
             errorId="pelcro-input-email-error"
@@ -45,8 +45,8 @@ export const PasswordResetView = (props) => {
             id="pelcro-submit"
           />
           <small className="pelcro-footnote">* {t("required")}</small>
-        </div>
-      </PasswordResetContainer>
+        </PasswordResetContainer>
+      </div>
     </div>
   );
 };
