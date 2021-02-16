@@ -3,10 +3,8 @@ import { useTranslation } from "react-i18next";
 import { Loader } from "../SubComponents/Loader";
 import { SET_STATE, SET_STATES } from "../utils/action-types";
 import { showError } from "../utils/showing-error";
+import { Select } from "./Select";
 
-/**
- *
- */
 export function StateSelect({
   placeholder = "",
   style,
@@ -79,7 +77,7 @@ export function StateSelect({
   }
 
   return (
-    <select
+    <Select
       value={state}
       onChange={onStateChange}
       className={className}
@@ -90,6 +88,6 @@ export function StateSelect({
         {placeholder}
       </option>
       {createStateItems()}
-    </select>
+    </Select>
   );
 }

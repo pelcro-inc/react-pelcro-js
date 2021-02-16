@@ -25,7 +25,7 @@ export function TextInput({ store, fieldName, ...otherProps }) {
     <Input
       type="text"
       value={state[fieldName]}
-      defaultValue={window.Pelcro.user.read()?.metadata[fieldName]}
+      defaultValue={window.Pelcro.user.read()?.metadata?.[fieldName]}
       onChange={(e) => handleInputChange(e.target.value)}
       {...otherProps}
     />

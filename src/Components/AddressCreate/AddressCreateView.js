@@ -1,6 +1,5 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import ErrMessage from "../common/ErrMessage";
 import { AddressCreateFirstName } from "./AddressCreateFirstName";
 import { AddressCreateLastName } from "./AddressCreateLastName";
 import { AddressCreateLine1 } from "./AddressCreateLine1";
@@ -10,128 +9,85 @@ import { AddressCreateSubmit } from "./AddressCreateSubmit";
 import { AddressCreateContainer } from "./AddressCreateContainer";
 import { AddressCreateCountrySelect } from "./AddressCreateCountrySelect";
 import { AddressCreateStateSelect } from "./AddressCreateStateSelect";
+import { AlertWithContext } from "../../SubComponents/AlertWithContext";
 
 export const AddressCreateView = (props) => {
   const { t } = useTranslation("address");
   return (
-    <AddressCreateContainer {...props}>
-      <div className="pelcro-prefix-title-clock">
+    <div id="pelcro-address-create-view">
+      <div className="pelcro-title-container">
         <h4>{t("title")}</h4>
       </div>
-
-      <ErrMessage name="address" />
-
-      <div className="pelcro-prefix-form">
-        <div className="pelcro-prefix-row">
-          <div className="col-md-6">
-            <label
-              className="pelcro-prefix-label"
-              htmlFor="pelcro-input-first_name"
-            >
-              {t("labels.firstName")} *
-            </label>
+      <div className="pelcro-form">
+        <AddressCreateContainer {...props}>
+          <AlertWithContext />
+          <div className="flex gap-3">
             <AddressCreateFirstName
-              className="pelcro-prefix-input pelcro-prefix-form-control"
               autoComplete="first-name"
-              id="pelcro-input-first_name"
+              id="pelcro-input-first-name"
+              errorId="pelcro-input-first-name-error"
               placeholder={t("labels.firstName")}
+              required
+              label={t("labels.firstName")}
             />
-          </div>
-          <div className="col-md-6">
-            <label
-              className="pelcro-prefix-label"
-              htmlFor="pelcro-input-last_name"
-            >
-              {t("labels.lastName")} *
-            </label>
             <AddressCreateLastName
-              className="pelcro-prefix-input pelcro-prefix-form-control"
               autoComplete="last-name"
-              id="pelcro-input-last_name"
+              id="pelcro-input-last-name"
+              errorId="pelcro-input-last-name-error"
+              required
               placeholder={t("labels.lastName")}
+              label={t("labels.lastName")}
             />
           </div>
-        </div>
-        <div className="pelcro-prefix-row">
-          <div className="col-md-12">
-            <label
-              className="pelcro-prefix-label"
-              htmlFor="pelcro-input-line1"
-            >
-              {t("labels.address")} *
-            </label>
+          <div className="flex gap-3">
             <AddressCreateLine1
-              className="pelcro-prefix-input pelcro-prefix-form-control"
               autoComplete="street-address"
               id="pelcro-input-line1"
+              errorId="pelcro-input-line1-error"
+              required
               placeholder={t("labels.address")}
+              label={t("labels.address")}
             />
           </div>
-        </div>
-        <div className="pelcro-prefix-row">
-          <div className="col-md-6">
-            <label
-              className="pelcro-prefix-label"
-              htmlFor="pelcro-input-postal_code"
-            >
-              {t("labels.code")} *
-            </label>
+          <div className="flex gap-3">
             <AddressCreatePostalCode
-              className="pelcro-prefix-input pelcro-prefix-form-control"
               autoComplete="postal-code"
-              id="pelcro-input-postal_code"
+              id="pelcro-input-postal-code"
+              errorId="pelcro-input-postal-code-error"
+              required
               placeholder={t("labels.code")}
+              label={t("labels.code")}
             />
-          </div>
-          <div className="col-md-6">
-            <label
-              className="pelcro-prefix-label"
-              htmlFor="pelcro-input-city"
-            >
-              {t("labels.city")} *
-            </label>
             <AddressCreateCity
-              className="pelcro-prefix-input pelcro-prefix-form-control"
               autoComplete="address-level2"
               id="pelcro-input-city"
+              errorId="pelcro-input-city-error"
               placeholder={t("labels.city")}
+              label={t("labels.city")}
+              required
             />
           </div>
-        </div>
-        <div className="pelcro-prefix-row">
-          <div className="col-md-6">
-            <label
-              className="pelcro-prefix-label"
-              htmlFor="pelcro-input-country"
-            >
-              {t("labels.country")} *
-            </label>
+          <div className="flex gap-3">
             <AddressCreateCountrySelect
-              className="pelcro-prefix-select pelcro-prefix-form-control"
               id="pelcro-input-country"
+              errorId="pelcro-input-country-error"
+              label={t("labels.country")}
+              required
             />
-          </div>
-          <div className="col-md-6">
-            <label
-              className="pelcro-prefix-label"
-              htmlFor="pelcro-input-region"
-            >
-              {t("labels.region")} *
-            </label>
             <AddressCreateStateSelect
-              className="pelcro-prefix-select pelcro-prefix-form-control"
+              label={t("labels.region")}
               id="pelcro-input-state"
+              errorId="pelcro-input-state-error"
+              required
             />
           </div>
-        </div>
-        <small className="pelcro-prefix-footnote pelcro-prefix-form-text">
-          * {t("labels.required")}
-        </small>
-        <AddressCreateSubmit
-          name={t("buttons.submit")}
-          id="address-submit"
-        ></AddressCreateSubmit>
+          <p className="pelcro-footnote">* {t("labels.required")}</p>
+          <AddressCreateSubmit
+            name={t("buttons.submit")}
+            id="pelcro-submit"
+          />
+        </AddressCreateContainer>
       </div>
-    </AddressCreateContainer>
+    </div>
   );
 };

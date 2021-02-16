@@ -161,6 +161,9 @@ class App extends Component {
     } else if (view === "newsletter") {
       this.setView("newsletter");
       return true;
+    } else if (view === "address") {
+      this.setView("address");
+      return true;
     } else {
       return false;
     }
@@ -710,7 +713,7 @@ class App extends Component {
           {this.state.view === "address" && (
             <AddressCreateModal
               giftCode={this.state.giftCode}
-              resetView={this.resetView}
+              onClose={this.resetView}
               onSuccess={() => {
                 if (!this.state.product) {
                   this.setView("orderCreate");
