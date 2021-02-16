@@ -1,8 +1,9 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Button } from "../../SubComponents/Button";
 import { HANDLE_LOGIN } from "../../utils/action-types";
+import { store } from "./LoginContainer";
 
-export const LoginButton = ({ store, ...otherProps }) => {
+export const LoginButton = ({ name, ...otherProps }) => {
   const {
     state: {
       emailError,
@@ -31,8 +32,9 @@ export const LoginButton = ({ store, ...otherProps }) => {
       {...otherProps}
       onClick={() => dispatch({ type: HANDLE_LOGIN })}
       disabled={isDisabled}
+      isFullWidth={true}
     >
-      {otherProps.name || "Login"}
+      {name}
     </Button>
   );
 };

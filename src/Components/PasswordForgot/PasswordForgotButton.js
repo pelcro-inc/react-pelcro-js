@@ -1,9 +1,6 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext } from "react";
 import { Button } from "../../SubComponents/Button";
-import {
-  HANDLE_LOGIN,
-  HANDLE_SUBMIT
-} from "../../utils/action-types";
+import { HANDLE_SUBMIT } from "../../utils/action-types";
 import { store } from "./PasswordForgotContainer";
 
 export const PasswordForgotButton = ({ name, ...otherProps }) => {
@@ -17,8 +14,9 @@ export const PasswordForgotButton = ({ name, ...otherProps }) => {
       {...otherProps}
       onClick={() => dispatch({ type: HANDLE_SUBMIT })}
       disabled={buttonDisabled}
+      isFullWidth={true}
     >
-      {name || "Submit"}
+      {name}
     </Button>
   );
 };

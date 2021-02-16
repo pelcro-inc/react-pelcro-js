@@ -10,17 +10,21 @@ import {
   SET_PASSWORD_ERROR,
   RESET_LOGIN_FORM,
   HANDLE_LOGIN,
-  DISABLE_LOGIN_BUTTON
+  DISABLE_LOGIN_BUTTON,
+  SHOW_ALERT
 } from "../../utils/action-types";
 import { getErrorMessages } from "../common/Helpers";
-import { showError } from "../../utils/showing-error";
 
 const initialState = {
   email: "",
   password: "",
   emailError: null,
   passwordError: null,
-  buttonDisabled: false
+  buttonDisabled: false,
+  alert: {
+    type: "error",
+    content: ""
+  }
 };
 const store = createContext(initialState);
 const { Provider } = store;
@@ -37,8 +41,11 @@ const LoginContainer = ({
       dispatch({ type: DISABLE_LOGIN_BUTTON, payload: false });
 
       if (err) {
-        showError(getErrorMessages(err), "pelcro-error-login");
-        return onFailure(err);
+        dispatch({
+          type: SHOW_ALERT,
+          payload: { type: "error", content: getErrorMessages(err) }
+        });
+        onFailure(err);
       } else {
         onSuccess();
       }
@@ -71,6 +78,11 @@ const LoginContainer = ({
             ...state,
             passwordError: action.payload,
             password: ""
+          });
+        case SHOW_ALERT:
+          return Update({
+            ...state,
+            alert: action.payload
           });
         case RESET_LOGIN_FORM:
           return initialState;

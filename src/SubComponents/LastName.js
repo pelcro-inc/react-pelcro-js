@@ -1,18 +1,9 @@
 import React, { useContext } from "react";
 import { Loader } from "../SubComponents/Loader";
 import { SET_LAST_NAME } from "../utils/action-types";
+import { Input } from "./Input";
 
-/**
- *
- */
-export function LastName({
-  placeholder,
-  style,
-  className,
-  id,
-  store,
-  ...otherProps
-}) {
+export function LastName({ store, ...otherProps }) {
   const { dispatch, state } = useContext(store);
 
   const handleInputChange = (value) => {
@@ -28,15 +19,11 @@ export function LastName({
   }
 
   return (
-    <input
+    <Input
       type="text"
-      id={id}
-      style={{ ...style }}
-      className={className}
-      value={state.lastName || ""}
+      value={state.lastName}
       onChange={(e) => handleInputChange(e.target.value)}
-      placeholder={placeholder || "Enter Your Last Name"}
       {...otherProps}
-    ></input>
+    />
   );
 }

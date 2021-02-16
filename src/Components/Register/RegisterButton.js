@@ -1,8 +1,9 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Button } from "../../SubComponents/Button";
 import { HANDLE_REGISTRATION } from "../../utils/action-types";
+import { store } from "./RegisterContainer";
 
-export const RegisterButton = ({ store, ...otherProps }) => {
+export const RegisterButton = ({ name, ...otherProps }) => {
   const {
     state: {
       emailError,
@@ -31,8 +32,9 @@ export const RegisterButton = ({ store, ...otherProps }) => {
       {...otherProps}
       onClick={() => dispatch({ type: HANDLE_REGISTRATION })}
       disabled={isDisabled}
+      isFullWidth={true}
     >
-      {otherProps.name || "Register"}
+      {name}
     </Button>
   );
 };

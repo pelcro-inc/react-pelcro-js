@@ -1,20 +1,16 @@
-// Register view.
-// Sign up form. It is displayed after the plan is selected (after Select view) if user is not authenticated.
-
 import React from "react";
 import { useTranslation } from "react-i18next";
-import ErrMessage from "../common/ErrMessage";
-import Header from "../common/Header";
+import { Link } from "../../SubComponents/Link";
+import {
+  Modal,
+  ModalBody,
+  ModalFooter,
+  ModalHeader
+} from "../../SubComponents/Modal";
 import Authorship from "../common/Authorship";
 import { RegisterView } from "./RegisterView";
 
-export function RegisterModal({
-  onSuccess,
-  setView,
-  resetView,
-  product,
-  ...otherProps
-}) {
+export function RegisterModal({ setView, onClose, ...otherProps }) {
   const { t } = useTranslation("register");
 
   const displayLoginView = () => {
@@ -25,62 +21,34 @@ export function RegisterModal({
     setView("select");
   };
 
-  const title = product?.paywall?.register_title ?? t("title");
-  const subtitle =
-    product?.paywall?.register_subtitle ?? t("subtitle");
+  const site = window.Pelcro.site.read();
 
   return (
-    <div className="pelcro-prefix-view">
-      <div
-        className="pelcro-prefix-modal pelcro-prefix-fade pelcro-prefix-show"
-        id="pelcro-view-register"
-        tabIndex="-1"
-        role="dialog"
-        aria-hidden="true"
-      >
-        <div className="pelcro-prefix-modal-dialog pelcro-prefix-modal-dialog-centered">
-          <div
-            className="pelcro-prefix-modal-content"
-            role="document"
-          >
-            <Header
-              closeButton={window.Pelcro.paywall.displayCloseButton()}
-              resetView={resetView}
-              site={window.Pelcro.site.read()}
-            ></Header>
-            <div className="pelcro-prefix-modal-body">
-              <div className="pelcro-prefix-title-block">
-                <h4>{title}</h4>
-                <p>{subtitle}</p>
-              </div>
-
-              <ErrMessage name="register" />
-
-              <RegisterView onSuccess={onSuccess} {...otherProps} />
-
-              <div className="pelcro-prefix-modal-footer">
-                <small>
-                  {t("messages.alreadyHaveAccount") + " "}
-                  <button
-                    className="pelcro-prefix-link"
-                    onClick={displayLoginView}
-                  >
-                    {t("messages.loginHere")}
-                  </button>
-                  {" " + t("messages.selectPlan")}
-                  <button
-                    className="pelcro-prefix-link"
-                    onClick={displaySelectView}
-                  >
-                    {t("messages.here")}
-                  </button>
-                </small>
-                <Authorship></Authorship>
-              </div>
-            </div>
-          </div>
+    <Modal id="pelcro-register-modal">
+      <ModalHeader
+        hideCloseButton={!window.Pelcro.paywall.displayCloseButton()}
+        onClose={onClose}
+        logo={site.logo}
+        title={site.name}
+      />
+      <ModalBody>
+        <RegisterView {...otherProps} />
+      </ModalBody>
+      <ModalFooter>
+        <div>
+          {t("messages.alreadyHaveAccount") + " "}
+          <Link onClick={displayLoginView}>
+            {t("messages.loginHere")}
+          </Link>
         </div>
-      </div>
-    </div>
+        <div>
+          {" " + t("messages.selectPlan")}
+          <Link onClick={displaySelectView}>
+            {t("messages.here")}
+          </Link>
+        </div>
+        <Authorship />
+      </ModalFooter>
+    </Modal>
   );
 }

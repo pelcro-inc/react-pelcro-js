@@ -4,80 +4,48 @@ import { PasswordResetPassword } from "./PasswordResetPassword";
 import { PasswordResetButton } from "./PasswordResetButton";
 import { PasswordResetEmail } from "./PasswordResetEmail";
 import { PasswordResetConfirmPassword } from "./PasswordResetConfirmPassword";
-import { AlertDanger } from "../Alerts/AlertDanger";
-import { AlertSuccess } from "../Alerts/AlertSuccess";
 import { useTranslation } from "react-i18next";
-import Authorship from "../common/Authorship";
+import { AlertWithContext } from "../../SubComponents/AlertWithContext";
 
 export const PasswordResetView = (props) => {
   const { t } = useTranslation("passwordReset");
   return (
-    <PasswordResetContainer {...props}>
-      <div className="pelcro-prefix-title-block">
+    <div id="pelcro-password-reset-view">
+      <div className="flex flex-col items-center text-lg font-semibold pelcro-title-container">
         <h4>{t("title")}</h4>
         <p>{t("subtitle")}</p>
       </div>
-
-      <AlertDanger name="password-reset" />
-      <AlertSuccess name="password-reset" />
-      <div className="pelcro-prefix-form">
-        <div className="pelcro-prefix-form-group">
-          <label
-            htmlFor="pelcro-input-email"
-            className="pelcro-prefix-label"
-          >
-            {t("email")} *
-          </label>
+      <div className="mt-2 pelcro-form">
+        <PasswordResetContainer {...props}>
+          <AlertWithContext />
           <PasswordResetEmail
-            className="pelcro-prefix-input pelcro-prefix-form-control"
             id="pelcro-input-email"
+            errorId="pelcro-input-email-error"
             required
             placeholder={t("email")}
+            label={t("email")}
           />
-        </div>
-
-        <div className="pelcro-prefix-form-group">
-          <label
-            htmlFor="pelcro-input-password"
-            className="pelcro-prefix-label"
-          >
-            {t("password")} *
-          </label>
           <PasswordResetPassword
             id="pelcro-input-password"
-            className="pelcro-prefix-input pelcro-prefix-form-control"
+            errorId="pelcro-input-password-error"
             placeholder={t("password")}
             required
+            label={t("password")}
           />
-        </div>
-
-        <div className="pelcro-prefix-form-group">
-          <label
-            htmlFor="pelcro-input-confirm_password"
-            className="pelcro-prefix-label"
-          >
-            {t("confirmPassword")} *
-          </label>
           <PasswordResetConfirmPassword
-            id="pelcro-input-confirm_password"
-            className="pelcro-prefix-input pelcro-prefix-form-control"
+            id="pelcro-input-confirm-password"
+            errorId="pelcro-input-confirm-password-error"
             placeholder={t("confirmPassword")}
             required
+            label={t("confirmPassword")}
           />
-        </div>
 
-        <PasswordResetButton
-          className="pelcro-prefix-btn"
-          name={t("submit")}
-        />
-        <small className="pelcro-prefix-footnote pelcro-prefix-form-text">
-          * {t("required")}
-        </small>
+          <PasswordResetButton
+            name={t("submit")}
+            id="pelcro-submit"
+          />
+        </PasswordResetContainer>
       </div>
-
-      <div className="pelcro-prefix-modal-footer">
-        <Authorship></Authorship>
-      </div>
-    </PasswordResetContainer>
+    </div>
   );
 };

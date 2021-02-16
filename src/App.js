@@ -161,6 +161,9 @@ class App extends Component {
     } else if (view === "newsletter") {
       this.setView("newsletter");
       return true;
+    } else if (view === "address") {
+      this.setView("address");
+      return true;
     } else {
       return false;
     }
@@ -192,17 +195,14 @@ class App extends Component {
   };
 
   enableScroll = () => {
-    document.body.className = document.body.className.replace(
-      "pelcro-prefix-modal-open",
-      ""
-    );
+    document.body.classList.remove("pelcro-prefix-modal-open");
   };
 
   disableScroll = () => {
     if (
       !document.body.classList.contains("pelcro-prefix-modal-open")
     ) {
-      document.body.className += " pelcro-prefix-modal-open";
+      document.body.classList.add("pelcro-prefix-modal-open");
     }
   };
 
@@ -575,7 +575,7 @@ class App extends Component {
           {this.state.view === "login" && (
             <LoginModal
               setView={this.setView}
-              resetView={this.resetView}
+              onClose={this.resetView}
               onSuccess={() => {
                 this.setView("");
                 this.loggedIn();
@@ -586,7 +586,7 @@ class App extends Component {
             <RegisterModal
               product={this.state.product}
               setView={this.setView}
-              resetView={this.resetView}
+              onClose={this.resetView}
               onDisplay={() => {
                 ReactGA.event({
                   category: "VIEWS",
@@ -713,7 +713,7 @@ class App extends Component {
           {this.state.view === "address" && (
             <AddressCreateModal
               giftCode={this.state.giftCode}
-              resetView={this.resetView}
+              onClose={this.resetView}
               onSuccess={() => {
                 if (!this.state.product) {
                   this.setView("orderCreate");
@@ -742,15 +742,15 @@ class App extends Component {
 
           {this.state.view === "password-forgot" && (
             <PasswordForgotModal
-              resetView={this.resetView}
+              onClose={this.resetView}
               setView={this.setView}
             />
           )}
           {this.state.view === "password-reset" && (
-            <PasswordResetModal resetView={this.resetView} />
+            <PasswordResetModal onClose={this.resetView} />
           )}
           {this.state.view === "password-change" && (
-            <PasswordChangeModal resetView={this.resetView} />
+            <PasswordChangeModal onClose={this.resetView} />
           )}
 
           {this.state.view === "source-create" && (

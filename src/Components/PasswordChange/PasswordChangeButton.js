@@ -24,8 +24,9 @@ export const PasswordChangeButton = ({ name, ...otherProps }) => {
       {...otherProps}
       onClick={() => dispatch({ type: HANDLE_SUBMIT })}
       disabled={buttonDisabled || hasInvalidField}
+      isFullWidth={true}
     >
-      {name ?? "SUBMIT"}
+      {name}
     </Button>
   );
 };

@@ -4,51 +4,44 @@ import { RegisterContainer } from "./RegisterContainer";
 import { RegisterEmail } from "./RegisterEmail";
 import { RegisterPassword } from "./RegisterPassword";
 import { RegisterButton } from "./RegisterButton";
+import { AlertWithContext } from "../../SubComponents/AlertWithContext";
 
 export function RegisterView(props) {
   const { t } = useTranslation("register");
 
+  const title = props.product?.paywall?.register_title ?? t("title");
+  const subtitle =
+    props.product?.paywall?.register_subtitle ?? t("subtitle");
+
   return (
-    <div className="pelcro-prefix-form">
-      <RegisterContainer {...props}>
-        <div className="pelcro-prefix-row">
-          <div className="col-md-12">
-            <label
-              className="pelcro-prefix-label"
-              htmlFor="pelcro-input-email"
-            >
-              {t("labels.email")} *
-            </label>
-            <RegisterEmail
-              className="pelcro-prefix-input pelcro-prefix-form-control"
-              id="pelcro-input-email"
-              placeholder={t("labels.emailPlaceholder")}
-            />
-
-            <label
-              className="pelcro-prefix-label"
-              htmlFor="pelcro-input-password"
-            >
-              {t("labels.password")} *
-            </label>
-            <RegisterPassword
-              className="pelcro-prefix-input pelcro-prefix-form-control"
-              id="pelcro-input-password"
-              placeholder={t("labels.passwordPlaceholder")}
-            />
-          </div>
-        </div>
-
-        <small className="pelcro-prefix-footnote pelcro-prefix-form-text">
-          * {t("labels.required")}
-        </small>
-
-        <RegisterButton
-          className="pelcro-prefix-btn"
-          id="pelcro-registeration-submit"
-          name={t("messages.createAccount")}
-        />
-      </RegisterContainer>
+    <div id="pelcro-register-view">
+      <div className="flex flex-col  text-lg items-center font-semibold pelcro-title-container">
+        <h4>{title}</h4>
+        <p>{subtitle}</p>
+      </div>
+      <div className="mt-2 pelcro-form">
+        <RegisterContainer {...props}>
+          <AlertWithContext />
+          <RegisterEmail
+            id="pelcro-input-email"
+            errorId="pelcro-input-email-error"
+            placeholder={t("labels.emailPlaceholder")}
+            label={t("labels.email")}
+            required
+          />
+          <RegisterPassword
+            id="pelcro-input-password"
+            errorId="pelcro-input-password-error"
+            placeholder={t("labels.passwordPlaceholder")}
+            label={t("labels.password")}
+            required
+          />
+          <RegisterButton
+            id="pelcro-submit"
+            name={t("messages.createAccount")}
+          />
+        </RegisterContainer>
+      </div>
     </div>
   );
 }

@@ -1,36 +1,46 @@
-// Newsletter view.
-// The emaill form. Allows users to get free articles by entering their email.
-
 import React from "react";
+import { useTranslation } from "react-i18next";
+import { Link } from "../../SubComponents/Link";
+import {
+  Modal,
+  ModalBody,
+  ModalFooter,
+  ModalHeader
+} from "../../SubComponents/Modal";
+import Authorship from "../common/Authorship";
 import { PasswordForgotView } from "./PasswordForgotView";
-import Header from "../common/Header";
 
-export const PasswordForgotModal = (props) => {
+export const PasswordForgotModal = ({
+  onClose,
+  setView,
+  ...otherProps
+}) => {
+  const { t } = useTranslation("passwordForgot");
+  const site = window.Pelcro.site.read();
+
   return (
-    <div className="pelcro-prefix-view">
-      <div
-        className="pelcro-prefix-modal pelcro-prefix-fade pelcro-prefix-show"
-        id="pelcro-view-password-forgot"
-        tabIndex="-1"
-        role="dialog"
-        aria-hidden="true"
-      >
-        <div
-          className="pelcro-prefix-modal-dialog pelcro-prefix-modal-dialog-centered"
-          role="document"
-        >
-          <div className="pelcro-prefix-modal-content">
-            <Header
-              closeButton={true}
-              resetView={props.resetView}
-              site={window.Pelcro.site.read()}
-            ></Header>
-            <div className="pelcro-prefix-modal-body">
-              <PasswordForgotView {...props} />
-            </div>
-          </div>
+    <Modal id="password-forgot-modal">
+      <ModalHeader
+        hideCloseButton={false}
+        onClose={onClose}
+        logo={site.logo}
+        title={site.name}
+      />
+      <ModalBody>
+        <PasswordForgotView {...otherProps} />
+      </ModalBody>
+      <ModalFooter>
+        <div>
+          {t("messages.alreadyHaveAccount") + " "}
+          <Link
+            id="pelcro-link-login"
+            onClick={() => setView("login")}
+          >
+            {t("messages.loginHere")}
+          </Link>
         </div>
-      </div>
-    </div>
+        <Authorship />
+      </ModalFooter>
+    </Modal>
   );
 };

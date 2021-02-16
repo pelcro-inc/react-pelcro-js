@@ -1,16 +1,16 @@
 import React from "react";
 
-const Submit = ({ disabled, id, text, onClick, style = {}, className }) => {
+/**
+ * use atomic Button instead please
+ */
+const Submit = ({ disabled, id, text, onClick, className }) => {
   return (
     <div className="submit">
       <button
-        disabled={disabled}
         name="submit"
         style={style}
         className={`pelcro-prefix-btn ${className}`}
-        id={id}
         type="submit"
-        onClick={onClick}
       >
         {text}
       </button>

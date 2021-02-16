@@ -11,7 +11,7 @@ export function Alert({
   return (
     <div
       className={`inline-flex items-center p-5 w-full font-semibold text-white ${
-        type === "error" ? "bg-red-800" : "bg-primary-500"
+        type === "error" ? "bg-red-500" : "bg-primary-500"
       } rounded-sm pelcro-alert-${type} ${className}`}
       {...otherProps}
     >
