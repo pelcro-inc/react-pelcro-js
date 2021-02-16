@@ -10,11 +10,11 @@ import {
 import Authorship from "../common/Authorship";
 import { PasswordForgotView } from "./PasswordForgotView";
 
-export const PasswordForgotModal = (
+export const PasswordForgotModal = ({
   onClose,
   setView,
   ...otherProps
-) => {
+}) => {
   const { t } = useTranslation("passwordForgot");
   const site = window.Pelcro.site.read();
 
