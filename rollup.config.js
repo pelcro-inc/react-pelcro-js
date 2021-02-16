@@ -20,7 +20,11 @@ export default [
     ],
     plugins: [
       url(),
-      svgr(),
+      svgr({
+        svgoConfig: {
+          plugins: [{ prefixIds: false }]
+        }
+      }),
       resolve(),
       external(),
       postcss({

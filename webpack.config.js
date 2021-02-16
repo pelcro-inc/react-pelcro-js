@@ -32,7 +32,17 @@ module.exports = {
       },
       {
         test: /\.svg$/,
-        use: ["@svgr/webpack", "file-loader"]
+        use: [
+          {
+            loader: "@svgr/webpack",
+            options: {
+              svgoConfig: {
+                plugins: [{ prefixIds: false }]
+              }
+            }
+          },
+          "file-loader"
+        ]
       },
       {
         test: /\.(gif|png|jpe?g)$/i,

@@ -91,8 +91,6 @@ export { SubscriptionCreateContainer } from "./Components/SubscriptionCreate/Sub
 export { SubscriptionRenewContainer } from "./Components/SubscriptionRenew/SubscriptionRenewContainer";
 export { PaymentCreateContainer } from "./Components/PaymentCreate/PaymentCreateContainer";
 export { PaymentCreateView } from "./Components/PaymentCreate/PaymentCreateView";
-export { PaymentUpdateContainer } from "./Components/PaymentUpdate/PaymentUpdateContainer";
-export { PaymentUpdateView } from "./Components/PaymentUpdate/PaymentUpdateView";
 export { PaymentMethodUpdateContainer } from "./Components/PaymentMethodUpdate/PaymentMethodUpdateContainer";
 export { PaymentMethodUpdateModal } from "./Components/PaymentMethodUpdate/PaymentMethodUpdateModal";
 export { PaymentMethodUpdateView } from "./Components/PaymentMethodUpdate/PaymentMethodUpdateView";

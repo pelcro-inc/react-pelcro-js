@@ -1,34 +1,44 @@
 {
   "labels": {
+    "hello": "Hello",
     "menu": "Pelcro Menu",
     "name": "Name",
     "email": "Email",
     "plan": "Plan",
     "description": "Description",
     "expiry": "Expiry",
-    "status": "Status",
+    "status": {
+      "title": "Status",
+      "active": "Active",
+      "inTrial": "In trial",
+      "endingSoon": "Ending soon"
+    },
     "shipments": "Shipments remaining",
     "logout": "Logout",
     "dashboard": "Dashboard",
-    "unsubscribe": "Unsubscribe",
+    "unsubscribe": "Cancel",
     "reactivate": "Reactivate",
     "renew": "Renew",
     "support": "Support",
     "account": "Account",
     "subscriptions": "Subscriptions",
     "updatePaymentSource": "Update",
-    "updateProfile": "Update",
-    "updateAddress": "Update",
+    "profile": "Profile",
+    "updateProfile": "Edit profile",
+    "edit": "Edit",
+    "gifts": "Gifts",
     "redeemGift": "Redeem gift",
     "address": "Address",
-    "paymentSource": "Payment card",
+    "addresses": "Addresses",
+    "paymentSource": "Payment cards",
     "actions": "Actions",
-    "expiresOn": "Expires on",
-    "renewsOn": "Renews on",
+    "expiresOn": "Ends",
+    "renewsOn": "Renews",
     "isSureToCancel": "Are you sure you want to cancel your subscription?",
-    "giftRecipients": {
-      "title": "Gift recipients"
-    }
+    "recipient": "Recipient",
+    "addAddress": "Add address",
+    "addSubscription": "New Subscription",
+    "addGift": "New Gift"
   },
   "messages": {
     "yourDashboard": "Your Pelcro Dashboard"

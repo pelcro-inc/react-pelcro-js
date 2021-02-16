@@ -1,12 +1,18 @@
 {
   "labels": {
+    "hello": "Bonjour",
     "menu": "Menu Pelcro",
     "name": "Nom",
     "email": "Courriel",
     "plan": "Plan",
     "description": "Description",
     "expiry": "Expiration",
-    "status": "Statut",
+    "status": {
+      "title": "Statut",
+      "active": "Active",
+      "inTrial": "Dans l'essai",
+      "endingSoon": "Fin bientôt"
+    },
     "shipments": "Expéditions restantes",
     "logout": "Déconnexion",
     "dashboard": "Tableau de bord",
@@ -17,18 +23,22 @@
     "account": "Compte",
     "subscriptions": "Abonnements",
     "updatePaymentSource": "Mettre à jour la source de paiement",
+    "profile": "Profil",
     "updateProfile": "Mettre à jour le profil",
-    "updateAddress": "Modifier",
+    "edit": "Modifier",
+    "gifts": "Cadeaux",
     "redeemGift": "Échanger un cadeau",
     "address": "Adresse",
-    "paymentSource": "Source de paiement",
+    "addresses": "Adresses",
+    "paymentSource": "Sources de paiement",
     "actions": "Actes",
     "expiresOn": "Expire le",
     "renewsOn": "Renouvelle le",
     "isSureToCancel": "Êtes-vous certain de vouloir annuler votre abonnement ?",
-    "giftRecipients": {
-      "title": "Destinataires du cadeau"
-    }
+    "recipient": "Destinataire",
+    "addAddress": "Ajoutez l'adresse",
+    "addSubscription": "Nouvel abonnement",
+    "addGift": "ajouter un cadeau"
   },
   "messages": {
     "yourDashboard": "Votre tableau de bord Pelcro"
