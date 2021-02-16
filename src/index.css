@@ -6,3 +6,7 @@
 .pelcro-prefix-modal-open {
   @apply overflow-hidden;
 }
+
+.pelcro-modal-overlay {
+  backdrop-filter: blur(2px);
+}

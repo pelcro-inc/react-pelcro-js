@@ -11,11 +11,10 @@ export function LoginView(props) {
 
   return (
     <div id="pelcro-login-view">
-      <div className="pelcro-title-container">
+      <div className="flex flex-col items-center text-lg font-semibold pelcro-title-container">
         <h4>{t("messages.loginTo")}</h4>
-        <p>{t("messages.welcome")}</p>
       </div>
-      <div className="pelcro-form">
+      <div className="mt-2 pelcro-form">
         <LoginContainer {...props}>
           <AlertWithContext />
           <LoginEmail
@@ -32,7 +31,6 @@ export function LoginView(props) {
             placeholder={t("labels.passwordPlaceholder")}
             label={t("labels.password")}
           />
-          <p className="pelcro-footnote">* {t("labels.required")}</p>
           <LoginButton name={t("labels.login")} id="pelcro-submit" />
         </LoginContainer>
       </div>

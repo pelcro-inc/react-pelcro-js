@@ -30,10 +30,15 @@ export const PasswordForgotModal = ({
         <PasswordForgotView {...otherProps} />
       </ModalBody>
       <ModalFooter>
-        {t("messages.alreadyHaveAccount") + " "}
-        <Link id="pelcro-link-login" onClick={() => setView("login")}>
-          {t("messages.loginHere")}
-        </Link>
+        <div>
+          {t("messages.alreadyHaveAccount") + " "}
+          <Link
+            id="pelcro-link-login"
+            onClick={() => setView("login")}
+          >
+            {t("messages.loginHere")}
+          </Link>
+        </div>
         <Authorship />
       </ModalFooter>
     </Modal>

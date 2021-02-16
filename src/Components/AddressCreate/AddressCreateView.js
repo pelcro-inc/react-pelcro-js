@@ -15,10 +15,10 @@ export const AddressCreateView = (props) => {
   const { t } = useTranslation("address");
   return (
     <div id="pelcro-address-create-view">
-      <div className="pelcro-title-container">
+      <div className="flex flex-col items-center text-lg font-semibold pelcro-title-container">
         <h4>{t("title")}</h4>
       </div>
-      <div className="pelcro-form">
+      <div className="mt-2 pelcro-form">
         <AddressCreateContainer {...props}>
           <AlertWithContext />
           <div className="flex gap-3">
@@ -83,6 +83,7 @@ export const AddressCreateView = (props) => {
           </div>
           <p className="pelcro-footnote">* {t("labels.required")}</p>
           <AddressCreateSubmit
+            className="mt-2"
             name={t("buttons.submit")}
             id="pelcro-submit"
           />

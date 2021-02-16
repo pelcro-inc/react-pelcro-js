@@ -12,11 +12,11 @@ export const PasswordChangeView = (props) => {
 
   return (
     <div id="pelcro-password-change-view">
-      <div className="pelcro-title-container">
+      <div className="flex flex-col  text-lg items-center font-semibold pelcro-title-container">
         <h4>{t("title")}</h4>
         <p>{t("subtitle")}</p>
       </div>
-      <div className="pelcro-form">
+      <div className="mt-2 pelcro-form">
         <PasswordChangeContainer {...props}>
           <AlertWithContext />
           <PasswordChangeCurrentPassword
@@ -41,7 +41,6 @@ export const PasswordChangeView = (props) => {
             required
           />
           <PasswordChangeButton name={t("submit")} />
-          <p className="pelcro-footnote">* {t("required")}</p>
         </PasswordChangeContainer>
       </div>
     </div>

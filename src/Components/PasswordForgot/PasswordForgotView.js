@@ -9,11 +9,11 @@ export const PasswordForgotView = (props) => {
   const { t } = useTranslation("passwordForgot");
   return (
     <div className="pelcro-password-forgot-view">
-      <div className="pelcro-title-container">
+      <div className="flex flex-col  text-lg items-center font-semibold pelcro-title-container">
         <h4>{t("title")}</h4>
         <p>{t("subtitle")}</p>
       </div>
-      <div className="pelcro-form">
+      <div className="mt-2 pelcro-form">
         <PasswordForgotContainer {...props}>
           <AlertWithContext />
           <PasswordForgotEmail
@@ -26,7 +26,6 @@ export const PasswordForgotView = (props) => {
             name={t("submit")}
             id="pelcro-submit"
           />
-          <p className="pelcro-footnote">* {t("required")}</p>
         </PasswordForgotContainer>
       </div>
     </div>

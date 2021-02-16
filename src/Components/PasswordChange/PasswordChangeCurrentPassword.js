@@ -1,4 +1,5 @@
 import React, { useContext, useCallback } from "react";
+import { Input } from "../../SubComponents/Input";
 import {
   VALIDATE_PASSWORD,
   SET_PASSWORD,
@@ -28,7 +29,7 @@ export function PasswordChangeCurrentPassword(props) {
   }, [dispatch]);
 
   return (
-    <input
+    <Input
       type="password"
       value={currentPassword}
       error={currentPasswordError}
