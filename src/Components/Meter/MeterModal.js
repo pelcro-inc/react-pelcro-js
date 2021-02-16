@@ -6,25 +6,21 @@ import React from "react";
 import PropTypes from "prop-types";
 import { MeterView } from "./MeterView";
 
-export const MeterModal = props => (
-  <div className="pelcro-prefix-view">
-    <div
-      id="pelcro-view-meter"
-      className="col-sm-4 col-md-3"
-      data-animation="from-bottom"
-      data-autoshow="200"
+export const MeterModal = (props) => (
+  <div
+    id="pelcro-view-meter"
+    className="fixed bottom-0 right-0 w-full p-4 bg-white border-t-4 rounded shadow-md motion-safe:animate-slideInBottom sm:m-4 sm:max-w-md z-max border-primary-500"
+  >
+    <button
+      type="button"
+      className="absolute top-0 text-2xl text-gray-500 right-1 pelcro-prefix-close"
+      aria-label="Close"
+      onClick={props.onClose}
     >
-      <button
-        type="button"
-        className="pelcro-prefix-close"
-        aria-label="Close"
-        onClick={props.resetView}
-      >
-        <span>&times;</span>
-      </button>
-      <div>
-        <MeterView {...props} />
-      </div>
+      <span>×</span>
+    </button>
+    <div>
+      <MeterView {...props} />
     </div>
   </div>
 );

@@ -16,7 +16,7 @@ module.exports = {
     colors: {
       transparent: "transparent",
       current: "currentColor",
-      primary: colors.indigo,
+      primary: colors.emerald,
 
       black: colors.black,
       white: colors.white,
@@ -72,7 +72,8 @@ module.exports = {
       spin: "spin 1s linear infinite",
       ping: "ping 1s cubic-bezier(0, 0, 0.2, 1) infinite",
       pulse: "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
-      bounce: "bounce 1s infinite"
+      bounce: "bounce 1s infinite",
+      slideInBottom: "slideInBottom 0.5s ease-out"
     },
     backgroundColor: (theme) => theme("colors"),
     backgroundImage: {
@@ -430,6 +431,16 @@ module.exports = {
         "50%": {
           transform: "none",
           animationTimingFunction: "cubic-bezier(0,0,0.2,1)"
+        }
+      },
+      slideInBottom: {
+        "0%": {
+          transform: "translateY(1000px)",
+          opacity: "0"
+        },
+        "100%": {
+          transform: "translateY(0)",
+          opacity: "1"
         }
       }
     },
@@ -937,6 +948,7 @@ module.exports = {
       backgroundColor: ["disabled", "checked"],
       borderColor: ["disabled", "checked"],
       cursor: ["disabled"],
+      animation: ["motion-safe"],
       inset: ["checked"],
       translate: ["group-hover"]
     }

@@ -735,7 +735,7 @@ class App extends Component {
             <MeterModal
               plan={this.state.plan}
               product={this.state.product}
-              resetView={this.resetView}
+              onClose={this.resetView}
               setView={this.setView}
             />
           )}
