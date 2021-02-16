@@ -10,13 +10,13 @@ export function Modal({
   return (
     <div className="absolute top-0 left-0 flex items-center justify-center w-full h-full overflow-auto bg-black pelcro-modal-overlay z-max bg-opacity-60">
       <div
-        className={`container absolute top-0 flex flex-col items-center max-w-xl bg-white rounded-md md:mt-8 pelcro-modal ${className}`}
+        className={`container absolute top-0 flex flex-col items-center max-w-lg bg-white rounded-md md:mt-8 pelcro-modal ${className}`}
         role="dialog"
         aria-modal="true"
         id={id}
         {...otherProps}
       >
-        <div className="pelcro-modal-content">
+        <div className="w-full pelcro-modal-content">
           {children.find(({ type }) => type.name === "ModalHeader")}
           {children.find(({ type }) => type.name === "ModalBody")}
           {children.find(({ type }) => type.name === "ModalFooter")}
@@ -33,38 +33,41 @@ export const ModalHeader = ({
   title
 }) => {
   return (
-    <div className="flex items-center justify-center p-10 border-b-2 border-gray-300 h-1/6 pelcro-modal-header">
+    <div className="flex items-center justify-center p-3 border-b border-gray-300 pelcro-modal-header">
       {!hideCloseButton && (
         <button
           type="button"
-          className="absolute w-6 text-gray-500 top-5 right-4 hover:text-black pelcro-modal-close"
+          className="absolute w-6 text-gray-500 top-3 right-3 hover:text-black pelcro-modal-close"
           aria-label="close modal"
           onClick={onClose}
         >
           <CloseIcon className="fill-current" />
         </button>
       )}
-      <div>
-        {logo && (
+      <div className="flex flex-col items-center w-full p-2 mt-4">
+        {logo ? (
           <img
             alt="company logo"
-            className="pelcro-modal-logo"
+            className="max-h-14 pelcro-modal-logo"
             src={logo.url}
           />
+        ) : (
+          <h3 className="pelcro-modal-header-title">{title}</h3>
         )}
-        <h3 className="pelcro-modal-title">{title}</h3>
       </div>
     </div>
   );
 };
 
 export const ModalBody = ({ children }) => {
-  return <div className="p-6 pelcro-modal-body">{children}</div>;
+  return (
+    <div className="px-8 py-4 pelcro-modal-body">{children}</div>
+  );
 };
 
 export const ModalFooter = ({ children }) => {
   return (
-    <div className="flex flex-col items-center justify-center px-6 py-10 border-t-2 border-gray-300 h-1/6 pelcro-modal-footer">
+    <div className="flex flex-col items-center justify-center px-8 py-4 border-t border-gray-300 pelcro-modal-footer">
       {children}
     </div>
   );
