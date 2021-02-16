@@ -1,12 +1,9 @@
 import React, { useContext } from "react";
 import { Button } from "../../SubComponents/Button";
 import { HANDLE_SUBMIT } from "../../utils/action-types";
+import { store } from "./PasswordForgotContainer";
 
-export const PasswordForgotButton = ({
-  store,
-  name,
-  ...otherProps
-}) => {
+export const PasswordForgotButton = ({ name, ...otherProps }) => {
   const {
     state: { buttonDisabled },
     dispatch

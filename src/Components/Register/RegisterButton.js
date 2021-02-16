@@ -1,8 +1,9 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Button } from "../../SubComponents/Button";
 import { HANDLE_REGISTRATION } from "../../utils/action-types";
+import { store } from "./RegisterContainer";
 
-export const RegisterButton = ({ store, name, ...otherProps }) => {
+export const RegisterButton = ({ name, ...otherProps }) => {
   const {
     state: {
       emailError,

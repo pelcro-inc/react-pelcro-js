@@ -1,8 +1,9 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Button } from "../../SubComponents/Button";
 import { HANDLE_LOGIN } from "../../utils/action-types";
+import { store } from "./LoginContainer";
 
-export const LoginButton = ({ store, name, ...otherProps }) => {
+export const LoginButton = ({ name, ...otherProps }) => {
   const {
     state: {
       emailError,
