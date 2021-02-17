@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 ### Fixed
 
 - Use plan currency instead of default currency for discounted amount.
+- Using e-commerce one click purchase buttons, not showing total price on confirmation modal.
 
 ## [Released]
 
