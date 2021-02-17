@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Unreleased]
 
+### Changed
+
+- Add address_id param to gift renewal. [PRIVATE]
+
 ### Fixed
 
 - Use plan currency instead of default currency for discounted amount.

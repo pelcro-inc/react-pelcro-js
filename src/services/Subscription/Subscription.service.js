@@ -251,6 +251,7 @@ export class StripeGateway {
     const {
       subscriptionIdToRenew,
       token,
+      product,
       plan,
       couponCode
     } = options;
@@ -261,7 +262,10 @@ export class StripeGateway {
         auth_token: window.Pelcro.user.read().auth_token,
         plan_id: plan.id,
         coupon_code: couponCode,
-        subscription_id: subscriptionIdToRenew
+        subscription_id: subscriptionIdToRenew,
+        address_id: product.address_required
+          ? getUserLatestAddress().id
+          : null
       },
       (err, res) => {
         callback(err, res);

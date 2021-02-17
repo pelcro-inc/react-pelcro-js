@@ -246,9 +246,7 @@ const PaymentMethodContainerWithoutStripe = ({
           gift_recipient_first_name: giftRecipient?.firstName,
           gift_recipient_last_name: giftRecipient?.lastName,
           address_id: product.address_required
-            ? window.Pelcro.user.read().addresses[
-                window.Pelcro.user.read().addresses.length - 1
-              ].id
+            ? getUserLatestAddress()?.id
             : null
         },
         (err, res) => {
@@ -271,7 +269,10 @@ const PaymentMethodContainerWithoutStripe = ({
             plan_id: plan.id,
             quantity: plan.quantity,
             coupon_code: couponCode,
-            subscription_id: subscriptionIdToRenew
+            subscription_id: subscriptionIdToRenew,
+            address_id: product.address_required
+              ? getUserLatestAddress()?.id
+              : null
           },
           (err, res) => {
             dispatch({ type: DISABLE_SUBMIT, payload: false });
@@ -293,9 +294,7 @@ const PaymentMethodContainerWithoutStripe = ({
             coupon_code: couponCode,
             subscription_id: subscriptionIdToRenew,
             address_id: product.address_required
-              ? window.Pelcro.user.read().addresses[
-                  window.Pelcro.user.read().addresses.length - 1
-                ]
+              ? getUserLatestAddress()?.id
               : null
           },
           (err, res) => {
