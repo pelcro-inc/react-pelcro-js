@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 ### Changed
 
 - Add address_id param to gift renewal. [PRIVATE]
+- Always swtich users to create a new address if product has address required enabled.
 
 ### Fixed
 
