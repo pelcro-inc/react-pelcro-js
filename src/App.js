@@ -399,14 +399,14 @@ class App extends Component {
   setOfflineProductAndPlanByButton = (e) => {
     this.setState({
       product: {
-        id: e.target.dataset.productId,
-        address_required: true
+        id: e.target.dataset.productId
       },
       plan: {
         product_id: e.target.dataset.productId,
         id: e.target.dataset.planId
       }
     });
+
     window.Pelcro.plan.getPlan(
       {
         plan_id: e.target.dataset.planId
@@ -415,20 +415,29 @@ class App extends Component {
         if (error) {
           return;
         }
+
+        const { plan } = response.data;
+
         this.setState({
-          plan: response.data.plan
+          plan,
+          product: plan?.product
         });
 
         const isAuthenticated = window.Pelcro.user.isAuthenticated();
         if (!isAuthenticated) {
-          this.setView("register");
+          return this.setView("register");
+        }
+
+        const requiresAddress = Boolean(plan.address_required);
+
+        if (!requiresAddress) {
+          this.setView("payment");
         } else {
           this.setView("address");
         }
       }
     );
   };
-
   handleAfterRegistrationLogic = () => {
     const { product, order, giftCode, isGift } = this.state;
 
