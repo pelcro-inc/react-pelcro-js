@@ -529,7 +529,7 @@ class Dashboard extends Component {
               <div className="border-block">
                 <div className="border-text">
                   <h4>
-                    {this.locale("labels.giftRecipients").title}
+                    {this.locale("labels.giftRecipients.title")}
                   </h4>
                 </div>
                 <div className="pelcro-prefix-dashboard-block">

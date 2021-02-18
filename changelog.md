@@ -8,6 +8,18 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Released]
 
+## [2.11.3] - 2021-02-18
+
+### Changed
+
+- Add address_id param to gift renewal. [PRIVATE]
+- Always swtich users to create a new address if product has address required enabled.
+
+### Fixed
+
+- Use plan currency instead of default currency for discounted amount.
+- Using e-commerce one click purchase buttons, not showing total price on confirmation modal.
+
 ## [2.11.2] - 2021-02-10
 
 ### Added

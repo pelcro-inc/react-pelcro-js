@@ -219,26 +219,23 @@ class SelectModal extends Component {
       this.state.isGift
     );
 
-    // Check if user is already loggen in
-    if (window.Pelcro.user.isAuthenticated()) {
-      if (!this.state.isGift) {
-        if (
-          (this.state.product.address_required ||
-            this.site.taxes_enabled) &&
-          !window.Pelcro.user.read().addresses
-        ) {
-          return this.props.setView("address");
-        } else {
-          this.props.setView("payment");
-        }
-      } else {
-        this.props.setView("gift");
-      }
+    const { product, isGift } = this.state;
+    const { setView } = this.props;
+    const isAuthenticated = window.Pelcro.user.isAuthenticated();
 
-      // User is not authenticated, register him first
-    } else {
-      this.props.setView("register");
+    if (!isAuthenticated) {
+      return setView("register");
     }
+
+    if (isGift) {
+      return setView("gift");
+    }
+
+    if (product.address_required) {
+      return setView("address");
+    }
+
+    return setView("payment");
   };
 
   // inserting error message into modal window

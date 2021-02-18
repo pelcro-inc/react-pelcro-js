@@ -210,12 +210,40 @@ export const init = (app) => {
       pelcroPurchaseButtonsByClass[i].addEventListener(
         "click",
         (e) => {
+          const skuId = Number(e.target.dataset.skuId);
+          // initialize with current product listing
+          const allProducts =
+            window.Pelcro.ecommerce.products
+              .read()
+              .flatMap((prod) => prod.skus.map((sku) => sku))
+              // reset the cart quantities, button's associated item should be the only item in cart
+              .map((sku) => {
+                sku.quantity = 0;
+                return sku;
+              }) ?? [];
+
+          const productIndex = allProducts.findIndex(
+            (prod) => prod.id === skuId
+          );
+
+          if (productIndex === -1) {
+            return;
+          }
+
+          // set quantity of the product to 1 as it's a direct purchase button
+          allProducts[productIndex] = {
+            ...allProducts[productIndex],
+            quantity: 1
+          };
+
+          app.setProductsForCart(allProducts);
           app.setOrder([
             {
-              sku_id: e.target.dataset.skuId,
-              quantity: "1"
+              sku_id: skuId,
+              quantity: 1
             }
           ]);
+
           if (window.Pelcro.user.isAuthenticated()) {
             app.setView("orderCreate");
           } else {
