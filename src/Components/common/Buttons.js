@@ -81,7 +81,7 @@ export const init = (app) => {
   );
 
   const saveToMetadataByButton = (e) => {
-    const key = e.currentTarget.dataset.key;
+    const { key } = e.currentTarget.dataset;
     const value = JSON.parse(JSON.stringify(e.currentTarget.dataset));
     delete value.key;
     let newVal = "";
@@ -245,7 +245,7 @@ export const init = (app) => {
           ]);
 
           if (window.Pelcro.user.isAuthenticated()) {
-            app.setView("orderCreate");
+            app.setView("address");
           } else {
             app.setView("login");
           }
