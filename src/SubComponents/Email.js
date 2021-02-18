@@ -8,9 +8,6 @@ import { useTranslation } from "react-i18next";
 import { SET_EMAIL, SET_EMAIL_ERROR } from "../utils/action-types";
 import { Input } from "./Input";
 
-/**
- *
- */
 export function Email({
   initWithUserEmail = true,
   disableEmailValidation,
@@ -86,20 +83,17 @@ export function Email({
   };
 
   return (
-    <React.Fragment>
-      <Input
-        type="email"
-        error={emailError}
-        value={
-          (disableEmailValidation
-            ? stateEmail
-            : email || stateEmail) ?? ""
-        }
-        onChange={(e) => handleInputChange(e.target.value)}
-        onBlur={() => setFinishedTyping(true)}
-        onFocus={() => setFinishedTyping(false)}
-        {...otherProps}
-      />
-    </React.Fragment>
+    <Input
+      type="email"
+      error={emailError}
+      value={
+        (disableEmailValidation ? stateEmail : email || stateEmail) ??
+        ""
+      }
+      onChange={(e) => handleInputChange(e.target.value)}
+      onBlur={() => setFinishedTyping(true)}
+      onFocus={() => setFinishedTyping(false)}
+      {...otherProps}
+    />
   );
 }
