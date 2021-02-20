@@ -600,7 +600,7 @@ class App extends Component {
           {this.state.view === "gift" && (
             <GiftCreateModal
               setView={this.setView}
-              resetView={this.resetView}
+              onClose={this.resetView}
               onDisplay={() => {
                 ReactGA.event({
                   category: "VIEWS",

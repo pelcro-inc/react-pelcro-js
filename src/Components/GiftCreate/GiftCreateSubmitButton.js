@@ -1,28 +1,22 @@
-import React, { useContext, useEffect, useMemo } from "react";
-import Submit from "../common/Submit";
+import React, { useContext } from "react";
 import { store } from "./GiftCreateContainer";
 import { HANDLE_SUBMIT } from "../../utils/action-types";
+import { Button } from "../../SubComponents/Button";
 
-export const GiftCreateSubmitButton = ({
-  name,
-  style,
-  className
-}) => {
+export const GiftCreateSubmitButton = ({ name, ...otherProps }) => {
   const {
     dispatch,
     state: { disableSubmit }
   } = useContext(store);
 
-  return useMemo(
-    () => (
-      <Submit
-        onClick={() => dispatch({ type: HANDLE_SUBMIT })}
-        text={name}
-        disabled={disableSubmit}
-        style={style}
-        className={className}
-      />
-    ),
-    [className, name, disableSubmit, style]
+  return (
+    <Button
+      {...otherProps}
+      onClick={() => dispatch({ type: HANDLE_SUBMIT })}
+      disabled={disableSubmit}
+      isFullWidth={true}
+    >
+      {name}
+    </Button>
   );
 };
