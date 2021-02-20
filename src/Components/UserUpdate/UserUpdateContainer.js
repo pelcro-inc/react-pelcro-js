@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import useReducerWithSideEffects, {
   UpdateWithSideEffect,
@@ -11,10 +11,10 @@ import {
   SET_PHONE,
   SET_TEXT_FIELD,
   HANDLE_USER_UPDATE,
-  DISABLE_USER_UPDATE_BUTTON
+  DISABLE_USER_UPDATE_BUTTON,
+  SHOW_ALERT
 } from "../../utils/action-types";
 import { getErrorMessages } from "../common/Helpers";
-import { showError, showSuccess } from "../../utils/showing-error";
 
 const initialState = {
   email: window.Pelcro.user.read()?.email,
@@ -23,7 +23,11 @@ const initialState = {
   displayName: window.Pelcro.user.read()?.display_name,
   phone: window.Pelcro.user.read()?.phone,
   buttonDisabled: false,
-  textFields: {}
+  textFields: {},
+  alert: {
+    type: "error",
+    content: ""
+  }
 };
 
 const store = createContext(initialState);
@@ -93,16 +97,22 @@ const UserUpdateContainer = ({
         });
 
         if (err) {
+          dispatch({
+            type: SHOW_ALERT,
+            payload: {
+              type: "error",
+              content: getErrorMessages(err)
+            }
+          });
           onFailure(err);
-          return showError(
-            getErrorMessages(err),
-            "pelcro-error-user-edit"
-          );
         } else {
-          showSuccess(
-            t("messages.userUpdated"),
-            "pelcro-success-user-edit"
-          );
+          dispatch({
+            type: SHOW_ALERT,
+            payload: {
+              type: "success",
+              content: t("messages.userUpdated")
+            }
+          });
           onSuccess();
         }
       }
@@ -140,6 +150,12 @@ const UserUpdateContainer = ({
           return Update({
             ...state,
             phone: action.payload
+          });
+
+        case SHOW_ALERT:
+          return Update({
+            ...state,
+            alert: action.payload
           });
 
         case DISABLE_USER_UPDATE_BUTTON:

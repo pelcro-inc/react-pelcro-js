@@ -3,7 +3,7 @@ import { Button } from "../../SubComponents/Button";
 import { HANDLE_USER_UPDATE } from "../../utils/action-types";
 import { store } from "./UserUpdateContainer";
 
-export const UserUpdateButton = ({ ...otherProps }) => {
+export const UserUpdateButton = ({ name, ...otherProps }) => {
   const {
     state: { buttonDisabled },
     dispatch
@@ -14,8 +14,9 @@ export const UserUpdateButton = ({ ...otherProps }) => {
       {...otherProps}
       onClick={() => dispatch({ type: HANDLE_USER_UPDATE })}
       disabled={buttonDisabled}
+      isFullWidth={true}
     >
-      {otherProps.name || "SUBMIT"}
+      {name}
     </Button>
   );
 };

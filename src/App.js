@@ -774,7 +774,7 @@ class App extends Component {
           )}
 
           {this.state.view === "user-edit" && (
-            <UserUpdateModal resetView={this.resetView} />
+            <UserUpdateModal onClose={this.resetView} />
           )}
           {this.state.view === "address-edit" && (
             <AddressUpdateModal
