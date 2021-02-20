@@ -13,10 +13,10 @@ import {
   SET_FIRST_NAME,
   SET_LAST_NAME,
   SET_TEXT_FIELD,
-  SET_STATE
+  SET_STATE,
+  SHOW_ALERT
 } from "../../utils/action-types";
 import { getErrorMessages } from "../common/Helpers";
-import { showError, showSuccess } from "../../utils/showing-error";
 
 const initialState = {
   disableSubmit: false,
@@ -29,7 +29,11 @@ const initialState = {
   postalCode: "",
   states: [],
   countries: [],
-  loading: true
+  loading: true,
+  alert: {
+    type: "error",
+    content: ""
+  }
 };
 const store = createContext(initialState);
 const { Provider } = store;
@@ -102,18 +106,24 @@ const AddressUpdateContainer = ({
       (err, res) => {
         dispatch({ type: DISABLE_SUBMIT, payload: false });
         if (err) {
+          dispatch({
+            type: SHOW_ALERT,
+            payload: {
+              type: "error",
+              content: getErrorMessages(err)
+            }
+          });
           onFailure(err);
-          return showError(
-            getErrorMessages(err),
-            "pelcro-error-address"
-          );
+        } else {
+          dispatch({
+            type: SHOW_ALERT,
+            payload: {
+              type: "success",
+              content: t("messages.addressUpdated")
+            }
+          });
+          onSuccess();
         }
-
-        onSuccess();
-        return showSuccess(
-          t("messages.addressUpdated"),
-          "pelcro-success-address"
-        );
       }
     );
   };
@@ -146,6 +156,12 @@ const AddressUpdateContainer = ({
           return Update({
             ...state,
             ...action.payload
+          });
+
+        case SHOW_ALERT:
+          return Update({
+            ...state,
+            alert: action.payload
           });
 
         case HANDLE_SUBMIT:

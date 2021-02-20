@@ -779,7 +779,7 @@ class App extends Component {
           {this.state.view === "address-edit" && (
             <AddressUpdateModal
               addressId={this.state.addressId}
-              resetView={this.resetView}
+              onClose={this.resetView}
               onSuccess={() => null}
             />
           )}
