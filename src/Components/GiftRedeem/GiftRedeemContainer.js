@@ -7,13 +7,17 @@ import useReducerWithSideEffects, {
 import {
   SET_GIFT_CODE,
   HANDLE_SUBMIT,
-  DISABLE_SUBMIT
+  DISABLE_SUBMIT,
+  SHOW_ALERT
 } from "../../utils/action-types";
-import { showError } from "../../utils/showing-error";
 
 const initialState = {
   giftCode: "",
-  buttonDisabled: true
+  buttonDisabled: true,
+  alert: {
+    type: "error",
+    content: ""
+  }
 };
 const store = createContext(initialState);
 const { Provider } = store;
@@ -34,14 +38,17 @@ const GiftRedeemContainer = ({
 
   const handleRedeem = ({ giftCode }, dispatch) => {
     if (!giftCode) {
+      dispatch({
+        type: SHOW_ALERT,
+        payload: {
+          type: "error",
+          content: t("redeem.messages.enterGiftCode")
+        }
+      });
       onFailure();
-      return showError(
-        t("redeem.messages.enterGiftCode"),
-        "pelcro-error-redeem"
-      );
+    } else {
+      onSuccess(giftCode);
     }
-
-    return onSuccess(giftCode);
   };
 
   const [state, dispatch] = useReducerWithSideEffects(
@@ -51,6 +58,12 @@ const GiftRedeemContainer = ({
           return Update({
             ...state,
             giftCode: action.payload
+          });
+
+        case SHOW_ALERT:
+          return Update({
+            ...state,
+            alert: action.payload
           });
 
         case DISABLE_SUBMIT:

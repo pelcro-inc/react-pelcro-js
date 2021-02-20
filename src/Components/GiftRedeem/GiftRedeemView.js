@@ -1,47 +1,37 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { GiftRedeemContainer } from "./GiftRedeemContainer";
-import { AlertDanger } from "../Alerts/AlertDanger";
 import { GiftRedeemCode } from "./GiftRedeemCode";
 import { GiftRedeemSubmitButton } from "./GiftRedeemSubmitButton";
+import { AlertWithContext } from "../../SubComponents/AlertWithContext";
 
 export const GiftRedeemView = (props) => {
   const { t } = useTranslation("register");
   return (
-    <GiftRedeemContainer {...props}>
-      <div className="pelcro-prefix-title-block">
+    <div id="pelcro-gift-redeem-view">
+      <div className="flex flex-col items-center text-lg font-semibold pelcro-title-container">
         <h4>{t("redeem.titles.firstTitle")}</h4>
         <p>{t("redeem.titles.secondTitle")}</p>
       </div>
-
-      <AlertDanger name="redeem" />
-
-      <div className="pelcro-prefix-form">
-        <div className="pelcro-prefix-row">
-          <div className="col-sm-12">
-            <label
-              className="pelcro-prefix-label"
-              htmlFor="pelcro-input-gift_code"
-            >
-              {t("redeem.labels.code")} *
-            </label>
+      <div className="mt-2 pelcro-form">
+        <GiftRedeemContainer {...props}>
+          <AlertWithContext />
+          <div className="flex gap-3">
             <GiftRedeemCode
-              className="pelcro-prefix-input pelcro-prefix-form-control"
-              id="pelcro-input-gift_code"
+              id="pelcro-input-gift-code"
+              errorId="pelcro-input-gift-code-error"
               placeholder={t("redeem.labels.codePlaceholder")}
+              label={t("redeem.labels.code")}
+              required
             />
           </div>
-        </div>
-
-        <small className="pelcro-prefix-footnote pelcro-prefix-form-text">
-          * {t("redeem.labels.required")}
-        </small>
-
-        <GiftRedeemSubmitButton
-          className="pelcro-prefix-btn"
-          name={t("redeem.buttons.redeem")}
-        />
+          <GiftRedeemSubmitButton
+            className="mt-2"
+            id="pelcro-submit"
+            name={t("redeem.buttons.redeem")}
+          />
+        </GiftRedeemContainer>
       </div>
-    </GiftRedeemContainer>
+    </div>
   );
 };

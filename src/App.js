@@ -629,7 +629,7 @@ class App extends Component {
           {this.state.view === "redeem" && (
             <GiftRedeemModal
               setView={this.setView}
-              resetView={this.resetView}
+              onClose={this.resetView}
               onDisplay={() => {
                 ReactGA.event({
                   category: "VIEWS",
