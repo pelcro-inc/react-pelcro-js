@@ -41,6 +41,7 @@ export const PasswordResetView = (props) => {
           />
 
           <PasswordResetButton
+            className="mt-2"
             name={t("submit")}
             id="pelcro-submit"
           />

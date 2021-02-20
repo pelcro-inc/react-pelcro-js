@@ -31,7 +31,11 @@ export function LoginView(props) {
             placeholder={t("labels.passwordPlaceholder")}
             label={t("labels.password")}
           />
-          <LoginButton name={t("labels.login")} id="pelcro-submit" />
+          <LoginButton
+            className="mt-2"
+            name={t("labels.login")}
+            id="pelcro-submit"
+          />
         </LoginContainer>
       </div>
     </div>
