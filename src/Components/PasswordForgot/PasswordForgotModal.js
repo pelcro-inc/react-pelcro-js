@@ -19,7 +19,7 @@ export const PasswordForgotModal = ({
   const site = window.Pelcro.site.read();
 
   return (
-    <Modal id="password-forgot-modal">
+    <Modal id="pelcro-password-forgot-modal">
       <ModalHeader
         hideCloseButton={false}
         onClose={onClose}
