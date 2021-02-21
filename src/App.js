@@ -811,7 +811,7 @@ class App extends Component {
             <OrderCreateModal
               order={this.state.order}
               setView={this.setView}
-              resetView={this.resetView}
+              onClose={this.resetView}
               onDisplay={() => {
                 ReactGA.event({
                   category: "VIEWS",

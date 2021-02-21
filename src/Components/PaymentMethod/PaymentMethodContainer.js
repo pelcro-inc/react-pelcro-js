@@ -25,14 +25,10 @@ import {
   SET_PAYMENT_REQUEST,
   INIT_CONTAINER,
   UPDATE_PAYMENT_REQUEST,
-  SET_ORDER
+  SET_ORDER,
+  SHOW_ALERT
 } from "../../utils/action-types";
 import { getErrorMessages, debounce } from "../common/Helpers";
-import {
-  showError,
-  showSuccess,
-  hideError
-} from "../../utils/showing-error";
 import {
   Subscription,
   PaypalGateWay,
@@ -54,6 +50,7 @@ import {
  * @property {unknown} paymentRequest
  * @property {number} updatedPrice
  * @property {object} order
+ * @property {object} alert
  */
 
 /** @type {PaymentStateType} */
@@ -66,22 +63,14 @@ const initialState = {
   canMakePayment: false,
   paymentRequest: null,
   updatedPrice: null,
-  order: {}
+  order: {},
+  alert: {
+    type: "error",
+    content: ""
+  }
 };
 const store = createContext(initialState);
 const { Provider } = store;
-
-const displayError = (message) => {
-  showError(message, "pelcro-error-payment-create");
-};
-
-const removeErrorElement = () => {
-  hideError("pelcro-error-payment-create");
-};
-
-const displaySuccess = (message) => {
-  showSuccess(message, "pelcro-success-payment-create");
-};
 
 const PaymentMethodContainerWithoutStripe = ({
   style,
@@ -171,12 +160,24 @@ const PaymentMethodContainerWithoutStripe = ({
         dispatch({ type: DISABLE_SUBMIT, payload: false });
         if (err) {
           console.log("createPayment -> err", err);
+          dispatch({
+            type: SHOW_ALERT,
+            payload: {
+              type: "error",
+              content: getErrorMessages(err)
+            }
+          });
           onFailure(err);
-          return displayError(getErrorMessages(err));
+        } else {
+          dispatch({
+            type: SHOW_ALERT,
+            payload: {
+              type: "success",
+              content: successMessage
+            }
+          });
+          onSuccess(res);
         }
-
-        displaySuccess(successMessage);
-        onSuccess(res);
       }
     );
   };
@@ -200,11 +201,23 @@ const PaymentMethodContainerWithoutStripe = ({
           if (err) {
             dispatch({ type: SET_PERCENT_OFF, payload: "" });
 
-            onFailure(err);
-            return displayError(getErrorMessages(err));
+            dispatch({
+              type: SHOW_ALERT,
+              payload: {
+                type: "error",
+                content: getErrorMessages(err)
+              }
+            });
+            return onFailure(err);
           }
 
-          removeErrorElement();
+          dispatch({
+            type: SHOW_ALERT,
+            payload: {
+              type: "error",
+              content: ""
+            }
+          });
           dispatch({
             type: SET_PERCENT_OFF,
             payload: `${res.data.coupon?.percent_off}%`
@@ -253,11 +266,17 @@ const PaymentMethodContainerWithoutStripe = ({
           dispatch({ type: DISABLE_SUBMIT, payload: false });
 
           if (err) {
+            dispatch({
+              type: SHOW_ALERT,
+              payload: {
+                type: "error",
+                content: getErrorMessages(err)
+              }
+            });
             onFailure(err);
-            return displayError(getErrorMessages(err));
+          } else {
+            onSuccess(res);
           }
-
-          onSuccess(res);
         }
       );
     } else {
@@ -275,8 +294,14 @@ const PaymentMethodContainerWithoutStripe = ({
             dispatch({ type: DISABLE_SUBMIT, payload: false });
 
             if (err) {
-              onFailure(err);
-              return displayError(getErrorMessages(err));
+              dispatch({
+                type: SHOW_ALERT,
+                payload: {
+                  type: "error",
+                  content: getErrorMessages(err)
+                }
+              });
+              return onFailure(err);
             }
 
             onGiftRenewalSuccess(res);
@@ -300,11 +325,17 @@ const PaymentMethodContainerWithoutStripe = ({
             dispatch({ type: DISABLE_SUBMIT, payload: false });
 
             if (err) {
+              dispatch({
+                type: SHOW_ALERT,
+                payload: {
+                  type: "error",
+                  content: getErrorMessages(err)
+                }
+              });
               onFailure(err);
-              return displayError(getErrorMessages(err));
+            } else {
+              onSuccess(res);
             }
-
-            onSuccess(res);
           }
         );
       }
@@ -343,11 +374,17 @@ const PaymentMethodContainerWithoutStripe = ({
           dispatch({ type: DISABLE_SUBMIT, payload: false });
 
           if (err) {
+            dispatch({
+              type: SHOW_ALERT,
+              payload: {
+                type: "error",
+                content: getErrorMessages(err)
+              }
+            });
             onFailure(err);
-            return displayError(getErrorMessages(err));
+          } else {
+            onSuccess(res);
           }
-
-          onSuccess(res);
         }
       );
     }
@@ -364,11 +401,17 @@ const PaymentMethodContainerWithoutStripe = ({
         dispatch({ type: DISABLE_SUBMIT, payload: false });
 
         if (err) {
-          onFailure(err);
-          return displayError(getErrorMessages(err));
+          dispatch({
+            type: SHOW_ALERT,
+            payload: {
+              type: "error",
+              content: getErrorMessages(err)
+            }
+          });
+          return onFailure(err);
+        } else {
+          onSuccess(res);
         }
-
-        onSuccess(res);
       }
     );
   };
@@ -394,8 +437,14 @@ const PaymentMethodContainerWithoutStripe = ({
         dispatch({ type: DISABLE_SUBMIT, payload: false });
 
         if (err) {
-          onFailure(err);
-          return displayError(getErrorMessages(err));
+          dispatch({
+            type: SHOW_ALERT,
+            payload: {
+              type: "error",
+              content: getErrorMessages(err)
+            }
+          });
+          return onFailure(err);
         }
 
         // Reset cart products
@@ -429,8 +478,14 @@ const PaymentMethodContainerWithoutStripe = ({
           }
         }
 
+        dispatch({
+          type: SHOW_ALERT,
+          payload: {
+            type: "error",
+            content: getErrorMessages(err)
+          }
+        });
         onFailure(error);
-        displayError(error?.message);
         dispatch({ type: DISABLE_SUBMIT, payload: false });
       } else if (token && type === "createPayment") {
         dispatch({ type: DISABLE_SUBMIT, payload: true });
@@ -519,6 +574,12 @@ const PaymentMethodContainerWithoutStripe = ({
           );
         case SET_PERCENT_OFF:
           return Update({ ...state, percentOff: action.payload });
+
+        case SHOW_ALERT:
+          return Update({
+            ...state,
+            alert: action.payload
+          });
 
         default:
           return state;

@@ -5,6 +5,7 @@ import { ReactComponent as SuccessIcon } from "../assets/check.svg";
 export function Alert({
   type = "error",
   className = "",
+  hideIcon = false,
   children,
   ...otherProps
 }) {
@@ -15,14 +16,14 @@ export function Alert({
       } rounded-sm pelcro-alert-${type} ${className}`}
       {...otherProps}
     >
-      {type === "error" && (
+      {type === "error" && !hideIcon && (
         <ErrorIcon
           className="w-6 mr-3 pelcro-alert-icon"
           stroke="currentColor"
           fill="none"
         />
       )}
-      {type === "success" && (
+      {type === "success" && !hideIcon && (
         <SuccessIcon
           className="w-6 mr-3 pelcro-alert-icon"
           fill="currentColor"

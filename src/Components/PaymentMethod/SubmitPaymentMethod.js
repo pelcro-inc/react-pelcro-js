@@ -1,24 +1,22 @@
-import React, { useContext, useEffect, useMemo } from "react";
-import Submit from "../common/Submit";
+import React, { useContext } from "react";
 import { store } from "./PaymentMethodContainer";
 import { SUBMIT_PAYMENT } from "../../utils/action-types";
+import { Button } from "../../SubComponents/Button";
 
-export const SubmitPaymentMethod = ({ name, style, className }) => {
+export const SubmitPaymentMethod = ({ name, ...otherProps }) => {
   const {
     dispatch,
     state: { disableSubmit }
   } = useContext(store);
 
-  return useMemo(
-    () => (
-      <Submit
-        onClick={() => dispatch({ type: SUBMIT_PAYMENT })}
-        text={name}
-        disabled={disableSubmit}
-        style={style}
-        className={className}
-      />
-    ),
-    [className, name, disableSubmit, style]
+  return (
+    <Button
+      {...otherProps}
+      onClick={() => dispatch({ type: SUBMIT_PAYMENT })}
+      disabled={disableSubmit}
+      isFullWidth={true}
+    >
+      {name}
+    </Button>
   );
 };
