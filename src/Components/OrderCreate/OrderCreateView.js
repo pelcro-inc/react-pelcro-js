@@ -2,9 +2,11 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { OrderCreateContainer } from "./OrderCreateContainer";
 import { OrderCraeteSubmitButton } from "./OrderCraeteSubmitButton";
-import { PelcroCardNumber } from "../../SubComponents/PelcroCardNumber";
-import { PelcroCardCVC } from "../../SubComponents/PelcroCardCVC";
-import { PelcroCardExpiry } from "../../SubComponents/PelcroCardExpiry";
+import {
+  PelcroCardNumber,
+  PelcroCardExpiry,
+  PelcroCardCVC
+} from "../../SubComponents/StripeElements";
 import { AlertDanger } from "../Alerts/AlertDanger";
 
 export const OrderCreateView = (props) => {

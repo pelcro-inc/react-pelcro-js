@@ -11,6 +11,7 @@ import useReducerWithSideEffects, {
 
 import {
   DISABLE_SUBMIT,
+  LOADING,
   CREATE_PAYMENT,
   SET_UPDATED_PRICE,
   SUBMIT_PAYMENT,
@@ -25,14 +26,10 @@ import {
   SET_PAYMENT_REQUEST,
   INIT_CONTAINER,
   UPDATE_PAYMENT_REQUEST,
-  SET_ORDER
+  SET_ORDER,
+  SHOW_ALERT
 } from "../../utils/action-types";
 import { getErrorMessages, debounce } from "../common/Helpers";
-import {
-  showError,
-  showSuccess,
-  hideError
-} from "../../utils/showing-error";
 import {
   Subscription,
   PaypalGateWay,
@@ -46,6 +43,7 @@ import {
 /**
  * @typedef {Object} PaymentStateType
  * @property {boolean} disableSubmit
+ * @property {boolean} isLoading
  * @property {boolean} disableCouponButton
  * @property {string} couponCode
  * @property {boolean} enableCouponField
@@ -53,12 +51,15 @@ import {
  * @property {unknown} canMakePayment
  * @property {unknown} paymentRequest
  * @property {number} updatedPrice
+ * @property {object} currentPlan
  * @property {object} order
+ * @property {object} alert
  */
 
 /** @type {PaymentStateType} */
 const initialState = {
   disableSubmit: false,
+  isLoading: false,
   disableCouponButton: false,
   couponCode: "",
   enableCouponField: false,
@@ -66,22 +67,12 @@ const initialState = {
   canMakePayment: false,
   paymentRequest: null,
   updatedPrice: null,
-  order: {}
+  currentPlan: null,
+  order: {},
+  alert: {}
 };
 const store = createContext(initialState);
 const { Provider } = store;
-
-const displayError = (message) => {
-  showError(message, "pelcro-error-payment-create");
-};
-
-const removeErrorElement = () => {
-  hideError("pelcro-error-payment-create");
-};
-
-const displaySuccess = (message) => {
-  showSuccess(message, "pelcro-success-payment-create");
-};
 
 const PaymentMethodContainerWithoutStripe = ({
   style,
@@ -169,13 +160,23 @@ const PaymentMethodContainerWithoutStripe = ({
       (err, res) => {
         console.log("createPayment -> err, res", err, res);
         dispatch({ type: DISABLE_SUBMIT, payload: false });
+        dispatch({ type: LOADING, payload: false });
         if (err) {
           console.log("createPayment -> err", err);
           onFailure(err);
-          return displayError(getErrorMessages(err));
+          return dispatch({
+            type: SHOW_ALERT,
+            payload: { type: "error", content: getErrorMessages(err) }
+          });
         }
 
-        displaySuccess(successMessage);
+        dispatch({
+          type: SHOW_ALERT,
+          payload: {
+            type: "success",
+            content: successMessage
+          }
+        });
         onSuccess(res);
       }
     );
@@ -201,10 +202,19 @@ const PaymentMethodContainerWithoutStripe = ({
             dispatch({ type: SET_PERCENT_OFF, payload: "" });
 
             onFailure(err);
-            return displayError(getErrorMessages(err));
+            return dispatch({
+              type: SHOW_ALERT,
+              payload: {
+                type: "error",
+                content: getErrorMessages(err)
+              }
+            });
           }
 
-          removeErrorElement();
+          dispatch({
+            type: SHOW_ALERT,
+            payload: { type: "error", content: "" }
+          });
           dispatch({
             type: SET_PERCENT_OFF,
             payload: `${res.data.coupon?.percent_off}%`
@@ -251,10 +261,17 @@ const PaymentMethodContainerWithoutStripe = ({
         },
         (err, res) => {
           dispatch({ type: DISABLE_SUBMIT, payload: false });
+          dispatch({ type: LOADING, payload: false });
 
           if (err) {
             onFailure(err);
-            return displayError(getErrorMessages(err));
+            return dispatch({
+              type: SHOW_ALERT,
+              payload: {
+                type: "error",
+                content: getErrorMessages(err)
+              }
+            });
           }
 
           onSuccess(res);
@@ -273,10 +290,17 @@ const PaymentMethodContainerWithoutStripe = ({
           },
           (err, res) => {
             dispatch({ type: DISABLE_SUBMIT, payload: false });
+            dispatch({ type: LOADING, payload: false });
 
             if (err) {
               onFailure(err);
-              return displayError(getErrorMessages(err));
+              return dispatch({
+                type: SHOW_ALERT,
+                payload: {
+                  type: "error",
+                  content: getErrorMessages(err)
+                }
+              });
             }
 
             onGiftRenewalSuccess(res);
@@ -298,10 +322,17 @@ const PaymentMethodContainerWithoutStripe = ({
           },
           (err, res) => {
             dispatch({ type: DISABLE_SUBMIT, payload: false });
+            dispatch({ type: LOADING, payload: false });
 
             if (err) {
               onFailure(err);
-              return displayError(getErrorMessages(err));
+              return dispatch({
+                type: SHOW_ALERT,
+                payload: {
+                  type: "error",
+                  content: getErrorMessages(err)
+                }
+              });
             }
 
             onSuccess(res);
@@ -341,10 +372,17 @@ const PaymentMethodContainerWithoutStripe = ({
 
         (err, res) => {
           dispatch({ type: DISABLE_SUBMIT, payload: false });
+          dispatch({ type: LOADING, payload: false });
 
           if (err) {
             onFailure(err);
-            return displayError(getErrorMessages(err));
+            return dispatch({
+              type: SHOW_ALERT,
+              payload: {
+                type: "error",
+                content: getErrorMessages(err)
+              }
+            });
           }
 
           onSuccess(res);
@@ -362,10 +400,14 @@ const PaymentMethodContainerWithoutStripe = ({
       },
       (err, res) => {
         dispatch({ type: DISABLE_SUBMIT, payload: false });
+        dispatch({ type: LOADING, payload: false });
 
         if (err) {
           onFailure(err);
-          return displayError(getErrorMessages(err));
+          return dispatch({
+            type: SHOW_ALERT,
+            payload: { type: "error", content: getErrorMessages(err) }
+          });
         }
 
         onSuccess(res);
@@ -392,10 +434,14 @@ const PaymentMethodContainerWithoutStripe = ({
       },
       (err, res) => {
         dispatch({ type: DISABLE_SUBMIT, payload: false });
+        dispatch({ type: LOADING, payload: false });
 
         if (err) {
           onFailure(err);
-          return displayError(getErrorMessages(err));
+          return dispatch({
+            type: SHOW_ALERT,
+            payload: { type: "error", content: getErrorMessages(err) }
+          });
         }
 
         // Reset cart products
@@ -415,6 +461,7 @@ const PaymentMethodContainerWithoutStripe = ({
   };
 
   const submitPayment = (state, dispatch) => {
+    dispatch({ type: LOADING, payload: true });
     return stripe.createToken().then(({ token, error }) => {
       if (error) {
         if (
@@ -430,8 +477,12 @@ const PaymentMethodContainerWithoutStripe = ({
         }
 
         onFailure(error);
-        displayError(error?.message);
+        dispatch({
+          type: SHOW_ALERT,
+          payload: { type: "error", content: error?.message }
+        });
         dispatch({ type: DISABLE_SUBMIT, payload: false });
+        dispatch({ type: LOADING, payload: false });
       } else if (token && type === "createPayment") {
         dispatch({ type: DISABLE_SUBMIT, payload: true });
         subscribe(token, state, dispatch);
@@ -449,6 +500,9 @@ const PaymentMethodContainerWithoutStripe = ({
       switch (action.type) {
         case DISABLE_SUBMIT:
           return Update({ ...state, disableSubmit: action.payload });
+
+        case LOADING:
+          return Update({ ...state, isLoading: action.payload });
 
         case SHOW_COUPON_FIELD:
           return Update({
@@ -470,8 +524,9 @@ const PaymentMethodContainerWithoutStripe = ({
           );
 
         case INIT_CONTAINER:
-          return UpdateWithSideEffect(state, (state, dispatch) =>
-            initPaymentRequest(state, dispatch)
+          return UpdateWithSideEffect(
+            { ...state, currentPlan: plan },
+            (state, dispatch) => initPaymentRequest(state, dispatch)
           );
 
         case UPDATE_PAYMENT_REQUEST:
@@ -519,6 +574,12 @@ const PaymentMethodContainerWithoutStripe = ({
           );
         case SET_PERCENT_OFF:
           return Update({ ...state, percentOff: action.payload });
+
+        case SHOW_ALERT:
+          return Update({
+            ...state,
+            alert: action.payload
+          });
 
         default:
           return state;

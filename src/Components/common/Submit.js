@@ -8,7 +8,6 @@ const Submit = ({ disabled, id, text, onClick, className }) => {
     <div className="submit">
       <button
         name="submit"
-        style={style}
         className={`pelcro-prefix-btn ${className}`}
         type="submit"
       >

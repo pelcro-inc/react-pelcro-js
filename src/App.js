@@ -654,7 +654,7 @@ class App extends Component {
                 giftRecipient={this.state.giftRecipient}
                 plan={this.state.plan}
                 product={this.state.product}
-                resetView={this.resetView}
+                onClose={this.resetView}
                 logout={this.logout}
                 onDisplay={() => {
                   ReactGA.event({
@@ -675,7 +675,7 @@ class App extends Component {
                 isRenewingGift={this.state.isRenewingGift}
                 plan={this.state.plan}
                 product={this.state.product}
-                resetView={this.resetView}
+                onClose={this.resetView}
                 logout={this.logout}
                 onDisplay={() => {
                   ReactGA.event({
@@ -707,7 +707,7 @@ class App extends Component {
                 });
               }}
               product={this.state.product}
-              resetView={this.resetView}
+              onClose={this.resetView}
             />
           )}
           {this.state.view === "address" && (
@@ -755,7 +755,7 @@ class App extends Component {
 
           {this.state.view === "source-create" && (
             <PaymentMethodUpdateModal
-              resetView={this.resetView}
+              onClose={this.resetView}
               onDisplay={() => {
                 ReactGA.event({
                   category: "VIEWS",

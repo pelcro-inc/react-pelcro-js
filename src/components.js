@@ -69,10 +69,12 @@ export { AddressCreateCountrySelect } from "./Components/AddressCreate/AddressCr
 export { AddressCreateStateSelect } from "./Components/AddressCreate/AddressCreateStateSelect";
 export { AlertSuccess } from "./Components/Alerts/AlertSuccess";
 export { AlertDanger } from "./Components/Alerts/AlertDanger";
-export { PelcroCardCVC } from "./SubComponents/PelcroCardCVC";
-export { PelcroCardExpiry } from "./SubComponents/PelcroCardExpiry";
-export { PelcroCardNumber } from "./SubComponents/PelcroCardNumber";
-export { PelcroPaymentRequestButton } from "./SubComponents/PelcroPaymentRequestButton";
+export {
+  PelcroCardCVC,
+  PelcroCardExpiry,
+  PelcroCardNumber,
+  PelcroPaymentRequestButton
+} from "./SubComponents/StripeElements";
 export { PaypalSubscribeButton } from "./Components/PaypalButtons/PaypalSubscribeButton";
 export { AddressUpdateContainer } from "./Components/AddressUpdate/AddressUpdateContainer";
 export { AddressUpdateCountrySelect } from "./Components/AddressUpdate/AddressUpdateCountrySelect";

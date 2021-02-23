@@ -1,14 +1,19 @@
 {
-    "labels": {
-        "card": "Entrez le numéro de carte",
-        "date": "Date d’expiration",
-        "CVC": "CVC",
-        "required": "Champs obligatoires",
-        "submit": "Soumettre",
-        "addCode": "Ajouter un code promo",
-        "hideCode": "Cacher",
-        "codePlaceholder": "Entrez votre code de coupon",
-        "applyCouponCode": "Appliquer",
-        "code": "Code promo"
-    }
+  "messages": {
+    "youAreSafe": "Vous êtes en sécurité - PCI conforme 128 SSL par"
+  },
+  "labels": {
+    "card": "Entrez le numéro de carte",
+    "date": "Date d’expiration",
+    "CVC": "CVC",
+    "required": "Champs obligatoires",
+    "submit": "Soumettre",
+    "pay": "Payer",
+    "addCode": "Ajouter un code promo",
+    "hideCode": "Cacher",
+    "codePlaceholder": "Entrez votre code de coupon",
+    "applyCouponCode": "Appliquer",
+    "code": "Code promo",
+    "for": "pour"
+  }
 }
