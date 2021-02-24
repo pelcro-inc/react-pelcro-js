@@ -5,22 +5,19 @@ import { APPLY_COUPON_CODE } from "../../utils/action-types";
 
 export const ApplyCouponButton = ({ children }) => {
   const {
-    state: {
-      disableCouponButton: disableCouponButtonState,
-      couponCode,
-      disableCouponButton,
-    },
-    dispatch,
+    state: { couponCode, disableCouponButton },
+    dispatch
   } = useContext(store);
 
-  const onApplyCouponCode = () => dispatch({ type: APPLY_COUPON_CODE });
+  const onApplyCouponCode = () =>
+    dispatch({ type: APPLY_COUPON_CODE });
 
   return (
     <Button
-      className="pelcro-prefix-link"
-      type="button"
+      className="text-sm text-green-500 uppercase border border-gray-300 disabled:text-white disabled:bg-gray-200 hover:text-white bg-gray-50"
+      variant="outline"
       onClick={onApplyCouponCode}
-      disabled={!couponCode || disableCouponButton || disableCouponButtonState}
+      disabled={!couponCode || disableCouponButton}
     >
       {children}
     </Button>

@@ -4,20 +4,20 @@ import { store } from "./PaymentMethodContainer";
 
 export const DiscountedPrice = () => {
   const {
-    state: { updatedPrice, percentOff }
+    state: { updatedPrice, percentOff, currentPlan }
   } = useContext(store);
-  const { default_currency, default_locale } = Pelcro.site.read();
+  const { default_locale } = Pelcro.site.read();
 
   if (percentOff) {
     return (
-      <span>
+      <div className="my-2">
         (-{percentOff}){" "}
         {getFormattedPriceByLocal(
           updatedPrice,
-          default_currency,
+          currentPlan.currency,
           default_locale
         )}
-      </span>
+      </div>
     );
   }
 

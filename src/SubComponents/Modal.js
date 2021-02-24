@@ -44,7 +44,7 @@ export const ModalHeader = ({
           <CloseIcon className="fill-current" />
         </button>
       )}
-      <div className="flex flex-col items-center w-full p-2 mt-4">
+      <div className="flex flex-col items-center w-full p-2 sm:mt-4">
         {logo ? (
           <img
             alt="company logo"

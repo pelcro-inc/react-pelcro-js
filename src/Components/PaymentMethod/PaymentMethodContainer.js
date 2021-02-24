@@ -11,6 +11,7 @@ import useReducerWithSideEffects, {
 
 import {
   DISABLE_SUBMIT,
+  LOADING,
   CREATE_PAYMENT,
   SET_UPDATED_PRICE,
   SUBMIT_PAYMENT,
@@ -42,6 +43,7 @@ import {
 /**
  * @typedef {Object} PaymentStateType
  * @property {boolean} disableSubmit
+ * @property {boolean} isLoading
  * @property {boolean} disableCouponButton
  * @property {string} couponCode
  * @property {boolean} enableCouponField
@@ -49,6 +51,7 @@ import {
  * @property {unknown} canMakePayment
  * @property {unknown} paymentRequest
  * @property {number} updatedPrice
+ * @property {object} currentPlan
  * @property {object} order
  * @property {object} alert
  */
@@ -56,6 +59,7 @@ import {
 /** @type {PaymentStateType} */
 const initialState = {
   disableSubmit: false,
+  isLoading: false,
   disableCouponButton: false,
   couponCode: "",
   enableCouponField: false,
@@ -158,6 +162,7 @@ const PaymentMethodContainerWithoutStripe = ({
       (err, res) => {
         console.log("createPayment -> err, res", err, res);
         dispatch({ type: DISABLE_SUBMIT, payload: false });
+        dispatch({ type: LOADING, payload: false });
         if (err) {
           console.log("createPayment -> err", err);
           dispatch({
@@ -168,16 +173,20 @@ const PaymentMethodContainerWithoutStripe = ({
             }
           });
           onFailure(err);
-        } else {
-          dispatch({
+          return dispatch({
             type: SHOW_ALERT,
-            payload: {
-              type: "success",
-              content: successMessage
-            }
+            payload: { type: "error", content: getErrorMessages(err) }
           });
-          onSuccess(res);
         }
+
+        dispatch({
+          type: SHOW_ALERT,
+          payload: {
+            type: "success",
+            content: successMessage
+          }
+        });
+        onSuccess(res);
       }
     );
   };
@@ -201,22 +210,19 @@ const PaymentMethodContainerWithoutStripe = ({
           if (err) {
             dispatch({ type: SET_PERCENT_OFF, payload: "" });
 
-            dispatch({
+            onFailure(err);
+            return dispatch({
               type: SHOW_ALERT,
               payload: {
                 type: "error",
                 content: getErrorMessages(err)
               }
             });
-            return onFailure(err);
           }
 
           dispatch({
             type: SHOW_ALERT,
-            payload: {
-              type: "error",
-              content: ""
-            }
+            payload: { type: "error", content: "" }
           });
           dispatch({
             type: SET_PERCENT_OFF,
@@ -264,6 +270,7 @@ const PaymentMethodContainerWithoutStripe = ({
         },
         (err, res) => {
           dispatch({ type: DISABLE_SUBMIT, payload: false });
+          dispatch({ type: LOADING, payload: false });
 
           if (err) {
             dispatch({
@@ -274,8 +281,13 @@ const PaymentMethodContainerWithoutStripe = ({
               }
             });
             onFailure(err);
-          } else {
-            onSuccess(res);
+            return dispatch({
+              type: SHOW_ALERT,
+              payload: {
+                type: "error",
+                content: getErrorMessages(err)
+              }
+            });
           }
         }
       );
@@ -292,16 +304,17 @@ const PaymentMethodContainerWithoutStripe = ({
           },
           (err, res) => {
             dispatch({ type: DISABLE_SUBMIT, payload: false });
+            dispatch({ type: LOADING, payload: false });
 
             if (err) {
-              dispatch({
+              onFailure(err);
+              return dispatch({
                 type: SHOW_ALERT,
                 payload: {
                   type: "error",
                   content: getErrorMessages(err)
                 }
               });
-              return onFailure(err);
             }
 
             onGiftRenewalSuccess(res);
@@ -323,6 +336,7 @@ const PaymentMethodContainerWithoutStripe = ({
           },
           (err, res) => {
             dispatch({ type: DISABLE_SUBMIT, payload: false });
+            dispatch({ type: LOADING, payload: false });
 
             if (err) {
               dispatch({
@@ -333,8 +347,13 @@ const PaymentMethodContainerWithoutStripe = ({
                 }
               });
               onFailure(err);
-            } else {
-              onSuccess(res);
+              return dispatch({
+                type: SHOW_ALERT,
+                payload: {
+                  type: "error",
+                  content: getErrorMessages(err)
+                }
+              });
             }
           }
         );
@@ -372,6 +391,7 @@ const PaymentMethodContainerWithoutStripe = ({
 
         (err, res) => {
           dispatch({ type: DISABLE_SUBMIT, payload: false });
+          dispatch({ type: LOADING, payload: false });
 
           if (err) {
             dispatch({
@@ -382,8 +402,13 @@ const PaymentMethodContainerWithoutStripe = ({
               }
             });
             onFailure(err);
-          } else {
-            onSuccess(res);
+            return dispatch({
+              type: SHOW_ALERT,
+              payload: {
+                type: "error",
+                content: getErrorMessages(err)
+              }
+            });
           }
         }
       );
@@ -399,18 +424,14 @@ const PaymentMethodContainerWithoutStripe = ({
       },
       (err, res) => {
         dispatch({ type: DISABLE_SUBMIT, payload: false });
+        dispatch({ type: LOADING, payload: false });
 
         if (err) {
-          dispatch({
+          onFailure(err);
+          return dispatch({
             type: SHOW_ALERT,
-            payload: {
-              type: "error",
-              content: getErrorMessages(err)
-            }
+            payload: { type: "error", content: getErrorMessages(err) }
           });
-          return onFailure(err);
-        } else {
-          onSuccess(res);
         }
       }
     );
@@ -435,16 +456,14 @@ const PaymentMethodContainerWithoutStripe = ({
       },
       (err, res) => {
         dispatch({ type: DISABLE_SUBMIT, payload: false });
+        dispatch({ type: LOADING, payload: false });
 
         if (err) {
-          dispatch({
+          onFailure(err);
+          return dispatch({
             type: SHOW_ALERT,
-            payload: {
-              type: "error",
-              content: getErrorMessages(err)
-            }
+            payload: { type: "error", content: getErrorMessages(err) }
           });
-          return onFailure(err);
         }
 
         // Reset cart products
@@ -464,6 +483,7 @@ const PaymentMethodContainerWithoutStripe = ({
   };
 
   const submitPayment = (state, dispatch) => {
+    dispatch({ type: LOADING, payload: true });
     return stripe.createToken().then(({ token, error }) => {
       if (error) {
         if (
@@ -486,7 +506,12 @@ const PaymentMethodContainerWithoutStripe = ({
           }
         });
         onFailure(error);
+        dispatch({
+          type: SHOW_ALERT,
+          payload: { type: "error", content: error?.message }
+        });
         dispatch({ type: DISABLE_SUBMIT, payload: false });
+        dispatch({ type: LOADING, payload: false });
       } else if (token && type === "createPayment") {
         dispatch({ type: DISABLE_SUBMIT, payload: true });
         subscribe(token, state, dispatch);
@@ -504,6 +529,9 @@ const PaymentMethodContainerWithoutStripe = ({
       switch (action.type) {
         case DISABLE_SUBMIT:
           return Update({ ...state, disableSubmit: action.payload });
+
+        case LOADING:
+          return Update({ ...state, isLoading: action.payload });
 
         case SHOW_COUPON_FIELD:
           return Update({
@@ -525,8 +553,9 @@ const PaymentMethodContainerWithoutStripe = ({
           );
 
         case INIT_CONTAINER:
-          return UpdateWithSideEffect(state, (state, dispatch) =>
-            initPaymentRequest(state, dispatch)
+          return UpdateWithSideEffect(
+            { ...state, currentPlan: plan },
+            (state, dispatch) => initPaymentRequest(state, dispatch)
           );
 
         case UPDATE_PAYMENT_REQUEST:

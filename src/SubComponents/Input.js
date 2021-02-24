@@ -4,6 +4,7 @@ export function Input({
   label = "",
   required,
   id,
+  hideErrors,
   errorId,
   error,
   className = "",
@@ -22,20 +23,24 @@ export function Input({
       <input
         type="text"
         id={id}
-        className={`mt-1 w-full border border-gray-300 bg-gray-50 p-3 appearance-none outline-none rounded-sm focus:ring-1 focus:ring-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed pelcro-input-input ${className} ${
+        className={`${
+          label && "mt-1"
+        } w-full border border-gray-300 bg-gray-50 p-3 appearance-none outline-none rounded-sm focus:ring-1 focus:ring-blue-400 disabled:bg-gray-300 disabled:cursor-not-allowed pelcro-input-input ${className} ${
           error ? "ring-1 ring-red-500 pelcro-input-invalid" : ""
         }`}
         aria-describedby={errorId}
         aria-invalid={Boolean(error)}
         {...otherProps}
       />
-      <p
-        id={errorId}
-        aria-live="assertive"
-        className={`h-3 mt-1 mb-2 text-sm text-red-500 normal-case pelcro-field-error ${errorClassName}`}
-      >
-        {error}
-      </p>
+      {!hideErrors && (
+        <p
+          id={errorId}
+          aria-live="assertive"
+          className={`h-3 mt-1 mb-2 text-sm text-red-500 normal-case pelcro-field-error ${errorClassName}`}
+        >
+          {error}
+        </p>
+      )}
     </div>
   );
 }

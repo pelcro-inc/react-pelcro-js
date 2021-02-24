@@ -1,9 +1,13 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-
-import Header from "../common/Header";
+import {
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter
+} from "../../SubComponents/Modal";
+import { Link } from "../../SubComponents/Link";
 import Authorship from "../common/Authorship";
-
 import { SubscriptionCreateView } from "./SubscriptionCreateView";
 
 export function SubscriptionCreateModal({
@@ -11,68 +15,51 @@ export function SubscriptionCreateModal({
   plan,
   giftRecipient,
   product,
-  resetView,
+  onClose,
   onFailure = () => {},
   onSuccess = () => {},
   onDisplay = () => {}
 }) {
-  const { t } = useTranslation("payment");
+  const { t } = useTranslation("messages");
+  const site = window.Pelcro.site.read();
 
   return (
-    <div className="pelcro-prefix-view">
-      <div
-        className="pelcro-prefix-modal modal pelcro-prefix-fade pelcro-prefix-show"
-        id="pelcro-view-payment"
-        tabIndex="-1"
-        role="dialog"
-        aria-hidden="true"
-      >
-        <div
-          className="pelcro-prefix-modal-dialog pelcro-prefix-modal-dialog-centered"
-          role="document"
-        >
-          <div className="pelcro-prefix-modal-content">
-            <Header
-              closeButton={window.Pelcro.paywall.displayCloseButton()}
-              resetView={resetView}
-              site={window.Pelcro.site.read()}
-            ></Header>
+    <Modal id="pelcro-subscription-create-modal">
+      <ModalHeader
+        hideCloseButton={!window.Pelcro.paywall.displayCloseButton()}
+        onClose={onClose}
+        logo={site.logo}
+        title={site.name}
+      ></ModalHeader>
 
-            <div className="pelcro-prefix-modal-body">
-              <SubscriptionCreateView
-                plan={plan}
-                giftRecipient={giftRecipient}
-                product={product}
-                onDisplay={onDisplay}
-                onFailure={onFailure}
-                onSuccess={onSuccess}
-              />
-            </div>
-            <div className="pelcro-prefix-modal-footer">
-              <small>
-                {t("messages.haveQuestion")}{" "}
-                {t("messages.visitOurFaq.visitOur")}{" "}
-                <a
-                  className="pelcro-prefix-link"
-                  target="new"
-                  href="https://www.pelcro.com/faq/user"
-                >
-                  {t("messages.visitOurFaq.faq")}
-                </a>
-                . {t("messages.cancel")}
-                {" " + t("messages.logout.logout")}{" "}
-                <button
-                  className="pelcro-prefix-link"
-                  onClick={logout}
-                >
-                  {t("messages.logout.here")}
-                </button>
-              </small>
-              <Authorship></Authorship>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+      <ModalBody>
+        <SubscriptionCreateView
+          plan={plan}
+          giftRecipient={giftRecipient}
+          product={product}
+          onDisplay={onDisplay}
+          onFailure={onFailure}
+          onSuccess={onSuccess}
+        />
+      </ModalBody>
+      <ModalFooter>
+        <small className="mb-2 text-center">
+          {t("haveQuestion")} {t("visitOurFaq.visitOur")}{" "}
+          <Link
+            id="pelcro-link-faq"
+            href="https://www.pelcro.com/faq/user"
+            target="_blank"
+          >
+            {t("visitOurFaq.faq")}
+          </Link>
+          . {t("cancel")}
+          {" " + t("logout.logout")}{" "}
+          <Link id="pelcro-link-logout" onClick={logout}>
+            {t("logout.here")}
+          </Link>
+        </small>
+        <Authorship />
+      </ModalFooter>
+    </Modal>
   );
 }

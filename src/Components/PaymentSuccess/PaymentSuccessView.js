@@ -1,23 +1,30 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import Submit from "../common/Submit";
+import { Button } from "../../SubComponents/Button";
+import { ReactComponent as CheckMarkOutlineIcon } from "../../assets/check-outline.svg";
 
-export const PaymentSuccessView = ({ resetView, product }) => {
+export const PaymentSuccessView = ({ onClose, product }) => {
   const { t } = useTranslation("success");
 
   if (product) {
     return (
-      <React.Fragment>
-        <div className="pelcro-prefix-title-block">
-          <h4>{product.paywall.success_title}</h4>
+      <div className="flex flex-col items-center">
+        <CheckMarkOutlineIcon className="w-32 my-4 text-green-500" />
+        <div className="text-center text-gray-700">
+          <h4 className="mb-4 text-3xl text-green-500">
+            {product.paywall.success_title}
+          </h4>
+          <p>{product.paywall.success_content}</p>
         </div>
-        <div>
-          <p className="pelcro-prefix-center-text">
-            {product.paywall.success_content}
-          </p>
-        </div>
-        <Submit onClick={resetView} text={t("continue")}></Submit>
-      </React.Fragment>
+        <Button
+          variant="outline"
+          className="mt-6"
+          onClick={onClose}
+          autoFocus
+        >
+          {t("continue")}
+        </Button>
+      </div>
     );
   }
   return null;

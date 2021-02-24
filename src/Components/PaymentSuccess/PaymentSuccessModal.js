@@ -1,72 +1,33 @@
-// Success view.
-// The modal vindow wich is shown if the subscription was successful.
-
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import Header from "../common/Header";
+import React, { useEffect } from "react";
+import {
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter
+} from "../../SubComponents/Modal";
 import Authorship from "../common/Authorship";
 import { PaymentSuccessView } from "./PaymentSuccessView";
 
-export class PaymentSuccessModal extends Component {
-  componentDidMount = () => {
+export function PaymentSuccessModal({ onDisplay, onClose, product }) {
+  useEffect(() => {
     window.Pelcro.insight.track("Modal Displayed", {
       name: "success"
     });
 
-    if (this.props.onDisplay) {
-      this.props.onDisplay();
-    }
+    onDisplay?.();
+  });
 
-    document.addEventListener("keydown", this.handleSubmit);
-  };
-
-  componentWillUnmount = () => {
-    document.removeEventListener("keydown", this.handleSubmit);
-  };
-
-  handleSubmit = (e) => {
-    if (e.key === "Enter") this.props.resetView();
-  };
-
-  render() {
-    return (
-      <div className="pelcro-prefix-view">
-        <div
-          className="pelcro-prefix-modal pelcro-prefix-fade pelcro-prefix-show"
-          id="pelcro-view-success"
-          tabIndex="-1"
-          role="dialog"
-          aria-hidden="true"
-        >
-          <div
-            className="pelcro-prefix-modal-dialog pelcro-prefix-modal-dialog-centered"
-            role="document"
-          >
-            <div className="pelcro-prefix-modal-content">
-              <Header
-                closeButton={window.Pelcro.paywall.displayCloseButton()}
-                resetView={this.props.resetView}
-                site={window.Pelcro.site.read()}
-              ></Header>
-              <div className="pelcro-prefix-modal-body">
-                <PaymentSuccessView
-                  resetView={this.props.resetView}
-                  product={this.props.product}
-                />
-              </div>
-              <div className="pelcro-prefix-modal-footer">
-                <Authorship></Authorship>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
+  return (
+    <Modal
+      id="pelcro-payment-success-modal"
+      className="border-t-8 border-green-500 "
+    >
+      <ModalBody>
+        <PaymentSuccessView onClose={onClose} product={product} />
+      </ModalBody>
+      <ModalFooter>
+        <Authorship></Authorship>
+      </ModalFooter>
+    </Modal>
+  );
 }
-
-PaymentSuccessModal.propTypes = {
-  product: PropTypes.object,
-  resetView: PropTypes.func,
-  onDisplay: PropTypes.func
-};
