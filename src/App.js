@@ -727,7 +727,7 @@ class App extends Component {
           {this.state.view === "newsletter" && (
             <NewsLetter
               product={this.state.product}
-              resetView={this.resetView}
+              onClose={this.resetView}
               setView={this.setView}
             />
           )}
