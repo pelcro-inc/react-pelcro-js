@@ -1,9 +1,15 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import Header from "../common/Header";
 import Authorship from "../common/Authorship";
-import Submit from "../common/Submit";
 import { withTranslation } from "react-i18next";
+import {
+  Modal,
+  ModalBody,
+  ModalFooter
+} from "../../SubComponents/Modal";
+import { Button } from "../../SubComponents/Button";
+import { ReactComponent as CheckMarkOutlineIcon } from "../../assets/check-outline.svg";
+import { Badge } from "../../SubComponents/Badge";
 
 export class OrderConfirmModal extends Component {
   constructor(props) {
@@ -18,20 +24,14 @@ export class OrderConfirmModal extends Component {
 
     this.locale = this.props.t;
     this.site = window.Pelcro.site.read();
-    this.closeButton = window.Pelcro.paywall.displayCloseButton();
   }
-
-  componentDidMount = () => {
-    const checkmark = document.getElementById("checkmark");
-    checkmark.classList.add("wrapper-ready");
-  };
 
   componentWillUnmount = () => {
     this.removeAll();
   };
 
   handleSubmit = (e) => {
-    if (e.key === "Enter") this.props.resetView();
+    if (e.key === "Enter") this.props.onClose();
   };
 
   removeAll = () => {
@@ -59,122 +59,88 @@ export class OrderConfirmModal extends Component {
 
   render() {
     return (
-      <div className="pelcro-prefix-view">
-        <div
-          className="pelcro-prefix-modal pelcro-prefix-fade pelcro-prefix-show"
-          id="pelcro-view-confirm"
-          tabIndex="-1"
-          role="dialog"
-          aria-hidden="true"
-        >
-          <div
-            className="pelcro-prefix-modal-dialog pelcro-prefix-modal-dialog-centered"
-            role="document"
-          >
-            <div className="pelcro-prefix-modal-content">
-              <Header
-                closeButton={this.closeButton}
-                resetView={this.props.resetView}
-                site={this.site}
-              ></Header>
-              <div className="pelcro-prefix-modal-body">
-                <div id="checkmark" className="wrapper">
-                  <div className="spinner"> </div>
-                  <div className="mask"> </div>
-                  <div className="filler"> </div>
-                  <div className="innerCircle"> </div>
-                  <div className="check"> </div>
-                </div>
-
-                <div className="pelcro-prefix-title-block">
-                  <h4>
-                    {this.locale("messages.orderConfirmed.title")}
-                  </h4>
-                  <p>{this.locale("messages.orderConfirmed.body")}</p>
-                  <p>{this.locale("messages.haveQuestions")}</p>
-                </div>
-
-                <Submit
-                  onClick={this.props.resetView}
-                  text={this.locale("buttons.continue")}
-                ></Submit>
-
-                <div className="pelcro-prefix-cart-field">
-                  <div className="order-summary">
-                    <div className="order-summary-title">
-                      {" "}
-                      <p> Order summary </p>
-                    </div>
-                    {this.state.products.map((product) => {
-                      if (product.quantity > 0) {
-                        return (
-                          <div key={`product-${product.id}`}>
-                            <div
-                              id={`pelcro-prefix-container-product-${product.id}`}
-                              className="pelcro-prefix-product-container row"
-                            >
-                              <div className="pelcro-prefix-product-name-row col-6 row pelcro-prefix-name">
-                                <div className="pelcro-prefix-img-wrapper">
-                                  {product.image && (
-                                    <div>
-                                      <img
-                                        className="pelcro-prefix-cart-product-img"
-                                        alt="product"
-                                        src={product.image}
-                                      />
-                                    </div>
-                                  )}
-                                  <div className="pelcro-prefix-cart-product-quantity pelcro-prefix-quantity">
-                                    {product.quantity}
-                                  </div>
-                                </div>
-                                <div className="pelcro-prefix-cart-product-name">
-                                  {product.name}
-                                </div>
-                              </div>
-                              <div className="pelcro-prefix-product-row col-6 col-md-4">
-                                <div className="pelcro-prefix-cart-product-price pelcro-prefix-price">
-                                  {" "}
-                                  {parseFloat(
-                                    (product.price / 100) *
-                                      product.quantity
-                                  ).toLocaleString("fr-CA", {
-                                    style: "currency",
-                                    currency: "CAD"
-                                  })}{" "}
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        );
-                      } else
-                        return (
-                          <div key={`product-${product.id}`}> </div>
-                        );
-                    })}
-
-                    <div className="pelcro-prefix-total-container row">
-                      <div className="pelcro-prefix-total-block row col-md-12">
-                        <div className="pelcro-prefix-total-text col-6">
-                          {" "}
-                          Total:{" "}
-                        </div>
-                        <div className="pelcro-prefix-total-price col-6">
-                          {" "}
-                          {this.countTotal()}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="pelcro-prefix-modal-footer">
-                <Authorship></Authorship>
+      <Modal
+        id="pelcro-order-confirm-modal"
+        className="border-t-8 border-green-500 "
+      >
+        <ModalBody>
+          <div className="pelcro-order-confirm-view">
+            <div className="flex flex-col items-center">
+              <CheckMarkOutlineIcon className="w-32 my-4 text-green-500" />
+              <div className="text-center text-gray-700">
+                <h4 className="mb-4 text-3xl text-green-500">
+                  {this.locale("messages.orderConfirmed.title")}
+                </h4>
+                <p>{this.locale("messages.orderConfirmed.body")}</p>
+                <p>{this.locale("messages.haveQuestions")}</p>
               </div>
             </div>
+            <div className="mt-5 pelcro-order-summary-container">
+              <div className="pelcro-order-summary">
+                <p className="font-bold pelcro-order-summary-title">
+                  Order summary
+                </p>
+                {this.state.products.map((product) => {
+                  return (
+                    product.quantity > 0 && (
+                      <div
+                        key={product.id}
+                        id={`pelcro-summary-product-${product.id}`}
+                        className="flex items-center pt-2 mt-2 border-t border-gray-400 min-h-12 justify-evenly pelcro-summary-product-wrapper"
+                      >
+                        <div className="w-1/4 pelcro-summary-image-wrapper">
+                          {product.image && (
+                            <Badge content={product.quantity}>
+                              <img
+                                className="object-contain h-20 pelcro-summary-product-image"
+                                alt={`image of ${product.name}`}
+                                src={product.image}
+                              />
+                            </Badge>
+                          )}
+                        </div>
+                        <div className="w-1/2 break-words pelcro-summary-product-name">
+                          {product.name}
+                        </div>
+                        <div className="w-1/5 text-center pelcro-summary-product-price">
+                          {parseFloat(
+                            (product.price / 100) * product.quantity
+                          ).toLocaleString("fr-CA", {
+                            style: "currency",
+                            currency: "CAD"
+                          })}
+                        </div>
+                      </div>
+                    )
+                  );
+                })}
+
+                <div className="flex items-center justify-end pt-2 mt-2 font-bold border-t border-gray-400 pelcro-summary-total-wrapper">
+                  <p className="mr-1 pelcro-summary-total-text">
+                    Total:{" "}
+                  </p>
+                  <p className="pelcro-summary-total">
+                    {this.countTotal()}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="flex justify-center mt-6">
+              <Button
+                id="pelcro-submit"
+                onClick={this.props.onClose}
+                variant="outline"
+                autoFocus
+              >
+                {this.locale("buttons.continue")}
+              </Button>
+            </div>
           </div>
-        </div>
-      </div>
+        </ModalBody>
+        <ModalFooter>
+          <Authorship />
+        </ModalFooter>
+      </Modal>
     );
   }
 }
@@ -182,7 +148,7 @@ export class OrderConfirmModal extends Component {
 OrderConfirmModal.propTypes = {
   plan: PropTypes.object,
   product: PropTypes.object,
-  resetView: PropTypes.func
+  onClose: PropTypes.func
 };
 
 export const OrderConfirmModalWithTrans = withTranslation("shop")(

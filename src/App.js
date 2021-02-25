@@ -832,7 +832,7 @@ class App extends Component {
               order={this.state.order}
               plan={this.state.plan}
               product={this.state.product}
-              resetView={this.resetView}
+              onClose={this.resetView}
               ReactGA={ReactGA}
               setView={this.setView}
             />

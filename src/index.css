@@ -10,3 +10,8 @@
 .pelcro-modal-overlay {
   backdrop-filter: blur(2px);
 }
+
+.pelcro-badge {
+  top: -5%;
+  right: -5%;
+}
