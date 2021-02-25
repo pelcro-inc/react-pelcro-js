@@ -165,13 +165,6 @@ const PaymentMethodContainerWithoutStripe = ({
         dispatch({ type: LOADING, payload: false });
         if (err) {
           console.log("createPayment -> err", err);
-          dispatch({
-            type: SHOW_ALERT,
-            payload: {
-              type: "error",
-              content: getErrorMessages(err)
-            }
-          });
           onFailure(err);
           return dispatch({
             type: SHOW_ALERT,
@@ -273,13 +266,6 @@ const PaymentMethodContainerWithoutStripe = ({
           dispatch({ type: LOADING, payload: false });
 
           if (err) {
-            dispatch({
-              type: SHOW_ALERT,
-              payload: {
-                type: "error",
-                content: getErrorMessages(err)
-              }
-            });
             onFailure(err);
             return dispatch({
               type: SHOW_ALERT,
@@ -339,13 +325,6 @@ const PaymentMethodContainerWithoutStripe = ({
             dispatch({ type: LOADING, payload: false });
 
             if (err) {
-              dispatch({
-                type: SHOW_ALERT,
-                payload: {
-                  type: "error",
-                  content: getErrorMessages(err)
-                }
-              });
               onFailure(err);
               return dispatch({
                 type: SHOW_ALERT,
@@ -394,13 +373,6 @@ const PaymentMethodContainerWithoutStripe = ({
           dispatch({ type: LOADING, payload: false });
 
           if (err) {
-            dispatch({
-              type: SHOW_ALERT,
-              payload: {
-                type: "error",
-                content: getErrorMessages(err)
-              }
-            });
             onFailure(err);
             return dispatch({
               type: SHOW_ALERT,
@@ -497,14 +469,6 @@ const PaymentMethodContainerWithoutStripe = ({
             return subscribe({}, state, dispatch);
           }
         }
-
-        dispatch({
-          type: SHOW_ALERT,
-          payload: {
-            type: "error",
-            content: getErrorMessages(err)
-          }
-        });
         onFailure(error);
         dispatch({
           type: SHOW_ALERT,
