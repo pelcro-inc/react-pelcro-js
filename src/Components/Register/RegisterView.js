@@ -15,7 +15,7 @@ export function RegisterView(props) {
 
   return (
     <div id="pelcro-register-view">
-      <div className="flex flex-col items-center text-lg font-semibold pelcro-title-container">
+      <div className="flex flex-col items-center text-lg font-semibold pelcro-title-wrapper">
         <h4>{title}</h4>
         <p>{subtitle}</p>
       </div>

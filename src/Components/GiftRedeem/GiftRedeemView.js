@@ -9,7 +9,7 @@ export const GiftRedeemView = (props) => {
   const { t } = useTranslation("register");
   return (
     <div id="pelcro-gift-redeem-view">
-      <div className="flex flex-col items-center text-lg font-semibold pelcro-title-container">
+      <div className="flex flex-col items-center text-lg font-semibold pelcro-title-wrapper">
         <h4>{t("redeem.titles.firstTitle")}</h4>
         <p>{t("redeem.titles.secondTitle")}</p>
       </div>

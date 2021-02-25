@@ -138,7 +138,7 @@ class DefaultNewsLetter extends Component {
         />
         <ModalBody>
           <div id="pelcro-newsletter-view">
-            <div className="flex flex-col items-center text-lg font-semibold pelcro-title-container">
+            <div className="flex flex-col items-center text-lg font-semibold pelcro-title-wrapper">
               <h4>{this.title}</h4>
               <p>{this.subtitle}</p>
             </div>

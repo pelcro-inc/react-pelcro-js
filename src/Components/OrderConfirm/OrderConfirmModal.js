@@ -75,54 +75,52 @@ export class OrderConfirmModal extends Component {
                 <p>{this.locale("messages.haveQuestions")}</p>
               </div>
             </div>
-            <div className="mt-5 pelcro-order-summary-container">
-              <div className="pelcro-order-summary">
-                <p className="font-bold pelcro-order-summary-title">
-                  Order summary
-                </p>
-                {this.state.products.map((product) => {
-                  return (
-                    product.quantity > 0 && (
-                      <div
-                        key={product.id}
-                        id={`pelcro-summary-product-${product.id}`}
-                        className="flex items-center pt-2 mt-2 border-t border-gray-400 min-h-12 justify-evenly pelcro-summary-product-wrapper"
-                      >
-                        <div className="w-1/4 pelcro-summary-image-wrapper">
-                          {product.image && (
-                            <Badge content={product.quantity}>
-                              <img
-                                className="object-contain h-20 pelcro-summary-product-image"
-                                alt={`image of ${product.name}`}
-                                src={product.image}
-                              />
-                            </Badge>
-                          )}
-                        </div>
-                        <div className="w-1/2 break-words pelcro-summary-product-name">
-                          {product.name}
-                        </div>
-                        <div className="w-1/5 text-center pelcro-summary-product-price">
-                          {parseFloat(
-                            (product.price / 100) * product.quantity
-                          ).toLocaleString("fr-CA", {
-                            style: "currency",
-                            currency: "CAD"
-                          })}
-                        </div>
+            <div className="mt-5 pelcro-order-summary-wrapper">
+              <p className="font-bold pelcro-order-summary-title">
+                Order summary
+              </p>
+              {this.state.products.map((product) => {
+                return (
+                  product.quantity > 0 && (
+                    <div
+                      key={product.id}
+                      id={`pelcro-summary-product-${product.id}`}
+                      className="flex items-center pt-2 mt-2 border-t border-gray-400 min-h-12 justify-evenly pelcro-summary-product-wrapper"
+                    >
+                      <div className="w-1/4 pelcro-summary-image-wrapper">
+                        {product.image && (
+                          <Badge content={product.quantity}>
+                            <img
+                              className="object-contain w-20 h-20 pelcro-summary-product-image"
+                              alt={`image of ${product.name}`}
+                              src={product.image}
+                            />
+                          </Badge>
+                        )}
                       </div>
-                    )
-                  );
-                })}
+                      <div className="w-1/2 break-words pelcro-summary-product-name">
+                        {product.name}
+                      </div>
+                      <div className="w-1/5 text-center pelcro-summary-product-price">
+                        {parseFloat(
+                          (product.price / 100) * product.quantity
+                        ).toLocaleString("fr-CA", {
+                          style: "currency",
+                          currency: "CAD"
+                        })}
+                      </div>
+                    </div>
+                  )
+                );
+              })}
 
-                <div className="flex items-center justify-end pt-2 mt-2 font-bold border-t border-gray-400 pelcro-summary-total-wrapper">
-                  <p className="mr-1 pelcro-summary-total-text">
-                    Total:{" "}
-                  </p>
-                  <p className="pelcro-summary-total">
-                    {this.countTotal()}
-                  </p>
-                </div>
+              <div className="flex items-center justify-end pt-2 mt-2 font-bold border-t border-gray-400 pelcro-summary-total-wrapper">
+                <p className="mr-1 pelcro-summary-total-text">
+                  Total:{" "}
+                </p>
+                <p className="pelcro-summary-total">
+                  {this.countTotal()}
+                </p>
               </div>
             </div>
             <div className="flex justify-center mt-6">
