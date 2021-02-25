@@ -64,7 +64,7 @@ export class OrderConfirmModal extends Component {
         className="border-t-8 border-green-500 "
       >
         <ModalBody>
-          <div className="pelcro-order-confirm-view">
+          <div id="pelcro-order-confirm-view">
             <div className="flex flex-col items-center">
               <CheckMarkOutlineIcon className="w-32 my-4 text-green-500" />
               <div className="text-center text-gray-700">
