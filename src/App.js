@@ -788,7 +788,7 @@ class App extends Component {
             <CartModal
               getProducts={this.getProducts}
               products={this.state.products}
-              resetView={this.resetView}
+              onClose={this.resetView}
               onSuccess={(items) => {
                 this.setOrder(items);
 
