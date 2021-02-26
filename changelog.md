@@ -21,6 +21,7 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 - Use plan currency instead of default currency for discounted amount.
 - Using e-commerce one click purchase buttons, not showing total price on confirmation modal.
 - Use the correct address for gift redeem.
+- Phone field reset behaviour.
 
 ## [2.11.2] - 2021-02-10
 
