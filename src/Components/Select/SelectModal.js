@@ -352,7 +352,7 @@ SelectModal.propTypes = {
   iaGift: PropTypes.bool,
   disableGifting: PropTypes.bool,
   setView: PropTypes.func,
-  resetView: PropTypes.func,
+  onClose: PropTypes.func,
   subscribe: PropTypes.func
 };
 

@@ -218,7 +218,7 @@ class DefaultNewsLetter extends Component {
 DefaultNewsLetter.propTypes = {
   product: PropTypes.object,
   setView: PropTypes.func,
-  resetView: PropTypes.func
+  onClose: PropTypes.func
 };
 
 export const NewsLetter = withTranslation("newsletter")(
