@@ -8,7 +8,7 @@ import {
 import Authorship from "../common/Authorship";
 import { AddressUpdateView } from "./AddressUpdateView";
 
-export const AddressUpdateModal = (onClose, ...otherProps) => {
+export const AddressUpdateModal = ({ onClose, ...otherProps }) => {
   const site = window.Pelcro.site.read();
 
   return (

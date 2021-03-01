@@ -8,7 +8,7 @@ import {
   ModalHeader
 } from "../../SubComponents/Modal";
 
-export function UserUpdateModal(onClose, ...otherProps) {
+export function UserUpdateModal({ onClose, ...otherProps }) {
   const site = window.Pelcro.site.read();
 
   return (
