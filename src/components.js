@@ -67,8 +67,6 @@ export { AddressCreateCity } from "./Components/AddressCreate/AddressCreateCity"
 export { AddressCreatePostalCode } from "./Components/AddressCreate/AddressCreatePostalCode";
 export { AddressCreateCountrySelect } from "./Components/AddressCreate/AddressCreateCountrySelect";
 export { AddressCreateStateSelect } from "./Components/AddressCreate/AddressCreateStateSelect";
-export { AlertSuccess } from "./Components/Alerts/AlertSuccess";
-export { AlertDanger } from "./Components/Alerts/AlertDanger";
 export {
   PelcroCardCVC,
   PelcroCardExpiry,
