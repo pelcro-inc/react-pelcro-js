@@ -555,7 +555,7 @@ class App extends Component {
               disableGifting={this.state.isRenewingGift}
               plan={this.state.plan}
               product={this.state.product}
-              resetView={this.resetView}
+              onClose={this.resetView}
               setProductAndPlan={this.setProductAndPlan}
               setView={this.setView}
               subscribe={this.subscribe}
