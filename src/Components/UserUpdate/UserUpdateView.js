@@ -50,7 +50,6 @@ export const UserUpdateView = (props) => {
               label={t("labels.phone")}
             />
           </div>
-          <p className="pelcro-footnote">* {t("labels.required")}</p>
           <UserUpdateButton
             className="mt-2"
             name={t("labels.submit")}
