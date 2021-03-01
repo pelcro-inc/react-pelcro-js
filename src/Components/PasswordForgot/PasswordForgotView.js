@@ -9,7 +9,7 @@ export const PasswordForgotView = (props) => {
   const { t } = useTranslation("passwordForgot");
   return (
     <div id="pelcro-password-forgot-view">
-      <div className="flex flex-col items-center text-lg font-semibold pelcro-title-wrapper">
+      <div className="flex flex-col items-center text-lg font-semibold text-center pelcro-title-wrapper">
         <h4>{t("title")}</h4>
         <p>{t("subtitle")}</p>
       </div>

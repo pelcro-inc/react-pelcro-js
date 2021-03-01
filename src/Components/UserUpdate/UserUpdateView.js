@@ -13,7 +13,7 @@ export const UserUpdateView = (props) => {
 
   return (
     <div id="pelcro-user-update-view">
-      <div className="flex flex-col items-center text-lg font-semibold pelcro-title-wrapper">
+      <div className="flex flex-col items-center text-lg font-semibold text-center pelcro-title-wrapper">
         <h4>{t("labels.title")}</h4>
         <p>{t("labels.subtitle")}</p>
       </div>

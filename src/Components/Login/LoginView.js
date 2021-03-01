@@ -11,7 +11,7 @@ export function LoginView(props) {
 
   return (
     <div id="pelcro-login-view">
-      <div className="flex flex-col items-center text-lg font-semibold pelcro-title-wrapper">
+      <div className="flex flex-col items-center text-lg font-semibold text-center pelcro-title-wrapper">
         <h4>{t("messages.loginTo")}</h4>
       </div>
       <div className="mt-2 pelcro-form">
