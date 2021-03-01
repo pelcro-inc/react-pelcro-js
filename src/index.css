@@ -3,7 +3,7 @@
 @tailwind components;
 @tailwind utilities;
 
-.pelcro-prefix-modal-open {
+  #pelcro-app .pelcro-modal-open {
   @apply overflow-hidden;
 }
 

@@ -195,14 +195,12 @@ class App extends Component {
   };
 
   enableScroll = () => {
-    document.body.classList.remove("pelcro-prefix-modal-open");
+    document.body.classList.remove("pelcro-modal-open");
   };
 
   disableScroll = () => {
-    if (
-      !document.body.classList.contains("pelcro-prefix-modal-open")
-    ) {
-      document.body.classList.add("pelcro-prefix-modal-open");
+    if (!document.body.classList.contains("pelcro-modal-open")) {
+      document.body.classList.add("pelcro-modal-open");
     }
   };
 
