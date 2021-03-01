@@ -1,15 +1,15 @@
-import React, { useContext, useMemo, useState } from "react";
+import React, { useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { Button } from "../../SubComponents/Button";
 import { store } from "./ShopContainer";
-import { SET_PRODUCTS } from "../../utils/action-types";
 
 let selectProduct;
 
 export const ShopSelectProductButton = ({
-  style,
+  name,
   className,
-  children,
-  product
+  product,
+  ...otherProps
 }) => {
   const {
     dispatch,
@@ -23,7 +23,7 @@ export const ShopSelectProductButton = ({
   const handleClick = () => {
     setDisabled(true);
     const productButton = document.getElementById(
-      `pelcro-prefix-btn-for-${product.id}`
+      `pelcro-shop-product-${product.id}`
     );
     productButton.textContent = t("buttons.added");
     setTimeout(() => {
@@ -32,20 +32,17 @@ export const ShopSelectProductButton = ({
     }, 1000);
   };
 
-  return useMemo(
-    () => (
-      <button
-        data-sku-id={product.id}
-        id={`pelcro-prefix-btn-for-${product.id}`}
-        style={style}
-        className={`pelcro-add-to-cart-button ${className}`}
-        onClick={handleClick}
-        disabled={disabled}
-      >
-        {children}
-      </button>
-    ),
-    [className, style, disabled]
+  return (
+    <Button
+      {...otherProps}
+      data-sku-id={product.id}
+      id={`pelcro-shop-product-${product.id}`}
+      className={`pelcro-add-to-cart-button ${className}`}
+      onClick={handleClick}
+      disabled={disabled}
+    >
+      {name}
+    </Button>
   );
 };
 

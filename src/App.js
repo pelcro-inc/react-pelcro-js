@@ -325,18 +325,10 @@ class App extends Component {
     this.removeHTMLButton("pelcro-register-button");
   };
 
-  renderShop = () => {
+  shouldRenderShop = () => {
     const products = document.getElementById("pelcro-shop");
-
-    if (products) {
-      ReactDOM.render(
-        <ShopView
-          getProducts={this.getProducts}
-          products={this.state.products}
-        />,
-        products
-      );
-    }
+    if (products) return true;
+    return false;
   };
 
   setProductsForCart = (products) => {
@@ -851,7 +843,12 @@ class App extends Component {
             />
           )}
         </div>
-        {this.renderShop()}
+        {this.shouldRenderShop && (
+          <ShopView
+            getProducts={this.getProducts}
+            products={this.state.products}
+          />
+        )}
       </div>
     );
   }
