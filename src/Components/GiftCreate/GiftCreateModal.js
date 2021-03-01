@@ -10,12 +10,12 @@ import Authorship from "../common/Authorship";
 import { GiftCreateView } from "./GiftCreateView";
 import { Link } from "../../SubComponents/Link";
 
-export const GiftCreateModal = (
+export const GiftCreateModal = ({
   setView,
   onDisplay,
   onClose,
   ...otherProps
-) => {
+}) => {
   const site = window.Pelcro.site.read();
   const { t } = useTranslation("register");
 
