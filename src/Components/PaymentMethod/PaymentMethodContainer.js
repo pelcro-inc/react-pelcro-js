@@ -67,6 +67,7 @@ const initialState = {
   canMakePayment: false,
   paymentRequest: null,
   updatedPrice: null,
+  currentPlan: null,
   order: {},
   alert: {
     type: "error",
@@ -275,6 +276,7 @@ const PaymentMethodContainerWithoutStripe = ({
               }
             });
           }
+          onSuccess(res);
         }
       );
     } else {
@@ -334,6 +336,7 @@ const PaymentMethodContainerWithoutStripe = ({
                 }
               });
             }
+            onSuccess(res);
           }
         );
       }
@@ -382,6 +385,7 @@ const PaymentMethodContainerWithoutStripe = ({
               }
             });
           }
+          onSuccess(res);
         }
       );
     }
@@ -405,6 +409,7 @@ const PaymentMethodContainerWithoutStripe = ({
             payload: { type: "error", content: getErrorMessages(err) }
           });
         }
+        onSuccess(res);
       }
     );
   };
