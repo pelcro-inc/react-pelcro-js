@@ -22,6 +22,7 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 - Using e-commerce one click purchase buttons, not showing total price on confirmation modal.
 - Use the correct address for gift redeem.
 - Phone field reset behaviour.
+- State selection dropdown menu being stuck in loading state, or showing incorrect states under certain conditions.
 
 ## [2.11.2] - 2021-02-10
 
