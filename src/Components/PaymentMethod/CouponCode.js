@@ -43,6 +43,4 @@ export const CouponCode = () => {
       )}
     </div>
   );
-
-  return null;
 };
