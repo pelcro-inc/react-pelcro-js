@@ -15,6 +15,7 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 - Use the correct address for gift redeem.
 - Phone & Email fields reset behaviour.
 - State selection dropdown menu being stuck in loading state, or showing incorrect states under certain conditions.
+- Password change modal showing close button on paywall mode.
 
 ### Changed
 
