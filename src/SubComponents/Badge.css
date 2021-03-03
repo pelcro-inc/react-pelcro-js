@@ -1,0 +1,6 @@
+@layer components {
+  #pelcro-app .pelcro-badge {
+    top: -5%;
+    right: -5%;
+  }
+}

@@ -1,31 +1,15 @@
+/* globals */
 @import "./css/normalize.css";
 @import "./css/forms.css";
+
+/* sub-components */
+@import "./SubComponents/Badge.css";
+@import "./SubComponents/Modal.css";
+@import "./SubComponents/Select.css";
+
+/* components */
+@import "./Components/Shop/ShopView.css";
+
+/* tailwind */
 @tailwind components;
 @tailwind utilities;
-
-@layer components {
-  #pelcro-app .pelcro-modal-open {
-    @apply overflow-hidden;
-  }
-
-  #pelcro-app .pelcro-modal-overlay {
-    backdrop-filter: blur(2px);
-  }
-
-  #pelcro-app .pelcro-badge {
-    top: -5%;
-    right: -5%;
-  }
-
-  #pelcro-app .pelcro-shop-product-image {
-    max-width: 13rem;
-  }
-
-  #pelcro-app .pelcro-shop-products {
-    grid-template-columns: repeat(auto-fill, 14rem);
-  }
-
-  #pelcro-app .pelcro-select-plan-radio {
-    margin-top: 0.4rem;
-  }
-}
