@@ -94,6 +94,15 @@ export class PaypalClient {
       );
     }
 
+    if (
+      options.product.currency !==
+      window.Pelcro.site.read().braintree_currency
+    ) {
+      return console.error(
+        "The product's currency doesnt match the braintree/paypal configuration"
+      );
+    }
+
     this.siteInfo = window.Pelcro.site.read();
     this.product = options.product;
     this.amount = options.amount;

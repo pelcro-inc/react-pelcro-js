@@ -18,7 +18,7 @@ export const PasswordResetModal = (props) => {
         >
           <div className="pelcro-prefix-modal-content">
             <Header
-              closeButton={true}
+              closeButton={window.Pelcro.paywall.displayCloseButton()}
               resetView={props.resetView}
               site={window.Pelcro.site.read()}
             ></Header>

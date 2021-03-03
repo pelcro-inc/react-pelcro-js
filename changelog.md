@@ -8,6 +8,19 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Released]
 
+## [2.11.4] - 2021-03-03
+
+### Fixed
+
+- Use the correct address for gift redeem.
+- Phone & Email fields reset behaviour.
+- State selection dropdown menu being stuck in loading state, or showing incorrect states under certain conditions.
+- Password change modal showing close button on paywall mode.
+
+### Changed
+
+- Only render PayPal button when product and braintree currencies match
+
 ## [2.11.3] - 2021-02-18
 
 ### Changed

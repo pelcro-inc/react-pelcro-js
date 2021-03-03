@@ -15,6 +15,7 @@ import {
   SET_TEXT_FIELD,
   SET_STATE
 } from "../../utils/action-types";
+import { getUserLatestAddress } from "../../utils/utils";
 import { getErrorMessages } from "../common/Helpers";
 import { showError } from "../../utils/showing-error";
 
@@ -93,17 +94,13 @@ const AddressCreateContainer = ({
         }
 
         if (giftCode) {
-          let addressId = null;
-
-          if (window.Pelcro.user.read().addresses) {
-            addressId = window.Pelcro.user.read().addresses[0].id;
-          }
+          const address = getUserLatestAddress();
 
           window.Pelcro.subscription.redeemGift(
             {
               auth_token: window.Pelcro.user.read().auth_token,
               gift_code: giftCode,
-              address_id: addressId
+              address_id: address?.id
             },
             (err, res) => {
               dispatch({ type: DISABLE_SUBMIT, payload: false });

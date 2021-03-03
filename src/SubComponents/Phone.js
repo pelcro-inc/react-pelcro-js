@@ -12,19 +12,13 @@ export function Phone({
   store,
   ...otherProps
 }) {
-  const {
-    dispatch,
-    state: { phone: stateValue }
-  } = useContext(store);
-  const [value, setValue] = useState(stateValue);
+  const { dispatch, state } = useContext(store);
 
   const handleInputChange = useCallback(
-    value => {
-      setValue(value);
-
+    (value) => {
       dispatch({ type: SET_PHONE, payload: value });
     },
-    [dispatch, value]
+    [dispatch]
   );
 
   return (
@@ -34,8 +28,8 @@ export function Phone({
         id={id}
         style={{ ...style }}
         className={className}
-        value={value || window.Pelcro.user.read().phone}
-        onChange={e => handleInputChange(e.target.value)}
+        value={state.phone}
+        onChange={(e) => handleInputChange(e.target.value)}
         placeholder={placeholder || "Phone"}
         {...otherProps}
       ></input>

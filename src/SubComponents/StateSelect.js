@@ -1,12 +1,8 @@
 import React, { useContext, useEffect } from "react";
-import { useTranslation } from "react-i18next";
 import { Loader } from "../SubComponents/Loader";
 import { SET_STATE, SET_STATES } from "../utils/action-types";
 import { showError } from "../utils/showing-error";
 
-/**
- *
- */
 export function StateSelect({
   placeholder = "",
   style,
@@ -18,27 +14,27 @@ export function StateSelect({
     dispatch,
     state: { country, state, states, loading }
   } = useContext(store);
-  const { t } = useTranslation("address");
 
   useEffect(() => {
-    getStateList();
-  }, [country]);
+    const setStates = (error, tmp) => {
+      if (error) {
+        showError(error.message, "pelcro-error-address");
+      } else if (tmp) {
+        dispatch({ type: SET_STATES, payload: tmp });
+      }
+    };
 
-  const getStateList = () => {
-    const selectedCountry = country ? country : "CA";
-    window.Pelcro.geolocation.getStatesForCountry(
-      selectedCountry,
-      setStates
-    );
-  };
+    const getStateList = () => {
+      window.Pelcro.geolocation.getStatesForCountry(
+        country,
+        setStates
+      );
+    };
 
-  const setStates = (error, tmp) => {
-    if (error) {
-      showError(error.message, "pelcro-error-address");
-    } else if (tmp) {
-      dispatch({ type: SET_STATES, payload: tmp });
+    if (country) {
+      getStateList();
     }
-  };
+  }, [country]);
 
   const createStateItems = () => {
     const items = [];
