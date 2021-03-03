@@ -8,21 +8,29 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Released]
 
+## [2.11.4] - 2021-03-03
+
+### Fixed
+
+- Use the correct address for gift redeem.
+- Phone & Email fields reset behaviour.
+- State selection dropdown menu being stuck in loading state, or showing incorrect states under certain conditions.
+
+### Changed
+
+- Only render PayPal button when product and braintree currencies match
+
 ## [2.11.3] - 2021-02-18
 
 ### Changed
 
 - Add address_id param to gift renewal. [PRIVATE]
 - Always swtich users to create a new address if product has address required enabled.
-- Only render PayPal button when product and braintree currencies match
 
 ### Fixed
 
 - Use plan currency instead of default currency for discounted amount.
 - Using e-commerce one click purchase buttons, not showing total price on confirmation modal.
-- Use the correct address for gift redeem.
-- Phone & Email fields reset behaviour.
-- State selection dropdown menu being stuck in loading state, or showing incorrect states under certain conditions.
 
 ## [2.11.2] - 2021-02-10
 
