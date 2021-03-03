@@ -195,14 +195,12 @@ class App extends Component {
   };
 
   enableScroll = () => {
-    document.body.classList.remove("pelcro-prefix-modal-open");
+    document.body.classList.remove("pelcro-modal-open");
   };
 
   disableScroll = () => {
-    if (
-      !document.body.classList.contains("pelcro-prefix-modal-open")
-    ) {
-      document.body.classList.add("pelcro-prefix-modal-open");
+    if (!document.body.classList.contains("pelcro-modal-open")) {
+      document.body.classList.add("pelcro-modal-open");
     }
   };
 
@@ -325,18 +323,10 @@ class App extends Component {
     this.removeHTMLButton("pelcro-register-button");
   };
 
-  renderShop = () => {
+  shouldRenderShop = () => {
     const products = document.getElementById("pelcro-shop");
-
-    if (products) {
-      ReactDOM.render(
-        <ShopView
-          getProducts={this.getProducts}
-          products={this.state.products}
-        />,
-        products
-      );
-    }
+    if (products) return true;
+    return false;
   };
 
   setProductsForCart = (products) => {
@@ -565,7 +555,7 @@ class App extends Component {
               disableGifting={this.state.isRenewingGift}
               plan={this.state.plan}
               product={this.state.product}
-              resetView={this.resetView}
+              onClose={this.resetView}
               setProductAndPlan={this.setProductAndPlan}
               setView={this.setView}
               subscribe={this.subscribe}
@@ -600,7 +590,7 @@ class App extends Component {
           {this.state.view === "gift" && (
             <GiftCreateModal
               setView={this.setView}
-              resetView={this.resetView}
+              onClose={this.resetView}
               onDisplay={() => {
                 ReactGA.event({
                   category: "VIEWS",
@@ -629,7 +619,7 @@ class App extends Component {
           {this.state.view === "redeem" && (
             <GiftRedeemModal
               setView={this.setView}
-              resetView={this.resetView}
+              onClose={this.resetView}
               onDisplay={() => {
                 ReactGA.event({
                   category: "VIEWS",
@@ -727,7 +717,7 @@ class App extends Component {
           {this.state.view === "newsletter" && (
             <NewsLetter
               product={this.state.product}
-              resetView={this.resetView}
+              onClose={this.resetView}
               setView={this.setView}
             />
           )}
@@ -774,12 +764,12 @@ class App extends Component {
           )}
 
           {this.state.view === "user-edit" && (
-            <UserUpdateModal resetView={this.resetView} />
+            <UserUpdateModal onClose={this.resetView} />
           )}
           {this.state.view === "address-edit" && (
             <AddressUpdateModal
               addressId={this.state.addressId}
-              resetView={this.resetView}
+              onClose={this.resetView}
               onSuccess={() => null}
             />
           )}
@@ -788,7 +778,7 @@ class App extends Component {
             <CartModal
               getProducts={this.getProducts}
               products={this.state.products}
-              resetView={this.resetView}
+              onClose={this.resetView}
               onSuccess={(items) => {
                 this.setOrder(items);
 
@@ -811,7 +801,7 @@ class App extends Component {
             <OrderCreateModal
               order={this.state.order}
               setView={this.setView}
-              resetView={this.resetView}
+              onClose={this.resetView}
               onDisplay={() => {
                 ReactGA.event({
                   category: "VIEWS",
@@ -832,7 +822,7 @@ class App extends Component {
               order={this.state.order}
               plan={this.state.plan}
               product={this.state.product}
-              resetView={this.resetView}
+              onClose={this.resetView}
               ReactGA={ReactGA}
               setView={this.setView}
             />
@@ -851,7 +841,12 @@ class App extends Component {
             />
           )}
         </div>
-        {this.renderShop()}
+        {this.shouldRenderShop && (
+          <ShopView
+            getProducts={this.getProducts}
+            products={this.state.products}
+          />
+        )}
       </div>
     );
   }

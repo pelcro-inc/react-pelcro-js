@@ -1,12 +1,15 @@
+/* globals */
 @import "./css/normalize.css";
 @import "./css/forms.css";
+
+/* sub-components */
+@import "./SubComponents/Badge.css";
+@import "./SubComponents/Modal.css";
+@import "./SubComponents/Select.css";
+
+/* components */
+@import "./Components/Shop/ShopView.css";
+
+/* tailwind */
 @tailwind components;
 @tailwind utilities;
-
-.pelcro-prefix-modal-open {
-  @apply overflow-hidden;
-}
-
-.pelcro-modal-overlay {
-  backdrop-filter: blur(2px);
-}

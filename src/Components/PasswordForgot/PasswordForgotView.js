@@ -8,8 +8,8 @@ import { AlertWithContext } from "../../SubComponents/AlertWithContext";
 export const PasswordForgotView = (props) => {
   const { t } = useTranslation("passwordForgot");
   return (
-    <div className="pelcro-password-forgot-view">
-      <div className="flex flex-col  text-lg items-center font-semibold pelcro-title-container">
+    <div id="pelcro-password-forgot-view">
+      <div className="flex flex-col items-center text-lg font-semibold text-center pelcro-title-wrapper">
         <h4>{t("title")}</h4>
         <p>{t("subtitle")}</p>
       </div>
@@ -23,6 +23,7 @@ export const PasswordForgotView = (props) => {
             label={t("email")}
           />
           <PasswordForgotButton
+            className="mt-2"
             name={t("submit")}
             id="pelcro-submit"
           />

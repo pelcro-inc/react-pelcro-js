@@ -1,17 +1,18 @@
-// Newsletter view.
-// The emaill form. Allows users to get free articles by entering their email.
-
 import React, { Component } from "react";
 import { withTranslation } from "react-i18next";
-import ErrMessage from "../common/ErrMessage";
 import PropTypes from "prop-types";
 import { getErrorMessages } from "../common/Helpers";
-
-import { showError } from "../../utils/showing-error";
-
-import Header from "../common/Header";
 import Authorship from "../common/Authorship";
-import Submit from "../common/Submit";
+import {
+  Modal,
+  ModalBody,
+  ModalFooter,
+  ModalHeader
+} from "../../SubComponents/Modal";
+import { Alert } from "../../SubComponents/Alert";
+import { Button } from "../../SubComponents/Button";
+import { Input } from "../../SubComponents/Input";
+import { Link } from "../../SubComponents/Link";
 
 class DefaultNewsLetter extends Component {
   constructor(props) {
@@ -22,7 +23,11 @@ class DefaultNewsLetter extends Component {
       email: "",
       firstName: "",
       lastName: "",
-      postalCode: ""
+      postalCode: "",
+      alert: {
+        type: "error",
+        content: ""
+      }
     };
 
     this.product =
@@ -57,11 +62,6 @@ class DefaultNewsLetter extends Component {
       this.submitNewsletter();
   };
 
-  // inserting error message into modal window
-  showError = (message) => {
-    showError(message, "pelcro-error-newsletter");
-  };
-
   displayLoginView = () => {
     this.props.setView("login");
   };
@@ -87,7 +87,10 @@ class DefaultNewsLetter extends Component {
       },
       (err, res) => {
         this.setState({ disableSubmit: false });
-        if (err) return this.showError(getErrorMessages(err));
+        if (err)
+          return this.setState({
+            alert: { type: "error", content: getErrorMessages(err) }
+          });
 
         try {
           this.postSubmit();
@@ -126,138 +129,88 @@ class DefaultNewsLetter extends Component {
     const { t } = this.props;
 
     return (
-      <div className="pelcro-prefix-view">
-        <div
-          className="pelcro-prefix-modal pelcro-prefix-fade pelcro-prefix-show"
-          id="pelcro-view-newsletter"
-          tabIndex="-1"
-          role="dialog"
-          aria-hidden="true"
-        >
-          <div
-            className="pelcro-prefix-modal-dialog pelcro-prefix-modal-dialog-centered"
-            role="document"
-          >
-            <div className="pelcro-prefix-modal-content">
-              <Header
-                closeButton={this.closeButton}
-                resetView={this.props.resetView}
-                site={this.site}
-              ></Header>
-              <div className="pelcro-prefix-modal-body">
-                <div className="pelcro-prefix-title-block">
-                  <h4>{this.title}</h4>
-                  <p>{this.subtitle}</p>
-                </div>
-
-                <ErrMessage name="newsletter" />
-                <div className="pelcro-prefix-form">
-                  <div className="pelcro-prefix-row">
-                    <div className="col-sm-6">
-                      <label
-                        className="pelcro-prefix-label"
-                        htmlFor="pelcro-input-first_name"
-                      >
-                        {t("labels.firstName")}
-                      </label>
-                      <input
-                        value={this.state.first_name}
-                        onChange={this.onFirstNameChange}
-                        className="pelcro-prefix-input pelcro-prefix-form-control"
-                        autoComplete="first-name"
-                        id="pelcro-input-first_name"
-                        type="text"
-                        placeholder={t("labels.firstName")}
-                      ></input>
-                    </div>
-                    <div className="col-sm-6">
-                      <label
-                        className="pelcro-prefix-label"
-                        htmlFor="pelcro-input-last_name"
-                      >
-                        {t("labels.lastName")}
-                      </label>
-                      <input
-                        value={this.state.last_name}
-                        onChange={this.onLastNameChange}
-                        className="pelcro-prefix-input pelcro-prefix-form-control"
-                        autoComplete="last-name"
-                        id="pelcro-input-last_name"
-                        type="text"
-                        placeholder={t("labels.lastName")}
-                      ></input>
-                    </div>
-                  </div>
-
-                  <div className="pelcro-prefix-form-group">
-                    <label
-                      htmlFor="pelcro-input-email"
-                      className="pelcro-prefix-label"
-                    >
-                      {t("labels.email")} *
-                    </label>
-                    <input
-                      id="pelcro-input-email"
-                      onChange={this.onEmailChange}
-                      type="text"
-                      className="pelcro-prefix-input pelcro-prefix-form-control"
-                      placeholder={t("labels.email")}
-                    ></input>
-                  </div>
-
-                  <div className="pelcro-prefix-row">
-                    <div className="col-sm-12">
-                      <label
-                        className="pelcro-prefix-label"
-                        htmlFor="pelcro-input-postal_code"
-                      >
-                        {t("labels.postalCode")}
-                      </label>
-                      <input
-                        value={this.state.postal_code}
-                        onChange={this.onPostalCodeChange}
-                        className="pelcro-prefix-input pelcro-prefix-form-control"
-                        autoComplete="postal-code"
-                        id="pelcro-input-postal_code"
-                        type="text"
-                        placeholder={t("labels.postalCode")}
-                      ></input>
-                    </div>
-                  </div>
-
-                  <Submit
-                    onClick={this.submitNewsletter}
-                    text={t("labels.submit")}
-                    disabled={this.state.disableSubmit}
-                  ></Submit>
-                  <small className="pelcro-prefix-footnote pelcro-prefix-form-text">
-                    * {t("labels.required")}
-                  </small>
-                </div>
+      <Modal id="pelcro-newsletter-modal">
+        <ModalHeader
+          hideCloseButton={!this.closeButton}
+          onClose={this.props.onClose}
+          logo={this.site.logo}
+          title={this.site.name}
+        />
+        <ModalBody>
+          <div id="pelcro-newsletter-view">
+            <div className="flex flex-col items-center text-lg font-semibold text-center pelcro-title-wrapper">
+              <h4>{this.title}</h4>
+              <p>{this.subtitle}</p>
+            </div>
+            <div className="mt-2 pelcro-form">
+              {this.state.alert.content && (
+                <Alert type={this.state.alert.type}>
+                  {this.state.alert.content}
+                </Alert>
+              )}
+              <div className="flex gap-3">
+                <Input
+                  value={this.state.first_name}
+                  onChange={this.onFirstNameChange}
+                  autoComplete="first-name"
+                  id="pelcro-input-first-name"
+                  label={t("labels.firstName")}
+                />
+                <Input
+                  value={this.state.last_name}
+                  onChange={this.onLastNameChange}
+                  autoComplete="last-name"
+                  id="pelcro-input-last-name"
+                  label={t("labels.lastName")}
+                />
               </div>
-              <div className="pelcro-prefix-modal-footer">
-                <small>
-                  {t("messages.alreadyHaveAccount") + " "}
-                  <button
-                    className="pelcro-prefix-link "
-                    onClick={this.displayLoginView}
-                  >
-                    {t("messages.loginHere")}
-                  </button>
-                  {t("messages.createAnAccount")}
-                  <button
-                    className="pelcro-prefix-link "
-                    onClick={this.displaySelectView}
-                  >
-                    {t("messages.here")}
-                  </button>
-                </small>
-                <Authorship></Authorship>
-              </div>
+              <Input
+                id="pelcro-input-email"
+                errorId="pelcro-input-email-error"
+                onChange={this.onEmailChange}
+                type="email"
+                label={t("labels.email")}
+                required
+              />
+              <Input
+                value={this.state.postal_code}
+                onChange={this.onPostalCodeChange}
+                autoComplete="postal-code"
+                id="pelcro-input-postal-code"
+                errorId="pelcro-input-postal-code-error"
+                label={t("labels.postalCode")}
+              />
+              <p className="pelcro-footnote">
+                * {t("labels.required")}
+              </p>
+              <Button
+                className="mt-2"
+                id="pelcro-submit"
+                isFullWidth={true}
+                onClick={this.submitNewsletter}
+                disabled={this.state.disableSubmit}
+              >
+                {t("labels.submit")}
+              </Button>
             </div>
           </div>
-        </div>
-      </div>
+        </ModalBody>
+        <ModalFooter>
+          <p>
+            {t("messages.alreadyHaveAccount") + " "}
+            <Link onClick={this.displayLoginView}>
+              {t("messages.loginHere")}
+            </Link>
+          </p>
+          <p>
+            {t("messages.createAnAccount")}
+            <Link onClick={this.displaySelectView}>
+              {t("messages.here")}
+            </Link>
+          </p>
+          <Authorship />
+        </ModalFooter>
+      </Modal>
     );
   }
 }
@@ -265,7 +218,7 @@ class DefaultNewsLetter extends Component {
 DefaultNewsLetter.propTypes = {
   product: PropTypes.object,
   setView: PropTypes.func,
-  resetView: PropTypes.func
+  onClose: PropTypes.func
 };
 
 export const NewsLetter = withTranslation("newsletter")(

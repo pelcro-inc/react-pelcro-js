@@ -1,0 +1,9 @@
+@layer components {
+  #pelcro-app .pelcro-shop-product-image {
+    max-width: 13rem;
+  }
+
+  #pelcro-app .pelcro-shop-products {
+    grid-template-columns: repeat(auto-fill, 14rem);
+  }
+}

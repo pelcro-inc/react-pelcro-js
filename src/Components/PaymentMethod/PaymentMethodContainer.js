@@ -69,7 +69,10 @@ const initialState = {
   updatedPrice: null,
   currentPlan: null,
   order: {},
-  alert: {}
+  alert: {
+    type: "error",
+    content: ""
+  }
 };
 const store = createContext(initialState);
 const { Provider } = store;
@@ -273,7 +276,6 @@ const PaymentMethodContainerWithoutStripe = ({
               }
             });
           }
-
           onSuccess(res);
         }
       );
@@ -334,7 +336,6 @@ const PaymentMethodContainerWithoutStripe = ({
                 }
               });
             }
-
             onSuccess(res);
           }
         );
@@ -384,7 +385,6 @@ const PaymentMethodContainerWithoutStripe = ({
               }
             });
           }
-
           onSuccess(res);
         }
       );
@@ -409,7 +409,6 @@ const PaymentMethodContainerWithoutStripe = ({
             payload: { type: "error", content: getErrorMessages(err) }
           });
         }
-
         onSuccess(res);
       }
     );
@@ -475,7 +474,6 @@ const PaymentMethodContainerWithoutStripe = ({
             return subscribe({}, state, dispatch);
           }
         }
-
         onFailure(error);
         dispatch({
           type: SHOW_ALERT,

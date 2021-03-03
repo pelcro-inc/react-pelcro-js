@@ -1,24 +1,23 @@
-// Select view.
-// Here user selet the plap to subscribe. This view is displayed after clicking on 'Subscribe' button.
-
 import React, { Component } from "react";
-import ErrMessage from "../common/ErrMessage";
 import PropTypes from "prop-types";
-import { showError } from "../../utils/showing-error";
-import Submit from "../common/Submit";
-import Header from "../common/Header";
 import Authorship from "../common/Authorship";
 import { withTranslation } from "react-i18next";
+import {
+  Modal,
+  ModalBody,
+  ModalFooter,
+  ModalHeader
+} from "../../SubComponents/Modal";
+import { Link } from "../../SubComponents/Link";
+import { Button } from "../../SubComponents/Button";
+import { Checkbox } from "../../SubComponents/Checkbox";
+import { Radio } from "../../SubComponents/Radio";
 
 class SelectModal extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      // product: props.product ? props.product : window.Pelcro.site.read().products[0],
-      // plan: props.plan ? props.plan : window.Pelcro.site.read().products[0].plans[0],
-      // isGift: props.isGift,
-
       product: {},
       plan: {},
       isGift: props.isGift,
@@ -96,49 +95,62 @@ class SelectModal extends Component {
   };
 
   renderProducts = () => {
-    return this.state.productList.map((product) => {
+    const userDidSelectProduct = Boolean(this.state.mode === "plan");
+    const productsToShow = userDidSelectProduct
+      ? [this.state.product]
+      : this.state.productList;
+    const productButtonLabel = userDidSelectProduct
+      ? this.locale("buttons.back")
+      : this.locale("buttons.select");
+    const productButtonCallback = userDidSelectProduct
+      ? this.goBack
+      : this.selectProduct;
+
+    return productsToShow.map((product) => {
       return (
-        <div key={`product-${product.id}`}>
-          <div className="pelcro-prefix-product-container pelcro-prefix-gradient-border row">
-            {product.image && (
-              <img
-                alt="product"
-                src={`${product.image}`}
-                className="pelcro-prefix-product-img col-3"
-              />
-            )}
+        <div
+          key={product.id}
+          className="p-2 mt-4 border border-gray-500 border-solid rounded pelcro-select-product-wrapper"
+        >
+          {product.image && (
+            <img
+              alt={`image of ${product.name}`}
+              src={product.image}
+              className="object-contain w-1/4 pelcro-select-product-image"
+            />
+          )}
 
-            <div
-              className={`row ${product.image ? "col-9" : "col-12"}`}
-            >
-              <div className="pelcro-prefix-product-block col-12">
-                <div className="pelcro-prefix-product-title">
-                  {product.name}
-                </div>
-                <div className="pelcro-prefix-product-description">
-                  {product.description}
-                </div>
-              </div>
+          <div
+            className={`flex flex-wrap ${
+              product.image ? "w-3/4" : "w-full"
+            }`}
+          >
+            <div className="w-full pelcro-select-product-header">
+              <p className="font-bold pelcro-select-product-title">
+                {product.name}
+              </p>
+              <p className="text-xs pelcro-select-product-description">
+                {product.description}
+              </p>
+            </div>
 
-              <div className="row col-12">
-                <div className="pelcro-prefix-product-cost col-6">
-                  {" "}
-                  <p>
-                    {this.locale("labels.startingAt")}{" "}
-                    {this.countStartPrice(product.plans)}
-                  </p>
-                </div>
-                <button
-                  data-key={product.id}
-                  onClick={this.selectProduct}
-                  className="pelcro-prefix-btn pelcro-prefix-product-button col-6"
-                >
-                  {this.locale("buttons.select")}
-                </button>
-              </div>
+            <div className="flex items-end w-full mt-3">
+              {product.plans && (
+                <p className="w-1/2 text-xs pelcro-select-product-cost">
+                  {this.locale("labels.startingAt")}{" "}
+                  {this.countStartPrice(product.plans)}
+                </p>
+              )}
+              <Button
+                onClick={productButtonCallback}
+                data-key={product.id}
+                id="pelcro-select-product-back-button"
+                className="ml-auto text-xs"
+              >
+                {productButtonLabel}
+              </Button>
             </div>
           </div>
-          <div className="pelcro-prefix-gradient-bg"></div>
         </div>
       );
     });
@@ -149,35 +161,30 @@ class SelectModal extends Component {
       const isChecked = this.state.plan.id === plan.id ? true : false;
       return (
         <div
-          key={`key_${plan.id}`}
-          className="pelcro-prefix-plan-container row"
+          key={plan.id}
+          className="p-2 mx-3 mt-2 border border-gray-400 border-solid rounded pelcro-select-plan-wrapper"
         >
-          <label
-            className="col-12 pelcro-prefix-plan-block control control-radio"
-            htmlFor={`id_${plan.id}`}
+          <Radio
+            inputClassName="self-start pelcro-select-plan-radio"
+            labelClassName="cursor-pointer w-full"
+            id={`pelcro-select-plan-${plan.id}`}
+            name="plan"
+            checked={isChecked}
+            data-key={plan.id}
+            onChange={this.selectPlan}
           >
-            <input
-              type="radio"
-              id={`id_${plan.id}`}
-              name="plan"
-              className=""
-              checked={isChecked}
-              data-key={plan.id}
-              onChange={this.selectPlan}
-            ></input>
-            <div className="control-indicator"></div>
-            <div className="pelcro-prefix-plan-title">
-              {plan.nickname}
-            </div>
-            <div className="row">
-              <div className="col-12 pelcro-prefix-plan-description">
+            <div>
+              <p className="font-bold pelcro-select-plan-title">
+                {plan.nickname}
+              </p>
+              <p className="text-xs pelcro-select-plan-description">
                 {plan.description}
-              </div>
-              <div className="col-12 pelcro-prefix-plan-price">
-                {plan.amount_formatted}
-              </div>
+              </p>
             </div>
-          </label>
+            <p className="mt-3 font-bold pelcro-select-plan-price">
+              {plan.amount_formatted}
+            </p>
+          </Radio>
         </div>
       );
     });
@@ -241,17 +248,11 @@ class SelectModal extends Component {
     }
   };
 
-  // inserting error message into modal window
-  showError = (message) => {
-    showError(message, "pelcro-error-select");
-  };
-
   displayLoginView = () => {
     this.props.setView("login");
   };
 
   render() {
-    const { product } = this.state;
     const { disableGifting } = this.props;
 
     if (this.state.mode === "product") {
@@ -260,240 +261,98 @@ class SelectModal extends Component {
         action: "Product Modal Viewed",
         nonInteraction: true
       });
-
-      return (
-        <div className="pelcro-prefix-view">
-          <div
-            className="pelcro-prefix-modal pelcro-prefix-fade pelcro-prefix-show"
-            id="pelcro-view-select"
-            tabIndex="-1"
-            role="dialog"
-            aria-hidden="true"
-          >
-            <div
-              className="pelcro-prefix-modal-dialog pelcro-prefix-modal-dialog-centered"
-              role="document"
-            >
-              <div className="pelcro-prefix-modal-content">
-                {this.site.banner_url && (
-                  <img
-                    alt="banner"
-                    src={this.site.banner_url.url}
-                    width="100% !important;"
-                  ></img>
-                )}
-
-                <Header
-                  closeButton={this.closeButton}
-                  resetView={this.props.resetView}
-                  site={this.site}
-                ></Header>
-
-                <div className="pelcro-prefix-modal-body">
-                  <div className="pelcro-prefix-title-block">
-                    <h4>
-                      {(this.product &&
-                        this.product.paywall.select_title) ||
-                        window.Pelcro.product.list()[0]?.paywall
-                          .select_title}
-                    </h4>
-                    <p>
-                      {(this.product &&
-                        this.product.paywall.select_subtitle) ||
-                        window.Pelcro.product.list()[0]?.paywall
-                          .select_subtitle}
-                    </p>
-                  </div>
-
-                  <ErrMessage name="select" />
-                  <div className="pelcro-prefix-product-field-wrapper">
-                    <div className="pelcro-prefix-product-field">
-                      {this.renderProducts()}
-                    </div>
-                  </div>
-                </div>
-                <div className="pelcro-prefix-modal-footer">
-                  {!window.Pelcro.user.isAuthenticated() && (
-                    <small>
-                      {this.locale("messages.alreadyHaveAccount") +
-                        " "}
-                      <button
-                        className="pelcro-prefix-link"
-                        onClick={this.displayLoginView}
-                      >
-                        {this.locale("messages.loginHere")}
-                      </button>
-                    </small>
-                  )}
-                  <Authorship></Authorship>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      );
     } else if (this.state.mode === "plan") {
       this.props.ReactGA.event({
         category: "VIEWS",
         action: "Plan Modal Viewed",
         nonInteraction: true
       });
+    }
 
-      return (
-        <div className="pelcro-prefix-view">
-          <div
-            className="pelcro-prefix-modal pelcro-prefix-fade pelcro-prefix-show"
-            id="pelcro-view-select"
-            tabIndex="-1"
-            role="dialog"
-            aria-hidden="true"
-          >
-            <div
-              className="pelcro-prefix-modal-dialog pelcro-prefix-modal-dialog-centered"
-              role="document"
-            >
-              <div className="pelcro-prefix-modal-content">
-                {this.site.banner_url && (
-                  <img
-                    alt="banner"
-                    src={this.site.banner_url.url}
-                    width="100% !important;"
-                  ></img>
-                )}
-
-                <Header
-                  closeButton={this.closeButton}
-                  resetView={this.props.resetView}
-                  site={this.site}
-                ></Header>
-
-                <div className="pelcro-prefix-modal-body">
-                  <div className="pelcro-prefix-title-block">
-                    <h4>
-                      {(this.product &&
-                        this.product.paywall.select_title) ||
-                        window.Pelcro.product.list()[0]?.paywall
-                          ?.select_title}
-                    </h4>
-                    <p>
-                      {(this.product &&
-                        this.product.paywall.select_subtitle) ||
-                        window.Pelcro.product.list()[0]?.paywall
-                          ?.select_subtitle}
-                    </p>
-                  </div>
-
-                  <ErrMessage name="select" />
-
-                  <div className="pelcro-prefix-product-field-wrapper">
-                    <div className="pelcro-prefix-product-field">
-                      <div key={`product-${product.id}`}>
-                        <div className="pelcro-prefix-product-container pelcro-prefix-gradient-border row">
-                          {product.image && (
-                            <img
-                              alt="product"
-                              src={`${product.image}`}
-                              className="pelcro-prefix-product-img col-3"
-                            />
-                          )}
-
-                          <div
-                            className={`row ${
-                              product.image ? "col-9" : "col-12"
-                            }`}
-                          >
-                            <div className="pelcro-prefix-product-block col-12">
-                              <div className="pelcro-prefix-product-title">
-                                {product.name}
-                              </div>
-                              <div className="pelcro-prefix-product-description">
-                                {product.description}
-                              </div>
-                            </div>
-
-                            <div className="row col-12">
-                              <div className="pelcro-prefix-product-cost col-6">
-                                {" "}
-                                <p>
-                                  {this.locale("labels.startingAt")}{" "}
-                                  {this.countStartPrice(
-                                    product.plans
-                                  )}
-                                </p>
-                              </div>
-                              <button
-                                onClick={this.goBack}
-                                className="pelcro-prefix-btn pelcro-prefix-product-button col-6"
-                              >
-                                {this.locale("buttons.back")}
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="pelcro-prefix-gradient-bg"></div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="pelcro-prefix-plan-field-wrapper">
-                    <div className="pelcro-prefix-plan-field">
-                      {this.renderPlans()}
-                    </div>
-                  </div>
-                  {!disableGifting && (
-                    <div className="pelcro-prefix-center-text">
-                      <label
-                        className="pelcro-prefix-form-check-label control control-checkbox"
-                        htmlFor="pelcro-input-is_gift"
-                      >
-                        {this.locale("messages.checkbox")}
-                        <input
-                          onChange={this.onIsGiftChange}
-                          checked={this.state.isGift}
-                          type="checkbox"
-                          id="pelcro-input-is_gift"
-                        />
-                        <div className="control-indicator"></div>
-                      </label>
-                    </div>
-                  )}
-                  <Submit
-                    disabled={this.state.disabled}
-                    onClick={this.submitOption}
-                    text={this.locale("buttons.next")}
-                    id="select-submit"
-                  ></Submit>
-                </div>
-                <div className="pelcro-prefix-modal-footer">
-                  {!window.Pelcro.user.isAuthenticated() && (
-                    <small>
-                      {this.locale("messages.alreadyHaveAccount") +
-                        " "}
-                      <button
-                        className="pelcro-prefix-link"
-                        onClick={this.displayLoginView}
-                      >
-                        {this.locale("messages.loginHere")}
-                      </button>
-                    </small>
-                  )}
-                  <Authorship></Authorship>
-                </div>
-              </div>
+    return (
+      <Modal id="pelcro-selection-modal">
+        <ModalHeader
+          hideCloseButton={!this.closeButton}
+          onClose={this.props.onClose}
+          logo={this.site.logo}
+          title={this.site.name}
+        />
+        <ModalBody>
+          <div id="pelcro-selection-view">
+            <div className="flex flex-col items-center text-lg font-semibold text-center pelcro-title-wrapper">
+              <h4>
+                {(this.product &&
+                  this.product.paywall.select_title) ||
+                  window.Pelcro.product.list()[0]?.paywall
+                    .select_title}
+              </h4>
+              <p>
+                {(this.product &&
+                  this.product.paywall.select_subtitle) ||
+                  window.Pelcro.product.list()[0]?.paywall
+                    .select_subtitle}
+              </p>
             </div>
           </div>
-        </div>
-      );
-    }
+
+          <div className="pelcro-select-products-wrapper">
+            {this.renderProducts()}
+          </div>
+
+          {this.state.mode === "plan" && (
+            <>
+              <div className="overflow-y-scroll max-h-72 pelcro-select-plans-wrapper">
+                {this.renderPlans()}
+              </div>
+              {!disableGifting && (
+                <div className="flex justify-center mt-2">
+                  <Checkbox
+                    onChange={this.onIsGiftChange}
+                    checked={this.state.isGift}
+                    id="pelcro-input-is-gift"
+                  >
+                    {this.locale("messages.checkbox")}
+                  </Checkbox>
+                </div>
+              )}
+              <Button
+                disabled={this.state.disabled}
+                onClick={this.submitOption}
+                isFullWidth={true}
+                id="pelcro-submit"
+                className="mt-2"
+              >
+                {this.locale("buttons.next")}
+              </Button>
+            </>
+          )}
+        </ModalBody>
+        <ModalFooter>
+          {!window.Pelcro.user.isAuthenticated() && (
+            <p>
+              {this.locale("messages.alreadyHaveAccount") + " "}
+              <Link
+                id="pelcro-link-login"
+                onClick={this.displayLoginView}
+              >
+                {this.locale("messages.loginHere")}
+              </Link>
+            </p>
+          )}
+          <Authorship />
+        </ModalFooter>
+      </Modal>
+    );
   }
 }
+
 SelectModal.propTypes = {
   plan: PropTypes.object,
   product: PropTypes.object,
   iaGift: PropTypes.bool,
   disableGifting: PropTypes.bool,
   setView: PropTypes.func,
-  resetView: PropTypes.func,
+  onClose: PropTypes.func,
   subscribe: PropTypes.func
 };
 

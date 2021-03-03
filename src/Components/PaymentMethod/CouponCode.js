@@ -34,7 +34,7 @@ export const CouponCode = () => {
           : t("labels.hideCode")}
       </Button>
       {enableCouponField && (
-        <div className="flex w-full my-4 bg-gray-100 pelcro-apply-coupon-container">
+        <div className="flex w-full my-4 bg-gray-100 pelcro-apply-coupon-wrapper">
           <CouponCodeField />
           <ApplyCouponButton>
             {t("labels.applyCouponCode")}
@@ -43,6 +43,4 @@ export const CouponCode = () => {
       )}
     </div>
   );
-
-  return null;
 };

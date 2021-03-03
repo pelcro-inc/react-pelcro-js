@@ -1,18 +1,9 @@
 import React, { useContext, useEffect } from "react";
 import { Loader } from "../SubComponents/Loader";
 import { SET_GIFT_CODE } from "../utils/action-types";
+import { Input } from "./Input";
 
-/**
- *
- */
-export function GiftCode({
-  placeholder,
-  style,
-  className,
-  id,
-  store,
-  ...otherProps
-}) {
+export function GiftCode({ store, ...otherProps }) {
   const { dispatch, state } = useContext(store);
 
   const handleInputChange = (value) => {
@@ -38,15 +29,11 @@ export function GiftCode({
   }
 
   return (
-    <input
+    <Input
       type="text"
-      id={id}
-      style={{ ...style }}
-      className={className}
       value={state.giftCode || null}
       onChange={(e) => handleInputChange(e.target.value)}
-      placeholder={placeholder}
       {...otherProps}
-    ></input>
+    />
   );
 }

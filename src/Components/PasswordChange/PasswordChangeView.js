@@ -12,7 +12,7 @@ export const PasswordChangeView = (props) => {
 
   return (
     <div id="pelcro-password-change-view">
-      <div className="flex flex-col  text-lg items-center font-semibold pelcro-title-container">
+      <div className="flex flex-col items-center text-lg font-semibold text-center pelcro-title-wrapper">
         <h4>{t("title")}</h4>
         <p>{t("subtitle")}</p>
       </div>
@@ -40,7 +40,11 @@ export const PasswordChangeView = (props) => {
             label={t("confirmNewPassword")}
             required
           />
-          <PasswordChangeButton name={t("submit")} />
+          <PasswordChangeButton
+            className="mt-2"
+            name={t("submit")}
+            id="pelcro-submit"
+          />
         </PasswordChangeContainer>
       </div>
     </div>

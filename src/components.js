@@ -67,8 +67,6 @@ export { AddressCreateCity } from "./Components/AddressCreate/AddressCreateCity"
 export { AddressCreatePostalCode } from "./Components/AddressCreate/AddressCreatePostalCode";
 export { AddressCreateCountrySelect } from "./Components/AddressCreate/AddressCreateCountrySelect";
 export { AddressCreateStateSelect } from "./Components/AddressCreate/AddressCreateStateSelect";
-export { AlertSuccess } from "./Components/Alerts/AlertSuccess";
-export { AlertDanger } from "./Components/Alerts/AlertDanger";
 export {
   PelcroCardCVC,
   PelcroCardExpiry,
@@ -127,7 +125,7 @@ export { CartTotalPrice } from "./Components/Cart/CartTotalPrice";
 export { ShopContainer } from "./Components/Shop/ShopContainer";
 export { ShopSelectProductButton } from "./Components/Shop/ShopSelectProductButton";
 export { ShopView } from "./Components/Shop/ShopView";
-export { OrderCraeteSubmitButton } from "./Components/OrderCreate/OrderCraeteSubmitButton";
+export { OrderCreateSubmitButton } from "./Components/OrderCreate/OrderCreateSubmitButton";
 export { OrderCreateContainer } from "./Components/OrderCreate/OrderCreateContainer";
 export { OrderCreateModal } from "./Components/OrderCreate/OrderCreateModal";
 export { OrderCreateView } from "./Components/OrderCreate/OrderCreateView";

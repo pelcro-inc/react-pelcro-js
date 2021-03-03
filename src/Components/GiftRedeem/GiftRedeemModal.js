@@ -1,49 +1,47 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import Header from "../common/Header";
+import {
+  Modal,
+  ModalBody,
+  ModalFooter,
+  ModalHeader
+} from "../../SubComponents/Modal";
 import Authorship from "../common/Authorship";
 import { GiftRedeemView } from "./GiftRedeemView";
+import { Link } from "../../SubComponents/Link";
 
-export const GiftRedeemModal = (props) => {
+export const GiftRedeemModal = ({
+  onClose,
+  setView,
+  ...otherProps
+}) => {
+  const site = window.Pelcro.site.read();
   const { t } = useTranslation("register");
+
   return (
-    <div className="pelcro-prefix-view">
-      <div
-        className="pelcro-prefix-modal modal pelcro-prefix-fade pelcro-prefix-show"
-        id="pelcro-view-redeem"
-        tabIndex="-1"
-        role="dialog"
-        aria-hidden="true"
-      >
-        <div className="pelcro-prefix-modal-dialog pelcro-prefix-modal-dialog-centered">
-          <div
-            className="pelcro-prefix-modal-content"
-            role="document"
+    <Modal id="pelcro-gift-redeem-modal">
+      <ModalHeader
+        hideCloseButton={!window.Pelcro.paywall.displayCloseButton()}
+        onClose={onClose}
+        logo={site.logo}
+        title={site.name}
+      />
+      <ModalBody>
+        <GiftRedeemView {...otherProps} />
+      </ModalBody>
+      <ModalFooter>
+        <p>
+          {t("redeem.footer.click")}{" "}
+          <Link
+            id="pelcro-link-redeem"
+            onClick={() => setView("address")}
           >
-            <Header
-              closeButton={window.Pelcro.paywall.displayCloseButton()}
-              resetView={props.resetView}
-              site={window.Pelcro.site.read()}
-            ></Header>
-            <div className="pelcro-prefix-modal-body">
-              <GiftRedeemView {...props} />
-            </div>
-            <div className="pelcro-prefix-modal-footer">
-              <small>
-                {t("redeem.footer.click")}{" "}
-                <button
-                  className="pelcro-prefix-link"
-                  onClick={() => props.setView("address")}
-                >
-                  {t("redeem.footer.here")}
-                </button>{" "}
-                {t("redeem.footer.toAdd")}
-              </small>
-              <Authorship></Authorship>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+            {t("redeem.footer.here")}
+          </Link>{" "}
+          {t("redeem.footer.toAdd")}
+        </p>
+        <Authorship />
+      </ModalFooter>
+    </Modal>
   );
 };

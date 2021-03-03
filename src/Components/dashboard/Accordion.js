@@ -36,14 +36,14 @@ export const Accordion = ({ children, initialActiveMenu }) => {
  * Accordion component
  * @param {AccordionItemPropsType} AccordionProps
  */
-Accordion.item = ({
+Accordion.item = function AccordionItem({
   name,
   icon,
   title,
   content,
   activeMenu,
   setActiveMenu
-}) => {
+}) {
   const isActive = activeMenu === name;
   return (
     <div

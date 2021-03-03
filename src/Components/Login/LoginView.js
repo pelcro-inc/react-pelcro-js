@@ -11,7 +11,7 @@ export function LoginView(props) {
 
   return (
     <div id="pelcro-login-view">
-      <div className="flex flex-col items-center text-lg font-semibold pelcro-title-container">
+      <div className="flex flex-col items-center text-lg font-semibold text-center pelcro-title-wrapper">
         <h4>{t("messages.loginTo")}</h4>
       </div>
       <div className="mt-2 pelcro-form">
@@ -31,7 +31,11 @@ export function LoginView(props) {
             placeholder={t("labels.passwordPlaceholder")}
             label={t("labels.password")}
           />
-          <LoginButton name={t("labels.login")} id="pelcro-submit" />
+          <LoginButton
+            className="mt-2"
+            name={t("labels.login")}
+            id="pelcro-submit"
+          />
         </LoginContainer>
       </div>
     </div>

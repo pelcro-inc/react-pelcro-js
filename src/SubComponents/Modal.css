@@ -1,0 +1,9 @@
+@layer components {
+  .pelcro-modal-open {
+    @apply overflow-hidden;
+  }
+
+  #pelcro-app .pelcro-modal-overlay {
+    backdrop-filter: blur(2px);
+  }
+}

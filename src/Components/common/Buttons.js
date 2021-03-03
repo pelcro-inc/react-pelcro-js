@@ -1,5 +1,3 @@
-import { selectProduct } from "../Shop/ShopSelectProductButton";
-
 export const init = (app) => {
   const pelcroLoginButtonsByClass = document.getElementsByClassName(
     "pelcro-login-button"

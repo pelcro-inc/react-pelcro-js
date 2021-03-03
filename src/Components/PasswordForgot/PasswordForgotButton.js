@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { useTranslation } from "react-i18next";
 import { Button } from "../../SubComponents/Button";
 import { HANDLE_SUBMIT } from "../../utils/action-types";
 import { store } from "./PasswordForgotContainer";
@@ -9,6 +10,8 @@ export const PasswordForgotButton = ({ name, ...otherProps }) => {
     dispatch
   } = useContext(store);
 
+  const { t } = useTranslation("passwordForgot");
+
   return (
     <Button
       {...otherProps}
@@ -16,7 +19,7 @@ export const PasswordForgotButton = ({ name, ...otherProps }) => {
       disabled={buttonDisabled}
       isFullWidth={true}
     >
-      {name}
+      {name ?? t("submit")}
     </Button>
   );
 };

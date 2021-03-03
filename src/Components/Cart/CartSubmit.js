@@ -1,25 +1,27 @@
 import React, { useContext } from "react";
-import { useTranslation } from "react-i18next";
 import { store } from "./CartContainer";
 import { HANDLE_SUBMIT } from "../../utils/action-types";
+import { Button } from "../../SubComponents/Button";
+import { useTranslation } from "react-i18next";
 
-export const CartSubmit = ({ name, style, className }) => {
+export const CartSubmit = ({ name, ...otherProps }) => {
   const {
     dispatch,
     state: { isEmpty, disableSubmit }
   } = useContext(store);
+
   const { t } = useTranslation("cart");
 
   if (!isEmpty) {
     return (
-      <button
-        style={style}
-        className={className}
+      <Button
+        {...otherProps}
         onClick={() => dispatch({ type: HANDLE_SUBMIT })}
         disabled={disableSubmit}
+        isFullWidth={true}
       >
-        {t("confirm")}
-      </button>
+        {name ?? t("confirm")}
+      </Button>
     );
   }
   return null;
