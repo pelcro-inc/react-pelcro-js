@@ -2,12 +2,15 @@ import React, { useContext } from "react";
 import { store } from "./GiftRedeemContainer";
 import { HANDLE_SUBMIT } from "../../utils/action-types";
 import { Button } from "../../SubComponents/Button";
+import { useTranslation } from "react-i18next";
 
 export const GiftRedeemSubmitButton = ({ name, ...otherProps }) => {
   const {
     dispatch,
     state: { disableSubmit }
   } = useContext(store);
+
+  const { t } = useTranslation("register");
 
   return (
     <Button
@@ -16,7 +19,7 @@ export const GiftRedeemSubmitButton = ({ name, ...otherProps }) => {
       disabled={disableSubmit}
       isFullWidth={true}
     >
-      {name}
+      {name ?? t("redeem.buttons.redeem")}
     </Button>
   );
 };

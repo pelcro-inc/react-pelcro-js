@@ -41,7 +41,7 @@ export const ShopSelectProductButton = ({
       onClick={handleClick}
       disabled={disabled}
     >
-      {name}
+      {name ?? t("buttons.select")}
     </Button>
   );
 };

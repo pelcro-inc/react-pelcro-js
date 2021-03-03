@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { Button } from "../../SubComponents/Button";
 import { HANDLE_REGISTRATION } from "../../utils/action-types";
 import { store } from "./RegisterContainer";
@@ -14,6 +15,8 @@ export const RegisterButton = ({ name, ...otherProps }) => {
     },
     dispatch
   } = useContext(store);
+
+  const { t } = useTranslation("register");
 
   const [isDisabled, setDisabled] = useState(true);
 
@@ -34,7 +37,7 @@ export const RegisterButton = ({ name, ...otherProps }) => {
       disabled={isDisabled}
       isFullWidth={true}
     >
-      {name}
+      {name ?? t("messages.createAccount")}
     </Button>
   );
 };
