@@ -77,7 +77,9 @@ export const CartView = (props) => {
               })}
             </div>
             <div className="flex items-center justify-end pt-2 mt-2 font-bold border-t border-gray-400 pelcro-cart-total-wrapper">
-              <p className="mr-1 pelcro-cart-total-text">Total: </p>
+              <p className="mr-1 pelcro-cart-total-text">
+                {t("total")}:
+              </p>
               <p className="pelcro-cart-total">
                 <CartTotalPrice />
               </p>
