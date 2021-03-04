@@ -205,7 +205,6 @@ const PaymentMethodContainerWithoutStripe = ({
             onFailure(err);
             return displayError(getErrorMessages(err));
           }
-
           removeErrorElement();
           dispatch({
             type: SET_PERCENT_OFF,
@@ -217,9 +216,7 @@ const PaymentMethodContainerWithoutStripe = ({
             payload: res.data.total
           });
 
-          if (canMakePayment) {
-            dispatch({ type: UPDATE_PAYMENT_REQUEST });
-          }
+          dispatch({ type: UPDATE_PAYMENT_REQUEST });
         }
       );
     }
@@ -409,7 +406,7 @@ const PaymentMethodContainerWithoutStripe = ({
   };
 
   const updatePaymentRequest = (state) => {
-    state.paymentRequest.update({
+    state?.paymentRequest?.update({
       total: {
         label: plan.nickname || plan.description,
         amount: state.updatedPrice
