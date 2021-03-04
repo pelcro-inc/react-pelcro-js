@@ -6,11 +6,13 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Unreleased]
 
+## [Released]
+
+## [2.11.6] - 2021-03-04
+
 ### Fixed
 
 - Always reflect coupon information from URL for Google/Apple Pay
-
-## [Released]
 
 ## [2.11.4] - 2021-03-03
 
