@@ -107,9 +107,9 @@ class Dashboard extends Component {
     return this.props.setView("address-edit");
   };
 
-  getGiftRecipientStatusText = (recipient) => {
-    if (recipient.status === "canceled") {
-      const cancelDate = new Date(recipient.canceled_at);
+  getSubscriptionStatusText = (subscription) => {
+    if (subscription.status === "canceled") {
+      const cancelDate = new Date(subscription.canceled_at);
       const formattedCancelDate = new Intl.DateTimeFormat(
         "en-CA"
       ).format(cancelDate);
@@ -119,14 +119,14 @@ class Dashboard extends Component {
       )} ${formattedCancelDate}`;
     }
 
-    if (recipient.cancel_at_period_end) {
+    if (subscription.cancel_at_period_end) {
       return `${this.locale("labels.expiresOn")} ${
-        recipient.current_period_end
+        subscription.current_period_end
       }`;
     }
 
     return `${this.locale("labels.renewsOn")} ${
-      recipient.current_period_end
+      subscription.current_period_end
     }`;
   };
 
@@ -184,14 +184,6 @@ class Dashboard extends Component {
           this.props.setView("select");
         };
 
-        const status = sub.cancel_at_period_end
-          ? `${this.locale("labels.expiresOn")} ${
-              sub.current_period_end
-            }`
-          : `${this.locale("labels.renewsOn")} ${
-              sub.current_period_end
-            }`;
-
         return (
           <div
             key={"dashboard-subscription-" + sub.id}
@@ -216,7 +208,7 @@ class Dashboard extends Component {
                     {this.locale("labels.status")}
                   </span>
                   <span className="pelcro-prefix-dashboard-value col-8">
-                    {status}
+                    {this.getSubscriptionStatusText(sub)}
                   </span>
                 </div>
               )}
@@ -346,7 +338,7 @@ class Dashboard extends Component {
                   {this.locale("labels.status")}
                 </span>
                 <span className="pelcro-prefix-dashboard-value col-8">
-                  {this.getGiftRecipientStatusText(recipient)}
+                  {this.getSubscriptionStatusText(recipient)}
                 </span>
               </div>
             )}
