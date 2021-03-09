@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Unreleased]
 
+### Fixed
+
+- Use plan currency instead of user currency on Google/Apple Pay.
+
 ## [Released]
 
 ## [2.11.6] - 2021-03-04
