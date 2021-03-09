@@ -3,7 +3,7 @@
     @apply overflow-hidden;
   }
 
-  #pelcro-app .pelcro-modal-overlay {
+  .pelcro-root .pelcro-modal-overlay {
     backdrop-filter: blur(2px);
   }
 }

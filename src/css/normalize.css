@@ -10,9 +10,9 @@ Document
 Use a better box model (opinionated).
 */
 
-  #pelcro-app *,
-  #pelcro-app *::before,
-  #pelcro-app *::after {
+  .pelcro-root *,
+  .pelcro-root *::before,
+  .pelcro-root *::after {
     box-sizing: border-box;
   }
 
@@ -20,7 +20,7 @@ Use a better box model (opinionated).
 Use a more readable tab size (opinionated).
 */
 
-  #pelcro-app {
+  .pelcro-root {
     tab-size: 4;
   }
 
@@ -29,7 +29,7 @@ Use a more readable tab size (opinionated).
 2. Prevent adjustments of font size after orientation changes in iOS.
 */
 
-  #pelcro-app {
+  .pelcro-root {
     line-height: 1.15; /* 1 */
     text-size-adjust: 100%; /* 2 */
   }
@@ -43,7 +43,7 @@ Sections
 Remove the margin in all browsers.
 */
 
-  #pelcro-app {
+  .pelcro-root {
     margin: 0;
   }
 
@@ -51,7 +51,7 @@ Remove the margin in all browsers.
 Improve consistency of default fonts in all browsers. (https://github.com/sindresorhus/modern-normalize/issues/3)
 */
 
-  #pelcro-app {
+  .pelcro-root {
     font-family: system-ui, -apple-system,
       /* Firefox supports this but not yet `system-ui` */ "Segoe UI",
       Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji",
@@ -68,7 +68,7 @@ Grouping content
 2. Correct the inheritance of border color in Firefox. (https://bugzilla.mozilla.org/show_bug.cgi?id=190655)
 */
 
-  #pelcro-app hr {
+  .pelcro-root hr {
     height: 0; /* 1 */
     color: inherit; /* 2 */
   }
@@ -82,7 +82,7 @@ Text-level semantics
 Add the correct text decoration in Chrome, Edge, and Safari.
 */
 
-  #pelcro-app abbr[title] {
+  .pelcro-root abbr[title] {
     text-decoration: underline dotted;
   }
 
@@ -90,8 +90,8 @@ Add the correct text decoration in Chrome, Edge, and Safari.
 Add the correct font weight in Edge and Safari.
 */
 
-  #pelcro-app b,
-  #pelcro-app strong {
+  .pelcro-root b,
+  .pelcro-root strong {
     font-weight: bolder;
   }
 
@@ -100,10 +100,10 @@ Add the correct font weight in Edge and Safari.
 2. Correct the odd 'em' font sizing in all browsers.
 */
 
-  #pelcro-app code,
-  #pelcro-app kbd,
-  #pelcro-app samp,
-  #pelcro-app pre {
+  .pelcro-root code,
+  .pelcro-root kbd,
+  .pelcro-root samp,
+  .pelcro-root pre {
     font-family: ui-monospace, SFMono-Regular, Consolas,
       "Liberation Mono", Menlo, monospace; /* 1 */
     font-size: 1em; /* 2 */
@@ -113,7 +113,7 @@ Add the correct font weight in Edge and Safari.
 Add the correct font size in all browsers.
 */
 
-  #pelcro-app small {
+  .pelcro-root small {
     font-size: 80%;
   }
 
@@ -121,19 +121,19 @@ Add the correct font size in all browsers.
 Prevent 'sub' and 'sup' elements from affecting the line height in all browsers.
 */
 
-  #pelcro-app sub,
-  #pelcro-app sup {
+  .pelcro-root sub,
+  .pelcro-root sup {
     font-size: 75%;
     line-height: 0;
     position: relative;
     vertical-align: baseline;
   }
 
-  #pelcro-app sub {
+  .pelcro-root sub {
     bottom: -0.25em;
   }
 
-  #pelcro-app sup {
+  .pelcro-root sup {
     top: -0.5em;
   }
 
@@ -147,7 +147,7 @@ Tabular data
 2. Correct table border color inheritance in all Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=935729, https://bugs.webkit.org/show_bug.cgi?id=195016)
 */
 
-  #pelcro-app table {
+  .pelcro-root table {
     text-indent: 0; /* 1 */
     border-color: inherit; /* 2 */
   }
@@ -162,11 +162,11 @@ Forms
 2. Remove the margin in Firefox and Safari.
 */
 
-  #pelcro-app button,
-  #pelcro-app input,
-  #pelcro-app optgroup,
-  #pelcro-app select,
-  #pelcro-app textarea {
+  .pelcro-root button,
+  .pelcro-root input,
+  .pelcro-root optgroup,
+  .pelcro-root select,
+  .pelcro-root textarea {
     font-family: inherit; /* 1 */
     font-size: 100%; /* 1 */
     line-height: 1.15; /* 1 */
@@ -178,8 +178,8 @@ Remove the inheritance of text transform in Edge and Firefox.
 1. Remove the inheritance of text transform in Firefox.
 */
 
-  #pelcro-app button,
-  #pelcro-app select {
+  .pelcro-root button,
+  .pelcro-root select {
     /* 1 */
     text-transform: none;
   }
@@ -188,10 +188,10 @@ Remove the inheritance of text transform in Edge and Firefox.
 Correct the inability to style clickable types in iOS and Safari.
 */
 
-  #pelcro-app button,
-  #pelcro-app [type="button"],
-  #pelcro-app [type="reset"],
-  #pelcro-app [type="submit"] {
+  .pelcro-root button,
+  .pelcro-root [type="button"],
+  .pelcro-root [type="reset"],
+  .pelcro-root [type="submit"] {
     appearance: button;
   }
 
@@ -212,7 +212,7 @@ See: https://github.com/mozilla/gecko-dev/blob/2f9eacd9d3d995c937b4251a5557d95d4
 Remove the padding so developers are not caught out when they zero out 'fieldset' elements in all browsers.
 */
 
-  #pelcro-app legend {
+  .pelcro-root legend {
     padding: 0;
   }
 
@@ -220,7 +220,7 @@ Remove the padding so developers are not caught out when they zero out 'fieldset
 Add the correct vertical alignment in Chrome and Firefox.
 */
 
-  #pelcro-app progress {
+  .pelcro-root progress {
     vertical-align: baseline;
   }
 
@@ -251,7 +251,7 @@ Interactive
 Add the correct display in Chrome and Safari.
 */
 
-  #pelcro-app summary {
+  .pelcro-root summary {
     display: list-item;
   }
 
@@ -265,23 +265,23 @@ Add the correct display in Chrome and Safari.
  * Removes the default spacing and border for appropriate elements.
  */
 
-  #pelcro-app blockquote,
-  #pelcro-app dl,
-  #pelcro-app dd,
-  #pelcro-app h1,
-  #pelcro-app h2,
-  #pelcro-app h3,
-  #pelcro-app h4,
-  #pelcro-app h5,
-  #pelcro-app h6,
-  #pelcro-app hr,
-  #pelcro-app figure,
-  #pelcro-app p,
-  #pelcro-app pre {
+  .pelcro-root blockquote,
+  .pelcro-root dl,
+  .pelcro-root dd,
+  .pelcro-root h1,
+  .pelcro-root h2,
+  .pelcro-root h3,
+  .pelcro-root h4,
+  .pelcro-root h5,
+  .pelcro-root h6,
+  .pelcro-root hr,
+  .pelcro-root figure,
+  .pelcro-root p,
+  .pelcro-root pre {
     margin: 0;
   }
 
-  #pelcro-app button {
+  .pelcro-root button {
     background-color: transparent;
     background-image: none;
   }
@@ -291,18 +291,18 @@ Add the correct display in Chrome and Safari.
  * results in a loss of the default `button` focus styles.
  */
 
-  #pelcro-app button:focus {
+  .pelcro-root button:focus {
     outline: 1px dotted;
     outline: 5px auto -webkit-focus-ring-color;
   }
 
-  #pelcro-app fieldset {
+  .pelcro-root fieldset {
     margin: 0;
     padding: 0;
   }
 
-  #pelcro-app ol,
-  #pelcro-app ul {
+  .pelcro-root ol,
+  .pelcro-root ul {
     list-style: none;
     margin: 0;
     padding: 0;
@@ -319,7 +319,7 @@ Add the correct display in Chrome and Safari.
  *    to override it to ensure consistency even when using the default theme.
  */
 
-  #pelcro-app {
+  .pelcro-root {
     font-family: ui-sans-serif, system-ui, -apple-system,
       BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
       "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
@@ -353,9 +353,9 @@ Add the correct display in Chrome and Safari.
  *    https://github.com/tailwindcss/tailwindcss/pull/116
  */
 
-  #pelcro-app *,
-  #pelcro-app ::before,
-  #pelcro-app ::after {
+  .pelcro-root *,
+  .pelcro-root ::before,
+  .pelcro-root ::after {
     box-sizing: border-box; /* 1 */
     border-width: 0; /* 2 */
     border-style: solid; /* 2 */
@@ -366,7 +366,7 @@ Add the correct display in Chrome and Safari.
  * Ensure horizontal rules are visible by default
  */
 
-  #pelcro-app hr {
+  .pelcro-root hr {
     border-top-width: 1px;
   }
 
@@ -380,34 +380,34 @@ Add the correct display in Chrome and Safari.
  * https://github.com/tailwindcss/tailwindcss/issues/362
  */
 
-  #pelcro-app img {
+  .pelcro-root img {
     border-style: solid;
   }
 
-  #pelcro-app textarea {
+  .pelcro-root textarea {
     resize: vertical;
   }
 
-  #pelcro-app input::placeholder,
-  #pelcro-app textarea::placeholder {
+  .pelcro-root input::placeholder,
+  .pelcro-root textarea::placeholder {
     color: #9ca3af;
   }
 
-  #pelcro-app button,
-  #pelcro-app [role="button"] {
+  .pelcro-root button,
+  .pelcro-root [role="button"] {
     cursor: pointer;
   }
 
-  #pelcro-app table {
+  .pelcro-root table {
     border-collapse: collapse;
   }
 
-  #pelcro-app h1,
-  #pelcro-app h2,
-  #pelcro-app h3,
-  #pelcro-app h4,
-  #pelcro-app h5,
-  #pelcro-app h6 {
+  .pelcro-root h1,
+  .pelcro-root h2,
+  .pelcro-root h3,
+  .pelcro-root h4,
+  .pelcro-root h5,
+  .pelcro-root h6 {
     font-size: inherit;
     font-weight: inherit;
   }
@@ -417,7 +417,7 @@ Add the correct display in Chrome and Safari.
  * opt-out.
  */
 
-  #pelcro-app a {
+  .pelcro-root a {
     color: inherit;
     text-decoration: inherit;
   }
@@ -430,11 +430,11 @@ Add the correct display in Chrome and Safari.
  * normalize.css.
  */
 
-  #pelcro-app button,
-  #pelcro-app input,
-  #pelcro-app optgroup,
-  #pelcro-app select,
-  #pelcro-app textarea {
+  .pelcro-root button,
+  .pelcro-root input,
+  .pelcro-root optgroup,
+  .pelcro-root select,
+  .pelcro-root textarea {
     padding: 0;
     line-height: inherit;
     color: inherit;
@@ -447,10 +447,10 @@ Add the correct display in Chrome and Safari.
  * 'mono' font family.
  */
 
-  #pelcro-app pre,
-  #pelcro-app code,
-  #pelcro-app kbd,
-  #pelcro-app samp {
+  .pelcro-root pre,
+  .pelcro-root code,
+  .pelcro-root kbd,
+  .pelcro-root samp {
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
       "Liberation Mono", "Courier New", monospace;
   }
@@ -463,14 +463,14 @@ Add the correct display in Chrome and Safari.
  * https://github.com/mozdevs/cssremedy/issues/14
  */
 
-  #pelcro-app img,
-  #pelcro-app svg,
-  #pelcro-app video,
-  #pelcro-app canvas,
-  #pelcro-app audio,
-  #pelcro-app iframe,
-  #pelcro-app embed,
-  #pelcro-app object {
+  .pelcro-root img,
+  .pelcro-root svg,
+  .pelcro-root video,
+  .pelcro-root canvas,
+  .pelcro-root audio,
+  .pelcro-root iframe,
+  .pelcro-root embed,
+  .pelcro-root object {
     display: block;
     vertical-align: middle;
   }
@@ -482,8 +482,8 @@ Add the correct display in Chrome and Safari.
  * https://github.com/mozdevs/cssremedy/issues/14
  */
 
-  #pelcro-app img,
-  #pelcro-app video {
+  .pelcro-root img,
+  .pelcro-root video {
     max-width: 100%;
     height: auto;
   }
