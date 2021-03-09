@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Unreleased]
 
+### Fixed
+
+- Canceled Subscriptions and gifts showing incorrect status values in user dashboard.
+
 ## [Released]
 
 ## [2.11.7] - 2021-03-09
