@@ -132,7 +132,7 @@ const PaymentMethodContainerWithoutStripe = ({
     try {
       const paymentRequest = stripe.paymentRequest({
         country: window.Pelcro.user.location.countryCode || "US",
-        currency: window.Pelcro.user.read().currency || "usd",
+        currency: plan.currency,
         total: {
           label: plan.nickname || plan.description,
           amount: state.updatedPrice || plan.amount
@@ -170,10 +170,8 @@ const PaymentMethodContainerWithoutStripe = ({
         token: token.id
       },
       (err, res) => {
-        console.log("createPayment -> err, res", err, res);
         dispatch({ type: DISABLE_SUBMIT, payload: false });
         if (err) {
-          console.log("createPayment -> err", err);
           onFailure(err);
           return displayError(getErrorMessages(err));
         }

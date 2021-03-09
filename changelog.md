@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 ### Fixed
 
 - Coupon code not being applied on apple pay.
+- Use plan currency instead of user currency on Google/Apple Pay.
 
 ## [Released]
 
