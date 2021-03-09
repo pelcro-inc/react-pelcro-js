@@ -148,7 +148,7 @@ class DefaultNewsLetter extends Component {
                   {this.state.alert.content}
                 </Alert>
               )}
-              <div className="flex gap-3">
+              <div className="flex">
                 <Input
                   value={this.state.first_name}
                   onChange={this.onFirstNameChange}
@@ -157,6 +157,7 @@ class DefaultNewsLetter extends Component {
                   label={t("labels.firstName")}
                 />
                 <Input
+                  wrapperClassName="ml-3"
                   value={this.state.last_name}
                   onChange={this.onLastNameChange}
                   autoComplete="last-name"

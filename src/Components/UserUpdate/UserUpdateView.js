@@ -20,13 +20,13 @@ export const UserUpdateView = (props) => {
       <div className="mt-2 pelcro-form">
         <UserUpdateContainer {...props}>
           <AlertWithContext />
-          <div className="flex gap-3">
+          <div className="flex">
             <UserUpdateEmail
               placeholder={t("labels.email")}
               label={t("labels.email")}
             />
           </div>
-          <div className="flex gap-3">
+          <div className="flex">
             <UserUpdateFirstName
               autoComplete="first-name"
               id="pelcro-input-first-name"
@@ -35,6 +35,7 @@ export const UserUpdateView = (props) => {
               label={t("labels.firstName")}
             />
             <UserUpdateLastName
+              wrapperClassName="ml-3"
               autoComplete="last-name"
               id="pelcro-input-last-name"
               errorId="pelcro-input-last-name-error"
@@ -42,7 +43,7 @@ export const UserUpdateView = (props) => {
               label={t("labels.lastName")}
             />
           </div>
-          <div className="flex gap-3">
+          <div className="flex">
             <UserUpdatePhone
               id="pelcro-input-phone"
               errorId="pelcro-input-phone-error"

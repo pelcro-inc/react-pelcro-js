@@ -7,8 +7,6 @@ import { Select } from "./Select";
 
 export function StateSelect({
   placeholder = "",
-  style,
-  className,
   store,
   ...otherProps
 }) {
@@ -80,7 +78,6 @@ export function StateSelect({
     <Select
       value={state}
       onChange={onStateChange}
-      className={className}
       autoComplete="state"
       {...otherProps}
     >

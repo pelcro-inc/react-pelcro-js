@@ -17,7 +17,7 @@ export const GiftCreateView = (props) => {
       <div className="mt-2 pelcro-form">
         <GiftCreateContainer {...props}>
           <AlertWithContext />
-          <div className="flex gap-3">
+          <div className="flex">
             <GiftCreateFirstName
               autoComplete="first-name"
               id="pelcro-input-first-name"
@@ -26,6 +26,7 @@ export const GiftCreateView = (props) => {
               label={t("gift.labels.firstName")}
             />
             <GiftCreateLastName
+              wrapperClassName="ml-3"
               autoComplete="last-name"
               id="pelcro-input-last-name"
               errorId="pelcro-input-last-name-error"
@@ -33,7 +34,7 @@ export const GiftCreateView = (props) => {
               label={t("gift.labels.lastName")}
             />
           </div>
-          <div className="flex gap-3">
+          <div className="flex">
             <GiftCreateEmail
               id="pelcro-input-email"
               errorId="pelcro-input-email-error"
