@@ -25,6 +25,7 @@
     "actions": "Actions",
     "expiresOn": "Expires on",
     "renewsOn": "Renews on",
+    "canceledOn": "Canceled on",
     "isSureToCancel": "Are you sure you want to cancel your subscription?",
     "giftRecipients": {
       "title": "Gift recipients"
