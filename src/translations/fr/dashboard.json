@@ -25,6 +25,7 @@
     "actions": "Actes",
     "expiresOn": "Expire le",
     "renewsOn": "Renouvelle le",
+    "canceledOn": "annulé le",
     "isSureToCancel": "Êtes-vous certain de vouloir annuler votre abonnement ?",
     "giftRecipients": {
       "title": "Destinataires du cadeau"

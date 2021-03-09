@@ -107,6 +107,29 @@ class Dashboard extends Component {
     return this.props.setView("address-edit");
   };
 
+  getGiftRecipientStatusText = (recipient) => {
+    if (recipient.status === "canceled") {
+      const cancelDate = new Date(recipient.canceled_at);
+      const formattedCancelDate = new Intl.DateTimeFormat(
+        "en-CA"
+      ).format(cancelDate);
+
+      return `${this.locale(
+        "labels.canceledOn"
+      )} ${formattedCancelDate}`;
+    }
+
+    if (recipient.cancel_at_period_end) {
+      return `${this.locale("labels.expiresOn")} ${
+        recipient.current_period_end
+      }`;
+    }
+
+    return `${this.locale("labels.renewsOn")} ${
+      recipient.current_period_end
+    }`;
+  };
+
   reactivateSubscription = (subscription_id) => {
     // disable the Login button to prevent repeated clicks
     this.setState({ disableSubmit: true });
@@ -323,13 +346,7 @@ class Dashboard extends Component {
                   {this.locale("labels.status")}
                 </span>
                 <span className="pelcro-prefix-dashboard-value col-8">
-                  {recipient.cancel_at_period_end
-                    ? `${this.locale("labels.expiresOn")} ${
-                        recipient.current_period_end
-                      }`
-                    : `${this.locale("labels.renewsOn")} ${
-                        recipient.current_period_end
-                      }`}
+                  {this.getGiftRecipientStatusText(recipient)}
                 </span>
               </div>
             )}
