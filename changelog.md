@@ -8,6 +8,13 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Released]
 
+## [2.11.7] - 2021-03-09
+
+### Fixed
+
+- Coupon code not being applied on apple pay.
+- Use plan currency instead of user currency on Google/Apple Pay.
+
 ## [2.11.6] - 2021-03-04
 
 ### Fixed
