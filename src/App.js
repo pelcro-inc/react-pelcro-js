@@ -323,10 +323,20 @@ class App extends Component {
     this.removeHTMLButton("pelcro-register-button");
   };
 
-  shouldRenderShop = () => {
+  renderShop = () => {
     const products = document.getElementById("pelcro-shop");
-    if (products) return true;
-    return false;
+
+    if (products) {
+      ReactDOM.render(
+        <div className="pelcro-root">
+          <ShopView
+            getProducts={this.getProducts}
+            products={this.state.products}
+          />
+        </div>,
+        products
+      );
+    }
   };
 
   setProductsForCart = (products) => {
@@ -538,7 +548,7 @@ class App extends Component {
 
   render() {
     return (
-      <div id="pelcro-app">
+      <div id="pelcro-app" className="pelcro-root">
         <div id="list">
           {this.state.isAuthenticated && (
             <DashboardOpenButton
@@ -841,12 +851,7 @@ class App extends Component {
             />
           )}
         </div>
-        {this.shouldRenderShop && (
-          <ShopView
-            getProducts={this.getProducts}
-            products={this.state.products}
-          />
-        )}
+        {this.renderShop()}
       </div>
     );
   }

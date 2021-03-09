@@ -10,10 +10,11 @@ export function Input({
   className = "",
   labelClassName = "",
   errorClassName = "",
+  wrapperClassName = "",
   ...otherProps
 }) {
   return (
-    <div className="w-full">
+    <div className={`w-full ${wrapperClassName}`}>
       <label
         htmlFor={id}
         className={`text-gray-700 pelcro-input-label ${labelClassName}`}

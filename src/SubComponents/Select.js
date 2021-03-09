@@ -9,11 +9,12 @@ export function Select({
   className = "",
   labelClassName = "",
   errorClassName = "",
+  wrapperClassName = "",
   children,
   ...otherProps
 }) {
   return (
-    <div className="w-full">
+    <div className={`w-full ${wrapperClassName}`}>
       <label
         htmlFor={id}
         className={`text-gray-700 pelcro-select-label ${labelClassName}`}

@@ -3,7 +3,7 @@ const colors = require("tailwindcss/colors");
 module.exports = {
   purge: ["./src/**/*.html", "./src/**/*.js", "./src/**/*.jsx"],
   presets: [],
-  important: "#pelcro-app",
+  important: ".pelcro-root",
   darkMode: false, // or 'media' or 'class'
   theme: {
     screens: {

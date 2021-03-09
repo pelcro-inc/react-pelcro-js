@@ -21,7 +21,7 @@ export const AddressCreateView = (props) => {
       <div className="mt-2 pelcro-form">
         <AddressCreateContainer {...props}>
           <AlertWithContext />
-          <div className="flex gap-3">
+          <div className="flex">
             <AddressCreateFirstName
               autoComplete="first-name"
               id="pelcro-input-first-name"
@@ -31,6 +31,7 @@ export const AddressCreateView = (props) => {
               label={t("labels.firstName")}
             />
             <AddressCreateLastName
+              wrapperClassName="ml-3"
               autoComplete="last-name"
               id="pelcro-input-last-name"
               errorId="pelcro-input-last-name-error"
@@ -39,7 +40,7 @@ export const AddressCreateView = (props) => {
               label={t("labels.lastName")}
             />
           </div>
-          <div className="flex gap-3">
+          <div className="flex">
             <AddressCreateLine1
               autoComplete="street-address"
               id="pelcro-input-line1"
@@ -49,7 +50,7 @@ export const AddressCreateView = (props) => {
               label={t("labels.address")}
             />
           </div>
-          <div className="flex gap-3">
+          <div className="flex">
             <AddressCreatePostalCode
               autoComplete="postal-code"
               id="pelcro-input-postal-code"
@@ -59,6 +60,7 @@ export const AddressCreateView = (props) => {
               label={t("labels.code")}
             />
             <AddressCreateCity
+              wrapperClassName="ml-3"
               autoComplete="address-level2"
               id="pelcro-input-city"
               errorId="pelcro-input-city-error"
@@ -67,7 +69,7 @@ export const AddressCreateView = (props) => {
               required
             />
           </div>
-          <div className="flex gap-3">
+          <div className="flex">
             <AddressCreateCountrySelect
               id="pelcro-input-country"
               errorId="pelcro-input-country-error"
@@ -75,6 +77,7 @@ export const AddressCreateView = (props) => {
               required
             />
             <AddressCreateStateSelect
+              wrapperClassName="ml-3"
               label={t("labels.region")}
               id="pelcro-input-state"
               errorId="pelcro-input-state-error"

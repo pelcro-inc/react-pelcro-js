@@ -22,7 +22,7 @@ export const AddressUpdateView = (props) => {
       <div className="mt-2 pelcro-form">
         <AddressUpdateContainer {...props}>
           <AlertWithContext />
-          <div className="flex gap-3">
+          <div className="flex">
             <AddressUpdateFirstName
               autoComplete="first-name"
               id="pelcro-input-first-name"
@@ -32,6 +32,7 @@ export const AddressUpdateView = (props) => {
               required
             />
             <AddressUpdateLastName
+              wrapperClassName="ml-3"
               autoComplete="last-name"
               id="pelcro-input-last-name"
               errorId="pelcro-input-last-name-error"
@@ -40,7 +41,7 @@ export const AddressUpdateView = (props) => {
               required
             />
           </div>
-          <div className="flex gap-3">
+          <div className="flex">
             <AddressUpdateLine1
               autoComplete="street-address"
               id="pelcro-input-line1"
@@ -50,7 +51,7 @@ export const AddressUpdateView = (props) => {
               required
             />
           </div>
-          <div className="flex gap-3">
+          <div className="flex">
             <AddressUpdatePostalCode
               autoComplete="postal-code"
               id="pelcro-input-postal_code"
@@ -60,6 +61,7 @@ export const AddressUpdateView = (props) => {
               required
             />
             <AddressUpdateCity
+              wrapperClassName="ml-3"
               autoComplete="address-level2"
               id="pelcro-input-city"
               errorId="pelcro-input-city-error"
@@ -68,7 +70,7 @@ export const AddressUpdateView = (props) => {
               required
             />
           </div>
-          <div className="flex gap-3">
+          <div className="flex">
             <AddressUpdateCountrySelect
               id="pelcro-input-country"
               errorId="pelcro-input-country-error"
@@ -76,6 +78,7 @@ export const AddressUpdateView = (props) => {
               required
             />
             <AddressUpdateStateSelect
+              wrapperClassName="ml-3"
               id="pelcro-input-state"
               errorId="pelcro-input-state-error"
               label={t("labels.region")}

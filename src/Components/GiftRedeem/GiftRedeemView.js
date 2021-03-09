@@ -16,7 +16,7 @@ export const GiftRedeemView = (props) => {
       <div className="mt-2 pelcro-form">
         <GiftRedeemContainer {...props}>
           <AlertWithContext />
-          <div className="flex gap-3">
+          <div className="flex">
             <GiftRedeemCode
               id="pelcro-input-gift-code"
               errorId="pelcro-input-gift-code-error"
