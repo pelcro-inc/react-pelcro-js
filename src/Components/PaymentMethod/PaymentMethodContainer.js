@@ -6,12 +6,12 @@ import {
 } from "react-stripe-elements";
 import useReducerWithSideEffects, {
   UpdateWithSideEffect,
-  Update
+  Update,
+  SideEffect
 } from "use-reducer-with-side-effects";
 
 import {
   DISABLE_SUBMIT,
-  CREATE_PAYMENT,
   SET_UPDATED_PRICE,
   SUBMIT_PAYMENT,
   HANDLE_PAYPAL_SUBSCRIPTION,
@@ -25,7 +25,8 @@ import {
   SET_PAYMENT_REQUEST,
   INIT_CONTAINER,
   UPDATE_PAYMENT_REQUEST,
-  SET_ORDER
+  SET_ORDER,
+  SUBSCRIBE
 } from "../../utils/action-types";
 import { getErrorMessages, debounce } from "../common/Helpers";
 import {
@@ -142,7 +143,7 @@ const PaymentMethodContainerWithoutStripe = ({
         dispatch({ type: DISABLE_COUPON_BUTTON, payload: true });
         dispatch({ type: DISABLE_SUBMIT, payload: true });
         onLoading();
-        subscribe(token, state, dispatch);
+        dispatch({ type: SUBSCRIBE, payload: token });
         complete("success");
       });
 
@@ -460,11 +461,9 @@ const PaymentMethodContainerWithoutStripe = ({
             disableCouponButton: action.payload
           });
 
-        case CREATE_PAYMENT:
-          return UpdateWithSideEffect(
-            { ...state, disableSubmit: true },
-            (state, dispatch) =>
-              updatePaymentSource(action.payload, state, dispatch)
+        case SUBSCRIBE:
+          return SideEffect((state, dispatch) =>
+            subscribe(action.payload, state, dispatch)
           );
 
         case INIT_CONTAINER:
