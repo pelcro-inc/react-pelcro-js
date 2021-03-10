@@ -293,39 +293,39 @@ class SelectModal extends Component {
                     .select_subtitle}
               </p>
             </div>
-          </div>
 
-          <div className="pelcro-select-products-wrapper">
-            {this.renderProducts()}
-          </div>
+            <div className="pelcro-select-products-wrapper">
+              {this.renderProducts()}
+            </div>
 
-          {this.state.mode === "plan" && (
-            <>
-              <div className="overflow-y-scroll max-h-72 pelcro-select-plans-wrapper">
-                {this.renderPlans()}
-              </div>
-              {!disableGifting && (
-                <div className="flex justify-center mt-2">
-                  <Checkbox
-                    onChange={this.onIsGiftChange}
-                    checked={this.state.isGift}
-                    id="pelcro-input-is-gift"
-                  >
-                    {this.locale("messages.checkbox")}
-                  </Checkbox>
+            {this.state.mode === "plan" && (
+              <>
+                <div className="overflow-y-scroll max-h-72 pelcro-select-plans-wrapper">
+                  {this.renderPlans()}
                 </div>
-              )}
-              <Button
-                disabled={this.state.disabled}
-                onClick={this.submitOption}
-                isFullWidth={true}
-                id="pelcro-submit"
-                className="mt-2"
-              >
-                {this.locale("buttons.next")}
-              </Button>
-            </>
-          )}
+                {!disableGifting && (
+                  <div className="flex justify-center mt-2">
+                    <Checkbox
+                      onChange={this.onIsGiftChange}
+                      checked={this.state.isGift}
+                      id="pelcro-input-is-gift"
+                    >
+                      {this.locale("messages.checkbox")}
+                    </Checkbox>
+                  </div>
+                )}
+                <Button
+                  disabled={this.state.disabled}
+                  onClick={this.submitOption}
+                  isFullWidth={true}
+                  id="pelcro-submit"
+                  className="mt-2"
+                >
+                  {this.locale("buttons.next")}
+                </Button>
+              </>
+            )}
+          </div>
         </ModalBody>
         <ModalFooter>
           {!window.Pelcro.user.isAuthenticated() && (
