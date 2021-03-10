@@ -107,6 +107,29 @@ class Dashboard extends Component {
     return this.props.setView("address-edit");
   };
 
+  getSubscriptionStatusText = (subscription) => {
+    if (subscription.status === "canceled") {
+      const cancelDate = new Date(subscription.canceled_at);
+      const formattedCancelDate = new Intl.DateTimeFormat(
+        "en-CA"
+      ).format(cancelDate);
+
+      return `${this.locale(
+        "labels.canceledOn"
+      )} ${formattedCancelDate}`;
+    }
+
+    if (subscription.cancel_at_period_end) {
+      return `${this.locale("labels.expiresOn")} ${
+        subscription.current_period_end
+      }`;
+    }
+
+    return `${this.locale("labels.renewsOn")} ${
+      subscription.current_period_end
+    }`;
+  };
+
   reactivateSubscription = (subscription_id) => {
     // disable the Login button to prevent repeated clicks
     this.setState({ disableSubmit: true });
@@ -161,14 +184,6 @@ class Dashboard extends Component {
           this.props.setView("select");
         };
 
-        const status = sub.cancel_at_period_end
-          ? `${this.locale("labels.expiresOn")} ${
-              sub.current_period_end
-            }`
-          : `${this.locale("labels.renewsOn")} ${
-              sub.current_period_end
-            }`;
-
         return (
           <div
             key={"dashboard-subscription-" + sub.id}
@@ -193,7 +208,7 @@ class Dashboard extends Component {
                     {this.locale("labels.status")}
                   </span>
                   <span className="pelcro-prefix-dashboard-value col-8">
-                    {status}
+                    {this.getSubscriptionStatusText(sub)}
                   </span>
                 </div>
               )}
@@ -323,13 +338,7 @@ class Dashboard extends Component {
                   {this.locale("labels.status")}
                 </span>
                 <span className="pelcro-prefix-dashboard-value col-8">
-                  {recipient.cancel_at_period_end
-                    ? `${this.locale("labels.expiresOn")} ${
-                        recipient.current_period_end
-                      }`
-                    : `${this.locale("labels.renewsOn")} ${
-                        recipient.current_period_end
-                      }`}
+                  {this.getSubscriptionStatusText(recipient)}
                 </span>
               </div>
             )}
