@@ -67,7 +67,7 @@ export const ModalBody = ({ children }) => {
 
 export const ModalFooter = ({ children }) => {
   return (
-    <div className="flex flex-col items-center justify-center px-8 py-4 border-t border-gray-300 pelcro-modal-footer">
+    <div className="flex flex-col items-center justify-center px-8 py-4 text-sm border-t border-gray-300 pelcro-modal-footer">
       {children}
     </div>
   );

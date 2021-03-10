@@ -5,7 +5,7 @@ import React from "react";
 export const DashboardOpenButton = (props) => {
   const { openDashboard } = props;
   return (
-    <div className="pelcro-prefix-pelcro-view">
+    <div className="pelcro-dashboard-open-btn">
       <button
         className="border-2 border-primary-300"
         name="menu"
