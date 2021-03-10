@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 ### Fixed
 
 - Canceled Subscriptions and gifts showing incorrect status values in user dashboard.
+- Apple pay URL coupons race condition.
 
 ## [Released]
 
