@@ -13,7 +13,7 @@ export const MeterModal = (props) => (
   >
     <button
       type="button"
-      className="absolute top-0 text-2xl text-gray-500 right-1 pelcro-prefix-close"
+      className="absolute top-0 text-2xl text-gray-500 right-1 pelcro-close-btn"
       aria-label="Close"
       onClick={props.onClose}
     >

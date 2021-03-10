@@ -1,16 +1,11 @@
-// Dashboard view.
-// Displays dashboard shown after clicking on menu button. Contains user email,
-// list of subscriptions, Logout button and Support link.
-// Here user can unsubscribe from the plan he is subscribed on.
-
 import React, { Component } from "react";
 import { Transition } from "@headlessui/react";
-import { showError } from "../../utils/showing-error";
 import { getErrorMessages } from "../common/Helpers";
 import { withTranslation } from "react-i18next";
 import { getFormattedPriceByLocal } from "../../utils/utils";
 import { Button } from "../../SubComponents/Button";
 import { getPaymentCardIcon } from "./utils";
+import { Accordion } from "./Accordion";
 import { ReactComponent as ExitIcon } from "../../assets/exit.svg";
 import { ReactComponent as ArrowLeftIcon } from "../../assets/arrow-left.svg";
 import { ReactComponent as CheckMarkIcon } from "../../assets/check-mark.svg";
@@ -24,7 +19,6 @@ import { ReactComponent as LocationIcon } from "../../assets/location-pin.svg";
 import { ReactComponent as BoxIcon } from "../../assets/box.svg";
 import { ReactComponent as GiftIcon } from "../../assets/gift.svg";
 import { ReactComponent as PlusIcon } from "../../assets/plus.svg";
-import { Accordion } from "./Accordion";
 
 const SUB_MENUS = {
   SUBSCRIPTIONS: "subscriptions",
@@ -48,11 +42,6 @@ class Dashboard extends Component {
     this.site = window.Pelcro.site.read();
     this.locale = this.props.t;
     this.user = window.Pelcro.user.read();
-    this.address = window.Pelcro.user.read().addresses
-      ? window.Pelcro.user.read().addresses[
-          window.Pelcro.user.read().addresses.length - 1
-        ]
-      : null;
   }
 
   componentDidMount = () => {
@@ -74,11 +63,6 @@ class Dashboard extends Component {
     if (addresses) this.setState({ addresses: addresses });
   };
 
-  // inserting error message into modal window
-  showError = (message) => {
-    showError(message, "pelcro-error-dashboard");
-  };
-
   cancelSubscription = (subscription_id) => {
     // disable the Login button to prevent repeated clicks
     this.setState({ disableSubmit: true });
@@ -90,10 +74,6 @@ class Dashboard extends Component {
       },
       (err, res) => {
         this.setState({ disableSubmit: false });
-
-        if (err) {
-          return this.showError(getErrorMessages(err));
-        }
 
         this.props.ReactGA.event({
           category: "ACTIONS",
@@ -144,11 +124,6 @@ class Dashboard extends Component {
       },
       (err, res) => {
         this.setState({ disableSubmit: false });
-
-        if (err) {
-          return this.showError(getErrorMessages(err));
-        }
-
         this.props.resetView();
       }
     );
@@ -177,7 +152,8 @@ class Dashboard extends Component {
     if (isSubscriptionEndingSoon(sub)) {
       return {
         title: this.locale("labels.status.endingSoon"),
-        color: "orange",
+        textColor: "text-orange-700",
+        bgColor: "bg-orange-100",
         icon: <ExclamationIcon />
       };
     }
@@ -185,14 +161,16 @@ class Dashboard extends Component {
     if (isSubscriptionInTrial(sub)) {
       return {
         title: this.locale("labels.status.inTrial"),
-        color: "yellow",
+        textColor: "text-yellow-700",
+        bgColor: "bg-yellow-100",
         icon: <CheckMarkIcon />
       };
     }
 
     return {
       title: this.locale("labels.status.active"),
-      color: "green",
+      textColor: "text-green-700",
+      bgColor: "bg-green-100",
       icon: <CheckMarkIcon />
     };
   };
@@ -264,11 +242,11 @@ class Dashboard extends Component {
             <td>
               {/* Pill */}
               <span
-                className={`inline-flex p-1 text-xs font-semibold bg-${
-                  this.getSubscriptionStatus(sub).color
-                }-100 uppercase text-${
-                  this.getSubscriptionStatus(sub).color
-                }-700 rounded-lg`}
+                className={`inline-flex p-1 text-xs font-semibold ${
+                  this.getSubscriptionStatus(sub).bgColor
+                } uppercase ${
+                  this.getSubscriptionStatus(sub).textColor
+                } rounded-lg`}
               >
                 {this.getSubscriptionStatus(sub).icon}
                 {this.getSubscriptionStatus(sub).title}
@@ -353,7 +331,7 @@ class Dashboard extends Component {
                 isFullWidth={true}
                 icon={<PlusIcon className="w-4 mr-1" />}
                 className="font-semibold tracking-wider uppercase rounded-none text-primary-700 hover:bg-primary-50"
-                onClick={this.displayUserEdit}
+                onClick={this.displayProductSelect}
               >
                 {this.locale("labels.addSubscription")}
               </Button>
@@ -446,11 +424,11 @@ class Dashboard extends Component {
               <td>
                 {/* Pill */}
                 <span
-                  className={`inline-flex p-1 text-xs font-semibold bg-${
-                    this.getSubscriptionStatus(recipient).color
-                  }-100 uppercase text-${
-                    this.getSubscriptionStatus(recipient).color
-                  }-700 rounded-lg`}
+                  className={`inline-flex p-1 text-xs font-semibold ${
+                    this.getSubscriptionStatus(recipient).bgColor
+                  } uppercase ${
+                    this.getSubscriptionStatus(recipient).textColor
+                  } rounded-lg`}
                 >
                   {this.getSubscriptionStatus(recipient).icon}
                   {this.getSubscriptionStatus(recipient).title}
@@ -589,7 +567,7 @@ class Dashboard extends Component {
     const { isOpen } = this.state;
     return (
       <Transition
-        className="fixed inset-y-0 right-0 z-10 h-full max-w-xl overflow-y-auto text-left bg-white shadow-xl"
+        className="fixed inset-y-0 right-0 z-max h-full max-w-xl overflow-y-auto text-left bg-white shadow-xl"
         show={isOpen}
         enter="transform transition duration-500"
         enterFrom="translate-x-full"
