@@ -6,12 +6,16 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Unreleased]
 
+condition.
+
+## [Released]
+
+## [2.11.7] - 2021-03-10
+
 ### Fixed
 
 - Canceled Subscriptions and gifts showing incorrect status values in user dashboard.
-- Apple pay URL coupons race condition.
-
-## [Released]
+- Apple pay URL coupons race
 
 ## [2.11.7] - 2021-03-09
 
