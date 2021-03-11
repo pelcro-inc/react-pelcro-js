@@ -47,7 +47,7 @@ export function SubscriptionRenewModal({
         />
       </ModalBody>
       <ModalFooter>
-        <small className="mb-2 text-center">
+        <small className="plc-mb-2 plc-text-center">
           {t("haveQuestion")} {t("visitOurFaq.visitOur")}{" "}
           <Link
             id="pelcro-link-faq"

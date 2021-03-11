@@ -23,14 +23,14 @@ export const MeterView = (props) => {
   };
 
   return (
-    <div className="flex items-center justify-between">
+    <div className="plc-flex plc-items-center plc-justify-between">
       <div>
-        <h4 className="mb-2 text-xl font-semibold text-gray-600">
+        <h4 className="plc-mb-2 plc-text-xl plc-font-semibold plc-text-gray-600">
           {title}
         </h4>
-        <p className="text-sm text-gray-600">
+        <p className="plc-text-sm plc-text-gray-600">
           {subtitle}{" "}
-          <Link className="ml-1" onClick={displaySelectView}>
+          <Link className="plc-ml-1" onClick={displaySelectView}>
             {t("messages.subscribeNow")}
           </Link>
           {!window.Pelcro.user.isAuthenticated() && (
@@ -38,7 +38,7 @@ export const MeterView = (props) => {
               <br />
               <span>
                 {t("messages.alreadyHaveAccount") + " "}
-                <Link className="ml-1" onClick={displayLoginView}>
+                <Link className="plc-ml-1" onClick={displayLoginView}>
                   {t("messages.loginHere")}
                 </Link>
               </span>
@@ -49,7 +49,7 @@ export const MeterView = (props) => {
       {site.logo.url && (
         <img
           alt="avatar"
-          className="w-12 h-12 ml-4 mr-2"
+          className="plc-w-12 plc-h-12 plc-ml-4 plc-mr-2"
           src={site.logo.url}
         ></img>
       )}

@@ -7,13 +7,13 @@ export const DashboardOpenButton = (props) => {
   return (
     <div className="pelcro-dashboard-open-btn">
       <button
-        className="border-2 border-primary-300"
+        className="plc-border-2 plc-border-primary-300"
         name="menu"
         id="pelcro-view-menu"
         onClick={openDashboard}
       >
         <svg
-          className="text-primary-400 hover:text-primary-500"
+          className="plc-text-primary-400 hover:plc-text-primary-500"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"
           fill="currentColor"

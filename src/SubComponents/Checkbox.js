@@ -8,16 +8,16 @@ export function Checkbox({
   ...otherProps
 }) {
   return (
-    <div className="flex items-center">
+    <div className="plc-flex plc-items-center">
       <input
         type="checkbox"
         id={id}
-        className={`text-primary-500 checked:border-transparent rounded focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-300 text-md disabled:cursor-not-allowed disabled:text-gray-300 pelcro-checkbox-input ${inputClassName}`}
+        className={`plc-text-primary-500 checked:plc-border-transparent plc-rounded focus:plc-outline-none focus:plc-ring-2 focus:plc-ring-offset-2 focus:plc-ring-primary-300 text-md disabled:plc-cursor-not-allowed disabled:plc-text-gray-300 pelcro-checkbox-input ${inputClassName}`}
         {...otherProps}
       />
       <label
         htmlFor={id}
-        className={`ml-2 pelcro-checkbox-label ${labelClassName}`}
+        className={`plc-ml-2 pelcro-checkbox-label ${labelClassName}`}
       >
         {children}
       </label>

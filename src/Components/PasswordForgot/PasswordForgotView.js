@@ -9,11 +9,11 @@ export const PasswordForgotView = (props) => {
   const { t } = useTranslation("passwordForgot");
   return (
     <div id="pelcro-password-forgot-view">
-      <div className="flex flex-col items-center text-lg font-semibold text-center pelcro-title-wrapper">
+      <div className="plc-flex plc-flex-col plc-items-center plc-text-lg plc-font-semibold plc-text-center pelcro-title-wrapper">
         <h4>{t("title")}</h4>
         <p>{t("subtitle")}</p>
       </div>
-      <div className="mt-2 pelcro-form">
+      <div className="plc-mt-2 pelcro-form">
         <PasswordForgotContainer {...props}>
           <AlertWithContext />
           <PasswordForgotEmail
@@ -23,7 +23,7 @@ export const PasswordForgotView = (props) => {
             label={t("email")}
           />
           <PasswordForgotButton
-            className="mt-2"
+            className="plc-mt-2"
             name={t("submit")}
             id="pelcro-submit"
           />

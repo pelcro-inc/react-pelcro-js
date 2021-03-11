@@ -138,17 +138,17 @@ class DefaultNewsLetter extends Component {
         />
         <ModalBody>
           <div id="pelcro-newsletter-view">
-            <div className="flex flex-col items-center text-lg font-semibold text-center pelcro-title-wrapper">
+            <div className="plc-flex plc-flex-col plc-items-center plc-text-lg plc-font-semibold plc-text-center pelcro-title-wrapper">
               <h4>{this.title}</h4>
               <p>{this.subtitle}</p>
             </div>
-            <div className="mt-2 pelcro-form">
+            <div className="plc-mt-2 pelcro-form">
               {this.state.alert.content && (
                 <Alert type={this.state.alert.type}>
                   {this.state.alert.content}
                 </Alert>
               )}
-              <div className="flex">
+              <div className="plc-flex">
                 <Input
                   value={this.state.first_name}
                   onChange={this.onFirstNameChange}
@@ -157,7 +157,7 @@ class DefaultNewsLetter extends Component {
                   label={t("labels.firstName")}
                 />
                 <Input
-                  wrapperClassName="ml-3"
+                  wrapperClassName="plc-ml-3"
                   value={this.state.last_name}
                   onChange={this.onLastNameChange}
                   autoComplete="last-name"
@@ -185,7 +185,7 @@ class DefaultNewsLetter extends Component {
                 * {t("labels.required")}
               </p>
               <Button
-                className="mt-2"
+                className="plc-mt-2"
                 id="pelcro-submit"
                 isFullWidth={true}
                 onClick={this.submitNewsletter}

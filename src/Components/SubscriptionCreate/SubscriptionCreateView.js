@@ -22,15 +22,15 @@ export const SubscriptionCreateView = ({
         : `1 ${interval}`;
 
     return (
-      <p className="text-gray-600">
-        <span className="tracking-wider uppercase">
+      <p className="plc-text-gray-600">
+        <span className="plc-tracking-wider plc-uppercase">
           {plan.nickname}
         </span>
         <br />
-        <span className="text-xl font-semibold text-green-600">
+        <span className="plc-text-xl plc-font-semibold plc-text-green-600">
           {plan.amount_formatted}{" "}
         </span>
-        <span className="font-thin">
+        <span className="plc-font-thin">
           {autoRenewed ? "/" : t("labels.for")} {formattedInterval}
         </span>
       </p>
@@ -39,8 +39,8 @@ export const SubscriptionCreateView = ({
 
   return (
     <div id="pelcro-subscription-create-view">
-      <div className="text-center">
-        <h4 className="mb-2 text-xl">
+      <div className="plc-text-center">
+        <h4 className="plc-mb-2 plc-text-xl">
           {product?.paywall?.subscribe_title ??
             window.Pelcro.paywall.read()?.subscribe_title}
         </h4>{" "}
@@ -48,7 +48,7 @@ export const SubscriptionCreateView = ({
           {product?.paywall?.subscribe_subtitle ??
             window.Pelcro.paywall.read()?.subscribe_subtitle}
         </p>
-        <div className="w-full p-2 mt-2 font-semibold text-center text-gray-700 bg-gray-100 border border-gray-200">
+        <div className="plc-w-full plc-p-2 plc-mt-2 plc-font-semibold plc-text-center plc-text-gray-700 plc-bg-gray-100 plc-border plc-border-gray-200">
           {getPricingText(plan)}
         </div>
       </div>

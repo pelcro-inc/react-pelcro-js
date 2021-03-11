@@ -16,15 +16,15 @@ export const CartView = (props) => {
 
   return (
     <div id="pelcro-cart-view">
-      <div className="flex flex-col items-center text-lg font-semibold text-center pelcro-title-wrapper">
+      <div className="plc-flex plc-flex-col plc-items-center plc-text-lg plc-font-semibold plc-text-center pelcro-title-wrapper">
         <h4>{t("title")}</h4>
       </div>
       {isEmpty ? (
-        <p className="mt-4 text-center pelcro-cart-empty">
+        <p className="plc-mt-4 plc-text-center pelcro-cart-empty">
           {t("empty")}
         </p>
       ) : (
-        <div className="mt-2 pelcro-form">
+        <div className="plc-mt-2 pelcro-form">
           <CartContainer {...props}>
             <div className="pelcro-cart-wrapper">
               {props.products.map((product) => {
@@ -33,23 +33,23 @@ export const CartView = (props) => {
                     <div
                       key={product.id}
                       id={`pelcro-cart-product-${product.id}`}
-                      className="flex items-center pt-2 mt-2 border-t border-gray-400 min-h-12 justify-evenly pelcro-cart-product-wrapper"
+                      className="plc-flex plc-items-center plc-pt-2 plc-mt-2 plc-border-t plc-border-gray-400 min-h-12 plc-justify-evenly pelcro-cart-product-wrapper"
                     >
-                      <div className="w-1/4 pelcro-cart-image-wrapper">
+                      <div className="plc-w-1/4 pelcro-cart-image-wrapper">
                         {product.image && (
                           <Badge content={product.quantity}>
                             <img
-                              className="w-20 h-20 pelcro-cart-product-image"
+                              className="plc-w-20 plc-h-20 pelcro-cart-product-image"
                               alt={`image of ${product.name}`}
                               src={product.image}
                             />
                           </Badge>
                         )}
                       </div>
-                      <div className="w-2/5 break-words pelcro-cart-product-name">
+                      <div className="plc-w-2/5 plc-break-words pelcro-cart-product-name">
                         {product.name}
                       </div>
-                      <div className="w-1/5 text-center pelcro-cart-product-price">
+                      <div className="plc-w-1/5 plc-text-center pelcro-cart-product-price">
                         {parseFloat(
                           (product.price / 100) * product.quantity
                         ).toLocaleString("fr-CA", {
@@ -59,7 +59,7 @@ export const CartView = (props) => {
                       </div>
                       <CartRemoveProductButton
                         id={`pelcro-remove-product-${product.id}`}
-                        className="bg-gray-800 hover:bg-gray-600"
+                        className="plc-bg-gray-800 hover:plc-bg-gray-600"
                         data-key={product.id}
                         aria-label="remove item from cart"
                         icon={
@@ -75,8 +75,8 @@ export const CartView = (props) => {
                 }
               })}
             </div>
-            <div className="flex items-center justify-end pt-2 mt-2 font-bold border-t border-gray-400 pelcro-cart-total-wrapper">
-              <p className="mr-1 pelcro-cart-total-text">
+            <div className="plc-flex plc-items-center plc-justify-end plc-pt-2 plc-mt-2 plc-font-bold plc-border-t plc-border-gray-400 pelcro-cart-total-wrapper">
+              <p className="plc-mr-1 pelcro-cart-total-text">
                 {t("total")}:
               </p>
               <p className="pelcro-cart-total">
@@ -84,7 +84,7 @@ export const CartView = (props) => {
               </p>
             </div>
             <CartSubmit
-              className="mt-2"
+              className="plc-mt-2"
               id="pelcro-submit"
               name={t("confirm")}
             />

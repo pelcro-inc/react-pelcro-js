@@ -152,8 +152,8 @@ class Dashboard extends Component {
     if (isSubscriptionEndingSoon(sub)) {
       return {
         title: this.locale("labels.status.endingSoon"),
-        textColor: "text-orange-700",
-        bgColor: "bg-orange-100",
+        textColor: "plc-text-orange-700",
+        bgColor: "plc-bg-orange-100",
         icon: <ExclamationIcon />
       };
     }
@@ -161,16 +161,16 @@ class Dashboard extends Component {
     if (isSubscriptionInTrial(sub)) {
       return {
         title: this.locale("labels.status.inTrial"),
-        textColor: "text-yellow-700",
-        bgColor: "bg-yellow-100",
+        textColor: "plc-text-yellow-700",
+        bgColor: "plc-bg-yellow-100",
         icon: <CheckMarkIcon />
       };
     }
 
     return {
       title: this.locale("labels.status.active"),
-      textColor: "text-green-700",
-      bgColor: "bg-green-100",
+      textColor: "plc-text-green-700",
+      bgColor: "plc-bg-green-100",
       icon: <CheckMarkIcon />
     };
   };
@@ -220,16 +220,16 @@ class Dashboard extends Component {
         return (
           <tr
             key={"dashboard-subscription-" + sub.id}
-            className="w-full align-top"
+            className="plc-w-full plc-align-top"
           >
             <td>
               {sub.plan.nickname && (
                 <>
-                  <span className="font-semibold text-gray-500">
+                  <span className="plc-font-semibold plc-text-gray-500">
                     {sub.plan.nickname}
                   </span>
                   <br />
-                  <span className="text-xs text-gray-400">
+                  <span className="plc-text-xs plc-text-gray-400">
                     {getFormattedPriceByLocal(
                       sub.plan.amount,
                       sub.plan.currency,
@@ -242,25 +242,25 @@ class Dashboard extends Component {
             <td>
               {/* Pill */}
               <span
-                className={`inline-flex p-1 text-xs font-semibold ${
+                className={`plc-inline-flex plc-p-1 plc-text-xs plc-font-semibold ${
                   this.getSubscriptionStatus(sub).bgColor
-                } uppercase ${
+                } plc-uppercase ${
                   this.getSubscriptionStatus(sub).textColor
-                } rounded-lg`}
+                } plc-rounded-lg`}
               >
                 {this.getSubscriptionStatus(sub).icon}
                 {this.getSubscriptionStatus(sub).title}
               </span>
               <br />
-              <div className="mb-4 text-xs text-gray-500">
+              <div className="plc-mb-4 plc-text-xs plc-text-gray-500">
                 {sub.status && (
-                  <span className="inline-block mt-1 underline">
+                  <span className="plc-inline-block plc-mt-1 plc-underline">
                     {status}
                   </span>
                 )}
                 <br />
                 {sub.shipments_remaining && (
-                  <span className="inline-block mt-1">
+                  <span className="plc-inline-block plc-mt-1">
                     {sub.shipments_remaining}{" "}
                     {this.locale("labels.shipments")}
                   </span>
@@ -272,7 +272,7 @@ class Dashboard extends Component {
               {sub.cancel_at_period_end === 0 && (
                 <Button
                   variant="ghost"
-                  className="text-red-400 focus:ring-red-300"
+                  className="plc-text-red-400 focus:plc-ring-red-300"
                   icon={<XCircleIcon />}
                   onClick={onCancelClick}
                   disabled={this.state.disableSubmit}
@@ -283,7 +283,7 @@ class Dashboard extends Component {
               {sub.cancel_at_period_end === 1 && sub.plan.auto_renew && (
                 <Button
                   variant="ghost"
-                  className="text-green-400 focus:ring-green-300"
+                  className="plc-text-green-400 focus:plc-ring-green-300"
                   icon={<RefreshIcon />}
                   onClick={onReactivateClick}
                   disabled={this.state.disableSubmit}
@@ -294,7 +294,7 @@ class Dashboard extends Component {
               {sub.cancel_at_period_end === 1 && (
                 <Button
                   variant="ghost"
-                  className="text-blue-400 focus:ring-blue-300"
+                  className="plc-text-blue-400 focus:plc-ring-blue-300"
                   icon={<RefreshIcon />}
                   onClick={onRenewClick}
                   disabled={this.state.disableSubmit}
@@ -308,29 +308,31 @@ class Dashboard extends Component {
       });
 
     return (
-      <table className="w-full table-fixed">
-        <thead className="text-xs font-semibold tracking-wider text-gray-400 uppercase ">
+      <table className="plc-w-full plc-table-fixed">
+        <thead className="plc-text-xs plc-font-semibold plc-tracking-wider plc-text-gray-400 plc-uppercase ">
           <tr>
-            <th className="w-5/12 ">{this.locale("labels.plan")}</th>
-            <th className="w-4/12 ">
+            <th className="plc-w-5/12 ">
+              {this.locale("labels.plan")}
+            </th>
+            <th className="plc-w-4/12 ">
               {this.locale("labels.status.title")}
             </th>
-            <th className="w-3/12 ">
+            <th className="plc-w-3/12 ">
               {this.locale("labels.actions")}
             </th>
           </tr>
         </thead>
         <tbody>
           {/* Spacer */}
-          <tr className="h-4"></tr>
+          <tr className="plc-h-4"></tr>
           {subscriptions}
           <tr>
-            <td colSpan="4" className="p-1">
+            <td colSpan="4" className="plc-p-1">
               <Button
                 variant="ghost"
                 isFullWidth={true}
-                icon={<PlusIcon className="w-4 mr-1" />}
-                className="font-semibold tracking-wider uppercase rounded-none text-primary-700 hover:bg-primary-50"
+                icon={<PlusIcon className="plc-w-4 plc-mr-1" />}
+                className="plc-font-semibold plc-tracking-wider plc-uppercase plc-rounded-none plc-text-primary-700 hover:plc-bg-primary-50"
                 onClick={this.displayProductSelect}
               >
                 {this.locale("labels.addSubscription")}
@@ -338,12 +340,12 @@ class Dashboard extends Component {
             </td>
           </tr>
           <tr>
-            <td colSpan="4" className="p-1">
+            <td colSpan="4" className="plc-p-1">
               <Button
                 variant="ghost"
                 isFullWidth={true}
-                icon={<GiftIcon className="w-4 mr-1" />}
-                className="font-semibold tracking-wider uppercase rounded-none text-primary-700 hover:bg-primary-50"
+                icon={<GiftIcon className="plc-w-4 plc-mr-1" />}
+                className="plc-font-semibold plc-tracking-wider plc-uppercase plc-rounded-none plc-text-primary-700 hover:plc-bg-primary-50"
                 onClick={this.displayRedeem}
               >
                 {this.locale("labels.redeemGift")}
@@ -385,30 +387,30 @@ class Dashboard extends Component {
         return (
           <tr
             key={"dashboard-gift-recipients-" + recipient.id}
-            className="align-top"
+            className="plc-align-top"
           >
             {/* User info section */}
             <td
-              className="pr-2 text-gray-500 truncate"
+              className="plc-pr-2 plc-text-gray-500 plc-truncate"
               title={recipient.email}
             >
               {(recipient.first_name || recipient.last_name) && (
-                <span className="font-semibold">
+                <span className="plc-font-semibold">
                   {recipient.first_name} {recipient.last_name}
                 </span>
               )}
               <br />
-              <span className="text-xs">{recipient.email}</span>
+              <span className="plc-text-xs">{recipient.email}</span>
             </td>
             {/* Plan info section */}
             <td>
               {recipient.plan.nickname && (
                 <>
-                  <span className="font-semibold text-gray-500">
+                  <span className="plc-font-semibold plc-text-gray-500">
                     {recipient.plan.nickname}
                   </span>
                   <br />
-                  <span className="text-xs text-gray-400">
+                  <span className="plc-text-xs plc-text-gray-400">
                     {getFormattedPriceByLocal(
                       recipient.plan.amount,
                       recipient.plan.currency,
@@ -424,19 +426,19 @@ class Dashboard extends Component {
               <td>
                 {/* Pill */}
                 <span
-                  className={`inline-flex p-1 text-xs font-semibold ${
+                  className={`plc-inline-flex plc-p-1 plc-text-xs plc-font-semibold ${
                     this.getSubscriptionStatus(recipient).bgColor
-                  } uppercase ${
+                  } plc-uppercase ${
                     this.getSubscriptionStatus(recipient).textColor
-                  } rounded-lg`}
+                  } plc-rounded-lg`}
                 >
                   {this.getSubscriptionStatus(recipient).icon}
                   {this.getSubscriptionStatus(recipient).title}
                 </span>
                 <br />
-                <div className="mb-4 text-xs text-gray-500">
+                <div className="plc-mb-4 plc-text-xs plc-text-gray-500">
                   {recipient.status && (
-                    <span className="inline-block mt-1 underline">
+                    <span className="plc-inline-block plc-mt-1 plc-underline">
                       {subscriptionStatus}
                     </span>
                   )}
@@ -449,7 +451,7 @@ class Dashboard extends Component {
               <Button
                 variant="ghost"
                 icon={<RefreshIcon />}
-                className="text-blue-400 focus:ring-blue-300"
+                className="plc-text-blue-400 focus:plc-ring-blue-300"
                 onClick={onRenewClick}
                 disabled={this.state.disableSubmit}
               >
@@ -461,32 +463,34 @@ class Dashboard extends Component {
       });
 
     return (
-      <table className="w-full table-fixed">
-        <thead className="text-xs font-semibold tracking-wider text-gray-400 uppercase ">
+      <table className="plc-w-full plc-table-fixed">
+        <thead className="plc-text-xs plc-font-semibold plc-tracking-wider plc-text-gray-400 plc-uppercase ">
           <tr>
-            <th className="w-4/12 ">
+            <th className="plc-w-4/12 ">
               {this.locale("labels.recipient")}
             </th>
-            <th className="w-3/12 ">{this.locale("labels.plan")}</th>
-            <th className="w-3/12 ">
+            <th className="plc-w-3/12 ">
+              {this.locale("labels.plan")}
+            </th>
+            <th className="plc-w-3/12 ">
               {this.locale("labels.status.title")}
             </th>
-            <th className="w-2/12 ">
+            <th className="plc-w-2/12 ">
               {this.locale("labels.actions")}
             </th>
           </tr>
         </thead>
         {/* Spacer */}
-        <tr className="h-4"></tr>
+        <tr className="plc-h-4"></tr>
         <tbody>
           {giftedSubscriptions}
           <tr>
-            <td colSpan="4" className="p-1">
+            <td colSpan="4" className="plc-p-1">
               <Button
                 variant="ghost"
                 isFullWidth={true}
-                icon={<PlusIcon className="w-4 mr-1" />}
-                className="font-semibold tracking-wider uppercase rounded-none text-primary-700 hover:bg-primary-50"
+                icon={<PlusIcon className="plc-w-4 plc-mr-1" />}
+                className="plc-font-semibold plc-tracking-wider plc-uppercase plc-rounded-none plc-text-primary-700 hover:plc-bg-primary-50"
                 onClick={this.displayProductSelect}
               >
                 {this.locale("labels.addGift")}
@@ -504,8 +508,8 @@ class Dashboard extends Component {
       this.state.addresses.map((address, index) => {
         return (
           <tr key={"dashboard-address-" + address.id}>
-            <td className="pr-2 text-gray-400 truncate">
-              <span className="font-semibold text-gray-600">
+            <td className="plc-pr-2 plc-text-gray-400 plc-truncate">
+              <span className="plc-font-semibold plc-text-gray-600">
                 {address.city}, {address.country}
               </span>{" "}
               <span title={address.line1}>{address.line1}</span>
@@ -513,7 +517,7 @@ class Dashboard extends Component {
             <td>
               <Button
                 variant="icon"
-                className="text-gray-500"
+                className="plc-text-gray-500"
                 icon={<EditIcon />}
                 id={"pelcro-button-update-address-" + index}
                 data-key={address.id}
@@ -525,27 +529,29 @@ class Dashboard extends Component {
       });
 
     return (
-      <table className="w-full table-fixed">
-        <thead className="text-xs font-semibold tracking-wider text-gray-400 uppercase ">
+      <table className="plc-w-full plc-table-fixed">
+        <thead className="plc-text-xs plc-font-semibold plc-tracking-wider plc-text-gray-400 plc-uppercase ">
           <tr>
-            <th className="w-10/12">
+            <th className="plc-w-10/12">
               {this.locale("labels.address")}
             </th>
-            <th className="w-2/12">{this.locale("labels.edit")}</th>
+            <th className="plc-w-2/12">
+              {this.locale("labels.edit")}
+            </th>
           </tr>
         </thead>
 
         <tbody>
           {/* Spacer */}
-          <tr className="h-4"></tr>
+          <tr className="plc-h-4"></tr>
           {addresses}
           <tr>
-            <td colSpan="2" className="p-1">
+            <td colSpan="2" className="plc-p-1">
               <Button
                 variant="ghost"
                 isFullWidth={true}
-                icon={<PlusIcon className="w-4 mr-1" />}
-                className="font-semibold tracking-wider uppercase text-primary-700 hover:bg-primary-50"
+                icon={<PlusIcon className="plc-w-4 plc-mr-1" />}
+                className="plc-font-semibold plc-tracking-wider plc-uppercase plc-text-primary-700 hover:plc-bg-primary-50"
                 onClick={this.displayAddressCreate}
               >
                 {this.locale("labels.addAddress")}
@@ -567,22 +573,22 @@ class Dashboard extends Component {
     const { isOpen } = this.state;
     return (
       <Transition
-        className="fixed inset-y-0 right-0 h-full max-w-xl overflow-y-auto text-left bg-white shadow-xl z-max"
+        className="plc-fixed plc-inset-y-0 plc-right-0 plc-h-full plc-max-w-xl plc-overflow-y-auto plc-text-left plc-bg-white plc-shadow-xl z-max"
         show={isOpen}
-        enter="transform transition duration-500"
-        enterFrom="translate-x-full"
-        enterTo="translate-x-0"
-        leave="transform transition duration-500"
-        leaveFrom="translate-x-0"
-        leaveTo="translate-x-full"
+        enter="plc-transform plc-transition plc-duration-500"
+        enterFrom="plc-translate-x-full"
+        enterTo="plc-translate-x-0"
+        leave="plc-transform plc-transition plc-duration-500"
+        leaveFrom="plc-translate-x-0"
+        leaveTo="plc-translate-x-full"
         afterLeave={this.props.onClose}
       >
         <div id="pelcro-view-dashboard">
-          <header className="flex flex-col p-2 bg-primary-500 h-52">
-            <div className="flex items-center justify-between">
+          <header className="plc-flex plc-flex-col plc-p-2 plc-bg-primary-500 plc-h-52">
+            <div className="plc-flex plc-items-center plc-justify-between">
               <button
                 type="button"
-                className="w-8 text-gray-100 outline-none hover:text-gray-200"
+                className="plc-w-8 plc-text-gray-100 plc-outline-none hover:plc-text-gray-200"
                 aria-label="Close"
                 onClick={this.closeDashboard}
               >
@@ -591,17 +597,17 @@ class Dashboard extends Component {
               {this.site.logo && (
                 <img
                   alt="avatar"
-                  className="w-10 h-10 p-1 bg-white rounded-full"
+                  className="plc-w-10 plc-h-10 plc-p-1 plc-bg-white plc-rounded-full"
                   src={this.site.logo.url}
                 />
               )}
             </div>
 
-            <div className="flex flex-col justify-end flex-grow px-6">
-              <div className="flex flex-col justify-center">
+            <div className="plc-flex plc-flex-col plc-justify-end plc-flex-grow plc-px-6">
+              <div className="plc-flex plc-flex-col plc-justify-center">
                 {(this.user.first_name || this.user.last_name) && (
-                  <p className="m-0 text-3xl font-bold text-white text">
-                    <span className="text-lg opacity-80">
+                  <p className="plc-m-0 plc-text-3xl plc-font-bold plc-text-white text">
+                    <span className="plc-text-lg plc-opacity-80">
                       {this.locale("labels.hello")},
                     </span>
                     <br />
@@ -609,15 +615,15 @@ class Dashboard extends Component {
                   </p>
                 )}
 
-                <p className="m-0 text-sm text-white">
+                <p className="plc-m-0 plc-text-sm plc-text-white">
                   {this.user.email}
                 </p>
               </div>
-              <div className="flex mt-2 space-x-2">
+              <div className="plc-flex plc-mt-2 plc-space-x-2">
                 <Button
                   variant="solid"
                   icon={<SettingsIcon />}
-                  className="text-xs text-gray-700 capitalize bg-white hover:bg-gray-100"
+                  className="plc-text-xs plc-text-gray-700 plc-capitalize plc-bg-white hover:plc-bg-gray-100"
                   onClick={this.displayUserEdit}
                 >
                   {this.locale("labels.updateProfile")}
@@ -625,7 +631,7 @@ class Dashboard extends Component {
                 <Button
                   variant="outline"
                   icon={<ExitIcon />}
-                  className="text-xs text-white capitalize border-white hover:bg-white hover:text-gray-700"
+                  className="plc-text-xs plc-text-white plc-capitalize plc-border-white hover:plc-bg-white hover:plc-text-gray-700"
                   onClick={this.props.logout}
                 >
                   {this.locale("labels.logout")}
@@ -634,9 +640,9 @@ class Dashboard extends Component {
             </div>
           </header>
 
-          <section className="mt-6 shadow-sm">
-            <header className="pl-8 mb-2">
-              <p className="text-xs font-bold tracking-widest text-gray-500 uppercase">
+          <section className="plc-mt-6 plc-shadow-sm">
+            <header className="plc-pl-8 plc-mb-2">
+              <p className="plc-text-xs plc-font-bold plc-tracking-widest plc-text-gray-500 plc-uppercase">
                 {this.locale("labels.profile")}
               </p>
             </header>
@@ -647,17 +653,17 @@ class Dashboard extends Component {
                 icon={<PaymentCardIcon />}
                 title={this.locale("labels.paymentSource")}
                 content={
-                  <div className="flex items-center justify-between max-w-xs p-4 mb-2 text-white bg-gray-800 rounded-md h-14">
+                  <div className="plc-flex plc-items-center plc-justify-between plc-max-w-xs plc-p-4 plc-mb-2 plc-text-white plc-bg-gray-800 plc-rounded-md plc-h-14">
                     {getPaymentCardIcon(
                       this.user.source?.properties?.brand
                     )}
-                    <span className="ml-1 text-lg tracking-widest">
+                    <span className="plc-ml-1 plc-text-lg plc-tracking-widest">
                       •••• •••• ••••{" "}
                       {this.user.source?.properties?.last4}
                     </span>
                     <Button
                       variant="icon"
-                      className="text-white"
+                      className="plc-text-white"
                       icon={<EditIcon />}
                       onClick={this.displaySourceCreate}
                       disabled={this.state.disableSubmit}

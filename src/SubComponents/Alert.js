@@ -12,18 +12,18 @@ export function Alert({
 }) {
   return (
     <div
-      className={`inline-flex items-center justify-between px-4 py-3 pr-1 w-full font-semibold text-sm text-white ${
-        type === "error" ? "bg-red-500" : "bg-primary-500"
-      } rounded-sm pelcro-alert-${type} ${className}`}
+      className={`plc-inline-flex plc-items-center plc-justify-between plc-px-4 plc-py-3 plc-pr-1 plc-w-full plc-font-semibold plc-text-sm plc-text-white ${
+        type === "error" ? "plc-bg-red-500" : "plc-bg-primary-500"
+      } plc-rounded-sm pelcro-alert-${type} ${className}`}
       {...otherProps}
     >
-      <div className="inline-flex items-center">
+      <div className="plc-inline-flex plc-items-center">
         {type === "error" && (
-          <ErrorIcon className="flex-shrink-0 w-6 mr-3 pelcro-alert-icon" />
+          <ErrorIcon className="plc-flex-shrink-0 plc-w-6 plc-mr-3 pelcro-alert-icon" />
         )}
         {type === "success" && (
           <SuccessIcon
-            className="flex-shrink-0 w-6 mr-3 pelcro-alert-icon"
+            className="plc-flex-shrink-0 plc-w-6 plc-mr-3 pelcro-alert-icon"
             fill="currentColor"
           />
         )}
@@ -32,7 +32,7 @@ export function Alert({
       {onClose && (
         <button
           type="button"
-          className="flex-shrink-0 w-6 text-white hover:text-gray-300 pelcro-modal-close pelcro-alert-close-btn"
+          className="plc-flex-shrink-0 plc-w-6 plc-text-white hover:plc-text-gray-300 pelcro-modal-close pelcro-alert-close-btn"
           aria-label="close modal"
           onClick={onClose}
         >

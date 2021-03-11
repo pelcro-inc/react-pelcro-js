@@ -14,7 +14,7 @@ export const ApplyCouponButton = ({ children }) => {
 
   return (
     <Button
-      className="text-sm text-green-500 uppercase border border-gray-300 disabled:text-white disabled:bg-gray-200 hover:text-white bg-gray-50"
+      className="plc-text-sm plc-text-green-500 plc-uppercase plc-border plc-border-gray-300 disabled:plc-text-white disabled:plc-bg-gray-200 hover:plc-text-white plc-bg-gray-50"
       variant="outline"
       onClick={onApplyCouponCode}
       disabled={!couponCode || disableCouponButton}

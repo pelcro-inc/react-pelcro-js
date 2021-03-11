@@ -61,22 +61,22 @@ export class OrderConfirmModal extends Component {
     return (
       <Modal
         id="pelcro-order-confirm-modal"
-        className="border-t-8 border-green-500 "
+        className="plc-border-t-8 plc-border-green-500 "
       >
         <ModalBody>
           <div id="pelcro-order-confirm-view">
-            <div className="flex flex-col items-center">
-              <CheckMarkOutlineIcon className="w-32 my-4 text-green-500" />
-              <div className="text-center text-gray-700">
-                <h4 className="mb-4 text-3xl text-green-500">
+            <div className="plc-flex plc-flex-col plc-items-center">
+              <CheckMarkOutlineIcon className="plc-w-32 plc-my-4 plc-text-green-500" />
+              <div className="plc-text-center plc-text-gray-700">
+                <h4 className="plc-mb-4 plc-text-3xl plc-text-green-500">
                   {this.locale("messages.orderConfirmed.title")}
                 </h4>
                 <p>{this.locale("messages.orderConfirmed.body")}</p>
                 <p>{this.locale("messages.haveQuestions")}</p>
               </div>
             </div>
-            <div className="mt-5 pelcro-order-summary-wrapper">
-              <p className="font-bold pelcro-order-summary-title">
+            <div className="plc-mt-5 pelcro-order-summary-wrapper">
+              <p className="plc-font-bold pelcro-order-summary-title">
                 Order summary
               </p>
               {this.state.products.map((product) => {
@@ -85,23 +85,23 @@ export class OrderConfirmModal extends Component {
                     <div
                       key={product.id}
                       id={`pelcro-summary-product-${product.id}`}
-                      className="flex items-center pt-2 mt-2 border-t border-gray-400 min-h-12 justify-evenly pelcro-summary-product-wrapper"
+                      className="plc-flex plc-items-center plc-pt-2 plc-mt-2 plc-border-t plc-border-gray-400 plc-min-h-12 plc-justify-evenly pelcro-summary-product-wrapper"
                     >
-                      <div className="w-1/4 pelcro-summary-image-wrapper">
+                      <div className="plc-w-1/4 pelcro-summary-image-wrapper">
                         {product.image && (
                           <Badge content={product.quantity}>
                             <img
-                              className="object-contain w-20 h-20 pelcro-summary-product-image"
+                              className="plc-object-contain plc-w-20 plc-h-20 pelcro-summary-product-image"
                               alt={`image of ${product.name}`}
                               src={product.image}
                             />
                           </Badge>
                         )}
                       </div>
-                      <div className="w-1/2 break-words pelcro-summary-product-name">
+                      <div className="plc-w-1/2 plc-break-words pelcro-summary-product-name">
                         {product.name}
                       </div>
-                      <div className="w-1/5 text-center pelcro-summary-product-price">
+                      <div className="plc-w-1/5 plc-text-center pelcro-summary-product-price">
                         {parseFloat(
                           (product.price / 100) * product.quantity
                         ).toLocaleString("fr-CA", {
@@ -114,8 +114,8 @@ export class OrderConfirmModal extends Component {
                 );
               })}
 
-              <div className="flex items-center justify-end pt-2 mt-2 font-bold border-t border-gray-400 pelcro-summary-total-wrapper">
-                <p className="mr-1 pelcro-summary-total-text">
+              <div className="plc-flex plc-items-center plc-justify-end plc-pt-2 plc-mt-2 plc-font-bold plc-border-t plc-border-gray-400 pelcro-summary-total-wrapper">
+                <p className="plc-mr-1 pelcro-summary-total-text">
                   Total:{" "}
                 </p>
                 <p className="pelcro-summary-total">
@@ -123,7 +123,7 @@ export class OrderConfirmModal extends Component {
                 </p>
               </div>
             </div>
-            <div className="flex justify-center mt-6">
+            <div className="plc-flex plc-justify-center plc-mt-6">
               <Button
                 id="pelcro-submit"
                 onClick={this.props.onClose}

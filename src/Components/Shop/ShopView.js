@@ -9,12 +9,12 @@ export const ShopView = (props) => {
   return (
     <div id="pelcro-shop-view">
       <ShopContainer {...props}>
-        <div className="grid justify-center rounded justify-items-center gap-y-5 gap-x-3 pelcro-shop-products">
+        <div className="plc-grid plc-justify-center plc-rounded plc-justify-items-center plc-gap-y-5 plc-gap-x-3 pelcro-shop-products">
           {props.products.map((product) => {
             return (
               <div
                 key={product.id}
-                className="flex flex-col items-center p-2 m-3 border border-gray-400 border-solid rounded-md w-max pelcro-shop-product-wrapper"
+                className="plc-flex plc-flex-col plc-items-center plc-p-2 plc-m-3 plc-border plc-border-gray-400 plc-border-solid plc-rounded-md plc-w-max pelcro-shop-product-wrapper"
               >
                 {product.image && (
                   <img
@@ -23,17 +23,17 @@ export const ShopView = (props) => {
                     src={product.image}
                   />
                 )}
-                <div className="flex flex-col items-center mt-auto pelcro-shop-product-info-wrapper">
-                  <p className="font-bold pelcro-shop-product-name">
+                <div className="plc-flex plc-flex-col plc-items-center plc-mt-auto pelcro-shop-product-info-wrapper">
+                  <p className="plc-font-bold pelcro-shop-product-name">
                     {product.name}
                   </p>
-                  <p className="font-bold pelcro-shop-product-description">
+                  <p className="plc-font-bold pelcro-shop-product-description">
                     {product.description}
                   </p>
                   <ShopSelectProductButton
                     product={product}
                     name={t("buttons.select")}
-                    className="mt-2"
+                    className="plc-mt-2"
                   />
                 </div>
               </div>

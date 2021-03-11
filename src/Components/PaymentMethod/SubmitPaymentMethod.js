@@ -21,7 +21,7 @@ export const SubmitPaymentMethod = ({ children }) => {
 
   return (
     <Button
-      className="py-3"
+      className="plc-py-3"
       variant="solid"
       isLoading={isLoading}
       isFullWidth={true}
@@ -30,7 +30,7 @@ export const SubmitPaymentMethod = ({ children }) => {
     >
       {/* Show price on button only if there's a selected plan */}
       {currentPlan ? (
-        <span className="capitalize ">
+        <span className="plc-capitalize ">
           {t("labels.pay")} {priceFormatted && priceFormatted}
         </span>
       ) : (
