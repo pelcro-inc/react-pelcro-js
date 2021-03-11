@@ -49,7 +49,7 @@ Accordion.item = function AccordionItem({
     <div
       onClick={() => setActiveMenu(name)}
       id={name}
-      className={`plc-border-l-2 plc-border-transparent plc-border-solid group
+      className={`plc-border-l-2 plc-border-transparent plc-border-solid plc-group
         ${
           isActive
             ? "plc-border-solid plc-bg-grey-200 plc-border-primary-400"
