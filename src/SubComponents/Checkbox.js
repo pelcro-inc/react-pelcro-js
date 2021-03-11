@@ -12,7 +12,7 @@ export function Checkbox({
       <input
         type="checkbox"
         id={id}
-        className={`plc-text-primary-500 checked:plc-border-transparent plc-rounded focus:plc-outline-none focus:plc-ring-2 focus:plc-ring-offset-2 focus:plc-ring-primary-300 text-md disabled:plc-cursor-not-allowed disabled:plc-text-gray-300 pelcro-checkbox-input ${inputClassName}`}
+        className={`plc-text-primary-500 checked:plc-border-transparent plc-rounded focus:plc-outline-none focus:plc-ring-2 focus:plc-ring-offset-2 focus:plc-ring-primary-300 plc-text-md disabled:plc-cursor-not-allowed disabled:plc-text-gray-300 pelcro-checkbox-input ${inputClassName}`}
         {...otherProps}
       />
       <label

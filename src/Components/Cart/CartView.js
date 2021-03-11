@@ -33,7 +33,7 @@ export const CartView = (props) => {
                     <div
                       key={product.id}
                       id={`pelcro-cart-product-${product.id}`}
-                      className="plc-flex plc-items-center plc-pt-2 plc-mt-2 plc-border-t plc-border-gray-400 min-h-12 plc-justify-evenly pelcro-cart-product-wrapper"
+                      className="plc-flex plc-items-center plc-pt-2 plc-mt-2 plc-border-t plc-border-gray-400 plc-min-h-12 plc-justify-evenly pelcro-cart-product-wrapper"
                     >
                       <div className="plc-w-1/4 pelcro-cart-image-wrapper">
                         {product.image && (
