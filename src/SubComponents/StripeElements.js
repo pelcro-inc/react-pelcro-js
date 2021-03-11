@@ -19,14 +19,16 @@ export const PelcroCardNumber = (props) => {
   const { t } = useTranslation("checkoutForm");
 
   return (
-    <label>
-      {t("labels.card")} *
+    <>
+      <label htmlFor="pelcro-input-card-number">
+        {t("labels.card")} *
+      </label>
       <CardNumberElement
         id="pelcro-input-card-number"
         classes={StripeInputStyle}
         {...props}
       />
-    </label>
+    </>
   );
 };
 
@@ -34,14 +36,16 @@ export const PelcroCardCVC = (props) => {
   const { t } = useTranslation("checkoutForm");
 
   return (
-    <label>
-      {t("labels.CVC")} *
+    <>
+      <label htmlFor="pelcro-input-cvc-number">
+        {t("labels.CVC")} *
+      </label>
       <CardCVCElement
         id="pelcro-input-cvc-number"
         classes={StripeInputStyle}
         {...props}
       />
-    </label>
+    </>
   );
 };
 
@@ -49,14 +53,16 @@ export const PelcroCardExpiry = (props) => {
   const { t } = useTranslation("checkoutForm");
 
   return (
-    <label>
-      {t("labels.date")} *
+    <>
+      <label htmlFor="pelcro-input-expiry-date">
+        {t("labels.date")} *
+      </label>
       <CardExpiryElement
         id="pelcro-input-expiry-date"
         classes={StripeInputStyle}
         {...props}
       />
-    </label>
+    </>
   );
 };
 
