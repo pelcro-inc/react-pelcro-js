@@ -276,6 +276,7 @@ class Dashboard extends Component {
                   icon={<XCircleIcon />}
                   onClick={onCancelClick}
                   disabled={this.state.disableSubmit}
+                  data-key={sub.id}
                 >
                   {this.locale("labels.unsubscribe")}
                 </Button>
@@ -287,6 +288,7 @@ class Dashboard extends Component {
                   icon={<RefreshIcon />}
                   onClick={onReactivateClick}
                   disabled={this.state.disableSubmit}
+                  data-key={sub.id}
                 >
                   {this.locale("labels.reactivate")}
                 </Button>
@@ -298,6 +300,7 @@ class Dashboard extends Component {
                   icon={<RefreshIcon />}
                   onClick={onRenewClick}
                   disabled={this.state.disableSubmit}
+                  data-key={sub.id}
                 >
                   {this.locale("labels.renew")}
                 </Button>
@@ -452,6 +455,7 @@ class Dashboard extends Component {
                 className="text-blue-400 focus:ring-blue-300"
                 onClick={onRenewClick}
                 disabled={this.state.disableSubmit}
+                data-key={recipient.id}
               >
                 {this.locale("labels.renew")}
               </Button>
