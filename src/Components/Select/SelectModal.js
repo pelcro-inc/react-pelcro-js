@@ -110,33 +110,33 @@ class SelectModal extends Component {
       return (
         <div
           key={product.id}
-          className="p-2 mt-4 border border-gray-500 border-solid rounded pelcro-select-product-wrapper"
+          className="plc-p-2 plc-mt-4 plc-border plc-border-gray-500 plc-border-solid plc-rounded pelcro-select-product-wrapper"
         >
           {product.image && (
             <img
               alt={`image of ${product.name}`}
               src={product.image}
-              className="object-contain w-1/4 pelcro-select-product-image"
+              className="plc-object-contain plc-w-1/4 pelcro-select-product-image"
             />
           )}
 
           <div
-            className={`flex flex-wrap ${
-              product.image ? "w-3/4" : "w-full"
+            className={`plc-flex plc-flex-wrap ${
+              product.image ? "plc-w-3/4" : "plc-w-full"
             }`}
           >
-            <div className="w-full pelcro-select-product-header">
-              <p className="font-bold pelcro-select-product-title">
+            <div className="plc-w-full pelcro-select-product-header">
+              <p className="plc-font-bold pelcro-select-product-title">
                 {product.name}
               </p>
-              <p className="text-xs pelcro-select-product-description">
+              <p className="plc-text-xs pelcro-select-product-description">
                 {product.description}
               </p>
             </div>
 
-            <div className="flex items-end w-full mt-3">
+            <div className="plc-flex plc-items-end plc-w-full plc-mt-3">
               {product.plans && (
-                <p className="w-1/2 text-xs pelcro-select-product-cost">
+                <p className="plc-w-1/2 plc-text-xs pelcro-select-product-cost">
                   {this.locale("labels.startingAt")}{" "}
                   {this.countStartPrice(product.plans)}
                 </p>
@@ -145,7 +145,7 @@ class SelectModal extends Component {
                 onClick={productButtonCallback}
                 data-key={product.id}
                 id="pelcro-select-product-back-button"
-                className="ml-auto text-xs"
+                className="plc-ml-auto plc-text-xs"
               >
                 {productButtonLabel}
               </Button>
@@ -162,11 +162,11 @@ class SelectModal extends Component {
       return (
         <div
           key={plan.id}
-          className="p-2 mx-3 mt-2 border border-gray-400 border-solid rounded pelcro-select-plan-wrapper"
+          className="plc-p-2 plc-mx-3 plc-mt-2 plc-border plc-border-gray-400 plc-border-solid plc-rounded pelcro-select-plan-wrapper"
         >
           <Radio
-            inputClassName="self-start pelcro-select-plan-radio"
-            labelClassName="cursor-pointer w-full"
+            inputClassName="plc-self-start pelcro-select-plan-radio"
+            labelClassName="plc-cursor-pointer plc-w-full"
             id={`pelcro-select-plan-${plan.id}`}
             name="plan"
             checked={isChecked}
@@ -174,14 +174,14 @@ class SelectModal extends Component {
             onChange={this.selectPlan}
           >
             <div>
-              <p className="font-bold pelcro-select-plan-title">
+              <p className="plc-font-bold pelcro-select-plan-title">
                 {plan.nickname}
               </p>
-              <p className="text-xs pelcro-select-plan-description">
+              <p className="plc-text-xs pelcro-select-plan-description">
                 {plan.description}
               </p>
             </div>
-            <p className="mt-3 font-bold pelcro-select-plan-price">
+            <p className="plc-mt-3 plc-font-bold pelcro-select-plan-price">
               {plan.amount_formatted}
             </p>
           </Radio>
@@ -279,7 +279,7 @@ class SelectModal extends Component {
         />
         <ModalBody>
           <div id="pelcro-selection-view">
-            <div className="flex flex-col items-center text-lg font-semibold text-center pelcro-title-wrapper">
+            <div className="plc-flex plc-flex-col plc-items-center plc-text-lg plc-font-semibold plc-text-center pelcro-title-wrapper">
               <h4>
                 {(this.product &&
                   this.product.paywall.select_title) ||
@@ -300,11 +300,11 @@ class SelectModal extends Component {
 
             {this.state.mode === "plan" && (
               <>
-                <div className="overflow-y-scroll max-h-72 pelcro-select-plans-wrapper">
+                <div className="plc-overflow-y-scroll plc-max-h-72 pelcro-select-plans-wrapper">
                   {this.renderPlans()}
                 </div>
                 {!disableGifting && (
-                  <div className="flex justify-center mt-2">
+                  <div className="plc-flex plc-justify-center plc-mt-2">
                     <Checkbox
                       onChange={this.onIsGiftChange}
                       checked={this.state.isGift}
@@ -319,7 +319,7 @@ class SelectModal extends Component {
                   onClick={this.submitOption}
                   isFullWidth={true}
                   id="pelcro-submit"
-                  className="mt-2"
+                  className="plc-mt-2"
                 >
                   {this.locale("buttons.next")}
                 </Button>

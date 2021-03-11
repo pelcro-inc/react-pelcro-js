@@ -10,9 +10,9 @@ import { store } from "../Components/PaymentMethod/PaymentMethodContainer";
 
 const StripeInputStyle = {
   base:
-    "w-full p-3 border border-gray-300 appearance-none outline-none rounded-sm bg-gray-50 pelcro-input-input",
-  focus: "ring-1 ring-blue-400",
-  invalid: "ring-1 ring-red-300 pelcro-input-invalid"
+    "plc-w-full plc-p-3 plc-border plc-border-gray-300 plc-appearance-none plc-outline-none plc-rounded-sm plc-bg-gray-50 pelcro-input-input",
+  focus: "plc-ring-1 plc-ring-blue-400",
+  invalid: "plc-ring-1 plc-ring-red-300 pelcro-input-invalid"
 };
 
 export const PelcroCardNumber = (props) => {

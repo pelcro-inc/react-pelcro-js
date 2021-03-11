@@ -10,7 +10,7 @@ export const DiscountedPrice = () => {
 
   if (percentOff) {
     return (
-      <div className="my-2">
+      <div className="plc-my-2">
         (-{percentOff}){" "}
         {getFormattedPriceByLocal(
           updatedPrice,

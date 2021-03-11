@@ -49,34 +49,34 @@ Accordion.item = function AccordionItem({
     <div
       onClick={() => setActiveMenu(name)}
       id={name}
-      className={`border-l-2 border-transparent border-solid group
+      className={`plc-border-l-2 plc-border-transparent plc-border-solid group
         ${
           isActive
-            ? "border-solid bg-grey-200 border-primary-400"
-            : "hover:bg-primary-50"
+            ? "plc-border-solid plc-bg-grey-200 plc-border-primary-400"
+            : "hover:plc-bg-primary-50"
         }`}
     >
-      <header className="flex items-center justify-between p-5 px-8 cursor-pointer select-none">
+      <header className="plc-flex plc-items-center plc-justify-between plc-p-5 plc-px-8 plc-cursor-pointer plc-select-none">
         <span
-          className={`flex text-lg ${
-            isActive ? "text-primary-400" : "text-gray-500"
+          className={`plc-flex plc-text-lg ${
+            isActive ? "plc-text-primary-400" : "plc-text-gray-500"
           }`}
         >
           {icon}
           {title}
         </span>
         <div
-          className={`flex items-center justify-center transition-transform ease-out transform rounded-full w-7 h-7 ${
+          className={`plc-flex plc-items-center plc-justify-center plc-transition-transform plc-ease-out plc-transform plc-rounded-full plc-w-7 plc-h-7 ${
             isActive
-              ? "flex place-items-center w-7 h-7 p-1 bg-primary-400 rounded-full"
-              : "group-hover:translate-x-1"
+              ? "plc-flex plc-place-items-center plc-w-7 plc-h-7 plc-p-1 plc-bg-primary-400 plc-rounded-full"
+              : "group-hover:plc-translate-x-1"
           }`}
         >
           <span
-            className={`transition ease-out  ${
+            className={`plc-transition plc-ease-out  ${
               isActive
-                ? "text-white transform rotate-90"
-                : "text-gray-600  group-hover:text-primary-400"
+                ? "plc-text-white plc-transform plc-rotate-90"
+                : "plc-text-gray-600  group-hover:plc-text-primary-400"
             }`}
           >
             <ChevronRightIcon />
@@ -85,8 +85,10 @@ Accordion.item = function AccordionItem({
       </header>
 
       <div
-        className={`ml-8 overflow-auto transition-transform origin-right transform ${
-          isActive ? "max-h-80 scale-x-100" : "max-h-0 scale-x-0"
+        className={`plc-ml-8 plc-overflow-auto plc-transition-transform plc-origin-right plc-transform ${
+          isActive
+            ? "plc-max-h-80 plc-scale-x-100"
+            : "plc-max-h-0 plc-scale-x-0"
         }`}
       >
         {content}

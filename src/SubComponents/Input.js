@@ -14,10 +14,10 @@ export function Input({
   ...otherProps
 }) {
   return (
-    <div className={`w-full ${wrapperClassName}`}>
+    <div className={`plc-w-full ${wrapperClassName}`}>
       <label
         htmlFor={id}
-        className={`text-gray-700 pelcro-input-label ${labelClassName}`}
+        className={`plc-text-gray-700 pelcro-input-label ${labelClassName}`}
       >
         {`${label}${required ? "*" : ""}`}
       </label>
@@ -25,9 +25,11 @@ export function Input({
         type="text"
         id={id}
         className={`${
-          label && "mt-1"
-        } w-full border border-gray-300 bg-gray-50 p-3 appearance-none outline-none rounded-sm focus:ring-1 focus:ring-blue-400 disabled:bg-gray-300 disabled:cursor-not-allowed pelcro-input-input ${className} ${
-          error ? "ring-1 ring-red-500 pelcro-input-invalid" : ""
+          label && "plc-mt-1"
+        } plc-w-full plc-border plc-border-gray-300 plc-bg-gray-50 plc-p-3 plc-appearance-none plc-outline-none plc-rounded-sm focus:plc-ring-1 focus:plc-ring-blue-400 disabled:plc-bg-gray-300 disabled:plc-cursor-not-allowed pelcro-input-input ${className} ${
+          error
+            ? "plc-ring-1 plc-ring-red-500 pelcro-input-invalid"
+            : ""
         }`}
         aria-describedby={errorId}
         aria-invalid={Boolean(error)}
@@ -37,7 +39,7 @@ export function Input({
         <p
           id={errorId}
           aria-live="assertive"
-          className={`h-3 mt-1 mb-2 text-sm text-red-500 normal-case pelcro-field-error ${errorClassName}`}
+          className={`plc-h-3 plc-mt-1 plc-mb-2 plc-text-sm plc-text-red-500 plc-normal-case pelcro-field-error ${errorClassName}`}
         >
           {error}
         </p>

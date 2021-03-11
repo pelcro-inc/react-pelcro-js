@@ -1,6 +1,6 @@
 @layer components {
   .pelcro-modal-open {
-    @apply overflow-hidden;
+    @apply plc-overflow-hidden;
   }
 
   .pelcro-root .pelcro-modal-overlay {

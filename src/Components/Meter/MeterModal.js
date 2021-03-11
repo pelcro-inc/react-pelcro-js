@@ -9,11 +9,11 @@ import { MeterView } from "./MeterView";
 export const MeterModal = (props) => (
   <div
     id="pelcro-view-meter"
-    className="fixed bottom-0 right-0 w-full p-4 bg-white border-t-4 rounded shadow-md motion-safe:animate-slideInBottom sm:m-4 sm:max-w-md z-max border-primary-500"
+    className="plc-fixed plc-bottom-0 plc-right-0 plc-w-full plc-p-4 plc-bg-white plc-border-t-4 plc-rounded plc-shadow-md motion-safe:plc-animate-slideInBottom sm:plc-m-4 sm:plc-max-w-md plc-z-max plc-border-primary-500"
   >
     <button
       type="button"
-      className="absolute top-0 text-2xl text-gray-500 right-1 pelcro-close-btn"
+      className="plc-absolute plc-top-0 plc-text-2xl plc-text-gray-500 plc-right-1 pelcro-close-btn"
       aria-label="Close"
       onClick={props.onClose}
     >
