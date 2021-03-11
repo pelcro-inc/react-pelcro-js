@@ -5,15 +5,15 @@ import React from "react";
 export const DashboardOpenButton = (props) => {
   const { openDashboard } = props;
   return (
-    <div className="pelcro-dashboard-open-btn">
+    <div className="plc-fixed plc-right-4 plc-bottom-4 pelcro-open-dashboard-btn">
       <button
-        className="plc-border-2 plc-border-primary-300"
+        className="plc-bg-white plc-border-2 plc-rounded-full focus:plc-outline-none plc-border-primary-300"
         name="menu"
         id="pelcro-view-menu"
         onClick={openDashboard}
       >
         <svg
-          className="plc-text-primary-400 hover:plc-text-primary-500"
+          className="plc-w-10 plc-h-10 plc-text-primary-400 hover:plc-text-primary-500"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"
           fill="currentColor"
