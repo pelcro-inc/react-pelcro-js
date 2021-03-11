@@ -843,7 +843,7 @@ class App extends Component {
               setAddress={this.setAddress}
               setSubscriptionIdToRenew={this.setSubscriptionIdToRenew}
               setIsRenewingGift={this.setIsRenewingGift}
-              resetView={this.resetView}
+              onClose={this.resetView}
               logout={this.logout}
               setView={this.setView}
               setProductAndPlan={this.setProductAndPlan}

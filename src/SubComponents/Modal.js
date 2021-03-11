@@ -17,9 +17,9 @@ export function Modal({
         {...otherProps}
       >
         <div className="w-full pelcro-modal-content">
-          {children.find(({ type }) => type.name === "ModalHeader")}
-          {children.find(({ type }) => type.name === "ModalBody")}
-          {children.find(({ type }) => type.name === "ModalFooter")}
+          {children.find(({ type }) => type === ModalHeader)}
+          {children.find(({ type }) => type === ModalBody)}
+          {children.find(({ type }) => type === ModalFooter)}
         </div>
       </div>
     </div>
