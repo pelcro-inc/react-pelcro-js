@@ -577,7 +577,7 @@ class Dashboard extends Component {
     const { isOpen } = this.state;
     return (
       <Transition
-        className="plc-fixed plc-inset-y-0 plc-right-0 plc-h-full plc-max-w-xl plc-overflow-y-auto plc-text-left plc-bg-white plc-shadow-xl z-max"
+        className="plc-fixed plc-inset-y-0 plc-right-0 plc-h-full plc-max-w-xl plc-overflow-y-auto plc-text-left plc-bg-white plc-shadow-xl plc-z-max"
         show={isOpen}
         enter="plc-transform plc-transition plc-duration-500"
         enterFrom="plc-translate-x-full"
