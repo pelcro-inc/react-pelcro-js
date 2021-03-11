@@ -28,5 +28,5 @@ export const MeterModal = (props) => (
 MeterModal.propTypes = {
   plan: PropTypes.object,
   product: PropTypes.object,
-  resetView: PropTypes.func
+  onClose: PropTypes.func
 };

@@ -81,7 +81,7 @@ class Dashboard extends Component {
           nonInteraction: true
         });
 
-        this.props.resetView();
+        this.props.onClose();
       }
     );
   };
@@ -124,7 +124,7 @@ class Dashboard extends Component {
       },
       (err, res) => {
         this.setState({ disableSubmit: false });
-        this.props.resetView();
+        this.props.onClose();
       }
     );
   };
@@ -567,7 +567,7 @@ class Dashboard extends Component {
     const { isOpen } = this.state;
     return (
       <Transition
-        className="fixed inset-y-0 right-0 z-max h-full max-w-xl overflow-y-auto text-left bg-white shadow-xl"
+        className="fixed inset-y-0 right-0 h-full max-w-xl overflow-y-auto text-left bg-white shadow-xl z-max"
         show={isOpen}
         enter="transform transition duration-500"
         enterFrom="translate-x-full"
@@ -575,7 +575,7 @@ class Dashboard extends Component {
         leave="transform transition duration-500"
         leaveFrom="translate-x-0"
         leaveTo="translate-x-full"
-        afterLeave={this.props.resetView}
+        afterLeave={this.props.onClose}
       >
         <div id="pelcro-view-dashboard">
           <header className="flex flex-col p-2 bg-primary-500 h-52">
