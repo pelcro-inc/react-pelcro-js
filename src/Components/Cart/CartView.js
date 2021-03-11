@@ -67,7 +67,6 @@ export const CartView = (props) => {
                             fill="white"
                             aria-hidden="true"
                             focusable="false"
-                            className="pointer-events-none"
                           />
                         }
                       />

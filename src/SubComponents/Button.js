@@ -29,7 +29,15 @@ export function Button({
           focusable="false"
         />
       )}
-      {!isLoading && <div className="mr-2">{icon}</div>}
+      {!isLoading && (
+        <div
+          className={`${
+            variant === "icon" ? "" : "mr-2"
+          } pointer-events-none`}
+        >
+          {icon}
+        </div>
+      )}
       {children}
     </button>
   );
