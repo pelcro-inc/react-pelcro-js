@@ -8,7 +8,7 @@ export function Modal({
   ...otherProps
 }) {
   return (
-    <div className="absolute top-0 left-0 flex items-center justify-center w-full h-full overflow-auto bg-black pelcro-modal-overlay z-max bg-opacity-60">
+    <div className="fixed top-0 left-0 flex items-center justify-center w-full h-full overflow-auto bg-black pelcro-modal-overlay z-max bg-opacity-60">
       <div
         className={`container absolute top-0 flex flex-col items-center max-w-lg bg-white rounded-md md:mt-8 pelcro-modal ${className}`}
         role="dialog"
