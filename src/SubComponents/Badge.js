@@ -9,13 +9,13 @@ export function Badge({
 }) {
   return (
     <div
-      className={`relative w-max pelcro-badge-wrapper ${className}`}
+      className={`plc-relative plc-w-max pelcro-badge-wrapper ${className}`}
       {...otherProps}
     >
       {children}
       {content && (
         <span
-          className={`flex flex-wrap justify-center items-center absolute font-bold rounded-full text-sm text-white bg-primary-500 w-1/4 h-1/4 pelcro-badge ${badgeClassName}`}
+          className={`plc-flex plc-flex-wrap plc-justify-center plc-items-center plc-absolute plc-font-bold plc-rounded-full plc-text-sm plc-text-white plc-bg-primary-500 plc-w-1/4 plc-h-1/4 pelcro-badge ${badgeClassName}`}
         >
           {content}
         </span>

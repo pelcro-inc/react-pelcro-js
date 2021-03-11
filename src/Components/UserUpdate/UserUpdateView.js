@@ -13,20 +13,20 @@ export const UserUpdateView = (props) => {
 
   return (
     <div id="pelcro-user-update-view">
-      <div className="flex flex-col items-center text-lg font-semibold text-center pelcro-title-wrapper">
+      <div className="plc-flex plc-flex-col plc-items-center plc-text-lg plc-font-semibold plc-text-center pelcro-title-wrapper">
         <h4>{t("labels.title")}</h4>
         <p>{t("labels.subtitle")}</p>
       </div>
-      <div className="mt-2 pelcro-form">
+      <div className="plc-mt-2 pelcro-form">
         <UserUpdateContainer {...props}>
           <AlertWithContext />
-          <div className="flex">
+          <div className="plc-flex">
             <UserUpdateEmail
               placeholder={t("labels.email")}
               label={t("labels.email")}
             />
           </div>
-          <div className="flex">
+          <div className="plc-flex">
             <UserUpdateFirstName
               autoComplete="first-name"
               id="pelcro-input-first-name"
@@ -35,7 +35,7 @@ export const UserUpdateView = (props) => {
               label={t("labels.firstName")}
             />
             <UserUpdateLastName
-              wrapperClassName="ml-3"
+              wrapperClassName="plc-ml-3"
               autoComplete="last-name"
               id="pelcro-input-last-name"
               errorId="pelcro-input-last-name-error"
@@ -43,7 +43,7 @@ export const UserUpdateView = (props) => {
               label={t("labels.lastName")}
             />
           </div>
-          <div className="flex">
+          <div className="plc-flex">
             <UserUpdatePhone
               id="pelcro-input-phone"
               errorId="pelcro-input-phone-error"
@@ -52,7 +52,7 @@ export const UserUpdateView = (props) => {
             />
           </div>
           <UserUpdateButton
-            className="mt-2"
+            className="plc-mt-2"
             name={t("labels.submit")}
             id="pelcro-submit"
           />

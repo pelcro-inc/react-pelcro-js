@@ -4,6 +4,7 @@ module.exports = {
   purge: ["./src/**/*.html", "./src/**/*.js", "./src/**/*.jsx"],
   presets: [],
   important: ".pelcro-root",
+  prefix: "plc-",
   darkMode: false, // or 'media' or 'class'
   theme: {
     screens: {

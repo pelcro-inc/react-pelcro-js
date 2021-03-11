@@ -15,13 +15,13 @@ export const AddressCreateView = (props) => {
   const { t } = useTranslation("address");
   return (
     <div id="pelcro-address-create-view">
-      <div className="flex flex-col items-center text-lg font-semibold text-center pelcro-title-wrapper">
+      <div className="plc-flex plc-flex-col plc-items-center plc-text-lg plc-font-semibold plc-text-center pelcro-title-wrapper">
         <h4>{t("title")}</h4>
       </div>
-      <div className="mt-2 pelcro-form">
+      <div className="plc-mt-2 pelcro-form">
         <AddressCreateContainer {...props}>
           <AlertWithContext />
-          <div className="flex">
+          <div className="plc-flex">
             <AddressCreateFirstName
               autoComplete="first-name"
               id="pelcro-input-first-name"
@@ -31,7 +31,7 @@ export const AddressCreateView = (props) => {
               label={t("labels.firstName")}
             />
             <AddressCreateLastName
-              wrapperClassName="ml-3"
+              wrapperClassName="plc-ml-3"
               autoComplete="last-name"
               id="pelcro-input-last-name"
               errorId="pelcro-input-last-name-error"
@@ -40,7 +40,7 @@ export const AddressCreateView = (props) => {
               label={t("labels.lastName")}
             />
           </div>
-          <div className="flex">
+          <div className="plc-flex">
             <AddressCreateLine1
               autoComplete="street-address"
               id="pelcro-input-line1"
@@ -50,7 +50,7 @@ export const AddressCreateView = (props) => {
               label={t("labels.address")}
             />
           </div>
-          <div className="flex">
+          <div className="plc-flex">
             <AddressCreatePostalCode
               autoComplete="postal-code"
               id="pelcro-input-postal-code"
@@ -60,7 +60,7 @@ export const AddressCreateView = (props) => {
               label={t("labels.code")}
             />
             <AddressCreateCity
-              wrapperClassName="ml-3"
+              wrapperClassName="plc-ml-3"
               autoComplete="address-level2"
               id="pelcro-input-city"
               errorId="pelcro-input-city-error"
@@ -69,7 +69,7 @@ export const AddressCreateView = (props) => {
               required
             />
           </div>
-          <div className="flex">
+          <div className="plc-flex">
             <AddressCreateCountrySelect
               id="pelcro-input-country"
               errorId="pelcro-input-country-error"
@@ -77,7 +77,7 @@ export const AddressCreateView = (props) => {
               required
             />
             <AddressCreateStateSelect
-              wrapperClassName="ml-3"
+              wrapperClassName="plc-ml-3"
               label={t("labels.region")}
               id="pelcro-input-state"
               errorId="pelcro-input-state-error"
@@ -86,7 +86,7 @@ export const AddressCreateView = (props) => {
           </div>
           <p className="pelcro-footnote">* {t("labels.required")}</p>
           <AddressCreateSubmit
-            className="mt-2"
+            className="plc-mt-2"
             name={t("buttons.submit")}
             id="pelcro-submit"
           />

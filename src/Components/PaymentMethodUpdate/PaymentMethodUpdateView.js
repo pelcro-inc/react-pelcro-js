@@ -7,8 +7,8 @@ export function PaymentMethodUpdateView(props) {
 
   return (
     <div id="pelcro-payment-method-update-view">
-      <div className="text-center">
-        <h4 className="mb-2 text-xl">{t("title")}</h4>
+      <div className="plc-text-center">
+        <h4 className="plc-mb-2 plc-text-xl">{t("title")}</h4>
         <p>{t("subtitle")}</p>
       </div>
 

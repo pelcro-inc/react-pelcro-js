@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import {
   Modal,
-  ModalHeader,
   ModalBody,
   ModalFooter
 } from "../../SubComponents/Modal";
@@ -20,7 +19,7 @@ export function PaymentSuccessModal({ onDisplay, onClose, product }) {
   return (
     <Modal
       id="pelcro-payment-success-modal"
-      className="border-t-8 border-green-500 "
+      className="plc-border-t-8 plc-border-green-500 "
     >
       <ModalBody>
         <PaymentSuccessView onClose={onClose} product={product} />

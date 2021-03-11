@@ -36,13 +36,13 @@ export function PaymentMethodView({
   const { t } = useTranslation("checkoutForm");
 
   return (
-    <div className="flex flex-col items-center mt-4 sm:px-8 pelcro-payment-block">
-      <div className="flex w-full px-4 py-2 text-center text-green-600 border border-green-400 rounded bg-green-50">
-        <LockIcon className="w-5 mr-1" />
+    <div className="plc-flex plc-flex-col plc-items-center plc-mt-4 sm:plc-px-8 pelcro-payment-block">
+      <div className="plc-flex plc-w-full plc-px-4 plc-py-2 plc-text-center plc-text-green-600 plc-border plc-border-green-400 plc-rounded plc-bg-green-50">
+        <LockIcon className="plc-w-5 plc-mr-1" />
         <span>
           {t("messages.youAreSafe")}
           <Link
-            className="ml-1"
+            className="plc-ml-1"
             target="_blank"
             href="https://www.stripe.com/us/customers"
           >
@@ -51,7 +51,7 @@ export function PaymentMethodView({
         </span>
       </div>
 
-      <div className="w-full mt-2 font-semibold text-gray-600 pelcro-form">
+      <div className="plc-w-full plc-mt-2 plc-font-semibold plc-text-gray-600 pelcro-form">
         <PaymentMethodContainer
           type={type}
           successMessage={successMessage}
@@ -68,22 +68,22 @@ export function PaymentMethodView({
           onFailure={onFailure}
           order={order}
         >
-          <AlertWithContext className="mb-2" />
+          <AlertWithContext className="plc-mb-2" />
           {/* Payment form */}
           <div>
             <PelcroCardNumber />
             <img
               alt="credit_cards"
-              className="h-4 mt-2"
+              className="plc-h-4 plc-mt-2"
               src="https://js.pelcro.com/ui/plugin/main/images/credit_cards.png"
             />
 
-            <div className="flex justify-between my-2">
-              <div className="w-6/12 pr-4">
+            <div className="plc-flex plc-justify-between plc-my-2">
+              <div className="plc-w-6/12 plc-pr-4">
                 <PelcroCardExpiry />
               </div>
 
-              <div className="w-6/12 pl-4">
+              <div className="plc-w-6/12 plc-pl-4">
                 <PelcroCardCVC />
               </div>
             </div>
@@ -97,7 +97,7 @@ export function PaymentMethodView({
             )}
 
             {/* Payment buttons section */}
-            <div className="grid mt-4 gap-y-2">
+            <div className="plc-grid plc-mt-4 plc-gap-y-2">
               <SubmitPaymentMethod />
               {showExternalPaymentMethods && (
                 <>

@@ -11,11 +11,11 @@ export const PasswordResetView = (props) => {
   const { t } = useTranslation("passwordReset");
   return (
     <div id="pelcro-password-reset-view">
-      <div className="flex flex-col items-center text-lg font-semibold text-center pelcro-title-wrapper">
+      <div className="plc-flex plc-flex-col plc-items-center plc-text-lg plc-font-semibold plc-text-center pelcro-title-wrapper">
         <h4>{t("title")}</h4>
         <p>{t("subtitle")}</p>
       </div>
-      <div className="mt-2 pelcro-form">
+      <div className="plc-mt-2 pelcro-form">
         <PasswordResetContainer {...props}>
           <AlertWithContext />
           <PasswordResetEmail
@@ -41,7 +41,7 @@ export const PasswordResetView = (props) => {
           />
 
           <PasswordResetButton
-            className="mt-2"
+            className="plc-mt-2"
             name={t("submit")}
             id="pelcro-submit"
           />

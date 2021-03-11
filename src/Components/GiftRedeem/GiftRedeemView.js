@@ -9,14 +9,14 @@ export const GiftRedeemView = (props) => {
   const { t } = useTranslation("register");
   return (
     <div id="pelcro-gift-redeem-view">
-      <div className="flex flex-col items-center text-lg font-semibold text-center pelcro-title-wrapper">
+      <div className="plc-flex plc-flex-col plc-items-center plc-text-lg plc-font-semibold plc-text-center pelcro-title-wrapper">
         <h4>{t("redeem.titles.firstTitle")}</h4>
         <p>{t("redeem.titles.secondTitle")}</p>
       </div>
-      <div className="mt-2 pelcro-form">
+      <div className="plc-mt-2 pelcro-form">
         <GiftRedeemContainer {...props}>
           <AlertWithContext />
-          <div className="flex">
+          <div className="plc-flex">
             <GiftRedeemCode
               id="pelcro-input-gift-code"
               errorId="pelcro-input-gift-code-error"
@@ -26,7 +26,7 @@ export const GiftRedeemView = (props) => {
             />
           </div>
           <GiftRedeemSubmitButton
-            className="mt-2"
+            className="plc-mt-2"
             id="pelcro-submit"
             name={t("redeem.buttons.redeem")}
           />

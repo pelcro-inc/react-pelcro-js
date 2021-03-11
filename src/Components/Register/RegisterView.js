@@ -15,11 +15,11 @@ export function RegisterView(props) {
 
   return (
     <div id="pelcro-register-view">
-      <div className="flex flex-col items-center text-lg font-semibold text-center pelcro-title-wrapper">
+      <div className="plc-flex plc-flex-col plc-items-center plc-text-lg plc-font-semibold plc-text-center pelcro-title-wrapper">
         <h4>{title}</h4>
         <p>{subtitle}</p>
       </div>
-      <div className="mt-2 pelcro-form">
+      <div className="plc-mt-2 pelcro-form">
         <RegisterContainer {...props}>
           <AlertWithContext />
           <RegisterEmail
@@ -37,7 +37,7 @@ export function RegisterView(props) {
             required
           />
           <RegisterButton
-            className="mt-2"
+            className="plc-mt-2"
             id="pelcro-submit"
             name={t("messages.createAccount")}
           />

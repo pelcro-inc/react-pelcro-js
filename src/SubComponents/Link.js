@@ -8,7 +8,7 @@ export function Link({
 }) {
   return (
     <a
-      className={`underline font-semibold cursor-pointer hover:text-primary-600 pelcro-link ${className}`}
+      className={`plc-underline plc-font-semibold plc-cursor-pointer hover:plc-text-primary-600 pelcro-link ${className}`}
       href={href}
       {...otherProps}
     >
