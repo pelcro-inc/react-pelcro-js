@@ -22,7 +22,7 @@ export const AddressUpdateView = (props) => {
       <div className="plc-mt-2 pelcro-form">
         <AddressUpdateContainer {...props}>
           <AlertWithContext />
-          <div className="plc-flex">
+          <div className="plc-flex plc-space-x-3">
             <AddressUpdateFirstName
               autoComplete="first-name"
               id="pelcro-input-first-name"
@@ -32,7 +32,6 @@ export const AddressUpdateView = (props) => {
               required
             />
             <AddressUpdateLastName
-              wrapperClassName="plc-ml-3"
               autoComplete="last-name"
               id="pelcro-input-last-name"
               errorId="pelcro-input-last-name-error"
@@ -51,7 +50,7 @@ export const AddressUpdateView = (props) => {
               required
             />
           </div>
-          <div className="plc-flex">
+          <div className="plc-flex plc-space-x-3">
             <AddressUpdatePostalCode
               autoComplete="postal-code"
               id="pelcro-input-postal_code"
@@ -61,7 +60,6 @@ export const AddressUpdateView = (props) => {
               required
             />
             <AddressUpdateCity
-              wrapperClassName="plc-ml-3"
               autoComplete="address-level2"
               id="pelcro-input-city"
               errorId="pelcro-input-city-error"
@@ -70,7 +68,7 @@ export const AddressUpdateView = (props) => {
               required
             />
           </div>
-          <div className="plc-flex">
+          <div className="plc-flex plc-space-x-3">
             <AddressUpdateCountrySelect
               id="pelcro-input-country"
               errorId="pelcro-input-country-error"
@@ -78,7 +76,6 @@ export const AddressUpdateView = (props) => {
               required
             />
             <AddressUpdateStateSelect
-              wrapperClassName="plc-ml-3"
               id="pelcro-input-state"
               errorId="pelcro-input-state-error"
               label={t("labels.region")}
