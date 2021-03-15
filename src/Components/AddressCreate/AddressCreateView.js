@@ -69,7 +69,7 @@ export const AddressCreateView = (props) => {
               required
             />
           </div>
-          <div className="plc-flex">
+          <div className="plc-flex plc-space-x-3">
             <AddressCreateCountrySelect
               id="pelcro-input-country"
               errorId="pelcro-input-country-error"
@@ -77,7 +77,6 @@ export const AddressCreateView = (props) => {
               required
             />
             <AddressCreateStateSelect
-              wrapperClassName="plc-ml-3"
               label={t("labels.region")}
               id="pelcro-input-state"
               errorId="pelcro-input-state-error"

@@ -1,5 +1,4 @@
 import React, { useContext, useEffect } from "react";
-import { useTranslation } from "react-i18next";
 import { Loader } from "../SubComponents/Loader";
 import { SET_STATE, SET_STATES } from "../utils/action-types";
 import { showError } from "../utils/showing-error";
@@ -14,7 +13,6 @@ export function StateSelect({
     dispatch,
     state: { country, state, states, loading }
   } = useContext(store);
-  const { t } = useTranslation("address");
 
   useEffect(() => {
     getStateList();
@@ -68,7 +66,7 @@ export function StateSelect({
 
   if (loading || (!createStateItems() && country)) {
     return (
-      <div className="state-select-loader">
+      <div className="plc-w-full plc-flex plc-justify-center plc-items-center pelcro-loader-wrapper">
         <Loader />
       </div>
     );

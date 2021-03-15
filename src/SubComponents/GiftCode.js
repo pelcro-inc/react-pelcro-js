@@ -22,7 +22,7 @@ export function GiftCode({ store, ...otherProps }) {
 
   if (state.loading) {
     return (
-      <div className="state-select-loader">
+      <div className="pelcro-loader-wrapper">
         <Loader />
       </div>
     );

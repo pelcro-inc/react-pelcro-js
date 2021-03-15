@@ -57,7 +57,7 @@ export function CountrySelect({ placeholder, store, ...otherProps }) {
 
   if (loading) {
     return (
-      <div className="state-select-loader">
+      <div className="pelcro-loader-wrapper">
         <Loader />
       </div>
     );
