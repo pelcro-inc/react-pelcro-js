@@ -22,7 +22,7 @@ export const AddressUpdateView = (props) => {
       <div className="plc-mt-2 pelcro-form">
         <AddressUpdateContainer {...props}>
           <AlertWithContext />
-          <div className="plc-flex plc-space-x-3">
+          <div className="plc-flex plc-space-x-3 plc-items-end">
             <AddressUpdateFirstName
               autoComplete="first-name"
               id="pelcro-input-first-name"
@@ -40,7 +40,7 @@ export const AddressUpdateView = (props) => {
               required
             />
           </div>
-          <div className="plc-flex">
+          <div className="plc-flex plc-items-end">
             <AddressUpdateLine1
               autoComplete="street-address"
               id="pelcro-input-line1"
@@ -50,7 +50,7 @@ export const AddressUpdateView = (props) => {
               required
             />
           </div>
-          <div className="plc-flex plc-space-x-3">
+          <div className="plc-flex plc-space-x-3 plc-items-end">
             <AddressUpdatePostalCode
               autoComplete="postal-code"
               id="pelcro-input-postal_code"
@@ -68,7 +68,7 @@ export const AddressUpdateView = (props) => {
               required
             />
           </div>
-          <div className="plc-flex plc-space-x-3">
+          <div className="plc-flex plc-space-x-3 plc-items-end">
             <AddressUpdateCountrySelect
               id="pelcro-input-country"
               errorId="pelcro-input-country-error"

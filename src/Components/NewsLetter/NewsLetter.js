@@ -148,7 +148,7 @@ class DefaultNewsLetter extends Component {
                   {this.state.alert.content}
                 </Alert>
               )}
-              <div className="plc-flex">
+              <div className="plc-flex plc-items-end">
                 <Input
                   value={this.state.first_name}
                   onChange={this.onFirstNameChange}

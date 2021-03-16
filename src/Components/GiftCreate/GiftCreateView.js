@@ -17,7 +17,7 @@ export const GiftCreateView = (props) => {
       <div className="plc-mt-2 pelcro-form">
         <GiftCreateContainer {...props}>
           <AlertWithContext />
-          <div className="plc-flex">
+          <div className="plc-flex plc-items-end">
             <GiftCreateFirstName
               autoComplete="first-name"
               id="pelcro-input-first-name"
@@ -34,7 +34,7 @@ export const GiftCreateView = (props) => {
               label={t("gift.labels.lastName")}
             />
           </div>
-          <div className="plc-flex">
+          <div className="plc-flex plc-items-end">
             <GiftCreateEmail
               id="pelcro-input-email"
               errorId="pelcro-input-email-error"
