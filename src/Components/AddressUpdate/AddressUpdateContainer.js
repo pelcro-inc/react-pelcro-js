@@ -14,12 +14,14 @@ import {
   SET_LAST_NAME,
   SET_TEXT_FIELD,
   SET_STATE,
-  SHOW_ALERT
+  SHOW_ALERT,
+  LOADING
 } from "../../utils/action-types";
 import { getErrorMessages } from "../common/Helpers";
 
 const initialState = {
   disableSubmit: false,
+  isSubmitting: false,
   firstName: "",
   lastName: "",
   line1: "",
@@ -77,6 +79,11 @@ const AddressUpdateContainer = ({
     }
   };
 
+  const enableSubmitButton = () => {
+    dispatch({ type: DISABLE_SUBMIT, payload: false });
+    dispatch({ type: LOADING, payload: false });
+  };
+
   const submitAddress = (
     {
       firstName,
@@ -90,6 +97,8 @@ const AddressUpdateContainer = ({
     },
     dispatch
   ) => {
+    dispatch({ type: LOADING, payload: true });
+
     window.Pelcro.address.update(
       {
         address_id: addressId,
@@ -104,7 +113,7 @@ const AddressUpdateContainer = ({
         postal_code: postalCode
       },
       (err, res) => {
-        dispatch({ type: DISABLE_SUBMIT, payload: false });
+        enableSubmitButton();
         if (err) {
           dispatch({
             type: SHOW_ALERT,
@@ -162,6 +171,12 @@ const AddressUpdateContainer = ({
           return Update({
             ...state,
             alert: action.payload
+          });
+
+        case LOADING:
+          return Update({
+            ...state,
+            isSubmitting: action.payload
           });
 
         case HANDLE_SUBMIT:
