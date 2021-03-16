@@ -334,7 +334,7 @@ class Dashboard extends Component {
                 variant="ghost"
                 isFullWidth={true}
                 icon={<PlusIcon className="plc-w-4 plc-mr-1" />}
-                className="plc-font-semibold plc-tracking-wider plc-uppercase plc-rounded-none plc-text-primary-700 hover:plc-bg-primary-50"
+                className="plc-h-8 plc-font-semibold plc-tracking-wider plc-uppercase plc-rounded-none plc-text-primary-700 hover:plc-bg-primary-50"
                 onClick={this.displayProductSelect}
               >
                 {this.locale("labels.addSubscription")}
@@ -347,7 +347,7 @@ class Dashboard extends Component {
                 variant="ghost"
                 isFullWidth={true}
                 icon={<GiftIcon className="plc-w-4 plc-mr-1" />}
-                className="plc-font-semibold plc-tracking-wider plc-uppercase plc-rounded-none plc-text-primary-700 hover:plc-bg-primary-50"
+                className="plc-h-8 plc-font-semibold plc-tracking-wider plc-uppercase plc-rounded-none plc-text-primary-700 hover:plc-bg-primary-50"
                 onClick={this.displayRedeem}
               >
                 {this.locale("labels.redeemGift")}
@@ -494,8 +494,10 @@ class Dashboard extends Component {
               <Button
                 variant="ghost"
                 isFullWidth={true}
-                icon={<PlusIcon className="plc-w-4 plc-mr-1" />}
-                className="plc-font-semibold plc-tracking-wider plc-uppercase plc-rounded-none plc-text-primary-700 hover:plc-bg-primary-50"
+                icon={
+                  <PlusIcon className="plc-w-4 plc-h-4 plc-mr-1" />
+                }
+                className="plc-h-8 plc-font-semibold plc-tracking-wider plc-uppercase plc-rounded-none plc-text-primary-700 hover:plc-bg-primary-50"
                 onClick={this.displayProductSelect}
               >
                 {this.locale("labels.addGift")}
@@ -556,7 +558,7 @@ class Dashboard extends Component {
                 variant="ghost"
                 isFullWidth={true}
                 icon={<PlusIcon className="plc-w-4 plc-mr-1" />}
-                className="plc-font-semibold plc-tracking-wider plc-uppercase plc-text-primary-700 hover:plc-bg-primary-50"
+                className="plc-h-8 plc-font-semibold plc-tracking-wider plc-uppercase plc-text-primary-700 hover:plc-bg-primary-50"
                 onClick={this.displayAddressCreate}
               >
                 {this.locale("labels.addAddress")}
@@ -595,13 +597,13 @@ class Dashboard extends Component {
             <div className="plc-flex plc-flex-row-reverse">
               <Button
                 variant="icon"
-                className="plc-w-9 plc-h-9 plc-text-gray-100"
+                className="plc-text-gray-100 plc-w-9 plc-h-9"
                 icon={<XIcon />}
                 onClick={this.closeDashboard}
               ></Button>
             </div>
 
-            <div className="plc-flex plc-flex-col plc-flex-grow plc-justify-between plc-px-6">
+            <div className="plc-flex plc-flex-col plc-justify-between plc-flex-grow plc-px-6">
               <div className="plc-flex plc-flex-col plc-flex-grow">
                 {userHasName && (
                   <p className="plc-m-0 plc-text-3xl plc-font-bold plc-text-white text">
@@ -645,7 +647,7 @@ class Dashboard extends Component {
           </header>
 
           <section className="plc-mt-6 plc-shadow-sm">
-            <header className="plc-pl-4 sm:plc-pl-8 plc-mb-2">
+            <header className="plc-pl-4 plc-mb-2 sm:plc-pl-8">
               <p className="plc-text-xs plc-font-bold plc-tracking-widest plc-text-gray-500 plc-uppercase">
                 {this.locale("labels.profile")}
               </p>
