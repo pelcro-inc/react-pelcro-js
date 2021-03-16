@@ -450,16 +450,18 @@ class Dashboard extends Component {
 
             {/* Recipient sub renew section */}
             {recipient.cancel_at_period_end === 1 && (
-              <Button
-                variant="ghost"
-                icon={<RefreshIcon />}
-                className="plc-text-blue-400 focus:plc-ring-blue-300"
-                onClick={onRenewClick}
-                disabled={this.state.disableSubmit}
-                data-key={recipient.id}
-              >
-                {this.locale("labels.renew")}
-              </Button>
+              <td>
+                <Button
+                  variant="ghost"
+                  icon={<RefreshIcon />}
+                  className="plc-text-blue-400 focus:plc-ring-blue-300"
+                  onClick={onRenewClick}
+                  disabled={this.state.disableSubmit}
+                  data-key={recipient.id}
+                >
+                  {this.locale("labels.renew")}
+                </Button>
+              </td>
             )}
           </tr>
         );
@@ -484,8 +486,8 @@ class Dashboard extends Component {
           </tr>
         </thead>
         {/* Spacer */}
-        <tr className="plc-h-4"></tr>
         <tbody>
+          <tr className="plc-h-4"></tr>
           {giftedSubscriptions}
           <tr>
             <td colSpan="4" className="plc-p-1">
@@ -574,6 +576,8 @@ class Dashboard extends Component {
 
   render() {
     const { isOpen } = this.state;
+    const userHasName = this.user.first_name || this.user.last_name;
+
     return (
       <Transition
         className="plc-fixed plc-inset-y-0 plc-right-0 plc-h-full plc-max-w-xl plc-overflow-y-auto plc-text-left plc-bg-white plc-shadow-xl plc-z-max"
@@ -598,8 +602,8 @@ class Dashboard extends Component {
             </div>
 
             <div className="plc-flex plc-flex-col plc-flex-grow plc-justify-between plc-px-6">
-              <div className="plc-flex plc-flex-col">
-                {(this.user.first_name || this.user.last_name) && (
+              <div className="plc-flex plc-flex-col plc-flex-grow">
+                {userHasName && (
                   <p className="plc-m-0 plc-text-3xl plc-font-bold plc-text-white text">
                     <span className="plc-text-lg plc-opacity-80">
                       {this.locale("labels.hello")},
@@ -609,7 +613,13 @@ class Dashboard extends Component {
                   </p>
                 )}
 
-                <p className="plc-m-0 plc-text-sm plc-text-white">
+                <p
+                  className={`plc-m-0 plc-text-sm plc-text-white ${
+                    userHasName
+                      ? "plc-text-sm"
+                      : "plc-text-lg plc-font-bold plc-mt-auto"
+                  }`}
+                >
                   {this.user.email}
                 </p>
               </div>
