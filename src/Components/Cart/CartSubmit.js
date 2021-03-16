@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 export const CartSubmit = ({ name, ...otherProps }) => {
   const {
     dispatch,
-    state: { isEmpty, disableSubmit }
+    state: { isEmpty }
   } = useContext(store);
 
   const { t } = useTranslation("cart");
@@ -17,7 +17,6 @@ export const CartSubmit = ({ name, ...otherProps }) => {
       <Button
         {...otherProps}
         onClick={() => dispatch({ type: HANDLE_SUBMIT })}
-        disabled={disableSubmit}
         isFullWidth={true}
       >
         {name ?? t("confirm")}
