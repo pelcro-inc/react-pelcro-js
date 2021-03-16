@@ -56,7 +56,7 @@ Accordion.item = function AccordionItem({
             : "hover:plc-bg-primary-50"
         }`}
     >
-      <header className="plc-flex plc-items-center plc-justify-between plc-p-5 plc-px-8 plc-cursor-pointer plc-select-none">
+      <header className="plc-flex plc-items-center plc-justify-between plc-p-5 plc-px-4 sm:plc-px-8 plc-cursor-pointer plc-select-none">
         <span
           className={`plc-flex plc-text-lg ${
             isActive ? "plc-text-primary-400" : "plc-text-gray-500"
@@ -85,7 +85,7 @@ Accordion.item = function AccordionItem({
       </header>
 
       <div
-        className={`plc-ml-8 plc-overflow-auto plc-transition-transform plc-origin-right plc-transform ${
+        className={`plc-ml-4 sm:plc-ml-8 plc-overflow-auto plc-transition-transform plc-origin-right plc-transform ${
           isActive
             ? "plc-max-h-80 plc-scale-x-100"
             : "plc-max-h-0 plc-scale-x-0"

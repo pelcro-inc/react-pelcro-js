@@ -1,13 +1,12 @@
 import React, { Component } from "react";
 import { Transition } from "@headlessui/react";
-import { getErrorMessages } from "../common/Helpers";
 import { withTranslation } from "react-i18next";
 import { getFormattedPriceByLocal } from "../../utils/utils";
 import { Button } from "../../SubComponents/Button";
 import { getPaymentCardIcon } from "./utils";
 import { Accordion } from "./Accordion";
 import { ReactComponent as ExitIcon } from "../../assets/exit.svg";
-import { ReactComponent as ArrowLeftIcon } from "../../assets/arrow-left.svg";
+import { ReactComponent as XIcon } from "../../assets/x-icon.svg";
 import { ReactComponent as CheckMarkIcon } from "../../assets/check-mark.svg";
 import { ReactComponent as ExclamationIcon } from "../../assets/exclamation.svg";
 import { ReactComponent as EditIcon } from "../../assets/edit.svg";
@@ -589,26 +588,17 @@ class Dashboard extends Component {
       >
         <div id="pelcro-view-dashboard">
           <header className="plc-flex plc-flex-col plc-p-2 plc-bg-primary-500 plc-h-52">
-            <div className="plc-flex plc-items-center plc-justify-between">
-              <button
-                type="button"
-                className="plc-w-8 plc-text-gray-100 plc-outline-none hover:plc-text-gray-200"
-                aria-label="Close"
+            <div className="plc-flex plc-flex-row-reverse">
+              <Button
+                variant="icon"
+                className="plc-w-9 plc-h-9 plc-text-gray-100"
+                icon={<XIcon />}
                 onClick={this.closeDashboard}
-              >
-                <ArrowLeftIcon />
-              </button>
-              {this.site.logo && (
-                <img
-                  alt="avatar"
-                  className="plc-w-10 plc-h-10 plc-p-1 plc-bg-white plc-rounded-full"
-                  src={this.site.logo.url}
-                />
-              )}
+              ></Button>
             </div>
 
-            <div className="plc-flex plc-flex-col plc-justify-end plc-flex-grow plc-px-6">
-              <div className="plc-flex plc-flex-col plc-justify-center">
+            <div className="plc-flex plc-flex-col plc-flex-grow plc-justify-between plc-px-6">
+              <div className="plc-flex plc-flex-col">
                 {(this.user.first_name || this.user.last_name) && (
                   <p className="plc-m-0 plc-text-3xl plc-font-bold plc-text-white text">
                     <span className="plc-text-lg plc-opacity-80">
@@ -645,7 +635,7 @@ class Dashboard extends Component {
           </header>
 
           <section className="plc-mt-6 plc-shadow-sm">
-            <header className="plc-pl-8 plc-mb-2">
+            <header className="plc-pl-4 sm:plc-pl-8 plc-mb-2">
               <p className="plc-text-xs plc-font-bold plc-tracking-widest plc-text-gray-500 plc-uppercase">
                 {this.locale("labels.profile")}
               </p>
@@ -662,8 +652,7 @@ class Dashboard extends Component {
                       this.user.source?.properties?.brand
                     )}
                     <span className="plc-ml-1 plc-text-lg plc-tracking-widest">
-                      •••• •••• ••••{" "}
-                      {this.user.source?.properties?.last4}
+                      •••• {this.user.source?.properties?.last4}
                     </span>
                     <Button
                       variant="icon"
