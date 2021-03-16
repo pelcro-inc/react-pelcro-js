@@ -333,7 +333,9 @@ class Dashboard extends Component {
               <Button
                 variant="ghost"
                 isFullWidth={true}
-                icon={<PlusIcon className="plc-w-4 plc-mr-1" />}
+                icon={
+                  <PlusIcon className="plc-w-4 plc-h-4 plc-mr-1" />
+                }
                 className="plc-h-8 plc-font-semibold plc-tracking-wider plc-uppercase plc-rounded-none plc-text-primary-700 hover:plc-bg-primary-50"
                 onClick={this.displayProductSelect}
               >
@@ -346,7 +348,9 @@ class Dashboard extends Component {
               <Button
                 variant="ghost"
                 isFullWidth={true}
-                icon={<GiftIcon className="plc-w-4 plc-mr-1" />}
+                icon={
+                  <GiftIcon className="plc-w-4 plc-h-4 plc-mr-1" />
+                }
                 className="plc-h-8 plc-font-semibold plc-tracking-wider plc-uppercase plc-rounded-none plc-text-primary-700 hover:plc-bg-primary-50"
                 onClick={this.displayRedeem}
               >

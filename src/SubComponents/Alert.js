@@ -3,6 +3,9 @@ import { ReactComponent as ErrorIcon } from "../assets/error.svg";
 import { ReactComponent as SuccessIcon } from "../assets/check.svg";
 import { ReactComponent as CloseIcon } from "../assets/x-icon.svg";
 
+/**
+ *
+ */
 export function Alert({
   type = "error",
   className = "",
@@ -19,11 +22,11 @@ export function Alert({
     >
       <div className="plc-inline-flex plc-items-center">
         {type === "error" && (
-          <ErrorIcon className="plc-flex-shrink-0 plc-w-6 plc-mr-3 pelcro-alert-icon" />
+          <ErrorIcon className="plc-flex-shrink-0 plc-w-6 plc-h-6 plc-mr-3 pelcro-alert-icon" />
         )}
         {type === "success" && (
           <SuccessIcon
-            className="plc-flex-shrink-0 plc-w-6 plc-mr-3 pelcro-alert-icon"
+            className="plc-flex-shrink-0 plc-w-6 plc-h-6 plc-mr-3 pelcro-alert-icon"
             fill="currentColor"
           />
         )}
