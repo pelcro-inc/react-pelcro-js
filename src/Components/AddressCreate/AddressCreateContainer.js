@@ -14,12 +14,14 @@ import {
   SET_LAST_NAME,
   SET_TEXT_FIELD,
   SET_STATE,
-  SHOW_ALERT
+  SHOW_ALERT,
+  LOADING
 } from "../../utils/action-types";
 import { getErrorMessages } from "../common/Helpers";
 
 const initialState = {
   disableSubmit: false,
+  isSubmitting: false,
   firstName: "",
   lastName: "",
   line1: "",
@@ -55,6 +57,11 @@ const AddressCreateContainer = ({
     });
   }, []);
 
+  const enableSubmitButton = () => {
+    dispatch({ type: DISABLE_SUBMIT, payload: false });
+    dispatch({ type: LOADING, payload: false });
+  };
+
   const submitAddress = (
     {
       firstName,
@@ -68,6 +75,8 @@ const AddressCreateContainer = ({
     },
     dispatch
   ) => {
+    dispatch({ type: LOADING, payload: true });
+
     window.Pelcro.address.create(
       {
         auth_token: window.Pelcro.user.read().auth_token,
@@ -90,7 +99,7 @@ const AddressCreateContainer = ({
             }
           });
           onFailure(err);
-          dispatch({ type: DISABLE_SUBMIT, payload: false });
+          enableSubmitButton();
         }
 
         if (giftCode) {
@@ -107,7 +116,7 @@ const AddressCreateContainer = ({
               address_id: addressId
             },
             (err, res) => {
-              dispatch({ type: DISABLE_SUBMIT, payload: false });
+              enableSubmitButton();
 
               if (err) {
                 dispatch({
@@ -125,7 +134,7 @@ const AddressCreateContainer = ({
             }
           );
         } else {
-          dispatch({ type: DISABLE_SUBMIT, payload: false });
+          enableSubmitButton();
           return onSuccess();
         }
       }
@@ -165,6 +174,11 @@ const AddressCreateContainer = ({
           return Update({
             ...state,
             alert: action.payload
+          });
+        case LOADING:
+          return Update({
+            ...state,
+            isSubmitting: action.payload
           });
         case HANDLE_SUBMIT:
           return UpdateWithSideEffect(
