@@ -97,8 +97,6 @@ const AddressUpdateContainer = ({
     },
     dispatch
   ) => {
-    dispatch({ type: LOADING, payload: true });
-
     window.Pelcro.address.update(
       {
         address_id: addressId,
@@ -181,7 +179,7 @@ const AddressUpdateContainer = ({
 
         case HANDLE_SUBMIT:
           return UpdateWithSideEffect(
-            { ...state, disableSubmit: true },
+            { ...state, disableSubmit: true, isSubmitting: true },
             (state, dispatch) => submitAddress(state, dispatch)
           );
 

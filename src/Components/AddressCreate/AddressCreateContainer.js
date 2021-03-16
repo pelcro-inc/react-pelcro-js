@@ -75,8 +75,6 @@ const AddressCreateContainer = ({
     },
     dispatch
   ) => {
-    dispatch({ type: LOADING, payload: true });
-
     window.Pelcro.address.create(
       {
         auth_token: window.Pelcro.user.read().auth_token,
@@ -182,7 +180,7 @@ const AddressCreateContainer = ({
           });
         case HANDLE_SUBMIT:
           return UpdateWithSideEffect(
-            { ...state, disableSubmit: true },
+            { ...state, disableSubmit: true, isSubmitting: true },
             (state, dispatch) => submitAddress(state, dispatch)
           );
         default:

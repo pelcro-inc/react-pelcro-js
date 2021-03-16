@@ -190,6 +190,7 @@ class DefaultNewsLetter extends Component {
                 isFullWidth={true}
                 onClick={this.submitNewsletter}
                 disabled={this.state.disableSubmit}
+                isLoading={this.state.disableSubmit}
               >
                 {t("labels.submit")}
               </Button>

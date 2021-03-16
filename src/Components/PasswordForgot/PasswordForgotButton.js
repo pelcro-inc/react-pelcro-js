@@ -17,6 +17,7 @@ export const PasswordForgotButton = ({ name, ...otherProps }) => {
       {...otherProps}
       onClick={() => dispatch({ type: HANDLE_SUBMIT })}
       disabled={buttonDisabled}
+      isLoading={buttonDisabled}
       isFullWidth={true}
     >
       {name ?? t("submit")}
