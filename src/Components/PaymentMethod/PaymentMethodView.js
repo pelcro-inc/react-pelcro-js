@@ -15,6 +15,9 @@ import { PaypalSubscribeButton } from "../PaypalButtons/PaypalSubscribeButton";
 import { Link } from "../../SubComponents/Link";
 import { ReactComponent as LockIcon } from "../../assets/lock.svg";
 
+/**
+ *
+ */
 export function PaymentMethodView({
   type,
   couponCode,
@@ -37,8 +40,8 @@ export function PaymentMethodView({
 
   return (
     <div className="plc-flex plc-flex-col plc-items-center plc-mt-4 sm:plc-px-8 pelcro-payment-block">
-      <div className="plc-flex plc-w-full plc-px-4 plc-py-2 plc-text-center plc-text-green-600 plc-border plc-border-green-400 plc-rounded plc-bg-green-50">
-        <LockIcon className="plc-w-5 plc-mr-1" />
+      <div className="plc-flex plc-items-center plc-w-full plc-px-4 plc-py-2 plc-text-center plc-text-green-600 plc-border plc-border-green-400 plc-rounded plc-bg-green-50">
+        <LockIcon className="plc-w-5 plc-h-5 plc-mr-1" />
         <span>
           {t("messages.youAreSafe")}
           <Link

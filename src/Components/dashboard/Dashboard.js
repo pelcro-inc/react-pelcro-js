@@ -1,13 +1,12 @@
 import React, { Component } from "react";
 import { Transition } from "@headlessui/react";
-import { getErrorMessages } from "../common/Helpers";
 import { withTranslation } from "react-i18next";
 import { getFormattedPriceByLocal } from "../../utils/utils";
 import { Button } from "../../SubComponents/Button";
 import { getPaymentCardIcon } from "./utils";
 import { Accordion } from "./Accordion";
 import { ReactComponent as ExitIcon } from "../../assets/exit.svg";
-import { ReactComponent as ArrowLeftIcon } from "../../assets/arrow-left.svg";
+import { ReactComponent as XIcon } from "../../assets/x-icon.svg";
 import { ReactComponent as CheckMarkIcon } from "../../assets/check-mark.svg";
 import { ReactComponent as ExclamationIcon } from "../../assets/exclamation.svg";
 import { ReactComponent as EditIcon } from "../../assets/edit.svg";
@@ -334,8 +333,10 @@ class Dashboard extends Component {
               <Button
                 variant="ghost"
                 isFullWidth={true}
-                icon={<PlusIcon className="plc-w-4 plc-mr-1" />}
-                className="plc-font-semibold plc-tracking-wider plc-uppercase plc-rounded-none plc-text-primary-700 hover:plc-bg-primary-50"
+                icon={
+                  <PlusIcon className="plc-w-4 plc-h-4 plc-mr-1" />
+                }
+                className="plc-h-8 plc-font-semibold plc-tracking-wider plc-uppercase plc-rounded-none plc-text-primary-700 hover:plc-bg-primary-50"
                 onClick={this.displayProductSelect}
               >
                 {this.locale("labels.addSubscription")}
@@ -347,8 +348,10 @@ class Dashboard extends Component {
               <Button
                 variant="ghost"
                 isFullWidth={true}
-                icon={<GiftIcon className="plc-w-4 plc-mr-1" />}
-                className="plc-font-semibold plc-tracking-wider plc-uppercase plc-rounded-none plc-text-primary-700 hover:plc-bg-primary-50"
+                icon={
+                  <GiftIcon className="plc-w-4 plc-h-4 plc-mr-1" />
+                }
+                className="plc-h-8 plc-font-semibold plc-tracking-wider plc-uppercase plc-rounded-none plc-text-primary-700 hover:plc-bg-primary-50"
                 onClick={this.displayRedeem}
               >
                 {this.locale("labels.redeemGift")}
@@ -451,16 +454,18 @@ class Dashboard extends Component {
 
             {/* Recipient sub renew section */}
             {recipient.cancel_at_period_end === 1 && (
-              <Button
-                variant="ghost"
-                icon={<RefreshIcon />}
-                className="plc-text-blue-400 focus:plc-ring-blue-300"
-                onClick={onRenewClick}
-                disabled={this.state.disableSubmit}
-                data-key={recipient.id}
-              >
-                {this.locale("labels.renew")}
-              </Button>
+              <td>
+                <Button
+                  variant="ghost"
+                  icon={<RefreshIcon />}
+                  className="plc-text-blue-400 focus:plc-ring-blue-300"
+                  onClick={onRenewClick}
+                  disabled={this.state.disableSubmit}
+                  data-key={recipient.id}
+                >
+                  {this.locale("labels.renew")}
+                </Button>
+              </td>
             )}
           </tr>
         );
@@ -485,16 +490,18 @@ class Dashboard extends Component {
           </tr>
         </thead>
         {/* Spacer */}
-        <tr className="plc-h-4"></tr>
         <tbody>
+          <tr className="plc-h-4"></tr>
           {giftedSubscriptions}
           <tr>
             <td colSpan="4" className="plc-p-1">
               <Button
                 variant="ghost"
                 isFullWidth={true}
-                icon={<PlusIcon className="plc-w-4 plc-mr-1" />}
-                className="plc-font-semibold plc-tracking-wider plc-uppercase plc-rounded-none plc-text-primary-700 hover:plc-bg-primary-50"
+                icon={
+                  <PlusIcon className="plc-w-4 plc-h-4 plc-mr-1" />
+                }
+                className="plc-h-8 plc-font-semibold plc-tracking-wider plc-uppercase plc-rounded-none plc-text-primary-700 hover:plc-bg-primary-50"
                 onClick={this.displayProductSelect}
               >
                 {this.locale("labels.addGift")}
@@ -555,7 +562,7 @@ class Dashboard extends Component {
                 variant="ghost"
                 isFullWidth={true}
                 icon={<PlusIcon className="plc-w-4 plc-mr-1" />}
-                className="plc-font-semibold plc-tracking-wider plc-uppercase plc-text-primary-700 hover:plc-bg-primary-50"
+                className="plc-h-8 plc-font-semibold plc-tracking-wider plc-uppercase plc-text-primary-700 hover:plc-bg-primary-50"
                 onClick={this.displayAddressCreate}
               >
                 {this.locale("labels.addAddress")}
@@ -575,6 +582,8 @@ class Dashboard extends Component {
 
   render() {
     const { isOpen } = this.state;
+    const userHasName = this.user.first_name || this.user.last_name;
+
     return (
       <Transition
         className="plc-fixed plc-inset-y-0 plc-right-0 plc-h-full plc-max-w-xl plc-overflow-y-auto plc-text-left plc-bg-white plc-shadow-xl plc-z-max"
@@ -589,27 +598,18 @@ class Dashboard extends Component {
       >
         <div id="pelcro-view-dashboard">
           <header className="plc-flex plc-flex-col plc-p-2 plc-bg-primary-500 plc-h-52">
-            <div className="plc-flex plc-items-center plc-justify-between">
-              <button
-                type="button"
-                className="plc-w-8 plc-text-gray-100 plc-outline-none hover:plc-text-gray-200"
-                aria-label="Close"
+            <div className="plc-flex plc-flex-row-reverse">
+              <Button
+                variant="icon"
+                className="plc-text-gray-100 plc-w-9 plc-h-9"
+                icon={<XIcon />}
                 onClick={this.closeDashboard}
-              >
-                <ArrowLeftIcon />
-              </button>
-              {this.site.logo && (
-                <img
-                  alt="avatar"
-                  className="plc-w-10 plc-h-10 plc-p-1 plc-bg-white plc-rounded-full"
-                  src={this.site.logo.url}
-                />
-              )}
+              ></Button>
             </div>
 
-            <div className="plc-flex plc-flex-col plc-justify-end plc-flex-grow plc-px-6">
-              <div className="plc-flex plc-flex-col plc-justify-center">
-                {(this.user.first_name || this.user.last_name) && (
+            <div className="plc-flex plc-flex-col plc-justify-between plc-flex-grow plc-px-6">
+              <div className="plc-flex plc-flex-col plc-flex-grow">
+                {userHasName && (
                   <p className="plc-m-0 plc-text-3xl plc-font-bold plc-text-white text">
                     <span className="plc-text-lg plc-opacity-80">
                       {this.locale("labels.hello")},
@@ -619,7 +619,13 @@ class Dashboard extends Component {
                   </p>
                 )}
 
-                <p className="plc-m-0 plc-text-sm plc-text-white">
+                <p
+                  className={`plc-m-0 plc-text-sm plc-text-white ${
+                    userHasName
+                      ? "plc-text-sm"
+                      : "plc-text-lg plc-font-bold plc-mt-auto"
+                  }`}
+                >
                   {this.user.email}
                 </p>
               </div>
@@ -645,7 +651,7 @@ class Dashboard extends Component {
           </header>
 
           <section className="plc-mt-6 plc-shadow-sm">
-            <header className="plc-pl-8 plc-mb-2">
+            <header className="plc-pl-4 plc-mb-2 sm:plc-pl-8">
               <p className="plc-text-xs plc-font-bold plc-tracking-widest plc-text-gray-500 plc-uppercase">
                 {this.locale("labels.profile")}
               </p>
@@ -662,8 +668,7 @@ class Dashboard extends Component {
                       this.user.source?.properties?.brand
                     )}
                     <span className="plc-ml-1 plc-text-lg plc-tracking-widest">
-                      •••• •••• ••••{" "}
-                      {this.user.source?.properties?.last4}
+                      •••• {this.user.source?.properties?.last4}
                     </span>
                     <Button
                       variant="icon"
