@@ -279,6 +279,8 @@ Add the correct display in Chrome and Safari.
   .pelcro-root p,
   .pelcro-root pre {
     margin: 0;
+    padding: 0;
+    font-weight: normal;
   }
 
   .pelcro-root button {

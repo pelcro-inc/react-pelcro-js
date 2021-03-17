@@ -26,7 +26,7 @@ export const CouponCode = () => {
       <Button
         className="plc-text-base plc-text-gray-500"
         variant="ghost"
-        icon={<TicketIcon className="plc-w-5 plc-mr-2" />}
+        icon={<TicketIcon className="plc-w-5 plc-h-5 plc-mr-2" />}
         onClick={showCouponField}
       >
         {!enableCouponField

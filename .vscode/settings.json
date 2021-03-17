@@ -38,5 +38,6 @@
     "spellright.documentTypes": [
         "latex",
         "plaintext"
-    ]
+    ],
+    "headwind.customTailwindPrefix": "plc-"
 }
