@@ -8,6 +8,10 @@ export const getErrorMessages = (error) => {
     return error.error.message;
   }
 
+  if (error?.response?.data?.message) {
+    return error?.response?.data?.message;
+  }
+
   if (error?.response?.data?.error?.message) {
     return error?.response?.data?.error?.message;
   }

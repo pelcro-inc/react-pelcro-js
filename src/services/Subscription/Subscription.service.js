@@ -39,6 +39,7 @@ export class Subscription {
    * @property {object} [couponCode]
    * @property {object} [giftRecipient]
    * @property {number} [subscriptionIdToRenew]
+   * @property {number} [quantity]
    */
 
   /**
@@ -144,10 +145,17 @@ export class StripeGateway {
    * @return {void}
    */
   #createSubscription = (options, callback) => {
-    const { token, plan, couponCode, product } = options;
+    const {
+      token,
+      plan,
+      couponCode,
+      product,
+      quantity = 1
+    } = options;
 
     window.Pelcro.subscription.create(
       {
+        quantity,
         gateway_token: token,
         payment_gateway: this.#paymentGateway,
         auth_token: window.Pelcro.user.read().auth_token,
@@ -175,11 +183,13 @@ export class StripeGateway {
       plan,
       couponCode,
       product,
-      giftRecipient
+      giftRecipient,
+      quantity = 1
     } = options;
 
     window.Pelcro.subscription.create(
       {
+        quantity,
         gateway_token: token,
         payment_gateway: this.#paymentGateway,
         auth_token: window.Pelcro.user.read().auth_token,
@@ -240,6 +250,7 @@ export class StripeGateway {
     const {
       subscriptionIdToRenew,
       token,
+      product,
       plan,
       couponCode
     } = options;
@@ -250,7 +261,10 @@ export class StripeGateway {
         auth_token: window.Pelcro.user.read().auth_token,
         plan_id: plan.id,
         coupon_code: couponCode,
-        subscription_id: subscriptionIdToRenew
+        subscription_id: subscriptionIdToRenew,
+        address_id: product.address_required
+          ? getUserLatestAddress().id
+          : null
       },
       (err, res) => {
         callback(err, res);
@@ -294,10 +308,17 @@ export class PaypalGateWay {
    * @return {void}
    */
   #createSubscription = (options, callback) => {
-    const { token, plan, couponCode, product } = options;
+    const {
+      token,
+      plan,
+      couponCode,
+      product,
+      quantity = 1
+    } = options;
 
     window.Pelcro.subscription.create(
       {
+        quantity,
         gateway_token: token,
         payment_gateway: this.#paymentGateway,
         auth_token: window.Pelcro.user.read().auth_token,
@@ -325,11 +346,13 @@ export class PaypalGateWay {
       plan,
       couponCode,
       product,
-      giftRecipient
+      giftRecipient,
+      quantity = 1
     } = options;
 
     window.Pelcro.subscription.create(
       {
+        quantity,
         gateway_token: token,
         payment_gateway: this.#paymentGateway,
         auth_token: window.Pelcro.user.read().auth_token,

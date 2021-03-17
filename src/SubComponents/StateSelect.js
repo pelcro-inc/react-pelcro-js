@@ -15,24 +15,25 @@ export function StateSelect({
   } = useContext(store);
 
   useEffect(() => {
-    getStateList();
-  }, [country]);
+    const setStates = (error, tmp) => {
+      if (error) {
+        showError(error.message, "pelcro-error-address");
+      } else if (tmp) {
+        dispatch({ type: SET_STATES, payload: tmp });
+      }
+    };
 
-  const getStateList = () => {
-    const selectedCountry = country ? country : "CA";
-    window.Pelcro.geolocation.getStatesForCountry(
-      selectedCountry,
-      setStates
-    );
-  };
+    const getStateList = () => {
+      window.Pelcro.geolocation.getStatesForCountry(
+        country,
+        setStates
+      );
+    };
 
-  const setStates = (error, tmp) => {
-    if (error) {
-      showError(error.message, "pelcro-error-address");
-    } else if (tmp) {
-      dispatch({ type: SET_STATES, payload: tmp });
+    if (country) {
+      getStateList();
     }
-  };
+  }, [country]);
 
   const createStateItems = () => {
     const items = [];

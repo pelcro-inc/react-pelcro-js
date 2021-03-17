@@ -6,12 +6,65 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Unreleased]
 
+## [Released]
+
+## [2.11.8] - 2021-03-10
+
+### Fixed
+
+- Canceled Subscriptions and gifts showing incorrect status values in user dashboard.
+- Apple pay URL coupons race condition.
+
+## [2.11.7] - 2021-03-09
+
+### Fixed
+
+- Coupon code not being applied on apple pay.
+- Use plan currency instead of user currency on Google/Apple Pay.
+
+## [2.11.6] - 2021-03-04
+
+### Fixed
+
+- Always reflect coupon information from URL for Google/Apple Pay
+
+## [2.11.4] - 2021-03-03
+
+### Fixed
+
+- Use the correct address for gift redeem.
+- Phone & Email fields reset behaviour.
+- State selection dropdown menu being stuck in loading state, or showing incorrect states under certain conditions.
+- Password change modal showing close button on paywall mode.
+
+### Changed
+
+- Only render PayPal button when product and braintree currencies match
+
+## [2.11.3] - 2021-02-18
+
+### Changed
+
+- Add address_id param to gift renewal. [PRIVATE]
+- Always swtich users to create a new address if product has address required enabled.
+
+### Fixed
+
+- Use plan currency instead of default currency for discounted amount.
+- Using e-commerce one click purchase buttons, not showing total price on confirmation modal.
+
+## [2.11.2] - 2021-02-10
+
+### Added
+
+- Consider quantity of plan on paypal & subscription service.
+
+## [2.11.1] - 2021-02-04
+
 ### Added
 
 - Add address id param to coupon submision. [PRIVATE]
 - Consider quantity of plan when subscribing.
-
-## [Released]
 
 ## [2.11.0] = 2021-01-29
 

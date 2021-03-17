@@ -65,16 +65,19 @@ const AddressUpdateContainer = ({
       const thisAddress = addresses[address];
 
       if (+thisAddress.id === +addressId) {
-        initialState["firstName"] = thisAddress.first_name;
-        initialState["lastName"] = thisAddress.last_name;
-        initialState["line1"] = thisAddress.line1;
-        initialState["line2"] = thisAddress.line2;
-        initialState["city"] = thisAddress.city;
-        initialState["state"] = thisAddress.state;
-        initialState["country"] = thisAddress.country;
-        initialState["postalCode"] = thisAddress.postal_code;
-        initialState.loading = false;
-        dispatch({ type: SET_TEXT_FIELD, payload: initialState });
+        const newState = {
+          ...initialState,
+          firstName: thisAddress.first_name,
+          lastName: thisAddress.last_name,
+          line1: thisAddress.line1,
+          line2: thisAddress.line2,
+          city: thisAddress.city,
+          state: thisAddress.state,
+          country: thisAddress.country,
+          postalCode: thisAddress.postal_code,
+          loading: false
+        };
+        dispatch({ type: SET_TEXT_FIELD, payload: newState });
       }
     }
   };

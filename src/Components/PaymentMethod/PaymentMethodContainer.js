@@ -6,7 +6,8 @@ import {
 } from "react-stripe-elements";
 import useReducerWithSideEffects, {
   UpdateWithSideEffect,
-  Update
+  Update,
+  SideEffect
 } from "use-reducer-with-side-effects";
 
 import {
@@ -27,7 +28,8 @@ import {
   INIT_CONTAINER,
   UPDATE_PAYMENT_REQUEST,
   SET_ORDER,
-  SHOW_ALERT
+  SHOW_ALERT,
+  SUBSCRIBE
 } from "../../utils/action-types";
 import { getErrorMessages, debounce } from "../common/Helpers";
 import {
@@ -123,7 +125,7 @@ const PaymentMethodContainerWithoutStripe = ({
     try {
       const paymentRequest = stripe.paymentRequest({
         country: window.Pelcro.user.location.countryCode || "US",
-        currency: window.Pelcro.user.read().currency || "usd",
+        currency: plan.currency,
         total: {
           label: plan.nickname || plan.description,
           amount: state.updatedPrice || plan.amount
@@ -134,7 +136,7 @@ const PaymentMethodContainerWithoutStripe = ({
         dispatch({ type: DISABLE_COUPON_BUTTON, payload: true });
         dispatch({ type: DISABLE_SUBMIT, payload: true });
         onLoading();
-        subscribe(token, state, dispatch);
+        dispatch({ type: SUBSCRIBE, payload: token });
         complete("success");
       });
 
@@ -161,11 +163,9 @@ const PaymentMethodContainerWithoutStripe = ({
         token: token.id
       },
       (err, res) => {
-        console.log("createPayment -> err, res", err, res);
         dispatch({ type: DISABLE_SUBMIT, payload: false });
         dispatch({ type: LOADING, payload: false });
         if (err) {
-          console.log("createPayment -> err", err);
           onFailure(err);
           return dispatch({
             type: SHOW_ALERT,
@@ -228,9 +228,7 @@ const PaymentMethodContainerWithoutStripe = ({
             payload: res.data.total
           });
 
-          if (canMakePayment) {
-            dispatch({ type: UPDATE_PAYMENT_REQUEST });
-          }
+          dispatch({ type: UPDATE_PAYMENT_REQUEST });
         }
       );
     }
@@ -257,9 +255,7 @@ const PaymentMethodContainerWithoutStripe = ({
           gift_recipient_first_name: giftRecipient?.firstName,
           gift_recipient_last_name: giftRecipient?.lastName,
           address_id: product.address_required
-            ? window.Pelcro.user.read().addresses[
-                window.Pelcro.user.read().addresses.length - 1
-              ].id
+            ? getUserLatestAddress()?.id
             : null
         },
         (err, res) => {
@@ -288,7 +284,10 @@ const PaymentMethodContainerWithoutStripe = ({
             plan_id: plan.id,
             quantity: plan.quantity,
             coupon_code: couponCode,
-            subscription_id: subscriptionIdToRenew
+            subscription_id: subscriptionIdToRenew,
+            address_id: product.address_required
+              ? getUserLatestAddress()?.id
+              : null
           },
           (err, res) => {
             dispatch({ type: DISABLE_SUBMIT, payload: false });
@@ -317,9 +316,7 @@ const PaymentMethodContainerWithoutStripe = ({
             coupon_code: couponCode,
             subscription_id: subscriptionIdToRenew,
             address_id: product.address_required
-              ? window.Pelcro.user.read().addresses[
-                  window.Pelcro.user.read().addresses.length - 1
-                ]
+              ? getUserLatestAddress()?.id
               : null
           },
           (err, res) => {
@@ -365,6 +362,7 @@ const PaymentMethodContainerWithoutStripe = ({
         {
           type: SUBSCRIPTION_TYPES.CREATE_GIFTED_SUBSCRIPTION,
           token: paypalNonce,
+          quantity: plan.quantity,
           plan,
           couponCode,
           product,
@@ -394,6 +392,7 @@ const PaymentMethodContainerWithoutStripe = ({
       {
         type: SUBSCRIPTION_TYPES.CREATE_SUBSCRIPTION,
         token: paypalNonce,
+        quantity: plan.quantity,
         plan,
         couponCode,
         product
@@ -451,7 +450,7 @@ const PaymentMethodContainerWithoutStripe = ({
   };
 
   const updatePaymentRequest = (state) => {
-    state.paymentRequest.update({
+    state?.paymentRequest?.update({
       total: {
         label: plan.nickname || plan.description,
         amount: state.updatedPrice
@@ -514,11 +513,9 @@ const PaymentMethodContainerWithoutStripe = ({
             disableCouponButton: action.payload
           });
 
-        case CREATE_PAYMENT:
-          return UpdateWithSideEffect(
-            { ...state, disableSubmit: true },
-            (state, dispatch) =>
-              updatePaymentSource(action.payload, state, dispatch)
+        case SUBSCRIBE:
+          return SideEffect((state, dispatch) =>
+            subscribe(action.payload, state, dispatch)
           );
 
         case INIT_CONTAINER:
