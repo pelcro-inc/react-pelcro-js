@@ -26,7 +26,7 @@ export const PasswordResetView = (props) => {
             htmlFor="pelcro-input-email"
             className="pelcro-prefix-label"
           >
-            {t("email")} *
+            {t("email")}
           </label>
           <PasswordResetEmail
             className="pelcro-prefix-input pelcro-prefix-form-control"
