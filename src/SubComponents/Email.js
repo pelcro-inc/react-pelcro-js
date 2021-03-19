@@ -86,10 +86,7 @@ export function Email({
     <Input
       type="email"
       error={emailError}
-      value={
-        (disableEmailValidation ? stateEmail : email || stateEmail) ??
-        ""
-      }
+      value={email ?? ""}
       onChange={(e) => handleInputChange(e.target.value)}
       onBlur={() => setFinishedTyping(true)}
       onFocus={() => setFinishedTyping(false)}
