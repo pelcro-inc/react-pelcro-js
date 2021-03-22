@@ -1,63 +1,53 @@
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { AlertDanger } from "../Alerts/AlertDanger";
-
-import Header from "../common/Header";
+import {
+  Modal,
+  ModalBody,
+  ModalFooter,
+  ModalHeader
+} from "../../SubComponents/Modal";
 import Authorship from "../common/Authorship";
 import { GiftCreateView } from "./GiftCreateView";
+import { Link } from "../../SubComponents/Link";
 
-export const GiftCreateModal = (props) => {
+export const GiftCreateModal = ({
+  setView,
+  onDisplay,
+  onClose,
+  ...otherProps
+}) => {
+  const site = window.Pelcro.site.read();
   const { t } = useTranslation("register");
 
   useEffect(() => {
-    if (props.onDisplay) props.onDisplay();
+    if (onDisplay) {
+      onDisplay();
+    }
   }, []);
 
   return (
-    <div className="pelcro-prefix-view">
-      <div
-        className="pelcro-prefix-modal modal pelcro-prefix-fade pelcro-prefix-show"
-        id="pelcro-view-gift"
-        tabIndex="-1"
-        role="dialog"
-        aria-hidden="true"
-      >
-        <div className="pelcro-prefix-modal-dialog pelcro-prefix-modal-dialog-centered">
-          <div
-            className="pelcro-prefix-modal-content"
-            role="document"
+    <Modal id="pelcro-gift-create-modal">
+      <ModalHeader
+        hideCloseButton={!window.Pelcro.paywall.displayCloseButton()}
+        onClose={onClose}
+        logo={site.logo}
+        title={site.name}
+      />
+      <ModalBody>
+        <GiftCreateView {...otherProps} />
+      </ModalBody>
+      <ModalFooter>
+        <p>
+          {t("messages.selectPlan") + " "}
+          <Link
+            id="pelcro-link-select-plan"
+            onClick={() => setView("select")}
           >
-            <Header
-              closeButton={window.Pelcro.paywall.displayCloseButton()}
-              resetView={props.resetView}
-              site={window.Pelcro.site.read()}
-            ></Header>
-            <div className="pelcro-prefix-modal-body">
-              <div className="pelcro-prefix-title-block">
-                <h4>{t("gift.titles.firstTitle")}</h4>
-              </div>
-
-              <AlertDanger name="gift" />
-
-              <div className="pelcro-prefix-form">
-                <GiftCreateView {...props} />
-              </div>
-            </div>
-            <div className="pelcro-prefix-modal-footer">
-              <small>
-                {" " + t("messages.selectPlan")}
-                <button
-                  className="pelcro-prefix-link"
-                  onClick={() => props.setView("select")}
-                >
-                  {t("messages.here")}
-                </button>
-              </small>
-              <Authorship></Authorship>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+            {t("messages.here")}
+          </Link>
+        </p>
+        <Authorship />
+      </ModalFooter>
+    </Modal>
   );
 };

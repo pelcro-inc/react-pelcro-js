@@ -1,3 +1,4 @@
+import { getUserLatestAddress } from "../../utils/utils";
 /**
  * @TODO: All subscription related business logic should end up moving
  * to this service, and out of react components.
@@ -14,8 +15,6 @@ export const SUBSCRIPTION_TYPES = {
   RENEW_SUBSCRIPTION: "RENEW_SUBSCRIPTION",
   RENEW_GIFTED_SUBSCRIPTION: "RENEW_GIFTED_SUBSCRIPTION"
 };
-
-import { getUserLatestAddress } from "../../utils/utils";
 
 export class Subscription {
   /**

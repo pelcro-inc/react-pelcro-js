@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { store } from "./PaymentMethodContainer";
 import { UPDATE_COUPON_CODE } from "../../utils/action-types";
+import { Input } from "../../SubComponents/Input";
 
 export const CouponCodeField = (props) => {
   const { t } = useTranslation("checkoutForm");
@@ -14,7 +15,10 @@ export const CouponCodeField = (props) => {
     dispatch({ type: UPDATE_COUPON_CODE, payload: e.target.value });
 
   return (
-    <input
+    <Input
+      className="plc-w-6/12 plc-border-r-0"
+      hideErrors={true}
+      aria-label={t("labels.code")}
       value={couponCode}
       onChange={onCouponCodeChange}
       type="text"

@@ -5,66 +5,55 @@ import { GiftCreateSubmitButton } from "./GiftCreateSubmitButton";
 import { GiftCreateEmail } from "./GiftCreateEmail";
 import { GiftCreateFirstName } from "./GiftCreateFirstName";
 import { GiftCreateLastName } from "./GiftCreateLastName";
+import { AlertWithContext } from "../../SubComponents/AlertWithContext";
 
 export const GiftCreateView = (props) => {
   const { t } = useTranslation("register");
   return (
-    <GiftCreateContainer {...props}>
-      <div className="pelcro-prefix-row">
-        <div className="col-sm-6">
-          <label
-            className="pelcro-prefix-label"
-            htmlFor="pelcro-gift-create-input-first_name"
-          >
-            {t("gift.labels.firstName")}
-          </label>
-          <GiftCreateFirstName
-            className="pelcro-prefix-input pelcro-prefix-form-control"
-            autoComplete="first-name"
-            id="pelcro-gift-create-input-first_name"
-            placeholder={t("gift.labels.firstNamePlaceholder")}
-          ></GiftCreateFirstName>
-        </div>
-        <div className="col-sm-6">
-          <label
-            className="pelcro-prefix-label"
-            htmlFor="pelcro-gift-create-input-last_name"
-          >
-            {t("gift.labels.lastName")}
-          </label>
-          <GiftCreateLastName
-            className="pelcro-prefix-input pelcro-prefix-form-control"
-            autoComplete="last-name"
-            id="pelcro-gift-create-input-last_name"
-            placeholder={t("gift.labels.lastNamePlaceholder")}
-          ></GiftCreateLastName>
-        </div>
+    <div id="pelcro-gift-create-view">
+      <div className="plc-flex plc-flex-col plc-items-center plc-text-lg plc-font-semibold plc-text-center pelcro-title-wrapper">
+        <h4>{t("gift.titles.firstTitle")}</h4>
       </div>
-      <div className="pelcro-prefix-row">
-        <div className="col-sm-12">
-          <label
-            className="pelcro-prefix-label"
-            htmlFor="pelcro-gift-create-input-email"
-          >
-            {t("gift.labels.email")} *
-          </label>
-          <GiftCreateEmail
-            className="pelcro-prefix-input pelcro-prefix-form-control"
-            id="pelcro-gift-create-input-email"
-            placeholder={t("gift.labels.emailPlaceholder")}
-            autoComplete="off"
-          ></GiftCreateEmail>
-        </div>
+      <div className="plc-mt-2 pelcro-form">
+        <GiftCreateContainer {...props}>
+          <AlertWithContext />
+          <div className="plc-flex plc-items-end">
+            <GiftCreateFirstName
+              autoComplete="first-name"
+              id="pelcro-input-first-name"
+              errorId="pelcro-input-first-name-error"
+              placeholder={t("gift.labels.firstNamePlaceholder")}
+              label={t("gift.labels.firstName")}
+            />
+            <GiftCreateLastName
+              wrapperClassName="plc-ml-3"
+              autoComplete="last-name"
+              id="pelcro-input-last-name"
+              errorId="pelcro-input-last-name-error"
+              placeholder={t("gift.labels.lastNamePlaceholder")}
+              label={t("gift.labels.lastName")}
+            />
+          </div>
+          <div className="plc-flex plc-items-end">
+            <GiftCreateEmail
+              id="pelcro-input-email"
+              errorId="pelcro-input-email-error"
+              placeholder={t("gift.labels.emailPlaceholder")}
+              autoComplete="off"
+              label={t("gift.labels.email")}
+              required
+            />
+          </div>
+          <p className="pelcro-footnote">
+            * {t("gift.labels.required")}
+          </p>
+          <GiftCreateSubmitButton
+            className="plc-mt-2"
+            name={t("gift.buttons.gift")}
+            id="pelcro-submit"
+          />
+        </GiftCreateContainer>
       </div>
-
-      <small className="pelcro-prefix-footnote pelcro-prefix-form-text">
-        * {t("gift.labels.required")}
-      </small>
-
-      <GiftCreateSubmitButton
-        name={t("gift.buttons.gift")}
-        className="pelcro-prefix-btn"
-      ></GiftCreateSubmitButton>
-    </GiftCreateContainer>
+    </div>
   );
 };

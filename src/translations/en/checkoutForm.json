@@ -1,14 +1,19 @@
 {
-    "labels": {
-        "card": "Enter card number",
-        "date": "Expiration date",
-        "CVC": "CVC",
-        "required": "required",
-        "submit": "Submit",
-        "addCode": "Add coupon code",
-        "hideCode": "Hide",
-        "codePlaceholder": "Enter your coupon code",
-        "applyCouponCode": "Apply coupon",
-        "code": "Coupon code"
-    }
+  "messages": {
+    "youAreSafe": "You're safe - PCI compliant 128 SSL by"
+  },
+  "labels": {
+    "card": "Enter card number",
+    "date": "Expiration date",
+    "CVC": "CVC",
+    "required": "required",
+    "submit": "Submit",
+    "pay": "pay",
+    "addCode": "Add coupon code",
+    "hideCode": "Hide",
+    "codePlaceholder": "Enter your coupon code",
+    "applyCouponCode": "Apply",
+    "code": "Coupon code",
+    "for": "for"
+  }
 }

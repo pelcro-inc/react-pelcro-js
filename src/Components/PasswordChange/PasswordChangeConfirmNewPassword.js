@@ -1,4 +1,5 @@
 import React, { useContext, useCallback } from "react";
+import { Input } from "../../SubComponents/Input";
 import {
   RESET_CONFIRM_NEW_PASSWORD_ERROR,
   SET_CONFIRM_NEW_PASSWORD,
@@ -6,13 +7,7 @@ import {
 } from "../../utils/action-types";
 import { store } from "./PasswordChangeContainer";
 
-export function PasswordChangeConfirmNewPassword({
-  placeholder,
-  style,
-  className,
-  id,
-  ...otherProps
-}) {
+export function PasswordChangeConfirmNewPassword(props) {
   const {
     dispatch,
     state: { confirmNewPassword, confirmNewPasswordError }
@@ -34,27 +29,14 @@ export function PasswordChangeConfirmNewPassword({
   }, [dispatch]);
 
   return (
-    <React.Fragment>
-      <input
-        type="password"
-        id={id}
-        style={{ ...style }}
-        className={className}
-        value={confirmNewPassword}
-        onChange={(e) => handleInputChange(e.target.value)}
-        onBlur={handleBlur}
-        onFocus={handleFocus}
-        placeholder={placeholder}
-        aria-invalid={Boolean(confirmNewPasswordError)}
-        aria-describedby="pelcro-input-confirm_new_password-error"
-        {...otherProps}
-      />
-      <div
-        id="pelcro-input-confirm_new_password-error"
-        aria-live="assertive"
-      >
-        {confirmNewPasswordError}
-      </div>
-    </React.Fragment>
+    <Input
+      type="password"
+      value={confirmNewPassword}
+      error={confirmNewPasswordError}
+      onChange={(e) => handleInputChange(e.target.value)}
+      onBlur={handleBlur}
+      onFocus={handleFocus}
+      {...props}
+    />
   );
 }

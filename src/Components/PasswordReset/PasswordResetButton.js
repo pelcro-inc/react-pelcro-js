@@ -1,35 +1,26 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext } from "react";
+import { useTranslation } from "react-i18next";
 import { Button } from "../../SubComponents/Button";
-import {
-  HANDLE_LOGIN,
-  HANDLE_SUBMIT
-} from "../../utils/action-types";
+import { HANDLE_SUBMIT } from "../../utils/action-types";
 import { store } from "./PasswordResetContainer";
 
-export const PasswordResetButton = ({ ...otherProps }) => {
+export const PasswordResetButton = ({ name, ...otherProps }) => {
   const {
-    state: { email, password, passwordConfirmation, buttonDisabled },
+    state: { buttonDisabled },
     dispatch
   } = useContext(store);
 
-  // const [isDisabled, setDisabled] = useState(buttonDisabled);
-
-  // useEffect(() => {
-  //   setDisabled(
-  //     buttonDisabled ||
-  //       !email.length ||
-  //       !password.length ||
-  //       !passwordConfirmation.length
-  //   );
-  // }, [email, password]);
+  const { t } = useTranslation("passwordReset");
 
   return (
     <Button
       {...otherProps}
       onClick={() => dispatch({ type: HANDLE_SUBMIT })}
       disabled={buttonDisabled}
+      isLoading={buttonDisabled}
+      isFullWidth={true}
     >
-      {otherProps.name || "Reset Password"}
+      {name ?? t("submit")}
     </Button>
   );
 };

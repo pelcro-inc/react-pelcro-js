@@ -1,25 +1,18 @@
 import React, { useContext, useEffect } from "react";
 import { Loader } from "../SubComponents/Loader";
-import { useTranslation } from "react-i18next";
-import { SET_COUNTRY, SET_COUNTRIES } from "../utils/action-types";
+import {
+  SET_COUNTRY,
+  SET_COUNTRIES,
+  SHOW_ALERT
+} from "../utils/action-types";
 import { sortCountries } from "../utils/utils";
-import { showError } from "../utils/showing-error";
+import { Select } from "./Select";
 
-/**
- *
- */
-export function CountrySelect({
-  placeholder = "",
-  style,
-  className,
-  store,
-  ...otherProps
-}) {
+export function CountrySelect({ placeholder, store, ...otherProps }) {
   const {
     dispatch,
     state: { country, countries, loading }
   } = useContext(store);
-  const { t } = useTranslation("address");
 
   const getCountryList = () => {
     window.Pelcro.geolocation.getCountryList(setCountries);
@@ -27,7 +20,13 @@ export function CountrySelect({
 
   const setCountries = (error, tmp) => {
     if (error) {
-      showError(error.message, "pelcro-error-address");
+      dispatch({
+        type: SHOW_ALERT,
+        payload: {
+          type: "error",
+          content: error.message
+        }
+      });
     } else if (tmp) {
       dispatch({
         type: SET_COUNTRIES,
@@ -58,26 +57,23 @@ export function CountrySelect({
 
   if (loading) {
     return (
-      <div className="state-select-loader">
+      <div className="pelcro-loader-wrapper">
         <Loader />
       </div>
     );
   }
 
   return (
-    <React.Fragment>
-      <select
-        value={country}
-        onChange={onCountryChange}
-        className={className}
-        autoComplete="country"
-        {...otherProps}
-      >
-        <option value="" disabled selected>
-          {placeholder}
-        </option>
-        {createCountryItems()}
-      </select>
-    </React.Fragment>
+    <Select
+      value={country}
+      onChange={onCountryChange}
+      autoComplete="country"
+      {...otherProps}
+    >
+      <option value="" disabled selected>
+        {placeholder}
+      </option>
+      {createCountryItems()}
+    </Select>
   );
 }

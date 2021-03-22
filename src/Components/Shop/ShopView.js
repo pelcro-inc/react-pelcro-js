@@ -7,41 +7,40 @@ export const ShopView = (props) => {
   const { t } = useTranslation("shop");
 
   return (
-    <ShopContainer {...props}>
-      <div id="products">
-        <div className="pelcro-prefix-product-field">
+    <div id="pelcro-shop-view">
+      <ShopContainer {...props}>
+        <div className="plc-grid plc-justify-center plc-rounded plc-justify-items-center plc-gap-y-5 plc-gap-x-3 pelcro-shop-products">
           {props.products.map((product) => {
             return (
               <div
-                key={`product-${product.id}`}
-                className="pelcro-prefix-product-container"
+                key={product.id}
+                className="plc-flex plc-flex-col plc-items-center plc-p-2 plc-m-3 plc-border plc-border-gray-400 plc-border-solid plc-rounded-md plc-w-max pelcro-shop-product-wrapper"
               >
                 {product.image && (
                   <img
-                    className="pelcro-prefix-shop-product-img"
-                    alt="product"
+                    className="pelcro-shop-product-image"
+                    alt={`image of ${product.name}`}
                     src={product.image}
                   />
                 )}
-                <div className="pelcro-prefix-product-text-block">
-                  <div className="pelcro-prefix-shop-product-name">
+                <div className="plc-flex plc-flex-col plc-items-center plc-mt-auto pelcro-shop-product-info-wrapper">
+                  <p className="plc-font-bold pelcro-shop-product-name">
                     {product.name}
-                  </div>
-                  <div className="pelcro-prefix-shop-product-description">
+                  </p>
+                  <p className="plc-font-bold pelcro-shop-product-description">
                     {product.description}
-                  </div>
+                  </p>
                   <ShopSelectProductButton
                     product={product}
-                    className="pelcro-prefix-change-text pelcro-prefix-btn"
-                  >
-                    {t("buttons.select")}
-                  </ShopSelectProductButton>
+                    name={t("buttons.select")}
+                    className="plc-mt-2"
+                  />
                 </div>
               </div>
             );
           })}
         </div>
-      </div>
-    </ShopContainer>
+      </ShopContainer>
+    </div>
   );
 };

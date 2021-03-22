@@ -1,5 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { Link } from "../../SubComponents/Link";
 
 export const MeterView = (props) => {
   const { t } = useTranslation("meter");
@@ -22,40 +23,36 @@ export const MeterView = (props) => {
   };
 
   return (
-    <React.Fragment>
-      {site.logo.url && (
-        <img
-          alt="avatar"
-          className="pelcro-prefix-site-logo pelcro-prefix-center"
-          src={site.logo.url}
-        ></img>
-      )}
+    <div className="plc-flex plc-items-center plc-justify-between">
       <div>
-        <h4>{title}</h4>
-        <p>
+        <h4 className="plc-mb-2 plc-text-xl plc-font-semibold plc-text-gray-600">
+          {title}
+        </h4>
+        <p className="plc-text-sm plc-text-gray-600">
           {subtitle}{" "}
-          <button
-            className="pelcro-prefix-link"
-            onClick={displaySelectView}
-          >
+          <Link className="plc-ml-1" onClick={displaySelectView}>
             {t("messages.subscribeNow")}
-          </button>
+          </Link>
           {!window.Pelcro.user.isAuthenticated() && (
             <>
               <br />
               <span>
                 {t("messages.alreadyHaveAccount") + " "}
-                <button
-                  className="pelcro-prefix-link"
-                  onClick={displayLoginView}
-                >
+                <Link className="plc-ml-1" onClick={displayLoginView}>
                   {t("messages.loginHere")}
-                </button>
+                </Link>
               </span>
             </>
           )}
         </p>
       </div>
-    </React.Fragment>
+      {site.logo.url && (
+        <img
+          alt="avatar"
+          className="plc-w-12 plc-h-12 plc-ml-4 plc-mr-2"
+          src={site.logo.url}
+        ></img>
+      )}
+    </div>
   );
 };

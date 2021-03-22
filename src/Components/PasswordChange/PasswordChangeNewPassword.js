@@ -1,4 +1,5 @@
 import React, { useContext, useCallback } from "react";
+import { Input } from "../../SubComponents/Input";
 import {
   VALIDATE_NEW_PASSWORD,
   SET_NEW_PASSWORD,
@@ -6,13 +7,7 @@ import {
 } from "../../utils/action-types";
 import { store } from "./PasswordChangeContainer";
 
-export function PasswordChangeNewPassword({
-  placeholder,
-  style,
-  className,
-  id,
-  ...otherProps
-}) {
+export function PasswordChangeNewPassword(props) {
   const {
     dispatch,
     state: { newPassword, newPasswordError }
@@ -34,24 +29,14 @@ export function PasswordChangeNewPassword({
   }, [dispatch]);
 
   return (
-    <React.Fragment>
-      <input
-        type="password"
-        id={id}
-        style={{ ...style }}
-        className={className}
-        value={newPassword}
-        onChange={(e) => handleInputChange(e.target.value)}
-        onBlur={handleBlur}
-        onFocus={handleFocus}
-        placeholder={placeholder}
-        aria-invalid={Boolean(newPasswordError)}
-        aria-describedby="pelcro-input-new_password-error"
-        {...otherProps}
-      />
-      <div id="pelcro-input-new_password-error" aria-live="assertive">
-        {newPasswordError}
-      </div>
-    </React.Fragment>
+    <Input
+      type="password"
+      value={newPassword}
+      error={newPasswordError}
+      onChange={(e) => handleInputChange(e.target.value)}
+      onBlur={handleBlur}
+      onFocus={handleFocus}
+      {...props}
+    />
   );
 }

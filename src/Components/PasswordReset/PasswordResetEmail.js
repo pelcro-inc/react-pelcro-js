@@ -4,10 +4,9 @@ import { Email } from "../../SubComponents/Email";
 
 export const PasswordResetEmail = (props) => (
   <Email
-    id="pelcro-input-email"
     store={store}
+    {...props}
     value={window.Pelcro.helpers.getURLParameter("email")}
     disabled
-    {...props}
   />
 );

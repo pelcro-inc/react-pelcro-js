@@ -2,11 +2,10 @@ import React, { useContext, useEffect } from "react";
 import { Loader } from "../SubComponents/Loader";
 import { SET_STATE, SET_STATES } from "../utils/action-types";
 import { showError } from "../utils/showing-error";
+import { Select } from "./Select";
 
 export function StateSelect({
   placeholder = "",
-  style,
-  className,
   store,
   ...otherProps
 }) {
@@ -68,17 +67,16 @@ export function StateSelect({
 
   if (loading || (!createStateItems() && country)) {
     return (
-      <div className="state-select-loader">
+      <div className="plc-w-full plc-flex plc-justify-center plc-items-center pelcro-loader-wrapper">
         <Loader />
       </div>
     );
   }
 
   return (
-    <select
+    <Select
       value={state}
       onChange={onStateChange}
-      className={className}
       autoComplete="state"
       {...otherProps}
     >
@@ -86,6 +84,6 @@ export function StateSelect({
         {placeholder}
       </option>
       {createStateItems()}
-    </select>
+    </Select>
   );
 }

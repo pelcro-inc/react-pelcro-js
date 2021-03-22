@@ -161,6 +161,9 @@ class App extends Component {
     } else if (view === "newsletter") {
       this.setView("newsletter");
       return true;
+    } else if (view === "address") {
+      this.setView("address");
+      return true;
     } else {
       return false;
     }
@@ -192,17 +195,12 @@ class App extends Component {
   };
 
   enableScroll = () => {
-    document.body.className = document.body.className.replace(
-      "pelcro-prefix-modal-open",
-      ""
-    );
+    document.body.classList.remove("pelcro-modal-open");
   };
 
   disableScroll = () => {
-    if (
-      !document.body.classList.contains("pelcro-prefix-modal-open")
-    ) {
-      document.body.className += " pelcro-prefix-modal-open";
+    if (!document.body.classList.contains("pelcro-modal-open")) {
+      document.body.classList.add("pelcro-modal-open");
     }
   };
 
@@ -330,10 +328,12 @@ class App extends Component {
 
     if (products) {
       ReactDOM.render(
-        <ShopView
-          getProducts={this.getProducts}
-          products={this.state.products}
-        />,
+        <div className="pelcro-root">
+          <ShopView
+            getProducts={this.getProducts}
+            products={this.state.products}
+          />
+        </div>,
         products
       );
     }
@@ -555,7 +555,7 @@ class App extends Component {
 
   render() {
     return (
-      <div id="pelcro-app">
+      <div id="pelcro-app" className="pelcro-root">
         <div id="list">
           {this.state.isAuthenticated && (
             <DashboardOpenButton
@@ -572,7 +572,7 @@ class App extends Component {
               disableGifting={this.state.isRenewingGift}
               plan={this.state.plan}
               product={this.state.product}
-              resetView={this.resetView}
+              onClose={this.resetView}
               setProductAndPlan={this.setProductAndPlan}
               setView={this.setView}
               subscribe={this.subscribe}
@@ -582,7 +582,7 @@ class App extends Component {
           {this.state.view === "login" && (
             <LoginModal
               setView={this.setView}
-              resetView={this.resetView}
+              onClose={this.resetView}
               onSuccess={() => {
                 this.setView("");
                 this.loggedIn();
@@ -593,7 +593,7 @@ class App extends Component {
             <RegisterModal
               product={this.state.product}
               setView={this.setView}
-              resetView={this.resetView}
+              onClose={this.resetView}
               onDisplay={() => {
                 ReactGA.event({
                   category: "VIEWS",
@@ -607,7 +607,7 @@ class App extends Component {
           {this.state.view === "gift" && (
             <GiftCreateModal
               setView={this.setView}
-              resetView={this.resetView}
+              onClose={this.resetView}
               onDisplay={() => {
                 ReactGA.event({
                   category: "VIEWS",
@@ -633,7 +633,7 @@ class App extends Component {
           {this.state.view === "redeem" && (
             <GiftRedeemModal
               setView={this.setView}
-              resetView={this.resetView}
+              onClose={this.resetView}
               onDisplay={() => {
                 ReactGA.event({
                   category: "VIEWS",
@@ -658,7 +658,7 @@ class App extends Component {
                 giftRecipient={this.state.giftRecipient}
                 plan={this.state.plan}
                 product={this.state.product}
-                resetView={this.resetView}
+                onClose={this.resetView}
                 logout={this.logout}
                 onDisplay={() => {
                   ReactGA.event({
@@ -679,7 +679,7 @@ class App extends Component {
                 isRenewingGift={this.state.isRenewingGift}
                 plan={this.state.plan}
                 product={this.state.product}
-                resetView={this.resetView}
+                onClose={this.resetView}
                 logout={this.logout}
                 onDisplay={() => {
                   ReactGA.event({
@@ -711,13 +711,13 @@ class App extends Component {
                 });
               }}
               product={this.state.product}
-              resetView={this.resetView}
+              onClose={this.resetView}
             />
           )}
           {this.state.view === "address" && (
             <AddressCreateModal
               giftCode={this.state.giftCode}
-              resetView={this.resetView}
+              onClose={this.resetView}
               onSuccess={() => {
                 if (!this.state.product) {
                   this.setView("orderCreate");
@@ -731,7 +731,7 @@ class App extends Component {
           {this.state.view === "newsletter" && (
             <NewsLetter
               product={this.state.product}
-              resetView={this.resetView}
+              onClose={this.resetView}
               setView={this.setView}
             />
           )}
@@ -739,27 +739,27 @@ class App extends Component {
             <MeterModal
               plan={this.state.plan}
               product={this.state.product}
-              resetView={this.resetView}
+              onClose={this.resetView}
               setView={this.setView}
             />
           )}
 
           {this.state.view === "password-forgot" && (
             <PasswordForgotModal
-              resetView={this.resetView}
+              onClose={this.resetView}
               setView={this.setView}
             />
           )}
           {this.state.view === "password-reset" && (
-            <PasswordResetModal resetView={this.resetView} />
+            <PasswordResetModal onClose={this.resetView} />
           )}
           {this.state.view === "password-change" && (
-            <PasswordChangeModal resetView={this.resetView} />
+            <PasswordChangeModal onClose={this.resetView} />
           )}
 
           {this.state.view === "source-create" && (
             <PaymentMethodUpdateModal
-              resetView={this.resetView}
+              onClose={this.resetView}
               onDisplay={() => {
                 ReactGA.event({
                   category: "VIEWS",
@@ -778,12 +778,12 @@ class App extends Component {
           )}
 
           {this.state.view === "user-edit" && (
-            <UserUpdateModal resetView={this.resetView} />
+            <UserUpdateModal onClose={this.resetView} />
           )}
           {this.state.view === "address-edit" && (
             <AddressUpdateModal
               addressId={this.state.addressId}
-              resetView={this.resetView}
+              onClose={this.resetView}
               onSuccess={() => null}
             />
           )}
@@ -792,7 +792,7 @@ class App extends Component {
             <CartModal
               getProducts={this.getProducts}
               products={this.state.products}
-              resetView={this.resetView}
+              onClose={this.resetView}
               onSuccess={(items) => {
                 this.setOrder(items);
 
@@ -809,7 +809,7 @@ class App extends Component {
             <OrderCreateModal
               order={this.state.order}
               setView={this.setView}
-              resetView={this.resetView}
+              onClose={this.resetView}
               onDisplay={() => {
                 ReactGA.event({
                   category: "VIEWS",
@@ -830,7 +830,7 @@ class App extends Component {
               order={this.state.order}
               plan={this.state.plan}
               product={this.state.product}
-              resetView={this.resetView}
+              onClose={this.resetView}
               ReactGA={ReactGA}
               setView={this.setView}
             />
@@ -841,7 +841,7 @@ class App extends Component {
               setAddress={this.setAddress}
               setSubscriptionIdToRenew={this.setSubscriptionIdToRenew}
               setIsRenewingGift={this.setIsRenewingGift}
-              resetView={this.resetView}
+              onClose={this.resetView}
               logout={this.logout}
               setView={this.setView}
               setProductAndPlan={this.setProductAndPlan}

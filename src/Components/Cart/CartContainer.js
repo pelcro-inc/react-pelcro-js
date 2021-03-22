@@ -5,11 +5,8 @@ import useReducerWithSideEffects, {
 } from "use-reducer-with-side-effects";
 import {
   SET_PRODUCTS,
-  HANDLE_REMOVE_PRODUCT,
   HANDLE_SUBMIT
 } from "../../utils/action-types";
-import { getErrorMessages } from "../common/Helpers";
-import { showError } from "../../utils/showing-error";
 
 const initialState = {
   products: [],

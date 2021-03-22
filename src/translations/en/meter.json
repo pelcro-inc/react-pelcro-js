@@ -1,11 +1,11 @@
 {
-    "messages": {
-        "freeVisits": "Free visits left:",
-        "subscribeNow": "Subscribe now!",
-        "alreadyHaveAccount": "Already have an account?",
-        "loginHere": "Login here"
-    },
-    "errors": {
-        "": ""
-    }
+  "messages": {
+    "freeVisits": "Free visits left:",
+    "subscribeNow": "Subscribe",
+    "alreadyHaveAccount": "Already have an account?",
+    "loginHere": "Login here"
+  },
+  "errors": {
+    "": ""
+  }
 }

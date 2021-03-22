@@ -3,7 +3,8 @@ import PropTypes from "prop-types";
 import { store } from "../PaymentMethod/PaymentMethodContainer";
 import {
   HANDLE_PAYPAL_SUBSCRIPTION,
-  DISABLE_SUBMIT
+  DISABLE_SUBMIT,
+  LOADING
 } from "../../utils/action-types";
 import { PaypalClient } from "../../services/PayPal/PaypalCheckout.service";
 
@@ -46,8 +47,10 @@ export const PaypalSubscribeButton = (props) => {
             type: HANDLE_PAYPAL_SUBSCRIPTION,
             payload: nonce
           });
+          dispatch({ type: LOADING, payload: true });
         },
         onPaymentCancel: () => {
+          dispatch({ type: LOADING, payload: false });
           dispatch({ type: DISABLE_SUBMIT, payload: false });
         }
       });

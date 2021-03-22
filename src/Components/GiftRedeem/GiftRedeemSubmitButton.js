@@ -1,28 +1,25 @@
-import React, { useContext, useMemo } from "react";
-import Submit from "../common/Submit";
+import React, { useContext } from "react";
 import { store } from "./GiftRedeemContainer";
 import { HANDLE_SUBMIT } from "../../utils/action-types";
+import { Button } from "../../SubComponents/Button";
+import { useTranslation } from "react-i18next";
 
-export const GiftRedeemSubmitButton = ({
-  name,
-  style,
-  className
-}) => {
+export const GiftRedeemSubmitButton = ({ name, ...otherProps }) => {
   const {
     dispatch,
     state: { disableSubmit }
   } = useContext(store);
 
-  return useMemo(
-    () => (
-      <Submit
-        onClick={() => dispatch({ type: HANDLE_SUBMIT })}
-        text={name}
-        disabled={disableSubmit}
-        style={style}
-        className={className}
-      />
-    ),
-    [className, name, disableSubmit, style]
+  const { t } = useTranslation("register");
+
+  return (
+    <Button
+      {...otherProps}
+      onClick={() => dispatch({ type: HANDLE_SUBMIT })}
+      disabled={disableSubmit}
+      isFullWidth={true}
+    >
+      {name ?? t("redeem.buttons.redeem")}
+    </Button>
   );
 };

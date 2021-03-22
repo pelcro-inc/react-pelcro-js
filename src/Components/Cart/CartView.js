@@ -1,103 +1,96 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import Authorship from "../common/Authorship";
 import { CartContainer } from "./CartContainer";
 import { CartRemoveProductButton } from "./CartRemoveProductButton";
 import { CartSubmit } from "./CartSubmit";
 import { CartTotalPrice } from "./CartTotalPrice";
 import { ReactComponent as RemoveIcon } from "../../assets/x-icon.svg";
+import { Badge } from "../../SubComponents/Badge";
 
 export const CartView = (props) => {
   const { t } = useTranslation("cart");
-  let isEmpty = !props.products.filter((product) => product.quantity)
-    .length;
-  return (
-    <CartContainer {...props}>
-      <div className="pelcro-prefix-modal-body">
-        <div className="pelcro-prefix-title-block">
-          <h4>{t("title")}</h4>
-        </div>
+  const isEmpty =
+    (window.Pelcro.cartProducts &&
+      window.Pelcro.cartProducts.length === 0) ??
+    true;
 
-        <div className="pelcro-prefix-cart-field">
-          {props.products.map((product) => {
-            if (product.quantity > 0) {
-              return (
-                <div key={`product-${product.id}`}>
-                  <div
-                    id={`pelcro-prefix-container-product-${product.id}`}
-                    className="pelcro-prefix-product-container row"
-                  >
-                    <div className="pelcro-prefix-product-name-row col-6 row pelcro-prefix-name">
-                      <div className="pelcro-prefix-img-wrapper">
+  return (
+    <div id="pelcro-cart-view">
+      <div className="plc-flex plc-flex-col plc-items-center plc-text-lg plc-font-semibold plc-text-center pelcro-title-wrapper">
+        <h4>{t("title")}</h4>
+      </div>
+      {isEmpty ? (
+        <p className="plc-mt-4 plc-text-center pelcro-cart-empty">
+          {t("empty")}
+        </p>
+      ) : (
+        <div className="plc-mt-2 pelcro-form">
+          <CartContainer {...props}>
+            <div className="pelcro-cart-wrapper">
+              {props.products.map((product) => {
+                if (product.quantity > 0) {
+                  return (
+                    <div
+                      key={product.id}
+                      id={`pelcro-cart-product-${product.id}`}
+                      className="plc-flex plc-items-center plc-pt-2 plc-mt-2 plc-border-t plc-border-gray-400 plc-min-h-12 plc-justify-evenly pelcro-cart-product-wrapper"
+                    >
+                      <div className="plc-w-1/4 pelcro-cart-image-wrapper">
                         {product.image && (
-                          <div>
+                          <Badge content={product.quantity}>
                             <img
-                              className="pelcro-prefix-cart-product-img"
-                              alt="product"
+                              className="plc-w-20 plc-h-20 pelcro-cart-product-image"
+                              alt={`image of ${product.name}`}
                               src={product.image}
                             />
-                          </div>
+                          </Badge>
                         )}
-                        <div className="pelcro-prefix-cart-product-quantity pelcro-prefix-quantity">
-                          {product.quantity}
-                        </div>
                       </div>
-                      <div className="pelcro-prefix-cart-product-name">
+                      <div className="plc-w-2/5 plc-break-words pelcro-cart-product-name">
                         {product.name}
                       </div>
-                    </div>
-                    <div className="pelcro-prefix-product-row col-6 col-md-4 row">
-                      <div className="col-7 pelcro-prefix-cart-product-price pelcro-prefix-price">
-                        {" "}
+                      <div className="plc-w-1/5 plc-text-center pelcro-cart-product-price">
                         {parseFloat(
-                          (product?.price / 100) * product.quantity
+                          (product.price / 100) * product.quantity
                         ).toLocaleString("fr-CA", {
                           style: "currency",
                           currency: "CAD"
-                        })}{" "}
+                        })}
                       </div>
-                      <div className="col-5">
-                        <CartRemoveProductButton
-                          product={product}
-                          className="pelcro-prefix-btn-dark remove-btn"
-                        >
+                      <CartRemoveProductButton
+                        id={`pelcro-remove-product-${product.id}`}
+                        className="plc-bg-gray-800 hover:plc-bg-gray-600"
+                        data-key={product.id}
+                        aria-label="remove item from cart"
+                        icon={
                           <RemoveIcon
                             fill="white"
-                            className="remove-btn-icon"
                             aria-hidden="true"
                             focusable="false"
                           />
-                        </CartRemoveProductButton>
-                      </div>
+                        }
+                      />
                     </div>
-                  </div>
-                </div>
-              );
-            } else return <div key={`product-${product.id}`}> </div>;
-          })}
-
-          {isEmpty && <div> {t("empty")}</div>}
-        </div>
-
-        {!isEmpty && (
-          <div className="pelcro-prefix-total-container row">
-            <div className="pelcro-prefix-total-block row col-md-12">
-              <div className="pelcro-prefix-total-text col-6">
-                {" "}
-                {t("total")}:{" "}
-              </div>
-              <div className="pelcro-prefix-total-price col-6">
-                {" "}
-                <CartTotalPrice />
-              </div>
+                  );
+                }
+              })}
             </div>
-            <CartSubmit className="pelcro-prefix-btn" />
-          </div>
-        )}
-      </div>
-      <div className="pelcro-prefix-modal-footer">
-        <Authorship></Authorship>
-      </div>
-    </CartContainer>
+            <div className="plc-flex plc-items-center plc-justify-end plc-pt-2 plc-mt-2 plc-font-bold plc-border-t plc-border-gray-400 pelcro-cart-total-wrapper">
+              <p className="plc-mr-1 pelcro-cart-total-text">
+                {t("total")}:
+              </p>
+              <p className="pelcro-cart-total">
+                <CartTotalPrice />
+              </p>
+            </div>
+            <CartSubmit
+              className="plc-mt-2"
+              id="pelcro-submit"
+              name={t("confirm")}
+            />
+          </CartContainer>
+        </div>
+      )}
+    </div>
   );
 };
