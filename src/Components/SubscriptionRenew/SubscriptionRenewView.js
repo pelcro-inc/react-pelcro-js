@@ -1,12 +1,11 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { PaymentMethodView } from "../PaymentMethod/PaymentMethodView";
-import ErrMessage from "../common/ErrMessage";
-import AlertSuccess from "../common/AlertSuccess";
 
 export const SubscriptionRenewView = ({
   product,
   plan,
+  giftRecipient,
   subscriptionIdToRenew,
   isRenewingGift,
   onFailure,
@@ -14,54 +13,62 @@ export const SubscriptionRenewView = ({
   onDisplay,
   onGiftRenewalSuccess
 }) => {
-  const { t } = useTranslation("payment");
+  const { t } = useTranslation("checkoutForm");
+
+  const getPricingText = (plan) => {
+    const autoRenewed = plan.auto_renew;
+    const { interval, intervalCount } = plan;
+
+    const formattedInterval =
+      intervalCount > 1
+        ? `${intervalCount} ${interval}`
+        : `1 ${interval}`;
+
+    return (
+      <p className="plc-text-gray-600">
+        <span className="plc-tracking-wider plc-uppercase">
+          {plan.nickname}
+        </span>
+        <br />
+        <span className="plc-text-xl plc-font-semibold plc-text-green-600">
+          {plan.amount_formatted}{" "}
+        </span>
+        <span className="plc-font-thin">
+          {autoRenewed ? "/" : t("labels.for")} {formattedInterval}
+        </span>
+      </p>
+    );
+  };
+
   return (
-    <div>
-      <div className="pelcro-prefix-title-block">
-        <h4>{product.paywall.subscribe_title}</h4>
+    <div id="pelcro-subscription-renew-view">
+      <div className="plc-text-center">
+        <h4 className="plc-mb-2 plc-text-xl">
+          {product?.paywall?.subscribe_title ??
+            window.Pelcro.paywall.read()?.subscribe_title}
+        </h4>{" "}
         <p>
-          {product.paywall.subscribe_subtitle} -{" "}
-          {plan.amount_formatted}
-          {plan.auto_renew && (
-            <span>/({plan.interval_count})</span>
-          )}{" "}
-          {plan.interval}.
+          {product?.paywall?.subscribe_subtitle ??
+            window.Pelcro.paywall.read()?.subscribe_subtitle}
         </p>
-      </div>
-
-      <ErrMessage name="payment-create" />
-
-      <div className="pelcro-prefix-payment-block">
-        <div className="pelcro-prefix-alert pelcro-prefix-alert-success">
-          <div className="pelcro-prefix-payment-message">
-            <span>
-              {t("messages.youAreSafe")}{" "}
-              <a
-                className="pelcro-prefix-link"
-                rel="nofollow"
-                target="new"
-                href="https://www.stripe.com/us/customers"
-              >
-                Stripe
-              </a>{" "}
-            </span>
-          </div>
-        </div>
-        <div className="pelcro-prefix-form">
-          <PaymentMethodView
-            type="createPayment"
-            showCoupon={true}
-            plan={plan}
-            subscriptionIdToRenew={subscriptionIdToRenew}
-            isRenewingGift={isRenewingGift}
-            product={product}
-            onFailure={onFailure}
-            onSuccess={onSuccess}
-            onDisplay={onDisplay}
-            onGiftRenewalSuccess={onGiftRenewalSuccess}
-          />
+        <div className="plc-w-full plc-p-2 plc-mt-2 plc-font-semibold plc-text-center plc-text-gray-700 plc-bg-gray-100 plc-border plc-border-gray-200">
+          {getPricingText(plan)}
         </div>
       </div>
+
+      <PaymentMethodView
+        type="createPayment"
+        showCoupon={true}
+        plan={plan}
+        subscriptionIdToRenew={subscriptionIdToRenew}
+        isRenewingGift={isRenewingGift}
+        product={product}
+        giftRecipient={giftRecipient}
+        onFailure={onFailure}
+        onSuccess={onSuccess}
+        onDisplay={onDisplay}
+        onGiftRenewalSuccess={onGiftRenewalSuccess}
+      />
     </div>
   );
 };

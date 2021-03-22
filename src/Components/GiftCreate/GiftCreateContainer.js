@@ -9,15 +9,19 @@ import {
   SET_LAST_NAME,
   SET_FIRST_NAME,
   HANDLE_SUBMIT,
-  DISABLE_SUBMIT
+  DISABLE_SUBMIT,
+  SHOW_ALERT
 } from "../../utils/action-types";
-import { showError } from "../../utils/showing-error";
 
 const initialState = {
   email: "",
   firstName: "",
   lastName: "",
-  buttonDisabled: true
+  buttonDisabled: true,
+  alert: {
+    type: "error",
+    content: ""
+  }
 };
 const store = createContext(initialState);
 const { Provider } = store;
@@ -32,18 +36,21 @@ const GiftCreateContainer = ({
   const { t } = useTranslation("register");
   const handleSubmit = ({ email, firstName, lastName }, dispatch) => {
     if (!email) {
+      dispatch({
+        type: SHOW_ALERT,
+        payload: {
+          type: "error",
+          content: t("gift.messages.enterEmail")
+        }
+      });
       onFailure();
-      return showError(
-        t("gift.messages.enterEmail"),
-        "pelcro-error-gift"
-      );
+    } else {
+      onSuccess({
+        email,
+        firstName,
+        lastName
+      });
     }
-
-    return onSuccess({
-      email,
-      firstName,
-      lastName
-    });
   };
 
   const [state, dispatch] = useReducerWithSideEffects(
@@ -65,6 +72,12 @@ const GiftCreateContainer = ({
           return Update({
             ...state,
             lastName: action.payload
+          });
+
+        case SHOW_ALERT:
+          return Update({
+            ...state,
+            alert: action.payload
           });
 
         case DISABLE_SUBMIT:

@@ -13,14 +13,16 @@ import {
   SET_FIRST_NAME,
   SET_LAST_NAME,
   SET_TEXT_FIELD,
-  SET_STATE
+  SET_STATE,
+  SHOW_ALERT,
+  LOADING
 } from "../../utils/action-types";
 import { getUserLatestAddress } from "../../utils/utils";
 import { getErrorMessages } from "../common/Helpers";
-import { showError } from "../../utils/showing-error";
 
 const initialState = {
   disableSubmit: false,
+  isSubmitting: false,
   firstName: "",
   lastName: "",
   line1: "",
@@ -29,7 +31,11 @@ const initialState = {
   country: "",
   postalCode: "",
   states: [],
-  countries: []
+  countries: [],
+  alert: {
+    type: "error",
+    content: ""
+  }
 };
 const store = createContext(initialState);
 const { Provider } = store;
@@ -50,13 +56,12 @@ const AddressCreateContainer = ({
     window.Pelcro.insight.track("Modal Displayed", {
       name: "address"
     });
-
-    // document.addEventListener("keydown", submitAddress);
-
-    return () => {
-      //   document.removeEventListener("keydown", submitAddress);
-    };
   }, []);
+
+  const enableSubmitButton = () => {
+    dispatch({ type: DISABLE_SUBMIT, payload: false });
+    dispatch({ type: LOADING, payload: false });
+  };
 
   const submitAddress = (
     {
@@ -85,12 +90,15 @@ const AddressCreateContainer = ({
       },
       (err, res) => {
         if (err) {
+          dispatch({
+            type: SHOW_ALERT,
+            payload: {
+              type: "error",
+              content: getErrorMessages(err)
+            }
+          });
           onFailure(err);
-          dispatch({ type: DISABLE_SUBMIT, payload: false });
-          return showError(
-            getErrorMessages(err),
-            "pelcro-error-address"
-          );
+          enableSubmitButton();
         }
 
         if (giftCode) {
@@ -103,14 +111,17 @@ const AddressCreateContainer = ({
               address_id: address?.id
             },
             (err, res) => {
-              dispatch({ type: DISABLE_SUBMIT, payload: false });
+              enableSubmitButton();
 
               if (err) {
+                dispatch({
+                  type: SHOW_ALERT,
+                  payload: {
+                    type: "error",
+                    content: getErrorMessages(err)
+                  }
+                });
                 onFailure(err);
-                return showError(
-                  getErrorMessages(err),
-                  "pelcro-error-address"
-                );
               }
 
               alert(t("messages.subRedeemed"));
@@ -118,7 +129,7 @@ const AddressCreateContainer = ({
             }
           );
         } else {
-          dispatch({ type: DISABLE_SUBMIT, payload: false });
+          enableSubmitButton();
           return onSuccess();
         }
       }
@@ -154,10 +165,19 @@ const AddressCreateContainer = ({
             ...state,
             ...action.payload
           });
-
+        case SHOW_ALERT:
+          return Update({
+            ...state,
+            alert: action.payload
+          });
+        case LOADING:
+          return Update({
+            ...state,
+            isSubmitting: action.payload
+          });
         case HANDLE_SUBMIT:
           return UpdateWithSideEffect(
-            { ...state, disableSubmit: true },
+            { ...state, disableSubmit: true, isSubmitting: true },
             (state, dispatch) => submitAddress(state, dispatch)
           );
         default:

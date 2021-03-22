@@ -1,0 +1,13 @@
+# ignore everything by default
+*.js
+*.jsx
+**/*.js
+**/*.jsx
+
+# allow linting of everything in src
+!src/**/*.js
+!src/**/*.jsx
+
+# now re-ignore non-library code 
+src/index.js
+src/App.js

@@ -9,18 +9,9 @@ import {
   SET_PASSWORD,
   SET_PASSWORD_ERROR
 } from "../utils/action-types";
+import { Input } from "./Input";
 
-/**
- *
- */
-export function Password({
-  placeholder,
-  style,
-  className,
-  id,
-  store,
-  ...otherProps
-}) {
+export function Password({ store, ...otherProps }) {
   const { t } = useTranslation("common");
 
   const {
@@ -51,20 +42,14 @@ export function Password({
   }, [finishedTyping, password, handleInputChange]);
 
   return (
-    <React.Fragment>
-      <input
-        type="password"
-        id={id}
-        style={{ ...style }}
-        className={(passwordError ? "input-error " : "") + className}
-        value={password}
-        onChange={(e) => handleInputChange(e.target.value)}
-        placeholder={placeholder}
-        onBlur={() => setFinishedTyping(true)}
-        onFocus={() => setFinishedTyping(false)}
-        {...otherProps}
-      ></input>
-      <div>{passwordError}</div>
-    </React.Fragment>
+    <Input
+      type="password"
+      error={passwordError}
+      value={password}
+      onChange={(e) => handleInputChange(e.target.value)}
+      onBlur={() => setFinishedTyping(true)}
+      onFocus={() => setFinishedTyping(false)}
+      {...otherProps}
+    />
   );
 }

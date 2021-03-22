@@ -1,37 +1,30 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { PaymentMethodUpdateView } from "./PaymentMethodUpdateView";
-import Header from "../common/Header";
+import {
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter
+} from "../../SubComponents/Modal";
 import Authorship from "../common/Authorship";
 
 export const PaymentMethodUpdateModal = (props) => {
+  const site = window.Pelcro.site.read();
+
   return (
-    <div className="pelcro-prefix-view">
-      <div
-        className="pelcro-prefix-modal modal pelcro-prefix-fade pelcro-prefix-show"
-        id="pelcro-view-payment"
-        tabIndex="-1"
-        role="dialog"
-        aria-hidden="true"
-      >
-        <div
-          className="pelcro-prefix-modal-dialog pelcro-prefix-modal-dialog-centered"
-          role="document"
-        >
-          <div className="pelcro-prefix-modal-content">
-            <Header
-              closeButton={true}
-              resetView={props.resetView}
-              site={window.Pelcro.site.read()}
-            ></Header>
-            <div className="pelcro-prefix-modal-body">
-              <PaymentMethodUpdateView {...props} />
-            </div>
-            <div className="pelcro-prefix-modal-footer">
-              <Authorship></Authorship>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <Modal id="pelcro-payment-method-update-modal">
+      <ModalHeader
+        hideCloseButton={!window.Pelcro.paywall.displayCloseButton()}
+        onClose={props.onClose}
+        logo={site.logo}
+        title={site.name}
+      ></ModalHeader>
+      <ModalBody>
+        <PaymentMethodUpdateView {...props} />
+      </ModalBody>
+      <ModalFooter>
+        <Authorship></Authorship>
+      </ModalFooter>
+    </Modal>
   );
 };

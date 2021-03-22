@@ -1,12 +1,11 @@
-import React, { useContext, useMemo } from "react";
+import React, { useContext } from "react";
 import { store } from "./CartContainer";
 import { SET_PRODUCTS } from "../../utils/action-types";
+import { Button } from "../../SubComponents/Button";
 
 export const CartRemoveProductButton = ({
-  style,
-  className,
   children,
-  product
+  ...otherProps
 }) => {
   const {
     dispatch,
@@ -26,7 +25,7 @@ export const CartRemoveProductButton = ({
           dispatch({ type: SET_PRODUCTS, payload: productArr });
 
           productContainer = document.getElementById(
-            `pelcro-prefix-container-product-${product.id}`
+            `pelcro-cart-product-${product.id}`
           );
           if (productContainer)
             productContainer.classList.add(
@@ -52,21 +51,10 @@ export const CartRemoveProductButton = ({
   };
 
   if (!isEmpty) {
-    // eslint-disable-next-line
-    return useMemo(
-      () => (
-        <button
-          aria-label="remove item from cart"
-          id={`cart-btn-for-${product.id}`}
-          data-key={product.id}
-          style={style}
-          className={className}
-          onClick={removeProduct}
-        >
-          {children}
-        </button>
-      ),
-      [className, style]
+    return (
+      <Button {...otherProps} variant="icon" onClick={removeProduct}>
+        {children}
+      </Button>
     );
   }
   return null;

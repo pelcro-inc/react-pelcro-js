@@ -1,122 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Pelcro Examples</title>
+  </head>
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pelcro Examples</title>
-</head>
+  <body>
+    <noscript>
+      You need to enable JavaScript to run this app.
+    </noscript>
+    <script>
+      var Pelcro = window.Pelcro || (window.Pelcro = {});
+      Pelcro.siteid = "85";
+      Pelcro.environment = {};
+      Pelcro.environment.stripe = "pk_test_aThAAdvPHgIdAziZweywBWNk";
+      Pelcro.environment.domain = "https://staging.pelcro.com";
+      Pelcro.environment.ui = "-";
+      window.Pelcro.ENABLE_ECOMMERCE = true;
+    </script>
+    <script src="https://js.pelcro.com/sdk/staging/main.min.js"></script>
 
-<body>
-  <noscript>
-    You need to enable JavaScript to run this app.
-  </noscript>
-  <script>
-    var Pelcro = window.Pelcro || (window.Pelcro = {});
-    Pelcro.siteid = "%REACT_APP_SITEID%";
-    Pelcro.environment = {};
-    Pelcro.environment.stripe = "%REACT_APP_STRIPE%";
-    Pelcro.environment.domain = "%REACT_APP_DOMAIN%";
-    Pelcro.environment.ui = "%REACT_APP_UI%";
-    window.Pelcro.ENABLE_ECOMMERCE = true;
-  </script>
-  <script src="https://js.pelcro.com/sdk/staging/main.min.js"></script>
+    <div>
+      <h2>Class Buttons</h2>
+      <button class="pelcro-login-button">Login</button>
+      <button class="pelcro-subscribe-button">Subscribe</button>
+      <button class="pelcro-register-button">Register</button>
+      <button
+        class="pelcro-product-button"
+        data-product-id="84"
+        class="btn"
+      >
+        Product ID = 84
+      </button>
+      <button
+        class="pelcro-product-button"
+        data-product-id="83"
+        class="btn"
+      >
+        Product ID = 83
+      </button>
+      <button
+        class="pelcro-product-button"
+        data-is-gift="true"
+        data-product-id="47"
+        class="btn"
+      >
+        Product ID = 47 (GIFT = TRUE)
+      </button>
+      <button class="pelcro-subscribe-button" data-product-id="83">
+        Product ID = 83
+      </button>
+      <button class="pelcro-gift-button" data-is-gift="true">
+        GIFT
+      </button>
+      <br />
+      <br />
+      <button
+        class="pelcro-plan-button"
+        data-product-id="84"
+        data-plan-id="1204"
+      >
+        PLAN ID = 1204
+      </button>
+      <button
+        class="pelcro-plan-button"
+        data-product-id="84"
+        data-plan-id="2102"
+      >
+        PLAN ID = 2102
+      </button>
+      <button
+        class="pelcro-plan-button"
+        data-product-id="83"
+        data-plan-id="1200"
+      >
+        PLAN ID = 1200
+      </button>
+      <button
+        class="pelcro-plan-button"
+        data-product-id="83"
+        data-plan-id="1199"
+      >
+        PLAN ID = 1199
+      </button>
+      <button
+        class="pelcro-subscribe-button"
+        data-product-id="83"
+        data-plan-id="1199"
+      >
+        PLAN ID = 1199
+      </button>
 
-  <div>
-    <h2>Class Buttons</h2>
-    <button class="pelcro-login-button">Login</button>
-    <button class="pelcro-subscribe-button">Subscribe</button>
-    <button class="pelcro-register-button">Register</button>
-    <button class="pelcro-product-button" data-product-id="84" class="btn">Product ID = 84</button>
-    <button class="pelcro-product-button" data-product-id="83" class="btn">Product ID = 83</button>
-    <button class="pelcro-product-button" data-is-gift=true data-product-id="47" class="btn">Product ID = 47 (GIFT =
-      TRUE)</button>
-    <button class="pelcro-subscribe-button" data-product-id="83">Product ID = 83</button>
-    <button class="pelcro-gift-button" data-is-gift=true>GIFT</button>
-    <br />
-    <br />
-    <button class="pelcro-plan-button" data-product-id="84" data-plan-id="1204">PLAN ID = 1204</button>
-    <button class="pelcro-plan-button" data-product-id="84" data-plan-id="2102">PLAN ID = 2102</button>
-    <button class="pelcro-plan-button" data-product-id="83" data-plan-id="1200">PLAN ID = 1200</button>
-    <button class="pelcro-plan-button" data-product-id="83" data-plan-id="1199">PLAN ID = 1199</button>
-    <button class="pelcro-subscribe-button" data-product-id="83" data-plan-id="1199">PLAN ID = 1199</button>
+      <button
+        class="pelcro-save-button"
+        data-key="newss"
+        data-link="https://www.example.com"
+        data-title="Test link"
+        data-tag="test tag"
+      >
+        Save article
+      </button>
 
-    <button class="pelcro-save-button" data-key="newss" data-link="https://www.example.com" data-title="Test link"
-      data-tag="test tag">Save
-      article</button>
+      <button class="pelcro-cart-button" class="btn">
+        View Cart
+      </button>
 
-    <button class="pelcro-cart-button" class="btn">View Cart</button>
+      <button class="pelcro-add-to-cart-button" data-sku-id="4">
+        Add to cart
+      </button>
+      <button class="pelcro-add-to-cart-button" data-sku-id="3">
+        Add to cart
+      </button>
+      <button class="pelcro-add-to-cart-button" data-sku-id="2">
+        Add to cart
+      </button>
 
-    <button class="pelcro-add-to-cart-button" data-sku-id="4">Add to cart</button>
-    <button class="pelcro-add-to-cart-button" data-sku-id="3">Add to cart</button>
-    <button class="pelcro-add-to-cart-button" data-sku-id="2">Add to cart</button>
+      <button class="pelcro-purchase-button" data-sku-id="4">
+        Purchase Product with ID 4
+      </button>
 
-    <button class="pelcro-purchase-button" data-sku-id="4">Purchase Product with ID 4</button>
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+    </div>
 
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-
-  </div>
-
-  <div id="pelcro-shop">
-
-  </div>
-
-
-  <!-- <script>
-    window.Pelcro.product.listGoods = function () {
-      return [{
-        id: 'sku_HX2P38D8qi5s4A',
-        name: 'Newsweek Issue 1',
-        image: 'https://i.pinimg.com/474x/ec/42/57/ec425743991f64cf938de768e630f2e4.jpg',
-        description: 'Newsweek International Magazine renowned combination of news, culture and thought-provoking ideas is now available on your digital device. Articles provide the type of in-depth analysis missing in 24 hour news coverage. The perfect weekly read for those more inquisitive about the world.',
-        sku: [{
-          price: 9.99
-        }],
-        quantity: 0
-      }, {
-        id: 'sku_HX2VhLcR28h76R',
-        name: 'Newsweek Issue 2',
-        image: 'https://pocketmagscovers.imgix.net/newsweek-europe-magazine-14th-september-2018-cover.jpg?w=362&auto=format',
-        description: 'Newsweek International Magazine renowned combination of news, culture and thought-provoking ideas is now available on your digital device. Articles provide the type of in-depth analysis missing in 24 hour news coverage. The perfect weekly read for those more inquisitive about the world.',
-        sku: [{
-          price: 10.99
-        }],
-        quantity: 0
-      }, {
-        id: 'sku_HX2VHUE0HKzWV3',
-        name: 'Special report',
-        image: 'https://mms.businesswire.com/media/20191022006102/en/751611/5/award.jpg?download=1',
-        description: 'To communicate its focus on customer experience and bring the customer insight to life, Meineke adjusted its branding and began a new advertising campaign, inspired by how people feel when thinking about having their vehicle serviced.',
-        sku: [{
-          price: 25.99
-        }],
-        quantity: 0
-
-      }, {
-
-        id: 'sku_HX2WPEIwRSkG8A',
-        name: 'Product',
-        image: 'https://ih1.redbubble.net/image.933439545.7213/ssrco,tote,cotton,canvas_creme,flatlay,tall_portrait,750x1000-bg,f8f8f8.1.jpg',
-        description: 'Donec elementum massa vitae varius finibus. Aenean finibus suscipit risus, eget bibendum urna sagittis ut. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vitae dapibus felis.',
-        sku: [{
-          price: 2.99
-        }],
-        quantity: 0
-
-      }
-
-      ];
-    }
-  </script> -->
-
-
-</body>
-
+    <div id="pelcro-shop"></div>
+  </body>
 </html>

@@ -4,11 +4,13 @@ import { ApplyCouponButton } from "./ApplyCouponButton";
 import { CouponCodeField } from "./CouponCodeField";
 import { store } from "./PaymentMethodContainer";
 import { SHOW_COUPON_FIELD } from "../../utils/action-types";
+import { Button } from "../../SubComponents/Button";
+import { ReactComponent as TicketIcon } from "../../assets/ticket.svg";
 
-export const CouponCode = ({ showCoupon }) => {
+export const CouponCode = () => {
   const {
     dispatch,
-    state: { enableCouponField, disableCouponButton }
+    state: { enableCouponField }
   } = useContext(store);
 
   const { t } = useTranslation("checkoutForm");
@@ -19,44 +21,26 @@ export const CouponCode = ({ showCoupon }) => {
       payload: !enableCouponField
     });
 
-  if (showCoupon) {
-    return (
-      <div>
-        <button
-          className="pelcro-prefix-link"
-          type="button"
-          onClick={showCouponField}
-          style={!enableCouponField ? { marginBottom: 10 } : {}}
-        >
-          {!enableCouponField
-            ? t("labels.addCode")
-            : t("labels.hideCode")}
-        </button>
-        {enableCouponField && (
-          <div className="pelcro-prefix-row">
-            <div className="col-sm-12">
-              <div className="pelcro-prefix-input-wrapper">
-                <label
-                  className="pelcro-prefix-label"
-                  htmlFor="pelcro-input-coupon_code"
-                >
-                  {t("labels.code")}
-                </label>
-                <div className="pelcro-prefix-input pelcro-apply-coupon-container">
-                  <CouponCodeField />
-                  <ApplyCouponButton
-                    disableCouponButton={disableCouponButton}
-                  >
-                    {t("labels.applyCouponCode")}
-                  </ApplyCouponButton>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-      </div>
-    );
-  }
-
-  return null;
+  return (
+    <div className="plc-my-4">
+      <Button
+        className="plc-text-base plc-text-gray-500"
+        variant="ghost"
+        icon={<TicketIcon className="plc-w-5 plc-h-5 plc-mr-2" />}
+        onClick={showCouponField}
+      >
+        {!enableCouponField
+          ? t("labels.addCode")
+          : t("labels.hideCode")}
+      </Button>
+      {enableCouponField && (
+        <div className="plc-flex plc-w-full plc-my-4 plc-bg-gray-100 pelcro-apply-coupon-wrapper">
+          <CouponCodeField />
+          <ApplyCouponButton>
+            {t("labels.applyCouponCode")}
+          </ApplyCouponButton>
+        </div>
+      )}
+    </div>
+  );
 };

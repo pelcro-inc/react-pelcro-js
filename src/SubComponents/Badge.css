@@ -1,0 +1,6 @@
+@layer components {
+  .pelcro-root .pelcro-badge {
+    top: -5%;
+    right: -5%;
+  }
+}

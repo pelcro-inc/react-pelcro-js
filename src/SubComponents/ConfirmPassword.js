@@ -9,17 +9,12 @@ import {
   SET_CONFIRM_PASSWORD_ERROR,
   CONFIRM_PASSWORD_USED
 } from "../utils/action-types";
+import { Input } from "./Input";
 
 /**
  *
  */
-export function ConfirmPassword({
-  placeholder,
-  style,
-  className,
-  id,
-  store
-}) {
+export function ConfirmPassword({ store, ...otherProps }) {
   const {
     dispatch,
     state: {
@@ -36,7 +31,7 @@ export function ConfirmPassword({
   );
 
   const handleInputChange = useCallback(
-    value => {
+    (value) => {
       setPassword(value);
 
       if (password.length) {
@@ -56,21 +51,14 @@ export function ConfirmPassword({
   }, [finishedTyping, password, handleInputChange]);
 
   return (
-    <React.Fragment>
-      <input
-        type="password"
-        id={id}
-        style={{ ...style }}
-        className={
-          confirmPasswordError ? "input-error " : "" + className
-        }
-        value={password}
-        onChange={e => handleInputChange(e.target.value)}
-        placeholder={placeholder || "Enter Your Password again"}
-        onBlur={() => setFinishedTyping(true)}
-        onFocus={() => setFinishedTyping(false)}
-      ></input>
-      <div>{confirmPasswordError}</div>
-    </React.Fragment>
+    <Input
+      type="password"
+      error={confirmPasswordError}
+      value={password}
+      onChange={(e) => handleInputChange(e.target.value)}
+      onBlur={() => setFinishedTyping(true)}
+      onFocus={() => setFinishedTyping(false)}
+      {...otherProps}
+    />
   );
 }

@@ -2,13 +2,20 @@
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
     "google",
     "prettier"
   ],
-  "plugins": ["prettier", "jsdoc"],
-  "parser": "babel-eslint",
+  "plugins": [
+    "prettier",
+    "jsdoc",
+    "import"
+  ],
+  "parser": "@babel/eslint-parser",
   "rules": {
-    "prettier/prettier": ["warn"],
+    "prettier/prettier": [
+      "warn"
+    ],
     "jsdoc/valid-types": "warn",
     "jsdoc/require-jsdoc": "warn",
     "require-jsdoc": "off",
@@ -23,7 +30,18 @@
     "react/no-unescaped-entities": "warn",
     "new-cap": "off",
     "no-unused-vars": "warn",
-    "prefer-const": "warn"
+    "prefer-const": "warn",
+    "no-duplicate-imports": "warn",
+    "import/no-commonjs": "error",
+    "import/first": "error",
+    "import/newline-after-import": "warn",
+    "import/no-unused-modules": [
+      "error",
+      {
+        "unusedExports": false,
+        "missingExports": true
+      }
+    ]
   },
   "env": {
     "browser": true,

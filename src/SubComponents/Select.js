@@ -1,51 +1,46 @@
-import React, { useContext, useEffect } from "react";
-import { SET_SELECT } from "../utils/action-types";
+import React from "react";
 
-/**
- *
- */
 export function Select({
-  options = [],
-  fieldName,
-  placeholder = "",
-  style,
-  className,
+  label = "",
+  required,
   id,
-  store,
+  errorId,
+  error = "",
+  className = "",
+  labelClassName = "",
+  errorClassName = "",
+  wrapperClassName = "",
+  children,
   ...otherProps
 }) {
-  const { dispatch, state } = useContext(store);
-
-  const createSelectItems = () => {
-    return options.map((option) => (
-      <option key={option.key} value={option.value}>
-        {option.value}
-      </option>
-    ));
-  };
-
-  const onSelect = (e) => {
-    dispatch({
-      type: SET_SELECT,
-      payload: { [fieldName]: e.target.value }
-    });
-  };
-
   return (
-    <select
-      value={state[fieldName]}
-      onChange={onSelect}
-      className={className}
-      autoComplete="state"
-      id="pelcro-input-state"
-      {...otherProps}
-    >
-      {" "}
-      (placeholder &&
-      <option value="" disabled selected>
-        {placeholder}
-      </option>
-      ){createSelectItems()}
-    </select>
+    <div className={`plc-w-full ${wrapperClassName}`}>
+      <label
+        htmlFor={id}
+        className={`plc-text-gray-700 pelcro-select-label ${labelClassName}`}
+      >
+        {`${label}${required ? "*" : ""}`}
+      </label>
+      <select
+        id={id}
+        className={`plc-mt-1 plc-w-full plc-border plc-border-gray-300 plc-bg-gray-50 plc-p-3 plc-appearance-none plc-outline-none plc-rounded-sm focus:plc-ring-1 focus:plc-ring-blue-600 disabled:plc-bg-gray-300 disabled:plc-cursor-not-allowed pelcro-select-select ${className} ${
+          error
+            ? "plc-ring-1 plc-ring-red-500 pelcro-input-invalid"
+            : ""
+        }`}
+        aria-describedby={errorId}
+        aria-invalid={Boolean(error)}
+        {...otherProps}
+      >
+        {children}
+      </select>
+      <p
+        id={errorId}
+        aria-live="assertive"
+        className="plc-h-3 plc-mt-1 plc-mb-2 plc-text-sm plc-text-red-500 plc-normal-case pelcro-field-error"
+      >
+        {error}
+      </p>
+    </div>
   );
 }

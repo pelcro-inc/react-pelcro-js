@@ -1,6 +1,6 @@
 import React from "react";
 
-export const Logout = props => {
+export const Logout = (props) => {
   const handleLogout = () => {
     window.Pelcro.user.logout();
 
@@ -13,7 +13,7 @@ export const Logout = props => {
   return (
     <button
       name="logout"
-      className="pelcro-prefix-btn pelcro-prefix-logout-btn"
+      className="pelcro-logout-btn"
       onClick={handleLogout}
       disabled={false}
     >

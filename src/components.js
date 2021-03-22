@@ -1,4 +1,6 @@
 import "./i18n";
+import "./index.css";
+
 export { LoginContainer } from "./Components/Login/LoginContainer";
 export { Email } from "./SubComponents/Email";
 export { Password } from "./SubComponents/Password";
@@ -17,7 +19,6 @@ export { RegisterLastName } from "./Components/Register/RegisterLastName";
 export { RegisterButton } from "./Components/Register/RegisterButton";
 export { RegisterJobTitle } from "./Components/Register/RegisterJobTitle";
 export { RegisterCompany } from "./Components/Register/RegisterCompany";
-export { RegisterSelect } from "./Components/Register/RegisterSelect";
 export { PelcroContainer } from "./Components/PelcroContainer";
 export { LoginModal } from "./Components/Login/LoginModal";
 export { RegisterModal } from "./Components/Register/RegisterModal";
@@ -48,11 +49,6 @@ export { UserUpdateDisplayName } from "./Components/UserUpdate/UserUpdateDisplay
 export { UserUpdateLastName } from "./Components/UserUpdate/UserUpdateLastName";
 export { UserUpdatePhone } from "./Components/UserUpdate/UserUpdatePhone";
 export { UserUpdateTextInput } from "./Components/UserUpdate/UserUpdateTextInput";
-export { SubscriptionActionButton } from "./Components/Subscriptions/SubscriptionActionButton";
-export { PlanName } from "./Components/Subscriptions/PlanName";
-export { ShipmentsRemaining } from "./Components/Subscriptions/ShipmentsRemaining";
-export { SubscriptionsListView } from "./Components/Subscriptions/SubscriptionsListView";
-export { SubscriptionStatus } from "./Components/Subscriptions/SubscriptionStatus";
 export { AddressCreateContainer } from "./Components/AddressCreate/AddressCreateContainer";
 export { AddressCreateModal } from "./Components/AddressCreate/AddressCreateModal";
 export { AddressCreateSubmit } from "./Components/AddressCreate/AddressCreateSubmit";
@@ -66,12 +62,12 @@ export { AddressCreateCity } from "./Components/AddressCreate/AddressCreateCity"
 export { AddressCreatePostalCode } from "./Components/AddressCreate/AddressCreatePostalCode";
 export { AddressCreateCountrySelect } from "./Components/AddressCreate/AddressCreateCountrySelect";
 export { AddressCreateStateSelect } from "./Components/AddressCreate/AddressCreateStateSelect";
-export { AlertSuccess } from "./Components/Alerts/AlertSuccess";
-export { AlertDanger } from "./Components/Alerts/AlertDanger";
-export { PelcroCardCVC } from "./SubComponents/PelcroCardCVC";
-export { PelcroCardExpiry } from "./SubComponents/PelcroCardExpiry";
-export { PelcroCardNumber } from "./SubComponents/PelcroCardNumber";
-export { PelcroPaymentRequestButton } from "./SubComponents/PelcroPaymentRequestButton";
+export {
+  PelcroCardCVC,
+  PelcroCardExpiry,
+  PelcroCardNumber,
+  PelcroPaymentRequestButton
+} from "./SubComponents/StripeElements";
 export { PaypalSubscribeButton } from "./Components/PaypalButtons/PaypalSubscribeButton";
 export { AddressUpdateContainer } from "./Components/AddressUpdate/AddressUpdateContainer";
 export { AddressUpdateCountrySelect } from "./Components/AddressUpdate/AddressUpdateCountrySelect";
@@ -90,8 +86,6 @@ export { SubscriptionCreateContainer } from "./Components/SubscriptionCreate/Sub
 export { SubscriptionRenewContainer } from "./Components/SubscriptionRenew/SubscriptionRenewContainer";
 export { PaymentCreateContainer } from "./Components/PaymentCreate/PaymentCreateContainer";
 export { PaymentCreateView } from "./Components/PaymentCreate/PaymentCreateView";
-export { PaymentUpdateContainer } from "./Components/PaymentUpdate/PaymentUpdateContainer";
-export { PaymentUpdateView } from "./Components/PaymentUpdate/PaymentUpdateView";
 export { PaymentMethodUpdateContainer } from "./Components/PaymentMethodUpdate/PaymentMethodUpdateContainer";
 export { PaymentMethodUpdateModal } from "./Components/PaymentMethodUpdate/PaymentMethodUpdateModal";
 export { PaymentMethodUpdateView } from "./Components/PaymentMethodUpdate/PaymentMethodUpdateView";
@@ -126,7 +120,7 @@ export { CartTotalPrice } from "./Components/Cart/CartTotalPrice";
 export { ShopContainer } from "./Components/Shop/ShopContainer";
 export { ShopSelectProductButton } from "./Components/Shop/ShopSelectProductButton";
 export { ShopView } from "./Components/Shop/ShopView";
-export { OrderCraeteSubmitButton } from "./Components/OrderCreate/OrderCraeteSubmitButton";
+export { OrderCreateSubmitButton } from "./Components/OrderCreate/OrderCreateSubmitButton";
 export { OrderCreateContainer } from "./Components/OrderCreate/OrderCreateContainer";
 export { OrderCreateModal } from "./Components/OrderCreate/OrderCreateModal";
 export { OrderCreateView } from "./Components/OrderCreate/OrderCreateView";

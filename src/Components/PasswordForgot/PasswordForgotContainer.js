@@ -7,14 +7,18 @@ import useReducerWithSideEffects, {
 import {
   SET_EMAIL,
   HANDLE_SUBMIT,
-  DISABLE_SUBMIT
+  DISABLE_SUBMIT,
+  SHOW_ALERT
 } from "../../utils/action-types";
 import { getErrorMessages } from "../common/Helpers";
-import { showError, showSuccess } from "../../utils/showing-error";
 
 const initialState = {
   email: "",
-  buttonDisabled: false
+  buttonDisabled: false,
+  alert: {
+    type: "error",
+    content: ""
+  }
 };
 const store = createContext(initialState);
 const { Provider } = store;
@@ -37,16 +41,19 @@ const PasswordForgotContainer = ({
         dispatch({ type: DISABLE_SUBMIT, payload: false });
 
         if (err) {
-          showError(
-            getErrorMessages(err),
-            "pelcro-error-password-forgot"
-          );
-          return onFailure(err);
+          dispatch({
+            type: SHOW_ALERT,
+            payload: { type: "error", content: getErrorMessages(err) }
+          });
+          onFailure(err);
         } else {
-          showSuccess(
-            t("passwordResetEmailSent"),
-            "pelcro-success-password-forgot"
-          );
+          dispatch({
+            type: SHOW_ALERT,
+            payload: {
+              type: "success",
+              content: t("passwordResetEmailSent")
+            }
+          });
           onSuccess();
         }
       }
@@ -60,6 +67,11 @@ const PasswordForgotContainer = ({
           return Update({
             ...state,
             email: action.payload
+          });
+        case SHOW_ALERT:
+          return Update({
+            ...state,
+            alert: action.payload
           });
         case DISABLE_SUBMIT:
           return Update({ ...state, buttonDisabled: action.payload });

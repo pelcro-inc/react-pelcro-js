@@ -1,66 +1,43 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import ErrMessage from "../common/ErrMessage";
 import { LoginContainer } from "./LoginContainer";
 import { LoginPassword } from "./LoginPassword";
 import { LoginButton } from "./LoginButton";
 import { LoginEmail } from "./LoginEmail";
+import { AlertWithContext } from "../../SubComponents/AlertWithContext";
 
 export function LoginView(props) {
   const { t } = useTranslation("login");
 
   return (
-    <div className="pelcro-prefix-modal-body">
-      <div className="pelcro-prefix-title-block">
+    <div id="pelcro-login-view">
+      <div className="plc-flex plc-flex-col plc-items-center plc-text-lg plc-font-semibold plc-text-center pelcro-title-wrapper">
         <h4>{t("messages.loginTo")}</h4>
-        <p>{t("messages.welcome")}</p>
       </div>
-
-      <ErrMessage name={"login"} />
-
-      <div className="pelcro-prefix-form">
+      <div className="plc-mt-2 pelcro-form">
         <LoginContainer {...props}>
-          <div className="pelcro-prefix-form-group">
-            <label
-              className="pelcro-prefix-label"
-              htmlFor="pelcro-input-email"
-            >
-              {t("labels.email")} *
-            </label>
-
-            <LoginEmail
-              className="pelcro-prefix-input pelcro-prefix-form-control"
-              id="pelcro-input-email"
-              required
-              placeholder={t("labels.emailPlaceholder")}
-            />
-          </div>
-          <div className="pelcro-prefix-form-group">
-            <label
-              className="pelcro-prefix-label"
-              htmlFor="pelcro-input-password"
-            >
-              {t("labels.password")} *
-            </label>
-            <LoginPassword
-              className="pelcro-prefix-input pelcro-prefix-form-control"
-              id="pelcro-input-password"
-              required
-              placeholder={t("labels.passwordPlaceholder")}
-            />
-          </div>
-          <small className="pelcro-prefix-footnote pelcro-prefix-form-text">
-            * {t("labels.required")}
-          </small>
+          <AlertWithContext />
+          <LoginEmail
+            id="pelcro-input-email"
+            errorId="pelcro-input-email-error"
+            required
+            placeholder={t("labels.emailPlaceholder")}
+            label={t("labels.email")}
+          />
+          <LoginPassword
+            id="pelcro-input-password"
+            errorId="pelcro-input-password-error"
+            required
+            placeholder={t("labels.passwordPlaceholder")}
+            label={t("labels.password")}
+          />
           <LoginButton
+            className="plc-mt-2"
             name={t("labels.login")}
-            id="pelcro-login-submit"
-            className="pelcro-prefix-btn"
+            id="pelcro-submit"
           />
         </LoginContainer>
       </div>
     </div>
   );
 }
-
-// Look into having classnames generated automatically in react. Maybe CSS in JS.

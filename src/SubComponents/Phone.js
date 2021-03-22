@@ -1,38 +1,25 @@
-import React, { useContext, useState, useCallback } from "react";
+import React, { useContext, useState } from "react";
 import { SET_PHONE } from "../utils/action-types";
+import { Input } from "./Input";
 
-/**
- *
- */
-export function Phone({
-  placeholder,
-  style,
-  className,
-  id,
-  store,
-  ...otherProps
-}) {
-  const { dispatch, state } = useContext(store);
+export function Phone({ store, ...otherProps }) {
+  const {
+    dispatch,
+    state: { phone: stateValue }
+  } = useContext(store);
+  const [value, setValue] = useState(stateValue);
 
-  const handleInputChange = useCallback(
-    (value) => {
-      dispatch({ type: SET_PHONE, payload: value });
-    },
-    [dispatch]
-  );
+  const handleInputChange = (value) => {
+    setValue(value);
+    dispatch({ type: SET_PHONE, payload: value });
+  };
 
   return (
-    <React.Fragment>
-      <input
-        type="text"
-        id={id}
-        style={{ ...style }}
-        className={className}
-        value={state.phone}
-        onChange={(e) => handleInputChange(e.target.value)}
-        placeholder={placeholder || "Phone"}
-        {...otherProps}
-      ></input>
-    </React.Fragment>
+    <Input
+      type="tel"
+      value={value || window.Pelcro.user.read().phone}
+      onChange={(e) => handleInputChange(e.target.value)}
+      {...otherProps}
+    />
   );
 }

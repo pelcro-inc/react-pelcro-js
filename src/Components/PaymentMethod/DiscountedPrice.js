@@ -10,14 +10,14 @@ export const DiscountedPrice = () => {
 
   if (percentOff) {
     return (
-      <span>
+      <div className="plc-my-2">
         (-{percentOff}){" "}
         {getFormattedPriceByLocal(
           updatedPrice,
           currentPlan.currency,
           default_locale
         )}
-      </span>
+      </div>
     );
   }
 

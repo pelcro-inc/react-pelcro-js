@@ -2,7 +2,7 @@
   "buttons": {
     "select": "Select",
     "added": "Added to cart",
-    "continue": "Continue to content"
+    "continue": "Continue"
   },
   "messages": {
     "orderConfirmed": {

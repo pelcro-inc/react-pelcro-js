@@ -5,10 +5,11 @@ import external from "rollup-plugin-peer-deps-external";
 import visualizer from "rollup-plugin-visualizer";
 import babel from "rollup-plugin-babel";
 import json from "@rollup/plugin-json";
-import { terser } from "rollup-plugin-terser";
 import pkg from "./package.json";
 import url from "@rollup/plugin-url";
 import svgr from "@svgr/rollup";
+import postcss from "rollup-plugin-postcss";
+import path from "path";
 
 export default [
   {
@@ -19,15 +20,19 @@ export default [
     ],
     plugins: [
       url(),
-      svgr(),
+      svgr({
+        svgoConfig: {
+          plugins: [{ prefixIds: false }]
+        }
+      }),
       resolve(),
       external(),
+      postcss({
+        extract: path.resolve("dist/pelcro.css")
+      }),
       babel({
         presets: ["react-app"],
         plugins: [
-          "@babel/plugin-proposal-object-rest-spread",
-          "@babel/plugin-proposal-optional-chaining",
-          "@babel/plugin-syntax-dynamic-import",
           "@babel/plugin-proposal-class-properties",
           "transform-react-remove-prop-types"
         ],
@@ -48,8 +53,7 @@ export default [
           ]
         }
       }),
-      terser(),
-      del({ targets: ["dist/*", "playground/src/component-lib"] }),
+      del({ targets: ["dist/*"] }),
       json(),
       visualizer({
         gzipSize: true,
