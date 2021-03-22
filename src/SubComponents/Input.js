@@ -39,7 +39,7 @@ export function Input({
         <p
           id={errorId}
           aria-live="assertive"
-          className={`plc-h-3 plc-mt-1 plc-mb-2 plc-text-sm plc-text-red-500 plc-normal-case pelcro-field-error ${errorClassName}`}
+          className={`plc-h-3 plc-mt-1 plc-mb-3 plc-text-sm plc-text-red-500 plc-normal-case pelcro-field-error ${errorClassName}`}
         >
           {error}
         </p>
