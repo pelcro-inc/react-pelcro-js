@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Unreleased]
 
+### Changed
+
+- Apply coupon button appearence & Added gap between field and button.
+
 ## [Released]
 
 <!-- Links -->
