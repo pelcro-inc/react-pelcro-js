@@ -30,7 +30,9 @@ export function Alert({
             fill="currentColor"
           />
         )}
-        <div className="pelcro-alert-content">{children}</div>
+        <div className="plc-whitespace-pre-wrap pelcro-alert-content">
+          {children}
+        </div>
       </div>
       {onClose && (
         <button
