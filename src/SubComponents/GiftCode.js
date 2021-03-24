@@ -21,11 +21,7 @@ export function GiftCode({ store, ...otherProps }) {
   }, []);
 
   if (state.loading) {
-    return (
-      <div className="pelcro-loader-wrapper">
-        <Loader />
-      </div>
-    );
+    return <Loader />;
   }
 
   return (

@@ -56,11 +56,7 @@ export function CountrySelect({ placeholder, store, ...otherProps }) {
   };
 
   if (loading) {
-    return (
-      <div className="pelcro-loader-wrapper">
-        <Loader />
-      </div>
-    );
+    return <Loader />;
   }
 
   return (

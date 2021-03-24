@@ -66,11 +66,7 @@ export function StateSelect({
   };
 
   if (loading || (!createStateItems() && country)) {
-    return (
-      <div className="plc-w-full plc-flex plc-justify-center plc-items-center pelcro-loader-wrapper">
-        <Loader />
-      </div>
-    );
+    return <Loader />;
   }
 
   return (
