@@ -5,17 +5,15 @@ import useReducerWithSideEffects, {
   Update
 } from "use-reducer-with-side-effects";
 import {
-  SET_COUNTRY,
   DISABLE_SUBMIT,
   HANDLE_SUBMIT,
   SET_COUNTRIES,
   SET_STATES,
-  SET_FIRST_NAME,
-  SET_LAST_NAME,
   SET_TEXT_FIELD,
-  SET_STATE,
   SHOW_ALERT,
-  LOADING
+  LOADING,
+  VALIDATE_FIELD,
+  RESET_FIELD_ERROR
 } from "../../utils/action-types";
 import { getErrorMessages } from "../common/Helpers";
 
@@ -23,12 +21,19 @@ const initialState = {
   disableSubmit: false,
   isSubmitting: false,
   firstName: "",
+  firstNameError: "",
   lastName: "",
+  lastNameError: "",
   line1: "",
+  line1Error: "",
   city: "",
+  cityError: "",
   state: "",
+  stateError: "",
   country: "",
+  countryError: "",
   postalCode: "",
+  postalCodeError: "",
   states: [],
   countries: [],
   loading: true,
@@ -141,23 +146,11 @@ const AddressUpdateContainer = ({
   const [state, dispatch] = useReducerWithSideEffects(
     (state, action) => {
       switch (action.type) {
-        case SET_COUNTRY:
-          return Update({ ...state, country: action.payload });
-
-        case SET_STATE:
-          return Update({ ...state, state: action.payload });
-
         case DISABLE_SUBMIT:
           return Update({ ...state, disableSubmit: action.payload });
 
         case SET_COUNTRIES:
           return Update({ ...state, countries: action.payload });
-
-        case SET_FIRST_NAME:
-          return Update({ ...state, firstName: action.payload });
-
-        case SET_LAST_NAME:
-          return Update({ ...state, lastName: action.payload });
 
         case SET_STATES:
           return Update({ ...state, states: action.payload });
@@ -166,6 +159,20 @@ const AddressUpdateContainer = ({
           return Update({
             ...state,
             ...action.payload
+          });
+
+        case VALIDATE_FIELD:
+          return Update({
+            ...state,
+            [`${action.payload}Error`]: state[action.payload]
+              ? ""
+              : t("labels.required")
+          });
+
+        case RESET_FIELD_ERROR:
+          return Update({
+            ...state,
+            [action.payload]: ""
           });
 
         case SHOW_ALERT:
