@@ -1,6 +1,11 @@
 import React, { useContext, useEffect } from "react";
 import { Loader } from "../SubComponents/Loader";
-import { SET_STATE, SET_STATES } from "../utils/action-types";
+import {
+  RESET_FIELD_ERROR,
+  SET_STATES,
+  SET_TEXT_FIELD,
+  VALIDATE_FIELD
+} from "../utils/action-types";
 import { showError } from "../utils/showing-error";
 import { Select } from "./Select";
 
@@ -11,7 +16,7 @@ export function StateSelect({
 }) {
   const {
     dispatch,
-    state: { country, state, states, loading }
+    state: { country, state, stateError, states, loading }
   } = useContext(store);
 
   useEffect(() => {
@@ -61,8 +66,22 @@ export function StateSelect({
     }
   };
 
-  const onStateChange = (e) => {
-    dispatch({ type: SET_STATE, payload: e.target.value });
+  const handleInputChange = (value) => {
+    dispatch({ type: SET_TEXT_FIELD, payload: { state: value } });
+  };
+
+  const handleBlur = () => {
+    return dispatch({
+      type: VALIDATE_FIELD,
+      payload: "state"
+    });
+  };
+
+  const handleFocus = () => {
+    dispatch({
+      type: RESET_FIELD_ERROR,
+      payload: "stateError"
+    });
   };
 
   if (loading || (!createStateItems() && country)) {
@@ -72,8 +91,11 @@ export function StateSelect({
   return (
     <Select
       value={state}
-      onChange={onStateChange}
-      autoComplete="state"
+      error={stateError}
+      onChange={(e) => handleInputChange(e.target.value)}
+      onBlur={handleBlur}
+      onFocus={handleFocus}
+      autoComplete="address-level1"
       {...otherProps}
     >
       <option value="" disabled selected>

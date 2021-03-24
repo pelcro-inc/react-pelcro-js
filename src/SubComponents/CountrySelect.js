@@ -1,9 +1,11 @@
 import React, { useContext, useEffect } from "react";
 import { Loader } from "../SubComponents/Loader";
 import {
-  SET_COUNTRY,
   SET_COUNTRIES,
-  SHOW_ALERT
+  SHOW_ALERT,
+  RESET_FIELD_ERROR,
+  VALIDATE_FIELD,
+  SET_TEXT_FIELD
 } from "../utils/action-types";
 import { sortCountries } from "../utils/utils";
 import { Select } from "./Select";
@@ -11,7 +13,7 @@ import { Select } from "./Select";
 export function CountrySelect({ placeholder, store, ...otherProps }) {
   const {
     dispatch,
-    state: { country, countries, loading }
+    state: { country, countryError, countries, loading }
   } = useContext(store);
 
   const getCountryList = () => {
@@ -51,8 +53,22 @@ export function CountrySelect({ placeholder, store, ...otherProps }) {
     }
   };
 
-  const onCountryChange = (e) => {
-    dispatch({ type: SET_COUNTRY, payload: e.target.value });
+  const handleInputChange = (value) => {
+    dispatch({ type: SET_TEXT_FIELD, payload: { country: value } });
+  };
+
+  const handleBlur = () => {
+    return dispatch({
+      type: VALIDATE_FIELD,
+      payload: "country"
+    });
+  };
+
+  const handleFocus = () => {
+    dispatch({
+      type: RESET_FIELD_ERROR,
+      payload: "countryError"
+    });
   };
 
   if (loading) {
@@ -62,7 +78,10 @@ export function CountrySelect({ placeholder, store, ...otherProps }) {
   return (
     <Select
       value={country}
-      onChange={onCountryChange}
+      error={countryError}
+      onChange={(e) => handleInputChange(e.target.value)}
+      onBlur={handleBlur}
+      onFocus={handleFocus}
       autoComplete="country"
       {...otherProps}
     >
