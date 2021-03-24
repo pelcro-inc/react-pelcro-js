@@ -21,6 +21,7 @@ import {
   APPLY_COUPON_CODE,
   SET_PERCENT_OFF,
   SET_COUPON,
+  SET_COUPON_ERROR,
   UPDATE_COUPON_CODE,
   SHOW_COUPON_FIELD,
   SET_CAN_MAKE_PAYMENT,
@@ -64,6 +65,10 @@ const initialState = {
   isLoading: false,
   disableCouponButton: false,
   couponCode: "",
+  couponError: {
+    type: "error",
+    content: ""
+  },
   enableCouponField: false,
   percentOff: "",
   canMakePayment: false,
@@ -203,10 +208,10 @@ const PaymentMethodContainerWithoutStripe = ({
 
           if (err) {
             dispatch({ type: SET_PERCENT_OFF, payload: "" });
-
             onFailure(err);
+
             return dispatch({
-              type: SHOW_ALERT,
+              type: SET_COUPON_ERROR,
               payload: {
                 type: "error",
                 content: getErrorMessages(err)
@@ -560,6 +565,9 @@ const PaymentMethodContainerWithoutStripe = ({
 
         case SET_COUPON:
           return Update({ ...state, coupon: action.payload });
+
+        case SET_COUPON_ERROR:
+          return Update({ ...state, couponError: action.payload });
 
         case UPDATE_COUPON_CODE:
           return UpdateWithSideEffect(

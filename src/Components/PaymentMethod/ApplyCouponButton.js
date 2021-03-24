@@ -17,11 +17,11 @@ export const ApplyCouponButton = ({ children }) => {
 
   return (
     <Button
-      className="plc-pl-3 plc-pr-2 plc-ml-4 plc-text-sm plc-text-primary-500 disabled:plc-bg-gray-200"
+      className="plc-h-12 plc-ml-4"
       variant="solid"
       aria-label={t("labels.applyCouponCode")}
       icon={
-        <ArrowLeftIcon className="plc-w-5 plc-transform plc-rotate-180" />
+        <ArrowLeftIcon className="plc-w-5 plc-h-5 plc-transform plc-rotate-180" />
       }
       onClick={onApplyCouponCode}
       disabled={!couponCode || disableCouponButton}
