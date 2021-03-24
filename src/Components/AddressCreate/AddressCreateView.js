@@ -23,7 +23,6 @@ export const AddressCreateView = (props) => {
           <AlertWithContext />
           <div className="plc-flex plc-space-x-3 plc-items-end">
             <AddressCreateFirstName
-              autoComplete="first-name"
               id="pelcro-input-first-name"
               errorId="pelcro-input-first-name-error"
               placeholder={t("labels.firstName")}
@@ -31,7 +30,6 @@ export const AddressCreateView = (props) => {
               label={t("labels.firstName")}
             />
             <AddressCreateLastName
-              autoComplete="last-name"
               id="pelcro-input-last-name"
               errorId="pelcro-input-last-name-error"
               required
@@ -41,7 +39,6 @@ export const AddressCreateView = (props) => {
           </div>
           <div className="plc-flex plc-items-end">
             <AddressCreateLine1
-              autoComplete="street-address"
               id="pelcro-input-line1"
               errorId="pelcro-input-line1-error"
               required
@@ -51,7 +48,6 @@ export const AddressCreateView = (props) => {
           </div>
           <div className="plc-flex plc-space-x-3 plc-items-end">
             <AddressCreatePostalCode
-              autoComplete="postal-code"
               id="pelcro-input-postal-code"
               errorId="pelcro-input-postal-code-error"
               required
@@ -59,7 +55,6 @@ export const AddressCreateView = (props) => {
               label={t("labels.code")}
             />
             <AddressCreateCity
-              autoComplete="address-level2"
               id="pelcro-input-city"
               errorId="pelcro-input-city-error"
               placeholder={t("labels.city")}
