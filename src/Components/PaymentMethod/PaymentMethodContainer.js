@@ -49,6 +49,7 @@ import {
  * @property {boolean} isLoading
  * @property {boolean} disableCouponButton
  * @property {string} couponCode
+ * @property {object} couponError
  * @property {boolean} enableCouponField
  * @property {string} percentOff
  * @property {unknown} canMakePayment

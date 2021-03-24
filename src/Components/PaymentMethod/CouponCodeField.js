@@ -25,7 +25,7 @@ export const CouponCodeField = (props) => {
   return (
     <Input
       className="plc-h-12"
-      errorClassName="plc-mb-6"
+      errorClassName="plc-h-12 sm:plc-h-8"
       hideErrors={!couponError.content}
       error={couponError.content}
       aria-label={t("labels.code")}
