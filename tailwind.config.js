@@ -678,7 +678,7 @@ module.exports = {
     placeholderColor: (theme) => theme("colors"),
     placeholderOpacity: (theme) => theme("opacity"),
     ringColor: (theme) => ({
-      DEFAULT: theme("colors.blue.500", "#3b82f6"),
+      DEFAULT: theme("colors.primary.500", "#3b82f6"),
       ...theme("colors")
     }),
     ringOffsetColor: (theme) => theme("colors"),
