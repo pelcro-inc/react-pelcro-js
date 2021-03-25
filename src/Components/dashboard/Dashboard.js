@@ -174,6 +174,7 @@ class Dashboard extends Component {
     if (isSubscriptionEndingSoon(sub)) {
       return {
         title: this.locale("labels.status.endingSoon"),
+        content: this.getSubscriptionStatusText(sub),
         textColor: "plc-text-orange-700",
         bgColor: "plc-bg-orange-100",
         icon: <ExclamationIcon />
@@ -183,6 +184,7 @@ class Dashboard extends Component {
     if (isSubscriptionInTrial(sub)) {
       return {
         title: this.locale("labels.status.inTrial"),
+        content: this.getSubscriptionStatusText(sub),
         textColor: "plc-text-yellow-700",
         bgColor: "plc-bg-yellow-100",
         icon: <CheckMarkIcon />
@@ -191,6 +193,7 @@ class Dashboard extends Component {
 
     return {
       title: this.locale("labels.status.active"),
+      content: this.getSubscriptionStatusText(sub),
       textColor: "plc-text-green-700",
       bgColor: "plc-bg-green-100",
       icon: <CheckMarkIcon />
@@ -269,16 +272,16 @@ class Dashboard extends Component {
               <div className="plc-mb-4 plc-text-xs plc-text-gray-500">
                 {sub.status && (
                   <span className="plc-inline-block plc-mt-1 plc-underline">
-                    {status}
+                    {this.getSubscriptionStatus(sub).content}
                   </span>
                 )}
                 <br />
-                {sub.shipments_remaining && (
+                {sub.shipments_remaining ? (
                   <span className="plc-inline-block plc-mt-1">
                     {sub.shipments_remaining}{" "}
                     {this.locale("labels.shipments")}
                   </span>
-                )}
+                ) : null}
               </div>
             </td>
 
@@ -397,14 +400,6 @@ class Dashboard extends Component {
           this.props.setView("select");
         };
 
-        const subscriptionStatus = recipient.cancel_at_period_end
-          ? `${this.locale("labels.expiresOn")} ${
-              recipient.current_period_end
-            }`
-          : `${this.locale("labels.renewsOn")} ${
-              recipient.current_period_end
-            }`;
-
         return (
           <tr
             key={"dashboard-gift-recipients-" + recipient.id}
@@ -460,7 +455,7 @@ class Dashboard extends Component {
                 <div className="plc-mb-4 plc-text-xs plc-text-gray-500">
                   {recipient.status && (
                     <span className="plc-inline-block plc-mt-1 plc-underline">
-                      {subscriptionStatus}
+                      {this.getSubscriptionStatus(recipient).content}
                     </span>
                   )}
                 </div>
