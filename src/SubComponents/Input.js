@@ -26,9 +26,9 @@ export function Input({
         id={id}
         className={`${
           label && "plc-mt-1"
-        } plc-w-full plc-border plc-border-gray-300 plc-bg-gray-50 plc-p-3 plc-appearance-none plc-outline-none plc-rounded-sm focus:plc-ring-1 focus:plc-ring-primary-400 disabled:plc-bg-gray-300 disabled:plc-cursor-not-allowed pelcro-input-input ${className} ${
+        } plc-w-full plc-border plc-border-gray-300 plc-bg-gray-50 plc-p-3 plc-appearance-none plc-outline-none plc-rounded-sm focus:plc-ring-2 focus:plc-ring-primary-400 disabled:plc-bg-gray-300 disabled:plc-cursor-not-allowed pelcro-input-input ${className} ${
           error
-            ? "plc-ring-1 plc-ring-red-500 pelcro-input-invalid"
+            ? "plc-ring-2 plc-ring-red-500 pelcro-input-invalid"
             : ""
         }`}
         aria-describedby={errorId}
