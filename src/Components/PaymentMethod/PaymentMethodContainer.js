@@ -13,7 +13,6 @@ import useReducerWithSideEffects, {
 import {
   DISABLE_SUBMIT,
   LOADING,
-  CREATE_PAYMENT,
   SET_UPDATED_PRICE,
   SUBMIT_PAYMENT,
   HANDLE_PAYPAL_SUBSCRIPTION,
@@ -49,7 +48,7 @@ import {
  * @property {boolean} isLoading
  * @property {boolean} disableCouponButton
  * @property {string} couponCode
- * @property {object} couponError
+ * @property {string} couponError
  * @property {boolean} enableCouponField
  * @property {string} percentOff
  * @property {unknown} canMakePayment
@@ -66,10 +65,7 @@ const initialState = {
   isLoading: false,
   disableCouponButton: false,
   couponCode: "",
-  couponError: {
-    type: "error",
-    content: ""
-  },
+  couponError: "",
   enableCouponField: false,
   percentOff: "",
   canMakePayment: false,
@@ -213,10 +209,7 @@ const PaymentMethodContainerWithoutStripe = ({
 
             return dispatch({
               type: SET_COUPON_ERROR,
-              payload: {
-                type: "error",
-                content: getErrorMessages(err)
-              }
+              payload: getErrorMessages(err)
             });
           }
 

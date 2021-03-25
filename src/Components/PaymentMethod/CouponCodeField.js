@@ -17,7 +17,7 @@ export const CouponCodeField = (props) => {
   const onCouponCodeChange = (e) => {
     dispatch({ type: UPDATE_COUPON_CODE, payload: e.target.value });
 
-    if (couponError.content) {
+    if (couponError) {
       dispatch({ type: SET_COUPON_ERROR, payload: "" });
     }
   };
@@ -26,8 +26,8 @@ export const CouponCodeField = (props) => {
     <Input
       className="plc-h-12"
       errorClassName="plc-h-12 sm:plc-h-8"
-      hideErrors={!couponError.content}
-      error={couponError.content}
+      hideErrors={!couponError}
+      error={couponError}
       aria-label={t("labels.code")}
       value={couponCode}
       onChange={onCouponCodeChange}
