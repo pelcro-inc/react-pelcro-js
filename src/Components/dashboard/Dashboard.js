@@ -286,7 +286,7 @@ class Dashboard extends Component {
               {sub.cancel_at_period_end === 0 && (
                 <Button
                   variant="ghost"
-                  className="plc-text-red-400 focus:plc-ring-red-300"
+                  className="plc-text-red-500 focus:plc-ring-red-500"
                   icon={<XCircleIcon />}
                   onClick={onCancelClick}
                   disabled={this.state.disableSubmit}

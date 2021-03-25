@@ -15,20 +15,19 @@ export function Alert({
 }) {
   return (
     <div
-      className={`plc-inline-flex plc-items-center plc-justify-between plc-px-4 plc-py-3 plc-pr-1 plc-w-full plc-font-semibold plc-text-sm plc-text-white ${
-        type === "error" ? "plc-bg-red-500" : "plc-bg-primary-500"
+      className={`plc-flex plc-items-center plc-justify-between plc-px-4 plc-py-3 plc-w-full plc-font-semibold plc-text-sm ${
+        type === "error"
+          ? "plc-text-red-600  plc-bg-red-100"
+          : "plc-text-green-800 plc-bg-green-200"
       } plc-rounded-sm pelcro-alert-${type} ${className}`}
       {...otherProps}
     >
       <div className="plc-inline-flex plc-items-center">
         {type === "error" && (
-          <ErrorIcon className="plc-flex-shrink-0 plc-w-6 plc-h-6 plc-mr-3 pelcro-alert-icon" />
+          <ErrorIcon className="plc-flex-shrink-0 plc-w-6 plc-h-6 plc-mr-3 plc-fill-current pelcro-alert-icon" />
         )}
         {type === "success" && (
-          <SuccessIcon
-            className="plc-flex-shrink-0 plc-w-6 plc-h-6 plc-mr-3 pelcro-alert-icon"
-            fill="currentColor"
-          />
+          <SuccessIcon className="plc-flex-shrink-0 plc-w-6 plc-h-6 plc-mr-3 plc-fill-current pelcro-alert-icon" />
         )}
         <div className="plc-whitespace-pre-wrap pelcro-alert-content">
           {children}
@@ -37,7 +36,7 @@ export function Alert({
       {onClose && (
         <button
           type="button"
-          className="plc-flex-shrink-0 plc-w-6 plc-text-white hover:plc-text-gray-300 pelcro-modal-close pelcro-alert-close-btn"
+          className="plc-flex-shrink-0 plc-w-6 plc-fill-current pelcro-modal-close pelcro-alert-close-btn"
           aria-label="close modal"
           onClick={onClose}
         >
