@@ -16,7 +16,6 @@ export const PasswordChangeView = (props) => {
         <h4 className="plc-text-xl plc-font-semibold">
           {t("title")}
         </h4>
-        <p>{t("subtitle")}</p>
       </div>
       <div className="plc-mt-2 pelcro-form">
         <PasswordChangeContainer {...props}>
