@@ -1,13 +1,8 @@
 import React from "react";
+import { ReactComponent as AuthorshipIcon } from "../../assets/pelcro-authorship.svg";
 
 const Authorship = () => {
-  return (
-    <img
-      className="plc-mt-2 plc-h-9 pelcro-authorship"
-      alt="powered by Pelcro"
-      src="https://cdn.pelcro.com/images/logo/powered-by/dark-239x56.png"
-    />
-  );
+  return <AuthorshipIcon className="plc-h-12 pelcro-authorship" />;
 };
 
 export default Authorship;
