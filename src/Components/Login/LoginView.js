@@ -5,6 +5,7 @@ import { LoginPassword } from "./LoginPassword";
 import { LoginButton } from "./LoginButton";
 import { LoginEmail } from "./LoginEmail";
 import { AlertWithContext } from "../../SubComponents/AlertWithContext";
+import { Link } from "../../SubComponents/Link";
 
 export function LoginView(props) {
   const { t } = useTranslation("login");
@@ -29,6 +30,13 @@ export function LoginView(props) {
             required
             label={t("labels.password")}
           />
+          <Link
+            className="plc-flex plc-justify-end"
+            id="pelcro-link-forget-password"
+            onClick={props.onForgotPassword}
+          >
+            {t("messages.forgotPassword")}
+          </Link>
           <LoginButton
             className="plc-mt-2"
             name={t("labels.login")}
