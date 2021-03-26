@@ -15,7 +15,7 @@ export function Alert({
 }) {
   return (
     <div
-      className={`plc-flex plc-items-center plc-justify-between plc-px-4 plc-py-3 plc-w-full plc-font-semibold plc-text-sm ${
+      className={`plc-flex plc-items-center plc-justify-between plc-px-4 plc-py-3 plc-mb-2 plc-w-full plc-font-semibold plc-text-sm ${
         type === "error"
           ? "plc-text-red-600  plc-bg-red-100"
           : "plc-text-green-800 plc-bg-green-200"
