@@ -276,8 +276,8 @@ class SelectModal extends Component {
         />
         <ModalBody>
           <div id="pelcro-selection-view">
-            <div className="plc-flex plc-flex-col plc-items-center plc-text-lg plc-font-semibold plc-text-center pelcro-title-wrapper">
-              <h4>
+            <div className="plc-mb-2 plc-text-center plc-text-gray-700 pelcro-title-wrapper">
+              <h4 className="plc-text-xl plc-font-semibold">
                 {(this.product &&
                   this.product.paywall.select_title) ||
                   window.Pelcro.product.list()[0]?.paywall
