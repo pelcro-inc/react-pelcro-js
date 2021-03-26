@@ -11,7 +11,7 @@ export const GiftCreateView = (props) => {
   const { t } = useTranslation("register");
   return (
     <div id="pelcro-gift-create-view">
-      <div className="plc-flex plc-flex-col plc-items-center plc-text-lg plc-font-semibold plc-text-center pelcro-title-wrapper">
+      <div className="plc-mb-2 plc-text-xl plc-font-semibold plc-text-center plc-text-gray-700 pelcro-title-wrapper">
         <h4>{t("gift.titles.firstTitle")}</h4>
       </div>
       <div className="plc-mt-2 pelcro-form">
@@ -22,7 +22,6 @@ export const GiftCreateView = (props) => {
               autoComplete="first-name"
               id="pelcro-input-first-name"
               errorId="pelcro-input-first-name-error"
-              placeholder={t("gift.labels.firstNamePlaceholder")}
               label={t("gift.labels.firstName")}
             />
             <GiftCreateLastName
@@ -30,7 +29,6 @@ export const GiftCreateView = (props) => {
               autoComplete="last-name"
               id="pelcro-input-last-name"
               errorId="pelcro-input-last-name-error"
-              placeholder={t("gift.labels.lastNamePlaceholder")}
               label={t("gift.labels.lastName")}
             />
           </div>
@@ -38,7 +36,6 @@ export const GiftCreateView = (props) => {
             <GiftCreateEmail
               id="pelcro-input-email"
               errorId="pelcro-input-email-error"
-              placeholder={t("gift.labels.emailPlaceholder")}
               autoComplete="off"
               label={t("gift.labels.email")}
               required

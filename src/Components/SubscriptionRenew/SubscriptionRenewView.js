@@ -42,8 +42,8 @@ export const SubscriptionRenewView = ({
 
   return (
     <div id="pelcro-subscription-renew-view">
-      <div className="plc-text-center">
-        <h4 className="plc-mb-2 plc-text-xl">
+      <div className="plc-mb-2 plc-text-center plc-text-gray-700 pelcro-title-wrapper">
+        <h4 className="plc-text-xl plc-font-semibold ">
           {product?.paywall?.subscribe_title ??
             window.Pelcro.paywall.read()?.subscribe_title}
         </h4>{" "}

@@ -15,8 +15,8 @@ export function RegisterView(props) {
 
   return (
     <div id="pelcro-register-view">
-      <div className="plc-flex plc-flex-col plc-items-center plc-text-lg plc-font-semibold plc-text-center pelcro-title-wrapper">
-        <h4>{title}</h4>
+      <div className="plc-mb-2 plc-text-center plc-text-gray-700 pelcro-title-wrapper">
+        <h4 className="plc-text-xl plc-font-semibold">{title}</h4>
         <p>{subtitle}</p>
       </div>
       <div className="plc-mt-2 pelcro-form">
@@ -25,14 +25,12 @@ export function RegisterView(props) {
           <RegisterEmail
             id="pelcro-input-email"
             errorId="pelcro-input-email-error"
-            placeholder={t("labels.emailPlaceholder")}
             label={t("labels.email")}
             required
           />
           <RegisterPassword
             id="pelcro-input-password"
             errorId="pelcro-input-password-error"
-            placeholder={t("labels.passwordPlaceholder")}
             label={t("labels.password")}
             required
           />

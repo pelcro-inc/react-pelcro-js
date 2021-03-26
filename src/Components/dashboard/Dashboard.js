@@ -286,7 +286,7 @@ class Dashboard extends Component {
               {sub.cancel_at_period_end === 0 && (
                 <Button
                   variant="ghost"
-                  className="plc-text-red-400 focus:plc-ring-red-300"
+                  className="plc-text-red-500 focus:plc-ring-red-500"
                   icon={<XCircleIcon />}
                   onClick={onCancelClick}
                   disabled={this.state.disableSubmit}
@@ -310,7 +310,7 @@ class Dashboard extends Component {
               {sub.cancel_at_period_end === 1 && (
                 <Button
                   variant="ghost"
-                  className="plc-text-blue-400 focus:plc-ring-blue-300"
+                  className="plc-text-blue-400"
                   icon={<RefreshIcon />}
                   onClick={onRenewClick}
                   disabled={this.state.disableSubmit}
@@ -473,7 +473,7 @@ class Dashboard extends Component {
                 <Button
                   variant="ghost"
                   icon={<RefreshIcon />}
-                  className="plc-text-blue-400 focus:plc-ring-blue-300"
+                  className="plc-text-blue-400"
                   onClick={onRenewClick}
                   disabled={this.state.disableSubmit}
                   data-key={recipient.id}

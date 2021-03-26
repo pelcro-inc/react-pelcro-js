@@ -11,11 +11,7 @@ export function DisplayName({ store, ...otherProps }) {
   };
 
   if (state.loading) {
-    return (
-      <div className="pelcro-loader-wrapper">
-        <Loader />
-      </div>
-    );
+    return <Loader />;
   }
 
   return (

@@ -32,7 +32,6 @@ export const CouponCodeField = (props) => {
       value={couponCode}
       onChange={onCouponCodeChange}
       type="text"
-      placeholder={t("labels.codePlaceholder")}
       id="pelcro-input-coupon_code"
       {...props}
     />

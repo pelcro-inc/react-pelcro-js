@@ -12,9 +12,10 @@ export const PasswordChangeView = (props) => {
 
   return (
     <div id="pelcro-password-change-view">
-      <div className="plc-flex plc-flex-col plc-items-center plc-text-lg plc-font-semibold plc-text-center pelcro-title-wrapper">
-        <h4>{t("title")}</h4>
-        <p>{t("subtitle")}</p>
+      <div className="plc-mb-2 plc-text-center plc-text-gray-700 pelcro-title-wrapper">
+        <h4 className="plc-text-xl plc-font-semibold">
+          {t("title")}
+        </h4>
       </div>
       <div className="plc-mt-2 pelcro-form">
         <PasswordChangeContainer {...props}>
@@ -22,21 +23,18 @@ export const PasswordChangeView = (props) => {
           <PasswordChangeCurrentPassword
             id="pelcro-input-password"
             errorId="pelcro-input-password-error"
-            placeholder={t("currentPassword")}
             label={t("currentPassword")}
             required
           />
           <PasswordChangeNewPassword
             id="pelcro-input-new-password"
             errorId="pelcro-input-new-password-error"
-            placeholder={t("newPassword")}
             label={t("newPassword")}
             required
           />
           <PasswordChangeConfirmNewPassword
             id="pelcro-input-confirm-password"
             errorId="pelcro-input-confirm-password-error"
-            placeholder={t("confirmNewPassword")}
             label={t("confirmNewPassword")}
             required
           />

@@ -32,7 +32,10 @@ export function LoginModal({ setView, onClose, ...otherProps }) {
         title={site.name}
       />
       <ModalBody>
-        <LoginView {...otherProps} />
+        <LoginView
+          onForgotPassword={onForgotPassword}
+          {...otherProps}
+        />
       </ModalBody>
       <ModalFooter>
         <div>
@@ -43,17 +46,6 @@ export function LoginModal({ setView, onClose, ...otherProps }) {
           >
             {t("messages.createAccount")}
           </Link>
-        </div>
-        <div>
-          {t("messages.forgotPassword") + " "}
-          {t("messages.reset.click") + " "}
-          <Link
-            id="pelcro-link-forget-password"
-            onClick={onForgotPassword}
-          >
-            {t("messages.reset.here")}
-          </Link>
-          {" " + t("messages.reset.toReset")}
         </div>
         <Authorship />
       </ModalFooter>

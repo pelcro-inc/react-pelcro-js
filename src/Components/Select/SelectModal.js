@@ -110,7 +110,7 @@ class SelectModal extends Component {
       return (
         <div
           key={product.id}
-          className="plc-flex plc-space-x-3 plc-p-2 plc-mt-4 plc-border plc-border-gray-500 plc-border-solid plc-rounded pelcro-select-product-wrapper"
+          className="plc-flex plc-space-x-3 plc-p-2 plc-mt-4 plc-bg-gray-200 plc-rounded pelcro-select-product-wrapper"
         >
           {product.image && (
             <img
@@ -162,7 +162,7 @@ class SelectModal extends Component {
       return (
         <div
           key={plan.id}
-          className="plc-p-2 plc-mx-3 plc-mt-2 plc-border plc-border-gray-400 plc-border-solid plc-rounded pelcro-select-plan-wrapper"
+          className="plc-p-2 plc-mx-3 plc-mt-2 plc-bg-gray-100 plc-rounded pelcro-select-plan-wrapper"
         >
           <Radio
             inputClassName="plc-self-start pelcro-select-plan-radio"
@@ -276,8 +276,8 @@ class SelectModal extends Component {
         />
         <ModalBody>
           <div id="pelcro-selection-view">
-            <div className="plc-flex plc-flex-col plc-items-center plc-text-lg plc-font-semibold plc-text-center pelcro-title-wrapper">
-              <h4>
+            <div className="plc-mb-2 plc-text-center plc-text-gray-700 pelcro-title-wrapper">
+              <h4 className="plc-text-xl plc-font-semibold">
                 {(this.product &&
                   this.product.paywall.select_title) ||
                   window.Pelcro.product.list()[0]?.paywall

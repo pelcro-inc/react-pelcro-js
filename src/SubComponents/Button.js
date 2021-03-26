@@ -45,13 +45,13 @@ export function Button({
 
 const getClassName = (variant, isFullWidth, disabled) => {
   const variantsClasses = {
-    solid: `plc-inline-flex plc-items-center plc-justify-center plc-px-6 plc-py-2 plc-font-semibold plc-tracking-wider plc-text-white plc-uppercase plc-bg-primary-500 plc-rounded focus:plc-outline-none focus:plc-ring-4 focus:plc-ring-primary-300 plc-text-md plc-justify-items-center ${
+    solid: `plc-inline-flex plc-items-center plc-justify-center plc-px-6 plc-py-2 plc-font-semibold plc-tracking-wider plc-text-white plc-uppercase plc-bg-primary-500 plc-rounded focus:plc-outline-none focus:plc-ring-2 focus:plc-ring-primary-300 plc-text-md plc-justify-items-center ${
       disabled ? "" : "hover:plc-bg-primary-600"
     } disabled:plc-bg-gray-400 disabled:plc-cursor-not-allowed ${
       isFullWidth ? "plc-w-full" : "plc-w-max"
     }`,
 
-    outline: `plc-inline-flex plc-items-center plc-justify-center plc-px-6 plc-py-2 plc-font-semibold plc-uppercase plc-text-primary-500 plc-border plc-border-primary-500 plc-rounded focus:plc-outline-none focus:plc-ring-4 focus:plc-ring-primary-300 plc-text-md plc-justify-items-center ${
+    outline: `plc-inline-flex plc-items-center plc-justify-center plc-px-6 plc-py-2 plc-font-semibold plc-uppercase plc-text-primary-500 plc-border plc-border-primary-500 plc-rounded focus:plc-outline-none focus:plc-ring-2 focus:plc-ring-primary-300 plc-text-md plc-justify-items-center ${
       disabled ? "" : "hover:plc-bg-primary-600 hover:plc-text-white"
     } plc-tracking-wider disabled:plc-text-gray-500 disabled:plc-border-gray-500 disabled:plc-cursor-not-allowed ${
       isFullWidth ? "plc-w-full" : "plc-w-max"
