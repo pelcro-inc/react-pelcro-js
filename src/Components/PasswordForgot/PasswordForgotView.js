@@ -19,7 +19,6 @@ export const PasswordForgotView = (props) => {
           <PasswordForgotEmail
             id="pelcro-input-email"
             required
-            placeholder={t("email")}
             label={t("email")}
           />
           <PasswordForgotButton

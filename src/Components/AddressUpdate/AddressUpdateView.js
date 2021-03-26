@@ -26,14 +26,12 @@ export const AddressUpdateView = (props) => {
             <AddressUpdateFirstName
               id="pelcro-input-first-name"
               errorId="pelcro-input-first-name-error"
-              placeholder={t("labels.firstName")}
               label={t("labels.firstName")}
               required
             />
             <AddressUpdateLastName
               id="pelcro-input-last-name"
               errorId="pelcro-input-last-name-error"
-              placeholder={t("labels.lastName")}
               label={t("labels.lastName")}
               required
             />
@@ -42,7 +40,6 @@ export const AddressUpdateView = (props) => {
             <AddressUpdateLine1
               id="pelcro-input-line1"
               errorId="pelcro-input-line1-error"
-              placeholder={t("labels.address")}
               label={t("labels.address")}
               required
             />
@@ -51,14 +48,12 @@ export const AddressUpdateView = (props) => {
             <AddressUpdatePostalCode
               id="pelcro-input-postal_code"
               errorId="pelcro-input-postal-code-error"
-              placeholder={t("labels.code")}
               label={t("labels.code")}
               required
             />
             <AddressUpdateCity
               id="pelcro-input-city"
               errorId="pelcro-input-city-error"
-              placeholder={t("labels.city")}
               label={t("labels.city")}
               required
             />

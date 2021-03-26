@@ -25,7 +25,6 @@ export const AddressCreateView = (props) => {
             <AddressCreateFirstName
               id="pelcro-input-first-name"
               errorId="pelcro-input-first-name-error"
-              placeholder={t("labels.firstName")}
               required
               label={t("labels.firstName")}
             />
@@ -33,7 +32,6 @@ export const AddressCreateView = (props) => {
               id="pelcro-input-last-name"
               errorId="pelcro-input-last-name-error"
               required
-              placeholder={t("labels.lastName")}
               label={t("labels.lastName")}
             />
           </div>
@@ -42,7 +40,6 @@ export const AddressCreateView = (props) => {
               id="pelcro-input-line1"
               errorId="pelcro-input-line1-error"
               required
-              placeholder={t("labels.address")}
               label={t("labels.address")}
             />
           </div>
@@ -51,13 +48,11 @@ export const AddressCreateView = (props) => {
               id="pelcro-input-postal-code"
               errorId="pelcro-input-postal-code-error"
               required
-              placeholder={t("labels.code")}
               label={t("labels.code")}
             />
             <AddressCreateCity
               id="pelcro-input-city"
               errorId="pelcro-input-city-error"
-              placeholder={t("labels.city")}
               label={t("labels.city")}
               required
             />

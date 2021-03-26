@@ -25,14 +25,12 @@ export function RegisterView(props) {
           <RegisterEmail
             id="pelcro-input-email"
             errorId="pelcro-input-email-error"
-            placeholder={t("labels.emailPlaceholder")}
             label={t("labels.email")}
             required
           />
           <RegisterPassword
             id="pelcro-input-password"
             errorId="pelcro-input-password-error"
-            placeholder={t("labels.passwordPlaceholder")}
             label={t("labels.password")}
             required
           />

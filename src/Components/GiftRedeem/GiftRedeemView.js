@@ -20,7 +20,6 @@ export const GiftRedeemView = (props) => {
             <GiftRedeemCode
               id="pelcro-input-gift-code"
               errorId="pelcro-input-gift-code-error"
-              placeholder={t("redeem.labels.codePlaceholder")}
               label={t("redeem.labels.code")}
               required
             />

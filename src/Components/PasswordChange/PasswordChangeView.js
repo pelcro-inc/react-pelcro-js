@@ -22,21 +22,18 @@ export const PasswordChangeView = (props) => {
           <PasswordChangeCurrentPassword
             id="pelcro-input-password"
             errorId="pelcro-input-password-error"
-            placeholder={t("currentPassword")}
             label={t("currentPassword")}
             required
           />
           <PasswordChangeNewPassword
             id="pelcro-input-new-password"
             errorId="pelcro-input-new-password-error"
-            placeholder={t("newPassword")}
             label={t("newPassword")}
             required
           />
           <PasswordChangeConfirmNewPassword
             id="pelcro-input-confirm-password"
             errorId="pelcro-input-confirm-password-error"
-            placeholder={t("confirmNewPassword")}
             label={t("confirmNewPassword")}
             required
           />

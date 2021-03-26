@@ -21,14 +21,12 @@ export function LoginView(props) {
             id="pelcro-input-email"
             errorId="pelcro-input-email-error"
             required
-            placeholder={t("labels.emailPlaceholder")}
             label={t("labels.email")}
           />
           <LoginPassword
             id="pelcro-input-password"
             errorId="pelcro-input-password-error"
             required
-            placeholder={t("labels.passwordPlaceholder")}
             label={t("labels.password")}
           />
           <LoginButton
