@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Unreleased]
 
+### Added
+
+- Add profile section to user dashboard.
+
 ### Changed
 
 - Place coupon related errors under the coupon field.
