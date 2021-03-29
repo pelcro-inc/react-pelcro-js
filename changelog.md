@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 - Place coupon related errors under the coupon field.
 - Apply coupon button appearence & Added gap between field and button.
+- Replace Pelcro's authorship logo with SVG version.
 
 ## [Released]
 

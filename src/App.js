@@ -719,11 +719,15 @@ class App extends Component {
               giftCode={this.state.giftCode}
               onClose={this.resetView}
               onSuccess={() => {
-                if (!this.state.product) {
-                  this.setView("orderCreate");
-                } else {
-                  this.setView("payment");
+                if (this.state.product) {
+                  return this.setView("payment");
                 }
+
+                if (this.state.order) {
+                  return this.setView("orderCreate");
+                }
+
+                this.resetView();
               }}
               onGiftRedemptionSuccess={this.resetView}
             />
