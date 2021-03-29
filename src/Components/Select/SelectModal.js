@@ -110,7 +110,7 @@ class SelectModal extends Component {
       return (
         <div
           key={product.id}
-          className="plc-flex plc-space-x-3 plc-p-2 plc-mt-4 plc-bg-gray-200 plc-rounded pelcro-select-product-wrapper"
+          className="plc-flex plc-items-start plc-space-x-3 plc-p-2 plc-mt-4 plc-bg-gray-200 plc-rounded pelcro-select-product-wrapper"
         >
           {product.image && (
             <img
