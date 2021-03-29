@@ -1,4 +1,4 @@
-import { saveToMetadataButton } from "./PelcroNativeButtons/saveToMetadata";
+import { saveToMetadataButton } from "./saveToMetadata";
 
 export const init = (app) => {
   saveToMetadataButton.init(app);
