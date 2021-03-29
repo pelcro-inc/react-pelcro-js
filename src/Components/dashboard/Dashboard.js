@@ -672,7 +672,7 @@ class Dashboard extends Component {
                 }
                 title={this.locale("labels.myProfile")}
                 content={
-                  <div className="plc-flex plc-flex-wrap plc-my-2 plc-ml-2 plc-space-x-4">
+                  <div className="plc-flex plc-flex-col plc-my-2 plc-ml-2 plc-space-y-4">
                     <Button
                       variant="ghost"
                       isFullWidth={false}
