@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 export const AddressCreateSubmit = ({ name, ...otherProps }) => {
   const {
     dispatch,
-    state: { disableSubmit, isSubmitting }
+    state: { isSubmitting }
   } = useContext(store);
 
   const { t } = useTranslation("address");
@@ -16,7 +16,6 @@ export const AddressCreateSubmit = ({ name, ...otherProps }) => {
     <Button
       {...otherProps}
       onClick={() => dispatch({ type: HANDLE_SUBMIT })}
-      disabled={disableSubmit}
       isLoading={isSubmitting}
       isFullWidth={true}
     >

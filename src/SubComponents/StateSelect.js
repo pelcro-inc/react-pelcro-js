@@ -1,12 +1,10 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { Loader } from "../SubComponents/Loader";
 import {
   RESET_FIELD_ERROR,
-  SET_STATES,
   SET_TEXT_FIELD,
   VALIDATE_FIELD
 } from "../utils/action-types";
-import { showError } from "../utils/showing-error";
 import { Select } from "./Select";
 
 export function StateSelect({
@@ -16,29 +14,8 @@ export function StateSelect({
 }) {
   const {
     dispatch,
-    state: { country, state, stateError, states, loading }
+    state: { country, state, stateError, states, isStateLoading }
   } = useContext(store);
-
-  useEffect(() => {
-    const setStates = (error, tmp) => {
-      if (error) {
-        showError(error.message, "pelcro-error-address");
-      } else if (tmp) {
-        dispatch({ type: SET_STATES, payload: tmp });
-      }
-    };
-
-    const getStateList = () => {
-      window.Pelcro.geolocation.getStatesForCountry(
-        country,
-        setStates
-      );
-    };
-
-    if (country) {
-      getStateList();
-    }
-  }, [country]);
 
   const createStateItems = () => {
     const items = [];
@@ -84,7 +61,7 @@ export function StateSelect({
     });
   };
 
-  if (loading || (!createStateItems() && country)) {
+  if (isStateLoading || (!createStateItems() && country)) {
     return <Loader />;
   }
 
