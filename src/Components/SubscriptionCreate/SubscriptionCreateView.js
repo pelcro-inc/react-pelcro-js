@@ -27,7 +27,7 @@ export const SubscriptionCreateView = ({
           {plan.nickname}
         </span>
         <br />
-        <span className="plc-text-xl plc-font-semibold plc-text-green-600">
+        <span className="plc-text-xl plc-font-semibold plc-text-primary-600">
           {plan.amount_formatted}{" "}
         </span>
         <span className="plc-font-thin">
@@ -39,7 +39,7 @@ export const SubscriptionCreateView = ({
 
   return (
     <div id="pelcro-subscription-create-view">
-      <div className="plc-mb-2 plc-text-center plc-text-gray-700 pelcro-title-wrapper">
+      <div className="plc-flex plc-flex-col plc-items-center plc-mb-2 plc-text-center plc-text-gray-700 pelcro-title-wrapper sm:plc-px-8">
         <h4 className="plc-text-xl plc-font-semibold ">
           {product?.paywall?.subscribe_title ??
             window.Pelcro.paywall.read()?.subscribe_title}
