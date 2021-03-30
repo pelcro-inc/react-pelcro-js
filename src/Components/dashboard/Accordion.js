@@ -3,20 +3,29 @@ import { ReactComponent as ChevronRightIcon } from "../../assets/chevron-right.s
 
 /**
  * @typedef {Object} AccordionPropsType
- * @property {string} initialActiveMenu the default active menu
+ * @property {string} initialActiveMenu the initial active menu
  */
 
 /**
  * Accordion component
  * @param {AccordionPropsType} AccordionProps
+ * @return {JSX}
  */
-export const Accordion = ({ children, initialActiveMenu }) => {
+export const Accordion = ({ children, initialActiveMenu = "" }) => {
   const [activeMenu, setActiveMenu] = useState(initialActiveMenu);
+
+  const toggleActiveMenu = (menuToToggle) => {
+    if (activeMenu === menuToToggle) {
+      setActiveMenu("");
+    } else {
+      setActiveMenu(menuToToggle);
+    }
+  };
 
   return React.Children.map(children, (child, i) =>
     React.cloneElement(child, {
       activeMenu,
-      setActiveMenu,
+      toggleActiveMenu,
       key: i
     })
   );
@@ -28,13 +37,14 @@ export const Accordion = ({ children, initialActiveMenu }) => {
  * @property {Element} icon icon element
  * @property {string} title item header title
  * @property {Element} content content element
- * @property {string} activeMenu the default active menu [PASSED IMPLICITLY BY ACCORDION]
- * @property {(name: string) => void} setActiveMenu active menu setter [PASSED IMPLICITLY BY ACCORDION]
+ * @property {string} activeMenu active menu [PASSED IMPLICITLY BY ACCORDION]
+ * @property {(name: string) => void} toggleActiveMenu active menu toggler [PASSED IMPLICITLY BY ACCORDION]
  */
 
 /**
  * Accordion component
  * @param {AccordionItemPropsType} AccordionProps
+ * @return {JSX}
  */
 Accordion.item = function AccordionItem({
   name,
@@ -42,12 +52,11 @@ Accordion.item = function AccordionItem({
   title,
   content,
   activeMenu,
-  setActiveMenu
+  toggleActiveMenu
 }) {
   const isActive = activeMenu === name;
   return (
     <div
-      onClick={() => setActiveMenu(name)}
       id={name}
       className={`plc-border-l-2 plc-border-transparent plc-border-solid plc-group
         ${
@@ -56,7 +65,10 @@ Accordion.item = function AccordionItem({
             : "hover:plc-bg-primary-50"
         }`}
     >
-      <header className="plc-flex plc-items-center plc-justify-between plc-p-5 plc-px-4 plc-cursor-pointer plc-select-none sm:plc-px-8">
+      <header
+        onClick={() => toggleActiveMenu(name)}
+        className="plc-flex plc-items-center plc-justify-between plc-p-5 plc-px-4 plc-cursor-pointer plc-select-none sm:plc-px-8"
+      >
         <span
           className={`plc-flex plc-text-lg plc-items-center ${
             isActive ? "plc-text-primary-400" : "plc-text-gray-500"
