@@ -100,16 +100,16 @@ class Dashboard extends Component {
     return this.props.setView("user-edit");
   };
 
+  displayChangePassword = () => {
+    return this.props.setView("password-change");
+  };
+
   displayProductSelect = ({ isGift }) => {
     if (isGift) {
       this.props.setProductAndPlan(null, null, true);
     }
 
     return this.props.setView("select");
-  };
-
-  displayChangePassword = () => {
-    return this.props.setView("password-change");
   };
 
   displayAddressCreate = () => {
