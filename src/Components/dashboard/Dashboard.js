@@ -97,7 +97,11 @@ class Dashboard extends Component {
     return this.props.setView("user-edit");
   };
 
-  displayProductSelect = () => {
+  displayProductSelect = ({ isGift }) => {
+    if (isGift) {
+      this.props.setProductAndPlan(null, null, true);
+    }
+
     return this.props.setView("select");
   };
 
@@ -512,7 +516,9 @@ class Dashboard extends Component {
                   <PlusIcon className="plc-w-4 plc-h-4 plc-mr-1" />
                 }
                 className="plc-h-8 plc-font-semibold plc-tracking-wider plc-uppercase plc-rounded-none plc-text-primary-700 hover:plc-bg-primary-50"
-                onClick={this.displayProductSelect}
+                onClick={() =>
+                  this.displayProductSelect({ isGift: true })
+                }
               >
                 {this.locale("labels.addGift")}
               </Button>
