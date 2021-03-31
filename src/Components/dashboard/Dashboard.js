@@ -104,6 +104,8 @@ class Dashboard extends Component {
     if (isGift) {
       this.props.setProductAndPlan(null, null, true);
     }
+
+    return this.props.setView("select");
   };
 
   displayChangePassword = () => {
