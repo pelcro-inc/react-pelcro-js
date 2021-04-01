@@ -205,6 +205,7 @@ class App extends Component {
   };
 
   resetView = () => {
+    this.setView(null);
     this.setState({
       product: null,
       plan: null,
@@ -215,7 +216,6 @@ class App extends Component {
 
     if (this.state.giftRecipient)
       this.setState({ giftRecipient: null });
-    this.setView(null);
     this.enableScroll();
   };
 
