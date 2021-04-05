@@ -1,9 +1,6 @@
 import "./i18n";
 import "./index.css";
 
-// eslint-disable-next-line import/no-commonjs
-const tailwindConfig = require("../tailwind.config");
-
 export { LoginContainer } from "./Components/Login/LoginContainer";
 export { Email } from "./SubComponents/Email";
 export { Password } from "./SubComponents/Password";
@@ -153,4 +150,4 @@ export {
   unauthenticatedButtons
 } from "./Components/common/Buttons";
 
-export { tailwindConfig };
+export { default as tailwindConfig } from "../tailwind.config";
