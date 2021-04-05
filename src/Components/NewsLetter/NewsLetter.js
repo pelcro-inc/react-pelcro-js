@@ -153,6 +153,7 @@ class DefaultNewsLetter extends Component {
                   autoComplete="first-name"
                   id="pelcro-input-first-name"
                   label={t("labels.firstName")}
+                  autoFocus={true}
                 />
                 <Input
                   wrapperClassName="plc-ml-3"

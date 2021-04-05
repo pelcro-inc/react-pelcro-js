@@ -128,7 +128,7 @@ export class OrderConfirmModal extends Component {
                 id="pelcro-submit"
                 onClick={this.props.onClose}
                 variant="outline"
-                autoFocus
+                autoFocus={true}
               >
                 {this.locale("buttons.continue")}
               </Button>

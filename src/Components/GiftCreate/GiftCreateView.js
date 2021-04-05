@@ -23,6 +23,7 @@ export const GiftCreateView = (props) => {
               id="pelcro-input-first-name"
               errorId="pelcro-input-first-name-error"
               label={t("gift.labels.firstName")}
+              autoFocus={true}
             />
             <GiftCreateLastName
               wrapperClassName="plc-ml-3"

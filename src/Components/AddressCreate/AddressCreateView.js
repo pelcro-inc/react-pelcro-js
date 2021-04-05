@@ -27,6 +27,7 @@ export const AddressCreateView = (props) => {
               errorId="pelcro-input-first-name-error"
               required
               label={t("labels.firstName")}
+              autoFocus={true}
             />
             <AddressCreateLastName
               id="pelcro-input-last-name"

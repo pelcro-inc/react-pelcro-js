@@ -28,6 +28,7 @@ export const AddressUpdateView = (props) => {
               errorId="pelcro-input-first-name-error"
               label={t("labels.firstName")}
               required
+              autoFocus={true}
             />
             <AddressUpdateLastName
               id="pelcro-input-last-name"

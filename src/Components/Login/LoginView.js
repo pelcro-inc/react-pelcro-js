@@ -23,6 +23,7 @@ export function LoginView(props) {
             errorId="pelcro-input-email-error"
             required
             label={t("labels.email")}
+            autoFocus={true}
           />
           <LoginPassword
             id="pelcro-input-password"

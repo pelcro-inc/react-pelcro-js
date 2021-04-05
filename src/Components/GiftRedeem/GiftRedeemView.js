@@ -24,6 +24,7 @@ export const GiftRedeemView = (props) => {
               errorId="pelcro-input-gift-code-error"
               label={t("redeem.labels.code")}
               required
+              autoFocus={true}
             />
           </div>
           <GiftRedeemSubmitButton

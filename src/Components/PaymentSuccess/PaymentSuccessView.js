@@ -16,7 +16,11 @@ export const PaymentSuccessView = ({ onClose, product }) => {
           </h4>
           <p>{product.paywall.success_content}</p>
         </div>
-        <Button className="plc-mt-6" onClick={onClose} autoFocus>
+        <Button
+          className="plc-mt-6"
+          onClick={onClose}
+          autoFocus={true}
+        >
           {t("continue")}
         </Button>
       </div>

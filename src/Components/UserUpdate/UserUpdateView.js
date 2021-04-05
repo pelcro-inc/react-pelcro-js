@@ -31,6 +31,7 @@ export const UserUpdateView = (props) => {
               id="pelcro-input-first-name"
               errorId="pelcro-input-first-name-error"
               label={t("labels.firstName")}
+              autoFocus={true}
             />
             <UserUpdateLastName
               wrapperClassName="plc-ml-3"

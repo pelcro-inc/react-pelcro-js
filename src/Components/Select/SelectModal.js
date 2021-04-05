@@ -105,7 +105,7 @@ class SelectModal extends Component {
       ? this.goBack
       : this.selectProduct;
 
-    return productsToShow.map((product) => {
+    return productsToShow.map((product, i) => {
       return (
         <div
           key={product.id}
@@ -145,6 +145,7 @@ class SelectModal extends Component {
                 data-key={product.id}
                 id="pelcro-select-product-back-button"
                 className="plc-ml-auto plc-text-xs"
+                {...(i === 0 && { autoFocus: true })}
               >
                 {productButtonLabel}
               </Button>

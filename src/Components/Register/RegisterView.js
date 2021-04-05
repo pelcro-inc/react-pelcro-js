@@ -27,6 +27,7 @@ export function RegisterView(props) {
             errorId="pelcro-input-email-error"
             label={t("labels.email")}
             required
+            autoFocus={true}
           />
           <RegisterPassword
             id="pelcro-input-password"

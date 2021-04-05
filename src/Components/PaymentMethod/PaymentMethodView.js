@@ -78,7 +78,7 @@ export function PaymentMethodView({
           <AlertWithContext className="plc-mb-2" />
           {/* Payment form */}
           <div>
-            <PelcroCardNumber />
+            <PelcroCardNumber autoFocus={true} />
             <img
               alt="credit_cards"
               className="plc-h-4 plc-mt-2"

@@ -88,6 +88,7 @@ export const CartView = (props) => {
               className="plc-mt-2"
               id="pelcro-submit"
               name={t("confirm")}
+              autoFocus={true}
             />
           </CartContainer>
         </form>
