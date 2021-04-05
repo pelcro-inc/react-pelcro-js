@@ -149,5 +149,3 @@ export {
   authenticatedButtons,
   unauthenticatedButtons
 } from "./Components/common/Buttons";
-
-export { default as tailwindConfig } from "../tailwind.config";
