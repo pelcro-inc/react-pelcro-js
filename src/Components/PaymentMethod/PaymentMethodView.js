@@ -48,6 +48,7 @@ export function PaymentMethodView({
             className="plc-ml-1"
             target="_blank"
             href="https://www.stripe.com/us/customers"
+            isButton={false}
           >
             Stripe
           </Link>
