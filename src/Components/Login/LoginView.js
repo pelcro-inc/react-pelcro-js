@@ -35,7 +35,7 @@ export function LoginView(props) {
             label={t("labels.password")}
           />
           <Link
-            className="plc-flex plc-justify-end"
+            className="plc-flex plc-justify-end plc-text-sm"
             id="pelcro-link-forget-password"
             onClick={props.onForgotPassword}
           >
