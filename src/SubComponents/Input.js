@@ -35,7 +35,7 @@ export function Input({
         aria-invalid={Boolean(error)}
         {...otherProps}
       />
-      {!hideErrors && (
+      {error && (
         <p
           id={errorId}
           aria-live="assertive"
