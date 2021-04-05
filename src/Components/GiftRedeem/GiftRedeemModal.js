@@ -3,8 +3,7 @@ import { useTranslation } from "react-i18next";
 import {
   Modal,
   ModalBody,
-  ModalFooter,
-  ModalHeader
+  ModalFooter
 } from "../../SubComponents/Modal";
 import Authorship from "../common/Authorship";
 import { GiftRedeemView } from "./GiftRedeemView";
@@ -18,11 +17,11 @@ export const GiftRedeemModal = ({
   const { t } = useTranslation("register");
 
   return (
-    <Modal id="pelcro-gift-redeem-modal">
-      <ModalHeader
-        hideCloseButton={!window.Pelcro.paywall.displayCloseButton()}
-        onClose={onClose}
-      />
+    <Modal
+      hideCloseButton={!window.Pelcro.paywall.displayCloseButton()}
+      onClose={onClose}
+      id="pelcro-gift-redeem-modal"
+    >
       <ModalBody>
         <GiftRedeemView {...otherProps} />
       </ModalBody>

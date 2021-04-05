@@ -6,8 +6,7 @@ import Authorship from "../common/Authorship";
 import {
   Modal,
   ModalBody,
-  ModalFooter,
-  ModalHeader
+  ModalFooter
 } from "../../SubComponents/Modal";
 import { Alert } from "../../SubComponents/Alert";
 import { Button } from "../../SubComponents/Button";
@@ -127,11 +126,11 @@ class DefaultNewsLetter extends Component {
     const { t } = this.props;
 
     return (
-      <Modal id="pelcro-newsletter-modal">
-        <ModalHeader
-          hideCloseButton={!this.closeButton}
-          onClose={this.props.onClose}
-        />
+      <Modal
+        hideCloseButton={!this.closeButton}
+        onClose={this.props.onClose}
+        id="pelcro-newsletter-modal"
+      >
         <ModalBody>
           <div id="pelcro-newsletter-view">
             <div className="plc-mb-2 plc-text-center plc-text-gray-700 pelcro-title-wrapper">

@@ -3,8 +3,7 @@ import { useTranslation } from "react-i18next";
 import {
   Modal,
   ModalBody,
-  ModalFooter,
-  ModalHeader
+  ModalFooter
 } from "../../SubComponents/Modal";
 import Authorship from "../common/Authorship";
 import { GiftCreateView } from "./GiftCreateView";
@@ -25,11 +24,11 @@ export const GiftCreateModal = ({
   }, []);
 
   return (
-    <Modal id="pelcro-gift-create-modal">
-      <ModalHeader
-        hideCloseButton={!window.Pelcro.paywall.displayCloseButton()}
-        onClose={onClose}
-      />
+    <Modal
+      hideCloseButton={!window.Pelcro.paywall.displayCloseButton()}
+      onClose={onClose}
+      id="pelcro-gift-create-modal"
+    >
       <ModalBody>
         <GiftCreateView {...otherProps} />
       </ModalBody>

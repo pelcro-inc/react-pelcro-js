@@ -5,6 +5,8 @@ export function Modal({
   id,
   className = "",
   children,
+  hideCloseButton = false,
+  onClose,
   ...otherProps
 }) {
   return (
@@ -17,7 +19,18 @@ export function Modal({
         {...otherProps}
       >
         <div className="plc-w-full pelcro-modal-content">
-          {children.find(({ type }) => type === ModalHeader)}
+          <div className="plc-p-1 pelcro-modal-header">
+            {!hideCloseButton && (
+              <button
+                type="button"
+                className="plc-absolute plc-w-6 plc-text-gray-500 plc-top-3 plc-right-3 hover:plc-text-black pelcro-modal-close"
+                aria-label="close modal"
+                onClick={onClose}
+              >
+                <CloseIcon className="plc-fill-current" />
+              </button>
+            )}
+          </div>
           {children.find(({ type }) => type === ModalBody)}
           {children.find(({ type }) => type === ModalFooter)}
         </div>
@@ -25,23 +38,6 @@ export function Modal({
     </div>
   );
 }
-
-export const ModalHeader = ({ hideCloseButton = false, onClose }) => {
-  return (
-    <div className="plc-p-1 pelcro-modal-header">
-      {!hideCloseButton && (
-        <button
-          type="button"
-          className="plc-absolute plc-w-6 plc-text-gray-500 plc-top-3 plc-right-3 hover:plc-text-black pelcro-modal-close"
-          aria-label="close modal"
-          onClick={onClose}
-        >
-          <CloseIcon className="plc-fill-current" />
-        </button>
-      )}
-    </div>
-  );
-};
 
 export const ModalBody = ({ children }) => {
   return (

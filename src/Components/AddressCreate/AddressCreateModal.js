@@ -4,17 +4,16 @@ import { AddressCreateView } from "./AddressCreateView";
 import {
   Modal,
   ModalBody,
-  ModalFooter,
-  ModalHeader
+  ModalFooter
 } from "../../SubComponents/Modal";
 
 export const AddressCreateModal = ({ onClose, ...otherProps }) => {
   return (
-    <Modal id="pelcro-address-create-modal">
-      <ModalHeader
-        hideCloseButton={!window.Pelcro.paywall.displayCloseButton()}
-        onClose={onClose}
-      />
+    <Modal
+      hideCloseButton={!window.Pelcro.paywall.displayCloseButton()}
+      onClose={onClose}
+      id="pelcro-address-create-modal"
+    >
       <ModalBody>
         <AddressCreateView {...otherProps} />
       </ModalBody>

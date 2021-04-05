@@ -5,8 +5,7 @@ import { withTranslation } from "react-i18next";
 import {
   Modal,
   ModalBody,
-  ModalFooter,
-  ModalHeader
+  ModalFooter
 } from "../../SubComponents/Modal";
 import { Link } from "../../SubComponents/Link";
 import { Button } from "../../SubComponents/Button";
@@ -267,11 +266,11 @@ class SelectModal extends Component {
     }
 
     return (
-      <Modal id="pelcro-selection-modal">
-        <ModalHeader
-          hideCloseButton={!this.closeButton}
-          onClose={this.props.onClose}
-        />
+      <Modal
+        hideCloseButton={!this.closeButton}
+        onClose={this.props.onClose}
+        id="pelcro-selection-modal"
+      >
         <ModalBody>
           <div id="pelcro-selection-view">
             <div className="plc-mb-2 plc-text-center plc-text-gray-700 pelcro-title-wrapper">

@@ -4,7 +4,6 @@ import Authorship from "../common/Authorship";
 import { LoginView } from "./LoginView";
 import {
   Modal,
-  ModalHeader,
   ModalBody,
   ModalFooter
 } from "../../SubComponents/Modal";
@@ -21,11 +20,11 @@ export function LoginModal({ setView, onClose, ...otherProps }) {
     setView("password-forgot");
   };
   return (
-    <Modal id="pelcro-login-modal">
-      <ModalHeader
-        hideCloseButton={!window.Pelcro.paywall.displayCloseButton()}
-        onClose={onClose}
-      />
+    <Modal
+      hideCloseButton={!window.Pelcro.paywall.displayCloseButton()}
+      onClose={onClose}
+      id="pelcro-login-modal"
+    >
       <ModalBody>
         <LoginView
           onForgotPassword={onForgotPassword}

@@ -4,8 +4,7 @@ import { Link } from "../../SubComponents/Link";
 import {
   Modal,
   ModalBody,
-  ModalFooter,
-  ModalHeader
+  ModalFooter
 } from "../../SubComponents/Modal";
 import Authorship from "../common/Authorship";
 import { RegisterView } from "./RegisterView";
@@ -22,11 +21,11 @@ export function RegisterModal({ setView, onClose, ...otherProps }) {
   };
 
   return (
-    <Modal id="pelcro-register-modal">
-      <ModalHeader
-        hideCloseButton={!window.Pelcro.paywall.displayCloseButton()}
-        onClose={onClose}
-      />
+    <Modal
+      hideCloseButton={!window.Pelcro.paywall.displayCloseButton()}
+      onClose={onClose}
+      id="pelcro-register-modal"
+    >
       <ModalBody>
         <RegisterView {...otherProps} />
       </ModalBody>

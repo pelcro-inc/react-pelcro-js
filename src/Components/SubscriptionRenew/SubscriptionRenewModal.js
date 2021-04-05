@@ -3,8 +3,7 @@ import { SubscriptionRenewView } from "./SubscriptionRenewView";
 import {
   Modal,
   ModalBody,
-  ModalFooter,
-  ModalHeader
+  ModalFooter
 } from "../../SubComponents/Modal";
 import Authorship from "../common/Authorship";
 
@@ -20,12 +19,11 @@ export function SubscriptionRenewModal({
   onClose
 }) {
   return (
-    <Modal id="pelcro-subscription-renew-modal">
-      <ModalHeader
-        hideCloseButton={!window.Pelcro.paywall.displayCloseButton()}
-        onClose={onClose}
-      ></ModalHeader>
-
+    <Modal
+      hideCloseButton={!window.Pelcro.paywall.displayCloseButton()}
+      onClose={onClose}
+      id="pelcro-subscription-renew-modal"
+    >
       <ModalBody>
         <SubscriptionRenewView
           plan={plan}

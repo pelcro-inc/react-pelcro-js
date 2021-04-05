@@ -1,7 +1,6 @@
 import React from "react";
 import {
   Modal,
-  ModalHeader,
   ModalBody,
   ModalFooter
 } from "../../SubComponents/Modal";
@@ -18,12 +17,11 @@ export function SubscriptionCreateModal({
   onDisplay = () => {}
 }) {
   return (
-    <Modal id="pelcro-subscription-create-modal">
-      <ModalHeader
-        hideCloseButton={!window.Pelcro.paywall.displayCloseButton()}
-        onClose={onClose}
-      ></ModalHeader>
-
+    <Modal
+      hideCloseButton={!window.Pelcro.paywall.displayCloseButton()}
+      onClose={onClose}
+      id="pelcro-subscription-create-modal"
+    >
       <ModalBody>
         <SubscriptionCreateView
           plan={plan}
