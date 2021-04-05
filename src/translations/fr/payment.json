@@ -1,46 +1,33 @@
 {
-    "labels": {
-        "cardNumber": "Numéro de carte",
-        "securityCode": "Code de sécurité",
-        "submit": "Soumettre",
-        "months": {
-            "jan": "Janvier",
-            "feb": "Février",
-            "mar": "Mars",
-            "apr": "Avril",
-            "may": "Mai",
-            "jun": "Juin",
-            "jul": "Juillet",
-            "aug": "Août",
-            "sep": "Septembre",
-            "oct": "Octobre",
-            "nov": "Novembre",
-            "dec": "Décembre"
-        },
-        "checkout": {
-            "title": "Informations de paiement"
-        }
+  "labels": {
+    "cardNumber": "Numéro de carte",
+    "securityCode": "Code de sécurité",
+    "submit": "Soumettre",
+    "months": {
+      "jan": "Janvier",
+      "feb": "Février",
+      "mar": "Mars",
+      "apr": "Avril",
+      "may": "Mai",
+      "jun": "Juin",
+      "jul": "Juillet",
+      "aug": "Août",
+      "sep": "Septembre",
+      "oct": "Octobre",
+      "nov": "Novembre",
+      "dec": "Décembre"
     },
-    "messages": {
-        "youAreSafe": "Vous êtes en sécurité - PCI conforme 128 SSL par",
-        "haveQuestion": "Des questions?",
-        "visitOurWebsite": {
-            "visitTo": "Visitez notre site Web pour",
-            "learnMore": "en savoir plus"
-        },
-        "visitOurFaq": {
-            "visitOur": "Visitez notre",
-            "faq": "FAQ"
-        },
-        "cancel": "Annuler votre abonnement en ligne à tout moment.",
-        "logout": {
-            "logout": "Déconnexion",
-            "here": "ici"
-        },
-        "giftSent": "Le cadeau d’abonnement a été envoyé à",
-        "successfully": "avec succès."
-    },
-    "errors": {
-        "": ""
+    "checkout": {
+      "title": "Informations de paiement"
     }
+  },
+  "messages": {
+    "youAreSafe": "Vous êtes en sécurité - PCI conforme 128 SSL par",
+    "cancel": "Annuler votre abonnement en ligne à tout moment.",
+    "giftSent": "Le cadeau d’abonnement a été envoyé à",
+    "successfully": "avec succès."
+  },
+  "errors": {
+    "": ""
+  }
 }

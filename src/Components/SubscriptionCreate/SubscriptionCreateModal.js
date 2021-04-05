@@ -43,21 +43,6 @@ export function SubscriptionCreateModal({
         />
       </ModalBody>
       <ModalFooter>
-        <small className="plc-mb-2 plc-text-center">
-          {t("haveQuestion")} {t("visitOurFaq.visitOur")}{" "}
-          <Link
-            id="pelcro-link-faq"
-            href="https://www.pelcro.com/faq/user"
-            target="_blank"
-          >
-            {t("visitOurFaq.faq")}
-          </Link>
-          . {t("cancel")}
-          {" " + t("logout.logout")}{" "}
-          <Link id="pelcro-link-logout" onClick={logout}>
-            {t("logout.here")}
-          </Link>
-        </small>
         <Authorship />
       </ModalFooter>
     </Modal>
