@@ -4,7 +4,6 @@ export function Input({
   label = "",
   required,
   id,
-  hideErrors,
   errorId,
   error,
   className = "",
