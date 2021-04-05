@@ -16,7 +16,7 @@ export const AddressUpdateView = (props) => {
 
   return (
     <div id="pelcro-address-update-view">
-      <div className="plc-mb-2 plc-text-xl plc-font-semibold plc-text-center plc-text-gray-700 pelcro-title-wrapper">
+      <div className="plc-mb-4 plc-text-xl plc-font-semibold plc-text-center plc-text-gray-700 pelcro-title-wrapper">
         <h4>{t("title")}</h4>
       </div>
       <form

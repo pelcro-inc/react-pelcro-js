@@ -133,7 +133,7 @@ class DefaultNewsLetter extends Component {
       >
         <ModalBody>
           <div id="pelcro-newsletter-view">
-            <div className="plc-mb-2 plc-text-center plc-text-gray-700 pelcro-title-wrapper">
+            <div className="plc-mb-4 plc-text-center plc-text-gray-700 pelcro-title-wrapper">
               <h4 className="plc-text-xl plc-font-semibold">
                 {this.title}
               </h4>
