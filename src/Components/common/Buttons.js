@@ -245,7 +245,7 @@ export const init = (app) => {
           if (window.Pelcro.user.isAuthenticated()) {
             app.setView("address");
           } else {
-            app.setView("login");
+            app.setView("register");
           }
         }
       );
