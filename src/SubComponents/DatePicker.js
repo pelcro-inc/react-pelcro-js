@@ -12,7 +12,7 @@ export function DatePicker({
   ...otherProps
 }) {
   return (
-    <div className="plc-w-full">
+    <div className="plc-w-full plc-mb-3">
       <label
         htmlFor={id}
         className={`plc-text-gray-700 pelcro-date-label ${labelClassName}`}
@@ -35,7 +35,7 @@ export function DatePicker({
         <p
           id={errorId}
           aria-live="assertive"
-          className={`plc-h-3 plc-mt-1 plc-mb-3 plc-text-sm plc-text-red-500 plc-normal-case pelcro-field-error ${errorClassName}`}
+          className={`plc-h-3 plc-mt-1 plc-text-sm plc-text-red-500 plc-normal-case pelcro-field-error ${errorClassName}`}
         >
           {error}
         </p>
