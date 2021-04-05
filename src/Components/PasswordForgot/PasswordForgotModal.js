@@ -16,16 +16,9 @@ export const PasswordForgotModal = ({
   ...otherProps
 }) => {
   const { t } = useTranslation("passwordForgot");
-  const site = window.Pelcro.site.read();
-
   return (
     <Modal id="pelcro-password-forgot-modal">
-      <ModalHeader
-        hideCloseButton={false}
-        onClose={onClose}
-        logo={site.logo}
-        title={site.name}
-      />
+      <ModalHeader hideCloseButton={false} onClose={onClose} />
       <ModalBody>
         <PasswordForgotView {...otherProps} />
       </ModalBody>

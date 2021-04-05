@@ -15,7 +15,6 @@ export const GiftRedeemModal = ({
   setView,
   ...otherProps
 }) => {
-  const site = window.Pelcro.site.read();
   const { t } = useTranslation("register");
 
   return (
@@ -23,8 +22,6 @@ export const GiftRedeemModal = ({
       <ModalHeader
         hideCloseButton={!window.Pelcro.paywall.displayCloseButton()}
         onClose={onClose}
-        logo={site.logo}
-        title={site.name}
       />
       <ModalBody>
         <GiftRedeemView {...otherProps} />

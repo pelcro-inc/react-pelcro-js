@@ -29,7 +29,6 @@ class SelectModal extends Component {
     this.product =
       this.props.product || window.Pelcro.paywall.getProduct();
     this.locale = this.props.t;
-    this.site = window.Pelcro.site.read();
     this.closeButton = window.Pelcro.paywall.displayCloseButton();
   }
 
@@ -271,8 +270,6 @@ class SelectModal extends Component {
         <ModalHeader
           hideCloseButton={!this.closeButton}
           onClose={this.props.onClose}
-          logo={this.site.logo}
-          title={this.site.name}
         />
         <ModalBody>
           <div id="pelcro-selection-view">

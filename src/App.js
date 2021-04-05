@@ -659,7 +659,6 @@ class App extends Component {
                 plan={this.state.plan}
                 product={this.state.product}
                 onClose={this.resetView}
-                logout={this.logout}
                 onDisplay={() => {
                   ReactGA.event({
                     category: "VIEWS",
@@ -680,7 +679,6 @@ class App extends Component {
                 plan={this.state.plan}
                 product={this.state.product}
                 onClose={this.resetView}
-                logout={this.logout}
                 onDisplay={() => {
                   ReactGA.event({
                     category: "VIEWS",

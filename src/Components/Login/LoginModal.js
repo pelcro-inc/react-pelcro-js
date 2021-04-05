@@ -20,16 +20,11 @@ export function LoginModal({ setView, onClose, ...otherProps }) {
   const onForgotPassword = () => {
     setView("password-forgot");
   };
-
-  const site = window.Pelcro.site.read();
-
   return (
     <Modal id="pelcro-login-modal">
       <ModalHeader
         hideCloseButton={!window.Pelcro.paywall.displayCloseButton()}
         onClose={onClose}
-        logo={site.logo}
-        title={site.name}
       />
       <ModalBody>
         <LoginView

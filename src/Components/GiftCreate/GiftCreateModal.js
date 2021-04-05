@@ -16,7 +16,6 @@ export const GiftCreateModal = ({
   onClose,
   ...otherProps
 }) => {
-  const site = window.Pelcro.site.read();
   const { t } = useTranslation("register");
 
   useEffect(() => {
@@ -30,8 +29,6 @@ export const GiftCreateModal = ({
       <ModalHeader
         hideCloseButton={!window.Pelcro.paywall.displayCloseButton()}
         onClose={onClose}
-        logo={site.logo}
-        title={site.name}
       />
       <ModalBody>
         <GiftCreateView {...otherProps} />

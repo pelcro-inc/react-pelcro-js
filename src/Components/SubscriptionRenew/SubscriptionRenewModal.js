@@ -1,5 +1,4 @@
 import React from "react";
-import { useTranslation } from "react-i18next";
 import { SubscriptionRenewView } from "./SubscriptionRenewView";
 import {
   Modal,
@@ -8,7 +7,6 @@ import {
   ModalHeader
 } from "../../SubComponents/Modal";
 import Authorship from "../common/Authorship";
-import { Link } from "../../SubComponents/Link";
 
 export function SubscriptionRenewModal({
   product,
@@ -19,19 +17,13 @@ export function SubscriptionRenewModal({
   onSuccess,
   onDisplay,
   onGiftRenewalSuccess,
-  logout,
   onClose
 }) {
-  const { t } = useTranslation("messages");
-  const site = window.Pelcro.site.read();
-
   return (
     <Modal id="pelcro-subscription-renew-modal">
       <ModalHeader
         hideCloseButton={!window.Pelcro.paywall.displayCloseButton()}
         onClose={onClose}
-        logo={site.logo}
-        title={site.name}
       ></ModalHeader>
 
       <ModalBody>

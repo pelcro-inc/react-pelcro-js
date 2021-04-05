@@ -9,16 +9,9 @@ import {
 } from "../../SubComponents/Modal";
 
 export const OrderCreateModal = ({ onClose, ...otherProps }) => {
-  const site = window.Pelcro.site.read();
-
   return (
     <Modal id="pelcro-order-create-modal">
-      <ModalHeader
-        hideCloseButton={false}
-        onClose={onClose}
-        logo={site.logo}
-        title={site.name}
-      />
+      <ModalHeader hideCloseButton={false} onClose={onClose} />
       <ModalBody>
         <OrderCreateView {...otherProps} />
       </ModalBody>

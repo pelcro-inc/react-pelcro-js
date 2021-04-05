@@ -21,15 +21,11 @@ export function RegisterModal({ setView, onClose, ...otherProps }) {
     setView("select");
   };
 
-  const site = window.Pelcro.site.read();
-
   return (
     <Modal id="pelcro-register-modal">
       <ModalHeader
         hideCloseButton={!window.Pelcro.paywall.displayCloseButton()}
         onClose={onClose}
-        logo={site.logo}
-        title={site.name}
       />
       <ModalBody>
         <RegisterView {...otherProps} />

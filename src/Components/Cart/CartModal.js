@@ -9,15 +9,9 @@ import Authorship from "../common/Authorship";
 import { CartView } from "./CartView";
 
 export const CartModal = ({ onClose, ...otherProps }) => {
-  const site = window.Pelcro.site.read();
   return (
     <Modal id="pelcro-cart-modal">
-      <ModalHeader
-        hideCloseButton={false}
-        onClose={onClose}
-        logo={site.logo}
-        title={site.name}
-      />
+      <ModalHeader hideCloseButton={false} onClose={onClose} />
       <ModalBody>
         <CartView {...otherProps} />
       </ModalBody>
