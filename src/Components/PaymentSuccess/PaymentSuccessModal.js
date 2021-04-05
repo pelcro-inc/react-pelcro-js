@@ -25,7 +25,7 @@ export function PaymentSuccessModal({ onDisplay, onClose, product }) {
         <PaymentSuccessView onClose={onClose} product={product} />
       </ModalBody>
       <ModalFooter>
-        <Authorship></Authorship>
+        <Authorship />
       </ModalFooter>
     </Modal>
   );
