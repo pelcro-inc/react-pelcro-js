@@ -24,7 +24,7 @@ export const CartView = (props) => {
           {t("empty")}
         </p>
       ) : (
-        <div className="plc-mt-2 pelcro-form">
+        <form action="" className="plc-mt-2 pelcro-form">
           <CartContainer {...props}>
             <div className="pelcro-cart-wrapper">
               {props.products.map((product) => {
@@ -84,12 +84,13 @@ export const CartView = (props) => {
               </p>
             </div>
             <CartSubmit
+              role="submit"
               className="plc-mt-2"
               id="pelcro-submit"
               name={t("confirm")}
             />
           </CartContainer>
-        </div>
+        </form>
       )}
     </div>
   );

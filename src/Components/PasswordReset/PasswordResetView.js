@@ -17,7 +17,7 @@ export const PasswordResetView = (props) => {
         </h4>
         <p>{t("subtitle")}</p>
       </div>
-      <div className="plc-mt-2 pelcro-form">
+      <form action="" className="plc-mt-2 pelcro-form">
         <PasswordResetContainer {...props}>
           <AlertWithContext />
           <PasswordResetEmail
@@ -40,12 +40,13 @@ export const PasswordResetView = (props) => {
           />
 
           <PasswordResetButton
+            role="submit"
             className="plc-mt-2"
             name={t("submit")}
             id="pelcro-submit"
           />
         </PasswordResetContainer>
-      </div>
+      </form>
     </div>
   );
 };

@@ -140,7 +140,7 @@ class DefaultNewsLetter extends Component {
               </h4>
               <p>{this.subtitle}</p>
             </div>
-            <div className="plc-mt-2 pelcro-form">
+            <form action="" className="plc-mt-2 pelcro-form">
               {this.state.alert.content && (
                 <Alert type={this.state.alert.type}>
                   {this.state.alert.content}
@@ -183,6 +183,7 @@ class DefaultNewsLetter extends Component {
                 * {t("labels.required")}
               </p>
               <Button
+                role="submit"
                 className="plc-mt-2"
                 id="pelcro-submit"
                 isFullWidth={true}
@@ -192,7 +193,7 @@ class DefaultNewsLetter extends Component {
               >
                 {t("labels.submit")}
               </Button>
-            </div>
+            </form>
           </div>
         </ModalBody>
         <ModalFooter>

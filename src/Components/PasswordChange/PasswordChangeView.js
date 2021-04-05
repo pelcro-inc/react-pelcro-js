@@ -17,7 +17,7 @@ export const PasswordChangeView = (props) => {
           {t("title")}
         </h4>
       </div>
-      <div className="plc-mt-2 pelcro-form">
+      <form action="" className="plc-mt-2 pelcro-form">
         <PasswordChangeContainer {...props}>
           <AlertWithContext />
           <PasswordChangeCurrentPassword
@@ -39,12 +39,13 @@ export const PasswordChangeView = (props) => {
             required
           />
           <PasswordChangeButton
+            role="submit"
             className="plc-mt-2"
             name={t("submit")}
             id="pelcro-submit"
           />
         </PasswordChangeContainer>
-      </div>
+      </form>
     </div>
   );
 };

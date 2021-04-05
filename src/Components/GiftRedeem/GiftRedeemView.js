@@ -15,7 +15,7 @@ export const GiftRedeemView = (props) => {
         </h4>
         <p>{t("redeem.titles.secondTitle")}</p>
       </div>
-      <div className="plc-mt-2 pelcro-form">
+      <form action="" className="plc-mt-2 pelcro-form">
         <GiftRedeemContainer {...props}>
           <AlertWithContext />
           <div className="plc-flex plc-items-start">
@@ -27,12 +27,13 @@ export const GiftRedeemView = (props) => {
             />
           </div>
           <GiftRedeemSubmitButton
+            role="submit"
             className="plc-mt-2"
             id="pelcro-submit"
             name={t("redeem.buttons.redeem")}
           />
         </GiftRedeemContainer>
-      </div>
+      </form>
     </div>
   );
 };

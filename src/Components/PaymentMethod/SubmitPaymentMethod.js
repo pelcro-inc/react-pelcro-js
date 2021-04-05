@@ -21,6 +21,7 @@ export const SubmitPaymentMethod = ({ children }) => {
 
   return (
     <Button
+      role="submit"
       className="plc-py-3"
       variant="solid"
       isLoading={isLoading}

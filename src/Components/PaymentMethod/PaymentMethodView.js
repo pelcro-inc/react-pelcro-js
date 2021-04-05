@@ -55,7 +55,10 @@ export function PaymentMethodView({
         </span>
       </div>
 
-      <div className="plc-w-full plc-mt-2 plc-font-semibold plc-text-gray-600 pelcro-form">
+      <form
+        action=""
+        className="plc-w-full plc-mt-2 plc-font-semibold plc-text-gray-600 pelcro-form"
+      >
         <PaymentMethodContainer
           type={type}
           successMessage={successMessage}
@@ -115,7 +118,7 @@ export function PaymentMethodView({
             </div>
           </div>
         </PaymentMethodContainer>
-      </div>
+      </form>
     </div>
   );
 }

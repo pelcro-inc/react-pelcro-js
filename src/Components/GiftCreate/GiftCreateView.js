@@ -14,7 +14,7 @@ export const GiftCreateView = (props) => {
       <div className="plc-mb-2 plc-text-xl plc-font-semibold plc-text-center plc-text-gray-700 pelcro-title-wrapper">
         <h4>{t("gift.titles.firstTitle")}</h4>
       </div>
-      <div className="plc-mt-2 pelcro-form">
+      <form action="" className="plc-mt-2 pelcro-form">
         <GiftCreateContainer {...props}>
           <AlertWithContext />
           <div className="plc-flex plc-items-start">
@@ -45,12 +45,13 @@ export const GiftCreateView = (props) => {
             * {t("gift.labels.required")}
           </p>
           <GiftCreateSubmitButton
+            role="submit"
             className="plc-mt-2"
             name={t("gift.buttons.gift")}
             id="pelcro-submit"
           />
         </GiftCreateContainer>
-      </div>
+      </form>
     </div>
   );
 };
