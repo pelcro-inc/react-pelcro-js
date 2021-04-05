@@ -23,7 +23,7 @@ export function Select({
       </label>
       <select
         id={id}
-        className={`plc-mt-1 plc-w-full plc-border plc-border-gray-300 plc-bg-gray-50 plc-p-3 plc-appearance-none plc-outline-none plc-rounded-sm focus:plc-ring-2 focus:plc-ring-primary-600 disabled:plc-bg-gray-300 disabled:plc-cursor-not-allowed pelcro-select-select ${className} ${
+        className={`plc-mt-1 plc-w-full plc-border plc-border-gray-300 plc-bg-gray-50 plc-p-2 plc-appearance-none plc-outline-none plc-rounded-sm focus:plc-ring-2 focus:plc-ring-primary-600 disabled:plc-bg-gray-300 disabled:plc-cursor-not-allowed pelcro-select-select ${className} ${
           error
             ? "plc-ring-2 plc-ring-red-400 pelcro-input-invalid"
             : ""
