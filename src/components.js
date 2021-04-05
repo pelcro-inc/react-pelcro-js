@@ -20,6 +20,7 @@ export { RegisterButton } from "./Components/Register/RegisterButton";
 export { RegisterJobTitle } from "./Components/Register/RegisterJobTitle";
 export { RegisterCompany } from "./Components/Register/RegisterCompany";
 export { PelcroContainer } from "./Components/PelcroContainer";
+export { AlertWithContext as Alert } from "./SubComponents/AlertWithContext";
 export { LoginModal } from "./Components/Login/LoginModal";
 export { RegisterModal } from "./Components/Register/RegisterModal";
 export { SelectModalWithTrans as SelectModal } from "./Components/Select/SelectModal";
