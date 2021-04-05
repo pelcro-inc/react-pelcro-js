@@ -24,7 +24,10 @@ export const CartView = (props) => {
           {t("empty")}
         </p>
       ) : (
-        <form action="" className="plc-mt-2 pelcro-form">
+        <form
+          action="javascript:void(0);"
+          className="plc-mt-2 pelcro-form"
+        >
           <CartContainer {...props}>
             <div className="pelcro-cart-wrapper">
               {props.products.map((product) => {

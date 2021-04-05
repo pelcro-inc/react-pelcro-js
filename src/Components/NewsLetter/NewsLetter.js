@@ -140,7 +140,10 @@ class DefaultNewsLetter extends Component {
               </h4>
               <p>{this.subtitle}</p>
             </div>
-            <form action="" className="plc-mt-2 pelcro-form">
+            <form
+              action="javascript:void(0);"
+              className="plc-mt-2 pelcro-form"
+            >
               {this.state.alert.content && (
                 <Alert type={this.state.alert.type}>
                   {this.state.alert.content}

@@ -15,7 +15,10 @@ export const GiftRedeemView = (props) => {
         </h4>
         <p>{t("redeem.titles.secondTitle")}</p>
       </div>
-      <form action="" className="plc-mt-2 pelcro-form">
+      <form
+        action="javascript:void(0);"
+        className="plc-mt-2 pelcro-form"
+      >
         <GiftRedeemContainer {...props}>
           <AlertWithContext />
           <div className="plc-flex plc-items-start">

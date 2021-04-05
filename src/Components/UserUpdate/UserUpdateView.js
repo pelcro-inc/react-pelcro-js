@@ -19,7 +19,10 @@ export const UserUpdateView = (props) => {
         </h4>
         <p>{t("labels.subtitle")}</p>
       </div>
-      <form action="" className="plc-mt-2 pelcro-form">
+      <form
+        action="javascript:void(0);"
+        className="plc-mt-2 pelcro-form"
+      >
         <UserUpdateContainer {...props}>
           <AlertWithContext />
           <div className="plc-flex plc-items-start">

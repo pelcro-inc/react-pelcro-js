@@ -56,7 +56,7 @@ export function PaymentMethodView({
       </div>
 
       <form
-        action=""
+        action="javascript:void(0);"
         className="plc-w-full plc-mt-2 plc-font-semibold plc-text-gray-600 pelcro-form"
       >
         <PaymentMethodContainer

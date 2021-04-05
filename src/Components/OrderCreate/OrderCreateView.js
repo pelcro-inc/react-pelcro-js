@@ -9,7 +9,10 @@ export const OrderCreateView = (props) => {
       <div className="plc-mb-2 plc-text-xl plc-font-semibold plc-text-center plc-text-gray-700 pelcro-title-wrapper">
         <h4>{t("labels.checkout.title")}</h4>
       </div>
-      <form action="" className="plc-mt-2 pelcro-form">
+      <form
+        action="javascript:void(0);"
+        className="plc-mt-2 pelcro-form"
+      >
         <PaymentMethodView
           type="orderCreate"
           showCoupon={false}
