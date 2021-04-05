@@ -12,7 +12,7 @@ export function Modal({
   return (
     <div className="plc-fixed plc-top-0 plc-left-0 plc-flex plc-items-center plc-justify-center plc-w-full plc-h-full plc-overflow-auto plc-bg-black pelcro-modal-overlay plc-z-max plc-bg-opacity-60">
       <div
-        className={`plc-container plc-absolute plc-top-0 plc-flex plc-flex-col plc-items-center plc-max-w-lg plc-bg-white plc-border-t-4 plc-border-primary-500  plc-rounded-md md:plc-mt-8 pelcro-modal ${className}`}
+        className={`plc-container plc-absolute plc-top-0 plc-flex plc-flex-col plc-items-center plc-max-w-lg plc-bg-white plc-border-t-8 plc-border-primary-500 plc-rounded-md md:plc-mt-8 pelcro-modal ${className}`}
         role="dialog"
         aria-modal="true"
         id={id}
