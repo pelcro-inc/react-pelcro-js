@@ -1,6 +1,7 @@
 /* globals */
 @import "./css/normalize.css";
 @import "./css/forms.css";
+@import "./css/variables.css";
 
 /* sub-components */
 @import "./SubComponents/Badge.css";
