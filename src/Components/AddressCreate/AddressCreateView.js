@@ -21,7 +21,7 @@ export const AddressCreateView = (props) => {
       <div className="plc-mt-2 pelcro-form">
         <AddressCreateContainer {...props}>
           <AlertWithContext />
-          <div className="plc-flex plc-space-x-3 plc-items-end">
+          <div className="plc-flex plc-space-x-3 plc-items-start">
             <AddressCreateFirstName
               id="pelcro-input-first-name"
               errorId="pelcro-input-first-name-error"
@@ -35,7 +35,7 @@ export const AddressCreateView = (props) => {
               label={t("labels.lastName")}
             />
           </div>
-          <div className="plc-flex plc-items-end">
+          <div className="plc-flex plc-items-start">
             <AddressCreateLine1
               id="pelcro-input-line1"
               errorId="pelcro-input-line1-error"
@@ -43,7 +43,7 @@ export const AddressCreateView = (props) => {
               label={t("labels.address")}
             />
           </div>
-          <div className="plc-flex plc-space-x-3 plc-items-end">
+          <div className="plc-flex plc-space-x-3 plc-items-start">
             <AddressCreatePostalCode
               id="pelcro-input-postal-code"
               errorId="pelcro-input-postal-code-error"
@@ -57,7 +57,7 @@ export const AddressCreateView = (props) => {
               required
             />
           </div>
-          <div className="plc-flex plc-space-x-3 plc-items-end">
+          <div className="plc-flex plc-space-x-3 plc-items-start">
             <AddressCreateCountrySelect
               id="pelcro-input-country"
               errorId="pelcro-input-country-error"

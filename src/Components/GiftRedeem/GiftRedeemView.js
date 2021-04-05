@@ -18,7 +18,7 @@ export const GiftRedeemView = (props) => {
       <div className="plc-mt-2 pelcro-form">
         <GiftRedeemContainer {...props}>
           <AlertWithContext />
-          <div className="plc-flex plc-items-end">
+          <div className="plc-flex plc-items-start">
             <GiftRedeemCode
               id="pelcro-input-gift-code"
               errorId="pelcro-input-gift-code-error"

@@ -22,10 +22,10 @@ export const UserUpdateView = (props) => {
       <div className="plc-mt-2 pelcro-form">
         <UserUpdateContainer {...props}>
           <AlertWithContext />
-          <div className="plc-flex plc-items-end">
+          <div className="plc-flex plc-items-start">
             <UserUpdateEmail label={t("labels.email")} />
           </div>
-          <div className="plc-flex plc-items-end">
+          <div className="plc-flex plc-items-start">
             <UserUpdateFirstName
               autoComplete="first-name"
               id="pelcro-input-first-name"
@@ -40,7 +40,7 @@ export const UserUpdateView = (props) => {
               label={t("labels.lastName")}
             />
           </div>
-          <div className="plc-flex plc-items-end">
+          <div className="plc-flex plc-items-start">
             <UserUpdatePhone
               id="pelcro-input-phone"
               errorId="pelcro-input-phone-error"
