@@ -10,7 +10,7 @@ export const PasswordForgotView = (props) => {
   return (
     <div id="pelcro-password-forgot-view">
       <div className="plc-mb-4 plc-text-center plc-text-gray-700 pelcro-title-wrapper">
-        <h4 className="plc-text-xl plc-font-semibold">
+        <h4 className="plc-text-2xl plc-font-semibold">
           {t("title")}
         </h4>
       </div>

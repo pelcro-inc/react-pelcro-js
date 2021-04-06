@@ -24,7 +24,7 @@ export const MeterView = (props) => {
 
   return (
     <div>
-      <h4 className="plc-mb-2 plc-text-xl plc-font-semibold plc-text-gray-600">
+      <h4 className="plc-mb-2 plc-text-2xl plc-font-semibold plc-text-gray-600">
         {title}
       </h4>
       <p className="plc-text-sm plc-text-gray-600">

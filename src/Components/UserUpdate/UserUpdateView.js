@@ -14,7 +14,7 @@ export const UserUpdateView = (props) => {
   return (
     <div id="pelcro-user-update-view">
       <div className="plc-mb-4 plc-text-center plc-text-gray-700 pelcro-title-wrapper">
-        <h4 className="plc-text-xl plc-font-semibold">
+        <h4 className="plc-text-2xl plc-font-semibold">
           {t("labels.title")}
         </h4>
         <p>{t("labels.subtitle")}</p>
