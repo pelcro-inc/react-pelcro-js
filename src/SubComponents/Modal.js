@@ -41,7 +41,7 @@ export function Modal({
 
 export const ModalBody = ({ children }) => {
   return (
-    <div className="plc-px-8 plc-py-4 pelcro-modal-body">
+    <div className="plc-mx-8 plc-my-4 pelcro-modal-body">
       {children}
     </div>
   );
@@ -49,7 +49,7 @@ export const ModalBody = ({ children }) => {
 
 export const ModalFooter = ({ children }) => {
   return (
-    <div className="plc-flex plc-flex-col plc-items-center plc-justify-center plc-px-8 plc-py-4 plc-text-sm pelcro-modal-footer">
+    <div className="plc-flex plc-flex-col plc-items-center plc-justify-center plc-mx-8 plc-mt-6 plc-mb-4 plc-text-sm pelcro-modal-footer">
       {children}
     </div>
   );
