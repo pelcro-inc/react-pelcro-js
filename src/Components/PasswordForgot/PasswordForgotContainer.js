@@ -8,12 +8,14 @@ import {
   SET_EMAIL,
   HANDLE_SUBMIT,
   DISABLE_SUBMIT,
-  SHOW_ALERT
+  SHOW_ALERT,
+  SET_EMAIL_ERROR
 } from "../../utils/action-types";
 import { getErrorMessages } from "../common/Helpers";
 
 const initialState = {
   email: "",
+  emailError: null,
   buttonDisabled: false,
   alert: {
     type: "error",
@@ -66,7 +68,14 @@ const PasswordForgotContainer = ({
         case SET_EMAIL:
           return Update({
             ...state,
-            email: action.payload
+            email: action.payload,
+            emailError: null
+          });
+        case SET_EMAIL_ERROR:
+          return Update({
+            ...state,
+            emailError: action.payload,
+            email: ""
           });
         case SHOW_ALERT:
           return Update({
