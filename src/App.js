@@ -30,6 +30,8 @@ import {
   GiftRedeemModal,
   PasswordChangeModal
 } from "./components";
+import { AddressSelectModal } from "./Components/AddressSelect/AddressSelectModal";
+import { userHasAddress } from "./utils/utils";
 
 class App extends Component {
   constructor(props) {
@@ -433,7 +435,11 @@ class App extends Component {
         if (!requiresAddress) {
           this.setView("payment");
         } else {
-          this.setView("address");
+          if (userHasAddress()) {
+            this.setView("address-select");
+          } else {
+            this.setView("address");
+          }
         }
       }
     );
@@ -456,6 +462,9 @@ class App extends Component {
 
     // If this is a redeem gift
     if (giftCode) {
+      if (userHasAddress()) {
+        return this.setView("address-select");
+      }
       return this.setView("address");
     }
 
@@ -465,12 +474,19 @@ class App extends Component {
     }
 
     if (order) {
+      if (userHasAddress()) {
+        return this.setView("address-select");
+      }
       return this.setView("address");
     }
 
     if (product) {
       if (product.address_required) {
-        return this.setView("address");
+        if (userHasAddress()) {
+          this.setView("address-select");
+        } else {
+          this.setView("address");
+        }
       } else {
         return this.setView("payment");
       }
@@ -623,7 +639,11 @@ class App extends Component {
                 });
 
                 if (this.state.product.address_required) {
-                  this.setView("address");
+                  if (userHasAddress()) {
+                    this.setView("address-select");
+                  } else {
+                    this.setView("address");
+                  }
                 } else {
                   this.setView("payment");
                 }
@@ -645,11 +665,34 @@ class App extends Component {
                 this.setGiftCode(giftCode);
 
                 if (window.Pelcro.user.isAuthenticated()) {
-                  this.setView("address");
+                  if (userHasAddress()) {
+                    this.setView("address-select");
+                  } else {
+                    this.setView("address");
+                  }
                 } else {
                   this.setView("register");
                 }
               }}
+            />
+          )}
+          {this.state.view === "address-select" && (
+            <AddressSelectModal
+              giftCode={this.state.giftCode}
+              onClose={this.resetView}
+              setView={this.setView}
+              onSuccess={() => {
+                if (this.state.product) {
+                  return this.setView("payment");
+                }
+
+                if (this.state.order) {
+                  return this.setView("orderCreate");
+                }
+
+                this.resetView();
+              }}
+              onGiftRedemptionSuccess={this.resetView}
             />
           )}
           {this.state.view === "payment" &&
@@ -802,7 +845,11 @@ class App extends Component {
                   return this.setView("register");
                 }
 
-                return this.setView("address");
+                if (userHasAddress()) {
+                  this.setView("address-select");
+                } else {
+                  this.setView("address");
+                }
               }}
             />
           )}

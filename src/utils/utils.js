@@ -89,3 +89,11 @@ export const getFormattedPriceByLocal = (
 
   return formatter.format(amount / 100);
 };
+
+/** check wether or not the user have any addresses
+ * @returns {boolean} true if the user have at least one address, false otherwise
+ */
+export const userHasAddress = () => {
+  const addresses = window.Pelcro.user.read().addresses ?? [];
+  return addresses.length > 0;
+};
