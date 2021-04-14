@@ -37,6 +37,9 @@ class App extends Component {
     this.locale = props.t;
     this.loadPaymentSDKs();
     initButtons(this);
+    setTimeout(() => {
+      this.setView("payment");
+    }, 5000);
   }
 
   state = {
@@ -46,7 +49,250 @@ class App extends Component {
     products: [],
     isRenewingGift: false,
     isGift: false,
-    giftCode: ""
+    giftCode: "",
+    product: {
+      id: 834,
+      address_required: true,
+      description:
+        "Get access to all of the content you love and more!",
+      name: "Digital Membership",
+      unit_label: null,
+      image:
+        "https://uploads.pelcro.com/images/site/product/image/834-1615908366.jpeg",
+      plans: [
+        {
+          id: 22033,
+          product_id: 834,
+          amount: 1000,
+          currency: "usd",
+          countries: null,
+          entitlements: ["test_entitlement"],
+          interval: "month",
+          interval_count: 1,
+          allow_send_invoice: false,
+          auto_renew: true,
+          metadata: {
+            pelcro_product_id: "834",
+            pelcro_plan_id: "22033",
+            vimeo_product_id: "52894"
+          },
+          nickname: "Monthly Membership",
+          trial_period_days: 14,
+          description:
+            "Introductory offer! Enjoy one month of unlimited access.",
+          gift_description: null,
+          apple_product_id: null,
+          image: null,
+          amount_formatted: "$10.00",
+          isCheked: true
+        },
+        {
+          id: 22034,
+          product_id: 834,
+          amount: 11000,
+          currency: "usd",
+          countries: null,
+          entitlements: null,
+          interval: "year",
+          interval_count: 1,
+          allow_send_invoice: false,
+          auto_renew: true,
+          metadata: {
+            pelcro_product_id: "834",
+            pelcro_plan_id: "22034"
+          },
+          nickname: "Yearly Subscription",
+          trial_period_days: 0,
+          description:
+            "Enjoy 52 weeks of unlimited access, events, and more perks brought.",
+          gift_description: null,
+          apple_product_id: null,
+          image: null,
+          amount_formatted: "$110.00",
+          isCheked: false
+        },
+        {
+          id: 318053,
+          product_id: 834,
+          amount: 10000,
+          currency: "usd",
+          countries: null,
+          entitlements: null,
+          interval: "week",
+          interval_count: 1,
+          allow_send_invoice: false,
+          auto_renew: false,
+          metadata: {
+            pelcro_product_id: "834",
+            pelcro_plan_id: "318053"
+          },
+          nickname: "USD Weekly",
+          trial_period_days: 0,
+          description: null,
+          gift_description: null,
+          apple_product_id: null,
+          image: null,
+          amount_formatted: "$100.00",
+          isCheked: false
+        },
+        {
+          id: 318100,
+          product_id: 834,
+          amount: 100000,
+          currency: "usd",
+          countries: null,
+          entitlements: null,
+          interval: "week",
+          interval_count: 52,
+          allow_send_invoice: false,
+          auto_renew: false,
+          metadata: {
+            pelcro_product_id: "834",
+            pelcro_plan_id: "318100"
+          },
+          nickname: "Weekly billing - One time",
+          trial_period_days: 0,
+          description: null,
+          gift_description: null,
+          apple_product_id: null,
+          image: null,
+          amount_formatted: "$1,000.00",
+          isCheked: false
+        },
+        {
+          id: 318101,
+          product_id: 834,
+          amount: 100000,
+          currency: "usd",
+          countries: null,
+          entitlements: null,
+          interval: "month",
+          interval_count: 12,
+          allow_send_invoice: false,
+          auto_renew: false,
+          metadata: {
+            pelcro_product_id: "834",
+            pelcro_plan_id: "318101"
+          },
+          nickname: "Monthly billing - One time",
+          trial_period_days: 0,
+          description: null,
+          gift_description: null,
+          apple_product_id: null,
+          image: null,
+          amount_formatted: "$1,000.00",
+          isCheked: false
+        },
+        {
+          id: 318102,
+          product_id: 834,
+          amount: 100000,
+          currency: "usd",
+          countries: null,
+          entitlements: null,
+          interval: "year",
+          interval_count: 1,
+          allow_send_invoice: false,
+          auto_renew: false,
+          metadata: {
+            pelcro_product_id: "834",
+            pelcro_plan_id: "318102"
+          },
+          nickname: "Yearly billing - One time",
+          trial_period_days: 0,
+          description: null,
+          gift_description: null,
+          apple_product_id: null,
+          image: null,
+          amount_formatted: "$1,000.00",
+          isCheked: false
+        },
+        {
+          id: 318103,
+          product_id: 834,
+          amount: 100000,
+          currency: "usd",
+          countries: null,
+          entitlements: null,
+          interval: "day",
+          interval_count: 120,
+          allow_send_invoice: false,
+          auto_renew: false,
+          metadata: {
+            pelcro_product_id: "834",
+            pelcro_plan_id: "318103"
+          },
+          nickname: "Daily plan 2 - One time",
+          trial_period_days: 0,
+          description: null,
+          gift_description: null,
+          apple_product_id: null,
+          image: null,
+          amount_formatted: "$1,000.00",
+          isCheked: false
+        }
+      ],
+      paywall: {
+        id: 74,
+        product_id: 834,
+        block_incognito: false,
+        frequency_limit: 5,
+        meter_title: "Free Articles",
+        meter_subtitle: "Subscribe for unlimited access!",
+        register_title: "Create an account",
+        register_subtitle: "Enter your information below to continue",
+        register_image: null,
+        subscribe_title: "One Step Closer",
+        subscribe_subtitle:
+          "Please enter your credit card information below",
+        select_title: "Choose from the list below",
+        select_subtitle:
+          "Select one of the options below to get started",
+        success_title: "Congratulations!",
+        success_content:
+          "You are now a Digital Subscriber! Don't hesitate to contact support@subscriptions.com for any questions.",
+        subscription_likelihood_score_threshold: null,
+        newsletter_title: "Want more free visits?",
+        newsletter_subtitle:
+          "Subscribe to our newsletter and we'll give you 2 more free articles & keep updated",
+        target_adblock: false,
+        auto_trigger: true,
+        target_all: false,
+        tags: null,
+        social_registration: false,
+        newsletter_enabled: true,
+        newsletter_extra_visits: 2,
+        interval_in_days: 30,
+        countries: [],
+        platforms: []
+      }
+    },
+    plan: {
+      id: 22033,
+      product_id: 834,
+      amount: 1000,
+      currency: "usd",
+      countries: null,
+      entitlements: ["test_entitlement"],
+      interval: "month",
+      interval_count: 1,
+      allow_send_invoice: false,
+      auto_renew: true,
+      metadata: {
+        pelcro_product_id: "834",
+        pelcro_plan_id: "22033",
+        vimeo_product_id: "52894"
+      },
+      nickname: "Monthly Membership",
+      trial_period_days: 14,
+      description:
+        "Introductory offer! Enjoy one month of unlimited access.",
+      gift_description: null,
+      apple_product_id: null,
+      image: null,
+      amount_formatted: "$10.00",
+      isCheked: true
+    }
   };
 
   loadPaymentSDKs = () => {

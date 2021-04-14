@@ -39,6 +39,7 @@ import {
 } from "../../services/Subscription/Subscription.service";
 import {
   getCanonicalLocaleFormat,
+  getEcommerceOrderTotal,
   getUserLatestAddress
 } from "../../utils/utils";
 
@@ -121,7 +122,37 @@ const PaymentMethodContainerWithoutStripe = ({
       });
     }
     dispatch({ type: INIT_CONTAINER });
+
+    window.addEventListener(
+      "message",
+      function (ev) {
+        if (ev.data.message === "3DS-authentication-complete") {
+          const cardAuthContainer = document.querySelector(
+            ".card-authentication-container"
+          );
+          cardAuthContainer.innerHTML = "";
+          const modalElement = document.querySelector(
+            ".pelcro-title-wrapper"
+          );
+          modalElement.style.opacity = "1";
+          retrieveSource(ev.data.sourceId, ev.data.clientSecret);
+        }
+      },
+      false
+    );
   }, []);
+
+  const retrieveSource = async (sourceId, clientSecret) => {
+    const { source } = await stripe.retrieveSource({
+      id: sourceId,
+      client_secret: clientSecret
+    });
+
+    console.log(`The card is ${source?.status}`);
+    console.log(`Handling payment ${type}`);
+
+    handlePayment(source);
+  };
 
   const initPaymentRequest = (state, dispatch) => {
     try {
@@ -237,13 +268,13 @@ const PaymentMethodContainerWithoutStripe = ({
     debounce(onApplyCouponCode, 1000)
   ).current;
 
-  const subscribe = (token, state, dispatch) => {
+  const subscribe = (stripeSource, state, dispatch) => {
     const { couponCode } = state;
 
     if (!subscriptionIdToRenew) {
       window.Pelcro.subscription.create(
         {
-          stripe_token: token.id,
+          stripe_token: stripeSource.id,
           auth_token: window.Pelcro.user.read().auth_token,
           plan_id: plan.id,
           quantity: plan.quantity,
@@ -278,7 +309,7 @@ const PaymentMethodContainerWithoutStripe = ({
       if (isRenewingGift) {
         window.Pelcro.subscription.renewGift(
           {
-            stripe_token: token.id,
+            stripe_token: stripeSource.id,
             auth_token: window.Pelcro.user.read().auth_token,
             plan_id: plan.id,
             quantity: plan.quantity,
@@ -309,7 +340,7 @@ const PaymentMethodContainerWithoutStripe = ({
       } else {
         window.Pelcro.subscription.renew(
           {
-            stripe_token: token.id,
+            stripe_token: stripeSource.id,
             auth_token: window.Pelcro.user.read().auth_token,
             plan_id: plan.id,
             coupon_code: couponCode,
@@ -459,36 +490,93 @@ const PaymentMethodContainerWithoutStripe = ({
 
   const submitPayment = (state, dispatch) => {
     dispatch({ type: LOADING, payload: true });
-    return stripe.createToken().then(({ token, error }) => {
-      if (error) {
-        if (
-          error.type === "validation_error" &&
-          // Subscription creation & renewal
-          type === "createPayment"
-        ) {
-          const { updatedPrice } = state;
-          // When price is 0, we allow submitting without card info
-          if (updatedPrice === 0) {
-            return subscribe({}, state, dispatch);
-          }
+
+    stripe
+      .createSource({ type: "card" })
+      .then(({ source, error }) => {
+        if (error) {
+          return handlePaymentError(error);
         }
-        onFailure(error);
-        dispatch({
-          type: SHOW_ALERT,
-          payload: { type: "error", content: error?.message }
-        });
-        dispatch({ type: DISABLE_SUBMIT, payload: false });
-        dispatch({ type: LOADING, payload: false });
-      } else if (token && type === "createPayment") {
-        dispatch({ type: DISABLE_SUBMIT, payload: true });
-        subscribe(token, state, dispatch);
-      } else if (token && type === "orderCreate") {
-        dispatch({ type: DISABLE_SUBMIT, payload: true });
-        purchase(token, state, dispatch);
-      } else if (token) {
-        updatePaymentSource(token, state, dispatch);
+
+        if (source.card.three_d_secure === "required") {
+          return stripe
+            .createSource({
+              type: "three_d_secure",
+              amount:
+                state?.updatedPrice ||
+                plan?.amount ||
+                getEcommerceOrderTotal(order?.items) ||
+                0,
+              currency:
+                plan?.currency ||
+                window.Pelcro.site.read().default_currency,
+              three_d_secure: {
+                card: source?.id
+              },
+              redirect: {
+                return_url:
+                  "https://cocky-williams-cf94f0.netlify.app/"
+              }
+            })
+            .then(({ source, error }) => {
+              if (error) {
+                return handlePaymentError(error);
+              }
+
+              const cardAuthContainer = document.querySelector(
+                ".card-authentication-container"
+              );
+
+              const modalElement = document.querySelector(
+                ".pelcro-title-wrapper"
+              );
+              modalElement.style.opacity = 0;
+
+              const iframe = document.createElement("iframe");
+              iframe.src = source.redirect.url;
+              iframe.style =
+                "position: absolute; width: 100%; height: 100%; left: 0; top: 40px; bottom: 0; z-index: 10;";
+
+              cardAuthContainer.appendChild(iframe);
+            });
+        }
+
+        return handlePayment(source);
+      });
+  };
+
+  const handlePayment = (stripeSource) => {
+    if (stripeSource && type === "createPayment") {
+      dispatch({ type: DISABLE_SUBMIT, payload: true });
+      subscribe(stripeSource, state, dispatch);
+    } else if (stripeSource && type === "orderCreate") {
+      dispatch({ type: DISABLE_SUBMIT, payload: true });
+      purchase(stripeSource, state, dispatch);
+    } else if (stripeSource) {
+      updatePaymentSource(stripeSource, state, dispatch);
+    }
+  };
+
+  const handlePaymentError = (error) => {
+    if (
+      error.type === "validation_error" &&
+      // Subscription creation & renewal
+      type === "createPayment"
+    ) {
+      const { updatedPrice } = state;
+      // When price is 0, we allow submitting without card info
+      if (updatedPrice === 0) {
+        return subscribe({}, state, dispatch);
       }
+    }
+
+    onFailure(error);
+    dispatch({
+      type: SHOW_ALERT,
+      payload: { type: "error", content: error?.message }
     });
+    dispatch({ type: DISABLE_SUBMIT, payload: false });
+    dispatch({ type: LOADING, payload: false });
   };
 
   const [state, dispatch] = useReducerWithSideEffects(

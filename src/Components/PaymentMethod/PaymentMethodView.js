@@ -75,6 +75,7 @@ export function PaymentMethodView({
           onFailure={onFailure}
           order={order}
         >
+          <div className="card-authentication-container"></div>
           <AlertWithContext className="plc-mb-2" />
           {/* Payment form */}
           <div>

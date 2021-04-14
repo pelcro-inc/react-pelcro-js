@@ -89,3 +89,18 @@ export const getFormattedPriceByLocal = (
 
   return formatter.format(amount / 100);
 };
+
+export const getEcommerceOrderTotal = (order) => {
+  const allSkus = window.Pelcro.ecommerce.products
+    .read()
+    .flatMap((prod) => prod.skus.map((sku) => sku))
+    .reduce((obj, item) => ({ ...obj, [item.id]: { ...item } }), {});
+
+  const totalAmount = order.reduce((total, orderItem) => {
+    const product = allSkus[orderItem.sku_id];
+
+    return total + product.price * orderItem.quantity;
+  }, 0);
+
+  return totalAmount;
+};
