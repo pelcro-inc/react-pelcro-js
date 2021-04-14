@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Unreleased]
 
+### Fixed
+
+- Displaying close button after paywall limit for password reset modal.
+
+## [Released]
+
 ### Added
 
 - Add profile section to user dashboard.
@@ -15,8 +21,6 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 - Place coupon related errors under the coupon field.
 - Apply coupon button appearence & Added gap between field and button.
 - Replace Pelcro's authorship logo with SVG version.
-
-## [Released]
 
 <!-- Links -->
 
