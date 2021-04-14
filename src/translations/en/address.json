@@ -1,5 +1,7 @@
 {
   "title": "Please enter your address",
+  "selectAddressTitle": "Please select an address",
+  "selectAddressSubtitle": "Select one of your saved addresses, or add a new one",
   "labels": {
     "address": "Address",
     "code": "Postal Code/Zip",
@@ -11,7 +13,9 @@
     "required": "required"
   },
   "buttons": {
-    "submit": "submit"
+    "submit": "submit",
+    "selectAddress": "select address",
+    "addAddress": "Add new address"
   },
   "messages": {
     "addressUpdated": "The address was successfully updated!",

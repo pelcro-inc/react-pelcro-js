@@ -141,6 +141,12 @@ export { GiftRedeemModal } from "./Components/GiftRedeem/GiftRedeemModal";
 export { GiftRedeemView } from "./Components/GiftRedeem/GiftRedeemView";
 export { GiftRedeemSubmitButton } from "./Components/GiftRedeem/GiftRedeemSubmitButton";
 
+export { AddressSelectContainer } from "./Components/AddressSelect/AddressSelectContainer";
+export { AddressSelectModal } from "./Components/AddressSelect/AddressSelectModal";
+export { AddressSelectSubmit } from "./Components/AddressSelect/AddressSelectSubmit";
+export { AddressSelectList } from "./Components/AddressSelect/AddressSelectList";
+export { AddressSelectView } from "./Components/AddressSelect/AddressSelectView";
+
 export { DashboardWithTrans as Dashboard } from "./Components/dashboard/Dashboard";
 export { DashboardOpenButton } from "./Components/dashboard/DashboardOpenButton";
 
