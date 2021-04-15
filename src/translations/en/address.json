@@ -13,8 +13,8 @@
     "required": "required"
   },
   "buttons": {
-    "submit": "submit",
-    "selectAddress": "select address",
+    "submit": "Submit",
+    "selectAddress": "Select address",
     "addAddress": "Add new address"
   },
   "messages": {
