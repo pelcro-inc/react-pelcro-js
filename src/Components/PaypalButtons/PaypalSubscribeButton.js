@@ -24,19 +24,16 @@ export const PaypalSubscribeButton = (props) => {
 
     // initialize paypal client, then render paypal button.
     const initializePaypal = async () => {
-      const paypalCheckoutInstance = new PaypalClient(
-        {
-          buttonElementID:
-            props.buttonElementID ?? "pelcro-paypal-button",
-          style: props.buttonStyle,
-          enableShippingAddress: props.product.address_required,
-          shippingAddressEditable: props.makeAddressEditable,
-          displayName: props.merchantDisplayName,
-          locale: props.locale,
-          billingAgreementDescription: props.billingDescription
-        },
-        selectedAddress
-      );
+      const paypalCheckoutInstance = new PaypalClient({
+        buttonElementID:
+          props.buttonElementID ?? "pelcro-paypal-button",
+        style: props.buttonStyle,
+        enableShippingAddress: props.product.address_required,
+        shippingAddressEditable: props.makeAddressEditable,
+        displayName: props.merchantDisplayName,
+        locale: props.locale,
+        billingAgreementDescription: props.billingDescription
+      });
 
       // Await building paypal instance
       await paypalCheckoutInstance.build();
@@ -44,6 +41,7 @@ export const PaypalSubscribeButton = (props) => {
       paypalCheckoutInstance.createPayment({
         product: props.plan,
         amount: updatedPrice,
+        address: selectedAddress,
         onButtonClick: () => {
           dispatch({ type: DISABLE_SUBMIT, payload: true });
         },

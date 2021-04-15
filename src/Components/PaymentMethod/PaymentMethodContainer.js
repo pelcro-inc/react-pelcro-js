@@ -346,10 +346,7 @@ const PaymentMethodContainerWithoutStripe = ({
    * @return {void}
    */
   const handlePaypalSubscription = (state, paypalNonce) => {
-    const subscription = new Subscription(
-      new PaypalGateWay(),
-      selectedAddressId
-    );
+    const subscription = new Subscription(new PaypalGateWay());
     const { couponCode } = state;
 
     /**
@@ -365,7 +362,8 @@ const PaymentMethodContainerWithoutStripe = ({
           plan,
           couponCode,
           product,
-          giftRecipient
+          giftRecipient,
+          addressId: selectedAddressId
         },
 
         (err, res) => {

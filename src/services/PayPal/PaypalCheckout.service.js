@@ -21,9 +21,8 @@ export class PaypalClient {
   /**
    * Paypal client constructor
    * @param {paypalConstructorOptions} paypalClientConfig
-   * @param {object} address
    */
-  constructor(paypalClientConfig, address) {
+  constructor(paypalClientConfig) {
     this.client = null;
     this.paypalButton = null;
     this.product = null;
@@ -31,7 +30,6 @@ export class PaypalClient {
     this.config = paypalClientConfig;
     this.braintreeToken = window.Pelcro.site.read().braintree_tokenization;
     this.isPaypalEnabled = PaypalClient.isPaypalEnabled();
-    this.address = address;
   }
 
   /**
@@ -69,6 +67,7 @@ export class PaypalClient {
    * @typedef {Object} paymentCreationOptions
    * @property {object} product e-commerce product / plan to checkout
    * @property {number} amount optional amount (has higher precidence over "amount" in product object)
+   * @property {object} address selected user address
    * @property {() => void} onButtonClick paypal button click callback
    * @property {(data: object) => void} onPaymentApprove payment approved callback
    * @property {(data: object) => void} onPaymentCancel payment cancelled callback
@@ -120,7 +119,8 @@ export class PaypalClient {
       // button style
       style: this.config.style ?? defaultButtonStyle,
       // create payment handler
-      createBillingAgreement: this.#createPayment,
+      createBillingAgreement: () =>
+        this.#createPayment(options.address),
       // paypal button click callback
       onClick: () => {
         options?.onButtonClick?.();
@@ -166,8 +166,10 @@ export class PaypalClient {
    * Payment creation handler, invoked on paypal button click
    * @return {void}
    */
-  #createPayment = () => {
-    return this.client.createPayment(this.#computePaymentOptions());
+  #createPayment = (address) => {
+    return this.client.createPayment(
+      this.#computePaymentOptions(address)
+    );
   };
 
   /**
@@ -210,7 +212,7 @@ export class PaypalClient {
    * Computes and returns payment options for paypalClient.createPayment()
    * @return {object} payment options
    */
-  #computePaymentOptions = () => {
+  #computePaymentOptions = (address) => {
     const billingWording = this.#getFormattedAmount();
 
     return {
@@ -224,15 +226,14 @@ export class PaypalClient {
 
       shippingAddressOverride: this.config.enableShippingAddress
         ? {
-            recipientName:
-              this.address.first_name + this.address.last_name,
-            line1: this.address.line1,
-            line2: this.address.line2,
-            city: this.address.city,
-            countryCode: this.address.country,
-            postalCode: this.address.postal_code,
-            state: this.address.state,
-            phone: this.address.phone
+            recipientName: address.first_name + address.last_name,
+            line1: address.line1,
+            line2: address.line2,
+            city: address.city,
+            countryCode: address.country,
+            postalCode: address.postal_code,
+            state: address.state,
+            phone: address.phone
           }
         : undefined,
 

@@ -20,15 +20,13 @@ export class Subscription {
    * Subscription service  constructor
    * @param {(StripeGateway|PaypalGateWay)} paymentGateway
    */
-  constructor(paymentGateway, addressId) {
+  constructor(paymentGateway) {
     if (this.#isPaymentGatewayInvalid(paymentGateway)) {
       this.paymentGateway = null;
       console.error("Incompatible subscription gateway");
     } else {
       this.paymentGateway = paymentGateway;
     }
-
-    this.addressId = addressId;
   }
 
   /**
@@ -41,6 +39,7 @@ export class Subscription {
    * @property {object} [giftRecipient]
    * @property {number} [subscriptionIdToRenew]
    * @property {number} [quantity]
+   * @property {string} addressId
    */
 
   /**
@@ -151,7 +150,8 @@ export class StripeGateway {
       plan,
       couponCode,
       product,
-      quantity = 1
+      quantity = 1,
+      addressId
     } = options;
 
     window.Pelcro.subscription.create(
@@ -162,7 +162,7 @@ export class StripeGateway {
         auth_token: window.Pelcro.user.read().auth_token,
         plan_id: plan.id,
         coupon_code: couponCode,
-        address_id: product.address_required ? this.addressId : null
+        address_id: product.address_required ? addressId : null
       },
       (err, res) => {
         callback(err, res);
@@ -183,7 +183,8 @@ export class StripeGateway {
       couponCode,
       product,
       giftRecipient,
-      quantity = 1
+      quantity = 1,
+      addressId
     } = options;
 
     window.Pelcro.subscription.create(
@@ -197,7 +198,7 @@ export class StripeGateway {
         gift_recipient_email: giftRecipient.email,
         gift_recipient_first_name: giftRecipient?.firstName,
         gift_recipient_last_name: giftRecipient?.lastName,
-        address_id: product.address_required ? this.addressId : null
+        address_id: product.address_required ? addressId : null
       },
       (err, res) => {
         callback(err, res);
@@ -217,7 +218,8 @@ export class StripeGateway {
       token,
       plan,
       couponCode,
-      product
+      product,
+      addressId
     } = options;
 
     window.Pelcro.subscription.renew(
@@ -227,7 +229,7 @@ export class StripeGateway {
         plan_id: plan.id,
         coupon_code: couponCode,
         subscription_id: subscriptionIdToRenew,
-        address_id: product.address_required ? this.addressId : null
+        address_id: product.address_required ? addressId : null
       },
       (err, res) => {
         callback(err, res);
@@ -247,7 +249,8 @@ export class StripeGateway {
       token,
       product,
       plan,
-      couponCode
+      couponCode,
+      addressId
     } = options;
 
     window.Pelcro.subscription.renewGift(
@@ -257,7 +260,7 @@ export class StripeGateway {
         plan_id: plan.id,
         coupon_code: couponCode,
         subscription_id: subscriptionIdToRenew,
-        address_id: product.address_required ? this.addressId : null
+        address_id: product.address_required ? addressId : null
       },
       (err, res) => {
         callback(err, res);
@@ -306,7 +309,8 @@ export class PaypalGateWay {
       plan,
       couponCode,
       product,
-      quantity = 1
+      quantity = 1,
+      addressId
     } = options;
 
     window.Pelcro.subscription.create(
@@ -317,7 +321,7 @@ export class PaypalGateWay {
         auth_token: window.Pelcro.user.read().auth_token,
         plan_id: plan.id,
         coupon_code: couponCode,
-        address_id: product.address_required ? this.addressId : null
+        address_id: product.address_required ? addressId : null
       },
       (err, res) => {
         callback(err, res);
@@ -338,7 +342,8 @@ export class PaypalGateWay {
       couponCode,
       product,
       giftRecipient,
-      quantity = 1
+      quantity = 1,
+      addressId
     } = options;
 
     window.Pelcro.subscription.create(
@@ -352,7 +357,7 @@ export class PaypalGateWay {
         gift_recipient_email: giftRecipient.email,
         gift_recipient_first_name: giftRecipient?.firstName,
         gift_recipient_last_name: giftRecipient?.lastName,
-        address_id: product.address_required ? this.addressId : null
+        address_id: product.address_required ? addressId : null
       },
       (err, res) => {
         callback(err, res);
