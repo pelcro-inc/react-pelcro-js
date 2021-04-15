@@ -222,6 +222,14 @@ class App extends Component {
     this.enableScroll();
   };
 
+  displayAddressView = () => {
+    if (userHasAddress()) {
+      this.setView("address-select");
+    } else {
+      this.setView("address");
+    }
+  };
+
   displayLoginView = () => {
     // if user is already authenticated the Login view will not be displayed
     if (window.Pelcro.user.isAuthenticated())
@@ -436,11 +444,7 @@ class App extends Component {
         if (!requiresAddress) {
           this.setView("payment");
         } else {
-          if (userHasAddress()) {
-            this.setView("address-select");
-          } else {
-            this.setView("address");
-          }
+          this.displayAddressView();
         }
       }
     );
@@ -463,10 +467,7 @@ class App extends Component {
 
     // If this is a redeem gift
     if (giftCode) {
-      if (userHasAddress()) {
-        return this.setView("address-select");
-      }
-      return this.setView("address");
+      return this.displayAddressView();
     }
 
     // Check if the subscription is meant as a gift (if so, gather recipients info)
@@ -475,19 +476,12 @@ class App extends Component {
     }
 
     if (order) {
-      if (userHasAddress()) {
-        return this.setView("address-select");
-      }
-      return this.setView("address");
+      return this.displayAddressView();
     }
 
     if (product) {
       if (product.address_required) {
-        if (userHasAddress()) {
-          this.setView("address-select");
-        } else {
-          this.setView("address");
-        }
+        return this.displayAddressView();
       } else {
         return this.setView("payment");
       }
@@ -640,11 +634,7 @@ class App extends Component {
                 });
 
                 if (this.state.product.address_required) {
-                  if (userHasAddress()) {
-                    this.setView("address-select");
-                  } else {
-                    this.setView("address");
-                  }
+                  this.displayAddressView();
                 } else {
                   this.setView("payment");
                 }
@@ -666,11 +656,7 @@ class App extends Component {
                 this.setGiftCode(giftCode);
 
                 if (window.Pelcro.user.isAuthenticated()) {
-                  if (userHasAddress()) {
-                    this.setView("address-select");
-                  } else {
-                    this.setView("address");
-                  }
+                  this.displayAddressView();
                 } else {
                   this.setView("register");
                 }
@@ -851,12 +837,7 @@ class App extends Component {
                 if (!window.Pelcro.user.isAuthenticated()) {
                   return this.setView("register");
                 }
-
-                if (userHasAddress()) {
-                  this.setView("address-select");
-                } else {
-                  this.setView("address");
-                }
+                this.displayAddressView();
               }}
             />
           )}
