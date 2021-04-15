@@ -48,7 +48,8 @@ class App extends Component {
     products: [],
     isRenewingGift: false,
     isGift: false,
-    giftCode: ""
+    giftCode: "",
+    selectedAddressId: null
   };
 
   loadPaymentSDKs = () => {
@@ -681,12 +682,14 @@ class App extends Component {
               giftCode={this.state.giftCode}
               onClose={this.resetView}
               setView={this.setView}
-              onSuccess={() => {
+              onSuccess={(selectedAddressId) => {
                 if (this.state.product) {
+                  this.setState({ selectedAddressId });
                   return this.setView("payment");
                 }
 
                 if (this.state.order) {
+                  this.setState({ selectedAddressId });
                   return this.setView("orderCreate");
                 }
 
@@ -701,6 +704,7 @@ class App extends Component {
                 giftRecipient={this.state.giftRecipient}
                 plan={this.state.plan}
                 product={this.state.product}
+                selectedAddressId={this.state.selectedAddressId}
                 onClose={this.resetView}
                 onDisplay={() => {
                   ReactGA.event({
@@ -721,6 +725,7 @@ class App extends Component {
                 isRenewingGift={this.state.isRenewingGift}
                 plan={this.state.plan}
                 product={this.state.product}
+                selectedAddressId={this.state.selectedAddressId}
                 onClose={this.resetView}
                 onDisplay={() => {
                   ReactGA.event({
@@ -759,12 +764,14 @@ class App extends Component {
             <AddressCreateModal
               giftCode={this.state.giftCode}
               onClose={this.resetView}
-              onSuccess={() => {
+              onSuccess={(newAddressId) => {
                 if (this.state.product) {
+                  this.setState({ selectedAddressId: newAddressId });
                   return this.setView("payment");
                 }
 
                 if (this.state.order) {
+                  this.setState({ selectedAddressId: newAddressId });
                   return this.setView("orderCreate");
                 }
 
@@ -857,6 +864,7 @@ class App extends Component {
           {this.state.view === "orderCreate" && (
             <OrderCreateModal
               order={this.state.order}
+              selectedAddressId={this.state.selectedAddressId}
               setView={this.setView}
               onClose={this.resetView}
               onDisplay={() => {
