@@ -8,6 +8,7 @@ export const SubscriptionRenewView = ({
   giftRecipient,
   subscriptionIdToRenew,
   isRenewingGift,
+  selectedAddressId,
   onFailure,
   onSuccess,
   onDisplay,
@@ -68,6 +69,7 @@ export const SubscriptionRenewView = ({
         onSuccess={onSuccess}
         onDisplay={onDisplay}
         onGiftRenewalSuccess={onGiftRenewalSuccess}
+        selectedAddressId={selectedAddressId}
       />
     </div>
   );

@@ -7,6 +7,7 @@ import {
   LOADING
 } from "../../utils/action-types";
 import { PaypalClient } from "../../services/PayPal/PaypalCheckout.service";
+import { getAddressById } from "../../utils/utils";
 
 /**
  * PaypalSubscribeButton component
@@ -19,19 +20,23 @@ export const PaypalSubscribeButton = (props) => {
   useEffect(() => {
     // sometimes, price is updated. eg. Coupon codes.
     const updatedPrice = state.updatedPrice ?? props.plan.amount;
+    const selectedAddress = getAddressById(props.selectedAddressId);
 
     // initialize paypal client, then render paypal button.
     const initializePaypal = async () => {
-      const paypalCheckoutInstance = new PaypalClient({
-        buttonElementID:
-          props.buttonElementID ?? "pelcro-paypal-button",
-        style: props.buttonStyle,
-        enableShippingAddress: props.product.address_required,
-        shippingAddressEditable: props.makeAddressEditable,
-        displayName: props.merchantDisplayName,
-        locale: props.locale,
-        billingAgreementDescription: props.billingDescription
-      });
+      const paypalCheckoutInstance = new PaypalClient(
+        {
+          buttonElementID:
+            props.buttonElementID ?? "pelcro-paypal-button",
+          style: props.buttonStyle,
+          enableShippingAddress: props.product.address_required,
+          shippingAddressEditable: props.makeAddressEditable,
+          displayName: props.merchantDisplayName,
+          locale: props.locale,
+          billingAgreementDescription: props.billingDescription
+        },
+        selectedAddress
+      );
 
       // Await building paypal instance
       await paypalCheckoutInstance.build();
@@ -75,5 +80,6 @@ PaypalSubscribeButton.propTypes = {
   locale: PropTypes.string,
   billingDescription: PropTypes.string,
   buttonElementID: PropTypes.string,
-  buttonStyle: PropTypes.object
+  buttonStyle: PropTypes.object,
+  selectedAddressId: PropTypes.string
 };

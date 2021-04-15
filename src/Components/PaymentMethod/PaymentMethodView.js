@@ -30,6 +30,7 @@ export function PaymentMethodView({
   giftRecipient = null,
   plan,
   product,
+  selectedAddressId,
   onSuccess,
   onGiftRenewalSuccess,
   onFailure,
@@ -68,6 +69,7 @@ export function PaymentMethodView({
           giftRecipient={giftRecipient}
           plan={plan}
           product={product}
+          selectedAddressId={selectedAddressId}
           couponCode={couponCode}
           onDisplay={onDisplay}
           onSuccess={onSuccess}
@@ -112,6 +114,7 @@ export function PaymentMethodView({
                   <PaypalSubscribeButton
                     product={product}
                     plan={plan}
+                    selectedAddressId={selectedAddressId}
                   />
                 </>
               )}
