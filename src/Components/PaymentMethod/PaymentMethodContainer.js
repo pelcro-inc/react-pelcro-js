@@ -125,49 +125,7 @@ const PaymentMethodContainerWithoutStripe = ({
       });
     }
     dispatch({ type: INIT_CONTAINER });
-
-    window.addEventListener(
-      "message",
-      function (event) {
-        const { data } = event;
-        if (data.message === "3DS-authentication-complete") {
-          toggleAuthenticationPendingView();
-          retrieveSource(data.sourceId, data.clientSecret);
-        }
-      },
-      false
-    );
   }, []);
-
-  const toggleAuthenticationPendingView = () => {
-    const cardAuthContainer = document.querySelector(
-      ".card-authentication-container"
-    );
-
-    cardAuthContainer.classList.toggle("plc-hidden");
-    cardAuthContainer.classList.toggle("plc-flex");
-  };
-
-  const retrieveSource = async (sourceId, clientSecret) => {
-    try {
-      const { source } = await stripe.retrieveSource({
-        id: sourceId,
-        client_secret: clientSecret
-      });
-
-      if (source.status === "failed") {
-        return handlePaymentError({
-          message: t("messages.cardAuthFailed")
-        });
-      }
-
-      if (source.status === "chargeable") {
-        handlePayment(source);
-      }
-    } catch (error) {
-      handlePaymentError(error);
-    }
-  };
 
   const initPaymentRequest = (state, dispatch) => {
     try {
@@ -201,36 +159,6 @@ const PaymentMethodContainerWithoutStripe = ({
         "Google Pay/Apple pay isn't available in this country"
       );
     }
-  };
-
-  const updatePaymentSource = (token, state, dispatch) => {
-    dispatch({ type: DISABLE_SUBMIT, payload: true });
-    window.Pelcro.source.create(
-      {
-        auth_token: window.Pelcro.user.read().auth_token,
-        token: token.id
-      },
-      (err, res) => {
-        dispatch({ type: DISABLE_SUBMIT, payload: false });
-        dispatch({ type: LOADING, payload: false });
-        if (err) {
-          onFailure(err);
-          return dispatch({
-            type: SHOW_ALERT,
-            payload: { type: "error", content: getErrorMessages(err) }
-          });
-        }
-
-        dispatch({
-          type: SHOW_ALERT,
-          payload: {
-            type: "success",
-            content: successMessage
-          }
-        });
-        onSuccess(res);
-      }
-    );
   };
 
   const onApplyCouponCode = (state, dispatch) => {
@@ -494,6 +422,44 @@ const PaymentMethodContainerWithoutStripe = ({
     );
   };
 
+  const updatePaymentSource = (state, dispatch) => {
+    return stripe.createToken().then(({ token, error }) => {
+      if (error) {
+        return handlePaymentError(error);
+      }
+
+      window.Pelcro.source.create(
+        {
+          auth_token: window.Pelcro.user.read().auth_token,
+          token: token.id
+        },
+        (err, res) => {
+          dispatch({ type: DISABLE_SUBMIT, payload: false });
+          dispatch({ type: LOADING, payload: false });
+          if (err) {
+            onFailure(err);
+            return dispatch({
+              type: SHOW_ALERT,
+              payload: {
+                type: "error",
+                content: getErrorMessages(err)
+              }
+            });
+          }
+
+          dispatch({
+            type: SHOW_ALERT,
+            payload: {
+              type: "success",
+              content: successMessage
+            }
+          });
+          onSuccess(res);
+        }
+      );
+    });
+  };
+
   const updatePaymentRequest = (state) => {
     state?.paymentRequest?.update({
       total: {
@@ -504,8 +470,6 @@ const PaymentMethodContainerWithoutStripe = ({
   };
 
   const submitPayment = (state, dispatch) => {
-    dispatch({ type: LOADING, payload: true });
-
     stripe
       .createSource({ type: "card" })
       .then(({ source, error }) => {
@@ -514,6 +478,15 @@ const PaymentMethodContainerWithoutStripe = ({
         }
 
         if (source.card.three_d_secure === "required") {
+          // listen to injected iframe for authentication complete message
+          window.addEventListener("message", (event) => {
+            const { data } = event;
+            if (data.message === "3DS-authentication-complete") {
+              toggleAuthenticationPendingView(false);
+              retrieveSource(data.sourceId, data.clientSecret);
+            }
+          });
+
           return stripe
             .createSource({
               type: "three_d_secure",
@@ -538,7 +511,7 @@ const PaymentMethodContainerWithoutStripe = ({
                 return handlePaymentError(error);
               }
 
-              toggleAuthenticationPendingView();
+              toggleAuthenticationPendingView(true);
               injectCardAuthenticationIframe(source);
             });
         }
@@ -549,13 +522,9 @@ const PaymentMethodContainerWithoutStripe = ({
 
   const handlePayment = (stripeSource) => {
     if (stripeSource && type === "createPayment") {
-      dispatch({ type: DISABLE_SUBMIT, payload: true });
       subscribe(stripeSource, state, dispatch);
     } else if (stripeSource && type === "orderCreate") {
-      dispatch({ type: DISABLE_SUBMIT, payload: true });
       purchase(stripeSource, state, dispatch);
-    } else if (stripeSource) {
-      updatePaymentSource(stripeSource, state, dispatch);
     }
   };
 
@@ -579,6 +548,41 @@ const PaymentMethodContainerWithoutStripe = ({
     });
     dispatch({ type: DISABLE_SUBMIT, payload: false });
     dispatch({ type: LOADING, payload: false });
+  };
+
+  const retrieveSource = async (sourceId, clientSecret) => {
+    try {
+      const { source } = await stripe.retrieveSource({
+        id: sourceId,
+        client_secret: clientSecret
+      });
+
+      if (source.status === "failed") {
+        return handlePaymentError({
+          message: t("messages.cardAuthFailed")
+        });
+      }
+
+      if (source.status === "chargeable") {
+        handlePayment(source);
+      }
+    } catch (error) {
+      handlePaymentError(error);
+    }
+  };
+
+  const toggleAuthenticationPendingView = (show) => {
+    const cardAuthContainer = document.querySelector(
+      ".card-authentication-container"
+    );
+
+    if (show) {
+      cardAuthContainer.classList.remove("plc-hidden");
+      cardAuthContainer.classList.add("plc-flex");
+    } else {
+      cardAuthContainer.classList.add("plc-hidden");
+      cardAuthContainer.classList.remove("plc-flex");
+    }
   };
 
   const injectCardAuthenticationIframe = (source) => {
@@ -633,8 +637,14 @@ const PaymentMethodContainerWithoutStripe = ({
 
         case SUBMIT_PAYMENT:
           return UpdateWithSideEffect(
-            { ...state, disableSubmit: true },
-            (state, dispatch) => submitPayment(state, dispatch)
+            { ...state, disableSubmit: true, isLoading: true },
+            (state, dispatch) => {
+              if (type === "updatePaymentSource") {
+                updatePaymentSource(state, dispatch);
+              } else {
+                submitPayment(state, dispatch);
+              }
+            }
           );
 
         case HANDLE_PAYPAL_SUBSCRIPTION:
