@@ -19,8 +19,6 @@ const getDefaultAddress = (addresses) => {
 
 const moveDefaultAddressToStart = (addresses) => {
   const defaultAddress = getDefaultAddress(addresses);
-  if (!defaultAddress) return addresses;
-
   const addressesWithoutDefault = addresses.filter(
     (address) => !address.is_default
   );
@@ -96,7 +94,9 @@ const AddressSelectContainer = ({
           return Update({
             ...state,
             addresses: moveDefaultAddressToStart(action.payload),
-            selectedAddressId: getDefaultAddress(action.payload)?.id
+            selectedAddressId: String(
+              getDefaultAddress(action.payload).id
+            )
           });
 
         case SHOW_ALERT:
