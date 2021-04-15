@@ -1,4 +1,3 @@
-import { getUserLatestAddress } from "../../utils/utils";
 /**
  * @TODO: All subscription related business logic should end up moving
  * to this service, and out of react components.
@@ -21,13 +20,15 @@ export class Subscription {
    * Subscription service  constructor
    * @param {(StripeGateway|PaypalGateWay)} paymentGateway
    */
-  constructor(paymentGateway) {
+  constructor(paymentGateway, addressId) {
     if (this.#isPaymentGatewayInvalid(paymentGateway)) {
       this.paymentGateway = null;
       console.error("Incompatible subscription gateway");
     } else {
       this.paymentGateway = paymentGateway;
     }
+
+    this.addressId = addressId;
   }
 
   /**
@@ -161,9 +162,7 @@ export class StripeGateway {
         auth_token: window.Pelcro.user.read().auth_token,
         plan_id: plan.id,
         coupon_code: couponCode,
-        address_id: product.address_required
-          ? getUserLatestAddress().id
-          : null
+        address_id: product.address_required ? this.addressId : null
       },
       (err, res) => {
         callback(err, res);
@@ -198,9 +197,7 @@ export class StripeGateway {
         gift_recipient_email: giftRecipient.email,
         gift_recipient_first_name: giftRecipient?.firstName,
         gift_recipient_last_name: giftRecipient?.lastName,
-        address_id: product.address_required
-          ? getUserLatestAddress().id
-          : null
+        address_id: product.address_required ? this.addressId : null
       },
       (err, res) => {
         callback(err, res);
@@ -230,9 +227,7 @@ export class StripeGateway {
         plan_id: plan.id,
         coupon_code: couponCode,
         subscription_id: subscriptionIdToRenew,
-        address_id: product.address_required
-          ? getUserLatestAddress().id
-          : null
+        address_id: product.address_required ? this.addressId : null
       },
       (err, res) => {
         callback(err, res);
@@ -262,9 +257,7 @@ export class StripeGateway {
         plan_id: plan.id,
         coupon_code: couponCode,
         subscription_id: subscriptionIdToRenew,
-        address_id: product.address_required
-          ? getUserLatestAddress().id
-          : null
+        address_id: product.address_required ? this.addressId : null
       },
       (err, res) => {
         callback(err, res);
@@ -324,9 +317,7 @@ export class PaypalGateWay {
         auth_token: window.Pelcro.user.read().auth_token,
         plan_id: plan.id,
         coupon_code: couponCode,
-        address_id: product.address_required
-          ? getUserLatestAddress().id
-          : null
+        address_id: product.address_required ? this.addressId : null
       },
       (err, res) => {
         callback(err, res);
@@ -361,9 +352,7 @@ export class PaypalGateWay {
         gift_recipient_email: giftRecipient.email,
         gift_recipient_first_name: giftRecipient?.firstName,
         gift_recipient_last_name: giftRecipient?.lastName,
-        address_id: product.address_required
-          ? getUserLatestAddress().id
-          : null
+        address_id: product.address_required ? this.addressId : null
       },
       (err, res) => {
         callback(err, res);

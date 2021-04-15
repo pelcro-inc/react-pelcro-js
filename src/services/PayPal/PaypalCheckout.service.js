@@ -1,7 +1,4 @@
-import {
-  getFormattedPriceByLocal,
-  getUserLatestAddress
-} from "../../utils/utils";
+import { getFormattedPriceByLocal } from "../../utils/utils";
 
 /**
  * @typedef {Object} paypalConstructorOptions
@@ -24,8 +21,9 @@ export class PaypalClient {
   /**
    * Paypal client constructor
    * @param {paypalConstructorOptions} paypalClientConfig
+   * @param {object} address
    */
-  constructor(paypalClientConfig) {
+  constructor(paypalClientConfig, address) {
     this.client = null;
     this.paypalButton = null;
     this.product = null;
@@ -33,6 +31,7 @@ export class PaypalClient {
     this.config = paypalClientConfig;
     this.braintreeToken = window.Pelcro.site.read().braintree_tokenization;
     this.isPaypalEnabled = PaypalClient.isPaypalEnabled();
+    this.address = address;
   }
 
   /**
@@ -212,8 +211,6 @@ export class PaypalClient {
    * @return {object} payment options
    */
   #computePaymentOptions = () => {
-    // get user's shipping address
-    const address = getUserLatestAddress();
     const billingWording = this.#getFormattedAmount();
 
     return {
@@ -227,14 +224,15 @@ export class PaypalClient {
 
       shippingAddressOverride: this.config.enableShippingAddress
         ? {
-            recipientName: address.first_name + address.last_name,
-            line1: address.line1,
-            line2: address.line2,
-            city: address.city,
-            countryCode: address.country,
-            postalCode: address.postal_code,
-            state: address.state,
-            phone: address.phone
+            recipientName:
+              this.address.first_name + this.address.last_name,
+            line1: this.address.line1,
+            line2: this.address.line2,
+            city: this.address.city,
+            countryCode: this.address.country,
+            postalCode: this.address.postal_code,
+            state: this.address.state,
+            phone: this.address.phone
           }
         : undefined,
 
