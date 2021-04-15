@@ -47,6 +47,9 @@ const initialState = {
 const store = createContext(initialState);
 const { Provider } = store;
 
+const getNewlyCreatedAddress = (addresses) =>
+  addresses[addresses.length - 1];
+
 const AddressCreateContainer = ({
   style,
   className,
@@ -137,7 +140,9 @@ const AddressCreateContainer = ({
           return dispatch({ type: LOADING, payload: false });
         }
 
-        const newAddressId = String(res.data.id);
+        const newAddressId = String(
+          getNewlyCreatedAddress(res.data.addresses).id
+        );
         if (giftCode) {
           window.Pelcro.subscription.redeemGift(
             {
