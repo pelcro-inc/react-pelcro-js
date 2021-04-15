@@ -8,6 +8,7 @@ import {
 import Authorship from "../common/Authorship";
 import { GiftRedeemView } from "./GiftRedeemView";
 import { Link } from "../../SubComponents/Link";
+import { userHasAddress } from "../../utils/utils";
 
 export const GiftRedeemModal = ({
   onClose,
@@ -30,7 +31,12 @@ export const GiftRedeemModal = ({
           {t("redeem.footer.click")}{" "}
           <Link
             id="pelcro-link-redeem"
-            onClick={() => setView("address")}
+            onClick={() => {
+              if (userHasAddress()) {
+                return setView("address-select");
+              }
+              return setView("address");
+            }}
           >
             {t("redeem.footer.here")}
           </Link>{" "}

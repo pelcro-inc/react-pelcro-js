@@ -30,6 +30,8 @@ import {
   GiftRedeemModal,
   PasswordChangeModal
 } from "./components";
+import { AddressSelectModal } from "./Components/AddressSelect/AddressSelectModal";
+import { userHasAddress } from "./utils/utils";
 
 class App extends Component {
   constructor(props) {
@@ -46,7 +48,8 @@ class App extends Component {
     products: [],
     isRenewingGift: false,
     isGift: false,
-    giftCode: ""
+    giftCode: "",
+    selectedAddressId: null
   };
 
   loadPaymentSDKs = () => {
@@ -217,6 +220,14 @@ class App extends Component {
     if (this.state.giftRecipient)
       this.setState({ giftRecipient: null });
     this.enableScroll();
+  };
+
+  displayAddressView = () => {
+    if (userHasAddress()) {
+      this.setView("address-select");
+    } else {
+      this.setView("address");
+    }
   };
 
   displayLoginView = () => {
@@ -433,7 +444,7 @@ class App extends Component {
         if (!requiresAddress) {
           this.setView("payment");
         } else {
-          this.setView("address");
+          this.displayAddressView();
         }
       }
     );
@@ -456,7 +467,7 @@ class App extends Component {
 
     // If this is a redeem gift
     if (giftCode) {
-      return this.setView("address");
+      return this.displayAddressView();
     }
 
     // Check if the subscription is meant as a gift (if so, gather recipients info)
@@ -465,12 +476,12 @@ class App extends Component {
     }
 
     if (order) {
-      return this.setView("address");
+      return this.displayAddressView();
     }
 
     if (product) {
       if (product.address_required) {
-        return this.setView("address");
+        return this.displayAddressView();
       } else {
         return this.setView("payment");
       }
@@ -623,7 +634,7 @@ class App extends Component {
                 });
 
                 if (this.state.product.address_required) {
-                  this.setView("address");
+                  this.displayAddressView();
                 } else {
                   this.setView("payment");
                 }
@@ -645,11 +656,32 @@ class App extends Component {
                 this.setGiftCode(giftCode);
 
                 if (window.Pelcro.user.isAuthenticated()) {
-                  this.setView("address");
+                  this.displayAddressView();
                 } else {
                   this.setView("register");
                 }
               }}
+            />
+          )}
+          {this.state.view === "address-select" && (
+            <AddressSelectModal
+              giftCode={this.state.giftCode}
+              onClose={this.resetView}
+              setView={this.setView}
+              onSuccess={(selectedAddressId) => {
+                if (this.state.product) {
+                  this.setState({ selectedAddressId });
+                  return this.setView("payment");
+                }
+
+                if (this.state.order) {
+                  this.setState({ selectedAddressId });
+                  return this.setView("orderCreate");
+                }
+
+                this.resetView();
+              }}
+              onGiftRedemptionSuccess={this.resetView}
             />
           )}
           {this.state.view === "payment" &&
@@ -658,6 +690,7 @@ class App extends Component {
                 giftRecipient={this.state.giftRecipient}
                 plan={this.state.plan}
                 product={this.state.product}
+                selectedAddressId={this.state.selectedAddressId}
                 onClose={this.resetView}
                 onDisplay={() => {
                   ReactGA.event({
@@ -678,6 +711,7 @@ class App extends Component {
                 isRenewingGift={this.state.isRenewingGift}
                 plan={this.state.plan}
                 product={this.state.product}
+                selectedAddressId={this.state.selectedAddressId}
                 onClose={this.resetView}
                 onDisplay={() => {
                   ReactGA.event({
@@ -716,12 +750,14 @@ class App extends Component {
             <AddressCreateModal
               giftCode={this.state.giftCode}
               onClose={this.resetView}
-              onSuccess={() => {
+              onSuccess={(newAddressId) => {
                 if (this.state.product) {
+                  this.setState({ selectedAddressId: newAddressId });
                   return this.setView("payment");
                 }
 
                 if (this.state.order) {
+                  this.setState({ selectedAddressId: newAddressId });
                   return this.setView("orderCreate");
                 }
 
@@ -801,8 +837,7 @@ class App extends Component {
                 if (!window.Pelcro.user.isAuthenticated()) {
                   return this.setView("register");
                 }
-
-                return this.setView("address");
+                this.displayAddressView();
               }}
             />
           )}
@@ -810,6 +845,7 @@ class App extends Component {
           {this.state.view === "orderCreate" && (
             <OrderCreateModal
               order={this.state.order}
+              selectedAddressId={this.state.selectedAddressId}
               setView={this.setView}
               onClose={this.resetView}
               onDisplay={() => {
