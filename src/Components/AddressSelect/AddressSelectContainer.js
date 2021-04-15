@@ -53,7 +53,7 @@ const AddressSelectContainer = ({
 
   const submitAddress = ({ selectedAddressId }, dispatch) => {
     if (!giftCode) {
-      return onSuccess();
+      return onSuccess(selectedAddressId);
     }
 
     dispatch({ type: LOADING, payload: true });

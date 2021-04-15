@@ -16,10 +16,7 @@ import {
   GET_COUNTRIES_FETCH,
   GET_STATES_FETCH
 } from "../../utils/action-types";
-import {
-  getUserLatestAddress,
-  sortCountries
-} from "../../utils/utils";
+import { sortCountries } from "../../utils/utils";
 import { getErrorMessages } from "../common/Helpers";
 
 const initialState = {
@@ -140,14 +137,13 @@ const AddressCreateContainer = ({
           return dispatch({ type: LOADING, payload: false });
         }
 
+        const newAddressId = res.data.id;
         if (giftCode) {
-          const address = getUserLatestAddress();
-
           window.Pelcro.subscription.redeemGift(
             {
               auth_token: window.Pelcro.user.read().auth_token,
               gift_code: giftCode,
-              address_id: address?.id
+              address_id: newAddressId
             },
             (err, res) => {
               dispatch({ type: LOADING, payload: false });
@@ -170,7 +166,7 @@ const AddressCreateContainer = ({
         }
 
         dispatch({ type: LOADING, payload: false });
-        return onSuccess();
+        return onSuccess(newAddressId);
       }
     );
   };
