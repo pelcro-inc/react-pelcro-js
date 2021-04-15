@@ -23,7 +23,7 @@ export function Modal({
             {!hideCloseButton && (
               <button
                 type="button"
-                className="plc-absolute plc-w-6 plc-text-gray-500 plc-top-3 plc-right-3 hover:plc-text-black pelcro-modal-close"
+                className="plc-absolute plc-w-6 plc-text-gray-500 plc-z-max plc-top-3 plc-right-3 hover:plc-text-black pelcro-modal-close"
                 aria-label="close modal"
                 onClick={onClose}
               >

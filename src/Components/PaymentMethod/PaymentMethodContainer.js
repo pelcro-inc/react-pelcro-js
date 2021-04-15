@@ -1,4 +1,5 @@
 import React, { createContext, useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import {
   injectStripe,
   Elements,
@@ -102,6 +103,8 @@ const PaymentMethodContainerWithoutStripe = ({
   onLoading = () => {},
   onDisplay = () => {}
 }) => {
+  const { t } = useTranslation("payment");
+
   useEffect(() => {
     onDisplay();
 
@@ -125,33 +128,45 @@ const PaymentMethodContainerWithoutStripe = ({
 
     window.addEventListener(
       "message",
-      function (ev) {
-        if (ev.data.message === "3DS-authentication-complete") {
-          const cardAuthContainer = document.querySelector(
-            ".card-authentication-container"
-          );
-          cardAuthContainer.innerHTML = "";
-          const modalElement = document.querySelector(
-            ".pelcro-title-wrapper"
-          );
-          modalElement.style.opacity = "1";
-          retrieveSource(ev.data.sourceId, ev.data.clientSecret);
+      function (event) {
+        const { data } = event;
+        if (data.message === "3DS-authentication-complete") {
+          toggleAuthenticationPendingView();
+          retrieveSource(data.sourceId, data.clientSecret);
         }
       },
       false
     );
   }, []);
 
+  const toggleAuthenticationPendingView = () => {
+    const cardAuthContainer = document.querySelector(
+      ".card-authentication-container"
+    );
+
+    cardAuthContainer.classList.toggle("plc-hidden");
+    cardAuthContainer.classList.toggle("plc-flex");
+  };
+
   const retrieveSource = async (sourceId, clientSecret) => {
-    const { source } = await stripe.retrieveSource({
-      id: sourceId,
-      client_secret: clientSecret
-    });
+    try {
+      const { source } = await stripe.retrieveSource({
+        id: sourceId,
+        client_secret: clientSecret
+      });
 
-    console.log(`The card is ${source?.status}`);
-    console.log(`Handling payment ${type}`);
+      if (source.status === "failed") {
+        return handlePaymentError({
+          message: t("messages.cardAuthFailed")
+        });
+      }
 
-    handlePayment(source);
+      if (source.status === "chargeable") {
+        handlePayment(source);
+      }
+    } catch (error) {
+      handlePaymentError(error);
+    }
   };
 
   const initPaymentRequest = (state, dispatch) => {
@@ -523,21 +538,8 @@ const PaymentMethodContainerWithoutStripe = ({
                 return handlePaymentError(error);
               }
 
-              const cardAuthContainer = document.querySelector(
-                ".card-authentication-container"
-              );
-
-              const modalElement = document.querySelector(
-                ".pelcro-title-wrapper"
-              );
-              modalElement.style.opacity = 0;
-
-              const iframe = document.createElement("iframe");
-              iframe.src = source.redirect.url;
-              iframe.style =
-                "position: absolute; width: 100%; height: 100%; left: 0; top: 40px; bottom: 0; z-index: 10;";
-
-              cardAuthContainer.appendChild(iframe);
+              toggleAuthenticationPendingView();
+              injectCardAuthenticationIframe(source);
             });
         }
 
@@ -577,6 +579,19 @@ const PaymentMethodContainerWithoutStripe = ({
     });
     dispatch({ type: DISABLE_SUBMIT, payload: false });
     dispatch({ type: LOADING, payload: false });
+  };
+
+  const injectCardAuthenticationIframe = (source) => {
+    const cardAuthContainer = document.querySelector(
+      ".card-authentication-container"
+    );
+
+    const iframe = document.createElement("iframe");
+    iframe.src = source.redirect.url;
+    iframe.style =
+      "position: absolute; width: 100%; height: 100%; left: 0; top: 40px; bottom: 0; z-index: 10;";
+
+    cardAuthContainer.appendChild(iframe);
   };
 
   const [state, dispatch] = useReducerWithSideEffects(
