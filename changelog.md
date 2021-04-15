@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Unreleased]
 
+### Added
+
+- Add address selection modal.
+
 ### Fixed
 
 - Displaying close button after paywall limit for password reset modal.
