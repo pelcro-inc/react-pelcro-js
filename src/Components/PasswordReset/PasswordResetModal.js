@@ -10,7 +10,7 @@ import { PasswordResetView } from "./PasswordResetView";
 export const PasswordResetModal = ({ onClose, ...otherProps }) => {
   return (
     <Modal
-      hideCloseButton={false}
+      hideCloseButton={!window.Pelcro.paywall.displayCloseButton()}
       onClose={onClose}
       id="pelcro-password-reset-modal"
     >

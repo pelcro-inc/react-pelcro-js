@@ -17,7 +17,7 @@ export const PasswordForgotModal = ({
   const { t } = useTranslation("passwordForgot");
   return (
     <Modal
-      hideCloseButton={false}
+      hideCloseButton={!window.Pelcro.paywall.displayCloseButton()}
       onClose={onClose}
       id="pelcro-password-forgot-modal"
     >

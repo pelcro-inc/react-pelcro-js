@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ### Fixed
 
+- Displaying close button after paywall limit for password reset modal.
 - Add email validation to the password forgot view.
 
 ## [Released]
