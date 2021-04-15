@@ -138,12 +138,29 @@ const PaymentMethodContainerWithoutStripe = ({
         }
       });
 
-      paymentRequest.on("token", ({ complete, token, ...data }) => {
+      paymentRequest.on("source", ({ complete, source, ...data }) => {
         dispatch({ type: DISABLE_COUPON_BUTTON, payload: true });
         dispatch({ type: DISABLE_SUBMIT, payload: true });
-        onLoading();
-        dispatch({ type: SUBSCRIBE, payload: token });
+        dispatch({ type: LOADING, payload: true });
         complete("success");
+        onLoading();
+
+        if (source?.card.three_d_secure === "required") {
+          return generate3DSecureSource(source).then(
+            ({ source, error }) => {
+              if (error) {
+                return handlePaymentError(error);
+              }
+
+              toggleAuthenticationPendingView(true, source);
+            }
+          );
+        }
+
+        dispatch({
+          type: SUBSCRIBE,
+          payload: source
+        });
       });
 
       paymentRequest.canMakePayment().then((result) => {
@@ -478,55 +495,64 @@ const PaymentMethodContainerWithoutStripe = ({
         }
 
         if (source.card.three_d_secure === "required") {
-          const retrieveSourceInfoFromIframe = (event) => {
-            const { data } = event;
-            if (data.message === "3DS-authentication-complete") {
-              toggleAuthenticationPendingView(false);
-              retrieveSource(data.sourceId, data.clientSecret);
-              window.removeEventListener(
-                "message",
-                retrieveSourceInfoFromIframe
-              );
-            }
-          };
-
-          // listen to injected iframe for authentication complete message
-          window.addEventListener(
-            "message",
-            retrieveSourceInfoFromIframe
-          );
-
-          return stripe
-            .createSource({
-              type: "three_d_secure",
-              amount:
-                state?.updatedPrice ||
-                plan?.amount ||
-                getEcommerceOrderTotal(order?.items) ||
-                0,
-              currency:
-                plan?.currency ||
-                window.Pelcro.site.read().default_currency,
-              three_d_secure: {
-                card: source?.id
-              },
-              redirect: {
-                return_url:
-                  "https://cocky-williams-cf94f0.netlify.app/"
-              }
-            })
-            .then(({ source, error }) => {
+          return generate3DSecureSource(source).then(
+            ({ source, error }) => {
               if (error) {
                 return handlePaymentError(error);
               }
 
-              toggleAuthenticationPendingView(true);
-              injectCardAuthenticationIframe(source);
-            });
+              toggleAuthenticationPendingView(true, source);
+            }
+          );
         }
 
         return handlePayment(source);
       });
+  };
+
+  const generate3DSecureSource = (source) => {
+    const listenFor3DSecureCompletionMessage = () => {
+      const retrieveSourceInfoFromIframe = (event) => {
+        const { data } = event;
+        if (data.message === "3DS-authentication-complete") {
+          toggleAuthenticationPendingView(false);
+          retrieveSource(
+            data.sourceId,
+            data.clientSecret,
+            handlePayment
+          );
+          window.removeEventListener(
+            "message",
+            retrieveSourceInfoFromIframe
+          );
+        }
+      };
+
+      // listen to injected iframe for authentication complete message
+      window.addEventListener(
+        "message",
+        retrieveSourceInfoFromIframe
+      );
+    };
+
+    listenFor3DSecureCompletionMessage();
+
+    return stripe.createSource({
+      type: "three_d_secure",
+      amount:
+        state?.updatedPrice ||
+        plan?.amount ||
+        getEcommerceOrderTotal(order?.items) ||
+        0,
+      currency:
+        plan?.currency || window.Pelcro.site.read().default_currency,
+      three_d_secure: {
+        card: source?.id
+      },
+      redirect: {
+        return_url: "https://cocky-williams-cf94f0.netlify.app/"
+      }
+    });
   };
 
   const handlePayment = (stripeSource) => {
@@ -559,7 +585,11 @@ const PaymentMethodContainerWithoutStripe = ({
     dispatch({ type: LOADING, payload: false });
   };
 
-  const retrieveSource = async (sourceId, clientSecret) => {
+  const retrieveSource = async (
+    sourceId,
+    clientSecret,
+    paymentHandler
+  ) => {
     try {
       const { source } = await stripe.retrieveSource({
         id: sourceId,
@@ -573,19 +603,20 @@ const PaymentMethodContainerWithoutStripe = ({
       }
 
       if (source.status === "chargeable") {
-        handlePayment(source);
+        paymentHandler(source);
       }
     } catch (error) {
       handlePaymentError(error);
     }
   };
 
-  const toggleAuthenticationPendingView = (show) => {
+  const toggleAuthenticationPendingView = (show, source) => {
     const cardAuthContainer = document.querySelector(
       ".card-authentication-container"
     );
 
     if (show) {
+      injectCardAuthenticationIframe(source);
       cardAuthContainer.classList.remove("plc-hidden");
       cardAuthContainer.classList.add("plc-flex");
     } else {
