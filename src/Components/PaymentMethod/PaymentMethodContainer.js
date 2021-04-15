@@ -478,14 +478,23 @@ const PaymentMethodContainerWithoutStripe = ({
         }
 
         if (source.card.three_d_secure === "required") {
-          // listen to injected iframe for authentication complete message
-          window.addEventListener("message", (event) => {
+          const retrieveSourceInfoFromIframe = (event) => {
             const { data } = event;
             if (data.message === "3DS-authentication-complete") {
               toggleAuthenticationPendingView(false);
               retrieveSource(data.sourceId, data.clientSecret);
+              window.removeEventListener(
+                "message",
+                retrieveSourceInfoFromIframe
+              );
             }
-          });
+          };
+
+          // listen to injected iframe for authentication complete message
+          window.addEventListener(
+            "message",
+            retrieveSourceInfoFromIframe
+          );
 
           return stripe
             .createSource({
