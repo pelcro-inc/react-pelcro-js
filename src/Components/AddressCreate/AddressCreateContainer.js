@@ -137,7 +137,7 @@ const AddressCreateContainer = ({
           return dispatch({ type: LOADING, payload: false });
         }
 
-        const newAddressId = res.data.id;
+        const newAddressId = String(res.data.id);
         if (giftCode) {
           window.Pelcro.subscription.redeemGift(
             {
