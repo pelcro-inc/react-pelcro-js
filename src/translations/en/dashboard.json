@@ -44,6 +44,6 @@
     "addGift": "New Gift"
   },
   "messages": {
-    "yourDashboard": "Your Pelcro Dashboard"
+    "noCard": "You don't have a card"
   }
 }

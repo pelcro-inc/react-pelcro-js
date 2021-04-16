@@ -712,19 +712,36 @@ class Dashboard extends Component {
                 title={this.locale("labels.paymentSource")}
                 content={
                   <div className="plc-flex plc-items-center plc-justify-between plc-max-w-xs plc-p-4 plc-mb-2 plc-text-white plc-bg-gray-800 plc-rounded-md plc-h-14">
-                    {getPaymentCardIcon(
-                      this.user.source?.properties?.brand
+                    {this.user.source ? (
+                      <>
+                        {getPaymentCardIcon(
+                          this.user.source?.properties?.brand
+                        )}
+                        <span className="plc-ml-1 plc-text-lg plc-tracking-widest">
+                          •••• {this.user.source?.properties?.last4}
+                        </span>
+                        <Button
+                          variant="icon"
+                          className="plc-text-white"
+                          icon={<EditIcon />}
+                          onClick={this.displaySourceCreate}
+                          disabled={this.state.disableSubmit}
+                        ></Button>
+                      </>
+                    ) : (
+                      <>
+                        <span>{this.locale("messages.noCard")}</span>
+                        <Button
+                          variant="icon"
+                          className="plc-text-white"
+                          icon={
+                            <PlusIcon className="plc-w-6 plc-h-6" />
+                          }
+                          onClick={this.displaySourceCreate}
+                          disabled={this.state.disableSubmit}
+                        />
+                      </>
                     )}
-                    <span className="plc-ml-1 plc-text-lg plc-tracking-widest">
-                      •••• {this.user.source?.properties?.last4}
-                    </span>
-                    <Button
-                      variant="icon"
-                      className="plc-text-white"
-                      icon={<EditIcon />}
-                      onClick={this.displaySourceCreate}
-                      disabled={this.state.disableSubmit}
-                    ></Button>
                   </div>
                 }
               />

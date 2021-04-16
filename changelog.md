@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 ### Added
 
 - Add address selection modal.
+- Add empty state for dashboard payment cards section.
 
 ### Fixed
 
