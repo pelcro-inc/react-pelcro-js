@@ -28,9 +28,9 @@ import {
   OrderCreateModal,
   GiftCreateModal,
   GiftRedeemModal,
-  PasswordChangeModal
+  PasswordChangeModal,
+  AddressSelectModal
 } from "./components";
-import { AddressSelectModal } from "./Components/AddressSelect/AddressSelectModal";
 import { userHasAddress } from "./utils/utils";
 
 class App extends Component {
