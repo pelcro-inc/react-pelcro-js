@@ -31,7 +31,6 @@ import {
   PasswordChangeModal,
   AddressSelectModal
 } from "./components";
-import { userHasAddress } from "./utils/utils";
 
 class App extends Component {
   constructor(props) {
@@ -223,6 +222,11 @@ class App extends Component {
   };
 
   displayAddressView = () => {
+    const userHasAddress = () => {
+      const addresses = window.Pelcro.user.read().addresses ?? [];
+      return addresses.length > 0;
+    };
+
     if (userHasAddress()) {
       this.setView("address-select");
     } else {
