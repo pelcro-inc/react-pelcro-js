@@ -27,10 +27,7 @@ class SaveToMetadataButtonClass {
   };
 
   unauthenticated = () => {
-    this.#onClick(() => {
-      this.app.displayLoginView();
-    });
-
+    this.#onClick(this.app.displayLoginView);
     this.#unmarkAllSavedButtons();
   };
 
