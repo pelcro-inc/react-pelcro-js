@@ -10,6 +10,7 @@
 
 /* components */
 @import "./Components/Shop/ShopView.css";
+@import "./Components/dashboard/DashboardMenus/OrdersMenu.css";
 
 /* tailwind */
 @tailwind components;

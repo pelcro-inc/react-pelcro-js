@@ -17,15 +17,18 @@ import { ReactComponent as PaymentCardIcon } from "../../assets/payment-card.svg
 import { ReactComponent as LocationIcon } from "../../assets/location-pin.svg";
 import { ReactComponent as BoxIcon } from "../../assets/box.svg";
 import { ReactComponent as GiftIcon } from "../../assets/gift.svg";
+import { ReactComponent as ShoppingIcon } from "../../assets/shopping.svg";
 import { ReactComponent as PlusIcon } from "../../assets/plus.svg";
 import { ReactComponent as KeyIcon } from "../../assets/key.svg";
+import { OrdersMenu } from "./DashboardMenus/OrdersMenu";
 
 const SUB_MENUS = {
   PROFILE: "profile",
   SUBSCRIPTIONS: "subscriptions",
   PAYMENT_CARDS: "payment-cards",
   ADDRESSES: "addresses",
-  GIFTS: "gifts"
+  GIFTS: "gifts",
+  ORDERS: "orders"
 };
 
 class Dashboard extends Component {
@@ -771,6 +774,13 @@ class Dashboard extends Component {
                 icon={<GiftIcon />}
                 title={this.locale("labels.gifts")}
                 content={this.renderGiftRecipients()}
+              />
+
+              <Accordion.item
+                name={SUB_MENUS.ORDERS}
+                icon={<ShoppingIcon />}
+                title={this.locale("labels.orders")}
+                content={<OrdersMenu />}
               />
             </Accordion>
           </section>
