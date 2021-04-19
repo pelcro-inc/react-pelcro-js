@@ -779,7 +779,7 @@ class Dashboard extends Component {
               <Accordion.item
                 name={SUB_MENUS.ORDERS}
                 icon={<ShoppingIcon />}
-                title={this.locale("labels.orders")}
+                title={this.locale("labels.orders.label")}
                 content={<OrdersMenu />}
               />
             </Accordion>

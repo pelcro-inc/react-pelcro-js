@@ -29,7 +29,6 @@
     "changePassword": "Changer le mot de passe",
     "edit": "Modifier",
     "gifts": "Cadeaux",
-    "orders": "Commandes",
     "redeemGift": "Échanger un cadeau",
     "address": "Adresse",
     "addresses": "Adresses",
@@ -43,7 +42,12 @@
     "recipient": "Destinataire",
     "addAddress": "Ajoutez l'adresse",
     "addSubscription": "Nouvel abonnement",
-    "addGift": "ajouter un cadeau"
+    "addGift": "ajouter un cadeau",
+    "orders": {
+      "label": "Commandes",
+      "itemsAmount": "{{count}} article",
+      "itemsAmount_plural": "{{count}} articles"
+    }
   },
   "messages": {
     "noCard": "Vous ñ'avez pas un carte"
