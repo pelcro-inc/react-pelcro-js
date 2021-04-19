@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Unreleased]
 
+### Added
+
+- Add ecommerce orders section in the user's dashboard.
+
 ## [Released]
 
 ## [0.9.0] - 2021-04-16
