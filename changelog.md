@@ -6,9 +6,11 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Unreleased]
 
-- Export i18n instance to allow extending/customizing it.
-
 ## [Released]
+
+## [0.10.0] - 2021-04-19
+
+- Export i18n instance to allow extending/customizing it.
 
 ## [0.9.0] - 2021-04-16
 
