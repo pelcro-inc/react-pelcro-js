@@ -1,6 +1,10 @@
 class SaveToMetadataButtonClass {
   app = null;
 
+  /**
+   * Save buttons getter
+   * @return {HTMLButtonElement[]} button elements
+   */
   get saveButtons() {
     return Array.from(
       document.getElementsByClassName("pelcro-save-button")
@@ -21,37 +25,64 @@ class SaveToMetadataButtonClass {
     this.#onClick(this.#saveToMetadata);
   }
 
+  /**
+   * Authenticated callback
+   */
   authenticated = () => {
     this.#onClick(this.#saveToMetadata);
     this.#markAllSavedButtons();
   };
 
+  /**
+   * Unauthenticated callback
+   */
   unauthenticated = () => {
     this.#onClick(this.app.displayLoginView);
     this.#unmarkAllSavedButtons();
   };
 
+  /**
+   * Checks if the button content is already saved in user metadata
+   * @param {HTMLButtonElement} button
+   * @return {boolean}
+   */
   #isAlreadySaved = (button) => {
     return button.classList.contains("pelcro-is-active");
   };
 
+  /**
+   * Inject loading state to the button
+   * @param {HTMLButtonElement} button
+   */
   #markButtonAsLoading = (button) => {
     button.classList.add("pelcro-is-loading");
     button.disabled = true;
   };
 
+  /**
+   * Inject saved state to the button
+   * @param {HTMLButtonElement} button
+   */
   #markButtonAsSaved = (button) => {
     button.classList.add("pelcro-is-active");
     button.classList.remove("pelcro-is-loading");
     button.disabled = false;
   };
 
+  /**
+   * Remove saved state from the button
+   * @param {HTMLButtonElement} button
+   */
   #unmarkSavedButton = (button) => {
     button.classList.remove("pelcro-is-active");
     button.classList.remove("pelcro-is-loading");
     button.disabled = false;
   };
 
+  /**
+   * Inject saved state to all active buttons
+   * @param {HTMLButtonElement} button
+   */
   #markAllSavedButtons = () => {
     const userMetadataArray = Object.values(
       window.Pelcro.user.read().metadata ?? {}
@@ -68,19 +99,27 @@ class SaveToMetadataButtonClass {
     });
   };
 
+  /**
+   * Remove saved state from all buttons
+   * @param {HTMLButtonElement} button
+   */
   #unmarkAllSavedButtons = () => {
     this.saveButtons.forEach((button) => {
       this.#unmarkSavedButton(button);
     });
   };
 
-  #saveToMetadata = (e) => {
-    const button = e.currentTarget;
+  /**
+   * Save button content to user metadata
+   * @param {MouseEvent} event
+   */
+  #saveToMetadata = (event) => {
+    const button = event.currentTarget;
     const user = window.Pelcro.user.read();
     const { key, ...buttonMetadata } = button.dataset;
 
     if (this.#isAlreadySaved(button)) {
-      this.#removeMetaData(e);
+      this.#removeMetaData(event);
       return;
     }
 
@@ -112,8 +151,12 @@ class SaveToMetadataButtonClass {
     }
   };
 
-  #removeMetaData = (e) => {
-    const button = e.currentTarget;
+  /**
+   * Remove button content from user metadata
+   * @param {MouseEvent} event
+   */
+  #removeMetaData = (event) => {
+    const button = event.currentTarget;
     const user = window.Pelcro.user.read();
     const { key, title } = button.dataset;
 
@@ -138,6 +181,10 @@ class SaveToMetadataButtonClass {
     }
   };
 
+  /**
+   * Remove button content from user metadata
+   * @param {function():void} callback
+   */
   #onClick = (callback) => {
     this.saveButtons.forEach((button) => {
       button.onclick = callback;
