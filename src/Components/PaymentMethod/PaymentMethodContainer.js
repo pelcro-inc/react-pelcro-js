@@ -40,8 +40,7 @@ import {
 } from "../../services/Subscription/Subscription.service";
 import {
   getCanonicalLocaleFormat,
-  getEcommerceOrderTotal,
-  getUserLatestAddress
+  getEcommerceOrderTotal
 } from "../../utils/utils";
 
 /**
@@ -544,7 +543,11 @@ const PaymentMethodContainerWithoutStripe = ({
         card: source?.id
       },
       redirect: {
-        return_url: "https://cocky-williams-cf94f0.netlify.app/"
+        return_url: `${
+          window.Pelcro.environment.domain
+        }/webhook/stripe/callback/3dsecure?token=${
+          window.Pelcro.user.read().auth_token
+        }`
       }
     });
   };
