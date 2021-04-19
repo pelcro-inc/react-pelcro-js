@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Unreleased]
 
+- Authorship logo in modals footers now links to Pelcro's homepage.
+
 ## [Released]
 
 ## [0.10.0] - 2021-04-19
