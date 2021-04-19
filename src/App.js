@@ -48,8 +48,7 @@ class App extends Component {
     isRenewingGift: false,
     isGift: false,
     giftCode: "",
-    selectedAddressId: null,
-    view: "dashboard"
+    selectedAddressId: null
   };
 
   loadPaymentSDKs = () => {
