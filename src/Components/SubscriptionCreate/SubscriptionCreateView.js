@@ -6,6 +6,7 @@ export const SubscriptionCreateView = ({
   product,
   plan,
   giftRecipient,
+  selectedAddressId,
   onSuccess = () => {},
   onFailure = () => {},
   onDisplay = () => {}
@@ -60,6 +61,7 @@ export const SubscriptionCreateView = ({
         plan={plan}
         product={product}
         giftRecipient={giftRecipient}
+        selectedAddressId={selectedAddressId}
         onFailure={onFailure}
         onSuccess={onSuccess}
         onDisplay={onDisplay}

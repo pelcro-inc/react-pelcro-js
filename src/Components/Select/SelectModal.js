@@ -11,6 +11,7 @@ import { Link } from "../../SubComponents/Link";
 import { Button } from "../../SubComponents/Button";
 import { Checkbox } from "../../SubComponents/Checkbox";
 import { Radio } from "../../SubComponents/Radio";
+import { userHasAddress } from "../../utils/utils";
 
 class SelectModal extends Component {
   constructor(props) {
@@ -238,6 +239,9 @@ class SelectModal extends Component {
     }
 
     if (product.address_required) {
+      if (userHasAddress()) {
+        return setView("address-select");
+      }
       return setView("address");
     }
 

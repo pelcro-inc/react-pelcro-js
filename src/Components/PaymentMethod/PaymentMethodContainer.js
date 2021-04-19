@@ -97,6 +97,7 @@ const PaymentMethodContainerWithoutStripe = ({
   store,
   order = {},
   giftRecipient = null,
+  selectedAddressId,
   onSuccess = () => {},
   onGiftRenewalSuccess = () => {},
   onFailure = () => {},
@@ -180,7 +181,6 @@ const PaymentMethodContainerWithoutStripe = ({
 
   const onApplyCouponCode = (state, dispatch) => {
     dispatch({ type: DISABLE_COUPON_BUTTON, payload: true });
-    const addressId = getUserLatestAddress()?.id;
     const { couponCode, canMakePayment } = state;
 
     if (couponCode) {
@@ -189,7 +189,7 @@ const PaymentMethodContainerWithoutStripe = ({
           auth_token: window.Pelcro.user.read().auth_token,
           plan_id: plan.id,
           coupon_code: couponCode,
-          address_id: addressId
+          address_id: selectedAddressId
         },
         (err, res) => {
           dispatch({ type: DISABLE_COUPON_BUTTON, payload: false });
@@ -245,7 +245,7 @@ const PaymentMethodContainerWithoutStripe = ({
           gift_recipient_first_name: giftRecipient?.firstName,
           gift_recipient_last_name: giftRecipient?.lastName,
           address_id: product.address_required
-            ? getUserLatestAddress()?.id
+            ? selectedAddressId
             : null
         },
         (err, res) => {
@@ -276,7 +276,7 @@ const PaymentMethodContainerWithoutStripe = ({
             coupon_code: couponCode,
             subscription_id: subscriptionIdToRenew,
             address_id: product.address_required
-              ? getUserLatestAddress()?.id
+              ? selectedAddressId
               : null
           },
           (err, res) => {
@@ -306,7 +306,7 @@ const PaymentMethodContainerWithoutStripe = ({
             coupon_code: couponCode,
             subscription_id: subscriptionIdToRenew,
             address_id: product.address_required
-              ? getUserLatestAddress()?.id
+              ? selectedAddressId
               : null
           },
           (err, res) => {
@@ -356,7 +356,8 @@ const PaymentMethodContainerWithoutStripe = ({
           plan,
           couponCode,
           product,
-          giftRecipient
+          giftRecipient,
+          addressId: selectedAddressId
         },
 
         (err, res) => {
@@ -406,19 +407,12 @@ const PaymentMethodContainerWithoutStripe = ({
   const purchase = (token, state, dispatch) => {
     const { order } = state;
     order.email = window.Pelcro.user.read().email;
-    const address = window.Pelcro.user.read().addresses
-      ? window.Pelcro.user.read().addresses[
-          window.Pelcro.user.read().addresses.length - 1
-        ]
-      : null;
-
-    const addressId = address?.id;
 
     window.Pelcro.ecommerce.order.create(
       {
         items: order.items,
         stripe_token: token.id,
-        ...(addressId && { address_id: addressId })
+        ...(selectedAddressId && { address_id: selectedAddressId })
       },
       (err, res) => {
         dispatch({ type: DISABLE_SUBMIT, payload: false });

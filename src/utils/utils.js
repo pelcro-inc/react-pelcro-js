@@ -48,12 +48,13 @@ export const cleanObjectNullValues = (obj) =>
     .reduce((a, [k, v]) => (v == null ? a : ((a[k] = v), a)), {});
 
 /**
- * Gets user last submited pelcro shipping address
- * @return {object?} User address
+ * get an address using it's id
+ * @param {string} id id of the wanted address
+ * @return {object?} address with the matching id
  */
-export const getUserLatestAddress = () => {
-  const addressesLength = window.Pelcro.address.list()?.length;
-  return window.Pelcro.address.list()?.[addressesLength - 1];
+export const getAddressById = (id) => {
+  const addresses = window.Pelcro.user.read().addresses ?? [];
+  return addresses.find((address) => address.id === id);
 };
 
 /**
@@ -103,4 +104,12 @@ export const getEcommerceOrderTotal = (order) => {
   }, 0);
 
   return totalAmount;
+};
+
+/** check wether or not the user have any addresses
+ * @return {boolean} true if the user have at least one address, false otherwise
+ */
+export const userHasAddress = () => {
+  const addresses = window.Pelcro.user.read().addresses ?? [];
+  return addresses.length > 0;
 };

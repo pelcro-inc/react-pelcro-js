@@ -1,7 +1,4 @@
-import {
-  getFormattedPriceByLocal,
-  getUserLatestAddress
-} from "../../utils/utils";
+import { getFormattedPriceByLocal } from "../../utils/utils";
 
 /**
  * @typedef {Object} paypalConstructorOptions
@@ -70,6 +67,7 @@ export class PaypalClient {
    * @typedef {Object} paymentCreationOptions
    * @property {object} product e-commerce product / plan to checkout
    * @property {number} amount optional amount (has higher precidence over "amount" in product object)
+   * @property {object} address selected user address
    * @property {() => void} onButtonClick paypal button click callback
    * @property {(data: object) => void} onPaymentApprove payment approved callback
    * @property {(data: object) => void} onPaymentCancel payment cancelled callback
@@ -121,7 +119,8 @@ export class PaypalClient {
       // button style
       style: this.config.style ?? defaultButtonStyle,
       // create payment handler
-      createBillingAgreement: this.#createPayment,
+      createBillingAgreement: () =>
+        this.#createPayment(options.address),
       // paypal button click callback
       onClick: () => {
         options?.onButtonClick?.();
@@ -167,8 +166,10 @@ export class PaypalClient {
    * Payment creation handler, invoked on paypal button click
    * @return {void}
    */
-  #createPayment = () => {
-    return this.client.createPayment(this.#computePaymentOptions());
+  #createPayment = (address) => {
+    return this.client.createPayment(
+      this.#computePaymentOptions(address)
+    );
   };
 
   /**
@@ -211,9 +212,7 @@ export class PaypalClient {
    * Computes and returns payment options for paypalClient.createPayment()
    * @return {object} payment options
    */
-  #computePaymentOptions = () => {
-    // get user's shipping address
-    const address = getUserLatestAddress();
+  #computePaymentOptions = (address) => {
     const billingWording = this.#getFormattedAmount();
 
     return {

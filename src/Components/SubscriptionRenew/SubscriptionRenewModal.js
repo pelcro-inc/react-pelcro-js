@@ -7,17 +7,7 @@ import {
 } from "../../SubComponents/Modal";
 import Authorship from "../common/Authorship";
 
-export function SubscriptionRenewModal({
-  product,
-  plan,
-  subscriptionIdToRenew,
-  isRenewingGift,
-  onFailure,
-  onSuccess,
-  onDisplay,
-  onGiftRenewalSuccess,
-  onClose
-}) {
+export function SubscriptionRenewModal({ onClose, ...otherProps }) {
   return (
     <Modal
       hideCloseButton={!window.Pelcro.paywall.displayCloseButton()}
@@ -25,16 +15,7 @@ export function SubscriptionRenewModal({
       id="pelcro-subscription-renew-modal"
     >
       <ModalBody>
-        <SubscriptionRenewView
-          plan={plan}
-          subscriptionIdToRenew={subscriptionIdToRenew}
-          isRenewingGift={isRenewingGift}
-          product={product}
-          onFailure={onFailure}
-          onSuccess={onSuccess}
-          onDisplay={onDisplay}
-          onGiftRenewalSuccess={onGiftRenewalSuccess}
-        />
+        <SubscriptionRenewView {...otherProps} />
       </ModalBody>
       <ModalFooter>
         <Authorship />

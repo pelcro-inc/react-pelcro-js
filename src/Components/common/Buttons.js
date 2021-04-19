@@ -1,3 +1,5 @@
+import { userHasAddress } from "../../utils/utils";
+
 export const init = (app) => {
   const pelcroLoginButtonsByClass = document.getElementsByClassName(
     "pelcro-login-button"
@@ -243,7 +245,11 @@ export const init = (app) => {
           ]);
 
           if (window.Pelcro.user.isAuthenticated()) {
-            app.setView("address");
+            if (userHasAddress()) {
+              app.setView("address-select");
+            } else {
+              app.setView("address");
+            }
           } else {
             app.setView("register");
           }
