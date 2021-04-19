@@ -33,6 +33,7 @@ export const Accordion = ({ children, initialActiveMenu = "" }) => {
 
 /**
  * @typedef {Object} AccordionItemPropsType
+ * @property {boolean} [show=true] conditionally show the item, defaults to true
  * @property {string} name defined name for the item
  * @property {Element} icon icon element
  * @property {string} title item header title
@@ -47,6 +48,7 @@ export const Accordion = ({ children, initialActiveMenu = "" }) => {
  * @return {JSX}
  */
 Accordion.item = function AccordionItem({
+  show = true,
   name,
   icon,
   title,
@@ -55,7 +57,7 @@ Accordion.item = function AccordionItem({
   toggleActiveMenu
 }) {
   const isActive = activeMenu === name;
-  return (
+  return show ? (
     <div
       id={name}
       className={`plc-border-l-2 plc-border-transparent plc-border-solid plc-group
@@ -106,5 +108,5 @@ Accordion.item = function AccordionItem({
         {content}
       </div>
     </div>
-  );
+  ) : null;
 };

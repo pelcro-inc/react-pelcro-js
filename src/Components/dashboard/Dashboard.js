@@ -777,6 +777,7 @@ class Dashboard extends Component {
               />
 
               <Accordion.item
+                show={window.Pelcro.site.read().ecommerce_enabled}
                 name={SUB_MENUS.ORDERS}
                 icon={<ShoppingIcon />}
                 title={this.locale("labels.orders.label")}
