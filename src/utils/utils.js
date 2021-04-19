@@ -61,11 +61,11 @@ export const getAddressById = (id) => {
  * Transforms locale names stored in our backend like
  * "en_US" into the standerd accepted in core i18n methods: "en-US"
  * @param {string} localeName
- * @return {string}
+ * @return {string | undefined}
  * @example getCanonicalLocaleFormat("en_US") => "en-US"
  */
 export const getCanonicalLocaleFormat = (localeName) =>
-  localeName.replace("_", "-");
+  localeName?.replace("_", "-");
 
 /**
  * Returns a formatted price string depending on locale
@@ -92,7 +92,7 @@ export const getFormattedPriceByLocal = (
 };
 
 /** check wether or not the user have any addresses
- * @returns {boolean} true if the user have at least one address, false otherwise
+ * @return {boolean} true if the user have at least one address, false otherwise
  */
 export const userHasAddress = () => {
   const addresses = window.Pelcro.user.read().addresses ?? [];
