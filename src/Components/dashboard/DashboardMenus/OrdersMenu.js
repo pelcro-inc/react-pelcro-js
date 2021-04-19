@@ -5,13 +5,17 @@ import { ReactComponent as ChevronRightIcon } from "../../../assets/chevron-righ
 import { Accordion } from "../Accordion";
 
 export const OrdersMenu = () => {
+  const { t } = useTranslation("dashboard");
+
   return (
     <table className="plc-w-full plc-py-4 plc-table-fixed ">
       <thead className="plc-text-xs plc-font-semibold plc-tracking-wider plc-text-gray-400 plc-uppercase ">
         <tr>
-          <th className="plc-w-4/12 plc-pl-2">Total</th>
-          <th className="plc-w-5/12 ">Date</th>
-          <th className="plc-w-3/12">Details</th>
+          <th className="plc-w-4/12 plc-pl-2">
+            {t("labels.orders.total")}
+          </th>
+          <th className="plc-w-5/12 ">{t("labels.orders.date")}</th>
+          <th className="plc-w-3/12">{t("labels.orders.details")}</th>
         </tr>
       </thead>
       {/* Spacer */}

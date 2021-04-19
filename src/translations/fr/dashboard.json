@@ -45,6 +45,9 @@
     "addGift": "ajouter un cadeau",
     "orders": {
       "label": "Commandes",
+      "total": "Total",
+      "date": "Date",
+      "details": "Des détails",
       "itemsAmount": "{{count}} article",
       "itemsAmount_plural": "{{count}} articles"
     }
