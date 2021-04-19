@@ -2,8 +2,4 @@
   .pelcro-root .accordion-header:hover .accordion-chevron {
     @apply plc-transform plc-translate-x-1 plc-text-primary-400;
   }
-
-  .pelcro-root .order-details-row:last-child {
-    @apply plc-border-b-2;
-  }
 }
