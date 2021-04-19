@@ -147,7 +147,6 @@ const OrderItems = ({ orders, activeMenu, toggleActiveMenu }) => {
                 </tr>
               </>
             )}
-            {/* Spacer */}
           </tbody>
         </React.Fragment>
       );
