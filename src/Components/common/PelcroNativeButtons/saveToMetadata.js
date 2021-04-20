@@ -1,16 +1,6 @@
 class SaveToMetadataButtonClass {
   app = null;
 
-  /**
-   * Save buttons getter
-   * @return {HTMLButtonElement[]} button elements
-   */
-  get saveButtons() {
-    return Array.from(
-      document.getElementsByClassName("pelcro-save-button")
-    ).filter((button) => button.dataset.key);
-  }
-
   init(app) {
     this.app = app;
 
@@ -40,6 +30,10 @@ class SaveToMetadataButtonClass {
     this.#onClick(this.app.displayLoginView);
     this.#unmarkAllSavedButtons();
   };
+
+  /**
+   * PRIVATE METHODS
+   */
 
   /**
    * Checks if the button content is already saved in user metadata
@@ -92,7 +86,7 @@ class SaveToMetadataButtonClass {
       const buttonMetadata = button.dataset;
 
       userMetadataArray?.forEach((value) => {
-        if (value.title === buttonMetadata.title) {
+        if (value?.title === buttonMetadata?.title) {
           this.#markButtonAsSaved(button);
         }
       });
@@ -125,9 +119,8 @@ class SaveToMetadataButtonClass {
 
     let newMetadataValue = [buttonMetadata];
     // if this key already exist in user metadata object, append to it.
-    if (user.metadata?.[`metadata_${key}`]) {
-      const oldValue = user.metadata[`metadata_${key}`];
-
+    const oldValue = user.metadata[`metadata_saved_${key}`];
+    if (oldValue) {
       if (Array.isArray(oldValue)) {
         newMetadataValue = [...oldValue, buttonMetadata];
       } else {
@@ -135,12 +128,11 @@ class SaveToMetadataButtonClass {
       }
     }
 
-    console.log(newMetadataValue);
     if (window.Pelcro.user.isAuthenticated()) {
       this.#markButtonAsLoading(button);
       window.Pelcro.user.saveToMetaData(
         {
-          key,
+          key: `saved_${key}`,
           value: newMetadataValue,
           auth_token: window.Pelcro.user.read().auth_token
         },
@@ -159,18 +151,17 @@ class SaveToMetadataButtonClass {
     const button = event.currentTarget;
     const user = window.Pelcro.user.read();
     const { key, title } = button.dataset;
-
-    const oldValue = user.metadata[`metadata_${key}`];
+    const oldValue = user.metadata[`metadata_saved_${key}`];
 
     const newMetadataValue = oldValue.filter(
-      (metadata) => !(metadata.title === title)
+      (metadata) => !(metadata?.title === title)
     );
 
     if (window.Pelcro.user.isAuthenticated()) {
       this.#markButtonAsLoading(button);
       window.Pelcro.user.saveToMetaData(
         {
-          key,
+          key: `saved_${key}`,
           value: newMetadataValue,
           auth_token: window.Pelcro.user.read().auth_token
         },
@@ -190,6 +181,16 @@ class SaveToMetadataButtonClass {
       button.onclick = callback;
     });
   };
+
+  /**
+   * Save buttons getter
+   * @return {HTMLButtonElement[]} button elements
+   */
+  get saveButtons() {
+    return Array.from(
+      document.getElementsByClassName("pelcro-save-button")
+    ).filter((button) => button.dataset.key);
+  }
 }
 
 const saveToMetadataButton = new SaveToMetadataButtonClass();

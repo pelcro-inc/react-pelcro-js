@@ -1,5 +1,5 @@
 import { saveToMetadataButton } from "./saveToMetadata";
-import { userHasAddress } from "../../utils/utils";
+import { userHasAddress } from "../../../utils/utils";
 
 export const init = (app) => {
   saveToMetadataButton.init(app);
