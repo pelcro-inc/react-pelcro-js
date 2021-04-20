@@ -1,47 +1,17 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { Loader } from "../SubComponents/Loader";
 import {
-  SET_COUNTRIES,
-  SHOW_ALERT,
   RESET_FIELD_ERROR,
   VALIDATE_FIELD,
   SET_TEXT_FIELD
 } from "../utils/action-types";
-import { sortCountries } from "../utils/utils";
 import { Select } from "./Select";
 
 export function CountrySelect({ placeholder, store, ...otherProps }) {
   const {
     dispatch,
-    state: { country, countryError, countries, loading }
+    state: { country, countryError, countries, isCountryLoading }
   } = useContext(store);
-
-  const getCountryList = () => {
-    window.Pelcro.geolocation.getCountryList(setCountries);
-  };
-
-  const setCountries = (error, tmp) => {
-    if (error) {
-      dispatch({
-        type: SHOW_ALERT,
-        payload: {
-          type: "error",
-          content: error.message
-        }
-      });
-    } else if (tmp) {
-      dispatch({
-        type: SET_COUNTRIES,
-        payload: sortCountries(tmp.countries)
-      });
-    }
-  };
-
-  useEffect(() => {
-    if (!countries.length) {
-      getCountryList();
-    }
-  }, []);
 
   const createCountryItems = () => {
     if (countries.length) {
@@ -71,7 +41,7 @@ export function CountrySelect({ placeholder, store, ...otherProps }) {
     });
   };
 
-  if (loading) {
+  if (isCountryLoading) {
     return <Loader />;
   }
 

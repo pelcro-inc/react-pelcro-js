@@ -4,8 +4,7 @@ import { Link } from "../../SubComponents/Link";
 import {
   Modal,
   ModalBody,
-  ModalFooter,
-  ModalHeader
+  ModalFooter
 } from "../../SubComponents/Modal";
 import Authorship from "../common/Authorship";
 import { PasswordForgotView } from "./PasswordForgotView";
@@ -16,16 +15,12 @@ export const PasswordForgotModal = ({
   ...otherProps
 }) => {
   const { t } = useTranslation("passwordForgot");
-  const site = window.Pelcro.site.read();
-
   return (
-    <Modal id="pelcro-password-forgot-modal">
-      <ModalHeader
-        hideCloseButton={false}
-        onClose={onClose}
-        logo={site.logo}
-        title={site.name}
-      />
+    <Modal
+      hideCloseButton={!window.Pelcro.paywall.displayCloseButton()}
+      onClose={onClose}
+      id="pelcro-password-forgot-modal"
+    >
       <ModalBody>
         <PasswordForgotView {...otherProps} />
       </ModalBody>

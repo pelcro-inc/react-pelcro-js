@@ -5,20 +5,21 @@ import useReducerWithSideEffects, {
   Update
 } from "use-reducer-with-side-effects";
 import {
-  DISABLE_SUBMIT,
   HANDLE_SUBMIT,
-  SET_COUNTRIES,
-  SET_STATES,
+  GET_COUNTRIES_SUCCESS,
+  GET_STATES_SUCCESS,
   SET_TEXT_FIELD,
   SHOW_ALERT,
   LOADING,
   VALIDATE_FIELD,
-  RESET_FIELD_ERROR
+  RESET_FIELD_ERROR,
+  GET_COUNTRIES_FETCH,
+  GET_STATES_FETCH
 } from "../../utils/action-types";
+import { sortCountries } from "../../utils/utils";
 import { getErrorMessages } from "../common/Helpers";
 
 const initialState = {
-  disableSubmit: false,
   isSubmitting: false,
   firstName: "",
   firstNameError: "",
@@ -30,13 +31,14 @@ const initialState = {
   cityError: "",
   state: "",
   stateError: "",
+  isStateLoading: "",
   country: "",
   countryError: "",
+  isCountryLoading: false,
   postalCode: "",
   postalCodeError: "",
   states: [],
   countries: [],
-  loading: true,
   alert: {
     type: "error",
     content: ""
@@ -58,7 +60,30 @@ const AddressUpdateContainer = ({
 }) => {
   const [t] = useTranslation("address");
   useEffect(() => {
+    const getCountries = () => {
+      dispatch({
+        type: GET_COUNTRIES_FETCH
+      });
+      window.Pelcro.geolocation.getCountryList((error, response) => {
+        if (error) {
+          dispatch({
+            type: SHOW_ALERT,
+            payload: {
+              type: "error",
+              content: error.message
+            }
+          });
+        } else if (response) {
+          dispatch({
+            type: GET_COUNTRIES_SUCCESS,
+            payload: sortCountries(response.countries)
+          });
+        }
+      });
+    };
+
     getAddressData();
+    getCountries();
     window.Pelcro.insight.track("Modal Displayed", {
       name: "address"
     });
@@ -79,17 +104,11 @@ const AddressUpdateContainer = ({
           city: thisAddress.city,
           state: thisAddress.state,
           country: thisAddress.country,
-          postalCode: thisAddress.postal_code,
-          loading: false
+          postalCode: thisAddress.postal_code
         };
         dispatch({ type: SET_TEXT_FIELD, payload: newState });
       }
     }
-  };
-
-  const enableSubmitButton = () => {
-    dispatch({ type: DISABLE_SUBMIT, payload: false });
-    dispatch({ type: LOADING, payload: false });
   };
 
   const submitAddress = (
@@ -119,7 +138,7 @@ const AddressUpdateContainer = ({
         postal_code: postalCode
       },
       (err, res) => {
-        enableSubmitButton();
+        dispatch({ type: LOADING, payload: false });
         if (err) {
           dispatch({
             type: SHOW_ALERT,
@@ -146,14 +165,31 @@ const AddressUpdateContainer = ({
   const [state, dispatch] = useReducerWithSideEffects(
     (state, action) => {
       switch (action.type) {
-        case DISABLE_SUBMIT:
-          return Update({ ...state, disableSubmit: action.payload });
+        case GET_COUNTRIES_FETCH:
+          return Update({
+            ...state,
+            isCountryLoading: true
+          });
 
-        case SET_COUNTRIES:
-          return Update({ ...state, countries: action.payload });
+        case GET_COUNTRIES_SUCCESS:
+          return Update({
+            ...state,
+            countries: action.payload,
+            isCountryLoading: false
+          });
 
-        case SET_STATES:
-          return Update({ ...state, states: action.payload });
+        case GET_STATES_FETCH:
+          return Update({
+            ...state,
+            isStateLoading: true
+          });
+
+        case GET_STATES_SUCCESS:
+          return Update({
+            ...state,
+            states: action.payload,
+            isStateLoading: false
+          });
 
         case SET_TEXT_FIELD:
           return Update({
@@ -189,7 +225,7 @@ const AddressUpdateContainer = ({
 
         case HANDLE_SUBMIT:
           return UpdateWithSideEffect(
-            { ...state, disableSubmit: true, isSubmitting: true },
+            { ...state, isSubmitting: true },
             (state, dispatch) => submitAddress(state, dispatch)
           );
 
@@ -199,6 +235,37 @@ const AddressUpdateContainer = ({
     },
     initialState
   );
+
+  useEffect(() => {
+    const getStates = () => {
+      dispatch({
+        type: GET_STATES_FETCH
+      });
+      window.Pelcro.geolocation.getStatesForCountry(
+        state.country,
+        (error, response) => {
+          if (error) {
+            dispatch({
+              type: SHOW_ALERT,
+              payload: {
+                type: "error",
+                content: error.message
+              }
+            });
+          } else if (response) {
+            dispatch({
+              type: GET_STATES_SUCCESS,
+              payload: response
+            });
+          }
+        }
+      );
+    };
+
+    if (state.country) {
+      getStates();
+    }
+  }, [state.country]);
 
   return (
     <div style={{ ...style }} className={className}>

@@ -15,18 +15,22 @@ export const AddressCreateView = (props) => {
   const { t } = useTranslation("address");
   return (
     <div id="pelcro-address-create-view">
-      <div className="plc-mb-2 plc-text-xl plc-font-semibold plc-text-center plc-text-gray-700 pelcro-title-wrapper">
+      <div className="plc-mb-6 plc-text-2xl plc-font-semibold plc-text-center plc-text-gray-700 pelcro-title-wrapper">
         <h4>{t("title")}</h4>
       </div>
-      <div className="plc-mt-2 pelcro-form">
+      <form
+        action="javascript:void(0);"
+        className="plc-mt-2 pelcro-form"
+      >
         <AddressCreateContainer {...props}>
           <AlertWithContext />
-          <div className="plc-flex plc-space-x-3 plc-items-end">
+          <div className="plc-flex plc-space-x-3 plc-items-start">
             <AddressCreateFirstName
               id="pelcro-input-first-name"
               errorId="pelcro-input-first-name-error"
               required
               label={t("labels.firstName")}
+              autoFocus={true}
             />
             <AddressCreateLastName
               id="pelcro-input-last-name"
@@ -35,7 +39,7 @@ export const AddressCreateView = (props) => {
               label={t("labels.lastName")}
             />
           </div>
-          <div className="plc-flex plc-items-end">
+          <div className="plc-flex plc-items-start">
             <AddressCreateLine1
               id="pelcro-input-line1"
               errorId="pelcro-input-line1-error"
@@ -43,7 +47,7 @@ export const AddressCreateView = (props) => {
               label={t("labels.address")}
             />
           </div>
-          <div className="plc-flex plc-space-x-3 plc-items-end">
+          <div className="plc-flex plc-space-x-3 plc-items-start">
             <AddressCreatePostalCode
               id="pelcro-input-postal-code"
               errorId="pelcro-input-postal-code-error"
@@ -57,7 +61,7 @@ export const AddressCreateView = (props) => {
               required
             />
           </div>
-          <div className="plc-flex plc-space-x-3 plc-items-end">
+          <div className="plc-flex plc-space-x-3 plc-items-start">
             <AddressCreateCountrySelect
               id="pelcro-input-country"
               errorId="pelcro-input-country-error"
@@ -73,12 +77,13 @@ export const AddressCreateView = (props) => {
           </div>
           <p className="pelcro-footnote">* {t("labels.required")}</p>
           <AddressCreateSubmit
+            role="submit"
             className="plc-mt-2"
             name={t("buttons.submit")}
             id="pelcro-submit"
           />
         </AddressCreateContainer>
-      </div>
+      </form>
     </div>
   );
 };

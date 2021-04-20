@@ -1,7 +1,7 @@
 {
   "name": "@pelcro/react-pelcro-js",
   "description": "Pelcro's React UI Elements",
-  "version": "0.3.0",
+  "version": "0.9.0",
   "private": false,
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
@@ -16,10 +16,14 @@
     "lint": "eslint ./src/**/*.js --fix"
   },
   "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
+    "last 8 ChromeAndroid versions",
+    "last 8 Chrome versions",
+    "last 2 Android versions",
+    "last 2 iOS versions",
+    "last 1 Samsung version",
+    "last 1 Firefox version",
+    "last 1 Edge version",
+    "last 1 Safari version"
   ],
   "devDependencies": {
     "@babel/cli": "^7.8.4",
@@ -42,6 +46,7 @@
     "babel-loader": "^8.1.0",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "babel-preset-react-app": "^10.0.0",
+    "browserslist": "^4.16.3",
     "css-loader": "^3.2.0",
     "cssimportant-loader": "^0.4.0",
     "eslint": "^7.19.0",

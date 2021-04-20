@@ -10,7 +10,7 @@ import { ReactComponent as XIcon } from "../../assets/x-icon.svg";
 import { ReactComponent as CheckMarkIcon } from "../../assets/check-mark.svg";
 import { ReactComponent as ExclamationIcon } from "../../assets/exclamation.svg";
 import { ReactComponent as EditIcon } from "../../assets/edit.svg";
-import { ReactComponent as SettingsIcon } from "../../assets/settings.svg";
+import { ReactComponent as UserIcon } from "../../assets/user.svg";
 import { ReactComponent as RefreshIcon } from "../../assets/refresh.svg";
 import { ReactComponent as XCircleIcon } from "../../assets/x-icon-circle.svg";
 import { ReactComponent as PaymentCardIcon } from "../../assets/payment-card.svg";
@@ -18,13 +18,16 @@ import { ReactComponent as LocationIcon } from "../../assets/location-pin.svg";
 import { ReactComponent as BoxIcon } from "../../assets/box.svg";
 import { ReactComponent as GiftIcon } from "../../assets/gift.svg";
 import { ReactComponent as PlusIcon } from "../../assets/plus.svg";
+import { ReactComponent as KeyIcon } from "../../assets/key.svg";
 
 const SUB_MENUS = {
+  PROFILE: "profile",
   SUBSCRIPTIONS: "subscriptions",
   PAYMENT_CARDS: "payment-cards",
   ADDRESSES: "addresses",
   GIFTS: "gifts"
 };
+
 class Dashboard extends Component {
   constructor(props) {
     super(props);
@@ -97,7 +100,15 @@ class Dashboard extends Component {
     return this.props.setView("user-edit");
   };
 
-  displayProductSelect = () => {
+  displayChangePassword = () => {
+    return this.props.setView("password-change");
+  };
+
+  displayProductSelect = ({ isGift }) => {
+    if (isGift) {
+      this.props.setProductAndPlan(null, null, true);
+    }
+
     return this.props.setView("select");
   };
 
@@ -512,7 +523,9 @@ class Dashboard extends Component {
                   <PlusIcon className="plc-w-4 plc-h-4 plc-mr-1" />
                 }
                 className="plc-h-8 plc-font-semibold plc-tracking-wider plc-uppercase plc-rounded-none plc-text-primary-700 hover:plc-bg-primary-50"
-                onClick={this.displayProductSelect}
+                onClick={() =>
+                  this.displayProductSelect({ isGift: true })
+                }
               >
                 {this.locale("labels.addGift")}
               </Button>
@@ -607,7 +620,7 @@ class Dashboard extends Component {
         afterLeave={this.props.onClose}
       >
         <div id="pelcro-view-dashboard">
-          <header className="plc-flex plc-flex-col plc-p-2 plc-bg-primary-500 plc-h-52">
+          <header className="plc-flex plc-flex-col plc-h-48 plc-p-2 plc-bg-primary-500">
             <div className="plc-flex plc-flex-row-reverse">
               <Button
                 variant="icon"
@@ -617,7 +630,7 @@ class Dashboard extends Component {
               ></Button>
             </div>
 
-            <div className="plc-flex plc-flex-col plc-justify-between plc-flex-grow plc-px-6">
+            <div className="plc-flex plc-flex-col plc-justify-between plc-flex-grow plc-px-2 sm:plc-px-6">
               <div className="plc-flex plc-flex-col plc-flex-grow">
                 {userHasName && (
                   <p className="plc-m-0 plc-text-3xl plc-font-bold plc-text-white text">
@@ -639,54 +652,96 @@ class Dashboard extends Component {
                   {this.user.email}
                 </p>
               </div>
-              <div className="plc-flex plc-mt-2 plc-space-x-2">
-                <Button
-                  variant="solid"
-                  icon={<SettingsIcon />}
-                  className="plc-text-xs plc-text-gray-700 plc-capitalize plc-bg-white hover:plc-bg-gray-100"
-                  onClick={this.displayUserEdit}
-                >
-                  {this.locale("labels.updateProfile")}
-                </Button>
-                <Button
-                  variant="outline"
-                  icon={<ExitIcon />}
-                  className="plc-text-xs plc-text-white plc-capitalize plc-border-white hover:plc-bg-white hover:plc-text-gray-700"
-                  onClick={this.props.logout}
-                >
-                  {this.locale("labels.logout")}
-                </Button>
-              </div>
+              <Button
+                variant="outline"
+                icon={<ExitIcon />}
+                className="plc-text-xs plc-text-white plc-capitalize plc-border-white hover:plc-bg-white hover:plc-text-gray-700"
+                onClick={this.props.logout}
+              >
+                {this.locale("labels.logout")}
+              </Button>
             </div>
           </header>
 
           <section className="plc-mt-6 plc-shadow-sm">
             <header className="plc-pl-4 plc-mb-2 sm:plc-pl-8">
               <p className="plc-text-xs plc-font-bold plc-tracking-widest plc-text-gray-500 plc-uppercase">
-                {this.locale("labels.profile")}
+                {this.locale("labels.account")}
               </p>
             </header>
 
-            <Accordion initialActiveMenu={SUB_MENUS.ADDRESSES}>
+            <Accordion>
+              <Accordion.item
+                name={SUB_MENUS.PROFILE}
+                icon={
+                  <UserIcon className="plc-w-6 plc-h-6 plc-mr-2" />
+                }
+                title={this.locale("labels.myProfile")}
+                content={
+                  <div className="plc-flex plc-flex-col plc-my-2 plc-ml-2 plc-space-y-4">
+                    <Button
+                      variant="ghost"
+                      isFullWidth={false}
+                      icon={
+                        <EditIcon className="plc-w-5 plc-h-5 plc-mr-1" />
+                      }
+                      className="plc-text-sm plc-text-gray-500 hover:plc-text-primary-700"
+                      onClick={this.displayUserEdit}
+                    >
+                      {this.locale("labels.updateProfile")}
+                    </Button>
+
+                    <Button
+                      variant="ghost"
+                      isFullWidth={false}
+                      icon={
+                        <KeyIcon className="plc-w-5 plc-h-5 plc-mr-1" />
+                      }
+                      className="plc-text-sm plc-text-gray-500 hover:plc-text-primary-700"
+                      onClick={this.displayChangePassword}
+                    >
+                      {this.locale("labels.changePassword")}
+                    </Button>
+                  </div>
+                }
+              />
+
               <Accordion.item
                 name={SUB_MENUS.PAYMENT_CARDS}
                 icon={<PaymentCardIcon />}
                 title={this.locale("labels.paymentSource")}
                 content={
                   <div className="plc-flex plc-items-center plc-justify-between plc-max-w-xs plc-p-4 plc-mb-2 plc-text-white plc-bg-gray-800 plc-rounded-md plc-h-14">
-                    {getPaymentCardIcon(
-                      this.user.source?.properties?.brand
+                    {this.user.source ? (
+                      <>
+                        {getPaymentCardIcon(
+                          this.user.source?.properties?.brand
+                        )}
+                        <span className="plc-ml-1 plc-text-lg plc-tracking-widest">
+                          •••• {this.user.source?.properties?.last4}
+                        </span>
+                        <Button
+                          variant="icon"
+                          className="plc-text-white"
+                          icon={<EditIcon />}
+                          onClick={this.displaySourceCreate}
+                          disabled={this.state.disableSubmit}
+                        ></Button>
+                      </>
+                    ) : (
+                      <>
+                        <span>{this.locale("messages.noCard")}</span>
+                        <Button
+                          variant="icon"
+                          className="plc-text-white"
+                          icon={
+                            <PlusIcon className="plc-w-6 plc-h-6" />
+                          }
+                          onClick={this.displaySourceCreate}
+                          disabled={this.state.disableSubmit}
+                        />
+                      </>
                     )}
-                    <span className="plc-ml-1 plc-text-lg plc-tracking-widest">
-                      •••• {this.user.source?.properties?.last4}
-                    </span>
-                    <Button
-                      variant="icon"
-                      className="plc-text-white"
-                      icon={<EditIcon />}
-                      onClick={this.displaySourceCreate}
-                      disabled={this.state.disableSubmit}
-                    ></Button>
                   </div>
                 }
               />
@@ -697,6 +752,12 @@ class Dashboard extends Component {
                 title={this.locale("labels.addresses")}
                 content={this.renderAddresses()}
               />
+
+              <header className="plc-pl-4 plc-my-2 sm:plc-pl-8">
+                <p className="plc-text-xs plc-font-bold plc-tracking-widest plc-text-gray-500 plc-uppercase">
+                  {this.locale("labels.purchases")}
+                </p>
+              </header>
 
               <Accordion.item
                 name={SUB_MENUS.SUBSCRIPTIONS}

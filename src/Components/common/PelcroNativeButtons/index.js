@@ -1,4 +1,5 @@
 import { saveToMetadataButton } from "./saveToMetadata";
+import { userHasAddress } from "../../utils/utils";
 
 export const init = (app) => {
   saveToMetadataButton.init(app);
@@ -193,9 +194,13 @@ export const init = (app) => {
           ]);
 
           if (window.Pelcro.user.isAuthenticated()) {
-            app.setView("address");
+            if (userHasAddress()) {
+              app.setView("address-select");
+            } else {
+              app.setView("address");
+            }
           } else {
-            app.setView("login");
+            app.setView("register");
           }
         }
       );

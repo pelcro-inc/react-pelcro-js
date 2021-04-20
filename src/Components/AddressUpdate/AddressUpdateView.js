@@ -16,18 +16,22 @@ export const AddressUpdateView = (props) => {
 
   return (
     <div id="pelcro-address-update-view">
-      <div className="plc-mb-2 plc-text-xl plc-font-semibold plc-text-center plc-text-gray-700 pelcro-title-wrapper">
+      <div className="plc-mb-6 plc-text-2xl plc-font-semibold plc-text-center plc-text-gray-700 pelcro-title-wrapper">
         <h4>{t("title")}</h4>
       </div>
-      <div className="plc-mt-2 pelcro-form">
+      <form
+        action="javascript:void(0);"
+        className="plc-mt-2 pelcro-form"
+      >
         <AddressUpdateContainer {...props}>
           <AlertWithContext />
-          <div className="plc-flex plc-space-x-3 plc-items-end">
+          <div className="plc-flex plc-space-x-3 plc-items-start">
             <AddressUpdateFirstName
               id="pelcro-input-first-name"
               errorId="pelcro-input-first-name-error"
               label={t("labels.firstName")}
               required
+              autoFocus={true}
             />
             <AddressUpdateLastName
               id="pelcro-input-last-name"
@@ -36,7 +40,7 @@ export const AddressUpdateView = (props) => {
               required
             />
           </div>
-          <div className="plc-flex plc-items-end">
+          <div className="plc-flex plc-items-start">
             <AddressUpdateLine1
               id="pelcro-input-line1"
               errorId="pelcro-input-line1-error"
@@ -44,7 +48,7 @@ export const AddressUpdateView = (props) => {
               required
             />
           </div>
-          <div className="plc-flex plc-space-x-3 plc-items-end">
+          <div className="plc-flex plc-space-x-3 plc-items-start">
             <AddressUpdatePostalCode
               id="pelcro-input-postal_code"
               errorId="pelcro-input-postal-code-error"
@@ -58,7 +62,7 @@ export const AddressUpdateView = (props) => {
               required
             />
           </div>
-          <div className="plc-flex plc-space-x-3 plc-items-end">
+          <div className="plc-flex plc-space-x-3 plc-items-start">
             <AddressUpdateCountrySelect
               id="pelcro-input-country"
               errorId="pelcro-input-country-error"
@@ -74,12 +78,13 @@ export const AddressUpdateView = (props) => {
           </div>
           <p className="pelcro-footnote">* {t("labels.required")}</p>
           <AddressUpdateSubmit
+            role="submit"
             className="plc-mt-2"
             name={t("buttons.submit")}
             id="pelcro-submit"
           />
         </AddressUpdateContainer>
-      </div>
+      </form>
     </div>
   );
 };

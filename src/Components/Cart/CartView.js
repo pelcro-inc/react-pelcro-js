@@ -16,7 +16,7 @@ export const CartView = (props) => {
 
   return (
     <div id="pelcro-cart-view">
-      <div className="plc-mb-2 plc-text-xl plc-font-semibold plc-text-center plc-text-gray-700 pelcro-title-wrapper">
+      <div className="plc-mb-6 plc-text-2xl plc-font-semibold plc-text-center plc-text-gray-700 pelcro-title-wrapper">
         <h4>{t("title")}</h4>
       </div>
       {isEmpty ? (
@@ -24,7 +24,10 @@ export const CartView = (props) => {
           {t("empty")}
         </p>
       ) : (
-        <div className="plc-mt-2 pelcro-form">
+        <form
+          action="javascript:void(0);"
+          className="plc-mt-2 pelcro-form"
+        >
           <CartContainer {...props}>
             <div className="pelcro-cart-wrapper">
               {props.products.map((product) => {
@@ -84,12 +87,14 @@ export const CartView = (props) => {
               </p>
             </div>
             <CartSubmit
+              role="submit"
               className="plc-mt-2"
               id="pelcro-submit"
               name={t("confirm")}
+              autoFocus={true}
             />
           </CartContainer>
-        </div>
+        </form>
       )}
     </div>
   );

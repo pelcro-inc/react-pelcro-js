@@ -30,6 +30,7 @@ export function PaymentMethodView({
   giftRecipient = null,
   plan,
   product,
+  selectedAddressId,
   onSuccess,
   onGiftRenewalSuccess,
   onFailure,
@@ -48,13 +49,17 @@ export function PaymentMethodView({
             className="plc-ml-1"
             target="_blank"
             href="https://www.stripe.com/us/customers"
+            isButton={false}
           >
             Stripe
           </Link>
         </span>
       </div>
 
-      <div className="plc-w-full plc-mt-2 plc-font-semibold plc-text-gray-600 pelcro-form">
+      <form
+        action="javascript:void(0);"
+        className="plc-w-full plc-mt-2 plc-font-semibold plc-text-gray-600 pelcro-form"
+      >
         <PaymentMethodContainer
           type={type}
           successMessage={successMessage}
@@ -64,6 +69,7 @@ export function PaymentMethodView({
           giftRecipient={giftRecipient}
           plan={plan}
           product={product}
+          selectedAddressId={selectedAddressId}
           couponCode={couponCode}
           onDisplay={onDisplay}
           onSuccess={onSuccess}
@@ -74,7 +80,7 @@ export function PaymentMethodView({
           <AlertWithContext className="plc-mb-2" />
           {/* Payment form */}
           <div>
-            <PelcroCardNumber />
+            <PelcroCardNumber autoFocus={true} />
             <img
               alt="credit_cards"
               className="plc-h-4 plc-mt-2"
@@ -108,13 +114,14 @@ export function PaymentMethodView({
                   <PaypalSubscribeButton
                     product={product}
                     plan={plan}
+                    selectedAddressId={selectedAddressId}
                   />
                 </>
               )}
             </div>
           </div>
         </PaymentMethodContainer>
-      </div>
+      </form>
     </div>
   );
 }

@@ -6,8 +6,7 @@ import Authorship from "../common/Authorship";
 import {
   Modal,
   ModalBody,
-  ModalFooter,
-  ModalHeader
+  ModalFooter
 } from "../../SubComponents/Modal";
 import { Alert } from "../../SubComponents/Alert";
 import { Button } from "../../SubComponents/Button";
@@ -32,8 +31,6 @@ class DefaultNewsLetter extends Component {
 
     this.product =
       this.props.product || window.Pelcro.paywall.getProduct();
-
-    this.site = window.Pelcro.site.read();
     this.closeButton = window.Pelcro.paywall.displayCloseButton();
 
     const { t } = this.props;
@@ -129,34 +126,36 @@ class DefaultNewsLetter extends Component {
     const { t } = this.props;
 
     return (
-      <Modal id="pelcro-newsletter-modal">
-        <ModalHeader
-          hideCloseButton={!this.closeButton}
-          onClose={this.props.onClose}
-          logo={this.site.logo}
-          title={this.site.name}
-        />
+      <Modal
+        hideCloseButton={!this.closeButton}
+        onClose={this.props.onClose}
+        id="pelcro-newsletter-modal"
+      >
         <ModalBody>
           <div id="pelcro-newsletter-view">
-            <div className="plc-mb-2 plc-text-center plc-text-gray-700 pelcro-title-wrapper">
-              <h4 className="plc-text-xl plc-font-semibold">
+            <div className="plc-mb-6 plc-text-center plc-text-gray-700 pelcro-title-wrapper">
+              <h4 className="plc-text-2xl plc-font-semibold">
                 {this.title}
               </h4>
               <p>{this.subtitle}</p>
             </div>
-            <div className="plc-mt-2 pelcro-form">
+            <form
+              action="javascript:void(0);"
+              className="plc-mt-2 pelcro-form"
+            >
               {this.state.alert.content && (
                 <Alert type={this.state.alert.type}>
                   {this.state.alert.content}
                 </Alert>
               )}
-              <div className="plc-flex plc-items-end">
+              <div className="plc-flex plc-items-start">
                 <Input
                   value={this.state.first_name}
                   onChange={this.onFirstNameChange}
                   autoComplete="first-name"
                   id="pelcro-input-first-name"
                   label={t("labels.firstName")}
+                  autoFocus={true}
                 />
                 <Input
                   wrapperClassName="plc-ml-3"
@@ -187,6 +186,7 @@ class DefaultNewsLetter extends Component {
                 * {t("labels.required")}
               </p>
               <Button
+                role="submit"
                 className="plc-mt-2"
                 id="pelcro-submit"
                 isFullWidth={true}
@@ -196,7 +196,7 @@ class DefaultNewsLetter extends Component {
               >
                 {t("labels.submit")}
               </Button>
-            </div>
+            </form>
           </div>
         </ModalBody>
         <ModalFooter>

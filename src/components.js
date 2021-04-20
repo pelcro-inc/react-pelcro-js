@@ -20,6 +20,7 @@ export { RegisterButton } from "./Components/Register/RegisterButton";
 export { RegisterJobTitle } from "./Components/Register/RegisterJobTitle";
 export { RegisterCompany } from "./Components/Register/RegisterCompany";
 export { PelcroContainer } from "./Components/PelcroContainer";
+export { AlertWithContext as Alert } from "./SubComponents/AlertWithContext";
 export { LoginModal } from "./Components/Login/LoginModal";
 export { RegisterModal } from "./Components/Register/RegisterModal";
 export { SelectModalWithTrans as SelectModal } from "./Components/Select/SelectModal";
@@ -139,6 +140,12 @@ export { GiftRedeemContainer } from "./Components/GiftRedeem/GiftRedeemContainer
 export { GiftRedeemModal } from "./Components/GiftRedeem/GiftRedeemModal";
 export { GiftRedeemView } from "./Components/GiftRedeem/GiftRedeemView";
 export { GiftRedeemSubmitButton } from "./Components/GiftRedeem/GiftRedeemSubmitButton";
+
+export { AddressSelectContainer } from "./Components/AddressSelect/AddressSelectContainer";
+export { AddressSelectModal } from "./Components/AddressSelect/AddressSelectModal";
+export { AddressSelectSubmit } from "./Components/AddressSelect/AddressSelectSubmit";
+export { AddressSelectList } from "./Components/AddressSelect/AddressSelectList";
+export { AddressSelectView } from "./Components/AddressSelect/AddressSelectView";
 
 export { DashboardWithTrans as Dashboard } from "./Components/dashboard/Dashboard";
 export { DashboardOpenButton } from "./Components/dashboard/DashboardOpenButton";

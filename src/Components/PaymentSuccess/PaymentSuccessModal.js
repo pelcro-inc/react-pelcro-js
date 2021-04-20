@@ -17,15 +17,12 @@ export function PaymentSuccessModal({ onDisplay, onClose, product }) {
   });
 
   return (
-    <Modal
-      id="pelcro-payment-success-modal"
-      className="plc-border-t-8 plc-border-green-500 "
-    >
+    <Modal id="pelcro-payment-success-modal">
       <ModalBody>
         <PaymentSuccessView onClose={onClose} product={product} />
       </ModalBody>
       <ModalFooter>
-        <Authorship></Authorship>
+        <Authorship />
       </ModalFooter>
     </Modal>
   );

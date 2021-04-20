@@ -3,8 +3,7 @@ import { useTranslation } from "react-i18next";
 import {
   Modal,
   ModalBody,
-  ModalFooter,
-  ModalHeader
+  ModalFooter
 } from "../../SubComponents/Modal";
 import Authorship from "../common/Authorship";
 import { GiftCreateView } from "./GiftCreateView";
@@ -16,7 +15,6 @@ export const GiftCreateModal = ({
   onClose,
   ...otherProps
 }) => {
-  const site = window.Pelcro.site.read();
   const { t } = useTranslation("register");
 
   useEffect(() => {
@@ -26,13 +24,11 @@ export const GiftCreateModal = ({
   }, []);
 
   return (
-    <Modal id="pelcro-gift-create-modal">
-      <ModalHeader
-        hideCloseButton={!window.Pelcro.paywall.displayCloseButton()}
-        onClose={onClose}
-        logo={site.logo}
-        title={site.name}
-      />
+    <Modal
+      hideCloseButton={!window.Pelcro.paywall.displayCloseButton()}
+      onClose={onClose}
+      id="pelcro-gift-create-modal"
+    >
       <ModalBody>
         <GiftCreateView {...otherProps} />
       </ModalBody>

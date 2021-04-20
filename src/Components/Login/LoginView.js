@@ -12,10 +12,13 @@ export function LoginView(props) {
 
   return (
     <div id="pelcro-login-view">
-      <div className="plc-mb-2 plc-text-xl plc-font-semibold plc-text-center plc-text-gray-700 pelcro-title-wrapper">
+      <div className="plc-mb-6 plc-text-2xl plc-font-semibold plc-text-center plc-text-gray-700 pelcro-title-wrapper">
         <h4>{t("messages.loginTo")}</h4>
       </div>
-      <div className="plc-mt-2 pelcro-form">
+      <form
+        action="javascript:void(0);"
+        className="plc-mt-2 pelcro-form"
+      >
         <LoginContainer {...props}>
           <AlertWithContext />
           <LoginEmail
@@ -23,6 +26,7 @@ export function LoginView(props) {
             errorId="pelcro-input-email-error"
             required
             label={t("labels.email")}
+            autoFocus={true}
           />
           <LoginPassword
             id="pelcro-input-password"
@@ -31,19 +35,20 @@ export function LoginView(props) {
             label={t("labels.password")}
           />
           <Link
-            className="plc-flex plc-justify-end"
+            className="plc-flex plc-justify-end plc-text-sm"
             id="pelcro-link-forget-password"
             onClick={props.onForgotPassword}
           >
             {t("messages.forgotPassword")}
           </Link>
           <LoginButton
+            role="submit"
             className="plc-mt-2"
             name={t("labels.login")}
             id="pelcro-submit"
           />
         </LoginContainer>
-      </div>
+      </form>
     </div>
   );
 }

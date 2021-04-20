@@ -1,21 +1,32 @@
 import React from "react";
 import Authorship from "../common/Authorship";
-import { AddressCreateView } from "./AddressCreateView";
+import { AddressSelectView } from "./AddressSelectView";
 import {
   Modal,
   ModalBody,
   ModalFooter
 } from "../../SubComponents/Modal";
 
-export const AddressCreateModal = ({ onClose, ...otherProps }) => {
+export const AddressSelectModal = ({
+  setView,
+  onClose,
+  ...otherProps
+}) => {
+  const onAddNewAddress = () => {
+    setView("address");
+  };
+
   return (
     <Modal
       hideCloseButton={!window.Pelcro.paywall.displayCloseButton()}
       onClose={onClose}
-      id="pelcro-address-create-modal"
+      id="pelcro-address-select-modal"
     >
       <ModalBody>
-        <AddressCreateView {...otherProps} />
+        <AddressSelectView
+          onAddNewAddress={onAddNewAddress}
+          {...otherProps}
+        />
       </ModalBody>
       <ModalFooter>
         <Authorship />

@@ -21,15 +21,18 @@
     "renew": "Renew",
     "support": "Support",
     "account": "Account",
+    "purchases": "Purchases",
     "subscriptions": "Subscriptions",
     "updatePaymentSource": "Update",
     "profile": "Profile",
     "updateProfile": "Edit profile",
+    "changePassword": "Change password",
     "edit": "Edit",
     "gifts": "Gifts",
     "redeemGift": "Redeem gift",
     "address": "Address",
     "addresses": "Addresses",
+    "myProfile": "My profile",
     "paymentSource": "Payment cards",
     "actions": "Actions",
     "expiresOn": "Ends",
@@ -41,6 +44,6 @@
     "addGift": "New Gift"
   },
   "messages": {
-    "yourDashboard": "Your Pelcro Dashboard"
+    "noCard": "You don't have a card"
   }
 }

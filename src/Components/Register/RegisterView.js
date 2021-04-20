@@ -15,11 +15,14 @@ export function RegisterView(props) {
 
   return (
     <div id="pelcro-register-view">
-      <div className="plc-mb-2 plc-text-center plc-text-gray-700 pelcro-title-wrapper">
-        <h4 className="plc-text-xl plc-font-semibold">{title}</h4>
+      <div className="plc-mb-6 plc-text-center plc-text-gray-700 pelcro-title-wrapper">
+        <h4 className="plc-text-2xl plc-font-semibold">{title}</h4>
         <p>{subtitle}</p>
       </div>
-      <div className="plc-mt-2 pelcro-form">
+      <form
+        action="javascript:void(0);"
+        className="plc-mt-2 pelcro-form"
+      >
         <RegisterContainer {...props}>
           <AlertWithContext />
           <RegisterEmail
@@ -27,6 +30,7 @@ export function RegisterView(props) {
             errorId="pelcro-input-email-error"
             label={t("labels.email")}
             required
+            autoFocus={true}
           />
           <RegisterPassword
             id="pelcro-input-password"
@@ -35,12 +39,13 @@ export function RegisterView(props) {
             required
           />
           <RegisterButton
+            role="submit"
             className="plc-mt-2"
             id="pelcro-submit"
             name={t("messages.createAccount")}
           />
         </RegisterContainer>
-      </div>
+      </form>
     </div>
   );
 }

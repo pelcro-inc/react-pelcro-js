@@ -3,29 +3,26 @@ import { useTranslation } from "react-i18next";
 import {
   Modal,
   ModalBody,
-  ModalFooter,
-  ModalHeader
+  ModalFooter
 } from "../../SubComponents/Modal";
 import Authorship from "../common/Authorship";
 import { GiftRedeemView } from "./GiftRedeemView";
 import { Link } from "../../SubComponents/Link";
+import { userHasAddress } from "../../utils/utils";
 
 export const GiftRedeemModal = ({
   onClose,
   setView,
   ...otherProps
 }) => {
-  const site = window.Pelcro.site.read();
   const { t } = useTranslation("register");
 
   return (
-    <Modal id="pelcro-gift-redeem-modal">
-      <ModalHeader
-        hideCloseButton={!window.Pelcro.paywall.displayCloseButton()}
-        onClose={onClose}
-        logo={site.logo}
-        title={site.name}
-      />
+    <Modal
+      hideCloseButton={!window.Pelcro.paywall.displayCloseButton()}
+      onClose={onClose}
+      id="pelcro-gift-redeem-modal"
+    >
       <ModalBody>
         <GiftRedeemView {...otherProps} />
       </ModalBody>
@@ -34,7 +31,12 @@ export const GiftRedeemModal = ({
           {t("redeem.footer.click")}{" "}
           <Link
             id="pelcro-link-redeem"
-            onClick={() => setView("address")}
+            onClick={() => {
+              if (userHasAddress()) {
+                return setView("address-select");
+              }
+              return setView("address");
+            }}
           >
             {t("redeem.footer.here")}
           </Link>{" "}

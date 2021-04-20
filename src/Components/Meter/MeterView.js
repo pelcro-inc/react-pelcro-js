@@ -23,36 +23,27 @@ export const MeterView = (props) => {
   };
 
   return (
-    <div className="plc-flex plc-items-center plc-justify-between">
-      <div>
-        <h4 className="plc-mb-2 plc-text-xl plc-font-semibold plc-text-gray-600">
-          {title}
-        </h4>
-        <p className="plc-text-sm plc-text-gray-600">
-          {subtitle}{" "}
-          <Link className="plc-ml-1" onClick={displaySelectView}>
-            {t("messages.subscribeNow")}
-          </Link>
-          {!window.Pelcro.user.isAuthenticated() && (
-            <>
-              <br />
-              <span>
-                {t("messages.alreadyHaveAccount") + " "}
-                <Link className="plc-ml-1" onClick={displayLoginView}>
-                  {t("messages.loginHere")}
-                </Link>
-              </span>
-            </>
-          )}
-        </p>
-      </div>
-      {site.logo.url && (
-        <img
-          alt="avatar"
-          className="plc-w-12 plc-h-12 plc-ml-4 plc-mr-2"
-          src={site.logo.url}
-        ></img>
-      )}
+    <div>
+      <h4 className="plc-mb-2 plc-text-2xl plc-font-semibold plc-text-gray-600">
+        {title}
+      </h4>
+      <p className="plc-text-sm plc-text-gray-600">
+        {subtitle}{" "}
+        <Link className="plc-ml-1" onClick={displaySelectView}>
+          {t("messages.subscribeNow")}
+        </Link>
+        {!window.Pelcro.user.isAuthenticated() && (
+          <>
+            <br />
+            <span>
+              {t("messages.alreadyHaveAccount") + " "}
+              <Link className="plc-ml-1" onClick={displayLoginView}>
+                {t("messages.loginHere")}
+              </Link>
+            </span>
+          </>
+        )}
+      </p>
     </div>
   );
 };

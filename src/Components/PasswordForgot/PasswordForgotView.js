@@ -9,12 +9,15 @@ export const PasswordForgotView = (props) => {
   const { t } = useTranslation("passwordForgot");
   return (
     <div id="pelcro-password-forgot-view">
-      <div className="plc-mb-2 plc-text-center plc-text-gray-700 pelcro-title-wrapper">
-        <h4 className="plc-text-xl plc-font-semibold">
+      <div className="plc-mb-6 plc-text-center plc-text-gray-700 pelcro-title-wrapper">
+        <h4 className="plc-text-2xl plc-font-semibold">
           {t("title")}
         </h4>
       </div>
-      <div className="plc-mt-2 pelcro-form">
+      <form
+        action="javascript:void(0);"
+        className="plc-mt-2 pelcro-form"
+      >
         <PasswordForgotContainer {...props}>
           <AlertWithContext />
           <PasswordForgotEmail
@@ -23,12 +26,13 @@ export const PasswordForgotView = (props) => {
             label={t("email")}
           />
           <PasswordForgotButton
+            role="submit"
             className="plc-mt-2"
             name={t("submit")}
             id="pelcro-submit"
           />
         </PasswordForgotContainer>
-      </div>
+      </form>
     </div>
   );
 };

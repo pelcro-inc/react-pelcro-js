@@ -13,24 +13,28 @@ export const UserUpdateView = (props) => {
 
   return (
     <div id="pelcro-user-update-view">
-      <div className="plc-mb-2 plc-text-center plc-text-gray-700 pelcro-title-wrapper">
-        <h4 className="plc-text-xl plc-font-semibold">
+      <div className="plc-mb-6 plc-text-center plc-text-gray-700 pelcro-title-wrapper">
+        <h4 className="plc-text-2xl plc-font-semibold">
           {t("labels.title")}
         </h4>
         <p>{t("labels.subtitle")}</p>
       </div>
-      <div className="plc-mt-2 pelcro-form">
+      <form
+        action="javascript:void(0);"
+        className="plc-mt-2 pelcro-form"
+      >
         <UserUpdateContainer {...props}>
           <AlertWithContext />
-          <div className="plc-flex plc-items-end">
+          <div className="plc-flex plc-items-start">
             <UserUpdateEmail label={t("labels.email")} />
           </div>
-          <div className="plc-flex plc-items-end">
+          <div className="plc-flex plc-items-start">
             <UserUpdateFirstName
               autoComplete="first-name"
               id="pelcro-input-first-name"
               errorId="pelcro-input-first-name-error"
               label={t("labels.firstName")}
+              autoFocus={true}
             />
             <UserUpdateLastName
               wrapperClassName="plc-ml-3"
@@ -40,7 +44,7 @@ export const UserUpdateView = (props) => {
               label={t("labels.lastName")}
             />
           </div>
-          <div className="plc-flex plc-items-end">
+          <div className="plc-flex plc-items-start">
             <UserUpdatePhone
               id="pelcro-input-phone"
               errorId="pelcro-input-phone-error"
@@ -48,12 +52,13 @@ export const UserUpdateView = (props) => {
             />
           </div>
           <UserUpdateButton
+            role="submit"
             className="plc-mt-2"
             name={t("labels.submit")}
             id="pelcro-submit"
           />
         </UserUpdateContainer>
-      </div>
+      </form>
     </div>
   );
 };

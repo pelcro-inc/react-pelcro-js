@@ -5,13 +5,13 @@ import { withTranslation } from "react-i18next";
 import {
   Modal,
   ModalBody,
-  ModalFooter,
-  ModalHeader
+  ModalFooter
 } from "../../SubComponents/Modal";
 import { Link } from "../../SubComponents/Link";
 import { Button } from "../../SubComponents/Button";
 import { Checkbox } from "../../SubComponents/Checkbox";
 import { Radio } from "../../SubComponents/Radio";
+import { userHasAddress } from "../../utils/utils";
 
 class SelectModal extends Component {
   constructor(props) {
@@ -29,7 +29,6 @@ class SelectModal extends Component {
     this.product =
       this.props.product || window.Pelcro.paywall.getProduct();
     this.locale = this.props.t;
-    this.site = window.Pelcro.site.read();
     this.closeButton = window.Pelcro.paywall.displayCloseButton();
   }
 
@@ -106,11 +105,11 @@ class SelectModal extends Component {
       ? this.goBack
       : this.selectProduct;
 
-    return productsToShow.map((product) => {
+    return productsToShow.map((product, i) => {
       return (
         <div
           key={product.id}
-          className="plc-flex plc-space-x-3 plc-p-2 plc-mt-4 plc-bg-gray-200 plc-rounded pelcro-select-product-wrapper"
+          className="plc-flex plc-items-start plc-space-x-3 plc-p-2 plc-mt-4 plc-border plc-border-gray-500 plc-border-solid plc-rounded pelcro-select-product-wrapper"
         >
           {product.image && (
             <img
@@ -146,6 +145,7 @@ class SelectModal extends Component {
                 data-key={product.id}
                 id="pelcro-select-product-back-button"
                 className="plc-ml-auto plc-text-xs"
+                {...(i === 0 && { autoFocus: true })}
               >
                 {productButtonLabel}
               </Button>
@@ -162,7 +162,7 @@ class SelectModal extends Component {
       return (
         <div
           key={plan.id}
-          className="plc-p-2 plc-mx-3 plc-mt-2 plc-bg-gray-100 plc-rounded pelcro-select-plan-wrapper"
+          className="plc-p-2 plc-mx-3 plc-mt-2 plc-border plc-border-gray-400 plc-border-solid plc-rounded pelcro-select-plan-wrapper"
         >
           <Radio
             inputClassName="plc-self-start pelcro-select-plan-radio"
@@ -239,6 +239,9 @@ class SelectModal extends Component {
     }
 
     if (product.address_required) {
+      if (userHasAddress()) {
+        return setView("address-select");
+      }
       return setView("address");
     }
 
@@ -267,17 +270,15 @@ class SelectModal extends Component {
     }
 
     return (
-      <Modal id="pelcro-selection-modal">
-        <ModalHeader
-          hideCloseButton={!this.closeButton}
-          onClose={this.props.onClose}
-          logo={this.site.logo}
-          title={this.site.name}
-        />
+      <Modal
+        hideCloseButton={!this.closeButton}
+        onClose={this.props.onClose}
+        id="pelcro-selection-modal"
+      >
         <ModalBody>
           <div id="pelcro-selection-view">
-            <div className="plc-mb-2 plc-text-center plc-text-gray-700 pelcro-title-wrapper">
-              <h4 className="plc-text-xl plc-font-semibold">
+            <div className="plc-mb-6 plc-text-center plc-text-gray-700 pelcro-title-wrapper">
+              <h4 className="plc-text-2xl plc-font-semibold">
                 {(this.product &&
                   this.product.paywall.select_title) ||
                   window.Pelcro.product.list()[0]?.paywall
