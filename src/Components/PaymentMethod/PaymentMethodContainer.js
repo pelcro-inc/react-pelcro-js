@@ -545,7 +545,7 @@ const PaymentMethodContainerWithoutStripe = ({
       redirect: {
         return_url: `${
           window.Pelcro.environment.domain
-        }/webhook/stripe/callback/3dsecure?token=${
+        }/webhook/stripe/callback/3dsecure?auth_token=${
           window.Pelcro.user.read().auth_token
         }`
       }
