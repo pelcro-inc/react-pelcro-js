@@ -1,3 +1,5 @@
+import ReactGA from "react-ga";
+
 class SaveToMetadataButtonClass {
   app = null;
 
@@ -138,6 +140,11 @@ class SaveToMetadataButtonClass {
         },
         (err, resp) => {
           this.#markButtonAsSaved(button);
+          ReactGA?.event({
+            category: "ACTIONS",
+            action: "Save/Follow",
+            label: buttonMetadata?.title
+          });
         }
       );
     }
@@ -167,6 +174,11 @@ class SaveToMetadataButtonClass {
         },
         (err, resp) => {
           this.#unmarkSavedButton(button);
+          ReactGA?.event({
+            category: "ACTIONS",
+            action: "Unsave/Unfollow",
+            label: title
+          });
         }
       );
     }
