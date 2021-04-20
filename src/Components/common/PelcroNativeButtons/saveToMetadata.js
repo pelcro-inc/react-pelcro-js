@@ -173,7 +173,7 @@ class SaveToMetadataButtonClass {
   };
 
   /**
-   * Remove button content from user metadata
+   * Set click handler on all save buttons
    * @param {function():void} callback
    */
   #onClick = (callback) => {
