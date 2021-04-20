@@ -97,6 +97,9 @@ i18n
     // debug: true,
     interpolation: {
       escapeValue: false // react already safes from xss
+    },
+    react: {
+      bindI18nStore: "added" //the key is 'bindI18nStore' not 'bindStore', the types are wrong
     }
   });
 

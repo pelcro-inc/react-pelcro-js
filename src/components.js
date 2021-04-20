@@ -150,6 +150,8 @@ export { AddressSelectView } from "./Components/AddressSelect/AddressSelectView"
 export { DashboardWithTrans as Dashboard } from "./Components/dashboard/Dashboard";
 export { DashboardOpenButton } from "./Components/dashboard/DashboardOpenButton";
 
+export { default as i18n } from "./i18n";
+
 export {
   init as initButtons,
   authenticatedButtons,
