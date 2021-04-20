@@ -6,6 +6,9 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Unreleased]
 
+### Added
+
+- Add ecommerce orders section in the user's dashboard.
 - Authorship logo in modals footers now links to Pelcro's homepage.
 
 ## [Released]
