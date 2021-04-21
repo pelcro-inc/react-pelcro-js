@@ -44,6 +44,7 @@
     "addGift": "New Gift",
     "orders": {
       "label": "Orders",
+      "noOrders": "You have not placed any orders",
       "total": "Total",
       "date": "Date",
       "details": "Details",

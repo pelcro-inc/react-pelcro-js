@@ -45,6 +45,7 @@
     "addGift": "ajouter un cadeau",
     "orders": {
       "label": "Commandes",
+      "noOrders": "Vous n'avez passé aucune commande",
       "total": "Total",
       "date": "Date",
       "details": "Des détails",

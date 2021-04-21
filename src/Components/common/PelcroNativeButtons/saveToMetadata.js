@@ -56,13 +56,21 @@ class SaveToMetadataButtonClass {
   };
 
   /**
+   * Remove loading state from the button
+   * @param {HTMLButtonElement} button
+   */
+  #removeLoadingState = (button) => {
+    button.classList.remove("pelcro-is-loading");
+    button.disabled = false;
+  };
+
+  /**
    * Inject saved state to the button
    * @param {HTMLButtonElement} button
    */
   #markButtonAsSaved = (button) => {
     button.classList.add("pelcro-is-active");
-    button.classList.remove("pelcro-is-loading");
-    button.disabled = false;
+    this.#removeLoadingState(button);
   };
 
   /**
@@ -71,8 +79,7 @@ class SaveToMetadataButtonClass {
    */
   #unmarkSavedButton = (button) => {
     button.classList.remove("pelcro-is-active");
-    button.classList.remove("pelcro-is-loading");
-    button.disabled = false;
+    this.#removeLoadingState(button);
   };
 
   /**
@@ -139,6 +146,10 @@ class SaveToMetadataButtonClass {
           auth_token: window.Pelcro.user.read().auth_token
         },
         (err, resp) => {
+          if (err) {
+            return this.#removeLoadingState(button);
+          }
+
           this.#markButtonAsSaved(button);
           ReactGA?.event({
             category: "ACTIONS",
@@ -173,6 +184,10 @@ class SaveToMetadataButtonClass {
           auth_token: window.Pelcro.user.read().auth_token
         },
         (err, resp) => {
+          if (err) {
+            return this.#removeLoadingState(button);
+          }
+
           this.#unmarkSavedButton(button);
           ReactGA?.event({
             category: "ACTIONS",
