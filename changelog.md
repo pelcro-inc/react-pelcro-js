@@ -6,13 +6,15 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Unreleased]
 
+## [Released]
+
+## [0.11.0] - 2021-04-21
+
 ### Added
 
 - Pelcro save and follow button to support loading/active states via classes.
 - Add ecommerce orders section in the user's dashboard.
 - Authorship logo in modals footers now links to Pelcro's homepage.
-
-## [Released]
 
 ## [0.10.0] - 2021-04-19
 
