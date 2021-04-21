@@ -6,6 +6,7 @@ import { Accordion } from "../Accordion";
 
 export const OrdersMenu = () => {
   const { t } = useTranslation("dashboard");
+  const userOrders = window.Pelcro.user.read().orders;
 
   return (
     <table className="plc-w-full plc-py-4 plc-table-fixed ">
@@ -23,7 +24,7 @@ export const OrdersMenu = () => {
         <tr className="plc-h-4"></tr>
       </tbody>
       <Accordion>
-        <OrderItems orders={window.Pelcro.user.read().orders} />
+        <OrderItems orders={userOrders} />
       </Accordion>
       <tbody>
         <tr className="plc-h-4"></tr>
@@ -42,7 +43,15 @@ const OrderItems = ({ orders, activeMenu, toggleActiveMenu }) => {
   const { t } = useTranslation("dashboard");
   const site = window.Pelcro.site.read();
 
-  return (
+  return !orders?.length ? (
+    <tbody>
+      <tr>
+        <td colSpan="3" className="plc-text-center plc-text-gray-500">
+          {t("labels.orders.noOrders")}
+        </td>
+      </tr>
+    </tbody>
+  ) : (
     orders?.map((order) => {
       const isActive = activeMenu === order.id;
 
@@ -150,6 +159,6 @@ const OrderItems = ({ orders, activeMenu, toggleActiveMenu }) => {
           </tbody>
         </React.Fragment>
       );
-    }) ?? null
+    })
   );
 };
