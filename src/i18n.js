@@ -38,9 +38,10 @@ import dashboard_en from "./translations/en/dashboard.json";
 import dashboard_fr from "./translations/fr/dashboard.json";
 import select_en from "./translations/en/select.json";
 import select_fr from "./translations/fr/select.json";
+import { getCanonicalLocaleFormat } from "./utils/utils";
 
 const resources = {
-  en_US: {
+  "en-US": {
     common: common_en,
     paymentCreate: paymentCreate_en,
     newsletter: newsletter_en,
@@ -61,7 +62,7 @@ const resources = {
     dashboard: dashboard_en,
     select: select_en
   },
-  fr_CA: {
+  "fr-CA": {
     common: common_fr,
     paymentCreate: paymentCreate_fr,
     newsletter: newsletter_fr,
@@ -86,16 +87,19 @@ const resources = {
 
 let locale = window.Pelcro.site.read().default_locale;
 
-if (!locale) locale = "en_US";
+if (!locale) locale = "en-US";
 
 i18n
   .use(initReactI18next) // passes i18n down to react-i18next,
   .init({
     resources,
-    lng: locale,
+    lng: getCanonicalLocaleFormat(locale),
     // debug: true,
     interpolation: {
       escapeValue: false // react already safes from xss
+    },
+    react: {
+      bindI18nStore: "added" //the key is 'bindI18nStore' not 'bindStore', the types are wrong
     }
   });
 

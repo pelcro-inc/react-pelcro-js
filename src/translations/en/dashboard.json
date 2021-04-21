@@ -41,7 +41,15 @@
     "recipient": "Recipient",
     "addAddress": "Add address",
     "addSubscription": "New Subscription",
-    "addGift": "New Gift"
+    "addGift": "New Gift",
+    "orders": {
+      "label": "Orders",
+      "total": "Total",
+      "date": "Date",
+      "details": "Details",
+      "itemsAmount": "{{count}} item",
+      "itemsAmount_plural": "{{count}} items"
+    }
   },
   "messages": {
     "noCard": "You don't have a card"
