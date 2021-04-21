@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Unreleased]
 
+### Added
+
+- Pelcro save and follow button to support loading/active states via classes.
+
 ## [Released]
 
 ## [0.9.0] - 2021-04-16
