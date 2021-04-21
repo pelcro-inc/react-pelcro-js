@@ -156,4 +156,4 @@ export {
   init as initButtons,
   authenticatedButtons,
   unauthenticatedButtons
-} from "./Components/common/Buttons";
+} from "./Components/common/PelcroNativeButtons";
