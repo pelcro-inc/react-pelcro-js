@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Unreleased]
 
+- Allow theming the UI's colors using the platform's design table 
+
 ## [Released]
 
 ## [0.11.0] - 2021-04-21
