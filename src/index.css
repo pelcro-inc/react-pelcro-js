@@ -13,6 +13,7 @@
 @import "./components/ProfilePicChange/ProfilePicChangeCropper.css";
 @import "./components/ProfilePicChange/ProfilePicChangeZoom.css";
 @import "./components/UserUpdate/UserUpdateProfilePic.css";
+@import "./Components/dashboard/DashboardMenus/OrdersMenu.css";
 
 /* tailwind */
 @tailwind components;
