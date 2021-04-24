@@ -50,6 +50,7 @@ export { UserUpdateDisplayName } from "./Components/UserUpdate/UserUpdateDisplay
 export { UserUpdateLastName } from "./Components/UserUpdate/UserUpdateLastName";
 export { UserUpdatePhone } from "./Components/UserUpdate/UserUpdatePhone";
 export { UserUpdateTextInput } from "./Components/UserUpdate/UserUpdateTextInput";
+export { UserUpdateProfilePic } from "./Components/UserUpdate/UserUpdateProfilePic";
 export { AddressCreateContainer } from "./Components/AddressCreate/AddressCreateContainer";
 export { AddressCreateModal } from "./Components/AddressCreate/AddressCreateModal";
 export { AddressCreateSubmit } from "./Components/AddressCreate/AddressCreateSubmit";

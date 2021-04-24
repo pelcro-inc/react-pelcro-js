@@ -7,7 +7,11 @@ import {
   ModalFooter
 } from "../../SubComponents/Modal";
 
-export function UserUpdateModal({ onClose, ...otherProps }) {
+export function UserUpdateModal({ onClose, setView, ...otherProps }) {
+  const onPictureClick = () => {
+    setView("profile-picture");
+  };
+
   return (
     <Modal
       hideCloseButton={!window.Pelcro.paywall.displayCloseButton()}
@@ -15,7 +19,10 @@ export function UserUpdateModal({ onClose, ...otherProps }) {
       id="pelcro-user-update-modal"
     >
       <ModalBody>
-        <UserUpdateView {...otherProps} />
+        <UserUpdateView
+          onPictureClick={onPictureClick}
+          {...otherProps}
+        />
       </ModalBody>
       <ModalFooter>
         <Authorship />
