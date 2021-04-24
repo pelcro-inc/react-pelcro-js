@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Unreleased]
 
+- Added profile pictures: users now can select and crop an image and set it as their profile picture
+
 ## [Released]
 
 ## [0.11.0] - 2021-04-21
