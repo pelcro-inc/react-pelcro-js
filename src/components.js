@@ -150,6 +150,14 @@ export { AddressSelectView } from "./Components/AddressSelect/AddressSelectView"
 export { DashboardWithTrans as Dashboard } from "./Components/dashboard/Dashboard";
 export { DashboardOpenButton } from "./Components/dashboard/DashboardOpenButton";
 
+export { ProfilePicChangeButton } from "./Components/ProfilePicChange/ProfilePicChangeButton";
+export { ProfilePicChangeContainer } from "./Components/ProfilePicChange/ProfilePicChangeContainer";
+export { ProfilePicChangeCropper } from "./Components/ProfilePicChange/ProfilePicChangeCropper";
+export { ProfilePicChangeZoom } from "./Components/ProfilePicChange/ProfilePicChangeZoom";
+export { ProfilePicChangeSelectButton } from "./Components/ProfilePicChange/ProfilePicChangeSelectButton";
+export { ProfilePicChangeView } from "./Components/ProfilePicChange/ProfilePicChangeView";
+export { ProfilePicChangeModal } from "./Components/ProfilePicChange/ProfilePicChangeModal";
+
 export { default as i18n } from "./i18n";
 
 export {

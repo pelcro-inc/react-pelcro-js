@@ -10,6 +10,8 @@
 
 /* components */
 @import "./Components/Shop/ShopView.css";
+@import "./components/ProfilePicChange/ProfilePicChangeCropper.css";
+@import "./components/ProfilePicChange/ProfilePicChangeZoom.css";
 
 /* tailwind */
 @tailwind components;
