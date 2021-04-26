@@ -6,10 +6,14 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Unreleased]
 
-- Added profile pictures: users now can select and crop an image and set it as their profile picture
-- Allow theming the UI's colors using the platform's design table 
-
 ## [Released]
+
+## [0.12.0] - 2021-04-26
+
+### Added
+
+- Added profile pictures: users now can select and crop an image and set it as their profile picture
+- Allow theming the UI's colors using the platform's design table
 
 ## [0.11.0] - 2021-04-21
 
