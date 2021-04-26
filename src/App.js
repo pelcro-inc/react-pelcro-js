@@ -29,7 +29,8 @@ import {
   GiftCreateModal,
   GiftRedeemModal,
   PasswordChangeModal,
-  AddressSelectModal
+  AddressSelectModal,
+  ProfilePicChangeModal
 } from "./components";
 
 class App extends Component {
@@ -892,7 +893,16 @@ class App extends Component {
           )}
 
           {this.state.view === "user-edit" && (
-            <UserUpdateModal onClose={this.resetView} />
+            <UserUpdateModal
+              onClose={this.resetView}
+              setView={this.setView}
+            />
+          )}
+          {this.state.view === "profile-picture" && (
+            <ProfilePicChangeModal
+              onClose={this.resetView}
+              onSuccess={this.resetView}
+            />
           )}
           {this.state.view === "address-edit" && (
             <AddressUpdateModal

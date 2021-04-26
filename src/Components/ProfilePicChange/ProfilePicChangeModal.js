@@ -1,5 +1,5 @@
 import React from "react";
-import { UserUpdateView } from "./UserUpdateView";
+import { ProfilePicChangeView } from "./ProfilePicChangeView";
 import Authorship from "../common/Authorship";
 import {
   Modal,
@@ -7,22 +7,15 @@ import {
   ModalFooter
 } from "../../SubComponents/Modal";
 
-export function UserUpdateModal({ onClose, setView, ...otherProps }) {
-  const onPictureClick = () => {
-    setView("profile-picture");
-  };
-
+export function ProfilePicChangeModal({ onClose, ...otherProps }) {
   return (
     <Modal
       hideCloseButton={!window.Pelcro.paywall.displayCloseButton()}
       onClose={onClose}
-      id="pelcro-user-update-modal"
+      id="pelcro-profile-picture-modal"
     >
       <ModalBody>
-        <UserUpdateView
-          onPictureClick={onPictureClick}
-          {...otherProps}
-        />
+        <ProfilePicChangeView {...otherProps} />
       </ModalBody>
       <ModalFooter>
         <Authorship />

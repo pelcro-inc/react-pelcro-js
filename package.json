@@ -87,6 +87,7 @@
   "dependencies": {
     "@headlessui/react": "^0.3.0",
     "i18next": "^19.1.0",
+    "react-easy-crop": "^3.3.2",
     "react-i18next": "^11.3.3",
     "react-stripe-elements": "^2.0.3",
     "use-reducer-with-side-effects": "^2.2.0"

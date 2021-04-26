@@ -20,6 +20,7 @@ import { ReactComponent as GiftIcon } from "../../assets/gift.svg";
 import { ReactComponent as ShoppingIcon } from "../../assets/shopping.svg";
 import { ReactComponent as PlusIcon } from "../../assets/plus.svg";
 import { ReactComponent as KeyIcon } from "../../assets/key.svg";
+import userSolidIcon from "../../assets/user-solid.svg";
 import { OrdersMenu } from "./DashboardMenus/OrdersMenu";
 
 const SUB_MENUS = {
@@ -609,6 +610,8 @@ class Dashboard extends Component {
   render() {
     const { isOpen } = this.state;
     const userHasName = this.user.first_name || this.user.last_name;
+    const profilePicture =
+      window.Pelcro.user.read().profile_photo ?? userSolidIcon;
 
     return (
       <Transition
@@ -632,37 +635,45 @@ class Dashboard extends Component {
                 onClick={this.closeDashboard}
               ></Button>
             </div>
+            <div className="plc-flex plc-items-center">
+              {profilePicture && (
+                <img
+                  className="plc-border-white plc-border-2 plc-border-solid plc-rounded-full plc-mr-2 sm:plc-ml-2 plc-w-36 plc-h-36 plc-bg-gray-300"
+                  src={profilePicture}
+                  alt="profile picture"
+                />
+              )}
+              <div className="plc-flex plc-flex-col plc-justify-between plc-flex-grow plc-px-2 sm:plc-px-6">
+                <div className="plc-flex plc-flex-col plc-flex-grow">
+                  {userHasName && (
+                    <p className="plc-m-0 plc-text-3xl plc-font-bold plc-text-white text">
+                      <span className="plc-text-lg plc-opacity-80">
+                        {this.locale("labels.hello")},
+                      </span>
+                      <br />
+                      {this.user.first_name} {this.user.last_name}
+                    </p>
+                  )}
 
-            <div className="plc-flex plc-flex-col plc-justify-between plc-flex-grow plc-px-2 sm:plc-px-6">
-              <div className="plc-flex plc-flex-col plc-flex-grow">
-                {userHasName && (
-                  <p className="plc-m-0 plc-text-3xl plc-font-bold plc-text-white text">
-                    <span className="plc-text-lg plc-opacity-80">
-                      {this.locale("labels.hello")},
-                    </span>
-                    <br />
-                    {this.user.first_name} {this.user.last_name}
+                  <p
+                    className={`plc-m-0 plc-text-sm plc-text-white ${
+                      userHasName
+                        ? "plc-text-sm"
+                        : "plc-text-lg plc-font-bold plc-mt-auto"
+                    }`}
+                  >
+                    {this.user.email}
                   </p>
-                )}
-
-                <p
-                  className={`plc-m-0 plc-text-sm plc-text-white ${
-                    userHasName
-                      ? "plc-text-sm"
-                      : "plc-text-lg plc-font-bold plc-mt-auto"
-                  }`}
+                </div>
+                <Button
+                  variant="outline"
+                  icon={<ExitIcon />}
+                  className="plc-text-xs plc-text-white plc-capitalize plc-border-white hover:plc-bg-white hover:plc-text-gray-700"
+                  onClick={this.props.logout}
                 >
-                  {this.user.email}
-                </p>
+                  {this.locale("labels.logout")}
+                </Button>
               </div>
-              <Button
-                variant="outline"
-                icon={<ExitIcon />}
-                className="plc-text-xs plc-text-white plc-capitalize plc-border-white hover:plc-bg-white hover:plc-text-gray-700"
-                onClick={this.props.logout}
-              >
-                {this.locale("labels.logout")}
-              </Button>
             </div>
           </header>
 

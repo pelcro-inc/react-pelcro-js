@@ -57,7 +57,7 @@ const getClassName = (variant, isFullWidth, disabled) => {
       isFullWidth ? "plc-w-full" : "plc-w-max"
     }`,
 
-    icon: `plc-w-8 plc-h-8 plc-p-1 plc-rounded-full focus:plc-outline-none focus:plc-ring-2 focus:plc-ring-primary-300 ${
+    icon: `plc-flex plc-justify-center plc-items-center plc-w-8 plc-h-8 plc-p-1 plc-rounded-full focus:plc-outline-none focus:plc-ring-2 focus:plc-ring-primary-300 ${
       disabled
         ? ""
         : "hover:plc-bg-primary-100 hover:plc-text-primary-600"

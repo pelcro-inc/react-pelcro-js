@@ -1,0 +1,5 @@
+@layer components {
+  .pelcro-user-update-picture:hover {
+    filter: brightness(0.8);
+  }
+}
