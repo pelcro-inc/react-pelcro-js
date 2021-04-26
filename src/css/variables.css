@@ -1,3 +1,6 @@
 :root {
+  /* default values represent Pelcro's green color */
   --plc-primary-hue: 174;
+  --plc-primary-saturation: 55%;
+  --plc-primary-lightness: 44%;
 }
