@@ -6,11 +6,14 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Unreleased]
 
+
+## [Released]
+
+## [0.12.1] - 2021-04-26
+
 ### Fixed
 
 - profile picture cropper library CSS getting purged [PRIVATE]
-
-## [Released]
 
 ## [0.12.0] - 2021-04-26
 
