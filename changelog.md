@@ -6,6 +6,9 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Unreleased]
 
+### Added
+
+- Add missing locale to pelcro's native buttons [PRIVATE]
 
 ## [Released]
 
