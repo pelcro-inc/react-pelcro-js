@@ -78,7 +78,7 @@ export function PaymentMethodView({
           onFailure={onFailure}
           order={order}
         >
-          <div className="plc-absolute plc-inset-0 plc-z-10 plc-flex-col plc-items-center plc-justify-center plc-hidden plc-text-lg plc-bg-white plc-text-primary-500 card-authentication-container">
+          <div className="plc-absolute plc-inset-0 plc-flex-col plc-items-center plc-justify-center plc-hidden plc-text-lg plc-bg-white plc-z-max plc-text-primary-500 card-authentication-container">
             {t("messages.bankRedirection")}
             <SpinnerIcon className="plc-w-10 plc-h-10 plc-mt-5 plc-animate-spin" />
           </div>
