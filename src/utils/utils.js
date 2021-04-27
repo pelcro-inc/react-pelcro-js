@@ -49,12 +49,12 @@ export const cleanObjectNullValues = (obj) =>
 
 /**
  * get an address using it's id
- * @param {string} id id of the wanted address
+ * @param {number} id id of the wanted address
  * @return {object?} address with the matching id
  */
 export const getAddressById = (id) => {
   const addresses = window.Pelcro.user.read().addresses ?? [];
-  return addresses.find((address) => address.id === id);
+  return addresses.find((address) => address.id === Number(id));
 };
 
 /**

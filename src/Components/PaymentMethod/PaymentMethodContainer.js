@@ -385,7 +385,8 @@ const PaymentMethodContainerWithoutStripe = ({
         quantity: plan.quantity,
         plan,
         couponCode,
-        product
+        product,
+        addressId: selectedAddressId
       },
       (err, res) => {
         dispatch({ type: DISABLE_SUBMIT, payload: false });
