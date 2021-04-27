@@ -1,6 +1,13 @@
-import { userHasAddress } from "../../utils/utils";
+import { saveToMetadataButton } from "./saveToMetadata";
+import { userHasAddress } from "../../../utils/utils";
+import { i18n } from "../../../components";
+
+const translations = i18n.t("common:buttons", {
+  returnObjects: true
+});
 
 export const init = (app) => {
+  saveToMetadataButton.init(app);
   const pelcroLoginButtonsByClass = document.getElementsByClassName(
     "pelcro-login-button"
   );
@@ -71,59 +78,6 @@ export const init = (app) => {
         pelcroSubscribeButtonsByClass[j].addEventListener(
           "click",
           app.displaySelectView
-        );
-      }
-    }
-  }
-
-  const pelcroSaveButtonsByClass = document.getElementsByClassName(
-    "pelcro-save-button"
-  );
-
-  const saveToMetadataByButton = (e) => {
-    const { key } = e.currentTarget.dataset;
-    const value = JSON.parse(JSON.stringify(e.currentTarget.dataset));
-    delete value.key;
-    let newVal = "";
-    const pelcroUser = window.Pelcro.user.read();
-    if (
-      pelcroUser.metadata &&
-      pelcroUser.metadata[`metadata_${key}`]
-    ) {
-      const oldValue = pelcroUser.metadata[`metadata_${key}`];
-      if (typeof oldValue === "object" && oldValue.length) {
-        newVal = [...oldValue, value];
-      } else {
-        newVal = [oldValue, value];
-      }
-    } else {
-      newVal = [value];
-    }
-
-    window.Pelcro.user.saveToMetaData(
-      {
-        key,
-        value: newVal,
-        auth_token: window.Pelcro.user.read().auth_token
-      },
-      (err, resp) => {
-        console.log(
-          "window.Pelcro.user.saveToMetaData -> resp",
-          resp
-        );
-      }
-    );
-  };
-
-  if (pelcroSaveButtonsByClass.length !== 0) {
-    for (let j = 0; j < pelcroSaveButtonsByClass.length; j++) {
-      if (
-        pelcroSaveButtonsByClass[j].dataset &&
-        "key" in pelcroSaveButtonsByClass[j].dataset
-      ) {
-        pelcroSaveButtonsByClass[j].addEventListener(
-          "click",
-          saveToMetadataByButton
         );
       }
     }
@@ -260,25 +214,28 @@ export const init = (app) => {
 };
 
 export const authenticatedButtons = (id) => {
+  saveToMetadataButton.authenticated();
   const pelcroLoginByClass = document.getElementsByClassName(
     "pelcro-login-button"
   );
 
   if (pelcroLoginByClass) {
     for (let i = 0; i < pelcroLoginByClass.length; i++) {
-      pelcroLoginByClass.item(i).innerHTML = "My account";
+      pelcroLoginByClass.item(i).innerHTML = translations.account;
     }
   }
 };
 
 export const unauthenticatedButtons = (id) => {
+  saveToMetadataButton.unauthenticated();
+
   const pelcroLoginByClass = document.getElementsByClassName(
     "pelcro-login-button"
   );
 
   if (pelcroLoginByClass) {
     for (let i = 0; i < pelcroLoginByClass.length; i++) {
-      pelcroLoginByClass.item(i).innerHTML = "Login";
+      pelcroLoginByClass.item(i).innerHTML = translations.login;
     }
   }
 };

@@ -7,6 +7,7 @@ import { UserUpdatePhone } from "./UserUpdatePhone";
 import { UserUpdateButton } from "./UserUpdateButton";
 import { UserUpdateContainer } from "./UserUpdateContainer";
 import { AlertWithContext } from "../../SubComponents/AlertWithContext";
+import { UserUpdateProfilePic } from "./UserUpdateProfilePic";
 
 export const UserUpdateView = (props) => {
   const { t } = useTranslation("userEdit");
@@ -25,6 +26,7 @@ export const UserUpdateView = (props) => {
       >
         <UserUpdateContainer {...props}>
           <AlertWithContext />
+          <UserUpdateProfilePic onClick={props.onPictureClick} />
           <div className="plc-flex plc-items-start">
             <UserUpdateEmail label={t("labels.email")} />
           </div>

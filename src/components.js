@@ -50,6 +50,7 @@ export { UserUpdateDisplayName } from "./Components/UserUpdate/UserUpdateDisplay
 export { UserUpdateLastName } from "./Components/UserUpdate/UserUpdateLastName";
 export { UserUpdatePhone } from "./Components/UserUpdate/UserUpdatePhone";
 export { UserUpdateTextInput } from "./Components/UserUpdate/UserUpdateTextInput";
+export { UserUpdateProfilePic } from "./Components/UserUpdate/UserUpdateProfilePic";
 export { AddressCreateContainer } from "./Components/AddressCreate/AddressCreateContainer";
 export { AddressCreateModal } from "./Components/AddressCreate/AddressCreateModal";
 export { AddressCreateSubmit } from "./Components/AddressCreate/AddressCreateSubmit";
@@ -150,8 +151,18 @@ export { AddressSelectView } from "./Components/AddressSelect/AddressSelectView"
 export { DashboardWithTrans as Dashboard } from "./Components/dashboard/Dashboard";
 export { DashboardOpenButton } from "./Components/dashboard/DashboardOpenButton";
 
+export { ProfilePicChangeButton } from "./Components/ProfilePicChange/ProfilePicChangeButton";
+export { ProfilePicChangeContainer } from "./Components/ProfilePicChange/ProfilePicChangeContainer";
+export { ProfilePicChangeCropper } from "./Components/ProfilePicChange/ProfilePicChangeCropper";
+export { ProfilePicChangeZoom } from "./Components/ProfilePicChange/ProfilePicChangeZoom";
+export { ProfilePicChangeSelectButton } from "./Components/ProfilePicChange/ProfilePicChangeSelectButton";
+export { ProfilePicChangeView } from "./Components/ProfilePicChange/ProfilePicChangeView";
+export { ProfilePicChangeModal } from "./Components/ProfilePicChange/ProfilePicChangeModal";
+
+export { default as i18n } from "./i18n";
+
 export {
   init as initButtons,
   authenticatedButtons,
   unauthenticatedButtons
-} from "./Components/common/Buttons";
+} from "./Components/common/PelcroNativeButtons";

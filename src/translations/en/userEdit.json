@@ -1,15 +1,20 @@
 {
-    "labels": {
-        "title": "Want to update your profile?",
-        "subtitle": "Enter your information below to update your profile",
-        "email": "Email",
-        "firstName": "First name",
-        "lastName": "Last name",
-        "phone": "Phone",
-        "submit": "Submit",
-        "required": "Required"
-    },
-    "messages": {
-        "userUpdated": "Thanks! Your profile was updated successfully."
-    }
+  "labels": {
+    "title": "Want to update your profile?",
+    "subtitle": "Enter your information below to update your profile",
+    "email": "Email",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "phone": "Phone",
+    "submit": "Submit",
+    "required": "Required",
+    "cropperTitle": "Update your profile picture",
+    "cropperSubtitle": "Upload an image from your device, and then crop it",
+    "save": "Save",
+    "selectImage": "Select image",
+    "zoom": "Zoom"
+  },
+  "messages": {
+    "userUpdated": "Thanks! Your profile was updated successfully."
+  }
 }
