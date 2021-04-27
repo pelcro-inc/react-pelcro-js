@@ -138,6 +138,7 @@ const PaymentMethodContainerWithoutStripe = ({
         }
       });
 
+      // When Google pay / Apple pay source created
       paymentRequest.on("source", ({ complete, source, ...data }) => {
         dispatch({ type: DISABLE_COUPON_BUTTON, payload: true });
         dispatch({ type: DISABLE_SUBMIT, payload: true });
@@ -145,7 +146,7 @@ const PaymentMethodContainerWithoutStripe = ({
         complete("success");
         onLoading();
 
-        if (source?.card.three_d_secure === "required") {
+        if (source?.card?.three_d_secure === "required") {
           return generate3DSecureSource(source).then(
             ({ source, error }) => {
               if (error) {
@@ -488,7 +489,7 @@ const PaymentMethodContainerWithoutStripe = ({
           return handlePaymentError(error);
         }
 
-        if (source.card.three_d_secure === "required") {
+        if (source?.card?.three_d_secure === "required") {
           return generate3DSecureSource(source).then(
             ({ source, error }) => {
               if (error) {
@@ -594,13 +595,13 @@ const PaymentMethodContainerWithoutStripe = ({
         client_secret: clientSecret
       });
 
-      if (source.status === "failed") {
+      if (source?.status === "failed") {
         return handlePaymentError({
           message: t("messages.cardAuthFailed")
         });
       }
 
-      if (source.status === "chargeable") {
+      if (source?.status === "chargeable") {
         paymentHandler(source);
       }
     } catch (error) {

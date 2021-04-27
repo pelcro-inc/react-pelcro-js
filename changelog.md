@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ### Added
 
+- Implemented 3D secure for payment cards requiring authentication.
 - Add missing locale to pelcro's native buttons [PRIVATE]
 
 ## [Released]
