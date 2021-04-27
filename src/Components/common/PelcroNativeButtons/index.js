@@ -1,5 +1,10 @@
 import { saveToMetadataButton } from "./saveToMetadata";
 import { userHasAddress } from "../../../utils/utils";
+import { i18n } from "../../../components";
+
+const translations = i18n.t("common:buttons", {
+  returnObjects: true
+});
 
 export const init = (app) => {
   saveToMetadataButton.init(app);
@@ -216,7 +221,7 @@ export const authenticatedButtons = (id) => {
 
   if (pelcroLoginByClass) {
     for (let i = 0; i < pelcroLoginByClass.length; i++) {
-      pelcroLoginByClass.item(i).innerHTML = "My account";
+      pelcroLoginByClass.item(i).innerHTML = translations.account;
     }
   }
 };
@@ -230,7 +235,7 @@ export const unauthenticatedButtons = (id) => {
 
   if (pelcroLoginByClass) {
     for (let i = 0; i < pelcroLoginByClass.length; i++) {
-      pelcroLoginByClass.item(i).innerHTML = "Login";
+      pelcroLoginByClass.item(i).innerHTML = translations.login;
     }
   }
 };
