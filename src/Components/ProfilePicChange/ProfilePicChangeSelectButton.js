@@ -19,6 +19,7 @@ export const ProfilePicChangeSelectButton = ({
         icon={<PhotoIcon />}
         isFullWidth={true}
         onClick={browseFiles}
+        aria-controls="fileupload"
         {...otherProps}
       >
         {name ?? t("labels.selectImage")}
