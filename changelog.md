@@ -9,6 +9,12 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Released]
 
+## [0.13.1] - 2021-04-28
+
+### Fixed
+
+- Circular dependency. [PRIVATE]
+
 ## [0.13.0] - 2021-04-28
 
 ### Added
