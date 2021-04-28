@@ -23,7 +23,7 @@ export function Button({
     >
       {isLoading && (
         <SpinnerIcon
-          className="plc-w-5 plc-h-5 plc-mr-2 plc-animate-spin pelcro-button-spinner"
+          className="plc-w-5 plc-h-5 plc-mr-1 plc-animate-spin pelcro-button-spinner"
           fill="currentColor"
           aria-hidden="true"
           focusable="false"
@@ -32,7 +32,9 @@ export function Button({
       {!isLoading && (
         <div
           className={`${
-            variant === "icon" ? "" : "plc-mr-2"
+            variant === "icon"
+              ? "plc-flex plc-items-center plc-justify-center plc-w-full"
+              : "plc-mr-1"
           } plc-pointer-events-none`}
         >
           {icon}
@@ -57,7 +59,7 @@ const getClassName = (variant, isFullWidth, disabled) => {
       isFullWidth ? "plc-w-full" : "plc-w-max"
     }`,
 
-    icon: `plc-flex plc-justify-center plc-items-center plc-w-8 plc-h-8 plc-p-1 plc-rounded-full focus:plc-outline-none focus:plc-ring-2 focus:plc-ring-primary-300 ${
+    icon: `plc-inline-flex plc-items-center plc-justify-center plc-w-8 plc-h-8 plc-rounded-full focus:plc-outline-none focus:plc-ring-2 focus:plc-ring-primary-300 ${
       disabled
         ? ""
         : "hover:plc-bg-primary-100 hover:plc-text-primary-600"
