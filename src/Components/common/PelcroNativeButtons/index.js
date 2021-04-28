@@ -1,6 +1,6 @@
 import { saveToMetadataButton } from "./saveToMetadata";
 import { userHasAddress } from "../../../utils/utils";
-import { i18n } from "../../../components";
+import i18n from "../../../i18n";
 
 const translations = i18n.t("common:buttons", {
   returnObjects: true
