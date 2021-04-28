@@ -25,7 +25,8 @@
     "youAreSafe": "You're safe - PCI compliant 128 SSL by",
     "cancel": "Cancel your subscription online at anytime.",
     "giftSent": "Subscription gift has been sent to",
-    "successfully": "successfully"
+    "successfully": "successfully",
+    "cardAuthFailed": "We are unable to authenticate your payment method. Please choose a different payment method and try again."
   },
   "errors": {
     "": ""

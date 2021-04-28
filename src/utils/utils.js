@@ -49,12 +49,12 @@ export const cleanObjectNullValues = (obj) =>
 
 /**
  * get an address using it's id
- * @param {string} id id of the wanted address
+ * @param {number} id id of the wanted address
  * @return {object?} address with the matching id
  */
 export const getAddressById = (id) => {
   const addresses = window.Pelcro.user.read().addresses ?? [];
-  return addresses.find((address) => address.id === id);
+  return addresses.find((address) => address.id === Number(id));
 };
 
 /**
@@ -89,6 +89,21 @@ export const getFormattedPriceByLocal = (
   );
 
   return formatter.format(amount / 100);
+};
+
+export const getEcommerceOrderTotal = (order) => {
+  const allSkus = window.Pelcro.ecommerce.products
+    .read()
+    .flatMap((prod) => prod.skus.map((sku) => sku))
+    .reduce((obj, item) => ({ ...obj, [item.id]: { ...item } }), {});
+
+  const totalAmount = order.reduce((total, orderItem) => {
+    const product = allSkus[orderItem.sku_id];
+
+    return total + product.price * orderItem.quantity;
+  }, 0);
+
+  return totalAmount;
 };
 
 /** check wether or not the user have any addresses

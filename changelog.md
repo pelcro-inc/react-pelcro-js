@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Unreleased]
 
+### Added
+
+- Implemented 3D secure for payment cards requiring authentication.
+
+### Fixed
+
+- Only skip card if 100% coupon code is set to forever
 
 ## [Released]
 
@@ -21,8 +28,7 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 - Add missing locale to pelcro's native buttons [PRIVATE]
 
-### Fixed
-
+## [Released]
 - Password change modal being opened even if user is not logged in.
 - Password change modal submit button stays enabled even after successfully changing the password.
 - Login button showing a "My account" label even after the user is signed out after successfully changing their password.
