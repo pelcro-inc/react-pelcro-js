@@ -48,6 +48,7 @@ import {
  * @property {boolean} disableSubmit
  * @property {boolean} isLoading
  * @property {boolean} disableCouponButton
+ * @property {object} couponObject
  * @property {string} couponCode
  * @property {string} couponError
  * @property {boolean} enableCouponField
@@ -65,6 +66,7 @@ const initialState = {
   disableSubmit: false,
   isLoading: false,
   disableCouponButton: false,
+  couponObject: null,
   couponCode: "",
   couponError: "",
   enableCouponField: false,
@@ -181,7 +183,7 @@ const PaymentMethodContainerWithoutStripe = ({
 
   const onApplyCouponCode = (state, dispatch) => {
     dispatch({ type: DISABLE_COUPON_BUTTON, payload: true });
-    const { couponCode, canMakePayment } = state;
+    const { couponCode } = state;
 
     if (couponCode) {
       window.Pelcro.order.create(
@@ -208,6 +210,12 @@ const PaymentMethodContainerWithoutStripe = ({
             type: SHOW_ALERT,
             payload: { type: "error", content: "" }
           });
+
+          dispatch({
+            type: SET_COUPON,
+            payload: res.data.coupon
+          });
+
           dispatch({
             type: SET_PERCENT_OFF,
             payload: `${res.data.coupon?.percent_off}%`
@@ -570,7 +578,10 @@ const PaymentMethodContainerWithoutStripe = ({
     ) {
       const { updatedPrice } = state;
       // When price is 0, we allow submitting without card info
-      if (updatedPrice === 0) {
+      if (
+        updatedPrice === 0 &&
+        state.coupon?.duration === "forever"
+      ) {
         return subscribe({}, state, dispatch);
       }
     }
