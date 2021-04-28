@@ -218,7 +218,7 @@ class App extends Component {
       this.setView("password-reset");
       return true;
     } else if (view === "password-change") {
-      this.setView("password-change");
+      this.displayPasswordChangeView();
       return true;
     } else if (view === "source-create") {
       // @FIXME - implement a redirect to login first
@@ -311,6 +311,13 @@ class App extends Component {
     // if user is already authenticated the Login view will not be displayed
     if (window.Pelcro.user.isAuthenticated())
       return this.displayDashboardView();
+
+    this.setView("login");
+  };
+
+  displayPasswordChangeView = () => {
+    if (window.Pelcro.user.isAuthenticated())
+      return this.setView("password-change");
 
     this.setView("login");
   };
