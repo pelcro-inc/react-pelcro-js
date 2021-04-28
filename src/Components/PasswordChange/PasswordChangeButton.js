@@ -7,7 +7,8 @@ import { store } from "./PasswordChangeContainer";
 export const PasswordChangeButton = ({ name, ...otherProps }) => {
   const {
     state: {
-      buttonDisabled,
+      isSubmitting,
+      passwordChanged,
       currentPasswordError,
       newPasswordError,
       confirmNewPasswordError
@@ -26,8 +27,8 @@ export const PasswordChangeButton = ({ name, ...otherProps }) => {
     <Button
       {...otherProps}
       onClick={() => dispatch({ type: HANDLE_SUBMIT })}
-      disabled={buttonDisabled || hasInvalidField}
-      isLoading={buttonDisabled}
+      disabled={hasInvalidField || passwordChanged}
+      isLoading={isSubmitting}
       isFullWidth={true}
     >
       {name ?? t("submit")}
