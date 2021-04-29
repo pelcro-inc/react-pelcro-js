@@ -16,7 +16,8 @@ import {
   RESET_PASSWORD_ERROR,
   RESET_NEW_PASSWORD_ERROR,
   RESET_CONFIRM_NEW_PASSWORD_ERROR,
-  SHOW_ALERT
+  SHOW_ALERT,
+  PASSWORD_CHANGE_SUCCESS
 } from "../../utils/action-types";
 import { getErrorMessages } from "../common/Helpers";
 
@@ -27,7 +28,8 @@ const initialState = {
   currentPasswordError: "",
   newPasswordError: "",
   confirmNewPasswordError: "",
-  buttonDisabled: false,
+  isSubmitting: false,
+  passwordChanged: false,
   alert: {
     type: "error",
     content: ""
@@ -75,6 +77,7 @@ export const PasswordChangeContainer = ({
               content: t("passwordChanged")
             }
           });
+          dispatch({ type: PASSWORD_CHANGE_SUCCESS });
           onSuccess();
         }
       }
@@ -165,10 +168,12 @@ export const PasswordChangeContainer = ({
             confirmNewPasswordError: ""
           });
         case DISABLE_SUBMIT:
-          return Update({ ...state, buttonDisabled: action.payload });
+          return Update({ ...state, isSubmitting: action.payload });
+        case PASSWORD_CHANGE_SUCCESS:
+          return Update({ ...state, passwordChanged: true });
         case HANDLE_SUBMIT:
           return UpdateWithSideEffect(
-            { ...state, buttonDisabled: true },
+            { ...state, isSubmitting: true },
             (state, dispatch) => handleSubmit(state, dispatch)
           );
         default:

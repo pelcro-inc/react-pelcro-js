@@ -2,6 +2,9 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { PaymentMethodView } from "../PaymentMethod/PaymentMethodView";
 
+/**
+ *
+ */
 export function PaymentMethodUpdateView(props) {
   const [t] = useTranslation("paymentCreate");
 
@@ -15,6 +18,7 @@ export function PaymentMethodUpdateView(props) {
       </div>
 
       <PaymentMethodView
+        type="updatePaymentSource"
         successMessage={t("success")}
         showCoupon={false}
         onDisplay={props.onDisplay}

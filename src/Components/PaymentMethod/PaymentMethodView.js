@@ -14,6 +14,7 @@ import { AlertWithContext } from "../../SubComponents/AlertWithContext";
 import { PaypalSubscribeButton } from "../PaypalButtons/PaypalSubscribeButton";
 import { Link } from "../../SubComponents/Link";
 import { ReactComponent as LockIcon } from "../../assets/lock.svg";
+import { ReactComponent as SpinnerIcon } from "../../assets/spinner.svg";
 
 /**
  *
@@ -77,6 +78,10 @@ export function PaymentMethodView({
           onFailure={onFailure}
           order={order}
         >
+          <div className="plc-absolute plc-inset-0 plc-flex-col plc-items-center plc-justify-center plc-hidden plc-text-lg plc-bg-white plc-z-max plc-text-primary-500 card-authentication-container">
+            {t("messages.bankRedirection")}
+            <SpinnerIcon className="plc-w-10 plc-h-10 plc-mt-5 plc-animate-spin" />
+          </div>
           <AlertWithContext className="plc-mb-2" />
           {/* Payment form */}
           <div>

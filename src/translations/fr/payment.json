@@ -25,7 +25,8 @@
     "youAreSafe": "Vous êtes en sécurité - PCI conforme 128 SSL par",
     "cancel": "Annuler votre abonnement en ligne à tout moment.",
     "giftSent": "Le cadeau d’abonnement a été envoyé à",
-    "successfully": "avec succès."
+    "successfully": "avec succès.",
+    "cardAuthFailed": "Nous ne parvenons pas à authentifier votre mode de paiement. Veuillez choisir un autre mode de paiement et essayer à nouveau."
   },
   "errors": {
     "": ""

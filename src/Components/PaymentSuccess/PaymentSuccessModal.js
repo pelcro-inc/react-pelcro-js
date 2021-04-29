@@ -17,7 +17,7 @@ export function PaymentSuccessModal({ onDisplay, onClose, product }) {
   });
 
   return (
-    <Modal id="pelcro-payment-success-modal">
+    <Modal id="pelcro-payment-success-modal" onClose={onClose}>
       <ModalBody>
         <PaymentSuccessView onClose={onClose} product={product} />
       </ModalBody>
