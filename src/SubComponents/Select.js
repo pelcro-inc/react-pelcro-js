@@ -14,19 +14,17 @@ export function Select({
   ...otherProps
 }) {
   return (
-    <div className={`plc-w-full plc-mb-3 ${wrapperClassName}`}>
+    <div className={`pelcro-input-wrapper ${wrapperClassName}`}>
       <label
         htmlFor={id}
-        className={`plc-text-gray-700 pelcro-select-label ${labelClassName}`}
+        className={`pelcro-input-label ${labelClassName}`}
       >
         {`${label}${required ? "*" : ""}`}
       </label>
       <select
         id={id}
-        className={`plc-mt-1 plc-w-full plc-border plc-border-gray-300 plc-bg-gray-50 plc-p-2 plc-appearance-none plc-outline-none plc-rounded-sm focus:plc-ring-2 focus:plc-ring-primary-600 disabled:plc-bg-gray-300 disabled:plc-cursor-not-allowed pelcro-select-select ${className} ${
-          error
-            ? "plc-ring-2 plc-ring-red-400 pelcro-input-invalid"
-            : ""
+        className={`pelcro-input-field ${className} ${
+          error ? "pelcro-input-invalid" : ""
         }`}
         aria-describedby={errorId}
         aria-invalid={Boolean(error)}
@@ -38,7 +36,7 @@ export function Select({
         <p
           id={errorId}
           aria-live="assertive"
-          className="plc-h-3 plc-mt-1 plc-text-sm plc-text-red-500 plc-normal-case pelcro-field-error"
+          className={`pelcro-input-error ${errorClassName}`}
         >
           {error}
         </p>
