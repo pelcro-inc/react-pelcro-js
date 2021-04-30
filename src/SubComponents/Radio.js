@@ -1,7 +1,7 @@
 import React from "react";
 
 export function Radio({
-  inputClassName = "",
+  className = "",
   labelClassName = "",
   id,
   children,
@@ -12,12 +12,12 @@ export function Radio({
       <input
         type="radio"
         id={id}
-        className={`plc-text-primary-500 checked:plc-border-transparent focus:plc-outline-none focus:plc-ring-2 focus:plc-ring-offset-2 focus:plc-ring-primary-300 plc-text-md disabled:plc-cursor-not-allowed disabled:plc-text-gray-300 pelcro-radio-input ${inputClassName}`}
+        className={`pelcro-radio ${className}`}
         {...otherProps}
       />
       <label
         htmlFor={id}
-        className={`plc-ml-2 pelcro-radio-label ${labelClassName}`}
+        className={`pelcro-radio-label ${labelClassName}`}
       >
         {children}
       </label>
