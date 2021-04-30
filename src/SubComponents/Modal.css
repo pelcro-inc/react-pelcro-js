@@ -4,6 +4,31 @@
   }
 
   .pelcro-root .pelcro-modal-overlay {
+    @apply plc-fixed plc-top-0 plc-left-0 plc-flex plc-items-center plc-justify-center plc-w-full plc-h-full plc-overflow-auto plc-bg-black plc-z-max plc-bg-opacity-60;
     backdrop-filter: blur(2px);
+  }
+
+  .pelcro-root .pelcro-modal {
+    @apply plc-container plc-absolute plc-top-0 plc-flex plc-flex-col plc-items-center plc-max-w-lg plc-bg-white plc-border-t-8 plc-border-primary-500 plc-rounded-md md:plc-mt-8;
+  }
+
+  .pelcro-root .pelcro-modal-content {
+    @apply plc-w-full;
+  }
+
+  .pelcro-root .pelcro-modal-header {
+    @apply plc-p-1;
+  }
+
+  .pelcro-root .pelcro-modal-close {
+    @apply plc-absolute plc-w-6 plc-text-gray-500 plc-z-max plc-top-3 plc-right-3 hover:plc-text-black;
+  }
+
+  .pelcro-root .pelcro-modal-body {
+    @apply plc-mx-8 plc-my-4;
+  }
+
+  .pelcro-root .pelcro-modal-footer {
+    @apply plc-flex plc-flex-col plc-items-center plc-justify-center plc-mx-8 plc-mt-6 plc-mb-4 plc-text-sm;
   }
 }
