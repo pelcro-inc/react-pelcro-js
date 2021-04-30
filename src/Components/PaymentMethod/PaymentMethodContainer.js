@@ -182,10 +182,11 @@ const PaymentMethodContainerWithoutStripe = ({
   };
 
   const onApplyCouponCode = (state, dispatch) => {
-    dispatch({ type: DISABLE_COUPON_BUTTON, payload: true });
     const { couponCode } = state;
 
-    if (couponCode) {
+    if (couponCode?.trim()) {
+      dispatch({ type: DISABLE_COUPON_BUTTON, payload: true });
+
       window.Pelcro.order.create(
         {
           auth_token: window.Pelcro.user.read().auth_token,
