@@ -3,18 +3,24 @@
 @import "./css/forms.css";
 @import "./css/variables.css";
 
-/* sub-components */
+/* sub-components and components */
+@import "tailwindcss/components";
 @import "./SubComponents/Badge.css";
 @import "./SubComponents/Modal.css";
-@import "./SubComponents/Select.css";
+@import "./SubComponents/Inputs.css";
+@import "./SubComponents/Checkbox.css";
+@import "./SubComponents/Loader.css";
+@import "./SubComponents/Button.css";
+@import "./SubComponents/Link.css";
+@import "./SubComponents/Radio.css";
+@import "./SubComponents/Alert.css";
 
-/* components */
 @import "./Components/Shop/ShopView.css";
 @import "./components/ProfilePicChange/ProfilePicChangeCropper.css";
 @import "./components/ProfilePicChange/ProfilePicChangeZoom.css";
 @import "./components/UserUpdate/UserUpdateProfilePic.css";
 @import "./Components/dashboard/DashboardMenus/OrdersMenu.css";
+@import "./Components/Select/SelectModal.css";
 
-/* tailwind */
-@tailwind components;
-@tailwind utilities;
+/* utilities */
+@import "tailwindcss/utilities";
