@@ -17,7 +17,6 @@ export const AddressUpdateSubmit = ({ name, ...otherProps }) => {
       {...otherProps}
       onClick={() => dispatch({ type: HANDLE_SUBMIT })}
       isLoading={isSubmitting}
-      isFullWidth={true}
     >
       {name ?? t("buttons.submit")}
     </Button>

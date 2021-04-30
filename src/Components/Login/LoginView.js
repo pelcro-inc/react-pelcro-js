@@ -43,7 +43,7 @@ export function LoginView(props) {
           </Link>
           <LoginButton
             role="submit"
-            className="plc-mt-2"
+            className="plc-mt-2 plc-w-full"
             name={t("labels.login")}
             id="pelcro-submit"
           />

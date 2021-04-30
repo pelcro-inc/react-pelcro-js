@@ -22,10 +22,9 @@ export const SubmitPaymentMethod = ({ children }) => {
   return (
     <Button
       role="submit"
-      className="plc-py-3"
+      className="plc-py-3 plc-w-full"
       variant="solid"
       isLoading={isLoading}
-      isFullWidth={true}
       onClick={() => dispatch({ type: SUBMIT_PAYMENT })}
       disabled={disableSubmit}
     >

@@ -17,7 +17,6 @@ export const ProfilePicChangeButton = ({ name, ...otherProps }) => {
       {...otherProps}
       onClick={() => dispatch({ type: HANDLE_USER_UPDATE })}
       isLoading={isSubmitting}
-      isFullWidth={true}
     >
       {name ?? t("labels.save")}
     </Button>

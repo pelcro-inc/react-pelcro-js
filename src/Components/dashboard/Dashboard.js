@@ -365,11 +365,10 @@ class Dashboard extends Component {
             <td colSpan="4" className="plc-p-1">
               <Button
                 variant="ghost"
-                isFullWidth={true}
                 icon={
                   <PlusIcon className="plc-w-4 plc-h-4 plc-mr-1" />
                 }
-                className="plc-h-8 plc-font-semibold plc-tracking-wider plc-uppercase plc-rounded-none plc-text-primary-700 hover:plc-bg-primary-50"
+                className="plc-h-8 plc-font-semibold plc-tracking-wider plc-uppercase plc-rounded-none plc-text-primary-700 hover:plc-bg-primary-50 plc-w-full"
                 onClick={this.displayProductSelect}
               >
                 {this.locale("labels.addSubscription")}
@@ -380,11 +379,10 @@ class Dashboard extends Component {
             <td colSpan="4" className="plc-p-1">
               <Button
                 variant="ghost"
-                isFullWidth={true}
                 icon={
                   <GiftIcon className="plc-w-4 plc-h-4 plc-mr-1" />
                 }
-                className="plc-h-8 plc-font-semibold plc-tracking-wider plc-uppercase plc-rounded-none plc-text-primary-700 hover:plc-bg-primary-50"
+                className="plc-h-8 plc-font-semibold plc-tracking-wider plc-uppercase plc-rounded-none plc-text-primary-700 hover:plc-bg-primary-50 plc-w-full"
                 onClick={this.displayRedeem}
               >
                 {this.locale("labels.redeemGift")}
@@ -522,11 +520,10 @@ class Dashboard extends Component {
             <td colSpan="4" className="plc-p-1">
               <Button
                 variant="ghost"
-                isFullWidth={true}
                 icon={
                   <PlusIcon className="plc-w-4 plc-h-4 plc-mr-1" />
                 }
-                className="plc-h-8 plc-font-semibold plc-tracking-wider plc-uppercase plc-rounded-none plc-text-primary-700 hover:plc-bg-primary-50"
+                className="plc-h-8 plc-font-semibold plc-tracking-wider plc-uppercase plc-rounded-none plc-text-primary-700 hover:plc-bg-primary-50 plc-w-full"
                 onClick={() =>
                   this.displayProductSelect({ isGift: true })
                 }
@@ -587,9 +584,8 @@ class Dashboard extends Component {
             <td colSpan="2" className="plc-p-1">
               <Button
                 variant="ghost"
-                isFullWidth={true}
                 icon={<PlusIcon className="plc-w-4 plc-mr-1" />}
-                className="plc-h-8 plc-font-semibold plc-tracking-wider plc-uppercase plc-text-primary-700 hover:plc-bg-primary-50"
+                className="plc-h-8 plc-font-semibold plc-tracking-wider plc-uppercase plc-text-primary-700 hover:plc-bg-primary-50 plc-w-full"
                 onClick={this.displayAddressCreate}
               >
                 {this.locale("labels.addAddress")}
@@ -695,7 +691,6 @@ class Dashboard extends Component {
                   <div className="plc-flex plc-flex-col plc-my-2 plc-ml-2 plc-space-y-4">
                     <Button
                       variant="ghost"
-                      isFullWidth={false}
                       icon={
                         <EditIcon className="plc-w-5 plc-h-5 plc-mr-1" />
                       }
@@ -707,7 +702,6 @@ class Dashboard extends Component {
 
                     <Button
                       variant="ghost"
-                      isFullWidth={false}
                       icon={
                         <KeyIcon className="plc-w-5 plc-h-5 plc-mr-1" />
                       }

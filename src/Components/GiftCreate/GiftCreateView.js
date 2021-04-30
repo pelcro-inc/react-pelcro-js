@@ -50,7 +50,7 @@ export const GiftCreateView = (props) => {
           </p>
           <GiftCreateSubmitButton
             role="submit"
-            className="plc-mt-2"
+            className="plc-mt-2 plc-w-full"
             name={t("gift.buttons.gift")}
             id="pelcro-submit"
           />

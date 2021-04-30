@@ -315,9 +315,8 @@ class SelectModal extends Component {
                 <Button
                   disabled={this.state.disabled}
                   onClick={this.submitOption}
-                  isFullWidth={true}
                   id="pelcro-submit"
-                  className="plc-mt-2"
+                  className="plc-mt-2 plc-w-full"
                 >
                   {this.locale("buttons.next")}
                 </Button>
