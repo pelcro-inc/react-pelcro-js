@@ -15,29 +15,27 @@ export function Alert({
 }) {
   return (
     <div
-      className={`plc-flex plc-items-center plc-justify-between plc-px-4 plc-py-3 plc-mb-2 plc-w-full plc-font-semibold plc-text-sm ${
+      className={`${
         type === "error"
-          ? "plc-text-red-600  plc-bg-red-100"
-          : "plc-text-green-800 plc-bg-green-200"
-      } plc-rounded-sm pelcro-alert-${type} ${className}`}
+          ? "pelcro-alert-error"
+          : "pelcro-alert-success"
+      } ${className}`}
       {...otherProps}
     >
       <div className="plc-inline-flex plc-items-center">
         {type === "error" && (
-          <ErrorIcon className="plc-flex-shrink-0 plc-w-6 plc-h-6 plc-mr-3 plc-fill-current pelcro-alert-icon" />
+          <ErrorIcon className="pelcro-alert-icon" />
         )}
         {type === "success" && (
-          <SuccessIcon className="plc-flex-shrink-0 plc-w-6 plc-h-6 plc-mr-3 plc-fill-current pelcro-alert-icon" />
+          <SuccessIcon className="pelcro-alert-icon" />
         )}
-        <div className="plc-whitespace-pre-wrap pelcro-alert-content">
-          {children}
-        </div>
+        <div className="pelcro-alert-content">{children}</div>
       </div>
       {onClose && (
         <button
           type="button"
-          className="plc-flex-shrink-0 plc-w-6 plc-fill-current pelcro-modal-close pelcro-alert-close-btn"
-          aria-label="close modal"
+          className="pelcro-alert-close"
+          aria-label="close alert"
           onClick={onClose}
         >
           <CloseIcon />
