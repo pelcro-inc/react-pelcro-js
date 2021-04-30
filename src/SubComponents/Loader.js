@@ -2,9 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 export const Loader = (props) => (
-  <div
-    className={`plc-w-full plc-flex plc-justify-center plc-items-center plc-self-center pelcro-loader-wrapper ${props.className}`}
-  >
+  <div className={`pelcro-loader-wrapper ${props.className}`}>
     <svg
       width={props.width}
       height={props.height}
