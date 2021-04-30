@@ -1,5 +1,10 @@
 @layer components {
+  .pelcro-root .pelcro-badge-wrapper {
+    @apply plc-relative plc-w-max;
+  }
+
   .pelcro-root .pelcro-badge {
+    @apply plc-flex plc-flex-wrap plc-justify-center plc-items-center plc-absolute plc-font-bold plc-rounded-full plc-text-sm plc-text-white plc-bg-primary-500 plc-w-1/4 plc-h-1/4;
     top: -5%;
     right: -5%;
   }
