@@ -62,6 +62,7 @@ export class OrderConfirmModal extends Component {
       <Modal
         id="pelcro-order-confirm-modal"
         className="plc-border-t-8 plc-border-green-500 "
+        onClose={this.props.onClose}
       >
         <ModalBody>
           <div id="pelcro-order-confirm-view">
