@@ -21,7 +21,7 @@ export const AddressSelectList = () => {
           className="plc-p-2 plc-mx-3 plc-mt-2 plc-border plc-border-gray-400 plc-border-solid plc-rounded pelcro-address-wrapper"
         >
           <Radio
-            inputClassName="plc-self-start pelcro-select-address-radio"
+            className="plc-self-start pelcro-select-address-radio"
             labelClassName="plc-cursor-pointer plc-w-full"
             id={`pelcro-address-select-${address.id}`}
             name="address"
