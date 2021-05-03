@@ -8,7 +8,7 @@ export const Loader = (props) => (
       height={props.height}
       viewBox="0 0 120 30"
       xmlns="http://www.w3.org/2000/svg"
-      fill={props.color}
+      fill="currentColor"
       aria-label={props.label}
     >
       <circle cx="15" cy="15" r={props.radius + 6}>
