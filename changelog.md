@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Unreleased]
 
+## [Released]
+
+## [0.15.0] - 2021-05-03
+
 ### Added
 
 - Ability to change profile picture directly from user dashboard header.
@@ -19,8 +23,6 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 - Dashboard logout button is now at the bottom of the options list.
 - Dashboard header elements (picture, name, email) alignment to be more consistent.
-
-## [Released]
 
 ## [0.14.0] - 2021-04-28
 
