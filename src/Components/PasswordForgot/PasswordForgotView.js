@@ -27,7 +27,7 @@ export const PasswordForgotView = (props) => {
           />
           <PasswordForgotButton
             role="submit"
-            className="plc-mt-2"
+            className="plc-mt-2 plc-w-full"
             name={t("submit")}
             id="pelcro-submit"
           />

@@ -1,0 +1,5 @@
+@layer components {
+  .pelcro-root .pelcro-loader-wrapper {
+    @apply plc-w-full plc-flex plc-justify-center plc-items-center plc-self-center;
+  }
+}

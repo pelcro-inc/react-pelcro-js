@@ -32,7 +32,7 @@ export const GiftRedeemView = (props) => {
           </div>
           <GiftRedeemSubmitButton
             role="submit"
-            className="plc-mt-2"
+            className="plc-mt-2 plc-w-full"
             id="pelcro-submit"
             name={t("redeem.buttons.redeem")}
           />

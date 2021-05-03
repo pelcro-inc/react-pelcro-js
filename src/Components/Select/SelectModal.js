@@ -165,7 +165,7 @@ class SelectModal extends Component {
           className="plc-p-2 plc-mx-3 plc-mt-2 plc-border plc-border-gray-400 plc-border-solid plc-rounded pelcro-select-plan-wrapper"
         >
           <Radio
-            inputClassName="plc-self-start pelcro-select-plan-radio"
+            className="plc-self-start pelcro-select-plan-radio"
             labelClassName="plc-cursor-pointer plc-w-full"
             id={`pelcro-select-plan-${plan.id}`}
             name="plan"
@@ -315,9 +315,8 @@ class SelectModal extends Component {
                 <Button
                   disabled={this.state.disabled}
                   onClick={this.submitOption}
-                  isFullWidth={true}
                   id="pelcro-submit"
-                  className="plc-mt-2"
+                  className="plc-mt-2 plc-w-full"
                 >
                   {this.locale("buttons.next")}
                 </Button>

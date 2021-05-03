@@ -18,7 +18,6 @@ export const AddressSelectSubmit = ({ name, ...otherProps }) => {
       onClick={() => dispatch({ type: HANDLE_SUBMIT })}
       disabled={!selectedAddressId}
       isLoading={isSubmitting}
-      isFullWidth={true}
     >
       {name ?? t("buttons.submit")}
     </Button>

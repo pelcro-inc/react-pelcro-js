@@ -187,9 +187,8 @@ class DefaultNewsLetter extends Component {
               </p>
               <Button
                 role="submit"
-                className="plc-mt-2"
+                className="plc-mt-2 plc-w-full"
                 id="pelcro-submit"
-                isFullWidth={true}
                 onClick={this.submitNewsletter}
                 disabled={this.state.disableSubmit}
                 isLoading={this.state.disableSubmit}

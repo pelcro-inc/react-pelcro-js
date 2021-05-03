@@ -18,7 +18,6 @@ export const PasswordResetButton = ({ name, ...otherProps }) => {
       onClick={() => dispatch({ type: HANDLE_SUBMIT })}
       disabled={buttonDisabled}
       isLoading={buttonDisabled}
-      isFullWidth={true}
     >
       {name ?? t("submit")}
     </Button>

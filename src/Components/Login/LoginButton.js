@@ -36,7 +36,6 @@ export const LoginButton = ({ name, ...otherProps }) => {
       onClick={() => dispatch({ type: HANDLE_LOGIN })}
       disabled={isDisabled}
       isLoading={buttonDisabled}
-      isFullWidth={true}
     >
       {name ?? t("labels.login")}
     </Button>

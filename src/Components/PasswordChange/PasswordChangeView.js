@@ -43,7 +43,7 @@ export const PasswordChangeView = (props) => {
           />
           <PasswordChangeButton
             role="submit"
-            className="plc-mt-2"
+            className="plc-mt-2 plc-w-full"
             name={t("submit")}
             id="pelcro-submit"
           />

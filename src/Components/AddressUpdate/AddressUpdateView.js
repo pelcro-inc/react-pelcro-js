@@ -79,7 +79,7 @@ export const AddressUpdateView = (props) => {
           <p className="pelcro-footnote">* {t("labels.required")}</p>
           <AddressUpdateSubmit
             role="submit"
-            className="plc-mt-2"
+            className="plc-mt-2 plc-w-full"
             name={t("buttons.submit")}
             id="pelcro-submit"
           />

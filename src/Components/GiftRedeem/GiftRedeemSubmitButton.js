@@ -17,7 +17,6 @@ export const GiftRedeemSubmitButton = ({ name, ...otherProps }) => {
       {...otherProps}
       onClick={() => dispatch({ type: HANDLE_SUBMIT })}
       disabled={disableSubmit}
-      isFullWidth={true}
     >
       {name ?? t("redeem.buttons.redeem")}
     </Button>
