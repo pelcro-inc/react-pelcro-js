@@ -6,10 +6,19 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Unreleased]
 
+### Added
+
+- Ability to change profile picture directly from user dashboard header.
+
 ### Fixed
 
-- Close button not working on purchace confirm modal
+- Close button not working on purchace confirm modal.
 - Atomic subcomps styling not being overridden by utility classes. [PRIVATE]
+
+### Changed
+
+- Dashboard logout button is now at the bottom of the options list.
+- Dashboard header elements (picture, name, email) alignment to be more consistent.
 
 ## [Released]
 
