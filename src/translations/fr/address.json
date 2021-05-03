@@ -1,7 +1,7 @@
 {
   "title": "Veuillez entrer votre adresse",
   "selectAddressTitle": "Veuillez sélectionner une adresse",
-  "selectAddressSubtitle": "Sélectionnez l'une de vos adresses enregistrées ou ajoutez-en une nouvelle",
+  "selectAddressSubtitle": "Choisissez l'une de vos adresses ou créez-en une nouvelle",
   "labels": {
     "address": "Adresse",
     "code": "Code postal / Zip",
@@ -14,7 +14,7 @@
   },
   "buttons": {
     "submit": "Valider",
-    "selectAddress": "Sélectionnez une adresse",
+    "selectAddress": "Choisir cette adresse",
     "addAddress": "Ajouter une nouvelle adresse"
   },
   "messages": {

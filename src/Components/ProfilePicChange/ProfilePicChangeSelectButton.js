@@ -19,6 +19,7 @@ export const ProfilePicChangeSelectButton = ({
         icon={<PhotoIcon />}
         className="plc-w-full"
         onClick={browseFiles}
+        aria-controls="fileupload"
         {...otherProps}
       >
         {name ?? t("labels.selectImage")}

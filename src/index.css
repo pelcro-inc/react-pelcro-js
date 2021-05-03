@@ -23,6 +23,7 @@
 @import "./components/UserUpdate/UserUpdateProfilePic.css";
 @import "./Components/dashboard/DashboardMenus/OrdersMenu.css";
 @import "./Components/Select/SelectModal.css";
+@import "./components/dashboard/Dashboard.css";
 
 /* utilities */
 @import "tailwindcss/utilities";
