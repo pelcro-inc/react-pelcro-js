@@ -7,7 +7,9 @@
 @import "tailwindcss/components";
 @import "./SubComponents/Badge.css";
 @import "./SubComponents/Modal.css";
-@import "./SubComponents/Inputs.css";
+@import "./SubComponents/Input.css";
+@import "./SubComponents/DatePicker.css";
+@import "./SubComponents/Select.css";
 @import "./SubComponents/Checkbox.css";
 @import "./SubComponents/Loader.css";
 @import "./SubComponents/Button.css";
