@@ -8,9 +8,9 @@
     "phone": "Numéro de téléphone",
     "submit": "Soumettre",
     "required": "Champs obligatoires",
-    "cropperTitle": "Mettez à jour votre photo de profil",
-    "cropperSubtitle": "Téléchargez une image depuis votre appareil, puis recadrez-la",
-    "save": "sauvegarder",
+    "cropperTitle": "Mettre à jour la photo de profil",
+    "cropperSubtitle": "Téléverser une photo et ajustez la à votre goût",
+    "save": "Téléverser une photo",
     "selectImage": "Sélectionnez une image",
     "zoom": "Zoom"
   },

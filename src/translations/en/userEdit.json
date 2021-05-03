@@ -8,9 +8,9 @@
     "phone": "Phone",
     "submit": "Submit",
     "required": "Required",
-    "cropperTitle": "Update your profile picture",
-    "cropperSubtitle": "Upload an image from your device, and then crop it",
-    "save": "Save",
+    "cropperTitle": "Update Profile Picture",
+    "cropperSubtitle": "Upload a photo. Then adjust as you see fit",
+    "save": "Upload Photo",
     "selectImage": "Select image",
     "zoom": "Zoom"
   },
