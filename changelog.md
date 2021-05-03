@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Unreleased]
 
+### Fixed
+
+- Atomic subcomps styling not being overridden by utility classes. [PRIVATE]
+
 ## [Released]
 
 ## [0.14.0] - 2021-04-28
