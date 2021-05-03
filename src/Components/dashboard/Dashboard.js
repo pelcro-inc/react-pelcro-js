@@ -636,10 +636,10 @@ class Dashboard extends Component {
               ></Button>
             </div>
             <div className="plc-flex plc-items-center">
-              <div className="plc-flex plc-justify-center">
-                <div className="plc-relative">
+              <div className="plc-flex plc-justify-center plc-ml-3 sm:plc-ml-6 ">
+                <div className="plc-relative plc-flex-shrink-0">
                   <img
-                    className="plc-border-white plc-border-2 plc-border-solid plc-rounded-full plc-ml-3 sm:plc-ml-6 plc-w-24 plc-h-24 plc-bg-gray-300 plc-cursor-pointer pelcro-user-profile-picture"
+                    className="plc-border-white plc-border-2 plc-border-solid plc-rounded-full plc-w-24 plc-h-24 plc-bg-gray-300 plc-cursor-pointer pelcro-user-profile-picture"
                     src={profilePicture}
                     alt="profile picture"
                     onClick={this.displayProfilePicChange}
@@ -654,7 +654,7 @@ class Dashboard extends Component {
                 </div>
               </div>
 
-              <div className="plc-flex plc-flex-col plc-justify-between plc-flex-grow plc-px-2 sm:plc-px-6">
+              <div className="plc-flex plc-flex-col plc-justify-between plc-flex-grow plc-px-2 sm:plc-px-6 plc-ml-1 sm:plc-ml-0">
                 {userHasName && (
                   <p className="plc-text-3xl plc-font-bold plc-text-white">
                     {this.user.first_name} {this.user.last_name}
