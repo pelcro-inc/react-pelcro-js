@@ -643,10 +643,6 @@ class Dashboard extends Component {
                 <div className="plc-flex plc-flex-col plc-flex-grow">
                   {userHasName && (
                     <p className="plc-m-0 plc-text-3xl plc-font-bold plc-text-white text">
-                      <span className="plc-text-lg plc-opacity-80">
-                        {this.locale("labels.hello")},
-                      </span>
-                      <br />
                       {this.user.first_name} {this.user.last_name}
                     </p>
                   )}
@@ -661,14 +657,6 @@ class Dashboard extends Component {
                     {this.user.email}
                   </p>
                 </div>
-                <Button
-                  variant="outline"
-                  icon={<ExitIcon />}
-                  className="plc-text-xs plc-text-white plc-capitalize plc-border-white hover:plc-bg-white hover:plc-text-gray-700"
-                  onClick={this.props.logout}
-                >
-                  {this.locale("labels.logout")}
-                </Button>
               </div>
             </div>
           </header>
@@ -788,6 +776,16 @@ class Dashboard extends Component {
                 title={this.locale("labels.orders.label")}
                 content={<OrdersMenu />}
               />
+
+              <Button
+                variant="outline"
+                icon={<ExitIcon />}
+                isFullWidth={true}
+                className="plc-flex plc-items-center plc-justify-start plc-w-full plc-p-5 plc-px-4 plc-cursor-pointer plc-select-none sm:plc-px-8 plc-text-gray-500 hover:plc-text-primary-400 plc-text-lg plc-bg-transparent hover:plc-bg-primary-50 plc-capitalize plc-border-0 plc-border-l-2 plc-border-transparent plc-font-normal plc-rounded-none"
+                onClick={this.props.logout}
+              >
+                {this.locale("labels.logout")}
+              </Button>
             </Accordion>
           </section>
         </div>

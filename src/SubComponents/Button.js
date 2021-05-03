@@ -36,7 +36,7 @@ export function Button({
           className={`${
             variant === "icon"
               ? "plc-flex plc-items-center plc-justify-center plc-w-full"
-              : "plc-mr-1"
+              : "plc-mr-2"
           } plc-pointer-events-none`}
         >
           {icon}
