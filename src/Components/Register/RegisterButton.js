@@ -36,7 +36,6 @@ export const RegisterButton = ({ name, ...otherProps }) => {
       onClick={() => dispatch({ type: HANDLE_REGISTRATION })}
       disabled={isDisabled}
       isLoading={buttonDisabled}
-      isFullWidth={true}
     >
       {name ?? t("messages.createAccount")}
     </Button>

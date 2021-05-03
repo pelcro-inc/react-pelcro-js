@@ -13,7 +13,7 @@ export function Link({
 
   return (
     <a
-      className={`plc-underline plc-font-semibold plc-cursor-pointer plc-text-primary-500 hover:plc-text-primary-600 pelcro-link ${className}`}
+      className={`pelcro-link ${className}`}
       href={href}
       {...(isButton && { role: "button", onKeyDown: handleSpaceBar })}
       {...otherProps}

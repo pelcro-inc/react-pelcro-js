@@ -40,7 +40,7 @@ export function RegisterView(props) {
           />
           <RegisterButton
             role="submit"
-            className="plc-mt-2"
+            className="plc-mt-2 plc-w-full"
             id="pelcro-submit"
             name={t("messages.createAccount")}
           />
