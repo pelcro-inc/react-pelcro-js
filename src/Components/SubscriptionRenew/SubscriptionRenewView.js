@@ -31,7 +31,7 @@ export const SubscriptionRenewView = ({
           {plan.nickname}
         </span>
         <br />
-        <span className="plc-text-xl plc-font-semibold plc-text-green-600">
+        <span className="plc-text-xl plc-font-semibold plc-text-primary-600">
           {plan.amount_formatted}{" "}
         </span>
         <span className="plc-font-thin">

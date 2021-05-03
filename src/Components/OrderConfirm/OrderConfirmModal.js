@@ -61,15 +61,15 @@ export class OrderConfirmModal extends Component {
     return (
       <Modal
         id="pelcro-order-confirm-modal"
-        className="plc-border-t-8 plc-border-green-500 "
+        className="plc-border-t-8 plc-border-primary-500"
         onClose={this.props.onClose}
       >
         <ModalBody>
           <div id="pelcro-order-confirm-view">
             <div className="plc-flex plc-flex-col plc-items-center">
-              <CheckMarkOutlineIcon className="plc-w-32 plc-my-4 plc-text-green-500" />
+              <CheckMarkOutlineIcon className="plc-w-32 plc-my-4 plc-text-primary-500" />
               <div className="plc-text-center plc-text-gray-700">
-                <h4 className="plc-mb-4 plc-text-3xl plc-text-green-500">
+                <h4 className="plc-mb-4 plc-text-3xl plc-text-primary-500">
                   {this.locale("messages.orderConfirmed.title")}
                 </h4>
                 <p>{this.locale("messages.orderConfirmed.body")}</p>
