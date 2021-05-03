@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Unreleased]
 
+### Fixed
+
+- Triggering coupon flow with empty spaces.
+
 ## [Released]
 
 ## [0.15.0] - 2021-05-03
