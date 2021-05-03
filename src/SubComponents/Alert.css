@@ -1,0 +1,21 @@
+@layer components {
+  .pelcro-root .pelcro-alert-error {
+    @apply plc-flex plc-items-center plc-justify-between plc-px-4 plc-py-3 plc-mb-2 plc-w-full plc-font-semibold plc-text-sm plc-text-red-600  plc-bg-red-100 plc-rounded-sm;
+  }
+
+  .pelcro-root .pelcro-alert-success {
+    @apply plc-flex plc-items-center plc-justify-between plc-px-4 plc-py-3 plc-mb-2 plc-w-full plc-font-semibold plc-text-sm plc-text-green-800 plc-bg-green-200 plc-rounded-sm;
+  }
+
+  .pelcro-root .pelcro-alert-icon {
+    @apply plc-flex-shrink-0 plc-w-6 plc-h-6 plc-mr-3 plc-fill-current;
+  }
+
+  .pelcro-root .pelcro-alert-content {
+    @apply plc-whitespace-pre-wrap;
+  }
+
+  .pelcro-root .pelcro-alert-close {
+    @apply plc-flex-shrink-0 plc-w-6 plc-fill-current;
+  }
+}

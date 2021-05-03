@@ -17,7 +17,6 @@ export const CartSubmit = ({ name, ...otherProps }) => {
       <Button
         {...otherProps}
         onClick={() => dispatch({ type: HANDLE_SUBMIT })}
-        isFullWidth={true}
       >
         {name ?? t("confirm")}
       </Button>

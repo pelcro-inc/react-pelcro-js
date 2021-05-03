@@ -35,7 +35,7 @@ export const AddressSelectView = (props) => {
           </div>
           <AddressSelectSubmit
             role="submit"
-            className="plc-mt-4"
+            className="plc-mt-4 plc-w-full"
             name={t("buttons.selectAddress")}
             id="pelcro-submit"
           />

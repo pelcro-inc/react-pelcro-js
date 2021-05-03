@@ -246,13 +246,11 @@ class App extends Component {
 
   // displays required view
   initViews = () => {
-    const isUserAllowed =
-      window.Pelcro.subscription.isSubscribedToSite() &&
-      !Pelcro.paywall.isArticleRestricted();
-
-    if (this.initViewFromUrl() || isUserAllowed) {
+    if (
+      this.initViewFromUrl() ||
+      window.Pelcro.subscription.isSubscribedToSite()
+    )
       return;
-    }
 
     if (window.Pelcro.paywall.displayMeterPaywall()) {
       this.setView("meter");

@@ -18,7 +18,7 @@ export const UserUpdateButton = ({ name, ...otherProps }) => {
       onClick={() => dispatch({ type: HANDLE_USER_UPDATE })}
       disabled={buttonDisabled}
       isLoading={buttonDisabled}
-      isFullWidth={true}
+      className="plc-w-full"
     >
       {name ?? t("labels.submit")}
     </Button>

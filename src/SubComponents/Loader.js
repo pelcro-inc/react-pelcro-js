@@ -2,15 +2,13 @@ import React from "react";
 import PropTypes from "prop-types";
 
 export const Loader = (props) => (
-  <div
-    className={`plc-w-full plc-flex plc-justify-center plc-items-center plc-self-center pelcro-loader-wrapper ${props.className}`}
-  >
+  <div className={`pelcro-loader-wrapper ${props.className}`}>
     <svg
       width={props.width}
       height={props.height}
       viewBox="0 0 120 30"
       xmlns="http://www.w3.org/2000/svg"
-      fill={props.color}
+      fill="currentColor"
       aria-label={props.label}
     >
       <circle cx="15" cy="15" r={props.radius + 6}>

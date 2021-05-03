@@ -17,7 +17,6 @@ export const GiftCreateSubmitButton = ({ name, ...otherProps }) => {
       {...otherProps}
       onClick={() => dispatch({ type: HANDLE_SUBMIT })}
       disabled={disableSubmit}
-      isFullWidth={true}
     >
       {name ?? t("gift.buttons.gift")}
     </Button>

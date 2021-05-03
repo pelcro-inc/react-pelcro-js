@@ -19,7 +19,7 @@ export const ProfilePicChangeWrapper = () => {
       <ProfilePicChangeZoom className="plc-mt-2" />
       <ProfilePicChangeButton
         role="submit"
-        className="plc-mt-2"
+        className="plc-mt-2 plc-w-full"
         name={t("labels.save")}
         id="pelcro-submit"
       />

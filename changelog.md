@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Unreleased]
 
+### Fixed
+
+- Close button not working on purchace confirm modal
+- Atomic subcomps styling not being overridden by utility classes. [PRIVATE]
+
 ## [Released]
 
 ## [0.14.0] - 2021-04-28

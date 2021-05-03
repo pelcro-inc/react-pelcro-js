@@ -17,7 +17,7 @@ export const ProfilePicChangeSelectButton = ({
     <>
       <Button
         icon={<PhotoIcon />}
-        isFullWidth={true}
+        className="plc-w-full"
         onClick={browseFiles}
         aria-controls="fileupload"
         {...otherProps}
