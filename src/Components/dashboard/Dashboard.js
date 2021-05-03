@@ -127,6 +127,10 @@ class Dashboard extends Component {
     return this.props.setView("address-edit");
   };
 
+  displayProfilePicChange = () => {
+    return this.props.setView("profile-picture");
+  };
+
   getSubscriptionStatusText = (subscription) => {
     if (subscription.status === "canceled") {
       const cancelDate = new Date(subscription.canceled_at);
@@ -622,7 +626,7 @@ class Dashboard extends Component {
         afterLeave={this.props.onClose}
       >
         <div id="pelcro-view-dashboard">
-          <header className="plc-flex plc-flex-col plc-h-48 plc-p-2 plc-bg-primary-500">
+          <header className="plc-flex plc-flex-col plc-min-h-40 plc-p-2 plc-bg-primary-500">
             <div className="plc-flex plc-flex-row-reverse">
               <Button
                 variant="icon"
@@ -632,31 +636,40 @@ class Dashboard extends Component {
               ></Button>
             </div>
             <div className="plc-flex plc-items-center">
-              {profilePicture && (
-                <img
-                  className="plc-border-white plc-border-2 plc-border-solid plc-rounded-full plc-mr-2 sm:plc-ml-2 plc-w-36 plc-h-36 plc-bg-gray-300"
-                  src={profilePicture}
-                  alt="profile picture"
-                />
-              )}
-              <div className="plc-flex plc-flex-col plc-justify-between plc-flex-grow plc-px-2 sm:plc-px-6">
-                <div className="plc-flex plc-flex-col plc-flex-grow">
-                  {userHasName && (
-                    <p className="plc-m-0 plc-text-3xl plc-font-bold plc-text-white text">
-                      {this.user.first_name} {this.user.last_name}
-                    </p>
-                  )}
-
-                  <p
-                    className={`plc-m-0 plc-text-sm plc-text-white ${
-                      userHasName
-                        ? "plc-text-sm"
-                        : "plc-text-lg plc-font-bold plc-mt-auto"
-                    }`}
-                  >
-                    {this.user.email}
-                  </p>
+              <div className="plc-flex plc-justify-center">
+                <div className="plc-relative">
+                  <img
+                    className="plc-border-white plc-border-2 plc-border-solid plc-rounded-full plc-ml-3 sm:plc-ml-6 plc-w-24 plc-h-24 plc-bg-gray-300 plc-cursor-pointer pelcro-user-profile-picture"
+                    src={profilePicture}
+                    alt="profile picture"
+                    onClick={this.displayProfilePicChange}
+                  />
+                  <Button
+                    variant="icon"
+                    className="plc-absolute plc-bg-primary-300 plc-text-white plc-w-7 plc-h-7 plc-top-16 plc--right-1 hover:plc-bg-primary-600 hover:plc-text-white"
+                    icon={<EditIcon />}
+                    id={"pelcro-user-update-picture-button"}
+                    onClick={this.displayProfilePicChange}
+                  />
                 </div>
+              </div>
+
+              <div className="plc-flex plc-flex-col plc-justify-between plc-flex-grow plc-px-2 sm:plc-px-6">
+                {userHasName && (
+                  <p className="plc-text-3xl plc-font-bold plc-text-white">
+                    {this.user.first_name} {this.user.last_name}
+                  </p>
+                )}
+
+                <p
+                  className={`plc-m-0 plc-text-sm plc-text-white ${
+                    userHasName
+                      ? "plc-text-sm"
+                      : "plc-text-lg plc-font-bold plc-mt-auto"
+                  }`}
+                >
+                  {this.user.email}
+                </p>
               </div>
             </div>
           </header>
