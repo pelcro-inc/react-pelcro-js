@@ -26,7 +26,7 @@ export const ProfilePicChangeWrapper = () => {
     </>
   ) : (
     <ProfilePicChangeSelectButton
-      className="plc-mt-2"
+      className="plc-mt-2 plc-w-full"
       name={t("labels.selectImage")}
       id="pelcro-profile-picture-select"
     />
