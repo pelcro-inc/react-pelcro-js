@@ -14,6 +14,11 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 - Triggering coupon flow with empty spaces.
 
+### Changed
+
+- Order confirm and subscription renew modals to use primary color instead of hard-coded green.
+- Add address action to be a link instead of an outline button in address selection modal. 
+
 ## [Released]
 
 ## [0.15.0] - 2021-05-03
