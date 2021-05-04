@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Unreleased]
 
+### Added
+
+- Ability to show business logo at the top of every modal.
+
 ### Fixed
 
 - Triggering coupon flow with empty spaces.
