@@ -1,21 +1,30 @@
 import React from "react";
 import { ReactComponent as CloseIcon } from "../assets/x-icon.svg";
+import { usePelcro } from "../hooks/usePelcro";
 
+/**
+ *
+ */
 export function Modal({
   id,
   className = "",
   children,
   hideCloseButton = false,
-  onClose,
   ...otherProps
 }) {
+  const resetView = usePelcro((state) => state.resetView);
+
+  const onClose = () => {
+    resetView();
+  };
+
   return (
     <div className="pelcro-modal-overlay">
       <div
         className={`pelcro-modal ${className}`}
         role="dialog"
         aria-modal="true"
-        id={id}
+        id={`pelcro-${id}-modal`}
         {...otherProps}
       >
         <div className="pelcro-modal-content">

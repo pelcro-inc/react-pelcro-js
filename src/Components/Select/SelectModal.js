@@ -12,7 +12,35 @@ import { Button } from "../../SubComponents/Button";
 import { Checkbox } from "../../SubComponents/Checkbox";
 import { Radio } from "../../SubComponents/Radio";
 import { userHasAddress } from "../../utils/utils";
+import { usePelcro } from "../../hooks/usePelcro";
 
+/**
+ *
+ */
+export function SelectModalWithHook() {
+  const {
+    isGift,
+    plan,
+    product,
+    setProductAndPlan,
+    isRenewingGift,
+    switchView,
+    resetView
+  } = usePelcro();
+  return (
+    <SelectModalWithTrans
+      isGift={isGift}
+      disableGifting={isRenewingGift}
+      plan={plan}
+      product={product}
+      onClose={resetView}
+      setProductAndPlan={setProductAndPlan}
+      setView={switchView}
+    />
+  );
+}
+
+SelectModalWithHook.id = "select";
 class SelectModal extends Component {
   constructor(props) {
     super(props);
@@ -109,7 +137,7 @@ class SelectModal extends Component {
       return (
         <div
           key={product.id}
-          className="plc-flex plc-items-start plc-space-x-3 plc-p-2 plc-mt-4 plc-border plc-border-gray-500 plc-border-solid plc-rounded pelcro-select-product-wrapper"
+          className="plc-flex plc-items-start plc-p-2 plc-mt-4 plc-space-x-3 plc-border plc-border-gray-500 plc-border-solid plc-rounded pelcro-select-product-wrapper"
         >
           {product.image && (
             <img
@@ -256,24 +284,24 @@ class SelectModal extends Component {
     const { disableGifting } = this.props;
 
     if (this.state.mode === "product") {
-      this.props.ReactGA.event({
-        category: "VIEWS",
-        action: "Product Modal Viewed",
-        nonInteraction: true
-      });
+      // this.props.ReactGA.event({
+      //   category: "VIEWS",
+      //   action: "Product Modal Viewed",
+      //   nonInteraction: true
+      // });
     } else if (this.state.mode === "plan") {
-      this.props.ReactGA.event({
-        category: "VIEWS",
-        action: "Plan Modal Viewed",
-        nonInteraction: true
-      });
+      // this.props.ReactGA.event({
+      //   category: "VIEWS",
+      //   action: "Plan Modal Viewed",
+      //   nonInteraction: true
+      // });
     }
 
     return (
       <Modal
         hideCloseButton={!this.closeButton}
         onClose={this.props.onClose}
-        id="pelcro-selection-modal"
+        id="select"
       >
         <ModalBody>
           <div id="pelcro-selection-view">
@@ -316,7 +344,7 @@ class SelectModal extends Component {
                   disabled={this.state.disabled}
                   onClick={this.submitOption}
                   id="pelcro-submit"
-                  className="plc-mt-2 plc-w-full"
+                  className="plc-w-full plc-mt-2"
                 >
                   {this.locale("buttons.next")}
                 </Button>

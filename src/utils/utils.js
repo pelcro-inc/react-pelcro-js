@@ -1,3 +1,5 @@
+import { usePelcroVanilla } from "../hooks/usePelcro";
+
 export const formatDiscountedPrice = (planAmount, percentageOff) =>
   parseFloat(
     parseFloat(
@@ -112,4 +114,19 @@ export const getEcommerceOrderTotal = (order) => {
 export const userHasAddress = () => {
   const addresses = window.Pelcro.user.read().addresses ?? [];
   return addresses.length > 0;
+};
+
+export const displayAddressView = () => {
+  const { switchView } = usePelcroVanilla();
+
+  const userHasAddress = () => {
+    const addresses = window.Pelcro.user.read().addresses ?? [];
+    return addresses.length > 0;
+  };
+
+  if (userHasAddress()) {
+    switchView("address-select");
+  } else {
+    switchView("address");
+  }
 };

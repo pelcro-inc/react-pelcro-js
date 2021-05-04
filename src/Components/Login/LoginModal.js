@@ -8,28 +8,34 @@ import {
   ModalFooter
 } from "../../SubComponents/Modal";
 import { Link } from "../../SubComponents/Link";
+import { usePelcro } from "../../hooks/usePelcro";
 
-export function LoginModal({ setView, onClose, ...otherProps }) {
+/**
+ *
+ */
+export function LoginModal({ setView, onClose, ...props }) {
   const { t } = useTranslation("login");
+  const { switchView } = usePelcro();
 
   const onCreateAccountClick = () => {
-    setView("select");
+    if (props?.onCreateAccountClick?.() === false) {
+      return;
+    }
+
+    console.log("switched to select view");
+    switchView("select");
   };
 
   const onForgotPassword = () => {
-    setView("password-forgot");
+    switchView("password-forgot");
   };
   return (
     <Modal
       hideCloseButton={!window.Pelcro.paywall.displayCloseButton()}
-      onClose={onClose}
-      id="pelcro-login-modal"
+      id="login"
     >
       <ModalBody>
-        <LoginView
-          onForgotPassword={onForgotPassword}
-          {...otherProps}
-        />
+        <LoginView onForgotPassword={onForgotPassword} {...props} />
       </ModalBody>
       <ModalFooter>
         <div>
@@ -46,3 +52,5 @@ export function LoginModal({ setView, onClose, ...otherProps }) {
     </Modal>
   );
 }
+
+LoginModal.id = "login";
