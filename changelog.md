@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Unreleased]
 
+## [Released]
+
+## [0.16.0] - 2021-05-04
+
 ### Added
 
 - Ability to show business logo at the top of every modal.
@@ -18,8 +22,6 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 - Order confirm and subscription renew modals to use primary color instead of hard-coded green.
 - Add address action to be a link instead of an outline button in address selection modal. 
-
-## [Released]
 
 ## [0.15.0] - 2021-05-03
 
