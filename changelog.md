@@ -6,9 +6,18 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Unreleased]
 
+### Added
+
+- Ability to show business logo at the top of every modal.
+
 ### Fixed
 
 - Triggering coupon flow with empty spaces.
+
+### Changed
+
+- Order confirm and subscription renew modals to use primary color instead of hard-coded green.
+- Add address action to be a link instead of an outline button in address selection modal. 
 
 ## [Released]
 

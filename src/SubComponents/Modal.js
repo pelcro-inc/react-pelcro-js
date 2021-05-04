@@ -6,9 +6,12 @@ export function Modal({
   className = "",
   children,
   hideCloseButton = false,
+  hideHeaderLogo = true,
   onClose,
   ...otherProps
 }) {
+  const logoUrl = window.Pelcro.site.read().logo.url;
+
   return (
     <div className="pelcro-modal-overlay">
       <div
@@ -30,6 +33,15 @@ export function Modal({
                 <CloseIcon className="plc-fill-current" />
               </button>
             )}
+            <div className="plc-flex plc-justify-center plc-items-center plc-w-full">
+              <img
+                alt="business logo"
+                className={`plc-max-h-14 plc-mt-2 pelcro-modal-logo ${
+                  hideHeaderLogo ? "plc-hidden" : ""
+                }`}
+                src={logoUrl}
+              />
+            </div>
           </div>
           {children.find(({ type }) => type === ModalBody)}
           {children.find(({ type }) => type === ModalFooter)}

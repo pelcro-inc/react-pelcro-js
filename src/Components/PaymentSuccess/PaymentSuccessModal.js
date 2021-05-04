@@ -7,7 +7,12 @@ import {
 import Authorship from "../common/Authorship";
 import { PaymentSuccessView } from "./PaymentSuccessView";
 
-export function PaymentSuccessModal({ onDisplay, onClose, product }) {
+export function PaymentSuccessModal({
+  onDisplay,
+  onClose,
+  product,
+  hideHeaderLogo
+}) {
   useEffect(() => {
     window.Pelcro.insight.track("Modal Displayed", {
       name: "success"
@@ -17,7 +22,11 @@ export function PaymentSuccessModal({ onDisplay, onClose, product }) {
   });
 
   return (
-    <Modal id="pelcro-payment-success-modal" onClose={onClose}>
+    <Modal
+      id="pelcro-payment-success-modal"
+      onClose={onClose}
+      hideHeaderLogo={hideHeaderLogo}
+    >
       <ModalBody>
         <PaymentSuccessView onClose={onClose} product={product} />
       </ModalBody>

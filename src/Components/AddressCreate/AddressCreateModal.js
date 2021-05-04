@@ -7,10 +7,15 @@ import {
   ModalFooter
 } from "../../SubComponents/Modal";
 
-export const AddressCreateModal = ({ onClose, ...otherProps }) => {
+export const AddressCreateModal = ({
+  onClose,
+  hideHeaderLogo,
+  ...otherProps
+}) => {
   return (
     <Modal
       hideCloseButton={!window.Pelcro.paywall.displayCloseButton()}
+      hideHeaderLogo={hideHeaderLogo}
       onClose={onClose}
       id="pelcro-address-create-modal"
     >

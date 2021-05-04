@@ -9,7 +9,12 @@ import {
 import Authorship from "../common/Authorship";
 import { RegisterView } from "./RegisterView";
 
-export function RegisterModal({ setView, onClose, ...otherProps }) {
+export function RegisterModal({
+  setView,
+  onClose,
+  hideHeaderLogo,
+  ...otherProps
+}) {
   const { t } = useTranslation("register");
 
   const displayLoginView = () => {
@@ -24,6 +29,7 @@ export function RegisterModal({ setView, onClose, ...otherProps }) {
     <Modal
       hideCloseButton={!window.Pelcro.paywall.displayCloseButton()}
       onClose={onClose}
+      hideHeaderLogo={hideHeaderLogo}
       id="pelcro-register-modal"
     >
       <ModalBody>

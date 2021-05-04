@@ -13,6 +13,7 @@ import { userHasAddress } from "../../utils/utils";
 export const GiftRedeemModal = ({
   onClose,
   setView,
+  hideHeaderLogo,
   ...otherProps
 }) => {
   const { t } = useTranslation("register");
@@ -21,6 +22,7 @@ export const GiftRedeemModal = ({
     <Modal
       hideCloseButton={!window.Pelcro.paywall.displayCloseButton()}
       onClose={onClose}
+      hideHeaderLogo={hideHeaderLogo}
       id="pelcro-gift-redeem-modal"
     >
       <ModalBody>

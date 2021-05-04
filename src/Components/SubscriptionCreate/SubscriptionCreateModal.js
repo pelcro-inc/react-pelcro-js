@@ -7,11 +7,16 @@ import {
 import Authorship from "../common/Authorship";
 import { SubscriptionCreateView } from "./SubscriptionCreateView";
 
-export function SubscriptionCreateModal({ onClose, ...otherProps }) {
+export function SubscriptionCreateModal({
+  onClose,
+  hideHeaderLogo,
+  ...otherProps
+}) {
   return (
     <Modal
       hideCloseButton={!window.Pelcro.paywall.displayCloseButton()}
       onClose={onClose}
+      hideHeaderLogo={hideHeaderLogo}
       id="pelcro-subscription-create-modal"
     >
       <ModalBody>
