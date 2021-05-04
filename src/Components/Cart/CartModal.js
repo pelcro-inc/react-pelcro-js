@@ -7,11 +7,16 @@ import {
 import Authorship from "../common/Authorship";
 import { CartView } from "./CartView";
 
-export const CartModal = ({ onClose, ...otherProps }) => {
+export const CartModal = ({
+  onClose,
+  hideHeaderLogo,
+  ...otherProps
+}) => {
   return (
     <Modal
       hideCloseButton={false}
       onClose={onClose}
+      hideHeaderLogo={hideHeaderLogo}
       id="pelcro-cart-modal"
     >
       <ModalBody>

@@ -7,11 +7,16 @@ import {
   ModalFooter
 } from "../../SubComponents/Modal";
 
-export const OrderCreateModal = ({ onClose, ...otherProps }) => {
+export const OrderCreateModal = ({
+  onClose,
+  hideHeaderLogo,
+  ...otherProps
+}) => {
   return (
     <Modal
       hideCloseButton={false}
       onClose={onClose}
+      hideHeaderLogo={hideHeaderLogo}
       id="pelcro-order-create-modal"
     >
       <ModalBody>

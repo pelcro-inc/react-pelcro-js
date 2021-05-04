@@ -10,6 +10,7 @@ import {
 export const AddressSelectModal = ({
   setView,
   onClose,
+  hideHeaderLogo,
   ...otherProps
 }) => {
   const onAddNewAddress = () => {
@@ -20,6 +21,7 @@ export const AddressSelectModal = ({
     <Modal
       hideCloseButton={!window.Pelcro.paywall.displayCloseButton()}
       onClose={onClose}
+      hideHeaderLogo={hideHeaderLogo}
       id="pelcro-address-select-modal"
     >
       <ModalBody>

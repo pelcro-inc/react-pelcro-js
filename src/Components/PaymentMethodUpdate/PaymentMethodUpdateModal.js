@@ -12,6 +12,7 @@ export const PaymentMethodUpdateModal = (props) => {
     <Modal
       hideCloseButton={!window.Pelcro.paywall.displayCloseButton()}
       onClose={props.onClose}
+      hideHeaderLogo={props.hideHeaderLogo}
       id="pelcro-payment-method-update-modal"
     >
       <ModalBody>

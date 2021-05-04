@@ -12,6 +12,7 @@ import { PasswordForgotView } from "./PasswordForgotView";
 export const PasswordForgotModal = ({
   onClose,
   setView,
+  hideHeaderLogo,
   ...otherProps
 }) => {
   const { t } = useTranslation("passwordForgot");
@@ -19,6 +20,7 @@ export const PasswordForgotModal = ({
     <Modal
       hideCloseButton={!window.Pelcro.paywall.displayCloseButton()}
       onClose={onClose}
+      hideHeaderLogo={hideHeaderLogo}
       id="pelcro-password-forgot-modal"
     >
       <ModalBody>

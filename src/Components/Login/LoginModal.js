@@ -9,7 +9,12 @@ import {
 } from "../../SubComponents/Modal";
 import { Link } from "../../SubComponents/Link";
 
-export function LoginModal({ setView, onClose, ...otherProps }) {
+export function LoginModal({
+  setView,
+  onClose,
+  hideHeaderLogo,
+  ...otherProps
+}) {
   const { t } = useTranslation("login");
 
   const onCreateAccountClick = () => {
@@ -23,6 +28,7 @@ export function LoginModal({ setView, onClose, ...otherProps }) {
     <Modal
       hideCloseButton={!window.Pelcro.paywall.displayCloseButton()}
       onClose={onClose}
+      hideHeaderLogo={hideHeaderLogo}
       id="pelcro-login-modal"
     >
       <ModalBody>

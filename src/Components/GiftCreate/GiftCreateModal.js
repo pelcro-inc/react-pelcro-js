@@ -13,6 +13,7 @@ export const GiftCreateModal = ({
   setView,
   onDisplay,
   onClose,
+  hideHeaderLogo,
   ...otherProps
 }) => {
   const { t } = useTranslation("register");
@@ -27,6 +28,7 @@ export const GiftCreateModal = ({
     <Modal
       hideCloseButton={!window.Pelcro.paywall.displayCloseButton()}
       onClose={onClose}
+      hideHeaderLogo={hideHeaderLogo}
       id="pelcro-gift-create-modal"
     >
       <ModalBody>
