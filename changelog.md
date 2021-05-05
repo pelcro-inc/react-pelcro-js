@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Unreleased]
 
+### Added
+
+- Add onDisplay prop to order confirmation modal.
+
 ## [Released]
 
 ## [0.16.0] - 2021-05-04
@@ -21,7 +25,7 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 ### Changed
 
 - Order confirm and subscription renew modals to use primary color instead of hard-coded green.
-- Add address action to be a link instead of an outline button in address selection modal. 
+- Add address action to be a link instead of an outline button in address selection modal.
 
 ## [0.15.0] - 2021-05-03
 
