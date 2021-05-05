@@ -26,6 +26,10 @@ export class OrderConfirmModal extends Component {
     this.site = window.Pelcro.site.read();
   }
 
+  componentDidMount = () => {
+    this.props?.onDisplay?.();
+  };
+
   componentWillUnmount = () => {
     this.removeAll();
   };

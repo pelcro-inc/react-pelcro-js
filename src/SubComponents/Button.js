@@ -31,7 +31,7 @@ export function Button({
           focusable="false"
         />
       )}
-      {!isLoading && (
+      {!isLoading && icon && (
         <div
           className={`${
             variant === "icon"
