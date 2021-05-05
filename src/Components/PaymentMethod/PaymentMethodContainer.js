@@ -444,41 +444,50 @@ const PaymentMethodContainerWithoutStripe = ({
   };
 
   const updatePaymentSource = (state, dispatch) => {
-    return stripe.createToken().then(({ token, error }) => {
-      if (error) {
-        return handlePaymentError(error);
-      }
+    return stripe
+      .createSource({ type: "card" })
+      .then(({ source, error }) => {
+        // We don't support source creation for 3D secure yet
+        if (source?.card?.three_d_secure === "required") {
+          return handlePaymentError({
+            message: t("messages.cardAuthFailed")
+          });
+        }
 
-      window.Pelcro.source.create(
-        {
-          auth_token: window.Pelcro.user.read().auth_token,
-          token: token.id
-        },
-        (err, res) => {
-          dispatch({ type: DISABLE_SUBMIT, payload: false });
-          dispatch({ type: LOADING, payload: false });
-          if (err) {
-            onFailure(err);
-            return dispatch({
+        if (error) {
+          return handlePaymentError(error);
+        }
+
+        window.Pelcro.source.create(
+          {
+            auth_token: window.Pelcro.user.read().auth_token,
+            token: source.id
+          },
+          (err, res) => {
+            dispatch({ type: DISABLE_SUBMIT, payload: false });
+            dispatch({ type: LOADING, payload: false });
+            if (err) {
+              onFailure(err);
+              return dispatch({
+                type: SHOW_ALERT,
+                payload: {
+                  type: "error",
+                  content: getErrorMessages(err)
+                }
+              });
+            }
+
+            dispatch({
               type: SHOW_ALERT,
               payload: {
-                type: "error",
-                content: getErrorMessages(err)
+                type: "success",
+                content: successMessage
               }
             });
+            onSuccess(res);
           }
-
-          dispatch({
-            type: SHOW_ALERT,
-            payload: {
-              type: "success",
-              content: successMessage
-            }
-          });
-          onSuccess(res);
-        }
-      );
-    });
+        );
+      });
   };
 
   const updatePaymentRequest = (state) => {
