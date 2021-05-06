@@ -26,7 +26,8 @@
     "cancel": "Cancel your subscription online at anytime.",
     "giftSent": "Subscription gift has been sent to",
     "successfully": "successfully",
-    "cardAuthFailed": "We are unable to authenticate your payment method. Please choose a different payment method and try again."
+    "cardAuthFailed": "We are unable to authenticate your payment method. Please choose a different payment method and try again.",
+    "cardAuthNotSupported": "Updating your payment method to one that requires authentication is currently not possible. Please use a different payment method or contact customer service."
   },
   "errors": {
     "": ""

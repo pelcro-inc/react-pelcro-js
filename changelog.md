@@ -26,6 +26,10 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [0.16.0] - 2021-05-04
 
+### Changed
+
+- Use stripe sources & reject 3D secure required cards in pelcro source creation.
+
 ### Added
 
 - Ability to show business logo at the top of every modal.
