@@ -6,8 +6,11 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Unreleased]
 
-
 ## [Released]
+
+## [0.17.1] - 2021-05-06
+
+- Reject 3D secure requiring cards in source creation flow.
 
 ## [0.17.0] - 2021-05-06
 
