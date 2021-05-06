@@ -9,10 +9,15 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 ### Added
 
 - Add onDisplay prop to order confirmation modal.
+- Ability to remove user's profile picture.
 
 ### Fixed
 
-- App crashing when there is no primary color set in the platform
+- App crashing when there is no primary color set in the platform.
+
+### Changed
+
+- reduced the usage of primary color in the dashboard, and used different grades of gray instead.
 
 ## [Released]
 
