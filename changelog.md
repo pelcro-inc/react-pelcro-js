@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Unreleased]
 
+
+## [Released]
+
+## [0.17.0] - 2021-05-06
+
 ### Added
 
 - Add onDisplay prop to order confirmation modal.
@@ -18,8 +23,6 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 ### Changed
 
 - reduced the usage of primary color in the dashboard, and used different grades of gray instead.
-
-## [Released]
 
 ## [0.16.0] - 2021-05-04
 
