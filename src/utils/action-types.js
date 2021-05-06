@@ -74,6 +74,7 @@ export const SELECT_VIEW = "SELECT_VIEW";
 export const SET_CROP = "SET_CROP";
 export const SET_ZOOM = "SET_ZOOM";
 export const CHANGE_IMAGE_FILE = "CHANGE_IMAGE_FILE";
+export const REMOVE_IMAGE = "REMOVE_IMAGE";
 export const CROP_COMPLETE = "CROP_COMPLETE";
 export const SET_IMAGE_SRC = "SET_IMAGE_SRC";
 export const PASSWORD_CHANGE_SUCCESS = "PASSWORD_CHANGE_SUCCESS";

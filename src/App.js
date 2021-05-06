@@ -911,7 +911,7 @@ class App extends Component {
           {this.state.view === "profile-picture" && (
             <ProfilePicChangeModal
               onClose={this.resetView}
-              onSuccess={this.resetView}
+              onChangeSuccess={this.resetView}
             />
           )}
           {this.state.view === "address-edit" && (

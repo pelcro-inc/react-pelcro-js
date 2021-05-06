@@ -156,6 +156,7 @@ export { ProfilePicChangeContainer } from "./Components/ProfilePicChange/Profile
 export { ProfilePicChangeCropper } from "./Components/ProfilePicChange/ProfilePicChangeCropper";
 export { ProfilePicChangeZoom } from "./Components/ProfilePicChange/ProfilePicChangeZoom";
 export { ProfilePicChangeSelectButton } from "./Components/ProfilePicChange/ProfilePicChangeSelectButton";
+export { ProfilePicChangeRemoveButton } from "./Components/ProfilePicChange/ProfilePicChangeRemoveButton";
 export { ProfilePicChangeView } from "./Components/ProfilePicChange/ProfilePicChangeView";
 export { ProfilePicChangeModal } from "./Components/ProfilePicChange/ProfilePicChangeModal";
 

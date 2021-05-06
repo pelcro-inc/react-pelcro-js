@@ -12,9 +12,11 @@
     "cropperSubtitle": "Téléverser une photo et ajustez la à votre goût",
     "save": "Téléverser une photo",
     "selectImage": "Sélectionnez une image",
+    "removeImage": "Supprimer la photo de profil",
     "zoom": "Zoom"
   },
   "messages": {
-    "userUpdated": "Votre profil a été mis à jour avec succès."
+    "userUpdated": "Votre profil a été mis à jour avec succès.",
+    "pictureRemoved": "Votre photo de profil a été supprimée avec succès."
   }
 }
