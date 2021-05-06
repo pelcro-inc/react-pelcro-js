@@ -174,8 +174,8 @@ class App extends Component {
       };
     };
 
-    const primaryColorHex = this.state.site.design_settings
-      .primary_color;
+    const primaryColorHex = this.state.site?.design_settings
+      ?.primary_color;
     if (!primaryColorHex) {
       return;
     }
