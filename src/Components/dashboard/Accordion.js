@@ -64,7 +64,7 @@ Accordion.item = function AccordionItem({
         ${
           isActive
             ? "plc-border-solid plc-bg-grey-200 plc-border-primary-400"
-            : "hover:plc-bg-primary-50"
+            : "hover:plc-bg-gray-100"
         }`}
     >
       <header
