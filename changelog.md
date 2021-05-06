@@ -10,6 +10,10 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 - Add onDisplay prop to order confirmation modal.
 
+### Fixed
+
+- App crashing when there is no primary color set in the platform
+
 ## [Released]
 
 ## [0.16.0] - 2021-05-04
