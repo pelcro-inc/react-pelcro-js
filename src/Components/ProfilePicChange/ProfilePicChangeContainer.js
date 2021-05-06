@@ -1,4 +1,5 @@
 import React, { createContext } from "react";
+import { useTranslation } from "react-i18next";
 import useReducerWithSideEffects, {
   UpdateWithSideEffect,
   Update,
@@ -12,7 +13,8 @@ import {
   SET_ZOOM,
   CHANGE_IMAGE_FILE,
   CROP_COMPLETE,
-  SET_IMAGE_SRC
+  SET_IMAGE_SRC,
+  REMOVE_IMAGE
 } from "../../utils/action-types";
 import { getErrorMessages } from "../common/Helpers";
 
@@ -34,10 +36,14 @@ const { Provider } = store;
 const ProfilePicChangeContainer = ({
   style,
   className,
-  onSuccess = () => {},
-  onFailure = () => {},
+  onChangeSuccess = () => {},
+  onChangeFailure = () => {},
+  onRemoveSuccess = () => {},
+  onRemoveFailure = () => {},
   children
 }) => {
+  const { t } = useTranslation("userEdit");
+
   const handleUpdatePicture = async (
     { imageSrc, croppedAreaPixels },
     dispatch
@@ -63,14 +69,43 @@ const ProfilePicChangeContainer = ({
                 content: getErrorMessages(err)
               }
             });
-            return onFailure(err);
+            return onChangeFailure(err);
           }
-          return onSuccess();
+          return onChangeSuccess();
         }
       );
     } catch (e) {
       console.error(e);
     }
+  };
+
+  const handleRemovePicture = (dispatch) => {
+    window.Pelcro.user.removeProfilePicture(
+      {
+        auth_token: window.Pelcro.user.read().auth_token
+      },
+      (err, res) => {
+        dispatch({ type: LOADING, payload: false });
+        if (err) {
+          dispatch({
+            type: SHOW_ALERT,
+            payload: {
+              type: "error",
+              content: getErrorMessages(err)
+            }
+          });
+          return onRemoveFailure(err);
+        }
+        dispatch({
+          type: SHOW_ALERT,
+          payload: {
+            type: "success",
+            content: t("messages.pictureRemoved")
+          }
+        });
+        return onRemoveSuccess();
+      }
+    );
   };
 
   const [state, dispatch] = useReducerWithSideEffects(
@@ -86,6 +121,12 @@ const ProfilePicChangeContainer = ({
             ...state,
             imageSrc: action.payload
           });
+
+        case REMOVE_IMAGE:
+          return UpdateWithSideEffect(
+            { ...state, isSubmitting: true },
+            (state, dispatch) => handleRemovePicture(dispatch)
+          );
 
         case SET_ZOOM:
           return Update({
