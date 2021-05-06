@@ -15,7 +15,7 @@ import { ReactComponent as RefreshIcon } from "../../assets/refresh.svg";
 import { ReactComponent as XCircleIcon } from "../../assets/x-icon-circle.svg";
 import { ReactComponent as PaymentCardIcon } from "../../assets/payment-card.svg";
 import { ReactComponent as LocationIcon } from "../../assets/location-pin.svg";
-import { ReactComponent as BoxIcon } from "../../assets/box.svg";
+import { ReactComponent as SubscriptionIcon } from "../../assets/subscription.svg";
 import { ReactComponent as GiftIcon } from "../../assets/gift.svg";
 import { ReactComponent as ShoppingIcon } from "../../assets/shopping.svg";
 import { ReactComponent as PlusIcon } from "../../assets/plus.svg";
@@ -770,7 +770,9 @@ class Dashboard extends Component {
 
               <Accordion.item
                 name={SUB_MENUS.SUBSCRIPTIONS}
-                icon={<BoxIcon />}
+                icon={
+                  <SubscriptionIcon className="plc-h-10 plc-w-10 plc-pt-2 plc-pr-1 plc--ml-2" />
+                }
                 title={this.locale("labels.subscriptions")}
                 content={this.renderSubscriptions()}
               />
