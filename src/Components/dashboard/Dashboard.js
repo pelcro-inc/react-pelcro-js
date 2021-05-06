@@ -646,7 +646,7 @@ class Dashboard extends Component {
                   />
                   <Button
                     variant="icon"
-                    className="plc-absolute plc-bg-primary-300 plc-text-white plc-w-7 plc-h-7 plc-top-16 plc--right-1 hover:plc-bg-primary-600 hover:plc-text-white"
+                    className="plc-absolute plc-bg-gray-500 plc-text-white plc-w-7 plc-h-7 plc-top-16 plc--right-1 hover:plc-bg-gray-600 hover:plc-text-white"
                     icon={<EditIcon />}
                     id={"pelcro-user-update-picture-button"}
                     onClick={this.displayProfilePicChange}
