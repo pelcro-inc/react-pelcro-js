@@ -372,7 +372,7 @@ class Dashboard extends Component {
                 icon={
                   <PlusIcon className="plc-w-4 plc-h-4 plc-mr-1" />
                 }
-                className="plc-h-8 plc-font-semibold plc-tracking-wider plc-uppercase plc-rounded-none plc-text-primary-700 hover:plc-bg-primary-50 plc-w-full"
+                className="plc-h-8 plc-font-semibold plc-tracking-wider plc-uppercase plc-rounded-none plc-text-gray-700 hover:plc-bg-gray-100 plc-w-full"
                 onClick={this.displayProductSelect}
               >
                 {this.locale("labels.addSubscription")}
@@ -386,7 +386,7 @@ class Dashboard extends Component {
                 icon={
                   <GiftIcon className="plc-w-4 plc-h-4 plc-mr-1" />
                 }
-                className="plc-h-8 plc-font-semibold plc-tracking-wider plc-uppercase plc-rounded-none plc-text-primary-700 hover:plc-bg-primary-50 plc-w-full"
+                className="plc-h-8 plc-font-semibold plc-tracking-wider plc-uppercase plc-rounded-none plc-text-gray-700 hover:plc-bg-gray-100 plc-w-full"
                 onClick={this.displayRedeem}
               >
                 {this.locale("labels.redeemGift")}
@@ -527,7 +527,7 @@ class Dashboard extends Component {
                 icon={
                   <PlusIcon className="plc-w-4 plc-h-4 plc-mr-1" />
                 }
-                className="plc-h-8 plc-font-semibold plc-tracking-wider plc-uppercase plc-rounded-none plc-text-primary-700 hover:plc-bg-primary-50 plc-w-full"
+                className="plc-h-8 plc-font-semibold plc-tracking-wider plc-uppercase plc-rounded-none plc-text-gray-700 hover:plc-bg-gray-100 plc-w-full"
                 onClick={() =>
                   this.displayProductSelect({ isGift: true })
                 }
@@ -589,7 +589,7 @@ class Dashboard extends Component {
               <Button
                 variant="ghost"
                 icon={<PlusIcon className="plc-w-4 plc-mr-1" />}
-                className="plc-h-8 plc-font-semibold plc-tracking-wider plc-uppercase plc-text-primary-700 hover:plc-bg-primary-50 plc-w-full"
+                className="plc-h-8 plc-font-semibold plc-tracking-wider plc-uppercase plc-text-gray-700 hover:plc-bg-gray-100 plc-w-full"
                 onClick={this.displayAddressCreate}
               >
                 {this.locale("labels.addAddress")}
