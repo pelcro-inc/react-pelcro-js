@@ -10,11 +10,12 @@ export function Modal({
   className = "",
   children,
   hideCloseButton = false,
-  ...otherProps
+  ...props
 }) {
   const resetView = usePelcro((state) => state.resetView);
 
   const onClose = () => {
+    props?.onClose?.();
     resetView();
   };
 
@@ -25,7 +26,7 @@ export function Modal({
         role="dialog"
         aria-modal="true"
         id={`pelcro-${id}-modal`}
-        {...otherProps}
+        {...props}
       >
         <div className="pelcro-modal-content">
           <div className="pelcro-modal-header">
