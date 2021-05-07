@@ -22,10 +22,11 @@ export function SelectModalWithHook() {
     isGift,
     plan,
     product,
-    setProductAndPlan,
+
     isRenewingGift,
     switchView,
-    resetView
+    resetView,
+    set
   } = usePelcro();
   return (
     <SelectModalWithTrans
@@ -34,7 +35,9 @@ export function SelectModalWithHook() {
       plan={plan}
       product={product}
       onClose={resetView}
-      setProductAndPlan={setProductAndPlan}
+      setProductAndPlan={(product, plan, isGift) =>
+        set({ product, plan, isGift })
+      }
       setView={switchView}
     />
   );

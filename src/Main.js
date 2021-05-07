@@ -3,7 +3,9 @@ import { usePelcro } from "./hooks/usePelcro";
 import { PelcroModalController } from "./Components/PelcroModalController/PelcroModalController";
 import { LoginModal } from "./Components/Login/LoginModal";
 import { RegisterModal } from "./Components/Register/RegisterModal";
+import { AddressUpdateModal } from "./Components/AddressUpdate/AddressUpdateModal";
 import { SelectModalWithHook as SelectModal } from "./Components/Select/SelectModal";
+import { DashboardWithHook as Dashboard } from "./Components/dashboard/Dashboard";
 
 export const Main = () => {
   const { resetView, switchView } = usePelcro();
@@ -28,6 +30,10 @@ export const Main = () => {
       />
 
       <SelectModal />
+
+      <Dashboard />
+
+      <AddressUpdateModal />
     </PelcroModalController>
   );
 };

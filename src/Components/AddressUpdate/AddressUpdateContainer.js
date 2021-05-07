@@ -4,6 +4,7 @@ import useReducerWithSideEffects, {
   UpdateWithSideEffect,
   Update
 } from "use-reducer-with-side-effects";
+import { usePelcro } from "../../hooks/usePelcro";
 import {
   HANDLE_SUBMIT,
   GET_COUNTRIES_SUCCESS,
@@ -51,13 +52,11 @@ const AddressUpdateContainer = ({
   style,
   className,
   type = "shipping",
-  giftCode = false,
-  product = null,
   onSuccess = () => {},
   onFailure = () => {},
-  children,
-  addressId
+  children
 }) => {
+  const { addressIdToEdit } = usePelcro();
   const [t] = useTranslation("address");
   useEffect(() => {
     const getCountries = () => {
@@ -94,7 +93,7 @@ const AddressUpdateContainer = ({
     for (const address in addresses) {
       const thisAddress = addresses[address];
 
-      if (+thisAddress.id === +addressId) {
+      if (+thisAddress.id === +addressIdToEdit) {
         const newState = {
           ...initialState,
           firstName: thisAddress.first_name,
@@ -126,7 +125,7 @@ const AddressUpdateContainer = ({
   ) => {
     window.Pelcro.address.update(
       {
-        address_id: addressId,
+        address_id: addressIdToEdit,
         auth_token: window.Pelcro.user.read().auth_token,
         type: type,
         first_name: firstName,

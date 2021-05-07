@@ -23,3 +23,5 @@ export const AddressUpdateModal = ({ onClose, ...otherProps }) => {
     </Modal>
   );
 };
+
+AddressUpdateModal.id = "address-edit";
