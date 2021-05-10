@@ -8,6 +8,10 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Released]
 
+## [0.17.2] - 2021-05-10
+
+- Include tax calculation in 3D secure flow.
+
 ## [0.17.1] - 2021-05-06
 
 - Reject 3D secure requiring cards in source creation flow.
