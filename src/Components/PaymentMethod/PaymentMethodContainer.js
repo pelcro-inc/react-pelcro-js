@@ -507,17 +507,27 @@ const PaymentMethodContainerWithoutStripe = ({
           return handlePaymentError(error);
         }
 
-        if (source?.card?.three_d_secure === "required") {
-          return resolveTaxCalculation().then((totalAmountWithTax) =>
-            generate3DSecureSource(source, totalAmountWithTax).then(
-              ({ source, error }) => {
-                if (error) {
-                  return handlePaymentError(error);
-                }
+        const totalAmount =
+          state?.updatedPrice ??
+          plan?.amount ??
+          getEcommerceOrderTotal(order?.items) ??
+          0;
 
-                toggleAuthenticationPendingView(true, source);
+        if (
+          source?.card?.three_d_secure === "required" &&
+          totalAmount > 0
+        ) {
+          return resolveTaxCalculation().then((totalAmountWithTax) =>
+            generate3DSecureSource(
+              source,
+              totalAmountWithTax ?? totalAmount
+            ).then(({ source, error }) => {
+              if (error) {
+                return handlePaymentError(error);
               }
-            )
+
+              toggleAuthenticationPendingView(true, source);
+            })
           );
         }
 
@@ -563,10 +573,11 @@ const PaymentMethodContainerWithoutStripe = ({
   /**
    * Resolves with a generated stripe 3DSecure source
    * @param {Object} source stripe's source object
-   * @param {number | null} totalAmountWithTax total amount with taxes added incase taxes enabled
+   * @param {number | null} totalAmount total amount with taxes added incase taxes enabled
    * @return {Promise}
    */
-  const generate3DSecureSource = (source, totalAmountWithTax) => {
+  const generate3DSecureSource = (source, totalAmount) => {
+    console.log(totalAmount);
     const listenFor3DSecureCompletionMessage = () => {
       const retrieveSourceInfoFromIframe = (event) => {
         const { data } = event;
@@ -595,12 +606,7 @@ const PaymentMethodContainerWithoutStripe = ({
 
     return stripe.createSource({
       type: "three_d_secure",
-      amount:
-        state?.updatedPrice ??
-        totalAmountWithTax ??
-        plan?.amount ??
-        getEcommerceOrderTotal(order?.items) ??
-        0,
+      amount: totalAmount,
       currency:
         plan?.currency || window.Pelcro.site.read().default_currency,
       three_d_secure: {
