@@ -447,15 +447,15 @@ const PaymentMethodContainerWithoutStripe = ({
     return stripe
       .createSource({ type: "card" })
       .then(({ source, error }) => {
+        if (error) {
+          return handlePaymentError(error);
+        }
+
         // We don't support source creation for 3D secure yet
         if (source?.card?.three_d_secure === "required") {
           return handlePaymentError({
             message: t("messages.cardAuthNotSupported")
           });
-        }
-
-        if (error) {
-          return handlePaymentError(error);
         }
 
         window.Pelcro.source.create(
