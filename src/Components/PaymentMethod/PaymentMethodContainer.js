@@ -508,22 +508,65 @@ const PaymentMethodContainerWithoutStripe = ({
         }
 
         if (source?.card?.three_d_secure === "required") {
-          return generate3DSecureSource(source).then(
-            ({ source, error }) => {
-              if (error) {
-                return handlePaymentError(error);
-              }
+          return resolveTaxCalculation().then((totalAmountWithTax) =>
+            generate3DSecureSource(source, totalAmountWithTax).then(
+              ({ source, error }) => {
+                if (error) {
+                  return handlePaymentError(error);
+                }
 
-              toggleAuthenticationPendingView(true, source);
-            }
+                toggleAuthenticationPendingView(true, source);
+              }
+            )
           );
         }
 
         return handlePayment(source);
+      })
+      .catch((error) => {
+        return handlePaymentError(error);
       });
   };
 
-  const generate3DSecureSource = (source) => {
+  /**
+   * Resolves with the total including taxes incase taxes enabled by site
+   * @return {Promise}
+   */
+  const resolveTaxCalculation = () => {
+    const taxesEnabled = window.Pelcro.site.read()?.taxes_enabled;
+
+    return new Promise((resolve, reject) => {
+      // resolve early if taxes isn't enabled
+      if (!taxesEnabled) {
+        return resolve(null);
+      }
+
+      window.Pelcro.order.create(
+        {
+          auth_token: window.Pelcro.user.read().auth_token,
+          plan_id: plan.id,
+          coupon_code: state?.couponCode,
+          address_id: selectedAddressId
+        },
+        (error, res) => {
+          if (error) {
+            return reject(error);
+          }
+
+          const totalAmountWithTax = res.data?.total;
+          resolve(totalAmountWithTax);
+        }
+      );
+    });
+  };
+
+  /**
+   * Resolves with a generated stripe 3DSecure source
+   * @param {Object} source stripe's source object
+   * @param {number | null} totalAmountWithTax total amount with taxes added incase taxes enabled
+   * @return {Promise}
+   */
+  const generate3DSecureSource = (source, totalAmountWithTax) => {
     const listenFor3DSecureCompletionMessage = () => {
       const retrieveSourceInfoFromIframe = (event) => {
         const { data } = event;
@@ -553,9 +596,10 @@ const PaymentMethodContainerWithoutStripe = ({
     return stripe.createSource({
       type: "three_d_secure",
       amount:
-        state?.updatedPrice ||
-        plan?.amount ||
-        getEcommerceOrderTotal(order?.items) ||
+        state?.updatedPrice ??
+        totalAmountWithTax ??
+        plan?.amount ??
+        getEcommerceOrderTotal(order?.items) ??
         0,
       currency:
         plan?.currency || window.Pelcro.site.read().default_currency,
