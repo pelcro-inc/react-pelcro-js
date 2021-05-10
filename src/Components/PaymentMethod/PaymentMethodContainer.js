@@ -510,8 +510,7 @@ const PaymentMethodContainerWithoutStripe = ({
         const totalAmount =
           state?.updatedPrice ??
           plan?.amount ??
-          getEcommerceOrderTotal(order?.items) ??
-          0;
+          getEcommerceOrderTotal(order?.items);
 
         if (
           source?.card?.three_d_secure === "required" &&
