@@ -44,7 +44,7 @@ export const ProfilePicChangeWrapper = () => {
       />
       {currentProfilePicture && (
         <ProfilePicChangeRemoveButton
-          className="plc-mt-1 plc-w-full plc-bg-red-500 hover:plc-bg-red-600 disabled:plc-bg-gray-400"
+          className="plc-mt-1 plc-w-full plc-bg-gray-600 hover:plc-bg-gray-700 disabled:plc-bg-gray-400"
           name={t("labels.removeImage")}
           id="pelcro-profile-picture-remove"
         />
