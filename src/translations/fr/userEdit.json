@@ -11,8 +11,8 @@
     "cropperTitle": "Mettre à jour la photo de profil",
     "cropperSubtitle": "Téléverser une photo et ajustez la à votre goût",
     "save": "Téléverser une photo",
-    "selectImage": "Sélectionnez une image",
-    "removeImage": "Supprimer la photo de profil",
+    "selectImage": "Télécharger une nouvelle photo",
+    "removeImage": "supprimer la photo actuelle",
     "zoom": "Zoom"
   },
   "messages": {
