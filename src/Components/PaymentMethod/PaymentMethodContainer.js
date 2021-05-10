@@ -576,7 +576,6 @@ const PaymentMethodContainerWithoutStripe = ({
    * @return {Promise}
    */
   const generate3DSecureSource = (source, totalAmount) => {
-    console.log(totalAmount);
     const listenFor3DSecureCompletionMessage = () => {
       const retrieveSourceInfoFromIframe = (event) => {
         const { data } = event;
