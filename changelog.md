@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Unreleased]
 
+## [Released]
+
+## [0.17.3] - 2021-05-10
+
 ### Fixed
 
 - password reset modal not showing any alerts
@@ -13,8 +17,6 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 ### Changed
 
 - color and wording of the 'remove profile picture' button in the user profile picture change modal
-
-## [Released]
 
 ## [0.17.2] - 2021-05-10
 
