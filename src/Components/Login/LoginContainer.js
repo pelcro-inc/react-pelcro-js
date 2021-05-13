@@ -37,7 +37,7 @@ const LoginContainer = ({
   onFailure = () => {},
   children
 }) => {
-  const { setIsAuthenticated } = usePelcro();
+  const { set } = usePelcro();
 
   const handleLogin = ({ email, password }, dispatch) => {
     window.Pelcro.user.login({ email, password }, (err, res) => {
@@ -50,7 +50,7 @@ const LoginContainer = ({
         });
         onFailure(err);
       } else {
-        setIsAuthenticated(true);
+        set({ isAuthenticated: true });
         onSuccess();
       }
     });

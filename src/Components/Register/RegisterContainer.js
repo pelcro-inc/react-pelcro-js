@@ -58,7 +58,8 @@ const RegisterContainer = ({
   useEffect(() => {
     onDisplay();
   }, []);
-  const { setIsAuthenticated } = usePelcro();
+
+  const { set } = usePelcro();
 
   const handleRegister = (userData, dispatch) => {
     const filteredData = cleanObjectNullValues(userData);
@@ -94,7 +95,7 @@ const RegisterContainer = ({
           onFailure(err);
         } else {
           onSuccess();
-          setIsAuthenticated(true);
+          set({ isAuthenticated: true });
         }
       }
     );

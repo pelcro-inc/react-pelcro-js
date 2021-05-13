@@ -27,7 +27,6 @@ const createPelcroStore = (set, get) => {
 
     // User
     isAuthenticated: window.Pelcro.user.isAuthenticated(),
-    setIsAuthenticated: (isAuthenticated) => set({ isAuthenticated }),
     logout: actions.logout,
     selectedAddressId: null,
     addressIdToEdit: null,
