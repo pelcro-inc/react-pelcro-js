@@ -1,42 +1,43 @@
-import create from "zustand";
-import createVanilla from "zustand/vanilla";
+import createHook from "zustand";
+import createStore from "zustand/vanilla";
 import { mountStoreDevtool } from "simple-zustand-devtools";
 import { PelcroActions } from "./pelcroActions";
 
-const createPelcroStore = (set, get) => {
-  const actions = new PelcroActions(set, get);
+const createPelcroStore = () =>
+  createStore((set, get) => {
+    const actions = new PelcroActions(set, get);
 
-  return {
-    // View
-    view: null,
-    switchView: actions.switchView,
-    resetView: actions.resetView,
-    flow: "renewal", // TBD
+    return {
+      // View
+      view: null,
+      switchView: actions.switchView,
+      resetView: actions.resetView,
+      flow: "renewal", // TBD
 
-    // Plans
-    product: null,
-    plan: null,
-    isGift: false,
-    isRenewingGift: false,
-    giftCode: "",
-    subscriptionIdToRenew: null,
+      // Plans
+      product: null,
+      plan: null,
+      isGift: false,
+      isRenewingGift: false,
+      giftCode: "",
+      subscriptionIdToRenew: null,
 
-    // E-commerce
-    products: [],
-    order: null,
+      // E-commerce
+      products: [],
+      order: null,
 
-    // User
-    isAuthenticated: window.Pelcro.user.isAuthenticated(),
-    logout: actions.logout,
-    selectedAddressId: null,
-    addressIdToEdit: null,
+      // User
+      isAuthenticated: window.Pelcro.user.isAuthenticated(),
+      logout: actions.logout,
+      selectedAddressId: null,
+      addressIdToEdit: null,
 
-    // store setter
-    set
-  };
-};
+      // store setter
+      set
+    };
+  });
 
-const pelcroStore = createVanilla(createPelcroStore);
+const pelcroStore = createPelcroStore();
 
 export const usePelcroVanilla = () => {
   return {
@@ -46,7 +47,7 @@ export const usePelcroVanilla = () => {
 };
 
 // Creates the react store hook
-export const usePelcro = create(pelcroStore);
+export const usePelcro = createHook(pelcroStore);
 
 if (process.env.NODE_ENV === "development") {
   mountStoreDevtool("Store", usePelcro);
