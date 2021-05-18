@@ -7,6 +7,7 @@ import { AddressUpdateModal } from "./Components/AddressUpdate/AddressUpdateModa
 import { SelectModalWithHook as SelectModal } from "./Components/Select/SelectModal";
 import { DashboardWithHook as Dashboard } from "./Components/dashboard/Dashboard";
 import { UserUpdateModal } from "./Components/UserUpdate/UserUpdateModal";
+import { ProfilePicChangeModal } from "./Components/ProfilePicChange/ProfilePicChangeModal";
 
 usePelcro.override((set) => {
   return {
@@ -36,6 +37,7 @@ export const Main = () => {
       />
 
       <UserUpdateModal />
+      <ProfilePicChangeModal />
 
       <SelectModal />
 
