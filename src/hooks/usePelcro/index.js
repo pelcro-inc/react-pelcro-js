@@ -32,7 +32,7 @@ const createPelcroStore = () =>
       selectedAddressId: null,
       addressIdToEdit: null,
 
-      // store setter
+      // Store setter
       set
     };
   });
