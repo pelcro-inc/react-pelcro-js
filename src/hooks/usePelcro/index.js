@@ -41,8 +41,7 @@ const pelcroStore = createPelcroStore();
 
 export const usePelcroVanilla = () => {
   return {
-    isAuthenticated: () => pelcroStore.getState().isAuthenticated,
-    switchView: (view) => pelcroStore.setState({ view })
+    ...pelcroStore.getState()
   };
 };
 
@@ -50,5 +49,5 @@ export const usePelcroVanilla = () => {
 export const usePelcro = createHook(pelcroStore);
 
 if (process.env.NODE_ENV === "development") {
-  mountStoreDevtool("Store", usePelcro);
+  mountStoreDevtool("Pelcro Store", usePelcro);
 }
