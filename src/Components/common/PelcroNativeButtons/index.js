@@ -7,8 +7,8 @@ const translations = i18n.t("common:buttons", {
   returnObjects: true
 });
 
-export const init = (app) => {
-  saveToMetadataButton.init(app);
+export const init = () => {
+  saveToMetadataButton.init();
 
   const { isAuthenticated, switchView, set } = usePelcroVanilla();
 
@@ -233,8 +233,9 @@ export const init = (app) => {
   }
 };
 
-export const authenticatedButtons = (id) => {
-  // saveToMetadataButton.authenticated();
+export const authenticatedButtons = () => {
+  saveToMetadataButton.authenticated();
+
   const pelcroLoginByClass = document.getElementsByClassName(
     "pelcro-login-button"
   );
@@ -255,8 +256,8 @@ export const authenticatedButtons = (id) => {
   removeHTMLButton("pelcro-register-button");
 };
 
-export const unauthenticatedButtons = (id) => {
-  // saveToMetadataButton.unauthenticated();
+export const unauthenticatedButtons = () => {
+  saveToMetadataButton.unauthenticated();
 
   const pelcroLoginByClass = document.getElementsByClassName(
     "pelcro-login-button"
