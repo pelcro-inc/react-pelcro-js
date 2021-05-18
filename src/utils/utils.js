@@ -1,4 +1,4 @@
-import { usePelcroVanilla } from "../hooks/usePelcro";
+import { usePelcro } from "../hooks/usePelcro";
 
 export const formatDiscountedPrice = (planAmount, percentageOff) =>
   parseFloat(
@@ -117,7 +117,7 @@ export const userHasAddress = () => {
 };
 
 export const displayAddressView = () => {
-  const { switchView } = usePelcroVanilla();
+  const { switchView } = usePelcro.getState();
 
   const userHasAddress = () => {
     const addresses = window.Pelcro.user.read().addresses ?? [];

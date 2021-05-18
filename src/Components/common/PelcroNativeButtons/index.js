@@ -1,7 +1,7 @@
 import { saveToMetadataButton } from "./saveToMetadata";
 import { userHasAddress } from "../../../utils/utils";
 import i18n from "../../../i18n";
-import { usePelcroVanilla } from "../../../hooks/usePelcro";
+import { usePelcro } from "../../../hooks/usePelcro";
 
 const translations = i18n.t("common:buttons", {
   returnObjects: true
@@ -10,7 +10,7 @@ const translations = i18n.t("common:buttons", {
 export const init = () => {
   saveToMetadataButton.init();
 
-  const { isAuthenticated, switchView, set } = usePelcroVanilla();
+  const { isAuthenticated, switchView, set } = usePelcro.getState();
 
   const pelcroLoginButtonsByClass = document.getElementsByClassName(
     "pelcro-login-button"

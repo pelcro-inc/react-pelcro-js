@@ -1,5 +1,5 @@
 import ReactGA from "react-ga";
-import { usePelcroVanilla } from "../../../hooks/usePelcro";
+import { usePelcro } from "../../../hooks/usePelcro";
 
 class SaveToMetadataButtonClass {
   init() {
@@ -26,7 +26,7 @@ class SaveToMetadataButtonClass {
    * Unauthenticated callback
    */
   unauthenticated = () => {
-    const { switchView } = usePelcroVanilla();
+    const { switchView } = usePelcro.getState();
 
     this.#onClick(() => switchView("login"));
     this.#unmarkAllSavedButtons();
