@@ -7,18 +7,23 @@ import { AddressUpdateModal } from "./Components/AddressUpdate/AddressUpdateModa
 import { SelectModalWithHook as SelectModal } from "./Components/Select/SelectModal";
 import { DashboardWithHook as Dashboard } from "./Components/dashboard/Dashboard";
 
+usePelcro.override((set) => {
+  return {
+    switchView: (view) => {
+      console.log("switching to", view);
+      set({ view });
+    }
+  };
+});
+
 export const Main = () => {
-  const { resetView, switchView } = usePelcro();
+  const { resetView } = usePelcro();
+
   return (
     <PelcroModalController>
       <LoginModal
         onSuccess={() => {
           resetView();
-        }}
-        onCreateAccountClick={() => {
-          console.log("clicked on create account");
-          switchView("register");
-          return false;
         }}
       />
 

@@ -37,16 +37,25 @@ const createPelcroStore = () =>
     };
   });
 
-const pelcroStore = createPelcroStore();
+const createPelcroHook = (store) => {
+  // initiate hook with zustand creator
+  const pelcroHook = createHook(store);
 
-export const usePelcroVanilla = () => {
-  return {
-    ...pelcroStore.getState()
+  /**
+   * Override internal implementation inside pelcro store
+   * @param {function(storeSetter, storeGetter): object} fn
+   */
+  pelcroHook.override = (fn) => {
+    const partialState = fn(store.setState, store.getState);
+
+    usePelcro.setState(partialState);
   };
+
+  return pelcroHook;
 };
 
-// Creates the react store hook
-export const usePelcro = createHook(pelcroStore);
+const pelcroStore = createPelcroStore();
+export const usePelcro = createPelcroHook(pelcroStore);
 
 if (process.env.NODE_ENV === "development") {
   mountStoreDevtool("Pelcro Store", usePelcro);
