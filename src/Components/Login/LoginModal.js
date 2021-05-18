@@ -32,6 +32,7 @@ export function LoginModal({ setView, onClose, ...props }) {
   return (
     <Modal
       hideCloseButton={!window.Pelcro.paywall.displayCloseButton()}
+      onClose={onClose}
       id="login"
     >
       <ModalBody>

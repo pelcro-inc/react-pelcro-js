@@ -6,17 +6,23 @@ import {
   ModalBody,
   ModalFooter
 } from "../../SubComponents/Modal";
+import { usePelcro } from "../../hooks/usePelcro";
 
+/**
+ *
+ */
 export function UserUpdateModal({ onClose, setView, ...otherProps }) {
+  const { switchView } = usePelcro();
+
   const onPictureClick = () => {
-    setView("profile-picture");
+    switchView("profile-picture");
   };
 
   return (
     <Modal
       hideCloseButton={!window.Pelcro.paywall.displayCloseButton()}
       onClose={onClose}
-      id="pelcro-user-update-modal"
+      id="user-edit"
     >
       <ModalBody>
         <UserUpdateView
@@ -30,3 +36,5 @@ export function UserUpdateModal({ onClose, setView, ...otherProps }) {
     </Modal>
   );
 }
+
+UserUpdateModal.id = "user-edit";
