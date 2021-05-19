@@ -10,12 +10,16 @@ import {
 /**
  *
  */
-export function ProfilePicChangeModal({ onClose, ...otherProps }) {
+export function ProfilePicChangeModal({
+  onDisplay,
+  onClose,
+  ...otherProps
+}) {
   return (
     <Modal
-      hideCloseButton={!window.Pelcro.paywall.displayCloseButton()}
-      onClose={onClose}
       id="profile-picture"
+      onDisplay={onDisplay}
+      onClose={onClose}
     >
       <ModalBody>
         <ProfilePicChangeView {...otherProps} />

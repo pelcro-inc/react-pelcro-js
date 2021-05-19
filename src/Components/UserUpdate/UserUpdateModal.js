@@ -11,7 +11,11 @@ import { usePelcro } from "../../hooks/usePelcro";
 /**
  *
  */
-export function UserUpdateModal({ onClose, setView, ...otherProps }) {
+export function UserUpdateModal({
+  onClose,
+  onDisplay,
+  ...otherProps
+}) {
   const { switchView } = usePelcro();
 
   const onPictureClick = () => {
@@ -19,11 +23,7 @@ export function UserUpdateModal({ onClose, setView, ...otherProps }) {
   };
 
   return (
-    <Modal
-      hideCloseButton={!window.Pelcro.paywall.displayCloseButton()}
-      onClose={onClose}
-      id="user-edit"
-    >
+    <Modal id="user-edit" onDisplay={onDisplay} onClose={onClose}>
       <ModalBody>
         <UserUpdateView
           onPictureClick={onPictureClick}
