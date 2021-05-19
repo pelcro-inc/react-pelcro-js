@@ -7,6 +7,7 @@ import { usePelcro } from "../hooks/usePelcro";
  */
 export function Modal({
   id,
+  onDisplay,
   className = "",
   hideCloseButton = !window.Pelcro.paywall.displayCloseButton(),
   children,
@@ -15,7 +16,7 @@ export function Modal({
   const resetView = usePelcro((state) => state.resetView);
 
   useEffect(() => {
-    props?.onDisplay?.();
+    onDisplay?.();
   }, []);
 
   const onClose = () => {

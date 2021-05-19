@@ -10,6 +10,9 @@ import { UserUpdateModal } from "./Components/UserUpdate/UserUpdateModal";
 import { ProfilePicChangeModal } from "./Components/ProfilePicChange/ProfilePicChangeModal";
 import { GiftCreateModal } from "./Components/GiftCreate/GiftCreateModal";
 import { GiftRedeemModal } from "./Components/GiftRedeem/GiftRedeemModal";
+import { PasswordForgotModal } from "./Components/PasswordForgot/PasswordForgotModal";
+import { PasswordChangeModal } from "./Components/PasswordChange/PasswordChangeModal";
+import { PasswordResetModal } from "./Components/PasswordReset/PasswordResetModal";
 
 usePelcro.override((set, get) => {
   return {
@@ -36,6 +39,9 @@ export const Main = () => {
 
       <UserUpdateModal />
       <ProfilePicChangeModal />
+      <PasswordForgotModal />
+      <PasswordChangeModal />
+      <PasswordResetModal />
 
       <SelectModal />
 

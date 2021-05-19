@@ -7,12 +7,16 @@ import {
 import Authorship from "../common/Authorship";
 import { PasswordChangeView } from "./PasswordChangeView";
 
-export const PasswordChangeModal = ({ onClose, ...otherProps }) => {
+export const PasswordChangeModal = ({
+  onDisplay,
+  onClose,
+  ...otherProps
+}) => {
   return (
     <Modal
-      hideCloseButton={false}
+      id="password-change"
+      onDisplay={onDisplay}
       onClose={onClose}
-      id="pelcro-password-change-modal"
     >
       <ModalBody>
         <PasswordChangeView {...otherProps} />
@@ -23,3 +27,5 @@ export const PasswordChangeModal = ({ onClose, ...otherProps }) => {
     </Modal>
   );
 };
+
+PasswordChangeModal.id = "password-change";

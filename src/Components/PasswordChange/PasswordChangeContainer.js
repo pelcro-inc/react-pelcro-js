@@ -4,6 +4,7 @@ import useReducerWithSideEffects, {
   UpdateWithSideEffect,
   Update
 } from "use-reducer-with-side-effects";
+import { usePelcro } from "../../hooks/usePelcro";
 import {
   SET_PASSWORD,
   HANDLE_SUBMIT,
@@ -46,6 +47,7 @@ export const PasswordChangeContainer = ({
   children
 }) => {
   const { t } = useTranslation("passwordChange");
+  const { set } = usePelcro();
 
   const handleSubmit = (
     { currentPassword, newPassword, confirmNewPassword },
@@ -78,6 +80,7 @@ export const PasswordChangeContainer = ({
             }
           });
           dispatch({ type: PASSWORD_CHANGE_SUCCESS });
+          set({ isAuthenticated: false });
           onSuccess();
         }
       }

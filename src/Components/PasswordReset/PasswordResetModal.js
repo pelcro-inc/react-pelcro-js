@@ -7,12 +7,16 @@ import {
 import Authorship from "../common/Authorship";
 import { PasswordResetView } from "./PasswordResetView";
 
-export const PasswordResetModal = ({ onClose, ...otherProps }) => {
+export const PasswordResetModal = ({
+  onDisplay,
+  onClose,
+  ...otherProps
+}) => {
   return (
     <Modal
-      hideCloseButton={!window.Pelcro.paywall.displayCloseButton()}
+      onDisplay={onDisplay}
       onClose={onClose}
-      id="pelcro-password-reset-modal"
+      id="password-reset"
     >
       <ModalBody>
         <PasswordResetView {...otherProps} />
@@ -23,3 +27,5 @@ export const PasswordResetModal = ({ onClose, ...otherProps }) => {
     </Modal>
   );
 };
+
+PasswordResetModal.id = "password-reset";
