@@ -11,25 +11,21 @@ import { ProfilePicChangeModal } from "./Components/ProfilePicChange/ProfilePicC
 import { GiftCreateModal } from "./Components/GiftCreate/GiftCreateModal";
 import { GiftRedeemModal } from "./Components/GiftRedeem/GiftRedeemModal";
 
-usePelcro.override((set) => {
+usePelcro.override((set, get) => {
   return {
     switchView: (view) => {
-      console.log("switching to", view);
+      console.log("switching from", get().view, "to", view);
       set({ view });
     }
   };
 });
 
 export const Main = () => {
-  const { resetView } = usePelcro();
+  const {} = usePelcro();
 
   return (
     <PelcroModalController>
-      <LoginModal
-        onSuccess={() => {
-          resetView();
-        }}
-      />
+      <LoginModal />
 
       <RegisterModal
         onSuccess={() => {

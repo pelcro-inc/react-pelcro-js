@@ -12,7 +12,6 @@ import { usePelcro } from "../../hooks/usePelcro";
 import { displayAddressView } from "../../utils/utils";
 
 export const GiftCreateModal = ({
-  setView,
   onDisplay,
   onClose,
   ...otherProps
@@ -39,7 +38,7 @@ export const GiftCreateModal = ({
           {t("messages.selectPlan") + " "}
           <Link
             id="pelcro-link-select-plan"
-            onClick={() => setView("select")}
+            onClick={() => switchView("select")}
           >
             {t("messages.here")}
           </Link>

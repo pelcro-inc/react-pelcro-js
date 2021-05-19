@@ -13,30 +13,35 @@ import { usePelcro } from "../../hooks/usePelcro";
 /**
  *
  */
-export function LoginModal({ setView, onClose, ...props }) {
+export function LoginModal({ onDisplay, onClose, ...props }) {
   const { t } = useTranslation("login");
-  const { switchView } = usePelcro();
+  const { switchView, resetView } = usePelcro();
+
+  const onSuccess = () => {
+    props.onSuccess?.();
+    resetView();
+  };
 
   const onCreateAccountClick = () => {
     if (props?.onCreateAccountClick?.() === false) {
       return;
     }
 
-    console.log("switched to select view");
     switchView("select");
   };
 
   const onForgotPassword = () => {
     switchView("password-forgot");
   };
+
   return (
-    <Modal
-      hideCloseButton={!window.Pelcro.paywall.displayCloseButton()}
-      onClose={onClose}
-      id="login"
-    >
+    <Modal id="login" onDisplay={onDisplay} onClose={onClose}>
       <ModalBody>
-        <LoginView onForgotPassword={onForgotPassword} {...props} />
+        <LoginView
+          onForgotPassword={onForgotPassword}
+          {...props}
+          onSuccess={onSuccess}
+        />
       </ModalBody>
       <ModalFooter>
         <div>
