@@ -21,10 +21,7 @@ import useReducerWithSideEffects, {
   Update
 } from "use-reducer-with-side-effects";
 import { getErrorMessages } from "../common/Helpers";
-import {
-  cleanObjectNullValues,
-  displayAddressView
-} from "../../utils/utils";
+import { cleanObjectNullValues } from "../../utils/utils";
 import { usePelcro } from "../../hooks/usePelcro";
 
 const initialState = {

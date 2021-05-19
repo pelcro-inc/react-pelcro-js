@@ -26,12 +26,9 @@ export function RegisterModal(props) {
     isGift
   } = usePelcro();
 
-  const displayLoginView = () => {
-    switchView("login");
-  };
-
-  const displaySelectView = () => {
-    switchView("select");
+  const onSuccess = () => {
+    props.onSuccess?.();
+    handleAfterRegistrationLogic();
   };
 
   const handleAfterRegistrationLogic = () => {
@@ -67,31 +64,23 @@ export function RegisterModal(props) {
 
   return (
     <Modal
-      hideCloseButton={!window.Pelcro.paywall.displayCloseButton()}
       id="register"
+      onDisplay={props?.onDisplay}
+      onClose={props?.onClose}
     >
       <ModalBody>
-        <RegisterView
-          {...props}
-          onSuccess={() => {
-            if (props?.onSuccess?.() === false) {
-              return;
-            }
-
-            handleAfterRegistrationLogic();
-          }}
-        />
+        <RegisterView {...props} onSuccess={onSuccess} />
       </ModalBody>
       <ModalFooter>
         <div>
           {t("messages.alreadyHaveAccount") + " "}
-          <Link onClick={displayLoginView}>
+          <Link onClick={() => switchView("login")}>
             {t("messages.loginHere")}
           </Link>
         </div>
         <div>
           {" " + t("messages.selectPlan")}
-          <Link onClick={displaySelectView}>
+          <Link onClick={() => switchView("select")}>
             {t("messages.here")}
           </Link>
         </div>
