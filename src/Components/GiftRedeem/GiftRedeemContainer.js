@@ -4,6 +4,7 @@ import useReducerWithSideEffects, {
   UpdateWithSideEffect,
   Update
 } from "use-reducer-with-side-effects";
+import { usePelcro } from "../../hooks/usePelcro";
 import {
   SET_GIFT_CODE,
   HANDLE_SUBMIT,
@@ -31,6 +32,7 @@ const GiftRedeemContainer = ({
   children
 }) => {
   const { t } = useTranslation("register");
+  const { set } = usePelcro();
 
   useEffect(() => {
     onDisplay();
@@ -47,6 +49,7 @@ const GiftRedeemContainer = ({
       });
       onFailure();
     } else {
+      set({ giftCode });
       onSuccess(giftCode);
     }
   };

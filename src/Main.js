@@ -8,6 +8,8 @@ import { SelectModalWithHook as SelectModal } from "./Components/Select/SelectMo
 import { DashboardWithHook as Dashboard } from "./Components/dashboard/Dashboard";
 import { UserUpdateModal } from "./Components/UserUpdate/UserUpdateModal";
 import { ProfilePicChangeModal } from "./Components/ProfilePicChange/ProfilePicChangeModal";
+import { GiftCreateModal } from "./Components/GiftCreate/GiftCreateModal";
+import { GiftRedeemModal } from "./Components/GiftRedeem/GiftRedeemModal";
 
 usePelcro.override((set) => {
   return {
@@ -44,6 +46,9 @@ export const Main = () => {
       <Dashboard />
 
       <AddressUpdateModal />
+
+      <GiftCreateModal />
+      <GiftRedeemModal />
     </PelcroModalController>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import {
   Modal,
@@ -8,6 +8,8 @@ import {
 import Authorship from "../common/Authorship";
 import { GiftCreateView } from "./GiftCreateView";
 import { Link } from "../../SubComponents/Link";
+import { usePelcro } from "../../hooks/usePelcro";
+import { displayAddressView } from "../../utils/utils";
 
 export const GiftCreateModal = ({
   setView,
@@ -16,21 +18,21 @@ export const GiftCreateModal = ({
   ...otherProps
 }) => {
   const { t } = useTranslation("register");
+  const { switchView, product } = usePelcro();
 
-  useEffect(() => {
-    if (onDisplay) {
-      onDisplay();
+  const onSuccess = (giftCode) => {
+    otherProps.onSuccess?.(giftCode);
+    if (product.address_required) {
+      displayAddressView();
+    } else {
+      switchView("payment");
     }
-  }, []);
+  };
 
   return (
-    <Modal
-      hideCloseButton={!window.Pelcro.paywall.displayCloseButton()}
-      onClose={onClose}
-      id="pelcro-gift-create-modal"
-    >
+    <Modal id="gift" onDisplay={onDisplay} onClose={onClose}>
       <ModalBody>
-        <GiftCreateView {...otherProps} />
+        <GiftCreateView {...otherProps} onSuccess={onSuccess} />
       </ModalBody>
       <ModalFooter>
         <p>
@@ -47,3 +49,5 @@ export const GiftCreateModal = ({
     </Modal>
   );
 };
+
+GiftCreateModal.id = "gift";

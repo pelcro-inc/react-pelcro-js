@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { ReactComponent as CloseIcon } from "../assets/x-icon.svg";
 import { usePelcro } from "../hooks/usePelcro";
 
@@ -8,11 +8,15 @@ import { usePelcro } from "../hooks/usePelcro";
 export function Modal({
   id,
   className = "",
+  hideCloseButton = !window.Pelcro.paywall.displayCloseButton(),
   children,
-  hideCloseButton = false,
   ...props
 }) {
   const resetView = usePelcro((state) => state.resetView);
+
+  useEffect(() => {
+    props?.onDisplay?.();
+  }, []);
 
   const onClose = () => {
     props?.onClose?.();

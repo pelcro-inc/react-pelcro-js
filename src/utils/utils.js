@@ -119,11 +119,6 @@ export const userHasAddress = () => {
 export const displayAddressView = () => {
   const { switchView } = usePelcro.getState();
 
-  const userHasAddress = () => {
-    const addresses = window.Pelcro.user.read().addresses ?? [];
-    return addresses.length > 0;
-  };
-
   if (userHasAddress()) {
     switchView("address-select");
   } else {
