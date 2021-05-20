@@ -5,13 +5,20 @@ import {
   authenticatedButtons,
   unauthenticatedButtons
 } from "../common/PelcroNativeButtons";
+import { initPaywalls } from "./service";
 
 export const PelcroModalController = ({ children }) => {
+  const { view, isAuthenticated, whenSiteReady } = usePelcro();
+
+  React.useEffect(() => {
+    whenSiteReady(() => {
+      initPaywalls();
+    });
+  }, []);
+
   React.useEffect(() => {
     initNativeButtons();
   }, []);
-
-  const { view, isAuthenticated } = usePelcro();
 
   return (
     <div id="pelcro-app" className="pelcro-root">

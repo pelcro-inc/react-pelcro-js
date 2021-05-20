@@ -2,12 +2,16 @@ import createHook from "zustand";
 import createStore from "zustand/vanilla";
 import { mountStoreDevtool } from "simple-zustand-devtools";
 import { PelcroActions } from "./pelcroActions";
+import { PelcroCallbacks } from "./pelcroCallbacks";
 
 const createPelcroStore = () =>
   createStore((set, get) => {
     const actions = new PelcroActions(set, get);
-
+    const eventCallbacks = new PelcroCallbacks();
     return {
+      // Store setter
+      set,
+
       // View
       view: null,
       switchView: actions.switchView,
@@ -32,8 +36,8 @@ const createPelcroStore = () =>
       selectedAddressId: null,
       addressIdToEdit: null,
 
-      // Store setter
-      set
+      // Callbacks
+      ...eventCallbacks
     };
   });
 
