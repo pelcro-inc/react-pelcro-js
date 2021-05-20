@@ -5,6 +5,7 @@ import {
   authenticatedButtons,
   unauthenticatedButtons
 } from "../common/PelcroNativeButtons";
+import { DashboardOpenButton } from "../dashboard/DashboardOpenButton";
 import { disableScroll, enableScroll, initPaywalls } from "./service";
 
 export const PelcroModalController = ({ children }) => {
@@ -40,6 +41,11 @@ export const PelcroModalController = ({ children }) => {
 
   return (
     <div id="pelcro-app" className="pelcro-root">
+      {isAuthenticated &&
+        children.find(
+          ({ type }) => type?.id === "pelcro-dashboard-open-button"
+        )}
+
       {children.find(({ type }) => type?.id === view)}
     </div>
   );

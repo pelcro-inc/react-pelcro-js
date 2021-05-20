@@ -14,6 +14,7 @@ import { PasswordForgotModal } from "./Components/PasswordForgot/PasswordForgotM
 import { PasswordChangeModal } from "./Components/PasswordChange/PasswordChangeModal";
 import { PasswordResetModal } from "./Components/PasswordReset/PasswordResetModal";
 import { MeterModal } from "./Components/Meter/MeterModal";
+import { DashboardOpenButton } from "./Components/dashboard/DashboardOpenButton";
 
 usePelcro.override((set, get) => {
   return {
@@ -35,6 +36,7 @@ export const Main = () => {
 
       <UserUpdateModal />
       <Dashboard />
+      <DashboardOpenButton />
       <ProfilePicChangeModal />
       <PasswordForgotModal />
       <PasswordChangeModal />

@@ -3,12 +3,20 @@
 // It prompts the user to subscribe (go to Select view) or login (go to Login view).
 
 import React, { useEffect } from "react";
+import { usePelcro } from "../../hooks/usePelcro";
 import { MeterView } from "./MeterView";
 
 export const MeterModal = (props) => {
+  const { resetView } = usePelcro();
+
   useEffect(() => {
     props.onDisplay?.();
   }, []);
+
+  const onClose = () => {
+    props.onClose?.();
+    resetView();
+  };
 
   return (
     <div
@@ -19,7 +27,7 @@ export const MeterModal = (props) => {
         type="button"
         className="plc-absolute plc-top-0 plc-text-2xl plc-text-gray-500 plc-right-1 pelcro-close-btn"
         aria-label="Close"
-        onClick={props.onClose}
+        onClick={onClose}
       >
         <span>×</span>
       </button>
