@@ -5,7 +5,7 @@ import {
   authenticatedButtons,
   unauthenticatedButtons
 } from "../common/PelcroNativeButtons";
-import { initPaywalls } from "./service";
+import { disableScroll, enableScroll, initPaywalls } from "./service";
 
 export const PelcroModalController = ({ children }) => {
   const { view, isAuthenticated, whenSiteReady } = usePelcro();
@@ -19,6 +19,16 @@ export const PelcroModalController = ({ children }) => {
   React.useEffect(() => {
     initNativeButtons();
   }, []);
+
+  React.useEffect(() => {
+    if (view === null || view === "meter") {
+      return enableScroll();
+    }
+
+    if (view) {
+      return disableScroll();
+    }
+  }, [view]);
 
   return (
     <div id="pelcro-app" className="pelcro-root">
