@@ -30,10 +30,16 @@ export const PelcroModalController = ({ children }) => {
     }
   }, [view]);
 
+  React.useEffect(() => {
+    if (isAuthenticated) {
+      authenticatedButtons();
+    } else {
+      unauthenticatedButtons();
+    }
+  }, [isAuthenticated]);
+
   return (
     <div id="pelcro-app" className="pelcro-root">
-      {isAuthenticated && authenticatedButtons()}
-      {!isAuthenticated && unauthenticatedButtons()}
       {children.find(({ type }) => type?.id === view)}
     </div>
   );

@@ -10,7 +10,7 @@ const translations = i18n.t("common:buttons", {
 export const init = () => {
   saveToMetadataButton.init();
 
-  const { isAuthenticated, switchView, set } = usePelcro.getState();
+  const { switchView, set } = usePelcro.getState();
 
   const pelcroLoginButtonsByClass = document.getElementsByClassName(
     "pelcro-login-button"
@@ -19,7 +19,7 @@ export const init = () => {
   if (pelcroLoginButtonsByClass.length !== 0) {
     for (let i = 0; i < pelcroLoginButtonsByClass.length; i++) {
       pelcroLoginButtonsByClass[i].addEventListener("click", () => {
-        if (isAuthenticated) {
+        if (usePelcro.getState().isAuthenticated) {
           switchView("dashboard");
         } else {
           switchView("login");
