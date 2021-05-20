@@ -5,7 +5,6 @@ import {
   authenticatedButtons,
   unauthenticatedButtons
 } from "../common/PelcroNativeButtons";
-import { DashboardOpenButton } from "../dashboard/DashboardOpenButton";
 import { disableScroll, enableScroll, initPaywalls } from "./service";
 
 export const PelcroModalController = ({ children }) => {
@@ -22,6 +21,14 @@ export const PelcroModalController = ({ children }) => {
   }, []);
 
   React.useEffect(() => {
+    if (isAuthenticated) {
+      authenticatedButtons();
+    } else {
+      unauthenticatedButtons();
+    }
+  }, [isAuthenticated]);
+
+  React.useEffect(() => {
     if (view === null || view === "meter") {
       return enableScroll();
     }
@@ -30,14 +37,6 @@ export const PelcroModalController = ({ children }) => {
       return disableScroll();
     }
   }, [view]);
-
-  React.useEffect(() => {
-    if (isAuthenticated) {
-      authenticatedButtons();
-    } else {
-      unauthenticatedButtons();
-    }
-  }, [isAuthenticated]);
 
   return (
     <div id="pelcro-app" className="pelcro-root">

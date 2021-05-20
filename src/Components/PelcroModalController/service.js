@@ -1,20 +1,52 @@
 import { usePelcro } from "../../hooks/usePelcro";
 
 export const initPaywalls = () => {
-  const { switchView } = usePelcro.getState();
+  /**
+   * returns true if the URL contains a supported view trigger URL
+   * @return {boolean}
+   */
+  const isValidViewFromURL = () => {
+    const view = window.Pelcro.helpers.getURLParameter("view");
+    if (
+      [
+        "login",
+        "register",
+        "select",
+        "redeem",
+        "password-forgot",
+        "password-forget",
+        "password-reset",
+        "password-change",
+        "source-create",
+        "user-edit",
+        "newsletter",
+        "address"
+      ].includes(view)
+    ) {
+      return true;
+    }
 
-  const paywallMethods = window.Pelcro.paywall;
+    return false;
+  };
 
-  if (window.Pelcro.subscription.isSubscribedToSite()) {
-    return;
-  }
+  if (window.Pelcro.site.read()?.settings === "subscription") {
+    if (
+      isValidViewFromURL() ||
+      window.Pelcro.subscription.isSubscribedToSite()
+    ) {
+      return;
+    }
 
-  if (paywallMethods?.displayMeterPaywall()) {
-    switchView("meter");
-  } else if (paywallMethods?.displayNewsletterPaywall()) {
-    switchView("newsletter");
-  } else if (paywallMethods?.displayPaywall()) {
-    switchView("select");
+    const { switchView } = usePelcro.getState();
+    const paywallMethods = window.Pelcro.paywall;
+
+    if (paywallMethods?.displayMeterPaywall()) {
+      switchView("meter");
+    } else if (paywallMethods?.displayNewsletterPaywall()) {
+      switchView("newsletter");
+    } else if (paywallMethods?.displayPaywall()) {
+      switchView("select");
+    }
   }
 };
 
