@@ -13,6 +13,7 @@ import { GiftRedeemModal } from "./Components/GiftRedeem/GiftRedeemModal";
 import { PasswordForgotModal } from "./Components/PasswordForgot/PasswordForgotModal";
 import { PasswordChangeModal } from "./Components/PasswordChange/PasswordChangeModal";
 import { PasswordResetModal } from "./Components/PasswordReset/PasswordResetModal";
+import { MeterModal } from "./Components/Meter/MeterModal";
 
 usePelcro.override((set, get) => {
   return {
@@ -28,24 +29,18 @@ export const Main = () => {
 
   return (
     <PelcroModalController>
+      <MeterModal />
       <LoginModal />
-
-      <RegisterModal
-        onSuccess={() => {
-          console.log("registeration succeded");
-          return false;
-        }}
-      />
+      <RegisterModal />
 
       <UserUpdateModal />
+      <Dashboard />
       <ProfilePicChangeModal />
       <PasswordForgotModal />
       <PasswordChangeModal />
       <PasswordResetModal />
 
       <SelectModal />
-
-      <Dashboard />
 
       <AddressUpdateModal />
 
