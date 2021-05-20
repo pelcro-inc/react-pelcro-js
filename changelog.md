@@ -8,6 +8,12 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Released]
 
+## [0.17.4] - 2021-05-20
+
+### Changed
+
+- force radio buttons and checkboxes to have no CSS :before pseudo element. [PRIVATE]
+
 ## [0.17.3] - 2021-05-10
 
 ### Fixed
