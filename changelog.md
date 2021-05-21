@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog][keep a changelog] and this project adheres to [Semantic Versioning][semantic versioning].
 
 ## [Unreleased]
+
+## [Released]
+
+## [0.17.6] - 2021-05-22
+
 ## Fixed
 
 - Dashboard logout button having a different hover color compared to other dashboard items.
@@ -17,8 +22,6 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 - Alignment of dashboard close button.
 - Color grade of text from gray-700 to gray-900 to better match Bootstrap's default text color.
 - E-commerce purchase success modal button to use default solid variant instead of outline one.
-
-## [Released]
 
 ## [0.17.5] - 2021-05-21
 
