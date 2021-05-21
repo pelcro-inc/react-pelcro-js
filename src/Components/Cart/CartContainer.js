@@ -3,6 +3,7 @@ import useReducerWithSideEffects, {
   UpdateWithSideEffect,
   Update
 } from "use-reducer-with-side-effects";
+import { usePelcro } from "../../hooks/usePelcro";
 import {
   SET_PRODUCTS,
   HANDLE_SUBMIT
@@ -23,6 +24,8 @@ const CartContainer = ({
   getProducts = () => {},
   children
 }) => {
+  const { set } = usePelcro();
+
   useEffect(() => {
     if (window.Pelcro.ecommerce.products.read().length) {
       dispatch({
@@ -81,6 +84,7 @@ const CartContainer = ({
         };
       });
 
+    set({ order: { items } });
     onSuccess(items);
   };
 

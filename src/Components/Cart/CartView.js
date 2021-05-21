@@ -14,6 +14,11 @@ export const CartView = (props) => {
       window.Pelcro.cartProducts.length === 0) ??
     true;
 
+  // temp solution until the ecom refactor
+  const products = window.Pelcro.ecommerce.products
+    .read()
+    .flatMap((prod) => prod.skus.map((sku) => sku));
+
   return (
     <div id="pelcro-cart-view">
       <div className="plc-mb-6 plc-text-2xl plc-font-semibold plc-text-center plc-text-gray-700 pelcro-title-wrapper">
@@ -30,7 +35,7 @@ export const CartView = (props) => {
         >
           <CartContainer {...props}>
             <div className="pelcro-cart-wrapper">
-              {props.products.map((product) => {
+              {products.map((product) => {
                 if (product.quantity > 0) {
                   return (
                     <div
@@ -88,7 +93,7 @@ export const CartView = (props) => {
             </div>
             <CartSubmit
               role="submit"
-              className="plc-mt-2 plc-w-full"
+              className="plc-w-full plc-mt-2"
               id="pelcro-submit"
               name={t("confirm")}
               autoFocus={true}
