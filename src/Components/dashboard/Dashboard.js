@@ -821,7 +821,6 @@ class Dashboard extends Component {
               <Button
                 variant="outline"
                 icon={<ExitIcon />}
-                isFullWidth={true}
                 className="plc-flex plc-items-center plc-justify-start plc-w-full plc-p-5 plc-px-4 plc-text-lg plc-font-normal plc-text-gray-500 plc-capitalize plc-bg-transparent plc-border-0 plc-border-l-2 plc-border-transparent plc-rounded-none plc-cursor-pointer plc-select-none sm:plc-px-8 hover:plc-text-primary-400 hover:plc-bg-primary-50"
                 onClick={this.props.logout}
               >
