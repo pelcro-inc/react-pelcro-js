@@ -134,7 +134,7 @@ class DefaultNewsLetter extends Component {
       >
         <ModalBody>
           <div id="pelcro-newsletter-view">
-            <div className="plc-mb-6 plc-text-center plc-text-gray-700 pelcro-title-wrapper">
+            <div className="plc-mb-6 plc-text-center plc-text-gray-900 pelcro-title-wrapper">
               <h4 className="plc-text-2xl plc-font-semibold">
                 {this.title}
               </h4>
@@ -183,7 +183,7 @@ class DefaultNewsLetter extends Component {
                 errorId="pelcro-input-postal-code-error"
                 label={t("labels.postalCode")}
               />
-              <p className="plc-text-gray-700 pelcro-footnote">
+              <p className="plc-text-gray-900 pelcro-footnote">
                 * {t("labels.required")}
               </p>
               <Button

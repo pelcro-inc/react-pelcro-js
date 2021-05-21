@@ -20,7 +20,7 @@ export const ProfilePicChangeZoom = ({
     >
       <label
         htmlFor="pelcro-picture-zoom-input"
-        className="plc-text-gray-700"
+        className="plc-text-gray-900"
       >
         {t("labels.zoom")}
       </label>

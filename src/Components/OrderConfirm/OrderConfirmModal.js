@@ -73,7 +73,7 @@ export class OrderConfirmModal extends Component {
           <div id="pelcro-order-confirm-view">
             <div className="plc-flex plc-flex-col plc-items-center">
               <CheckMarkOutlineIcon className="plc-w-32 plc-my-4 plc-text-green-500" />
-              <div className="plc-text-center plc-text-gray-700">
+              <div className="plc-text-center plc-text-gray-900">
                 <h4 className="plc-mb-4 plc-text-3xl plc-text-green-500">
                   {this.locale("messages.orderConfirmed.title")}
                 </h4>
