@@ -15,7 +15,7 @@ import { ReactComponent as RefreshIcon } from "../../assets/refresh.svg";
 import { ReactComponent as XCircleIcon } from "../../assets/x-icon-circle.svg";
 import { ReactComponent as PaymentCardIcon } from "../../assets/payment-card.svg";
 import { ReactComponent as LocationIcon } from "../../assets/location-pin.svg";
-import { ReactComponent as BoxIcon } from "../../assets/box.svg";
+import { ReactComponent as SubscriptionIcon } from "../../assets/subscription.svg";
 import { ReactComponent as GiftIcon } from "../../assets/gift.svg";
 import { ReactComponent as ShoppingIcon } from "../../assets/shopping.svg";
 import { ReactComponent as PlusIcon } from "../../assets/plus.svg";
@@ -398,7 +398,7 @@ class Dashboard extends Component {
                 icon={
                   <PlusIcon className="plc-w-4 plc-h-4 plc-mr-1" />
                 }
-                className="plc-w-full plc-h-8 plc-font-semibold plc-tracking-wider plc-uppercase plc-rounded-none plc-text-primary-700 hover:plc-bg-primary-50"
+                className="plc-w-full plc-h-8 plc-font-semibold plc-tracking-wider plc-text-gray-700 plc-uppercase plc-rounded-none hover:plc-bg-gray-100"
                 onClick={this.displayProductSelect}
               >
                 {this.locale("labels.addSubscription")}
@@ -412,7 +412,7 @@ class Dashboard extends Component {
                 icon={
                   <GiftIcon className="plc-w-4 plc-h-4 plc-mr-1" />
                 }
-                className="plc-w-full plc-h-8 plc-font-semibold plc-tracking-wider plc-uppercase plc-rounded-none plc-text-primary-700 hover:plc-bg-primary-50"
+                className="plc-w-full plc-h-8 plc-font-semibold plc-tracking-wider plc-text-gray-700 plc-uppercase plc-rounded-none hover:plc-bg-gray-100"
                 onClick={this.displayRedeem}
               >
                 {this.locale("labels.redeemGift")}
@@ -553,7 +553,7 @@ class Dashboard extends Component {
                 icon={
                   <PlusIcon className="plc-w-4 plc-h-4 plc-mr-1" />
                 }
-                className="plc-w-full plc-h-8 plc-font-semibold plc-tracking-wider plc-uppercase plc-rounded-none plc-text-primary-700 hover:plc-bg-primary-50"
+                className="plc-w-full plc-h-8 plc-font-semibold plc-tracking-wider plc-text-gray-700 plc-uppercase plc-rounded-none hover:plc-bg-gray-100"
                 onClick={() =>
                   this.displayProductSelect({ isGift: true })
                 }
@@ -615,7 +615,7 @@ class Dashboard extends Component {
               <Button
                 variant="ghost"
                 icon={<PlusIcon className="plc-w-4 plc-mr-1" />}
-                className="plc-w-full plc-h-8 plc-font-semibold plc-tracking-wider plc-uppercase plc-text-primary-700 hover:plc-bg-primary-50"
+                className="plc-w-full plc-h-8 plc-font-semibold plc-tracking-wider plc-text-gray-700 plc-uppercase hover:plc-bg-gray-100"
                 onClick={this.displayAddressCreate}
               >
                 {this.locale("labels.addAddress")}
@@ -672,7 +672,7 @@ class Dashboard extends Component {
                   />
                   <Button
                     variant="icon"
-                    className="plc-absolute plc-text-white plc-bg-primary-300 plc-w-7 plc-h-7 plc-top-16 plc--right-1 hover:plc-bg-primary-600 hover:plc-text-white"
+                    className="plc-absolute plc-text-white plc-bg-gray-500 plc-w-7 plc-h-7 plc-top-16 plc--right-1 hover:plc-bg-gray-600 hover:plc-text-white"
                     icon={<EditIcon />}
                     id={"pelcro-user-update-picture-button"}
                     onClick={this.displayProfilePicChange}
@@ -796,7 +796,9 @@ class Dashboard extends Component {
 
               <Accordion.item
                 name={SUB_MENUS.SUBSCRIPTIONS}
-                icon={<BoxIcon />}
+                icon={
+                  <SubscriptionIcon className="plc-w-10 plc-h-10 plc-pt-2 plc-pr-1 plc--ml-2" />
+                }
                 title={this.locale("labels.subscriptions")}
                 content={this.renderSubscriptions()}
               />

@@ -19,7 +19,7 @@ export const UserUpdateProfilePic = ({ onClick, ...otherProps }) => {
         />
         <Button
           variant="icon"
-          className="plc-absolute plc-bg-primary-500 plc-text-white plc-w-10 plc-h-10 plc-top-24 plc-right-2 hover:plc-bg-primary-600 hover:plc-text-white"
+          className="plc-absolute plc-bg-gray-500 plc-text-white plc-w-10 plc-h-10 plc-top-24 plc-right-2 hover:plc-bg-gray-600"
           icon={<EditIcon />}
           id={"pelcro-user-update-picture-button"}
           onClick={onClick}

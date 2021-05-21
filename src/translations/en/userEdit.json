@@ -9,12 +9,14 @@
     "submit": "Submit",
     "required": "Required",
     "cropperTitle": "Update Profile Picture",
-    "cropperSubtitle": "Upload a photo. Then adjust as you see fit",
+    "cropperSubtitle": "Upload a photo, Then adjust as you see fit",
     "save": "Upload Photo",
-    "selectImage": "Select image",
+    "selectImage": "Upload new photo",
+    "removeImage": "Remove current photo",
     "zoom": "Zoom"
   },
   "messages": {
-    "userUpdated": "Thanks! Your profile was updated successfully."
+    "userUpdated": "Thanks! Your profile was updated successfully.",
+    "pictureRemoved": "Your profile picture was removed successfully."
   }
 }

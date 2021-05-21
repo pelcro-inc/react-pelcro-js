@@ -26,6 +26,10 @@ export class OrderConfirmModal extends Component {
     this.site = window.Pelcro.site.read();
   }
 
+  componentDidMount = () => {
+    this.props?.onDisplay?.();
+  };
+
   componentWillUnmount = () => {
     this.removeAll();
   };
@@ -61,8 +65,9 @@ export class OrderConfirmModal extends Component {
     return (
       <Modal
         id="pelcro-order-confirm-modal"
-        className="plc-border-t-8 plc-border-green-500 "
+        className="plc-border-t-8 plc-border-primary-500"
         onClose={this.props.onClose}
+        hideHeaderLogo={this.props.hideHeaderLogo}
       >
         <ModalBody>
           <div id="pelcro-order-confirm-view">

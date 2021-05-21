@@ -94,6 +94,10 @@ export const getFormattedPriceByLocal = (
 };
 
 export const getEcommerceOrderTotal = (order) => {
+  if (!order) {
+    return null;
+  }
+
   const allSkus = window.Pelcro.ecommerce.products
     .read()
     .flatMap((prod) => prod.skus.map((sku) => sku))

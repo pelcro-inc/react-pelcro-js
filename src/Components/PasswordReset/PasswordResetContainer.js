@@ -112,7 +112,7 @@ const PasswordResetContainer = ({
         case SHOW_ALERT:
           return Update({
             ...state,
-            token: action.payload
+            alert: action.payload
           });
         case DISABLE_SUBMIT:
           return Update({ ...state, buttonDisabled: action.payload });

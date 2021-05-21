@@ -444,41 +444,50 @@ const PaymentMethodContainerWithoutStripe = ({
   };
 
   const updatePaymentSource = (state, dispatch) => {
-    return stripe.createToken().then(({ token, error }) => {
-      if (error) {
-        return handlePaymentError(error);
-      }
+    return stripe
+      .createSource({ type: "card" })
+      .then(({ source, error }) => {
+        if (error) {
+          return handlePaymentError(error);
+        }
 
-      window.Pelcro.source.create(
-        {
-          auth_token: window.Pelcro.user.read().auth_token,
-          token: token.id
-        },
-        (err, res) => {
-          dispatch({ type: DISABLE_SUBMIT, payload: false });
-          dispatch({ type: LOADING, payload: false });
-          if (err) {
-            onFailure(err);
-            return dispatch({
+        // We don't support source creation for 3D secure yet
+        if (source?.card?.three_d_secure === "required") {
+          return handlePaymentError({
+            message: t("messages.cardAuthNotSupported")
+          });
+        }
+
+        window.Pelcro.source.create(
+          {
+            auth_token: window.Pelcro.user.read().auth_token,
+            token: source.id
+          },
+          (err, res) => {
+            dispatch({ type: DISABLE_SUBMIT, payload: false });
+            dispatch({ type: LOADING, payload: false });
+            if (err) {
+              onFailure(err);
+              return dispatch({
+                type: SHOW_ALERT,
+                payload: {
+                  type: "error",
+                  content: getErrorMessages(err)
+                }
+              });
+            }
+
+            dispatch({
               type: SHOW_ALERT,
               payload: {
-                type: "error",
-                content: getErrorMessages(err)
+                type: "success",
+                content: successMessage
               }
             });
+            onSuccess(res);
           }
-
-          dispatch({
-            type: SHOW_ALERT,
-            payload: {
-              type: "success",
-              content: successMessage
-            }
-          });
-          onSuccess(res);
-        }
-      );
-    });
+        );
+      });
   };
 
   const updatePaymentRequest = (state) => {
@@ -498,23 +507,75 @@ const PaymentMethodContainerWithoutStripe = ({
           return handlePaymentError(error);
         }
 
-        if (source?.card?.three_d_secure === "required") {
-          return generate3DSecureSource(source).then(
-            ({ source, error }) => {
+        const totalAmount =
+          state?.updatedPrice ??
+          plan?.amount ??
+          getEcommerceOrderTotal(order?.items);
+
+        if (
+          source?.card?.three_d_secure === "required" &&
+          totalAmount > 0
+        ) {
+          return resolveTaxCalculation().then((totalAmountWithTax) =>
+            generate3DSecureSource(
+              source,
+              totalAmountWithTax ?? totalAmount
+            ).then(({ source, error }) => {
               if (error) {
                 return handlePaymentError(error);
               }
 
               toggleAuthenticationPendingView(true, source);
-            }
+            })
           );
         }
 
         return handlePayment(source);
+      })
+      .catch((error) => {
+        return handlePaymentError(error);
       });
   };
 
-  const generate3DSecureSource = (source) => {
+  /**
+   * Resolves with the total including taxes incase taxes enabled by site
+   * @return {Promise}
+   */
+  const resolveTaxCalculation = () => {
+    const taxesEnabled = window.Pelcro.site.read()?.taxes_enabled;
+
+    return new Promise((resolve, reject) => {
+      // resolve early if taxes isn't enabled
+      if (!taxesEnabled) {
+        return resolve(null);
+      }
+
+      window.Pelcro.order.create(
+        {
+          auth_token: window.Pelcro.user.read().auth_token,
+          plan_id: plan.id,
+          coupon_code: state?.couponCode,
+          address_id: selectedAddressId
+        },
+        (error, res) => {
+          if (error) {
+            return reject(error);
+          }
+
+          const totalAmountWithTax = res.data?.total;
+          resolve(totalAmountWithTax);
+        }
+      );
+    });
+  };
+
+  /**
+   * Resolves with a generated stripe 3DSecure source
+   * @param {Object} source stripe's source object
+   * @param {number | null} totalAmount total amount with taxes added incase taxes enabled
+   * @return {Promise}
+   */
+  const generate3DSecureSource = (source, totalAmount) => {
     const listenFor3DSecureCompletionMessage = () => {
       const retrieveSourceInfoFromIframe = (event) => {
         const { data } = event;
@@ -543,11 +604,7 @@ const PaymentMethodContainerWithoutStripe = ({
 
     return stripe.createSource({
       type: "three_d_secure",
-      amount:
-        state?.updatedPrice ||
-        plan?.amount ||
-        getEcommerceOrderTotal(order?.items) ||
-        0,
+      amount: totalAmount,
       currency:
         plan?.currency || window.Pelcro.site.read().default_currency,
       three_d_secure: {

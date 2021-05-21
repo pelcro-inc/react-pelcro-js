@@ -11,10 +11,12 @@
     "cropperTitle": "Mettre à jour la photo de profil",
     "cropperSubtitle": "Téléverser une photo et ajustez la à votre goût",
     "save": "Téléverser une photo",
-    "selectImage": "Sélectionnez une image",
+    "selectImage": "Télécharger une nouvelle photo",
+    "removeImage": "supprimer la photo actuelle",
     "zoom": "Zoom"
   },
   "messages": {
-    "userUpdated": "Votre profil a été mis à jour avec succès."
+    "userUpdated": "Votre profil a été mis à jour avec succès.",
+    "pictureRemoved": "Votre photo de profil a été supprimée avec succès."
   }
 }

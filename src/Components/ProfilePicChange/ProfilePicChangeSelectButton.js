@@ -9,7 +9,10 @@ export const ProfilePicChangeSelectButton = ({
   name,
   ...otherProps
 }) => {
-  const { dispatch } = useContext(store);
+  const {
+    dispatch,
+    state: { isSubmitting }
+  } = useContext(store);
 
   const { t } = useTranslation("userEdit");
 
@@ -17,7 +20,7 @@ export const ProfilePicChangeSelectButton = ({
     <>
       <Button
         icon={<PhotoIcon />}
-        className="plc-w-full"
+        disabled={isSubmitting}
         onClick={browseFiles}
         aria-controls="fileupload"
         {...otherProps}

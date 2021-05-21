@@ -26,7 +26,8 @@
     "cancel": "Annuler votre abonnement en ligne à tout moment.",
     "giftSent": "Le cadeau d’abonnement a été envoyé à",
     "successfully": "avec succès.",
-    "cardAuthFailed": "Nous ne parvenons pas à authentifier votre mode de paiement. Veuillez choisir un autre mode de paiement et essayer à nouveau."
+    "cardAuthFailed": "Nous ne parvenons pas à authentifier votre mode de paiement. Veuillez choisir un autre mode de paiement et essayer à nouveau.",
+    "cardAuthNotSupported": "Votre carte ne peut être mise à jour puisqu'elle nécessite une authentification. Veuillez utiliser un autre mode de paiement ou contacter le service client."
   },
   "errors": {
     "": ""

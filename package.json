@@ -1,7 +1,7 @@
 {
   "name": "@pelcro/react-pelcro-js",
   "description": "Pelcro's React UI Elements",
-  "version": "0.15.0",
+  "version": "0.17.3",
   "private": false,
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",

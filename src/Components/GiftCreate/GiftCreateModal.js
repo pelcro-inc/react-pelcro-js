@@ -14,6 +14,7 @@ import { displayAddressView } from "../../utils/utils";
 export const GiftCreateModal = ({
   onDisplay,
   onClose,
+  hideHeaderLogo,
   ...otherProps
 }) => {
   const { t } = useTranslation("register");

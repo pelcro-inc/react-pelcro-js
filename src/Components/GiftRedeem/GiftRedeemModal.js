@@ -15,6 +15,7 @@ export const GiftRedeemModal = ({
   onClose,
   onDisplay,
   setView,
+  hideHeaderLogo,
   ...otherProps
 }) => {
   const { t } = useTranslation("register");

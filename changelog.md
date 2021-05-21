@@ -6,11 +6,59 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Unreleased]
 
+## [Released]
+
+## [0.17.3] - 2021-05-10
+
+### Fixed
+
+- password reset modal not showing any alerts
+
+### Changed
+
+- color and wording of the 'remove profile picture' button in the user profile picture change modal
+
+## [0.17.2] - 2021-05-10
+
+- Include tax calculation in 3D secure flow.
+
+## [0.17.1] - 2021-05-06
+
+- Reject 3D secure requiring cards in source creation flow.
+
+## [0.17.0] - 2021-05-06
+
+### Added
+
+- Add onDisplay prop to order confirmation modal.
+- Ability to remove user's profile picture.
+
+### Fixed
+
+- App crashing when there is no primary color set in the platform.
+
+### Changed
+
+- reduced the usage of primary color in the dashboard, and used different grades of gray instead.
+
+## [0.16.0] - 2021-05-04
+
+### Changed
+
+- Use stripe sources & reject 3D secure required cards in pelcro source creation.
+
+### Added
+
+- Ability to show business logo at the top of every modal.
+
 ### Fixed
 
 - Triggering coupon flow with empty spaces.
 
-## [Released]
+### Changed
+
+- Order confirm and subscription renew modals to use primary color instead of hard-coded green.
+- Add address action to be a link instead of an outline button in address selection modal.
 
 ## [0.15.0] - 2021-05-03
 

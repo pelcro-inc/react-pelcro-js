@@ -11,6 +11,7 @@ import { usePelcro } from "../../hooks/usePelcro";
 export const AddressSelectModal = ({
   onDisplay,
   onClose,
+  hideHeaderLogo,
   ...otherProps
 }) => {
   const { product, order, switchView, resetView } = usePelcro();

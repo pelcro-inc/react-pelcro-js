@@ -7,11 +7,16 @@ import {
 } from "../../SubComponents/Modal";
 import Authorship from "../common/Authorship";
 
-export function SubscriptionRenewModal({ onClose, ...otherProps }) {
+export function SubscriptionRenewModal({
+  onClose,
+  hideHeaderLogo,
+  ...otherProps
+}) {
   return (
     <Modal
       hideCloseButton={!window.Pelcro.paywall.displayCloseButton()}
       onClose={onClose}
+      hideHeaderLogo={hideHeaderLogo}
       id="pelcro-subscription-renew-modal"
     >
       <ModalBody>

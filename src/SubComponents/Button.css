@@ -8,11 +8,11 @@
   }
 
   .pelcro-root .pelcro-button-icon {
-    @apply plc-inline-flex plc-items-center plc-justify-center plc-w-8 plc-h-8 plc-rounded-full focus:plc-outline-none focus:plc-ring-2 focus:plc-ring-primary-300 hover:plc-bg-primary-100 hover:plc-text-primary-600 disabled:plc-text-gray-500 disabled:plc-cursor-not-allowed;
+    @apply plc-inline-flex plc-items-center plc-justify-center plc-w-8 plc-h-8 plc-rounded-full focus:plc-outline-none focus:plc-ring-2 focus:plc-ring-primary-300 hover:plc-bg-gray-200 hover:plc-text-gray-600 disabled:plc-text-gray-300 disabled:plc-cursor-not-allowed;
   }
 
   .pelcro-root .pelcro-button-ghost {
-    @apply plc-inline-flex plc-items-center plc-justify-center plc-p-1 plc-text-xs plc-font-semibold plc-text-primary-400 plc-bg-transparent plc-rounded-lg focus:plc-outline-none focus:plc-ring-2 focus:plc-ring-primary-300 plc-justify-items-center disabled:plc-text-gray-500 hover:plc-bg-primary-50 disabled:plc-bg-transparent disabled:plc-cursor-not-allowed plc-w-max;
+    @apply plc-inline-flex plc-items-center plc-justify-center plc-p-1 plc-text-xs plc-font-semibold plc-text-gray-500 plc-bg-transparent plc-rounded-lg focus:plc-outline-none focus:plc-ring-2 focus:plc-ring-primary-300 plc-justify-items-center disabled:plc-text-gray-300 hover:plc-bg-gray-100 disabled:plc-bg-transparent disabled:plc-cursor-not-allowed plc-w-max;
   }
 
   .pelcro-root .pelcro-button-spinner {

@@ -140,7 +140,7 @@ class SelectModal extends Component {
       return (
         <div
           key={product.id}
-          className="plc-flex plc-items-start plc-p-2 plc-mt-4 plc-space-x-3 plc-border plc-border-gray-500 plc-border-solid plc-rounded pelcro-select-product-wrapper"
+          className="plc-flex plc-items-start plc-p-2 plc-mt-4 plc-space-x-3 plc-border plc-border-solid plc-rounded plc-border-primary-500 pelcro-select-product-wrapper"
         >
           {product.image && (
             <img
@@ -304,7 +304,8 @@ class SelectModal extends Component {
       <Modal
         hideCloseButton={!this.closeButton}
         onClose={this.props.onClose}
-        id="select"
+        hideHeaderLogo={this.props.hideHeaderLogo}
+        id="pelcro-selection-modal"
       >
         <ModalBody>
           <div id="pelcro-selection-view">

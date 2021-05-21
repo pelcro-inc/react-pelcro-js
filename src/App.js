@@ -174,8 +174,8 @@ class App extends Component {
       };
     };
 
-    const primaryColorHex = this.state.site.design_settings
-      .primary_color;
+    const primaryColorHex = this.state.site?.design_settings
+      ?.primary_color;
     if (!primaryColorHex) {
       return;
     }
@@ -911,7 +911,7 @@ class App extends Component {
           {this.state.view === "profile-picture" && (
             <ProfilePicChangeModal
               onClose={this.resetView}
-              onSuccess={this.resetView}
+              onChangeSuccess={this.resetView}
             />
           )}
           {this.state.view === "address-edit" && (

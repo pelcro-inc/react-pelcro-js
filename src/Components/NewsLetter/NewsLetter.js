@@ -147,6 +147,7 @@ class DefaultNewsLetter extends Component {
       <Modal
         hideCloseButton={!this.closeButton}
         onClose={this.props.onClose}
+        hideHeaderLogo={this.props.hideHeaderLogo}
         id="pelcro-newsletter-modal"
       >
         <ModalBody>

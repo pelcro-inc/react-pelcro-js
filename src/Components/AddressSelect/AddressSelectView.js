@@ -4,7 +4,7 @@ import { AddressSelectContainer } from "./AddressSelectContainer";
 import { AddressSelectList } from "./AddressSelectList";
 import { AddressSelectSubmit } from "./AddressSelectSubmit";
 import { AlertWithContext } from "../../SubComponents/AlertWithContext";
-import { Button } from "../../SubComponents/Button";
+import { Link } from "../../SubComponents/Link";
 
 export const AddressSelectView = (props) => {
   const { t } = useTranslation("address");
@@ -25,13 +25,12 @@ export const AddressSelectView = (props) => {
           <AlertWithContext />
           <AddressSelectList />
           <div className="plc-flex plc-justify-center plc-mt-4">
-            <Button
-              variant="outline"
-              onClick={props.onAddNewAddress}
+            <Link
               id="pelcro-add-address"
+              onClick={props.onAddNewAddress}
             >
               {t("buttons.addAddress")}
-            </Button>
+            </Link>
           </div>
           <AddressSelectSubmit
             role="submit"
