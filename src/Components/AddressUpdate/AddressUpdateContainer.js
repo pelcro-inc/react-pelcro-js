@@ -54,9 +54,12 @@ const AddressUpdateContainer = ({
   type = "shipping",
   onSuccess = () => {},
   onFailure = () => {},
-  children
+  children,
+  ...props
 }) => {
   const { addressIdToEdit } = usePelcro();
+  const addressId = props?.addressId ?? addressIdToEdit;
+
   const [t] = useTranslation("address");
   useEffect(() => {
     const getCountries = () => {
@@ -93,7 +96,7 @@ const AddressUpdateContainer = ({
     for (const address in addresses) {
       const thisAddress = addresses[address];
 
-      if (+thisAddress.id === +addressIdToEdit) {
+      if (+thisAddress.id === +addressId) {
         const newState = {
           ...initialState,
           firstName: thisAddress.first_name,
@@ -125,7 +128,7 @@ const AddressUpdateContainer = ({
   ) => {
     window.Pelcro.address.update(
       {
-        address_id: addressIdToEdit,
+        address_id: addressId,
         auth_token: window.Pelcro.user.read().auth_token,
         type: type,
         first_name: firstName,
