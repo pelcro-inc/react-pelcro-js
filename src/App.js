@@ -203,7 +203,6 @@ class App extends Component {
       return true;
     } else if (view === "select") {
       this.setProductAndPlanFromUrl();
-      this.displaySelectView();
       return true;
     } else if (view === "redeem") {
       this.setView("redeem");
@@ -348,13 +347,9 @@ class App extends Component {
     this.setView("login");
   };
 
-  displaySelectView = () => {
-    this.setState({ subscriptionIdToRenew: null });
-    if (!window.Pelcro.site.read().products) return;
-    this.setView("select");
-  };
-
   setProductAndPlanFromUrl = () => {
+    this.setState({ subscriptionIdToRenew: null });
+
     const productsList = window.Pelcro.product.list();
     if (!productsList?.length) return;
 
@@ -376,6 +371,26 @@ class App extends Component {
       selectedPlan,
       Boolean(isGift)
     );
+
+    if (!selectedProduct || !selectedPlan) {
+      return this.setView("select");
+    }
+
+    const isAuthenticated = window.Pelcro.user.isAuthenticated();
+    if (!isAuthenticated) {
+      return this.setView("register");
+    }
+
+    if (isGift) {
+      return this.setView("gift");
+    }
+
+    const requiresAddress = Boolean(selectedProduct.address_required);
+    if (!requiresAddress) {
+      return this.setView("payment");
+    }
+
+    return this.displayAddressView();
   };
 
   displayCartView = () => {
