@@ -31,4 +31,4 @@ export const DashboardOpenButton = () => {
   );
 };
 
-DashboardOpenButton.id = "pelcro-dashboard-open-button";
+DashboardOpenButton.id = "dashboard-open";
