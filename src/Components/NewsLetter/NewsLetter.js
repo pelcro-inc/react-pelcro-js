@@ -183,7 +183,7 @@ class DefaultNewsLetter extends Component {
                 errorId="pelcro-input-postal-code-error"
                 label={t("labels.postalCode")}
               />
-              <p className="pelcro-footnote">
+              <p className="plc-text-gray-700 pelcro-footnote">
                 * {t("labels.required")}
               </p>
               <Button

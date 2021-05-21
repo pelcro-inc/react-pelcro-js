@@ -75,7 +75,9 @@ export const AddressCreateView = (props) => {
               required
             />
           </div>
-          <p className="pelcro-footnote">* {t("labels.required")}</p>
+          <p className="plc-text-gray-700 pelcro-footnote">
+            * {t("labels.required")}
+          </p>
           <AddressCreateSubmit
             role="submit"
             className="plc-mt-2 plc-w-full"

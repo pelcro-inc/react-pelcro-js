@@ -76,7 +76,9 @@ export const AddressUpdateView = (props) => {
               required
             />
           </div>
-          <p className="pelcro-footnote">* {t("labels.required")}</p>
+          <p className="plc-text-gray-700 pelcro-footnote">
+            * {t("labels.required")}
+          </p>
           <AddressUpdateSubmit
             role="submit"
             className="plc-mt-2 plc-w-full"

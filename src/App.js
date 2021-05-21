@@ -486,7 +486,23 @@ class App extends Component {
       Boolean(isGift)
     );
 
-    this.setView("select");
+    if (!selectedProduct || !selectedPlan) return;
+
+    const isAuthenticated = window.Pelcro.user.isAuthenticated();
+    if (!isAuthenticated) {
+      return this.setView("register");
+    }
+
+    if (isGift) {
+      return this.setView("gift");
+    }
+
+    const requiresAddress = Boolean(selectedProduct.address_required);
+    if (!requiresAddress) {
+      return this.setView("payment");
+    }
+
+    return this.displayAddressView();
   };
 
   setOfflineProductAndPlanByButton = (e) => {
