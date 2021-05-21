@@ -16,7 +16,6 @@ export const CartModal = ({
     <Modal
       hideCloseButton={false}
       onClose={onClose}
-      hideHeaderLogo={hideHeaderLogo}
       id="pelcro-cart-modal"
     >
       <ModalBody>

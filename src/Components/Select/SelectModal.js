@@ -304,7 +304,6 @@ class SelectModal extends Component {
       <Modal
         hideCloseButton={!this.closeButton}
         onClose={this.props.onClose}
-        hideHeaderLogo={this.props.hideHeaderLogo}
         id="pelcro-selection-modal"
       >
         <ModalBody>

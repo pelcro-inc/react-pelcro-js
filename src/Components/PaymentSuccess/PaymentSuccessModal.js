@@ -7,6 +7,9 @@ import {
 import Authorship from "../common/Authorship";
 import { PaymentSuccessView } from "./PaymentSuccessView";
 
+/**
+ *
+ */
 export function PaymentSuccessModal({
   onDisplay,
   onClose,
@@ -22,11 +25,7 @@ export function PaymentSuccessModal({
   });
 
   return (
-    <Modal
-      id="pelcro-payment-success-modal"
-      onClose={onClose}
-      hideHeaderLogo={hideHeaderLogo}
-    >
+    <Modal id="pelcro-payment-success-modal" onClose={onClose}>
       <ModalBody>
         <PaymentSuccessView onClose={onClose} product={product} />
       </ModalBody>

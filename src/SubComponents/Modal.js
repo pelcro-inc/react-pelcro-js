@@ -10,7 +10,6 @@ export function Modal({
   onDisplay,
   className = "",
   hideCloseButton = !window.Pelcro.paywall.displayCloseButton(),
-  hideHeaderLogo = true,
   children,
   ...props
 }) {
@@ -23,8 +22,6 @@ export function Modal({
     props?.onClose?.();
     resetView();
   };
-
-  const logoUrl = window.Pelcro.site.read().logo.url;
 
   return (
     <div className="pelcro-modal-overlay">
@@ -51,9 +48,9 @@ export function Modal({
               <img
                 alt="business logo"
                 className={`plc-max-h-14 plc-mt-2 pelcro-modal-logo ${
-                  hideHeaderLogo ? "plc-hidden" : ""
+                  window.Pelcro?._showModalHeader ? "" : "plc-hidden"
                 }`}
-                src={logoUrl}
+                src={window.Pelcro.site.read().logo?.url}
               />
             </div>
           </div>

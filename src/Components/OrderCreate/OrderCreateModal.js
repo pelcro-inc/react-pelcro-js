@@ -16,7 +16,6 @@ export const OrderCreateModal = ({
     <Modal
       hideCloseButton={false}
       onClose={onClose}
-      hideHeaderLogo={hideHeaderLogo}
       id="pelcro-order-create-modal"
     >
       <ModalBody>
