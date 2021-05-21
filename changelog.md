@@ -20,6 +20,7 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 - Check mark icon and title color in subscription success and purchase sucess modal.
 - Alignment of dashboard close button.
 - Color grade of text from gray-700 to gray-900 to better match Bootstrap's default text color.
+- E-commerce purchase success modal button to use default solid variant instead of outline one.
 
 ## [Released]
 
