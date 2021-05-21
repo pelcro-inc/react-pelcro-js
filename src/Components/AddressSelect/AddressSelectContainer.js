@@ -4,6 +4,7 @@ import useReducerWithSideEffects, {
   Update,
   UpdateWithSideEffect
 } from "use-reducer-with-side-effects";
+import { usePelcro } from "../../hooks/usePelcro";
 import {
   HANDLE_SUBMIT,
   LOADING,
@@ -41,15 +42,19 @@ const { Provider } = store;
 const AddressSelectContainer = ({
   style,
   className,
-  giftCode = false,
   onGiftRedemptionSuccess = () => {},
   onSuccess = () => {},
   onFailure = () => {},
-  children
+  children,
+  ...props
 }) => {
   const { t } = useTranslation("address");
+  const { giftCode: giftCodeFromStore, set } = usePelcro();
+  const giftCode = props.giftCode ?? giftCodeFromStore;
 
   const submitAddress = ({ selectedAddressId }, dispatch) => {
+    set({ selectedAddressId });
+
     if (!giftCode) {
       return onSuccess(selectedAddressId);
     }

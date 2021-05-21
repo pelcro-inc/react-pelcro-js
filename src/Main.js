@@ -17,6 +17,7 @@ import { MeterModal } from "./Components/Meter/MeterModal";
 import { DashboardOpenButton } from "./Components/dashboard/DashboardOpenButton";
 import { NewsletterWithHook as Newsletter } from "./Components/NewsLetter/NewsLetter";
 import { AddressCreateModal } from "./Components/AddressCreate/AddressCreateModal";
+import { AddressSelectModal } from "./Components/AddressSelect/AddressSelectModal";
 
 usePelcro.override((set, get) => {
   return {
@@ -48,6 +49,7 @@ export const Main = () => {
       <Newsletter />
 
       <AddressCreateModal />
+      <AddressSelectModal />
       <AddressUpdateModal />
 
       <GiftCreateModal />

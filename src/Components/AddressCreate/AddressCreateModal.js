@@ -34,10 +34,6 @@ export const AddressCreateModal = ({
     resetView();
   };
 
-  const onFailure = () => {
-    otherProps.onFailure?.();
-  };
-
   return (
     <Modal id="address" onDisplay={onDisplay} onClose={onClose}>
       <ModalBody>
@@ -45,7 +41,7 @@ export const AddressCreateModal = ({
           {...otherProps}
           onSuccess={onSuccess}
           onGiftRedemptionSuccess={onGiftRedemptionSuccess}
-          onFailure={onFailure}
+          onFailure={otherProps.onFailure}
         />
       </ModalBody>
       <ModalFooter>
