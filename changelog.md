@@ -5,10 +5,6 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog][keep a changelog] and this project adheres to [Semantic Versioning][semantic versioning].
 
 ## [Unreleased]
-### Fixed
-
-## [0.17.6] - 2021-05-21
-
 ## Fixed
 
 - Dashboard logout button having a different hover color compared to other dashboard items.
