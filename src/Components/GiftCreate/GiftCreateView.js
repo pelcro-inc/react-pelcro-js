@@ -45,7 +45,7 @@ export const GiftCreateView = (props) => {
               required
             />
           </div>
-          <p className="pelcro-footnote">
+          <p className="plc-text-gray-700 pelcro-footnote">
             * {t("gift.labels.required")}
           </p>
           <GiftCreateSubmitButton
