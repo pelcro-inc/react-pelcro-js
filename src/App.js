@@ -486,7 +486,9 @@ class App extends Component {
       Boolean(isGift)
     );
 
-    if (!selectedProduct || !selectedPlan) return;
+    if (!selectedProduct || !selectedPlan) {
+      return this.setView("select");
+    }
 
     const isAuthenticated = window.Pelcro.user.isAuthenticated();
     if (!isAuthenticated) {
