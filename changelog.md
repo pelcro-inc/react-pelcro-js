@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Unreleased]
 
+## Changed
+
+- Skip the product/plan selection step when url trigger params contain all required data
+
 ## [Released]
 
 ## [0.17.6] - 2021-05-22
