@@ -6,16 +6,47 @@ import {
   ModalBody,
   ModalFooter
 } from "../../SubComponents/Modal";
+import { usePelcro } from "../../hooks/usePelcro";
 
-export const AddressCreateModal = ({ onClose, ...otherProps }) => {
+export const AddressCreateModal = ({
+  onDisplay,
+  onClose,
+  ...otherProps
+}) => {
+  const { product, order, switchView, resetView } = usePelcro();
+
+  const onSuccess = (newAddressId) => {
+    otherProps.onSuccess?.(newAddressId);
+
+    if (product) {
+      return switchView("payment");
+    }
+
+    if (order) {
+      return switchView("orderCreate");
+    }
+
+    resetView();
+  };
+
+  const onGiftRedemptionSuccess = () => {
+    otherProps.onGiftRedemptionSuccess?.();
+    resetView();
+  };
+
+  const onFailure = () => {
+    otherProps.onFailure?.();
+  };
+
   return (
-    <Modal
-      hideCloseButton={!window.Pelcro.paywall.displayCloseButton()}
-      onClose={onClose}
-      id="pelcro-address-create-modal"
-    >
+    <Modal id="address" onDisplay={onDisplay} onClose={onClose}>
       <ModalBody>
-        <AddressCreateView {...otherProps} />
+        <AddressCreateView
+          {...otherProps}
+          onSuccess={onSuccess}
+          onGiftRedemptionSuccess={onGiftRedemptionSuccess}
+          onFailure={onFailure}
+        />
       </ModalBody>
       <ModalFooter>
         <Authorship />
@@ -23,3 +54,5 @@ export const AddressCreateModal = ({ onClose, ...otherProps }) => {
     </Modal>
   );
 };
+
+AddressCreateModal.id = "address";
