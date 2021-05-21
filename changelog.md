@@ -5,26 +5,42 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog][keep a changelog] and this project adheres to [Semantic Versioning][semantic versioning].
 
 ## [Unreleased]
-### Fixed
+## Fixed
 
-- Fixed French typos on dashboard
+- Dashboard logout button having a different hover color compared to other dashboard items.
+- Dashboard user first and last name overflowing on smaller devices
+- French typos in dashboard
+
+### Changed
+
+- Check mark icon and title color in subscription success and purchase sucess modal.
+- Alignment of dashboard close button.
+- Color grade of text from gray-700 to gray-900 to better match Bootstrap's default text color.
+- E-commerce purchase success modal button to use default solid variant instead of outline one.
+
 ## [Released]
+
+## [0.17.5] - 2021-05-21
+
+### Changed
+
+- Skip the product/plan selection step when clicking on a subscription button that has all required attributes
 
 ## [0.17.4] - 2021-05-20
 
 ### Changed
 
-- force radio buttons and checkboxes to have no CSS :before pseudo element. [PRIVATE]
+- Force radio buttons and checkboxes to have no CSS :before pseudo element. [PRIVATE]
 
 ## [0.17.3] - 2021-05-10
 
 ### Fixed
 
-- password reset modal not showing any alerts
+- Password reset modal not showing any alerts
 
 ### Changed
 
-- color and wording of the 'remove profile picture' button in the user profile picture change modal
+- Color and wording of the 'remove profile picture' button in the user profile picture change modal
 
 ## [0.17.2] - 2021-05-10
 

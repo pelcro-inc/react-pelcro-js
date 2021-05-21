@@ -11,7 +11,7 @@ export const GiftCreateView = (props) => {
   const { t } = useTranslation("register");
   return (
     <div id="pelcro-gift-create-view">
-      <div className="plc-mb-6 plc-text-2xl plc-font-semibold plc-text-center plc-text-gray-700 pelcro-title-wrapper">
+      <div className="plc-mb-6 plc-text-2xl plc-font-semibold plc-text-center plc-text-gray-900 pelcro-title-wrapper">
         <h4>{t("gift.titles.firstTitle")}</h4>
       </div>
       <form
@@ -45,7 +45,7 @@ export const GiftCreateView = (props) => {
               required
             />
           </div>
-          <p className="plc-text-gray-700 pelcro-footnote">
+          <p className="plc-text-gray-900 pelcro-footnote">
             * {t("gift.labels.required")}
           </p>
           <GiftCreateSubmitButton

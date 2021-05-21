@@ -1,6 +1,6 @@
 @layer components {
   .pelcro-root .pelcro-radio-label {
-    @apply plc-ml-2;
+    @apply plc-ml-2 plc-text-gray-900;
   }
 
   .pelcro-root .pelcro-radio {
