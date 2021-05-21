@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog][keep a changelog] and this project adheres to [Semantic Versioning][semantic versioning].
 
 ## [Unreleased]
+### Fixed
 
 ## [0.17.6] - 2021-05-21
 
@@ -12,6 +13,7 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 - Dashboard logout button having a different hover color compared to other dashboard items.
 - Dashboard user first and last name overflowing on smaller devices
+- French typos in dashboard
 
 ### Changed
 
