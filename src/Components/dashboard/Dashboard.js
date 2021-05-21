@@ -796,7 +796,7 @@ class Dashboard extends Component {
                 variant="outline"
                 icon={<ExitIcon />}
                 isFullWidth={true}
-                className="plc-flex plc-items-center plc-justify-start plc-w-full plc-p-5 plc-px-4 plc-cursor-pointer plc-select-none sm:plc-px-8 plc-text-gray-500 hover:plc-text-primary-400 plc-text-lg plc-bg-transparent hover:plc-bg-primary-50 plc-capitalize plc-border-0 plc-border-l-2 plc-border-transparent plc-font-normal plc-rounded-none"
+                className="plc-flex plc-items-center plc-justify-start plc-w-full plc-p-5 plc-px-4 plc-cursor-pointer plc-select-none sm:plc-px-8 plc-text-gray-500 plc-text-lg plc-bg-transparent hover:plc-bg-gray-100 hover:plc-text-gray-500 plc-capitalize plc-border-0 plc-border-l-2 plc-border-transparent plc-font-normal plc-rounded-none"
                 onClick={this.props.logout}
               >
                 {this.locale("labels.logout")}
