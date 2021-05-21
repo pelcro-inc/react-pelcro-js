@@ -15,6 +15,7 @@ import { PasswordChangeModal } from "./Components/PasswordChange/PasswordChangeM
 import { PasswordResetModal } from "./Components/PasswordReset/PasswordResetModal";
 import { MeterModal } from "./Components/Meter/MeterModal";
 import { DashboardOpenButton } from "./Components/dashboard/DashboardOpenButton";
+import { NewsletterWithHook as Newsletter } from "./Components/NewsLetter/NewsLetter";
 
 usePelcro.override((set, get) => {
   return {
@@ -43,6 +44,7 @@ export const Main = () => {
       <PasswordResetModal />
 
       <SelectModal />
+      <Newsletter />
 
       <AddressUpdateModal />
 

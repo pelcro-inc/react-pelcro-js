@@ -12,6 +12,24 @@ import { Alert } from "../../SubComponents/Alert";
 import { Button } from "../../SubComponents/Button";
 import { Input } from "../../SubComponents/Input";
 import { Link } from "../../SubComponents/Link";
+import { usePelcro } from "../../hooks/usePelcro";
+
+/**
+ *
+ */
+export function NewsletterWithHook() {
+  const { switchView, resetView, product } = usePelcro();
+
+  return (
+    <NewsLetter
+      onClose={resetView}
+      setView={switchView}
+      product={product}
+    />
+  );
+}
+
+NewsletterWithHook.id = "newsletter";
 
 class DefaultNewsLetter extends Component {
   constructor(props) {
@@ -187,7 +205,7 @@ class DefaultNewsLetter extends Component {
               </p>
               <Button
                 role="submit"
-                className="plc-mt-2 plc-w-full"
+                className="plc-w-full plc-mt-2"
                 id="pelcro-submit"
                 onClick={this.submitNewsletter}
                 disabled={this.state.disableSubmit}
