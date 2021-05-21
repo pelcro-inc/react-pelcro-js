@@ -6,29 +6,42 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Unreleased]
 
+## [0.17.6] - 2021-05-21
+
+## Fixed
+
+- Dashboard logout button having a different hover color compared to other dashboard items.
+- Dashboard user first and last name overflowing on smaller devices
+
+### Changed
+
+- Check mark icon and title color in subscription success and purchase sucess modal.
+- Alignment of dashboard close button.
+- Color grade of text from gray-700 to gray-900 to better match Bootstrap's default text color.
+
 ## [Released]
 
 ## [0.17.5] - 2021-05-21
 
 ### Changed
 
-- skip the product/plan selection step when clicking on a subscription button that has all required attributes
+- Skip the product/plan selection step when clicking on a subscription button that has all required attributes
 
 ## [0.17.4] - 2021-05-20
 
 ### Changed
 
-- force radio buttons and checkboxes to have no CSS :before pseudo element. [PRIVATE]
+- Force radio buttons and checkboxes to have no CSS :before pseudo element. [PRIVATE]
 
 ## [0.17.3] - 2021-05-10
 
 ### Fixed
 
-- password reset modal not showing any alerts
+- Password reset modal not showing any alerts
 
 ### Changed
 
-- color and wording of the 'remove profile picture' button in the user profile picture change modal
+- Color and wording of the 'remove profile picture' button in the user profile picture change modal
 
 ## [0.17.2] - 2021-05-10
 
