@@ -5,7 +5,12 @@ import {
   authenticatedButtons,
   unauthenticatedButtons
 } from "../common/PelcroNativeButtons";
-import { disableScroll, enableScroll, initPaywalls } from "./service";
+import {
+  disableScroll,
+  enableScroll,
+  initPaywalls,
+  renderShopView
+} from "./service";
 
 export const PelcroModalController = ({ children }) => {
   const { view, isAuthenticated, whenSiteReady } = usePelcro();
@@ -44,7 +49,11 @@ export const PelcroModalController = ({ children }) => {
         children.find(
           ({ type }) => type?.id === "pelcro-dashboard-open-button"
         )}
+      {renderShopView(
+        children.find(({ type }) => type?.id === "shop")
+      )}
 
+      {/* Conditionally render our modals */}
       {children.find(({ type }) => type?.id === view)}
     </div>
   );

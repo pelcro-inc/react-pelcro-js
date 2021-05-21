@@ -1,3 +1,5 @@
+import React from "react";
+import ReactDOM from "react-dom";
 import { usePelcro } from "../../hooks/usePelcro";
 
 export const initPaywalls = () => {
@@ -57,5 +59,16 @@ export const enableScroll = () => {
 export const disableScroll = () => {
   if (!document.body.classList.contains("pelcro-modal-open")) {
     document.body.classList.add("pelcro-modal-open");
+  }
+};
+
+export const renderShopView = (shopComponent) => {
+  const shopElement = document.getElementById("pelcro-shop");
+
+  if (shopElement) {
+    ReactDOM.render(
+      <div className="pelcro-root">{shopComponent}</div>,
+      shopElement
+    );
   }
 };

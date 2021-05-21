@@ -20,7 +20,6 @@ const CartContainer = ({
   style,
   className,
   onSuccess = () => {},
-  onFailure = () => {},
   getProducts = () => {},
   children
 }) => {

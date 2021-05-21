@@ -18,4 +18,17 @@ export class PelcroCallbacks {
       });
     }
   };
+
+  whenEcommerceLoaded = (callback) => {
+    if (window.Pelcro.ecommerce.products.read()?.length) {
+      callback(window.Pelcro.ecommerce.products.read());
+    } else {
+      window.document.addEventListener(
+        "PelcroEcommerceProductsLoaded",
+        (e) => {
+          callback(window.Pelcro.ecommerce.products.read());
+        }
+      );
+    }
+  };
 }

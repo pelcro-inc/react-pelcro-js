@@ -19,6 +19,7 @@ import { NewsletterWithHook as Newsletter } from "./Components/NewsLetter/NewsLe
 import { AddressCreateModal } from "./Components/AddressCreate/AddressCreateModal";
 import { AddressSelectModal } from "./Components/AddressSelect/AddressSelectModal";
 import { CartModal } from "./Components/Cart/CartModal";
+import { ShopView } from "./Components/Shop/ShopView";
 
 usePelcro.override((set, get) => {
   return {
@@ -56,6 +57,7 @@ export const Main = () => {
       <GiftCreateModal />
       <GiftRedeemModal />
 
+      <ShopView />
       <CartModal />
     </PelcroModalController>
   );
