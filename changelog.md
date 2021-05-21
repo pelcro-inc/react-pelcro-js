@@ -8,6 +8,12 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Released]
 
+## [0.17.5] - 2021-05-21
+
+### Changed
+
+- skip the product/plan selection step when clicking on a subscription button that has all required attributes
+
 ## [0.17.4] - 2021-05-20
 
 ### Changed
