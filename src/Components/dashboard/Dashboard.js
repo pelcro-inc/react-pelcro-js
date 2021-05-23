@@ -398,7 +398,7 @@ class Dashboard extends Component {
                 icon={
                   <PlusIcon className="plc-w-4 plc-h-4 plc-mr-1" />
                 }
-                className="plc-w-full plc-h-8 plc-font-semibold plc-tracking-wider plc-text-gray-700 plc-uppercase plc-rounded-none hover:plc-bg-gray-100"
+                className="plc-w-full plc-h-8 plc-font-semibold plc-tracking-wider plc-text-gray-900 plc-uppercase plc-rounded-none hover:plc-bg-gray-100"
                 onClick={this.displayProductSelect}
               >
                 {this.locale("labels.addSubscription")}
@@ -412,7 +412,7 @@ class Dashboard extends Component {
                 icon={
                   <GiftIcon className="plc-w-4 plc-h-4 plc-mr-1" />
                 }
-                className="plc-w-full plc-h-8 plc-font-semibold plc-tracking-wider plc-text-gray-700 plc-uppercase plc-rounded-none hover:plc-bg-gray-100"
+                className="plc-w-full plc-h-8 plc-font-semibold plc-tracking-wider plc-text-gray-900 plc-uppercase plc-rounded-none hover:plc-bg-gray-100"
                 onClick={this.displayRedeem}
               >
                 {this.locale("labels.redeemGift")}
@@ -553,7 +553,7 @@ class Dashboard extends Component {
                 icon={
                   <PlusIcon className="plc-w-4 plc-h-4 plc-mr-1" />
                 }
-                className="plc-w-full plc-h-8 plc-font-semibold plc-tracking-wider plc-text-gray-700 plc-uppercase plc-rounded-none hover:plc-bg-gray-100"
+                className="plc-w-full plc-h-8 plc-font-semibold plc-tracking-wider plc-text-gray-900 plc-uppercase plc-rounded-none hover:plc-bg-gray-100"
                 onClick={() =>
                   this.displayProductSelect({ isGift: true })
                 }
@@ -615,7 +615,7 @@ class Dashboard extends Component {
               <Button
                 variant="ghost"
                 icon={<PlusIcon className="plc-w-4 plc-mr-1" />}
-                className="plc-w-full plc-h-8 plc-font-semibold plc-tracking-wider plc-text-gray-700 plc-uppercase hover:plc-bg-gray-100"
+                className="plc-w-full plc-h-8 plc-font-semibold plc-tracking-wider plc-text-gray-900 plc-uppercase hover:plc-bg-gray-100"
                 onClick={this.displayAddressCreate}
               >
                 {this.locale("labels.addAddress")}
@@ -652,11 +652,11 @@ class Dashboard extends Component {
         afterLeave={this.props.onClose}
       >
         <div id="pelcro-view-dashboard">
-          <header className="plc-flex plc-flex-col plc-p-2 plc-min-h-40 plc-bg-primary-500">
+          <header className="plc-flex plc-flex-col plc-p-4 plc-pl-2 plc-min-h-40 sm:plc-pr-8 plc-bg-primary-500">
             <div className="plc-flex plc-flex-row-reverse">
               <Button
                 variant="icon"
-                className="plc-text-gray-100 plc-w-9 plc-h-9"
+                className="plc-text-gray-100 plc-w-7 plc-h-7"
                 icon={<XIcon />}
                 onClick={this.closeDashboard}
               ></Button>
@@ -680,9 +680,9 @@ class Dashboard extends Component {
                 </div>
               </div>
 
-              <div className="plc-flex plc-flex-col plc-justify-between plc-flex-grow plc-px-2 plc-ml-1 sm:plc-px-6 sm:plc-ml-0">
+              <div className="plc-flex plc-flex-col plc-justify-between plc-flex-grow plc-w-56 plc-ml-4 plc-break-words sm:plc-w-auto">
                 {userHasName && (
-                  <p className="plc-text-3xl plc-font-bold plc-text-white">
+                  <p className="plc-text-2xl plc-font-bold plc-text-white">
                     {this.user.first_name} {this.user.last_name}
                   </p>
                 )}
@@ -821,7 +821,8 @@ class Dashboard extends Component {
               <Button
                 variant="outline"
                 icon={<ExitIcon />}
-                className="plc-flex plc-items-center plc-justify-start plc-w-full plc-p-5 plc-px-4 plc-text-lg plc-font-normal plc-text-gray-500 plc-capitalize plc-bg-transparent plc-border-0 plc-border-l-2 plc-border-transparent plc-rounded-none plc-cursor-pointer plc-select-none sm:plc-px-8 hover:plc-text-primary-400 hover:plc-bg-primary-50"
+                isFullWidth={true}
+                className="plc-flex plc-items-center plc-justify-start plc-w-full plc-p-5 plc-px-4 plc-text-lg plc-font-normal plc-text-gray-500 plc-capitalize plc-bg-transparent plc-border-0 plc-border-l-2 plc-border-transparent plc-rounded-none plc-cursor-pointer plc-select-none sm:plc-px-8 hover:plc-bg-gray-100 hover:plc-text-gray-500"
                 onClick={this.props.logout}
               >
                 {this.locale("labels.logout")}

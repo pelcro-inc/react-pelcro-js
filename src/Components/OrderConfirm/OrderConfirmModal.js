@@ -8,7 +8,7 @@ import {
   ModalFooter
 } from "../../SubComponents/Modal";
 import { Button } from "../../SubComponents/Button";
-import { ReactComponent as CheckMarkOutlineIcon } from "../../assets/check-outline.svg";
+import { ReactComponent as CheckMark } from "../../assets/check-solid.svg";
 import { Badge } from "../../SubComponents/Badge";
 
 export class OrderConfirmModal extends Component {
@@ -71,9 +71,9 @@ export class OrderConfirmModal extends Component {
         <ModalBody>
           <div id="pelcro-order-confirm-view">
             <div className="plc-flex plc-flex-col plc-items-center">
-              <CheckMarkOutlineIcon className="plc-w-32 plc-my-4 plc-text-green-500" />
-              <div className="plc-text-center plc-text-gray-700">
-                <h4 className="plc-mb-4 plc-text-3xl plc-text-green-500">
+              <CheckMark className="plc-w-32 plc-my-4 plc-text-green-500" />
+              <div className="plc-text-center plc-text-gray-900">
+                <h4 className="plc-mb-4 plc-text-3xl">
                   {this.locale("messages.orderConfirmed.title")}
                 </h4>
                 <p>{this.locale("messages.orderConfirmed.body")}</p>
@@ -132,7 +132,6 @@ export class OrderConfirmModal extends Component {
               <Button
                 id="pelcro-submit"
                 onClick={this.props.onClose}
-                variant="outline"
                 autoFocus={true}
               >
                 {this.locale("buttons.continue")}

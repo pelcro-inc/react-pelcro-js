@@ -18,7 +18,7 @@ export const AddressSelectList = () => {
       {addresses.map((address) => (
         <div
           key={address.id}
-          className="plc-p-2 plc-mx-3 plc-mt-2 plc-border plc-border-gray-400 plc-border-solid plc-rounded pelcro-address-wrapper"
+          className="plc-p-2 plc-mx-3 plc-mt-2 plc-border plc-border-gray-400 plc-border-solid plc-rounded plc-text-gray-900 pelcro-address-wrapper"
         >
           <Radio
             className="plc-self-start pelcro-select-address-radio"

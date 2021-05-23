@@ -15,7 +15,7 @@ export const AddressCreateView = (props) => {
   const { t } = useTranslation("address");
   return (
     <div id="pelcro-address-create-view">
-      <div className="plc-mb-6 plc-text-2xl plc-font-semibold plc-text-center plc-text-gray-700 pelcro-title-wrapper">
+      <div className="plc-mb-6 plc-text-2xl plc-font-semibold plc-text-center plc-text-gray-900 pelcro-title-wrapper">
         <h4>{t("title")}</h4>
       </div>
       <form
@@ -75,7 +75,9 @@ export const AddressCreateView = (props) => {
               required
             />
           </div>
-          <p className="pelcro-footnote">* {t("labels.required")}</p>
+          <p className="plc-text-gray-900 pelcro-footnote">
+            * {t("labels.required")}
+          </p>
           <AddressCreateSubmit
             role="submit"
             className="plc-mt-2 plc-w-full"

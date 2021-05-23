@@ -20,7 +20,7 @@ export function RegisterView(props) {
 
   return (
     <div id="pelcro-register-view">
-      <div className="plc-mb-6 plc-text-center plc-text-gray-700 pelcro-title-wrapper">
+      <div className="plc-mb-6 plc-text-center plc-text-gray-900 pelcro-title-wrapper">
         <h4 className="plc-text-2xl plc-font-semibold">{title}</h4>
         <p>{subtitle}</p>
       </div>
