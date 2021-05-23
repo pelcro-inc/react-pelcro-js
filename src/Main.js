@@ -20,6 +20,9 @@ import { AddressCreateModal } from "./Components/AddressCreate/AddressCreateModa
 import { AddressSelectModal } from "./Components/AddressSelect/AddressSelectModal";
 import { CartModal } from "./Components/Cart/CartModal";
 import { ShopView } from "./Components/Shop/ShopView";
+import { SubscriptionCreateModal } from "./Components/SubscriptionCreate/SubscriptionCreateModal";
+import { SubscriptionRenewModal } from "./Components/SubscriptionRenew/SubscriptionRenewModal";
+import { PaymentSuccessModal } from "./Components/PaymentSuccess/PaymentSuccessModal";
 
 usePelcro.override((set, get) => {
   return {
@@ -53,6 +56,10 @@ export const Main = () => {
       <AddressCreateModal />
       <AddressSelectModal />
       <AddressUpdateModal />
+
+      <SubscriptionCreateModal />
+      <SubscriptionRenewModal />
+      <PaymentSuccessModal />
 
       <GiftCreateModal />
       <GiftRedeemModal />

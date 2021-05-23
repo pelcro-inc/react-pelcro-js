@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { usePelcro } from "../../hooks/usePelcro";
 import {
   Modal,
   ModalBody,
@@ -10,24 +11,28 @@ import { PaymentSuccessView } from "./PaymentSuccessView";
 /**
  *
  */
-export function PaymentSuccessModal({
-  onDisplay,
-  onClose,
-  product,
-  hideHeaderLogo
-}) {
+export function PaymentSuccessModal({ onDisplay, ...props }) {
+  const { resetView } = usePelcro();
+
   useEffect(() => {
     window.Pelcro.insight.track("Modal Displayed", {
       name: "success"
     });
+  }, []);
 
-    onDisplay?.();
-  });
+  const onClose = () => {
+    props.onClose?.();
+    return resetView();
+  };
 
   return (
-    <Modal id="pelcro-payment-success-modal" onClose={onClose}>
+    <Modal
+      id="payment-success"
+      onDisplay={onDisplay}
+      onClose={onClose}
+    >
       <ModalBody>
-        <PaymentSuccessView onClose={onClose} product={product} />
+        <PaymentSuccessView onClose={onClose} />
       </ModalBody>
       <ModalFooter>
         <Authorship />
@@ -35,3 +40,5 @@ export function PaymentSuccessModal({
     </Modal>
   );
 }
+
+PaymentSuccessModal.id = "success";

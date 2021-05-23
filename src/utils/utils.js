@@ -129,3 +129,27 @@ export const displayAddressView = () => {
     switchView("address");
   }
 };
+
+export const displayPaymentView = () => {
+  const {
+    switchView,
+    resetView,
+    product,
+    subscriptionIdToRenew,
+    order
+  } = usePelcro.getState();
+
+  if (product && subscriptionIdToRenew) {
+    return switchView("subscription-renew");
+  }
+
+  if (product && !subscriptionIdToRenew) {
+    return switchView("subscription-create");
+  }
+
+  if (order) {
+    return switchView("order-create");
+  }
+
+  return resetView();
+};

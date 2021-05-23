@@ -20,23 +20,12 @@ import { ReactComponent as SpinnerIcon } from "../../assets/spinner.svg";
  *
  */
 export function PaymentMethodView({
-  type,
-  couponCode,
-  successMessage,
-  ReactGA,
-  showCoupon,
-  showExternalPaymentMethods,
-  subscriptionIdToRenew,
-  isRenewingGift,
-  giftRecipient = null,
-  plan,
-  product,
-  selectedAddressId,
   onSuccess,
   onGiftRenewalSuccess,
   onFailure,
-  onDisplay,
-  order = {}
+  type,
+  showCoupon,
+  showExternalPaymentMethods
 }) {
   const { t } = useTranslation("checkoutForm");
 
@@ -63,20 +52,9 @@ export function PaymentMethodView({
       >
         <PaymentMethodContainer
           type={type}
-          successMessage={successMessage}
-          ReactGA={ReactGA}
-          subscriptionIdToRenew={subscriptionIdToRenew}
-          isRenewingGift={isRenewingGift}
-          giftRecipient={giftRecipient}
-          plan={plan}
-          product={product}
-          selectedAddressId={selectedAddressId}
-          couponCode={couponCode}
-          onDisplay={onDisplay}
           onSuccess={onSuccess}
           onGiftRenewalSuccess={onGiftRenewalSuccess}
           onFailure={onFailure}
-          order={order}
         >
           <div className="plc-absolute plc-inset-0 plc-flex-col plc-items-center plc-justify-center plc-hidden plc-text-lg plc-bg-white plc-z-max plc-text-primary-500 card-authentication-container">
             {t("messages.bankRedirection")}
@@ -116,11 +94,7 @@ export function PaymentMethodView({
               {showExternalPaymentMethods && (
                 <>
                   <PelcroPaymentRequestButton />
-                  <PaypalSubscribeButton
-                    product={product}
-                    plan={plan}
-                    selectedAddressId={selectedAddressId}
-                  />
+                  <PaypalSubscribeButton />
                 </>
               )}
             </div>

@@ -16,7 +16,6 @@ const createPelcroStore = () =>
       view: null,
       switchView: actions.switchView,
       resetView: actions.resetView,
-      flow: "renewal", // TBD
 
       // Plans
       product: null,

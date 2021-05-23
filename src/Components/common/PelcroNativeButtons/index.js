@@ -1,6 +1,7 @@
 import { saveToMetadataButton } from "./saveToMetadata";
 import {
   displayAddressView,
+  displayPaymentView,
   userHasAddress
 } from "../../../utils/utils";
 import i18n from "../../../i18n";
@@ -125,7 +126,7 @@ export const init = () => {
             );
 
             if (!requiresAddress) {
-              return switchView("payment");
+              return displayPaymentView();
             }
 
             return displayAddressView();

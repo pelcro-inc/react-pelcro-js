@@ -1,4 +1,6 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
+import { usePelcro } from "../../hooks/usePelcro";
 import {
   Modal,
   ModalBody,
@@ -11,18 +13,38 @@ import { SubscriptionCreateView } from "./SubscriptionCreateView";
  *
  */
 export function SubscriptionCreateModal({
+  onDisplay,
   onClose,
-  hideHeaderLogo,
   ...otherProps
 }) {
+  const { t } = useTranslation("common");
+  const { switchView, resetView, giftRecipient } = usePelcro();
+
+  const onSuccess = () => {
+    otherProps.onSuccess?.();
+    if (giftRecipient) {
+      window.alert(
+        `${t("confirm.giftSent")} ${giftRecipient.email} ${t(
+          "confirm.successfully"
+        )}`
+      );
+      return resetView();
+    }
+
+    return switchView("success");
+  };
+
   return (
     <Modal
-      hideCloseButton={!window.Pelcro.paywall.displayCloseButton()}
+      id="subscription-create"
+      onDisplay={onDisplay}
       onClose={onClose}
-      id="pelcro-subscription-create-modal"
     >
       <ModalBody>
-        <SubscriptionCreateView {...otherProps} />
+        <SubscriptionCreateView
+          {...otherProps}
+          onSuccess={onSuccess}
+        />
       </ModalBody>
       <ModalFooter>
         <Authorship />
@@ -30,3 +52,5 @@ export function SubscriptionCreateModal({
     </Modal>
   );
 }
+
+SubscriptionCreateModal.id = "subscription-create";

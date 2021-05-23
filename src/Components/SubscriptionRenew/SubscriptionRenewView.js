@@ -1,28 +1,22 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { usePelcro } from "../../hooks/usePelcro";
 import { PaymentMethodView } from "../PaymentMethod/PaymentMethodView";
 
 export const SubscriptionRenewView = ({
-  product,
-  plan,
-  giftRecipient,
-  subscriptionIdToRenew,
-  isRenewingGift,
-  selectedAddressId,
-  onFailure,
-  onSuccess,
-  onDisplay,
-  onGiftRenewalSuccess
+  onSuccess = () => {},
+  onFailure = () => {}
 }) => {
   const { t } = useTranslation("checkoutForm");
+  const { product, plan } = usePelcro();
 
   const getPricingText = (plan) => {
     const autoRenewed = plan.auto_renew;
-    const { interval, intervalCount } = plan;
+    const { interval, interval_count } = plan;
 
     const formattedInterval =
-      intervalCount > 1
-        ? `${intervalCount} ${interval}`
+      interval_count > 1
+        ? `${interval_count} ${interval}`
         : `1 ${interval}`;
 
     return (
@@ -60,16 +54,9 @@ export const SubscriptionRenewView = ({
       <PaymentMethodView
         type="createPayment"
         showCoupon={true}
-        plan={plan}
-        subscriptionIdToRenew={subscriptionIdToRenew}
-        isRenewingGift={isRenewingGift}
-        product={product}
-        giftRecipient={giftRecipient}
-        onFailure={onFailure}
+        showExternalPaymentMethods={false}
         onSuccess={onSuccess}
-        onDisplay={onDisplay}
-        onGiftRenewalSuccess={onGiftRenewalSuccess}
-        selectedAddressId={selectedAddressId}
+        onFailure={onFailure}
       />
     </div>
   );

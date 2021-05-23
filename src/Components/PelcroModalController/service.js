@@ -72,3 +72,28 @@ export const renderShopView = (shopComponent) => {
     );
   }
 };
+
+export const loadPaymentSDKs = () => {
+  // Load stripe's SDK
+  window.Pelcro.helpers.loadSDK(
+    "https://js.stripe.com/v3/",
+    "pelcro-sdk-stripe-id"
+  );
+
+  // Load PayPal SDK's
+  const supportsPaypal = Boolean(
+    window.Pelcro.site.read().braintree_tokenization
+  );
+
+  if (supportsPaypal) {
+    window.Pelcro.helpers.loadSDK(
+      "https://js.braintreegateway.com/web/3.69.0/js/client.min.js",
+      "braintree-sdk"
+    );
+
+    window.Pelcro.helpers.loadSDK(
+      "https://js.braintreegateway.com/web/3.69.0/js/paypal-checkout.min.js",
+      "braintree-paypal-sdk"
+    );
+  }
+};

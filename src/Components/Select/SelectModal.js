@@ -11,7 +11,10 @@ import { Link } from "../../SubComponents/Link";
 import { Button } from "../../SubComponents/Button";
 import { Checkbox } from "../../SubComponents/Checkbox";
 import { Radio } from "../../SubComponents/Radio";
-import { userHasAddress } from "../../utils/utils";
+import {
+  displayPaymentView,
+  userHasAddress
+} from "../../utils/utils";
 import { usePelcro } from "../../hooks/usePelcro";
 
 /**
@@ -22,7 +25,6 @@ export function SelectModalWithHook() {
     isGift,
     plan,
     product,
-
     isRenewingGift,
     switchView,
     resetView,
@@ -276,7 +278,7 @@ class SelectModal extends Component {
       return setView("address");
     }
 
-    return setView("payment");
+    return displayPaymentView();
   };
 
   displayLoginView = () => {

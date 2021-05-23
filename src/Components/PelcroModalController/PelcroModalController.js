@@ -9,6 +9,7 @@ import {
   disableScroll,
   enableScroll,
   initPaywalls,
+  loadPaymentSDKs,
   renderShopView
 } from "./service";
 
@@ -18,6 +19,7 @@ export const PelcroModalController = ({ children }) => {
   React.useEffect(() => {
     whenSiteReady(() => {
       initPaywalls();
+      loadPaymentSDKs();
     });
   }, []);
 

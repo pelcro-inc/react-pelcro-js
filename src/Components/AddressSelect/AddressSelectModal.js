@@ -7,6 +7,7 @@ import {
   ModalFooter
 } from "../../SubComponents/Modal";
 import { usePelcro } from "../../hooks/usePelcro";
+import { displayPaymentView } from "../../utils/utils";
 
 export const AddressSelectModal = ({
   onDisplay,
@@ -14,20 +15,12 @@ export const AddressSelectModal = ({
   hideHeaderLogo,
   ...otherProps
 }) => {
-  const { product, order, switchView, resetView } = usePelcro();
+  const { switchView, resetView } = usePelcro();
 
   const onSuccess = (selectedAddressId) => {
     otherProps.onSuccess?.(selectedAddressId);
 
-    if (product) {
-      return switchView("payment");
-    }
-
-    if (order) {
-      return switchView("orderCreate");
-    }
-
-    resetView();
+    displayPaymentView();
   };
 
   const onGiftRedemptionSuccess = () => {

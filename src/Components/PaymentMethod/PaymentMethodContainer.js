@@ -42,6 +42,7 @@ import {
   getCanonicalLocaleFormat,
   getEcommerceOrderTotal
 } from "../../utils/utils";
+import { usePelcro } from "../../hooks/usePelcro";
 
 /**
  * @typedef {Object} PaymentStateType
@@ -88,28 +89,25 @@ const PaymentMethodContainerWithoutStripe = ({
   style,
   className,
   children,
-  successMessage,
   stripe,
   type,
-  subscriptionIdToRenew,
-  isRenewingGift,
-  plan,
-  product,
   store,
-  order = {},
-  giftRecipient = null,
-  selectedAddressId,
   onSuccess = () => {},
   onGiftRenewalSuccess = () => {},
-  onFailure = () => {},
-  onLoading = () => {},
-  onDisplay = () => {}
+  onFailure = () => {}
 }) => {
   const { t } = useTranslation("payment");
+  const {
+    order,
+    subscriptionIdToRenew,
+    product,
+    plan,
+    selectedAddressId,
+    giftRecipient,
+    isRenewingGift
+  } = usePelcro();
 
   useEffect(() => {
-    onDisplay();
-
     window.Pelcro.insight.track("Modal Displayed", {
       name: "payment"
     });
@@ -146,7 +144,6 @@ const PaymentMethodContainerWithoutStripe = ({
         dispatch({ type: DISABLE_SUBMIT, payload: true });
         dispatch({ type: LOADING, payload: true });
         complete("success");
-        onLoading();
 
         if (source?.card?.three_d_secure === "required") {
           return generate3DSecureSource(source).then(
@@ -481,7 +478,7 @@ const PaymentMethodContainerWithoutStripe = ({
               type: SHOW_ALERT,
               payload: {
                 type: "success",
-                content: successMessage
+                content: t("messages.sourceUpdated")
               }
             });
             onSuccess(res);

@@ -6,23 +6,40 @@ import {
   ModalFooter
 } from "../../SubComponents/Modal";
 import Authorship from "../common/Authorship";
+import { usePelcro } from "../../hooks/usePelcro";
 
 /**
  *
  */
 export function SubscriptionRenewModal({
+  onDisplay,
   onClose,
-  hideHeaderLogo,
   ...otherProps
 }) {
+  const { switchView } = usePelcro();
+
+  const onSuccess = () => {
+    otherProps.onSuccess?.();
+    return switchView("success");
+  };
+
+  const onGiftRenewalSuccess = () => {
+    otherProps.onGiftRenewalSuccess?.();
+    return switchView("success");
+  };
+
   return (
     <Modal
-      hideCloseButton={!window.Pelcro.paywall.displayCloseButton()}
+      id="subscription-renew"
+      onDisplay={onDisplay}
       onClose={onClose}
-      id="pelcro-subscription-renew-modal"
     >
       <ModalBody>
-        <SubscriptionRenewView {...otherProps} />
+        <SubscriptionRenewView
+          {...otherProps}
+          onSuccess={onSuccess}
+          onGiftRenewalSuccess={onGiftRenewalSuccess}
+        />
       </ModalBody>
       <ModalFooter>
         <Authorship />
@@ -30,3 +47,5 @@ export function SubscriptionRenewModal({
     </Modal>
   );
 }
+
+SubscriptionRenewModal.id = "subscription-renew";

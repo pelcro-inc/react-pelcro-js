@@ -7,7 +7,10 @@ import {
   ModalBody,
   ModalFooter
 } from "../../SubComponents/Modal";
-import { displayAddressView } from "../../utils/utils";
+import {
+  displayAddressView,
+  displayPaymentView
+} from "../../utils/utils";
 import Authorship from "../common/Authorship";
 import { RegisterView } from "./RegisterView";
 
@@ -55,7 +58,7 @@ export function RegisterModal(props) {
       if (product.address_required) {
         return displayAddressView();
       } else {
-        return switchView("payment");
+        return displayPaymentView();
       }
     }
 
