@@ -4,7 +4,21 @@ export class PelcroActions {
     this.get = storeGetter;
   }
 
-  switchView = (view) => this.set({ view });
+  switchView = (view) => {
+    // view switching guards
+    if (
+      ["login", "register"].includes(view) &&
+      this.get().isAuthenticated
+    ) {
+      return this.set({ view: "dashboard" });
+    }
+
+    if (view === "password-change" && !this.get().isAuthenticated) {
+      return this.set({ view: "login" });
+    }
+
+    this.set({ view });
+  };
 
   resetView = () => {
     this.set({
