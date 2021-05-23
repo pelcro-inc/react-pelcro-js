@@ -1,5 +1,8 @@
 import { saveToMetadataButton } from "./saveToMetadata";
-import { userHasAddress } from "../../../utils/utils";
+import {
+  displayAddressView,
+  userHasAddress
+} from "../../../utils/utils";
 import i18n from "../../../i18n";
 import { usePelcro } from "../../../hooks/usePelcro";
 
@@ -103,7 +106,29 @@ export const init = () => {
               isGift: Boolean(isGift)
             });
 
-            switchView("select");
+            if (!selectedProduct || !selectedPlan) {
+              return switchView("select");
+            }
+
+            const { isAuthenticated } = usePelcro.getState();
+
+            if (!isAuthenticated) {
+              return switchView("register");
+            }
+
+            if (isGift) {
+              return switchView("gift");
+            }
+
+            const requiresAddress = Boolean(
+              selectedProduct.address_required
+            );
+
+            if (!requiresAddress) {
+              return switchView("payment");
+            }
+
+            return displayAddressView();
           }
         );
       } else {
