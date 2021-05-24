@@ -30,7 +30,6 @@ export class PelcroActions {
       isRenewingGift: false,
       giftCode: "",
       subscriptionIdToRenew: null,
-      products: [],
       order: null,
       selectedAddressId: null,
       addressIdToEdit: null
