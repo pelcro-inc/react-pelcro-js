@@ -104,7 +104,8 @@ const PaymentMethodContainerWithoutStripe = ({
     plan,
     selectedAddressId,
     giftRecipient,
-    isRenewingGift
+    isRenewingGift,
+    set
   } = usePelcro();
 
   useEffect(() => {
@@ -435,6 +436,7 @@ const PaymentMethodContainerWithoutStripe = ({
 
         // Reset cart products
         window.Pelcro.cartProducts = [];
+        set({ order: null });
         onSuccess(res);
       }
     );

@@ -34,7 +34,6 @@ export const AddressCreateModal = ({
           {...otherProps}
           onSuccess={onSuccess}
           onGiftRedemptionSuccess={onGiftRedemptionSuccess}
-          onFailure={otherProps.onFailure}
         />
       </ModalBody>
       <ModalFooter>

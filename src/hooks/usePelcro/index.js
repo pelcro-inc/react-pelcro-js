@@ -26,7 +26,6 @@ const createPelcroStore = () =>
       subscriptionIdToRenew: null,
 
       // E-commerce
-      products: [],
       order: null,
 
       // User

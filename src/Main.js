@@ -23,6 +23,8 @@ import { ShopView } from "./Components/Shop/ShopView";
 import { SubscriptionCreateModal } from "./Components/SubscriptionCreate/SubscriptionCreateModal";
 import { SubscriptionRenewModal } from "./Components/SubscriptionRenew/SubscriptionRenewModal";
 import { PaymentSuccessModal } from "./Components/PaymentSuccess/PaymentSuccessModal";
+import { OrderCreateModal } from "./Components/OrderCreate/OrderCreateModal";
+import { OrderConfirmModalWithHook as OrderConfirmModal } from "./components/OrderConfirm/OrderConfirmModal";
 
 usePelcro.override((set, get) => {
   return {
@@ -66,6 +68,8 @@ export const Main = () => {
 
       <ShopView />
       <CartModal />
+      <OrderCreateModal />
+      <OrderConfirmModal />
     </PelcroModalController>
   );
 };
