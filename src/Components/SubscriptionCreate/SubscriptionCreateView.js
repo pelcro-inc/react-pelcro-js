@@ -13,11 +13,10 @@ export const SubscriptionCreateView = ({
   const getPricingText = (plan) => {
     const autoRenewed = plan.auto_renew;
     const { interval, interval_count } = plan;
-
-    const formattedInterval =
-      interval_count > 1
-        ? `${interval_count} ${interval}`
-        : `1 ${interval}`;
+    const intervalText = t("labels.interval", {
+      interval,
+      count: interval_count
+    });
 
     return (
       <p className="plc-text-gray-600">
@@ -29,7 +28,7 @@ export const SubscriptionCreateView = ({
           {plan.amount_formatted}{" "}
         </span>
         <span className="plc-font-thin">
-          {autoRenewed ? "/" : t("labels.for")} {formattedInterval}
+          {autoRenewed ? "/" : t("labels.for")} {intervalText}
         </span>
       </p>
     );

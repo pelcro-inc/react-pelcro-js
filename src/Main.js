@@ -25,7 +25,7 @@ import { SubscriptionCreateModal } from "./Components/SubscriptionCreate/Subscri
 import { SubscriptionRenewModal } from "./Components/SubscriptionRenew/SubscriptionRenewModal";
 import { PaymentSuccessModal } from "./Components/PaymentSuccess/PaymentSuccessModal";
 import { OrderCreateModal } from "./Components/OrderCreate/OrderCreateModal";
-import { OrderConfirmModalWithHook as OrderConfirmModal } from "./components/OrderConfirm/OrderConfirmModal";
+import { OrderConfirmModalWithHook as OrderConfirmModal } from "./Components/OrderConfirm/OrderConfirmModal";
 
 usePelcro.override((set, get) => {
   return {
