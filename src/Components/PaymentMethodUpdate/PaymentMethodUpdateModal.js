@@ -10,10 +10,9 @@ import Authorship from "../common/Authorship";
 export const PaymentMethodUpdateModal = (props) => {
   return (
     <Modal
-      hideCloseButton={!window.Pelcro.paywall.displayCloseButton()}
+      id="source-create"
+      onDisplay={props.onDisplay}
       onClose={props.onClose}
-      hideHeaderLogo={props.hideHeaderLogo}
-      id="pelcro-payment-method-update-modal"
     >
       <ModalBody>
         <PaymentMethodUpdateView {...props} />
@@ -24,3 +23,5 @@ export const PaymentMethodUpdateModal = (props) => {
     </Modal>
   );
 };
+
+PaymentMethodUpdateModal.id = "source-create";

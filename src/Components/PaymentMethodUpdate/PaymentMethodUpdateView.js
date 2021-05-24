@@ -21,6 +21,7 @@ export function PaymentMethodUpdateView(props) {
         type="updatePaymentSource"
         successMessage={t("success")}
         showCoupon={false}
+        showExternalPaymentMethods={false}
         onDisplay={props.onDisplay}
         onFailure={props.onFailure}
         onSuccess={props.onSuccess}

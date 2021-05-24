@@ -241,7 +241,6 @@ export const init = () => {
             quantity: 1
           };
 
-          set({ products: allProducts });
           set({ order: { items: [{ sku_id: skuId, quantity: 1 }] } });
 
           if (window.Pelcro.user.isAuthenticated()) {
