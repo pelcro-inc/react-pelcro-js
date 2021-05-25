@@ -91,22 +91,26 @@ const PaymentMethodContainerWithoutStripe = ({
   children,
   stripe,
   type,
-  store,
   onSuccess = () => {},
   onGiftRenewalSuccess = () => {},
-  onFailure = () => {}
+  onFailure = () => {},
+  ...props
 }) => {
   const { t } = useTranslation("payment");
-  const {
-    order,
-    subscriptionIdToRenew,
-    product,
-    plan,
-    selectedAddressId,
-    giftRecipient,
-    isRenewingGift,
-    set
-  } = usePelcro();
+  const pelcroStore = usePelcro();
+  const { set } = usePelcro();
+
+  const order = props.order ?? pelcroStore.order;
+  const product = props.product ?? pelcroStore.product;
+  const plan = props.plan ?? pelcroStore.plan;
+  const subscriptionIdToRenew =
+    props.subscriptionIdToRenew ?? pelcroStore.subscriptionIdToRenew;
+  const selectedAddressId =
+    props.selectedAddressId ?? pelcroStore.selectedAddressId;
+  const giftRecipient =
+    props.giftRecipient ?? pelcroStore.giftRecipient;
+  const isRenewingGift =
+    props.isRenewingGift ?? pelcroStore.isRenewingGift;
 
   useEffect(() => {
     window.Pelcro.insight.track("Modal Displayed", {
