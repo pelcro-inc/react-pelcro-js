@@ -83,6 +83,25 @@ export const init = (app) => {
     }
   }
 
+  const pelcroOfflineSubButtonsByClass = document.getElementsByClassName(
+    "pelcro-offline-subscribe-button"
+  );
+
+  if (pelcroOfflineSubButtonsByClass.length !== 0) {
+    for (let j = 0; j < pelcroOfflineSubButtonsByClass.length; j++) {
+      if (
+        pelcroOfflineSubButtonsByClass[j].dataset &&
+        "productId" in pelcroOfflineSubButtonsByClass[j].dataset &&
+        "planId" in pelcroOfflineSubButtonsByClass[j].dataset
+      ) {
+        pelcroOfflineSubButtonsByClass[j].addEventListener(
+          "click",
+          app.setOfflineProductAndPlanByButton
+        );
+      }
+    }
+  }
+
   const pelcroRegisterButtonsByClass = document.getElementsByClassName(
     "pelcro-register-button"
   );
