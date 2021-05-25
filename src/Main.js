@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { usePelcro } from "./hooks/usePelcro";
 import { PelcroModalController } from "./Components/PelcroModalController/PelcroModalController";
 import { LoginModal } from "./Components/Login/LoginModal";
@@ -26,6 +26,11 @@ import { SubscriptionRenewModal } from "./Components/SubscriptionRenew/Subscript
 import { PaymentSuccessModal } from "./Components/PaymentSuccess/PaymentSuccessModal";
 import { OrderCreateModal } from "./Components/OrderCreate/OrderCreateModal";
 import { OrderConfirmModalWithHook as OrderConfirmModal } from "./Components/OrderConfirm/OrderConfirmModal";
+import {
+  applyPelcroTheme,
+  initViewFromURL,
+  initSubscriptionFromURL
+} from "./publicMethods";
 
 usePelcro.override((set, get) => {
   return {
@@ -37,7 +42,11 @@ usePelcro.override((set, get) => {
 });
 
 export const Main = () => {
-  const {} = usePelcro();
+  useEffect(() => {
+    initViewFromURL();
+    initSubscriptionFromURL();
+    applyPelcroTheme();
+  }, []);
 
   return (
     <PelcroModalController>

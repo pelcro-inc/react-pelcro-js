@@ -1,36 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { usePelcro } from "../../hooks/usePelcro";
+import { isValidViewFromURL } from "../../utils/utils";
 
 export const initPaywalls = () => {
-  /**
-   * returns true if the URL contains a supported view trigger URL
-   * @return {boolean}
-   */
-  const isValidViewFromURL = () => {
-    const view = window.Pelcro.helpers.getURLParameter("view");
-    if (
-      [
-        "login",
-        "register",
-        "select",
-        "redeem",
-        "password-forgot",
-        "password-forget",
-        "password-reset",
-        "password-change",
-        "source-create",
-        "user-edit",
-        "newsletter",
-        "address"
-      ].includes(view)
-    ) {
-      return true;
-    }
-
-    return false;
-  };
-
   if (window.Pelcro.site.read()?.settings === "subscription") {
     if (
       isValidViewFromURL() ||

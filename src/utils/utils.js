@@ -153,3 +153,31 @@ export const displayPaymentView = () => {
 
   return resetView();
 };
+
+/**
+ * returns true if the URL contains a supported view trigger URL
+ * @return {boolean}
+ */
+export const isValidViewFromURL = () => {
+  const view = window.Pelcro.helpers.getURLParameter("view");
+  if (
+    [
+      "login",
+      "register",
+      "select",
+      "redeem",
+      "password-forgot",
+      "password-forget",
+      "password-reset",
+      "password-change",
+      "source-create",
+      "user-edit",
+      "newsletter",
+      "address"
+    ].includes(view)
+  ) {
+    return true;
+  }
+
+  return false;
+};

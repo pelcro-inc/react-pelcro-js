@@ -11,7 +11,7 @@ import {
   initPaywalls,
   loadPaymentSDKs,
   renderShopView
-} from "./service";
+} from "./PelcroModalController.service";
 
 export const PelcroModalController = ({ children }) => {
   const { view, isAuthenticated, whenSiteReady } = usePelcro();
