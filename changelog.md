@@ -9,6 +9,11 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Released]
 
+## [0.17.9] - 2021-05-25
+## Fixed
+
+- Native subscribe button not working.
+
 ## [0.17.8] - 2021-05-25
 ## Fixed
 
