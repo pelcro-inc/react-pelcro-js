@@ -80,7 +80,6 @@ export const PasswordChangeContainer = ({
             }
           });
           dispatch({ type: PASSWORD_CHANGE_SUCCESS });
-          set({ isAuthenticated: false });
           onSuccess();
         }
       }

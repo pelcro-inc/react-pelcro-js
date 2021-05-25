@@ -8,12 +8,15 @@ export class PelcroActions {
     // view switching guards
     if (
       ["login", "register"].includes(view) &&
-      this.get().isAuthenticated
+      this.get().isAuthenticated()
     ) {
       return this.set({ view: "dashboard" });
     }
 
-    if (view === "password-change" && !this.get().isAuthenticated) {
+    if (
+      ["dashboard", "password-change"].includes(view) &&
+      !this.get().isAuthenticated()
+    ) {
       return this.set({ view: "login" });
     }
 
@@ -39,10 +42,10 @@ export class PelcroActions {
   logout = () => {
     // if user is not authenticated function execution is terminated
     if (!window.Pelcro.user.isAuthenticated()) {
-      return console.warning("You are already logged out.");
+      return console.warn("You are already logged out.");
     }
 
-    this.set({ isAuthenticated: false });
+    // this.set({ isAuthenticated: false });
     window.Pelcro.user.logout();
     this.resetView();
 

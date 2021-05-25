@@ -133,7 +133,7 @@ export const initSubscriptionFromURL = () => {
 
     const { isAuthenticated } = usePelcro.getState();
 
-    if (!isAuthenticated) {
+    if (!isAuthenticated()) {
       return switchView("register");
     }
 

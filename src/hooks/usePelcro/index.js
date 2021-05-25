@@ -29,7 +29,7 @@ const createPelcroStore = () =>
       order: null,
 
       // User
-      isAuthenticated: window.Pelcro.user.isAuthenticated(),
+      isAuthenticated: () => window.Pelcro.user.isAuthenticated(),
       logout: actions.logout,
       selectedAddressId: null,
       addressIdToEdit: null,

@@ -3,7 +3,6 @@ import useReducerWithSideEffects, {
   UpdateWithSideEffect,
   Update
 } from "use-reducer-with-side-effects";
-import { usePelcro } from "../../hooks/usePelcro";
 import {
   SET_EMAIL,
   SET_PASSWORD,
@@ -37,8 +36,6 @@ const LoginContainer = ({
   onFailure = () => {},
   children
 }) => {
-  const { set } = usePelcro();
-
   const handleLogin = ({ email, password }, dispatch) => {
     window.Pelcro.user.login({ email, password }, (err, res) => {
       dispatch({ type: DISABLE_LOGIN_BUTTON, payload: false });
@@ -50,7 +47,6 @@ const LoginContainer = ({
         });
         onFailure(err);
       } else {
-        set({ isAuthenticated: true });
         onSuccess();
       }
     });

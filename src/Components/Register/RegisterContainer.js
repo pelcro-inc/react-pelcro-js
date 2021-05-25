@@ -22,7 +22,6 @@ import useReducerWithSideEffects, {
 } from "use-reducer-with-side-effects";
 import { getErrorMessages } from "../common/Helpers";
 import { cleanObjectNullValues } from "../../utils/utils";
-import { usePelcro } from "../../hooks/usePelcro";
 
 const initialState = {
   email: "",
@@ -55,9 +54,6 @@ const RegisterContainer = ({
   useEffect(() => {
     onDisplay();
   }, []);
-
-  const { set } = usePelcro();
-
   const handleRegister = (userData, dispatch) => {
     const filteredData = cleanObjectNullValues(userData);
     const {
@@ -92,7 +88,6 @@ const RegisterContainer = ({
           onFailure(err);
         } else {
           onSuccess();
-          set({ isAuthenticated: true });
         }
       }
     );

@@ -29,12 +29,12 @@ export const PelcroModalController = ({ children }) => {
   }, []);
 
   React.useEffect(() => {
-    if (isAuthenticated) {
+    if (window.Pelcro.user.isAuthenticated()) {
       authenticatedButtons();
     } else {
       unauthenticatedButtons();
     }
-  }, [isAuthenticated]);
+  }, [window.Pelcro.user.isAuthenticated()]);
 
   React.useEffect(() => {
     if (view === null || view === "meter") {
@@ -48,7 +48,7 @@ export const PelcroModalController = ({ children }) => {
 
   return (
     <div id="pelcro-app" className="pelcro-root">
-      {isAuthenticated &&
+      {isAuthenticated() &&
         children.find(({ type }) => type?.id === "dashboard-open")}
 
       {/* Conditionally render our modals */}
