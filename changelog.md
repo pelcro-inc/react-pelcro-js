@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Unreleased]
 
+
+## [Released]
+
+## [0.17.8] - 2021-05-25
 ## Fixed
 
 - Native subscribe button not working.
@@ -16,9 +20,6 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 - Input fields margins.
 - Add a default solid border style to all input fields.
-
-
-## [Released]
 
 ## [0.17.7] - 2021-05-22
 ## Changed
