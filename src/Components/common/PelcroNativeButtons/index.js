@@ -77,7 +77,7 @@ export const init = (app) => {
       } else {
         pelcroSubscribeButtonsByClass[j].addEventListener(
           "click",
-          app.displaySelectView
+          app.setView("select")
         );
       }
     }
