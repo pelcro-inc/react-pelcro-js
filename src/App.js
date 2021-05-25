@@ -261,6 +261,13 @@ class App extends Component {
   };
 
   setView = (view) => {
+    if (
+      view === "dashboard" &&
+      !window.Pelcro.user.isAuthenticated()
+    ) {
+      return;
+    }
+
     this.setState({ view: view });
 
     if (view !== "meter") this.disableScroll();
