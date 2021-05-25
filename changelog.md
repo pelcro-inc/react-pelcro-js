@@ -6,6 +6,18 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Unreleased]
 
+## Fixed
+
+- Native subscribe button not working.
+- Dashboard showing up even if the user is signed out under certain circumstances.
+- Native offline subscriptions buttons not working.
+
+### Changed
+
+- Input fields margins.
+- Add a default solid border style to all input fields.
+
+
 ## [Released]
 
 ## [0.17.7] - 2021-05-22
