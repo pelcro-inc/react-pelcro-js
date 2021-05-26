@@ -621,8 +621,25 @@ class App extends Component {
           : !!this.state.plan && this.state.plan.currency
     });
 
+    const { subscriptions } = res.data;
+    const latestSubscriptionId =
+      subscriptions &&
+      subscriptions[
+        subscriptions.length ? subscriptions.length - 1 : 0
+      ].id;
+
+    ReactGA.plugin.execute("ecommerce", "addTransaction", {
+      id: latestSubscriptionId,
+      affiliation: "Pelcro",
+      revenue:
+        !!this.state.plan && this.state.plan.amount
+          ? this.state.plan.amount / 100
+          : 0,
+      coupon: this.state.couponCode
+    });
+
     ReactGA.plugin.execute("ecommerce", "addItem", {
-      id: this.state.product.id,
+      id: latestSubscriptionId,
       name: this.state.product.name,
       category: this.state.product.description,
       variant: this.state.plan.nickname,
@@ -633,21 +650,6 @@ class App extends Component {
       quantity: 1
     });
 
-    const { subscriptions } = res.data;
-
-    ReactGA.plugin.execute("ecommerce", "addTransaction", {
-      id:
-        subscriptions &&
-        subscriptions[
-          subscriptions.length ? subscriptions.length - 1 : 0
-        ].id,
-      affiliation: "Pelcro",
-      revenue:
-        !!this.state.plan && this.state.plan.amount
-          ? this.state.plan.amount / 100
-          : 0,
-      coupon: this.state.couponCode
-    });
     ReactGA.plugin.execute("ecommerce", "send");
 
     ReactGA.event({
