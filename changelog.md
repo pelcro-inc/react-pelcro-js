@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog][keep a changelog] and this project adheres to [Semantic Versioning][semantic versioning].
 
 ## [Unreleased]
+
+## [Released]
+
+## [0.17.10] - 2021-05-27
 ## Fixed
 
 - Scroll being disabled after logging in.
@@ -13,8 +17,6 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 ## Changed
 
 - Remove 'select a different plan' link from registeration modal footer.
-
-## [Released]
 
 ## [0.17.9] - 2021-05-25
 ## Fixed
