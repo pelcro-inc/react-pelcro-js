@@ -717,7 +717,7 @@ class App extends Component {
               setView={this.setView}
               onClose={this.resetView}
               onSuccess={() => {
-                this.setView("");
+                this.resetView();
                 this.loggedIn();
               }}
             />
