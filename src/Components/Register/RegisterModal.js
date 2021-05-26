@@ -42,12 +42,6 @@ export function RegisterModal({
             {t("messages.loginHere")}
           </Link>
         </div>
-        <div>
-          {" " + t("messages.selectPlan")}
-          <Link onClick={displaySelectView}>
-            {t("messages.here")}
-          </Link>
-        </div>
         <Authorship />
       </ModalFooter>
     </Modal>
