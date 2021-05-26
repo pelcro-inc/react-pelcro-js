@@ -14,7 +14,7 @@ const translations = i18n.t("common:buttons", {
 export const init = () => {
   saveToMetadataButton.init();
 
-  const { switchView, set } = usePelcro.getState();
+  const { switchView, set, isAuthenticated } = usePelcro.getState();
 
   const pelcroLoginButtonsByClass = document.getElementsByClassName(
     "pelcro-login-button"
@@ -23,7 +23,7 @@ export const init = () => {
   if (pelcroLoginButtonsByClass.length !== 0) {
     for (let i = 0; i < pelcroLoginButtonsByClass.length; i++) {
       pelcroLoginButtonsByClass[i].addEventListener("click", () => {
-        if (usePelcro.getState().isAuthenticated) {
+        if (isAuthenticated()) {
           switchView("dashboard");
         } else {
           switchView("login");
@@ -111,9 +111,7 @@ export const init = () => {
               return switchView("select");
             }
 
-            const { isAuthenticated } = usePelcro.getState();
-
-            if (!isAuthenticated) {
+            if (!isAuthenticated()) {
               return switchView("register");
             }
 
@@ -136,6 +134,67 @@ export const init = () => {
         pelcroSubscribeButtonsByClass[j].addEventListener(
           "click",
           () => switchView("select")
+        );
+      }
+    }
+  }
+
+  const pelcroOfflineSubButtonsByClass = document.getElementsByClassName(
+    "pelcro-offline-subscribe-button"
+  );
+
+  if (pelcroOfflineSubButtonsByClass.length !== 0) {
+    for (let j = 0; j < pelcroOfflineSubButtonsByClass.length; j++) {
+      if (
+        pelcroOfflineSubButtonsByClass[j].dataset &&
+        "productId" in pelcroOfflineSubButtonsByClass[j].dataset &&
+        "planId" in pelcroOfflineSubButtonsByClass[j].dataset
+      ) {
+        pelcroOfflineSubButtonsByClass[j].addEventListener(
+          "click",
+          (e) => {
+            set({
+              product: {
+                id: e.target.dataset.productId
+              },
+              plan: {
+                product_id: e.target.dataset.productId,
+                id: e.target.dataset.planId
+              }
+            });
+
+            window.Pelcro.plan.getPlan(
+              {
+                plan_id: e.target.dataset.planId
+              },
+              (error, response) => {
+                if (error) {
+                  return;
+                }
+
+                const { plan } = response.data;
+
+                set({
+                  plan,
+                  product: plan?.product
+                });
+
+                if (!isAuthenticated()) {
+                  return switchView("register");
+                }
+
+                const requiresAddress = Boolean(
+                  plan.address_required
+                );
+
+                if (!requiresAddress) {
+                  return displayPaymentView();
+                }
+
+                return displayAddressView();
+              }
+            );
+          }
         );
       }
     }
@@ -243,7 +302,7 @@ export const init = () => {
 
           set({ order: { items: [{ sku_id: skuId, quantity: 1 }] } });
 
-          if (window.Pelcro.user.isAuthenticated()) {
+          if (isAuthenticated()) {
             if (userHasAddress()) {
               switchView("address-select");
             } else {
