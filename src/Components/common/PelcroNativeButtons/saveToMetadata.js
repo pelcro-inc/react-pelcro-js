@@ -26,7 +26,7 @@ class SaveToMetadataButtonClass {
    * Unauthenticated callback
    */
   unauthenticated = () => {
-    const { switchView } = usePelcro.getState();
+    const { switchView } = usePelcro.getStore();
 
     this.#onClick(() => switchView("login"));
     this.#unmarkAllSavedButtons();

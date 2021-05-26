@@ -14,7 +14,7 @@ const translations = i18n.t("common:buttons", {
 export const init = () => {
   saveToMetadataButton.init();
 
-  const { switchView, set, isAuthenticated } = usePelcro.getState();
+  const { switchView, set, isAuthenticated } = usePelcro.getStore();
 
   const pelcroLoginButtonsByClass = document.getElementsByClassName(
     "pelcro-login-button"

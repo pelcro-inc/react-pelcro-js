@@ -56,7 +56,7 @@ export const applyPelcroTheme = () => {
     };
   };
 
-  const { whenSiteReady } = usePelcro.getState();
+  const { whenSiteReady } = usePelcro.getStore();
 
   whenSiteReady(() => {
     const primaryColorHex = window.Pelcro.site.read()?.design_settings
@@ -86,7 +86,7 @@ export const applyPelcroTheme = () => {
  */
 export const initViewFromURL = () => {
   const view = window.Pelcro.helpers.getURLParameter("view");
-  const { switchView, whenSiteReady } = usePelcro.getState();
+  const { switchView, whenSiteReady } = usePelcro.getStore();
   if (isValidViewFromURL()) {
     whenSiteReady(() => {
       switchView(view);
@@ -99,7 +99,7 @@ export const initViewFromURL = () => {
  * with valid IDs. Otherwise, switches to the product selection flow
  */
 export const initSubscriptionFromURL = () => {
-  const { switchView, whenSiteReady, set } = usePelcro.getState();
+  const { switchView, whenSiteReady, set } = usePelcro.getStore();
   whenSiteReady(() => {
     const productsList = window.Pelcro.product.list();
     if (!productsList?.length) return;
@@ -131,7 +131,7 @@ export const initSubscriptionFromURL = () => {
       return;
     }
 
-    const { isAuthenticated } = usePelcro.getState();
+    const { isAuthenticated } = usePelcro.getStore();
 
     if (!isAuthenticated()) {
       return switchView("register");

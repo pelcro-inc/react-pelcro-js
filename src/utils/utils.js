@@ -121,7 +121,7 @@ export const userHasAddress = () => {
 };
 
 export const displayAddressView = () => {
-  const { switchView } = usePelcro.getState();
+  const { switchView } = usePelcro.getStore();
 
   if (userHasAddress()) {
     switchView("address-select");
@@ -137,7 +137,7 @@ export const displayPaymentView = () => {
     product,
     subscriptionIdToRenew,
     order
-  } = usePelcro.getState();
+  } = usePelcro.getStore();
 
   if (product && subscriptionIdToRenew) {
     return switchView("subscription-renew");

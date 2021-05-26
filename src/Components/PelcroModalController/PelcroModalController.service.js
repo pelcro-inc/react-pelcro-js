@@ -12,7 +12,7 @@ export const initPaywalls = () => {
       return;
     }
 
-    const { switchView } = usePelcro.getState();
+    const { switchView } = usePelcro.getStore();
     const paywallMethods = window.Pelcro.paywall;
 
     if (paywallMethods?.displayMeterPaywall()) {
