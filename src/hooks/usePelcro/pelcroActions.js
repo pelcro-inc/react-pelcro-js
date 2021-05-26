@@ -24,9 +24,11 @@ export class PelcroActions {
   };
 
   resetView = () => {
+    const { switchView } = this.get();
+    switchView(null);
+
+    // Other pelcro state to reset
     this.set({
-      view: null,
-      // Other pelcro state to reset
       product: null,
       plan: null,
       isGift: false,
@@ -40,15 +42,14 @@ export class PelcroActions {
   };
 
   logout = () => {
+    const { switchView, resetView, isAuthenticated } = this.get();
     // if user is not authenticated function execution is terminated
-    if (!window.Pelcro.user.isAuthenticated()) {
+    if (!isAuthenticated()) {
       return console.warn("You are already logged out.");
     }
 
-    // this.set({ isAuthenticated: false });
     window.Pelcro.user.logout();
-    this.resetView();
-
-    this.switchView("login");
+    resetView();
+    switchView("login");
   };
 }
