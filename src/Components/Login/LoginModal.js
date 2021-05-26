@@ -23,10 +23,6 @@ export function LoginModal({ onDisplay, onClose, ...props }) {
   };
 
   const onCreateAccountClick = () => {
-    if (props?.onCreateAccountClick?.() === false) {
-      return;
-    }
-
     switchView("select");
   };
 

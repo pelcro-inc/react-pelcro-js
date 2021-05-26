@@ -17,12 +17,19 @@ import { usePelcro } from "../../hooks/usePelcro";
 /**
  *
  */
-export function NewsletterWithHook() {
+export function NewsletterWithHook(props) {
+  React.useEffect(() => {
+    props.onDisplay?.();
+  }, []);
+
   const { switchView, resetView, product } = usePelcro();
 
   return (
     <NewsLetter
-      onClose={resetView}
+      onClose={() => {
+        props.onClose?.();
+        resetView();
+      }}
       setView={switchView}
       product={product}
     />

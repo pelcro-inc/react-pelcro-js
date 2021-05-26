@@ -20,7 +20,11 @@ import { usePelcro } from "../../hooks/usePelcro";
 /**
  *
  */
-export function SelectModalWithHook() {
+export function SelectModalWithHook(props) {
+  React.useEffect(() => {
+    props.onDisplay?.();
+  }, []);
+
   const {
     isGift,
     plan,
@@ -36,7 +40,10 @@ export function SelectModalWithHook() {
       disableGifting={isRenewingGift}
       plan={plan}
       product={product}
-      onClose={resetView}
+      onClose={() => {
+        props.onClose?.();
+        resetView();
+      }}
       setProductAndPlan={(product, plan, isGift) =>
         set({ product, plan, isGift })
       }

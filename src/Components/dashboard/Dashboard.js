@@ -36,7 +36,11 @@ const SUB_MENUS = {
 /**
  *
  */
-export function DashboardWithHook() {
+export function DashboardWithHook(props) {
+  React.useEffect(() => {
+    props.onDisplay?.();
+  }, []);
+
   const { switchView, resetView, logout, set } = usePelcro();
 
   return (
@@ -46,7 +50,10 @@ export function DashboardWithHook() {
         set({ subscriptionIdToRenew })
       }
       setIsRenewingGift={(isRenewingGift) => set({ isRenewingGift })}
-      onClose={resetView}
+      onClose={() => {
+        props.onClose?.();
+        resetView();
+      }}
       logout={logout}
       setView={switchView}
       setProductAndPlan={(product, plan, isGift) =>
