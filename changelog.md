@@ -5,7 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog][keep a changelog] and this project adheres to [Semantic Versioning][semantic versioning].
 
 ## [Unreleased]
+## Fixed
 
+- Scroll being disabled after logging in.
+- E-commerce analytics double counting transactions.
+
+## Changed
+
+- Remove 'select a different plan' link from registeration modal footer.
 
 ## [Released]
 
