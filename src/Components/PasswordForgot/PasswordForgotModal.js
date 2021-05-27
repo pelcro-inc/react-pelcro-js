@@ -31,7 +31,7 @@ export const PasswordForgotModal = ({
         <div>
           {t("messages.alreadyHaveAccount") + " "}
           <Link
-            id="pelcro-pelcro-link-login"
+            id="pelcro-link-login"
             onClick={() => switchView("login")}
           >
             {t("messages.loginHere")}
