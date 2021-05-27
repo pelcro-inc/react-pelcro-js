@@ -36,7 +36,7 @@ export const AddressSelectModal = ({
     <Modal
       onDisplay={onDisplay}
       onClose={onClose}
-      id="address-select"
+      id="pelcro-address-select-modal"
     >
       <ModalBody>
         <AddressSelectView

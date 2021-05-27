@@ -36,7 +36,7 @@ export function SubscriptionCreateModal({
 
   return (
     <Modal
-      id="subscription-create"
+      id="pelcro-subscription-create-modal"
       onDisplay={onDisplay}
       onClose={onClose}
     >

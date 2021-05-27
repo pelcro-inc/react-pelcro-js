@@ -16,7 +16,7 @@ export const PasswordResetModal = ({
     <Modal
       onDisplay={onDisplay}
       onClose={onClose}
-      id="password-reset"
+      id="pelcro-password-reset-modal"
     >
       <ModalBody>
         <PasswordResetView {...otherProps} />

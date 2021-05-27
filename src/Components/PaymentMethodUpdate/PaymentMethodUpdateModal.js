@@ -10,7 +10,7 @@ import Authorship from "../common/Authorship";
 export const PaymentMethodUpdateModal = (props) => {
   return (
     <Modal
-      id="source-create"
+      id="pelcro-source-create-modal"
       onDisplay={props.onDisplay}
       onClose={props.onClose}
     >

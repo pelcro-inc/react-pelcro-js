@@ -67,7 +67,7 @@ export function RegisterModal(props) {
 
   return (
     <Modal
-      id="register"
+      id="pelcro-register-modal"
       onDisplay={props?.onDisplay}
       onClose={props?.onClose}
     >

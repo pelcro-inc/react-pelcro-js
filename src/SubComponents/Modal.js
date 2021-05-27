@@ -29,7 +29,7 @@ export function Modal({
         className={`pelcro-modal ${className}`}
         role="dialog"
         aria-modal="true"
-        id={`pelcro-${id}-modal`}
+        id={id}
         {...props}
       >
         <div className="pelcro-modal-content">

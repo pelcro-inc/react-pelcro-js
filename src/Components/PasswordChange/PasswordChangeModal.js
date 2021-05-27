@@ -14,7 +14,7 @@ export const PasswordChangeModal = ({
 }) => {
   return (
     <Modal
-      id="password-change"
+      id="pelcro-password-change-modal"
       onDisplay={onDisplay}
       onClose={onClose}
     >

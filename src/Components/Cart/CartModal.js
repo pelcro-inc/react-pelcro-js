@@ -24,7 +24,7 @@ export const CartModal = ({ onDisplay, onClose, ...otherProps }) => {
 
   return (
     <Modal
-      id="cart"
+      id="pelcro-cart-modal"
       onDisplay={onDisplay}
       onClose={onClose}
       hideCloseButton={false}

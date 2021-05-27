@@ -31,7 +31,11 @@ export const GiftRedeemModal = ({
   };
 
   return (
-    <Modal id="redeem" onClose={onClose} onDisplay={onDisplay}>
+    <Modal
+      id="pelcro-redeem-modal"
+      onClose={onClose}
+      onDisplay={onDisplay}
+    >
       <ModalBody>
         <GiftRedeemView {...otherProps} onSuccess={onSuccess} />
       </ModalBody>

@@ -21,7 +21,11 @@ export const OrderCreateModal = ({
   };
 
   return (
-    <Modal id="order-create" onDisplay={onDisplay} onClose={onClose}>
+    <Modal
+      id="pelcro-order-create-modal"
+      onDisplay={onDisplay}
+      onClose={onClose}
+    >
       <ModalBody>
         <OrderCreateView {...otherProps} onSuccess={onSuccess} />
       </ModalBody>

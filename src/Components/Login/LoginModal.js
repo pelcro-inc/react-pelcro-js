@@ -31,7 +31,11 @@ export function LoginModal({ onDisplay, onClose, ...props }) {
   };
 
   return (
-    <Modal id="login" onDisplay={onDisplay} onClose={onClose}>
+    <Modal
+      id="pelcro-login-modal"
+      onDisplay={onDisplay}
+      onClose={onClose}
+    >
       <ModalBody>
         <LoginView
           onForgotPassword={onForgotPassword}

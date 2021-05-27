@@ -17,7 +17,7 @@ export function ProfilePicChangeModal({
 }) {
   return (
     <Modal
-      id="profile-picture"
+      id="pelcro-profile-picture-modal"
       onDisplay={onDisplay}
       onClose={onClose}
     >

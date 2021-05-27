@@ -30,7 +30,7 @@ export function SubscriptionRenewModal({
 
   return (
     <Modal
-      id="subscription-renew"
+      id="pelcro-subscription-renew-modal"
       onDisplay={onDisplay}
       onClose={onClose}
     >

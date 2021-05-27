@@ -13,7 +13,11 @@ export const AddressUpdateModal = ({
   ...otherProps
 }) => {
   return (
-    <Modal id="address-edit" onDisplay={onDisplay} onClose={onClose}>
+    <Modal
+      id="pelcro-address-edit-modal"
+      onDisplay={onDisplay}
+      onClose={onClose}
+    >
       <ModalBody>
         <AddressUpdateView {...otherProps} />
       </ModalBody>

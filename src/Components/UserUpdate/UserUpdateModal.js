@@ -23,7 +23,11 @@ export function UserUpdateModal({
   };
 
   return (
-    <Modal id="user-edit" onDisplay={onDisplay} onClose={onClose}>
+    <Modal
+      id="pelcro-user-edit-modal"
+      onDisplay={onDisplay}
+      onClose={onClose}
+    >
       <ModalBody>
         <UserUpdateView
           onPictureClick={onPictureClick}

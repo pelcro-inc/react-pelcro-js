@@ -27,7 +27,7 @@ export function PaymentSuccessModal({ onDisplay, ...props }) {
 
   return (
     <Modal
-      id="payment-success"
+      id="pelcro-payment-success-modal"
       onDisplay={onDisplay}
       onClose={onClose}
     >
