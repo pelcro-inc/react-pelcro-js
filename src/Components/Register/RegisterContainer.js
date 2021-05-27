@@ -87,7 +87,7 @@ const RegisterContainer = ({
           });
           onFailure(err);
         } else {
-          onSuccess();
+          onSuccess(res);
         }
       }
     );

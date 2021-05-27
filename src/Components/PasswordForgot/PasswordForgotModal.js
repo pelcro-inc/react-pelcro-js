@@ -43,4 +43,4 @@ export const PasswordForgotModal = ({
   );
 };
 
-PasswordForgotModal.id = "password-forgot";
+PasswordForgotModal.viewId = "password-forgot";

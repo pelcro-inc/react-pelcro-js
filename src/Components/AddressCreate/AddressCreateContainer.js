@@ -178,7 +178,7 @@ const AddressCreateContainer = ({
               }
 
               alert(t("messages.subRedeemed"));
-              return onGiftRedemptionSuccess();
+              return onGiftRedemptionSuccess(res);
             }
           );
         }

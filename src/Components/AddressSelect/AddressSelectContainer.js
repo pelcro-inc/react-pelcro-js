@@ -81,7 +81,7 @@ const AddressSelectContainer = ({
         }
 
         alert(t("messages.subRedeemed"));
-        return onGiftRedemptionSuccess();
+        return onGiftRedemptionSuccess(res);
       }
     );
   };

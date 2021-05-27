@@ -60,4 +60,4 @@ export const ShopView = (props) => {
   );
 };
 
-ShopView.id = "shop";
+ShopView.viewId = "shop";

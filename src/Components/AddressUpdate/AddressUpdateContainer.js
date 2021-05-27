@@ -158,7 +158,7 @@ const AddressUpdateContainer = ({
               content: t("messages.addressUpdated")
             }
           });
-          onSuccess();
+          onSuccess(res);
         }
       }
     );

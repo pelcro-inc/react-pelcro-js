@@ -24,4 +24,4 @@ export const PaymentMethodUpdateModal = (props) => {
   );
 };
 
-PaymentMethodUpdateModal.id = "source-create";
+PaymentMethodUpdateModal.viewId = "source-create";

@@ -48,4 +48,4 @@ export function SubscriptionRenewModal({
   );
 }
 
-SubscriptionRenewModal.id = "subscription-renew";
+SubscriptionRenewModal.viewId = "subscription-renew";

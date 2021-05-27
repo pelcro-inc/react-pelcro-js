@@ -28,4 +28,4 @@ export const PasswordChangeModal = ({
   );
 };
 
-PasswordChangeModal.id = "password-change";
+PasswordChangeModal.viewId = "password-change";

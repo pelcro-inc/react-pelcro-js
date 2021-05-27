@@ -80,7 +80,7 @@ export const PasswordChangeContainer = ({
             }
           });
           dispatch({ type: PASSWORD_CHANGE_SUCCESS });
-          onSuccess();
+          onSuccess(res);
         }
       }
     );

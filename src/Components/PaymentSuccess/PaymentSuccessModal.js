@@ -41,4 +41,4 @@ export function PaymentSuccessModal({ onDisplay, ...props }) {
   );
 }
 
-PaymentSuccessModal.id = "success";
+PaymentSuccessModal.viewId = "success";

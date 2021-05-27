@@ -28,4 +28,4 @@ export const PasswordResetModal = ({
   );
 };
 
-PasswordResetModal.id = "password-reset";
+PasswordResetModal.viewId = "password-reset";

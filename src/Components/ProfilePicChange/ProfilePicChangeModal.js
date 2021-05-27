@@ -31,4 +31,4 @@ export function ProfilePicChangeModal({
   );
 }
 
-ProfilePicChangeModal.id = "profile-picture";
+ProfilePicChangeModal.viewId = "profile-picture";

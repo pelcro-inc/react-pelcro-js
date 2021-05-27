@@ -53,4 +53,4 @@ export function SubscriptionCreateModal({
   );
 }
 
-SubscriptionCreateModal.id = "subscription-create";
+SubscriptionCreateModal.viewId = "subscription-create";

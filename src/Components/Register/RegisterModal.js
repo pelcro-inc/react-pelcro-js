@@ -81,16 +81,10 @@ export function RegisterModal(props) {
             {t("messages.loginHere")}
           </Link>
         </div>
-        <div>
-          {" " + t("messages.selectPlan")}
-          <Link onClick={() => switchView("select")}>
-            {t("messages.here")}
-          </Link>
-        </div>
         <Authorship />
       </ModalFooter>
     </Modal>
   );
 }
 
-RegisterModal.id = "register";
+RegisterModal.viewId = "register";
