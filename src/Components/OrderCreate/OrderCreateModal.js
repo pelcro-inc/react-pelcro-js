@@ -32,4 +32,4 @@ export const OrderCreateModal = ({
   );
 };
 
-OrderCreateModal.id = "order-create";
+OrderCreateModal.viewId = "order-create";

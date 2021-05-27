@@ -63,7 +63,7 @@ export function DashboardWithHook(props) {
   );
 }
 
-DashboardWithHook.id = "dashboard";
+DashboardWithHook.viewId = "dashboard";
 
 class Dashboard extends Component {
   constructor(props) {

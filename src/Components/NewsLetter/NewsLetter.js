@@ -36,7 +36,7 @@ export function NewsletterWithHook(props) {
   );
 }
 
-NewsletterWithHook.id = "newsletter";
+NewsletterWithHook.viewId = "newsletter";
 
 class DefaultNewsLetter extends Component {
   constructor(props) {

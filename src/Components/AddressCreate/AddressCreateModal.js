@@ -43,4 +43,4 @@ export const AddressCreateModal = ({
   );
 };
 
-AddressCreateModal.id = "address";
+AddressCreateModal.viewId = "address";

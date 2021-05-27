@@ -49,4 +49,4 @@ export const GiftRedeemModal = ({
   );
 };
 
-GiftRedeemModal.id = "redeem";
+GiftRedeemModal.viewId = "redeem";

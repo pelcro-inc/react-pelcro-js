@@ -37,4 +37,4 @@ export function UserUpdateModal({
   );
 }
 
-UserUpdateModal.id = "user-edit";
+UserUpdateModal.viewId = "user-edit";

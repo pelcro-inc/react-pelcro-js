@@ -53,4 +53,4 @@ export const GiftCreateModal = ({
   );
 };
 
-GiftCreateModal.id = "gift";
+GiftCreateModal.viewId = "gift";

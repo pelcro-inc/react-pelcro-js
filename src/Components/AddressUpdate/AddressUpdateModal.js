@@ -24,4 +24,4 @@ export const AddressUpdateModal = ({
   );
 };
 
-AddressUpdateModal.id = "address-edit";
+AddressUpdateModal.viewId = "address-edit";

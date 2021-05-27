@@ -55,4 +55,4 @@ export function LoginModal({ onDisplay, onClose, ...props }) {
   );
 }
 
-LoginModal.id = "login";
+LoginModal.viewId = "login";

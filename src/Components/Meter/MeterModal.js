@@ -38,4 +38,4 @@ export const MeterModal = (props) => {
   );
 };
 
-MeterModal.id = "meter";
+MeterModal.viewId = "meter";

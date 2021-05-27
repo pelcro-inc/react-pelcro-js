@@ -41,7 +41,7 @@ export function OrderConfirmModalWithHook(props) {
   );
 }
 
-OrderConfirmModalWithHook.id = "confirm";
+OrderConfirmModalWithHook.viewId = "confirm";
 export class OrderConfirmModal extends Component {
   constructor(props) {
     super(props);

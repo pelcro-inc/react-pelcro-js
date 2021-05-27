@@ -25,7 +25,9 @@ export const PelcroModalController = ({ children }) => {
 
   React.useEffect(() => {
     initNativeButtons();
-    renderShopView(children.find(({ type }) => type?.id === "shop"));
+    renderShopView(
+      children.find(({ type }) => type?.viewId === "shop")
+    );
   }, []);
 
   React.useEffect(() => {
@@ -49,10 +51,12 @@ export const PelcroModalController = ({ children }) => {
   return (
     <div id="pelcro-app" className="pelcro-root">
       {isAuthenticated() &&
-        children.find(({ type }) => type?.id === "dashboard-open")}
+        children.find(
+          ({ type }) => type?.viewId === "dashboard-open"
+        )}
 
       {/* Conditionally render our modals */}
-      {children.find(({ type }) => type?.id === view)}
+      {children.find(({ type }) => type?.viewId === view)}
     </div>
   );
 };

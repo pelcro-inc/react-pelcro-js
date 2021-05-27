@@ -53,4 +53,4 @@ export const AddressSelectModal = ({
   );
 };
 
-AddressSelectModal.id = "address-select";
+AddressSelectModal.viewId = "address-select";

@@ -31,4 +31,4 @@ export const DashboardOpenButton = () => {
   );
 };
 
-DashboardOpenButton.id = "dashboard-open";
+DashboardOpenButton.viewId = "dashboard-open";

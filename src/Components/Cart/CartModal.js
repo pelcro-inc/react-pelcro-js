@@ -39,4 +39,4 @@ export const CartModal = ({ onDisplay, onClose, ...otherProps }) => {
   );
 };
 
-CartModal.id = "cart";
+CartModal.viewId = "cart";
