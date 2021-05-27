@@ -1,4 +1,5 @@
 import React from "react";
+import ReactGA from "react-ga";
 import { useTranslation } from "react-i18next";
 import { usePelcro } from "../../hooks/usePelcro";
 import { Link } from "../../SubComponents/Link";
@@ -29,12 +30,18 @@ export function RegisterModal(props) {
     isGift
   } = usePelcro();
 
-  const onSuccess = () => {
-    props.onSuccess?.();
+  const onSuccess = (res) => {
+    props.onSuccess?.(res);
     handleAfterRegistrationLogic();
   };
 
   const handleAfterRegistrationLogic = () => {
+    ReactGA?.event?.({
+      category: "ACTIONS",
+      action: "Registered",
+      nonInteraction: true
+    });
+
     // If product and plan are not selected
     if (!product && !order && !giftCode) {
       return resetView();

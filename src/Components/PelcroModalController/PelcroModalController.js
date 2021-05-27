@@ -8,18 +8,23 @@ import {
 import {
   disableScroll,
   enableScroll,
+  initGATracking,
   initPaywalls,
   loadPaymentSDKs,
   renderShopView
 } from "./PelcroModalController.service";
 
-export const PelcroModalController = ({ children }) => {
+export const PelcroModalController = ({
+  rootId = "pelcro-app",
+  children
+}) => {
   const { view, isAuthenticated, whenSiteReady } = usePelcro();
 
   React.useEffect(() => {
     whenSiteReady(() => {
       initPaywalls();
       loadPaymentSDKs();
+      initGATracking();
     });
   }, []);
 
@@ -49,7 +54,7 @@ export const PelcroModalController = ({ children }) => {
   }, [view]);
 
   return (
-    <div id="pelcro-app" className="pelcro-root">
+    <div id={rootId} className="pelcro-root">
       {isAuthenticated() &&
         children.find(
           ({ type }) => type?.viewId === "dashboard-open"

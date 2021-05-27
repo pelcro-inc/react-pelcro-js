@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import ReactGA from "react-ga";
 import { usePelcro } from "../../hooks/usePelcro";
 import { isValidViewFromURL } from "../../utils/utils";
 
@@ -25,27 +26,6 @@ export const initPaywalls = () => {
   }
 };
 
-export const enableScroll = () => {
-  document.body.classList.remove("pelcro-modal-open");
-};
-
-export const disableScroll = () => {
-  if (!document.body.classList.contains("pelcro-modal-open")) {
-    document.body.classList.add("pelcro-modal-open");
-  }
-};
-
-export const renderShopView = (shopComponent) => {
-  const shopElement = document.getElementById("pelcro-shop");
-
-  if (shopElement) {
-    ReactDOM.render(
-      <div className="pelcro-root">{shopComponent}</div>,
-      shopElement
-    );
-  }
-};
-
 export const loadPaymentSDKs = () => {
   // Load stripe's SDK
   window.Pelcro.helpers.loadSDK(
@@ -67,6 +47,34 @@ export const loadPaymentSDKs = () => {
     window.Pelcro.helpers.loadSDK(
       "https://js.braintreegateway.com/web/3.69.0/js/paypal-checkout.min.js",
       "braintree-paypal-sdk"
+    );
+  }
+};
+
+export const initGATracking = () => {
+  ReactGA?.initialize?.(
+    window.Pelcro.site.read().google_analytics_id
+  );
+  ReactGA?.plugin?.require?.("ecommerce");
+};
+
+export const enableScroll = () => {
+  document.body.classList.remove("pelcro-modal-open");
+};
+
+export const disableScroll = () => {
+  if (!document.body.classList.contains("pelcro-modal-open")) {
+    document.body.classList.add("pelcro-modal-open");
+  }
+};
+
+export const renderShopView = (shopComponent) => {
+  const shopElement = document.getElementById("pelcro-shop");
+
+  if (shopElement) {
+    ReactDOM.render(
+      <div className="pelcro-root">{shopComponent}</div>,
+      shopElement
     );
   }
 };

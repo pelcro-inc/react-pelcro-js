@@ -1,3 +1,5 @@
+import ReactGA from "react-ga";
+
 export class PelcroActions {
   constructor(storeSetter, storeGetter) {
     this.set = storeSetter;
@@ -49,6 +51,12 @@ export class PelcroActions {
     }
 
     window.Pelcro.user.logout();
+    ReactGA?.event?.({
+      category: "ACTIONS",
+      action: "Logged out",
+      nonInteraction: true
+    });
+
     resetView();
     switchView("login");
   };

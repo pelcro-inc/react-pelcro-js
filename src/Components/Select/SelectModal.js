@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import ReactGA from "react-ga";
 import PropTypes from "prop-types";
 import Authorship from "../common/Authorship";
 import { withTranslation } from "react-i18next";
@@ -296,17 +297,17 @@ class SelectModal extends Component {
     const { disableGifting } = this.props;
 
     if (this.state.mode === "product") {
-      // this.props.ReactGA.event({
-      //   category: "VIEWS",
-      //   action: "Product Modal Viewed",
-      //   nonInteraction: true
-      // });
+      ReactGA?.event?.({
+        category: "VIEWS",
+        action: "Product Modal Viewed",
+        nonInteraction: true
+      });
     } else if (this.state.mode === "plan") {
-      // this.props.ReactGA.event({
-      //   category: "VIEWS",
-      //   action: "Plan Modal Viewed",
-      //   nonInteraction: true
-      // });
+      ReactGA?.event?.({
+        category: "VIEWS",
+        action: "Plan Modal Viewed",
+        nonInteraction: true
+      });
     }
 
     return (

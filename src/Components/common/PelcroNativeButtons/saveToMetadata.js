@@ -150,7 +150,7 @@ class SaveToMetadataButtonClass {
           }
 
           this.#markButtonAsSaved(button);
-          ReactGA?.event({
+          ReactGA?.event?.({
             category: "ACTIONS",
             action: "Save/Follow",
             label: buttonMetadata?.title
@@ -188,7 +188,7 @@ class SaveToMetadataButtonClass {
           }
 
           this.#unmarkSavedButton(button);
-          ReactGA?.event({
+          ReactGA?.event?.({
             category: "ACTIONS",
             action: "Unsave/Unfollow",
             label: title

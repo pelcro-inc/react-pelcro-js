@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import ReactGA from "react-ga";
 import { Transition } from "@headlessui/react";
 import { withTranslation } from "react-i18next";
 import { getFormattedPriceByLocal } from "../../utils/utils";
@@ -92,7 +93,7 @@ class Dashboard extends Component {
       name: "dashboard"
     });
 
-    this.props.ReactGA?.event?.({
+    ReactGA?.event?.({
       category: "VIEWS",
       action: "Dashboard Modal Viewed",
       nonInteraction: true

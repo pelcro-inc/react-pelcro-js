@@ -6,6 +6,7 @@ import {
   ModalBody,
   ModalFooter
 } from "../../SubComponents/Modal";
+import { trackSubscriptionOnGA } from "../../utils/utils";
 import Authorship from "../common/Authorship";
 import { SubscriptionCreateView } from "./SubscriptionCreateView";
 
@@ -22,6 +23,8 @@ export function SubscriptionCreateModal({
 
   const onSuccess = () => {
     otherProps.onSuccess?.();
+    trackSubscriptionOnGA();
+
     if (giftRecipient) {
       window.alert(
         `${t("confirm.giftSent")} ${giftRecipient.email} ${t(

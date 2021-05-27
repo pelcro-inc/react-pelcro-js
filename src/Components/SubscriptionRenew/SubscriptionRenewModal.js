@@ -1,4 +1,5 @@
 import React from "react";
+import ReactGA from "react-ga";
 import { SubscriptionRenewView } from "./SubscriptionRenewView";
 import {
   Modal,
@@ -20,11 +21,23 @@ export function SubscriptionRenewModal({
 
   const onSuccess = () => {
     otherProps.onSuccess?.();
+    ReactGA?.event?.({
+      category: "ACTIONS",
+      action: "Renewed",
+      nonInteraction: true
+    });
+
     return switchView("success");
   };
 
   const onGiftRenewalSuccess = () => {
     otherProps.onGiftRenewalSuccess?.();
+    ReactGA?.event?.({
+      category: "ACTIONS",
+      action: "Renewed Gift",
+      nonInteraction: true
+    });
+
     return switchView("success");
   };
 

@@ -1,4 +1,5 @@
 import { usePelcro } from "../hooks/usePelcro";
+import ReactGA from "react?-ga";
 
 export const formatDiscountedPrice = (planAmount, percentageOff) =>
   parseFloat(
@@ -180,4 +181,44 @@ export const isValidViewFromURL = () => {
   }
 
   return false;
+};
+
+export const trackSubscriptionOnGA = () => {
+  const { product, plan, couponCode } = usePelcro.getStore();
+
+  const subscriptions = window.Pelcro.subscription.list();
+  const lastSubscription = subscriptions?.[subscriptions.length - 1];
+
+  if (!lastSubscription) {
+    return;
+  }
+
+  ReactGA?.set?.({
+    currencyCode:
+      window.Pelcro.user.read()?.currency ?? this.state.plan.currency
+  });
+
+  ReactGA?.plugin?.execute?.("ecommerce", "addTransaction", {
+    id: lastSubscription.id,
+    affiliation: "Pelcro",
+    revenue: plan?.amount ? plan.amount / 100 : 0,
+    coupon: couponCode
+  });
+
+  ReactGA?.plugin?.execute?.("ecommerce", "addItem", {
+    id: lastSubscription.id,
+    name: product.name,
+    category: product.description,
+    variant: plan.nickname,
+    price: plan?.amount ? plan.amount / 100 : 0,
+    quantity: 1
+  });
+
+  ReactGA?.plugin?.execute?.("ecommerce", "send");
+
+  ReactGA?.event?.({
+    category: "ACTIONS",
+    action: "Subscribed",
+    nonInteraction: true
+  });
 };

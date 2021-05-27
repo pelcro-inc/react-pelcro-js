@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import ReactGA from "react-ga";
 import { ReactComponent as CloseIcon } from "../assets/x-icon.svg";
 import { usePelcro } from "../hooks/usePelcro";
 
@@ -16,6 +17,13 @@ export function Modal({
   const resetView = usePelcro((state) => state.resetView);
   useEffect(() => {
     onDisplay?.();
+    ReactGA?.event?.({
+      category: "VIEWS",
+      action: `${id
+        .replace("pelcro-", "")
+        .replaceAll("-", " ")} viewed`,
+      nonInteraction: true
+    });
   }, []);
 
   const onClose = () => {
