@@ -314,10 +314,10 @@ class SelectModal extends Component {
       <Modal
         hideCloseButton={!this.closeButton}
         onClose={this.props.onClose}
-        id="pelcro-select-modal"
+        id="pelcro-selection-modal"
       >
         <ModalBody>
-          <div id="pelcro-select-view">
+          <div id="pelcro-selection-view">
             <div className="plc-mb-6 plc-text-center plc-text-gray-900 pelcro-title-wrapper">
               <h4 className="plc-text-2xl plc-font-semibold">
                 {(this.product &&

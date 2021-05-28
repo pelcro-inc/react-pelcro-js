@@ -34,7 +34,7 @@ export const GiftCreateModal = ({
 
   return (
     <Modal
-      id="pelcro-gift-modal"
+      id="pelcro-gift-create-modal"
       onDisplay={onDisplay}
       onClose={onClose}
     >

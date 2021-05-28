@@ -32,15 +32,6 @@ import {
   initSubscriptionFromURL
 } from "./publicMethods";
 
-usePelcro.override((set, get) => {
-  return {
-    switchView: (view) => {
-      console.log("switching from", get().view, "to", view);
-      set({ view });
-    }
-  };
-});
-
 export const Main = () => {
   useEffect(() => {
     initViewFromURL();

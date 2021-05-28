@@ -7,6 +7,7 @@ export {
   initViewFromURL,
   initSubscriptionFromURL
 } from "./publicMethods";
+export { PelcroModalController } from "./Components/PelcroModalController/PelcroModalController";
 
 export { LoginContainer } from "./Components/Login/LoginContainer";
 export { Email } from "./SubComponents/Email";
