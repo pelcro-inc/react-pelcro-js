@@ -8,6 +8,33 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Released]
 
+## [0.17.10] - 2021-05-27
+## Fixed
+
+- Scroll being disabled after logging in.
+- E-commerce analytics double counting transactions.
+
+## Changed
+
+- Remove 'select a different plan' link from registeration modal footer.
+
+## [0.17.9] - 2021-05-25
+## Fixed
+
+- Native subscribe button not working.
+
+## [0.17.8] - 2021-05-25
+## Fixed
+
+- Native subscribe button not working.
+- Dashboard showing up even if the user is signed out under certain circumstances.
+- Native offline subscriptions buttons not working.
+
+### Changed
+
+- Input fields margins.
+- Add a default solid border style to all input fields.
+
 ## [0.17.7] - 2021-05-22
 ## Changed
 
