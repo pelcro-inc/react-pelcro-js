@@ -19,8 +19,8 @@ export function SubscriptionRenewModal({
 }) {
   const { switchView } = usePelcro();
 
-  const onSuccess = () => {
-    otherProps.onSuccess?.();
+  const onSuccess = (res) => {
+    otherProps.onSuccess?.(res);
     ReactGA?.event?.({
       category: "ACTIONS",
       action: "Renewed",

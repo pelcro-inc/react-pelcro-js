@@ -21,8 +21,8 @@ export function SubscriptionCreateModal({
   const { t } = useTranslation("common");
   const { switchView, resetView, giftRecipient } = usePelcro();
 
-  const onSuccess = () => {
-    otherProps.onSuccess?.();
+  const onSuccess = (res) => {
+    otherProps.onSuccess?.(res);
     trackSubscriptionOnGA();
 
     if (giftRecipient) {

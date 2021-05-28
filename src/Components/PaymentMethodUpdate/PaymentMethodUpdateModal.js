@@ -9,8 +9,8 @@ import {
 import Authorship from "../common/Authorship";
 
 export const PaymentMethodUpdateModal = (props) => {
-  const onSuccess = () => {
-    props.onSuccess?.();
+  const onSuccess = (res) => {
+    props.onSuccess?.(res);
     ReactGA?.event?.({
       category: "ACTIONS",
       action: "Updated payment card",
