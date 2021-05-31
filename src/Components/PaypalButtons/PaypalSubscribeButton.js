@@ -22,7 +22,7 @@ export const PaypalSubscribeButton = (props) => {
   useEffect(() => {
     // sometimes, price is updated. eg. Coupon codes.
     const updatedPrice =
-      state.updatedPrice ?? props.plan.amount ?? plan.amount;
+      state.updatedPrice ?? props.plan?.amount ?? plan.amount;
     const selectedAddress = getAddressById(
       props.selectedAddressId ?? selectedAddressId
     );
@@ -34,7 +34,7 @@ export const PaypalSubscribeButton = (props) => {
           props.buttonElementID ?? "pelcro-paypal-button",
         style: props.buttonStyle,
         enableShippingAddress:
-          props.product.address_required ?? product.address_required,
+          props.product?.address_required ?? product.address_required,
         shippingAddressEditable: props.makeAddressEditable,
         displayName: props.merchantDisplayName,
         locale: props.locale,
