@@ -30,6 +30,8 @@ export function NewsletterWithHook(props) {
         props.onClose?.();
         resetView();
       }}
+      onSuccess={props.onSuccess}
+      onFailure={props.onFailure}
       setView={switchView}
       product={product}
     />
@@ -109,11 +111,14 @@ class DefaultNewsLetter extends Component {
       },
       (err, res) => {
         this.setState({ disableSubmit: false });
-        if (err)
+        if (err) {
+          this.props.onFailure?.(err);
           return this.setState({
             alert: { type: "error", content: getErrorMessages(err) }
           });
+        }
 
+        this.props.onSuccess?.(res);
         try {
           this.postSubmit();
         } catch {

@@ -17,8 +17,8 @@ export function LoginModal({ onDisplay, onClose, ...props }) {
   const { t } = useTranslation("login");
   const { switchView, resetView } = usePelcro();
 
-  const onSuccess = () => {
-    props.onSuccess?.();
+  const onSuccess = (res) => {
+    props.onSuccess?.(res);
     resetView();
   };
 

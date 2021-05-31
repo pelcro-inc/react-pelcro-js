@@ -60,7 +60,6 @@ const createPelcroHook = (store) => {
 
 const pelcroStore = createPelcroStore();
 export const usePelcro = createPelcroHook(pelcroStore);
-window.usePelcro = usePelcro;
 
 if (process.env.NODE_ENV === "development") {
   mountStoreDevtool("Pelcro Store", usePelcro);

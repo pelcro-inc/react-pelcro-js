@@ -32,7 +32,7 @@ export const GiftRedeemModal = ({
 
   return (
     <Modal
-      id="pelcro-redeem-modal"
+      id="pelcro-gift-redeem-modal"
       onClose={onClose}
       onDisplay={onDisplay}
     >

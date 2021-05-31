@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import { usePelcro } from "./hooks/usePelcro";
+import React from "react";
 import { PelcroModalController } from "./Components/PelcroModalController/PelcroModalController";
 import { LoginModal } from "./Components/Login/LoginModal";
 import { RegisterModal } from "./Components/Register/RegisterModal";
@@ -26,28 +25,8 @@ import { SubscriptionRenewModal } from "./Components/SubscriptionRenew/Subscript
 import { PaymentSuccessModal } from "./Components/PaymentSuccess/PaymentSuccessModal";
 import { OrderCreateModal } from "./Components/OrderCreate/OrderCreateModal";
 import { OrderConfirmModalWithHook as OrderConfirmModal } from "./Components/OrderConfirm/OrderConfirmModal";
-import {
-  applyPelcroTheme,
-  initViewFromURL,
-  initSubscriptionFromURL
-} from "./publicMethods";
-
-usePelcro.override((set, get) => {
-  return {
-    switchView: (view) => {
-      console.log("switching from", get().view, "to", view);
-      set({ view });
-    }
-  };
-});
 
 export const Main = () => {
-  useEffect(() => {
-    initViewFromURL();
-    initSubscriptionFromURL();
-    applyPelcroTheme();
-  }, []);
-
   return (
     <PelcroModalController>
       <MeterModal />
