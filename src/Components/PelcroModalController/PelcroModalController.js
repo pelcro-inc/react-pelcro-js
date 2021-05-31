@@ -6,27 +6,25 @@ import {
   unauthenticatedButtons
 } from "../common/PelcroNativeButtons";
 import {
-  disableScroll,
-  enableScroll,
-  initGATracking,
-  initPaywalls,
-  loadPaymentSDKs,
+  optionsController,
   renderShopView
 } from "./PelcroModalController.service";
+import { enableScroll, disableScroll } from "../../utils/utils";
+
+const defaultOptions = {
+  loadPaymentSDKs: true,
+  enableURLTriggers: true,
+  enableTheme: true,
+  enablePaywalls: true,
+  enableGoogleAnalytics: false
+};
 
 export const PelcroModalController = ({
   rootId = "pelcro-app",
+  options = defaultOptions,
   children
 }) => {
   const { view, isAuthenticated, whenSiteReady } = usePelcro();
-
-  React.useEffect(() => {
-    whenSiteReady(() => {
-      initPaywalls();
-      loadPaymentSDKs();
-      initGATracking();
-    });
-  }, []);
 
   React.useEffect(() => {
     initNativeButtons();
@@ -34,6 +32,15 @@ export const PelcroModalController = ({
       children.find(({ type }) => type?.viewId === "shop")
     );
   }, []);
+
+  // default options are overridable by consumer's options
+  const mergedOptions = { ...defaultOptions, ...options };
+
+  React.useEffect(() => {
+    whenSiteReady(() => {
+      optionsController(mergedOptions);
+    });
+  }, [options]);
 
   React.useEffect(() => {
     if (window.Pelcro.user.isAuthenticated()) {

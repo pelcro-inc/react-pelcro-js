@@ -2,11 +2,6 @@ import "./i18n";
 import "./index.css";
 
 export { usePelcro } from "./hooks/usePelcro";
-export {
-  applyPelcroTheme,
-  initViewFromURL,
-  initSubscriptionFromURL
-} from "./publicMethods";
 export { PelcroModalController } from "./Components/PelcroModalController/PelcroModalController";
 
 export { LoginContainer } from "./Components/Login/LoginContainer";

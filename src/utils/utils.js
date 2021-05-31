@@ -183,6 +183,16 @@ export const isValidViewFromURL = () => {
   return false;
 };
 
+export const enableScroll = () => {
+  document.body.classList.remove("pelcro-modal-open");
+};
+
+export const disableScroll = () => {
+  if (!document.body.classList.contains("pelcro-modal-open")) {
+    document.body.classList.add("pelcro-modal-open");
+  }
+};
+
 export const trackSubscriptionOnGA = () => {
   const { product, plan, couponCode } = usePelcro.getStore();
 
