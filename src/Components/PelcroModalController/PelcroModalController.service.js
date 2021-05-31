@@ -8,6 +8,20 @@ import {
   isValidViewFromURL
 } from "../../utils/utils";
 
+/**
+ * @typedef {Object} OptionsType
+ * @property {boolean} loadPaymentSDKs
+ * @property {boolean} enableURLTriggers
+ * @property {boolean} enableTheme
+ * @property {boolean} enablePaywalls
+ * @property {boolean} enableGoogleAnalytics
+ */
+
+/**
+ * Initializes pelcro features based on the options flag object
+ * @param {OptionsType} options
+ * @returns
+ */
 export const optionsController = (options) => {
   if (!options) {
     return;

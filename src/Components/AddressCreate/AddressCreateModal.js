@@ -29,7 +29,7 @@ export const AddressCreateModal = ({
 
   return (
     <Modal
-      id="pelcro-address-modal"
+      id="pelcro-address-create-modal"
       onDisplay={onDisplay}
       onClose={onClose}
     >

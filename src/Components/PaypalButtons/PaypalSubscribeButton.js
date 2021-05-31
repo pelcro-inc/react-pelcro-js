@@ -21,8 +21,11 @@ export const PaypalSubscribeButton = (props) => {
 
   useEffect(() => {
     // sometimes, price is updated. eg. Coupon codes.
-    const updatedPrice = state.updatedPrice ?? plan.amount;
-    const selectedAddress = getAddressById(selectedAddressId);
+    const updatedPrice =
+      state.updatedPrice ?? props.plan.amount ?? plan.amount;
+    const selectedAddress = getAddressById(
+      props.selectedAddressId ?? selectedAddressId
+    );
 
     // initialize paypal client, then render paypal button.
     const initializePaypal = async () => {
@@ -30,7 +33,8 @@ export const PaypalSubscribeButton = (props) => {
         buttonElementID:
           props.buttonElementID ?? "pelcro-paypal-button",
         style: props.buttonStyle,
-        enableShippingAddress: product.address_required,
+        enableShippingAddress:
+          props.product.address_required ?? product.address_required,
         shippingAddressEditable: props.makeAddressEditable,
         displayName: props.merchantDisplayName,
         locale: props.locale,
@@ -41,7 +45,7 @@ export const PaypalSubscribeButton = (props) => {
       await paypalCheckoutInstance.build();
       // Create paypal payment
       paypalCheckoutInstance.createPayment({
-        product: plan,
+        product: props.plan ?? plan,
         amount: updatedPrice,
         address: selectedAddress,
         onButtonClick: () => {
@@ -73,6 +77,8 @@ export const PaypalSubscribeButton = (props) => {
 };
 
 PaypalSubscribeButton.propTypes = {
+  product: PropTypes.object,
+  plan: PropTypes.object,
   makeAddressEditable: PropTypes.bool,
   merchantDisplayName: PropTypes.string,
   locale: PropTypes.string,
