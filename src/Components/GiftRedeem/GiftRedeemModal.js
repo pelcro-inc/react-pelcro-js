@@ -8,7 +8,6 @@ import {
 import Authorship from "../common/Authorship";
 import { GiftRedeemView } from "./GiftRedeemView";
 import { Link } from "../../SubComponents/Link";
-import { displayAddressView } from "../../utils/utils";
 import { usePelcro } from "../../hooks/usePelcro";
 
 export const GiftRedeemModal = ({
@@ -19,7 +18,7 @@ export const GiftRedeemModal = ({
   ...otherProps
 }) => {
   const { t } = useTranslation("register");
-  const { switchView } = usePelcro();
+  const { switchView, displayAddressView } = usePelcro();
 
   const onSuccess = (giftCode) => {
     otherProps.onSuccess?.(giftCode);

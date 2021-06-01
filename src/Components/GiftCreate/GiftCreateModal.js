@@ -9,10 +9,6 @@ import Authorship from "../common/Authorship";
 import { GiftCreateView } from "./GiftCreateView";
 import { Link } from "../../SubComponents/Link";
 import { usePelcro } from "../../hooks/usePelcro";
-import {
-  displayAddressView,
-  displayPaymentView
-} from "../../utils/utils";
 
 export const GiftCreateModal = ({
   onDisplay,
@@ -21,7 +17,12 @@ export const GiftCreateModal = ({
   ...otherProps
 }) => {
   const { t } = useTranslation("register");
-  const { switchView, product } = usePelcro();
+  const {
+    switchView,
+    displayAddressView,
+    displayPaymentView,
+    product
+  } = usePelcro();
 
   const onSuccess = (giftRecipient) => {
     otherProps.onSuccess?.(giftRecipient);

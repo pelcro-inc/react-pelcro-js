@@ -7,14 +7,13 @@ import {
   ModalFooter
 } from "../../SubComponents/Modal";
 import { usePelcro } from "../../hooks/usePelcro";
-import { displayPaymentView } from "../../utils/utils";
 
 export const AddressCreateModal = ({
   onDisplay,
   onClose,
   ...otherProps
 }) => {
-  const { resetView } = usePelcro();
+  const { resetView, displayPaymentView } = usePelcro();
 
   const onSuccess = (newAddressId) => {
     otherProps.onSuccess?.(newAddressId);
