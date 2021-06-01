@@ -8,10 +8,6 @@ import {
   ModalBody,
   ModalFooter
 } from "../../SubComponents/Modal";
-import {
-  displayAddressView,
-  displayPaymentView
-} from "../../utils/utils";
 import Authorship from "../common/Authorship";
 import { RegisterView } from "./RegisterView";
 
@@ -24,6 +20,8 @@ export function RegisterModal(props) {
   const {
     switchView,
     resetView,
+    displayAddressView,
+    displayPaymentView,
     product,
     order,
     giftCode,

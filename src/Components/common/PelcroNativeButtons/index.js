@@ -1,9 +1,4 @@
 import { saveToMetadataButton } from "./saveToMetadata";
-import {
-  displayAddressView,
-  displayPaymentView,
-  userHasAddress
-} from "../../../utils/utils";
 import i18n from "../../../i18n";
 import { usePelcro } from "../../../hooks/usePelcro";
 
@@ -14,7 +9,13 @@ const translations = i18n.t("common:buttons", {
 export const init = () => {
   saveToMetadataButton.init();
 
-  const { switchView, set, isAuthenticated } = usePelcro.getStore();
+  const {
+    switchView,
+    set,
+    isAuthenticated,
+    displayAddressView,
+    displayPaymentView
+  } = usePelcro.getStore();
 
   const pelcroLoginButtonsByClass = document.getElementsByClassName(
     "pelcro-login-button"
@@ -303,11 +304,7 @@ export const init = () => {
           set({ order: { items: [{ sku_id: skuId, quantity: 1 }] } });
 
           if (isAuthenticated()) {
-            if (userHasAddress()) {
-              switchView("address-select");
-            } else {
-              switchView("address");
-            }
+            displayAddressView();
           } else {
             switchView("register");
           }

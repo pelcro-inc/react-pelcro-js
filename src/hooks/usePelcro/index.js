@@ -14,8 +14,6 @@ const createPelcroStore = () =>
 
       // View
       view: null,
-      switchView: actions.switchView,
-      resetView: actions.resetView,
 
       // Plans
       product: null,
@@ -30,10 +28,11 @@ const createPelcroStore = () =>
 
       // User
       isAuthenticated: () => window.Pelcro.user.isAuthenticated(),
-      logout: actions.logout,
       selectedAddressId: null,
       addressIdToEdit: null,
 
+      // State actions
+      ...actions,
       // Callbacks
       ...eventCallbacks
     };

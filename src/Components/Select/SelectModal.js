@@ -12,10 +12,6 @@ import { Link } from "../../SubComponents/Link";
 import { Button } from "../../SubComponents/Button";
 import { Checkbox } from "../../SubComponents/Checkbox";
 import { Radio } from "../../SubComponents/Radio";
-import {
-  displayPaymentView,
-  userHasAddress
-} from "../../utils/utils";
 import { usePelcro } from "../../hooks/usePelcro";
 
 /**
@@ -271,6 +267,11 @@ class SelectModal extends Component {
     const { setView } = this.props;
     const isAuthenticated = window.Pelcro.user.isAuthenticated();
 
+    const {
+      displayAddressView,
+      displayPaymentView
+    } = usePelcro.getStore();
+
     if (!isAuthenticated) {
       return setView("register");
     }
@@ -280,10 +281,7 @@ class SelectModal extends Component {
     }
 
     if (product.address_required) {
-      if (userHasAddress()) {
-        return setView("address-select");
-      }
-      return setView("address");
+      return displayAddressView();
     }
 
     return displayPaymentView();

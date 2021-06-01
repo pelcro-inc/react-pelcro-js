@@ -5,12 +5,11 @@ import {
   ModalBody,
   ModalFooter
 } from "../../SubComponents/Modal";
-import { displayAddressView } from "../../utils/utils";
 import Authorship from "../common/Authorship";
 import { CartView } from "./CartView";
 
 export const CartModal = ({ onDisplay, onClose, ...otherProps }) => {
-  const { switchView } = usePelcro();
+  const { switchView, displayAddressView } = usePelcro();
 
   const onSuccess = (items) => {
     otherProps.onSuccess?.(items);

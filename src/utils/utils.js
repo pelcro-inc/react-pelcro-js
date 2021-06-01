@@ -1,5 +1,5 @@
 import { usePelcro } from "../hooks/usePelcro";
-import ReactGA from "react?-ga";
+import ReactGA from "react-ga";
 
 export const formatDiscountedPrice = (planAmount, percentageOff) =>
   parseFloat(
@@ -119,40 +119,6 @@ export const getEcommerceOrderTotal = (order) => {
 export const userHasAddress = () => {
   const addresses = window.Pelcro.user.read().addresses ?? [];
   return addresses.length > 0;
-};
-
-export const displayAddressView = () => {
-  const { switchView } = usePelcro.getStore();
-
-  if (userHasAddress()) {
-    switchView("address-select");
-  } else {
-    switchView("address");
-  }
-};
-
-export const displayPaymentView = () => {
-  const {
-    switchView,
-    resetView,
-    product,
-    subscriptionIdToRenew,
-    order
-  } = usePelcro.getStore();
-
-  if (product && subscriptionIdToRenew) {
-    return switchView("subscription-renew");
-  }
-
-  if (product && !subscriptionIdToRenew) {
-    return switchView("subscription-create");
-  }
-
-  if (order) {
-    return switchView("order-create");
-  }
-
-  return resetView();
 };
 
 /**

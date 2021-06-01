@@ -2,11 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import ReactGA from "react-ga";
 import { usePelcro } from "../../hooks/usePelcro";
-import {
-  displayAddressView,
-  displayPaymentView,
-  isValidViewFromURL
-} from "../../utils/utils";
+import { isValidViewFromURL } from "../../utils/utils";
 
 /**
  * @typedef {Object} OptionsType
@@ -236,7 +232,11 @@ export const initSubscriptionFromURL = () => {
       return;
     }
 
-    const { isAuthenticated } = usePelcro.getStore();
+    const {
+      isAuthenticated,
+      displayAddressView,
+      displayPaymentView
+    } = usePelcro.getStore();
 
     if (!isAuthenticated()) {
       return switchView("register");

@@ -1,4 +1,5 @@
 import ReactGA from "react-ga";
+import { userHasAddress } from "../../utils/utils";
 
 export class PelcroActions {
   constructor(storeSetter, storeGetter) {
@@ -25,11 +26,7 @@ export class PelcroActions {
     this.set({ view });
   };
 
-  resetView = () => {
-    const { switchView } = this.get();
-    switchView(null);
-
-    // Other pelcro state to reset
+  resetState = () => {
     this.set({
       product: null,
       plan: null,
@@ -41,6 +38,47 @@ export class PelcroActions {
       selectedAddressId: null,
       addressIdToEdit: null
     });
+  };
+
+  resetView = () => {
+    const { switchView, resetState } = this.get();
+
+    switchView(null);
+    resetState();
+  };
+
+  displayPaymentView = () => {
+    const {
+      switchView,
+      resetView,
+      product,
+      subscriptionIdToRenew,
+      order
+    } = this.get();
+
+    if (product && subscriptionIdToRenew) {
+      return switchView("subscription-renew");
+    }
+
+    if (product && !subscriptionIdToRenew) {
+      return switchView("subscription-create");
+    }
+
+    if (order) {
+      return switchView("order-create");
+    }
+
+    return resetView();
+  };
+
+  displayAddressView = () => {
+    const { switchView } = this.get();
+
+    if (userHasAddress()) {
+      switchView("address-select");
+    } else {
+      switchView("address");
+    }
   };
 
   logout = () => {
