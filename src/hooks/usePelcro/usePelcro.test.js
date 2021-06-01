@@ -2,6 +2,7 @@
 import * as React from "react";
 import { render, act } from "@testing-library/react";
 import { usePelcro as usePelcroHook } from "./index.js";
+import { PelcroActions } from "./pelcroActions";
 import { setupTests } from "../../../__tests__/testsSetup.js";
 
 const usePelcro = () => {
@@ -24,7 +25,14 @@ beforeAll(() => {
 beforeEach(() => {
   jest.resetAllMocks();
   act(() => {
+    const defaultPelcroActions = new PelcroActions(
+      usePelcroHook.setState,
+      usePelcroHook.getState
+    );
+
+    // reset store state and actions before every test
     usePelcro().resetView();
+    usePelcro().set({ ...defaultPelcroActions });
   });
 });
 
@@ -59,6 +67,30 @@ describe("Returns the store with the correct initial state", () => {
     expect(store.order).toEqual(null);
     expect(store.selectedAddressId).toEqual(null);
     expect(store.addressIdToEdit).toEqual(null);
+  });
+});
+
+describe("usePelcro.override", () => {
+  test("should override default implementation of store methods", () => {
+    const store = usePelcroHook.getStore();
+    // try to customize switchView logic
+    act(() => {
+      usePelcroHook.override((set, get) => {
+        return {
+          switchView: (view) => {
+            if (view === "login") {
+              set({ view: null });
+            }
+          }
+        };
+      });
+    });
+
+    act(() => {
+      store.switchView("login");
+    });
+
+    expect(store.view).toEqual(null);
   });
 });
 
