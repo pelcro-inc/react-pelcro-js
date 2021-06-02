@@ -8,6 +8,11 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Released]
 
+## [0.17.12] - 2021-06-02
+## Fixed
+
+- Subscriptions intervals always showing up as "1".
+
 ## [0.17.11] - 2021-06-01
 ## Changed
 
