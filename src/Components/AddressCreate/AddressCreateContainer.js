@@ -71,12 +71,6 @@ const AddressCreateContainer = ({
   const giftCode = props.giftCode ?? giftCodeFromStore;
 
   useEffect(() => {
-    window.Pelcro.insight.track("Modal Displayed", {
-      name: "address"
-    });
-  }, []);
-
-  useEffect(() => {
     const getCountries = () => {
       dispatch({
         type: GET_COUNTRIES_FETCH

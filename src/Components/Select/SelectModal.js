@@ -87,9 +87,6 @@ class SelectModal extends Component {
         mode: "plan"
       });
     }
-    window.Pelcro.insight.track("Modal Displayed", {
-      name: "select"
-    });
 
     document.addEventListener("keydown", this.handleSubmit);
   };

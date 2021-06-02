@@ -130,10 +130,6 @@ const AddressSelectContainer = ({
   );
 
   useEffect(() => {
-    window.Pelcro.insight.track("Modal Displayed", {
-      name: "address"
-    });
-
     dispatch({
       type: LOAD_ADDRESSES,
       payload: window.Pelcro.user.read().addresses ?? []

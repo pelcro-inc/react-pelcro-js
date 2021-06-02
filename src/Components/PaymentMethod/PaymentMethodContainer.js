@@ -113,10 +113,6 @@ const PaymentMethodContainerWithoutStripe = ({
     props.isRenewingGift ?? pelcroStore.isRenewingGift;
 
   useEffect(() => {
-    window.Pelcro.insight.track("Modal Displayed", {
-      name: "payment"
-    });
-
     if (window.Pelcro.coupon.getFromUrl()) {
       dispatch({
         type: UPDATE_COUPON_CODE,

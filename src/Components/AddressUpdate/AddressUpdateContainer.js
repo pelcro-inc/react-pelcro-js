@@ -86,9 +86,6 @@ const AddressUpdateContainer = ({
 
     getAddressData();
     getCountries();
-    window.Pelcro.insight.track("Modal Displayed", {
-      name: "address"
-    });
   }, []);
 
   const getAddressData = () => {
