@@ -17,7 +17,7 @@ export const OrderCreateModal = ({
 
   const onSuccess = () => {
     otherProps.onSuccess?.();
-    return switchView("confirm");
+    return switchView("order-confirm");
   };
 
   return (
