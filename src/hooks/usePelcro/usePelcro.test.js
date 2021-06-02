@@ -122,213 +122,273 @@ describe("State setter", () => {
   });
 });
 
-describe("View", () => {
-  test("switchView should change the view state", () => {
-    const store = usePelcro();
+describe("Actions", () => {
+  describe("switchView", () => {
+    test("switchView should change the view state", () => {
+      const store = usePelcro();
 
-    act(() => {
-      store.switchView("select");
+      act(() => {
+        store.switchView("select");
+      });
+
+      expect(store.view).toEqual("select");
     });
 
-    expect(store.view).toEqual("select");
+    test("switchView('dashboard') should switch to login view when user is not authenticated", () => {
+      const store = usePelcro();
+
+      act(() => {
+        store.switchView("dashboard");
+      });
+
+      expect(store.view).toEqual("login");
+    });
+
+    test("switchView('password-change') should switch to login view when is user not authenticated", () => {
+      const store = usePelcro();
+
+      act(() => {
+        store.switchView("password-change");
+      });
+
+      expect(store.view).toEqual("login");
+    });
+
+    test("switchView('login') should switch to dashboard view when user is authenticated", () => {
+      const store = usePelcro();
+      act(() => {
+        store.set({ isAuthenticated: () => true });
+      });
+
+      act(() => {
+        store.switchView("login");
+      });
+
+      expect(store.view).toEqual("dashboard");
+    });
+
+    test("switchView('register') should switch to dashboard view when user is authenticated", () => {
+      const store = usePelcro();
+      act(() => {
+        store.set({ isAuthenticated: () => true });
+      });
+
+      act(() => {
+        store.switchView("register");
+      });
+
+      expect(store.view).toEqual("dashboard");
+    });
   });
 
-  test("switchView('dashboard') should switch to login view when user is not authenticated", () => {
-    const store = usePelcro();
+  describe("setProduct", () => {
+    test("should set the product by id", () => {
+      const testProduct = {
+        id: 1234,
+        name: "test-product",
+        plans: [
+          {
+            id: 45184,
+            nickname: "test-plan"
+          }
+        ]
+      };
 
-    act(() => {
-      store.switchView("dashboard");
+      jest
+        .spyOn(window.Pelcro.product, "list")
+        .mockImplementation(() => [testProduct]);
+
+      const store = usePelcro();
+
+      act(() => {
+        store.setProduct(1234);
+      });
+
+      expect(store.product).toEqual(testProduct);
     });
-
-    expect(store.view).toEqual("login");
   });
 
-  test("switchView('password-change') should switch to login view when is user not authenticated", () => {
-    const store = usePelcro();
+  describe("setPlan", () => {
+    test("should set the plan by id", () => {
+      const testProduct = {
+        id: 1234,
+        name: "test-product",
+        plans: [
+          {
+            id: 45184,
+            nickname: "test-plan"
+          }
+        ]
+      };
 
-    act(() => {
-      store.switchView("password-change");
+      jest
+        .spyOn(window.Pelcro.product, "list")
+        .mockImplementation(() => [testProduct]);
+
+      const store = usePelcro();
+
+      act(() => {
+        store.setPlan(45184);
+      });
+
+      expect(store.plan).toEqual(testProduct.plans[0]);
     });
-
-    expect(store.view).toEqual("login");
   });
 
-  test("switchView('login') should switch to dashboard view when user is authenticated", () => {
-    const store = usePelcro();
-    act(() => {
-      store.set({ isAuthenticated: () => true });
-    });
+  describe("resetView", () => {
+    test("resetView should reset view state", () => {
+      const store = usePelcro();
 
-    act(() => {
-      store.switchView("login");
-    });
+      act(() => {
+        store.switchView("select");
+      });
 
-    expect(store.view).toEqual("dashboard");
+      act(() => {
+        store.resetView();
+      });
+
+      expect(store.view).toEqual(null);
+    });
   });
 
-  test("switchView('register') should switch to dashboard view when user is authenticated", () => {
-    const store = usePelcro();
-    act(() => {
-      store.set({ isAuthenticated: () => true });
+  describe("switchToPaymentView", () => {
+    test("switch to subscription-create view when there is a selected product", () => {
+      const store = usePelcro();
+      act(() => {
+        store.set({ product: { id: 1234 } });
+      });
+
+      act(() => {
+        store.switchToPaymentView();
+      });
+
+      expect(store.view).toEqual("subscription-create");
     });
 
-    act(() => {
-      store.switchView("register");
+    test("switch to subscription-renew view when there is a selected product and a subscriptionIdToRenew", () => {
+      const store = usePelcro();
+      act(() => {
+        store.set({
+          product: { id: 1234 },
+          subscriptionIdToRenew: 12345
+        });
+      });
+
+      act(() => {
+        store.switchToPaymentView();
+      });
+
+      expect(store.view).toEqual("subscription-renew");
     });
 
-    expect(store.view).toEqual("dashboard");
+    test("switch to order-create view when there is an ecommerce order", () => {
+      const store = usePelcro();
+      act(() => {
+        store.set({ order: { items: ["test-item"] } });
+      });
+
+      act(() => {
+        store.switchToPaymentView();
+      });
+
+      expect(store.view).toEqual("order-create");
+    });
+
+    test("reset the view to when there is neither a product nor an order", () => {
+      const store = usePelcro();
+
+      act(() => {
+        store.switchToPaymentView();
+      });
+
+      expect(store.view).toEqual(null);
+    });
   });
 
-  test("resetView should reset view state", () => {
-    const store = usePelcro();
+  describe("switchToAddressView", () => {
+    test("switch to address creation view when the user doesn't have any address", () => {
+      const store = usePelcro();
 
-    act(() => {
-      store.switchView("select");
+      act(() => {
+        store.switchToAddressView();
+      });
+
+      expect(store.view).toEqual("address-create");
     });
 
-    act(() => {
-      store.resetView();
+    test("switch to address-select when the user has at least one address", () => {
+      const store = usePelcro();
+      jest
+        .spyOn(window.Pelcro.user, "read")
+        .mockImplementation(() => ({
+          addresses: [{ id: "test-address" }]
+        }));
+
+      act(() => {
+        store.switchToAddressView();
+      });
+
+      expect(store.view).toEqual("address-select");
     });
-
-    expect(store.view).toEqual(null);
-  });
-});
-
-describe("displayPaymentView", () => {
-  test("switch to subscription-create view when there is a selected product", () => {
-    const store = usePelcro();
-    act(() => {
-      store.set({ product: { id: 1234 } });
-    });
-
-    act(() => {
-      store.displayPaymentView();
-    });
-
-    expect(store.view).toEqual("subscription-create");
   });
 
-  test("switch to subscription-renew view when there is a selected product and a subscriptionIdToRenew", () => {
-    const store = usePelcro();
-    act(() => {
-      store.set({
-        product: { id: 1234 },
-        subscriptionIdToRenew: 12345
+  describe("logout", () => {
+    test("should reset all state and switch to the login view", () => {
+      const store = usePelcro();
+      const originalSwitchView = store.switchView;
+
+      // test setup
+      jest
+        // don't actually call the sdk method
+        .spyOn(window.Pelcro.user, "logout")
+        .mockImplementation(() => {});
+      act(() => {
+        // temporarily remove the view switching guards
+        store.set({ switchView: (view) => store.set({ view }) });
+      });
+      // test setup end
+
+      act(() => {
+        store.set({
+          selectedAddressId: 1234,
+          isGift: true,
+          isAuthenticated: () => true
+        });
+      });
+
+      act(() => {
+        store.logout();
+      });
+
+      expect(store.selectedAddressId).toEqual(null);
+      expect(store.isGift).toEqual(false);
+      expect(store.view).toEqual("login");
+
+      act(() => {
+        store.set({
+          switchView: originalSwitchView
+        });
       });
     });
 
-    act(() => {
-      store.displayPaymentView();
-    });
+    test("should do nothing if user is already not authenticated", () => {
+      const store = usePelcro();
 
-    expect(store.view).toEqual("subscription-renew");
-  });
-
-  test("switch to order-create view when there is an ecommerce order", () => {
-    const store = usePelcro();
-    act(() => {
-      store.set({ order: { items: ["test-item"] } });
-    });
-
-    act(() => {
-      store.displayPaymentView();
-    });
-
-    expect(store.view).toEqual("order-create");
-  });
-
-  test("reset the view to when there is neither a product nor an order", () => {
-    const store = usePelcro();
-
-    act(() => {
-      store.displayPaymentView();
-    });
-
-    expect(store.view).toEqual(null);
-  });
-});
-
-describe("displayAddressView", () => {
-  test("switch to address creation view when the user doesn't have any address", () => {
-    const store = usePelcro();
-
-    act(() => {
-      store.displayAddressView();
-    });
-
-    expect(store.view).toEqual("address");
-  });
-
-  test("switch to address-select when the user has at least one address", () => {
-    const store = usePelcro();
-    jest.spyOn(window.Pelcro.user, "read").mockImplementation(() => ({
-      addresses: [{ id: "test-address" }]
-    }));
-
-    act(() => {
-      store.displayAddressView();
-    });
-
-    expect(store.view).toEqual("address-select");
-  });
-});
-
-describe("logout", () => {
-  test("should reset all state and switch to the login view", () => {
-    const store = usePelcro();
-    const originalSwitchView = store.switchView;
-
-    // test setup
-    jest
-      // don't actually call the sdk method
-      .spyOn(window.Pelcro.user, "logout")
-      .mockImplementation(() => {});
-    act(() => {
-      // temporarily remove the view switching guards
-      store.set({ switchView: (view) => store.set({ view }) });
-    });
-    // test setup end
-
-    act(() => {
-      store.set({
-        selectedAddressId: 1234,
-        isGift: true,
-        isAuthenticated: () => true
+      act(() => {
+        store.set({
+          selectedAddressId: 1234,
+          isGift: true,
+          isAuthenticated: () => false
+        });
       });
-    });
 
-    act(() => {
-      store.logout();
-    });
-
-    expect(store.selectedAddressId).toEqual(null);
-    expect(store.isGift).toEqual(false);
-    expect(store.view).toEqual("login");
-
-    act(() => {
-      store.set({
-        switchView: originalSwitchView
+      act(() => {
+        store.logout();
       });
+
+      expect(store.selectedAddressId).toEqual(1234);
+      expect(store.isGift).toEqual(true);
     });
-  });
-
-  test("should do nothing if user is already not authenticated", () => {
-    const store = usePelcro();
-
-    act(() => {
-      store.set({
-        selectedAddressId: 1234,
-        isGift: true,
-        isAuthenticated: () => false
-      });
-    });
-
-    act(() => {
-      store.logout();
-    });
-
-    expect(store.selectedAddressId).toEqual(1234);
-    expect(store.isGift).toEqual(true);
   });
 });
 
