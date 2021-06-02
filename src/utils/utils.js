@@ -132,7 +132,7 @@ export const isValidViewFromURL = () => {
       "login",
       "register",
       "select",
-      "redeem",
+      "gift-redeem",
       "password-forgot",
       "password-forget",
       "password-reset",
@@ -140,7 +140,7 @@ export const isValidViewFromURL = () => {
       "source-create",
       "user-edit",
       "newsletter",
-      "address"
+      "address-create"
     ].includes(view)
   ) {
     return true;

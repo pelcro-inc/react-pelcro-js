@@ -52,4 +52,4 @@ export const GiftRedeemModal = ({
   );
 };
 
-GiftRedeemModal.viewId = "redeem";
+GiftRedeemModal.viewId = "gift-redeem";

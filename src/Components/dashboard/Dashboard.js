@@ -127,7 +127,7 @@ class Dashboard extends Component {
   };
 
   displayRedeem = () => {
-    return this.props.setView("redeem");
+    return this.props.setView("gift-redeem");
   };
 
   displaySourceCreate = () => {
