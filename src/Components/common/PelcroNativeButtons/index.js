@@ -117,7 +117,7 @@ export const init = () => {
             }
 
             if (isGift) {
-              return switchView("gift");
+              return switchView("gift-create");
             }
 
             const requiresAddress = Boolean(

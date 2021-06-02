@@ -58,4 +58,4 @@ export const GiftCreateModal = ({
   );
 };
 
-GiftCreateModal.viewId = "gift";
+GiftCreateModal.viewId = "gift-create";

@@ -243,7 +243,7 @@ export const initSubscriptionFromURL = () => {
     }
 
     if (isGift) {
-      return switchView("gift");
+      return switchView("gift-create");
     }
 
     const requiresAddress = Boolean(selectedProduct.address_required);

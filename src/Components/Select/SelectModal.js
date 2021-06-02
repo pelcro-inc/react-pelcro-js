@@ -274,7 +274,7 @@ class SelectModal extends Component {
     }
 
     if (isGift) {
-      return setView("gift");
+      return setView("gift-create");
     }
 
     if (product.address_required) {

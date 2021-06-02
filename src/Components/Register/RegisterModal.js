@@ -52,7 +52,7 @@ export function RegisterModal(props) {
 
     // Check if the subscription is meant as a gift (if so, gather recipients info)
     if (isGift) {
-      return switchView("gift");
+      return switchView("gift-create");
     }
 
     if (order) {
