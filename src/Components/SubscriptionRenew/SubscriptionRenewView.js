@@ -18,11 +18,11 @@ export const SubscriptionRenewView = ({
 
   const getPricingText = (plan) => {
     const autoRenewed = plan.auto_renew;
-    const { interval, intervalCount } = plan;
+    const { interval, interval_count } = plan;
 
     const formattedInterval =
-      intervalCount > 1
-        ? `${intervalCount} ${interval}`
+      interval_count > 1
+        ? `${interval_count} ${interval}`
         : `1 ${interval}`;
 
     return (
