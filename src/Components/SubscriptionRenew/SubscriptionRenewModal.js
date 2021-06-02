@@ -27,7 +27,7 @@ export function SubscriptionRenewModal({
       nonInteraction: true
     });
 
-    return switchView("success");
+    return switchView("subscription-success");
   };
 
   const onGiftRenewalSuccess = () => {
@@ -38,7 +38,7 @@ export function SubscriptionRenewModal({
       nonInteraction: true
     });
 
-    return switchView("success");
+    return switchView("subscription-success");
   };
 
   return (

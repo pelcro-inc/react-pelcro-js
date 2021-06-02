@@ -21,7 +21,7 @@ export function PaymentSuccessModal({ onDisplay, ...props }) {
 
   return (
     <Modal
-      id="pelcro-payment-success-modal"
+      id="pelcro-subscription-success-modal"
       onDisplay={onDisplay}
       onClose={onClose}
     >
@@ -35,4 +35,4 @@ export function PaymentSuccessModal({ onDisplay, ...props }) {
   );
 }
 
-PaymentSuccessModal.viewId = "success";
+PaymentSuccessModal.viewId = "subscription-success";

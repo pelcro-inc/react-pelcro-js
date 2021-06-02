@@ -34,7 +34,7 @@ export function SubscriptionCreateModal({
       return resetView();
     }
 
-    return switchView("success");
+    return switchView("subscription-success");
   };
 
   return (
