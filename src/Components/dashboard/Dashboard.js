@@ -127,7 +127,7 @@ class Dashboard extends Component {
   };
 
   displayRedeem = () => {
-    return this.props.setView("redeem");
+    return this.props.setView("gift-redeem");
   };
 
   displaySourceCreate = () => {
@@ -151,7 +151,7 @@ class Dashboard extends Component {
   };
 
   displayAddressCreate = () => {
-    return this.props.setView("address");
+    return this.props.setView("address-create");
   };
 
   displayAddressEdit = (e) => {

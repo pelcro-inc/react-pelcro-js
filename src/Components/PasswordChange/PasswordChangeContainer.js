@@ -47,7 +47,6 @@ export const PasswordChangeContainer = ({
   children
 }) => {
   const { t } = useTranslation("passwordChange");
-  const { set } = usePelcro();
 
   const handleSubmit = (
     { currentPassword, newPassword, confirmNewPassword },

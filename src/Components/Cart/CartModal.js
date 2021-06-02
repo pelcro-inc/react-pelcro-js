@@ -9,7 +9,7 @@ import Authorship from "../common/Authorship";
 import { CartView } from "./CartView";
 
 export const CartModal = ({ onDisplay, onClose, ...otherProps }) => {
-  const { switchView, displayAddressView } = usePelcro();
+  const { switchView, switchToAddressView } = usePelcro();
 
   const onSuccess = (items) => {
     otherProps.onSuccess?.(items);
@@ -18,7 +18,7 @@ export const CartModal = ({ onDisplay, onClose, ...otherProps }) => {
       return switchView("register");
     }
 
-    displayAddressView();
+    switchToAddressView();
   };
 
   return (

@@ -7,6 +7,28 @@ export class PelcroActions {
     this.get = storeGetter;
   }
 
+  /**
+   * State actions
+   */
+
+  resetState = () => {
+    this.set({
+      product: null,
+      plan: null,
+      isGift: false,
+      isRenewingGift: false,
+      giftCode: "",
+      subscriptionIdToRenew: null,
+      order: null,
+      selectedAddressId: null,
+      addressIdToEdit: null
+    });
+  };
+
+  /**
+   * View Actions
+   */
+
   switchView = (view) => {
     // view switching guards
     if (
@@ -26,20 +48,6 @@ export class PelcroActions {
     this.set({ view });
   };
 
-  resetState = () => {
-    this.set({
-      product: null,
-      plan: null,
-      isGift: false,
-      isRenewingGift: false,
-      giftCode: "",
-      subscriptionIdToRenew: null,
-      order: null,
-      selectedAddressId: null,
-      addressIdToEdit: null
-    });
-  };
-
   resetView = () => {
     const { switchView, resetState } = this.get();
 
@@ -47,7 +55,7 @@ export class PelcroActions {
     resetState();
   };
 
-  displayPaymentView = () => {
+  switchToPaymentView = () => {
     const {
       switchView,
       resetView,
@@ -71,15 +79,33 @@ export class PelcroActions {
     return resetView();
   };
 
-  displayAddressView = () => {
+  switchToAddressView = () => {
     const { switchView } = this.get();
 
     if (userHasAddress()) {
       switchView("address-select");
     } else {
-      switchView("address");
+      switchView("address-create");
     }
   };
+
+  /**
+   * Subscription Actions
+   */
+
+  setProduct = (id) => {
+    const product = window.Pelcro.product.getById(id);
+    this.set({ product });
+  };
+
+  setPlan = (id) => {
+    const plan = window.Pelcro.plan.getById(id);
+    this.set({ plan });
+  };
+
+  /**
+   * User Actions
+   */
 
   logout = () => {
     const { switchView, resetView, isAuthenticated } = this.get();

@@ -234,8 +234,8 @@ export const initSubscriptionFromURL = () => {
 
     const {
       isAuthenticated,
-      displayAddressView,
-      displayPaymentView
+      switchToAddressView,
+      switchToPaymentView
     } = usePelcro.getStore();
 
     if (!isAuthenticated()) {
@@ -243,15 +243,15 @@ export const initSubscriptionFromURL = () => {
     }
 
     if (isGift) {
-      return switchView("gift");
+      return switchView("gift-create");
     }
 
     const requiresAddress = Boolean(selectedProduct.address_required);
 
     if (!requiresAddress) {
-      return displayPaymentView();
+      return switchToPaymentView();
     }
 
-    return displayAddressView();
+    return switchToAddressView();
   });
 };

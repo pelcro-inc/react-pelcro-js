@@ -14,12 +14,6 @@ import { PaymentSuccessView } from "./PaymentSuccessView";
 export function PaymentSuccessModal({ onDisplay, ...props }) {
   const { resetView } = usePelcro();
 
-  useEffect(() => {
-    window.Pelcro.insight.track("Modal Displayed", {
-      name: "success"
-    });
-  }, []);
-
   const onClose = () => {
     props.onClose?.();
     return resetView();
@@ -27,7 +21,7 @@ export function PaymentSuccessModal({ onDisplay, ...props }) {
 
   return (
     <Modal
-      id="pelcro-payment-success-modal"
+      id="pelcro-subscription-success-modal"
       onDisplay={onDisplay}
       onClose={onClose}
     >
@@ -41,4 +35,4 @@ export function PaymentSuccessModal({ onDisplay, ...props }) {
   );
 }
 
-PaymentSuccessModal.viewId = "success";
+PaymentSuccessModal.viewId = "subscription-success";

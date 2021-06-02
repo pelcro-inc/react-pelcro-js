@@ -24,6 +24,10 @@ export function Modal({
         .replaceAll("-", " ")} viewed`,
       nonInteraction: true
     });
+
+    window.Pelcro.insight.track("Modal Displayed", {
+      name: `${id.replace("pelcro-", "").replaceAll("-", " ")}`
+    });
   }, []);
 
   const onClose = () => {

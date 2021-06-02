@@ -87,9 +87,6 @@ class SelectModal extends Component {
         mode: "plan"
       });
     }
-    window.Pelcro.insight.track("Modal Displayed", {
-      name: "select"
-    });
 
     document.addEventListener("keydown", this.handleSubmit);
   };
@@ -268,8 +265,8 @@ class SelectModal extends Component {
     const isAuthenticated = window.Pelcro.user.isAuthenticated();
 
     const {
-      displayAddressView,
-      displayPaymentView
+      switchToAddressView,
+      switchToPaymentView
     } = usePelcro.getStore();
 
     if (!isAuthenticated) {
@@ -277,14 +274,14 @@ class SelectModal extends Component {
     }
 
     if (isGift) {
-      return setView("gift");
+      return setView("gift-create");
     }
 
     if (product.address_required) {
-      return displayAddressView();
+      return switchToAddressView();
     }
 
-    return displayPaymentView();
+    return switchToPaymentView();
   };
 
   displayLoginView = () => {

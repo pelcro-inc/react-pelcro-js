@@ -20,8 +20,8 @@ export function RegisterModal(props) {
   const {
     switchView,
     resetView,
-    displayAddressView,
-    displayPaymentView,
+    switchToAddressView,
+    switchToPaymentView,
     product,
     order,
     giftCode,
@@ -47,23 +47,23 @@ export function RegisterModal(props) {
 
     // If this is a redeem gift
     if (giftCode) {
-      return displayAddressView();
+      return switchToAddressView();
     }
 
     // Check if the subscription is meant as a gift (if so, gather recipients info)
     if (isGift) {
-      return switchView("gift");
+      return switchView("gift-create");
     }
 
     if (order) {
-      return displayAddressView();
+      return switchToAddressView();
     }
 
     if (product) {
       if (product.address_required) {
-        return displayAddressView();
+        return switchToAddressView();
       } else {
-        return displayPaymentView();
+        return switchToPaymentView();
       }
     }
 

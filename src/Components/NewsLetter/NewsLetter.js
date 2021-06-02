@@ -70,10 +70,6 @@ class DefaultNewsLetter extends Component {
   }
 
   componentDidMount = () => {
-    window.Pelcro.insight.track("Modal Displayed", {
-      name: "newsletter"
-    });
-
     document.addEventListener("keydown", this.handleSubmit);
   };
 

@@ -14,12 +14,12 @@ export const AddressSelectModal = ({
   hideHeaderLogo,
   ...otherProps
 }) => {
-  const { switchView, resetView, displayPaymentView } = usePelcro();
+  const { switchView, resetView, switchToPaymentView } = usePelcro();
 
   const onSuccess = (selectedAddressId) => {
     otherProps.onSuccess?.(selectedAddressId);
 
-    displayPaymentView();
+    switchToPaymentView();
   };
 
   const onGiftRedemptionSuccess = () => {
@@ -28,7 +28,7 @@ export const AddressSelectModal = ({
   };
 
   const onAddNewAddress = () => {
-    switchView("address");
+    switchView("address-create");
   };
 
   return (
