@@ -77,7 +77,7 @@ export class PelcroActions {
     if (userHasAddress()) {
       switchView("address-select");
     } else {
-      switchView("address");
+      switchView("address-create");
     }
   };
 

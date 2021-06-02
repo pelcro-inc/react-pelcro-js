@@ -28,7 +28,7 @@ export const AddressSelectModal = ({
   };
 
   const onAddNewAddress = () => {
-    switchView("address");
+    switchView("address-create");
   };
 
   return (
