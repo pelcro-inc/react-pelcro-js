@@ -265,8 +265,8 @@ class SelectModal extends Component {
     const isAuthenticated = window.Pelcro.user.isAuthenticated();
 
     const {
-      displayAddressView,
-      displayPaymentView
+      switchToAddressView,
+      switchToPaymentView
     } = usePelcro.getStore();
 
     if (!isAuthenticated) {
@@ -278,10 +278,10 @@ class SelectModal extends Component {
     }
 
     if (product.address_required) {
-      return displayAddressView();
+      return switchToAddressView();
     }
 
-    return displayPaymentView();
+    return switchToPaymentView();
   };
 
   displayLoginView = () => {

@@ -47,7 +47,7 @@ export class PelcroActions {
     resetState();
   };
 
-  displayPaymentView = () => {
+  switchToPaymentView = () => {
     const {
       switchView,
       resetView,
@@ -71,7 +71,7 @@ export class PelcroActions {
     return resetView();
   };
 
-  displayAddressView = () => {
+  switchToAddressView = () => {
     const { switchView } = this.get();
 
     if (userHasAddress()) {

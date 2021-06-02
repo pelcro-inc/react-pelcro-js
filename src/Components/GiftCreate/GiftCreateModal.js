@@ -19,17 +19,17 @@ export const GiftCreateModal = ({
   const { t } = useTranslation("register");
   const {
     switchView,
-    displayAddressView,
-    displayPaymentView,
+    switchToAddressView,
+    switchToPaymentView,
     product
   } = usePelcro();
 
   const onSuccess = (giftRecipient) => {
     otherProps.onSuccess?.(giftRecipient);
     if (product.address_required) {
-      displayAddressView();
+      switchToAddressView();
     } else {
-      displayPaymentView();
+      switchToPaymentView();
     }
   };
 

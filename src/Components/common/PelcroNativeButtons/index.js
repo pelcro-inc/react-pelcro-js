@@ -13,8 +13,8 @@ export const init = () => {
     switchView,
     set,
     isAuthenticated,
-    displayAddressView,
-    displayPaymentView
+    switchToAddressView,
+    switchToPaymentView
   } = usePelcro.getStore();
 
   const pelcroLoginButtonsByClass = document.getElementsByClassName(
@@ -125,10 +125,10 @@ export const init = () => {
             );
 
             if (!requiresAddress) {
-              return displayPaymentView();
+              return switchToPaymentView();
             }
 
-            return displayAddressView();
+            return switchToAddressView();
           }
         );
       } else {
@@ -189,10 +189,10 @@ export const init = () => {
                 );
 
                 if (!requiresAddress) {
-                  return displayPaymentView();
+                  return switchToPaymentView();
                 }
 
-                return displayAddressView();
+                return switchToAddressView();
               }
             );
           }
@@ -304,7 +304,7 @@ export const init = () => {
           set({ order: { items: [{ sku_id: skuId, quantity: 1 }] } });
 
           if (isAuthenticated()) {
-            displayAddressView();
+            switchToAddressView();
           } else {
             switchView("register");
           }

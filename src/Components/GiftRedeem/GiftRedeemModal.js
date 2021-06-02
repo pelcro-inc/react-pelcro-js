@@ -18,12 +18,12 @@ export const GiftRedeemModal = ({
   ...otherProps
 }) => {
   const { t } = useTranslation("register");
-  const { switchView, displayAddressView } = usePelcro();
+  const { switchView, switchToAddressView } = usePelcro();
 
   const onSuccess = (giftCode) => {
     otherProps.onSuccess?.(giftCode);
     if (window.Pelcro.user.isAuthenticated()) {
-      displayAddressView();
+      switchToAddressView();
     } else {
       switchView("register");
     }
@@ -41,7 +41,7 @@ export const GiftRedeemModal = ({
       <ModalFooter>
         <p>
           {t("redeem.footer.click")}{" "}
-          <Link id="pelcro-link-redeem" onClick={displayAddressView}>
+          <Link id="pelcro-link-redeem" onClick={switchToAddressView}>
             {t("redeem.footer.here")}
           </Link>{" "}
           {t("redeem.footer.toAdd")}
