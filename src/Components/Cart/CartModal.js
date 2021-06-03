@@ -1,4 +1,5 @@
 import React from "react";
+import { usePelcro } from "../../hooks/usePelcro";
 import {
   Modal,
   ModalBody,
@@ -7,20 +8,28 @@ import {
 import Authorship from "../common/Authorship";
 import { CartView } from "./CartView";
 
-export const CartModal = ({
-  onClose,
-  hideHeaderLogo,
-  ...otherProps
-}) => {
+export const CartModal = ({ onDisplay, onClose, ...otherProps }) => {
+  const { switchView, switchToAddressView } = usePelcro();
+
+  const onSuccess = (items) => {
+    otherProps.onSuccess?.(items);
+
+    if (!window.Pelcro.user.isAuthenticated()) {
+      return switchView("register");
+    }
+
+    switchToAddressView();
+  };
+
   return (
     <Modal
-      hideCloseButton={false}
-      onClose={onClose}
-      hideHeaderLogo={hideHeaderLogo}
       id="pelcro-cart-modal"
+      onDisplay={onDisplay}
+      onClose={onClose}
+      hideCloseButton={false}
     >
       <ModalBody>
-        <CartView {...otherProps} />
+        <CartView {...otherProps} onSuccess={onSuccess} />
       </ModalBody>
       <ModalFooter>
         <Authorship />
@@ -28,3 +37,5 @@ export const CartModal = ({
     </Modal>
   );
 };
+
+CartModal.viewId = "cart";

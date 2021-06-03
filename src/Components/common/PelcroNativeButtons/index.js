@@ -1,23 +1,35 @@
 import { saveToMetadataButton } from "./saveToMetadata";
-import { userHasAddress } from "../../../utils/utils";
 import i18n from "../../../i18n";
+import { usePelcro } from "../../../hooks/usePelcro";
 
 const translations = i18n.t("common:buttons", {
   returnObjects: true
 });
 
-export const init = (app) => {
-  saveToMetadataButton.init(app);
+export const init = () => {
+  saveToMetadataButton.init();
+
+  const {
+    switchView,
+    set,
+    isAuthenticated,
+    switchToAddressView,
+    switchToPaymentView
+  } = usePelcro.getStore();
+
   const pelcroLoginButtonsByClass = document.getElementsByClassName(
     "pelcro-login-button"
   );
 
   if (pelcroLoginButtonsByClass.length !== 0) {
     for (let i = 0; i < pelcroLoginButtonsByClass.length; i++) {
-      pelcroLoginButtonsByClass[i].addEventListener(
-        "click",
-        app.displayLoginView
-      );
+      pelcroLoginButtonsByClass[i].addEventListener("click", () => {
+        if (isAuthenticated()) {
+          switchView("dashboard");
+        } else {
+          switchView("login");
+        }
+      });
     }
   }
 
@@ -26,21 +38,30 @@ export const init = (app) => {
   );
 
   if (pelcroRegisterButton) {
-    pelcroRegisterButton.addEventListener(
-      "click",
-      app.displayRegisterView
+    pelcroRegisterButton.addEventListener("click", () =>
+      switchView("register")
     );
   }
 
+  const pelcroRegisterButtonsByClass = document.getElementsByClassName(
+    "pelcro-register-button"
+  );
+
+  if (pelcroRegisterButtonsByClass.length !== 0) {
+    for (let j = 0; j < pelcroRegisterButtonsByClass.length; j++) {
+      pelcroRegisterButtonsByClass[j].addEventListener("click", () =>
+        switchView("register")
+      );
+    }
+  }
   const pelcroCartButtonsByClass = document.getElementsByClassName(
     "pelcro-cart-button"
   );
 
   if (pelcroCartButtonsByClass.length !== 0) {
     for (let i = 0; i < pelcroCartButtonsByClass.length; i++) {
-      pelcroCartButtonsByClass[i].addEventListener(
-        "click",
-        app.displayCartView
+      pelcroCartButtonsByClass[i].addEventListener("click", () =>
+        switchView("cart")
       );
     }
   }
@@ -48,7 +69,7 @@ export const init = (app) => {
   const cartButton = document.getElementById("pelcro-cart-button");
 
   if (cartButton) {
-    cartButton.addEventListener("click", app.displayCartView);
+    cartButton.addEventListener("click", () => switchView("cart"));
   }
 
   const pelcroSubscribeButtonsByClass = document.getElementsByClassName(
@@ -59,40 +80,124 @@ export const init = (app) => {
     for (let j = 0; j < pelcroSubscribeButtonsByClass.length; j++) {
       if (
         pelcroSubscribeButtonsByClass[j].dataset &&
-        "productId" in pelcroSubscribeButtonsByClass[j].dataset &&
-        "planId" in pelcroSubscribeButtonsByClass[j].dataset
-      ) {
-        pelcroSubscribeButtonsByClass[j].addEventListener(
-          "click",
-          app.setProductAndPlanByButton
-        );
-      } else if (
-        pelcroSubscribeButtonsByClass[j].dataset &&
         "productId" in pelcroSubscribeButtonsByClass[j].dataset
       ) {
         pelcroSubscribeButtonsByClass[j].addEventListener(
           "click",
-          app.setProduct
+          (e) => {
+            const productsList = window.Pelcro.product.list();
+            if (!productsList?.length) return;
+
+            const [productId, planId, isGift] = [
+              e.target.dataset.productId,
+              e.target.dataset.planId,
+              e.target.dataset.isGift
+            ];
+
+            const selectedProduct = productsList.find(
+              (product) => product.id === Number(productId)
+            );
+
+            const selectedPlan = selectedProduct?.plans?.find(
+              (plan) => plan.id === Number(planId)
+            );
+
+            set({
+              product: selectedProduct,
+              plan: selectedPlan,
+              isGift: Boolean(isGift)
+            });
+
+            if (!selectedProduct || !selectedPlan) {
+              return switchView("select");
+            }
+
+            if (!isAuthenticated()) {
+              return switchView("register");
+            }
+
+            if (isGift) {
+              return switchView("gift-create");
+            }
+
+            const requiresAddress = Boolean(
+              selectedProduct.address_required
+            );
+
+            if (!requiresAddress) {
+              return switchToPaymentView();
+            }
+
+            return switchToAddressView();
+          }
         );
       } else {
         pelcroSubscribeButtonsByClass[j].addEventListener(
           "click",
-          app.displaySelectView
+          () => switchView("select")
         );
       }
     }
   }
 
-  const pelcroRegisterButtonsByClass = document.getElementsByClassName(
-    "pelcro-register-button"
+  const pelcroOfflineSubButtonsByClass = document.getElementsByClassName(
+    "pelcro-offline-subscribe-button"
   );
 
-  if (pelcroRegisterButtonsByClass.length !== 0) {
-    for (let j = 0; j < pelcroRegisterButtonsByClass.length; j++) {
-      pelcroRegisterButtonsByClass[j].addEventListener(
-        "click",
-        app.displayRegisterView
-      );
+  if (pelcroOfflineSubButtonsByClass.length !== 0) {
+    for (let j = 0; j < pelcroOfflineSubButtonsByClass.length; j++) {
+      if (
+        pelcroOfflineSubButtonsByClass[j].dataset &&
+        "productId" in pelcroOfflineSubButtonsByClass[j].dataset &&
+        "planId" in pelcroOfflineSubButtonsByClass[j].dataset
+      ) {
+        pelcroOfflineSubButtonsByClass[j].addEventListener(
+          "click",
+          (e) => {
+            set({
+              product: {
+                id: e.target.dataset.productId
+              },
+              plan: {
+                product_id: e.target.dataset.productId,
+                id: e.target.dataset.planId
+              }
+            });
+
+            window.Pelcro.plan.getPlan(
+              {
+                plan_id: e.target.dataset.planId
+              },
+              (error, response) => {
+                if (error) {
+                  return;
+                }
+
+                const { plan } = response.data;
+
+                set({
+                  plan,
+                  product: plan?.product
+                });
+
+                if (!isAuthenticated()) {
+                  return switchView("register");
+                }
+
+                const requiresAddress = Boolean(
+                  plan.address_required
+                );
+
+                if (!requiresAddress) {
+                  return switchToPaymentView();
+                }
+
+                return switchToAddressView();
+              }
+            );
+          }
+        );
+      }
     }
   }
 
@@ -102,7 +207,13 @@ export const init = (app) => {
 
   if (giftButtonsByClass.length !== 0) {
     for (let j = 0; j < giftButtonsByClass.length; j++) {
-      giftButtonsByClass[j].addEventListener("click", app.setGift);
+      giftButtonsByClass[j].addEventListener("click", (e) => {
+        if (e.target.dataset.isGift === "true") {
+          set({ isGift: true });
+        }
+
+        switchView("select");
+      });
     }
   }
 
@@ -190,22 +301,12 @@ export const init = (app) => {
             quantity: 1
           };
 
-          app.setProductsForCart(allProducts);
-          app.setOrder([
-            {
-              sku_id: skuId,
-              quantity: 1
-            }
-          ]);
+          set({ order: { items: [{ sku_id: skuId, quantity: 1 }] } });
 
-          if (window.Pelcro.user.isAuthenticated()) {
-            if (userHasAddress()) {
-              app.setView("address-select");
-            } else {
-              app.setView("address");
-            }
+          if (isAuthenticated()) {
+            switchToAddressView();
           } else {
-            app.setView("register");
+            switchView("register");
           }
         }
       );
@@ -213,8 +314,9 @@ export const init = (app) => {
   }
 };
 
-export const authenticatedButtons = (id) => {
+export const authenticatedButtons = () => {
   saveToMetadataButton.authenticated();
+
   const pelcroLoginByClass = document.getElementsByClassName(
     "pelcro-login-button"
   );
@@ -224,9 +326,18 @@ export const authenticatedButtons = (id) => {
       pelcroLoginByClass.item(i).innerHTML = translations.account;
     }
   }
+
+  const removeHTMLButton = (buttonClass) => {
+    const elements = document.getElementsByClassName(buttonClass);
+    while (elements.length > 0) {
+      elements[0].parentNode.removeChild(elements[0]);
+    }
+  };
+
+  removeHTMLButton("pelcro-register-button");
 };
 
-export const unauthenticatedButtons = (id) => {
+export const unauthenticatedButtons = () => {
   saveToMetadataButton.unauthenticated();
 
   const pelcroLoginByClass = document.getElementsByClassName(

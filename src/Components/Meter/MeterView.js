@@ -1,26 +1,18 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { usePelcro } from "../../hooks/usePelcro";
 import { Link } from "../../SubComponents/Link";
 
-export const MeterView = (props) => {
+export const MeterView = () => {
   const { t } = useTranslation("meter");
-  const site = window.Pelcro.site.read();
-  const plan =
-    props.plan ?? window.Pelcro.paywall.getProduct()?.plans?.[0];
-  const product = props.product ?? window.Pelcro.paywall.getProduct();
+  const { switchView, product } = usePelcro();
+
+  const paywallProduct =
+    product ?? window.Pelcro.paywall.getProduct();
+
   const visitsLeft = window.Pelcro.paywall.freeVisitsLeft();
-
-  const title =
-    plan && `${product?.paywall?.meter_title}: ${visitsLeft}`;
-  const subtitle = plan && product?.paywall?.meter_subtitle;
-
-  const displayLoginView = () => {
-    props.setView("login");
-  };
-
-  const displaySelectView = () => {
-    props.setView("select");
-  };
+  const title = `${paywallProduct?.paywall?.meter_title}: ${visitsLeft}`;
+  const subtitle = paywallProduct?.paywall?.meter_subtitle;
 
   return (
     <div>
@@ -29,7 +21,10 @@ export const MeterView = (props) => {
       </h4>
       <p className="plc-text-sm plc-text-gray-600">
         {subtitle}{" "}
-        <Link className="plc-ml-1" onClick={displaySelectView}>
+        <Link
+          className="plc-ml-1"
+          onClick={() => switchView("select")}
+        >
           {t("messages.subscribeNow")}
         </Link>
         {!window.Pelcro.user.isAuthenticated() && (
@@ -37,7 +32,10 @@ export const MeterView = (props) => {
             <br />
             <span>
               {t("messages.alreadyHaveAccount") + " "}
-              <Link className="plc-ml-1" onClick={displayLoginView}>
+              <Link
+                className="plc-ml-1"
+                onClick={() => switchView("login")}
+              >
                 {t("messages.loginHere")}
               </Link>
             </span>

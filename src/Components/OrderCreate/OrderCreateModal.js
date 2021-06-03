@@ -6,21 +6,28 @@ import {
   ModalBody,
   ModalFooter
 } from "../../SubComponents/Modal";
+import { usePelcro } from "../../hooks/usePelcro";
 
 export const OrderCreateModal = ({
+  onDisplay,
   onClose,
-  hideHeaderLogo,
   ...otherProps
 }) => {
+  const { switchView } = usePelcro();
+
+  const onSuccess = () => {
+    otherProps.onSuccess?.();
+    return switchView("order-confirm");
+  };
+
   return (
     <Modal
-      hideCloseButton={false}
-      onClose={onClose}
-      hideHeaderLogo={hideHeaderLogo}
       id="pelcro-order-create-modal"
+      onDisplay={onDisplay}
+      onClose={onClose}
     >
       <ModalBody>
-        <OrderCreateView {...otherProps} />
+        <OrderCreateView {...otherProps} onSuccess={onSuccess} />
       </ModalBody>
       <ModalFooter>
         <Authorship />
@@ -28,3 +35,5 @@ export const OrderCreateModal = ({
     </Modal>
   );
 };
+
+OrderCreateModal.viewId = "order-create";

@@ -47,7 +47,7 @@ const LoginContainer = ({
         });
         onFailure(err);
       } else {
-        onSuccess();
+        onSuccess(res);
       }
     });
   };

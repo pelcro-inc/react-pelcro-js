@@ -1,7 +1,7 @@
 {
   "name": "@pelcro/react-pelcro-js",
   "description": "Pelcro's React UI Elements",
-  "version": "0.17.3",
+  "version": "0.17.12",
   "private": false,
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
@@ -77,6 +77,7 @@
     "rollup-plugin-postcss": "^4.0.0",
     "rollup-plugin-visualizer": "^4.2.0",
     "sass-loader": "^7.1.0",
+    "simple-zustand-devtools": "^1.0.0",
     "style-loader": "^2.0.0",
     "tailwindcss": "^2.0.2",
     "travis-ci-cloudfront-invalidation": "^1.1.0",
@@ -90,12 +91,14 @@
     "react-easy-crop": "^3.3.2",
     "react-i18next": "^11.3.3",
     "react-stripe-elements": "^6.1.2",
-    "use-reducer-with-side-effects": "^2.2.0"
+    "use-reducer-with-side-effects": "^2.2.0",
+    "zustand": "^3.4.2"
   },
   "peerDependencies": {
     "prop-types": "^15.0.0",
     "react": "^16.6.1",
-    "react-dom": "^16.6.1"
+    "react-dom": "^16.6.1",
+    "react-ga": "^2.7.0"
   },
   "babel": {
     "presets": [

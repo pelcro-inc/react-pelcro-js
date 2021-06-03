@@ -1,23 +1,18 @@
 /* used by multiple input sub-components */
-
 @layer components {
   .pelcro-root .pelcro-input-wrapper {
     @apply plc-w-full plc-mb-3;
   }
-
   .pelcro-root .pelcro-input-label {
-    @apply plc-text-gray-700;
+    @apply plc-mb-1 plc-text-gray-900;
   }
-
   .pelcro-root .pelcro-input-error {
     @apply plc-h-3 plc-mt-1 plc-text-sm plc-text-red-500 plc-normal-case;
   }
-
   .pelcro-root .pelcro-input-invalid {
     @apply plc-ring-2 plc-ring-red-400;
   }
-
   .pelcro-root .pelcro-input-field {
-    @apply plc-mt-1 plc-w-full plc-border plc-border-gray-300 plc-bg-gray-50 plc-p-2 plc-appearance-none plc-outline-none plc-rounded-sm focus:plc-ring-2 focus:plc-ring-primary-400 disabled:plc-bg-gray-300 disabled:plc-cursor-not-allowed;
+    @apply plc-w-full plc-p-2 plc-text-gray-900 plc-border plc-border-gray-300 plc-border-solid plc-rounded-sm plc-outline-none plc-appearance-none plc-bg-gray-50 focus:plc-ring-2 focus:plc-ring-primary-400 disabled:plc-bg-gray-300 disabled:plc-cursor-not-allowed;
   }
 }

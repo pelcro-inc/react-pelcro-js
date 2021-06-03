@@ -1,10 +1,11 @@
 import React from "react";
+import ReactGA from "react-ga";
 
 export const Logout = (props) => {
   const handleLogout = () => {
     window.Pelcro.user.logout();
 
-    props.ReactGA.event({
+    ReactGA?.event?.({
       category: "ACTIONS",
       action: "Logged out",
       nonInteraction: true

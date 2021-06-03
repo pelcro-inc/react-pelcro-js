@@ -113,7 +113,7 @@ const UserUpdateContainer = ({
               content: t("messages.userUpdated")
             }
           });
-          onSuccess();
+          onSuccess(res);
         }
       }
     );

@@ -18,12 +18,12 @@
 @import "./SubComponents/Alert.css";
 
 @import "./Components/Shop/ShopView.css";
-@import "./components/ProfilePicChange/ProfilePicChangeCropper.css";
-@import "./components/ProfilePicChange/ProfilePicChangeZoom.css";
-@import "./components/UserUpdate/UserUpdateProfilePic.css";
+@import "./Components/ProfilePicChange/ProfilePicChangeCropper.css";
+@import "./Components/ProfilePicChange/ProfilePicChangeZoom.css";
+@import "./Components/UserUpdate/UserUpdateProfilePic.css";
 @import "./Components/dashboard/DashboardMenus/OrdersMenu.css";
 @import "./Components/Select/SelectModal.css";
-@import "./components/dashboard/Dashboard.css";
+@import "./Components/dashboard/Dashboard.css";
 
 /* utilities */
 @import "tailwindcss/utilities";

@@ -1,6 +1,9 @@
 import "./i18n";
 import "./index.css";
 
+export { usePelcro } from "./hooks/usePelcro";
+export { PelcroModalController } from "./Components/PelcroModalController/PelcroModalController";
+
 export { LoginContainer } from "./Components/Login/LoginContainer";
 export { Email } from "./SubComponents/Email";
 export { Password } from "./SubComponents/Password";
@@ -22,12 +25,12 @@ export { RegisterCompany } from "./Components/Register/RegisterCompany";
 export { AlertWithContext as Alert } from "./SubComponents/AlertWithContext";
 export { LoginModal } from "./Components/Login/LoginModal";
 export { RegisterModal } from "./Components/Register/RegisterModal";
-export { SelectModalWithTrans as SelectModal } from "./Components/Select/SelectModal";
+export { SelectModalWithHook as SelectModal } from "./Components/Select/SelectModal";
 export { SubscriptionRenewModal } from "./Components/SubscriptionRenew/SubscriptionRenewModal";
 export { SubscriptionRenewView } from "./Components/SubscriptionRenew/SubscriptionRenewView";
 export { PaymentSuccessModal } from "./Components/PaymentSuccess/PaymentSuccessModal";
 export { PaymentSuccessView } from "./Components/PaymentSuccess/PaymentSuccessView";
-export { NewsLetter } from "./Components/NewsLetter/NewsLetter";
+export { NewsletterWithHook as NewsLetter } from "./Components/NewsLetter/NewsLetter";
 export { MeterModal } from "./Components/Meter/MeterModal";
 export { MeterView } from "./Components/Meter/MeterView";
 export { PaymentMethodContainer } from "./Components/PaymentMethod/PaymentMethodContainer";
@@ -125,7 +128,7 @@ export { OrderCreateSubmitButton } from "./Components/OrderCreate/OrderCreateSub
 export { OrderCreateContainer } from "./Components/OrderCreate/OrderCreateContainer";
 export { OrderCreateModal } from "./Components/OrderCreate/OrderCreateModal";
 export { OrderCreateView } from "./Components/OrderCreate/OrderCreateView";
-export { OrderConfirmModalWithTrans as OrderConfirmModal } from "./Components/OrderConfirm/OrderConfirmModal";
+export { OrderConfirmModalWithHook as OrderConfirmModal } from "./Components/OrderConfirm/OrderConfirmModal";
 
 export { GiftCreateModal } from "./Components/GiftCreate/GiftCreateModal";
 export { GiftCreateView } from "./Components/GiftCreate/GiftCreateView";
@@ -147,7 +150,7 @@ export { AddressSelectSubmit } from "./Components/AddressSelect/AddressSelectSub
 export { AddressSelectList } from "./Components/AddressSelect/AddressSelectList";
 export { AddressSelectView } from "./Components/AddressSelect/AddressSelectView";
 
-export { DashboardWithTrans as Dashboard } from "./Components/dashboard/Dashboard";
+export { DashboardWithHook as Dashboard } from "./Components/dashboard/Dashboard";
 export { DashboardOpenButton } from "./Components/dashboard/DashboardOpenButton";
 
 export { ProfilePicChangeButton } from "./Components/ProfilePicChange/ProfilePicChangeButton";

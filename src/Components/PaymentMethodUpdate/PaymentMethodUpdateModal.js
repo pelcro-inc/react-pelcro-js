@@ -1,4 +1,5 @@
 import React from "react";
+import ReactGA from "react-ga";
 import { PaymentMethodUpdateView } from "./PaymentMethodUpdateView";
 import {
   Modal,
@@ -8,15 +9,23 @@ import {
 import Authorship from "../common/Authorship";
 
 export const PaymentMethodUpdateModal = (props) => {
+  const onSuccess = (res) => {
+    props.onSuccess?.(res);
+    ReactGA?.event?.({
+      category: "ACTIONS",
+      action: "Updated payment card",
+      nonInteraction: true
+    });
+  };
+
   return (
     <Modal
-      hideCloseButton={!window.Pelcro.paywall.displayCloseButton()}
+      id="pelcro-source-create-modal"
+      onDisplay={props.onDisplay}
       onClose={props.onClose}
-      hideHeaderLogo={props.hideHeaderLogo}
-      id="pelcro-payment-method-update-modal"
     >
       <ModalBody>
-        <PaymentMethodUpdateView {...props} />
+        <PaymentMethodUpdateView {...props} onSuccess={onSuccess} />
       </ModalBody>
       <ModalFooter>
         <Authorship />
@@ -24,3 +33,5 @@ export const PaymentMethodUpdateModal = (props) => {
     </Modal>
   );
 };
+
+PaymentMethodUpdateModal.viewId = "source-create";

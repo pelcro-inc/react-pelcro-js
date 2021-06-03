@@ -56,7 +56,7 @@ const PasswordForgotContainer = ({
               content: t("passwordResetEmailSent")
             }
           });
-          onSuccess();
+          onSuccess(res);
         }
       }
     );

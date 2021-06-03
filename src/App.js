@@ -203,7 +203,6 @@ class App extends Component {
       return true;
     } else if (view === "select") {
       this.setProductAndPlanFromUrl();
-      this.displaySelectView();
       return true;
     } else if (view === "redeem") {
       this.setView("redeem");
@@ -262,6 +261,13 @@ class App extends Component {
   };
 
   setView = (view) => {
+    if (
+      view === "dashboard" &&
+      !window.Pelcro.user.isAuthenticated()
+    ) {
+      return;
+    }
+
     this.setState({ view: view });
 
     if (view !== "meter") this.disableScroll();
@@ -348,13 +354,9 @@ class App extends Component {
     this.setView("login");
   };
 
-  displaySelectView = () => {
-    this.setState({ subscriptionIdToRenew: null });
-    if (!window.Pelcro.site.read().products) return;
-    this.setView("select");
-  };
-
   setProductAndPlanFromUrl = () => {
+    this.setState({ subscriptionIdToRenew: null });
+
     const productsList = window.Pelcro.product.list();
     if (!productsList?.length) return;
 
@@ -376,6 +378,26 @@ class App extends Component {
       selectedPlan,
       Boolean(isGift)
     );
+
+    if (!selectedProduct || !selectedPlan) {
+      return this.setView("select");
+    }
+
+    const isAuthenticated = window.Pelcro.user.isAuthenticated();
+    if (!isAuthenticated) {
+      return this.setView("register");
+    }
+
+    if (isGift) {
+      return this.setView("gift");
+    }
+
+    const requiresAddress = Boolean(selectedProduct.address_required);
+    if (!requiresAddress) {
+      return this.setView("payment");
+    }
+
+    return this.displayAddressView();
   };
 
   displayCartView = () => {
@@ -486,7 +508,25 @@ class App extends Component {
       Boolean(isGift)
     );
 
-    this.setView("select");
+    if (!selectedProduct || !selectedPlan) {
+      return this.setView("select");
+    }
+
+    const isAuthenticated = window.Pelcro.user.isAuthenticated();
+    if (!isAuthenticated) {
+      return this.setView("register");
+    }
+
+    if (isGift) {
+      return this.setView("gift");
+    }
+
+    const requiresAddress = Boolean(selectedProduct.address_required);
+    if (!requiresAddress) {
+      return this.setView("payment");
+    }
+
+    return this.displayAddressView();
   };
 
   setOfflineProductAndPlanByButton = (e) => {
@@ -581,8 +621,25 @@ class App extends Component {
           : !!this.state.plan && this.state.plan.currency
     });
 
+    const { subscriptions } = res.data;
+    const latestSubscriptionId =
+      subscriptions &&
+      subscriptions[
+        subscriptions.length ? subscriptions.length - 1 : 0
+      ].id;
+
+    ReactGA.plugin.execute("ecommerce", "addTransaction", {
+      id: latestSubscriptionId,
+      affiliation: "Pelcro",
+      revenue:
+        !!this.state.plan && this.state.plan.amount
+          ? this.state.plan.amount / 100
+          : 0,
+      coupon: this.state.couponCode
+    });
+
     ReactGA.plugin.execute("ecommerce", "addItem", {
-      id: this.state.product.id,
+      id: latestSubscriptionId,
       name: this.state.product.name,
       category: this.state.product.description,
       variant: this.state.plan.nickname,
@@ -593,21 +650,6 @@ class App extends Component {
       quantity: 1
     });
 
-    const { subscriptions } = res.data;
-
-    ReactGA.plugin.execute("ecommerce", "addTransaction", {
-      id:
-        subscriptions &&
-        subscriptions[
-          subscriptions.length ? subscriptions.length - 1 : 0
-        ].id,
-      affiliation: "Pelcro",
-      revenue:
-        !!this.state.plan && this.state.plan.amount
-          ? this.state.plan.amount / 100
-          : 0,
-      coupon: this.state.couponCode
-    });
     ReactGA.plugin.execute("ecommerce", "send");
 
     ReactGA.event({
@@ -677,7 +719,7 @@ class App extends Component {
               setView={this.setView}
               onClose={this.resetView}
               onSuccess={() => {
-                this.setView("");
+                this.resetView();
                 this.loggedIn();
               }}
             />

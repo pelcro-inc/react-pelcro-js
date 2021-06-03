@@ -4,6 +4,7 @@ import useReducerWithSideEffects, {
   UpdateWithSideEffect,
   Update
 } from "use-reducer-with-side-effects";
+import { usePelcro } from "../../hooks/usePelcro";
 import {
   SET_EMAIL,
   SET_LAST_NAME,
@@ -34,8 +35,16 @@ const GiftCreateContainer = ({
   children
 }) => {
   const { t } = useTranslation("register");
-  const handleSubmit = ({ email, firstName, lastName }, dispatch) => {
-    if (!email) {
+  const { set } = usePelcro();
+
+  const handleSubmit = (state, dispatch) => {
+    const giftRecipient = {
+      email: state.email,
+      firstName: state.firstName,
+      lastName: state.lastName
+    };
+
+    if (!giftRecipient.email) {
       dispatch({
         type: SHOW_ALERT,
         payload: {
@@ -45,11 +54,8 @@ const GiftCreateContainer = ({
       });
       onFailure();
     } else {
-      onSuccess({
-        email,
-        firstName,
-        lastName
-      });
+      set({ giftRecipient });
+      onSuccess(giftRecipient);
     }
   };
 

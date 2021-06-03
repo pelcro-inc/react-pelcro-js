@@ -6,7 +6,7 @@ export const OrderCreateView = (props) => {
   const { t } = useTranslation("payment");
   return (
     <div id="pelcro-order-create-view">
-      <div className="plc-mb-6 plc-text-2xl plc-font-semibold plc-text-center plc-text-gray-700 pelcro-title-wrapper">
+      <div className="plc-mb-6 plc-text-2xl plc-font-semibold plc-text-center plc-text-gray-900 pelcro-title-wrapper">
         <h4>{t("labels.checkout.title")}</h4>
       </div>
       <form

@@ -41,7 +41,7 @@
     "recipient": "Destinataire",
     "addAddress": "Ajoutez l'adresse",
     "addSubscription": "Nouvel abonnement",
-    "addGift": "ajouter un cadeau",
+    "addGift": "Ajouter un cadeau",
     "orders": {
       "label": "Commandes",
       "noOrders": "Vous n'avez passé aucune commande",
@@ -53,6 +53,6 @@
     }
   },
   "messages": {
-    "noCard": "Vous ñ'avez pas un carte"
+    "noCard": "Vous n’avez pas une carte"
   }
 }

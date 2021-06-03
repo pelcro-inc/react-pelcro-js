@@ -7,17 +7,19 @@ import {
   ModalFooter
 } from "../../SubComponents/Modal";
 
+/**
+ *
+ */
 export function ProfilePicChangeModal({
+  onDisplay,
   onClose,
-  hideHeaderLogo,
   ...otherProps
 }) {
   return (
     <Modal
-      hideCloseButton={!window.Pelcro.paywall.displayCloseButton()}
-      onClose={onClose}
-      hideHeaderLogo={hideHeaderLogo}
       id="pelcro-profile-picture-modal"
+      onDisplay={onDisplay}
+      onClose={onClose}
     >
       <ModalBody>
         <ProfilePicChangeView {...otherProps} />
@@ -28,3 +30,5 @@ export function ProfilePicChangeModal({
     </Modal>
   );
 }
+
+ProfilePicChangeModal.viewId = "profile-picture";

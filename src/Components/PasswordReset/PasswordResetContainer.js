@@ -66,7 +66,7 @@ const PasswordResetContainer = ({
               content: t("passwordUpdated")
             }
           });
-          onSuccess();
+          onSuccess(res);
         }
       }
     );

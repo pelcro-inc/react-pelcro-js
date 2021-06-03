@@ -1,16 +1,39 @@
-import React from "react";
+import React, { useEffect } from "react";
+import ReactGA from "react-ga";
 import { ReactComponent as CloseIcon } from "../assets/x-icon.svg";
+import { usePelcro } from "../hooks/usePelcro";
 
+/**
+ *
+ */
 export function Modal({
   id,
+  onDisplay,
   className = "",
+  hideCloseButton = !window.Pelcro.paywall.displayCloseButton(),
   children,
-  hideCloseButton = false,
-  hideHeaderLogo = true,
-  onClose,
-  ...otherProps
+  ...props
 }) {
-  const logoUrl = window.Pelcro.site.read().logo.url;
+  const resetView = usePelcro((state) => state.resetView);
+  useEffect(() => {
+    onDisplay?.();
+    ReactGA?.event?.({
+      category: "VIEWS",
+      action: `${id
+        .replace("pelcro-", "")
+        .replaceAll("-", " ")} viewed`,
+      nonInteraction: true
+    });
+
+    window.Pelcro.insight.track("Modal Displayed", {
+      name: `${id.replace("pelcro-", "").replaceAll("-", " ")}`
+    });
+  }, []);
+
+  const onClose = () => {
+    props?.onClose?.();
+    resetView();
+  };
 
   return (
     <div className="pelcro-modal-overlay">
@@ -19,7 +42,7 @@ export function Modal({
         role="dialog"
         aria-modal="true"
         id={id}
-        {...otherProps}
+        {...props}
       >
         <div className="pelcro-modal-content">
           <div className="pelcro-modal-header">
@@ -33,13 +56,13 @@ export function Modal({
                 <CloseIcon className="plc-fill-current" />
               </button>
             )}
-            <div className="plc-flex plc-justify-center plc-items-center plc-w-full">
+            <div className="plc-flex plc-items-center plc-justify-center plc-w-full">
               <img
                 alt="business logo"
                 className={`plc-max-h-14 plc-mt-2 pelcro-modal-logo ${
-                  hideHeaderLogo ? "plc-hidden" : ""
+                  window.Pelcro?._showModalHeader ? "" : "plc-hidden"
                 }`}
-                src={logoUrl}
+                src={window.Pelcro.site.read().logo?.url}
               />
             </div>
           </div>
