@@ -6,6 +6,15 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Unreleased]
 
+### Added
+
+- Added usePelcro global hook, to have access to pelcro UI state.
+- Added PelcroModalController component to orchestrate between modals & initialize features.
+
+### Changed
+
+- Replaced app.js with Main.js using the new external API. [PRIVATE]
+
 ## [Released]
 
 ## [0.17.12] - 2021-06-02
@@ -19,6 +28,7 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 - Address creation modal title wording.
 
 ## [0.17.10] - 2021-05-27
+
 ## Fixed
 
 - Scroll being disabled after logging in.
@@ -29,11 +39,13 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 - Remove 'select a different plan' link from registeration modal footer.
 
 ## [0.17.9] - 2021-05-25
+
 ## Fixed
 
 - Native subscribe button not working.
 
 ## [0.17.8] - 2021-05-25
+
 ## Fixed
 
 - Native subscribe button not working.
@@ -46,6 +58,7 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 - Add a default solid border style to all input fields.
 
 ## [0.17.7] - 2021-05-22
+
 ## Changed
 
 - Skip the product/plan selection step when url trigger params contain all required data

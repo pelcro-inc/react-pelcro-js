@@ -4,6 +4,7 @@ import useReducerWithSideEffects, {
   UpdateWithSideEffect,
   Update
 } from "use-reducer-with-side-effects";
+import { usePelcro } from "../../hooks/usePelcro";
 import {
   HANDLE_SUBMIT,
   GET_COUNTRIES_SUCCESS,
@@ -51,13 +52,14 @@ const AddressUpdateContainer = ({
   style,
   className,
   type = "shipping",
-  giftCode = false,
-  product = null,
   onSuccess = () => {},
   onFailure = () => {},
   children,
-  addressId
+  ...props
 }) => {
+  const { addressIdToEdit } = usePelcro();
+  const addressId = props?.addressId ?? addressIdToEdit;
+
   const [t] = useTranslation("address");
   useEffect(() => {
     const getCountries = () => {
@@ -84,9 +86,6 @@ const AddressUpdateContainer = ({
 
     getAddressData();
     getCountries();
-    window.Pelcro.insight.track("Modal Displayed", {
-      name: "address"
-    });
   }, []);
 
   const getAddressData = () => {
@@ -156,7 +155,7 @@ const AddressUpdateContainer = ({
               content: t("messages.addressUpdated")
             }
           });
-          onSuccess();
+          onSuccess(res);
         }
       }
     );

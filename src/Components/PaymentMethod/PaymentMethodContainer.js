@@ -42,6 +42,7 @@ import {
   getCanonicalLocaleFormat,
   getEcommerceOrderTotal
 } from "../../utils/utils";
+import { usePelcro } from "../../hooks/usePelcro";
 
 /**
  * @typedef {Object} PaymentStateType
@@ -88,32 +89,30 @@ const PaymentMethodContainerWithoutStripe = ({
   style,
   className,
   children,
-  successMessage,
   stripe,
   type,
-  subscriptionIdToRenew,
-  isRenewingGift,
-  plan,
-  product,
-  store,
-  order = {},
-  giftRecipient = null,
-  selectedAddressId,
   onSuccess = () => {},
   onGiftRenewalSuccess = () => {},
   onFailure = () => {},
-  onLoading = () => {},
-  onDisplay = () => {}
+  ...props
 }) => {
   const { t } = useTranslation("payment");
+  const pelcroStore = usePelcro();
+  const { set } = usePelcro();
+
+  const order = props.order ?? pelcroStore.order;
+  const product = props.product ?? pelcroStore.product;
+  const plan = props.plan ?? pelcroStore.plan;
+  const subscriptionIdToRenew =
+    props.subscriptionIdToRenew ?? pelcroStore.subscriptionIdToRenew;
+  const selectedAddressId =
+    props.selectedAddressId ?? pelcroStore.selectedAddressId;
+  const giftRecipient =
+    props.giftRecipient ?? pelcroStore.giftRecipient;
+  const isRenewingGift =
+    props.isRenewingGift ?? pelcroStore.isRenewingGift;
 
   useEffect(() => {
-    onDisplay();
-
-    window.Pelcro.insight.track("Modal Displayed", {
-      name: "payment"
-    });
-
     if (window.Pelcro.coupon.getFromUrl()) {
       dispatch({
         type: UPDATE_COUPON_CODE,
@@ -146,7 +145,6 @@ const PaymentMethodContainerWithoutStripe = ({
         dispatch({ type: DISABLE_SUBMIT, payload: true });
         dispatch({ type: LOADING, payload: true });
         complete("success");
-        onLoading();
 
         if (source?.card?.three_d_secure === "required") {
           return generate3DSecureSource(source).then(
@@ -438,6 +436,7 @@ const PaymentMethodContainerWithoutStripe = ({
 
         // Reset cart products
         window.Pelcro.cartProducts = [];
+        set({ order: null });
         onSuccess(res);
       }
     );
@@ -481,7 +480,7 @@ const PaymentMethodContainerWithoutStripe = ({
               type: SHOW_ALERT,
               payload: {
                 type: "success",
-                content: successMessage
+                content: t("messages.sourceUpdated")
               }
             });
             onSuccess(res);

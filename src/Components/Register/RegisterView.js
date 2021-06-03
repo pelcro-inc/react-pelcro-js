@@ -5,13 +5,18 @@ import { RegisterEmail } from "./RegisterEmail";
 import { RegisterPassword } from "./RegisterPassword";
 import { RegisterButton } from "./RegisterButton";
 import { AlertWithContext } from "../../SubComponents/AlertWithContext";
+import { usePelcro } from "../../hooks/usePelcro";
 
+/**
+ *
+ */
 export function RegisterView(props) {
   const { t } = useTranslation("register");
+  const { product } = usePelcro();
 
-  const title = props.product?.paywall?.register_title ?? t("title");
+  const title = product?.paywall?.register_title ?? t("title");
   const subtitle =
-    props.product?.paywall?.register_subtitle ?? t("subtitle");
+    product?.paywall?.register_subtitle ?? t("subtitle");
 
   return (
     <div id="pelcro-register-view">
@@ -40,7 +45,7 @@ export function RegisterView(props) {
           />
           <RegisterButton
             role="submit"
-            className="plc-mt-2 plc-w-full"
+            className="plc-w-full plc-mt-2"
             id="pelcro-submit"
             name={t("messages.createAccount")}
           />

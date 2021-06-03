@@ -8,6 +8,7 @@ import {
 } from "../../utils/action-types";
 import { PaypalClient } from "../../services/PayPal/PaypalCheckout.service";
 import { getAddressById } from "../../utils/utils";
+import { usePelcro } from "../../hooks/usePelcro";
 
 /**
  * PaypalSubscribeButton component
@@ -16,11 +17,15 @@ import { getAddressById } from "../../utils/utils";
  */
 export const PaypalSubscribeButton = (props) => {
   const { dispatch, state } = useContext(store);
+  const { product, plan, selectedAddressId } = usePelcro();
 
   useEffect(() => {
     // sometimes, price is updated. eg. Coupon codes.
-    const updatedPrice = state.updatedPrice ?? props.plan.amount;
-    const selectedAddress = getAddressById(props.selectedAddressId);
+    const updatedPrice =
+      state.updatedPrice ?? props.plan?.amount ?? plan.amount;
+    const selectedAddress = getAddressById(
+      props.selectedAddressId ?? selectedAddressId
+    );
 
     // initialize paypal client, then render paypal button.
     const initializePaypal = async () => {
@@ -28,7 +33,8 @@ export const PaypalSubscribeButton = (props) => {
         buttonElementID:
           props.buttonElementID ?? "pelcro-paypal-button",
         style: props.buttonStyle,
-        enableShippingAddress: props.product.address_required,
+        enableShippingAddress:
+          props.product?.address_required ?? product.address_required,
         shippingAddressEditable: props.makeAddressEditable,
         displayName: props.merchantDisplayName,
         locale: props.locale,
@@ -39,7 +45,7 @@ export const PaypalSubscribeButton = (props) => {
       await paypalCheckoutInstance.build();
       // Create paypal payment
       paypalCheckoutInstance.createPayment({
-        product: props.plan,
+        product: props.plan ?? plan,
         amount: updatedPrice,
         address: selectedAddress,
         onButtonClick: () => {

@@ -8,38 +8,40 @@ import {
 import Authorship from "../common/Authorship";
 import { GiftRedeemView } from "./GiftRedeemView";
 import { Link } from "../../SubComponents/Link";
-import { userHasAddress } from "../../utils/utils";
+import { usePelcro } from "../../hooks/usePelcro";
 
 export const GiftRedeemModal = ({
   onClose,
+  onDisplay,
   setView,
   hideHeaderLogo,
   ...otherProps
 }) => {
   const { t } = useTranslation("register");
+  const { switchView, switchToAddressView } = usePelcro();
+
+  const onSuccess = (giftCode) => {
+    otherProps.onSuccess?.(giftCode);
+    if (window.Pelcro.user.isAuthenticated()) {
+      switchToAddressView();
+    } else {
+      switchView("register");
+    }
+  };
 
   return (
     <Modal
-      hideCloseButton={!window.Pelcro.paywall.displayCloseButton()}
-      onClose={onClose}
-      hideHeaderLogo={hideHeaderLogo}
       id="pelcro-gift-redeem-modal"
+      onClose={onClose}
+      onDisplay={onDisplay}
     >
       <ModalBody>
-        <GiftRedeemView {...otherProps} />
+        <GiftRedeemView {...otherProps} onSuccess={onSuccess} />
       </ModalBody>
       <ModalFooter>
         <p>
           {t("redeem.footer.click")}{" "}
-          <Link
-            id="pelcro-link-redeem"
-            onClick={() => {
-              if (userHasAddress()) {
-                return setView("address-select");
-              }
-              return setView("address");
-            }}
-          >
+          <Link id="pelcro-link-redeem" onClick={switchToAddressView}>
             {t("redeem.footer.here")}
           </Link>{" "}
           {t("redeem.footer.toAdd")}
@@ -49,3 +51,5 @@ export const GiftRedeemModal = ({
     </Modal>
   );
 };
+
+GiftRedeemModal.viewId = "gift-redeem";

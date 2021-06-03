@@ -4,6 +4,7 @@ import useReducerWithSideEffects, {
   UpdateWithSideEffect,
   Update
 } from "use-reducer-with-side-effects";
+import { usePelcro } from "../../hooks/usePelcro";
 import {
   SET_PASSWORD,
   HANDLE_SUBMIT,
@@ -78,7 +79,7 @@ export const PasswordChangeContainer = ({
             }
           });
           dispatch({ type: PASSWORD_CHANGE_SUCCESS });
-          onSuccess();
+          onSuccess(res);
         }
       }
     );
