@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 - Added usePelcro global hook, to have access to pelcro UI state.
 - Added PelcroModalController component to orchestrate between modals & initialize features.
+- Setup tests in the repo and add added first test suite. [PRIVATE]
 
 ### Changed
 
@@ -18,11 +19,13 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 ## [Released]
 
 ## [0.17.12] - 2021-06-02
+
 ## Fixed
 
 - Subscriptions intervals always showing up as "1".
 
 ## [0.17.11] - 2021-06-01
+
 ## Changed
 
 - Address creation modal title wording.
