@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 - Added usePelcro global hook, to have access to pelcro UI state.
 - Added PelcroModalController component to orchestrate between modals & initialize features.
+- Setup tests in the repo and add added first test suite. [PRIVATE]
 
 ### Changed
 
