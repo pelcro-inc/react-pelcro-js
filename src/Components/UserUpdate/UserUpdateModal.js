@@ -24,7 +24,7 @@ export function UserUpdateModal({
 
   return (
     <Modal
-      id="pelcro-user-edit-modal"
+      id="pelcro-user-update-modal"
       onDisplay={onDisplay}
       onClose={onClose}
     >
