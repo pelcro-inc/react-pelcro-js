@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import Authorship from "../common/Authorship";
 import { withTranslation } from "react-i18next";
 import {
@@ -10,20 +9,12 @@ import {
 import { Button } from "../../SubComponents/Button";
 import { ReactComponent as CheckMark } from "../../assets/check-solid.svg";
 import { Badge } from "../../SubComponents/Badge";
+import { calcAndFormatItemsTotal } from "../../utils/utils";
 
 export class OrderConfirmModal extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      products: this.props.products
-    };
-
-    this.plan = this.props.plan;
-    this.product = this.props.product;
-
     this.locale = this.props.t;
-    this.site = window.Pelcro.site.read();
   }
 
   componentDidMount = () => {
@@ -31,34 +22,11 @@ export class OrderConfirmModal extends Component {
   };
 
   componentWillUnmount = () => {
-    this.removeAll();
+    this.props.resetCart();
   };
 
   handleSubmit = (e) => {
     if (e.key === "Enter") this.props.onClose();
-  };
-
-  removeAll = () => {
-    const productArr = this.state.products.slice();
-    for (const product of productArr) {
-      product.quantity = 0;
-    }
-    this.setState({ products: productArr });
-    this.props.setProductsForCart(this.state.products);
-  };
-
-  countTotal = () => {
-    const productArr = this.state.products.slice();
-    let total = 0;
-    for (const product of productArr) {
-      total += parseFloat(
-        ((product.price / 100) * product.quantity).toFixed(2)
-      );
-    }
-    return parseFloat(total).toLocaleString("fr-CA", {
-      style: "currency",
-      currency: "CAD"
-    });
   };
 
   render() {
@@ -83,49 +51,42 @@ export class OrderConfirmModal extends Component {
             </div>
             <div className="plc-mt-5 pelcro-order-summary-wrapper">
               <p className="plc-font-bold pelcro-order-summary-title">
-                Order summary
+                {this.locale("labels.summary")}
               </p>
-              {this.state.products.map((product) => {
+              {this.props.orderedItems.map((item) => {
                 return (
-                  product.quantity > 0 && (
-                    <div
-                      key={product.id}
-                      id={`pelcro-summary-product-${product.id}`}
-                      className="plc-flex plc-items-center plc-pt-2 plc-mt-2 plc-border-t plc-border-gray-400 plc-min-h-12 plc-justify-evenly pelcro-summary-product-wrapper"
-                    >
-                      <div className="plc-w-1/4 pelcro-summary-image-wrapper">
-                        {product.image && (
-                          <Badge content={product.quantity}>
-                            <img
-                              className="plc-object-contain plc-w-20 plc-h-20 pelcro-summary-product-image"
-                              alt={`image of ${product.name}`}
-                              src={product.image}
-                            />
-                          </Badge>
-                        )}
-                      </div>
-                      <div className="plc-w-1/2 plc-break-words pelcro-summary-product-name">
-                        {product.name}
-                      </div>
-                      <div className="plc-w-1/5 plc-text-center pelcro-summary-product-price">
-                        {parseFloat(
-                          (product.price / 100) * product.quantity
-                        ).toLocaleString("fr-CA", {
-                          style: "currency",
-                          currency: "CAD"
-                        })}
-                      </div>
+                  <div
+                    key={item.id}
+                    id={`pelcro-summary-product-${item.id}`}
+                    className="plc-flex plc-items-center plc-pt-2 plc-mt-2 plc-border-t plc-border-gray-400 plc-min-h-12 plc-justify-evenly pelcro-summary-product-wrapper"
+                  >
+                    <div className="plc-w-1/4 pelcro-summary-image-wrapper">
+                      {item.image && (
+                        <Badge content={item.quantity}>
+                          <img
+                            className="plc-object-contain plc-w-20 plc-h-20 pelcro-summary-product-image"
+                            alt={`image of ${item.name}`}
+                            src={item.image}
+                          />
+                        </Badge>
+                      )}
                     </div>
-                  )
+                    <div className="plc-w-1/2 plc-break-words pelcro-summary-product-name">
+                      {item.name}
+                    </div>
+                    <div className="plc-w-1/5 plc-text-center pelcro-summary-product-price">
+                      {calcAndFormatItemsTotal([item])}
+                    </div>
+                  </div>
                 );
               })}
 
               <div className="plc-flex plc-items-center plc-justify-end plc-pt-2 plc-mt-2 plc-font-bold plc-border-t plc-border-gray-400 pelcro-summary-total-wrapper">
                 <p className="plc-mr-1 pelcro-summary-total-text">
-                  Total:{" "}
+                  {this.locale("labels.total")}
                 </p>
                 <p className="pelcro-summary-total">
-                  {this.countTotal()}
+                  {calcAndFormatItemsTotal(this.props.orderedItems)}
                 </p>
               </div>
             </div>
@@ -147,12 +108,6 @@ export class OrderConfirmModal extends Component {
     );
   }
 }
-
-OrderConfirmModal.propTypes = {
-  plan: PropTypes.object,
-  product: PropTypes.object,
-  onClose: PropTypes.func
-};
 
 export const OrderConfirmModalWithTrans = withTranslation("shop")(
   OrderConfirmModal
