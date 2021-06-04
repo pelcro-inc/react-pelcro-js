@@ -1,17 +1,10 @@
-import React, { createContext, useEffect } from "react";
+import React, { createContext } from "react";
 import useReducerWithSideEffects, {
-  UpdateWithSideEffect,
-  Update
+  UpdateWithSideEffect
 } from "use-reducer-with-side-effects";
-import {
-  SET_PRODUCTS,
-  HANDLE_SUBMIT
-} from "../../utils/action-types";
+import { HANDLE_SUBMIT } from "../../utils/action-types";
 
-const initialState = {
-  products: [],
-  isEmpty: true
-};
+const initialState = {};
 const store = createContext(initialState);
 const { Provider } = store;
 
@@ -20,86 +13,18 @@ const CartContainer = ({
   className,
   onSuccess = () => {},
   onFailure = () => {},
-  getProducts = () => {},
   children
 }) => {
-  useEffect(() => {
-    if (window.Pelcro.ecommerce.products.read().length) {
-      dispatch({
-        type: SET_PRODUCTS,
-        payload: window.Pelcro.ecommerce.products
-          .read()
-          .map((prod) => prod.skus.map((sku) => sku))
-          .flat()
-          .map((product) => {
-            if (
-              window.Pelcro.cartProducts &&
-              window.Pelcro.cartProducts.length
-            ) {
-              product.quantity = window.Pelcro.cartProducts.filter(
-                (productId) => +productId === +product.id
-              ).length;
-            }
-
-            return product;
-          })
-      });
-    } else {
-      document.addEventListener(
-        "PelcroEcommerceProductsLoaded",
-        function (e) {
-          dispatch({
-            type: SET_PRODUCTS,
-            payload: window.Pelcro.ecommerce.products
-              .read()
-              .map((prod) => prod.skus.map((sku) => sku))
-              .flat()
-              .map((product) => {
-                if (
-                  window.Pelcro.cartProducts &&
-                  window.Pelcro.cartProducts.length
-                ) {
-                  product.quantity = window.Pelcro.cartProducts.filter(
-                    (productId) => +productId === +product.id
-                  ).length;
-                }
-
-                return product;
-              })
-          });
-        }
-      );
-    }
-  }, []);
   const submit = (state, dispatch) => {
-    const items = state.products
-      .filter((product) => product.quantity)
-      .map((product) => {
-        return {
-          sku_id: product.id,
-          quantity: product.quantity
-        };
-      });
-
-    onSuccess(items);
+    onSuccess();
   };
 
   const [state, dispatch] = useReducerWithSideEffects(
     (state, action) => {
       switch (action.type) {
-        case SET_PRODUCTS:
-          getProducts(action.payload);
-          return Update({
-            ...state,
-            products: action.payload,
-            isEmpty: !action.payload.filter(
-              (product) => product.quantity
-            ).length
-          });
-
         case HANDLE_SUBMIT:
           return UpdateWithSideEffect(
-            { ...state, disableSubmit: true },
+            { ...state },
             (state, dispatch) => submit(state, dispatch)
           );
         default:
