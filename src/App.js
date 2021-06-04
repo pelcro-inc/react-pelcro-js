@@ -44,12 +44,14 @@ class App extends Component {
   state = {
     site: window.Pelcro.site.read(),
     isAuthenticated: window.Pelcro.user.isAuthenticated(), // controls menu button displaying
-    order: null,
-    products: [],
+    cartItems: [],
     isRenewingGift: false,
     isGift: false,
     giftCode: "",
-    selectedAddressId: null
+    selectedAddressId: null,
+    meta: {
+      orderedItems: []
+    }
   };
 
   loadPaymentSDKs = () => {
@@ -111,9 +113,10 @@ class App extends Component {
   };
 
   initSite = () => {
-    this.setState({ site: window.Pelcro.site.read() }, () =>
-      this.initUI()
-    );
+    this.setState({ site: window.Pelcro.site.read() }, () => {
+      this.initUI();
+      // this.initializeEcomProds();
+    });
 
     ReactGA.initialize(window.Pelcro.site.read().google_analytics_id);
     ReactGA.plugin.require("ecommerce");
@@ -240,8 +243,6 @@ class App extends Component {
       return false;
     }
   };
-
-  getProducts = (products) => this.setState({ products });
 
   // displays required view
   initViews = () => {
@@ -439,29 +440,107 @@ class App extends Component {
   };
 
   renderShop = () => {
-    const products = document.getElementById("pelcro-shop");
+    const shopNode = document.getElementById("pelcro-shop");
 
-    if (products) {
+    if (shopNode) {
       ReactDOM.render(
         <div className="pelcro-root">
-          <ShopView
-            getProducts={this.getProducts}
-            products={this.state.products}
-          />
+          <ShopView addCartItem={this.addCartItem} />
         </div>,
-        products
+        shopNode
       );
     }
   };
 
-  setProductsForCart = (products) => {
-    this.setState({ products: products });
+  // initializeEcomProds = () => {
+  //   const getFilteredProducts = () =>
+  //     window.Pelcro.ecommerce.products
+  //       .read()
+  //       .map((prod) => prod.skus.map((sku) => sku))
+  //       .flat();
+
+  //   if (window.Pelcro.ecommerce.products.read().length) {
+  //     this.setState({ products: getFilteredProducts() });
+  //   } else {
+  //     document.addEventListener("PelcroEcommerceProductsLoaded", () =>
+  //       this.setState({ products: getFilteredProducts() })
+  //     );
+  //   }
+  // };
+
+  removeCartItem = (itemId) => {
+    const cartItems = this.state.cartItems;
+    const itemToRemoveIdx = cartItems.findIndex(
+      (item) => item.id === itemId
+    );
+    const itemToRemove = cartItems[itemToRemoveIdx];
+
+    if (itemToRemove.quantity > 1) {
+      // reduce quantity
+      const newItems = cartItems.map((item, i) => {
+        if (i === itemToRemoveIdx) {
+          return {
+            ...item,
+            quantity: item.quantity - 1
+          };
+        }
+
+        return item;
+      });
+
+      return this.setState({ cartItems: newItems });
+    }
+
+    // remove item
+    const newItems = [
+      ...cartItems.slice(0, itemToRemoveIdx),
+      ...cartItems.slice(itemToRemoveIdx + 1)
+    ];
+
+    this.setState({ cartItems: newItems });
   };
 
-  setOrder = (items) => {
-    const order = this.state.order ?? {};
-    order.items = items;
-    this.setState({ order });
+  addCartItem = (itemSkuId) => {
+    const itemToAdd = window.Pelcro.ecommerce.products.getBySkuId(
+      itemSkuId
+    );
+
+    if (!itemToAdd) {
+      console.error("invalid item SKU id");
+      return;
+    }
+
+    const cartItems = this.state.cartItems;
+    const itemAlreadyExists = cartItems.includes(
+      (item) => item.id === itemToAdd.id
+    );
+
+    if (itemAlreadyExists) {
+      // increase quantity
+      const itemsWithIncreasedQuantity = cartItems.map((item) => {
+        if (item.id === itemToAdd.id) {
+          return {
+            ...item,
+            quantity: item.quantity + 1
+          };
+        }
+
+        return item;
+      });
+
+      return this.setState({ cartItems: itemsWithIncreasedQuantity });
+    }
+
+    // add new item
+    const newItemWithQuantity = { ...itemToAdd, quantity: 1 };
+
+    return this.setState((prevState) => ({
+      cartItems: [...prevState.cartItems, newItemWithQuantity]
+    }));
+  };
+
+  resetCart = () => {
+    this.setState({ cartItems: [] });
   };
 
   setProduct = (e) => {
@@ -572,7 +651,7 @@ class App extends Component {
     );
   };
   handleAfterRegistrationLogic = () => {
-    const { product, order, giftCode, isGift } = this.state;
+    const { product, cartItems, giftCode, isGift } = this.state;
 
     ReactGA.event({
       category: "ACTIONS",
@@ -583,7 +662,7 @@ class App extends Component {
     this.loggedIn();
 
     // If product and plan are not selected
-    if (!product && !order && !giftCode) {
+    if (!product && !cartItems.length && !giftCode) {
       return this.resetView();
     }
 
@@ -597,7 +676,7 @@ class App extends Component {
       return this.setView("gift");
     }
 
-    if (order) {
+    if (cartItems.length) {
       return this.displayAddressView();
     }
 
@@ -798,7 +877,7 @@ class App extends Component {
                   return this.setView("payment");
                 }
 
-                if (this.state.order) {
+                if (this.state.cartItems.length) {
                   this.setState({ selectedAddressId });
                   return this.setView("orderCreate");
                 }
@@ -880,7 +959,7 @@ class App extends Component {
                   return this.setView("payment");
                 }
 
-                if (this.state.order) {
+                if (this.state.cartItems.length) {
                   this.setState({ selectedAddressId: newAddressId });
                   return this.setView("orderCreate");
                 }
@@ -966,12 +1045,10 @@ class App extends Component {
 
           {this.state.view === "cart" && (
             <CartModal
-              getProducts={this.getProducts}
-              products={this.state.products}
+              items={this.state.cartItems}
+              removeItem={this.removeCartItem}
               onClose={this.resetView}
-              onSuccess={(items) => {
-                this.setOrder(items);
-
+              onSuccess={() => {
                 if (!window.Pelcro.user.isAuthenticated()) {
                   return this.setView("register");
                 }
@@ -982,7 +1059,7 @@ class App extends Component {
 
           {this.state.view === "orderCreate" && (
             <OrderCreateModal
-              order={this.state.order}
+              cartItems={this.state.cartItems}
               selectedAddressId={this.state.selectedAddressId}
               setView={this.setView}
               onClose={this.resetView}
@@ -994,16 +1071,15 @@ class App extends Component {
                 });
               }}
               onSuccess={() => {
-                this.setOrder(null);
+                this.setState({ cartItems: [] });
                 this.setView("confirm");
               }}
             />
           )}
           {this.state.view === "confirm" && (
             <OrderConfirmModal
-              products={this.state.products}
-              setProductsForCart={this.setProductsForCart}
-              order={this.state.order}
+              resetCart={this.resetCart}
+              orderedItems={this.state.meta.orderedItems}
               plan={this.state.plan}
               product={this.state.product}
               onClose={this.resetView}
