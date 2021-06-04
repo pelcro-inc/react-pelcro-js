@@ -128,10 +128,10 @@ describe("Actions", () => {
       const store = usePelcro();
 
       act(() => {
-        store.switchView("select");
+        store.switchView("plan-select");
       });
 
-      expect(store.view).toEqual("select");
+      expect(store.view).toEqual("plan-select");
     });
 
     test("switchView('dashboard') should switch to login view when user is not authenticated", () => {
@@ -240,7 +240,7 @@ describe("Actions", () => {
       const store = usePelcro();
 
       act(() => {
-        store.switchView("select");
+        store.switchView("plan-select");
       });
 
       act(() => {

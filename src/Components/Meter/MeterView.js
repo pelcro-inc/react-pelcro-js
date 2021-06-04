@@ -23,7 +23,7 @@ export const MeterView = () => {
         {subtitle}{" "}
         <Link
           className="plc-ml-1"
-          onClick={() => switchView("select")}
+          onClick={() => switchView("plan-select")}
         >
           {t("messages.subscribeNow")}
         </Link>

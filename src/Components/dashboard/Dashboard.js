@@ -147,7 +147,7 @@ class Dashboard extends Component {
       this.props.setProductAndPlan(null, null, true);
     }
 
-    return this.props.setView("select");
+    return this.props.setView("plan-select");
   };
 
   displayAddressCreate = () => {
@@ -284,7 +284,7 @@ class Dashboard extends Component {
 
           this.props.setProductAndPlan(product, plan);
           this.props.setSubscriptionIdToRenew(sub.id);
-          this.props.setView("select");
+          this.props.setView("plan-select");
         };
 
         return (
@@ -448,7 +448,7 @@ class Dashboard extends Component {
           this.props.setProductAndPlan(product, plan);
           this.props.setSubscriptionIdToRenew(recipient.id);
           this.props.setIsRenewingGift(true);
-          this.props.setView("select");
+          this.props.setView("plan-select");
         };
 
         return (

@@ -87,7 +87,7 @@ class DefaultNewsLetter extends Component {
   };
 
   displaySelectView = () => {
-    this.props.setView("select");
+    this.props.setView("plan-select");
   };
 
   submitNewsletter = () => {

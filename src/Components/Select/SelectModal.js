@@ -49,7 +49,7 @@ export function SelectModalWithHook(props) {
   );
 }
 
-SelectModalWithHook.viewId = "select";
+SelectModalWithHook.viewId = "plan-select";
 class SelectModal extends Component {
   constructor(props) {
     super(props);

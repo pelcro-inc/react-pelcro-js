@@ -54,7 +54,7 @@ export const initPaywalls = () => {
     } else if (paywallMethods?.displayNewsletterPaywall()) {
       switchView("newsletter");
     } else if (paywallMethods?.displayPaywall()) {
-      switchView("select");
+      switchView("plan-select");
     }
   }
 };
@@ -186,7 +186,7 @@ export const initViewFromURL = () => {
   const { switchView, whenSiteReady } = usePelcro.getStore();
   if (isValidViewFromURL()) {
     whenSiteReady(() => {
-      if (view === "select") {
+      if (view === "plan-select") {
         return initSubscriptionFromURL();
       }
 
@@ -226,7 +226,7 @@ export const initSubscriptionFromURL = () => {
 
     if (!selectedProduct || !selectedPlan) {
       if (productId && planId) {
-        return switchView("select");
+        return switchView("plan-select");
       }
 
       return;

@@ -109,7 +109,7 @@ export const init = () => {
             });
 
             if (!selectedProduct || !selectedPlan) {
-              return switchView("select");
+              return switchView("plan-select");
             }
 
             if (!isAuthenticated()) {
@@ -134,7 +134,7 @@ export const init = () => {
       } else {
         pelcroSubscribeButtonsByClass[j].addEventListener(
           "click",
-          () => switchView("select")
+          () => switchView("plan-select")
         );
       }
     }
@@ -212,7 +212,7 @@ export const init = () => {
           set({ isGift: true });
         }
 
-        switchView("select");
+        switchView("plan-select");
       });
     }
   }

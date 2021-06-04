@@ -23,7 +23,7 @@ export function LoginModal({ onDisplay, onClose, ...props }) {
   };
 
   const onCreateAccountClick = () => {
-    switchView("select");
+    switchView("plan-select");
   };
 
   const onForgotPassword = () => {

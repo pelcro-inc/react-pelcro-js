@@ -47,7 +47,7 @@ export const GiftCreateModal = ({
           {t("messages.selectPlan") + " "}
           <Link
             id="pelcro-link-select-plan"
-            onClick={() => switchView("select")}
+            onClick={() => switchView("plan-select")}
           >
             {t("messages.here")}
           </Link>
