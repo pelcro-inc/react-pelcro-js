@@ -5,22 +5,16 @@ import { Button } from "../../SubComponents/Button";
 import { useTranslation } from "react-i18next";
 
 export const CartSubmit = ({ name, ...otherProps }) => {
-  const {
-    dispatch,
-    state: { isEmpty }
-  } = useContext(store);
+  const { dispatch } = useContext(store);
 
   const { t } = useTranslation("cart");
 
-  if (!isEmpty) {
-    return (
-      <Button
-        {...otherProps}
-        onClick={() => dispatch({ type: HANDLE_SUBMIT })}
-      >
-        {name ?? t("confirm")}
-      </Button>
-    );
-  }
-  return null;
+  return (
+    <Button
+      {...otherProps}
+      onClick={() => dispatch({ type: HANDLE_SUBMIT })}
+    >
+      {name ?? t("confirm")}
+    </Button>
+  );
 };

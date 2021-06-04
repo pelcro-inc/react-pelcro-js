@@ -10,5 +10,9 @@
       "body": "Your order has been confirmed and will be shipped within the next few days. You'll shortly receive an email confirmation of this order."
     },
     "haveQuestions": "If you have any queries please don't hesitate to contact us!"
+  },
+  "labels": {
+    "summary": "Order summary",
+    "total": "total"
   }
 }

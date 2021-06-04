@@ -10,5 +10,9 @@
       "body": "Votre commande a été confirmée et vous sera expédiée dans les prochains jours. Vous recevrez un courriel de confirmation sous peu."
     },
     "haveQuestions": "N’hésitez pas à nous contacter pour toute question !"
+  },
+  "labels": {
+    "summary": "récapitulatif de commande",
+    "total": "total"
   }
 }
