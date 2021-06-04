@@ -1,5 +1,5 @@
 import { saveToMetadataButton } from "./saveToMetadata";
-import { userHasAddress } from "../../../utils/utils";
+import { getAllSkus, userHasAddress } from "../../../utils/utils";
 import i18n from "../../../i18n";
 
 const translations = i18n.t("common:buttons", {
@@ -135,9 +135,7 @@ export const init = (app) => {
         pelcroAddToCartButtonsByClass[i].addEventListener(
           "click",
           (e) => {
-            window.Pelcro.cartProducts =
-              window.Pelcro?.cartProducts || [];
-            window.Pelcro.cartProducts.push(e.target.dataset.skuId);
+            app.addItemToOrder(e.target.dataset.skuId);
           }
         );
       }
@@ -160,11 +158,7 @@ export const init = (app) => {
               pelcroAddToCartButtonsByClass[i].addEventListener(
                 "click",
                 (e) => {
-                  window.Pelcro.cartProducts =
-                    window.Pelcro?.cartProducts || [];
-                  window.Pelcro.cartProducts.push(
-                    e.target.dataset.skuId
-                  );
+                  app.addItemToOrder(e.target.dataset.skuId);
                 }
               );
             }
@@ -184,38 +178,18 @@ export const init = (app) => {
         "click",
         (e) => {
           const skuId = Number(e.target.dataset.skuId);
-          // initialize with current product listing
-          const allProducts =
-            window.Pelcro.ecommerce.products
-              .read()
-              .flatMap((prod) => prod.skus.map((sku) => sku))
-              // reset the cart quantities, button's associated item should be the only item in cart
-              .map((sku) => {
-                sku.quantity = 0;
-                return sku;
-              }) ?? [];
 
-          const productIndex = allProducts.findIndex(
+          const allProducts = getAllSkus();
+
+          const product = allProducts.find(
             (prod) => prod.id === skuId
           );
 
-          if (productIndex === -1) {
+          if (!product) {
             return;
           }
 
-          // set quantity of the product to 1 as it's a direct purchase button
-          allProducts[productIndex] = {
-            ...allProducts[productIndex],
-            quantity: 1
-          };
-
-          app.setProductsForCart(allProducts);
-          app.setOrder([
-            {
-              sku_id: skuId,
-              quantity: 1
-            }
-          ]);
+          app.addItemToOrder(product);
 
           if (window.Pelcro.user.isAuthenticated()) {
             if (userHasAddress()) {
