@@ -115,11 +115,9 @@ export { PasswordChangeButton } from "./Components/PasswordChange/PasswordChange
 export { CartContainer } from "./Components/Cart/CartContainer";
 export { CartModal } from "./Components/Cart/CartModal";
 export { CartView } from "./Components/Cart/CartView";
-export { CartRemoveProductButton } from "./Components/Cart/CartRemoveProductButton";
+export { CartRemoveItemButton } from "./Components/Cart/CartRemoveItemButton";
 export { CartSubmit } from "./Components/Cart/CartSubmit";
-export { CartTotalPrice } from "./Components/Cart/CartTotalPrice";
 
-export { ShopContainer } from "./Components/Shop/ShopContainer";
 export { ShopSelectProductButton } from "./Components/Shop/ShopSelectProductButton";
 export { ShopView } from "./Components/Shop/ShopView";
 export { OrderCreateSubmitButton } from "./Components/OrderCreate/OrderCreateSubmitButton";
