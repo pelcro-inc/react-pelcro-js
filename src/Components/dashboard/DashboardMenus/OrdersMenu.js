@@ -33,7 +33,11 @@ export const OrdersMenu = () => {
   );
 };
 
-const OrderItems = ({ orders, activeMenu, toggleActiveMenu }) => {
+export const OrderItems = ({
+  orders,
+  activeMenu,
+  toggleActiveMenu
+}) => {
   const getItemsAmount = (orderId) => {
     return orders
       ?.find((order) => order.id === orderId)

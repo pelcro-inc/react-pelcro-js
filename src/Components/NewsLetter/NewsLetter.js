@@ -12,6 +12,33 @@ import { Alert } from "../../SubComponents/Alert";
 import { Button } from "../../SubComponents/Button";
 import { Input } from "../../SubComponents/Input";
 import { Link } from "../../SubComponents/Link";
+import { usePelcro } from "../../hooks/usePelcro";
+
+/**
+ *
+ */
+export function NewsletterWithHook(props) {
+  React.useEffect(() => {
+    props.onDisplay?.();
+  }, []);
+
+  const { switchView, resetView, product } = usePelcro();
+
+  return (
+    <NewsLetter
+      onClose={() => {
+        props.onClose?.();
+        resetView();
+      }}
+      onSuccess={props.onSuccess}
+      onFailure={props.onFailure}
+      setView={switchView}
+      product={product}
+    />
+  );
+}
+
+NewsletterWithHook.viewId = "newsletter";
 
 class DefaultNewsLetter extends Component {
   constructor(props) {
@@ -43,10 +70,6 @@ class DefaultNewsLetter extends Component {
   }
 
   componentDidMount = () => {
-    window.Pelcro.insight.track("Modal Displayed", {
-      name: "newsletter"
-    });
-
     document.addEventListener("keydown", this.handleSubmit);
   };
 
@@ -64,7 +87,7 @@ class DefaultNewsLetter extends Component {
   };
 
   displaySelectView = () => {
-    this.props.setView("select");
+    this.props.setView("plan-select");
   };
 
   submitNewsletter = () => {
@@ -84,11 +107,14 @@ class DefaultNewsLetter extends Component {
       },
       (err, res) => {
         this.setState({ disableSubmit: false });
-        if (err)
+        if (err) {
+          this.props.onFailure?.(err);
           return this.setState({
             alert: { type: "error", content: getErrorMessages(err) }
           });
+        }
 
+        this.props.onSuccess?.(res);
         try {
           this.postSubmit();
         } catch {
@@ -129,7 +155,6 @@ class DefaultNewsLetter extends Component {
       <Modal
         hideCloseButton={!this.closeButton}
         onClose={this.props.onClose}
-        hideHeaderLogo={this.props.hideHeaderLogo}
         id="pelcro-newsletter-modal"
       >
         <ModalBody>
@@ -188,7 +213,7 @@ class DefaultNewsLetter extends Component {
               </p>
               <Button
                 role="submit"
-                className="plc-mt-2 plc-w-full"
+                className="plc-w-full plc-mt-2"
                 id="pelcro-submit"
                 onClick={this.submitNewsletter}
                 disabled={this.state.disableSubmit}

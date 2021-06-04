@@ -1,3 +1,6 @@
+import { usePelcro } from "../hooks/usePelcro";
+import ReactGA from "react-ga";
+
 export const formatDiscountedPrice = (planAmount, percentageOff) =>
   parseFloat(
     parseFloat(
@@ -123,4 +126,81 @@ export const calcAndFormatItemsTotal = (items) => {
   const currency = items[0].currency;
   const locale = window.Pelcro.site.read().default_locale;
   return getFormattedPriceByLocal(total, currency, locale);
+};
+
+/**
+ * returns true if the URL contains a supported view trigger URL
+ * @return {boolean}
+ */
+export const isValidViewFromURL = () => {
+  const view = window.Pelcro.helpers.getURLParameter("view");
+  if (
+    [
+      "login",
+      "register",
+      "select",
+      "gift-redeem",
+      "password-forgot",
+      "password-reset",
+      "password-change",
+      "source-create",
+      "user-edit",
+      "newsletter",
+      "address-create"
+    ].includes(view)
+  ) {
+    return true;
+  }
+
+  return false;
+};
+
+export const enableScroll = () => {
+  document.body.classList.remove("pelcro-modal-open");
+};
+
+export const disableScroll = () => {
+  if (!document.body.classList.contains("pelcro-modal-open")) {
+    document.body.classList.add("pelcro-modal-open");
+  }
+};
+
+export const trackSubscriptionOnGA = () => {
+  const { product, plan, couponCode } = usePelcro.getStore();
+
+  const subscriptions = window.Pelcro.subscription.list();
+  const lastSubscription = subscriptions?.[subscriptions.length - 1];
+
+  if (!lastSubscription) {
+    return;
+  }
+
+  ReactGA?.set?.({
+    currencyCode:
+      window.Pelcro.user.read()?.currency ?? this.state.plan.currency
+  });
+
+  ReactGA?.plugin?.execute?.("ecommerce", "addTransaction", {
+    id: lastSubscription.id,
+    affiliation: "Pelcro",
+    revenue: plan?.amount ? plan.amount / 100 : 0,
+    coupon: couponCode
+  });
+
+  ReactGA?.plugin?.execute?.("ecommerce", "addItem", {
+    id: lastSubscription.id,
+    name: product.name,
+    category: product.description,
+    variant: plan.nickname,
+    price: plan?.amount ? plan.amount / 100 : 0,
+    quantity: 1
+  });
+
+  ReactGA?.plugin?.execute?.("ecommerce", "send");
+
+  ReactGA?.event?.({
+    category: "ACTIONS",
+    action: "Subscribed",
+    nonInteraction: true
+  });
 };

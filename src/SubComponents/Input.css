@@ -13,6 +13,6 @@
     @apply plc-ring-2 plc-ring-red-400;
   }
   .pelcro-root .pelcro-input-field {
-    @apply plc-w-full plc-p-2 plc-text-gray-900 plc-border plc-border-solid plc-border-gray-300 plc-rounded-sm plc-outline-none plc-appearance-none plc-bg-gray-50 focus:plc-ring-2 focus:plc-ring-primary-400 disabled:plc-bg-gray-300 disabled:plc-cursor-not-allowed;
+    @apply plc-w-full plc-p-2 plc-text-gray-900 plc-border plc-border-gray-300 plc-border-solid plc-rounded-sm plc-outline-none plc-appearance-none plc-bg-gray-50 focus:plc-ring-2 focus:plc-ring-primary-400 disabled:plc-bg-gray-300 disabled:plc-cursor-not-allowed;
   }
 }

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { ReactComponent as ChevronRightIcon } from "../../assets/chevron-right.svg";
+import { OrderItems } from "../dashboard/DashboardMenus/OrdersMenu";
 
 /**
  * @typedef {Object} AccordionPropsType
@@ -22,13 +23,17 @@ export const Accordion = ({ children, initialActiveMenu = "" }) => {
     }
   };
 
-  return React.Children.map(children, (child, i) =>
-    React.cloneElement(child, {
-      activeMenu,
-      toggleActiveMenu,
-      key: i
-    })
-  );
+  return React.Children.map(children, (child, i) => {
+    if (child.type === Accordion.item || child.type === OrderItems) {
+      return React.cloneElement(child, {
+        activeMenu,
+        toggleActiveMenu,
+        key: i
+      });
+    } else {
+      return child;
+    }
+  });
 };
 
 /**

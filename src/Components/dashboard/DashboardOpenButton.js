@@ -1,16 +1,18 @@
 // The button in the lower right that shows the dashboard.
 
 import React from "react";
+import { usePelcro } from "../../hooks/usePelcro";
 
-export const DashboardOpenButton = (props) => {
-  const { openDashboard } = props;
+export const DashboardOpenButton = () => {
+  const { switchView } = usePelcro();
+
   return (
     <div className="plc-fixed plc-right-4 plc-bottom-4 pelcro-open-dashboard-btn">
       <button
         className="plc-bg-white plc-border-2 plc-rounded-full focus:plc-outline-none plc-border-primary-300"
         name="menu"
         id="pelcro-view-menu"
-        onClick={openDashboard}
+        onClick={() => switchView("dashboard")}
       >
         <svg
           className="plc-w-10 plc-h-10 plc-text-primary-400 hover:plc-text-primary-500"
@@ -28,3 +30,5 @@ export const DashboardOpenButton = (props) => {
     </div>
   );
 };
+
+DashboardOpenButton.viewId = "dashboard-open";

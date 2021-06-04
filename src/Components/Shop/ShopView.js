@@ -41,3 +41,5 @@ export const ShopView = ({ addCartItem }) => {
     </div>
   );
 };
+
+ShopView.viewId = "shop";

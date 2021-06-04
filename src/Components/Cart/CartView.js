@@ -66,7 +66,7 @@ export const CartView = (props) => {
             </div>
             <CartSubmit
               role="submit"
-              className="plc-mt-2 plc-w-full"
+              className="plc-w-full plc-mt-2"
               id="pelcro-submit"
               name={t("confirm")}
               autoFocus={true}

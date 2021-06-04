@@ -11,6 +11,36 @@ import { ReactComponent as CheckMark } from "../../assets/check-solid.svg";
 import { Badge } from "../../SubComponents/Badge";
 import { calcAndFormatItemsTotal } from "../../utils/utils";
 
+/**
+ *
+ */
+export function OrderConfirmModalWithHook(props) {
+  React.useEffect(() => {
+    props.onDisplay?.();
+  }, []);
+
+  // temp solution until the ecom refactor
+  const products = window.Pelcro.ecommerce.products
+    .read()
+    .flatMap((prod) => prod.skus.map((sku) => sku));
+
+  const { order, switchView, resetView, set } = usePelcro();
+
+  return (
+    <OrderConfirmModalWithTrans
+      products={products}
+      order={order}
+      onClose={() => {
+        props.onClose?.();
+        set({ order: null });
+        resetView();
+      }}
+      setView={switchView}
+    />
+  );
+}
+
+OrderConfirmModalWithHook.viewId = "order-confirm";
 export class OrderConfirmModal extends Component {
   constructor(props) {
     super(props);
@@ -35,7 +65,6 @@ export class OrderConfirmModal extends Component {
         id="pelcro-order-confirm-modal"
         className="plc-border-t-8 plc-border-primary-500"
         onClose={this.props.onClose}
-        hideHeaderLogo={this.props.hideHeaderLogo}
       >
         <ModalBody>
           <div id="pelcro-order-confirm-view">

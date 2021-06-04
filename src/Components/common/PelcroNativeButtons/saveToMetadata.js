@@ -1,11 +1,8 @@
 import ReactGA from "react-ga";
+import { usePelcro } from "../../../hooks/usePelcro";
 
 class SaveToMetadataButtonClass {
-  app = null;
-
-  init(app) {
-    this.app = app;
-
+  init() {
     if (window.Pelcro.user.read().metadata) {
       this.#markAllSavedButtons();
     } else {
@@ -29,7 +26,9 @@ class SaveToMetadataButtonClass {
    * Unauthenticated callback
    */
   unauthenticated = () => {
-    this.#onClick(this.app.displayLoginView);
+    const { switchView } = usePelcro.getStore();
+
+    this.#onClick(() => switchView("login"));
     this.#unmarkAllSavedButtons();
   };
 
@@ -151,7 +150,7 @@ class SaveToMetadataButtonClass {
           }
 
           this.#markButtonAsSaved(button);
-          ReactGA?.event({
+          ReactGA?.event?.({
             category: "ACTIONS",
             action: "Save/Follow",
             label: buttonMetadata?.title
@@ -189,7 +188,7 @@ class SaveToMetadataButtonClass {
           }
 
           this.#unmarkSavedButton(button);
-          ReactGA?.event({
+          ReactGA?.event?.({
             category: "ACTIONS",
             action: "Unsave/Unfollow",
             label: title

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import ReactGA from "react-ga";
 import PropTypes from "prop-types";
 import Authorship from "../common/Authorship";
 import { withTranslation } from "react-i18next";
@@ -11,8 +12,44 @@ import { Link } from "../../SubComponents/Link";
 import { Button } from "../../SubComponents/Button";
 import { Checkbox } from "../../SubComponents/Checkbox";
 import { Radio } from "../../SubComponents/Radio";
-import { userHasAddress } from "../../utils/utils";
+import { usePelcro } from "../../hooks/usePelcro";
 
+/**
+ *
+ */
+export function SelectModalWithHook(props) {
+  React.useEffect(() => {
+    props.onDisplay?.();
+  }, []);
+
+  const {
+    isGift,
+    plan,
+    product,
+    isRenewingGift,
+    switchView,
+    resetView,
+    set
+  } = usePelcro();
+  return (
+    <SelectModalWithTrans
+      isGift={isGift}
+      disableGifting={isRenewingGift}
+      plan={plan}
+      product={product}
+      onClose={() => {
+        props.onClose?.();
+        resetView();
+      }}
+      setProductAndPlan={(product, plan, isGift) =>
+        set({ product, plan, isGift })
+      }
+      setView={switchView}
+    />
+  );
+}
+
+SelectModalWithHook.viewId = "plan-select";
 class SelectModal extends Component {
   constructor(props) {
     super(props);
@@ -50,9 +87,6 @@ class SelectModal extends Component {
         mode: "plan"
       });
     }
-    window.Pelcro.insight.track("Modal Displayed", {
-      name: "select"
-    });
 
     document.addEventListener("keydown", this.handleSubmit);
   };
@@ -109,7 +143,7 @@ class SelectModal extends Component {
       return (
         <div
           key={product.id}
-          className="plc-flex plc-items-start plc-space-x-3 plc-p-2 plc-mt-4 plc-border plc-border-primary-500 plc-border-solid plc-rounded plc-text-gray-900 pelcro-select-product-wrapper"
+          className="plc-flex plc-items-start plc-p-2 plc-mt-4 plc-space-x-3 plc-text-gray-900 plc-border plc-border-solid plc-rounded plc-border-primary-500 pelcro-select-product-wrapper"
         >
           {product.image && (
             <img
@@ -125,7 +159,7 @@ class SelectModal extends Component {
             }`}
           >
             <div className="plc-w-full pelcro-select-product-header">
-              <p className="plc-font-bold  pelcro-select-product-title">
+              <p className="plc-font-bold pelcro-select-product-title">
                 {product.name}
               </p>
               <p className="plc-text-xs pelcro-select-product-description">
@@ -162,7 +196,7 @@ class SelectModal extends Component {
       return (
         <div
           key={plan.id}
-          className="plc-p-2 plc-mx-3 plc-mt-2 plc-border plc-border-gray-400 plc-border-solid plc-rounded plc-text-gray-900 pelcro-select-plan-wrapper"
+          className="plc-p-2 plc-mx-3 plc-mt-2 plc-text-gray-900 plc-border plc-border-gray-400 plc-border-solid plc-rounded pelcro-select-plan-wrapper"
         >
           <Radio
             className="plc-self-start pelcro-select-plan-radio"
@@ -230,22 +264,24 @@ class SelectModal extends Component {
     const { setView } = this.props;
     const isAuthenticated = window.Pelcro.user.isAuthenticated();
 
+    const {
+      switchToAddressView,
+      switchToPaymentView
+    } = usePelcro.getStore();
+
     if (!isAuthenticated) {
       return setView("register");
     }
 
     if (isGift) {
-      return setView("gift");
+      return setView("gift-create");
     }
 
     if (product.address_required) {
-      if (userHasAddress()) {
-        return setView("address-select");
-      }
-      return setView("address");
+      return switchToAddressView();
     }
 
-    return setView("payment");
+    return switchToPaymentView();
   };
 
   displayLoginView = () => {
@@ -256,13 +292,13 @@ class SelectModal extends Component {
     const { disableGifting } = this.props;
 
     if (this.state.mode === "product") {
-      this.props.ReactGA.event({
+      ReactGA?.event?.({
         category: "VIEWS",
         action: "Product Modal Viewed",
         nonInteraction: true
       });
     } else if (this.state.mode === "plan") {
-      this.props.ReactGA.event({
+      ReactGA?.event?.({
         category: "VIEWS",
         action: "Plan Modal Viewed",
         nonInteraction: true
@@ -273,7 +309,6 @@ class SelectModal extends Component {
       <Modal
         hideCloseButton={!this.closeButton}
         onClose={this.props.onClose}
-        hideHeaderLogo={this.props.hideHeaderLogo}
         id="pelcro-selection-modal"
       >
         <ModalBody>
@@ -317,7 +352,7 @@ class SelectModal extends Component {
                   disabled={this.state.disabled}
                   onClick={this.submitOption}
                   id="pelcro-submit"
-                  className="plc-mt-2 plc-w-full"
+                  className="plc-w-full plc-mt-2"
                 >
                   {this.locale("buttons.next")}
                 </Button>
