@@ -18,7 +18,7 @@ export const CartRemoveProductButton = ({
     const productArr = products.slice();
 
     for (const product of productArr) {
-      if (+product.viewId === +id) {
+      if (+product.id === +id) {
         if (product.quantity === 1) {
           product.quantity -= 1;
 

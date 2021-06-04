@@ -9,12 +9,16 @@ import Authorship from "../common/Authorship";
 import { CartView } from "./CartView";
 
 export const CartModal = ({ onDisplay, onClose, ...otherProps }) => {
-  const { switchView, switchToAddressView } = usePelcro();
+  const {
+    switchView,
+    switchToAddressView,
+    isAuthenticated
+  } = usePelcro();
 
   const onSuccess = (items) => {
     otherProps.onSuccess?.(items);
 
-    if (!window.Pelcro.user.isAuthenticated()) {
+    if (!isAuthenticated()) {
       return switchView("register");
     }
 

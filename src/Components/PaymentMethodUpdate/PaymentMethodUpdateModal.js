@@ -20,7 +20,7 @@ export const PaymentMethodUpdateModal = (props) => {
 
   return (
     <Modal
-      id="pelcro-source-create-modal"
+      id="pelcro-payment-method-update-modal"
       onDisplay={props.onDisplay}
       onClose={props.onClose}
     >

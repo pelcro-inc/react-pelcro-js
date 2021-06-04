@@ -134,7 +134,6 @@ export const isValidViewFromURL = () => {
       "select",
       "gift-redeem",
       "password-forgot",
-      "password-forget",
       "password-reset",
       "password-change",
       "source-create",

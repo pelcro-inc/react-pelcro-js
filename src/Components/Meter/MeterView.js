@@ -5,7 +5,7 @@ import { Link } from "../../SubComponents/Link";
 
 export const MeterView = () => {
   const { t } = useTranslation("meter");
-  const { switchView, product } = usePelcro();
+  const { switchView, product, isAuthenticated } = usePelcro();
 
   const paywallProduct =
     product ?? window.Pelcro.paywall.getProduct();
@@ -27,7 +27,7 @@ export const MeterView = () => {
         >
           {t("messages.subscribeNow")}
         </Link>
-        {!window.Pelcro.user.isAuthenticated() && (
+        {!isAuthenticated() && (
           <>
             <br />
             <span>

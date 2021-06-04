@@ -18,11 +18,15 @@ export const GiftRedeemModal = ({
   ...otherProps
 }) => {
   const { t } = useTranslation("register");
-  const { switchView, switchToAddressView } = usePelcro();
+  const {
+    switchView,
+    switchToAddressView,
+    isAuthenticated
+  } = usePelcro();
 
   const onSuccess = (giftCode) => {
     otherProps.onSuccess?.(giftCode);
-    if (window.Pelcro.user.isAuthenticated()) {
+    if (isAuthenticated()) {
       switchToAddressView();
     } else {
       switchView("register");

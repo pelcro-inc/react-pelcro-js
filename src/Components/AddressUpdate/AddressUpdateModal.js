@@ -14,7 +14,7 @@ export const AddressUpdateModal = ({
 }) => {
   return (
     <Modal
-      id="pelcro-address-edit-modal"
+      id="pelcro-address-update-modal"
       onDisplay={onDisplay}
       onClose={onClose}
     >
