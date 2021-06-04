@@ -1,7 +1,7 @@
 {
   "name": "@pelcro/react-pelcro-js",
   "description": "Pelcro's React UI Elements",
-  "version": "0.17.14",
+  "version": "0.17.15",
   "private": false,
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
@@ -10,11 +10,11 @@
   ],
   "scripts": {
     "preinstall": "git config core.hooksPath qa/hooks",
-    "postpublish": "git push&&git push --tags",
+    "postpublish": "",
     "start": "webpack serve",
     "generateFiles": "SET NODE_ENV=production&&rollup -c",
-    "release": "SET NODE_ENV=production&&yarn generateFiles && yarn publish",
-    "release:next": "SET NODE_ENV=production&&yarn generateFiles && yarn publish --tag next",
+    "release": "SET NODE_ENV=production&&yarn generateFiles&&yarn publish&&git push&&git push --tags",
+    "release:next": "SET NODE_ENV=production&&yarn generateFiles&&yarn publish --tag next&&git push&&git push --tags",
     "lint": "eslint ./src/**/*.js --fix",
     "test": "node ./__tests__/sdkDownloader&&jest --watchAll"
   },
