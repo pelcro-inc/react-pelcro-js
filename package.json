@@ -10,7 +10,6 @@
   ],
   "scripts": {
     "preinstall": "git config core.hooksPath qa/hooks",
-    "postpublish": "",
     "start": "webpack serve",
     "generateFiles": "SET NODE_ENV=production&&rollup -c",
     "release": "SET NODE_ENV=production&&yarn generateFiles&&yarn publish&&git push&&git push --tags",

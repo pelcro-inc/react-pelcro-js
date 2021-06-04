@@ -60,7 +60,7 @@ const gitJokes = [
 const message = fs.readFileSync(process.argv[2], "utf8").trim();
 if (
   message.match(
-    /^\[(FEAT|TEST|CI\/CD|REFACTOR|STYLE|DOCS|FIX)\]+ .*/gm
+    /^\[(FEAT|TEST|CI\/CD|REFACTOR|STYLE|DOCS|FIX|CHORES)\]+ .*/gm
   )
 ) {
   console.log(
@@ -83,6 +83,12 @@ if (
   console.log(
     "\x1b[36m%s\x1b[0m",
     "Default Merge message is accepted! Happy merging =)",
+    "\x1b[0m"
+  );
+} else if (message.match(/^(v).*/gm)) {
+  console.log(
+    "\x1b[36m%s\x1b[0m",
+    "Default release message is accepted! Happy merging =)",
     "\x1b[0m"
   );
 } else {
