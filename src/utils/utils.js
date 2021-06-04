@@ -169,8 +169,7 @@ export const trackSubscriptionOnGA = () => {
   }
 
   ReactGA?.set?.({
-    currencyCode:
-      window.Pelcro.user.read()?.currency ?? this.state.plan.currency
+    currencyCode: window.Pelcro.user.read()?.currency ?? plan.currency
   });
 
   ReactGA?.plugin?.execute?.("ecommerce", "addTransaction", {
