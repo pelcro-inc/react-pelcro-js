@@ -4,6 +4,32 @@ import { mountStoreDevtool } from "simple-zustand-devtools";
 import { PelcroActions } from "./pelcroActions";
 import { PelcroCallbacks } from "./pelcroCallbacks";
 
+export const initialState = {
+  // View
+  view: null,
+
+  // Plans
+  product: null,
+  plan: null,
+  isGift: false,
+  isRenewingGift: false,
+  giftCode: "",
+  subscriptionIdToRenew: null,
+
+  // E-commerce
+  cartItems: [],
+
+  // User
+  isAuthenticated: () => window.Pelcro.user.isAuthenticated(),
+  selectedAddressId: null,
+  addressIdToEdit: null,
+
+  // internal meta-state
+  meta: {
+    orderedItems: []
+  }
+};
+
 const createPelcroStore = () =>
   createStore((set, get) => {
     const actions = new PelcroActions(set, get);
@@ -11,26 +37,7 @@ const createPelcroStore = () =>
     return {
       // Store setter
       set,
-
-      // View
-      view: null,
-
-      // Plans
-      product: null,
-      plan: null,
-      isGift: false,
-      isRenewingGift: false,
-      giftCode: "",
-      subscriptionIdToRenew: null,
-
-      // E-commerce
-      order: null,
-
-      // User
-      isAuthenticated: () => window.Pelcro.user.isAuthenticated(),
-      selectedAddressId: null,
-      addressIdToEdit: null,
-
+      ...initialState,
       // State actions
       ...actions,
       // Callbacks
