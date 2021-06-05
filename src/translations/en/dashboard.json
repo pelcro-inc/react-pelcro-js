@@ -49,6 +49,13 @@
       "details": "Details",
       "itemsAmount": "{{count}} item",
       "itemsAmount_plural": "{{count}} items"
+    },
+    "savedItems": {
+      "label": "Saved items",
+      "noSavedItems": "You have no saved items",
+      "categories": "Categories",
+      "details": "Details",
+      "removeItem": "Remove"
     }
   },
   "messages": {
