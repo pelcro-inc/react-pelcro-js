@@ -2,7 +2,7 @@ import React from "react";
 import { getAllSkus } from "../../utils/utils";
 import { ShopSelectProductButton } from "./ShopSelectProductButton";
 
-export const ShopView = ({ addCartItem }) => {
+export const ShopView = () => {
   const skus = getAllSkus();
 
   return (
@@ -30,7 +30,6 @@ export const ShopView = ({ addCartItem }) => {
                 </p>
                 <ShopSelectProductButton
                   itemId={item.id}
-                  addCartItem={addCartItem}
                   className="plc-mt-2"
                 />
               </div>

@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { usePelcro } from "../../hooks/usePelcro";
 import { Button } from "../../SubComponents/Button";
 
 export const ShopSelectProductButton = ({
   itemId,
-  addCartItem,
   ...otherProps
 }) => {
+  const { addCartItem } = usePelcro();
+
   const { t } = useTranslation("shop");
 
   const [disabled, setDisabled] = useState(false);
