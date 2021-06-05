@@ -1,5 +1,5 @@
 import { saveToMetadataButton } from "./saveToMetadata";
-import { getAllSkus, userHasAddress } from "../../../utils/utils";
+import { getAllSkus } from "../../../utils/utils";
 import i18n from "../../../i18n";
 import { usePelcro } from "../../../hooks/usePelcro";
 
@@ -15,7 +15,8 @@ export const init = () => {
     set,
     isAuthenticated,
     switchToAddressView,
-    switchToPaymentView
+    switchToPaymentView,
+    addCartItem
   } = usePelcro.getStore();
 
   const pelcroLoginButtonsByClass = document.getElementsByClassName(
@@ -228,7 +229,7 @@ export const init = () => {
         pelcroAddToCartButtonsByClass[i].addEventListener(
           "click",
           (e) => {
-            app.addItemToOrder(e.target.dataset.skuId);
+            addCartItem(Number(e.target.dataset.skuId));
           }
         );
       }
@@ -251,7 +252,7 @@ export const init = () => {
               pelcroAddToCartButtonsByClass[i].addEventListener(
                 "click",
                 (e) => {
-                  app.addItemToOrder(e.target.dataset.skuId);
+                  addCartItem(Number(e.target.dataset.skuId));
                 }
               );
             }
@@ -282,7 +283,7 @@ export const init = () => {
             return;
           }
 
-          app.addItemToOrder(product);
+          addCartItem(skuId);
 
           if (isAuthenticated()) {
             switchToAddressView();
