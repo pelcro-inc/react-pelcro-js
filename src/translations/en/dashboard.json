@@ -51,7 +51,7 @@
       "itemsAmount_plural": "{{count}} items"
     },
     "savedItems": {
-      "label": "Saved items",
+      "label": "Saved & Followed",
       "noSavedItems": "You have no saved items",
       "categories": "Categories",
       "details": "Details",
