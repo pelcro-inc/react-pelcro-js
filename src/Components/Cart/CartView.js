@@ -5,8 +5,12 @@ import { CartRemoveItemButton } from "./CartRemoveItemButton";
 import { CartSubmit } from "./CartSubmit";
 import { Badge } from "../../SubComponents/Badge";
 import { calcAndFormatItemsTotal } from "../../utils/utils";
+import { usePelcro } from "../../hooks/usePelcro";
+import { AlertWithContext } from "../../SubComponents/AlertWithContext";
 
 export const CartView = (props) => {
+  const { cartItems } = usePelcro();
+
   const { t } = useTranslation("cart");
 
   return (
@@ -14,14 +18,15 @@ export const CartView = (props) => {
       <div className="plc-mb-6 plc-text-2xl plc-font-semibold plc-text-center plc-text-gray-900 pelcro-title-wrapper">
         <h4>{t("title")}</h4>
       </div>
-      {props.items.length ? (
+      {cartItems.length ? (
         <form
           action="javascript:void(0);"
           className="plc-mt-2 pelcro-form"
         >
           <CartContainer {...props}>
+            <AlertWithContext />
             <div className="pelcro-cart-wrapper">
-              {props.items.map((item) => {
+              {cartItems.map((item) => {
                 return (
                   <div
                     key={item.id}
@@ -46,7 +51,6 @@ export const CartView = (props) => {
                       {calcAndFormatItemsTotal([item])}
                     </div>
                     <CartRemoveItemButton
-                      removeItem={props.removeItem}
                       itemId={item.id}
                       id={`pelcro-remove-product-${item.id}`}
                       className="plc-bg-red-400 hover:plc-bg-red-600"
@@ -61,7 +65,7 @@ export const CartView = (props) => {
                 {t("total")}:
               </p>
               <p className="pelcro-cart-total">
-                {calcAndFormatItemsTotal(props.items)}
+                {calcAndFormatItemsTotal(cartItems)}
               </p>
             </div>
             <CartSubmit

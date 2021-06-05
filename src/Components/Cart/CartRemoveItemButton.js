@@ -1,13 +1,15 @@
 import React from "react";
 import { Button } from "../../SubComponents/Button";
 import { ReactComponent as RemoveIcon } from "../../assets/x-icon.svg";
+import { usePelcro } from "../../hooks/usePelcro";
 
 export const CartRemoveItemButton = ({
   children,
-  removeItem,
   itemId,
   ...otherProps
 }) => {
+  const { removeCartItem } = usePelcro();
+
   return (
     <Button
       {...otherProps}
@@ -20,7 +22,7 @@ export const CartRemoveItemButton = ({
           focusable="false"
         />
       }
-      onClick={() => removeItem(itemId)}
+      onClick={() => removeCartItem(itemId)}
     >
       {children}
     </Button>
