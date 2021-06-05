@@ -126,7 +126,7 @@ export { OrderCreateSubmitButton } from "./Components/OrderCreate/OrderCreateSub
 export { OrderCreateContainer } from "./Components/OrderCreate/OrderCreateContainer";
 export { OrderCreateModal } from "./Components/OrderCreate/OrderCreateModal";
 export { OrderCreateView } from "./Components/OrderCreate/OrderCreateView";
-export { OrderConfirmModalWithHook as OrderConfirmModal } from "./Components/OrderConfirm/OrderConfirmModal";
+export { OrderConfirmModal } from "./Components/OrderConfirm/OrderConfirmModal";
 
 export { GiftCreateModal } from "./Components/GiftCreate/GiftCreateModal";
 export { GiftCreateView } from "./Components/GiftCreate/GiftCreateView";
