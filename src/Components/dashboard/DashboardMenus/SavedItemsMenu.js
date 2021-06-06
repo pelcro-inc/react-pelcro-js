@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactGA from "react-ga";
 import { useTranslation } from "react-i18next";
 import { ReactComponent as ChevronRightIcon } from "../../../assets/chevron-right.svg";
@@ -8,7 +8,10 @@ import { Accordion } from "../Accordion";
 
 export const SavedItemsMenu = () => {
   const { t } = useTranslation("dashboard");
-  const userMetadata = window.Pelcro.user.read().metadata;
+  const [userMetadata, setUserMetadata] = useState(
+    window.Pelcro.user.read().metadata
+  );
+
   const userSavedItems = userMetadata
     ? Object.entries(userMetadata)
         // only get metadata related to saved items
@@ -41,7 +44,10 @@ export const SavedItemsMenu = () => {
         <tr className="plc-h-4"></tr>
       </tbody>
       <Accordion>
-        <SavedItems savedItems={userSavedItems} />
+        <SavedItems
+          items={userSavedItems}
+          setItems={setUserMetadata}
+        />
       </Accordion>
       <tbody>
         <tr className="plc-h-4"></tr>
@@ -51,13 +57,49 @@ export const SavedItemsMenu = () => {
 };
 
 export const SavedItems = ({
-  savedItems,
+  items,
+  setItems,
   activeMenu,
   toggleActiveMenu
 }) => {
   const { t } = useTranslation("dashboard");
+  const [isLoading, setLoading] = useState(false);
+  const { isAuthenticated } = usePelcro();
 
-  return !savedItems?.length ? (
+  const removeItemFromMetadata = (category, title) => {
+    const user = window.Pelcro.user.read();
+    const oldValue = user.metadata[`metadata_saved_${category}`];
+
+    const newMetadataValue = oldValue.filter(
+      (metadata) => !(metadata?.title === title)
+    );
+
+    if (isAuthenticated()) {
+      setLoading(true);
+      window.Pelcro.user.saveToMetaData(
+        {
+          key: `saved_${category}`,
+          value: newMetadataValue,
+          auth_token: window.Pelcro.user.read().auth_token
+        },
+        (error, response) => {
+          if (error) {
+            return;
+          }
+
+          setLoading(false);
+          setItems(response?.data?.metadata);
+          ReactGA?.event?.({
+            category: "ACTIONS",
+            action: "Unsave/Unfollow",
+            label: title
+          });
+        }
+      );
+    }
+  };
+
+  return !items?.length ? (
     <tbody>
       <tr>
         <td colSpan="2" className="plc-text-center plc-text-gray-500">
@@ -66,7 +108,7 @@ export const SavedItems = ({
       </tr>
     </tbody>
   ) : (
-    savedItems?.map(([categoryTitle, item]) => {
+    items.map(([categoryTitle, item]) => {
       const isActive = activeMenu === categoryTitle;
 
       return (
@@ -137,10 +179,12 @@ export const SavedItems = ({
                         <Button
                           variant="ghost"
                           className="plc-text-red-500 plc-uppercase focus:plc-ring-red-500"
+                          disabled={isLoading}
                           onClick={() =>
                             removeItemFromMetadata(
                               categoryTitle,
-                              item.title
+                              item.title,
+                              setItems
                             )
                           }
                         >
@@ -162,35 +206,4 @@ export const SavedItems = ({
       );
     })
   );
-};
-
-const removeItemFromMetadata = (category, title) => {
-  const { isAuthenticated } = usePelcro.getStore();
-  const user = window.Pelcro.user.read();
-  const oldValue = user.metadata[`metadata_saved_${category}`];
-
-  const newMetadataValue = oldValue.filter(
-    (metadata) => !(metadata?.title === title)
-  );
-
-  if (isAuthenticated()) {
-    window.Pelcro.user.saveToMetaData(
-      {
-        key: `saved_${category}`,
-        value: newMetadataValue,
-        auth_token: window.Pelcro.user.read().auth_token
-      },
-      (err) => {
-        if (err) {
-          return;
-        }
-
-        ReactGA?.event?.({
-          category: "ACTIONS",
-          action: "Unsave/Unfollow",
-          label: title
-        });
-      }
-    );
-  }
 };

@@ -118,7 +118,7 @@ class Dashboard extends Component {
       (err, res) => {
         this.setState({ disableSubmit: false });
 
-        this.props.ReactGA.event({
+        ReactGA?.event?.({
           category: "ACTIONS",
           action: "Canceled",
           nonInteraction: true
