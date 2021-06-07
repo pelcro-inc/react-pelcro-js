@@ -34,6 +34,13 @@ const CartContainer = ({
 
   useEffect(() => {
     dispatch({ type: DISABLE_SUBMIT, payload: false });
+    dispatch({
+      type: SHOW_ALERT,
+      payload: {
+        type: "error",
+        content: ""
+      }
+    });
 
     if (cartItems.length === 0) return;
 
@@ -48,7 +55,7 @@ const CartContainer = ({
         type: SHOW_ALERT,
         payload: {
           type: "error",
-          content: t("multipleCurrencies")
+          content: t("messages.multipleCurrencies")
         }
       });
     } else {
@@ -61,7 +68,7 @@ const CartContainer = ({
           type: SHOW_ALERT,
           payload: {
             type: "error",
-            content: t("currencyMismatch")
+            content: t("messages.currencyMismatch")
           }
         });
       }
@@ -77,6 +84,11 @@ const CartContainer = ({
       switch (action.type) {
         case DISABLE_SUBMIT:
           return Update({ ...state, buttonDisabled: action.payload });
+        case SHOW_ALERT:
+          return Update({
+            ...state,
+            alert: action.payload
+          });
         case HANDLE_SUBMIT:
           return SideEffect((state, dispatch) =>
             submit(state, dispatch)
