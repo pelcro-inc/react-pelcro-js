@@ -91,15 +91,19 @@ export const initGATracking = () => {
   ReactGA?.plugin?.require?.("ecommerce");
 };
 
-export const renderShopView = (shopComponent) => {
-  const shopElement = document.getElementById("pelcro-shop");
+const { whenSiteReady, whenEcommerceLoaded } = usePelcro.getStore();
 
-  if (shopElement) {
-    ReactDOM.render(
-      <div className="pelcro-root">{shopComponent}</div>,
-      shopElement
-    );
-  }
+export const renderShopView = (shopComponent) => {
+  whenEcommerceLoaded(() => {
+    const shopElement = document.getElementById("pelcro-shop");
+
+    if (shopElement) {
+      ReactDOM.render(
+        <div className="pelcro-root">{shopComponent}</div>,
+        shopElement
+      );
+    }
+  });
 };
 
 /**
@@ -153,11 +157,9 @@ export const applyPelcroTheme = () => {
     };
   };
 
-  const { whenSiteReady } = usePelcro.getStore();
-
   whenSiteReady(() => {
-    const primaryColorHex = window.Pelcro.site.read()?.design_settings
-      ?.primary_color;
+    const primaryColorHex =
+      window.Pelcro.site.read()?.design_settings?.primary_color;
     if (!primaryColorHex) {
       return;
     }
