@@ -7,6 +7,7 @@ import { Badge } from "../../SubComponents/Badge";
 import { calcAndFormatItemsTotal } from "../../utils/utils";
 import { usePelcro } from "../../hooks/usePelcro";
 import { AlertWithContext } from "../../SubComponents/AlertWithContext";
+import { CartTotalPrice } from "./CartTotalPrice";
 
 export const CartView = (props) => {
   const { cartItems } = usePelcro();
@@ -61,12 +62,7 @@ export const CartView = (props) => {
               })}
             </div>
             <div className="plc-flex plc-items-center plc-justify-end plc-pt-2 plc-mt-2 plc-font-bold plc-border-t plc-border-gray-400 pelcro-cart-total-wrapper">
-              <p className="plc-mr-1 pelcro-cart-total-text">
-                {t("total")}:
-              </p>
-              <p className="pelcro-cart-total">
-                {calcAndFormatItemsTotal(cartItems)}
-              </p>
+              <CartTotalPrice />
             </div>
             <CartSubmit
               role="submit"
