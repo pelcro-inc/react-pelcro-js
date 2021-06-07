@@ -15,7 +15,8 @@
     "release": "SET NODE_ENV=production&&yarn generateFiles&&yarn publish&&git push&&git push --tags",
     "release:next": "SET NODE_ENV=production&&yarn generateFiles&&yarn publish --tag next&&git push&&git push --tags",
     "lint": "eslint ./src/**/*.js --fix",
-    "test": "node ./__tests__/sdkDownloader&&jest --watchAll"
+    "test": "node ./__tests__/sdkDownloader&&jest --watchAll",
+    "test:once": "node ./__tests__/sdkDownloader&&jest"
   },
   "browserslist": [
     "last 8 ChromeAndroid versions",
