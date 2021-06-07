@@ -1,9 +1,8 @@
 import React from "react";
-import { getAllSkus } from "../../utils/utils";
 import { ShopSelectProductButton } from "./ShopSelectProductButton";
 
 export const ShopView = () => {
-  const skus = getAllSkus();
+  const skus = window.Pelcro.ecommerce.products.getSkus();
 
   return (
     <div id="pelcro-shop-view">

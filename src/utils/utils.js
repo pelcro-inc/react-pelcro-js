@@ -102,30 +102,23 @@ export const userHasAddress = () => {
   return addresses.length > 0;
 };
 
-export const getAllSkus = () => {
-  const allSkus = window.Pelcro.ecommerce.products
-    .read()
-    .map((prod) => prod.skus.map((sku) => sku))
-    .flat();
-
-  const userCurrency = window.Pelcro.user.read().currency;
-  if (!userCurrency) return allSkus;
-  return allSkus.filter((sku) => sku.currency === userCurrency);
-};
-
 export const calcAndFormatItemsTotal = (items) => {
   if (!Array.isArray(items)) return;
 
-  let total = 0;
+  let totalWithoutDividingBy100 = 0;
   for (const item of items) {
-    total += parseFloat(
-      ((item.price / 100) * item.quantity).toFixed(2)
+    totalWithoutDividingBy100 += parseFloat(
+      (item.price * item.quantity).toFixed(2)
     );
   }
 
   const currency = items[0].currency;
   const locale = window.Pelcro.site.read().default_locale;
-  return getFormattedPriceByLocal(total, currency, locale);
+  return getFormattedPriceByLocal(
+    totalWithoutDividingBy100,
+    currency,
+    locale
+  );
 };
 
 /**

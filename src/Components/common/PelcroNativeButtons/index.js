@@ -1,5 +1,4 @@
 import { saveToMetadataButton } from "./saveToMetadata";
-import { getAllSkus } from "../../../utils/utils";
 import i18n from "../../../i18n";
 import { usePelcro } from "../../../hooks/usePelcro";
 
@@ -273,7 +272,8 @@ export const init = () => {
         (e) => {
           const skuId = Number(e.target.dataset.skuId);
 
-          const allProducts = getAllSkus();
+          const allProducts =
+            window.Pelcro.ecommerce.products.getSkus();
 
           const product = allProducts.find(
             (prod) => prod.id === skuId
