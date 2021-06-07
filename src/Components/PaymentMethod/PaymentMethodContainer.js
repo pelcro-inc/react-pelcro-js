@@ -28,7 +28,6 @@ import {
   SET_PAYMENT_REQUEST,
   INIT_CONTAINER,
   UPDATE_PAYMENT_REQUEST,
-  SET_ORDER,
   SHOW_ALERT,
   SUBSCRIBE
 } from "../../utils/action-types";
@@ -38,10 +37,7 @@ import {
   PaypalGateWay,
   SUBSCRIPTION_TYPES
 } from "../../services/Subscription/Subscription.service";
-import {
-  getCanonicalLocaleFormat,
-  getEcommerceOrderTotal
-} from "../../utils/utils";
+import { getCanonicalLocaleFormat } from "../../utils/utils";
 import { usePelcro } from "../../hooks/usePelcro";
 
 /**
@@ -58,7 +54,6 @@ import { usePelcro } from "../../hooks/usePelcro";
  * @property {unknown} paymentRequest
  * @property {number} updatedPrice
  * @property {object} currentPlan
- * @property {object} order
  * @property {object} alert
  */
 
@@ -76,7 +71,6 @@ const initialState = {
   paymentRequest: null,
   updatedPrice: null,
   currentPlan: null,
-  order: {},
   alert: {
     type: "error",
     content: ""
@@ -98,9 +92,8 @@ const PaymentMethodContainerWithoutStripe = ({
 }) => {
   const { t } = useTranslation("payment");
   const pelcroStore = usePelcro();
-  const { set } = usePelcro();
+  const { set, cartItems } = usePelcro();
 
-  const order = props.order ?? pelcroStore.order;
   const product = props.product ?? pelcroStore.product;
   const plan = props.plan ?? pelcroStore.plan;
   const subscriptionIdToRenew =
@@ -117,12 +110,6 @@ const PaymentMethodContainerWithoutStripe = ({
       dispatch({
         type: UPDATE_COUPON_CODE,
         payload: window.Pelcro.coupon.getFromUrl()
-      });
-    }
-    if (order) {
-      dispatch({
-        type: SET_ORDER,
-        payload: order
       });
     }
     dispatch({ type: INIT_CONTAINER });
@@ -413,12 +400,12 @@ const PaymentMethodContainerWithoutStripe = ({
   };
 
   const purchase = (token, state, dispatch) => {
-    const { order } = state;
-    order.email = window.Pelcro.user.read().email;
-
     window.Pelcro.ecommerce.order.create(
       {
-        items: order.items,
+        items: cartItems.map((item) => ({
+          sku_id: item.id,
+          quantity: item.quantity
+        })),
         stripe_token: token.id,
         ...(selectedAddressId && { address_id: selectedAddressId })
       },
@@ -430,13 +417,18 @@ const PaymentMethodContainerWithoutStripe = ({
           onFailure(err);
           return dispatch({
             type: SHOW_ALERT,
-            payload: { type: "error", content: getErrorMessages(err) }
+            payload: {
+              type: "error",
+              content: getErrorMessages(err)
+            }
           });
         }
 
-        // Reset cart products
-        window.Pelcro.cartProducts = [];
-        set({ order: null });
+        set((prevState) => ({
+          cartItems: [],
+          meta: { orderedItems: [...prevState.cartItems] }
+        }));
+
         onSuccess(res);
       }
     );
@@ -506,10 +498,18 @@ const PaymentMethodContainerWithoutStripe = ({
           return handlePaymentError(error);
         }
 
+        const getCartItemsTotal = () => {
+          if (cartItems.length === 0) {
+            return null;
+          }
+          const totalAmount = cartItems.reduce((total, item) => {
+            return total + item.price * item.quantity;
+          }, 0);
+          return totalAmount;
+        };
+
         const totalAmount =
-          state?.updatedPrice ??
-          plan?.amount ??
-          getEcommerceOrderTotal(order?.items);
+          state?.updatedPrice ?? plan?.amount ?? getCartItemsTotal();
 
         if (
           source?.card?.three_d_secure === "required" &&
@@ -767,9 +767,6 @@ const PaymentMethodContainerWithoutStripe = ({
 
         case SET_PAYMENT_REQUEST:
           return Update({ ...state, paymentRequest: action.payload });
-
-        case SET_ORDER:
-          return Update({ ...state, order: action.payload });
 
         case APPLY_COUPON_CODE:
           return UpdateWithSideEffect(

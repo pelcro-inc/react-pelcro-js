@@ -53,7 +53,7 @@ export class PelcroActions {
       resetView,
       product,
       subscriptionIdToRenew,
-      order
+      cartItems
     } = this.get();
 
     if (product && subscriptionIdToRenew) {
@@ -64,7 +64,7 @@ export class PelcroActions {
       return switchView("subscription-create");
     }
 
-    if (order) {
+    if (cartItems.length > 0) {
       return switchView("order-create");
     }
 
@@ -87,11 +87,13 @@ export class PelcroActions {
 
   setProduct = (id) => {
     const product = window.Pelcro.product.getById(id);
+    if (!product) return console.error("invalid product id");
     this.set({ product });
   };
 
   setPlan = (id) => {
     const plan = window.Pelcro.plan.getById(id);
+    if (!plan) return console.error("invalid plan id");
     this.set({ plan });
   };
 
@@ -133,7 +135,7 @@ export class PelcroActions {
 
     const { cartItems } = this.get();
 
-    const itemAlreadyExists = cartItems.includes(
+    const itemAlreadyExists = cartItems.some(
       (item) => item.id === itemToAdd.id
     );
 
