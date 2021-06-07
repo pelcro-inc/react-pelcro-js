@@ -122,7 +122,6 @@ export class PelcroActions {
    */
 
   addCartItem = (itemSkuId) => {
-    // MISSING PERSISTENCE
     const itemToAdd = window.Pelcro.ecommerce.products.getBySkuId(
       Number(itemSkuId)
     );
@@ -165,7 +164,6 @@ export class PelcroActions {
   };
 
   removeCartItem = (itemSkuId) => {
-    // MISSING PERSISTENCE
     const { cartItems } = this.get();
 
     const itemToRemoveIdx = cartItems.findIndex(

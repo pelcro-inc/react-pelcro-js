@@ -1,6 +1,7 @@
 import createHook from "zustand";
 import createStore from "zustand/vanilla";
 import { mountStoreDevtool } from "simple-zustand-devtools";
+import { persist } from "zustand/middleware";
 import { PelcroActions } from "./pelcroActions";
 import { PelcroCallbacks } from "./pelcroCallbacks";
 
@@ -31,19 +32,24 @@ export const initialState = {
 };
 
 const createPelcroStore = () =>
-  createStore((set, get) => {
-    const actions = new PelcroActions(set, get);
-    const eventCallbacks = new PelcroCallbacks();
-    return {
-      // Store setter
-      set,
-      ...initialState,
-      // State actions
-      ...actions,
-      // Callbacks
-      ...eventCallbacks
-    };
-  });
+  createStore(
+    persist(
+      (set, get) => {
+        const actions = new PelcroActions(set, get);
+        const eventCallbacks = new PelcroCallbacks();
+        return {
+          // Store setter
+          set,
+          ...initialState,
+          // State actions
+          ...actions,
+          // Callbacks
+          ...eventCallbacks
+        };
+      },
+      { name: "pelcro-store", whitelist: ["cartItems"] }
+    )
+  );
 
 const createPelcroHook = (store) => {
   // initiate hook with zustand creator
