@@ -19,10 +19,12 @@ import { ReactComponent as LocationIcon } from "../../assets/location-pin.svg";
 import { ReactComponent as SubscriptionIcon } from "../../assets/subscription.svg";
 import { ReactComponent as GiftIcon } from "../../assets/gift.svg";
 import { ReactComponent as ShoppingIcon } from "../../assets/shopping.svg";
+import { ReactComponent as BookmarkIcon } from "../../assets/bookmark.svg";
 import { ReactComponent as PlusIcon } from "../../assets/plus.svg";
 import { ReactComponent as KeyIcon } from "../../assets/key.svg";
 import userSolidIcon from "../../assets/user-solid.svg";
 import { OrdersMenu } from "./DashboardMenus/OrdersMenu";
+import { SavedItemsMenu } from "./DashboardMenus/SavedItemsMenu";
 import { usePelcro } from "../../hooks/usePelcro";
 
 const SUB_MENUS = {
@@ -31,7 +33,8 @@ const SUB_MENUS = {
   PAYMENT_CARDS: "payment-cards",
   ADDRESSES: "addresses",
   GIFTS: "gifts",
-  ORDERS: "orders"
+  ORDERS: "orders",
+  SAVED_ITEMS: "saved-items"
 };
 
 /**
@@ -115,7 +118,7 @@ class Dashboard extends Component {
       (err, res) => {
         this.setState({ disableSubmit: false });
 
-        this.props.ReactGA.event({
+        ReactGA?.event?.({
           category: "ACTIONS",
           action: "Canceled",
           nonInteraction: true
@@ -824,6 +827,13 @@ class Dashboard extends Component {
                 icon={<ShoppingIcon />}
                 title={this.locale("labels.orders.label")}
                 content={<OrdersMenu />}
+              />
+
+              <Accordion.item
+                name={SUB_MENUS.SAVED_ITEMS}
+                icon={<BookmarkIcon />}
+                title={this.locale("labels.savedItems.label")}
+                content={<SavedItemsMenu />}
               />
 
               <Button
