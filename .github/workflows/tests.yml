@@ -25,4 +25,4 @@ jobs:
 
       # Run jest
       - name: Run Tests
-        run: yarn test
+        run: yarn test:once
