@@ -100,7 +100,7 @@ if (
 
   console.log(
     "\x1b[31m",
-    "Please use a message that starts with [FEAT|TEST|CI/CD|REFACTOR|STYLE|DOCS|FIX]. And don't forget a space after",
+    "Please use a message that starts with [FEAT|TEST|CI/CD|REFACTOR|STYLE|DOCS|FIX|CHORES]. And don't forget a space after",
     "\x1b[0m"
   );
 
