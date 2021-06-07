@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { ReactComponent as ChevronRightIcon } from "../../../assets/chevron-right.svg";
 import { usePelcro } from "../../../hooks/usePelcro";
 import { Button } from "../../../SubComponents/Button";
+import { Link } from "../../../SubComponents/Link";
 import { Accordion } from "../Accordion";
 
 export const SavedItemsMenu = () => {
@@ -160,19 +161,27 @@ export const SavedItems = ({
                       className="plc-text-lg plc-text-gray-500 pelcro-saved-items-details-row "
                     >
                       <td>
-                        <div className="plc-flex plc-items-center plc-py-2 plc-space-x-2 sm:plc-p-2">
-                          {item?.image && (
-                            <img
-                              className="plc-w-12 plc-h-12 pelcro-saved-item-image"
-                              alt={`image of ${item.title}`}
-                              src={item?.image}
-                            />
-                          )}
+                        <Link
+                          className="plc-text-gray-700 plc-no-underline"
+                          href={item.link}
+                          isButton={true}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <div className="plc-flex plc-items-center plc-py-2 plc-space-x-2 sm:plc-p-2">
+                            {item?.image && (
+                              <img
+                                className="plc-w-12 plc-h-12 pelcro-saved-item-image"
+                                alt={`image of ${item.title}`}
+                                src={item?.image}
+                              />
+                            )}
 
-                          <span className="plc-font-semibold">
-                            {item.title}
-                          </span>
-                        </div>
+                            <span className="plc-font-semibold">
+                              {item.title}
+                            </span>
+                          </div>
+                        </Link>
                       </td>
 
                       <td>
