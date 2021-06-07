@@ -94,31 +94,31 @@ export const getFormattedPriceByLocal = (
   return formatter.format(amount / 100);
 };
 
-export const getEcommerceOrderTotal = (order) => {
-  if (!order) {
-    return null;
-  }
-
-  const allSkus = window.Pelcro.ecommerce.products
-    .read()
-    .flatMap((prod) => prod.skus.map((sku) => sku))
-    .reduce((obj, item) => ({ ...obj, [item.id]: { ...item } }), {});
-
-  const totalAmount = order.reduce((total, orderItem) => {
-    const product = allSkus[orderItem.sku_id];
-
-    return total + product.price * orderItem.quantity;
-  }, 0);
-
-  return totalAmount;
-};
-
 /** check wether or not the user have any addresses
  * @return {boolean} true if the user have at least one address, false otherwise
  */
 export const userHasAddress = () => {
   const addresses = window.Pelcro.user.read().addresses ?? [];
   return addresses.length > 0;
+};
+
+export const calcAndFormatItemsTotal = (items) => {
+  if (!Array.isArray(items)) return;
+
+  let totalWithoutDividingBy100 = 0;
+  for (const item of items) {
+    totalWithoutDividingBy100 += parseFloat(
+      (item.price * item.quantity).toFixed(2)
+    );
+  }
+
+  const currency = items[0].currency;
+  const locale = window.Pelcro.site.read().default_locale;
+  return getFormattedPriceByLocal(
+    totalWithoutDividingBy100,
+    currency,
+    locale
+  );
 };
 
 /**

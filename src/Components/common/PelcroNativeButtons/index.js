@@ -14,7 +14,9 @@ export const init = () => {
     set,
     isAuthenticated,
     switchToAddressView,
-    switchToPaymentView
+    switchToPaymentView,
+    whenEcommerceLoaded,
+    addCartItem
   } = usePelcro.getStore();
 
   const pelcroLoginButtonsByClass = document.getElementsByClassName(
@@ -43,9 +45,8 @@ export const init = () => {
     );
   }
 
-  const pelcroRegisterButtonsByClass = document.getElementsByClassName(
-    "pelcro-register-button"
-  );
+  const pelcroRegisterButtonsByClass =
+    document.getElementsByClassName("pelcro-register-button");
 
   if (pelcroRegisterButtonsByClass.length !== 0) {
     for (let j = 0; j < pelcroRegisterButtonsByClass.length; j++) {
@@ -72,9 +73,8 @@ export const init = () => {
     cartButton.addEventListener("click", () => switchView("cart"));
   }
 
-  const pelcroSubscribeButtonsByClass = document.getElementsByClassName(
-    "pelcro-subscribe-button"
-  );
+  const pelcroSubscribeButtonsByClass =
+    document.getElementsByClassName("pelcro-subscribe-button");
 
   if (pelcroSubscribeButtonsByClass.length !== 0) {
     for (let j = 0; j < pelcroSubscribeButtonsByClass.length; j++) {
@@ -140,9 +140,10 @@ export const init = () => {
     }
   }
 
-  const pelcroOfflineSubButtonsByClass = document.getElementsByClassName(
-    "pelcro-offline-subscribe-button"
-  );
+  const pelcroOfflineSubButtonsByClass =
+    document.getElementsByClassName(
+      "pelcro-offline-subscribe-button"
+    );
 
   if (pelcroOfflineSubButtonsByClass.length !== 0) {
     for (let j = 0; j < pelcroOfflineSubButtonsByClass.length; j++) {
@@ -217,58 +218,24 @@ export const init = () => {
     }
   }
 
-  if (window.Pelcro.ecommerce?.products?.read()?.length) {
-    const pelcroAddToCartButtonsByClass = document.getElementsByClassName(
-      "pelcro-add-to-cart-button"
-    );
+  whenEcommerceLoaded(() => {
+    const pelcroAddToCartButtonsByClass =
+      document.getElementsByClassName("pelcro-add-to-cart-button");
 
     if (pelcroAddToCartButtonsByClass.length !== 0) {
       for (let i = 0; i < pelcroAddToCartButtonsByClass.length; i++) {
         pelcroAddToCartButtonsByClass[i].addEventListener(
           "click",
           (e) => {
-            window.Pelcro.cartProducts =
-              window.Pelcro?.cartProducts || [];
-            window.Pelcro.cartProducts.push(e.target.dataset.skuId);
+            addCartItem(Number(e.target.dataset.skuId));
           }
         );
       }
     }
-  } else {
-    document.addEventListener(
-      "PelcroEcommerceProductsLoaded",
-      function (e) {
-        setTimeout(() => {
-          const pelcroAddToCartButtonsByClass = document.getElementsByClassName(
-            "pelcro-add-to-cart-button"
-          );
+  });
 
-          if (pelcroAddToCartButtonsByClass.length !== 0) {
-            for (
-              let i = 0;
-              i < pelcroAddToCartButtonsByClass.length;
-              i++
-            ) {
-              pelcroAddToCartButtonsByClass[i].addEventListener(
-                "click",
-                (e) => {
-                  window.Pelcro.cartProducts =
-                    window.Pelcro?.cartProducts || [];
-                  window.Pelcro.cartProducts.push(
-                    e.target.dataset.skuId
-                  );
-                }
-              );
-            }
-          }
-        }, 500);
-      }
-    );
-  }
-
-  const pelcroPurchaseButtonsByClass = document.getElementsByClassName(
-    "pelcro-purchase-button"
-  );
+  const pelcroPurchaseButtonsByClass =
+    document.getElementsByClassName("pelcro-purchase-button");
 
   if (pelcroPurchaseButtonsByClass.length !== 0) {
     for (let i = 0; i < pelcroPurchaseButtonsByClass.length; i++) {
@@ -276,32 +243,19 @@ export const init = () => {
         "click",
         (e) => {
           const skuId = Number(e.target.dataset.skuId);
-          // initialize with current product listing
-          const allProducts =
-            window.Pelcro.ecommerce.products
-              .read()
-              .flatMap((prod) => prod.skus.map((sku) => sku))
-              // reset the cart quantities, button's associated item should be the only item in cart
-              .map((sku) => {
-                sku.quantity = 0;
-                return sku;
-              }) ?? [];
 
-          const productIndex = allProducts.findIndex(
+          const allProducts =
+            window.Pelcro.ecommerce.products.getSkus();
+
+          const product = allProducts.find(
             (prod) => prod.id === skuId
           );
 
-          if (productIndex === -1) {
+          if (!product) {
             return;
           }
 
-          // set quantity of the product to 1 as it's a direct purchase button
-          allProducts[productIndex] = {
-            ...allProducts[productIndex],
-            quantity: 1
-          };
-
-          set({ order: { items: [{ sku_id: skuId, quantity: 1 }] } });
+          addCartItem(skuId);
 
           if (isAuthenticated()) {
             switchToAddressView();

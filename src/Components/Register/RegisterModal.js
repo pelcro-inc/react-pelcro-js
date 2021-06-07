@@ -23,7 +23,7 @@ export function RegisterModal(props) {
     switchToAddressView,
     switchToPaymentView,
     product,
-    order,
+    cartItems,
     giftCode,
     isGift
   } = usePelcro();
@@ -41,7 +41,7 @@ export function RegisterModal(props) {
     });
 
     // If product and plan are not selected
-    if (!product && !order && !giftCode) {
+    if (!product && !cartItems.length && !giftCode) {
       return resetView();
     }
 
@@ -55,7 +55,7 @@ export function RegisterModal(props) {
       return switchView("gift-create");
     }
 
-    if (order) {
+    if (cartItems.length) {
       return switchToAddressView();
     }
 

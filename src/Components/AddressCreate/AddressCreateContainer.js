@@ -65,7 +65,7 @@ const AddressCreateContainer = ({
   const {
     giftCode: giftCodeFromStore,
     product,
-    order,
+    cartItems,
     set
   } = usePelcro();
   const giftCode = props.giftCode ?? giftCodeFromStore;
@@ -146,7 +146,7 @@ const AddressCreateContainer = ({
           getNewlyCreatedAddress(res.data.addresses).id
         );
 
-        if (product || order) {
+        if (product || cartItems.length) {
           set({ selectedAddressId: newAddressId });
         }
 

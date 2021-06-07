@@ -1,49 +1,39 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { usePelcro } from "../../hooks/usePelcro";
 import { Button } from "../../SubComponents/Button";
-import { store } from "./ShopContainer";
-
-let selectProduct;
 
 export const ShopSelectProductButton = ({
-  name,
-  className,
-  product,
+  itemId,
   ...otherProps
 }) => {
-  const {
-    dispatch,
-    state: { products }
-  } = useContext(store);
+  const { addCartItem } = usePelcro();
 
   const { t } = useTranslation("shop");
 
   const [disabled, setDisabled] = useState(false);
+  const [textContent, setTextContent] = useState(t("buttons.select"));
 
   const handleClick = () => {
     setDisabled(true);
-    const productButton = document.getElementById(
-      `pelcro-shop-product-${product.id}`
-    );
-    productButton.textContent = t("buttons.added");
+    setTextContent(t("buttons.added"));
+    addCartItem(itemId);
+
     setTimeout(() => {
       setDisabled(false);
-      productButton.textContent = t("buttons.select");
+      setTextContent(t("buttons.select"));
     }, 1000);
   };
 
   return (
     <Button
       {...otherProps}
-      data-sku-id={product.id}
-      id={`pelcro-shop-product-${product.id}`}
-      className={`pelcro-add-to-cart-button ${className}`}
+      data-sku-id={itemId}
+      id={`pelcro-shop-product-${itemId}`}
       onClick={handleClick}
       disabled={disabled}
     >
-      {name ?? t("buttons.select")}
+      {textContent}
     </Button>
   );
 };
-
-export { selectProduct };

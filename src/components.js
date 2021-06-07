@@ -117,18 +117,17 @@ export { PasswordChangeButton } from "./Components/PasswordChange/PasswordChange
 export { CartContainer } from "./Components/Cart/CartContainer";
 export { CartModal } from "./Components/Cart/CartModal";
 export { CartView } from "./Components/Cart/CartView";
-export { CartRemoveProductButton } from "./Components/Cart/CartRemoveProductButton";
+export { CartRemoveItemButton } from "./Components/Cart/CartRemoveItemButton";
 export { CartSubmit } from "./Components/Cart/CartSubmit";
 export { CartTotalPrice } from "./Components/Cart/CartTotalPrice";
 
-export { ShopContainer } from "./Components/Shop/ShopContainer";
 export { ShopSelectProductButton } from "./Components/Shop/ShopSelectProductButton";
 export { ShopView } from "./Components/Shop/ShopView";
 export { OrderCreateSubmitButton } from "./Components/OrderCreate/OrderCreateSubmitButton";
 export { OrderCreateContainer } from "./Components/OrderCreate/OrderCreateContainer";
 export { OrderCreateModal } from "./Components/OrderCreate/OrderCreateModal";
 export { OrderCreateView } from "./Components/OrderCreate/OrderCreateView";
-export { OrderConfirmModalWithHook as OrderConfirmModal } from "./Components/OrderConfirm/OrderConfirmModal";
+export { OrderConfirmModal } from "./Components/OrderConfirm/OrderConfirmModal";
 
 export { GiftCreateModal } from "./Components/GiftCreate/GiftCreateModal";
 export { GiftCreateView } from "./Components/GiftCreate/GiftCreateView";

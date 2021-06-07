@@ -1,4 +1,5 @@
 import ReactGA from "react-ga";
+import { initialState } from ".";
 import { userHasAddress } from "../../utils/utils";
 
 export class PelcroActions {
@@ -12,17 +13,8 @@ export class PelcroActions {
    */
 
   resetState = () => {
-    this.set({
-      product: null,
-      plan: null,
-      isGift: false,
-      isRenewingGift: false,
-      giftCode: "",
-      subscriptionIdToRenew: null,
-      order: null,
-      selectedAddressId: null,
-      addressIdToEdit: null
-    });
+    const { view, cartItems, ...otherStateFields } = initialState;
+    this.set(otherStateFields);
   };
 
   /**
@@ -61,7 +53,7 @@ export class PelcroActions {
       resetView,
       product,
       subscriptionIdToRenew,
-      order
+      cartItems
     } = this.get();
 
     if (product && subscriptionIdToRenew) {
@@ -72,7 +64,7 @@ export class PelcroActions {
       return switchView("subscription-create");
     }
 
-    if (order) {
+    if (cartItems.length > 0) {
       return switchView("order-create");
     }
 
@@ -95,11 +87,13 @@ export class PelcroActions {
 
   setProduct = (id) => {
     const product = window.Pelcro.product.getById(id);
+    if (!product) return console.error("invalid product id");
     this.set({ product });
   };
 
   setPlan = (id) => {
     const plan = window.Pelcro.plan.getById(id);
+    if (!plan) return console.error("invalid plan id");
     this.set({ plan });
   };
 
@@ -123,5 +117,92 @@ export class PelcroActions {
 
     resetView();
     switchView("login");
+  };
+
+  /**
+   * E-commerce Actions
+   */
+
+  addCartItem = (itemSkuId) => {
+    const itemToAdd = window.Pelcro.ecommerce.products.getBySkuId(
+      Number(itemSkuId)
+    );
+
+    if (!itemToAdd) {
+      console.error("invalid item SKU id");
+      return false;
+    }
+
+    const { cartItems } = this.get();
+
+    const itemAlreadyExists = cartItems.some(
+      (item) => item.id === itemToAdd.id
+    );
+
+    if (itemAlreadyExists) {
+      // increase quantity of item
+      const itemsWithIncreasedQuantity = cartItems.map((item) => {
+        if (item.id === itemToAdd.id) {
+          return {
+            ...item,
+            quantity: item.quantity + 1
+          };
+        }
+
+        return item;
+      });
+
+      this.set({ cartItems: itemsWithIncreasedQuantity });
+      return true;
+    }
+
+    // add new item
+    const newItemWithQuantity = { ...itemToAdd, quantity: 1 };
+
+    this.set((prevState) => ({
+      cartItems: [...prevState.cartItems, newItemWithQuantity]
+    }));
+    return true;
+  };
+
+  removeCartItem = (itemSkuId) => {
+    const { cartItems } = this.get();
+
+    const itemToRemoveIdx = cartItems.findIndex(
+      (item) => item.id === Number(itemSkuId)
+    );
+
+    if (itemToRemoveIdx === -1) {
+      console.error("invalid item SKU id");
+      return false;
+    }
+
+    const itemToRemove = cartItems[itemToRemoveIdx];
+
+    if (itemToRemove.quantity > 1) {
+      // reduce quantity of item
+      const newItems = cartItems.map((item, i) => {
+        if (i === itemToRemoveIdx) {
+          return {
+            ...item,
+            quantity: item.quantity - 1
+          };
+        }
+
+        return item;
+      });
+
+      this.set({ cartItems: newItems });
+      return true;
+    }
+
+    // remove the item
+    const newItems = [
+      ...cartItems.slice(0, itemToRemoveIdx),
+      ...cartItems.slice(itemToRemoveIdx + 1)
+    ];
+
+    this.set({ cartItems: newItems });
+    return true;
   };
 }

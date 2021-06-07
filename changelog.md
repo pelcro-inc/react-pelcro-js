@@ -10,11 +10,17 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 - Added usePelcro global hook, to have access to pelcro UI state.
 - Added PelcroModalController component to orchestrate between modals & initialize features.
+- Show an error in the cart modal if there are items that don't match the user account's currency, or if there are items with multiple different currencies.
+- Keep cart items between different sessions on the same device.
 - Setup tests in the repo and add added first test suite. [PRIVATE]
 
 ### Changed
 
 - Replaced app.js with Main.js using the new external API. [PRIVATE]
+
+### Fixed
+
+- Hardcoded currencies and wordings in e-commerce components
 
 ## [Released]
 

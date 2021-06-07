@@ -9,6 +9,12 @@
       "title": "Order confirmed!",
       "body": "Your order has been confirmed and will be shipped within the next few days. You'll shortly receive an email confirmation of this order."
     },
-    "haveQuestions": "If you have any queries please don't hesitate to contact us!"
+    "haveQuestions": "If you have any queries please don't hesitate to contact us!",
+    "multipleCurrencies": "You have items with different currencies in your cart, all cart items must have the same currency.",
+    "currencyMismatch": "Cart items currency doesn't match your account's currency."
+  },
+  "labels": {
+    "summary": "Order summary",
+    "total": "total"
   }
 }

@@ -6,21 +6,19 @@ import { useTranslation } from "react-i18next";
 
 export const CartSubmit = ({ name, ...otherProps }) => {
   const {
-    dispatch,
-    state: { isEmpty }
+    state: { buttonDisabled },
+    dispatch
   } = useContext(store);
 
   const { t } = useTranslation("cart");
 
-  if (!isEmpty) {
-    return (
-      <Button
-        {...otherProps}
-        onClick={() => dispatch({ type: HANDLE_SUBMIT })}
-      >
-        {name ?? t("confirm")}
-      </Button>
-    );
-  }
-  return null;
+  return (
+    <Button
+      {...otherProps}
+      onClick={() => dispatch({ type: HANDLE_SUBMIT })}
+      disabled={buttonDisabled}
+    >
+      {name ?? t("confirm")}
+    </Button>
+  );
 };

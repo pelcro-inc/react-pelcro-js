@@ -1,29 +1,29 @@
 import React, { useContext } from "react";
+import { useTranslation } from "react-i18next";
+import { usePelcro } from "../../hooks/usePelcro";
+import { calcAndFormatItemsTotal } from "../../utils/utils";
 import { store } from "./CartContainer";
 
 export const CartTotalPrice = () => {
   const {
-    state: { products, isEmpty },
-    dispatch
+    state: { alert }
   } = useContext(store);
 
-  const countTotal = () => {
-    const productArr = products.slice();
-    let total = 0;
-    for (const product of productArr) {
-      total += parseFloat(
-        ((product?.price / 100) * product.quantity).toFixed(2)
-      );
-    }
-    return parseFloat(total).toLocaleString("fr-CA", {
-      style: "currency",
-      currency: "CAD"
-    });
-  };
+  const { cartItems } = usePelcro();
 
-  if (!isEmpty) {
-    return <>{countTotal()}</>;
+  const { t } = useTranslation("cart");
+
+  if (!alert.content) {
+    return (
+      <>
+        <p className="plc-mr-1 pelcro-cart-total-text">
+          {t("total")}:
+        </p>
+        <p className="pelcro-cart-total">
+          {calcAndFormatItemsTotal(cartItems)}
+        </p>
+      </>
+    );
   }
-
   return null;
 };
