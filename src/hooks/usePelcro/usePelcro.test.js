@@ -32,6 +32,7 @@ beforeEach(() => {
 
     // reset store state and actions before every test
     usePelcro().resetView();
+    usePelcro().set({ cartItems: [] });
     usePelcro().set({ ...defaultPelcroActions });
   });
 });
@@ -48,7 +49,6 @@ describe("Returns the store with the correct initial state", () => {
     expect(store.isRenewingGift).toEqual(false);
     expect(store.giftCode).toEqual("");
     expect(store.subscriptionIdToRenew).toEqual(null);
-    expect(store.order).toEqual(null);
     expect(store.selectedAddressId).toEqual(null);
     expect(store.addressIdToEdit).toEqual(null);
   });
@@ -64,7 +64,6 @@ describe("Returns the store with the correct initial state", () => {
     expect(store.isRenewingGift).toEqual(false);
     expect(store.giftCode).toEqual("");
     expect(store.subscriptionIdToRenew).toEqual(null);
-    expect(store.order).toEqual(null);
     expect(store.selectedAddressId).toEqual(null);
     expect(store.addressIdToEdit).toEqual(null);
   });
@@ -281,10 +280,10 @@ describe("Actions", () => {
       expect(store.view).toEqual("subscription-renew");
     });
 
-    test("switch to order-create view when there is an ecommerce order", () => {
+    test("switch to order-create view when there are items in the cart", () => {
       const store = usePelcro();
       act(() => {
-        store.set({ order: { items: ["test-item"] } });
+        store.set({ cartItems: [{ id: "test-item" }] });
       });
 
       act(() => {
@@ -294,7 +293,7 @@ describe("Actions", () => {
       expect(store.view).toEqual("order-create");
     });
 
-    test("reset the view to when there is neither a product nor an order", () => {
+    test("reset the view to when there is neither a product nor items in the cart", () => {
       const store = usePelcro();
 
       act(() => {
