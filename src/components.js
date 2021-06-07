@@ -119,6 +119,7 @@ export { CartModal } from "./Components/Cart/CartModal";
 export { CartView } from "./Components/Cart/CartView";
 export { CartRemoveItemButton } from "./Components/Cart/CartRemoveItemButton";
 export { CartSubmit } from "./Components/Cart/CartSubmit";
+export { CartTotalPrice } from "./Components/Cart/CartTotalPrice";
 
 export { ShopSelectProductButton } from "./Components/Shop/ShopSelectProductButton";
 export { ShopView } from "./Components/Shop/ShopView";
