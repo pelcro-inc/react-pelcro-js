@@ -13,8 +13,8 @@ export class PelcroActions {
    */
 
   resetState = () => {
-    const { view, ...initialStateWithoutView } = initialState;
-    this.set(initialStateWithoutView);
+    const { view, cartItems, ...otherStateFields } = initialState;
+    this.set(otherStateFields);
   };
 
   /**
