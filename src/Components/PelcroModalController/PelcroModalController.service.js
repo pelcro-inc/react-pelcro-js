@@ -2,7 +2,10 @@ import React from "react";
 import ReactDOM from "react-dom";
 import ReactGA from "react-ga";
 import { usePelcro } from "../../hooks/usePelcro";
-import { isValidViewFromURL } from "../../utils/utils";
+import {
+  getStableViewID,
+  isValidViewFromURL
+} from "../../utils/utils";
 
 /**
  * @typedef {Object} OptionsType
@@ -38,9 +41,12 @@ export const optionsController = (options) => {
 };
 
 export const initPaywalls = () => {
+  const viewFromURL = getStableViewID(
+    window.Pelcro.helpers.getURLParameter("view")
+  );
   if (window.Pelcro.site.read()?.settings === "subscription") {
     if (
-      isValidViewFromURL() ||
+      isValidViewFromURL(viewFromURL) ||
       window.Pelcro.subscription.isSubscribedToSite()
     ) {
       return;
@@ -158,8 +164,8 @@ export const applyPelcroTheme = () => {
   };
 
   whenSiteReady(() => {
-    const primaryColorHex =
-      window.Pelcro.site.read()?.design_settings?.primary_color;
+    const primaryColorHex = window.Pelcro.site.read()?.design_settings
+      ?.primary_color;
     if (!primaryColorHex) {
       return;
     }
@@ -184,9 +190,12 @@ export const applyPelcroTheme = () => {
  * Initializes a specific modal according to the url 'view' param
  */
 export const initViewFromURL = () => {
-  const view = window.Pelcro.helpers.getURLParameter("view");
+  const view = getStableViewID(
+    window.Pelcro.helpers.getURLParameter("view")
+  );
+
   const { switchView, whenSiteReady } = usePelcro.getStore();
-  if (isValidViewFromURL()) {
+  if (isValidViewFromURL(view)) {
     whenSiteReady(() => {
       if (view === "plan-select") {
         return initSubscriptionFromURL();
@@ -203,6 +212,7 @@ export const initViewFromURL = () => {
  */
 export const initSubscriptionFromURL = () => {
   const { switchView, whenSiteReady, set } = usePelcro.getStore();
+
   whenSiteReady(() => {
     const productsList = window.Pelcro.product.list();
     if (!productsList?.length) return;
@@ -227,11 +237,7 @@ export const initSubscriptionFromURL = () => {
     });
 
     if (!selectedProduct || !selectedPlan) {
-      if (productId && planId) {
-        return switchView("plan-select");
-      }
-
-      return;
+      return switchView("plan-select");
     }
 
     const {

@@ -123,29 +123,50 @@ export const calcAndFormatItemsTotal = (items) => {
 
 /**
  * returns true if the URL contains a supported view trigger URL
+ * @param {string} viewID
  * @return {boolean}
  */
-export const isValidViewFromURL = () => {
-  const view = window.Pelcro.helpers.getURLParameter("view");
+export const isValidViewFromURL = (viewID) => {
   if (
     [
       "login",
       "register",
-      "select",
+      "plan-select",
       "gift-redeem",
       "password-forgot",
       "password-reset",
       "password-change",
-      "source-create",
+      "payment-method-create",
       "user-edit",
       "newsletter",
       "address-create"
-    ].includes(view)
+    ].includes(viewID)
   ) {
     return true;
   }
 
   return false;
+};
+
+/**
+ * Returns the current stable viewID from all old variations
+ * @param {string} view
+ * @return {string}
+ */
+export const getStableViewID = (view) => {
+  if (view === "select") {
+    return "plan-select";
+  }
+
+  if (view === "redeem") {
+    return "gift-redeem";
+  }
+
+  if (view === "address") {
+    return "address-create";
+  }
+
+  return view;
 };
 
 export const enableScroll = () => {
