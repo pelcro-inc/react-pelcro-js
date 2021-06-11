@@ -84,11 +84,11 @@ export const SavedItems = ({
           auth_token: window.Pelcro.user.read().auth_token
         },
         (error, response) => {
+          setLoading(false);
           if (error) {
             return;
           }
 
-          setLoading(false);
           setItems(response?.data?.metadata);
           ReactGA?.event?.({
             category: "ACTIONS",
