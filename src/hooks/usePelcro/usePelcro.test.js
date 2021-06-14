@@ -390,7 +390,7 @@ describe("Actions", () => {
     });
   });
 
-  describe("addCartItem", () => {
+  describe("addToCart", () => {
     test("should add new item", () => {
       const testSku = {
         currency: "cad",
@@ -409,7 +409,7 @@ describe("Actions", () => {
       const store = usePelcro();
 
       act(() => {
-        store.addCartItem(testSku.id);
+        store.addToCart(testSku.id);
       });
 
       expect(store.cartItems[0]).toEqual({ ...testSku, quantity: 1 });
@@ -433,8 +433,8 @@ describe("Actions", () => {
       const store = usePelcro();
 
       act(() => {
-        store.addCartItem(testSku.id);
-        store.addCartItem(testSku.id);
+        store.addToCart(testSku.id);
+        store.addToCart(testSku.id);
       });
 
       expect(store.cartItems[0]).toEqual({
@@ -452,7 +452,7 @@ describe("Actions", () => {
       const store = usePelcro();
 
       act(() => {
-        store.addCartItem(invalidSkuId);
+        store.addToCart(invalidSkuId);
       });
 
       expect(store.cartItems.length).toEqual(0);

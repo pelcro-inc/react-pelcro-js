@@ -16,7 +16,7 @@ export const init = () => {
     switchToAddressView,
     switchToPaymentView,
     whenEcommerceLoaded,
-    addCartItem,
+    addToCart,
     purchaseItem
   } = usePelcro.getStore();
 
@@ -228,7 +228,7 @@ export const init = () => {
         pelcroAddToCartButtonsByClass[i].addEventListener(
           "click",
           (e) => {
-            addCartItem(Number(e.target.dataset.skuId));
+            addToCart(Number(e.target.dataset.skuId));
           }
         );
       }

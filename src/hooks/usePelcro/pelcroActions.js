@@ -123,7 +123,7 @@ export class PelcroActions {
    * E-commerce Actions
    */
 
-  addCartItem = (itemSkuId) => {
+  addToCart = (itemSkuId) => {
     const itemToAdd = window.Pelcro.ecommerce.products.getBySkuId(
       Number(itemSkuId)
     );

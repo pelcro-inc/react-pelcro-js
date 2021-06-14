@@ -7,7 +7,7 @@ export const ShopSelectProductButton = ({
   itemId,
   ...otherProps
 }) => {
-  const { addCartItem } = usePelcro();
+  const { addToCart } = usePelcro();
 
   const { t } = useTranslation("shop");
 
@@ -17,7 +17,7 @@ export const ShopSelectProductButton = ({
   const handleClick = () => {
     setDisabled(true);
     setTextContent(t("buttons.added"));
-    addCartItem(itemId);
+    addToCart(itemId);
 
     setTimeout(() => {
       setDisabled(false);
