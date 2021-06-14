@@ -121,6 +121,7 @@ export { CartSubmit } from "./Components/Cart/CartSubmit";
 export { CartTotalPrice } from "./Components/Cart/CartTotalPrice";
 
 export { ShopSelectProductButton } from "./Components/Shop/ShopSelectProductButton";
+export { ShopPurchaseButton } from "./Components/Shop/ShopPurchaseButton";
 export { ShopView } from "./Components/Shop/ShopView";
 export { OrderCreateSubmitButton } from "./Components/OrderCreate/OrderCreateSubmitButton";
 export { OrderCreateContainer } from "./Components/OrderCreate/OrderCreateContainer";
