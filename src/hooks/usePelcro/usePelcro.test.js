@@ -448,6 +448,8 @@ describe("Actions", () => {
       jest
         .spyOn(window.Pelcro.ecommerce.products, "getBySkuId")
         .mockImplementation(() => null);
+      // suppress real errors
+      jest.spyOn(console, "error").mockImplementation(() => {});
 
       const store = usePelcro();
 
@@ -471,9 +473,9 @@ describe("Actions", () => {
         product_id: 1522
       };
       const store = usePelcro();
-      store.set({ cartItems: [{ ...testSku, quantity: 1 }] });
 
       act(() => {
+        store.set({ cartItems: [{ ...testSku, quantity: 1 }] });
         store.removeFromCart(testSku.id);
       });
 
@@ -491,9 +493,9 @@ describe("Actions", () => {
         product_id: 1522
       };
       const store = usePelcro();
-      store.set({ cartItems: [{ ...testSku, quantity: 2 }] });
 
       act(() => {
+        store.set({ cartItems: [{ ...testSku, quantity: 2 }] });
         store.removeFromCart(testSku.id);
       });
 
@@ -504,6 +506,9 @@ describe("Actions", () => {
     });
 
     test("should not remove anything if the id is invalid", () => {
+      // suppress real errors
+      jest.spyOn(console, "error").mockImplementation(() => {});
+
       const testSku = {
         currency: "cad",
         id: 34,
@@ -514,11 +519,10 @@ describe("Actions", () => {
         product_id: 1522
       };
       const store = usePelcro();
-      store.set({ cartItems: [{ ...testSku, quantity: 1 }] });
-
       const invalidSkuId = 999;
 
       act(() => {
+        store.set({ cartItems: [{ ...testSku, quantity: 1 }] });
         store.removeFromCart(invalidSkuId);
       });
 
@@ -555,6 +559,9 @@ describe("Actions", () => {
     });
 
     test("should not order item if the sku id is invalid", () => {
+      // suppress real errors
+      jest.spyOn(console, "error").mockImplementation(() => {});
+
       const invalidSkuId = 999;
       jest
         .spyOn(window.Pelcro.ecommerce.products, "getBySkuId")
