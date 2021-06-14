@@ -169,6 +169,8 @@ export { DatePicker } from "./SubComponents/DatePicker";
 export { Input } from "./SubComponents/Input";
 export { Link } from "./SubComponents/Link";
 export { Modal } from "./SubComponents/Modal";
+export { ModalBody } from "./SubComponents/Modal";
+export { ModalFooter } from "./SubComponents/Modal";
 export { Radio } from "./SubComponents/Radio";
 export { Select } from "./SubComponents/Select";
 
