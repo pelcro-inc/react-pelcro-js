@@ -2,6 +2,7 @@
   "buttons": {
     "select": "Select",
     "added": "Added to cart",
+    "purchase": "Purchase",
     "continue": "Continue"
   },
   "messages": {

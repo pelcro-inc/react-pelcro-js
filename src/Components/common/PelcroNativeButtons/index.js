@@ -16,7 +16,8 @@ export const init = () => {
     switchToAddressView,
     switchToPaymentView,
     whenEcommerceLoaded,
-    addCartItem
+    addCartItem,
+    purchaseItem
   } = usePelcro.getStore();
 
   const pelcroLoginButtonsByClass = document.getElementsByClassName(
@@ -255,7 +256,7 @@ export const init = () => {
             return;
           }
 
-          addCartItem(skuId);
+          purchaseItem(skuId);
 
           if (isAuthenticated()) {
             switchToAddressView();

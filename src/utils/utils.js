@@ -102,21 +102,20 @@ export const userHasAddress = () => {
   return addresses.length > 0;
 };
 
-export const calcAndFormatItemsTotal = (items) => {
+export const calcAndFormatItemsTotal = (items, currency) => {
   if (!Array.isArray(items)) return;
 
   let totalWithoutDividingBy100 = 0;
   for (const item of items) {
     totalWithoutDividingBy100 += parseFloat(
-      (item.price * item.quantity).toFixed(2)
+      ((item.price ?? item.amount) * item.quantity).toFixed(2)
     );
   }
 
-  const currency = items[0].currency;
   const locale = window.Pelcro.site.read().default_locale;
   return getFormattedPriceByLocal(
     totalWithoutDividingBy100,
-    currency,
+    currency ? currency : items[0].currency,
     locale
   );
 };

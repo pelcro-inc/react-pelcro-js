@@ -19,16 +19,12 @@ export const initialState = {
 
   // E-commerce
   cartItems: [],
+  order: null, // null | SKU[] | SKU,
 
   // User
   isAuthenticated: () => window.Pelcro.user.isAuthenticated(),
   selectedAddressId: null,
-  addressIdToEdit: null,
-
-  // internal meta-state
-  meta: {
-    orderedItems: []
-  }
+  addressIdToEdit: null
 };
 
 const createPelcroStore = () =>

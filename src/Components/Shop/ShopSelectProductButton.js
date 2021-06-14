@@ -29,7 +29,7 @@ export const ShopSelectProductButton = ({
     <Button
       {...otherProps}
       data-sku-id={itemId}
-      id={`pelcro-shop-product-${itemId}`}
+      id={`pelcro-shop-select-${itemId}`}
       onClick={handleClick}
       disabled={disabled}
     >

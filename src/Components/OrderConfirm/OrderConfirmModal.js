@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Authorship from "../common/Authorship";
 import { useTranslation } from "react-i18next";
 import {
@@ -13,34 +13,23 @@ import { calcAndFormatItemsTotal } from "../../utils/utils";
 import { usePelcro } from "../../hooks/usePelcro";
 
 export const OrderConfirmModal = (props) => {
-  const {
-    meta: { orderedItems },
-    resetView
-  } = usePelcro();
+  const userOrders = window.Pelcro.user.read().orders;
+  const latestOrder = userOrders?.[userOrders.length - 1];
 
   const { t } = useTranslation("shop");
 
+  const { resetView } = usePelcro();
+
   const onClose = () => {
-    props.onClose?.();
-    return resetView();
+    props?.onClose?.();
+    resetView();
   };
-
-  useEffect(() => {
-    props.onDisplay?.();
-
-    const enterKeyHandler = (e) => {
-      if (e.key === "Enter") onClose();
-    };
-    window.addEventListener("keydown", enterKeyHandler);
-    return () =>
-      window.removeEventListener("keydown", enterKeyHandler);
-  }, []);
 
   return (
     <Modal
       id="pelcro-order-confirm-modal"
       className="plc-border-t-8 plc-border-primary-500"
-      onClose={onClose}
+      onClose={props.onClose}
       onDisplay={props.onDisplay}
     >
       <ModalBody>
@@ -59,26 +48,31 @@ export const OrderConfirmModal = (props) => {
             <p className="plc-font-bold pelcro-order-summary-title">
               {t("labels.summary")}
             </p>
-            {orderedItems.map((item) => {
+            {latestOrder?.items.map((item) => {
+              const itemImage =
+                window.Pelcro.ecommerce.products.getBySkuId(
+                  item.product_sku_id
+                ).image;
+
               return (
                 <div
-                  key={item.id}
-                  id={`pelcro-summary-product-${item.id}`}
+                  key={item.product_sku_id}
+                  id={`pelcro-summary-product-${item.product_sku_id}`}
                   className="plc-flex plc-items-center plc-pt-2 plc-mt-2 plc-border-t plc-border-gray-400 plc-min-h-12 plc-justify-evenly pelcro-summary-product-wrapper"
                 >
                   <div className="plc-w-1/4 pelcro-summary-image-wrapper">
-                    {item.image && (
+                    {itemImage && (
                       <Badge content={item.quantity}>
                         <img
                           className="plc-object-contain plc-w-20 plc-h-20 pelcro-summary-product-image"
-                          alt={`image of ${item.name}`}
-                          src={item.image}
+                          alt={`image of ${item.product_sku_name}`}
+                          src={itemImage}
                         />
                       </Badge>
                     )}
                   </div>
                   <div className="plc-w-1/2 plc-break-words pelcro-summary-product-name">
-                    {item.name}
+                    {item.product_sku_name}
                   </div>
                   <div className="plc-w-1/5 plc-text-center pelcro-summary-product-price">
                     {calcAndFormatItemsTotal([item])}
@@ -92,7 +86,10 @@ export const OrderConfirmModal = (props) => {
                 {t("labels.total")}
               </p>
               <p className="pelcro-summary-total">
-                {calcAndFormatItemsTotal(orderedItems)}
+                {calcAndFormatItemsTotal(
+                  latestOrder?.items,
+                  latestOrder?.currency
+                )}
               </p>
             </div>
           </div>

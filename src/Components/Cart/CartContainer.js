@@ -28,7 +28,7 @@ const CartContainer = ({
   onFailure = () => {},
   children
 }) => {
-  const { cartItems } = usePelcro();
+  const { cartItems, set } = usePelcro();
 
   const { t } = useTranslation("shop");
 
@@ -76,6 +76,7 @@ const CartContainer = ({
   }, [cartItems]);
 
   const submit = (state, dispatch) => {
+    set({ order: [...cartItems] });
     onSuccess(cartItems);
   };
 

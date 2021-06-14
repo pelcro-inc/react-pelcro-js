@@ -2,6 +2,7 @@
   "buttons": {
     "select": "Choisir",
     "added": "Ajouté au panier",
+    "purchase": "Acheter",
     "continue": "Continuer au contenu"
   },
   "messages": {
