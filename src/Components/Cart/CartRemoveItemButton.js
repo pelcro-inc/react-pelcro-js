@@ -8,7 +8,7 @@ export const CartRemoveItemButton = ({
   itemId,
   ...otherProps
 }) => {
-  const { removeCartItem } = usePelcro();
+  const { removeFromCart } = usePelcro();
 
   return (
     <Button
@@ -22,7 +22,7 @@ export const CartRemoveItemButton = ({
           focusable="false"
         />
       }
-      onClick={() => removeCartItem(itemId)}
+      onClick={() => removeFromCart(itemId)}
     >
       {children}
     </Button>

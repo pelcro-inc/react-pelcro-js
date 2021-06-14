@@ -165,7 +165,7 @@ export class PelcroActions {
     return true;
   };
 
-  removeCartItem = (itemSkuId) => {
+  removeFromCart = (itemSkuId) => {
     const { cartItems } = this.get();
 
     const itemToRemoveIdx = cartItems.findIndex(

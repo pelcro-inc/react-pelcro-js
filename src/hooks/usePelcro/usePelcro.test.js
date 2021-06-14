@@ -459,7 +459,7 @@ describe("Actions", () => {
     });
   });
 
-  describe("removeCartItem", () => {
+  describe("removeFromCart", () => {
     test("should remove item from cart if the quantity is only 1", () => {
       const testSku = {
         currency: "cad",
@@ -474,7 +474,7 @@ describe("Actions", () => {
       store.set({ cartItems: [{ ...testSku, quantity: 1 }] });
 
       act(() => {
-        store.removeCartItem(testSku.id);
+        store.removeFromCart(testSku.id);
       });
 
       expect(store.cartItems.length).toEqual(0);
@@ -494,7 +494,7 @@ describe("Actions", () => {
       store.set({ cartItems: [{ ...testSku, quantity: 2 }] });
 
       act(() => {
-        store.removeCartItem(testSku.id);
+        store.removeFromCart(testSku.id);
       });
 
       expect(store.cartItems[0]).toEqual({
@@ -519,7 +519,7 @@ describe("Actions", () => {
       const invalidSkuId = 999;
 
       act(() => {
-        store.removeCartItem(invalidSkuId);
+        store.removeFromCart(invalidSkuId);
       });
 
       expect(store.cartItems[0]).toEqual({
