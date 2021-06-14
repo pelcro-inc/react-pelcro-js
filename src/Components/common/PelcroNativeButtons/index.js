@@ -233,40 +233,34 @@ export const init = () => {
         );
       }
     }
-  });
 
-  const pelcroPurchaseButtonsByClass =
-    document.getElementsByClassName("pelcro-purchase-button");
+    const pelcroPurchaseButtonsByClass =
+      document.getElementsByClassName("pelcro-purchase-button");
 
-  if (pelcroPurchaseButtonsByClass.length !== 0) {
-    for (let i = 0; i < pelcroPurchaseButtonsByClass.length; i++) {
-      pelcroPurchaseButtonsByClass[i].addEventListener(
-        "click",
-        (e) => {
-          const skuId = Number(e.target.dataset.skuId);
+    if (pelcroPurchaseButtonsByClass.length !== 0) {
+      for (let i = 0; i < pelcroPurchaseButtonsByClass.length; i++) {
+        pelcroPurchaseButtonsByClass[i].addEventListener(
+          "click",
+          (e) => {
+            const skuId = Number(e.target.dataset.skuId);
 
-          const allProducts =
-            window.Pelcro.ecommerce.products.getSkus();
+            const allProducts =
+              window.Pelcro.ecommerce.products.getSkus();
 
-          const product = allProducts.find(
-            (prod) => prod.id === skuId
-          );
+            const product = allProducts.find(
+              (prod) => prod.id === skuId
+            );
 
-          if (!product) {
-            return;
+            if (!product) {
+              return;
+            }
+
+            purchaseItem(skuId);
           }
-
-          purchaseItem(skuId);
-
-          if (isAuthenticated()) {
-            switchToAddressView();
-          } else {
-            switchView("register");
-          }
-        }
-      );
+        );
+      }
     }
-  }
+  });
 };
 
 export const authenticatedButtons = () => {
