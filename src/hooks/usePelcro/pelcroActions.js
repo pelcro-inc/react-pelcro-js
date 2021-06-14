@@ -53,7 +53,7 @@ export class PelcroActions {
       resetView,
       product,
       subscriptionIdToRenew,
-      cartItems
+      order
     } = this.get();
 
     if (product && subscriptionIdToRenew) {
@@ -64,7 +64,7 @@ export class PelcroActions {
       return switchView("subscription-create");
     }
 
-    if (cartItems.length > 0) {
+    if (order) {
       return switchView("order-create");
     }
 
@@ -123,7 +123,7 @@ export class PelcroActions {
    * E-commerce Actions
    */
 
-  addCartItem = (itemSkuId) => {
+  addToCart = (itemSkuId) => {
     const itemToAdd = window.Pelcro.ecommerce.products.getBySkuId(
       Number(itemSkuId)
     );
@@ -165,7 +165,7 @@ export class PelcroActions {
     return true;
   };
 
-  removeCartItem = (itemSkuId) => {
+  removeFromCart = (itemSkuId) => {
     const { cartItems } = this.get();
 
     const itemToRemoveIdx = cartItems.findIndex(
@@ -197,12 +197,36 @@ export class PelcroActions {
     }
 
     // remove the item
-    const newItems = [
-      ...cartItems.slice(0, itemToRemoveIdx),
-      ...cartItems.slice(itemToRemoveIdx + 1)
-    ];
+    const newItems = cartItems.filter(
+      (item) => item !== itemToRemove
+    );
 
     this.set({ cartItems: newItems });
     return true;
+  };
+
+  purchaseItem = (itemSkuId) => {
+    const quickPurchaseItem =
+      window.Pelcro.ecommerce.products.getBySkuId(Number(itemSkuId));
+
+    if (!quickPurchaseItem) {
+      console.error("invalid item SKU id");
+      return false;
+    }
+
+    const quickPurchaseItemWithQuantity = {
+      ...quickPurchaseItem,
+      quantity: 1
+    };
+
+    this.set({ order: quickPurchaseItemWithQuantity });
+
+    const { isAuthenticated, switchView, switchToAddressView } =
+      this.get();
+
+    if (!isAuthenticated()) {
+      return switchView("register");
+    }
+    switchToAddressView();
   };
 }

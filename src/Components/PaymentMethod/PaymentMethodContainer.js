@@ -92,7 +92,7 @@ const PaymentMethodContainerWithoutStripe = ({
 }) => {
   const { t } = useTranslation("payment");
   const pelcroStore = usePelcro();
-  const { set, cartItems } = usePelcro();
+  const { set, order } = usePelcro();
 
   const product = props.product ?? pelcroStore.product;
   const plan = props.plan ?? pelcroStore.plan;
@@ -400,12 +400,17 @@ const PaymentMethodContainerWithoutStripe = ({
   };
 
   const purchase = (token, state, dispatch) => {
-    window.Pelcro.ecommerce.order.create(
-      {
-        items: cartItems.map((item) => ({
+    const isQuickPurchase = !Array.isArray(order);
+    const mappedOrderItems = isQuickPurchase
+      ? [{ sku_id: order.id, quantity: order.quantity }]
+      : order.map((item) => ({
           sku_id: item.id,
           quantity: item.quantity
-        })),
+        }));
+
+    window.Pelcro.ecommerce.order.create(
+      {
+        items: mappedOrderItems,
         stripe_token: token.id,
         ...(selectedAddressId && { address_id: selectedAddressId })
       },
@@ -424,10 +429,11 @@ const PaymentMethodContainerWithoutStripe = ({
           });
         }
 
-        set((prevState) => ({
-          cartItems: [],
-          meta: { orderedItems: [...prevState.cartItems] }
-        }));
+        if (isQuickPurchase) {
+          set({ order: [] });
+        } else {
+          set({ order: [], cartItems: [] });
+        }
 
         onSuccess(res);
       }
@@ -498,18 +504,24 @@ const PaymentMethodContainerWithoutStripe = ({
           return handlePaymentError(error);
         }
 
-        const getCartItemsTotal = () => {
-          if (cartItems.length === 0) {
+        const getOrderItemsTotal = () => {
+          const isQuickPurchase = !Array.isArray(order);
+
+          if (isQuickPurchase) {
+            return order.price * order.quantity;
+          }
+
+          if (order.length === 0) {
             return null;
           }
-          const totalAmount = cartItems.reduce((total, item) => {
+
+          return order.reduce((total, item) => {
             return total + item.price * item.quantity;
           }, 0);
-          return totalAmount;
         };
 
         const totalAmount =
-          state?.updatedPrice ?? plan?.amount ?? getCartItemsTotal();
+          state?.updatedPrice ?? plan?.amount ?? getOrderItemsTotal();
 
         if (
           source?.card?.three_d_secure === "required" &&

@@ -22,7 +22,6 @@ export { RegisterLastName } from "./Components/Register/RegisterLastName";
 export { RegisterButton } from "./Components/Register/RegisterButton";
 export { RegisterJobTitle } from "./Components/Register/RegisterJobTitle";
 export { RegisterCompany } from "./Components/Register/RegisterCompany";
-export { AlertWithContext as Alert } from "./SubComponents/AlertWithContext";
 export { LoginModal } from "./Components/Login/LoginModal";
 export { RegisterModal } from "./Components/Register/RegisterModal";
 export { SelectModalWithHook as SelectModal } from "./Components/Select/SelectModal";
@@ -122,6 +121,7 @@ export { CartSubmit } from "./Components/Cart/CartSubmit";
 export { CartTotalPrice } from "./Components/Cart/CartTotalPrice";
 
 export { ShopSelectProductButton } from "./Components/Shop/ShopSelectProductButton";
+export { ShopPurchaseButton } from "./Components/Shop/ShopPurchaseButton";
 export { ShopView } from "./Components/Shop/ShopView";
 export { OrderCreateSubmitButton } from "./Components/OrderCreate/OrderCreateSubmitButton";
 export { OrderCreateContainer } from "./Components/OrderCreate/OrderCreateContainer";
@@ -160,6 +160,17 @@ export { ProfilePicChangeSelectButton } from "./Components/ProfilePicChange/Prof
 export { ProfilePicChangeRemoveButton } from "./Components/ProfilePicChange/ProfilePicChangeRemoveButton";
 export { ProfilePicChangeView } from "./Components/ProfilePicChange/ProfilePicChangeView";
 export { ProfilePicChangeModal } from "./Components/ProfilePicChange/ProfilePicChangeModal";
+
+export { AlertWithContext as Alert } from "./SubComponents/AlertWithContext";
+export { Badge } from "./SubComponents/Badge";
+export { Button } from "./SubComponents/Button";
+export { Checkbox } from "./SubComponents/Checkbox";
+export { DatePicker } from "./SubComponents/DatePicker";
+export { Input } from "./SubComponents/Input";
+export { Link } from "./SubComponents/Link";
+export { Modal } from "./SubComponents/Modal";
+export { Radio } from "./SubComponents/Radio";
+export { Select } from "./SubComponents/Select";
 
 export { default as i18n } from "./i18n";
 

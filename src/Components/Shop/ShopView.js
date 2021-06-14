@@ -1,4 +1,5 @@
 import React from "react";
+import { ShopPurchaseButton } from "./ShopPurchaseButton";
 import { ShopSelectProductButton } from "./ShopSelectProductButton";
 
 export const ShopView = () => {
@@ -28,6 +29,10 @@ export const ShopView = () => {
                   {item.description}
                 </p>
                 <ShopSelectProductButton
+                  itemId={item.id}
+                  className="plc-mt-2"
+                />
+                <ShopPurchaseButton
                   itemId={item.id}
                   className="plc-mt-2"
                 />

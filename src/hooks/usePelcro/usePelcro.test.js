@@ -280,10 +280,10 @@ describe("Actions", () => {
       expect(store.view).toEqual("subscription-renew");
     });
 
-    test("switch to order-create view when there are items in the cart", () => {
+    test("switch to order-create view when there is an order", () => {
       const store = usePelcro();
       act(() => {
-        store.set({ cartItems: [{ id: "test-item" }] });
+        store.set({ order: [{ id: "test-item" }] });
       });
 
       act(() => {
@@ -387,6 +387,186 @@ describe("Actions", () => {
 
       expect(store.selectedAddressId).toEqual(1234);
       expect(store.isGift).toEqual(true);
+    });
+  });
+
+  describe("addToCart", () => {
+    test("should add new item", () => {
+      const testSku = {
+        currency: "cad",
+        id: 34,
+        image:
+          "https://uploads.pelcro.com/images/site/ecommerce/product/sku/image/random.jpeg",
+        name: "Model 1",
+        price: 1000,
+        product_id: 1522
+      };
+
+      jest
+        .spyOn(window.Pelcro.ecommerce.products, "getBySkuId")
+        .mockImplementation(() => testSku);
+
+      const store = usePelcro();
+
+      act(() => {
+        store.addToCart(testSku.id);
+      });
+
+      expect(store.cartItems[0]).toEqual({ ...testSku, quantity: 1 });
+    });
+
+    test("should increase quantity of item if it already exists", () => {
+      const testSku = {
+        currency: "cad",
+        id: 34,
+        image:
+          "https://uploads.pelcro.com/images/site/ecommerce/product/sku/image/random.jpeg",
+        name: "Model 1",
+        price: 1000,
+        product_id: 1522
+      };
+
+      jest
+        .spyOn(window.Pelcro.ecommerce.products, "getBySkuId")
+        .mockImplementation(() => testSku);
+
+      const store = usePelcro();
+
+      act(() => {
+        store.addToCart(testSku.id);
+        store.addToCart(testSku.id);
+      });
+
+      expect(store.cartItems[0]).toEqual({
+        ...testSku,
+        quantity: 2
+      });
+    });
+
+    test("should not add the item if the id is invalid", () => {
+      const invalidSkuId = 999;
+      jest
+        .spyOn(window.Pelcro.ecommerce.products, "getBySkuId")
+        .mockImplementation(() => null);
+
+      const store = usePelcro();
+
+      act(() => {
+        store.addToCart(invalidSkuId);
+      });
+
+      expect(store.cartItems.length).toEqual(0);
+    });
+  });
+
+  describe("removeFromCart", () => {
+    test("should remove item from cart if the quantity is only 1", () => {
+      const testSku = {
+        currency: "cad",
+        id: 34,
+        image:
+          "https://uploads.pelcro.com/images/site/ecommerce/product/sku/image/random.jpeg",
+        name: "Model 1",
+        price: 1000,
+        product_id: 1522
+      };
+      const store = usePelcro();
+      store.set({ cartItems: [{ ...testSku, quantity: 1 }] });
+
+      act(() => {
+        store.removeFromCart(testSku.id);
+      });
+
+      expect(store.cartItems.length).toEqual(0);
+    });
+
+    test("should decrease quantity of item if it quantity is more than 1", () => {
+      const testSku = {
+        currency: "cad",
+        id: 34,
+        image:
+          "https://uploads.pelcro.com/images/site/ecommerce/product/sku/image/random.jpeg",
+        name: "Model 1",
+        price: 1000,
+        product_id: 1522
+      };
+      const store = usePelcro();
+      store.set({ cartItems: [{ ...testSku, quantity: 2 }] });
+
+      act(() => {
+        store.removeFromCart(testSku.id);
+      });
+
+      expect(store.cartItems[0]).toEqual({
+        ...testSku,
+        quantity: 1
+      });
+    });
+
+    test("should not remove anything if the id is invalid", () => {
+      const testSku = {
+        currency: "cad",
+        id: 34,
+        image:
+          "https://uploads.pelcro.com/images/site/ecommerce/product/sku/image/random.jpeg",
+        name: "Model 1",
+        price: 1000,
+        product_id: 1522
+      };
+      const store = usePelcro();
+      store.set({ cartItems: [{ ...testSku, quantity: 1 }] });
+
+      const invalidSkuId = 999;
+
+      act(() => {
+        store.removeFromCart(invalidSkuId);
+      });
+
+      expect(store.cartItems[0]).toEqual({
+        ...testSku,
+        quantity: 1
+      });
+    });
+  });
+
+  describe("purchaseItem", () => {
+    test("should create an order for this single item", () => {
+      const testSku = {
+        currency: "cad",
+        id: 34,
+        image:
+          "https://uploads.pelcro.com/images/site/ecommerce/product/sku/image/random.jpeg",
+        name: "Model 1",
+        price: 1000,
+        product_id: 1522
+      };
+
+      jest
+        .spyOn(window.Pelcro.ecommerce.products, "getBySkuId")
+        .mockImplementation(() => testSku);
+
+      const store = usePelcro();
+
+      act(() => {
+        store.purchaseItem(testSku.id);
+      });
+
+      expect(store.order).toEqual({ ...testSku, quantity: 1 });
+    });
+
+    test("should not order item if the sku id is invalid", () => {
+      const invalidSkuId = 999;
+      jest
+        .spyOn(window.Pelcro.ecommerce.products, "getBySkuId")
+        .mockImplementation(() => null);
+
+      const store = usePelcro();
+
+      act(() => {
+        store.purchaseItem(invalidSkuId);
+      });
+
+      expect(store.order).toBeNull;
     });
   });
 });

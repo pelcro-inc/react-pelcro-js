@@ -22,7 +22,7 @@ export const CartView = (props) => {
       {cartItems.length ? (
         <form
           action="javascript:void(0);"
-          className="plc-mt-2 pelcro-form"
+          className="plc-mt-2 pelcro-form plc-text-gray-900"
         >
           <CartContainer {...props}>
             <AlertWithContext />
