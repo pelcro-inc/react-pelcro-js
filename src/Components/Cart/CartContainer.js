@@ -68,7 +68,9 @@ const CartContainer = ({
           type: SHOW_ALERT,
           payload: {
             type: "error",
-            content: t("messages.currencyMismatch")
+            content: t("messages.currencyMismatch", {
+              currency: userCurrency.toUpperCase()
+            })
           }
         });
       }
