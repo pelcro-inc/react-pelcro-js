@@ -12,7 +12,7 @@
     },
     "haveQuestions": "N’hésitez pas à nous contacter pour toute question !",
     "multipleCurrencies": "Votre panier contient des articles disponibles dans différentes devises. Avant de passer à la caisse, veuillez vous assurer que tous les articles ont la même devise.",
-    "currencyMismatch": "Les articles sélectionnés ne correspondent pas à la devise actuelle de votre compte ({{currency}}). Veuillez choisir un autre article."
+    "currencyMismatch": "Les articles sélectionnés ne sont pas compatibles avec la devise associée à votre compte ({{currency}}). Veuillez choisir des articles uniquement offerts dans cette devise."
   },
   "labels": {
     "summary": "récapitulatif de commande",

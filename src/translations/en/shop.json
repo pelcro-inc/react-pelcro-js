@@ -12,7 +12,7 @@
     },
     "haveQuestions": "If you have any queries please don't hesitate to contact us!",
     "multipleCurrencies": "Your cart currently contains items which are available in different currencies. In order to proceed with the checkout, please make sure that all items have the same currency.",
-    "currencyMismatch": "The selected items do not match your current account currency ({{currency}}). Please choose a different item."
+    "currencyMismatch": "The selected item(s) do not match your current default currency ({{currency}}). Please choose item(s) only matching this currency."
   },
   "labels": {
     "summary": "Order summary",
