@@ -20,13 +20,13 @@ export function Modal({
     ReactGA?.event?.({
       category: "VIEWS",
       action: `${id
-        .replace("pelcro-", "")
-        .replaceAll("-", " ")} viewed`,
+        ?.replace("pelcro-", "")
+        ?.replaceAll("-", " ")} viewed`,
       nonInteraction: true
     });
 
     window.Pelcro.insight.track("Modal Displayed", {
-      name: `${id.replace("pelcro-", "").replaceAll("-", " ")}`
+      name: `${id?.replace("pelcro-", "")?.replaceAll("-", " ")}`
     });
   }, []);
 

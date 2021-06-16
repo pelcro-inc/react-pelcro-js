@@ -15,6 +15,10 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 - Setup tests in the repo and add added first test suite. [PRIVATE]
 - Atomic comps to exported components [PRIVATE]
 
+### Fixed
+
+- Respect plan quantity in subscription view
+
 ### Changed
 
 - Replaced app.js with Main.js using the new external API. [PRIVATE]

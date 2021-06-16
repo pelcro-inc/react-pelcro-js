@@ -1,6 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { usePelcro } from "../../hooks/usePelcro";
+import { getFormattedPriceByLocal } from "../../utils/utils";
 import { PaymentMethodView } from "../PaymentMethod/PaymentMethodView";
 
 export const SubscriptionCreateView = ({
@@ -18,6 +19,13 @@ export const SubscriptionCreateView = ({
       count: interval_count
     });
 
+    const { default_locale } = Pelcro.site.read();
+    const priceFormatted = getFormattedPriceByLocal(
+      plan?.amount * (plan?.quantity ?? 1),
+      plan?.currency,
+      default_locale
+    );
+
     return (
       <p className="plc-text-gray-600">
         <span className="plc-tracking-wider plc-uppercase">
@@ -25,7 +33,7 @@ export const SubscriptionCreateView = ({
         </span>
         <br />
         <span className="plc-text-xl plc-font-semibold plc-text-primary-600">
-          {plan.amount_formatted}{" "}
+          {priceFormatted}{" "}
         </span>
         <span className="plc-font-thin">
           {autoRenewed ? "/" : t("labels.for")} {intervalText}
