@@ -9,12 +9,18 @@ import {
 import { Button } from "../../SubComponents/Button";
 import { ReactComponent as CheckMark } from "../../assets/check-solid.svg";
 import { Badge } from "../../SubComponents/Badge";
-import { calcAndFormatItemsTotal } from "../../utils/utils";
+import {
+  calcAndFormatItemsTotal,
+  getFormattedPriceByLocal
+} from "../../utils/utils";
 import { usePelcro } from "../../hooks/usePelcro";
 
 export const OrderConfirmModal = (props) => {
   const userOrders = window.Pelcro.user.read().orders;
   const latestOrder = userOrders?.[userOrders.length - 1];
+  const latestOrderDiscount = latestOrder?.coupon?.percent_off;
+
+  const locale = window.Pelcro.site.read().default_locale;
 
   const { t } = useTranslation("shop");
 
@@ -86,9 +92,11 @@ export const OrderConfirmModal = (props) => {
                 {t("labels.total")}
               </p>
               <p className="pelcro-summary-total">
-                {calcAndFormatItemsTotal(
-                  latestOrder?.items,
-                  latestOrder?.currency
+                {latestOrderDiscount && `(-${latestOrderDiscount}%) `}
+                {getFormattedPriceByLocal(
+                  latestOrder?.amount,
+                  latestOrder?.currency,
+                  locale
                 )}
               </p>
             </div>

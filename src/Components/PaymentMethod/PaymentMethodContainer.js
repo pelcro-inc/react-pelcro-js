@@ -169,52 +169,72 @@ const PaymentMethodContainerWithoutStripe = ({
   const onApplyCouponCode = (state, dispatch) => {
     const { couponCode } = state;
 
+    const handleCouponResponse = (err, res) => {
+      dispatch({ type: DISABLE_COUPON_BUTTON, payload: false });
+
+      if (err) {
+        dispatch({ type: SET_PERCENT_OFF, payload: "" });
+        onFailure(err);
+
+        return dispatch({
+          type: SET_COUPON_ERROR,
+          payload: getErrorMessages(err)
+        });
+      }
+
+      dispatch({
+        type: SHOW_ALERT,
+        payload: { type: "error", content: "" }
+      });
+
+      dispatch({
+        type: SET_COUPON,
+        payload: res.data.coupon
+      });
+
+      dispatch({
+        type: SET_PERCENT_OFF,
+        payload: `${res.data.coupon?.percent_off}%`
+      });
+
+      dispatch({
+        type: SET_UPDATED_PRICE,
+        payload: res.data.total
+      });
+
+      dispatch({ type: UPDATE_PAYMENT_REQUEST });
+    };
+
     if (couponCode?.trim()) {
       dispatch({ type: DISABLE_COUPON_BUTTON, payload: true });
 
-      window.Pelcro.order.create(
-        {
-          auth_token: window.Pelcro.user.read().auth_token,
-          plan_id: plan.id,
-          coupon_code: couponCode,
-          address_id: selectedAddressId
-        },
-        (err, res) => {
-          dispatch({ type: DISABLE_COUPON_BUTTON, payload: false });
+      if (type === "createPayment") {
+        window.Pelcro.order.create(
+          {
+            auth_token: window.Pelcro.user.read().auth_token,
+            plan_id: plan.id,
+            coupon_code: couponCode,
+            address_id: selectedAddressId
+          },
+          handleCouponResponse
+        );
+      } else if (type === "orderCreate") {
+        const isQuickPurchase = !Array.isArray(order);
+        const mappedOrderItems = isQuickPurchase
+          ? [{ sku_id: order.id, quantity: order.quantity }]
+          : order.map((item) => ({
+              sku_id: item.id,
+              quantity: item.quantity
+            }));
 
-          if (err) {
-            dispatch({ type: SET_PERCENT_OFF, payload: "" });
-            onFailure(err);
-
-            return dispatch({
-              type: SET_COUPON_ERROR,
-              payload: getErrorMessages(err)
-            });
-          }
-
-          dispatch({
-            type: SHOW_ALERT,
-            payload: { type: "error", content: "" }
-          });
-
-          dispatch({
-            type: SET_COUPON,
-            payload: res.data.coupon
-          });
-
-          dispatch({
-            type: SET_PERCENT_OFF,
-            payload: `${res.data.coupon?.percent_off}%`
-          });
-
-          dispatch({
-            type: SET_UPDATED_PRICE,
-            payload: res.data.total
-          });
-
-          dispatch({ type: UPDATE_PAYMENT_REQUEST });
-        }
-      );
+        window.Pelcro.ecommerce.order.createSummary(
+          {
+            items: mappedOrderItems,
+            coupon_code: couponCode
+          },
+          handleCouponResponse
+        );
+      }
     }
   };
 
@@ -408,9 +428,12 @@ const PaymentMethodContainerWithoutStripe = ({
           quantity: item.quantity
         }));
 
+    const { couponCode } = state;
+
     window.Pelcro.ecommerce.order.create(
       {
         items: mappedOrderItems,
+        coupon_code: couponCode,
         stripe_token: token.id,
         ...(selectedAddressId && { address_id: selectedAddressId })
       },
@@ -430,9 +453,9 @@ const PaymentMethodContainerWithoutStripe = ({
         }
 
         if (isQuickPurchase) {
-          set({ order: [] });
+          set({ order: null });
         } else {
-          set({ order: [], cartItems: [] });
+          set({ order: null, cartItems: [] });
         }
 
         onSuccess(res);
