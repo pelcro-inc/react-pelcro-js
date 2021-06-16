@@ -49,8 +49,14 @@ const AddressSelectContainer = ({
   ...props
 }) => {
   const { t } = useTranslation("address");
-  const { giftCode: giftCodeFromStore, set } = usePelcro();
+  const {
+    giftCode: giftCodeFromStore,
+    subscriptionIdToRenew: subscriptionIdToRenewFromStore,
+    set
+  } = usePelcro();
   const giftCode = props.giftCode ?? giftCodeFromStore;
+  const subscriptionIdToRenew =
+    props.subscriptionIdToRenew ?? subscriptionIdToRenewFromStore;
 
   const submitAddress = ({ selectedAddressId }, dispatch) => {
     set({ selectedAddressId });
@@ -64,7 +70,9 @@ const AddressSelectContainer = ({
       {
         auth_token: window.Pelcro.user.read().auth_token,
         gift_code: giftCode,
-        address_id: selectedAddressId
+        address_id: selectedAddressId,
+        // redeem gift as a future phase of an existing subscription
+        subscription_id: subscriptionIdToRenew
       },
       (err, res) => {
         dispatch({ type: LOADING, payload: false });

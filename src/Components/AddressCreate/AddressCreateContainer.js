@@ -64,11 +64,14 @@ const AddressCreateContainer = ({
   const { t } = useTranslation("address");
   const {
     giftCode: giftCodeFromStore,
+    subscriptionIdToRenew: subscriptionIdToRenewFromStore,
     product,
     order,
     set
   } = usePelcro();
   const giftCode = props.giftCode ?? giftCodeFromStore;
+  const subscriptionIdToRenew =
+    props.subscriptionIdToRenew ?? subscriptionIdToRenewFromStore;
 
   useEffect(() => {
     const getCountries = () => {
@@ -155,7 +158,9 @@ const AddressCreateContainer = ({
             {
               auth_token: window.Pelcro.user.read().auth_token,
               gift_code: giftCode,
-              address_id: newAddressId
+              address_id: newAddressId,
+              // redeem gift as a future phase of an existing subscription
+              subscription_id: subscriptionIdToRenew
             },
             (err, res) => {
               dispatch({ type: LOADING, payload: false });
