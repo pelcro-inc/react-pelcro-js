@@ -1,35 +1,39 @@
 import React, { useContext } from "react";
+import { usePelcro } from "../../hooks/usePelcro";
 import { useTranslation } from "react-i18next";
 import { store } from "./PaymentMethodContainer";
 import { SUBMIT_PAYMENT } from "../../utils/action-types";
 import { Button } from "../../SubComponents/Button";
 import { getFormattedPriceByLocal } from "../../utils/utils";
 
-export const SubmitPaymentMethod = ({ children }) => {
+export const SubmitPaymentMethod = () => {
+  const { plan } = usePelcro();
   const { t } = useTranslation("checkoutForm");
   const {
     dispatch,
-    state: { disableSubmit, isLoading, updatedPrice, currentPlan }
+    state: { disableSubmit, isLoading, updatedPrice }
   } = useContext(store);
-
   const { default_locale } = Pelcro.site.read();
+
+  const planQuantity = plan?.quantity ?? 1;
+  const price = updatedPrice ?? plan?.amount;
   const priceFormatted = getFormattedPriceByLocal(
-    updatedPrice ?? currentPlan?.amount,
-    currentPlan?.currency,
+    price * planQuantity,
+    plan?.currency,
     default_locale
   );
 
   return (
     <Button
       role="submit"
-      className="plc-py-3 plc-w-full"
+      className="plc-w-full plc-py-3"
       variant="solid"
       isLoading={isLoading}
       onClick={() => dispatch({ type: SUBMIT_PAYMENT })}
       disabled={disableSubmit}
     >
       {/* Show price on button only if there's a selected plan */}
-      {currentPlan ? (
+      {plan ? (
         <span className="plc-capitalize ">
           {t("labels.pay")} {priceFormatted && priceFormatted}
         </span>
