@@ -14,6 +14,7 @@
     "generateFiles": "SET NODE_ENV=production&&rollup -c",
     "deploy": "SET NODE_ENV=production&&yarn generateFiles && yarn publish",
     "lint": "eslint ./src/**/*.js --fix",
+    "commit": "cz",
     "semantic-release": "semantic-release"
   },
   "browserslist": [
@@ -54,6 +55,7 @@
     "browserslist": "^4.16.3",
     "css-loader": "^3.2.0",
     "cssimportant-loader": "^0.4.0",
+    "cz-conventional-changelog": "3.3.0",
     "eslint": "^7.19.0",
     "eslint-config-google": "^0.14.0",
     "eslint-config-prettier": "^6.11.0",
@@ -86,14 +88,14 @@
     "rollup-plugin-postcss": "^4.0.0",
     "rollup-plugin-visualizer": "^4.2.0",
     "sass-loader": "^7.1.0",
+    "semantic-release": "^17.4.4",
     "simple-zustand-devtools": "^1.0.0",
     "style-loader": "^2.0.0",
     "tailwindcss": "^2.0.2",
     "travis-ci-cloudfront-invalidation": "^1.1.0",
     "webpack": "^4.44.1",
     "webpack-cli": "^4.3.0",
-    "webpack-dev-server": "^3.11.2",
-    "semantic-release": "^17.4.4"
+    "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
     "@headlessui/react": "^0.3.0",
@@ -126,5 +128,10 @@
   },
   "publishConfig": {
     "access": "restricted"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
