@@ -11,8 +11,7 @@
   "scripts": {
     "preinstall": "git config core.hooksPath qa/hooks",
     "start": "webpack serve",
-    "generateFiles": "cross-env NODE_ENV=production && rollup -c",
-    "deploy": "cross-env NODE_ENV=production && yarn generateFiles && yarn publish",
+    "generateFiles": "cross-env NODE_ENV=production rollup -c",
     "lint": "eslint ./src/**/*.js --fix",
     "commit": "cz",
     "test": "node ./__tests__/sdkDownloader&&jest --watchAll",
