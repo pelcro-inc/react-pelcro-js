@@ -34,4 +34,4 @@ export const PaymentMethodUpdateModal = (props) => {
   );
 };
 
-PaymentMethodUpdateModal.viewId = "payment-method-create";
+PaymentMethodUpdateModal.viewId = "payment-method-update";

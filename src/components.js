@@ -36,6 +36,7 @@ export { PaymentMethodContainer } from "./Components/PaymentMethod/PaymentMethod
 export { PaymentMethodView } from "./Components/PaymentMethod/PaymentMethodView";
 export { ApplyCouponButton } from "./Components/PaymentMethod/ApplyCouponButton";
 export { CouponCode } from "./Components/PaymentMethod/CouponCode";
+export { BankRedirection } from "./Components/PaymentMethod/BankRedirection";
 export { CouponCodeField } from "./Components/PaymentMethod/CouponCodeField";
 export { SubmitPaymentMethod } from "./Components/PaymentMethod/SubmitPaymentMethod";
 export { SubscriptionCreateModal } from "./Components/SubscriptionCreate/SubscriptionCreateModal";

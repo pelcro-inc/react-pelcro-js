@@ -15,6 +15,7 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 - Ability to use coupon codes when buying e-commerce products.
 - Setup tests in the repo and add added first test suite. [PRIVATE]
 - Atomic comps to exported components [PRIVATE]
+- Add BankRedirection component for payment views 3DSecure flow.
 
 ### Fixed
 

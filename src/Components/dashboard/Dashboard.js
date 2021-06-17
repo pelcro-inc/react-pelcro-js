@@ -134,7 +134,7 @@ class Dashboard extends Component {
   };
 
   displaySourceCreate = () => {
-    return this.props.setView("payment-method-create");
+    return this.props.setView("payment-method-update");
   };
 
   displayUserEdit = () => {
