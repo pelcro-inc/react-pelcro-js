@@ -11,8 +11,8 @@
   "scripts": {
     "preinstall": "git config core.hooksPath qa/hooks",
     "start": "webpack serve",
-    "generateFiles": "set NODE_ENV=production&&rollup -c",
-    "deploy": "SET NODE_ENV=production&&yarn generateFiles && yarn publish",
+    "generateFiles": "cross-env NODE_ENV=production && rollup -c",
+    "deploy": "cross-env NODE_ENV=production && yarn generateFiles && yarn publish",
     "lint": "eslint ./src/**/*.js --fix",
     "commit": "cz",
     "test": "node ./__tests__/sdkDownloader&&jest --watchAll",
@@ -97,7 +97,8 @@
     "travis-ci-cloudfront-invalidation": "^1.1.0",
     "webpack": "^4.44.1",
     "webpack-cli": "^4.3.0",
-    "webpack-dev-server": "^3.11.2"
+    "webpack-dev-server": "^3.11.2",
+    "cross-env": "^7.0.3"
   },
   "dependencies": {
     "@headlessui/react": "^0.3.0",
