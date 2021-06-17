@@ -2,9 +2,7 @@ name: Release npm package
 
 on:
   push:
-    branches:
-      - master
-
+    branches: [next, master]
 jobs:
   release:
     name: Release
@@ -21,7 +19,8 @@ jobs:
       - name: Build
         run: yarn run generateFiles
 
-      - run: yarn run semantic-release
+      - name: Publish
+        run: yarn run semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
