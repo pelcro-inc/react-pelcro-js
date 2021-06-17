@@ -135,7 +135,7 @@ export const isValidViewFromURL = (viewID) => {
       "password-forgot",
       "password-reset",
       "password-change",
-      "payment-method-create",
+      "payment-method-update",
       "user-edit",
       "newsletter",
       "address-create"
