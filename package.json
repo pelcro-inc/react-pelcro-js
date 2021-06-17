@@ -1,7 +1,7 @@
 {
   "name": "@pelcro/react-pelcro-js",
   "description": "Pelcro's React UI Elements",
-  "version": "0.20.0",
+  "version": "0.0.0-development",
   "private": false,
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
@@ -12,11 +12,9 @@
     "preinstall": "git config core.hooksPath qa/hooks",
     "start": "webpack serve",
     "generateFiles": "SET NODE_ENV=production&&rollup -c",
-    "release": "SET NODE_ENV=production&&yarn generateFiles&&yarn publish&&git push&&git push --tags",
-    "release:next": "SET NODE_ENV=production&&yarn generateFiles&&yarn publish --tag next&&git push&&git push --tags",
+    "deploy": "SET NODE_ENV=production&&yarn generateFiles && yarn publish",
     "lint": "eslint ./src/**/*.js --fix",
-    "test": "node ./__tests__/sdkDownloader&&jest --watchAll",
-    "test:once": "node ./__tests__/sdkDownloader&&jest"
+    "semantic-release": "semantic-release"
   },
   "browserslist": [
     "last 8 ChromeAndroid versions",
@@ -94,7 +92,8 @@
     "travis-ci-cloudfront-invalidation": "^1.1.0",
     "webpack": "^4.44.1",
     "webpack-cli": "^4.3.0",
-    "webpack-dev-server": "^3.11.2"
+    "webpack-dev-server": "^3.11.2",
+    "semantic-release": "^17.4.4"
   },
   "dependencies": {
     "@headlessui/react": "^0.3.0",
@@ -120,5 +119,12 @@
       "@babel/plugin-proposal-optional-chaining",
       "@babel/plugin-proposal-nullish-coalescing-operator"
     ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pelcro-inc/react-pelcro-js.git"
+  },
+  "publishConfig": {
+    "access": "restricted"
   }
 }
