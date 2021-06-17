@@ -1,4 +1,4 @@
-name: Release npm package
+name: Release package
 
 on:
   push:
@@ -9,12 +9,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
         with:
-          node-version: "12.x"
+          persist-credentials: false
 
-      - name: Install Dependencies
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "14"
+
+      - name: Install dependencies
         run: yarn install
+
+      - name: Run tests
+        run: yarn test:once
 
       - name: Build
         run: yarn run generateFiles

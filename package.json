@@ -11,10 +11,12 @@
   "scripts": {
     "preinstall": "git config core.hooksPath qa/hooks",
     "start": "webpack serve",
-    "generateFiles": "SET NODE_ENV=production&&rollup -c",
+    "generateFiles": "set NODE_ENV=production&&rollup -c",
     "deploy": "SET NODE_ENV=production&&yarn generateFiles && yarn publish",
     "lint": "eslint ./src/**/*.js --fix",
     "commit": "cz",
+    "test": "node ./__tests__/sdkDownloader&&jest --watchAll",
+    "test:once": "node ./__tests__/sdkDownloader&&jest",
     "semantic-release": "semantic-release"
   },
   "browserslist": [
