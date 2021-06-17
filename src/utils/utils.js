@@ -108,7 +108,9 @@ export const calcAndFormatItemsTotal = (items, currency) => {
   let totalWithoutDividingBy100 = 0;
   for (const item of items) {
     totalWithoutDividingBy100 += parseFloat(
-      ((item.price ?? item.amount) * item.quantity).toFixed(2)
+      item.price
+        ? (item.price * item.quantity).toFixed(2)
+        : item.amount.toFixed(2)
     );
   }
 

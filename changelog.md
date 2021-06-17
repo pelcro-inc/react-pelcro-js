@@ -12,6 +12,7 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 - Added PelcroModalController component to orchestrate between modals & initialize features.
 - Show an error in the cart modal if there are items that don't match the user account's currency, or if there are items with multiple different currencies.
 - Keep cart items between different sessions on the same device.
+- Ability to use coupon codes when buying e-commerce products.
 - Setup tests in the repo and add added first test suite. [PRIVATE]
 - Atomic comps to exported components [PRIVATE]
 

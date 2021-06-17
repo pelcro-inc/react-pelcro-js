@@ -11,8 +11,8 @@
       "body": "Your order has been confirmed and will be shipped within the next few days. You'll shortly receive an email confirmation of this order."
     },
     "haveQuestions": "If you have any queries please don't hesitate to contact us!",
-    "multipleCurrencies": "You have items with different currencies in your cart, all cart items must have the same currency.",
-    "currencyMismatch": "Cart items currency doesn't match your account's currency."
+    "multipleCurrencies": "Your cart currently contains items which are available in different currencies. In order to proceed with the checkout, please make sure that all items have the same currency.",
+    "currencyMismatch": "The selected item(s) do not match your current default currency ({{currency}}). Please choose item(s) only matching this currency."
   },
   "labels": {
     "summary": "Order summary",

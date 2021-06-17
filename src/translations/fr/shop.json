@@ -11,8 +11,8 @@
       "body": "Votre commande a été confirmée et vous sera expédiée dans les prochains jours. Vous recevrez un courriel de confirmation sous peu."
     },
     "haveQuestions": "N’hésitez pas à nous contacter pour toute question !",
-    "multipleCurrencies": "Vous avez des articles avec des devises différentes dans votre panier, tous les articles du panier doivent avoir la même devise.",
-    "currencyMismatch": "La devise des articles du panier ne correspond pas à la devise de votre compte."
+    "multipleCurrencies": "Votre panier contient des articles disponibles dans différentes devises. Avant de passer à la caisse, veuillez vous assurer que tous les articles ont la même devise.",
+    "currencyMismatch": "Les articles sélectionnés ne sont pas compatibles avec la devise associée à votre compte ({{currency}}). Veuillez choisir des articles uniquement offerts dans cette devise."
   },
   "labels": {
     "summary": "récapitulatif de commande",

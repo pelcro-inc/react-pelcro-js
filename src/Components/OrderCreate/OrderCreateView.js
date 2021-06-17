@@ -15,7 +15,7 @@ export const OrderCreateView = (props) => {
       >
         <PaymentMethodView
           type="orderCreate"
-          showCoupon={false}
+          showCoupon={true}
           showExternalPaymentMethods={false}
           {...props}
         />
