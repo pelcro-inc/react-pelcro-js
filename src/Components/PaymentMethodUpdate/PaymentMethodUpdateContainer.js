@@ -2,5 +2,7 @@ import React from "react";
 import { PaymentMethodContainer } from "../PaymentMethod/PaymentMethodContainer";
 
 export const PaymentMethodUpdateContainer = (props) => {
-  return <PaymentMethodContainer {...props} />;
+  return (
+    <PaymentMethodContainer type="updatePaymentSource" {...props} />
+  );
 };
