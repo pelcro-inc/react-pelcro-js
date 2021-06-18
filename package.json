@@ -2,6 +2,7 @@
   "name": "@pelcro/react-pelcro-js",
   "description": "Pelcro's React UI Elements",
   "version": "0.0.0-development",
+  "license": "MIT",
   "private": false,
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
@@ -54,6 +55,7 @@
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "babel-preset-react-app": "^10.0.0",
     "browserslist": "^4.16.3",
+    "cross-env": "^7.0.3",
     "css-loader": "^3.2.0",
     "cssimportant-loader": "^0.4.0",
     "cz-conventional-changelog": "3.3.0",
@@ -74,7 +76,7 @@
     "postcss": "^8.2.4",
     "postcss-import": "^14.0.0",
     "postcss-loader": "4.2.0",
-    "prettier": "^2.2.1",
+    "prettier": "2.3.1",
     "react": "^16.6.1",
     "react-dom": "^16.6.1",
     "react-ga": "^2.7.0",
@@ -96,8 +98,7 @@
     "travis-ci-cloudfront-invalidation": "^1.1.0",
     "webpack": "^4.44.1",
     "webpack-cli": "^4.3.0",
-    "webpack-dev-server": "^3.11.2",
-    "cross-env": "^7.0.3"
+    "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
     "@headlessui/react": "^0.3.0",
