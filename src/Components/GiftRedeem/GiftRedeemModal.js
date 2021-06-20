@@ -13,16 +13,11 @@ import { usePelcro } from "../../hooks/usePelcro";
 export const GiftRedeemModal = ({
   onClose,
   onDisplay,
-  setView,
-  hideHeaderLogo,
   ...otherProps
 }) => {
   const { t } = useTranslation("register");
-  const {
-    switchView,
-    switchToAddressView,
-    isAuthenticated
-  } = usePelcro();
+  const { switchView, switchToAddressView, isAuthenticated } =
+    usePelcro();
 
   const onSuccess = (giftCode) => {
     otherProps.onSuccess?.(giftCode);
@@ -43,13 +38,18 @@ export const GiftRedeemModal = ({
         <GiftRedeemView {...otherProps} onSuccess={onSuccess} />
       </ModalBody>
       <ModalFooter>
-        <p>
-          {t("redeem.footer.click")}{" "}
-          <Link id="pelcro-link-redeem" onClick={switchToAddressView}>
-            {t("redeem.footer.here")}
-          </Link>{" "}
-          {t("redeem.footer.toAdd")}
-        </p>
+        {isAuthenticated() && (
+          <p>
+            {t("redeem.footer.click")}{" "}
+            <Link
+              id="pelcro-link-redeem"
+              onClick={switchToAddressView}
+            >
+              {t("redeem.footer.here")}
+            </Link>{" "}
+            {t("redeem.footer.toAdd")}
+          </p>
+        )}
         <Authorship />
       </ModalFooter>
     </Modal>

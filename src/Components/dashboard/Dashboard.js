@@ -354,18 +354,20 @@ class Dashboard extends Component {
                   {this.locale("labels.unsubscribe")}
                 </Button>
               )}
-              {sub.cancel_at_period_end === 1 && sub.plan.auto_renew && (
-                <Button
-                  variant="ghost"
-                  className="plc-text-green-400 focus:plc-ring-green-300"
-                  icon={<RefreshIcon />}
-                  onClick={onReactivateClick}
-                  disabled={this.state.disableSubmit}
-                  data-key={sub.id}
-                >
-                  {this.locale("labels.reactivate")}
-                </Button>
-              )}
+              {sub.cancel_at_period_end === 1 &&
+                sub.plan.auto_renew &&
+                !sub.is_gift_recipient && (
+                  <Button
+                    variant="ghost"
+                    className="plc-text-green-400 focus:plc-ring-green-300"
+                    icon={<RefreshIcon />}
+                    onClick={onReactivateClick}
+                    disabled={this.state.disableSubmit}
+                    data-key={sub.id}
+                  >
+                    {this.locale("labels.reactivate")}
+                  </Button>
+                )}
               {sub.cancel_at_period_end === 1 && (
                 <Button
                   variant="ghost"
@@ -852,6 +854,5 @@ class Dashboard extends Component {
   }
 }
 
-export const DashboardWithTrans = withTranslation("dashboard")(
-  Dashboard
-);
+export const DashboardWithTrans =
+  withTranslation("dashboard")(Dashboard);
