@@ -71,7 +71,9 @@ const AddressCreateContainer = ({
   } = usePelcro();
   const giftCode = props.giftCode ?? giftCodeFromStore;
   const subscriptionIdToRenew =
-    props.subscriptionIdToRenew ?? subscriptionIdToRenewFromStore;
+    props.subscriptionIdToRenew ??
+    subscriptionIdToRenewFromStore ??
+    undefined;
 
   useEffect(() => {
     const getCountries = () => {

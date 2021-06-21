@@ -36,6 +36,7 @@
     "actions": "Actions",
     "expiresOn": "Ends",
     "renewsOn": "Renews",
+    "canceledOn": "Canceled on",
     "isSureToCancel": "Are you sure you want to cancel your subscription?",
     "recipient": "Recipient",
     "addAddress": "Add address",

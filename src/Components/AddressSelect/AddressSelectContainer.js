@@ -56,7 +56,9 @@ const AddressSelectContainer = ({
   } = usePelcro();
   const giftCode = props.giftCode ?? giftCodeFromStore;
   const subscriptionIdToRenew =
-    props.subscriptionIdToRenew ?? subscriptionIdToRenewFromStore;
+    props.subscriptionIdToRenew ??
+    subscriptionIdToRenewFromStore ??
+    undefined;
 
   const submitAddress = ({ selectedAddressId }, dispatch) => {
     set({ selectedAddressId });
