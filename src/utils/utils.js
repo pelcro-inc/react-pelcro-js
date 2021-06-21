@@ -117,7 +117,7 @@ export const calcAndFormatItemsTotal = (items, currency) => {
   const locale = window.Pelcro.site.read().default_locale;
   return getFormattedPriceByLocal(
     totalWithoutDividingBy100,
-    currency ? currency : items[0].currency,
+    currency,
     locale
   );
 };

@@ -49,7 +49,7 @@ export const CartView = (props) => {
                       {item.name}
                     </div>
                     <div className="plc-w-1/5 plc-text-center pelcro-cart-product-price">
-                      {calcAndFormatItemsTotal([item])}
+                      {calcAndFormatItemsTotal([item], item.currency)}
                     </div>
                     <CartRemoveItemButton
                       itemId={item.id}

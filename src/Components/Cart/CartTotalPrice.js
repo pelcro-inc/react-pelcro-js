@@ -10,6 +10,7 @@ export const CartTotalPrice = () => {
   } = useContext(store);
 
   const { cartItems } = usePelcro();
+  const totalPriceCurrency = cartItems[0].currency;
 
   const { t } = useTranslation("cart");
 
@@ -20,7 +21,7 @@ export const CartTotalPrice = () => {
           {t("total")}:
         </p>
         <p className="pelcro-cart-total">
-          {calcAndFormatItemsTotal(cartItems)}
+          {calcAndFormatItemsTotal(cartItems, totalPriceCurrency)}
         </p>
       </>
     );
