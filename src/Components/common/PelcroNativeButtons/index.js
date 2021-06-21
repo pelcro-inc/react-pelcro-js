@@ -242,20 +242,20 @@ export const init = () => {
         pelcroPurchaseButtonsByClass[i].addEventListener(
           "click",
           (e) => {
-            const skuId = Number(e.target.dataset.skuId);
+            const skuIdToPurcahse = Number(e.target.dataset.skuId);
 
-            const allProducts =
+            const allSkus =
               window.Pelcro.ecommerce.products.getSkus();
 
-            const product = allProducts.find(
-              (prod) => prod.id === skuId
+            const skuExists = allSkus.some(
+              (sku) => sku.id === skuIdToPurcahse
             );
 
-            if (!product) {
+            if (!skuExists) {
               return;
             }
 
-            purchaseItem(skuId);
+            purchaseItem(skuIdToPurcahse);
           }
         );
       }
