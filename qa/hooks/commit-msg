@@ -9,15 +9,15 @@ Git commit hook:
 import sys
 import re
 
-valid_commit_types = ['feat', 'fix', 'docs', 'style', 'refactor', 'test', 'chore', ]
+valid_commit_types = ['feat', 'fix', 'docs', 'style', 'refactor', 'perf', 'build', 'ci', 'test', 'chore', 'revert']
 commit_file = sys.argv[1]
 help_address = 'https://gist.github.com/stephenparish/9941e89d80e2bc58a153'
 
 with open(commit_file) as commit:
     lines = commit.readlines()
     if len(lines) == 0:
-        sys.stderr.write("\nEmpty commit message\n")
-        sys.stderr.write("\n - Commit message guide: %s\n\n" % help_address)
+        sys.stderr.write("\nEmpty commit messages are not allowed\n")
+        sys.stderr.write("\nCommit message guide: %s\n\n" % help_address)
         sys.exit(1)
 
     # first line
@@ -25,23 +25,23 @@ with open(commit_file) as commit:
     m = re.search('^(.*)\((.*)\): (.*)$', line)
 
     if not m or len(m.groups()) != 3:
-        sys.stderr.write("\nFirst commit message line (header) does not follow format: type(scope): message\n")
-        sys.stderr.write("\n - Commit message guide: %s\n\n" % help_address)
+        sys.stderr.write("\ncommit message header line does not follow format: type(scope): message\n")
+        sys.stderr.write("\nCommit message guide: %s\n\n" % help_address)
         sys.exit(1)
     commit_type, commit_scope, commit_message = m.groups()
     if commit_type not in valid_commit_types:
-        sys.stderr.write("\nCommit type not in valid ones: %s\n" % ", ".join(valid_commit_types))
-        sys.stderr.write("\n - Commit message guide: %s\n\n" % help_address)
+        sys.stderr.write("\nCommit type must be one of: %s\n" % ", ".join(valid_commit_types))
+        sys.stderr.write("\nCommit message guide: %s\n\n" % help_address)
         sys.exit(1)
 
     if len(lines) > 1 and lines[1].strip():
-        sys.stderr.write("\nSecond commit message line must be empty\n")
-        sys.stderr.write("\n - Commit message guide: %s\n\n" % help_address)
+        sys.stderr.write("\nSecond commit second message line must be empty\n")
+        sys.stderr.write("\nCommit message guide: %s\n\n" % help_address)
         sys.exit(1)
 
     if len(lines) > 2 and not lines[2].strip():
-        sys.stderr.write("\nThird commit message line (body) must not be empty\n")
-        sys.stderr.write("\n - Commit message guide: %s\n\n" % help_address)
+        sys.stderr.write("\ncommit message body line must not be empty\n")
+        sys.stderr.write("\nCommit message guide: %s\n\n" % help_address)
         sys.exit(1)
 
 sys.exit(0)
