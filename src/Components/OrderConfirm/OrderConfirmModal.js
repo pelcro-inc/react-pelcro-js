@@ -81,7 +81,10 @@ export const OrderConfirmModal = (props) => {
                     {item.product_sku_name}
                   </div>
                   <div className="plc-w-1/5 plc-text-center pelcro-summary-product-price">
-                    {calcAndFormatItemsTotal([item])}
+                    {calcAndFormatItemsTotal(
+                      [item],
+                      latestOrder?.currency
+                    )}
                   </div>
                 </div>
               );
