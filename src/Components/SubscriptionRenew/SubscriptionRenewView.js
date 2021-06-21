@@ -5,6 +5,7 @@ import { PaymentMethodView } from "../PaymentMethod/PaymentMethodView";
 
 export const SubscriptionRenewView = ({
   onSuccess = () => {},
+  onGiftRenewalSuccess = () => {},
   onFailure = () => {}
 }) => {
   const { t } = useTranslation("checkoutForm");
@@ -46,7 +47,7 @@ export const SubscriptionRenewView = ({
             window.Pelcro.paywall.read()?.subscribe_subtitle}
         </p>
         <div className="plc-w-full plc-p-2 plc-mt-2 plc-font-semibold plc-text-center plc-text-gray-900 plc-bg-gray-100 plc-border plc-border-gray-200">
-          {getPricingText(plan)}
+          {plan && getPricingText(plan)}
         </div>
       </div>
 
@@ -55,6 +56,7 @@ export const SubscriptionRenewView = ({
         showCoupon={true}
         showExternalPaymentMethods={false}
         onSuccess={onSuccess}
+        onGiftRenewalSuccess={onGiftRenewalSuccess}
         onFailure={onFailure}
       />
     </div>

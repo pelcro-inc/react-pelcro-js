@@ -20,15 +20,12 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 ### Fixed
 
 - Respect plan quantity in subscription view
+- Hardcoded currencies and wordings in e-commerce components
 
 ### Changed
 
 - Replaced app.js with Main.js using the new external API. [PRIVATE]
 - Design of item removal button in cart modal.
-
-### Fixed
-
-- Hardcoded currencies and wordings in e-commerce components
 
 ## [Released]
 

@@ -54,7 +54,7 @@ export const SubscriptionCreateView = ({
             window.Pelcro.paywall.read()?.subscribe_subtitle}
         </p>
         <div className="plc-w-full plc-p-2 plc-mt-2 plc-font-semibold plc-text-center plc-text-gray-900 plc-bg-gray-100 plc-border plc-border-gray-200">
-          {getPricingText(plan)}
+          {plan && getPricingText(plan)}
         </div>
       </div>
 
