@@ -23,6 +23,10 @@ with open(commit_file) as commit:
     # first line
     line = lines[0]
     m = re.search('^(.*)\((.*)\): (.*)$', line)
+    n = re.search('^(Merge branch).*', line)
+
+    if n:
+        sys.exit(0)
 
     if not m or len(m.groups()) != 3:
         sys.stderr.write("\ncommit message header line does not follow format: type(scope): message\n")
