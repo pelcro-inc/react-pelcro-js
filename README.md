@@ -11,7 +11,7 @@ Customize your [Pelcro](https://www.pelcro.com/) experience for your clients nee
 
 ## Features
 
-- Integrates with our JS SDK out-of-the-box  
+- Integrates with our JS SDK out-of-the-box
 - Supports different levels of customization, need modal-level control? use [Modals](https://docs-react-elements.pelcro.com/Modals/introduction), want fine-grained control? use [Containers](https://docs-react-elements.pelcro.com/Containers/introduction)
 - Provides [`usePelcro` hook](https://docs-react-elements.pelcro.com/usePelcro) which provides a global store for all Pelcro related data and actions
 - Consistent UX across different browsers
