@@ -1,16 +1,22 @@
 import React, { createContext, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import useReducerWithSideEffects, {
-  UpdateWithSideEffect,
+  SideEffect,
   Update
 } from "use-reducer-with-side-effects";
+import { usePelcro } from "../../hooks/usePelcro";
 import {
-  SET_PRODUCTS,
-  HANDLE_SUBMIT
+  DISABLE_SUBMIT,
+  HANDLE_SUBMIT,
+  SHOW_ALERT
 } from "../../utils/action-types";
 
 const initialState = {
-  products: [],
-  isEmpty: true
+  buttonDisabled: false,
+  alert: {
+    type: "error",
+    content: ""
+  }
 };
 const store = createContext(initialState);
 const { Provider } = store;
@@ -20,87 +26,75 @@ const CartContainer = ({
   className,
   onSuccess = () => {},
   onFailure = () => {},
-  getProducts = () => {},
   children
 }) => {
-  useEffect(() => {
-    if (window.Pelcro.ecommerce.products.read().length) {
-      dispatch({
-        type: SET_PRODUCTS,
-        payload: window.Pelcro.ecommerce.products
-          .read()
-          .map((prod) => prod.skus.map((sku) => sku))
-          .flat()
-          .map((product) => {
-            if (
-              window.Pelcro.cartProducts &&
-              window.Pelcro.cartProducts.length
-            ) {
-              product.quantity = window.Pelcro.cartProducts.filter(
-                (productId) => +productId === +product.id
-              ).length;
-            }
+  const { cartItems, set } = usePelcro();
 
-            return product;
-          })
+  const { t } = useTranslation("shop");
+
+  useEffect(() => {
+    dispatch({ type: DISABLE_SUBMIT, payload: false });
+    dispatch({
+      type: SHOW_ALERT,
+      payload: {
+        type: "error",
+        content: ""
+      }
+    });
+
+    if (cartItems.length === 0) return;
+
+    const itemsCurrencies = new Set(
+      cartItems.map((item) => item.currency)
+    );
+    const cartHasMultipleCurrencies = itemsCurrencies.size > 1;
+
+    if (cartHasMultipleCurrencies) {
+      dispatch({ type: DISABLE_SUBMIT, payload: true });
+      dispatch({
+        type: SHOW_ALERT,
+        payload: {
+          type: "error",
+          content: t("messages.multipleCurrencies")
+        }
       });
     } else {
-      document.addEventListener(
-        "PelcroEcommerceProductsLoaded",
-        function (e) {
-          dispatch({
-            type: SET_PRODUCTS,
-            payload: window.Pelcro.ecommerce.products
-              .read()
-              .map((prod) => prod.skus.map((sku) => sku))
-              .flat()
-              .map((product) => {
-                if (
-                  window.Pelcro.cartProducts &&
-                  window.Pelcro.cartProducts.length
-                ) {
-                  product.quantity = window.Pelcro.cartProducts.filter(
-                    (productId) => +productId === +product.id
-                  ).length;
-                }
+      const userCurrency = window.Pelcro.user.read().currency;
+      const itemsCurrency = cartItems[0].currency;
 
-                return product;
-              })
-          });
-        }
-      );
+      if (userCurrency && userCurrency !== itemsCurrency) {
+        dispatch({ type: DISABLE_SUBMIT, payload: true });
+        dispatch({
+          type: SHOW_ALERT,
+          payload: {
+            type: "error",
+            content: t("messages.currencyMismatch", {
+              currency: userCurrency.toUpperCase()
+            })
+          }
+        });
+      }
     }
-  }, []);
-  const submit = (state, dispatch) => {
-    const items = state.products
-      .filter((product) => product.quantity)
-      .map((product) => {
-        return {
-          sku_id: product.id,
-          quantity: product.quantity
-        };
-      });
+  }, [cartItems]);
 
-    onSuccess(items);
+  const submit = (state, dispatch) => {
+    set({ order: [...cartItems] });
+    onSuccess(cartItems);
   };
 
   const [state, dispatch] = useReducerWithSideEffects(
     (state, action) => {
       switch (action.type) {
-        case SET_PRODUCTS:
-          getProducts(action.payload);
+        case DISABLE_SUBMIT:
+          return Update({ ...state, buttonDisabled: action.payload });
+        case SHOW_ALERT:
           return Update({
             ...state,
-            products: action.payload,
-            isEmpty: !action.payload.filter(
-              (product) => product.quantity
-            ).length
+            alert: action.payload
           });
-
         case HANDLE_SUBMIT:
-          return UpdateWithSideEffect(
-            { ...state, disableSubmit: true },
-            (state, dispatch) => submit(state, dispatch)
+          return SideEffect((state, dispatch) =>
+            submit(state, dispatch)
           );
         default:
           return state;

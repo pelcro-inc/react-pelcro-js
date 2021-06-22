@@ -6,19 +6,43 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Unreleased]
 
+### Added
+
+- Added usePelcro global hook, to have access to pelcro UI state.
+- Added PelcroModalController component to orchestrate between modals & initialize features.
+- Show an error in the cart modal if there are items that don't match the user account's currency, or if there are items with multiple different currencies.
+- Keep cart items between different sessions on the same device.
+- Ability to use coupon codes when buying e-commerce products.
+- Setup tests in the repo and add added first test suite. [PRIVATE]
+- Atomic comps to exported components [PRIVATE]
+- Add BankRedirection component for payment views 3DSecure flow.
+
+### Fixed
+
+- Respect plan quantity in subscription view
+- Hardcoded currencies and wordings in e-commerce components
+
+### Changed
+
+- Replaced app.js with Main.js using the new external API. [PRIVATE]
+- Design of item removal button in cart modal.
+
 ## [Released]
 
 ## [0.17.12] - 2021-06-02
+
 ## Fixed
 
 - Subscriptions intervals always showing up as "1".
 
 ## [0.17.11] - 2021-06-01
+
 ## Changed
 
 - Address creation modal title wording.
 
 ## [0.17.10] - 2021-05-27
+
 ## Fixed
 
 - Scroll being disabled after logging in.
@@ -29,11 +53,13 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 - Remove 'select a different plan' link from registeration modal footer.
 
 ## [0.17.9] - 2021-05-25
+
 ## Fixed
 
 - Native subscribe button not working.
 
 ## [0.17.8] - 2021-05-25
+
 ## Fixed
 
 - Native subscribe button not working.
@@ -46,6 +72,7 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 - Add a default solid border style to all input fields.
 
 ## [0.17.7] - 2021-05-22
+
 ## Changed
 
 - Skip the product/plan selection step when url trigger params contain all required data

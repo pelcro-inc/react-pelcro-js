@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import ReactGA from "react-ga";
 import { Transition } from "@headlessui/react";
 import { withTranslation } from "react-i18next";
 import { getFormattedPriceByLocal } from "../../utils/utils";
@@ -18,10 +19,13 @@ import { ReactComponent as LocationIcon } from "../../assets/location-pin.svg";
 import { ReactComponent as SubscriptionIcon } from "../../assets/subscription.svg";
 import { ReactComponent as GiftIcon } from "../../assets/gift.svg";
 import { ReactComponent as ShoppingIcon } from "../../assets/shopping.svg";
+import { ReactComponent as BookmarkIcon } from "../../assets/bookmark.svg";
 import { ReactComponent as PlusIcon } from "../../assets/plus.svg";
 import { ReactComponent as KeyIcon } from "../../assets/key.svg";
 import userSolidIcon from "../../assets/user-solid.svg";
 import { OrdersMenu } from "./DashboardMenus/OrdersMenu";
+import { SavedItemsMenu } from "./DashboardMenus/SavedItemsMenu";
+import { usePelcro } from "../../hooks/usePelcro";
 
 const SUB_MENUS = {
   PROFILE: "profile",
@@ -29,8 +33,41 @@ const SUB_MENUS = {
   PAYMENT_CARDS: "payment-cards",
   ADDRESSES: "addresses",
   GIFTS: "gifts",
-  ORDERS: "orders"
+  ORDERS: "orders",
+  SAVED_ITEMS: "saved-items"
 };
+
+/**
+ *
+ */
+export function DashboardWithHook(props) {
+  React.useEffect(() => {
+    props.onDisplay?.();
+  }, []);
+
+  const { switchView, resetView, logout, set } = usePelcro();
+
+  return (
+    <DashboardWithTrans
+      setAddress={(addressIdToEdit) => set({ addressIdToEdit })}
+      setSubscriptionIdToRenew={(subscriptionIdToRenew) =>
+        set({ subscriptionIdToRenew })
+      }
+      setIsRenewingGift={(isRenewingGift) => set({ isRenewingGift })}
+      onClose={() => {
+        props.onClose?.();
+        resetView();
+      }}
+      logout={logout}
+      setView={switchView}
+      setProductAndPlan={(product, plan, isGift) =>
+        set({ product, plan, isGift })
+      }
+    />
+  );
+}
+
+DashboardWithHook.viewId = "dashboard";
 
 class Dashboard extends Component {
   constructor(props) {
@@ -59,7 +96,7 @@ class Dashboard extends Component {
       name: "dashboard"
     });
 
-    this.props.ReactGA.event({
+    ReactGA?.event?.({
       category: "VIEWS",
       action: "Dashboard Modal Viewed",
       nonInteraction: true
@@ -81,7 +118,7 @@ class Dashboard extends Component {
       (err, res) => {
         this.setState({ disableSubmit: false });
 
-        this.props.ReactGA.event({
+        ReactGA?.event?.({
           category: "ACTIONS",
           action: "Canceled",
           nonInteraction: true
@@ -93,11 +130,11 @@ class Dashboard extends Component {
   };
 
   displayRedeem = () => {
-    return this.props.setView("redeem");
+    return this.props.setView("gift-redeem");
   };
 
   displaySourceCreate = () => {
-    return this.props.setView("source-create");
+    return this.props.setView("payment-method-update");
   };
 
   displayUserEdit = () => {
@@ -113,11 +150,11 @@ class Dashboard extends Component {
       this.props.setProductAndPlan(null, null, true);
     }
 
-    return this.props.setView("select");
+    return this.props.setView("plan-select");
   };
 
   displayAddressCreate = () => {
-    return this.props.setView("address");
+    return this.props.setView("address-create");
   };
 
   displayAddressEdit = (e) => {
@@ -250,7 +287,7 @@ class Dashboard extends Component {
 
           this.props.setProductAndPlan(product, plan);
           this.props.setSubscriptionIdToRenew(sub.id);
-          this.props.setView("select");
+          this.props.setView("plan-select");
         };
 
         return (
@@ -317,18 +354,20 @@ class Dashboard extends Component {
                   {this.locale("labels.unsubscribe")}
                 </Button>
               )}
-              {sub.cancel_at_period_end === 1 && sub.plan.auto_renew && (
-                <Button
-                  variant="ghost"
-                  className="plc-text-green-400 focus:plc-ring-green-300"
-                  icon={<RefreshIcon />}
-                  onClick={onReactivateClick}
-                  disabled={this.state.disableSubmit}
-                  data-key={sub.id}
-                >
-                  {this.locale("labels.reactivate")}
-                </Button>
-              )}
+              {sub.cancel_at_period_end === 1 &&
+                sub.plan.auto_renew &&
+                !sub.is_gift_recipient && (
+                  <Button
+                    variant="ghost"
+                    className="plc-text-green-400 focus:plc-ring-green-300"
+                    icon={<RefreshIcon />}
+                    onClick={onReactivateClick}
+                    disabled={this.state.disableSubmit}
+                    data-key={sub.id}
+                  >
+                    {this.locale("labels.reactivate")}
+                  </Button>
+                )}
               {sub.cancel_at_period_end === 1 && (
                 <Button
                   variant="ghost"
@@ -372,7 +411,7 @@ class Dashboard extends Component {
                 icon={
                   <PlusIcon className="plc-w-4 plc-h-4 plc-mr-1" />
                 }
-                className="plc-h-8 plc-font-semibold plc-tracking-wider plc-uppercase plc-rounded-none plc-text-gray-900 hover:plc-bg-gray-100 plc-w-full"
+                className="plc-w-full plc-h-8 plc-font-semibold plc-tracking-wider plc-text-gray-900 plc-uppercase plc-rounded-none hover:plc-bg-gray-100"
                 onClick={this.displayProductSelect}
               >
                 {this.locale("labels.addSubscription")}
@@ -386,7 +425,7 @@ class Dashboard extends Component {
                 icon={
                   <GiftIcon className="plc-w-4 plc-h-4 plc-mr-1" />
                 }
-                className="plc-h-8 plc-font-semibold plc-tracking-wider plc-uppercase plc-rounded-none plc-text-gray-900 hover:plc-bg-gray-100 plc-w-full"
+                className="plc-w-full plc-h-8 plc-font-semibold plc-tracking-wider plc-text-gray-900 plc-uppercase plc-rounded-none hover:plc-bg-gray-100"
                 onClick={this.displayRedeem}
               >
                 {this.locale("labels.redeemGift")}
@@ -414,7 +453,7 @@ class Dashboard extends Component {
           this.props.setProductAndPlan(product, plan);
           this.props.setSubscriptionIdToRenew(recipient.id);
           this.props.setIsRenewingGift(true);
-          this.props.setView("select");
+          this.props.setView("plan-select");
         };
 
         return (
@@ -527,7 +566,7 @@ class Dashboard extends Component {
                 icon={
                   <PlusIcon className="plc-w-4 plc-h-4 plc-mr-1" />
                 }
-                className="plc-h-8 plc-font-semibold plc-tracking-wider plc-uppercase plc-rounded-none plc-text-gray-900 hover:plc-bg-gray-100 plc-w-full"
+                className="plc-w-full plc-h-8 plc-font-semibold plc-tracking-wider plc-text-gray-900 plc-uppercase plc-rounded-none hover:plc-bg-gray-100"
                 onClick={() =>
                   this.displayProductSelect({ isGift: true })
                 }
@@ -589,7 +628,7 @@ class Dashboard extends Component {
               <Button
                 variant="ghost"
                 icon={<PlusIcon className="plc-w-4 plc-mr-1" />}
-                className="plc-h-8 plc-font-semibold plc-tracking-wider plc-uppercase plc-text-gray-900 hover:plc-bg-gray-100 plc-w-full"
+                className="plc-w-full plc-h-8 plc-font-semibold plc-tracking-wider plc-text-gray-900 plc-uppercase hover:plc-bg-gray-100"
                 onClick={this.displayAddressCreate}
               >
                 {this.locale("labels.addAddress")}
@@ -626,7 +665,7 @@ class Dashboard extends Component {
         afterLeave={this.props.onClose}
       >
         <div id="pelcro-view-dashboard">
-          <header className="plc-flex plc-flex-col plc-min-h-40 plc-p-4 plc-pl-2 sm:plc-pr-8 plc-bg-primary-500">
+          <header className="plc-flex plc-flex-col plc-p-4 plc-pl-2 plc-min-h-40 sm:plc-pr-8 plc-bg-primary-500">
             <div className="plc-flex plc-flex-row-reverse">
               <Button
                 variant="icon"
@@ -639,14 +678,14 @@ class Dashboard extends Component {
               <div className="plc-flex plc-justify-center plc-ml-3 sm:plc-ml-6 ">
                 <div className="plc-relative plc-flex-shrink-0">
                   <img
-                    className="plc-border-white plc-border-2 plc-border-solid plc-rounded-full plc-w-24 plc-h-24 plc-bg-gray-300 plc-cursor-pointer pelcro-user-profile-picture"
+                    className="plc-w-24 plc-h-24 plc-bg-gray-300 plc-border-2 plc-border-white plc-border-solid plc-rounded-full plc-cursor-pointer pelcro-user-profile-picture"
                     src={profilePicture}
                     alt="profile picture"
                     onClick={this.displayProfilePicChange}
                   />
                   <Button
                     variant="icon"
-                    className="plc-absolute plc-bg-gray-500 plc-text-white plc-w-7 plc-h-7 plc-top-16 plc--right-1 hover:plc-bg-gray-600 hover:plc-text-white"
+                    className="plc-absolute plc-text-white plc-bg-gray-500 plc-w-7 plc-h-7 plc-top-16 plc--right-1 hover:plc-bg-gray-600 hover:plc-text-white"
                     icon={<EditIcon />}
                     id={"pelcro-user-update-picture-button"}
                     onClick={this.displayProfilePicChange}
@@ -654,7 +693,7 @@ class Dashboard extends Component {
                 </div>
               </div>
 
-              <div className="plc-flex plc-flex-col plc-justify-between plc-flex-grow plc-ml-4 plc-w-56 plc-break-words sm:plc-w-auto">
+              <div className="plc-flex plc-flex-col plc-justify-between plc-flex-grow plc-w-56 plc-ml-4 plc-break-words sm:plc-w-auto">
                 {userHasName && (
                   <p className="plc-text-2xl plc-font-bold plc-text-white">
                     {this.user.first_name} {this.user.last_name}
@@ -771,7 +810,7 @@ class Dashboard extends Component {
               <Accordion.item
                 name={SUB_MENUS.SUBSCRIPTIONS}
                 icon={
-                  <SubscriptionIcon className="plc-h-10 plc-w-10 plc-pt-2 plc-pr-1 plc--ml-2" />
+                  <SubscriptionIcon className="plc-w-10 plc-h-10 plc-pt-2 plc-pr-1 plc--ml-2" />
                 }
                 title={this.locale("labels.subscriptions")}
                 content={this.renderSubscriptions()}
@@ -792,11 +831,17 @@ class Dashboard extends Component {
                 content={<OrdersMenu />}
               />
 
+              <Accordion.item
+                name={SUB_MENUS.SAVED_ITEMS}
+                icon={<BookmarkIcon />}
+                title={this.locale("labels.savedItems.label")}
+                content={<SavedItemsMenu />}
+              />
+
               <Button
                 variant="outline"
                 icon={<ExitIcon />}
-                isFullWidth={true}
-                className="plc-flex plc-items-center plc-justify-start plc-w-full plc-p-5 plc-px-4 plc-cursor-pointer plc-select-none sm:plc-px-8 plc-text-gray-500 plc-text-lg plc-bg-transparent hover:plc-bg-gray-100 hover:plc-text-gray-500 plc-capitalize plc-border-0 plc-border-l-2 plc-border-transparent plc-font-normal plc-rounded-none"
+                className="plc-flex plc-items-center plc-justify-start plc-w-full plc-p-5 plc-px-4 plc-text-lg plc-font-normal plc-text-gray-500 plc-capitalize plc-bg-transparent plc-border-0 plc-border-l-2 plc-border-transparent plc-rounded-none plc-cursor-pointer plc-select-none sm:plc-px-8 hover:plc-bg-gray-100 hover:plc-text-gray-500"
                 onClick={this.props.logout}
               >
                 {this.locale("labels.logout")}
@@ -809,6 +854,5 @@ class Dashboard extends Component {
   }
 }
 
-export const DashboardWithTrans = withTranslation("dashboard")(
-  Dashboard
-);
+export const DashboardWithTrans =
+  withTranslation("dashboard")(Dashboard);

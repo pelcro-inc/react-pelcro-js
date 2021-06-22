@@ -15,6 +15,8 @@
     "codePlaceholder": "Entrez votre code de coupon",
     "applyCouponCode": "Appliquer",
     "code": "Code promo",
-    "for": "pour"
+    "for": "pour",
+    "interval": "{{count}} {{interval}}",
+    "interval_plural": "{{count}} {{interval}}s"
   }
 }

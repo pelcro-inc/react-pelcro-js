@@ -7,6 +7,9 @@ import { LoginEmail } from "./LoginEmail";
 import { AlertWithContext } from "../../SubComponents/AlertWithContext";
 import { Link } from "../../SubComponents/Link";
 
+/**
+ *
+ */
 export function LoginView(props) {
   const { t } = useTranslation("login");
 
@@ -36,14 +39,14 @@ export function LoginView(props) {
           />
           <Link
             className="plc-flex plc-justify-end plc-text-sm"
-            id="pelcro-link-forget-password"
+            id="pelcro-link-forgot-password"
             onClick={props.onForgotPassword}
           >
             {t("messages.forgotPassword")}
           </Link>
           <LoginButton
             role="submit"
-            className="plc-mt-2 plc-w-full"
+            className="plc-w-full plc-mt-2"
             name={t("labels.login")}
             id="pelcro-submit"
           />

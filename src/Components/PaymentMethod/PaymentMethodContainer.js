@@ -28,7 +28,6 @@ import {
   SET_PAYMENT_REQUEST,
   INIT_CONTAINER,
   UPDATE_PAYMENT_REQUEST,
-  SET_ORDER,
   SHOW_ALERT,
   SUBSCRIBE
 } from "../../utils/action-types";
@@ -38,10 +37,8 @@ import {
   PaypalGateWay,
   SUBSCRIPTION_TYPES
 } from "../../services/Subscription/Subscription.service";
-import {
-  getCanonicalLocaleFormat,
-  getEcommerceOrderTotal
-} from "../../utils/utils";
+import { getCanonicalLocaleFormat } from "../../utils/utils";
+import { usePelcro } from "../../hooks/usePelcro";
 
 /**
  * @typedef {Object} PaymentStateType
@@ -57,7 +54,6 @@ import {
  * @property {unknown} paymentRequest
  * @property {number} updatedPrice
  * @property {object} currentPlan
- * @property {object} order
  * @property {object} alert
  */
 
@@ -75,7 +71,6 @@ const initialState = {
   paymentRequest: null,
   updatedPrice: null,
   currentPlan: null,
-  order: {},
   alert: {
     type: "error",
     content: ""
@@ -88,42 +83,33 @@ const PaymentMethodContainerWithoutStripe = ({
   style,
   className,
   children,
-  successMessage,
   stripe,
   type,
-  subscriptionIdToRenew,
-  isRenewingGift,
-  plan,
-  product,
-  store,
-  order = {},
-  giftRecipient = null,
-  selectedAddressId,
   onSuccess = () => {},
   onGiftRenewalSuccess = () => {},
   onFailure = () => {},
-  onLoading = () => {},
-  onDisplay = () => {}
+  ...props
 }) => {
   const { t } = useTranslation("payment");
+  const pelcroStore = usePelcro();
+  const { set, order } = usePelcro();
+
+  const product = props.product ?? pelcroStore.product;
+  const plan = props.plan ?? pelcroStore.plan;
+  const subscriptionIdToRenew =
+    props.subscriptionIdToRenew ?? pelcroStore.subscriptionIdToRenew;
+  const selectedAddressId =
+    props.selectedAddressId ?? pelcroStore.selectedAddressId;
+  const giftRecipient =
+    props.giftRecipient ?? pelcroStore.giftRecipient;
+  const isRenewingGift =
+    props.isRenewingGift ?? pelcroStore.isRenewingGift;
 
   useEffect(() => {
-    onDisplay();
-
-    window.Pelcro.insight.track("Modal Displayed", {
-      name: "payment"
-    });
-
     if (window.Pelcro.coupon.getFromUrl()) {
       dispatch({
         type: UPDATE_COUPON_CODE,
         payload: window.Pelcro.coupon.getFromUrl()
-      });
-    }
-    if (order) {
-      dispatch({
-        type: SET_ORDER,
-        payload: order
       });
     }
     dispatch({ type: INIT_CONTAINER });
@@ -146,7 +132,6 @@ const PaymentMethodContainerWithoutStripe = ({
         dispatch({ type: DISABLE_SUBMIT, payload: true });
         dispatch({ type: LOADING, payload: true });
         complete("success");
-        onLoading();
 
         if (source?.card?.three_d_secure === "required") {
           return generate3DSecureSource(source).then(
@@ -184,52 +169,72 @@ const PaymentMethodContainerWithoutStripe = ({
   const onApplyCouponCode = (state, dispatch) => {
     const { couponCode } = state;
 
+    const handleCouponResponse = (err, res) => {
+      dispatch({ type: DISABLE_COUPON_BUTTON, payload: false });
+
+      if (err) {
+        dispatch({ type: SET_PERCENT_OFF, payload: "" });
+        onFailure(err);
+
+        return dispatch({
+          type: SET_COUPON_ERROR,
+          payload: getErrorMessages(err)
+        });
+      }
+
+      dispatch({
+        type: SHOW_ALERT,
+        payload: { type: "error", content: "" }
+      });
+
+      dispatch({
+        type: SET_COUPON,
+        payload: res.data.coupon
+      });
+
+      dispatch({
+        type: SET_PERCENT_OFF,
+        payload: `${res.data.coupon?.percent_off}%`
+      });
+
+      dispatch({
+        type: SET_UPDATED_PRICE,
+        payload: res.data.total
+      });
+
+      dispatch({ type: UPDATE_PAYMENT_REQUEST });
+    };
+
     if (couponCode?.trim()) {
       dispatch({ type: DISABLE_COUPON_BUTTON, payload: true });
 
-      window.Pelcro.order.create(
-        {
-          auth_token: window.Pelcro.user.read().auth_token,
-          plan_id: plan.id,
-          coupon_code: couponCode,
-          address_id: selectedAddressId
-        },
-        (err, res) => {
-          dispatch({ type: DISABLE_COUPON_BUTTON, payload: false });
+      if (type === "createPayment") {
+        window.Pelcro.order.create(
+          {
+            auth_token: window.Pelcro.user.read().auth_token,
+            plan_id: plan.id,
+            coupon_code: couponCode,
+            address_id: selectedAddressId
+          },
+          handleCouponResponse
+        );
+      } else if (type === "orderCreate") {
+        const isQuickPurchase = !Array.isArray(order);
+        const mappedOrderItems = isQuickPurchase
+          ? [{ sku_id: order.id, quantity: order.quantity }]
+          : order.map((item) => ({
+              sku_id: item.id,
+              quantity: item.quantity
+            }));
 
-          if (err) {
-            dispatch({ type: SET_PERCENT_OFF, payload: "" });
-            onFailure(err);
-
-            return dispatch({
-              type: SET_COUPON_ERROR,
-              payload: getErrorMessages(err)
-            });
-          }
-
-          dispatch({
-            type: SHOW_ALERT,
-            payload: { type: "error", content: "" }
-          });
-
-          dispatch({
-            type: SET_COUPON,
-            payload: res.data.coupon
-          });
-
-          dispatch({
-            type: SET_PERCENT_OFF,
-            payload: `${res.data.coupon?.percent_off}%`
-          });
-
-          dispatch({
-            type: SET_UPDATED_PRICE,
-            payload: res.data.total
-          });
-
-          dispatch({ type: UPDATE_PAYMENT_REQUEST });
-        }
-      );
+        window.Pelcro.ecommerce.order.createSummary(
+          {
+            items: mappedOrderItems,
+            coupon_code: couponCode
+          },
+          handleCouponResponse
+        );
+      }
     }
   };
 
@@ -415,12 +420,20 @@ const PaymentMethodContainerWithoutStripe = ({
   };
 
   const purchase = (token, state, dispatch) => {
-    const { order } = state;
-    order.email = window.Pelcro.user.read().email;
+    const isQuickPurchase = !Array.isArray(order);
+    const mappedOrderItems = isQuickPurchase
+      ? [{ sku_id: order.id, quantity: order.quantity }]
+      : order.map((item) => ({
+          sku_id: item.id,
+          quantity: item.quantity
+        }));
+
+    const { couponCode } = state;
 
     window.Pelcro.ecommerce.order.create(
       {
-        items: order.items,
+        items: mappedOrderItems,
+        coupon_code: couponCode,
         stripe_token: token.id,
         ...(selectedAddressId && { address_id: selectedAddressId })
       },
@@ -432,12 +445,19 @@ const PaymentMethodContainerWithoutStripe = ({
           onFailure(err);
           return dispatch({
             type: SHOW_ALERT,
-            payload: { type: "error", content: getErrorMessages(err) }
+            payload: {
+              type: "error",
+              content: getErrorMessages(err)
+            }
           });
         }
 
-        // Reset cart products
-        window.Pelcro.cartProducts = [];
+        if (isQuickPurchase) {
+          set({ order: null });
+        } else {
+          set({ order: null, cartItems: [] });
+        }
+
         onSuccess(res);
       }
     );
@@ -481,7 +501,7 @@ const PaymentMethodContainerWithoutStripe = ({
               type: SHOW_ALERT,
               payload: {
                 type: "success",
-                content: successMessage
+                content: t("messages.sourceUpdated")
               }
             });
             onSuccess(res);
@@ -507,10 +527,24 @@ const PaymentMethodContainerWithoutStripe = ({
           return handlePaymentError(error);
         }
 
+        const getOrderItemsTotal = () => {
+          const isQuickPurchase = !Array.isArray(order);
+
+          if (isQuickPurchase) {
+            return order.price * order.quantity;
+          }
+
+          if (order.length === 0) {
+            return null;
+          }
+
+          return order.reduce((total, item) => {
+            return total + item.price * item.quantity;
+          }, 0);
+        };
+
         const totalAmount =
-          state?.updatedPrice ??
-          plan?.amount ??
-          getEcommerceOrderTotal(order?.items);
+          state?.updatedPrice ?? plan?.amount ?? getOrderItemsTotal();
 
         if (
           source?.card?.three_d_secure === "required" &&
@@ -768,9 +802,6 @@ const PaymentMethodContainerWithoutStripe = ({
 
         case SET_PAYMENT_REQUEST:
           return Update({ ...state, paymentRequest: action.payload });
-
-        case SET_ORDER:
-          return Update({ ...state, order: action.payload });
 
         case APPLY_COUPON_CODE:
           return UpdateWithSideEffect(

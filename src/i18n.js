@@ -85,7 +85,7 @@ const resources = {
   }
 };
 
-let locale = window.Pelcro.site.read().default_locale;
+let locale = window.Pelcro?.site?.read?.()?.default_locale;
 
 if (!locale) locale = "en-US";
 
@@ -99,7 +99,7 @@ i18n
       escapeValue: false // react already safes from xss
     },
     react: {
-      bindI18nStore: "added" //the key is 'bindI18nStore' not 'bindStore', the types are wrong
+      bindI18nStore: "added" // the key is 'bindI18nStore' not 'bindStore', the types are wrong
     }
   });
 

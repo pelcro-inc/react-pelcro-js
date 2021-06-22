@@ -6,28 +6,43 @@ import {
   ModalBody,
   ModalFooter
 } from "../../SubComponents/Modal";
+import { usePelcro } from "../../hooks/usePelcro";
 
 export const AddressSelectModal = ({
-  setView,
+  onDisplay,
   onClose,
   hideHeaderLogo,
   ...otherProps
 }) => {
+  const { switchView, resetView, switchToPaymentView } = usePelcro();
+
+  const onSuccess = (selectedAddressId) => {
+    otherProps.onSuccess?.(selectedAddressId);
+
+    switchToPaymentView();
+  };
+
+  const onGiftRedemptionSuccess = () => {
+    otherProps.onGiftRedemptionSuccess?.();
+    resetView();
+  };
+
   const onAddNewAddress = () => {
-    setView("address");
+    switchView("address-create");
   };
 
   return (
     <Modal
-      hideCloseButton={!window.Pelcro.paywall.displayCloseButton()}
+      onDisplay={onDisplay}
       onClose={onClose}
-      hideHeaderLogo={hideHeaderLogo}
       id="pelcro-address-select-modal"
     >
       <ModalBody>
         <AddressSelectView
           onAddNewAddress={onAddNewAddress}
           {...otherProps}
+          onSuccess={onSuccess}
+          onGiftRedemptionSuccess={onGiftRedemptionSuccess}
         />
       </ModalBody>
       <ModalFooter>
@@ -36,3 +51,5 @@ export const AddressSelectModal = ({
     </Modal>
   );
 };
+
+AddressSelectModal.viewId = "address-select";

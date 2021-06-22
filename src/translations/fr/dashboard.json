@@ -50,6 +50,13 @@
       "details": "Des détails",
       "itemsAmount": "{{count}} article",
       "itemsAmount_plural": "{{count}} articles"
+    },
+    "savedItems": {
+      "label": "Enregistré et suivi",
+      "noSavedItems": "Vous n'avez aucun élément enregistré",
+      "categories": "Catégories",
+      "details": "Détails",
+      "removeItem": "Retirer"
     }
   },
   "messages": {

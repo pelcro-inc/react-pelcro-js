@@ -1,5 +1,7 @@
 import React from "react";
+import ReactGA from "react-ga";
 import { useTranslation } from "react-i18next";
+import { usePelcro } from "../../hooks/usePelcro";
 import { Link } from "../../SubComponents/Link";
 import {
   Modal,
@@ -9,41 +11,85 @@ import {
 import Authorship from "../common/Authorship";
 import { RegisterView } from "./RegisterView";
 
-export function RegisterModal({
-  setView,
-  onClose,
-  hideHeaderLogo,
-  ...otherProps
-}) {
+/**
+ *
+ */
+export function RegisterModal(props) {
   const { t } = useTranslation("register");
 
-  const displayLoginView = () => {
-    setView("login");
+  const {
+    switchView,
+    resetView,
+    switchToAddressView,
+    switchToPaymentView,
+    product,
+    order,
+    giftCode,
+    isGift
+  } = usePelcro();
+
+  const onSuccess = (res) => {
+    props.onSuccess?.(res);
+    handleAfterRegistrationLogic();
   };
 
-  const displaySelectView = () => {
-    setView("select");
+  const handleAfterRegistrationLogic = () => {
+    ReactGA?.event?.({
+      category: "ACTIONS",
+      action: "Registered",
+      nonInteraction: true
+    });
+
+    // If product and plan are not selected
+    if (!product && !order && !giftCode) {
+      return resetView();
+    }
+
+    // If this is a redeem gift
+    if (giftCode) {
+      return switchToAddressView();
+    }
+
+    // Check if the subscription is meant as a gift (if so, gather recipients info)
+    if (isGift) {
+      return switchView("gift-create");
+    }
+
+    if (order) {
+      return switchToAddressView();
+    }
+
+    if (product) {
+      if (product.address_required) {
+        return switchToAddressView();
+      } else {
+        return switchToPaymentView();
+      }
+    }
+
+    return resetView();
   };
 
   return (
     <Modal
-      hideCloseButton={!window.Pelcro.paywall.displayCloseButton()}
-      onClose={onClose}
-      hideHeaderLogo={hideHeaderLogo}
       id="pelcro-register-modal"
+      onDisplay={props?.onDisplay}
+      onClose={props?.onClose}
     >
       <ModalBody>
-        <RegisterView {...otherProps} />
+        <RegisterView {...props} onSuccess={onSuccess} />
       </ModalBody>
       <ModalFooter>
-        <div>
+        <p>
           {t("messages.alreadyHaveAccount") + " "}
-          <Link onClick={displayLoginView}>
+          <Link onClick={() => switchView("login")}>
             {t("messages.loginHere")}
           </Link>
-        </div>
+        </p>
         <Authorship />
       </ModalFooter>
     </Modal>
   );
 }
+
+RegisterModal.viewId = "register";

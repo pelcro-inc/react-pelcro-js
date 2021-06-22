@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import {
   Modal,
@@ -8,38 +8,46 @@ import {
 import Authorship from "../common/Authorship";
 import { GiftCreateView } from "./GiftCreateView";
 import { Link } from "../../SubComponents/Link";
+import { usePelcro } from "../../hooks/usePelcro";
 
 export const GiftCreateModal = ({
-  setView,
   onDisplay,
   onClose,
   hideHeaderLogo,
   ...otherProps
 }) => {
   const { t } = useTranslation("register");
+  const {
+    switchView,
+    switchToAddressView,
+    switchToPaymentView,
+    product
+  } = usePelcro();
 
-  useEffect(() => {
-    if (onDisplay) {
-      onDisplay();
+  const onSuccess = (giftRecipient) => {
+    otherProps.onSuccess?.(giftRecipient);
+    if (product.address_required) {
+      switchToAddressView();
+    } else {
+      switchToPaymentView();
     }
-  }, []);
+  };
 
   return (
     <Modal
-      hideCloseButton={!window.Pelcro.paywall.displayCloseButton()}
-      onClose={onClose}
-      hideHeaderLogo={hideHeaderLogo}
       id="pelcro-gift-create-modal"
+      onDisplay={onDisplay}
+      onClose={onClose}
     >
       <ModalBody>
-        <GiftCreateView {...otherProps} />
+        <GiftCreateView {...otherProps} onSuccess={onSuccess} />
       </ModalBody>
       <ModalFooter>
         <p>
           {t("messages.selectPlan") + " "}
           <Link
             id="pelcro-link-select-plan"
-            onClick={() => setView("select")}
+            onClick={() => switchView("plan-select")}
           >
             {t("messages.here")}
           </Link>
@@ -49,3 +57,5 @@ export const GiftCreateModal = ({
     </Modal>
   );
 };
+
+GiftCreateModal.viewId = "gift-create";

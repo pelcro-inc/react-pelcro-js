@@ -33,7 +33,11 @@ export const OrdersMenu = () => {
   );
 };
 
-const OrderItems = ({ orders, activeMenu, toggleActiveMenu }) => {
+export const OrderItems = ({
+  orders,
+  activeMenu,
+  toggleActiveMenu
+}) => {
   const getItemsAmount = (orderId) => {
     return orders
       ?.find((order) => order.id === orderId)
@@ -118,7 +122,7 @@ const OrderItems = ({ orders, activeMenu, toggleActiveMenu }) => {
                   return (
                     <tr
                       key={item.id}
-                      className="plc-text-lg plc-text-gray-500 order-details-row "
+                      className="plc-text-lg plc-text-gray-500 pelcro-order-details-row "
                     >
                       <td colSpan="2">
                         <div className="plc-flex plc-items-center plc-py-2 plc-space-x-2 sm:plc-p-2">

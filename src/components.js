@@ -1,6 +1,9 @@
 import "./i18n";
 import "./index.css";
 
+export { usePelcro } from "./hooks/usePelcro";
+export { PelcroModalController } from "./Components/PelcroModalController/PelcroModalController";
+
 export { LoginContainer } from "./Components/Login/LoginContainer";
 export { Email } from "./SubComponents/Email";
 export { Password } from "./SubComponents/Password";
@@ -19,22 +22,21 @@ export { RegisterLastName } from "./Components/Register/RegisterLastName";
 export { RegisterButton } from "./Components/Register/RegisterButton";
 export { RegisterJobTitle } from "./Components/Register/RegisterJobTitle";
 export { RegisterCompany } from "./Components/Register/RegisterCompany";
-export { PelcroContainer } from "./Components/PelcroContainer";
-export { AlertWithContext as Alert } from "./SubComponents/AlertWithContext";
 export { LoginModal } from "./Components/Login/LoginModal";
 export { RegisterModal } from "./Components/Register/RegisterModal";
-export { SelectModalWithTrans as SelectModal } from "./Components/Select/SelectModal";
+export { SelectModalWithHook as SelectModal } from "./Components/Select/SelectModal";
 export { SubscriptionRenewModal } from "./Components/SubscriptionRenew/SubscriptionRenewModal";
 export { SubscriptionRenewView } from "./Components/SubscriptionRenew/SubscriptionRenewView";
 export { PaymentSuccessModal } from "./Components/PaymentSuccess/PaymentSuccessModal";
 export { PaymentSuccessView } from "./Components/PaymentSuccess/PaymentSuccessView";
-export { NewsLetter } from "./Components/NewsLetter/NewsLetter";
+export { NewsletterWithHook as NewsLetter } from "./Components/NewsLetter/NewsLetter";
 export { MeterModal } from "./Components/Meter/MeterModal";
 export { MeterView } from "./Components/Meter/MeterView";
 export { PaymentMethodContainer } from "./Components/PaymentMethod/PaymentMethodContainer";
 export { PaymentMethodView } from "./Components/PaymentMethod/PaymentMethodView";
 export { ApplyCouponButton } from "./Components/PaymentMethod/ApplyCouponButton";
 export { CouponCode } from "./Components/PaymentMethod/CouponCode";
+export { BankRedirection } from "./Components/PaymentMethod/BankRedirection";
 export { CouponCodeField } from "./Components/PaymentMethod/CouponCodeField";
 export { SubmitPaymentMethod } from "./Components/PaymentMethod/SubmitPaymentMethod";
 export { SubscriptionCreateModal } from "./Components/SubscriptionCreate/SubscriptionCreateModal";
@@ -115,18 +117,18 @@ export { PasswordChangeButton } from "./Components/PasswordChange/PasswordChange
 export { CartContainer } from "./Components/Cart/CartContainer";
 export { CartModal } from "./Components/Cart/CartModal";
 export { CartView } from "./Components/Cart/CartView";
-export { CartRemoveProductButton } from "./Components/Cart/CartRemoveProductButton";
+export { CartRemoveItemButton } from "./Components/Cart/CartRemoveItemButton";
 export { CartSubmit } from "./Components/Cart/CartSubmit";
 export { CartTotalPrice } from "./Components/Cart/CartTotalPrice";
 
-export { ShopContainer } from "./Components/Shop/ShopContainer";
 export { ShopSelectProductButton } from "./Components/Shop/ShopSelectProductButton";
+export { ShopPurchaseButton } from "./Components/Shop/ShopPurchaseButton";
 export { ShopView } from "./Components/Shop/ShopView";
 export { OrderCreateSubmitButton } from "./Components/OrderCreate/OrderCreateSubmitButton";
 export { OrderCreateContainer } from "./Components/OrderCreate/OrderCreateContainer";
 export { OrderCreateModal } from "./Components/OrderCreate/OrderCreateModal";
 export { OrderCreateView } from "./Components/OrderCreate/OrderCreateView";
-export { OrderConfirmModalWithTrans as OrderConfirmModal } from "./Components/OrderConfirm/OrderConfirmModal";
+export { OrderConfirmModal } from "./Components/OrderConfirm/OrderConfirmModal";
 
 export { GiftCreateModal } from "./Components/GiftCreate/GiftCreateModal";
 export { GiftCreateView } from "./Components/GiftCreate/GiftCreateView";
@@ -148,7 +150,7 @@ export { AddressSelectSubmit } from "./Components/AddressSelect/AddressSelectSub
 export { AddressSelectList } from "./Components/AddressSelect/AddressSelectList";
 export { AddressSelectView } from "./Components/AddressSelect/AddressSelectView";
 
-export { DashboardWithTrans as Dashboard } from "./Components/dashboard/Dashboard";
+export { DashboardWithHook as Dashboard } from "./Components/dashboard/Dashboard";
 export { DashboardOpenButton } from "./Components/dashboard/DashboardOpenButton";
 
 export { ProfilePicChangeButton } from "./Components/ProfilePicChange/ProfilePicChangeButton";
@@ -159,6 +161,19 @@ export { ProfilePicChangeSelectButton } from "./Components/ProfilePicChange/Prof
 export { ProfilePicChangeRemoveButton } from "./Components/ProfilePicChange/ProfilePicChangeRemoveButton";
 export { ProfilePicChangeView } from "./Components/ProfilePicChange/ProfilePicChangeView";
 export { ProfilePicChangeModal } from "./Components/ProfilePicChange/ProfilePicChangeModal";
+
+export { AlertWithContext as Alert } from "./SubComponents/AlertWithContext";
+export { Badge } from "./SubComponents/Badge";
+export { Button } from "./SubComponents/Button";
+export { Checkbox } from "./SubComponents/Checkbox";
+export { DatePicker } from "./SubComponents/DatePicker";
+export { Input } from "./SubComponents/Input";
+export { Link } from "./SubComponents/Link";
+export { Modal } from "./SubComponents/Modal";
+export { ModalBody } from "./SubComponents/Modal";
+export { ModalFooter } from "./SubComponents/Modal";
+export { Radio } from "./SubComponents/Radio";
+export { Select } from "./SubComponents/Select";
 
 export { default as i18n } from "./i18n";
 

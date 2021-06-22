@@ -54,7 +54,6 @@ const RegisterContainer = ({
   useEffect(() => {
     onDisplay();
   }, []);
-
   const handleRegister = (userData, dispatch) => {
     const filteredData = cleanObjectNullValues(userData);
     const {
@@ -88,7 +87,7 @@ const RegisterContainer = ({
           });
           onFailure(err);
         } else {
-          onSuccess();
+          onSuccess(res);
         }
       }
     );

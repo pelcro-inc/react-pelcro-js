@@ -4,6 +4,7 @@ import useReducerWithSideEffects, {
   UpdateWithSideEffect,
   Update
 } from "use-reducer-with-side-effects";
+import { usePelcro } from "../../hooks/usePelcro";
 import {
   HANDLE_SUBMIT,
   SHOW_ALERT,
@@ -54,19 +55,25 @@ const AddressCreateContainer = ({
   style,
   className,
   type = "shipping",
-  giftCode = false,
   onGiftRedemptionSuccess = () => {},
   onSuccess = () => {},
   onFailure = () => {},
-  children
+  children,
+  ...props
 }) => {
   const { t } = useTranslation("address");
-
-  useEffect(() => {
-    window.Pelcro.insight.track("Modal Displayed", {
-      name: "address"
-    });
-  }, []);
+  const {
+    giftCode: giftCodeFromStore,
+    subscriptionIdToRenew: subscriptionIdToRenewFromStore,
+    product,
+    order,
+    set
+  } = usePelcro();
+  const giftCode = props.giftCode ?? giftCodeFromStore;
+  const subscriptionIdToRenew =
+    props.subscriptionIdToRenew ??
+    subscriptionIdToRenewFromStore ??
+    undefined;
 
   useEffect(() => {
     const getCountries = () => {
@@ -143,12 +150,19 @@ const AddressCreateContainer = ({
         const newAddressId = String(
           getNewlyCreatedAddress(res.data.addresses).id
         );
+
+        if (product || order) {
+          set({ selectedAddressId: newAddressId });
+        }
+
         if (giftCode) {
           window.Pelcro.subscription.redeemGift(
             {
               auth_token: window.Pelcro.user.read().auth_token,
               gift_code: giftCode,
-              address_id: newAddressId
+              address_id: newAddressId,
+              // redeem gift as a future phase of an existing subscription
+              subscription_id: subscriptionIdToRenew
             },
             (err, res) => {
               dispatch({ type: LOADING, payload: false });
@@ -165,7 +179,7 @@ const AddressCreateContainer = ({
               }
 
               alert(t("messages.subRedeemed"));
-              return onGiftRedemptionSuccess();
+              return onGiftRedemptionSuccess(res);
             }
           );
         }

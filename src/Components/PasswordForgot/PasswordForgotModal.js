@@ -1,5 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { usePelcro } from "../../hooks/usePelcro";
 import { Link } from "../../SubComponents/Link";
 import {
   Modal,
@@ -10,18 +11,18 @@ import Authorship from "../common/Authorship";
 import { PasswordForgotView } from "./PasswordForgotView";
 
 export const PasswordForgotModal = ({
+  onDisplay,
   onClose,
-  setView,
-  hideHeaderLogo,
   ...otherProps
 }) => {
   const { t } = useTranslation("passwordForgot");
+  const { switchView } = usePelcro();
+
   return (
     <Modal
-      hideCloseButton={!window.Pelcro.paywall.displayCloseButton()}
-      onClose={onClose}
-      hideHeaderLogo={hideHeaderLogo}
       id="pelcro-password-forgot-modal"
+      onDisplay={onDisplay}
+      onClose={onClose}
     >
       <ModalBody>
         <PasswordForgotView {...otherProps} />
@@ -31,7 +32,7 @@ export const PasswordForgotModal = ({
           {t("messages.alreadyHaveAccount") + " "}
           <Link
             id="pelcro-link-login"
-            onClick={() => setView("login")}
+            onClick={() => switchView("login")}
           >
             {t("messages.loginHere")}
           </Link>
@@ -41,3 +42,5 @@ export const PasswordForgotModal = ({
     </Modal>
   );
 };
+
+PasswordForgotModal.viewId = "password-forgot";

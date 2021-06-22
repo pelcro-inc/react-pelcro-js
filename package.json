@@ -1,7 +1,8 @@
 {
   "name": "@pelcro/react-pelcro-js",
   "description": "Pelcro's React UI Elements",
-  "version": "0.17.12",
+  "version": "0.0.0-development",
+  "license": "MIT",
   "private": false,
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
@@ -11,9 +12,12 @@
   "scripts": {
     "preinstall": "git config core.hooksPath qa/hooks",
     "start": "webpack serve",
-    "generateFiles": "SET NODE_ENV=production&&rollup -c",
-    "deploy": "SET NODE_ENV=production&&yarn generateFiles && yarn publish",
-    "lint": "eslint ./src/**/*.js --fix"
+    "generateFiles": "cross-env NODE_ENV=production rollup -c",
+    "lint": "eslint ./src/**/*.js --fix",
+    "commit": "cz",
+    "test": "node ./__tests__/sdkDownloader&&jest --watchAll",
+    "test:once": "node ./__tests__/sdkDownloader&&jest",
+    "semantic-release": "semantic-release"
   },
   "browserslist": [
     "last 8 ChromeAndroid versions",
@@ -30,25 +34,31 @@
     "@babel/core": "^7.9.0",
     "@babel/eslint-parser": "^7.12.13",
     "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.13.8",
+    "@babel/plugin-proposal-optional-chaining": "^7.13.12",
     "@babel/plugin-syntax-class-properties": "^7.10.4",
     "@babel/polyfill": "^7.2.5",
-    "@babel/preset-env": "^7.9.0",
-    "@babel/preset-react": "^7.9.4",
+    "@babel/preset-env": "^7.14.1",
+    "@babel/preset-react": "^7.13.13",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.4.3",
     "@rollup/plugin-commonjs": "^11.1.0",
     "@rollup/plugin-json": "^4.0.3",
     "@rollup/plugin-url": "^6.0.0",
     "@svgr/rollup": "^5.5.0",
     "@svgr/webpack": "^5.5.0",
+    "@testing-library/react": "^11.2.7",
     "@webpack-cli/serve": "^1.3.0",
     "autoprefixer": "^10.2.4",
     "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^26.6.3",
     "babel-loader": "^8.1.0",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "babel-preset-react-app": "^10.0.0",
     "browserslist": "^4.16.3",
+    "cross-env": "^7.0.3",
     "css-loader": "^3.2.0",
     "cssimportant-loader": "^0.4.0",
+    "cz-conventional-changelog": "3.3.0",
     "eslint": "^7.19.0",
     "eslint-config-google": "^0.14.0",
     "eslint-config-prettier": "^6.11.0",
@@ -58,17 +68,21 @@
     "eslint-plugin-react": "^7.18.0",
     "eslint-plugin-react-hooks": "^4.2.0",
     "file-loader": "^6.2.0",
+    "fs": "^0.0.1-security",
     "html-webpack-plugin": "^3.2.0",
     "image-webpack-loader": "^7.0.1",
+    "jest": "^26.6.3",
     "node-sass": "^4.14.1",
     "postcss": "^8.2.4",
     "postcss-import": "^14.0.0",
     "postcss-loader": "4.2.0",
-    "prettier": "^2.2.1",
+    "prettier": "2.3.1",
     "react": "^16.6.1",
     "react-dom": "^16.6.1",
     "react-ga": "^2.7.0",
     "react-refresh": "^0.9.0",
+    "react-test-renderer": "^17.0.2",
+    "request": "^2.88.2",
     "rollup": "^2.6.1",
     "rollup-plugin-babel": "^4.4.0",
     "rollup-plugin-delete": "^1.2.0",
@@ -77,6 +91,8 @@
     "rollup-plugin-postcss": "^4.0.0",
     "rollup-plugin-visualizer": "^4.2.0",
     "sass-loader": "^7.1.0",
+    "semantic-release": "^17.4.4",
+    "simple-zustand-devtools": "^1.0.0",
     "style-loader": "^2.0.0",
     "tailwindcss": "^2.0.2",
     "travis-ci-cloudfront-invalidation": "^1.1.0",
@@ -90,7 +106,8 @@
     "react-easy-crop": "^3.3.2",
     "react-i18next": "^11.3.3",
     "react-stripe-elements": "^6.1.2",
-    "use-reducer-with-side-effects": "^2.2.0"
+    "use-reducer-with-side-effects": "^2.2.0",
+    "zustand": "^3.4.2"
   },
   "peerDependencies": {
     "prop-types": "^15.0.0",
@@ -103,7 +120,21 @@
       "@babel/preset-react"
     ],
     "plugins": [
-      "@babel/plugin-proposal-class-properties"
+      "@babel/plugin-proposal-class-properties",
+      "@babel/plugin-proposal-optional-chaining",
+      "@babel/plugin-proposal-nullish-coalescing-operator"
     ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pelcro-inc/react-pelcro-js.git"
+  },
+  "publishConfig": {
+    "access": "restricted"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
   }
 }

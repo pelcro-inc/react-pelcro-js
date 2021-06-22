@@ -1,26 +1,30 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { usePelcro } from "../../hooks/usePelcro";
+import { getFormattedPriceByLocal } from "../../utils/utils";
 import { PaymentMethodView } from "../PaymentMethod/PaymentMethodView";
 
 export const SubscriptionCreateView = ({
-  product,
-  plan,
-  giftRecipient,
-  selectedAddressId,
   onSuccess = () => {},
-  onFailure = () => {},
-  onDisplay = () => {}
+  onFailure = () => {}
 }) => {
   const { t } = useTranslation("checkoutForm");
+  const { product, plan } = usePelcro();
 
   const getPricingText = (plan) => {
     const autoRenewed = plan.auto_renew;
     const { interval, interval_count } = plan;
+    const intervalText = t("labels.interval", {
+      interval,
+      count: interval_count
+    });
 
-    const formattedInterval =
-      interval_count > 1
-        ? `${interval_count} ${interval}`
-        : `1 ${interval}`;
+    const { default_locale } = Pelcro.site.read();
+    const priceFormatted = getFormattedPriceByLocal(
+      plan?.amount * (plan?.quantity ?? 1),
+      plan?.currency,
+      default_locale
+    );
 
     return (
       <p className="plc-text-gray-600">
@@ -29,10 +33,10 @@ export const SubscriptionCreateView = ({
         </span>
         <br />
         <span className="plc-text-xl plc-font-semibold plc-text-primary-600">
-          {plan.amount_formatted}{" "}
+          {priceFormatted}{" "}
         </span>
         <span className="plc-font-thin">
-          {autoRenewed ? "/" : t("labels.for")} {formattedInterval}
+          {autoRenewed ? "/" : t("labels.for")} {intervalText}
         </span>
       </p>
     );
@@ -50,7 +54,7 @@ export const SubscriptionCreateView = ({
             window.Pelcro.paywall.read()?.subscribe_subtitle}
         </p>
         <div className="plc-w-full plc-p-2 plc-mt-2 plc-font-semibold plc-text-center plc-text-gray-900 plc-bg-gray-100 plc-border plc-border-gray-200">
-          {getPricingText(plan)}
+          {plan && getPricingText(plan)}
         </div>
       </div>
 
@@ -58,13 +62,8 @@ export const SubscriptionCreateView = ({
         type="createPayment"
         showCoupon={true}
         showExternalPaymentMethods={true}
-        plan={plan}
-        product={product}
-        giftRecipient={giftRecipient}
-        selectedAddressId={selectedAddressId}
-        onFailure={onFailure}
         onSuccess={onSuccess}
-        onDisplay={onDisplay}
+        onFailure={onFailure}
       />
     </div>
   );

@@ -4,6 +4,7 @@ import useReducerWithSideEffects, {
   Update,
   UpdateWithSideEffect
 } from "use-reducer-with-side-effects";
+import { usePelcro } from "../../hooks/usePelcro";
 import {
   HANDLE_SUBMIT,
   LOADING,
@@ -41,15 +42,27 @@ const { Provider } = store;
 const AddressSelectContainer = ({
   style,
   className,
-  giftCode = false,
   onGiftRedemptionSuccess = () => {},
   onSuccess = () => {},
   onFailure = () => {},
-  children
+  children,
+  ...props
 }) => {
   const { t } = useTranslation("address");
+  const {
+    giftCode: giftCodeFromStore,
+    subscriptionIdToRenew: subscriptionIdToRenewFromStore,
+    set
+  } = usePelcro();
+  const giftCode = props.giftCode ?? giftCodeFromStore;
+  const subscriptionIdToRenew =
+    props.subscriptionIdToRenew ??
+    subscriptionIdToRenewFromStore ??
+    undefined;
 
   const submitAddress = ({ selectedAddressId }, dispatch) => {
+    set({ selectedAddressId });
+
     if (!giftCode) {
       return onSuccess(selectedAddressId);
     }
@@ -59,7 +72,9 @@ const AddressSelectContainer = ({
       {
         auth_token: window.Pelcro.user.read().auth_token,
         gift_code: giftCode,
-        address_id: selectedAddressId
+        address_id: selectedAddressId,
+        // redeem gift as a future phase of an existing subscription
+        subscription_id: subscriptionIdToRenew
       },
       (err, res) => {
         dispatch({ type: LOADING, payload: false });
@@ -76,7 +91,7 @@ const AddressSelectContainer = ({
         }
 
         alert(t("messages.subRedeemed"));
-        return onGiftRedemptionSuccess();
+        return onGiftRedemptionSuccess(res);
       }
     );
   };
@@ -125,10 +140,6 @@ const AddressSelectContainer = ({
   );
 
   useEffect(() => {
-    window.Pelcro.insight.track("Modal Displayed", {
-      name: "address"
-    });
-
     dispatch({
       type: LOAD_ADDRESSES,
       payload: window.Pelcro.user.read().addresses ?? []

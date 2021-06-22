@@ -2,9 +2,11 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "../../SubComponents/Button";
 import { ReactComponent as CheckMark } from "../../assets/check-solid.svg";
+import { usePelcro } from "../../hooks/usePelcro";
 
-export const PaymentSuccessView = ({ onClose, product }) => {
+export const PaymentSuccessView = ({ onClose }) => {
   const { t } = useTranslation("success");
+  const { product } = usePelcro();
 
   if (product) {
     return (

@@ -8,16 +8,15 @@ import Authorship from "../common/Authorship";
 import { AddressUpdateView } from "./AddressUpdateView";
 
 export const AddressUpdateModal = ({
+  onDisplay,
   onClose,
-  hideHeaderLogo,
   ...otherProps
 }) => {
   return (
     <Modal
-      hideCloseButton={!window.Pelcro.paywall.displayCloseButton()}
-      onClose={onClose}
-      hideHeaderLogo={hideHeaderLogo}
       id="pelcro-address-update-modal"
+      onDisplay={onDisplay}
+      onClose={onClose}
     >
       <ModalBody>
         <AddressUpdateView {...otherProps} />
@@ -28,3 +27,5 @@ export const AddressUpdateModal = ({
     </Modal>
   );
 };
+
+AddressUpdateModal.viewId = "address-edit";

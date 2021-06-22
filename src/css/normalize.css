@@ -489,4 +489,8 @@ Add the correct display in Chrome and Safari.
     max-width: 100%;
     height: auto;
   }
+
+  .pelcro-root p {
+    color: #111827;
+  }
 }
