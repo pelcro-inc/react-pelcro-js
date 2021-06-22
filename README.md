@@ -1,85 +1,116 @@
+
+<p align="center">
+  <img src="https://docs-react-elements.pelcro.com/img/logo.png" width="100px" alt="Pelcro logo"/>
+</p>
+
+
 # Pelcro React Elements
 
-## Motivation
+Customize your [Pelcro](https://www.pelcro.com/) experience for your clients needs using our React components
 
-- Gives users more control over the structure of their apps. By giving them the ability to compose components, and add or remove fields from forms.
 
-- Allows users to customize the look of their components. By passing styles to the style props of the components, or adding classNames to the individual components.
+## Features
 
-- Reduces bugs. By centralizing the common logic in smaller functional components and custom hooks, and reusing these components across the apps.
+- Integrates with our JS SDK out-of-the-box
+- Supports different levels of customization, need modal-level control? use [Modals](https://docs-react-elements.pelcro.com/Modals/introduction), want fine-grained control? use [Containers](https://docs-react-elements.pelcro.com/Containers/introduction)
+- Provides [`usePelcro` hook](https://docs-react-elements.pelcro.com/usePelcro) which provides a global store for all Pelcro related data and actions
+- Consistent UX across different browsers
+- Easy styling customization using `className` prop and regular CSS
+- First-class Localization support using [react-i18next](https://react.i18next.com/)
+## Documentation
 
-## Components
+For a complete reference with live examples, check the
+[React Pelcro elements docs](https://docs-react-elements.pelcro.com/)
 
-### Overview
+  
+## Installation 
 
-Users are able to use our Main UI components directly as they are, e.g. `The login modal`, or they can have a more granular control over how their components should look like by using subcomponents, e.g. `email component`.
+To use Pelcro components, all you need to do is install the `@pelcro/react-pelcro-js` package
 
-### Main Components
+```bash 
+  yarn add @pelcro/react-pelcro-js
 
-#### `<Login style={stylesObject} className={classNamesString} onSuccess={() => {}} onError={() => {}} />`
+  or
 
-Returns the main Login component from Pelcro's Main UI.
+  npm install @pelcro/react-pelcro-js
+```
+    
+## Minimal example
 
-#### `<Register style={stylesObject} className={classNamesString} onSuccess={() => {}} onError={() => {}} />`
+```javascript
+import React from "react";
+import {
+  PelcroModalController,
+  Dashboard,
+  DashboardOpenButton,
+  SelectModal,
+  LoginModal,
+  RegisterModal,
+  PaymentMethodUpdateModal,
+  SubscriptionCreateModal,
+  SubscriptionRenewModal,
+  NewsLetter,
+  PaymentSuccessModal,
+  MeterModal,
+  UserUpdateModal,
+  AddressCreateModal,
+  AddressUpdateModal,
+  PasswordResetModal,
+  PasswordForgotModal,
+  CartModal,
+  ShopView,
+  OrderConfirmModal,
+  OrderCreateModal,
+  GiftCreateModal,
+  GiftRedeemModal,
+  PasswordChangeModal,
+  AddressSelectModal,
+  ProfilePicChangeModal
+} from "@pelcro/react-pelcro-js/dist/index.esm";
+import "@pelcro/react-pelcro-js/dist/pelcro.css";
 
-Returns the main Registeration component from Pelcro's Main UI.
+export default function Main() {
+  return (
+    <>
+      <button className="pelcro-login-button">Login</button>
+      <button className="pelcro-subscribe-button">Subscribe</button>
 
-#### `<Dashboard style={stylesObject} className={classNamesString} />`
-
-Returns the main Dashboard component from Pelcro's Main UI.
-
-#### `<Subscribe className={classNamesString} onSuccess={() => {}} onError={() => {}}>`
-
-Opens the select subscription viwe, which is the main Select component from Pelcro's Main UI.
-
-### Subcomponents
-
-#### `<LoginContainer style={stylesObject} className={classNamesString} onSuccess={() => {}} onError={() => {}}> Subcomponents </LoginContainer>`
-
-You can use these subcomponents inside it
-
-- `<Email style={stylesObject} className={classNamesString} />`
-
-- `<Password style={stylesObject} className={classNamesString} />`
-
-- `<LoginButton style={stylesObject} className={classNamesString} name="button name [Login]" />`
-
-#### Example
+      <PelcroModalController>
+        <MeterModal />
+        <LoginModal />
+        <RegisterModal />
+        <UserUpdateModal />
+        <Dashboard />
+        <DashboardOpenButton />
+        <ProfilePicChangeModal />
+        <PasswordForgotModal />
+        <PasswordChangeModal />
+        <PasswordResetModal />
+        <PaymentMethodUpdateModal />
+        <SelectModal />
+        <NewsLetter />
+        <AddressCreateModal />
+        <AddressSelectModal />
+        <AddressUpdateModal />
+        <SubscriptionCreateModal />
+        <SubscriptionRenewModal />
+        <PaymentSuccessModal />
+        <GiftCreateModal />
+        <GiftRedeemModal />
+        <ShopView />
+        <CartModal />
+        <OrderCreateModal />
+        <OrderConfirmModal />
+      </PelcroModalController>
+    </>
+  );
+}
 
 ```
-<LoginContainer onSuccess={() => {}} onError={() => {}}>
-    <label htmlFor="email">Email: </label>
-    <Email placeholder="Email Address" id="email" />
-    <label htmlFor="password">Password: </label>
-    <Password id="password" />
-    <LoginButton name="Login here" />
-</LoginContainer>
-```
 
-#### `<RegisterContainer onSuccess={() => {}} onError={() => {}}> Subcomponents </RegisterContainer>`
+  
+## License
 
-You can use these subcomponents inside it
+[MIT](https://choosealicense.com/licenses/mit/)
 
-- `<FirstName style={stylesObject} className={classNamesString} />`
-
-- `<LastName style={stylesObject} className={classNamesString} />`
-
-- `<Email style={stylesObject} className={classNamesString} />`
-
-- `<Password style={stylesObject} className={classNamesString} />`
-
-- `<ConfirmPassword style={stylesObject} className={classNamesString} />`
-
-- `<TermsOfService style={stylesObject} className={classNamesString} />`
-
-- `<PrivacyPolicy style={stylesObject} className={classNamesString} />`
-
-#### `<DashboardContainer> Subcomponents </DashboardContainer>`
-
-You can use these subcomponents inside it
-
-- `<UpdatePaymentMethod style={stylesObject} className={classNamesString} onSuccess={() => {}} onError={() => {} />`
-
-- `<UpdateAddress style={stylesObject} className={classNamesString} onSuccess={() => {}} onError={() => {} />`
-
-- `<UpdateSubscription style={stylesObject} className={classNamesString} onSuccess={() => {}} onError={() => {} />`
+  
