@@ -66,7 +66,7 @@ import {
   PasswordChangeModal,
   AddressSelectModal,
   ProfilePicChangeModal
-} from "@pelcro/react-pelcro-js/dist/index.esm";
+} from "@pelcro/react-pelcro-js";
 import "@pelcro/react-pelcro-js/dist/pelcro.css";
 
 export default function Main() {
