@@ -9,7 +9,6 @@ Git commit hook:
 import sys
 import re
 
-valid_commit_types = ['feat', 'fix', 'docs', 'style', 'refactor', 'perf', 'build', 'ci', 'test', 'chore', 'revert']
 commit_file = sys.argv[1]
 help_address = 'https://gist.github.com/stephenparish/9941e89d80e2bc58a153'
 
@@ -22,7 +21,7 @@ with open(commit_file) as commit:
 
     # first line
     line = lines[0]
-    m = re.search('^(.*)\((.*)\): (.*)$', line)
+    m = re.search('^(feat|fix|docs|style|refactor|perf|test|build|ci|test|chore|revert)(\(.+\))?\: (.+)$', line)
     n = re.search('^(Merge branch).*', line)
 
     if n:
@@ -30,11 +29,6 @@ with open(commit_file) as commit:
 
     if not m or len(m.groups()) != 3:
         sys.stderr.write("\ncommit message header line does not follow format: type(scope): message\n")
-        sys.stderr.write("\nCommit message guide: %s\n\n" % help_address)
-        sys.exit(1)
-    commit_type, commit_scope, commit_message = m.groups()
-    if commit_type not in valid_commit_types:
-        sys.stderr.write("\nCommit type must be one of: %s\n" % ", ".join(valid_commit_types))
         sys.stderr.write("\nCommit message guide: %s\n\n" % help_address)
         sys.exit(1)
 
