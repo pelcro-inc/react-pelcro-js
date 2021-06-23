@@ -7,11 +7,10 @@
 <h1 align="center" style="border-bottom: none;">Pelcro React Elements</h1>
 
 <p align="center">
-  Customize your <a href="https://www.pelcro.com/">Pelcro</a> experience for your clients needs using our React components 
+  Tailor your <a href="https://www.pelcro.com/">Pelcro</a> experience to the needs of your clients using our React components
 </p>
 
 <p align="center">
-    <img src="https://badgen.net/bundlephobia/tree-shaking/@pelcro/react-pelcro-js">
     <img src="https://github.com/pelcro-inc/react-pelcro-js/actions/workflows/release.yml/badge.svg">
     <img src="https://github.com/pelcro-inc/react-pelcro-js/actions/workflows/tests.yml/badge.svg?branch=next">
     <img src="https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg">
