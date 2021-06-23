@@ -80,12 +80,12 @@ export function RegisterModal(props) {
         <RegisterView {...props} onSuccess={onSuccess} />
       </ModalBody>
       <ModalFooter>
-        <div>
+        <p>
           {t("messages.alreadyHaveAccount") + " "}
           <Link onClick={() => switchView("login")}>
             {t("messages.loginHere")}
           </Link>
-        </div>
+        </p>
         <Authorship />
       </ModalFooter>
     </Modal>
