@@ -164,8 +164,8 @@ export const applyPelcroTheme = () => {
   };
 
   whenSiteReady(() => {
-    const primaryColorHex = window.Pelcro.site.read()?.design_settings
-      ?.primary_color;
+    const primaryColorHex =
+      window.Pelcro.site.read()?.design_settings?.primary_color;
     if (!primaryColorHex) {
       return;
     }
@@ -199,6 +199,14 @@ export const initViewFromURL = () => {
     whenSiteReady(() => {
       if (view === "plan-select") {
         return initSubscriptionFromURL();
+      }
+
+      if (view === "order-create") {
+        return initPurchaseFromUrl();
+      }
+
+      if (view === "cart") {
+        return initCartFromUrl();
       }
 
       switchView(view);
@@ -261,5 +269,45 @@ export const initSubscriptionFromURL = () => {
     }
 
     return switchToAddressView();
+  });
+};
+
+/**
+ * Initializes the e-commerce quick purchase flow if 'sku_id' param exist
+ * with valid IDs, Otherwise, ignore the param
+ */
+export const initPurchaseFromUrl = () => {
+  const { whenEcommerceLoaded, purchaseItem } = usePelcro.getStore();
+
+  whenEcommerceLoaded(() => {
+    const skuId = window.Pelcro.helpers.getURLParameter("sku_id");
+    purchaseItem(skuId);
+  });
+};
+
+/**
+ * Initializes the cart if 'sku_id' param exist with valid IDs,
+ * Otherwise, ignore the param.
+ */
+export const initCartFromUrl = () => {
+  const { whenEcommerceLoaded, addToCart, switchView } =
+    usePelcro.getStore();
+
+  whenEcommerceLoaded(() => {
+    const skusIdsParam =
+      window.Pelcro.helpers.getURLParameter("sku_id");
+
+    const skusIds = skusIdsParam?.split(",");
+
+    let hasAddedAnItemSuccessfully = false;
+
+    skusIds?.forEach((skuId) => {
+      const didAddItemSuccessfully = addToCart(skuId);
+      if (didAddItemSuccessfully) {
+        hasAddedAnItemSuccessfully = true;
+      }
+    });
+
+    if (hasAddedAnItemSuccessfully) switchView("cart");
   });
 };
