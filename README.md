@@ -51,6 +51,7 @@ To use Pelcro components, all you need to do is install the `@pelcro/react-pelcr
 ```javascript
 import React from "react";
 import {
+  usePelcro,
   PelcroModalController,
   Dashboard,
   DashboardOpenButton,
@@ -81,10 +82,13 @@ import {
 import "@pelcro/react-pelcro-js/dist/pelcro.css";
 
 export default function Main() {
+
+  const { switchView } = usePelcro();
+
   return (
     <>
-      <button className="pelcro-login-button">Login</button>
-      <button className="pelcro-subscribe-button">Subscribe</button>
+      <button onClick={() => switchView("login")}>Login</button>
+      <button onClick={() => switchView("plan-select")}>Subscribe</button>
 
       <PelcroModalController>
         <MeterModal />
