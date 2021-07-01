@@ -140,7 +140,9 @@ export const isValidViewFromURL = (viewID) => {
       "payment-method-update",
       "user-edit",
       "newsletter",
-      "address-create"
+      "address-create",
+      "order-create",
+      "cart"
     ].includes(viewID)
   ) {
     return true;
