@@ -185,10 +185,15 @@ export const disableScroll = () => {
 export const trackSubscriptionOnGA = () => {
   const { product, plan, couponCode } = usePelcro.getStore();
 
-  const subscriptions = window.Pelcro.subscription.list();
-  const lastSubscription = subscriptions?.[subscriptions.length - 1];
+  /*   
+  getting the latest subscription id from invoices instead of subscriptions
+  to handle gifted subs which are not added to subs list
+  */
+  const invoices = window.Pelcro.user.read().invoices;
+  const lastSubscriptionId =
+    invoices?.[invoices.length - 1].subscription_id;
 
-  if (!lastSubscription) {
+  if (!lastSubscriptionId) {
     return;
   }
 
@@ -197,14 +202,14 @@ export const trackSubscriptionOnGA = () => {
   });
 
   ReactGA?.plugin?.execute?.("ecommerce", "addTransaction", {
-    id: lastSubscription.id,
+    id: lastSubscriptionId,
     affiliation: "Pelcro",
     revenue: plan?.amount ? plan.amount / 100 : 0,
     coupon: couponCode
   });
 
   ReactGA?.plugin?.execute?.("ecommerce", "addItem", {
-    id: lastSubscription.id,
+    id: lastSubscriptionId,
     name: product.name,
     category: product.description,
     variant: plan.nickname,
