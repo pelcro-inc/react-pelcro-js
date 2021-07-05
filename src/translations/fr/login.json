@@ -1,25 +1,28 @@
 {
-    "labels": {
-        "email": "Entrez votre adresse courriel",
-        "password": "Entrez votre mot de passe",
-        "required": "Champs obligatoires",
-        "emailPlaceholder": "Adresse courriel",
-        "passwordPlaceholder": "Mot de passe",
-        "login": "Connexion"
+  "labels": {
+    "email": "Entrez votre adresse courriel",
+    "password": "Entrez votre mot de passe",
+    "required": "Champs obligatoires",
+    "emailPlaceholder": "Adresse courriel",
+    "passwordPlaceholder": "Mot de passe",
+    "login": "Connexion"
+  },
+  "messages": {
+    "loginTo": "Connectez-vous à votre compte",
+    "welcome": "Bienvenue, connectez-vous avec votre compte existant.",
+    "dontHaveAccount": "Vous n’avez pas encore de compte ?",
+    "createAccount": "Créer un compte",
+    "forgotPassword": "Mot de passe oublié ?",
+    "reset": {
+      "click": "Cliquez",
+      "here": "ici",
+      "toReset": "pour le réinitialiser."
     },
-    "messages": {
-        "loginTo": "Connectez-vous à votre compte",
-        "welcome": "Bienvenue, connectez-vous avec votre compte existant.",
-        "dontHaveAccount": "Vous n’avez pas encore de compte ?",
-        "createAccount": "Créer un compte",
-        "forgotPassword": "Mot de passe oublié ?",
-        "reset": {
-            "click": "Cliquez",
-            "here": "ici",
-            "toReset": "pour le réinitialiser."
-        }
-    },
-    "errors": {
-        "": ""
+    "socialLogin": {
+      "label": "Ou continuer avec"
     }
+  },
+  "errors": {
+    "": ""
+  }
 }

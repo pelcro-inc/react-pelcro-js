@@ -27,6 +27,9 @@
       "click": "Cliquez",
       "here": "ici",
       "ifPrefer": "si vous préférez désactiver votre bloqueur de publicités."
+    },
+    "socialLogin": {
+      "label": "Ou continuer avec"
     }
   },
   "errors": {

@@ -5,13 +5,18 @@ import { LoginPassword } from "./LoginPassword";
 import { LoginButton } from "./LoginButton";
 import { LoginEmail } from "./LoginEmail";
 import { AlertWithContext } from "../../SubComponents/AlertWithContext";
+import { FacebookLoginButton } from "../../Components/common/FacebookLoginButton/FacebookLoginButton";
 import { Link } from "../../SubComponents/Link";
+import { GoogleLoginButton } from "../common/GoogleLoginButton/GoogleLoginButton";
 
 /**
  *
  */
 export function LoginView(props) {
   const { t } = useTranslation("login");
+  const socialLoginEnabled =
+    window.Pelcro.site.read()?.facebook_app_id ||
+    window.Pelcro.site.read()?.google_app_id;
 
   return (
     <div id="pelcro-login-view">
@@ -50,6 +55,21 @@ export function LoginView(props) {
             name={t("labels.login")}
             id="pelcro-submit"
           />
+          {socialLoginEnabled && (
+            <div className="plc-mt-5">
+              <div className="plc-flex plc-items-center plc-justify-between ">
+                <hr className="plc-w-full plc-border-gray-300" />
+                <span className="plc-flex-shrink-0 plc-p-2 plc-text-xs plc-text-gray-400 plc-uppercase">
+                  {t("messages.socialLogin.label")}
+                </span>
+                <hr className="plc-w-full plc-border-gray-300" />
+              </div>
+              <div className="plc-flex plc-justify-center plc-px-5 plc-mt-1 plc-space-x-3">
+                <GoogleLoginButton />
+                <FacebookLoginButton />
+              </div>
+            </div>
+          )}
         </LoginContainer>
       </form>
     </div>

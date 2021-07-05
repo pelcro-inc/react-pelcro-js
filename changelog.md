@@ -8,6 +8,15 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ### Added
 
+- Add items to cart to quickly purchase ecommerce items using url triggers.
+- Facebook and Google login button components.
+
+## [Released]
+
+## [1.0.0] - 2021-06-22
+
+### Added
+
 - Added usePelcro global hook, to have access to pelcro UI state.
 - Added PelcroModalController component to orchestrate between modals & initialize features.
 - Show an error in the cart modal if there are items that don't match the user account's currency, or if there are items with multiple different currencies.
@@ -26,8 +35,6 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 - Replaced app.js with Main.js using the new external API. [PRIVATE]
 - Design of item removal button in cart modal.
-
-## [Released]
 
 ## [0.17.12] - 2021-06-02
 
