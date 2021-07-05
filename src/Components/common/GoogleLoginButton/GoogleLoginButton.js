@@ -13,7 +13,7 @@ export const GoogleLoginButton = () => {
 
   const onSuccess = (response) => {
     const profile = response.getBasicProfile();
-    const accessToken = response.getAuthResponse()?.access_token;
+    const accessToken = response.getAuthResponse()?.id_token;
 
     loginDispatch?.({
       type: HANDLE_SOCIAL_LOGIN,
