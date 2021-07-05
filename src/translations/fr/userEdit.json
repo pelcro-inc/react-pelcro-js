@@ -17,6 +17,7 @@
   },
   "messages": {
     "userUpdated": "Votre profil a été mis à jour avec succès.",
-    "pictureRemoved": "Votre photo de profil a été supprimée avec succès."
+    "pictureRemoved": "Votre photo de profil a été supprimée avec succès.",
+    "pictureUpdated": "Votre photo de profil a été mise à jour avec succès."
   }
 }

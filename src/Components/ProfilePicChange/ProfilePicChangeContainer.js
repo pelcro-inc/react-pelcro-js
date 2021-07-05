@@ -71,6 +71,13 @@ const ProfilePicChangeContainer = ({
             });
             return onChangeFailure(err);
           }
+          dispatch({
+            type: SHOW_ALERT,
+            payload: {
+              type: "success",
+              content: t("messages.pictureUpdated")
+            }
+          });
           return onChangeSuccess();
         }
       );

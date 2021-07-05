@@ -17,6 +17,7 @@
   },
   "messages": {
     "userUpdated": "Thanks! Your profile was updated successfully.",
-    "pictureRemoved": "Your profile picture was removed successfully."
+    "pictureRemoved": "Your profile picture was removed successfully.",
+    "pictureUpdated": "Your profile picture was updated successfully."
   }
 }
