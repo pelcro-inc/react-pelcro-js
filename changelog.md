@@ -6,6 +6,23 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 ## [Unreleased]
 
+## [Released]
+
+## [1.1.1] - 2021-07-07
+
+### Fixed
+
+- Success alert not showing up after profile picture upload.
+- Gift recipient not resetting when resetState is called.
+
+## [1.1.0] - 2021-07-01
+
+### Added
+
+- Add items to cart to quickly purchase ecommerce items using url triggers.
+
+## [1.0.0] - 2021-06-22
+
 ### Added
 
 - Added usePelcro global hook, to have access to pelcro UI state.
@@ -26,8 +43,6 @@ The format is based on [Keep a Changelog][keep a changelog] and this project adh
 
 - Replaced app.js with Main.js using the new external API. [PRIVATE]
 - Design of item removal button in cart modal.
-
-## [Released]
 
 ## [0.17.12] - 2021-06-02
 
