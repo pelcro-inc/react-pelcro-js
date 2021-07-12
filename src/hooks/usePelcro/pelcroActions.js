@@ -1,6 +1,9 @@
 import ReactGA from "react-ga";
-import { initialState } from ".";
-import { userHasAddress } from "../../utils/utils";
+import { initialState } from "./index";
+import {
+  userHasAddress,
+  userHasPaymentMethod
+} from "../../utils/utils";
 
 export class PelcroActions {
   constructor(storeSetter, storeGetter) {
@@ -51,10 +54,26 @@ export class PelcroActions {
     const {
       switchView,
       resetView,
+      switchToCheckoutForm,
       product,
-      subscriptionIdToRenew,
       order
     } = this.get();
+
+    if (product || order) {
+      // direct user to stripe checkout form when there are no existing cards
+      if (!userHasPaymentMethod()) {
+        switchToCheckoutForm();
+      }
+
+      return switchView("payment-method-select");
+    }
+
+    return resetView();
+  };
+
+  switchToCheckoutForm = () => {
+    const { switchView, product, subscriptionIdToRenew, order } =
+      this.get();
 
     if (product && subscriptionIdToRenew) {
       return switchView("subscription-renew");
@@ -67,8 +86,6 @@ export class PelcroActions {
     if (order) {
       return switchView("order-create");
     }
-
-    return resetView();
   };
 
   switchToAddressView = () => {

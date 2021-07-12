@@ -38,7 +38,10 @@ const PaymentMethodSelectContainer = ({
   onSuccess = () => {},
   children
 }) => {
-  const { set } = usePelcro();
+  const {
+    set,
+    selectedPaymentMethodId: selectedPaymentMethodIdFromStore
+  } = usePelcro();
 
   const submitPaymentMethod = ({ selectedPaymentMethodId }) => {
     set({ selectedPaymentMethodId });
@@ -61,9 +64,9 @@ const PaymentMethodSelectContainer = ({
             paymentMethods: moveDefaultPaymentMethodToStart(
               action.payload
             ),
-            selectedPaymentMethodId: String(
-              window.Pelcro.user.read()?.source?.id
-            )
+            selectedPaymentMethodId:
+              selectedPaymentMethodIdFromStore ??
+              String(window.Pelcro.user.read()?.source?.id)
           });
 
         case HANDLE_SUBMIT:

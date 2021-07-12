@@ -13,21 +13,17 @@ export const PaymentMethodSelectModal = ({
   onClose,
   ...otherProps
 }) => {
-  const { switchView, resetView, switchToPaymentView } = usePelcro();
+  const { switchToCheckoutForm, set } = usePelcro();
 
   const onSuccess = (selectedPaymentMethodId) => {
     otherProps.onSuccess?.(selectedPaymentMethodId);
 
-    switchToPaymentView();
-  };
-
-  const onGiftRedemptionSuccess = () => {
-    otherProps.onGiftRedemptionSuccess?.();
-    resetView();
+    switchToCheckoutForm();
   };
 
   const onAddNewPaymentMethod = () => {
-    switchView("subscription-create");
+    set({ selectedPaymentMethodId: null });
+    switchToCheckoutForm();
   };
 
   return (
@@ -41,7 +37,6 @@ export const PaymentMethodSelectModal = ({
           onAddNewPaymentMethod={onAddNewPaymentMethod}
           {...otherProps}
           onSuccess={onSuccess}
-          onGiftRedemptionSuccess={onGiftRedemptionSuccess}
         />
       </ModalBody>
       <ModalFooter>

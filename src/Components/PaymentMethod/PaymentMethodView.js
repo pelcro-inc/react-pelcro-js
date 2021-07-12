@@ -13,6 +13,7 @@ import { PaypalSubscribeButton } from "../PaypalButtons/PaypalSubscribeButton";
 import { BankRedirection } from "./BankRedirection";
 import { Link } from "../../SubComponents/Link";
 import { ReactComponent as LockIcon } from "../../assets/lock.svg";
+import { SelectedPaymentMethod } from "./SelectedPaymentMethod";
 
 /**
  *
@@ -58,7 +59,7 @@ export function PaymentMethodView({
           <AlertWithContext className="plc-mb-2" />
           {/* Payment form */}
           <div>
-            {/* <SelectedPaymentMethod /> */}
+            <SelectedPaymentMethod />
             <CheckoutForm />
 
             {/* Coupon section */}
