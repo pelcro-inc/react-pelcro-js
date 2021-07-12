@@ -1,0 +1,18 @@
+{
+  "update": {
+    "title": "Update your payment information",
+    "subtitle": "Enter the fields below to update your credit card information",
+    "required": "Required",
+    "success": "Your payment information has been updated",
+    "secure": "You're safe - PCI compliant 128 SSL by"
+  },
+  "select": {
+    "title": "Select a payment method",
+    "subtitle": "Select one of your saved methods, or pay with a new one",
+    "expires": "Expires",
+    "buttons": {
+      "addPaymentMethod": "Pay with a new payment method",
+      "selectPaymentMethod": "Continue"
+    }
+  }
+}

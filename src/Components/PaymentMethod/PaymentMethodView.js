@@ -1,9 +1,7 @@
 import React from "react";
 import {
-  PelcroCardNumber,
-  PelcroCardExpiry,
-  PelcroCardCVC,
-  PelcroPaymentRequestButton
+  PelcroPaymentRequestButton,
+  CheckoutForm
 } from "../../SubComponents/StripeElements";
 import { useTranslation } from "react-i18next";
 import { DiscountedPrice } from "./DiscountedPrice";
@@ -60,22 +58,8 @@ export function PaymentMethodView({
           <AlertWithContext className="plc-mb-2" />
           {/* Payment form */}
           <div>
-            <PelcroCardNumber autoFocus={true} />
-            <img
-              alt="credit_cards"
-              className="plc-h-4 plc-mt-2"
-              src="https://js.pelcro.com/ui/plugin/main/images/credit_cards.png"
-            />
-
-            <div className="plc-flex plc-justify-between plc-my-2">
-              <div className="plc-w-6/12 plc-pr-4">
-                <PelcroCardExpiry />
-              </div>
-
-              <div className="plc-w-6/12 plc-pl-4">
-                <PelcroCardCVC />
-              </div>
-            </div>
+            {/* <SelectedPaymentMethod /> */}
+            <CheckoutForm />
 
             {/* Coupon section */}
             {showCoupon && (
