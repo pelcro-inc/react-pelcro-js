@@ -99,7 +99,7 @@ export const getFormattedPriceByLocal = (
  * @return {boolean} true if the user have at least one address, false otherwise
  */
 export const userHasAddress = () => {
-  const addresses = window.Pelcro.user.read().addresses ?? [];
+  const addresses = window.Pelcro.user.read()?.addresses ?? [];
   return addresses.length > 0;
 };
 
@@ -231,7 +231,7 @@ export const trackSubscriptionOnGA = () => {
  * @return {boolean} true if the user have at least one payment method (source), false otherwise
  */
 export const userHasPaymentMethod = () => {
-  const sources = window.Pelcro.user.read().sources ?? [];
+  const sources = window.Pelcro.user.read()?.sources ?? [];
   return sources.length > 0;
 };
 

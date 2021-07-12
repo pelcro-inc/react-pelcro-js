@@ -49,8 +49,11 @@ describe("Returns the store with the correct initial state", () => {
     expect(store.isRenewingGift).toEqual(false);
     expect(store.giftCode).toEqual("");
     expect(store.subscriptionIdToRenew).toEqual(null);
+    expect(store.cartItems).toEqual([]);
+    expect(store.order).toEqual(null);
     expect(store.selectedAddressId).toEqual(null);
     expect(store.addressIdToEdit).toEqual(null);
+    expect(store.selectedPaymentMethodId).toEqual(null);
   });
 
   test("getStore API", () => {
@@ -64,8 +67,11 @@ describe("Returns the store with the correct initial state", () => {
     expect(store.isRenewingGift).toEqual(false);
     expect(store.giftCode).toEqual("");
     expect(store.subscriptionIdToRenew).toEqual(null);
+    expect(store.cartItems).toEqual([]);
+    expect(store.order).toEqual(null);
     expect(store.selectedAddressId).toEqual(null);
     expect(store.addressIdToEdit).toEqual(null);
+    expect(store.selectedPaymentMethodId).toEqual(null);
   });
 });
 
@@ -251,7 +257,38 @@ describe("Actions", () => {
   });
 
   describe("switchToPaymentView", () => {
-    test("switch to subscription-create view when there is a selected product", () => {
+    test("switch to payment-method-select view when the user has existing payment methods", () => {
+      // test setup
+      jest
+        .spyOn(window.Pelcro.user, "read")
+        .mockImplementation(() => ({
+          sources: [{ id: "source-1" }]
+        }));
+      // test setup end
+
+      const store = usePelcro();
+      act(() => {
+        store.set({
+          product: { id: 1234 }
+        });
+      });
+
+      act(() => {
+        store.switchToPaymentView();
+      });
+
+      expect(store.view).toEqual("payment-method-select");
+    });
+
+    test("switch to the suitable checkout form when the user has no existing payment methods", () => {
+      // test setup
+      jest
+        .spyOn(window.Pelcro.user, "read")
+        .mockImplementation(() => ({
+          sources: []
+        }));
+      // test setup end
+
       const store = usePelcro();
       act(() => {
         store.set({ product: { id: 1234 } });
@@ -259,6 +296,21 @@ describe("Actions", () => {
 
       act(() => {
         store.switchToPaymentView();
+      });
+
+      expect(store.view).toEqual("subscription-create");
+    });
+  });
+
+  describe("switchToCheckoutForm", () => {
+    test("switch to subscription-create view when there is a selected product", () => {
+      const store = usePelcro();
+      act(() => {
+        store.set({ product: { id: 1234 } });
+      });
+
+      act(() => {
+        store.switchToCheckoutForm();
       });
 
       expect(store.view).toEqual("subscription-create");
@@ -274,7 +326,7 @@ describe("Actions", () => {
       });
 
       act(() => {
-        store.switchToPaymentView();
+        store.switchToCheckoutForm();
       });
 
       expect(store.view).toEqual("subscription-renew");
@@ -287,7 +339,7 @@ describe("Actions", () => {
       });
 
       act(() => {
-        store.switchToPaymentView();
+        store.switchToCheckoutForm();
       });
 
       expect(store.view).toEqual("order-create");
@@ -297,7 +349,7 @@ describe("Actions", () => {
       const store = usePelcro();
 
       act(() => {
-        store.switchToPaymentView();
+        store.switchToCheckoutForm();
       });
 
       expect(store.view).toEqual(null);
@@ -306,6 +358,7 @@ describe("Actions", () => {
 
   describe("switchToAddressView", () => {
     test("switch to address creation view when the user doesn't have any address", () => {
+      console.log("useerrrrr", Pelcro.user.read());
       const store = usePelcro();
 
       act(() => {

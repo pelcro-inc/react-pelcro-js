@@ -62,7 +62,7 @@ export class PelcroActions {
     if (product || order) {
       // direct user to stripe checkout form when there are no existing cards
       if (!userHasPaymentMethod()) {
-        switchToCheckoutForm();
+        return switchToCheckoutForm();
       }
 
       return switchView("payment-method-select");
