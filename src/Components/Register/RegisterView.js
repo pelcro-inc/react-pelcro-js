@@ -6,6 +6,8 @@ import { RegisterPassword } from "./RegisterPassword";
 import { RegisterButton } from "./RegisterButton";
 import { AlertWithContext } from "../../SubComponents/AlertWithContext";
 import { usePelcro } from "../../hooks/usePelcro";
+import { FacebookLoginButton } from "../common/FacebookLoginButton/FacebookLoginButton";
+import { GoogleLoginButton } from "../common/GoogleLoginButton/GoogleLoginButton";
 
 /**
  *
@@ -17,6 +19,9 @@ export function RegisterView(props) {
   const title = product?.paywall?.register_title ?? t("title");
   const subtitle =
     product?.paywall?.register_subtitle ?? t("subtitle");
+  const socialLoginEnabled =
+    window.Pelcro.site.read()?.facebook_app_id ||
+    window.Pelcro.site.read()?.google_app_id;
 
   return (
     <div id="pelcro-register-view">
@@ -49,6 +54,22 @@ export function RegisterView(props) {
             id="pelcro-submit"
             name={t("messages.createAccount")}
           />
+
+          {socialLoginEnabled && (
+            <div className="plc-mt-5">
+              <div className="plc-flex plc-items-center plc-justify-between ">
+                <hr className="plc-w-full plc-border-gray-300" />
+                <span className="plc-flex-shrink-0 plc-p-2 plc-text-xs plc-text-gray-400 plc-uppercase">
+                  {t("messages.socialLogin.label")}
+                </span>
+                <hr className="plc-w-full plc-border-gray-300" />
+              </div>
+              <div className="plc-flex plc-justify-center plc-px-5 plc-mt-1 plc-space-x-3">
+                <GoogleLoginButton />
+                <FacebookLoginButton />
+              </div>
+            </div>
+          )}
         </RegisterContainer>
       </form>
     </div>

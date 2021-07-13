@@ -1,7 +1,8 @@
 import React, { createContext } from "react";
 import useReducerWithSideEffects, {
   UpdateWithSideEffect,
-  Update
+  Update,
+  SideEffect
 } from "use-reducer-with-side-effects";
 import {
   SET_EMAIL,
@@ -11,7 +12,8 @@ import {
   RESET_LOGIN_FORM,
   HANDLE_LOGIN,
   DISABLE_LOGIN_BUTTON,
-  SHOW_ALERT
+  SHOW_ALERT,
+  HANDLE_SOCIAL_LOGIN
 } from "../../utils/action-types";
 import { getErrorMessages } from "../common/Helpers";
 
@@ -50,6 +52,39 @@ const LoginContainer = ({
         onSuccess(res);
       }
     });
+  };
+
+  const handleSocialLogin = ({
+    idpName,
+    idpToken,
+    email,
+    firstName,
+    lastName
+  }) => {
+    dispatch({ type: DISABLE_LOGIN_BUTTON, payload: true });
+
+    window.Pelcro.user.idpLogin(
+      {
+        idp_name: idpName,
+        idp_token: idpToken,
+        email: email,
+        first_name: firstName,
+        last_name: lastName
+      },
+      (err, res) => {
+        dispatch({ type: DISABLE_LOGIN_BUTTON, payload: false });
+
+        if (err) {
+          dispatch({
+            type: SHOW_ALERT,
+            payload: { type: "error", content: getErrorMessages(err) }
+          });
+          onFailure(err);
+        } else {
+          onSuccess(res);
+        }
+      }
+    );
   };
 
   const [state, dispatch] = useReducerWithSideEffects(
@@ -93,6 +128,9 @@ const LoginContainer = ({
             { ...state, buttonDisabled: true },
             (state, dispatch) => handleLogin(state, dispatch)
           );
+        case HANDLE_SOCIAL_LOGIN:
+          return SideEffect(() => handleSocialLogin(action.payload));
+
         default:
           return state;
       }
