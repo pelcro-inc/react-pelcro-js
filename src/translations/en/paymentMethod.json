@@ -11,7 +11,7 @@
     "subtitle": "Select one of your saved methods, or pay with a new one",
     "expires": "Expires",
     "buttons": {
-      "addPaymentMethod": "Pay with a new payment method",
+      "addPaymentMethod": "Pay with another payment method",
       "selectPaymentMethod": "Continue"
     }
   }

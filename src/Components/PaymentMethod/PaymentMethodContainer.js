@@ -248,9 +248,12 @@ const PaymentMethodContainerWithoutStripe = ({
     if (!subscriptionIdToRenew) {
       window.Pelcro.subscription.create(
         {
-          source_id: stripeSource.isExistingSource && stripeSource.id,
-          stripe_token:
-            !stripeSource.isExistingSource && stripeSource.id,
+          source_id: stripeSource.isExistingSource
+            ? stripeSource.id
+            : undefined,
+          stripe_token: !stripeSource.isExistingSource
+            ? stripeSource.id
+            : undefined,
           auth_token: window.Pelcro.user.read().auth_token,
           plan_id: plan.id,
           quantity: plan.quantity,
@@ -285,10 +288,12 @@ const PaymentMethodContainerWithoutStripe = ({
       if (isRenewingGift) {
         window.Pelcro.subscription.renewGift(
           {
-            source_id:
-              stripeSource.isExistingSource && stripeSource.id,
-            stripe_token:
-              !stripeSource.isExistingSource && stripeSource.id,
+            source_id: stripeSource.isExistingSource
+              ? stripeSource.id
+              : undefined,
+            stripe_token: !stripeSource.isExistingSource
+              ? stripeSource.id
+              : undefined,
             auth_token: window.Pelcro.user.read().auth_token,
             plan_id: plan.id,
             quantity: plan.quantity,
@@ -319,10 +324,12 @@ const PaymentMethodContainerWithoutStripe = ({
       } else {
         window.Pelcro.subscription.renew(
           {
-            source_id:
-              stripeSource.isExistingSource && stripeSource.id,
-            stripe_token:
-              !stripeSource.isExistingSource && stripeSource.id,
+            source_id: stripeSource.isExistingSource
+              ? stripeSource.id
+              : undefined,
+            stripe_token: !stripeSource.isExistingSource
+              ? stripeSource.id
+              : undefined,
             auth_token: window.Pelcro.user.read().auth_token,
             plan_id: plan.id,
             coupon_code: couponCode,
@@ -440,9 +447,12 @@ const PaymentMethodContainerWithoutStripe = ({
 
     window.Pelcro.ecommerce.order.create(
       {
-        source_id: stripeSource.isExistingSource && stripeSource.id,
-        stripe_token:
-          !stripeSource.isExistingSource && stripeSource.id,
+        source_id: stripeSource.isExistingSource
+          ? stripeSource.id
+          : undefined,
+        stripe_token: !stripeSource.isExistingSource
+          ? stripeSource.id
+          : undefined,
         items: mappedOrderItems,
         coupon_code: couponCode,
         ...(selectedAddressId && { address_id: selectedAddressId })
