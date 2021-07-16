@@ -27,6 +27,9 @@
       "click": "Click",
       "here": "here",
       "ifPrefer": "if you prefer to disable your Ad blocker."
+    },
+    "socialLogin": {
+      "label": "Or continue with"
     }
   },
   "errors": {

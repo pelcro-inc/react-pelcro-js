@@ -1,25 +1,28 @@
 {
-    "labels": {
-        "email": "Enter email",
-        "password": "Enter password",
-        "required": "required",
-        "emailPlaceholder": "Email",
-        "passwordPlaceholder": "Password",
-        "login": "Login"
+  "labels": {
+    "email": "Enter email",
+    "password": "Enter password",
+    "required": "required",
+    "emailPlaceholder": "Email",
+    "passwordPlaceholder": "Password",
+    "login": "Login"
+  },
+  "messages": {
+    "loginTo": "Login to your account",
+    "welcome": "Welcome back, sign in with your existing account.",
+    "dontHaveAccount": "Don't have an account yet?",
+    "createAccount": "Create an account.",
+    "forgotPassword": "Forgot your password?",
+    "reset": {
+      "click": "Click",
+      "here": "here",
+      "toReset": "to reset it."
     },
-    "messages": {
-        "loginTo": "Login to your account",
-        "welcome": "Welcome back, sign in with your existing account.",
-        "dontHaveAccount": "Don't have an account yet?",
-        "createAccount": "Create an account.",
-        "forgotPassword": "Forgot your password?",
-        "reset": {
-            "click": "Click",
-            "here": "here",
-            "toReset": "to reset it."
-        }
-    },
-    "errors": {
-        "": ""
+    "socialLogin": {
+      "label": "Or continue with"
     }
+  },
+  "errors": {
+    "": ""
+  }
 }
