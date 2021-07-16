@@ -14,11 +14,13 @@ import {
   SET_LAST_NAME,
   SET_TEXT_FIELD,
   SET_SELECT,
-  SHOW_ALERT
+  SHOW_ALERT,
+  HANDLE_SOCIAL_LOGIN
 } from "../../utils/action-types";
 import useReducerWithSideEffects, {
   UpdateWithSideEffect,
-  Update
+  Update,
+  SideEffect
 } from "use-reducer-with-side-effects";
 import { getErrorMessages } from "../common/Helpers";
 import { cleanObjectNullValues } from "../../utils/utils";
@@ -73,6 +75,42 @@ const RegisterContainer = ({
         first_name: firstName,
         last_name: lastName,
         metadata: { organization, jobTitle, ...selectFields }
+      },
+      (err, res) => {
+        dispatch({
+          type: DISABLE_REGISTRATION_BUTTON,
+          payload: false
+        });
+
+        if (err) {
+          dispatch({
+            type: SHOW_ALERT,
+            payload: { type: "error", content: getErrorMessages(err) }
+          });
+          onFailure(err);
+        } else {
+          onSuccess(res);
+        }
+      }
+    );
+  };
+
+  const handleSocialLogin = ({
+    idpName,
+    idpToken,
+    email,
+    firstName,
+    lastName
+  }) => {
+    dispatch({ type: DISABLE_REGISTRATION_BUTTON, payload: true });
+
+    window.Pelcro.user.idpLogin(
+      {
+        idp_name: idpName,
+        idp_token: idpToken,
+        email: email,
+        first_name: firstName,
+        last_name: lastName
       },
       (err, res) => {
         dispatch({
@@ -178,6 +216,8 @@ const RegisterContainer = ({
             { ...state, buttonDisabled: true },
             (state, dispatch) => handleRegister(state, dispatch)
           );
+        case HANDLE_SOCIAL_LOGIN:
+          return SideEffect(() => handleSocialLogin(action.payload));
 
         default:
           return state;
