@@ -12,11 +12,11 @@
 
 <p align="center">
     <img src="https://github.com/pelcro-inc/react-pelcro-js/actions/workflows/release.yml/badge.svg">
-    <img src="https://github.com/pelcro-inc/react-pelcro-js/actions/workflows/tests.yml/badge.svg?branch=next">
+    <img src="https://github.com/pelcro-inc/react-pelcro-js/actions/workflows/tests.yml/badge.svg">
     <img src="https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg">
     </br>
     <img src="https://img.shields.io/npm/v/@pelcro/react-pelcro-js/latest">
-    <img src="https://img.shields.io/npm/v/@pelcro/react-pelcro-js/next">
+    <img src="https://img.shields.io/npm/v/@pelcro/react-pelcro-js/beta">
 </p>
 
 
