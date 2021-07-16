@@ -549,6 +549,10 @@ describe("Actions", () => {
         .spyOn(window.Pelcro.ecommerce.products, "getBySkuId")
         .mockImplementation(() => testSku);
 
+      jest
+        .spyOn(window.Pelcro.ecommerce.products, "getSkus")
+        .mockImplementation(() => [testSku]);
+
       const store = usePelcro();
 
       act(() => {
@@ -559,13 +563,12 @@ describe("Actions", () => {
     });
 
     test("should not order item if the sku id is invalid", () => {
-      // suppress real errors
-      jest.spyOn(console, "error").mockImplementation(() => {});
-
       const invalidSkuId = 999;
       jest
         .spyOn(window.Pelcro.ecommerce.products, "getBySkuId")
         .mockImplementation(() => null);
+      // suppress real errors
+      jest.spyOn(console, "error").mockImplementation(() => {});
 
       const store = usePelcro();
 
