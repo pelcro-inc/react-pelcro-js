@@ -69,6 +69,10 @@ export const PelcroModalController = ({
           ({ type }) => type?.viewId === "dashboard-open"
         )}
 
+      {React.Children.map(children, (child) => child).find(
+        ({ type }) => type?.viewId === "toaster"
+      )}
+
       {/* Conditionally render our modals */}
       {React.Children.map(children, (child) => child).find(
         ({ type }) => type?.viewId === view
