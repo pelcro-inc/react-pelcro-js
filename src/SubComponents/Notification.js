@@ -1,18 +1,15 @@
 import React from "react";
-import {
-  default as hotToast,
-  Toaster as HotToaster
-} from "react-hot-toast";
+import { default as toast, Toaster } from "react-hot-toast";
 import { ReactComponent as CheckIcon } from "../assets/check-solid.svg";
 import { ReactComponent as XIcon } from "../assets/x-icon-solid.svg";
 
-export const Toaster = ({ children, ...otherProps }) => {
+export const Notification = ({ children, ...otherProps }) => {
   return (
-    <HotToaster
-      containerClassName="pelcro-toaster-container"
+    <Toaster
+      containerClassName="pelcro-notification-container"
       toastOptions={{
         success: {
-          className: "pelcro-toaster-success",
+          className: "pelcro-notification-success",
           icon: <CheckIcon className="plc-w-24 plc-h-8" />,
           iconTheme: {
             primary: "white",
@@ -20,7 +17,7 @@ export const Toaster = ({ children, ...otherProps }) => {
           }
         },
         error: {
-          className: "pelcro-toaster-error",
+          className: "pelcro-notification-error",
           icon: <XIcon className="plc-w-20 plc-h-8" />,
           iconTheme: {
             primary: "white",
@@ -31,10 +28,10 @@ export const Toaster = ({ children, ...otherProps }) => {
       {...otherProps}
     >
       {children}
-    </HotToaster>
+    </Toaster>
   );
 };
 
-Toaster.viewId = "toaster";
+Notification.viewId = "notification";
 
-export const toast = hotToast;
+export const notify = toast;

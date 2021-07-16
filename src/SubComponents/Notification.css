@@ -1,9 +1,9 @@
 @layer components {
-  .pelcro-root .pelcro-toaster-error {
+  .pelcro-root .pelcro-notification-error {
     @apply plc-font-semibold plc-text-sm plc-bg-red-500  plc-text-white;
   }
 
-  .pelcro-root .pelcro-toaster-success {
+  .pelcro-root .pelcro-notification-success {
     @apply plc-font-semibold plc-text-sm plc-bg-green-500 plc-text-white;
   }
 }

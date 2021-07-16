@@ -25,7 +25,7 @@ import { SubscriptionRenewModal } from "./Components/SubscriptionRenew/Subscript
 import { PaymentSuccessModal } from "./Components/PaymentSuccess/PaymentSuccessModal";
 import { OrderCreateModal } from "./Components/OrderCreate/OrderCreateModal";
 import { OrderConfirmModal } from "./Components/OrderConfirm/OrderConfirmModal";
-import { Toaster } from "./SubComponents/Toast";
+import { Notification } from "./SubComponents/Notification";
 
 export const Main = () => {
   return (
@@ -62,7 +62,7 @@ export const Main = () => {
       <OrderCreateModal />
       <OrderConfirmModal />
 
-      <Toaster />
+      <Notification />
     </PelcroModalController>
   );
 };

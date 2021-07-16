@@ -70,7 +70,7 @@ export const PelcroModalController = ({
         )}
 
       {React.Children.map(children, (child) => child).find(
-        ({ type }) => type?.viewId === "toaster"
+        ({ type }) => type?.viewId === "notification"
       )}
 
       {/* Conditionally render our modals */}

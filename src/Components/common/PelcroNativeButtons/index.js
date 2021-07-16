@@ -1,7 +1,7 @@
 import { saveToMetadataButton } from "./saveToMetadata";
 import i18n from "../../../i18n";
 import { usePelcro } from "../../../hooks/usePelcro";
-import { toast } from "../../../SubComponents/Toast";
+import { notify } from "../../../SubComponents/Notification";
 
 const translations = i18n.t("common:buttons", {
   returnObjects: true
@@ -264,7 +264,7 @@ export const init = () => {
                 "shop:messages.currencyMismatch",
                 { currency: userCurrency }
               );
-              toast.error(errorMsg);
+              notify.error(errorMsg);
             }
           }
         );
