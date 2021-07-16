@@ -29,6 +29,7 @@ const initialState = {
     content: ""
   }
 };
+
 const store = createContext(initialState);
 const { Provider } = store;
 
