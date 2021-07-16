@@ -12,7 +12,8 @@
     "expires": "Expires",
     "buttons": {
       "addPaymentMethod": "Pay with another payment method",
-      "selectPaymentMethod": "Continue"
+      "selectPaymentMethod": "Continue",
+      "changePaymentMethod": "Change"
     }
   }
 }

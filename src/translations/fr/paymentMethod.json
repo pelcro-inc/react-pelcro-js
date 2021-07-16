@@ -7,12 +7,13 @@
     "secure": "Vous êtes en sécurité - 128 SSL conforme à la norme PCI"
   },
   "select": {
-    "title": "Select a payment method",
-    "subtitle": "Select one of your saved payment methods, or pay with a new one",
-    "expires": "Expires",
+    "title": "Sélectionnez un mode de paiement",
+    "subtitle": "Sélectionnez un mode de paiement existant ou choisissez-en un nouveau",
+    "expires": "Date d'expiration",
     "buttons": {
-      "addPaymentMethod": "Pay with a new payment method",
-      "selectPaymentMethod": "Continue"
+      "addPaymentMethod": "Choisir un autre mode de paiement",
+      "selectPaymentMethod": "Continuer",
+      "changePaymentMethod": "Modifier"
     }
   }
 }

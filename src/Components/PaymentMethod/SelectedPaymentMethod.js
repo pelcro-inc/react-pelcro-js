@@ -50,7 +50,7 @@ export const SelectedPaymentMethod = () => {
               variant="ghost"
               className="plc-text-primary-500"
             >
-              Change
+              {t("select.buttons.changePaymentMethod")}
             </Button>
           </div>
         </div>
