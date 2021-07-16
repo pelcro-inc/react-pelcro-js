@@ -245,9 +245,7 @@ export const init = () => {
           (e) => {
             const itemSkuId = Number(e.target.dataset.skuId);
             const quickPurchaseItem =
-              window.Pelcro.ecommerce.products.getBySkuId(
-                Number(itemSkuId)
-              );
+              window.Pelcro.ecommerce.products.getBySkuId(itemSkuId);
 
             if (!quickPurchaseItem) {
               return console.error("invalid item SKU id");
