@@ -13,7 +13,7 @@ import { ReactComponent as ExclamationIcon } from "../../assets/exclamation.svg"
 import { ReactComponent as EditIcon } from "../../assets/edit.svg";
 import { ReactComponent as UserIcon } from "../../assets/user.svg";
 import { ReactComponent as RefreshIcon } from "../../assets/refresh.svg";
-import { ReactComponent as XCircleIcon } from "../../assets/x-icon-circle.svg";
+import { ReactComponent as XCircleIcon } from "../../assets/x-icon-solid.svg";
 import { ReactComponent as PaymentCardIcon } from "../../assets/payment-card.svg";
 import { ReactComponent as LocationIcon } from "../../assets/location-pin.svg";
 import { ReactComponent as SubscriptionIcon } from "../../assets/subscription.svg";
