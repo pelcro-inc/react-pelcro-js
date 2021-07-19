@@ -358,7 +358,6 @@ describe("Actions", () => {
 
   describe("switchToAddressView", () => {
     test("switch to address creation view when the user doesn't have any address", () => {
-      console.log("useerrrrr", Pelcro.user.read());
       const store = usePelcro();
 
       act(() => {
