@@ -201,8 +201,13 @@ export const initViewFromURL = () => {
         return initSubscriptionFromURL();
       }
 
-      if (view === "offline-plan") {
-        return initOfflineSubscriptionFromURL();
+      if (view === "register") {
+        const offlinePlanId =
+          window.Pelcro.helpers.getURLParameter("plan_id");
+
+        if (offlinePlanId) {
+          return initOfflineSubscriptionFromURL(offlinePlanId);
+        }
       }
 
       if (view === "order-create") {
@@ -280,22 +285,17 @@ export const initSubscriptionFromURL = () => {
  * Initializes offline subscription flow if 'plan_id' params exist
  * with valid IDs, Otherwise, ignore the param
  */
-export const initOfflineSubscriptionFromURL = () => {
+export const initOfflineSubscriptionFromURL = (offlinePlanId) => {
   const {
     switchView,
-    whenUserReady,
+    whenSiteReady,
     isAuthenticated,
     switchToPaymentView,
     switchToAddressView,
     set
   } = usePelcro.getStore();
 
-  whenUserReady(() => {
-    const offlinePlanId =
-      window.Pelcro.helpers.getURLParameter("plan_id");
-
-    if (!offlinePlanId) return;
-
+  whenSiteReady(() => {
     window.Pelcro.plan.getPlan(
       {
         plan_id: offlinePlanId
