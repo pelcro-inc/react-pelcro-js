@@ -92,7 +92,7 @@ const PaymentMethodContainerWithoutStripe = ({
 }) => {
   const { t } = useTranslation("payment");
   const pelcroStore = usePelcro();
-  const { set, order } = usePelcro();
+  const { set, order, selectedPaymentMethodId } = usePelcro();
 
   const product = props.product ?? pelcroStore.product;
   const plan = props.plan ?? pelcroStore.plan;
@@ -248,7 +248,12 @@ const PaymentMethodContainerWithoutStripe = ({
     if (!subscriptionIdToRenew) {
       window.Pelcro.subscription.create(
         {
-          stripe_token: stripeSource.id,
+          source_id: stripeSource.isExistingSource
+            ? stripeSource.id
+            : undefined,
+          stripe_token: !stripeSource.isExistingSource
+            ? stripeSource.id
+            : undefined,
           auth_token: window.Pelcro.user.read().auth_token,
           plan_id: plan.id,
           quantity: plan.quantity,
@@ -283,7 +288,12 @@ const PaymentMethodContainerWithoutStripe = ({
       if (isRenewingGift) {
         window.Pelcro.subscription.renewGift(
           {
-            stripe_token: stripeSource.id,
+            source_id: stripeSource.isExistingSource
+              ? stripeSource.id
+              : undefined,
+            stripe_token: !stripeSource.isExistingSource
+              ? stripeSource.id
+              : undefined,
             auth_token: window.Pelcro.user.read().auth_token,
             plan_id: plan.id,
             quantity: plan.quantity,
@@ -314,7 +324,12 @@ const PaymentMethodContainerWithoutStripe = ({
       } else {
         window.Pelcro.subscription.renew(
           {
-            stripe_token: stripeSource.id,
+            source_id: stripeSource.isExistingSource
+              ? stripeSource.id
+              : undefined,
+            stripe_token: !stripeSource.isExistingSource
+              ? stripeSource.id
+              : undefined,
             auth_token: window.Pelcro.user.read().auth_token,
             plan_id: plan.id,
             coupon_code: couponCode,
@@ -419,7 +434,7 @@ const PaymentMethodContainerWithoutStripe = ({
     );
   };
 
-  const purchase = (token, state, dispatch) => {
+  const purchase = (stripeSource, state, dispatch) => {
     const isQuickPurchase = !Array.isArray(order);
     const mappedOrderItems = isQuickPurchase
       ? [{ sku_id: order.id, quantity: order.quantity }]
@@ -432,9 +447,14 @@ const PaymentMethodContainerWithoutStripe = ({
 
     window.Pelcro.ecommerce.order.create(
       {
+        source_id: stripeSource.isExistingSource
+          ? stripeSource.id
+          : undefined,
+        stripe_token: !stripeSource.isExistingSource
+          ? stripeSource.id
+          : undefined,
         items: mappedOrderItems,
         coupon_code: couponCode,
-        stripe_token: token.id,
         ...(selectedAddressId && { address_id: selectedAddressId })
       },
       (err, res) => {
@@ -781,6 +801,18 @@ const PaymentMethodContainerWithoutStripe = ({
           return UpdateWithSideEffect(
             { ...state, disableSubmit: true, isLoading: true },
             (state, dispatch) => {
+              if (selectedPaymentMethodId) {
+                // pay with selected method (source) if exists already
+                return handlePayment(
+                  {
+                    id: selectedPaymentMethodId,
+                    isExistingSource: true
+                  },
+                  state,
+                  dispatch
+                );
+              }
+
               if (type === "updatePaymentSource") {
                 updatePaymentSource(state, dispatch);
               } else {

@@ -36,6 +36,7 @@ export { MeterModal } from "./Components/Meter/MeterModal";
 export { MeterView } from "./Components/Meter/MeterView";
 export { PaymentMethodContainer } from "./Components/PaymentMethod/PaymentMethodContainer";
 export { PaymentMethodView } from "./Components/PaymentMethod/PaymentMethodView";
+export { SelectedPaymentMethod } from "./Components/PaymentMethod/SelectedPaymentMethod";
 export { ApplyCouponButton } from "./Components/PaymentMethod/ApplyCouponButton";
 export { CouponCode } from "./Components/PaymentMethod/CouponCode";
 export { BankRedirection } from "./Components/PaymentMethod/BankRedirection";
@@ -72,7 +73,8 @@ export {
   PelcroCardCVC,
   PelcroCardExpiry,
   PelcroCardNumber,
-  PelcroPaymentRequestButton
+  PelcroPaymentRequestButton,
+  CheckoutForm
 } from "./SubComponents/StripeElements";
 export { PaypalSubscribeButton } from "./Components/PaypalButtons/PaypalSubscribeButton";
 export { AddressUpdateContainer } from "./Components/AddressUpdate/AddressUpdateContainer";
@@ -151,6 +153,12 @@ export { AddressSelectModal } from "./Components/AddressSelect/AddressSelectModa
 export { AddressSelectSubmit } from "./Components/AddressSelect/AddressSelectSubmit";
 export { AddressSelectList } from "./Components/AddressSelect/AddressSelectList";
 export { AddressSelectView } from "./Components/AddressSelect/AddressSelectView";
+
+export { PaymentMethodSelectContainer } from "./Components/PaymentMethodSelect/PaymentMethodSelectContainer";
+export { PaymentMethodSelectModal } from "./Components/PaymentMethodSelect/PaymentMethodSelectModal";
+export { PaymentMethodSelectView } from "./Components/PaymentMethodSelect/PaymentMethodSelectView";
+export { PaymentMethodSelectSubmit } from "./Components/PaymentMethodSelect/PaymentMethodSelectSubmit";
+export { PaymentMethodSelectList } from "./Components/PaymentMethodSelect/PaymentMethodSelectList";
 
 export { DashboardWithHook as Dashboard } from "./Components/dashboard/Dashboard";
 export { DashboardOpenButton } from "./Components/dashboard/DashboardOpenButton";
