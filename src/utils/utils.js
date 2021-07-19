@@ -142,7 +142,8 @@ export const isValidViewFromURL = (viewID) => {
       "newsletter",
       "address-create",
       "order-create",
-      "cart"
+      "cart",
+      "offline-plan"
     ].includes(viewID)
   ) {
     return true;

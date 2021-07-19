@@ -201,6 +201,10 @@ export const initViewFromURL = () => {
         return initSubscriptionFromURL();
       }
 
+      if (view === "offline-plan") {
+        return initOfflineSubscriptionFromURL();
+      }
+
       if (view === "order-create") {
         return initPurchaseFromUrl();
       }
@@ -269,6 +273,58 @@ export const initSubscriptionFromURL = () => {
     }
 
     return switchToAddressView();
+  });
+};
+
+/**
+ * Initializes offline subscription flow if 'plan_id' params exist
+ * with valid IDs, Otherwise, ignore the param
+ */
+export const initOfflineSubscriptionFromURL = () => {
+  const {
+    switchView,
+    whenUserReady,
+    isAuthenticated,
+    switchToPaymentView,
+    switchToAddressView,
+    set
+  } = usePelcro.getStore();
+
+  whenUserReady(() => {
+    const offlinePlanId =
+      window.Pelcro.helpers.getURLParameter("plan_id");
+
+    if (!offlinePlanId) return;
+
+    window.Pelcro.plan.getPlan(
+      {
+        plan_id: offlinePlanId
+      },
+      (error, response) => {
+        if (error) {
+          return;
+        }
+
+        const { plan } = response.data;
+
+        set({
+          plan,
+          product: plan?.product
+        });
+
+        if (!isAuthenticated()) {
+          return switchView("register");
+        }
+
+        const requiresAddress = Boolean(plan.address_required);
+
+        if (!requiresAddress) {
+          return switchToPaymentView();
+        }
+
+        return switchToAddressView();
+      }
+    );
   });
 };
 
