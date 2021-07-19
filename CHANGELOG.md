@@ -1,3 +1,10 @@
+# [2.0.0-beta.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.0.0-beta.2...v2.0.0-beta.3) (2021-07-19)
+
+
+### Features
+
+* add offline plans URL trigger ([#58](https://github.com/pelcro-inc/react-pelcro-js/issues/58)) ([981259c](https://github.com/pelcro-inc/react-pelcro-js/commit/981259c919387a6c1028117728de56961da91f21))
+
 # [2.0.0-beta.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.0.0-beta.1...v2.0.0-beta.2) (2021-07-19)
 
 
