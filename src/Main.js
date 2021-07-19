@@ -8,6 +8,7 @@ import { DashboardWithHook as Dashboard } from "./Components/dashboard/Dashboard
 import { UserUpdateModal } from "./Components/UserUpdate/UserUpdateModal";
 import { ProfilePicChangeModal } from "./Components/ProfilePicChange/ProfilePicChangeModal";
 import { PaymentMethodUpdateModal } from "./Components/PaymentMethodUpdate/PaymentMethodUpdateModal";
+import { PaymentMethodSelectModal } from "./Components/PaymentMethodSelect/PaymentMethodSelectModal";
 import { GiftCreateModal } from "./Components/GiftCreate/GiftCreateModal";
 import { GiftRedeemModal } from "./Components/GiftRedeem/GiftRedeemModal";
 import { PasswordForgotModal } from "./Components/PasswordForgot/PasswordForgotModal";
@@ -41,7 +42,9 @@ export const Main = () => {
       <PasswordForgotModal />
       <PasswordChangeModal />
       <PasswordResetModal />
+
       <PaymentMethodUpdateModal />
+      <PaymentMethodSelectModal />
 
       <SelectModal />
       <Newsletter />

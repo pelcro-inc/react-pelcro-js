@@ -2,8 +2,8 @@ import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import common_fr from "./translations/fr/common.json";
 import common_en from "./translations/en/common.json";
-import paymentCreate_en from "./translations/en/paymentCreate.json";
-import paymentCreate_fr from "./translations/fr/paymentCreate.json";
+import paymentMethod_en from "./translations/en/paymentMethod.json";
+import paymentMethod_fr from "./translations/fr/paymentMethod.json";
 import newsletter_en from "./translations/en/newsletter.json";
 import newsletter_fr from "./translations/fr/newsletter.json";
 import success_en from "./translations/en/success.json";
@@ -43,7 +43,7 @@ import { getCanonicalLocaleFormat } from "./utils/utils";
 const resources = {
   "en-US": {
     common: common_en,
-    paymentCreate: paymentCreate_en,
+    paymentMethod: paymentMethod_en,
     newsletter: newsletter_en,
     success: success_en,
     meter: meter_en,
@@ -64,7 +64,7 @@ const resources = {
   },
   "fr-CA": {
     common: common_fr,
-    paymentCreate: paymentCreate_fr,
+    paymentMethod: paymentMethod_fr,
     newsletter: newsletter_fr,
     success: success_fr,
     meter: meter_fr,

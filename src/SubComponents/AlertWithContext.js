@@ -10,7 +10,7 @@ export const AlertWithContext = ({ store, ...otherProps }) => {
 
   return (
     <>
-      {alert.content && (
+      {alert?.content && (
         <Alert
           type={alert.type}
           onClose={() =>
