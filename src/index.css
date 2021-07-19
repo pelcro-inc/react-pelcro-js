@@ -16,6 +16,7 @@
 @import "./SubComponents/Link.css";
 @import "./SubComponents/Radio.css";
 @import "./SubComponents/Alert.css";
+@import "./SubComponents/Notification.css";
 
 @import "./Components/Shop/ShopView.css";
 @import "./Components/ProfilePicChange/ProfilePicChangeCropper.css";

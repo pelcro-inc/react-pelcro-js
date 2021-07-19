@@ -16,6 +16,6 @@
   }
 
   .pelcro-root .pelcro-alert-close {
-    @apply plc-flex-shrink-0 plc-w-6 plc-fill-current;
+    @apply plc-flex-shrink-0 plc-w-4 plc-fill-current;
   }
 }

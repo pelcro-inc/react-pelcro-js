@@ -1,5 +1,5 @@
 import React from "react";
-import { ReactComponent as ErrorIcon } from "../assets/error.svg";
+import { ReactComponent as ErrorIcon } from "../assets/x-icon-solid.svg";
 import { ReactComponent as SuccessIcon } from "../assets/check.svg";
 import { ReactComponent as CloseIcon } from "../assets/x-icon.svg";
 

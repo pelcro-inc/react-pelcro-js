@@ -1,6 +1,7 @@
 import { saveToMetadataButton } from "./saveToMetadata";
 import i18n from "../../../i18n";
 import { usePelcro } from "../../../hooks/usePelcro";
+import { notify } from "../../../SubComponents/Notification";
 
 const translations = i18n.t("common:buttons", {
   returnObjects: true
@@ -242,20 +243,29 @@ export const init = () => {
         pelcroPurchaseButtonsByClass[i].addEventListener(
           "click",
           (e) => {
-            const skuIdToPurcahse = Number(e.target.dataset.skuId);
+            const itemSkuId = Number(e.target.dataset.skuId);
+            const quickPurchaseItem =
+              window.Pelcro.ecommerce.products.getBySkuId(itemSkuId);
 
-            const allSkus =
-              window.Pelcro.ecommerce.products.getSkus();
-
-            const skuExists = allSkus.some(
-              (sku) => sku.id === skuIdToPurcahse
-            );
-
-            if (!skuExists) {
-              return;
+            if (!quickPurchaseItem) {
+              return console.error("invalid item SKU id");
             }
 
-            purchaseItem(skuIdToPurcahse);
+            const purchaseResult = purchaseItem(itemSkuId);
+
+            const itemDidntMatchUserCurrency =
+              purchaseResult === false;
+
+            if (itemDidntMatchUserCurrency) {
+              const userCurrency = window.Pelcro.user
+                .read()
+                .currency?.toUpperCase();
+              const errorMsg = i18n.t(
+                "shop:messages.currencyMismatch",
+                { currency: userCurrency }
+              );
+              notify.error(errorMsg);
+            }
           }
         );
       }

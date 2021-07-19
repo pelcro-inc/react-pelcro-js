@@ -231,6 +231,21 @@ export class PelcroActions {
       return false;
     }
 
+    const skusMatchingUserCurrency =
+      window.Pelcro.ecommerce.products.getSkus();
+
+    const itemMatchesUserCurrency = skusMatchingUserCurrency.some(
+      (sku) => sku.id === quickPurchaseItem.id
+    );
+
+    if (!itemMatchesUserCurrency) {
+      const userCurrency = window.Pelcro.user.read().currency;
+      console.error(
+        `SKU currency (${quickPurchaseItem.currency}) doesn't match user account's currency (${userCurrency}). users can only purchase SKUs that match their account's currency`
+      );
+      return false;
+    }
+
     const quickPurchaseItemWithQuantity = {
       ...quickPurchaseItem,
       quantity: 1
