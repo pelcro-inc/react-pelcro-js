@@ -1,3 +1,10 @@
+# [2.0.0-beta.4](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.0.0-beta.3...v2.0.0-beta.4) (2021-07-20)
+
+
+### Features
+
+* dispatch modal view event with each modal displayed ([#59](https://github.com/pelcro-inc/react-pelcro-js/issues/59)) ([81a7f49](https://github.com/pelcro-inc/react-pelcro-js/commit/81a7f4920081228f94c55334d606b454cf38fcd4))
+
 # [2.0.0-beta.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.0.0-beta.2...v2.0.0-beta.3) (2021-07-19)
 
 
