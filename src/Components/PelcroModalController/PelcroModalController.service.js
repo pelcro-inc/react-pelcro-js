@@ -97,6 +97,25 @@ export const initGATracking = () => {
   ReactGA?.plugin?.require?.("ecommerce");
 };
 
+export const dispatchModalDisplayEvents = (modalName) => {
+  ReactGA?.event?.({
+    category: "VIEWS",
+    action: `${modalName
+      ?.replace("pelcro-", "")
+      ?.replaceAll("-", " ")} viewed`,
+    nonInteraction: true
+  });
+
+  window.Pelcro.insight.track("Modal Displayed", {
+    name: `${modalName?.replace("pelcro-", "")?.replaceAll("-", " ")}`
+  });
+
+  const modalDisplayEvent = new CustomEvent("PelcroModalDisplay", {
+    detail: { modalName }
+  });
+  document.dispatchEvent(modalDisplayEvent);
+};
+
 const { whenSiteReady, whenEcommerceLoaded } = usePelcro.getStore();
 
 export const renderShopView = (shopComponent) => {

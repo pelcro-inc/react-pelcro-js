@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import ReactGA from "react-ga";
 import { ReactComponent as CloseIcon } from "../assets/x-icon.svg";
+import { dispatchModalDisplayEvents } from "../Components/PelcroModalController/PelcroModalController.service";
 import { usePelcro } from "../hooks/usePelcro";
 
 /**
@@ -17,17 +17,7 @@ export function Modal({
   const resetView = usePelcro((state) => state.resetView);
   useEffect(() => {
     onDisplay?.();
-    ReactGA?.event?.({
-      category: "VIEWS",
-      action: `${id
-        ?.replace("pelcro-", "")
-        ?.replaceAll("-", " ")} viewed`,
-      nonInteraction: true
-    });
-
-    window.Pelcro.insight.track("Modal Displayed", {
-      name: `${id?.replace("pelcro-", "")?.replaceAll("-", " ")}`
-    });
+    dispatchModalDisplayEvents(id);
   }, []);
 
   const onClose = () => {
