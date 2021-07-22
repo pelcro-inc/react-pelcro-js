@@ -59,6 +59,7 @@ import {
   LoginModal,
   RegisterModal,
   PaymentMethodUpdateModal,
+  PaymentMethodSelectModal,
   SubscriptionCreateModal,
   SubscriptionRenewModal,
   NewsLetter,
@@ -82,12 +83,12 @@ import {
 import "@pelcro/react-pelcro-js/dist/pelcro.css";
 
 export default function Main() {
-
   const { switchView } = usePelcro();
 
   return (
     <>
       <button onClick={() => switchView("login")}>Login</button>
+      <button onClick={() => switchView("dashboard")}>My dashboard</button>
       <button onClick={() => switchView("plan-select")}>Subscribe</button>
 
       <PelcroModalController>
@@ -102,6 +103,7 @@ export default function Main() {
         <PasswordChangeModal />
         <PasswordResetModal />
         <PaymentMethodUpdateModal />
+        <PaymentMethodSelectModal />
         <SelectModal />
         <NewsLetter />
         <AddressCreateModal />
