@@ -1,3 +1,10 @@
+## [2.0.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.0.0...v2.0.1) (2021-07-22)
+
+
+### Bug Fixes
+
+* **login:** only clone non null react children ([faa8a9f](https://github.com/pelcro-inc/react-pelcro-js/commit/faa8a9fae2d94699ee2c9861428c78852b461ca0))
+
 # [2.0.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v1.1.1...v2.0.0) (2021-07-22)
 
 
