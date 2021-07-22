@@ -1,3 +1,10 @@
+## [2.0.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.0.1...v2.0.2) (2021-07-22)
+
+
+### Bug Fixes
+
+* **register:** registerContainer clone method ([7c981a4](https://github.com/pelcro-inc/react-pelcro-js/commit/7c981a4d8e44c205ce15ffc608c722a17cad4004))
+
 ## [2.0.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.0.0...v2.0.1) (2021-07-22)
 
 
