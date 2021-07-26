@@ -1,3 +1,10 @@
+## [2.0.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.0.2...v2.0.3) (2021-07-26)
+
+
+### Bug Fixes
+
+* **checkout form:** credit cards icons having no explicit width ([#60](https://github.com/pelcro-inc/react-pelcro-js/issues/60)) ([c6698aa](https://github.com/pelcro-inc/react-pelcro-js/commit/c6698aa99348053d1a9899275e95800fc0038ae1))
+
 ## [2.0.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.0.1...v2.0.2) (2021-07-22)
 
 
