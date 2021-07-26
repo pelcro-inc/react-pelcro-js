@@ -115,7 +115,7 @@ export const CheckoutForm = () => {
         <PelcroCardNumber autoFocus={true} />
         <img
           alt="credit_cards"
-          className="plc-h-4 plc-mt-2"
+          className="plc-h-4 plc-w-auto plc-mt-2"
           src="https://js.pelcro.com/ui/plugin/main/images/credit_cards.png"
         />
 
