@@ -1,3 +1,10 @@
+# [2.1.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.0.3...v2.1.0) (2021-07-29)
+
+
+### Features
+
+* **login buttons:** allow styling using props and css classes ([#61](https://github.com/pelcro-inc/react-pelcro-js/issues/61)) ([6494261](https://github.com/pelcro-inc/react-pelcro-js/commit/6494261fe20fd3ba9b753983eb282287eb673fc7))
+
 ## [2.0.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.0.2...v2.0.3) (2021-07-26)
 
 
