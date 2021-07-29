@@ -78,7 +78,8 @@ import {
   GiftRedeemModal,
   PasswordChangeModal,
   AddressSelectModal,
-  ProfilePicChangeModal
+  ProfilePicChangeModal,
+  Notification
 } from "@pelcro/react-pelcro-js";
 import "@pelcro/react-pelcro-js/dist/pelcro.css";
 
@@ -118,6 +119,7 @@ export default function Main() {
         <CartModal />
         <OrderCreateModal />
         <OrderConfirmModal />
+        <Notification />
       </PelcroModalController>
     </>
   );
