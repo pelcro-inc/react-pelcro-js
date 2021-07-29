@@ -5,7 +5,11 @@ import { store as registerStore } from "../../Register/RegisterContainer";
 import { ReactComponent as GoogleLogoIcon } from "../../../assets/google-logo.svg";
 import { HANDLE_SOCIAL_LOGIN } from "../../../utils/action-types";
 
-export const GoogleLoginButton = () => {
+export const GoogleLoginButton = ({
+  className = "",
+  labelClassName = "",
+  iconClassName = ""
+}) => {
   const googleLoginEnabled = window.Pelcro.site.read()?.google_app_id;
 
   const { dispatch: loginDispatch } = useContext(loginStore);
@@ -51,10 +55,16 @@ export const GoogleLoginButton = () => {
         render={(renderProps) => (
           <button
             onClick={renderProps.onClick}
-            className="plc-flex plc-items-center plc-justify-center plc-w-full plc-p-3 plc-space-x-3 plc-text-gray-700 plc-border plc-border-gray-200 plc-rounded-3xl hover:plc-bg-gray-200"
+            className={`plc-flex plc-items-center plc-justify-center plc-w-full plc-p-3 plc-space-x-3 plc-text-gray-700 plc-border plc-border-gray-200 plc-rounded-3xl hover:plc-bg-gray-200 pelcro-google-login ${className}`}
           >
-            <GoogleLogoIcon className="plc-w-6 plc-h-auto" />
-            <p>Google</p>
+            <GoogleLogoIcon
+              className={`plc-w-6 plc-h-auto pelcro-google-login-icon" ${iconClassName}`}
+            />
+            <p
+              className={`pelcro-google-login-label ${labelClassName}`}
+            >
+              Google
+            </p>
           </button>
         )}
       />

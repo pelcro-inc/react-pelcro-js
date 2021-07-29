@@ -5,7 +5,11 @@ import { store as registerStore } from "../../Register/RegisterContainer";
 import { ReactComponent as FacebookLogoIcon } from "../../../assets/facebook-logo.svg";
 import { HANDLE_SOCIAL_LOGIN } from "../../../utils/action-types";
 
-export const FacebookLoginButton = () => {
+export const FacebookLoginButton = ({
+  className = "",
+  labelClassName = "",
+  iconClassName = ""
+}) => {
   const facebookLoginEnabled =
     window.Pelcro.site.read()?.facebook_app_id;
 
@@ -51,10 +55,16 @@ export const FacebookLoginButton = () => {
         render={(renderProps) => (
           <button
             onClick={renderProps.onClick}
-            className="plc-flex plc-items-center plc-justify-center plc-w-full plc-p-3 plc-space-x-3 plc-text-gray-700 plc-border plc-border-gray-200 plc-rounded-3xl hover:plc-bg-gray-200"
+            className={`plc-flex plc-items-center plc-justify-center plc-w-full plc-p-3 plc-space-x-3 plc-text-gray-700 plc-border plc-border-gray-200 plc-rounded-3xl hover:plc-bg-gray-200 pelcro-facebook-login ${className}`}
           >
-            <FacebookLogoIcon className="plc-w-3 plc-h-auto" />
-            <p>Facebook</p>
+            <FacebookLogoIcon
+              className={`plc-w-3 plc-h-auto pelcro-facebook-login-icon ${iconClassName}`}
+            />
+            <p
+              className={`pelcro-facebook-login-label ${labelClassName}`}
+            >
+              Facebook
+            </p>
           </button>
         )}
       />
