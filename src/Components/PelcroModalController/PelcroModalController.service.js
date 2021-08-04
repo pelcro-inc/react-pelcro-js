@@ -325,14 +325,21 @@ export const initOfflineSubscriptionFromURL = (offlinePlanId) => {
         }
 
         const { plan } = response.data;
+        const isGift =
+          window.Pelcro.helpers.getURLParameter("is_gift");
 
         set({
           plan,
-          product: plan?.product
+          product: plan?.product,
+          isGift: Boolean(isGift)
         });
 
         if (!isAuthenticated()) {
           return switchView("register");
+        }
+
+        if (isGift) {
+          return switchView("gift-create");
         }
 
         const requiresAddress = Boolean(plan.address_required);
