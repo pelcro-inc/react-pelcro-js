@@ -1,3 +1,10 @@
+# [2.2.0-beta.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.1.0...v2.2.0-beta.1) (2021-08-04)
+
+
+### Features
+
+* **url triggers:** add gifting param to offline plans trigger ([#62](https://github.com/pelcro-inc/react-pelcro-js/issues/62)) ([353c868](https://github.com/pelcro-inc/react-pelcro-js/commit/353c868da674a3169666a25d61b23829a7357620))
+
 # [2.1.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.0.3...v2.1.0) (2021-07-29)
 
 
