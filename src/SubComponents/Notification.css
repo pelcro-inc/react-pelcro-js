@@ -6,4 +6,8 @@
   .pelcro-root .pelcro-notification-success {
     @apply plc-font-semibold plc-text-sm plc-bg-green-500 plc-text-white;
   }
+
+  .pelcro-root .pelcro-notification-warning {
+    @apply plc-font-semibold plc-text-sm plc-bg-yellow-500 plc-text-white;
+  }
 }
