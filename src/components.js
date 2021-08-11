@@ -193,3 +193,5 @@ export {
   authenticatedButtons,
   unauthenticatedButtons
 } from "./Components/common/PelcroNativeButtons";
+
+export { init as initContentEntitlement } from "./Components/common/contentEntitlement";
