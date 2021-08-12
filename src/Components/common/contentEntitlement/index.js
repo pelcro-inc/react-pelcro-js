@@ -11,7 +11,7 @@ export const init = () => {
     );
 
     entitlementsProtectedElements.forEach((elem) => {
-      const shouldBlurContent = !window.Pelcro.user.isEntitled(
+      const shouldBlurContent = !window.Pelcro.user.isEntitledTo(
         elem.dataset.entitlement
       );
 
