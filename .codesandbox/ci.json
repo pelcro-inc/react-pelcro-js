@@ -1,0 +1,4 @@
+{
+  "buildCommand": "generateFiles",
+  "sandboxes": ["bitter-dream-5ctl9"]
+}
