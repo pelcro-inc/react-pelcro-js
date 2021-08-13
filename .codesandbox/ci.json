@@ -1,4 +1,5 @@
 {
   "buildCommand": "generateFiles",
-  "sandboxes": ["bitter-dream-5ctl9"]
+  "sandboxes": ["bitter-dream-5ctl9"],
+  "node": "14"
 }
