@@ -41,19 +41,21 @@ export const optionsController = (options) => {
 };
 
 export const initPaywalls = () => {
+  const paywallMethods = window.Pelcro.paywall;
   const viewFromURL = getStableViewID(
     window.Pelcro.helpers.getURLParameter("view")
   );
+
   if (window.Pelcro.site.read()?.settings === "subscription") {
+    // Skip if article is not restricted
     if (
       isValidViewFromURL(viewFromURL) ||
-      window.Pelcro.subscription.isSubscribedToSite()
+      !paywallMethods.isArticleRestricted()
     ) {
       return;
     }
 
     const { switchView } = usePelcro.getStore();
-    const paywallMethods = window.Pelcro.paywall;
 
     if (paywallMethods?.displayMeterPaywall()) {
       switchView("meter");
