@@ -1,5 +1,5 @@
-# validate all commits, and ignore the PR title
-commitsOnly: true
+# Always validate the PR title AND all the commits
+titleAndCommits: true
 
 # Require at least one commit to be valid instead of validating all commits
 anyCommit: true
