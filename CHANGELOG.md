@@ -1,3 +1,10 @@
+# [2.2.0-beta.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.2.0-beta.1...v2.2.0-beta.2) (2021-08-13)
+
+
+### Features
+
+* **paywall:** add dynamic paywall support to the controller ([#70](https://github.com/pelcro-inc/react-pelcro-js/issues/70)) ([f24577e](https://github.com/pelcro-inc/react-pelcro-js/commit/f24577e88d5e43268d5598a8fc6d88c78700ae63))
+
 # [2.2.0-beta.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.1.0...v2.2.0-beta.1) (2021-08-04)
 
 
