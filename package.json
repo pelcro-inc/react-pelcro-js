@@ -10,7 +10,7 @@
     "dist"
   ],
   "scripts": {
-    "preinstall": "git config core.hooksPath qa/hooks",
+    "preinstall": "git config core.hooksPath ./qa/hooks || echo 'GIT hooks directory not found'",
     "start": "webpack serve",
     "generateFiles": "cross-env NODE_ENV=production rollup -c",
     "lint": "eslint ./src/**/*.js --fix",
