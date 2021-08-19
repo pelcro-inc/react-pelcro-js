@@ -1,3 +1,10 @@
+## [2.1.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.1.0...v2.1.1) (2021-08-19)
+
+
+### Bug Fixes
+
+* **git hooks:** add fallback the preinstall hooks command ([ae18b90](https://github.com/pelcro-inc/react-pelcro-js/commit/ae18b90e071ee1475736549956c6a8c3a826d1fd))
+
 # [2.1.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.0.3...v2.1.0) (2021-07-29)
 
 
