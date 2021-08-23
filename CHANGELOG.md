@@ -1,3 +1,10 @@
+# [2.2.0-beta.4](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.2.0-beta.3...v2.2.0-beta.4) (2021-08-23)
+
+
+### Features
+
+* **paywall:** display paywall after login if article is restricted ([#71](https://github.com/pelcro-inc/react-pelcro-js/issues/71)) ([60ec21d](https://github.com/pelcro-inc/react-pelcro-js/commit/60ec21df84b90711e26ed0df893128b12ea1b6de))
+
 # [2.2.0-beta.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.2.0-beta.2...v2.2.0-beta.3) (2021-08-19)
 
 
