@@ -1,3 +1,12 @@
+# [2.2.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.1.1...v2.2.0) (2021-08-26)
+
+
+### Features
+
+* **paywall:** add dynamic paywall support to the controller ([#70](https://github.com/pelcro-inc/react-pelcro-js/issues/70)) ([f24577e](https://github.com/pelcro-inc/react-pelcro-js/commit/f24577e88d5e43268d5598a8fc6d88c78700ae63))
+* **paywall:** display paywall after login if article is restricted ([#71](https://github.com/pelcro-inc/react-pelcro-js/issues/71)) ([60ec21d](https://github.com/pelcro-inc/react-pelcro-js/commit/60ec21df84b90711e26ed0df893128b12ea1b6de))
+* **url triggers:** add gifting param to offline plans trigger ([#62](https://github.com/pelcro-inc/react-pelcro-js/issues/62)) ([353c868](https://github.com/pelcro-inc/react-pelcro-js/commit/353c868da674a3169666a25d61b23829a7357620))
+
 ## [2.1.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.1.0...v2.1.1) (2021-08-19)
 
 
