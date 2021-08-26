@@ -41,19 +41,21 @@ export const optionsController = (options) => {
 };
 
 export const initPaywalls = () => {
+  const paywallMethods = window.Pelcro.paywall;
   const viewFromURL = getStableViewID(
     window.Pelcro.helpers.getURLParameter("view")
   );
+
   if (window.Pelcro.site.read()?.settings === "subscription") {
+    // Skip if article is not restricted
     if (
       isValidViewFromURL(viewFromURL) ||
-      window.Pelcro.subscription.isSubscribedToSite()
+      !paywallMethods.isArticleRestricted()
     ) {
       return;
     }
 
     const { switchView } = usePelcro.getStore();
-    const paywallMethods = window.Pelcro.paywall;
 
     if (paywallMethods?.displayMeterPaywall()) {
       switchView("meter");
@@ -253,11 +255,12 @@ export const initSubscriptionFromURL = () => {
     const productsList = window.Pelcro.product.list();
     if (!productsList?.length) return;
 
-    const [productId, planId, isGift] = [
+    const [productId, planId, isGiftParam] = [
       window.Pelcro.helpers.getURLParameter("product_id"),
       window.Pelcro.helpers.getURLParameter("plan_id"),
       window.Pelcro.helpers.getURLParameter("is_gift")
     ];
+    const isGift = isGiftParam?.toLowerCase() === "true";
 
     const selectedProduct = productsList.find(
       (product) => product.id === Number(productId)
@@ -269,7 +272,7 @@ export const initSubscriptionFromURL = () => {
     set({
       product: selectedProduct,
       plan: selectedPlan,
-      isGift: Boolean(isGift)
+      isGift
     });
 
     if (!selectedProduct || !selectedPlan) {
@@ -326,13 +329,22 @@ export const initOfflineSubscriptionFromURL = (offlinePlanId) => {
 
         const { plan } = response.data;
 
+        const isGiftParam =
+          window.Pelcro.helpers.getURLParameter("is_gift");
+        const isGift = isGiftParam?.toLowerCase() === "true";
+
         set({
           plan,
-          product: plan?.product
+          product: plan?.product,
+          isGift
         });
 
         if (!isAuthenticated()) {
           return switchView("register");
+        }
+
+        if (isGift) {
+          return switchView("gift-create");
         }
 
         const requiresAddress = Boolean(plan.address_required);
