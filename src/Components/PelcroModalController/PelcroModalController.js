@@ -5,7 +5,6 @@ import {
   authenticatedButtons,
   unauthenticatedButtons
 } from "../common/PelcroNativeButtons";
-import { init as initContentEntitlement } from "../common/contentEntitlement";
 import {
   optionsController,
   renderShopView
@@ -29,7 +28,6 @@ export const PelcroModalController = ({
 
   React.useEffect(() => {
     initNativeButtons();
-    initContentEntitlement();
     renderShopView(
       React.Children.map(children, (child) => child).find(
         ({ type }) => type?.viewId === "shop"
