@@ -51,12 +51,18 @@ export const init = () => {
           resetView();
         }
 
+        const NOTIFICATION_ID = "entitlement";
         notify(
           <p>
             <Trans i18nKey="messages:entitlement">
               Some of the content on this page is available under one
               or more of our plans.
-              <Link onClick={() => switchView("plan-select")}>
+              <Link
+                onClick={() => {
+                  notify.dismiss(NOTIFICATION_ID);
+                  switchView("plan-select");
+                }}
+              >
                 Subscribe
               </Link>
               to one of our available plans get access to more content
@@ -66,7 +72,7 @@ export const init = () => {
             className: "pelcro-notification-entitlement",
             position: "bottom-right",
             duration: Infinity,
-            id: "entitlement"
+            id: NOTIFICATION_ID
           }
         );
       }
