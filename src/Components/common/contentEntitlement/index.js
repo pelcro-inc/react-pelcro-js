@@ -1,9 +1,12 @@
-import i18n from "../../../i18n";
+import React from "react";
 import { usePelcro } from "../../../hooks/usePelcro";
 import { notify } from "../../../SubComponents/Notification";
+import { Trans } from "react-i18next";
+import { Link } from "../../../SubComponents/Link";
 
 export const init = () => {
-  const { whenSiteReady } = usePelcro.getStore();
+  const { whenSiteReady, view, resetView, switchView } =
+    usePelcro.getStore();
 
   whenSiteReady(() => {
     const entitlementsProtectedElements = document.querySelectorAll(
@@ -39,12 +42,33 @@ export const init = () => {
           "filter:blur(3px) !important; pointer-events:none !important; user-select:none !important"
         );
 
-        const errorMsg = i18n.t("messages:entitlement");
-        notify.warning(errorMsg, {
-          position: "top-right",
-          duration: Infinity,
-          id: errorMsg
-        });
+        /* 
+        showing both the meter and the entitlements notification doesn't make sense from
+        a product prespective + they would take half the screen on mobile devies, so we're
+        hiding the meter, and showing the entitlements notification only.
+        */
+        if (view === "meter") {
+          resetView();
+        }
+
+        notify(
+          <p>
+            <Trans i18nKey="messages:entitlement">
+              Some of the content on this page is available under one
+              or more of our plans.
+              <Link onClick={() => switchView("plan-select")}>
+                Subscribe
+              </Link>
+              to one of our available plans get access to more content
+            </Trans>
+          </p>,
+          {
+            className: "pelcro-notification-entitlement",
+            position: "bottom-right",
+            duration: Infinity,
+            id: "entitlement"
+          }
+        );
       }
     });
   });

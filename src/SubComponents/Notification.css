@@ -10,4 +10,8 @@
   .pelcro-root .pelcro-notification-warning {
     @apply plc-font-semibold plc-text-sm plc-bg-yellow-500 plc-text-white;
   }
+
+  .pelcro-root .pelcro-notification-entitlement {
+    @apply plc-font-semibold plc-text-sm plc-bg-white plc-text-gray-600 plc-border-t-8 plc-border-primary-500;
+  }
 }
