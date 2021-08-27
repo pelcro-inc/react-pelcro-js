@@ -9,6 +9,7 @@ import {
 } from "../../SubComponents/Modal";
 import { Link } from "../../SubComponents/Link";
 import { usePelcro } from "../../hooks/usePelcro";
+import { initPaywalls } from "../PelcroModalController/PelcroModalController.service";
 
 /**
  *
@@ -20,6 +21,10 @@ export function LoginModal({ onDisplay, onClose, ...props }) {
   const onSuccess = (res) => {
     props.onSuccess?.(res);
     resetView();
+
+    if (window.Pelcro.paywall.isArticleRestricted()) {
+      initPaywalls();
+    }
   };
 
   const onCreateAccountClick = () => {
