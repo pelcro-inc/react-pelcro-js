@@ -1,3 +1,10 @@
+# [2.2.0-beta.5](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.2.0-beta.4...v2.2.0-beta.5) (2021-08-30)
+
+
+### Features
+
+* **social login:** add custom label prop to social login buttons ([#73](https://github.com/pelcro-inc/react-pelcro-js/issues/73)) ([fb37b66](https://github.com/pelcro-inc/react-pelcro-js/commit/fb37b664026a13cd7c9e3cef7efe853f7ccec6b2))
+
 # [2.2.0-beta.4](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.2.0-beta.3...v2.2.0-beta.4) (2021-08-23)
 
 
