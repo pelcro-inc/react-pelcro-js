@@ -670,7 +670,7 @@ class Dashboard extends Component {
               <Button
                 variant="icon"
                 className="plc-text-gray-100 plc-w-7 plc-h-7"
-                icon={<XIcon />}
+                icon={<XIcon className="plc-w-7 plc-h-7" />}
                 onClick={this.closeDashboard}
               ></Button>
             </div>
