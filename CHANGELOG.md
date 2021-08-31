@@ -1,3 +1,10 @@
+## [2.2.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.2.0...v2.2.1) (2021-08-31)
+
+
+### Bug Fixes
+
+* **dashboard:** close button not visible on Safari ([#74](https://github.com/pelcro-inc/react-pelcro-js/issues/74)) ([d1f3ab6](https://github.com/pelcro-inc/react-pelcro-js/commit/d1f3ab68be9c463ec6b8f7d9b502d47fe83215e9))
+
 # [2.2.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.1.1...v2.2.0) (2021-08-26)
 
 
