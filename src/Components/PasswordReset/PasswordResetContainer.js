@@ -31,7 +31,7 @@ const { Provider } = store;
 
 const PasswordResetContainer = ({
   style,
-  className,
+  className = "",
   onSuccess = () => {},
   onFailure = () => {},
   children
@@ -77,9 +77,8 @@ const PasswordResetContainer = ({
       type: SET_EMAIL,
       payload: window.Pelcro.helpers.getURLParameter("email")
     });
-    initialState.email = window.Pelcro.helpers.getURLParameter(
-      "email"
-    );
+    initialState.email =
+      window.Pelcro.helpers.getURLParameter("email");
     dispatch({
       type: SET_TOKEN,
       payload: window.Pelcro.helpers.getURLParameter("token")
@@ -129,7 +128,10 @@ const PasswordResetContainer = ({
   );
 
   return (
-    <div style={{ ...style }} className={className}>
+    <div
+      style={{ ...style }}
+      className={`pelcro-container pelcro-password-reset-container ${className}`}
+    >
       <Provider value={{ state, dispatch }}>
         {children.length
           ? children.map((child, i) =>
