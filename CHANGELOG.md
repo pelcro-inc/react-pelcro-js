@@ -1,3 +1,10 @@
+# [2.2.0-beta.6](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.2.0-beta.5...v2.2.0-beta.6) (2021-09-01)
+
+
+### Features
+
+* **containers:** add CSS classes for selectors targetting ([#75](https://github.com/pelcro-inc/react-pelcro-js/issues/75)) ([66f68f6](https://github.com/pelcro-inc/react-pelcro-js/commit/66f68f642e86debbf0ef16c3b6076860f2953515))
+
 # [2.2.0-beta.5](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.2.0-beta.4...v2.2.0-beta.5) (2021-08-30)
 
 
