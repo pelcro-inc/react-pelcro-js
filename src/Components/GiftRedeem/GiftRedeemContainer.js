@@ -25,7 +25,7 @@ const { Provider } = store;
 
 const GiftRedeemContainer = ({
   style,
-  className,
+  className = "",
   onSuccess = () => {},
   onFailure = () => {},
   onDisplay = () => {},
@@ -84,7 +84,10 @@ const GiftRedeemContainer = ({
   );
 
   return (
-    <div style={{ ...style }} className={className}>
+    <div
+      style={{ ...style }}
+      className={`pelcro-container pelcro-gift-redeem-container ${className}`}
+    >
       <Provider value={{ state, dispatch }}>
         {children.length
           ? children.map((child, i) =>

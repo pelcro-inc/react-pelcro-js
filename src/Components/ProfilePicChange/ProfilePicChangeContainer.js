@@ -35,7 +35,7 @@ const { Provider } = store;
 
 const ProfilePicChangeContainer = ({
   style,
-  className,
+  className = "",
   onChangeSuccess = () => {},
   onChangeFailure = () => {},
   onRemoveSuccess = () => {},
@@ -179,7 +179,10 @@ const ProfilePicChangeContainer = ({
   );
 
   return (
-    <div style={{ ...style }} className={className}>
+    <div
+      style={{ ...style }}
+      className={`pelcro-container pelcro-profile-picture-container ${className}`}
+    >
       <Provider value={{ state, dispatch }}>
         {children.length
           ? children.map((child, i) =>
