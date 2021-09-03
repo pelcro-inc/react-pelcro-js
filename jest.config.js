@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unused-modules */
 const config = {
   collectCoverage: true,
   collectCoverageFrom: [
@@ -6,7 +7,8 @@ const config = {
     "!**/utils/**",
     "!**/__tests__/**",
     // temporarily just collect coverage from tested files
-    "**/usePelcro/*.{js,jsx}"
+    "**/usePelcro/*.{js,jsx}",
+    "**/services/Subscription/*.{js,jsx}"
   ],
   coverageReporters: ["text", "json", "html"],
   verbose: true,
