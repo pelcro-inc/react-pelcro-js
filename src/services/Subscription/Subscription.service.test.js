@@ -28,8 +28,8 @@ describe("Initialize a subscription instance with the right gateway", () => {
       {
         type: SUBSCRIPTION_TYPES.CREATE_SUBSCRIPTION,
         token: "test_token",
-        plan: 123,
-        product: 123
+        plan: { id: 123 },
+        product: { id: 123 }
       },
       mockCallback
     );
@@ -56,8 +56,8 @@ describe("Initialize a subscription instance with the right gateway", () => {
       {
         type: SUBSCRIPTION_TYPES.CREATE_SUBSCRIPTION,
         token: "test_token",
-        plan: 123,
-        product: 123
+        plan: { id: 123 },
+        product: { id: 123 }
       },
       mockCallback
     );
@@ -96,8 +96,8 @@ describe("Initialize a subscription instance with the right gateway", () => {
       {
         type: SUBSCRIPTION_TYPES.CREATE_SUBSCRIPTION,
         token: "test_token",
-        plan: 123,
-        product: 123
+        plan: { id: 123 },
+        product: { id: 123 }
       },
       mockCallback
     );
@@ -121,9 +121,9 @@ describe("Successfully create any type of subscription", () => {
         {
           type: "BLA BLA INVALID TYPE",
           token: "test_token",
-          plan: 123,
-          product: 123,
-          subscription_id: 123
+          plan: { id: 123 },
+          product: { id: 123 },
+          subscriptionIdToRenew: 123
         },
         mockCallback
       );
@@ -142,13 +142,20 @@ describe("Successfully create any type of subscription", () => {
         {
           type: SUBSCRIPTION_TYPES.CREATE_SUBSCRIPTION,
           token: "test_token",
-          plan: 123,
-          product: 123
+          plan: { id: 123 },
+          product: { id: 123 }
         },
         () => null
       );
 
-      expect(window.Pelcro.subscription.create).toBeCalled();
+      expect(window.Pelcro.subscription.create).toBeCalledWith(
+        expect.objectContaining({
+          payment_gateway: "stripe",
+          gateway_token: "test_token",
+          plan_id: 123
+        }),
+        expect.anything()
+      );
     });
 
     test("Should create a gift subscription", () => {
@@ -162,18 +169,26 @@ describe("Successfully create any type of subscription", () => {
         {
           type: SUBSCRIPTION_TYPES.CREATE_GIFTED_SUBSCRIPTION,
           token: "test_token",
-          plan: 123,
-          product: 123,
+          plan: { id: 123 },
+          product: { id: 123 },
           giftRecipient: {
-            gift_recipient_email: "test@email.com",
-            gift_recipient_first_name: "Samuel",
-            gift_recipient_last_name: "Jackson"
+            email: "test@email.com",
+            firstName: "Samuel",
+            lastName: "Jackson"
           }
         },
         () => null
       );
 
-      expect(window.Pelcro.subscription.create).toBeCalled();
+      expect(window.Pelcro.subscription.create).toBeCalledWith(
+        expect.objectContaining({
+          payment_gateway: "stripe",
+          gift_recipient_email: "test@email.com",
+          gift_recipient_first_name: "Samuel",
+          gift_recipient_last_name: "Jackson"
+        }),
+        expect.anything()
+      );
     });
 
     test("Should renew a subscription", () => {
@@ -187,14 +202,21 @@ describe("Successfully create any type of subscription", () => {
         {
           type: SUBSCRIPTION_TYPES.RENEW_SUBSCRIPTION,
           token: "test_token",
-          plan: 123,
-          product: 123,
-          subscription_id: 123
+          plan: { id: 123 },
+          product: { id: 123 },
+          subscriptionIdToRenew: 123
         },
         () => null
       );
 
-      expect(window.Pelcro.subscription.renew).toBeCalled();
+      expect(window.Pelcro.subscription.renew).toBeCalledWith(
+        expect.objectContaining({
+          // TODO: migrate to payment_token
+          stripe_token: "test_token",
+          subscription_id: 123
+        }),
+        expect.anything()
+      );
     });
 
     test("Should renew a gift subscription", () => {
@@ -208,14 +230,22 @@ describe("Successfully create any type of subscription", () => {
         {
           type: SUBSCRIPTION_TYPES.RENEW_GIFTED_SUBSCRIPTION,
           token: "test_token",
-          plan: 123,
-          product: 123,
-          subscription_id: 123
+          plan: { id: 123 },
+          product: { id: 123 },
+          subscriptionIdToRenew: 123
         },
         () => null
       );
 
-      expect(window.Pelcro.subscription.renewGift).toBeCalled();
+      expect(window.Pelcro.subscription.renewGift).toBeCalledWith(
+        expect.objectContaining({
+          // TODO: migrate to payment_token
+          stripe_token: "test_token",
+          plan_id: 123,
+          subscription_id: 123
+        }),
+        expect.anything()
+      );
     });
   });
 
@@ -228,9 +258,9 @@ describe("Successfully create any type of subscription", () => {
         {
           type: "BLA BLA INVALID TYPE",
           token: "test_token",
-          plan: 123,
-          product: 123,
-          subscription_id: 123
+          plan: { id: 123 },
+          product: { id: 123 },
+          subscriptionIdToRenew: 123
         },
         mockCallback
       );
@@ -249,13 +279,20 @@ describe("Successfully create any type of subscription", () => {
         {
           type: SUBSCRIPTION_TYPES.CREATE_SUBSCRIPTION,
           token: "test_token",
-          plan: 123,
-          product: 123
+          plan: { id: 123 },
+          product: { id: 123 }
         },
         () => null
       );
 
-      expect(window.Pelcro.subscription.create).toBeCalled();
+      expect(window.Pelcro.subscription.create).toBeCalledWith(
+        expect.objectContaining({
+          payment_gateway: "braintree",
+          gateway_token: "test_token",
+          plan_id: 123
+        }),
+        expect.anything()
+      );
     });
 
     test("Should create a gift subscription", () => {
@@ -269,18 +306,26 @@ describe("Successfully create any type of subscription", () => {
         {
           type: SUBSCRIPTION_TYPES.CREATE_GIFTED_SUBSCRIPTION,
           token: "test_token",
-          plan: 123,
-          product: 123,
+          plan: { id: 123 },
+          product: { id: 123 },
           giftRecipient: {
-            gift_recipient_email: "test@email.com",
-            gift_recipient_first_name: "Samuel",
-            gift_recipient_last_name: "Jackson"
+            email: "test@email.com",
+            firstName: "Samuel",
+            lastName: "Jackson"
           }
         },
         () => null
       );
 
-      expect(window.Pelcro.subscription.create).toBeCalled();
+      expect(window.Pelcro.subscription.create).toBeCalledWith(
+        expect.objectContaining({
+          payment_gateway: "braintree",
+          gift_recipient_email: "test@email.com",
+          gift_recipient_first_name: "Samuel",
+          gift_recipient_last_name: "Jackson"
+        }),
+        expect.anything()
+      );
     });
   });
 });
