@@ -295,7 +295,7 @@ class Dashboard extends Component {
             key={"dashboard-subscription-" + sub.id}
             className="plc-w-full plc-align-top"
           >
-            <td>
+            <td className="plc-truncate">
               {sub.plan.nickname && (
                 <>
                   <span className="plc-font-semibold plc-text-gray-500">
@@ -475,7 +475,7 @@ class Dashboard extends Component {
               <span className="plc-text-xs">{recipient.email}</span>
             </td>
             {/* Plan info section */}
-            <td>
+            <td className="plc-truncate">
               {recipient.plan.nickname && (
                 <>
                   <span className="plc-font-semibold plc-text-gray-500">
