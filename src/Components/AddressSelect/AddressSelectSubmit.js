@@ -14,10 +14,10 @@ export const AddressSelectSubmit = ({ name, ...otherProps }) => {
 
   return (
     <Button
-      {...otherProps}
       onClick={() => dispatch({ type: HANDLE_SUBMIT })}
       disabled={!selectedAddressId}
       isLoading={isSubmitting}
+      {...otherProps}
     >
       {name ?? t("buttons.submit")}
     </Button>
