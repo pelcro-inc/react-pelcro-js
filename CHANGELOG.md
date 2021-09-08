@@ -1,3 +1,10 @@
+# [2.2.0-beta.7](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.2.0-beta.6...v2.2.0-beta.7) (2021-09-08)
+
+
+### Bug Fixes
+
+* **dashboard:** plan text overflow ([#77](https://github.com/pelcro-inc/react-pelcro-js/issues/77)) ([8ca759f](https://github.com/pelcro-inc/react-pelcro-js/commit/8ca759fb7f45c5e0d85b71b6be570da76587b063))
+
 # [2.2.0-beta.6](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.2.0-beta.5...v2.2.0-beta.6) (2021-09-01)
 
 
