@@ -1,3 +1,10 @@
+# [2.2.0-beta.8](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.2.0-beta.7...v2.2.0-beta.8) (2021-09-09)
+
+
+### Features
+
+* improve ability to style several comps ([#78](https://github.com/pelcro-inc/react-pelcro-js/issues/78)) ([d0346b7](https://github.com/pelcro-inc/react-pelcro-js/commit/d0346b73ce8b2105abab8e7ed01163744904e3bd))
+
 # [2.2.0-beta.7](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.2.0-beta.6...v2.2.0-beta.7) (2021-09-08)
 
 
