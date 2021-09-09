@@ -20,7 +20,7 @@ export const UserUpdateButton = ({
     <Button
       onClick={() => {
         dispatch({ type: HANDLE_USER_UPDATE });
-        onClick();
+        onClick?.();
       }}
       disabled={buttonDisabled}
       isLoading={buttonDisabled}

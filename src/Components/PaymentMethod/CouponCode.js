@@ -20,7 +20,7 @@ export const CouponCode = ({ onClick, ...otherProps }) => {
       type: SHOW_COUPON_FIELD,
       payload: !enableCouponField
     });
-    onClick();
+    onClick?.();
   };
 
   return (

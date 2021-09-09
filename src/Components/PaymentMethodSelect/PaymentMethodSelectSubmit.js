@@ -19,7 +19,7 @@ export const PaymentMethodSelectSubmit = ({
     <Button
       onClick={() => {
         dispatch({ type: HANDLE_SUBMIT });
-        onClick();
+        onClick?.();
       }}
       disabled={!selectedPaymentMethodId}
       isLoading={isSubmitting}
