@@ -6,7 +6,7 @@ import { SUBMIT_PAYMENT } from "../../utils/action-types";
 import { Button } from "../../SubComponents/Button";
 import { getFormattedPriceByLocal } from "../../utils/utils";
 
-export const SubmitPaymentMethod = () => {
+export const SubmitPaymentMethod = ({ onClick, ...otherProps }) => {
   const { plan } = usePelcro();
   const { t } = useTranslation("checkoutForm");
   const {
@@ -29,8 +29,12 @@ export const SubmitPaymentMethod = () => {
       className="plc-w-full plc-py-3"
       variant="solid"
       isLoading={isLoading}
-      onClick={() => dispatch({ type: SUBMIT_PAYMENT })}
+      onClick={() => {
+        dispatch({ type: SUBMIT_PAYMENT });
+        onClick();
+      }}
       disabled={disableSubmit}
+      {...otherProps}
     >
       {/* Show price on button only if there's a selected plan */}
       {plan ? (

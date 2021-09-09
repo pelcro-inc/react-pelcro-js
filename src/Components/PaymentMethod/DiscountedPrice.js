@@ -3,7 +3,7 @@ import { usePelcro } from "../../hooks/usePelcro";
 import { getFormattedPriceByLocal } from "../../utils/utils";
 import { store } from "./PaymentMethodContainer";
 
-export const DiscountedPrice = () => {
+export const DiscountedPrice = (props) => {
   const {
     state: { updatedPrice, percentOff }
   } = useContext(store);
@@ -23,7 +23,7 @@ export const DiscountedPrice = () => {
 
   if (percentOff) {
     return (
-      <div className="plc-my-2">
+      <div className="plc-my-2" {...props}>
         (-{percentOff}) {priceFormatted}
       </div>
     );

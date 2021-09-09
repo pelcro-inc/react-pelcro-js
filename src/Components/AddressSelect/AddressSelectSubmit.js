@@ -4,7 +4,11 @@ import { HANDLE_SUBMIT } from "../../utils/action-types";
 import { Button } from "../../SubComponents/Button";
 import { useTranslation } from "react-i18next";
 
-export const AddressSelectSubmit = ({ name, ...otherProps }) => {
+export const AddressSelectSubmit = ({
+  name,
+  onClick,
+  ...otherProps
+}) => {
   const {
     dispatch,
     state: { selectedAddressId, isSubmitting }
@@ -14,7 +18,10 @@ export const AddressSelectSubmit = ({ name, ...otherProps }) => {
 
   return (
     <Button
-      onClick={() => dispatch({ type: HANDLE_SUBMIT })}
+      onClick={() => {
+        dispatch({ type: HANDLE_SUBMIT });
+        onClick();
+      }}
       disabled={!selectedAddressId}
       isLoading={isSubmitting}
       {...otherProps}

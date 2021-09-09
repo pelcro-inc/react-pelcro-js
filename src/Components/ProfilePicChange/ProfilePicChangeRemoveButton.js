@@ -7,6 +7,7 @@ import { REMOVE_IMAGE } from "../../utils/action-types";
 
 export const ProfilePicChangeRemoveButton = ({
   name,
+  onClick,
   ...otherProps
 }) => {
   const {
@@ -20,7 +21,10 @@ export const ProfilePicChangeRemoveButton = ({
     <Button
       icon={<XIcon className="plc-h-6 plc-w-6" />}
       isLoading={isSubmitting}
-      onClick={() => dispatch({ type: REMOVE_IMAGE })}
+      onClick={() => {
+        dispatch({ type: REMOVE_IMAGE });
+        onClick();
+      }}
       {...otherProps}
     >
       {name ?? t("labels.removeImage")}
