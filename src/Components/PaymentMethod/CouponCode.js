@@ -7,7 +7,7 @@ import { SHOW_COUPON_FIELD } from "../../utils/action-types";
 import { Button } from "../../SubComponents/Button";
 import { ReactComponent as TicketIcon } from "../../assets/ticket.svg";
 
-export const CouponCode = () => {
+export const CouponCode = ({ onClick, ...otherProps }) => {
   const {
     dispatch,
     state: { enableCouponField }
@@ -15,11 +15,13 @@ export const CouponCode = () => {
 
   const { t } = useTranslation("checkoutForm");
 
-  const showCouponField = () =>
+  const showCouponField = () => {
     dispatch({
       type: SHOW_COUPON_FIELD,
       payload: !enableCouponField
     });
+    onClick();
+  };
 
   return (
     <div className="plc-my-4">
@@ -28,6 +30,7 @@ export const CouponCode = () => {
         variant="ghost"
         icon={<TicketIcon className="plc-w-5 plc-h-5 plc-mr-2" />}
         onClick={showCouponField}
+        {...otherProps}
       >
         {!enableCouponField
           ? t("labels.addCode")
