@@ -1,3 +1,10 @@
+# [2.2.0-beta.9](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.2.0-beta.8...v2.2.0-beta.9) (2021-09-09)
+
+
+### Bug Fixes
+
+* optional extra click handler ([#79](https://github.com/pelcro-inc/react-pelcro-js/issues/79)) ([5a87645](https://github.com/pelcro-inc/react-pelcro-js/commit/5a87645e66c9d5647cfee9727472fd4d1ed8c447))
+
 # [2.2.0-beta.8](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.2.0-beta.7...v2.2.0-beta.8) (2021-09-09)
 
 
