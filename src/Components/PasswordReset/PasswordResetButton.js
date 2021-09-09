@@ -16,7 +16,7 @@ export const PasswordResetButton = ({ name, ...otherProps }) => {
     <Button
       onClick={() => {
         dispatch({ type: HANDLE_SUBMIT });
-        onclick();
+        onClick?.();
       }}
       disabled={buttonDisabled}
       isLoading={buttonDisabled}

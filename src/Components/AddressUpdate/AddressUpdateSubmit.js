@@ -20,7 +20,7 @@ export const AddressUpdateSubmit = ({
     <Button
       onClick={() => {
         dispatch({ type: HANDLE_SUBMIT });
-        onClick();
+        onClick?.();
       }}
       isLoading={isSubmitting}
       {...otherProps}

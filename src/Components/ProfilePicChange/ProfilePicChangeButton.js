@@ -4,7 +4,11 @@ import { Button } from "../../SubComponents/Button";
 import { HANDLE_USER_UPDATE } from "../../utils/action-types";
 import { store } from "./ProfilePicChangeContainer";
 
-export const ProfilePicChangeButton = ({ name, ...otherProps }) => {
+export const ProfilePicChangeButton = ({
+  name,
+  onClick,
+  ...otherProps
+}) => {
   const {
     state: { isSubmitting },
     dispatch
@@ -14,9 +18,12 @@ export const ProfilePicChangeButton = ({ name, ...otherProps }) => {
 
   return (
     <Button
-      {...otherProps}
-      onClick={() => dispatch({ type: HANDLE_USER_UPDATE })}
+      onClick={() => {
+        dispatch({ type: HANDLE_USER_UPDATE });
+        onClick?.();
+      }}
       isLoading={isSubmitting}
+      {...otherProps}
     >
       {name ?? t("labels.save")}
     </Button>

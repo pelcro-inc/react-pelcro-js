@@ -23,7 +23,7 @@ export const ProfilePicChangeRemoveButton = ({
       isLoading={isSubmitting}
       onClick={() => {
         dispatch({ type: REMOVE_IMAGE });
-        onClick();
+        onClick?.();
       }}
       {...otherProps}
     >

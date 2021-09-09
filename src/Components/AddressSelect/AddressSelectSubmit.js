@@ -20,7 +20,7 @@ export const AddressSelectSubmit = ({
     <Button
       onClick={() => {
         dispatch({ type: HANDLE_SUBMIT });
-        onClick();
+        onClick?.();
       }}
       disabled={!selectedAddressId}
       isLoading={isSubmitting}

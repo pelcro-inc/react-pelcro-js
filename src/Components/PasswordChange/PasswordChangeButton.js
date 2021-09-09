@@ -31,7 +31,7 @@ export const PasswordChangeButton = ({
     <Button
       onClick={() => {
         dispatch({ type: HANDLE_SUBMIT });
-        onClick();
+        onClick?.();
       }}
       disabled={hasInvalidField || passwordChanged}
       isLoading={isSubmitting}

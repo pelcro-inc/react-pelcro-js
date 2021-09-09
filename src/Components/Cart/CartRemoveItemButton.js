@@ -19,7 +19,7 @@ export const CartRemoveItemButton = ({
       className="plc-bg-transparent plc-w-5 plc-h-5"
       onClick={() => {
         removeFromCart(itemId);
-        onClick();
+        onClick?.();
       }}
       {...otherProps}
     >

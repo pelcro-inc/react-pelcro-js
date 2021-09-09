@@ -18,7 +18,7 @@ export const ApplyCouponButton = ({
 
   const onApplyCouponCode = () => {
     dispatch({ type: APPLY_COUPON_CODE });
-    onClick();
+    onClick?.();
   };
 
   return (

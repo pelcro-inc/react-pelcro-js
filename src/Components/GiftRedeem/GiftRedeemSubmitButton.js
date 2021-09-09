@@ -20,7 +20,7 @@ export const GiftRedeemSubmitButton = ({
     <Button
       onClick={() => {
         dispatch({ type: HANDLE_SUBMIT });
-        onClick();
+        onClick?.();
       }}
       disabled={disableSubmit}
       {...otherProps}

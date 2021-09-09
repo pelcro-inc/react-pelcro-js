@@ -34,7 +34,7 @@ export const RegisterButton = ({ name, onClick, ...otherProps }) => {
     <Button
       onClick={() => {
         dispatch({ type: HANDLE_REGISTRATION });
-        onClick();
+        onClick?.();
       }}
       disabled={isDisabled}
       isLoading={buttonDisabled}

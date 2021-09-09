@@ -23,7 +23,7 @@ export const ProfilePicChangeSelectButton = ({
     );
     if (fileInput) {
       fileInput.click();
-      onClick();
+      onClick?.();
     }
   };
 
