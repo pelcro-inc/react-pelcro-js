@@ -4,7 +4,7 @@ import { Button } from "../../SubComponents/Button";
 import { HANDLE_LOGIN } from "../../utils/action-types";
 import { store } from "./LoginContainer";
 
-export const LoginButton = ({ name, ...otherProps }) => {
+export const LoginButton = ({ name, onClick, ...otherProps }) => {
   const {
     state: {
       emailError,
@@ -32,10 +32,13 @@ export const LoginButton = ({ name, ...otherProps }) => {
 
   return (
     <Button
-      {...otherProps}
-      onClick={() => dispatch({ type: HANDLE_LOGIN })}
+      onClick={() => {
+        dispatch({ type: HANDLE_LOGIN });
+        onClick();
+      }}
       disabled={isDisabled}
       isLoading={buttonDisabled}
+      {...otherProps}
     >
       {name ?? t("labels.login")}
     </Button>

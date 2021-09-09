@@ -7,6 +7,7 @@ import { CHANGE_IMAGE_FILE } from "../../utils/action-types";
 
 export const ProfilePicChangeSelectButton = ({
   name,
+  onClick,
   ...otherProps
 }) => {
   const {
@@ -15,6 +16,16 @@ export const ProfilePicChangeSelectButton = ({
   } = useContext(store);
 
   const { t } = useTranslation("userEdit");
+
+  const browseFiles = () => {
+    const fileInput = document.getElementById(
+      "pelcro-profile-picture-selector"
+    );
+    if (fileInput) {
+      fileInput.click();
+      onClick();
+    }
+  };
 
   return (
     <>
@@ -42,13 +53,4 @@ export const ProfilePicChangeSelectButton = ({
       />
     </>
   );
-};
-
-const browseFiles = () => {
-  const fileInput = document.getElementById(
-    "pelcro-profile-picture-selector"
-  );
-  if (fileInput) {
-    fileInput.click();
-  }
 };

@@ -14,10 +14,13 @@ export const PasswordResetButton = ({ name, ...otherProps }) => {
 
   return (
     <Button
-      {...otherProps}
-      onClick={() => dispatch({ type: HANDLE_SUBMIT })}
+      onClick={() => {
+        dispatch({ type: HANDLE_SUBMIT });
+        onclick();
+      }}
       disabled={buttonDisabled}
       isLoading={buttonDisabled}
+      {...otherProps}
     >
       {name ?? t("submit")}
     </Button>
