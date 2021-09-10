@@ -263,6 +263,8 @@ const PaymentMethodContainerWithoutStripe = ({
             : null,
           gift_recipient_first_name: giftRecipient?.firstName,
           gift_recipient_last_name: giftRecipient?.lastName,
+          gift_start_date: giftRecipient?.startDate,
+          gift_message: giftRecipient?.giftMessage,
           address_id: product.address_required
             ? selectedAddressId
             : null
