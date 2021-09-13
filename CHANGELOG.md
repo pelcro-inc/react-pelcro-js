@@ -1,3 +1,10 @@
+# [2.2.0-beta.11](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.2.0-beta.10...v2.2.0-beta.11) (2021-09-13)
+
+
+### Bug Fixes
+
+* **gift creation:** only default the start date on the UI part ([5ea8f95](https://github.com/pelcro-inc/react-pelcro-js/commit/5ea8f95478178aa93327c621d6dbfe171f7206a8))
+
 # [2.2.0-beta.10](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.2.0-beta.9...v2.2.0-beta.10) (2021-09-13)
 
 
