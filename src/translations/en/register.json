@@ -43,6 +43,8 @@
       "firstName": "First name",
       "lastName": "Last name",
       "email": "Email",
+      "startDate": "Starting date",
+      "giftMessage": "Gift message (500 characters max)",
       "required": "required",
       "firstNamePlaceholder": "First name",
       "lastNamePlaceholder": "Last name",
@@ -52,7 +54,7 @@
       "gift": "gift"
     },
     "messages": {
-      "enterEmail": "Please enter the gift recepients email."
+      "enterEmail": "Please enter the gift recipient's email."
     }
   },
   "redeem": {
