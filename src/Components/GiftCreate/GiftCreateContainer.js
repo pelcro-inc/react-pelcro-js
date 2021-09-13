@@ -16,12 +16,11 @@ import {
   SHOW_ALERT
 } from "../../utils/action-types";
 
-const nowDate = new Date().toISOString().substr(0, 10);
 const initialState = {
   email: "",
   firstName: "",
   lastName: "",
-  startDate: nowDate,
+  startDate: null,
   giftMessage: "",
   buttonDisabled: true,
   alert: {

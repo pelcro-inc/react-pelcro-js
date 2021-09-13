@@ -19,7 +19,7 @@ export const GiftCreateStartDate = (props) => {
   return (
     <DatePicker
       min={nowDate}
-      value={state.startDate}
+      value={state.startDate ?? nowDate}
       onChange={(e) => handleInputChange(e.target.value)}
       {...props}
     />
