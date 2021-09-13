@@ -1,3 +1,10 @@
+# [2.2.0-beta.10](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.2.0-beta.9...v2.2.0-beta.10) (2021-09-13)
+
+
+### Features
+
+* add start date & gift message to gift creation fields ([8cdefa4](https://github.com/pelcro-inc/react-pelcro-js/commit/8cdefa4fe1a92cbb3c9567d2ad28f2297ee496ca))
+
 # [2.2.0-beta.9](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.2.0-beta.8...v2.2.0-beta.9) (2021-09-09)
 
 
