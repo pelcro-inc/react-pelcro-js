@@ -1,3 +1,10 @@
+# [2.2.0-beta.12](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.2.0-beta.11...v2.2.0-beta.12) (2021-09-14)
+
+
+### Features
+
+* **atoms:** Add a new Tooltip atom component ([897a752](https://github.com/pelcro-inc/react-pelcro-js/commit/897a752628cac627f5d882944495f61ce9a13f18))
+
 # [2.2.0-beta.11](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.2.0-beta.10...v2.2.0-beta.11) (2021-09-13)
 
 
