@@ -1,3 +1,10 @@
+# [2.2.0-beta.13](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.2.0-beta.12...v2.2.0-beta.13) (2021-09-14)
+
+
+### Bug Fixes
+
+* **tooltip:** wrap css inside tailwind components layer ([4b1ae09](https://github.com/pelcro-inc/react-pelcro-js/commit/4b1ae094d2eaf33c2b6fcc566877e7724c7fa6d7))
+
 # [2.2.0-beta.12](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.2.0-beta.11...v2.2.0-beta.12) (2021-09-14)
 
 
