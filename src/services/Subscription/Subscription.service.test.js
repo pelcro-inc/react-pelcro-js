@@ -174,7 +174,9 @@ describe("Successfully create any type of subscription", () => {
           giftRecipient: {
             email: "test@email.com",
             firstName: "Samuel",
-            lastName: "Jackson"
+            lastName: "Jackson",
+            startDate: "2021-09-02",
+            giftMessage: "Enjoy your gift"
           }
         },
         () => null
@@ -185,7 +187,9 @@ describe("Successfully create any type of subscription", () => {
           payment_gateway: "stripe",
           gift_recipient_email: "test@email.com",
           gift_recipient_first_name: "Samuel",
-          gift_recipient_last_name: "Jackson"
+          gift_recipient_last_name: "Jackson",
+          gift_start_date: "2021-09-02",
+          gift_message: "Enjoy your gift"
         }),
         expect.anything()
       );
@@ -311,7 +315,9 @@ describe("Successfully create any type of subscription", () => {
           giftRecipient: {
             email: "test@email.com",
             firstName: "Samuel",
-            lastName: "Jackson"
+            lastName: "Jackson",
+            startDate: "2021-09-02",
+            giftMessage: "Enjoy your gift"
           }
         },
         () => null
@@ -322,7 +328,9 @@ describe("Successfully create any type of subscription", () => {
           payment_gateway: "braintree",
           gift_recipient_email: "test@email.com",
           gift_recipient_first_name: "Samuel",
-          gift_recipient_last_name: "Jackson"
+          gift_recipient_last_name: "Jackson",
+          gift_start_date: "2021-09-02",
+          gift_message: "Enjoy your gift"
         }),
         expect.anything()
       );

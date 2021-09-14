@@ -26,7 +26,7 @@ export const PasswordForgotButton = ({
     <Button
       onClick={() => {
         dispatch({ type: HANDLE_SUBMIT });
-        onClick();
+        onClick?.();
       }}
       disabled={isDisabled}
       isLoading={buttonDisabled}

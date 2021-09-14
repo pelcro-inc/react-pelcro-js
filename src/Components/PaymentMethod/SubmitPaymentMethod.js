@@ -31,7 +31,7 @@ export const SubmitPaymentMethod = ({ onClick, ...otherProps }) => {
       isLoading={isLoading}
       onClick={() => {
         dispatch({ type: SUBMIT_PAYMENT });
-        onClick();
+        onClick?.();
       }}
       disabled={disableSubmit}
       {...otherProps}

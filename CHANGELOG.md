@@ -1,3 +1,45 @@
+# [2.2.0-beta.14](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.2.0-beta.13...v2.2.0-beta.14) (2021-09-14)
+
+
+### Bug Fixes
+
+* **tooltip:** use opacity instead of visibility ([d6700b5](https://github.com/pelcro-inc/react-pelcro-js/commit/d6700b59d98b9c0a3d636ac8529d6af5c8ccfaed))
+
+# [2.2.0-beta.13](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.2.0-beta.12...v2.2.0-beta.13) (2021-09-14)
+
+
+### Bug Fixes
+
+* **tooltip:** wrap css inside tailwind components layer ([4b1ae09](https://github.com/pelcro-inc/react-pelcro-js/commit/4b1ae094d2eaf33c2b6fcc566877e7724c7fa6d7))
+
+# [2.2.0-beta.12](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.2.0-beta.11...v2.2.0-beta.12) (2021-09-14)
+
+
+### Features
+
+* **atoms:** Add a new Tooltip atom component ([897a752](https://github.com/pelcro-inc/react-pelcro-js/commit/897a752628cac627f5d882944495f61ce9a13f18))
+
+# [2.2.0-beta.11](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.2.0-beta.10...v2.2.0-beta.11) (2021-09-13)
+
+
+### Bug Fixes
+
+* **gift creation:** only default the start date on the UI part ([5ea8f95](https://github.com/pelcro-inc/react-pelcro-js/commit/5ea8f95478178aa93327c621d6dbfe171f7206a8))
+
+# [2.2.0-beta.10](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.2.0-beta.9...v2.2.0-beta.10) (2021-09-13)
+
+
+### Features
+
+* add start date & gift message to gift creation fields ([8cdefa4](https://github.com/pelcro-inc/react-pelcro-js/commit/8cdefa4fe1a92cbb3c9567d2ad28f2297ee496ca))
+
+# [2.2.0-beta.9](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.2.0-beta.8...v2.2.0-beta.9) (2021-09-09)
+
+
+### Bug Fixes
+
+* optional extra click handler ([#79](https://github.com/pelcro-inc/react-pelcro-js/issues/79)) ([5a87645](https://github.com/pelcro-inc/react-pelcro-js/commit/5a87645e66c9d5647cfee9727472fd4d1ed8c447))
+
 # [2.2.0-beta.8](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.2.0-beta.7...v2.2.0-beta.8) (2021-09-09)
 
 

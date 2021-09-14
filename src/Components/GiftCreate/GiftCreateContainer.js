@@ -9,6 +9,8 @@ import {
   SET_EMAIL,
   SET_LAST_NAME,
   SET_FIRST_NAME,
+  SET_START_DATE,
+  SET_GIFT_MESSAGE,
   HANDLE_SUBMIT,
   DISABLE_SUBMIT,
   SHOW_ALERT
@@ -18,6 +20,8 @@ const initialState = {
   email: "",
   firstName: "",
   lastName: "",
+  startDate: null,
+  giftMessage: "",
   buttonDisabled: true,
   alert: {
     type: "error",
@@ -41,7 +45,9 @@ const GiftCreateContainer = ({
     const giftRecipient = {
       email: state.email,
       firstName: state.firstName,
-      lastName: state.lastName
+      lastName: state.lastName,
+      startDate: state.startDate,
+      giftMessage: state.giftMessage
     };
 
     if (!giftRecipient.email) {
@@ -78,6 +84,18 @@ const GiftCreateContainer = ({
           return Update({
             ...state,
             lastName: action.payload
+          });
+
+        case SET_START_DATE:
+          return Update({
+            ...state,
+            startDate: action.payload
+          });
+
+        case SET_GIFT_MESSAGE:
+          return Update({
+            ...state,
+            giftMessage: action.payload
           });
 
         case SHOW_ALERT:

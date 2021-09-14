@@ -34,7 +34,7 @@ export const LoginButton = ({ name, onClick, ...otherProps }) => {
     <Button
       onClick={() => {
         dispatch({ type: HANDLE_LOGIN });
-        onClick();
+        onClick?.();
       }}
       disabled={isDisabled}
       isLoading={buttonDisabled}
