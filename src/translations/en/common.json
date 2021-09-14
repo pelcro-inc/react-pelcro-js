@@ -1,82 +1,82 @@
 {
-    "validation": {
-        "validEmail": "Email address is not valid.",
-        "enterEmail": "Email address is required.",
-        "enterPassword": "Password is required."
+  "validation": {
+    "validEmail": "Email address is not valid.",
+    "enterEmail": "Email address is required.",
+    "enterPassword": "Password is required."
+  },
+  "buttons": {
+    "account": "My account",
+    "login": "Login"
+  },
+  "dashboard": {
+    "labels": {
+      "menu": "Pelcro Menu",
+      "name": "Name",
+      "email": "Email",
+      "plan": "Plan",
+      "description": "Description",
+      "expiry": "Expiry",
+      "status": "Status",
+      "logout": "Logout",
+      "dashboard": "Dashboard",
+      "unsubscribe": "Unsubscribe",
+      "reactivate": "Reactivate",
+      "renew": "Renew",
+      "support": "Support",
+      "account": "Account",
+      "subscriptions": "Subscriptions",
+      "updatePaymentSource": "Update",
+      "updateProfile": "Update",
+      "updateAddress": "Update",
+      "redeemGift": "Redeem gift",
+      "address": "Address",
+      "paymentSource": "Payment card",
+      "actions": "Actions",
+      "expiresOn": "Expires on",
+      "renewsOn": "Renews on",
+      "isSureToCancel": "Are you sure you want to cancel your subscription?"
+    },
+    "messages": {
+      "yourDashboard": "Your Pelcro Dashboard"
+    },
+    "errors": {
+      "": ""
+    }
+  },
+  "select": {
+    "messages": {
+      "alreadyHaveAccount": "Already have an account?",
+      "loginHere": "Login here",
+      "checkbox": "Check this box to gift this subscription"
+    },
+    "labels": {
+      "plan": {
+        "title": "Subscribe to a plan",
+        "subtitle": "Select one of the plans below and click on next."
+      },
+      "product": {
+        "title": "Subscribe to a product",
+        "subtitle": "Select one of the products below and click on next."
+      },
+      "selectProduct": "Select a product",
+      "selectPlan": "Select a plan",
+      "startingAt": "Starting at"
     },
     "buttons": {
-        "account": "My account",
-        "login": "Login"
-    },
-    "dashboard": {
-        "labels": {
-            "menu": "Pelcro Menu",
-            "name": "Name",
-            "email": "Email",
-            "plan": "Plan",
-            "description": "Description",
-            "expiry": "Expiry",
-            "status": "Status",
-            "logout": "Logout",
-            "dashboard": "Dashboard",
-            "unsubscribe": "Unsubscribe",
-            "reactivate": "Reactivate",
-            "renew": "Renew",
-            "support": "Support",
-            "account": "Account",
-            "subscriptions": "Subscriptions",
-            "updatePaymentSource": "Update",
-            "updateProfile": "Update",
-            "updateAddress": "Update",
-            "redeemGift": "Redeem gift",
-            "address": "Address",
-            "paymentSource": "Payment card",
-            "actions": "Actions",
-            "expiresOn": "Expires on",
-            "renewsOn": "Renews on",
-            "isSureToCancel": "Are you sure you want to cancel your subscription?"
-        },
-        "messages": {
-            "yourDashboard": "Your Pelcro Dashboard"
-        },
-        "errors": {
-            "": ""
-        }
-    },
-    "select": {
-        "messages": {
-            "alreadyHaveAccount": "Already have an account?",
-            "loginHere": "Login here",
-            "checkbox": "Check this box to gift this subscription"
-        },
-        "labels": {
-            "plan": {
-                "title": "Subscribe to a plan",
-                "subtitle": "Select one of the plans below and click on next."
-            },
-            "product": {
-                "title": "Subscribe to a product",
-                "subtitle": "Select one of the products below and click on next."
-            },
-            "selectProduct": "Select a product",
-            "selectPlan": "Select a plan",
-            "startingAt": "Starting at"
-        },
-        "buttons": {
-            "next": "Next",
-            "select": "Select",
-            "back": "Back"
-        }
-    },
-    "confirm": {
-        "buttons": {
-            "continue": "Continue to content"
-        },
-        "labels": {
-            "title": "Thanks for your order!",
-            "subtitle": "Your items will be on their way shortly."
-        },
-        "giftSent": "Subscription gift has been sent to",
-        "successfully": "successfully"
+      "next": "Next",
+      "select": "Select",
+      "back": "Back"
     }
+  },
+  "confirm": {
+    "buttons": {
+      "continue": "Continue to content"
+    },
+    "labels": {
+      "title": "Thanks for your order!",
+      "subtitle": "Your items will be on their way shortly."
+    },
+    "giftSent": "The gift will be sent to",
+    "successfully": "on the date you specified."
+  }
 }
