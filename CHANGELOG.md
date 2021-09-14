@@ -1,3 +1,10 @@
+# [2.2.0-beta.14](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.2.0-beta.13...v2.2.0-beta.14) (2021-09-14)
+
+
+### Bug Fixes
+
+* **tooltip:** use opacity instead of visibility ([d6700b5](https://github.com/pelcro-inc/react-pelcro-js/commit/d6700b59d98b9c0a3d636ac8529d6af5c8ccfaed))
+
 # [2.2.0-beta.13](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.2.0-beta.12...v2.2.0-beta.13) (2021-09-14)
 
 
