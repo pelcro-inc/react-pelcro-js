@@ -78,7 +78,8 @@
       "toAdd": "pour ajouter une adresse"
     },
     "messages": {
-      "enterGiftCode": "Veuillez entrer un code cadeau."
+      "enterGiftCode": "Veuillez entrer un code cadeau.",
+      "giftDateInfo": "Le destinataire recevra un courriel à la date déterminée afin d'activer leur abonnement cadeau."
     }
   }
 }

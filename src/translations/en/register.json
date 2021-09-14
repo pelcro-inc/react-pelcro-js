@@ -43,7 +43,7 @@
       "firstName": "First name",
       "lastName": "Last name",
       "email": "Email",
-      "startDate": "Starting date",
+      "startDate": "Gift date",
       "giftMessage": "Gift message (500 characters max)",
       "required": "required",
       "firstNamePlaceholder": "First name",
@@ -54,7 +54,8 @@
       "gift": "gift"
     },
     "messages": {
-      "enterEmail": "Please enter the gift recipient's email."
+      "enterEmail": "Please enter the gift recipient's email.",
+      "giftDateInfo": "The recipient will receive a gift email notification with your message on the date you select in order to redeem the gift."
     }
   },
   "redeem": {
