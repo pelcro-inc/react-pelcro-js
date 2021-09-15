@@ -1,3 +1,10 @@
+# [2.2.0-beta.17](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.2.0-beta.16...v2.2.0-beta.17) (2021-09-15)
+
+
+### Bug Fixes
+
+* **tooltip:** use an svg icon instead of the symbol ([4560c49](https://github.com/pelcro-inc/react-pelcro-js/commit/4560c499dc30d4293e3392e91b420e11c2d9fd2d))
+
 # [2.2.0-beta.16](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.2.0-beta.15...v2.2.0-beta.16) (2021-09-15)
 
 
