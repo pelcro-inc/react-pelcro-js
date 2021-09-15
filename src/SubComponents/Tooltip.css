@@ -1,10 +1,10 @@
 @layer components {
   .pelcro-root .tooltip {
-    @apply plc-absolute plc-opacity-0;
+    @apply plc-absolute plc-hidden;
   }
 
   .pelcro-root .tooltip-container:hover .tooltip,
   .pelcro-root .tooltip:hover {
-    @apply plc-z-50 plc-opacity-100;
+    @apply plc-z-50 plc-block;
   }
 }
