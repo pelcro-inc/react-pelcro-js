@@ -1,3 +1,10 @@
+# [2.2.0-beta.16](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.2.0-beta.15...v2.2.0-beta.16) (2021-09-15)
+
+
+### Bug Fixes
+
+* **tooltip:** scope tooltip className ([76d3bcb](https://github.com/pelcro-inc/react-pelcro-js/commit/76d3bcb67adf169dd7a274ba5fea77673b9afd34))
+
 # [2.2.0-beta.15](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.2.0-beta.14...v2.2.0-beta.15) (2021-09-15)
 
 
