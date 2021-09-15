@@ -1,3 +1,10 @@
+# [2.2.0-beta.15](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.2.0-beta.14...v2.2.0-beta.15) (2021-09-15)
+
+
+### Bug Fixes
+
+* **tooltip:** use display hidden to remove from dom ([b1dc490](https://github.com/pelcro-inc/react-pelcro-js/commit/b1dc4900149f8631345245a276e8d3c7a6206244))
+
 # [2.2.0-beta.14](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.2.0-beta.13...v2.2.0-beta.14) (2021-09-14)
 
 
