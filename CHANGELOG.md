@@ -1,3 +1,10 @@
+# [2.2.0-beta.19](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.2.0-beta.18...v2.2.0-beta.19) (2021-09-20)
+
+
+### Bug Fixes
+
+* minor UI fixes ([#83](https://github.com/pelcro-inc/react-pelcro-js/issues/83)) ([0472f01](https://github.com/pelcro-inc/react-pelcro-js/commit/0472f019cd661b46814e1c284c975c6e33061b3f))
+
 # [2.2.0-beta.18](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.2.0-beta.17...v2.2.0-beta.18) (2021-09-20)
 
 
