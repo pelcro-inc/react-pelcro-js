@@ -55,7 +55,7 @@ export const UserUpdateView = (props) => {
           </div>
           <UserUpdateButton
             role="submit"
-            className="plc-mt-2"
+            className="plc-w-full plc-mt-2"
             name={t("labels.submit")}
             id="pelcro-submit"
           />
