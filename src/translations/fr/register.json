@@ -79,6 +79,7 @@
     },
     "messages": {
       "enterGiftCode": "Veuillez entrer un code cadeau.",
+      "invalidDate": "La date du cadeau doit être comprise entre aujourd'hui et un an.",
       "giftDateInfo": "Le destinataire recevra un courriel à la date déterminée afin d'activer leur abonnement cadeau."
     }
   }
