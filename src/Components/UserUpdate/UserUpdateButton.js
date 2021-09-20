@@ -24,7 +24,6 @@ export const UserUpdateButton = ({
       }}
       disabled={buttonDisabled}
       isLoading={buttonDisabled}
-      className="plc-w-full"
       {...otherProps}
     >
       {name ?? t("labels.submit")}
