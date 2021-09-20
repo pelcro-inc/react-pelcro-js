@@ -1,3 +1,10 @@
+# [2.2.0-beta.18](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.2.0-beta.17...v2.2.0-beta.18) (2021-09-20)
+
+
+### Features
+
+* **gift creation:** add starting date validation on the container ([#82](https://github.com/pelcro-inc/react-pelcro-js/issues/82)) ([a7dee8f](https://github.com/pelcro-inc/react-pelcro-js/commit/a7dee8f930aa03bc4c6e1346761bb38e6a7aeb57))
+
 # [2.2.0-beta.17](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.2.0-beta.16...v2.2.0-beta.17) (2021-09-15)
 
 
