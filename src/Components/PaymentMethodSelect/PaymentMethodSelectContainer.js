@@ -35,7 +35,7 @@ const { Provider } = store;
 
 const PaymentMethodSelectContainer = ({
   style,
-  className,
+  className = "",
   onSuccess = () => {},
   children
 }) => {
@@ -91,7 +91,10 @@ const PaymentMethodSelectContainer = ({
   }, []);
 
   return (
-    <div style={{ ...style }} className={className}>
+    <div
+      style={{ ...style }}
+      className={`pelcro-container pelcro-payment-select-container ${className}`}
+    >
       <Provider value={{ state, dispatch }}>
         {children.length
           ? children.map((child, i) =>

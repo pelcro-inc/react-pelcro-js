@@ -6,6 +6,7 @@ import { ReactComponent as FacebookLogoIcon } from "../../../assets/facebook-log
 import { HANDLE_SOCIAL_LOGIN } from "../../../utils/action-types";
 
 export const FacebookLoginButton = ({
+  label = "Facebook",
   className = "",
   labelClassName = "",
   iconClassName = ""
@@ -44,30 +45,28 @@ export const FacebookLoginButton = ({
     console.error(error);
   };
 
-  return (
-    facebookLoginEnabled && (
-      <FacebookLogin
-        appId={window.Pelcro.site.read().facebook_app_id}
-        language={window.Pelcro.site.read().default_locale ?? "en_US"}
-        fields="first_name,last_name,email,picture"
-        callback={onSuccess}
-        onFailure={onFailure}
-        render={(renderProps) => (
-          <button
-            onClick={renderProps.onClick}
-            className={`plc-flex plc-items-center plc-justify-center plc-w-full plc-p-3 plc-space-x-3 plc-text-gray-700 plc-border plc-border-gray-200 plc-rounded-3xl hover:plc-bg-gray-200 pelcro-facebook-login ${className}`}
+  return facebookLoginEnabled ? (
+    <FacebookLogin
+      appId={window.Pelcro.site.read().facebook_app_id}
+      language={window.Pelcro.site.read().default_locale ?? "en_US"}
+      fields="first_name,last_name,email,picture"
+      callback={onSuccess}
+      onFailure={onFailure}
+      render={(renderProps) => (
+        <button
+          onClick={renderProps.onClick}
+          className={`plc-flex plc-items-center plc-justify-center plc-w-full plc-p-3 plc-space-x-3 plc-text-gray-700 plc-border plc-border-gray-200 plc-rounded-3xl hover:plc-bg-gray-200 pelcro-facebook-login ${className}`}
+        >
+          <FacebookLogoIcon
+            className={`plc-w-3 plc-h-auto pelcro-facebook-login-icon ${iconClassName}`}
+          />
+          <p
+            className={`pelcro-facebook-login-label ${labelClassName}`}
           >
-            <FacebookLogoIcon
-              className={`plc-w-3 plc-h-auto pelcro-facebook-login-icon ${iconClassName}`}
-            />
-            <p
-              className={`pelcro-facebook-login-label ${labelClassName}`}
-            >
-              Facebook
-            </p>
-          </button>
-        )}
-      />
-    )
-  );
+            {label}
+          </p>
+        </button>
+      )}
+    />
+  ) : null;
 };

@@ -45,6 +45,8 @@
       "firstName": "Prénom",
       "lastName": "Nom de famille",
       "email": "Adresse courriel",
+      "startDate": "Date de début",
+      "giftMessage": "Message du cadeau (500 caractères max)",
       "required": "Champs obligatoires",
       "firstNamePlaceholder": "Prénom",
       "lastNamePlaceholder": "Nom de famille",
@@ -54,7 +56,9 @@
       "gift": "cadeau"
     },
     "messages": {
-      "enterEmail": "Veuillez entrer l’adresse courriel du destinataire du cadeau."
+      "enterEmail": "Veuillez entrer l’adresse courriel du destinataire du cadeau.",
+      "invalidDate": "La date du cadeau doit être comprise entre aujourd'hui et un an.",
+      "giftDateInfo": "Le destinataire recevra un courriel à la date déterminée afin d'activer leur abonnement cadeau."
     }
   },
   "redeem": {

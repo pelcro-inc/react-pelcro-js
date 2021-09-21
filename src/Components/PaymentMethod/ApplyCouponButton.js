@@ -5,15 +5,21 @@ import { store } from "./PaymentMethodContainer";
 import { APPLY_COUPON_CODE } from "../../utils/action-types";
 import { ReactComponent as ArrowLeftIcon } from "../../assets/arrow-left.svg";
 
-export const ApplyCouponButton = ({ children }) => {
+export const ApplyCouponButton = ({
+  children,
+  onClick,
+  ...otherProps
+}) => {
   const {
     state: { couponCode, disableCouponButton },
     dispatch
   } = useContext(store);
   const { t } = useTranslation("checkoutForm");
 
-  const onApplyCouponCode = () =>
+  const onApplyCouponCode = () => {
     dispatch({ type: APPLY_COUPON_CODE });
+    onClick?.();
+  };
 
   return (
     <Button
@@ -25,6 +31,7 @@ export const ApplyCouponButton = ({ children }) => {
       }
       onClick={onApplyCouponCode}
       disabled={!couponCode || disableCouponButton}
+      {...otherProps}
     >
       {children}
     </Button>

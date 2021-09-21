@@ -35,7 +35,7 @@ const { Provider } = store;
 
 const UserUpdateContainer = ({
   style,
-  className,
+  className = "",
   onSuccess = () => {},
   onFailure = () => {},
   children
@@ -174,7 +174,10 @@ const UserUpdateContainer = ({
   );
 
   return (
-    <div style={{ ...style }} className={className}>
+    <div
+      style={{ ...style }}
+      className={`pelcro-container pelcro-user-update-container ${className}`}
+    >
       <Provider value={{ state, dispatch }}>
         {children.length
           ? children.map((child, i) =>

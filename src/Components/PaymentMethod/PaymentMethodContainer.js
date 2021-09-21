@@ -81,7 +81,7 @@ const { Provider } = store;
 
 const PaymentMethodContainerWithoutStripe = ({
   style,
-  className,
+  className = "",
   children,
   stripe,
   type,
@@ -263,6 +263,8 @@ const PaymentMethodContainerWithoutStripe = ({
             : null,
           gift_recipient_first_name: giftRecipient?.firstName,
           gift_recipient_last_name: giftRecipient?.lastName,
+          gift_start_date: giftRecipient?.startDate,
+          gift_message: giftRecipient?.giftMessage,
           address_id: product.address_required
             ? selectedAddressId
             : null
@@ -870,7 +872,10 @@ const PaymentMethodContainerWithoutStripe = ({
   );
 
   return (
-    <div style={{ ...style }} className={className}>
+    <div
+      style={{ ...style }}
+      className={`pelcro-container pelcro-payment-container ${className}`}
+    >
       <Provider value={{ state, dispatch }}>
         {children.length
           ? children.map((child, i) =>

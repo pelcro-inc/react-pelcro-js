@@ -141,6 +141,8 @@ export { GiftCreateSubmitButton } from "./Components/GiftCreate/GiftCreateSubmit
 export { GiftCreateFirstName } from "./Components/GiftCreate/GiftCreateFirstName";
 export { GiftCreateLastName } from "./Components/GiftCreate/GiftCreateLastName";
 export { GiftCreateEmail } from "./Components/GiftCreate/GiftCreateEmail";
+export { GiftCreateStartDate } from "./Components/GiftCreate/GiftCreateStartDate";
+export { GiftCreateMessage } from "./Components/GiftCreate/GiftCreateMessage";
 
 export { GiftRedeemCode } from "./Components/GiftRedeem/GiftRedeemCode";
 export { GiftRedeemContainer } from "./Components/GiftRedeem/GiftRedeemContainer";
@@ -178,6 +180,7 @@ export { Button } from "./SubComponents/Button";
 export { Checkbox } from "./SubComponents/Checkbox";
 export { DatePicker } from "./SubComponents/DatePicker";
 export { Input } from "./SubComponents/Input";
+export { TextArea } from "./SubComponents/TextArea";
 export { Link } from "./SubComponents/Link";
 export { Modal } from "./SubComponents/Modal";
 export { ModalBody } from "./SubComponents/Modal";
@@ -185,6 +188,7 @@ export { ModalFooter } from "./SubComponents/Modal";
 export { Radio } from "./SubComponents/Radio";
 export { Select } from "./SubComponents/Select";
 export { notify, Notification } from "./SubComponents/Notification";
+export { Tooltip } from "./SubComponents/Tooltip";
 
 export { default as i18n } from "./i18n";
 

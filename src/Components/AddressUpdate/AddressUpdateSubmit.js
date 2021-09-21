@@ -4,7 +4,11 @@ import { HANDLE_SUBMIT } from "../../utils/action-types";
 import { Button } from "../../SubComponents/Button";
 import { useTranslation } from "react-i18next";
 
-export const AddressUpdateSubmit = ({ name, ...otherProps }) => {
+export const AddressUpdateSubmit = ({
+  name,
+  onClick,
+  ...otherProps
+}) => {
   const {
     dispatch,
     state: { isSubmitting }
@@ -14,9 +18,12 @@ export const AddressUpdateSubmit = ({ name, ...otherProps }) => {
 
   return (
     <Button
-      {...otherProps}
-      onClick={() => dispatch({ type: HANDLE_SUBMIT })}
+      onClick={() => {
+        dispatch({ type: HANDLE_SUBMIT });
+        onClick?.();
+      }}
       isLoading={isSubmitting}
+      {...otherProps}
     >
       {name ?? t("buttons.submit")}
     </Button>

@@ -43,11 +43,13 @@ export function LoginView(props) {
             label={t("labels.password")}
           />
           <Link
-            className="plc-flex plc-justify-end plc-text-sm"
+            className="plc-flex plc-items-end plc-justify-end plc-text-sm plc-cursor-default plc-h-9"
             id="pelcro-link-forgot-password"
             onClick={props.onForgotPassword}
           >
-            {t("messages.forgotPassword")}
+            <span className="plc-cursor-pointer">
+              {t("messages.forgotPassword")}
+            </span>
           </Link>
           <LoginButton
             role="submit"

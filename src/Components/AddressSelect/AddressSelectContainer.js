@@ -41,7 +41,7 @@ const { Provider } = store;
 
 const AddressSelectContainer = ({
   style,
-  className,
+  className = "",
   onGiftRedemptionSuccess = () => {},
   onSuccess = () => {},
   onFailure = () => {},
@@ -147,7 +147,10 @@ const AddressSelectContainer = ({
   }, []);
 
   return (
-    <div style={{ ...style }} className={className}>
+    <div
+      style={{ ...style }}
+      className={`pelcro-container pelcro-address-select-container ${className}`}
+    >
       <Provider value={{ state, dispatch }}>
         {children.length
           ? children.map((child, i) =>

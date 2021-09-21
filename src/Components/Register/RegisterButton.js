@@ -4,7 +4,7 @@ import { Button } from "../../SubComponents/Button";
 import { HANDLE_REGISTRATION } from "../../utils/action-types";
 import { store } from "./RegisterContainer";
 
-export const RegisterButton = ({ name, ...otherProps }) => {
+export const RegisterButton = ({ name, onClick, ...otherProps }) => {
   const {
     state: {
       emailError,
@@ -32,10 +32,13 @@ export const RegisterButton = ({ name, ...otherProps }) => {
 
   return (
     <Button
-      {...otherProps}
-      onClick={() => dispatch({ type: HANDLE_REGISTRATION })}
+      onClick={() => {
+        dispatch({ type: HANDLE_REGISTRATION });
+        onClick?.();
+      }}
       disabled={isDisabled}
       isLoading={buttonDisabled}
+      {...otherProps}
     >
       {name ?? t("messages.createAccount")}
     </Button>
