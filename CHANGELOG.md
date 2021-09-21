@@ -1,3 +1,10 @@
+# [2.2.0-beta.20](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.2.0-beta.19...v2.2.0-beta.20) (2021-09-21)
+
+
+### Bug Fixes
+
+* **i18n:** french wording nesting ([d03dbf6](https://github.com/pelcro-inc/react-pelcro-js/commit/d03dbf6401550ad2fd9e8f7783c6174b07d4b235))
+
 # [2.2.0-beta.19](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.2.0-beta.18...v2.2.0-beta.19) (2021-09-20)
 
 
