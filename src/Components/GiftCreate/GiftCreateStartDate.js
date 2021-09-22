@@ -5,7 +5,14 @@ import { Loader } from "../../SubComponents/Loader";
 import { DatePicker } from "../../SubComponents/DatePicker";
 import { SET_START_DATE } from "../../utils/action-types";
 
-const nowDate = new Date().toISOString().substr(0, 10);
+const nowDate = new Date();
+const nowDateISO = nowDate.toISOString().substr(0, 10);
+const yearFromNowDateISO = new Date(
+  new Date().setFullYear(nowDate.getFullYear() + 1)
+)
+  .toISOString()
+  .substr(0, 10);
+
 export const GiftCreateStartDate = (props) => {
   const { t } = useTranslation("register");
   const { dispatch, state } = useContext(store);
@@ -20,8 +27,9 @@ export const GiftCreateStartDate = (props) => {
 
   return (
     <DatePicker
-      min={nowDate}
-      value={state.startDate ?? nowDate}
+      min={nowDateISO}
+      max={yearFromNowDateISO}
+      value={state.startDate ?? nowDateISO}
       onChange={(e) => handleInputChange(e.target.value)}
       tooltipText={t("gift.messages.giftDateInfo")}
       {...props}

@@ -1,3 +1,24 @@
+# [2.2.0-beta.20](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.2.0-beta.19...v2.2.0-beta.20) (2021-09-21)
+
+
+### Bug Fixes
+
+* **i18n:** french wording nesting ([d03dbf6](https://github.com/pelcro-inc/react-pelcro-js/commit/d03dbf6401550ad2fd9e8f7783c6174b07d4b235))
+
+# [2.2.0-beta.19](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.2.0-beta.18...v2.2.0-beta.19) (2021-09-20)
+
+
+### Bug Fixes
+
+* minor UI fixes ([#83](https://github.com/pelcro-inc/react-pelcro-js/issues/83)) ([0472f01](https://github.com/pelcro-inc/react-pelcro-js/commit/0472f019cd661b46814e1c284c975c6e33061b3f))
+
+# [2.2.0-beta.18](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.2.0-beta.17...v2.2.0-beta.18) (2021-09-20)
+
+
+### Features
+
+* **gift creation:** add starting date validation on the container ([#82](https://github.com/pelcro-inc/react-pelcro-js/issues/82)) ([a7dee8f](https://github.com/pelcro-inc/react-pelcro-js/commit/a7dee8f930aa03bc4c6e1346761bb38e6a7aeb57))
+
 # [2.2.0-beta.17](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.2.0-beta.16...v2.2.0-beta.17) (2021-09-15)
 
 

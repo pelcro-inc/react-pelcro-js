@@ -56,7 +56,9 @@
       "gift": "cadeau"
     },
     "messages": {
-      "enterEmail": "Veuillez entrer l’adresse courriel du destinataire du cadeau."
+      "enterEmail": "Veuillez entrer l’adresse courriel du destinataire du cadeau.",
+      "invalidDate": "La date du cadeau doit être comprise entre aujourd'hui et un an.",
+      "giftDateInfo": "Le destinataire recevra un courriel à la date déterminée afin d'activer leur abonnement cadeau."
     }
   },
   "redeem": {
@@ -78,8 +80,7 @@
       "toAdd": "pour ajouter une adresse"
     },
     "messages": {
-      "enterGiftCode": "Veuillez entrer un code cadeau.",
-      "giftDateInfo": "Le destinataire recevra un courriel à la date déterminée afin d'activer leur abonnement cadeau."
+      "enterGiftCode": "Veuillez entrer un code cadeau."
     }
   }
 }

@@ -58,11 +58,33 @@ const GiftCreateContainer = ({
           content: t("gift.messages.enterEmail")
         }
       });
-      onFailure();
-    } else {
-      set({ giftRecipient });
-      onSuccess(giftRecipient);
+      return onFailure();
     }
+
+    if (giftRecipient.startDate) {
+      const nowDate = new Date();
+      const yearFromNowDate = new Date(
+        new Date().setFullYear(nowDate.getFullYear() + 1)
+      );
+      const submittedDate = new Date(giftRecipient.startDate);
+
+      if (
+        submittedDate < nowDate ||
+        submittedDate > yearFromNowDate
+      ) {
+        dispatch({
+          type: SHOW_ALERT,
+          payload: {
+            type: "error",
+            content: t("gift.messages.invalidDate")
+          }
+        });
+        return onFailure();
+      }
+    }
+
+    set({ giftRecipient });
+    return onSuccess(giftRecipient);
   };
 
   const [state, dispatch] = useReducerWithSideEffects(
