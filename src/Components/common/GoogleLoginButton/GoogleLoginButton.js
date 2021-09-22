@@ -6,6 +6,7 @@ import { ReactComponent as GoogleLogoIcon } from "../../../assets/google-logo.sv
 import { HANDLE_SOCIAL_LOGIN } from "../../../utils/action-types";
 
 export const GoogleLoginButton = ({
+  label = "Google",
   className = "",
   labelClassName = "",
   iconClassName = ""
@@ -46,28 +47,26 @@ export const GoogleLoginButton = ({
     console.error(error);
   };
 
-  return (
-    googleLoginEnabled && (
-      <GoogleLogin
-        clientId={window.Pelcro.site.read().google_app_id}
-        onSuccess={onSuccess}
-        onFailure={onFailure}
-        render={(renderProps) => (
-          <button
-            onClick={renderProps.onClick}
-            className={`plc-flex plc-items-center plc-justify-center plc-w-full plc-p-3 plc-space-x-3 plc-text-gray-700 plc-border plc-border-gray-200 plc-rounded-3xl hover:plc-bg-gray-200 pelcro-google-login ${className}`}
+  return googleLoginEnabled ? (
+    <GoogleLogin
+      clientId={window.Pelcro.site.read().google_app_id}
+      onSuccess={onSuccess}
+      onFailure={onFailure}
+      render={(renderProps) => (
+        <button
+          onClick={renderProps.onClick}
+          className={`plc-flex plc-items-center plc-justify-center plc-w-full plc-p-3 plc-space-x-3 plc-text-gray-700 plc-border plc-border-gray-200 plc-rounded-3xl hover:plc-bg-gray-200 pelcro-google-login ${className}`}
+        >
+          <GoogleLogoIcon
+            className={`plc-w-6 plc-h-auto pelcro-google-login-icon" ${iconClassName}`}
+          />
+          <p
+            className={`pelcro-google-login-label ${labelClassName}`}
           >
-            <GoogleLogoIcon
-              className={`plc-w-6 plc-h-auto pelcro-google-login-icon" ${iconClassName}`}
-            />
-            <p
-              className={`pelcro-google-login-label ${labelClassName}`}
-            >
-              Google
-            </p>
-          </button>
-        )}
-      />
-    )
-  );
+            {label}
+          </p>
+        </button>
+      )}
+    />
+  ) : null;
 };

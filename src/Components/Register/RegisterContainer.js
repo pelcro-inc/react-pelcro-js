@@ -47,7 +47,7 @@ const { Provider } = store;
 
 const RegisterContainer = ({
   style,
-  className,
+  className = "",
   onSuccess = () => {},
   onFailure = () => {},
   onDisplay = () => {},
@@ -227,7 +227,10 @@ const RegisterContainer = ({
   );
 
   return (
-    <div style={{ ...style }} className={className}>
+    <div
+      style={{ ...style }}
+      className={`pelcro-container pelcro-register-container ${className}`}
+    >
       <Provider value={{ state, dispatch }}>
         {children.length
           ? children.map((child, i) => {

@@ -54,7 +54,6 @@ export const CartView = (props) => {
                     <CartRemoveItemButton
                       itemId={item.id}
                       id={`pelcro-remove-product-${item.id}`}
-                      className="plc-bg-red-400 hover:plc-bg-red-600"
                       aria-label="remove item from cart"
                     />
                   </div>

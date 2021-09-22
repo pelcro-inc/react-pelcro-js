@@ -9,6 +9,8 @@ import {
   SET_EMAIL,
   SET_LAST_NAME,
   SET_FIRST_NAME,
+  SET_START_DATE,
+  SET_GIFT_MESSAGE,
   HANDLE_SUBMIT,
   DISABLE_SUBMIT,
   SHOW_ALERT
@@ -18,6 +20,8 @@ const initialState = {
   email: "",
   firstName: "",
   lastName: "",
+  startDate: null,
+  giftMessage: "",
   buttonDisabled: true,
   alert: {
     type: "error",
@@ -29,7 +33,7 @@ const { Provider } = store;
 
 const GiftCreateContainer = ({
   style,
-  className,
+  className = "",
   onSuccess = () => {},
   onFailure = () => {},
   children
@@ -41,7 +45,9 @@ const GiftCreateContainer = ({
     const giftRecipient = {
       email: state.email,
       firstName: state.firstName,
-      lastName: state.lastName
+      lastName: state.lastName,
+      startDate: state.startDate,
+      giftMessage: state.giftMessage
     };
 
     if (!giftRecipient.email) {
@@ -52,11 +58,33 @@ const GiftCreateContainer = ({
           content: t("gift.messages.enterEmail")
         }
       });
-      onFailure();
-    } else {
-      set({ giftRecipient });
-      onSuccess(giftRecipient);
+      return onFailure();
     }
+
+    if (giftRecipient.startDate) {
+      const nowDate = new Date();
+      const yearFromNowDate = new Date(
+        new Date().setFullYear(nowDate.getFullYear() + 1)
+      );
+      const submittedDate = new Date(giftRecipient.startDate);
+
+      if (
+        submittedDate < nowDate ||
+        submittedDate > yearFromNowDate
+      ) {
+        dispatch({
+          type: SHOW_ALERT,
+          payload: {
+            type: "error",
+            content: t("gift.messages.invalidDate")
+          }
+        });
+        return onFailure();
+      }
+    }
+
+    set({ giftRecipient });
+    return onSuccess(giftRecipient);
   };
 
   const [state, dispatch] = useReducerWithSideEffects(
@@ -80,6 +108,18 @@ const GiftCreateContainer = ({
             lastName: action.payload
           });
 
+        case SET_START_DATE:
+          return Update({
+            ...state,
+            startDate: action.payload
+          });
+
+        case SET_GIFT_MESSAGE:
+          return Update({
+            ...state,
+            giftMessage: action.payload
+          });
+
         case SHOW_ALERT:
           return Update({
             ...state,
@@ -101,7 +141,10 @@ const GiftCreateContainer = ({
   );
 
   return (
-    <div style={{ ...style }} className={className}>
+    <div
+      style={{ ...style }}
+      className={`pelcro-container pelcro-gift-create-container ${className}`}
+    >
       <Provider value={{ state, dispatch }}>
         {children.length
           ? children.map((child, i) =>

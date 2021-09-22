@@ -27,7 +27,7 @@ const { Provider } = store;
 
 const PasswordForgotContainer = ({
   style,
-  className,
+  className = "",
   onSuccess = () => {},
   onFailure = () => {},
   children
@@ -97,7 +97,10 @@ const PasswordForgotContainer = ({
   );
 
   return (
-    <div style={{ ...style }} className={className}>
+    <div
+      style={{ ...style }}
+      className={`pelcro-container pelcro-password-forgot-container ${className}`}
+    >
       <Provider value={{ state, dispatch }}>
         {children.length
           ? children.map((child, i) =>

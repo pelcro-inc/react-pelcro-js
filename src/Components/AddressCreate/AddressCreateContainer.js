@@ -53,7 +53,7 @@ const getNewlyCreatedAddress = (addresses) =>
 
 const AddressCreateContainer = ({
   style,
-  className,
+  className = "",
   type = "shipping",
   onGiftRedemptionSuccess = () => {},
   onSuccess = () => {},
@@ -295,7 +295,10 @@ const AddressCreateContainer = ({
   }, [state.country]);
 
   return (
-    <div style={{ ...style }} className={className}>
+    <div
+      style={{ ...style }}
+      className={`pelcro-container pelcro-address-create-container ${className}`}
+    >
       <Provider value={{ state, dispatch }}>
         {children.length
           ? children.map((child, i) =>

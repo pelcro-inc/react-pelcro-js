@@ -1,9 +1,10 @@
 import React from "react";
-import { Tooltip } from "./Tooltip";
 
-export function DatePicker({
+/**
+ *
+ */
+export function TextArea({
   label = "",
-  tooltipText,
   required,
   id,
   errorId,
@@ -18,16 +19,12 @@ export function DatePicker({
     <div className={`pelcro-input-wrapper ${wrapperClassName}`}>
       <label
         htmlFor={id}
-        className={`pelcro-input-label plc-flex plc-items-center ${labelClassName}`}
+        className={`pelcro-input-label ${labelClassName}`}
       >
         {`${label}${required ? "*" : ""}`}
-
-        {tooltipText && (
-          <Tooltip value={tooltipText} className="plc-ml-1" />
-        )}
       </label>
-      <input
-        type="date"
+      <textarea
+        type="text"
         id={id}
         className={`pelcro-input-field ${className} ${
           error ? "pelcro-input-invalid" : ""

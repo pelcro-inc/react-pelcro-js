@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 
 export const PaymentMethodSelectSubmit = ({
   name,
+  onClick,
   ...otherProps
 }) => {
   const { t } = useTranslation("paymentMethod");
@@ -16,10 +17,13 @@ export const PaymentMethodSelectSubmit = ({
 
   return (
     <Button
-      {...otherProps}
-      onClick={() => dispatch({ type: HANDLE_SUBMIT })}
+      onClick={() => {
+        dispatch({ type: HANDLE_SUBMIT });
+        onClick?.();
+      }}
       disabled={!selectedPaymentMethodId}
       isLoading={isSubmitting}
+      {...otherProps}
     >
       {name ?? t("select.buttons.selectPaymentMethod")}
     </Button>

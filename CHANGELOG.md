@@ -1,3 +1,115 @@
+# [2.2.0-beta.20](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.2.0-beta.19...v2.2.0-beta.20) (2021-09-21)
+
+
+### Bug Fixes
+
+* **i18n:** french wording nesting ([d03dbf6](https://github.com/pelcro-inc/react-pelcro-js/commit/d03dbf6401550ad2fd9e8f7783c6174b07d4b235))
+
+# [2.2.0-beta.19](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.2.0-beta.18...v2.2.0-beta.19) (2021-09-20)
+
+
+### Bug Fixes
+
+* minor UI fixes ([#83](https://github.com/pelcro-inc/react-pelcro-js/issues/83)) ([0472f01](https://github.com/pelcro-inc/react-pelcro-js/commit/0472f019cd661b46814e1c284c975c6e33061b3f))
+
+# [2.2.0-beta.18](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.2.0-beta.17...v2.2.0-beta.18) (2021-09-20)
+
+
+### Features
+
+* **gift creation:** add starting date validation on the container ([#82](https://github.com/pelcro-inc/react-pelcro-js/issues/82)) ([a7dee8f](https://github.com/pelcro-inc/react-pelcro-js/commit/a7dee8f930aa03bc4c6e1346761bb38e6a7aeb57))
+
+# [2.2.0-beta.17](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.2.0-beta.16...v2.2.0-beta.17) (2021-09-15)
+
+
+### Bug Fixes
+
+* **tooltip:** use an svg icon instead of the symbol ([4560c49](https://github.com/pelcro-inc/react-pelcro-js/commit/4560c499dc30d4293e3392e91b420e11c2d9fd2d))
+
+# [2.2.0-beta.16](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.2.0-beta.15...v2.2.0-beta.16) (2021-09-15)
+
+
+### Bug Fixes
+
+* **tooltip:** scope tooltip className ([76d3bcb](https://github.com/pelcro-inc/react-pelcro-js/commit/76d3bcb67adf169dd7a274ba5fea77673b9afd34))
+
+# [2.2.0-beta.15](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.2.0-beta.14...v2.2.0-beta.15) (2021-09-15)
+
+
+### Bug Fixes
+
+* **tooltip:** use display hidden to remove from dom ([b1dc490](https://github.com/pelcro-inc/react-pelcro-js/commit/b1dc4900149f8631345245a276e8d3c7a6206244))
+
+# [2.2.0-beta.14](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.2.0-beta.13...v2.2.0-beta.14) (2021-09-14)
+
+
+### Bug Fixes
+
+* **tooltip:** use opacity instead of visibility ([d6700b5](https://github.com/pelcro-inc/react-pelcro-js/commit/d6700b59d98b9c0a3d636ac8529d6af5c8ccfaed))
+
+# [2.2.0-beta.13](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.2.0-beta.12...v2.2.0-beta.13) (2021-09-14)
+
+
+### Bug Fixes
+
+* **tooltip:** wrap css inside tailwind components layer ([4b1ae09](https://github.com/pelcro-inc/react-pelcro-js/commit/4b1ae094d2eaf33c2b6fcc566877e7724c7fa6d7))
+
+# [2.2.0-beta.12](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.2.0-beta.11...v2.2.0-beta.12) (2021-09-14)
+
+
+### Features
+
+* **atoms:** Add a new Tooltip atom component ([897a752](https://github.com/pelcro-inc/react-pelcro-js/commit/897a752628cac627f5d882944495f61ce9a13f18))
+
+# [2.2.0-beta.11](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.2.0-beta.10...v2.2.0-beta.11) (2021-09-13)
+
+
+### Bug Fixes
+
+* **gift creation:** only default the start date on the UI part ([5ea8f95](https://github.com/pelcro-inc/react-pelcro-js/commit/5ea8f95478178aa93327c621d6dbfe171f7206a8))
+
+# [2.2.0-beta.10](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.2.0-beta.9...v2.2.0-beta.10) (2021-09-13)
+
+
+### Features
+
+* add start date & gift message to gift creation fields ([8cdefa4](https://github.com/pelcro-inc/react-pelcro-js/commit/8cdefa4fe1a92cbb3c9567d2ad28f2297ee496ca))
+
+# [2.2.0-beta.9](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.2.0-beta.8...v2.2.0-beta.9) (2021-09-09)
+
+
+### Bug Fixes
+
+* optional extra click handler ([#79](https://github.com/pelcro-inc/react-pelcro-js/issues/79)) ([5a87645](https://github.com/pelcro-inc/react-pelcro-js/commit/5a87645e66c9d5647cfee9727472fd4d1ed8c447))
+
+# [2.2.0-beta.8](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.2.0-beta.7...v2.2.0-beta.8) (2021-09-09)
+
+
+### Features
+
+* improve ability to style several comps ([#78](https://github.com/pelcro-inc/react-pelcro-js/issues/78)) ([d0346b7](https://github.com/pelcro-inc/react-pelcro-js/commit/d0346b73ce8b2105abab8e7ed01163744904e3bd))
+
+# [2.2.0-beta.7](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.2.0-beta.6...v2.2.0-beta.7) (2021-09-08)
+
+
+### Bug Fixes
+
+* **dashboard:** plan text overflow ([#77](https://github.com/pelcro-inc/react-pelcro-js/issues/77)) ([8ca759f](https://github.com/pelcro-inc/react-pelcro-js/commit/8ca759fb7f45c5e0d85b71b6be570da76587b063))
+
+# [2.2.0-beta.6](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.2.0-beta.5...v2.2.0-beta.6) (2021-09-01)
+
+
+### Features
+
+* **containers:** add CSS classes for selectors targetting ([#75](https://github.com/pelcro-inc/react-pelcro-js/issues/75)) ([66f68f6](https://github.com/pelcro-inc/react-pelcro-js/commit/66f68f642e86debbf0ef16c3b6076860f2953515))
+
+# [2.2.0-beta.5](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.2.0-beta.4...v2.2.0-beta.5) (2021-08-30)
+
+
+### Features
+
+* **social login:** add custom label prop to social login buttons ([#73](https://github.com/pelcro-inc/react-pelcro-js/issues/73)) ([fb37b66](https://github.com/pelcro-inc/react-pelcro-js/commit/fb37b664026a13cd7c9e3cef7efe853f7ccec6b2))
+
 # [2.2.0-beta.4](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.2.0-beta.3...v2.2.0-beta.4) (2021-08-23)
 
 

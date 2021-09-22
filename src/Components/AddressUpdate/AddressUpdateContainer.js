@@ -50,7 +50,7 @@ const { Provider } = store;
 
 const AddressUpdateContainer = ({
   style,
-  className,
+  className = "",
   type = "shipping",
   onSuccess = () => {},
   onFailure = () => {},
@@ -267,7 +267,10 @@ const AddressUpdateContainer = ({
   }, [state.country]);
 
   return (
-    <div style={{ ...style }} className={className}>
+    <div
+      style={{ ...style }}
+      className={`pelcro-container pelcro-address-update-container ${className}`}
+    >
       <Provider value={{ state, dispatch }}>
         {children.length
           ? children.map((child, i) =>

@@ -4,7 +4,11 @@ import { Button } from "../../SubComponents/Button";
 import { HANDLE_USER_UPDATE } from "../../utils/action-types";
 import { store } from "./UserUpdateContainer";
 
-export const UserUpdateButton = ({ name, ...otherProps }) => {
+export const UserUpdateButton = ({
+  name,
+  onClick,
+  ...otherProps
+}) => {
   const {
     state: { buttonDisabled },
     dispatch
@@ -14,11 +18,13 @@ export const UserUpdateButton = ({ name, ...otherProps }) => {
 
   return (
     <Button
-      {...otherProps}
-      onClick={() => dispatch({ type: HANDLE_USER_UPDATE })}
+      onClick={() => {
+        dispatch({ type: HANDLE_USER_UPDATE });
+        onClick?.();
+      }}
       disabled={buttonDisabled}
       isLoading={buttonDisabled}
-      className="plc-w-full"
+      {...otherProps}
     >
       {name ?? t("labels.submit")}
     </Button>

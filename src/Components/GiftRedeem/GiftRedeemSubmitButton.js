@@ -4,7 +4,11 @@ import { HANDLE_SUBMIT } from "../../utils/action-types";
 import { Button } from "../../SubComponents/Button";
 import { useTranslation } from "react-i18next";
 
-export const GiftRedeemSubmitButton = ({ name, ...otherProps }) => {
+export const GiftRedeemSubmitButton = ({
+  name,
+  onClick,
+  ...otherProps
+}) => {
   const {
     dispatch,
     state: { disableSubmit }
@@ -14,9 +18,12 @@ export const GiftRedeemSubmitButton = ({ name, ...otherProps }) => {
 
   return (
     <Button
-      {...otherProps}
-      onClick={() => dispatch({ type: HANDLE_SUBMIT })}
+      onClick={() => {
+        dispatch({ type: HANDLE_SUBMIT });
+        onClick?.();
+      }}
       disabled={disableSubmit}
+      {...otherProps}
     >
       {name ?? t("redeem.buttons.redeem")}
     </Button>

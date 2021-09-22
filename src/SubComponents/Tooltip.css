@@ -1,0 +1,10 @@
+@layer components {
+  .pelcro-root .pelcro-tooltip {
+    @apply plc-absolute plc-hidden;
+  }
+
+  .pelcro-root .pelcro-tooltip-container:hover .pelcro-tooltip,
+  .pelcro-root .pelcro-tooltip:hover {
+    @apply plc-z-50 plc-block;
+  }
+}
