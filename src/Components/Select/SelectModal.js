@@ -13,7 +13,7 @@ import { Button } from "../../SubComponents/Button";
 import { Checkbox } from "../../SubComponents/Checkbox";
 import { Radio } from "../../SubComponents/Radio";
 import { usePelcro } from "../../hooks/usePelcro";
-import { getProductsWithEntitlements } from "../../utils/utils";
+import { getEntitlementsFromElem } from "../../utils/utils";
 
 /**
  *
@@ -30,9 +30,18 @@ export function SelectModalWithHook(props) {
     isRenewingGift,
     switchView,
     resetView,
-    set,
-    contentEntitlements
+    view,
+    set
   } = usePelcro();
+
+  const entitlementsProtectedElements = document.querySelectorAll(
+    "[data-entitlements]"
+  );
+
+  const entitlements = getEntitlementsFromElem(
+    entitlementsProtectedElements[0]
+  );
+
   return (
     <SelectModalWithTrans
       isGift={isGift}
@@ -47,7 +56,9 @@ export function SelectModalWithHook(props) {
         set({ product, plan, isGift })
       }
       setView={switchView}
-      contentEntitlements={contentEntitlements}
+      matchingEntitlements={
+        view === "_plan-select-entitlements" ? entitlements : null
+      }
     />
   );
 }
@@ -63,8 +74,10 @@ class SelectModal extends Component {
       isGift: props.isGift,
       disabled: true,
       mode: "product",
-      productList: props.contentEntitlements
-        ? getProductsWithEntitlements(props.contentEntitlements)
+      productList: props.matchingEntitlements
+        ? window.Pelcro.product.getByEntitlements(
+            props.matchingEntitlements
+          )
         : window.Pelcro.product.list()
     };
 

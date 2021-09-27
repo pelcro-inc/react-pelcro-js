@@ -3,19 +3,13 @@ import { usePelcro } from "../../../hooks/usePelcro";
 import { notify } from "../../../SubComponents/Notification";
 import { Trans } from "react-i18next";
 import { Link } from "../../../SubComponents/Link";
-import { getProductsWithEntitlements } from "../../../utils/utils";
+import { getEntitlementsFromElem } from "../../../utils/utils";
 
 export const init = () => {
-  const {
-    whenSiteReady,
-    whenUserReady, //FIXME: use other one
-    view,
-    resetView,
-    switchView,
-    set
-  } = usePelcro.getStore();
+  const { whenSiteReady, view, resetView, switchView, set } =
+    usePelcro.getStore();
 
-  whenUserReady(() => {
+  whenSiteReady(() => {
     const entitlementsProtectedElements = document.querySelectorAll(
       "[data-entitlements]"
     );
@@ -44,7 +38,10 @@ export const init = () => {
         return;
       }
 
-      if (getProductsWithEntitlements(entitlements).length === 0) {
+      if (
+        window.Pelcro.product.getByEntitlements(entitlements)
+          .length === 0
+      ) {
         console.warn(
           "user can't subscribe to any plan that has any of the entitlement(s) needed, this is usually unintentional, make sure that the entitlements are spelled correctly, entitlements are case sensitive. make sure that your plans are configured in a way that allows users from all supported countries, using all supported currencies, to have access to your content by subscribing to certain plans that provide the needed entitlement(s)"
         );
@@ -81,16 +78,13 @@ export const init = () => {
               or more of our plans.
               <Link
                 onClick={() => {
-                  const productsList = window.Pelcro.product.list();
-                  const productId = elem.dataset.productId;
-                  const planId = elem.dataset.planId;
+                  const productId = Number(elem.dataset.productId);
+                  const planId = Number(elem.dataset.planId);
 
-                  const selectedProduct = productsList.find(
-                    (product) => product.id === Number(productId)
-                  );
-                  const selectedPlan = selectedProduct?.plans?.find(
-                    (plan) => plan.id === Number(planId)
-                  );
+                  const selectedProduct =
+                    window.Pelcro.product.getById(productId);
+                  const selectedPlan =
+                    window.Pelcro.plan.getById(planId);
                   const hasValidProductAndPlan = Boolean(
                     selectedProduct && selectedPlan
                   );
@@ -102,7 +96,7 @@ export const init = () => {
                     });
                   }
                   notify.dismiss(NOTIFICATION_ID);
-                  switchView("plan-select");
+                  switchView("_plan-select-entitlements");
                 }}
               >
                 Subscribe
@@ -132,13 +126,6 @@ function allElemsHaveSameEntitlements(elems) {
       elemEntitlements.includes(ent)
     );
   });
-}
-
-function getEntitlementsFromElem(elem) {
-  return elem.dataset.entitlements
-    .split(",")
-    .map((entitlement) => entitlement.trim())
-    .filter((entitlement) => entitlement);
 }
 
 function disableKeyboardInteractions(elem) {
