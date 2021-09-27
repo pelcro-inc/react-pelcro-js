@@ -1,4 +1,12 @@
 # [2.3.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.2.1...v2.3.0) (2021-09-21)
+# [2.2.0-beta.21](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.2.0-beta.20...v2.2.0-beta.21) (2021-09-27)
+
+
+### Bug Fixes
+
+* **pw reset:** password reset flow ([#84](https://github.com/pelcro-inc/react-pelcro-js/issues/84)) ([e6c5e2f](https://github.com/pelcro-inc/react-pelcro-js/commit/e6c5e2f5e66e527cbf6bc480e1bb4b6f123da4a9))
+
+# [2.2.0-beta.20](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.2.0-beta.19...v2.2.0-beta.20) (2021-09-21)
 
 
 ### Bug Fixes

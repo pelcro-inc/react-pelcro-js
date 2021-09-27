@@ -4,7 +4,11 @@ import { Button } from "../../SubComponents/Button";
 import { HANDLE_SUBMIT } from "../../utils/action-types";
 import { store } from "./PasswordResetContainer";
 
-export const PasswordResetButton = ({ name, ...otherProps }) => {
+export const PasswordResetButton = ({
+  name,
+  onClick,
+  ...otherProps
+}) => {
   const {
     state: { buttonDisabled },
     dispatch
