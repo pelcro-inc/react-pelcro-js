@@ -1,4 +1,28 @@
+# [2.4.0-beta.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.3.0...v2.4.0-beta.1) (2021-09-27)
+
+
+### Bug Fixes
+
+* **cart remove btn:** default styling showing wrong color ([f2b890a](https://github.com/pelcro-inc/react-pelcro-js/commit/f2b890a6248554ed9a17d3932178250e7aa79250))
+* **check icon:** use currentColor fill by default ([c116bf5](https://github.com/pelcro-inc/react-pelcro-js/commit/c116bf504c83e68503595188739004d79e06510e))
+* **dashboard:** close icon hidden on Safari ([905c1d0](https://github.com/pelcro-inc/react-pelcro-js/commit/905c1d0bbe1de1543ea0b5df04bffc6e65264ef7))
+* **pw reset:** password reset flow ([#84](https://github.com/pelcro-inc/react-pelcro-js/issues/84)) ([e6c5e2f](https://github.com/pelcro-inc/react-pelcro-js/commit/e6c5e2f5e66e527cbf6bc480e1bb4b6f123da4a9))
+* **user update:** submit button not taking full width ([8d9ed99](https://github.com/pelcro-inc/react-pelcro-js/commit/8d9ed994a36ad30c03eab0eccb787f508328b85b))
+
+
+### Features
+
+* **submit buttons:** allow overriding className + add extra click logic ([ad9af2b](https://github.com/pelcro-inc/react-pelcro-js/commit/ad9af2bc00f0999d18e3e6aa4069c7368e8f4acc))
+
 # [2.3.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.2.1...v2.3.0) (2021-09-21)
+# [2.2.0-beta.21](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.2.0-beta.20...v2.2.0-beta.21) (2021-09-27)
+
+
+### Bug Fixes
+
+* **pw reset:** password reset flow ([#84](https://github.com/pelcro-inc/react-pelcro-js/issues/84)) ([e6c5e2f](https://github.com/pelcro-inc/react-pelcro-js/commit/e6c5e2f5e66e527cbf6bc480e1bb4b6f123da4a9))
+
+# [2.2.0-beta.20](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.2.0-beta.19...v2.2.0-beta.20) (2021-09-21)
 
 
 ### Bug Fixes
