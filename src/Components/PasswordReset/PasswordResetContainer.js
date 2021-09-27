@@ -11,14 +11,18 @@ import {
   SET_CONFIRM_PASSWORD,
   HANDLE_SUBMIT,
   DISABLE_SUBMIT,
-  SHOW_ALERT
+  SHOW_ALERT,
+  SET_PASSWORD_ERROR,
+  SET_CONFIRM_PASSWORD_ERROR
 } from "../../utils/action-types";
 import { getErrorMessages } from "../common/Helpers";
 
 const initialState = {
   email: "",
   password: "",
+  passwordError: null,
   confirmPassword: "",
+  confirmPasswordError: null,
   token: "",
   buttonDisabled: false,
   alert: {
@@ -96,12 +100,26 @@ const PasswordResetContainer = ({
         case SET_PASSWORD:
           return Update({
             ...state,
-            password: action.payload
+            password: action.payload,
+            passwordError: null
           });
         case SET_CONFIRM_PASSWORD:
           return Update({
             ...state,
-            confirmPassword: action.payload
+            confirmPassword: action.payload,
+            confirmPasswordError: null
+          });
+        case SET_PASSWORD_ERROR:
+          return Update({
+            ...state,
+            passwordError: action.payload,
+            password: ""
+          });
+        case SET_CONFIRM_PASSWORD_ERROR:
+          return Update({
+            ...state,
+            confirmPasswordError: action.payload,
+            confirmPassword: ""
           });
         case SET_TOKEN:
           return Update({
