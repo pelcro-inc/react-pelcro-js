@@ -235,6 +235,39 @@ export const userHasPaymentMethod = () => {
   return sources.length > 0;
 };
 
+/**
+ * @param {Array<String>} entitlements plans entitlements to look for
+ * @return {Array<Object>} an array of products, only plans that have at least one
+ * of the passed entitlements are included, if no plan matches this condition,
+ * the product is not included in the array
+ */
+export function getProductsWithEntitlements(entitlements) {
+  return window.Pelcro.product
+    .list()
+    .map((product) => {
+      const matchingPlans = getMatchingPlansOnly(product);
+      if (matchingPlans.length > 0) {
+        return { ...product, plans: matchingPlans };
+      } else {
+        return null;
+      }
+    })
+    .flat()
+    .filter((product) => product);
+
+  function getMatchingPlansOnly(product) {
+    return (
+      product?.plans.filter(hasAtLeastOneMatchingEntitlement) ?? []
+    );
+  }
+
+  function hasAtLeastOneMatchingEntitlement(plan) {
+    return entitlements.some(
+      (ent) => plan.entitlements?.includes(ent) ?? false
+    );
+  }
+}
+
 export const getPaymentCardIcon = (name) => {
   const icons = {
     Visa: (
