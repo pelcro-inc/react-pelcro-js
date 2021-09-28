@@ -1,3 +1,10 @@
+# [2.4.0-beta.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.4.0-beta.1...v2.4.0-beta.2) (2021-09-28)
+
+
+### Features
+
+* entitlements based content ([#85](https://github.com/pelcro-inc/react-pelcro-js/issues/85)) ([bcea71f](https://github.com/pelcro-inc/react-pelcro-js/commit/bcea71fdf2a17ff43e4bb18f6d985209921d25cb))
+
 # [2.4.0-beta.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.3.0...v2.4.0-beta.1) (2021-09-27)
 
 
