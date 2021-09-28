@@ -6,6 +6,7 @@ import {
   getStableViewID,
   isValidViewFromURL
 } from "../../utils/utils";
+import { init as initContentEntitlement } from "../common/contentEntitlement";
 
 /**
  * @typedef {Object} OptionsType
@@ -59,6 +60,8 @@ export const initPaywalls = () => {
 
     if (paywallMethods?.displayMeterPaywall()) {
       switchView("meter");
+      // initializing content entitlement here because it interacts with meter
+      initContentEntitlement();
     } else if (paywallMethods?.displayNewsletterPaywall()) {
       switchView("newsletter");
     } else if (paywallMethods?.displayPaywall()) {

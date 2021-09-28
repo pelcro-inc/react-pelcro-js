@@ -235,6 +235,18 @@ export const userHasPaymentMethod = () => {
   return sources.length > 0;
 };
 
+/**
+ * @param {Element} elem html element with data-entitlements attribute
+ * @return {Array<String>} array of entitlements extracted from the data-entitlements
+ * attribute
+ */
+export const getEntitlementsFromElem = (elem) => {
+  return elem.dataset.entitlements
+    .split(",")
+    .map((entitlement) => entitlement.trim())
+    .filter((entitlement) => entitlement);
+};
+
 export const getPaymentCardIcon = (name) => {
   const icons = {
     Visa: (
