@@ -1,3 +1,10 @@
+# [2.4.0-beta.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.4.0-beta.2...v2.4.0-beta.3) (2021-09-29)
+
+
+### Bug Fixes
+
+* **select modal:** crashing when there are no entitls content ([d82a0d8](https://github.com/pelcro-inc/react-pelcro-js/commit/d82a0d813520f06b08cf96a7cc4616a186aca1ff))
+
 # [2.4.0-beta.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.4.0-beta.1...v2.4.0-beta.2) (2021-09-28)
 
 
