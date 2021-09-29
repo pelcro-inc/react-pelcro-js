@@ -109,8 +109,6 @@ class Dashboard extends Component {
 
   cancelSubscription = (subscription_id, onSuccess, onFailure) => {
     // disable the Login button to prevent repeated clicks
-    this.setState({ disableSubmit: true });
-
     window.Pelcro.subscription.cancel(
       {
         auth_token: window.Pelcro.user.read().auth_token,
@@ -120,8 +118,6 @@ class Dashboard extends Component {
         if (err) {
           return onFailure?.(err);
         }
-
-        this.setState({ disableSubmit: false });
 
         ReactGA?.event?.({
           category: "ACTIONS",
@@ -273,10 +269,18 @@ class Dashboard extends Component {
               this.cancelSubscription(sub.id, onSuccess, onFailure);
             },
             {
-              confirm: this.locale("labels.isSureToCancel"),
-              loading: "Cancelling your subscription",
-              success: "Subscription is successfully cancelled",
-              error: "Error cancelling your subscription"
+              confirmMessage: this.locale(
+                "messages.subCancellation.isSureToCancel"
+              ),
+              loadingMessage: this.locale(
+                "messages.subCancellation.loading"
+              ),
+              successMessage: this.locale(
+                "messages.subCancellation.success"
+              ),
+              errorMessage: this.locale(
+                "messages.subCancellation.error"
+              )
             }
           );
         };

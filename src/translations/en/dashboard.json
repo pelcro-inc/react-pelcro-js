@@ -37,7 +37,6 @@
     "expiresOn": "Ends",
     "renewsOn": "Renews",
     "canceledOn": "Canceled on",
-    "isSureToCancel": "Are you sure you want to cancel your subscription?",
     "recipient": "Recipient",
     "addAddress": "Add address",
     "addSubscription": "New Subscription",
@@ -60,6 +59,12 @@
     }
   },
   "messages": {
-    "noCard": "You don't have a card"
+    "noCard": "You don't have a card",
+    "subCancellation": {
+      "isSureToCancel": "Are you sure you want to cancel your subscription?",
+      "loading": "Cancelling your subscription",
+      "success": "Subscription is successfully cancelled",
+      "error": "Error while cancelling your subscription"
+    }
   }
 }

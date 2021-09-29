@@ -1,11 +1,17 @@
 import React from "react";
-import { default as toast, ToastBar, Toaster } from "react-hot-toast";
+import {
+  default as toast,
+  ToastBar,
+  Toaster,
+  resolveValue
+} from "react-hot-toast";
 import { ReactComponent as CheckIcon } from "../assets/check-solid.svg";
 import { ReactComponent as XIcon } from "../assets/x-icon.svg";
 import { ReactComponent as SolidXIcon } from "../assets/x-icon-solid.svg";
 import { ReactComponent as SolidExclamationIcon } from "../assets/exclamation.svg";
 import { ReactComponent as SpinnerIcon } from "../assets/spinner.svg";
 import { Button } from "./Button";
+import i18n from "../i18n";
 
 export const Notification = ({ children, ...otherProps }) => {
   return (
@@ -14,7 +20,7 @@ export const Notification = ({ children, ...otherProps }) => {
       toastOptions={{
         success: {
           className: "pelcro-notification-success",
-          icon: <CheckIcon className="plc-w-24 plc-h-8" />,
+          icon: <CheckIcon className="plc-w-20 plc-h-8" />,
           iconTheme: {
             primary: "white",
             secondary: "green"
@@ -31,23 +37,18 @@ export const Notification = ({ children, ...otherProps }) => {
         confirm: {
           className: "pelcro-notification-confirm",
           icon: (
-            <SolidExclamationIcon className="plc-w-10 plc-h-10" />
+            <SolidExclamationIcon className="plc-w-20 plc-h-8 plc-text-red-500" />
           ),
-          iconTheme: {
-            primary: "white",
-            secondary: "red"
-          },
-          duration: Infinity
+          duration: Infinity,
+          hideCloseButton: true
         },
         loading: {
           className: "pelcro-notification-loading",
           icon: (
-            <SpinnerIcon className="plc-w-10 plc-h-10 plc-animate-spin" />
+            <SpinnerIcon className="plc-w-8 plc-h-8 plc-animate-spin" />
           ),
-          iconTheme: {
-            primary: "white",
-            secondary: "red"
-          }
+          duration: Infinity,
+          hideCloseButton: true
         }
       }}
       {...otherProps}
@@ -58,10 +59,12 @@ export const Notification = ({ children, ...otherProps }) => {
             <>
               {icon}
               {message}
-              <XIcon
-                className="plc-w-10 plc-h-5 plc-cursor-pointer"
-                onClick={() => toast.dismiss(t.id)}
-              />
+              {!t.hideCloseButton && (
+                <XIcon
+                  className="plc-w-10 plc-h-5 plc-cursor-pointer"
+                  onClick={() => toast.dismiss(t.id)}
+                />
+              )}
             </>
           )}
         </ToastBar>
@@ -83,31 +86,33 @@ toast.warning = (msg, options) =>
     ...options
   });
 
-export const notify = toast;
-
-notify.confirm = (
+toast.confirm = (
   onConfirm,
-  { confirm, loading, success, error },
+  { confirmMessage, loadingMessage, successMessage, errorMessage },
   options
 ) => {
-  const id = notify(
+  const translations = i18n.t("notification:confirm", {
+    returnObjects: true
+  });
+
+  const id = toast(
     (t) => (
       <div className="plc-space-y-4">
-        <p>{confirm}</p>
+        <p className="plc-font-semibold">{confirmMessage}</p>
         <div className="plc-space-y-2 sm:plc-space-y-0 sm:plc-space-x-2">
           <Button
             variant="solid"
-            className="plc-text-xs"
+            className="plc-text-xs plc-bg-red-500 hover:plc-bg-red-600"
             onClick={onConfirmClick}
           >
-            Confirm
+            {translations.labels.confirm}
           </Button>
           <Button
             className="plc-text-xs"
             variant="outline"
-            onClick={() => notify.dismiss(t.id)}
+            onClick={() => toast.dismiss(t.id)}
           >
-            Close
+            {translations.labels.close}
           </Button>
         </div>
       </div>
@@ -124,23 +129,25 @@ notify.confirm = (
   };
 
   const onLoading = () => {
-    notify.loading(loading, {
+    toast.loading(loadingMessage, {
       id,
       ...options
     });
   };
 
-  const onSuccess = () => {
-    notify.success(success, {
+  const onSuccess = (successValue) => {
+    toast.success(resolveValue(successMessage, successValue), {
       id,
       ...options
     });
   };
 
-  const onFailure = () => {
-    notify.error(error, {
+  const onFailure = (errorValue) => {
+    toast.error(resolveValue(errorMessage, errorValue), {
       id,
       ...options
     });
   };
 };
+
+export const notify = toast;

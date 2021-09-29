@@ -1,18 +1,26 @@
 {
-    "labels": {
-        "continue": "Abonnement réussi !"
+  "labels": {
+    "continue": "Abonnement réussi !"
+  },
+  "messages": {
+    "yourFreeTrial": "Votre essai gratuit vient de débuter",
+    "youHaveAccess": "Nous espérons que vous allez apprécier votre abonnement. Veuillez nous contacter si vous avez des questions ou des préoccupations.",
+    "clickToLearn": {
+      "click": "cliquez",
+      "here": "ici",
+      "toLearn": "pour en savoir plus ou contactez-nous à",
+      "forQuestion": "pour toute question."
     },
-    "messages": {
-        "yourFreeTrial": "Votre essai gratuit vient de débuter",
-        "youHaveAccess": "Nous espérons que vous allez apprécier votre abonnement. Veuillez nous contacter si vous avez des questions ou des préoccupations.",
-        "clickToLearn": {
-            "click": "cliquez",
-            "here": "ici",
-            "toLearn": "pour en savoir plus ou contactez-nous à",
-            "forQuestion": "pour toute question."
-        }
+    "giftCreate": {
+      "title": "Your Gift has been sent",
+      "content": "Le cadeau d’abonnement a été envoyé à {{email}} avec succès."
     },
-    "errors": {
-        "": ""
+    "giftRedeem": {
+      "title": "Congratulations",
+      "content": "You have successfully redeemed your gift subscription. Enjoy!"
     }
+  },
+  "errors": {
+    "": ""
+  }
 }
