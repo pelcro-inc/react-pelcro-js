@@ -13,6 +13,7 @@ import { Button } from "../../SubComponents/Button";
 import { Checkbox } from "../../SubComponents/Checkbox";
 import { Radio } from "../../SubComponents/Radio";
 import { usePelcro } from "../../hooks/usePelcro";
+import { getEntitlementsFromElem } from "../../utils/utils";
 
 /**
  *
@@ -29,8 +30,18 @@ export function SelectModalWithHook(props) {
     isRenewingGift,
     switchView,
     resetView,
+    view,
     set
   } = usePelcro();
+
+  const entitlementsProtectedElements = document.querySelectorAll(
+    "[data-entitlements]"
+  );
+
+  const entitlements = getEntitlementsFromElem(
+    entitlementsProtectedElements[0]
+  );
+
   return (
     <SelectModalWithTrans
       isGift={isGift}
@@ -45,6 +56,9 @@ export function SelectModalWithHook(props) {
         set({ product, plan, isGift })
       }
       setView={switchView}
+      matchingEntitlements={
+        view === "_plan-select-entitlements" ? entitlements : null
+      }
     />
   );
 }
@@ -60,7 +74,11 @@ class SelectModal extends Component {
       isGift: props.isGift,
       disabled: true,
       mode: "product",
-      productList: window.Pelcro.product.list()
+      productList: props.matchingEntitlements
+        ? window.Pelcro.product.getByEntitlements(
+            props.matchingEntitlements
+          )
+        : window.Pelcro.product.list()
     };
 
     this.product =
@@ -101,9 +119,8 @@ class SelectModal extends Component {
   };
 
   onProductChange = (e) => {
-    const product = window.Pelcro.product.list()[
-      e.target.selectedIndex
-    ];
+    const product =
+      window.Pelcro.product.list()[e.target.selectedIndex];
     this.setState({ product: product, plan: product.plans[0] });
   };
 
@@ -264,10 +281,8 @@ class SelectModal extends Component {
     const { setView } = this.props;
     const isAuthenticated = window.Pelcro.user.isAuthenticated();
 
-    const {
-      switchToAddressView,
-      switchToPaymentView
-    } = usePelcro.getStore();
+    const { switchToAddressView, switchToPaymentView } =
+      usePelcro.getStore();
 
     if (!isAuthenticated) {
       return setView("register");
@@ -389,6 +404,5 @@ SelectModal.propTypes = {
   subscribe: PropTypes.func
 };
 
-export const SelectModalWithTrans = withTranslation("select")(
-  SelectModal
-);
+export const SelectModalWithTrans =
+  withTranslation("select")(SelectModal);
