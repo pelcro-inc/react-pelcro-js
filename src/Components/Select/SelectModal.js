@@ -38,9 +38,10 @@ export function SelectModalWithHook(props) {
     "[data-entitlements]"
   );
 
-  const entitlements = getEntitlementsFromElem(
-    entitlementsProtectedElements[0]
-  );
+  const entitlements =
+    entitlementsProtectedElements.length > 0
+      ? getEntitlementsFromElem(entitlementsProtectedElements[0])
+      : null;
 
   return (
     <SelectModalWithTrans
