@@ -19,20 +19,11 @@ export function SubscriptionCreateModal({
   ...otherProps
 }) {
   const { t } = useTranslation("common");
-  const { switchView, resetView, giftRecipient } = usePelcro();
+  const { switchView } = usePelcro();
 
   const onSuccess = (res) => {
     otherProps.onSuccess?.(res);
     trackSubscriptionOnGA();
-
-    if (giftRecipient) {
-      window.alert(
-        `${t("confirm.giftSent")} ${giftRecipient.email} ${t(
-          "confirm.successfully"
-        )}`
-      );
-      return resetView();
-    }
 
     return switchView("subscription-success");
   };

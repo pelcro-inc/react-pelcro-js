@@ -90,7 +90,6 @@ const AddressSelectContainer = ({
           return onFailure(err);
         }
 
-        alert(t("messages.subRedeemed"));
         return onGiftRedemptionSuccess(res);
       }
     );
