@@ -12,7 +12,7 @@
       "forQuestion": "for any questions."
     },
     "giftCreate": {
-      "title": "Your Gift has been sent",
+      "title": "Your gift has been sent",
       "content": "The gift will be sent to {{email}} on the date you specified."
     },
     "giftRedeem": {
