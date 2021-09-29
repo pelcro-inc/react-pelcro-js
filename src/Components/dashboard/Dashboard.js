@@ -26,6 +26,7 @@ import userSolidIcon from "../../assets/user-solid.svg";
 import { OrdersMenu } from "./DashboardMenus/OrdersMenu";
 import { SavedItemsMenu } from "./DashboardMenus/SavedItemsMenu";
 import { usePelcro } from "../../hooks/usePelcro";
+import { notify } from "../../SubComponents/Notification";
 
 const SUB_MENUS = {
   PROFILE: "profile",
@@ -106,7 +107,7 @@ class Dashboard extends Component {
     if (addresses) this.setState({ addresses: addresses });
   };
 
-  cancelSubscription = (subscription_id) => {
+  cancelSubscription = (subscription_id, onSuccess, onFailure) => {
     // disable the Login button to prevent repeated clicks
     this.setState({ disableSubmit: true });
 
@@ -116,6 +117,10 @@ class Dashboard extends Component {
         subscription_id: subscription_id
       },
       (err, res) => {
+        if (err) {
+          return onFailure?.(err);
+        }
+
         this.setState({ disableSubmit: false });
 
         ReactGA?.event?.({
@@ -123,8 +128,7 @@ class Dashboard extends Component {
           action: "Canceled",
           nonInteraction: true
         });
-
-        this.props.onClose();
+        onSuccess?.(res);
       }
     );
   };
@@ -263,13 +267,18 @@ class Dashboard extends Component {
       .map((sub) => {
         // Cancel button click handlers
         const onCancelClick = () => {
-          const confirmation = window.confirm(
-            this.locale("labels.isSureToCancel")
+          this.props.onClose();
+          notify.confirm(
+            (onSuccess, onFailure) => {
+              this.cancelSubscription(sub.id, onSuccess, onFailure);
+            },
+            {
+              confirm: this.locale("labels.isSureToCancel"),
+              loading: "Cancelling your subscription",
+              success: "Subscription is successfully cancelled",
+              error: "Error cancelling your subscription"
+            }
           );
-
-          if (confirmation === true) {
-            this.cancelSubscription(sub.id);
-          }
         };
 
         // Reactivate button click handlers
