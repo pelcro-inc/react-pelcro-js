@@ -1,3 +1,10 @@
+# [2.4.0-beta.4](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.4.0-beta.3...v2.4.0-beta.4) (2021-10-01)
+
+
+### Features
+
+* **register:** add optional name fields ([#87](https://github.com/pelcro-inc/react-pelcro-js/issues/87)) ([1aad1b6](https://github.com/pelcro-inc/react-pelcro-js/commit/1aad1b6336d2341dce7cfaeca22f33db1ccc95a2))
+
 # [2.4.0-beta.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.4.0-beta.2...v2.4.0-beta.3) (2021-09-29)
 
 
