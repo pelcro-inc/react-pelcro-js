@@ -5,11 +5,13 @@
     "signUpFacebook": "Sign up with Facebook",
     "signUpGoogle": "Sign up with Google",
     "signUpEmail": "Sign up with Email",
-    "password": "Create password",
-    "email": "Enter email",
+    "password": "Password",
+    "email": "Email",
     "passwordPlaceholder": "Create password",
     "emailPlaceholder": "Enter email",
-    "required": "required"
+    "required": "required",
+    "firstName": "First name",
+    "lastName": "Last name"
   },
   "messages": {
     "alreadyHaveAccount": "Already have an account?",
