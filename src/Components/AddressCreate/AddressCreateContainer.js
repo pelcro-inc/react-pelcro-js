@@ -155,6 +155,11 @@ const AddressCreateContainer = ({
           set({ selectedAddressId: newAddressId });
         }
 
+        if (!giftCode) {
+          dispatch({ type: LOADING, payload: false });
+          return onSuccess(newAddressId);
+        }
+
         if (giftCode) {
           window.Pelcro.subscription.redeemGift(
             {
@@ -178,14 +183,10 @@ const AddressCreateContainer = ({
                 return onFailure(err);
               }
 
-              alert(t("messages.subRedeemed"));
               return onGiftRedemptionSuccess(res);
             }
           );
         }
-
-        dispatch({ type: LOADING, payload: false });
-        return onSuccess(newAddressId);
       }
     );
   };

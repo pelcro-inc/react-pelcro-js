@@ -1,17 +1,25 @@
 @layer components {
   .pelcro-root .pelcro-notification-error {
-    @apply plc-font-semibold plc-text-sm plc-bg-red-500  plc-text-white;
+    @apply plc-text-sm plc-font-semibold plc-text-white plc-bg-red-500;
   }
 
   .pelcro-root .pelcro-notification-success {
-    @apply plc-font-semibold plc-text-sm plc-bg-green-500 plc-text-white;
+    @apply plc-text-sm plc-font-semibold plc-text-white plc-bg-green-500;
+  }
+
+  .pelcro-root .pelcro-notification-confirm {
+    @apply plc-space-x-4 plc-text-sm plc-font-semibold plc-bg-white;
+  }
+
+  .pelcro-root .pelcro-notification-loading {
+    @apply plc-space-x-4 plc-text-sm plc-font-semibold;
   }
 
   .pelcro-root .pelcro-notification-warning {
-    @apply plc-font-semibold plc-text-sm plc-bg-yellow-500 plc-text-white;
+    @apply plc-text-sm plc-font-semibold plc-text-white plc-bg-yellow-500;
   }
 
   .pelcro-root .pelcro-notification-entitlement {
-    @apply plc-font-semibold plc-text-sm plc-bg-white plc-text-gray-600 plc-border-t-8 plc-border-primary-500;
+    @apply plc-text-sm plc-font-semibold plc-text-gray-600 plc-bg-white plc-border-t-8 plc-border-primary-500;
   }
 }

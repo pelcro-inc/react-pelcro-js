@@ -1,18 +1,26 @@
 {
-    "labels": {
-        "continue": "Continue to content"
+  "labels": {
+    "continue": "Continue to content"
+  },
+  "messages": {
+    "yourFreeTrial": "Subscription successful!",
+    "youHaveAccess": "Hope you enjoy the subscription. Please contact us if you have any questions or concerns.",
+    "clickToLearn": {
+      "click": "Click",
+      "here": "here",
+      "toLearn": "to learn more or contact us at",
+      "forQuestion": "for any questions."
     },
-    "messages": {
-        "yourFreeTrial": "Subscription successful!",
-        "youHaveAccess": "Hope you enjoy the subscription. Please contact us if you have any questions or concerns.",
-        "clickToLearn": {
-            "click": "Click",
-            "here": "here",
-            "toLearn": "to learn more or contact us at",
-            "forQuestion": "for any questions."
-        }
+    "giftCreate": {
+      "title": "Your gift has been sent",
+      "content": "The gift will be sent to {{email}} on the date you specified."
     },
-    "errors": {
-        "": ""
+    "giftRedeem": {
+      "title": "Congratulations",
+      "content": "You have successfully redeemed your gift subscription. Enjoy!"
     }
+  },
+  "errors": {
+    "": ""
+  }
 }

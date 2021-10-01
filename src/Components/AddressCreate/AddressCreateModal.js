@@ -13,7 +13,7 @@ export const AddressCreateModal = ({
   onClose,
   ...otherProps
 }) => {
-  const { resetView, switchToPaymentView } = usePelcro();
+  const { switchView, switchToPaymentView } = usePelcro();
 
   const onSuccess = (newAddressId) => {
     otherProps.onSuccess?.(newAddressId);
@@ -23,7 +23,7 @@ export const AddressCreateModal = ({
 
   const onGiftRedemptionSuccess = () => {
     otherProps.onGiftRedemptionSuccess?.();
-    resetView();
+    switchView("subscription-success");
   };
 
   return (

@@ -26,6 +26,7 @@ import userSolidIcon from "../../assets/user-solid.svg";
 import { OrdersMenu } from "./DashboardMenus/OrdersMenu";
 import { SavedItemsMenu } from "./DashboardMenus/SavedItemsMenu";
 import { usePelcro } from "../../hooks/usePelcro";
+import { notify } from "../../SubComponents/Notification";
 
 const SUB_MENUS = {
   PROFILE: "profile",
@@ -106,25 +107,24 @@ class Dashboard extends Component {
     if (addresses) this.setState({ addresses: addresses });
   };
 
-  cancelSubscription = (subscription_id) => {
+  cancelSubscription = (subscription_id, onSuccess, onFailure) => {
     // disable the Login button to prevent repeated clicks
-    this.setState({ disableSubmit: true });
-
     window.Pelcro.subscription.cancel(
       {
         auth_token: window.Pelcro.user.read().auth_token,
         subscription_id: subscription_id
       },
       (err, res) => {
-        this.setState({ disableSubmit: false });
+        if (err) {
+          return onFailure?.(err);
+        }
 
         ReactGA?.event?.({
           category: "ACTIONS",
           action: "Canceled",
           nonInteraction: true
         });
-
-        this.props.onClose();
+        onSuccess?.(res);
       }
     );
   };
@@ -263,13 +263,26 @@ class Dashboard extends Component {
       .map((sub) => {
         // Cancel button click handlers
         const onCancelClick = () => {
-          const confirmation = window.confirm(
-            this.locale("labels.isSureToCancel")
+          this.props.onClose();
+          notify.confirm(
+            (onSuccess, onFailure) => {
+              this.cancelSubscription(sub.id, onSuccess, onFailure);
+            },
+            {
+              confirmMessage: this.locale(
+                "messages.subCancellation.isSureToCancel"
+              ),
+              loadingMessage: this.locale(
+                "messages.subCancellation.loading"
+              ),
+              successMessage: this.locale(
+                "messages.subCancellation.success"
+              ),
+              errorMessage: this.locale(
+                "messages.subCancellation.error"
+              )
+            }
           );
-
-          if (confirmation === true) {
-            this.cancelSubscription(sub.id);
-          }
         };
 
         // Reactivate button click handlers

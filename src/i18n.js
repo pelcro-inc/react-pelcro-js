@@ -38,6 +38,8 @@ import dashboard_en from "./translations/en/dashboard.json";
 import dashboard_fr from "./translations/fr/dashboard.json";
 import select_en from "./translations/en/select.json";
 import select_fr from "./translations/fr/select.json";
+import notification_en from "./translations/en/notification.json";
+import notification_fr from "./translations/fr/notification.json";
 import { getCanonicalLocaleFormat } from "./utils/utils";
 
 const resources = {
@@ -60,7 +62,8 @@ const resources = {
     shop: shop_en,
     payment: payment_en,
     dashboard: dashboard_en,
-    select: select_en
+    select: select_en,
+    notification: notification_en
   },
   "fr-CA": {
     common: common_fr,
@@ -81,7 +84,8 @@ const resources = {
     shop: shop_fr,
     payment: payment_fr,
     dashboard: dashboard_fr,
-    select: select_fr
+    select: select_fr,
+    notification: notification_fr
   }
 };
 
