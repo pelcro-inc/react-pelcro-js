@@ -7,9 +7,11 @@
     "signUpEmail": "Inscrivez-vous avec votre courriel",
     "password": "Créer un mot de passe",
     "email": "Courriel",
-    "passwordPlaceholder": "Créer un mot de passe",
+    "passwordPlaceholder": "Mot de passe",
     "emailPlaceholder": "Courriel",
-    "required": "Champs obligatoires"
+    "required": "Champs obligatoires",
+    "firstName": "Prénom",
+    "lastName": "Nom de famille"
   },
   "messages": {
     "alreadyHaveAccount": "Vous avez déjà un compte?",

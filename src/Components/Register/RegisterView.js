@@ -4,6 +4,8 @@ import { RegisterContainer } from "./RegisterContainer";
 import { RegisterEmail } from "./RegisterEmail";
 import { RegisterPassword } from "./RegisterPassword";
 import { RegisterButton } from "./RegisterButton";
+import { RegisterFirstName } from "./RegisterFirstName";
+import { RegisterLastName } from "./RegisterLastName";
 import { AlertWithContext } from "../../SubComponents/AlertWithContext";
 import { usePelcro } from "../../hooks/usePelcro";
 import { FacebookLoginButton } from "../common/FacebookLoginButton/FacebookLoginButton";
@@ -22,6 +24,8 @@ export function RegisterView(props) {
   const socialLoginEnabled =
     window.Pelcro.site.read()?.facebook_app_id ||
     window.Pelcro.site.read()?.google_app_id;
+  const showNameFields =
+    window.Pelcro?.uiSettings?.enableNameFieldsInRegister;
 
   return (
     <div id="pelcro-register-view">
@@ -35,6 +39,19 @@ export function RegisterView(props) {
       >
         <RegisterContainer {...props}>
           <AlertWithContext />
+          {showNameFields && (
+            <div className="plc-flex plc-items-start">
+              <RegisterFirstName
+                id="pelcro-input-first-name"
+                label={t("labels.firstName")}
+              />
+              <RegisterLastName
+                wrapperClassName="plc-ml-3"
+                id="pelcro-input-last-name"
+                label={t("labels.lastName")}
+              />
+            </div>
+          )}
           <RegisterEmail
             id="pelcro-input-email"
             errorId="pelcro-input-email-error"
