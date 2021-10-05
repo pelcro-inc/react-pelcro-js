@@ -181,14 +181,27 @@ class Dashboard extends Component {
     }
 
     if (subscription.cancel_at_period_end) {
-      return `${this.locale("labels.expiresOn")} ${
-        subscription.current_period_end
-      }`;
+      // DateTime from BE is missing 3 zeros so we add them before instancing a date
+      const expiryDate = new Date(
+        Number(`${subscription.expires_at}000`)
+      );
+      const formattedExpiryDate = new Intl.DateTimeFormat(
+        "en-CA"
+      ).format(expiryDate);
+
+      return `${this.locale(
+        "labels.expiresOn"
+      )} ${formattedExpiryDate}`;
     }
 
-    return `${this.locale("labels.renewsOn")} ${
-      subscription.current_period_end
-    }`;
+    const renewDate = new Date(
+      Number(`${subscription.renews_at}000`)
+    );
+    const formattedRenewDate = new Intl.DateTimeFormat(
+      "en-CA"
+    ).format(renewDate);
+
+    return `${this.locale("labels.renewsOn")} ${formattedRenewDate}`;
   };
 
   reactivateSubscription = (subscription_id) => {
