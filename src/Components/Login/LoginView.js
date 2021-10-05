@@ -42,15 +42,17 @@ export function LoginView(props) {
             required
             label={t("labels.password")}
           />
-          <Link
-            className="plc-flex plc-items-end plc-justify-end plc-text-sm plc-cursor-default plc-h-9"
-            id="pelcro-link-forgot-password"
-            onClick={props.onForgotPassword}
-          >
-            <span className="plc-cursor-pointer">
-              {t("messages.forgotPassword")}
-            </span>
-          </Link>
+          <div className="plc-flex plc-flex-row-reverse">
+            <Link
+              className="plc-inline-flex plc-items-end plc-text-sm plc-cursor-default plc-h-9"
+              id="pelcro-link-forgot-password"
+              onClick={props.onForgotPassword}
+            >
+              <span className="plc-cursor-pointer">
+                {t("messages.forgotPassword")}
+              </span>
+            </Link>
+          </div>
           <LoginButton
             role="submit"
             className="plc-w-full plc-mt-2"

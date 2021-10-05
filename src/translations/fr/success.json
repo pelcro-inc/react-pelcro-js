@@ -12,12 +12,12 @@
       "forQuestion": "pour toute question."
     },
     "giftCreate": {
-      "title": "Your Gift has been sent",
+      "title": "Votre cadeau a été envoyé",
       "content": "Le cadeau d’abonnement a été envoyé à {{email}} avec succès."
     },
     "giftRedeem": {
-      "title": "Congratulations",
-      "content": "You have successfully redeemed your gift subscription. Enjoy!"
+      "title": "Félicitations",
+      "content": "Vous avez validé votre abonnement cadeau. Profitez-en!"
     }
   },
   "errors": {

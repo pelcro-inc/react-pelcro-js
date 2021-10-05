@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "../../SubComponents/Button";
 import { ReactComponent as CheckMark } from "../../assets/check-solid.svg";

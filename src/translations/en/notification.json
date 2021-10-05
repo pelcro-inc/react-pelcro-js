@@ -1,8 +1,8 @@
 {
   "confirm": {
     "labels": {
-      "confirm": "confirm",
-      "close": "close"
+      "confirm": "Confirm",
+      "close": "Close"
     }
   }
 }

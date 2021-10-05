@@ -61,10 +61,10 @@
   "messages": {
     "noCard": "Vous n’avez pas une carte",
     "subCancellation": {
-      "isSureToCancel": "Are you sure you want to cancel your subscription?",
-      "loading": "Cancelling your subscription",
-      "success": "Subscription is successfully cancelled",
-      "error": "Error while cancelling your subscription"
+      "isSureToCancel": "Êtes-vous certain de vouloir annuler votre abonnement?",
+      "loading": "Annulation de l'abonnement",
+      "success": "L'abonnement a été annulé avec succès",
+      "error": "Une erreure s'est produite lors de l'annulation de l'abonnement"
     }
   }
 }
