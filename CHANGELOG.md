@@ -1,3 +1,10 @@
+# [2.4.0-beta.6](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.4.0-beta.5...v2.4.0-beta.6) (2021-10-05)
+
+
+### Features
+
+* **textarea:** add tooltip text support ([#92](https://github.com/pelcro-inc/react-pelcro-js/issues/92)) ([2cc52fc](https://github.com/pelcro-inc/react-pelcro-js/commit/2cc52fcf2cc55e9b8cfc256f8c98c5391c937ad5))
+
 # [2.4.0-beta.5](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.4.0-beta.4...v2.4.0-beta.5) (2021-10-05)
 
 
