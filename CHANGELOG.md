@@ -1,3 +1,10 @@
+# [2.4.0-beta.5](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.4.0-beta.4...v2.4.0-beta.5) (2021-10-05)
+
+
+### Features
+
+* **dashboard:** use phase sensitive dates in subscription section ([#91](https://github.com/pelcro-inc/react-pelcro-js/issues/91)) ([0d7b9c0](https://github.com/pelcro-inc/react-pelcro-js/commit/0d7b9c0b7e1a83006e4993aefd67fcbe178abb04))
+
 # [2.4.0-beta.4](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.4.0-beta.3...v2.4.0-beta.4) (2021-10-01)
 
 
