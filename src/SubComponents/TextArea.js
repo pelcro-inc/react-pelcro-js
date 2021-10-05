@@ -1,10 +1,12 @@
 import React from "react";
+import { Tooltip } from "./Tooltip";
 
 /**
  *
  */
 export function TextArea({
   label = "",
+  tooltipText,
   required,
   id,
   errorId,
@@ -19,9 +21,13 @@ export function TextArea({
     <div className={`pelcro-input-wrapper ${wrapperClassName}`}>
       <label
         htmlFor={id}
-        className={`pelcro-input-label ${labelClassName}`}
+        className={`pelcro-input-label plc-flex plc-items-center ${labelClassName}`}
       >
         {`${label}${required ? "*" : ""}`}
+
+        {tooltipText && (
+          <Tooltip value={tooltipText} className="plc-ml-1" />
+        )}
       </label>
       <textarea
         type="text"

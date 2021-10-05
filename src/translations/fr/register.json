@@ -60,7 +60,8 @@
     "messages": {
       "enterEmail": "Veuillez entrer l’adresse courriel du destinataire du cadeau.",
       "invalidDate": "La date du cadeau doit être comprise entre aujourd'hui et un an.",
-      "giftDateInfo": "Le destinataire recevra un courriel à la date déterminée afin d'activer leur abonnement cadeau."
+      "giftDateInfo": "Le destinataire recevra un courriel à la date déterminée afin d'activer leur abonnement cadeau.",
+      "giftMessageInfo": "Laissez un message au destinataire sans oublier de signer votre nom."
     }
   },
   "redeem": {
