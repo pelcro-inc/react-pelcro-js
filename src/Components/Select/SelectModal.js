@@ -249,6 +249,12 @@ class SelectModal extends Component {
         this.setState({ product: product });
         this.setState({ planList: product.plans });
         this.setState({ mode: "plan" });
+        const isSelectedPlanPartOfThisProduct =
+          this.state.plan?.product_id === Number(product.id);
+
+        if (isSelectedPlanPartOfThisProduct) {
+          this.setState({ disabled: false });
+        }
       }
     }
   };
