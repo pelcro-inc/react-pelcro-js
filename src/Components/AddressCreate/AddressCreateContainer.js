@@ -213,13 +213,16 @@ const AddressCreateContainer = ({
             isStateLoading: true
           });
 
-        case GET_STATES_SUCCESS:
+        case GET_STATES_SUCCESS: {
+          const stateKeys = Object.keys(action.payload.states);
+
           return Update({
             ...state,
             states: action.payload,
+            state: stateKeys?.[0],
             isStateLoading: false
           });
-
+        }
         case SET_TEXT_FIELD:
           return Update({
             ...state,
