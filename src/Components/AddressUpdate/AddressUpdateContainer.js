@@ -183,12 +183,21 @@ const AddressUpdateContainer = ({
             isStateLoading: true
           });
 
-        case GET_STATES_SUCCESS:
+        case GET_STATES_SUCCESS: {
+          const stateKeys = Object.keys(action.payload.states);
+          const isSelectedStatePartOfCountry = stateKeys?.includes?.(
+            state.state
+          );
+
           return Update({
             ...state,
             states: action.payload,
-            isStateLoading: false
+            isStateLoading: false,
+            ...(!isSelectedStatePartOfCountry && {
+              state: stateKeys?.[0]
+            })
           });
+        }
 
         case SET_TEXT_FIELD:
           return Update({
