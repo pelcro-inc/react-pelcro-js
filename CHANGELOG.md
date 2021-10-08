@@ -1,3 +1,11 @@
+# [2.4.0-beta.7](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.4.0-beta.6...v2.4.0-beta.7) (2021-10-08)
+
+
+### Bug Fixes
+
+* **address:** stale state select field when update country select field ([c548386](https://github.com/pelcro-inc/react-pelcro-js/commit/c548386ccd5e61881d59b8d0f4a758885a05460d))
+* **select:** next button disabled when go back and reselect same product ([9988388](https://github.com/pelcro-inc/react-pelcro-js/commit/9988388f7a4f72117dc097928419430576c9c2a6))
+
 # [2.4.0-beta.6](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.4.0-beta.5...v2.4.0-beta.6) (2021-10-05)
 
 
