@@ -13,7 +13,7 @@
     },
     "giftCreate": {
       "title": "Your gift has been sent",
-      "content": "The gift will be sent to {{email}} on the date you specified."
+      "content": "Your recipient will receive an email with instructions to redeem their gift soon."
     },
     "giftRedeem": {
       "title": "Congratulations",

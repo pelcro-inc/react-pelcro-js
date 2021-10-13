@@ -13,7 +13,7 @@
     },
     "giftCreate": {
       "title": "Votre cadeau a été envoyé",
-      "content": "Le cadeau d’abonnement a été envoyé à {{email}} avec succès."
+      "content": "Le cadeau d'abonnement a été envoyé avec succès."
     },
     "giftRedeem": {
       "title": "Félicitations",

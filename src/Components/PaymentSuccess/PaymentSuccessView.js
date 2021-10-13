@@ -45,7 +45,7 @@ const getCurrentFlow = () => {
 
 const getSuccessContent = (i18n) => {
   const flow = getCurrentFlow();
-  const { product, giftRecipient } = usePelcro.getStore();
+  const { product } = usePelcro.getStore();
 
   const wordingDictionary = {
     subscriptionSuccess: {
@@ -60,9 +60,7 @@ const getSuccessContent = (i18n) => {
         <GiftIcon className="plc-w-32 plc-my-4 plc-text-gray-400" />
       ),
       successTitle: i18n("messages.giftCreate.title"),
-      successContent: i18n("messages.giftCreate.content", {
-        email: giftRecipient?.email
-      })
+      successContent: i18n("messages.giftCreate.content")
     },
     giftRedeem: {
       successIcon: (
