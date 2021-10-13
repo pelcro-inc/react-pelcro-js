@@ -1,3 +1,25 @@
+# [2.4.0-beta.8](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.4.0-beta.7...v2.4.0-beta.8) (2021-10-13)
+
+
+### Bug Fixes
+
+* **content entitle:** incorrect SDK method name ([2d4d9b7](https://github.com/pelcro-inc/react-pelcro-js/commit/2d4d9b7ea8fcf0f1a19c5c8af758554850cc30eb))
+* **entitelments:** change data attribue to data-pelcro-entitlements ([3eb0270](https://github.com/pelcro-inc/react-pelcro-js/commit/3eb0270122e25bf3288de39784670c2223ede301))
+* **select modal:** crashing when there are no entitls content ([587f75e](https://github.com/pelcro-inc/react-pelcro-js/commit/587f75edb290648c2516535cafa5d4e1bbeddc84))
+
+
+### Features
+
+* **content entitl.:** change styling + prioritize over meter ([aeb6e21](https://github.com/pelcro-inc/react-pelcro-js/commit/aeb6e21c93475468be3d630402ad8d5d63347d95))
+* **content entitl.:** close notification after clicking on link ([9c79dc1](https://github.com/pelcro-inc/react-pelcro-js/commit/9c79dc138bb647ce6c3b6018991c2cf2e7692206))
+* **content entitl.:** init feature in service instead of controller ([e58dcf8](https://github.com/pelcro-inc/react-pelcro-js/commit/e58dcf88feb08d1a4f064f9fa6469926a87a4bb4))
+* **content entitlements:** update notification message ([4e85b92](https://github.com/pelcro-inc/react-pelcro-js/commit/4e85b928d8bc1a712c2e6910dc28d679c6e632a0))
+* **entitlements:** add util to filter prods by entitlement ([9c40bf2](https://github.com/pelcro-inc/react-pelcro-js/commit/9c40bf26d65de17b0b71b251a4bd374e21e2b3b3))
+* **entitlements:** handle hard-coded combo + improve error handling ([a509b0b](https://github.com/pelcro-inc/react-pelcro-js/commit/a509b0b9c4a2dd60f5412633f575ca3c1de72773))
+* **notification comp:** add warning notification + close button ([e3b87b2](https://github.com/pelcro-inc/react-pelcro-js/commit/e3b87b2f418e57ad461c6ea1d9ecc111c1908caa))
+* **select modal:** allow filter plans by entitlements ([b247753](https://github.com/pelcro-inc/react-pelcro-js/commit/b24775323965a98fad8bf62a53437610b0217cac))
+* add ability to blur content based on entitlements ([7c554d5](https://github.com/pelcro-inc/react-pelcro-js/commit/7c554d52a142362cdb8aed78eadf4e07721acdaa))
+
 # [2.4.0-beta.7](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.4.0-beta.6...v2.4.0-beta.7) (2021-10-08)
 
 
