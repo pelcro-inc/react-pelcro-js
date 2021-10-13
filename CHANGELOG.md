@@ -1,3 +1,10 @@
+# [2.4.0-beta.9](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.4.0-beta.8...v2.4.0-beta.9) (2021-10-13)
+
+
+### Bug Fixes
+
+* **payment success:** replace wording and change gift icon ([#95](https://github.com/pelcro-inc/react-pelcro-js/issues/95)) ([eb6dad9](https://github.com/pelcro-inc/react-pelcro-js/commit/eb6dad9a47ff9f6d565c5d22733d9da3837b9ff7))
+
 # [2.4.0-beta.8](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.4.0-beta.7...v2.4.0-beta.8) (2021-10-13)
 
 
