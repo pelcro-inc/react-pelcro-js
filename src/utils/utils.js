@@ -236,12 +236,12 @@ export const userHasPaymentMethod = () => {
 };
 
 /**
- * @param {Element} elem html element with data-entitlements attribute
- * @return {Array<String>} array of entitlements extracted from the data-entitlements
+ * @param {Element} elem html element with data-pelcro-entitlements attribute
+ * @return {Array<String>} array of entitlements extracted from the data-pelcro-entitlements
  * attribute
  */
 export const getEntitlementsFromElem = (elem) => {
-  return elem.dataset.entitlements
+  return elem.dataset.pelcroEntitlements
     .split(",")
     .map((entitlement) => entitlement.trim())
     .filter((entitlement) => entitlement);
