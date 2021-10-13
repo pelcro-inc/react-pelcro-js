@@ -35,7 +35,7 @@ export function SelectModalWithHook(props) {
   } = usePelcro();
 
   const entitlementsProtectedElements = document.querySelectorAll(
-    "[data-entitlements]"
+    "[data-pelcro-entitlements]"
   );
 
   const entitlements =

@@ -11,7 +11,7 @@ export const init = () => {
 
   whenSiteReady(() => {
     const entitlementsProtectedElements = document.querySelectorAll(
-      "[data-entitlements]"
+      "[data-pelcro-entitlements]"
     );
 
     if (entitlementsProtectedElements.length === 0) {
@@ -22,7 +22,7 @@ export const init = () => {
       !allElemsHaveSameEntitlements(entitlementsProtectedElements)
     ) {
       console.error(
-        "not all elements protected by entitlements have the same entitlements, all elements protected by entitlements must have the exact same data-entitlements attribute value"
+        "not all elements protected by entitlements have the same entitlements, all elements protected by entitlements must have the exact same data-pelcro-entitlements attribute value"
       );
       return;
     }
@@ -32,7 +32,7 @@ export const init = () => {
 
       if (entitlements.length === 0) {
         console.error(
-          "invalid data-entitlements attribute value",
+          "invalid data-pelcro-entitlements attribute value",
           elem
         );
         return;
@@ -74,7 +74,7 @@ export const init = () => {
         notify(
           <p>
             <Trans i18nKey="messages:entitlement">
-              Some of the content on this page is available under one
+              Some of the content on this page is available with one
               or more of our plans.
               <Link
                 onClick={() => {
@@ -101,7 +101,7 @@ export const init = () => {
               >
                 Subscribe
               </Link>
-              to one of our available plans get access to more content
+              now to get full page access.
             </Trans>
           </p>,
           {
@@ -116,6 +116,9 @@ export const init = () => {
   });
 };
 
+/**
+ *
+ */
 function allElemsHaveSameEntitlements(elems) {
   const entitlements = getEntitlementsFromElem(elems[0]);
 
@@ -128,6 +131,9 @@ function allElemsHaveSameEntitlements(elems) {
   });
 }
 
+/**
+ *
+ */
 function disableKeyboardInteractions(elem) {
   elem.addEventListener(
     "keydown",
@@ -143,6 +149,9 @@ function disableKeyboardInteractions(elem) {
   );
 }
 
+/**
+ *
+ */
 function unblurElemWhenUserSubscribes(elem, entitlements) {
   document.addEventListener("PelcroSubscriptionCreate", (event) => {
     const { isGift } = usePelcro.getStore();
@@ -161,6 +170,9 @@ function unblurElemWhenUserSubscribes(elem, entitlements) {
   });
 }
 
+/**
+ *
+ */
 function shouldBlurContent(entitlements) {
   return entitlements.every(
     (entitlement) => !window.Pelcro.user.isEntitledTo(entitlement)
