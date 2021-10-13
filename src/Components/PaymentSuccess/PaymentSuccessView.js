@@ -57,7 +57,7 @@ const getSuccessContent = (i18n) => {
     },
     giftCreate: {
       successIcon: (
-        <GiftIcon className="plc-w-32 plc-my-4 plc-text-gray-400" />
+        <GiftIcon className="plc-w-32 plc-my-4 plc-text-gray-500" />
       ),
       successTitle: i18n("messages.giftCreate.title"),
       successContent: i18n("messages.giftCreate.content")
