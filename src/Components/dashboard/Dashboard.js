@@ -294,6 +294,11 @@ class Dashboard extends Component {
               errorMessage: this.locale(
                 "messages.subCancellation.error"
               )
+            },
+            {
+              closeButtonLabel: this.locale(
+                "labels.subCancellation.goBack"
+              )
             }
           );
         };

@@ -89,7 +89,7 @@ toast.warning = (msg, options) =>
 toast.confirm = (
   onConfirm,
   { confirmMessage, loadingMessage, successMessage, errorMessage },
-  options
+  { confirmButtonLabel, closeButtonLabel, ...options } = {}
 ) => {
   const translations = i18n.t("notification:confirm", {
     returnObjects: true
@@ -105,14 +105,14 @@ toast.confirm = (
             className="plc-text-xs plc-bg-red-500 hover:plc-bg-red-600"
             onClick={onConfirmClick}
           >
-            {translations.labels.confirm}
+            {confirmButtonLabel ?? translations.labels.confirm}
           </Button>
           <Button
             className="plc-text-xs"
             variant="outline"
             onClick={() => toast.dismiss(t.id)}
           >
-            {translations.labels.close}
+            {closeButtonLabel ?? translations.labels.close}
           </Button>
         </div>
       </div>

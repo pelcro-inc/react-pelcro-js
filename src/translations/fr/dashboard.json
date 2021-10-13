@@ -56,6 +56,9 @@
       "categories": "Catégories",
       "details": "Détails",
       "removeItem": "Retirer"
+    },
+    "subCancellation": {
+      "goBack": "Retourner"
     }
   },
   "messages": {
