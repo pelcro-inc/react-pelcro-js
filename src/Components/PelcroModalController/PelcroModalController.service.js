@@ -60,13 +60,14 @@ export const initPaywalls = () => {
 
     if (paywallMethods?.displayMeterPaywall()) {
       switchView("meter");
-      // initializing content entitlement here because it interacts with meter
-      initContentEntitlement();
     } else if (paywallMethods?.displayNewsletterPaywall()) {
       switchView("newsletter");
     } else if (paywallMethods?.displayPaywall()) {
       switchView("plan-select");
     }
+
+    // hide entitlements based content
+    initContentEntitlement();
   }
 };
 
