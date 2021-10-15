@@ -1,3 +1,10 @@
+# [2.4.0-beta.10](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.4.0-beta.9...v2.4.0-beta.10) (2021-10-15)
+
+
+### Bug Fixes
+
+* **entitlements:** hide entitlements content on regular products too ([42ef783](https://github.com/pelcro-inc/react-pelcro-js/commit/42ef78390f9c3fe81cccf5e9beeaed56f04debc0))
+
 # [2.4.0-beta.9](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.4.0-beta.8...v2.4.0-beta.9) (2021-10-13)
 
 
