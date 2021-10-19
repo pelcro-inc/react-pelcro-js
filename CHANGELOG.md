@@ -1,3 +1,10 @@
+# [2.4.0-beta.12](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.4.0-beta.11...v2.4.0-beta.12) (2021-10-19)
+
+
+### Bug Fixes
+
+* **entitls.:** initialization not communicating if elems were blured ([c309ed3](https://github.com/pelcro-inc/react-pelcro-js/commit/c309ed3bf72775cc34ba200338349a6051b7c678))
+
 # [2.4.0-beta.11](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.4.0-beta.10...v2.4.0-beta.11) (2021-10-19)
 
 
