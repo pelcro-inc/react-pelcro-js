@@ -6,110 +6,103 @@ import { Link } from "../../../SubComponents/Link";
 import { getEntitlementsFromElem } from "../../../utils/utils";
 
 export const init = () => {
-  const { whenSiteReady, switchView, set } = usePelcro.getStore();
+  const { switchView, set } = usePelcro.getStore();
 
-  whenSiteReady(() => {
-    const entitlementsProtectedElements = document.querySelectorAll(
-      "[data-pelcro-entitlements]"
+  const entitlementsProtectedElements = document.querySelectorAll(
+    "[data-pelcro-entitlements]"
+  );
+
+  if (entitlementsProtectedElements.length === 0) {
+    return false;
+  }
+
+  if (!allElemsHaveSameEntitlements(entitlementsProtectedElements)) {
+    console.error(
+      "not all elements protected by entitlements have the same entitlements, all elements protected by entitlements must have the exact same data-pelcro-entitlements attribute value"
     );
+    return false;
+  }
 
-    if (entitlementsProtectedElements.length === 0) {
-      return false;
-    }
+  entitlementsProtectedElements.forEach((elem) => {
+    const entitlements = getEntitlementsFromElem(elem);
 
-    if (
-      !allElemsHaveSameEntitlements(entitlementsProtectedElements)
-    ) {
+    if (entitlements.length === 0) {
       console.error(
-        "not all elements protected by entitlements have the same entitlements, all elements protected by entitlements must have the exact same data-pelcro-entitlements attribute value"
+        "invalid data-pelcro-entitlements attribute value",
+        elem
       );
       return false;
     }
 
-    entitlementsProtectedElements.forEach((elem) => {
-      const entitlements = getEntitlementsFromElem(elem);
+    if (
+      window.Pelcro.product.getByEntitlements(entitlements).length ===
+      0
+    ) {
+      console.warn(
+        "user can't subscribe to any plan that has any of the entitlement(s) needed, this is usually unintentional, make sure that the entitlements are spelled correctly, entitlements are case sensitive. make sure that your plans are configured in a way that allows users from all supported countries, using all supported currencies, to have access to your content by subscribing to certain plans that provide the needed entitlement(s)"
+      );
+    }
 
-      if (entitlements.length === 0) {
-        console.error(
-          "invalid data-pelcro-entitlements attribute value",
-          elem
-        );
-        return false;
-      }
+    if (shouldBlurContent(entitlements)) {
+      // remove all event listeners from the elem by replacing it with a deep clone of itself
+      const elemDeepClone = elem.cloneNode(true);
+      elem.replaceWith(elemDeepClone);
 
-      if (
-        window.Pelcro.product.getByEntitlements(entitlements)
-          .length === 0
-      ) {
-        console.warn(
-          "user can't subscribe to any plan that has any of the entitlement(s) needed, this is usually unintentional, make sure that the entitlements are spelled correctly, entitlements are case sensitive. make sure that your plans are configured in a way that allows users from all supported countries, using all supported currencies, to have access to your content by subscribing to certain plans that provide the needed entitlement(s)"
-        );
-      }
+      disableKeyboardInteractions(elemDeepClone);
 
-      if (shouldBlurContent(entitlements)) {
-        // remove all event listeners from the elem by replacing it with a deep clone of itself
-        const elemDeepClone = elem.cloneNode(true);
-        elem.replaceWith(elemDeepClone);
+      elemDeepClone.setAttribute(
+        "style",
+        "filter:blur(3px) !important; pointer-events:none !important; user-select:none !important"
+      );
 
-        disableKeyboardInteractions(elemDeepClone);
+      unblurElemWhenUserSubscribes(elemDeepClone, entitlements);
 
-        elemDeepClone.setAttribute(
-          "style",
-          "filter:blur(3px) !important; pointer-events:none !important; user-select:none !important"
-        );
+      const NOTIFICATION_ID = "entitlement";
+      notify(
+        <p>
+          <Trans i18nKey="messages:entitlement">
+            Some of the content on this page is available with one or
+            more of our plans.
+            <Link
+              onClick={() => {
+                const productId = Number(elem.dataset.productId);
+                const planId = Number(elem.dataset.planId);
 
-        unblurElemWhenUserSubscribes(elemDeepClone, entitlements);
+                const selectedProduct =
+                  window.Pelcro.product.getById(productId);
+                const selectedPlan =
+                  window.Pelcro.plan.getById(planId);
+                const hasValidProductAndPlan = Boolean(
+                  selectedProduct && selectedPlan
+                );
 
-        const NOTIFICATION_ID = "entitlement";
-        notify(
-          <p>
-            <Trans i18nKey="messages:entitlement">
-              Some of the content on this page is available with one
-              or more of our plans.
-              <Link
-                onClick={() => {
-                  const productId = Number(elem.dataset.productId);
-                  const planId = Number(elem.dataset.planId);
-
-                  const selectedProduct =
-                    window.Pelcro.product.getById(productId);
-                  const selectedPlan =
-                    window.Pelcro.plan.getById(planId);
-                  const hasValidProductAndPlan = Boolean(
-                    selectedProduct && selectedPlan
-                  );
-
-                  if (hasValidProductAndPlan) {
-                    set({
-                      product: selectedProduct,
-                      plan: selectedPlan
-                    });
-                  }
-                  notify.dismiss(NOTIFICATION_ID);
-                  switchView("_plan-select-entitlements");
-                }}
-              >
-                Subscribe
-              </Link>
-              now to get full page access.
-            </Trans>
-          </p>,
-          {
-            className: "pelcro-notification-entitlement",
-            position: "bottom-right",
-            duration: Infinity,
-            id: NOTIFICATION_ID
-          }
-        );
-      }
-    });
-    return true;
+                if (hasValidProductAndPlan) {
+                  set({
+                    product: selectedProduct,
+                    plan: selectedPlan
+                  });
+                }
+                notify.dismiss(NOTIFICATION_ID);
+                switchView("_plan-select-entitlements");
+              }}
+            >
+              Subscribe
+            </Link>
+            now to get full page access.
+          </Trans>
+        </p>,
+        {
+          className: "pelcro-notification-entitlement",
+          position: "bottom-right",
+          duration: Infinity,
+          id: NOTIFICATION_ID
+        }
+      );
+    }
   });
+  return true;
 };
 
-/**
- *
- */
 function allElemsHaveSameEntitlements(elems) {
   const entitlements = getEntitlementsFromElem(elems[0]);
 
@@ -122,9 +115,6 @@ function allElemsHaveSameEntitlements(elems) {
   });
 }
 
-/**
- *
- */
 function disableKeyboardInteractions(elem) {
   elem.addEventListener(
     "keydown",
