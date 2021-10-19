@@ -48,7 +48,10 @@ export const initPaywalls = () => {
   );
 
   if (window.Pelcro.site.read()?.settings === "subscription") {
-    // Skip if article is not restricted
+    // blur entitlements based content
+    const didBlurContent = initContentEntitlement();
+
+    // Skip paywall if article is not restricted
     if (
       isValidViewFromURL(viewFromURL) ||
       !paywallMethods.isArticleRestricted()
@@ -59,15 +62,19 @@ export const initPaywalls = () => {
     const { switchView } = usePelcro.getStore();
 
     if (paywallMethods?.displayMeterPaywall()) {
-      switchView("meter");
+      /* 
+        showing both the meter and the entitlements notification doesn't make sense from
+        a product prespective + they would take half the screen on mobile devies, so we're
+        not showing the meter, and only showing the entitlements notification.
+        */
+      if (!didBlurContent) {
+        switchView("meter");
+      }
     } else if (paywallMethods?.displayNewsletterPaywall()) {
       switchView("newsletter");
     } else if (paywallMethods?.displayPaywall()) {
       switchView("plan-select");
     }
-
-    // hide entitlements based content
-    initContentEntitlement();
   }
 };
 
