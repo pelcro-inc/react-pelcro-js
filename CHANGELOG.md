@@ -1,3 +1,10 @@
+# [2.4.0-beta.11](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.4.0-beta.10...v2.4.0-beta.11) (2021-10-19)
+
+
+### Bug Fixes
+
+* **entitlements:** not being initialized correctly ([#96](https://github.com/pelcro-inc/react-pelcro-js/issues/96)) ([741d505](https://github.com/pelcro-inc/react-pelcro-js/commit/741d505d8bd2d531a880ec6c791e9ea957f4dff8))
+
 # [2.4.0-beta.10](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.4.0-beta.9...v2.4.0-beta.10) (2021-10-15)
 
 
