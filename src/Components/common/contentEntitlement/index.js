@@ -6,8 +6,7 @@ import { Link } from "../../../SubComponents/Link";
 import { getEntitlementsFromElem } from "../../../utils/utils";
 
 export const init = () => {
-  const { whenSiteReady, view, resetView, switchView, set } =
-    usePelcro.getStore();
+  const { whenSiteReady, switchView, set } = usePelcro.getStore();
 
   whenSiteReady(() => {
     const entitlementsProtectedElements = document.querySelectorAll(
@@ -15,7 +14,7 @@ export const init = () => {
     );
 
     if (entitlementsProtectedElements.length === 0) {
-      return;
+      return false;
     }
 
     if (
@@ -24,7 +23,7 @@ export const init = () => {
       console.error(
         "not all elements protected by entitlements have the same entitlements, all elements protected by entitlements must have the exact same data-pelcro-entitlements attribute value"
       );
-      return;
+      return false;
     }
 
     entitlementsProtectedElements.forEach((elem) => {
@@ -35,7 +34,7 @@ export const init = () => {
           "invalid data-pelcro-entitlements attribute value",
           elem
         );
-        return;
+        return false;
       }
 
       if (
@@ -60,15 +59,6 @@ export const init = () => {
         );
 
         unblurElemWhenUserSubscribes(elemDeepClone, entitlements);
-
-        /* 
-        showing both the meter and the entitlements notification doesn't make sense from
-        a product prespective + they would take half the screen on mobile devies, so we're
-        hiding the meter, and showing the entitlements notification only.
-        */
-        if (view === "meter") {
-          resetView();
-        }
 
         const NOTIFICATION_ID = "entitlement";
         notify(
@@ -113,6 +103,7 @@ export const init = () => {
         );
       }
     });
+    return true;
   });
 };
 
@@ -149,16 +140,16 @@ function disableKeyboardInteractions(elem) {
   );
 }
 
-/**
- *
- */
 function unblurElemWhenUserSubscribes(elem, entitlements) {
   document.addEventListener("PelcroSubscriptionCreate", (event) => {
     const { isGift } = usePelcro.getStore();
     if (isGift) return;
-    const latestSub = event.detail.data.subscriptions[0];
+    const latestSub =
+      event.detail.data.subscriptions[
+        event.detail.data.subscriptions.length - 1
+      ];
     const shouldUnblurContent = entitlements.some(
-      (ent) => latestSub.plan.entitlements?.includes(ent) ?? false
+      (ent) => latestSub?.plan?.entitlements?.includes(ent) ?? false
     );
 
     if (shouldUnblurContent) {
@@ -170,9 +161,6 @@ function unblurElemWhenUserSubscribes(elem, entitlements) {
   });
 }
 
-/**
- *
- */
 function shouldBlurContent(entitlements) {
   return entitlements.every(
     (entitlement) => !window.Pelcro.user.isEntitledTo(entitlement)
