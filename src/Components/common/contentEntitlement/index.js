@@ -144,9 +144,12 @@ function unblurElemWhenUserSubscribes(elem, entitlements) {
   document.addEventListener("PelcroSubscriptionCreate", (event) => {
     const { isGift } = usePelcro.getStore();
     if (isGift) return;
-    const latestSub = event.detail.data.subscriptions[0];
+    const latestSub =
+      event.detail.data.subscriptions[
+        event.detail.data.subscriptions.length - 1
+      ];
     const shouldUnblurContent = entitlements.some(
-      (ent) => latestSub.plan.entitlements?.includes(ent) ?? false
+      (ent) => latestSub?.plan?.entitlements?.includes(ent) ?? false
     );
 
     if (shouldUnblurContent) {
