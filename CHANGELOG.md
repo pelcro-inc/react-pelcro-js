@@ -1,3 +1,10 @@
+# [2.4.0-beta.13](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.4.0-beta.12...v2.4.0-beta.13) (2021-10-20)
+
+
+### Bug Fixes
+
+* **entitls.:** disable properly when invalid html attribute value is found ([c4b7086](https://github.com/pelcro-inc/react-pelcro-js/commit/c4b7086c4375498eaa306c63da5e495009b2f5b4))
+
 # [2.4.0-beta.12](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.4.0-beta.11...v2.4.0-beta.12) (2021-10-19)
 
 
