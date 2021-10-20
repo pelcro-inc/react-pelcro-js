@@ -23,7 +23,7 @@ export const init = () => {
     return false;
   }
 
-  entitlementsProtectedElements.forEach((elem) => {
+  for (const elem of entitlementsProtectedElements) {
     const entitlements = getEntitlementsFromElem(elem);
 
     if (entitlements.length === 0) {
@@ -99,7 +99,8 @@ export const init = () => {
         }
       );
     }
-  });
+  }
+
   return true;
 };
 
