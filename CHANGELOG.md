@@ -1,3 +1,44 @@
+# [2.4.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.3.0...v2.4.0) (2021-10-21)
+
+
+### Bug Fixes
+
+* **address:** stale state select field when update country select field ([c548386](https://github.com/pelcro-inc/react-pelcro-js/commit/c548386ccd5e61881d59b8d0f4a758885a05460d))
+* **cart remove btn:** default styling showing wrong color ([f2b890a](https://github.com/pelcro-inc/react-pelcro-js/commit/f2b890a6248554ed9a17d3932178250e7aa79250))
+* **check icon:** use currentColor fill by default ([c116bf5](https://github.com/pelcro-inc/react-pelcro-js/commit/c116bf504c83e68503595188739004d79e06510e))
+* **content entitle:** incorrect SDK method name ([2d4d9b7](https://github.com/pelcro-inc/react-pelcro-js/commit/2d4d9b7ea8fcf0f1a19c5c8af758554850cc30eb))
+* **dashboard:** close icon hidden on Safari ([905c1d0](https://github.com/pelcro-inc/react-pelcro-js/commit/905c1d0bbe1de1543ea0b5df04bffc6e65264ef7))
+* **entitelments:** change data attribue to data-pelcro-entitlements ([3eb0270](https://github.com/pelcro-inc/react-pelcro-js/commit/3eb0270122e25bf3288de39784670c2223ede301))
+* **entitlements:** hide entitlements content on regular products too ([42ef783](https://github.com/pelcro-inc/react-pelcro-js/commit/42ef78390f9c3fe81cccf5e9beeaed56f04debc0))
+* **entitlements:** not being initialized correctly ([#96](https://github.com/pelcro-inc/react-pelcro-js/issues/96)) ([741d505](https://github.com/pelcro-inc/react-pelcro-js/commit/741d505d8bd2d531a880ec6c791e9ea957f4dff8))
+* **entitls.:** disable properly when invalid html attribute value is found ([c4b7086](https://github.com/pelcro-inc/react-pelcro-js/commit/c4b7086c4375498eaa306c63da5e495009b2f5b4))
+* **entitls.:** initialization not communicating if elems were blured ([c309ed3](https://github.com/pelcro-inc/react-pelcro-js/commit/c309ed3bf72775cc34ba200338349a6051b7c678))
+* **payment success:** replace wording and change gift icon ([#95](https://github.com/pelcro-inc/react-pelcro-js/issues/95)) ([eb6dad9](https://github.com/pelcro-inc/react-pelcro-js/commit/eb6dad9a47ff9f6d565c5d22733d9da3837b9ff7))
+* **pw reset:** password reset flow ([#84](https://github.com/pelcro-inc/react-pelcro-js/issues/84)) ([e6c5e2f](https://github.com/pelcro-inc/react-pelcro-js/commit/e6c5e2f5e66e527cbf6bc480e1bb4b6f123da4a9))
+* **select:** next button disabled when go back and reselect same product ([9988388](https://github.com/pelcro-inc/react-pelcro-js/commit/9988388f7a4f72117dc097928419430576c9c2a6))
+* **select modal:** crashing when there are no entitls content ([587f75e](https://github.com/pelcro-inc/react-pelcro-js/commit/587f75edb290648c2516535cafa5d4e1bbeddc84))
+* **select modal:** crashing when there are no entitls content ([d82a0d8](https://github.com/pelcro-inc/react-pelcro-js/commit/d82a0d813520f06b08cf96a7cc4616a186aca1ff))
+* **user update:** submit button not taking full width ([8d9ed99](https://github.com/pelcro-inc/react-pelcro-js/commit/8d9ed994a36ad30c03eab0eccb787f508328b85b))
+
+
+### Features
+
+* **content entitl.:** change styling + prioritize over meter ([aeb6e21](https://github.com/pelcro-inc/react-pelcro-js/commit/aeb6e21c93475468be3d630402ad8d5d63347d95))
+* **content entitl.:** close notification after clicking on link ([9c79dc1](https://github.com/pelcro-inc/react-pelcro-js/commit/9c79dc138bb647ce6c3b6018991c2cf2e7692206))
+* **content entitl.:** init feature in service instead of controller ([e58dcf8](https://github.com/pelcro-inc/react-pelcro-js/commit/e58dcf88feb08d1a4f064f9fa6469926a87a4bb4))
+* **content entitlements:** update notification message ([4e85b92](https://github.com/pelcro-inc/react-pelcro-js/commit/4e85b928d8bc1a712c2e6910dc28d679c6e632a0))
+* **dashboard:** use phase sensitive dates in subscription section ([#91](https://github.com/pelcro-inc/react-pelcro-js/issues/91)) ([0d7b9c0](https://github.com/pelcro-inc/react-pelcro-js/commit/0d7b9c0b7e1a83006e4993aefd67fcbe178abb04))
+* **entitlements:** add util to filter prods by entitlement ([9c40bf2](https://github.com/pelcro-inc/react-pelcro-js/commit/9c40bf26d65de17b0b71b251a4bd374e21e2b3b3))
+* **entitlements:** handle hard-coded combo + improve error handling ([a509b0b](https://github.com/pelcro-inc/react-pelcro-js/commit/a509b0b9c4a2dd60f5412633f575ca3c1de72773))
+* **notification comp:** add warning notification + close button ([e3b87b2](https://github.com/pelcro-inc/react-pelcro-js/commit/e3b87b2f418e57ad461c6ea1d9ecc111c1908caa))
+* **register:** add optional name fields ([#87](https://github.com/pelcro-inc/react-pelcro-js/issues/87)) ([1aad1b6](https://github.com/pelcro-inc/react-pelcro-js/commit/1aad1b6336d2341dce7cfaeca22f33db1ccc95a2))
+* **release:** 2.4.0 ([#97](https://github.com/pelcro-inc/react-pelcro-js/issues/97)) ([c54c4d4](https://github.com/pelcro-inc/react-pelcro-js/commit/c54c4d454172b7f11e0bc655584536279412b3a9))
+* **textarea:** add tooltip text support ([#92](https://github.com/pelcro-inc/react-pelcro-js/issues/92)) ([2cc52fc](https://github.com/pelcro-inc/react-pelcro-js/commit/2cc52fcf2cc55e9b8cfc256f8c98c5391c937ad5))
+* add ability to blur content based on entitlements ([7c554d5](https://github.com/pelcro-inc/react-pelcro-js/commit/7c554d52a142362cdb8aed78eadf4e07721acdaa))
+* entitlements based content ([#85](https://github.com/pelcro-inc/react-pelcro-js/issues/85)) ([bcea71f](https://github.com/pelcro-inc/react-pelcro-js/commit/bcea71fdf2a17ff43e4bb18f6d985209921d25cb))
+* **select modal:** allow filter plans by entitlements ([b247753](https://github.com/pelcro-inc/react-pelcro-js/commit/b24775323965a98fad8bf62a53437610b0217cac))
+* **submit buttons:** allow overriding className + add extra click logic ([ad9af2b](https://github.com/pelcro-inc/react-pelcro-js/commit/ad9af2bc00f0999d18e3e6aa4069c7368e8f4acc))
+
 # [2.4.0-beta.13](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.4.0-beta.12...v2.4.0-beta.13) (2021-10-20)
 
 
