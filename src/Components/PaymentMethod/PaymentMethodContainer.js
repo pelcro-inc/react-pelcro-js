@@ -205,6 +205,25 @@ const PaymentMethodContainerWithoutStripe = ({
       dispatch({ type: UPDATE_PAYMENT_REQUEST });
     };
 
+    if (couponCode?.trim() === "") {
+      dispatch({
+        type: SET_COUPON,
+        payload: null
+      });
+
+      dispatch({
+        type: SET_PERCENT_OFF,
+        payload: ""
+      });
+
+      dispatch({
+        type: SET_UPDATED_PRICE,
+        payload: null
+      });
+
+      dispatch({ type: UPDATE_PAYMENT_REQUEST });
+    }
+
     if (couponCode?.trim()) {
       dispatch({ type: DISABLE_COUPON_BUTTON, payload: true });
 
@@ -694,7 +713,7 @@ const PaymentMethodContainerWithoutStripe = ({
       // When price is 0, we allow submitting without card info
       if (
         updatedPrice === 0 &&
-        state.coupon?.duration === "forever"
+        state.couponObject?.duration === "forever"
       ) {
         return subscribe({}, state, dispatch);
       }
@@ -844,7 +863,7 @@ const PaymentMethodContainerWithoutStripe = ({
           );
 
         case SET_COUPON:
-          return Update({ ...state, coupon: action.payload });
+          return Update({ ...state, couponObject: action.payload });
 
         case SET_COUPON_ERROR:
           return Update({ ...state, couponError: action.payload });
