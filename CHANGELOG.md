@@ -1,3 +1,10 @@
+# [2.4.0-beta.14](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.4.0-beta.13...v2.4.0-beta.14) (2021-10-22)
+
+
+### Bug Fixes
+
+* **coupon:** remove discount from price when coupon is removed ([#98](https://github.com/pelcro-inc/react-pelcro-js/issues/98)) ([cf4bf8b](https://github.com/pelcro-inc/react-pelcro-js/commit/cf4bf8ba11637a14e5031843b5569db253e9a429))
+
 # [2.4.0-beta.13](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.4.0-beta.12...v2.4.0-beta.13) (2021-10-20)
 
 
