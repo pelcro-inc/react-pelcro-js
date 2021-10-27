@@ -79,12 +79,6 @@ export const initPaywalls = () => {
 };
 
 export const loadPaymentSDKs = () => {
-  // Load stripe's SDK
-  window.Pelcro.helpers.loadSDK(
-    "https://js.stripe.com/v3/",
-    "pelcro-sdk-stripe-id"
-  );
-
   // Load PayPal SDK's
   const supportsPaypal = Boolean(
     window.Pelcro.site.read().braintree_tokenization

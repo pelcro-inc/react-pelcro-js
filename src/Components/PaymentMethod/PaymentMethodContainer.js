@@ -1,4 +1,9 @@
-import React, { createContext, useEffect, useRef } from "react";
+import React, {
+  createContext,
+  useEffect,
+  useRef,
+  useState
+} from "react";
 import { useTranslation } from "react-i18next";
 import {
   injectStripe,
@@ -39,6 +44,7 @@ import {
 } from "../../services/Subscription/Subscription.service";
 import { getCanonicalLocaleFormat } from "../../utils/utils";
 import { usePelcro } from "../../hooks/usePelcro";
+import { loadStripe } from "@stripe/stripe-js/pure";
 
 /**
  * @typedef {Object} PaymentStateType
@@ -911,7 +917,14 @@ const UnwrappedForm = injectStripe(
 );
 
 const PaymentMethodContainer = (props) => {
-  if (window.Stripe) {
+  const [stripeLoaded, setStripeLoaded] = useState(false);
+  useEffect(() => {
+    loadStripe(window.Pelcro.environment.stripe).then(() => {
+      setStripeLoaded(true);
+    });
+  }, []);
+
+  if (stripeLoaded) {
     return (
       <StripeProvider
         apiKey={window.Pelcro.environment.stripe}
@@ -926,6 +939,7 @@ const PaymentMethodContainer = (props) => {
       </StripeProvider>
     );
   }
+
   return null;
 };
 
