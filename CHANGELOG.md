@@ -1,3 +1,10 @@
+# [2.4.0-beta.15](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.4.0-beta.14...v2.4.0-beta.15) (2021-10-27)
+
+
+### Features
+
+* **stripe:** lazy load stripe sdk on checkout form ([#99](https://github.com/pelcro-inc/react-pelcro-js/issues/99)) ([6c30b6e](https://github.com/pelcro-inc/react-pelcro-js/commit/6c30b6ea0991a4008af2d71640a9cd52b3a73e0a))
+
 # [2.4.0-beta.14](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.4.0-beta.13...v2.4.0-beta.14) (2021-10-22)
 
 
