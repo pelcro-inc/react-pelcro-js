@@ -40,6 +40,18 @@ export class PelcroActions {
       return this.set({ view: "login" });
     }
 
+    if (view === "newsletter-update") {
+      const newsletters = window.Pelcro?.uiSettings?.newsletters;
+      const siteHasNewslettersDefined =
+        Array.isArray(newsletters) && newsletters.length > 0;
+      if (
+        !this.get().isAuthenticated() ||
+        !siteHasNewslettersDefined
+      ) {
+        return;
+      }
+    }
+
     this.set({ view });
   };
 
