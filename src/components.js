@@ -34,7 +34,7 @@ export { PaymentSuccessView } from "./Components/PaymentSuccess/PaymentSuccessVi
 export { NewsletterWithHook as NewsLetter } from "./Components/NewsLetter/NewsLetter";
 export { NewsletterUpdateModal } from "./Components/NewsletterUpdate/NewsletterUpdateModal";
 export { NewsletterUpdateButton } from "./Components/NewsletterUpdate/NewsletterUpdateButton";
-export { NewslettersUpdateContainer } from "./Components/NewsletterUpdate/NewsletterUpdateContainer";
+export { NewsletterUpdateContainer } from "./Components/NewsletterUpdate/NewsletterUpdateContainer";
 export { NewsletterUpdateView } from "./Components/NewsletterUpdate/NewsletterUpdateView";
 export { MeterModal } from "./Components/Meter/MeterModal";
 export { MeterView } from "./Components/Meter/MeterView";
