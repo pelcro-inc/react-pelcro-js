@@ -19,7 +19,7 @@ export const NewsletterUpdateList = () => {
   }
 
   return (
-    <div className="plc-max-h-80 pelcro-newsletters-wrapper">
+    <div className="plc-max-h-80 plc-overflow-y-auto pelcro-newsletters-wrapper">
       {newsletters.map((newsletter) => (
         <div
           key={newsletter.id}
