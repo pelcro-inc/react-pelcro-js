@@ -68,11 +68,7 @@ export const init = () => {
       pelcroUpdateNewslettersButtons[i].addEventListener(
         "click",
         () => {
-          if (isAuthenticated()) {
-            switchView("newsletter-update");
-          } else {
-            switchView("login");
-          }
+          switchView("newsletter-update");
         }
       );
     }
