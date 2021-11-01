@@ -23,8 +23,11 @@ export const DiscountedPrice = (props) => {
 
   if (percentOff) {
     return (
-      <div className="plc-my-2" {...props}>
-        (-{percentOff}) {priceFormatted}
+      <div className="pelcro-discount" {...props}>
+        (-{percentOff}){" "}
+        <span className="plc-font-bold pelcro-discounted-price">
+          {priceFormatted}
+        </span>
       </div>
     );
   }

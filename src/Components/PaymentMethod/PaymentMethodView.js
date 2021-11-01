@@ -14,6 +14,7 @@ import { BankRedirection } from "./BankRedirection";
 import { Link } from "../../SubComponents/Link";
 import { ReactComponent as LockIcon } from "../../assets/lock.svg";
 import { SelectedPaymentMethod } from "./SelectedPaymentMethod";
+import { TaxAmount } from "./TaxAmount";
 
 /**
  *
@@ -64,14 +65,16 @@ export function PaymentMethodView({
 
             {/* Coupon section */}
             {showCoupon && (
-              <>
+              <div className="plc-mb-6">
                 <CouponCode />
                 <DiscountedPrice />
-              </>
+              </div>
             )}
 
+            <TaxAmount />
+
             {/* Payment buttons section */}
-            <div className="plc-grid plc-mt-4 plc-gap-y-2">
+            <div className="plc-grid plc-mt-2 plc-gap-y-2">
               <SubmitPaymentMethod />
               {showExternalPaymentMethods && (
                 <>
