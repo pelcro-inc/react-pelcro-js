@@ -12,6 +12,7 @@ import { ReactComponent as CheckMarkIcon } from "../../assets/check-mark.svg";
 import { ReactComponent as ExclamationIcon } from "../../assets/exclamation.svg";
 import { ReactComponent as EditIcon } from "../../assets/edit.svg";
 import { ReactComponent as UserIcon } from "../../assets/user.svg";
+import { ReactComponent as NewsletterIcon } from "../../assets/newsletter.svg";
 import { ReactComponent as RefreshIcon } from "../../assets/refresh.svg";
 import { ReactComponent as XCircleIcon } from "../../assets/x-icon-solid.svg";
 import { ReactComponent as PaymentCardIcon } from "../../assets/payment-card.svg";
@@ -143,6 +144,10 @@ class Dashboard extends Component {
 
   displayChangePassword = () => {
     return this.props.setView("password-change");
+  };
+
+  displayNewsletterUpdate = () => {
+    return this.props.setView("newsletter-update");
   };
 
   displayProductSelect = ({ isGift }) => {
@@ -683,6 +688,10 @@ class Dashboard extends Component {
     const profilePicture =
       window.Pelcro.user.read().profile_photo ?? userSolidIcon;
 
+    const newsletters = window.Pelcro?.uiSettings?.newsletters;
+    const siteHasNewslettersDefined =
+      Array.isArray(newsletters) && newsletters.length > 0;
+
     return (
       <Transition
         className="plc-fixed plc-inset-y-0 plc-right-0 plc-h-full plc-max-w-xl plc-overflow-y-auto plc-text-left plc-bg-white plc-shadow-xl plc-z-max"
@@ -781,6 +790,19 @@ class Dashboard extends Component {
                     >
                       {this.locale("labels.changePassword")}
                     </Button>
+
+                    {siteHasNewslettersDefined && (
+                      <Button
+                        variant="ghost"
+                        icon={
+                          <NewsletterIcon className="plc-w-5 plc-h-5 plc-mr-1" />
+                        }
+                        className="plc-text-sm plc-text-gray-500 hover:plc-text-primary-700"
+                        onClick={this.displayNewsletterUpdate}
+                      >
+                        {this.locale("labels.editNewsletters")}
+                      </Button>
+                    )}
                   </div>
                 }
               />
