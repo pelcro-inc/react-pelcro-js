@@ -18,6 +18,6 @@
     "for": "pour",
     "interval": "{{count}} {{interval}}",
     "interval_plural": "{{count}} {{interval}}s",
-    "tax": "+ Tax"
+    "tax": "+ Taxe"
   }
 }
