@@ -45,6 +45,7 @@ export { SubmitPaymentMethod } from "./Components/PaymentMethod/SubmitPaymentMet
 export { SubscriptionCreateModal } from "./Components/SubscriptionCreate/SubscriptionCreateModal";
 export { SubscriptionCreateView } from "./Components/SubscriptionCreate/SubscriptionCreateView";
 export { DiscountedPrice } from "./Components/PaymentMethod/DiscountedPrice";
+export { TaxAmount } from "./Components/PaymentMethod/TaxAmount";
 export { UserUpdateEmail } from "./Components/UserUpdate/UserUpdateEmail";
 export { UserUpdateButton } from "./Components/UserUpdate/UserUpdateButton";
 export { UserUpdateContainer } from "./Components/UserUpdate/UserUpdateContainer";

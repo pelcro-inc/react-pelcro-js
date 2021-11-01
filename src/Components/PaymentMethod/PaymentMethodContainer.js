@@ -20,6 +20,7 @@ import {
   DISABLE_SUBMIT,
   LOADING,
   SET_UPDATED_PRICE,
+  SET_TAX_AMOUNT,
   SUBMIT_PAYMENT,
   HANDLE_PAYPAL_SUBSCRIPTION,
   DISABLE_COUPON_BUTTON,
@@ -59,6 +60,7 @@ import { loadStripe } from "@stripe/stripe-js/pure";
  * @property {unknown} canMakePayment
  * @property {unknown} paymentRequest
  * @property {number} updatedPrice
+ * @property {number} taxAmount
  * @property {object} currentPlan
  * @property {object} alert
  */
@@ -76,6 +78,7 @@ const initialState = {
   canMakePayment: false,
   paymentRequest: null,
   updatedPrice: null,
+  taxAmount: null,
   currentPlan: null,
   alert: {
     type: "error",
@@ -119,6 +122,7 @@ const PaymentMethodContainerWithoutStripe = ({
       });
     }
     dispatch({ type: INIT_CONTAINER });
+    updateTotalAmountWithTax();
   }, []);
 
   const initPaymentRequest = (state, dispatch) => {
@@ -172,6 +176,40 @@ const PaymentMethodContainerWithoutStripe = ({
     }
   };
 
+  /**
+   * Updates the total amount after adding taxes only if site taxes are enabled
+   */
+  const updateTotalAmountWithTax = () => {
+    const taxesEnabled = window.Pelcro.site.read()?.taxes_enabled;
+
+    if (taxesEnabled && type === "createPayment") {
+      dispatch({ type: DISABLE_SUBMIT, payload: true });
+
+      resolveTaxCalculation()
+        .then((res) => {
+          if (res) {
+            dispatch({
+              type: SET_TAX_AMOUNT,
+              payload: res.taxAmount
+            });
+
+            dispatch({
+              type: SET_UPDATED_PRICE,
+              payload: res.totalAmountWithTax
+            });
+
+            dispatch({ type: UPDATE_PAYMENT_REQUEST });
+          }
+        })
+        .catch((error) => {
+          handlePaymentError(error);
+        })
+        .finally(() => {
+          dispatch({ type: DISABLE_SUBMIT, payload: false });
+        });
+    }
+  };
+
   const onApplyCouponCode = (state, dispatch) => {
     const { couponCode } = state;
 
@@ -204,6 +242,11 @@ const PaymentMethodContainerWithoutStripe = ({
       });
 
       dispatch({
+        type: SET_TAX_AMOUNT,
+        payload: res.data.taxes
+      });
+
+      dispatch({
         type: SET_UPDATED_PRICE,
         payload: res.data.total
       });
@@ -227,7 +270,13 @@ const PaymentMethodContainerWithoutStripe = ({
         payload: null
       });
 
+      dispatch({
+        type: SET_TAX_AMOUNT,
+        payload: null
+      });
+
       dispatch({ type: UPDATE_PAYMENT_REQUEST });
+      updateTotalAmountWithTax();
     }
 
     if (couponCode?.trim()) {
@@ -597,10 +646,10 @@ const PaymentMethodContainerWithoutStripe = ({
           source?.card?.three_d_secure === "required" &&
           totalAmount > 0
         ) {
-          return resolveTaxCalculation().then((totalAmountWithTax) =>
+          return resolveTaxCalculation().then((res) =>
             generate3DSecureSource(
               source,
-              totalAmountWithTax ?? totalAmount
+              res?.totalAmountWithTax ?? totalAmount
             ).then(({ source, error }) => {
               if (error) {
                 return handlePaymentError(error);
@@ -619,7 +668,7 @@ const PaymentMethodContainerWithoutStripe = ({
   };
 
   /**
-   * Resolves with the total including taxes incase taxes enabled by site
+   * Resolves with the total & tax amount incase taxes enabled by site
    * @return {Promise}
    */
   const resolveTaxCalculation = () => {
@@ -643,8 +692,9 @@ const PaymentMethodContainerWithoutStripe = ({
             return reject(error);
           }
 
+          const taxAmount = res.data?.taxes;
           const totalAmountWithTax = res.data?.total;
-          resolve(totalAmountWithTax);
+          resolve({ totalAmountWithTax, taxAmount });
         }
       );
     });
@@ -855,6 +905,9 @@ const PaymentMethodContainerWithoutStripe = ({
 
         case SET_UPDATED_PRICE:
           return Update({ ...state, updatedPrice: action.payload });
+
+        case SET_TAX_AMOUNT:
+          return Update({ ...state, taxAmount: action.payload });
 
         case SET_CAN_MAKE_PAYMENT:
           return Update({ ...state, canMakePayment: action.payload });

@@ -17,6 +17,7 @@
     "code": "Coupon code",
     "for": "for",
     "interval": "{{count}} {{interval}}",
-    "interval_plural": "{{count}} {{interval}}s"
+    "interval_plural": "{{count}} {{interval}}s",
+    "tax": "+ Tax"
   }
 }
