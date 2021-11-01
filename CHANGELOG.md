@@ -1,3 +1,10 @@
+# [2.4.0-beta.16](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.4.0-beta.15...v2.4.0-beta.16) (2021-11-01)
+
+
+### Features
+
+* **checkout:** display tax inclusive price at checkout ([#100](https://github.com/pelcro-inc/react-pelcro-js/issues/100)) ([da89fad](https://github.com/pelcro-inc/react-pelcro-js/commit/da89faddda02852c71b40ccdf9320f958bc66adf))
+
 # [2.4.0-beta.15](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.4.0-beta.14...v2.4.0-beta.15) (2021-10-27)
 
 
