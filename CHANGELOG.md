@@ -1,3 +1,10 @@
+# [2.4.0-beta.18](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.4.0-beta.17...v2.4.0-beta.18) (2021-11-02)
+
+
+### Bug Fixes
+
+* enforce having no border for multiple buttons ([#103](https://github.com/pelcro-inc/react-pelcro-js/issues/103)) ([90aaa27](https://github.com/pelcro-inc/react-pelcro-js/commit/90aaa27780be9c614b2bfd92f1e508cd34b593d3))
+
 # [2.4.0-beta.17](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.4.0-beta.16...v2.4.0-beta.17) (2021-11-02)
 
 
