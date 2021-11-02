@@ -1,3 +1,10 @@
+# [2.4.0-beta.17](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.4.0-beta.16...v2.4.0-beta.17) (2021-11-02)
+
+
+### Features
+
+* add update newsletters modal ([#101](https://github.com/pelcro-inc/react-pelcro-js/issues/101)) ([c68d5f0](https://github.com/pelcro-inc/react-pelcro-js/commit/c68d5f0f2e7045b4a3dd69ef5e37e5a8320347fd))
+
 # [2.4.0-beta.16](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.4.0-beta.15...v2.4.0-beta.16) (2021-11-01)
 
 
