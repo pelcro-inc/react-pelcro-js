@@ -21,7 +21,7 @@
   }
 
   .pelcro-root .pelcro-modal-close {
-    @apply plc-absolute plc-w-6 plc-text-gray-500 plc-z-max plc-top-3 plc-right-3 hover:plc-text-black hover:plc-shadow-none;
+    @apply plc-absolute plc-w-6 plc-text-gray-500 plc-z-max plc-top-3 plc-right-3 plc-border-0 hover:plc-text-black hover:plc-shadow-none;
   }
 
   .pelcro-root .pelcro-modal-body {
