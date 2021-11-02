@@ -57,6 +57,23 @@ export const init = () => {
       );
     }
   }
+
+  const pelcroUpdateNewslettersButtons =
+    document.getElementsByClassName(
+      "pelcro-update-newsletters-button"
+    );
+
+  if (pelcroUpdateNewslettersButtons.length !== 0) {
+    for (let i = 0; i < pelcroUpdateNewslettersButtons.length; i++) {
+      pelcroUpdateNewslettersButtons[i].addEventListener(
+        "click",
+        () => {
+          switchView("newsletter-update");
+        }
+      );
+    }
+  }
+
   const pelcroCartButtonsByClass = document.getElementsByClassName(
     "pelcro-cart-button"
   );

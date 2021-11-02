@@ -22,7 +22,11 @@
       Pelcro.environment.ui = "-";
       window.Pelcro.ENABLE_ECOMMERCE = true;
       window.Pelcro.uiSettings = {
-        enableNameFieldsInRegister: true
+        enableNameFieldsInRegister: true,
+        newsletters: [
+          { label: "news 1", id: 12 },
+          { label: "default", id: "default" }
+        ]
       };
     </script>
     <script src="https://js.pelcro.com/sdk/staging/main.min.js"></script>
@@ -156,6 +160,9 @@
 
       <button class="pelcro-purchase-button" data-sku-id="4">
         Purchase Product with ID 4
+      </button>
+      <button class="pelcro-update-newsletters-button">
+        update newsletters
       </button>
       <button onclick="window.Pelcro.user.logout()">Logout</button>
       <br />

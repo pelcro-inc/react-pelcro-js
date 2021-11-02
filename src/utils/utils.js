@@ -141,6 +141,7 @@ export const isValidViewFromURL = (viewID) => {
       "payment-method-update",
       "user-edit",
       "newsletter",
+      "newsletter-update",
       "address-create",
       "order-create",
       "cart"
