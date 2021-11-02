@@ -184,6 +184,37 @@ describe("Actions", () => {
 
       expect(store.view).toEqual("dashboard");
     });
+
+    test("switchView('newsletter-update') should switch to newsletters update view when user is authenticated and site has newsletters defined", () => {
+      const randomNewsletters = [
+        { label: "news 1", id: 12 },
+        { label: "news 2", id: 35 }
+      ];
+
+      const originalUisettings = window.Pelcro.uiSettings;
+
+      window.Pelcro.uiSettings = {
+        newsletters: randomNewsletters
+      };
+
+      const store = usePelcro();
+      act(() => {
+        store.set({ isAuthenticated: () => true });
+      });
+
+      act(() => {
+        store.switchView("newsletter-update");
+      });
+
+      expect(store.view).toEqual("newsletter-update");
+
+      // clean up
+      if (originalUisettings) {
+        window.Pelcro.uiSettings = originalUisettings;
+      } else {
+        delete window.Pelcro.uiSettings;
+      }
+    });
   });
 
   describe("setProduct", () => {
