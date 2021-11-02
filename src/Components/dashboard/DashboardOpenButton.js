@@ -9,7 +9,7 @@ export const DashboardOpenButton = () => {
   return (
     <div className="plc-fixed plc-right-4 plc-bottom-4 pelcro-open-dashboard-btn">
       <button
-        className="plc-bg-white plc-border-2 plc-rounded-full focus:plc-outline-none plc-border-primary-300"
+        className="plc-bg-white plc-border-2 plc-rounded-full focus:plc-outline-none plc-border-primary-300 hover:plc-bg-white"
         name="menu"
         id="pelcro-view-menu"
         onClick={() => switchView("dashboard")}
