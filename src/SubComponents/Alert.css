@@ -16,6 +16,6 @@
   }
 
   .pelcro-root .pelcro-alert-close {
-    @apply plc-flex-shrink-0 plc-w-4 plc-fill-current plc-border-0;
+    @apply plc-flex-shrink-0 plc-w-4 plc-fill-current plc-border-0 plc-bg-transparent focus:plc-bg-transparent hover:plc-bg-transparent plc-text-current hover:plc-text-current focus:plc-text-current;
   }
 }

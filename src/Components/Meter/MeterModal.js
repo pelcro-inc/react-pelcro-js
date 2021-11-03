@@ -25,7 +25,7 @@ export const MeterModal = (props) => {
     >
       <button
         type="button"
-        className="plc-absolute plc-top-0 plc-text-2xl plc-text-gray-500 plc-right-1 plc-border-0 pelcro-close-btn"
+        className="plc-absolute plc-top-0 plc-text-2xl plc-text-gray-500 hover:plc-text-black focus:plc-text-black plc-right-1 plc-border-0 plc-bg-transparent hover:plc-bg-transparent focus:plc-bg-transparent pelcro-close-btn"
         aria-label="Close"
         onClick={onClose}
       >
