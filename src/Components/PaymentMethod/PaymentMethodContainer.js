@@ -226,6 +226,7 @@ const PaymentMethodContainerWithoutStripe = ({
         });
       }
 
+      dispatch({ type: SET_COUPON_ERROR, payload: "" });
       dispatch({
         type: SHOW_ALERT,
         payload: { type: "error", content: "" }
