@@ -1,3 +1,10 @@
+# [2.4.0-beta.19](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.4.0-beta.18...v2.4.0-beta.19) (2021-11-03)
+
+
+### Bug Fixes
+
+* enforce buttons colors ([#104](https://github.com/pelcro-inc/react-pelcro-js/issues/104)) ([154722f](https://github.com/pelcro-inc/react-pelcro-js/commit/154722fe656bf3753fa00961b928d67183eac8c4))
+
 # [2.4.0-beta.18](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.4.0-beta.17...v2.4.0-beta.18) (2021-11-02)
 
 
