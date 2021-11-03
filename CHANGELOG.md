@@ -1,3 +1,10 @@
+# [2.4.0-beta.20](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.4.0-beta.19...v2.4.0-beta.20) (2021-11-03)
+
+
+### Bug Fixes
+
+* **coupon:** display discounted amount before taxes ([#102](https://github.com/pelcro-inc/react-pelcro-js/issues/102)) ([3b28aaa](https://github.com/pelcro-inc/react-pelcro-js/commit/3b28aaa21161b19b3c894a03add29e7d5b8635d9))
+
 # [2.4.0-beta.19](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.4.0-beta.18...v2.4.0-beta.19) (2021-11-03)
 
 
