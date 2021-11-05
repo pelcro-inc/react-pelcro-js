@@ -1,3 +1,10 @@
+# [2.4.0-beta.22](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.4.0-beta.21...v2.4.0-beta.22) (2021-11-05)
+
+
+### Bug Fixes
+
+* **payment button:** add padding between tax and button ([4abadd7](https://github.com/pelcro-inc/react-pelcro-js/commit/4abadd703a64c9ceb94fd39f2b25ecc41d97e8ed))
+
 # [2.4.0-beta.21](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.4.0-beta.20...v2.4.0-beta.21) (2021-11-05)
 
 
