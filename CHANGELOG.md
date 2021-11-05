@@ -1,3 +1,10 @@
+# [2.4.0-beta.23](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.4.0-beta.22...v2.4.0-beta.23) (2021-11-05)
+
+
+### Features
+
+* **dashboard:** close menu when user clicks outside ([#105](https://github.com/pelcro-inc/react-pelcro-js/issues/105)) ([bb61cfc](https://github.com/pelcro-inc/react-pelcro-js/commit/bb61cfc3dece74470d807538efb3e8ed6d795805))
+
 # [2.4.0-beta.22](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.4.0-beta.21...v2.4.0-beta.22) (2021-11-05)
 
 
