@@ -74,7 +74,7 @@ export function PaymentMethodView({
             <TaxAmount />
 
             {/* Payment buttons section */}
-            <div className="plc-grid plc-mt-2 plc-gap-y-2">
+            <div className="plc-grid plc-mt-4 plc-gap-y-2">
               <SubmitPaymentMethod />
               {showExternalPaymentMethods && (
                 <>
