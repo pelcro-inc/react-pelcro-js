@@ -65,7 +65,7 @@ export function PaymentMethodView({
 
             {/* Coupon section */}
             {showCoupon && (
-              <div className="plc-mb-6">
+              <div className="plc-mb-2">
                 <CouponCode />
                 <DiscountedPrice />
               </div>

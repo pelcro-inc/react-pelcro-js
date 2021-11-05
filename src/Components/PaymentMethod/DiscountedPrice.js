@@ -22,7 +22,10 @@ export const DiscountedPrice = (props) => {
 
   if (percentOff) {
     return (
-      <div className="pelcro-discount" {...props}>
+      <div
+        className="plc-flex plc-justify-center plc-mt-2 pelcro-discount"
+        {...props}
+      >
         (-{percentOff}){" "}
         <span className="plc-font-bold pelcro-discounted-price">
           {priceFormatted}
