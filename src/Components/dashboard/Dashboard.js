@@ -87,6 +87,8 @@ class Dashboard extends Component {
     this.site = window.Pelcro.site.read();
     this.locale = this.props.t;
     this.user = window.Pelcro.user.read();
+
+    this.menuRef = React.createRef();
   }
 
   componentDidMount = () => {
@@ -106,6 +108,28 @@ class Dashboard extends Component {
 
     const { addresses } = window.Pelcro.user.read();
     if (addresses) this.setState({ addresses: addresses });
+  };
+
+  componentWillUnmount = () => {
+    document.removeEventListener(
+      "click",
+      this.hideMenuIfClickedOutside
+    );
+  };
+
+  initializeHideMenuHandler = () => {
+    document.addEventListener("click", this.hideMenuIfClickedOutside);
+  };
+
+  hideMenuIfClickedOutside = (event) => {
+    const didClickOutsideMenu =
+      this.state.isOpen &&
+      this.menuRef.current &&
+      !this.menuRef.current.contains(event.target);
+
+    if (didClickOutsideMenu) {
+      this.setState({ isOpen: false });
+    }
   };
 
   cancelSubscription = (subscription_id, onSuccess, onFailure) => {
@@ -699,12 +723,13 @@ class Dashboard extends Component {
         enter="plc-transform plc-transition plc-duration-500"
         enterFrom="plc-translate-x-full"
         enterTo="plc-translate-x-0"
+        afterEnter={this.initializeHideMenuHandler}
         leave="plc-transform plc-transition plc-duration-500"
         leaveFrom="plc-translate-x-0"
         leaveTo="plc-translate-x-full"
         afterLeave={this.props.onClose}
       >
-        <div id="pelcro-view-dashboard">
+        <div id="pelcro-view-dashboard" ref={this.menuRef}>
           <header className="plc-flex plc-flex-col plc-p-4 plc-pl-2 plc-min-h-40 sm:plc-pr-8 plc-bg-primary-500">
             <div className="plc-flex plc-flex-row-reverse">
               <Button
