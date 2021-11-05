@@ -1,3 +1,10 @@
+# [2.4.0-beta.21](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.4.0-beta.20...v2.4.0-beta.21) (2021-11-05)
+
+
+### Features
+
+* **discount price:** center align discounted price ([8cca80b](https://github.com/pelcro-inc/react-pelcro-js/commit/8cca80b34bb645b97890b60e738030ce84d67041))
+
 # [2.4.0-beta.20](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.4.0-beta.19...v2.4.0-beta.20) (2021-11-03)
 
 
