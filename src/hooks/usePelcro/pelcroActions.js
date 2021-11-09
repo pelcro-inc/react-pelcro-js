@@ -44,10 +44,13 @@ export class PelcroActions {
       const newsletters = window.Pelcro?.uiSettings?.newsletters;
       const siteHasNewslettersDefined =
         Array.isArray(newsletters) && newsletters.length > 0;
-      if (
-        !this.get().isAuthenticated() ||
-        !siteHasNewslettersDefined
-      ) {
+
+      const queryParamEmail =
+        window.Pelcro.helpers.getURLParameter("email");
+      const hasEmail =
+        this.get().isAuthenticated() || queryParamEmail;
+
+      if (!hasEmail || !siteHasNewslettersDefined) {
         return;
       }
     }

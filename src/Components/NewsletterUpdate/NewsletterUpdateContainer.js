@@ -150,41 +150,41 @@ const NewsletterUpdateContainer = ({
         type: GET_NEWSLETTERS_FETCH
       });
 
-      window.Pelcro.newsletter.getByEmail(
-        window.Pelcro.user.read()?.email,
-        (err, res) => {
-          if (err) {
-            return dispatch({
-              type: SHOW_ALERT,
-              payload: {
-                type: "error",
-                content: getErrorMessages(err)
-              }
-            });
-          }
+      const email =
+        window.Pelcro.user.read()?.email ??
+        window.Pelcro.helpers.getURLParameter("email");
 
-          const newsletters =
-            window.Pelcro?.uiSettings?.newsletters ?? [];
-          const selectedNewsletters =
-            res.data.lists?.split(",") ?? [];
-          const allNewslettersWithSelectedField = newsletters.map(
-            (newsletter) => ({
-              ...newsletter,
-              id: String(newsletter.id),
-              selected: selectedNewsletters.includes(
-                String(newsletter.id)
-              )
-            })
-          );
-          dispatch({
-            type: GET_NEWSLETTERS_SUCCESS,
+      window.Pelcro.newsletter.getByEmail(email, (err, res) => {
+        if (err) {
+          return dispatch({
+            type: SHOW_ALERT,
             payload: {
-              newsletters: allNewslettersWithSelectedField,
-              didSubToNewslettersBefore: Boolean(res.data.email)
+              type: "error",
+              content: getErrorMessages(err)
             }
           });
         }
-      );
+
+        const newsletters =
+          window.Pelcro?.uiSettings?.newsletters ?? [];
+        const selectedNewsletters = res.data.lists?.split(",") ?? [];
+        const allNewslettersWithSelectedField = newsletters.map(
+          (newsletter) => ({
+            ...newsletter,
+            id: String(newsletter.id),
+            selected: selectedNewsletters.includes(
+              String(newsletter.id)
+            )
+          })
+        );
+        dispatch({
+          type: GET_NEWSLETTERS_SUCCESS,
+          payload: {
+            newsletters: allNewslettersWithSelectedField,
+            didSubToNewslettersBefore: Boolean(res.data.email)
+          }
+        });
+      });
     };
 
     getUserNewsletters();
