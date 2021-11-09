@@ -1,4 +1,5 @@
 import React, { createContext, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import useReducerWithSideEffects, {
   UpdateWithSideEffect,
   Update
@@ -34,6 +35,8 @@ const NewsletterUpdateContainer = ({
   onFailure = () => {},
   children
 }) => {
+  const [t] = useTranslation("address");
+
   const handleSubmit = (
     { newsletters, didSubToNewslettersBefore },
     dispatch
@@ -54,6 +57,13 @@ const NewsletterUpdateContainer = ({
         if (!didSubToNewslettersBefore) {
           dispatch({ type: SWITCH_TO_UPDATE });
         }
+        dispatch({
+          type: SHOW_ALERT,
+          payload: {
+            type: "success",
+            content: t("messages.addressUpdated")
+          }
+        });
         onSuccess(res);
       }
     };

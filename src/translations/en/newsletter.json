@@ -1,6 +1,6 @@
 {
   "title": "Enter your email to subscribe to our newsletter",
-  "updateTitle": "Select the newsletters you want to subscribe to",
+  "updateTitle": "Update newsletter selections",
   "subtitle": "We may use your email for other marketing communication",
   "labels": {
     "submit": "Submit",
@@ -12,11 +12,9 @@
   },
   "messages": {
     "alreadyHaveAccount": "Already have an account?",
+    "success": "Newsletters selections successfully updated!",
     "loginHere": "Login here.",
     "createAnAccount": " Create an account by clicking ",
     "here": "here"
-  },
-  "errors": {
-    "": ""
   }
 }
