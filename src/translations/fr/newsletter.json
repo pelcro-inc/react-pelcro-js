@@ -1,6 +1,6 @@
 {
   "title": "Entrez votre adresse courriel pour vous abonner à notre infolettre",
-  "updateTitle": "Sélectionnez les newsletters auxquelles vous souhaitez vous abonner",
+  "updateTitle": "Mettre à jour son choix d'infolettres",
   "subtitle": "Nous pouvons utiliser votre adresse courriel pour d’autres communications marketing",
   "labels": {
     "submit": "Lire l’article !",
@@ -12,11 +12,9 @@
   },
   "messages": {
     "alreadyHaveAccount": "Vous avez déjà un compte ?",
+    "success": "Votre choix d'infolettres a été retenu",
     "loginHere": "Connectez-vous ici",
     "createAnAccount": " Créez un compte en cliquant ",
     "here": "ici"
-  },
-  "errors": {
-    "": ""
   }
 }

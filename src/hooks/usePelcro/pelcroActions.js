@@ -44,10 +44,24 @@ export class PelcroActions {
       const newsletters = window.Pelcro?.uiSettings?.newsletters;
       const siteHasNewslettersDefined =
         Array.isArray(newsletters) && newsletters.length > 0;
-      if (
-        !this.get().isAuthenticated() ||
-        !siteHasNewslettersDefined
-      ) {
+
+      if (!siteHasNewslettersDefined) {
+        return;
+      }
+
+      const queryParamEmail =
+        window.Pelcro.helpers.getURLParameter("email");
+
+      if (queryParamEmail && this.get().isAuthenticated()) {
+        if (queryParamEmail !== window.Pelcro.user.read()?.email) {
+          console.error(
+            "email query parameter and user account email are different, url email query parameter must match user email if user is logged in"
+          );
+          return;
+        }
+      }
+
+      if (!queryParamEmail && !this.get().isAuthenticated()) {
         return;
       }
     }
