@@ -69,7 +69,9 @@ const NewsletterUpdateContainer = ({
     };
 
     const requestData = {
-      email: window.Pelcro.user.read()?.email,
+      email:
+        window.Pelcro.user.read()?.email ??
+        window.Pelcro.helpers.getURLParameter("email"),
       source: "web",
       lists: newsletters
         .filter((newsletter) => newsletter.selected)
