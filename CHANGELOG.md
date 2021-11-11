@@ -1,3 +1,17 @@
+# [2.4.0-beta.24](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.4.0-beta.23...v2.4.0-beta.24) (2021-11-10)
+
+
+### Features
+
+* **url triggers:** allow opening newsletters update modal for non authed users ([#106](https://github.com/pelcro-inc/react-pelcro-js/issues/106)) ([3d474e4](https://github.com/pelcro-inc/react-pelcro-js/commit/3d474e47cd54bb993310f2fb285860fdf53fff07))
+
+# [2.4.0-beta.23](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.4.0-beta.22...v2.4.0-beta.23) (2021-11-05)
+
+
+### Features
+
+* **dashboard:** close menu when user clicks outside ([#105](https://github.com/pelcro-inc/react-pelcro-js/issues/105)) ([bb61cfc](https://github.com/pelcro-inc/react-pelcro-js/commit/bb61cfc3dece74470d807538efb3e8ed6d795805))
+
 # [2.4.0-beta.22](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.4.0-beta.21...v2.4.0-beta.22) (2021-11-05)
 
 
