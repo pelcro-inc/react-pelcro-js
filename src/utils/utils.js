@@ -141,16 +141,46 @@ export const isValidViewFromURL = (viewID) => {
       "payment-method-update",
       "user-edit",
       "newsletter",
-      "newsletter-update",
       "address-create",
       "order-create",
       "cart"
-    ].includes(viewID)
+    ].includes(viewID) ||
+    hasValidNewsletterUpdateUrl()
   ) {
     return true;
   }
 
   return false;
+
+  function hasValidNewsletterUpdateUrl() {
+    if (viewID !== "newsletter-update") return false;
+
+    const newsletters = window.Pelcro?.uiSettings?.newsletters;
+    const siteHasNewslettersDefined =
+      Array.isArray(newsletters) && newsletters.length > 0;
+
+    if (!siteHasNewslettersDefined) {
+      return false;
+    }
+
+    const queryParamEmail =
+      window.Pelcro.helpers.getURLParameter("email");
+
+    if (queryParamEmail && window.Pelcro.user.isAuthenticated()) {
+      if (queryParamEmail !== window.Pelcro.user.read()?.email) {
+        console.error(
+          "email query parameter and user account email are different, url email query parameter must match user email if user is logged in"
+        );
+        return false;
+      }
+    }
+
+    if (!queryParamEmail && !window.Pelcro.user.isAuthenticated()) {
+      return false;
+    }
+
+    return true;
+  }
 };
 
 /**
