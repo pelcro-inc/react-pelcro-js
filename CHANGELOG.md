@@ -1,3 +1,10 @@
+# [2.4.0-beta.25](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.4.0-beta.24...v2.4.0-beta.25) (2021-11-11)
+
+
+### Bug Fixes
+
+* **url triggers:** newsletters update trigger breaking paywalls ([#107](https://github.com/pelcro-inc/react-pelcro-js/issues/107)) ([71069af](https://github.com/pelcro-inc/react-pelcro-js/commit/71069afd065de46657c6338b94eefb094d709c04))
+
 # [2.4.0-beta.24](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.4.0-beta.23...v2.4.0-beta.24) (2021-11-10)
 
 
