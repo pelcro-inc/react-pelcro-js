@@ -35,7 +35,7 @@ const NewsletterUpdateContainer = ({
   onFailure = () => {},
   children
 }) => {
-  const [t] = useTranslation("address");
+  const [t] = useTranslation("newsletter");
 
   const handleSubmit = (
     { newsletters, didSubToNewslettersBefore },
@@ -61,7 +61,7 @@ const NewsletterUpdateContainer = ({
           type: SHOW_ALERT,
           payload: {
             type: "success",
-            content: t("messages.addressUpdated")
+            content: t("messages.success")
           }
         });
         onSuccess(res);
