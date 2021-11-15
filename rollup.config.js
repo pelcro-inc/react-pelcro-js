@@ -50,8 +50,7 @@ export default [
             "isValidElementType",
             "ForwardRef",
             "typeOf"
-          ],
-          "node_modules/@stripe/stripe-js/pure.js": ["loadStripe"]
+          ]
         }
       }),
       del({ targets: ["dist/*"] }),
