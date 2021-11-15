@@ -1,3 +1,10 @@
+# [2.4.0-beta.27](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.4.0-beta.26...v2.4.0-beta.27) (2021-11-15)
+
+
+### Features
+
+* **newsletters update:** update success wording ([#109](https://github.com/pelcro-inc/react-pelcro-js/issues/109)) ([bb72ee1](https://github.com/pelcro-inc/react-pelcro-js/commit/bb72ee109a26a2864fa5f0d104653ec23fc1f054))
+
 # [2.4.0-beta.26](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.4.0-beta.25...v2.4.0-beta.26) (2021-11-15)
 
 
