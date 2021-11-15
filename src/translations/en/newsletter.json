@@ -12,7 +12,7 @@
   },
   "messages": {
     "alreadyHaveAccount": "Already have an account?",
-    "success": "Newsletters selections successfully updated!",
+    "success": "Newsletters were successfully updated",
     "loginHere": "Login here.",
     "createAnAccount": " Create an account by clicking ",
     "here": "here"
