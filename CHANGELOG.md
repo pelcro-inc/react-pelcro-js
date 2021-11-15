@@ -1,3 +1,10 @@
+# [2.4.0-beta.26](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.4.0-beta.25...v2.4.0-beta.26) (2021-11-15)
+
+
+### Reverts
+
+* stripe sdk lazy loading ([#108](https://github.com/pelcro-inc/react-pelcro-js/issues/108)) ([2718a9d](https://github.com/pelcro-inc/react-pelcro-js/commit/2718a9dace4b2672bcf5ae1673a85873e8aff350))
+
 # [2.4.0-beta.25](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.4.0-beta.24...v2.4.0-beta.25) (2021-11-11)
 
 
