@@ -1,3 +1,31 @@
+# [2.5.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.4.0...v2.5.0) (2021-11-17)
+
+
+### Bug Fixes
+
+* **coupon:** display discounted amount before taxes ([#102](https://github.com/pelcro-inc/react-pelcro-js/issues/102)) ([3b28aaa](https://github.com/pelcro-inc/react-pelcro-js/commit/3b28aaa21161b19b3c894a03add29e7d5b8635d9))
+* **coupon:** remove discount from price when coupon is removed ([#98](https://github.com/pelcro-inc/react-pelcro-js/issues/98)) ([cf4bf8b](https://github.com/pelcro-inc/react-pelcro-js/commit/cf4bf8ba11637a14e5031843b5569db253e9a429))
+* **payment button:** add padding between tax and button ([4abadd7](https://github.com/pelcro-inc/react-pelcro-js/commit/4abadd703a64c9ceb94fd39f2b25ecc41d97e8ed))
+* **url triggers:** newsletters update trigger breaking paywalls ([#107](https://github.com/pelcro-inc/react-pelcro-js/issues/107)) ([71069af](https://github.com/pelcro-inc/react-pelcro-js/commit/71069afd065de46657c6338b94eefb094d709c04))
+* enforce buttons colors ([#104](https://github.com/pelcro-inc/react-pelcro-js/issues/104)) ([154722f](https://github.com/pelcro-inc/react-pelcro-js/commit/154722fe656bf3753fa00961b928d67183eac8c4))
+* enforce having no border for multiple buttons ([#103](https://github.com/pelcro-inc/react-pelcro-js/issues/103)) ([90aaa27](https://github.com/pelcro-inc/react-pelcro-js/commit/90aaa27780be9c614b2bfd92f1e508cd34b593d3))
+
+
+### Features
+
+* **checkout:** display tax inclusive price at checkout ([#100](https://github.com/pelcro-inc/react-pelcro-js/issues/100)) ([da89fad](https://github.com/pelcro-inc/react-pelcro-js/commit/da89faddda02852c71b40ccdf9320f958bc66adf))
+* **dashboard:** close menu when user clicks outside ([#105](https://github.com/pelcro-inc/react-pelcro-js/issues/105)) ([bb61cfc](https://github.com/pelcro-inc/react-pelcro-js/commit/bb61cfc3dece74470d807538efb3e8ed6d795805))
+* **discount price:** center align discounted price ([8cca80b](https://github.com/pelcro-inc/react-pelcro-js/commit/8cca80b34bb645b97890b60e738030ce84d67041))
+* **newsletters update:** update success wording ([#109](https://github.com/pelcro-inc/react-pelcro-js/issues/109)) ([bb72ee1](https://github.com/pelcro-inc/react-pelcro-js/commit/bb72ee109a26a2864fa5f0d104653ec23fc1f054))
+* **url triggers:** allow opening newsletters update modal for non authed users ([#106](https://github.com/pelcro-inc/react-pelcro-js/issues/106)) ([3d474e4](https://github.com/pelcro-inc/react-pelcro-js/commit/3d474e47cd54bb993310f2fb285860fdf53fff07))
+* add update newsletters modal ([#101](https://github.com/pelcro-inc/react-pelcro-js/issues/101)) ([c68d5f0](https://github.com/pelcro-inc/react-pelcro-js/commit/c68d5f0f2e7045b4a3dd69ef5e37e5a8320347fd))
+* **stripe:** lazy load stripe sdk on checkout form ([#99](https://github.com/pelcro-inc/react-pelcro-js/issues/99)) ([6c30b6e](https://github.com/pelcro-inc/react-pelcro-js/commit/6c30b6ea0991a4008af2d71640a9cd52b3a73e0a))
+
+
+### Reverts
+
+* stripe sdk lazy loading ([#108](https://github.com/pelcro-inc/react-pelcro-js/issues/108)) ([2718a9d](https://github.com/pelcro-inc/react-pelcro-js/commit/2718a9dace4b2672bcf5ae1673a85873e8aff350))
+
 # [2.4.0-beta.27](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.4.0-beta.26...v2.4.0-beta.27) (2021-11-15)
 
 
