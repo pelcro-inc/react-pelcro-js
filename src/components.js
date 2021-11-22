@@ -181,6 +181,7 @@ export { ProfilePicChangeView } from "./Components/ProfilePicChange/ProfilePicCh
 export { ProfilePicChangeModal } from "./Components/ProfilePicChange/ProfilePicChangeModal";
 
 export { AlertWithContext as Alert } from "./SubComponents/AlertWithContext";
+export { Alert as AlertElement } from "./SubComponents/Alert";
 export { Badge } from "./SubComponents/Badge";
 export { Button } from "./SubComponents/Button";
 export { Checkbox } from "./SubComponents/Checkbox";
