@@ -1,3 +1,10 @@
+# [2.6.0-beta.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.5.0...v2.6.0-beta.1) (2021-11-22)
+
+
+### Features
+
+* **dashboard:** add css classes for sub action buttons ([#110](https://github.com/pelcro-inc/react-pelcro-js/issues/110)) ([7f019fa](https://github.com/pelcro-inc/react-pelcro-js/commit/7f019fab762eeab724d152fed9377b0900f6b134))
+
 # [2.5.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.4.0...v2.5.0) (2021-11-17)
 
 
