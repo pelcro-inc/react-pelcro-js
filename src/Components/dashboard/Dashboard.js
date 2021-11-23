@@ -405,7 +405,7 @@ class Dashboard extends Component {
               {sub.cancel_at_period_end === 0 && (
                 <Button
                   variant="ghost"
-                  className="plc-text-red-500 focus:plc-ring-red-500 pelcro-dashoard-sub-cancel-button"
+                  className="plc-text-red-500 focus:plc-ring-red-500 pelcro-dashboard-sub-cancel-button"
                   icon={<XCircleIcon />}
                   onClick={onCancelClick}
                   disabled={this.state.disableSubmit}
@@ -419,7 +419,7 @@ class Dashboard extends Component {
                 !sub.is_gift_recipient && (
                   <Button
                     variant="ghost"
-                    className="plc-text-green-400 focus:plc-ring-green-300 pelcro-dashoard-sub-reactivate-button"
+                    className="plc-text-green-400 focus:plc-ring-green-300 pelcro-dashboard-sub-reactivate-button"
                     icon={<RefreshIcon />}
                     onClick={onReactivateClick}
                     disabled={this.state.disableSubmit}
@@ -431,7 +431,7 @@ class Dashboard extends Component {
               {sub.cancel_at_period_end === 1 && (
                 <Button
                   variant="ghost"
-                  className="plc-text-blue-400 pelcro-dashoard-sub-renew-button"
+                  className="plc-text-blue-400 pelcro-dashboard-sub-renew-button"
                   icon={<RefreshIcon />}
                   onClick={onRenewClick}
                   disabled={this.state.disableSubmit}
