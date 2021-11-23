@@ -1,3 +1,10 @@
+# [2.6.0-beta.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.6.0-beta.1...v2.6.0-beta.2) (2021-11-23)
+
+
+### Bug Fixes
+
+* **dashboard:** sub action button CSS classes typo ([88857d7](https://github.com/pelcro-inc/react-pelcro-js/commit/88857d74a06120abe131557022b03dfd6e4265da))
+
 # [2.6.0-beta.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.5.0...v2.6.0-beta.1) (2021-11-22)
 
 
