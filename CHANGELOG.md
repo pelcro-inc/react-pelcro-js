@@ -1,3 +1,10 @@
+# [2.6.0-beta.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.6.0-beta.2...v2.6.0-beta.3) (2021-11-25)
+
+
+### Features
+
+* lazy load stripe sdk ([#112](https://github.com/pelcro-inc/react-pelcro-js/issues/112)) ([778d18b](https://github.com/pelcro-inc/react-pelcro-js/commit/778d18b648f5d607fc592da4721dadf3532898a8))
+
 # [2.6.0-beta.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.6.0-beta.1...v2.6.0-beta.2) (2021-11-23)
 
 
