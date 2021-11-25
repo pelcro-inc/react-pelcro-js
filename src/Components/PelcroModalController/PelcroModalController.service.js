@@ -7,6 +7,7 @@ import {
   isValidViewFromURL
 } from "../../utils/utils";
 import { init as initContentEntitlement } from "../common/contentEntitlement";
+import { loadStripe } from "@stripe/stripe-js/pure";
 
 /**
  * @typedef {Object} OptionsType
@@ -79,11 +80,13 @@ export const initPaywalls = () => {
 };
 
 export const loadPaymentSDKs = () => {
-  // Load stripe's SDK
-  window.Pelcro.helpers.loadSDK(
-    "https://js.stripe.com/v3/",
-    "pelcro-sdk-stripe-id"
-  );
+  // Lazy load stripe's SDK
+  const { whenUserReady } = usePelcro.getStore();
+  whenUserReady(() => {
+    if (!window.Stripe) {
+      loadStripe(window.Pelcro.environment.stripe);
+    }
+  });
 
   // Load PayPal SDK's
   const supportsPaypal = Boolean(
