@@ -1,4 +1,7 @@
-import { getFormattedPriceByLocal } from "../../utils/utils";
+import {
+  getFormattedPriceByLocal,
+  getPageOrDefaultLanguage
+} from "../../utils/utils";
 
 /**
  * @typedef {Object} paypalConstructorOptions
@@ -28,7 +31,8 @@ export class PaypalClient {
     this.product = null;
     this.amount = null;
     this.config = paypalClientConfig;
-    this.braintreeToken = window.Pelcro.site.read().braintree_tokenization;
+    this.braintreeToken =
+      window.Pelcro.site.read().braintree_tokenization;
     this.isPaypalEnabled = PaypalClient.isPaypalEnabled();
   }
 
@@ -49,11 +53,10 @@ export class PaypalClient {
       authorization: this.braintreeToken
     });
 
-    const paypalCheckoutInstance = await window.braintree.paypalCheckout.create(
-      {
+    const paypalCheckoutInstance =
+      await window.braintree.paypalCheckout.create({
         client: braintreeClient
-      }
-    );
+      });
 
     const paypalClient = await paypalCheckoutInstance.loadPayPalSDK({
       vault: true,
@@ -115,7 +118,7 @@ export class PaypalClient {
     this.paypalButton = window.paypal.Buttons({
       fundingSource: window.paypal.FUNDING.PAYPAL,
       // button locale
-      locale: this.config.locale ?? this.siteInfo.default_locale,
+      locale: this.config.locale ?? getPageOrDefaultLanguage(),
       // button style
       style: this.config.style ?? defaultButtonStyle,
       // create payment handler
@@ -239,7 +242,7 @@ export class PaypalClient {
 
       shippingAddressEditable: this.config.shippingAddressEditable,
       displayName: this.config.displayName ?? this.siteInfo.name,
-      locale: this.config.locale ?? this.siteInfo.default_locale
+      locale: this.config.locale ?? getPageOrDefaultLanguage()
     };
   };
 
@@ -254,7 +257,7 @@ export class PaypalClient {
     const priceFormatted = getFormattedPriceByLocal(
       totalAmount,
       this.product.currency,
-      this.siteInfo.default_locale
+      getPageOrDefaultLanguage()
     );
 
     const autoRenewed = this.product.auto_renew;

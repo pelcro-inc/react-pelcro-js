@@ -63,13 +63,35 @@ export const getAddressById = (id) => {
 
 /**
  * Transforms locale names stored in our backend like
- * "en_US" into the standerd accepted in core i18n methods: "en-US"
+ * "en_US" into the standard accepted in core i18n methods: "en-US"
  * @param {string} localeName
  * @return {string | undefined}
  * @example getCanonicalLocaleFormat("en_US") => "en-US"
  */
 export const getCanonicalLocaleFormat = (localeName) =>
   localeName?.replace("_", "-");
+
+/**
+ * @param {string} localeName
+ * @return {string | undefined}
+ * @example getLanguageWithoutRegion("en-US") => "en"
+ */
+export const getLanguageWithoutRegion = (localeName) => {
+  return getCanonicalLocaleFormat(localeName)?.split("-")[0];
+};
+
+/**
+ * Gets the current page language or fallbacks to site default
+ * @return {string | undefined}
+ */
+export const getPageOrDefaultLanguage = () => {
+  return (
+    window.Pelcro.helpers.getHtmlLanguageAttribute() ??
+    getLanguageWithoutRegion(
+      window.Pelcro?.site?.read?.()?.default_locale
+    )
+  );
+};
 
 /**
  * Returns a formatted price string depending on locale
@@ -82,7 +104,7 @@ export const getCanonicalLocaleFormat = (localeName) =>
 export const getFormattedPriceByLocal = (
   amount,
   currency = "USD",
-  locale = "en-US"
+  locale = "en"
 ) => {
   const formatter = new Intl.NumberFormat(
     getCanonicalLocaleFormat(locale),
@@ -115,11 +137,10 @@ export const calcAndFormatItemsTotal = (items, currency) => {
     );
   }
 
-  const locale = window.Pelcro.site.read().default_locale;
   return getFormattedPriceByLocal(
     totalWithoutDividingBy100,
     currency,
-    locale
+    getPageOrDefaultLanguage()
   );
 };
 
@@ -152,6 +173,9 @@ export const isValidViewFromURL = (viewID) => {
 
   return false;
 
+  /**
+   *
+   */
   function hasValidNewsletterUpdateUrl() {
     if (viewID !== "newsletter-update") return false;
 

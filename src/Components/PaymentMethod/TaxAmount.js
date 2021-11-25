@@ -1,7 +1,10 @@
 import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { usePelcro } from "../../hooks/usePelcro";
-import { getFormattedPriceByLocal } from "../../utils/utils";
+import {
+  getFormattedPriceByLocal,
+  getPageOrDefaultLanguage
+} from "../../utils/utils";
 import { store } from "./PaymentMethodContainer";
 
 export const TaxAmount = () => {
@@ -9,14 +12,13 @@ export const TaxAmount = () => {
   const {
     state: { taxAmount }
   } = useContext(store);
-  const { default_locale } = Pelcro.site.read();
   const { plan } = usePelcro();
 
   const planQuantity = plan?.quantity ?? 1;
   const priceFormatted = getFormattedPriceByLocal(
     taxAmount * planQuantity,
     plan?.currency,
-    default_locale
+    getPageOrDefaultLanguage()
   );
 
   if (taxAmount) {
