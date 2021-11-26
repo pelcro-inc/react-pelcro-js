@@ -4,7 +4,10 @@ import { useTranslation } from "react-i18next";
 import { store } from "./PaymentMethodContainer";
 import { SUBMIT_PAYMENT } from "../../utils/action-types";
 import { Button } from "../../SubComponents/Button";
-import { getFormattedPriceByLocal } from "../../utils/utils";
+import {
+  getFormattedPriceByLocal,
+  getPageOrDefaultLanguage
+} from "../../utils/utils";
 
 export const SubmitPaymentMethod = ({ onClick, ...otherProps }) => {
   const { plan } = usePelcro();
@@ -13,14 +16,13 @@ export const SubmitPaymentMethod = ({ onClick, ...otherProps }) => {
     dispatch,
     state: { disableSubmit, isLoading, updatedPrice }
   } = useContext(store);
-  const { default_locale } = Pelcro.site.read();
 
   const planQuantity = plan?.quantity ?? 1;
   const price = updatedPrice ?? plan?.amount;
   const priceFormatted = getFormattedPriceByLocal(
     price * planQuantity,
     plan?.currency,
-    default_locale
+    getPageOrDefaultLanguage()
   );
 
   return (

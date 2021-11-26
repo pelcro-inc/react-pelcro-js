@@ -38,7 +38,7 @@ import {
   PaypalGateWay,
   SUBSCRIPTION_TYPES
 } from "../../services/Subscription/Subscription.service";
-import { getCanonicalLocaleFormat } from "../../utils/utils";
+import { getPageOrDefaultLanguage } from "../../utils/utils";
 import { usePelcro } from "../../hooks/usePelcro";
 
 /**
@@ -970,9 +970,7 @@ const PaymentMethodContainer = (props) => {
       <StripeProvider
         apiKey={window.Pelcro.environment.stripe}
         stripeAccount={window.Pelcro.site.read().account_id}
-        locale={getCanonicalLocaleFormat(
-          window.Pelcro.site.read().default_locale
-        )}
+        locale={getPageOrDefaultLanguage()}
       >
         <Elements>
           <UnwrappedForm store={store} {...props} />

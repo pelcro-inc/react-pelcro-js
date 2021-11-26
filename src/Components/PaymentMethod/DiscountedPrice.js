@@ -1,13 +1,15 @@
 import React, { useContext } from "react";
 import { usePelcro } from "../../hooks/usePelcro";
-import { getFormattedPriceByLocal } from "../../utils/utils";
+import {
+  getFormattedPriceByLocal,
+  getPageOrDefaultLanguage
+} from "../../utils/utils";
 import { store } from "./PaymentMethodContainer";
 
 export const DiscountedPrice = (props) => {
   const {
     state: { updatedPrice, taxAmount, percentOff }
   } = useContext(store);
-  const { default_locale } = Pelcro.site.read();
   const { order, plan } = usePelcro();
 
   const ecommOrderCurrency = order?.currency ?? order?.[0]?.currency;
@@ -17,7 +19,7 @@ export const DiscountedPrice = (props) => {
   const priceFormatted = getFormattedPriceByLocal(
     order ? updatedPrice : discountedPriceWithoutTax * planQuantity,
     ecommOrderCurrency ?? plan?.currency,
-    default_locale
+    getPageOrDefaultLanguage()
   );
 
   if (percentOff) {

@@ -1,6 +1,9 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { getFormattedPriceByLocal } from "../../../utils/utils";
+import {
+  getFormattedPriceByLocal,
+  getPageOrDefaultLanguage
+} from "../../../utils/utils";
 import { ReactComponent as ChevronRightIcon } from "../../../assets/chevron-right.svg";
 import { Accordion } from "../Accordion";
 
@@ -45,7 +48,6 @@ export const OrderItems = ({
   };
 
   const { t } = useTranslation("dashboard");
-  const site = window.Pelcro.site.read();
 
   return !orders?.length ? (
     <tbody>
@@ -75,7 +77,7 @@ export const OrderItems = ({
                   {getFormattedPriceByLocal(
                     order.amount,
                     order.currency,
-                    site.default_locale
+                    getPageOrDefaultLanguage()
                   )}
                 </span>
                 <br />
@@ -115,9 +117,10 @@ export const OrderItems = ({
             {isActive && (
               <>
                 {order.items.map((item) => {
-                  const productSku = window.Pelcro.ecommerce.products.getBySkuId(
-                    item.product_sku_id
-                  );
+                  const productSku =
+                    window.Pelcro.ecommerce.products.getBySkuId(
+                      item.product_sku_id
+                    );
 
                   return (
                     <tr
@@ -146,7 +149,7 @@ export const OrderItems = ({
                           {getFormattedPriceByLocal(
                             item.amount,
                             order.currency,
-                            site.default_locale
+                            getPageOrDefaultLanguage()
                           )}
                         </span>
                       </td>

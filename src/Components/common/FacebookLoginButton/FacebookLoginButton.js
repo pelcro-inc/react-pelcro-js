@@ -4,6 +4,7 @@ import { store as loginStore } from "../../Login/LoginContainer";
 import { store as registerStore } from "../../Register/RegisterContainer";
 import { ReactComponent as FacebookLogoIcon } from "../../../assets/facebook-logo.svg";
 import { HANDLE_SOCIAL_LOGIN } from "../../../utils/action-types";
+import { getPageOrDefaultLanguage } from "../../../utils/utils";
 
 export const FacebookLoginButton = ({
   label = "Facebook",
@@ -48,7 +49,7 @@ export const FacebookLoginButton = ({
   return facebookLoginEnabled ? (
     <FacebookLogin
       appId={window.Pelcro.site.read().facebook_app_id}
-      language={window.Pelcro.site.read().default_locale ?? "en_US"}
+      language={getPageOrDefaultLanguage()}
       fields="first_name,last_name,email,picture"
       callback={onSuccess}
       onFailure={onFailure}

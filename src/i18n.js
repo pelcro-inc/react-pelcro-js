@@ -40,10 +40,10 @@ import select_en from "./translations/en/select.json";
 import select_fr from "./translations/fr/select.json";
 import notification_en from "./translations/en/notification.json";
 import notification_fr from "./translations/fr/notification.json";
-import { getCanonicalLocaleFormat } from "./utils/utils";
+import { getPageOrDefaultLanguage } from "./utils/utils";
 
 const resources = {
-  "en-US": {
+  en: {
     common: common_en,
     paymentMethod: paymentMethod_en,
     newsletter: newsletter_en,
@@ -65,7 +65,7 @@ const resources = {
     select: select_en,
     notification: notification_en
   },
-  "fr-CA": {
+  fr: {
     common: common_fr,
     paymentMethod: paymentMethod_fr,
     newsletter: newsletter_fr,
@@ -89,15 +89,15 @@ const resources = {
   }
 };
 
-let locale = window.Pelcro?.site?.read?.()?.default_locale;
-
-if (!locale) locale = "en-US";
+// set UI language to the page language or default to the language in site settings
+const locale = getPageOrDefaultLanguage();
 
 i18n
   .use(initReactI18next) // passes i18n down to react-i18next,
   .init({
     resources,
-    lng: getCanonicalLocaleFormat(locale),
+    lng: locale,
+    fallbackLng: "en",
     // debug: true,
     interpolation: {
       escapeValue: false // react already safes from xss
@@ -106,5 +106,19 @@ i18n
       bindI18nStore: "added" // the key is 'bindI18nStore' not 'bindStore', the types are wrong
     }
   });
+
+const pageLanguageObserver = new MutationObserver((mutationsList) => {
+  mutationsList.forEach((mutationRecord) => {
+    if (mutationRecord.attributeName === "lang") {
+      i18n.changeLanguage(
+        window.Pelcro.helpers.getHtmlLanguageAttribute()
+      );
+    }
+  });
+});
+
+pageLanguageObserver.observe(document.documentElement, {
+  attributes: true
+});
 
 export default i18n;

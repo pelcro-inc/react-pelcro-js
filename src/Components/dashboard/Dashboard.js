@@ -2,7 +2,10 @@ import React, { Component } from "react";
 import ReactGA from "react-ga";
 import { Transition } from "@headlessui/react";
 import { withTranslation } from "react-i18next";
-import { getFormattedPriceByLocal } from "../../utils/utils";
+import {
+  getFormattedPriceByLocal,
+  getPageOrDefaultLanguage
+} from "../../utils/utils";
 import { Button } from "../../SubComponents/Button";
 import { getPaymentCardIcon } from "./utils";
 import { Accordion } from "./Accordion";
@@ -366,7 +369,7 @@ class Dashboard extends Component {
                     {getFormattedPriceByLocal(
                       sub.plan.amount,
                       sub.plan.currency,
-                      this.site.default_locale
+                      getPageOrDefaultLanguage()
                     )}
                   </span>
                 </>
@@ -546,7 +549,7 @@ class Dashboard extends Component {
                     {getFormattedPriceByLocal(
                       recipient.plan.amount,
                       recipient.plan.currency,
-                      this.site.default_locale
+                      getPageOrDefaultLanguage()
                     )}
                   </span>
                 </>
