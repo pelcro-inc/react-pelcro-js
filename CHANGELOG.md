@@ -1,3 +1,10 @@
+# [2.6.0-beta.4](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.6.0-beta.3...v2.6.0-beta.4) (2021-11-26)
+
+
+### Features
+
+* **i18n:** use and observe page language in all UI ([#114](https://github.com/pelcro-inc/react-pelcro-js/issues/114)) ([fed8180](https://github.com/pelcro-inc/react-pelcro-js/commit/fed8180107000a0da9b9e7f0ac29bdb5907c6b4c))
+
 # [2.6.0-beta.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.6.0-beta.2...v2.6.0-beta.3) (2021-11-25)
 
 
