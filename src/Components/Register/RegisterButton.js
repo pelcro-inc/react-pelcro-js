@@ -4,7 +4,12 @@ import { Button } from "../../SubComponents/Button";
 import { HANDLE_REGISTRATION } from "../../utils/action-types";
 import { store } from "./RegisterContainer";
 
-export const RegisterButton = ({ name, onClick, ...otherProps }) => {
+export const RegisterButton = ({
+  name,
+  onClick,
+  className,
+  ...otherProps
+}) => {
   const {
     state: {
       emailError,
@@ -38,6 +43,9 @@ export const RegisterButton = ({ name, onClick, ...otherProps }) => {
       }}
       disabled={isDisabled}
       isLoading={buttonDisabled}
+      className={`${className} g-recaptcha`}
+      data-action="register"
+      data-sitekey={window.Pelcro.site.read()?.security_key}
       {...otherProps}
     >
       {name ?? t("messages.createAccount")}
