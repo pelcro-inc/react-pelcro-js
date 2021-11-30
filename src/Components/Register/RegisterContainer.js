@@ -68,31 +68,52 @@ const RegisterContainer = ({
       selectFields
     } = filteredData;
 
-    window.Pelcro.user.register(
-      {
-        email,
-        password,
-        first_name: firstName,
-        last_name: lastName,
-        metadata: { organization, jobTitle, ...selectFields }
-      },
-      (err, res) => {
-        dispatch({
-          type: DISABLE_REGISTRATION_BUTTON,
-          payload: false
-        });
+    if (!hasSecurityTokenEnabled()) {
+      sendRegisterRequest();
+      return;
+    }
 
-        if (err) {
-          dispatch({
-            type: SHOW_ALERT,
-            payload: { type: "error", content: getErrorMessages(err) }
-          });
-          onFailure(err);
-        } else {
-          onSuccess(res);
+    window.grecaptcha.enterprise.ready(async () => {
+      const token = await window.grecaptcha.enterprise.execute(
+        window.Pelcro.site.read()?.security_key,
+        {
+          action: "register"
         }
-      }
-    );
+      );
+      sendRegisterRequest(token);
+    });
+
+    function sendRegisterRequest(securityToken) {
+      window.Pelcro.user.register(
+        {
+          email,
+          password,
+          first_name: firstName,
+          last_name: lastName,
+          security_token: securityToken,
+          metadata: { organization, jobTitle, ...selectFields }
+        },
+        (err, res) => {
+          dispatch({
+            type: DISABLE_REGISTRATION_BUTTON,
+            payload: false
+          });
+
+          if (err) {
+            dispatch({
+              type: SHOW_ALERT,
+              payload: {
+                type: "error",
+                content: getErrorMessages(err)
+              }
+            });
+            onFailure(err);
+          } else {
+            onSuccess(res);
+          }
+        }
+      );
+    }
   };
 
   const handleSocialLogin = ({
@@ -245,3 +266,12 @@ const RegisterContainer = ({
 };
 
 export { RegisterContainer, store };
+
+/**
+ * Checks if the current site has security token enabled
+ * @return {boolean}
+ */
+function hasSecurityTokenEnabled() {
+  const hasSecuritySdkLoaded = Boolean(window.grecaptcha);
+  return hasSecuritySdkLoaded;
+}

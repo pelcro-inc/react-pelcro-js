@@ -16,6 +16,7 @@ const defaultOptions = {
   enableURLTriggers: true,
   enableTheme: true,
   enablePaywalls: true,
+  loadSecuritySDK: true,
   enableGoogleAnalytics: false
 };
 
