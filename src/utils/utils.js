@@ -377,3 +377,14 @@ export const getPaymentCardIcon = (name) => {
     )
   );
 };
+
+/**
+ * Gets the current date with time set to 0
+ * @param {Date} dateObject
+ * @return {Date}
+ */
+export function getDateWithoutTime(dateObject) {
+  const date = new Date(dateObject.getTime());
+  date.setHours(0, 0, 0, 0);
+  return date;
+}

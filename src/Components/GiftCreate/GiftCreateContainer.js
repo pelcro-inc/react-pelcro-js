@@ -15,6 +15,7 @@ import {
   DISABLE_SUBMIT,
   SHOW_ALERT
 } from "../../utils/action-types";
+import { getDateWithoutTime } from "../../utils/utils";
 
 const initialState = {
   email: "",
@@ -62,11 +63,13 @@ const GiftCreateContainer = ({
     }
 
     if (giftRecipient.startDate) {
-      const nowDate = new Date();
-      const yearFromNowDate = new Date(
-        new Date().setFullYear(nowDate.getFullYear() + 1)
+      const nowDate = getDateWithoutTime(new Date());
+      const yearFromNowDate = getDateWithoutTime(
+        new Date(new Date().setFullYear(nowDate.getFullYear() + 1))
       );
-      const submittedDate = new Date(giftRecipient.startDate);
+      const submittedDate = getDateWithoutTime(
+        new Date(giftRecipient.startDate)
+      );
 
       if (
         submittedDate < nowDate ||
