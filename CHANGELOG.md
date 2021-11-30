@@ -1,3 +1,10 @@
+# [2.6.0-beta.5](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.6.0-beta.4...v2.6.0-beta.5) (2021-11-30)
+
+
+### Bug Fixes
+
+* **gift creation:** error dispatched if gift date is set to today ([#115](https://github.com/pelcro-inc/react-pelcro-js/issues/115)) ([6e5f12a](https://github.com/pelcro-inc/react-pelcro-js/commit/6e5f12a384407ccfdd525285bf1b4ed8243b3244))
+
 # [2.6.0-beta.4](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.6.0-beta.3...v2.6.0-beta.4) (2021-11-26)
 
 
