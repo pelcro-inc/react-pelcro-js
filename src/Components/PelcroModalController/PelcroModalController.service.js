@@ -33,6 +33,7 @@ export const optionsController = (options) => {
     enableURLTriggers: initViewFromURL,
     enableTheme: applyPelcroTheme,
     enablePaywalls: initPaywalls,
+    loadSecuritySDK: initSecuritySdk,
     enableGoogleAnalytics: initGATracking
   };
 
@@ -104,6 +105,19 @@ export const loadPaymentSDKs = () => {
       "braintree-paypal-sdk"
     );
   }
+};
+
+export const initSecuritySdk = () => {
+  const { whenSiteReady } = usePelcro.getStore();
+
+  whenSiteReady(() => {
+    const securityKey = window.Pelcro.site.read()?.security_key;
+    if (!securityKey) return;
+    window.Pelcro.helpers.loadSDK(
+      `https://www.google.com/recaptcha/enterprise.js?render=${securityKey}`,
+      "pelcro-security-enteprise"
+    );
+  });
 };
 
 export const initGATracking = () => {
