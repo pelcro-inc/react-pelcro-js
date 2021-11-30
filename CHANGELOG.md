@@ -1,3 +1,10 @@
+# [2.6.0-beta.6](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.6.0-beta.5...v2.6.0-beta.6) (2021-11-30)
+
+
+### Features
+
+* add expiremental security token support ([#116](https://github.com/pelcro-inc/react-pelcro-js/issues/116)) ([fab27c6](https://github.com/pelcro-inc/react-pelcro-js/commit/fab27c687dcd0336a325e3771995d51d9380731c))
+
 # [2.6.0-beta.5](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.6.0-beta.4...v2.6.0-beta.5) (2021-11-30)
 
 
