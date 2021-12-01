@@ -68,7 +68,7 @@
       "isSureToCancel": "Êtes-vous certain de vouloir annuler votre abonnement?",
       "loading": "Annulation de l'abonnement",
       "success": "L'abonnement a été annulé avec succès",
-      "error": "Une erreure s'est produite lors de l'annulation de l'abonnement"
+      "error": "Une erreur s'est produite lors de l'annulation de l'abonnement"
     }
   }
 }
