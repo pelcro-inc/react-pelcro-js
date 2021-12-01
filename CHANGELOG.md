@@ -1,3 +1,10 @@
+# [2.6.0-beta.7](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.6.0-beta.6...v2.6.0-beta.7) (2021-12-01)
+
+
+### Bug Fixes
+
+* **subscription cancelation:** fix french wording for the error message ([3207fc1](https://github.com/pelcro-inc/react-pelcro-js/commit/3207fc12cb872418d78f004d47f3a345f72fac39))
+
 # [2.6.0-beta.6](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.6.0-beta.5...v2.6.0-beta.6) (2021-11-30)
 
 
