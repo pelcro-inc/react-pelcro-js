@@ -1,4 +1,9 @@
-import React, { createContext, useEffect, useRef } from "react";
+import React, {
+  createContext,
+  useEffect,
+  useRef,
+  useState
+} from "react";
 import { useTranslation } from "react-i18next";
 import {
   injectStripe,
@@ -965,7 +970,21 @@ const UnwrappedForm = injectStripe(
 );
 
 const PaymentMethodContainer = (props) => {
-  if (window.Stripe) {
+  const [isStripeLoaded, setIsStripeLoaded] = useState(
+    Boolean(window.Stripe)
+  );
+
+  useEffect(() => {
+    if (!window.Stripe) {
+      document
+        .querySelector('script[src="https://js.stripe.com/v3"]')
+        .addEventListener("load", () => {
+          setIsStripeLoaded(true);
+        });
+    }
+  }, []);
+
+  if (isStripeLoaded) {
     return (
       <StripeProvider
         apiKey={window.Pelcro.environment.stripe}
