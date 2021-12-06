@@ -5,6 +5,7 @@ import { Accordion } from "../Accordion";
 import { useTranslation } from "react-i18next";
 import { ReactComponent as XCircleIcon } from "../../../assets/x-icon-solid.svg";
 import { ReactComponent as RefreshIcon } from "../../../assets/refresh.svg";
+import { ReactComponent as CalendarIcon } from "../../../assets/calendar.svg";
 import { ReactComponent as GiftIcon } from "../../../assets/gift.svg";
 import { ReactComponent as PlusIcon } from "../../../assets/plus.svg";
 import { ReactComponent as ChevronRightIcon } from "../../../assets/chevron-right.svg";
@@ -304,7 +305,7 @@ export const SubscriptionsItems = ({
                             "plc-inline-flex plc-p-1 plc-text-xs plc-font-semibold plc-text-blue-700 plc-bg-blue-100 plc-uppercase plc-rounded-lg"
                           }
                         >
-                          <RefreshIcon />
+                          <CalendarIcon />
                           {t("labels.status.scheduled")}
                         </span>
                         <br />
