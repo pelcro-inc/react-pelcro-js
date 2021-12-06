@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { ReactComponent as ChevronRightIcon } from "../../assets/chevron-right.svg";
 import { OrderItems } from "../dashboard/DashboardMenus/OrdersMenu";
 import { SavedItems } from "../dashboard/DashboardMenus/SavedItemsMenu";
+import { SubscriptionsItems } from "./DashboardMenus/SubsMenu";
 
 /**
  * @typedef {Object} AccordionPropsType
@@ -28,7 +29,8 @@ export const Accordion = ({ children, initialActiveMenu = "" }) => {
     if (
       child.type === Accordion.item ||
       child.type === OrderItems ||
-      child.type === SavedItems
+      child.type === SavedItems ||
+      child.type === SubscriptionsItems
     ) {
       return React.cloneElement(child, {
         activeMenu,

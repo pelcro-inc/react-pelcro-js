@@ -10,7 +10,8 @@
       "title": "Statut",
       "active": "Active",
       "inTrial": "Dans l'essai",
-      "endingSoon": "Fin bientôt"
+      "endingSoon": "Fin bientôt",
+      "scheduled": "Prévue"
     },
     "shipments": "Expéditions restantes",
     "logout": "Déconnexion",
@@ -36,6 +37,7 @@
     "paymentSource": "Sources de paiement",
     "actions": "Actes",
     "expiresOn": "Expire le",
+    "startsOn": "Commence le",
     "renewsOn": "Renouvelle le",
     "canceledOn": "Annulé le",
     "recipient": "Destinataire",
