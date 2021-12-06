@@ -1,3 +1,10 @@
+# [2.6.0-beta.8](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.6.0-beta.7...v2.6.0-beta.8) (2021-12-06)
+
+
+### Bug Fixes
+
+* **payment:** stripe elements not loading because of race condition ([#118](https://github.com/pelcro-inc/react-pelcro-js/issues/118)) ([a6f23ba](https://github.com/pelcro-inc/react-pelcro-js/commit/a6f23baf1a78af0d89478b17dd3137be0bb96cde))
+
 # [2.6.0-beta.7](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.6.0-beta.6...v2.6.0-beta.7) (2021-12-01)
 
 
