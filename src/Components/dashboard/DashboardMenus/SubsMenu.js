@@ -12,7 +12,52 @@ import {
   getPageOrDefaultLanguage
 } from "../../../utils/utils";
 
-export const SubsMenu = ({
+export const SubscriptionsMenu = (props) => {
+  const { t } = useTranslation("dashboard");
+
+  return (
+    <table className="plc-w-full plc-table-fixed">
+      <thead className="plc-text-xs plc-font-semibold plc-tracking-wider plc-text-gray-400 plc-uppercase ">
+        <tr>
+          <th className="plc-w-5/12 ">{t("labels.plan")}</th>
+          <th className="plc-w-4/12 ">{t("labels.status.title")}</th>
+          <th className="plc-w-3/12 ">{t("labels.actions")}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {/* Spacer */}
+        <tr className="plc-h-4"></tr>
+        <SubscriptionsItems {...props} />
+        <tr>
+          <td colSpan="4" className="plc-p-1">
+            <Button
+              variant="ghost"
+              icon={<PlusIcon className="plc-w-4 plc-h-4 plc-mr-1" />}
+              className="plc-w-full plc-h-8 plc-font-semibold plc-tracking-wider plc-text-gray-900 plc-uppercase plc-rounded-none hover:plc-bg-gray-100"
+              onClick={props.displayProductSelect}
+            >
+              {t("labels.addSubscription")}
+            </Button>
+          </td>
+        </tr>
+        <tr>
+          <td colSpan="4" className="plc-p-1">
+            <Button
+              variant="ghost"
+              icon={<GiftIcon className="plc-w-4 plc-h-4 plc-mr-1" />}
+              className="plc-w-full plc-h-8 plc-font-semibold plc-tracking-wider plc-text-gray-900 plc-uppercase plc-rounded-none hover:plc-bg-gray-100"
+              onClick={props.displayRedeem}
+            >
+              {t("labels.redeemGift")}
+            </Button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  );
+};
+
+const SubscriptionsItems = ({
   onClose,
   cancelSubscription,
   reactivateSubscription,
@@ -20,13 +65,11 @@ export const SubsMenu = ({
   setSubscriptionIdToRenew,
   setView,
   getSubscriptionStatus,
-  disableSubmit,
-  displayProductSelect,
-  displayRedeem
+  disableSubmit
 }) => {
   const { t } = useTranslation("dashboard");
 
-  const subscriptions = window.Pelcro.subscription
+  return window.Pelcro.subscription
     .list()
     ?.sort((a, b) => a.expires_at - b.expires_at)
     .sort((a, b) => a.renews_at - b.renews_at)
@@ -163,45 +206,4 @@ export const SubsMenu = ({
         </tr>
       );
     });
-
-  return (
-    <table className="plc-w-full plc-table-fixed">
-      <thead className="plc-text-xs plc-font-semibold plc-tracking-wider plc-text-gray-400 plc-uppercase ">
-        <tr>
-          <th className="plc-w-5/12 ">{t("labels.plan")}</th>
-          <th className="plc-w-4/12 ">{t("labels.status.title")}</th>
-          <th className="plc-w-3/12 ">{t("labels.actions")}</th>
-        </tr>
-      </thead>
-      <tbody>
-        {/* Spacer */}
-        <tr className="plc-h-4"></tr>
-        {subscriptions}
-        <tr>
-          <td colSpan="4" className="plc-p-1">
-            <Button
-              variant="ghost"
-              icon={<PlusIcon className="plc-w-4 plc-h-4 plc-mr-1" />}
-              className="plc-w-full plc-h-8 plc-font-semibold plc-tracking-wider plc-text-gray-900 plc-uppercase plc-rounded-none hover:plc-bg-gray-100"
-              onClick={displayProductSelect}
-            >
-              {t("labels.addSubscription")}
-            </Button>
-          </td>
-        </tr>
-        <tr>
-          <td colSpan="4" className="plc-p-1">
-            <Button
-              variant="ghost"
-              icon={<GiftIcon className="plc-w-4 plc-h-4 plc-mr-1" />}
-              className="plc-w-full plc-h-8 plc-font-semibold plc-tracking-wider plc-text-gray-900 plc-uppercase plc-rounded-none hover:plc-bg-gray-100"
-              onClick={displayRedeem}
-            >
-              {t("labels.redeemGift")}
-            </Button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  );
 };

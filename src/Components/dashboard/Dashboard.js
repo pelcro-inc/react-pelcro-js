@@ -31,7 +31,7 @@ import { OrdersMenu } from "./DashboardMenus/OrdersMenu";
 import { SavedItemsMenu } from "./DashboardMenus/SavedItemsMenu";
 import { usePelcro } from "../../hooks/usePelcro";
 import { notify } from "../../SubComponents/Notification";
-import { SubsMenu } from "./DashboardMenus/SubsMenu";
+import { SubscriptionsMenu } from "./DashboardMenus/SubsMenu";
 
 const SUB_MENUS = {
   PROFILE: "profile",
@@ -697,7 +697,7 @@ class Dashboard extends Component {
                 }
                 title={this.locale("labels.subscriptions")}
                 content={
-                  <SubsMenu
+                  <SubscriptionsMenu
                     onClose={this.props.onClose}
                     cancelSubscription={this.cancelSubscription}
                     reactivateSubscription={
