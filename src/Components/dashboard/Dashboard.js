@@ -31,6 +31,7 @@ import { OrdersMenu } from "./DashboardMenus/OrdersMenu";
 import { SavedItemsMenu } from "./DashboardMenus/SavedItemsMenu";
 import { usePelcro } from "../../hooks/usePelcro";
 import { notify } from "../../SubComponents/Notification";
+import { SubsMenu } from "./DashboardMenus/SubsMenu";
 
 const SUB_MENUS = {
   PROFILE: "profile",
@@ -299,205 +300,6 @@ class Dashboard extends Component {
       bgColor: "plc-bg-green-100",
       icon: <CheckMarkIcon />
     };
-  };
-
-  renderSubscriptions = () => {
-    const subscriptions = this.state.subscriptions
-      ?.sort((a, b) => a.expires_at - b.expires_at)
-      .sort((a, b) => a.renews_at - b.renews_at)
-      .map((sub) => {
-        // Cancel button click handlers
-        const onCancelClick = () => {
-          this.props.onClose();
-          notify.confirm(
-            (onSuccess, onFailure) => {
-              this.cancelSubscription(sub.id, onSuccess, onFailure);
-            },
-            {
-              confirmMessage: this.locale(
-                "messages.subCancellation.isSureToCancel"
-              ),
-              loadingMessage: this.locale(
-                "messages.subCancellation.loading"
-              ),
-              successMessage: this.locale(
-                "messages.subCancellation.success"
-              ),
-              errorMessage: this.locale(
-                "messages.subCancellation.error"
-              )
-            },
-            {
-              closeButtonLabel: this.locale(
-                "labels.subCancellation.goBack"
-              )
-            }
-          );
-        };
-
-        // Reactivate button click handlers
-        const onReactivateClick = () => {
-          this.reactivateSubscription(sub.id);
-        };
-
-        // Renew click
-        const onRenewClick = () => {
-          const product_id = sub.plan.product.id;
-          const plan_id = sub.plan.id;
-
-          const product = window.Pelcro.product.getById(product_id);
-          const plan = window.Pelcro.plan.getById(plan_id);
-
-          this.props.setProductAndPlan(product, plan);
-          this.props.setSubscriptionIdToRenew(sub.id);
-          this.props.setView("plan-select");
-        };
-
-        return (
-          <tr
-            key={"dashboard-subscription-" + sub.id}
-            className="plc-w-full plc-align-top"
-          >
-            <td className="plc-truncate">
-              {sub.plan.nickname && (
-                <>
-                  <span className="plc-font-semibold plc-text-gray-500">
-                    {sub.plan.nickname}
-                  </span>
-                  <br />
-                  <span className="plc-text-xs plc-text-gray-400">
-                    {getFormattedPriceByLocal(
-                      sub.plan.amount,
-                      sub.plan.currency,
-                      getPageOrDefaultLanguage()
-                    )}
-                  </span>
-                </>
-              )}
-            </td>
-            <td>
-              {/* Pill */}
-              <span
-                className={`plc-inline-flex plc-p-1 plc-text-xs plc-font-semibold ${
-                  this.getSubscriptionStatus(sub).bgColor
-                } plc-uppercase ${
-                  this.getSubscriptionStatus(sub).textColor
-                } plc-rounded-lg`}
-              >
-                {this.getSubscriptionStatus(sub).icon}
-                {this.getSubscriptionStatus(sub).title}
-              </span>
-              <br />
-              <div className="plc-mb-4 plc-text-xs plc-text-gray-500">
-                {sub.status && (
-                  <span className="plc-inline-block plc-mt-1 plc-underline">
-                    {this.getSubscriptionStatus(sub).content}
-                  </span>
-                )}
-                <br />
-                {sub.shipments_remaining ? (
-                  <span className="plc-inline-block plc-mt-1">
-                    {sub.shipments_remaining}{" "}
-                    {this.locale("labels.shipments")}
-                  </span>
-                ) : null}
-              </div>
-            </td>
-
-            <td>
-              {sub.cancel_at_period_end === 0 && (
-                <Button
-                  variant="ghost"
-                  className="plc-text-red-500 focus:plc-ring-red-500 pelcro-dashboard-sub-cancel-button"
-                  icon={<XCircleIcon />}
-                  onClick={onCancelClick}
-                  disabled={this.state.disableSubmit}
-                  data-key={sub.id}
-                >
-                  {this.locale("labels.unsubscribe")}
-                </Button>
-              )}
-              {sub.cancel_at_period_end === 1 &&
-                sub.plan.auto_renew &&
-                !sub.is_gift_recipient && (
-                  <Button
-                    variant="ghost"
-                    className="plc-text-green-400 focus:plc-ring-green-300 pelcro-dashboard-sub-reactivate-button"
-                    icon={<RefreshIcon />}
-                    onClick={onReactivateClick}
-                    disabled={this.state.disableSubmit}
-                    data-key={sub.id}
-                  >
-                    {this.locale("labels.reactivate")}
-                  </Button>
-                )}
-              {sub.cancel_at_period_end === 1 && (
-                <Button
-                  variant="ghost"
-                  className="plc-text-blue-400 pelcro-dashboard-sub-renew-button"
-                  icon={<RefreshIcon />}
-                  onClick={onRenewClick}
-                  disabled={this.state.disableSubmit}
-                  data-key={sub.id}
-                >
-                  {this.locale("labels.renew")}
-                </Button>
-              )}
-            </td>
-          </tr>
-        );
-      });
-
-    return (
-      <table className="plc-w-full plc-table-fixed">
-        <thead className="plc-text-xs plc-font-semibold plc-tracking-wider plc-text-gray-400 plc-uppercase ">
-          <tr>
-            <th className="plc-w-5/12 ">
-              {this.locale("labels.plan")}
-            </th>
-            <th className="plc-w-4/12 ">
-              {this.locale("labels.status.title")}
-            </th>
-            <th className="plc-w-3/12 ">
-              {this.locale("labels.actions")}
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {/* Spacer */}
-          <tr className="plc-h-4"></tr>
-          {subscriptions}
-          <tr>
-            <td colSpan="4" className="plc-p-1">
-              <Button
-                variant="ghost"
-                icon={
-                  <PlusIcon className="plc-w-4 plc-h-4 plc-mr-1" />
-                }
-                className="plc-w-full plc-h-8 plc-font-semibold plc-tracking-wider plc-text-gray-900 plc-uppercase plc-rounded-none hover:plc-bg-gray-100"
-                onClick={this.displayProductSelect}
-              >
-                {this.locale("labels.addSubscription")}
-              </Button>
-            </td>
-          </tr>
-          <tr>
-            <td colSpan="4" className="plc-p-1">
-              <Button
-                variant="ghost"
-                icon={
-                  <GiftIcon className="plc-w-4 plc-h-4 plc-mr-1" />
-                }
-                className="plc-w-full plc-h-8 plc-font-semibold plc-tracking-wider plc-text-gray-900 plc-uppercase plc-rounded-none hover:plc-bg-gray-100"
-                onClick={this.displayRedeem}
-              >
-                {this.locale("labels.redeemGift")}
-              </Button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    );
   };
 
   renderGiftRecipients = () => {
@@ -894,7 +696,24 @@ class Dashboard extends Component {
                   <SubscriptionIcon className="plc-w-10 plc-h-10 plc-pt-2 plc-pr-1 plc--ml-2" />
                 }
                 title={this.locale("labels.subscriptions")}
-                content={this.renderSubscriptions()}
+                content={
+                  <SubsMenu
+                    onClose={this.props.onClose}
+                    cancelSubscription={this.cancelSubscription}
+                    reactivateSubscription={
+                      this.reactivateSubscription
+                    }
+                    setProductAndPlan={this.props.setProductAndPlan}
+                    setSubscriptionIdToRenew={
+                      this.props.setSubscriptionIdToRenew
+                    }
+                    setView={this.props.setView}
+                    getSubscriptionStatus={this.getSubscriptionStatus}
+                    disableSubmit={this.state.disableSubmit}
+                    displayProductSelect={this.displayProductSelect}
+                    displayRedeem={this.displayRedeem}
+                  />
+                }
               />
 
               <Accordion.item
