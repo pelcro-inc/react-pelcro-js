@@ -282,20 +282,10 @@ export const SubscriptionsItems = ({
                       className="pelcro-sub-phase-row plc-w-full plc-align-middle"
                     >
                       <td className="plc-truncate plc-py-2">
-                        {plan && (
-                          <>
-                            <span className="plc-font-semibold plc-text-gray-500">
-                              {plan.nickname}
-                            </span>
-                            <br />
-                            <span className="plc-text-xs plc-text-gray-400">
-                              {getFormattedPriceByLocal(
-                                plan.amount,
-                                plan.currency,
-                                getPageOrDefaultLanguage()
-                              )}
-                            </span>
-                          </>
+                        {plan.nickname && (
+                          <span className="plc-font-semibold plc-text-gray-500">
+                            {plan.nickname}
+                          </span>
                         )}
                       </td>
 
