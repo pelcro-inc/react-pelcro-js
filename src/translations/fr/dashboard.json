@@ -11,7 +11,7 @@
       "active": "Active",
       "inTrial": "Dans l'essai",
       "endingSoon": "Fin bientôt",
-      "scheduled": "Prévue"
+      "scheduled": "Programmé"
     },
     "shipments": "Expéditions restantes",
     "logout": "Déconnexion",
@@ -37,7 +37,7 @@
     "paymentSource": "Sources de paiement",
     "actions": "Actes",
     "expiresOn": "Expire le",
-    "startsOn": "Commence le",
+    "startsOn": "Débute le",
     "renewsOn": "Renouvelle le",
     "canceledOn": "Annulé le",
     "recipient": "Destinataire",
