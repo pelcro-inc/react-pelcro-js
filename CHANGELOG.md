@@ -1,3 +1,10 @@
+# [2.6.0-beta.10](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.6.0-beta.9...v2.6.0-beta.10) (2021-12-07)
+
+
+### Features
+
+* **dashboard:** add current phase to sub phases table ([#119](https://github.com/pelcro-inc/react-pelcro-js/issues/119)) ([3344e0a](https://github.com/pelcro-inc/react-pelcro-js/commit/3344e0a15727562199d5bab1705af62ea4fdde76))
+
 # [2.6.0-beta.9](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.6.0-beta.8...v2.6.0-beta.9) (2021-12-07)
 
 
