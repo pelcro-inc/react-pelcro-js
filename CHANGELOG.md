@@ -1,3 +1,10 @@
+# [2.6.0-beta.9](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.6.0-beta.8...v2.6.0-beta.9) (2021-12-07)
+
+
+### Features
+
+* **dashboard:** add future phases in subscriptions section ([#117](https://github.com/pelcro-inc/react-pelcro-js/issues/117)) ([a187e9c](https://github.com/pelcro-inc/react-pelcro-js/commit/a187e9cf05f64c339e78bd57e2ffd40fa0ccee9e))
+
 # [2.6.0-beta.8](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.6.0-beta.7...v2.6.0-beta.8) (2021-12-06)
 
 
