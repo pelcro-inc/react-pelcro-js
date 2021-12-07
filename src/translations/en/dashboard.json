@@ -10,7 +10,8 @@
       "title": "Status",
       "active": "Active",
       "inTrial": "In trial",
-      "endingSoon": "Ending soon"
+      "endingSoon": "Ending soon",
+      "scheduled": "Scheduled"
     },
     "shipments": "Shipments remaining",
     "logout": "Logout",
@@ -36,6 +37,7 @@
     "paymentSource": "Payment cards",
     "actions": "Actions",
     "expiresOn": "Ends",
+    "startsOn": "Starts",
     "renewsOn": "Renews",
     "canceledOn": "Canceled on",
     "recipient": "Recipient",
