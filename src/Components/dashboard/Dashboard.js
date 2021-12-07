@@ -17,7 +17,6 @@ import { ReactComponent as EditIcon } from "../../assets/edit.svg";
 import { ReactComponent as UserIcon } from "../../assets/user.svg";
 import { ReactComponent as NewsletterIcon } from "../../assets/newsletter.svg";
 import { ReactComponent as RefreshIcon } from "../../assets/refresh.svg";
-import { ReactComponent as XCircleIcon } from "../../assets/x-icon-solid.svg";
 import { ReactComponent as PaymentCardIcon } from "../../assets/payment-card.svg";
 import { ReactComponent as LocationIcon } from "../../assets/location-pin.svg";
 import { ReactComponent as SubscriptionIcon } from "../../assets/subscription.svg";
@@ -30,7 +29,6 @@ import userSolidIcon from "../../assets/user-solid.svg";
 import { OrdersMenu } from "./DashboardMenus/OrdersMenu";
 import { SavedItemsMenu } from "./DashboardMenus/SavedItemsMenu";
 import { usePelcro } from "../../hooks/usePelcro";
-import { notify } from "../../SubComponents/Notification";
 import { SubscriptionsMenu } from "./DashboardMenus/SubsMenu";
 
 const SUB_MENUS = {

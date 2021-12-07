@@ -9,6 +9,7 @@ import { ReactComponent as CalendarIcon } from "../../../assets/calendar.svg";
 import { ReactComponent as GiftIcon } from "../../../assets/gift.svg";
 import { ReactComponent as PlusIcon } from "../../../assets/plus.svg";
 import { ReactComponent as ChevronRightIcon } from "../../../assets/chevron-right.svg";
+import { ReactComponent as CheckMarkIcon } from "../../../assets/check-mark.svg";
 import {
   getFormattedPriceByLocal,
   getPageOrDefaultLanguage
@@ -126,18 +127,24 @@ export const SubscriptionsItems = ({
         setView("plan-select");
       };
 
-      const getFuturePhases = () => {
+      const getPhases = () => {
         if (!sub.schedule) return [];
 
         const currentPhaseStartDate =
           sub.schedule.current_phase.start_date;
 
-        return sub.schedule.phases.filter((phase) => {
+        const currentPhase = sub.schedule.phases.find((phase) => {
+          return phase.start_date === currentPhaseStartDate;
+        });
+
+        const futurePhases = sub.schedule.phases.filter((phase) => {
           return phase.start_date > currentPhaseStartDate;
         });
+
+        return [currentPhase, ...futurePhases];
       };
 
-      const hasFuturePhases = getFuturePhases().length > 0;
+      const hasPhases = getPhases().length > 0;
 
       return (
         <React.Fragment key={sub.id}>
@@ -149,7 +156,7 @@ export const SubscriptionsItems = ({
                 isActive ? "plc-bg-gray-100" : "hover:plc-bg-gray-50"
               }`}
             >
-              <td className="plc-truncate plc-py-2">
+              <td className="plc-truncate">
                 {sub.plan.nickname && (
                   <>
                     <span className="plc-font-semibold plc-text-gray-500">
@@ -166,7 +173,7 @@ export const SubscriptionsItems = ({
                   </>
                 )}
               </td>
-              <td>
+              <td className="plc-py-2">
                 {/* Pill */}
                 <span
                   className={`plc-inline-flex plc-p-1 plc-text-xs plc-font-semibold ${
@@ -237,7 +244,7 @@ export const SubscriptionsItems = ({
               </td>
 
               <td>
-                {hasFuturePhases && (
+                {hasPhases && (
                   <div
                     className={`plc-flex plc-items-center plc-justify-center plc-transition-transform plc-ease-out plc-transform plc-rounded-full plc-w-7 plc-h-7 ${
                       isActive
@@ -262,26 +269,40 @@ export const SubscriptionsItems = ({
           <tbody>
             {isActive && (
               <>
-                {getFuturePhases().map((phase) => {
+                {getPhases().map((phase, i) => {
                   const plan = phase.plans?.[0].plan;
+                  const isCurrentPhase = i === 0;
 
                   const startDate = new Date(
                     Number(`${phase.start_date}000`)
                   );
+
+                  const endDate = new Date(
+                    Number(`${phase.end_date}000`)
+                  );
+
                   const formattedStartDate = new Intl.DateTimeFormat(
                     "en-CA"
                   ).format(startDate);
 
+                  const formattedEndDate = new Intl.DateTimeFormat(
+                    "en-CA"
+                  ).format(endDate);
+
                   const startDateString = `${t(
                     "labels.startsOn"
                   )} ${formattedStartDate}`;
+
+                  const endDateString = `${t(
+                    "labels.expiresOn"
+                  )} ${formattedEndDate}`;
 
                   return (
                     <tr
                       key={`${phase.start_date}-${phase.end_date}`}
                       className="pelcro-sub-phase-row plc-w-full plc-align-middle"
                     >
-                      <td className="plc-truncate plc-py-2">
+                      <td className="plc-truncate">
                         {plan.nickname && (
                           <span className="plc-font-semibold plc-text-gray-500">
                             {plan.nickname}
@@ -289,19 +310,30 @@ export const SubscriptionsItems = ({
                         )}
                       </td>
 
-                      <td>
+                      <td className="plc-py-2">
                         <span
-                          className={
-                            "plc-inline-flex plc-p-1 plc-text-xs plc-font-semibold plc-text-blue-700 plc-bg-blue-100 plc-uppercase plc-rounded-lg"
+                          className={`plc-inline-flex plc-p-1 plc-text-xs plc-font-semibold plc-uppercase plc-rounded-lg ${
+                            isCurrentPhase
+                              ? "plc-text-green-700 plc-bg-green-100"
+                              : "plc-text-blue-700 plc-bg-blue-100"
                           }
+                             `}
                         >
-                          <CalendarIcon />
-                          {t("labels.status.scheduled")}
+                          {isCurrentPhase ? (
+                            <CheckMarkIcon />
+                          ) : (
+                            <CalendarIcon />
+                          )}
+                          {isCurrentPhase
+                            ? t("labels.status.active")
+                            : t("labels.status.scheduled")}
                         </span>
                         <br />
                         <div className="plc-text-xs plc-text-gray-500">
                           <span className="plc-inline-block plc-mt-1 plc-underline">
-                            {startDateString}
+                            {isCurrentPhase
+                              ? endDateString
+                              : startDateString}
                           </span>
                         </div>
                       </td>
