@@ -1,3 +1,10 @@
+# [2.6.0-beta.11](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.6.0-beta.10...v2.6.0-beta.11) (2021-12-13)
+
+
+### Features
+
+* **register:** add copyright text and hide security badge ([#120](https://github.com/pelcro-inc/react-pelcro-js/issues/120)) ([705b2ef](https://github.com/pelcro-inc/react-pelcro-js/commit/705b2efa65ea128ef6c035c168e0340f8c58bb85))
+
 # [2.6.0-beta.10](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.6.0-beta.9...v2.6.0-beta.10) (2021-12-07)
 
 
