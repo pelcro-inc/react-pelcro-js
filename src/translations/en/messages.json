@@ -3,5 +3,6 @@
   "cancel": "Cancel your subscription online at anytime.",
   "giftSent": "Subscription gift has been sent to",
   "successfully": "successfully",
-  "entitlement": "Some of the content on this page is available with one or more of our plans. <1>Subscribe</1> now to get full page access."
+  "entitlement": "Some of the content on this page is available with one or more of our plans. <1>Subscribe</1> now to get full page access.",
+  "recaptcha": "This site is protected by reCAPTCHA and the Google <1>Privacy Policy</1> and <3>Terms of Service</3> apply."
 }
