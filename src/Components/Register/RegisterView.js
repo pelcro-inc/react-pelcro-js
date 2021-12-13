@@ -1,5 +1,5 @@
 import React from "react";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { RegisterContainer } from "./RegisterContainer";
 import { RegisterEmail } from "./RegisterEmail";
 import { RegisterPassword } from "./RegisterPassword";
@@ -10,6 +10,7 @@ import { AlertWithContext } from "../../SubComponents/AlertWithContext";
 import { usePelcro } from "../../hooks/usePelcro";
 import { FacebookLoginButton } from "../common/FacebookLoginButton/FacebookLoginButton";
 import { GoogleLoginButton } from "../common/GoogleLoginButton/GoogleLoginButton";
+import { Link } from "../../SubComponents/Link";
 
 /**
  *
@@ -71,6 +72,27 @@ export function RegisterView(props) {
             id="pelcro-submit"
             name={t("messages.createAccount")}
           />
+          {hasSecurityTokenEnabled() && (
+            <p className="plc-text-sm plc-text-gray-500 plc-mt-1">
+              <Trans i18nKey="messages:recaptcha">
+                This site is protected by reCAPTCHA and the Google
+                <Link
+                  href="https://policies.google.com/privacy"
+                  className="plc-text-sm plc-text-gray-500"
+                >
+                  Privacy Policy
+                </Link>
+                and
+                <Link
+                  href="https://policies.google.com/terms"
+                  className="plc-text-sm plc-text-gray-500"
+                >
+                  Terms of Service
+                </Link>
+                apply.
+              </Trans>
+            </p>
+          )}
 
           {socialLoginEnabled && (
             <div className="plc-mt-5">
@@ -91,4 +113,12 @@ export function RegisterView(props) {
       </form>
     </div>
   );
+}
+
+/**
+ * Checks if the current site has security token enabled
+ * @return {boolean}
+ */
+function hasSecurityTokenEnabled() {
+  return Boolean(window.Pelcro.site?.read()?.security_key);
 }
