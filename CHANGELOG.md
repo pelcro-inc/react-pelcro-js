@@ -1,3 +1,10 @@
+# [2.6.0-beta.12](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.6.0-beta.11...v2.6.0-beta.12) (2021-12-15)
+
+
+### Bug Fixes
+
+* **dashboard:** sub with no phases showing empty phases table ([#121](https://github.com/pelcro-inc/react-pelcro-js/issues/121)) ([d7414ce](https://github.com/pelcro-inc/react-pelcro-js/commit/d7414ce754bc99b424f6cd2ea4a86c97b2cfed53))
+
 # [2.6.0-beta.11](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.6.0-beta.10...v2.6.0-beta.11) (2021-12-13)
 
 
