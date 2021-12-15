@@ -150,7 +150,9 @@ export const SubscriptionsItems = ({
         <React.Fragment key={sub.id}>
           <tbody>
             <tr
-              onClick={() => toggleActiveMenu(sub.id)}
+              onClick={() => {
+                if (hasPhases) toggleActiveMenu(sub.id);
+              }}
               key={sub.id}
               className={`plc-w-full plc-align-middle plc-cursor-pointer accordion-header ${
                 isActive ? "plc-bg-gray-100" : "hover:plc-bg-gray-50"
