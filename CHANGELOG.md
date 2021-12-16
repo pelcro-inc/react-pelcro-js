@@ -1,3 +1,26 @@
+# [2.6.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.5.0...v2.6.0) (2021-12-16)
+
+
+### Bug Fixes
+
+* **dashboard:** sub action button CSS classes typo ([88857d7](https://github.com/pelcro-inc/react-pelcro-js/commit/88857d74a06120abe131557022b03dfd6e4265da))
+* **dashboard:** sub with no phases showing empty phases table ([#121](https://github.com/pelcro-inc/react-pelcro-js/issues/121)) ([d7414ce](https://github.com/pelcro-inc/react-pelcro-js/commit/d7414ce754bc99b424f6cd2ea4a86c97b2cfed53))
+* **gift creation:** error dispatched if gift date is set to today ([#115](https://github.com/pelcro-inc/react-pelcro-js/issues/115)) ([6e5f12a](https://github.com/pelcro-inc/react-pelcro-js/commit/6e5f12a384407ccfdd525285bf1b4ed8243b3244))
+* **payment:** stripe elements not loading because of race condition ([#118](https://github.com/pelcro-inc/react-pelcro-js/issues/118)) ([a6f23ba](https://github.com/pelcro-inc/react-pelcro-js/commit/a6f23baf1a78af0d89478b17dd3137be0bb96cde))
+* **subscription cancelation:** fix french wording for the error message ([3207fc1](https://github.com/pelcro-inc/react-pelcro-js/commit/3207fc12cb872418d78f004d47f3a345f72fac39))
+
+
+### Features
+
+* trigger release ([cac1676](https://github.com/pelcro-inc/react-pelcro-js/commit/cac16764b513374873f065c440ab23ed820d270a))
+* **dashboard:** add css classes for sub action buttons ([#110](https://github.com/pelcro-inc/react-pelcro-js/issues/110)) ([7f019fa](https://github.com/pelcro-inc/react-pelcro-js/commit/7f019fab762eeab724d152fed9377b0900f6b134))
+* **dashboard:** add current phase to sub phases table ([#119](https://github.com/pelcro-inc/react-pelcro-js/issues/119)) ([3344e0a](https://github.com/pelcro-inc/react-pelcro-js/commit/3344e0a15727562199d5bab1705af62ea4fdde76))
+* **dashboard:** add future phases in subscriptions section ([#117](https://github.com/pelcro-inc/react-pelcro-js/issues/117)) ([a187e9c](https://github.com/pelcro-inc/react-pelcro-js/commit/a187e9cf05f64c339e78bd57e2ffd40fa0ccee9e))
+* **register:** add copyright text and hide security badge ([#120](https://github.com/pelcro-inc/react-pelcro-js/issues/120)) ([705b2ef](https://github.com/pelcro-inc/react-pelcro-js/commit/705b2efa65ea128ef6c035c168e0340f8c58bb85))
+* add expiremental security token support ([#116](https://github.com/pelcro-inc/react-pelcro-js/issues/116)) ([fab27c6](https://github.com/pelcro-inc/react-pelcro-js/commit/fab27c687dcd0336a325e3771995d51d9380731c))
+* **i18n:** use and observe page language in all UI ([#114](https://github.com/pelcro-inc/react-pelcro-js/issues/114)) ([fed8180](https://github.com/pelcro-inc/react-pelcro-js/commit/fed8180107000a0da9b9e7f0ac29bdb5907c6b4c))
+* lazy load stripe sdk ([#112](https://github.com/pelcro-inc/react-pelcro-js/issues/112)) ([778d18b](https://github.com/pelcro-inc/react-pelcro-js/commit/778d18b648f5d607fc592da4721dadf3532898a8))
+
 # [2.6.0-beta.12](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.6.0-beta.11...v2.6.0-beta.12) (2021-12-15)
 
 
