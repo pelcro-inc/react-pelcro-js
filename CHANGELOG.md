@@ -1,3 +1,10 @@
+# [2.6.0-beta.13](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.6.0-beta.12...v2.6.0-beta.13) (2021-12-16)
+
+
+### Features
+
+* trigger release ([cac1676](https://github.com/pelcro-inc/react-pelcro-js/commit/cac16764b513374873f065c440ab23ed820d270a))
+
 # [2.6.0-beta.12](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.6.0-beta.11...v2.6.0-beta.12) (2021-12-15)
 
 
