@@ -1,3 +1,10 @@
+# [2.6.0-beta.14](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.6.0-beta.13...v2.6.0-beta.14) (2022-01-07)
+
+
+### Bug Fixes
+
+* **paymentMethod:** cvc and expiry date having incorrect alignment ([#122](https://github.com/pelcro-inc/react-pelcro-js/issues/122)) ([e65d0e5](https://github.com/pelcro-inc/react-pelcro-js/commit/e65d0e5805a10d51b3e403be9fb3e030edbd73e5))
+
 # [2.6.0-beta.13](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.6.0-beta.12...v2.6.0-beta.13) (2021-12-16)
 
 
