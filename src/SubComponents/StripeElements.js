@@ -119,7 +119,7 @@ export const CheckoutForm = () => {
           src="https://js.pelcro.com/ui/plugin/main/images/credit_cards.png"
         />
 
-        <div className="plc-flex plc-justify-between plc-my-2">
+        <div className="plc-flex plc-justify-between plc-my-2 plc-items-end">
           <div className="plc-w-6/12 plc-pr-4">
             <PelcroCardExpiry />
           </div>
