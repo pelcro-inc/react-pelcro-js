@@ -1,3 +1,10 @@
+# [2.6.0-beta.15](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.6.0-beta.14...v2.6.0-beta.15) (2022-01-12)
+
+
+### Bug Fixes
+
+* **edit profile modal:** phone field can't be cleared ([#123](https://github.com/pelcro-inc/react-pelcro-js/issues/123)) ([2af86a2](https://github.com/pelcro-inc/react-pelcro-js/commit/2af86a25623c5c2ef9d1a51d60c692e4ceb53b83))
+
 # [2.6.0-beta.14](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.6.0-beta.13...v2.6.0-beta.14) (2022-01-07)
 
 
