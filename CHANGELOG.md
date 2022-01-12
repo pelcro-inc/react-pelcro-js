@@ -18,6 +18,13 @@
 ### Features
 
 * trigger release ([cac1676](https://github.com/pelcro-inc/react-pelcro-js/commit/cac16764b513374873f065c440ab23ed820d270a))
+* **dashboard:** add css classes for sub action buttons ([#110](https://github.com/pelcro-inc/react-pelcro-js/issues/110)) ([7f019fa](https://github.com/pelcro-inc/react-pelcro-js/commit/7f019fab762eeab724d152fed9377b0900f6b134))
+* **dashboard:** add current phase to sub phases table ([#119](https://github.com/pelcro-inc/react-pelcro-js/issues/119)) ([3344e0a](https://github.com/pelcro-inc/react-pelcro-js/commit/3344e0a15727562199d5bab1705af62ea4fdde76))
+* **dashboard:** add future phases in subscriptions section ([#117](https://github.com/pelcro-inc/react-pelcro-js/issues/117)) ([a187e9c](https://github.com/pelcro-inc/react-pelcro-js/commit/a187e9cf05f64c339e78bd57e2ffd40fa0ccee9e))
+* **register:** add copyright text and hide security badge ([#120](https://github.com/pelcro-inc/react-pelcro-js/issues/120)) ([705b2ef](https://github.com/pelcro-inc/react-pelcro-js/commit/705b2efa65ea128ef6c035c168e0340f8c58bb85))
+* add expiremental security token support ([#116](https://github.com/pelcro-inc/react-pelcro-js/issues/116)) ([fab27c6](https://github.com/pelcro-inc/react-pelcro-js/commit/fab27c687dcd0336a325e3771995d51d9380731c))
+* **i18n:** use and observe page language in all UI ([#114](https://github.com/pelcro-inc/react-pelcro-js/issues/114)) ([fed8180](https://github.com/pelcro-inc/react-pelcro-js/commit/fed8180107000a0da9b9e7f0ac29bdb5907c6b4c))
+* lazy load stripe sdk ([#112](https://github.com/pelcro-inc/react-pelcro-js/issues/112)) ([778d18b](https://github.com/pelcro-inc/react-pelcro-js/commit/778d18b648f5d607fc592da4721dadf3532898a8))
 
 # [2.6.0-beta.12](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.6.0-beta.11...v2.6.0-beta.12) (2021-12-15)
 
