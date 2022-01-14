@@ -26,6 +26,7 @@ export { RegisterCompany } from "./Components/Register/RegisterCompany";
 export { RegisterModal } from "./Components/Register/RegisterModal";
 export { FacebookLoginButton } from "./Components/common/FacebookLoginButton/FacebookLoginButton";
 export { GoogleLoginButton } from "./Components/common/GoogleLoginButton/GoogleLoginButton";
+export { Auth0LoginButton } from "./Components/common/Auth0LoginButton/Auth0LoginButton";
 export { SelectModalWithHook as SelectModal } from "./Components/Select/SelectModal";
 export { SubscriptionRenewModal } from "./Components/SubscriptionRenew/SubscriptionRenewModal";
 export { SubscriptionRenewView } from "./Components/SubscriptionRenew/SubscriptionRenewView";
