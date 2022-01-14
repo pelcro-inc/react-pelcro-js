@@ -27,7 +27,7 @@ export const Auth0LoginButton = ({
   const { dispatch: registerDispatch } = useContext(registerStore);
 
   function handleClick() {
-    auth0InstanceRef.current.popup.authorize(
+    auth0InstanceRef.current?.popup?.authorize?.(
       {
         responseType: "token id_token",
         owp: true // close popup when finished
@@ -44,7 +44,7 @@ export const Auth0LoginButton = ({
 
   const onSuccess = (authResult) => {
     const { accessToken } = authResult;
-    auth0InstanceRef.current.client.userInfo(
+    auth0InstanceRef.current?.popup?.authorize?.(
       accessToken,
       (error, user) => {
         if (error) {
