@@ -30,6 +30,7 @@ export const optionsController = (options) => {
 
   const optionsMethodsDict = {
     loadPaymentSDKs: loadPaymentSDKs,
+    loadAuth0SDK: loadAuth0SDK,
     enableURLTriggers: initViewFromURL,
     enableTheme: applyPelcroTheme,
     enablePaywalls: initPaywalls,
@@ -103,6 +104,20 @@ export const loadPaymentSDKs = () => {
     window.Pelcro.helpers.loadSDK(
       "https://js.braintreegateway.com/web/3.69.0/js/paypal-checkout.min.js",
       "braintree-paypal-sdk"
+    );
+  }
+};
+
+export const loadAuth0SDK = () => {
+  const auth0Enabled = Boolean(
+    window.Pelcro.site.read().auth0_client_id &&
+      window.Pelcro.site.read().auth0_base_url
+  );
+
+  if (auth0Enabled) {
+    window.Pelcro.helpers.loadSDK(
+      "https://cdn.auth0.com/js/auth0/9.18/auth0.min.js",
+      "auth0-sdk"
     );
   }
 };

@@ -13,6 +13,7 @@ import { enableScroll, disableScroll } from "../../utils/utils";
 
 const defaultOptions = {
   loadPaymentSDKs: true,
+  loadAuth0SDK: true,
   enableURLTriggers: true,
   enableTheme: true,
   enablePaywalls: true,
