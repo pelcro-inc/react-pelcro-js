@@ -44,7 +44,7 @@ export const Auth0LoginButton = ({
 
   const onSuccess = (authResult) => {
     const { accessToken } = authResult;
-    auth0InstanceRef.current?.popup?.authorize?.(
+    auth0InstanceRef.current?.client?.userInfo?.(
       accessToken,
       (error, user) => {
         if (error) {
