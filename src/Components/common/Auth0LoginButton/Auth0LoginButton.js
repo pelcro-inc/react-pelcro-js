@@ -17,10 +17,12 @@ export const Auth0LoginButton = ({
 
   const auth0InstanceRef = React.useRef(null);
   React.useEffect(() => {
-    auth0InstanceRef.current = new window.auth0.WebAuth({
-      domain: window.Pelcro.site.read().auth0_base_url,
-      clientID: window.Pelcro.site.read().auth0_client_id
-    });
+    if (auth0Enabled) {
+      auth0InstanceRef.current = new window.auth0.WebAuth({
+        domain: window.Pelcro.site.read().auth0_base_url,
+        clientID: window.Pelcro.site.read().auth0_client_id
+      });
+    }
   }, []);
 
   const { dispatch: loginDispatch } = useContext(loginStore);
