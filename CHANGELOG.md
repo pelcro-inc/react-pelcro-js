@@ -1,3 +1,10 @@
+# [2.7.0-beta.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.6.1-beta.1...v2.7.0-beta.1) (2022-01-17)
+
+
+### Features
+
+* **auth:** implement auth0 IDP ([#124](https://github.com/pelcro-inc/react-pelcro-js/issues/124)) ([181a421](https://github.com/pelcro-inc/react-pelcro-js/commit/181a421cca6efcb527a609853f8f99c325b7bd3b))
+
 ## [2.6.1-beta.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.6.0...v2.6.1-beta.1) (2022-01-12)
 
 
