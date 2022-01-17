@@ -1,3 +1,10 @@
+# [2.7.0-beta.4](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.7.0-beta.3...v2.7.0-beta.4) (2022-01-17)
+
+
+### Bug Fixes
+
+* **auth0:** log an error if auth0 sdk isn't loaded ([67163c6](https://github.com/pelcro-inc/react-pelcro-js/commit/67163c6eb7e7d5c17790c3f95a5235e37a92488b))
+
 # [2.7.0-beta.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.7.0-beta.2...v2.7.0-beta.3) (2022-01-17)
 
 
