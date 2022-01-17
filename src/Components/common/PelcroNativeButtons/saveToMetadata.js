@@ -127,7 +127,7 @@ class SaveToMetadataButtonClass {
 
     let newMetadataValue = [buttonMetadata];
     // if this key already exist in user metadata object, append to it.
-    const oldValue = user.metadata[`metadata_saved_${key}`];
+    const oldValue = user.metadata?.[`metadata_saved_${key}`];
     if (oldValue) {
       if (Array.isArray(oldValue)) {
         newMetadataValue = [...oldValue, buttonMetadata];
