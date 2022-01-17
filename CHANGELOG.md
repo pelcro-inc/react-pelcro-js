@@ -1,3 +1,10 @@
+# [2.7.0-beta.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.7.0-beta.1...v2.7.0-beta.2) (2022-01-17)
+
+
+### Bug Fixes
+
+* **save button:** add null coelising when accessing user metadata ([93ae816](https://github.com/pelcro-inc/react-pelcro-js/commit/93ae816a7533bca306d54b4dd6698dc18226e98d))
+
 # [2.7.0-beta.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.6.1-beta.1...v2.7.0-beta.1) (2022-01-17)
 
 
