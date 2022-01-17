@@ -10,17 +10,21 @@ export const Auth0LoginButton = ({
   labelClassName = "",
   iconClassName = ""
 }) => {
+  if (
+    !window.auth0 &&
+    window.Pelcro.site.read().auth0_client_id &&
+    window.Pelcro.site.read().auth0_base_url
+  ) {
+    console.error(
+      "Auth0 sdk script wasn't loaded, you need to load auth0 sdk before rendering the Auth0LoginButton"
+    );
+  }
+
   const auth0Enabled = Boolean(
     window.Pelcro.site.read().auth0_client_id &&
       window.Pelcro.site.read().auth0_base_url &&
       window.auth0
   );
-
-  if (auth0Enabled && !window.auth0) {
-    console.error(
-      "Auth0 sdk script wasn't loaded, you need to load auth0 sdk before rendering the Auth0LoginButton"
-    );
-  }
 
   const auth0InstanceRef = React.useRef(null);
   React.useEffect(() => {
