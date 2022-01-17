@@ -8,6 +8,7 @@ import { AlertWithContext } from "../../SubComponents/AlertWithContext";
 import { FacebookLoginButton } from "../../Components/common/FacebookLoginButton/FacebookLoginButton";
 import { Link } from "../../SubComponents/Link";
 import { GoogleLoginButton } from "../common/GoogleLoginButton/GoogleLoginButton";
+import { Auth0LoginButton } from "../common/Auth0LoginButton/Auth0LoginButton";
 
 /**
  *
@@ -16,7 +17,8 @@ export function LoginView(props) {
   const { t } = useTranslation("login");
   const socialLoginEnabled =
     window.Pelcro.site.read()?.facebook_app_id ||
-    window.Pelcro.site.read()?.google_app_id;
+    window.Pelcro.site.read()?.google_app_id ||
+    window.Pelcro.site.read()?.auth0_client_id;
 
   return (
     <div id="pelcro-login-view">
@@ -71,6 +73,7 @@ export function LoginView(props) {
               <div className="plc-flex plc-justify-center plc-px-5 plc-mt-1 plc-space-x-3">
                 <GoogleLoginButton />
                 <FacebookLoginButton />
+                <Auth0LoginButton />
               </div>
             </div>
           )}

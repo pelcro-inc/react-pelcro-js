@@ -17,7 +17,7 @@
       "warn"
     ],
     "jsdoc/valid-types": "warn",
-    "jsdoc/require-jsdoc": "warn",
+    "jsdoc/require-jsdoc": "off",
     "require-jsdoc": "off",
     "valid-jsdoc": "warn",
     "guard-for-in": "off",

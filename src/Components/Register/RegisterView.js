@@ -10,6 +10,7 @@ import { AlertWithContext } from "../../SubComponents/AlertWithContext";
 import { usePelcro } from "../../hooks/usePelcro";
 import { FacebookLoginButton } from "../common/FacebookLoginButton/FacebookLoginButton";
 import { GoogleLoginButton } from "../common/GoogleLoginButton/GoogleLoginButton";
+import { Auth0LoginButton } from "../common/Auth0LoginButton/Auth0LoginButton";
 import { Link } from "../../SubComponents/Link";
 
 /**
@@ -24,7 +25,9 @@ export function RegisterView(props) {
     product?.paywall?.register_subtitle ?? t("subtitle");
   const socialLoginEnabled =
     window.Pelcro.site.read()?.facebook_app_id ||
-    window.Pelcro.site.read()?.google_app_id;
+    window.Pelcro.site.read()?.google_app_id ||
+    window.Pelcro.site.read()?.auth0_client_id;
+
   const showNameFields =
     window.Pelcro?.uiSettings?.enableNameFieldsInRegister;
 
@@ -106,6 +109,7 @@ export function RegisterView(props) {
               <div className="plc-flex plc-justify-center plc-px-5 plc-mt-1 plc-space-x-3">
                 <GoogleLoginButton />
                 <FacebookLoginButton />
+                <Auth0LoginButton />
               </div>
             </div>
           )}
