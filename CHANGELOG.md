@@ -1,3 +1,10 @@
+# [2.7.0-beta.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.7.0-beta.2...v2.7.0-beta.3) (2022-01-17)
+
+
+### Bug Fixes
+
+* **auth0:** check if auth0 sdk script is loaded before rendering ([6a4aee6](https://github.com/pelcro-inc/react-pelcro-js/commit/6a4aee6642d7fd078a1b1b975505273ee1d49b9f))
+
 # [2.7.0-beta.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.7.0-beta.1...v2.7.0-beta.2) (2022-01-17)
 
 
