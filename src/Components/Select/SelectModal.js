@@ -208,7 +208,6 @@ class SelectModal extends Component {
   };
 
   renderProducts = () => {
-    console.log("normal");
     const userDidSelectProduct = Boolean(this.state.mode === "plan");
     const productsToShow = userDidSelectProduct
       ? [this.state.product]
