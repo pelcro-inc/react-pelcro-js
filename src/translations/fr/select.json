@@ -15,7 +15,11 @@
     },
     "selectProduct": "Sélectionnez un produit",
     "selectPlan": "Sélectionnez un plan",
-    "starningAt": "À partir de"
+    "starningAt": "À partir de",
+    "restrictiveArticles": {
+      "subscribeTo": "Abonnez-vous à une des options suivantes pour accéder au contenu de cette page",
+      "or": "Sinon, jetez un coup d'oeil à d'autres offres ci-dessous"
+    }
   },
   "buttons": {
     "next": "Prochain",

@@ -145,67 +145,130 @@ class SelectModal extends Component {
     return `${startingPlan.amount_formatted}/${startingPlan.interval}`;
   };
 
+  renderOneProduct = (product, index, options) => {
+    const isPlanMode = Boolean(this.state.mode === "plan");
+    const productButtonLabel = isPlanMode
+      ? this.locale("buttons.back")
+      : this.locale("buttons.select");
+    const productButtonCallback = isPlanMode
+      ? this.goBack
+      : this.selectProduct;
+
+    return (
+      <div
+        key={product.id}
+        className={`plc-flex plc-items-start plc-p-2 plc-mt-4 plc-space-x-3 plc-text-gray-900 plc-border-solid plc-rounded plc-border-primary-500 pelcro-select-product-wrapper ${
+          options?.emphasize ? "plc-border-2" : "plc-border"
+        }`}
+      >
+        {product.image && (
+          <img
+            alt={`image of ${product.name}`}
+            src={product.image}
+            className="plc-object-contain plc-w-1/4 pelcro-select-product-image"
+          />
+        )}
+
+        <div
+          className={`plc-flex plc-flex-wrap ${
+            product.image ? "plc-w-3/4" : "plc-w-full"
+          }`}
+        >
+          <div className="plc-w-full pelcro-select-product-header">
+            <p className="plc-font-bold pelcro-select-product-title">
+              {product.name}
+            </p>
+            <p className="plc-text-xs pelcro-select-product-description">
+              {product.description}
+            </p>
+          </div>
+
+          <div className="plc-flex plc-items-end plc-w-full plc-mt-3">
+            {product.plans && (
+              <p className="plc-w-1/2 plc-text-xs pelcro-select-product-cost">
+                {this.locale("labels.startingAt")}{" "}
+                {this.countStartPrice(product.plans)}
+              </p>
+            )}
+            <Button
+              onClick={productButtonCallback}
+              data-key={product.id}
+              id="pelcro-select-product-back-button"
+              className={`plc-ml-auto plc-text-xs ${
+                options?.emphasize ? "plc-bg-primary-700" : ""
+              }`}
+              {...(index === 0 && { autoFocus: true })}
+            >
+              {productButtonLabel}
+            </Button>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   renderProducts = () => {
     const userDidSelectProduct = Boolean(this.state.mode === "plan");
     const productsToShow = userDidSelectProduct
       ? [this.state.product]
       : this.state.productList;
-    const productButtonLabel = userDidSelectProduct
-      ? this.locale("buttons.back")
-      : this.locale("buttons.select");
-    const productButtonCallback = userDidSelectProduct
-      ? this.goBack
-      : this.selectProduct;
 
-    return productsToShow.map((product, i) => {
-      return (
-        <div
-          key={product.id}
-          className="plc-flex plc-items-start plc-p-2 plc-mt-4 plc-space-x-3 plc-text-gray-900 plc-border plc-border-solid plc-rounded plc-border-primary-500 pelcro-select-product-wrapper"
-        >
-          {product.image && (
-            <img
-              alt={`image of ${product.name}`}
-              src={product.image}
-              className="plc-object-contain plc-w-1/4 pelcro-select-product-image"
-            />
-          )}
-
-          <div
-            className={`plc-flex plc-flex-wrap ${
-              product.image ? "plc-w-3/4" : "plc-w-full"
-            }`}
-          >
-            <div className="plc-w-full pelcro-select-product-header">
-              <p className="plc-font-bold pelcro-select-product-title">
-                {product.name}
-              </p>
-              <p className="plc-text-xs pelcro-select-product-description">
-                {product.description}
-              </p>
-            </div>
-
-            <div className="plc-flex plc-items-end plc-w-full plc-mt-3">
-              {product.plans && (
-                <p className="plc-w-1/2 plc-text-xs pelcro-select-product-cost">
-                  {this.locale("labels.startingAt")}{" "}
-                  {this.countStartPrice(product.plans)}
-                </p>
-              )}
-              <Button
-                onClick={productButtonCallback}
-                data-key={product.id}
-                id="pelcro-select-product-back-button"
-                className="plc-ml-auto plc-text-xs"
-                {...(i === 0 && { autoFocus: true })}
-              >
-                {productButtonLabel}
-              </Button>
-            </div>
-          </div>
-        </div>
-      );
+    return productsToShow.map((product, index) => {
+      return this.renderOneProduct(product, index);
     });
+  };
+
+  renderMatchingProductsFirst = () => {
+    const isPlanMode = Boolean(this.state.mode === "plan");
+    if (isPlanMode) {
+      return this.renderOneProduct(this.state.product);
+    }
+
+    const [productsThatMatchArticleTag, allProductsMinusMatched] =
+      productsWithMatchedTaggedFirst();
+
+    // Render normal products if there are no available matching products
+    if (!productsThatMatchArticleTag?.length) {
+      return this.renderProducts();
+    }
+
+    return (
+      <div>
+        <h3 className="plc-text-sm plc-font-semibold">
+          {this.locale("labels.restrictiveArticles.subscribeTo")}
+        </h3>
+        {productsThatMatchArticleTag.map((product, index) =>
+          this.renderOneProduct(product, index, { emphasize: true })
+        )}
+
+        {allProductsMinusMatched?.length > 0 && (
+          <>
+            <hr className="plc-my-4" />
+
+            <h3 className="plc-text-sm plc-font-semibold">
+              {this.locale("labels.restrictiveArticles.or")}
+            </h3>
+            {allProductsMinusMatched.map((product, index) =>
+              this.renderOneProduct(product, index)
+            )}
+          </>
+        )}
+      </div>
+    );
+
+    function productsWithMatchedTaggedFirst() {
+      const allProducts = window.Pelcro.product.list() ?? [];
+      const productsThatMatchArticleTag =
+        window.Pelcro.product.getByMatchingPageTags();
+
+      const allProductsMinusMatched = allProducts.filter((product) =>
+        productsThatMatchArticleTag.find(
+          (matchedProduct) => matchedProduct.id !== product.id
+        )
+      );
+
+      return [productsThatMatchArticleTag, allProductsMinusMatched];
+    }
   };
 
   renderPlans = () => {
@@ -351,7 +414,10 @@ class SelectModal extends Component {
             </div>
 
             <div className="pelcro-select-products-wrapper">
-              {this.renderProducts()}
+              {window.Pelcro.site.read()
+                ?.restrictive_paywall_metatags_enabled
+                ? this.renderMatchingProductsFirst()
+                : this.renderProducts()}
             </div>
 
             {this.state.mode === "plan" && (
