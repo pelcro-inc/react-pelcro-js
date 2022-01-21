@@ -1,3 +1,10 @@
+# [2.7.0-beta.5](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.7.0-beta.4...v2.7.0-beta.5) (2022-01-21)
+
+
+### Features
+
+* **select modal:** emphasize a product if it matches page tag ([#125](https://github.com/pelcro-inc/react-pelcro-js/issues/125)) ([b4f039f](https://github.com/pelcro-inc/react-pelcro-js/commit/b4f039ffc6583c11fbf37ea32153df39d1b7b98c))
+
 # [2.7.0-beta.4](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.7.0-beta.3...v2.7.0-beta.4) (2022-01-17)
 
 
