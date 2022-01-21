@@ -241,16 +241,34 @@ class SelectModal extends Component {
           this.renderOneProduct(product, index, { emphasize: true })
         )}
 
-        <hr className="plc-my-4" />
+        {allProductsMinusMatched?.length > 0 && (
+          <>
+            <hr className="plc-my-4" />
 
-        <h3 className="plc-text-sm plc-font-semibold">
-          {this.locale("labels.restrictiveArticles.or")}
-        </h3>
-        {allProductsMinusMatched.map((product, index) =>
-          this.renderOneProduct(product, index)
+            <h3 className="plc-text-sm plc-font-semibold">
+              {this.locale("labels.restrictiveArticles.or")}
+            </h3>
+            {allProductsMinusMatched.map((product, index) =>
+              this.renderOneProduct(product, index)
+            )}
+          </>
         )}
       </div>
     );
+
+    function productsWithMatchedTaggedFirst() {
+      const allProducts = window.Pelcro.product.list() ?? [];
+      const productsThatMatchArticleTag =
+        window.Pelcro.product.getByMatchingPageTags();
+
+      const allProductsMinusMatched = allProducts.filter((product) =>
+        productsThatMatchArticleTag.find(
+          (matchedProduct) => matchedProduct.id !== product.id
+        )
+      );
+
+      return [productsThatMatchArticleTag, allProductsMinusMatched];
+    }
   };
 
   renderPlans = () => {
@@ -461,34 +479,3 @@ SelectModal.propTypes = {
 
 export const SelectModalWithTrans =
   withTranslation("select")(SelectModal);
-
-function getProductsThatMatchArticleTag() {
-  const productsThatMatchArticleTags = Pelcro.product
-    .list()
-    .filter((product) => product.paywall && product.paywall.tags)
-    .filter((productWithTags) => {
-      const articleTags = window.Pelcro.helpers.getOgArticleTags();
-      const productTags = productWithTags.paywall.tags.split(",");
-
-      // return intersection
-      return articleTags?.some((articleTag) =>
-        productTags.includes(articleTag)
-      );
-    });
-
-  return productsThatMatchArticleTags ?? [];
-}
-
-function productsWithMatchedTaggedFirst() {
-  const allProducts = window.Pelcro.product.list() ?? [];
-  const productsThatMatchArticleTag =
-    getProductsThatMatchArticleTag();
-
-  const allProductsMinusMatched = allProducts.filter((product) =>
-    productsThatMatchArticleTag.find(
-      (matchedProduct) => matchedProduct.id !== product.id
-    )
-  );
-
-  return [productsThatMatchArticleTag, allProductsMinusMatched];
-}
