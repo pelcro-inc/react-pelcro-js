@@ -272,6 +272,8 @@ export { RegisterContainer, store };
  * @return {boolean}
  */
 function hasSecurityTokenEnabled() {
-  const hasSecuritySdkLoaded = Boolean(window.grecaptcha);
+  const hasSecuritySdkLoaded = Boolean(
+    window.Pelcro.site.read()?.security_key
+  );
   return hasSecuritySdkLoaded;
 }
