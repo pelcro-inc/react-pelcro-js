@@ -1,3 +1,10 @@
+# [2.7.0-beta.6](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.7.0-beta.5...v2.7.0-beta.6) (2022-01-24)
+
+
+### Bug Fixes
+
+* **register:** failing if site already uses grecaptcha outside pelcro ([#126](https://github.com/pelcro-inc/react-pelcro-js/issues/126)) ([3d3e5a0](https://github.com/pelcro-inc/react-pelcro-js/commit/3d3e5a02887401f778ad080fe68d18ae92fd4145))
+
 # [2.7.0-beta.5](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.7.0-beta.4...v2.7.0-beta.5) (2022-01-21)
 
 
