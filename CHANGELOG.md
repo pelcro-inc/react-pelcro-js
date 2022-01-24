@@ -13,6 +13,7 @@
 * **auth0:** log an error if auth0 sdk isn't loaded ([67163c6](https://github.com/pelcro-inc/react-pelcro-js/commit/67163c6eb7e7d5c17790c3f95a5235e37a92488b))
 
 # [2.7.0-beta.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.7.0-beta.2...v2.7.0-beta.3) (2022-01-17)
+## [2.6.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.6.1...v2.6.2) (2022-01-24)
 
 
 ### Bug Fixes
@@ -34,6 +35,9 @@
 * **auth:** implement auth0 IDP ([#124](https://github.com/pelcro-inc/react-pelcro-js/issues/124)) ([181a421](https://github.com/pelcro-inc/react-pelcro-js/commit/181a421cca6efcb527a609853f8f99c325b7bd3b))
 
 ## [2.6.1-beta.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.6.0...v2.6.1-beta.1) (2022-01-12)
+* **register:** failing if site already uses grecaptcha outside pelcro ([#126](https://github.com/pelcro-inc/react-pelcro-js/issues/126)) ([3d3e5a0](https://github.com/pelcro-inc/react-pelcro-js/commit/3d3e5a02887401f778ad080fe68d18ae92fd4145))
+
+## [2.6.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.6.0...v2.6.1) (2022-01-12)
 
 
 ### Bug Fixes
