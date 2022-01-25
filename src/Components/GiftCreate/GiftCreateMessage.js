@@ -24,7 +24,7 @@ export function GiftCreateMessage(props) {
     <TextArea
       onChange={(e) => handleInputChange(e.target.value)}
       value={state.giftMessage}
-      maxLength="500"
+      maxLength="200"
       rows={3}
       tooltipText={t("gift.messages.giftMessageInfo")}
       {...props}
