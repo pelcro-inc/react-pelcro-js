@@ -78,12 +78,11 @@ export const SubscriptionsItems = ({
   toggleActiveMenu
 }) => {
   const { t } = useTranslation("dashboard");
-  const subs = window.Pelcro.subscription.list();
+  const subs = getNonDonationSubs();
 
-  if (!subs || subs.length === 0) return null;
+  if (subs.length === 0) return null;
 
-  return window.Pelcro.subscription
-    .list()
+  return subs
     .sort((a, b) => a.expires_at - b.expires_at)
     .sort((a, b) => a.renews_at - b.renews_at)
     .map((sub) => {
@@ -354,3 +353,11 @@ export const SubscriptionsItems = ({
       );
     });
 };
+
+function getNonDonationSubs() {
+  return (
+    window.Pelcro.subscription
+      ?.list()
+      ?.filter((sub) => !sub.plan.is_donation) ?? []
+  );
+}
