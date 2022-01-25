@@ -14,17 +14,17 @@ export const DonationsMenu = () => {
     .map((sub) => {
       return (
         <tr
-          key={"dashboard-subscription-" + sub.id}
-          className="plc-w-full plc-align-top"
+          key={sub.id}
+          className="plc-w-full plc-align-top pelcro-donation-row"
         >
           <td className="plc-truncate">
             {sub.plan.nickname && (
               <>
-                <span className="plc-font-semibold plc-text-gray-500">
+                <span className="plc-font-semibold plc-text-gray-500 pelcro-donation-plan">
                   {sub.plan.nickname}
                 </span>
                 <br />
-                <span className="plc-text-xs plc-text-gray-400">
+                <span className="plc-text-xs plc-text-gray-400 pelcro-donation-price">
                   {getFormattedPriceByLocal(
                     sub.plan.amount * sub.quantity,
                     sub.plan.currency,
@@ -35,7 +35,7 @@ export const DonationsMenu = () => {
             )}
           </td>
           <td>
-            <div className="plc-mb-4 plc-text-gray-500">
+            <div className="plc-mb-4 plc-text-gray-500 pelcro-donation-date">
               {sub.status && (
                 <span>{formatStartDate(sub.start)}</span>
               )}
@@ -46,7 +46,7 @@ export const DonationsMenu = () => {
     });
 
   return (
-    <table className="plc-w-full plc-table-fixed">
+    <table className="plc-w-full plc-table-fixed pelcro-donations-table">
       <thead className="plc-text-xs plc-font-semibold plc-tracking-wider plc-text-gray-400 plc-uppercase ">
         <tr>
           <th className="plc-w-6/12 ">{t("labels.plan")}</th>
