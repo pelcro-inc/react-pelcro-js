@@ -1,3 +1,10 @@
+# [2.7.0-beta.7](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.7.0-beta.6...v2.7.0-beta.7) (2022-01-26)
+
+
+### Features
+
+* **dashboard:** add donations menu ([#127](https://github.com/pelcro-inc/react-pelcro-js/issues/127)) ([df69410](https://github.com/pelcro-inc/react-pelcro-js/commit/df694107bf377cf04c930feb1079b971780afb98))
+
 # [2.7.0-beta.6](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.7.0-beta.5...v2.7.0-beta.6) (2022-01-24)
 
 
