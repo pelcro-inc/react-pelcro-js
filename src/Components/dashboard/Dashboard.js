@@ -25,15 +25,18 @@ import { ReactComponent as ShoppingIcon } from "../../assets/shopping.svg";
 import { ReactComponent as BookmarkIcon } from "../../assets/bookmark.svg";
 import { ReactComponent as PlusIcon } from "../../assets/plus.svg";
 import { ReactComponent as KeyIcon } from "../../assets/key.svg";
+import { ReactComponent as DonateIcon } from "../../assets/donate.svg";
 import userSolidIcon from "../../assets/user-solid.svg";
 import { OrdersMenu } from "./DashboardMenus/OrdersMenu";
 import { SavedItemsMenu } from "./DashboardMenus/SavedItemsMenu";
 import { usePelcro } from "../../hooks/usePelcro";
 import { SubscriptionsMenu } from "./DashboardMenus/SubsMenu";
+import { DonationsMenu } from "./DashboardMenus/DonationsMenu";
 
 const SUB_MENUS = {
   PROFILE: "profile",
   SUBSCRIPTIONS: "subscriptions",
+  DONATIONS: "donations",
   PAYMENT_CARDS: "payment-cards",
   ADDRESSES: "addresses",
   GIFTS: "gifts",
@@ -715,6 +718,16 @@ class Dashboard extends Component {
               />
 
               <Accordion.item
+                show={hasDonationSubs()}
+                name={SUB_MENUS.DONATIONS}
+                icon={
+                  <DonateIcon className="plc-transform plc-scale-120 plc-w-7 plc-h-8 plc-mr-1 plc-pt-1" />
+                }
+                title={this.locale("labels.donations")}
+                content={<DonationsMenu />}
+              />
+
+              <Accordion.item
                 name={SUB_MENUS.GIFTS}
                 icon={<GiftIcon />}
                 title={this.locale("labels.gifts")}
@@ -750,6 +763,15 @@ class Dashboard extends Component {
       </Transition>
     );
   }
+}
+
+function hasDonationSubs() {
+  const donations =
+    window.Pelcro.subscription
+      ?.list()
+      ?.filter((sub) => sub.plan.is_donation) ?? [];
+
+  return donations.length > 0;
 }
 
 export const DashboardWithTrans =

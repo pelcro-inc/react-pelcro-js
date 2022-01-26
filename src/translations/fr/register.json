@@ -48,7 +48,7 @@
       "lastName": "Nom de famille",
       "email": "Adresse courriel",
       "startDate": "Date de début",
-      "giftMessage": "Message du cadeau (500 caractères max)",
+      "giftMessage": "Message du cadeau (200 caractères max)",
       "required": "Champs obligatoires",
       "firstNamePlaceholder": "Prénom",
       "lastNamePlaceholder": "Nom de famille",
