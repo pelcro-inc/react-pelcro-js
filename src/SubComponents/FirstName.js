@@ -5,7 +5,6 @@ import { Input } from "./Input";
 
 export function FirstName({ store, ...otherProps }) {
   const { dispatch, state } = useContext(store);
-
   const handleInputChange = (value) => {
     dispatch({ type: SET_FIRST_NAME, payload: value });
   };
