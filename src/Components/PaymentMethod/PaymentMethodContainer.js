@@ -35,7 +35,8 @@ import {
   INIT_CONTAINER,
   UPDATE_PAYMENT_REQUEST,
   SHOW_ALERT,
-  SUBSCRIBE
+  SUBSCRIBE,
+  REMOVE_APPLIED_COUPON
 } from "../../utils/action-types";
 import { getErrorMessages, debounce } from "../common/Helpers";
 import {
@@ -216,7 +217,6 @@ const PaymentMethodContainerWithoutStripe = ({
       dispatch({ type: DISABLE_COUPON_BUTTON, payload: false });
 
       if (err) {
-        dispatch({ type: SET_PERCENT_OFF, payload: "" });
         onFailure(err);
 
         return dispatch({
@@ -315,6 +315,54 @@ const PaymentMethodContainerWithoutStripe = ({
   const debouncedApplyCouponCode = useRef(
     debounce(onApplyCouponCode, 1000)
   ).current;
+
+  const removeAppliedCoupon = (state) => {
+    state.couponCode = "";
+
+    dispatch({ type: SET_COUPON_ERROR, payload: "" });
+
+    dispatch({
+      type: SHOW_COUPON_FIELD,
+      payload: false
+    });
+
+    dispatch({
+      type: SET_COUPON,
+      payload: null
+    });
+
+    dispatch({
+      type: SET_PERCENT_OFF,
+      payload: ""
+    });
+
+    dispatch({
+      type: SET_UPDATED_PRICE,
+      payload: null
+    });
+
+    dispatch({
+      type: SET_TAX_AMOUNT,
+      payload: null
+    });
+
+    const { currentPlan } = state;
+
+    if (currentPlan) {
+      const quantity = currentPlan.quantity ?? 1;
+      const price = currentPlan.amount;
+
+      dispatch({
+        type: SET_UPDATED_PRICE,
+        // set original plan price
+        payload: price * quantity
+      });
+      dispatch({ type: UPDATE_PAYMENT_REQUEST });
+
+      // update the new amount with taxes if site has taxes enabled
+      updateTotalAmountWithTax();
+    }
+  };
 
   const subscribe = (stripeSource, state, dispatch) => {
     const { couponCode } = state;
@@ -919,6 +967,11 @@ const PaymentMethodContainerWithoutStripe = ({
           return UpdateWithSideEffect(
             { ...state, disableCouponButton: true },
             (state, dispatch) => onApplyCouponCode(state, dispatch)
+          );
+
+        case REMOVE_APPLIED_COUPON:
+          return UpdateWithSideEffect(state, () =>
+            removeAppliedCoupon(state)
           );
 
         case SET_COUPON:
