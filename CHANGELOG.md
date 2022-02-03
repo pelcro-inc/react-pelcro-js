@@ -1,3 +1,10 @@
+# [2.7.0-beta.8](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.7.0-beta.7...v2.7.0-beta.8) (2022-02-03)
+
+
+### Features
+
+* **discount:** add a remove coupon button ([dafa4c7](https://github.com/pelcro-inc/react-pelcro-js/commit/dafa4c7170c38e6a575ff4959578319b057cbeb1))
+
 # [2.7.0-beta.7](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.7.0-beta.6...v2.7.0-beta.7) (2022-01-26)
 
 
