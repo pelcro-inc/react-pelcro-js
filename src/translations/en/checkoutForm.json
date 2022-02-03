@@ -18,6 +18,7 @@
     "for": "for",
     "interval": "{{count}} {{interval}}",
     "interval_plural": "{{count}} {{interval}}s",
-    "tax": "+ Tax"
+    "tax": "+ Tax",
+    "removeCoupon": "REMOVE"
   }
 }
