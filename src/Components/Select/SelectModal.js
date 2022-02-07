@@ -261,10 +261,11 @@ class SelectModal extends Component {
       const productsThatMatchArticleTag =
         window.Pelcro.product.getByMatchingPageTags();
 
-      const allProductsMinusMatched = allProducts.filter((product) =>
-        productsThatMatchArticleTag.find(
-          (matchedProduct) => matchedProduct.id !== product.id
-        )
+      const allProductsMinusMatched = allProducts.filter(
+        (product) =>
+          !productsThatMatchArticleTag.some(
+            (matchedProduct) => matchedProduct.id === product.id
+          )
       );
 
       return [productsThatMatchArticleTag, allProductsMinusMatched];
