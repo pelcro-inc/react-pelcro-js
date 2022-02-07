@@ -1,3 +1,10 @@
+# [2.7.0-beta.10](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.7.0-beta.9...v2.7.0-beta.10) (2022-02-07)
+
+
+### Bug Fixes
+
+* **product select:** fix the product filteration technique ([6ecb888](https://github.com/pelcro-inc/react-pelcro-js/commit/6ecb888b3e004bbff2bbae6b2f240e64fe4092e0))
+
 # [2.7.0-beta.9](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.7.0-beta.8...v2.7.0-beta.9) (2022-02-07)
 
 
