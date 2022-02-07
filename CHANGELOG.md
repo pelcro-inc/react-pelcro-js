@@ -1,3 +1,10 @@
+# [2.7.0-beta.9](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.7.0-beta.8...v2.7.0-beta.9) (2022-02-07)
+
+
+### Bug Fixes
+
+* **coupon:** remove current coupon when invalid coupon is entered ([b9fc344](https://github.com/pelcro-inc/react-pelcro-js/commit/b9fc3442709d41e0406240c56700189c40978f71))
+
 # [2.7.0-beta.8](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.7.0-beta.7...v2.7.0-beta.8) (2022-02-03)
 
 
