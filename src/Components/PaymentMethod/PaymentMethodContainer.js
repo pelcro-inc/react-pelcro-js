@@ -219,10 +219,50 @@ const PaymentMethodContainerWithoutStripe = ({
       if (err) {
         onFailure(err);
 
-        return dispatch({
+        dispatch({
           type: SET_COUPON_ERROR,
           payload: getErrorMessages(err)
         });
+
+        // remove current coupon
+        dispatch({
+          type: SET_COUPON,
+          payload: null
+        });
+
+        dispatch({
+          type: SET_PERCENT_OFF,
+          payload: ""
+        });
+
+        dispatch({
+          type: SET_UPDATED_PRICE,
+          payload: null
+        });
+
+        dispatch({
+          type: SET_TAX_AMOUNT,
+          payload: null
+        });
+
+        const { currentPlan } = state;
+
+        if (currentPlan) {
+          const quantity = currentPlan.quantity ?? 1;
+          const price = currentPlan.amount;
+
+          dispatch({
+            type: SET_UPDATED_PRICE,
+            // set original plan price
+            payload: price * quantity
+          });
+          dispatch({ type: UPDATE_PAYMENT_REQUEST });
+
+          // update the new amount with taxes if site has taxes enabled
+          updateTotalAmountWithTax();
+        }
+
+        return;
       }
 
       dispatch({ type: SET_COUPON_ERROR, payload: "" });
