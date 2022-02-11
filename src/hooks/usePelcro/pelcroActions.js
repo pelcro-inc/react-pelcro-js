@@ -26,7 +26,7 @@ export class PelcroActions {
 
   switchView = (view) => {
     const isEmailVerificationEnabled =
-      window.Pelcro.site.read()?.email_verification_enabled ?? false;
+      window.Pelcro.site.read()?.email_verify_enabled ?? false;
 
     const isUserEmailVerified =
       window.Pelcro.user.read()?.email_confirm ?? false;
