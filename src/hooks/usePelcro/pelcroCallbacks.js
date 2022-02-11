@@ -9,13 +9,17 @@ export class PelcroCallbacks {
     }
   };
 
-  whenUserReady = (callback) => {
+  whenUserReady = (callback, listenerOptions) => {
     if (window.Pelcro.user.read()?.id) {
       callback(window.Pelcro.user.read());
     } else {
-      window.document.addEventListener("PelcroUserLoaded", (e) => {
-        callback(window.Pelcro.user.read());
-      });
+      window.document.addEventListener(
+        "PelcroUserLoaded",
+        (e) => {
+          callback(window.Pelcro.user.read());
+        },
+        listenerOptions
+      );
     }
   };
 
