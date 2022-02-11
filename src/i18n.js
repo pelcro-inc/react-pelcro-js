@@ -40,6 +40,8 @@ import select_en from "./translations/en/select.json";
 import select_fr from "./translations/fr/select.json";
 import notification_en from "./translations/en/notification.json";
 import notification_fr from "./translations/fr/notification.json";
+import verifyEmail_en from "./translations/en/verifyEmail.json";
+import verifyEmail_fr from "./translations/fr/verifyEmail.json";
 import { getPageOrDefaultLanguage } from "./utils/utils";
 
 const resources = {
@@ -58,6 +60,7 @@ const resources = {
     passwordReset: passwordReset_en,
     passwordForgot: passwordForgot_en,
     passwordChange: passwordChange_en,
+    verifyEmail: verifyEmail_en,
     cart: cart_en,
     shop: shop_en,
     payment: payment_en,
@@ -80,6 +83,7 @@ const resources = {
     passwordReset: passwordReset_fr,
     passwordForgot: passwordForgot_fr,
     passwordChange: passwordChange_fr,
+    verifyEmail: verifyEmail_fr,
     cart: cart_fr,
     shop: shop_fr,
     payment: payment_fr,

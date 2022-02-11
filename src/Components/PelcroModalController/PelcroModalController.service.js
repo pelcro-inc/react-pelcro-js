@@ -8,6 +8,9 @@ import {
 } from "../../utils/utils";
 import { init as initContentEntitlement } from "../common/contentEntitlement";
 import { loadStripe } from "@stripe/stripe-js/pure";
+import { notify } from "../../SubComponents/Notification";
+import { getErrorMessages } from "../common/Helpers";
+import i18n from "../../i18n";
 
 /**
  * @typedef {Object} OptionsType
@@ -282,6 +285,10 @@ export const initViewFromURL = () => {
         return initCartFromUrl();
       }
 
+      if (view === "email-verify") {
+        return verifyEmailTokenFromUrl();
+      }
+
       switchView(view);
     });
   }
@@ -440,4 +447,43 @@ export const initCartFromUrl = () => {
 
     if (hasAddedAnItemSuccessfully) switchView("cart");
   });
+};
+
+const verifyEmailTokenFromUrl = () => {
+  const { whenUserReady } = usePelcro.getStore();
+
+  const translations = i18n.t("verifyEmail:messages", {
+    returnObjects: true
+  });
+
+  const emailToken = window.Pelcro.helpers.getURLParameter("token");
+
+  const isEmailVerificationEnabled =
+    window.Pelcro.site.read()?.email_verify_enabled ?? false;
+
+  if (!emailToken || !isEmailVerificationEnabled) return;
+
+  /*   
+  using whenUserReady means that the verification link needs to be
+  opened on the same device that was used for registeration to guarantee
+  that the user is authenticated. if that's not the case, nothing would show up,
+  this is a limitation caused by the SDK and it's events
+  */
+  whenUserReady(
+    () => {
+      window.Pelcro.user.verifyEmailToken(
+        {
+          token: emailToken
+        },
+        (err, res) => {
+          if (err) {
+            return notify.error(getErrorMessages(err));
+          }
+
+          return notify.success(translations.success);
+        }
+      );
+    },
+    { once: true }
+  );
 };

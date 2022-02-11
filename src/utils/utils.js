@@ -164,7 +164,8 @@ export const isValidViewFromURL = (viewID) => {
       "newsletter",
       "address-create",
       "order-create",
-      "cart"
+      "cart",
+      "email-verify"
     ].includes(viewID) ||
     hasValidNewsletterUpdateUrl()
   ) {
