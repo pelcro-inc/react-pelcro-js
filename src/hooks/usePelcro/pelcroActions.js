@@ -25,7 +25,25 @@ export class PelcroActions {
    */
 
   switchView = (view) => {
+    const isEmailVerificationEnabled =
+      window.Pelcro.site.read()?.email_verification_enabled ?? false;
+
+    const isUserEmailVerified =
+      window.Pelcro.user.read()?.email_confirm ?? false;
+
+    const userMustVerifyEmail =
+      this.get().isAuthenticated() &&
+      isEmailVerificationEnabled &&
+      !isUserEmailVerified;
+
     // view switching guards
+    if (
+      userMustVerifyEmail &&
+      !["dashboard", "meter", "login", null].includes(view)
+    ) {
+      return this.set({ view: "email-verify" });
+    }
+
     if (
       ["login", "register"].includes(view) &&
       this.get().isAuthenticated()
