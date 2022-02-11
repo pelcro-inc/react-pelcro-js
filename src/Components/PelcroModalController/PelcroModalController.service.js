@@ -459,7 +459,7 @@ const verifyEmailTokenFromUrl = () => {
   const emailToken = window.Pelcro.helpers.getURLParameter("token");
 
   const isEmailVerificationEnabled =
-    window.Pelcro.site.read()?.email_verification_enabled ?? false;
+    window.Pelcro.site.read()?.email_verify_enabled ?? false;
 
   if (!emailToken || !isEmailVerificationEnabled) return;
 
