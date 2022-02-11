@@ -181,6 +181,11 @@ export { ProfilePicChangeRemoveButton } from "./Components/ProfilePicChange/Prof
 export { ProfilePicChangeView } from "./Components/ProfilePicChange/ProfilePicChangeView";
 export { ProfilePicChangeModal } from "./Components/ProfilePicChange/ProfilePicChangeModal";
 
+export { EmailVerifyContainer } from "./Components/EmailVerify/EmailVerifyContainer";
+export { EmailVerifyModal } from "./Components/EmailVerify/EmailVerifyModal";
+export { EmailVerifyResendButton } from "./Components/EmailVerify/EmailVerifyResendButton";
+export { EmailVerifyView } from "./Components/EmailVerify/EmailVerifyView";
+
 export { AlertWithContext as Alert } from "./SubComponents/AlertWithContext";
 export { Alert as AlertElement } from "./SubComponents/Alert";
 export { Badge } from "./SubComponents/Badge";

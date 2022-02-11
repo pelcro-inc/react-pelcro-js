@@ -1,0 +1,11 @@
+{
+  "labels": {
+    "title": "Verify your e-mail",
+    "instructions": "To complete creating your account, you need to verify your e-mail address by opening the verification link we've sent to your email:",
+    "resend": "Resend message"
+  },
+  "messages": {
+    "resent": "Resent successfully",
+    "success": "E-mail verified successfully"
+  }
+}
