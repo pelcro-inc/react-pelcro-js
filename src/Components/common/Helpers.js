@@ -1,3 +1,5 @@
+import { usePelcro } from "../../hooks/usePelcro";
+
 /**
  * Extracts error message from the response error object
  * @param {Object} error Error object
@@ -56,3 +58,15 @@ export const debounce = (func, waitTime) => {
     timeout = setTimeout(later, waitTime);
   };
 };
+
+export function getSiteCardProcessor() {
+  const { view } = usePelcro.getStore();
+  const temp_ONLY_RENDER_WITH_SUBSCRIPTION_CREATE =
+    view === "subscription-create";
+
+  if (temp_ONLY_RENDER_WITH_SUBSCRIPTION_CREATE) {
+    return "vantiv";
+  }
+
+  return "stripe";
+}
