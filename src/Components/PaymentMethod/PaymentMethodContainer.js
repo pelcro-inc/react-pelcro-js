@@ -38,10 +38,15 @@ import {
   SUBSCRIBE,
   REMOVE_APPLIED_COUPON
 } from "../../utils/action-types";
-import { getErrorMessages, debounce } from "../common/Helpers";
+import {
+  getErrorMessages,
+  debounce,
+  getSiteCardProcessor
+} from "../common/Helpers";
 import {
   Subscription,
-  PaypalGateWay,
+  PaypalGateway,
+  VantivGateway,
   SUBSCRIPTION_TYPES
 } from "../../services/Subscription/Subscription.service";
 import { getPageOrDefaultLanguage } from "../../utils/utils";
@@ -123,6 +128,72 @@ const PaymentMethodContainerWithoutStripe = ({
     }
     dispatch({ type: INIT_CONTAINER });
     updateTotalAmountWithTax();
+  }, []);
+
+  function submitVantivPayment() {
+    const orderId = `pelcro-${new Date().getTime()}`;
+    // calls handleVantivPayment
+    vantivInstanceRef.current.getPaypageRegistrationId({
+      id: orderId,
+      orderId: orderId
+    });
+  }
+
+  function handleVantivPayment(paymentRequest) {
+    const SUCCESS_STATUS = "870";
+    if (paymentRequest.response !== SUCCESS_STATUS) {
+      return handlePaymentError({
+        error: new Error(paymentRequest.message)
+      });
+    }
+
+    const subscription = new Subscription(new VantivGateway());
+    const { couponCode } = state;
+
+    return subscription.execute(
+      {
+        type: SUBSCRIPTION_TYPES.CREATE_SUBSCRIPTION,
+        token: paymentRequest.paypageRegistrationId,
+        quantity: plan.quantity,
+        plan,
+        couponCode,
+        product,
+        addressId: selectedAddressId
+      },
+      (err, res) => {
+        if (err) {
+          return handlePaymentError(err);
+        }
+
+        onSuccess(res);
+      }
+    );
+  }
+
+  const vantivInstanceRef = React.useRef(null);
+  useEffect(() => {
+    const cardProcessor = getSiteCardProcessor();
+
+    if (cardProcessor === "vantiv") {
+      vantivInstanceRef.current = new window.EprotectIframeClient({
+        paypageId: "6BpBxTo2XWMv4MpG",
+        reportGroup: "6BpBxTo2XWMv4MpG",
+        style: "enhancedStyle",
+        height: "245",
+        timeout: 50000,
+        div: "eProtectiframe",
+        callback: handleVantivPayment,
+        showCvv: true,
+        numYears: 8,
+        placeholderText: {
+          cvv: "CVV"
+        },
+        inputsEmptyCallback: (e) => console.log(e),
+        enhancedUxFeatures: {
+          inlineFieldValidations: true
+        }
+      });
+    }
   }, []);
 
   const initPaymentRequest = (state, dispatch) => {
@@ -533,7 +604,7 @@ const PaymentMethodContainerWithoutStripe = ({
    * @return {void}
    */
   const handlePaypalSubscription = (state, paypalNonce) => {
-    const subscription = new Subscription(new PaypalGateWay());
+    const subscription = new Subscription(new PaypalGateway());
     const { couponCode } = state;
 
     /**
@@ -866,7 +937,10 @@ const PaymentMethodContainerWithoutStripe = ({
     onFailure(error);
     dispatch({
       type: SHOW_ALERT,
-      payload: { type: "error", content: error?.message }
+      payload: {
+        type: "error",
+        content: getErrorMessages(error) ?? error?.message
+      }
     });
     dispatch({ type: DISABLE_SUBMIT, payload: false });
     dispatch({ type: LOADING, payload: false });
@@ -979,10 +1053,14 @@ const PaymentMethodContainerWithoutStripe = ({
               }
 
               if (type === "updatePaymentSource") {
-                updatePaymentSource(state, dispatch);
-              } else {
-                submitPayment(state, dispatch);
+                return updatePaymentSource(state, dispatch);
               }
+
+              if (getSiteCardProcessor() === "vantiv") {
+                return submitVantivPayment();
+              }
+
+              submitPayment(state, dispatch);
             }
           );
 
