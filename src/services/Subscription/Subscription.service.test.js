@@ -2,7 +2,7 @@
 
 import { setupTests } from "../../../__tests__/testsSetup";
 import {
-  PaypalGateWay,
+  PaypalGateway,
   StripeGateway,
   Subscription,
   SUBSCRIPTION_TYPES
@@ -255,7 +255,7 @@ describe("Successfully create any type of subscription", () => {
 
   describe("PayPal gateway", () => {
     test("Should not execute given an invalid type of subscription", () => {
-      const subscription = new Subscription(new PaypalGateWay());
+      const subscription = new Subscription(new PaypalGateway());
       const mockCallback = jest.fn();
 
       subscription.execute(
@@ -273,7 +273,7 @@ describe("Successfully create any type of subscription", () => {
     });
 
     test("Should create a subscription", () => {
-      const subscription = new Subscription(new PaypalGateWay());
+      const subscription = new Subscription(new PaypalGateway());
 
       jest
         .spyOn(window.Pelcro.subscription, "create")
@@ -300,7 +300,7 @@ describe("Successfully create any type of subscription", () => {
     });
 
     test("Should create a gift subscription", () => {
-      const subscription = new Subscription(new PaypalGateWay());
+      const subscription = new Subscription(new PaypalGateway());
 
       jest
         .spyOn(window.Pelcro.subscription, "create")
