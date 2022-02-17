@@ -174,6 +174,11 @@ describe("Actions", () => {
 
     test("switchView('register') should switch to dashboard view when user is authenticated", () => {
       const store = usePelcro();
+
+      jest
+        .spyOn(window.Pelcro.site, "read")
+        .mockImplementation(() => ({ email_verify_enabled: false }));
+
       act(() => {
         store.set({ isAuthenticated: () => true });
       });
