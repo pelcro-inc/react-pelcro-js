@@ -23,7 +23,7 @@ export const EmailVerifyView = (props) => {
           <AlertWithContext />
           <div className="plc-flex plc-flex-col plc-items-center plc-justify-center plc-mt-4">
             <EmailIcon className="plc-w-32 plc-h-32" />
-            <p className="plc-mb-1 plc-text-gray-900">
+            <p className="plc-mb-1 plc-text-gray-900 plc-text-center plc-whitespace-pre-line">
               {t("labels.instructions")}{" "}
               <span className="plc-font-bold">
                 {window.Pelcro.user.read()?.email}
