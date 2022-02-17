@@ -1,3 +1,10 @@
+# [2.7.0-beta.11](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.7.0-beta.10...v2.7.0-beta.11) (2022-02-11)
+
+
+### Features
+
+* email verification ([#129](https://github.com/pelcro-inc/react-pelcro-js/issues/129)) ([bdc0ea7](https://github.com/pelcro-inc/react-pelcro-js/commit/bdc0ea7a63926723379ecf4e9a7e30185218091c))
+
 # [2.7.0-beta.10](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.7.0-beta.9...v2.7.0-beta.10) (2022-02-07)
 
 
