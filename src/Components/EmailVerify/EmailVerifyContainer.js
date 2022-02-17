@@ -32,7 +32,7 @@ const EmailVerifyContainer = ({
   const { t } = useTranslation("verifyEmail");
 
   const submit = () => {
-    window.Pelcro.user.resendEmailVerificationToken((err, res) => {
+    window.Pelcro.user.resendEmailVerification((err, res) => {
       dispatch({ type: LOADING, payload: false });
 
       if (err) {

@@ -450,7 +450,7 @@ export const initCartFromUrl = () => {
 };
 
 const verifyEmailTokenFromUrl = () => {
-  const { whenUserReady } = usePelcro.getStore();
+  const { whenSiteReady } = usePelcro.getStore();
 
   const translations = i18n.t("verifyEmail:messages", {
     returnObjects: true
@@ -463,13 +463,7 @@ const verifyEmailTokenFromUrl = () => {
 
   if (!emailToken || !isEmailVerificationEnabled) return;
 
-  /*   
-  using whenUserReady means that the verification link needs to be
-  opened on the same device that was used for registeration to guarantee
-  that the user is authenticated. if that's not the case, nothing would show up,
-  this is a limitation caused by the SDK and it's events
-  */
-  whenUserReady(
+  whenSiteReady(
     () => {
       window.Pelcro.user.verifyEmailToken(
         {
