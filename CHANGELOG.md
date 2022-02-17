@@ -1,3 +1,10 @@
+# [2.7.0-beta.12](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.7.0-beta.11...v2.7.0-beta.12) (2022-02-17)
+
+
+### Features
+
+* **email verify:** use new SDK method name + wording updates ([91e2f92](https://github.com/pelcro-inc/react-pelcro-js/commit/91e2f929335b8609facb2f3b2064d49b456dd643))
+
 # [2.7.0-beta.11](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.7.0-beta.10...v2.7.0-beta.11) (2022-02-11)
 
 
