@@ -10,36 +10,35 @@ export const Auth0LoginButton = ({
   labelClassName = "",
   iconClassName = ""
 }) => {
-  if (
-    !window.auth0 &&
-    window.Pelcro.site.read().auth0_client_id &&
-    window.Pelcro.site.read().auth0_base_url
-  ) {
-    console.error(
-      "Auth0 sdk script wasn't loaded, you need to load auth0 sdk before rendering the Auth0LoginButton"
-    );
-  }
-
   const auth0Enabled = Boolean(
     window.Pelcro.site.read().auth0_client_id &&
-      window.Pelcro.site.read().auth0_base_url &&
-      window.auth0
+      window.Pelcro.site.read().auth0_base_url
   );
 
   const auth0InstanceRef = React.useRef(null);
   React.useEffect(() => {
-    if (auth0Enabled) {
+    if (
+      auth0Enabled &&
+      window.auth0 &&
+      auth0InstanceRef.current === null
+    ) {
       auth0InstanceRef.current = new window.auth0.WebAuth({
         domain: window.Pelcro.site.read().auth0_base_url,
         clientID: window.Pelcro.site.read().auth0_client_id
       });
     }
-  }, []);
+  }, [auth0Enabled, window.auth0]);
 
   const { dispatch: loginDispatch } = useContext(loginStore);
   const { dispatch: registerDispatch } = useContext(registerStore);
 
   function handleClick() {
+    if (!window.auth0) {
+      return console.error(
+        "Auth0 sdk script wasn't loaded, you need to load auth0 sdk before rendering the Auth0LoginButton"
+      );
+    }
+
     auth0InstanceRef.current?.popup?.authorize?.(
       {
         responseType: "token id_token",
