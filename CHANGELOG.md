@@ -1,3 +1,10 @@
+# [2.7.0-beta.13](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.7.0-beta.12...v2.7.0-beta.13) (2022-02-21)
+
+
+### Bug Fixes
+
+* auth0 button not rendering on url trigger ([#131](https://github.com/pelcro-inc/react-pelcro-js/issues/131)) ([4cdd9d0](https://github.com/pelcro-inc/react-pelcro-js/commit/4cdd9d0f42f140e5d346ebdfaa4cdfed828ee658))
+
 # [2.7.0-beta.12](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.7.0-beta.11...v2.7.0-beta.12) (2022-02-17)
 
 
