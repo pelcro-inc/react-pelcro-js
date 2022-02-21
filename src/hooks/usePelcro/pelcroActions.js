@@ -74,10 +74,11 @@ export class PelcroActions {
       resetView,
       switchToCheckoutForm,
       product,
-      order
+      order,
+      invoice
     } = this.get();
 
-    if (product || order) {
+    if (product || order || invoice) {
       // direct user to stripe checkout form when there are no existing cards
       if (!userHasPaymentMethod()) {
         return switchToCheckoutForm();
@@ -90,8 +91,13 @@ export class PelcroActions {
   };
 
   switchToCheckoutForm = () => {
-    const { switchView, product, subscriptionIdToRenew, order } =
-      this.get();
+    const {
+      switchView,
+      product,
+      subscriptionIdToRenew,
+      order,
+      invoice
+    } = this.get();
 
     if (product && subscriptionIdToRenew) {
       return switchView("subscription-renew");
@@ -103,6 +109,10 @@ export class PelcroActions {
 
     if (order) {
       return switchView("order-create");
+    }
+
+    if (invoice) {
+      return switchView("invoice-payment");
     }
   };
 
@@ -130,6 +140,21 @@ export class PelcroActions {
     const plan = window.Pelcro.plan.getById(id);
     if (!plan) return console.error("invalid plan id");
     this.set({ plan });
+  };
+
+  setInvoice = (id) => {
+    const invoices = window.Pelcro.invoice.list() ?? [];
+    const invoice = invoices.find(
+      (inv) => String(inv.id) === String(id)
+    );
+
+    if (!invoice) {
+      console.error("invalid invoice id");
+      return false;
+    }
+
+    this.set({ invoice });
+    return true;
   };
 
   /**

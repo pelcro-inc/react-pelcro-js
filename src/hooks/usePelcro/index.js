@@ -22,6 +22,9 @@ export const initialState = {
   cartItems: [],
   order: null, // null | SKU[] | SKU,
 
+  // invoices
+  invoice: null,
+
   // User
   isAuthenticated: () => window.Pelcro.user.isAuthenticated(),
   selectedPaymentMethodId: null,
