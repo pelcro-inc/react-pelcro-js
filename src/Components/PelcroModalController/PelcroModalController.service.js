@@ -289,6 +289,10 @@ export const initViewFromURL = () => {
         return verifyEmailTokenFromUrl();
       }
 
+      if (view === "invoice-details") {
+        return showInvoiceDetailsFromUrl();
+      }
+
       switchView(view);
     });
   }
@@ -480,4 +484,23 @@ const verifyEmailTokenFromUrl = () => {
     },
     { once: true }
   );
+};
+
+const showInvoiceDetailsFromUrl = () => {
+  const { isAuthenticated, setInvoice, switchView } =
+    usePelcro.getStore();
+
+  if (!isAuthenticated()) {
+    return switchView("login");
+  }
+  const invoiceId = window.Pelcro.helpers.getURLParameter("id");
+
+  const wasSetSuccessfully = setInvoice(invoiceId);
+  if (!wasSetSuccessfully) {
+    const translations = i18n.t("messages", {
+      returnObjects: true
+    });
+
+    notify.error(translations.invalidInvoice);
+  }
 };
