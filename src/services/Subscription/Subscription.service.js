@@ -12,7 +12,8 @@ export const SUBSCRIPTION_TYPES = {
   CREATE_SUBSCRIPTION: "CREATE_SUBSCRIPTION",
   CREATE_GIFTED_SUBSCRIPTION: "CREATE_GIFTED_SUBSCRIPTION",
   RENEW_SUBSCRIPTION: "RENEW_SUBSCRIPTION",
-  RENEW_GIFTED_SUBSCRIPTION: "RENEW_GIFTED_SUBSCRIPTION"
+  RENEW_GIFTED_SUBSCRIPTION: "RENEW_GIFTED_SUBSCRIPTION",
+  PAY_INVOICE: "PAY_INVOICE"
 };
 
 export class Subscription {
@@ -40,6 +41,7 @@ export class Subscription {
    * @property {number} [subscriptionIdToRenew]
    * @property {number} [quantity]
    * @property {string} addressId
+   * @property {number} invoiceId
    */
 
   /**
@@ -130,6 +132,8 @@ export class StripeGateway {
         return this.#createGiftedSubscription(options, callback);
       case types.RENEW_GIFTED_SUBSCRIPTION:
         return this.#renewGiftedSubscription(options, callback);
+      case types.PAY_INVOICE:
+        return this.#payInvoice(options, callback);
 
       default:
         console.error(
@@ -269,6 +273,21 @@ export class StripeGateway {
       }
     );
   };
+
+  #payInvoice = (options, callback) => {
+    const { token, invoiceId } = options;
+
+    window.Pelcro.invoice.pay(
+      {
+        payment_gateway: this.#paymentGateway,
+        gateway_token: token,
+        invoice_id: invoiceId
+      },
+      (err, res) => {
+        callback(err, res);
+      }
+    );
+  };
 }
 
 /**
@@ -291,6 +310,8 @@ export class PaypalGateWay {
         return this.#createSubscription(options, callback);
       case types.CREATE_GIFTED_SUBSCRIPTION:
         return this.#createGiftedSubscription(options, callback);
+      case types.PAY_INVOICE:
+        return this.#payInvoice(options, callback);
 
       default:
         console.error(
@@ -362,6 +383,21 @@ export class PaypalGateWay {
         gift_start_date: giftRecipient?.startDate,
         gift_message: giftRecipient?.giftMessage,
         address_id: product.address_required ? addressId : null
+      },
+      (err, res) => {
+        callback(err, res);
+      }
+    );
+  };
+
+  #payInvoice = (options, callback) => {
+    const { token, invoiceId } = options;
+
+    window.Pelcro.invoice.pay(
+      {
+        payment_gateway: this.#paymentGateway,
+        gateway_token: token,
+        invoice_id: invoiceId
       },
       (err, res) => {
         callback(err, res);
