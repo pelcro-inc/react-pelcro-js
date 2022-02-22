@@ -1,3 +1,15 @@
+# [3.0.0-beta.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.7.0-beta.14...v3.0.0-beta.1) (2022-02-22)
+
+
+### Features
+
+* require email verification modal ([4bb628a](https://github.com/pelcro-inc/react-pelcro-js/commit/4bb628a0141875e7aef14a7f147b3a4abb3f1482))
+
+
+### BREAKING CHANGES
+
+* EmailVerifyModal is now needed for all client UIs
+
 # [2.7.0-beta.14](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.7.0-beta.13...v2.7.0-beta.14) (2022-02-22)
 
 
