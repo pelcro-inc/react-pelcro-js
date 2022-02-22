@@ -131,7 +131,15 @@ export const SubscriptionsItems = ({
         const isEmailVerificationEnabled =
           window.Pelcro.site.read()?.email_verify_enabled ?? false;
 
-        if (isEmailVerificationEnabled) {
+        const isUserEmailVerified =
+          window.Pelcro.user.read()?.email_confirm ?? false;
+
+        const userMustVerifyEmail =
+          isAuthenticated() &&
+          isEmailVerificationEnabled &&
+          !isUserEmailVerified;
+
+        if (userMustVerifyEmail) {
           return switchView("email-verify");
         }
 
