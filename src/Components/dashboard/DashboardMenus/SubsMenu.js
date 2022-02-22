@@ -12,8 +12,10 @@ import { ReactComponent as ChevronRightIcon } from "../../../assets/chevron-righ
 import { ReactComponent as CheckMarkIcon } from "../../../assets/check-mark.svg";
 import {
   getFormattedPriceByLocal,
-  getPageOrDefaultLanguage
+  getPageOrDefaultLanguage,
+  userMustVerifyEmail
 } from "../../../utils/utils";
+import { usePelcro } from "../../../hooks/usePelcro";
 
 export const SubscriptionsMenu = (props) => {
   const { t } = useTranslation("dashboard");
@@ -78,6 +80,8 @@ export const SubscriptionsItems = ({
   toggleActiveMenu
 }) => {
   const { t } = useTranslation("dashboard");
+  const { switchView, isAuthenticated } = usePelcro();
+
   const subs = getNonDonationSubs();
 
   if (subs.length === 0) return null;
@@ -89,6 +93,10 @@ export const SubscriptionsItems = ({
       const isActive = activeMenu === sub.id;
       // Cancel button click handlers
       const onCancelClick = () => {
+        if (userMustVerifyEmail()) {
+          return switchView("email-verify");
+        }
+
         onClose?.();
         notify.confirm(
           (onSuccess, onFailure) => {
@@ -110,6 +118,10 @@ export const SubscriptionsItems = ({
 
       // Reactivate button click handlers
       const onReactivateClick = () => {
+        if (userMustVerifyEmail()) {
+          return switchView("email-verify");
+        }
+
         reactivateSubscription(sub.id);
       };
 

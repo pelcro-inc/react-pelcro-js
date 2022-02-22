@@ -1,3 +1,10 @@
+# [2.7.0-beta.14](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.7.0-beta.13...v2.7.0-beta.14) (2022-02-22)
+
+
+### Bug Fixes
+
+* **customer verification:** not stoping certain flows for unverified users ([#132](https://github.com/pelcro-inc/react-pelcro-js/issues/132)) ([1f977d5](https://github.com/pelcro-inc/react-pelcro-js/commit/1f977d58e47110272538dc4d63360338db58ce88))
+
 # [2.7.0-beta.13](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.7.0-beta.12...v2.7.0-beta.13) (2022-02-21)
 
 
