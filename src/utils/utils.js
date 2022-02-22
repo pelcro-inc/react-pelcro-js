@@ -394,7 +394,8 @@ export function userMustVerifyEmail() {
   const isEmailVerificationEnabled =
     window.Pelcro.site.read()?.email_verify_enabled ?? false;
 
-  const isUserEmailVerified = user?.email_confirm ?? false;
+  const isUserEmailVerified =
+    window.Pelcro.user.read()?.email_confirm ?? false;
 
   return (
     window.Pelcro.user.isAuthenticated() &&
