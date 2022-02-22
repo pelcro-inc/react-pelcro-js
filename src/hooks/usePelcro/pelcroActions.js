@@ -2,7 +2,8 @@ import ReactGA from "react-ga";
 import { initialState } from "./index";
 import {
   userHasAddress,
-  userHasPaymentMethod
+  userHasPaymentMethod,
+  userMustVerifyEmail
 } from "../../utils/utils";
 
 export class PelcroActions {
@@ -25,20 +26,9 @@ export class PelcroActions {
    */
 
   switchView = (view) => {
-    const isEmailVerificationEnabled =
-      window.Pelcro.site.read()?.email_verify_enabled ?? false;
-
-    const isUserEmailVerified =
-      window.Pelcro.user.read()?.email_confirm ?? false;
-
-    const userMustVerifyEmail =
-      this.get().isAuthenticated() &&
-      isEmailVerificationEnabled &&
-      !isUserEmailVerified;
-
     // view switching guards
     if (
-      userMustVerifyEmail &&
+      userMustVerifyEmail() &&
       !["dashboard", "meter", "login", null].includes(view)
     ) {
       return this.set({ view: "email-verify" });

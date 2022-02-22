@@ -40,8 +40,15 @@ export function RegisterModal(props) {
       nonInteraction: true
     });
 
-    // If product and plan are not selected
+    const isEmailVerificationEnabled =
+      window.Pelcro.site.read()?.email_verify_enabled ?? false;
+
+    if (isEmailVerificationEnabled) {
+      return switchView("email-verify");
+    }
+
     if (!product && !order && !giftCode) {
+      // If product and plan are not selected
       return resetView();
     }
 
