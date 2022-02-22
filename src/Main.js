@@ -34,9 +34,9 @@ export const Main = () => {
   return (
     <PelcroModalController>
       <MeterModal />
+      <EmailVerifyModal />
       <LoginModal />
       <RegisterModal />
-      <EmailVerifyModal />
 
       <UserUpdateModal />
       <Dashboard />
