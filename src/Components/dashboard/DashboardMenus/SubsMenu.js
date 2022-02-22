@@ -14,6 +14,7 @@ import {
   getFormattedPriceByLocal,
   getPageOrDefaultLanguage
 } from "../../../utils/utils";
+import { usePelcro } from "../../../hooks/usePelcro";
 
 export const SubscriptionsMenu = (props) => {
   const { t } = useTranslation("dashboard");
@@ -78,6 +79,8 @@ export const SubscriptionsItems = ({
   toggleActiveMenu
 }) => {
   const { t } = useTranslation("dashboard");
+  const { switchView, isAuthenticated } = usePelcro();
+
   const subs = getNonDonationSubs();
 
   if (subs.length === 0) return null;
@@ -89,6 +92,21 @@ export const SubscriptionsItems = ({
       const isActive = activeMenu === sub.id;
       // Cancel button click handlers
       const onCancelClick = () => {
+        const isEmailVerificationEnabled =
+          window.Pelcro.site.read()?.email_verify_enabled ?? false;
+
+        const isUserEmailVerified =
+          window.Pelcro.user.read()?.email_confirm ?? false;
+
+        const userMustVerifyEmail =
+          isAuthenticated() &&
+          isEmailVerificationEnabled &&
+          !isUserEmailVerified;
+
+        if (userMustVerifyEmail) {
+          return switchView("email-verify");
+        }
+
         onClose?.();
         notify.confirm(
           (onSuccess, onFailure) => {
@@ -110,6 +128,13 @@ export const SubscriptionsItems = ({
 
       // Reactivate button click handlers
       const onReactivateClick = () => {
+        const isEmailVerificationEnabled =
+          window.Pelcro.site.read()?.email_verify_enabled ?? false;
+
+        if (isEmailVerificationEnabled) {
+          return switchView("email-verify");
+        }
+
         reactivateSubscription(sub.id);
       };
 
