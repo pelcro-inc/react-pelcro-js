@@ -12,7 +12,8 @@ import { ReactComponent as ChevronRightIcon } from "../../../assets/chevron-righ
 import { ReactComponent as CheckMarkIcon } from "../../../assets/check-mark.svg";
 import {
   getFormattedPriceByLocal,
-  getPageOrDefaultLanguage
+  getPageOrDefaultLanguage,
+  userMustVerifyEmail
 } from "../../../utils/utils";
 import { usePelcro } from "../../../hooks/usePelcro";
 
@@ -92,18 +93,7 @@ export const SubscriptionsItems = ({
       const isActive = activeMenu === sub.id;
       // Cancel button click handlers
       const onCancelClick = () => {
-        const isEmailVerificationEnabled =
-          window.Pelcro.site.read()?.email_verify_enabled ?? false;
-
-        const isUserEmailVerified =
-          window.Pelcro.user.read()?.email_confirm ?? false;
-
-        const userMustVerifyEmail =
-          isAuthenticated() &&
-          isEmailVerificationEnabled &&
-          !isUserEmailVerified;
-
-        if (userMustVerifyEmail) {
+        if (userMustVerifyEmail()) {
           return switchView("email-verify");
         }
 
@@ -128,18 +118,7 @@ export const SubscriptionsItems = ({
 
       // Reactivate button click handlers
       const onReactivateClick = () => {
-        const isEmailVerificationEnabled =
-          window.Pelcro.site.read()?.email_verify_enabled ?? false;
-
-        const isUserEmailVerified =
-          window.Pelcro.user.read()?.email_confirm ?? false;
-
-        const userMustVerifyEmail =
-          isAuthenticated() &&
-          isEmailVerificationEnabled &&
-          !isUserEmailVerified;
-
-        if (userMustVerifyEmail) {
+        if (userMustVerifyEmail()) {
           return switchView("email-verify");
         }
 

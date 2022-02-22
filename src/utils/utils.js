@@ -389,3 +389,16 @@ export function getDateWithoutTime(dateObject) {
   date.setHours(0, 0, 0, 0);
   return date;
 }
+
+export function userMustVerifyEmail() {
+  const isEmailVerificationEnabled =
+    window.Pelcro.site.read()?.email_verify_enabled ?? false;
+
+  const isUserEmailVerified = user?.email_confirm ?? false;
+
+  return (
+    window.Pelcro.user.isAuthenticated() &&
+    isEmailVerificationEnabled &&
+    !isUserEmailVerified
+  );
+}
