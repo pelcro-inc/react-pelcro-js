@@ -1,3 +1,10 @@
+# [3.0.0-beta.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.0.0-beta.2...v3.0.0-beta.3) (2022-02-23)
+
+
+### Bug Fixes
+
+* **auth0:** null check auth0 script ([0972a4c](https://github.com/pelcro-inc/react-pelcro-js/commit/0972a4c4d229beeb0800cad848f614c80006c438))
+
 # [3.0.0-beta.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.0.0-beta.1...v3.0.0-beta.2) (2022-02-23)
 
 
