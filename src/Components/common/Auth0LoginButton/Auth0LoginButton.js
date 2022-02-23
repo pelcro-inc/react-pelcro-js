@@ -30,7 +30,7 @@ export const Auth0LoginButton = ({
     }
 
     return () => {
-      auth0Script.removeEventListener("load", handleScriptLoaded);
+      auth0Script?.removeEventListener?.("load", handleScriptLoaded);
     };
   }, [auth0Script, auth0Enabled, auth0Loaded]);
 
