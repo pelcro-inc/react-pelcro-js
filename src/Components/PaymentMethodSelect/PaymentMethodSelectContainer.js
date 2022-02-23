@@ -12,10 +12,13 @@ import {
 
 const moveDefaultPaymentMethodToStart = (paymentMethods) => {
   const defaultPaymentMethod = window.Pelcro.user.read()?.source;
-
   const paymentMethodsWithoutDefault = paymentMethods.filter(
     (paymentMethod) => paymentMethod.id !== defaultPaymentMethod.id
   );
+
+  if (defaultPaymentMethod.status !== "chargeable") {
+    return paymentMethodsWithoutDefault;
+  }
 
   return [defaultPaymentMethod, ...paymentMethodsWithoutDefault];
 };
