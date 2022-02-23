@@ -1,3 +1,10 @@
+# [3.0.0-beta.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.0.0-beta.1...v3.0.0-beta.2) (2022-02-23)
+
+
+### Bug Fixes
+
+* **auth0:** listen to auth0 sdk load ([36e9204](https://github.com/pelcro-inc/react-pelcro-js/commit/36e9204d402db3e64196ed4470b65a91c2720220))
+
 # [3.0.0-beta.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.7.0-beta.14...v3.0.0-beta.1) (2022-02-22)
 
 
