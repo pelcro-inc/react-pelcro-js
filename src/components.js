@@ -194,6 +194,7 @@ export { InvoicePaymentView } from "./Components/InvoicePayment/InvoicePaymentVi
 export { InvoiceDetailsContainer } from "./Components/InvoiceDetails/InvoiceDetailsContainer";
 export { InvoiceDetailsModal } from "./Components/InvoiceDetails/InvoiceDetailsModal";
 export { InvoiceDetailsPayButton } from "./Components/InvoiceDetails/InvoiceDetailsPayButton";
+export { InvoiceDetailsDownloadButton } from "./Components/InvoiceDetails/InvoiceDetailsDownloadButton";
 export { InvoiceDetailsView } from "./Components/InvoiceDetails/InvoiceDetailsView";
 
 export { AlertWithContext as Alert } from "./SubComponents/AlertWithContext";
