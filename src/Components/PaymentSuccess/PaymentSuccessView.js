@@ -32,9 +32,12 @@ export const PaymentSuccessView = ({ onClose }) => {
 };
 
 const getCurrentFlow = () => {
-  const { product, giftRecipient, giftCode } = usePelcro.getStore();
+  const { product, giftRecipient, giftCode, invoice } =
+    usePelcro.getStore();
 
-  if (giftRecipient) {
+  if (invoice) {
+    return "invoicePayment";
+  } else if (giftRecipient) {
     return "giftCreate";
   } else if (giftCode) {
     return "giftRedeem";
@@ -68,6 +71,13 @@ const getSuccessContent = (i18n) => {
       ),
       successTitle: i18n("messages.giftRedeem.title"),
       successContent: i18n("messages.giftRedeem.content")
+    },
+    invoicePayment: {
+      successIcon: (
+        <CheckMark className="plc-w-32 plc-my-4 plc-text-green-500" />
+      ),
+      successTitle: i18n("messages.invoicePayment.title"),
+      successContent: i18n("messages.invoicePayment.title")
     }
   };
 

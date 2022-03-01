@@ -42,7 +42,8 @@ import { getErrorMessages, debounce } from "../common/Helpers";
 import {
   Subscription,
   PaypalGateWay,
-  SUBSCRIPTION_TYPES
+  SUBSCRIPTION_TYPES,
+  StripeGateway
 } from "../../services/Subscription/Subscription.service";
 import { getPageOrDefaultLanguage } from "../../utils/utils";
 import { usePelcro } from "../../hooks/usePelcro";
@@ -113,6 +114,7 @@ const PaymentMethodContainerWithoutStripe = ({
     props.giftRecipient ?? pelcroStore.giftRecipient;
   const isRenewingGift =
     props.isRenewingGift ?? pelcroStore.isRenewingGift;
+  const invoice = props.invoice ?? pelcroStore.invoice;
 
   useEffect(() => {
     if (window.Pelcro.coupon.getFromUrl()) {
@@ -647,6 +649,37 @@ const PaymentMethodContainerWithoutStripe = ({
     );
   };
 
+  const payInvoice = (gatewayService, gatewayToken, dispatch) => {
+    const subscription = new Subscription(gatewayService);
+
+    return subscription.execute(
+      {
+        type: SUBSCRIPTION_TYPES.PAY_INVOICE,
+        token: gatewayToken,
+        invoiceId: invoice.id
+      },
+      (err, res) => {
+        dispatch({ type: DISABLE_SUBMIT, payload: false });
+        dispatch({ type: LOADING, payload: false });
+
+        if (err) {
+          onFailure(err);
+          return dispatch({
+            type: SHOW_ALERT,
+            payload: {
+              type: "error",
+              content: getErrorMessages(err)
+            }
+          });
+        }
+
+        set({ invoice: null });
+
+        onSuccess(res);
+      }
+    );
+  };
+
   const updatePaymentSource = (state, dispatch) => {
     return stripe
       .createSource({ type: "card" })
@@ -712,6 +745,10 @@ const PaymentMethodContainerWithoutStripe = ({
         }
 
         const getOrderItemsTotal = () => {
+          if (!order) {
+            return null;
+          }
+
           const isQuickPurchase = !Array.isArray(order);
 
           if (isQuickPurchase) {
@@ -728,7 +765,10 @@ const PaymentMethodContainerWithoutStripe = ({
         };
 
         const totalAmount =
-          state?.updatedPrice ?? plan?.amount ?? getOrderItemsTotal();
+          state?.updatedPrice ??
+          plan?.amount ??
+          invoice.amount_remaining ??
+          getOrderItemsTotal();
 
         if (
           source?.card?.three_d_secure === "required" &&
@@ -760,6 +800,10 @@ const PaymentMethodContainerWithoutStripe = ({
    * @return {Promise}
    */
   const resolveTaxCalculation = () => {
+    if (type === "invoicePayment") {
+      return new Promise((resolve) => resolve());
+    }
+
     const taxesEnabled = window.Pelcro.site.read()?.taxes_enabled;
 
     return new Promise((resolve, reject) => {
@@ -844,6 +888,8 @@ const PaymentMethodContainerWithoutStripe = ({
       subscribe(stripeSource, state, dispatch);
     } else if (stripeSource && type === "orderCreate") {
       purchase(stripeSource, state, dispatch);
+    } else if (stripeSource && type === "invoicePayment") {
+      payInvoice(new StripeGateway(), stripeSource.id, dispatch);
     }
   };
 
@@ -987,9 +1033,17 @@ const PaymentMethodContainerWithoutStripe = ({
           );
 
         case HANDLE_PAYPAL_SUBSCRIPTION:
-          return UpdateWithSideEffect(state, () =>
-            handlePaypalSubscription(state, action.payload)
-          );
+          return UpdateWithSideEffect(state, (state, dispatch) => {
+            if (type === "invoicePayment") {
+              payInvoice(
+                new PaypalGateWay(),
+                action.payload,
+                dispatch
+              );
+            } else {
+              handlePaypalSubscription(state, action.payload);
+            }
+          });
 
         case SET_UPDATED_PRICE:
           return Update({ ...state, updatedPrice: action.payload });

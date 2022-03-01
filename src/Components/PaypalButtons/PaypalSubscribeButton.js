@@ -17,12 +17,15 @@ import { usePelcro } from "../../hooks/usePelcro";
  */
 export const PaypalSubscribeButton = (props) => {
   const { dispatch, state } = useContext(store);
-  const { product, plan, selectedAddressId } = usePelcro();
+  const { product, plan, invoice, selectedAddressId } = usePelcro();
 
   useEffect(() => {
     // sometimes, price is updated. eg. Coupon codes.
     const updatedPrice =
-      state.updatedPrice ?? props.plan?.amount ?? plan.amount;
+      state.updatedPrice ??
+      props.plan?.amount ??
+      plan?.amount ??
+      invoice.amount_remaining;
     const selectedAddress = getAddressById(
       props.selectedAddressId ?? selectedAddressId
     );
@@ -34,7 +37,8 @@ export const PaypalSubscribeButton = (props) => {
           props.buttonElementID ?? "pelcro-paypal-button",
         style: props.buttonStyle,
         enableShippingAddress:
-          props.product?.address_required ?? product.address_required,
+          props.product?.address_required ??
+          product?.address_required,
         shippingAddressEditable: props.makeAddressEditable,
         displayName: props.merchantDisplayName,
         locale: props.locale,
@@ -45,9 +49,9 @@ export const PaypalSubscribeButton = (props) => {
       await paypalCheckoutInstance.build();
       // Create paypal payment
       paypalCheckoutInstance.createPayment({
-        product: props.plan ?? plan,
+        product: invoice ? invoice.plan : props.plan ?? plan,
         amount: updatedPrice,
-        address: selectedAddress,
+        address: invoice ? null : selectedAddress,
         onButtonClick: () => {
           dispatch({ type: DISABLE_SUBMIT, payload: true });
         },

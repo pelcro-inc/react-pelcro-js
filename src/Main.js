@@ -29,6 +29,8 @@ import { OrderCreateModal } from "./Components/OrderCreate/OrderCreateModal";
 import { OrderConfirmModal } from "./Components/OrderConfirm/OrderConfirmModal";
 import { Notification } from "./SubComponents/Notification";
 import { EmailVerifyModal } from "./Components/EmailVerify/EmailVerifyModal";
+import { InvoiceDetailsModal } from "./Components/InvoiceDetails/InvoiceDetailsModal";
+import { InvoicePaymentModal } from "./Components/InvoicePayment/InvoicePaymentModal";
 
 export const Main = () => {
   return (
@@ -68,6 +70,9 @@ export const Main = () => {
       <CartModal />
       <OrderCreateModal />
       <OrderConfirmModal />
+
+      <InvoiceDetailsModal />
+      <InvoicePaymentModal />
 
       <Notification />
     </PelcroModalController>
