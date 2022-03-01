@@ -745,6 +745,10 @@ const PaymentMethodContainerWithoutStripe = ({
         }
 
         const getOrderItemsTotal = () => {
+          if (!order) {
+            return null;
+          }
+
           const isQuickPurchase = !Array.isArray(order);
 
           if (isQuickPurchase) {
@@ -761,7 +765,10 @@ const PaymentMethodContainerWithoutStripe = ({
         };
 
         const totalAmount =
-          state?.updatedPrice ?? plan?.amount ?? getOrderItemsTotal();
+          state?.updatedPrice ??
+          plan?.amount ??
+          invoice.amount_remaining ??
+          getOrderItemsTotal();
 
         if (
           source?.card?.three_d_secure === "required" &&
@@ -793,6 +800,10 @@ const PaymentMethodContainerWithoutStripe = ({
    * @return {Promise}
    */
   const resolveTaxCalculation = () => {
+    if (type === "invoicePayment") {
+      return new Promise((resolve) => resolve());
+    }
+
     const taxesEnabled = window.Pelcro.site.read()?.taxes_enabled;
 
     return new Promise((resolve, reject) => {
