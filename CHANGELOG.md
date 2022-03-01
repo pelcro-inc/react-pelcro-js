@@ -1,3 +1,10 @@
+# [3.0.0-beta.4](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.0.0-beta.3...v3.0.0-beta.4) (2022-03-01)
+
+
+### Features
+
+* add ability to view and pay invoices ([#133](https://github.com/pelcro-inc/react-pelcro-js/issues/133)) ([a5f95f3](https://github.com/pelcro-inc/react-pelcro-js/commit/a5f95f39955da0863af1e00aa5e697f98155ce1a))
+
 # [3.0.0-beta.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.0.0-beta.2...v3.0.0-beta.3) (2022-02-23)
 
 
