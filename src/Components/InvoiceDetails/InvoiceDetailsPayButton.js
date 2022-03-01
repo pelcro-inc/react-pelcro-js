@@ -11,7 +11,7 @@ export const InvoiceDetailsPayButton = ({
 }) => {
   const { dispatch } = useContext(store);
 
-  const { t } = useTranslation("address");
+  const { t } = useTranslation("invoiceDetails");
 
   return (
     <Button
@@ -21,7 +21,7 @@ export const InvoiceDetailsPayButton = ({
       }}
       {...otherProps}
     >
-      {name ?? t("buttons.submit")}
+      {name ?? t("buttons.pay")}
     </Button>
   );
 };
