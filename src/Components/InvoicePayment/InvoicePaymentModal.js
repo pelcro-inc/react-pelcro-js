@@ -17,7 +17,7 @@ export const InvoicePaymentModal = ({
 
   const onSuccess = () => {
     otherProps.onSuccess?.();
-    return switchView("invoice-payment-success");
+    return switchView("subscription-success");
   };
 
   return (

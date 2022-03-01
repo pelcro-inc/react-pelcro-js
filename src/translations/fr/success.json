@@ -18,6 +18,10 @@
     "giftRedeem": {
       "title": "Félicitations",
       "content": "Vous avez validé votre abonnement cadeau. Profitez-en!"
+    },
+    "invoicePayment": {
+      "title": "Invoice paid successfully",
+      "content": "Please contact us if you have any questions or concerns."
     }
   },
   "errors": {
