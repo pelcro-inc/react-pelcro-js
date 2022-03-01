@@ -42,6 +42,8 @@ import notification_en from "./translations/en/notification.json";
 import notification_fr from "./translations/fr/notification.json";
 import verifyEmail_en from "./translations/en/verifyEmail.json";
 import verifyEmail_fr from "./translations/fr/verifyEmail.json";
+import invoiceDetails_en from "./translations/en/InvoiceDetails.json";
+import invoiceDetails_fr from "./translations/fr/InvoiceDetails.json";
 import { getPageOrDefaultLanguage } from "./utils/utils";
 
 const resources = {
@@ -66,7 +68,8 @@ const resources = {
     payment: payment_en,
     dashboard: dashboard_en,
     select: select_en,
-    notification: notification_en
+    notification: notification_en,
+    invoiceDetails: invoiceDetails_en
   },
   fr: {
     common: common_fr,
@@ -89,7 +92,8 @@ const resources = {
     payment: payment_fr,
     dashboard: dashboard_fr,
     select: select_fr,
-    notification: notification_fr
+    notification: notification_fr,
+    invoiceDetails: invoiceDetails_fr
   }
 };
 
