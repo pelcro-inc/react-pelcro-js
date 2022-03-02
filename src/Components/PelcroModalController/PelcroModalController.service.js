@@ -498,11 +498,11 @@ const showInvoiceDetailsFromUrl = () => {
 
     const wasSetSuccessfully = setInvoice(invoiceId);
     if (!wasSetSuccessfully) {
-      const translations = i18n.t("messages", {
+      const errorMessage = i18n.t("messages:invalidInvoice", {
         returnObjects: true
       });
 
-      notify.error(translations.invalidInvoice);
+      return notify.error(errorMessage);
     }
     return switchView("invoice-details");
   });
