@@ -487,20 +487,22 @@ const verifyEmailTokenFromUrl = () => {
 };
 
 const showInvoiceDetailsFromUrl = () => {
-  const { isAuthenticated, setInvoice, switchView } =
+  const { isAuthenticated, setInvoice, whenSiteReady, switchView } =
     usePelcro.getStore();
 
-  if (!isAuthenticated()) {
-    return switchView("login");
-  }
-  const invoiceId = window.Pelcro.helpers.getURLParameter("id");
+  whenSiteReady(() => {
+    if (!isAuthenticated()) {
+      return switchView("login");
+    }
+    const invoiceId = window.Pelcro.helpers.getURLParameter("id");
 
-  const wasSetSuccessfully = setInvoice(invoiceId);
-  if (!wasSetSuccessfully) {
-    const translations = i18n.t("messages", {
-      returnObjects: true
-    });
+    const wasSetSuccessfully = setInvoice(invoiceId);
+    if (!wasSetSuccessfully) {
+      const translations = i18n.t("messages", {
+        returnObjects: true
+      });
 
-    notify.error(translations.invalidInvoice);
-  }
+      notify.error(translations.invalidInvoice);
+    }
+  });
 };
