@@ -787,7 +787,10 @@ function hasDonationSubs() {
       ?.list()
       ?.filter((sub) => sub.plan.is_donation) ?? [];
 
-  return donations.length > 0;
+  const canceledDonations =
+    window.Pelcro.user.read().expired_subscriptions ?? [];
+
+  return donations.length > 0 || canceledDonations.length > 0;
 }
 
 export const DashboardWithTrans =
