@@ -1,3 +1,12 @@
+# [3.0.0-beta.6](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.0.0-beta.5...v3.0.0-beta.6) (2022-03-02)
+
+
+### Bug Fixes
+
+* **(url triggers):** invoice details trigger not working ([72446f9](https://github.com/pelcro-inc/react-pelcro-js/commit/72446f97945ccde4f203fe3b3d1f228c9c7e842b))
+* **donations menu:** not showing canceled donations ([03d0bae](https://github.com/pelcro-inc/react-pelcro-js/commit/03d0bae5ce751747f77130747964356c752c1dd3))
+* **url trigger:** invalid invoice id error msg wording ([b206ad8](https://github.com/pelcro-inc/react-pelcro-js/commit/b206ad837f37042b65f06d3ff9a07c3212ebc116))
+
 # [3.0.0-beta.5](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.0.0-beta.4...v3.0.0-beta.5) (2022-03-02)
 
 
