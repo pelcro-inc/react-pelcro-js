@@ -1,3 +1,10 @@
+# [3.0.0-beta.7](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.0.0-beta.6...v3.0.0-beta.7) (2022-03-03)
+
+
+### Bug Fixes
+
+* **donations menu:** showing all expired subs ([0477f6c](https://github.com/pelcro-inc/react-pelcro-js/commit/0477f6c87386469dcd770fed5343d566962e945f))
+
 # [3.0.0-beta.6](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.0.0-beta.5...v3.0.0-beta.6) (2022-03-02)
 
 
