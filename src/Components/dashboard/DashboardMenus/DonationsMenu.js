@@ -69,7 +69,10 @@ function getDonationSubs() {
       ?.filter((sub) => sub.plan.is_donation) ?? [];
 
   const canceledDonations =
-    window.Pelcro.user.read().expired_subscriptions ?? [];
+    window.Pelcro.user
+      .read()
+      .expired_subscriptions?.filter((sub) => sub.plan.is_donation) ??
+    [];
 
   return [...donations, ...canceledDonations];
 }
