@@ -17,6 +17,7 @@ import { ReactComponent as EditIcon } from "../../assets/edit.svg";
 import { ReactComponent as UserIcon } from "../../assets/user.svg";
 import { ReactComponent as NewsletterIcon } from "../../assets/newsletter.svg";
 import { ReactComponent as RefreshIcon } from "../../assets/refresh.svg";
+import { ReactComponent as InvoiceIcon } from "../../assets/document.svg";
 import { ReactComponent as PaymentCardIcon } from "../../assets/payment-card.svg";
 import { ReactComponent as LocationIcon } from "../../assets/location-pin.svg";
 import { ReactComponent as SubscriptionIcon } from "../../assets/subscription.svg";
@@ -32,6 +33,7 @@ import { SavedItemsMenu } from "./DashboardMenus/SavedItemsMenu";
 import { usePelcro } from "../../hooks/usePelcro";
 import { SubscriptionsMenu } from "./DashboardMenus/SubsMenu";
 import { DonationsMenu } from "./DashboardMenus/DonationsMenu";
+import { InvoicesMenu } from "./DashboardMenus/InvoicesMenu";
 
 const SUB_MENUS = {
   PROFILE: "profile",
@@ -41,6 +43,7 @@ const SUB_MENUS = {
   ADDRESSES: "addresses",
   GIFTS: "gifts",
   ORDERS: "orders",
+  INVOICES: "invoices",
   SAVED_ITEMS: "saved-items"
 };
 
@@ -743,6 +746,14 @@ class Dashboard extends Component {
               />
 
               <Accordion.item
+                show={hasInvoices()}
+                name={SUB_MENUS.INVOICES}
+                icon={<InvoiceIcon />}
+                title={this.locale("labels.invoices")}
+                content={<InvoicesMenu />}
+              />
+
+              <Accordion.item
                 name={SUB_MENUS.SAVED_ITEMS}
                 icon={<BookmarkIcon />}
                 title={this.locale("labels.savedItems.label")}
@@ -765,13 +776,21 @@ class Dashboard extends Component {
   }
 }
 
+function hasInvoices() {
+  const invoices = window.Pelcro.invoice.list() ?? [];
+  return invoices.length > 0;
+}
+
 function hasDonationSubs() {
   const donations =
     window.Pelcro.subscription
       ?.list()
       ?.filter((sub) => sub.plan.is_donation) ?? [];
 
-  return donations.length > 0;
+  const canceledDonations =
+    window.Pelcro.user.read().expired_subscriptions ?? [];
+
+  return donations.length > 0 || canceledDonations.length > 0;
 }
 
 export const DashboardWithTrans =

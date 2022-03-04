@@ -63,11 +63,18 @@ export const DonationsMenu = () => {
 };
 
 function getDonationSubs() {
-  return (
+  const donations =
     window.Pelcro.subscription
       ?.list()
-      ?.filter((sub) => sub.plan.is_donation) ?? []
-  );
+      ?.filter((sub) => sub.plan.is_donation) ?? [];
+
+  const canceledDonations =
+    window.Pelcro.user
+      .read()
+      .expired_subscriptions?.filter((sub) => sub.plan.is_donation) ??
+    [];
+
+  return [...donations, ...canceledDonations];
 }
 
 function formatStartDate(date) {

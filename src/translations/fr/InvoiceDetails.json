@@ -1,0 +1,14 @@
+{
+  "title": "Invoice details",
+  "labels": {
+    "summary": "Summary",
+    "total": "Total",
+    "amountPaid": "Amount paid",
+    "amountDue": "Amount due",
+    "creationDate": "Created on:"
+  },
+  "buttons": {
+    "download": "Download",
+    "pay": "Pay now"
+  }
+}

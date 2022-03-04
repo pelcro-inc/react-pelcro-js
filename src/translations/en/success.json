@@ -18,6 +18,10 @@
     "giftRedeem": {
       "title": "Congratulations",
       "content": "You have successfully redeemed your gift subscription. Enjoy!"
+    },
+    "invoicePayment": {
+      "title": "Invoice paid successfully",
+      "content": "Please contact us if you have any questions or concerns."
     }
   },
   "errors": {
