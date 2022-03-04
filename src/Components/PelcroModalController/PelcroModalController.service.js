@@ -113,8 +113,6 @@ export const loadPaymentSDKs = () => {
   );
 
   if (supportsVantiv) {
-    // Load Vantiv SDKs
-
     if (!window.jQuery) {
       window.Pelcro.helpers.loadSDK(
         "https://code.jquery.com/jquery-3.6.0.slim.min.js",
