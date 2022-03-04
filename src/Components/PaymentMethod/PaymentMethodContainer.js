@@ -153,7 +153,7 @@ const PaymentMethodContainerWithoutStripe = ({
     return subscription.execute(
       {
         type: SUBSCRIPTION_TYPES.CREATE_SUBSCRIPTION,
-        token: paymentRequest.paypageRegistrationId,
+        token: paymentRequest,
         quantity: plan.quantity,
         plan,
         couponCode,
@@ -186,9 +186,9 @@ const PaymentMethodContainerWithoutStripe = ({
         showCvv: true,
         numYears: 8,
         placeholderText: {
-          cvv: "CVV"
+          cvv: "CVV",
+          accountNumber: "1234 1234 1234 1234"
         },
-        inputsEmptyCallback: (e) => console.log(e),
         enhancedUxFeatures: {
           inlineFieldValidations: true
         }

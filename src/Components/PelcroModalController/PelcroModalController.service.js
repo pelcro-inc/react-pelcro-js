@@ -107,7 +107,12 @@ export const loadPaymentSDKs = () => {
     );
   }
 
-  if (true) {
+  // Load Vantiv SDKs
+  const supportsVantiv = Boolean(
+    window.Pelcro.site.read().vantiv_pay_page_id
+  );
+
+  if (supportsVantiv) {
     // Load Vantiv SDKs
 
     if (!window.jQuery) {

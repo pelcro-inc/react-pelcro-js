@@ -61,10 +61,13 @@ export const debounce = (func, waitTime) => {
 
 export function getSiteCardProcessor() {
   const { view } = usePelcro.getStore();
-  const temp_ONLY_RENDER_WITH_SUBSCRIPTION_CREATE =
+  const temp_ONLY_USE_VANTIV_WITH_SUBSCRIPTION_CREATE =
     view === "subscription-create";
 
-  if (temp_ONLY_RENDER_WITH_SUBSCRIPTION_CREATE) {
+  if (
+    temp_ONLY_USE_VANTIV_WITH_SUBSCRIPTION_CREATE &&
+    window.Pelcro.site.read()?.vantiv_pay_page_id
+  ) {
     return "vantiv";
   }
 
