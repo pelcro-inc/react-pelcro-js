@@ -131,6 +131,12 @@ const PaymentMethodContainerWithoutStripe = ({
   }, []);
 
   function submitVantivPayment() {
+    if (!vantivInstanceRef.current) {
+      return console.error(
+        "Vantiv sdk script wasn't loaded, you need to load vantiv sdk before rendering the vantiv payment flow"
+      );
+    }
+
     const orderId = `pelcro-${new Date().getTime()}`;
     // calls handleVantivPayment
     vantivInstanceRef.current.getPaypageRegistrationId({
