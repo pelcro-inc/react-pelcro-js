@@ -1,3 +1,57 @@
+# [3.0.0-beta.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.0.0-beta.2...v3.0.0-beta.3) (2022-02-23)
+
+
+### Bug Fixes
+
+* **auth0:** null check auth0 script ([0972a4c](https://github.com/pelcro-inc/react-pelcro-js/commit/0972a4c4d229beeb0800cad848f614c80006c438))
+
+# [3.0.0-beta.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.0.0-beta.1...v3.0.0-beta.2) (2022-02-23)
+
+
+### Bug Fixes
+
+* **auth0:** listen to auth0 sdk load ([36e9204](https://github.com/pelcro-inc/react-pelcro-js/commit/36e9204d402db3e64196ed4470b65a91c2720220))
+
+# [3.0.0-beta.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.7.0-beta.14...v3.0.0-beta.1) (2022-02-22)
+
+
+### Features
+
+* require email verification modal ([4bb628a](https://github.com/pelcro-inc/react-pelcro-js/commit/4bb628a0141875e7aef14a7f147b3a4abb3f1482))
+
+
+### BREAKING CHANGES
+
+* EmailVerifyModal is now needed for all client UIs
+
+# [2.7.0-beta.14](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.7.0-beta.13...v2.7.0-beta.14) (2022-02-22)
+
+
+### Bug Fixes
+
+* **customer verification:** not stoping certain flows for unverified users ([#132](https://github.com/pelcro-inc/react-pelcro-js/issues/132)) ([1f977d5](https://github.com/pelcro-inc/react-pelcro-js/commit/1f977d58e47110272538dc4d63360338db58ce88))
+
+# [2.7.0-beta.13](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.7.0-beta.12...v2.7.0-beta.13) (2022-02-21)
+
+
+### Bug Fixes
+
+* auth0 button not rendering on url trigger ([#131](https://github.com/pelcro-inc/react-pelcro-js/issues/131)) ([4cdd9d0](https://github.com/pelcro-inc/react-pelcro-js/commit/4cdd9d0f42f140e5d346ebdfaa4cdfed828ee658))
+
+# [2.7.0-beta.12](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.7.0-beta.11...v2.7.0-beta.12) (2022-02-17)
+
+
+### Features
+
+* **email verify:** use new SDK method name + wording updates ([91e2f92](https://github.com/pelcro-inc/react-pelcro-js/commit/91e2f929335b8609facb2f3b2064d49b456dd643))
+
+# [2.7.0-beta.11](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.7.0-beta.10...v2.7.0-beta.11) (2022-02-11)
+
+
+### Features
+
+* email verification ([#129](https://github.com/pelcro-inc/react-pelcro-js/issues/129)) ([bdc0ea7](https://github.com/pelcro-inc/react-pelcro-js/commit/bdc0ea7a63926723379ecf4e9a7e30185218091c))
+
 # [2.7.0-beta.10](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.7.0-beta.9...v2.7.0-beta.10) (2022-02-07)
 
 

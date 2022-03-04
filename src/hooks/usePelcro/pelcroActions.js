@@ -2,7 +2,8 @@ import ReactGA from "react-ga";
 import { initialState } from "./index";
 import {
   userHasAddress,
-  userHasPaymentMethod
+  userHasPaymentMethod,
+  userMustVerifyEmail
 } from "../../utils/utils";
 
 export class PelcroActions {
@@ -26,6 +27,13 @@ export class PelcroActions {
 
   switchView = (view) => {
     // view switching guards
+    if (
+      userMustVerifyEmail() &&
+      !["dashboard", "meter", "login", null].includes(view)
+    ) {
+      return this.set({ view: "email-verify" });
+    }
+
     if (
       ["login", "register"].includes(view) &&
       this.get().isAuthenticated()

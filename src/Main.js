@@ -28,11 +28,13 @@ import { PaymentSuccessModal } from "./Components/PaymentSuccess/PaymentSuccessM
 import { OrderCreateModal } from "./Components/OrderCreate/OrderCreateModal";
 import { OrderConfirmModal } from "./Components/OrderConfirm/OrderConfirmModal";
 import { Notification } from "./SubComponents/Notification";
+import { EmailVerifyModal } from "./Components/EmailVerify/EmailVerifyModal";
 
 export const Main = () => {
   return (
     <PelcroModalController>
       <MeterModal />
+      <EmailVerifyModal />
       <LoginModal />
       <RegisterModal />
 

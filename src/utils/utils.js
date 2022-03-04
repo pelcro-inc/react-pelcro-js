@@ -164,7 +164,8 @@ export const isValidViewFromURL = (viewID) => {
       "newsletter",
       "address-create",
       "order-create",
-      "cart"
+      "cart",
+      "email-verify"
     ].includes(viewID) ||
     hasValidNewsletterUpdateUrl()
   ) {
@@ -387,4 +388,18 @@ export function getDateWithoutTime(dateObject) {
   const date = new Date(dateObject.getTime());
   date.setHours(0, 0, 0, 0);
   return date;
+}
+
+export function userMustVerifyEmail() {
+  const isEmailVerificationEnabled =
+    window.Pelcro.site.read()?.email_verify_enabled ?? false;
+
+  const isUserEmailVerified =
+    window.Pelcro.user.read()?.email_confirm ?? false;
+
+  return (
+    window.Pelcro.user.isAuthenticated() &&
+    isEmailVerificationEnabled &&
+    !isUserEmailVerified
+  );
 }

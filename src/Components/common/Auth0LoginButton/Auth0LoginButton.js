@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { store as loginStore } from "../../Login/LoginContainer";
 import { store as registerStore } from "../../Register/RegisterContainer";
 import { HANDLE_SOCIAL_LOGIN } from "../../../utils/action-types";
@@ -10,36 +10,54 @@ export const Auth0LoginButton = ({
   labelClassName = "",
   iconClassName = ""
 }) => {
-  if (
-    !window.auth0 &&
-    window.Pelcro.site.read().auth0_client_id &&
-    window.Pelcro.site.read().auth0_base_url
-  ) {
-    console.error(
-      "Auth0 sdk script wasn't loaded, you need to load auth0 sdk before rendering the Auth0LoginButton"
-    );
-  }
-
   const auth0Enabled = Boolean(
     window.Pelcro.site.read().auth0_client_id &&
-      window.Pelcro.site.read().auth0_base_url &&
-      window.auth0
+      window.Pelcro.site.read().auth0_base_url
   );
+
+  const auth0Script = document.querySelector("#auth0-sdk");
+  const [auth0Loaded, setAuth0Loaded] = useState(
+    Boolean(window.auth0)
+  );
+
+  React.useEffect(() => {
+    function handleScriptLoaded() {
+      setAuth0Loaded(true);
+    }
+
+    if (auth0Enabled && !auth0Loaded) {
+      auth0Script.addEventListener("load", handleScriptLoaded);
+    }
+
+    return () => {
+      auth0Script?.removeEventListener?.("load", handleScriptLoaded);
+    };
+  }, [auth0Script, auth0Enabled, auth0Loaded]);
 
   const auth0InstanceRef = React.useRef(null);
   React.useEffect(() => {
-    if (auth0Enabled) {
+    if (
+      auth0Enabled &&
+      auth0Loaded &&
+      auth0InstanceRef.current === null
+    ) {
       auth0InstanceRef.current = new window.auth0.WebAuth({
         domain: window.Pelcro.site.read().auth0_base_url,
         clientID: window.Pelcro.site.read().auth0_client_id
       });
     }
-  }, []);
+  }, [auth0Enabled, auth0Loaded]);
 
   const { dispatch: loginDispatch } = useContext(loginStore);
   const { dispatch: registerDispatch } = useContext(registerStore);
 
   function handleClick() {
+    if (!auth0Loaded) {
+      return console.error(
+        "Auth0 sdk script wasn't loaded, you need to load auth0 sdk before rendering the Auth0LoginButton"
+      );
+    }
+
     auth0InstanceRef.current?.popup?.authorize?.(
       {
         responseType: "token id_token",

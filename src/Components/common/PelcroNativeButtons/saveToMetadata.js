@@ -1,5 +1,6 @@
 import ReactGA from "react-ga";
 import { usePelcro } from "../../../hooks/usePelcro";
+import { userMustVerifyEmail } from "../../../utils/utils";
 
 class SaveToMetadataButtonClass {
   init() {
@@ -118,7 +119,12 @@ class SaveToMetadataButtonClass {
   #saveToMetadata = (event) => {
     const button = event.currentTarget;
     const user = window.Pelcro.user.read();
+    const { switchView } = usePelcro.getStore();
     const { key, ...buttonMetadata } = button.dataset;
+
+    if (userMustVerifyEmail()) {
+      return switchView("email-verify");
+    }
 
     if (this.#isAlreadySaved(button)) {
       this.#removeMetaData(event);
