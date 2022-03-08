@@ -1,3 +1,12 @@
+# [3.0.0-beta.8](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.0.0-beta.7...v3.0.0-beta.8) (2022-03-08)
+
+
+### Bug Fixes
+
+* **donations menu:** showing gifted donations ([efa94ad](https://github.com/pelcro-inc/react-pelcro-js/commit/efa94ad0a37555340d339a165152ec42e5e1a437))
+* **invoices:** not handling scheduled invoices ([12574b2](https://github.com/pelcro-inc/react-pelcro-js/commit/12574b2b6302d3b9b62e85d3af0fa21a0d381d94))
+* **verify email modal:** french wording issues ([8b15d63](https://github.com/pelcro-inc/react-pelcro-js/commit/8b15d638279cab47f5a0bb83de8d5e512026c8c5))
+
 # [3.0.0-beta.7](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.0.0-beta.6...v3.0.0-beta.7) (2022-03-03)
 
 
