@@ -1,3 +1,10 @@
+# [3.0.0-beta.10](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.0.0-beta.9...v3.0.0-beta.10) (2022-03-08)
+
+
+### Features
+
+* **subscription service:** add vantiv payment gateway ([#134](https://github.com/pelcro-inc/react-pelcro-js/issues/134)) ([209aaef](https://github.com/pelcro-inc/react-pelcro-js/commit/209aaefbf6f8469f325cfef83a14cf2611703ce5))
+
 # [3.0.0-beta.9](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.0.0-beta.8...v3.0.0-beta.9) (2022-03-08)
 
 
