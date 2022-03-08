@@ -1,3 +1,10 @@
+# [3.0.0-beta.11](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.0.0-beta.10...v3.0.0-beta.11) (2022-03-08)
+
+
+### Features
+
+* **gift create:** add gift message chars count ([6992b55](https://github.com/pelcro-inc/react-pelcro-js/commit/6992b552d75fb0f0579422295abdefd68a472419))
+
 # [3.0.0-beta.10](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.0.0-beta.9...v3.0.0-beta.10) (2022-03-08)
 
 
