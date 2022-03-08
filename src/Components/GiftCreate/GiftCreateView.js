@@ -60,7 +60,6 @@ export const GiftCreateView = (props) => {
               autoComplete="gift-message"
               id="pelcro-input-gift-message"
               errorId="pelcro-input-gift-message-error"
-              label={t("gift.labels.giftMessage")}
             />
           </div>
 

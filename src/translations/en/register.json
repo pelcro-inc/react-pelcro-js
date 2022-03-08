@@ -46,7 +46,7 @@
       "lastName": "Last name",
       "email": "Email",
       "startDate": "Gift date",
-      "giftMessage": "Gift message (200 characters max)",
+      "giftMessage": "Gift message ({{count}} characters remaining)",
       "required": "required",
       "firstNamePlaceholder": "First name",
       "lastNamePlaceholder": "Last name",
