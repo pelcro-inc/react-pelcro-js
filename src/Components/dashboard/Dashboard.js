@@ -785,7 +785,8 @@ function hasDonationSubs() {
   const donations =
     window.Pelcro.subscription
       ?.list()
-      ?.filter((sub) => sub.plan.is_donation) ?? [];
+      ?.filter((sub) => sub.plan.is_donation && !sub.is_gift_donor) ??
+    [];
 
   const canceledDonations =
     window.Pelcro.user
