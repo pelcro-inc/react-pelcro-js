@@ -6,6 +6,7 @@ import { ReactComponent as EditIcon } from "../../../assets/edit.svg";
 import { ReactComponent as ExclamationIcon } from "../../../assets/exclamation.svg";
 import { ReactComponent as CheckMarkIcon } from "../../../assets/check-mark.svg";
 import { ReactComponent as InvoiceIcon } from "../../../assets/document.svg";
+import { ReactComponent as CalendarIcon } from "../../../assets/calendar.svg";
 import {
   getFormattedPriceByLocal,
   getPageOrDefaultLanguage
@@ -144,6 +145,14 @@ function getInvoiceStatus(invoice) {
         bgColor: "plc-bg-blue-100",
         icon: <EditIcon />,
         title: translations.draft
+      };
+
+    case "scheduled":
+      return {
+        textColor: "plc-text-blue-700",
+        bgColor: "plc-bg-blue-100",
+        icon: <CalendarIcon />,
+        title: translations.scheduled
       };
 
     case "uncollectible":

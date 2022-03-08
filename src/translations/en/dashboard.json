@@ -30,6 +30,7 @@
     "paid": "Paid",
     "open": "Open",
     "draft": "Draft",
+    "scheduled": "Scheduled",
     "uncollectible": "Uncollectible",
     "void": "Void",
     "pastDue": "Past due",
