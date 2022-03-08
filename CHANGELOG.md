@@ -1,3 +1,11 @@
+# [3.0.0-beta.9](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.0.0-beta.8...v3.0.0-beta.9) (2022-03-08)
+
+
+### Bug Fixes
+
+* **dashboard:** donations showing active gift subs ([dbffd29](https://github.com/pelcro-inc/react-pelcro-js/commit/dbffd2935fd3e2526f0fd700b6620b22dccfd8e1))
+* **dashboard:** donations showing active gift subs ([83f5f96](https://github.com/pelcro-inc/react-pelcro-js/commit/83f5f96ca19bf2ea333fb3a34e0c0f96714329a9))
+
 # [3.0.0-beta.8](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.0.0-beta.7...v3.0.0-beta.8) (2022-03-08)
 
 
