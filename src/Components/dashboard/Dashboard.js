@@ -788,7 +788,11 @@ function hasDonationSubs() {
       ?.filter((sub) => sub.plan.is_donation) ?? [];
 
   const canceledDonations =
-    window.Pelcro.user.read().expired_subscriptions ?? [];
+    window.Pelcro.user
+      .read()
+      .expired_subscriptions?.filter(
+        (sub) => sub.plan.is_donation && !sub.is_gift_donor
+      ) ?? [];
 
   return donations.length > 0 || canceledDonations.length > 0;
 }
