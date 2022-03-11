@@ -844,7 +844,7 @@ const PaymentMethodContainerWithoutStripe = ({
         const totalAmount =
           state?.updatedPrice ??
           plan?.amount ??
-          invoice.amount_remaining ??
+          invoice?.amount_remaining ??
           getOrderItemsTotal();
 
         if (
