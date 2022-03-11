@@ -539,6 +539,17 @@ const showInvoiceDetailsFromUrl = () => {
 
       return notify.error(errorMessage);
     }
+
+    const { invoice } = usePelcro.getStore();
+
+    if (invoice.total === 0) {
+      const errorMessage = i18n.t("messages:zeroTotalInvoice", {
+        returnObjects: true
+      });
+
+      return notify.error(errorMessage);
+    }
+
     return switchView("invoice-details");
   });
 };

@@ -5,5 +5,6 @@
   "successfully": "avec succès.",
   "entitlement": "Une partie du contenu de cette page est disponible sous un ou plusieurs de nos plans. <1>Abonnez-vous</1> à l'un de nos plans disponibles pour accéder à plus de contenu",
   "recaptcha": "Ce site est protégé par reCAPTCHA - les <1>règles de confidentialité</1> Google ainsi que les <3>conditions d'utilisation</3> s'appliquent.",
-  "invalidInvoice": "Invalid invoice ID, please contact support"
+  "invalidInvoice": "Invalid invoice ID, please contact support",
+  "zeroTotalInvoice": "You can't view an invoice of 0$"
 }

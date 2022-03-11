@@ -39,7 +39,10 @@ const InvoicesItems = () => {
   const { t } = useTranslation("dashboard");
 
   const { setInvoice, switchView } = usePelcro();
-  const invoices = window.Pelcro.invoice.list() ?? [];
+  const invoices =
+    window.Pelcro.invoice
+      .list()
+      ?.filter((invoice) => invoice.total > 0) ?? [];
 
   const showInvoiceDetails = (event) => {
     if (setInvoice(event.target.dataset.id)) {

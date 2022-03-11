@@ -777,7 +777,10 @@ class Dashboard extends Component {
 }
 
 function hasInvoices() {
-  const invoices = window.Pelcro.invoice.list() ?? [];
+  const invoices =
+    window.Pelcro.invoice
+      .list()
+      ?.filter((invoice) => invoice.total > 0) ?? [];
   return invoices.length > 0;
 }
 
