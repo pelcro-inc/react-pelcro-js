@@ -752,8 +752,6 @@ const PaymentMethodContainerWithoutStripe = ({
           });
         }
 
-        set({ invoice: null });
-
         onSuccess(res);
       }
     );
