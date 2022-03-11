@@ -734,6 +734,7 @@ const PaymentMethodContainerWithoutStripe = ({
       {
         type: SUBSCRIPTION_TYPES.PAY_INVOICE,
         token: gatewayToken,
+        isExistingSource: Boolean(selectedPaymentMethodId),
         invoiceId: invoice.id
       },
       (err, res) => {

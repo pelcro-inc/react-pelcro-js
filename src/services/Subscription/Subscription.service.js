@@ -42,6 +42,7 @@ export class Subscription {
    * @property {number} [quantity]
    * @property {string} addressId
    * @property {number} invoiceId
+   * @property {boolean} isExistingSource
    */
 
   /**
@@ -280,16 +281,20 @@ export class StripeGateway {
   #payInvoice = (options, callback) => {
     const { token, invoiceId } = options;
 
-    window.Pelcro.invoice.pay(
-      {
-        payment_gateway: this.#paymentGateway,
-        gateway_token: token,
-        invoice_id: invoiceId
-      },
-      (err, res) => {
-        callback(err, res);
-      }
-    );
+    const params = options.isExistingSource
+      ? {
+          source_id: token,
+          invoice_id: invoiceId
+        }
+      : {
+          payment_gateway: this.#paymentGateway,
+          gateway_token: token,
+          invoice_id: invoiceId
+        };
+
+    window.Pelcro.invoice.pay(params, (err, res) => {
+      callback(err, res);
+    });
   };
 }
 
