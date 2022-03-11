@@ -1,3 +1,18 @@
+# [3.0.0-beta.12](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.0.0-beta.11...v3.0.0-beta.12) (2022-03-11)
+
+
+### Bug Fixes
+
+* **pay invoice:** payments using existing cards not working ([1b23074](https://github.com/pelcro-inc/react-pelcro-js/commit/1b2307494ae80cd5be4b59d87fdce8f2fc99477b))
+* **pay invoice:** success modal not showing ([40a1018](https://github.com/pelcro-inc/react-pelcro-js/commit/40a101827fd522016e2c548c1fb284c130832982))
+* **payments:** paypal gateway typo breaking paypal ([ddbeff0](https://github.com/pelcro-inc/react-pelcro-js/commit/ddbeff071283a0cf71c0d62415ccdf13f7bd1b60))
+
+
+### Features
+
+* **invoice details:** improve UI alignment ([279dd61](https://github.com/pelcro-inc/react-pelcro-js/commit/279dd614422341c20e8fd4b14ec61bd6e45da0da))
+* **invoices menu:** hide zero total invoices ([83ebe72](https://github.com/pelcro-inc/react-pelcro-js/commit/83ebe728cf8cd2389b30d1b3aeaf2810eb38acf2))
+
 # [3.0.0-beta.11](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.0.0-beta.10...v3.0.0-beta.11) (2022-03-08)
 
 
