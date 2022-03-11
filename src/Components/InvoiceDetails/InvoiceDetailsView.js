@@ -43,11 +43,11 @@ export const InvoiceDetailsView = (props) => {
                     "labels.creationDate"
                   )} ${formattedCreationDate}`}
                 </p>
-                <div className="plc-flex plc-items-center plc-pt-2 plc-mt-2 plc-border-t plc-border-gray-400 plc-min-h-12 plc-justify-evenly pelcro-invoice-plan-wrapper">
-                  <div className="plc-w-1/2 plc-break-words pelcro-invoice-plan-name">
+                <div className="plc-flex plc-items-center plc-pt-2 plc-mt-2 plc-border-t plc-border-gray-400 plc-min-h-12 plc-justify-between pelcro-invoice-plan-wrapper">
+                  <div className="plc-break-words pelcro-invoice-plan-name">
                     {invoice.plan.nickname}
                   </div>
-                  <div className="plc-w-1/5 plc-text-center pelcro-invoice-summary-price">
+                  <div className="plc-text-center pelcro-invoice-summary-price">
                     {calcAndFormatItemsTotal(
                       [invoice.plan],
                       invoice.currency
