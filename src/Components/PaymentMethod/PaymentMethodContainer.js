@@ -1121,7 +1121,7 @@ const PaymentMethodContainerWithoutStripe = ({
           return UpdateWithSideEffect(state, (state, dispatch) => {
             if (type === "invoicePayment") {
               payInvoice(
-                new PaypalGateWay(),
+                new PaypalGateway(),
                 action.payload,
                 dispatch
               );
