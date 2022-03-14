@@ -2,11 +2,10 @@
 
 import { setupTests } from "../../../__tests__/testsSetup";
 import {
-  PaypalGateway,
+  PaypalGateWay,
   StripeGateway,
   Subscription,
-  SUBSCRIPTION_TYPES,
-  VantivGateway
+  SUBSCRIPTION_TYPES
 } from "./Subscription.service";
 
 beforeAll(() => {
@@ -256,7 +255,7 @@ describe("Successfully create any type of subscription", () => {
 
   describe("PayPal gateway", () => {
     test("Should not execute given an invalid type of subscription", () => {
-      const subscription = new Subscription(new PaypalGateway());
+      const subscription = new Subscription(new PaypalGateWay());
       const mockCallback = jest.fn();
 
       subscription.execute(
@@ -274,7 +273,7 @@ describe("Successfully create any type of subscription", () => {
     });
 
     test("Should create a subscription", () => {
-      const subscription = new Subscription(new PaypalGateway());
+      const subscription = new Subscription(new PaypalGateWay());
 
       jest
         .spyOn(window.Pelcro.subscription, "create")
@@ -301,7 +300,7 @@ describe("Successfully create any type of subscription", () => {
     });
 
     test("Should create a gift subscription", () => {
-      const subscription = new Subscription(new PaypalGateway());
+      const subscription = new Subscription(new PaypalGateWay());
 
       jest
         .spyOn(window.Pelcro.subscription, "create")
@@ -332,53 +331,6 @@ describe("Successfully create any type of subscription", () => {
           gift_recipient_last_name: "Jackson",
           gift_start_date: "2021-09-02",
           gift_message: "Enjoy your gift"
-        }),
-        expect.anything()
-      );
-    });
-  });
-
-  describe("Vantiv gateway", () => {
-    test("Should not execute given an invalid type of subscription", () => {
-      const subscription = new Subscription(new VantivGateway());
-      const mockCallback = jest.fn();
-
-      subscription.execute(
-        {
-          type: "BLA BLA INVALID TYPE",
-          token: "test_token",
-          plan: { id: 123 },
-          product: { id: 123 },
-          subscriptionIdToRenew: 123
-        },
-        mockCallback
-      );
-
-      expect(mockCallback).not.toBeCalled();
-    });
-
-    test("Should create a subscription", () => {
-      const subscription = new Subscription(new VantivGateway());
-
-      jest
-        .spyOn(window.Pelcro.subscription, "create")
-        .mockImplementation((_, callback) => callback());
-
-      subscription.execute(
-        {
-          type: SUBSCRIPTION_TYPES.CREATE_SUBSCRIPTION,
-          token: "test_token",
-          plan: { id: 123 },
-          product: { id: 123 }
-        },
-        () => null
-      );
-
-      expect(window.Pelcro.subscription.create).toBeCalledWith(
-        expect.objectContaining({
-          payment_gateway: "vantiv",
-          gateway_token: "test_token",
-          plan_id: 123
         }),
         expect.anything()
       );

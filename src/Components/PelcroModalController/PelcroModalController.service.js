@@ -93,7 +93,7 @@ export const loadPaymentSDKs = () => {
     }
   });
 
-  // Load PayPal SDKs
+  // Load PayPal SDK's
   const supportsPaypal = Boolean(
     window.Pelcro.site.read().braintree_tokenization
   );
@@ -109,44 +109,9 @@ export const loadPaymentSDKs = () => {
       "braintree-paypal-sdk"
     );
   }
-
-  // Load Vantiv SDKs
-  const supportsVantiv = Boolean(
-    window.Pelcro.site.read().vantiv_pay_page_id
-  );
-
-  if (supportsVantiv) {
-    if (!window.jQuery) {
-      window.Pelcro.helpers.loadSDK(
-        "https://code.jquery.com/jquery-3.6.0.slim.min.js",
-        "vantiv-jquery-sdk"
-      );
-    }
-
-    if (!window.EprotectIframeClient) {
-      window.Pelcro.helpers.loadSDK(
-        "https://request.eprotect.vantivprelive.com/eProtect/js/eProtect-iframe-client.min.js",
-        "vantiv-eprotect-sdk"
-      );
-    }
-  }
 };
 
 export const loadAuth0SDK = () => {
-  const auth0Enabled = Boolean(
-    window.Pelcro.site.read().auth0_client_id &&
-      window.Pelcro.site.read().auth0_base_url
-  );
-
-  if (auth0Enabled) {
-    window.Pelcro.helpers.loadSDK(
-      "https://cdn.auth0.com/js/auth0/9.18/auth0.min.js",
-      "auth0-sdk"
-    );
-  }
-};
-
-export const load = () => {
   const auth0Enabled = Boolean(
     window.Pelcro.site.read().auth0_client_id &&
       window.Pelcro.site.read().auth0_base_url
