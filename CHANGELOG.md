@@ -1,3 +1,15 @@
+# [3.0.0-beta.13](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.0.0-beta.12...v3.0.0-beta.13) (2022-03-14)
+
+
+### Bug Fixes
+
+* **payments:** crashing when there's no invoice in certain conds ([ef59e45](https://github.com/pelcro-inc/react-pelcro-js/commit/ef59e45a6d1e10742e952c408781f527c86e5e64))
+
+
+### Reverts
+
+* Revert "feat(subscription service): add vantiv payment gateway (#134)" ([7a35351](https://github.com/pelcro-inc/react-pelcro-js/commit/7a353513e52c0f0a47547745dd5afc7c8fdcbc3b)), closes [#134](https://github.com/pelcro-inc/react-pelcro-js/issues/134)
+
 # [3.0.0-beta.12](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.0.0-beta.11...v3.0.0-beta.12) (2022-03-11)
 
 
