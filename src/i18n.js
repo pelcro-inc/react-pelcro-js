@@ -44,6 +44,8 @@ import verifyEmail_en from "./translations/en/verifyEmail.json";
 import verifyEmail_fr from "./translations/fr/verifyEmail.json";
 import invoiceDetails_en from "./translations/en/InvoiceDetails.json";
 import invoiceDetails_fr from "./translations/fr/InvoiceDetails.json";
+import subscriptionOptions_en from "./translations/en/subscriptionOptions.json";
+import subscriptionOptions_fr from "./translations/fr/subscriptionOptions.json";
 import { getPageOrDefaultLanguage } from "./utils/utils";
 
 const resources = {
@@ -69,7 +71,8 @@ const resources = {
     dashboard: dashboard_en,
     select: select_en,
     notification: notification_en,
-    invoiceDetails: invoiceDetails_en
+    invoiceDetails: invoiceDetails_en,
+    subscriptionOptions: subscriptionOptions_en
   },
   fr: {
     common: common_fr,
@@ -93,7 +96,8 @@ const resources = {
     dashboard: dashboard_fr,
     select: select_fr,
     notification: notification_fr,
-    invoiceDetails: invoiceDetails_fr
+    invoiceDetails: invoiceDetails_fr,
+    subscriptionOptions: subscriptionOptions_fr
   }
 };
 
