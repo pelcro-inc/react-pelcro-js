@@ -80,7 +80,8 @@ export const SubscriptionsItems = ({
   toggleActiveMenu
 }) => {
   const { t } = useTranslation("dashboard");
-  const { switchView, isAuthenticated } = usePelcro();
+  const { switchView, switchToAddressView, switchToPaymentView } =
+    usePelcro();
 
   const subs = getNonDonationSubs();
 
@@ -135,7 +136,12 @@ export const SubscriptionsItems = ({
 
         setProductAndPlan(product, plan);
         setSubscriptionIdToRenew(sub.id);
-        setView("plan-select");
+
+        if (product.address_required) {
+          return switchToAddressView();
+        }
+
+        return switchToPaymentView();
       };
 
       const getPhases = () => {
