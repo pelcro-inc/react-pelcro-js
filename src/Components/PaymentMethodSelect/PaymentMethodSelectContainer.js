@@ -53,6 +53,18 @@ const PaymentMethodSelectContainer = ({
     return onSuccess(selectedPaymentMethodId);
   };
 
+  const getInitialSelectedMethodId = () => {
+    if (selectedPaymentMethodIdFromStore) {
+      return selectedPaymentMethodIdFromStore;
+    }
+
+    const defaultMethod = window.Pelcro.user.read()?.source;
+    if (defaultMethod && defaultMethod.status === "chargeable") {
+      return String(defaultMethod.id);
+    }
+    return null;
+  };
+
   const [state, dispatch] = useReducerWithSideEffects(
     (state, action) => {
       switch (action.type) {
@@ -68,9 +80,7 @@ const PaymentMethodSelectContainer = ({
             paymentMethods: moveDefaultPaymentMethodToStart(
               action.payload
             ),
-            selectedPaymentMethodId:
-              selectedPaymentMethodIdFromStore ??
-              String(window.Pelcro.user.read()?.source?.id)
+            selectedPaymentMethodId: getInitialSelectedMethodId()
           });
 
         case HANDLE_SUBMIT:
