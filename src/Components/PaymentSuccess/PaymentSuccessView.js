@@ -77,7 +77,7 @@ const getSuccessContent = (i18n) => {
         <CheckMark className="plc-w-32 plc-my-4 plc-text-green-500" />
       ),
       successTitle: i18n("messages.invoicePayment.title"),
-      successContent: i18n("messages.invoicePayment.title")
+      successContent: i18n("messages.invoicePayment.content")
     }
   };
 
