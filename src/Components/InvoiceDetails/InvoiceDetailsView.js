@@ -66,7 +66,7 @@ export const InvoiceDetailsView = (props) => {
                       {t("labels.amountDue")}
                     </p>
                   </div>
-                  <div className="plc-flex plc-flex-col">
+                  <div className="plc-flex plc-flex-col plc-items-end">
                     <p className="pelcro-invoice-total">
                       {getFormattedPriceByLocal(
                         invoice.total,
