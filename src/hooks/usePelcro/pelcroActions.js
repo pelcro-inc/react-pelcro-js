@@ -1,6 +1,7 @@
 import ReactGA from "react-ga";
 import { initialState } from "./index";
 import {
+  getRenewableProducts,
   userHasAddress,
   userHasPaymentMethod,
   userMustVerifyEmail
@@ -46,6 +47,13 @@ export class PelcroActions {
       !this.get().isAuthenticated()
     ) {
       return this.set({ view: "login" });
+    }
+
+    if (view === "subscription-options") {
+      const noRenewableProducts = getRenewableProducts().length === 0;
+      if (noRenewableProducts) {
+        return this.set({ view: "plan-select" });
+      }
     }
 
     this.set({ view });
@@ -119,6 +127,33 @@ export class PelcroActions {
   /**
    * Subscription Actions
    */
+
+  setProductsList = (products) => {
+    if (!Array.isArray(products)) {
+      return console.error(
+        `setProductsList expects an array of products as an argument, got an argument of type ${typeof products} instead`
+      );
+    }
+
+    const allowedProducts = window.Pelcro.product.list();
+
+    const validProducts = products.filter((product) => {
+      const isValidProduct = allowedProducts.some(
+        (allowedProduct) =>
+          allowedProduct.id === product?.id &&
+          allowedProduct.name === product?.name
+      );
+      if (!isValidProduct) {
+        console.warn(
+          `setProductsList expects an array of products that exist in the list of valid products (window.Pelcro.product.list()), but it recieved a product which doesn't exist in that list:`,
+          product
+        );
+      }
+      return isValidProduct;
+    });
+
+    this.set({ productsList: validProducts });
+  };
 
   setProduct = (id) => {
     const product = window.Pelcro.product.getById(id);
