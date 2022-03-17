@@ -1,3 +1,17 @@
+# [3.1.0-beta.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.1.0-beta.2...v3.1.0-beta.3) (2022-03-17)
+
+
+### Bug Fixes
+
+* **payment selection:** not disabling continue when no method is selected ([561c96b](https://github.com/pelcro-inc/react-pelcro-js/commit/561c96bc0f9387b0a938a319f5ae82ec82913e78))
+* **success modal:** wording for invoice payments ([5b4a010](https://github.com/pelcro-inc/react-pelcro-js/commit/5b4a010a49cc16b3a47b64b6552ad9d5f89aaee9))
+
+
+### Features
+
+* require sub options and invoices modals in main.js ([276e883](https://github.com/pelcro-inc/react-pelcro-js/commit/276e883f9cab0a29bb0caf0b379ce99efed043d5))
+* **invoice details:** improve UI alignment ([1031859](https://github.com/pelcro-inc/react-pelcro-js/commit/103185944536b891d92c010f0b96bb947973b854))
+
 # [3.1.0-beta.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.1.0-beta.1...v3.1.0-beta.2) (2022-03-17)
 
 
