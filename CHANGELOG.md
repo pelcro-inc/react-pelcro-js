@@ -1,4 +1,5 @@
 # [3.0.0-beta.13](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.0.0-beta.12...v3.0.0-beta.13) (2022-03-14)
+# [3.0.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.7.0...v3.0.0) (2022-02-24)
 
 
 ### Bug Fixes
@@ -18,6 +19,12 @@
 * **pay invoice:** payments using existing cards not working ([1b23074](https://github.com/pelcro-inc/react-pelcro-js/commit/1b2307494ae80cd5be4b59d87fdce8f2fc99477b))
 * **pay invoice:** success modal not showing ([40a1018](https://github.com/pelcro-inc/react-pelcro-js/commit/40a101827fd522016e2c548c1fb284c130832982))
 * **payments:** paypal gateway typo breaking paypal ([ddbeff0](https://github.com/pelcro-inc/react-pelcro-js/commit/ddbeff071283a0cf71c0d62415ccdf13f7bd1b60))
+* **auth0:** listen to auth0 sdk load ([36e9204](https://github.com/pelcro-inc/react-pelcro-js/commit/36e9204d402db3e64196ed4470b65a91c2720220))
+* **auth0:** null check auth0 script ([0972a4c](https://github.com/pelcro-inc/react-pelcro-js/commit/0972a4c4d229beeb0800cad848f614c80006c438))
+* **coupon:** remove current coupon when invalid coupon is entered ([b9fc344](https://github.com/pelcro-inc/react-pelcro-js/commit/b9fc3442709d41e0406240c56700189c40978f71))
+* **customer verification:** not stoping certain flows for unverified users ([#132](https://github.com/pelcro-inc/react-pelcro-js/issues/132)) ([1f977d5](https://github.com/pelcro-inc/react-pelcro-js/commit/1f977d58e47110272538dc4d63360338db58ce88))
+* auth0 button not rendering on url trigger ([#131](https://github.com/pelcro-inc/react-pelcro-js/issues/131)) ([4cdd9d0](https://github.com/pelcro-inc/react-pelcro-js/commit/4cdd9d0f42f140e5d346ebdfaa4cdfed828ee658))
+* **product select:** fix the product filteration technique ([6ecb888](https://github.com/pelcro-inc/react-pelcro-js/commit/6ecb888b3e004bbff2bbae6b2f240e64fe4092e0))
 
 
 ### Features
@@ -85,8 +92,18 @@
 ### Features
 
 * add ability to view and pay invoices ([#133](https://github.com/pelcro-inc/react-pelcro-js/issues/133)) ([a5f95f3](https://github.com/pelcro-inc/react-pelcro-js/commit/a5f95f39955da0863af1e00aa5e697f98155ce1a))
+* require email verification modal ([4bb628a](https://github.com/pelcro-inc/react-pelcro-js/commit/4bb628a0141875e7aef14a7f147b3a4abb3f1482))
+* **email verify:** use new SDK method name + wording updates ([91e2f92](https://github.com/pelcro-inc/react-pelcro-js/commit/91e2f929335b8609facb2f3b2064d49b456dd643))
+* email verification ([#129](https://github.com/pelcro-inc/react-pelcro-js/issues/129)) ([bdc0ea7](https://github.com/pelcro-inc/react-pelcro-js/commit/bdc0ea7a63926723379ecf4e9a7e30185218091c))
+* **discount:** add a remove coupon button ([dafa4c7](https://github.com/pelcro-inc/react-pelcro-js/commit/dafa4c7170c38e6a575ff4959578319b057cbeb1))
+
+
+### BREAKING CHANGES
+
+* EmailVerifyModal is now needed for all client UIs
 
 # [3.0.0-beta.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.0.0-beta.2...v3.0.0-beta.3) (2022-02-23)
+# [2.7.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.6.2...v2.7.0) (2022-01-28)
 
 
 ### Bug Fixes
@@ -155,11 +172,18 @@
 * **coupon:** remove current coupon when invalid coupon is entered ([b9fc344](https://github.com/pelcro-inc/react-pelcro-js/commit/b9fc3442709d41e0406240c56700189c40978f71))
 
 # [2.7.0-beta.8](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.7.0-beta.7...v2.7.0-beta.8) (2022-02-03)
+* **auth0:** check if auth0 sdk script is loaded before rendering ([6a4aee6](https://github.com/pelcro-inc/react-pelcro-js/commit/6a4aee6642d7fd078a1b1b975505273ee1d49b9f))
+* **auth0:** log an error if auth0 sdk isn't loaded ([67163c6](https://github.com/pelcro-inc/react-pelcro-js/commit/67163c6eb7e7d5c17790c3f95a5235e37a92488b))
+* **save button:** add null coelising when accessing user metadata ([93ae816](https://github.com/pelcro-inc/react-pelcro-js/commit/93ae816a7533bca306d54b4dd6698dc18226e98d))
 
 
 ### Features
 
 * **discount:** add a remove coupon button ([dafa4c7](https://github.com/pelcro-inc/react-pelcro-js/commit/dafa4c7170c38e6a575ff4959578319b057cbeb1))
+* release 2.7 ([3a98ea5](https://github.com/pelcro-inc/react-pelcro-js/commit/3a98ea5ced44406ee951cbe0ce99bac1a7140548))
+* **auth:** implement auth0 IDP ([#124](https://github.com/pelcro-inc/react-pelcro-js/issues/124)) ([181a421](https://github.com/pelcro-inc/react-pelcro-js/commit/181a421cca6efcb527a609853f8f99c325b7bd3b))
+* **dashboard:** add donations menu ([#127](https://github.com/pelcro-inc/react-pelcro-js/issues/127)) ([df69410](https://github.com/pelcro-inc/react-pelcro-js/commit/df694107bf377cf04c930feb1079b971780afb98))
+* **select modal:** emphasize a product if it matches page tag ([#125](https://github.com/pelcro-inc/react-pelcro-js/issues/125)) ([b4f039f](https://github.com/pelcro-inc/react-pelcro-js/commit/b4f039ffc6583c11fbf37ea32153df39d1b7b98c))
 
 # [2.7.0-beta.7](https://github.com/pelcro-inc/react-pelcro-js/compare/v2.7.0-beta.6...v2.7.0-beta.7) (2022-01-26)
 
