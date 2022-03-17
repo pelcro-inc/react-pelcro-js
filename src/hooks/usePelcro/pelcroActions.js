@@ -1,6 +1,7 @@
 import ReactGA from "react-ga";
 import { initialState } from "./index";
 import {
+  getRenewableProducts,
   userHasAddress,
   userHasPaymentMethod,
   userMustVerifyEmail
@@ -46,6 +47,13 @@ export class PelcroActions {
       !this.get().isAuthenticated()
     ) {
       return this.set({ view: "login" });
+    }
+
+    if (view === "subscription-options") {
+      const noRenewableProducts = getRenewableProducts().length === 0;
+      if (noRenewableProducts) {
+        return this.set({ view: "plan-select" });
+      }
     }
 
     this.set({ view });
