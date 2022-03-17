@@ -53,7 +53,6 @@ export const Main = () => {
       <PaymentMethodSelectModal />
 
       <SelectModal />
-      <SubscriptionOptionsModal />
       <Newsletter />
       <NewsletterUpdateModal />
 
@@ -61,6 +60,7 @@ export const Main = () => {
       <AddressSelectModal />
       <AddressUpdateModal />
 
+      <SubscriptionOptionsModal />
       <SubscriptionCreateModal />
       <SubscriptionRenewModal />
       <PaymentSuccessModal />
