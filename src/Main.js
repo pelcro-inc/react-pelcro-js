@@ -31,7 +31,6 @@ import { Notification } from "./SubComponents/Notification";
 import { EmailVerifyModal } from "./Components/EmailVerify/EmailVerifyModal";
 import { InvoiceDetailsModal } from "./Components/InvoiceDetails/InvoiceDetailsModal";
 import { InvoicePaymentModal } from "./Components/InvoicePayment/InvoicePaymentModal";
-import { SubscriptionOptionsModal } from "./Components/SubscriptionOptions/SubscriptionOptionsModal";
 
 export const Main = () => {
   return (
