@@ -1,3 +1,10 @@
+# [3.1.0-beta.6](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.1.0-beta.5...v3.1.0-beta.6) (2022-03-20)
+
+
+### Reverts
+
+* Revert "Revert "Revert "feat(subscription service): add vantiv payment gateway (#134)""" ([caa4c17](https://github.com/pelcro-inc/react-pelcro-js/commit/caa4c176cd4757b1e755430a491ce39354528322)), closes [#134](https://github.com/pelcro-inc/react-pelcro-js/issues/134)
+
 # [3.1.0-beta.5](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.1.0-beta.4...v3.1.0-beta.5) (2022-03-20)
 
 
