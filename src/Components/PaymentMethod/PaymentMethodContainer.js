@@ -38,17 +38,12 @@ import {
   SUBSCRIBE,
   REMOVE_APPLIED_COUPON
 } from "../../utils/action-types";
-import {
-  getErrorMessages,
-  debounce,
-  getSiteCardProcessor
-} from "../common/Helpers";
+import { getErrorMessages, debounce } from "../common/Helpers";
 import {
   Subscription,
-  StripeGateway,
-  PaypalGateway,
-  VantivGateway,
-  SUBSCRIPTION_TYPES
+  PaypalGateWay,
+  SUBSCRIPTION_TYPES,
+  StripeGateway
 } from "../../services/Subscription/Subscription.service";
 import { getPageOrDefaultLanguage } from "../../utils/utils";
 import { usePelcro } from "../../hooks/usePelcro";
@@ -130,79 +125,6 @@ const PaymentMethodContainerWithoutStripe = ({
     }
     dispatch({ type: INIT_CONTAINER });
     updateTotalAmountWithTax();
-  }, []);
-
-  function submitVantivPayment() {
-    if (!vantivInstanceRef.current) {
-      return console.error(
-        "Vantiv sdk script wasn't loaded, you need to load vantiv sdk before rendering the vantiv payment flow"
-      );
-    }
-
-    const orderId = `pelcro-${new Date().getTime()}`;
-    // calls handleVantivPayment
-    vantivInstanceRef.current.getPaypageRegistrationId({
-      id: orderId,
-      orderId: orderId
-    });
-  }
-
-  function handleVantivPayment(paymentRequest) {
-    const SUCCESS_STATUS = "870";
-    if (paymentRequest.response !== SUCCESS_STATUS) {
-      return handlePaymentError({
-        error: new Error(paymentRequest.message)
-      });
-    }
-
-    const subscription = new Subscription(new VantivGateway());
-    const { couponCode } = state;
-
-    return subscription.execute(
-      {
-        type: SUBSCRIPTION_TYPES.CREATE_SUBSCRIPTION,
-        token: paymentRequest,
-        quantity: plan.quantity,
-        plan,
-        couponCode,
-        product,
-        addressId: selectedAddressId
-      },
-      (err, res) => {
-        if (err) {
-          return handlePaymentError(err);
-        }
-
-        onSuccess(res);
-      }
-    );
-  }
-
-  const vantivInstanceRef = React.useRef(null);
-  useEffect(() => {
-    const cardProcessor = getSiteCardProcessor();
-
-    if (cardProcessor === "vantiv") {
-      const payPageId = window.Pelcro.site.read()?.vantiv_pay_page_id;
-      vantivInstanceRef.current = new window.EprotectIframeClient({
-        paypageId: payPageId,
-        reportGroup: payPageId,
-        style: "pelcro",
-        height: "245",
-        timeout: 50000,
-        div: "eProtectiframe",
-        callback: handleVantivPayment,
-        showCvv: true,
-        numYears: 8,
-        placeholderText: {
-          cvv: "CVV",
-          accountNumber: "1234 1234 1234 1234"
-        },
-        enhancedUxFeatures: {
-          inlineFieldValidations: true
-        }
-      });
-    }
   }, []);
 
   const initPaymentRequest = (state, dispatch) => {
@@ -613,7 +535,7 @@ const PaymentMethodContainerWithoutStripe = ({
    * @return {void}
    */
   const handlePaypalSubscription = (state, paypalNonce) => {
-    const subscription = new Subscription(new PaypalGateway());
+    const subscription = new Subscription(new PaypalGateWay());
     const { couponCode } = state;
 
     /**
@@ -989,10 +911,7 @@ const PaymentMethodContainerWithoutStripe = ({
     onFailure(error);
     dispatch({
       type: SHOW_ALERT,
-      payload: {
-        type: "error",
-        content: getErrorMessages(error) ?? error?.message
-      }
+      payload: { type: "error", content: error?.message }
     });
     dispatch({ type: DISABLE_SUBMIT, payload: false });
     dispatch({ type: LOADING, payload: false });
@@ -1105,14 +1024,10 @@ const PaymentMethodContainerWithoutStripe = ({
               }
 
               if (type === "updatePaymentSource") {
-                return updatePaymentSource(state, dispatch);
+                updatePaymentSource(state, dispatch);
+              } else {
+                submitPayment(state, dispatch);
               }
-
-              if (getSiteCardProcessor() === "vantiv") {
-                return submitVantivPayment();
-              }
-
-              submitPayment(state, dispatch);
             }
           );
 

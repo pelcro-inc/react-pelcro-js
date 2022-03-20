@@ -8,7 +8,6 @@ import {
 } from "react-stripe-elements";
 import { store } from "../Components/PaymentMethod/PaymentMethodContainer";
 import { usePelcro } from "../hooks/usePelcro";
-import { getSiteCardProcessor } from "../Components/common/Helpers";
 
 const StripeInputStyle = {
   base: "plc-w-full plc-p-3 plc-border plc-border-gray-300 plc-appearance-none plc-outline-none plc-rounded-sm plc-bg-gray-50 pelcro-input-input",
@@ -109,27 +108,18 @@ export const PelcroPaymentRequestButton = (props) => {
 
 export const CheckoutForm = () => {
   const { selectedPaymentMethodId } = usePelcro();
-  const cardProcessor = getSiteCardProcessor();
 
-  if (selectedPaymentMethodId) {
-    return null;
-  }
-
-  if (cardProcessor === "vantiv") {
-    return <div id="eProtectiframe"></div>;
-  }
-
-  if (cardProcessor === "stripe") {
-    return (
+  return (
+    !selectedPaymentMethodId && (
       <div>
         <PelcroCardNumber autoFocus={true} />
         <img
           alt="credit_cards"
-          className="plc-w-auto plc-h-4 plc-mt-2"
+          className="plc-h-4 plc-w-auto plc-mt-2"
           src="https://js.pelcro.com/ui/plugin/main/images/credit_cards.png"
         />
 
-        <div className="plc-flex plc-items-end plc-justify-between plc-my-2">
+        <div className="plc-flex plc-justify-between plc-my-2 plc-items-end">
           <div className="plc-w-6/12 plc-pr-4">
             <PelcroCardExpiry />
           </div>
@@ -139,8 +129,6 @@ export const CheckoutForm = () => {
           </div>
         </div>
       </div>
-    );
-  }
-
-  return null;
+    )
+  );
 };

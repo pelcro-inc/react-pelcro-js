@@ -19,7 +19,7 @@ export const SUBSCRIPTION_TYPES = {
 export class Subscription {
   /**
    * Subscription service  constructor
-   * @param {(StripeGateway|PaypalGateway|VantivGateway)} paymentGateway
+   * @param {(StripeGateway|PaypalGateWay)} paymentGateway
    */
   constructor(paymentGateway) {
     if (this.#isPaymentGatewayInvalid(paymentGateway)) {
@@ -81,11 +81,9 @@ export class Subscription {
   #isPaymentGatewayInvalid = (gateway) => {
     return (
       gateway &&
-      !(
-        gateway instanceof StripeGateway ||
-        gateway instanceof PaypalGateway ||
-        gateway instanceof VantivGateway
-      )
+      !(gateway instanceof StripeGateway) &&
+      gateway &&
+      !(gateway instanceof PaypalGateWay)
     );
   };
 
@@ -104,8 +102,7 @@ export class Subscription {
 
 const PAYMENT_GATEWAYS_ENUM = {
   stripe: "stripe",
-  paypal: "braintree",
-  vantiv: "vantiv"
+  paypal: "braintree"
 };
 
 /**
@@ -301,7 +298,7 @@ export class StripeGateway {
 /**
  * Paypal gateway strategy
  */
-export class PaypalGateway {
+export class PaypalGateWay {
   #paymentGateway = PAYMENT_GATEWAYS_ENUM["paypal"];
 
   /**
@@ -406,61 +403,6 @@ export class PaypalGateway {
         payment_gateway: this.#paymentGateway,
         gateway_token: token,
         invoice_id: invoiceId
-      },
-      (err, res) => {
-        callback(err, res);
-      }
-    );
-  };
-}
-
-export class VantivGateway {
-  #paymentGateway = PAYMENT_GATEWAYS_ENUM["vantiv"];
-
-  /**
-   * Subscription execution method
-   * @param {subscriptionOptions} options subscription options
-   * @param {executeCallback} callback
-   * @return {void}
-   */
-  execute = (options, callback) => {
-    const types = SUBSCRIPTION_TYPES;
-
-    switch (options.type) {
-      case types.CREATE_SUBSCRIPTION:
-        return this.#createSubscription(options, callback);
-      default:
-        console.error(
-          "Unsupported subscriptiion method: vantiv Gateway"
-        );
-    }
-  };
-
-  /**
-   * Create a new subscription
-   * @param {subscriptionOptions} options subscription options
-   * @param {executeCallback} callback
-   * @return {void}
-   */
-  #createSubscription = (options, callback) => {
-    const {
-      token,
-      plan,
-      couponCode,
-      product,
-      quantity = 1,
-      addressId
-    } = options;
-
-    window.Pelcro.subscription.create(
-      {
-        quantity,
-        gateway_token: token,
-        payment_gateway: this.#paymentGateway,
-        auth_token: window.Pelcro.user.read().auth_token,
-        plan_id: plan.id,
-        coupon_code: couponCode,
-        address_id: product.address_required ? addressId : null
       },
       (err, res) => {
         callback(err, res);
