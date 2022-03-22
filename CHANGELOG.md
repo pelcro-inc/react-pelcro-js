@@ -1,3 +1,12 @@
+# [3.1.0-beta.7](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.1.0-beta.6...v3.1.0-beta.7) (2022-03-22)
+
+
+### Bug Fixes
+
+* **gifts menu:** minor spacing improvement on mobile ([574c87f](https://github.com/pelcro-inc/react-pelcro-js/commit/574c87fafa4b568db0b4b1e3d9929a2e4d244fc6))
+* **intents:** invoice currency being invalid ([92b63d6](https://github.com/pelcro-inc/react-pelcro-js/commit/92b63d684c32863f270559d9d7899580e9adabf7))
+* **main.js:** remove left-over subsOption modal ([ebf2e34](https://github.com/pelcro-inc/react-pelcro-js/commit/ebf2e34d408a51da2d519b3f9269868f3f2ae168))
+
 # [3.1.0-beta.6](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.1.0-beta.5...v3.1.0-beta.6) (2022-03-20)
 
 
