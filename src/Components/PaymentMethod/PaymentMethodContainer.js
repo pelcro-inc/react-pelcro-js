@@ -868,7 +868,9 @@ const PaymentMethodContainerWithoutStripe = ({
       type: "three_d_secure",
       amount: totalAmount,
       currency:
-        plan?.currency || window.Pelcro.site.read().default_currency,
+        plan?.currency ||
+        invoice?.currency ||
+        window.Pelcro.site.read().default_currency,
       three_d_secure: {
         card: source?.id
       },
