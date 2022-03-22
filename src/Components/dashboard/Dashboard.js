@@ -392,7 +392,7 @@ class Dashboard extends Component {
               <td>
                 <Button
                   variant="ghost"
-                  icon={<RefreshIcon />}
+                  icon={<RefreshIcon className="plc-w-4 plc-h-4" />}
                   className="plc-text-blue-400"
                   onClick={onRenewClick}
                   disabled={this.state.disableSubmit}
