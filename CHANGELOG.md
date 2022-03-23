@@ -1,3 +1,10 @@
+# [3.1.0-beta.8](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.1.0-beta.7...v3.1.0-beta.8) (2022-03-22)
+
+
+### Bug Fixes
+
+* **sub service:** typo causing papyal to break ([04a3418](https://github.com/pelcro-inc/react-pelcro-js/commit/04a341868871be9e1cbf28bd923d969c1ee367d2))
+
 # [3.1.0-beta.7](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.1.0-beta.6...v3.1.0-beta.7) (2022-03-22)
 
 
