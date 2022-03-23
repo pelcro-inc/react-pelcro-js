@@ -71,8 +71,8 @@ export const Main = () => {
       <OrderCreateModal />
       <OrderConfirmModal />
 
-      <InvoiceDetailsModal />
       <InvoicePaymentModal />
+      <InvoiceDetailsModal />
 
       <Notification />
     </PelcroModalController>
