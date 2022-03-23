@@ -1,3 +1,46 @@
+# [3.1.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.0.0...v3.1.0) (2022-03-23)
+
+
+### Bug Fixes
+
+* **(url triggers):** invoice details trigger not working ([72446f9](https://github.com/pelcro-inc/react-pelcro-js/commit/72446f97945ccde4f203fe3b3d1f228c9c7e842b))
+* **(url triggers):** invoice details trigger not working ([c8c74a0](https://github.com/pelcro-inc/react-pelcro-js/commit/c8c74a0b83095a5ffb12533d37b8f12a5b3a8696))
+* **dashboard:** donations showing active gift subs ([dbffd29](https://github.com/pelcro-inc/react-pelcro-js/commit/dbffd2935fd3e2526f0fd700b6620b22dccfd8e1))
+* **dashboard:** donations showing active gift subs ([83f5f96](https://github.com/pelcro-inc/react-pelcro-js/commit/83f5f96ca19bf2ea333fb3a34e0c0f96714329a9))
+* **donations menu:** not showing canceled donations ([03d0bae](https://github.com/pelcro-inc/react-pelcro-js/commit/03d0bae5ce751747f77130747964356c752c1dd3))
+* **donations menu:** showing all expired subs ([0477f6c](https://github.com/pelcro-inc/react-pelcro-js/commit/0477f6c87386469dcd770fed5343d566962e945f))
+* **donations menu:** showing gifted donations ([efa94ad](https://github.com/pelcro-inc/react-pelcro-js/commit/efa94ad0a37555340d339a165152ec42e5e1a437))
+* **gifts menu:** minor spacing improvement on mobile ([574c87f](https://github.com/pelcro-inc/react-pelcro-js/commit/574c87fafa4b568db0b4b1e3d9929a2e4d244fc6))
+* **intents:** invoice currency being invalid ([92b63d6](https://github.com/pelcro-inc/react-pelcro-js/commit/92b63d684c32863f270559d9d7899580e9adabf7))
+* **invoices:** not handling scheduled invoices ([12574b2](https://github.com/pelcro-inc/react-pelcro-js/commit/12574b2b6302d3b9b62e85d3af0fa21a0d381d94))
+* **main.js:** remove left-over subsOption modal ([ebf2e34](https://github.com/pelcro-inc/react-pelcro-js/commit/ebf2e34d408a51da2d519b3f9269868f3f2ae168))
+* **pay invoice:** payments using existing cards not working ([1b23074](https://github.com/pelcro-inc/react-pelcro-js/commit/1b2307494ae80cd5be4b59d87fdce8f2fc99477b))
+* **pay invoice:** success modal not showing ([40a1018](https://github.com/pelcro-inc/react-pelcro-js/commit/40a101827fd522016e2c548c1fb284c130832982))
+* **payment selection:** not disabling continue when no method is selected ([561c96b](https://github.com/pelcro-inc/react-pelcro-js/commit/561c96bc0f9387b0a938a319f5ae82ec82913e78))
+* **payments:** crashing when there's no invoice in certain conds ([ef59e45](https://github.com/pelcro-inc/react-pelcro-js/commit/ef59e45a6d1e10742e952c408781f527c86e5e64))
+* **payments:** paypal gateway typo breaking paypal ([ddbeff0](https://github.com/pelcro-inc/react-pelcro-js/commit/ddbeff071283a0cf71c0d62415ccdf13f7bd1b60))
+* **sub service:** typo causing papyal to break ([04a3418](https://github.com/pelcro-inc/react-pelcro-js/commit/04a341868871be9e1cbf28bd923d969c1ee367d2))
+* **success modal:** wording for invoice payments ([5b4a010](https://github.com/pelcro-inc/react-pelcro-js/commit/5b4a010a49cc16b3a47b64b6552ad9d5f89aaee9))
+* **url trigger:** invalid invoice id error msg wording ([b206ad8](https://github.com/pelcro-inc/react-pelcro-js/commit/b206ad837f37042b65f06d3ff9a07c3212ebc116))
+* **verify email modal:** french wording issues ([8b15d63](https://github.com/pelcro-inc/react-pelcro-js/commit/8b15d638279cab47f5a0bb83de8d5e512026c8c5))
+
+
+### Features
+
+* hide pay invoice feature ([baad26e](https://github.com/pelcro-inc/react-pelcro-js/commit/baad26ede2543723111429cf75d9b7336e55fe2c))
+* require sub options and invoices modals in main.js ([276e883](https://github.com/pelcro-inc/react-pelcro-js/commit/276e883f9cab0a29bb0caf0b379ce99efed043d5))
+* trigger build ([ecf0bbe](https://github.com/pelcro-inc/react-pelcro-js/commit/ecf0bbed2d0bda74b319db19ea713d5797d329d6))
+* **gift create:** add gift message chars count ([6992b55](https://github.com/pelcro-inc/react-pelcro-js/commit/6992b552d75fb0f0579422295abdefd68a472419))
+* **invoice details:** improve UI alignment ([1031859](https://github.com/pelcro-inc/react-pelcro-js/commit/103185944536b891d92c010f0b96bb947973b854))
+* **invoice details:** improve UI alignment ([279dd61](https://github.com/pelcro-inc/react-pelcro-js/commit/279dd614422341c20e8fd4b14ec61bd6e45da0da))
+* **invoices menu:** hide zero total invoices ([83ebe72](https://github.com/pelcro-inc/react-pelcro-js/commit/83ebe728cf8cd2389b30d1b3aeaf2810eb38acf2))
+* add ability to view and pay invoices ([#133](https://github.com/pelcro-inc/react-pelcro-js/issues/133)) ([a5f95f3](https://github.com/pelcro-inc/react-pelcro-js/commit/a5f95f39955da0863af1e00aa5e697f98155ce1a))
+
+
+### Reverts
+
+* Revert "feat: add subscription options modal (#135)" ([1f2fc56](https://github.com/pelcro-inc/react-pelcro-js/commit/1f2fc56c2532dc6bd876740001f923466eebe76a)), closes [#135](https://github.com/pelcro-inc/react-pelcro-js/issues/135)
+
 # [3.1.0-beta.9](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.1.0-beta.8...v3.1.0-beta.9) (2022-03-23)
 
 
