@@ -1,3 +1,10 @@
+# [3.2.0-beta.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.1.0...v3.2.0-beta.1) (2022-03-23)
+
+
+### Features
+
+* enable vantiv for subscription flows ([a2602bc](https://github.com/pelcro-inc/react-pelcro-js/commit/a2602bcedd0ae76a0a25655bb92cdc799b40f8e9))
+
 # [3.1.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.0.0...v3.1.0) (2022-03-23)
 
 
