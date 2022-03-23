@@ -1,3 +1,10 @@
+# [3.1.0-beta.9](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.1.0-beta.8...v3.1.0-beta.9) (2022-03-23)
+
+
+### Features
+
+* hide pay invoice feature ([baad26e](https://github.com/pelcro-inc/react-pelcro-js/commit/baad26ede2543723111429cf75d9b7336e55fe2c))
+
 # [3.1.0-beta.8](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.1.0-beta.7...v3.1.0-beta.8) (2022-03-22)
 
 
