@@ -290,7 +290,9 @@ export const initViewFromURL = () => {
       }
 
       if (view === "invoice-details") {
-        return showInvoiceDetailsFromUrl();
+        // FIXME: commented out to remove from the release
+        return false;
+        // return showInvoiceDetailsFromUrl();
       }
 
       switchView(view);
