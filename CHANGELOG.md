@@ -1,3 +1,10 @@
+# [3.2.0-beta.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.1...v3.2.0-beta.2) (2022-03-25)
+
+
+### Reverts
+
+* Revert "feat: hide pay invoice feature" ([36fbae2](https://github.com/pelcro-inc/react-pelcro-js/commit/36fbae21ab4e204519907824812b456a98782f17))
+
 # [3.2.0-beta.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.1.0...v3.2.0-beta.1) (2022-03-23)
 
 
