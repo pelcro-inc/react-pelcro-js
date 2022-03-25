@@ -745,15 +745,13 @@ class Dashboard extends Component {
                 content={<OrdersMenu />}
               />
 
-              {/* 
-              FIXME: commented out to remove from release
               <Accordion.item
                 show={hasInvoices()}
                 name={SUB_MENUS.INVOICES}
                 icon={<InvoiceIcon />}
                 title={this.locale("labels.invoices")}
                 content={<InvoicesMenu />}
-              /> */}
+              />
 
               <Accordion.item
                 name={SUB_MENUS.SAVED_ITEMS}

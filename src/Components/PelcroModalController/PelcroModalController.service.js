@@ -325,9 +325,7 @@ export const initViewFromURL = () => {
       }
 
       if (view === "invoice-details") {
-        // FIXME: commented out to remove from the release
-        return false;
-        // return showInvoiceDetailsFromUrl();
+        return showInvoiceDetailsFromUrl();
       }
 
       switchView(view);
