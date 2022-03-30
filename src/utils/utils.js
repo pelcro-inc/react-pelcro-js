@@ -404,3 +404,39 @@ export function userMustVerifyEmail() {
     !isUserEmailVerified
   );
 }
+
+export function getRenewableProducts() {
+  const renewableSubs = window.Pelcro.subscription
+    .list()
+    .filter(
+      (sub) =>
+        sub.status === "active" && sub.cancel_at_period_end === 1
+    );
+
+  const renewableProductsIds = [
+    ...new Set(renewableSubs.map((sub) => sub.plan.product.id))
+  ];
+
+  const renewablePlansIds = [
+    ...new Set(renewableSubs.map((sub) => sub.plan.id))
+  ];
+
+  const { productsList } = usePelcro.getStore();
+
+  return productsList
+    .map((product) => {
+      if (renewableProductsIds.includes(product.id)) {
+        const renewablePlans = getRenewablePlansOnly(product);
+        return { ...product, plans: renewablePlans };
+      }
+    })
+    .filter((product) => product);
+
+  function getRenewablePlansOnly(product) {
+    return (
+      product?.plans?.filter((plan) =>
+        renewablePlansIds.includes(plan.id)
+      ) ?? []
+    );
+  }
+}

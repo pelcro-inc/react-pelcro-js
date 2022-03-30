@@ -6,7 +6,7 @@ import { Link } from "../../../SubComponents/Link";
 import { getEntitlementsFromElem } from "../../../utils/utils";
 
 export const init = () => {
-  const { switchView, set } = usePelcro.getStore();
+  const { switchView, set, setProductsList } = usePelcro.getStore();
 
   const entitlementsProtectedElements = document.querySelectorAll(
     "[data-pelcro-entitlements]"
@@ -83,7 +83,13 @@ export const init = () => {
                   });
                 }
                 notify.dismiss(NOTIFICATION_ID);
-                switchView("_plan-select-entitlements");
+
+                setProductsList(
+                  window.Pelcro.product.getByEntitlements(
+                    entitlements
+                  )
+                );
+                switchView("plan-select");
               }}
             >
               Subscribe
