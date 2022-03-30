@@ -1,3 +1,10 @@
+# [3.2.0-beta.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.2...v3.2.0-beta.3) (2022-03-30)
+
+
+### Features
+
+* expiremental vantiv support to most flows ([2fdfd18](https://github.com/pelcro-inc/react-pelcro-js/commit/2fdfd1827feb4445c43aef73ad8020c7bb247ef8))
+
 # [3.2.0-beta.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.1...v3.2.0-beta.2) (2022-03-25)
 
 
