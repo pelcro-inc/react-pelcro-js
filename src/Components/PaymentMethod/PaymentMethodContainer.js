@@ -117,6 +117,7 @@ const PaymentMethodContainerWithoutStripe = ({
     props.selectedAddressId ?? pelcroStore.selectedAddressId;
   const giftRecipient =
     props.giftRecipient ?? pelcroStore.giftRecipient;
+  const isGift = props.isGift ?? pelcroStore.isGift;
   const isRenewingGift =
     props.isRenewingGift ?? pelcroStore.isRenewingGift;
   const invoice = props.invoice ?? pelcroStore.invoice;
@@ -133,56 +134,152 @@ const PaymentMethodContainerWithoutStripe = ({
   }, []);
 
   function submitVantivPayment() {
-    if (!vantivInstanceRef.current) {
-      return console.error(
-        "Vantiv sdk script wasn't loaded, you need to load vantiv sdk before rendering the vantiv payment flow"
-      );
-    }
+    if (!selectedPaymentMethodId) {
+      if (!vantivInstanceRef.current) {
+        return console.error(
+          "Vantiv sdk script wasn't loaded, you need to load vantiv sdk before rendering the vantiv payment flow"
+        );
+      }
 
-    const orderId = `pelcro-${new Date().getTime()}`;
-    // calls handleVantivPayment
-    vantivInstanceRef.current.getPaypageRegistrationId({
-      id: orderId,
-      orderId: orderId
-    });
+      const orderId = `pelcro-${new Date().getTime()}`;
+      // calls handleVantivPayment
+      vantivInstanceRef.current.getPaypageRegistrationId({
+        id: orderId,
+        orderId: orderId
+      });
+    } else {
+      handleVantivPayment(null);
+    }
   }
 
   function handleVantivPayment(paymentRequest) {
-    const SUCCESS_STATUS = "870";
-    if (paymentRequest.response !== SUCCESS_STATUS) {
-      return handlePaymentError({
-        error: new Error(paymentRequest.message)
-      });
+    if (paymentRequest) {
+      const SUCCESS_STATUS = "870";
+      if (paymentRequest.response !== SUCCESS_STATUS) {
+        return handlePaymentError({
+          error: new Error(paymentRequest.message)
+        });
+      }
     }
 
     const subscription = new Subscription(new VantivGateway());
-    const { couponCode } = state;
 
-    return subscription.execute(
-      {
-        type: SUBSCRIPTION_TYPES.CREATE_SUBSCRIPTION,
-        token: paymentRequest,
-        quantity: plan.quantity,
-        plan,
-        couponCode,
-        product,
-        addressId: selectedAddressId
-      },
-      (err, res) => {
-        if (err) {
-          return handlePaymentError(err);
-        }
+    if (type === "createPayment") {
+      handleVantivSubscription();
+    }
+    // TODO: handle other types of payments
+    // } else if (type === "orderCreate") {
+    //   purchase(stripeSource, state, dispatch);
+    // } else if (type === "invoicePayment") {
+    //   payInvoice(new StripeGateway(), stripeSource.id, dispatch);
+    // }
 
-        onSuccess(res);
+    function handleVantivSubscription() {
+      const createSubscription = !isGift && !subscriptionIdToRenew;
+      const renewSubscription = !isGift && subscriptionIdToRenew;
+      const giftSubscriprition = isGift && !subscriptionIdToRenew;
+      const renewGift = isRenewingGift;
+
+      const { couponCode } = state;
+      const isUsingExistingPaymentMethod = Boolean(
+        selectedPaymentMethodId
+      );
+
+      if (renewGift) {
+        return subscription.execute(
+          {
+            type: SUBSCRIPTION_TYPES.RENEW_GIFTED_SUBSCRIPTION,
+            token: isUsingExistingPaymentMethod
+              ? selectedPaymentMethodId
+              : paymentRequest,
+            plan,
+            couponCode,
+            product,
+            isExistingSource: isUsingExistingPaymentMethod,
+            subscriptionIdToRenew,
+            addressId: selectedAddressId
+          },
+          (err, res) => {
+            if (err) {
+              return handlePaymentError(err);
+            }
+            onSuccess(res);
+          }
+        );
+      } else if (giftSubscriprition) {
+        return subscription.execute(
+          {
+            type: SUBSCRIPTION_TYPES.CREATE_GIFTED_SUBSCRIPTION,
+            token: isUsingExistingPaymentMethod
+              ? selectedPaymentMethodId
+              : paymentRequest,
+            quantity: plan.quantity,
+            plan,
+            couponCode,
+            product,
+            isExistingSource: isUsingExistingPaymentMethod,
+            giftRecipient,
+            addressId: selectedAddressId
+          },
+          (err, res) => {
+            if (err) {
+              return handlePaymentError(err);
+            }
+            onSuccess(res);
+          }
+        );
+      } else if (renewSubscription) {
+        return subscription.execute(
+          {
+            type: SUBSCRIPTION_TYPES.RENEW_SUBSCRIPTION,
+            token: isUsingExistingPaymentMethod
+              ? selectedPaymentMethodId
+              : paymentRequest,
+            quantity: plan.quantity,
+            plan,
+            couponCode,
+            product,
+            isExistingSource: isUsingExistingPaymentMethod,
+            subscriptionIdToRenew,
+            addressId: selectedAddressId
+          },
+          (err, res) => {
+            if (err) {
+              return handlePaymentError(err);
+            }
+            onSuccess(res);
+          }
+        );
+      } else if (createSubscription) {
+        return subscription.execute(
+          {
+            type: SUBSCRIPTION_TYPES.CREATE_SUBSCRIPTION,
+            token: isUsingExistingPaymentMethod
+              ? selectedPaymentMethodId
+              : paymentRequest,
+            quantity: plan.quantity,
+            plan,
+            couponCode,
+            product,
+            isExistingSource: isUsingExistingPaymentMethod,
+            addressId: selectedAddressId
+          },
+          (err, res) => {
+            if (err) {
+              return handlePaymentError(err);
+            }
+            onSuccess(res);
+          }
+        );
       }
-    );
+    }
   }
 
   const vantivInstanceRef = React.useRef(null);
   useEffect(() => {
     const cardProcessor = getSiteCardProcessor();
 
-    if (cardProcessor === "vantiv") {
+    if (cardProcessor === "vantiv" && !selectedPaymentMethodId) {
       const payPageId = window.Pelcro.site.read()?.vantiv_pay_page_id;
       vantivInstanceRef.current = new window.EprotectIframeClient({
         paypageId: payPageId,
@@ -203,7 +300,7 @@ const PaymentMethodContainerWithoutStripe = ({
         }
       });
     }
-  }, []);
+  }, [selectedPaymentMethodId]);
 
   const initPaymentRequest = (state, dispatch) => {
     try {
@@ -1094,6 +1191,10 @@ const PaymentMethodContainerWithoutStripe = ({
           return UpdateWithSideEffect(
             { ...state, disableSubmit: true, isLoading: true },
             (state, dispatch) => {
+              if (getSiteCardProcessor() === "vantiv") {
+                return submitVantivPayment();
+              }
+
               if (selectedPaymentMethodId) {
                 // pay with selected method (source) if exists already
                 return handlePayment(
@@ -1108,10 +1209,6 @@ const PaymentMethodContainerWithoutStripe = ({
 
               if (type === "updatePaymentSource") {
                 return updatePaymentSource(state, dispatch);
-              }
-
-              if (getSiteCardProcessor() === "vantiv") {
-                return submitVantivPayment();
               }
 
               submitPayment(state, dispatch);

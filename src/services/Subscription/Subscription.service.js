@@ -429,6 +429,16 @@ export class VantivGateway {
     switch (options.type) {
       case types.CREATE_SUBSCRIPTION:
         return this.#createSubscription(options, callback);
+      case types.RENEW_SUBSCRIPTION:
+        return this.#renewSubscription(options, callback);
+      case types.CREATE_GIFTED_SUBSCRIPTION:
+        return this.#createGiftedSubscription(options, callback);
+      case types.RENEW_GIFTED_SUBSCRIPTION:
+        return this.#renewGiftedSubscription(options, callback);
+      // TODO: implement paying invoices as well
+      // case types.PAY_INVOICE:
+      //   return this.#payInvoice(options, callback);
+
       default:
         console.error(
           "Unsupported subscriptiion method: vantiv Gateway"
@@ -449,18 +459,156 @@ export class VantivGateway {
       couponCode,
       product,
       quantity = 1,
-      addressId
+      addressId,
+      isExistingSource
     } = options;
+
+    const params = isExistingSource
+      ? {
+          source_id: token
+        }
+      : {
+          payment_gateway: this.#paymentGateway,
+          gateway_token: token
+        };
 
     window.Pelcro.subscription.create(
       {
         quantity,
-        gateway_token: token,
-        payment_gateway: this.#paymentGateway,
         auth_token: window.Pelcro.user.read().auth_token,
         plan_id: plan.id,
         coupon_code: couponCode,
-        address_id: product.address_required ? addressId : null
+        address_id: product.address_required ? addressId : null,
+        ...params
+      },
+      (err, res) => {
+        callback(err, res);
+      }
+    );
+  };
+
+  /**
+   * Renews a subscription
+   * @param {subscriptionOptions} options subscription options
+   * @param {executeCallback} callback
+   * @return {void}
+   */
+  #renewSubscription = (options, callback) => {
+    const {
+      subscriptionIdToRenew,
+      token,
+      plan,
+      couponCode,
+      product,
+      addressId,
+      isExistingSource
+    } = options;
+
+    const params = isExistingSource
+      ? {
+          source_id: token
+        }
+      : {
+          payment_gateway: this.#paymentGateway,
+          gateway_token: token
+        };
+
+    window.Pelcro.subscription.renew(
+      {
+        auth_token: window.Pelcro.user.read().auth_token,
+        plan_id: plan.id,
+        coupon_code: couponCode,
+        subscription_id: subscriptionIdToRenew,
+        address_id: product.address_required ? addressId : null,
+        ...params
+      },
+      (err, res) => {
+        callback(err, res);
+      }
+    );
+  };
+
+  /**
+   * Create a new gifted subscription
+   * @param {subscriptionOptions} options subscription options
+   * @param {executeCallback} callback
+   * @return {void}
+   */
+  #createGiftedSubscription = (options, callback) => {
+    const {
+      token,
+      plan,
+      couponCode,
+      product,
+      giftRecipient,
+      quantity = 1,
+      addressId,
+      isExistingSource
+    } = options;
+
+    const params = isExistingSource
+      ? {
+          source_id: token
+        }
+      : {
+          payment_gateway: this.#paymentGateway,
+          gateway_token: token
+        };
+
+    window.Pelcro.subscription.create(
+      {
+        quantity,
+        auth_token: window.Pelcro.user.read().auth_token,
+        plan_id: plan.id,
+        coupon_code: couponCode,
+        gift_recipient_email: giftRecipient.email,
+        gift_recipient_first_name: giftRecipient?.firstName,
+        gift_recipient_last_name: giftRecipient?.lastName,
+        gift_start_date: giftRecipient?.startDate,
+        gift_message: giftRecipient?.giftMessage,
+        address_id: product.address_required ? addressId : null,
+        ...params
+      },
+      (err, res) => {
+        callback(err, res);
+      }
+    );
+  };
+
+  /**
+   * Renews a gifted subscription
+   * @param {subscriptionOptions} options subscription options
+   * @param {executeCallback} callback
+   * @return {void}
+   */
+  #renewGiftedSubscription = (options, callback) => {
+    const {
+      subscriptionIdToRenew,
+      token,
+      product,
+      plan,
+      couponCode,
+      addressId,
+      isExistingSource
+    } = options;
+
+    const params = isExistingSource
+      ? {
+          source_id: token
+        }
+      : {
+          payment_gateway: this.#paymentGateway,
+          gateway_token: token
+        };
+
+    window.Pelcro.subscription.renewGift(
+      {
+        auth_token: window.Pelcro.user.read().auth_token,
+        plan_id: plan.id,
+        coupon_code: couponCode,
+        subscription_id: subscriptionIdToRenew,
+        address_id: product.address_required ? addressId : null,
+        ...params
       },
       (err, res) => {
         callback(err, res);
