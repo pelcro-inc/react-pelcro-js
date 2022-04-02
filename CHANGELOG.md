@@ -1,3 +1,15 @@
+# [3.2.0-beta.5](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.4...v3.2.0-beta.5) (2022-04-02)
+
+
+### Bug Fixes
+
+* **sub button:** not working when user has no subs ([2a283d5](https://github.com/pelcro-inc/react-pelcro-js/commit/2a283d59337a0a7fff989116864271b54d869e79))
+
+
+### Features
+
+* **payments:** add vantiv to invoice and ecomm payments ([289b2db](https://github.com/pelcro-inc/react-pelcro-js/commit/289b2db8a2e953f2c129dbb00f9c5f6e81d334fd))
+
 # [3.2.0-beta.4](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.3...v3.2.0-beta.4) (2022-03-30)
 
 
