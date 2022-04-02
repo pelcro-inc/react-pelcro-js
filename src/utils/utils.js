@@ -406,12 +406,13 @@ export function userMustVerifyEmail() {
 }
 
 export function getRenewableProducts() {
-  const renewableSubs = window.Pelcro.subscription
-    .list()
-    .filter(
-      (sub) =>
-        sub.status === "active" && sub.cancel_at_period_end === 1
-    );
+  const renewableSubs =
+    window.Pelcro.subscription
+      .list()
+      ?.filter(
+        (sub) =>
+          sub.status === "active" && sub.cancel_at_period_end === 1
+      ) ?? [];
 
   const renewableProductsIds = [
     ...new Set(renewableSubs.map((sub) => sub.plan.product.id))
