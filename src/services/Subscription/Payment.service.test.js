@@ -4,10 +4,10 @@ import { setupTests } from "../../../__tests__/testsSetup";
 import {
   PaypalGateway,
   StripeGateway,
-  Subscription,
-  SUBSCRIPTION_TYPES,
+  Payment,
+  PAYMENT_TYPES,
   VantivGateway
-} from "./Subscription.service";
+} from "./Payment.service";
 
 beforeAll(() => {
   console.warn = () => {};
@@ -22,12 +22,12 @@ beforeEach(() => {
 
 describe("Initialize a subscription instance with the right gateway", () => {
   test("Should return an error if executed with no gateway instance at construction", () => {
-    const subscription = new Subscription();
+    const subscription = new Payment();
     const mockCallback = jest.fn();
 
     subscription.execute(
       {
-        type: SUBSCRIPTION_TYPES.CREATE_SUBSCRIPTION,
+        type: PAYMENT_TYPES.CREATE_SUBSCRIPTION,
         token: "test_token",
         plan: { id: 123 },
         product: { id: 123 }
@@ -50,12 +50,12 @@ describe("Initialize a subscription instance with the right gateway", () => {
       }
     }
 
-    const subscription = new Subscription(new BlaBlaGateway());
+    const subscription = new Payment(new BlaBlaGateway());
     const mockCallback = jest.fn();
 
     subscription.execute(
       {
-        type: SUBSCRIPTION_TYPES.CREATE_SUBSCRIPTION,
+        type: PAYMENT_TYPES.CREATE_SUBSCRIPTION,
         token: "test_token",
         plan: { id: 123 },
         product: { id: 123 }
@@ -72,7 +72,7 @@ describe("Initialize a subscription instance with the right gateway", () => {
   });
 
   test("Should return an error if executed with no options", () => {
-    const subscription = new Subscription(new StripeGateway());
+    const subscription = new Payment(new StripeGateway());
     const mockCallback = jest.fn();
 
     subscription.execute({}, mockCallback);
@@ -86,7 +86,7 @@ describe("Initialize a subscription instance with the right gateway", () => {
   });
 
   test("Should not return an error if executed with a valid gateway and options", () => {
-    const subscription = new Subscription(new StripeGateway());
+    const subscription = new Payment(new StripeGateway());
     const mockCallback = jest.fn();
 
     jest
@@ -95,7 +95,7 @@ describe("Initialize a subscription instance with the right gateway", () => {
 
     subscription.execute(
       {
-        type: SUBSCRIPTION_TYPES.CREATE_SUBSCRIPTION,
+        type: PAYMENT_TYPES.CREATE_SUBSCRIPTION,
         token: "test_token",
         plan: { id: 123 },
         product: { id: 123 }
@@ -115,7 +115,7 @@ describe("Initialize a subscription instance with the right gateway", () => {
 describe("Successfully create any type of subscription", () => {
   describe("Stripe gateway", () => {
     test("Should not execute given an invalid type of subscription", () => {
-      const subscription = new Subscription(new StripeGateway());
+      const subscription = new Payment(new StripeGateway());
       const mockCallback = jest.fn();
 
       subscription.execute(
@@ -133,7 +133,7 @@ describe("Successfully create any type of subscription", () => {
     });
 
     test("Should create a subscription", () => {
-      const subscription = new Subscription(new StripeGateway());
+      const subscription = new Payment(new StripeGateway());
 
       jest
         .spyOn(window.Pelcro.subscription, "create")
@@ -141,7 +141,7 @@ describe("Successfully create any type of subscription", () => {
 
       subscription.execute(
         {
-          type: SUBSCRIPTION_TYPES.CREATE_SUBSCRIPTION,
+          type: PAYMENT_TYPES.CREATE_SUBSCRIPTION,
           token: "test_token",
           plan: { id: 123 },
           product: { id: 123 }
@@ -160,7 +160,7 @@ describe("Successfully create any type of subscription", () => {
     });
 
     test("Should create a gift subscription", () => {
-      const subscription = new Subscription(new StripeGateway());
+      const subscription = new Payment(new StripeGateway());
 
       jest
         .spyOn(window.Pelcro.subscription, "create")
@@ -168,7 +168,7 @@ describe("Successfully create any type of subscription", () => {
 
       subscription.execute(
         {
-          type: SUBSCRIPTION_TYPES.CREATE_GIFTED_SUBSCRIPTION,
+          type: PAYMENT_TYPES.CREATE_GIFTED_SUBSCRIPTION,
           token: "test_token",
           plan: { id: 123 },
           product: { id: 123 },
@@ -197,7 +197,7 @@ describe("Successfully create any type of subscription", () => {
     });
 
     test("Should renew a subscription", () => {
-      const subscription = new Subscription(new StripeGateway());
+      const subscription = new Payment(new StripeGateway());
 
       jest
         .spyOn(window.Pelcro.subscription, "renew")
@@ -205,7 +205,7 @@ describe("Successfully create any type of subscription", () => {
 
       subscription.execute(
         {
-          type: SUBSCRIPTION_TYPES.RENEW_SUBSCRIPTION,
+          type: PAYMENT_TYPES.RENEW_SUBSCRIPTION,
           token: "test_token",
           plan: { id: 123 },
           product: { id: 123 },
@@ -225,7 +225,7 @@ describe("Successfully create any type of subscription", () => {
     });
 
     test("Should renew a gift subscription", () => {
-      const subscription = new Subscription(new StripeGateway());
+      const subscription = new Payment(new StripeGateway());
 
       jest
         .spyOn(window.Pelcro.subscription, "renewGift")
@@ -233,7 +233,7 @@ describe("Successfully create any type of subscription", () => {
 
       subscription.execute(
         {
-          type: SUBSCRIPTION_TYPES.RENEW_GIFTED_SUBSCRIPTION,
+          type: PAYMENT_TYPES.RENEW_GIFTED_SUBSCRIPTION,
           token: "test_token",
           plan: { id: 123 },
           product: { id: 123 },
@@ -256,7 +256,7 @@ describe("Successfully create any type of subscription", () => {
 
   describe("PayPal gateway", () => {
     test("Should not execute given an invalid type of subscription", () => {
-      const subscription = new Subscription(new PaypalGateway());
+      const subscription = new Payment(new PaypalGateway());
       const mockCallback = jest.fn();
 
       subscription.execute(
@@ -274,7 +274,7 @@ describe("Successfully create any type of subscription", () => {
     });
 
     test("Should create a subscription", () => {
-      const subscription = new Subscription(new PaypalGateway());
+      const subscription = new Payment(new PaypalGateway());
 
       jest
         .spyOn(window.Pelcro.subscription, "create")
@@ -282,7 +282,7 @@ describe("Successfully create any type of subscription", () => {
 
       subscription.execute(
         {
-          type: SUBSCRIPTION_TYPES.CREATE_SUBSCRIPTION,
+          type: PAYMENT_TYPES.CREATE_SUBSCRIPTION,
           token: "test_token",
           plan: { id: 123 },
           product: { id: 123 }
@@ -301,7 +301,7 @@ describe("Successfully create any type of subscription", () => {
     });
 
     test("Should create a gift subscription", () => {
-      const subscription = new Subscription(new PaypalGateway());
+      const subscription = new Payment(new PaypalGateway());
 
       jest
         .spyOn(window.Pelcro.subscription, "create")
@@ -309,7 +309,7 @@ describe("Successfully create any type of subscription", () => {
 
       subscription.execute(
         {
-          type: SUBSCRIPTION_TYPES.CREATE_GIFTED_SUBSCRIPTION,
+          type: PAYMENT_TYPES.CREATE_GIFTED_SUBSCRIPTION,
           token: "test_token",
           plan: { id: 123 },
           product: { id: 123 },
@@ -340,7 +340,7 @@ describe("Successfully create any type of subscription", () => {
 
   describe("Vantiv gateway", () => {
     test("Should not execute given an invalid type of subscription", () => {
-      const subscription = new Subscription(new VantivGateway());
+      const subscription = new Payment(new VantivGateway());
       const mockCallback = jest.fn();
 
       subscription.execute(
@@ -358,7 +358,7 @@ describe("Successfully create any type of subscription", () => {
     });
 
     test("Should create a subscription", () => {
-      const subscription = new Subscription(new VantivGateway());
+      const subscription = new Payment(new VantivGateway());
 
       jest
         .spyOn(window.Pelcro.subscription, "create")
@@ -366,7 +366,7 @@ describe("Successfully create any type of subscription", () => {
 
       subscription.execute(
         {
-          type: SUBSCRIPTION_TYPES.CREATE_SUBSCRIPTION,
+          type: PAYMENT_TYPES.CREATE_SUBSCRIPTION,
           token: "test_token",
           plan: { id: 123 },
           product: { id: 123 }
