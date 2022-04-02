@@ -1,14 +1,14 @@
 /**
- * @TODO: All subscription related business logic should end up moving
+ * @TODO: All payment related business logic should end up moving
  * to this service, and out of react components.
  */
 
 /**
- * Enum for subscription types
+ * Enum for payment types
  * @readonly
  * @enum {string}
  */
-export const SUBSCRIPTION_TYPES = {
+export const PAYMENT_TYPES = {
   CREATE_SUBSCRIPTION: "CREATE_SUBSCRIPTION",
   CREATE_GIFTED_SUBSCRIPTION: "CREATE_GIFTED_SUBSCRIPTION",
   RENEW_SUBSCRIPTION: "RENEW_SUBSCRIPTION",
@@ -16,23 +16,22 @@ export const SUBSCRIPTION_TYPES = {
   PAY_INVOICE: "PAY_INVOICE"
 };
 
-export class Subscription {
+export class Payment {
   /**
-   * Subscription service  constructor
    * @param {(StripeGateway|PaypalGateway|VantivGateway)} paymentGateway
    */
   constructor(paymentGateway) {
     if (this.#isPaymentGatewayInvalid(paymentGateway)) {
       this.paymentGateway = null;
-      console.error("Incompatible subscription gateway");
+      console.error("Incompatible payment gateway");
     } else {
       this.paymentGateway = paymentGateway;
     }
   }
 
   /**
-   * @typedef subscriptionOptions
-   * @property {SUBSCRIPTION_TYPES} type
+   * @typedef paymentOptions
+   * @property {PAYMENT_TYPES} type
    * @property {string} token
    * @property {object} plan
    * @property {object} [product]
@@ -53,8 +52,8 @@ export class Subscription {
    */
 
   /**
-   * Subscription execution method
-   * @param {subscriptionOptions} options subscription options
+   * Payment execution method
+   * @param {paymentOptions} options payment options
    * @param {executeCallback} callback
    * @return {void}
    */
@@ -66,7 +65,7 @@ export class Subscription {
 
     if (!options.type) {
       callback(this.#generateUserError(), null);
-      return console.error("No subscription type provided");
+      return console.error("No payment type provided");
     }
 
     // delegate execution to paymentgateway
@@ -96,7 +95,7 @@ export class Subscription {
   #generateUserError = () => {
     return {
       error: new Error(
-        "An error has occured in the subscription service, please try again later"
+        "An error has occured in the payment service, please try again later"
       )
     };
   };
@@ -109,7 +108,7 @@ const PAYMENT_GATEWAYS_ENUM = {
 };
 
 /**
- * Subscription Strategies
+ * Payment Strategies
  */
 
 /**
@@ -119,13 +118,13 @@ export class StripeGateway {
   #paymentGateway = PAYMENT_GATEWAYS_ENUM["stripe"];
 
   /**
-   * Subscription execution method
-   * @param {subscriptionOptions} options subscription options
+   * Payment execution method
+   * @param {paymentOptions} options payment options
    * @param {executeCallback} callback
    * @return {void}
    */
   execute = (options, callback) => {
-    const types = SUBSCRIPTION_TYPES;
+    const types = PAYMENT_TYPES;
 
     switch (options.type) {
       case types.CREATE_SUBSCRIPTION:
@@ -140,15 +139,13 @@ export class StripeGateway {
         return this.#payInvoice(options, callback);
 
       default:
-        console.error(
-          "Unsupported subscriptiion method: Stripe Gateway"
-        );
+        console.error("Unsupported payment method: Stripe Gateway");
     }
   };
 
   /**
    * Create a new subscription
-   * @param {subscriptionOptions} options subscription options
+   * @param {paymentOptions} options payment options
    * @param {executeCallback} callback
    * @return {void}
    */
@@ -180,7 +177,7 @@ export class StripeGateway {
 
   /**
    * Create a new gifted subscription
-   * @param {subscriptionOptions} options subscription options
+   * @param {paymentOptions} options payment options
    * @param {executeCallback} callback
    * @return {void}
    */
@@ -218,7 +215,7 @@ export class StripeGateway {
 
   /**
    * Renews a subscription
-   * @param {subscriptionOptions} options subscription options
+   * @param {paymentOptions} options payment options
    * @param {executeCallback} callback
    * @return {void}
    */
@@ -249,7 +246,7 @@ export class StripeGateway {
 
   /**
    * Renews a gifted subscription
-   * @param {subscriptionOptions} options subscription options
+   * @param {paymentOptions} options payment options
    * @param {executeCallback} callback
    * @return {void}
    */
@@ -305,13 +302,13 @@ export class PaypalGateway {
   #paymentGateway = PAYMENT_GATEWAYS_ENUM["paypal"];
 
   /**
-   * Subscription execution method
-   * @param {subscriptionOptions} options subscription options
+   * Payment execution method
+   * @param {paymentOptions} options payment options
    * @param {executeCallback} callback
    * @return {void}
    */
   execute = (options, callback) => {
-    const types = SUBSCRIPTION_TYPES;
+    const types = PAYMENT_TYPES;
 
     switch (options.type) {
       case types.CREATE_SUBSCRIPTION:
@@ -330,7 +327,7 @@ export class PaypalGateway {
 
   /**
    * Create a new subscription
-   * @param {subscriptionOptions} options subscription options
+   * @param {paymentOptions} options payment options
    * @param {executeCallback} callback
    * @return {void}
    */
@@ -362,7 +359,7 @@ export class PaypalGateway {
 
   /**
    * Create a new gifted subscription
-   * @param {subscriptionOptions} options subscription options
+   * @param {paymentOptions} options payment options
    * @param {executeCallback} callback
    * @return {void}
    */
@@ -418,13 +415,13 @@ export class VantivGateway {
   #paymentGateway = PAYMENT_GATEWAYS_ENUM["vantiv"];
 
   /**
-   * Subscription execution method
-   * @param {subscriptionOptions} options subscription options
+   * Payment execution method
+   * @param {paymentOptions} options payment options
    * @param {executeCallback} callback
    * @return {void}
    */
   execute = (options, callback) => {
-    const types = SUBSCRIPTION_TYPES;
+    const types = PAYMENT_TYPES;
 
     switch (options.type) {
       case types.CREATE_SUBSCRIPTION:
@@ -435,20 +432,17 @@ export class VantivGateway {
         return this.#createGiftedSubscription(options, callback);
       case types.RENEW_GIFTED_SUBSCRIPTION:
         return this.#renewGiftedSubscription(options, callback);
-      // TODO: implement paying invoices as well
-      // case types.PAY_INVOICE:
-      //   return this.#payInvoice(options, callback);
+      case types.PAY_INVOICE:
+        return this.#payInvoice(options, callback);
 
       default:
-        console.error(
-          "Unsupported subscriptiion method: vantiv Gateway"
-        );
+        console.error("Unsupported payment method: vantiv Gateway");
     }
   };
 
   /**
    * Create a new subscription
-   * @param {subscriptionOptions} options subscription options
+   * @param {paymentOptions} options payment options
    * @param {executeCallback} callback
    * @return {void}
    */
@@ -489,7 +483,7 @@ export class VantivGateway {
 
   /**
    * Renews a subscription
-   * @param {subscriptionOptions} options subscription options
+   * @param {paymentOptions} options payment options
    * @param {executeCallback} callback
    * @return {void}
    */
@@ -530,7 +524,7 @@ export class VantivGateway {
 
   /**
    * Create a new gifted subscription
-   * @param {subscriptionOptions} options subscription options
+   * @param {paymentOptions} options payment options
    * @param {executeCallback} callback
    * @return {void}
    */
@@ -577,7 +571,7 @@ export class VantivGateway {
 
   /**
    * Renews a gifted subscription
-   * @param {subscriptionOptions} options subscription options
+   * @param {paymentOptions} options payment options
    * @param {executeCallback} callback
    * @return {void}
    */
