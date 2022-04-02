@@ -44,12 +44,12 @@ import {
   getSiteCardProcessor
 } from "../common/Helpers";
 import {
-  Subscription,
+  Payment,
   StripeGateway,
   PaypalGateway,
   VantivGateway,
-  SUBSCRIPTION_TYPES
-} from "../../services/Subscription/Subscription.service";
+  PAYMENT_TYPES
+} from "../../services/Subscription/Payment.service";
 import { getPageOrDefaultLanguage } from "../../utils/utils";
 import { usePelcro } from "../../hooks/usePelcro";
 
@@ -133,24 +133,24 @@ const PaymentMethodContainerWithoutStripe = ({
     updateTotalAmountWithTax();
   }, []);
 
-  function submitVantivPayment() {
-    if (!selectedPaymentMethodId) {
-      if (!vantivInstanceRef.current) {
-        return console.error(
-          "Vantiv sdk script wasn't loaded, you need to load vantiv sdk before rendering the vantiv payment flow"
-        );
-      }
-
-      const orderId = `pelcro-${new Date().getTime()}`;
-      // calls handleVantivPayment
-      vantivInstanceRef.current.getPaypageRegistrationId({
-        id: orderId,
-        orderId: orderId
-      });
-    } else {
-      handleVantivPayment(null);
+  const submitVantivPayment = () => {
+    if (selectedPaymentMethodId) {
+      return handleVantivPayment(null);
     }
-  }
+
+    if (!vantivInstanceRef.current) {
+      return console.error(
+        "Vantiv sdk script wasn't loaded, you need to load vantiv sdk before rendering the vantiv payment flow"
+      );
+    }
+
+    const orderId = `pelcro-${new Date().getTime()}`;
+    // calls handleVantivPayment
+    vantivInstanceRef.current.getPaypageRegistrationId({
+      id: orderId,
+      orderId: orderId
+    });
+  };
 
   function handleVantivPayment(paymentRequest) {
     if (paymentRequest) {
@@ -162,33 +162,45 @@ const PaymentMethodContainerWithoutStripe = ({
       }
     }
 
-    const subscription = new Subscription(new VantivGateway());
+    const isUsingExistingPaymentMethod = Boolean(
+      selectedPaymentMethodId
+    );
 
     if (type === "createPayment") {
       handleVantivSubscription();
+    } else if (type === "orderCreate") {
+      purchase(
+        new VantivGateway(),
+        isUsingExistingPaymentMethod
+          ? selectedPaymentMethodId
+          : paymentRequest,
+        state,
+        dispatch
+      );
+    } else if (type === "invoicePayment") {
+      payInvoice(
+        new VantivGateway(),
+        isUsingExistingPaymentMethod
+          ? selectedPaymentMethodId
+          : paymentRequest,
+        dispatch
+      );
     }
-    // TODO: handle other types of payments
-    // } else if (type === "orderCreate") {
-    //   purchase(stripeSource, state, dispatch);
-    // } else if (type === "invoicePayment") {
-    //   payInvoice(new StripeGateway(), stripeSource.id, dispatch);
-    // }
 
     function handleVantivSubscription() {
+      const payment = new Payment(new VantivGateway());
+
       const createSubscription = !isGift && !subscriptionIdToRenew;
       const renewSubscription = !isGift && subscriptionIdToRenew;
       const giftSubscriprition = isGift && !subscriptionIdToRenew;
       const renewGift = isRenewingGift;
 
       const { couponCode } = state;
-      const isUsingExistingPaymentMethod = Boolean(
-        selectedPaymentMethodId
-      );
 
       if (renewGift) {
-        return subscription.execute(
+        return payment.execute(
           {
-            type: SUBSCRIPTION_TYPES.RENEW_GIFTED_SUBSCRIPTION,
+            type: PAYMENT_TYPES.RENEW_GIFTED_SUBSCRIPTION,
             token: isUsingExistingPaymentMethod
               ? selectedPaymentMethodId
               : paymentRequest,
@@ -207,9 +219,9 @@ const PaymentMethodContainerWithoutStripe = ({
           }
         );
       } else if (giftSubscriprition) {
-        return subscription.execute(
+        return payment.execute(
           {
-            type: SUBSCRIPTION_TYPES.CREATE_GIFTED_SUBSCRIPTION,
+            type: PAYMENT_TYPES.CREATE_GIFTED_SUBSCRIPTION,
             token: isUsingExistingPaymentMethod
               ? selectedPaymentMethodId
               : paymentRequest,
@@ -229,9 +241,9 @@ const PaymentMethodContainerWithoutStripe = ({
           }
         );
       } else if (renewSubscription) {
-        return subscription.execute(
+        return payment.execute(
           {
-            type: SUBSCRIPTION_TYPES.RENEW_SUBSCRIPTION,
+            type: PAYMENT_TYPES.RENEW_SUBSCRIPTION,
             token: isUsingExistingPaymentMethod
               ? selectedPaymentMethodId
               : paymentRequest,
@@ -251,9 +263,9 @@ const PaymentMethodContainerWithoutStripe = ({
           }
         );
       } else if (createSubscription) {
-        return subscription.execute(
+        return payment.execute(
           {
-            type: SUBSCRIPTION_TYPES.CREATE_SUBSCRIPTION,
+            type: PAYMENT_TYPES.CREATE_SUBSCRIPTION,
             token: isUsingExistingPaymentMethod
               ? selectedPaymentMethodId
               : paymentRequest,
@@ -710,7 +722,7 @@ const PaymentMethodContainerWithoutStripe = ({
    * @return {void}
    */
   const handlePaypalSubscription = (state, paypalNonce) => {
-    const subscription = new Subscription(new PaypalGateway());
+    const payment = new Payment(new PaypalGateway());
     const { couponCode } = state;
 
     /**
@@ -718,9 +730,9 @@ const PaymentMethodContainerWithoutStripe = ({
      */
 
     if (giftRecipient) {
-      return subscription.execute(
+      return payment.execute(
         {
-          type: SUBSCRIPTION_TYPES.CREATE_GIFTED_SUBSCRIPTION,
+          type: PAYMENT_TYPES.CREATE_GIFTED_SUBSCRIPTION,
           token: paypalNonce,
           quantity: plan.quantity,
           plan,
@@ -749,9 +761,9 @@ const PaymentMethodContainerWithoutStripe = ({
       );
     }
 
-    return subscription.execute(
+    return payment.execute(
       {
-        type: SUBSCRIPTION_TYPES.CREATE_SUBSCRIPTION,
+        type: PAYMENT_TYPES.CREATE_SUBSCRIPTION,
         token: paypalNonce,
         quantity: plan.quantity,
         plan,
@@ -775,7 +787,12 @@ const PaymentMethodContainerWithoutStripe = ({
     );
   };
 
-  const purchase = (stripeSource, state, dispatch) => {
+  const purchase = (
+    gatewayService,
+    gatewayToken,
+    state,
+    dispatch
+  ) => {
     const isQuickPurchase = !Array.isArray(order);
     const mappedOrderItems = isQuickPurchase
       ? [{ sku_id: order.id, quantity: order.quantity }]
@@ -786,17 +803,16 @@ const PaymentMethodContainerWithoutStripe = ({
 
     const { couponCode } = state;
 
-    window.Pelcro.ecommerce.order.create(
+    const payment = new Payment(gatewayService);
+
+    payment.execute(
       {
-        source_id: stripeSource.isExistingSource
-          ? stripeSource.id
-          : undefined,
-        stripe_token: !stripeSource.isExistingSource
-          ? stripeSource.id
-          : undefined,
+        type: PAYMENT_TYPES.PURCHASE_ECOMMERCE_ORDER,
+        token: gatewayToken,
+        isExistingSource: Boolean(selectedPaymentMethodId),
         items: mappedOrderItems,
-        coupon_code: couponCode,
-        ...(selectedAddressId && { address_id: selectedAddressId })
+        addressId: selectedAddressId,
+        couponCode
       },
       (err, res) => {
         dispatch({ type: DISABLE_SUBMIT, payload: false });
@@ -825,11 +841,11 @@ const PaymentMethodContainerWithoutStripe = ({
   };
 
   const payInvoice = (gatewayService, gatewayToken, dispatch) => {
-    const subscription = new Subscription(gatewayService);
+    const payment = new Payment(gatewayService);
 
-    return subscription.execute(
+    return payment.execute(
       {
-        type: SUBSCRIPTION_TYPES.PAY_INVOICE,
+        type: PAYMENT_TYPES.PAY_INVOICE,
         token: gatewayToken,
         isExistingSource: Boolean(selectedPaymentMethodId),
         invoiceId: invoice.id
@@ -1063,7 +1079,7 @@ const PaymentMethodContainerWithoutStripe = ({
     if (stripeSource && type === "createPayment") {
       subscribe(stripeSource, state, dispatch);
     } else if (stripeSource && type === "orderCreate") {
-      purchase(stripeSource, state, dispatch);
+      purchase(new StripeGateway(), stripeSource.id, state, dispatch);
     } else if (stripeSource && type === "invoicePayment") {
       payInvoice(new StripeGateway(), stripeSource.id, dispatch);
     }

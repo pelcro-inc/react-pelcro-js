@@ -13,6 +13,7 @@ export const PAYMENT_TYPES = {
   CREATE_GIFTED_SUBSCRIPTION: "CREATE_GIFTED_SUBSCRIPTION",
   RENEW_SUBSCRIPTION: "RENEW_SUBSCRIPTION",
   RENEW_GIFTED_SUBSCRIPTION: "RENEW_GIFTED_SUBSCRIPTION",
+  PURCHASE_ECOMMERCE_ORDER: "PURCHASE_ECOMMERCE_ORDER",
   PAY_INVOICE: "PAY_INVOICE"
 };
 
@@ -42,6 +43,7 @@ export class Payment {
    * @property {string} addressId
    * @property {number} invoiceId
    * @property {boolean} isExistingSource
+   * @property {Array} items
    */
 
   /**
@@ -135,6 +137,8 @@ export class StripeGateway {
         return this.#createGiftedSubscription(options, callback);
       case types.RENEW_GIFTED_SUBSCRIPTION:
         return this.#renewGiftedSubscription(options, callback);
+      case types.PURCHASE_ECOMMERCE_ORDER:
+        return this.#purchaseEcommerceOrder(options, callback);
       case types.PAY_INVOICE:
         return this.#payInvoice(options, callback);
 
@@ -268,6 +272,38 @@ export class StripeGateway {
         coupon_code: couponCode,
         subscription_id: subscriptionIdToRenew,
         address_id: product.address_required ? addressId : null
+      },
+      (err, res) => {
+        callback(err, res);
+      }
+    );
+  };
+
+  /**
+   * purchase an Ecommerce order
+   * @param {paymentOptions} options payment options
+   * @param {executeCallback} callback
+   * @return {void}
+   */
+  #purchaseEcommerceOrder = (options, callback) => {
+    const { token, items, couponCode, addressId, isExistingSource } =
+      options;
+
+    const params = isExistingSource
+      ? {
+          source_id: token
+        }
+      : {
+          payment_gateway: this.#paymentGateway,
+          gateway_token: token
+        };
+
+    window.Pelcro.ecommerce.order.create(
+      {
+        items,
+        coupon_code: couponCode,
+        ...params,
+        ...(addressId && { address_id: addressId })
       },
       (err, res) => {
         callback(err, res);
@@ -432,6 +468,8 @@ export class VantivGateway {
         return this.#createGiftedSubscription(options, callback);
       case types.RENEW_GIFTED_SUBSCRIPTION:
         return this.#renewGiftedSubscription(options, callback);
+      case types.PURCHASE_ECOMMERCE_ORDER:
+        return this.#purchaseEcommerceOrder(options, callback);
       case types.PAY_INVOICE:
         return this.#payInvoice(options, callback);
 
@@ -608,5 +646,56 @@ export class VantivGateway {
         callback(err, res);
       }
     );
+  };
+
+  /**
+   * purchase an Ecommerce order
+   * @param {paymentOptions} options payment options
+   * @param {executeCallback} callback
+   * @return {void}
+   */
+  #purchaseEcommerceOrder = (options, callback) => {
+    const { token, items, couponCode, addressId, isExistingSource } =
+      options;
+
+    const params = isExistingSource
+      ? {
+          source_id: token
+        }
+      : {
+          payment_gateway: this.#paymentGateway,
+          gateway_token: token
+        };
+
+    window.Pelcro.ecommerce.order.create(
+      {
+        items,
+        coupon_code: couponCode,
+        ...params,
+        ...(addressId && { address_id: addressId })
+      },
+      (err, res) => {
+        callback(err, res);
+      }
+    );
+  };
+
+  #payInvoice = (options, callback) => {
+    const { token, invoiceId } = options;
+
+    const params = options.isExistingSource
+      ? {
+          source_id: token,
+          invoice_id: invoiceId
+        }
+      : {
+          payment_gateway: this.#paymentGateway,
+          gateway_token: token,
+          invoice_id: invoiceId
+        };
+
+    window.Pelcro.invoice.pay(params, (err, res) => {
+      callback(err, res);
+    });
   };
 }
