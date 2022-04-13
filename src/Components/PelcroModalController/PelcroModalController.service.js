@@ -112,7 +112,7 @@ export const loadPaymentSDKs = () => {
 
   // Load Vantiv SDKs
   const supportsVantiv = Boolean(
-    window.Pelcro.site.read().vantiv_pay_page_id
+    window.Pelcro.site.read().vantiv_gateway_settings
   );
 
   if (supportsVantiv) {
@@ -124,8 +124,17 @@ export const loadPaymentSDKs = () => {
     }
 
     if (!window.EprotectIframeClient) {
+      const PRELIVE_URL =
+        "https://request.eprotect.vantivprelive.com/eProtect/js/eProtect-iframe-client.min.js";
+      const PRODUCTION_URL =
+        "https://request.eprotect.vantivcnp.com/eProtect/js/eProtect-iframe-client4.min.js";
+      const scriptUrlToUse =
+        window.Pelcro.site.read().vantiv_gateway_settings
+          .environment === "production"
+          ? PRODUCTION_URL
+          : PRELIVE_URL;
       window.Pelcro.helpers.loadSDK(
-        "https://request.eprotect.vantivprelive.com/eProtect/js/eProtect-iframe-client.min.js",
+        scriptUrlToUse,
         "vantiv-eprotect-sdk"
       );
     }

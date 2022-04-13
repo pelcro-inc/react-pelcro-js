@@ -292,10 +292,16 @@ const PaymentMethodContainerWithoutStripe = ({
     const cardProcessor = getSiteCardProcessor();
 
     if (cardProcessor === "vantiv" && !selectedPaymentMethodId) {
-      const payPageId = window.Pelcro.site.read()?.vantiv_pay_page_id;
+      const payPageId =
+        window.Pelcro.site.read()?.vantiv_gateway_settings
+          .pay_page_id;
+      const reportGroup =
+        window.Pelcro.site.read()?.vantiv_gateway_settings
+          .report_group;
+
       vantivInstanceRef.current = new window.EprotectIframeClient({
         paypageId: payPageId,
-        reportGroup: payPageId,
+        reportGroup: reportGroup,
         style: "pelcro",
         height: "245",
         timeout: 50000,
