@@ -1,3 +1,10 @@
+# [3.2.0-beta.6](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.5...v3.2.0-beta.6) (2022-04-13)
+
+
+### Bug Fixes
+
+* **vantiv:** properly load script based on environment ([7e08f5c](https://github.com/pelcro-inc/react-pelcro-js/commit/7e08f5c5d964072810e191a200ef0b12438ee384))
+
 # [3.2.0-beta.5](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.4...v3.2.0-beta.5) (2022-04-02)
 
 
