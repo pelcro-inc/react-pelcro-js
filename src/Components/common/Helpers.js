@@ -60,7 +60,7 @@ export const debounce = (func, waitTime) => {
 };
 
 export function getSiteCardProcessor() {
-  if (window.Pelcro.site.read()?.vantiv_pay_page_id) {
+  if (window.Pelcro.site.read()?.vantiv_gateway_settings) {
     return "vantiv";
   }
 
