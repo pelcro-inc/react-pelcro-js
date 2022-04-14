@@ -171,6 +171,8 @@ export class StripeGateway {
         auth_token: window.Pelcro.user.read().auth_token,
         plan_id: plan.id,
         coupon_code: couponCode,
+        campaign_key:
+          window.Pelcro.helpers.getURLParameter("campaign_key"),
         address_id: product.address_required ? addressId : null
       },
       (err, res) => {
@@ -204,6 +206,8 @@ export class StripeGateway {
         auth_token: window.Pelcro.user.read().auth_token,
         plan_id: plan.id,
         coupon_code: couponCode,
+        campaign_key:
+          window.Pelcro.helpers.getURLParameter("campaign_key"),
         gift_recipient_email: giftRecipient.email,
         gift_recipient_first_name: giftRecipient?.firstName,
         gift_recipient_last_name: giftRecipient?.lastName,
@@ -238,6 +242,8 @@ export class StripeGateway {
         stripe_token: token,
         auth_token: window.Pelcro.user.read().auth_token,
         plan_id: plan.id,
+        campaign_key:
+          window.Pelcro.helpers.getURLParameter("campaign_key"),
         coupon_code: couponCode,
         subscription_id: subscriptionIdToRenew,
         address_id: product.address_required ? addressId : null
@@ -302,6 +308,8 @@ export class StripeGateway {
       {
         items,
         coupon_code: couponCode,
+        campaign_key:
+          window.Pelcro.helpers.getURLParameter("campaign_key"),
         ...params,
         ...(addressId && { address_id: addressId })
       },
@@ -384,6 +392,8 @@ export class PaypalGateway {
         payment_gateway: this.#paymentGateway,
         auth_token: window.Pelcro.user.read().auth_token,
         plan_id: plan.id,
+        campaign_key:
+          window.Pelcro.helpers.getURLParameter("campaign_key"),
         coupon_code: couponCode,
         address_id: product.address_required ? addressId : null
       },
@@ -418,6 +428,8 @@ export class PaypalGateway {
         auth_token: window.Pelcro.user.read().auth_token,
         plan_id: plan.id,
         coupon_code: couponCode,
+        campaign_key:
+          window.Pelcro.helpers.getURLParameter("campaign_key"),
         gift_recipient_email: giftRecipient.email,
         gift_recipient_first_name: giftRecipient?.firstName,
         gift_recipient_last_name: giftRecipient?.lastName,
@@ -509,6 +521,8 @@ export class VantivGateway {
         quantity,
         auth_token: window.Pelcro.user.read().auth_token,
         plan_id: plan.id,
+        campaign_key:
+          window.Pelcro.helpers.getURLParameter("campaign_key"),
         coupon_code: couponCode,
         address_id: product.address_required ? addressId : null,
         ...params
@@ -550,6 +564,8 @@ export class VantivGateway {
         auth_token: window.Pelcro.user.read().auth_token,
         plan_id: plan.id,
         coupon_code: couponCode,
+        campaign_key:
+          window.Pelcro.helpers.getURLParameter("campaign_key"),
         subscription_id: subscriptionIdToRenew,
         address_id: product.address_required ? addressId : null,
         ...params
@@ -593,6 +609,8 @@ export class VantivGateway {
         auth_token: window.Pelcro.user.read().auth_token,
         plan_id: plan.id,
         coupon_code: couponCode,
+        campaign_key:
+          window.Pelcro.helpers.getURLParameter("campaign_key"),
         gift_recipient_email: giftRecipient.email,
         gift_recipient_first_name: giftRecipient?.firstName,
         gift_recipient_last_name: giftRecipient?.lastName,
@@ -671,6 +689,8 @@ export class VantivGateway {
       {
         items,
         coupon_code: couponCode,
+        campaign_key:
+          window.Pelcro.helpers.getURLParameter("campaign_key"),
         ...params,
         ...(addressId && { address_id: addressId })
       },

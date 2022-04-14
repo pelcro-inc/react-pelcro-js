@@ -522,6 +522,8 @@ const PaymentMethodContainerWithoutStripe = ({
           {
             auth_token: window.Pelcro.user.read().auth_token,
             plan_id: plan.id,
+            campaign_key:
+              window.Pelcro.helpers.getURLParameter("campaign_key"),
             coupon_code: couponCode,
             address_id: selectedAddressId
           },
@@ -613,6 +615,8 @@ const PaymentMethodContainerWithoutStripe = ({
             : undefined,
           auth_token: window.Pelcro.user.read().auth_token,
           plan_id: plan.id,
+          campaign_key:
+            window.Pelcro.helpers.getURLParameter("campaign_key"),
           quantity: plan.quantity,
           coupon_code: couponCode,
           gift_recipient_email: giftRecipient
@@ -691,6 +695,8 @@ const PaymentMethodContainerWithoutStripe = ({
               : undefined,
             auth_token: window.Pelcro.user.read().auth_token,
             plan_id: plan.id,
+            campaign_key:
+              window.Pelcro.helpers.getURLParameter("campaign_key"),
             coupon_code: couponCode,
             subscription_id: subscriptionIdToRenew,
             address_id: product.address_required
@@ -1012,6 +1018,8 @@ const PaymentMethodContainerWithoutStripe = ({
         {
           auth_token: window.Pelcro.user.read().auth_token,
           plan_id: plan.id,
+          campaign_key:
+            window.Pelcro.helpers.getURLParameter("campaign_key"),
           coupon_code: state?.couponCode,
           address_id: selectedAddressId
         },
