@@ -1,14 +1,14 @@
 {
-  "title": "Invoice details",
+  "title": "Détails de la facture",
   "labels": {
-    "summary": "Summary",
+    "summary": "Résumé",
     "total": "Total",
-    "amountPaid": "Amount paid",
-    "amountDue": "Amount due",
-    "creationDate": "Created on:"
+    "amountPaid": "Montant payé",
+    "amountDue": "Montant dû",
+    "creationDate": "Créé le:"
   },
   "buttons": {
-    "download": "Download",
-    "pay": "Pay now"
+    "download": "Télécharger",
+    "pay": "Payer"
   }
 }
