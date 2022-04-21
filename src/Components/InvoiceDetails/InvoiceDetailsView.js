@@ -15,6 +15,8 @@ export const InvoiceDetailsView = (props) => {
 
   const { invoice } = usePelcro();
   const showPayButton = canPayInvoice(invoice);
+  const showDownloadButton = Boolean(invoice?.invoice_pdf);
+  const hasPlanDetails = Boolean(invoice.plan);
   const creationDate = new Date(invoice?.created_at);
   const formattedCreationDate = new Intl.DateTimeFormat(
     "en-CA"
@@ -43,17 +45,19 @@ export const InvoiceDetailsView = (props) => {
                     "labels.creationDate"
                   )} ${formattedCreationDate}`}
                 </p>
-                <div className="plc-flex plc-items-center plc-pt-2 plc-mt-2 plc-border-t plc-border-gray-400 plc-min-h-12 plc-justify-between pelcro-invoice-plan-wrapper">
-                  <div className="plc-break-words pelcro-invoice-plan-name">
-                    {invoice.plan.nickname}
+                {hasPlanDetails && (
+                  <div className="plc-flex plc-items-center plc-pt-2 plc-mt-2 plc-border-t plc-border-gray-400 plc-min-h-12 plc-justify-between pelcro-invoice-plan-wrapper">
+                    <div className="plc-break-words pelcro-invoice-plan-name">
+                      {invoice.plan.nickname}
+                    </div>
+                    <div className="plc-text-center pelcro-invoice-summary-price">
+                      {calcAndFormatItemsTotal(
+                        [invoice.plan],
+                        invoice.currency
+                      )}
+                    </div>
                   </div>
-                  <div className="plc-text-center pelcro-invoice-summary-price">
-                    {calcAndFormatItemsTotal(
-                      [invoice.plan],
-                      invoice.currency
-                    )}
-                  </div>
-                </div>
+                )}
                 <div className="plc-flex plc-justify-end plc-pt-2 plc-mt-2 plc-font-bold plc-border-t plc-border-gray-400 pelcro-invoice-total-wrapper">
                   <div className="plc-mr-2 plc-flex plc-flex-col">
                     <p className="pelcro-invoice-total-text">
@@ -94,10 +98,12 @@ export const InvoiceDetailsView = (props) => {
             )}
           </div>
           <div className="plc-flex plc-items-center plc-justify-center plc-mt-4">
-            <InvoiceDetailsDownloadButton
-              url={invoice?.invoice_pdf}
-              className="plc-w-full plc-text-center"
-            />
+            {showDownloadButton && (
+              <InvoiceDetailsDownloadButton
+                url={invoice?.invoice_pdf}
+                className="plc-w-full plc-text-center"
+              />
+            )}
             {showPayButton && (
               <InvoiceDetailsPayButton
                 role="submit"
