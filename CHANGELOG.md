@@ -1,3 +1,10 @@
+# [3.2.0-beta.10](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.9...v3.2.0-beta.10) (2022-04-21)
+
+
+### Bug Fixes
+
+* **stripe:** stripe validation errors not working properly ([f928827](https://github.com/pelcro-inc/react-pelcro-js/commit/f9288274f6b508082c6e7b1996e7ce98dd11cee6))
+
 # [3.2.0-beta.9](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.8...v3.2.0-beta.9) (2022-04-21)
 
 
