@@ -1,3 +1,10 @@
+# [3.2.0-beta.8](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.7...v3.2.0-beta.8) (2022-04-14)
+
+
+### Bug Fixes
+
+* **utils:** not returning correct payment gateway ([4a6a3ca](https://github.com/pelcro-inc/react-pelcro-js/commit/4a6a3caee7461cafb493a8ec91609e30b251d97c))
+
 # [3.2.0-beta.7](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.6...v3.2.0-beta.7) (2022-04-14)
 
 
