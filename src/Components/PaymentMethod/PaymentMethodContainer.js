@@ -893,7 +893,9 @@ const PaymentMethodContainerWithoutStripe = ({
         // We don't support source creation for 3D secure yet
         if (source?.card?.three_d_secure === "required") {
           return handlePaymentError({
-            message: t("messages.cardAuthNotSupported")
+            error: {
+              message: t("messages.cardAuthNotSupported")
+            }
           });
         }
 
@@ -1140,7 +1142,9 @@ const PaymentMethodContainerWithoutStripe = ({
 
       if (source?.status === "failed") {
         return handlePaymentError({
-          message: t("messages.cardAuthFailed")
+          error: {
+            message: t("messages.cardAuthFailed")
+          }
         });
       }
 
