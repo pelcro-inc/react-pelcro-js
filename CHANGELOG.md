@@ -1,3 +1,17 @@
+# [3.2.0-beta.9](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.8...v3.2.0-beta.9) (2022-04-21)
+
+
+### Bug Fixes
+
+* **3d secure:** not handling failed autherizations ([818f786](https://github.com/pelcro-inc/react-pelcro-js/commit/818f7868dfe92f41215147ff735d7a585929fb40))
+
+
+### Features
+
+* handle vantiv cards updates ([8708684](https://github.com/pelcro-inc/react-pelcro-js/commit/870868498fb55e497df4b0c051fcc30e43888d15))
+* **invoice:** handle standalone invoices ([7b39d66](https://github.com/pelcro-inc/react-pelcro-js/commit/7b39d661289d0272d7b75548825ad434e256dddd))
+* **invoices:** update french wording ([76af0d7](https://github.com/pelcro-inc/react-pelcro-js/commit/76af0d7971a94debd9008294da28c72e7ad38f40))
+
 # [3.2.0-beta.8](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.7...v3.2.0-beta.8) (2022-04-14)
 
 
