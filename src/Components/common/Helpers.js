@@ -18,6 +18,10 @@ export const getErrorMessages = (error) => {
     return error?.response?.data?.error?.message;
   }
 
+  if (error?.message) {
+    return error.message;
+  }
+
   const errorMessages = [];
 
   // enumerable error (ex: validation errors)
