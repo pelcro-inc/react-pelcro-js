@@ -133,8 +133,12 @@ const PaymentMethodContainerWithoutStripe = ({
     updateTotalAmountWithTax();
   }, []);
 
-  const submitVantivPayment = () => {
-    if (selectedPaymentMethodId) {
+  const submitUsingVantiv = () => {
+    const isUsingExistingPaymentMethod = Boolean(
+      selectedPaymentMethodId
+    );
+    if (isUsingExistingPaymentMethod) {
+      // no need to create a new source using vantiv
       return handleVantivPayment(null);
     }
 
@@ -145,7 +149,9 @@ const PaymentMethodContainerWithoutStripe = ({
     }
 
     const orderId = `pelcro-${new Date().getTime()}`;
-    // calls handleVantivPayment
+    /*     
+    calls handleVantivPayment to either handle a payment or update a source by simply creating a new source 
+    */
     vantivInstanceRef.current.getPaypageRegistrationId({
       id: orderId,
       orderId: orderId
@@ -184,6 +190,41 @@ const PaymentMethodContainerWithoutStripe = ({
           ? selectedPaymentMethodId
           : paymentRequest,
         dispatch
+      );
+    } else if (type === "updatePaymentSource") {
+      createNewVantivCard();
+    }
+
+    function createNewVantivCard() {
+      window.Pelcro.source.create(
+        {
+          auth_token: window.Pelcro.user.read().auth_token,
+          token: paymentRequest,
+          gateway: "vantiv"
+        },
+        (err, res) => {
+          dispatch({ type: DISABLE_SUBMIT, payload: false });
+          dispatch({ type: LOADING, payload: false });
+          if (err) {
+            onFailure(err);
+            return dispatch({
+              type: SHOW_ALERT,
+              payload: {
+                type: "error",
+                content: getErrorMessages(err)
+              }
+            });
+          }
+
+          dispatch({
+            type: SHOW_ALERT,
+            payload: {
+              type: "success",
+              content: t("messages.sourceUpdated")
+            }
+          });
+          onSuccess(res);
+        }
       );
     }
 
@@ -1226,7 +1267,7 @@ const PaymentMethodContainerWithoutStripe = ({
             { ...state, disableSubmit: true, isLoading: true },
             (state, dispatch) => {
               if (getSiteCardProcessor() === "vantiv") {
-                return submitVantivPayment();
+                return submitUsingVantiv();
               }
 
               if (selectedPaymentMethodId) {
