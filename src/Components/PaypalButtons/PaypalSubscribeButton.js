@@ -45,11 +45,30 @@ export const PaypalSubscribeButton = (props) => {
         billingAgreementDescription: props.billingDescription
       });
 
+      const getProduct = () => {
+        if (invoice) {
+          invoice.plan = null;
+          if (invoice.plan) {
+            return invoice.plan;
+          } else {
+            // standalone invoices dont have a plan
+            return {
+              currency: invoice.currency,
+              nickname: `invoice #${invoice.id}`
+            };
+          }
+        } else if (props.plan) {
+          return props.plan;
+        } else {
+          return plan;
+        }
+      };
+
       // Await building paypal instance
       await paypalCheckoutInstance.build();
       // Create paypal payment
       paypalCheckoutInstance.createPayment({
-        product: invoice ? invoice.plan : props.plan ?? plan,
+        product: getProduct(),
         amount: updatedPrice,
         address: invoice ? null : selectedAddress,
         onButtonClick: () => {
