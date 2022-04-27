@@ -1,3 +1,11 @@
+# [3.2.0-beta.11](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.10...v3.2.0-beta.11) (2022-04-27)
+
+
+### Features
+
+* **paypal:** handle standalone invoices ([5e9ee0e](https://github.com/pelcro-inc/react-pelcro-js/commit/5e9ee0e6b52cb76c8582a9514d42b163bac5ff37))
+* **sub option modal:** update french wording ([d04ec73](https://github.com/pelcro-inc/react-pelcro-js/commit/d04ec73d84abc676d8d22b7f9325f45f03bf4e2e))
+
 # [3.2.0-beta.10](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.9...v3.2.0-beta.10) (2022-04-21)
 
 
