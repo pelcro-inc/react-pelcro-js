@@ -1,3 +1,10 @@
+# [3.2.0-beta.12](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.11...v3.2.0-beta.12) (2022-04-27)
+
+
+### Reverts
+
+* add subscription options modal ([#135](https://github.com/pelcro-inc/react-pelcro-js/issues/135)) ([dda164d](https://github.com/pelcro-inc/react-pelcro-js/commit/dda164d8be5089ff68b8c6bfd9771ddc71a5d21f))
+
 # [3.2.0-beta.11](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.10...v3.2.0-beta.11) (2022-04-27)
 
 
