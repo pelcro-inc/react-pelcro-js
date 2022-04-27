@@ -5,6 +5,7 @@ import useReducerWithSideEffects, {
   UpdateWithSideEffect
 } from "use-reducer-with-side-effects";
 import { usePelcro } from "../../hooks/usePelcro";
+import { notify } from "../../SubComponents/Notification";
 import {
   HANDLE_SUBMIT,
   LOADING,
@@ -43,6 +44,7 @@ const AddressSelectContainer = ({
   style,
   className = "",
   onGiftRedemptionSuccess = () => {},
+  onMembershipAdressUpdateSuccess = () => {},
   onSuccess = () => {},
   onFailure = () => {},
   children,
@@ -52,7 +54,8 @@ const AddressSelectContainer = ({
   const {
     giftCode: giftCodeFromStore,
     subscriptionIdToRenew: subscriptionIdToRenewFromStore,
-    set
+    set,
+    selectedMembership
   } = usePelcro();
   const giftCode = props.giftCode ?? giftCodeFromStore;
   const subscriptionIdToRenew =
@@ -63,36 +66,64 @@ const AddressSelectContainer = ({
   const submitAddress = ({ selectedAddressId }, dispatch) => {
     set({ selectedAddressId });
 
-    if (!giftCode) {
-      return onSuccess(selectedAddressId);
+    if (selectedMembership.id) {
+      dispatch({ type: LOADING, payload: true });
+      return window.Pelcro.member.update(
+        {
+          auth_token: window.Pelcro.user.read().auth_token,
+          address_id: selectedAddressId,
+          membership_id: selectedMembership.id
+        },
+        (err, res) => {
+          dispatch({ type: LOADING, payload: false });
+
+          if (err) {
+            dispatch({
+              type: SHOW_ALERT,
+              payload: {
+                type: "error",
+                content: getErrorMessages(err)
+              }
+            });
+            return onFailure(err);
+          }
+          // FIXME: use wording
+          notify.success("updated successfully membership");
+          return onMembershipAdressUpdateSuccess(res);
+        }
+      );
     }
 
-    dispatch({ type: LOADING, payload: true });
-    window.Pelcro.subscription.redeemGift(
-      {
-        auth_token: window.Pelcro.user.read().auth_token,
-        gift_code: giftCode,
-        address_id: selectedAddressId,
-        // redeem gift as a future phase of an existing subscription
-        subscription_id: subscriptionIdToRenew
-      },
-      (err, res) => {
-        dispatch({ type: LOADING, payload: false });
+    if (giftCode) {
+      dispatch({ type: LOADING, payload: true });
+      return window.Pelcro.subscription.redeemGift(
+        {
+          auth_token: window.Pelcro.user.read().auth_token,
+          gift_code: giftCode,
+          address_id: selectedAddressId,
+          // redeem gift as a future phase of an existing subscription
+          subscription_id: subscriptionIdToRenew
+        },
+        (err, res) => {
+          dispatch({ type: LOADING, payload: false });
 
-        if (err) {
-          dispatch({
-            type: SHOW_ALERT,
-            payload: {
-              type: "error",
-              content: getErrorMessages(err)
-            }
-          });
-          return onFailure(err);
+          if (err) {
+            dispatch({
+              type: SHOW_ALERT,
+              payload: {
+                type: "error",
+                content: getErrorMessages(err)
+              }
+            });
+            return onFailure(err);
+          }
+
+          return onGiftRedemptionSuccess(res);
         }
+      );
+    }
 
-        return onGiftRedemptionSuccess(res);
-      }
-    );
+    onSuccess(selectedAddressId);
   };
 
   const [state, dispatch] = useReducerWithSideEffects(
