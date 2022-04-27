@@ -76,12 +76,13 @@ export const PelcroModalController = ({
       )}
 
       {/* the reason we're doing this is to be able to tell if the select modal
-      should set the SubscriptionIdToRenew state value. we're trying to avoid
+      should filter the list by certain entitlements or not. we're trying to avoid
       adding a field to the usePelcro hook just to communicate this because then it
       would be considered part of the public API, so we decided to do this for now.
-      if we face other complications, then this should be refactored and we should
-      find a better way of handling this case */}
-      {view === "_plan-select-renew" &&
+      if we face other cases where we need to pass certain data when using switchView,
+      then this should be refactored and we should find a better way of handling these
+      cases */}
+      {view === "_plan-select-entitlements" &&
         React.Children.map(children, (child) => child).find(
           ({ type }) => type?.viewId === "plan-select"
         )}
