@@ -1,3 +1,34 @@
+# [3.2.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.1.0...v3.2.0) (2022-04-28)
+
+
+### Bug Fixes
+
+* **3d secure:** not handling failed autherizations ([818f786](https://github.com/pelcro-inc/react-pelcro-js/commit/818f7868dfe92f41215147ff735d7a585929fb40))
+* **stripe:** stripe validation errors not working properly ([f928827](https://github.com/pelcro-inc/react-pelcro-js/commit/f9288274f6b508082c6e7b1996e7ce98dd11cee6))
+* **sub button:** not working when user has no subs ([2a283d5](https://github.com/pelcro-inc/react-pelcro-js/commit/2a283d59337a0a7fff989116864271b54d869e79))
+* **utils:** not returning correct payment gateway ([4a6a3ca](https://github.com/pelcro-inc/react-pelcro-js/commit/4a6a3caee7461cafb493a8ec91609e30b251d97c))
+* **vantiv:** properly load script based on environment ([7e08f5c](https://github.com/pelcro-inc/react-pelcro-js/commit/7e08f5c5d964072810e191a200ef0b12438ee384))
+
+
+### Features
+
+* **invoice:** handle standalone invoices ([7b39d66](https://github.com/pelcro-inc/react-pelcro-js/commit/7b39d661289d0272d7b75548825ad434e256dddd))
+* **invoices:** update french wording ([76af0d7](https://github.com/pelcro-inc/react-pelcro-js/commit/76af0d7971a94debd9008294da28c72e7ad38f40))
+* **payments:** add vantiv to invoice and ecomm payments ([289b2db](https://github.com/pelcro-inc/react-pelcro-js/commit/289b2db8a2e953f2c129dbb00f9c5f6e81d334fd))
+* **paypal:** handle standalone invoices ([5e9ee0e](https://github.com/pelcro-inc/react-pelcro-js/commit/5e9ee0e6b52cb76c8582a9514d42b163bac5ff37))
+* **sub option modal:** update french wording ([d04ec73](https://github.com/pelcro-inc/react-pelcro-js/commit/d04ec73d84abc676d8d22b7f9325f45f03bf4e2e))
+* add campaign_key to sub create, renew, and order create ([d3f2711](https://github.com/pelcro-inc/react-pelcro-js/commit/d3f271185f4a01b03763bd683dd4395cf2946555))
+* enable vantiv for subscription flows ([a2602bc](https://github.com/pelcro-inc/react-pelcro-js/commit/a2602bcedd0ae76a0a25655bb92cdc799b40f8e9))
+* expiremental vantiv support to most flows ([2fdfd18](https://github.com/pelcro-inc/react-pelcro-js/commit/2fdfd1827feb4445c43aef73ad8020c7bb247ef8))
+* handle vantiv cards updates ([8708684](https://github.com/pelcro-inc/react-pelcro-js/commit/870868498fb55e497df4b0c051fcc30e43888d15))
+* revert add subscription options modal ([#135](https://github.com/pelcro-inc/react-pelcro-js/issues/135))"" ([19f2480](https://github.com/pelcro-inc/react-pelcro-js/commit/19f24805c1532a0b31b249f637aaee6dbd73ce98))
+
+
+### Reverts
+
+* add subscription options modal ([#135](https://github.com/pelcro-inc/react-pelcro-js/issues/135)) ([dda164d](https://github.com/pelcro-inc/react-pelcro-js/commit/dda164d8be5089ff68b8c6bfd9771ddc71a5d21f))
+* Revert "feat: hide pay invoice feature" ([36fbae2](https://github.com/pelcro-inc/react-pelcro-js/commit/36fbae21ab4e204519907824812b456a98782f17))
+
 # [3.2.0-beta.11](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.10...v3.2.0-beta.11) (2022-04-27)
 
 
