@@ -18,21 +18,23 @@ export const getErrorMessages = (error) => {
     return error?.response?.data?.error?.message;
   }
 
+  if(error?.response?.data?.errors) {
+    const errorMessages = [];
+
+    // enumerable error (ex: validation errors)
+    Object.values(error?.response?.data?.errors).forEach(
+      ([errorMessage]) => {
+        errorMessages.push(errorMessage);
+      }
+    );
+
+    // convert to multiline string
+    return errorMessages.join("\n");
+  }
+
   if (error?.message) {
     return error.message;
   }
-
-  const errorMessages = [];
-
-  // enumerable error (ex: validation errors)
-  Object.values(error?.response?.data?.errors).forEach(
-    ([errorMessage]) => {
-      errorMessages.push(errorMessage);
-    }
-  );
-
-  // convert to multiline string
-  return errorMessages.join("\n");
 };
 
 /**
