@@ -1,3 +1,10 @@
+# [3.2.0-beta.13](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.12...v3.2.0-beta.13) (2022-05-11)
+
+
+### Bug Fixes
+
+* **bugs:** confirm pass lang FR & register error ([#137](https://github.com/pelcro-inc/react-pelcro-js/issues/137)) ([0162572](https://github.com/pelcro-inc/react-pelcro-js/commit/0162572e9412b90829d82f2f37d71689a9fed459))
+
 # [3.2.0-beta.12](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.11...v3.2.0-beta.12) (2022-04-27)
 
 
