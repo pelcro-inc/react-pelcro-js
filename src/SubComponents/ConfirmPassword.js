@@ -39,7 +39,7 @@ export function ConfirmPassword({ store, ...otherProps }) {
       } else if (finishedTyping) {
         dispatch({
           type: SET_CONFIRM_PASSWORD_ERROR,
-          payload: "Confirm password is required."
+          payload: t("validation.confirmPassword")
         });
       }
     },
