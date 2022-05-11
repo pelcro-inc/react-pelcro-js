@@ -4,6 +4,7 @@ import React, {
   useEffect,
   useCallback
 } from "react";
+import { useTranslation } from "react-i18next";
 import {
   SET_CONFIRM_PASSWORD,
   SET_CONFIRM_PASSWORD_ERROR,
@@ -15,6 +16,8 @@ import { Input } from "./Input";
  *
  */
 export function ConfirmPassword({ store, ...otherProps }) {
+  const { t } = useTranslation("common");
+  
   const {
     dispatch,
     state: {
