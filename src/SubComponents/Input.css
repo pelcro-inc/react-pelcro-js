@@ -7,7 +7,7 @@
     @apply plc-mb-1 plc-text-gray-900;
   }
   .pelcro-root .pelcro-input-error {
-    @apply plc-absolute plc-h-auto plc-h-3 plc-mt-0.5 plc-text-sm plc-text-red-500 plc-normal-case;
+    @apply plc-absolute plc-h-auto plc-mt-0.5 plc-text-sm plc-text-red-500 plc-normal-case;
   }
   .pelcro-root .pelcro-input-invalid {
     @apply plc-ring-2 plc-ring-red-400;
