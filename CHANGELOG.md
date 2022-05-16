@@ -1,3 +1,10 @@
+# [3.2.0-beta.15](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.14...v3.2.0-beta.15) (2022-05-16)
+
+
+### Features
+
+* add zero decimal currencies support ([#140](https://github.com/pelcro-inc/react-pelcro-js/issues/140)) ([3ef0a6a](https://github.com/pelcro-inc/react-pelcro-js/commit/3ef0a6a556e59ede5af61193122a2b4da2590867))
+
 # [3.2.0-beta.14](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.13...v3.2.0-beta.14) (2022-05-11)
 
 
