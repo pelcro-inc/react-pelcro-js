@@ -1,3 +1,10 @@
+# [3.2.0-beta.16](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.15...v3.2.0-beta.16) (2022-05-16)
+
+
+### Bug Fixes
+
+* **redirection:** create account redirection link ([#141](https://github.com/pelcro-inc/react-pelcro-js/issues/141)) ([3dba81e](https://github.com/pelcro-inc/react-pelcro-js/commit/3dba81e2b066ae913060cf5fc582d9d72d062655))
+
 # [3.2.0-beta.15](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.14...v3.2.0-beta.15) (2022-05-16)
 
 
