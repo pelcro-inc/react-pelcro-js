@@ -1,3 +1,10 @@
+# [3.2.0-beta.17](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.16...v3.2.0-beta.17) (2022-05-26)
+
+
+### Features
+
+* send email field to the update profile function ([#149](https://github.com/pelcro-inc/react-pelcro-js/issues/149)) ([efc2ad1](https://github.com/pelcro-inc/react-pelcro-js/commit/efc2ad1c6194c0adf13610770a32692adf20063c))
+
 # [3.2.0-beta.16](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.15...v3.2.0-beta.16) (2022-05-16)
 
 
