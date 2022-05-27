@@ -186,6 +186,11 @@ export { EmailVerifyModal } from "./Components/EmailVerify/EmailVerifyModal";
 export { EmailVerifyResendButton } from "./Components/EmailVerify/EmailVerifyResendButton";
 export { EmailVerifyView } from "./Components/EmailVerify/EmailVerifyView";
 
+export { VerifyLinkTokenContainer } from "./Components/VerifyLinkToken/VerifyLinkTokenContainer";
+export { VerifyLinkTokenModal } from "./Components/VerifyLinkToken/VerifyLinkTokenModal";
+export { VerifyLinkTokenView } from "./Components/VerifyLinkToken/VerifyLinkTokenView";
+export { VerifyLinkTokenLoader } from "./Components/VerifyLinkToken/VerifyLinkTokenLoader";
+
 export { InvoicePaymentContainer } from "./Components/InvoicePayment/InvoicePaymentContainer";
 export { InvoicePaymentModal } from "./Components/InvoicePayment/InvoicePaymentModal";
 export { invoicePaymentSubmitButton } from "./Components/InvoicePayment/InvoicePaymentSubmitButton";

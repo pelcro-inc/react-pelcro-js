@@ -16,6 +16,8 @@ import messages_en from "./translations/en/messages.json";
 import messages_fr from "./translations/fr/messages.json";
 import login_en from "./translations/en/login.json";
 import login_fr from "./translations/fr/login.json";
+import verifyLinkToken_en from "./translations/en/verifyLinkToken.json";
+import verifyLinkToken_fr from "./translations/fr/verifyLinkToken.json";
 import register_en from "./translations/en/register.json";
 import register_fr from "./translations/fr/register.json";
 import userEdit_en from "./translations/en/userEdit.json";
@@ -56,6 +58,7 @@ const resources = {
     checkoutForm: checkoutForm_en,
     messages: messages_en,
     login: login_en,
+    verifyLinkToken: verifyLinkToken_en,
     register: register_en,
     userEdit: userEdit_en,
     address: address_en,
@@ -80,6 +83,7 @@ const resources = {
     checkoutForm: checkoutForm_fr,
     messages: messages_fr,
     login: login_fr,
+    verifyLinkToken: verifyLinkToken_fr,
     register: register_fr,
     userEdit: userEdit_fr,
     address: address_fr,

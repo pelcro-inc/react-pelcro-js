@@ -1,6 +1,7 @@
 import React from "react";
 import { PelcroModalController } from "./Components/PelcroModalController/PelcroModalController";
 import { LoginModal } from "./Components/Login/LoginModal";
+import { VerifyLinkTokenModal } from "./Components/VerifyLinkToken/VerifyLinkTokenModal";
 import { RegisterModal } from "./Components/Register/RegisterModal";
 import { AddressUpdateModal } from "./Components/AddressUpdate/AddressUpdateModal";
 import { SelectModalWithHook as SelectModal } from "./Components/Select/SelectModal";
@@ -38,6 +39,7 @@ export const Main = () => {
       <MeterModal />
       <EmailVerifyModal />
       <LoginModal />
+      <VerifyLinkTokenModal />
       <RegisterModal />
 
       <UserUpdateModal />
