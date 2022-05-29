@@ -7,6 +7,7 @@ import {
   ModalFooter
 } from "../../SubComponents/Modal";
 import Authorship from "../common/Authorship";
+import { notify } from "../../SubComponents/Notification";
 import { usePelcro } from "../../hooks/usePelcro";
 
 /**
@@ -19,6 +20,7 @@ export function VerifyLinkTokenModal({ onDisplay, onClose, ...props }) {
   const onSuccess = (res) => {
     props.onSuccess?.(res);
     resetView();
+    notify.success(t("messages.success"));
   };
 
   return (
