@@ -1,0 +1,11 @@
+{
+  "labels": {
+    "title": "Confirmez votre courriel",
+    "instructions": "Confirmez votre courriel.\nVeuillez cliquer sur le lien de vérification, qui vous a été envoyé à:",
+    "resend": "Renvoyer le courriel"
+  },
+  "messages": {
+    "resent": "Renvoyé avec succès",
+    "success": "Lien vérifiée avec succès"
+  }
+}

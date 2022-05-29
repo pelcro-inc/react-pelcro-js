@@ -333,6 +333,10 @@ export const initViewFromURL = () => {
         return verifyEmailTokenFromUrl();
       }
 
+      if (view === "passwordless-login") {
+        return verifyLinkTokenFromUrl();
+      }
+
       if (view === "invoice-details") {
         return showInvoiceDetailsFromUrl();
       }
@@ -528,6 +532,19 @@ const verifyEmailTokenFromUrl = () => {
     },
     { once: true }
   );
+};
+
+const verifyLinkTokenFromUrl = () => {
+  const isAlreadyLoggedIn = window.Pelcro.user?.isAuthenticated() ?? false;
+
+  const loginToken = window.Pelcro.helpers.getURLParameter("token");
+
+  if (isAlreadyLoggedIn || !loginToken) return;
+
+  
+  const { switchView } = usePelcro.getStore();
+  
+  return switchView("passwordless-login");
 };
 
 const showInvoiceDetailsFromUrl = () => {
