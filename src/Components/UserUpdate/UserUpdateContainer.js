@@ -6,6 +6,9 @@ import useReducerWithSideEffects, {
 } from "use-reducer-with-side-effects";
 import {
   SET_EMAIL,
+  SET_EMAIL_ERROR,
+  SET_EMAIL_CONFRIM,
+  SET_EMAIL_CONFORM_ERROR,
   SET_FIRST_NAME,
   SET_LAST_NAME,
   SET_DISPLAY_NAME,
@@ -19,6 +22,9 @@ import { getErrorMessages } from "../common/Helpers";
 
 const initialState = {
   email: window.Pelcro.user.read()?.email,
+  emailError: null,
+  emailConfirm: "",
+  emailConformError: null,
   firstName: window.Pelcro.user.read()?.first_name,
   lastName: window.Pelcro.user.read()?.last_name,
   displayName: window.Pelcro.user.read()?.display_name,
@@ -138,6 +144,24 @@ const UserUpdateContainer = ({
           return Update({
             ...state,
             email: action.payload
+          });
+
+        case SET_EMAIL_ERROR:
+          return Update({
+            ...state,
+            emailError: action.payload
+          });
+
+        case SET_EMAIL_CONFRIM:
+          return Update({
+            ...state,
+            emailConfirm: action.payload
+          });
+
+        case SET_EMAIL_CONFORM_ERROR:
+          return Update({
+            ...state,
+            emailConformError: action.payload
           });
 
         case SET_FIRST_NAME:

@@ -1,7 +1,9 @@
 {
   "validation": {
     "validEmail": "Email address is not valid.",
+    "validEmailConfirm": "Email confirmation does not match the Email address.",
     "enterEmail": "Email address is required.",
+    "enterEmailConfirm": "Email confirmation is required.",
     "enterPassword": "Password is required.",
     "confirmPassword": "Confirm password is required."
   },

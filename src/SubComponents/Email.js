@@ -5,7 +5,11 @@ import React, {
   useCallback
 } from "react";
 import { useTranslation } from "react-i18next";
-import { SET_EMAIL, SET_EMAIL_ERROR } from "../utils/action-types";
+import {
+  SET_EMAIL,
+  SET_EMAIL_ERROR,
+  DISABLE_USER_UPDATE_BUTTON
+} from "../utils/action-types";
 import { Input } from "./Input";
 
 export function Email({
@@ -23,6 +27,8 @@ export function Email({
   const [email, setEmail] = useState(stateEmail);
   const [finishedTyping, setFinishedTyping] = useState(false);
 
+  console.log(emailError);
+
   const handleInputChange = useCallback(
     (value) => {
       setEmail(value);
@@ -32,6 +38,10 @@ export function Email({
       }
 
       if (isEmailValid(email)) {
+        dispatch({
+          type: SET_EMAIL_ERROR,
+          payload: null
+        });
         return dispatch({ type: SET_EMAIL, payload: email });
       }
 
@@ -41,11 +51,15 @@ export function Email({
             type: SET_EMAIL_ERROR,
             payload: t("validation.validEmail")
           });
+
+          dispatch({ type: SET_EMAIL, payload: value });
         } else {
           dispatch({
             type: SET_EMAIL_ERROR,
             payload: t("validation.enterEmail")
           });
+
+          dispatch({ type: SET_EMAIL, payload: value });
         }
       }
     },
@@ -78,7 +92,8 @@ export function Email({
   }, []);
 
   const isEmailValid = (email) => {
-    const re = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+    const re =
+      /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
     return re.test(email);
   };
 

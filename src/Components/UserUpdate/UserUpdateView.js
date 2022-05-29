@@ -27,18 +27,16 @@ export const UserUpdateView = (props) => {
         <UserUpdateContainer {...props}>
           <AlertWithContext />
           <UserUpdateProfilePic onClick={props.onPictureClick} />
-          <div className="plc-flex plc-items-start">
-            <UserUpdateEmail
-              label={t("labels.email")}
-              autoFocus={true}
-            />
-          </div>
+
+          <UserUpdateEmail />
+
           <div className="plc-flex plc-items-start">
             <UserUpdateFirstName
               autoComplete="first-name"
               id="pelcro-input-first-name"
               errorId="pelcro-input-first-name-error"
               label={t("labels.firstName")}
+              autoFocus={true}
             />
             <UserUpdateLastName
               wrapperClassName="plc-ml-3"
