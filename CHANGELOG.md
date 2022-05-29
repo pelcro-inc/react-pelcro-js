@@ -1,3 +1,10 @@
+# [3.2.0-beta.20](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.19...v3.2.0-beta.20) (2022-05-29)
+
+
+### Bug Fixes
+
+* **modal:** modified verifylink modal ([9f2166f](https://github.com/pelcro-inc/react-pelcro-js/commit/9f2166f29e0aac3d22f4551cdf182c70d491df3a))
+
 # [3.2.0-beta.19](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.18...v3.2.0-beta.19) (2022-05-27)
 
 
