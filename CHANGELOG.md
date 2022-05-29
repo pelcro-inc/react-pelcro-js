@@ -1,3 +1,10 @@
+# [3.2.0-beta.19](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.18...v3.2.0-beta.19) (2022-05-27)
+
+
+### Features
+
+* **modal:** added verifylink modal ([b775cbb](https://github.com/pelcro-inc/react-pelcro-js/commit/b775cbb408e88d7a98a4d9f5302a222595b08fd6))
+
 # [3.2.0-beta.18](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.17...v3.2.0-beta.18) (2022-05-27)
 
 
