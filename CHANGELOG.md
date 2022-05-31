@@ -1,3 +1,10 @@
+# [3.2.0-beta.22](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.21...v3.2.0-beta.22) (2022-05-31)
+
+
+### Bug Fixes
+
+* edit top position of the edit email button ([ac70caf](https://github.com/pelcro-inc/react-pelcro-js/commit/ac70caf6dd87973e0adda76d331f22475145bb9c))
+
 # [3.2.0-beta.21](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.20...v3.2.0-beta.21) (2022-05-31)
 
 
