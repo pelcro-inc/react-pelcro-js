@@ -21,8 +21,6 @@ import { getErrorMessages } from "../common/Helpers";
 const initialState = {
   email: window.Pelcro.user.read()?.email,
   emailError: null,
-  emailConfirm: "",
-  emailConformError: null,
   firstName: window.Pelcro.user.read()?.first_name,
   lastName: window.Pelcro.user.read()?.last_name,
   displayName: window.Pelcro.user.read()?.display_name,
