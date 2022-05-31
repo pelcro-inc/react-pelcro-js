@@ -1,9 +1,7 @@
 {
   "validation": {
     "validEmail": "le courriel n’est pas valide",
-    "validEmailConfirm": "L'e-mail de confirmation ne correspond pas à l'adresse e-mail",
     "enterEmail": "Un courriel est requis.",
-    "enterEmailConfirm": "Une confirmation par e-mail est requise.",
     "enterPassword": "Mot de passe requis.",
     "confirmPassword": "Confirmer le mot de passe requis."
   },

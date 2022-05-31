@@ -5,17 +5,14 @@ import React, {
   useCallback
 } from "react";
 import { useTranslation } from "react-i18next";
-import {
-  SET_EMAIL,
-  SET_EMAIL_ERROR,
-  DISABLE_USER_UPDATE_BUTTON
-} from "../utils/action-types";
+import { SET_EMAIL, SET_EMAIL_ERROR } from "../utils/action-types";
 import { Input } from "./Input";
 
 export function Email({
   initWithUserEmail = true,
   disableEmailValidation,
   store,
+  enableEmailEdit,
   ...otherProps
 }) {
   const { t } = useTranslation("common");
@@ -26,8 +23,6 @@ export function Email({
   } = useContext(store);
   const [email, setEmail] = useState(stateEmail);
   const [finishedTyping, setFinishedTyping] = useState(false);
-
-  console.log(emailError);
 
   const handleInputChange = useCallback(
     (value) => {
@@ -51,20 +46,22 @@ export function Email({
             type: SET_EMAIL_ERROR,
             payload: t("validation.validEmail")
           });
-
-          dispatch({ type: SET_EMAIL, payload: value });
         } else {
           dispatch({
             type: SET_EMAIL_ERROR,
             payload: t("validation.enterEmail")
           });
-
-          dispatch({ type: SET_EMAIL, payload: value });
         }
       }
     },
     [dispatch, email, finishedTyping]
   );
+
+  useEffect(() => {
+    if (!enableEmailEdit) {
+      loadEmailIntoField();
+    }
+  }, [enableEmailEdit]);
 
   useEffect(() => {
     handleInputChange(email);

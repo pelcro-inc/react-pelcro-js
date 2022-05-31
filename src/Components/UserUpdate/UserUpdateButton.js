@@ -10,7 +10,7 @@ export const UserUpdateButton = ({
   ...otherProps
 }) => {
   const {
-    state: { buttonDisabled, emailError, emailConformError },
+    state: { buttonDisabled, emailError },
     dispatch
   } = useContext(store);
 
@@ -22,8 +22,8 @@ export const UserUpdateButton = ({
         dispatch({ type: HANDLE_USER_UPDATE });
         onClick?.();
       }}
-      disabled={buttonDisabled || emailError || emailConformError}
-      isLoading={buttonDisabled && !emailError && !emailConformError}
+      disabled={buttonDisabled || emailError}
+      isLoading={buttonDisabled && !emailError}
       {...otherProps}
     >
       {name ?? t("labels.submit")}

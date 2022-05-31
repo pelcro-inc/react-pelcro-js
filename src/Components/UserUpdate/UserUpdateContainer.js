@@ -7,8 +7,6 @@ import useReducerWithSideEffects, {
 import {
   SET_EMAIL,
   SET_EMAIL_ERROR,
-  SET_EMAIL_CONFRIM,
-  SET_EMAIL_CONFORM_ERROR,
   SET_FIRST_NAME,
   SET_LAST_NAME,
   SET_DISPLAY_NAME,
@@ -150,18 +148,6 @@ const UserUpdateContainer = ({
           return Update({
             ...state,
             emailError: action.payload
-          });
-
-        case SET_EMAIL_CONFRIM:
-          return Update({
-            ...state,
-            emailConfirm: action.payload
-          });
-
-        case SET_EMAIL_CONFORM_ERROR:
-          return Update({
-            ...state,
-            emailConformError: action.payload
           });
 
         case SET_FIRST_NAME:

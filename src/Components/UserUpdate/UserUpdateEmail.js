@@ -1,48 +1,57 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { store } from "./UserUpdateContainer";
+import { SET_EMAIL, SET_EMAIL_ERROR } from "../../utils/action-types";
 import { Email } from "../../SubComponents/Email";
-import { EmailConfirm } from "../../SubComponents/EmailConfirm";
 import { ReactComponent as EditIcon } from "../../assets/edit.svg";
+import { ReactComponent as CancelIcon } from "../../assets/x-icon.svg";
 import { Button } from "../../SubComponents/Button";
 
 export const UserUpdateEmail = (props) => {
-  const [showEmailConfirm, setShowEmailConfirm] = useState(false);
+  const {
+    dispatch,
+    state: { email, emailError }
+  } = useContext(store);
+  const [enableEmailEdit, setEnableEmailEdit] = useState(false);
   const { t } = useTranslation("userEdit");
 
-  const handleShowEmailConfirm = () => {
-    setShowEmailConfirm(true);
+  const handleEnableEmailEdit = () => {
+    if (enableEmailEdit) {
+      dispatch({ type: SET_EMAIL, payload: email });
+      dispatch({
+        type: SET_EMAIL_ERROR,
+        payload: null
+      });
+      setEnableEmailEdit(false);
+    } else {
+      setEnableEmailEdit(true);
+    }
   };
 
   return (
     <div>
       <div className="plc-flex plc-items-start plc-relative">
         <Email
-          disabled={!showEmailConfirm}
+          disabled={!enableEmailEdit}
           store={store}
           label={t("labels.email")}
+          enableEmailEdit={enableEmailEdit}
           {...props}
         />
-        {showEmailConfirm || (
-          <Button
-            variant="icon"
-            className="plc-absolute plc-rounded-none plc-text-gray-500 plc-w-10 plc-h-10 plc-top-6 plc-right-0 hover:plc-text-gray-900 hover:plc-bg-transparent"
-            icon={<EditIcon />}
-            id={"pelcro-user-update-picture-button"}
-            onClick={handleShowEmailConfirm}
-          />
-        )}
+        <Button
+          variant="icon"
+          className="plc-absolute  plc-rounded-none plc-text-gray-500 plc-w-10 plc-h-10 plc-top-6 plc-right-0 hover:plc-text-gray-900 hover:plc-bg-transparent focus:plc-ring-0 focus:plc-shadow-none"
+          icon={
+            enableEmailEdit ? (
+              <CancelIcon className="plc-w-6" />
+            ) : (
+              <EditIcon />
+            )
+          }
+          id={"pelcro-user-update-picture-button"}
+          onClick={handleEnableEmailEdit}
+        />
       </div>
-
-      {showEmailConfirm && (
-        <div className="plc-flex plc-items-start">
-          <EmailConfirm
-            store={store}
-            label={t("labels.emailConfirm")}
-            {...props}
-          />
-        </div>
-      )}
     </div>
   );
 };
