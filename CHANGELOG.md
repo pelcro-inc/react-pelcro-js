@@ -1,3 +1,10 @@
+# [3.2.0-beta.21](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.20...v3.2.0-beta.21) (2022-05-31)
+
+
+### Bug Fixes
+
+* remove unused entries in initialState in UserUpdateContainer ([246182c](https://github.com/pelcro-inc/react-pelcro-js/commit/246182c6d24788b92cff1d58d2d892f0d0d5e9c4))
+
 # [3.2.0-beta.20](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.19...v3.2.0-beta.20) (2022-05-29)
 
 
