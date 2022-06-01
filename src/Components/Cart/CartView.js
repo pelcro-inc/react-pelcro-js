@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { CartContainer } from "./CartContainer";
 import { CartRemoveItemButton } from "./CartRemoveItemButton";
@@ -8,11 +8,22 @@ import { calcAndFormatItemsTotal } from "../../utils/utils";
 import { usePelcro } from "../../hooks/usePelcro";
 import { AlertWithContext } from "../../SubComponents/AlertWithContext";
 import { CartTotalPrice } from "./CartTotalPrice";
+import {
+  cartOpened,
+  cartItemRemoved,
+  orderCheckedOut
+} from "../../utils/events";
 
 export const CartView = (props) => {
   const { cartItems } = usePelcro();
 
+  const totalPriceCurrency = cartItems[0].currency;
+
   const { t } = useTranslation("cart");
+
+  useEffect(() => {
+    document.dispatchEvent(cartOpened(cartItems));
+  }, []);
 
   return (
     <div id="pelcro-cart-view">
@@ -55,6 +66,9 @@ export const CartView = (props) => {
                       itemId={item.id}
                       id={`pelcro-remove-product-${item.id}`}
                       aria-label="remove item from cart"
+                      onClick={() =>
+                        document.dispatchEvent(cartItemRemoved(item))
+                      }
                     />
                   </div>
                 );
@@ -69,6 +83,17 @@ export const CartView = (props) => {
               id="pelcro-submit"
               name={t("confirm")}
               autoFocus={true}
+              onClick={() =>
+                document.dispatchEvent(
+                  orderCheckedOut({
+                    items: cartItems,
+                    totalPrice: calcAndFormatItemsTotal(
+                      cartItems,
+                      totalPriceCurrency
+                    )
+                  })
+                )
+              }
             />
           </CartContainer>
         </form>

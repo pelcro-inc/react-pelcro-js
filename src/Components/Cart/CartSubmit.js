@@ -4,7 +4,7 @@ import { HANDLE_SUBMIT } from "../../utils/action-types";
 import { Button } from "../../SubComponents/Button";
 import { useTranslation } from "react-i18next";
 
-export const CartSubmit = ({ name, ...otherProps }) => {
+export const CartSubmit = ({ name, onClick, ...otherProps }) => {
   const {
     state: { buttonDisabled },
     dispatch
@@ -15,7 +15,10 @@ export const CartSubmit = ({ name, ...otherProps }) => {
   return (
     <Button
       {...otherProps}
-      onClick={() => dispatch({ type: HANDLE_SUBMIT })}
+      onClick={() => {
+        dispatch({ type: HANDLE_SUBMIT });
+        onClick?.();
+      }}
       disabled={buttonDisabled}
     >
       {name ?? t("confirm")}
