@@ -4,24 +4,14 @@ import { CartContainer } from "./CartContainer";
 import { CartRemoveItemButton } from "./CartRemoveItemButton";
 import { CartSubmit } from "./CartSubmit";
 import { Badge } from "../../SubComponents/Badge";
-import {
-  calcAndFormatItemsTotal,
-  calcOrderAmount
-} from "../../utils/utils";
+import { calcAndFormatItemsTotal } from "../../utils/utils";
 import { usePelcro } from "../../hooks/usePelcro";
 import { AlertWithContext } from "../../SubComponents/AlertWithContext";
 import { CartTotalPrice } from "./CartTotalPrice";
-import {
-  cartOpened,
-  cartItemRemoved,
-  orderCheckedOut
-} from "../../utils/events";
+import { cartOpened, cartItemRemoved } from "../../utils/events";
 
 export const CartView = (props) => {
   const { cartItems } = usePelcro();
-
-  const totalPriceCurrency = cartItems[0].currency;
-  const user_id = window.Pelcro.user.read().id;
 
   const { t } = useTranslation("cart");
 
@@ -87,18 +77,6 @@ export const CartView = (props) => {
               id="pelcro-submit"
               name={t("confirm")}
               autoFocus={true}
-              onClick={() =>
-                document.dispatchEvent(
-                  orderCheckedOut({
-                    order: {
-                      user_id,
-                      currency: totalPriceCurrency,
-                      amount: calcOrderAmount(cartItems),
-                      items: cartItems
-                    }
-                  })
-                )
-              }
             />
           </CartContainer>
         </form>
