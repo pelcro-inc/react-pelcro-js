@@ -5,51 +5,53 @@ import ReactGA from "react-ga";
 /**
  * List of zero-decimal currencies.
  * @see https://stripe.com/docs/currencies#zero-decimal
- * 
+ *
  */
 export const ZERO_DECIMAL_CURRENCIES = [
-  'BIF',
-  'CLP',
-  'DJF',
-  'GNF',
-  'JPY',
-  'KMF',
-  'KRW',
-  'MGA',
-  'PYG',
-  'RWF',
-  'UGX',
-  'VND',
-  'VUV',
-  'XAF',
-  'XOF',
-  'XPF'
+  "BIF",
+  "CLP",
+  "DJF",
+  "GNF",
+  "JPY",
+  "KMF",
+  "KRW",
+  "MGA",
+  "PYG",
+  "RWF",
+  "UGX",
+  "VND",
+  "VUV",
+  "XAF",
+  "XOF",
+  "XPF"
 ];
 
 /**
  * @param {string}
  * @return {boolean}
  */
-export const isCurrencyZeroDecimal = (currency) => 
-  ZERO_DECIMAL_CURRENCIES.includes(currency);
+export const isCurrencyZeroDecimal = (currency) =>
+  ZERO_DECIMAL_CURRENCIES.includes(currency.toUpperCase());
 
-export const formatDiscountedPrice = (planAmount, percentageOff, planCurrency) =>
+export const formatDiscountedPrice = (
+  planAmount,
+  percentageOff,
+  planCurrency
+) =>
   isCurrencyZeroDecimal(planCurrency)
     ? parseFloat(
         parseFloat(
-          (parseInt(planAmount)) *
-          (1 - parseInt(percentageOff) / 100)
-        )
-        .toString()
-    )
+          parseInt(planAmount) * (1 - parseInt(percentageOff) / 100)
+        ).toString()
+      )
     : parseFloat(
         parseFloat(
           (parseInt(planAmount) / 100) *
-          (1 - parseInt(percentageOff) / 100)
+            (1 - parseInt(percentageOff) / 100)
         )
-        .toString()
-        .match(/^-?\d+(?:\.\d{0,2})?/)[0]
-    )
+          .toString()
+          .match(/^-?\d+(?:\.\d{0,2})?/)[0]
+      );
 
 export const sortCountries = (countries) => {
   const sortable = [];
@@ -152,10 +154,10 @@ export const getFormattedPriceByLocal = (
       currency
     }
   );
-  
-  return isCurrencyZeroDecimal(currency) ?
-    formatter.format(amount)
-    : formatter.format(amount / 100)
+
+  return isCurrencyZeroDecimal(currency)
+    ? formatter.format(amount)
+    : formatter.format(amount / 100);
 };
 
 /** check wether or not the user have any addresses
@@ -174,11 +176,11 @@ export const calcAndFormatItemsTotal = (items, currency) => {
     totalWithoutDividingBy100 += parseFloat(
       item.price
         ? isCurrencyZeroDecimal(currency)
-            ? (item.price * item.quantity) 
-            : (item.price * item.quantity).toFixed(2) 
+          ? item.price * item.quantity
+          : (item.price * item.quantity).toFixed(2)
         : isCurrencyZeroDecimal(currency)
-            ? item.amount
-            : item.amount.toFixed(2)
+        ? item.amount
+        : item.amount.toFixed(2)
     );
   }
 
@@ -300,8 +302,8 @@ export const trackSubscriptionOnGA = () => {
   if (!lastSubscriptionId) {
     return;
   }
-  
-  const currencyCode = 
+
+  const currencyCode =
     window.Pelcro.user.read()?.currency ?? plan.currency;
 
   ReactGA?.set?.({
@@ -311,7 +313,11 @@ export const trackSubscriptionOnGA = () => {
   ReactGA?.plugin?.execute?.("ecommerce", "addTransaction", {
     id: lastSubscriptionId,
     affiliation: "Pelcro",
-    revenue: plan?.amount ? isCurrencyZeroDecimal(currencyCode) ? plan.amount : plan.amount / 100 : 0,
+    revenue: plan?.amount
+      ? isCurrencyZeroDecimal(currencyCode)
+        ? plan.amount
+        : plan.amount / 100
+      : 0,
     coupon: couponCode
   });
 
@@ -320,7 +326,11 @@ export const trackSubscriptionOnGA = () => {
     name: product.name,
     category: product.description,
     variant: plan.nickname,
-    price: plan?.amount ? isCurrencyZeroDecimal(currencyCode) ? plan.amount : plan.amount / 100 : 0,
+    price: plan?.amount
+      ? isCurrencyZeroDecimal(currencyCode)
+        ? plan.amount
+        : plan.amount / 100
+      : 0,
     quantity: 1
   });
 
