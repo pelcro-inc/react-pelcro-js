@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Authorship from "../common/Authorship";
 import { useTranslation } from "react-i18next";
 import {
@@ -15,16 +15,11 @@ import {
   getPageOrDefaultLanguage
 } from "../../utils/utils";
 import { usePelcro } from "../../hooks/usePelcro";
-import { orderCheckedOut } from "../../utils/events";
 
 export const OrderConfirmModal = (props) => {
   const userOrders = window.Pelcro.user.read().orders;
   const latestOrder = userOrders?.[userOrders.length - 1];
   const latestOrderDiscount = latestOrder?.coupon?.percent_off;
-
-  console.log("user orders", userOrders);
-  console.log("lates order", latestOrder);
-  console.log("latest order discount", latestOrderDiscount);
 
   const { t } = useTranslation("shop");
 
@@ -34,14 +29,6 @@ export const OrderConfirmModal = (props) => {
     props?.onClose?.();
     resetView();
   };
-
-  useEffect(() => {
-    document.dispatchEvent(
-      orderCheckedOut({
-        order: latestOrder
-      })
-    );
-  }, []);
 
   return (
     <Modal
