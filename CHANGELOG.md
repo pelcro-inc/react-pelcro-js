@@ -1,3 +1,10 @@
+# [3.2.0-beta.24](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.23...v3.2.0-beta.24) (2022-06-07)
+
+
+### Bug Fixes
+
+* edit the isCurrencyZeroDecimal function to be case insensitive ([#153](https://github.com/pelcro-inc/react-pelcro-js/issues/153)) ([0ebca0d](https://github.com/pelcro-inc/react-pelcro-js/commit/0ebca0d6e268bf473548d85f7d5591069cf6feba))
+
 # [3.2.0-beta.23](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.22...v3.2.0-beta.23) (2022-06-07)
 
 
