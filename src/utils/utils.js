@@ -31,7 +31,7 @@ export const ZERO_DECIMAL_CURRENCIES = [
  * @return {boolean}
  */
 export const isCurrencyZeroDecimal = (currency) =>
-  ZERO_DECIMAL_CURRENCIES.includes(currency);
+  ZERO_DECIMAL_CURRENCIES.includes(currency.toUpperCase());
 
 export const formatDiscountedPrice = (
   planAmount,
