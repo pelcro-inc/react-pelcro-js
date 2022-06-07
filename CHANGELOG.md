@@ -1,3 +1,10 @@
+# [3.2.0-beta.23](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.22...v3.2.0-beta.23) (2022-06-07)
+
+
+### Bug Fixes
+
+* **deploy:** reformatted the index.html to force new version ([046973f](https://github.com/pelcro-inc/react-pelcro-js/commit/046973fb683af3e32fc2ecc0a193d4208d2de7ec))
+
 # [3.2.0-beta.22](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.21...v3.2.0-beta.22) (2022-05-31)
 
 
