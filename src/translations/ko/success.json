@@ -1,0 +1,30 @@
+{
+    "labels": {
+      "continue": "콘텐츠로 돌아가기"
+    },
+    "messages": {
+      "yourFreeTrial": "유료 멤버십에 가입하셨습니다!",
+      "youHaveAccess": "멤버십 혜택을 즐기시기를 바라며, 질문이나 문의 사항이 있으면 저희에게 연락주십시오.",
+      "clickToLearn": {
+        "click": "여기를",
+        "here": "클릭하여",
+        "toLearn": "자세히 알아보거나 ",
+        "forQuestion": "를 통해 당사에 문의주십시오."
+      },
+      "giftCreate": {
+        "title": "귀하의 선물이 전송되었습니다.",
+        "content": "선물 사용 방법이 안내된 이메일이 받는 사람에게 전송됩니다."
+      },
+      "giftRedeem": {
+        "title": "축하합니다!",
+        "content": "선물받은 유료 멤버십을 성공적으로 사용하셨습니다. 이제 즐겨보세요!"
+      },
+      "invoicePayment": {
+        "title": "인보이스 지불에 성공했습니다.",
+        "content": "질문이나 문의 사항이 있으면 저희에게 연락주시기 바랍니다."
+      }
+    },
+    "errors": {
+      "": ""
+    }
+  }

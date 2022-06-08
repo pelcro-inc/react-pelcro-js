@@ -1,0 +1,20 @@
+{
+    "title": "Frieze 뉴스레터를 구독하려면 이메일을 입력하세요.",
+    "updateTitle": "뉴스레터 선택 업데이트",
+    "subtitle": "귀하의 이메일은 다른 마케팅 용도로도 사용됩니다.",
+    "labels": {
+      "submit": "제출",
+      "firstName": "이름",
+      "lastName": "성",
+      "email": "이메일",
+      "postalCode": "우편번호",
+      "required": "필수 항목"
+    },
+    "messages": {
+      "alreadyHaveAccount": "이미 계정이 있습니까?",
+      "success": "뉴스레터가 성공적으로 업데이트되었습니다.",
+      "loginHere": "여기에서 로그인하세요.",
+      "createAnAccount": " 계정을 만들려면 여기를 ",
+      "here": "클릭하세요."
+    }
+  }
