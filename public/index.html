@@ -189,5 +189,47 @@
     </div>
 
     <div id="pelcro-shop"></div>
+
+    <script>
+      
+      document.addEventListener("PelcroUserLoggedIn", function(e) {
+        console.log("PelcroUserLoggedIn", e);
+      });
+
+      document.addEventListener("PelcroUserLogin", function(e) {
+        console.log("PelcroUserLogin", e);
+      });
+
+      document.addEventListener("PelcroNewsletterCreated", function(
+        e
+      ) {
+        console.log("PelcroNewsletterCreated", e);
+      });
+
+      document.addEventListener("PelcroOrderCreate", function(e) {
+        console.log("PelcroOrderCreate", e);
+      });
+
+      document.addEventListener("PelcroOrderCreated", function(e) {
+        console.log("PelcroOrderCreated", e);
+      });
+
+      document.addEventListener("PelcroSubscriptionRenewed", function(
+        e
+      ) {
+        console.log("PelcroSubscriptionRenewed", e);
+      });
+
+      document.addEventListener(
+        "PelcroSubscriptionReactivated",
+        function(e) {
+          console.log("PelcroSubscriptionReactivated", e);
+        }
+      );
+
+      document.addEventListener("PelcroGiftRedeemed", function(e) {
+        console.log("PelcroGiftRedeemed", e);
+      });
+    </script>
   </body>
 </html>
