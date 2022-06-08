@@ -1,3 +1,10 @@
+# [3.2.0-beta.27](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.26...v3.2.0-beta.27) (2022-06-08)
+
+
+### Bug Fixes
+
+* **beta:** for new beta ([c0b245c](https://github.com/pelcro-inc/react-pelcro-js/commit/c0b245cf0fdd3aa9304c625f81a8888035e9473f))
+
 # [3.2.0-beta.26](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.25...v3.2.0-beta.26) (2022-06-08)
 
 
