@@ -26,7 +26,7 @@ import login_fr from "./translations/fr/login.json";
 import login_ko from "./translations/ko/login.json";
 import verifyLinkToken_en from "./translations/en/verifyLinkToken.json";
 import verifyLinkToken_fr from "./translations/fr/verifyLinkToken.json";
-import verifyLinkToken_ko from "./translations/ko/verifyLinkToken.json";
+// import verifyLinkToken_ko from "./translations/ko/verifyLinkToken.json";
 import register_en from "./translations/en/register.json";
 import register_fr from "./translations/fr/register.json";
 import register_ko from "./translations/ko/register.json";
@@ -131,7 +131,7 @@ const resources = {
     checkoutForm: checkoutForm_ko,
     messages: messages_ko,
     login: login_ko,
-    verifyLinkToken: verifyLinkToken_ko,
+    // verifyLinkToken: verifyLinkToken_ko,
     register: register_ko,
     userEdit: userEdit_ko,
     address: address_ko,
