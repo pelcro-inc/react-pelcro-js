@@ -1,0 +1,14 @@
+{
+    "title": "인보이스 세부 정보",
+    "labels": {
+      "summary": "요약",
+      "total": "총계",
+      "amountPaid": "지불된 금액",
+      "amountDue": "지불액",
+      "creationDate": "생성일:"
+    },
+    "buttons": {
+      "download": "다운로드",
+      "pay": "지금 지불"
+    }
+  }

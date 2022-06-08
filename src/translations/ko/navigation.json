@@ -1,0 +1,9 @@
+{
+    "customer": {
+        "edit": "프로필",
+        "payment_methods": "결제 수단",
+        "subscriptions": "유료 멤버십",
+        "password": "비밀번호"
+    }
+
+}
