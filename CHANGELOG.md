@@ -1,3 +1,10 @@
+# [3.2.0-beta.25](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.24...v3.2.0-beta.25) (2022-06-08)
+
+
+### Bug Fixes
+
+* edit a typo in PelcroGiftRedeemed event listener ([472c510](https://github.com/pelcro-inc/react-pelcro-js/commit/472c5103ecb8f0137fc0bc4bd0b0565a0816b045))
+
 # [3.2.0-beta.24](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.23...v3.2.0-beta.24) (2022-06-07)
 
 
