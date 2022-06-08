@@ -1,3 +1,10 @@
+# [3.2.0-beta.26](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.25...v3.2.0-beta.26) (2022-06-08)
+
+
+### Bug Fixes
+
+* remove event listeners from the project ([70bb3be](https://github.com/pelcro-inc/react-pelcro-js/commit/70bb3bee36bfd3ebae5e6efdde15d92d51465422))
+
 # [3.2.0-beta.25](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.24...v3.2.0-beta.25) (2022-06-08)
 
 
