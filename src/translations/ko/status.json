@@ -1,7 +1,0 @@
-{
-    "chargeable":"결제 금액",
-    "pending":"처리 중",
-    "consumed":"사용 완료",
-    "failed":"결제 실패",
-    "canceled":"결제 취소"
-}

@@ -69,18 +69,6 @@ import verifyEmail_ko from "./translations/ko/verifyEmail.json";
 import invoiceDetails_en from "./translations/en/InvoiceDetails.json";
 import invoiceDetails_fr from "./translations/fr/InvoiceDetails.json";
 import invoiceDetails_ko from "./translations/ko/InvoiceDetails.json";
-
-import auth_ko from "./translations/ko/auth.json";
-import navigation_ko from "./translations/ko/navigation.json";
-import pagination_ko from "./translations/ko/pagination.json";
-import passwords_ko from "./translations/ko/passwords.json";
-import routes_ko from "./translations/ko/routes.json";
-import status_ko from "./translations/ko/status.json";
-import stripe_ko from "./translations/ko/stripe.json";
-import subscriptionOptions_ko from "./translations/ko/subscriptionOptions.json";
-import translations_ko from "./translations/ko/translations.json";
-import validation_ko from "./translations/ko/validation.json";
-
 import { getPageOrDefaultLanguage } from "./utils/utils";
 
 const resources = {
@@ -157,17 +145,7 @@ const resources = {
     dashboard: dashboard_ko,
     select: select_ko,
     notification: notification_ko,
-    invoiceDetails: invoiceDetails_ko,
-    auth: auth_ko,
-    navigation: navigation_ko,
-    pagination: pagination_ko,
-    passwords: passwords_ko,
-    routes: routes_ko,
-    status: status_ko,
-    stripe: stripe_ko,
-    subscriptionOptions: subscriptionOptions_ko,
-    translations: translations_ko,
-    validation: validation_ko
+    invoiceDetails: invoiceDetails_ko
   }
 };
 
