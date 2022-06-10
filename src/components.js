@@ -10,6 +10,7 @@ export { Password } from "./SubComponents/Password";
 export { ConfirmPassword } from "./SubComponents/ConfirmPassword";
 export { Logout } from "./SubComponents/Logout";
 export { LoginButton } from "./Components/Login/LoginButton";
+export { LoginRequestLoginToken } from "./Components/Login/LoginRequestLoginToken";
 export { LoginEmail } from "./Components/Login/LoginEmail";
 export { LoginPassword } from "./Components/Login/LoginPassword";
 export { LoginView } from "./Components/Login/LoginView";

@@ -5,7 +5,8 @@
     "required": "Champs obligatoires",
     "emailPlaceholder": "Adresse courriel",
     "passwordPlaceholder": "Mot de passe",
-    "login": "Connexion"
+    "login": "Connexion",
+    "passwordless": "Connexion sans mot de passe"
   },
   "messages": {
     "loginTo": "Connectez-vous à votre compte",
@@ -13,6 +14,7 @@
     "dontHaveAccount": "Vous n’avez pas encore de compte ?",
     "createAccount": "Créer un compte",
     "forgotPassword": "Mot de passe oublié ?",
+    "PasswordlessLoginSuccess": "Vous avez été authentifié avec succès avec la connexion sans mot de passe",
     "reset": {
       "click": "Cliquez",
       "here": "ici",
