@@ -64,7 +64,7 @@ export function LoginView(props) {
             name={t("labels.login")}
             id="pelcro-submit"
           />
-          {/* {passwordlessEnabled && ( */}
+          {passwordlessEnabled && (
             <div className="">
               <div className="plc-flex plc-items-center plc-justify-between ">
                 <hr className="plc-w-full plc-border-gray-300" />
@@ -79,7 +79,7 @@ export function LoginView(props) {
                 id="pelcro-passwordless"
               />
             </div>
-          {/* )} */}
+          )}
           {socialLoginEnabled && (
             <div className="plc-mt-5">
               <div className="plc-flex plc-items-center plc-justify-between ">
