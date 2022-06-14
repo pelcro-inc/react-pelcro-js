@@ -13,6 +13,7 @@ import { PaymentMethodSelectModal } from "./Components/PaymentMethodSelect/Payme
 import { GiftCreateModal } from "./Components/GiftCreate/GiftCreateModal";
 import { GiftRedeemModal } from "./Components/GiftRedeem/GiftRedeemModal";
 import { PasswordForgotModal } from "./Components/PasswordForgot/PasswordForgotModal";
+import { PasswordlessRequestModal } from "./Components/PasswordlessRequest/PasswordlessRequestModal";
 import { PasswordChangeModal } from "./Components/PasswordChange/PasswordChangeModal";
 import { PasswordResetModal } from "./Components/PasswordReset/PasswordResetModal";
 import { MeterModal } from "./Components/Meter/MeterModal";
@@ -47,6 +48,7 @@ export const Main = () => {
       <DashboardOpenButton />
       <ProfilePicChangeModal />
       <PasswordForgotModal />
+      <PasswordlessRequestModal/>
       <PasswordChangeModal />
       <PasswordResetModal />
 

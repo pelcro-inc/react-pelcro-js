@@ -115,7 +115,7 @@ export const Auth0LoginButton = ({
     return (
       <button
         onClick={handleClick}
-        className={`plc-flex plc-items-center plc-justify-center plc-w-full plc-p-3 plc-space-x-3 plc-text-gray-700 plc-border plc-border-gray-200 plc-rounded-3xl hover:plc-bg-gray-200 pelcro-auth0-login ${className}`}
+        className={`plc-flex plc-items-center plc-justify-center plc-p-3 plc-space-x-3 plc-text-gray-700 plc-border plc-border-gray-200 plc-rounded-3xl hover:plc-bg-gray-200 pelcro-auth0-login ${className}`}
       >
         <Auth0LogoIcon
           className={`plc-w-6 plc-h-auto pelcro-auth0-login-icon" ${iconClassName}`}

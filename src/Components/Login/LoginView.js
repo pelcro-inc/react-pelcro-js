@@ -64,22 +64,6 @@ export function LoginView(props) {
             name={t("labels.login")}
             id="pelcro-submit"
           />
-          {passwordlessEnabled && (
-            <div className="">
-              <div className="plc-flex plc-items-center plc-justify-between ">
-                <hr className="plc-w-full plc-border-gray-300" />
-                <span className="plc-flex-shrink-0 plc-p-2 plc-text-xs plc-text-gray-400 plc-uppercase">
-                  {t("messages.socialLogin.label")}
-                </span>
-                <hr className="plc-w-full plc-border-gray-300" />
-              </div>
-              <LoginRequestLoginToken
-                className="plc-w-full plc-mt-2"
-                name={t("labels.passwordless")}
-                id="pelcro-passwordless"
-              />
-            </div>
-          )}
           {socialLoginEnabled && (
             <div className="plc-mt-5">
               <div className="plc-flex plc-items-center plc-justify-between ">
@@ -89,10 +73,16 @@ export function LoginView(props) {
                 </span>
                 <hr className="plc-w-full plc-border-gray-300" />
               </div>
-              <div className="plc-flex plc-justify-center plc-px-5 plc-mt-1 plc-space-x-3">
+              <div className="plc-flex plc-justify-center plc-flex-wrap plc-px-5 plc-mt-1 plc-space-x-3">
                 <GoogleLoginButton />
                 <FacebookLoginButton />
                 <Auth0LoginButton />
+                {passwordlessEnabled && ( 
+                  <LoginRequestLoginToken
+                    className="plc-mt-2"
+                    onClick={props.onPasswordlessRequest}
+                  />
+                )}
               </div>
             </div>
           )}

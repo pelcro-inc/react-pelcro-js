@@ -45,6 +45,9 @@ import passwordForgot_ko from "./translations/ko/passwordForgot.json";
 import passwordChange_en from "./translations/en/passwordChange.json";
 import passwordChange_fr from "./translations/fr/passwordChange.json";
 import passwordChange_ko from "./translations/ko/passwordChange.json";
+import passwordlessRequest_en from "./translations/en/passwordlessRequest.json";
+import passwordlessRequest_fr from "./translations/fr/passwordlessRequest.json";
+import passwordlessRequest_ko from "./translations/ko/passwordlessRequest.json";
 import cart_fr from "./translations/fr/cart.json";
 import cart_en from "./translations/en/cart.json";
 import cart_ko from "./translations/ko/cart.json";
@@ -88,6 +91,7 @@ const resources = {
     passwordReset: passwordReset_en,
     passwordForgot: passwordForgot_en,
     passwordChange: passwordChange_en,
+    passwordlessRequest: passwordlessRequest_en,
     verifyEmail: verifyEmail_en,
     cart: cart_en,
     shop: shop_en,
@@ -113,6 +117,7 @@ const resources = {
     passwordReset: passwordReset_fr,
     passwordForgot: passwordForgot_fr,
     passwordChange: passwordChange_fr,
+    passwordlessRequest: passwordlessRequest_fr,
     verifyEmail: verifyEmail_fr,
     cart: cart_fr,
     shop: shop_fr,
@@ -138,6 +143,7 @@ const resources = {
     passwordReset: passwordReset_ko,
     passwordForgot: passwordForgot_ko,
     passwordChange: passwordChange_ko,
+    passwordlessRequest: passwordlessRequest_ko,
     verifyEmail: verifyEmail_ko,
     cart: cart_ko,
     shop: shop_ko,

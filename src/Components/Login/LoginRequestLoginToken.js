@@ -1,41 +1,29 @@
-import React, { useContext, useState, useEffect } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
-import { Button } from "../../SubComponents/Button";
-import { HANDLE_PASSWORDLESS_LOGIN } from "../../utils/action-types";
-import { store } from "./LoginContainer";
+import { ReactComponent as PasswordlessLogoIcon } from "../../assets/email-verify.svg";
 
-export const LoginRequestLoginToken = ({ name, onClick, ...otherProps }) => {
-  const {
-    state: {
-      emailError,
-      email,
-      passwordlessButtonDisabled
-    },
-    dispatch
-  } = useContext(store);
+export const LoginRequestLoginToken = ({ 
+  name, 
+  onClick, 
+  className = "", 
+  labelClassName = "", 
+  iconClassName = "",  
+  ...otherProps 
+}) => {
 
-  const { t } = useTranslation("login");
-
-  const [isDisabled, setDisabled] = useState(false);
-
-  useEffect(() => {
-    setDisabled(
-      emailError ||
-      !email.length
-    );
-  }, [emailError, email, passwordlessButtonDisabled]);
+  const { t } = useTranslation("passwordlessRequest");
 
   return (
-    <Button
-      onClick={() => {
-        dispatch({ type: HANDLE_PASSWORDLESS_LOGIN });
-        onClick?.();
-      }}
-      disabled={isDisabled}
-      isLoading={passwordlessButtonDisabled}
-      {...otherProps}
+    <button
+      onClick={() => onClick?.()}
+      className={`plc-flex plc-items-center plc-mt-3 plc-justify-center plc-p-3 plc-space-x-3 plc-text-gray-700 plc-border plc-border-gray-200 plc-rounded-3xl hover:plc-bg-gray-200 pelcro-auth0-login ${className}`}
     >
-      {name ?? t("labels.passwordless")}
-    </Button>
+      <PasswordlessLogoIcon
+        className={`plc-w-6 plc-h-auto" ${iconClassName}`}
+      />
+      <p className={`${labelClassName}`}>
+        {name ?? t("title")}
+      </p>
+    </button>
   );
 };

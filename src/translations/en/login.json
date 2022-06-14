@@ -5,8 +5,7 @@
     "required": "required",
     "emailPlaceholder": "Email",
     "passwordPlaceholder": "Password",
-    "login": "Login",
-    "passwordless": "Passwordless Login"
+    "login": "Login"
   },
   "messages": {
     "loginTo": "Login to your account",
@@ -14,7 +13,6 @@
     "dontHaveAccount": "Don't have an account yet?",
     "createAccount": "Create an account.",
     "forgotPassword": "Forgot your password?",
-    "PasswordlessLoginSuccess": "You have been successfully authenticated with Passwordless Login",
     "reset": {
       "click": "Click",
       "here": "here",

@@ -117,6 +117,11 @@ export { PasswordForgotContainer } from "./Components/PasswordForgot/PasswordFor
 export { PasswordForgotEmail } from "./Components/PasswordForgot/PasswordForgotEmail";
 export { PasswordForgotModal } from "./Components/PasswordForgot/PasswordForgotModal";
 export { PasswordForgotView } from "./Components/PasswordForgot/PasswordForgotView";
+export { PasswordlessRequestContainer } from "./Components/PasswordlessRequest/PasswordlessRequestContainer";
+export { PasswordlessRequestViewButton } from "./Components/PasswordlessRequest/PasswordlessRequestButton";
+export { PasswordlessRequestEmail } from "./Components/PasswordlessRequest/PasswordlessRequestEmail";
+export { PasswordlessRequestModal } from "./Components/PasswordlessRequest/PasswordlessRequestModal";
+export { PasswordlessRequestView } from "./Components/PasswordlessRequest/PasswordlessRequestView";
 
 export { PasswordChangeView } from "./Components/PasswordChange/PasswordChangeView";
 export { PasswordChangeContainer } from "./Components/PasswordChange/PasswordChangeContainer";

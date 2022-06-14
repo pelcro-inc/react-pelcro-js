@@ -219,6 +219,7 @@ export const isValidViewFromURL = (viewID) => {
       "password-reset",
       "password-change",
       "passwordless-login",
+      "passwordless-request",
       "payment-method-update",
       "user-edit",
       "newsletter",

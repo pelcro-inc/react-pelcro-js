@@ -12,14 +12,11 @@ import {
   SET_PASSWORD_ERROR,
   RESET_LOGIN_FORM,
   HANDLE_LOGIN,
-  HANDLE_PASSWORDLESS_LOGIN,
   DISABLE_LOGIN_BUTTON,
-  DISABLE_PASSWORDLESS_LOGIN_BUTTON,
   SHOW_ALERT,
   HANDLE_SOCIAL_LOGIN
 } from "../../utils/action-types";
 import { getErrorMessages } from "../common/Helpers";
-import { notify } from "../../SubComponents/Notification";
 
 const initialState = {
   email: "",
@@ -27,7 +24,6 @@ const initialState = {
   emailError: null,
   passwordError: null,
   buttonDisabled: false,
-  passwordlessButtonDisabled: false,
   alert: {
     type: "error",
     content: ""
@@ -43,9 +39,7 @@ const LoginContainer = ({
   onFailure = () => {},
   children
 }) => {
-
-  const { t } = useTranslation("login");
-
+  
   const handleLogin = ({ email, password }, dispatch) => {
     window.Pelcro.user.login({ email, password }, (err, res) => {
       dispatch({ type: DISABLE_LOGIN_BUTTON, payload: false });
@@ -58,23 +52,6 @@ const LoginContainer = ({
         onFailure(err);
       } else {
         onSuccess(res);
-      }
-    });
-  };
-
-  const handlePasswordlessLogin = ({ email }, dispatch) => {
-    window.Pelcro.user.requestLoginToken({ email }, (err, res) => {
-      dispatch({ type: DISABLE_PASSWORDLESS_LOGIN_BUTTON, payload: false });
-
-      if (err) {
-        dispatch({
-          type: SHOW_ALERT,
-          payload: { type: "error", content: getErrorMessages(err) }
-        });
-        onFailure(err);
-      } else {
-        onSuccess(res);
-        notify.success(t("messages.PasswordlessLoginSuccess"));
       }
     });
   };
@@ -148,17 +125,10 @@ const LoginContainer = ({
           return initialState;
         case DISABLE_LOGIN_BUTTON:
           return Update({ ...state, buttonDisabled: action.payload });
-        case DISABLE_PASSWORDLESS_LOGIN_BUTTON:
-          return Update({ ...state, passwordlessButtonDisabled: action.payload });
         case HANDLE_LOGIN:
           return UpdateWithSideEffect(
             { ...state, buttonDisabled: true },
             (state, dispatch) => handleLogin(state, dispatch)
-          );
-        case HANDLE_PASSWORDLESS_LOGIN:
-          return UpdateWithSideEffect(
-            { ...state, passwordlessButtonDisabled: true },
-            (state, dispatch) => handlePasswordlessLogin(state, dispatch)
           );
         case HANDLE_SOCIAL_LOGIN:
           return SideEffect(() => handleSocialLogin(action.payload));
