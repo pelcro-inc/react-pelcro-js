@@ -132,6 +132,18 @@ export class PelcroActions {
     this.set({ plan });
   };
 
+  setSubscriptionToCancel = (id) => {
+    const subscriptions = window.Pelcro.subscription.list() ?? [];
+    const subscriptionToCancel = subscriptions.filter(
+      (sub) => String(sub.id) === String(id)
+    )[0];
+    if (!subscriptionToCancel) {
+      // this.set({ subscriptionToCancel: null });
+      return console.error("invalid subscription id");
+    }
+    this.set({ subscriptionToCancel });
+  };
+
   setInvoice = (id) => {
     const invoices = window.Pelcro.invoice.list() ?? [];
     const invoice = invoices.find(

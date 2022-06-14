@@ -80,7 +80,7 @@ export const SubscriptionsItems = ({
   toggleActiveMenu
 }) => {
   const { t } = useTranslation("dashboard");
-  const { switchView, isAuthenticated } = usePelcro();
+  const { switchView, setSubscriptionToCancel, isAuthenticated } = usePelcro();
 
   const subs = getNonDonationSubs();
 
@@ -93,6 +93,14 @@ export const SubscriptionsItems = ({
       const isActive = activeMenu === sub.id;
       // Cancel button click handlers
       const onCancelClick = () => {
+        const isImmediateCancelationEnabled = window.Pelcro.site.read().cancel_settings.status;
+
+        if(isImmediateCancelationEnabled) {
+          console.log(sub);
+          setSubscriptionToCancel(sub.id);
+          return switchView("subscription-cancel", sub.id);
+        }
+
         if (userMustVerifyEmail()) {
           return switchView("email-verify");
         }
