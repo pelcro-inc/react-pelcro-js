@@ -1,3 +1,10 @@
+# [3.2.0-beta.28](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.27...v3.2.0-beta.28) (2022-06-14)
+
+
+### Features
+
+* **login:** passwordless-login ([#156](https://github.com/pelcro-inc/react-pelcro-js/issues/156)) ([4ff766b](https://github.com/pelcro-inc/react-pelcro-js/commit/4ff766b6ddb929e7e0903a1ae858fdefc6d68b8e))
+
 # [3.2.0-beta.27](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.26...v3.2.0-beta.27) (2022-06-08)
 
 
