@@ -1,3 +1,10 @@
+# [3.2.0-beta.31](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.30...v3.2.0-beta.31) (2022-06-15)
+
+
+### Features
+
+* **cart:** dispatch the cartItemAdded event from the addToCart function ([2a32116](https://github.com/pelcro-inc/react-pelcro-js/commit/2a32116d3c8b422007eb1dc8b47cb572d3937941))
+
 # [3.2.0-beta.30](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.29...v3.2.0-beta.30) (2022-06-15)
 
 
