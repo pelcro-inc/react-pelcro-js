@@ -1,3 +1,10 @@
+# [3.2.0-beta.30](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.29...v3.2.0-beta.30) (2022-06-15)
+
+
+### Bug Fixes
+
+* **cart:** fixed a typo in the dispatch event. ([32f7900](https://github.com/pelcro-inc/react-pelcro-js/commit/32f79005a0989ea197b68e9a11d4ab83fed463fa))
+
 # [3.2.0-beta.29](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.28...v3.2.0-beta.29) (2022-06-15)
 
 
