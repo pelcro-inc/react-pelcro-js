@@ -497,7 +497,7 @@ describe("Actions", () => {
       const store = usePelcro();
 
       act(() => {
-        store.addToCart(testSku);
+        store.addToCart(testSku.id);
       });
 
       expect(store.cartItems[0]).toEqual({ ...testSku, quantity: 1 });
@@ -521,8 +521,8 @@ describe("Actions", () => {
       const store = usePelcro();
 
       act(() => {
-        store.addToCart(testSku);
-        store.addToCart(testSku);
+        store.addToCart(testSku.id);
+        store.addToCart(testSku.id);
       });
 
       expect(store.cartItems[0]).toEqual({
@@ -532,15 +532,7 @@ describe("Actions", () => {
     });
 
     test("should not add the item if the id is invalid", () => {
-      const invalidSku = {
-        currency: "cad",
-        id: 99999,
-        image:
-          "https://uploads.pelcro.com/images/site/ecommerce/product/sku/image/random.jpeg",
-        name: "Model 1",
-        price: 1000,
-        product_id: 1522
-      };
+      const invalidSkuId = 999;
       jest
         .spyOn(window.Pelcro.ecommerce.products, "getBySkuId")
         .mockImplementation(() => null);
@@ -550,7 +542,7 @@ describe("Actions", () => {
       const store = usePelcro();
 
       act(() => {
-        store.addToCart(invalidSku);
+        store.addToCart(invalidSkuId);
       });
 
       expect(store.cartItems.length).toEqual(0);

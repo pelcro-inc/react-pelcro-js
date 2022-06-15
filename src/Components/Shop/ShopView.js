@@ -29,7 +29,7 @@ export const ShopView = () => {
                   {item.description}
                 </p>
                 <ShopSelectProductButton
-                  item={item}
+                  itemId={item.id}
                   className="plc-mt-2"
                 />
                 <ShopPurchaseButton

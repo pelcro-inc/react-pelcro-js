@@ -4,7 +4,7 @@ import { usePelcro } from "../../hooks/usePelcro";
 import { Button } from "../../SubComponents/Button";
 
 export const ShopSelectProductButton = ({
-  item,
+  itemId,
   onClick,
   ...otherProps
 }) => {
@@ -18,7 +18,7 @@ export const ShopSelectProductButton = ({
   const handleClick = () => {
     setDisabled(true);
     setTextContent(t("buttons.added"));
-    addToCart(item);
+    addToCart(itemId);
     onClick?.();
 
     setTimeout(() => {
@@ -29,8 +29,8 @@ export const ShopSelectProductButton = ({
 
   return (
     <Button
-      data-sku-id={item.id}
-      id={`pelcro-shop-select-${item.id}`}
+      data-sku-id={itemId}
+      id={`pelcro-shop-select-${itemId}`}
       onClick={handleClick}
       disabled={disabled}
       {...otherProps}

@@ -5,7 +5,6 @@ import {
   userHasPaymentMethod,
   userMustVerifyEmail
 } from "../../utils/utils";
-
 import { cartItemAdded } from "../../utils/events";
 
 export class PelcroActions {
@@ -175,9 +174,9 @@ export class PelcroActions {
    * E-commerce Actions
    */
 
-  addToCart = (item) => {
+  addToCart = (itemSkuId) => {
     const itemToAdd = window.Pelcro.ecommerce.products.getBySkuId(
-      Number(item.id)
+      Number(itemSkuId)
     );
 
     if (!itemToAdd) {
@@ -185,8 +184,8 @@ export class PelcroActions {
       return false;
     }
 
-    //Dispatch PelcroElementsCartItemAdded event when the item got added successfully
-    document.dispatchEvent(cartItemAdded(item));
+    //Dispatch PelcroElementsCartItemAdded when an item added successfully to the cart
+    document.dispatchEvent(cartItemAdded(itemToAdd));
 
     const { cartItems } = this.get();
 
