@@ -33,6 +33,7 @@ import { Notification } from "./SubComponents/Notification";
 import { EmailVerifyModal } from "./Components/EmailVerify/EmailVerifyModal";
 import { InvoiceDetailsModal } from "./Components/InvoiceDetails/InvoiceDetailsModal";
 import { InvoicePaymentModal } from "./Components/InvoicePayment/InvoicePaymentModal";
+import { QrCodeModal } from "./Components/QrCode/QrCodeModal";
 
 export const Main = () => {
   return (
@@ -48,7 +49,7 @@ export const Main = () => {
       <DashboardOpenButton />
       <ProfilePicChangeModal />
       <PasswordForgotModal />
-      <PasswordlessRequestModal/>
+      <PasswordlessRequestModal />
       <PasswordChangeModal />
       <PasswordResetModal />
 
@@ -77,6 +78,8 @@ export const Main = () => {
 
       <InvoicePaymentModal />
       <InvoiceDetailsModal />
+
+      <QrCodeModal />
 
       <Notification />
     </PelcroModalController>
