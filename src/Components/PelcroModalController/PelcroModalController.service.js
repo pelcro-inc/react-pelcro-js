@@ -337,6 +337,10 @@ export const initViewFromURL = () => {
         return verifyLinkTokenFromUrl();
       }
 
+      if (view === "passwordless-request") {
+        return showPasswordlessRequestFromUrl();
+      }
+
       if (view === "invoice-details") {
         return showInvoiceDetailsFromUrl();
       }
@@ -545,6 +549,16 @@ const verifyLinkTokenFromUrl = () => {
   const { switchView } = usePelcro.getStore();
   
   return switchView("passwordless-login");
+};
+
+const showPasswordlessRequestFromUrl = () => {
+  const passwordlessEnabled = window.Pelcro.site.read()?.passwordless_enabled;
+
+  if (!passwordlessEnabled) return;
+
+  const { switchView } = usePelcro.getStore();
+  
+  return switchView("passwordless-request");
 };
 
 const showInvoiceDetailsFromUrl = () => {

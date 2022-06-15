@@ -35,6 +35,10 @@ export function LoginModal({ onDisplay, onClose, ...props }) {
     switchView("password-forgot");
   };
 
+  const onPasswordlessRequest = () => {
+    switchView("passwordless-request");
+  };
+
   return (
     <Modal
       id="pelcro-login-modal"
@@ -46,6 +50,7 @@ export function LoginModal({ onDisplay, onClose, ...props }) {
           onForgotPassword={onForgotPassword}
           {...props}
           onSuccess={onSuccess}
+          onPasswordlessRequest={onPasswordlessRequest}
         />
       </ModalBody>
       <ModalFooter>

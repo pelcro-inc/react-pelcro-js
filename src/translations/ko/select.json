@@ -1,0 +1,29 @@
+{
+    "messages": {
+      "alreadyHaveAccount": "이미 계정이 있습니까?",
+      "loginHere": "여기에서 로그인하세요.",
+      "checkbox": "이 유료 멤버십을 선물하려면 체크하세요."
+    },
+    "labels": {
+      "plan": {
+        "title": "요금제 가입하기",
+        "subtitle": "아래 요금제 중 하나를 선택하고 다음을 클릭하세요."
+      },
+      "product": {
+        "title": "상품 가입하기",
+        "subtitle": "아래 상품 중 하나를 선택하고 다음을 클릭하세요."
+      },
+      "selectProduct": "상품 선택",
+      "selectPlan": "요금제 선택",
+      "startingAt": "시작일:",
+      "restrictiveArticles": {
+        "subscribeTo": "이 페이지에 액세스하려면 다음 요금제 중 하나에 가입하거나",
+        "or": "아래에서 다른 상품을 선택해주시기 바랍니다."
+      }
+    },
+    "buttons": {
+      "next": "다음",
+      "select": "선택",
+      "back": "뒤로"
+    }
+  }

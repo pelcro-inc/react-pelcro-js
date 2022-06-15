@@ -1,3 +1,52 @@
+# [3.2.0-beta.29](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.28...v3.2.0-beta.29) (2022-06-15)
+
+
+### Bug Fixes
+
+* **couponCode:** added margin bottom ([d046844](https://github.com/pelcro-inc/react-pelcro-js/commit/d046844f0a3d78543f12b4e7e8cd1a3cf34e01ee))
+
+# [3.2.0-beta.28](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.27...v3.2.0-beta.28) (2022-06-14)
+
+
+### Features
+
+* **login:** passwordless-login ([#156](https://github.com/pelcro-inc/react-pelcro-js/issues/156)) ([4ff766b](https://github.com/pelcro-inc/react-pelcro-js/commit/4ff766b6ddb929e7e0903a1ae858fdefc6d68b8e))
+
+# [3.2.0-beta.27](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.26...v3.2.0-beta.27) (2022-06-08)
+
+
+### Bug Fixes
+
+* **beta:** for new beta ([c0b245c](https://github.com/pelcro-inc/react-pelcro-js/commit/c0b245cf0fdd3aa9304c625f81a8888035e9473f))
+
+# [3.2.0-beta.26](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.25...v3.2.0-beta.26) (2022-06-08)
+
+
+### Bug Fixes
+
+* remove event listeners from the project ([70bb3be](https://github.com/pelcro-inc/react-pelcro-js/commit/70bb3bee36bfd3ebae5e6efdde15d92d51465422))
+
+# [3.2.0-beta.25](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.24...v3.2.0-beta.25) (2022-06-08)
+
+
+### Bug Fixes
+
+* edit a typo in PelcroGiftRedeemed event listener ([472c510](https://github.com/pelcro-inc/react-pelcro-js/commit/472c5103ecb8f0137fc0bc4bd0b0565a0816b045))
+
+# [3.2.0-beta.24](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.23...v3.2.0-beta.24) (2022-06-07)
+
+
+### Bug Fixes
+
+* edit the isCurrencyZeroDecimal function to be case insensitive ([#153](https://github.com/pelcro-inc/react-pelcro-js/issues/153)) ([0ebca0d](https://github.com/pelcro-inc/react-pelcro-js/commit/0ebca0d6e268bf473548d85f7d5591069cf6feba))
+
+# [3.2.0-beta.23](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.22...v3.2.0-beta.23) (2022-06-07)
+
+
+### Bug Fixes
+
+* **deploy:** reformatted the index.html to force new version ([046973f](https://github.com/pelcro-inc/react-pelcro-js/commit/046973fb683af3e32fc2ecc0a193d4208d2de7ec))
+
 # [3.2.0-beta.22](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.21...v3.2.0-beta.22) (2022-05-31)
 
 

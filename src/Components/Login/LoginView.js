@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { LoginContainer } from "./LoginContainer";
 import { LoginPassword } from "./LoginPassword";
 import { LoginButton } from "./LoginButton";
+import { LoginRequestLoginToken } from "./LoginRequestLoginToken";
 import { LoginEmail } from "./LoginEmail";
 import { AlertWithContext } from "../../SubComponents/AlertWithContext";
 import { FacebookLoginButton } from "../../Components/common/FacebookLoginButton/FacebookLoginButton";
@@ -19,6 +20,8 @@ export function LoginView(props) {
     window.Pelcro.site.read()?.facebook_app_id ||
     window.Pelcro.site.read()?.google_app_id ||
     window.Pelcro.site.read()?.auth0_client_id;
+
+  const passwordlessEnabled = window.Pelcro.site.read()?.passwordless_enabled;
 
   return (
     <div id="pelcro-login-view">
@@ -70,10 +73,16 @@ export function LoginView(props) {
                 </span>
                 <hr className="plc-w-full plc-border-gray-300" />
               </div>
-              <div className="plc-flex plc-justify-center plc-px-5 plc-mt-1 plc-space-x-3">
+              <div className="plc-flex plc-justify-center plc-flex-wrap plc-px-5 plc-mt-1 plc-space-x-3">
                 <GoogleLoginButton />
                 <FacebookLoginButton />
                 <Auth0LoginButton />
+                {passwordlessEnabled && ( 
+                  <LoginRequestLoginToken
+                    className="plc-mt-2"
+                    onClick={props.onPasswordlessRequest}
+                  />
+                )}
               </div>
             </div>
           )}
