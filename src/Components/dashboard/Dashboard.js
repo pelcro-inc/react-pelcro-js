@@ -28,6 +28,7 @@ import { ReactComponent as PlusIcon } from "../../assets/plus.svg";
 import { ReactComponent as KeyIcon } from "../../assets/key.svg";
 import { ReactComponent as DonateIcon } from "../../assets/donate.svg";
 import userSolidIcon from "../../assets/user-solid.svg";
+import { ReactComponent as QrCodeIcon } from "../../assets/qrcode.svg";
 import { OrdersMenu } from "./DashboardMenus/OrdersMenu";
 import { SavedItemsMenu } from "./DashboardMenus/SavedItemsMenu";
 import { usePelcro } from "../../hooks/usePelcro";
@@ -180,6 +181,10 @@ class Dashboard extends Component {
 
   displayNewsletterUpdate = () => {
     return this.props.setView("newsletter-update");
+  };
+
+  displayQRCode = () => {
+    return this.props.setView("qrcode");
   };
 
   displayProductSelect = ({ isGift }) => {
@@ -637,6 +642,16 @@ class Dashboard extends Component {
                         {this.locale("labels.editNewsletters")}
                       </Button>
                     )}
+                    <Button
+                      variant="ghost"
+                      icon={
+                        <QrCodeIcon className="plc-w-5 plc-h-5 plc-mr-1" />
+                      }
+                      className="plc-text-sm plc-text-gray-500 hover:plc-text-primary-700"
+                      onClick={this.displayQRCode}
+                    >
+                      My QR code
+                    </Button>
                   </div>
                 }
               />
