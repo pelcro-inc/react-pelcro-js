@@ -5,6 +5,7 @@ import {
   userHasPaymentMethod,
   userMustVerifyEmail
 } from "../../utils/utils";
+
 import { cartItemAdded } from "../../utils/events";
 
 export class PelcroActions {
