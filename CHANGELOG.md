@@ -1,3 +1,10 @@
+# [3.2.0-beta.29](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.28...v3.2.0-beta.29) (2022-06-15)
+
+
+### Bug Fixes
+
+* **couponCode:** added margin bottom ([d046844](https://github.com/pelcro-inc/react-pelcro-js/commit/d046844f0a3d78543f12b4e7e8cd1a3cf34e01ee))
+
 # [3.2.0-beta.28](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.27...v3.2.0-beta.28) (2022-06-14)
 
 
