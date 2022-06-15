@@ -138,7 +138,6 @@ export class PelcroActions {
       (sub) => String(sub.id) === String(id)
     )[0];
     if (!subscriptionToCancel) {
-      // this.set({ subscriptionToCancel: null });
       return console.error("invalid subscription id");
     }
     this.set({ subscriptionToCancel });

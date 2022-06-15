@@ -72,6 +72,9 @@ import verifyEmail_ko from "./translations/ko/verifyEmail.json";
 import invoiceDetails_en from "./translations/en/InvoiceDetails.json";
 import invoiceDetails_fr from "./translations/fr/InvoiceDetails.json";
 import invoiceDetails_ko from "./translations/ko/InvoiceDetails.json";
+import subscriptionCancel_en from "./translations/en/subscriptionCancel.json";
+import subscriptionCancel_fr from "./translations/fr/subscriptionCancel.json";
+import subscriptionCancel_ko from "./translations/ko/subscriptionCancel.json";
 import { getPageOrDefaultLanguage } from "./utils/utils";
 
 const resources = {
@@ -99,7 +102,8 @@ const resources = {
     dashboard: dashboard_en,
     select: select_en,
     notification: notification_en,
-    invoiceDetails: invoiceDetails_en
+    invoiceDetails: invoiceDetails_en,
+    subscriptionCancel: subscriptionCancel_en
   },
   fr: {
     common: common_fr,
@@ -125,7 +129,8 @@ const resources = {
     dashboard: dashboard_fr,
     select: select_fr,
     notification: notification_fr,
-    invoiceDetails: invoiceDetails_fr
+    invoiceDetails: invoiceDetails_fr,
+    subscriptionCancel: subscriptionCancel_fr
   },
   ko: {
     common: common_ko,
@@ -151,7 +156,8 @@ const resources = {
     dashboard: dashboard_ko,
     select: select_ko,
     notification: notification_ko,
-    invoiceDetails: invoiceDetails_ko
+    invoiceDetails: invoiceDetails_ko,
+    subscriptionCancel: subscriptionCancel_ko
   }
 };
 
