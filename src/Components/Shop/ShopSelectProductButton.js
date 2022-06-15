@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { usePelcro } from "../../hooks/usePelcro";
 import { Button } from "../../SubComponents/Button";
+import { cartItemAdded } from "../../utils/events";
 
 export const ShopSelectProductButton = ({
-  itemId,
+  item,
   onClick,
   ...otherProps
 }) => {
@@ -18,7 +19,8 @@ export const ShopSelectProductButton = ({
   const handleClick = () => {
     setDisabled(true);
     setTextContent(t("buttons.added"));
-    addToCart(itemId);
+    addToCart(item.id);
+    document.dispatchEvent(cartItemAdded(item))
     onClick?.();
 
     setTimeout(() => {
@@ -29,8 +31,8 @@ export const ShopSelectProductButton = ({
 
   return (
     <Button
-      data-sku-id={itemId}
-      id={`pelcro-shop-select-${itemId}`}
+      data-sku-id={item.id}
+      id={`pelcro-shop-select-${item.id}`}
       onClick={handleClick}
       disabled={disabled}
       {...otherProps}
