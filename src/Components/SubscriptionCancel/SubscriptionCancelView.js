@@ -26,7 +26,7 @@ export const SubscriptionCancelView = (props) => {
           <div className="plc-flex plc-flex-col plc-items-center plc-justify-center plc-mt-4">
             <SubscriptionIcon className="plc-w-32 plc-h-32" />
             <p className="plc-mb-1 plc-text-gray-900 plc-text-center plc-whitespace-pre-line">
-              {t("messages.subscriptionEnd")} {subscriptionToCancel?.current_period_end}
+              {t("messages.subscriptionEnd")} {new Date(subscriptionToCancel?.current_period_end).toLocaleDateString('en-CA', { year:"numeric", month:"short", day:"numeric"})}.
             </p>
           </div>
         </SubscriptionCancelContainer>

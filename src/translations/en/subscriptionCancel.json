@@ -3,6 +3,6 @@
     "title": "Cancel subscription"
   },
   "messages": {
-    "subscriptionEnd": "This subscription is set to expire on May 18, 2023."
+    "subscriptionEnd": "This subscription is set to expire on"
   }
 }
