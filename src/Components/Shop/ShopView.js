@@ -1,7 +1,6 @@
 import React from "react";
 import { ShopPurchaseButton } from "./ShopPurchaseButton";
 import { ShopSelectProductButton } from "./ShopSelectProductButton";
-import { cartItemAdded } from "../../utils/events";
 
 export const ShopView = () => {
   const skus = window.Pelcro.ecommerce.products.getSkus();
@@ -32,9 +31,6 @@ export const ShopView = () => {
                 <ShopSelectProductButton
                   itemId={item.id}
                   className="plc-mt-2"
-                  onClick={() =>
-                    document.dispatchEvent(cartItemAdded(item))
-                  }
                 />
                 <ShopPurchaseButton
                   itemId={item.id}

@@ -5,6 +5,7 @@ import {
   userHasPaymentMethod,
   userMustVerifyEmail
 } from "../../utils/utils";
+import { cartItemAdded } from "../../utils/events";
 
 export class PelcroActions {
   constructor(storeSetter, storeGetter) {
@@ -193,6 +194,9 @@ export class PelcroActions {
       console.error("invalid item SKU id");
       return false;
     }
+
+    //Dispatch PelcroElementsCartItemAdded when an item added successfully to the
+    document.dispatchEvent(cartItemAdded(itemToAdd));
 
     const { cartItems } = this.get();
 

@@ -24,7 +24,7 @@ export const CouponCode = ({ onClick, ...otherProps }) => {
   };
 
   return (
-    <div className="plc-mt-4">
+    <div className="plc-mt-4 plc-mb-6">
       <Button
         className="plc-mb-2 plc-text-base plc-text-gray-500"
         variant="ghost"

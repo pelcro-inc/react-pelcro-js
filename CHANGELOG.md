@@ -1,3 +1,49 @@
+# [3.2.0-beta.33](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.32...v3.2.0-beta.33) (2022-06-15)
+
+
+### Bug Fixes
+
+* **cart:** revert back the test.js file to original state and fixed typo in pelcroActions ([12f0b29](https://github.com/pelcro-inc/react-pelcro-js/commit/12f0b29dfb3062f056f5a89eba435a5bc9253685))
+
+# [3.2.0-beta.32](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.31...v3.2.0-beta.32) (2022-06-15)
+
+
+### Bug Fixes
+
+* **cart:** add the cartItemAdded event in the correct spot ([ad41865](https://github.com/pelcro-inc/react-pelcro-js/commit/ad4186549b9de497bcd79eb496da992ffeb98c54))
+* **cart:** fix dispatch itemAdded event ([6b150ff](https://github.com/pelcro-inc/react-pelcro-js/commit/6b150ff704aa68f53760240a546dfa5e718e60ae))
+* **cart:** fix dispatch itemAdded event ([d28c822](https://github.com/pelcro-inc/react-pelcro-js/commit/d28c822a29b499f9f7aefd5618a77ee59e21e96b))
+* fire the PelcroElementsOrderCheckedOut event in the order confirmed modal instead of checkout ([7c23ca1](https://github.com/pelcro-inc/react-pelcro-js/commit/7c23ca1b3d445deb8cb52e346b33edc3a3ace7a1))
+* remove the PelcroElementsOrderCheckedOut event ([dc6c034](https://github.com/pelcro-inc/react-pelcro-js/commit/dc6c034ceed61a8bb2dc0f3a27f2a0a48ec495ac))
+* send the correct order object in the orderCheckedOut event ([3ffa3bb](https://github.com/pelcro-inc/react-pelcro-js/commit/3ffa3bb08e5afc1fb790a1558a9d6b084814ceac))
+
+
+### Features
+
+* dispatch the cartItemAdded event from the addToCart function ([b7ccf39](https://github.com/pelcro-inc/react-pelcro-js/commit/b7ccf397652f189c95bd85f97c9aeb89a19e941f))
+* fire several cart related events ([0659b6d](https://github.com/pelcro-inc/react-pelcro-js/commit/0659b6d1f5306141b3d4d9d6290cb4b63356e4f4))
+
+# [3.2.0-beta.31](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.30...v3.2.0-beta.31) (2022-06-15)
+
+
+### Features
+
+* **cart:** dispatch the cartItemAdded event from the addToCart function ([2a32116](https://github.com/pelcro-inc/react-pelcro-js/commit/2a32116d3c8b422007eb1dc8b47cb572d3937941))
+
+# [3.2.0-beta.30](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.29...v3.2.0-beta.30) (2022-06-15)
+
+
+### Bug Fixes
+
+* **cart:** fixed a typo in the dispatch event. ([32f7900](https://github.com/pelcro-inc/react-pelcro-js/commit/32f79005a0989ea197b68e9a11d4ab83fed463fa))
+
+# [3.2.0-beta.29](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.28...v3.2.0-beta.29) (2022-06-15)
+
+
+### Bug Fixes
+
+* **couponCode:** added margin bottom ([d046844](https://github.com/pelcro-inc/react-pelcro-js/commit/d046844f0a3d78543f12b4e7e8cd1a3cf34e01ee))
+
 # [3.2.0-beta.28](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.27...v3.2.0-beta.28) (2022-06-14)
 
 
