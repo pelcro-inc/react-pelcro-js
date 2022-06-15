@@ -1,3 +1,10 @@
+# [3.2.0-beta.33](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.32...v3.2.0-beta.33) (2022-06-15)
+
+
+### Bug Fixes
+
+* **cart:** revert back the test.js file to original state and fixed typo in pelcroActions ([12f0b29](https://github.com/pelcro-inc/react-pelcro-js/commit/12f0b29dfb3062f056f5a89eba435a5bc9253685))
+
 # [3.2.0-beta.32](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.31...v3.2.0-beta.32) (2022-06-15)
 
 
