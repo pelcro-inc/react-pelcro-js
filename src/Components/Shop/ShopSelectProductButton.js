@@ -20,7 +20,8 @@ export const ShopSelectProductButton = ({
     setDisabled(true);
     setTextContent(t("buttons.added"));
     addToCart(item.id);
-    document.dispatchEvent(cartItemAdded(item))
+    document.dispatchEvent(cartItemAdded(item));
+    
     onClick?.();
 
     setTimeout(() => {
