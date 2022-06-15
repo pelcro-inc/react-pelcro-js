@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { usePelcro } from "../../hooks/usePelcro";
 import { Button } from "../../SubComponents/Button";
-import { cartItemAdded } from "../../utils/events";
 
 export const ShopSelectProductButton = ({
   item,
@@ -19,9 +18,7 @@ export const ShopSelectProductButton = ({
   const handleClick = () => {
     setDisabled(true);
     setTextContent(t("buttons.added"));
-    addToCart(item.id);
-    document.dispatchEvent(cartItemAdded(item));
-    
+    addToCart(item);
     onClick?.();
 
     setTimeout(() => {

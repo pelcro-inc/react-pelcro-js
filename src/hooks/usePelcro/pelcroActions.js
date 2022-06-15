@@ -6,6 +6,8 @@ import {
   userMustVerifyEmail
 } from "../../utils/utils";
 
+import { cartItemAdded } from "../../utils/events";
+
 export class PelcroActions {
   constructor(storeSetter, storeGetter) {
     this.set = storeSetter;
@@ -173,15 +175,18 @@ export class PelcroActions {
    * E-commerce Actions
    */
 
-  addToCart = (itemSkuId) => {
+  addToCart = (item) => {
     const itemToAdd = window.Pelcro.ecommerce.products.getBySkuId(
-      Number(itemSkuId)
+      Number(item.id)
     );
 
     if (!itemToAdd) {
       console.error("invalid item SKU id");
       return false;
     }
+
+    //Dispatch PelcroElementsCartItemAdded event when the item got added successfully
+    document.dispatchEvent(cartItemAdded(item));
 
     const { cartItems } = this.get();
 
