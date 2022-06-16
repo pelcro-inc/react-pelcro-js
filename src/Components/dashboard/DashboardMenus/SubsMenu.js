@@ -96,7 +96,6 @@ export const SubscriptionsItems = ({
         const isImmediateCancelationEnabled = window.Pelcro.site.read().cancel_settings.status;
 
         if(isImmediateCancelationEnabled) {
-          console.log(sub);
           setSubscriptionToCancel(sub.id);
           return switchView("subscription-cancel", sub.id);
         }

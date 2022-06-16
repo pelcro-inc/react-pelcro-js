@@ -1,8 +1,21 @@
 {
   "labels": {
-    "title": "Cancel subscription"
+    "title": "Annuler l'abonnement",
+    "cancelReason": "Motif d'annulation",
+    "subCancellation": {
+      "goBack": "Retourner"
+    }
   },
   "messages": {
-    "subscriptionEnd": "This subscription is set to expire on"
+    "subscriptionEnd": "Cet abonnement doit expirer le",
+    "cancelNow": "Cancel Subscription Now",
+    "cancelLater": "Annuler l'abonnement maintenant",
+    "subCancellation": {
+      "isSureToCancelNow": "Êtes-vous sûr de vouloir résilier votre abonnement immédiatement?",
+      "isSureToCancel": "Êtes-vous sûr de vouloir résilier votre abonnement?",
+      "loading": "Annulation de votre abonnement",
+      "success": "L'abonnement a été annulé avec succès",
+      "error": "Erreur lors de l'annulation de votre abonnement"
+    }
   }
 }
