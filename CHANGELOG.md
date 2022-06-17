@@ -1,3 +1,10 @@
+# [3.2.0-beta.35](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.34...v3.2.0-beta.35) (2022-06-17)
+
+
+### Bug Fixes
+
+* **subscription:** export SubscriptionCancelModal ([4f4860d](https://github.com/pelcro-inc/react-pelcro-js/commit/4f4860d7178c14f5cd4daee78ea06bdca13ff6d6))
+
 # [3.2.0-beta.34](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.33...v3.2.0-beta.34) (2022-06-17)
 
 
