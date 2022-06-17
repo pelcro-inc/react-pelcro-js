@@ -1,3 +1,10 @@
+# [3.2.0-beta.34](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.33...v3.2.0-beta.34) (2022-06-17)
+
+
+### Features
+
+* **subscription:** add cancel subscription modal ([81229e3](https://github.com/pelcro-inc/react-pelcro-js/commit/81229e3262fa12bff1f053ab7ded010dad744461))
+
 # [3.2.0-beta.33](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.32...v3.2.0-beta.33) (2022-06-15)
 
 
