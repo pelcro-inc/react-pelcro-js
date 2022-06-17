@@ -30,6 +30,7 @@ export { GoogleLoginButton } from "./Components/common/GoogleLoginButton/GoogleL
 export { Auth0LoginButton } from "./Components/common/Auth0LoginButton/Auth0LoginButton";
 export { SelectModalWithHook as SelectModal } from "./Components/Select/SelectModal";
 export { SubscriptionRenewModal } from "./Components/SubscriptionRenew/SubscriptionRenewModal";
+export { SubscriptionCancelModal } from "./Components/SubscriptionCancel/SubscriptionCancelModal";
 export { SubscriptionRenewView } from "./Components/SubscriptionRenew/SubscriptionRenewView";
 export { PaymentSuccessModal } from "./Components/PaymentSuccess/PaymentSuccessModal";
 export { PaymentSuccessView } from "./Components/PaymentSuccess/PaymentSuccessView";
