@@ -97,7 +97,7 @@ export const SubscriptionsItems = ({
 
         if(isImmediateCancelationEnabled) {
           setSubscriptionToCancel(sub.id);
-          return switchView("subscription-cancel", sub.id);
+          return switchView("subscription-cancel");
         }
 
         if (userMustVerifyEmail()) {
