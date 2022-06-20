@@ -47,7 +47,7 @@ export const SubscriptionCancelLaterButton = ({
   const handleCancelNowClick = () => {
     const payload = {
       subscription_id: subscription.id,
-      mode: "now",
+      mode: "period_end",
       ...(cancelationReason && { reason: cancelationReason }),
     }
 
