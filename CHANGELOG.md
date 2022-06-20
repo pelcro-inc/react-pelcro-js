@@ -1,3 +1,10 @@
+# [3.2.0-beta.36](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.35...v3.2.0-beta.36) (2022-06-20)
+
+
+### Bug Fixes
+
+* fix the cancel at period end issue ([64f6a85](https://github.com/pelcro-inc/react-pelcro-js/commit/64f6a8598ca1eead7f15d044fbb6536a595a5f8d))
+
 # [3.2.0-beta.35](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.34...v3.2.0-beta.35) (2022-06-17)
 
 
