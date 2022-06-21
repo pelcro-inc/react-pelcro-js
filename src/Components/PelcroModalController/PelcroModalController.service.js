@@ -539,16 +539,44 @@ const verifyEmailTokenFromUrl = () => {
 };
 
 const verifyLinkTokenFromUrl = () => {
+  const { whenSiteReady } = usePelcro.getStore();
+
+  const translations = i18n.t("verifyLinkToken:messages", {
+    returnObjects: true
+  });
   const isAlreadyLoggedIn = window.Pelcro.user?.isAuthenticated() ?? false;
 
   const loginToken = window.Pelcro.helpers.getURLParameter("token");
 
   if (isAlreadyLoggedIn || !loginToken) return;
 
-  
-  const { switchView } = usePelcro.getStore();
-  
-  return switchView("passwordless-login");
+  whenSiteReady(
+    () => {
+      window.Pelcro.user.verifyLoginToken(
+        {
+          token: loginToken
+        },
+        (err, res) => {
+          if (err) {
+            return notify.error(getErrorMessages(err));
+          }
+          const { auth_token } = res.data;
+          window.Pelcro.user.refresh(
+            { 
+              auth_token 
+            }, 
+            (err, res) => {
+              if(err) {
+                return notify.error(getErrorMessages(err));
+              }
+              return notify.success(translations.success);
+            }
+          )
+        }
+      );
+    },
+    { once: true }
+  );
 };
 
 const showPasswordlessRequestFromUrl = () => {
