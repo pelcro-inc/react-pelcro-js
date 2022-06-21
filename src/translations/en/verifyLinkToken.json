@@ -6,6 +6,6 @@
   },
   "messages": {
     "resent": "Resent successfully",
-    "success": "You have been successfully authenticated with Passwordless Login"
+    "success": "You have logged in successfully"
   }
 }
