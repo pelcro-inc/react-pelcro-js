@@ -1,3 +1,17 @@
+# [3.2.0-beta.38](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.37...v3.2.0-beta.38) (2022-06-21)
+
+
+### Bug Fixes
+
+* **SSO:** first-name-&-last-name-as-auth0-response ([#162](https://github.com/pelcro-inc/react-pelcro-js/issues/162)) ([9830257](https://github.com/pelcro-inc/react-pelcro-js/commit/983025775b27e32a8d9485ee97b20dbd4c4b9259))
+
+# [3.2.0-beta.37](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.36...v3.2.0-beta.37) (2022-06-21)
+
+
+### Bug Fixes
+
+* **MagicLink:** disable modal view ([#161](https://github.com/pelcro-inc/react-pelcro-js/issues/161)) ([f7dbba1](https://github.com/pelcro-inc/react-pelcro-js/commit/f7dbba1e588ff834a5ad3c7244fb60ef8a4ed407))
+
 # [3.2.0-beta.36](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.35...v3.2.0-beta.36) (2022-06-20)
 
 
