@@ -77,14 +77,13 @@ export function LoginView(props) {
                 <GoogleLoginButton />
                 <FacebookLoginButton />
                 <Auth0LoginButton />
-                {passwordlessEnabled && ( 
-                  <LoginRequestLoginToken
-                    className="plc-mt-2"
-                    onClick={props.onPasswordlessRequest}
-                  />
-                )}
               </div>
             </div>
+          )}
+          {passwordlessEnabled && (
+            <LoginRequestLoginToken
+              onClick={props.onPasswordlessRequest}
+            />
           )}
         </LoginContainer>
       </form>
