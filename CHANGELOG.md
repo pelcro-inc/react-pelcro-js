@@ -1,3 +1,10 @@
+# [3.2.0-beta.40](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.39...v3.2.0-beta.40) (2022-06-22)
+
+
+### Bug Fixes
+
+* **MagicLink:** dont show modal if user logged in ([2f7cf06](https://github.com/pelcro-inc/react-pelcro-js/commit/2f7cf06f565497a492699cbfb860d86f404249ea))
+
 # [3.2.0-beta.39](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.38...v3.2.0-beta.39) (2022-06-22)
 
 
