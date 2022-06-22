@@ -16,7 +16,7 @@ export const LoginRequestLoginToken = ({
   return (
     <button
       onClick={() => onClick?.()}
-      className={`plc-flex plc-items-center plc-mt-3 plc-justify-center plc-p-3 plc-space-x-3 plc-text-gray-700 plc-border plc-border-gray-200 plc-rounded-3xl hover:plc-bg-gray-200 pelcro-auth0-login ${className}`}
+      className={`plc-flex plc-items-center plc-mt-3 plc-mx-auto plc-justify-center plc-p-3 plc-space-x-3 plc-text-gray-700 plc-border plc-border-gray-200 plc-rounded-3xl hover:plc-bg-gray-200 pelcro-auth0-login ${className}`}
     >
       <PasswordlessLogoIcon
         className={`plc-w-6 plc-h-auto" ${iconClassName}`}

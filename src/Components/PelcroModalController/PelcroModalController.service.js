@@ -539,7 +539,7 @@ const verifyEmailTokenFromUrl = () => {
 };
 
 const verifyLinkTokenFromUrl = () => {
-  const { whenSiteReady } = usePelcro.getStore();
+  const { whenSiteReady, resetView } = usePelcro.getStore();
 
   const translations = i18n.t("verifyLinkToken:messages", {
     returnObjects: true
@@ -569,6 +569,7 @@ const verifyLinkTokenFromUrl = () => {
               if(err) {
                 return notify.error(getErrorMessages(err));
               }
+              resetView();
               return notify.success(translations.success);
             }
           )
@@ -582,7 +583,9 @@ const verifyLinkTokenFromUrl = () => {
 const showPasswordlessRequestFromUrl = () => {
   const passwordlessEnabled = window.Pelcro.site.read()?.passwordless_enabled;
 
-  if (!passwordlessEnabled) return;
+  const isAlreadyLoggedIn = window.Pelcro.user?.isAuthenticated() ?? false;
+
+  if (!passwordlessEnabled || isAlreadyLoggedIn) return;
 
   const { switchView } = usePelcro.getStore();
   
