@@ -1,3 +1,10 @@
+# [3.2.0-beta.41](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.40...v3.2.0-beta.41) (2022-06-23)
+
+
+### Bug Fixes
+
+* **MagicLink:** check passwordless_enabled ([a7027e7](https://github.com/pelcro-inc/react-pelcro-js/commit/a7027e74531a46433d4dd2f3b16521b978e0722c))
+
 # [3.2.0-beta.40](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.39...v3.2.0-beta.40) (2022-06-22)
 
 
