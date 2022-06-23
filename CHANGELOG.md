@@ -1,3 +1,10 @@
+# [3.2.0-beta.42](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.41...v3.2.0-beta.42) (2022-06-23)
+
+
+### Bug Fixes
+
+* **SSO:** first-name-&-last-name ([2c8586f](https://github.com/pelcro-inc/react-pelcro-js/commit/2c8586fdf994d8ffbb005ebb5d9033f279809a21))
+
 # [3.2.0-beta.41](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.40...v3.2.0-beta.41) (2022-06-23)
 
 
