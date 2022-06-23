@@ -82,13 +82,15 @@ export const Auth0LoginButton = ({
           return onFailure(error);
         }
 
-        const { email } = user;
+        const { email, first_name, last_name, given_name, family_name } = user;
 
         loginDispatch?.({
           type: HANDLE_SOCIAL_LOGIN,
           payload: {
             idpName: "auth0",
             idpToken: accessToken,
+            ...((first_name || given_name) && {firstName: first_name || given_name}),
+            ...((last_name || family_name) && {lastName: last_name || family_name}),
             email
           }
         });
@@ -98,6 +100,8 @@ export const Auth0LoginButton = ({
           payload: {
             idpName: "auth0",
             idpToken: accessToken,
+            ...((first_name || given_name) && {firstName: first_name || given_name}),
+            ...((last_name || family_name) && {lastName: last_name || family_name}),
             email
           }
         });
