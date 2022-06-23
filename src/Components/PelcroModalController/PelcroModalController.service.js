@@ -539,19 +539,21 @@ const verifyEmailTokenFromUrl = () => {
 };
 
 const verifyLinkTokenFromUrl = () => {
-  const { whenSiteReady, resetView } = usePelcro.getStore();
+  const { whenSiteReady, resetView, isAuthenticated } = usePelcro.getStore();
 
   const translations = i18n.t("verifyLinkToken:messages", {
     returnObjects: true
   });
-  const isAlreadyLoggedIn = window.Pelcro.user?.isAuthenticated() ?? false;
 
   const loginToken = window.Pelcro.helpers.getURLParameter("token");
 
-  if (isAlreadyLoggedIn || !loginToken) return;
+  const passwordlessEnabled = window.Pelcro.site.read()?.passwordless_enabled;
 
+  if (isAuthenticated() || !loginToken || !passwordlessEnabled) return;
+  
   whenSiteReady(
     () => {
+      
       window.Pelcro.user.verifyLoginToken(
         {
           token: loginToken
@@ -581,11 +583,11 @@ const verifyLinkTokenFromUrl = () => {
 };
 
 const showPasswordlessRequestFromUrl = () => {
+  const { isAuthenticated } = usePelcro.getStore();
+
   const passwordlessEnabled = window.Pelcro.site.read()?.passwordless_enabled;
 
-  const isAlreadyLoggedIn = window.Pelcro.user?.isAuthenticated() ?? false;
-
-  if (!passwordlessEnabled || isAlreadyLoggedIn) return;
+  if (!passwordlessEnabled || isAuthenticated()) return;
 
   const { switchView } = usePelcro.getStore();
   
