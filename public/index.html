@@ -1,137 +1,193 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Pelcro Examples</title>
+  </head>
+  <body>
+    <noscript>
+      You need to enable JavaScript to run this app.
+    </noscript>
+    <script>
+      var Pelcro = window.Pelcro || (window.Pelcro = {});
+      Pelcro.siteid = "85";
+      Pelcro.environment = {};
+      Pelcro.environment.stripe = "pk_test_aThAAdvPHgIdAziZweywBWNk";
+      Pelcro.environment.domain = "https://staging.pelcro.com";
+      Pelcro.environment.ui = "-";
+      window.Pelcro.ENABLE_ECOMMERCE = true;
+      window.Pelcro.uiSettings = {
+        enableNameFieldsInRegister: true,
+        newsletters: [
+          { label: "news 1", id: 12 },
+          { label: "default", id: "default" }
+        ]
+      };
+    </script>
+    <script src="https://js.pelcro.com/sdk/staging/main.min.js"></script>
 
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pelcro Examples</title>
-</head>
+    <div>
+      <h2>Class Buttons</h2>
 
-<body>
-  <noscript>
-    You need to enable JavaScript to run this app.
-  </noscript>
-  <script>
-    var Pelcro = window.Pelcro || (window.Pelcro = {});
-    Pelcro.siteid = "85";
-    Pelcro.environment = {};
-    Pelcro.environment.stripe = "pk_test_aThAAdvPHgIdAziZweywBWNk";
-    Pelcro.environment.domain = "https://staging.pelcro.com";
-    Pelcro.environment.ui = "-";
-    window.Pelcro.ENABLE_ECOMMERCE = true;
-    window.Pelcro.uiSettings = {
-      enableNameFieldsInRegister: true,
-      newsletters: [
-        { label: "news 1", id: 12 },
-        { label: "default", id: "default" }
-      ]
-    };
-  </script>
-  <script src="https://js.pelcro.com/sdk/staging/main.min.js"></script>
+      <select
+        id="language-picker"
+        onchange="document.documentElement.lang = this.value"
+      >
+        <option value="en" selected>English</option>
+        <option value="fr">French</option>
+        <option value="it">Italian</option>
+        <option value="wtf">WTF</option>
+      </select>
 
-  <div>
-    <h2>Class Buttons</h2>
+      <br />
+      <br />
 
-    <select id="language-picker" onchange="document.documentElement.lang = this.value">
-      <option value="en" selected>English</option>
-      <option value="fr">French</option>
-      <option value="it">Italian</option>
-      <option value="wtf">WTF</option>
-    </select>
+      <button class="pelcro-login-button">Login</button>
+      <button class="pelcro-subscribe-button">Subscribe</button>
+      <button class="pelcro-register-button">Register</button>
+      <button
+        class="pelcro-subscribe-button"
+        data-product-id="84"
+        class="btn"
+      >
+        Product ID = 834
+      </button>
+      <button
+        class="pelcro-subscribe-button"
+        data-product-id="83"
+        class="btn"
+      >
+        Product ID = 83
+      </button>
+      <button
+        class="pelcro-subscribe-button"
+        data-is-gift="true"
+        data-product-id="834"
+        data-plan-id="22033"
+      >
+        Product ID = 47, Plan ID = 22033, GIFT = TRUE
+      </button>
+      <button class="pelcro-subscribe-button" data-product-id="83">
+        Product ID = 83
+      </button>
+      <button class="pelcro-gift-button" data-is-gift="true">
+        GIFT
+      </button>
+      <br />
+      <br />
+      <button
+        class="pelcro-subscribe-button"
+        data-product-id="834"
+        data-plan-id="22033"
+      >
+        PLAN ID = 1204
+      </button>
+      <button
+        class="pelcro-subscribe-button"
+        data-product-id="84"
+        data-plan-id="2102"
+      >
+        PLAN ID = 2102
+      </button>
+      <button
+        class="pelcro-subscribe-button"
+        data-product-id="83"
+        data-plan-id="1200"
+      >
+        PLAN ID = 1200
+      </button>
+      <button
+        class="pelcro-subscribe-button"
+        data-product-id="83"
+        data-plan-id="1199"
+      >
+        PLAN ID = 1199
+      </button>
+      <button
+        class="pelcro-subscribe-button"
+        data-product-id="83"
+        data-plan-id="1199"
+      >
+        PLAN ID = 1199
+      </button>
 
-    <br />
-    <br />
+      <button
+        class="pelcro-offline-subscribe-button"
+        data-product-id="834"
+        data-plan-id="22033"
+      >
+        Subscribe to offline plan
+      </button>
 
-    <button class="pelcro-login-button">Login</button>
-    <button class="pelcro-subscribe-button">Subscribe</button>
-    <button class="pelcro-register-button">Register</button>
-    <button class="pelcro-subscribe-button" data-product-id="84" class="btn">
-      Product ID = 834
-    </button>
-    <button class="pelcro-subscribe-button" data-product-id="83" class="btn">
-      Product ID = 83
-    </button>
-    <button class="pelcro-subscribe-button" data-is-gift="true" data-product-id="834" data-plan-id="22033">
-      Product ID = 47, Plan ID = 22033, GIFT = TRUE
-    </button>
-    <button class="pelcro-subscribe-button" data-product-id="83">
-      Product ID = 83
-    </button>
-    <button class="pelcro-gift-button" data-is-gift="true">
-      GIFT
-    </button>
-    <br />
-    <br />
-    <button class="pelcro-subscribe-button" data-product-id="834" data-plan-id="22033">
-      PLAN ID = 1204
-    </button>
-    <button class="pelcro-subscribe-button" data-product-id="84" data-plan-id="2102">
-      PLAN ID = 2102
-    </button>
-    <button class="pelcro-subscribe-button" data-product-id="83" data-plan-id="1200">
-      PLAN ID = 1200
-    </button>
-    <button class="pelcro-subscribe-button" data-product-id="83" data-plan-id="1199">
-      PLAN ID = 1199
-    </button>
-    <button class="pelcro-subscribe-button" data-product-id="83" data-plan-id="1199">
-      PLAN ID = 1199
-    </button>
+      <button class="pelcro-save-button">Save without key</button>
+      <button class="pelcro-save-button">Save without key</button>
 
-    <button class="pelcro-offline-subscribe-button" data-product-id="834" data-plan-id="22033">
-      Subscribe to offline plan
-    </button>
+      <button
+        class="pelcro-save-button"
+        data-key="newss"
+        data-title="news title 1"
+        data-link="https://www.example.com"
+        data-title="Test link"
+        data-tag="test tag"
+      >
+        Save news
+      </button>
 
-    <button class="pelcro-save-button">Save without key</button>
-    <button class="pelcro-save-button">Save without key</button>
+      <button
+        class="pelcro-save-button"
+        data-key="newss"
+        data-title="news title 2"
+        data-link="https://www.example.com"
+        data-title="Test link"
+        data-tag="test tag 2"
+      >
+        Save news 2
+      </button>
 
-    <button class="pelcro-save-button" data-key="newss" data-title="news title 1" data-link="https://www.example.com"
-      data-title="Test link" data-tag="test tag">
-      Save news
-    </button>
+      <button
+        class="pelcro-save-button"
+        data-key="article"
+        data-title="article title 1"
+        data-link="https://www.example.com"
+      >
+        Save article 1
+      </button>
 
-    <button class="pelcro-save-button" data-key="newss" data-title="news title 2" data-link="https://www.example.com"
-      data-title="Test link" data-tag="test tag 2">
-      Save news 2
-    </button>
+      <button class="pelcro-cart-button" class="btn">
+        View Cart
+      </button>
 
-    <button class="pelcro-save-button" data-key="article" data-title="article title 1"
-      data-link="https://www.example.com">
-      Save article 1
-    </button>
+      <button class="pelcro-add-to-cart-button" data-sku-id="4">
+        Add to cart
+      </button>
+      <button class="pelcro-add-to-cart-button" data-sku-id="3">
+        Add to cart
+      </button>
+      <button class="pelcro-add-to-cart-button" data-sku-id="2">
+        Add to cart
+      </button>
 
-    <button class="pelcro-cart-button" class="btn">
-      View Cart
-    </button>
+      <button class="pelcro-purchase-button" data-sku-id="4">
+        Purchase Product with ID 4
+      </button>
+      <button class="pelcro-update-newsletters-button">
+        update newsletters
+      </button>
+      <button onclick="window.Pelcro.user.logout()">Logout</button>
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+    </div>
 
-    <button class="pelcro-add-to-cart-button" data-sku-id="4">
-      Add to cart
-    </button>
-    <button class="pelcro-add-to-cart-button" data-sku-id="3">
-      Add to cart
-    </button>
-    <button class="pelcro-add-to-cart-button" data-sku-id="2">
-      Add to cart
-    </button>
-
-    <button class="pelcro-purchase-button" data-sku-id="4">
-      Purchase Product with ID 4
-    </button>
-    <button class="pelcro-update-newsletters-button">
-      update newsletters
-    </button>
-    <button onclick="window.Pelcro.user.logout()">Logout</button>
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-  </div>
-
-  <div id="pelcro-shop"></div>
-</body>
-
+    <div id="pelcro-shop"></div>
+  </body>
 </html>

@@ -12,6 +12,7 @@ export function Email({
   initWithUserEmail = true,
   disableEmailValidation,
   store,
+  enableEmailEdit,
   ...otherProps
 }) {
   const { t } = useTranslation("common");
@@ -32,6 +33,10 @@ export function Email({
       }
 
       if (isEmailValid(email)) {
+        dispatch({
+          type: SET_EMAIL_ERROR,
+          payload: null
+        });
         return dispatch({ type: SET_EMAIL, payload: email });
       }
 
@@ -51,6 +56,12 @@ export function Email({
     },
     [dispatch, email, finishedTyping]
   );
+
+  useEffect(() => {
+    if (!enableEmailEdit) {
+      loadEmailIntoField();
+    }
+  }, [enableEmailEdit]);
 
   useEffect(() => {
     handleInputChange(email);
@@ -78,7 +89,8 @@ export function Email({
   }, []);
 
   const isEmailValid = (email) => {
-    const re = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+    const re =
+      /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
     return re.test(email);
   };
 

@@ -1,82 +1,83 @@
 {
-    "validation": {
-        "validEmail": "le courriel n’est pas valide",
-        "enterEmail": "Un courriel est requis.",
-        "enterPassword": "Mot de passe requis."
+  "validation": {
+    "validEmail": "le courriel n’est pas valide",
+    "enterEmail": "Un courriel est requis.",
+    "enterPassword": "Mot de passe requis.",
+    "confirmPassword": "Confirmer le mot de passe requis."
+  },
+  "buttons": {
+    "account": "Accès abonné(e)s",
+    "login": "Se connecter"
+  },
+  "dashboard": {
+    "labels": {
+      "menu": "Menu Pelcro",
+      "name": "Nom",
+      "email": "Courriel",
+      "plan": "Plan",
+      "description": "Description",
+      "expiry": "Expiration",
+      "status": "Statut",
+      "logout": "Déconnexion",
+      "dashboard": "Tableau de bord",
+      "unsubscribe": "Se désabonner",
+      "reactivate": "Réactiver",
+      "renew": "Renouveler",
+      "support": "Soutien",
+      "account": "Compte",
+      "subscriptions": "Abonnements",
+      "updatePaymentSource": "Mettre à jour le mode de paiement",
+      "updateProfile": "Mettre à jour le profil",
+      "updateAddress": "Modifier",
+      "redeemGift": "Échanger un cadeau",
+      "address": "Adresse",
+      "paymentSource": "Mode de paiement",
+      "actions": "Actes",
+      "expiresOn": "Expire le",
+      "renewsOn": "Renouvelle le",
+      "isSureToCancel": "Êtes-vous certain de vouloir annuler votre abonnement ?"
+    },
+    "messages": {
+      "yourDashboard": "Votre tableau de bord Pelcro"
+    },
+    "errors": {
+      "": ""
+    }
+  },
+  "select": {
+    "messages": {
+      "alreadyHaveAccount": "Vous avez déjà un compte ?",
+      "loginHere": "Connectez-vous ici",
+      "checkbox": "Cochez cette case pour offrir cet abonnement"
+    },
+    "labels": {
+      "plan": {
+        "title": "Abonnez-vous à un plan",
+        "subtitle": "Sélectionnez l’un des plans ci-dessous et cliquez sur suivant."
+      },
+      "product": {
+        "title": "Abonnez-vous à un produit",
+        "subtitle": "Sélectionnez l’un des produits ci-dessous et cliquez sur suivant."
+      },
+      "selectProduct": "Sélectionnez un produit",
+      "selectPlan": "Sélectionnez un plan",
+      "starningAt": "À partir de"
     },
     "buttons": {
-        "account": "Accès abonné(e)s",
-        "login": "Se connecter"
-    },
-    "dashboard": {
-        "labels": {
-            "menu": "Menu Pelcro",
-            "name": "Nom",
-            "email": "Courriel",
-            "plan": "Plan",
-            "description": "Description",
-            "expiry": "Expiration",
-            "status": "Statut",
-            "logout": "Déconnexion",
-            "dashboard": "Tableau de bord",
-            "unsubscribe": "Se désabonner",
-            "reactivate": "Réactiver",
-            "renew": "Renouveler",
-            "support": "Soutien",
-            "account": "Compte",
-            "subscriptions": "Abonnements",
-            "updatePaymentSource": "Mettre à jour le mode de paiement",
-            "updateProfile": "Mettre à jour le profil",
-            "updateAddress": "Modifier",
-            "redeemGift": "Échanger un cadeau",
-            "address": "Adresse",
-            "paymentSource": "Mode de paiement",
-            "actions": "Actes",
-            "expiresOn": "Expire le",
-            "renewsOn": "Renouvelle le",
-            "isSureToCancel": "Êtes-vous certain de vouloir annuler votre abonnement ?"
-        },
-        "messages": {
-            "yourDashboard": "Votre tableau de bord Pelcro"
-        },
-        "errors": {
-            "": ""
-        }
-    },
-    "select": {
-        "messages": {
-            "alreadyHaveAccount": "Vous avez déjà un compte ?",
-            "loginHere": "Connectez-vous ici",
-            "checkbox": "Cochez cette case pour offrir cet abonnement"
-        },
-        "labels": {
-            "plan": {
-                "title": "Abonnez-vous à un plan",
-                "subtitle": "Sélectionnez l’un des plans ci-dessous et cliquez sur suivant."
-            },
-            "product": {
-                "title": "Abonnez-vous à un produit",
-                "subtitle": "Sélectionnez l’un des produits ci-dessous et cliquez sur suivant."
-            },
-            "selectProduct": "Sélectionnez un produit",
-            "selectPlan": "Sélectionnez un plan",
-            "starningAt": "À partir de"
-        },
-        "buttons": {
-            "next": "Prochain",
-            "select": "Choisir",
-            "back": "Retour"
-        }
-    },
-    "confirm": {
-        "buttons": {
-            "continue": "Continuer au contenu"
-        },
-        "labels": {
-            "title": "Merci pour votre commande !",
-            "subtitle": "Vos articles seront bientôt en route."
-        },
-        "giftSent": "Le cadeau d’abonnement a été envoyé à",
-        "successfully": "avec succès."
+      "next": "Prochain",
+      "select": "Choisir",
+      "back": "Retour"
     }
+  },
+  "confirm": {
+    "buttons": {
+      "continue": "Continuer au contenu"
+    },
+    "labels": {
+      "title": "Merci pour votre commande !",
+      "subtitle": "Vos articles seront bientôt en route."
+    },
+    "giftSent": "Le cadeau d’abonnement a été envoyé à",
+    "successfully": "avec succès."
+  }
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import { PelcroModalController } from "./Components/PelcroModalController/PelcroModalController";
 import { LoginModal } from "./Components/Login/LoginModal";
+import { VerifyLinkTokenModal } from "./Components/VerifyLinkToken/VerifyLinkTokenModal";
 import { RegisterModal } from "./Components/Register/RegisterModal";
 import { AddressUpdateModal } from "./Components/AddressUpdate/AddressUpdateModal";
 import { SelectModalWithHook as SelectModal } from "./Components/Select/SelectModal";
@@ -12,6 +13,7 @@ import { PaymentMethodSelectModal } from "./Components/PaymentMethodSelect/Payme
 import { GiftCreateModal } from "./Components/GiftCreate/GiftCreateModal";
 import { GiftRedeemModal } from "./Components/GiftRedeem/GiftRedeemModal";
 import { PasswordForgotModal } from "./Components/PasswordForgot/PasswordForgotModal";
+import { PasswordlessRequestModal } from "./Components/PasswordlessRequest/PasswordlessRequestModal";
 import { PasswordChangeModal } from "./Components/PasswordChange/PasswordChangeModal";
 import { PasswordResetModal } from "./Components/PasswordReset/PasswordResetModal";
 import { MeterModal } from "./Components/Meter/MeterModal";
@@ -24,6 +26,7 @@ import { CartModal } from "./Components/Cart/CartModal";
 import { ShopView } from "./Components/Shop/ShopView";
 import { SubscriptionCreateModal } from "./Components/SubscriptionCreate/SubscriptionCreateModal";
 import { SubscriptionRenewModal } from "./Components/SubscriptionRenew/SubscriptionRenewModal";
+import { SubscriptionCancelModal } from "./Components/SubscriptionCancel/SubscriptionCancelModal";
 import { PaymentSuccessModal } from "./Components/PaymentSuccess/PaymentSuccessModal";
 import { OrderCreateModal } from "./Components/OrderCreate/OrderCreateModal";
 import { OrderConfirmModal } from "./Components/OrderConfirm/OrderConfirmModal";
@@ -38,6 +41,7 @@ export const Main = () => {
       <MeterModal />
       <EmailVerifyModal />
       <LoginModal />
+      <VerifyLinkTokenModal />
       <RegisterModal />
 
       <UserUpdateModal />
@@ -45,6 +49,7 @@ export const Main = () => {
       <DashboardOpenButton />
       <ProfilePicChangeModal />
       <PasswordForgotModal />
+      <PasswordlessRequestModal/>
       <PasswordChangeModal />
       <PasswordResetModal />
 
@@ -61,6 +66,7 @@ export const Main = () => {
 
       <SubscriptionCreateModal />
       <SubscriptionRenewModal />
+      <SubscriptionCancelModal />
       <PaymentSuccessModal />
 
       <GiftCreateModal />

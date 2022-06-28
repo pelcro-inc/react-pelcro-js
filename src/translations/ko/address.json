@@ -1,0 +1,24 @@
+{
+    "title": "배송 주소를 입력하십시오.",
+    "selectAddressTitle": "주소를 선택하십시오.",
+    "selectAddressSubtitle": "저장된 주소에서 선택하거나 새 주소를 추가하십시오.",
+    "labels": {
+      "address": "주소",
+      "code": "우편번호",
+      "city": "도시",
+      "region": "시/도/지역",
+      "country": "국가",
+      "firstName": "이름",
+      "lastName": "성",
+      "required": "필수 항목"
+    },
+    "buttons": {
+      "submit": "제출",
+      "selectAddress": "주소 선택",
+      "addAddress": "새 주소 추가"
+    },
+    "messages": {
+      "addressUpdated": "주소가 성공적으로 업데이트되었습니다!",
+      "subRedeemed": "귀하의 유료 멤버십이 사용되었습니다."
+    }
+  }

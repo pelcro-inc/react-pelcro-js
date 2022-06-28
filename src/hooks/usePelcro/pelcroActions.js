@@ -5,6 +5,7 @@ import {
   userHasPaymentMethod,
   userMustVerifyEmail
 } from "../../utils/utils";
+import { cartItemAdded } from "../../utils/events";
 
 export class PelcroActions {
   constructor(storeSetter, storeGetter) {
@@ -46,6 +47,16 @@ export class PelcroActions {
       !this.get().isAuthenticated()
     ) {
       return this.set({ view: "login" });
+    }
+    console.log(this.get().isAuthenticated(), );
+    if (
+      ["passwordless-request"].includes(view) &&
+      (
+        this.get().isAuthenticated() ||
+        !window.Pelcro.site.read()?.passwordless_enabled
+      )
+    ) {
+      return this.set({ view: null });
     }
 
     this.set({ view });
@@ -132,6 +143,17 @@ export class PelcroActions {
     this.set({ plan });
   };
 
+  setSubscriptionToCancel = (id) => {
+    const subscriptions = window.Pelcro.subscription.list() ?? [];
+    const subscriptionToCancel = subscriptions.filter(
+      (sub) => String(sub.id) === String(id)
+    )[0];
+    if (!subscriptionToCancel) {
+      return console.error("invalid subscription id");
+    }
+    this.set({ subscriptionToCancel });
+  };
+
   setInvoice = (id) => {
     const invoices = window.Pelcro.invoice.list() ?? [];
     const invoice = invoices.find(
@@ -182,6 +204,9 @@ export class PelcroActions {
       console.error("invalid item SKU id");
       return false;
     }
+
+    //Dispatch PelcroElementsCartItemAdded when an item added successfully to the
+    document.dispatchEvent(cartItemAdded(itemToAdd));
 
     const { cartItems } = this.get();
 

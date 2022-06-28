@@ -1,0 +1,21 @@
+{
+  "labels": {
+    "title": "Cancel subscription",
+    "cancelReason": "Cancellation reason",
+    "subCancellation": {
+      "goBack": "Go back"
+    }
+  },
+  "messages": {
+    "subscriptionEnd": "This subscription is set to expire on",
+    "cancelNow": "Cancel Subscription Now",
+    "cancelLater": "Cancel at Period End",
+    "subCancellation": {
+      "isSureToCancelNow": "Are you sure you want to cancel your subscription immediately?",
+      "isSureToCancel": "Are you sure you want to cancel your subscription?",
+      "loading": "Canceling your subscription",
+      "success": "Subscription is successfully canceled",
+      "error": "Error while canceling your subscription"
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+    "labels": {
+      "title": "프로파일을 업데이트하시겠습니까?",
+      "subtitle": "프로필을 업데이트하려면 아래 정보를 입력하세요.",
+      "email": "이메일",
+      "firstName": "이름",
+      "lastName": "성",
+      "phone": "전화번호",
+      "submit": "제출",
+      "required": "필수 항목",
+      "cropperTitle": "프로필 사진 업데이트",
+      "cropperSubtitle": "사진을 업로드한 다음 알맞은 크기로 조정하세요.",
+      "save": "사진 업로드",
+      "selectImage": "새로운 사진 업로드",
+      "removeImage": "기존 사진 제거",
+      "zoom": "확대"
+    },
+    "messages": {
+      "userUpdated": "감사합니다! 프로필이 성공적으로 업데이트되었습니다.",
+      "pictureRemoved": "귀하의 프로필 사진이 제거되었습니다.",
+      "pictureUpdated": "귀하의 프로필 사진이 업데이트되었습니다."
+    }
+  }

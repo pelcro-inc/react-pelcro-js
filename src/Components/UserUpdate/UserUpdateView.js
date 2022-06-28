@@ -27,9 +27,9 @@ export const UserUpdateView = (props) => {
         <UserUpdateContainer {...props}>
           <AlertWithContext />
           <UserUpdateProfilePic onClick={props.onPictureClick} />
-          <div className="plc-flex plc-items-start">
-            <UserUpdateEmail label={t("labels.email")} />
-          </div>
+
+          <UserUpdateEmail />
+
           <div className="plc-flex plc-items-start">
             <UserUpdateFirstName
               autoComplete="first-name"
