@@ -1,3 +1,50 @@
+# [3.3.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0...v3.3.0) (2022-06-28)
+
+
+### Bug Fixes
+
+* **beta:** for new beta ([c0b245c](https://github.com/pelcro-inc/react-pelcro-js/commit/c0b245cf0fdd3aa9304c625f81a8888035e9473f))
+* **bugs:** confirm pass lang FR & register error ([#137](https://github.com/pelcro-inc/react-pelcro-js/issues/137)) ([0162572](https://github.com/pelcro-inc/react-pelcro-js/commit/0162572e9412b90829d82f2f37d71689a9fed459))
+* **cart:** add the cartItemAdded event in the correct spot ([ad41865](https://github.com/pelcro-inc/react-pelcro-js/commit/ad4186549b9de497bcd79eb496da992ffeb98c54))
+* **cart:** fix dispatch itemAdded event ([6b150ff](https://github.com/pelcro-inc/react-pelcro-js/commit/6b150ff704aa68f53760240a546dfa5e718e60ae))
+* **cart:** fix dispatch itemAdded event ([d28c822](https://github.com/pelcro-inc/react-pelcro-js/commit/d28c822a29b499f9f7aefd5618a77ee59e21e96b))
+* **cart:** fixed a typo in the dispatch event. ([32f7900](https://github.com/pelcro-inc/react-pelcro-js/commit/32f79005a0989ea197b68e9a11d4ab83fed463fa))
+* **cart:** revert back the test.js file to original state and fixed typo in pelcroActions ([12f0b29](https://github.com/pelcro-inc/react-pelcro-js/commit/12f0b29dfb3062f056f5a89eba435a5bc9253685))
+* **couponCode:** added margin bottom ([d046844](https://github.com/pelcro-inc/react-pelcro-js/commit/d046844f0a3d78543f12b4e7e8cd1a3cf34e01ee))
+* **deploy:** minor changes in index.html to fore deployment ([a96e6ce](https://github.com/pelcro-inc/react-pelcro-js/commit/a96e6cee777351227e52cb485b7e7dfd32654828))
+* **deploy:** reformatted the index.html to force new version ([046973f](https://github.com/pelcro-inc/react-pelcro-js/commit/046973fb683af3e32fc2ecc0a193d4208d2de7ec))
+* **fr translate:** confirm error translate ([#138](https://github.com/pelcro-inc/react-pelcro-js/issues/138)) ([9b4198b](https://github.com/pelcro-inc/react-pelcro-js/commit/9b4198b381a009a054e788bcc18eb4ce12c316a4))
+* **MagicLink:** check passwordless_enabled ([a7027e7](https://github.com/pelcro-inc/react-pelcro-js/commit/a7027e74531a46433d4dd2f3b16521b978e0722c))
+* **MagicLink:** disable modal view ([#161](https://github.com/pelcro-inc/react-pelcro-js/issues/161)) ([f7dbba1](https://github.com/pelcro-inc/react-pelcro-js/commit/f7dbba1e588ff834a5ad3c7244fb60ef8a4ed407))
+* **MagicLink:** dont show modal if user logged in ([2f7cf06](https://github.com/pelcro-inc/react-pelcro-js/commit/2f7cf06f565497a492699cbfb860d86f404249ea))
+* **modal:** modified verifylink modal ([9f2166f](https://github.com/pelcro-inc/react-pelcro-js/commit/9f2166f29e0aac3d22f4551cdf182c70d491df3a))
+* **SSO:** first-name-&-last-name ([2c8586f](https://github.com/pelcro-inc/react-pelcro-js/commit/2c8586fdf994d8ffbb005ebb5d9033f279809a21))
+* **SSO:** first-name-&-last-name-as-auth0-response ([#162](https://github.com/pelcro-inc/react-pelcro-js/issues/162)) ([9830257](https://github.com/pelcro-inc/react-pelcro-js/commit/983025775b27e32a8d9485ee97b20dbd4c4b9259))
+* edit the isCurrencyZeroDecimal function to be case insensitive ([#153](https://github.com/pelcro-inc/react-pelcro-js/issues/153)) ([0ebca0d](https://github.com/pelcro-inc/react-pelcro-js/commit/0ebca0d6e268bf473548d85f7d5591069cf6feba))
+* fire the PelcroElementsOrderCheckedOut event in the order confirmed modal instead of checkout ([7c23ca1](https://github.com/pelcro-inc/react-pelcro-js/commit/7c23ca1b3d445deb8cb52e346b33edc3a3ace7a1))
+* fix the cancel at period end issue ([64f6a85](https://github.com/pelcro-inc/react-pelcro-js/commit/64f6a8598ca1eead7f15d044fbb6536a595a5f8d))
+* **subscription:** export SubscriptionCancelModal ([4f4860d](https://github.com/pelcro-inc/react-pelcro-js/commit/4f4860d7178c14f5cd4daee78ea06bdca13ff6d6))
+* edit a typo in PelcroGiftRedeemed event listener ([472c510](https://github.com/pelcro-inc/react-pelcro-js/commit/472c5103ecb8f0137fc0bc4bd0b0565a0816b045))
+* edit top position of the edit email button ([ac70caf](https://github.com/pelcro-inc/react-pelcro-js/commit/ac70caf6dd87973e0adda76d331f22475145bb9c))
+* remove event listeners from the project ([70bb3be](https://github.com/pelcro-inc/react-pelcro-js/commit/70bb3bee36bfd3ebae5e6efdde15d92d51465422))
+* remove the PelcroElementsOrderCheckedOut event ([dc6c034](https://github.com/pelcro-inc/react-pelcro-js/commit/dc6c034ceed61a8bb2dc0f3a27f2a0a48ec495ac))
+* remove unused entries in initialState in UserUpdateContainer ([246182c](https://github.com/pelcro-inc/react-pelcro-js/commit/246182c6d24788b92cff1d58d2d892f0d0d5e9c4))
+* send the correct order object in the orderCheckedOut event ([3ffa3bb](https://github.com/pelcro-inc/react-pelcro-js/commit/3ffa3bb08e5afc1fb790a1558a9d6b084814ceac))
+* **redirection:** create account redirection link ([#141](https://github.com/pelcro-inc/react-pelcro-js/issues/141)) ([3dba81e](https://github.com/pelcro-inc/react-pelcro-js/commit/3dba81e2b066ae913060cf5fc582d9d72d062655))
+
+
+### Features
+
+* **beta:** build beta V ([efd5ee0](https://github.com/pelcro-inc/react-pelcro-js/commit/efd5ee0f8699a7097546a529130da05b72e46b18))
+* **cart:** dispatch the cartItemAdded event from the addToCart function ([2a32116](https://github.com/pelcro-inc/react-pelcro-js/commit/2a32116d3c8b422007eb1dc8b47cb572d3937941))
+* **login:** passwordless-login ([#156](https://github.com/pelcro-inc/react-pelcro-js/issues/156)) ([4ff766b](https://github.com/pelcro-inc/react-pelcro-js/commit/4ff766b6ddb929e7e0903a1ae858fdefc6d68b8e))
+* **modal:** added verifylink modal ([b775cbb](https://github.com/pelcro-inc/react-pelcro-js/commit/b775cbb408e88d7a98a4d9f5302a222595b08fd6))
+* **subscription:** add cancel subscription modal ([81229e3](https://github.com/pelcro-inc/react-pelcro-js/commit/81229e3262fa12bff1f053ab7ded010dad744461))
+* add zero decimal currencies support ([#140](https://github.com/pelcro-inc/react-pelcro-js/issues/140)) ([3ef0a6a](https://github.com/pelcro-inc/react-pelcro-js/commit/3ef0a6a556e59ede5af61193122a2b4da2590867))
+* dispatch the cartItemAdded event from the addToCart function ([b7ccf39](https://github.com/pelcro-inc/react-pelcro-js/commit/b7ccf397652f189c95bd85f97c9aeb89a19e941f))
+* fire several cart related events ([0659b6d](https://github.com/pelcro-inc/react-pelcro-js/commit/0659b6d1f5306141b3d4d9d6290cb4b63356e4f4))
+* send email field to the update profile function ([#149](https://github.com/pelcro-inc/react-pelcro-js/issues/149)) ([efc2ad1](https://github.com/pelcro-inc/react-pelcro-js/commit/efc2ad1c6194c0adf13610770a32692adf20063c))
+
 # [3.2.0-beta.42](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0-beta.41...v3.2.0-beta.42) (2022-06-23)
 
 
