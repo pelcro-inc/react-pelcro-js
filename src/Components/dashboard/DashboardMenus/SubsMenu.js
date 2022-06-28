@@ -252,16 +252,22 @@ export const SubscriptionsItems = ({
                   </Button>
                 )}
 
-                <Button
-                  variant="ghost"
-                  className="plc-text-red-500 focus:plc-ring-red-500 pelcro-dashboard-sub-cancel-button"
-                  icon={<XCircleIcon />}
-                  onClick={onCancelClick}
-                  disabled={disableSubmit}
-                  data-key={sub.id}
-                >
-                  {t("labels.unsubscribe")}
-                </Button>
+                {!sub.plan.auto_renew ||
+                (sub.plan.auto_renew &&
+                  sub.cancel_at_period_end === 0) ? (
+                  <Button
+                    variant="ghost"
+                    className="plc-text-red-500 focus:plc-ring-red-500 pelcro-dashboard-sub-cancel-button"
+                    icon={<XCircleIcon />}
+                    onClick={onCancelClick}
+                    disabled={disableSubmit}
+                    data-key={sub.id}
+                  >
+                    {t("labels.unsubscribe")}
+                  </Button>
+                ) : (
+                  ""
+                )}
               </td>
 
               <td>
