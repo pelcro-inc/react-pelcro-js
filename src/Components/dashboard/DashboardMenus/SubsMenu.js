@@ -251,7 +251,6 @@ export const SubscriptionsItems = ({
                     {t("labels.renew")}
                   </Button>
                 )}
-
                 <Button
                   variant="ghost"
                   className="plc-text-red-500 focus:plc-ring-red-500 pelcro-dashboard-sub-cancel-button"
