@@ -1,3 +1,13 @@
+## [3.3.1-beta.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.3.0...v3.3.1-beta.1) (2022-06-28)
+
+
+### Bug Fixes
+
+* add cancel button to all active subscriptions ([5311163](https://github.com/pelcro-inc/react-pelcro-js/commit/53111632320aa0626e510a4f9600696a49a23892))
+* add cancel button to all active subscriptions ([#164](https://github.com/pelcro-inc/react-pelcro-js/issues/164)) ([49514d5](https://github.com/pelcro-inc/react-pelcro-js/commit/49514d5721e733be9dc6e1fc853406bd85681ff7))
+* hide cancel button if already canceled at period end ([3c01622](https://github.com/pelcro-inc/react-pelcro-js/commit/3c01622c181bc3264e1ab8ccbd78208a183a89af))
+* remove empty line ([3608844](https://github.com/pelcro-inc/react-pelcro-js/commit/3608844c33a24a042b096b7bb1504e4340a8801a))
+
 # [3.3.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0...v3.3.0) (2022-06-28)
 
 ### Bug Fixes
