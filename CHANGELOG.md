@@ -1,3 +1,10 @@
+## [3.3.1-beta.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.3.1-beta.1...v3.3.1-beta.2) (2022-06-30)
+
+
+### Bug Fixes
+
+* **Address:** Modal show only shipping addresses ([#166](https://github.com/pelcro-inc/react-pelcro-js/issues/166)) ([d4c855e](https://github.com/pelcro-inc/react-pelcro-js/commit/d4c855e3768fe4ed71030cb4800a721ace21483b))
+
 ## [3.3.1-beta.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.3.0...v3.3.1-beta.1) (2022-06-28)
 
 
