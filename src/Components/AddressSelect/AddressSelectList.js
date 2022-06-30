@@ -16,7 +16,7 @@ export const AddressSelectList = () => {
   return (
     <div className="plc-overflow-y-scroll plc-max-h-80 pelcro-addresses-select-wrapper">
       {addresses.map((address) => (
-        <div
+        address.type === "shipping" && <div
           key={address.id}
           className="plc-p-2 plc-mx-3 plc-mt-2 plc-border plc-border-gray-400 plc-border-solid plc-rounded plc-text-gray-900 pelcro-address-wrapper"
         >
