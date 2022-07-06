@@ -80,7 +80,8 @@ export const SubscriptionsItems = ({
   toggleActiveMenu
 }) => {
   const { t } = useTranslation("dashboard");
-  const { switchView, setSubscriptionToCancel, isAuthenticated } = usePelcro();
+  const { switchView, setSubscriptionToCancel, isAuthenticated } =
+    usePelcro();
 
   const subs = getNonDonationSubs();
 
@@ -93,9 +94,10 @@ export const SubscriptionsItems = ({
       const isActive = activeMenu === sub.id;
       // Cancel button click handlers
       const onCancelClick = () => {
-        const isImmediateCancelationEnabled = window.Pelcro.site.read().cancel_settings.status;
+        const isImmediateCancelationEnabled =
+          window.Pelcro.site.read().cancel_settings.status;
 
-        if(isImmediateCancelationEnabled) {
+        if (isImmediateCancelationEnabled) {
           setSubscriptionToCancel(sub.id);
           return switchView("subscription-cancel");
         }
@@ -223,18 +225,6 @@ export const SubscriptionsItems = ({
               </td>
 
               <td>
-                {sub.cancel_at_period_end === 0 && (
-                  <Button
-                    variant="ghost"
-                    className="plc-text-red-500 focus:plc-ring-red-500 pelcro-dashboard-sub-cancel-button"
-                    icon={<XCircleIcon />}
-                    onClick={onCancelClick}
-                    disabled={disableSubmit}
-                    data-key={sub.id}
-                  >
-                    {t("labels.unsubscribe")}
-                  </Button>
-                )}
                 {sub.cancel_at_period_end === 1 &&
                   sub.plan.auto_renew &&
                   !sub.is_gift_recipient && (
@@ -260,6 +250,23 @@ export const SubscriptionsItems = ({
                   >
                     {t("labels.renew")}
                   </Button>
+                )}
+
+                {!sub.plan.auto_renew ||
+                (sub.plan.auto_renew &&
+                  sub.cancel_at_period_end === 0) ? (
+                  <Button
+                    variant="ghost"
+                    className="plc-text-red-500 focus:plc-ring-red-500 pelcro-dashboard-sub-cancel-button"
+                    icon={<XCircleIcon />}
+                    onClick={onCancelClick}
+                    disabled={disableSubmit}
+                    data-key={sub.id}
+                  >
+                    {t("labels.unsubscribe")}
+                  </Button>
+                ) : (
+                  ""
                 )}
               </td>
 
