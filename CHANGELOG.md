@@ -1,3 +1,21 @@
+# [3.4.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.3.0...v3.4.0) (2022-07-06)
+
+
+### Bug Fixes
+
+* add cancel button to all active subscriptions ([5311163](https://github.com/pelcro-inc/react-pelcro-js/commit/53111632320aa0626e510a4f9600696a49a23892))
+* add cancel button to all subscriptions ([#167](https://github.com/pelcro-inc/react-pelcro-js/issues/167)) ([b82d3ed](https://github.com/pelcro-inc/react-pelcro-js/commit/b82d3ed89f0d2e9ab0ca9c6a79acfe029d8554a3)), closes [#164](https://github.com/pelcro-inc/react-pelcro-js/issues/164) [#164](https://github.com/pelcro-inc/react-pelcro-js/issues/164) [#164](https://github.com/pelcro-inc/react-pelcro-js/issues/164) [#166](https://github.com/pelcro-inc/react-pelcro-js/issues/166) [#166](https://github.com/pelcro-inc/react-pelcro-js/issues/166)
+* add cancel button to all subscriptions ([#167](https://github.com/pelcro-inc/react-pelcro-js/issues/167)) ([#168](https://github.com/pelcro-inc/react-pelcro-js/issues/168)) ([f9f6b82](https://github.com/pelcro-inc/react-pelcro-js/commit/f9f6b8247f7c5aa01a9a61d50de90d02651e2960)), closes [#164](https://github.com/pelcro-inc/react-pelcro-js/issues/164) [#164](https://github.com/pelcro-inc/react-pelcro-js/issues/164) [#164](https://github.com/pelcro-inc/react-pelcro-js/issues/164) [#166](https://github.com/pelcro-inc/react-pelcro-js/issues/166) [#166](https://github.com/pelcro-inc/react-pelcro-js/issues/166)
+* **Address:** Modal show only shipping addresses ([#166](https://github.com/pelcro-inc/react-pelcro-js/issues/166)) ([d4c855e](https://github.com/pelcro-inc/react-pelcro-js/commit/d4c855e3768fe4ed71030cb4800a721ace21483b))
+* add cancel button to all active subscriptions ([#164](https://github.com/pelcro-inc/react-pelcro-js/issues/164)) ([49514d5](https://github.com/pelcro-inc/react-pelcro-js/commit/49514d5721e733be9dc6e1fc853406bd85681ff7))
+* hide cancel button if already canceled at period end ([3c01622](https://github.com/pelcro-inc/react-pelcro-js/commit/3c01622c181bc3264e1ab8ccbd78208a183a89af))
+* remove empty line ([3608844](https://github.com/pelcro-inc/react-pelcro-js/commit/3608844c33a24a042b096b7bb1504e4340a8801a))
+
+
+### Features
+
+* add cancel button to all active subscriptions ([#169](https://github.com/pelcro-inc/react-pelcro-js/issues/169)) ([5147f96](https://github.com/pelcro-inc/react-pelcro-js/commit/5147f965fe1a7e3cbf786f9f318516d383951c9e)), closes [#164](https://github.com/pelcro-inc/react-pelcro-js/issues/164) [#164](https://github.com/pelcro-inc/react-pelcro-js/issues/164) [#164](https://github.com/pelcro-inc/react-pelcro-js/issues/164) [#166](https://github.com/pelcro-inc/react-pelcro-js/issues/166) [#166](https://github.com/pelcro-inc/react-pelcro-js/issues/166) [#167](https://github.com/pelcro-inc/react-pelcro-js/issues/167) [#168](https://github.com/pelcro-inc/react-pelcro-js/issues/168) [#164](https://github.com/pelcro-inc/react-pelcro-js/issues/164) [#164](https://github.com/pelcro-inc/react-pelcro-js/issues/164) [#164](https://github.com/pelcro-inc/react-pelcro-js/issues/164) [#166](https://github.com/pelcro-inc/react-pelcro-js/issues/166) [#166](https://github.com/pelcro-inc/react-pelcro-js/issues/166)
+
 ## [3.3.1-beta.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.3.1-beta.1...v3.3.1-beta.2) (2022-06-30)
 
 
