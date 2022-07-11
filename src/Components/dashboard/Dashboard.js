@@ -186,10 +186,9 @@ class Dashboard extends Component {
   displayProductSelect = ({ isGift }) => {
     if (isGift) {
       this.props.setProductAndPlan(null, null, true);
-      return this.props.setView("plan-select");
     }
 
-    return this.props.setView("subscription-options");
+    return this.props.setView("plan-select");
   };
 
   displayAddressCreate = () => {

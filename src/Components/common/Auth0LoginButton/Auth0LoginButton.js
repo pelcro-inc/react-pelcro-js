@@ -82,14 +82,15 @@ export const Auth0LoginButton = ({
           return onFailure(error);
         }
 
-        const { email, nickname } = user;
+        const { email, first_name, last_name, given_name, family_name } = user;
 
         loginDispatch?.({
           type: HANDLE_SOCIAL_LOGIN,
           payload: {
             idpName: "auth0",
             idpToken: accessToken,
-            firstName: nickname,
+            ...((first_name || given_name) && {firstName: first_name || given_name}),
+            ...((last_name || family_name) && {lastName: last_name || family_name}),
             email
           }
         });
@@ -99,7 +100,8 @@ export const Auth0LoginButton = ({
           payload: {
             idpName: "auth0",
             idpToken: accessToken,
-            firstName: nickname,
+            ...((first_name || given_name) && {firstName: first_name || given_name}),
+            ...((last_name || family_name) && {lastName: last_name || family_name}),
             email
           }
         });
@@ -115,7 +117,7 @@ export const Auth0LoginButton = ({
     return (
       <button
         onClick={handleClick}
-        className={`plc-flex plc-items-center plc-justify-center plc-w-full plc-p-3 plc-space-x-3 plc-text-gray-700 plc-border plc-border-gray-200 plc-rounded-3xl hover:plc-bg-gray-200 pelcro-auth0-login ${className}`}
+        className={`plc-flex plc-items-center plc-justify-center plc-p-3 plc-space-x-3 plc-text-gray-700 plc-border plc-border-gray-200 plc-rounded-3xl hover:plc-bg-gray-200 pelcro-auth0-login ${className}`}
       >
         <Auth0LogoIcon
           className={`plc-w-6 plc-h-auto pelcro-auth0-login-icon" ${iconClassName}`}

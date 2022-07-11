@@ -10,7 +10,6 @@ export const initialState = {
   view: null,
 
   // Plans
-  productsList: window.Pelcro?.product.list() ?? [],
   product: null,
   plan: null,
   isGift: false,

@@ -1,11 +1,11 @@
 import ReactGA from "react-ga";
 import { initialState } from "./index";
 import {
-  getRenewableProducts,
   userHasAddress,
   userHasPaymentMethod,
   userMustVerifyEmail
 } from "../../utils/utils";
+import { cartItemAdded } from "../../utils/events";
 
 export class PelcroActions {
   constructor(storeSetter, storeGetter) {
@@ -48,12 +48,15 @@ export class PelcroActions {
     ) {
       return this.set({ view: "login" });
     }
-
-    if (view === "subscription-options") {
-      const noRenewableProducts = getRenewableProducts().length === 0;
-      if (noRenewableProducts) {
-        return this.set({ view: "plan-select" });
-      }
+    console.log(this.get().isAuthenticated(), );
+    if (
+      ["passwordless-request"].includes(view) &&
+      (
+        this.get().isAuthenticated() ||
+        !window.Pelcro.site.read()?.passwordless_enabled
+      )
+    ) {
+      return this.set({ view: null });
     }
 
     this.set({ view });
@@ -128,33 +131,6 @@ export class PelcroActions {
    * Subscription Actions
    */
 
-  setProductsList = (products) => {
-    if (!Array.isArray(products)) {
-      return console.error(
-        `setProductsList expects an array of products as an argument, got an argument of type ${typeof products} instead`
-      );
-    }
-
-    const allowedProducts = window.Pelcro.product.list();
-
-    const validProducts = products.filter((product) => {
-      const isValidProduct = allowedProducts.some(
-        (allowedProduct) =>
-          allowedProduct.id === product?.id &&
-          allowedProduct.name === product?.name
-      );
-      if (!isValidProduct) {
-        console.warn(
-          `setProductsList expects an array of products that exist in the list of valid products (window.Pelcro.product.list()), but it recieved a product which doesn't exist in that list:`,
-          product
-        );
-      }
-      return isValidProduct;
-    });
-
-    this.set({ productsList: validProducts });
-  };
-
   setProduct = (id) => {
     const product = window.Pelcro.product.getById(id);
     if (!product) return console.error("invalid product id");
@@ -165,6 +141,17 @@ export class PelcroActions {
     const plan = window.Pelcro.plan.getById(id);
     if (!plan) return console.error("invalid plan id");
     this.set({ plan });
+  };
+
+  setSubscriptionToCancel = (id) => {
+    const subscriptions = window.Pelcro.subscription.list() ?? [];
+    const subscriptionToCancel = subscriptions.filter(
+      (sub) => String(sub.id) === String(id)
+    )[0];
+    if (!subscriptionToCancel) {
+      return console.error("invalid subscription id");
+    }
+    this.set({ subscriptionToCancel });
   };
 
   setInvoice = (id) => {
@@ -232,6 +219,9 @@ export class PelcroActions {
       console.error("invalid item SKU id");
       return false;
     }
+
+    //Dispatch PelcroElementsCartItemAdded when an item added successfully to the
+    document.dispatchEvent(cartItemAdded(itemToAdd));
 
     const { cartItems } = this.get();
 

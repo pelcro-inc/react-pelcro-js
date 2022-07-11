@@ -333,6 +333,14 @@ export const initViewFromURL = () => {
         return verifyEmailTokenFromUrl();
       }
 
+      if (view === "passwordless-login") {
+        return verifyLinkTokenFromUrl();
+      }
+
+      if (view === "passwordless-request") {
+        return showPasswordlessRequestFromUrl();
+      }
+
       if (view === "invoice-details") {
         return showInvoiceDetailsFromUrl();
       }
@@ -528,6 +536,62 @@ const verifyEmailTokenFromUrl = () => {
     },
     { once: true }
   );
+};
+
+const verifyLinkTokenFromUrl = () => {
+  const { whenSiteReady, resetView, isAuthenticated } = usePelcro.getStore();
+
+  const translations = i18n.t("verifyLinkToken:messages", {
+    returnObjects: true
+  });
+
+  const loginToken = window.Pelcro.helpers.getURLParameter("token");
+
+  const passwordlessEnabled = window.Pelcro.site.read()?.passwordless_enabled;
+
+  if (isAuthenticated() || !loginToken || !passwordlessEnabled) return;
+  
+  whenSiteReady(
+    () => {
+      
+      window.Pelcro.user.verifyLoginToken(
+        {
+          token: loginToken
+        },
+        (err, res) => {
+          if (err) {
+            return notify.error(getErrorMessages(err));
+          }
+          const { auth_token } = res.data;
+          window.Pelcro.user.refresh(
+            { 
+              auth_token 
+            }, 
+            (err, res) => {
+              if(err) {
+                return notify.error(getErrorMessages(err));
+              }
+              resetView();
+              return notify.success(translations.success);
+            }
+          )
+        }
+      );
+    },
+    { once: true }
+  );
+};
+
+const showPasswordlessRequestFromUrl = () => {
+  const { isAuthenticated } = usePelcro.getStore();
+
+  const passwordlessEnabled = window.Pelcro.site.read()?.passwordless_enabled;
+
+  if (!passwordlessEnabled || isAuthenticated()) return;
+
+  const { switchView } = usePelcro.getStore();
+  
+  return switchView("passwordless-request");
 };
 
 const showInvoiceDetailsFromUrl = () => {

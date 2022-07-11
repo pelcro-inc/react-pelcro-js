@@ -5,6 +5,8 @@ import useReducerWithSideEffects, {
   Update
 } from "use-reducer-with-side-effects";
 import {
+  SET_EMAIL,
+  SET_EMAIL_ERROR,
   SET_FIRST_NAME,
   SET_LAST_NAME,
   SET_DISPLAY_NAME,
@@ -18,6 +20,7 @@ import { getErrorMessages } from "../common/Helpers";
 
 const initialState = {
   email: window.Pelcro.user.read()?.email,
+  emailError: null,
   firstName: window.Pelcro.user.read()?.first_name,
   lastName: window.Pelcro.user.read()?.last_name,
   displayName: window.Pelcro.user.read()?.display_name,
@@ -53,6 +56,10 @@ const UserUpdateContainer = ({
   const loadUserDataIntoFields = () => {
     const fields = [
       {
+        type: SET_EMAIL,
+        payload: window.Pelcro.user.read()?.email
+      },
+      {
         type: SET_FIRST_NAME,
         payload: window.Pelcro.user.read()?.first_name
       },
@@ -78,12 +85,13 @@ const UserUpdateContainer = ({
   };
 
   const handleUpdateUser = (
-    { firstName, lastName, phone, textFields, displayName },
+    { email, firstName, lastName, phone, textFields, displayName },
     dispatch
   ) => {
     window.Pelcro.user.update(
       {
         auth_token: window.Pelcro.user.read().auth_token,
+        email: email,
         first_name: firstName,
         last_name: lastName,
         display_name: displayName,
@@ -126,6 +134,18 @@ const UserUpdateContainer = ({
           return Update({
             ...state,
             textFields: { ...state.textFields, ...action.payload }
+          });
+
+        case SET_EMAIL:
+          return Update({
+            ...state,
+            email: action.payload
+          });
+
+        case SET_EMAIL_ERROR:
+          return Update({
+            ...state,
+            emailError: action.payload
           });
 
         case SET_FIRST_NAME:

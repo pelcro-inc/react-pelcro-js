@@ -13,6 +13,7 @@ import { Button } from "../../SubComponents/Button";
 import { Checkbox } from "../../SubComponents/Checkbox";
 import { Radio } from "../../SubComponents/Radio";
 import { usePelcro } from "../../hooks/usePelcro";
+import { getEntitlementsFromElem } from "../../utils/utils";
 
 /**
  *
@@ -23,7 +24,6 @@ export function SelectModalWithHook(props) {
   }, []);
 
   const {
-    productsList,
     isGift,
     plan,
     product,
@@ -34,14 +34,19 @@ export function SelectModalWithHook(props) {
     set
   } = usePelcro();
 
-  const isRenewingSub = view === "_plan-select-renew";
+  const entitlementsProtectedElements = document.querySelectorAll(
+    "[data-pelcro-entitlements]"
+  );
+
+  const entitlements =
+    entitlementsProtectedElements.length > 0
+      ? getEntitlementsFromElem(entitlementsProtectedElements[0])
+      : null;
 
   return (
     <SelectModalWithTrans
-      productsList={productsList}
       isGift={isGift}
-      disableGifting={isRenewingGift || isRenewingSub}
-      isRenewingSub={isRenewingSub}
+      disableGifting={isRenewingGift}
       plan={plan}
       product={product}
       onClose={() => {
@@ -51,10 +56,10 @@ export function SelectModalWithHook(props) {
       setProductAndPlan={(product, plan, isGift) =>
         set({ product, plan, isGift })
       }
-      setSubscriptionIdToRenew={(subscriptionIdToRenew) =>
-        set({ subscriptionIdToRenew })
-      }
       setView={switchView}
+      matchingEntitlements={
+        view === "_plan-select-entitlements" ? entitlements : null
+      }
     />
   );
 }
@@ -69,7 +74,12 @@ class SelectModal extends Component {
       plan: {},
       isGift: props.isGift,
       disabled: true,
-      mode: "product"
+      mode: "product",
+      productList: props.matchingEntitlements
+        ? window.Pelcro.product.getByEntitlements(
+            props.matchingEntitlements
+          )
+        : window.Pelcro.product.list()
     };
 
     this.product =
@@ -89,10 +99,10 @@ class SelectModal extends Component {
       this.setState({ plan, disabled: false });
     }
 
-    if (this.props.productsList.length === 1) {
+    if (this.state.productList.length === 1) {
       this.setState({
-        product: this.props.productsList[0],
-        planList: this.props.productsList[0].plans,
+        product: this.state.productList[0],
+        planList: this.state.productList[0].plans,
         mode: "plan"
       });
     }
@@ -110,7 +120,8 @@ class SelectModal extends Component {
   };
 
   onProductChange = (e) => {
-    const product = productsList[e.target.selectedIndex];
+    const product =
+      window.Pelcro.product.list()[e.target.selectedIndex];
     this.setState({ product: product, plan: product.plans[0] });
   };
 
@@ -200,7 +211,7 @@ class SelectModal extends Component {
     const userDidSelectProduct = Boolean(this.state.mode === "plan");
     const productsToShow = userDidSelectProduct
       ? [this.state.product]
-      : this.props.productsList;
+      : this.state.productList;
 
     return productsToShow.map((product, index) => {
       return this.renderOneProduct(product, index);
@@ -214,7 +225,7 @@ class SelectModal extends Component {
     }
 
     const [productsThatMatchArticleTag, allProductsMinusMatched] =
-      productsWithMatchedTaggedFirst(this.props.productsList);
+      productsWithMatchedTaggedFirst();
 
     // Render normal products if there are no available matching products
     if (!productsThatMatchArticleTag?.length) {
@@ -245,7 +256,8 @@ class SelectModal extends Component {
       </div>
     );
 
-    function productsWithMatchedTaggedFirst(allProducts) {
+    function productsWithMatchedTaggedFirst() {
+      const allProducts = window.Pelcro.product.list() ?? [];
       const productsThatMatchArticleTag =
         window.Pelcro.product.getByMatchingPageTags();
 
@@ -296,7 +308,7 @@ class SelectModal extends Component {
 
   selectProduct = (e) => {
     const id = e.target.dataset.key;
-    for (const product of this.props.productsList) {
+    for (const product of this.state.productList) {
       if (+product.id === +id) {
         this.setState({ product: product });
         this.setState({ planList: product.plans });
@@ -335,18 +347,6 @@ class SelectModal extends Component {
       this.state.plan,
       this.state.isGift
     );
-
-    if (this.props.isRenewingSub) {
-      const matchingSub = window.Pelcro.subscription
-        .list()
-        .find(
-          (sub) =>
-            sub.plan.id === this.state.plan.id &&
-            sub.status === "active" &&
-            sub.cancel_at_period_end === 1
-        );
-      this.props.setSubscriptionIdToRenew(matchingSub?.id ?? null);
-    }
 
     const { product, isGift } = this.state;
     const { setView } = this.props;
@@ -403,12 +403,14 @@ class SelectModal extends Component {
               <h4 className="plc-text-2xl plc-font-semibold">
                 {(this.product &&
                   this.product.paywall.select_title) ||
-                  this.props.productsList[0]?.paywall.select_title}
+                  window.Pelcro.product.list()[0]?.paywall
+                    .select_title}
               </h4>
               <p>
                 {(this.product &&
                   this.product.paywall.select_subtitle) ||
-                  this.props.productsList[0]?.paywall.select_subtitle}
+                  window.Pelcro.product.list()[0]?.paywall
+                    .select_subtitle}
               </p>
             </div>
 

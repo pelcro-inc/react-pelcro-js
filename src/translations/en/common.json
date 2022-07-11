@@ -2,7 +2,8 @@
   "validation": {
     "validEmail": "Email address is not valid.",
     "enterEmail": "Email address is required.",
-    "enterPassword": "Password is required."
+    "enterPassword": "Password is required.",
+    "confirmPassword": "Confirm password is required."
   },
   "buttons": {
     "account": "My account",

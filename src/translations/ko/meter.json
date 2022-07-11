@@ -1,0 +1,11 @@
+{
+    "messages": {
+      "freeVisits": "남은 무료 방문 기간:",
+      "subscribeNow": "멤버십 가입",
+      "alreadyHaveAccount": "이미 계정이 있습니까?",
+      "loginHere": "여기에서 로그인하세요."
+    },
+    "errors": {
+      "": ""
+    }
+  }

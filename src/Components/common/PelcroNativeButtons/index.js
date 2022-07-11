@@ -153,9 +153,7 @@ export const init = () => {
       } else {
         pelcroSubscribeButtonsByClass[j].addEventListener(
           "click",
-          () => {
-            return switchView("subscription-options");
-          }
+          () => switchView("plan-select")
         );
       }
     }

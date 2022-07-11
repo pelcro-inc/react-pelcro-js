@@ -1,0 +1,13 @@
+{
+    "title": "귀하의 장바구니",
+    "subtitle": "아래에서 결제를 진행하세요.",
+    "name": "이름",
+    "quantity": "수량",
+    "price": "가격",
+    "actions": "조치",
+    "remove": "제거",
+    "total": "총계",
+    "confirm": "체크아웃",
+    "empty": "장바구니가 비었습니다.",
+    "removeAll": "모두 제거"
+}
