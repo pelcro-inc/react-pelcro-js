@@ -10,7 +10,8 @@
     "country": "Country",
     "firstName": "First name",
     "lastName": "Last name",
-    "required": "required"
+    "required": "required",
+    "isDefault": "Set as default"
   },
   "buttons": {
     "submit": "Submit",

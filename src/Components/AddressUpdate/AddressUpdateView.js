@@ -9,6 +9,7 @@ import { AddressUpdateSubmit } from "./AddressUpdateSubmit";
 import { AddressUpdateContainer } from "./AddressUpdateContainer";
 import { AddressUpdateCountrySelect } from "./AddressUpdateCountrySelect";
 import { AddressUpdateStateSelect } from "./AddressUpdateStateSelect";
+import { AddressUpdateSetDefault } from "./AddressUpdateSetDefault";
 import { AlertWithContext } from "../../SubComponents/AlertWithContext";
 
 export const AddressUpdateView = (props) => {
@@ -76,6 +77,14 @@ export const AddressUpdateView = (props) => {
               required
             />
           </div>
+
+          <div className="plc-flex plc-space-x-3 plc-items-start plc-mb-3">
+            <AddressUpdateSetDefault
+              id="pelcro-input-is-default"
+              label={t("labels.isDefault")}
+            />
+          </div>
+
           <p className="plc-text-gray-900 pelcro-footnote">
             * {t("labels.required")}
           </p>

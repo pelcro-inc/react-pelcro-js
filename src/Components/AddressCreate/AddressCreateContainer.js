@@ -11,6 +11,7 @@ import {
   LOADING,
   VALIDATE_FIELD,
   SET_TEXT_FIELD,
+  HANDLE_CHECKBOX_CHANGE,
   RESET_FIELD_ERROR,
   GET_COUNTRIES_SUCCESS,
   GET_STATES_SUCCESS,
@@ -40,6 +41,7 @@ const initialState = {
   postalCodeError: "",
   states: [],
   countries: [],
+  isDefault: false,
   alert: {
     type: "error",
     content: ""
@@ -118,7 +120,8 @@ const AddressCreateContainer = ({
       city,
       state,
       country,
-      postalCode
+      postalCode,
+      isDefault
     },
     dispatch
   ) => {
@@ -132,7 +135,8 @@ const AddressCreateContainer = ({
         city: city,
         state: state,
         country: country,
-        postal_code: postalCode
+        postal_code: postalCode,
+        is_default: isDefault
       },
       (err, res) => {
         if (err) {
@@ -224,6 +228,12 @@ const AddressCreateContainer = ({
           });
         }
         case SET_TEXT_FIELD:
+          return Update({
+            ...state,
+            ...action.payload
+          });
+
+        case HANDLE_CHECKBOX_CHANGE:
           return Update({
             ...state,
             ...action.payload
