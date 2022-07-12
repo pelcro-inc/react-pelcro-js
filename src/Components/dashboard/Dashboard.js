@@ -722,7 +722,6 @@ class Dashboard extends Component {
                 }
               />
 
-              {/* FIXME: fix icons and labels */}
               <Accordion.item
                 show={hasActiveMemberships()}
                 name={SUB_MENUS.MEMBERSHIPS}

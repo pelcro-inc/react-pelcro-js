@@ -71,7 +71,6 @@ const MembershipsItems = () => {
           <td>
             <span>{membership.status}</span>
           </td>
-          {/* FIXME: fix labels and icons */}
           <td>
             <Button
               variant="ghost"
