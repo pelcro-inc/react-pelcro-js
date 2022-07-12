@@ -155,7 +155,7 @@ const AddressCreateContainer = ({
 
         if (selectedMembership) {
           dispatch({ type: LOADING, payload: true });
-          return window.Pelcro.member.update(
+          return window.Pelcro.membership.update(
             {
               auth_token: window.Pelcro.user.read().auth_token,
               address_id: newAddressId,
@@ -174,8 +174,7 @@ const AddressCreateContainer = ({
                 });
                 return onFailure(err);
               }
-              // FIXME: use wording
-              notify.success("updated successfully membership");
+              notify.success(t("messages.addressUpdated"));
               return onMembershipAdressUpdateSuccess(res);
             }
           );
