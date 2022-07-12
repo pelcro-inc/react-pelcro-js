@@ -56,6 +56,7 @@ const AddressCreateContainer = ({
   className = "",
   type = "shipping",
   onGiftRedemptionSuccess = () => {},
+  onMembershipAdressUpdateSuccess = () => {},
   onSuccess = () => {},
   onFailure = () => {},
   children,
@@ -67,7 +68,8 @@ const AddressCreateContainer = ({
     subscriptionIdToRenew: subscriptionIdToRenewFromStore,
     product,
     order,
-    set
+    set,
+    selectedMembership
   } = usePelcro();
   const giftCode = props.giftCode ?? giftCodeFromStore;
   const subscriptionIdToRenew =
@@ -150,6 +152,33 @@ const AddressCreateContainer = ({
         const newAddressId = String(
           getNewlyCreatedAddress(res.data.addresses).id
         );
+
+        if (selectedMembership) {
+          dispatch({ type: LOADING, payload: true });
+          return window.Pelcro.membership.update(
+            {
+              auth_token: window.Pelcro.user.read().auth_token,
+              address_id: newAddressId,
+              membership_id: selectedMembership.id
+            },
+            (err, res) => {
+              dispatch({ type: LOADING, payload: false });
+
+              if (err) {
+                dispatch({
+                  type: SHOW_ALERT,
+                  payload: {
+                    type: "error",
+                    content: getErrorMessages(err)
+                  }
+                });
+                return onFailure(err);
+              }
+              notify.success(t("messages.addressUpdated"));
+              return onMembershipAdressUpdateSuccess(res);
+            }
+          );
+        }
 
         if (product || order) {
           set({ selectedAddressId: newAddressId });

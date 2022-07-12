@@ -34,11 +34,13 @@ import { usePelcro } from "../../hooks/usePelcro";
 import { SubscriptionsMenu } from "./DashboardMenus/SubsMenu";
 import { DonationsMenu } from "./DashboardMenus/DonationsMenu";
 import { InvoicesMenu } from "./DashboardMenus/InvoicesMenu";
+import { MembershipsMenu } from "./DashboardMenus/MembershipsMenu";
 
 const SUB_MENUS = {
   PROFILE: "profile",
   SUBSCRIPTIONS: "subscriptions",
   DONATIONS: "donations",
+  MEMBERSHIPS: "memberships",
   PAYMENT_CARDS: "payment-cards",
   ADDRESSES: "addresses",
   GIFTS: "gifts",
@@ -720,6 +722,17 @@ class Dashboard extends Component {
                 }
               />
 
+              {/* FIXME: fix icons and labels */}
+              <Accordion.item
+                show={hasActiveMemberships()}
+                name={SUB_MENUS.MEMBERSHIPS}
+                icon={
+                  <DonateIcon className="plc-transform plc-scale-120 plc-w-7 plc-h-8 plc-mr-1 plc-pt-1" />
+                }
+                title={this.locale("labels.memberships")}
+                content={<MembershipsMenu />}
+              />
+
               <Accordion.item
                 show={hasDonationSubs()}
                 name={SUB_MENUS.DONATIONS}
@@ -799,6 +812,16 @@ function hasDonationSubs() {
       ) ?? [];
 
   return donations.length > 0 || canceledDonations.length > 0;
+}
+
+function hasActiveMemberships() {
+  return (
+    window.Pelcro.user
+      .read()
+      .memberships?.some(
+        (membership) => membership.status === "active"
+      ) ?? false
+  );
 }
 
 export const DashboardWithTrans =

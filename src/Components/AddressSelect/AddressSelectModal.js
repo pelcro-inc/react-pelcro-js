@@ -30,6 +30,11 @@ export const AddressSelectModal = ({
     switchView("address-create");
   };
 
+  // FIXME: implement me
+  const onMembershipAdressUpdateSuccess = () => {
+    otherProps.onMembershipAdressUpdateSuccess?.();
+  };
+
   return (
     <Modal
       onDisplay={onDisplay}
@@ -42,6 +47,9 @@ export const AddressSelectModal = ({
           {...otherProps}
           onSuccess={onSuccess}
           onGiftRedemptionSuccess={onGiftRedemptionSuccess}
+          onMembershipAdressUpdateSuccess={
+            onMembershipAdressUpdateSuccess
+          }
         />
       </ModalBody>
       <ModalFooter>

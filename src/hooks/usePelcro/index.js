@@ -25,6 +25,9 @@ export const initialState = {
   // invoices
   invoice: null,
 
+  // memberships
+  selectedMembership: null,
+
   // User
   isAuthenticated: () => window.Pelcro.user.isAuthenticated(),
   selectedPaymentMethodId: null,
