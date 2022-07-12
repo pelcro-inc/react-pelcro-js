@@ -1,3 +1,10 @@
+## [3.4.1-beta.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.4.0...v3.4.1-beta.1) (2022-07-12)
+
+
+### Bug Fixes
+
+* **memberships:** remove comments ([782671b](https://github.com/pelcro-inc/react-pelcro-js/commit/782671bc87fa468f58fd83808afe5b9380307933))
+
 # [3.4.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.3.0...v3.4.0) (2022-07-06)
 
 
