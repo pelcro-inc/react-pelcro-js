@@ -26,6 +26,11 @@ export const AddressCreateModal = ({
     switchView("subscription-success");
   };
 
+  // FIXME: implement me
+  const onMembershipAdressUpdateSuccess = () => {
+    otherProps.onMembershipAdressUpdateSuccess?.();
+  };
+
   return (
     <Modal
       id="pelcro-address-create-modal"
@@ -37,6 +42,9 @@ export const AddressCreateModal = ({
           {...otherProps}
           onSuccess={onSuccess}
           onGiftRedemptionSuccess={onGiftRedemptionSuccess}
+          onMembershipAdressUpdateSuccess={
+            onMembershipAdressUpdateSuccess
+          }
         />
       </ModalBody>
       <ModalFooter>

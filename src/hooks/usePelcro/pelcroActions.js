@@ -169,6 +169,21 @@ export class PelcroActions {
     return true;
   };
 
+  setSelectedMembership = (id) => {
+    const memberships = window.Pelcro.user.read()?.memberships ?? [];
+    const membership = memberships.find(
+      (membership) => String(membership.id) === String(id)
+    );
+
+    if (!membership) {
+      console.error("invalid membership id");
+      return false;
+    }
+
+    this.set({ selectedMembership: membership });
+    return true;
+  };
+
   /**
    * User Actions
    */
