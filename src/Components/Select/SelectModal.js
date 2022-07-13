@@ -142,7 +142,11 @@ class SelectModal extends Component {
         startingPlan = plan;
       }
     }
-    return `${startingPlan.amount_formatted}/${startingPlan.interval}`;
+    return `${startingPlan.amount_formatted}/${
+      startingPlan.interval_count > 1
+        ? `${startingPlan.interval_count} `
+        : ""
+    }${startingPlan.interval}`;
   };
 
   renderOneProduct = (product, index, options) => {
@@ -188,6 +192,7 @@ class SelectModal extends Component {
               <p className="plc-w-1/2 plc-text-xs pelcro-select-product-cost">
                 {this.locale("labels.startingAt")}{" "}
                 {this.countStartPrice(product.plans)}
+                {console.log(product)}
               </p>
             )}
             <Button
