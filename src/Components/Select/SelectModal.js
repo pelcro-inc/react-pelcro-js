@@ -144,9 +144,9 @@ class SelectModal extends Component {
     }
     return `${startingPlan.amount_formatted}/${
       startingPlan.interval_count > 1
-        ? `${startingPlan.interval_count} `
-        : ""
-    }${startingPlan.interval}`;
+        ? `${startingPlan.interval_count} ${startingPlan.interval}s`
+        : `${startingPlan.interval}`
+    }`;
   };
 
   renderOneProduct = (product, index, options) => {
