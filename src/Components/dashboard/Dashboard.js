@@ -462,6 +462,17 @@ class Dashboard extends Component {
                 {address.city}, {address.country}
               </span>{" "}
               <span title={address.line1}>{address.line1}</span>
+              <div className="plc-flex plc-mb-2 plc-mt-1">
+                <span className="plc-rounded-full plc-bg-gray-200 plc-text-black plc-inline-flex plc-items-start plc-py-1 plc-px-4 plc-text-sm plc-capitalize">
+                  {address.type}
+                </span>
+
+                {address.is_default && (
+                  <span className="plc-rounded-full plc-bg-gray-800 plc-text-white plc-inline-flex plc-items-start plc-py-1 plc-px-4 plc-text-sm plc-ml-2">
+                    {this.locale("labels.default")}
+                  </span>
+                )}
+              </div>
             </td>
             <td>
               <Button

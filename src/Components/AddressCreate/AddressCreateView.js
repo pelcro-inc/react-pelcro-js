@@ -9,6 +9,7 @@ import { AddressCreateSubmit } from "./AddressCreateSubmit";
 import { AddressCreateContainer } from "./AddressCreateContainer";
 import { AddressCreateCountrySelect } from "./AddressCreateCountrySelect";
 import { AddressCreateStateSelect } from "./AddressCreateStateSelect";
+import { AddressCreateSetDefault } from "./AddressCreateSetDefault";
 import { AlertWithContext } from "../../SubComponents/AlertWithContext";
 
 export const AddressCreateView = (props) => {
@@ -75,6 +76,14 @@ export const AddressCreateView = (props) => {
               required
             />
           </div>
+
+          <div className="plc-flex plc-space-x-3 plc-items-start plc-mb-3">
+            <AddressCreateSetDefault
+              id="pelcro-input-is-default"
+              label={t("labels.isDefault")}
+            />
+          </div>
+
           <p className="plc-text-gray-900 pelcro-footnote">
             * {t("labels.required")}
           </p>
