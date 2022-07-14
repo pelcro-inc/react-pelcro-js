@@ -1,3 +1,10 @@
+# [3.5.0-beta.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.4.1-beta.5...v3.5.0-beta.1) (2022-07-14)
+
+
+### Features
+
+* **usePelcro:** add setCouponCode and couponCode ([#174](https://github.com/pelcro-inc/react-pelcro-js/issues/174)) ([6442a53](https://github.com/pelcro-inc/react-pelcro-js/commit/6442a53fea60215e6811839b85b1a84978400d32))
+
 ## [3.4.1-beta.5](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.4.1-beta.4...v3.4.1-beta.5) (2022-07-14)
 
 
