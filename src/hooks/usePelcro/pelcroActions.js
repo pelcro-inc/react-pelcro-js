@@ -184,6 +184,11 @@ export class PelcroActions {
     return true;
   };
 
+  setCouponCode = (couponCode) => {
+    if (!couponCode) return console.error("invalid coupon code");
+    this.set({ couponCode });
+  };
+
   /**
    * User Actions
    */

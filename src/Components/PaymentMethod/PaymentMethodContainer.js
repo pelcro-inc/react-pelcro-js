@@ -107,7 +107,7 @@ const PaymentMethodContainerWithoutStripe = ({
 }) => {
   const { t } = useTranslation("payment");
   const pelcroStore = usePelcro();
-  const { set, order, selectedPaymentMethodId } = usePelcro();
+  const { set, order, selectedPaymentMethodId, couponCode } = usePelcro();
 
   const product = props.product ?? pelcroStore.product;
   const plan = props.plan ?? pelcroStore.plan;
@@ -127,6 +127,19 @@ const PaymentMethodContainerWithoutStripe = ({
       dispatch({
         type: UPDATE_COUPON_CODE,
         payload: window.Pelcro.coupon.getFromUrl()
+      });
+      dispatch({
+        type: SHOW_COUPON_FIELD,
+        payload: true
+      });
+    } else if (couponCode) {
+      dispatch({
+        type: UPDATE_COUPON_CODE,
+        payload: couponCode
+      });
+      dispatch({
+        type: SHOW_COUPON_FIELD,
+        payload: true
       });
     }
     dispatch({ type: INIT_CONTAINER });
