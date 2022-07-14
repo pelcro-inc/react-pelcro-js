@@ -1,3 +1,10 @@
+## [3.4.1-beta.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.4.1-beta.2...v3.4.1-beta.3) (2022-07-14)
+
+
+### Bug Fixes
+
+* **SelectModal:** add (s) to print format ([#172](https://github.com/pelcro-inc/react-pelcro-js/issues/172)) ([15aaeb9](https://github.com/pelcro-inc/react-pelcro-js/commit/15aaeb9e9c0d803352fa413118af352b22046d2d))
+
 ## [3.4.1-beta.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.4.1-beta.1...v3.4.1-beta.2) (2022-07-13)
 
 
