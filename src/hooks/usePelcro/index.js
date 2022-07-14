@@ -25,6 +25,9 @@ export const initialState = {
   // invoices
   invoice: null,
 
+  // couponCode
+  couponCode: null,
+
   // memberships
   selectedMembership: null,
 
