@@ -66,7 +66,7 @@ const AddressSelectContainer = ({
   const submitAddress = ({ selectedAddressId }, dispatch) => {
     set({ selectedAddressId });
 
-    if (selectedMembership.id) {
+    if (selectedMembership) {
       dispatch({ type: LOADING, payload: true });
       return window.Pelcro.membership.update(
         {
