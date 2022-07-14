@@ -1,3 +1,10 @@
+## [3.4.1-beta.4](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.4.1-beta.3...v3.4.1-beta.4) (2022-07-14)
+
+
+### Bug Fixes
+
+* **SelectModal:** id error ([#173](https://github.com/pelcro-inc/react-pelcro-js/issues/173)) ([881d600](https://github.com/pelcro-inc/react-pelcro-js/commit/881d600e647f52c34d8fa644d5ec5a1707ad8f2d))
+
 ## [3.4.1-beta.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.4.1-beta.2...v3.4.1-beta.3) (2022-07-14)
 
 
