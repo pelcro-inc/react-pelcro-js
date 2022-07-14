@@ -1,3 +1,10 @@
+## [3.4.1-beta.5](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.4.1-beta.4...v3.4.1-beta.5) (2022-07-14)
+
+
+### Bug Fixes
+
+* remove unused state ([17152ca](https://github.com/pelcro-inc/react-pelcro-js/commit/17152ca443e2040b9ed5815309784c0f88c1f0fc))
+
 ## [3.4.1-beta.4](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.4.1-beta.3...v3.4.1-beta.4) (2022-07-14)
 
 
