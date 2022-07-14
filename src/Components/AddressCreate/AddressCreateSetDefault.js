@@ -4,10 +4,7 @@ import { Checkbox } from "../../SubComponents/Checkbox";
 import { HANDLE_CHECKBOX_CHANGE } from "../../utils/action-types";
 
 export const AddressCreateSetDefault = (props) => {
-  const {
-    dispatch,
-    state: { isDefault }
-  } = useContext(store);
+  const { dispatch, state } = useContext(store);
 
   const handleCheckboxChange = (e) => {
     dispatch({
