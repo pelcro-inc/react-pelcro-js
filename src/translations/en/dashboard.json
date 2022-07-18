@@ -57,6 +57,7 @@
     "addAddress": "Add address",
     "addSubscription": "New Subscription",
     "addGift": "New Gift",
+    "default": "Default",
     "orders": {
       "label": "Orders",
       "noOrders": "You have not placed any orders",

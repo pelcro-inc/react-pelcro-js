@@ -57,6 +57,7 @@
     "addAddress": "Ajoutez l'adresse",
     "addSubscription": "Nouvel abonnement",
     "addGift": "Ajouter un cadeau",
+    "default": "Défaut",
     "orders": {
       "label": "Commandes",
       "noOrders": "Vous n'avez passé aucune commande",

@@ -1,3 +1,24 @@
+# [3.5.0-beta.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.5.0-beta.1...v3.5.0-beta.2) (2022-07-18)
+
+
+### Bug Fixes
+
+* export new address set default components from components.js file ([a929420](https://github.com/pelcro-inc/react-pelcro-js/commit/a929420eff2253283c5297dab8965aa98b327a46))
+
+# [3.5.0-beta.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.4.1-beta.5...v3.5.0-beta.1) (2022-07-14)
+
+
+### Features
+
+* **usePelcro:** add setCouponCode and couponCode ([#174](https://github.com/pelcro-inc/react-pelcro-js/issues/174)) ([6442a53](https://github.com/pelcro-inc/react-pelcro-js/commit/6442a53fea60215e6811839b85b1a84978400d32))
+
+## [3.4.1-beta.5](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.4.1-beta.4...v3.4.1-beta.5) (2022-07-14)
+
+
+### Bug Fixes
+
+* remove unused state ([17152ca](https://github.com/pelcro-inc/react-pelcro-js/commit/17152ca443e2040b9ed5815309784c0f88c1f0fc))
+
 ## [3.4.1-beta.4](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.4.1-beta.3...v3.4.1-beta.4) (2022-07-14)
 
 

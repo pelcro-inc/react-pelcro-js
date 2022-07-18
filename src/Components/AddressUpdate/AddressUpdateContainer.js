@@ -10,6 +10,7 @@ import {
   GET_COUNTRIES_SUCCESS,
   GET_STATES_SUCCESS,
   SET_TEXT_FIELD,
+  HANDLE_CHECKBOX_CHANGE,
   SHOW_ALERT,
   LOADING,
   VALIDATE_FIELD,
@@ -40,6 +41,7 @@ const initialState = {
   postalCodeError: "",
   states: [],
   countries: [],
+  isDefault: false,
   alert: {
     type: "error",
     content: ""
@@ -103,7 +105,8 @@ const AddressUpdateContainer = ({
           city: thisAddress.city,
           state: thisAddress.state,
           country: thisAddress.country,
-          postalCode: thisAddress.postal_code
+          postalCode: thisAddress.postal_code,
+          isDefault: thisAddress.is_default
         };
         dispatch({ type: SET_TEXT_FIELD, payload: newState });
       }
@@ -119,7 +122,8 @@ const AddressUpdateContainer = ({
       city,
       state,
       country,
-      postalCode
+      postalCode,
+      isDefault
     },
     dispatch
   ) => {
@@ -134,7 +138,8 @@ const AddressUpdateContainer = ({
         city: city,
         state: state,
         country: country,
-        postal_code: postalCode
+        postal_code: postalCode,
+        is_default: isDefault
       },
       (err, res) => {
         dispatch({ type: LOADING, payload: false });
@@ -200,6 +205,12 @@ const AddressUpdateContainer = ({
         }
 
         case SET_TEXT_FIELD:
+          return Update({
+            ...state,
+            ...action.payload
+          });
+
+        case HANDLE_CHECKBOX_CHANGE:
           return Update({
             ...state,
             ...action.payload

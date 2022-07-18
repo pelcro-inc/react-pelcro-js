@@ -10,7 +10,8 @@
     "country": "Pays",
     "firstName": "Prénom",
     "lastName": "Nom de famille",
-    "required": "Champs obligatoires"
+    "required": "Champs obligatoires",
+    "isDefault": "Définir par défaut"
   },
   "buttons": {
     "submit": "Valider",
