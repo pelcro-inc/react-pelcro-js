@@ -1,3 +1,10 @@
+# [3.5.0-beta.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.5.0-beta.1...v3.5.0-beta.2) (2022-07-18)
+
+
+### Bug Fixes
+
+* export new address set default components from components.js file ([a929420](https://github.com/pelcro-inc/react-pelcro-js/commit/a929420eff2253283c5297dab8965aa98b327a46))
+
 # [3.5.0-beta.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.4.1-beta.5...v3.5.0-beta.1) (2022-07-14)
 
 
