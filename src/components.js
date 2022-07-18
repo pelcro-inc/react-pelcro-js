@@ -78,6 +78,7 @@ export { AddressCreateCity } from "./Components/AddressCreate/AddressCreateCity"
 export { AddressCreatePostalCode } from "./Components/AddressCreate/AddressCreatePostalCode";
 export { AddressCreateCountrySelect } from "./Components/AddressCreate/AddressCreateCountrySelect";
 export { AddressCreateStateSelect } from "./Components/AddressCreate/AddressCreateStateSelect";
+export { AddressCreateSetDefault } from "./Components/AddressCreate/AddressCreateSetDefault";
 export {
   PelcroCardCVC,
   PelcroCardExpiry,
@@ -99,6 +100,7 @@ export { AddressUpdateStateSelect } from "./Components/AddressUpdate/AddressUpda
 export { AddressUpdateSubmit } from "./Components/AddressUpdate/AddressUpdateSubmit";
 export { AddressUpdateTextInput } from "./Components/AddressUpdate/AddressUpdateTextInput";
 export { AddressUpdateView } from "./Components/AddressUpdate/AddressUpdateView";
+export { AddressUpdateSetDefault } from "./Components/AddressUpdate/AddressUpdateSetDefault";
 export { SubscriptionCreateContainer } from "./Components/SubscriptionCreate/SubscriptionCreateContainer";
 export { SubscriptionRenewContainer } from "./Components/SubscriptionRenew/SubscriptionRenewContainer";
 export { PaymentCreateContainer } from "./Components/PaymentCreate/PaymentCreateContainer";
