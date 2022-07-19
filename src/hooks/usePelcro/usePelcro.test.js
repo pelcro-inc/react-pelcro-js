@@ -276,6 +276,19 @@ describe("Actions", () => {
     });
   });
 
+  describe("setCouponCode", () => {
+    test("should set the Coupon Code", () => {
+
+      const store = usePelcro();
+
+      act(() => {
+        store.setCouponCode(45184);
+      });
+
+      expect(store.couponCode).toEqual(45184);
+    });
+  });
+
   describe("resetView", () => {
     test("resetView should reset view state", () => {
       const store = usePelcro();
