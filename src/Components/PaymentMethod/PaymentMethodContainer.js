@@ -128,18 +128,10 @@ const PaymentMethodContainerWithoutStripe = ({
         type: UPDATE_COUPON_CODE,
         payload: window.Pelcro.coupon.getFromUrl()
       });
-      dispatch({
-        type: SHOW_COUPON_FIELD,
-        payload: true
-      });
     } else if (couponCode) {
       dispatch({
         type: UPDATE_COUPON_CODE,
         payload: couponCode
-      });
-      dispatch({
-        type: SHOW_COUPON_FIELD,
-        payload: true
       });
     }
     dispatch({ type: INIT_CONTAINER });
