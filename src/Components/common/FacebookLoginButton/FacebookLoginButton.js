@@ -7,7 +7,7 @@ import { HANDLE_SOCIAL_LOGIN } from "../../../utils/action-types";
 import { getPageOrDefaultLanguage } from "../../../utils/utils";
 
 export const FacebookLoginButton = ({
-  label = "Facebook",
+  label = "Continue With Facebook",
   className = "",
   labelClassName = "",
   iconClassName = ""
@@ -56,13 +56,13 @@ export const FacebookLoginButton = ({
       render={(renderProps) => (
         <button
           onClick={renderProps.onClick}
-          className={`plc-flex plc-items-center plc-justify-center plc-p-3 plc-space-x-3 plc-text-gray-700 plc-border plc-border-gray-200 plc-rounded-3xl hover:plc-bg-gray-200 pelcro-facebook-login ${className}`}
+          className={`plc-flex plc-items-center plc-justify-center plc-h-11 plc-px-5 plc-text-gray-700 plc-rounded-md pelcro-google-login plc-shadow-md_dark shadow plc-flex-1 ${className}`}
         >
           <FacebookLogoIcon
             className={`plc-w-3 plc-h-auto pelcro-facebook-login-icon ${iconClassName}`}
           />
           <p
-            className={`pelcro-facebook-login-label ${labelClassName}`}
+            className={`pelcro-facebook-login-label  plc-ml-1 ${labelClassName}`}
           >
             {label}
           </p>
