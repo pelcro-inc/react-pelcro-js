@@ -21,9 +21,6 @@ export function RegisterView(props) {
   const { t } = useTranslation("register");
   const { product } = usePelcro();
 
-  const title = product?.paywall?.register_title ?? t("title");
-  const subtitle =
-    product?.paywall?.register_subtitle ?? t("subtitle");
   const socialLoginEnabled =
     window.Pelcro.site.read()?.facebook_app_id ||
     window.Pelcro.site.read()?.google_app_id ||
@@ -34,16 +31,33 @@ export function RegisterView(props) {
 
   return (
     <div id="pelcro-register-view">
-      <div className="plc-mb-6 plc-text-center plc-text-gray-900 pelcro-title-wrapper">
-        <h4 className="plc-text-2xl plc-font-semibold">{title}</h4>
-        <p>{subtitle}</p>
-      </div>
       <form
         action="javascript:void(0);"
         className="plc-mt-2 pelcro-form"
       >
         <RegisterContainer {...props}>
           <AlertWithContext />
+          {socialLoginEnabled && (
+            <div className="plc-mt-5">
+              <div>
+                <div className="plc-flex plc-justify-center plc-align-middle plc-flex-wrap ">
+                  <GoogleLoginButton />
+                  <span className="divider plc-w-[1px] plc-bg-gray-500 plc-h-4 plc-mx-4 plc-inline-flex"></span>
+                  <FacebookLoginButton />
+                </div>
+                <Auth0LoginButton />
+              </div>
+
+              <div className="plc-flex plc-items-center plc-justify-between ">
+                <hr className="plc-w-full plc-border-gray-300" />
+                <span className="plc-flex-shrink-0 plc-p-2 plc-text-xs plc-text-gray-400 plc-uppercase">
+                  {t("messages.socialLogin.label")}
+                </span>
+                <hr className="plc-w-full plc-border-gray-300" />
+              </div>
+            </div>
+          )}
+
           {showNameFields && (
             <div className="plc-flex plc-items-start">
               <RegisterFirstName
@@ -99,23 +113,6 @@ export function RegisterView(props) {
                 apply.
               </Trans>
             </p>
-          )}
-
-          {socialLoginEnabled && (
-            <div className="plc-mt-5">
-              <div className="plc-flex plc-items-center plc-justify-between ">
-                <hr className="plc-w-full plc-border-gray-300" />
-                <span className="plc-flex-shrink-0 plc-p-2 plc-text-xs plc-text-gray-400 plc-uppercase">
-                  {t("messages.socialLogin.label")}
-                </span>
-                <hr className="plc-w-full plc-border-gray-300" />
-              </div>
-              <div className="plc-flex plc-justify-center plc-px-5 plc-mt-1 plc-space-x-3">
-                <GoogleLoginButton />
-                <FacebookLoginButton />
-                <Auth0LoginButton />
-              </div>
-            </div>
           )}
         </RegisterContainer>
       </form>

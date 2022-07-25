@@ -5,7 +5,7 @@ import { HANDLE_SOCIAL_LOGIN } from "../../../utils/action-types";
 import { ReactComponent as Auth0LogoIcon } from "../../../assets/auth0-logo.svg";
 
 export const Auth0LoginButton = ({
-  label = "Auth0",
+  label = "Continue With Auth0",
   className = "",
   labelClassName = "",
   iconClassName = ""
@@ -82,15 +82,25 @@ export const Auth0LoginButton = ({
           return onFailure(error);
         }
 
-        const { email, first_name, last_name, given_name, family_name } = user;
+        const {
+          email,
+          first_name,
+          last_name,
+          given_name,
+          family_name
+        } = user;
 
         loginDispatch?.({
           type: HANDLE_SOCIAL_LOGIN,
           payload: {
             idpName: "auth0",
             idpToken: accessToken,
-            ...((first_name || given_name) && {firstName: first_name || given_name}),
-            ...((last_name || family_name) && {lastName: last_name || family_name}),
+            ...((first_name || given_name) && {
+              firstName: first_name || given_name
+            }),
+            ...((last_name || family_name) && {
+              lastName: last_name || family_name
+            }),
             email
           }
         });
@@ -100,8 +110,12 @@ export const Auth0LoginButton = ({
           payload: {
             idpName: "auth0",
             idpToken: accessToken,
-            ...((first_name || given_name) && {firstName: first_name || given_name}),
-            ...((last_name || family_name) && {lastName: last_name || family_name}),
+            ...((first_name || given_name) && {
+              firstName: first_name || given_name
+            }),
+            ...((last_name || family_name) && {
+              lastName: last_name || family_name
+            }),
             email
           }
         });
@@ -117,12 +131,14 @@ export const Auth0LoginButton = ({
     return (
       <button
         onClick={handleClick}
-        className={`plc-flex plc-items-center plc-justify-center plc-p-3 plc-space-x-3 plc-text-gray-700 plc-border plc-border-gray-200 plc-rounded-3xl hover:plc-bg-gray-200 pelcro-auth0-login ${className}`}
+        className={`plc-flex plc-items-center plc-justify-center plc-h-11 plc-px-5 plc-text-gray-700 plc-rounded-md pelcro-google-login plc-shadow-md_dark shadow plc-w-1/2 plc-mt-4 ${className}`}
       >
         <Auth0LogoIcon
           className={`plc-w-6 plc-h-auto pelcro-auth0-login-icon" ${iconClassName}`}
         />
-        <p className={`pelcro-auth0-login-label ${labelClassName}`}>
+        <p
+          className={`pelcro-auth0-login-label plc-ml-1 ${labelClassName}`}
+        >
           {label}
         </p>
       </button>

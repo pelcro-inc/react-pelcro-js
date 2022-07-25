@@ -7,7 +7,7 @@ import { HANDLE_SOCIAL_LOGIN } from "../../../utils/action-types";
 import { gapi } from 'gapi-script';
 
 export const GoogleLoginButton = ({
-  label = "Google",
+  label = "Continue With Google",
   className = "",
   labelClassName = "",
   iconClassName = ""
@@ -62,13 +62,13 @@ export const GoogleLoginButton = ({
       render={(renderProps) => (
         <button
           onClick={renderProps.onClick}
-          className={`plc-flex plc-items-center plc-justify-center plc-p-3 plc-space-x-3 plc-text-gray-700 plc-border plc-border-gray-200 plc-rounded-3xl hover:plc-bg-gray-200 pelcro-google-login ${className}`}
+          className={`plc-flex plc-items-center plc-justify-center plc-h-11 plc-px-5 plc-text-gray-700 plc-rounded-md pelcro-google-login plc-shadow-md_dark shadow plc-flex-1 ${className}`}
         >
           <GoogleLogoIcon
             className={`plc-w-6 plc-h-auto pelcro-google-login-icon" ${iconClassName}`}
           />
           <p
-            className={`pelcro-google-login-label ${labelClassName}`}
+            className={`pelcro-google-login-label plc-ml-1 ${labelClassName}`}
           >
             {label}
           </p>
