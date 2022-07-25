@@ -1,10 +1,10 @@
-import React, { useContext, useEffect  } from "react";
+import React, { useContext, useEffect } from "react";
 import { GoogleLogin } from "react-google-login";
 import { store as loginStore } from "../../Login/LoginContainer";
 import { store as registerStore } from "../../Register/RegisterContainer";
 import { ReactComponent as GoogleLogoIcon } from "../../../assets/google-logo.svg";
 import { HANDLE_SOCIAL_LOGIN } from "../../../utils/action-types";
-import { gapi } from 'gapi-script';
+import { gapi } from "gapi-script";
 
 export const GoogleLoginButton = ({
   label = "Continue With Google",

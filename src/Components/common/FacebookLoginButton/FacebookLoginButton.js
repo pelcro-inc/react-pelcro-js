@@ -63,7 +63,7 @@ export const FacebookLoginButton = ({
             className={`plc-w-3 plc-h-auto pelcro-facebook-login-icon ${iconClassName}`}
           />
           <p
-            className={`pelcro-facebook-login-label  plc-ml-2 ${labelClassName}`}
+            className={`pelcro-facebook-login-label plc-ml-2 ${labelClassName}`}
           >
             {label}
           </p>
