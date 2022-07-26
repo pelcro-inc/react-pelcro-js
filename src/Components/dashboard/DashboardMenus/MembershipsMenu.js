@@ -105,12 +105,10 @@ function getActiveMemberships() {
 }
 
 function getMemberShipStatus(status) {
-  if (status === 'active') {
-    return {
-      title: status,
-      textColor: "plc-text-green-700",
-      bgColor: "plc-bg-green-100",
-      icon: <CheckMarkIcon />
-    };
-  }
+  return {
+    title: status,
+    textColor: "plc-text-green-700",
+    bgColor: "plc-bg-green-100",
+    icon: <CheckMarkIcon />
+  };
 }
