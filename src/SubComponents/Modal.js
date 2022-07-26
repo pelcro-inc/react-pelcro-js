@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { ReactComponent as CloseIcon } from "../assets/x-icon.svg";
 import { dispatchModalDisplayEvents } from "../Components/PelcroModalController/PelcroModalController.service";
 import { usePelcro } from "../hooks/usePelcro";
+import Authorship from "../Components/common/Authorship";
 
 /**
  *
@@ -94,5 +95,10 @@ export const ModalBody = ({ children }) => {
 };
 
 export const ModalFooter = ({ children }) => {
-  return <div className="pelcro-modal-footer">{children}</div>;
+  return (
+    <div className="pelcro-modal-footer">
+      {children}
+      <Authorship />
+    </div>
+  );
 };
