@@ -1,3 +1,10 @@
+# [3.5.0-beta.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.5.0-beta.2...v3.5.0-beta.3) (2022-07-26)
+
+
+### Bug Fixes
+
+* **membership:** UI issues ([#177](https://github.com/pelcro-inc/react-pelcro-js/issues/177)) ([66c7a88](https://github.com/pelcro-inc/react-pelcro-js/commit/66c7a88c08e5e16f2c8c8114aa09e090ecda570c))
+
 # [3.5.0-beta.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.5.0-beta.1...v3.5.0-beta.2) (2022-07-18)
 
 
