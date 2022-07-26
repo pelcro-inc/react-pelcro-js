@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "../../../SubComponents/Button";
 import { useTranslation } from "react-i18next";
-import { ReactComponent as RefreshIcon } from "../../../assets/refresh.svg";
+import { ReactComponent as CheckMarkIcon } from "../../../assets/check-mark.svg";
 import { ReactComponent as EditIcon } from "../../../assets/edit.svg";
 import { userMustVerifyEmail } from "../../../utils/utils";
 import { usePelcro } from "../../../hooks/usePelcro";
@@ -67,9 +67,17 @@ const MembershipsItems = () => {
               </>
             )}
           </td>
-
           <td>
-            <span>{membership.status}</span>
+            <span
+              className={`plc-inline-flex plc-p-1 plc-text-xs plc-font-semibold ${
+                getMemberShipStatus(membership.status).bgColor
+              } plc-uppercase ${
+                getMemberShipStatus(membership.status).textColor
+              } plc-rounded-lg`}
+            >
+              {getMemberShipStatus(membership.status).icon}
+              {getMemberShipStatus(membership.status).title}
+            </span>
           </td>
           <td>
             <Button
@@ -78,7 +86,7 @@ const MembershipsItems = () => {
               className="plc-text-blue-400 focus:plc-ring-blue-500 pelcro-dashboard-membership-address-button"
               onClick={() => onChangeAddressClick(membership.id)}
             >
-              {t("labels.edit")}
+              {`${t("labels.edit")} ${t("labels.address")}`}
             </Button>
           </td>
         </tr>
@@ -94,4 +102,13 @@ function getActiveMemberships() {
         (membership) => membership.status === "active"
       ) ?? []
   );
+}
+
+function getMemberShipStatus(status) {
+  return {
+    title: status,
+    textColor: "plc-text-green-700",
+    bgColor: "plc-bg-green-100",
+    icon: <CheckMarkIcon />
+  };
 }

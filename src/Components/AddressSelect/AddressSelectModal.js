@@ -13,7 +13,7 @@ export const AddressSelectModal = ({
   onClose,
   ...otherProps
 }) => {
-  const { switchView, switchToPaymentView } = usePelcro();
+  const { switchView, switchToPaymentView, resetView } = usePelcro();
 
   const onSuccess = (selectedAddressId) => {
     otherProps.onSuccess?.(selectedAddressId);
@@ -33,6 +33,7 @@ export const AddressSelectModal = ({
   // FIXME: implement me
   const onMembershipAdressUpdateSuccess = () => {
     otherProps.onMembershipAdressUpdateSuccess?.();
+    resetView();
   };
 
   return (

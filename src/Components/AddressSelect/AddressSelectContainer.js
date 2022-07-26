@@ -139,7 +139,8 @@ const AddressSelectContainer = ({
             ...state,
             addresses: moveDefaultAddressToStart(action.payload),
             selectedAddressId: String(
-              getDefaultAddress(action.payload).id
+              selectedMembership?.address_id ??
+                getDefaultAddress(action.payload).id
             )
           });
 
