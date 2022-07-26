@@ -7,6 +7,7 @@ import { RegisterButton } from "./RegisterButton";
 import { RegisterFirstName } from "./RegisterFirstName";
 import { RegisterLastName } from "./RegisterLastName";
 import { AlertWithContext } from "../../SubComponents/AlertWithContext";
+import { VerticalSeparator } from "../../SubComponents/VerticalSeparator";
 import { usePelcro } from "../../hooks/usePelcro";
 import { FacebookLoginButton } from "../common/FacebookLoginButton/FacebookLoginButton";
 import { GoogleLoginButton } from "../common/GoogleLoginButton/GoogleLoginButton";
@@ -38,19 +39,21 @@ export function RegisterView(props) {
         <RegisterContainer {...props}>
           <AlertWithContext />
           {socialLoginEnabled && (
-            <div className="plc-mt-5">
+            <div className="plc-my-5">
               <div>
-                <div className="plc-flex plc-justify-center plc-align-middle plc-flex-wrap ">
+                <div className="plc-flex plc-justify-center plc-flex-wrap plc-items-center">
                   <GoogleLoginButton />
-                  <span className="divider plc-w-[1px] plc-bg-gray-500 plc-h-4 plc-mx-4 plc-inline-flex"></span>
+                  <VerticalSeparator className="plc-mx-4 plc-h-8" />
                   <FacebookLoginButton />
                 </div>
-                <Auth0LoginButton />
+                <div className="plc-flex plc-justify-center plc-flex-wrap plc-items-center plc-mt-4">
+                  <Auth0LoginButton />
+                </div>
               </div>
 
-              <div className="plc-flex plc-items-center plc-justify-between ">
+              <div className="plc-flex plc-items-center plc-justify-between plc-mt-5">
                 <hr className="plc-w-full plc-border-gray-300" />
-                <span className="plc-flex-shrink-0 plc-p-2 plc-text-xs plc-text-gray-400 plc-uppercase">
+                <span className="plc-flex-shrink-0 plc-px-2 plc-text-sm plc-text-gray-700 plc-uppercase">
                   {t("messages.socialLogin.label")}
                 </span>
                 <hr className="plc-w-full plc-border-gray-300" />

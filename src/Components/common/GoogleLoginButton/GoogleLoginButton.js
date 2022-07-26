@@ -62,13 +62,13 @@ export const GoogleLoginButton = ({
       render={(renderProps) => (
         <button
           onClick={renderProps.onClick}
-          className={`plc-flex plc-items-center plc-justify-center plc-h-11 plc-px-5 plc-text-gray-700 plc-rounded-md pelcro-google-login plc-shadow-md_dark shadow plc-flex-1 ${className}`}
+          className={`plc-flex plc-items-center plc-justify-center plc-h-12 plc-px-5 plc-text-gray-700 plc-rounded-md pelcro-google-login plc-shadow-md_dark plc-flex-1 plc-bg-white hover:plc-bg-transparent ${className}`}
         >
           <GoogleLogoIcon
             className={`plc-w-6 plc-h-auto pelcro-google-login-icon" ${iconClassName}`}
           />
           <p
-            className={`pelcro-google-login-label plc-ml-1 ${labelClassName}`}
+            className={`pelcro-google-login-label plc-ml-2 ${labelClassName}`}
           >
             {label}
           </p>
