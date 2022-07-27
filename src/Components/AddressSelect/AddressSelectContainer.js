@@ -16,7 +16,7 @@ import {
 import { getErrorMessages } from "../common/Helpers";
 
 const getDefaultAddress = (addresses) => {
-  return addresses.find((address) => address.is_default);
+  return addresses.find((address) => address.is_default) || false;
 };
 
 const moveDefaultAddressToStart = (addresses) => {
@@ -52,6 +52,7 @@ const AddressSelectContainer = ({
 }) => {
   const { t } = useTranslation("address");
   const {
+    switchView,
     giftCode: giftCodeFromStore,
     subscriptionIdToRenew: subscriptionIdToRenewFromStore,
     set,
@@ -135,14 +136,18 @@ const AddressSelectContainer = ({
           });
 
         case LOAD_ADDRESSES:
-          return Update({
-            ...state,
-            addresses: moveDefaultAddressToStart(action.payload),
-            selectedAddressId: String(
-              selectedMembership?.address_id ??
-                getDefaultAddress(action.payload).id
-            )
-          });
+          if (!getDefaultAddress) {
+            return switchView("address-select");
+          } else {
+            return Update({
+              ...state,
+              addresses: moveDefaultAddressToStart(action.payload),
+              selectedAddressId: String(
+                selectedMembership?.address_id ??
+                  getDefaultAddress(action.payload).id
+              )
+            });
+          }
 
         case SHOW_ALERT:
           return Update({
