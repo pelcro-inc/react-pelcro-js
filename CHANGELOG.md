@@ -1,3 +1,24 @@
+# [3.5.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.4.0...v3.5.0) (2022-07-27)
+
+
+### Bug Fixes
+
+* export new address set default components from components.js file ([a929420](https://github.com/pelcro-inc/react-pelcro-js/commit/a929420eff2253283c5297dab8965aa98b327a46))
+* remove console log ([64b3bc5](https://github.com/pelcro-inc/react-pelcro-js/commit/64b3bc568fd2f4d9c1df341e57079139a7c54b66))
+* remove console log ([#178](https://github.com/pelcro-inc/react-pelcro-js/issues/178)) ([34f5b69](https://github.com/pelcro-inc/react-pelcro-js/commit/34f5b69d8664cbbb2b2803b3681fbb7c00f10198))
+* remove console log ([#179](https://github.com/pelcro-inc/react-pelcro-js/issues/179)) ([3430947](https://github.com/pelcro-inc/react-pelcro-js/commit/34309472eb7ecc5e6679737e6321ef6fed09ac3d))
+* **membership:** UI issues ([#177](https://github.com/pelcro-inc/react-pelcro-js/issues/177)) ([66c7a88](https://github.com/pelcro-inc/react-pelcro-js/commit/66c7a88c08e5e16f2c8c8114aa09e090ecda570c))
+* remove unused state ([17152ca](https://github.com/pelcro-inc/react-pelcro-js/commit/17152ca443e2040b9ed5815309784c0f88c1f0fc))
+* **memberships:** remove comments ([782671b](https://github.com/pelcro-inc/react-pelcro-js/commit/782671bc87fa468f58fd83808afe5b9380307933))
+* **SelectModal:** add (s) to print format ([#172](https://github.com/pelcro-inc/react-pelcro-js/issues/172)) ([15aaeb9](https://github.com/pelcro-inc/react-pelcro-js/commit/15aaeb9e9c0d803352fa413118af352b22046d2d))
+* **SelectModal:** id error ([#173](https://github.com/pelcro-inc/react-pelcro-js/issues/173)) ([881d600](https://github.com/pelcro-inc/react-pelcro-js/commit/881d600e647f52c34d8fa644d5ec5a1707ad8f2d))
+* **SelectModal:** starting at print format ([fa2fa0f](https://github.com/pelcro-inc/react-pelcro-js/commit/fa2fa0f572b507a2694c2d58e3d6ade5762add89))
+
+
+### Features
+
+* **usePelcro:** add setCouponCode and couponCode ([#174](https://github.com/pelcro-inc/react-pelcro-js/issues/174)) ([6442a53](https://github.com/pelcro-inc/react-pelcro-js/commit/6442a53fea60215e6811839b85b1a84978400d32))
+
 # [3.5.0-beta.4](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.5.0-beta.3...v3.5.0-beta.4) (2022-07-27)
 
 
