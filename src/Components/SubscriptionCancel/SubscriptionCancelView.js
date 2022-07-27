@@ -10,7 +10,7 @@ import { SubscriptionCancelLaterButton } from "./SubscriptionCancelLaterButton";
 export const SubscriptionCancelView = (props) => {
   const { subscriptionToCancel } = usePelcro();
 
-  console.log(subscriptionToCancel);
+  const { t } = useTranslation("subscriptionCancel");
 
   return (
     <div id="pelcro-subscription-cancel-view">
