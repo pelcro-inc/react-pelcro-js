@@ -1,3 +1,10 @@
+## [3.5.1-beta.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.5.0...v3.5.1-beta.1) (2022-07-27)
+
+
+### Bug Fixes
+
+* check if no default address in the user show the select address modal ([ec9446e](https://github.com/pelcro-inc/react-pelcro-js/commit/ec9446e717d74cbac1ccb71da511e8aebb112752))
+
 # [3.5.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.4.0...v3.5.0) (2022-07-27)
 
 
