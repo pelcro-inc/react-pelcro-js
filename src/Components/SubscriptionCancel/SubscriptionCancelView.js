@@ -12,8 +12,6 @@ export const SubscriptionCancelView = (props) => {
 
   console.log(subscriptionToCancel);
 
-  const { t } = useTranslation("subscriptionCancel");
-
   return (
     <div id="pelcro-subscription-cancel-view">
       <div className="plc-mb-6 plc-text-center plc-text-gray-900 pelcro-title-wrapper">
