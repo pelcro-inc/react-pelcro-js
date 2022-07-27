@@ -1,3 +1,10 @@
+## [3.5.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.5.1...v3.5.2) (2022-07-27)
+
+
+### Bug Fixes
+
+* set disabled on select address button properly ([e554743](https://github.com/pelcro-inc/react-pelcro-js/commit/e554743bbd275565bb1cf9e64fa2143d764929bf))
+
 ## [3.5.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.5.0...v3.5.1) (2022-07-27)
 
 ### Bug Fixes
