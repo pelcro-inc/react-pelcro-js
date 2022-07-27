@@ -1,3 +1,11 @@
+## [3.5.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.5.0...v3.5.1) (2022-07-27)
+
+
+### Bug Fixes
+
+* check if no default address in the user show the select address modal ([ec9446e](https://github.com/pelcro-inc/react-pelcro-js/commit/ec9446e717d74cbac1ccb71da511e8aebb112752))
+* check if no default address in the user show the select address modal ([#181](https://github.com/pelcro-inc/react-pelcro-js/issues/181)) ([b3dceb6](https://github.com/pelcro-inc/react-pelcro-js/commit/b3dceb66f55b771162c6da986daba32c0786bd30)), closes [#180](https://github.com/pelcro-inc/react-pelcro-js/issues/180) [#178](https://github.com/pelcro-inc/react-pelcro-js/issues/178) [#179](https://github.com/pelcro-inc/react-pelcro-js/issues/179) [#178](https://github.com/pelcro-inc/react-pelcro-js/issues/178) [#179](https://github.com/pelcro-inc/react-pelcro-js/issues/179) [#177](https://github.com/pelcro-inc/react-pelcro-js/issues/177) [#172](https://github.com/pelcro-inc/react-pelcro-js/issues/172) [#173](https://github.com/pelcro-inc/react-pelcro-js/issues/173) [#174](https://github.com/pelcro-inc/react-pelcro-js/issues/174)
+
 ## [3.5.1-beta.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.5.0...v3.5.1-beta.1) (2022-07-27)
 
 
