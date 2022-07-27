@@ -1,3 +1,10 @@
+# [3.5.0-beta.4](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.5.0-beta.3...v3.5.0-beta.4) (2022-07-27)
+
+
+### Bug Fixes
+
+* remove console log ([64b3bc5](https://github.com/pelcro-inc/react-pelcro-js/commit/64b3bc568fd2f4d9c1df341e57079139a7c54b66))
+
 # [3.5.0-beta.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.5.0-beta.2...v3.5.0-beta.3) (2022-07-26)
 
 
