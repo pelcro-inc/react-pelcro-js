@@ -1,3 +1,10 @@
+## [3.5.1-beta.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.5.1-beta.2...v3.5.1-beta.3) (2022-07-27)
+
+
+### Bug Fixes
+
+* translation mission issue ([de8a2d9](https://github.com/pelcro-inc/react-pelcro-js/commit/de8a2d932429025ca51ebed7040a36d412fbea71))
+
 ## [3.5.1-beta.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.5.1-beta.1...v3.5.1-beta.2) (2022-07-27)
 
 
