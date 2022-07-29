@@ -80,15 +80,18 @@ export function PaymentMethodView({
             {/* Payment buttons section */}
             <div className="plc-grid plc-mt-4 plc-gap-y-2">
               <SubmitPaymentMethod />
-              {showExternalPaymentMethods && (
+              {showExternalPaymentMethods &&
+              !window.Pelcro.site.read()?.vantiv_gateway_settings ? (
                 <>
-                  {window.Pelcro.site.read()
-                    ?.vantiv_gateway_settings || (
-                    <PelcroPaymentRequestButton />
-                  )}
+                  <PelcroPaymentRequestButton />
                   <PaypalSubscribeButton />
                 </>
-              )}
+              ) : showExternalPaymentMethods &&
+                window.Pelcro.site.read()?.vantiv_gateway_settings ? (
+                <>
+                  <PaypalSubscribeButton />
+                </>
+              ) : null}
             </div>
           </div>
         </PaymentMethodContainer>
