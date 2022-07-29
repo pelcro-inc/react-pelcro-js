@@ -1,3 +1,10 @@
+# [3.6.0-beta.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.5.1-beta.3...v3.6.0-beta.1) (2022-07-29)
+
+
+### Features
+
+* add qr code feature ([51edc4c](https://github.com/pelcro-inc/react-pelcro-js/commit/51edc4c17000a94481e0eeff2c92325c2f756af6))
+
 ## [3.5.1-beta.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.5.1-beta.2...v3.5.1-beta.3) (2022-07-27)
 
 
