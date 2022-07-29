@@ -82,7 +82,10 @@ export function PaymentMethodView({
               <SubmitPaymentMethod />
               {showExternalPaymentMethods && (
                 <>
-                  <PelcroPaymentRequestButton />
+                  {window.Pelcro.site.read()
+                    ?.vantiv_gateway_settings || (
+                    <PelcroPaymentRequestButton />
+                  )}
                   <PaypalSubscribeButton />
                 </>
               )}
