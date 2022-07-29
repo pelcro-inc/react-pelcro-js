@@ -1,3 +1,10 @@
+# [3.6.0-beta.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.1...v3.6.0-beta.2) (2022-07-29)
+
+
+### Features
+
+* hide google pay if vantiv gateway is enabled ([#182](https://github.com/pelcro-inc/react-pelcro-js/issues/182)) ([5642293](https://github.com/pelcro-inc/react-pelcro-js/commit/56422934a793fa7b2ab9a4ab9a7c7267e819b9d6))
+
 # [3.6.0-beta.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.5.1-beta.3...v3.6.0-beta.1) (2022-07-29)
 
 
