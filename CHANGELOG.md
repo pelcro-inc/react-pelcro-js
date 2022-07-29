@@ -1,3 +1,10 @@
+# [3.6.0-beta.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.2...v3.6.0-beta.3) (2022-07-29)
+
+
+### Bug Fixes
+
+* check for vantiv and display google pay button ([38154af](https://github.com/pelcro-inc/react-pelcro-js/commit/38154af6cec50408a1255a92560579ed988dd590))
+
 # [3.6.0-beta.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.1...v3.6.0-beta.2) (2022-07-29)
 
 
