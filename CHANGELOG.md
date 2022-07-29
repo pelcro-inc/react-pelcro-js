@@ -1,3 +1,10 @@
+# [3.6.0-beta.4](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.3...v3.6.0-beta.4) (2022-07-29)
+
+
+### Bug Fixes
+
+* export QrCodeModal in components.js ([#183](https://github.com/pelcro-inc/react-pelcro-js/issues/183)) ([43c0ef0](https://github.com/pelcro-inc/react-pelcro-js/commit/43c0ef00fc67fea6f19d06677e21fb368afbbbc7))
+
 # [3.6.0-beta.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.2...v3.6.0-beta.3) (2022-07-29)
 
 
