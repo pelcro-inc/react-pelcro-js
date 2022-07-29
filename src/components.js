@@ -228,6 +228,8 @@ export { Select } from "./SubComponents/Select";
 export { notify, Notification } from "./SubComponents/Notification";
 export { Tooltip } from "./SubComponents/Tooltip";
 
+export { QrCodeModal } from "./Components/QrCode/QrCodeModal";
+
 export { default as i18n } from "./i18n";
 
 export {
