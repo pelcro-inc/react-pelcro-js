@@ -19,7 +19,9 @@ export function Input({
         className={`pelcro-input-label ${labelClassName}`}
       >
         {required ? (
-          <span className="plc-text-primary-800">* </span>
+          <span className="plc-text-primary-800 plc-inline-flex plc-mr-1">
+            *
+          </span>
         ) : (
           ""
         )}

@@ -6,6 +6,7 @@ import { LoginButton } from "./LoginButton";
 import { LoginRequestLoginToken } from "./LoginRequestLoginToken";
 import { LoginEmail } from "./LoginEmail";
 import { AlertWithContext } from "../../SubComponents/AlertWithContext";
+import { VerticalSeparator } from "../../SubComponents/VerticalSeparator";
 import { FacebookLoginButton } from "../../Components/common/FacebookLoginButton/FacebookLoginButton";
 import { Link } from "../../SubComponents/Link";
 import { GoogleLoginButton } from "../common/GoogleLoginButton/GoogleLoginButton";
@@ -21,19 +22,53 @@ export function LoginView(props) {
     window.Pelcro.site.read()?.google_app_id ||
     window.Pelcro.site.read()?.auth0_client_id;
 
-  const passwordlessEnabled = window.Pelcro.site.read()?.passwordless_enabled;
+  const passwordlessEnabled =
+    window.Pelcro.site.read()?.passwordless_enabled;
 
   return (
     <div id="pelcro-login-view">
-      <div className="plc-mb-6 plc-text-2xl plc-font-semibold plc-text-center plc-text-gray-900 pelcro-title-wrapper">
-        <h4>{t("messages.loginTo")}</h4>
-      </div>
       <form
         action="javascript:void(0);"
         className="plc-mt-2 pelcro-form"
       >
         <LoginContainer {...props}>
           <AlertWithContext />
+          {socialLoginEnabled && (
+            <div className="plc-my-5">
+              <div>
+                <div className="plc-block sm:plc-flex plc-flex-col sm:plc-flex-row plc-justify-center plc-flex-wrap plc-items-center">
+                  <GoogleLoginButton className="plc-block sm:plc-flex plc-w-full sm:plc-w-auto plc-mb-4 sm:plc-mb-0" />
+                  <VerticalSeparator className="plc-hidden sm:plc-inline-grid plc-mx-4 plc-h-8" />
+                  <FacebookLoginButton className="plc-block sm:plc-flex plc-w-full sm:plc-w-auto" />
+                </div>
+                <div className="plc-block sm:plc-flex plc-flex-col sm:plc-flex-row plc-justify-center plc-flex-wrap plc-items-center plc-mt-4">
+                  <Auth0LoginButton
+                    className={`plc-block sm:plc-flex plc-w-full sm:plc-w-auto plc-mb-4 sm:plc-mb-0 ${
+                      passwordlessEnabled ? "plc-flex-1" : "plc-w-1/2"
+                    }`}
+                  />
+                  {passwordlessEnabled && (
+                    <>
+                      <VerticalSeparator className="plc-hidden sm:plc-inline-grid plc-mx-4 plc-h-8" />
+                      <LoginRequestLoginToken
+                        onClick={props.onPasswordlessRequest}
+                        className="plc-block sm:plc-flex plc-w-full sm:plc-w-auto"
+                      />
+                    </>
+                  )}
+                </div>
+              </div>
+
+              <div className="plc-flex plc-items-center plc-justify-between plc-mt-5">
+                <hr className="plc-w-full plc-border-gray-300" />
+                <span className="plc-flex-shrink-0 plc-px-2 plc-text-sm plc-text-gray-700 plc-uppercase">
+                  {t("messages.socialLogin.label")}
+                </span>
+                <hr className="plc-w-full plc-border-gray-300" />
+              </div>
+            </div>
+          )}
+
           <LoginEmail
             id="pelcro-input-email"
             errorId="pelcro-input-email-error"
@@ -49,7 +84,7 @@ export function LoginView(props) {
           />
           <div className="plc-flex plc-flex-row-reverse">
             <Link
-              className="plc-inline-flex plc-items-end plc-text-sm plc-cursor-default plc-h-9"
+              className="plc-inline-flex plc-text-sm plc-cursor-default plc-h-9"
               id="pelcro-link-forgot-password"
               onClick={props.onForgotPassword}
             >
@@ -64,27 +99,6 @@ export function LoginView(props) {
             name={t("labels.login")}
             id="pelcro-submit"
           />
-          {socialLoginEnabled && (
-            <div className="plc-mt-5">
-              <div className="plc-flex plc-items-center plc-justify-between ">
-                <hr className="plc-w-full plc-border-gray-300" />
-                <span className="plc-flex-shrink-0 plc-p-2 plc-text-xs plc-text-gray-400 plc-uppercase">
-                  {t("messages.socialLogin.label")}
-                </span>
-                <hr className="plc-w-full plc-border-gray-300" />
-              </div>
-              <div className="plc-flex plc-justify-center plc-flex-wrap plc-px-5 plc-mt-1 plc-space-x-3">
-                <GoogleLoginButton />
-                <FacebookLoginButton />
-                <Auth0LoginButton />
-              </div>
-            </div>
-          )}
-          {passwordlessEnabled && (
-            <LoginRequestLoginToken
-              onClick={props.onPasswordlessRequest}
-            />
-          )}
         </LoginContainer>
       </form>
     </div>
