@@ -1,5 +1,5 @@
 @layer components {
   .pelcro-root .pelcro-link {
-    @apply plc-underline plc-font-semibold plc-cursor-pointer plc-text-primary-500 hover:plc-text-primary-600;
+    @apply plc-font-semibold plc-cursor-pointer plc-text-primary-500 hover:plc-text-primary-600;
   }
 }

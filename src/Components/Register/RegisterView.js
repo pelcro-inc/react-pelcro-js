@@ -41,13 +41,13 @@ export function RegisterView(props) {
           {socialLoginEnabled && (
             <div className="plc-my-5">
               <div>
-                <div className="plc-flex plc-justify-center plc-flex-wrap plc-items-center">
-                  <GoogleLoginButton />
-                  <VerticalSeparator className="plc-mx-4 plc-h-8" />
-                  <FacebookLoginButton />
+                <div className="plc-block sm:plc-flex plc-flex-col sm:plc-flex-row plc-justify-center plc-flex-wrap plc-items-center">
+                  <GoogleLoginButton className="plc-block sm:plc-flex plc-w-full sm:plc-w-auto plc-mb-4 sm:plc-mb-0" />
+                  <VerticalSeparator className="plc-hidden sm:plc-inline-grid plc-mx-4 plc-h-8" />
+                  <FacebookLoginButton className="plc-block sm:plc-flex plc-w-full sm:plc-w-auto" />
                 </div>
-                <div className="plc-flex plc-justify-center plc-flex-wrap plc-items-center plc-mt-4">
-                  <Auth0LoginButton />
+                <div className="plc-block sm:plc-flex plc-flex-col sm:plc-flex-row plc-justify-center plc-flex-wrap plc-items-center plc-mt-4">
+                  <Auth0LoginButton className="plc-block sm:plc-flex plc-w-full sm:plc-w-1/2 plc-mb-4 sm:plc-mb-0" />
                 </div>
               </div>
 
