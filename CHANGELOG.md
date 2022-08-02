@@ -1,3 +1,10 @@
+# [3.6.0-beta.5](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.4...v3.6.0-beta.5) (2022-08-02)
+
+
+### Bug Fixes
+
+* check for vantiv support differently ([632bb68](https://github.com/pelcro-inc/react-pelcro-js/commit/632bb6828e039424c51ba605b0d4b10254ae3ba5))
+
 # [3.6.0-beta.4](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.3...v3.6.0-beta.4) (2022-07-29)
 
 
