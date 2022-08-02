@@ -23,7 +23,7 @@ export const NewsletterUpdateList = () => {
       {newsletters.map((newsletter) => (
         <div
           key={newsletter.id}
-          className="plc-p-2 plc-mx-3 plc-mt-2 plc-border plc-border-gray-400 plc-border-solid plc-rounded plc-text-gray-900 pelcro-newsletter-wrapper"
+          className="plc-py-4 plc-px-1 plc-border-b plc-text-gray-900 pelcro-newsletter-wrapper last:plc-border-0"
         >
           <Checkbox
             className="pelcro-select-newsletter-checkbox"
