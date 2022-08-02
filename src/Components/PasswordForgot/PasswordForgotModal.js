@@ -4,6 +4,7 @@ import { usePelcro } from "../../hooks/usePelcro";
 import { Link } from "../../SubComponents/Link";
 import {
   Modal,
+  ModalHeader,
   ModalBody,
   ModalFooter
 } from "../../SubComponents/Modal";
@@ -24,20 +25,28 @@ export const PasswordForgotModal = ({
       onDisplay={onDisplay}
       onClose={onClose}
     >
+      <ModalHeader>
+        <div className="plc-text-center plc-text-gray-900 pelcro-title-wrapper plc-flex-1 plc-flex plc-flex-col plc-justify-center">
+          <h4 className="plc-text-2xl plc-font-semibold">
+            {t("title")}
+          </h4>
+        </div>
+      </ModalHeader>
       <ModalBody>
         <PasswordForgotView {...otherProps} />
       </ModalBody>
       <ModalFooter>
-        <div>
-          {t("messages.alreadyHaveAccount") + " "}
+        <p className="plc-mb-9">
+          <span className="plc-font-medium">
+            {t("messages.alreadyHaveAccount") + " "}
+          </span>
           <Link
             id="pelcro-link-login"
             onClick={() => switchView("login")}
           >
             {t("messages.loginHere")}
           </Link>
-        </div>
-        <Authorship />
+        </p>
       </ModalFooter>
     </Modal>
   );
