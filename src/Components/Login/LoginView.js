@@ -36,23 +36,6 @@ export function LoginView(props) {
       >
         <LoginContainer {...props}>
           <AlertWithContext />
-          {enableLoginWithUsername ? (
-            <LoginUsername
-              id="pelcro-input-username"
-              errorId="pelcro-input-username-error"
-              required
-              label={t("labels.username")}
-              autoFocus={true}
-            />
-          ) : (
-            <LoginEmail
-              id="pelcro-input-email"
-              errorId="pelcro-input-email-error"
-              required
-              label={t("labels.email")}
-              autoFocus={true}
-            />
-          )}
           {socialLoginEnabled && (
             <div className="plc-my-5">
               <div>
@@ -89,13 +72,23 @@ export function LoginView(props) {
             </div>
           )}
 
-          <LoginEmail
-            id="pelcro-input-email"
-            errorId="pelcro-input-email-error"
-            required
-            label={t("labels.email")}
-            autoFocus={true}
-          />
+          {enableLoginWithUsername ? (
+            <LoginUsername
+              id="pelcro-input-username"
+              errorId="pelcro-input-username-error"
+              required
+              label={t("labels.username")}
+              autoFocus={true}
+            />
+          ) : (
+            <LoginEmail
+              id="pelcro-input-email"
+              errorId="pelcro-input-email-error"
+              required
+              label={t("labels.email")}
+              autoFocus={true}
+            />
+          )}
           <LoginPassword
             id="pelcro-input-password"
             errorId="pelcro-input-password-error"
