@@ -1,8 +1,9 @@
 import React from "react";
-import Authorship from "../common/Authorship";
+import { useTranslation } from "react-i18next";
 import { AddressSelectView } from "./AddressSelectView";
 import {
   Modal,
+  ModalHeader,
   ModalBody,
   ModalFooter
 } from "../../SubComponents/Modal";
@@ -14,6 +15,7 @@ export const AddressSelectModal = ({
   ...otherProps
 }) => {
   const { switchView, switchToPaymentView, resetView } = usePelcro();
+  const { t } = useTranslation("address");
 
   const onSuccess = (selectedAddressId) => {
     otherProps.onSuccess?.(selectedAddressId);
@@ -42,6 +44,14 @@ export const AddressSelectModal = ({
       onClose={onClose}
       id="pelcro-address-select-modal"
     >
+      <ModalHeader>
+        <div className="plc-text-center plc-text-gray-900 pelcro-title-wrapper plc-flex-1 plc-flex plc-flex-col plc-justify-center">
+          <h4 className="plc-text-2xl plc-font-semibold">
+            {t("selectAddressTitle")}
+          </h4>
+          <p>{t("selectAddressSubtitle")}</p>
+        </div>
+      </ModalHeader>
       <ModalBody>
         <AddressSelectView
           onAddNewAddress={onAddNewAddress}
@@ -53,9 +63,7 @@ export const AddressSelectModal = ({
           }
         />
       </ModalBody>
-      <ModalFooter>
-        <Authorship />
-      </ModalFooter>
+      <ModalFooter></ModalFooter>
     </Modal>
   );
 };

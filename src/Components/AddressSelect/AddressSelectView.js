@@ -11,12 +11,6 @@ export const AddressSelectView = (props) => {
 
   return (
     <div id="pelcro-address-select-view">
-      <div className="plc-mb-6 plc-text-center plc-text-gray-900 pelcro-title-wrapper">
-        <h4 className="plc-text-2xl plc-font-semibold">
-          {t("selectAddressTitle")}
-        </h4>
-        <p>{t("selectAddressSubtitle")}</p>
-      </div>
       <form
         action="javascript:void(0);"
         className="plc-mt-2 pelcro-form"
@@ -28,6 +22,7 @@ export const AddressSelectView = (props) => {
             <Link
               id="pelcro-add-address"
               onClick={props.onAddNewAddress}
+              className="plc-w-full plc-h-12 plc-flex plc-justify-center plc-border plc-items-center plc-border-solid plc-border-gray-300 plc-rounded plc-bg-white  hover:plc-border-primary-800"
             >
               {t("buttons.addAddress")}
             </Link>
