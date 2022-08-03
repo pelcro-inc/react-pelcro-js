@@ -21,12 +21,6 @@ export const UserUpdateView = (props) => {
 
   return (
     <div id="pelcro-user-update-view">
-      <div className="plc-mb-6 plc-text-center plc-text-gray-900 pelcro-title-wrapper">
-        <h4 className="plc-text-2xl plc-font-semibold">
-          {t("labels.title")}
-        </h4>
-        <p>{t("labels.subtitle")}</p>
-      </div>
       <form
         action="javascript:void(0);"
         className="plc-mt-2 pelcro-form"
