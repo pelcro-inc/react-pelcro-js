@@ -54,42 +54,46 @@ const MembershipsItems = () => {
         ?.find((address) => address.id === membership.address_id);
 
       return (
-        <tr
-          key={membership.id}
-          className={`plc-w-full plc-align-top pelcro-membership-row`}
-        >
-          <td className="plc-truncate">
-            {membership.subscription.plan.nickname && (
-              <>
-                <span className="plc-font-semibold plc-text-gray-500 pelcro-membership-plan">
-                  {membership.subscription.plan.nickname}
+        <>
+          { membership.subscription.ended_at === null &&
+            <tr
+              key={membership.id}
+              className={`plc-w-full plc-align-top pelcro-membership-row`}
+            >
+              <td className="plc-truncate">
+                {membership.subscription.plan.nickname && (
+                  <>
+                    <span className="plc-font-semibold plc-text-gray-500 pelcro-membership-plan">
+                      {membership.subscription.plan.nickname}
+                    </span>
+                  </>
+                )}
+              </td>
+              <td>
+                <span
+                  className={`plc-inline-flex plc-p-1 plc-text-xs plc-font-semibold ${
+                    getMemberShipStatus(membership.status).bgColor
+                  } plc-uppercase ${
+                    getMemberShipStatus(membership.status).textColor
+                  } plc-rounded-lg`}
+                >
+                  {getMemberShipStatus(membership.status).icon}
+                  {getMemberShipStatus(membership.status).title}
                 </span>
-              </>
-            )}
-          </td>
-          <td>
-            <span
-              className={`plc-inline-flex plc-p-1 plc-text-xs plc-font-semibold ${
-                getMemberShipStatus(membership.status).bgColor
-              } plc-uppercase ${
-                getMemberShipStatus(membership.status).textColor
-              } plc-rounded-lg`}
-            >
-              {getMemberShipStatus(membership.status).icon}
-              {getMemberShipStatus(membership.status).title}
-            </span>
-          </td>
-          <td>
-            <Button
-              variant="ghost"
-              icon={<EditIcon className="plc-w-4 plc-h-4" />}
-              className="plc-text-blue-400 focus:plc-ring-blue-500 pelcro-dashboard-membership-address-button"
-              onClick={() => onChangeAddressClick(membership.id)}
-            >
-              {`${t("labels.edit")} ${t("labels.address")}`}
-            </Button>
-          </td>
-        </tr>
+              </td>
+              <td>
+                <Button
+                  variant="ghost"
+                  icon={<EditIcon className="plc-w-4 plc-h-4" />}
+                  className="plc-text-blue-400 focus:plc-ring-blue-500 pelcro-dashboard-membership-address-button"
+                  onClick={() => onChangeAddressClick(membership.id)}
+                >
+                  {`${t("labels.edit")} ${t("labels.address")}`}
+                </Button>
+              </td>
+            </tr>
+          }
+        </>
       );
     });
 };
