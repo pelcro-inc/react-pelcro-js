@@ -1,3 +1,10 @@
+# [3.6.0-beta.8](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.7...v3.6.0-beta.8) (2022-08-04)
+
+
+### Features
+
+* remove paypal button to debug google pay ([af27999](https://github.com/pelcro-inc/react-pelcro-js/commit/af27999a4c57e7aa8840faa6bbb3457e45e18c8d))
+
 # [3.6.0-beta.7](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.6...v3.6.0-beta.7) (2022-08-04)
 
 
