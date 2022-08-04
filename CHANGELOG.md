@@ -1,3 +1,10 @@
+# [3.6.0-beta.7](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.6...v3.6.0-beta.7) (2022-08-04)
+
+
+### Bug Fixes
+
+* export QrCodeView ([#184](https://github.com/pelcro-inc/react-pelcro-js/issues/184)) ([852a580](https://github.com/pelcro-inc/react-pelcro-js/commit/852a580e4061cd2bdc5c653f3f1e772ea602707c))
+
 # [3.6.0-beta.6](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.5...v3.6.0-beta.6) (2022-08-04)
 
 
