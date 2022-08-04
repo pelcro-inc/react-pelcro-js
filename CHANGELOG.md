@@ -1,3 +1,10 @@
+# [3.6.0-beta.9](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.8...v3.6.0-beta.9) (2022-08-04)
+
+
+### Features
+
+* bring back Paypal button after debugging the Google Pay button ([9bc140a](https://github.com/pelcro-inc/react-pelcro-js/commit/9bc140adb0d7d673a43c6804c659f39d8485a042))
+
 # [3.6.0-beta.8](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.7...v3.6.0-beta.8) (2022-08-04)
 
 
