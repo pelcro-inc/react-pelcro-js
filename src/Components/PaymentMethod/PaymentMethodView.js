@@ -87,7 +87,7 @@ export function PaymentMethodView({
               {showExternalPaymentMethods && !supportsVantiv ? (
                 <>
                   <PelcroPaymentRequestButton />
-                  <PaypalSubscribeButton />
+                  {/* <PaypalSubscribeButton /> */}
                 </>
               ) : showExternalPaymentMethods && supportsVantiv ? (
                 <>
