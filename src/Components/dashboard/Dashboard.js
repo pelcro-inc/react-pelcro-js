@@ -844,7 +844,9 @@ function hasActiveMemberships() {
     window.Pelcro.user
       .read()
       .memberships?.some(
-        (membership) => membership.status === "active"
+        (membership) =>
+          membership.status === "active" &&
+          membership.subscription.ended_at === null
       ) ?? false
   );
 }
