@@ -1,3 +1,10 @@
+# [3.6.0-beta.10](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.9...v3.6.0-beta.10) (2022-08-08)
+
+
+### Features
+
+* update the custom CSS file name for Vantiv iframe ([#187](https://github.com/pelcro-inc/react-pelcro-js/issues/187)) ([a7c5ff2](https://github.com/pelcro-inc/react-pelcro-js/commit/a7c5ff2800f7dfbbbe2a454977f617b15430a570))
+
 # [3.6.0-beta.9](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.8...v3.6.0-beta.9) (2022-08-04)
 
 
