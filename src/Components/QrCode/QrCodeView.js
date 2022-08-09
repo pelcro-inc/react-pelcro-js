@@ -10,7 +10,9 @@ export function QrCodeView() {
 
   return (
     <div id="pelcro-qrcode-view">
-      <QRCode style={{ margin: "auto" }} value={value} />
+      <div className="plc-my-4">
+        <QRCode style={{ margin: "auto" }} value={value} />
+      </div>
     </div>
   );
 }
