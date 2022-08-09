@@ -112,6 +112,9 @@ import invoiceDetails_es from "./translations/es/InvoiceDetails.json";
 import subscriptionCancel_es from "./translations/es/subscriptionCancel.json";
 import subscriptionSuspend_es from "./translations/es/subscriptionSuspend.json";
 
+import qr_en from "./translations/en/qr.json";
+import qr_fr from "./translations/fr/qr.json";
+import qr_ko from "./translations/ko/qr.json";
 import { getPageOrDefaultLanguage } from "./utils/utils";
 
 const resources = {
@@ -142,7 +145,8 @@ const resources = {
     invoiceDetails: invoiceDetails_en,
     subscriptionCancel: subscriptionCancel_en,
     subscriptionSuspend: subscriptionSuspend_en,
-    subscriptionManageMembers: subscriptionManageMembers_en
+    subscriptionManageMembers: subscriptionManageMembers_en,
+    qr: qr_en
   },
   fr: {
     common: common_fr,
@@ -171,7 +175,8 @@ const resources = {
     invoiceDetails: invoiceDetails_fr,
     subscriptionCancel: subscriptionCancel_fr,
     subscriptionSuspend: subscriptionSuspend_fr,
-    subscriptionManageMembers: subscriptionManageMembers_fr
+    subscriptionManageMembers: subscriptionManageMembers_fr,
+    qr: qr_fr
   },
   ko: {
     common: common_ko,
@@ -228,7 +233,8 @@ const resources = {
     notification: notification_es,
     invoiceDetails: invoiceDetails_es,
     subscriptionCancel: subscriptionCancel_es,
-    subscriptionSuspend: subscriptionSuspend_es
+    subscriptionSuspend: subscriptionSuspend_es,
+    qr: qr_ko
   }
 };
 

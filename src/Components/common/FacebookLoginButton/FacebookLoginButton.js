@@ -55,6 +55,7 @@ export const FacebookLoginButton = ({
       onFailure={onFailure}
       render={(renderProps) => (
         <button
+          type="button"
           onClick={renderProps.onClick}
           className={`plc-flex plc-items-center plc-justify-center plc-h-12 plc-px-5 plc-text-gray-700 plc-rounded-md pelcro-google-login plc-shadow-md_dark shadow plc-flex-1 plc-bg-white hover:plc-bg-transparent ${className}`}
         >

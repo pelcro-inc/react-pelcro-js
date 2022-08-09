@@ -2,6 +2,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import {
   Modal,
+  ModalHeader,
   ModalBody,
   ModalFooter
 } from "../../SubComponents/Modal";
@@ -30,11 +31,36 @@ export const GiftRedeemModal = ({
       onClose={onClose}
       onDisplay={onDisplay}
     >
+      <ModalHeader>
+        <div className="plc-text-center plc-text-gray-900 pelcro-title-wrapper plc-flex-1 plc-flex plc-flex-col plc-justify-center">
+          <h4 className="plc-text-2xl plc-font-semibold">
+            {t("redeem.titles.firstTitle")}
+          </h4>
+          <p>{t("redeem.titles.secondTitle")}</p>
+        </div>
+      </ModalHeader>
       <ModalBody>
         <GiftRedeemView {...otherProps} onSuccess={onSuccess} />
       </ModalBody>
       <ModalFooter>
         {isAuthenticated() && (
+          <p className="plc-mb-9">
+            <span className="plc-font-medium">
+              {t("redeem.footer.click") + " "}
+            </span>
+            <Link
+              id="pelcro-link-redeem"
+              onClick={switchToAddressView}
+            >
+              {t("redeem.footer.here") + " "}
+            </Link>
+            <span className="plc-font-medium">
+              {t("redeem.footer.toAdd")}
+            </span>
+          </p>
+        )}
+
+        {/* {isAuthenticated() && (
           <p>
             {t("redeem.footer.click")}{" "}
             <Link
@@ -45,8 +71,7 @@ export const GiftRedeemModal = ({
             </Link>{" "}
             {t("redeem.footer.toAdd")}
           </p>
-        )}
-        <Authorship />
+        )} */}
       </ModalFooter>
     </Modal>
   );
