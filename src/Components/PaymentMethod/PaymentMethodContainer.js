@@ -349,7 +349,7 @@ const PaymentMethodContainerWithoutStripe = ({
       vantivInstanceRef.current = new window.EprotectIframeClient({
         paypageId: payPageId,
         reportGroup: reportGroup,
-        style: "enhancedStyle2",
+        style: "enhancedStyle3",
         height: "245",
         timeout: 50000,
         div: "eProtectiframe",
