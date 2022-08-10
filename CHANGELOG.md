@@ -1,3 +1,10 @@
+# [3.6.0-beta.12](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.11...v3.6.0-beta.12) (2022-08-10)
+
+
+### Features
+
+* edit Vantiv error messages ([#188](https://github.com/pelcro-inc/react-pelcro-js/issues/188)) ([6096a10](https://github.com/pelcro-inc/react-pelcro-js/commit/6096a10dfb96bc5a59fde3c95373261d237a8a7e))
+
 # [3.6.0-beta.11](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.10...v3.6.0-beta.11) (2022-08-10)
 
 
