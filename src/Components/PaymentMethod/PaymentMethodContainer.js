@@ -168,9 +168,16 @@ const PaymentMethodContainerWithoutStripe = ({
     if (paymentRequest) {
       const SUCCESS_STATUS = "870";
       if (paymentRequest.response !== SUCCESS_STATUS) {
-        return handlePaymentError({
-          error: new Error(paymentRequest.message)
-        });
+        switch (paymentRequest.response) {
+          case "871":
+            return handlePaymentError({
+              error: new Error("Invalid account number")
+            });
+          default:
+            return handlePaymentError({
+              error: new Error(paymentRequest.message)
+            });
+        }
       }
     }
 
