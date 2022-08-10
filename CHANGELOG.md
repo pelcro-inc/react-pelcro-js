@@ -1,3 +1,10 @@
+# [3.6.0-beta.11](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.10...v3.6.0-beta.11) (2022-08-10)
+
+
+### Features
+
+* update the Vantiv custom style name ([4293ee4](https://github.com/pelcro-inc/react-pelcro-js/commit/4293ee41b6a14655062b4cb299c9c7cc8011d2df))
+
 # [3.6.0-beta.10](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.9...v3.6.0-beta.10) (2022-08-08)
 
 
