@@ -12023,8 +12023,8 @@ react-qr-code@^2.0.7:
   resolved "https://registry.npmjs.org/react-qr-code/-/react-qr-code-2.0.7.tgz"
   integrity sha512-NpknL80p7dWbLdHfBSIxQIqLCu3+kBlyzYD692rO0UnVwfCSziIxc1xn/p3JhPEv1RV1lRD8j0w+hR3L7tawTQ==
   dependencies:
-    prop-types "^15.7.2"
-    qr.js "0.0.0"
+    "prop-types" "^15.7.2"
+    "qr.js" "0.0.0"
 
 react-refresh@^0.9.0:
   version "0.9.0"
