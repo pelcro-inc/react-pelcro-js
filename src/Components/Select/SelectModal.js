@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import ReactGA from "react-ga";
 import PropTypes from "prop-types";
-import Authorship from "../common/Authorship";
+import Carousel from "nuka-carousel";
 import { withTranslation } from "react-i18next";
 import {
   Modal,
+  ModalHeader,
   ModalBody,
   ModalFooter
 } from "../../SubComponents/Modal";
@@ -408,22 +409,30 @@ class SelectModal extends Component {
         onClose={this.props.onClose}
         id="pelcro-selection-modal"
       >
+        <ModalHeader>
+          <div className="plc-text-center plc-text-gray-900 pelcro-title-wrapper plc-flex-1 plc-flex plc-flex-col plc-justify-center">
+            <h4 className="plc-text-2xl plc-font-semibold">
+              {(this.product && this.product.paywall.select_title) ||
+                window.Pelcro.product.list()[0]?.paywall.select_title}
+            </h4>
+            <p>
+              {(this.product &&
+                this.product.paywall.select_subtitle) ||
+                window.Pelcro.product.list()[0]?.paywall
+                  .select_subtitle}
+            </p>
+          </div>
+        </ModalHeader>
+
         <ModalBody>
           <div id="pelcro-selection-view">
-            <div className="plc-mb-6 plc-text-center plc-text-gray-900 pelcro-title-wrapper">
-              <h4 className="plc-text-2xl plc-font-semibold">
-                {(this.product &&
-                  this.product.paywall.select_title) ||
-                  window.Pelcro.product.list()[0]?.paywall
-                    .select_title}
-              </h4>
-              <p>
-                {(this.product &&
-                  this.product.paywall.select_subtitle) ||
-                  window.Pelcro.product.list()[0]?.paywall
-                    .select_subtitle}
-              </p>
-            </div>
+            <Carousel wrapAround={true} slidesToShow={3}>
+              <div>1</div>
+              <div>2</div>
+              <div>3</div>
+              <div>4</div>
+              <div>5</div>
+            </Carousel>
 
             <div className="pelcro-select-products-wrapper">
               {window.Pelcro.site.read()
@@ -462,8 +471,10 @@ class SelectModal extends Component {
         </ModalBody>
         <ModalFooter>
           {!window.Pelcro.user.isAuthenticated() && (
-            <p>
-              {this.locale("messages.alreadyHaveAccount") + " "}
+            <p className="plc-mb-9">
+              <span className="plc-font-medium">
+                {this.locale("messages.alreadyHaveAccount") + " "}
+              </span>
               <Link
                 id="pelcro-link-login"
                 onClick={this.displayLoginView}
@@ -472,7 +483,6 @@ class SelectModal extends Component {
               </Link>
             </p>
           )}
-          <Authorship />
         </ModalFooter>
       </Modal>
     );
