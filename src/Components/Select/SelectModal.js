@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import ReactGA from "react-ga";
 import PropTypes from "prop-types";
-import Carousel from "nuka-carousel";
 import { withTranslation } from "react-i18next";
 import {
   Modal,
@@ -13,6 +12,7 @@ import { Link } from "../../SubComponents/Link";
 import { Button } from "../../SubComponents/Button";
 import { Checkbox } from "../../SubComponents/Checkbox";
 import { Radio } from "../../SubComponents/Radio";
+import { Carousel } from "../../SubComponents/Carousel";
 import { usePelcro } from "../../hooks/usePelcro";
 import { getEntitlementsFromElem } from "../../utils/utils";
 
@@ -112,7 +112,7 @@ class SelectModal extends Component {
       this.state.productList.length === 0 &&
       !window.Pelcro.user.isAuthenticated()
     ) {
-      this.props.setView('register');
+      this.props.setView("register");
     }
 
     document.addEventListener("keydown", this.handleSubmit);
@@ -150,11 +150,19 @@ class SelectModal extends Component {
         startingPlan = plan;
       }
     }
-    return `${startingPlan.amount_formatted}/${
-      startingPlan.interval_count > 1
-        ? `${startingPlan.interval_count} ${startingPlan.interval}s`
-        : `${startingPlan.interval}`
-    }`;
+    return (
+      <h5 className="plc-text-3xl pelcro-select-product-cost">
+        <span className="plc-font-medium">
+          {startingPlan.amount_formatted}
+        </span>
+        <span className="plc-text-sm plc-ml-1 plc-text-gray-400">
+          /{" "}
+          {startingPlan.interval_count > 1
+            ? `${startingPlan.interval_count} ${startingPlan.interval}s`
+            : `${startingPlan.interval}`}
+        </span>
+      </h5>
+    );
   };
 
   renderOneProduct = (product, index, options) => {
@@ -169,44 +177,48 @@ class SelectModal extends Component {
     return (
       <div
         key={product.id}
-        className={`plc-flex plc-items-start plc-p-2 plc-mt-4 plc-space-x-3 plc-text-gray-900 plc-border-solid plc-rounded plc-border-primary-500 pelcro-select-product-wrapper ${
+        className={`pelcro-product plc-relative plc-overflow-hidden plc-h-full plc-flex plc-flex-col plc-items-start plc-p-8 plc-text-gray-900 plc-border-solid plc-rounded plc-border-gray-200 plc-bg-white pelcro-select-product-wrapper ${
           options?.emphasize ? "plc-border-2" : "plc-border"
         }`}
       >
         {product.image && (
-          <img
-            alt={`image of ${product.name}`}
-            src={product.image}
-            className="plc-object-contain plc-w-1/4 pelcro-select-product-image"
-          />
+          <figure className="plc-w-full plc-mb-4 plc-h-28 plc-relative plc-overflow-hidden plc-flex plc-items-stretch">
+            <img
+              alt={`image of ${product.name}`}
+              src={product.image}
+              className="plc-object-contain plc-max-w-50% plc-object-left plc-max-h-full pelcro-select-product-image"
+            />
+          </figure>
         )}
 
-        <div
-          className={`plc-flex plc-flex-wrap ${
-            product.image ? "plc-w-3/4" : "plc-w-full"
-          }`}
-        >
+        <div className="plc-flex plc-flex-col plc-flex-wrap plc-w-full plc-flex-1">
           <div className="plc-w-full pelcro-select-product-header">
-            <p className="plc-font-bold pelcro-select-product-title">
+            <h4 className="plc-font-medium plc-text-2xl pelcro-select-product-title">
               {product.name}
-            </p>
-            <p className="plc-text-xs pelcro-select-product-description">
+            </h4>
+            <p className="plc-text-sm plc-mt-1 pelcro-select-product-description">
               {product.description}
             </p>
           </div>
 
-          <div className="plc-flex plc-items-end plc-w-full plc-mt-3">
+          <div className="plc-mt-3 plc-mb-6">
             {product.plans && (
-              <p className="plc-w-1/2 plc-text-xs pelcro-select-product-cost">
-                {this.locale("labels.startingAt")}{" "}
+              <>
+                <p className="plc-mb-2">
+                  {this.locale("labels.startingAt")}
+                </p>
+
                 {this.countStartPrice(product.plans)}
-              </p>
+              </>
             )}
+          </div>
+
+          <div className="plc-mt-auto">
             <Button
               onClick={productButtonCallback}
               data-key={product.id}
               id="pelcro-select-product-back-button"
-              className={`plc-ml-auto plc-text-xs ${
+              className={`plc-w-full ${
                 options?.emphasize ? "plc-bg-primary-700" : ""
               }`}
               {...(index === 0 && { autoFocus: true })}
@@ -225,9 +237,17 @@ class SelectModal extends Component {
       ? [this.state.product]
       : this.state.productList;
 
-    return productsToShow.map((product, index) => {
-      return this.renderOneProduct(product, index);
-    });
+    const items = productsToShow.map((product, index) =>
+      this.renderOneProduct(product, index)
+    );
+
+    const responsive = {
+      0: { items: 1 },
+      568: { items: 2 },
+      1024: { items: 4 }
+    };
+
+    return <Carousel items={items} responsive={responsive} />;
   };
 
   renderMatchingProductsFirst = () => {
@@ -405,6 +425,7 @@ class SelectModal extends Component {
 
     return (
       <Modal
+        className="plc-max-w-90%"
         hideCloseButton={!this.closeButton}
         onClose={this.props.onClose}
         id="pelcro-selection-modal"
@@ -426,14 +447,6 @@ class SelectModal extends Component {
 
         <ModalBody>
           <div id="pelcro-selection-view">
-            <Carousel wrapAround={true} slidesToShow={3}>
-              <div>1</div>
-              <div>2</div>
-              <div>3</div>
-              <div>4</div>
-              <div>5</div>
-            </Carousel>
-
             <div className="pelcro-select-products-wrapper">
               {window.Pelcro.site.read()
                 ?.restrictive_paywall_metatags_enabled

@@ -12077,7 +12077,14 @@ raw-body@2.5.1:
     "minimist" "^1.2.0"
     "strip-json-comments" "~2.0.1"
 
-"react-dom@*", "react-dom@^15.3.0 || ^16.0.0 || ^17.0.1 || ^18.0.0", "react-dom@^15.5.4 || ^16.0.0-0", "react-dom@^16 || ^17", "react-dom@^16.6.1", "react-dom@>=16", "react-dom@>=16.4.0", "react-dom@>=16.8.6":
+"react-alice-carousel@^2.6.4":
+  "integrity" "sha512-G2RTX8SVuqkif3n3qEF9yd1NOqdM8S8SmB7yZ1hiUMMgmgyA+h7HJGTnIbblmU7h7AtaZQ4V6qhJJKxJC0lacQ=="
+  "resolved" "https://registry.npmjs.org/react-alice-carousel/-/react-alice-carousel-2.6.4.tgz"
+  "version" "2.6.4"
+  dependencies:
+    "vanilla-swipe" "^2.2.0"
+
+"react-dom@*", "react-dom@^15.5.4 || ^16.0.0-0", "react-dom@^16 || ^17", "react-dom@^16.6.1", "react-dom@>=16", "react-dom@>=16.4.0", "react-dom@>=16.8.6":
   "integrity" "sha512-1gCeQXDLoIqMgqD3IO2Ah9bnf0w9kzhwN5q4FGnHZ67hBm9yePzB5JJAIQCc8x3pFnNlwFq4RidZggNAAkzWWw=="
   "resolved" "https://registry.npmjs.org/react-dom/-/react-dom-16.14.0.tgz"
   "version" "16.14.0"
@@ -12176,7 +12183,7 @@ raw-body@2.5.1:
     "react-shallow-renderer" "^16.13.1"
     "scheduler" "^0.20.2"
 
-"react@*", "react@^15.3.0 || ^16.0.0 || ^17.0.1 || ^18.0.0", "react@^15.5.4 || ^16.0.0-0", "react@^15.6.2 || ^16.0", "react@^16 || ^17", "react@^16.0.0", "react@^16.0.0 || ^17.0.0", "react@^16.14.0", "react@^16.6.1", "react@^16.8.0", "react@^16.x || ^17.x || ^18.x", "react@>= 16.8.0", "react@>=16", "react@>=16.4.0", "react@>=16.8", "react@>=16.8.6", "react@17.0.2":
+"react@*", "react@^15.5.4 || ^16.0.0-0", "react@^15.6.2 || ^16.0", "react@^16 || ^17", "react@^16.0.0", "react@^16.0.0 || ^17.0.0", "react@^16.14.0", "react@^16.6.1", "react@^16.8.0", "react@^16.x || ^17.x || ^18.x", "react@>= 16.8.0", "react@>=15.4", "react@>=16", "react@>=16.4.0", "react@>=16.8", "react@>=16.8.6", "react@17.0.2":
   "integrity" "sha512-0X2CImDkJGApiAlcf0ODKIneSwBPhqJawOa5wCtKbu7ZECrmS26NvtSILynQ66cgkT/RJ4LidJOc3bUESwmU8g=="
   "resolved" "https://registry.npmjs.org/react/-/react-16.14.0.tgz"
   "version" "16.14.0"
