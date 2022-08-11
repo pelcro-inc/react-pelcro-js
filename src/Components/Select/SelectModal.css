@@ -2,4 +2,9 @@
   .pelcro-root .pelcro-select-plan-radio {
     margin-top: 0.4rem;
   }
+
+  .pelcro-root .pelcro-product:before {
+    content: "";
+    @apply plc-w-full plc-h-1 plc-bg-primary-800 plc-absolute plc-top-0 plc-left-0;
+  }
 }
