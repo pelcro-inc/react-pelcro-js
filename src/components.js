@@ -32,6 +32,7 @@ export { SelectModalWithHook as SelectModal } from "./Components/Select/SelectMo
 export { SubscriptionRenewModal } from "./Components/SubscriptionRenew/SubscriptionRenewModal";
 export { SubscriptionCancelModal } from "./Components/SubscriptionCancel/SubscriptionCancelModal";
 export { SubscriptionSuspendModal } from "./Components/SubscriptionSuspend/SubscriptionSuspendModal";
+export { SubscriptionSuspendView } from "./Components/SubscriptionSuspend/SubscriptionSuspendView";
 export { SubscriptionRenewView } from "./Components/SubscriptionRenew/SubscriptionRenewView";
 export { PaymentSuccessModal } from "./Components/PaymentSuccess/PaymentSuccessModal";
 export { PaymentSuccessView } from "./Components/PaymentSuccess/PaymentSuccessView";
