@@ -19,6 +19,8 @@
     "unsubscribe": "Cancel",
     "reactivate": "Reactivate",
     "renew": "Renew",
+    "suspend": "Suspend",
+    "unsuspend": "UnSuspend",
     "support": "Support",
     "account": "Account",
     "purchases": "Purchases",
@@ -85,6 +87,12 @@
       "loading": "Cancelling your subscription",
       "success": "Subscription is successfully cancelled",
       "error": "Error while cancelling your subscription"
+    },
+    "subUnSuspend": {
+      "isSureToUnSuspend": "Are you sure you want to unsuspend your subscription?",
+      "loading": "Unsuspending your subscription",
+      "success": "Subscription is successfully Unsuspended",
+      "error": "Error while Unsuspending your subscription"
     }
   }
 }

@@ -1,0 +1,21 @@
+{
+  "labels": {
+    "title": "Suspendre l'abonnement",
+    "suspensionDate": "Date de suspension",
+    "subCancellation": {
+      "goBack": "Revenir en arrière"
+    }
+  },
+  "messages": {
+    "suspensionEnd": "La suspension doit expirer le",
+    "suspendNow": "Suspendre l'abonnement maintenant",
+    "suspendLater": "Suspendre à la fin de la période",
+    "subCancellation": {
+      "isSureToSuspendNow": "Êtes-vous sûr de vouloir suspendre votre abonnement immédiatement ?",
+      "isSureToSuspend": "Êtes-vous sûr de vouloir suspendre votre abonnement ?",
+      "loading": "Suspension de votre abonnement",
+      "success": "L'abonnement a été suspendu avec succès",
+      "error": "Erreur lors de la suspension de votre abonnement"
+    }
+  }
+}

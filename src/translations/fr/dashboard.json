@@ -19,6 +19,8 @@
     "unsubscribe": "Se désabonner",
     "reactivate": "Réactiver",
     "renew": "Renouveler",
+    "suspend": "Suspendre",
+    "unsuspend": "Annuler la suspension",
     "support": "Soutien",
     "account": "Compte",
     "purchases": "Achats",
@@ -85,6 +87,12 @@
       "loading": "Annulation de l'abonnement",
       "success": "L'abonnement a été annulé avec succès",
       "error": "Une erreur s'est produite lors de l'annulation de l'abonnement"
+    },
+    "subUnSuspend": {
+      "isSureToUnSuspend": "Êtes-vous sûr de vouloir annuler la suspension de votre abonnement ?",
+      "loading": "Annulation de la suspension de votre abonnement",
+      "success": "L'abonnement a été suspendu avec succès",
+      "error": "Erreur lors de l'annulation de la suspension de votre abonnement"
     }
   }
 }

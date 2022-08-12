@@ -31,6 +31,7 @@ export { Auth0LoginButton } from "./Components/common/Auth0LoginButton/Auth0Logi
 export { SelectModalWithHook as SelectModal } from "./Components/Select/SelectModal";
 export { SubscriptionRenewModal } from "./Components/SubscriptionRenew/SubscriptionRenewModal";
 export { SubscriptionCancelModal } from "./Components/SubscriptionCancel/SubscriptionCancelModal";
+export { SubscriptionSuspendModal } from "./Components/SubscriptionSuspend/SubscriptionSuspendModal";
 export { SubscriptionRenewView } from "./Components/SubscriptionRenew/SubscriptionRenewView";
 export { PaymentSuccessModal } from "./Components/PaymentSuccess/PaymentSuccessModal";
 export { PaymentSuccessView } from "./Components/PaymentSuccess/PaymentSuccessView";

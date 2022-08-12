@@ -1,0 +1,21 @@
+{
+  "labels": {
+    "title": "Suspend subscription",
+    "suspensionDate": "Suspension date",
+    "subCancellation": {
+      "goBack": "Go back"
+    }
+  },
+  "messages": {
+    "suspensionEnd": "The suspension is set to expire on",
+    "suspendNow": "Suspend Subscription Now",
+    "suspendLater": "Suspend at Period End",
+    "subCancellation": {
+      "isSureToSuspendNow": "Are you sure you want to suspend your subscription immediately?",
+      "isSureToSuspend": "Are you sure you want to suspend your subscription?",
+      "loading": "Suspending your subscription",
+      "success": "Subscription is successfully suspended",
+      "error": "Error while suspending your subscription"
+    }
+  }
+}
