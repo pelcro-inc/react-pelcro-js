@@ -1,0 +1,21 @@
+{
+  "labels": {
+    "title": "구독 중단",
+    "suspensionDate": "중단 날짜",
+    "subCancellation": {
+      "goBack": "돌아가기"
+    }
+  },
+  "messages": {
+    "suspensionEnd": "일시 중지가 만료되도록 설정되었습니다.",
+    "suspendNow": "지금 구독 일시 중단",
+    "suspendLater": "기간 종료 시 일시 중단",
+    "subCancellation": {
+      "isSureToSuspendNow": "구독을 즉시 중단하시겠습니까?",
+      "isSureToSuspend": "구독을 일시 중단하시겠습니까?",
+      "loading": "구독 일시 중단",
+      "success": "구독이 성공적으로 일시 중단되었습니다",
+      "error": "구독을 일시 중단하는 동안 오류가 발생했습니다."
+    }
+  }
+}

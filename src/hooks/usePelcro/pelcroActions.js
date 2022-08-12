@@ -154,6 +154,17 @@ export class PelcroActions {
     this.set({ subscriptionToCancel });
   };
 
+  setSubscriptionToSuspend = (id) => {
+    const subscriptions = window.Pelcro.subscription.list() ?? [];
+    const subscriptionToSuspend = subscriptions.filter(
+      (sub) => String(sub.id) === String(id)
+    )[0];
+    if (!subscriptionToSuspend) {
+      return console.error("invalid subscription id");
+    }
+    this.set({ subscriptionToSuspend });
+  };
+
   setInvoice = (id) => {
     const invoices = window.Pelcro.invoice.list() ?? [];
     const invoice = invoices.find(

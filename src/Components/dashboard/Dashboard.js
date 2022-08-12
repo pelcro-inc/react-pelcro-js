@@ -165,6 +165,28 @@ class Dashboard extends Component {
     );
   };
 
+  unSuspendSubscription = (subscription_id, onSuccess, onFailure) => {
+    window.Pelcro.subscription.update(
+      {
+        auth_token: window.Pelcro.user.read().auth_token,
+        subscription_id: subscription_id,
+        suspend: 0
+      },
+      (err, res) => {
+        if (err) {
+          return onFailure?.(err);
+        }
+
+        ReactGA?.event?.({
+          category: "ACTIONS",
+          action: "UnSuspended",
+          nonInteraction: true
+        });
+        onSuccess?.(res);
+      }
+    );
+  };
+
   displayRedeem = () => {
     return this.props.setView("gift-redeem");
   };
@@ -732,6 +754,7 @@ class Dashboard extends Component {
                   <SubscriptionsMenu
                     onClose={this.props.onClose}
                     cancelSubscription={this.cancelSubscription}
+                    unSuspendSubscription={this.unSuspendSubscription}
                     reactivateSubscription={
                       this.reactivateSubscription
                     }

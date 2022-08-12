@@ -27,6 +27,7 @@ import { ShopView } from "./Components/Shop/ShopView";
 import { SubscriptionCreateModal } from "./Components/SubscriptionCreate/SubscriptionCreateModal";
 import { SubscriptionRenewModal } from "./Components/SubscriptionRenew/SubscriptionRenewModal";
 import { SubscriptionCancelModal } from "./Components/SubscriptionCancel/SubscriptionCancelModal";
+import { SubscriptionSuspendModal } from "./Components/SubscriptionSuspend/SubscriptionSuspendModal";
 import { PaymentSuccessModal } from "./Components/PaymentSuccess/PaymentSuccessModal";
 import { OrderCreateModal } from "./Components/OrderCreate/OrderCreateModal";
 import { OrderConfirmModal } from "./Components/OrderConfirm/OrderConfirmModal";
@@ -68,6 +69,7 @@ export const Main = () => {
       <SubscriptionCreateModal />
       <SubscriptionRenewModal />
       <SubscriptionCancelModal />
+      <SubscriptionSuspendModal />
       <PaymentSuccessModal />
 
       <GiftCreateModal />
