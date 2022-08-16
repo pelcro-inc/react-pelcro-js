@@ -1,3 +1,24 @@
+# [3.6.0-beta.13](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.12...v3.6.0-beta.13) (2022-08-12)
+
+
+### Features
+
+* add suspend and unsuspend for subscriptions ([#189](https://github.com/pelcro-inc/react-pelcro-js/issues/189)) ([aa59aef](https://github.com/pelcro-inc/react-pelcro-js/commit/aa59aefd7980f408e54393ef4d448861667bc981))
+
+# [3.6.0-beta.12](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.11...v3.6.0-beta.12) (2022-08-10)
+
+
+### Features
+
+* edit Vantiv error messages ([#188](https://github.com/pelcro-inc/react-pelcro-js/issues/188)) ([6096a10](https://github.com/pelcro-inc/react-pelcro-js/commit/6096a10dfb96bc5a59fde3c95373261d237a8a7e))
+
+# [3.6.0-beta.11](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.10...v3.6.0-beta.11) (2022-08-10)
+
+
+### Features
+
+* update the Vantiv custom style name ([4293ee4](https://github.com/pelcro-inc/react-pelcro-js/commit/4293ee41b6a14655062b4cb299c9c7cc8011d2df))
+
 # [3.6.0-beta.10](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.9...v3.6.0-beta.10) (2022-08-08)
 
 
