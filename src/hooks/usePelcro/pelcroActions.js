@@ -48,7 +48,7 @@ export class PelcroActions {
     ) {
       return this.set({ view: "login" });
     }
-    console.log(this.get().isAuthenticated(), );
+    // console.log(this.get().isAuthenticated(), );
     if (
       ["passwordless-request"].includes(view) &&
       (
