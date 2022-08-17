@@ -2,6 +2,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import {
   Modal,
+  ModalHeader,
   ModalBody,
   ModalFooter
 } from "../../SubComponents/Modal";
@@ -39,12 +40,21 @@ export const GiftCreateModal = ({
       onDisplay={onDisplay}
       onClose={onClose}
     >
+      <ModalHeader>
+        <div className="plc-text-center plc-text-gray-900 pelcro-title-wrapper plc-flex-1 plc-flex plc-flex-col plc-justify-center">
+          <h4 className="plc-text-2xl plc-font-semibold">
+            {t("gift.titles.firstTitle")}
+          </h4>
+        </div>
+      </ModalHeader>
       <ModalBody>
         <GiftCreateView {...otherProps} onSuccess={onSuccess} />
       </ModalBody>
       <ModalFooter>
-        <p>
-          {t("messages.selectPlan") + " "}
+        <p className="plc-mb-9">
+          <span className="plc-font-medium">
+            {t("messages.selectPlan") + " "}
+          </span>
           <Link
             id="pelcro-link-select-plan"
             onClick={() => switchView("plan-select")}
@@ -52,7 +62,6 @@ export const GiftCreateModal = ({
             {t("messages.here")}
           </Link>
         </p>
-        <Authorship />
       </ModalFooter>
     </Modal>
   );
