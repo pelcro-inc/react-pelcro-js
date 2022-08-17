@@ -11,12 +11,6 @@ export const PasswordResetView = (props) => {
   const { t } = useTranslation("passwordReset");
   return (
     <div id="pelcro-password-reset-view">
-      <div className="plc-mb-6 plc-text-center plc-text-gray-900 pelcro-title-wrapper">
-        <h4 className="plc-text-2xl plc-font-semibold">
-          {t("title")}
-        </h4>
-        <p>{t("subtitle")}</p>
-      </div>
       <form
         action="javascript:void(0);"
         className="plc-mt-2 pelcro-form"
