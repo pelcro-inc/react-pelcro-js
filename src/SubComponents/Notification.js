@@ -140,6 +140,11 @@ toast.confirm = (
       id,
       ...options
     });
+
+    setTimeout(() => {
+      notify.dismiss(id);
+    }, 3000);
+
   };
 
   const onFailure = (errorValue) => {
@@ -147,6 +152,11 @@ toast.confirm = (
       id,
       ...options
     });
+
+    setTimeout(() => {
+      notify.dismiss(id);
+    }, 3000);
+    
   };
 };
 

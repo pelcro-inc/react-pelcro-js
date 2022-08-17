@@ -5,7 +5,6 @@ import {store} from "./SubscriptionSuspendContainer";
 import {SET_SUBSCRIPTION_SUSPEND_DATE, DISABLE_SUBMIT} from "../../utils/action-types";
 
 const nowDate = new Date();
-const nowDateISO = nowDate.toISOString().substr(0, 10);
 const dayFromNowDateISO = new Date(
   new Date().setDate(nowDate.getDate() + 1)
 )
@@ -33,9 +32,12 @@ export const SubscriptionSuspendDate = (props) => {
     <DatePicker 
       label={t("labels.suspensionDate")} 
       min={dayFromNowDateISO}
+      max={new Date(props?.subscription?.current_period_end).toISOString().substr(0, 10)}
       value={state.suspendDate ?? dayFromNowDateISO}
       onChange={(e) => handleInputChange(e.target.value)}
+      onKeyDown={(e) => e.preventDefault()}
       {...props} 
     />
+    
   );
 }

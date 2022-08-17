@@ -28,7 +28,7 @@ export const SubscriptionSuspendView = (props) => {
             {t("messages.suspensionEnd")}.
           </p>
 
-          <SubscriptionSuspendDate />
+          <SubscriptionSuspendDate subscription={subscriptionToSuspend} />
 
           <SubscriptionSuspendButton
             className="plc-mb-2"
