@@ -1,3 +1,10 @@
+# [3.6.0-beta.14](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.13...v3.6.0-beta.14) (2022-08-17)
+
+
+### Bug Fixes
+
+* remove log ([bc4716f](https://github.com/pelcro-inc/react-pelcro-js/commit/bc4716f62aa47d8f034e760c2c6a0727658936ae))
+
 # [3.6.0-beta.13](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.12...v3.6.0-beta.13) (2022-08-12)
 
 
