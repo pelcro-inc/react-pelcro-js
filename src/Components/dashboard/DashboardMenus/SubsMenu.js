@@ -162,7 +162,8 @@ export const SubscriptionsItems = ({
         if (userMustVerifyEmail()) {
           return switchView("email-verify");
         }
-
+        
+        onClose?.();
         notify.confirm(
           (onSuccess, onFailure) => {
             unSuspendSubscription(sub.id, onSuccess, onFailure);
@@ -286,10 +287,10 @@ export const SubscriptionsItems = ({
                   </Button>
                 )}
 
-                {sub.shipments_suspended_until ? (
+                {sub.shipments_suspended_until && sub.shipments_remaining > 0 && (
                   <Button
                     variant="ghost"
-                    className="plc-text-red-500 focus:plc-ring-red-500 pelcro-dashboard-sub-suspend-button"
+                    className="plc-text-blue-400 pelcro-dashboard-sub-suspend-button"
                     icon={<XCircleIcon />}
                     onClick={onUnSuspendClick}
                     disabled={disableSubmit}
@@ -297,10 +298,12 @@ export const SubscriptionsItems = ({
                   >
                     {t("labels.unsuspend")}
                   </Button>
-                ) : (
+                )}
+
+                {!sub.shipments_suspended_until && sub.shipments_remaining > 0 && (
                   <Button
                     variant="ghost"
-                    className="plc-text-blue-400 pelcro-dashboard-sub-suspend-button"
+                    className="plc-text-red-500 focus:plc-ring-red-500 pelcro-dashboard-sub-suspend-button"
                     icon={<CalendarIcon />}
                     onClick={onSuspendClick}
                     disabled={disableSubmit}
