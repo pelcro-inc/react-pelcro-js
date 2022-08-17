@@ -13,9 +13,6 @@ export const GiftCreateView = (props) => {
   const { t } = useTranslation("register");
   return (
     <div id="pelcro-gift-create-view">
-      <div className="plc-mb-6 plc-text-2xl plc-font-semibold plc-text-center plc-text-gray-900 pelcro-title-wrapper">
-        <h4>{t("gift.titles.firstTitle")}</h4>
-      </div>
       <form
         action="javascript:void(0);"
         className="plc-mt-2 pelcro-form"

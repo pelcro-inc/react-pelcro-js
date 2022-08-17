@@ -1,10 +1,11 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import {
   Modal,
+  ModalHeader,
   ModalBody,
   ModalFooter
 } from "../../SubComponents/Modal";
-import Authorship from "../common/Authorship";
 import { PasswordResetView } from "./PasswordResetView";
 
 export const PasswordResetModal = ({
@@ -12,18 +13,26 @@ export const PasswordResetModal = ({
   onClose,
   ...otherProps
 }) => {
+  const { t } = useTranslation("passwordReset");
+
   return (
     <Modal
       onDisplay={onDisplay}
       onClose={onClose}
       id="pelcro-password-reset-modal"
     >
+      <ModalHeader>
+        <div className="plc-text-center plc-text-gray-900 pelcro-title-wrapper plc-flex-1 plc-flex plc-flex-col plc-justify-center">
+          <h4 className="plc-text-2xl plc-font-semibold">
+            {t("title")}
+          </h4>
+          <p>{t("subtitle")}</p>
+        </div>
+      </ModalHeader>
       <ModalBody>
         <PasswordResetView {...otherProps} />
       </ModalBody>
-      <ModalFooter>
-        <Authorship />
-      </ModalFooter>
+      <ModalFooter></ModalFooter>
     </Modal>
   );
 };
