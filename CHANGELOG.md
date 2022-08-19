@@ -1,3 +1,10 @@
+# [3.6.0-beta.15](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.14...v3.6.0-beta.15) (2022-08-19)
+
+
+### Bug Fixes
+
+* membership edit address ([#191](https://github.com/pelcro-inc/react-pelcro-js/issues/191)) ([c66f3ff](https://github.com/pelcro-inc/react-pelcro-js/commit/c66f3ff05c46c293b20e022fc3a4452e8167f35b))
+
 # [3.6.0-beta.14](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.13...v3.6.0-beta.14) (2022-08-17)
 
 
