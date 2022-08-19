@@ -120,6 +120,7 @@
   "canceledOn": "취소일",
   "recipient": "받는 사람",
   "addAddress": "주소 추가",
+  "editAddress": "주소 수정",
   "addSubscription": "새 유료 멤버십",
   "addGift": "새 선물",
   "default": "기본",

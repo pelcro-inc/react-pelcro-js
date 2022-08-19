@@ -88,7 +88,7 @@ const MembershipsItems = () => {
                   className="plc-text-blue-400 focus:plc-ring-blue-500 pelcro-dashboard-membership-address-button"
                   onClick={() => onChangeAddressClick(membership.id)}
                 >
-                  {`${t("labels.edit")} ${t("labels.address")}`}
+                  {`${t("labels.editAddress")}`}
                 </Button>
               </td>
             </tr>
