@@ -123,6 +123,17 @@ class SelectModal extends Component {
     document.removeEventListener("keydown", this.handleSubmit);
   };
 
+  componentDidUpdate(prevProps, prevState) {
+    //Scroll to active tab
+    const activeElement = document.getElementById("activeTab");
+
+    if (activeElement) {
+      activeElement.parentNode.scrollLeft = activeElement.offsetLeft;
+    } else {
+      console.log(document.getElementById("activeTab"));
+    }
+  }
+
   handleSubmit = (e) => {
     if (e.key === "Enter" && !this.state.disabled)
       this.submitOption();
@@ -255,10 +266,50 @@ class SelectModal extends Component {
     );
   };
 
+  renderProductTabs = () => {
+    const productButtonCallback = this.selectProduct;
+    const { image, description } = this.state.product;
+
+    return (
+      <div className="productTabs plc-mb-8">
+        <ul className="tabs plc-flex plc-items-center plc-text-center plc-border-b plc-border-gray-300 plc-mb-8 plc-overflow-x-auto">
+          {this.state.productList.map((product, index) => (
+            <li
+              key={product.id}
+              id={`${
+                product.id === this.state.product?.id
+                  ? "activeTab"
+                  : ""
+              }`}
+              className="plc-relative"
+            >
+              <button
+                onClick={productButtonCallback}
+                data-key={product.id}
+                className="plc-px-4 plc-py-2 plc-text-gray-600 focus:plc-outline-none plc-whitespace-nowrap"
+              >
+                {product.name}
+              </button>
+            </li>
+          ))}
+        </ul>
+
+        <div className="selectedProduct plc-flex plc-flex-col plc-items-center plc-justify-center">
+          {image && (
+            <figure className="plc-mb-2">
+              <img src={image} alt="Product Image" />
+            </figure>
+          )}
+          {description && <p>{description}</p>}
+        </div>
+      </div>
+    );
+  };
+
   renderMatchingProductsFirst = () => {
     const isPlanMode = Boolean(this.state.mode === "plan");
     if (isPlanMode) {
-      return this.renderOneProduct(this.state.product);
+      return this.renderProductTabs();
     }
 
     const [productsThatMatchArticleTag, allProductsMinusMatched] =
@@ -310,7 +361,6 @@ class SelectModal extends Component {
   };
 
   renderPlans = () => {
-    console.log("Plans", this.state.planList);
     const items = this.state.planList.map((plan) => {
       const isChecked = this.state.plan.id === plan.id ? true : false;
 
