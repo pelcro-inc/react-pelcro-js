@@ -75,4 +75,15 @@
   .alice-carousel__dots-item:not(.__custom).__active {
     @apply plc-bg-primary-800;
   }
+
+  @media (max-width: 1024px) {
+    .pelcro-root .alice-carousel__prev-btn,
+    .pelcro-root .alice-carousel__next-btn {
+      display: none;
+    }
+
+    .pelcro-root .alice-carousel {
+      @apply plc-px-0;
+    }
+  }
 }

@@ -15,6 +15,7 @@ import { Radio } from "../../SubComponents/Radio";
 import { Carousel } from "../../SubComponents/Carousel";
 import { usePelcro } from "../../hooks/usePelcro";
 import { getEntitlementsFromElem } from "../../utils/utils";
+import { ReactComponent as ArrowLeft } from "../../assets/arrow-left.svg";
 
 /**
  *
@@ -160,12 +161,8 @@ class SelectModal extends Component {
 
   renderOneProduct = (product, index, options) => {
     const isPlanMode = Boolean(this.state.mode === "plan");
-    const productButtonLabel = isPlanMode
-      ? this.locale("buttons.back")
-      : this.locale("buttons.select");
-    const productButtonCallback = isPlanMode
-      ? this.goBack
-      : this.selectProduct;
+    const productButtonLabel = this.locale("buttons.select");
+    const productButtonCallback = this.selectProduct;
 
     return (
       <div
@@ -206,19 +203,21 @@ class SelectModal extends Component {
             )}
           </div>
 
-          <div className="plc-mt-auto">
-            <Button
-              onClick={productButtonCallback}
-              data-key={product.id}
-              id="pelcro-select-product-back-button"
-              className={`plc-w-full ${
-                options?.emphasize ? "plc-bg-primary-700" : ""
-              }`}
-              {...(index === 0 && { autoFocus: true })}
-            >
-              {productButtonLabel}
-            </Button>
-          </div>
+          {isPlanMode || (
+            <div className="plc-mt-auto">
+              <Button
+                onClick={productButtonCallback}
+                data-key={product.id}
+                id="pelcro-select-product-back-button"
+                className={`plc-w-full ${
+                  options?.emphasize ? "plc-bg-primary-700" : ""
+                }`}
+                {...(index === 0 && { autoFocus: true })}
+              >
+                {productButtonLabel}
+              </Button>
+            </div>
+          )}
         </div>
       </div>
     );
@@ -235,12 +234,18 @@ class SelectModal extends Component {
     );
 
     const responsive = {
-      0: { items: 1 },
-      568: { items: 2 },
-      1024: { items: 4 }
+      120: { items: 1 },
+      1024: { items: 2 },
+      1500: { items: 3 }
     };
 
-    return <Carousel items={items} responsive={responsive} />;
+    return (
+      <Carousel
+        items={items}
+        responsive={responsive}
+        controlsStrategy="responsive"
+      />
+    );
   };
 
   renderMatchingProductsFirst = () => {
@@ -298,37 +303,78 @@ class SelectModal extends Component {
   };
 
   renderPlans = () => {
-    return this.state.planList.map((plan) => {
+    console.log("Plans", this.state.planList);
+    const items = this.state.planList.map((plan) => {
       const isChecked = this.state.plan.id === plan.id ? true : false;
+
       return (
         <div
           key={plan.id}
-          className="plc-p-2 plc-mx-3 plc-mt-2 plc-text-gray-900 plc-border plc-border-gray-400 plc-border-solid plc-rounded pelcro-select-plan-wrapper"
+          className={`${
+            this.state?.plan.id === plan.id
+              ? "plc-border-2 plc-border-primary-800"
+              : "plc-border plc-border-gray-300"
+          } plc-h-full plc-flex plc-flex-col plc-items-start plc-text-gray-900 plc-border-solid plc-rounded-md plc-bg-white pelcro-select-plan-wrapper`}
         >
           <Radio
-            className="plc-self-start pelcro-select-plan-radio"
-            labelClassName="plc-cursor-pointer plc-w-full"
+            wrapperClassName="plc-w-full plc-flex plc-h-full"
+            className="plc-hidden pelcro-select-plan-radio"
+            labelClassName="plc-cursor-pointer plc-w-full plc-h-full plc-m-0 plc-flex-1 plc-flex plc-flex-col"
             id={`pelcro-select-plan-${plan.id}`}
             name="plan"
             checked={isChecked}
             data-key={plan.id}
             onChange={this.selectPlan}
           >
-            <div>
-              <p className="plc-font-bold pelcro-select-plan-title">
+            <div className="plc-p-8 plc-text-center plc-flex plc-flex-col plc-justify-center plc-items-center plc-w-full plc-border-b plc-border-gray-300">
+              <h4 className="pelcro-select-plan-title plc-font-medium plc-text-xl">
                 {plan.nickname}
-              </p>
-              <p className="plc-text-xs pelcro-select-plan-description">
+              </h4>
+              <p className="plc-text-sm plc-mt-1 pelcro-select-plan-description">
                 {plan.description}
               </p>
             </div>
-            <p className="plc-mt-3 plc-font-bold pelcro-select-plan-price">
-              {plan.amount_formatted}
-            </p>
+            <div className="plc-pt-4 plc-mb-8 plc-font-semibold pelcro-select-plan-price plc-px-8 plc-text-center plc-flex plc-items-end plc-justify-center">
+              <p className="plc-font-bold plc-text-4xl">
+                {plan.amount_formatted}
+              </p>
+              <span className="plc-text-gray-400 plc-text-xs plc-flex plc-flex-col plc-font-normal">
+                <span className="plc-uppercase">{plan.currency}</span>
+                <span className="plc-capitalize">
+                  / {plan.interval}
+                </span>
+              </span>
+            </div>
+            <div className="plc-mt-auto plc-px-8 plc-mb-8">
+              <div
+                className={`${
+                  this.state?.plan.id === plan.id
+                    ? "plc-bg-primary-800 plc-text-white"
+                    : "plc-text-primary-800"
+                } plc-flex plc-items-center plc-justify-center plc-text-center plc-py-2 plc-px-4 plc-w-full plc-border-2 plc-rounded-md plc-border-primary-800`}
+              >
+                {this.locale("buttons.select")}
+              </div>
+            </div>
           </Radio>
         </div>
       );
     });
+
+    const responsive = {
+      120: { items: 1 },
+      1024: { items: 2 },
+      1200: { items: 3 },
+      1500: { items: 4 }
+    };
+
+    return (
+      <Carousel
+        items={items}
+        responsive={responsive}
+        controlsStrategy="responsive"
+      />
+    );
   };
 
   selectProduct = (e) => {
@@ -425,6 +471,16 @@ class SelectModal extends Component {
       >
         <ModalHeader>
           <div className="plc-text-center plc-text-gray-900 pelcro-title-wrapper plc-flex-1 plc-flex plc-flex-col plc-justify-center">
+            {this.state.mode === "plan" && (
+              <button
+                type="button"
+                onClick={this.goBack}
+                className="plc-absolute plc-w-6 plc-text-gray-500 focus:plc-text-black plc-z-max plc-top-1/2 plc-left-5 plc-transform plc--translate-y-1/2 plc-border-0 hover:plc-text-black hover:plc-shadow-none plc-bg-transparent hover:plc-bg-transparent focus:plc-bg-transparent"
+              >
+                <ArrowLeft />
+              </button>
+            )}
+
             <h4 className="plc-text-2xl plc-font-semibold">
               {(this.product && this.product.paywall.select_title) ||
                 window.Pelcro.product.list()[0]?.paywall.select_title}
@@ -449,11 +505,11 @@ class SelectModal extends Component {
 
             {this.state.mode === "plan" && (
               <>
-                <div className="plc-overflow-y-scroll plc-max-h-72 pelcro-select-plans-wrapper">
+                <div className="plc-overflow-y-auto pelcro-select-plans-wrapper">
                   {this.renderPlans()}
                 </div>
                 {!disableGifting && (
-                  <div className="plc-flex plc-justify-center plc-mt-2">
+                  <div className="plc-flex plc-justify-center plc-mt-8">
                     <Checkbox
                       onChange={this.onIsGiftChange}
                       checked={this.state.isGift}
