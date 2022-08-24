@@ -27,6 +27,7 @@ import { ReactComponent as BookmarkIcon } from "../../assets/bookmark.svg";
 import { ReactComponent as PlusIcon } from "../../assets/plus.svg";
 import { ReactComponent as KeyIcon } from "../../assets/key.svg";
 import { ReactComponent as DonateIcon } from "../../assets/donate.svg";
+import { ReactComponent as MembershipsIcon } from "../../assets/memberships.svg";
 import userSolidIcon from "../../assets/user-solid.svg";
 import { ReactComponent as QrCodeIcon } from "../../assets/qrcode.svg";
 import { OrdersMenu } from "./DashboardMenus/OrdersMenu";
@@ -775,7 +776,7 @@ class Dashboard extends Component {
                 show={hasActiveMemberships()}
                 name={SUB_MENUS.MEMBERSHIPS}
                 icon={
-                  <DonateIcon className="plc-transform plc-scale-120 plc-w-7 plc-h-8 plc-mr-1 plc-pt-1" />
+                  <MembershipsIcon className="plc-transform plc-scale-120 plc-w-7 plc-h-8 plc-mr-1 plc-pt-1" />
                 }
                 title={this.locale("labels.memberships")}
                 content={<MembershipsMenu />}
