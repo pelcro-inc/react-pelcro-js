@@ -92,8 +92,8 @@
     "subUnSuspend": {
       "isSureToUnSuspend": "Are you sure you want to unsuspend your subscription?",
       "loading": "Unsuspending your subscription",
-      "success": "Subscription is successfully Unsuspended",
-      "error": "Error while Unsuspending your subscription"
+      "success": "Subscription is successfully unsuspended",
+      "error": "Error while unsuspending your subscription"
     }
   }
 }
