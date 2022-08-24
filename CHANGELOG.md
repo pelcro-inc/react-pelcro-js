@@ -1,3 +1,10 @@
+# [3.6.0-beta.16](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.15...v3.6.0-beta.16) (2022-08-24)
+
+
+### Bug Fixes
+
+* membership typo and icon ([#192](https://github.com/pelcro-inc/react-pelcro-js/issues/192)) ([da26e09](https://github.com/pelcro-inc/react-pelcro-js/commit/da26e09c36d4eb9beac27486d592ee46e9876c0c))
+
 # [3.6.0-beta.15](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.14...v3.6.0-beta.15) (2022-08-19)
 
 
