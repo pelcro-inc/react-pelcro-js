@@ -31,6 +31,8 @@ export { Auth0LoginButton } from "./Components/common/Auth0LoginButton/Auth0Logi
 export { SelectModalWithHook as SelectModal } from "./Components/Select/SelectModal";
 export { SubscriptionRenewModal } from "./Components/SubscriptionRenew/SubscriptionRenewModal";
 export { SubscriptionCancelModal } from "./Components/SubscriptionCancel/SubscriptionCancelModal";
+export { SubscriptionSuspendModal } from "./Components/SubscriptionSuspend/SubscriptionSuspendModal";
+export { SubscriptionSuspendView } from "./Components/SubscriptionSuspend/SubscriptionSuspendView";
 export { SubscriptionRenewView } from "./Components/SubscriptionRenew/SubscriptionRenewView";
 export { PaymentSuccessModal } from "./Components/PaymentSuccess/PaymentSuccessModal";
 export { PaymentSuccessView } from "./Components/PaymentSuccess/PaymentSuccessView";
@@ -227,6 +229,9 @@ export { Radio } from "./SubComponents/Radio";
 export { Select } from "./SubComponents/Select";
 export { notify, Notification } from "./SubComponents/Notification";
 export { Tooltip } from "./SubComponents/Tooltip";
+
+export { QrCodeModal } from "./Components/QrCode/QrCodeModal";
+export { QrCodeView } from "./Components/QrCode/QrCodeView";
 
 export { default as i18n } from "./i18n";
 

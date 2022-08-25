@@ -1,140 +1,254 @@
-## [3.5.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.5.2...v3.5.3) (2022-07-27)
+# [3.6.0-beta.16](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.15...v3.6.0-beta.16) (2022-08-24)
+
+
+### Bug Fixes
+
+* membership typo and icon ([#192](https://github.com/pelcro-inc/react-pelcro-js/issues/192)) ([da26e09](https://github.com/pelcro-inc/react-pelcro-js/commit/da26e09c36d4eb9beac27486d592ee46e9876c0c))
+
+# [3.6.0-beta.15](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.14...v3.6.0-beta.15) (2022-08-19)
+
+
+### Bug Fixes
+
+* membership edit address ([#191](https://github.com/pelcro-inc/react-pelcro-js/issues/191)) ([c66f3ff](https://github.com/pelcro-inc/react-pelcro-js/commit/c66f3ff05c46c293b20e022fc3a4452e8167f35b))
+
+# [3.6.0-beta.14](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.13...v3.6.0-beta.14) (2022-08-17)
+
+
+### Bug Fixes
+
+* remove log ([bc4716f](https://github.com/pelcro-inc/react-pelcro-js/commit/bc4716f62aa47d8f034e760c2c6a0727658936ae))
+
+# [3.6.0-beta.13](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.12...v3.6.0-beta.13) (2022-08-12)
+
+
+### Features
+
+* add suspend and unsuspend for subscriptions ([#189](https://github.com/pelcro-inc/react-pelcro-js/issues/189)) ([aa59aef](https://github.com/pelcro-inc/react-pelcro-js/commit/aa59aefd7980f408e54393ef4d448861667bc981))
+
+# [3.6.0-beta.12](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.11...v3.6.0-beta.12) (2022-08-10)
+
+
+### Features
+
+* edit Vantiv error messages ([#188](https://github.com/pelcro-inc/react-pelcro-js/issues/188)) ([6096a10](https://github.com/pelcro-inc/react-pelcro-js/commit/6096a10dfb96bc5a59fde3c95373261d237a8a7e))
+
+# [3.6.0-beta.11](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.10...v3.6.0-beta.11) (2022-08-10)
+
+
+### Features
+
+* update the Vantiv custom style name ([4293ee4](https://github.com/pelcro-inc/react-pelcro-js/commit/4293ee41b6a14655062b4cb299c9c7cc8011d2df))
+
+# [3.6.0-beta.10](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.9...v3.6.0-beta.10) (2022-08-08)
+
+
+### Features
+
+* update the custom CSS file name for Vantiv iframe ([#187](https://github.com/pelcro-inc/react-pelcro-js/issues/187)) ([a7c5ff2](https://github.com/pelcro-inc/react-pelcro-js/commit/a7c5ff2800f7dfbbbe2a454977f617b15430a570))
+
+# [3.6.0-beta.9](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.8...v3.6.0-beta.9) (2022-08-04)
+
+
+### Features
+
+* bring back Paypal button after debugging the Google Pay button ([9bc140a](https://github.com/pelcro-inc/react-pelcro-js/commit/9bc140adb0d7d673a43c6804c659f39d8485a042))
+
+# [3.6.0-beta.8](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.7...v3.6.0-beta.8) (2022-08-04)
+
+
+### Features
+
+* remove paypal button to debug google pay ([af27999](https://github.com/pelcro-inc/react-pelcro-js/commit/af27999a4c57e7aa8840faa6bbb3457e45e18c8d))
+
+# [3.6.0-beta.7](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.6...v3.6.0-beta.7) (2022-08-04)
+
+
+### Bug Fixes
+
+* export QrCodeView ([#184](https://github.com/pelcro-inc/react-pelcro-js/issues/184)) ([852a580](https://github.com/pelcro-inc/react-pelcro-js/commit/852a580e4061cd2bdc5c653f3f1e772ea602707c))
+
+# [3.6.0-beta.6](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.5...v3.6.0-beta.6) (2022-08-04)
+
+
+### Bug Fixes
+
+* hide membership if ended_at != null ([#185](https://github.com/pelcro-inc/react-pelcro-js/issues/185)) ([e77b922](https://github.com/pelcro-inc/react-pelcro-js/commit/e77b922843c56fa16109a8a2c354e10240b59c19))
+
+# [3.6.0-beta.5](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.4...v3.6.0-beta.5) (2022-08-02)
+
+
+### Bug Fixes
+
+* check for vantiv support differently ([632bb68](https://github.com/pelcro-inc/react-pelcro-js/commit/632bb6828e039424c51ba605b0d4b10254ae3ba5))
+
+# [3.6.0-beta.4](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.3...v3.6.0-beta.4) (2022-07-29)
+
+
+### Bug Fixes
+
+* export QrCodeModal in components.js ([#183](https://github.com/pelcro-inc/react-pelcro-js/issues/183)) ([43c0ef0](https://github.com/pelcro-inc/react-pelcro-js/commit/43c0ef00fc67fea6f19d06677e21fb368afbbbc7))
+
+# [3.6.0-beta.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.2...v3.6.0-beta.3) (2022-07-29)
+
+
+### Bug Fixes
+
+* check for vantiv and display google pay button ([38154af](https://github.com/pelcro-inc/react-pelcro-js/commit/38154af6cec50408a1255a92560579ed988dd590))
+
+# [3.6.0-beta.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.1...v3.6.0-beta.2) (2022-07-29)
+
+
+### Features
+
+* hide google pay if vantiv gateway is enabled ([#182](https://github.com/pelcro-inc/react-pelcro-js/issues/182)) ([5642293](https://github.com/pelcro-inc/react-pelcro-js/commit/56422934a793fa7b2ab9a4ab9a7c7267e819b9d6))
+
+# [3.6.0-beta.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.5.1-beta.3...v3.6.0-beta.1) (2022-07-29)
+
+
+### Features
+
+* add qr code feature ([51edc4c](https://github.com/pelcro-inc/react-pelcro-js/commit/51edc4c17000a94481e0eeff2c92325c2f756af6))
+
+## [3.5.1-beta.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.5.1-beta.2...v3.5.1-beta.3) (2022-07-27)
 
 
 ### Bug Fixes
 
 * translation mission issue ([de8a2d9](https://github.com/pelcro-inc/react-pelcro-js/commit/de8a2d932429025ca51ebed7040a36d412fbea71))
 
-## [3.5.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.5.1...v3.5.2) (2022-07-27)
-
 ## [3.5.1-beta.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.5.1-beta.1...v3.5.1-beta.2) (2022-07-27)
 
+
 ### Bug Fixes
 
-- set disabled on select address button properly ([e554743](https://github.com/pelcro-inc/react-pelcro-js/commit/e554743bbd275565bb1cf9e64fa2143d764929bf))
+* set disabled on select address button properly ([e554743](https://github.com/pelcro-inc/react-pelcro-js/commit/e554743bbd275565bb1cf9e64fa2143d764929bf))
 
 ## [3.5.1-beta.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.5.0...v3.5.1-beta.1) (2022-07-27)
 
-### Bug Fixes
-
-- set disabled on select address button properly ([e554743](https://github.com/pelcro-inc/react-pelcro-js/commit/e554743bbd275565bb1cf9e64fa2143d764929bf))
-
-## [3.5.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.5.0...v3.5.1) (2022-07-27)
 
 ### Bug Fixes
 
-- check if no default address in the user show the select address modal ([ec9446e](https://github.com/pelcro-inc/react-pelcro-js/commit/ec9446e717d74cbac1ccb71da511e8aebb112752))
-- check if no default address in the user show the select address modal ([#181](https://github.com/pelcro-inc/react-pelcro-js/issues/181)) ([b3dceb6](https://github.com/pelcro-inc/react-pelcro-js/commit/b3dceb66f55b771162c6da986daba32c0786bd30)), closes [#180](https://github.com/pelcro-inc/react-pelcro-js/issues/180) [#178](https://github.com/pelcro-inc/react-pelcro-js/issues/178) [#179](https://github.com/pelcro-inc/react-pelcro-js/issues/179) [#178](https://github.com/pelcro-inc/react-pelcro-js/issues/178) [#179](https://github.com/pelcro-inc/react-pelcro-js/issues/179) [#177](https://github.com/pelcro-inc/react-pelcro-js/issues/177) [#172](https://github.com/pelcro-inc/react-pelcro-js/issues/172) [#173](https://github.com/pelcro-inc/react-pelcro-js/issues/173) [#174](https://github.com/pelcro-inc/react-pelcro-js/issues/174)
-
-## [3.5.1-beta.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.5.0...v3.5.1-beta.1) (2022-07-27)
-
-### Bug Fixes
-
-- check if no default address in the user show the select address modal ([ec9446e](https://github.com/pelcro-inc/react-pelcro-js/commit/ec9446e717d74cbac1ccb71da511e8aebb112752))
+* check if no default address in the user show the select address modal ([ec9446e](https://github.com/pelcro-inc/react-pelcro-js/commit/ec9446e717d74cbac1ccb71da511e8aebb112752))
 
 # [3.5.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.4.0...v3.5.0) (2022-07-27)
 
+
 ### Bug Fixes
 
-- export new address set default components from components.js file ([a929420](https://github.com/pelcro-inc/react-pelcro-js/commit/a929420eff2253283c5297dab8965aa98b327a46))
-- remove console log ([64b3bc5](https://github.com/pelcro-inc/react-pelcro-js/commit/64b3bc568fd2f4d9c1df341e57079139a7c54b66))
-- remove console log ([#178](https://github.com/pelcro-inc/react-pelcro-js/issues/178)) ([34f5b69](https://github.com/pelcro-inc/react-pelcro-js/commit/34f5b69d8664cbbb2b2803b3681fbb7c00f10198))
-- remove console log ([#179](https://github.com/pelcro-inc/react-pelcro-js/issues/179)) ([3430947](https://github.com/pelcro-inc/react-pelcro-js/commit/34309472eb7ecc5e6679737e6321ef6fed09ac3d))
-- **membership:** UI issues ([#177](https://github.com/pelcro-inc/react-pelcro-js/issues/177)) ([66c7a88](https://github.com/pelcro-inc/react-pelcro-js/commit/66c7a88c08e5e16f2c8c8114aa09e090ecda570c))
-- remove unused state ([17152ca](https://github.com/pelcro-inc/react-pelcro-js/commit/17152ca443e2040b9ed5815309784c0f88c1f0fc))
-- **memberships:** remove comments ([782671b](https://github.com/pelcro-inc/react-pelcro-js/commit/782671bc87fa468f58fd83808afe5b9380307933))
-- **SelectModal:** add (s) to print format ([#172](https://github.com/pelcro-inc/react-pelcro-js/issues/172)) ([15aaeb9](https://github.com/pelcro-inc/react-pelcro-js/commit/15aaeb9e9c0d803352fa413118af352b22046d2d))
-- **SelectModal:** id error ([#173](https://github.com/pelcro-inc/react-pelcro-js/issues/173)) ([881d600](https://github.com/pelcro-inc/react-pelcro-js/commit/881d600e647f52c34d8fa644d5ec5a1707ad8f2d))
-- **SelectModal:** starting at print format ([fa2fa0f](https://github.com/pelcro-inc/react-pelcro-js/commit/fa2fa0f572b507a2694c2d58e3d6ade5762add89))
+* export new address set default components from components.js file ([a929420](https://github.com/pelcro-inc/react-pelcro-js/commit/a929420eff2253283c5297dab8965aa98b327a46))
+* remove console log ([64b3bc5](https://github.com/pelcro-inc/react-pelcro-js/commit/64b3bc568fd2f4d9c1df341e57079139a7c54b66))
+* remove console log ([#178](https://github.com/pelcro-inc/react-pelcro-js/issues/178)) ([34f5b69](https://github.com/pelcro-inc/react-pelcro-js/commit/34f5b69d8664cbbb2b2803b3681fbb7c00f10198))
+* remove console log ([#179](https://github.com/pelcro-inc/react-pelcro-js/issues/179)) ([3430947](https://github.com/pelcro-inc/react-pelcro-js/commit/34309472eb7ecc5e6679737e6321ef6fed09ac3d))
+* **membership:** UI issues ([#177](https://github.com/pelcro-inc/react-pelcro-js/issues/177)) ([66c7a88](https://github.com/pelcro-inc/react-pelcro-js/commit/66c7a88c08e5e16f2c8c8114aa09e090ecda570c))
+* remove unused state ([17152ca](https://github.com/pelcro-inc/react-pelcro-js/commit/17152ca443e2040b9ed5815309784c0f88c1f0fc))
+* **memberships:** remove comments ([782671b](https://github.com/pelcro-inc/react-pelcro-js/commit/782671bc87fa468f58fd83808afe5b9380307933))
+* **SelectModal:** add (s) to print format ([#172](https://github.com/pelcro-inc/react-pelcro-js/issues/172)) ([15aaeb9](https://github.com/pelcro-inc/react-pelcro-js/commit/15aaeb9e9c0d803352fa413118af352b22046d2d))
+* **SelectModal:** id error ([#173](https://github.com/pelcro-inc/react-pelcro-js/issues/173)) ([881d600](https://github.com/pelcro-inc/react-pelcro-js/commit/881d600e647f52c34d8fa644d5ec5a1707ad8f2d))
+* **SelectModal:** starting at print format ([fa2fa0f](https://github.com/pelcro-inc/react-pelcro-js/commit/fa2fa0f572b507a2694c2d58e3d6ade5762add89))
+
 
 ### Features
 
-- **usePelcro:** add setCouponCode and couponCode ([#174](https://github.com/pelcro-inc/react-pelcro-js/issues/174)) ([6442a53](https://github.com/pelcro-inc/react-pelcro-js/commit/6442a53fea60215e6811839b85b1a84978400d32))
+* **usePelcro:** add setCouponCode and couponCode ([#174](https://github.com/pelcro-inc/react-pelcro-js/issues/174)) ([6442a53](https://github.com/pelcro-inc/react-pelcro-js/commit/6442a53fea60215e6811839b85b1a84978400d32))
 
 # [3.5.0-beta.4](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.5.0-beta.3...v3.5.0-beta.4) (2022-07-27)
 
+
 ### Bug Fixes
 
-- remove console log ([64b3bc5](https://github.com/pelcro-inc/react-pelcro-js/commit/64b3bc568fd2f4d9c1df341e57079139a7c54b66))
+* remove console log ([64b3bc5](https://github.com/pelcro-inc/react-pelcro-js/commit/64b3bc568fd2f4d9c1df341e57079139a7c54b66))
 
 # [3.5.0-beta.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.5.0-beta.2...v3.5.0-beta.3) (2022-07-26)
 
+
 ### Bug Fixes
 
-- **membership:** UI issues ([#177](https://github.com/pelcro-inc/react-pelcro-js/issues/177)) ([66c7a88](https://github.com/pelcro-inc/react-pelcro-js/commit/66c7a88c08e5e16f2c8c8114aa09e090ecda570c))
+* **membership:** UI issues ([#177](https://github.com/pelcro-inc/react-pelcro-js/issues/177)) ([66c7a88](https://github.com/pelcro-inc/react-pelcro-js/commit/66c7a88c08e5e16f2c8c8114aa09e090ecda570c))
 
 # [3.5.0-beta.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.5.0-beta.1...v3.5.0-beta.2) (2022-07-18)
 
+
 ### Bug Fixes
 
-- export new address set default components from components.js file ([a929420](https://github.com/pelcro-inc/react-pelcro-js/commit/a929420eff2253283c5297dab8965aa98b327a46))
+* export new address set default components from components.js file ([a929420](https://github.com/pelcro-inc/react-pelcro-js/commit/a929420eff2253283c5297dab8965aa98b327a46))
 
 # [3.5.0-beta.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.4.1-beta.5...v3.5.0-beta.1) (2022-07-14)
 
+
 ### Features
 
-- **usePelcro:** add setCouponCode and couponCode ([#174](https://github.com/pelcro-inc/react-pelcro-js/issues/174)) ([6442a53](https://github.com/pelcro-inc/react-pelcro-js/commit/6442a53fea60215e6811839b85b1a84978400d32))
+* **usePelcro:** add setCouponCode and couponCode ([#174](https://github.com/pelcro-inc/react-pelcro-js/issues/174)) ([6442a53](https://github.com/pelcro-inc/react-pelcro-js/commit/6442a53fea60215e6811839b85b1a84978400d32))
 
 ## [3.4.1-beta.5](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.4.1-beta.4...v3.4.1-beta.5) (2022-07-14)
 
+
 ### Bug Fixes
 
-- remove unused state ([17152ca](https://github.com/pelcro-inc/react-pelcro-js/commit/17152ca443e2040b9ed5815309784c0f88c1f0fc))
+* remove unused state ([17152ca](https://github.com/pelcro-inc/react-pelcro-js/commit/17152ca443e2040b9ed5815309784c0f88c1f0fc))
 
 ## [3.4.1-beta.4](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.4.1-beta.3...v3.4.1-beta.4) (2022-07-14)
 
+
 ### Bug Fixes
 
-- **SelectModal:** id error ([#173](https://github.com/pelcro-inc/react-pelcro-js/issues/173)) ([881d600](https://github.com/pelcro-inc/react-pelcro-js/commit/881d600e647f52c34d8fa644d5ec5a1707ad8f2d))
+* **SelectModal:** id error ([#173](https://github.com/pelcro-inc/react-pelcro-js/issues/173)) ([881d600](https://github.com/pelcro-inc/react-pelcro-js/commit/881d600e647f52c34d8fa644d5ec5a1707ad8f2d))
 
 ## [3.4.1-beta.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.4.1-beta.2...v3.4.1-beta.3) (2022-07-14)
 
+
 ### Bug Fixes
 
-- **SelectModal:** add (s) to print format ([#172](https://github.com/pelcro-inc/react-pelcro-js/issues/172)) ([15aaeb9](https://github.com/pelcro-inc/react-pelcro-js/commit/15aaeb9e9c0d803352fa413118af352b22046d2d))
+* **SelectModal:** add (s) to print format ([#172](https://github.com/pelcro-inc/react-pelcro-js/issues/172)) ([15aaeb9](https://github.com/pelcro-inc/react-pelcro-js/commit/15aaeb9e9c0d803352fa413118af352b22046d2d))
 
 ## [3.4.1-beta.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.4.1-beta.1...v3.4.1-beta.2) (2022-07-13)
 
+
 ### Bug Fixes
 
-- **SelectModal:** starting at print format ([fa2fa0f](https://github.com/pelcro-inc/react-pelcro-js/commit/fa2fa0f572b507a2694c2d58e3d6ade5762add89))
+* **SelectModal:** starting at print format ([fa2fa0f](https://github.com/pelcro-inc/react-pelcro-js/commit/fa2fa0f572b507a2694c2d58e3d6ade5762add89))
 
 ## [3.4.1-beta.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.4.0...v3.4.1-beta.1) (2022-07-12)
 
+
 ### Bug Fixes
 
-- **memberships:** remove comments ([782671b](https://github.com/pelcro-inc/react-pelcro-js/commit/782671bc87fa468f58fd83808afe5b9380307933))
+* **memberships:** remove comments ([782671b](https://github.com/pelcro-inc/react-pelcro-js/commit/782671bc87fa468f58fd83808afe5b9380307933))
 
 # [3.4.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.3.0...v3.4.0) (2022-07-06)
 
+
 ### Bug Fixes
 
-- add cancel button to all active subscriptions ([5311163](https://github.com/pelcro-inc/react-pelcro-js/commit/53111632320aa0626e510a4f9600696a49a23892))
-- add cancel button to all subscriptions ([#167](https://github.com/pelcro-inc/react-pelcro-js/issues/167)) ([b82d3ed](https://github.com/pelcro-inc/react-pelcro-js/commit/b82d3ed89f0d2e9ab0ca9c6a79acfe029d8554a3)), closes [#164](https://github.com/pelcro-inc/react-pelcro-js/issues/164) [#164](https://github.com/pelcro-inc/react-pelcro-js/issues/164) [#164](https://github.com/pelcro-inc/react-pelcro-js/issues/164) [#166](https://github.com/pelcro-inc/react-pelcro-js/issues/166) [#166](https://github.com/pelcro-inc/react-pelcro-js/issues/166)
-- add cancel button to all subscriptions ([#167](https://github.com/pelcro-inc/react-pelcro-js/issues/167)) ([#168](https://github.com/pelcro-inc/react-pelcro-js/issues/168)) ([f9f6b82](https://github.com/pelcro-inc/react-pelcro-js/commit/f9f6b8247f7c5aa01a9a61d50de90d02651e2960)), closes [#164](https://github.com/pelcro-inc/react-pelcro-js/issues/164) [#164](https://github.com/pelcro-inc/react-pelcro-js/issues/164) [#164](https://github.com/pelcro-inc/react-pelcro-js/issues/164) [#166](https://github.com/pelcro-inc/react-pelcro-js/issues/166) [#166](https://github.com/pelcro-inc/react-pelcro-js/issues/166)
-- **Address:** Modal show only shipping addresses ([#166](https://github.com/pelcro-inc/react-pelcro-js/issues/166)) ([d4c855e](https://github.com/pelcro-inc/react-pelcro-js/commit/d4c855e3768fe4ed71030cb4800a721ace21483b))
-- add cancel button to all active subscriptions ([#164](https://github.com/pelcro-inc/react-pelcro-js/issues/164)) ([49514d5](https://github.com/pelcro-inc/react-pelcro-js/commit/49514d5721e733be9dc6e1fc853406bd85681ff7))
-- hide cancel button if already canceled at period end ([3c01622](https://github.com/pelcro-inc/react-pelcro-js/commit/3c01622c181bc3264e1ab8ccbd78208a183a89af))
-- remove empty line ([3608844](https://github.com/pelcro-inc/react-pelcro-js/commit/3608844c33a24a042b096b7bb1504e4340a8801a))
+* add cancel button to all active subscriptions ([5311163](https://github.com/pelcro-inc/react-pelcro-js/commit/53111632320aa0626e510a4f9600696a49a23892))
+* add cancel button to all subscriptions ([#167](https://github.com/pelcro-inc/react-pelcro-js/issues/167)) ([b82d3ed](https://github.com/pelcro-inc/react-pelcro-js/commit/b82d3ed89f0d2e9ab0ca9c6a79acfe029d8554a3)), closes [#164](https://github.com/pelcro-inc/react-pelcro-js/issues/164) [#164](https://github.com/pelcro-inc/react-pelcro-js/issues/164) [#164](https://github.com/pelcro-inc/react-pelcro-js/issues/164) [#166](https://github.com/pelcro-inc/react-pelcro-js/issues/166) [#166](https://github.com/pelcro-inc/react-pelcro-js/issues/166)
+* add cancel button to all subscriptions ([#167](https://github.com/pelcro-inc/react-pelcro-js/issues/167)) ([#168](https://github.com/pelcro-inc/react-pelcro-js/issues/168)) ([f9f6b82](https://github.com/pelcro-inc/react-pelcro-js/commit/f9f6b8247f7c5aa01a9a61d50de90d02651e2960)), closes [#164](https://github.com/pelcro-inc/react-pelcro-js/issues/164) [#164](https://github.com/pelcro-inc/react-pelcro-js/issues/164) [#164](https://github.com/pelcro-inc/react-pelcro-js/issues/164) [#166](https://github.com/pelcro-inc/react-pelcro-js/issues/166) [#166](https://github.com/pelcro-inc/react-pelcro-js/issues/166)
+* **Address:** Modal show only shipping addresses ([#166](https://github.com/pelcro-inc/react-pelcro-js/issues/166)) ([d4c855e](https://github.com/pelcro-inc/react-pelcro-js/commit/d4c855e3768fe4ed71030cb4800a721ace21483b))
+* add cancel button to all active subscriptions ([#164](https://github.com/pelcro-inc/react-pelcro-js/issues/164)) ([49514d5](https://github.com/pelcro-inc/react-pelcro-js/commit/49514d5721e733be9dc6e1fc853406bd85681ff7))
+* hide cancel button if already canceled at period end ([3c01622](https://github.com/pelcro-inc/react-pelcro-js/commit/3c01622c181bc3264e1ab8ccbd78208a183a89af))
+* remove empty line ([3608844](https://github.com/pelcro-inc/react-pelcro-js/commit/3608844c33a24a042b096b7bb1504e4340a8801a))
+
 
 ### Features
 
-- add cancel button to all active subscriptions ([#169](https://github.com/pelcro-inc/react-pelcro-js/issues/169)) ([5147f96](https://github.com/pelcro-inc/react-pelcro-js/commit/5147f965fe1a7e3cbf786f9f318516d383951c9e)), closes [#164](https://github.com/pelcro-inc/react-pelcro-js/issues/164) [#164](https://github.com/pelcro-inc/react-pelcro-js/issues/164) [#164](https://github.com/pelcro-inc/react-pelcro-js/issues/164) [#166](https://github.com/pelcro-inc/react-pelcro-js/issues/166) [#166](https://github.com/pelcro-inc/react-pelcro-js/issues/166) [#167](https://github.com/pelcro-inc/react-pelcro-js/issues/167) [#168](https://github.com/pelcro-inc/react-pelcro-js/issues/168) [#164](https://github.com/pelcro-inc/react-pelcro-js/issues/164) [#164](https://github.com/pelcro-inc/react-pelcro-js/issues/164) [#164](https://github.com/pelcro-inc/react-pelcro-js/issues/164) [#166](https://github.com/pelcro-inc/react-pelcro-js/issues/166) [#166](https://github.com/pelcro-inc/react-pelcro-js/issues/166)
+* add cancel button to all active subscriptions ([#169](https://github.com/pelcro-inc/react-pelcro-js/issues/169)) ([5147f96](https://github.com/pelcro-inc/react-pelcro-js/commit/5147f965fe1a7e3cbf786f9f318516d383951c9e)), closes [#164](https://github.com/pelcro-inc/react-pelcro-js/issues/164) [#164](https://github.com/pelcro-inc/react-pelcro-js/issues/164) [#164](https://github.com/pelcro-inc/react-pelcro-js/issues/164) [#166](https://github.com/pelcro-inc/react-pelcro-js/issues/166) [#166](https://github.com/pelcro-inc/react-pelcro-js/issues/166) [#167](https://github.com/pelcro-inc/react-pelcro-js/issues/167) [#168](https://github.com/pelcro-inc/react-pelcro-js/issues/168) [#164](https://github.com/pelcro-inc/react-pelcro-js/issues/164) [#164](https://github.com/pelcro-inc/react-pelcro-js/issues/164) [#164](https://github.com/pelcro-inc/react-pelcro-js/issues/164) [#166](https://github.com/pelcro-inc/react-pelcro-js/issues/166) [#166](https://github.com/pelcro-inc/react-pelcro-js/issues/166)
 
 ## [3.3.1-beta.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.3.1-beta.1...v3.3.1-beta.2) (2022-06-30)
 
+
 ### Bug Fixes
 
-- **Address:** Modal show only shipping addresses ([#166](https://github.com/pelcro-inc/react-pelcro-js/issues/166)) ([d4c855e](https://github.com/pelcro-inc/react-pelcro-js/commit/d4c855e3768fe4ed71030cb4800a721ace21483b))
+* **Address:** Modal show only shipping addresses ([#166](https://github.com/pelcro-inc/react-pelcro-js/issues/166)) ([d4c855e](https://github.com/pelcro-inc/react-pelcro-js/commit/d4c855e3768fe4ed71030cb4800a721ace21483b))
 
 ## [3.3.1-beta.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.3.0...v3.3.1-beta.1) (2022-06-28)
 
+
 ### Bug Fixes
 
-- add cancel button to all active subscriptions ([5311163](https://github.com/pelcro-inc/react-pelcro-js/commit/53111632320aa0626e510a4f9600696a49a23892))
-- add cancel button to all active subscriptions ([#164](https://github.com/pelcro-inc/react-pelcro-js/issues/164)) ([49514d5](https://github.com/pelcro-inc/react-pelcro-js/commit/49514d5721e733be9dc6e1fc853406bd85681ff7))
-- hide cancel button if already canceled at period end ([3c01622](https://github.com/pelcro-inc/react-pelcro-js/commit/3c01622c181bc3264e1ab8ccbd78208a183a89af))
-- remove empty line ([3608844](https://github.com/pelcro-inc/react-pelcro-js/commit/3608844c33a24a042b096b7bb1504e4340a8801a))
+* add cancel button to all active subscriptions ([5311163](https://github.com/pelcro-inc/react-pelcro-js/commit/53111632320aa0626e510a4f9600696a49a23892))
+* add cancel button to all active subscriptions ([#164](https://github.com/pelcro-inc/react-pelcro-js/issues/164)) ([49514d5](https://github.com/pelcro-inc/react-pelcro-js/commit/49514d5721e733be9dc6e1fc853406bd85681ff7))
+* hide cancel button if already canceled at period end ([3c01622](https://github.com/pelcro-inc/react-pelcro-js/commit/3c01622c181bc3264e1ab8ccbd78208a183a89af))
+* remove empty line ([3608844](https://github.com/pelcro-inc/react-pelcro-js/commit/3608844c33a24a042b096b7bb1504e4340a8801a))
 
 # [3.3.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.2.0...v3.3.0) (2022-06-28)
 

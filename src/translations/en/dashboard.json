@@ -19,6 +19,8 @@
     "unsubscribe": "Cancel",
     "reactivate": "Reactivate",
     "renew": "Renew",
+    "suspend": "Suspend",
+    "unsuspend": "Unsuspend",
     "support": "Support",
     "account": "Account",
     "purchases": "Purchases",
@@ -55,6 +57,7 @@
     "canceledOn": "Canceled on",
     "recipient": "Recipient",
     "addAddress": "Add address",
+    "editAddress": "Edit address",
     "addSubscription": "New Subscription",
     "addGift": "New Gift",
     "default": "Default",
@@ -85,6 +88,12 @@
       "loading": "Cancelling your subscription",
       "success": "Subscription is successfully cancelled",
       "error": "Error while cancelling your subscription"
+    },
+    "subUnSuspend": {
+      "isSureToUnSuspend": "Are you sure you want to unsuspend your subscription?",
+      "loading": "Unsuspending your subscription",
+      "success": "Subscription is successfully unsuspended",
+      "error": "Error while unsuspending your subscription"
     }
   }
 }

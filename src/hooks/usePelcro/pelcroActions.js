@@ -48,7 +48,7 @@ export class PelcroActions {
     ) {
       return this.set({ view: "login" });
     }
-    console.log(this.get().isAuthenticated(), );
+    // console.log(this.get().isAuthenticated(), );
     if (
       ["passwordless-request"].includes(view) &&
       (
@@ -152,6 +152,17 @@ export class PelcroActions {
       return console.error("invalid subscription id");
     }
     this.set({ subscriptionToCancel });
+  };
+
+  setSubscriptionToSuspend = (id) => {
+    const subscriptions = window.Pelcro.subscription.list() ?? [];
+    const subscriptionToSuspend = subscriptions.filter(
+      (sub) => String(sub.id) === String(id)
+    )[0];
+    if (!subscriptionToSuspend) {
+      return console.error("invalid subscription id");
+    }
+    this.set({ subscriptionToSuspend });
   };
 
   setInvoice = (id) => {

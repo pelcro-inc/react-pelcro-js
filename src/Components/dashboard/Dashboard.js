@@ -27,7 +27,9 @@ import { ReactComponent as BookmarkIcon } from "../../assets/bookmark.svg";
 import { ReactComponent as PlusIcon } from "../../assets/plus.svg";
 import { ReactComponent as KeyIcon } from "../../assets/key.svg";
 import { ReactComponent as DonateIcon } from "../../assets/donate.svg";
+import { ReactComponent as MembershipsIcon } from "../../assets/memberships.svg";
 import userSolidIcon from "../../assets/user-solid.svg";
+import { ReactComponent as QrCodeIcon } from "../../assets/qrcode.svg";
 import { OrdersMenu } from "./DashboardMenus/OrdersMenu";
 import { SavedItemsMenu } from "./DashboardMenus/SavedItemsMenu";
 import { usePelcro } from "../../hooks/usePelcro";
@@ -164,6 +166,28 @@ class Dashboard extends Component {
     );
   };
 
+  unSuspendSubscription = (subscription_id, onSuccess, onFailure) => {
+    window.Pelcro.subscription.update(
+      {
+        auth_token: window.Pelcro.user.read().auth_token,
+        subscription_id: subscription_id,
+        suspend: 0
+      },
+      (err, res) => {
+        if (err) {
+          return onFailure?.(err);
+        }
+
+        ReactGA?.event?.({
+          category: "ACTIONS",
+          action: "UnSuspended",
+          nonInteraction: true
+        });
+        onSuccess?.(res);
+      }
+    );
+  };
+
   displayRedeem = () => {
     return this.props.setView("gift-redeem");
   };
@@ -182,6 +206,10 @@ class Dashboard extends Component {
 
   displayNewsletterUpdate = () => {
     return this.props.setView("newsletter-update");
+  };
+
+  displayQRCode = () => {
+    return this.props.setView("qrcode");
   };
 
   displayProductSelect = ({ isGift }) => {
@@ -650,6 +678,16 @@ class Dashboard extends Component {
                         {this.locale("labels.editNewsletters")}
                       </Button>
                     )}
+                    <Button
+                      variant="ghost"
+                      icon={
+                        <QrCodeIcon className="plc-w-5 plc-h-5 plc-mr-1" />
+                      }
+                      className="plc-text-sm plc-text-gray-500 hover:plc-text-primary-700"
+                      onClick={this.displayQRCode}
+                    >
+                      My QR code
+                    </Button>
                   </div>
                 }
               />
@@ -717,6 +755,7 @@ class Dashboard extends Component {
                   <SubscriptionsMenu
                     onClose={this.props.onClose}
                     cancelSubscription={this.cancelSubscription}
+                    unSuspendSubscription={this.unSuspendSubscription}
                     reactivateSubscription={
                       this.reactivateSubscription
                     }
@@ -737,7 +776,7 @@ class Dashboard extends Component {
                 show={hasActiveMemberships()}
                 name={SUB_MENUS.MEMBERSHIPS}
                 icon={
-                  <DonateIcon className="plc-transform plc-scale-120 plc-w-7 plc-h-8 plc-mr-1 plc-pt-1" />
+                  <MembershipsIcon className="plc-transform plc-scale-120 plc-w-7 plc-h-8 plc-mr-1 plc-pt-1" />
                 }
                 title={this.locale("labels.memberships")}
                 content={<MembershipsMenu />}
@@ -829,7 +868,9 @@ function hasActiveMemberships() {
     window.Pelcro.user
       .read()
       .memberships?.some(
-        (membership) => membership.status === "active"
+        (membership) =>
+          membership.status === "active" &&
+          membership.subscription.ended_at === null
       ) ?? false
   );
 }

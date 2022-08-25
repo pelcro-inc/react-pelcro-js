@@ -27,6 +27,7 @@ import { ShopView } from "./Components/Shop/ShopView";
 import { SubscriptionCreateModal } from "./Components/SubscriptionCreate/SubscriptionCreateModal";
 import { SubscriptionRenewModal } from "./Components/SubscriptionRenew/SubscriptionRenewModal";
 import { SubscriptionCancelModal } from "./Components/SubscriptionCancel/SubscriptionCancelModal";
+import { SubscriptionSuspendModal } from "./Components/SubscriptionSuspend/SubscriptionSuspendModal";
 import { PaymentSuccessModal } from "./Components/PaymentSuccess/PaymentSuccessModal";
 import { OrderCreateModal } from "./Components/OrderCreate/OrderCreateModal";
 import { OrderConfirmModal } from "./Components/OrderConfirm/OrderConfirmModal";
@@ -34,6 +35,7 @@ import { Notification } from "./SubComponents/Notification";
 import { EmailVerifyModal } from "./Components/EmailVerify/EmailVerifyModal";
 import { InvoiceDetailsModal } from "./Components/InvoiceDetails/InvoiceDetailsModal";
 import { InvoicePaymentModal } from "./Components/InvoicePayment/InvoicePaymentModal";
+import { QrCodeModal } from "./Components/QrCode/QrCodeModal";
 
 export const Main = () => {
   return (
@@ -49,7 +51,7 @@ export const Main = () => {
       <DashboardOpenButton />
       <ProfilePicChangeModal />
       <PasswordForgotModal />
-      <PasswordlessRequestModal/>
+      <PasswordlessRequestModal />
       <PasswordChangeModal />
       <PasswordResetModal />
 
@@ -67,6 +69,7 @@ export const Main = () => {
       <SubscriptionCreateModal />
       <SubscriptionRenewModal />
       <SubscriptionCancelModal />
+      <SubscriptionSuspendModal />
       <PaymentSuccessModal />
 
       <GiftCreateModal />
@@ -79,6 +82,8 @@ export const Main = () => {
 
       <InvoicePaymentModal />
       <InvoiceDetailsModal />
+
+      <QrCodeModal />
 
       <Notification />
     </PelcroModalController>

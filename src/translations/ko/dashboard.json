@@ -19,6 +19,8 @@
     "unsubscribe": "취소",
     "reactivate": "재활성화",
     "renew": "갱신",
+    "suspend": "유예하다",
+    "unsuspend": "일시 중단 해제",
     "support": "지원",
     "account": "계정",
     "purchases": "구매",
@@ -118,6 +120,7 @@
   "canceledOn": "취소일",
   "recipient": "받는 사람",
   "addAddress": "주소 추가",
+  "editAddress": "주소 수정",
   "addSubscription": "새 유료 멤버십",
   "addGift": "새 선물",
   "default": "기본",
@@ -147,6 +150,12 @@
       "loading": "귀하의 유료 멤버십을 취소합니다.",
       "success": "유료 멤버십이 성공적으로 취소되었습니다.",
       "error": "유료 멤버십 취소 과정에서 오류가 발생했습니다."
+    },
+    "subUnSuspend": {
+      "isSureToUnSuspend": "구독 일시 중단을 해제하시겠습니까?",
+      "loading": "구독 일시 중단 해제",
+      "success": "구독이 성공적으로 일시 중단 해제되었습니다",
+      "error": "구독 일시 중단을 해제하는 동안 오류가 발생했습니다."
     }
   }
 }

@@ -31,6 +31,10 @@ export function PaymentMethodView({
   const { t } = useTranslation("checkoutForm");
   const cardProcessor = getSiteCardProcessor();
 
+  const supportsVantiv = Boolean(
+    window.Pelcro.site.read()?.vantiv_gateway_settings
+  );
+
   return (
     <div className="plc-flex plc-flex-col plc-items-center plc-mt-4 sm:plc-px-8 pelcro-payment-block">
       {cardProcessor === "stripe" && (
@@ -80,12 +84,16 @@ export function PaymentMethodView({
             {/* Payment buttons section */}
             <div className="plc-grid plc-mt-4 plc-gap-y-2">
               <SubmitPaymentMethod />
-              {showExternalPaymentMethods && (
+              {showExternalPaymentMethods && !supportsVantiv ? (
                 <>
                   <PelcroPaymentRequestButton />
                   <PaypalSubscribeButton />
                 </>
-              )}
+              ) : showExternalPaymentMethods && supportsVantiv ? (
+                <>
+                  <PaypalSubscribeButton />
+                </>
+              ) : null}
             </div>
           </div>
         </PaymentMethodContainer>

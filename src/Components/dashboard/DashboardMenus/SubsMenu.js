@@ -70,6 +70,7 @@ export const SubscriptionsMenu = (props) => {
 export const SubscriptionsItems = ({
   onClose,
   cancelSubscription,
+  unSuspendSubscription,
   reactivateSubscription,
   setProductAndPlan,
   setSubscriptionIdToRenew,
@@ -80,7 +81,7 @@ export const SubscriptionsItems = ({
   toggleActiveMenu
 }) => {
   const { t } = useTranslation("dashboard");
-  const { switchView, setSubscriptionToCancel, isAuthenticated } =
+  const { switchView, setSubscriptionToCancel, setSubscriptionToSuspend, isAuthenticated } =
     usePelcro();
 
   const subs = getNonDonationSubs();
@@ -145,6 +146,40 @@ export const SubscriptionsItems = ({
         setProductAndPlan(product, plan);
         setSubscriptionIdToRenew(sub.id);
         setView("plan-select");
+      };
+
+      // Suspend click
+      const onSuspendClick = () => {
+        if (userMustVerifyEmail()) {
+          return switchView("email-verify");
+        }
+        setSubscriptionToSuspend(sub.id);
+        return setView("subscription-suspend");
+      };
+
+      // UnSuspend click
+      const onUnSuspendClick = () => {
+        if (userMustVerifyEmail()) {
+          return switchView("email-verify");
+        }
+        
+        onClose?.();
+        notify.confirm(
+          (onSuccess, onFailure) => {
+            unSuspendSubscription(sub.id, onSuccess, onFailure);
+          },
+          {
+            confirmMessage: t(
+              "messages.subUnSuspend.isSureToUnSuspend"
+            ),
+            loadingMessage: t("messages.subUnSuspend.loading"),
+            successMessage: t("messages.subUnSuspend.success"),
+            errorMessage: t("messages.subUnSuspend.error")
+          },
+          {
+            closeButtonLabel: t("labels.subCancellation.goBack")
+          }
+        );
       };
 
       const getPhases = () => {
@@ -249,6 +284,32 @@ export const SubscriptionsItems = ({
                     data-key={sub.id}
                   >
                     {t("labels.renew")}
+                  </Button>
+                )}
+
+                {sub.shipments_suspended_until && sub.shipments_remaining > 0 && (
+                  <Button
+                    variant="ghost"
+                    className="plc-text-blue-400 pelcro-dashboard-sub-suspend-button"
+                    icon={<XCircleIcon />}
+                    onClick={onUnSuspendClick}
+                    disabled={disableSubmit}
+                    data-key={sub.id}
+                  >
+                    {t("labels.unsuspend")}
+                  </Button>
+                )}
+
+                {!sub.shipments_suspended_until && sub.shipments_remaining > 0 && (
+                  <Button
+                    variant="ghost"
+                    className="plc-text-red-500 focus:plc-ring-red-500 pelcro-dashboard-sub-suspend-button"
+                    icon={<CalendarIcon />}
+                    onClick={onSuspendClick}
+                    disabled={disableSubmit}
+                    data-key={sub.id}
+                  >
+                    {t("labels.suspend")}
                   </Button>
                 )}
 
