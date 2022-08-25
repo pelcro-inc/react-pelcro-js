@@ -1,3 +1,29 @@
+# [3.6.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.5.3...v3.6.0) (2022-08-25)
+
+
+### Bug Fixes
+
+* check for vantiv and display google pay button ([38154af](https://github.com/pelcro-inc/react-pelcro-js/commit/38154af6cec50408a1255a92560579ed988dd590))
+* check for vantiv support differently ([632bb68](https://github.com/pelcro-inc/react-pelcro-js/commit/632bb6828e039424c51ba605b0d4b10254ae3ba5))
+* export QrCodeModal in components.js ([#183](https://github.com/pelcro-inc/react-pelcro-js/issues/183)) ([43c0ef0](https://github.com/pelcro-inc/react-pelcro-js/commit/43c0ef00fc67fea6f19d06677e21fb368afbbbc7))
+* export QrCodeView ([#184](https://github.com/pelcro-inc/react-pelcro-js/issues/184)) ([852a580](https://github.com/pelcro-inc/react-pelcro-js/commit/852a580e4061cd2bdc5c653f3f1e772ea602707c))
+* hide membership if ended_at != null ([#185](https://github.com/pelcro-inc/react-pelcro-js/issues/185)) ([e77b922](https://github.com/pelcro-inc/react-pelcro-js/commit/e77b922843c56fa16109a8a2c354e10240b59c19))
+* membership edit address ([#191](https://github.com/pelcro-inc/react-pelcro-js/issues/191)) ([c66f3ff](https://github.com/pelcro-inc/react-pelcro-js/commit/c66f3ff05c46c293b20e022fc3a4452e8167f35b))
+* membership typo and icon ([#192](https://github.com/pelcro-inc/react-pelcro-js/issues/192)) ([da26e09](https://github.com/pelcro-inc/react-pelcro-js/commit/da26e09c36d4eb9beac27486d592ee46e9876c0c))
+* remove log ([bc4716f](https://github.com/pelcro-inc/react-pelcro-js/commit/bc4716f62aa47d8f034e760c2c6a0727658936ae))
+
+
+### Features
+
+* add qr code feature ([51edc4c](https://github.com/pelcro-inc/react-pelcro-js/commit/51edc4c17000a94481e0eeff2c92325c2f756af6))
+* add suspend and unsuspend for subscriptions ([#189](https://github.com/pelcro-inc/react-pelcro-js/issues/189)) ([aa59aef](https://github.com/pelcro-inc/react-pelcro-js/commit/aa59aefd7980f408e54393ef4d448861667bc981))
+* bring back Paypal button after debugging the Google Pay button ([9bc140a](https://github.com/pelcro-inc/react-pelcro-js/commit/9bc140adb0d7d673a43c6804c659f39d8485a042))
+* edit Vantiv error messages ([#188](https://github.com/pelcro-inc/react-pelcro-js/issues/188)) ([6096a10](https://github.com/pelcro-inc/react-pelcro-js/commit/6096a10dfb96bc5a59fde3c95373261d237a8a7e))
+* hide google pay if vantiv gateway is enabled ([#182](https://github.com/pelcro-inc/react-pelcro-js/issues/182)) ([5642293](https://github.com/pelcro-inc/react-pelcro-js/commit/56422934a793fa7b2ab9a4ab9a7c7267e819b9d6))
+* remove paypal button to debug google pay ([af27999](https://github.com/pelcro-inc/react-pelcro-js/commit/af27999a4c57e7aa8840faa6bbb3457e45e18c8d))
+* update the custom CSS file name for Vantiv iframe ([#187](https://github.com/pelcro-inc/react-pelcro-js/issues/187)) ([a7c5ff2](https://github.com/pelcro-inc/react-pelcro-js/commit/a7c5ff2800f7dfbbbe2a454977f617b15430a570))
+* update the Vantiv custom style name ([4293ee4](https://github.com/pelcro-inc/react-pelcro-js/commit/4293ee41b6a14655062b4cb299c9c7cc8011d2df))
+
 # [3.6.0-beta.16](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.15...v3.6.0-beta.16) (2022-08-24)
 
 
