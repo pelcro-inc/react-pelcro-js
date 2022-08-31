@@ -1,3 +1,10 @@
+# [3.6.0-beta.17](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.16...v3.6.0-beta.17) (2022-08-31)
+
+
+### Features
+
+* edit the required fields in create address ([#193](https://github.com/pelcro-inc/react-pelcro-js/issues/193)) ([af06b0f](https://github.com/pelcro-inc/react-pelcro-js/commit/af06b0fd09e21df7f63c45667bcf20fd7ab56466))
+
 # [3.6.0-beta.16](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.15...v3.6.0-beta.16) (2022-08-24)
 
 
