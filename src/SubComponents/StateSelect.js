@@ -48,10 +48,12 @@ export function StateSelect({
   };
 
   const handleBlur = () => {
-    return dispatch({
-      type: VALIDATE_FIELD,
-      payload: "state"
-    });
+    if (otherProps.required) {
+      return dispatch({
+        type: VALIDATE_FIELD,
+        payload: "state"
+      });
+    }
   };
 
   const handleFocus = () => {
@@ -75,7 +77,7 @@ export function StateSelect({
       autoComplete="address-level1"
       {...otherProps}
     >
-      <option value="" disabled selected>
+      <option value="" selected>
         {placeholder}
       </option>
       {createStateItems()}
