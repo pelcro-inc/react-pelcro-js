@@ -2,8 +2,7 @@ import React, { useContext } from "react";
 import { Input } from "../../SubComponents/Input";
 import {
   RESET_FIELD_ERROR,
-  SET_TEXT_FIELD,
-  VALIDATE_FIELD
+  SET_TEXT_FIELD
 } from "../../utils/action-types";
 import { store } from "./AddressCreateContainer";
 
@@ -12,13 +11,6 @@ export function AddressCreateCity(props) {
     dispatch,
     state: { city, cityError }
   } = useContext(store);
-
-  const handleBlur = () => {
-    return dispatch({
-      type: VALIDATE_FIELD,
-      payload: "city"
-    });
-  };
 
   const handleInputChange = (value) => {
     dispatch({
@@ -38,7 +30,6 @@ export function AddressCreateCity(props) {
       value={city}
       error={cityError}
       onChange={(e) => handleInputChange(e.target.value)}
-      onBlur={handleBlur}
       onFocus={handleFocus}
       {...props}
     />

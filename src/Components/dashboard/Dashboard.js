@@ -487,7 +487,8 @@ class Dashboard extends Component {
           <tr key={"dashboard-address-" + address.id}>
             <td className="plc-pr-2 plc-text-gray-400 plc-truncate">
               <span className="plc-font-semibold plc-text-gray-600">
-                {address.city}, {address.country}
+                {address.city ? `${address.city},` : null}{" "}
+                {address.country}
               </span>{" "}
               <span title={address.line1}>{address.line1}</span>
               <div className="plc-flex plc-mb-2 plc-mt-1">
