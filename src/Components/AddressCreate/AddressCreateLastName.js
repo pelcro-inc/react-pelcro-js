@@ -2,8 +2,7 @@ import React, { useContext } from "react";
 import { Input } from "../../SubComponents/Input";
 import {
   RESET_FIELD_ERROR,
-  SET_TEXT_FIELD,
-  VALIDATE_FIELD
+  SET_TEXT_FIELD
 } from "../../utils/action-types";
 import { store } from "./AddressCreateContainer";
 
@@ -12,13 +11,6 @@ export function AddressCreateLastName(props) {
     dispatch,
     state: { lastName, lastNameError }
   } = useContext(store);
-
-  const handleBlur = () => {
-    return dispatch({
-      type: VALIDATE_FIELD,
-      payload: "lastName"
-    });
-  };
 
   const handleInputChange = (value) => {
     dispatch({ type: SET_TEXT_FIELD, payload: { lastName: value } });
@@ -35,7 +27,6 @@ export function AddressCreateLastName(props) {
       value={lastName}
       error={lastNameError}
       onChange={(e) => handleInputChange(e.target.value)}
-      onBlur={handleBlur}
       onFocus={handleFocus}
       {...props}
     />
