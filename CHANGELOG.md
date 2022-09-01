@@ -1,3 +1,10 @@
+# [3.6.0-beta.18](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.17...v3.6.0-beta.18) (2022-09-01)
+
+
+### Bug Fixes
+
+* add SubscriptionSuspend to components ([a4569d3](https://github.com/pelcro-inc/react-pelcro-js/commit/a4569d3b9c1e6f5666ae6e3077827f2ec5d78e60))
+
 # [3.6.0-beta.17](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.16...v3.6.0-beta.17) (2022-08-31)
 
 
