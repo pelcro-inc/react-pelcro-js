@@ -18,7 +18,7 @@ export const getErrorMessages = (error) => {
     return error?.response?.data?.error?.message;
   }
 
-  if(error?.response?.data?.errors) {
+  if (error?.response?.data?.errors) {
     const errorMessages = [];
 
     // enumerable error (ex: validation errors)
@@ -68,6 +68,10 @@ export const debounce = (func, waitTime) => {
 export function getSiteCardProcessor() {
   if (window.Pelcro.site.read()?.vantiv_gateway_settings) {
     return "vantiv";
+  }
+
+  if (window.Pelcro.site.read()?.tap_gateway_settings) {
+    return "tap";
   }
 
   return "stripe";
