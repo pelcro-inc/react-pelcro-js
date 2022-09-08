@@ -105,6 +105,7 @@ export { AddressUpdateView } from "./Components/AddressUpdate/AddressUpdateView"
 export { AddressUpdateSetDefault } from "./Components/AddressUpdate/AddressUpdateSetDefault";
 export { SubscriptionCreateContainer } from "./Components/SubscriptionCreate/SubscriptionCreateContainer";
 export { SubscriptionRenewContainer } from "./Components/SubscriptionRenew/SubscriptionRenewContainer";
+export { SubscriptionSuspendContainer } from "./Components/SubscriptionSuspend/SubscriptionSuspendContainer";
 export { PaymentCreateContainer } from "./Components/PaymentCreate/PaymentCreateContainer";
 export { PaymentCreateView } from "./Components/PaymentCreate/PaymentCreateView";
 export { PaymentMethodUpdateContainer } from "./Components/PaymentMethodUpdate/PaymentMethodUpdateContainer";

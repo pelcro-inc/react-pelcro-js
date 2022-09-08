@@ -1,9 +1,22 @@
 # [3.7.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0...v3.7.0) (2022-08-31)
 
+# [3.6.0-beta.19](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.18...v3.6.0-beta.19) (2022-09-08)
+
+### Bug Fixes
+
+- change invoice details view to check if invoice is paid or not ([#194](https://github.com/pelcro-inc/react-pelcro-js/issues/194)) ([37fac5d](https://github.com/pelcro-inc/react-pelcro-js/commit/37fac5dd895a31a97ed496376be7aba56692f242))
+
+# [3.6.0-beta.18](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.17...v3.6.0-beta.18) (2022-09-01)
+
+### Bug Fixes
+
+- add SubscriptionSuspend to components ([a4569d3](https://github.com/pelcro-inc/react-pelcro-js/commit/a4569d3b9c1e6f5666ae6e3077827f2ec5d78e60))
+
+# [3.6.0-beta.17](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.16...v3.6.0-beta.17) (2022-08-31)
 
 ### Features
 
-* edit the required fields in create address ([#193](https://github.com/pelcro-inc/react-pelcro-js/issues/193)) ([af06b0f](https://github.com/pelcro-inc/react-pelcro-js/commit/af06b0fd09e21df7f63c45667bcf20fd7ab56466))
+- edit the required fields in create address ([#193](https://github.com/pelcro-inc/react-pelcro-js/issues/193)) ([af06b0f](https://github.com/pelcro-inc/react-pelcro-js/commit/af06b0fd09e21df7f63c45667bcf20fd7ab56466))
 
 # [3.6.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.5.3...v3.6.0) (2022-08-25)
 

@@ -7,11 +7,11 @@ import {
   ModalFooter
 } from "../../SubComponents/Modal";
 
-export const SubscriptionSuspendModal = ({
+export function SubscriptionSuspendModal ({
   onDisplay,
   onClose,
   ...otherProps
-}) => {
+}) {
   return (
     <Modal
       onDisplay={onDisplay}

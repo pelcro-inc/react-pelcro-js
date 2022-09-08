@@ -79,18 +79,30 @@ export const InvoiceDetailsView = (props) => {
                       )}
                     </p>
                     <p className="pelcro-invoice-total">
-                      {getFormattedPriceByLocal(
-                        invoice.amount_paid,
-                        invoice.currency,
-                        getPageOrDefaultLanguage()
-                      )}
+                      {invoice.paid && invoice.amount_paid === 0
+                        ? getFormattedPriceByLocal(
+                            invoice.total,
+                            invoice.currency,
+                            getPageOrDefaultLanguage()
+                          )
+                        : getFormattedPriceByLocal(
+                            invoice.amount_paid,
+                            invoice.currency,
+                            getPageOrDefaultLanguage()
+                          )}
                     </p>
                     <p className="plc-font-semibold pelcro-invoice-total">
-                      {getFormattedPriceByLocal(
-                        invoice.amount_remaining,
-                        invoice.currency,
-                        getPageOrDefaultLanguage()
-                      )}
+                      {invoice.paid
+                        ? getFormattedPriceByLocal(
+                            0,
+                            invoice.currency,
+                            getPageOrDefaultLanguage()
+                          )
+                        : getFormattedPriceByLocal(
+                            invoice.amount_remaining,
+                            invoice.currency,
+                            getPageOrDefaultLanguage()
+                          )}
                     </p>
                   </div>
                 </div>
