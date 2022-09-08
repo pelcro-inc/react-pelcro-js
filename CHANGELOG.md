@@ -1,3 +1,11 @@
+## [3.7.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.7.0...v3.7.1) (2022-09-08)
+
+
+### Bug Fixes
+
+* add SubscriptionSuspend to components ([a4569d3](https://github.com/pelcro-inc/react-pelcro-js/commit/a4569d3b9c1e6f5666ae6e3077827f2ec5d78e60))
+* change invoice details view to check if invoice is paid or not ([#194](https://github.com/pelcro-inc/react-pelcro-js/issues/194)) ([37fac5d](https://github.com/pelcro-inc/react-pelcro-js/commit/37fac5dd895a31a97ed496376be7aba56692f242))
+
 # [3.7.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0...v3.7.0) (2022-08-31)
 
 # [3.6.0-beta.19](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.18...v3.6.0-beta.19) (2022-09-08)
