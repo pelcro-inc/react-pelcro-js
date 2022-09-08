@@ -1,3 +1,10 @@
+# [3.6.0-beta.19](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.18...v3.6.0-beta.19) (2022-09-08)
+
+
+### Bug Fixes
+
+* change invoice details view to check if invoice is paid or not ([#194](https://github.com/pelcro-inc/react-pelcro-js/issues/194)) ([37fac5d](https://github.com/pelcro-inc/react-pelcro-js/commit/37fac5dd895a31a97ed496376be7aba56692f242))
+
 # [3.6.0-beta.18](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.17...v3.6.0-beta.18) (2022-09-01)
 
 
