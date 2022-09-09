@@ -48,6 +48,7 @@ import {
   StripeGateway,
   PaypalGateway,
   VantivGateway,
+  TapGateway,
   PAYMENT_TYPES
 } from "../../services/Subscription/Payment.service";
 import { getPageOrDefaultLanguage } from "../../utils/utils";
@@ -138,6 +139,9 @@ const PaymentMethodContainerWithoutStripe = ({
     dispatch({ type: INIT_CONTAINER });
     updateTotalAmountWithTax();
   }, []);
+
+  /*====== Start Tap integration ========*/
+  /*====== End Tap integration ========*/
 
   const submitUsingVantiv = () => {
     const isUsingExistingPaymentMethod = Boolean(
@@ -342,6 +346,8 @@ const PaymentMethodContainerWithoutStripe = ({
   }
 
   const vantivInstanceRef = React.useRef(null);
+  const tapInstanceRef = React.useRef(null);
+
   useEffect(() => {
     const cardProcessor = getSiteCardProcessor();
 
@@ -371,6 +377,73 @@ const PaymentMethodContainerWithoutStripe = ({
           inlineFieldValidations: true
         }
       });
+    }
+
+    if (cardProcessor === "tap" && !selectedPaymentMethodId) {
+      const tapKey = Tapjsli(
+        window.Pelcro.site.read()?.tap_gateway_settings
+          .publishable_key
+      );
+
+      let elements = tapKey.elements({});
+
+      let style = {
+        base: {
+          color: "#535353",
+          lineHeight: "18px",
+          fontFamily: "sans-serif",
+          fontSmoothing: "antialiased",
+          fontSize: "16px",
+          "::placeholder": {
+            color: "rgba(0, 0, 0, 0.26)",
+            fontSize: "15px"
+          }
+        },
+        invalid: {
+          color: "red"
+        }
+      };
+
+      // input labels/placeholders
+      let labels = {
+        cardNumber: "Card Number",
+        expirationDate: "MM/YY",
+        cvv: "CVV",
+        cardHolder: "Card Holder Name"
+      };
+
+      //payment options
+      let paymentOptions = {
+        labels: labels,
+        TextDirection: "ltr"
+      };
+
+      //create element, pass style and payment options
+      let card = elements.create(
+        "card",
+        { style: style },
+        paymentOptions
+      );
+
+      //mount element
+      card.mount("#tapPaymentIframe");
+
+      //card change event listener
+      card.addEventListener("change", function (event) {
+        console.log("111111", event);
+        if (event.loaded) {
+          console.log("UI loaded :" + event.loaded);
+          console.log("current currency is :" + card.getCurrency());
+        }
+        // let displayError = document.getElementById("error-handler");
+        // if (event.error) {
+        //   displayError.textContent = event.error.message;
+        // } else {
+        //   displayError.textContent = "";
+        // }
+      });
+
+      tapInstanceRef.current = card;
     }
   }, [selectedPaymentMethodId]);
 
