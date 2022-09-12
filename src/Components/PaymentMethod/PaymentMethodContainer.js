@@ -141,6 +141,326 @@ const PaymentMethodContainerWithoutStripe = ({
   }, []);
 
   /*====== Start Tap integration ========*/
+  const submitUsingTap = () => {
+    const isUsingExistingPaymentMethod = Boolean(
+      selectedPaymentMethodId
+    );
+    if (isUsingExistingPaymentMethod) {
+      // no need to create a new source using tap
+      return handleTapPayment(null);
+    }
+
+    if (!tapInstanceRef.current) {
+      return console.error(
+        "Tap sdk script wasn't loaded, you need to load tap sdk before rendering the tap payment flow"
+      );
+    }
+
+    const getOrderItemsTotal = () => {
+      if (!order) {
+        return null;
+      }
+
+      const isQuickPurchase = !Array.isArray(order);
+
+      if (isQuickPurchase) {
+        return order.price * order.quantity;
+      }
+
+      if (order.length === 0) {
+        return null;
+      }
+
+      return order.reduce((total, item) => {
+        return total + item.price * item.quantity;
+      }, 0);
+    };
+
+    const totalAmount =
+      state?.updatedPrice ??
+      plan?.amount ??
+      invoice?.amount_remaining ??
+      getOrderItemsTotal();
+
+    tapInstanceRef.current
+      .createToken(tapInstanceCard.current)
+      .then(function (result) {
+        if (result.error) {
+          // Inform the user if there was an error
+          // var errorElement = document.getElementById("error-handler");
+          // errorElement.textContent = result.error.message;
+
+          console.log("result.error", result.error);
+        } else {
+          console.log("Tap API Call result", result);
+
+          // console.log("Card Ref", tapInstanceCard.current);
+
+          // console.log("product", product);
+          // console.log("plan", plan);
+
+          window.Pelcro.payment.authorize(
+            {
+              auth_token: window.Pelcro.user.read().auth_token,
+              site_id: window.Pelcro.siteid,
+              amount: totalAmount,
+              currency:
+                plan?.currency ||
+                invoice?.currency ||
+                window.Pelcro.site.read().default_currency,
+              tap_token: result.id,
+              redirect_url: "http://localhost:3000/"
+              // redirect_url: `${window.Pelcro.environment.domain}`
+            },
+            (err, res) => {
+              console.log("Tap Authorize response", res);
+              const listenFor3DSecureCompletionMessage = () => {
+                const retrieveSourceInfoFromIframe = (event) => {
+                  console.log(
+                    "From Inside retrieveSourceInfoFromIframe",
+                    event
+                  );
+                  const { data } = event;
+                  if (
+                    data.message === "3DS-authentication-complete"
+                  ) {
+                    toggleAuthenticationPendingView(false);
+                    retrieveSource(
+                      data.sourceId,
+                      data.clientSecret,
+                      handlePayment
+                    );
+                    window.removeEventListener(
+                      "message",
+                      retrieveSourceInfoFromIframe
+                    );
+                  }
+                };
+
+                // listen to injected iframe for authentication complete message
+                window.addEventListener(
+                  "message",
+                  retrieveSourceInfoFromIframe
+                );
+              };
+
+              listenFor3DSecureCompletionMessage();
+
+              toggleAuthenticationPendingView(true, res);
+
+              // if (err) {
+              //   onFailure(err);
+              //   return dispatch({
+              //     type: SHOW_ALERT,
+              //     payload: {
+              //       type: "error",
+              //       content: getErrorMessages(err)
+              //     }
+              //   });
+              // }
+
+              // dispatch({
+              //   type: SHOW_ALERT,
+              //   payload: {
+              //     type: "success",
+              //     content: t("messages.sourceUpdated")
+              //   }
+              // });
+              // onSuccess(res);
+            }
+          );
+        }
+      });
+
+    const orderId = `pelcro-${new Date().getTime()}`;
+
+    console.log("Order ID", orderId);
+    console.log("Tap Instance Ref", tapInstanceRef.current);
+    /*     
+    calls handleTapPayment to either handle a payment or update a source by simply creating a new source 
+    */
+    // tapInstanceRef.current.getPaypageRegistrationId({
+    //   id: orderId,
+    //   orderId: orderId
+    // });
+  };
+
+  function handleTapPayment(paymentRequest) {
+    // if (paymentRequest) {
+    //   const SUCCESS_STATUS = "870";
+    //   if (paymentRequest.response !== SUCCESS_STATUS) {
+    //     switch (paymentRequest.response) {
+    //       case "871":
+    //         return handlePaymentError({
+    //           error: new Error("Invalid account number")
+    //         });
+    //       default:
+    //         return handlePaymentError({
+    //           error: new Error(paymentRequest.message)
+    //         });
+    //     }
+    //   }
+    // }
+
+    const isUsingExistingPaymentMethod = Boolean(
+      selectedPaymentMethodId
+    );
+
+    if (type === "createPayment") {
+      handleTapSubscription();
+    } else if (type === "orderCreate") {
+      purchase(
+        new TapGateway(),
+        isUsingExistingPaymentMethod
+          ? selectedPaymentMethodId
+          : paymentRequest,
+        state,
+        dispatch
+      );
+    } else if (type === "invoicePayment") {
+      payInvoice(
+        new TapGateway(),
+        isUsingExistingPaymentMethod
+          ? selectedPaymentMethodId
+          : paymentRequest,
+        dispatch
+      );
+    } else if (type === "updatePaymentSource") {
+      createNewTapCard();
+    }
+
+    function createNewTapCard() {
+      window.Pelcro.source.create(
+        {
+          auth_token: window.Pelcro.user.read().auth_token,
+          token: paymentRequest,
+          gateway: "tap"
+        },
+        (err, res) => {
+          dispatch({ type: DISABLE_SUBMIT, payload: false });
+          dispatch({ type: LOADING, payload: false });
+          if (err) {
+            onFailure(err);
+            return dispatch({
+              type: SHOW_ALERT,
+              payload: {
+                type: "error",
+                content: getErrorMessages(err)
+              }
+            });
+          }
+
+          dispatch({
+            type: SHOW_ALERT,
+            payload: {
+              type: "success",
+              content: t("messages.sourceUpdated")
+            }
+          });
+          onSuccess(res);
+        }
+      );
+    }
+
+    function handleTapSubscription() {
+      const payment = new Payment(new TapGateway());
+
+      const createSubscription = !isGift && !subscriptionIdToRenew;
+      const renewSubscription = !isGift && subscriptionIdToRenew;
+      const giftSubscriprition = isGift && !subscriptionIdToRenew;
+      const renewGift = isRenewingGift;
+
+      const { couponCode } = state;
+
+      if (renewGift) {
+        return payment.execute(
+          {
+            type: PAYMENT_TYPES.RENEW_GIFTED_SUBSCRIPTION,
+            token: isUsingExistingPaymentMethod
+              ? selectedPaymentMethodId
+              : paymentRequest,
+            plan,
+            couponCode,
+            product,
+            isExistingSource: isUsingExistingPaymentMethod,
+            subscriptionIdToRenew,
+            addressId: selectedAddressId
+          },
+          (err, res) => {
+            if (err) {
+              return handlePaymentError(err);
+            }
+            onSuccess(res);
+          }
+        );
+      } else if (giftSubscriprition) {
+        return payment.execute(
+          {
+            type: PAYMENT_TYPES.CREATE_GIFTED_SUBSCRIPTION,
+            token: isUsingExistingPaymentMethod
+              ? selectedPaymentMethodId
+              : paymentRequest,
+            quantity: plan.quantity,
+            plan,
+            couponCode,
+            product,
+            isExistingSource: isUsingExistingPaymentMethod,
+            giftRecipient,
+            addressId: selectedAddressId
+          },
+          (err, res) => {
+            if (err) {
+              return handlePaymentError(err);
+            }
+            onSuccess(res);
+          }
+        );
+      } else if (renewSubscription) {
+        return payment.execute(
+          {
+            type: PAYMENT_TYPES.RENEW_SUBSCRIPTION,
+            token: isUsingExistingPaymentMethod
+              ? selectedPaymentMethodId
+              : paymentRequest,
+            quantity: plan.quantity,
+            plan,
+            couponCode,
+            product,
+            isExistingSource: isUsingExistingPaymentMethod,
+            subscriptionIdToRenew,
+            addressId: selectedAddressId
+          },
+          (err, res) => {
+            if (err) {
+              return handlePaymentError(err);
+            }
+            onSuccess(res);
+          }
+        );
+      } else if (createSubscription) {
+        return payment.execute(
+          {
+            type: PAYMENT_TYPES.CREATE_SUBSCRIPTION,
+            token: isUsingExistingPaymentMethod
+              ? selectedPaymentMethodId
+              : paymentRequest,
+            quantity: plan.quantity,
+            plan,
+            couponCode,
+            product,
+            isExistingSource: isUsingExistingPaymentMethod,
+            addressId: selectedAddressId
+          },
+          (err, res) => {
+            if (err) {
+              return handlePaymentError(err);
+            }
+            onSuccess(res);
+          }
+        );
+      }
+    }
+  }
   /*====== End Tap integration ========*/
 
   const submitUsingVantiv = () => {
@@ -347,6 +667,7 @@ const PaymentMethodContainerWithoutStripe = ({
 
   const vantivInstanceRef = React.useRef(null);
   const tapInstanceRef = React.useRef(null);
+  const tapInstanceCard = React.useRef(null);
 
   useEffect(() => {
     const cardProcessor = getSiteCardProcessor();
@@ -430,7 +751,6 @@ const PaymentMethodContainerWithoutStripe = ({
 
       //card change event listener
       card.addEventListener("change", function (event) {
-        console.log("111111", event);
         if (event.loaded) {
           console.log("UI loaded :" + event.loaded);
           console.log("current currency is :" + card.getCurrency());
@@ -443,7 +763,8 @@ const PaymentMethodContainerWithoutStripe = ({
         // }
       });
 
-      tapInstanceRef.current = card;
+      tapInstanceRef.current = tapKey;
+      tapInstanceCard.current = card;
     }
   }, [selectedPaymentMethodId]);
 
@@ -1304,7 +1625,9 @@ const PaymentMethodContainerWithoutStripe = ({
     );
 
     const iframe = document.createElement("iframe");
-    iframe.src = source.redirect.url;
+    iframe.src = source?.redirect?.url
+      ? source.redirect.url
+      : source.threeDSecure_url;
     iframe.style =
       "position: absolute; width: 100%; height: 100%; left: 0; top: 40px; bottom: 0; z-index: 10;";
 
@@ -1354,6 +1677,10 @@ const PaymentMethodContainerWithoutStripe = ({
             (state, dispatch) => {
               if (getSiteCardProcessor() === "vantiv") {
                 return submitUsingVantiv();
+              }
+
+              if (getSiteCardProcessor() === "tap") {
+                return submitUsingTap();
               }
 
               if (selectedPaymentMethodId) {
