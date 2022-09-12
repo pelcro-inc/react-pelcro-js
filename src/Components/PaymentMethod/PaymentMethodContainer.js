@@ -209,11 +209,19 @@ const PaymentMethodContainerWithoutStripe = ({
                 invoice?.currency ||
                 window.Pelcro.site.read().default_currency,
               tap_token: result.id,
-              redirect_url: "http://localhost:3000/"
-              // redirect_url: `${window.Pelcro.environment.domain}`
+              redirect_url: `${
+                window.Pelcro.environment.domain
+              }/webhook/tap/callback/3dsecure?auth_token=${
+                window.Pelcro.user.read().auth_token
+              }`
             },
             (err, res) => {
               console.log("Tap Authorize response", res);
+
+              toggleAuthenticationPendingView(true, res);
+
+              let tapID;
+
               const listenFor3DSecureCompletionMessage = () => {
                 const retrieveSourceInfoFromIframe = (event) => {
                   console.log(
@@ -224,16 +232,19 @@ const PaymentMethodContainerWithoutStripe = ({
                   if (
                     data.message === "3DS-authentication-complete"
                   ) {
+                    tapID = data.tapID;
                     toggleAuthenticationPendingView(false);
-                    retrieveSource(
-                      data.sourceId,
-                      data.clientSecret,
-                      handlePayment
-                    );
+                    // retrieveSource(
+                    //   data.sourceId,
+                    //   data.clientSecret,
+                    //   handlePayment
+                    // );
                     window.removeEventListener(
                       "message",
                       retrieveSourceInfoFromIframe
                     );
+
+                    handleTapPayment(tapID);
                   }
                 };
 
@@ -246,7 +257,9 @@ const PaymentMethodContainerWithoutStripe = ({
 
               listenFor3DSecureCompletionMessage();
 
-              toggleAuthenticationPendingView(true, res);
+              // if (tapID) {
+              //   handleTapPayment(tapID);
+              // }
 
               // if (err) {
               //   onFailure(err);
@@ -274,8 +287,6 @@ const PaymentMethodContainerWithoutStripe = ({
 
     const orderId = `pelcro-${new Date().getTime()}`;
 
-    console.log("Order ID", orderId);
-    console.log("Tap Instance Ref", tapInstanceRef.current);
     /*     
     calls handleTapPayment to either handle a payment or update a source by simply creating a new source 
     */
