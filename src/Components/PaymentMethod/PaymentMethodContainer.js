@@ -766,6 +766,22 @@ const PaymentMethodContainerWithoutStripe = ({
           console.log("UI loaded :" + event.loaded);
           console.log("current currency is :" + card.getCurrency());
         }
+        console.log("Error", event);
+        if (event.error_interactive) {
+          onFailure(event.error_interactive);
+          return dispatch({
+            type: SHOW_ALERT,
+            payload: {
+              type: "error",
+              content: getErrorMessages(event.error_interactive)
+            }
+          });
+        } else {
+          dispatch({
+            type: SHOW_ALERT,
+            payload: { type: "error", content: "" }
+          });
+        }
         // let displayError = document.getElementById("error-handler");
         // if (event.error) {
         //   displayError.textContent = event.error.message;
@@ -1640,7 +1656,7 @@ const PaymentMethodContainerWithoutStripe = ({
       ? source.redirect.url
       : source.threeDSecure_url;
     iframe.style =
-      "position: absolute; width: 100%; height: 100%; left: 0; top: 40px; bottom: 0; z-index: 10;";
+      "position: absolute; width: 100%; height: 100%; left: 0; top: 0; bottom: 0; z-index: 10;";
 
     cardAuthContainer.appendChild(iframe);
   };
