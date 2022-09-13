@@ -378,7 +378,7 @@ export const getEntitlementsFromElem = (elem) => {
 
 export const getPaymentCardIcon = (name) => {
   const icons = {
-    Visa: (
+    visa: (
       <svg
         className="plc-w-16"
         xmlns="http://www.w3.org/2000/svg"
@@ -394,7 +394,7 @@ export const getPaymentCardIcon = (name) => {
         />
       </svg>
     ),
-    MasterCard: (
+    mastercard: (
       <svg
         className="plc-w-16"
         xmlns="http://www.w3.org/2000/svg"
@@ -414,7 +414,7 @@ export const getPaymentCardIcon = (name) => {
         />
       </svg>
     ),
-    "American Express": (
+    "american express": (
       <svg
         className="plc-w-16"
         xmlns="http://www.w3.org/2000/svg"
@@ -433,7 +433,7 @@ export const getPaymentCardIcon = (name) => {
   };
 
   return (
-    icons[name] ?? (
+    icons[name.toLowerCase()] ?? (
       <svg
         xmlns="http://www.w3.org/2000/svg"
         className="plc-w-16"
