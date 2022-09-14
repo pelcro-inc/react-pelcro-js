@@ -1,3 +1,10 @@
+# [3.6.0-beta.20](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.19...v3.6.0-beta.20) (2022-09-14)
+
+
+### Features
+
+* add optional parameter to logout function ([#195](https://github.com/pelcro-inc/react-pelcro-js/issues/195)) ([f695984](https://github.com/pelcro-inc/react-pelcro-js/commit/f69598461ad81570ba5cb888b0428cc64cc41840))
+
 # [3.6.0-beta.19](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.18...v3.6.0-beta.19) (2022-09-08)
 
 
