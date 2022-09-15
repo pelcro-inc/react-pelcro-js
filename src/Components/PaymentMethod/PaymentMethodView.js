@@ -35,6 +35,10 @@ export function PaymentMethodView({
     window.Pelcro.site.read()?.vantiv_gateway_settings
   );
 
+  const supportsTap = Boolean(
+    window.Pelcro.site.read()?.tap_gateway_settings
+  );
+
   return (
     <div className="plc-flex plc-flex-col plc-items-center plc-mt-4 sm:plc-px-8 pelcro-payment-block">
       {cardProcessor === "stripe" && (

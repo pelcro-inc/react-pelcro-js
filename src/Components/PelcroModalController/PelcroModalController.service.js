@@ -139,6 +139,23 @@ export const loadPaymentSDKs = () => {
       );
     }
   }
+
+  // Load Tap SDKs
+  const supportsTap = Boolean(
+    window.Pelcro.site.read().tap_gateway_settings
+  );
+
+  if (supportsTap) {
+    window.Pelcro.helpers.loadSDK(
+      "https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.4/bluebird.min.js",
+      "tap-bluebird"
+    );
+
+    window.Pelcro.helpers.loadSDK(
+      "https://secure.gosell.io/js/sdk/tap.min.js",
+      "tap-sdk"
+    );
+  }
 };
 
 export const loadAuth0SDK = () => {
@@ -539,7 +556,8 @@ const verifyEmailTokenFromUrl = () => {
 };
 
 const verifyLinkTokenFromUrl = () => {
-  const { whenSiteReady, resetView, isAuthenticated } = usePelcro.getStore();
+  const { whenSiteReady, resetView, isAuthenticated } =
+    usePelcro.getStore();
 
   const translations = i18n.t("verifyLinkToken:messages", {
     returnObjects: true
@@ -547,13 +565,14 @@ const verifyLinkTokenFromUrl = () => {
 
   const loginToken = window.Pelcro.helpers.getURLParameter("token");
 
-  const passwordlessEnabled = window.Pelcro.site.read()?.passwordless_enabled;
+  const passwordlessEnabled =
+    window.Pelcro.site.read()?.passwordless_enabled;
 
-  if (isAuthenticated() || !loginToken || !passwordlessEnabled) return;
-  
+  if (isAuthenticated() || !loginToken || !passwordlessEnabled)
+    return;
+
   whenSiteReady(
     () => {
-      
       window.Pelcro.user.verifyLoginToken(
         {
           token: loginToken
@@ -564,17 +583,17 @@ const verifyLinkTokenFromUrl = () => {
           }
           const { auth_token } = res.data;
           window.Pelcro.user.refresh(
-            { 
-              auth_token 
-            }, 
+            {
+              auth_token
+            },
             (err, res) => {
-              if(err) {
+              if (err) {
                 return notify.error(getErrorMessages(err));
               }
               resetView();
               return notify.success(translations.success);
             }
-          )
+          );
         }
       );
     },
@@ -585,12 +604,13 @@ const verifyLinkTokenFromUrl = () => {
 const showPasswordlessRequestFromUrl = () => {
   const { isAuthenticated } = usePelcro.getStore();
 
-  const passwordlessEnabled = window.Pelcro.site.read()?.passwordless_enabled;
+  const passwordlessEnabled =
+    window.Pelcro.site.read()?.passwordless_enabled;
 
   if (!passwordlessEnabled || isAuthenticated()) return;
 
   const { switchView } = usePelcro.getStore();
-  
+
   return switchView("passwordless-request");
 };
 
