@@ -217,53 +217,55 @@ const PaymentMethodContainerWithoutStripe = ({
               }`
             },
             (err, res) => {
-              toggleAuthenticationPendingView(true, res);
-
-              const listenFor3DSecureCompletionMessage = () => {
-                const retrieveSourceInfoFromIframe = (event) => {
-                  const { data } = event;
-                  if (
-                    data.message === "3DS-authentication-complete"
-                  ) {
-                    const tapID = data.tapID;
-                    toggleAuthenticationPendingView(false);
-                    window.removeEventListener(
-                      "message",
-                      retrieveSourceInfoFromIframe
-                    );
-
-                    handleTapPayment(tapID);
+              if (err) {
+                // Inform the user if there was an error
+                onFailure(result.error);
+                dispatch({ type: DISABLE_SUBMIT, payload: false });
+                dispatch({ type: LOADING, payload: false });
+                return dispatch({
+                  type: SHOW_ALERT,
+                  payload: {
+                    type: "error",
+                    content: getErrorMessages(result.error)
                   }
+                });
+              } else {
+                toggleAuthenticationPendingView(true, res);
+
+                const listenFor3DSecureCompletionMessage = () => {
+                  const retrieveSourceInfoFromIframe = (event) => {
+                    const { data } = event;
+                    if (
+                      data.message === "3DS-authentication-complete"
+                    ) {
+                      const tapID = data.tapID;
+                      toggleAuthenticationPendingView(false);
+                      window.removeEventListener(
+                        "message",
+                        retrieveSourceInfoFromIframe
+                      );
+
+                      dispatch({
+                        type: SHOW_ALERT,
+                        payload: {
+                          type: "error",
+                          content: null
+                        }
+                      });
+
+                      handleTapPayment(tapID);
+                    }
+                  };
+
+                  // listen to injected iframe for authentication complete message
+                  window.addEventListener(
+                    "message",
+                    retrieveSourceInfoFromIframe
+                  );
                 };
 
-                // listen to injected iframe for authentication complete message
-                window.addEventListener(
-                  "message",
-                  retrieveSourceInfoFromIframe
-                );
-              };
-
-              listenFor3DSecureCompletionMessage();
-
-              // if (err) {
-              //   onFailure(err);
-              //   return dispatch({
-              //     type: SHOW_ALERT,
-              //     payload: {
-              //       type: "error",
-              //       content: getErrorMessages(err)
-              //     }
-              //   });
-              // }
-
-              // dispatch({
-              //   type: SHOW_ALERT,
-              //   payload: {
-              //     type: "success",
-              //     content: t("messages.sourceUpdated")
-              //   }
-              // });
-              // onSuccess(res);
+                listenFor3DSecureCompletionMessage();
+              }
             }
           );
         }
