@@ -1,3 +1,10 @@
+# [3.6.0-beta.21](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.20...v3.6.0-beta.21) (2022-09-15)
+
+
+### Features
+
+* add tap payment gateway ([e6e58d5](https://github.com/pelcro-inc/react-pelcro-js/commit/e6e58d5c5619cd38201e89f7ee4d884cf2050fe0))
+
 # [3.6.0-beta.20](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.19...v3.6.0-beta.20) (2022-09-14)
 
 
