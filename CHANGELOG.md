@@ -1,3 +1,10 @@
+# [3.6.0-beta.24](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.23...v3.6.0-beta.24) (2022-09-15)
+
+
+### Bug Fixes
+
+* fix the error handling on auth response ([144f21c](https://github.com/pelcro-inc/react-pelcro-js/commit/144f21c981783defdacf81d824c330b37e2ffdd6))
+
 # [3.6.0-beta.23](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.22...v3.6.0-beta.23) (2022-09-15)
 
 
