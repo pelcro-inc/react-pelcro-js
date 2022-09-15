@@ -6,7 +6,8 @@ import {
   StripeGateway,
   Payment,
   PAYMENT_TYPES,
-  VantivGateway
+  VantivGateway,
+  TapGateway
 } from "./Payment.service";
 
 beforeAll(() => {
@@ -377,6 +378,53 @@ describe("Successfully create any type of subscription", () => {
       expect(window.Pelcro.subscription.create).toBeCalledWith(
         expect.objectContaining({
           payment_gateway: "vantiv",
+          gateway_token: "test_token",
+          plan_id: 123
+        }),
+        expect.anything()
+      );
+    });
+  });
+
+  describe("Tap gateway", () => {
+    test("Should not execute given an invalid type of subscription", () => {
+      const subscription = new Payment(new TapGateway());
+      const mockCallback = jest.fn();
+
+      subscription.execute(
+        {
+          type: "BLA BLA INVALID TYPE",
+          token: "test_token",
+          plan: { id: 123 },
+          product: { id: 123 },
+          subscriptionIdToRenew: 123
+        },
+        mockCallback
+      );
+
+      expect(mockCallback).not.toBeCalled();
+    });
+
+    test("Should create a subscription", () => {
+      const subscription = new Payment(new TapGateway());
+
+      jest
+        .spyOn(window.Pelcro.subscription, "create")
+        .mockImplementation((_, callback) => callback());
+
+      subscription.execute(
+        {
+          type: PAYMENT_TYPES.CREATE_SUBSCRIPTION,
+          token: "test_token",
+          plan: { id: 123 },
+          product: { id: 123 }
+        },
+        () => null
+      );
+
+      expect(window.Pelcro.subscription.create).toBeCalledWith(
+        expect.objectContaining({
+          payment_gateway: "tap",
           gateway_token: "test_token",
           plan_id: 123
         }),

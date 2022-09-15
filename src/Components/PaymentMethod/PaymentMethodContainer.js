@@ -187,17 +187,16 @@ const PaymentMethodContainerWithoutStripe = ({
       .then(function (result) {
         if (result.error) {
           // Inform the user if there was an error
-          // var errorElement = document.getElementById("error-handler");
-          // errorElement.textContent = result.error.message;
-
-          console.log("result.error", result.error);
+          onFailure(result.error);
+          return dispatch({
+            type: SHOW_ALERT,
+            payload: {
+              type: "error",
+              content: getErrorMessages(result.error)
+            }
+          });
         } else {
           console.log("Tap API Call result", result);
-
-          // console.log("Card Ref", tapInstanceCard.current);
-
-          // console.log("product", product);
-          // console.log("plan", plan);
 
           window.Pelcro.payment.authorize(
             {
@@ -216,29 +215,16 @@ const PaymentMethodContainerWithoutStripe = ({
               }`
             },
             (err, res) => {
-              console.log("Tap Authorize response", res);
-
               toggleAuthenticationPendingView(true, res);
-
-              let tapID;
 
               const listenFor3DSecureCompletionMessage = () => {
                 const retrieveSourceInfoFromIframe = (event) => {
-                  console.log(
-                    "From Inside retrieveSourceInfoFromIframe",
-                    event
-                  );
                   const { data } = event;
                   if (
                     data.message === "3DS-authentication-complete"
                   ) {
-                    tapID = data.tapID;
+                    const tapID = data.tapID;
                     toggleAuthenticationPendingView(false);
-                    // retrieveSource(
-                    //   data.sourceId,
-                    //   data.clientSecret,
-                    //   handlePayment
-                    // );
                     window.removeEventListener(
                       "message",
                       retrieveSourceInfoFromIframe
@@ -256,10 +242,6 @@ const PaymentMethodContainerWithoutStripe = ({
               };
 
               listenFor3DSecureCompletionMessage();
-
-              // if (tapID) {
-              //   handleTapPayment(tapID);
-              // }
 
               // if (err) {
               //   onFailure(err);
@@ -284,16 +266,6 @@ const PaymentMethodContainerWithoutStripe = ({
           );
         }
       });
-
-    const orderId = `pelcro-${new Date().getTime()}`;
-
-    /*     
-    calls handleTapPayment to either handle a payment or update a source by simply creating a new source 
-    */
-    // tapInstanceRef.current.getPaypageRegistrationId({
-    //   id: orderId,
-    //   orderId: orderId
-    // });
   };
 
   function handleTapPayment(paymentRequest) {
@@ -762,26 +734,21 @@ const PaymentMethodContainerWithoutStripe = ({
 
       //card change event listener
       card.addEventListener("change", function (event) {
-        if (event.loaded) {
-          console.log("UI loaded :" + event.loaded);
-          console.log("current currency is :" + card.getCurrency());
-        }
-        console.log("Error", event);
-        if (event.error_interactive) {
-          onFailure(event.error_interactive);
-          return dispatch({
-            type: SHOW_ALERT,
-            payload: {
-              type: "error",
-              content: getErrorMessages(event.error_interactive)
-            }
-          });
-        } else {
-          dispatch({
-            type: SHOW_ALERT,
-            payload: { type: "error", content: "" }
-          });
-        }
+        // if (event.error_interactive) {
+        //   onFailure(event.error_interactive);
+        //   return dispatch({
+        //     type: SHOW_ALERT,
+        //     payload: {
+        //       type: "error",
+        //       content: getErrorMessages(event.error_interactive)
+        //     }
+        //   });
+        // } else {
+        //   dispatch({
+        //     type: SHOW_ALERT,
+        //     payload: { type: "error", content: "" }
+        //   });
+        // }
         // let displayError = document.getElementById("error-handler");
         // if (event.error) {
         //   displayError.textContent = event.error.message;
