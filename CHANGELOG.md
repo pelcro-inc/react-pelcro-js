@@ -1,3 +1,10 @@
+# [3.6.0-beta.23](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.22...v3.6.0-beta.23) (2022-09-15)
+
+
+### Features
+
+* add error handling for tap authorize response ([1648c31](https://github.com/pelcro-inc/react-pelcro-js/commit/1648c31c1e743720ffa92a256069b76429876868))
+
 # [3.6.0-beta.22](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.21...v3.6.0-beta.22) (2022-09-15)
 
 
