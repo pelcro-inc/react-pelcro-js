@@ -188,6 +188,8 @@ const PaymentMethodContainerWithoutStripe = ({
         if (result.error) {
           // Inform the user if there was an error
           onFailure(result.error);
+          dispatch({ type: DISABLE_SUBMIT, payload: false });
+          dispatch({ type: LOADING, payload: false });
           return dispatch({
             type: SHOW_ALERT,
             payload: {
