@@ -125,10 +125,6 @@ class DefaultNewsLetter extends Component {
   };
 
   postSubmit = () => {
-    window.Pelcro.paywall.decrementPageViewFrequency(
-      this.product?.paywall?.newsletter_extra_visits,
-      this.product?.paywall?.frequency_limit
-    );
     this.props.setView("meter");
   };
 
