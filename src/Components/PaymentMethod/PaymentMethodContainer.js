@@ -1050,6 +1050,8 @@ const PaymentMethodContainerWithoutStripe = ({
   const subscribe = (stripeSource, state, dispatch) => {
     const { couponCode } = state;
 
+    console.log("Stripe Source", stripeSource);
+
     if (!subscriptionIdToRenew) {
       window.Pelcro.subscription.create(
         {
@@ -1077,20 +1079,27 @@ const PaymentMethodContainerWithoutStripe = ({
             : null
         },
         (err, res) => {
-          dispatch({ type: DISABLE_SUBMIT, payload: false });
-          dispatch({ type: LOADING, payload: false });
+          //Get the Intent Here
 
-          if (err) {
-            onFailure(err);
-            return dispatch({
-              type: SHOW_ALERT,
-              payload: {
-                type: "error",
-                content: getErrorMessages(err)
+          stripe
+            .confirmCardPayment(res.data.payment_intent.client_secret)
+            .then((res) => {
+              console.log("The validation respons", res);
+              dispatch({ type: DISABLE_SUBMIT, payload: false });
+              dispatch({ type: LOADING, payload: false });
+
+              if (res.error) {
+                onFailure(res.error);
+                return dispatch({
+                  type: SHOW_ALERT,
+                  payload: {
+                    type: "error",
+                    content: getErrorMessages(res.error)
+                  }
+                });
               }
+              onSuccess(res);
             });
-          }
-          onSuccess(res);
         }
       );
     } else {
@@ -1420,23 +1429,23 @@ const PaymentMethodContainerWithoutStripe = ({
           invoice?.amount_remaining ??
           getOrderItemsTotal();
 
-        if (
-          source?.card?.three_d_secure === "required" &&
-          totalAmount > 0
-        ) {
-          return resolveTaxCalculation().then((res) =>
-            generate3DSecureSource(
-              source,
-              res?.totalAmountWithTax ?? totalAmount
-            ).then(({ source, error }) => {
-              if (error) {
-                return handlePaymentError(error);
-              }
+        // if (
+        //   source?.card?.three_d_secure === "required" &&
+        //   totalAmount > 0
+        // ) {
+        //   return resolveTaxCalculation().then((res) =>
+        //     generate3DSecureSource(
+        //       source,
+        //       res?.totalAmountWithTax ?? totalAmount
+        //     ).then(({ source, error }) => {
+        //       if (error) {
+        //         return handlePaymentError(error);
+        //       }
 
-              toggleAuthenticationPendingView(true, source);
-            })
-          );
-        }
+        //       toggleAuthenticationPendingView(true, source);
+        //     })
+        //   );
+        // }
 
         return handlePayment(source);
       })
