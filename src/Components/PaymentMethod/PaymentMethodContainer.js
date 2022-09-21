@@ -1047,6 +1047,74 @@ const PaymentMethodContainerWithoutStripe = ({
     }
   };
 
+  /**
+   * Attempt to confirm a Stripe card payment via it's PaymentIntent.
+   * Only trigger method if PaymentIntent status is `requires_action`.
+   *
+   * @see https://stripe.com/docs/payments/intents#intent-statuses
+   *
+   * @param response
+   * @param error
+   * @returns {*}
+   */
+  const confirmStripeCardPayment = (response, error) => {
+    if (response) {
+      const paymentIntent = response.data?.payment_intent;
+      if (
+        paymentIntent?.status === "requires_action" &&
+        paymentIntent?.client_secret
+      ) {
+        stripe
+          .confirmCardPayment(paymentIntent.client_secret)
+          .then((res) => {
+            console.log("The validation response", res);
+            dispatch({ type: DISABLE_SUBMIT, payload: false });
+            dispatch({ type: LOADING, payload: false });
+
+            if (res.error) {
+              onFailure(res.error);
+              return dispatch({
+                type: SHOW_ALERT,
+                payload: {
+                  type: "error",
+                  content: getErrorMessages(res.error)
+                }
+              });
+            }
+            onSuccess(res);
+          });
+      } else if (
+        paymentIntent?.status === "requires_payment_method" &&
+        paymentIntent?.client_secret
+      ) {
+        dispatch({ type: DISABLE_SUBMIT, payload: false });
+        dispatch({ type: LOADING, payload: false });
+        return dispatch({
+          type: SHOW_ALERT,
+          payload: {
+            type: "error",
+            content: t("messages.cardAuthFailed")
+          }
+        });
+      }
+    } else {
+      dispatch({ type: DISABLE_SUBMIT, payload: false });
+      dispatch({ type: LOADING, payload: false });
+
+      if (error) {
+        onFailure(error);
+        return dispatch({
+          type: SHOW_ALERT,
+          payload: {
+            type: "error",
+            content: getErrorMessages(error)
+          }
+        });
+      }
+      onSuccess(response);
+    }
+  };
+
   const subscribe = (stripeSource, state, dispatch) => {
     const { couponCode } = state;
 
@@ -1077,20 +1145,7 @@ const PaymentMethodContainerWithoutStripe = ({
             : null
         },
         (err, res) => {
-          dispatch({ type: DISABLE_SUBMIT, payload: false });
-          dispatch({ type: LOADING, payload: false });
-
-          if (err) {
-            onFailure(err);
-            return dispatch({
-              type: SHOW_ALERT,
-              payload: {
-                type: "error",
-                content: getErrorMessages(err)
-              }
-            });
-          }
-          onSuccess(res);
+          confirmStripeCardPayment(res, err);
         }
       );
     } else {
@@ -1309,21 +1364,7 @@ const PaymentMethodContainerWithoutStripe = ({
         invoiceId: invoice.id
       },
       (err, res) => {
-        dispatch({ type: DISABLE_SUBMIT, payload: false });
-        dispatch({ type: LOADING, payload: false });
-
-        if (err) {
-          onFailure(err);
-          return dispatch({
-            type: SHOW_ALERT,
-            payload: {
-              type: "error",
-              content: getErrorMessages(err)
-            }
-          });
-        }
-
-        onSuccess(res);
+        confirmStripeCardPayment(res, err);
       }
     );
   };
@@ -1419,24 +1460,6 @@ const PaymentMethodContainerWithoutStripe = ({
           plan?.amount ??
           invoice?.amount_remaining ??
           getOrderItemsTotal();
-
-        if (
-          source?.card?.three_d_secure === "required" &&
-          totalAmount > 0
-        ) {
-          return resolveTaxCalculation().then((res) =>
-            generate3DSecureSource(
-              source,
-              res?.totalAmountWithTax ?? totalAmount
-            ).then(({ source, error }) => {
-              if (error) {
-                return handlePaymentError(error);
-              }
-
-              toggleAuthenticationPendingView(true, source);
-            })
-          );
-        }
 
         return handlePayment(source);
       })
