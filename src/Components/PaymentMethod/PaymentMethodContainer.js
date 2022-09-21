@@ -1061,13 +1061,11 @@ const PaymentMethodContainerWithoutStripe = ({
     if (response) {
       const paymentIntent = response.data?.payment_intent;
       if (
-          paymentIntent?.status === "requires_action" &&
-          paymentIntent?.client_secret
+        paymentIntent?.status === "requires_action" &&
+        paymentIntent?.client_secret
       ) {
         stripe
-          .confirmCardPayment(
-              paymentIntent.client_secret
-          )
+          .confirmCardPayment(paymentIntent.client_secret)
           .then((res) => {
             console.log("The validation response", res);
             dispatch({ type: DISABLE_SUBMIT, payload: false });
@@ -1085,6 +1083,22 @@ const PaymentMethodContainerWithoutStripe = ({
             }
             onSuccess(res);
           });
+      } else if (
+        paymentIntent?.status === "requires_payment_method" &&
+        paymentIntent?.client_secret
+      ) {
+        dispatch({ type: DISABLE_SUBMIT, payload: false });
+        dispatch({ type: LOADING, payload: false });
+        // onFailure(
+        //   "There was an issue with the payment method. Please choose or add another payment method."
+        // );
+        return dispatch({
+          type: SHOW_ALERT,
+          payload: {
+            type: "error",
+            content: t("messages.cardAuthFailed")
+          }
+        });
       }
     } else {
       dispatch({ type: DISABLE_SUBMIT, payload: false });
@@ -1353,21 +1367,7 @@ const PaymentMethodContainerWithoutStripe = ({
         invoiceId: invoice.id
       },
       (err, res) => {
-        dispatch({ type: DISABLE_SUBMIT, payload: false });
-        dispatch({ type: LOADING, payload: false });
-
-        if (err) {
-          onFailure(err);
-          return dispatch({
-            type: SHOW_ALERT,
-            payload: {
-              type: "error",
-              content: getErrorMessages(err)
-            }
-          });
-        }
-
-        onSuccess(res);
+        confirmStripeCardPayment(res, err);
       }
     );
   };
