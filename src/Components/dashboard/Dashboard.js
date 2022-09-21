@@ -247,6 +247,10 @@ class Dashboard extends Component {
       )} ${formattedCancelDate}`;
     }
 
+    if (subscription.status === "incomplete") {
+      return `${this.locale("labels.status.incomplete")}`;
+    }
+
     if (subscription.cancel_at_period_end) {
       // DateTime from BE is missing 3 zeros so we add them before instancing a date
       const expiryDate = new Date(
@@ -324,6 +328,16 @@ class Dashboard extends Component {
         textColor: "plc-text-yellow-700",
         bgColor: "plc-bg-yellow-100",
         icon: <CheckMarkIcon />
+      };
+    }
+
+    if (sub.status === "incomplete") {
+      return {
+        title: this.locale("labels.status.incomplete"),
+        content: this.getSubscriptionStatusText(sub),
+        textColor: "plc-text-orange-700",
+        bgColor: "plc-bg-orange-100",
+        icon: <ExclamationIcon />
       };
     }
 

@@ -11,7 +11,8 @@
       "active": "Active",
       "inTrial": "Dans l'essai",
       "endingSoon": "Fin bientôt",
-      "scheduled": "Programmé"
+      "scheduled": "Programmé",
+      "incomplete": "incomplète"
     },
     "shipments": "Expéditions restantes",
     "logout": "Déconnexion",
