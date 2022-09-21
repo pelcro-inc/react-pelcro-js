@@ -125,6 +125,7 @@ class DefaultNewsLetter extends Component {
   };
 
   postSubmit = () => {
+    window.Pelcro.paywall.setNewsletterExtraVisits(true);
     this.props.setView("meter");
   };
 
