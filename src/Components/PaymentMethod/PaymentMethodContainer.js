@@ -1047,17 +1047,29 @@ const PaymentMethodContainerWithoutStripe = ({
     }
   };
 
-  const validateStripeCard = (response, error) => {
+  /**
+   * Attempt to confirm a Stripe card payment via it's PaymentIntent.
+   * Only trigger method if PaymentIntent status is `requires_action`.
+   *
+   * @see https://stripe.com/docs/payments/intents#intent-statuses
+   *
+   * @param response
+   * @param error
+   * @returns {*}
+   */
+  const confirmStripeCardPayment = (response, error) => {
     if (response) {
+      const paymentIntent = response.data?.payment_intent;
       if (
-        response.data?.payment_intent?.status === "requires_action"
+          paymentIntent?.status === "requires_action" &&
+          paymentIntent?.client_secret
       ) {
         stripe
           .confirmCardPayment(
-            response.data?.payment_intent?.client_secret
+              paymentIntent.client_secret
           )
           .then((res) => {
-            console.log("The validation respons", res);
+            console.log("The validation response", res);
             dispatch({ type: DISABLE_SUBMIT, payload: false });
             dispatch({ type: LOADING, payload: false });
 
@@ -1122,7 +1134,7 @@ const PaymentMethodContainerWithoutStripe = ({
             : null
         },
         (err, res) => {
-          validateStripeCard(res, err);
+          confirmStripeCardPayment(res, err);
         }
       );
     } else {
