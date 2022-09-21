@@ -37,9 +37,11 @@ import { SubscriptionsMenu } from "./DashboardMenus/SubsMenu";
 import { DonationsMenu } from "./DashboardMenus/DonationsMenu";
 import { InvoicesMenu } from "./DashboardMenus/InvoicesMenu";
 import { MembershipsMenu } from "./DashboardMenus/MembershipsMenu";
+import { DashboardLink } from "./DashboardLink";
 
 const SUB_MENUS = {
   PROFILE: "profile",
+  QRCODE: "qr-code",
   SUBSCRIPTIONS: "subscriptions",
   DONATIONS: "donations",
   MEMBERSHIPS: "memberships",
@@ -585,19 +587,19 @@ class Dashboard extends Component {
 
     return (
       <Transition
-        className="plc-fixed plc-inset-y-0 plc-right-0 plc-h-full plc-max-w-xl plc-overflow-y-auto plc-text-left plc-bg-white plc-shadow-xl plc-z-max"
+        className="plc-fixed plc-inset-y-0 plc-left-0 plc-h-full plc-max-w-xl plc-overflow-y-auto plc-text-left plc-bg-white plc-shadow-xl plc-z-max"
         show={isOpen}
         enter="plc-transform plc-transition plc-duration-500"
-        enterFrom="plc-translate-x-full"
+        enterFrom="plc--translate-x-full"
         enterTo="plc-translate-x-0"
         afterEnter={this.initializeHideMenuHandler}
         leave="plc-transform plc-transition plc-duration-500"
         leaveFrom="plc-translate-x-0"
-        leaveTo="plc-translate-x-full"
+        leaveTo="plc--translate-x-full"
         afterLeave={this.props.onClose}
       >
         <div id="pelcro-view-dashboard" ref={this.menuRef}>
-          <header className="plc-flex plc-flex-col plc-p-4 plc-pl-2 plc-min-h-40 sm:plc-pr-8 plc-bg-primary-500">
+          {/* <header className="plc-flex plc-flex-col plc-p-4 plc-pl-2 plc-min-h-40 sm:plc-pr-8 plc-bg-primary-500">
             <div className="plc-flex plc-flex-row-reverse">
               <Button
                 variant="icon"
@@ -643,126 +645,163 @@ class Dashboard extends Component {
                 </p>
               </div>
             </div>
-          </header>
+          </header> */}
 
           <section className="plc-mt-6 plc-shadow-sm">
             <header className="plc-pl-4 plc-mb-2 sm:plc-pl-8">
-              <p className="plc-text-xs plc-font-bold plc-tracking-widest plc-text-gray-500 plc-uppercase">
-                {this.locale("labels.account")}
+              <p className="plc-font-bold plc-tracking-widest plc-text-gray-500">
+                {this.locale("labels.profile")}
               </p>
             </header>
 
+            <DashboardLink
+              name={SUB_MENUS.PROFILE}
+              icon={<UserIcon className="plc-w-6 plc-h-6 plc-mr-2" />}
+              content={
+                <div className="plc-flex plc-flex-col plc-my-2 plc-ml-2 plc-space-y-4">
+                  <Button
+                    variant="ghost"
+                    icon={
+                      <EditIcon className="plc-w-5 plc-h-5 plc-mr-1" />
+                    }
+                    className="plc-text-sm plc-text-gray-500 hover:plc-text-primary-700"
+                    onClick={this.displayUserEdit}
+                  >
+                    {this.locale("labels.updateProfile")}
+                  </Button>
+
+                  <Button
+                    variant="ghost"
+                    icon={
+                      <KeyIcon className="plc-w-5 plc-h-5 plc-mr-1" />
+                    }
+                    className="plc-text-sm plc-text-gray-500 hover:plc-text-primary-700"
+                    onClick={this.displayChangePassword}
+                  >
+                    {this.locale("labels.changePassword")}
+                  </Button>
+
+                  {siteHasNewslettersDefined && (
+                    <Button
+                      variant="ghost"
+                      icon={
+                        <NewsletterIcon className="plc-w-5 plc-h-5 plc-mr-1" />
+                      }
+                      className="plc-text-sm plc-text-gray-500 hover:plc-text-primary-700"
+                      onClick={this.displayNewsletterUpdate}
+                    >
+                      {this.locale("labels.editNewsletters")}
+                    </Button>
+                  )}
+                  <Button
+                    variant="ghost"
+                    icon={
+                      <QrCodeIcon className="plc-w-5 plc-h-5 plc-mr-1" />
+                    }
+                    className="plc-text-sm plc-text-gray-500 hover:plc-text-primary-700"
+                    onClick={this.displayQRCode}
+                  >
+                    {this.locale("labels.myQRCode")}
+                  </Button>
+                </div>
+              }
+              title={this.locale("labels.basicData")}
+              onClick={this.displayUserEdit}
+            />
+
+            <DashboardLink
+              name={SUB_MENUS.QRCODE}
+              icon={
+                <QrCodeIcon className="plc-w-6 plc-h-6 plc-mr-2" />
+              }
+              title={"My QR code"}
+              onClick={this.displayQRCode}
+            />
+
+            <DashboardLink
+              name={SUB_MENUS.SAVED_ITEMS}
+              icon={<BookmarkIcon />}
+              title={this.locale("labels.savedItems.label")}
+            />
+
             <Accordion>
-              <Accordion.item
-                name={SUB_MENUS.PROFILE}
-                icon={
-                  <UserIcon className="plc-w-6 plc-h-6 plc-mr-2" />
-                }
-                title={this.locale("labels.myProfile")}
-                content={
-                  <div className="plc-flex plc-flex-col plc-my-2 plc-ml-2 plc-space-y-4">
-                    <Button
-                      variant="ghost"
-                      icon={
-                        <EditIcon className="plc-w-5 plc-h-5 plc-mr-1" />
-                      }
-                      className="plc-text-sm plc-text-gray-500 hover:plc-text-primary-700"
-                      onClick={this.displayUserEdit}
-                    >
-                      {this.locale("labels.updateProfile")}
-                    </Button>
+              <header className="plc-pl-4 plc-mb-2 sm:plc-pl-8">
+                <p className="plc-font-bold plc-tracking-widest plc-text-gray-500">
+                  {this.locale("labels.accountSettings")}
+                </p>
+              </header>
 
-                    <Button
-                      variant="ghost"
-                      icon={
-                        <KeyIcon className="plc-w-5 plc-h-5 plc-mr-1" />
-                      }
-                      className="plc-text-sm plc-text-gray-500 hover:plc-text-primary-700"
-                      onClick={this.displayChangePassword}
-                    >
-                      {this.locale("labels.changePassword")}
-                    </Button>
-
-                    {siteHasNewslettersDefined && (
-                      <Button
-                        variant="ghost"
-                        icon={
-                          <NewsletterIcon className="plc-w-5 plc-h-5 plc-mr-1" />
-                        }
-                        className="plc-text-sm plc-text-gray-500 hover:plc-text-primary-700"
-                        onClick={this.displayNewsletterUpdate}
-                      >
-                        {this.locale("labels.editNewsletters")}
-                      </Button>
-                    )}
-                    <Button
-                      variant="ghost"
-                      icon={
-                        <QrCodeIcon className="plc-w-5 plc-h-5 plc-mr-1" />
-                      }
-                      className="plc-text-sm plc-text-gray-500 hover:plc-text-primary-700"
-                      onClick={this.displayQRCode}
-                    >
-                      {this.locale("labels.myQRCode")}
-                    </Button>
-                  </div>
-                }
-              />
-
-              <Accordion.item
+              <DashboardLink
                 name={SUB_MENUS.PAYMENT_CARDS}
                 icon={<PaymentCardIcon />}
                 title={this.locale("labels.paymentSource")}
-                content={
-                  <div className="plc-flex plc-items-center plc-justify-between plc-max-w-xs plc-p-4 plc-mb-2 plc-text-white plc-bg-gray-800 plc-rounded-md plc-h-14">
-                    {this.user.source ? (
-                      <>
-                        {getPaymentCardIcon(
-                          this.user.source?.properties?.brand
-                        )}
-                        <span className="plc-ml-1 plc-text-lg plc-tracking-widest">
-                          •••• {this.user.source?.properties?.last4}
-                        </span>
-                        <Button
-                          variant="icon"
-                          className="plc-text-white"
-                          icon={<EditIcon />}
-                          onClick={this.displaySourceCreate}
-                          disabled={this.state.disableSubmit}
-                        ></Button>
-                      </>
-                    ) : (
-                      <>
-                        <span>{this.locale("messages.noCard")}</span>
-                        <Button
-                          variant="icon"
-                          className="plc-text-white"
-                          icon={
-                            <PlusIcon className="plc-w-6 plc-h-6" />
-                          }
-                          onClick={this.displaySourceCreate}
-                          disabled={this.state.disableSubmit}
-                        />
-                      </>
-                    )}
-                  </div>
-                }
+                onClick={this.displaySourceCreate}
               />
 
-              <Accordion.item
+              <DashboardLink
                 name={SUB_MENUS.ADDRESSES}
                 icon={<LocationIcon />}
                 title={this.locale("labels.addresses")}
-                content={this.renderAddresses()}
+                onClick={this.displayAddressEdit}
               />
 
               <header className="plc-pl-4 plc-my-2 sm:plc-pl-8">
-                <p className="plc-text-xs plc-font-bold plc-tracking-widest plc-text-gray-500 plc-uppercase">
+                <p className="plc-font-bold plc-tracking-widest plc-text-gray-500">
                   {this.locale("labels.purchases")}
                 </p>
               </header>
 
-              <Accordion.item
+              <DashboardLink
+                name={SUB_MENUS.SUBSCRIPTIONS}
+                icon={
+                  <SubscriptionIcon className="plc-w-10 plc-h-10 plc-pt-2 plc-pr-1 plc--ml-2" />
+                }
+                title={this.locale("labels.subscriptions")}
+                // onClick={this.displayAddressEdit}
+              />
+
+              <DashboardLink
+                name={SUB_MENUS.MEMBERSHIPS}
+                icon={
+                  <MembershipsIcon className="plc-transform plc-scale-120 plc-w-7 plc-h-8 plc-mr-1 plc-pt-1" />
+                }
+                title={this.locale("labels.memberships")}
+                onClick={this.displayAddressEdit}
+              />
+
+              <DashboardLink
+                name={SUB_MENUS.DONATIONS}
+                icon={
+                  <DonateIcon className="plc-transform plc-scale-120 plc-w-7 plc-h-8 plc-mr-1 plc-pt-1" />
+                }
+                title={this.locale("labels.donations")}
+                // onClick={this.displayAddressEdit}
+              />
+
+              <DashboardLink
+                name={SUB_MENUS.GIFTS}
+                icon={<GiftIcon />}
+                title={this.locale("labels.gifts")}
+                // onClick={this.displayAddressEdit}
+              />
+
+              <DashboardLink
+                show={window.Pelcro.site.read().ecommerce_enabled}
+                name={SUB_MENUS.ORDERS}
+                icon={<ShoppingIcon />}
+                title={this.locale("labels.orders.label")}
+                // onClick={this.displayAddressEdit}
+              />
+
+              <DashboardLink
+                show={hasInvoices()}
+                name={SUB_MENUS.INVOICES}
+                icon={<InvoiceIcon />}
+                title={this.locale("labels.invoices")}
+                // onClick={this.displayAddressEdit}
+              />
+
+              {/* <Accordion.item
                 name={SUB_MENUS.SUBSCRIPTIONS}
                 icon={
                   <SubscriptionIcon className="plc-w-10 plc-h-10 plc-pt-2 plc-pr-1 plc--ml-2" />
@@ -787,9 +826,9 @@ class Dashboard extends Component {
                     displayRedeem={this.displayRedeem}
                   />
                 }
-              />
+              /> */}
 
-              <Accordion.item
+              {/* <Accordion.item
                 show={hasActiveMemberships()}
                 name={SUB_MENUS.MEMBERSHIPS}
                 icon={
@@ -797,9 +836,9 @@ class Dashboard extends Component {
                 }
                 title={this.locale("labels.memberships")}
                 content={<MembershipsMenu />}
-              />
+              /> */}
 
-              <Accordion.item
+              {/* <Accordion.item
                 show={hasDonationSubs()}
                 name={SUB_MENUS.DONATIONS}
                 icon={
@@ -816,45 +855,40 @@ class Dashboard extends Component {
                   />
                 }
               />
+                content={<DonationsMenu />}
+              /> */}
 
-              <Accordion.item
+              {/* <Accordion.item
                 name={SUB_MENUS.GIFTS}
                 icon={<GiftIcon />}
                 title={this.locale("labels.gifts")}
                 content={this.renderGiftRecipients()}
-              />
+              /> */}
 
-              <Accordion.item
+              {/* <Accordion.item
                 show={window.Pelcro.site.read().ecommerce_enabled}
                 name={SUB_MENUS.ORDERS}
                 icon={<ShoppingIcon />}
                 title={this.locale("labels.orders.label")}
                 content={<OrdersMenu />}
-              />
+              /> */}
 
-              <Accordion.item
+              {/* <Accordion.item
                 show={hasInvoices()}
                 name={SUB_MENUS.INVOICES}
                 icon={<InvoiceIcon />}
                 title={this.locale("labels.invoices")}
                 content={<InvoicesMenu />}
-              />
+              /> */}
 
-              <Accordion.item
-                name={SUB_MENUS.SAVED_ITEMS}
-                icon={<BookmarkIcon />}
-                title={this.locale("labels.savedItems.label")}
-                content={<SavedItemsMenu />}
-              />
-
-              <Button
+              {/* <Button
                 variant="outline"
                 icon={<ExitIcon />}
                 className="plc-flex plc-items-center plc-justify-start plc-w-full plc-p-5 plc-px-4 plc-text-lg plc-font-normal plc-text-gray-500 plc-capitalize plc-bg-transparent plc-border-0 plc-border-l-2 plc-border-transparent plc-rounded-none plc-cursor-pointer plc-select-none sm:plc-px-8 hover:plc-bg-gray-100 hover:plc-text-gray-500"
                 onClick={this.props.logout}
               >
                 {this.locale("labels.logout")}
-              </Button>
+              </Button> */}
             </Accordion>
           </section>
         </div>
