@@ -1,3 +1,10 @@
+# [3.6.0-beta.26](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.25...v3.6.0-beta.26) (2022-09-21)
+
+
+### Features
+
+* update ([3f66826](https://github.com/pelcro-inc/react-pelcro-js/commit/3f66826e3f9a722678ce7c5234b4f0ec8360ab52))
+
 # [3.6.0-beta.25](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.24...v3.6.0-beta.25) (2022-09-16)
 
 
