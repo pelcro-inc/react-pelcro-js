@@ -11,7 +11,8 @@
       "active": "Active",
       "inTrial": "In trial",
       "endingSoon": "Ending soon",
-      "scheduled": "Scheduled"
+      "scheduled": "Scheduled",
+      "incomplete": "incomplete"
     },
     "shipments": "Shipments remaining",
     "logout": "Logout",

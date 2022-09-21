@@ -11,7 +11,8 @@
       "active": "활성화",
       "inTrial": "체험판 사용",
       "endingSoon": "만료 예정",
-      "scheduled": "예약"
+      "scheduled": "예약",
+      "incomplete": "불완전한"
     },
     "shipments": "남은 배송 일정",
     "logout": "로그아웃",

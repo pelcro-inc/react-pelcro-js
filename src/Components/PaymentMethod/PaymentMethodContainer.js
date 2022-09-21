@@ -1096,6 +1096,8 @@ const PaymentMethodContainerWithoutStripe = ({
             content: t("messages.cardAuthFailed")
           }
         });
+      } else {
+        onSuccess(response);
       }
     } else {
       dispatch({ type: DISABLE_SUBMIT, payload: false });
