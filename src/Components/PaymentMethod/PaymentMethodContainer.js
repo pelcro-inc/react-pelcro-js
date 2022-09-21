@@ -1089,9 +1089,6 @@ const PaymentMethodContainerWithoutStripe = ({
       ) {
         dispatch({ type: DISABLE_SUBMIT, payload: false });
         dispatch({ type: LOADING, payload: false });
-        // onFailure(
-        //   "There was an issue with the payment method. Please choose or add another payment method."
-        // );
         return dispatch({
           type: SHOW_ALERT,
           payload: {
@@ -1463,24 +1460,6 @@ const PaymentMethodContainerWithoutStripe = ({
           plan?.amount ??
           invoice?.amount_remaining ??
           getOrderItemsTotal();
-
-        // if (
-        //   source?.card?.three_d_secure === "required" &&
-        //   totalAmount > 0
-        // ) {
-        //   return resolveTaxCalculation().then((res) =>
-        //     generate3DSecureSource(
-        //       source,
-        //       res?.totalAmountWithTax ?? totalAmount
-        //     ).then(({ source, error }) => {
-        //       if (error) {
-        //         return handlePaymentError(error);
-        //       }
-
-        //       toggleAuthenticationPendingView(true, source);
-        //     })
-        //   );
-        // }
 
         return handlePayment(source);
       })
