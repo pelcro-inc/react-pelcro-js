@@ -1,3 +1,10 @@
+# [3.6.0-beta.25](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.24...v3.6.0-beta.25) (2022-09-16)
+
+
+### Features
+
+* remove decrementPageViewFrequency ([#197](https://github.com/pelcro-inc/react-pelcro-js/issues/197)) ([4584453](https://github.com/pelcro-inc/react-pelcro-js/commit/4584453f004097fe59842d49f8e89afaf6aaa3d3))
+
 # [3.6.0-beta.24](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.23...v3.6.0-beta.24) (2022-09-15)
 
 
