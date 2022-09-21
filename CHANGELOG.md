@@ -1,3 +1,16 @@
+# [3.6.0-beta.28](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.27...v3.6.0-beta.28) (2022-09-21)
+
+
+### Bug Fixes
+
+* add onSuccess if no payment_intent conditions are met ([2ea38bf](https://github.com/pelcro-inc/react-pelcro-js/commit/2ea38bf8b65a706ee580d7e8a45251860f527780))
+
+
+### Features
+
+* add the confirmStripeCardPayment to the pay invoice ([9144c47](https://github.com/pelcro-inc/react-pelcro-js/commit/9144c47f65083ef7cadbc7a67f101eb1c5b8cdcc))
+* initial fix for 3ds2 ([fede375](https://github.com/pelcro-inc/react-pelcro-js/commit/fede375ed2c59845e729c7bd2832e3e127e50441))
+
 # [3.6.0-beta.27](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.26...v3.6.0-beta.27) (2022-09-21)
 
 
