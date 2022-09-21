@@ -1,3 +1,10 @@
+# [3.6.0-beta.27](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.26...v3.6.0-beta.27) (2022-09-21)
+
+
+### Features
+
+* support 3DS for stripe ([0edac64](https://github.com/pelcro-inc/react-pelcro-js/commit/0edac64dbbc213036dacc17f5e9440aa5c467b14))
+
 # [3.6.0-beta.26](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.25...v3.6.0-beta.26) (2022-09-21)
 
 
