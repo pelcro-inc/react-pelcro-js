@@ -1047,10 +1047,53 @@ const PaymentMethodContainerWithoutStripe = ({
     }
   };
 
+  const validateStripeCard = (response, error) => {
+    if (response) {
+      if (
+        response.data?.payment_intent?.status === "requires_action"
+      ) {
+        stripe
+          .confirmCardPayment(
+            response.data?.payment_intent?.client_secret
+          )
+          .then((res) => {
+            console.log("The validation respons", res);
+            dispatch({ type: DISABLE_SUBMIT, payload: false });
+            dispatch({ type: LOADING, payload: false });
+
+            if (res.error) {
+              onFailure(res.error);
+              return dispatch({
+                type: SHOW_ALERT,
+                payload: {
+                  type: "error",
+                  content: getErrorMessages(res.error)
+                }
+              });
+            }
+            onSuccess(res);
+          });
+      }
+    } else {
+      dispatch({ type: DISABLE_SUBMIT, payload: false });
+      dispatch({ type: LOADING, payload: false });
+
+      if (error) {
+        onFailure(error);
+        return dispatch({
+          type: SHOW_ALERT,
+          payload: {
+            type: "error",
+            content: getErrorMessages(error)
+          }
+        });
+      }
+      onSuccess(response);
+    }
+  };
+
   const subscribe = (stripeSource, state, dispatch) => {
     const { couponCode } = state;
-
-    console.log("Stripe Source", stripeSource);
 
     if (!subscriptionIdToRenew) {
       window.Pelcro.subscription.create(
@@ -1079,27 +1122,7 @@ const PaymentMethodContainerWithoutStripe = ({
             : null
         },
         (err, res) => {
-          //Get the Intent Here
-
-          stripe
-            .confirmCardPayment(res.data.payment_intent.client_secret)
-            .then((res) => {
-              console.log("The validation respons", res);
-              dispatch({ type: DISABLE_SUBMIT, payload: false });
-              dispatch({ type: LOADING, payload: false });
-
-              if (res.error) {
-                onFailure(res.error);
-                return dispatch({
-                  type: SHOW_ALERT,
-                  payload: {
-                    type: "error",
-                    content: getErrorMessages(res.error)
-                  }
-                });
-              }
-              onSuccess(res);
-            });
+          validateStripeCard(res, err);
         }
       );
     } else {
