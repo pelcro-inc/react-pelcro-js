@@ -81,8 +81,12 @@ export const SubscriptionsItems = ({
   toggleActiveMenu
 }) => {
   const { t } = useTranslation("dashboard");
-  const { switchView, setSubscriptionToCancel, setSubscriptionToSuspend, isAuthenticated } =
-    usePelcro();
+  const {
+    switchView,
+    setSubscriptionToCancel,
+    setSubscriptionToSuspend,
+    isAuthenticated
+  } = usePelcro();
 
   const subs = getNonDonationSubs();
 
@@ -162,7 +166,7 @@ export const SubscriptionsItems = ({
         if (userMustVerifyEmail()) {
           return switchView("email-verify");
         }
-        
+
         onClose?.();
         notify.confirm(
           (onSuccess, onFailure) => {
@@ -274,44 +278,47 @@ export const SubscriptionsItems = ({
                       {t("labels.reactivate")}
                     </Button>
                   )}
-                {sub.cancel_at_period_end === 1 && (
-                  <Button
-                    variant="ghost"
-                    className="plc-text-blue-400 pelcro-dashboard-sub-renew-button"
-                    icon={<RefreshIcon />}
-                    onClick={onRenewClick}
-                    disabled={disableSubmit}
-                    data-key={sub.id}
-                  >
-                    {t("labels.renew")}
-                  </Button>
-                )}
+                {sub.cancel_at_period_end === 1 &&
+                  sub.status !== "incomplete" && (
+                    <Button
+                      variant="ghost"
+                      className="plc-text-blue-400 pelcro-dashboard-sub-renew-button"
+                      icon={<RefreshIcon />}
+                      onClick={onRenewClick}
+                      disabled={disableSubmit}
+                      data-key={sub.id}
+                    >
+                      {t("labels.renew")}
+                    </Button>
+                  )}
 
-                {sub.shipments_suspended_until && sub.shipments_remaining > 0 && (
-                  <Button
-                    variant="ghost"
-                    className="plc-text-blue-400 pelcro-dashboard-sub-suspend-button"
-                    icon={<XCircleIcon />}
-                    onClick={onUnSuspendClick}
-                    disabled={disableSubmit}
-                    data-key={sub.id}
-                  >
-                    {t("labels.unsuspend")}
-                  </Button>
-                )}
+                {sub.shipments_suspended_until &&
+                  sub.shipments_remaining > 0 && (
+                    <Button
+                      variant="ghost"
+                      className="plc-text-blue-400 pelcro-dashboard-sub-suspend-button"
+                      icon={<XCircleIcon />}
+                      onClick={onUnSuspendClick}
+                      disabled={disableSubmit}
+                      data-key={sub.id}
+                    >
+                      {t("labels.unsuspend")}
+                    </Button>
+                  )}
 
-                {!sub.shipments_suspended_until && sub.shipments_remaining > 0 && (
-                  <Button
-                    variant="ghost"
-                    className="plc-text-red-500 focus:plc-ring-red-500 pelcro-dashboard-sub-suspend-button"
-                    icon={<CalendarIcon />}
-                    onClick={onSuspendClick}
-                    disabled={disableSubmit}
-                    data-key={sub.id}
-                  >
-                    {t("labels.suspend")}
-                  </Button>
-                )}
+                {!sub.shipments_suspended_until &&
+                  sub.shipments_remaining > 0 && (
+                    <Button
+                      variant="ghost"
+                      className="plc-text-red-500 focus:plc-ring-red-500 pelcro-dashboard-sub-suspend-button"
+                      icon={<CalendarIcon />}
+                      onClick={onSuspendClick}
+                      disabled={disableSubmit}
+                      data-key={sub.id}
+                    >
+                      {t("labels.suspend")}
+                    </Button>
+                  )}
 
                 {!sub.plan.auto_renew ||
                 (sub.plan.auto_renew &&
