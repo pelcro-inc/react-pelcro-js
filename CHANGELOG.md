@@ -1,3 +1,10 @@
+# [3.6.0-beta.30](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.29...v3.6.0-beta.30) (2022-09-22)
+
+
+### Features
+
+* edit the vantiv config to make the expiry date required ([#202](https://github.com/pelcro-inc/react-pelcro-js/issues/202)) ([9563565](https://github.com/pelcro-inc/react-pelcro-js/commit/9563565be3d4150765ea4cb638e6570d9a2a61fe))
+
 # [3.6.0-beta.29](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.28...v3.6.0-beta.29) (2022-09-22)
 
 
