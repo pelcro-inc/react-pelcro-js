@@ -1,3 +1,10 @@
+# [3.6.0-beta.31](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.30...v3.6.0-beta.31) (2022-09-22)
+
+
+### Features
+
+* disable submit button with custom error message when sub is created ([#203](https://github.com/pelcro-inc/react-pelcro-js/issues/203)) ([717d4fe](https://github.com/pelcro-inc/react-pelcro-js/commit/717d4fe59affb483b0378f31ee8ab2e367d18e65))
+
 # [3.6.0-beta.30](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.29...v3.6.0-beta.30) (2022-09-22)
 
 
