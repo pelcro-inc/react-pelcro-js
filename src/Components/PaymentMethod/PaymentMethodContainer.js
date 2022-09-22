@@ -682,7 +682,9 @@ const PaymentMethodContainerWithoutStripe = ({
           accountNumber: "1234 1234 1234 1234"
         },
         enhancedUxFeatures: {
-          inlineFieldValidations: true
+          inlineFieldValidations: true,
+          expDateValidation: true,
+          numericInputsOnly: true
         }
       });
     }
