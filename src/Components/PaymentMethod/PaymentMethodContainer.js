@@ -1057,7 +1057,11 @@ const PaymentMethodContainerWithoutStripe = ({
    * @param error
    * @returns {*}
    */
-  const confirmStripeCardPayment = (response, error) => {
+  const confirmStripeCardPayment = (
+    response,
+    error,
+    isSubCreate = false
+  ) => {
     if (response) {
       const paymentIntent = response.data?.payment_intent;
       if (
@@ -1067,8 +1071,9 @@ const PaymentMethodContainerWithoutStripe = ({
         stripe
           .confirmCardPayment(paymentIntent.client_secret)
           .then((res) => {
-            console.log("The validation response", res);
-            dispatch({ type: DISABLE_SUBMIT, payload: false });
+            if (!isSubCreate) {
+              dispatch({ type: DISABLE_SUBMIT, payload: false });
+            }
             dispatch({ type: LOADING, payload: false });
 
             if (res.error) {
@@ -1077,7 +1082,9 @@ const PaymentMethodContainerWithoutStripe = ({
                 type: SHOW_ALERT,
                 payload: {
                   type: "error",
-                  content: getErrorMessages(res.error)
+                  content: isSubCreate
+                    ? t("messages.tryAgainFromInvoice")
+                    : getErrorMessages(res.error)
                 }
               });
             }
@@ -1087,13 +1094,18 @@ const PaymentMethodContainerWithoutStripe = ({
         paymentIntent?.status === "requires_payment_method" &&
         paymentIntent?.client_secret
       ) {
-        dispatch({ type: DISABLE_SUBMIT, payload: false });
+        if (!isSubCreate) {
+          dispatch({ type: DISABLE_SUBMIT, payload: false });
+        }
         dispatch({ type: LOADING, payload: false });
+
         return dispatch({
           type: SHOW_ALERT,
           payload: {
             type: "error",
-            content: t("messages.cardAuthFailed")
+            content: isSubCreate
+              ? t("messages.tryAgainFromInvoice")
+              : t("messages.cardAuthFailed")
           }
         });
       } else {
@@ -1147,7 +1159,7 @@ const PaymentMethodContainerWithoutStripe = ({
             : null
         },
         (err, res) => {
-          confirmStripeCardPayment(res, err);
+          confirmStripeCardPayment(res, err, true);
         }
       );
     } else {
