@@ -1048,6 +1048,40 @@ const PaymentMethodContainerWithoutStripe = ({
   };
 
   /**
+   * Listen for the event message when Stripe's 3DS is complete
+   */
+  const listenForStripe3DSecureCompletionMessage = () => {
+    const retrieveSourceInfoFromIframe = (event) => {
+      const { data } = event;
+      if (data.message === "3DS-authentication-complete") {
+        console.log("The Messsage", data.message);
+
+        toggleAuthenticationPendingView(false);
+        window.removeEventListener(
+          "message",
+          retrieveSourceInfoFromIframe
+        );
+
+        dispatch({ type: DISABLE_SUBMIT, payload: false });
+        dispatch({ type: LOADING, payload: false });
+        onSuccess(data.message);
+      } else {
+        onFailure(data.message);
+        return dispatch({
+          type: SHOW_ALERT,
+          payload: {
+            type: "error",
+            content: getErrorMessages(data.message)
+          }
+        });
+      }
+    };
+
+    // listen to injected iframe for authentication complete message
+    window.addEventListener("message", retrieveSourceInfoFromIframe);
+  };
+
+  /**
    * Attempt to confirm a Stripe card payment via it's PaymentIntent.
    * Only trigger method if PaymentIntent status is `requires_action`.
    *
@@ -1060,28 +1094,30 @@ const PaymentMethodContainerWithoutStripe = ({
   const confirmStripeCardPayment = (response, error) => {
     if (response) {
       const paymentIntent = response.data?.payment_intent;
+
       if (
         paymentIntent?.status === "requires_action" &&
         paymentIntent?.client_secret
       ) {
         stripe
-          .confirmCardPayment(paymentIntent.client_secret)
+          .confirmCardPayment(
+            paymentIntent.client_secret,
+            {
+              return_url: `${
+                window.Pelcro.environment.domain
+              }/webhook/stripe/callback/3dsecure?auth_token=${
+                window.Pelcro.user.read().auth_token
+              }`
+            },
+            { handleActions: false }
+          )
           .then((res) => {
-            console.log("The validation response", res);
-            dispatch({ type: DISABLE_SUBMIT, payload: false });
-            dispatch({ type: LOADING, payload: false });
+            toggleAuthenticationPendingView(
+              true,
+              paymentIntent.next_action.redirect_to_url.url
+            );
 
-            if (res.error) {
-              onFailure(res.error);
-              return dispatch({
-                type: SHOW_ALERT,
-                payload: {
-                  type: "error",
-                  content: getErrorMessages(res.error)
-                }
-              });
-            }
-            onSuccess(res);
+            listenForStripe3DSecureCompletionMessage();
           });
       } else if (
         paymentIntent?.status === "requires_payment_method" &&
@@ -1516,31 +1552,7 @@ const PaymentMethodContainerWithoutStripe = ({
    * @return {Promise}
    */
   const generate3DSecureSource = (source, totalAmount) => {
-    const listenFor3DSecureCompletionMessage = () => {
-      const retrieveSourceInfoFromIframe = (event) => {
-        const { data } = event;
-        if (data.message === "3DS-authentication-complete") {
-          toggleAuthenticationPendingView(false);
-          retrieveSource(
-            data.sourceId,
-            data.clientSecret,
-            handlePayment
-          );
-          window.removeEventListener(
-            "message",
-            retrieveSourceInfoFromIframe
-          );
-        }
-      };
-
-      // listen to injected iframe for authentication complete message
-      window.addEventListener(
-        "message",
-        retrieveSourceInfoFromIframe
-      );
-    };
-
-    listenFor3DSecureCompletionMessage();
+    listenForStripe3DSecureCompletionMessage();
 
     return stripe.createSource({
       type: "three_d_secure",
