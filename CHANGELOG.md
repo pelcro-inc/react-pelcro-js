@@ -1,3 +1,11 @@
+# [3.6.0-beta.29](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.28...v3.6.0-beta.29) (2022-09-22)
+
+
+### Bug Fixes
+
+* incorrect translations ([ce21e71](https://github.com/pelcro-inc/react-pelcro-js/commit/ce21e717caeaade6da52bd17d09d55e45243a489))
+* remove renew button when subscription status is incomplete ([9f51541](https://github.com/pelcro-inc/react-pelcro-js/commit/9f515411a6fa77395a8f79651e8f6e72ff6d7066))
+
 # [3.6.0-beta.28](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.27...v3.6.0-beta.28) (2022-09-21)
 
 
