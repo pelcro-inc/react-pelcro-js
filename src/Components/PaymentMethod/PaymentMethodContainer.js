@@ -48,6 +48,7 @@ import {
   StripeGateway,
   PaypalGateway,
   VantivGateway,
+  TapGateway,
   PAYMENT_TYPES
 } from "../../services/Subscription/Payment.service";
 import { getPageOrDefaultLanguage } from "../../utils/utils";
@@ -138,6 +139,316 @@ const PaymentMethodContainerWithoutStripe = ({
     dispatch({ type: INIT_CONTAINER });
     updateTotalAmountWithTax();
   }, []);
+
+  /*====== Start Tap integration ========*/
+  const submitUsingTap = () => {
+    const isUsingExistingPaymentMethod = Boolean(
+      selectedPaymentMethodId
+    );
+    if (isUsingExistingPaymentMethod) {
+      // no need to create a new source using tap
+      return handleTapPayment(null);
+    }
+
+    if (!tapInstanceRef.current) {
+      return console.error(
+        "Tap sdk script wasn't loaded, you need to load tap sdk before rendering the tap payment flow"
+      );
+    }
+
+    const getOrderItemsTotal = () => {
+      if (!order) {
+        return null;
+      }
+
+      const isQuickPurchase = !Array.isArray(order);
+
+      if (isQuickPurchase) {
+        return order.price * order.quantity;
+      }
+
+      if (order.length === 0) {
+        return null;
+      }
+
+      return order.reduce((total, item) => {
+        return total + item.price * item.quantity;
+      }, 0);
+    };
+
+    const totalAmount =
+      state?.updatedPrice ??
+      plan?.amount ??
+      invoice?.amount_remaining ??
+      getOrderItemsTotal();
+
+    tapInstanceRef.current
+      .createToken(tapInstanceCard.current)
+      .then(function (result) {
+        if (result.error) {
+          // Inform the user if there was an error
+          onFailure(result.error);
+          dispatch({ type: DISABLE_SUBMIT, payload: false });
+          dispatch({ type: LOADING, payload: false });
+          return dispatch({
+            type: SHOW_ALERT,
+            payload: {
+              type: "error",
+              content: getErrorMessages(result.error)
+            }
+          });
+        } else {
+          console.log("Tap API Call result", result);
+
+          window.Pelcro.payment.authorize(
+            {
+              auth_token: window.Pelcro.user.read().auth_token,
+              site_id: window.Pelcro.siteid,
+              amount: totalAmount,
+              currency:
+                plan?.currency ||
+                invoice?.currency ||
+                window.Pelcro.site.read().default_currency,
+              tap_token: result.id,
+              redirect_url: `${
+                window.Pelcro.environment.domain
+              }/webhook/tap/callback/3dsecure?auth_token=${
+                window.Pelcro.user.read().auth_token
+              }`
+            },
+            (err, res) => {
+              if (err) {
+                // Inform the user if there was an error
+                onFailure(err);
+                dispatch({ type: DISABLE_SUBMIT, payload: false });
+                dispatch({ type: LOADING, payload: false });
+                return dispatch({
+                  type: SHOW_ALERT,
+                  payload: {
+                    type: "error",
+                    content: getErrorMessages(err)
+                  }
+                });
+              } else {
+                toggleAuthenticationPendingView(true, res);
+
+                const listenFor3DSecureCompletionMessage = () => {
+                  const retrieveSourceInfoFromIframe = (event) => {
+                    const { data } = event;
+                    if (
+                      data.message === "3DS-authentication-complete"
+                    ) {
+                      const tapID = data.tapID;
+                      toggleAuthenticationPendingView(false);
+                      window.removeEventListener(
+                        "message",
+                        retrieveSourceInfoFromIframe
+                      );
+
+                      dispatch({
+                        type: SHOW_ALERT,
+                        payload: {
+                          type: "error",
+                          content: null
+                        }
+                      });
+
+                      handleTapPayment(tapID);
+                    }
+                  };
+
+                  // listen to injected iframe for authentication complete message
+                  window.addEventListener(
+                    "message",
+                    retrieveSourceInfoFromIframe
+                  );
+                };
+
+                listenFor3DSecureCompletionMessage();
+              }
+            }
+          );
+        }
+      });
+  };
+
+  function handleTapPayment(paymentRequest) {
+    // if (paymentRequest) {
+    //   const SUCCESS_STATUS = "870";
+    //   if (paymentRequest.response !== SUCCESS_STATUS) {
+    //     switch (paymentRequest.response) {
+    //       case "871":
+    //         return handlePaymentError({
+    //           error: new Error("Invalid account number")
+    //         });
+    //       default:
+    //         return handlePaymentError({
+    //           error: new Error(paymentRequest.message)
+    //         });
+    //     }
+    //   }
+    // }
+
+    const isUsingExistingPaymentMethod = Boolean(
+      selectedPaymentMethodId
+    );
+
+    if (type === "createPayment") {
+      handleTapSubscription();
+    } else if (type === "orderCreate") {
+      purchase(
+        new TapGateway(),
+        isUsingExistingPaymentMethod
+          ? selectedPaymentMethodId
+          : paymentRequest,
+        state,
+        dispatch
+      );
+    } else if (type === "invoicePayment") {
+      payInvoice(
+        new TapGateway(),
+        isUsingExistingPaymentMethod
+          ? selectedPaymentMethodId
+          : paymentRequest,
+        dispatch
+      );
+    } else if (type === "updatePaymentSource") {
+      createNewTapCard();
+    }
+
+    function createNewTapCard() {
+      window.Pelcro.source.create(
+        {
+          auth_token: window.Pelcro.user.read().auth_token,
+          token: paymentRequest,
+          gateway: "tap"
+        },
+        (err, res) => {
+          dispatch({ type: DISABLE_SUBMIT, payload: false });
+          dispatch({ type: LOADING, payload: false });
+          if (err) {
+            onFailure(err);
+            return dispatch({
+              type: SHOW_ALERT,
+              payload: {
+                type: "error",
+                content: getErrorMessages(err)
+              }
+            });
+          }
+
+          dispatch({
+            type: SHOW_ALERT,
+            payload: {
+              type: "success",
+              content: t("messages.sourceUpdated")
+            }
+          });
+          onSuccess(res);
+        }
+      );
+    }
+
+    function handleTapSubscription() {
+      const payment = new Payment(new TapGateway());
+
+      const createSubscription = !isGift && !subscriptionIdToRenew;
+      const renewSubscription = !isGift && subscriptionIdToRenew;
+      const giftSubscriprition = isGift && !subscriptionIdToRenew;
+      const renewGift = isRenewingGift;
+
+      const { couponCode } = state;
+
+      if (renewGift) {
+        return payment.execute(
+          {
+            type: PAYMENT_TYPES.RENEW_GIFTED_SUBSCRIPTION,
+            token: isUsingExistingPaymentMethod
+              ? selectedPaymentMethodId
+              : paymentRequest,
+            plan,
+            couponCode,
+            product,
+            isExistingSource: isUsingExistingPaymentMethod,
+            subscriptionIdToRenew,
+            addressId: selectedAddressId
+          },
+          (err, res) => {
+            if (err) {
+              return handlePaymentError(err);
+            }
+            onSuccess(res);
+          }
+        );
+      } else if (giftSubscriprition) {
+        return payment.execute(
+          {
+            type: PAYMENT_TYPES.CREATE_GIFTED_SUBSCRIPTION,
+            token: isUsingExistingPaymentMethod
+              ? selectedPaymentMethodId
+              : paymentRequest,
+            quantity: plan.quantity,
+            plan,
+            couponCode,
+            product,
+            isExistingSource: isUsingExistingPaymentMethod,
+            giftRecipient,
+            addressId: selectedAddressId
+          },
+          (err, res) => {
+            if (err) {
+              return handlePaymentError(err);
+            }
+            onSuccess(res);
+          }
+        );
+      } else if (renewSubscription) {
+        return payment.execute(
+          {
+            type: PAYMENT_TYPES.RENEW_SUBSCRIPTION,
+            token: isUsingExistingPaymentMethod
+              ? selectedPaymentMethodId
+              : paymentRequest,
+            quantity: plan.quantity,
+            plan,
+            couponCode,
+            product,
+            isExistingSource: isUsingExistingPaymentMethod,
+            subscriptionIdToRenew,
+            addressId: selectedAddressId
+          },
+          (err, res) => {
+            if (err) {
+              return handlePaymentError(err);
+            }
+            onSuccess(res);
+          }
+        );
+      } else if (createSubscription) {
+        return payment.execute(
+          {
+            type: PAYMENT_TYPES.CREATE_SUBSCRIPTION,
+            token: isUsingExistingPaymentMethod
+              ? selectedPaymentMethodId
+              : paymentRequest,
+            quantity: plan.quantity,
+            plan,
+            couponCode,
+            product,
+            isExistingSource: isUsingExistingPaymentMethod,
+            addressId: selectedAddressId
+          },
+          (err, res) => {
+            if (err) {
+              return handlePaymentError(err);
+            }
+            onSuccess(res);
+          }
+        );
+      }
+    }
+  }
+  /*====== End Tap integration ========*/
 
   const submitUsingVantiv = () => {
     const isUsingExistingPaymentMethod = Boolean(
@@ -342,6 +653,9 @@ const PaymentMethodContainerWithoutStripe = ({
   }
 
   const vantivInstanceRef = React.useRef(null);
+  const tapInstanceRef = React.useRef(null);
+  const tapInstanceCard = React.useRef(null);
+
   useEffect(() => {
     const cardProcessor = getSiteCardProcessor();
 
@@ -368,9 +682,89 @@ const PaymentMethodContainerWithoutStripe = ({
           accountNumber: "1234 1234 1234 1234"
         },
         enhancedUxFeatures: {
-          inlineFieldValidations: true
+          inlineFieldValidations: true,
+          expDateValidation: true,
+          numericInputsOnly: true
         }
       });
+    }
+
+    if (cardProcessor === "tap" && !selectedPaymentMethodId) {
+      const tapKey = Tapjsli(
+        window.Pelcro.site.read()?.tap_gateway_settings
+          .publishable_key
+      );
+
+      let elements = tapKey.elements({});
+
+      let style = {
+        base: {
+          color: "#535353",
+          lineHeight: "18px",
+          fontFamily: "sans-serif",
+          fontSmoothing: "antialiased",
+          fontSize: "16px",
+          "::placeholder": {
+            color: "rgba(0, 0, 0, 0.26)",
+            fontSize: "15px"
+          }
+        },
+        invalid: {
+          color: "red"
+        }
+      };
+
+      // input labels/placeholders
+      let labels = {
+        cardNumber: "Card Number",
+        expirationDate: "MM/YY",
+        cvv: "CVV",
+        cardHolder: "Card Holder Name"
+      };
+
+      //payment options
+      let paymentOptions = {
+        labels: labels,
+        TextDirection: "ltr"
+      };
+
+      //create element, pass style and payment options
+      let card = elements.create(
+        "card",
+        { style: style },
+        paymentOptions
+      );
+
+      //mount element
+      card.mount("#tapPaymentIframe");
+
+      //card change event listener
+      card.addEventListener("change", function (event) {
+        // if (event.error_interactive) {
+        //   onFailure(event.error_interactive);
+        //   return dispatch({
+        //     type: SHOW_ALERT,
+        //     payload: {
+        //       type: "error",
+        //       content: getErrorMessages(event.error_interactive)
+        //     }
+        //   });
+        // } else {
+        //   dispatch({
+        //     type: SHOW_ALERT,
+        //     payload: { type: "error", content: "" }
+        //   });
+        // }
+        // let displayError = document.getElementById("error-handler");
+        // if (event.error) {
+        //   displayError.textContent = event.error.message;
+        // } else {
+        //   displayError.textContent = "";
+        // }
+      });
+
+      tapInstanceRef.current = tapKey;
+      tapInstanceCard.current = card;
     }
   }, [selectedPaymentMethodId]);
 
@@ -655,6 +1049,88 @@ const PaymentMethodContainerWithoutStripe = ({
     }
   };
 
+  /**
+   * Attempt to confirm a Stripe card payment via it's PaymentIntent.
+   * Only trigger method if PaymentIntent status is `requires_action`.
+   *
+   * @see https://stripe.com/docs/payments/intents#intent-statuses
+   *
+   * @param response
+   * @param error
+   * @returns {*}
+   */
+  const confirmStripeCardPayment = (
+    response,
+    error,
+    isSubCreate = false
+  ) => {
+    if (response) {
+      const paymentIntent = response.data?.payment_intent;
+      if (
+        paymentIntent?.status === "requires_action" &&
+        paymentIntent?.client_secret
+      ) {
+        stripe
+          .confirmCardPayment(paymentIntent.client_secret)
+          .then((res) => {
+            if (!isSubCreate) {
+              dispatch({ type: DISABLE_SUBMIT, payload: false });
+            }
+            dispatch({ type: LOADING, payload: false });
+
+            if (res.error) {
+              onFailure(res.error);
+              return dispatch({
+                type: SHOW_ALERT,
+                payload: {
+                  type: "error",
+                  content: isSubCreate
+                    ? t("messages.tryAgainFromInvoice")
+                    : getErrorMessages(res.error)
+                }
+              });
+            }
+            onSuccess(res);
+          });
+      } else if (
+        paymentIntent?.status === "requires_payment_method" &&
+        paymentIntent?.client_secret
+      ) {
+        if (!isSubCreate) {
+          dispatch({ type: DISABLE_SUBMIT, payload: false });
+        }
+        dispatch({ type: LOADING, payload: false });
+
+        return dispatch({
+          type: SHOW_ALERT,
+          payload: {
+            type: "error",
+            content: isSubCreate
+              ? t("messages.tryAgainFromInvoice")
+              : t("messages.cardAuthFailed")
+          }
+        });
+      } else {
+        onSuccess(response);
+      }
+    } else {
+      dispatch({ type: DISABLE_SUBMIT, payload: false });
+      dispatch({ type: LOADING, payload: false });
+
+      if (error) {
+        onFailure(error);
+        return dispatch({
+          type: SHOW_ALERT,
+          payload: {
+            type: "error",
+            content: getErrorMessages(error)
+          }
+        });
+      }
+      onSuccess(response);
+    }
+  };
+
   const subscribe = (stripeSource, state, dispatch) => {
     const { couponCode } = state;
 
@@ -685,20 +1161,7 @@ const PaymentMethodContainerWithoutStripe = ({
             : null
         },
         (err, res) => {
-          dispatch({ type: DISABLE_SUBMIT, payload: false });
-          dispatch({ type: LOADING, payload: false });
-
-          if (err) {
-            onFailure(err);
-            return dispatch({
-              type: SHOW_ALERT,
-              payload: {
-                type: "error",
-                content: getErrorMessages(err)
-              }
-            });
-          }
-          onSuccess(res);
+          confirmStripeCardPayment(res, err, true);
         }
       );
     } else {
@@ -917,21 +1380,7 @@ const PaymentMethodContainerWithoutStripe = ({
         invoiceId: invoice.id
       },
       (err, res) => {
-        dispatch({ type: DISABLE_SUBMIT, payload: false });
-        dispatch({ type: LOADING, payload: false });
-
-        if (err) {
-          onFailure(err);
-          return dispatch({
-            type: SHOW_ALERT,
-            payload: {
-              type: "error",
-              content: getErrorMessages(err)
-            }
-          });
-        }
-
-        onSuccess(res);
+        confirmStripeCardPayment(res, err);
       }
     );
   };
@@ -1027,24 +1476,6 @@ const PaymentMethodContainerWithoutStripe = ({
           plan?.amount ??
           invoice?.amount_remaining ??
           getOrderItemsTotal();
-
-        if (
-          source?.card?.three_d_secure === "required" &&
-          totalAmount > 0
-        ) {
-          return resolveTaxCalculation().then((res) =>
-            generate3DSecureSource(
-              source,
-              res?.totalAmountWithTax ?? totalAmount
-            ).then(({ source, error }) => {
-              if (error) {
-                return handlePaymentError(error);
-              }
-
-              toggleAuthenticationPendingView(true, source);
-            })
-          );
-        }
 
         return handlePayment(source);
       })
@@ -1231,9 +1662,11 @@ const PaymentMethodContainerWithoutStripe = ({
     );
 
     const iframe = document.createElement("iframe");
-    iframe.src = source.redirect.url;
+    iframe.src = source?.redirect?.url
+      ? source.redirect.url
+      : source.threeDSecure_url;
     iframe.style =
-      "position: absolute; width: 100%; height: 100%; left: 0; top: 40px; bottom: 0; z-index: 10;";
+      "position: absolute; width: 100%; height: 100%; left: 0; top: 0; bottom: 0; z-index: 10;";
 
     cardAuthContainer.appendChild(iframe);
   };
@@ -1281,6 +1714,10 @@ const PaymentMethodContainerWithoutStripe = ({
             (state, dispatch) => {
               if (getSiteCardProcessor() === "vantiv") {
                 return submitUsingVantiv();
+              }
+
+              if (getSiteCardProcessor() === "tap") {
+                return submitUsingTap();
               }
 
               if (selectedPaymentMethodId) {

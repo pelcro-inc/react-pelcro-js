@@ -1,10 +1,95 @@
 ## [3.7.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.7.0...v3.7.1) (2022-09-08)
 
+# [3.6.0-beta.31](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.30...v3.6.0-beta.31) (2022-09-22)
+
+### Features
+
+- disable submit button with custom error message when sub is created ([#203](https://github.com/pelcro-inc/react-pelcro-js/issues/203)) ([717d4fe](https://github.com/pelcro-inc/react-pelcro-js/commit/717d4fe59affb483b0378f31ee8ab2e367d18e65))
+
+# [3.6.0-beta.30](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.29...v3.6.0-beta.30) (2022-09-22)
+
+### Features
+
+- edit the vantiv config to make the expiry date required ([#202](https://github.com/pelcro-inc/react-pelcro-js/issues/202)) ([9563565](https://github.com/pelcro-inc/react-pelcro-js/commit/9563565be3d4150765ea4cb638e6570d9a2a61fe))
+
+# [3.6.0-beta.29](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.28...v3.6.0-beta.29) (2022-09-22)
 
 ### Bug Fixes
 
-* add SubscriptionSuspend to components ([a4569d3](https://github.com/pelcro-inc/react-pelcro-js/commit/a4569d3b9c1e6f5666ae6e3077827f2ec5d78e60))
-* change invoice details view to check if invoice is paid or not ([#194](https://github.com/pelcro-inc/react-pelcro-js/issues/194)) ([37fac5d](https://github.com/pelcro-inc/react-pelcro-js/commit/37fac5dd895a31a97ed496376be7aba56692f242))
+- incorrect translations ([ce21e71](https://github.com/pelcro-inc/react-pelcro-js/commit/ce21e717caeaade6da52bd17d09d55e45243a489))
+- remove renew button when subscription status is incomplete ([9f51541](https://github.com/pelcro-inc/react-pelcro-js/commit/9f515411a6fa77395a8f79651e8f6e72ff6d7066))
+
+# [3.6.0-beta.28](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.27...v3.6.0-beta.28) (2022-09-21)
+
+### Bug Fixes
+
+- add onSuccess if no payment_intent conditions are met ([2ea38bf](https://github.com/pelcro-inc/react-pelcro-js/commit/2ea38bf8b65a706ee580d7e8a45251860f527780))
+
+### Features
+
+- add the confirmStripeCardPayment to the pay invoice ([9144c47](https://github.com/pelcro-inc/react-pelcro-js/commit/9144c47f65083ef7cadbc7a67f101eb1c5b8cdcc))
+- initial fix for 3ds2 ([fede375](https://github.com/pelcro-inc/react-pelcro-js/commit/fede375ed2c59845e729c7bd2832e3e127e50441))
+
+# [3.6.0-beta.27](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.26...v3.6.0-beta.27) (2022-09-21)
+
+### Features
+
+- support 3DS for stripe ([0edac64](https://github.com/pelcro-inc/react-pelcro-js/commit/0edac64dbbc213036dacc17f5e9440aa5c467b14))
+
+# [3.6.0-beta.26](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.25...v3.6.0-beta.26) (2022-09-21)
+
+### Features
+
+- update ([3f66826](https://github.com/pelcro-inc/react-pelcro-js/commit/3f66826e3f9a722678ce7c5234b4f0ec8360ab52))
+
+# [3.6.0-beta.25](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.24...v3.6.0-beta.25) (2022-09-16)
+
+### Features
+
+- remove decrementPageViewFrequency ([#197](https://github.com/pelcro-inc/react-pelcro-js/issues/197)) ([4584453](https://github.com/pelcro-inc/react-pelcro-js/commit/4584453f004097fe59842d49f8e89afaf6aaa3d3))
+
+# [3.6.0-beta.24](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.23...v3.6.0-beta.24) (2022-09-15)
+
+### Bug Fixes
+
+- fix the error handling on auth response ([144f21c](https://github.com/pelcro-inc/react-pelcro-js/commit/144f21c981783defdacf81d824c330b37e2ffdd6))
+
+# [3.6.0-beta.23](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.22...v3.6.0-beta.23) (2022-09-15)
+
+### Features
+
+- add error handling for tap authorize response ([1648c31](https://github.com/pelcro-inc/react-pelcro-js/commit/1648c31c1e743720ffa92a256069b76429876868))
+
+# [3.6.0-beta.22](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.21...v3.6.0-beta.22) (2022-09-15)
+
+### Bug Fixes
+
+- reactivate the submit button after a failed tap card error ([8427c3f](https://github.com/pelcro-inc/react-pelcro-js/commit/8427c3fd39517c46ff06d7589970223a1e32f19e))
+
+# [3.6.0-beta.21](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.20...v3.6.0-beta.21) (2022-09-15)
+
+### Features
+
+- add tap payment gateway ([e6e58d5](https://github.com/pelcro-inc/react-pelcro-js/commit/e6e58d5c5619cd38201e89f7ee4d884cf2050fe0))
+
+# [3.6.0-beta.20](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.19...v3.6.0-beta.20) (2022-09-14)
+
+### Features
+
+- add optional parameter to logout function ([#195](https://github.com/pelcro-inc/react-pelcro-js/issues/195)) ([f695984](https://github.com/pelcro-inc/react-pelcro-js/commit/f69598461ad81570ba5cb888b0428cc64cc41840))
+
+# [3.6.0-beta.19](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.18...v3.6.0-beta.19) (2022-09-08)
+
+### Bug Fixes
+
+- change invoice details view to check if invoice is paid or not ([#194](https://github.com/pelcro-inc/react-pelcro-js/issues/194)) ([37fac5d](https://github.com/pelcro-inc/react-pelcro-js/commit/37fac5dd895a31a97ed496376be7aba56692f242))
+
+# [3.6.0-beta.18](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.17...v3.6.0-beta.18) (2022-09-01)
+
+### Bug Fixes
+
+- add SubscriptionSuspend to components ([a4569d3](https://github.com/pelcro-inc/react-pelcro-js/commit/a4569d3b9c1e6f5666ae6e3077827f2ec5d78e60))
+- change invoice details view to check if invoice is paid or not ([#194](https://github.com/pelcro-inc/react-pelcro-js/issues/194)) ([37fac5d](https://github.com/pelcro-inc/react-pelcro-js/commit/37fac5dd895a31a97ed496376be7aba56692f242))
 
 # [3.7.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0...v3.7.0) (2022-08-31)
 

@@ -9,9 +9,10 @@
     "status": {
       "title": "Statut",
       "active": "Active",
-      "inTrial": "Dans l'essai",
-      "endingSoon": "Fin bientôt",
-      "scheduled": "Programmé"
+      "inTrial": "En essai",
+      "endingSoon": "Expire bientôt",
+      "scheduled": "Programmé",
+      "incomplete": "Incomplet"
     },
     "shipments": "Expéditions restantes",
     "logout": "Déconnexion",

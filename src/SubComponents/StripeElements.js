@@ -119,6 +119,10 @@ export const CheckoutForm = () => {
     return <div id="eProtectiframe"></div>;
   }
 
+  if (cardProcessor === "tap") {
+    return <div id="tapPaymentIframe"></div>;
+  }
+
   if (cardProcessor === "stripe") {
     return (
       <div>

@@ -204,7 +204,7 @@ export class PelcroActions {
    * User Actions
    */
 
-  logout = () => {
+  logout = (displayLogin = true) => {
     const { switchView, resetView, isAuthenticated } = this.get();
     // if user is not authenticated function execution is terminated
     if (!isAuthenticated()) {
@@ -219,7 +219,9 @@ export class PelcroActions {
     });
 
     resetView();
-    switchView("login");
+    if (displayLogin) {
+      switchView("login");
+    }
   };
 
   /**
