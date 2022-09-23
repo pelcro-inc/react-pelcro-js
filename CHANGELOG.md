@@ -1,3 +1,28 @@
+# [3.8.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.7.1...v3.8.0) (2022-09-23)
+
+
+### Bug Fixes
+
+* add onSuccess if no payment_intent conditions are met ([2ea38bf](https://github.com/pelcro-inc/react-pelcro-js/commit/2ea38bf8b65a706ee580d7e8a45251860f527780))
+* fix the error handling on auth response ([144f21c](https://github.com/pelcro-inc/react-pelcro-js/commit/144f21c981783defdacf81d824c330b37e2ffdd6))
+* incorrect translations ([ce21e71](https://github.com/pelcro-inc/react-pelcro-js/commit/ce21e717caeaade6da52bd17d09d55e45243a489))
+* reactivate the submit button after a failed tap card error ([8427c3f](https://github.com/pelcro-inc/react-pelcro-js/commit/8427c3fd39517c46ff06d7589970223a1e32f19e))
+* remove renew button when subscription status is incomplete ([9f51541](https://github.com/pelcro-inc/react-pelcro-js/commit/9f515411a6fa77395a8f79651e8f6e72ff6d7066))
+
+
+### Features
+
+* add error handling for tap authorize response ([1648c31](https://github.com/pelcro-inc/react-pelcro-js/commit/1648c31c1e743720ffa92a256069b76429876868))
+* add optional parameter to logout function ([#195](https://github.com/pelcro-inc/react-pelcro-js/issues/195)) ([f695984](https://github.com/pelcro-inc/react-pelcro-js/commit/f69598461ad81570ba5cb888b0428cc64cc41840))
+* add tap payment gateway ([e6e58d5](https://github.com/pelcro-inc/react-pelcro-js/commit/e6e58d5c5619cd38201e89f7ee4d884cf2050fe0))
+* add the confirmStripeCardPayment to the pay invoice ([9144c47](https://github.com/pelcro-inc/react-pelcro-js/commit/9144c47f65083ef7cadbc7a67f101eb1c5b8cdcc))
+* disable submit button with custom error message when sub is created ([#203](https://github.com/pelcro-inc/react-pelcro-js/issues/203)) ([717d4fe](https://github.com/pelcro-inc/react-pelcro-js/commit/717d4fe59affb483b0378f31ee8ab2e367d18e65))
+* edit the vantiv config to make the expiry date required ([#202](https://github.com/pelcro-inc/react-pelcro-js/issues/202)) ([9563565](https://github.com/pelcro-inc/react-pelcro-js/commit/9563565be3d4150765ea4cb638e6570d9a2a61fe))
+* initial fix for 3ds2 ([fede375](https://github.com/pelcro-inc/react-pelcro-js/commit/fede375ed2c59845e729c7bd2832e3e127e50441))
+* remove decrementPageViewFrequency ([#197](https://github.com/pelcro-inc/react-pelcro-js/issues/197)) ([4584453](https://github.com/pelcro-inc/react-pelcro-js/commit/4584453f004097fe59842d49f8e89afaf6aaa3d3))
+* support 3DS for stripe ([0edac64](https://github.com/pelcro-inc/react-pelcro-js/commit/0edac64dbbc213036dacc17f5e9440aa5c467b14))
+* update ([3f66826](https://github.com/pelcro-inc/react-pelcro-js/commit/3f66826e3f9a722678ce7c5234b4f0ec8360ab52))
+
 ## [3.7.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.7.0...v3.7.1) (2022-09-08)
 
 # [3.6.0-beta.31](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.6.0-beta.30...v3.6.0-beta.31) (2022-09-22)
