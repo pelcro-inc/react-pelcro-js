@@ -1,3 +1,10 @@
+## [3.8.1-beta.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.8.0...v3.8.1-beta.1) (2022-09-30)
+
+
+### Bug Fixes
+
+* check for the credit card icon name before applying toLowerCase function ([8d8cccf](https://github.com/pelcro-inc/react-pelcro-js/commit/8d8cccf13167467ce0214c5e58c268033da233de))
+
 # [3.8.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.7.1...v3.8.0) (2022-09-23)
 
 
