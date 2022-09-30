@@ -192,7 +192,6 @@ class SelectModal extends Component {
               <p className="plc-w-1/2 plc-text-xs pelcro-select-product-cost">
                 {this.locale("labels.startingAt")}{" "}
                 {this.countStartPrice(product.plans)}
-                {console.log(product)}
               </p>
             )}
             <Button
