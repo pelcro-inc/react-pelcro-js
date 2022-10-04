@@ -14,12 +14,22 @@ export const RegisterButton = ({
     state: {
       emailError,
       passwordError,
+      firstNameError,
+      lastNameError,
+      phoneError,
       email,
       password,
+      firstName,
+      lastName,
+      phone,
       buttonDisabled
     },
     dispatch
   } = useContext(store);
+
+  const supportsTap = Boolean(
+    window.Pelcro.site.read()?.tap_gateway_settings
+  );
 
   const { t } = useTranslation("register");
 
@@ -30,10 +40,28 @@ export const RegisterButton = ({
       buttonDisabled ||
         emailError ||
         passwordError ||
+        firstNameError ||
+        lastNameError ||
+        phoneError ||
         !email.length ||
-        !password.length
+        !password.length ||
+        (supportsTap && !firstName.length) ||
+        (supportsTap && !lastName.length) ||
+        (supportsTap && !phone.length)
     );
-  }, [buttonDisabled, emailError, passwordError, email, password]);
+  }, [
+    buttonDisabled,
+    emailError,
+    passwordError,
+    firstNameError,
+    lastNameError,
+    phoneError,
+    email,
+    password,
+    firstName,
+    lastName,
+    phone
+  ]);
 
   return (
     <Button

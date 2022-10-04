@@ -1,87 +1,88 @@
 {
-    "title": "계정 만들기",
-    "subtitle": "아래에 이메일과 비밀번호를 입력하세요.",
+  "title": "계정 만들기",
+  "subtitle": "아래에 이메일과 비밀번호를 입력하세요.",
+  "labels": {
+    "signUpFacebook": "Facebook으로 가입하기",
+    "signUpGoogle": "Google로 가입하기",
+    "signUpEmail": "이메일로 가입하기",
+    "password": "비밀번호",
+    "email": "이메일",
+    "passwordPlaceholder": "비밀번호 설정",
+    "emailPlaceholder": "이메일 입력",
+    "required": "필수 항목",
+    "firstName": "이름",
+    "lastName": "성",
+    "phone": "핸드폰"
+  },
+  "messages": {
+    "alreadyHaveAccount": "이미 계정이 있습니까?",
+    "createAccount": "계정 만들기",
+    "loginHere": "여기에서 로그인하세요.",
+    "selectPlan": "다른 요금제를 선택하세요.",
+    "here": "여기",
+    "iAgree": {
+      "iAgree": "본인은",
+      "terms": "서비스 약관",
+      "and": "및",
+      "privacy": "개인정보 보호정책에 동의합니다."
+    },
+    "preferDisable": {
+      "click": "여기를",
+      "here": "클릭하여",
+      "ifPrefer": "광고 차단기를 비활성화하실 수 있습니다."
+    },
+    "socialLogin": {
+      "label": "다음을 계속 사용: "
+    }
+  },
+  "errors": {
+    "": ""
+  },
+  "gift": {
+    "titles": {
+      "firstTitle": "아래에 받는 사람 정보를 입력하세요."
+    },
     "labels": {
-      "signUpFacebook": "Facebook으로 가입하기",
-      "signUpGoogle": "Google로 가입하기",
-      "signUpEmail": "이메일로 가입하기",
-      "password": "비밀번호",
-      "email": "이메일",
-      "passwordPlaceholder": "비밀번호 설정",
-      "emailPlaceholder": "이메일 입력",
-      "required": "필수 항목",
       "firstName": "이름",
-      "lastName": "성"
+      "lastName": "성",
+      "email": "이메일",
+      "startDate": "선물 날짜",
+      "giftMessage": "선물 메시지(남은 글자 수: {{count}})",
+      "required": "필수 항목",
+      "firstNamePlaceholder": "이름",
+      "lastNamePlaceholder": "성",
+      "emailPlaceholder": "이메일 주소"
+    },
+    "buttons": {
+      "gift": "선물"
     },
     "messages": {
-      "alreadyHaveAccount": "이미 계정이 있습니까?",
-      "createAccount": "계정 만들기",
-      "loginHere": "여기에서 로그인하세요.",
-      "selectPlan": "다른 요금제를 선택하세요.",
-      "here": "여기",
-      "iAgree": {
-        "iAgree": "본인은",
-        "terms": "서비스 약관",
-        "and": "및",
-        "privacy": "개인정보 보호정책에 동의합니다."
-      },
-      "preferDisable": {
-        "click": "여기를",
-        "here": "클릭하여",
-        "ifPrefer": "광고 차단기를 비활성화하실 수 있습니다."
-      },
-      "socialLogin": {
-        "label": "다음을 계속 사용: "
-      }
+      "enterEmail": "선물을 받을 분의 이메일을 입력해주세요.",
+      "invalidDate": "선물 날짜는 오늘로부터 1년 이내여야 합니다.",
+      "giftDateInfo": "받는 분이 선물을 사용하실 수 있도록, 선택된 날짜에 귀하의 선물 메시지가 담겨 있는 이메일 알림이 전송됩니다.",
+      "giftMessageInfo": "받는 분을 위한 선물 메시지와 서명을 남기는 것을 잊지 마시기 바랍니다."
+    }
+  },
+  "redeem": {
+    "titles": {
+      "firstTitle": "선물 사용하기",
+      "secondTitle": "아래에 선물 코드를 입력하세요."
     },
-    "errors": {
-      "": ""
+    "labels": {
+      "code": "선물 코드 입력",
+      "codePlaceholder": "선물 코드",
+      "required": "필수 항목"
     },
-    "gift": {
-      "titles": {
-        "firstTitle": "아래에 받는 사람 정보를 입력하세요."
-      },
-      "labels": {
-        "firstName": "이름",
-        "lastName": "성",
-        "email": "이메일",
-        "startDate": "선물 날짜",
-        "giftMessage": "선물 메시지(남은 글자 수: {{count}})",
-        "required": "필수 항목",
-        "firstNamePlaceholder": "이름",
-        "lastNamePlaceholder": "성",
-        "emailPlaceholder": "이메일 주소"
-      },
-      "buttons": {
-        "gift": "선물"
-      },
-      "messages": {
-        "enterEmail": "선물을 받을 분의 이메일을 입력해주세요.",
-        "invalidDate": "선물 날짜는 오늘로부터 1년 이내여야 합니다.",
-        "giftDateInfo": "받는 분이 선물을 사용하실 수 있도록, 선택된 날짜에 귀하의 선물 메시지가 담겨 있는 이메일 알림이 전송됩니다.",
-        "giftMessageInfo": "받는 분을 위한 선물 메시지와 서명을 남기는 것을 잊지 마시기 바랍니다."
-      }
+    "buttons": {
+      "redeem": "선물 사용"
     },
-    "redeem": {
-      "titles": {
-        "firstTitle": "선물 사용하기",
-        "secondTitle": "아래에 선물 코드를 입력하세요."
-      },
-      "labels": {
-        "code": "선물 코드 입력",
-        "codePlaceholder": "선물 코드",
-        "required": "필수 항목"
-      },
-      "buttons": {
-        "redeem": "선물 사용"
-      },
-      "footer": {
-        "click": "여기를",
-        "here": "클릭하여",
-        "toAdd": "주소를 추가하세요."
-      },
-      "messages": {
-        "enterGiftCode": "선물 코드를 입력해 주십시오."
-      }
+    "footer": {
+      "click": "여기를",
+      "here": "클릭하여",
+      "toAdd": "주소를 추가하세요."
+    },
+    "messages": {
+      "enterGiftCode": "선물 코드를 입력해 주십시오."
     }
   }
+}

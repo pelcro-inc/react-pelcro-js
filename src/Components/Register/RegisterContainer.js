@@ -4,6 +4,9 @@ import {
   SET_PASSWORD,
   SET_EMAIL_ERROR,
   SET_PASSWORD_ERROR,
+  SET_FIRST_NAME_ERROR,
+  SET_LAST_NAME_ERROR,
+  SET_PHONE_ERROR,
   RESET_LOGIN_FORM,
   SET_CONFIRM_PASSWORD,
   CONFIRM_PASSWORD_USED,
@@ -12,6 +15,7 @@ import {
   DISABLE_REGISTRATION_BUTTON,
   SET_FIRST_NAME,
   SET_LAST_NAME,
+  SET_PHONE,
   SET_TEXT_FIELD,
   SET_SELECT,
   SHOW_ALERT,
@@ -28,14 +32,18 @@ import { cleanObjectNullValues } from "../../utils/utils";
 const initialState = {
   email: "",
   password: "",
+  firstName: "",
+  lastName: "",
+  phone: "",
   emailError: null,
   passwordError: null,
   confirmPassword: "",
   confirmPasswordError: null,
   confirmPasswordUsed: false,
   buttonDisabled: false,
-  firstName: null,
-  lastName: null,
+  firstNameError: null,
+  lastNameError: null,
+  phoneError: null,
   selectFields: {},
   alert: {
     type: "error",
@@ -63,6 +71,7 @@ const RegisterContainer = ({
       password,
       firstName,
       lastName,
+      phone,
       organization,
       jobTitle,
       selectFields
@@ -90,6 +99,7 @@ const RegisterContainer = ({
           password,
           first_name: firstName,
           last_name: lastName,
+          phone: phone,
           security_token: securityToken,
           metadata: { organization, jobTitle, ...selectFields }
         },
@@ -160,7 +170,6 @@ const RegisterContainer = ({
             ...state,
             selectFields: { ...state.selectFields, ...action.payload }
           });
-
         case SET_EMAIL:
           return Update({
             ...state,
@@ -173,17 +182,23 @@ const RegisterContainer = ({
             password: action.payload,
             passwordError: null
           });
-
         case SET_FIRST_NAME:
           return Update({
             ...state,
-            firstName: action.payload
+            firstName: action.payload,
+            firstNameError: null
           });
-
         case SET_LAST_NAME:
           return Update({
             ...state,
-            lastName: action.payload
+            lastName: action.payload,
+            lastNameError: null
+          });
+        case SET_PHONE:
+          return Update({
+            ...state,
+            phone: action.payload,
+            phoneError: null
           });
 
         case SET_TEXT_FIELD:
@@ -209,6 +224,24 @@ const RegisterContainer = ({
             ...state,
             passwordError: action.payload,
             password: ""
+          });
+        case SET_FIRST_NAME_ERROR:
+          return Update({
+            ...state,
+            firstNameError: action.payload,
+            firstName: ""
+          });
+        case SET_LAST_NAME_ERROR:
+          return Update({
+            ...state,
+            lastNameError: action.payload,
+            lastName: ""
+          });
+        case SET_PHONE_ERROR:
+          return Update({
+            ...state,
+            phoneError: action.payload,
+            phone: null
           });
         case SET_CONFIRM_PASSWORD_ERROR:
           return Update({
