@@ -11,7 +11,11 @@ import {
 } from "../utils/action-types";
 import { Input } from "./Input";
 
-export function LastName({ store, ...otherProps }) {
+export function LastName({
+  initWithUserLastName = true,
+  store,
+  ...otherProps
+}) {
   const { t } = useTranslation("common");
 
   const {
@@ -40,6 +44,27 @@ export function LastName({ store, ...otherProps }) {
   useEffect(() => {
     handleInputChange(lastName);
   }, [finishedTyping, lastName, handleInputChange]);
+
+  // Initialize last name field with user's last name
+  const loadLastNameIntoField = () => {
+    handleInputChange(window.Pelcro.user.read().last_name);
+  };
+
+  useEffect(() => {
+    if (initWithUserLastName) {
+      document.addEventListener("PelcroUserLoaded", () => {
+        loadLastNameIntoField();
+      });
+      loadLastNameIntoField();
+
+      return () => {
+        document.removeEventListener(
+          "PelcroUserLoaded",
+          handleInputChange
+        );
+      };
+    }
+  }, []);
 
   return (
     <Input

@@ -8,7 +8,11 @@ import { useTranslation } from "react-i18next";
 import { SET_PHONE, SET_PHONE_ERROR } from "../utils/action-types";
 import { Input } from "./Input";
 
-export function Phone({ store, ...otherProps }) {
+export function Phone({
+  initWithUserPhone = true,
+  store,
+  ...otherProps
+}) {
   const { t } = useTranslation("common");
 
   const {
@@ -37,6 +41,27 @@ export function Phone({ store, ...otherProps }) {
   useEffect(() => {
     handleInputChange(phone);
   }, [finishedTyping, phone, handleInputChange]);
+
+  // Initialize phone field with user's phone
+  const loadPhoneIntoField = () => {
+    handleInputChange(window.Pelcro.user.read().phone);
+  };
+
+  useEffect(() => {
+    if (initWithUserPhone) {
+      document.addEventListener("PelcroUserLoaded", () => {
+        loadPhoneIntoField();
+      });
+      loadPhoneIntoField();
+
+      return () => {
+        document.removeEventListener(
+          "PelcroUserLoaded",
+          handleInputChange
+        );
+      };
+    }
+  }, []);
 
   return (
     <Input
