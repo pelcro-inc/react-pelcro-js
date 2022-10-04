@@ -1,3 +1,10 @@
+# [3.9.0-beta.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.8.1...v3.9.0-beta.1) (2022-10-04)
+
+
+### Features
+
+* add firstName, lastName, and phone to be required in register if tap is enabled ([f7b7f7c](https://github.com/pelcro-inc/react-pelcro-js/commit/f7b7f7c6848b043d4337731280437ddc30e75058))
+
 ## [3.8.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.8.0...v3.8.1) (2022-09-30)
 
 
