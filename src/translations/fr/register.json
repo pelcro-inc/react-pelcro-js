@@ -11,7 +11,8 @@
     "emailPlaceholder": "Courriel",
     "required": "Champs obligatoires",
     "firstName": "Prénom",
-    "lastName": "Nom de famille"
+    "lastName": "Nom de famille",
+    "phone": "Téléphoner"
   },
   "messages": {
     "alreadyHaveAccount": "Vous avez déjà un compte?",

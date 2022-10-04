@@ -12,6 +12,7 @@ import { FacebookLoginButton } from "../common/FacebookLoginButton/FacebookLogin
 import { GoogleLoginButton } from "../common/GoogleLoginButton/GoogleLoginButton";
 import { Auth0LoginButton } from "../common/Auth0LoginButton/Auth0LoginButton";
 import { Link } from "../../SubComponents/Link";
+import { RegisterPhone } from "./RegisterPhone";
 
 /**
  *
@@ -31,6 +32,10 @@ export function RegisterView(props) {
   const showNameFields =
     window.Pelcro?.uiSettings?.enableNameFieldsInRegister;
 
+  const supportsTap = Boolean(
+    window.Pelcro.site.read()?.tap_gateway_settings
+  );
+
   return (
     <div id="pelcro-register-view">
       <div className="plc-mb-6 plc-text-center plc-text-gray-900 pelcro-title-wrapper">
@@ -43,19 +48,33 @@ export function RegisterView(props) {
       >
         <RegisterContainer {...props}>
           <AlertWithContext />
-          {showNameFields && (
+          {(showNameFields || supportsTap) && (
             <div className="plc-flex plc-items-start">
               <RegisterFirstName
                 id="pelcro-input-first-name"
                 label={t("labels.firstName")}
+                errorId="pelcro-input-firstName-error"
+                required={supportsTap ? true : false}
               />
               <RegisterLastName
                 wrapperClassName="plc-ml-3"
                 id="pelcro-input-last-name"
                 label={t("labels.lastName")}
+                errorId="pelcro-input-lastName-error"
+                required={supportsTap ? true : false}
               />
             </div>
           )}
+
+          {supportsTap && (
+            <RegisterPhone
+              id="pelcro-input-phone"
+              errorId="pelcro-input-phone-error"
+              label={t("labels.phone")}
+              required={supportsTap ? true : false}
+            />
+          )}
+
           <RegisterEmail
             id="pelcro-input-email"
             errorId="pelcro-input-email-error"
