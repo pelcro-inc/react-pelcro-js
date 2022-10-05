@@ -17,25 +17,19 @@ import React, { useState } from "react";
  */
 export const DashboardLink = ({
   show = true,
+  activeDashboardLink,
   name,
   icon,
   title,
-  onClick
+  setActiveDashboardLink
 }) => {
 
-  const [activeMenu, setActiveMenu] = useState("");
-
-  const dashboardLinkClicked = (menuToToggle) => {
-    setActiveMenu(menuToToggle);
-    onClick?.()
-  };
-
-  const isActive = activeMenu === name;
+  const isActive = activeDashboardLink === name;
 
   return show ? (
     <div
       id={name}
-      className={`plc-border-l-2 plc-border-transparent plc-border-solid plc-group
+      className={`plc-border-l-4 plc-border-transparent plc-border-solid plc-group
         ${
           isActive
             ? "plc-border-solid plc-bg-grey-200 plc-border-primary-400"
@@ -43,7 +37,7 @@ export const DashboardLink = ({
         }`}
     >
       <header
-        onClick={() => dashboardLinkClicked(name)}
+        onClick={() => setActiveDashboardLink(name)}
         className="plc-flex plc-items-center plc-justify-between plc-p-5 plc-px-4 plc-cursor-pointer plc-select-none sm:plc-px-8"
       >
         <span

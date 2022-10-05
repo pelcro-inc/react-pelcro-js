@@ -5,25 +5,24 @@ import { ReactComponent as CheckMarkIcon } from "../../../assets/check-mark.svg"
 import { ReactComponent as EditIcon } from "../../../assets/edit.svg";
 import { userMustVerifyEmail } from "../../../utils/utils";
 import { usePelcro } from "../../../hooks/usePelcro";
+import { Card } from "../Card";
+import { ToggleSwitch } from "../../../SubComponents/ToggleSwitch";
 
 export const MembershipsMenu = (props) => {
   const { t } = useTranslation("dashboard");
 
   return (
-    <table className="plc-w-full plc-table-fixed">
-      <thead className="plc-text-xs plc-font-semibold plc-tracking-wider plc-text-gray-400 plc-uppercase ">
-        <tr>
-          <th className="plc-w-5/12 ">{t("labels.plan")}</th>
-          <th className="plc-w-4/12 ">{t("labels.status.title")}</th>
-          <th className="plc-w-3/12 ">{t("labels.actions")}</th>
-        </tr>
-      </thead>
-      <tbody>
-        {/* Spacer */}
-        <tr className="plc-h-4"></tr>
-      </tbody>
-      <MembershipsItems {...props} />
-    </table>
+    <Card
+      id="pelcro-dashboard-donation-menu"
+      className="plc-max-w-80% plc-m-auto plc-mt-20"
+      title={t("labels.memberships")}
+    >
+      <table className="plc-w-full plc-table-fixed">
+        <tbody>
+          <MembershipsItems {...props} />
+        </tbody>
+      </table>
+    </Card>
   );
 };
 
@@ -32,7 +31,7 @@ const MembershipsItems = () => {
   const { switchView, setSelectedMembership, switchToAddressView } =
     usePelcro();
 
-  const memberships = getActiveMemberships();
+  const memberships = window.Pelcro.user.read().memberships ?? [];
 
   const onChangeAddressClick = (membershipId) => {
     if (userMustVerifyEmail()) {
@@ -69,27 +68,8 @@ const MembershipsItems = () => {
                   </>
                 )}
               </td>
-              <td>
-                <span
-                  className={`plc-inline-flex plc-p-1 plc-text-xs plc-font-semibold ${
-                    getMemberShipStatus(membership.status).bgColor
-                  } plc-uppercase ${
-                    getMemberShipStatus(membership.status).textColor
-                  } plc-rounded-lg`}
-                >
-                  {getMemberShipStatus(membership.status).icon}
-                  {getMemberShipStatus(membership.status).title}
-                </span>
-              </td>
-              <td>
-                <Button
-                  variant="ghost"
-                  icon={<EditIcon className="plc-w-4 plc-h-4" />}
-                  className="plc-text-blue-400 focus:plc-ring-blue-500 pelcro-dashboard-membership-address-button"
-                  onClick={() => onChangeAddressClick(membership.id)}
-                >
-                  {`${t("labels.editAddress")}`}
-                </Button>
+              <td className="plc-text-right">
+                <ToggleSwitch isActive={membership.status === "active"}/>
               </td>
             </tr>
           }

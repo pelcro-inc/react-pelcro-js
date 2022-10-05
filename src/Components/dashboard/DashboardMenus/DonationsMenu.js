@@ -4,6 +4,8 @@ import {
   getFormattedPriceByLocal,
   getPageOrDefaultLanguage
 } from "../../../utils/utils";
+import { AddNew } from "../AddNew";
+import { Card } from "../Card";
 
 export const DonationsMenu = () => {
   const { t } = useTranslation("dashboard");
@@ -46,19 +48,24 @@ export const DonationsMenu = () => {
     });
 
   return (
-    <table className="plc-w-full plc-table-fixed pelcro-donations-table">
-      <thead className="plc-text-xs plc-font-semibold plc-tracking-wider plc-text-gray-400 plc-uppercase ">
-        <tr>
-          <th className="plc-w-6/12 ">{t("labels.plan")}</th>
-          <th className="plc-w-6/12 ">{t("labels.startDate")}</th>
-        </tr>
-      </thead>
-      <tbody>
-        {/* Spacer */}
-        <tr className="plc-h-4"></tr>
-        {subscriptions}
-      </tbody>
-    </table>
+    <Card
+      id="pelcro-dashboard-donation-menu"
+      className="plc-max-w-80% plc-m-auto plc-mt-20"
+      title={t("labels.donations")}
+    >
+      <table className="plc-w-full plc-table-fixed pelcro-donations-table plc-text-left">
+        <thead className="plc-text-xs plc-font-semibold plc-tracking-wider plc-text-gray-400 plc-uppercase ">
+          <tr>
+            <th className="plc-w-1/4">{t("labels.plan")}</th>
+            <th className="plc-w-1/4">{t("labels.startDate")}</th>
+            <th className="plc-w-1/4">{t("labels.status.title")}</th>
+            <th className="plc-w-1/4">{t("labels.actions")}</th>
+          </tr>
+        </thead>
+        <tbody>{subscriptions}</tbody>
+      </table>
+      <AddNew title={`New Donations`} />
+    </Card>
   );
 };
 
