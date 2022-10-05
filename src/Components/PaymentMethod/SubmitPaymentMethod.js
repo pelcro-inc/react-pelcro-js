@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { usePelcro } from "../../hooks/usePelcro";
 import { useTranslation } from "react-i18next";
 import { store } from "./PaymentMethodContainer";
@@ -14,7 +14,17 @@ export const SubmitPaymentMethod = ({ onClick, ...otherProps }) => {
   const { t } = useTranslation("checkoutForm");
   const {
     dispatch,
-    state: { disableSubmit, isLoading, updatedPrice }
+    state: {
+      firstNameError,
+      lastNameError,
+      phoneError,
+      firstName,
+      lastName,
+      phone,
+      disableSubmit,
+      isLoading,
+      updatedPrice
+    }
   } = useContext(store);
 
   const planQuantity = plan?.quantity ?? 1;
@@ -24,6 +34,46 @@ export const SubmitPaymentMethod = ({ onClick, ...otherProps }) => {
     plan?.currency,
     getPageOrDefaultLanguage()
   );
+
+  const supportsTap = Boolean(
+    window.Pelcro.site.read()?.tap_gateway_settings
+  );
+  const isUserFirstName = Boolean(
+    window.Pelcro.user.read().first_name
+  );
+  const isUserLastName = Boolean(window.Pelcro.user.read().last_name);
+  const isUserPhone = Boolean(window.Pelcro.user.read().phone);
+
+  const [isDisabled, setDisabled] = useState(true);
+
+  useEffect(() => {
+    if (
+      supportsTap &&
+      isUserFirstName &&
+      isUserLastName &&
+      isUserPhone
+    ) {
+      setDisabled(disableSubmit);
+    } else {
+      setDisabled(
+        disableSubmit ||
+          (supportsTap && firstNameError) ||
+          (supportsTap && lastNameError) ||
+          (supportsTap && phoneError) ||
+          (supportsTap && !firstName.length) ||
+          (supportsTap && !lastName.length) ||
+          (supportsTap && !phone.length)
+      );
+    }
+  }, [
+    disableSubmit,
+    firstNameError,
+    lastNameError,
+    phoneError,
+    firstName,
+    lastName,
+    phone
+  ]);
 
   return (
     <Button
@@ -35,7 +85,7 @@ export const SubmitPaymentMethod = ({ onClick, ...otherProps }) => {
         dispatch({ type: SUBMIT_PAYMENT });
         onClick?.();
       }}
-      disabled={disableSubmit}
+      disabled={isDisabled}
       {...otherProps}
     >
       {/* Show price on button only if there's a selected plan */}
