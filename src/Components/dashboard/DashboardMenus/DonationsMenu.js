@@ -9,13 +9,16 @@ import { ReactComponent as XCircleIcon } from "../../../assets/x-icon-solid.svg"
 import { ReactComponent as RefreshIcon } from "../../../assets/refresh.svg";
 import { Button } from "../../../SubComponents/Button";
 import { usePelcro } from "../../../hooks/usePelcro";
+import { AddNew } from "../AddNew";
+import { Card } from "../Card";
 
-export const DonationsMenu = ({ reactivateSubscription, disableSubmit, cancelSubscription }) => {
+export const DonationsMenu = ({
+  reactivateSubscription,
+  disableSubmit,
+  cancelSubscription
+}) => {
   const { t } = useTranslation("dashboard");
-  const {
-    switchView,
-    setSubscriptionToCancel
-  } = usePelcro();
+  const { switchView, setSubscriptionToCancel } = usePelcro();
 
   const subscriptions = getDonationSubs()
     .sort((a, b) => a.expires_at - b.expires_at)
@@ -130,20 +133,24 @@ export const DonationsMenu = ({ reactivateSubscription, disableSubmit, cancelSub
     });
 
   return (
-    <table className="plc-w-full plc-table-fixed pelcro-donations-table">
-      <thead className="plc-text-xs plc-font-semibold plc-tracking-wider plc-text-gray-400 plc-uppercase ">
-        <tr>
-          <th className="plc-w-6/12 ">{t("labels.plan")}</th>
-          <th className="plc-w-6/12 ">{t("labels.startDate")}</th>
-          <th className="plc-w-3/12 ">{t("labels.actions")}</th>
-        </tr>
-      </thead>
-      <tbody>
-        {/* Spacer */}
-        <tr className="plc-h-4"></tr>
-        {subscriptions}
-      </tbody>
-    </table>
+    <Card
+      id="pelcro-dashboard-donation-menu"
+      className="plc-max-w-80% plc-m-auto plc-mt-20"
+      title={t("labels.donations")}
+    >
+      <table className="plc-w-full plc-table-fixed pelcro-donations-table plc-text-left">
+        <thead className="plc-text-xs plc-font-semibold plc-tracking-wider plc-text-gray-400 plc-uppercase ">
+          <tr>
+            <th className="plc-w-1/4">{t("labels.plan")}</th>
+            <th className="plc-w-1/4">{t("labels.startDate")}</th>
+            <th className="plc-w-1/4">{t("labels.status.title")}</th>
+            <th className="plc-w-1/4">{t("labels.actions")}</th>
+          </tr>
+        </thead>
+        <tbody>{subscriptions}</tbody>
+      </table>
+      <AddNew title={`New Donations`} />
+    </Card>
   );
 };
 

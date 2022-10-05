@@ -4,7 +4,7 @@
   }
 
   .pelcro-root .pelcro-modal-overlay {
-    @apply plc-fixed plc-top-0 plc-right-0 plc-flex plc-items-center plc-justify-center plc-w-full plc-h-full plc-overflow-auto plc-bg-white plc-z-max plc-bg-opacity-100;
+    @apply plc-fixed plc-top-0 plc-left-0 plc-flex plc-items-center plc-justify-center plc-w-full plc-h-full plc-overflow-auto plc-bg-black plc-z-max plc-bg-opacity-60;
     backdrop-filter: blur(2px);
   }
 
