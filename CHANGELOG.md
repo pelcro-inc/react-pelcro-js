@@ -1,3 +1,10 @@
+# [3.9.0-beta.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.9.0-beta.2...v3.9.0-beta.3) (2022-10-05)
+
+
+### Features
+
+* add more required fields in the checkout view when tap is enabled ([#205](https://github.com/pelcro-inc/react-pelcro-js/issues/205)) ([32ea5a8](https://github.com/pelcro-inc/react-pelcro-js/commit/32ea5a8d755b465a6dc2fa1ebe9441189b6ef0d2))
+
 # [3.9.0-beta.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.9.0-beta.1...v3.9.0-beta.2) (2022-10-04)
 
 
