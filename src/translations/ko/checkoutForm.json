@@ -1,24 +1,27 @@
 {
-    "messages": {
-      "youAreSafe": "PCI 준수 128비트 SSL 인증서로 보호됩니다. 제공: ",
-      "bankRedirection": "잠시만 기다려 주십시오. 결제 은행으로 연결 중입니다."
-    },
-    "labels": {
-      "card": "카드 번호 입력",
-      "date": "만료일",
-      "CVC": "CVC",
-      "required": "필수 항목",
-      "submit": "제출",
-      "pay": "결제",
-      "addCode": "쿠폰 코드 추가",
-      "hideCode": "숨기기",
-      "codePlaceholder": "쿠폰 코드 입력",
-      "applyCouponCode": "적용",
-      "code": "쿠폰 코드",
-      "for": "관련",
-      "interval": "{{count}} {{interval}}",
-      "interval_plural": "{{count}} {{interval}}",
-      "tax": "+ 세금",
-      "removeCoupon": "제거"
-    }
+  "messages": {
+    "youAreSafe": "PCI 준수 128비트 SSL 인증서로 보호됩니다. 제공: ",
+    "bankRedirection": "잠시만 기다려 주십시오. 결제 은행으로 연결 중입니다."
+  },
+  "labels": {
+    "card": "카드 번호 입력",
+    "date": "만료일",
+    "CVC": "CVC",
+    "required": "필수 항목",
+    "submit": "제출",
+    "pay": "결제",
+    "addCode": "쿠폰 코드 추가",
+    "hideCode": "숨기기",
+    "codePlaceholder": "쿠폰 코드 입력",
+    "applyCouponCode": "적용",
+    "code": "쿠폰 코드",
+    "for": "관련",
+    "interval": "{{count}} {{interval}}",
+    "interval_plural": "{{count}} {{interval}}",
+    "tax": "+ 세금",
+    "removeCoupon": "제거",
+    "firstName": "이름",
+    "lastName": "성",
+    "phone": "핸드폰"
   }
+}

@@ -3,5 +3,5 @@ import { store } from "./GiftCreateContainer";
 import { FirstName } from "../../SubComponents/FirstName";
 
 export const GiftCreateFirstName = (props) => (
-  <FirstName store={store} {...props} />
+  <FirstName initWithUserFirstName={false} store={store} {...props} />
 );

@@ -19,6 +19,9 @@
     "interval": "{{count}} {{interval}}",
     "interval_plural": "{{count}} {{interval}}s",
     "tax": "+ Taxe",
-    "removeCoupon": "RETIRER"
+    "removeCoupon": "RETIRER",
+    "firstName": "Prénom",
+    "lastName": "Nom de famille",
+    "phone": "Téléphoner"
   }
 }

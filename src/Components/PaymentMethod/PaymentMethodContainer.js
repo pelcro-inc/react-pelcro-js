@@ -36,7 +36,13 @@ import {
   UPDATE_PAYMENT_REQUEST,
   SHOW_ALERT,
   SUBSCRIBE,
-  REMOVE_APPLIED_COUPON
+  REMOVE_APPLIED_COUPON,
+  SET_FIRST_NAME,
+  SET_LAST_NAME,
+  SET_PHONE,
+  SET_FIRST_NAME_ERROR,
+  SET_LAST_NAME_ERROR,
+  SET_PHONE_ERROR
 } from "../../utils/action-types";
 import {
   getErrorMessages,
@@ -87,6 +93,12 @@ const initialState = {
   updatedPrice: null,
   taxAmount: null,
   currentPlan: null,
+  firstName: "",
+  lastName: "",
+  phone: "",
+  firstNameError: null,
+  lastNameError: null,
+  phoneError: null,
   alert: {
     type: "error",
     content: ""
@@ -198,9 +210,18 @@ const PaymentMethodContainerWithoutStripe = ({
             }
           });
         } else {
+          console.log("First Name", state.firstName);
+          console.log("Last Name", state.lastName);
+          console.log("Phone", state.phone);
           window.Pelcro.payment.authorize(
             {
               auth_token: window.Pelcro.user.read().auth_token,
+              first_name:
+                window.Pelcro.user.read().first_name ||
+                state.firstName,
+              last_name:
+                window.Pelcro.user.read().last_name || state.lastName,
+              phone: window.Pelcro.user.read().phone || state.phone,
               site_id: window.Pelcro.siteid,
               amount: totalAmount,
               currency:
@@ -1715,7 +1736,7 @@ const PaymentMethodContainerWithoutStripe = ({
               }
 
               if (getSiteCardProcessor() === "tap") {
-                return submitUsingTap();
+                return submitUsingTap(state, dispatch);
               }
 
               if (selectedPaymentMethodId) {
@@ -1788,6 +1809,48 @@ const PaymentMethodContainerWithoutStripe = ({
           );
         case SET_PERCENT_OFF:
           return Update({ ...state, percentOff: action.payload });
+
+        case SET_FIRST_NAME:
+          return Update({
+            ...state,
+            firstName: action.payload,
+            firstNameError: null
+          });
+
+        case SET_LAST_NAME:
+          return Update({
+            ...state,
+            lastName: action.payload,
+            lastNameError: null
+          });
+
+        case SET_PHONE:
+          return Update({
+            ...state,
+            phone: action.payload,
+            phoneError: null
+          });
+
+        case SET_FIRST_NAME_ERROR:
+          return Update({
+            ...state,
+            firstNameError: action.payload,
+            firstName: ""
+          });
+
+        case SET_LAST_NAME_ERROR:
+          return Update({
+            ...state,
+            lastNameError: action.payload,
+            lastName: ""
+          });
+
+        case SET_PHONE_ERROR:
+          return Update({
+            ...state,
+            phoneError: action.payload,
+            phone: null
+          });
 
         case SHOW_ALERT:
           return Update({
