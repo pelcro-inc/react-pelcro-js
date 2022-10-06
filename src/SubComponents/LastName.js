@@ -31,11 +31,15 @@ export function LastName({
 
       if (lastName?.length) {
         dispatch({ type: SET_LAST_NAME, payload: lastName });
-      } else if (finishedTyping && otherProps.required) {
-        dispatch({
-          type: SET_LAST_NAME_ERROR,
-          payload: t("validation.enterLastName")
-        });
+      } else {
+        if (finishedTyping && otherProps.required) {
+          dispatch({
+            type: SET_LAST_NAME_ERROR,
+            payload: t("validation.enterLastName")
+          });
+        } else {
+          dispatch({ type: SET_LAST_NAME, payload: lastName });
+        }
       }
     },
     [dispatch, lastName, finishedTyping]

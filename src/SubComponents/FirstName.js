@@ -31,11 +31,15 @@ export function FirstName({
 
       if (firstName?.length) {
         dispatch({ type: SET_FIRST_NAME, payload: firstName });
-      } else if (finishedTyping && otherProps.required) {
-        dispatch({
-          type: SET_FIRST_NAME_ERROR,
-          payload: t("validation.enterFirstName")
-        });
+      } else {
+        if (finishedTyping && otherProps.required) {
+          dispatch({
+            type: SET_FIRST_NAME_ERROR,
+            payload: t("validation.enterFirstName")
+          });
+        } else {
+          dispatch({ type: SET_FIRST_NAME, payload: firstName });
+        }
       }
     },
     [dispatch, firstName, finishedTyping]
