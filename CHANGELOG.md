@@ -1,3 +1,26 @@
+# [3.9.0-beta.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.9.0-beta.2...v3.9.0-beta.3) (2022-10-05)
+
+
+### Features
+
+* add more required fields in the checkout view when tap is enabled ([#205](https://github.com/pelcro-inc/react-pelcro-js/issues/205)) ([32ea5a8](https://github.com/pelcro-inc/react-pelcro-js/commit/32ea5a8d755b465a6dc2fa1ebe9441189b6ef0d2))
+
+# [3.9.0-beta.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.9.0-beta.1...v3.9.0-beta.2) (2022-10-04)
+
+
+### Bug Fixes
+
+* change the siteid back to 85 ([0c97df4](https://github.com/pelcro-inc/react-pelcro-js/commit/0c97df411eabe96d62623f07a6fbe24718ca64c1))
+* load the firstName, lastName, and Phone in the user update form if exist ([e217985](https://github.com/pelcro-inc/react-pelcro-js/commit/e217985ccd8653375a64955ed302a781b7346426))
+* reactivate the submit button if there was an error with the card info ([245a013](https://github.com/pelcro-inc/react-pelcro-js/commit/245a013f0460407beb64f5b1ef700f9d5c27d844))
+
+
+### Features
+
+* add firstName, lastName, and phone to be required in register if tap is enabled ([4e7ea2f](https://github.com/pelcro-inc/react-pelcro-js/commit/4e7ea2fa9a99e7efe231391300a023ec9d0d9e4f))
+* add two tap related check functions ([00ec4ee](https://github.com/pelcro-inc/react-pelcro-js/commit/00ec4ee1f5b9dcdaddefea069d5c99fcabb8c2de))
+* refactor and add test ([b9848ff](https://github.com/pelcro-inc/react-pelcro-js/commit/b9848ffdfea477b67a3f780f59a55c9a61983def))
+
 # [3.9.0-beta.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.8.1...v3.9.0-beta.1) (2022-10-04)
 
 
