@@ -210,9 +210,6 @@ const PaymentMethodContainerWithoutStripe = ({
             }
           });
         } else {
-          console.log("First Name", state.firstName);
-          console.log("Last Name", state.lastName);
-          console.log("Phone", state.phone);
           window.Pelcro.payment.authorize(
             {
               auth_token: window.Pelcro.user.read().auth_token,
