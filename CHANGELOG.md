@@ -1,3 +1,17 @@
+# [3.9.0-beta.4](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.9.0-beta.3...v3.9.0-beta.4) (2022-10-06)
+
+
+### Bug Fixes
+
+* change site id back to 85 ([abda218](https://github.com/pelcro-inc/react-pelcro-js/commit/abda218aa38bbcdf10726b8570a69839ba6afcd7))
+* firstName, lastName, and Phone on change value condition ([51e09e7](https://github.com/pelcro-inc/react-pelcro-js/commit/51e09e7c203f31e0ff84079a620da41224507372))
+* remove console logs ([2320ada](https://github.com/pelcro-inc/react-pelcro-js/commit/2320ada3ccd7cd17d89ade70fd2ef99627d3eb92))
+
+
+### Features
+
+* add more required fields in the checkout view when tap is enabled ([64f68d1](https://github.com/pelcro-inc/react-pelcro-js/commit/64f68d137553df7b888658a7fc25235d74c7cce6))
+
 # [3.9.0-beta.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.9.0-beta.2...v3.9.0-beta.3) (2022-10-05)
 
 
