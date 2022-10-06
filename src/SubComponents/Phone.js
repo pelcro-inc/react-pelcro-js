@@ -28,11 +28,15 @@ export function Phone({
 
       if (phone?.length) {
         dispatch({ type: SET_PHONE, payload: phone });
-      } else if (finishedTyping && otherProps.required) {
-        dispatch({
-          type: SET_PHONE_ERROR,
-          payload: t("validation.enterPhone")
-        });
+      } else {
+        if (finishedTyping && otherProps.required) {
+          dispatch({
+            type: SET_PHONE_ERROR,
+            payload: t("validation.enterPhone")
+          });
+        } else {
+          dispatch({ type: SET_PHONE, payload: phone });
+        }
       }
     },
     [dispatch, phone, finishedTyping]

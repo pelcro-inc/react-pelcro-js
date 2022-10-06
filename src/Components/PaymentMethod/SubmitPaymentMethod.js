@@ -60,9 +60,9 @@ export const SubmitPaymentMethod = ({ onClick, ...otherProps }) => {
           (supportsTap && firstNameError) ||
           (supportsTap && lastNameError) ||
           (supportsTap && phoneError) ||
-          (supportsTap && !firstName.length) ||
-          (supportsTap && !lastName.length) ||
-          (supportsTap && !phone.length)
+          (supportsTap && !firstName?.length) ||
+          (supportsTap && !lastName?.length) ||
+          (supportsTap && !phone?.length)
       );
     }
   }, [
