@@ -1,3 +1,10 @@
+# [3.9.0-beta.5](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.9.0-beta.4...v3.9.0-beta.5) (2022-10-07)
+
+
+### Bug Fixes
+
+* change the value from input not state when it's empty ([ef1397f](https://github.com/pelcro-inc/react-pelcro-js/commit/ef1397fa1657ebc2cd774539ed525702d8993739))
+
 # [3.9.0-beta.4](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.9.0-beta.3...v3.9.0-beta.4) (2022-10-06)
 
 
