@@ -38,7 +38,7 @@ export function FirstName({
             payload: t("validation.enterFirstName")
           });
         } else {
-          dispatch({ type: SET_FIRST_NAME, payload: firstName });
+          dispatch({ type: SET_FIRST_NAME, payload: value });
         }
       }
     },
