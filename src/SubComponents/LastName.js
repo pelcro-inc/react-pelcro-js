@@ -38,7 +38,7 @@ export function LastName({
             payload: t("validation.enterLastName")
           });
         } else {
-          dispatch({ type: SET_LAST_NAME, payload: lastName });
+          dispatch({ type: SET_LAST_NAME, payload: value });
         }
       }
     },

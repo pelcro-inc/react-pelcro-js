@@ -35,7 +35,7 @@ export function Phone({
             payload: t("validation.enterPhone")
           });
         } else {
-          dispatch({ type: SET_PHONE, payload: phone });
+          dispatch({ type: SET_PHONE, payload: value });
         }
       }
     },
