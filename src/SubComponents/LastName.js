@@ -29,16 +29,21 @@ export function LastName({
     (value) => {
       setLastName(value);
 
-      if (lastName?.length) {
-        dispatch({ type: SET_LAST_NAME, payload: lastName });
-      } else {
-        if (finishedTyping && otherProps.required) {
+      if (finishedTyping) {
+        if (lastName?.length) {
           dispatch({
-            type: SET_LAST_NAME_ERROR,
-            payload: t("validation.enterLastName")
+            type: SET_LAST_NAME,
+            payload: lastName
           });
         } else {
-          dispatch({ type: SET_LAST_NAME, payload: value });
+          if (otherProps.required) {
+            dispatch({
+              type: SET_LAST_NAME_ERROR,
+              payload: t("validation.enterLastName")
+            });
+          } else {
+            dispatch({ type: SET_LAST_NAME, payload: lastName });
+          }
         }
       }
     },
@@ -52,6 +57,10 @@ export function LastName({
   // Initialize last name field with user's last name
   const loadLastNameIntoField = () => {
     handleInputChange(window.Pelcro.user.read().last_name);
+    dispatch({
+      type: SET_LAST_NAME,
+      payload: window.Pelcro.user.read().last_name
+    });
   };
 
   useEffect(() => {

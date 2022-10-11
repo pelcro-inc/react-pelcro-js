@@ -29,16 +29,21 @@ export function FirstName({
     (value) => {
       setFirstName(value);
 
-      if (firstName?.length) {
-        dispatch({ type: SET_FIRST_NAME, payload: firstName });
-      } else {
-        if (finishedTyping && otherProps.required) {
+      if (finishedTyping) {
+        if (firstName?.length) {
           dispatch({
-            type: SET_FIRST_NAME_ERROR,
-            payload: t("validation.enterFirstName")
+            type: SET_FIRST_NAME,
+            payload: firstName
           });
         } else {
-          dispatch({ type: SET_FIRST_NAME, payload: value });
+          if (otherProps.required) {
+            dispatch({
+              type: SET_FIRST_NAME_ERROR,
+              payload: t("validation.enterFirstName")
+            });
+          } else {
+            dispatch({ type: SET_FIRST_NAME, payload: firstName });
+          }
         }
       }
     },
@@ -52,6 +57,10 @@ export function FirstName({
   // Initialize first name field with user's first name
   const loadFirstNameIntoField = () => {
     handleInputChange(window.Pelcro.user.read().first_name);
+    dispatch({
+      type: SET_FIRST_NAME,
+      payload: window.Pelcro.user.read().first_name
+    });
   };
 
   useEffect(() => {
