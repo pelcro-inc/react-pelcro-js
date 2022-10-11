@@ -1,3 +1,10 @@
+# [3.9.0-beta.8](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.9.0-beta.7...v3.9.0-beta.8) (2022-10-11)
+
+
+### Features
+
+* revert unnecessary changes and remove console logs ([7f44618](https://github.com/pelcro-inc/react-pelcro-js/commit/7f4461839c4b473a0c193dcb90d43ea875ef4c67))
+
 # [3.9.0-beta.7](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.9.0-beta.6...v3.9.0-beta.7) (2022-10-11)
 
 
