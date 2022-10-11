@@ -26,16 +26,21 @@ export function Phone({
     (value) => {
       setPhone(value);
 
-      if (phone?.length) {
-        dispatch({ type: SET_PHONE, payload: phone });
-      } else {
-        if (finishedTyping && otherProps.required) {
+      if (finishedTyping) {
+        if (phone?.length) {
           dispatch({
-            type: SET_PHONE_ERROR,
-            payload: t("validation.enterPhone")
+            type: SET_PHONE,
+            payload: phone
           });
         } else {
-          dispatch({ type: SET_PHONE, payload: value });
+          if (otherProps.required) {
+            dispatch({
+              type: SET_PHONE_ERROR,
+              payload: t("validation.enterPhone")
+            });
+          } else {
+            dispatch({ type: SET_PHONE, payload: phone });
+          }
         }
       }
     },
@@ -49,6 +54,10 @@ export function Phone({
   // Initialize phone field with user's phone
   const loadPhoneIntoField = () => {
     handleInputChange(window.Pelcro.user.read().phone);
+    dispatch({
+      type: SET_PHONE,
+      payload: window.Pelcro.user.read().phone
+    });
   };
 
   useEffect(() => {
