@@ -1,3 +1,10 @@
+# [3.9.0-beta.7](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.9.0-beta.6...v3.9.0-beta.7) (2022-10-11)
+
+
+### Features
+
+* clear firstName, lastName, and phone after component unmount ([eb044b3](https://github.com/pelcro-inc/react-pelcro-js/commit/eb044b322bfff22bdf574b28718ba3fb1e94731b))
+
 # [3.9.0-beta.6](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.9.0-beta.5...v3.9.0-beta.6) (2022-10-11)
 
 
