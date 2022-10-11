@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { VerifyLinkTokenView } from "./VerifyLinkTokenView";
 import {
   Modal,
+  ModalHeader,
   ModalBody,
   ModalFooter
 } from "../../SubComponents/Modal";
@@ -10,10 +11,11 @@ import Authorship from "../common/Authorship";
 import { notify } from "../../SubComponents/Notification";
 import { usePelcro } from "../../hooks/usePelcro";
 
-/**
- *
- */
-export function VerifyLinkTokenModal({ onDisplay, onClose, ...props }) {
+export function VerifyLinkTokenModal({
+  onDisplay,
+  onClose,
+  ...props
+}) {
   const { t } = useTranslation("verifyLinkToken");
   const { resetView } = usePelcro();
 
@@ -29,15 +31,19 @@ export function VerifyLinkTokenModal({ onDisplay, onClose, ...props }) {
       onDisplay={onDisplay}
       onClose={onClose}
     >
+      <ModalHeader>
+        <div className="plc-text-center plc-text-gray-900 pelcro-title-wrapper plc-flex-1 plc-flex plc-flex-col plc-justify-center">
+          <h4 className="plc-text-2xl plc-font-semibold ">
+            {t("labels.title")}
+          </h4>
+        </div>
+      </ModalHeader>
+
       <ModalBody>
-        <VerifyLinkTokenView
-          {...props}
-          onSuccess={onSuccess}
-        />
+        <VerifyLinkTokenView {...props} onSuccess={onSuccess} />
       </ModalBody>
-      <ModalFooter>
-        <Authorship />
-      </ModalFooter>
+
+      <ModalFooter></ModalFooter>
     </Modal>
   );
 }
