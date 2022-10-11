@@ -47,13 +47,6 @@ export const SubmitPaymentMethod = ({ onClick, ...otherProps }) => {
   const [isDisabled, setDisabled] = useState(true);
 
   useEffect(() => {
-    console.log("Support Tap", supportsTap);
-    console.log("firstNameError", firstNameError);
-    console.log("lastNameError", lastNameError);
-    console.log("phoneError", phoneError);
-    console.log("firstName", firstName);
-    console.log("lastName", lastName);
-    console.log("phone", phone);
     if (
       supportsTap &&
       isUserFirstName &&

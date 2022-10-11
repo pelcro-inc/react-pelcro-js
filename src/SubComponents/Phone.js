@@ -72,11 +72,6 @@ export function Phone({
           "PelcroUserLoaded",
           handleInputChange
         );
-
-        dispatch({
-          type: SET_PHONE,
-          payload: ""
-        });
       };
     }
   }, []);
