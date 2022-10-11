@@ -1,3 +1,10 @@
+# [3.9.0-beta.6](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.9.0-beta.5...v3.9.0-beta.6) (2022-10-11)
+
+
+### Features
+
+* make the firstName, lastName, and phone required in user update if tap is enabled ([4c87586](https://github.com/pelcro-inc/react-pelcro-js/commit/4c8758645ff2b8da08fbadd0b6d7550c4bbbc3eb))
+
 # [3.9.0-beta.5](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.9.0-beta.4...v3.9.0-beta.5) (2022-10-07)
 
 
