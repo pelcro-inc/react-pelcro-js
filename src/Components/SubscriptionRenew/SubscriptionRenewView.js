@@ -13,7 +13,7 @@ export const SubscriptionRenewView = ({
   const skipPayment =
     window.Pelcro?.uiSettings?.skipPaymentForFreePlans;
   const showSubscriptionButton = skipPayment && plan?.amount === 0;
-  
+
   const getPricingText = (plan) => {
     const autoRenewed = plan.auto_renew;
     const { interval, interval_count } = plan;
@@ -41,14 +41,6 @@ export const SubscriptionRenewView = ({
   return (
     <div id="pelcro-subscription-renew-view">
       <div className="plc-mb-6 plc-text-center plc-text-gray-900 pelcro-title-wrapper">
-        <h4 className="plc-text-2xl plc-font-semibold ">
-          {product?.paywall?.subscribe_title ??
-            window.Pelcro.paywall.read()?.subscribe_title}
-        </h4>{" "}
-        <p>
-          {product?.paywall?.subscribe_subtitle ??
-            window.Pelcro.paywall.read()?.subscribe_subtitle}
-        </p>
         <div className="plc-w-full plc-p-2 plc-mt-2 plc-font-semibold plc-text-center plc-text-gray-900 plc-bg-gray-100 plc-border plc-border-gray-200">
           {plan && getPricingText(plan)}
         </div>

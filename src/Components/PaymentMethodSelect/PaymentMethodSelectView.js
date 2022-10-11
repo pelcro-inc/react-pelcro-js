@@ -10,12 +10,6 @@ export const PaymentMethodSelectView = (props) => {
 
   return (
     <div id="pelcro-payment-method-select-view">
-      <div className="plc-mb-6 plc-space-y-2 plc-text-center plc-text-gray-900 pelcro-title-wrapper">
-        <h4 className="plc-text-2xl plc-font-semibold">
-          {t("select.title")}
-        </h4>
-        <p>{t("select.subtitle")}</p>
-      </div>
       <form
         action="javascript:void(0);"
         className="plc-mt-2 pelcro-form"

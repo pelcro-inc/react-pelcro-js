@@ -5,6 +5,7 @@ import { getErrorMessages } from "../common/Helpers";
 import Authorship from "../common/Authorship";
 import {
   Modal,
+  ModalHeader,
   ModalBody,
   ModalFooter
 } from "../../SubComponents/Modal";
@@ -154,14 +155,17 @@ class DefaultNewsLetter extends Component {
         onClose={this.props.onClose}
         id="pelcro-newsletter-modal"
       >
+        <ModalHeader>
+          <div className="plc-text-center plc-text-gray-900 pelcro-title-wrapper plc-flex-1 plc-flex plc-flex-col plc-justify-center">
+            <h4 className="plc-text-2xl plc-font-semibold">
+              {this.title}
+            </h4>
+            <p>{this.subtitle}</p>
+          </div>
+        </ModalHeader>
+
         <ModalBody>
           <div id="pelcro-newsletter-view">
-            <div className="plc-mb-6 plc-text-center plc-text-gray-900 pelcro-title-wrapper">
-              <h4 className="plc-text-2xl plc-font-semibold">
-                {this.title}
-              </h4>
-              <p>{this.subtitle}</p>
-            </div>
             <form
               action="javascript:void(0);"
               className="plc-mt-2 pelcro-form"
@@ -222,19 +226,23 @@ class DefaultNewsLetter extends Component {
           </div>
         </ModalBody>
         <ModalFooter>
-          <p>
-            {t("messages.alreadyHaveAccount") + " "}
+          <p className="plc-mb-3">
+            <span className="plc-font-medium">
+              {t("messages.alreadyHaveAccount") + " "}
+            </span>
             <Link onClick={this.displayLoginView}>
               {t("messages.loginHere")}
             </Link>
           </p>
-          <p>
-            {t("messages.createAnAccount")}
+
+          <p className="plc-mb-9">
+            <span className="plc-font-medium">
+              {t("messages.createAnAccount")}
+            </span>
             <Link onClick={this.displaySelectView}>
               {t("messages.here")}
             </Link>
           </p>
-          <Authorship />
         </ModalFooter>
       </Modal>
     );
@@ -247,6 +255,5 @@ DefaultNewsLetter.propTypes = {
   onClose: PropTypes.func
 };
 
-export const NewsLetter = withTranslation("newsletter")(
-  DefaultNewsLetter
-);
+export const NewsLetter =
+  withTranslation("newsletter")(DefaultNewsLetter);

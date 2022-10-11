@@ -51,14 +51,6 @@ export const SubscriptionCreateView = ({
   return (
     <div id="pelcro-subscription-create-view">
       <div className="plc-flex plc-flex-col plc-items-center plc-mb-6 plc-text-center plc-text-gray-900 pelcro-title-wrapper sm:plc-px-8">
-        <h4 className="plc-text-2xl plc-font-semibold ">
-          {product?.paywall?.subscribe_title ??
-            window.Pelcro.paywall.read()?.subscribe_title}
-        </h4>{" "}
-        <p>
-          {product?.paywall?.subscribe_subtitle ??
-            window.Pelcro.paywall.read()?.subscribe_subtitle}
-        </p>
         <div className="plc-w-full plc-p-2 plc-mt-2 plc-font-semibold plc-text-center plc-text-gray-900 plc-bg-gray-100 plc-border plc-border-gray-200">
           {plan && getPricingText(plan)}
         </div>

@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
-import Authorship from "../common/Authorship";
+import React from "react";
+import { useTranslation } from "react-i18next";
 import { PaymentMethodSelectView } from "./PaymentMethodSelectView";
 import {
   Modal,
+  ModalHeader,
   ModalBody,
   ModalFooter
 } from "../../SubComponents/Modal";
@@ -14,6 +15,7 @@ export const PaymentMethodSelectModal = ({
   ...otherProps
 }) => {
   const { switchToCheckoutForm, set, plan } = usePelcro();
+  const { t } = useTranslation("paymentMethod");
 
   const skipPayment =
     window.Pelcro?.uiSettings?.skipPaymentForFreePlans;
@@ -41,6 +43,14 @@ export const PaymentMethodSelectModal = ({
       onClose={onClose}
       id="pelcro-payment-method-select-modal"
     >
+      <ModalHeader>
+        <div className="plc-text-center plc-text-gray-900 pelcro-title-wrapper plc-flex-1 plc-flex plc-flex-col plc-justify-center">
+          <h4 className="plc-text-2xl plc-font-semibold">
+            {t("select.title")}
+          </h4>
+          <p>{t("select.subtitle")}</p>
+        </div>
+      </ModalHeader>
       <ModalBody>
         <PaymentMethodSelectView
           onAddNewPaymentMethod={onAddNewPaymentMethod}
@@ -48,9 +58,7 @@ export const PaymentMethodSelectModal = ({
           onSuccess={onSuccess}
         />
       </ModalBody>
-      <ModalFooter>
-        <Authorship />
-      </ModalFooter>
+      <ModalFooter></ModalFooter>
     </Modal>
   );
 };

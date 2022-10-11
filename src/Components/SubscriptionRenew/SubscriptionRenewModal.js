@@ -3,10 +3,10 @@ import ReactGA from "react-ga";
 import { SubscriptionRenewView } from "./SubscriptionRenewView";
 import {
   Modal,
+  ModalHeader,
   ModalBody,
   ModalFooter
 } from "../../SubComponents/Modal";
-import Authorship from "../common/Authorship";
 import { usePelcro } from "../../hooks/usePelcro";
 
 /**
@@ -17,7 +17,7 @@ export function SubscriptionRenewModal({
   onClose,
   ...otherProps
 }) {
-  const { switchView } = usePelcro();
+  const { product, switchView } = usePelcro();
 
   const onSuccess = (res) => {
     otherProps.onSuccess?.(res);
@@ -47,6 +47,18 @@ export function SubscriptionRenewModal({
       onDisplay={onDisplay}
       onClose={onClose}
     >
+      <ModalHeader>
+        <div className="plc-text-center plc-text-gray-900 pelcro-title-wrapper plc-flex-1 plc-flex plc-flex-col plc-justify-center">
+          <h4 className="plc-text-2xl plc-font-semibold ">
+            {product?.paywall?.subscribe_title ??
+              window.Pelcro.paywall.read()?.subscribe_title}
+          </h4>{" "}
+          <p>
+            {product?.paywall?.subscribe_subtitle ??
+              window.Pelcro.paywall.read()?.subscribe_subtitle}
+          </p>
+        </div>
+      </ModalHeader>
       <ModalBody>
         <SubscriptionRenewView
           {...otherProps}
@@ -54,9 +66,7 @@ export function SubscriptionRenewModal({
           onGiftRenewalSuccess={onGiftRenewalSuccess}
         />
       </ModalBody>
-      <ModalFooter>
-        <Authorship />
-      </ModalFooter>
+      <ModalFooter></ModalFooter>
     </Modal>
   );
 }
