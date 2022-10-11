@@ -39,6 +39,8 @@ import { InvoicesMenu } from "./DashboardMenus/InvoicesMenu";
 import { MembershipsMenu } from "./DashboardMenus/MembershipsMenu";
 import { DashboardLink } from "./DashboardLink";
 import { GiftsMenu } from "./DashboardMenus/GiftsMenu";
+import { AddressesMenu } from "./DashboardMenus/AddressesMenu";
+import { PaymentCardsMenu } from "./DashboardMenus/PaymentCardsMenu";
 
 const SUB_MENUS = {
   PROFILE: "profile",
@@ -471,119 +473,118 @@ class Dashboard extends Component {
         >
           <div id="pelcro-view-dashboard" ref={this.menuRef}>
             <section className="plc-mt-6 plc-shadow-sm">
-                <header className="plc-pl-4 plc-mb-2 sm:plc-pl-8">
-                  <p className="plc-font-bold plc-tracking-widest plc-text-gray-500">
-                    {this.locale("labels.profile")}
-                  </p>
-                </header>
+              <header className="plc-pl-4 plc-mb-2 sm:plc-pl-8">
+                <p className="plc-font-bold plc-tracking-widest plc-text-gray-500">
+                  {this.locale("labels.profile")}
+                </p>
+              </header>
 
-                <DashboardLink
-                  name={SUB_MENUS.PROFILE}
-                  icon={
-                    <UserIcon className="plc-w-6 plc-h-6 plc-mr-2" />
-                  }
-                  title={this.locale("labels.basicData")}
-                  setActiveDashboardLink={this.setActiveDashboardLink}
-                  activeDashboardLink={this.state.activeDashboardLink}
-                  // onClick={this.displayUserEdit}
-                />
+              <DashboardLink
+                name={SUB_MENUS.PROFILE}
+                icon={
+                  <UserIcon className="plc-w-6 plc-h-6 plc-mr-2" />
+                }
+                title={this.locale("labels.basicData")}
+                setActiveDashboardLink={this.setActiveDashboardLink}
+                activeDashboardLink={this.state.activeDashboardLink}
+                // onClick={this.displayUserEdit}
+              />
 
-                <DashboardLink
-                  name={SUB_MENUS.QRCODE}
-                  icon={
-                    <QrCodeIcon className="plc-w-6 plc-h-6 plc-mr-2" />
-                  }
-                  title={'My QR code'}
-                  setActiveDashboardLink={this.setActiveDashboardLink}
-                  activeDashboardLink={this.state.activeDashboardLink}
-                  // onClick={this.displayQRCode}
-                />
+              <DashboardLink
+                name={SUB_MENUS.QRCODE}
+                icon={
+                  <QrCodeIcon className="plc-w-6 plc-h-6 plc-mr-2" />
+                }
+                title={"My QR code"}
+                setActiveDashboardLink={this.setActiveDashboardLink}
+                activeDashboardLink={this.state.activeDashboardLink}
+                // onClick={this.displayQRCode}
+              />
 
-                <DashboardLink
-                  name={SUB_MENUS.SAVED_ITEMS}
-                  icon={<BookmarkIcon />}
-                  title={this.locale("labels.savedItems.label")}
-                  setActiveDashboardLink={this.setActiveDashboardLink}
-                  activeDashboardLink={this.state.activeDashboardLink}
-                />
-                
-                <header className="plc-pl-4 plc-mb-2 sm:plc-pl-8">
-                  <p className="plc-font-bold plc-tracking-widest plc-text-gray-500">
-                    {this.locale("labels.accountSettings")}
-                  </p>
-                </header>
+              <DashboardLink
+                name={SUB_MENUS.SAVED_ITEMS}
+                icon={<BookmarkIcon />}
+                title={this.locale("labels.savedItems.label")}
+                setActiveDashboardLink={this.setActiveDashboardLink}
+                activeDashboardLink={this.state.activeDashboardLink}
+              />
 
-                <DashboardLink
-                  name={SUB_MENUS.PAYMENT_CARDS}
-                  icon={<PaymentCardIcon />}
-                  title={this.locale("labels.paymentSource")}
-                  setActiveDashboardLink={this.setActiveDashboardLink}
-                  activeDashboardLink={this.state.activeDashboardLink}
-                  onClick={this.displaySourceCreate}
-                />
+              <header className="plc-pl-4 plc-mb-2 sm:plc-pl-8">
+                <p className="plc-font-bold plc-tracking-widest plc-text-gray-500">
+                  {this.locale("labels.accountSettings")}
+                </p>
+              </header>
 
-                <DashboardLink
-                  name={SUB_MENUS.ADDRESSES}
-                  icon={<LocationIcon />}
-                  title={this.locale("labels.addresses")}
-                  setActiveDashboardLink={this.setActiveDashboardLink}
-                  activeDashboardLink={this.state.activeDashboardLink}
-                  // onClick={this.displayAddressEdit}
-                />
+              <DashboardLink
+                name={SUB_MENUS.PAYMENT_CARDS}
+                icon={<PaymentCardIcon />}
+                title={this.locale("labels.paymentSource")}
+                setActiveDashboardLink={this.setActiveDashboardLink}
+                activeDashboardLink={this.state.activeDashboardLink}
+              />
 
-                <header className="plc-pl-4 plc-my-2 sm:plc-pl-8">
-                  <p className="plc-font-bold plc-tracking-widest plc-text-gray-500">
-                    {this.locale("labels.purchases")}
-                  </p>
-                </header>
+              <DashboardLink
+                name={SUB_MENUS.ADDRESSES}
+                icon={<LocationIcon />}
+                title={this.locale("labels.addresses")}
+                setActiveDashboardLink={this.setActiveDashboardLink}
+                activeDashboardLink={this.state.activeDashboardLink}
+              />
 
-                <DashboardLink
-                  name={SUB_MENUS.SUBSCRIPTIONS}
-                  icon={<SubscriptionIcon className="plc-w-10 plc-h-10 plc-pt-2 plc-pr-1 plc--ml-2" />}
-                  title={this.locale("labels.subscriptions")}
-                  setActiveDashboardLink={this.setActiveDashboardLink}
-                  activeDashboardLink={this.state.activeDashboardLink}
-                  // onClick={this.displayAddressEdit}
-                />
+              <header className="plc-pl-4 plc-my-2 sm:plc-pl-8">
+                <p className="plc-font-bold plc-tracking-widest plc-text-gray-500">
+                  {this.locale("labels.purchases")}
+                </p>
+              </header>
 
-                <DashboardLink
-                  name={SUB_MENUS.MEMBERSHIPS}
-                  icon={<MembershipsIcon className="plc-transform plc-scale-120 plc-w-7 plc-h-8 plc-mr-1 plc-pt-1" />}
-                  title={this.locale("labels.memberships")}
-                  setActiveDashboardLink={this.setActiveDashboardLink}
-                  activeDashboardLink={this.state.activeDashboardLink}
-                  // onClick={this.displayAddressEdit}
-                />
+              <DashboardLink
+                name={SUB_MENUS.SUBSCRIPTIONS}
+                icon={
+                  <SubscriptionIcon className="plc-w-10 plc-h-10 plc-pt-2 plc-pr-1 plc--ml-2" />
+                }
+                title={this.locale("labels.subscriptions")}
+                setActiveDashboardLink={this.setActiveDashboardLink}
+                activeDashboardLink={this.state.activeDashboardLink}
+              />
 
-                <DashboardLink
-                  name={SUB_MENUS.DONATIONS}
-                  icon={<DonateIcon className="plc-transform plc-scale-120 plc-w-7 plc-h-8 plc-mr-1 plc-pt-1" />}
-                  title={this.locale("labels.donations")}
-                  setActiveDashboardLink={this.setActiveDashboardLink}
-                  activeDashboardLink={this.state.activeDashboardLink}
-                  // onClick={this.displayAddressEdit}
-                />
+              <DashboardLink
+                name={SUB_MENUS.MEMBERSHIPS}
+                icon={
+                  <MembershipsIcon className="plc-transform plc-scale-120 plc-w-7 plc-h-8 plc-mr-1 plc-pt-1" />
+                }
+                title={this.locale("labels.memberships")}
+                setActiveDashboardLink={this.setActiveDashboardLink}
+                activeDashboardLink={this.state.activeDashboardLink}
+              />
 
-                <DashboardLink
-                  name={SUB_MENUS.GIFTS}
-                  icon={<GiftIcon />}
-                  title={this.locale("labels.gifts")}
-                  setActiveDashboardLink={this.setActiveDashboardLink}
-                  activeDashboardLink={this.state.activeDashboardLink}
-                  // onClick={this.displayAddressEdit}
-                />
+              <DashboardLink
+                name={SUB_MENUS.DONATIONS}
+                icon={
+                  <DonateIcon className="plc-transform plc-scale-120 plc-w-7 plc-h-8 plc-mr-1 plc-pt-1" />
+                }
+                title={this.locale("labels.donations")}
+                setActiveDashboardLink={this.setActiveDashboardLink}
+                activeDashboardLink={this.state.activeDashboardLink}
+              />
 
-                <DashboardLink
-                  show={hasInvoices()}
-                  name={SUB_MENUS.INVOICES}
-                  icon={<InvoiceIcon />}
-                  title={this.locale("labels.invoices")}
-                  setActiveDashboardLink={this.setActiveDashboardLink}
-                  activeDashboardLink={this.state.activeDashboardLink}
-                  // onClick={this.displayAddressEdit}
-                />
+              <DashboardLink
+                name={SUB_MENUS.GIFTS}
+                icon={<GiftIcon />}
+                title={this.locale("labels.gifts")}
+                setActiveDashboardLink={this.setActiveDashboardLink}
+                activeDashboardLink={this.state.activeDashboardLink}
+              />
 
-                {/* <Accordion.item
+              <DashboardLink
+                show={hasInvoices()}
+                name={SUB_MENUS.INVOICES}
+                icon={<InvoiceIcon />}
+                title={this.locale("labels.invoices")}
+                setActiveDashboardLink={this.setActiveDashboardLink}
+                activeDashboardLink={this.state.activeDashboardLink}
+              />
+
+              {/* <Accordion.item
                   name={SUB_MENUS.SUBSCRIPTIONS}
                   icon={
                     <SubscriptionIcon className="plc-w-10 plc-h-10 plc-pt-2 plc-pr-1 plc--ml-2" />
@@ -610,7 +611,7 @@ class Dashboard extends Component {
                   }
                 /> */}
 
-                {/* <Accordion.item
+              {/* <Accordion.item
                   show={hasActiveMemberships()}
                   name={SUB_MENUS.MEMBERSHIPS}
                   icon={
@@ -620,7 +621,7 @@ class Dashboard extends Component {
                   content={<MembershipsMenu />}
                 /> */}
 
-                {/* <Accordion.item
+              {/* <Accordion.item
                   show={hasDonationSubs()}
                   name={SUB_MENUS.DONATIONS}
                   icon={
@@ -630,14 +631,14 @@ class Dashboard extends Component {
                   content={<DonationsMenu />}
                 /> */}
 
-                {/* <Accordion.item
+              {/* <Accordion.item
                   name={SUB_MENUS.GIFTS}
                   icon={<GiftIcon />}
                   title={this.locale("labels.gifts")}
                   content={this.renderGiftRecipients()}
                 /> */}
 
-                {/* <Accordion.item
+              {/* <Accordion.item
                   show={window.Pelcro.site.read().ecommerce_enabled}
                   name={SUB_MENUS.ORDERS}
                   icon={<ShoppingIcon />}
@@ -645,7 +646,7 @@ class Dashboard extends Component {
                   content={<OrdersMenu />}
                 /> */}
 
-                {/* <Accordion.item
+              {/* <Accordion.item
                   show={hasInvoices()}
                   name={SUB_MENUS.INVOICES}
                   icon={<InvoiceIcon />}
@@ -653,7 +654,7 @@ class Dashboard extends Component {
                   content={<InvoicesMenu />}
                 /> */}
 
-                {/* <Button
+              {/* <Button
                   variant="outline"
                   icon={<ExitIcon />}
                   className="plc-flex plc-items-center plc-justify-start plc-w-full plc-p-5 plc-px-4 plc-text-lg plc-font-normal plc-text-gray-500 plc-capitalize plc-bg-transparent plc-border-0 plc-border-l-2 plc-border-transparent plc-rounded-none plc-cursor-pointer plc-select-none sm:plc-px-8 hover:plc-bg-gray-100 hover:plc-text-gray-500"
@@ -697,38 +698,57 @@ class Dashboard extends Component {
             </header>
           </div>
         </Transition>
-        { this.state.activeDashboardLink && isOpen &&
-          <div 
+        {this.state.activeDashboardLink && isOpen && (
+          <div
             id="pelcro-view-dashboard-submenus"
             className="plc-fixed plc-inset-y-0 plc-right-0 plc-h-full plc-w-9/12 plc-bg-gray-100 plc-z-max"
           >
-            {this.state.activeDashboardLink === SUB_MENUS.PROFILE && 
-              this.displayUserEdit()
-            }
-            {this.state.activeDashboardLink === SUB_MENUS.QRCODE && 
-              this.displayQRCode()
-            }
-            {this.state.activeDashboardLink === SUB_MENUS.MEMBERSHIPS && 
-              <MembershipsMenu />
-            }
-            {this.state.activeDashboardLink === SUB_MENUS.DONATIONS && 
-              <DonationsMenu />
-            }
-            {this.state.activeDashboardLink === SUB_MENUS.GIFTS && 
-              <GiftsMenu 
+            {this.state.activeDashboardLink === SUB_MENUS.PROFILE &&
+              this.displayUserEdit()}
+            {this.state.activeDashboardLink === SUB_MENUS.QRCODE &&
+              this.displayQRCode()}
+            {this.state.activeDashboardLink ===
+              SUB_MENUS.SAVED_ITEMS && <SavedItemsMenu />}
+            {this.state.activeDashboardLink ===
+              SUB_MENUS.SUBSCRIPTIONS &&
+              this.displayProductSelect({ isGift: false })}
+            {this.state.activeDashboardLink ===
+              SUB_MENUS.PAYMENT_CARDS && (
+              <PaymentCardsMenu
+                displaySourceCreate={this.displaySourceCreate}
+              />
+            )}
+            {this.state.activeDashboardLink ===
+              SUB_MENUS.ADDRESSES && (
+              <AddressesMenu
+                displayAddressCreate={this.displayAddressCreate}
+                displayAddressEdit={this.displayAddressEdit}
+              />
+            )}
+            {this.state.activeDashboardLink ===
+              SUB_MENUS.MEMBERSHIPS && <MembershipsMenu />}
+            {this.state.activeDashboardLink ===
+              SUB_MENUS.DONATIONS && (
+              <DonationsMenu
+                getSubscriptionStatus={this.getSubscriptionStatus}
+              />
+            )}
+            {this.state.activeDashboardLink === SUB_MENUS.GIFTS && (
+              <GiftsMenu
                 getSubscriptionStatus={this.getSubscriptionStatus}
                 displayProductSelect={this.displayProductSelect}
                 setProductAndPlan={this.props.setProductAndPlan}
-                setSubscriptionIdToRenew={this.props.setSubscriptionIdToRenew}
+                setSubscriptionIdToRenew={
+                  this.props.setSubscriptionIdToRenew
+                }
                 setIsRenewingGift={this.props.setIsRenewingGift}
                 setView={this.props.setView}
               />
-            }
-            {this.state.activeDashboardLink === SUB_MENUS.INVOICES && 
-              <InvoicesMenu />
-            }
+            )}
+            {this.state.activeDashboardLink ===
+              SUB_MENUS.INVOICES && <InvoicesMenu />}
           </div>
-        }
+        )}
       </>
     );
   }
