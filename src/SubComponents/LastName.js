@@ -75,6 +75,11 @@ export function LastName({
           "PelcroUserLoaded",
           handleInputChange
         );
+
+        dispatch({
+          type: SET_LAST_NAME,
+          payload: ""
+        });
       };
     }
   }, []);
