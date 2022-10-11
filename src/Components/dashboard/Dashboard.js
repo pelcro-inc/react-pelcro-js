@@ -39,6 +39,8 @@ import { InvoicesMenu } from "./DashboardMenus/InvoicesMenu";
 import { MembershipsMenu } from "./DashboardMenus/MembershipsMenu";
 import { DashboardLink } from "./DashboardLink";
 import { GiftsMenu } from "./DashboardMenus/GiftsMenu";
+import { AddressesMenu } from "./DashboardMenus/AddressesMenu";
+import { PaymentCardsMenu } from "./DashboardMenus/PaymentCardsMenu";
 
 const SUB_MENUS = {
   PROFILE: "profile",

@@ -5,7 +5,7 @@ export const getPaymentCardIcon = (name) => {
     visa: (
       <svg
         className="plc-w-12"
-        fill="#ffffff"
+        fill="#000000"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 50 50"
       >
@@ -15,7 +15,7 @@ export const getPaymentCardIcon = (name) => {
     mastercard: (
       <svg
         className="plc-w-12"
-        fill="#ffffff"
+        fill="#000000"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 50 50"
       >
@@ -25,7 +25,7 @@ export const getPaymentCardIcon = (name) => {
     "american express": (
       <svg
         className="plc-w-12"
-        fill="#ffffff"
+        fill="#000000"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 50 50"
       >

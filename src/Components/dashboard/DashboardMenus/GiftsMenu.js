@@ -104,8 +104,8 @@ export const GiftsMenu = (props) => {
                   variant="ghost"
                   icon={<RefreshIcon className="plc-w-4 plc-h-4" />}
                   className="plc-text-blue-400"
-                  onClick={onRenewClick}
-                  disabled={this.state.disableSubmit}
+                  // onClick={onRenewClick}
+                  // disabled={this.state.disableSubmit}
                   data-key={recipient.id}
                 >
                   {t("labels.renew")}
