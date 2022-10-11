@@ -75,6 +75,11 @@ export function FirstName({
           "PelcroUserLoaded",
           handleInputChange
         );
+
+        dispatch({
+          type: SET_FIRST_NAME,
+          payload: ""
+        });
       };
     }
   }, []);
