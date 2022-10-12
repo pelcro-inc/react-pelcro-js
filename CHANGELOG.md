@@ -1,3 +1,10 @@
+# [3.9.0-beta.10](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.9.0-beta.9...v3.9.0-beta.10) (2022-10-12)
+
+
+### Features
+
+* remove console log ([55b4972](https://github.com/pelcro-inc/react-pelcro-js/commit/55b497250d5fb20f1255c2c4c380b51c09d1ccb9))
+
 # [3.9.0-beta.9](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.9.0-beta.8...v3.9.0-beta.9) (2022-10-12)
 
 
