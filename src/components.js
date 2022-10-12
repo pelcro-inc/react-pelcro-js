@@ -234,6 +234,10 @@ export { Tooltip } from "./SubComponents/Tooltip";
 export { QrCodeModal } from "./Components/QrCode/QrCodeModal";
 export { QrCodeView } from "./Components/QrCode/QrCodeView";
 
+export { IncludeFirstName } from "./Components/PaymentMethod/IncludeFirstName";
+export { IncludeLastName } from "./Components/PaymentMethod/IncludeLastName";
+export { IncludePhone } from "./Components/PaymentMethod/IncludePhone";
+
 export { default as i18n } from "./i18n";
 
 export {
