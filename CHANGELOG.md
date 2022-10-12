@@ -1,3 +1,10 @@
+# [3.9.0-beta.9](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.9.0-beta.8...v3.9.0-beta.9) (2022-10-12)
+
+
+### Features
+
+* export payment method new inputs ([3b2bc2f](https://github.com/pelcro-inc/react-pelcro-js/commit/3b2bc2f5cde5efc035900228e7118336e068d8a2))
+
 # [3.9.0-beta.8](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.9.0-beta.7...v3.9.0-beta.8) (2022-10-11)
 
 
