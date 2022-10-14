@@ -18,7 +18,7 @@
     "for": "pour",
     "interval": "{{count}} {{interval}}",
     "interval_plural": "{{count}} {{interval}}s",
-    "tax": "+ Taxe",
+    "tax": "Taxe",
     "removeCoupon": "RETIRER",
     "firstName": "Prénom",
     "lastName": "Nom de famille",

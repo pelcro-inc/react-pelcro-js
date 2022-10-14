@@ -18,7 +18,7 @@
     "for": "관련",
     "interval": "{{count}} {{interval}}",
     "interval_plural": "{{count}} {{interval}}",
-    "tax": "+ 세금",
+    "tax": "세금",
     "removeCoupon": "제거",
     "firstName": "이름",
     "lastName": "성",
