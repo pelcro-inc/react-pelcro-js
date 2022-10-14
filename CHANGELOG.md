@@ -1,3 +1,10 @@
+# [3.9.0-beta.11](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.9.0-beta.10...v3.9.0-beta.11) (2022-10-14)
+
+
+### Features
+
+* add tax inclusive condition to show different UI ([8d34cb3](https://github.com/pelcro-inc/react-pelcro-js/commit/8d34cb35618e60227f001a39ed35cde6e60be024))
+
 # [3.9.0-beta.10](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.9.0-beta.9...v3.9.0-beta.10) (2022-10-12)
 
 
