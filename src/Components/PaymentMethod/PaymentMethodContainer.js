@@ -289,22 +289,6 @@ const PaymentMethodContainerWithoutStripe = ({
   };
 
   function handleTapPayment(paymentRequest) {
-    // if (paymentRequest) {
-    //   const SUCCESS_STATUS = "870";
-    //   if (paymentRequest.response !== SUCCESS_STATUS) {
-    //     switch (paymentRequest.response) {
-    //       case "871":
-    //         return handlePaymentError({
-    //           error: new Error("Invalid account number")
-    //         });
-    //       default:
-    //         return handlePaymentError({
-    //           error: new Error(paymentRequest.message)
-    //         });
-    //     }
-    //   }
-    // }
-
     const isUsingExistingPaymentMethod = Boolean(
       selectedPaymentMethodId
     );
