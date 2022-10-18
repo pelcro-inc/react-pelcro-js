@@ -1,3 +1,10 @@
+# [3.9.0-beta.12](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.9.0-beta.11...v3.9.0-beta.12) (2022-10-18)
+
+
+### Bug Fixes
+
+* remove commented code ([4083c7c](https://github.com/pelcro-inc/react-pelcro-js/commit/4083c7c928571e8f22f19cf0328bc8f96a632f61))
+
 # [3.9.0-beta.11](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.9.0-beta.10...v3.9.0-beta.11) (2022-10-14)
 
 
