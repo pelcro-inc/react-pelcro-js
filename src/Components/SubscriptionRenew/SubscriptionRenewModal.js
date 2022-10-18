@@ -1,5 +1,6 @@
 import React from "react";
 import ReactGA from "react-ga";
+import { SubscriptionRenewView } from "./SubscriptionRenewView";
 import {
   Modal,
   ModalHeader,
@@ -7,7 +8,12 @@ import {
   ModalFooter
 } from "../../SubComponents/Modal";
 import { usePelcro } from "../../hooks/usePelcro";
-import { SubscriptionRenewView } from "./SubscriptionRenewView";
+import { default as ReactGA1 } from "react-ga";
+import { default as ReactGA4 } from "react-ga4";
+
+const ReactGA = window?.Pelcro?.uiSettings?.enableReactGA4
+  ? ReactGA4
+  : ReactGA1;
 
 /**
  *

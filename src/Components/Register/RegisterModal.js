@@ -1,5 +1,4 @@
 import React from "react";
-import ReactGA from "react-ga";
 import { useTranslation } from "react-i18next";
 import { usePelcro } from "../../hooks/usePelcro";
 import { Link } from "../../SubComponents/Link";
@@ -10,6 +9,10 @@ import {
   ModalFooter
 } from "../../SubComponents/Modal";
 import { RegisterView } from "./RegisterView";
+import { default as ReactGA1 } from "react-ga";
+import { default as ReactGA4 } from "react-ga4";
+
+const ReactGA = window?.Pelcro?.uiSettings?.enableReactGA4 ? ReactGA4 : ReactGA1;
 
 /**
  *
