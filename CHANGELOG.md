@@ -1,3 +1,33 @@
+# [3.9.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.8.1...v3.9.0) (2022-10-18)
+
+
+### Bug Fixes
+
+* change site id back to 85 ([abda218](https://github.com/pelcro-inc/react-pelcro-js/commit/abda218aa38bbcdf10726b8570a69839ba6afcd7))
+* change the siteid back to 85 ([0c97df4](https://github.com/pelcro-inc/react-pelcro-js/commit/0c97df411eabe96d62623f07a6fbe24718ca64c1))
+* change the value from input not state when it's empty ([ef1397f](https://github.com/pelcro-inc/react-pelcro-js/commit/ef1397fa1657ebc2cd774539ed525702d8993739))
+* firstName, lastName, and Phone on change value condition ([51e09e7](https://github.com/pelcro-inc/react-pelcro-js/commit/51e09e7c203f31e0ff84079a620da41224507372))
+* load the firstName, lastName, and Phone in the user update form if exist ([e217985](https://github.com/pelcro-inc/react-pelcro-js/commit/e217985ccd8653375a64955ed302a781b7346426))
+* reactivate the submit button if there was an error with the card info ([245a013](https://github.com/pelcro-inc/react-pelcro-js/commit/245a013f0460407beb64f5b1ef700f9d5c27d844))
+* remove commented code ([4083c7c](https://github.com/pelcro-inc/react-pelcro-js/commit/4083c7c928571e8f22f19cf0328bc8f96a632f61))
+* remove console logs ([2320ada](https://github.com/pelcro-inc/react-pelcro-js/commit/2320ada3ccd7cd17d89ade70fd2ef99627d3eb92))
+
+
+### Features
+
+* add firstName, lastName, and phone to be required in register if tap is enabled ([f7b7f7c](https://github.com/pelcro-inc/react-pelcro-js/commit/f7b7f7c6848b043d4337731280437ddc30e75058))
+* add firstName, lastName, and phone to be required in register if tap is enabled ([4e7ea2f](https://github.com/pelcro-inc/react-pelcro-js/commit/4e7ea2fa9a99e7efe231391300a023ec9d0d9e4f))
+* add more required fields in the checkout view when tap is enabled ([64f68d1](https://github.com/pelcro-inc/react-pelcro-js/commit/64f68d137553df7b888658a7fc25235d74c7cce6))
+* add more required fields in the checkout view when tap is enabled ([#205](https://github.com/pelcro-inc/react-pelcro-js/issues/205)) ([32ea5a8](https://github.com/pelcro-inc/react-pelcro-js/commit/32ea5a8d755b465a6dc2fa1ebe9441189b6ef0d2))
+* add tax inclusive condition to show different UI ([8d34cb3](https://github.com/pelcro-inc/react-pelcro-js/commit/8d34cb35618e60227f001a39ed35cde6e60be024))
+* add two tap related check functions ([00ec4ee](https://github.com/pelcro-inc/react-pelcro-js/commit/00ec4ee1f5b9dcdaddefea069d5c99fcabb8c2de))
+* clear firstName, lastName, and phone after component unmount ([eb044b3](https://github.com/pelcro-inc/react-pelcro-js/commit/eb044b322bfff22bdf574b28718ba3fb1e94731b))
+* export payment method new inputs ([3b2bc2f](https://github.com/pelcro-inc/react-pelcro-js/commit/3b2bc2f5cde5efc035900228e7118336e068d8a2))
+* make the firstName, lastName, and phone required in user update if tap is enabled ([4c87586](https://github.com/pelcro-inc/react-pelcro-js/commit/4c8758645ff2b8da08fbadd0b6d7550c4bbbc3eb))
+* refactor and add test ([b9848ff](https://github.com/pelcro-inc/react-pelcro-js/commit/b9848ffdfea477b67a3f780f59a55c9a61983def))
+* remove console log ([55b4972](https://github.com/pelcro-inc/react-pelcro-js/commit/55b497250d5fb20f1255c2c4c380b51c09d1ccb9))
+* revert unnecessary changes and remove console logs ([7f44618](https://github.com/pelcro-inc/react-pelcro-js/commit/7f4461839c4b473a0c193dcb90d43ea875ef4c67))
+
 # [3.9.0-beta.11](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.9.0-beta.10...v3.9.0-beta.11) (2022-10-14)
 
 
