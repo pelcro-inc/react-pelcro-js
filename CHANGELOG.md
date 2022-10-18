@@ -1,141 +1,145 @@
-# [3.9.0-beta.12](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.9.0-beta.11...v3.9.0-beta.12) (2022-10-18)
-
+# [3.9.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.8.1...v3.9.0) (2022-10-18)
 
 ### Bug Fixes
 
-* remove commented code ([4083c7c](https://github.com/pelcro-inc/react-pelcro-js/commit/4083c7c928571e8f22f19cf0328bc8f96a632f61))
+- change site id back to 85 ([abda218](https://github.com/pelcro-inc/react-pelcro-js/commit/abda218aa38bbcdf10726b8570a69839ba6afcd7))
+- change the siteid back to 85 ([0c97df4](https://github.com/pelcro-inc/react-pelcro-js/commit/0c97df411eabe96d62623f07a6fbe24718ca64c1))
+- change the value from input not state when it's empty ([ef1397f](https://github.com/pelcro-inc/react-pelcro-js/commit/ef1397fa1657ebc2cd774539ed525702d8993739))
+- firstName, lastName, and Phone on change value condition ([51e09e7](https://github.com/pelcro-inc/react-pelcro-js/commit/51e09e7c203f31e0ff84079a620da41224507372))
+- load the firstName, lastName, and Phone in the user update form if exist ([e217985](https://github.com/pelcro-inc/react-pelcro-js/commit/e217985ccd8653375a64955ed302a781b7346426))
+- reactivate the submit button if there was an error with the card info ([245a013](https://github.com/pelcro-inc/react-pelcro-js/commit/245a013f0460407beb64f5b1ef700f9d5c27d844))
+- remove commented code ([4083c7c](https://github.com/pelcro-inc/react-pelcro-js/commit/4083c7c928571e8f22f19cf0328bc8f96a632f61))
+- remove console logs ([2320ada](https://github.com/pelcro-inc/react-pelcro-js/commit/2320ada3ccd7cd17d89ade70fd2ef99627d3eb92))
+
+### Features
+
+- add firstName, lastName, and phone to be required in register if tap is enabled ([f7b7f7c](https://github.com/pelcro-inc/react-pelcro-js/commit/f7b7f7c6848b043d4337731280437ddc30e75058))
+- add firstName, lastName, and phone to be required in register if tap is enabled ([4e7ea2f](https://github.com/pelcro-inc/react-pelcro-js/commit/4e7ea2fa9a99e7efe231391300a023ec9d0d9e4f))
+- add more required fields in the checkout view when tap is enabled ([64f68d1](https://github.com/pelcro-inc/react-pelcro-js/commit/64f68d137553df7b888658a7fc25235d74c7cce6))
+- add more required fields in the checkout view when tap is enabled ([#205](https://github.com/pelcro-inc/react-pelcro-js/issues/205)) ([32ea5a8](https://github.com/pelcro-inc/react-pelcro-js/commit/32ea5a8d755b465a6dc2fa1ebe9441189b6ef0d2))
+- add tax inclusive condition to show different UI ([8d34cb3](https://github.com/pelcro-inc/react-pelcro-js/commit/8d34cb35618e60227f001a39ed35cde6e60be024))
+- add two tap related check functions ([00ec4ee](https://github.com/pelcro-inc/react-pelcro-js/commit/00ec4ee1f5b9dcdaddefea069d5c99fcabb8c2de))
+- clear firstName, lastName, and phone after component unmount ([eb044b3](https://github.com/pelcro-inc/react-pelcro-js/commit/eb044b322bfff22bdf574b28718ba3fb1e94731b))
+- export payment method new inputs ([3b2bc2f](https://github.com/pelcro-inc/react-pelcro-js/commit/3b2bc2f5cde5efc035900228e7118336e068d8a2))
+- make the firstName, lastName, and phone required in user update if tap is enabled ([4c87586](https://github.com/pelcro-inc/react-pelcro-js/commit/4c8758645ff2b8da08fbadd0b6d7550c4bbbc3eb))
+- refactor and add test ([b9848ff](https://github.com/pelcro-inc/react-pelcro-js/commit/b9848ffdfea477b67a3f780f59a55c9a61983def))
+- remove console log ([55b4972](https://github.com/pelcro-inc/react-pelcro-js/commit/55b497250d5fb20f1255c2c4c380b51c09d1ccb9))
+- revert unnecessary changes and remove console logs ([7f44618](https://github.com/pelcro-inc/react-pelcro-js/commit/7f4461839c4b473a0c193dcb90d43ea875ef4c67))
 
 # [3.9.0-beta.11](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.9.0-beta.10...v3.9.0-beta.11) (2022-10-14)
 
-
 ### Features
 
-* add tax inclusive condition to show different UI ([8d34cb3](https://github.com/pelcro-inc/react-pelcro-js/commit/8d34cb35618e60227f001a39ed35cde6e60be024))
+- add tax inclusive condition to show different UI ([8d34cb3](https://github.com/pelcro-inc/react-pelcro-js/commit/8d34cb35618e60227f001a39ed35cde6e60be024))
 
 # [3.9.0-beta.10](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.9.0-beta.9...v3.9.0-beta.10) (2022-10-12)
 
-
 ### Features
 
-* remove console log ([55b4972](https://github.com/pelcro-inc/react-pelcro-js/commit/55b497250d5fb20f1255c2c4c380b51c09d1ccb9))
+- remove console log ([55b4972](https://github.com/pelcro-inc/react-pelcro-js/commit/55b497250d5fb20f1255c2c4c380b51c09d1ccb9))
 
 # [3.9.0-beta.9](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.9.0-beta.8...v3.9.0-beta.9) (2022-10-12)
 
-
 ### Features
 
-* export payment method new inputs ([3b2bc2f](https://github.com/pelcro-inc/react-pelcro-js/commit/3b2bc2f5cde5efc035900228e7118336e068d8a2))
+- export payment method new inputs ([3b2bc2f](https://github.com/pelcro-inc/react-pelcro-js/commit/3b2bc2f5cde5efc035900228e7118336e068d8a2))
 
 # [3.9.0-beta.8](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.9.0-beta.7...v3.9.0-beta.8) (2022-10-11)
 
-
 ### Features
 
-* revert unnecessary changes and remove console logs ([7f44618](https://github.com/pelcro-inc/react-pelcro-js/commit/7f4461839c4b473a0c193dcb90d43ea875ef4c67))
+- revert unnecessary changes and remove console logs ([7f44618](https://github.com/pelcro-inc/react-pelcro-js/commit/7f4461839c4b473a0c193dcb90d43ea875ef4c67))
 
 # [3.9.0-beta.7](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.9.0-beta.6...v3.9.0-beta.7) (2022-10-11)
 
-
 ### Features
 
-* clear firstName, lastName, and phone after component unmount ([eb044b3](https://github.com/pelcro-inc/react-pelcro-js/commit/eb044b322bfff22bdf574b28718ba3fb1e94731b))
+- clear firstName, lastName, and phone after component unmount ([eb044b3](https://github.com/pelcro-inc/react-pelcro-js/commit/eb044b322bfff22bdf574b28718ba3fb1e94731b))
 
 # [3.9.0-beta.6](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.9.0-beta.5...v3.9.0-beta.6) (2022-10-11)
 
-
 ### Features
 
-* make the firstName, lastName, and phone required in user update if tap is enabled ([4c87586](https://github.com/pelcro-inc/react-pelcro-js/commit/4c8758645ff2b8da08fbadd0b6d7550c4bbbc3eb))
+- make the firstName, lastName, and phone required in user update if tap is enabled ([4c87586](https://github.com/pelcro-inc/react-pelcro-js/commit/4c8758645ff2b8da08fbadd0b6d7550c4bbbc3eb))
 
 # [3.9.0-beta.5](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.9.0-beta.4...v3.9.0-beta.5) (2022-10-07)
 
-
 ### Bug Fixes
 
-* change the value from input not state when it's empty ([ef1397f](https://github.com/pelcro-inc/react-pelcro-js/commit/ef1397fa1657ebc2cd774539ed525702d8993739))
+- change the value from input not state when it's empty ([ef1397f](https://github.com/pelcro-inc/react-pelcro-js/commit/ef1397fa1657ebc2cd774539ed525702d8993739))
 
 # [3.9.0-beta.4](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.9.0-beta.3...v3.9.0-beta.4) (2022-10-06)
 
-
 ### Bug Fixes
 
-* change site id back to 85 ([abda218](https://github.com/pelcro-inc/react-pelcro-js/commit/abda218aa38bbcdf10726b8570a69839ba6afcd7))
-* firstName, lastName, and Phone on change value condition ([51e09e7](https://github.com/pelcro-inc/react-pelcro-js/commit/51e09e7c203f31e0ff84079a620da41224507372))
-* remove console logs ([2320ada](https://github.com/pelcro-inc/react-pelcro-js/commit/2320ada3ccd7cd17d89ade70fd2ef99627d3eb92))
-
+- change site id back to 85 ([abda218](https://github.com/pelcro-inc/react-pelcro-js/commit/abda218aa38bbcdf10726b8570a69839ba6afcd7))
+- firstName, lastName, and Phone on change value condition ([51e09e7](https://github.com/pelcro-inc/react-pelcro-js/commit/51e09e7c203f31e0ff84079a620da41224507372))
+- remove console logs ([2320ada](https://github.com/pelcro-inc/react-pelcro-js/commit/2320ada3ccd7cd17d89ade70fd2ef99627d3eb92))
 
 ### Features
 
-* add more required fields in the checkout view when tap is enabled ([64f68d1](https://github.com/pelcro-inc/react-pelcro-js/commit/64f68d137553df7b888658a7fc25235d74c7cce6))
+- add more required fields in the checkout view when tap is enabled ([64f68d1](https://github.com/pelcro-inc/react-pelcro-js/commit/64f68d137553df7b888658a7fc25235d74c7cce6))
 
 # [3.9.0-beta.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.9.0-beta.2...v3.9.0-beta.3) (2022-10-05)
 
-
 ### Features
 
-* add more required fields in the checkout view when tap is enabled ([#205](https://github.com/pelcro-inc/react-pelcro-js/issues/205)) ([32ea5a8](https://github.com/pelcro-inc/react-pelcro-js/commit/32ea5a8d755b465a6dc2fa1ebe9441189b6ef0d2))
+- add more required fields in the checkout view when tap is enabled ([#205](https://github.com/pelcro-inc/react-pelcro-js/issues/205)) ([32ea5a8](https://github.com/pelcro-inc/react-pelcro-js/commit/32ea5a8d755b465a6dc2fa1ebe9441189b6ef0d2))
 
 # [3.9.0-beta.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.9.0-beta.1...v3.9.0-beta.2) (2022-10-04)
 
-
 ### Bug Fixes
 
-* change the siteid back to 85 ([0c97df4](https://github.com/pelcro-inc/react-pelcro-js/commit/0c97df411eabe96d62623f07a6fbe24718ca64c1))
-* load the firstName, lastName, and Phone in the user update form if exist ([e217985](https://github.com/pelcro-inc/react-pelcro-js/commit/e217985ccd8653375a64955ed302a781b7346426))
-* reactivate the submit button if there was an error with the card info ([245a013](https://github.com/pelcro-inc/react-pelcro-js/commit/245a013f0460407beb64f5b1ef700f9d5c27d844))
-
+- change the siteid back to 85 ([0c97df4](https://github.com/pelcro-inc/react-pelcro-js/commit/0c97df411eabe96d62623f07a6fbe24718ca64c1))
+- load the firstName, lastName, and Phone in the user update form if exist ([e217985](https://github.com/pelcro-inc/react-pelcro-js/commit/e217985ccd8653375a64955ed302a781b7346426))
+- reactivate the submit button if there was an error with the card info ([245a013](https://github.com/pelcro-inc/react-pelcro-js/commit/245a013f0460407beb64f5b1ef700f9d5c27d844))
 
 ### Features
 
-* add firstName, lastName, and phone to be required in register if tap is enabled ([4e7ea2f](https://github.com/pelcro-inc/react-pelcro-js/commit/4e7ea2fa9a99e7efe231391300a023ec9d0d9e4f))
-* add two tap related check functions ([00ec4ee](https://github.com/pelcro-inc/react-pelcro-js/commit/00ec4ee1f5b9dcdaddefea069d5c99fcabb8c2de))
-* refactor and add test ([b9848ff](https://github.com/pelcro-inc/react-pelcro-js/commit/b9848ffdfea477b67a3f780f59a55c9a61983def))
+- add firstName, lastName, and phone to be required in register if tap is enabled ([4e7ea2f](https://github.com/pelcro-inc/react-pelcro-js/commit/4e7ea2fa9a99e7efe231391300a023ec9d0d9e4f))
+- add two tap related check functions ([00ec4ee](https://github.com/pelcro-inc/react-pelcro-js/commit/00ec4ee1f5b9dcdaddefea069d5c99fcabb8c2de))
+- refactor and add test ([b9848ff](https://github.com/pelcro-inc/react-pelcro-js/commit/b9848ffdfea477b67a3f780f59a55c9a61983def))
 
 # [3.9.0-beta.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.8.1...v3.9.0-beta.1) (2022-10-04)
 
-
 ### Features
 
-* add firstName, lastName, and phone to be required in register if tap is enabled ([f7b7f7c](https://github.com/pelcro-inc/react-pelcro-js/commit/f7b7f7c6848b043d4337731280437ddc30e75058))
+- add firstName, lastName, and phone to be required in register if tap is enabled ([f7b7f7c](https://github.com/pelcro-inc/react-pelcro-js/commit/f7b7f7c6848b043d4337731280437ddc30e75058))
 
 ## [3.8.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.8.0...v3.8.1) (2022-09-30)
 
-
 ### Bug Fixes
 
-* check for the credit card icon name before applying toLowerCase function ([8d8cccf](https://github.com/pelcro-inc/react-pelcro-js/commit/8d8cccf13167467ce0214c5e58c268033da233de))
+- check for the credit card icon name before applying toLowerCase function ([8d8cccf](https://github.com/pelcro-inc/react-pelcro-js/commit/8d8cccf13167467ce0214c5e58c268033da233de))
 
 ## [3.8.1-beta.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.8.0...v3.8.1-beta.1) (2022-09-30)
 
-
 ### Bug Fixes
 
-* check for the credit card icon name before applying toLowerCase function ([8d8cccf](https://github.com/pelcro-inc/react-pelcro-js/commit/8d8cccf13167467ce0214c5e58c268033da233de))
+- check for the credit card icon name before applying toLowerCase function ([8d8cccf](https://github.com/pelcro-inc/react-pelcro-js/commit/8d8cccf13167467ce0214c5e58c268033da233de))
 
 # [3.8.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.7.1...v3.8.0) (2022-09-23)
 
-
 ### Bug Fixes
 
-* add onSuccess if no payment_intent conditions are met ([2ea38bf](https://github.com/pelcro-inc/react-pelcro-js/commit/2ea38bf8b65a706ee580d7e8a45251860f527780))
-* fix the error handling on auth response ([144f21c](https://github.com/pelcro-inc/react-pelcro-js/commit/144f21c981783defdacf81d824c330b37e2ffdd6))
-* incorrect translations ([ce21e71](https://github.com/pelcro-inc/react-pelcro-js/commit/ce21e717caeaade6da52bd17d09d55e45243a489))
-* reactivate the submit button after a failed tap card error ([8427c3f](https://github.com/pelcro-inc/react-pelcro-js/commit/8427c3fd39517c46ff06d7589970223a1e32f19e))
-* remove renew button when subscription status is incomplete ([9f51541](https://github.com/pelcro-inc/react-pelcro-js/commit/9f515411a6fa77395a8f79651e8f6e72ff6d7066))
-
+- add onSuccess if no payment_intent conditions are met ([2ea38bf](https://github.com/pelcro-inc/react-pelcro-js/commit/2ea38bf8b65a706ee580d7e8a45251860f527780))
+- fix the error handling on auth response ([144f21c](https://github.com/pelcro-inc/react-pelcro-js/commit/144f21c981783defdacf81d824c330b37e2ffdd6))
+- incorrect translations ([ce21e71](https://github.com/pelcro-inc/react-pelcro-js/commit/ce21e717caeaade6da52bd17d09d55e45243a489))
+- reactivate the submit button after a failed tap card error ([8427c3f](https://github.com/pelcro-inc/react-pelcro-js/commit/8427c3fd39517c46ff06d7589970223a1e32f19e))
+- remove renew button when subscription status is incomplete ([9f51541](https://github.com/pelcro-inc/react-pelcro-js/commit/9f515411a6fa77395a8f79651e8f6e72ff6d7066))
 
 ### Features
 
-* add error handling for tap authorize response ([1648c31](https://github.com/pelcro-inc/react-pelcro-js/commit/1648c31c1e743720ffa92a256069b76429876868))
-* add optional parameter to logout function ([#195](https://github.com/pelcro-inc/react-pelcro-js/issues/195)) ([f695984](https://github.com/pelcro-inc/react-pelcro-js/commit/f69598461ad81570ba5cb888b0428cc64cc41840))
-* add tap payment gateway ([e6e58d5](https://github.com/pelcro-inc/react-pelcro-js/commit/e6e58d5c5619cd38201e89f7ee4d884cf2050fe0))
-* add the confirmStripeCardPayment to the pay invoice ([9144c47](https://github.com/pelcro-inc/react-pelcro-js/commit/9144c47f65083ef7cadbc7a67f101eb1c5b8cdcc))
-* disable submit button with custom error message when sub is created ([#203](https://github.com/pelcro-inc/react-pelcro-js/issues/203)) ([717d4fe](https://github.com/pelcro-inc/react-pelcro-js/commit/717d4fe59affb483b0378f31ee8ab2e367d18e65))
-* edit the vantiv config to make the expiry date required ([#202](https://github.com/pelcro-inc/react-pelcro-js/issues/202)) ([9563565](https://github.com/pelcro-inc/react-pelcro-js/commit/9563565be3d4150765ea4cb638e6570d9a2a61fe))
-* initial fix for 3ds2 ([fede375](https://github.com/pelcro-inc/react-pelcro-js/commit/fede375ed2c59845e729c7bd2832e3e127e50441))
-* remove decrementPageViewFrequency ([#197](https://github.com/pelcro-inc/react-pelcro-js/issues/197)) ([4584453](https://github.com/pelcro-inc/react-pelcro-js/commit/4584453f004097fe59842d49f8e89afaf6aaa3d3))
-* support 3DS for stripe ([0edac64](https://github.com/pelcro-inc/react-pelcro-js/commit/0edac64dbbc213036dacc17f5e9440aa5c467b14))
-* update ([3f66826](https://github.com/pelcro-inc/react-pelcro-js/commit/3f66826e3f9a722678ce7c5234b4f0ec8360ab52))
+- add error handling for tap authorize response ([1648c31](https://github.com/pelcro-inc/react-pelcro-js/commit/1648c31c1e743720ffa92a256069b76429876868))
+- add optional parameter to logout function ([#195](https://github.com/pelcro-inc/react-pelcro-js/issues/195)) ([f695984](https://github.com/pelcro-inc/react-pelcro-js/commit/f69598461ad81570ba5cb888b0428cc64cc41840))
+- add tap payment gateway ([e6e58d5](https://github.com/pelcro-inc/react-pelcro-js/commit/e6e58d5c5619cd38201e89f7ee4d884cf2050fe0))
+- add the confirmStripeCardPayment to the pay invoice ([9144c47](https://github.com/pelcro-inc/react-pelcro-js/commit/9144c47f65083ef7cadbc7a67f101eb1c5b8cdcc))
+- disable submit button with custom error message when sub is created ([#203](https://github.com/pelcro-inc/react-pelcro-js/issues/203)) ([717d4fe](https://github.com/pelcro-inc/react-pelcro-js/commit/717d4fe59affb483b0378f31ee8ab2e367d18e65))
+- edit the vantiv config to make the expiry date required ([#202](https://github.com/pelcro-inc/react-pelcro-js/issues/202)) ([9563565](https://github.com/pelcro-inc/react-pelcro-js/commit/9563565be3d4150765ea4cb638e6570d9a2a61fe))
+- initial fix for 3ds2 ([fede375](https://github.com/pelcro-inc/react-pelcro-js/commit/fede375ed2c59845e729c7bd2832e3e127e50441))
+- remove decrementPageViewFrequency ([#197](https://github.com/pelcro-inc/react-pelcro-js/issues/197)) ([4584453](https://github.com/pelcro-inc/react-pelcro-js/commit/4584453f004097fe59842d49f8e89afaf6aaa3d3))
+- support 3DS for stripe ([0edac64](https://github.com/pelcro-inc/react-pelcro-js/commit/0edac64dbbc213036dacc17f5e9440aa5c467b14))
+- update ([3f66826](https://github.com/pelcro-inc/react-pelcro-js/commit/3f66826e3f9a722678ce7c5234b4f0ec8360ab52))
 
 ## [3.7.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.7.0...v3.7.1) (2022-09-08)
 
