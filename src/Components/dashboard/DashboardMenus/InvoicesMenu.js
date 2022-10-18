@@ -21,7 +21,7 @@ export const InvoicesMenu = (props) => {
   return (
     <Card
       id="pelcro-dashboard-invoices-menu"
-      className="plc-max-w-80% plc-m-auto plc-mt-20"
+      className="plc-max-w-80% plc-m-auto"
       title={t("labels.invoices")}
     >
       <table className="plc-w-full plc-table-fixed pelcro-invoices-table plc-text-left">

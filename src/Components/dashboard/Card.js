@@ -11,7 +11,7 @@ export const Card = ({
   const { t } = useTranslation("dashboard");
   return (
     <div
-      className={`plc-bg-white plc-border-2 plc-p-6 plc-rounded ${className}`}
+      className={`plc-bg-white plc-border-2 plc-p-6 plc-rounded plc-my-20 ${className}`}
       id="plc-dashboard-card"
     >
       {title && (

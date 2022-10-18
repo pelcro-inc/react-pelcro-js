@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "./ToggleSwitch.css";
 
-export const ToggleSwitch = ({ label, isActive }) => {
+export const ToggleSwitch = ({ label, isActive, handleChange }) => {
   const [isToggled, setIsToggled] = useState(isActive ?? false);
   const onToggle = () => {
     setIsToggled(!isToggled);
-    console.log("Toggled");
+    handleChange?.();
   };
 
   
