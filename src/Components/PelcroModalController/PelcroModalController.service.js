@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import ReactGA from "react-ga";
+import { default as ReactGA1 } from "react-ga";
+import { default as ReactGA4 } from "react-ga4";
 import { usePelcro } from "../../hooks/usePelcro";
 import {
   getStableViewID,
@@ -11,6 +12,8 @@ import { loadStripe } from "@stripe/stripe-js/pure";
 import { notify } from "../../SubComponents/Notification";
 import { getErrorMessages } from "../common/Helpers";
 import i18n from "../../i18n";
+
+const ReactGA = window?.Pelcro?.uiSettings?.enableReactGA4 ? ReactGA4 : ReactGA1;
 
 /**
  * @typedef {Object} OptionsType
