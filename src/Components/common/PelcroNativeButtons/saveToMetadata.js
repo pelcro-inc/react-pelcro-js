@@ -1,6 +1,9 @@
-import ReactGA from "react-ga";
+import { default as ReactGA1 } from "react-ga";
+import { default as ReactGA4 } from "react-ga4";
 import { usePelcro } from "../../../hooks/usePelcro";
 import { userMustVerifyEmail } from "../../../utils/utils";
+
+const ReactGA = window?.Pelcro?.uiSettings?.enableReactGA4 ? ReactGA4 : ReactGA1;
 
 class SaveToMetadataButtonClass {
   init() {

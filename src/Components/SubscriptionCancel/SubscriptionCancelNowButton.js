@@ -1,10 +1,13 @@
 import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
-import ReactGA from "react-ga";
 import { Button } from "../../SubComponents/Button";
 import { usePelcro } from "../../hooks/usePelcro";
 import { store } from "./SubscriptionCancelContainer";
 import { notify } from "../../SubComponents/Notification";
+import { default as ReactGA1 } from "react-ga";
+import { default as ReactGA4 } from "react-ga4";
+
+const ReactGA = window?.Pelcro?.uiSettings?.enableReactGA4 ? ReactGA4 : ReactGA1;
 
 export const SubscriptionCancelNowButton = ({
   subscription,
