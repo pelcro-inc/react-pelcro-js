@@ -140,7 +140,7 @@ export const GiftsMenu = (props) => {
   return (
     <Card
       id="pelcro-dashboard-gifts-menu"
-      className="plc-max-w-80% plc-m-auto plc-mt-20"
+      className="plc-max-w-80% plc-m-auto"
       title={t("labels.gifts")}
     >
       {renderGiftRecipients()}

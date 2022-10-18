@@ -16,8 +16,8 @@ export const AddressesMenu = (props) => {
 
   return (
     <Card
-      id="pelcro-dashboard-donation-menu"
-      className="plc-max-w-80% plc-m-auto plc-mt-20"
+      id="pelcro-dashboard-addresses-menu"
+      className="plc-max-w-80% plc-m-auto"
       title={t("labels.addresses")}
       requestStates={requestStates}
     >
@@ -27,7 +27,7 @@ export const AddressesMenu = (props) => {
         displayAddressEdit={props?.displayAddressEdit}
       />
       <AddNew
-        title={`Add Address`}
+        title={t("labels.addAddress")}
         onClick={() => props?.displayAddressCreate()}
       />
     </Card>

@@ -30,8 +30,8 @@ export const SavedItemsMenu = () => {
 
   return (
     <Card
-      id="pelcro-dashboard-donation-menu"
-      className="plc-max-w-80% plc-m-auto plc-mt-20"
+      id="pelcro-dashboard-saved-menu"
+      className="plc-max-w-80% plc-m-auto"
       title={t("labels.savedItems.label")}
     >
       <SavedItems items={userSavedItems} setItems={setUserMetadata} />

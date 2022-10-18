@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import { ReactComponent as EditIcon } from "../../../assets/edit.svg";
-import { usePelcro } from "../../../hooks/usePelcro";
 import { Card } from "../Card";
 import { AddNew } from "../AddNew";
 import { Button } from "../../../SubComponents/Button";
@@ -13,8 +12,8 @@ export const PaymentCardsMenu = (props) => {
 
   return (
     <Card
-      id="pelcro-dashboard-donation-menu"
-      className="plc-max-w-80% plc-m-auto plc-mt-20"
+      id="pelcro-dashboard-payment-menu"
+      className="plc-max-w-80% plc-m-auto"
       title={t("labels.paymentSource")}
     >
       {source ? (
@@ -24,7 +23,7 @@ export const PaymentCardsMenu = (props) => {
         />
       ) : (
         <AddNew
-          title={`Add Card`}
+          title={t("labels.addCard")}
           onClick={() => props?.displaySourceCreate()}
         />
       )}

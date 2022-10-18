@@ -2,13 +2,7 @@ import React, { Component } from "react";
 import ReactGA from "react-ga";
 import { Transition } from "@headlessui/react";
 import { withTranslation } from "react-i18next";
-import {
-  getFormattedPriceByLocal,
-  getPageOrDefaultLanguage
-} from "../../utils/utils";
 import { Button } from "../../SubComponents/Button";
-import { getPaymentCardIcon } from "./utils";
-import { Accordion } from "./Accordion";
 import { ReactComponent as ExitIcon } from "../../assets/exit.svg";
 import { ReactComponent as XIcon } from "../../assets/x-icon.svg";
 import { ReactComponent as CheckMarkIcon } from "../../assets/check-mark.svg";
@@ -41,6 +35,9 @@ import { DashboardLink } from "./DashboardLink";
 import { GiftsMenu } from "./DashboardMenus/GiftsMenu";
 import { AddressesMenu } from "./DashboardMenus/AddressesMenu";
 import { PaymentCardsMenu } from "./DashboardMenus/PaymentCardsMenu";
+import { QRCodeMenu } from "./DashboardMenus/QRCodeMenu";
+import { ProfileMenu } from "./DashboardMenus/ProfileMenu";
+import { NewslettersMenu } from "./DashboardMenus/NewslettersMenu";
 
 const SUB_MENUS = {
   PROFILE: "profile",
@@ -48,11 +45,13 @@ const SUB_MENUS = {
   SUBSCRIPTIONS: "subscriptions",
   DONATIONS: "donations",
   MEMBERSHIPS: "memberships",
+  NEWSLETTERS: "Newsletters",
   PAYMENT_CARDS: "payment-cards",
   ADDRESSES: "addresses",
   GIFTS: "gifts",
   ORDERS: "orders",
   INVOICES: "invoices",
+  LOGOUT: "logout",
   SAVED_ITEMS: "saved-items"
 };
 
@@ -140,13 +139,13 @@ class Dashboard extends Component {
   };
 
   hideMenuIfClickedOutside = (event) => {
-    const dashboardCard = document.getElementById("plc-dashboard-card");
+    const dashboardSubmenus = document.getElementById("pelcro-view-dashboard-submenus");
 
     const didClickOutsideMenu =
       this.state.isOpen &&
       this.menuRef.current &&
       !this.menuRef.current.contains(event.target) &&
-      !dashboardCard?.contains(event.target);
+      !dashboardSubmenus?.contains(event.target);
 
     if (didClickOutsideMenu) {
       this.setState({ 
@@ -460,7 +459,7 @@ class Dashboard extends Component {
     return (
       <>
         <Transition
-          className="plc-fixed plc-inset-y-0 plc-left-0 plc-h-full plc-w-3/12 plc-overflow-y-auto plc-text-left plc-bg-white plc-shadow-xl plc-z-max"
+          className="plc-fixed plc-inset-y-0 plc-left-0 plc-h-full lg:plc-w-3/12 plc-w-full plc-overflow-y-auto plc-text-left plc-bg-white plc-shadow-xl plc-z-max"
           show={isOpen}
           enter="plc-transform plc-transition plc-duration-500"
           enterFrom="plc--translate-x-full"
@@ -487,7 +486,6 @@ class Dashboard extends Component {
                 title={this.locale("labels.basicData")}
                 setActiveDashboardLink={this.setActiveDashboardLink}
                 activeDashboardLink={this.state.activeDashboardLink}
-                // onClick={this.displayUserEdit}
               />
 
               <DashboardLink
@@ -498,7 +496,6 @@ class Dashboard extends Component {
                 title={"My QR code"}
                 setActiveDashboardLink={this.setActiveDashboardLink}
                 activeDashboardLink={this.state.activeDashboardLink}
-                // onClick={this.displayQRCode}
               />
 
               <DashboardLink
@@ -548,6 +545,16 @@ class Dashboard extends Component {
               />
 
               <DashboardLink
+                name={SUB_MENUS.NEWSLETTERS}
+                icon={
+                  <NewsletterIcon className="plc-transform plc-scale-120 plc-w-7 plc-h-8 plc-mr-1 plc-pt-1" />
+                }
+                title={this.locale("labels.Newsletters")}
+                setActiveDashboardLink={this.setActiveDashboardLink}
+                activeDashboardLink={this.state.activeDashboardLink}
+              />
+
+              <DashboardLink
                 name={SUB_MENUS.MEMBERSHIPS}
                 icon={
                   <MembershipsIcon className="plc-transform plc-scale-120 plc-w-7 plc-h-8 plc-mr-1 plc-pt-1" />
@@ -576,6 +583,14 @@ class Dashboard extends Component {
               />
 
               <DashboardLink
+                name={SUB_MENUS.ORDERS}
+                icon={<ShoppingIcon />}
+                title={this.locale("labels.orders.label")}
+                setActiveDashboardLink={this.setActiveDashboardLink}
+                activeDashboardLink={this.state.activeDashboardLink}
+              />
+
+              <DashboardLink
                 show={hasInvoices()}
                 name={SUB_MENUS.INVOICES}
                 icon={<InvoiceIcon />}
@@ -583,86 +598,6 @@ class Dashboard extends Component {
                 setActiveDashboardLink={this.setActiveDashboardLink}
                 activeDashboardLink={this.state.activeDashboardLink}
               />
-
-              {/* <Accordion.item
-                  name={SUB_MENUS.SUBSCRIPTIONS}
-                  icon={
-                    <SubscriptionIcon className="plc-w-10 plc-h-10 plc-pt-2 plc-pr-1 plc--ml-2" />
-                  }
-                  title={this.locale("labels.subscriptions")}
-                  content={
-                    <SubscriptionsMenu
-                      onClose={this.props.onClose}
-                      cancelSubscription={this.cancelSubscription}
-                      unSuspendSubscription={this.unSuspendSubscription}
-                      reactivateSubscription={
-                        this.reactivateSubscription
-                      }
-                      setProductAndPlan={this.props.setProductAndPlan}
-                      setSubscriptionIdToRenew={
-                        this.props.setSubscriptionIdToRenew
-                      }
-                      setView={this.props.setView}
-                      getSubscriptionStatus={this.getSubscriptionStatus}
-                      disableSubmit={this.state.disableSubmit}
-                      displayProductSelect={this.displayProductSelect}
-                      displayRedeem={this.displayRedeem}
-                    />
-                  }
-                /> */}
-
-              {/* <Accordion.item
-                  show={hasActiveMemberships()}
-                  name={SUB_MENUS.MEMBERSHIPS}
-                  icon={
-                    <MembershipsIcon className="plc-transform plc-scale-120 plc-w-7 plc-h-8 plc-mr-1 plc-pt-1" />
-                  }
-                  title={this.locale("labels.memberships")}
-                  content={<MembershipsMenu />}
-                /> */}
-
-              {/* <Accordion.item
-                  show={hasDonationSubs()}
-                  name={SUB_MENUS.DONATIONS}
-                  icon={
-                    <DonateIcon className="plc-transform plc-scale-120 plc-w-7 plc-h-8 plc-mr-1 plc-pt-1" />
-                  }
-                  title={this.locale("labels.donations")}
-                  content={<DonationsMenu />}
-                /> */}
-
-              {/* <Accordion.item
-                  name={SUB_MENUS.GIFTS}
-                  icon={<GiftIcon />}
-                  title={this.locale("labels.gifts")}
-                  content={this.renderGiftRecipients()}
-                /> */}
-
-              {/* <Accordion.item
-                  show={window.Pelcro.site.read().ecommerce_enabled}
-                  name={SUB_MENUS.ORDERS}
-                  icon={<ShoppingIcon />}
-                  title={this.locale("labels.orders.label")}
-                  content={<OrdersMenu />}
-                /> */}
-
-              {/* <Accordion.item
-                  show={hasInvoices()}
-                  name={SUB_MENUS.INVOICES}
-                  icon={<InvoiceIcon />}
-                  title={this.locale("labels.invoices")}
-                  content={<InvoicesMenu />}
-                /> */}
-
-              {/* <Button
-                  variant="outline"
-                  icon={<ExitIcon />}
-                  className="plc-flex plc-items-center plc-justify-start plc-w-full plc-p-5 plc-px-4 plc-text-lg plc-font-normal plc-text-gray-500 plc-capitalize plc-bg-transparent plc-border-0 plc-border-l-2 plc-border-transparent plc-rounded-none plc-cursor-pointer plc-select-none sm:plc-px-8 hover:plc-bg-gray-100 hover:plc-text-gray-500"
-                  onClick={this.props.logout}
-                >
-                  {this.locale("labels.logout")}
-                </Button> */}
-              {/* </Accordion> */}
             </section>
             <header className="plc-bg-gray-200 plc-flex plc-py-5">
               <div className="plc-flex plc-items-center">
@@ -696,22 +631,28 @@ class Dashboard extends Component {
                 </div>
               </div>
             </header>
+            <DashboardLink
+              name={SUB_MENUS.LOGOUT}
+              icon={<ExitIcon />}
+              title={this.locale("labels.logout")}
+              setActiveDashboardLink={this.setActiveDashboardLink}
+              activeDashboardLink={this.state.activeDashboardLink}
+            />
           </div>
         </Transition>
         {this.state.activeDashboardLink && isOpen && (
           <div
             id="pelcro-view-dashboard-submenus"
-            className="plc-fixed plc-inset-y-0 plc-right-0 plc-h-full plc-w-9/12 plc-bg-gray-100 plc-z-max"
+            className="plc-fixed plc-inset-y-0 plc-right-0 plc-h-full lg:plc-w-9/12 plc-w-full plc-bg-gray-100 plc-z-max plc-overflow-auto"
           >
-            {this.state.activeDashboardLink === SUB_MENUS.PROFILE &&
-              this.displayUserEdit()}
-            {this.state.activeDashboardLink === SUB_MENUS.QRCODE &&
-              this.displayQRCode()}
+            {this.state.activeDashboardLink === SUB_MENUS.PROFILE && (
+              <ProfileMenu />
+            )}
+            {this.state.activeDashboardLink === SUB_MENUS.QRCODE && (
+              <QRCodeMenu />
+            )}
             {this.state.activeDashboardLink ===
               SUB_MENUS.SAVED_ITEMS && <SavedItemsMenu />}
-            {this.state.activeDashboardLink ===
-              SUB_MENUS.SUBSCRIPTIONS &&
-              this.displayProductSelect({ isGift: false })}
             {this.state.activeDashboardLink ===
               SUB_MENUS.PAYMENT_CARDS && (
               <PaymentCardsMenu
@@ -726,7 +667,29 @@ class Dashboard extends Component {
               />
             )}
             {this.state.activeDashboardLink ===
-              SUB_MENUS.MEMBERSHIPS && <MembershipsMenu />}
+              SUB_MENUS.SUBSCRIPTIONS && (
+              <SubscriptionsMenu
+                // getSubscriptionStatus={this.getSubscriptionStatus}
+                displayProductSelect={this.displayProductSelect}
+                displayRedeem={this.displayRedeem}
+                cancelSubscription={this.cancelSubscription}
+                unSuspendSubscription={this.unSuspendSubscription}
+                reactivateSubscription={this.reactivateSubscription}
+                setProductAndPlan={this.props.setProductAndPlan}
+                setSubscriptionIdToRenew={this.props.setSubscriptionIdToRenew}
+                setView={this.props.setView}
+                getSubscriptionStatus={this.getSubscriptionStatus}
+                disableSubmit={this.state.disableSubmit}
+              />
+            )}
+            {this.state.activeDashboardLink ===
+              SUB_MENUS.MEMBERSHIPS && (
+              <MembershipsMenu
+                getSubscriptionStatus={this.getSubscriptionStatus}
+              />
+            )}
+            {this.state.activeDashboardLink ===
+              SUB_MENUS.NEWSLETTERS && <NewslettersMenu />}
             {this.state.activeDashboardLink ===
               SUB_MENUS.DONATIONS && (
               <DonationsMenu
@@ -746,7 +709,20 @@ class Dashboard extends Component {
               />
             )}
             {this.state.activeDashboardLink ===
+              SUB_MENUS.ORDERS && <OrdersMenu />}
+            {this.state.activeDashboardLink ===
               SUB_MENUS.INVOICES && <InvoicesMenu />}
+            {this.state.activeDashboardLink === SUB_MENUS.LOGOUT &&
+              this.props.logout()}
+
+            <Button
+              variant="ghost"
+              type="button"
+              className="plc-text-gray-500 plc-rounded-2xl plc-absolute plc-z-max plc-top-5 plc-right-10"
+              onClick={this.closeDashboard}
+            >
+              <XIcon className="plc-fill-current" />
+            </Button>
           </div>
         )}
       </>
