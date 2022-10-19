@@ -17,9 +17,14 @@ export const DiscountedPrice = (props) => {
   } = useContext(store);
   const { order, plan } = usePelcro();
 
+  const isTaxInclusive = window.Pelcro.site?.read()?.tax_inclusive;
+
   const ecommOrderCurrency = order?.currency ?? order?.[0]?.currency;
   const planQuantity = plan?.quantity ?? 1;
-  const discountedPriceWithoutTax = updatedPrice - taxAmount;
+
+  const discountedPriceWithoutTax = isTaxInclusive
+    ? updatedPrice
+    : updatedPrice - taxAmount;
 
   const priceFormatted = getFormattedPriceByLocal(
     order ? updatedPrice : discountedPriceWithoutTax * planQuantity,
