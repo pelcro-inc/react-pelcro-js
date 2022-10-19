@@ -814,7 +814,7 @@ const PaymentMethodContainerWithoutStripe = ({
       });
     } catch {
       console.log(
-        "Google Pay/Apple pay isn't available in this country"
+        "Google Pay/Apple pay isn't available/supported in this country"
       );
     }
   };
