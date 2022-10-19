@@ -1,3 +1,10 @@
+## [3.9.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.9.0...v3.9.1) (2022-10-19)
+
+
+### Bug Fixes
+
+* display the total amount when coupon is applied and tax is inclusive ([f5fe724](https://github.com/pelcro-inc/react-pelcro-js/commit/f5fe724552b9d18d66ef385cbd391977f666b408))
+
 ## [3.9.1-beta.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.9.0...v3.9.1-beta.1) (2022-10-19)
 
 
