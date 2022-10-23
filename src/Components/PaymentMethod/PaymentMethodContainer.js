@@ -193,7 +193,7 @@ const PaymentMethodContainerWithoutStripe = ({
       plan?.amount ??
       invoice?.amount_remaining ??
       getOrderItemsTotal() ??
-      0.1;
+      10;
 
     tapInstanceRef.current
       .createToken(tapInstanceCard.current)
