@@ -1,3 +1,10 @@
+## [3.9.4](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.9.3...v3.9.4) (2022-10-23)
+
+
+### Bug Fixes
+
+* send 10 cents as 10 instead of 0.1 ([3e44c14](https://github.com/pelcro-inc/react-pelcro-js/commit/3e44c14de31273800e14918bc6fcd9c1b47898b4))
+
 ## [3.9.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.9.2...v3.9.3) (2022-10-23)
 
 ### Bug Fixes
