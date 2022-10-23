@@ -128,7 +128,9 @@ export function PaymentMethodView({
             {/* Payment buttons section */}
             <div className="plc-grid plc-mt-4 plc-gap-y-2">
               <SubmitPaymentMethod />
-              {showExternalPaymentMethods && !supportsVantiv ? (
+              {showExternalPaymentMethods &&
+              !supportsVantiv &&
+              !supportsTap ? (
                 <>
                   <PelcroPaymentRequestButton />
                   <PaypalSubscribeButton />
