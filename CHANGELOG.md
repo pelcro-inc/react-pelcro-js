@@ -1,3 +1,10 @@
+## [3.9.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.9.1...v3.9.2) (2022-10-23)
+
+
+### Bug Fixes
+
+* remove apple pay, google page, and paypal if tap is Supported ([23ac068](https://github.com/pelcro-inc/react-pelcro-js/commit/23ac068fcef63620a7a1e94eb97c5cef1beede8c))
+
 ## [3.9.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.9.0...v3.9.1) (2022-10-19)
 
 
