@@ -1,3 +1,10 @@
+## [3.9.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.9.2...v3.9.3) (2022-10-23)
+
+
+### Bug Fixes
+
+* send 10 cents if there are no total amount using Tap ([16d7ed5](https://github.com/pelcro-inc/react-pelcro-js/commit/16d7ed5d2d24662662451637e13f11b019e7e12a))
+
 ## [3.9.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.9.1...v3.9.2) (2022-10-23)
 
 ### Bug Fixes
