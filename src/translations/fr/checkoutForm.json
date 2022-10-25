@@ -1,7 +1,8 @@
 {
   "messages": {
     "youAreSafe": "Vous êtes en sécurité - PCI conforme 128 SSL par",
-    "bankRedirection": "Veuillez patienter, nous vous redirigeons vers votre banque."
+    "bankRedirection": "Veuillez patienter, nous vous redirigeons vers votre banque.",
+    "bankAuthenticationSuccess": "Veuillez patienter pendant que nous accédons à votre requête."
   },
   "labels": {
     "card": "Entrez le numéro de carte",

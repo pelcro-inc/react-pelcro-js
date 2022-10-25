@@ -11,6 +11,7 @@ import { CouponCode } from "./CouponCode";
 import { AlertWithContext } from "../../SubComponents/AlertWithContext";
 import { PaypalSubscribeButton } from "../PaypalButtons/PaypalSubscribeButton";
 import { BankRedirection } from "./BankRedirection";
+import { BankAuthenticationSuccess } from "./BankAuthenticationSuccess";
 import { Link } from "../../SubComponents/Link";
 import { ReactComponent as LockIcon } from "../../assets/lock.svg";
 import { SelectedPaymentMethod } from "./SelectedPaymentMethod";
@@ -78,6 +79,7 @@ export function PaymentMethodView({
           onFailure={onFailure}
         >
           <BankRedirection />
+          <BankAuthenticationSuccess />
           <AlertWithContext className="plc-mb-2" />
           {/* Payment form */}
           <div>

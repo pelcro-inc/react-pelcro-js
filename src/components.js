@@ -50,6 +50,7 @@ export { SelectedPaymentMethod } from "./Components/PaymentMethod/SelectedPaymen
 export { ApplyCouponButton } from "./Components/PaymentMethod/ApplyCouponButton";
 export { CouponCode } from "./Components/PaymentMethod/CouponCode";
 export { BankRedirection } from "./Components/PaymentMethod/BankRedirection";
+export { BankAuthenticationSuccess } from "./Components/PaymentMethod/BankAuthenticationSuccess";
 export { CouponCodeField } from "./Components/PaymentMethod/CouponCodeField";
 export { SubmitPaymentMethod } from "./Components/PaymentMethod/SubmitPaymentMethod";
 export { SubscriptionCreateModal } from "./Components/SubscriptionCreate/SubscriptionCreateModal";

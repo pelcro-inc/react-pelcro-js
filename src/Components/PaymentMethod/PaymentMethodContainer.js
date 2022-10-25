@@ -257,6 +257,8 @@ const PaymentMethodContainerWithoutStripe = ({
                     ) {
                       const tapID = data.tapID;
                       toggleAuthenticationPendingView(false);
+                      toggleAuthenticationSuccessPendingView(true);
+
                       window.removeEventListener(
                         "message",
                         retrieveSourceInfoFromIframe
@@ -1588,6 +1590,8 @@ const PaymentMethodContainerWithoutStripe = ({
   };
 
   const handlePaymentError = (error) => {
+    toggleAuthenticationSuccessPendingView(false);
+
     if (
       error.type === "validation_error" &&
       // Subscription creation & renewal
@@ -1649,6 +1653,20 @@ const PaymentMethodContainerWithoutStripe = ({
 
     if (show) {
       injectCardAuthenticationIframe(source);
+      cardAuthContainer.classList.remove("plc-hidden");
+      cardAuthContainer.classList.add("plc-flex");
+    } else {
+      cardAuthContainer.classList.add("plc-hidden");
+      cardAuthContainer.classList.remove("plc-flex");
+    }
+  };
+
+  const toggleAuthenticationSuccessPendingView = (show) => {
+    const cardAuthContainer = document.querySelector(
+      ".card-authentication-success-container"
+    );
+
+    if (show) {
       cardAuthContainer.classList.remove("plc-hidden");
       cardAuthContainer.classList.add("plc-flex");
     } else {
