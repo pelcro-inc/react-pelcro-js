@@ -1,3 +1,10 @@
+# [3.10.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.9.4...v3.10.0) (2022-10-25)
+
+
+### Features
+
+* add loading screen after card authentication process instead of showing the card iframe ([c400a39](https://github.com/pelcro-inc/react-pelcro-js/commit/c400a39c55be25580e0ac6fb3b468a38007c5c67))
+
 ## [3.9.4](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.9.3...v3.9.4) (2022-10-23)
 
 ### Bug Fixes
