@@ -16,15 +16,21 @@ import { initPaywalls } from "../PelcroModalController/PelcroModalController.ser
  */
 export function LoginModal({ onDisplay, onClose, ...props }) {
   const { t } = useTranslation("login");
-  const { switchView, resetView } = usePelcro();
+  const { switchView, resetView, invoice } = usePelcro();
 
   const onSuccess = (res) => {
     props.onSuccess?.(res);
-    resetView();
 
+    // If this is an invoice
+    if (invoice) {
+      switchView("invoice-details");
+    }
+    
     if (window.Pelcro.paywall.isArticleRestricted()) {
       initPaywalls();
     }
+    
+    resetView();
   };
 
   const onCreateAccountClick = () => {
