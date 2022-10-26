@@ -619,6 +619,7 @@ const showInvoiceDetailsFromUrl = () => {
     usePelcro.getStore();
 
   whenUserReady(() => {
+    
     const invoiceId = window.Pelcro.helpers.getURLParameter("id");
 
     const wasSetSuccessfully = setInvoice(invoiceId);
