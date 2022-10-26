@@ -864,7 +864,7 @@ const PaymentMethodContainerWithoutStripe = ({
 
       if (err) {
         onFailure(err);
-
+        console.error(err);
         dispatch({
           type: SET_COUPON_ERROR,
           payload: getErrorMessages(err)
