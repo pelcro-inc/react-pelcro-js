@@ -615,10 +615,10 @@ const showPasswordlessRequestFromUrl = () => {
 };
 
 const showInvoiceDetailsFromUrl = () => {
-  const { isAuthenticated, setInvoice, whenSiteReady, switchView } =
+  const { isAuthenticated, setInvoice, whenUserReady, switchView } =
     usePelcro.getStore();
 
-  whenSiteReady(() => {
+  whenUserReady(() => {
     if (!isAuthenticated()) {
       return switchView("login");
     }
