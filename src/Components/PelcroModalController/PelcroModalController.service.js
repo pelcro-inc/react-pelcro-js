@@ -619,9 +619,6 @@ const showInvoiceDetailsFromUrl = () => {
     usePelcro.getStore();
 
   whenUserReady(() => {
-    if (!isAuthenticated()) {
-      return switchView("login");
-    }
     const invoiceId = window.Pelcro.helpers.getURLParameter("id");
 
     const wasSetSuccessfully = setInvoice(invoiceId);
@@ -631,6 +628,10 @@ const showInvoiceDetailsFromUrl = () => {
       });
 
       return notify.error(errorMessage);
+    }
+
+    if (!isAuthenticated()) {
+      return switchView("login");
     }
 
     const { invoice } = usePelcro.getStore();
