@@ -1,3 +1,10 @@
+## [3.10.1-beta.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.10.1-beta.2...v3.10.1-beta.3) (2022-10-27)
+
+
+### Bug Fixes
+
+* invoice url trigger ([#212](https://github.com/pelcro-inc/react-pelcro-js/issues/212)) ([b9fb2e5](https://github.com/pelcro-inc/react-pelcro-js/commit/b9fb2e5511b23ca8f7181ecc9eb67f5dab450718))
+
 ## [3.10.1-beta.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.10.1-beta.1...v3.10.1-beta.2) (2022-10-26)
 
 
