@@ -615,35 +615,37 @@ const showPasswordlessRequestFromUrl = () => {
 };
 
 const showInvoiceDetailsFromUrl = () => {
-  const { isAuthenticated, setInvoice, whenUserReady, switchView } =
+  const { isAuthenticated, setInvoice, whenUserReady, whenSiteReady, switchView } =
     usePelcro.getStore();
 
-  whenUserReady(() => {
-    const invoiceId = window.Pelcro.helpers.getURLParameter("id");
-
-    const wasSetSuccessfully = setInvoice(invoiceId);
-    if (!wasSetSuccessfully) {
-      const errorMessage = i18n.t("messages:invalidInvoice", {
-        returnObjects: true
-      });
-
-      return notify.error(errorMessage);
-    }
-
+  whenSiteReady(() => {
     if (!isAuthenticated()) {
       return switchView("login");
     }
+    
+    whenUserReady(()=> {
+      const invoiceId = window.Pelcro.helpers.getURLParameter("id");
+      
+      const wasSetSuccessfully = setInvoice(invoiceId);
+      if (!wasSetSuccessfully) {
+        const errorMessage = i18n.t("messages:invalidInvoice", {
+          returnObjects: true
+        });
 
-    const { invoice } = usePelcro.getStore();
+        return notify.error(errorMessage);
+      }
 
-    if (invoice.total === 0) {
-      const errorMessage = i18n.t("messages:zeroTotalInvoice", {
-        returnObjects: true
-      });
+      const { invoice } = usePelcro.getStore();
 
-      return notify.error(errorMessage);
-    }
+      if (invoice.total === 0) {
+        const errorMessage = i18n.t("messages:zeroTotalInvoice", {
+          returnObjects: true
+        });
 
-    return switchView("invoice-details");
+        return notify.error(errorMessage);
+      }
+
+      return switchView("invoice-details");
+    })
   });
 };

@@ -9,7 +9,8 @@ import {
 } from "../../SubComponents/Modal";
 import { Link } from "../../SubComponents/Link";
 import { usePelcro } from "../../hooks/usePelcro";
-import { initPaywalls } from "../PelcroModalController/PelcroModalController.service";
+import { initPaywalls, initViewFromURL } from "../PelcroModalController/PelcroModalController.service";
+import { getStableViewID } from "../../utils/utils";
 
 /**
  *
@@ -20,17 +21,20 @@ export function LoginModal({ onDisplay, onClose, ...props }) {
 
   const onSuccess = (res) => {
     props.onSuccess?.(res);
-
-    // If this is an invoice
-    if (invoice) {
-      switchView("invoice-details");
-    }
     
     if (window.Pelcro.paywall.isArticleRestricted()) {
       initPaywalls();
     }
     
     resetView();
+    
+    const viewFromURL = getStableViewID(
+      window.Pelcro.helpers.getURLParameter("view")
+    );
+
+    if (viewFromURL === "invoice-details") {
+      initViewFromURL();
+    }
   };
 
   const onCreateAccountClick = () => {
