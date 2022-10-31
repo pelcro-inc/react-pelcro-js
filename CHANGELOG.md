@@ -1,3 +1,10 @@
+## [3.10.1-beta.9](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.10.1-beta.8...v3.10.1-beta.9) (2022-10-31)
+
+
+### Bug Fixes
+
+* separate Tap initiation into it's own useEffect ([09649b3](https://github.com/pelcro-inc/react-pelcro-js/commit/09649b3c29dacf79c11e43741c5d5a74378dc447))
+
 ## [3.10.1-beta.8](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.10.1-beta.7...v3.10.1-beta.8) (2022-10-31)
 
 
