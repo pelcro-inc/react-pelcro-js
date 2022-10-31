@@ -122,6 +122,7 @@ const PaymentMethodContainerWithoutStripe = ({
   const pelcroStore = usePelcro();
   const { set, order, selectedPaymentMethodId, couponCode } =
     usePelcro();
+  const { whenUserReady } = usePelcro.getStore();
 
   const product = props.product ?? pelcroStore.product;
   const plan = props.plan ?? pelcroStore.plan;
@@ -136,9 +137,29 @@ const PaymentMethodContainerWithoutStripe = ({
     props.isRenewingGift ?? pelcroStore.isRenewingGift;
   const invoice = props.invoice ?? pelcroStore.invoice;
 
+  const cardProcessor = getSiteCardProcessor();
+
   const [isTapLoaded, setIsTapLoaded] = useState(
     Boolean(window.Tapjsli)
   );
+
+  useEffect(() => {
+    whenUserReady(() => {
+      if (cardProcessor === "tap" && !window.Tapjsli) {
+        window.Pelcro.helpers.loadSDK(
+          "https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.4/bluebird.min.js",
+          "tap-bluebird"
+        );
+
+        window.Pelcro.helpers.loadSDK(
+          "https://secure.gosell.io/js/sdk/tap.min.js",
+          "tap-sdk"
+        );
+
+        setIsTapLoaded(true);
+      }
+    });
+  }, []);
 
   useEffect(() => {
     if (window.Pelcro.coupon.getFromUrl()) {
@@ -663,8 +684,6 @@ const PaymentMethodContainerWithoutStripe = ({
   const tapInstanceRef = React.useRef(null);
   const tapInstanceCard = React.useRef(null);
 
-  const cardProcessor = getSiteCardProcessor();
-
   useEffect(() => {
     if (cardProcessor === "vantiv" && !selectedPaymentMethodId) {
       const payPageId =
@@ -698,20 +717,6 @@ const PaymentMethodContainerWithoutStripe = ({
   }, [selectedPaymentMethodId]);
 
   useEffect(() => {
-    if (cardProcessor === "tap" && !isTapLoaded) {
-      window.Pelcro.helpers.loadSDK(
-        "https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.4/bluebird.min.js",
-        "tap-bluebird"
-      );
-
-      window.Pelcro.helpers.loadSDK(
-        "https://secure.gosell.io/js/sdk/tap.min.js",
-        "tap-sdk"
-      );
-
-      setIsTapLoaded(true);
-    }
-
     if (
       cardProcessor === "tap" &&
       !selectedPaymentMethodId &&
