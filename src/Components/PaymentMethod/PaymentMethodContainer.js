@@ -136,6 +136,10 @@ const PaymentMethodContainerWithoutStripe = ({
     props.isRenewingGift ?? pelcroStore.isRenewingGift;
   const invoice = props.invoice ?? pelcroStore.invoice;
 
+  const [isTapLoaded, setIsTapLoaded] = useState(
+    Boolean(window.Tapjsli)
+  );
+
   useEffect(() => {
     if (window.Pelcro.coupon.getFromUrl()) {
       dispatch({
@@ -694,10 +698,24 @@ const PaymentMethodContainerWithoutStripe = ({
   }, [selectedPaymentMethodId]);
 
   useEffect(() => {
+    if (cardProcessor === "tap" && !isTapLoaded) {
+      window.Pelcro.helpers.loadSDK(
+        "https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.4/bluebird.min.js",
+        "tap-bluebird"
+      );
+
+      window.Pelcro.helpers.loadSDK(
+        "https://secure.gosell.io/js/sdk/tap.min.js",
+        "tap-sdk"
+      );
+
+      setIsTapLoaded(true);
+    }
+
     if (
       cardProcessor === "tap" &&
       !selectedPaymentMethodId &&
-      window.Tapjsli
+      isTapLoaded
     ) {
       console.log("Yes Tap JSLI is enabled and activated");
 
@@ -777,7 +795,7 @@ const PaymentMethodContainerWithoutStripe = ({
       tapInstanceRef.current = tapKey;
       tapInstanceCard.current = card;
     }
-  }, [selectedPaymentMethodId, window.Tapjsli]);
+  }, [selectedPaymentMethodId, isTapLoaded]);
 
   const initPaymentRequest = (state, dispatch) => {
     try {
