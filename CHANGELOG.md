@@ -1,3 +1,10 @@
+## [3.10.1-beta.8](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.10.1-beta.7...v3.10.1-beta.8) (2022-10-31)
+
+
+### Bug Fixes
+
+* check if window.Tapjsli is exposed and loaded ([27a70c7](https://github.com/pelcro-inc/react-pelcro-js/commit/27a70c7d2f44957fec845b0ef2be701d18f2daf9))
+
 ## [3.10.1-beta.7](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.10.1-beta.6...v3.10.1-beta.7) (2022-10-31)
 
 
