@@ -697,7 +697,7 @@ const PaymentMethodContainerWithoutStripe = ({
       !selectedPaymentMethodId &&
       Tapjsli
     ) {
-      console.log("Tap JSLI", Tapjsli);
+      console.log("Tap JSLI 22", Tapjsli);
       const tapKey = Tapjsli(
         window.Pelcro.site.read()?.tap_gateway_settings
           .publishable_key
@@ -774,7 +774,7 @@ const PaymentMethodContainerWithoutStripe = ({
       tapInstanceRef.current = tapKey;
       tapInstanceCard.current = card;
     }
-  }, [selectedPaymentMethodId, Tapjsli]);
+  }, [selectedPaymentMethodId]);
 
   const initPaymentRequest = (state, dispatch) => {
     try {
