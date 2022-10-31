@@ -1,3 +1,10 @@
+## [3.10.1-beta.12](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.10.1-beta.11...v3.10.1-beta.12) (2022-10-31)
+
+
+### Bug Fixes
+
+* initiate Tap with window.Tapjsli instead of Tapjsli ([d56f52d](https://github.com/pelcro-inc/react-pelcro-js/commit/d56f52dded89af4833b4698b389dce84267d9e87))
+
 ## [3.10.1-beta.11](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.10.1-beta.10...v3.10.1-beta.11) (2022-10-31)
 
 
