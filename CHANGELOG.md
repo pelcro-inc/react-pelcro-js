@@ -1,3 +1,10 @@
+## [3.10.1-beta.4](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.10.1-beta.3...v3.10.1-beta.4) (2022-10-31)
+
+
+### Bug Fixes
+
+* check for whenUserReady before checking for windo.Stripe in paymentMethodContainer ([ab10298](https://github.com/pelcro-inc/react-pelcro-js/commit/ab10298920ea26b0939df342131be7485ae60ba5))
+
 ## [3.10.1-beta.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.10.1-beta.2...v3.10.1-beta.3) (2022-10-27)
 
 
