@@ -1,3 +1,10 @@
+## [3.10.1-beta.7](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.10.1-beta.6...v3.10.1-beta.7) (2022-10-31)
+
+
+### Bug Fixes
+
+* remove Tapjsli from useEffect depencies ([a76deed](https://github.com/pelcro-inc/react-pelcro-js/commit/a76deed1d8ba92807c3d907c7f103307cac862bf))
+
 ## [3.10.1-beta.6](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.10.1-beta.5...v3.10.1-beta.6) (2022-10-31)
 
 
