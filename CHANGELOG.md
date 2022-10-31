@@ -1,3 +1,10 @@
+## [3.10.1-beta.5](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.10.1-beta.4...v3.10.1-beta.5) (2022-10-31)
+
+
+### Bug Fixes
+
+* lazy load Tap SDK ([84abc57](https://github.com/pelcro-inc/react-pelcro-js/commit/84abc57e163ee861b8d877e35d945848eb79433a))
+
 ## [3.10.1-beta.4](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.10.1-beta.3...v3.10.1-beta.4) (2022-10-31)
 
 
