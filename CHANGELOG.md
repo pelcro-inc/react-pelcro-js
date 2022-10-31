@@ -1,3 +1,10 @@
+## [3.10.1-beta.6](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.10.1-beta.5...v3.10.1-beta.6) (2022-10-31)
+
+
+### Bug Fixes
+
+* check for Tapjsli before initializing Tap form ([893a96f](https://github.com/pelcro-inc/react-pelcro-js/commit/893a96f53a1d018b4d6e845c0ea3581e2a323069))
+
 ## [3.10.1-beta.5](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.10.1-beta.4...v3.10.1-beta.5) (2022-10-31)
 
 
