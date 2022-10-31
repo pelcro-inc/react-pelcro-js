@@ -1,3 +1,10 @@
+## [3.10.1-beta.11](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.10.1-beta.10...v3.10.1-beta.11) (2022-10-31)
+
+
+### Bug Fixes
+
+* check for isUserReady before load tap script ([0b0418f](https://github.com/pelcro-inc/react-pelcro-js/commit/0b0418f2ffea8d1341cb030b012f9c177b31c51c))
+
 ## [3.10.1-beta.10](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.10.1-beta.9...v3.10.1-beta.10) (2022-10-31)
 
 
