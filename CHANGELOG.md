@@ -1,3 +1,10 @@
+## [3.10.1-beta.13](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.10.1-beta.12...v3.10.1-beta.13) (2022-10-31)
+
+
+### Bug Fixes
+
+* check for window.Tapjsli instead of isTapLoaded ([40688bf](https://github.com/pelcro-inc/react-pelcro-js/commit/40688bfb76c3599d17305e67a09e2e443b9b0ffa))
+
 ## [3.10.1-beta.12](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.10.1-beta.11...v3.10.1-beta.12) (2022-10-31)
 
 
