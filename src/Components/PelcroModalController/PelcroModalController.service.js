@@ -140,25 +140,22 @@ export const loadPaymentSDKs = () => {
     }
   }
 
-  //Lazy load Tap SDK
-  whenUserReady(() => {
-    // Load Tap SDKs
-    const supportsTap = Boolean(
-      window.Pelcro.site.read().tap_gateway_settings
+  // Load Tap SDKs
+  const supportsTap = Boolean(
+    window.Pelcro.site.read().tap_gateway_settings
+  );
+
+  if (supportsTap) {
+    window.Pelcro.helpers.loadSDK(
+      "https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.4/bluebird.min.js",
+      "tap-bluebird"
     );
 
-    if (supportsTap) {
-      window.Pelcro.helpers.loadSDK(
-        "https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.4/bluebird.min.js",
-        "tap-bluebird"
-      );
-
-      window.Pelcro.helpers.loadSDK(
-        "https://secure.gosell.io/js/sdk/tap.min.js",
-        "tap-sdk"
-      );
-    }
-  });
+    window.Pelcro.helpers.loadSDK(
+      "https://secure.gosell.io/js/sdk/tap.min.js",
+      "tap-sdk"
+    );
+  }
 };
 
 export const loadAuth0SDK = () => {
