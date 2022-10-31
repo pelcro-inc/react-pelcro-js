@@ -659,9 +659,9 @@ const PaymentMethodContainerWithoutStripe = ({
   const tapInstanceRef = React.useRef(null);
   const tapInstanceCard = React.useRef(null);
 
-  useEffect(() => {
-    const cardProcessor = getSiteCardProcessor();
+  const cardProcessor = getSiteCardProcessor();
 
+  useEffect(() => {
     if (cardProcessor === "vantiv" && !selectedPaymentMethodId) {
       const payPageId =
         window.Pelcro.site.read()?.vantiv_gateway_settings
@@ -691,88 +691,93 @@ const PaymentMethodContainerWithoutStripe = ({
         }
       });
     }
-
-    if (cardProcessor === "tap" && !selectedPaymentMethodId) {
-      if (window.Tapjsli) {
-        console.log("Yes Tap JSLI is enabled");
-        const tapKey = Tapjsli(
-          window.Pelcro.site.read()?.tap_gateway_settings
-            .publishable_key
-        );
-
-        let elements = tapKey.elements({});
-
-        let style = {
-          base: {
-            color: "#535353",
-            lineHeight: "18px",
-            fontFamily: "sans-serif",
-            fontSmoothing: "antialiased",
-            fontSize: "16px",
-            "::placeholder": {
-              color: "rgba(0, 0, 0, 0.26)",
-              fontSize: "15px"
-            }
-          },
-          invalid: {
-            color: "red"
-          }
-        };
-
-        // input labels/placeholders
-        let labels = {
-          cardNumber: "Card Number",
-          expirationDate: "MM/YY",
-          cvv: "CVV",
-          cardHolder: "Card Holder Name"
-        };
-
-        //payment options
-        let paymentOptions = {
-          labels: labels,
-          TextDirection: "ltr"
-        };
-
-        //create element, pass style and payment options
-        let card = elements.create(
-          "card",
-          { style: style },
-          paymentOptions
-        );
-
-        //mount element
-        card.mount("#tapPaymentIframe");
-
-        //card change event listener
-        card.addEventListener("change", function (event) {
-          // if (event.error_interactive) {
-          //   onFailure(event.error_interactive);
-          //   return dispatch({
-          //     type: SHOW_ALERT,
-          //     payload: {
-          //       type: "error",
-          //       content: getErrorMessages(event.error_interactive)
-          //     }
-          //   });
-          // } else {
-          //   dispatch({
-          //     type: SHOW_ALERT,
-          //     payload: { type: "error", content: "" }
-          //   });
-          // }
-          // let displayError = document.getElementById("error-handler");
-          // if (event.error) {
-          //   displayError.textContent = event.error.message;
-          // } else {
-          //   displayError.textContent = "";
-          // }
-        });
-
-        tapInstanceRef.current = tapKey;
-        tapInstanceCard.current = card;
-      }
-    }
   }, [selectedPaymentMethodId]);
+
+  useEffect(() => {
+    if (
+      cardProcessor === "tap" &&
+      !selectedPaymentMethodId &&
+      window.Tapjsli
+    ) {
+      console.log("Yes Tap JSLI is enabled and activated");
+
+      const tapKey = Tapjsli(
+        window.Pelcro.site.read()?.tap_gateway_settings
+          .publishable_key
+      );
+
+      let elements = tapKey.elements({});
+
+      let style = {
+        base: {
+          color: "#535353",
+          lineHeight: "18px",
+          fontFamily: "sans-serif",
+          fontSmoothing: "antialiased",
+          fontSize: "16px",
+          "::placeholder": {
+            color: "rgba(0, 0, 0, 0.26)",
+            fontSize: "15px"
+          }
+        },
+        invalid: {
+          color: "red"
+        }
+      };
+
+      // input labels/placeholders
+      let labels = {
+        cardNumber: "Card Number",
+        expirationDate: "MM/YY",
+        cvv: "CVV",
+        cardHolder: "Card Holder Name"
+      };
+
+      //payment options
+      let paymentOptions = {
+        labels: labels,
+        TextDirection: "ltr"
+      };
+
+      //create element, pass style and payment options
+      let card = elements.create(
+        "card",
+        { style: style },
+        paymentOptions
+      );
+
+      //mount element
+      card.mount("#tapPaymentIframe");
+
+      //card change event listener
+      card.addEventListener("change", function (event) {
+        // if (event.error_interactive) {
+        //   onFailure(event.error_interactive);
+        //   return dispatch({
+        //     type: SHOW_ALERT,
+        //     payload: {
+        //       type: "error",
+        //       content: getErrorMessages(event.error_interactive)
+        //     }
+        //   });
+        // } else {
+        //   dispatch({
+        //     type: SHOW_ALERT,
+        //     payload: { type: "error", content: "" }
+        //   });
+        // }
+        // let displayError = document.getElementById("error-handler");
+        // if (event.error) {
+        //   displayError.textContent = event.error.message;
+        // } else {
+        //   displayError.textContent = "";
+        // }
+      });
+
+      tapInstanceRef.current = tapKey;
+      tapInstanceCard.current = card;
+    }
+  }, [selectedPaymentMethodId, window.Tapjsli]);
 
   const initPaymentRequest = (state, dispatch) => {
     try {
