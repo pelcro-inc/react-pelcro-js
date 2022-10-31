@@ -720,9 +720,9 @@ const PaymentMethodContainerWithoutStripe = ({
     if (
       cardProcessor === "tap" &&
       !selectedPaymentMethodId &&
-      isTapLoaded
+      window.Tapjsli
     ) {
-      console.log("Yes Tap JSLI is enabled and script is loaded");
+      console.log(" window.Tapjsli script is loaded");
 
       const tapKey = window.Tapjsli(
         window.Pelcro.site.read()?.tap_gateway_settings
