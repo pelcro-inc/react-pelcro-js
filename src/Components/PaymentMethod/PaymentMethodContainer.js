@@ -1890,14 +1890,18 @@ const PaymentMethodContainer = (props) => {
     Boolean(window.Stripe)
   );
 
+  const { whenUserReady } = usePelcro.getStore();
+
   useEffect(() => {
-    if (!window.Stripe) {
-      document
-        .querySelector('script[src="https://js.stripe.com/v3"]')
-        .addEventListener("load", () => {
-          setIsStripeLoaded(true);
-        });
-    }
+    whenUserReady(() => {
+      if (!window.Stripe) {
+        document
+          .querySelector('script[src="https://js.stripe.com/v3"]')
+          .addEventListener("load", () => {
+            setIsStripeLoaded(true);
+          });
+      }
+    });
   }, []);
 
   if (isStripeLoaded) {
