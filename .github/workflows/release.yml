@@ -2,12 +2,7 @@ name: Release package
 
 on:
   push:
-    branches:
-      [
-        "master",
-        { name: "beta", prerelease: true },
-        { name: "alpha", prerelease: true }
-      ]
+    branches: [master, beta, { name: alpha, prerelease: true }]
 jobs:
   release:
     name: Release
