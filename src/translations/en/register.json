@@ -17,7 +17,7 @@
   "messages": {
     "alreadyHaveAccount": "Already have an account?",
     "createAccount": "Create account",
-    "loginHere": "login here. ",
+    "loginHere": "Login here. ",
     "selectPlan": "Select a different plan ",
     "here": "here",
     "iAgree": {
@@ -32,7 +32,7 @@
       "ifPrefer": "if you prefer to disable your Ad blocker."
     },
     "socialLogin": {
-      "label": "Or continue with"
+      "label": "OR"
     }
   },
   "errors": {

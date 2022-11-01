@@ -1,0 +1,89 @@
+@layer components {
+  .pelcro-root .alice-carousel {
+    @apply plc-px-20;
+  }
+
+  .pelcro-root .alice-carousel__stage {
+    @apply plc-flex;
+  }
+
+  .pelcro-root .alice-carousel__stage-item {
+    flex: 1 0 auto;
+    height: auto;
+  }
+
+  .pelcro-root .alice-carousel__next-btn,
+  .pelcro-root .alice-carousel__prev-btn {
+    @apply plc-absolute plc-top-1/2 plc-transform plc--translate-y-1/2 plc-w-auto;
+  }
+
+  .pelcro-root .alice-carousel__next-btn {
+    @apply plc-right-0;
+  }
+
+  .pelcro-root .alice-carousel__prev-btn {
+    @apply plc-left-0;
+  }
+
+  .pelcro-root .alice-carousel__next-btn-item span,
+  .pelcro-root .alice-carousel__prev-btn-item span {
+    @apply plc-w-14 plc-h-14 plc-rounded-full plc-inline-flex plc-justify-center plc-items-center plc-bg-primary-800 plc-text-white;
+  }
+
+  .pelcro-root .alice-carousel__next-btn-item span {
+    padding-left: 5px;
+  }
+
+  .pelcro-root .alice-carousel__prev-btn-item span {
+    padding-right: 5px;
+  }
+
+  .pelcro-root .alice-carousel__next-btn-item [data-area]::after,
+  .pelcro-root .alice-carousel__prev-btn-item [data-area]::after {
+    height: 28px;
+    width: 28px;
+    line-height: 1;
+    @apply plc-inline-flex plc-justify-center plc-items-center;
+  }
+
+  .pelcro-root .alice-carousel__next-btn-item [data-area]::after {
+    content: url("assets/arrow-thin-right.svg");
+  }
+
+  .pelcro-root .alice-carousel__prev-btn-item [data-area]::after {
+    content: url("assets/arrow-thin-left.svg");
+  }
+
+  .pelcro-root .alice-carousel__stage-item {
+    @apply plc-px-4;
+  }
+
+  .pelcro-root .alice-carousel__dots {
+    @apply plc-mt-8 plc-flex plc-items-center plc-justify-center;
+  }
+
+  .pelcro-root .alice-carousel__dots-item {
+    @apply plc-w-3 plc-h-3 plc-bg-gray-300;
+  }
+
+  .pelcro-root
+    .alice-carousel__dots-item:not(.__custom):not(:last-child) {
+    @apply plc-mr-2;
+  }
+
+  .pelcro-root .alice-carousel__dots-item:not(.__custom):hover,
+  .alice-carousel__dots-item:not(.__custom).__active {
+    @apply plc-bg-primary-800;
+  }
+
+  @media (max-width: 1024px) {
+    .pelcro-root .alice-carousel__prev-btn,
+    .pelcro-root .alice-carousel__next-btn {
+      display: none;
+    }
+
+    .pelcro-root .alice-carousel {
+      @apply plc-px-0;
+    }
+  }
+}

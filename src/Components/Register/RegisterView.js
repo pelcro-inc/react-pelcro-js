@@ -7,6 +7,7 @@ import { RegisterButton } from "./RegisterButton";
 import { RegisterFirstName } from "./RegisterFirstName";
 import { RegisterLastName } from "./RegisterLastName";
 import { AlertWithContext } from "../../SubComponents/AlertWithContext";
+import { VerticalSeparator } from "../../SubComponents/VerticalSeparator";
 import { usePelcro } from "../../hooks/usePelcro";
 import { FacebookLoginButton } from "../common/FacebookLoginButton/FacebookLoginButton";
 import { GoogleLoginButton } from "../common/GoogleLoginButton/GoogleLoginButton";
@@ -21,9 +22,6 @@ export function RegisterView(props) {
   const { t } = useTranslation("register");
   const { product } = usePelcro();
 
-  const title = product?.paywall?.register_title ?? t("title");
-  const subtitle =
-    product?.paywall?.register_subtitle ?? t("subtitle");
   const socialLoginEnabled =
     window.Pelcro.site.read()?.facebook_app_id ||
     window.Pelcro.site.read()?.google_app_id ||
@@ -34,16 +32,35 @@ export function RegisterView(props) {
 
   return (
     <div id="pelcro-register-view">
-      <div className="plc-mb-6 plc-text-center plc-text-gray-900 pelcro-title-wrapper">
-        <h4 className="plc-text-2xl plc-font-semibold">{title}</h4>
-        <p>{subtitle}</p>
-      </div>
       <form
         action="javascript:void(0);"
         className="plc-mt-2 pelcro-form"
       >
         <RegisterContainer {...props}>
           <AlertWithContext />
+          {socialLoginEnabled && (
+            <div className="plc-my-5">
+              <div>
+                <div className="plc-block sm:plc-flex plc-flex-col sm:plc-flex-row plc-justify-center plc-flex-wrap plc-items-center">
+                  <GoogleLoginButton className="plc-block sm:plc-flex plc-w-full sm:plc-w-auto plc-mb-4 sm:plc-mb-0" />
+                  <VerticalSeparator className="plc-hidden sm:plc-inline-grid plc-mx-4 plc-h-8" />
+                  <FacebookLoginButton className="plc-block sm:plc-flex plc-w-full sm:plc-w-auto" />
+                </div>
+                <div className="plc-block sm:plc-flex plc-flex-col sm:plc-flex-row plc-justify-center plc-flex-wrap plc-items-center plc-mt-4">
+                  <Auth0LoginButton className="plc-block sm:plc-flex plc-w-full sm:plc-w-1/2 plc-mb-4 sm:plc-mb-0" />
+                </div>
+              </div>
+
+              <div className="plc-flex plc-items-center plc-justify-between plc-mt-5">
+                <hr className="plc-w-full plc-border-gray-300" />
+                <span className="plc-flex-shrink-0 plc-px-2 plc-text-sm plc-text-gray-700 plc-uppercase">
+                  {t("messages.socialLogin.label")}
+                </span>
+                <hr className="plc-w-full plc-border-gray-300" />
+              </div>
+            </div>
+          )}
+
           {showNameFields && (
             <div className="plc-flex plc-items-start">
               <RegisterFirstName
@@ -99,23 +116,6 @@ export function RegisterView(props) {
                 apply.
               </Trans>
             </p>
-          )}
-
-          {socialLoginEnabled && (
-            <div className="plc-mt-5">
-              <div className="plc-flex plc-items-center plc-justify-between ">
-                <hr className="plc-w-full plc-border-gray-300" />
-                <span className="plc-flex-shrink-0 plc-p-2 plc-text-xs plc-text-gray-400 plc-uppercase">
-                  {t("messages.socialLogin.label")}
-                </span>
-                <hr className="plc-w-full plc-border-gray-300" />
-              </div>
-              <div className="plc-flex plc-justify-center plc-px-5 plc-mt-1 plc-space-x-3">
-                <GoogleLoginButton />
-                <FacebookLoginButton />
-                <Auth0LoginButton />
-              </div>
-            </div>
           )}
         </RegisterContainer>
       </form>

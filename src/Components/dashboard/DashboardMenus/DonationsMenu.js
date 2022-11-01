@@ -4,8 +4,10 @@ import {
   getFormattedPriceByLocal,
   getPageOrDefaultLanguage
 } from "../../../utils/utils";
+import { AddNew } from "../AddNew";
+import { Card } from "../Card";
 
-export const DonationsMenu = () => {
+export const DonationsMenu = (props) => {
   const { t } = useTranslation("dashboard");
 
   const subscriptions = getDonationSubs()
@@ -41,24 +43,64 @@ export const DonationsMenu = () => {
               )}
             </div>
           </td>
+          <td>
+            {/* Pill */}
+            <span
+              className={`plc-inline-flex plc-p-1 plc-text-xs plc-font-semibold ${
+                props?.getSubscriptionStatus(sub).bgColor
+              } plc-uppercase ${
+                props?.getSubscriptionStatus(sub).textColor
+              } plc-rounded-lg`}
+            >
+              {props?.getSubscriptionStatus(sub).icon}
+              {props?.getSubscriptionStatus(sub).title}
+            </span>
+            <br />
+            <div className="plc-mb-4 plc-text-xs plc-text-gray-500">
+              {sub.status && (
+                <span className="plc-inline-block plc-mt-1 plc-underline">
+                  {props?.getSubscriptionStatus(sub).content}
+                </span>
+              )}
+            </div>
+          </td>
+          <td>
+            {sub.cancel_at_period_end === 1 && (
+              <Button
+                variant="ghost"
+                icon={<RefreshIcon className="plc-w-4 plc-h-4" />}
+                className="plc-text-blue-400"
+                // onClick={onRenewClick}
+                // disabled={this.state.disableSubmit}
+                data-key={sub.id}
+              >
+                {t("labels.renew")}
+              </Button>
+            )}
+          </td>
         </tr>
       );
     });
 
   return (
-    <table className="plc-w-full plc-table-fixed pelcro-donations-table">
-      <thead className="plc-text-xs plc-font-semibold plc-tracking-wider plc-text-gray-400 plc-uppercase ">
-        <tr>
-          <th className="plc-w-6/12 ">{t("labels.plan")}</th>
-          <th className="plc-w-6/12 ">{t("labels.startDate")}</th>
-        </tr>
-      </thead>
-      <tbody>
-        {/* Spacer */}
-        <tr className="plc-h-4"></tr>
-        {subscriptions}
-      </tbody>
-    </table>
+    <Card
+      id="pelcro-dashboard-donation-menu"
+      className="plc-max-w-80% plc-m-auto"
+      title={t("labels.donations")}
+    >
+      <table className="plc-w-full plc-table-fixed pelcro-donations-table plc-text-left">
+        <thead className="plc-text-xs plc-font-semibold plc-tracking-wider plc-text-gray-400 plc-uppercase ">
+          <tr>
+            <th className="plc-w-1/4">{t("labels.plan")}</th>
+            <th className="plc-w-1/4">{t("labels.startDate")}</th>
+            <th className="plc-w-1/4">{t("labels.status.title")}</th>
+            <th className="plc-w-1/4">{t("labels.actions")}</th>
+          </tr>
+        </thead>
+        <tbody>{subscriptions}</tbody>
+      </table>
+      <AddNew title={t("labels.newDonations")} />
+    </Card>
   );
 };
 

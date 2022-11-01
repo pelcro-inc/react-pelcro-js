@@ -40,7 +40,7 @@ export const UserUpdateEmail = (props) => {
         />
         <Button
           variant="icon"
-          className="plc-absolute  plc-rounded-none plc-text-gray-500 plc-w-10 plc-h-10 plc-top-7 plc-right-0 hover:plc-text-gray-900 hover:plc-bg-transparent focus:plc-ring-0 focus:plc-shadow-none"
+          className="plc-absolute  plc-rounded-none plc-text-gray-500 plc-w-12 plc-h-12 plc-top-7 plc-right-0 hover:plc-text-gray-900 hover:plc-bg-transparent focus:plc-ring-0 focus:plc-shadow-none"
           icon={
             enableEmailEdit ? (
               <CancelIcon className="plc-w-6" />

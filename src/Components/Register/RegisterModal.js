@@ -5,10 +5,10 @@ import { usePelcro } from "../../hooks/usePelcro";
 import { Link } from "../../SubComponents/Link";
 import {
   Modal,
+  ModalHeader,
   ModalBody,
   ModalFooter
 } from "../../SubComponents/Modal";
-import Authorship from "../common/Authorship";
 import { RegisterView } from "./RegisterView";
 
 /**
@@ -77,23 +77,34 @@ export function RegisterModal(props) {
     return resetView();
   };
 
+  const title = product?.paywall?.register_title ?? t("title");
+  const subtitle =
+    product?.paywall?.register_subtitle ?? t("subtitle");
+
   return (
     <Modal
       id="pelcro-register-modal"
       onDisplay={props?.onDisplay}
       onClose={props?.onClose}
     >
+      <ModalHeader>
+        <div className="plc-text-center plc-text-gray-900 pelcro-title-wrapper plc-flex-1 plc-flex plc-flex-col plc-justify-center">
+          <h4 className="plc-text-2xl plc-font-semibold">{title}</h4>
+          <p>{subtitle}</p>
+        </div>
+      </ModalHeader>
       <ModalBody>
         <RegisterView {...props} onSuccess={onSuccess} />
       </ModalBody>
       <ModalFooter>
-        <p>
-          {t("messages.alreadyHaveAccount") + " "}
+        <p className="plc-mb-9">
+          <span className="plc-font-medium">
+            {t("messages.alreadyHaveAccount") + " "}
+          </span>
           <Link onClick={() => switchView("login")}>
             {t("messages.loginHere")}
           </Link>
         </p>
-        <Authorship />
       </ModalFooter>
     </Modal>
   );

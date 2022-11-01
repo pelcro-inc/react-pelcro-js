@@ -103,6 +103,7 @@
     "@headlessui/react": "^0.3.0",
     "@stripe/stripe-js": "^1.21.1",
     "i18next": "^19.1.0",
+    "react-alice-carousel": "^2.6.4",
     "react-easy-crop": "^3.3.2",
     "react-facebook-login": "^4.1.1",
     "react-google-login": "^5.2.2",

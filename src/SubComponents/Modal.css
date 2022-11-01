@@ -9,7 +9,7 @@
   }
 
   .pelcro-root .pelcro-modal {
-    @apply plc-container plc-absolute plc-top-0 plc-flex plc-flex-col plc-items-center plc-max-w-lg plc-bg-white plc-border-t-8 plc-border-primary-500 plc-rounded-md md:plc-mt-8;
+    @apply plc-container plc-absolute plc-top-0 plc-flex plc-flex-col plc-items-center plc-max-w-2xl plc-bg-white plc-rounded-lg md:plc-mt-8 plc-overflow-hidden;
   }
 
   .pelcro-root .pelcro-modal-content {
@@ -17,18 +17,19 @@
   }
 
   .pelcro-root .pelcro-modal-header {
-    @apply plc-p-1;
+    @apply plc-px-12 plc-py-3 plc-min-h-20 plc-relative plc-bg-white plc-border-b-2 plc-flex plc-flex-col;
+    border-bottom-width: 1px;
   }
 
   .pelcro-root .pelcro-modal-close {
-    @apply plc-absolute plc-w-6 plc-text-gray-500 focus:plc-text-black plc-z-max plc-top-3 plc-right-3 plc-border-0 hover:plc-text-black hover:plc-shadow-none plc-bg-transparent hover:plc-bg-transparent focus:plc-bg-transparent;
+    @apply plc-absolute plc-w-6 plc-text-gray-500 focus:plc-text-black plc-z-max plc-top-1/2 plc-right-5 plc-transform plc--translate-y-1/2 plc-border-0 hover:plc-text-black hover:plc-shadow-none plc-bg-transparent hover:plc-bg-transparent focus:plc-bg-transparent;
   }
 
   .pelcro-root .pelcro-modal-body {
-    @apply plc-mx-8 plc-my-4;
+    @apply plc-px-4 md:plc-px-16 plc-py-4 plc-bg-gray-100;
   }
 
   .pelcro-root .pelcro-modal-footer {
-    @apply plc-flex plc-flex-col plc-items-center plc-justify-center plc-mx-8 plc-mt-6 plc-mb-4 plc-text-sm;
+    @apply plc-bg-gray-100 plc-flex plc-flex-col plc-items-center plc-justify-center plc-p-4 plc-pb-11 plc-text-sm;
   }
 }

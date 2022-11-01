@@ -18,7 +18,14 @@ export function Input({
         htmlFor={id}
         className={`pelcro-input-label ${labelClassName}`}
       >
-        {`${label}${required ? "*" : ""}`}
+        {required ? (
+          <span className="plc-text-primary-800 plc-inline-flex plc-mr-1">
+            *
+          </span>
+        ) : (
+          ""
+        )}
+        {`${label}`}
       </label>
       <input
         type="text"

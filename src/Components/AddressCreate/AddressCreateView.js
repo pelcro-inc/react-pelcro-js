@@ -16,9 +16,6 @@ export const AddressCreateView = (props) => {
   const { t } = useTranslation("address");
   return (
     <div id="pelcro-address-create-view">
-      <div className="plc-mb-6 plc-text-2xl plc-font-semibold plc-text-center plc-text-gray-900 pelcro-title-wrapper">
-        <h4>{t("title")}</h4>
-      </div>
       <form
         action="javascript:void(0);"
         className="plc-mt-2 pelcro-form"

@@ -16,54 +16,66 @@ import {
   userMustVerifyEmail
 } from "../../../utils/utils";
 import { usePelcro } from "../../../hooks/usePelcro";
+import { Card } from "../Card";
 
 export const SubscriptionsMenu = (props) => {
   const { t } = useTranslation("dashboard");
 
   return (
-    <table className="plc-w-full plc-table-fixed">
-      <thead className="plc-text-xs plc-font-semibold plc-tracking-wider plc-text-gray-400 plc-uppercase ">
-        <tr>
-          <th className="plc-w-3/12 ">{t("labels.plan")}</th>
-          <th className="plc-w-4/12 ">{t("labels.status.title")}</th>
-          <th className="plc-w-3/12 ">{t("labels.actions")}</th>
-          <th className="plc-w-2/12 "></th>
-        </tr>
-      </thead>
-      <tbody>
-        {/* Spacer */}
-        <tr className="plc-h-4"></tr>
-      </tbody>
-      <Accordion>
-        <SubscriptionsItems {...props} />
-      </Accordion>
-      <tbody>
-        <tr>
-          <td colSpan="4" className="plc-p-1">
-            <Button
-              variant="ghost"
-              icon={<PlusIcon className="plc-w-4 plc-h-4 plc-mr-1" />}
-              className="plc-w-full plc-h-8 plc-font-semibold plc-tracking-wider plc-text-gray-900 plc-uppercase plc-rounded-none hover:plc-bg-gray-100"
-              onClick={props.displayProductSelect}
-            >
-              {t("labels.addSubscription")}
-            </Button>
-          </td>
-        </tr>
-        <tr>
-          <td colSpan="4" className="plc-p-1">
-            <Button
-              variant="ghost"
-              icon={<GiftIcon className="plc-w-4 plc-h-4 plc-mr-1" />}
-              className="plc-w-full plc-h-8 plc-font-semibold plc-tracking-wider plc-text-gray-900 plc-uppercase plc-rounded-none hover:plc-bg-gray-100"
-              onClick={props.displayRedeem}
-            >
-              {t("labels.redeemGift")}
-            </Button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <Card
+      id="pelcro-dashboard-subscriptions-menu"
+      className="plc-max-w-80% plc-m-auto"
+      title={t("labels.subscriptions")}
+    >
+      <table className="plc-w-full plc-table-fixed pelcro-subscriptions-table plc-text-left">
+        <thead className="plc-text-xs plc-font-semibold plc-tracking-wider plc-text-gray-400 plc-uppercase ">
+          <tr>
+            <th className="plc-w-1/5">{t("labels.product")}</th>
+            <th className="plc-w-1/5">{t("labels.plan")}</th>
+            <th className="plc-w-1/5">{t("labels.price")}</th>
+            <th className="plc-w-1/5">{t("labels.status.title")}</th>
+            <th className="plc-w-1/5">{t("labels.actions")}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {/* Spacer */}
+          <tr className="plc-h-4"></tr>
+        </tbody>
+        <Accordion>
+          <SubscriptionsItems {...props} />
+        </Accordion>
+        <tbody>
+          <tr>
+            <td colSpan="5" className="plc-p-1">
+              <Button
+                variant="ghost"
+                icon={
+                  <PlusIcon className="plc-w-4 plc-h-4 plc-mr-1" />
+                }
+                className="plc-w-full plc-h-8 plc-font-semibold plc-tracking-wider plc-text-gray-900 plc-uppercase plc-rounded-none hover:plc-bg-gray-100"
+                onClick={props.displayProductSelect}
+              >
+                {t("labels.addSubscription")}
+              </Button>
+            </td>
+          </tr>
+          <tr>
+            <td colSpan="5" className="plc-p-1">
+              <Button
+                variant="ghost"
+                icon={
+                  <GiftIcon className="plc-w-4 plc-h-4 plc-mr-1" />
+                }
+                className="plc-w-full plc-h-8 plc-font-semibold plc-tracking-wider plc-text-gray-900 plc-uppercase plc-rounded-none hover:plc-bg-gray-100"
+                onClick={props.displayRedeem}
+              >
+                {t("labels.redeemGift")}
+              </Button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </Card>
   );
 };
 
@@ -218,23 +230,27 @@ export const SubscriptionsItems = ({
               }`}
             >
               <td className="plc-truncate">
-                {sub.plan.nickname && (
-                  <>
-                    <span className="plc-font-semibold plc-text-gray-500">
-                      {sub.plan.nickname}
-                    </span>
-                    <br />
-                    <span className="plc-text-xs plc-text-gray-400">
-                      {getFormattedPriceByLocal(
-                        sub.plan.amount,
-                        sub.plan.currency,
-                        getPageOrDefaultLanguage()
-                      )}
-                    </span>
-                  </>
+                {sub.plan.product.name && (
+                  <span className="plc-font-semibold plc-text-gray-500">
+                    {sub.plan.product.name}
+                  </span>
                 )}
               </td>
-              <td className="plc-py-2">
+              <td className="plc-truncate">
+                <span className="plc-font-semibold plc-text-gray-500">
+                  {sub.plan.nickname}
+                </span>
+              </td>
+              <td className="plc-truncate">
+                <span className="plc-font-semibold plc-text-gray-500">
+                {getFormattedPriceByLocal(
+                  sub.plan.amount,
+                  sub.plan.currency,
+                  getPageOrDefaultLanguage()
+                )}
+                </span>
+              </td>
+              <td className="plc-py-2 truncate">
                 {/* Pill */}
                 <span
                   className={`plc-inline-flex plc-p-1 plc-text-xs plc-font-semibold ${
@@ -262,7 +278,6 @@ export const SubscriptionsItems = ({
                   ) : null}
                 </div>
               </td>
-
               <td>
                 {sub.cancel_at_period_end === 1 &&
                   sub.plan.auto_renew &&
@@ -337,7 +352,6 @@ export const SubscriptionsItems = ({
                   ""
                 )}
               </td>
-
               <td>
                 {hasPhases && (
                   <div

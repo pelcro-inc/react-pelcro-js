@@ -1,6 +1,6 @@
 @layer components {
   .pelcro-root .pelcro-button-solid {
-    @apply plc-inline-flex plc-items-center plc-justify-center plc-px-6 plc-py-2 plc-font-semibold plc-tracking-wider plc-text-white hover:plc-text-white focus:plc-text-white disabled:plc-text-white plc-uppercase plc-bg-primary-500 plc-rounded plc-border-0 focus:plc-outline-none focus:plc-ring-2 focus:plc-ring-primary-300 plc-justify-items-center disabled:plc-bg-gray-400 disabled:plc-cursor-not-allowed plc-w-max hover:plc-bg-primary-600 
+    @apply plc-inline-flex plc-items-center plc-justify-center plc-px-6 plc-py-2 plc-min-h-12 plc-font-semibold plc-tracking-wider plc-text-white hover:plc-text-white focus:plc-text-white disabled:plc-text-white plc-uppercase plc-bg-primary-500 plc-rounded plc-border-0 focus:plc-outline-none focus:plc-ring-2 focus:plc-ring-primary-300 plc-justify-items-center disabled:plc-bg-gray-400 disabled:plc-cursor-not-allowed plc-w-max hover:plc-bg-primary-600 
     focus:plc-bg-primary-600 hover:plc-shadow-none;
   }
 

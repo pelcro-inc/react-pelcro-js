@@ -6,33 +6,42 @@ import {
 } from "../../../utils/utils";
 import { ReactComponent as ChevronRightIcon } from "../../../assets/chevron-right.svg";
 import { Accordion } from "../Accordion";
+import { Card } from "../Card";
 
 export const OrdersMenu = () => {
   const { t } = useTranslation("dashboard");
   const userOrders = window.Pelcro.user.read().orders;
 
   return (
-    <table className="plc-w-full plc-py-4 plc-table-fixed ">
-      <thead className="plc-text-xs plc-font-semibold plc-tracking-wider plc-text-gray-400 plc-uppercase ">
-        <tr>
-          <th className="plc-w-4/12 plc-pl-2">
-            {t("labels.orders.total")}
-          </th>
-          <th className="plc-w-5/12 ">{t("labels.orders.date")}</th>
-          <th className="plc-w-3/12">{t("labels.orders.details")}</th>
-        </tr>
-      </thead>
-      {/* Spacer */}
-      <tbody>
-        <tr className="plc-h-4"></tr>
-      </tbody>
-      <Accordion>
-        <OrderItems orders={userOrders} />
-      </Accordion>
-      <tbody>
-        <tr className="plc-h-4"></tr>
-      </tbody>
-    </table>
+    <Card
+      id="pelcro-dashboard-orders-menu"
+      className="plc-max-w-80% plc-m-auto"
+      title={t("labels.orders.label")}
+    >
+      <table className="plc-w-full plc-py-4 plc-table-fixed plc-text-left">
+        <thead className="plc-text-xs plc-font-semibold plc-tracking-wider plc-text-gray-400 plc-uppercase ">
+          <tr>
+            <th className="plc-w-4/12 plc-pl-2">
+              {t("labels.orders.total")}
+            </th>
+            <th className="plc-w-5/12 ">{t("labels.orders.date")}</th>
+            <th className="plc-w-3/12">
+              {t("labels.orders.details")}
+            </th>
+          </tr>
+        </thead>
+        {/* Spacer */}
+        <tbody>
+          <tr className="plc-h-4"></tr>
+        </tbody>
+        <Accordion>
+          <OrderItems orders={userOrders} />
+        </Accordion>
+        <tbody>
+          <tr className="plc-h-4"></tr>
+        </tbody>
+      </table>
+    </Card>
   );
 };
 
@@ -49,15 +58,9 @@ export const OrderItems = ({
 
   const { t } = useTranslation("dashboard");
 
-  return !orders?.length ? (
-    <tbody>
-      <tr>
-        <td colSpan="3" className="plc-text-center plc-text-gray-500">
-          {t("labels.orders.noOrders")}
-        </td>
-      </tr>
-    </tbody>
-  ) : (
+  if (orders?.length === 0) return null;
+  
+  return !orders?.length ? null : (
     orders?.map((order) => {
       const isActive = activeMenu === order.id;
 

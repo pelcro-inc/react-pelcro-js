@@ -114,9 +114,7 @@ export const OrderConfirmModal = (props) => {
           </div>
         </div>
       </ModalBody>
-      <ModalFooter>
-        <Authorship />
-      </ModalFooter>
+      <ModalFooter></ModalFooter>
     </Modal>
   );
 };

@@ -10,11 +10,6 @@ export const EmailVerifyView = (props) => {
 
   return (
     <div id="pelcro-email-verify-view">
-      <div className="plc-mb-6 plc-text-center plc-text-gray-900 pelcro-title-wrapper">
-        <h4 className="plc-text-2xl plc-font-semibold">
-          {t("labels.title")}
-        </h4>
-      </div>
       <form
         action="javascript:void(0);"
         className="plc-mt-2 pelcro-form"

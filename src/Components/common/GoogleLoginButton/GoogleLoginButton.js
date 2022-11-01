@@ -6,7 +6,7 @@ import { ReactComponent as GoogleLogoIcon } from "../../../assets/google-logo.sv
 import { HANDLE_SOCIAL_LOGIN } from "../../../utils/action-types";
 
 export const GoogleLoginButton = ({
-  label = "Google",
+  label = "Continue With Google",
   className = "",
   labelClassName = "",
   iconClassName = ""
@@ -54,14 +54,15 @@ export const GoogleLoginButton = ({
       onFailure={onFailure}
       render={(renderProps) => (
         <button
+          type="button"
           onClick={renderProps.onClick}
-          className={`plc-flex plc-items-center plc-justify-center plc-p-3 plc-space-x-3 plc-text-gray-700 plc-border plc-border-gray-200 plc-rounded-3xl hover:plc-bg-gray-200 pelcro-google-login ${className}`}
+          className={`plc-flex plc-items-center plc-justify-center plc-h-12 plc-px-5 plc-text-gray-700 plc-rounded-md pelcro-google-login plc-shadow-md_dark plc-flex-1 plc-bg-white hover:plc-bg-transparent ${className}`}
         >
           <GoogleLogoIcon
             className={`plc-w-6 plc-h-auto pelcro-google-login-icon" ${iconClassName}`}
           />
           <p
-            className={`pelcro-google-login-label ${labelClassName}`}
+            className={`pelcro-google-login-label plc-ml-2 ${labelClassName}`}
           >
             {label}
           </p>

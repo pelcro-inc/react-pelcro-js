@@ -13,25 +13,32 @@ import {
 } from "../../../utils/utils";
 import { usePelcro } from "../../../hooks/usePelcro";
 import i18n from "../../../i18n";
+import { Card } from "../Card";
 
 export const InvoicesMenu = (props) => {
   const { t } = useTranslation("dashboard");
 
   return (
-    <table className="plc-w-full plc-table-fixed">
-      <thead className="plc-text-xs plc-font-semibold plc-tracking-wider plc-text-gray-400 plc-uppercase ">
-        <tr>
-          <th className="plc-w-4/12 ">{t("labels.details")}</th>
-          <th className="plc-w-4/12 ">{t("labels.status.title")}</th>
-          <th className="plc-w-3/12 ">{t("labels.actions")}</th>
-        </tr>
-      </thead>
-      <tbody>
-        {/* Spacer */}
-        <tr className="plc-h-4"></tr>
-        <InvoicesItems {...props} />
-      </tbody>
-    </table>
+    <Card
+      id="pelcro-dashboard-invoices-menu"
+      className="plc-max-w-80% plc-m-auto"
+      title={t("labels.invoices")}
+    >
+      <table className="plc-w-full plc-table-fixed pelcro-invoices-table plc-text-left">
+        <thead className="plc-text-xs plc-font-semibold plc-tracking-wider plc-text-gray-400 plc-uppercase ">
+          <tr>
+            <th className="plc-w-1/5">{t("labels.details")}</th>
+            <th className="plc-w-1/5">{t("labels.orders.date")}</th>
+            <th className="plc-w-1/5">{t("labels.total")}</th>
+            <th className="plc-w-1/5">{t("labels.status.title")}</th>
+            <th className="plc-w-1/5">{t("labels.actions")}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <InvoicesItems {...props} />
+        </tbody>
+      </table>
+    </Card>
   );
 };
 
@@ -67,13 +74,21 @@ const InvoicesItems = () => {
       return (
         <tr
           key={invoice.id}
-          className={`plc-w-full plc-align-middle plc-cursor-pointer accordion-header hover:plc-bg-gray-50`}
+          className={`plc-w-full plc-align-middle plc-cursor-pointer accordion-header`}
         >
           <td className="plc-truncate">
             <span className="plc-font-semibold plc-text-gray-500">
               {`#${invoice.id}`}
             </span>
-            <br />
+          </td>
+
+          <td>
+            <span className="plc-text-sm plc-text-gray-500">
+              {formattedCreationDate}
+            </span>
+          </td>
+
+          <td>
             <span className="plc-text-sm plc-text-gray-500">
               {getFormattedPriceByLocal(
                 invoice.total,
@@ -81,11 +96,8 @@ const InvoicesItems = () => {
                 getPageOrDefaultLanguage()
               )}
             </span>
-            <br />
-            <span className="plc-text-sm plc-text-gray-500">
-              {formattedCreationDate}
-            </span>
           </td>
+
           <td className="plc-py-2">
             {/* Pill */}
             <span

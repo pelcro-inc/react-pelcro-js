@@ -250,6 +250,8 @@ module.exports = {
       DEFAULT:
         "0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)",
       md: "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
+      md_dark:
+        "0 0px 6px -1px rgba(0, 0, 0, 0.1), 0 0px 4px -1px rgba(0, 0, 0, 0.4)",
       lg: "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
       xl: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
       "2xl": "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
@@ -604,6 +606,9 @@ module.exports = {
       "5xl": "64rem",
       "6xl": "72rem",
       "7xl": "80rem",
+      "50%": "50%",
+      "80%": "80%",
+      "90%": "90%",
       full: "100%",
       min: "min-content",
       max: "max-content",
@@ -613,6 +618,7 @@ module.exports = {
     minHeight: {
       0: "0px",
       12: "3rem",
+      20: "8rem",
       40: "10rem",
       full: "100%",
       screen: "100vh"
@@ -923,7 +929,7 @@ module.exports = {
     ],
     borderRadius: ["responsive"],
     borderStyle: ["responsive"],
-    borderWidth: ["responsive"],
+    borderWidth: ["responsive", "last"],
     boxShadow: [
       "responsive",
       "group-hover",
@@ -975,7 +981,7 @@ module.exports = {
     lineHeight: ["responsive"],
     listStylePosition: ["responsive"],
     listStyleType: ["responsive"],
-    margin: ["responsive"],
+    margin: ["responsive", "last"],
     maxHeight: ["responsive"],
     maxWidth: ["responsive"],
     minHeight: ["responsive"],
@@ -993,7 +999,7 @@ module.exports = {
     outline: ["responsive", "focus-within", "focus"],
     overflow: ["responsive"],
     overscrollBehavior: ["responsive"],
-    padding: ["responsive"],
+    padding: ["responsive", "last"],
     placeContent: ["responsive"],
     placeItems: ["responsive"],
     placeSelf: ["responsive"],

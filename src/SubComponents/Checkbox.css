@@ -1,10 +1,10 @@
 @layer components {
   .pelcro-root .pelcro-checkbox-label {
-    @apply plc-ml-2 plc-text-gray-900;
+    @apply plc-pl-2 plc-text-gray-900;
   }
 
   .pelcro-root .pelcro-checkbox {
-    @apply plc-text-primary-500 checked:plc-border-transparent plc-rounded focus:plc-outline-none focus:plc-ring-2 focus:plc-ring-offset-2 focus:plc-ring-primary-300 disabled:plc-cursor-not-allowed disabled:plc-text-gray-300;
+    @apply plc-w-5 plc-h-5 plc-text-primary-500 checked:plc-border-transparent plc-rounded-sm focus:plc-outline-none focus:plc-ring-1 focus:plc-ring-offset-1 focus:plc-ring-primary-300 disabled:plc-cursor-not-allowed disabled:plc-text-gray-300 plc-cursor-pointer;
   }
 
   .pelcro-root .pelcro-checkbox::before {

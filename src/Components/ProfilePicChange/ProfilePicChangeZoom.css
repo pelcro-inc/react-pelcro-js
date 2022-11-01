@@ -1,6 +1,6 @@
 @layer components {
   .pelcro-root input[type="range"] {
-    @apply plc-h-7 plc-appearance-none plc-w-full;
+    @apply plc-h-7 plc-appearance-none plc-w-full plc-bg-transparent;
   }
 
   .pelcro-root input[type="range"]:focus {

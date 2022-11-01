@@ -19,6 +19,8 @@
 @import "./SubComponents/Alert.css";
 @import "./SubComponents/Notification.css";
 @import "./SubComponents/Tooltip.css";
+@import "./SubComponents/VerticalSeparator.css";
+@import "./SubComponents/Carousel.css";
 
 @import "./Components/Shop/ShopView.css";
 @import "./Components/ProfilePicChange/ProfilePicChangeCropper.css";

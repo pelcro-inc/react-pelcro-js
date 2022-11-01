@@ -14,13 +14,13 @@ export const ProfilePicChangeWrapper = () => {
 
   const { t } = useTranslation("userEdit");
 
-  const currentProfilePicture = window.Pelcro.user.read()
-    .profile_photo;
+  const currentProfilePicture =
+    window.Pelcro.user.read().profile_photo;
 
   return imageSrc ? (
     <>
       <ProfilePicChangeCropper />
-      <ProfilePicChangeZoom className="plc-mt-2" />
+      <ProfilePicChangeZoom className="plc-mt-4 plc-mb-4" />
       <ProfilePicChangeButton
         role="submit"
         className="plc-mt-2 plc-w-full"
