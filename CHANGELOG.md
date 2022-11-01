@@ -1,3 +1,10 @@
+## [3.10.1-beta.18](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.10.1-beta.17...v3.10.1-beta.18) (2022-11-01)
+
+
+### Bug Fixes
+
+* move Tap script logic out of whenUserReady ([805591b](https://github.com/pelcro-inc/react-pelcro-js/commit/805591b575e62518a98f9c07da446b081c345d81))
+
 ## [3.10.1-beta.17](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.10.1-beta.16...v3.10.1-beta.17) (2022-11-01)
 
 
