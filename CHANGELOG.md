@@ -1,3 +1,10 @@
+## [3.10.1-beta.19](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.10.1-beta.18...v3.10.1-beta.19) (2022-11-01)
+
+
+### Bug Fixes
+
+* add eventListener for Tap script ([c0b34a9](https://github.com/pelcro-inc/react-pelcro-js/commit/c0b34a918d38d8b018e76d84b032c1e370775d0a))
+
 ## [3.10.1-beta.18](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.10.1-beta.17...v3.10.1-beta.18) (2022-11-01)
 
 
