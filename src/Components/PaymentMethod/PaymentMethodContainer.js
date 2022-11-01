@@ -161,11 +161,170 @@ const PaymentMethodContainerWithoutStripe = ({
             'script[src="https://secure.gosell.io/js/sdk/tap.min.js"]'
           )
           .addEventListener("load", () => {
-            setIsTapLoaded(true);
+            console.log("From event listener: Tap script is loaded");
+
+            const tapKey = window.Tapjsli(
+              window.Pelcro.site.read()?.tap_gateway_settings
+                .publishable_key
+            );
+
+            let elements = tapKey.elements({});
+
+            let style = {
+              base: {
+                color: "#535353",
+                lineHeight: "18px",
+                fontFamily: "sans-serif",
+                fontSmoothing: "antialiased",
+                fontSize: "16px",
+                "::placeholder": {
+                  color: "rgba(0, 0, 0, 0.26)",
+                  fontSize: "15px"
+                }
+              },
+              invalid: {
+                color: "red"
+              }
+            };
+
+            // input labels/placeholders
+            let labels = {
+              cardNumber: "Card Number",
+              expirationDate: "MM/YY",
+              cvv: "CVV",
+              cardHolder: "Card Holder Name"
+            };
+
+            //payment options
+            let paymentOptions = {
+              labels: labels,
+              TextDirection: "ltr"
+            };
+
+            //create element, pass style and payment options
+            let card = elements.create(
+              "card",
+              { style: style },
+              paymentOptions
+            );
+
+            //mount element
+            card.mount("#tapPaymentIframe");
+
+            //card change event listener
+            card.addEventListener("change", function (event) {
+              // if (event.error_interactive) {
+              //   onFailure(event.error_interactive);
+              //   return dispatch({
+              //     type: SHOW_ALERT,
+              //     payload: {
+              //       type: "error",
+              //       content: getErrorMessages(event.error_interactive)
+              //     }
+              //   });
+              // } else {
+              //   dispatch({
+              //     type: SHOW_ALERT,
+              //     payload: { type: "error", content: "" }
+              //   });
+              // }
+              // let displayError = document.getElementById("error-handler");
+              // if (event.error) {
+              //   displayError.textContent = event.error.message;
+              // } else {
+              //   displayError.textContent = "";
+              // }
+            });
+
+            tapInstanceRef.current = tapKey;
+            tapInstanceCard.current = card;
           });
       }
+
+      if (
+        cardProcessor === "tap" &&
+        !selectedPaymentMethodId &&
+        window.Tapjsli
+      ) {
+        console.log("window.Tapjsli script is loaded");
+        const tapKey = window.Tapjsli(
+          window.Pelcro.site.read()?.tap_gateway_settings
+            .publishable_key
+        );
+
+        let elements = tapKey.elements({});
+
+        let style = {
+          base: {
+            color: "#535353",
+            lineHeight: "18px",
+            fontFamily: "sans-serif",
+            fontSmoothing: "antialiased",
+            fontSize: "16px",
+            "::placeholder": {
+              color: "rgba(0, 0, 0, 0.26)",
+              fontSize: "15px"
+            }
+          },
+          invalid: {
+            color: "red"
+          }
+        };
+
+        // input labels/placeholders
+        let labels = {
+          cardNumber: "Card Number",
+          expirationDate: "MM/YY",
+          cvv: "CVV",
+          cardHolder: "Card Holder Name"
+        };
+
+        //payment options
+        let paymentOptions = {
+          labels: labels,
+          TextDirection: "ltr"
+        };
+
+        //create element, pass style and payment options
+        let card = elements.create(
+          "card",
+          { style: style },
+          paymentOptions
+        );
+
+        //mount element
+        card.mount("#tapPaymentIframe");
+
+        //card change event listener
+        card.addEventListener("change", function (event) {
+          // if (event.error_interactive) {
+          //   onFailure(event.error_interactive);
+          //   return dispatch({
+          //     type: SHOW_ALERT,
+          //     payload: {
+          //       type: "error",
+          //       content: getErrorMessages(event.error_interactive)
+          //     }
+          //   });
+          // } else {
+          //   dispatch({
+          //     type: SHOW_ALERT,
+          //     payload: { type: "error", content: "" }
+          //   });
+          // }
+          // let displayError = document.getElementById("error-handler");
+          // if (event.error) {
+          //   displayError.textContent = event.error.message;
+          // } else {
+          //   displayError.textContent = "";
+          // }
+        });
+
+        tapInstanceRef.current = tapKey;
+        tapInstanceCard.current = card;
+      }
     });
-  }, [isTapLoaded]);
+  }, [selectedPaymentMethodId]);
 
   useEffect(() => {
     if (window.Pelcro.coupon.getFromUrl()) {
@@ -721,123 +880,6 @@ const PaymentMethodContainerWithoutStripe = ({
       });
     }
   }, [selectedPaymentMethodId]);
-
-  useEffect(() => {
-    if (
-      cardProcessor === "tap" &&
-      !selectedPaymentMethodId &&
-      window.Tapjsli
-    ) {
-      console.log("window.Tapjsli script is loaded");
-
-      const tapKey = window.Tapjsli(
-        window.Pelcro.site.read()?.tap_gateway_settings
-          .publishable_key
-      );
-
-      let elements = tapKey.elements({});
-
-      let style = {
-        base: {
-          color: "#535353",
-          lineHeight: "18px",
-          fontFamily: "sans-serif",
-          fontSmoothing: "antialiased",
-          fontSize: "16px",
-          "::placeholder": {
-            color: "rgba(0, 0, 0, 0.26)",
-            fontSize: "15px"
-          }
-        },
-        invalid: {
-          color: "red"
-        }
-      };
-
-      // input labels/placeholders
-      let labels = {
-        cardNumber: "Card Number",
-        expirationDate: "MM/YY",
-        cvv: "CVV",
-        cardHolder: "Card Holder Name"
-      };
-
-      //payment options
-      let paymentOptions = {
-        labels: labels,
-        TextDirection: "ltr"
-      };
-
-      //create element, pass style and payment options
-      let card = elements.create(
-        "card",
-        { style: style },
-        paymentOptions
-      );
-
-      //mount element
-      card.mount("#tapPaymentIframe");
-
-      //card change event listener
-      card.addEventListener("change", function (event) {
-        // if (event.error_interactive) {
-        //   onFailure(event.error_interactive);
-        //   return dispatch({
-        //     type: SHOW_ALERT,
-        //     payload: {
-        //       type: "error",
-        //       content: getErrorMessages(event.error_interactive)
-        //     }
-        //   });
-        // } else {
-        //   dispatch({
-        //     type: SHOW_ALERT,
-        //     payload: { type: "error", content: "" }
-        //   });
-        // }
-        // let displayError = document.getElementById("error-handler");
-        // if (event.error) {
-        //   displayError.textContent = event.error.message;
-        // } else {
-        //   displayError.textContent = "";
-        // }
-      });
-
-      tapInstanceRef.current = tapKey;
-      tapInstanceCard.current = card;
-    } else if (cardProcessor === "tap" && !window.Tapjsli) {
-      console.log("window.Tapjsli script is NOT loaded");
-
-      whenUserReady(() => {
-        console.log(
-          "Site is ready and trying to load window.Tapjsli script"
-        );
-        window.Pelcro.helpers.loadSDK(
-          "https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.4/bluebird.min.js",
-          "tap-bluebird"
-        );
-
-        window.Pelcro.helpers.loadSDK(
-          "https://secure.gosell.io/js/sdk/tap.min.js",
-          "tap-sdk"
-        );
-
-        setIsTapLoaded(true);
-      });
-
-      window.Pelcro.helpers.loadSDK(
-        "https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.4/bluebird.min.js",
-        "tap-bluebird"
-      );
-
-      window.Pelcro.helpers.loadSDK(
-        "https://secure.gosell.io/js/sdk/tap.min.js",
-        "tap-sdk"
-      );
-
-      setIsTapLoaded(true);
-    }
-  }, [selectedPaymentMethodId, isTapLoaded]);
 
   const initPaymentRequest = (state, dispatch) => {
     try {
@@ -1958,7 +2000,6 @@ const PaymentMethodContainer = (props) => {
     Boolean(window.Stripe)
   );
   const { whenUserReady } = usePelcro.getStore();
-  const cardProcessor = getSiteCardProcessor();
 
   useEffect(() => {
     whenUserReady(() => {
