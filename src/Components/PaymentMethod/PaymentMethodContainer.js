@@ -139,9 +139,7 @@ const PaymentMethodContainerWithoutStripe = ({
 
   const cardProcessor = getSiteCardProcessor();
 
-  const [isTapLoaded, setIsTapLoaded] = useState(
-    Boolean(window.Tapjsli)
-  );
+  const [isTapLoaded, setIsTapLoaded] = useState(false);
 
   useEffect(() => {
     whenUserReady(() => {
@@ -1969,23 +1967,27 @@ const PaymentMethodContainer = (props) => {
             setIsStripeLoaded(true);
           });
       }
-
-      if (cardProcessor === "tap" && !window.Tapjsli) {
-        console.log(
-          "Inside Payment Method Container and window.Tapjsli is not loaded"
-        );
-
-        window.Pelcro.helpers.loadSDK(
-          "https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.4/bluebird.min.js",
-          "tap-bluebird"
-        );
-
-        window.Pelcro.helpers.loadSDK(
-          "https://secure.gosell.io/js/sdk/tap.min.js",
-          "tap-sdk"
-        );
-      }
     });
+
+    if (cardProcessor === "tap" && !window.Tapjsli) {
+      console.log(
+        "Inside Payment Method Container and window.Tapjsli is not loaded"
+      );
+
+      window.Pelcro.helpers.loadSDK(
+        "https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.4/bluebird.min.js",
+        "tap-bluebird"
+      );
+
+      window.Pelcro.helpers.loadSDK(
+        "https://secure.gosell.io/js/sdk/tap.min.js",
+        "tap-sdk"
+      );
+
+      console.log(
+        "After loading the Tap JS script from within PaymentMethodContainer"
+      );
+    }
   }, []);
 
   if (isStripeLoaded) {
