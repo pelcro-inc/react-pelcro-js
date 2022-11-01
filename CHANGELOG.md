@@ -1,5 +1,17 @@
 # [3.17.0-beta.10](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.17.0-beta.9...v3.17.0-beta.10) (2023-01-12)
 
+# [4.0.0-alpha.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.11.0-alpha.1...v4.0.0-alpha.1) (2022-11-01)
+
+### Features
+
+- introduce a new version of the UI ([379b0a0](https://github.com/pelcro-inc/react-pelcro-js/commit/379b0a05a940829d72a8cb29347b8e27f52179c6))
+
+### BREAKING CHANGES
+
+- this is considered a breaking change for most customers as a new UI is introduced in that version
+
+# [3.11.0-alpha.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.10.0...v3.11.0-alpha.1) (2022-11-01)
+
 # [3.11.0-alpha.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.10.0...v3.11.0-alpha.1) (2022-11-01)
 
 ### Bug Fixes
