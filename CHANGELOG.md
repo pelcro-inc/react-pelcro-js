@@ -1,119 +1,175 @@
 # [3.17.0-beta.10](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.17.0-beta.9...v3.17.0-beta.10) (2023-01-12)
 
+# [3.11.0-alpha.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.10.0...v3.11.0-alpha.1) (2022-11-01)
+
+### Bug Fixes
+
+- add another check for Tap script ([d801c1b](https://github.com/pelcro-inc/react-pelcro-js/commit/d801c1bf2cf5772715a090b21093cb47e3f8dce5))
+- add eventListener for Tap script ([c0b34a9](https://github.com/pelcro-inc/react-pelcro-js/commit/c0b34a918d38d8b018e76d84b032c1e370775d0a))
+- check for isUserReady before load tap script ([0b0418f](https://github.com/pelcro-inc/react-pelcro-js/commit/0b0418f2ffea8d1341cb030b012f9c177b31c51c))
+- check for Tapjsli before initializing Tap form ([893a96f](https://github.com/pelcro-inc/react-pelcro-js/commit/893a96f53a1d018b4d6e845c0ea3581e2a323069))
+- check for whenUserReady before checking for windo.Stripe in paymentMethodContainer ([ab10298](https://github.com/pelcro-inc/react-pelcro-js/commit/ab10298920ea26b0939df342131be7485ae60ba5))
+- check for window.Tapjsli instead of isTapLoaded ([40688bf](https://github.com/pelcro-inc/react-pelcro-js/commit/40688bfb76c3599d17305e67a09e2e443b9b0ffa))
+- check if not Tapjsli is loaded and load the script then ([4f12899](https://github.com/pelcro-inc/react-pelcro-js/commit/4f1289930090765b415e525a46b41df3494a85f5))
+- check if Tap script is loaded ([2564d3f](https://github.com/pelcro-inc/react-pelcro-js/commit/2564d3f34c5c09d63da6df1c7ddc7315a0c20bb1))
+- check if window.Tapjsli is exposed and loaded ([27a70c7](https://github.com/pelcro-inc/react-pelcro-js/commit/27a70c7d2f44957fec845b0ef2be701d18f2daf9))
+- initiate Tap script again if the eventListener is successful ([f7d9567](https://github.com/pelcro-inc/react-pelcro-js/commit/f7d9567e9e57188e1ed854e164d45039c7529d05))
+- initiate Tap with window.Tapjsli instead of Tapjsli ([d56f52d](https://github.com/pelcro-inc/react-pelcro-js/commit/d56f52dded89af4833b4698b389dce84267d9e87))
+- invoice url trigger ([#211](https://github.com/pelcro-inc/react-pelcro-js/issues/211)) ([6cbf856](https://github.com/pelcro-inc/react-pelcro-js/commit/6cbf856da42be826494d856373dd7054d807ca9c))
+- invoice url trigger ([#212](https://github.com/pelcro-inc/react-pelcro-js/issues/212)) ([b9fb2e5](https://github.com/pelcro-inc/react-pelcro-js/commit/b9fb2e5511b23ca8f7181ecc9eb67f5dab450718))
+- invoice url trigger with id ([#208](https://github.com/pelcro-inc/react-pelcro-js/issues/208)) ([3e66a2c](https://github.com/pelcro-inc/react-pelcro-js/commit/3e66a2c7b20220e5aa93e7a778c32d38d7db9f99))
+- lazy load Tap SDK ([84abc57](https://github.com/pelcro-inc/react-pelcro-js/commit/84abc57e163ee861b8d877e35d945848eb79433a))
+- move Tap script logic out of whenUserReady ([805591b](https://github.com/pelcro-inc/react-pelcro-js/commit/805591b575e62518a98f9c07da446b081c345d81))
+- remove console.log ([3fe1820](https://github.com/pelcro-inc/react-pelcro-js/commit/3fe18202dda24d5f1229a6091f8a93a7dd0b9346))
+- remove Tapjsli from useEffect depencies ([a76deed](https://github.com/pelcro-inc/react-pelcro-js/commit/a76deed1d8ba92807c3d907c7f103307cac862bf))
+- separate Tap initiation into it's own useEffect ([09649b3](https://github.com/pelcro-inc/react-pelcro-js/commit/09649b3c29dacf79c11e43741c5d5a74378dc447))
+- try another way to fix the tap script load issue ([e5cb09e](https://github.com/pelcro-inc/react-pelcro-js/commit/e5cb09ee77e75962a5eb5e550a5c020947d36248))
+- try to load Tap script earlier ([db94946](https://github.com/pelcro-inc/react-pelcro-js/commit/db94946068c9394c5283a9988fe5acd753628b0c))
+- yarn.lock ([995113f](https://github.com/pelcro-inc/react-pelcro-js/commit/995113f2ba494614d54ffa9955cac6a05c098508))
 
 ### Features
 
-* issue forms ([d8767b2](https://github.com/pelcro-inc/react-pelcro-js/commit/d8767b2c0557675bebc8b23c7896fd1470f1a4f3))
+- issue forms ([d8767b2](https://github.com/pelcro-inc/react-pelcro-js/commit/d8767b2c0557675bebc8b23c7896fd1470f1a4f3))
 
 # [3.17.0-beta.9](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.17.0-beta.8...v3.17.0-beta.9) (2023-01-12)
 
-
 ### Features
 
-* test issue forms ([7da0c10](https://github.com/pelcro-inc/react-pelcro-js/commit/7da0c10f0e42c1e48e35997e6c56344ed8b7b071))
+- test issue forms ([7da0c10](https://github.com/pelcro-inc/react-pelcro-js/commit/7da0c10f0e42c1e48e35997e6c56344ed8b7b071))
 
 # [3.17.0-beta.8](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.17.0-beta.7...v3.17.0-beta.8) (2023-01-10)
 
-
 ### Features
 
-* test issue forms ([ce3078d](https://github.com/pelcro-inc/react-pelcro-js/commit/ce3078d92bf1b87d4d9e269eb5893780de2945e1))
-* test issue forms (revert) ([41f768c](https://github.com/pelcro-inc/react-pelcro-js/commit/41f768c25e32197a27bbf99ec597eae822c6dbd6))
+- test issue forms ([ce3078d](https://github.com/pelcro-inc/react-pelcro-js/commit/ce3078d92bf1b87d4d9e269eb5893780de2945e1))
+- test issue forms (revert) ([41f768c](https://github.com/pelcro-inc/react-pelcro-js/commit/41f768c25e32197a27bbf99ec597eae822c6dbd6))
 
 # [3.17.0-beta.7](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.17.0-beta.6...v3.17.0-beta.7) (2023-01-10)
 
+- add address & payments ([b95f8e4](https://github.com/pelcro-inc/react-pelcro-js/commit/b95f8e4e8deb9d077a7347051eb0be995848e432))
+- add donations, gifts, invoices Menus ([9aa8783](https://github.com/pelcro-inc/react-pelcro-js/commit/9aa8783d52f01b4c1d9dbec418403b9c7978739a))
+- add memberships & many others ([dd0349d](https://github.com/pelcro-inc/react-pelcro-js/commit/dd0349dd67f3e9fd2debbd994eead28452081b73))
+- add nuka-carousel to the project ([56d43f3](https://github.com/pelcro-inc/react-pelcro-js/commit/56d43f3f47623de022132777181ebd03b629219a))
+- add nuka-carousel to the project ([03115fb](https://github.com/pelcro-inc/react-pelcro-js/commit/03115fbf952df7ac4b284466884d360433fa8968))
+- add plans carousel ([3e34812](https://github.com/pelcro-inc/react-pelcro-js/commit/3e3481230da74bf3707b681691f5d6730bb14768))
+- add plans carousel ([1b010f8](https://github.com/pelcro-inc/react-pelcro-js/commit/1b010f8f5c60b5ab23f3adca5b8fca8a8b87a337))
+- add release entry in the semantic release config ([c9cd436](https://github.com/pelcro-inc/react-pelcro-js/commit/c9cd4367d4be69dd26a4da83aae41413e79e1ee9))
+- add the ground work for the register modal ([3820094](https://github.com/pelcro-inc/react-pelcro-js/commit/3820094f9832d79f0d362e8ccfb1f5db9f876f5b))
+- add the ground work for the register modal ([90a9a8b](https://github.com/pelcro-inc/react-pelcro-js/commit/90a9a8b4b5e07cb2e158714609683576b411f8a3))
+- edit release.yml file ([6c6ab82](https://github.com/pelcro-inc/react-pelcro-js/commit/6c6ab820bc500651d80b79d8a29e86ee689f153a))
+- edit the semantic release config file ([0226fbd](https://github.com/pelcro-inc/react-pelcro-js/commit/0226fbdb94b977d425976187c90082db5bf26959))
+- finish the register modal ([77ba3a5](https://github.com/pelcro-inc/react-pelcro-js/commit/77ba3a51dd596a7f055c3bd96de87509eecce45f))
+- finish the register modal ([2e207bc](https://github.com/pelcro-inc/react-pelcro-js/commit/2e207bc7c4db556213f6198fb8edc3d6f931596c))
+- finish the select product and plan modal ([072bda4](https://github.com/pelcro-inc/react-pelcro-js/commit/072bda460ec56a9c8cd2b2de122e31e099913e18))
+- finish the select product and plan modal ([848a4ab](https://github.com/pelcro-inc/react-pelcro-js/commit/848a4ab43f621d73bdb863db3883f1de0081144e))
+- redesign change password modal ([5fd0663](https://github.com/pelcro-inc/react-pelcro-js/commit/5fd06633f9e69eb904db8c5a1d49ea46fe99ef0f))
+- redesign change password modal ([4e4ba5b](https://github.com/pelcro-inc/react-pelcro-js/commit/4e4ba5bcb1917ead9b1c809ab2d6169159f8931a))
+- redesign email verification and passwordless modals ([2be1db8](https://github.com/pelcro-inc/react-pelcro-js/commit/2be1db8aa4547fad2203ca486111d1fc91a9becd))
+- redesign email verification and passwordless modals ([97be125](https://github.com/pelcro-inc/react-pelcro-js/commit/97be12597cbd12bfc1c03fe08d7e8339e7dc0259))
+- redesign the address create and address update modals ([70c0e6a](https://github.com/pelcro-inc/react-pelcro-js/commit/70c0e6ab6adb1dfeab8897646c9d8290cbdc9240))
+- redesign the address create and address update modals ([2d8e60a](https://github.com/pelcro-inc/react-pelcro-js/commit/2d8e60a46c8443692e6c2957022133dea7183b0c))
+- redesign the create gift, rest password, and payment success modals ([ad48a7a](https://github.com/pelcro-inc/react-pelcro-js/commit/ad48a7a28de66ffd2b0ea47c43dc5a0eb5ca1c13))
+- redesign the create gift, rest password, and payment success modals ([8addf7d](https://github.com/pelcro-inc/react-pelcro-js/commit/8addf7dd85d9e23affe797bafe2e19b728b15140))
+- redesign the forget password modal ([86729b6](https://github.com/pelcro-inc/react-pelcro-js/commit/86729b67a02031e7d5a75bb9cf9736bf7e27f96d))
+- redesign the forget password modal ([92b3d9f](https://github.com/pelcro-inc/react-pelcro-js/commit/92b3d9f0d2b57712ef623981f83d575711eb183a))
+- redesign the gift redeem and qr code modals ([200533f](https://github.com/pelcro-inc/react-pelcro-js/commit/200533f4a9f42f197f305436dc1fa8fd678c2109))
+- redesign the gift redeem and qr code modals ([76766a3](https://github.com/pelcro-inc/react-pelcro-js/commit/76766a324c1937c7721580928cd7ff2d0c7d3074))
+- redesign the login modal ([972430b](https://github.com/pelcro-inc/react-pelcro-js/commit/972430bd4375357d4758e7623c8de7c5c0c9b143))
+- redesign the login modal ([e8a1eb3](https://github.com/pelcro-inc/react-pelcro-js/commit/e8a1eb3a7606f5c760bea4c27da52bb713060e7d))
+- redesign the select address modal ([9adff53](https://github.com/pelcro-inc/react-pelcro-js/commit/9adff532122a2691528373cdba8878fb2148af0d))
+- redesign the select address modal ([320d4ea](https://github.com/pelcro-inc/react-pelcro-js/commit/320d4ea69af0c3c2df10c60b44a655aa9ea8afd9))
+- redesign the select product modal ([23656aa](https://github.com/pelcro-inc/react-pelcro-js/commit/23656aa4af200bd646994183fa6528a32351fbd8))
+- redesign the select product modal ([4a3b0a5](https://github.com/pelcro-inc/react-pelcro-js/commit/4a3b0a59974931750386f8d6f2e07dd0a3a005a2))
+- redesign update newsletter modal ([2c066f2](https://github.com/pelcro-inc/react-pelcro-js/commit/2c066f29d31fea92e68cf4212264ce73d10332d0))
+- redesign update newsletter modal ([33e726e](https://github.com/pelcro-inc/react-pelcro-js/commit/33e726e58df437ac6269a1938e59c80eba3798bb))
+- redesign update user profile and update profile picture modals ([87b373e](https://github.com/pelcro-inc/react-pelcro-js/commit/87b373eb862e43e91ae7499d84d1a78cc0607bc3))
+- redesign update user profile and update profile picture modals ([2b8d9a2](https://github.com/pelcro-inc/react-pelcro-js/commit/2b8d9a2f23b2dc159adfbddab6dbaf74f8db8d25))
+- update dashboard Links ([5bc88b4](https://github.com/pelcro-inc/react-pelcro-js/commit/5bc88b4059b561906e8a881e6cfd3e3f057c8676))
+- update release.yml file ([e1af02d](https://github.com/pelcro-inc/react-pelcro-js/commit/e1af02d9ab547f49ff3539f81cf1fe2f6ad15263))
+- update release.yml file ([449414d](https://github.com/pelcro-inc/react-pelcro-js/commit/449414d4c06b7f84b86c5dc6835df2cbae36524b))
+- updated the rest of the modals to the new layout ([c2ac516](https://github.com/pelcro-inc/react-pelcro-js/commit/c2ac516d956e907856a66e801a5fccea01fd3233))
+
+## [3.10.1-beta.21](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.10.1-beta.20...v3.10.1-beta.21) (2022-11-01)
 
 ### Bug Fixes
 
-* incorrect file extension for issue forms (revert) ([af60bc4](https://github.com/pelcro-inc/react-pelcro-js/commit/af60bc47632482d75e64e33580e1757fb786410e))
+- incorrect file extension for issue forms (revert) ([af60bc4](https://github.com/pelcro-inc/react-pelcro-js/commit/af60bc47632482d75e64e33580e1757fb786410e))
 
 # [3.17.0-beta.6](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.17.0-beta.5...v3.17.0-beta.6) (2023-01-10)
 
-
 ### Bug Fixes
 
-* incorrect file extension for issue forms ([529fc71](https://github.com/pelcro-inc/react-pelcro-js/commit/529fc7131a988144b88c3ff3fd30ac7b4f34008b))
+- incorrect file extension for issue forms ([529fc71](https://github.com/pelcro-inc/react-pelcro-js/commit/529fc7131a988144b88c3ff3fd30ac7b4f34008b))
 
 # [3.17.0-beta.5](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.17.0-beta.4...v3.17.0-beta.5) (2023-01-10)
 
-
 ### Features
 
-* Testing issue forms ([616525b](https://github.com/pelcro-inc/react-pelcro-js/commit/616525b0e3c1ab9d21fb39877e1e78268af33c28))
+- Testing issue forms ([616525b](https://github.com/pelcro-inc/react-pelcro-js/commit/616525b0e3c1ab9d21fb39877e1e78268af33c28))
 
 # [3.17.0-beta.4](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.17.0-beta.3...v3.17.0-beta.4) (2023-01-10)
 
-
 ### Bug Fixes
 
-* change class to className ([#258](https://github.com/pelcro-inc/react-pelcro-js/issues/258)) ([470d779](https://github.com/pelcro-inc/react-pelcro-js/commit/470d7795cdaf4dad63318973facc08616590c325))
+- change class to className ([#258](https://github.com/pelcro-inc/react-pelcro-js/issues/258)) ([470d779](https://github.com/pelcro-inc/react-pelcro-js/commit/470d7795cdaf4dad63318973facc08616590c325))
 
 # [3.17.0-beta.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.17.0-beta.2...v3.17.0-beta.3) (2023-01-10)
 
-
 ### Features
 
-* Update issue templates ([630751b](https://github.com/pelcro-inc/react-pelcro-js/commit/630751b49c69647f83efd06be474aced3b359d75))
+- Update issue templates ([630751b](https://github.com/pelcro-inc/react-pelcro-js/commit/630751b49c69647f83efd06be474aced3b359d75))
 
 # [3.17.0-beta.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.17.0-beta.1...v3.17.0-beta.2) (2023-01-10)
 
-
 ### Features
 
-* issue template and config ([#255](https://github.com/pelcro-inc/react-pelcro-js/issues/255)) ([b861393](https://github.com/pelcro-inc/react-pelcro-js/commit/b8613931e5e6a7ee2bbad6f94f9ee041449355a7))
+- issue template and config ([#255](https://github.com/pelcro-inc/react-pelcro-js/issues/255)) ([b861393](https://github.com/pelcro-inc/react-pelcro-js/commit/b8613931e5e6a7ee2bbad6f94f9ee041449355a7))
 
 # [3.17.0-beta.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.16.0...v3.17.0-beta.1) (2023-01-10)
 
-
 ### Features
 
-* update the email validation to accept upper case letters ([#252](https://github.com/pelcro-inc/react-pelcro-js/issues/252)) ([a400d67](https://github.com/pelcro-inc/react-pelcro-js/commit/a400d67018c4161f18aea3cc60b94d1a41a069c8))
+- update the email validation to accept upper case letters ([#252](https://github.com/pelcro-inc/react-pelcro-js/issues/252)) ([a400d67](https://github.com/pelcro-inc/react-pelcro-js/commit/a400d67018c4161f18aea3cc60b94d1a41a069c8))
 
 # [3.16.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.15.0...v3.16.0) (2023-01-05)
 
-
 ### Bug Fixes
 
-* blur/unblur entitlements ([#248](https://github.com/pelcro-inc/react-pelcro-js/issues/248)) ([ced8405](https://github.com/pelcro-inc/react-pelcro-js/commit/ced84051880b78202efc83dce566c0ea664cebda))
-
+- blur/unblur entitlements ([#248](https://github.com/pelcro-inc/react-pelcro-js/issues/248)) ([ced8405](https://github.com/pelcro-inc/react-pelcro-js/commit/ced84051880b78202efc83dce566c0ea664cebda))
 
 ### Features
 
-* change address create title when gifting ([#249](https://github.com/pelcro-inc/react-pelcro-js/issues/249)) ([de50702](https://github.com/pelcro-inc/react-pelcro-js/commit/de507020678f161e59ffa29c8ea27f7a3d53199e))
+- change address create title when gifting ([#249](https://github.com/pelcro-inc/react-pelcro-js/issues/249)) ([de50702](https://github.com/pelcro-inc/react-pelcro-js/commit/de507020678f161e59ffa29c8ea27f7a3d53199e))
 
 # [3.16.0-beta.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.15.1-beta.1...v3.16.0-beta.1) (2023-01-04)
 
-
 ### Features
 
-* change address create title when gifting ([#249](https://github.com/pelcro-inc/react-pelcro-js/issues/249)) ([de50702](https://github.com/pelcro-inc/react-pelcro-js/commit/de507020678f161e59ffa29c8ea27f7a3d53199e))
+- change address create title when gifting ([#249](https://github.com/pelcro-inc/react-pelcro-js/issues/249)) ([de50702](https://github.com/pelcro-inc/react-pelcro-js/commit/de507020678f161e59ffa29c8ea27f7a3d53199e))
 
 ## [3.15.1-beta.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.15.0...v3.15.1-beta.1) (2022-12-21)
 
-
 ### Bug Fixes
 
-* blur/unblur entitlements ([#248](https://github.com/pelcro-inc/react-pelcro-js/issues/248)) ([ced8405](https://github.com/pelcro-inc/react-pelcro-js/commit/ced84051880b78202efc83dce566c0ea664cebda))
+- blur/unblur entitlements ([#248](https://github.com/pelcro-inc/react-pelcro-js/issues/248)) ([ced8405](https://github.com/pelcro-inc/react-pelcro-js/commit/ced84051880b78202efc83dce566c0ea664cebda))
 
 # [3.15.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.14.0...v3.15.0) (2022-12-21)
 
-
 ### Bug Fixes
 
-* manage members list UI ([#237](https://github.com/pelcro-inc/react-pelcro-js/issues/237)) ([e4315b2](https://github.com/pelcro-inc/react-pelcro-js/commit/e4315b27eac6266acf2ff32a9f9cbc82edcf1214))
-* members list alignment & pending color ([#236](https://github.com/pelcro-inc/react-pelcro-js/issues/236)) ([891c2d4](https://github.com/pelcro-inc/react-pelcro-js/commit/891c2d4c41039899d23b0b9e580e32e734d1258b))
-* Purchase flow interruption when signing in or verifying email ([#239](https://github.com/pelcro-inc/react-pelcro-js/issues/239)) ([54532e6](https://github.com/pelcro-inc/react-pelcro-js/commit/54532e63529b876c590e00759959c1b9a3a60690))
-* purchase flow url trigger ([#243](https://github.com/pelcro-inc/react-pelcro-js/issues/243)) ([d18c25b](https://github.com/pelcro-inc/react-pelcro-js/commit/d18c25b5f0e53eac1f3e6459c783f1173e573fb1))
-* toggleAuthenticationSuccessPendingView fix ([#247](https://github.com/pelcro-inc/react-pelcro-js/issues/247)) ([97cbf4a](https://github.com/pelcro-inc/react-pelcro-js/commit/97cbf4a7645aaedb1e7905df21be22de242b64f5))
-
+- manage members list UI ([#237](https://github.com/pelcro-inc/react-pelcro-js/issues/237)) ([e4315b2](https://github.com/pelcro-inc/react-pelcro-js/commit/e4315b27eac6266acf2ff32a9f9cbc82edcf1214))
+- members list alignment & pending color ([#236](https://github.com/pelcro-inc/react-pelcro-js/issues/236)) ([891c2d4](https://github.com/pelcro-inc/react-pelcro-js/commit/891c2d4c41039899d23b0b9e580e32e734d1258b))
+- Purchase flow interruption when signing in or verifying email ([#239](https://github.com/pelcro-inc/react-pelcro-js/issues/239)) ([54532e6](https://github.com/pelcro-inc/react-pelcro-js/commit/54532e63529b876c590e00759959c1b9a3a60690))
+- purchase flow url trigger ([#243](https://github.com/pelcro-inc/react-pelcro-js/issues/243)) ([d18c25b](https://github.com/pelcro-inc/react-pelcro-js/commit/d18c25b5f0e53eac1f3e6459c783f1173e573fb1))
+- toggleAuthenticationSuccessPendingView fix ([#247](https://github.com/pelcro-inc/react-pelcro-js/issues/247)) ([97cbf4a](https://github.com/pelcro-inc/react-pelcro-js/commit/97cbf4a7645aaedb1e7905df21be22de242b64f5))
 
 ### Features
 
-* **profile:** add display name input ([#246](https://github.com/pelcro-inc/react-pelcro-js/issues/246)) ([5029cb5](https://github.com/pelcro-inc/react-pelcro-js/commit/5029cb525b8dae6f4d1e00eef5cc8ce406e8e42f))
-* add update username in profile modal ([#234](https://github.com/pelcro-inc/react-pelcro-js/issues/234)) ([cd284b6](https://github.com/pelcro-inc/react-pelcro-js/commit/cd284b64fb4897cf37b6bbd8c93716ed2b2e691e))
-* cancel recurring donations ([#245](https://github.com/pelcro-inc/react-pelcro-js/issues/245)) ([93c2b01](https://github.com/pelcro-inc/react-pelcro-js/commit/93c2b01d019463d786f74e307cc0e8e009d4a667))
-* redeem the gift and create address only if required by product ([efb1db2](https://github.com/pelcro-inc/react-pelcro-js/commit/efb1db28a4ce75e58cef2ecc444e86c82f027e50))
-* username edit in profile modal ([#235](https://github.com/pelcro-inc/react-pelcro-js/issues/235)) ([60fd7da](https://github.com/pelcro-inc/react-pelcro-js/commit/60fd7dab187d07b936ac12abb6a07852c123262d))
+- **profile:** add display name input ([#246](https://github.com/pelcro-inc/react-pelcro-js/issues/246)) ([5029cb5](https://github.com/pelcro-inc/react-pelcro-js/commit/5029cb525b8dae6f4d1e00eef5cc8ce406e8e42f))
+- add update username in profile modal ([#234](https://github.com/pelcro-inc/react-pelcro-js/issues/234)) ([cd284b6](https://github.com/pelcro-inc/react-pelcro-js/commit/cd284b64fb4897cf37b6bbd8c93716ed2b2e691e))
+- cancel recurring donations ([#245](https://github.com/pelcro-inc/react-pelcro-js/issues/245)) ([93c2b01](https://github.com/pelcro-inc/react-pelcro-js/commit/93c2b01d019463d786f74e307cc0e8e009d4a667))
+- redeem the gift and create address only if required by product ([efb1db2](https://github.com/pelcro-inc/react-pelcro-js/commit/efb1db28a4ce75e58cef2ecc444e86c82f027e50))
+- username edit in profile modal ([#235](https://github.com/pelcro-inc/react-pelcro-js/issues/235)) ([60fd7da](https://github.com/pelcro-inc/react-pelcro-js/commit/60fd7dab187d07b936ac12abb6a07852c123262d))
 
 # [3.14.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.13.0...v3.14.0) (2022-12-01)
 
