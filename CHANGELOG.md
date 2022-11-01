@@ -1,3 +1,10 @@
+## [3.10.1-beta.14](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.10.1-beta.13...v3.10.1-beta.14) (2022-11-01)
+
+
+### Bug Fixes
+
+* check if not Tapjsli is loaded and load the script then ([4f12899](https://github.com/pelcro-inc/react-pelcro-js/commit/4f1289930090765b415e525a46b41df3494a85f5))
+
 ## [3.10.1-beta.13](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.10.1-beta.12...v3.10.1-beta.13) (2022-10-31)
 
 
