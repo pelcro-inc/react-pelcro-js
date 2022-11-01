@@ -722,7 +722,7 @@ const PaymentMethodContainerWithoutStripe = ({
       !selectedPaymentMethodId &&
       window.Tapjsli
     ) {
-      console.log(" window.Tapjsli script is loaded");
+      console.log("window.Tapjsli script is loaded");
 
       const tapKey = window.Tapjsli(
         window.Pelcro.site.read()?.tap_gateway_settings
@@ -800,15 +800,34 @@ const PaymentMethodContainerWithoutStripe = ({
       tapInstanceRef.current = tapKey;
       tapInstanceCard.current = card;
     } else if (cardProcessor === "tap" && !window.Tapjsli) {
-      window.Pelcro.helpers.loadSDK(
-        "https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.4/bluebird.min.js",
-        "tap-bluebird"
-      );
+      console.log("window.Tapjsli script is NOT loaded");
 
-      window.Pelcro.helpers.loadSDK(
-        "https://secure.gosell.io/js/sdk/tap.min.js",
-        "tap-sdk"
-      );
+      whenUserReady(() => {
+        console.log(
+          "Site is ready and trying to load window.Tapjsli script"
+        );
+        window.Pelcro.helpers.loadSDK(
+          "https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.4/bluebird.min.js",
+          "tap-bluebird"
+        );
+
+        window.Pelcro.helpers.loadSDK(
+          "https://secure.gosell.io/js/sdk/tap.min.js",
+          "tap-sdk"
+        );
+
+        setIsTapLoaded(true);
+      });
+
+      // window.Pelcro.helpers.loadSDK(
+      //   "https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.4/bluebird.min.js",
+      //   "tap-bluebird"
+      // );
+
+      // window.Pelcro.helpers.loadSDK(
+      //   "https://secure.gosell.io/js/sdk/tap.min.js",
+      //   "tap-sdk"
+      // );
 
       setIsTapLoaded(true);
     }
