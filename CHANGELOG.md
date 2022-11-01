@@ -1,3 +1,10 @@
+## [3.10.1-beta.20](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.10.1-beta.19...v3.10.1-beta.20) (2022-11-01)
+
+
+### Bug Fixes
+
+* initiate Tap script again if the eventListener is successful ([f7d9567](https://github.com/pelcro-inc/react-pelcro-js/commit/f7d9567e9e57188e1ed854e164d45039c7529d05))
+
 ## [3.10.1-beta.19](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.10.1-beta.18...v3.10.1-beta.19) (2022-11-01)
 
 
