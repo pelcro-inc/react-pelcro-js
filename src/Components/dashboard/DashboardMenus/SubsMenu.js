@@ -293,6 +293,7 @@ export const SubscriptionsItems = ({
                   )}
 
                 {sub.shipments_suspended_until &&
+                  isDateBeforeToday(shipments_suspended_until) &&
                   sub.shipments_remaining > 0 && (
                     <Button
                       variant="ghost"
@@ -306,19 +307,23 @@ export const SubscriptionsItems = ({
                     </Button>
                   )}
 
-                {!sub.shipments_suspended_until &&
-                  sub.shipments_remaining > 0 && (
-                    <Button
-                      variant="ghost"
-                      className="plc-text-red-500 focus:plc-ring-red-500 pelcro-dashboard-sub-suspend-button"
-                      icon={<CalendarIcon />}
-                      onClick={onSuspendClick}
-                      disabled={disableSubmit}
-                      data-key={sub.id}
-                    >
-                      {t("labels.suspend")}
-                    </Button>
-                  )}
+                {((!sub.shipments_suspended_until &&
+                  sub.shipments_remaining > 0) ||
+                  (shipments_suspended_until &&
+                    !isDateBeforeToday(
+                      shipments_suspended_until
+                    ))) && (
+                  <Button
+                    variant="ghost"
+                    className="plc-text-red-500 focus:plc-ring-red-500 pelcro-dashboard-sub-suspend-button"
+                    icon={<CalendarIcon />}
+                    onClick={onSuspendClick}
+                    disabled={disableSubmit}
+                    data-key={sub.id}
+                  >
+                    {t("labels.suspend")}
+                  </Button>
+                )}
 
                 {!sub.plan.auto_renew ||
                 (sub.plan.auto_renew &&
@@ -454,4 +459,8 @@ function getNonDonationSubs() {
       ?.list()
       ?.filter((sub) => !sub.plan.is_donation) ?? []
   );
+}
+
+function isDateBeforeToday(date) {
+  return new Date(date).getTime() < new Date().getTime();
 }
