@@ -1,3 +1,10 @@
+# [3.11.0-beta.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.11.0-beta.1...v3.11.0-beta.2) (2022-11-01)
+
+
+### Features
+
+* suspend/unsuspend button logic ([#213](https://github.com/pelcro-inc/react-pelcro-js/issues/213)) ([74a5364](https://github.com/pelcro-inc/react-pelcro-js/commit/74a53643d959fd33ee3b9d813d991c88efc4e355))
+
 # [3.11.0-beta.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.10.1-beta.21...v3.11.0-beta.1) (2022-11-01)
 
 
