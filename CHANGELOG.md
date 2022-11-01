@@ -1,3 +1,10 @@
+## [3.10.1-beta.17](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.10.1-beta.16...v3.10.1-beta.17) (2022-11-01)
+
+
+### Bug Fixes
+
+* add another check for Tap script ([d801c1b](https://github.com/pelcro-inc/react-pelcro-js/commit/d801c1bf2cf5772715a090b21093cb47e3f8dce5))
+
 ## [3.10.1-beta.16](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.10.1-beta.15...v3.10.1-beta.16) (2022-11-01)
 
 
