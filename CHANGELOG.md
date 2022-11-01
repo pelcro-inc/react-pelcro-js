@@ -1,3 +1,10 @@
+## [3.10.1-beta.16](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.10.1-beta.15...v3.10.1-beta.16) (2022-11-01)
+
+
+### Bug Fixes
+
+* try to load Tap script earlier ([db94946](https://github.com/pelcro-inc/react-pelcro-js/commit/db94946068c9394c5283a9988fe5acd753628b0c))
+
 ## [3.10.1-beta.15](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.10.1-beta.14...v3.10.1-beta.15) (2022-11-01)
 
 
