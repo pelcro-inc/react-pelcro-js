@@ -505,27 +505,7 @@ const PaymentMethodContainerWithoutStripe = ({
 
     //card change event listener
     card.addEventListener("change", function (event) {
-      // if (event.error_interactive) {
-      //   onFailure(event.error_interactive);
-      //   return dispatch({
-      //     type: SHOW_ALERT,
-      //     payload: {
-      //       type: "error",
-      //       content: getErrorMessages(event.error_interactive)
-      //     }
-      //   });
-      // } else {
-      //   dispatch({
-      //     type: SHOW_ALERT,
-      //     payload: { type: "error", content: "" }
-      //   });
-      // }
-      // let displayError = document.getElementById("error-handler");
-      // if (event.error) {
-      //   displayError.textContent = event.error.message;
-      // } else {
-      //   displayError.textContent = "";
-      // }
+      //If needed
     });
 
     tapInstanceRef.current = tapKey;
