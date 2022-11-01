@@ -139,7 +139,9 @@ const PaymentMethodContainerWithoutStripe = ({
 
   const cardProcessor = getSiteCardProcessor();
 
-  const [isTapLoaded, setIsTapLoaded] = useState(false);
+  const [isTapLoaded, setIsTapLoaded] = useState(
+    Boolean(window.Tapjsli)
+  );
 
   useEffect(() => {
     whenUserReady(() => {
@@ -154,7 +156,13 @@ const PaymentMethodContainerWithoutStripe = ({
           "tap-sdk"
         );
 
-        setIsTapLoaded(true);
+        document
+          .querySelector(
+            'script[src="https://secure.gosell.io/js/sdk/tap.min.js"]'
+          )
+          .addEventListener("load", () => {
+            setIsTapLoaded(true);
+          });
       }
     });
   }, [isTapLoaded]);
@@ -1946,8 +1954,6 @@ const UnwrappedForm = injectStripe(
 );
 
 const PaymentMethodContainer = (props) => {
-  console.log("Inside Payment Method Container");
-
   const [isStripeLoaded, setIsStripeLoaded] = useState(
     Boolean(window.Stripe)
   );
@@ -1957,10 +1963,6 @@ const PaymentMethodContainer = (props) => {
   useEffect(() => {
     whenUserReady(() => {
       if (!window.Stripe) {
-        console.log(
-          "Inside Payment Method Container and window.Stripe is not loaded"
-        );
-
         document
           .querySelector('script[src="https://js.stripe.com/v3"]')
           .addEventListener("load", () => {
@@ -1968,26 +1970,6 @@ const PaymentMethodContainer = (props) => {
           });
       }
     });
-
-    if (cardProcessor === "tap" && !window.Tapjsli) {
-      console.log(
-        "Inside Payment Method Container and window.Tapjsli is not loaded"
-      );
-
-      window.Pelcro.helpers.loadSDK(
-        "https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.4/bluebird.min.js",
-        "tap-bluebird"
-      );
-
-      window.Pelcro.helpers.loadSDK(
-        "https://secure.gosell.io/js/sdk/tap.min.js",
-        "tap-sdk"
-      );
-
-      console.log(
-        "After loading the Tap JS script from within PaymentMethodContainer"
-      );
-    }
   }, []);
 
   if (isStripeLoaded) {
