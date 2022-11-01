@@ -769,7 +769,6 @@ const PaymentMethodContainerWithoutStripe = ({
             'script[src="https://secure.gosell.io/js/sdk/tap.min.js"]'
           )
           .addEventListener("load", () => {
-            console.log("From event listener: Tap script is loaded");
             initTapScript();
           });
       }
@@ -779,7 +778,6 @@ const PaymentMethodContainerWithoutStripe = ({
         !selectedPaymentMethodId &&
         window.Tapjsli
       ) {
-        console.log("window.Tapjsli script is loaded");
         initTapScript();
       }
     });
