@@ -18,6 +18,10 @@ import {
 } from "../../utils/action-types";
 import { getErrorMessages } from "../common/Helpers";
 
+console.log(
+  "Introudce a new version of the UI with a breaking change"
+);
+
 const initialState = {
   email: "",
   password: "",
@@ -39,7 +43,6 @@ const LoginContainer = ({
   onFailure = () => {},
   children
 }) => {
-  
   const handleLogin = ({ email, password }, dispatch) => {
     window.Pelcro.user.login({ email, password }, (err, res) => {
       dispatch({ type: DISABLE_LOGIN_BUTTON, payload: false });
