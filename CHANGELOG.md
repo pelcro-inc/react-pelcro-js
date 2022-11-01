@@ -1,3 +1,11 @@
+# [3.11.0-beta.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.10.1-beta.21...v3.11.0-beta.1) (2022-11-01)
+
+
+### Features
+
+* add release entry in the semantic release config ([c9cd436](https://github.com/pelcro-inc/react-pelcro-js/commit/c9cd4367d4be69dd26a4da83aae41413e79e1ee9))
+* edit the semantic release config file ([0226fbd](https://github.com/pelcro-inc/react-pelcro-js/commit/0226fbdb94b977d425976187c90082db5bf26959))
+
 ## [3.10.1-beta.21](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.10.1-beta.20...v3.10.1-beta.21) (2022-11-01)
 
 
