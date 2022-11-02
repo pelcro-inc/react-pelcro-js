@@ -1,3 +1,10 @@
+# [3.11.0-beta.4](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.11.0-beta.3...v3.11.0-beta.4) (2022-11-02)
+
+
+### Bug Fixes
+
+* shipments_suspended logic ([109ae1a](https://github.com/pelcro-inc/react-pelcro-js/commit/109ae1addbb5b89f142d8842f72ea232b547a092))
+
 # [3.11.0-beta.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.11.0-beta.2...v3.11.0-beta.3) (2022-11-02)
 
 
