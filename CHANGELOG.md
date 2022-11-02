@@ -1,3 +1,10 @@
+# [3.11.0-beta.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.11.0-beta.2...v3.11.0-beta.3) (2022-11-02)
+
+
+### Bug Fixes
+
+* remove log ([7b866a4](https://github.com/pelcro-inc/react-pelcro-js/commit/7b866a431c5bd4fc4fe5844ade703327cdf21c5b))
+
 # [3.11.0-beta.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.11.0-beta.1...v3.11.0-beta.2) (2022-11-01)
 
 
