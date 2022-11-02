@@ -293,7 +293,7 @@ export const SubscriptionsItems = ({
                   )}
 
                 {sub.shipments_suspended_until &&
-                  isDateBeforeToday(shipments_suspended_until) &&
+                  isDateBeforeToday(sub.shipments_suspended_until) &&
                   sub.shipments_remaining > 0 && (
                     <Button
                       variant="ghost"
@@ -309,9 +309,9 @@ export const SubscriptionsItems = ({
 
                 {((!sub.shipments_suspended_until &&
                   sub.shipments_remaining > 0) ||
-                  (shipments_suspended_until &&
+                  (sub.shipments_suspended_until &&
                     !isDateBeforeToday(
-                      shipments_suspended_until
+                      sub.shipments_suspended_until
                     ))) && (
                   <Button
                     variant="ghost"
