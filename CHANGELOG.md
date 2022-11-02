@@ -1,3 +1,74 @@
+# [3.11.0-beta.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.11.0-beta.1...v3.11.0-beta.2) (2022-11-01)
+
+
+### Features
+
+* suspend/unsuspend button logic ([#213](https://github.com/pelcro-inc/react-pelcro-js/issues/213)) ([74a5364](https://github.com/pelcro-inc/react-pelcro-js/commit/74a53643d959fd33ee3b9d813d991c88efc4e355))
+
+# [3.11.0-beta.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.10.1-beta.21...v3.11.0-beta.1) (2022-11-01)
+
+
+### Features
+
+* add release entry in the semantic release config ([c9cd436](https://github.com/pelcro-inc/react-pelcro-js/commit/c9cd4367d4be69dd26a4da83aae41413e79e1ee9))
+* edit the semantic release config file ([0226fbd](https://github.com/pelcro-inc/react-pelcro-js/commit/0226fbdb94b977d425976187c90082db5bf26959))
+
+## [3.10.1-beta.21](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.10.1-beta.20...v3.10.1-beta.21) (2022-11-01)
+
+
+### Bug Fixes
+
+* remove console.log ([3fe1820](https://github.com/pelcro-inc/react-pelcro-js/commit/3fe18202dda24d5f1229a6091f8a93a7dd0b9346))
+
+## [3.10.1-beta.20](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.10.1-beta.19...v3.10.1-beta.20) (2022-11-01)
+
+
+### Bug Fixes
+
+* initiate Tap script again if the eventListener is successful ([f7d9567](https://github.com/pelcro-inc/react-pelcro-js/commit/f7d9567e9e57188e1ed854e164d45039c7529d05))
+
+## [3.10.1-beta.19](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.10.1-beta.18...v3.10.1-beta.19) (2022-11-01)
+
+
+### Bug Fixes
+
+* add eventListener for Tap script ([c0b34a9](https://github.com/pelcro-inc/react-pelcro-js/commit/c0b34a918d38d8b018e76d84b032c1e370775d0a))
+
+## [3.10.1-beta.18](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.10.1-beta.17...v3.10.1-beta.18) (2022-11-01)
+
+
+### Bug Fixes
+
+* move Tap script logic out of whenUserReady ([805591b](https://github.com/pelcro-inc/react-pelcro-js/commit/805591b575e62518a98f9c07da446b081c345d81))
+
+## [3.10.1-beta.17](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.10.1-beta.16...v3.10.1-beta.17) (2022-11-01)
+
+
+### Bug Fixes
+
+* add another check for Tap script ([d801c1b](https://github.com/pelcro-inc/react-pelcro-js/commit/d801c1bf2cf5772715a090b21093cb47e3f8dce5))
+
+## [3.10.1-beta.16](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.10.1-beta.15...v3.10.1-beta.16) (2022-11-01)
+
+
+### Bug Fixes
+
+* try to load Tap script earlier ([db94946](https://github.com/pelcro-inc/react-pelcro-js/commit/db94946068c9394c5283a9988fe5acd753628b0c))
+
+## [3.10.1-beta.15](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.10.1-beta.14...v3.10.1-beta.15) (2022-11-01)
+
+
+### Bug Fixes
+
+* try another way to fix the tap script load issue ([e5cb09e](https://github.com/pelcro-inc/react-pelcro-js/commit/e5cb09ee77e75962a5eb5e550a5c020947d36248))
+
+## [3.10.1-beta.14](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.10.1-beta.13...v3.10.1-beta.14) (2022-11-01)
+
+
+### Bug Fixes
+
+* check if not Tapjsli is loaded and load the script then ([4f12899](https://github.com/pelcro-inc/react-pelcro-js/commit/4f1289930090765b415e525a46b41df3494a85f5))
+
 ## [3.10.1-beta.13](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.10.1-beta.12...v3.10.1-beta.13) (2022-10-31)
 
 
