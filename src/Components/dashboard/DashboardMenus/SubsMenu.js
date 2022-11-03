@@ -293,7 +293,7 @@ export const SubscriptionsItems = ({
                   )}
 
                 {sub.shipments_suspended_until &&
-                  !isDateBeforeToday(sub.shipments_suspended_until) &&
+                  isDateAfterToday(sub.shipments_suspended_until) &&
                   sub.shipments_remaining > 0 && (
                     <Button
                       variant="ghost"
@@ -310,7 +310,7 @@ export const SubscriptionsItems = ({
                 {((!sub.shipments_suspended_until &&
                   sub.shipments_remaining > 0) ||
                   (sub.shipments_suspended_until &&
-                    isDateBeforeToday(
+                    !isDateAfterToday(
                       sub.shipments_suspended_until
                     ))) && (
                   <Button
@@ -461,6 +461,8 @@ function getNonDonationSubs() {
   );
 }
 
-function isDateBeforeToday(date) {
-  return new Date(date).getTime() < new Date().getTime();
+function isDateAfterToday(date) {
+  const today = new Date().setHours(0,0,0,0);
+  const newDate = new Date(date).setHours(0,0,0,0);
+  return newDate === today ? true : newDate > today;
 }
