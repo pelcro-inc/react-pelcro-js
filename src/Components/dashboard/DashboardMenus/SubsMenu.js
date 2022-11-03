@@ -462,7 +462,6 @@ function getNonDonationSubs() {
 }
 
 function isDateAfterToday(date) {
-  console.log(date);
   const today = new Date().setHours(0,0,0,0);
   const newDate = new Date(date).setHours(0,0,0,0);
   return newDate === today ? true : newDate > today;
