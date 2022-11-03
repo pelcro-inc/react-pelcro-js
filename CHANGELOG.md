@@ -1,3 +1,24 @@
+# [3.11.0-beta.5](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.11.0-beta.4...v3.11.0-beta.5) (2022-11-03)
+
+
+### Bug Fixes
+
+* from login if select empty go to register ([#215](https://github.com/pelcro-inc/react-pelcro-js/issues/215)) ([1439a64](https://github.com/pelcro-inc/react-pelcro-js/commit/1439a6468433c9920c7803306371c64d52dc53f2))
+
+# [3.11.0-beta.4](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.11.0-beta.3...v3.11.0-beta.4) (2022-11-02)
+
+
+### Bug Fixes
+
+* shipments_suspended logic ([109ae1a](https://github.com/pelcro-inc/react-pelcro-js/commit/109ae1addbb5b89f142d8842f72ea232b547a092))
+
+# [3.11.0-beta.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.11.0-beta.2...v3.11.0-beta.3) (2022-11-02)
+
+
+### Bug Fixes
+
+* remove log ([7b866a4](https://github.com/pelcro-inc/react-pelcro-js/commit/7b866a431c5bd4fc4fe5844ade703327cdf21c5b))
+
 # [3.11.0-beta.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.11.0-beta.1...v3.11.0-beta.2) (2022-11-01)
 
 
