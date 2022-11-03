@@ -33,6 +33,7 @@ export function LoginModal({ onDisplay, onClose, ...props }) {
     );
 
     if (viewFromURL === "invoice-details") {
+      console.log("invoice-details");
       initViewFromURL();
     }
   };
