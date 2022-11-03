@@ -1,3 +1,10 @@
+# [3.11.0-beta.5](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.11.0-beta.4...v3.11.0-beta.5) (2022-11-03)
+
+
+### Bug Fixes
+
+* from login if select empty go to register ([#215](https://github.com/pelcro-inc/react-pelcro-js/issues/215)) ([1439a64](https://github.com/pelcro-inc/react-pelcro-js/commit/1439a6468433c9920c7803306371c64d52dc53f2))
+
 # [3.11.0-beta.4](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.11.0-beta.3...v3.11.0-beta.4) (2022-11-02)
 
 
