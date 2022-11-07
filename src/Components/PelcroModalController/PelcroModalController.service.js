@@ -79,6 +79,8 @@ export const initPaywalls = () => {
     } else if (paywallMethods?.displayNewsletterPaywall()) {
       switchView("newsletter");
     } else if (paywallMethods?.displayPaywall()) {
+      const paywall_id = window.Pelcro.paywall.read().id;
+      window.sessionStorage.setItem("paywall_conversion_id", paywall_id);
       switchView("plan-select");
     }
   }

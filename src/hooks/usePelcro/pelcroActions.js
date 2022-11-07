@@ -64,6 +64,7 @@ export class PelcroActions {
 
     switchView(null);
     resetState();
+    window.sessionStorage.setItem("paywall_conversion_id", null);
   };
 
   switchToPaymentView = () => {

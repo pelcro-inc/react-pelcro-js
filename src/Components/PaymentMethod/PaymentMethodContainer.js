@@ -1146,6 +1146,19 @@ const PaymentMethodContainerWithoutStripe = ({
     }
   };
 
+  const trackPaywallConversion = (paywall_id) => {
+    // const paywall_id = window.Pelcro.paywall.read().id;
+    const user_id = window.Pelcro.user.read().id;
+    const subscription_id = subscriptionIdToRenew;
+    const plan_id = plan.id;
+    const product_id = product.id;
+    window.Pelcro.insight.track(`Paywall Conversion: ${paywall_id}`, {
+      user_id,
+      subscription_id,
+      plan_id,
+      product_id,
+    });
+  }
   const subscribe = (stripeSource, state, dispatch) => {
     const { couponCode } = state;
 
@@ -1249,6 +1262,8 @@ const PaymentMethodContainerWithoutStripe = ({
                 }
               });
             }
+            const paywall_id = window.sessionStorage.getItem("paywall_conversion_id");
+            if (paywall_id) trackPaywallConversion(paywall_id);
             onSuccess(res);
           }
         );
