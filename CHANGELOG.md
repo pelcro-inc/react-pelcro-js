@@ -1,3 +1,10 @@
+# [3.11.0-beta.6](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.11.0-beta.5...v3.11.0-beta.6) (2022-11-07)
+
+
+### Features
+
+* add tin field to user update modal ([#217](https://github.com/pelcro-inc/react-pelcro-js/issues/217)) ([5790f1a](https://github.com/pelcro-inc/react-pelcro-js/commit/5790f1a6a5d602383bd87f22a5b998e9747a67d4))
+
 # [3.11.0-beta.5](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.11.0-beta.4...v3.11.0-beta.5) (2022-11-03)
 
 
