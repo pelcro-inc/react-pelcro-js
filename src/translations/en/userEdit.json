@@ -13,7 +13,8 @@
     "save": "Upload Photo",
     "selectImage": "Upload new photo",
     "removeImage": "Remove current photo",
-    "zoom": "Zoom"
+    "zoom": "Zoom",
+    "tin": "Tax Identification Number"
   },
   "messages": {
     "userUpdated": "Thanks! Your profile was updated successfully.",
