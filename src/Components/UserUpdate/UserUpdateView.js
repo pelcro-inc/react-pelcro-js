@@ -8,6 +8,7 @@ import { UserUpdateButton } from "./UserUpdateButton";
 import { UserUpdateContainer } from "./UserUpdateContainer";
 import { AlertWithContext } from "../../SubComponents/AlertWithContext";
 import { UserUpdateProfilePic } from "./UserUpdateProfilePic";
+import { UserUpdateTin } from "./UserUpdateTin";
 
 export const UserUpdateView = (props) => {
   const { t } = useTranslation("userEdit");
@@ -58,6 +59,12 @@ export const UserUpdateView = (props) => {
               errorId="pelcro-input-phone-error"
               label={t("labels.phone")}
               required={supportsTap ? true : false}
+            />
+          </div>
+          <div className="plc-flex plc-items-start">
+            <UserUpdateTin
+              id="pelcro-input-tin"
+              label={t("labels.tin")}
             />
           </div>
           <UserUpdateButton

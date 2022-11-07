@@ -46,6 +46,7 @@ export const SET_LAST_NAME = "SET_LAST_NAME";
 export const SET_START_DATE = "SET_START_DATE";
 export const SET_GIFT_MESSAGE = "SET_GIFT_MESSAGE";
 export const SET_PHONE = "SET_PHONE";
+export const SET_TIN = "SET_TIN";
 export const SET_ADDRESS_ID = "SET_ADDRESS_ID";
 export const SET_PRODUCT_AND_PLAN = "SET_PRODUCT_AND_PLAN";
 export const SET_SUBSCRIPTION_TO_RENEW = "SET_SUBSCRIPTION_TO_RENEW";
