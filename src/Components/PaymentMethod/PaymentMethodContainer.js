@@ -1156,9 +1156,9 @@ const PaymentMethodContainerWithoutStripe = ({
       user_id,
       subscription_id,
       plan_id,
-      product_id,
+      product_id
     });
-  }
+  };
   const subscribe = (stripeSource, state, dispatch) => {
     const { couponCode } = state;
 
@@ -1262,8 +1262,16 @@ const PaymentMethodContainerWithoutStripe = ({
                 }
               });
             }
-            const paywall_id = window.sessionStorage.getItem("paywall_conversion_id");
-            if (paywall_id) trackPaywallConversion(paywall_id);
+            const paywall_id = window.sessionStorage.getItem(
+              "paywall_conversion_id"
+            );
+            if (paywall_id) {
+              trackPaywallConversion(paywall_id);
+              window.sessionStorage.setItem(
+                "paywall_conversion_id",
+                null
+              );
+            }
             onSuccess(res);
           }
         );

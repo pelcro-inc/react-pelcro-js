@@ -80,7 +80,10 @@ export const initPaywalls = () => {
       switchView("newsletter");
     } else if (paywallMethods?.displayPaywall()) {
       const paywall_id = window.Pelcro.paywall.read().id;
-      window.sessionStorage.setItem("paywall_conversion_id", paywall_id);
+      window.sessionStorage.setItem(
+        "paywall_conversion_id",
+        paywall_id
+      );
       switchView("plan-select");
     }
   }
@@ -617,17 +620,22 @@ const showPasswordlessRequestFromUrl = () => {
 };
 
 const showInvoiceDetailsFromUrl = () => {
-  const { isAuthenticated, setInvoice, whenUserReady, whenSiteReady, switchView } =
-    usePelcro.getStore();
+  const {
+    isAuthenticated,
+    setInvoice,
+    whenUserReady,
+    whenSiteReady,
+    switchView
+  } = usePelcro.getStore();
 
   whenSiteReady(() => {
     if (!isAuthenticated()) {
       return switchView("login");
     }
-    
-    whenUserReady(()=> {
+
+    whenUserReady(() => {
       const invoiceId = window.Pelcro.helpers.getURLParameter("id");
-      
+
       const wasSetSuccessfully = setInvoice(invoiceId);
       if (!wasSetSuccessfully) {
         const errorMessage = i18n.t("messages:invalidInvoice", {
@@ -648,6 +656,6 @@ const showInvoiceDetailsFromUrl = () => {
       }
 
       return switchView("invoice-details");
-    })
+    });
   });
 };
