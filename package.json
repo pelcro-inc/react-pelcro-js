@@ -101,6 +101,7 @@
   },
   "dependencies": {
     "@headlessui/react": "^0.3.0",
+    "@react-oauth/google": "^0.4.0",
     "@stripe/stripe-js": "^1.21.1",
     "i18next": "^19.1.0",
     "react-easy-crop": "^3.3.2",

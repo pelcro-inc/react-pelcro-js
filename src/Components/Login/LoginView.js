@@ -10,6 +10,7 @@ import { FacebookLoginButton } from "../../Components/common/FacebookLoginButton
 import { Link } from "../../SubComponents/Link";
 import { GoogleLoginButton } from "../common/GoogleLoginButton/GoogleLoginButton";
 import { Auth0LoginButton } from "../common/Auth0LoginButton/Auth0LoginButton";
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 /**
  *
@@ -74,7 +75,9 @@ export function LoginView(props) {
                 <hr className="plc-w-full plc-border-gray-300" />
               </div>
               <div className="plc-flex plc-justify-center plc-flex-wrap plc-px-5 plc-mt-1 plc-space-x-3">
-                <GoogleLoginButton />
+                <GoogleOAuthProvider clientId={window.Pelcro.site.read()?.google_app_id}>
+                  <GoogleLoginButton />
+                </GoogleOAuthProvider>
                 <FacebookLoginButton />
                 <Auth0LoginButton />
               </div>
