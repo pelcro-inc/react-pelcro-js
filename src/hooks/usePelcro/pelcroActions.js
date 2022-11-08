@@ -1,4 +1,3 @@
-import ReactGA from "react-ga";
 import { initialState } from "./index";
 import {
   userHasAddress,
@@ -6,6 +5,10 @@ import {
   userMustVerifyEmail
 } from "../../utils/utils";
 import { cartItemAdded } from "../../utils/events";
+import { default as ReactGA1 } from "react-ga";
+import { default as ReactGA4 } from "react-ga4";
+
+const ReactGA = window?.Pelcro?.uiSettings?.enableReactGA4 ? ReactGA4 : ReactGA1;
 
 export class PelcroActions {
   constructor(storeSetter, storeGetter) {

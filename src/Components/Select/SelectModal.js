@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import ReactGA from "react-ga";
 import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
 import {
@@ -16,6 +15,10 @@ import { Carousel } from "../../SubComponents/Carousel";
 import { usePelcro } from "../../hooks/usePelcro";
 import { getEntitlementsFromElem } from "../../utils/utils";
 import { ReactComponent as ArrowLeft } from "../../assets/arrow-left.svg";
+import { default as ReactGA1 } from "react-ga";
+import { default as ReactGA4 } from "react-ga4";
+
+const ReactGA = window?.Pelcro?.uiSettings?.enableReactGA4 ? ReactGA4 : ReactGA1;
 
 /**
  *
