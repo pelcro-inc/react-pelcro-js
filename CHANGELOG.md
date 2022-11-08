@@ -1,199 +1,203 @@
-# [3.11.0-beta.7](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.11.0-beta.6...v3.11.0-beta.7) (2022-11-08)
+# [3.11.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.10.0...v3.11.0) (2022-11-08)
 
+### Bug Fixes
+
+- add another check for Tap script ([d801c1b](https://github.com/pelcro-inc/react-pelcro-js/commit/d801c1bf2cf5772715a090b21093cb47e3f8dce5))
+- add eventListener for Tap script ([c0b34a9](https://github.com/pelcro-inc/react-pelcro-js/commit/c0b34a918d38d8b018e76d84b032c1e370775d0a))
+- check for isUserReady before load tap script ([0b0418f](https://github.com/pelcro-inc/react-pelcro-js/commit/0b0418f2ffea8d1341cb030b012f9c177b31c51c))
+- check for Tapjsli before initializing Tap form ([893a96f](https://github.com/pelcro-inc/react-pelcro-js/commit/893a96f53a1d018b4d6e845c0ea3581e2a323069))
+- check for whenUserReady before checking for windo.Stripe in paymentMethodContainer ([ab10298](https://github.com/pelcro-inc/react-pelcro-js/commit/ab10298920ea26b0939df342131be7485ae60ba5))
+- check for window.Tapjsli instead of isTapLoaded ([40688bf](https://github.com/pelcro-inc/react-pelcro-js/commit/40688bfb76c3599d17305e67a09e2e443b9b0ffa))
+- check if not Tapjsli is loaded and load the script then ([4f12899](https://github.com/pelcro-inc/react-pelcro-js/commit/4f1289930090765b415e525a46b41df3494a85f5))
+- check if Tap script is loaded ([2564d3f](https://github.com/pelcro-inc/react-pelcro-js/commit/2564d3f34c5c09d63da6df1c7ddc7315a0c20bb1))
+- check if window.Tapjsli is exposed and loaded ([27a70c7](https://github.com/pelcro-inc/react-pelcro-js/commit/27a70c7d2f44957fec845b0ef2be701d18f2daf9))
+- from login if select empty go to register ([#215](https://github.com/pelcro-inc/react-pelcro-js/issues/215)) ([1439a64](https://github.com/pelcro-inc/react-pelcro-js/commit/1439a6468433c9920c7803306371c64d52dc53f2))
+- initiate Tap script again if the eventListener is successful ([f7d9567](https://github.com/pelcro-inc/react-pelcro-js/commit/f7d9567e9e57188e1ed854e164d45039c7529d05))
+- initiate Tap with window.Tapjsli instead of Tapjsli ([d56f52d](https://github.com/pelcro-inc/react-pelcro-js/commit/d56f52dded89af4833b4698b389dce84267d9e87))
+- invoice url trigger ([#211](https://github.com/pelcro-inc/react-pelcro-js/issues/211)) ([6cbf856](https://github.com/pelcro-inc/react-pelcro-js/commit/6cbf856da42be826494d856373dd7054d807ca9c))
+- invoice url trigger ([#212](https://github.com/pelcro-inc/react-pelcro-js/issues/212)) ([b9fb2e5](https://github.com/pelcro-inc/react-pelcro-js/commit/b9fb2e5511b23ca8f7181ecc9eb67f5dab450718))
+- invoice url trigger with id ([#208](https://github.com/pelcro-inc/react-pelcro-js/issues/208)) ([3e66a2c](https://github.com/pelcro-inc/react-pelcro-js/commit/3e66a2c7b20220e5aa93e7a778c32d38d7db9f99))
+- lazy load Tap SDK ([84abc57](https://github.com/pelcro-inc/react-pelcro-js/commit/84abc57e163ee861b8d877e35d945848eb79433a))
+- move Tap script logic out of whenUserReady ([805591b](https://github.com/pelcro-inc/react-pelcro-js/commit/805591b575e62518a98f9c07da446b081c345d81))
+- remove console.log ([3fe1820](https://github.com/pelcro-inc/react-pelcro-js/commit/3fe18202dda24d5f1229a6091f8a93a7dd0b9346))
+- remove log ([7b866a4](https://github.com/pelcro-inc/react-pelcro-js/commit/7b866a431c5bd4fc4fe5844ade703327cdf21c5b))
+- remove Tapjsli from useEffect depencies ([a76deed](https://github.com/pelcro-inc/react-pelcro-js/commit/a76deed1d8ba92807c3d907c7f103307cac862bf))
+- separate Tap initiation into it's own useEffect ([09649b3](https://github.com/pelcro-inc/react-pelcro-js/commit/09649b3c29dacf79c11e43741c5d5a74378dc447))
+- shipments_suspended logic ([109ae1a](https://github.com/pelcro-inc/react-pelcro-js/commit/109ae1addbb5b89f142d8842f72ea232b547a092))
+- try another way to fix the tap script load issue ([e5cb09e](https://github.com/pelcro-inc/react-pelcro-js/commit/e5cb09ee77e75962a5eb5e550a5c020947d36248))
+- try to load Tap script earlier ([db94946](https://github.com/pelcro-inc/react-pelcro-js/commit/db94946068c9394c5283a9988fe5acd753628b0c))
 
 ### Features
 
-* export the UserUpdateTin component ([fef64cd](https://github.com/pelcro-inc/react-pelcro-js/commit/fef64cdd4b325d9f29efec8f067e268b259c6e2f))
+- export the UserUpdateTin component ([fef64cd](https://github.com/pelcro-inc/react-pelcro-js/commit/fef64cdd4b325d9f29efec8f067e268b259c6e2f))
+- add release entry in the semantic release config ([c9cd436](https://github.com/pelcro-inc/react-pelcro-js/commit/c9cd4367d4be69dd26a4da83aae41413e79e1ee9))
+- add tin field to user update modal ([#217](https://github.com/pelcro-inc/react-pelcro-js/issues/217)) ([5790f1a](https://github.com/pelcro-inc/react-pelcro-js/commit/5790f1a6a5d602383bd87f22a5b998e9747a67d4))
+- edit the semantic release config file ([0226fbd](https://github.com/pelcro-inc/react-pelcro-js/commit/0226fbdb94b977d425976187c90082db5bf26959))
+- export the UserUpdateTin component ([fef64cd](https://github.com/pelcro-inc/react-pelcro-js/commit/fef64cdd4b325d9f29efec8f067e268b259c6e2f))
+- suspend/unsuspend button logic ([#213](https://github.com/pelcro-inc/react-pelcro-js/issues/213)) ([74a5364](https://github.com/pelcro-inc/react-pelcro-js/commit/74a53643d959fd33ee3b9d813d991c88efc4e355))
 
 # [3.11.0-beta.6](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.11.0-beta.5...v3.11.0-beta.6) (2022-11-07)
 
-
 ### Features
 
-* add tin field to user update modal ([#217](https://github.com/pelcro-inc/react-pelcro-js/issues/217)) ([5790f1a](https://github.com/pelcro-inc/react-pelcro-js/commit/5790f1a6a5d602383bd87f22a5b998e9747a67d4))
+- add tin field to user update modal ([#217](https://github.com/pelcro-inc/react-pelcro-js/issues/217)) ([5790f1a](https://github.com/pelcro-inc/react-pelcro-js/commit/5790f1a6a5d602383bd87f22a5b998e9747a67d4))
 
 # [3.11.0-beta.5](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.11.0-beta.4...v3.11.0-beta.5) (2022-11-03)
 
-
 ### Bug Fixes
 
-* from login if select empty go to register ([#215](https://github.com/pelcro-inc/react-pelcro-js/issues/215)) ([1439a64](https://github.com/pelcro-inc/react-pelcro-js/commit/1439a6468433c9920c7803306371c64d52dc53f2))
+- from login if select empty go to register ([#215](https://github.com/pelcro-inc/react-pelcro-js/issues/215)) ([1439a64](https://github.com/pelcro-inc/react-pelcro-js/commit/1439a6468433c9920c7803306371c64d52dc53f2))
 
 # [3.11.0-beta.4](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.11.0-beta.3...v3.11.0-beta.4) (2022-11-02)
 
-
 ### Bug Fixes
 
-* shipments_suspended logic ([109ae1a](https://github.com/pelcro-inc/react-pelcro-js/commit/109ae1addbb5b89f142d8842f72ea232b547a092))
+- shipments_suspended logic ([109ae1a](https://github.com/pelcro-inc/react-pelcro-js/commit/109ae1addbb5b89f142d8842f72ea232b547a092))
 
 # [3.11.0-beta.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.11.0-beta.2...v3.11.0-beta.3) (2022-11-02)
 
-
 ### Bug Fixes
 
-* remove log ([7b866a4](https://github.com/pelcro-inc/react-pelcro-js/commit/7b866a431c5bd4fc4fe5844ade703327cdf21c5b))
+- remove log ([7b866a4](https://github.com/pelcro-inc/react-pelcro-js/commit/7b866a431c5bd4fc4fe5844ade703327cdf21c5b))
 
 # [3.11.0-beta.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.11.0-beta.1...v3.11.0-beta.2) (2022-11-01)
 
-
 ### Features
 
-* suspend/unsuspend button logic ([#213](https://github.com/pelcro-inc/react-pelcro-js/issues/213)) ([74a5364](https://github.com/pelcro-inc/react-pelcro-js/commit/74a53643d959fd33ee3b9d813d991c88efc4e355))
+- suspend/unsuspend button logic ([#213](https://github.com/pelcro-inc/react-pelcro-js/issues/213)) ([74a5364](https://github.com/pelcro-inc/react-pelcro-js/commit/74a53643d959fd33ee3b9d813d991c88efc4e355))
 
 # [3.11.0-beta.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.10.1-beta.21...v3.11.0-beta.1) (2022-11-01)
 
-
 ### Features
 
-* add release entry in the semantic release config ([c9cd436](https://github.com/pelcro-inc/react-pelcro-js/commit/c9cd4367d4be69dd26a4da83aae41413e79e1ee9))
-* edit the semantic release config file ([0226fbd](https://github.com/pelcro-inc/react-pelcro-js/commit/0226fbdb94b977d425976187c90082db5bf26959))
+- add release entry in the semantic release config ([c9cd436](https://github.com/pelcro-inc/react-pelcro-js/commit/c9cd4367d4be69dd26a4da83aae41413e79e1ee9))
+- edit the semantic release config file ([0226fbd](https://github.com/pelcro-inc/react-pelcro-js/commit/0226fbdb94b977d425976187c90082db5bf26959))
 
 ## [3.10.1-beta.21](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.10.1-beta.20...v3.10.1-beta.21) (2022-11-01)
 
-
 ### Bug Fixes
 
-* remove console.log ([3fe1820](https://github.com/pelcro-inc/react-pelcro-js/commit/3fe18202dda24d5f1229a6091f8a93a7dd0b9346))
+- remove console.log ([3fe1820](https://github.com/pelcro-inc/react-pelcro-js/commit/3fe18202dda24d5f1229a6091f8a93a7dd0b9346))
 
 ## [3.10.1-beta.20](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.10.1-beta.19...v3.10.1-beta.20) (2022-11-01)
 
-
 ### Bug Fixes
 
-* initiate Tap script again if the eventListener is successful ([f7d9567](https://github.com/pelcro-inc/react-pelcro-js/commit/f7d9567e9e57188e1ed854e164d45039c7529d05))
+- initiate Tap script again if the eventListener is successful ([f7d9567](https://github.com/pelcro-inc/react-pelcro-js/commit/f7d9567e9e57188e1ed854e164d45039c7529d05))
 
 ## [3.10.1-beta.19](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.10.1-beta.18...v3.10.1-beta.19) (2022-11-01)
 
-
 ### Bug Fixes
 
-* add eventListener for Tap script ([c0b34a9](https://github.com/pelcro-inc/react-pelcro-js/commit/c0b34a918d38d8b018e76d84b032c1e370775d0a))
+- add eventListener for Tap script ([c0b34a9](https://github.com/pelcro-inc/react-pelcro-js/commit/c0b34a918d38d8b018e76d84b032c1e370775d0a))
 
 ## [3.10.1-beta.18](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.10.1-beta.17...v3.10.1-beta.18) (2022-11-01)
 
-
 ### Bug Fixes
 
-* move Tap script logic out of whenUserReady ([805591b](https://github.com/pelcro-inc/react-pelcro-js/commit/805591b575e62518a98f9c07da446b081c345d81))
+- move Tap script logic out of whenUserReady ([805591b](https://github.com/pelcro-inc/react-pelcro-js/commit/805591b575e62518a98f9c07da446b081c345d81))
 
 ## [3.10.1-beta.17](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.10.1-beta.16...v3.10.1-beta.17) (2022-11-01)
 
-
 ### Bug Fixes
 
-* add another check for Tap script ([d801c1b](https://github.com/pelcro-inc/react-pelcro-js/commit/d801c1bf2cf5772715a090b21093cb47e3f8dce5))
+- add another check for Tap script ([d801c1b](https://github.com/pelcro-inc/react-pelcro-js/commit/d801c1bf2cf5772715a090b21093cb47e3f8dce5))
 
 ## [3.10.1-beta.16](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.10.1-beta.15...v3.10.1-beta.16) (2022-11-01)
 
-
 ### Bug Fixes
 
-* try to load Tap script earlier ([db94946](https://github.com/pelcro-inc/react-pelcro-js/commit/db94946068c9394c5283a9988fe5acd753628b0c))
+- try to load Tap script earlier ([db94946](https://github.com/pelcro-inc/react-pelcro-js/commit/db94946068c9394c5283a9988fe5acd753628b0c))
 
 ## [3.10.1-beta.15](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.10.1-beta.14...v3.10.1-beta.15) (2022-11-01)
 
-
 ### Bug Fixes
 
-* try another way to fix the tap script load issue ([e5cb09e](https://github.com/pelcro-inc/react-pelcro-js/commit/e5cb09ee77e75962a5eb5e550a5c020947d36248))
+- try another way to fix the tap script load issue ([e5cb09e](https://github.com/pelcro-inc/react-pelcro-js/commit/e5cb09ee77e75962a5eb5e550a5c020947d36248))
 
 ## [3.10.1-beta.14](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.10.1-beta.13...v3.10.1-beta.14) (2022-11-01)
 
-
 ### Bug Fixes
 
-* check if not Tapjsli is loaded and load the script then ([4f12899](https://github.com/pelcro-inc/react-pelcro-js/commit/4f1289930090765b415e525a46b41df3494a85f5))
+- check if not Tapjsli is loaded and load the script then ([4f12899](https://github.com/pelcro-inc/react-pelcro-js/commit/4f1289930090765b415e525a46b41df3494a85f5))
 
 ## [3.10.1-beta.13](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.10.1-beta.12...v3.10.1-beta.13) (2022-10-31)
 
-
 ### Bug Fixes
 
-* check for window.Tapjsli instead of isTapLoaded ([40688bf](https://github.com/pelcro-inc/react-pelcro-js/commit/40688bfb76c3599d17305e67a09e2e443b9b0ffa))
+- check for window.Tapjsli instead of isTapLoaded ([40688bf](https://github.com/pelcro-inc/react-pelcro-js/commit/40688bfb76c3599d17305e67a09e2e443b9b0ffa))
 
 ## [3.10.1-beta.12](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.10.1-beta.11...v3.10.1-beta.12) (2022-10-31)
 
-
 ### Bug Fixes
 
-* initiate Tap with window.Tapjsli instead of Tapjsli ([d56f52d](https://github.com/pelcro-inc/react-pelcro-js/commit/d56f52dded89af4833b4698b389dce84267d9e87))
+- initiate Tap with window.Tapjsli instead of Tapjsli ([d56f52d](https://github.com/pelcro-inc/react-pelcro-js/commit/d56f52dded89af4833b4698b389dce84267d9e87))
 
 ## [3.10.1-beta.11](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.10.1-beta.10...v3.10.1-beta.11) (2022-10-31)
 
-
 ### Bug Fixes
 
-* check for isUserReady before load tap script ([0b0418f](https://github.com/pelcro-inc/react-pelcro-js/commit/0b0418f2ffea8d1341cb030b012f9c177b31c51c))
+- check for isUserReady before load tap script ([0b0418f](https://github.com/pelcro-inc/react-pelcro-js/commit/0b0418f2ffea8d1341cb030b012f9c177b31c51c))
 
 ## [3.10.1-beta.10](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.10.1-beta.9...v3.10.1-beta.10) (2022-10-31)
 
-
 ### Bug Fixes
 
-* check if Tap script is loaded ([2564d3f](https://github.com/pelcro-inc/react-pelcro-js/commit/2564d3f34c5c09d63da6df1c7ddc7315a0c20bb1))
+- check if Tap script is loaded ([2564d3f](https://github.com/pelcro-inc/react-pelcro-js/commit/2564d3f34c5c09d63da6df1c7ddc7315a0c20bb1))
 
 ## [3.10.1-beta.9](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.10.1-beta.8...v3.10.1-beta.9) (2022-10-31)
 
-
 ### Bug Fixes
 
-* separate Tap initiation into it's own useEffect ([09649b3](https://github.com/pelcro-inc/react-pelcro-js/commit/09649b3c29dacf79c11e43741c5d5a74378dc447))
+- separate Tap initiation into it's own useEffect ([09649b3](https://github.com/pelcro-inc/react-pelcro-js/commit/09649b3c29dacf79c11e43741c5d5a74378dc447))
 
 ## [3.10.1-beta.8](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.10.1-beta.7...v3.10.1-beta.8) (2022-10-31)
 
-
 ### Bug Fixes
 
-* check if window.Tapjsli is exposed and loaded ([27a70c7](https://github.com/pelcro-inc/react-pelcro-js/commit/27a70c7d2f44957fec845b0ef2be701d18f2daf9))
+- check if window.Tapjsli is exposed and loaded ([27a70c7](https://github.com/pelcro-inc/react-pelcro-js/commit/27a70c7d2f44957fec845b0ef2be701d18f2daf9))
 
 ## [3.10.1-beta.7](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.10.1-beta.6...v3.10.1-beta.7) (2022-10-31)
 
-
 ### Bug Fixes
 
-* remove Tapjsli from useEffect depencies ([a76deed](https://github.com/pelcro-inc/react-pelcro-js/commit/a76deed1d8ba92807c3d907c7f103307cac862bf))
+- remove Tapjsli from useEffect depencies ([a76deed](https://github.com/pelcro-inc/react-pelcro-js/commit/a76deed1d8ba92807c3d907c7f103307cac862bf))
 
 ## [3.10.1-beta.6](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.10.1-beta.5...v3.10.1-beta.6) (2022-10-31)
 
-
 ### Bug Fixes
 
-* check for Tapjsli before initializing Tap form ([893a96f](https://github.com/pelcro-inc/react-pelcro-js/commit/893a96f53a1d018b4d6e845c0ea3581e2a323069))
+- check for Tapjsli before initializing Tap form ([893a96f](https://github.com/pelcro-inc/react-pelcro-js/commit/893a96f53a1d018b4d6e845c0ea3581e2a323069))
 
 ## [3.10.1-beta.5](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.10.1-beta.4...v3.10.1-beta.5) (2022-10-31)
 
-
 ### Bug Fixes
 
-* lazy load Tap SDK ([84abc57](https://github.com/pelcro-inc/react-pelcro-js/commit/84abc57e163ee861b8d877e35d945848eb79433a))
+- lazy load Tap SDK ([84abc57](https://github.com/pelcro-inc/react-pelcro-js/commit/84abc57e163ee861b8d877e35d945848eb79433a))
 
 ## [3.10.1-beta.4](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.10.1-beta.3...v3.10.1-beta.4) (2022-10-31)
 
-
 ### Bug Fixes
 
-* check for whenUserReady before checking for windo.Stripe in paymentMethodContainer ([ab10298](https://github.com/pelcro-inc/react-pelcro-js/commit/ab10298920ea26b0939df342131be7485ae60ba5))
+- check for whenUserReady before checking for windo.Stripe in paymentMethodContainer ([ab10298](https://github.com/pelcro-inc/react-pelcro-js/commit/ab10298920ea26b0939df342131be7485ae60ba5))
 
 ## [3.10.1-beta.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.10.1-beta.2...v3.10.1-beta.3) (2022-10-27)
 
-
 ### Bug Fixes
 
-* invoice url trigger ([#212](https://github.com/pelcro-inc/react-pelcro-js/issues/212)) ([b9fb2e5](https://github.com/pelcro-inc/react-pelcro-js/commit/b9fb2e5511b23ca8f7181ecc9eb67f5dab450718))
+- invoice url trigger ([#212](https://github.com/pelcro-inc/react-pelcro-js/issues/212)) ([b9fb2e5](https://github.com/pelcro-inc/react-pelcro-js/commit/b9fb2e5511b23ca8f7181ecc9eb67f5dab450718))
 
 ## [3.10.1-beta.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.10.1-beta.1...v3.10.1-beta.2) (2022-10-26)
 
-
 ### Bug Fixes
 
-* invoice url trigger ([#211](https://github.com/pelcro-inc/react-pelcro-js/issues/211)) ([6cbf856](https://github.com/pelcro-inc/react-pelcro-js/commit/6cbf856da42be826494d856373dd7054d807ca9c))
+- invoice url trigger ([#211](https://github.com/pelcro-inc/react-pelcro-js/issues/211)) ([6cbf856](https://github.com/pelcro-inc/react-pelcro-js/commit/6cbf856da42be826494d856373dd7054d807ca9c))
 
 ## [3.10.1-beta.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.10.0...v3.10.1-beta.1) (2022-10-26)
 
-
 ### Bug Fixes
 
-* invoice url trigger with id ([#208](https://github.com/pelcro-inc/react-pelcro-js/issues/208)) ([3e66a2c](https://github.com/pelcro-inc/react-pelcro-js/commit/3e66a2c7b20220e5aa93e7a778c32d38d7db9f99))
+- invoice url trigger with id ([#208](https://github.com/pelcro-inc/react-pelcro-js/issues/208)) ([3e66a2c](https://github.com/pelcro-inc/react-pelcro-js/commit/3e66a2c7b20220e5aa93e7a778c32d38d7db9f99))
 
 # [3.10.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.9.4...v3.10.0) (2022-10-25)
 
