@@ -61,12 +61,12 @@ export const UserUpdateView = (props) => {
               required={supportsTap ? true : false}
             />
           </div>
-          <div className="plc-flex plc-items-start">
+          {/* <div className="plc-flex plc-items-start">
             <UserUpdateTin
               id="pelcro-input-tin"
               label={t("labels.tin")}
             />
-          </div>
+          </div> */}
           <UserUpdateButton
             role="submit"
             className="plc-w-full plc-mt-2"
