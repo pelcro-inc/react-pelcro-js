@@ -1,3 +1,10 @@
+# [4.0.0-alpha.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.1...v4.0.0-alpha.2) (2022-11-08)
+
+
+### Features
+
+* add reactGA4 and uiSetting to use it ([ce7f7ff](https://github.com/pelcro-inc/react-pelcro-js/commit/ce7f7ff78b750c5143e569243a002c82f146d02e))
+
 # [4.0.0-alpha.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.11.0-alpha.1...v4.0.0-alpha.1) (2022-11-01)
 
 
