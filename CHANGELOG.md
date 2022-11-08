@@ -1,3 +1,10 @@
+# [3.11.0-beta.7](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.11.0-beta.6...v3.11.0-beta.7) (2022-11-08)
+
+
+### Features
+
+* export the UserUpdateTin component ([fef64cd](https://github.com/pelcro-inc/react-pelcro-js/commit/fef64cdd4b325d9f29efec8f067e268b259c6e2f))
+
 # [3.11.0-beta.6](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.11.0-beta.5...v3.11.0-beta.6) (2022-11-07)
 
 
