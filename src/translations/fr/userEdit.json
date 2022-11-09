@@ -13,7 +13,8 @@
     "save": "Téléverser une photo",
     "selectImage": "Télécharger une nouvelle photo",
     "removeImage": "supprimer la photo actuelle",
-    "zoom": "Zoom"
+    "zoom": "Zoom",
+    "tin": "Numéro d'identification fiscale"
   },
   "messages": {
     "userUpdated": "Votre profil a été mis à jour avec succès.",

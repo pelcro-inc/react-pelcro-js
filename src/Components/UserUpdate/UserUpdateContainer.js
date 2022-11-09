@@ -13,6 +13,7 @@ import {
   SET_LAST_NAME_ERROR,
   SET_DISPLAY_NAME,
   SET_PHONE,
+  SET_TIN,
   SET_PHONE_ERROR,
   SET_TEXT_FIELD,
   HANDLE_USER_UPDATE,
@@ -31,6 +32,7 @@ const initialState = {
   displayName: window.Pelcro.user.read()?.display_name,
   phone: window.Pelcro.user.read()?.phone,
   phoneError: null,
+  tin: window.Pelcro.user.read()?.tin,
   buttonDisabled: false,
   textFields: {},
   alert: {
@@ -80,6 +82,10 @@ const UserUpdateContainer = ({
       {
         type: SET_PHONE,
         payload: window.Pelcro.user.read()?.phone
+      },
+      {
+        type: SET_TIN,
+        payload: window.Pelcro.user.read()?.tin
       }
     ];
 
@@ -91,7 +97,15 @@ const UserUpdateContainer = ({
   };
 
   const handleUpdateUser = (
-    { email, firstName, lastName, phone, textFields, displayName },
+    {
+      email,
+      firstName,
+      lastName,
+      phone,
+      tin,
+      textFields,
+      displayName
+    },
     dispatch
   ) => {
     window.Pelcro.user.update(
@@ -102,6 +116,7 @@ const UserUpdateContainer = ({
         last_name: lastName,
         display_name: displayName,
         phone: phone,
+        tin: tin,
         metadata: { updated: "updated", ...textFields }
       },
       (err, res) => {
@@ -195,6 +210,12 @@ const UserUpdateContainer = ({
             ...state,
             phone: action.payload,
             phoneError: null
+          });
+
+        case SET_TIN:
+          return Update({
+            ...state,
+            tin: action.payload
           });
 
         case SET_PHONE_ERROR:
