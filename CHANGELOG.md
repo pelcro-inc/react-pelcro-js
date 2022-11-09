@@ -1,9 +1,16 @@
 ## [3.11.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.11.0...v3.11.1) (2022-11-08)
 
+# [3.12.0-beta.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.11.1-beta.1...v3.12.0-beta.1) (2022-11-09)
+
+### Features
+
+- show the tin field in the update user modal ([9d356fc](https://github.com/pelcro-inc/react-pelcro-js/commit/9d356fcade5d5c16447e9227f3d6c55c557dd554))
+
+## [3.11.1-beta.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.11.0...v3.11.1-beta.1) (2022-11-08)
 
 ### Bug Fixes
 
-* hide the tin field in the user update modal ([5694e4a](https://github.com/pelcro-inc/react-pelcro-js/commit/5694e4a88ad815a75cdbbe25705d792ce2b46aa2))
+- hide the tin field in the user update modal ([5694e4a](https://github.com/pelcro-inc/react-pelcro-js/commit/5694e4a88ad815a75cdbbe25705d792ce2b46aa2))
 
 # [3.11.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.10.0...v3.11.0) (2022-11-08)
 
