@@ -1,3 +1,18 @@
+# [4.0.0-alpha.5](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.4...v4.0.0-alpha.5) (2022-11-09)
+
+
+### Bug Fixes
+
+* from login if select empty go to register ([#215](https://github.com/pelcro-inc/react-pelcro-js/issues/215)) ([1439a64](https://github.com/pelcro-inc/react-pelcro-js/commit/1439a6468433c9920c7803306371c64d52dc53f2))
+* remove log ([7b866a4](https://github.com/pelcro-inc/react-pelcro-js/commit/7b866a431c5bd4fc4fe5844ade703327cdf21c5b))
+* shipments_suspended logic ([109ae1a](https://github.com/pelcro-inc/react-pelcro-js/commit/109ae1addbb5b89f142d8842f72ea232b547a092))
+
+
+### Features
+
+* add tin field to user update modal ([#217](https://github.com/pelcro-inc/react-pelcro-js/issues/217)) ([5790f1a](https://github.com/pelcro-inc/react-pelcro-js/commit/5790f1a6a5d602383bd87f22a5b998e9747a67d4))
+* suspend/unsuspend button logic ([#213](https://github.com/pelcro-inc/react-pelcro-js/issues/213)) ([74a5364](https://github.com/pelcro-inc/react-pelcro-js/commit/74a53643d959fd33ee3b9d813d991c88efc4e355))
+
 # [4.0.0-alpha.4](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.3...v4.0.0-alpha.4) (2022-11-09)
 
 
