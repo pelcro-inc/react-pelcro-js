@@ -58,14 +58,6 @@
   justify-content: center;
 }
 
-.pelcro-root .alice-carousel__next-btn-item [data-area]::after {
-  content: url("../assets/arrow-thin-right.svg");
-}
-
-.pelcro-root .alice-carousel__prev-btn-item [data-area]::after {
-  content: url("../assets/arrow-thin-left.svg");
-}
-
 .pelcro-root .alice-carousel__stage-item {
   padding-left: 1rem;
   padding-right: 1rem;
@@ -92,6 +84,14 @@
 .pelcro-root .alice-carousel__dots-item:not(.__custom):hover,
 .alice-carousel__dots-item:not(.__custom).__active {
   background-color: black;
+}
+
+.pelcro-root .alice-carousel__next-btn-item [data-area]::after {
+  content: url("/assets/arrow-thin-right.svg");
+}
+
+.pelcro-root .alice-carousel__prev-btn-item [data-area]::after {
+  content: url("/assets/arrow-thin-left.svg");
 }
 
 @media (max-width: 1024px) {
