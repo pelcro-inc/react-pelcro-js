@@ -13,7 +13,9 @@ import { notify } from "../../SubComponents/Notification";
 import { getErrorMessages } from "../common/Helpers";
 import i18n from "../../i18n";
 
-const ReactGA = window?.Pelcro?.uiSettings?.enableReactGA4 ? ReactGA4 : ReactGA1;
+const ReactGA = window?.Pelcro?.uiSettings?.enableReactGA4
+  ? ReactGA4
+  : ReactGA1;
 
 /**
  * @typedef {Object} OptionsType
@@ -82,6 +84,11 @@ export const initPaywalls = () => {
     } else if (paywallMethods?.displayNewsletterPaywall()) {
       switchView("newsletter");
     } else if (paywallMethods?.displayPaywall()) {
+      const paywallId = window.Pelcro.paywall.read().id;
+      window.sessionStorage.setItem(
+        "paywall_conversion_id",
+        paywallId
+      );
       switchView("plan-select");
     }
   }
