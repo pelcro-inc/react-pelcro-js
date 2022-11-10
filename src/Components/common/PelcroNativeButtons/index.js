@@ -299,7 +299,15 @@ export const authenticatedButtons = () => {
 
   if (pelcroLoginByClass) {
     for (let i = 0; i < pelcroLoginByClass.length; i++) {
-      pelcroLoginByClass.item(i).innerHTML = translations.account;
+      if (
+        pelcroLoginByClass.item(i).hasAttribute("data-dashboard-text")
+      ) {
+        pelcroLoginByClass.item(i).innerHTML = pelcroLoginByClass
+          .item(i)
+          .getAttribute("data-dashboard-text");
+      } else {
+        pelcroLoginByClass.item(i).innerHTML = translations.account;
+      }
     }
   }
 
@@ -322,7 +330,15 @@ export const unauthenticatedButtons = () => {
 
   if (pelcroLoginByClass) {
     for (let i = 0; i < pelcroLoginByClass.length; i++) {
-      pelcroLoginByClass.item(i).innerHTML = translations.login;
+      if (
+        pelcroLoginByClass.item(i).hasAttribute("data-login-text")
+      ) {
+        pelcroLoginByClass.item(i).innerHTML = pelcroLoginByClass
+          .item(i)
+          .getAttribute("data-login-text");
+      } else {
+        pelcroLoginByClass.item(i).innerHTML = translations.login;
+      }
     }
   }
 };
