@@ -1,3 +1,10 @@
+# [3.12.0-beta.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.12.0-beta.1...v3.12.0-beta.2) (2022-11-10)
+
+
+### Features
+
+* free plan subscription ([#220](https://github.com/pelcro-inc/react-pelcro-js/issues/220)) ([7939949](https://github.com/pelcro-inc/react-pelcro-js/commit/7939949898b1272ceb7db4ef32dc4cfa236242cd))
+
 # [3.12.0-beta.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.11.1-beta.1...v3.12.0-beta.1) (2022-11-09)
 
 
