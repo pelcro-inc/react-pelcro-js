@@ -1,3 +1,10 @@
+# [3.12.0-beta.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.12.0-beta.2...v3.12.0-beta.3) (2022-11-11)
+
+
+### Features
+
+* enable the client to override the Login text in case the user is authenticated or not ([#221](https://github.com/pelcro-inc/react-pelcro-js/issues/221)) ([e67d8b2](https://github.com/pelcro-inc/react-pelcro-js/commit/e67d8b25000b7ed0da0051c1aaf3680a4d8965cb))
+
 # [3.12.0-beta.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.12.0-beta.1...v3.12.0-beta.2) (2022-11-10)
 
 
