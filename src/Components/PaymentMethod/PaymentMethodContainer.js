@@ -1068,28 +1068,6 @@ const PaymentMethodContainerWithoutStripe = ({
     }
   };
 
-  const trackPaywallConversion = () => {
-    const paywallId = window.sessionStorage.getItem(
-      "paywall_conversion_id"
-    );
-    const userId = window.Pelcro.user.read().id;
-    const subscriptionId = subscriptionIdToRenew;
-    const planId = plan.id;
-    const productId = product.id;
-    if (paywallId) {
-      window.Pelcro.insight.track(
-        `Paywall Conversion: ${paywallId}`,
-        {
-          userId,
-          subscriptionId,
-          planId,
-          productId
-        }
-      );
-      window.sessionStorage.setItem("paywall_conversion_id", null);
-    }
-  };
-
   /**
    * Attempt to confirm a Stripe card payment via it's PaymentIntent.
    * Only trigger method if PaymentIntent status is `requires_action`.
@@ -1131,7 +1109,6 @@ const PaymentMethodContainerWithoutStripe = ({
                 }
               });
             }
-            trackPaywallConversion();
             onSuccess(res);
           });
       } else if (
@@ -1153,7 +1130,6 @@ const PaymentMethodContainerWithoutStripe = ({
           }
         });
       } else {
-        trackPaywallConversion();
         onSuccess(response);
       }
     } else {
@@ -1170,7 +1146,6 @@ const PaymentMethodContainerWithoutStripe = ({
           }
         });
       }
-      trackPaywallConversion();
       onSuccess(response);
     }
   };
@@ -1241,7 +1216,7 @@ const PaymentMethodContainerWithoutStripe = ({
                 }
               });
             }
-            trackPaywallConversion();
+
             onGiftRenewalSuccess(res);
           }
         );
@@ -1278,7 +1253,6 @@ const PaymentMethodContainerWithoutStripe = ({
                 }
               });
             }
-            trackPaywallConversion();
             onSuccess(res);
           }
         );
