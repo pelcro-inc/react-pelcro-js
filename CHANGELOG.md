@@ -1,5 +1,17 @@
 # [3.17.0-beta.10](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.17.0-beta.9...v3.17.0-beta.10) (2023-01-12)
 
+# [4.0.0-alpha.6](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.5...v4.0.0-alpha.6) (2022-11-14)
+
+### Reverts
+
+- Revert "add event tracking before every success call" ([312e4c6](https://github.com/pelcro-inc/react-pelcro-js/commit/312e4c6643ffb8a01f7edb5daf52f7851b39744b))
+- Revert "pass subscriptionId depending on if renewed or new" ([78f1718](https://github.com/pelcro-inc/react-pelcro-js/commit/78f17188899288130c203f7f56511ad3328f7913))
+- Revert "pass subscription id based on if renewed or new" ([64a0b2f](https://github.com/pelcro-inc/react-pelcro-js/commit/64a0b2f756628f7a9bf1d23d9d6ae90de5800254))
+- Revert "add set session storage item" ([7d89dac](https://github.com/pelcro-inc/react-pelcro-js/commit/7d89dac6468500b48b88209703b16249d0798c72))
+- Revert "set session storage item to null every time view is reset" ([03a6dd0](https://github.com/pelcro-inc/react-pelcro-js/commit/03a6dd0e899ef612e09c1327e2e179fc592fceb1))
+
+# [4.0.0-alpha.5](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.4...v4.0.0-alpha.5) (2022-11-09)
+
 # [4.0.0-alpha.5](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.4...v4.0.0-alpha.5) (2022-11-09)
 
 ### Bug Fixes
