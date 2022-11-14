@@ -1069,7 +1069,7 @@ const PaymentMethodContainerWithoutStripe = ({
       "paywall_conversion_id"
     );
     const userId = window.Pelcro.user.read().id;
-    const subscriptionId = window.Pelcro.subscription.read().id;
+    const subscriptionId = subscriptionIdToRenew;
     const planId = plan.id;
     const productId = product.id;
     if (paywallId) {
