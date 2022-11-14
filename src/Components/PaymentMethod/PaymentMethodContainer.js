@@ -1064,11 +1064,12 @@ const PaymentMethodContainerWithoutStripe = ({
     }
   };
 
-  const trackPaywallConversion = (subscriptionId) => {
+  const trackPaywallConversion = () => {
     const paywallId = window.sessionStorage.getItem(
       "paywall_conversion_id"
     );
     const userId = window.Pelcro.user.read().id;
+    const subscriptionId = window.Pelcro.subscription.read().id;
     const planId = plan.id;
     const productId = product.id;
     if (paywallId) {
@@ -1126,7 +1127,7 @@ const PaymentMethodContainerWithoutStripe = ({
                 }
               });
             }
-            trackPaywallConversion(response.data?.id);
+            trackPaywallConversion();
             onSuccess(res);
           });
       } else if (
@@ -1148,7 +1149,7 @@ const PaymentMethodContainerWithoutStripe = ({
           }
         });
       } else {
-        trackPaywallConversion(response.data?.id);
+        trackPaywallConversion();
         onSuccess(response);
       }
     } else {
@@ -1165,7 +1166,7 @@ const PaymentMethodContainerWithoutStripe = ({
           }
         });
       }
-      trackPaywallConversion(response.data?.id);
+      trackPaywallConversion();
       onSuccess(response);
     }
   };
@@ -1236,7 +1237,7 @@ const PaymentMethodContainerWithoutStripe = ({
                 }
               });
             }
-            trackPaywallConversion(subscriptionIdToRenew);
+            trackPaywallConversion();
             onGiftRenewalSuccess(res);
           }
         );
@@ -1273,7 +1274,7 @@ const PaymentMethodContainerWithoutStripe = ({
                 }
               });
             }
-            trackPaywallConversion(subscriptionIdToRenew);
+            trackPaywallConversion();
             onSuccess(res);
           }
         );
