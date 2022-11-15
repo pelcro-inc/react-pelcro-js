@@ -45,7 +45,6 @@ const AddressSelectContainer = ({
   className = "",
   onGiftRedemptionSuccess = () => {},
   onMembershipAdressUpdateSuccess = () => {},
-  onFreePlanSubscriptionSuccess = () => {},
   onSuccess = () => {},
   onFailure = () => {},
   children,
@@ -57,16 +56,13 @@ const AddressSelectContainer = ({
     giftCode: giftCodeFromStore,
     subscriptionIdToRenew: subscriptionIdToRenewFromStore,
     set,
-    selectedMembership,
-    plan,
-    product
+    selectedMembership
   } = usePelcro();
   const giftCode = props.giftCode ?? giftCodeFromStore;
   const subscriptionIdToRenew =
     props.subscriptionIdToRenew ??
     subscriptionIdToRenewFromStore ??
     undefined;
-  const skipPayment = window.Pelcro?.uiSettings?.skipPaymentForFreePlans;  
 
   const submitAddress = ({ selectedAddressId }, dispatch) => {
     set({ selectedAddressId });
@@ -125,38 +121,6 @@ const AddressSelectContainer = ({
           return onGiftRedemptionSuccess(res);
         }
       );
-    }
-
-    if (skipPayment && plan?.amount === 0) {
-      dispatch({ type: LOADING, payload: true });
-      window.Pelcro.subscription.create(
-        {
-          auth_token: window.Pelcro.user.read().auth_token,
-          plan_id: plan.id,
-          campaign_key:
-            window.Pelcro.helpers.getURLParameter("campaign_key"),
-          quantity: plan.quantity,
-          address_id: product.address_required
-            ? selectedAddressId
-            : null
-        },
-        (err, res) => {
-          dispatch({ type: LOADING, payload: false });
-
-          if (err) {
-            dispatch({
-              type: SHOW_ALERT,
-              payload: {
-                type: "error",
-                content: getErrorMessages(err)
-              }
-            });
-            return notify.error(getErrorMessages(err));
-          }
-          return onFreePlanSubscriptionSuccess(res);
-        }
-      );
-      return;
     }
 
     onSuccess(selectedAddressId);
