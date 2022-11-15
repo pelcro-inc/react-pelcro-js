@@ -1,3 +1,10 @@
+# [3.13.0-beta.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.13.0-beta.1...v3.13.0-beta.2) (2022-11-15)
+
+
+### Features
+
+* add enableReactGA4 to uisettings ([71af0df](https://github.com/pelcro-inc/react-pelcro-js/commit/71af0df454b094ccc67e58eb5a8410d13900bd5d))
+
 # [3.13.0-beta.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.12.0...v3.13.0-beta.1) (2022-11-11)
 
 
