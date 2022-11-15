@@ -10,7 +10,8 @@
   },
   "buttons": {
     "account": "Accès abonné(e)s",
-    "login": "Se connecter"
+    "login": "Se connecter",
+    "subscribe": "S'abonner"
   },
   "dashboard": {
     "labels": {

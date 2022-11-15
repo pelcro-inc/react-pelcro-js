@@ -9,7 +9,8 @@
   },
   "buttons": {
     "account": "내 계정",
-    "login": "로그인"
+    "login": "로그인",
+    "subscribe": "구독하다"
   },
   "dashboard": {
     "labels": {

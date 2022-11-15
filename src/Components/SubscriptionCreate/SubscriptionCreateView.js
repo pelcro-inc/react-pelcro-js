@@ -1,5 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { SubscriptionCreateFreePlanButton } from "./SubscriptionCreateFreePlanButton";
 import { usePelcro } from "../../hooks/usePelcro";
 import {
   getFormattedPriceByLocal,
@@ -13,6 +14,9 @@ export const SubscriptionCreateView = ({
 }) => {
   const { t } = useTranslation("checkoutForm");
   const { product, plan } = usePelcro();
+  const skipPayment =
+    window.Pelcro?.uiSettings?.skipPaymentForFreePlans;
+  const showSubscriptionButton = skipPayment && plan?.amount === 0;
 
   const getPricingText = (plan) => {
     const autoRenewed = plan.auto_renew;
@@ -66,6 +70,7 @@ export const SubscriptionCreateView = ({
         showExternalPaymentMethods={true}
         onSuccess={onSuccess}
         onFailure={onFailure}
+        showSubscriptionButton={showSubscriptionButton}
       />
     </div>
   );
