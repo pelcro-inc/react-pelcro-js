@@ -136,6 +136,8 @@ const PaymentMethodContainerWithoutStripe = ({
   const isRenewingGift =
     props.isRenewingGift ?? pelcroStore.isRenewingGift;
   const invoice = props.invoice ?? pelcroStore.invoice;
+  const skipPayment =
+    window.Pelcro?.uiSettings?.skipPaymentForFreePlans;
 
   const cardProcessor = getSiteCardProcessor();
 
@@ -784,6 +786,7 @@ const PaymentMethodContainerWithoutStripe = ({
   }, [selectedPaymentMethodId]);
 
   const initPaymentRequest = (state, dispatch) => {
+    if (skipPayment && plan?.amount === 0) return;
     try {
       const paymentRequest = stripe.paymentRequest({
         country: window.Pelcro.user.location.countryCode || "US",
@@ -838,6 +841,7 @@ const PaymentMethodContainerWithoutStripe = ({
    * Updates the total amount after adding taxes only if site taxes are enabled
    */
   const updateTotalAmountWithTax = () => {
+    if (skipPayment && plan?.amount === 0) return;
     const taxesEnabled = window.Pelcro.site.read()?.taxes_enabled;
 
     if (taxesEnabled && type === "createPayment") {
@@ -1152,11 +1156,11 @@ const PaymentMethodContainerWithoutStripe = ({
     if (!subscriptionIdToRenew) {
       window.Pelcro.subscription.create(
         {
-          source_id: stripeSource.isExistingSource
-            ? stripeSource.id
+          source_id: stripeSource?.isExistingSource
+            ? stripeSource?.id
             : undefined,
-          stripe_token: !stripeSource.isExistingSource
-            ? stripeSource.id
+          stripe_token: !stripeSource?.isExistingSource
+            ? stripeSource?.id
             : undefined,
           auth_token: window.Pelcro.user.read().auth_token,
           plan_id: plan.id,
