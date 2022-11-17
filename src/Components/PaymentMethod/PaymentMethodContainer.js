@@ -1187,11 +1187,11 @@ const PaymentMethodContainerWithoutStripe = ({
       if (isRenewingGift) {
         window.Pelcro.subscription.renewGift(
           {
-            source_id: stripeSource.isExistingSource
-              ? stripeSource.id
+            source_id: stripeSource?.isExistingSource
+              ? stripeSource?.id
               : undefined,
-            stripe_token: !stripeSource.isExistingSource
-              ? stripeSource.id
+            stripe_token: !stripeSource?.isExistingSource
+              ? stripeSource?.id
               : undefined,
             auth_token: window.Pelcro.user.read().auth_token,
             plan_id: plan.id,
@@ -1223,11 +1223,11 @@ const PaymentMethodContainerWithoutStripe = ({
       } else {
         window.Pelcro.subscription.renew(
           {
-            source_id: stripeSource.isExistingSource
-              ? stripeSource.id
+            source_id: stripeSource?.isExistingSource
+              ? stripeSource?.id
               : undefined,
-            stripe_token: !stripeSource.isExistingSource
-              ? stripeSource.id
+            stripe_token: !stripeSource?.isExistingSource
+              ? stripeSource?.id
               : undefined,
             auth_token: window.Pelcro.user.read().auth_token,
             plan_id: plan.id,
