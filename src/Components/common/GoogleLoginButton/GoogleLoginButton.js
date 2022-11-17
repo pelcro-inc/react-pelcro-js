@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
-// import { GoogleLogin } from "react-google-login";
-import { GoogleLogin, useGoogleLogin } from "@react-oauth/google";
+import { GoogleLogin } from "react-google-login";
 import { store as loginStore } from "../../Login/LoginContainer";
 import { store as registerStore } from "../../Register/RegisterContainer";
 import { ReactComponent as GoogleLogoIcon } from "../../../assets/google-logo.svg";
@@ -18,58 +17,56 @@ export const GoogleLoginButton = ({
   const { dispatch: registerDispatch } = useContext(registerStore);
 
   const onSuccess = (response) => {
-    console.log(response);
-    fetch("https://www.googleapis.com/oauth2/v1/userinfo?alt=json", {
-      headers: {
-        Authorization: `Bearer ${response.access_token}`
-      }
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        loginDispatch?.({
-          type: HANDLE_SOCIAL_LOGIN,
-          payload: {
-            idpName: "google",
-            idpToken: response.access_token,
-            email: data.email,
-            firstName: data.given_name,
-            lastName: data.family_name
-          }
-        });
+    const profile = response.getBasicProfile();
+    const accessToken = response.getAuthResponse()?.id_token;
 
-        registerDispatch?.({
-          type: HANDLE_SOCIAL_LOGIN,
-          payload: {
-            idpName: "google",
-            idpToken: response.access_token,
-            email: data.email,
-            firstName: data.given_name,
-            lastName: data.family_name
-          }
-        });
-      });
+    loginDispatch?.({
+      type: HANDLE_SOCIAL_LOGIN,
+      payload: {
+        idpName: "google",
+        idpToken: accessToken,
+        email: profile.getEmail?.(),
+        firstName: profile.getGivenName?.(),
+        lastName: profile.getFamilyName?.()
+      }
+    });
+
+    registerDispatch?.({
+      type: HANDLE_SOCIAL_LOGIN,
+      payload: {
+        idpName: "google",
+        idpToken: accessToken,
+        email: profile.getEmail?.(),
+        firstName: profile.getGivenName?.(),
+        lastName: profile.getFamilyName?.()
+      }
+    });
   };
 
   const onFailure = (error) => {
     console.error(error);
   };
 
-  const login = useGoogleLogin({
-    onSuccess: onSuccess,
-    onError: onFailure,
-  });
-
   return googleLoginEnabled ? (
-    <button
-      onClick={login}
-      className={`plc-flex plc-items-center plc-justify-center plc-p-3 plc-space-x-3 plc-text-gray-700 plc-border plc-border-gray-200 plc-rounded-3xl hover:plc-bg-gray-200 pelcro-google-login ${className}`}
-    >
-      <GoogleLogoIcon
-        className={`plc-w-6 plc-h-auto pelcro-google-login-icon" ${iconClassName}`}
-      />
-      <p className={`pelcro-google-login-label ${labelClassName}`}>
-        {label}
-      </p>
-    </button>
+    <GoogleLogin
+      clientId={window.Pelcro.site.read().google_app_id}
+      onSuccess={onSuccess}
+      onFailure={onFailure}
+      render={(renderProps) => (
+        <button
+          onClick={renderProps.onClick}
+          className={`plc-flex plc-items-center plc-justify-center plc-p-3 plc-space-x-3 plc-text-gray-700 plc-border plc-border-gray-200 plc-rounded-3xl hover:plc-bg-gray-200 pelcro-google-login ${className}`}
+        >
+          <GoogleLogoIcon
+            className={`plc-w-6 plc-h-auto pelcro-google-login-icon" ${iconClassName}`}
+          />
+          <p
+            className={`pelcro-google-login-label ${labelClassName}`}
+          >
+            {label}
+          </p>
+        </button>
+      )}
+    />
   ) : null;
 };

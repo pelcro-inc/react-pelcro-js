@@ -1774,11 +1774,6 @@
     schema-utils "^2.6.5"
     source-map "^0.7.3"
 
-"@react-oauth/google@^0.4.0":
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/@react-oauth/google/-/google-0.4.0.tgz#ae4fe2724040bd11facdc53aad43a21e9f34b2c9"
-  integrity sha512-2QxxrKbXXH8bwHSefB56sBgsKs7Bq3Pvv8tVmGJuINGefECsssIUKidTDm5P55T4CV99sCX/GUfxs3l2Ntxo8Q==
-
 "@rollup/plugin-commonjs@^11.1.0":
   version "11.1.0"
   resolved "https://registry.yarnpkg.com/@rollup/plugin-commonjs/-/plugin-commonjs-11.1.0.tgz#60636c7a722f54b41e419e1709df05c7234557ef"
