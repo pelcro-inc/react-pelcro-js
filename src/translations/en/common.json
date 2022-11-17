@@ -10,7 +10,8 @@
   },
   "buttons": {
     "account": "My account",
-    "login": "Login"
+    "login": "Login",
+    "subscribe": "Subscribe"
   },
   "dashboard": {
     "labels": {

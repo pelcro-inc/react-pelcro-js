@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Authorship from "../common/Authorship";
 import { PaymentMethodSelectView } from "./PaymentMethodSelectView";
 import {
@@ -13,7 +13,16 @@ export const PaymentMethodSelectModal = ({
   onClose,
   ...otherProps
 }) => {
-  const { switchToCheckoutForm, set } = usePelcro();
+  const { switchToCheckoutForm, set, plan } = usePelcro();
+
+  const skipPayment =
+    window.Pelcro?.uiSettings?.skipPaymentForFreePlans;
+
+  useEffect(() => {
+    if (skipPayment && plan?.amount === 0) {
+      switchToCheckoutForm();
+    }
+  }, []);
 
   const onSuccess = (selectedPaymentMethodId) => {
     otherProps.onSuccess?.(selectedPaymentMethodId);

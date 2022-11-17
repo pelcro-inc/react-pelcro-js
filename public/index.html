@@ -25,7 +25,9 @@
         newsletters: [
           { label: "news 1", id: 12 },
           { label: "default", id: "default" }
-        ]
+        ],
+        skipPaymentForFreePlans: true,
+        enableReactGA4: true
       };
     </script>
     <script src="https://js.pelcro.com/sdk/staging/main.min.js"></script>
@@ -46,7 +48,13 @@
       <br />
       <br />
 
-      <button class="pelcro-login-button">Login</button>
+      <button
+        class="pelcro-login-button"
+        data-login-text="Sign in"
+        data-dashboard-text="My Dashboard"
+      >
+        Sherif
+      </button>
       <button class="pelcro-subscribe-button">Subscribe</button>
       <button class="pelcro-register-button">Register</button>
       <button
