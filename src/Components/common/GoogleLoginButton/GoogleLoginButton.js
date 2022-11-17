@@ -1,9 +1,10 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { GoogleLogin } from "react-google-login";
 import { store as loginStore } from "../../Login/LoginContainer";
 import { store as registerStore } from "../../Register/RegisterContainer";
 import { ReactComponent as GoogleLogoIcon } from "../../../assets/google-logo.svg";
 import { HANDLE_SOCIAL_LOGIN } from "../../../utils/action-types";
+import { gapi } from 'gapi-script';
 
 export const GoogleLoginButton = ({
   label = "Google",
@@ -11,10 +12,16 @@ export const GoogleLoginButton = ({
   labelClassName = "",
   iconClassName = ""
 }) => {
-  const googleLoginEnabled = window.Pelcro.site.read()?.google_app_id;
+  const clientId = window.Pelcro.site.read()?.google_app_id;
 
   const { dispatch: loginDispatch } = useContext(loginStore);
   const { dispatch: registerDispatch } = useContext(registerStore);
+
+  useEffect(() => {
+    gapi.load("client:auth2", () => {
+      gapi.auth2.init({ clientId: clientId });
+    });
+  }, []);
 
   const onSuccess = (response) => {
     const profile = response.getBasicProfile();
@@ -47,9 +54,9 @@ export const GoogleLoginButton = ({
     console.error(error);
   };
 
-  return googleLoginEnabled ? (
+  return clientId ? (
     <GoogleLogin
-      clientId={window.Pelcro.site.read().google_app_id}
+      clientId={clientId}
       onSuccess={onSuccess}
       onFailure={onFailure}
       render={(renderProps) => (
