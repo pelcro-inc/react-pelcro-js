@@ -1,3 +1,10 @@
+# [3.13.0-beta.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.13.0-beta.2...v3.13.0-beta.3) (2022-11-17)
+
+
+### Bug Fixes
+
+* google button use gapi-script ([#225](https://github.com/pelcro-inc/react-pelcro-js/issues/225)) ([d411f99](https://github.com/pelcro-inc/react-pelcro-js/commit/d411f990d9530319abf5cbf27406eaccebe10227))
+
 # [3.13.0-beta.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.13.0-beta.1...v3.13.0-beta.2) (2022-11-15)
 
 
