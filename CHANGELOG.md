@@ -1,3 +1,10 @@
+# [3.13.0-beta.4](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.13.0-beta.3...v3.13.0-beta.4) (2022-11-17)
+
+
+### Bug Fixes
+
+* hide payment for free plans 2 ([#226](https://github.com/pelcro-inc/react-pelcro-js/issues/226)) ([e940467](https://github.com/pelcro-inc/react-pelcro-js/commit/e94046728eb53c43b2470f65028bc2e0e07e959c)), closes [#220](https://github.com/pelcro-inc/react-pelcro-js/issues/220)
+
 # [3.13.0-beta.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.13.0-beta.2...v3.13.0-beta.3) (2022-11-17)
 
 
