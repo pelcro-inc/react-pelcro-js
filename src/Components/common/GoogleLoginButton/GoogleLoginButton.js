@@ -12,14 +12,14 @@ export const GoogleLoginButton = ({
   labelClassName = "",
   iconClassName = ""
 }) => {
-  const clientId = window.Pelcro.site.read()?.google_app_id;
+  const googleClientId = window.Pelcro.site.read()?.google_app_id;
 
   const { dispatch: loginDispatch } = useContext(loginStore);
   const { dispatch: registerDispatch } = useContext(registerStore);
 
   useEffect(() => {
     gapi.load("client:auth2", () => {
-      gapi.auth2.init({ clientId: clientId });
+      gapi.auth2.init({ clientId: googleClientId });
     });
   }, []);
 
@@ -54,9 +54,9 @@ export const GoogleLoginButton = ({
     console.error(error);
   };
 
-  return clientId ? (
+  return googleClientId ? (
     <GoogleLogin
-      clientId={clientId}
+      clientId={googleClientId}
       onSuccess={onSuccess}
       onFailure={onFailure}
       render={(renderProps) => (
