@@ -251,11 +251,9 @@ class SelectModal extends Component {
     };
 
     return (
-      <Carousel
-        items={items}
-        responsive={responsive}
-        controlsStrategy="responsive"
-      />
+      <Carousel>
+        {items}
+      </Carousel>
     );
   };
 
@@ -419,11 +417,9 @@ class SelectModal extends Component {
     };
 
     return (
-      <Carousel
-        items={items}
-        responsive={responsive}
-        controlsStrategy="responsive"
-      />
+      <Carousel>
+        {items}
+      </Carousel>
     );
   };
 
@@ -555,7 +551,7 @@ class SelectModal extends Component {
 
             {this.state.mode === "plan" && (
               <>
-                <div className="plc-overflow-y-auto pelcro-select-plans-wrapper">
+                <div className="pelcro-select-plans-wrapper">
                   {this.renderPlans()}
                 </div>
                 {!disableGifting && (
