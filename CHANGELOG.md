@@ -1,3 +1,10 @@
+# [3.13.0-beta.5](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.13.0-beta.4...v3.13.0-beta.5) (2022-11-21)
+
+
+### Bug Fixes
+
+* display error on the UI "email in use" ([#227](https://github.com/pelcro-inc/react-pelcro-js/issues/227)) ([e98bfe7](https://github.com/pelcro-inc/react-pelcro-js/commit/e98bfe716ab5858192d6b45be2eeb683077a93c6))
+
 # [3.13.0-beta.4](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.13.0-beta.3...v3.13.0-beta.4) (2022-11-17)
 
 
