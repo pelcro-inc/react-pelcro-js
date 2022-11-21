@@ -1,3 +1,10 @@
+# [4.0.0-alpha.7](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.6...v4.0.0-alpha.7) (2022-11-21)
+
+
+### Features
+
+* add new meter design ([#228](https://github.com/pelcro-inc/react-pelcro-js/issues/228)) ([d21216c](https://github.com/pelcro-inc/react-pelcro-js/commit/d21216ca525c878f931b307f624fee078c1619bc))
+
 # [4.0.0-alpha.6](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.5...v4.0.0-alpha.6) (2022-11-14)
 
 
