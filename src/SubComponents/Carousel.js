@@ -1,19 +1,23 @@
 import React from "react";
-import AliceCarousel from "react-alice-carousel";
-import "react-alice-carousel/lib/alice-carousel.css";
+import Slider from "react-slick";
 
 export function Carousel({
-  items,
-  responsive,
-  controlsStrategy,
+    slidesToShow = 3,
+    slidesToScroll = 1,
+    children,
   ...otherProps
 }) {
+  const settings = {
+      dots: true,
+      infinite: false,
+      speed: 500,
+      slidesToShow: slidesToShow,
+      slidesToScroll: slidesToScroll
+    };
+
   return (
-    <AliceCarousel
-      mouseTracking
-      items={items}
-      responsive={responsive}
-      controlsStrategy={controlsStrategy}
-    />
+      <Slider {...settings}>
+        {children}
+      </Slider>
   );
 }
