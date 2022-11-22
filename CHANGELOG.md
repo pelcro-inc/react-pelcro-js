@@ -1,5 +1,14 @@
 # [3.17.0-beta.10](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.17.0-beta.9...v3.17.0-beta.10) (2023-01-12)
 
+# [4.0.0-alpha.8](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.7...v4.0.0-alpha.8) (2022-11-22)
+
+### Features
+
+- remove alice carousel and add react-slick ([ebfdcab](https://github.com/pelcro-inc/react-pelcro-js/commit/ebfdcab5f7a5e2f4ec6c442a2a019ffcfa71aee9))
+- update the product carousel ([40b3fc4](https://github.com/pelcro-inc/react-pelcro-js/commit/40b3fc4f63f59b26891570c942fe1afb7f011060))
+
+# [4.0.0-alpha.7](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.6...v4.0.0-alpha.7) (2022-11-21)
+
 # [4.0.0-alpha.7](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.6...v4.0.0-alpha.7) (2022-11-21)
 
 ### Features
