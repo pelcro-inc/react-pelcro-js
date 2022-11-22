@@ -1,3 +1,10 @@
+# [4.0.0-alpha.10](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.9...v4.0.0-alpha.10) (2022-11-22)
+
+
+### Bug Fixes
+
+* reduce the select modal padding spaces and add responsive ([b98f920](https://github.com/pelcro-inc/react-pelcro-js/commit/b98f92063540859b6598acb00cf9454dd27f1783))
+
 # [4.0.0-alpha.9](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.8...v4.0.0-alpha.9) (2022-11-22)
 
 
