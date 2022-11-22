@@ -1,5 +1,13 @@
 # [3.17.0-beta.10](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.17.0-beta.9...v3.17.0-beta.10) (2023-01-12)
 
+# [4.0.0-alpha.9](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.8...v4.0.0-alpha.9) (2022-11-22)
+
+### Features
+
+- update carousel css file ([e0225d7](https://github.com/pelcro-inc/react-pelcro-js/commit/e0225d76539a4524f19ba272c2b409bbd44f24b1))
+
+# [4.0.0-alpha.8](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.7...v4.0.0-alpha.8) (2022-11-22)
+
 # [4.0.0-alpha.8](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.7...v4.0.0-alpha.8) (2022-11-22)
 
 ### Features
