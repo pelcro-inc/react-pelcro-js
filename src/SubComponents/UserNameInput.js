@@ -39,36 +39,9 @@ export function UserNameInput({
     [dispatch, username, finishedTyping]
   );
 
-  // useEffect(() => {
-  //   if (!enableUsernameEdit) {
-  //     loadUsernameIntoField();
-  //   }
-  // }, [enableUsernameEdit]);
-
   useEffect(() => {
     handleInputChange(username);
   }, [finishedTyping, username, handleInputChange]);
-
-  // Initialize email field with user's email
-  // const loadUsernameIntoField = () => {
-  //   handleInputChange(window.Pelcro.user.read().email);
-  // };
-
-  // useEffect(() => {
-  //   if (initWithUserName) {
-  //     document.addEventListener("PelcroUserLoaded", () => {
-  //       loadUsernameIntoField();
-  //     });
-  //     loadUsernameIntoField();
-
-  //     return () => {
-  //       document.removeEventListener(
-  //         "PelcroUserLoaded",
-  //         handleInputChange
-  //       );
-  //     };
-  //   }
-  // }, []);
 
   return (
     <Input
