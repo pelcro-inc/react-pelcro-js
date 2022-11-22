@@ -6,12 +6,14 @@ export { PelcroModalController } from "./Components/PelcroModalController/Pelcro
 
 export { LoginContainer } from "./Components/Login/LoginContainer";
 export { Email } from "./SubComponents/Email";
+export { UserNameInput } from "./SubComponents/UserNameInput";
 export { Password } from "./SubComponents/Password";
 export { ConfirmPassword } from "./SubComponents/ConfirmPassword";
 export { Logout } from "./SubComponents/Logout";
 export { LoginButton } from "./Components/Login/LoginButton";
 export { LoginRequestLoginToken } from "./Components/Login/LoginRequestLoginToken";
 export { LoginEmail } from "./Components/Login/LoginEmail";
+export { LoginUsername } from "./Components/Login/LoginUsername";
 export { LoginPassword } from "./Components/Login/LoginPassword";
 export { LoginView } from "./Components/Login/LoginView";
 export { LoginModal } from "./Components/Login/LoginModal";

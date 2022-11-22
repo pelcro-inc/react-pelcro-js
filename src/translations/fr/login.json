@@ -1,6 +1,7 @@
 {
   "labels": {
     "email": "Entrez votre adresse courriel",
+    "username": "Saisissez votre nom d'utilisateur",
     "password": "Entrez votre mot de passe",
     "required": "Champs obligatoires",
     "emailPlaceholder": "Adresse courriel",
