@@ -128,7 +128,8 @@ class SelectModal extends Component {
     const activeElement = document.getElementById("activeTab");
 
     if (activeElement) {
-      activeElement.parentNode.scrollLeft = activeElement.offsetLeft;
+      activeElement.parentNode.scrollLeft =
+        activeElement.offsetLeft - 80;
     } else {
       console.log(document.getElementById("activeTab"));
     }
@@ -220,23 +221,22 @@ class SelectModal extends Component {
               </>
             )}
           </div>
-
-          {isPlanMode || (
-            <div className="plc-mt-auto">
-              <Button
-                onClick={productButtonCallback}
-                data-key={product.id}
-                id="pelcro-select-product-back-button"
-                className={`plc-w-full ${
-                  options?.emphasize ? "plc-bg-primary-700" : ""
-                }`}
-                {...(index === 0 && { autoFocus: true })}
-              >
-                {productButtonLabel}
-              </Button>
-            </div>
-          )}
         </div>
+        {isPlanMode || (
+          <div className="plc-mt-auto plc-w-full">
+            <Button
+              onClick={productButtonCallback}
+              data-key={product.id}
+              id="pelcro-select-product-back-button"
+              className={`plc-w-full ${
+                options?.emphasize ? "plc-bg-primary-700" : ""
+              }`}
+              {...(index === 0 && { autoFocus: true })}
+            >
+              {productButtonLabel}
+            </Button>
+          </div>
+        )}
       </div>
     );
   };
@@ -257,11 +257,7 @@ class SelectModal extends Component {
       1500: { items: 3 }
     };
 
-    return (
-      <Carousel>
-        {items}
-      </Carousel>
-    );
+    return <Carousel slidesCount={items.length}>{items}</Carousel>;
   };
 
   renderProductTabs = () => {
@@ -423,11 +419,7 @@ class SelectModal extends Component {
       1500: { items: 4 }
     };
 
-    return (
-      <Carousel>
-        {items}
-      </Carousel>
-    );
+    return <Carousel slidesCount={items.length}>{items}</Carousel>;
   };
 
   selectProduct = (e) => {
@@ -517,7 +509,7 @@ class SelectModal extends Component {
 
     return (
       <Modal
-        className="plc-max-w-90%"
+        className="plc-max-w-70%"
         hideCloseButton={!this.closeButton}
         onClose={this.props.onClose}
         id="pelcro-selection-modal"
