@@ -1,3 +1,10 @@
+# [3.13.0-beta.6](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.13.0-beta.5...v3.13.0-beta.6) (2022-11-22)
+
+
+### Features
+
+* add user name login ([#229](https://github.com/pelcro-inc/react-pelcro-js/issues/229)) ([c7077a9](https://github.com/pelcro-inc/react-pelcro-js/commit/c7077a9da47122ec93dee1c34767f2c74b5aacc6))
+
 # [3.13.0-beta.5](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.13.0-beta.4...v3.13.0-beta.5) (2022-11-21)
 
 
