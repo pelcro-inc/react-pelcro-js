@@ -77,7 +77,8 @@
   display: none;
 }
 .pelcro-root .slick-disabled {
-  display: none !important;
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 .pelcro-root .slick-dots {
   margin-top: 20px;
@@ -98,4 +99,7 @@
 }
 .pelcro-root .slick-dots li.slick-active {
   border-color: grey;
+}
+.pelcro-root .slick-arrow {
+  outline: none !important;
 }

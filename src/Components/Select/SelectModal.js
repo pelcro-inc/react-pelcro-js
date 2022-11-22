@@ -186,7 +186,7 @@ class SelectModal extends Component {
     return (
       <div
         key={product.id}
-        className={`pelcro-product plc-relative plc-overflow-hidden plc-h-full plc-flex plc-flex-col plc-items-start plc-p-8 plc-text-gray-900 plc-border-solid plc-rounded plc-border-gray-200 plc-bg-white pelcro-select-product-wrapper ${
+        className={`pelcro-product plc-relative plc-overflow-hidden plc-h-full plc-flex plc-flex-col plc-items-start plc-p-4 plc-text-gray-900 plc-border-solid plc-rounded plc-border-gray-200 plc-bg-white pelcro-select-product-wrapper ${
           options?.emphasize ? "plc-border-2" : "plc-border"
         }`}
       >
@@ -250,12 +250,6 @@ class SelectModal extends Component {
     const items = productsToShow.map((product, index) =>
       this.renderOneProduct(product, index)
     );
-
-    const responsive = {
-      120: { items: 1 },
-      1024: { items: 2 },
-      1500: { items: 3 }
-    };
 
     return <Carousel slidesCount={items.length}>{items}</Carousel>;
   };
@@ -377,7 +371,7 @@ class SelectModal extends Component {
             data-key={plan.id}
             onChange={this.selectPlan}
           >
-            <div className="plc-p-8 plc-text-center plc-flex plc-flex-col plc-justify-center plc-items-center plc-w-full plc-border-b plc-border-gray-300">
+            <div className="plc-p-4 plc-text-center plc-flex plc-flex-col plc-justify-center plc-items-center plc-w-full plc-border-b plc-border-gray-300">
               <h4 className="pelcro-select-plan-title plc-font-medium plc-text-xl">
                 {plan.nickname}
               </h4>
@@ -385,7 +379,7 @@ class SelectModal extends Component {
                 {plan.description}
               </p>
             </div>
-            <div className="plc-pt-4 plc-mb-8 plc-font-semibold pelcro-select-plan-price plc-px-8 plc-text-center plc-flex plc-items-end plc-justify-center">
+            <div className="plc-pt-4 plc-mb-4 plc-font-semibold pelcro-select-plan-price plc-px-4 plc-text-center plc-flex plc-items-end plc-justify-center">
               <p className="plc-font-bold plc-text-4xl">
                 {plan.amount_formatted}
               </p>
@@ -396,7 +390,7 @@ class SelectModal extends Component {
                 </span>
               </span>
             </div>
-            <div className="plc-mt-auto plc-px-8 plc-mb-8">
+            <div className="plc-mt-auto plc-px-4 plc-mb-4">
               <div
                 className={`${
                   this.state?.plan.id === plan.id
@@ -411,13 +405,6 @@ class SelectModal extends Component {
         </div>
       );
     });
-
-    const responsive = {
-      120: { items: 1 },
-      1024: { items: 2 },
-      1200: { items: 3 },
-      1500: { items: 4 }
-    };
 
     return <Carousel slidesCount={items.length}>{items}</Carousel>;
   };
@@ -509,7 +496,7 @@ class SelectModal extends Component {
 
     return (
       <Modal
-        className="plc-max-w-70%"
+        className="plc-max-w-full sm:plc-max-w-90% md:plc-max-w-70%"
         hideCloseButton={!this.closeButton}
         onClose={this.props.onClose}
         id="pelcro-selection-modal"
@@ -550,7 +537,7 @@ class SelectModal extends Component {
 
             {this.state.mode === "plan" && (
               <>
-                <div className="pelcro-select-plans-wrapper">
+                <div className="pelcro-select-plans-wrapper plc-mt-4">
                   {this.renderPlans()}
                 </div>
                 {!disableGifting && (
