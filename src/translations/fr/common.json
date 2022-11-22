@@ -1,7 +1,9 @@
 {
   "validation": {
     "validEmail": "le courriel n’est pas valide",
+    "validUsername": "Le nom d'utilisateur n'est pas valide.",
     "enterEmail": "Un courriel est requis.",
+    "enterUsername": "Nom d'utilisateur est nécessaire.",
     "enterPassword": "Mot de passe requis.",
     "confirmPassword": "Confirmer le mot de passe requis.",
     "enterFirstName": "Le prénom est requis.",
