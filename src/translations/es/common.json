@@ -1,0 +1,86 @@
+{
+  "validation": {
+    "validEmail": "La dirección de correo no es válida.",
+    "enterEmail": "La dirección de correo es obligatoria.",
+    "enterPassword": "La contraseña es obligatoria.",
+    "confirmPassword": "Confirmar la contraseña es obligatorio.",
+    "enterFirstName": "El nombre es obligatorio.",
+    "enterLastName": "El apellido es obligatorio.",
+    "enterPhone": "El número de teléfono es obligatorio."
+  },
+  "buttons": {
+    "account": "Mi cuenta",
+    "login": "Iniciar Sesión"
+  },
+  "dashboard": {
+    "labels": {
+      "menu": "Menú de Pelcro",
+      "name": "Nombre",
+      "email": "Correo",
+      "plan": "Plan",
+      "description": "Descripción",
+      "expiry": "Expiración",
+      "status": "Estado",
+      "logout": "Cerrar sesión",
+      "dashboard": "Panel",
+      "unsubscribe": "Cancelar suscripción",
+      "reactivate": "Reactivar",
+      "renew": "Renovar",
+      "support": "Soporte",
+      "account": "Cuenta",
+      "subscriptions": "Suscripciones",
+      "updatePaymentSource": "Actualización",
+      "updateProfile": "Actualización",
+      "updateAddress": "Actualización",
+      "redeemGift": "Redimir regalo",
+      "address": "Dirección",
+      "paymentSource": "Datos de pago",
+      "actions": "Acciones",
+      "expiresOn": "Expira el",
+      "renewsOn": "Se renueva el",
+      "isSureToCancel": "¿Estás seguro de que quieres cancelar tu suscripción?"
+    },
+    "messages": {
+      "yourDashboard": "Tu Panel de Pelcro"
+    },
+    "errors": {
+      "": ""
+    }
+  },
+  "select": {
+    "messages": {
+      "alreadyHaveAccount": "¿Ya tienes una cuenta?",
+      "loginHere": "Inicia sesión aquí",
+      "checkbox": "Marca esta casilla para regalar esta suscripción"
+    },
+    "labels": {
+      "plan": {
+        "title": "Suscribirse a un plan",
+        "subtitle": "Selecciona uno de los planes a continuación y pulsa en siguiente."
+      },
+      "product": {
+        "title": "Suscribirse a un producto",
+        "subtitle": "Selecciona uno de los productos a continuación y pulsa en siguiente."
+      },
+      "selectProduct": "Selecciona un producto",
+      "selectPlan": "Selecciona un plan",
+      "startingAt": "Inicial el"
+    },
+    "buttons": {
+      "next": "Siguiente",
+      "select": "Seleccionar dirección",
+      "back": "Volver"
+    }
+  },
+  "confirm": {
+    "buttons": {
+      "continue": "Continuar al contenido"
+    },
+    "labels": {
+      "title": "¡Gracias por tu orden!",
+      "subtitle": "Tus artículos estarán en camino en breve."
+    },
+    "giftSent": "El regalo será enviado a",
+    "successfully": "en la fecha que especificaste."
+  }
+}

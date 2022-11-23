@@ -1,0 +1,21 @@
+{
+  "labels": {
+    "title":"Suspender suscripción",
+    "suspensionDate":"Fecha de suspensión",
+    "subCancellation": {
+      "goBack":"Volver"
+    }
+  },
+  "messages": {
+    "suspensionEnd":"La suspensión expirará el",
+    "suspendNow":"Suspender Suscripción Ahora",
+    "suspendLater":"Suspender al Final del Periodo",
+    "subCancellation": {
+      "isSureToSuspendNow":"¿Estás seguro de que quieres suspender tu suscripción de inmediato?",
+      "isSureToSuspend":"¿Estás seguro de que quieres suspender tu suscripción?",
+      "loading":"Suspendiendo tu suscripción",
+      "success":"La suscripción se suspendió con éxito",
+      "error":"Erro al suspender tu suscripción"
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "buttons": {
+    "select":"Seleccionar",
+    "added":"Añadido al carrito",
+    "purchase":"Compra",
+    "continue":"Continuar"
+  },
+  "messages": {
+    "orderConfirmed": {
+      "title":"¡Orden confirmada!",
+      "body":"Tu orden ha sido confirmada y será enviada en los próximos días. En breve recibirás un correo electrónico de confirmación de esta orden."
+    },
+    "haveQuestions":"¡Si tienes alguna pregunta, no dudes en contactarnos!",
+    "multipleCurrencies":"Tu carrito actualmente contiene artículos que están disponibles en diferentes divisas. Para proceder a la compra, asegúrate de que todos los artículos tengan la misma divisa.",
+    "currencyMismatch":"El siguiente artículo(s) no coincide con tu divisa predeterminada actual ({{currency}}). Por favor, solo elige artículos que coincidan con esta divisa."
+  },
+  "labels": {
+    "summary":"Resumen de la orden",
+    "total":"total"
+  }
+}

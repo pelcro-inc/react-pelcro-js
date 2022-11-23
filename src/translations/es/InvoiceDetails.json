@@ -1,0 +1,14 @@
+{
+  "title": "Detalles del comprobante de pago",
+  "labels": {
+    "summary": "Resumen",
+    "total": "Total",
+    "amountPaid": "Monto pagado",
+    "amountDue": "Monto adeudado",
+    "creationDate": "Creado el:"
+  },
+  "buttons": {
+    "download": "Descargar",
+    "pay": "Pagar ahora"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "labels": {
+    "email": "Ingresar correo",
+    "password": "Ingresar contraseña",
+    "required": "obligatorio",
+    "emailPlaceholder": "Correo",
+    "passwordPlaceholder": "Contraseña",
+    "login": "Iniciar Sesión"
+  },
+  "messages": {
+    "loginTo": "Inicia sesión en tu cuenta",
+    "welcome": "Bienvenido de vuelta, inicia sesión con tu cuenta existente.",
+    "dontHaveAccount": "¿Aún no tienes una cuenta?",
+    "createAccount": "Crear una cuenta.",
+    "forgotPassword": "¿Olvidaste tu contraseña?",
+    "reset": {
+      "click": "Pulsa",
+      "here": "aquí",
+      "toReset": "para restablecerla."
+    },
+    "socialLogin": {
+      "label": "O continúa con"
+    }
+  },
+  "errors": {
+    "": ""
+  }
+}

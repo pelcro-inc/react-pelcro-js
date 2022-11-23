@@ -1,0 +1,11 @@
+{
+  "labels": {
+    "title":"Verificando Enlace Sin Contraseña",
+    "instructions":"¡Ya casi terminas!\nVamos a confirmar tu dirección de correo.\nPulsa el enlace de verificación que hemos enviado a tu correo:",
+    "resend":"Reenviar correo"
+  },
+  "messages": {
+    "resent":"Reenvío exitoso",
+    "success":"Inicio de sesión exitoso"
+  }
+}

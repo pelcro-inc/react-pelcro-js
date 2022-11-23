@@ -1,0 +1,11 @@
+{
+  "labels": {
+    "title":"Verifica tu correo",
+    "instructions":"¡Ya casi terminas!\nVamos a confirmar tu dirección de correo.\nPulsa el enlace de verificación que hemos enviado a tu correo:",
+    "resend":"Reenviar correo"
+  },
+  "messages": {
+    "resent":"Reenvío exitoso",
+    "success":"¡El correo se verificó con éxito!"
+  }
+}

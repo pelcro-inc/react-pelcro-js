@@ -1,0 +1,30 @@
+{
+  "labels": {
+    "continue": "Continuar al contenido"
+  },
+  "messages": {
+    "yourFreeTrial": "¡Suscripción exitosa!",
+    "youHaveAccess": "Esperamos que disfrutes de tu suscripción. Por favor, contáctanos si tienes alguna pregunta o inquietud.",
+    "clickToLearn": {
+      "click": "Pulsa",
+      "here": "aquí",
+      "toLearn": "para saber más o contactarnos",
+      "forQuestion": "para cualquier pregunta."
+    },
+    "giftCreate": {
+      "title": "Tu regalo ha sido enviado",
+      "content": "Tu destinatario pronto recibirá un correo con instrucciones para redimir su regalo."
+    },
+    "giftRedeem": {
+      "title": "Felicitaciones.",
+      "content": "Has redimido con éxito tu suscripción de regalo. ¡Que la disfrutes!"
+    },
+    "invoicePayment": {
+      "title": "Factura pagada con éxito",
+      "content": "Por favor, contáctanos si tienes alguna pregunta o inquietud."
+    }
+  },
+  "errors": {
+    "": ""
+  }
+}

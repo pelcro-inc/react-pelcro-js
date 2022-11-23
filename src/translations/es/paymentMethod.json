@@ -1,0 +1,19 @@
+{
+  "update": {
+    "title":"Actualiza tu información de pago",
+    "subtitle":"Rellena los campos a continuación para actualizar la información de tu tarjeta de crédito",
+    "required":"Obligatorio",
+    "success":"Tu información de pago se ha actualizado",
+    "secure":"Estás seguro - PCI compliance 128 SSL por"
+  },
+  "select": {
+    "title":"Selecciona un método de pago",
+    "subtitle":"Selecciona uno de tus métodos guardados o paga con uno nuevo",
+    "expires":"Expira",
+    "buttons": {
+      "addPaymentMethod":"Paga con otro método de pago",
+      "selectPaymentMethod":"Continuar",
+      "changePaymentMethod":"Cambiar"
+    }
+  }
+}
