@@ -1,5 +1,13 @@
 # [3.17.0-beta.10](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.17.0-beta.9...v3.17.0-beta.10) (2023-01-12)
 
+# [4.0.0-alpha.11](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.10...v4.0.0-alpha.11) (2022-11-24)
+
+### Bug Fixes
+
+- hide vertical separator if first-child ([8284f31](https://github.com/pelcro-inc/react-pelcro-js/commit/8284f3141fd26e48663db3129cd59e0b2a54d586))
+
+# [4.0.0-alpha.10](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.9...v4.0.0-alpha.10) (2022-11-22)
+
 # [4.0.0-alpha.10](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.9...v4.0.0-alpha.10) (2022-11-22)
 
 ### Bug Fixes
