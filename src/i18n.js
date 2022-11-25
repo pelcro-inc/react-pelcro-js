@@ -83,7 +83,7 @@ import subscriptionCancel_ko from "./translations/ko/subscriptionCancel.json";
 import subscriptionSuspend_ko from "./translations/ko/subscriptionSuspend.json";
 
 import common_es from "./translations/es/common.json";
-import paymentMethod_es from "./translations/es/paymentmethod.json";
+import paymentMethod_es from "./translations/es/paymentMethod.json";
 import newsletter_es from "./translations/es/newsletter.json";
 import success_es from "./translations/es/success.json";
 import meter_es from "./translations/es/meter.json";
