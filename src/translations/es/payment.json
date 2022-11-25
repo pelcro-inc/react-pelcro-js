@@ -1,0 +1,37 @@
+{
+  "labels": {
+    "cardNumber":"Número de Tarjeta",
+    "securityCode":"Código de Seguridad",
+    "submit":"Enviar",
+    "months": {
+      "jan":"Enero",
+      "feb":"Febrero",
+      "mar":"Marzo",
+      "apr":"Abril",
+      "may":"Mayo",
+      "jun":"Junio",
+      "jul":"Julio",
+      "aug":"Agosto",
+      "sep":"Septiembre",
+      "oct":"Octubre",
+      "nov":"Noviembre",
+      "dec":"Diciembre"
+    },
+    "checkout": {
+      "title":"Información de Pago"
+    }
+  },
+  "messages": {
+    "youAreSafe":"Estás seguro - PCI compliance 128 SSL por",
+    "cancel":"Cancela tu suscripción en línea en cualquier momento.",
+    "giftSent":"La suscripción de regalo se ha enviado a",
+    "successfully":"exitosamente",
+    "sourceUpdated":"Tu información de pago se ha actualizado",
+    "cardAuthFailed":"No pudimos autenticar tu método de pago. Por favor, elige un método de pago diferente e intenta de nuevo.",
+    "cardAuthNotSupported":"Actualmente no es posible actualizar tu método de pago a uno que requiere autenticación. Por favor, utiliza un método de pago diferente o contacta a atención al cliente.",
+    "tryAgainFromInvoice":"No nos fue posible autenticar tu pago, sin embargo, tu suscripción fue creada. Por favor, intenta pagar la factura utilizando otro método de pago desde el panel."
+  },
+  "errors": {
+    "": ""
+  }
+}

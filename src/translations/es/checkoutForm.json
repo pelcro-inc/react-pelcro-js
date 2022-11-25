@@ -1,0 +1,28 @@
+{
+  "messages": {
+    "youAreSafe": "Estás seguro - PCI compliance 128 SSL por",
+    "bankRedirection": "Por favor, espera, estamos redireccionando a tu banco.",
+    "bankAuthenticationSuccess": "Por favor, espera un momento mientras procesamos tu solicitud."
+  },
+  "labels": {
+    "card": "Ingresar número de tarjeta",
+    "date": "Vencimiento",
+    "CVC": "CVC",
+    "required": "obligatorio",
+    "submit": "Enviar",
+    "pay": "Pagar",
+    "addCode": "Agregar un código de cupón",
+    "hideCode": "Ocultar",
+    "codePlaceholder": "Ingresa tu código de cupón",
+    "applyCouponCode": "Aplicar",
+    "code": "Código de cupón",
+    "for": "por",
+    "interval": "{{count}} {{interval}}",
+    "interval_plural": "{{count}} {{interval}}s",
+    "tax": "Impuesto",
+    "removeCoupon": "ELIMINAR",
+    "firstName": "Nombre",
+    "lastName": "Apellido",
+    "phone": "Teléfono"
+  }
+}

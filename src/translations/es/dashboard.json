@@ -1,0 +1,100 @@
+{
+  "labels": {
+    "menu": "Menú de Pelcro",
+    "name": "Nombre",
+    "email": "Correo",
+    "plan": "Plan",
+    "description": "Descripción",
+    "expiry": "Expiración",
+    "status": {
+      "title": "Estado",
+      "active": "Activa",
+      "inTrial": "Prueba",
+      "endingSoon": "Termina pronto",
+      "scheduled": "Programada",
+      "incomplete": "Incompleta"
+    },
+    "shipments": "Envíos restantes",
+    "logout": "Cerrar sesión",
+    "dashboard": "Panel",
+    "unsubscribe": "Cancelar",
+    "reactivate": "Reactivar",
+    "renew": "Renovar",
+    "suspend": "Suspender",
+    "unsuspend": "Reanudar",
+    "support": "Soporte",
+    "account": "Cuenta",
+    "purchases": "Compras",
+    "subscriptions": "Suscripciones",
+    "donations": "Donaciones",
+    "memberships": "Membresías",
+    "invoices": "Comprobantes de pago",
+    "details": "Detalles",
+    "view": "Ver",
+    "paid": "Pagado",
+    "open": "Abierto",
+    "draft": "Borrador",
+    "scheduled": "Programado",
+    "uncollectible": "No se puede cobrar",
+    "void": "Inválido",
+    "pastDue": "Vencido",
+    "updatePaymentSource": "Actualización",
+    "profile": "Perfil",
+    "updateProfile": "Editar perfil",
+    "changePassword": "Cambiar contraseña",
+    "editNewsletters": "Editar boletines",
+    "edit": "Editar",
+    "gifts": "Regalos",
+    "redeemGift": "Redimir regalo",
+    "address": "Dirección",
+    "addresses": "Direcciones",
+    "myProfile": "Mi perfil",
+    "paymentSource": "Datos de pago",
+    "actions": "Acciones",
+    "expiresOn": "Finaliza",
+    "startsOn": "Inicia",
+    "startDate": "Fecha de inicio",
+    "renewsOn": "Renovación",
+    "canceledOn": "Cancelación el",
+    "recipient": "Destinatario",
+    "addAddress": "Añadir dirección",
+    "editAddress": "Editar dirección",
+    "addSubscription": "Nueva Suscripción",
+    "addGift": "Nuevo Regalo",
+    "default": "Predeterminado",
+    "orders": {
+      "label": "Órdenes",
+      "noOrders": "No has realizado ninguna orden",
+      "total": "Total",
+      "date": "Fecha",
+      "details": "Detalles",
+      "itemsAmount": "{{count}} artículo",
+      "itemsAmount_plural": "{{count}} artículos"
+    },
+    "savedItems": {
+      "label": "Guardado y Siguiendo",
+      "noSavedItems": "No tienes artículos guardados",
+      "categories": "Categorías",
+      "details": "Detalles",
+      "removeItem": "Eliminar"
+    },
+    "subCancellation": {
+      "goBack": "Volver"
+    }
+  },
+  "messages": {
+    "noCard": "No tienes una tarjeta",
+    "subCancellation": {
+      "isSureToCancel": "¿Estás seguro de que quieres cancelar tu suscripción?",
+      "loading": "Cancelando tu suscripción",
+      "success": "La suscripción se canceló con éxito",
+      "error": "Error al cancelar tu suscripción"
+    },
+    "subUnSuspend": {
+      "isSureToUnSuspend": "¿Estás seguro de que quieres reanudar tu suscripción?",
+      "loading": "Reanudando tu suscripción",
+      "success": "La suscripción se reanudó con éxito",
+      "error": "Error al reanudar tu suscripción"
+    }
+  }
+}

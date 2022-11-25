@@ -1,0 +1,88 @@
+{
+  "title": "Crear una cuenta",
+  "subtitle": "Ingresa tu correo y contraseña a continuación",
+  "labels": {
+    "signUpFacebook": "Regístrate con Facebook",
+    "signUpGoogle": "Regístrate con Google",
+    "signUpEmail": "Regístrate con Correo",
+    "password": "Contraseña",
+    "email": "Correo",
+    "passwordPlaceholder": "Crear contraseña",
+    "emailPlaceholder": "Ingresar correo",
+    "required": "obligatorio",
+    "firstName": "Nombre",
+    "lastName": "Apellido",
+    "phone": "Teléfono"
+  },
+  "messages": {
+    "alreadyHaveAccount": " ¿Ya tienes una cuenta?",
+    "createAccount": "Crear cuenta",
+    "loginHere": "inicia sesión aquí",
+    "selectPlan": "Selecciona un plan diferente",
+    "here": "aquí",
+    "iAgree": {
+      "iAgree": "Acepto los",
+      "terms": "Términos del Servicio",
+      "and": "y la",
+      "privacy": "Política de Privacidad."
+    },
+    "preferDisable": {
+      "click": "Pulsa",
+      "here": "aquí",
+      "ifPrefer": "si prefieres desactivar tu bloqueador de anuncios."
+    },
+    "socialLogin": {
+      "label": "O continúa con"
+    }
+  },
+  "errors": {
+    "": ""
+  },
+  "gift": {
+    "titles": {
+      "firstTitle": "Ingresa la información del destinatario a continuación"
+    },
+    "labels": {
+      "firstName": "Nombre",
+      "lastName": "Apellido",
+      "email": "Correo",
+      "startDate": "Fecha del regalo",
+      "giftMessage": "Mensaje del regalo ({{count}} caracteres restantes)",
+      "required": "obligatorio",
+      "firstNamePlaceholder": "Nombre",
+      "lastNamePlaceholder": "Apellido",
+      "emailPlaceholder": "Correo"
+    },
+    "buttons": {
+      "gift": "regalo"
+    },
+    "messages": {
+      "enterEmail": "Por favor, ingresa el correo del destinatario del regalo",
+      "invalidDate": "La fecha del regalo debe ser entre hoy y un año a partir de ahora.",
+      "giftDateInfo": "El destinatario recibirá un correo de notificación del regalo con tu mensaje en la fecha que seleccionaste en la orden para redimir el regalo.",
+      "giftMessageInfo": "Deja un mensaje para el destinatario y no olvides firmar con tu nombre."
+    }
+  },
+  "redeem": {
+    "titles": {
+      "firstTitle": "Redimir tu regalo",
+      "secondTitle": "Ingresa el código de regalo a continuación"
+    },
+    "labels": {
+      "code": "Ingresar el código de regalo",
+      "codePlaceholder": "Código de regalo",
+      "required": "obligatorio"
+    },
+    "buttons": {
+      "redeem": "Redimir regalo"
+    },
+    "footer": {
+      "click": "Pulsa",
+      "here": "aquí",
+      "toAdd": "para añadir una dirección"
+    },
+    "messages": {
+      "enterGiftCode": "Por favor, ingresa un código de regalo"
+    }
+  }
+}
