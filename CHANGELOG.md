@@ -1,3 +1,10 @@
+# [3.13.0-beta.7](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.13.0-beta.6...v3.13.0-beta.7) (2022-11-25)
+
+
+### Features
+
+* add spanish translation to the project ([#231](https://github.com/pelcro-inc/react-pelcro-js/issues/231)) ([8d56855](https://github.com/pelcro-inc/react-pelcro-js/commit/8d56855c31abd6de73630c6b9f976393c2769e2b))
+
 # [3.13.0-beta.6](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.13.0-beta.5...v3.13.0-beta.6) (2022-11-22)
 
 
