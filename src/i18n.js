@@ -105,7 +105,7 @@ import dashboard_es from "./translations/es/dashboard.json";
 import select_es from "./translations/es/select.json";
 import notification_es from "./translations/es/notification.json";
 import verifyEmail_es from "./translations/es/verifyEmail.json";
-import invoiceDetails_es from "./translations/es/invoiceDetails.json";
+import invoiceDetails_es from "./translations/es/InvoiceDetails.json";
 import subscriptionCancel_es from "./translations/es/subscriptionCancel.json";
 import subscriptionSuspend_es from "./translations/es/subscriptionSuspend.json";
 
