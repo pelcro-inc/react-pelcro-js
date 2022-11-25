@@ -162,6 +162,21 @@ export class PelcroActions {
     this.set({ subscriptionToSuspend });
   };
 
+  setSubscriptionToManageMembers = (id) => {
+    const subscriptions = window.Pelcro.subscription.list() ?? [];
+    const subscriptionToManageMembers = subscriptions.filter(
+      (sub) => String(sub.id) === String(id)
+    )[0];
+    if (!subscriptionToManageMembers) {
+      return console.error("invalid subscription id");
+    }
+    if (subscriptionToManageMembers?.plan?.type !== 'membership') {
+      return console.error("subscription is not from type membership");
+    }
+    this.set({ subscriptionToManageMembers });
+    return true;
+  };
+
   setInvoice = (id) => {
     const invoices = window.Pelcro.invoice.list() ?? [];
     const invoice = invoices.find(

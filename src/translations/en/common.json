@@ -2,6 +2,7 @@
   "validation": {
     "validEmail": "Email address is not valid.",
     "enterEmail": "Email address is required.",
+    "enterEmails": "Email addresses are required.",
     "enterPassword": "Password is required.",
     "confirmPassword": "Confirm password is required.",
     "enterFirstName": "First name is required.",

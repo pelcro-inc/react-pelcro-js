@@ -14,6 +14,7 @@
       "scheduled": "예약",
       "incomplete": "불완전한"
     },
+    "manageMembers": "회원 관리",
     "shipments": "남은 배송 일정",
     "logout": "로그아웃",
     "dashboard": "대시보드",

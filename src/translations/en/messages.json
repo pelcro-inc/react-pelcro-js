@@ -6,5 +6,6 @@
   "entitlement": "Some of the content on this page is available with one or more of our plans. <1>Subscribe</1> now to get full page access.",
   "recaptcha": "This site is protected by reCAPTCHA and the Google <1>Privacy Policy</1> and <3>Terms of Service</3> apply.",
   "invalidInvoice": "Invalid invoice ID, please contact support",
+  "invalidSubscription": "Invalid subscription ID, please contact support",
   "zeroTotalInvoice": "You can't view an invoice of 0$"
 }

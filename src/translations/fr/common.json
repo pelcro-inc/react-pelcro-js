@@ -2,6 +2,7 @@
   "validation": {
     "validEmail": "le courriel n’est pas valide",
     "enterEmail": "Un courriel est requis.",
+    "enterEmails": "Les adresses e-mail sont obligatoires.",
     "enterPassword": "Mot de passe requis.",
     "confirmPassword": "Confirmer le mot de passe requis.",
     "enterFirstName": "Le prénom est requis.",
