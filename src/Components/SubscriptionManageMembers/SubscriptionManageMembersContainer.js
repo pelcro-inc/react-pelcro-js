@@ -16,6 +16,7 @@ import {
   UPDATE_MEMBERS,
   UPDATE_REMOVE_MEMBER_ID,
   SHOW_ALERT,
+  LOADING,
 } from "../../utils/action-types";
 import { getErrorMessages } from "../common/Helpers";
 
@@ -23,8 +24,9 @@ const initialState = {
   emails: "",
   emailsError: null,
   buttonDisabled: false,
-  removeMemberId:null,
+  removeMemberId: null,
   members:[],
+  loading: false,
   alert: {
     type: "error",
     content: ""
@@ -54,6 +56,7 @@ const SubscriptionManageMembersContainer = ({
       },
       (err, res) => {
         dispatch({ type: UPDATE_INVITE_BUTTON, payload: false });
+        dispatch({ type: LOADING, payload: false });
         
         if (err) {
           dispatch({
@@ -82,7 +85,7 @@ const SubscriptionManageMembersContainer = ({
       },
       (err, res) => {
         dispatch({ type: UPDATE_INVITE_BUTTON, payload: false });
-        
+
         if (err) {
           dispatch({
             type: SHOW_ALERT,
@@ -141,6 +144,11 @@ const SubscriptionManageMembersContainer = ({
             ...state,
             alert: action.payload
           });
+        case LOADING:
+          return Update({
+            ...state,
+            loading: action.payload
+          });
         case UPDATE_MEMBERS:
           return Update({
             ...state,
@@ -155,7 +163,7 @@ const SubscriptionManageMembersContainer = ({
           return Update({ ...state, buttonDisabled: action.payload });
         case HANDLE_LIST_MEMBERS:
           return UpdateWithSideEffect(
-            { ...state },
+            { ...state, loading: true },
             (state, dispatch) => handleListMembers(state, dispatch)
           );
         case HANDLE_INVITE_MEMBERS:

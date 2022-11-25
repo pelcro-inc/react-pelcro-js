@@ -18,7 +18,8 @@ export const init = () => {
     switchToPaymentView,
     whenEcommerceLoaded,
     addToCart,
-    purchaseItem
+    purchaseItem,
+    setSubscriptionToManageMembers
   } = usePelcro.getStore();
 
   const pelcroLoginButtonsByClass = document.getElementsByClassName(
@@ -55,6 +56,43 @@ export const init = () => {
       pelcroRegisterButtonsByClass[j].addEventListener("click", () =>
         switchView("register")
       );
+    }
+  }
+
+  const pelcroManageMembersButtonsByClass =
+    document.getElementsByClassName("pelcro-manage-members-button");
+
+  if (pelcroManageMembersButtonsByClass.length !== 0) {
+    for (let j = 0; j < pelcroManageMembersButtonsByClass.length; j++) {
+      if (
+        pelcroManageMembersButtonsByClass[j].dataset &&
+        "subscriptionId" in
+          pelcroManageMembersButtonsByClass[j].dataset
+      ) {
+        pelcroManageMembersButtonsByClass[j].addEventListener(
+          "click",
+          (e) => {
+            const subscriptionId = e.target.dataset.subscriptionId;
+            const wasSetSuccessfully =
+              setSubscriptionToManageMembers(subscriptionId);
+            if (!wasSetSuccessfully) {
+              const errorMessage = i18n.t(
+                "messages:invalidSubscription",
+                {
+                  returnObjects: true
+                }
+              );
+              return notify.error(errorMessage);
+            }
+            switchView("manage-members");
+          }
+        );
+      } else {
+        const errorMessage = i18n.t("messages:invalidSubscription", {
+          returnObjects: true
+        });
+        return notify.error(errorMessage);
+      }
     }
   }
 

@@ -1,7 +1,5 @@
 import React, {
   useContext,
-  useState,
-  useEffect,
   useCallback
 } from "react";
 import { store } from "./SubscriptionManageMembersContainer";
@@ -20,7 +18,7 @@ export function SubscriptionManageMembersList(props) {
 
   const {
     dispatch,
-    state: { members, removeMemberId }
+    state: { members, removeMemberId, loading }
   } = useContext(store);
 
   const getMemberStatus = useCallback((sub) => {
@@ -42,6 +40,47 @@ export function SubscriptionManageMembersList(props) {
       icon: <CheckMarkIcon />
     };
   }, []);
+
+  if(loading) {
+    return (
+      <>
+        <tr>
+          <td>
+            <div class="plc-animate-pulse">
+              <div class="plc-bg-gray-200 plc-h-6 plc-m-0.5 plc-rounded"></div>
+            </div>
+          </td>
+          <td>
+            <div class="plc-animate-pulse">
+              <div class="plc-bg-gray-200 plc-h-6 plc-m-0.5 plc-rounded"></div>
+            </div>
+          </td>
+          <td>
+            <div class="plc-animate-pulse">
+              <div class="plc-bg-gray-200 plc-h-6 plc-m-0.5 plc-rounded"></div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="plc-animate-pulse">
+              <div class="plc-bg-gray-200 plc-h-6 plc-m-0.5 plc-rounded"></div>
+            </div>
+          </td>
+          <td>
+            <div class="plc-animate-pulse">
+              <div class="plc-bg-gray-200 plc-h-6 plc-m-0.5 plc-rounded"></div>
+            </div>
+          </td>
+          <td>
+            <div class="plc-animate-pulse">
+              <div class="plc-bg-gray-200 plc-h-6 plc-m-0.5 plc-rounded"></div>
+            </div>
+          </td>
+        </tr>
+      </>
+    );
+  }
 
   const onRemoveClick = (id) => {
     dispatch({ type: UPDATE_REMOVE_MEMBER_ID, payload:id });
