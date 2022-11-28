@@ -552,9 +552,10 @@ class Dashboard extends Component {
               />
 
               <DashboardLink
+                show={showNewsletters()}
                 name={SUB_MENUS.NEWSLETTERS}
                 icon={
-                  <NewsletterIcon className="plc-transform plc-scale-120 plc-w-7 plc-h-8 plc-mr-1 plc-pt-1" />
+                  <NewsletterIcon className="plc-transform plc--translate-x-1 plc-scale-105 plc-w-7 plc-h-8 plc-mr-1 plc-pt-1" />
                 }
                 title={this.locale("labels.Newsletters")}
                 setActiveDashboardLink={this.setActiveDashboardLink}
@@ -746,6 +747,12 @@ function hasInvoices() {
       .list()
       ?.filter((invoice) => invoice.total > 0) ?? [];
   return invoices.length > 0;
+}
+
+function showNewsletters() {
+  const showNewslettersUiSettings =
+    window.Pelcro?.uiSettings?.newsletters?.length > 0 ?? false;
+  return showNewslettersUiSettings;
 }
 
 function hasDonationSubs() {

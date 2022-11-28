@@ -95,39 +95,6 @@ export const DonationsMenu = ({
               )}
             </div>
           </td>
-          <td>
-            {sub.cancel_at_period_end === 1 &&
-              sub.plan.auto_renew &&
-              !sub.is_gift_recipient && (
-                <Button
-                  variant="ghost"
-                  className="plc-text-green-400 focus:plc-ring-green-300 pelcro-dashboard-sub-reactivate-button"
-                  icon={<RefreshIcon />}
-                  onClick={onReactivateClick}
-                  disabled={disableSubmit}
-                  data-key={sub.id}
-                >
-                  {t("labels.reactivate")}
-                </Button>
-              )}
-
-            {!sub.plan.auto_renew ||
-            (sub.plan.auto_renew &&
-              sub.cancel_at_period_end === 0) ? (
-              <Button
-                variant="ghost"
-                className="plc-text-red-500 focus:plc-ring-red-500 pelcro-dashboard-sub-cancel-button"
-                icon={<XCircleIcon />}
-                onClick={onCancelClick}
-                disabled={disableSubmit}
-                data-key={sub.id}
-              >
-                {t("labels.unsubscribe")}
-              </Button>
-            ) : (
-              ""
-            )}
-          </td>
         </tr>
       );
     });
@@ -143,13 +110,10 @@ export const DonationsMenu = ({
           <tr>
             <th className="plc-w-1/4">{t("labels.plan")}</th>
             <th className="plc-w-1/4">{t("labels.startDate")}</th>
-            <th className="plc-w-1/4">{t("labels.status.title")}</th>
-            <th className="plc-w-1/4">{t("labels.actions")}</th>
           </tr>
         </thead>
         <tbody>{subscriptions}</tbody>
       </table>
-      <AddNew title={t("labels.newDonations")} />
     </Card>
   );
 };

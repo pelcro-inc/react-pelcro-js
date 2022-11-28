@@ -251,11 +251,11 @@ export const SubscriptionsItems = ({
               </td>
               <td className="plc-truncate">
                 <span className="plc-font-semibold plc-text-gray-500">
-                {getFormattedPriceByLocal(
-                  sub.plan.amount,
-                  sub.plan.currency,
-                  getPageOrDefaultLanguage()
-                )}
+                  {getFormattedPriceByLocal(
+                    sub.plan.amount,
+                    sub.plan.currency,
+                    getPageOrDefaultLanguage()
+                  )}
                 </span>
               </td>
               <td className="plc-py-2 truncate">
