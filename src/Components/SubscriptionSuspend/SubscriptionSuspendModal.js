@@ -3,9 +3,11 @@ import { SubscriptionSuspendView } from "./SubscriptionSuspendView";
 import {
   Modal,
   ModalBody,
-  ModalFooter
+  ModalFooter,
+  ModalHeader
 } from "../../SubComponents/Modal";
 import { usePelcro } from "../../hooks/usePelcro";
+import { useTranslation } from "react-i18next";
 
 export function SubscriptionSuspendModal({
   onDisplay,
