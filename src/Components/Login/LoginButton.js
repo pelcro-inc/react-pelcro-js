@@ -9,8 +9,10 @@ export const LoginButton = ({ name, onClick, ...otherProps }) => {
     state: {
       emailError,
       passwordError,
+      usernameError,
       email,
       password,
+      username,
       buttonDisabled
     },
     dispatch
@@ -24,11 +26,11 @@ export const LoginButton = ({ name, onClick, ...otherProps }) => {
     setDisabled(
       emailError ||
         passwordError ||
-        !email.length ||
-        !password.length ||
+        usernameError ||
+        ((!email.length || !username.length) && !password.length) ||
         buttonDisabled
     );
-  }, [emailError, passwordError, email, password, buttonDisabled]);
+  }, [emailError, passwordError, usernameError, email, password, username, buttonDisabled]);
 
   return (
     <Button

@@ -1,0 +1,21 @@
+{
+  "labels": {
+    "title":"Cancelar suscripción",
+    "cancelReason":"Razón de la cancelación",
+    "subCancellation": {
+      "goBack":"Volver"
+    }
+  },
+  "messages": {
+    "subscriptionEnd":"Esta suscripción expirará el",
+    "cancelNow":"Cancelar Suscripción Ahora",
+    "cancelLater":"Cancelar al Final del Periodo",
+    "subCancellation": {
+      "isSureToCancelNow":"¿Estás seguro de que quieres cancelar tu suscripción de inmediato?",
+      "isSureToCancel":"¿Estás seguro de que quieres cancelar tu suscripción?",
+      "loading":"Cancelando tu suscripción",
+      "success":"La suscripción se canceló con éxito",
+      "error":"Error al cancelar tu suscripción"
+    }
+  }
+}

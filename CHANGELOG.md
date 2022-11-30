@@ -1,3 +1,24 @@
+# [3.13.0-beta.8](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.13.0-beta.7...v3.13.0-beta.8) (2022-11-30)
+
+
+### Features
+
+* add shipping, billing, and myQRCode translation ([de50bff](https://github.com/pelcro-inc/react-pelcro-js/commit/de50bff440dbe48d7729dc640234b610e6d6c8d0))
+
+# [3.13.0-beta.7](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.13.0-beta.6...v3.13.0-beta.7) (2022-11-25)
+
+
+### Features
+
+* add spanish translation to the project ([#231](https://github.com/pelcro-inc/react-pelcro-js/issues/231)) ([8d56855](https://github.com/pelcro-inc/react-pelcro-js/commit/8d56855c31abd6de73630c6b9f976393c2769e2b))
+
+# [3.13.0-beta.6](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.13.0-beta.5...v3.13.0-beta.6) (2022-11-22)
+
+
+### Features
+
+* add user name login ([#229](https://github.com/pelcro-inc/react-pelcro-js/issues/229)) ([c7077a9](https://github.com/pelcro-inc/react-pelcro-js/commit/c7077a9da47122ec93dee1c34767f2c74b5aacc6))
+
 # [3.13.0-beta.5](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.13.0-beta.4...v3.13.0-beta.5) (2022-11-21)
 
 

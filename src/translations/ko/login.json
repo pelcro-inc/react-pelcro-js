@@ -1,6 +1,7 @@
 {
     "labels": {
       "email": "이메일 입력",
+      "username": "사용자 이름 입력",
       "password": "비밀번호 입력",
       "required": "필수 항목",
       "emailPlaceholder": "이메일",
