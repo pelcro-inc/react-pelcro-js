@@ -1,3 +1,10 @@
+# [3.13.0-beta.8](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.13.0-beta.7...v3.13.0-beta.8) (2022-11-30)
+
+
+### Features
+
+* add shipping, billing, and myQRCode translation ([de50bff](https://github.com/pelcro-inc/react-pelcro-js/commit/de50bff440dbe48d7729dc640234b610e6d6c8d0))
+
 # [3.13.0-beta.7](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.13.0-beta.6...v3.13.0-beta.7) (2022-11-25)
 
 
