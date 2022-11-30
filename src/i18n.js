@@ -57,7 +57,6 @@ import select_fr from "./translations/fr/select.json";
 import notification_fr from "./translations/fr/notification.json";
 import verifyEmail_fr from "./translations/fr/verifyEmail.json";
 import invoiceDetails_fr from "./translations/fr/InvoiceDetails.json";
-import subscriptionCancel_fr from "./translations/fr/subscriptionCancel.json";
 import subscriptionSuspend_fr from "./translations/fr/subscriptionSuspend.json";
 
 import common_ko from "./translations/ko/common.json";
@@ -84,7 +83,6 @@ import select_ko from "./translations/ko/select.json";
 import notification_ko from "./translations/ko/notification.json";
 import verifyEmail_ko from "./translations/ko/verifyEmail.json";
 import invoiceDetails_ko from "./translations/ko/InvoiceDetails.json";
-import subscriptionCancel_ko from "./translations/ko/subscriptionCancel.json";
 import subscriptionSuspend_ko from "./translations/ko/subscriptionSuspend.json";
 
 import common_es from "./translations/es/common.json";
