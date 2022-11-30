@@ -96,7 +96,7 @@ export function SubscriptionManageMembersList(props) {
         >
           <td className="plc-truncate">
             <span className="plc-font-semibold plc-text-gray-500">
-              {member?.subscription?.email}
+              {member?.invitation_email}
             </span>
           </td>
           <td className="plc-py-2">
