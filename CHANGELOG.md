@@ -1,3 +1,10 @@
+# [3.13.0-beta.9](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.13.0-beta.8...v3.13.0-beta.9) (2022-11-30)
+
+
+### Features
+
+* 20221121 manage members ([#232](https://github.com/pelcro-inc/react-pelcro-js/issues/232)) ([6ed13a8](https://github.com/pelcro-inc/react-pelcro-js/commit/6ed13a810690503227ef6e2425efc159e6e0c5a7))
+
 # [3.13.0-beta.8](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.13.0-beta.7...v3.13.0-beta.8) (2022-11-30)
 
 
