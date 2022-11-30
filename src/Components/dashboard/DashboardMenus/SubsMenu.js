@@ -85,7 +85,7 @@ export const SubscriptionsItems = ({
     switchView,
     setSubscriptionToCancel,
     setSubscriptionToSuspend,
-    isAuthenticated
+    set
   } = usePelcro();
 
   const subs = getNonDonationSubs();
@@ -150,6 +150,14 @@ export const SubscriptionsItems = ({
         setProductAndPlan(product, plan);
         setSubscriptionIdToRenew(sub.id);
         setView("plan-select");
+      };
+
+      // Manage members click
+      const onManageMembersClick = () => {
+        const subscriptionToManageMembers = sub;
+
+        set({ subscriptionToManageMembers });
+        setView("manage-members");
       };
 
       // Suspend click
@@ -341,6 +349,19 @@ export const SubscriptionsItems = ({
                 ) : (
                   ""
                 )}
+
+                {sub?.plan?.type === 'membership' && (
+                    <Button
+                      variant="ghost"
+                      className="plc-text-blue-400 pelcro-dashboard-sub-manage-members-button"
+                      icon={<RefreshIcon />}
+                      onClick={onManageMembersClick}
+                      disabled={disableSubmit}
+                      data-key={sub.id}
+                    >
+                      {t("labels.manageMembers")}
+                    </Button>
+                  )}
               </td>
 
               <td>

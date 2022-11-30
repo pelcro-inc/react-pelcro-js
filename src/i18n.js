@@ -26,6 +26,11 @@ import notification_en from "./translations/en/notification.json";
 import verifyEmail_en from "./translations/en/verifyEmail.json";
 import invoiceDetails_en from "./translations/en/InvoiceDetails.json";
 import subscriptionCancel_en from "./translations/en/subscriptionCancel.json";
+import subscriptionCancel_fr from "./translations/fr/subscriptionCancel.json";
+import subscriptionCancel_ko from "./translations/ko/subscriptionCancel.json";
+import subscriptionManageMembers_en from "./translations/en/subscriptionManageMembers.json";
+import subscriptionManageMembers_fr from "./translations/fr/subscriptionManageMembers.json";
+import subscriptionManageMembers_ko from "./translations/ko/subscriptionManageMembers.json";
 import subscriptionSuspend_en from "./translations/en/subscriptionSuspend.json";
 
 import common_fr from "./translations/fr/common.json";
@@ -52,7 +57,6 @@ import select_fr from "./translations/fr/select.json";
 import notification_fr from "./translations/fr/notification.json";
 import verifyEmail_fr from "./translations/fr/verifyEmail.json";
 import invoiceDetails_fr from "./translations/fr/InvoiceDetails.json";
-import subscriptionCancel_fr from "./translations/fr/subscriptionCancel.json";
 import subscriptionSuspend_fr from "./translations/fr/subscriptionSuspend.json";
 
 import common_ko from "./translations/ko/common.json";
@@ -79,7 +83,6 @@ import select_ko from "./translations/ko/select.json";
 import notification_ko from "./translations/ko/notification.json";
 import verifyEmail_ko from "./translations/ko/verifyEmail.json";
 import invoiceDetails_ko from "./translations/ko/InvoiceDetails.json";
-import subscriptionCancel_ko from "./translations/ko/subscriptionCancel.json";
 import subscriptionSuspend_ko from "./translations/ko/subscriptionSuspend.json";
 
 import common_es from "./translations/es/common.json";
@@ -138,7 +141,8 @@ const resources = {
     notification: notification_en,
     invoiceDetails: invoiceDetails_en,
     subscriptionCancel: subscriptionCancel_en,
-    subscriptionSuspend: subscriptionSuspend_en
+    subscriptionSuspend: subscriptionSuspend_en,
+    subscriptionManageMembers: subscriptionManageMembers_en
   },
   fr: {
     common: common_fr,
@@ -166,7 +170,8 @@ const resources = {
     notification: notification_fr,
     invoiceDetails: invoiceDetails_fr,
     subscriptionCancel: subscriptionCancel_fr,
-    subscriptionSuspend: subscriptionSuspend_fr
+    subscriptionSuspend: subscriptionSuspend_fr,
+    subscriptionManageMembers: subscriptionManageMembers_fr
   },
   ko: {
     common: common_ko,
@@ -194,7 +199,8 @@ const resources = {
     notification: notification_ko,
     invoiceDetails: invoiceDetails_ko,
     subscriptionCancel: subscriptionCancel_ko,
-    subscriptionSuspend: subscriptionSuspend_ko
+    subscriptionSuspend: subscriptionSuspend_ko,
+    subscriptionManageMembers: subscriptionManageMembers_ko
   },
   es: {
     common: common_es,

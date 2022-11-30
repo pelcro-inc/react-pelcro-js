@@ -362,6 +362,10 @@ export const initViewFromURL = () => {
         return showInvoiceDetailsFromUrl();
       }
 
+      if (view === "manage-members") {
+        return showSubscriptionManageMembersFromUrl();
+      }
+
       switchView(view);
     });
   }
@@ -646,6 +650,32 @@ const showInvoiceDetailsFromUrl = () => {
       }
 
       return switchView("invoice-details");
+    })
+  });
+};
+
+const showSubscriptionManageMembersFromUrl = () => {
+  const { isAuthenticated, setSubscriptionToManageMembers, whenUserReady, whenSiteReady, switchView } =
+    usePelcro.getStore();
+
+  whenSiteReady(() => {
+    if (!isAuthenticated()) {
+      return switchView("login");
+    }
+    
+    whenUserReady(()=> {
+      const subscriptionId = window.Pelcro.helpers.getURLParameter("subscription_id");
+      
+      const wasSetSuccessfully = setSubscriptionToManageMembers(subscriptionId);
+      if (!wasSetSuccessfully) {
+        const errorMessage = i18n.t("messages:invalidSubscription", {
+          returnObjects: true
+        });
+
+        return notify.error(errorMessage);
+      }
+
+      return switchView("manage-members");
     })
   });
 };
