@@ -91,7 +91,7 @@ export const OrderItems = ({
                 </span>
               </td>
               <td>
-                <p className="plc-font-semibold ">{order.created}</p>
+                <p className="plc-font-semibold ">{order?.items?.[0].created_at}</p>
               </td>
 
               <td>
