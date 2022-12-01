@@ -17,6 +17,7 @@ import {
 } from "../../../utils/utils";
 import { usePelcro } from "../../../hooks/usePelcro";
 import { Card } from "../Card";
+import { AddNew } from "../AddNew";
 
 export const SubscriptionsMenu = (props) => {
   const { t } = useTranslation("dashboard");
@@ -44,21 +45,13 @@ export const SubscriptionsMenu = (props) => {
         <Accordion>
           <SubscriptionsItems {...props} />
         </Accordion>
+      </table>
+      <AddNew
+        title={t("labels.addSubscription")}
+        onClick={props.displayProductSelect}
+      />
+      <table className="plc-w-full plc-table-fixed pelcro-subscriptions-table plc-text-left">
         <tbody>
-          <tr>
-            <td colSpan="5" className="plc-p-1">
-              <Button
-                variant="ghost"
-                icon={
-                  <PlusIcon className="plc-w-4 plc-h-4 plc-mr-1" />
-                }
-                className="plc-w-full plc-h-8 plc-font-semibold plc-tracking-wider plc-text-gray-900 plc-uppercase plc-rounded-none hover:plc-bg-gray-100"
-                onClick={props.displayProductSelect}
-              >
-                {t("labels.addSubscription")}
-              </Button>
-            </td>
-          </tr>
           <tr>
             <td colSpan="5" className="plc-p-1">
               <Button
