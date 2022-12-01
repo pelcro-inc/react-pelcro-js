@@ -17,6 +17,7 @@
 * add user name login ([#229](https://github.com/pelcro-inc/react-pelcro-js/issues/229)) ([c7077a9](https://github.com/pelcro-inc/react-pelcro-js/commit/c7077a9da47122ec93dee1c34767f2c74b5aacc6))
 * enable the client to override the Login text in case the user is authenticated or not ([#221](https://github.com/pelcro-inc/react-pelcro-js/issues/221)) ([e67d8b2](https://github.com/pelcro-inc/react-pelcro-js/commit/e67d8b25000b7ed0da0051c1aaf3680a4d8965cb))
 * free plan subscription ([#220](https://github.com/pelcro-inc/react-pelcro-js/issues/220)) ([7939949](https://github.com/pelcro-inc/react-pelcro-js/commit/7939949898b1272ceb7db4ef32dc4cfa236242cd))
+* add pelcro-dashboard-button ([#233](https://github.com/pelcro-inc/react-pelcro-js/issues/233)) ([71f028c](https://github.com/pelcro-inc/react-pelcro-js/commit/71f028c50d8c96813dbd9daf742b08dd426184f2))
 
 # [3.13.0-beta.9](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.13.0-beta.8...v3.13.0-beta.9) (2022-11-30)
 
