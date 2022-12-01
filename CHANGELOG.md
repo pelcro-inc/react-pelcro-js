@@ -1,3 +1,10 @@
+# [3.13.0-beta.10](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.13.0-beta.9...v3.13.0-beta.10) (2022-12-01)
+
+
+### Features
+
+* add pelcro-dashboard-button ([#233](https://github.com/pelcro-inc/react-pelcro-js/issues/233)) ([71f028c](https://github.com/pelcro-inc/react-pelcro-js/commit/71f028c50d8c96813dbd9daf742b08dd426184f2))
+
 # [3.13.0-beta.9](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.13.0-beta.8...v3.13.0-beta.9) (2022-11-30)
 
 
