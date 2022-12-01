@@ -22,6 +22,20 @@ export const init = () => {
     setSubscriptionToManageMembers
   } = usePelcro.getStore();
 
+  const pelcroDashboardButtonsByClass = document.getElementsByClassName(
+    "pelcro-dashboard-button"
+  );
+
+  if (pelcroDashboardButtonsByClass.length !== 0) {
+    for (let i = 0; i < pelcroDashboardButtonsByClass.length; i++) {
+      pelcroDashboardButtonsByClass[i].addEventListener("click", () => {
+        if (isAuthenticated()) {
+          switchView("dashboard");
+        }
+      });
+    }
+  }
+
   const pelcroLoginButtonsByClass = document.getElementsByClassName(
     "pelcro-login-button"
   );
