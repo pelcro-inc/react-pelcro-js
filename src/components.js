@@ -70,6 +70,7 @@ export { DiscountedPrice } from "./Components/PaymentMethod/DiscountedPrice";
 export { TaxAmount } from "./Components/PaymentMethod/TaxAmount";
 export { UserUpdateEmail } from "./Components/UserUpdate/UserUpdateEmail";
 export { UserUpdateButton } from "./Components/UserUpdate/UserUpdateButton";
+export { UserUpdateUsername } from "./Components/UserUpdate/UserUpdateUsername";
 export { UserUpdateContainer } from "./Components/UserUpdate/UserUpdateContainer";
 export { UserUpdateView } from "./Components/UserUpdate/UserUpdateView";
 export { UserUpdateModal } from "./Components/UserUpdate/UserUpdateModal";

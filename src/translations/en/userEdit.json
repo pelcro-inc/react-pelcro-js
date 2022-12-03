@@ -5,6 +5,7 @@
     "email": "Email",
     "firstName": "First name",
     "lastName": "Last name",
+    "username": "Username",
     "phone": "Phone",
     "submit": "Submit",
     "required": "Required",
