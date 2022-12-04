@@ -1,4 +1,4 @@
-// The button in the lower right that shows the dashboard.
+// The button in the lower left that shows the dashboard.
 
 import React from "react";
 import { usePelcro } from "../../hooks/usePelcro";
@@ -7,7 +7,7 @@ export const DashboardOpenButton = () => {
   const { switchView } = usePelcro();
 
   return (
-    <div className="plc-fixed plc-right-4 plc-bottom-4 pelcro-open-dashboard-btn">
+    <div className="plc-fixed plc-left-4 plc-bottom-4 pelcro-open-dashboard-btn">
       <button
         className="plc-bg-white plc-border-2 plc-rounded-full focus:plc-outline-none plc-border-primary-300 hover:plc-bg-white"
         name="menu"

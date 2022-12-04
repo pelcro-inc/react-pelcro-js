@@ -225,6 +225,7 @@ export { Input } from "./SubComponents/Input";
 export { TextArea } from "./SubComponents/TextArea";
 export { Link } from "./SubComponents/Link";
 export { Modal } from "./SubComponents/Modal";
+export { ModalHeader } from "./SubComponents/Modal";
 export { ModalBody } from "./SubComponents/Modal";
 export { ModalFooter } from "./SubComponents/Modal";
 export { Radio } from "./SubComponents/Radio";
