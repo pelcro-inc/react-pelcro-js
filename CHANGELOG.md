@@ -1,3 +1,16 @@
+# [4.0.0-alpha.12](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.11...v4.0.0-alpha.12) (2022-12-04)
+
+
+### Bug Fixes
+
+* new subscription and orders date ([d0b34d6](https://github.com/pelcro-inc/react-pelcro-js/commit/d0b34d62970561bba7c81f1fe5bdf1b5e3daa03e))
+
+
+### Features
+
+* edit on dashboard items ([50e925a](https://github.com/pelcro-inc/react-pelcro-js/commit/50e925a21524ed995cea0b1c02433c6b8fc64f0a))
+* export ModalHeader and add authorship classname ([6bab4c5](https://github.com/pelcro-inc/react-pelcro-js/commit/6bab4c53b6835741e66c097a92552d22df87fdc4))
+
 # [4.0.0-alpha.11](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.10...v4.0.0-alpha.11) (2022-11-24)
 
 
