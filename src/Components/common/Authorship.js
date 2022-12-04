@@ -9,7 +9,9 @@ const Authorship = () => {
       target="_blank"
       className="plc-inline-flex plc-flex-col plc-items-center"
     >
-      <span className="plc-inline-flex plc-mb-2">Powered by</span>
+      <span className="plc-inline-flex plc-mb-2 pelcro-authorship">
+        Powered by
+      </span>
       <AuthorshipIcon className="pelcro-authorship" />
     </a>
   );
