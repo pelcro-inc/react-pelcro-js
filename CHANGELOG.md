@@ -1,3 +1,10 @@
+# [3.13.0-beta.12](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.13.0-beta.11...v3.13.0-beta.12) (2022-12-05)
+
+
+### Features
+
+* username edit in profile modal ([#235](https://github.com/pelcro-inc/react-pelcro-js/issues/235)) ([60fd7da](https://github.com/pelcro-inc/react-pelcro-js/commit/60fd7dab187d07b936ac12abb6a07852c123262d))
+
 # [3.13.0-beta.11](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.13.0-beta.10...v3.13.0-beta.11) (2022-12-03)
 
 
