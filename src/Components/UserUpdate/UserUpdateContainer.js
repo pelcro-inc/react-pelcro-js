@@ -123,7 +123,7 @@ const UserUpdateContainer = ({
         email: email,
         first_name: firstName,
         last_name: lastName,
-        username: username,
+        ...(username && { username }),
         display_name: displayName,
         phone: phone,
         tin: tin,
@@ -277,9 +277,11 @@ const UserUpdateContainer = ({
     >
       <Provider value={{ state, dispatch }}>
         {children.length
-          ? children.map((child, i) =>
-              React.cloneElement(child, { store, key: i })
-            )
+          ? children.map((child, i) => {
+              if (child) {
+                return React.cloneElement(child, { store, key: i });
+              }
+            })
           : React.cloneElement(children, { store })}
       </Provider>
     </div>
