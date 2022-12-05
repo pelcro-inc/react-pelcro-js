@@ -13,7 +13,6 @@ import { UserUpdateTin } from "./UserUpdateTin";
 
 export const UserUpdateView = (props) => {
   const { t } = useTranslation("userEdit");
-
   const supportsTap = Boolean(
     window.Pelcro.site.read()?.tap_gateway_settings
   );
