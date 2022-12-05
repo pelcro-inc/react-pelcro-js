@@ -17,6 +17,7 @@ export const UserUpdateView = (props) => {
   const supportsTap = Boolean(
     window.Pelcro.site.read()?.tap_gateway_settings
   );
+  const showUsernameInput = window.Pelcro?.uiSettings?.enableLoginWithUsername;
 
   return (
     <div id="pelcro-user-update-view">
@@ -54,12 +55,14 @@ export const UserUpdateView = (props) => {
               required={supportsTap ? true : false}
             />
           </div>
-          <UserUpdateUsername
-            id="pelcro-input-user-name"
-            autoComplete="user-name"
-            errorId="pelcro-input-user-name-error"
-            label={t("labels.username")}
-          />
+          {showUsernameInput && (
+            <UserUpdateUsername
+              id="pelcro-input-user-name"
+              autoComplete="user-name"
+              errorId="pelcro-input-user-name-error"
+              label={t("labels.username")}
+            />
+          )}
           <div className="plc-flex plc-items-start">
             <UserUpdatePhone
               id="pelcro-input-phone"
