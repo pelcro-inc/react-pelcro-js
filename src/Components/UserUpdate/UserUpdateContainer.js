@@ -11,6 +11,8 @@ import {
   SET_FIRST_NAME_ERROR,
   SET_LAST_NAME,
   SET_LAST_NAME_ERROR,
+  SET_USERNAME,
+  SET_USERNAME_ERROR,
   SET_DISPLAY_NAME,
   SET_PHONE,
   SET_TIN,
@@ -29,6 +31,8 @@ const initialState = {
   firstNameError: null,
   lastName: window.Pelcro.user.read()?.last_name,
   lastNameError: null,
+  username: window.Pelcro.user.read()?.username,
+  usernameError: null,
   displayName: window.Pelcro.user.read()?.display_name,
   phone: window.Pelcro.user.read()?.phone,
   phoneError: null,
@@ -76,6 +80,10 @@ const UserUpdateContainer = ({
         payload: window.Pelcro.user.read()?.last_name
       },
       {
+        type: SET_USERNAME,
+        payload: window.Pelcro.user.read()?.username
+      },
+      {
         type: SET_DISPLAY_NAME,
         payload: window.Pelcro.user.read()?.display_name
       },
@@ -101,6 +109,7 @@ const UserUpdateContainer = ({
       email,
       firstName,
       lastName,
+      username,
       phone,
       tin,
       textFields,
@@ -114,6 +123,7 @@ const UserUpdateContainer = ({
         email: email,
         first_name: firstName,
         last_name: lastName,
+        ...(username && { username }),
         display_name: displayName,
         phone: phone,
         tin: tin,
@@ -205,6 +215,20 @@ const UserUpdateContainer = ({
             lastName: ""
           });
 
+        case SET_USERNAME:
+          return Update({
+            ...state,
+            username: action.payload,
+            usernameError: null
+          });
+
+        case SET_USERNAME_ERROR:
+          return Update({
+            ...state,
+            usernameError: action.payload,
+            username: ""
+          });
+
         case SET_PHONE:
           return Update({
             ...state,
@@ -253,9 +277,11 @@ const UserUpdateContainer = ({
     >
       <Provider value={{ state, dispatch }}>
         {children.length
-          ? children.map((child, i) =>
-              React.cloneElement(child, { store, key: i })
-            )
+          ? children.map((child, i) => {
+              if (child) {
+                return React.cloneElement(child, { store, key: i });
+              }
+            })
           : React.cloneElement(children, { store })}
       </Provider>
     </div>

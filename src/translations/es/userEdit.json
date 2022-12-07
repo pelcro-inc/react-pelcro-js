@@ -5,6 +5,7 @@
     "email":"Correo",
     "firstName":"Nombre",
     "lastName":"Apellido",
+    "username": "Nombre de usuario",
     "phone":"Teléfono",
     "submit":"Enviar",
     "required":"Obligatorio",

@@ -5,6 +5,7 @@
     "email": "Address courriel",
     "firstName": "Prénom",
     "lastName": "Nom de famille",
+    "username": "Nom d'utilisateur",
     "phone": "Numéro de téléphone",
     "submit": "Soumettre",
     "required": "Champs obligatoires",
