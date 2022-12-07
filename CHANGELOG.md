@@ -1,3 +1,10 @@
+# [3.13.0-beta.13](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.13.0-beta.12...v3.13.0-beta.13) (2022-12-07)
+
+
+### Bug Fixes
+
+* members list alignment & pending color ([#236](https://github.com/pelcro-inc/react-pelcro-js/issues/236)) ([891c2d4](https://github.com/pelcro-inc/react-pelcro-js/commit/891c2d4c41039899d23b0b9e580e32e734d1258b))
+
 # [3.13.0-beta.12](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.13.0-beta.11...v3.13.0-beta.12) (2022-12-05)
 
 
