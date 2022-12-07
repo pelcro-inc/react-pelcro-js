@@ -44,7 +44,7 @@ export function SubscriptionManageMembersView(props) {
               <hr className="plc-w-full plc-border-gray-300" />
             </div>
             {/* table */}
-            <table className="plc-w-full plc-table-fixed">
+            <table className="plc-w-full plc-table-fixed plc-text-center">
               <thead className="plc-text-xs plc-font-semibold plc-tracking-wider plc-text-gray-400 plc-uppercase ">
                 <tr>
                   <th className="plc-w-6/12">{t("labels.email")}</th>
