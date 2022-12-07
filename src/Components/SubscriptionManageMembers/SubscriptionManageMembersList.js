@@ -26,8 +26,8 @@ export function SubscriptionManageMembersList(props) {
       return {
         title: sub.status,
         content: sub.status,
-        textColor: "plc-text-orange-700",
-        bgColor: "plc-bg-orange-100",
+        textColor: "plc-text-red-500",
+        bgColor: "plc-bg-red-100",
         icon: <ExclamationIcon />
       };
     }
