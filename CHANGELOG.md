@@ -1,3 +1,10 @@
+# [3.13.0-beta.14](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.13.0-beta.13...v3.13.0-beta.14) (2022-12-08)
+
+
+### Bug Fixes
+
+* manage members list UI ([#237](https://github.com/pelcro-inc/react-pelcro-js/issues/237)) ([e4315b2](https://github.com/pelcro-inc/react-pelcro-js/commit/e4315b27eac6266acf2ff32a9f9cbc82edcf1214))
+
 # [3.13.0-beta.13](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.13.0-beta.12...v3.13.0-beta.13) (2022-12-07)
 
 
