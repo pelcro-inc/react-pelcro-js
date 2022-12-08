@@ -11,7 +11,7 @@ import {
 import { ReactComponent as CheckMarkIcon } from "../../assets/check-mark.svg";
 import { ReactComponent as ExclamationIcon } from "../../assets/exclamation.svg";
 import { ReactComponent as XCircleIcon } from "../../assets/x-icon-solid.svg";
-import { Button } from "../../components";
+import { Button, Tooltip } from "../../components";
 
 export function SubscriptionManageMembersList(props) {
   const { t } = useTranslation("subscriptionManageMembers");
@@ -26,8 +26,8 @@ export function SubscriptionManageMembersList(props) {
       return {
         title: sub.status,
         content: sub.status,
-        textColor: "plc-text-red-500",
-        bgColor: "plc-bg-red-100",
+        textColor: "plc-text-yellow-500",
+        bgColor: "plc-bg-yellow-100",
         icon: <ExclamationIcon />
       };
     }
@@ -94,7 +94,7 @@ export function SubscriptionManageMembersList(props) {
           key={member.id}
           className={`plc-w-full plc-align-middle plc-cursor-pointer accordion-header hover:plc-bg-gray-50 plc-text-center`}
         >
-          <td className="plc-truncate">
+          <td className="plc-truncate plc-text-left" title={member?.invitation_email}>
             <span className="plc-font-semibold plc-text-gray-500">
               {member?.invitation_email}
             </span>
