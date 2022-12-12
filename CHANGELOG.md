@@ -1,3 +1,10 @@
+# [3.13.0-beta.16](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.13.0-beta.15...v3.13.0-beta.16) (2022-12-12)
+
+
+### Bug Fixes
+
+* Purchase flow interruption when signing in or verifying email ([#239](https://github.com/pelcro-inc/react-pelcro-js/issues/239)) ([54532e6](https://github.com/pelcro-inc/react-pelcro-js/commit/54532e63529b876c590e00759959c1b9a3a60690))
+
 # [3.13.0-beta.15](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.13.0-beta.14...v3.13.0-beta.15) (2022-12-12)
 
 
