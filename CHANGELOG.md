@@ -1,3 +1,10 @@
+# [3.13.0-beta.15](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.13.0-beta.14...v3.13.0-beta.15) (2022-12-12)
+
+
+### Features
+
+* redeem the gift and create address only if required by product ([efb1db2](https://github.com/pelcro-inc/react-pelcro-js/commit/efb1db28a4ce75e58cef2ecc444e86c82f027e50))
+
 # [3.13.0-beta.14](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.13.0-beta.13...v3.13.0-beta.14) (2022-12-08)
 
 
