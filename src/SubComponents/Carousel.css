@@ -11,7 +11,7 @@
   display: block;
   overflow: hidden;
   padding: 0;
-  margin: 0 -10px;
+  /* margin: 0 -10px; */
 }
 .pelcro-root .slick-list:focus {
   outline: none;
@@ -42,7 +42,7 @@
   visibility: hidden;
 }
 .pelcro-root .slick-slide {
-  display: flex;
+  display: flex !important;
   align-self: stretch;
   height: unset;
   margin: 0 10px;
