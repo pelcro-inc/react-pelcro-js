@@ -1,3 +1,10 @@
+# [4.0.0-alpha.13](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.12...v4.0.0-alpha.13) (2022-12-12)
+
+
+### Features
+
+* refine the carousel responsive behavior ([e15e193](https://github.com/pelcro-inc/react-pelcro-js/commit/e15e193fea7aab2088b96a113d36961ce4fa3fe5))
+
 # [4.0.0-alpha.12](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.11...v4.0.0-alpha.12) (2022-12-04)
 
 
