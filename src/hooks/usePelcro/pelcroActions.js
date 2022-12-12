@@ -170,8 +170,10 @@ export class PelcroActions {
     if (!subscriptionToManageMembers) {
       return console.error("invalid subscription id");
     }
-    if (subscriptionToManageMembers?.plan?.type !== 'membership') {
-      return console.error("subscription is not from type membership");
+    if (subscriptionToManageMembers?.plan?.type !== "membership") {
+      return console.error(
+        "subscription is not from type membership"
+      );
     }
     this.set({ subscriptionToManageMembers });
     return true;

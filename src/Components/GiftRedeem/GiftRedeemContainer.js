@@ -9,10 +9,13 @@ import {
   SET_GIFT_CODE,
   HANDLE_SUBMIT,
   DISABLE_SUBMIT,
-  SHOW_ALERT
+  SHOW_ALERT,
+  LOADING
 } from "../../utils/action-types";
+import { getErrorMessages } from "../common/Helpers";
 
 const initialState = {
+  isSubmitting: false,
   giftCode: "",
   buttonDisabled: true,
   alert: {
@@ -29,10 +32,22 @@ const GiftRedeemContainer = ({
   onSuccess = () => {},
   onFailure = () => {},
   onDisplay = () => {},
-  children
+  children,
+  ...props
 }) => {
   const { t } = useTranslation("register");
   const { set } = usePelcro();
+
+  const {
+    switchView,
+    switchToAddressView,
+    isAuthenticated,
+    subscriptionIdToRenew: subscriptionIdToRenewFromStore
+  } = usePelcro();
+  const subscriptionIdToRenew =
+    props.subscriptionIdToRenew ??
+    subscriptionIdToRenewFromStore ??
+    undefined;
 
   useEffect(() => {
     onDisplay();
@@ -50,7 +65,41 @@ const GiftRedeemContainer = ({
       onFailure();
     } else {
       set({ giftCode });
-      onSuccess(giftCode);
+      if (!isAuthenticated()) {
+        switchView("register");
+      } else {
+        console.log("Shaker");
+        window.Pelcro.subscription.redeemGift(
+          {
+            auth_token: window.Pelcro.user.read().auth_token,
+            gift_code: giftCode,
+            // redeem gift as a future phase of an existing subscription
+            subscription_id: subscriptionIdToRenew
+          },
+          (err, res) => {
+            dispatch({ type: LOADING, payload: false });
+
+            if (err) {
+              dispatch({
+                type: SHOW_ALERT,
+                payload: {
+                  type: "error",
+                  content: getErrorMessages(err)
+                }
+              });
+              if (
+                getErrorMessages(err) === "Address ID is required"
+              ) {
+                switchToAddressView();
+              } else {
+                return onFailure(err);
+              }
+            } else {
+              return onSuccess(giftCode);
+            }
+          }
+        );
+      }
     }
   };
 
@@ -71,9 +120,16 @@ const GiftRedeemContainer = ({
 
         case DISABLE_SUBMIT:
           return Update({ ...state, buttonDisabled: action.payload });
+
+        case LOADING:
+          return Update({
+            ...state,
+            isSubmitting: action.payload
+          });
+
         case HANDLE_SUBMIT:
           return UpdateWithSideEffect(
-            { ...state, buttonDisabled: true },
+            { ...state, isSubmitting: true, buttonDisabled: true },
             (state, dispatch) => handleRedeem(state, dispatch)
           );
         default:
