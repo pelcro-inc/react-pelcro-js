@@ -259,8 +259,8 @@ class SelectModal extends Component {
     const { image, description } = this.state.product;
 
     return (
-      <div className="productTabs plc-mb-8">
-        <ul className="tabs plc-flex plc-items-center plc-text-center plc-border-b plc-border-gray-300 plc-mb-8 plc-overflow-x-auto">
+      <div className="productTabs">
+        <ul className="tabs plc-flex plc-items-center plc-text-center plc-border-b plc-border-gray-300 plc-mb-4 plc-overflow-x-auto">
           {this.state.productList.map((product, index) => (
             <li
               key={product.id}
@@ -269,12 +269,12 @@ class SelectModal extends Component {
                   ? "activeTab"
                   : ""
               }`}
-              className="plc-relative"
+              className="plc-relative plc-mx-1"
             >
               <button
                 onClick={productButtonCallback}
                 data-key={product.id}
-                className="plc-px-4 plc-py-2 plc-text-gray-600 focus:plc-outline-none plc-whitespace-nowrap"
+                className="plc-px-4 plc-py-2 plc-bg-white plc-border plc-border-gray-200 plc-rounded plc-text-gray-600 focus:plc-outline-none plc-whitespace-nowrap"
               >
                 {product.name}
               </button>
@@ -288,7 +288,9 @@ class SelectModal extends Component {
               <img src={image} alt="Product Image" />
             </figure>
           )}
-          {description && <p>{description}</p>}
+          {description && (
+            <p className="plc-text-center">{description}</p>
+          )}
         </div>
       </div>
     );
@@ -372,7 +374,7 @@ class SelectModal extends Component {
             onChange={this.selectPlan}
           >
             <div className="plc-p-4 plc-text-center plc-flex plc-flex-col plc-justify-center plc-items-center plc-w-full plc-border-b plc-border-gray-300">
-              <h4 className="pelcro-select-plan-title plc-font-medium plc-text-xl">
+              <h4 className="pelcro-select-plan-title plc-font-medium plc-text-xl plc-break-all">
                 {plan.nickname}
               </h4>
               <p className="plc-text-sm plc-mt-1 pelcro-select-plan-description">

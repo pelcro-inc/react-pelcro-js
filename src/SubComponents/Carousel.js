@@ -5,7 +5,7 @@ import { ReactComponent as ArrowThinLeft } from "../assets/arrow-thin-left.svg";
 
 const NextArrow = ({ onClick, className }) => (
   <button
-    className={`plc-text-white plc-w-11 plc-h-11 plc-bg-primary plc-flex plc-items-center plc-justify-center plc-rounded-full plc-text-sm plc-absolute plc-top-1/2 plc--right-16 plc-transform plc--translate-y-1/2 plc-border plc-border-primary hover:plc-bg-white hover:plc-text-primary ${className}`}
+    className={`sm:plc-flex plc-hidden plc-text-white plc-w-11 plc-h-11 plc-bg-primary  plc-items-center plc-justify-center plc-rounded-full plc-text-sm plc-absolute plc-top-1/2 plc--right-16 plc-transform plc--translate-y-1/2 plc-border plc-border-primary hover:plc-bg-white hover:plc-text-primary ${className}`}
     onClick={onClick}
   >
     <ArrowThinRight
@@ -19,7 +19,7 @@ const NextArrow = ({ onClick, className }) => (
 
 const PrevArrow = ({ onClick, className }) => (
   <button
-    className={`plc-text-white plc-w-11 plc-h-11 plc-bg-primary plc-flex plc-items-center plc-justify-center plc-rounded-full plc-text-sm plc-absolute plc-top-1/2 plc--left-16 plc-transform plc--translate-y-1/2 plc-border plc-border-primary hover:plc-bg-white hover:plc-text-primary ${className}`}
+    className={`sm:plc-flex plc-hidden plc-text-white plc-w-11 plc-h-11 plc-bg-primary plc-items-center plc-justify-center plc-rounded-full plc-text-sm plc-absolute plc-top-1/2 plc--left-16 plc-transform plc--translate-y-1/2 plc-border plc-border-primary hover:plc-bg-white hover:plc-text-primary ${className}`}
     onClick={onClick}
   >
     <ArrowThinLeft
@@ -69,12 +69,7 @@ export function Carousel({
   };
 
   return (
-    // <div
-    //   className={`carousel-wrapper plc-relative plc-px-16 xl:plc-px-0 ${
-    //     slidesCount > 3 && `plc-px-16 xl:plc-px-16`
-    //   }`}
-    // >
-    <div className="carousel-wrapper plc-relative plc-px-16">
+    <div className="carousel-wrapper plc-relative sm:plc-px-16 plc-px-0">
       <Slider ref={ref} {...settings}>
         {children}
       </Slider>
