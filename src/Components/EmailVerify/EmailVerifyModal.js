@@ -12,6 +12,21 @@ export const EmailVerifyModal = ({
   onClose,
   ...otherProps
 }) => {
+  const { product, plan, switchToAddressView, switchToPaymentView } =
+    usePelcro();
+
+  const onSuccess = (res) => {
+    props.onSuccess?.(res);
+
+    if (product && plan) {
+      if (product.address_required) {
+        return switchToAddressView();
+      } else {
+        return switchToPaymentView();
+      }
+    }
+  };
+
   return (
     <Modal
       onDisplay={onDisplay}
@@ -19,7 +34,7 @@ export const EmailVerifyModal = ({
       id="pelcro-email-verify-modal"
     >
       <ModalBody>
-        <EmailVerifyView {...otherProps} />
+        <EmailVerifyView onSuccess={onSuccess} {...otherProps} />
       </ModalBody>
       <ModalFooter>
         <Authorship />

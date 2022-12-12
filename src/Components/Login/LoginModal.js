@@ -20,13 +20,28 @@ import { getStableViewID } from "../../utils/utils";
  */
 export function LoginModal({ onDisplay, onClose, ...props }) {
   const { t } = useTranslation("login");
-  const { switchView, resetView, invoice } = usePelcro();
+  const {
+    switchView,
+    resetView,
+    product,
+    plan,
+    switchToAddressView,
+    switchToPaymentView
+  } = usePelcro();
 
   const onSuccess = (res) => {
     props.onSuccess?.(res);
 
     if (window.Pelcro.paywall.isArticleRestricted()) {
       initPaywalls();
+    }
+
+    if(product && plan) {
+      if (product.address_required) {
+        return switchToAddressView();
+      } else {
+        return switchToPaymentView();
+      }
     }
 
     resetView();
