@@ -30,6 +30,6 @@
   }
 
   .pelcro-root .pelcro-modal-footer {
-    @apply plc-bg-gray-100 plc-flex plc-flex-col plc-items-center plc-justify-center plc-p-4 plc-pb-11 plc-text-sm;
+    @apply plc-bg-gray-100 plc-flex plc-flex-col plc-items-center plc-justify-center plc-p-4 plc-text-sm;
   }
 }
