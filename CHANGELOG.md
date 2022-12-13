@@ -1,3 +1,10 @@
+# [3.13.0-beta.17](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.13.0-beta.16...v3.13.0-beta.17) (2022-12-13)
+
+
+### Bug Fixes
+
+* purchase flow url trigger ([#243](https://github.com/pelcro-inc/react-pelcro-js/issues/243)) ([d18c25b](https://github.com/pelcro-inc/react-pelcro-js/commit/d18c25b5f0e53eac1f3e6459c783f1173e573fb1))
+
 # [3.13.0-beta.16](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.13.0-beta.15...v3.13.0-beta.16) (2022-12-12)
 
 
