@@ -52,7 +52,8 @@ export function LoginModal({ onDisplay, onClose, ...props }) {
 
     if (
       viewFromURL === "invoice-details" ||
-      viewFromURL === "gift-redeem"
+      viewFromURL === "gift-redeem" ||
+      viewFromURL === "plan-select"
     ) {
       initViewFromURL();
     }
