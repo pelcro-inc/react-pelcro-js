@@ -50,10 +50,13 @@ export function LoginModal({ onDisplay, onClose, ...props }) {
       window.Pelcro.helpers.getURLParameter("view")
     );
 
-    if (
-      viewFromURL === "invoice-details" ||
-      viewFromURL === "gift-redeem"
-    ) {
+    const viewsURLs = [
+      "invoice-details",
+      "gift-redeem",
+      "plan-select"
+    ];
+
+    if (viewsURLs.includes(viewFromURL)) {
       initViewFromURL();
     }
   };
