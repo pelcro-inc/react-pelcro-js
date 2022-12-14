@@ -2,16 +2,67 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import {
   getFormattedPriceByLocal,
-  getPageOrDefaultLanguage
+  getPageOrDefaultLanguage,
+  userMustVerifyEmail
 } from "../../../utils/utils";
+import { ReactComponent as XCircleIcon } from "../../../assets/x-icon-solid.svg";
+import { ReactComponent as RefreshIcon } from "../../../assets/refresh.svg";
+import { Button } from "../../../SubComponents/Button";
+import { usePelcro } from "../../../hooks/usePelcro";
 
-export const DonationsMenu = () => {
+export const DonationsMenu = ({ reactivateSubscription, disableSubmit, cancelSubscription }) => {
   const { t } = useTranslation("dashboard");
+  const {
+    switchView,
+    setSubscriptionToCancel
+  } = usePelcro();
 
   const subscriptions = getDonationSubs()
     .sort((a, b) => a.expires_at - b.expires_at)
     .sort((a, b) => a.renews_at - b.renews_at)
     .map((sub) => {
+      // Cancel button click handlers
+      const onCancelClick = () => {
+        const isImmediateCancelationEnabled =
+          window.Pelcro.site.read().cancel_settings.status;
+
+        if (isImmediateCancelationEnabled) {
+          setSubscriptionToCancel(sub.id);
+          return switchView("subscription-cancel");
+        }
+
+        if (userMustVerifyEmail()) {
+          return switchView("email-verify");
+        }
+
+        onClose?.();
+        notify.confirm(
+          (onSuccess, onFailure) => {
+            cancelSubscription(sub.id, onSuccess, onFailure);
+          },
+          {
+            confirmMessage: t(
+              "messages.subCancellation.isSureToCancel"
+            ),
+            loadingMessage: t("messages.subCancellation.loading"),
+            successMessage: t("messages.subCancellation.success"),
+            errorMessage: t("messages.subCancellation.error")
+          },
+          {
+            closeButtonLabel: t("labels.subCancellation.goBack")
+          }
+        );
+      };
+
+      // Reactivate button click handlers
+      const onReactivateClick = () => {
+        if (userMustVerifyEmail()) {
+          return switchView("email-verify");
+        }
+
+        reactivateSubscription(sub.id);
+      };
+
       return (
         <tr
           key={sub.id}
@@ -41,6 +92,39 @@ export const DonationsMenu = () => {
               )}
             </div>
           </td>
+          <td>
+            {sub.cancel_at_period_end === 1 &&
+              sub.plan.auto_renew &&
+              !sub.is_gift_recipient && (
+                <Button
+                  variant="ghost"
+                  className="plc-text-green-400 focus:plc-ring-green-300 pelcro-dashboard-sub-reactivate-button"
+                  icon={<RefreshIcon />}
+                  onClick={onReactivateClick}
+                  disabled={disableSubmit}
+                  data-key={sub.id}
+                >
+                  {t("labels.reactivate")}
+                </Button>
+              )}
+
+            {!sub.plan.auto_renew ||
+            (sub.plan.auto_renew &&
+              sub.cancel_at_period_end === 0) ? (
+              <Button
+                variant="ghost"
+                className="plc-text-red-500 focus:plc-ring-red-500 pelcro-dashboard-sub-cancel-button"
+                icon={<XCircleIcon />}
+                onClick={onCancelClick}
+                disabled={disableSubmit}
+                data-key={sub.id}
+              >
+                {t("labels.unsubscribe")}
+              </Button>
+            ) : (
+              ""
+            )}
+          </td>
         </tr>
       );
     });
@@ -51,6 +135,7 @@ export const DonationsMenu = () => {
         <tr>
           <th className="plc-w-6/12 ">{t("labels.plan")}</th>
           <th className="plc-w-6/12 ">{t("labels.startDate")}</th>
+          <th className="plc-w-3/12 ">{t("labels.actions")}</th>
         </tr>
       </thead>
       <tbody>
