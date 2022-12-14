@@ -34,7 +34,7 @@ export const ShopView = () => {
                 />
                 <ShopPurchaseButton
                   itemId={item.id}
-                  className="plc-mt-2"
+                  className="plc-mt-2 pelcro-purchase-button"
                 />
               </div>
             </div>

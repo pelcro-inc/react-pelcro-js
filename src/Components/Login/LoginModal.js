@@ -24,7 +24,7 @@ export function LoginModal({ onDisplay, onClose, ...props }) {
     switchView,
     resetView,
     product,
-    plan,
+    order,
     switchToAddressView,
     switchToPaymentView
   } = usePelcro();
@@ -36,12 +36,16 @@ export function LoginModal({ onDisplay, onClose, ...props }) {
       initPaywalls();
     }
 
-    if(product && plan) {
+    if(product) {
       if (product.address_required) {
         return switchToAddressView();
       } else {
         return switchToPaymentView();
       }
+    }
+
+    if(order) {
+      return switchToAddressView();
     }
 
     resetView();
