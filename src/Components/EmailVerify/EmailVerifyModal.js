@@ -18,7 +18,7 @@ export const EmailVerifyModal = ({
   const onSuccess = (res) => {
     props.onSuccess?.(res);
 
-    if (product && plan) {
+    if (product) {
       if (product.address_required) {
         return switchToAddressView();
       } else {
