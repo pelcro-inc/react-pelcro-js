@@ -1,3 +1,10 @@
+# [3.13.0-beta.18](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.13.0-beta.17...v3.13.0-beta.18) (2022-12-14)
+
+
+### Features
+
+* cancel recurring donations ([#245](https://github.com/pelcro-inc/react-pelcro-js/issues/245)) ([93c2b01](https://github.com/pelcro-inc/react-pelcro-js/commit/93c2b01d019463d786f74e307cc0e8e009d4a667))
+
 # [3.13.0-beta.17](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.13.0-beta.16...v3.13.0-beta.17) (2022-12-13)
 
 
