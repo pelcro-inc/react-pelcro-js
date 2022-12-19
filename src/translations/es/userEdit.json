@@ -6,6 +6,7 @@
     "firstName":"Nombre",
     "lastName":"Apellido",
     "username": "Nombre de usuario",
+    "displayname": "Nombre para mostrar",
     "phone":"Teléfono",
     "submit":"Enviar",
     "required":"Obligatorio",

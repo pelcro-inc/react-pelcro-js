@@ -10,6 +10,7 @@ import { UserUpdateContainer } from "./UserUpdateContainer";
 import { AlertWithContext } from "../../SubComponents/AlertWithContext";
 import { UserUpdateProfilePic } from "./UserUpdateProfilePic";
 import { UserUpdateTin } from "./UserUpdateTin";
+import { UserUpdateDisplayName } from "./UserUpdateDisplayName";
 
 export const UserUpdateView = (props) => {
   const { t } = useTranslation("userEdit");
@@ -54,6 +55,12 @@ export const UserUpdateView = (props) => {
               required={supportsTap ? true : false}
             />
           </div>
+          <UserUpdateDisplayName
+            id="pelcro-input-display-name"
+            autoComplete="display-name"
+            errorId="pelcro-input-display-name-error"
+            label={t("labels.displayname")}
+          />
           {showUsernameInput && (
             <UserUpdateUsername
               id="pelcro-input-user-name"
