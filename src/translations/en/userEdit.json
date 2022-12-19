@@ -6,6 +6,7 @@
     "firstName": "First name",
     "lastName": "Last name",
     "username": "Username",
+    "displayname": "Display name",
     "phone": "Phone",
     "submit": "Submit",
     "required": "Required",
