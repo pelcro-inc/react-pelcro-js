@@ -1,3 +1,10 @@
+# [3.13.0-beta.19](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.13.0-beta.18...v3.13.0-beta.19) (2022-12-19)
+
+
+### Features
+
+* **profile:** add display name input ([#246](https://github.com/pelcro-inc/react-pelcro-js/issues/246)) ([5029cb5](https://github.com/pelcro-inc/react-pelcro-js/commit/5029cb525b8dae6f4d1e00eef5cc8ce406e8e42f))
+
 # [3.13.0-beta.18](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.13.0-beta.17...v3.13.0-beta.18) (2022-12-14)
 
 
