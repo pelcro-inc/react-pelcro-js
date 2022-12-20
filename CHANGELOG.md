@@ -1,3 +1,10 @@
+# [3.13.0-beta.20](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.13.0-beta.19...v3.13.0-beta.20) (2022-12-20)
+
+
+### Bug Fixes
+
+* toggleAuthenticationSuccessPendingView fix ([#247](https://github.com/pelcro-inc/react-pelcro-js/issues/247)) ([97cbf4a](https://github.com/pelcro-inc/react-pelcro-js/commit/97cbf4a7645aaedb1e7905df21be22de242b64f5))
+
 # [3.13.0-beta.19](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.13.0-beta.18...v3.13.0-beta.19) (2022-12-19)
 
 
