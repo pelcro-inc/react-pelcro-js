@@ -1669,11 +1669,11 @@ const PaymentMethodContainerWithoutStripe = ({
 
     if (show) {
       injectCardAuthenticationIframe(source);
-      cardAuthContainer.classList.remove("plc-hidden");
-      cardAuthContainer.classList.add("plc-flex");
+      cardAuthContainer?.classList.remove("plc-hidden");
+      cardAuthContainer?.classList.add("plc-flex");
     } else {
-      cardAuthContainer.classList.add("plc-hidden");
-      cardAuthContainer.classList.remove("plc-flex");
+      cardAuthContainer?.classList.add("plc-hidden");
+      cardAuthContainer?.classList.remove("plc-flex");
     }
   };
 
@@ -1683,11 +1683,11 @@ const PaymentMethodContainerWithoutStripe = ({
     );
 
     if (show) {
-      cardAuthContainer.classList.remove("plc-hidden");
-      cardAuthContainer.classList.add("plc-flex");
+      cardAuthContainer?.classList.remove("plc-hidden");
+      cardAuthContainer?.classList.add("plc-flex");
     } else {
-      cardAuthContainer.classList.add("plc-hidden");
-      cardAuthContainer.classList.remove("plc-flex");
+      cardAuthContainer?.classList.add("plc-hidden");
+      cardAuthContainer?.classList.remove("plc-flex");
     }
   };
 
@@ -1703,7 +1703,7 @@ const PaymentMethodContainerWithoutStripe = ({
     iframe.style =
       "position: absolute; width: 100%; height: 100%; left: 0; top: 0; bottom: 0; z-index: 10;";
 
-    cardAuthContainer.appendChild(iframe);
+    cardAuthContainer?.appendChild(iframe);
   };
 
   const [state, dispatch] = useReducerWithSideEffects(
