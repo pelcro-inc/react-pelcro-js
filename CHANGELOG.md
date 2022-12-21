@@ -1,3 +1,23 @@
+# [3.15.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.14.0...v3.15.0) (2022-12-21)
+
+
+### Bug Fixes
+
+* manage members list UI ([#237](https://github.com/pelcro-inc/react-pelcro-js/issues/237)) ([e4315b2](https://github.com/pelcro-inc/react-pelcro-js/commit/e4315b27eac6266acf2ff32a9f9cbc82edcf1214))
+* members list alignment & pending color ([#236](https://github.com/pelcro-inc/react-pelcro-js/issues/236)) ([891c2d4](https://github.com/pelcro-inc/react-pelcro-js/commit/891c2d4c41039899d23b0b9e580e32e734d1258b))
+* Purchase flow interruption when signing in or verifying email ([#239](https://github.com/pelcro-inc/react-pelcro-js/issues/239)) ([54532e6](https://github.com/pelcro-inc/react-pelcro-js/commit/54532e63529b876c590e00759959c1b9a3a60690))
+* purchase flow url trigger ([#243](https://github.com/pelcro-inc/react-pelcro-js/issues/243)) ([d18c25b](https://github.com/pelcro-inc/react-pelcro-js/commit/d18c25b5f0e53eac1f3e6459c783f1173e573fb1))
+* toggleAuthenticationSuccessPendingView fix ([#247](https://github.com/pelcro-inc/react-pelcro-js/issues/247)) ([97cbf4a](https://github.com/pelcro-inc/react-pelcro-js/commit/97cbf4a7645aaedb1e7905df21be22de242b64f5))
+
+
+### Features
+
+* **profile:** add display name input ([#246](https://github.com/pelcro-inc/react-pelcro-js/issues/246)) ([5029cb5](https://github.com/pelcro-inc/react-pelcro-js/commit/5029cb525b8dae6f4d1e00eef5cc8ce406e8e42f))
+* add update username in profile modal ([#234](https://github.com/pelcro-inc/react-pelcro-js/issues/234)) ([cd284b6](https://github.com/pelcro-inc/react-pelcro-js/commit/cd284b64fb4897cf37b6bbd8c93716ed2b2e691e))
+* cancel recurring donations ([#245](https://github.com/pelcro-inc/react-pelcro-js/issues/245)) ([93c2b01](https://github.com/pelcro-inc/react-pelcro-js/commit/93c2b01d019463d786f74e307cc0e8e009d4a667))
+* redeem the gift and create address only if required by product ([efb1db2](https://github.com/pelcro-inc/react-pelcro-js/commit/efb1db28a4ce75e58cef2ecc444e86c82f027e50))
+* username edit in profile modal ([#235](https://github.com/pelcro-inc/react-pelcro-js/issues/235)) ([60fd7da](https://github.com/pelcro-inc/react-pelcro-js/commit/60fd7dab187d07b936ac12abb6a07852c123262d))
+
 # [3.14.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.13.0...v3.14.0) (2022-12-01)
 
 # [3.13.0-beta.20](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.13.0-beta.19...v3.13.0-beta.20) (2022-12-20)
