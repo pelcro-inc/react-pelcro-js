@@ -1,3 +1,10 @@
+## [3.15.1-beta.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.15.0...v3.15.1-beta.1) (2022-12-21)
+
+
+### Bug Fixes
+
+* blur/unblur entitlements ([#248](https://github.com/pelcro-inc/react-pelcro-js/issues/248)) ([ced8405](https://github.com/pelcro-inc/react-pelcro-js/commit/ced84051880b78202efc83dce566c0ea664cebda))
+
 # [3.15.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.14.0...v3.15.0) (2022-12-21)
 
 
