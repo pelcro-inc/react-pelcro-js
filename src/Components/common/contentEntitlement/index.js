@@ -57,6 +57,10 @@ export const init = () => {
 
       unblurElemWhenUserSubscribes(elemDeepClone, entitlements);
 
+      unblurElemWhenUserLogsIn(elemDeepClone, entitlements);
+
+      unblurElemWhenUserLogsOut(elemDeepClone, entitlements);
+
       const NOTIFICATION_ID = "entitlement";
       notify(
         <p>
@@ -147,6 +151,28 @@ function unblurElemWhenUserSubscribes(elem, entitlements) {
       elem.setAttribute(
         "style",
         "filter:inherit !important; pointer-events:inherit !important; user-select:inherit !important"
+      );
+    }
+  });
+}
+
+function unblurElemWhenUserLogsIn(elem, entitlements) {
+  document.addEventListener("PelcroUserLoggedIn", () => {
+    if (!shouldBlurContent(entitlements)) {
+      elem.setAttribute(
+        "style",
+        "filter:inherit !important; pointer-events:inherit !important; user-select:inherit !important"
+      );
+    }
+  });
+}
+
+function unblurElemWhenUserLogsOut(elem, entitlements) {
+  document.addEventListener("PelcroUserLogout", () => {
+    if (shouldBlurContent(entitlements)) {
+      elem.setAttribute(
+        "style",
+        "filter:blur(3px) !important; pointer-events:none !important; user-select:none !important"
       );
     }
   });
