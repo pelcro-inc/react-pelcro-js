@@ -806,7 +806,15 @@ class Dashboard extends Component {
                   <DonateIcon className="plc-transform plc-scale-120 plc-w-7 plc-h-8 plc-mr-1 plc-pt-1" />
                 }
                 title={this.locale("labels.donations")}
-                content={<DonationsMenu />}
+                content={
+                  <DonationsMenu
+                    reactivateSubscription={
+                      this.reactivateSubscription
+                    }
+                    disableSubmit={this.state.disableSubmit}
+                    cancelSubscription={this.cancelSubscription}
+                  />
+                }
               />
 
               <Accordion.item

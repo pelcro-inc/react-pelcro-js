@@ -5,17 +5,19 @@ import { UserUpdateFirstName } from "./UserUpdateFirstName";
 import { UserUpdateLastName } from "./UserUpdateLastName";
 import { UserUpdatePhone } from "./UserUpdatePhone";
 import { UserUpdateButton } from "./UserUpdateButton";
+import { UserUpdateUsername } from "./UserUpdateUsername";
 import { UserUpdateContainer } from "./UserUpdateContainer";
 import { AlertWithContext } from "../../SubComponents/AlertWithContext";
 import { UserUpdateProfilePic } from "./UserUpdateProfilePic";
 import { UserUpdateTin } from "./UserUpdateTin";
+import { UserUpdateDisplayName } from "./UserUpdateDisplayName";
 
 export const UserUpdateView = (props) => {
   const { t } = useTranslation("userEdit");
-
   const supportsTap = Boolean(
     window.Pelcro.site.read()?.tap_gateway_settings
   );
+  const showUsernameInput = window.Pelcro?.uiSettings?.enableLoginWithUsername;
 
   return (
     <div id="pelcro-user-update-view">
@@ -53,6 +55,20 @@ export const UserUpdateView = (props) => {
               required={supportsTap ? true : false}
             />
           </div>
+          <UserUpdateDisplayName
+            id="pelcro-input-display-name"
+            autoComplete="display-name"
+            errorId="pelcro-input-display-name-error"
+            label={t("labels.displayname")}
+          />
+          {showUsernameInput && (
+            <UserUpdateUsername
+              id="pelcro-input-user-name"
+              autoComplete="user-name"
+              errorId="pelcro-input-user-name-error"
+              label={t("labels.username")}
+            />
+          )}
           <div className="plc-flex plc-items-start">
             <UserUpdatePhone
               id="pelcro-input-phone"

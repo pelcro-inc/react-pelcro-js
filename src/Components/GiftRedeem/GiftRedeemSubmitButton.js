@@ -11,7 +11,7 @@ export const GiftRedeemSubmitButton = ({
 }) => {
   const {
     dispatch,
-    state: { disableSubmit }
+    state: { disableSubmit, isSubmitting }
   } = useContext(store);
 
   const { t } = useTranslation("register");
@@ -23,6 +23,7 @@ export const GiftRedeemSubmitButton = ({
         onClick?.();
       }}
       disabled={disableSubmit}
+      isLoading={isSubmitting}
       {...otherProps}
     >
       {name ?? t("redeem.buttons.redeem")}

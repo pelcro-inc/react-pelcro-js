@@ -9,7 +9,10 @@ import {
 } from "../../SubComponents/Modal";
 import { Link } from "../../SubComponents/Link";
 import { usePelcro } from "../../hooks/usePelcro";
-import { initPaywalls, initViewFromURL } from "../PelcroModalController/PelcroModalController.service";
+import {
+  initPaywalls,
+  initViewFromURL
+} from "../PelcroModalController/PelcroModalController.service";
 import { getStableViewID } from "../../utils/utils";
 
 /**
@@ -17,22 +20,47 @@ import { getStableViewID } from "../../utils/utils";
  */
 export function LoginModal({ onDisplay, onClose, ...props }) {
   const { t } = useTranslation("login");
-  const { switchView, resetView, invoice } = usePelcro();
+  const {
+    switchView,
+    resetView,
+    product,
+    order,
+    switchToAddressView,
+    switchToPaymentView
+  } = usePelcro();
 
   const onSuccess = (res) => {
     props.onSuccess?.(res);
-    
+
     if (window.Pelcro.paywall.isArticleRestricted()) {
       initPaywalls();
     }
-    
+
+    if(product) {
+      if (product.address_required) {
+        return switchToAddressView();
+      } else {
+        return switchToPaymentView();
+      }
+    }
+
+    if(order) {
+      return switchToAddressView();
+    }
+
     resetView();
-    
+
     const viewFromURL = getStableViewID(
       window.Pelcro.helpers.getURLParameter("view")
     );
 
-    if (viewFromURL === "invoice-details") {
+    const viewsURLs = [
+      "invoice-details",
+      "gift-redeem",
+      "plan-select"
+    ];
+
+    if (viewsURLs.includes(viewFromURL)) {
       initViewFromURL();
     }
   };

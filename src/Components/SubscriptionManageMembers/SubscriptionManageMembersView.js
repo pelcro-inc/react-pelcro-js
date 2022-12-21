@@ -16,7 +16,10 @@ export function SubscriptionManageMembersView(props) {
     <div id="pelcro-login-view">
       <div className="plc-font-semibold plc-text-center plc-text-gray-900 pelcro-title-wrapper">
         <h4 className="plc-text-2xl">{t("labels.inviteMembers")}</h4>
-        <p>Comma-separated list e.g. 'john@example.com,jane@example.com'</p>
+        <p>
+          Comma-separated list e.g.
+          'john@example.com,jane@example.com'
+        </p>
       </div>
       <form
         action="javascript:void(0);"
@@ -44,22 +47,26 @@ export function SubscriptionManageMembersView(props) {
               <hr className="plc-w-full plc-border-gray-300" />
             </div>
             {/* table */}
-            <table className="plc-w-full plc-table-fixed">
-              <thead className="plc-text-xs plc-font-semibold plc-tracking-wider plc-text-gray-400 plc-uppercase ">
-                <tr>
-                  <th className="plc-w-6/12">{t("labels.email")}</th>
-                  <th className="plc-w-3/12 ">
-                    {t("labels.status")}
-                  </th>
-                  <th className="plc-w-3/12 ">
-                    {t("labels.actions")}
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <SubscriptionManageMembersList />
-              </tbody>
-            </table>
+            <div className="plc-max-h-48 plc-overflow-x-hidden plc-overflow-y-auto">
+              <table className="plc-w-full plc-table-fixed plc-text-center plc-p-2 plc-m-1">
+                <thead className="plc-text-xs plc-font-semibold plc-tracking-wider plc-text-gray-400 plc-uppercase ">
+                  <tr>
+                    <th className="plc-w-6/12">
+                      {t("labels.email")}
+                    </th>
+                    <th className="plc-w-3/12 ">
+                      {t("labels.status")}
+                    </th>
+                    <th className="plc-w-3/12 ">
+                      {t("labels.actions")}
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <SubscriptionManageMembersList />
+                </tbody>
+              </table>
+            </div>
           </div>
         </SubscriptionManageMembersContainer>
       </form>

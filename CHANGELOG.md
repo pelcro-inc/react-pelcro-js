@@ -1,94 +1,144 @@
 # [3.14.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.13.0...v3.14.0) (2022-12-01)
 
+# [3.13.0-beta.20](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.13.0-beta.19...v3.13.0-beta.20) (2022-12-20)
+
+### Bug Fixes
+
+- toggleAuthenticationSuccessPendingView fix ([#247](https://github.com/pelcro-inc/react-pelcro-js/issues/247)) ([97cbf4a](https://github.com/pelcro-inc/react-pelcro-js/commit/97cbf4a7645aaedb1e7905df21be22de242b64f5))
+
+# [3.13.0-beta.19](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.13.0-beta.18...v3.13.0-beta.19) (2022-12-19)
 
 ### Features
 
-* add pelcro-dashboard-button ([#233](https://github.com/pelcro-inc/react-pelcro-js/issues/233)) ([71f028c](https://github.com/pelcro-inc/react-pelcro-js/commit/71f028c50d8c96813dbd9daf742b08dd426184f2))
+- **profile:** add display name input ([#246](https://github.com/pelcro-inc/react-pelcro-js/issues/246)) ([5029cb5](https://github.com/pelcro-inc/react-pelcro-js/commit/5029cb525b8dae6f4d1e00eef5cc8ce406e8e42f))
+
+# [3.13.0-beta.18](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.13.0-beta.17...v3.13.0-beta.18) (2022-12-14)
+
+### Features
+
+- cancel recurring donations ([#245](https://github.com/pelcro-inc/react-pelcro-js/issues/245)) ([93c2b01](https://github.com/pelcro-inc/react-pelcro-js/commit/93c2b01d019463d786f74e307cc0e8e009d4a667))
+
+# [3.13.0-beta.17](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.13.0-beta.16...v3.13.0-beta.17) (2022-12-13)
+
+### Bug Fixes
+
+- purchase flow url trigger ([#243](https://github.com/pelcro-inc/react-pelcro-js/issues/243)) ([d18c25b](https://github.com/pelcro-inc/react-pelcro-js/commit/d18c25b5f0e53eac1f3e6459c783f1173e573fb1))
+
+# [3.13.0-beta.16](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.13.0-beta.15...v3.13.0-beta.16) (2022-12-12)
+
+### Bug Fixes
+
+- Purchase flow interruption when signing in or verifying email ([#239](https://github.com/pelcro-inc/react-pelcro-js/issues/239)) ([54532e6](https://github.com/pelcro-inc/react-pelcro-js/commit/54532e63529b876c590e00759959c1b9a3a60690))
+
+# [3.13.0-beta.15](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.13.0-beta.14...v3.13.0-beta.15) (2022-12-12)
+
+### Features
+
+- redeem the gift and create address only if required by product ([efb1db2](https://github.com/pelcro-inc/react-pelcro-js/commit/efb1db28a4ce75e58cef2ecc444e86c82f027e50))
+
+# [3.13.0-beta.14](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.13.0-beta.13...v3.13.0-beta.14) (2022-12-08)
+
+### Bug Fixes
+
+- manage members list UI ([#237](https://github.com/pelcro-inc/react-pelcro-js/issues/237)) ([e4315b2](https://github.com/pelcro-inc/react-pelcro-js/commit/e4315b27eac6266acf2ff32a9f9cbc82edcf1214))
+
+# [3.13.0-beta.13](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.13.0-beta.12...v3.13.0-beta.13) (2022-12-07)
+
+### Bug Fixes
+
+- members list alignment & pending color ([#236](https://github.com/pelcro-inc/react-pelcro-js/issues/236)) ([891c2d4](https://github.com/pelcro-inc/react-pelcro-js/commit/891c2d4c41039899d23b0b9e580e32e734d1258b))
+
+# [3.13.0-beta.12](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.13.0-beta.11...v3.13.0-beta.12) (2022-12-05)
+
+### Features
+
+- username edit in profile modal ([#235](https://github.com/pelcro-inc/react-pelcro-js/issues/235)) ([60fd7da](https://github.com/pelcro-inc/react-pelcro-js/commit/60fd7dab187d07b936ac12abb6a07852c123262d))
+
+# [3.13.0-beta.11](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.13.0-beta.10...v3.13.0-beta.11) (2022-12-03)
+
+### Features
+
+- add update username in profile modal ([#234](https://github.com/pelcro-inc/react-pelcro-js/issues/234)) ([cd284b6](https://github.com/pelcro-inc/react-pelcro-js/commit/cd284b64fb4897cf37b6bbd8c93716ed2b2e691e))
+
+# [3.13.0-beta.10](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.13.0-beta.9...v3.13.0-beta.10) (2022-12-01)
+
+### Features
+
+- add pelcro-dashboard-button ([#233](https://github.com/pelcro-inc/react-pelcro-js/issues/233)) ([71f028c](https://github.com/pelcro-inc/react-pelcro-js/commit/71f028c50d8c96813dbd9daf742b08dd426184f2))
 
 # [3.13.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.12.0...v3.13.0) (2022-12-01)
 
-
 ### Bug Fixes
 
-* display error on the UI "email in use" ([#227](https://github.com/pelcro-inc/react-pelcro-js/issues/227)) ([e98bfe7](https://github.com/pelcro-inc/react-pelcro-js/commit/e98bfe716ab5858192d6b45be2eeb683077a93c6))
-* google button use gapi-script ([#225](https://github.com/pelcro-inc/react-pelcro-js/issues/225)) ([d411f99](https://github.com/pelcro-inc/react-pelcro-js/commit/d411f990d9530319abf5cbf27406eaccebe10227))
-* hide payment for free plans 2 ([#226](https://github.com/pelcro-inc/react-pelcro-js/issues/226)) ([e940467](https://github.com/pelcro-inc/react-pelcro-js/commit/e94046728eb53c43b2470f65028bc2e0e07e959c)), closes [#220](https://github.com/pelcro-inc/react-pelcro-js/issues/220)
-
+- display error on the UI "email in use" ([#227](https://github.com/pelcro-inc/react-pelcro-js/issues/227)) ([e98bfe7](https://github.com/pelcro-inc/react-pelcro-js/commit/e98bfe716ab5858192d6b45be2eeb683077a93c6))
+- google button use gapi-script ([#225](https://github.com/pelcro-inc/react-pelcro-js/issues/225)) ([d411f99](https://github.com/pelcro-inc/react-pelcro-js/commit/d411f990d9530319abf5cbf27406eaccebe10227))
+- hide payment for free plans 2 ([#226](https://github.com/pelcro-inc/react-pelcro-js/issues/226)) ([e940467](https://github.com/pelcro-inc/react-pelcro-js/commit/e94046728eb53c43b2470f65028bc2e0e07e959c)), closes [#220](https://github.com/pelcro-inc/react-pelcro-js/issues/220)
 
 ### Features
 
-* 20221121 manage members ([#232](https://github.com/pelcro-inc/react-pelcro-js/issues/232)) ([6ed13a8](https://github.com/pelcro-inc/react-pelcro-js/commit/6ed13a810690503227ef6e2425efc159e6e0c5a7))
-* add enableReactGA4 to uisettings ([71af0df](https://github.com/pelcro-inc/react-pelcro-js/commit/71af0df454b094ccc67e58eb5a8410d13900bd5d))
-* add shipping, billing, and myQRCode translation ([de50bff](https://github.com/pelcro-inc/react-pelcro-js/commit/de50bff440dbe48d7729dc640234b610e6d6c8d0))
-* add spanish translation to the project ([#231](https://github.com/pelcro-inc/react-pelcro-js/issues/231)) ([8d56855](https://github.com/pelcro-inc/react-pelcro-js/commit/8d56855c31abd6de73630c6b9f976393c2769e2b))
-* add user name login ([#229](https://github.com/pelcro-inc/react-pelcro-js/issues/229)) ([c7077a9](https://github.com/pelcro-inc/react-pelcro-js/commit/c7077a9da47122ec93dee1c34767f2c74b5aacc6))
-* enable the client to override the Login text in case the user is authenticated or not ([#221](https://github.com/pelcro-inc/react-pelcro-js/issues/221)) ([e67d8b2](https://github.com/pelcro-inc/react-pelcro-js/commit/e67d8b25000b7ed0da0051c1aaf3680a4d8965cb))
-* free plan subscription ([#220](https://github.com/pelcro-inc/react-pelcro-js/issues/220)) ([7939949](https://github.com/pelcro-inc/react-pelcro-js/commit/7939949898b1272ceb7db4ef32dc4cfa236242cd))
-* add pelcro-dashboard-button ([#233](https://github.com/pelcro-inc/react-pelcro-js/issues/233)) ([71f028c](https://github.com/pelcro-inc/react-pelcro-js/commit/71f028c50d8c96813dbd9daf742b08dd426184f2))
+- 20221121 manage members ([#232](https://github.com/pelcro-inc/react-pelcro-js/issues/232)) ([6ed13a8](https://github.com/pelcro-inc/react-pelcro-js/commit/6ed13a810690503227ef6e2425efc159e6e0c5a7))
+- add enableReactGA4 to uisettings ([71af0df](https://github.com/pelcro-inc/react-pelcro-js/commit/71af0df454b094ccc67e58eb5a8410d13900bd5d))
+- add shipping, billing, and myQRCode translation ([de50bff](https://github.com/pelcro-inc/react-pelcro-js/commit/de50bff440dbe48d7729dc640234b610e6d6c8d0))
+- add spanish translation to the project ([#231](https://github.com/pelcro-inc/react-pelcro-js/issues/231)) ([8d56855](https://github.com/pelcro-inc/react-pelcro-js/commit/8d56855c31abd6de73630c6b9f976393c2769e2b))
+- add user name login ([#229](https://github.com/pelcro-inc/react-pelcro-js/issues/229)) ([c7077a9](https://github.com/pelcro-inc/react-pelcro-js/commit/c7077a9da47122ec93dee1c34767f2c74b5aacc6))
+- enable the client to override the Login text in case the user is authenticated or not ([#221](https://github.com/pelcro-inc/react-pelcro-js/issues/221)) ([e67d8b2](https://github.com/pelcro-inc/react-pelcro-js/commit/e67d8b25000b7ed0da0051c1aaf3680a4d8965cb))
+- free plan subscription ([#220](https://github.com/pelcro-inc/react-pelcro-js/issues/220)) ([7939949](https://github.com/pelcro-inc/react-pelcro-js/commit/7939949898b1272ceb7db4ef32dc4cfa236242cd))
+- add pelcro-dashboard-button ([#233](https://github.com/pelcro-inc/react-pelcro-js/issues/233)) ([71f028c](https://github.com/pelcro-inc/react-pelcro-js/commit/71f028c50d8c96813dbd9daf742b08dd426184f2))
 
 # [3.13.0-beta.9](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.13.0-beta.8...v3.13.0-beta.9) (2022-11-30)
 
-
 ### Features
 
-* 20221121 manage members ([#232](https://github.com/pelcro-inc/react-pelcro-js/issues/232)) ([6ed13a8](https://github.com/pelcro-inc/react-pelcro-js/commit/6ed13a810690503227ef6e2425efc159e6e0c5a7))
+- 20221121 manage members ([#232](https://github.com/pelcro-inc/react-pelcro-js/issues/232)) ([6ed13a8](https://github.com/pelcro-inc/react-pelcro-js/commit/6ed13a810690503227ef6e2425efc159e6e0c5a7))
 
 # [3.13.0-beta.8](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.13.0-beta.7...v3.13.0-beta.8) (2022-11-30)
 
-
 ### Features
 
-* add shipping, billing, and myQRCode translation ([de50bff](https://github.com/pelcro-inc/react-pelcro-js/commit/de50bff440dbe48d7729dc640234b610e6d6c8d0))
+- add shipping, billing, and myQRCode translation ([de50bff](https://github.com/pelcro-inc/react-pelcro-js/commit/de50bff440dbe48d7729dc640234b610e6d6c8d0))
 
 # [3.13.0-beta.7](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.13.0-beta.6...v3.13.0-beta.7) (2022-11-25)
 
-
 ### Features
 
-* add spanish translation to the project ([#231](https://github.com/pelcro-inc/react-pelcro-js/issues/231)) ([8d56855](https://github.com/pelcro-inc/react-pelcro-js/commit/8d56855c31abd6de73630c6b9f976393c2769e2b))
+- add spanish translation to the project ([#231](https://github.com/pelcro-inc/react-pelcro-js/issues/231)) ([8d56855](https://github.com/pelcro-inc/react-pelcro-js/commit/8d56855c31abd6de73630c6b9f976393c2769e2b))
 
 # [3.13.0-beta.6](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.13.0-beta.5...v3.13.0-beta.6) (2022-11-22)
 
-
 ### Features
 
-* add user name login ([#229](https://github.com/pelcro-inc/react-pelcro-js/issues/229)) ([c7077a9](https://github.com/pelcro-inc/react-pelcro-js/commit/c7077a9da47122ec93dee1c34767f2c74b5aacc6))
+- add user name login ([#229](https://github.com/pelcro-inc/react-pelcro-js/issues/229)) ([c7077a9](https://github.com/pelcro-inc/react-pelcro-js/commit/c7077a9da47122ec93dee1c34767f2c74b5aacc6))
 
 # [3.13.0-beta.5](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.13.0-beta.4...v3.13.0-beta.5) (2022-11-21)
 
-
 ### Bug Fixes
 
-* display error on the UI "email in use" ([#227](https://github.com/pelcro-inc/react-pelcro-js/issues/227)) ([e98bfe7](https://github.com/pelcro-inc/react-pelcro-js/commit/e98bfe716ab5858192d6b45be2eeb683077a93c6))
+- display error on the UI "email in use" ([#227](https://github.com/pelcro-inc/react-pelcro-js/issues/227)) ([e98bfe7](https://github.com/pelcro-inc/react-pelcro-js/commit/e98bfe716ab5858192d6b45be2eeb683077a93c6))
 
 # [3.13.0-beta.4](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.13.0-beta.3...v3.13.0-beta.4) (2022-11-17)
 
-
 ### Bug Fixes
 
-* hide payment for free plans 2 ([#226](https://github.com/pelcro-inc/react-pelcro-js/issues/226)) ([e940467](https://github.com/pelcro-inc/react-pelcro-js/commit/e94046728eb53c43b2470f65028bc2e0e07e959c)), closes [#220](https://github.com/pelcro-inc/react-pelcro-js/issues/220)
+- hide payment for free plans 2 ([#226](https://github.com/pelcro-inc/react-pelcro-js/issues/226)) ([e940467](https://github.com/pelcro-inc/react-pelcro-js/commit/e94046728eb53c43b2470f65028bc2e0e07e959c)), closes [#220](https://github.com/pelcro-inc/react-pelcro-js/issues/220)
 
 # [3.13.0-beta.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.13.0-beta.2...v3.13.0-beta.3) (2022-11-17)
 
-
 ### Bug Fixes
 
-* google button use gapi-script ([#225](https://github.com/pelcro-inc/react-pelcro-js/issues/225)) ([d411f99](https://github.com/pelcro-inc/react-pelcro-js/commit/d411f990d9530319abf5cbf27406eaccebe10227))
+- google button use gapi-script ([#225](https://github.com/pelcro-inc/react-pelcro-js/issues/225)) ([d411f99](https://github.com/pelcro-inc/react-pelcro-js/commit/d411f990d9530319abf5cbf27406eaccebe10227))
 
 # [3.13.0-beta.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.13.0-beta.1...v3.13.0-beta.2) (2022-11-15)
 
-
 ### Features
 
-* add enableReactGA4 to uisettings ([71af0df](https://github.com/pelcro-inc/react-pelcro-js/commit/71af0df454b094ccc67e58eb5a8410d13900bd5d))
+- add enableReactGA4 to uisettings ([71af0df](https://github.com/pelcro-inc/react-pelcro-js/commit/71af0df454b094ccc67e58eb5a8410d13900bd5d))
 
 # [3.13.0-beta.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.12.0...v3.13.0-beta.1) (2022-11-11)
 
-
 ### Features
 
-* enable the client to override the Login text in case the user is authenticated or not ([#221](https://github.com/pelcro-inc/react-pelcro-js/issues/221)) ([e67d8b2](https://github.com/pelcro-inc/react-pelcro-js/commit/e67d8b25000b7ed0da0051c1aaf3680a4d8965cb))
-* free plan subscription ([#220](https://github.com/pelcro-inc/react-pelcro-js/issues/220)) ([7939949](https://github.com/pelcro-inc/react-pelcro-js/commit/7939949898b1272ceb7db4ef32dc4cfa236242cd))
+- enable the client to override the Login text in case the user is authenticated or not ([#221](https://github.com/pelcro-inc/react-pelcro-js/issues/221)) ([e67d8b2](https://github.com/pelcro-inc/react-pelcro-js/commit/e67d8b25000b7ed0da0051c1aaf3680a4d8965cb))
+- free plan subscription ([#220](https://github.com/pelcro-inc/react-pelcro-js/issues/220)) ([7939949](https://github.com/pelcro-inc/react-pelcro-js/commit/7939949898b1272ceb7db4ef32dc4cfa236242cd))
 
 # [3.12.0-beta.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.12.0-beta.2...v3.12.0-beta.3) (2022-11-11)
 
