@@ -1,7 +1,5 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import Authorship from "../common/Authorship";
-import { LoginView } from "./LoginView";
 import {
   Modal,
   ModalHeader,
@@ -15,6 +13,7 @@ import {
   initViewFromURL
 } from "../PelcroModalController/PelcroModalController.service";
 import { getStableViewID } from "../../utils/utils";
+import { LoginView } from "./LoginView";
 
 /**
  *
@@ -37,7 +36,7 @@ export function LoginModal({ onDisplay, onClose, ...props }) {
       initPaywalls();
     }
 
-    if(product) {
+    if (product) {
       if (product.address_required) {
         return switchToAddressView();
       } else {
@@ -45,7 +44,7 @@ export function LoginModal({ onDisplay, onClose, ...props }) {
       }
     }
 
-    if(order) {
+    if (order) {
       return switchToAddressView();
     }
 

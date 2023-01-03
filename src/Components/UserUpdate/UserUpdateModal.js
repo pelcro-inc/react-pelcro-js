@@ -1,7 +1,5 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { useTranslation } from "react-i18next";
-import { UserUpdateView } from "./UserUpdateView";
-import Authorship from "../common/Authorship";
 import {
   Modal,
   ModalHeader,
@@ -9,6 +7,12 @@ import {
   ModalFooter
 } from "../../SubComponents/Modal";
 import { usePelcro } from "../../hooks/usePelcro";
+// import { UserUpdateView } from "./UserUpdateView";
+const UserUpdateView = lazy(() =>
+  import("./UserUpdateView").then((module) => {
+    return { default: module.UserUpdateView };
+  })
+);
 
 /**
  *
@@ -40,10 +44,12 @@ export function UserUpdateModal({
         </div>
       </ModalHeader>
       <ModalBody>
-        <UserUpdateView
-          onPictureClick={onPictureClick}
-          {...otherProps}
-        />
+        <Suspense fallback={<p>Loading ...</p>}>
+          <UserUpdateView
+            onPictureClick={onPictureClick}
+            {...otherProps}
+          />
+        </Suspense>
       </ModalBody>
       <ModalFooter></ModalFooter>
     </Modal>

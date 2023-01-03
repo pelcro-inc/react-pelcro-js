@@ -1,6 +1,5 @@
-import React from "react";
+import React, { Suspense, lazy } from "react";
 import { useTranslation } from "react-i18next";
-import { PaymentMethodSelectView } from "./PaymentMethodSelectView";
 import {
   Modal,
   ModalHeader,
@@ -8,6 +7,12 @@ import {
   ModalFooter
 } from "../../SubComponents/Modal";
 import { usePelcro } from "../../hooks/usePelcro";
+// import { PaymentMethodSelectView } from "./PaymentMethodSelectView";
+const PaymentMethodSelectView = lazy(() =>
+  import("./PaymentMethodSelectView").then((module) => {
+    return { default: module.PaymentMethodSelectView };
+  })
+);
 
 export const PaymentMethodSelectModal = ({
   onDisplay,
@@ -52,11 +57,13 @@ export const PaymentMethodSelectModal = ({
         </div>
       </ModalHeader>
       <ModalBody>
-        <PaymentMethodSelectView
-          onAddNewPaymentMethod={onAddNewPaymentMethod}
-          {...otherProps}
-          onSuccess={onSuccess}
-        />
+        <Suspense fallback={<p>Loading ...</p>}>
+          <PaymentMethodSelectView
+            onAddNewPaymentMethod={onAddNewPaymentMethod}
+            {...otherProps}
+            onSuccess={onSuccess}
+          />
+        </Suspense>
       </ModalBody>
       <ModalFooter></ModalFooter>
     </Modal>

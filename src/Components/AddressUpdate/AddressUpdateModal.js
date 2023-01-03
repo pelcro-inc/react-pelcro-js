@@ -1,4 +1,4 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { useTranslation } from "react-i18next";
 import {
   Modal,
@@ -6,7 +6,12 @@ import {
   ModalBody,
   ModalFooter
 } from "../../SubComponents/Modal";
-import { AddressUpdateView } from "./AddressUpdateView";
+// import { AddressUpdateView } from "./AddressUpdateView";
+const AddressUpdateView = lazy(() =>
+  import("./AddressUpdateView").then((module) => {
+    return { default: module.AddressUpdateView };
+  })
+);
 
 export const AddressUpdateModal = ({
   onDisplay,
@@ -29,7 +34,9 @@ export const AddressUpdateModal = ({
         </div>
       </ModalHeader>
       <ModalBody>
-        <AddressUpdateView {...otherProps} />
+        <Suspense fallback={<p>Loading ...</p>}>
+          <AddressUpdateView {...otherProps} />
+        </Suspense>
       </ModalBody>
       <ModalFooter></ModalFooter>
     </Modal>
