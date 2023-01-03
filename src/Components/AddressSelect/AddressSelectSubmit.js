@@ -14,6 +14,10 @@ export const AddressSelectSubmit = ({
     state: { selectedAddressId, isSubmitting }
   } = useContext(store);
 
+  console.log("Selected", selectedAddressId);
+  console.log("Selected", typeof selectedAddressId);
+  console.log("IsSubmitted", isSubmitting);
+
   const { t } = useTranslation("address");
 
   return (

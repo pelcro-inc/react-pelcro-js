@@ -1,9 +1,6 @@
 import React from "react";
 import { usePelcro } from "../hooks/usePelcro";
-import { default as ReactGA1 } from "react-ga";
-import { default as ReactGA4 } from "react-ga4";
-
-const ReactGA = window?.Pelcro?.uiSettings?.enableReactGA4 ? ReactGA4 : ReactGA1;
+import ReactGA from "react-ga";
 
 /**
  * List of zero-decimal currencies.
@@ -436,23 +433,23 @@ export const getPaymentCardIcon = (name) => {
     )
   };
 
-  return name ? (
-    icons[name.toLowerCase()]
-  ) : (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      className="plc-w-16"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="1"
-        d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"
-      />
-    </svg>
+  return (
+    icons[name.toLowerCase()] ?? (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="plc-w-16"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="1"
+          d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"
+        />
+      </svg>
+    )
   );
 };
 

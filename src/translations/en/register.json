@@ -11,8 +11,7 @@
     "emailPlaceholder": "Enter email",
     "required": "required",
     "firstName": "First name",
-    "lastName": "Last name",
-    "phone": "Phone"
+    "lastName": "Last name"
   },
   "messages": {
     "alreadyHaveAccount": "Already have an account?",

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import ReactGA from "react-ga";
 import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
 import {

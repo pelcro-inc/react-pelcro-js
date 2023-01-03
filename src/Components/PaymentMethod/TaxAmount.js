@@ -21,17 +21,11 @@ export const TaxAmount = () => {
     getPageOrDefaultLanguage()
   );
 
-  const isTaxInclusive = window.Pelcro.site?.read()?.tax_inclusive;
-
   if (taxAmount) {
     return (
       <div className="plc-text-center pelcro-tax-amount">
-        {isTaxInclusive && "("}
-        {isTaxInclusive
-          ? `Includes ${t("labels.tax")}`
-          : `+ ${t("labels.tax")}`}{" "}
+        {t("labels.tax")}{" "}
         <span className="plc-font-bold">{priceFormatted}</span>
-        {isTaxInclusive && ")"}
       </div>
     );
   }

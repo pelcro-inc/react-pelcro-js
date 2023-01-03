@@ -2,14 +2,9 @@
 // Shows popup in the lower right if the user is not subsctibed to the site.
 // It prompts the user to subscribe (go to Select view) or login (go to Login view).
 
-import React, { useEffect, lazy, Suspense } from "react";
+import React, { useEffect } from "react";
 import { usePelcro } from "../../hooks/usePelcro";
-// import { MeterView } from "./MeterView";
-const MeterView = lazy(() =>
-  import("./MeterView").then((module) => {
-    return { default: module.MeterView };
-  })
-);
+import { MeterView } from "./MeterView";
 
 export const MeterModal = (props) => {
   const { resetView } = usePelcro();
@@ -37,9 +32,7 @@ export const MeterModal = (props) => {
         <span>×</span>
       </button>
       <div>
-        <Suspense fallback={<p>Loading ...</p>}>
-          <MeterView {...props} />
-        </Suspense>
+        <MeterView {...props} />
       </div>
     </div>
   );

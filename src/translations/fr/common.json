@@ -6,10 +6,7 @@
     "enterEmails": "Les adresses e-mail sont obligatoires.",
     "enterUsername": "Nom d'utilisateur est nécessaire.",
     "enterPassword": "Mot de passe requis.",
-    "confirmPassword": "Confirmer le mot de passe requis.",
-    "enterFirstName": "Le prénom est requis.",
-    "enterLastName": "Le nom de famille est requis.",
-    "enterPhone": "Le numéro de téléphone est requis."
+    "confirmPassword": "Confirmer le mot de passe requis."
   },
   "buttons": {
     "account": "Accès abonné(e)s",

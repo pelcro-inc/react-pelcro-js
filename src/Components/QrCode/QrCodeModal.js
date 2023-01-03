@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import {
   Modal,
@@ -6,12 +6,7 @@ import {
   ModalBody,
   ModalFooter
 } from "../../SubComponents/Modal";
-// import { QrCodeView } from "./QrCodeView";
-const QrCodeView = lazy(() =>
-  import("./QrCodeView").then((module) => {
-    return { default: module.QrCodeView };
-  })
-);
+import { QrCodeView } from "./QrCodeView";
 
 export const QrCodeModal = ({ onDisplay, onClose }) => {
   const { t } = useTranslation("qr");
@@ -30,9 +25,7 @@ export const QrCodeModal = ({ onDisplay, onClose }) => {
         </div>
       </ModalHeader>
       <ModalBody>
-        <Suspense fallback={<p>Loading ...</p>}>
-          <QrCodeView />
-        </Suspense>
+        <QrCodeView />
       </ModalBody>
       <ModalFooter></ModalFooter>
     </Modal>

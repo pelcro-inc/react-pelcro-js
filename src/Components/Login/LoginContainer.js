@@ -20,10 +20,6 @@ import {
 } from "../../utils/action-types";
 import { getErrorMessages } from "../common/Helpers";
 
-console.log(
-  "Introudce a new version of the UI with a breaking change"
-);
-
 const initialState = {
   email: "",
   username: "",

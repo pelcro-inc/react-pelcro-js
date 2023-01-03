@@ -1,12 +1,12 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { EmailVerifyView } from "./EmailVerifyView";
 import {
   Modal,
   ModalHeader,
   ModalBody,
   ModalFooter
 } from "../../SubComponents/Modal";
-import { EmailVerifyView } from "./EmailVerifyView";
 
 export const EmailVerifyModal = ({
   onDisplay,

@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { default as ReactGA1 } from "react-ga";
-import { default as ReactGA4 } from "react-ga4";
+import ReactGA from "react-ga";
 import { usePelcro } from "../../hooks/usePelcro";
 import {
   getStableViewID,
@@ -12,10 +11,6 @@ import { loadStripe } from "@stripe/stripe-js/pure";
 import { notify } from "../../SubComponents/Notification";
 import { getErrorMessages } from "../common/Helpers";
 import i18n from "../../i18n";
-
-const ReactGA = window?.Pelcro?.uiSettings?.enableReactGA4
-  ? ReactGA4
-  : ReactGA1;
 
 /**
  * @typedef {Object} OptionsType
@@ -624,38 +619,35 @@ const showPasswordlessRequestFromUrl = () => {
 };
 
 const showInvoiceDetailsFromUrl = () => {
-  const { isAuthenticated, setInvoice, whenUserReady, whenSiteReady, switchView } =
+  const { isAuthenticated, setInvoice, whenSiteReady, switchView } =
     usePelcro.getStore();
 
   whenSiteReady(() => {
     if (!isAuthenticated()) {
       return switchView("login");
     }
-    
-    whenUserReady(()=> {
-      const invoiceId = window.Pelcro.helpers.getURLParameter("id");
-      
-      const wasSetSuccessfully = setInvoice(invoiceId);
-      if (!wasSetSuccessfully) {
-        const errorMessage = i18n.t("messages:invalidInvoice", {
-          returnObjects: true
-        });
+    const invoiceId = window.Pelcro.helpers.getURLParameter("id");
 
-        return notify.error(errorMessage);
-      }
+    const wasSetSuccessfully = setInvoice(invoiceId);
+    if (!wasSetSuccessfully) {
+      const errorMessage = i18n.t("messages:invalidInvoice", {
+        returnObjects: true
+      });
 
-      const { invoice } = usePelcro.getStore();
+      return notify.error(errorMessage);
+    }
 
-      if (invoice.total === 0) {
-        const errorMessage = i18n.t("messages:zeroTotalInvoice", {
-          returnObjects: true
-        });
+    const { invoice } = usePelcro.getStore();
 
-        return notify.error(errorMessage);
-      }
+    if (invoice.total === 0) {
+      const errorMessage = i18n.t("messages:zeroTotalInvoice", {
+        returnObjects: true
+      });
 
-      return switchView("invoice-details");
-    })
+      return notify.error(errorMessage);
+    }
+
+    return switchView("invoice-details");
   });
 };
 

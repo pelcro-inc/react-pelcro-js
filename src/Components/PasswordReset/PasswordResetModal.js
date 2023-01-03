@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import {
   Modal,
@@ -6,12 +6,7 @@ import {
   ModalBody,
   ModalFooter
 } from "../../SubComponents/Modal";
-// import { PasswordResetView } from "./PasswordResetView";
-const PasswordResetView = lazy(() =>
-  import("./PasswordResetView").then((module) => {
-    return { default: module.PasswordResetView };
-  })
-);
+import { PasswordResetView } from "./PasswordResetView";
 
 export const PasswordResetModal = ({
   onDisplay,
@@ -35,9 +30,7 @@ export const PasswordResetModal = ({
         </div>
       </ModalHeader>
       <ModalBody>
-        <Suspense fallback={<p>Loading ...</p>}>
-          <PasswordResetView {...otherProps} />
-        </Suspense>
+        <PasswordResetView {...otherProps} />
       </ModalBody>
       <ModalFooter></ModalFooter>
     </Modal>

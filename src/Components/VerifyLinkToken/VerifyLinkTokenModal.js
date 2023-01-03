@@ -1,19 +1,15 @@
-import React, { lazy, Suspense } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
+import { VerifyLinkTokenView } from "./VerifyLinkTokenView";
 import {
   Modal,
   ModalHeader,
   ModalBody,
   ModalFooter
 } from "../../SubComponents/Modal";
+import Authorship from "../common/Authorship";
 import { notify } from "../../SubComponents/Notification";
 import { usePelcro } from "../../hooks/usePelcro";
-// import { VerifyLinkTokenView } from "./VerifyLinkTokenView";
-const VerifyLinkTokenView = lazy(() =>
-  import("./VerifyLinkTokenView").then((module) => {
-    return { default: module.VerifyLinkTokenView };
-  })
-);
 
 export function VerifyLinkTokenModal({
   onDisplay,
@@ -44,9 +40,7 @@ export function VerifyLinkTokenModal({
       </ModalHeader>
 
       <ModalBody>
-        <Suspense fallback={<p>Loading ...</p>}>
-          <VerifyLinkTokenView {...props} onSuccess={onSuccess} />
-        </Suspense>
+        <VerifyLinkTokenView {...props} onSuccess={onSuccess} />
       </ModalBody>
 
       <ModalFooter></ModalFooter>

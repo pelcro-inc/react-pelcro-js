@@ -52,7 +52,6 @@ export { SelectedPaymentMethod } from "./Components/PaymentMethod/SelectedPaymen
 export { ApplyCouponButton } from "./Components/PaymentMethod/ApplyCouponButton";
 export { CouponCode } from "./Components/PaymentMethod/CouponCode";
 export { BankRedirection } from "./Components/PaymentMethod/BankRedirection";
-export { BankAuthenticationSuccess } from "./Components/PaymentMethod/BankAuthenticationSuccess";
 export { CouponCodeField } from "./Components/PaymentMethod/CouponCodeField";
 export { SubmitPaymentMethod } from "./Components/PaymentMethod/SubmitPaymentMethod";
 export { SubscriptionCreateFreePlanButton } from "./Components/SubscriptionCreate/SubscriptionCreateFreePlanButton";
@@ -248,10 +247,6 @@ export { Tooltip } from "./SubComponents/Tooltip";
 
 export { QrCodeModal } from "./Components/QrCode/QrCodeModal";
 export { QrCodeView } from "./Components/QrCode/QrCodeView";
-
-export { IncludeFirstName } from "./Components/PaymentMethod/IncludeFirstName";
-export { IncludeLastName } from "./Components/PaymentMethod/IncludeLastName";
-export { IncludePhone } from "./Components/PaymentMethod/IncludePhone";
 
 export { default as i18n } from "./i18n";
 

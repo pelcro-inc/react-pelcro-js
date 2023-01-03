@@ -31,6 +31,7 @@ export function LoginModal({ onDisplay, onClose, ...props }) {
 
   const onSuccess = (res) => {
     props.onSuccess?.(res);
+    resetView();
 
     if (window.Pelcro.paywall.isArticleRestricted()) {
       initPaywalls();

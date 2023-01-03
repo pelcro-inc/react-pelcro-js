@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import {
   Modal,
@@ -6,12 +6,8 @@ import {
   ModalBody,
   ModalFooter
 } from "../../SubComponents/Modal";
-// import { PasswordlessRequestView } from "./PasswordlessRequestView";
-const PasswordlessRequestView = lazy(() =>
-  import("./PasswordlessRequestView").then((module) => {
-    return { default: module.PasswordlessRequestView };
-  })
-);
+import Authorship from "../common/Authorship";
+import { PasswordlessRequestView } from "./PasswordlessRequestView";
 
 export const PasswordlessRequestModal = ({
   onDisplay,
@@ -34,9 +30,7 @@ export const PasswordlessRequestModal = ({
         </div>
       </ModalHeader>
       <ModalBody>
-        <Suspense fallback={<p>Loading ...</p>}>
-          <PasswordlessRequestView {...otherProps} />
-        </Suspense>
+        <PasswordlessRequestView {...otherProps} />
       </ModalBody>
       <ModalFooter></ModalFooter>
     </Modal>

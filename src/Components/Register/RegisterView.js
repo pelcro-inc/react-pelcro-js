@@ -13,7 +13,6 @@ import { FacebookLoginButton } from "../common/FacebookLoginButton/FacebookLogin
 import { GoogleLoginButton } from "../common/GoogleLoginButton/GoogleLoginButton";
 import { Auth0LoginButton } from "../common/Auth0LoginButton/Auth0LoginButton";
 import { Link } from "../../SubComponents/Link";
-import { RegisterPhone } from "./RegisterPhone";
 
 /**
  *
@@ -66,17 +65,14 @@ export function RegisterView(props) {
               <RegisterFirstName
                 id="pelcro-input-first-name"
                 label={t("labels.firstName")}
-                errorId="pelcro-input-firstName-error"
               />
               <RegisterLastName
                 wrapperClassName="plc-ml-3"
                 id="pelcro-input-last-name"
                 label={t("labels.lastName")}
-                errorId="pelcro-input-lastName-error"
               />
             </div>
           )}
-
           <RegisterEmail
             id="pelcro-input-email"
             errorId="pelcro-input-email-error"

@@ -6,10 +6,7 @@
     "enterEmails": "Email addresses are required.",
     "enterUsername": "User name is required.",
     "enterPassword": "Password is required.",
-    "confirmPassword": "Confirm password is required.",
-    "enterFirstName": "First name is required.",
-    "enterLastName": "Last name is required.",
-    "enterPhone": "Phone number is required."
+    "confirmPassword": "Confirm password is required."
   },
   "buttons": {
     "account": "My account",

@@ -1,89 +1,22 @@
-import React, {
-  useContext,
-  useState,
-  useEffect,
-  useCallback
-} from "react";
-import { useTranslation } from "react-i18next";
-import { SET_PHONE, SET_PHONE_ERROR } from "../utils/action-types";
+import React, { useContext } from "react";
+import { SET_PHONE } from "../utils/action-types";
 import { Input } from "./Input";
 
-export function Phone({
-  initWithUserPhone = true,
-  store,
-  ...otherProps
-}) {
-  const { t } = useTranslation("common");
-
+export function Phone({ store, ...otherProps }) {
   const {
     dispatch,
-    state: { phone: statePhone, phoneError }
+    state: { phone }
   } = useContext(store);
-  const [phone, setPhone] = useState(statePhone);
-  const [finishedTyping, setFinishedTyping] = useState(false);
 
-  const handleInputChange = useCallback(
-    (value) => {
-      setPhone(value);
-
-      if (finishedTyping) {
-        if (phone?.length) {
-          dispatch({
-            type: SET_PHONE,
-            payload: phone
-          });
-        } else {
-          if (otherProps.required) {
-            dispatch({
-              type: SET_PHONE_ERROR,
-              payload: t("validation.enterPhone")
-            });
-          } else {
-            dispatch({ type: SET_PHONE, payload: phone });
-          }
-        }
-      }
-    },
-    [dispatch, phone, finishedTyping]
-  );
-
-  useEffect(() => {
-    handleInputChange(phone);
-  }, [finishedTyping, phone, handleInputChange]);
-
-  // Initialize phone field with user's phone
-  const loadPhoneIntoField = () => {
-    handleInputChange(window.Pelcro.user.read().phone);
-    dispatch({
-      type: SET_PHONE,
-      payload: window.Pelcro.user.read().phone
-    });
+  const handleInputChange = (value) => {
+    dispatch({ type: SET_PHONE, payload: value });
   };
-
-  useEffect(() => {
-    if (initWithUserPhone) {
-      document.addEventListener("PelcroUserLoaded", () => {
-        loadPhoneIntoField();
-      });
-      loadPhoneIntoField();
-
-      return () => {
-        document.removeEventListener(
-          "PelcroUserLoaded",
-          handleInputChange
-        );
-      };
-    }
-  }, []);
 
   return (
     <Input
       type="tel"
-      error={phoneError}
       value={phone}
       onChange={(e) => handleInputChange(e.target.value)}
-      onBlur={() => setFinishedTyping(true)}
-      onFocus={() => setFinishedTyping(false)}
       {...otherProps}
     />
   );
