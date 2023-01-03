@@ -1,5 +1,6 @@
-import React, { Suspense, lazy } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
+import { OrderCreateView } from "./OrderCreateView";
 import {
   Modal,
   ModalHeader,
@@ -7,12 +8,6 @@ import {
   ModalFooter
 } from "../../SubComponents/Modal";
 import { usePelcro } from "../../hooks/usePelcro";
-// import { OrderCreateView } from "./OrderCreateView";
-const OrderCreateView = lazy(() =>
-  import("./OrderCreateView").then((module) => {
-    return { default: module.OrderCreateView };
-  })
-);
 
 export const OrderCreateModal = ({
   onDisplay,
@@ -41,9 +36,7 @@ export const OrderCreateModal = ({
         </div>
       </ModalHeader>
       <ModalBody>
-        <Suspense fallback={<p>Loading ...</p>}>
-          <OrderCreateView {...otherProps} onSuccess={onSuccess} />
-        </Suspense>
+        <OrderCreateView {...otherProps} onSuccess={onSuccess} />
       </ModalBody>
       <ModalFooter></ModalFooter>
     </Modal>

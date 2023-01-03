@@ -1,5 +1,6 @@
-import React, { lazy, Suspense } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
+import { AddressCreateView } from "./AddressCreateView";
 import {
   Modal,
   ModalHeader,
@@ -7,12 +8,6 @@ import {
   ModalFooter
 } from "../../SubComponents/Modal";
 import { usePelcro } from "../../hooks/usePelcro";
-// import { AddressCreateView } from "./AddressCreateView";
-const AddressCreateView = lazy(() =>
-  import("./AddressCreateView").then((module) => {
-    return { default: module.AddressCreateView };
-  })
-);
 
 export const AddressCreateModal = ({
   onDisplay,
@@ -53,16 +48,14 @@ export const AddressCreateModal = ({
         </div>
       </ModalHeader>
       <ModalBody>
-        <Suspense fallback={<p>Loading ...</p>}>
-          <AddressCreateView
-            {...otherProps}
-            onSuccess={onSuccess}
-            onGiftRedemptionSuccess={onGiftRedemptionSuccess}
-            onMembershipAdressUpdateSuccess={
-              onMembershipAdressUpdateSuccess
-            }
-          />
-        </Suspense>
+        <AddressCreateView
+          {...otherProps}
+          onSuccess={onSuccess}
+          onGiftRedemptionSuccess={onGiftRedemptionSuccess}
+          onMembershipAdressUpdateSuccess={
+            onMembershipAdressUpdateSuccess
+          }
+        />
       </ModalBody>
       <ModalFooter></ModalFooter>
     </Modal>

@@ -11,15 +11,11 @@ import { CouponCode } from "./CouponCode";
 import { AlertWithContext } from "../../SubComponents/AlertWithContext";
 import { PaypalSubscribeButton } from "../PaypalButtons/PaypalSubscribeButton";
 import { BankRedirection } from "./BankRedirection";
-import { BankAuthenticationSuccess } from "./BankAuthenticationSuccess";
 import { Link } from "../../SubComponents/Link";
 import { ReactComponent as LockIcon } from "../../assets/lock.svg";
 import { SelectedPaymentMethod } from "./SelectedPaymentMethod";
 import { TaxAmount } from "./TaxAmount";
 import { getSiteCardProcessor } from "../../Components/common/Helpers";
-import { IncludeFirstName } from "./IncludeFirstName";
-import { IncludeLastName } from "./IncludeLastName";
-import { IncludePhone } from "./IncludePhone";
 
 /**
  *
@@ -42,12 +38,6 @@ export function PaymentMethodView({
   const supportsTap = Boolean(
     window.Pelcro.site.read()?.tap_gateway_settings
   );
-
-  const isUserFirstName = Boolean(
-    window.Pelcro.user.read().first_name
-  );
-  const isUserLastName = Boolean(window.Pelcro.user.read().last_name);
-  const isUserPhone = Boolean(window.Pelcro.user.read().phone);
 
   return (
     <div className="plc-flex plc-flex-col plc-items-center plc-mt-4 sm:plc-px-8 pelcro-payment-block">
@@ -79,42 +69,10 @@ export function PaymentMethodView({
           onFailure={onFailure}
         >
           <BankRedirection />
-          <BankAuthenticationSuccess />
           <AlertWithContext className="plc-mb-2" />
           {/* Payment form */}
           <div>
             <SelectedPaymentMethod />
-
-            {supportsTap &&
-              (!isUserFirstName ||
-                !isUserLastName ||
-                !isUserPhone) && (
-                <>
-                  <div className="plc-flex plc-items-start">
-                    <IncludeFirstName
-                      id="pelcro-input-first-name"
-                      label={t("labels.firstName")}
-                      errorId="pelcro-input-firstName-error"
-                      required
-                    />
-                    <IncludeLastName
-                      wrapperClassName="plc-ml-3"
-                      id="pelcro-input-last-name"
-                      label={t("labels.lastName")}
-                      errorId="pelcro-input-lastName-error"
-                      required
-                    />
-                  </div>
-
-                  <IncludePhone
-                    id="pelcro-input-phone"
-                    errorId="pelcro-input-phone-error"
-                    label={t("labels.phone")}
-                    required
-                  />
-                </>
-              )}
-
             <CheckoutForm />
 
             {/* Coupon section */}
@@ -130,9 +88,7 @@ export function PaymentMethodView({
             {/* Payment buttons section */}
             <div className="plc-grid plc-mt-4 plc-gap-y-2">
               <SubmitPaymentMethod />
-              {showExternalPaymentMethods &&
-              !supportsVantiv &&
-              !supportsTap ? (
+              {showExternalPaymentMethods && !supportsVantiv ? (
                 <>
                   <PelcroPaymentRequestButton />
                   <PaypalSubscribeButton />

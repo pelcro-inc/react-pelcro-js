@@ -1,8 +1,7 @@
 {
   "messages": {
     "youAreSafe": "You're safe - PCI compliant 128 SSL by",
-    "bankRedirection": "Please hold, redirecting you to your bank.",
-    "bankAuthenticationSuccess": "Please wait while we process your request."
+    "bankRedirection": "Please hold, redirecting you to your bank."
   },
   "labels": {
     "card": "Enter card number",
@@ -19,10 +18,7 @@
     "for": "for",
     "interval": "{{count}} {{interval}}",
     "interval_plural": "{{count}} {{interval}}s",
-    "tax": "Tax",
-    "removeCoupon": "REMOVE",
-    "firstName": "First name",
-    "lastName": "Last name",
-    "phone": "Phone"
+    "tax": "+ Tax",
+    "removeCoupon": "REMOVE"
   }
 }

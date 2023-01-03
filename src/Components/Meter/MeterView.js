@@ -1,7 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { usePelcro } from "../../hooks/usePelcro";
-import { Button } from "../../SubComponents/Button";
 import { Link } from "../../SubComponents/Link";
 
 export const MeterView = () => {
@@ -21,20 +20,28 @@ export const MeterView = () => {
         {title}
       </h4>
       <p className="plc-text-sm plc-text-gray-600">
-        {subtitle},
-        {!isAuthenticated() &&
-          " or " + t("messages.alreadyHaveAccount")}
-      </p>
-      <div className="plc-flex plc-mt-2">
-        <Button className="plc-w-1/2" onClick={() => switchView("plan-select")}>
+        {subtitle}{" "}
+        <Link
+          className="plc-ml-1"
+          onClick={() => switchView("plan-select")}
+        >
           {t("messages.subscribeNow")}
-        </Button>
+        </Link>
         {!isAuthenticated() && (
-          <Button className="pelcro-button-ghost plc-w-1/2" onClick={() => switchView("login")}>
-            {t("messages.loginHere")}
-          </Button>
+          <>
+            <br />
+            <span>
+              {t("messages.alreadyHaveAccount") + " "}
+              <Link
+                className="plc-ml-1"
+                onClick={() => switchView("login")}
+              >
+                {t("messages.loginHere")}
+              </Link>
+            </span>
+          </>
         )}
-      </div>
+      </p>
     </div>
   );
 };

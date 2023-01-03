@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import {
   Modal,
@@ -6,14 +6,10 @@ import {
   ModalBody,
   ModalFooter
 } from "../../SubComponents/Modal";
+import Authorship from "../common/Authorship";
+import { GiftCreateView } from "./GiftCreateView";
 import { Link } from "../../SubComponents/Link";
 import { usePelcro } from "../../hooks/usePelcro";
-// import { GiftCreateView } from "./GiftCreateView";
-const GiftCreateView = lazy(() =>
-  import("./GiftCreateView").then((module) => {
-    return { default: module.GiftCreateView };
-  })
-);
 
 export const GiftCreateModal = ({
   onDisplay,
@@ -52,9 +48,7 @@ export const GiftCreateModal = ({
         </div>
       </ModalHeader>
       <ModalBody>
-        <Suspense fallback={<p>Loading ...</p>}>
-          <GiftCreateView {...otherProps} onSuccess={onSuccess} />
-        </Suspense>
+        <GiftCreateView {...otherProps} onSuccess={onSuccess} />
       </ModalBody>
       <ModalFooter>
         <p className="plc-mb-9">

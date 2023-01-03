@@ -8,13 +8,9 @@ import {
   SET_EMAIL,
   SET_EMAIL_ERROR,
   SET_FIRST_NAME,
-  SET_FIRST_NAME_ERROR,
   SET_LAST_NAME,
-  SET_LAST_NAME_ERROR,
   SET_DISPLAY_NAME,
   SET_PHONE,
-  SET_TIN,
-  SET_PHONE_ERROR,
   SET_TEXT_FIELD,
   HANDLE_USER_UPDATE,
   DISABLE_USER_UPDATE_BUTTON,
@@ -26,13 +22,9 @@ const initialState = {
   email: window.Pelcro.user.read()?.email,
   emailError: null,
   firstName: window.Pelcro.user.read()?.first_name,
-  firstNameError: null,
   lastName: window.Pelcro.user.read()?.last_name,
-  lastNameError: null,
   displayName: window.Pelcro.user.read()?.display_name,
   phone: window.Pelcro.user.read()?.phone,
-  phoneError: null,
-  tin: window.Pelcro.user.read()?.tin,
   buttonDisabled: false,
   textFields: {},
   alert: {
@@ -82,10 +74,6 @@ const UserUpdateContainer = ({
       {
         type: SET_PHONE,
         payload: window.Pelcro.user.read()?.phone
-      },
-      {
-        type: SET_TIN,
-        payload: window.Pelcro.user.read()?.tin
       }
     ];
 
@@ -97,15 +85,7 @@ const UserUpdateContainer = ({
   };
 
   const handleUpdateUser = (
-    {
-      email,
-      firstName,
-      lastName,
-      phone,
-      tin,
-      textFields,
-      displayName
-    },
+    { email, firstName, lastName, phone, textFields, displayName },
     dispatch
   ) => {
     window.Pelcro.user.update(
@@ -116,7 +96,6 @@ const UserUpdateContainer = ({
         last_name: lastName,
         display_name: displayName,
         phone: phone,
-        tin: tin,
         metadata: { updated: "updated", ...textFields }
       },
       (err, res) => {
@@ -160,29 +139,19 @@ const UserUpdateContainer = ({
         case SET_EMAIL:
           return Update({
             ...state,
-            email: action.payload,
-            emailError: null
+            email: action.payload
           });
 
         case SET_EMAIL_ERROR:
           return Update({
             ...state,
-            emailError: action.payload,
-            email: ""
+            emailError: action.payload
           });
 
         case SET_FIRST_NAME:
           return Update({
             ...state,
-            firstName: action.payload,
-            firstNameError: null
-          });
-
-        case SET_FIRST_NAME_ERROR:
-          return Update({
-            ...state,
-            firstNameError: action.payload,
-            firstName: ""
+            firstName: action.payload
           });
 
         case SET_DISPLAY_NAME:
@@ -194,35 +163,13 @@ const UserUpdateContainer = ({
         case SET_LAST_NAME:
           return Update({
             ...state,
-            lastName: action.payload,
-            lastNameError: null
-          });
-
-        case SET_LAST_NAME_ERROR:
-          return Update({
-            ...state,
-            lastNameError: action.payload,
-            lastName: ""
+            lastName: action.payload
           });
 
         case SET_PHONE:
           return Update({
             ...state,
-            phone: action.payload,
-            phoneError: null
-          });
-
-        case SET_TIN:
-          return Update({
-            ...state,
-            tin: action.payload
-          });
-
-        case SET_PHONE_ERROR:
-          return Update({
-            ...state,
-            phoneError: action.payload,
-            phone: ""
+            phone: action.payload
           });
 
         case SHOW_ALERT:

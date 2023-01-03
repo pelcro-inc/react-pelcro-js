@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react";
+import React from "react";
 import { usePelcro } from "../../hooks/usePelcro";
 import {
   Modal,
@@ -7,12 +7,7 @@ import {
   ModalFooter
 } from "../../SubComponents/Modal";
 import { trackSubscriptionOnGA } from "../../utils/utils";
-// import { SubscriptionCreateView } from "./SubscriptionCreateView";
-const SubscriptionCreateView = lazy(() =>
-  import("./SubscriptionCreateView").then((module) => {
-    return { default: module.SubscriptionCreateView };
-  })
-);
+import { SubscriptionCreateView } from "./SubscriptionCreateView";
 
 /**
  *
@@ -50,12 +45,10 @@ export function SubscriptionCreateModal({
         </div>
       </ModalHeader>
       <ModalBody>
-        <Suspense fallback={<p>Loading ...</p>}>
-          <SubscriptionCreateView
-            {...otherProps}
-            onSuccess={onSuccess}
-          />
-        </Suspense>
+        <SubscriptionCreateView
+          {...otherProps}
+          onSuccess={onSuccess}
+        />
       </ModalBody>
       <ModalFooter></ModalFooter>
     </Modal>

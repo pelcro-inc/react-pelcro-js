@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { default as ReactGA1 } from "react-ga";
-import { default as ReactGA4 } from "react-ga4";
+import ReactGA from "react-ga";
 import { Transition } from "@headlessui/react";
 import { withTranslation } from "react-i18next";
 import { Button } from "../../SubComponents/Button";
@@ -39,8 +38,6 @@ import { PaymentCardsMenu } from "./DashboardMenus/PaymentCardsMenu";
 import { QRCodeMenu } from "./DashboardMenus/QRCodeMenu";
 import { ProfileMenu } from "./DashboardMenus/ProfileMenu";
 import { NewslettersMenu } from "./DashboardMenus/NewslettersMenu";
-
-const ReactGA = window?.Pelcro?.uiSettings?.enableReactGA4 ? ReactGA4 : ReactGA1;
 
 const SUB_MENUS = {
   PROFILE: "profile",

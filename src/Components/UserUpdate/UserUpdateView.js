@@ -8,14 +8,9 @@ import { UserUpdateButton } from "./UserUpdateButton";
 import { UserUpdateContainer } from "./UserUpdateContainer";
 import { AlertWithContext } from "../../SubComponents/AlertWithContext";
 import { UserUpdateProfilePic } from "./UserUpdateProfilePic";
-import { UserUpdateTin } from "./UserUpdateTin";
 
 export const UserUpdateView = (props) => {
   const { t } = useTranslation("userEdit");
-
-  const supportsTap = Boolean(
-    window.Pelcro.site.read()?.tap_gateway_settings
-  );
 
   return (
     <div id="pelcro-user-update-view">
@@ -36,7 +31,6 @@ export const UserUpdateView = (props) => {
               errorId="pelcro-input-first-name-error"
               label={t("labels.firstName")}
               autoFocus={true}
-              required={supportsTap ? true : false}
             />
             <UserUpdateLastName
               wrapperClassName="plc-ml-3"
@@ -44,7 +38,6 @@ export const UserUpdateView = (props) => {
               id="pelcro-input-last-name"
               errorId="pelcro-input-last-name-error"
               label={t("labels.lastName")}
-              required={supportsTap ? true : false}
             />
           </div>
           <div className="plc-flex plc-items-start">
@@ -52,13 +45,6 @@ export const UserUpdateView = (props) => {
               id="pelcro-input-phone"
               errorId="pelcro-input-phone-error"
               label={t("labels.phone")}
-              required={supportsTap ? true : false}
-            />
-          </div>
-          <div className="plc-flex plc-items-start">
-            <UserUpdateTin
-              id="pelcro-input-tin"
-              label={t("labels.tin")}
             />
           </div>
           <UserUpdateButton

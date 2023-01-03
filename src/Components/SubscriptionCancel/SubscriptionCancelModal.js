@@ -1,5 +1,6 @@
-import React, { lazy, Suspense } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
+import { SubscriptionCancelView } from "./SubscriptionCancelView";
 import {
   Modal,
   ModalHeader,
@@ -7,12 +8,6 @@ import {
   ModalFooter
 } from "../../SubComponents/Modal";
 import { usePelcro } from "../../hooks/usePelcro";
-// import { SubscriptionCancelView } from "./SubscriptionCancelView";
-const SubscriptionCancelView = lazy(() =>
-  import("./SubscriptionCancelView").then((module) => {
-    return { default: module.SubscriptionCancelView };
-  })
-);
 
 export const SubscriptionCancelModal = ({
   onDisplay,
@@ -40,9 +35,7 @@ export const SubscriptionCancelModal = ({
       </ModalHeader>
 
       <ModalBody>
-        <Suspense fallback={<p>Loading ...</p>}>
-          <SubscriptionCancelView {...otherProps} />
-        </Suspense>
+        <SubscriptionCancelView {...otherProps} />
       </ModalBody>
 
       <ModalFooter></ModalFooter>

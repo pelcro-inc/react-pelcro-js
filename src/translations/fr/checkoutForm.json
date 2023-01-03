@@ -1,8 +1,7 @@
 {
   "messages": {
     "youAreSafe": "Vous êtes en sécurité - PCI conforme 128 SSL par",
-    "bankRedirection": "Veuillez patienter, nous vous redirigeons vers votre banque.",
-    "bankAuthenticationSuccess": "Veuillez patienter pendant que nous accédons à votre requête."
+    "bankRedirection": "Veuillez patienter, nous vous redirigeons vers votre banque."
   },
   "labels": {
     "card": "Entrez le numéro de carte",
@@ -19,10 +18,7 @@
     "for": "pour",
     "interval": "{{count}} {{interval}}",
     "interval_plural": "{{count}} {{interval}}s",
-    "tax": "Taxe",
-    "removeCoupon": "RETIRER",
-    "firstName": "Prénom",
-    "lastName": "Nom de famille",
-    "phone": "Téléphoner"
+    "tax": "+ Taxe",
+    "removeCoupon": "RETIRER"
   }
 }

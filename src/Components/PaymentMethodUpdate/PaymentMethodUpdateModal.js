@@ -1,23 +1,13 @@
-import React, { Suspense, lazy } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
+import ReactGA from "react-ga";
+import { PaymentMethodUpdateView } from "./PaymentMethodUpdateView";
 import {
   Modal,
   ModalHeader,
   ModalBody,
   ModalFooter
 } from "../../SubComponents/Modal";
-import { default as ReactGA1 } from "react-ga";
-import { default as ReactGA4 } from "react-ga4";
-
-const ReactGA = window?.Pelcro?.uiSettings?.enableReactGA4
-  ? ReactGA4
-  : ReactGA1;
-// import { PaymentMethodUpdateView } from "./PaymentMethodUpdateView";
-const PaymentMethodUpdateView = lazy(() =>
-  import("./PaymentMethodUpdateView").then((module) => {
-    return { default: module.PaymentMethodUpdateView };
-  })
-);
 
 export const PaymentMethodUpdateModal = (props) => {
   const { t } = useTranslation("paymentMethod");
@@ -47,9 +37,7 @@ export const PaymentMethodUpdateModal = (props) => {
       </ModalHeader>
 
       <ModalBody>
-        <Suspense fallback={<p>Loading ...</p>}>
-          <PaymentMethodUpdateView {...props} onSuccess={onSuccess} />
-        </Suspense>
+        <PaymentMethodUpdateView {...props} onSuccess={onSuccess} />
       </ModalBody>
 
       <ModalFooter></ModalFooter>

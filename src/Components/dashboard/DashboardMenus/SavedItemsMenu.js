@@ -1,14 +1,11 @@
 import React, { useState } from "react";
-import { default as ReactGA1 } from "react-ga";
-import { default as ReactGA4 } from "react-ga4";
+import ReactGA from "react-ga";
 import { useTranslation } from "react-i18next";
 import { ReactComponent as XIcon } from "../../../assets/x-icon.svg";
 import { usePelcro } from "../../../hooks/usePelcro";
 import { Button } from "../../../SubComponents/Button";
 import { Link } from "../../../SubComponents/Link";
 import { Card } from "../Card";
-
-const ReactGA = window?.Pelcro?.uiSettings?.enableReactGA4 ? ReactGA4 : ReactGA1;
 
 export const SavedItemsMenu = () => {
   const { t } = useTranslation("dashboard");

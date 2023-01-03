@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import {
   Modal,
@@ -6,12 +6,7 @@ import {
   ModalBody,
   ModalFooter
 } from "../../SubComponents/Modal";
-// import { PasswordChangeView } from "./PasswordChangeView";
-const PasswordChangeView = lazy(() =>
-  import("./PasswordChangeView").then((module) => {
-    return { default: module.PasswordChangeView };
-  })
-);
+import { PasswordChangeView } from "./PasswordChangeView";
 
 export const PasswordChangeModal = ({
   onDisplay,
@@ -34,9 +29,7 @@ export const PasswordChangeModal = ({
         </div>
       </ModalHeader>
       <ModalBody>
-        <Suspense fallback={<p>Loading ...</p>}>
-          <PasswordChangeView {...otherProps} />
-        </Suspense>
+        <PasswordChangeView {...otherProps} />
       </ModalBody>
       <ModalFooter></ModalFooter>
     </Modal>

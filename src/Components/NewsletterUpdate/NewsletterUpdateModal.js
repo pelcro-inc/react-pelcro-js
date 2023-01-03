@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import {
   Modal,
@@ -6,12 +6,8 @@ import {
   ModalBody,
   ModalFooter
 } from "../../SubComponents/Modal";
-// import { NewsletterUpdateView } from "./NewsletterUpdateView";
-const NewsletterUpdateView = lazy(() =>
-  import("./NewsletterUpdateView").then((module) => {
-    return { default: module.NewsletterUpdateView };
-  })
-);
+import Authorship from "../common/Authorship";
+import { NewsletterUpdateView } from "./NewsletterUpdateView";
 
 export const NewsletterUpdateModal = ({
   onDisplay,
@@ -34,9 +30,7 @@ export const NewsletterUpdateModal = ({
         </div>
       </ModalHeader>
       <ModalBody>
-        <Suspense fallback={<p>Loading ...</p>}>
-          <NewsletterUpdateView {...otherProps} />
-        </Suspense>
+        <NewsletterUpdateView {...otherProps} />
       </ModalBody>
       <ModalFooter></ModalFooter>
     </Modal>
