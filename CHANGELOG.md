@@ -1,5 +1,16 @@
 # [3.17.0-beta.10](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.17.0-beta.9...v3.17.0-beta.10) (2023-01-12)
 
+# [4.0.0-alpha.17](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.16...v4.0.0-alpha.17) (2023-01-03)
+
+### Features
+
+- add alpha branch to release cycle ([1886630](https://github.com/pelcro-inc/react-pelcro-js/commit/188663023d694b13a4debc01db6de7148aeaba9c))
+- remove console log statement ([cadac32](https://github.com/pelcro-inc/react-pelcro-js/commit/cadac320edaf05e850e9c2d542f215cf37d62003))
+- remove console.log ([1947f71](https://github.com/pelcro-inc/react-pelcro-js/commit/1947f71003ba3c7f76bb4548fed3cc9bcd58c751))
+- revert back all code splitting ([cc1adfb](https://github.com/pelcro-inc/react-pelcro-js/commit/cc1adfb89fc2d7fe0203efc8674a14a1a8269706))
+
+# [3.8.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.7.1...v3.8.0) (2022-09-23)
+
 # [4.0.0-alpha.16](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.15...v4.0.0-alpha.16) (2023-01-03)
 
 ### Bug Fixes
