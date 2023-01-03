@@ -1,5 +1,4 @@
-import React from "react";
-import { SubscriptionRenewView } from "./SubscriptionRenewView";
+import React, { lazy, Suspense } from "react";
 import {
   Modal,
   ModalHeader,
@@ -10,7 +9,15 @@ import { usePelcro } from "../../hooks/usePelcro";
 import { default as ReactGA1 } from "react-ga";
 import { default as ReactGA4 } from "react-ga4";
 
-const ReactGA = window?.Pelcro?.uiSettings?.enableReactGA4 ? ReactGA4 : ReactGA1;
+const ReactGA = window?.Pelcro?.uiSettings?.enableReactGA4
+  ? ReactGA4
+  : ReactGA1;
+// import { SubscriptionRenewView } from "./SubscriptionRenewView";
+const SubscriptionRenewView = lazy(() =>
+  import("./SubscriptionRenewView").then((module) => {
+    return { default: module.SubscriptionRenewView };
+  })
+);
 
 /**
  *
@@ -63,11 +70,13 @@ export function SubscriptionRenewModal({
         </div>
       </ModalHeader>
       <ModalBody>
-        <SubscriptionRenewView
-          {...otherProps}
-          onSuccess={onSuccess}
-          onGiftRenewalSuccess={onGiftRenewalSuccess}
-        />
+        <Suspense fallback={<p>Loading ...</p>}>
+          <SubscriptionRenewView
+            {...otherProps}
+            onSuccess={onSuccess}
+            onGiftRenewalSuccess={onGiftRenewalSuccess}
+          />
+        </Suspense>
       </ModalBody>
       <ModalFooter></ModalFooter>
     </Modal>

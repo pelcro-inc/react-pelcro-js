@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense, lazy } from "react";
 import { useTranslation } from "react-i18next";
 import {
   Modal,
@@ -6,10 +6,14 @@ import {
   ModalBody,
   ModalFooter
 } from "../../SubComponents/Modal";
-import Authorship from "../common/Authorship";
-import { GiftRedeemView } from "./GiftRedeemView";
 import { Link } from "../../SubComponents/Link";
 import { usePelcro } from "../../hooks/usePelcro";
+// import { GiftRedeemView } from "./GiftRedeemView";
+const GiftRedeemView = lazy(() =>
+  import("./GiftRedeemView").then((module) => {
+    return { default: module.GiftRedeemView };
+  })
+);
 
 export const GiftRedeemModal = ({
   onClose,
@@ -44,7 +48,9 @@ export const GiftRedeemModal = ({
         </div>
       </ModalHeader>
       <ModalBody>
-        <GiftRedeemView {...otherProps} onSuccess={onSuccess} />
+        <Suspense fallback={<p>Loading ...</p>}>
+          <GiftRedeemView {...otherProps} onSuccess={onSuccess} />
+        </Suspense>
       </ModalBody>
       <ModalFooter>
         {isAuthenticated() && (

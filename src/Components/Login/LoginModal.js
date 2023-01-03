@@ -1,7 +1,5 @@
-import React from "react";
+import React, { Suspense, lazy } from "react";
 import { useTranslation } from "react-i18next";
-import Authorship from "../common/Authorship";
-import { LoginView } from "./LoginView";
 import {
   Modal,
   ModalHeader,
@@ -10,8 +8,17 @@ import {
 } from "../../SubComponents/Modal";
 import { Link } from "../../SubComponents/Link";
 import { usePelcro } from "../../hooks/usePelcro";
-import { initPaywalls, initViewFromURL } from "../PelcroModalController/PelcroModalController.service";
+import {
+  initPaywalls,
+  initViewFromURL
+} from "../PelcroModalController/PelcroModalController.service";
 import { getStableViewID } from "../../utils/utils";
+// import { LoginView } from "./LoginView";
+const LoginView = lazy(() =>
+  import("./LoginView").then((module) => {
+    return { default: module.LoginView };
+  })
+);
 
 /**
  *
@@ -22,13 +29,13 @@ export function LoginModal({ onDisplay, onClose, ...props }) {
 
   const onSuccess = (res) => {
     props.onSuccess?.(res);
-    
+
     if (window.Pelcro.paywall.isArticleRestricted()) {
       initPaywalls();
     }
-    
+
     resetView();
-    
+
     const viewFromURL = getStableViewID(
       window.Pelcro.helpers.getURLParameter("view")
     );
@@ -64,12 +71,14 @@ export function LoginModal({ onDisplay, onClose, ...props }) {
         </div>
       </ModalHeader>
       <ModalBody>
-        <LoginView
-          onForgotPassword={onForgotPassword}
-          {...props}
-          onSuccess={onSuccess}
-          onPasswordlessRequest={onPasswordlessRequest}
-        />
+        <Suspense fallback={<p>Loading ...</p>}>
+          <LoginView
+            onForgotPassword={onForgotPassword}
+            {...props}
+            onSuccess={onSuccess}
+            onPasswordlessRequest={onPasswordlessRequest}
+          />
+        </Suspense>
       </ModalBody>
       <ModalFooter>
         <p className="plc-mb-9">

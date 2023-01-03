@@ -1,4 +1,4 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { useTranslation } from "react-i18next";
 import { usePelcro } from "../../hooks/usePelcro";
 import { Link } from "../../SubComponents/Link";
@@ -8,11 +8,18 @@ import {
   ModalBody,
   ModalFooter
 } from "../../SubComponents/Modal";
-import { RegisterView } from "./RegisterView";
 import { default as ReactGA1 } from "react-ga";
 import { default as ReactGA4 } from "react-ga4";
 
-const ReactGA = window?.Pelcro?.uiSettings?.enableReactGA4 ? ReactGA4 : ReactGA1;
+const ReactGA = window?.Pelcro?.uiSettings?.enableReactGA4
+  ? ReactGA4
+  : ReactGA1;
+// import { RegisterView } from "./RegisterView";
+const RegisterView = lazy(() =>
+  import("./RegisterView").then((module) => {
+    return { default: module.RegisterView };
+  })
+);
 
 /**
  *
@@ -97,7 +104,9 @@ export function RegisterModal(props) {
         </div>
       </ModalHeader>
       <ModalBody>
-        <RegisterView {...props} onSuccess={onSuccess} />
+        <Suspense fallback={<p>Loading ...</p>}>
+          <RegisterView {...props} onSuccess={onSuccess} />
+        </Suspense>
       </ModalBody>
       <ModalFooter>
         <p className="plc-mb-9">
