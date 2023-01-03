@@ -1,5 +1,16 @@
 # [3.17.0-beta.10](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.17.0-beta.9...v3.17.0-beta.10) (2023-01-12)
 
+# [4.0.0-alpha.14](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.13...v4.0.0-alpha.14) (2023-01-03)
+
+### Features
+
+- add code splitting to all modals ([f318988](https://github.com/pelcro-inc/react-pelcro-js/commit/f31898889a2a4162d26b4f3bf2fdc5f79725d57d))
+- add new breakpoint and edit modal header ([a93505d](https://github.com/pelcro-inc/react-pelcro-js/commit/a93505daedcf93647af30a2b88f9eae9cf5ffbb8))
+- edit rollup config to allow dynamic imports ([e6dbcfe](https://github.com/pelcro-inc/react-pelcro-js/commit/e6dbcfee88bcde9684c910d09a7daf089eaf8eb3))
+- merge code splitting branch ([175cb02](https://github.com/pelcro-inc/react-pelcro-js/commit/175cb027b6691ac59b80637dc543b7a02cac4ed7))
+
+# [4.0.0-alpha.13](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.12...v4.0.0-alpha.13) (2022-12-12)
+
 # [4.0.0-alpha.13](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.12...v4.0.0-alpha.13) (2022-12-12)
 
 ### Features
