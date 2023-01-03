@@ -1,3 +1,10 @@
+# [4.0.0-alpha.16](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.15...v4.0.0-alpha.16) (2023-01-03)
+
+
+### Bug Fixes
+
+* update package.json and rollup config ([ff1f1b5](https://github.com/pelcro-inc/react-pelcro-js/commit/ff1f1b573879d49e21285197de7366880b09721a))
+
 # [4.0.0-alpha.15](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.14...v4.0.0-alpha.15) (2023-01-03)
 
 
