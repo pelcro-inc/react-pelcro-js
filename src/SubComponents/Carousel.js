@@ -1,5 +1,6 @@
-import React, { useRef } from "react";
-import Slider from "react-slick";
+import React, { useRef, lazy, Suspense } from "react";
+// import Slider from "react-slick";
+const Slider = lazy(() => import("react-slick"));
 import { ReactComponent as ArrowThinRight } from "../assets/arrow-thin-right.svg";
 import { ReactComponent as ArrowThinLeft } from "../assets/arrow-thin-left.svg";
 
@@ -70,9 +71,11 @@ export function Carousel({
 
   return (
     <div className="carousel-wrapper plc-relative sm:plc-px-16 plc-px-0">
-      <Slider ref={ref} {...settings}>
-        {children}
-      </Slider>
+      <Suspense fallback={<p>Loading ...</p>}>
+        <Slider ref={ref} {...settings}>
+          {children}
+        </Slider>
+      </Suspense>
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { useTranslation } from "react-i18next";
 import { usePelcro } from "../../hooks/usePelcro";
 import {
@@ -7,7 +7,12 @@ import {
   ModalBody,
   ModalFooter
 } from "../../SubComponents/Modal";
-import { CartView } from "./CartView";
+// import { CartView } from "./CartView";
+const CartView = lazy(() =>
+  import("./CartView").then((module) => {
+    return { default: module.CartView };
+  })
+);
 
 export const CartModal = ({ onDisplay, onClose, ...otherProps }) => {
   const { switchView, switchToAddressView, isAuthenticated } =
@@ -41,7 +46,9 @@ export const CartModal = ({ onDisplay, onClose, ...otherProps }) => {
       </ModalHeader>
 
       <ModalBody>
-        <CartView {...otherProps} onSuccess={onSuccess} />
+        <Suspense fallback={<p>Loading ...</p>}>
+          <CartView {...otherProps} onSuccess={onSuccess} />
+        </Suspense>
       </ModalBody>
 
       <ModalFooter></ModalFooter>

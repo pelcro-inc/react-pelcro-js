@@ -1,12 +1,16 @@
-import React, { useEffect } from "react";
+import React, { lazy, Suspense } from "react";
 import { usePelcro } from "../../hooks/usePelcro";
 import {
   Modal,
   ModalBody,
   ModalFooter
 } from "../../SubComponents/Modal";
-import Authorship from "../common/Authorship";
-import { PaymentSuccessView } from "./PaymentSuccessView";
+// import { PaymentSuccessView } from "./PaymentSuccessView";
+const PaymentSuccessView = lazy(() =>
+  import("./PaymentSuccessView").then((module) => {
+    return { default: module.PaymentSuccessView };
+  })
+);
 
 /**
  *
@@ -26,7 +30,9 @@ export function PaymentSuccessModal({ onDisplay, ...props }) {
       onClose={onClose}
     >
       <ModalBody>
-        <PaymentSuccessView onClose={onClose} />
+        <Suspense fallback={<p>Loading ...</p>}>
+          <PaymentSuccessView onClose={onClose} />
+        </Suspense>
       </ModalBody>
       <ModalFooter></ModalFooter>
     </Modal>

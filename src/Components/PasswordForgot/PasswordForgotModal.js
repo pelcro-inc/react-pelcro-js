@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense, lazy } from "react";
 import { useTranslation } from "react-i18next";
 import { usePelcro } from "../../hooks/usePelcro";
 import { Link } from "../../SubComponents/Link";
@@ -8,8 +8,12 @@ import {
   ModalBody,
   ModalFooter
 } from "../../SubComponents/Modal";
-import Authorship from "../common/Authorship";
-import { PasswordForgotView } from "./PasswordForgotView";
+// import { PasswordForgotView } from "./PasswordForgotView";
+const PasswordForgotView = lazy(() =>
+  import("./PasswordForgotView").then((module) => {
+    return { default: module.PasswordForgotView };
+  })
+);
 
 export const PasswordForgotModal = ({
   onDisplay,
@@ -33,7 +37,9 @@ export const PasswordForgotModal = ({
         </div>
       </ModalHeader>
       <ModalBody>
-        <PasswordForgotView {...otherProps} />
+        <Suspense fallback={<p>Loading ...</p>}>
+          <PasswordForgotView {...otherProps} />
+        </Suspense>
       </ModalBody>
       <ModalFooter>
         <p className="plc-mb-9">

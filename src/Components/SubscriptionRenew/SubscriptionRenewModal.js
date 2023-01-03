@@ -1,6 +1,5 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import ReactGA from "react-ga";
-import { SubscriptionRenewView } from "./SubscriptionRenewView";
 import {
   Modal,
   ModalHeader,
@@ -8,6 +7,12 @@ import {
   ModalFooter
 } from "../../SubComponents/Modal";
 import { usePelcro } from "../../hooks/usePelcro";
+// import { SubscriptionRenewView } from "./SubscriptionRenewView";
+const SubscriptionRenewView = lazy(() =>
+  import("./SubscriptionRenewView").then((module) => {
+    return { default: module.SubscriptionRenewView };
+  })
+);
 
 /**
  *
@@ -60,11 +65,13 @@ export function SubscriptionRenewModal({
         </div>
       </ModalHeader>
       <ModalBody>
-        <SubscriptionRenewView
-          {...otherProps}
-          onSuccess={onSuccess}
-          onGiftRenewalSuccess={onGiftRenewalSuccess}
-        />
+        <Suspense fallback={<p>Loading ...</p>}>
+          <SubscriptionRenewView
+            {...otherProps}
+            onSuccess={onSuccess}
+            onGiftRenewalSuccess={onGiftRenewalSuccess}
+          />
+        </Suspense>
       </ModalBody>
       <ModalFooter></ModalFooter>
     </Modal>
