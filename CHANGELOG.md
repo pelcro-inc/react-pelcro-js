@@ -1,3 +1,10 @@
+# [4.0.0-alpha.19](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.18...v4.0.0-alpha.19) (2023-01-03)
+
+
+### Reverts
+
+* Revert "feat: merge code splitting branch" ([f2d788f](https://github.com/pelcro-inc/react-pelcro-js/commit/f2d788f314709ae9850bc3dccf8a7d383153efb8))
+
 # [4.0.0-alpha.18](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.17...v4.0.0-alpha.18) (2023-01-03)
 
 
