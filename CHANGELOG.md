@@ -1,5 +1,13 @@
 # [3.17.0-beta.10](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.17.0-beta.9...v3.17.0-beta.10) (2023-01-12)
 
+# [4.0.0-alpha.18](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.17...v4.0.0-alpha.18) (2023-01-03)
+
+### Features
+
+- merge code splitting branch ([4b9e160](https://github.com/pelcro-inc/react-pelcro-js/commit/4b9e160179d82e4aa8e7144a2bc2c21c2c94eae3))
+
+# [4.0.0-alpha.17](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.16...v4.0.0-alpha.17) (2023-01-03)
+
 # [4.0.0-alpha.17](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.16...v4.0.0-alpha.17) (2023-01-03)
 
 ### Features
