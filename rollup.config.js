@@ -18,13 +18,19 @@ export default [
     //   dir: "dist",
     //   inlineDynamicImports: true
     // },
-    output: [
-      { dir: "dist", format: "cjs", inlineDynamicImports: false }
-    ],
     // output: [
-    //   { file: pkg.main, format: "cjs", inlineDynamicImports: false },
-    //   { file: pkg.module, format: "esm", inlineDynamicImports: false }
+    //   { dir: "dist", format: "cjs", inlineDynamicImports: false }
     // ],
+    output: [
+      {
+        dir: "dist",
+        inlineDynamicImports: false
+      },
+      {
+        dir: "dist",
+        inlineDynamicImports: false
+      }
+    ],
     plugins: [
       url(),
       svgr({
