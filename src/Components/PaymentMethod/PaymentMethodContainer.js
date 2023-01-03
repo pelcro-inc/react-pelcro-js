@@ -198,8 +198,6 @@ const PaymentMethodContainerWithoutStripe = ({
             }
           });
         } else {
-          console.log("Tap API Call result", result);
-
           window.Pelcro.payment.authorize(
             {
               auth_token: window.Pelcro.user.read().auth_token,
