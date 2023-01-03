@@ -14,10 +14,10 @@ import path from "path";
 export default [
   {
     input: "src/components.js",
-    output: [
-      { file: pkg.main, format: "cjs" },
-      { file: pkg.module, format: "esm" }
-    ],
+    output: {
+      dir: "dist",
+      format: "esm"
+    },
     plugins: [
       url(),
       svgr({
