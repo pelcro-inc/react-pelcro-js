@@ -1,3 +1,10 @@
+# [4.0.0-alpha.15](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.14...v4.0.0-alpha.15) (2023-01-03)
+
+
+### Features
+
+* edit the rollup.config file ([8e89e52](https://github.com/pelcro-inc/react-pelcro-js/commit/8e89e52c5048a8af2179efde80c1fe257f464eff))
+
 # [4.0.0-alpha.14](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.13...v4.0.0-alpha.14) (2023-01-03)
 
 
