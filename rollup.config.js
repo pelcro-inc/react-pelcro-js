@@ -15,8 +15,8 @@ export default [
   {
     input: "src/components.js",
     output: [
-      { file: pkg.main, format: "cjs" },
-      { file: pkg.module, format: "esm" }
+      { file: pkg.main, format: "cjs", inlineDynamicImports: true },
+      { file: pkg.module, format: "esm", inlineDynamicImports: true }
     ],
     plugins: [
       url(),

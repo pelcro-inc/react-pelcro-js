@@ -6,7 +6,6 @@ import {
   ModalBody,
   ModalFooter
 } from "../../SubComponents/Modal";
-import Authorship from "../common/Authorship";
 import { default as ReactGA1 } from "react-ga";
 import { default as ReactGA4 } from "react-ga4";
 
