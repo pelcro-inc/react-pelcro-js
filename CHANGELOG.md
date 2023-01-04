@@ -1,3 +1,10 @@
+# [3.16.0-beta.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.15.1-beta.1...v3.16.0-beta.1) (2023-01-04)
+
+
+### Features
+
+* change address create title when gifting ([#249](https://github.com/pelcro-inc/react-pelcro-js/issues/249)) ([de50702](https://github.com/pelcro-inc/react-pelcro-js/commit/de507020678f161e59ffa29c8ea27f7a3d53199e))
+
 ## [3.15.1-beta.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.15.0...v3.15.1-beta.1) (2022-12-21)
 
 
