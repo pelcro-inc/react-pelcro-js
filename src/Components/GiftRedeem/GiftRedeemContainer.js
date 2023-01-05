@@ -68,7 +68,6 @@ const GiftRedeemContainer = ({
       if (!isAuthenticated()) {
         switchView("register");
       } else {
-        console.log("Shaker");
         window.Pelcro.subscription.redeemGift(
           {
             auth_token: window.Pelcro.user.read().auth_token,
