@@ -17,17 +17,17 @@ export const MembershipsMenu = (props) => {
   return (
     <Card
       id="pelcro-dashboard-donation-menu"
-      className="plc-max-w-80% plc-m-auto"
+      className="plc-max-w-100% md:plc-max-w-80% plc-m-auto"
       title={t("labels.memberships")}
     >
       <table className="plc-w-full plc-table-fixed pelcro-memberships-table plc-text-left">
         <thead className="plc-text-xs plc-font-semibold plc-tracking-wider plc-text-gray-400 plc-uppercase ">
           <tr>
-            <th className="plc-w-1/5">{t("labels.product")}</th>
-            <th className="plc-w-1/5">{t("labels.plan")}</th>
-            <th className="plc-w-1/5">{t("labels.price")}</th>
-            <th className="plc-w-1/5">{t("labels.status.title")}</th>
-            <th className="plc-w-1/5">{t("labels.actions")}</th>
+            <th className="plc-hidden md:plc-table-cell plc-w-1/5">{t("labels.product")}</th>
+            <th className="plc-w-1/3 md:plc-w-1/5">{t("labels.plan")}</th>
+            <th className="plc-hidden md:plc-table-cell plc-w-1/5">{t("labels.price")}</th>
+            <th className="plc-w-1/3 md:plc-w-1/5">{t("labels.status.title")}</th>
+            <th className="plc-w-1/3 md:plc-w-1/5">{t("labels.actions")}</th>
           </tr>
         </thead>
         <tbody>
@@ -67,7 +67,7 @@ const MembershipsItems = (props) => {
               key={membership.id}
               className={`plc-w-full pelcro-membership-row`}
             >
-              <td className="plc-truncate">
+              <td className="plc-hidden md:plc-table-cell plc-truncate">
                 <span className="plc-font-semibold plc-text-gray-500">
                   {membership.subscription.plan.product.name}
                 </span>
@@ -76,8 +76,18 @@ const MembershipsItems = (props) => {
                 <span className="plc-font-semibold plc-text-gray-500">
                   {membership.subscription.plan.nickname}
                 </span>
+                <div className="plc-inline md:plc-hidden">
+                  <br />
+                  <span className="plc-text-xs plc-text-gray-400">
+                    {getFormattedPriceByLocal(
+                      membership.subscription.plan.amount,
+                      membership.subscription.plan.currency,
+                      getPageOrDefaultLanguage()
+                    )}
+                  </span>
+                </div>
               </td>
-              <td className="plc-truncate">
+              <td className="plc-hidden md:plc-table-cell plc-truncate">
                 <span className="plc-font-semibold plc-text-gray-500">
                   {getFormattedPriceByLocal(
                     membership.subscription.plan.amount,

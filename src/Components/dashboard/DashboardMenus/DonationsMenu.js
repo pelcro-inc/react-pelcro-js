@@ -102,7 +102,7 @@ export const DonationsMenu = ({
   return (
     <Card
       id="pelcro-dashboard-donation-menu"
-      className="plc-max-w-80% plc-m-auto"
+      className="plc-max-w-100% md:plc-max-w-80% plc-m-auto"
       title={t("labels.donations")}
     >
       <table className="plc-w-full plc-table-fixed pelcro-donations-table plc-text-left">
