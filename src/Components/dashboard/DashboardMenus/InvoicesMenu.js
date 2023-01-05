@@ -21,17 +21,17 @@ export const InvoicesMenu = (props) => {
   return (
     <Card
       id="pelcro-dashboard-invoices-menu"
-      className="plc-max-w-80% plc-m-auto"
+      className="plc-max-w-100% md:plc-max-w-80% plc-m-auto"
       title={t("labels.invoices")}
     >
       <table className="plc-w-full plc-table-fixed pelcro-invoices-table plc-text-left">
         <thead className="plc-text-xs plc-font-semibold plc-tracking-wider plc-text-gray-400 plc-uppercase ">
           <tr>
-            <th className="plc-w-1/5">{t("labels.details")}</th>
-            <th className="plc-w-1/5">{t("labels.orders.date")}</th>
-            <th className="plc-w-1/5">{t("labels.total")}</th>
-            <th className="plc-w-1/5">{t("labels.status.title")}</th>
-            <th className="plc-w-1/5">{t("labels.actions")}</th>
+            <th className="plc-w-1/3 md:plc-w-1/5">{t("labels.details")}</th>
+            <th className="plc-hidden md:plc-table-cell plc-w-1/5">{t("labels.orders.date")}</th>
+            <th className="plc-hidden md:plc-table-cell plc-w-1/5">{t("labels.orders.total")}</th>
+            <th className="plc-w-1/3 md:plc-w-1/5">{t("labels.status.title")}</th>
+            <th className="plc-w-1/3 md:plc-w-1/5">{t("labels.actions")}</th>
           </tr>
         </thead>
         <tbody>
@@ -80,15 +80,29 @@ const InvoicesItems = () => {
             <span className="plc-font-semibold plc-text-gray-500">
               {`#${invoice.id}`}
             </span>
+            <div className="plc-inline md:plc-hidden">
+              <br />
+              <span className="plc-text-sm plc-text-gray-500">
+                {getFormattedPriceByLocal(
+                  invoice.total,
+                  invoice.currency,
+                  getPageOrDefaultLanguage()
+                )}
+              </span>
+              <br />
+              <span className="plc-text-sm plc-text-gray-500">
+                {formattedCreationDate}
+              </span>
+            </div>
           </td>
 
-          <td>
+          <td className="plc-hidden md:plc-table-cell">
             <span className="plc-text-sm plc-text-gray-500">
               {formattedCreationDate}
             </span>
           </td>
 
-          <td>
+          <td className="plc-hidden md:plc-table-cell">
             <span className="plc-text-sm plc-text-gray-500">
               {getFormattedPriceByLocal(
                 invoice.total,
