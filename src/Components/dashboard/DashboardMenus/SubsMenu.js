@@ -31,11 +31,21 @@ export const SubscriptionsMenu = (props) => {
       <table className="plc-w-full plc-table-fixed pelcro-subscriptions-table plc-text-left">
         <thead className="plc-text-xs plc-font-semibold plc-tracking-wider plc-text-gray-400 plc-uppercase ">
           <tr>
-            <th className="plc-hidden md:plc-table-cell plc-w-2/12">{t("labels.product")}</th>
-            <th className="plc-w-1/3 md:plc-w-3/12">{t("labels.plan")}</th>
-            <th className="plc-hidden md:plc-table-cell plc-w-2/12">{t("labels.price")}</th>
-            <th className="plc-w-1/3 md:plc-w-2/12">{t("labels.status.title")}</th>
-            <th className="plc-w-1/3 md:plc-w-2/12">{t("labels.actions")}</th>
+            <th className="plc-hidden md:plc-table-cell plc-w-2/12">
+              {t("labels.product")}
+            </th>
+            <th className="plc-w-1/3 md:plc-w-3/12">
+              {t("labels.plan")}
+            </th>
+            <th className="plc-hidden md:plc-table-cell plc-w-2/12">
+              {t("labels.price")}
+            </th>
+            <th className="plc-w-1/3 md:plc-w-2/12">
+              {t("labels.status.title")}
+            </th>
+            <th className="plc-w-1/3 md:plc-w-2/12">
+              {t("labels.actions")}
+            </th>
             <th className="plc-w-1/3 md:plc-w-1/12"></th>
           </tr>
         </thead>
@@ -369,18 +379,18 @@ export const SubscriptionsItems = ({
                   ""
                 )}
 
-                {sub?.plan?.type === 'membership' && (
-                    <Button
-                      variant="ghost"
-                      className="plc-text-blue-400 pelcro-dashboard-sub-manage-members-button"
-                      icon={<RefreshIcon />}
-                      onClick={onManageMembersClick}
-                      disabled={disableSubmit}
-                      data-key={sub.id}
-                    >
-                      {t("labels.manageMembers")}
-                    </Button>
-                  )}
+                {sub?.plan?.type === "membership" && (
+                  <Button
+                    variant="ghost"
+                    className="plc-text-blue-400 pelcro-dashboard-sub-manage-members-button"
+                    icon={<RefreshIcon />}
+                    onClick={onManageMembersClick}
+                    disabled={disableSubmit}
+                    data-key={sub.id}
+                  >
+                    {t("labels.manageMembers")}
+                  </Button>
+                )}
               </td>
               <td>
                 {hasPhases && (
@@ -442,7 +452,7 @@ export const SubscriptionsItems = ({
                       className="pelcro-sub-phase-row plc-w-full plc-align-middle"
                     >
                       <td className="plc-hidden md:plc-table-cell plc-w-2/12"></td>
-                      
+
                       <td className="plc-truncate">
                         {plan.nickname && (
                           <span className="plc-font-semibold plc-text-gray-500">
@@ -505,7 +515,7 @@ function getNonDonationSubs() {
 }
 
 function isDateAfterToday(date) {
-  const today = new Date().setHours(0,0,0,0);
-  const newDate = new Date(date).setHours(0,0,0,0);
+  const today = new Date().setHours(0, 0, 0, 0);
+  const newDate = new Date(date).setHours(0, 0, 0, 0);
   return newDate === today ? true : newDate > today;
 }
