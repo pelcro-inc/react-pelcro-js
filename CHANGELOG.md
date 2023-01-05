@@ -1,5 +1,13 @@
 # [3.17.0-beta.10](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.17.0-beta.9...v3.17.0-beta.10) (2023-01-12)
 
+# [4.0.0-alpha.20](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.19...v4.0.0-alpha.20) (2023-01-05)
+
+### Bug Fixes
+
+- dashboard responsive ([#250](https://github.com/pelcro-inc/react-pelcro-js/issues/250)) ([a885247](https://github.com/pelcro-inc/react-pelcro-js/commit/a885247524d5ef3a956e768d03074950f5cd4b7d))
+
+# [4.0.0-alpha.19](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.18...v4.0.0-alpha.19) (2023-01-03)
+
 # [4.0.0-alpha.19](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.18...v4.0.0-alpha.19) (2023-01-03)
 
 ### Reverts
