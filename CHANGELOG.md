@@ -1,3 +1,34 @@
+# [4.0.0-alpha.20](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.19...v4.0.0-alpha.20) (2023-01-05)
+
+
+### Bug Fixes
+
+* dashboard responsive ([#250](https://github.com/pelcro-inc/react-pelcro-js/issues/250)) ([a885247](https://github.com/pelcro-inc/react-pelcro-js/commit/a885247524d5ef3a956e768d03074950f5cd4b7d))
+
+# [4.0.0-alpha.19](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.18...v4.0.0-alpha.19) (2023-01-03)
+
+
+### Reverts
+
+* Revert "feat: merge code splitting branch" ([f2d788f](https://github.com/pelcro-inc/react-pelcro-js/commit/f2d788f314709ae9850bc3dccf8a7d383153efb8))
+
+# [4.0.0-alpha.18](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.17...v4.0.0-alpha.18) (2023-01-03)
+
+
+### Features
+
+* merge code splitting branch ([4b9e160](https://github.com/pelcro-inc/react-pelcro-js/commit/4b9e160179d82e4aa8e7144a2bc2c21c2c94eae3))
+
+# [4.0.0-alpha.17](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.16...v4.0.0-alpha.17) (2023-01-03)
+
+
+### Features
+
+* add alpha branch to release cycle ([1886630](https://github.com/pelcro-inc/react-pelcro-js/commit/188663023d694b13a4debc01db6de7148aeaba9c))
+* remove console log statement ([cadac32](https://github.com/pelcro-inc/react-pelcro-js/commit/cadac320edaf05e850e9c2d542f215cf37d62003))
+* remove console.log ([1947f71](https://github.com/pelcro-inc/react-pelcro-js/commit/1947f71003ba3c7f76bb4548fed3cc9bcd58c751))
+* revert back all code splitting ([cc1adfb](https://github.com/pelcro-inc/react-pelcro-js/commit/cc1adfb89fc2d7fe0203efc8674a14a1a8269706))
+
 # [3.8.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.7.1...v3.8.0) (2022-09-23)
 
 

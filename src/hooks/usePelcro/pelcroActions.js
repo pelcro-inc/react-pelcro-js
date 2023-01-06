@@ -48,13 +48,10 @@ export class PelcroActions {
     ) {
       return this.set({ view: "login" });
     }
-    // console.log(this.get().isAuthenticated(), );
     if (
       ["passwordless-request"].includes(view) &&
-      (
-        this.get().isAuthenticated() ||
-        !window.Pelcro.site.read()?.passwordless_enabled
-      )
+      (this.get().isAuthenticated() ||
+        !window.Pelcro.site.read()?.passwordless_enabled)
     ) {
       return this.set({ view: null });
     }

@@ -421,7 +421,7 @@ export const SubscriptionsItems = ({
                       className="pelcro-sub-phase-row plc-w-full plc-align-middle"
                     >
                       <td className="plc-hidden md:plc-table-cell plc-w-2/12"></td>
-                      
+
                       <td className="plc-truncate">
                         {plan.nickname && (
                           <span className="plc-font-semibold plc-text-gray-500">

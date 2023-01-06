@@ -2,7 +2,7 @@ name: Release package
 
 on:
   push:
-    branches: [beta, master]
+    branches: [beta, alpha, master]
 jobs:
   release:
     name: Release
