@@ -719,7 +719,7 @@ class Dashboard extends Component {
             <Button
               variant="ghost"
               type="button"
-              className="plc-text-gray-500 plc-rounded-2xl plc-absolute plc-z-max plc-top-5 plc-right-10"
+              className="plc-text-gray-500 plc-rounded-2xl plc-absolute plc-z-max plc-top-2 plc-right-2 md:plc-top-5 md:plc-right-10"
               onClick={this.closeDashboard}
             >
               <XIcon className="plc-fill-current" />
