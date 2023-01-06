@@ -31,11 +31,12 @@ export const SubscriptionsMenu = (props) => {
       <table className="plc-w-full plc-table-fixed pelcro-subscriptions-table plc-text-left">
         <thead className="plc-text-xs plc-font-semibold plc-tracking-wider plc-text-gray-400 plc-uppercase ">
           <tr>
-            <th className="plc-hidden md:plc-table-cell plc-w-1/5">{t("labels.product")}</th>
-            <th className="plc-w-1/3 md:plc-w-1/5">{t("labels.plan")}</th>
-            <th className="plc-hidden md:plc-table-cell plc-w-1/5">{t("labels.price")}</th>
-            <th className="plc-w-1/3 md:plc-w-1/5">{t("labels.status.title")}</th>
-            <th className="plc-w-1/3 md:plc-w-1/5">{t("labels.actions")}</th>
+            <th className="plc-hidden md:plc-table-cell plc-w-2/12">{t("labels.product")}</th>
+            <th className="plc-w-1/3 md:plc-w-3/12">{t("labels.plan")}</th>
+            <th className="plc-hidden md:plc-table-cell plc-w-2/12">{t("labels.price")}</th>
+            <th className="plc-w-1/3 md:plc-w-2/12">{t("labels.status.title")}</th>
+            <th className="plc-w-1/3 md:plc-w-2/12">{t("labels.actions")}</th>
+            <th className="plc-w-1/3 md:plc-w-1/12"></th>
           </tr>
         </thead>
         <tbody>
@@ -440,6 +441,8 @@ export const SubscriptionsItems = ({
                       key={`${phase.start_date}-${phase.end_date}`}
                       className="pelcro-sub-phase-row plc-w-full plc-align-middle"
                     >
+                      <td className="plc-hidden md:plc-table-cell plc-w-2/12"></td>
+                      
                       <td className="plc-truncate">
                         {plan.nickname && (
                           <span className="plc-font-semibold plc-text-gray-500">
@@ -447,6 +450,8 @@ export const SubscriptionsItems = ({
                           </span>
                         )}
                       </td>
+
+                      <td className="plc-hidden md:plc-table-cell plc-w-2/12"></td>
 
                       <td className="plc-py-2">
                         <span
@@ -479,7 +484,7 @@ export const SubscriptionsItems = ({
                   );
                 })}
                 <tr>
-                  <td colSpan="4">
+                  <td colSpan="6">
                     <hr className="plc-mt-4" />
                   </td>
                 </tr>
