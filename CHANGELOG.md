@@ -1,3 +1,10 @@
+# [3.17.0-beta.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.16.0...v3.17.0-beta.1) (2023-01-10)
+
+
+### Features
+
+* update the email validation to accept upper case letters ([#252](https://github.com/pelcro-inc/react-pelcro-js/issues/252)) ([a400d67](https://github.com/pelcro-inc/react-pelcro-js/commit/a400d67018c4161f18aea3cc60b94d1a41a069c8))
+
 # [3.16.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.15.0...v3.16.0) (2023-01-05)
 
 
