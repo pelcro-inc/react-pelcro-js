@@ -1,7 +1,4 @@
-import React, {
-  useContext,
-  useCallback
-} from "react";
+import React, { useContext, useCallback } from "react";
 import { store } from "./SubscriptionManageMembersContainer";
 import { useTranslation } from "react-i18next";
 import {
@@ -41,40 +38,40 @@ export function SubscriptionManageMembersList(props) {
     };
   }, []);
 
-  if(loading) {
+  if (loading) {
     return (
       <>
         <tr>
           <td>
-            <div class="plc-animate-pulse">
-              <div class="plc-bg-gray-200 plc-h-6 plc-m-0.5 plc-rounded"></div>
+            <div className="plc-animate-pulse">
+              <div className="plc-bg-gray-200 plc-h-6 plc-m-0.5 plc-rounded"></div>
             </div>
           </td>
           <td>
-            <div class="plc-animate-pulse">
-              <div class="plc-bg-gray-200 plc-h-6 plc-m-0.5 plc-rounded"></div>
+            <div className="plc-animate-pulse">
+              <div className="plc-bg-gray-200 plc-h-6 plc-m-0.5 plc-rounded"></div>
             </div>
           </td>
           <td>
-            <div class="plc-animate-pulse">
-              <div class="plc-bg-gray-200 plc-h-6 plc-m-0.5 plc-rounded"></div>
+            <div className="plc-animate-pulse">
+              <div className="plc-bg-gray-200 plc-h-6 plc-m-0.5 plc-rounded"></div>
             </div>
           </td>
         </tr>
         <tr>
           <td>
-            <div class="plc-animate-pulse">
-              <div class="plc-bg-gray-200 plc-h-6 plc-m-0.5 plc-rounded"></div>
+            <div className="plc-animate-pulse">
+              <div className="plc-bg-gray-200 plc-h-6 plc-m-0.5 plc-rounded"></div>
             </div>
           </td>
           <td>
-            <div class="plc-animate-pulse">
-              <div class="plc-bg-gray-200 plc-h-6 plc-m-0.5 plc-rounded"></div>
+            <div className="plc-animate-pulse">
+              <div className="plc-bg-gray-200 plc-h-6 plc-m-0.5 plc-rounded"></div>
             </div>
           </td>
           <td>
-            <div class="plc-animate-pulse">
-              <div class="plc-bg-gray-200 plc-h-6 plc-m-0.5 plc-rounded"></div>
+            <div className="plc-animate-pulse">
+              <div className="plc-bg-gray-200 plc-h-6 plc-m-0.5 plc-rounded"></div>
             </div>
           </td>
         </tr>
@@ -83,9 +80,9 @@ export function SubscriptionManageMembersList(props) {
   }
 
   const onRemoveClick = (id) => {
-    dispatch({ type: UPDATE_REMOVE_MEMBER_ID, payload:id });
+    dispatch({ type: UPDATE_REMOVE_MEMBER_ID, payload: id });
     dispatch({ type: HANDLE_REMOVE_MEMBER });
-  }
+  };
 
   return (
     <>
@@ -94,7 +91,10 @@ export function SubscriptionManageMembersList(props) {
           key={member.id}
           className={`plc-w-full plc-align-middle plc-cursor-pointer accordion-header hover:plc-bg-gray-50 plc-text-center`}
         >
-          <td className="plc-truncate plc-text-left" title={member?.invitation_email}>
+          <td
+            className="plc-truncate plc-text-left"
+            title={member?.invitation_email}
+          >
             <span className="plc-font-semibold plc-text-gray-500">
               {member?.invitation_email}
             </span>
