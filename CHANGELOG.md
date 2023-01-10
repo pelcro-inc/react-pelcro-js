@@ -1,3 +1,10 @@
+# [3.17.0-beta.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.17.0-beta.1...v3.17.0-beta.2) (2023-01-10)
+
+
+### Features
+
+* issue template and config ([#255](https://github.com/pelcro-inc/react-pelcro-js/issues/255)) ([b861393](https://github.com/pelcro-inc/react-pelcro-js/commit/b8613931e5e6a7ee2bbad6f94f9ee041449355a7))
+
 # [3.17.0-beta.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.16.0...v3.17.0-beta.1) (2023-01-10)
 
 
