@@ -1,3 +1,10 @@
+# [3.17.0-beta.6](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.17.0-beta.5...v3.17.0-beta.6) (2023-01-10)
+
+
+### Bug Fixes
+
+* incorrect file extension for issue forms ([529fc71](https://github.com/pelcro-inc/react-pelcro-js/commit/529fc7131a988144b88c3ff3fd30ac7b4f34008b))
+
 # [3.17.0-beta.5](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.17.0-beta.4...v3.17.0-beta.5) (2023-01-10)
 
 
