@@ -1,1 +1,5 @@
 blank_issues_enabled: false
+contact_links:
+  - name: Pelcro Support
+    url: https://www.pelcro.com/en/support
+    about: If you are having general trouble with Pelcro or your integration with Pelcro, please reach out to Pelcro's support instead.
