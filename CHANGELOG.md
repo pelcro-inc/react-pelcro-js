@@ -1,3 +1,10 @@
+# [3.17.0-beta.4](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.17.0-beta.3...v3.17.0-beta.4) (2023-01-10)
+
+
+### Bug Fixes
+
+* change class to className ([#258](https://github.com/pelcro-inc/react-pelcro-js/issues/258)) ([470d779](https://github.com/pelcro-inc/react-pelcro-js/commit/470d7795cdaf4dad63318973facc08616590c325))
+
 # [3.17.0-beta.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.17.0-beta.2...v3.17.0-beta.3) (2023-01-10)
 
 
