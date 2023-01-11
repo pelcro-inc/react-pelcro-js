@@ -158,6 +158,49 @@ const PaymentMethodContainerWithoutStripe = ({
   }, []);
 
   /*====== Start Tap integration ========*/
+  function confirmTapPayment(res) {
+    if (res?.data?.threeDSecure_url) {
+      toggleAuthenticationPendingView(true, res.data);
+
+      const listenFor3DSecureCompletionMessage = () => {
+        const retrieveSourceInfoFromIframe = (event) => {
+          console.log("EVENT", event);
+          const { data } = event;
+          if (data.message === "3DS-authentication-complete") {
+            console.log(
+              "YES, THE DATA MESSAGE IS 3D-AUTHENTICATION-COMPLETE"
+            );
+            toggleAuthenticationPendingView(false);
+            toggleAuthenticationSuccessPendingView(true);
+
+            window.removeEventListener(
+              "message",
+              retrieveSourceInfoFromIframe
+            );
+
+            dispatch({
+              type: SHOW_ALERT,
+              payload: {
+                type: "error",
+                content: null
+              }
+            });
+
+            onSuccess(res.data);
+          }
+        };
+
+        // listen to injected iframe for authentication complete message
+        window.addEventListener(
+          "message",
+          retrieveSourceInfoFromIframe
+        );
+      };
+
+      listenFor3DSecureCompletionMessage();
+    }
+  }
+
   const submitUsingTap = () => {
     const isUsingExistingPaymentMethod = Boolean(
       selectedPaymentMethodId
@@ -193,12 +236,12 @@ const PaymentMethodContainerWithoutStripe = ({
       }, 0);
     };
 
-    const totalAmount =
-      state?.updatedPrice ??
-      plan?.amount ??
-      invoice?.amount_remaining ??
-      getOrderItemsTotal() ??
-      10;
+    // const totalAmount =
+    //   state?.updatedPrice ??
+    //   plan?.amount ??
+    //   invoice?.amount_remaining ??
+    //   getOrderItemsTotal() ??
+    //   10;
 
     tapInstanceRef.current
       .createToken(tapInstanceCard.current)
@@ -216,87 +259,89 @@ const PaymentMethodContainerWithoutStripe = ({
             }
           });
         } else {
-          window.Pelcro.payment.authorize(
-            {
-              auth_token: window.Pelcro.user.read().auth_token,
-              first_name:
-                window.Pelcro.user.read().first_name ||
-                state.firstName,
-              last_name:
-                window.Pelcro.user.read().last_name || state.lastName,
-              phone: window.Pelcro.user.read().phone || state.phone,
-              site_id: window.Pelcro.siteid,
-              amount: totalAmount,
-              currency:
-                plan?.currency ||
-                invoice?.currency ||
-                window.Pelcro.site.read().default_currency,
-              tap_token: result.id,
-              redirect_url: `${
-                window.Pelcro.environment.domain
-              }/webhook/tap/callback/3dsecure?auth_token=${
-                window.Pelcro.user.read().auth_token
-              }`
-            },
-            (err, res) => {
-              if (err) {
-                // Inform the user if there was an error
-                onFailure(err);
-                dispatch({ type: DISABLE_SUBMIT, payload: false });
-                dispatch({ type: LOADING, payload: false });
-                return dispatch({
-                  type: SHOW_ALERT,
-                  payload: {
-                    type: "error",
-                    content: getErrorMessages(err)
-                  }
-                });
-              } else {
-                toggleAuthenticationPendingView(true, res);
+          handleTapPayment(result.id);
 
-                const listenFor3DSecureCompletionMessage = () => {
-                  const retrieveSourceInfoFromIframe = (event) => {
-                    const { data } = event;
-                    if (
-                      data.message === "3DS-authentication-complete"
-                    ) {
-                      const tapID = data.tapID;
-                      toggleAuthenticationPendingView(false);
-                      toggleAuthenticationSuccessPendingView(true);
+          // window.Pelcro.payment.authorize(
+          //   {
+          //     auth_token: window.Pelcro.user.read().auth_token,
+          //     first_name:
+          //       window.Pelcro.user.read().first_name ||
+          //       state.firstName,
+          //     last_name:
+          //       window.Pelcro.user.read().last_name || state.lastName,
+          //     phone: window.Pelcro.user.read().phone || state.phone,
+          //     site_id: window.Pelcro.siteid,
+          //     amount: totalAmount,
+          //     currency:
+          //       plan?.currency ||
+          //       invoice?.currency ||
+          //       window.Pelcro.site.read().default_currency,
+          //     tap_token: result.id,
+          //     redirect_url: `${
+          //       window.Pelcro.environment.domain
+          //     }/webhook/tap/callback/3dsecure?auth_token=${
+          //       window.Pelcro.user.read().auth_token
+          //     }`
+          //   },
+          //   (err, res) => {
+          //     if (err) {
+          //       // Inform the user if there was an error
+          //       onFailure(err);
+          //       dispatch({ type: DISABLE_SUBMIT, payload: false });
+          //       dispatch({ type: LOADING, payload: false });
+          //       return dispatch({
+          //         type: SHOW_ALERT,
+          //         payload: {
+          //           type: "error",
+          //           content: getErrorMessages(err)
+          //         }
+          //       });
+          //     } else {
+          //       toggleAuthenticationPendingView(true, res);
 
-                      window.removeEventListener(
-                        "message",
-                        retrieveSourceInfoFromIframe
-                      );
+          //       const listenFor3DSecureCompletionMessage = () => {
+          //         const retrieveSourceInfoFromIframe = (event) => {
+          //           const { data } = event;
+          //           if (
+          //             data.message === "3DS-authentication-complete"
+          //           ) {
+          //             const tapID = data.tapID;
+          //             toggleAuthenticationPendingView(false);
+          //             toggleAuthenticationSuccessPendingView(true);
 
-                      dispatch({
-                        type: SHOW_ALERT,
-                        payload: {
-                          type: "error",
-                          content: null
-                        }
-                      });
+          //             window.removeEventListener(
+          //               "message",
+          //               retrieveSourceInfoFromIframe
+          //             );
 
-                      handleTapPayment(tapID);
-                    }
-                  };
+          //             dispatch({
+          //               type: SHOW_ALERT,
+          //               payload: {
+          //                 type: "error",
+          //                 content: null
+          //               }
+          //             });
 
-                  // listen to injected iframe for authentication complete message
-                  window.addEventListener(
-                    "message",
-                    retrieveSourceInfoFromIframe
-                  );
-                };
+          //             handleTapPayment(tapID);
+          //           }
+          //         };
 
-                listenFor3DSecureCompletionMessage();
-              }
-            }
-          );
+          //         // listen to injected iframe for authentication complete message
+          //         window.addEventListener(
+          //           "message",
+          //           retrieveSourceInfoFromIframe
+          //         );
+          //       };
+
+          //       listenFor3DSecureCompletionMessage();
+          //     }
+          //   }
+          // );
         }
       });
   };
 
-  function handleTapPayment(paymentRequest) {
+  function handleTapPayment(gatewayToken) {
     const isUsingExistingPaymentMethod = Boolean(
       selectedPaymentMethodId
     );
@@ -308,7 +353,7 @@ const PaymentMethodContainerWithoutStripe = ({
         new TapGateway(),
         isUsingExistingPaymentMethod
           ? selectedPaymentMethodId
-          : paymentRequest,
+          : gatewayToken,
         state,
         dispatch
       );
@@ -317,45 +362,45 @@ const PaymentMethodContainerWithoutStripe = ({
         new TapGateway(),
         isUsingExistingPaymentMethod
           ? selectedPaymentMethodId
-          : paymentRequest,
+          : gatewayToken,
         dispatch
       );
     } else if (type === "updatePaymentSource") {
       createNewTapCard();
     }
 
-    function createNewTapCard() {
-      window.Pelcro.source.create(
-        {
-          auth_token: window.Pelcro.user.read().auth_token,
-          token: paymentRequest,
-          gateway: "tap"
-        },
-        (err, res) => {
-          dispatch({ type: DISABLE_SUBMIT, payload: false });
-          dispatch({ type: LOADING, payload: false });
-          if (err) {
-            onFailure(err);
-            return dispatch({
-              type: SHOW_ALERT,
-              payload: {
-                type: "error",
-                content: getErrorMessages(err)
-              }
-            });
-          }
+    // function createNewTapCard() {
+    //   window.Pelcro.source.create(
+    //     {
+    //       auth_token: window.Pelcro.user.read().auth_token,
+    //       token: paymentRequest,
+    //       gateway: "tap"
+    //     },
+    //     (err, res) => {
+    //       dispatch({ type: DISABLE_SUBMIT, payload: false });
+    //       dispatch({ type: LOADING, payload: false });
+    //       if (err) {
+    //         onFailure(err);
+    //         return dispatch({
+    //           type: SHOW_ALERT,
+    //           payload: {
+    //             type: "error",
+    //             content: getErrorMessages(err)
+    //           }
+    //         });
+    //       }
 
-          dispatch({
-            type: SHOW_ALERT,
-            payload: {
-              type: "success",
-              content: t("messages.sourceUpdated")
-            }
-          });
-          onSuccess(res);
-        }
-      );
-    }
+    //       dispatch({
+    //         type: SHOW_ALERT,
+    //         payload: {
+    //           type: "success",
+    //           content: t("messages.sourceUpdated")
+    //         }
+    //       });
+    //       onSuccess(res);
+    //     }
+    //   );
+    // }
 
     function handleTapSubscription() {
       const payment = new Payment(new TapGateway());
@@ -436,9 +481,7 @@ const PaymentMethodContainerWithoutStripe = ({
         return payment.execute(
           {
             type: PAYMENT_TYPES.CREATE_SUBSCRIPTION,
-            token: isUsingExistingPaymentMethod
-              ? selectedPaymentMethodId
-              : paymentRequest,
+            token: gatewayToken,
             quantity: plan.quantity,
             plan,
             couponCode,
@@ -450,7 +493,9 @@ const PaymentMethodContainerWithoutStripe = ({
             if (err) {
               return handlePaymentError(err);
             }
-            onSuccess(res);
+            confirmTapPayment(res);
+            console.log("THE RESPONSE IS:", res.data);
+            // onSuccess(res);
           }
         );
       }
@@ -514,7 +559,6 @@ const PaymentMethodContainerWithoutStripe = ({
     tapInstanceCard.current = card;
   };
   /*====== End Tap integration ========*/
-
   const submitUsingVantiv = () => {
     const isUsingExistingPaymentMethod = Boolean(
       selectedPaymentMethodId
