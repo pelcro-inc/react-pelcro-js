@@ -14,7 +14,12 @@ export const AddressCreateModal = ({
   onClose,
   ...otherProps
 }) => {
-  const { switchView, switchToPaymentView, resetView } = usePelcro();
+  const {
+    switchView,
+    switchToPaymentView,
+    resetView,
+    giftRecipient
+  } = usePelcro();
   const { t } = useTranslation("address");
 
   const onSuccess = (newAddressId) => {
@@ -45,6 +50,7 @@ export const AddressCreateModal = ({
           <h4 className="plc-text-2xl plc-font-semibold">
             {t("title")}
           </h4>
+          <h4>{giftRecipient ? t("titleGifting") : t("title")}</h4>
         </div>
       </ModalHeader>
       <ModalBody>

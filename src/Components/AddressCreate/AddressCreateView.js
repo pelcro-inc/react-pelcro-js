@@ -11,17 +11,12 @@ import { AddressCreateCountrySelect } from "./AddressCreateCountrySelect";
 import { AddressCreateStateSelect } from "./AddressCreateStateSelect";
 import { AddressCreateSetDefault } from "./AddressCreateSetDefault";
 import { AlertWithContext } from "../../SubComponents/AlertWithContext";
-import { usePelcro } from "../../hooks/usePelcro";
 
 export const AddressCreateView = (props) => {
   const { t } = useTranslation("address");
-  const { giftRecipient } = usePelcro();
 
   return (
     <div id="pelcro-address-create-view">
-      <div className="plc-mb-6 plc-text-2xl plc-font-semibold plc-text-center plc-text-gray-900 pelcro-title-wrapper">
-        <h4>{giftRecipient ? t("titleGifting") : t("title")}</h4>
-      </div>
       <form
         action="javascript:void(0);"
         className="plc-mt-2 pelcro-form"
