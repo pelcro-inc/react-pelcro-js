@@ -20,12 +20,12 @@ body:
     id: steps-to-reproduce
     attributes:
       label: Instructions to reproduce
-      description: Detailed steps to reproduce the bug
+      description: Detailed steps to reproduce the bug.
       placeholder: |
-        1. Fetch a '...'
-        2. Update the '...'
-        3. Run command '...'
-        4. See error
+        1. I did this
+        2. Then I did that
+        3. Then I ran this command
+        4. Then it went kaboom and this error was displayed
     validations:
       required: true
   - type: textarea
