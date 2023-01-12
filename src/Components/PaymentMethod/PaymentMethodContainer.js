@@ -164,29 +164,35 @@ const PaymentMethodContainerWithoutStripe = ({
 
       const listenFor3DSecureCompletionMessage = () => {
         const retrieveSourceInfoFromIframe = (event) => {
-          console.log("EVENT", event);
           const { data } = event;
-          if (data.message === "3DS-authentication-complete") {
-            console.log(
-              "YES, THE DATA MESSAGE IS 3D-AUTHENTICATION-COMPLETE"
-            );
-            toggleAuthenticationPendingView(false);
-            toggleAuthenticationSuccessPendingView(true);
+          if (data.paid) {
+            if (data.message === "3DS-authentication-complete") {
+              toggleAuthenticationPendingView(false);
+              toggleAuthenticationSuccessPendingView(true);
 
+              window.removeEventListener(
+                "message",
+                retrieveSourceInfoFromIframe
+              );
+
+              dispatch({
+                type: SHOW_ALERT,
+                payload: {
+                  type: "error",
+                  content: null
+                }
+              });
+
+              onSuccess(res.data);
+            }
+          } else {
+            toggleAuthenticationPendingView(false);
             window.removeEventListener(
               "message",
               retrieveSourceInfoFromIframe
             );
 
-            dispatch({
-              type: SHOW_ALERT,
-              payload: {
-                type: "error",
-                content: null
-              }
-            });
-
-            onSuccess(res.data);
+            return handlePaymentError(data);
           }
         };
 
@@ -216,33 +222,6 @@ const PaymentMethodContainerWithoutStripe = ({
       );
     }
 
-    const getOrderItemsTotal = () => {
-      if (!order) {
-        return null;
-      }
-
-      const isQuickPurchase = !Array.isArray(order);
-
-      if (isQuickPurchase) {
-        return order.price * order.quantity;
-      }
-
-      if (order.length === 0) {
-        return null;
-      }
-
-      return order.reduce((total, item) => {
-        return total + item.price * item.quantity;
-      }, 0);
-    };
-
-    // const totalAmount =
-    //   state?.updatedPrice ??
-    //   plan?.amount ??
-    //   invoice?.amount_remaining ??
-    //   getOrderItemsTotal() ??
-    //   10;
-
     tapInstanceRef.current
       .createToken(tapInstanceCard.current)
       .then(function (result) {
@@ -260,83 +239,6 @@ const PaymentMethodContainerWithoutStripe = ({
           });
         } else {
           handleTapPayment(result.id);
-
-          // window.Pelcro.payment.authorize(
-          //   {
-          //     auth_token: window.Pelcro.user.read().auth_token,
-          //     first_name:
-          //       window.Pelcro.user.read().first_name ||
-          //       state.firstName,
-          //     last_name:
-          //       window.Pelcro.user.read().last_name || state.lastName,
-          //     phone: window.Pelcro.user.read().phone || state.phone,
-          //     site_id: window.Pelcro.siteid,
-          //     amount: totalAmount,
-          //     currency:
-          //       plan?.currency ||
-          //       invoice?.currency ||
-          //       window.Pelcro.site.read().default_currency,
-          //     tap_token: result.id,
-          //     redirect_url: `${
-          //       window.Pelcro.environment.domain
-          //     }/webhook/tap/callback/3dsecure?auth_token=${
-          //       window.Pelcro.user.read().auth_token
-          //     }`
-          //   },
-          //   (err, res) => {
-          //     if (err) {
-          //       // Inform the user if there was an error
-          //       onFailure(err);
-          //       dispatch({ type: DISABLE_SUBMIT, payload: false });
-          //       dispatch({ type: LOADING, payload: false });
-          //       return dispatch({
-          //         type: SHOW_ALERT,
-          //         payload: {
-          //           type: "error",
-          //           content: getErrorMessages(err)
-          //         }
-          //       });
-          //     } else {
-          //       toggleAuthenticationPendingView(true, res);
-
-          //       const listenFor3DSecureCompletionMessage = () => {
-          //         const retrieveSourceInfoFromIframe = (event) => {
-          //           const { data } = event;
-          //           if (
-          //             data.message === "3DS-authentication-complete"
-          //           ) {
-          //             const tapID = data.tapID;
-          //             toggleAuthenticationPendingView(false);
-          //             toggleAuthenticationSuccessPendingView(true);
-
-          //             window.removeEventListener(
-          //               "message",
-          //               retrieveSourceInfoFromIframe
-          //             );
-
-          //             dispatch({
-          //               type: SHOW_ALERT,
-          //               payload: {
-          //                 type: "error",
-          //                 content: null
-          //               }
-          //             });
-
-          //             handleTapPayment(tapID);
-          //           }
-          //         };
-
-          //         // listen to injected iframe for authentication complete message
-          //         window.addEventListener(
-          //           "message",
-          //           retrieveSourceInfoFromIframe
-          //         );
-          //       };
-
-          //       listenFor3DSecureCompletionMessage();
-          //     }
-          //   }
-          // );
         }
       });
   };
@@ -369,39 +271,6 @@ const PaymentMethodContainerWithoutStripe = ({
       createNewTapCard();
     }
 
-    // function createNewTapCard() {
-    //   window.Pelcro.source.create(
-    //     {
-    //       auth_token: window.Pelcro.user.read().auth_token,
-    //       token: paymentRequest,
-    //       gateway: "tap"
-    //     },
-    //     (err, res) => {
-    //       dispatch({ type: DISABLE_SUBMIT, payload: false });
-    //       dispatch({ type: LOADING, payload: false });
-    //       if (err) {
-    //         onFailure(err);
-    //         return dispatch({
-    //           type: SHOW_ALERT,
-    //           payload: {
-    //             type: "error",
-    //             content: getErrorMessages(err)
-    //           }
-    //         });
-    //       }
-
-    //       dispatch({
-    //         type: SHOW_ALERT,
-    //         payload: {
-    //           type: "success",
-    //           content: t("messages.sourceUpdated")
-    //         }
-    //       });
-    //       onSuccess(res);
-    //     }
-    //   );
-    // }
-
     function handleTapSubscription() {
       const payment = new Payment(new TapGateway());
 
@@ -430,7 +299,7 @@ const PaymentMethodContainerWithoutStripe = ({
             if (err) {
               return handlePaymentError(err);
             }
-            onSuccess(res);
+            confirmTapPayment(res);
           }
         );
       } else if (giftSubscriprition) {
@@ -452,7 +321,7 @@ const PaymentMethodContainerWithoutStripe = ({
             if (err) {
               return handlePaymentError(err);
             }
-            onSuccess(res);
+            confirmTapPayment(res);
           }
         );
       } else if (renewSubscription) {
@@ -474,7 +343,7 @@ const PaymentMethodContainerWithoutStripe = ({
             if (err) {
               return handlePaymentError(err);
             }
-            onSuccess(res);
+            confirmTapPayment(res);
           }
         );
       } else if (createSubscription) {
@@ -494,8 +363,6 @@ const PaymentMethodContainerWithoutStripe = ({
               return handlePaymentError(err);
             }
             confirmTapPayment(res);
-            console.log("THE RESPONSE IS:", res.data);
-            // onSuccess(res);
           }
         );
       }
