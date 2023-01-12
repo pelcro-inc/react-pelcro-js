@@ -1,3 +1,10 @@
+# [3.17.0-beta.10](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.17.0-beta.9...v3.17.0-beta.10) (2023-01-12)
+
+
+### Features
+
+* issue forms ([d8767b2](https://github.com/pelcro-inc/react-pelcro-js/commit/d8767b2c0557675bebc8b23c7896fd1470f1a4f3))
+
 # [3.17.0-beta.9](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.17.0-beta.8...v3.17.0-beta.9) (2023-01-12)
 
 
