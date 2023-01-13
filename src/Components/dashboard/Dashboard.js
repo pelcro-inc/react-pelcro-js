@@ -38,10 +38,12 @@ import { PaymentCardsMenu } from "./DashboardMenus/PaymentCardsMenu";
 import { QRCodeMenu } from "./DashboardMenus/QRCodeMenu";
 import { ProfileMenu } from "./DashboardMenus/ProfileMenu";
 import { NewslettersMenu } from "./DashboardMenus/NewslettersMenu";
+import { PasswordChangeMenu } from "./DashboardMenus/PasswordChangeMenu";
 
 const SUB_MENUS = {
   PROFILE: "profile",
   QRCODE: "qr-code",
+  PASSWORDCHANGE: "passwordChange",
   SUBSCRIPTIONS: "subscriptions",
   DONATIONS: "donations",
   MEMBERSHIPS: "memberships",
@@ -545,6 +547,16 @@ class Dashboard extends Component {
               />
 
               <DashboardLink
+                name={SUB_MENUS.PASSWORDCHANGE}
+                icon={
+                  <KeyIcon className="plc-w-6 plc-h-6 plc-mr-2" />
+                }
+                title={"Change password"}
+                setActiveDashboardLink={this.setActiveDashboardLink}
+                activeDashboardLink={this.state.activeDashboardLink}
+              />
+
+              <DashboardLink
                 name={SUB_MENUS.SAVED_ITEMS}
                 icon={<BookmarkIcon />}
                 title={this.locale("labels.savedItems.label")}
@@ -665,6 +677,9 @@ class Dashboard extends Component {
             )}
             {this.state.activeDashboardLink === SUB_MENUS.QRCODE && (
               <QRCodeMenu />
+            )}
+            {this.state.activeDashboardLink === SUB_MENUS.PASSWORDCHANGE && (
+              <PasswordChangeMenu />
             )}
             {this.state.activeDashboardLink ===
               SUB_MENUS.SAVED_ITEMS && <SavedItemsMenu />}
