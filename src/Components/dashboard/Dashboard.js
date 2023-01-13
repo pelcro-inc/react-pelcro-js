@@ -554,7 +554,6 @@ class Dashboard extends Component {
                 title={this.locale("labels.paymentSource")}
                 setActiveDashboardLink={this.setActiveDashboardLink}
                 activeDashboardLink={this.state.activeDashboardLink}
-                onClick={this.displaySourceCreate}
               />
 
               <DashboardLink
@@ -699,7 +698,11 @@ class Dashboard extends Component {
             {this.state.activeDashboardLink ===
               SUB_MENUS.NEWSLETTERS && <NewslettersMenu />}
             {this.state.activeDashboardLink ===
-              SUB_MENUS.DONATIONS && <DonationsMenu />}
+              SUB_MENUS.DONATIONS && (
+              <DonationsMenu
+                getSubscriptionStatus={this.getSubscriptionStatus}
+              />
+            )}
             {this.state.activeDashboardLink === SUB_MENUS.GIFTS && (
               <GiftsMenu
                 getSubscriptionStatus={this.getSubscriptionStatus}
