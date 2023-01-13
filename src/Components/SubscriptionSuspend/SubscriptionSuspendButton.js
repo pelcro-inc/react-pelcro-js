@@ -9,22 +9,18 @@ import { notify } from "../../SubComponents/Notification";
 export const SubscriptionSuspendButton = ({
   subscription,
   onClick,
-  className,
+  className
 }) => {
-  const {switchView} = usePelcro();
-  
+  const { switchView } = usePelcro();
+
   const {
-    state: {
-      suspendDate,
-      buttonDisabled
-    },
+    state: { suspendDate, buttonDisabled },
     dispatch
   } = useContext(store);
 
   const { t } = useTranslation("subscriptionSuspend");
 
   const suspendSubscription = (payload, onSuccess, onFailure) => {
-    
     window.Pelcro.subscription.update(
       {
         auth_token: window.Pelcro.user.read().auth_token,
@@ -50,13 +46,13 @@ export const SubscriptionSuspendButton = ({
   const handleClick = () => {
     const payload = {
       subscription_id: subscription.id
-    }
+    };
 
     onClick?.();
-    
+
     //Close the modal
     switchView(null);
-    
+
     //Show confirmation alert after closing the modal
     notify.confirm(
       (onSuccess, onFailure) => {
@@ -74,8 +70,7 @@ export const SubscriptionSuspendButton = ({
         closeButtonLabel: t("labels.subCancellation.goBack")
       }
     );
-    
-  }
+  };
 
   return (
     <Button
