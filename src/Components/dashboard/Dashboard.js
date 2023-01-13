@@ -505,6 +505,16 @@ class Dashboard extends Component {
                     {this.user.email}
                   </p>
                 </div>
+                <div className="lg:plc-hidden">
+                  <Button
+                    variant="ghost"
+                    type="button"
+                    className="plc-text-gray-500 plc-rounded-2xl plc-absolute plc-z-max plc-top-5 plc-right-10"
+                    onClick={this.closeDashboard}
+                  >
+                    <XIcon className="plc-fill-current" />
+                  </Button>
+                </div>
               </div>
             </header>
             <section className="plc-mt-6 plc-shadow-sm">
