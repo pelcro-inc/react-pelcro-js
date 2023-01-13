@@ -204,6 +204,8 @@ const PaymentMethodContainerWithoutStripe = ({
       };
 
       listenFor3DSecureCompletionMessage();
+    } else {
+      onSuccess(res);
     }
   }
 
@@ -285,9 +287,7 @@ const PaymentMethodContainerWithoutStripe = ({
         return payment.execute(
           {
             type: PAYMENT_TYPES.RENEW_GIFTED_SUBSCRIPTION,
-            token: isUsingExistingPaymentMethod
-              ? selectedPaymentMethodId
-              : paymentRequest,
+            token: gatewayToken,
             plan,
             couponCode,
             product,
@@ -306,9 +306,7 @@ const PaymentMethodContainerWithoutStripe = ({
         return payment.execute(
           {
             type: PAYMENT_TYPES.CREATE_GIFTED_SUBSCRIPTION,
-            token: isUsingExistingPaymentMethod
-              ? selectedPaymentMethodId
-              : paymentRequest,
+            token: gatewayToken,
             quantity: plan.quantity,
             plan,
             couponCode,
@@ -328,9 +326,7 @@ const PaymentMethodContainerWithoutStripe = ({
         return payment.execute(
           {
             type: PAYMENT_TYPES.RENEW_SUBSCRIPTION,
-            token: isUsingExistingPaymentMethod
-              ? selectedPaymentMethodId
-              : paymentRequest,
+            token: gatewayToken,
             quantity: plan.quantity,
             plan,
             couponCode,
