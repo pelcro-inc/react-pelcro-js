@@ -7,7 +7,7 @@ import {
   ModalBody,
   ModalFooter
 } from "../../SubComponents/Modal";
-import { usePelcro } from "../../components";
+import { usePelcro } from "../../hooks/usePelcro";
 
 export const EmailVerifyModal = ({
   onDisplay,
