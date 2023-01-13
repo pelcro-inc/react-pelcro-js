@@ -475,6 +475,38 @@ class Dashboard extends Component {
           afterLeave={this.props.onClose}
         >
           <div id="pelcro-view-dashboard" ref={this.menuRef}>
+            <header className="plc-bg-gray-200 plc-flex plc-py-5">
+              <div className="plc-flex plc-items-center">
+                <div className="plc-flex plc-justify-center plc-ml-3 sm:plc-ml-6 ">
+                  <div className="plc-relative plc-flex-shrink-0">
+                    <img
+                      className="pelcro-user-profile-picture plc-bg-gray-300 plc-cursor-pointer plc-h-10 plc-rounded-md plc-w-10"
+                      src={profilePicture}
+                      alt="profile picture"
+                      onClick={this.displayProfilePicChange}
+                    />
+                  </div>
+                </div>
+
+                <div className="plc-flex plc-flex-col plc-justify-between plc-flex-grow plc-w-56 plc-ml-4 plc-break-words sm:plc-w-auto">
+                  {userHasName && (
+                    <p className="plc-font-bold">
+                      {this.user.first_name} {this.user.last_name}
+                    </p>
+                  )}
+
+                  <p
+                    className={`plc-m-0 plc-text-sm ${
+                      userHasName
+                        ? "plc-text-sm"
+                        : "plc-text-lg plc-font-bold plc-mt-auto"
+                    }`}
+                  >
+                    {this.user.email}
+                  </p>
+                </div>
+              </div>
+            </header>
             <section className="plc-mt-6 plc-shadow-sm">
               <header className="plc-pl-4 plc-mb-2 sm:plc-pl-8">
                 <p className="plc-font-bold plc-tracking-widest plc-text-gray-500">
@@ -531,7 +563,6 @@ class Dashboard extends Component {
                 title={this.locale("labels.addresses")}
                 setActiveDashboardLink={this.setActiveDashboardLink}
                 activeDashboardLink={this.state.activeDashboardLink}
-                // onClick={this.displayAddressEdit}
               />
 
               <header className="plc-pl-4 plc-my-2 sm:plc-pl-8">
@@ -548,7 +579,6 @@ class Dashboard extends Component {
                 title={this.locale("labels.subscriptions")}
                 setActiveDashboardLink={this.setActiveDashboardLink}
                 activeDashboardLink={this.state.activeDashboardLink}
-                // onClick={this.displayAddressEdit}
               />
 
               <DashboardLink
@@ -570,7 +600,6 @@ class Dashboard extends Component {
                 title={this.locale("labels.memberships")}
                 setActiveDashboardLink={this.setActiveDashboardLink}
                 activeDashboardLink={this.state.activeDashboardLink}
-                // onClick={this.displayAddressEdit}
               />
 
               <DashboardLink
@@ -581,7 +610,6 @@ class Dashboard extends Component {
                 title={this.locale("labels.donations")}
                 setActiveDashboardLink={this.setActiveDashboardLink}
                 activeDashboardLink={this.state.activeDashboardLink}
-                // onClick={this.displayAddressEdit}
               />
 
               <DashboardLink
@@ -590,7 +618,6 @@ class Dashboard extends Component {
                 title={this.locale("labels.gifts")}
                 setActiveDashboardLink={this.setActiveDashboardLink}
                 activeDashboardLink={this.state.activeDashboardLink}
-                // onClick={this.displayAddressEdit}
               />
 
               <DashboardLink
@@ -608,41 +635,8 @@ class Dashboard extends Component {
                 title={this.locale("labels.invoices")}
                 setActiveDashboardLink={this.setActiveDashboardLink}
                 activeDashboardLink={this.state.activeDashboardLink}
-                // onClick={this.displayAddressEdit}
               />
             </section>
-            <header className="plc-bg-gray-200 plc-flex plc-py-5">
-              <div className="plc-flex plc-items-center">
-                <div className="plc-flex plc-justify-center plc-ml-3 sm:plc-ml-6 ">
-                  <div className="plc-relative plc-flex-shrink-0">
-                    <img
-                      className="pelcro-user-profile-picture plc-bg-gray-300 plc-cursor-pointer plc-h-10 plc-rounded-md plc-w-10"
-                      src={profilePicture}
-                      alt="profile picture"
-                      onClick={this.displayProfilePicChange}
-                    />
-                  </div>
-                </div>
-
-                <div className="plc-flex plc-flex-col plc-justify-between plc-flex-grow plc-w-56 plc-ml-4 plc-break-words sm:plc-w-auto">
-                  {userHasName && (
-                    <p className="plc-font-bold">
-                      {this.user.first_name} {this.user.last_name}
-                    </p>
-                  )}
-
-                  <p
-                    className={`plc-m-0 plc-text-sm ${
-                      userHasName
-                        ? "plc-text-sm"
-                        : "plc-text-lg plc-font-bold plc-mt-auto"
-                    }`}
-                  >
-                    {this.user.email}
-                  </p>
-                </div>
-              </div>
-            </header>
             <DashboardLink
               name={SUB_MENUS.LOGOUT}
               icon={<ExitIcon />}
@@ -716,6 +710,7 @@ class Dashboard extends Component {
                 }
                 setIsRenewingGift={this.props.setIsRenewingGift}
                 setView={this.props.setView}
+                disableSubmit={this.state.disableSubmit}
               />
             )}
             {this.state.activeDashboardLink === SUB_MENUS.ORDERS && (

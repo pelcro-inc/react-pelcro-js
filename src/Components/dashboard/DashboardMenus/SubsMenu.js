@@ -59,7 +59,7 @@ export const SubscriptionsMenu = (props) => {
       </table>
       <AddNew
         title={t("labels.addSubscription")}
-        onClick={props.displayProductSelect}
+        onClick={() => props?.displayProductSelect({ isGift: false })}
       />
       <table className="plc-w-full plc-table-fixed pelcro-subscriptions-table plc-text-left">
         <tbody>
@@ -395,9 +395,9 @@ export const SubscriptionsItems = ({
               <td>
                 {hasPhases && (
                   <div
-                    className={`plc-flex plc-items-center plc-justify-center plc-transition-transform plc-ease-out plc-transform plc-rounded-full plc-w-7 plc-h-7 ${
+                    className={`plc-flex plc-items-center plc-justify-center plc-transition-transform plc-ease-out plc-transform plc-rounded-full plc-h-7 ${
                       isActive
-                        ? "plc-flex plc-place-items-center plc-w-7 plc-h-7 plc-p-1 plc-bg-primary-400 plc-rounded-full"
+                        ? "plc-flex plc-place-items-center plc-h-7 plc-p-1 plc-bg-primary-400 plc-rounded-full"
                         : "accordion-chevron"
                     }`}
                   >
