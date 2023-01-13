@@ -100,6 +100,9 @@ const RegisterContainer = ({
           });
 
           if (err) {
+            let { registered_on_other_sites, ...errors } =
+              err?.response?.data?.errors;
+            err.response.data.errors = { ...errors };
             dispatch({
               type: SHOW_ALERT,
               payload: {

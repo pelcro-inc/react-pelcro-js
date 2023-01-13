@@ -1,0 +1,13 @@
+{
+  "title": "Tu carrito de compras",
+  "subtitle": "Completa tu compra a continuación",
+  "name": "Nombre",
+  "quantity": "Cantidad",
+  "price": "Precio",
+  "actions": "Acciones",
+  "remove": "Eliminar",
+  "total": "Total",
+  "confirm": "Pago",
+  "empty": "Tu carrito está vacío.",
+  "removeAll": "Eliminar todo"
+}

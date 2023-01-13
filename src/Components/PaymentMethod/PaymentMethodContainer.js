@@ -123,6 +123,8 @@ const PaymentMethodContainerWithoutStripe = ({
   const isRenewingGift =
     props.isRenewingGift ?? pelcroStore.isRenewingGift;
   const invoice = props.invoice ?? pelcroStore.invoice;
+  const skipPayment =
+    window.Pelcro?.uiSettings?.skipPaymentForFreePlans;
 
   useEffect(() => {
     if (window.Pelcro.coupon.getFromUrl()) {
@@ -198,6 +200,8 @@ const PaymentMethodContainerWithoutStripe = ({
             }
           });
         } else {
+          console.log("Tap API Call result", result);
+
           window.Pelcro.payment.authorize(
             {
               auth_token: window.Pelcro.user.read().auth_token,
@@ -767,6 +771,7 @@ const PaymentMethodContainerWithoutStripe = ({
   }, [selectedPaymentMethodId]);
 
   const initPaymentRequest = (state, dispatch) => {
+    if (skipPayment && plan?.amount === 0) return;
     try {
       const paymentRequest = stripe.paymentRequest({
         country: window.Pelcro.user.location.countryCode || "US",
@@ -821,6 +826,7 @@ const PaymentMethodContainerWithoutStripe = ({
    * Updates the total amount after adding taxes only if site taxes are enabled
    */
   const updateTotalAmountWithTax = () => {
+    if (skipPayment && plan?.amount === 0) return;
     const taxesEnabled = window.Pelcro.site.read()?.taxes_enabled;
 
     if (taxesEnabled && type === "createPayment") {
@@ -1135,11 +1141,11 @@ const PaymentMethodContainerWithoutStripe = ({
     if (!subscriptionIdToRenew) {
       window.Pelcro.subscription.create(
         {
-          source_id: stripeSource.isExistingSource
-            ? stripeSource.id
+          source_id: stripeSource?.isExistingSource
+            ? stripeSource?.id
             : undefined,
-          stripe_token: !stripeSource.isExistingSource
-            ? stripeSource.id
+          stripe_token: !stripeSource?.isExistingSource
+            ? stripeSource?.id
             : undefined,
           auth_token: window.Pelcro.user.read().auth_token,
           plan_id: plan.id,
@@ -1166,11 +1172,11 @@ const PaymentMethodContainerWithoutStripe = ({
       if (isRenewingGift) {
         window.Pelcro.subscription.renewGift(
           {
-            source_id: stripeSource.isExistingSource
-              ? stripeSource.id
+            source_id: stripeSource?.isExistingSource
+              ? stripeSource?.id
               : undefined,
-            stripe_token: !stripeSource.isExistingSource
-              ? stripeSource.id
+            stripe_token: !stripeSource?.isExistingSource
+              ? stripeSource?.id
               : undefined,
             auth_token: window.Pelcro.user.read().auth_token,
             plan_id: plan.id,
@@ -1202,11 +1208,11 @@ const PaymentMethodContainerWithoutStripe = ({
       } else {
         window.Pelcro.subscription.renew(
           {
-            source_id: stripeSource.isExistingSource
-              ? stripeSource.id
+            source_id: stripeSource?.isExistingSource
+              ? stripeSource?.id
               : undefined,
-            stripe_token: !stripeSource.isExistingSource
-              ? stripeSource.id
+            stripe_token: !stripeSource?.isExistingSource
+              ? stripeSource?.id
               : undefined,
             auth_token: window.Pelcro.user.read().auth_token,
             plan_id: plan.id,
@@ -1646,11 +1652,25 @@ const PaymentMethodContainerWithoutStripe = ({
 
     if (show) {
       injectCardAuthenticationIframe(source);
-      cardAuthContainer.classList.remove("plc-hidden");
-      cardAuthContainer.classList.add("plc-flex");
+      cardAuthContainer?.classList.remove("plc-hidden");
+      cardAuthContainer?.classList.add("plc-flex");
     } else {
-      cardAuthContainer.classList.add("plc-hidden");
-      cardAuthContainer.classList.remove("plc-flex");
+      cardAuthContainer?.classList.add("plc-hidden");
+      cardAuthContainer?.classList.remove("plc-flex");
+    }
+  };
+
+  const toggleAuthenticationSuccessPendingView = (show) => {
+    const cardAuthContainer = document.querySelector(
+      ".card-authentication-success-container"
+    );
+
+    if (show) {
+      cardAuthContainer?.classList.remove("plc-hidden");
+      cardAuthContainer?.classList.add("plc-flex");
+    } else {
+      cardAuthContainer?.classList.add("plc-hidden");
+      cardAuthContainer?.classList.remove("plc-flex");
     }
   };
 
@@ -1666,7 +1686,7 @@ const PaymentMethodContainerWithoutStripe = ({
     iframe.style =
       "position: absolute; width: 100%; height: 100%; left: 0; top: 0; bottom: 0; z-index: 10;";
 
-    cardAuthContainer.appendChild(iframe);
+    cardAuthContainer?.appendChild(iframe);
   };
 
   const [state, dispatch] = useReducerWithSideEffects(

@@ -139,7 +139,9 @@ class Dashboard extends Component {
   };
 
   hideMenuIfClickedOutside = (event) => {
-    const dashboardSubmenus = document.getElementById("pelcro-view-dashboard-submenus");
+    const dashboardSubmenus = document.getElementById(
+      "pelcro-view-dashboard-submenus"
+    );
 
     const didClickOutsideMenu =
       this.state.isOpen &&
@@ -148,7 +150,7 @@ class Dashboard extends Component {
       !dashboardSubmenus?.contains(event.target);
 
     if (didClickOutsideMenu) {
-      this.setState({ 
+      this.setState({
         isOpen: false,
         activeDashboardLink: null
       });
@@ -159,7 +161,7 @@ class Dashboard extends Component {
     this.setState({
       activeDashboardLink: submenuName ?? null
     });
-  }
+  };
 
   cancelSubscription = (subscription_id, onSuccess, onFailure) => {
     // disable the Login button to prevent repeated clicks
@@ -381,7 +383,9 @@ class Dashboard extends Component {
               <span title={address.line1}>{address.line1}</span>
               <div className="plc-flex plc-mb-2 plc-mt-1">
                 <span className="plc-rounded-full plc-bg-gray-200 plc-text-black plc-inline-flex plc-items-start plc-py-1 plc-px-4 plc-text-sm plc-capitalize">
-                  {address.type}
+                  {address.type === "shipping"
+                    ? this.locale("labels.shipping")
+                    : this.locale("labels.billing")}
                 </span>
 
                 {address.is_default && (
@@ -471,6 +475,38 @@ class Dashboard extends Component {
           afterLeave={this.props.onClose}
         >
           <div id="pelcro-view-dashboard" ref={this.menuRef}>
+            <header className="plc-bg-gray-200 plc-flex plc-py-5">
+              <div className="plc-flex plc-items-center">
+                <div className="plc-flex plc-justify-center plc-ml-3 sm:plc-ml-6 ">
+                  <div className="plc-relative plc-flex-shrink-0">
+                    <img
+                      className="pelcro-user-profile-picture plc-bg-gray-300 plc-cursor-pointer plc-h-10 plc-rounded-md plc-w-10"
+                      src={profilePicture}
+                      alt="profile picture"
+                      onClick={this.displayProfilePicChange}
+                    />
+                  </div>
+                </div>
+
+                <div className="plc-flex plc-flex-col plc-justify-between plc-flex-grow plc-w-56 plc-ml-4 plc-break-words sm:plc-w-auto">
+                  {userHasName && (
+                    <p className="plc-font-bold">
+                      {this.user.first_name} {this.user.last_name}
+                    </p>
+                  )}
+
+                  <p
+                    className={`plc-m-0 plc-text-sm ${
+                      userHasName
+                        ? "plc-text-sm"
+                        : "plc-text-lg plc-font-bold plc-mt-auto"
+                    }`}
+                  >
+                    {this.user.email}
+                  </p>
+                </div>
+              </div>
+            </header>
             <section className="plc-mt-6 plc-shadow-sm">
               <header className="plc-pl-4 plc-mb-2 sm:plc-pl-8">
                 <p className="plc-font-bold plc-tracking-widest plc-text-gray-500">
@@ -600,38 +636,6 @@ class Dashboard extends Component {
                 activeDashboardLink={this.state.activeDashboardLink}
               />
             </section>
-            <header className="plc-bg-gray-200 plc-flex plc-py-5">
-              <div className="plc-flex plc-items-center">
-                <div className="plc-flex plc-justify-center plc-ml-3 sm:plc-ml-6 ">
-                  <div className="plc-relative plc-flex-shrink-0">
-                    <img
-                      className="pelcro-user-profile-picture plc-bg-gray-300 plc-cursor-pointer plc-h-10 plc-rounded-md plc-w-10"
-                      src={profilePicture}
-                      alt="profile picture"
-                      onClick={this.displayProfilePicChange}
-                    />
-                  </div>
-                </div>
-
-                <div className="plc-flex plc-flex-col plc-justify-between plc-flex-grow plc-w-56 plc-ml-4 plc-break-words sm:plc-w-auto">
-                  {userHasName && (
-                    <p className="plc-font-bold">
-                      {this.user.first_name} {this.user.last_name}
-                    </p>
-                  )}
-
-                  <p
-                    className={`plc-m-0 plc-text-sm ${
-                      userHasName
-                        ? "plc-text-sm"
-                        : "plc-text-lg plc-font-bold plc-mt-auto"
-                    }`}
-                  >
-                    {this.user.email}
-                  </p>
-                </div>
-              </div>
-            </header>
             <DashboardLink
               name={SUB_MENUS.LOGOUT}
               icon={<ExitIcon />}
@@ -677,7 +681,9 @@ class Dashboard extends Component {
                 unSuspendSubscription={this.unSuspendSubscription}
                 reactivateSubscription={this.reactivateSubscription}
                 setProductAndPlan={this.props.setProductAndPlan}
-                setSubscriptionIdToRenew={this.props.setSubscriptionIdToRenew}
+                setSubscriptionIdToRenew={
+                  this.props.setSubscriptionIdToRenew
+                }
                 setView={this.props.setView}
                 getSubscriptionStatus={this.getSubscriptionStatus}
                 disableSubmit={this.state.disableSubmit}
@@ -707,10 +713,12 @@ class Dashboard extends Component {
                 }
                 setIsRenewingGift={this.props.setIsRenewingGift}
                 setView={this.props.setView}
+                disableSubmit={this.state.disableSubmit}
               />
             )}
-            {this.state.activeDashboardLink ===
-              SUB_MENUS.ORDERS && <OrdersMenu />}
+            {this.state.activeDashboardLink === SUB_MENUS.ORDERS && (
+              <OrdersMenu />
+            )}
             {this.state.activeDashboardLink ===
               SUB_MENUS.INVOICES && <InvoicesMenu />}
             {this.state.activeDashboardLink === SUB_MENUS.LOGOUT &&

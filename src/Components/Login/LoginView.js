@@ -5,6 +5,7 @@ import { LoginPassword } from "./LoginPassword";
 import { LoginButton } from "./LoginButton";
 import { LoginRequestLoginToken } from "./LoginRequestLoginToken";
 import { LoginEmail } from "./LoginEmail";
+import { LoginUsername } from "./LoginUsername";
 import { AlertWithContext } from "../../SubComponents/AlertWithContext";
 import { VerticalSeparator } from "../../SubComponents/VerticalSeparator";
 import { FacebookLoginButton } from "../../Components/common/FacebookLoginButton/FacebookLoginButton";
@@ -24,6 +25,8 @@ export function LoginView(props) {
 
   const passwordlessEnabled =
     window.Pelcro.site.read()?.passwordless_enabled;
+  const enableLoginWithUsername =
+    window.Pelcro?.uiSettings?.enableLoginWithUsername;
 
   return (
     <div id="pelcro-login-view">
@@ -69,13 +72,23 @@ export function LoginView(props) {
             </div>
           )}
 
-          <LoginEmail
-            id="pelcro-input-email"
-            errorId="pelcro-input-email-error"
-            required
-            label={t("labels.email")}
-            autoFocus={true}
-          />
+          {enableLoginWithUsername ? (
+            <LoginUsername
+              id="pelcro-input-username"
+              errorId="pelcro-input-username-error"
+              required
+              label={t("labels.username")}
+              autoFocus={true}
+            />
+          ) : (
+            <LoginEmail
+              id="pelcro-input-email"
+              errorId="pelcro-input-email-error"
+              required
+              label={t("labels.email")}
+              autoFocus={true}
+            />
+          )}
           <LoginPassword
             id="pelcro-input-password"
             errorId="pelcro-input-password-error"

@@ -1,13 +1,17 @@
 {
   "validation": {
     "validEmail": "Email address is not valid.",
+    "validUsername": "User name is not valid.",
     "enterEmail": "Email address is required.",
+    "enterEmails": "Email addresses are required.",
+    "enterUsername": "User name is required.",
     "enterPassword": "Password is required.",
     "confirmPassword": "Confirm password is required."
   },
   "buttons": {
     "account": "My account",
-    "login": "Login"
+    "login": "Login",
+    "subscribe": "Subscribe"
   },
   "dashboard": {
     "labels": {

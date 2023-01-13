@@ -14,8 +14,17 @@ export const PaymentMethodSelectModal = ({
   onClose,
   ...otherProps
 }) => {
-  const { switchToCheckoutForm, set } = usePelcro();
+  const { switchToCheckoutForm, set, plan } = usePelcro();
   const { t } = useTranslation("paymentMethod");
+
+  const skipPayment =
+    window.Pelcro?.uiSettings?.skipPaymentForFreePlans;
+
+  useEffect(() => {
+    if (skipPayment && plan?.amount === 0) {
+      switchToCheckoutForm();
+    }
+  }, []);
 
   const onSuccess = (selectedPaymentMethodId) => {
     otherProps.onSuccess?.(selectedPaymentMethodId);

@@ -16,6 +16,10 @@ import { ReactComponent as LockIcon } from "../../assets/lock.svg";
 import { SelectedPaymentMethod } from "./SelectedPaymentMethod";
 import { TaxAmount } from "./TaxAmount";
 import { getSiteCardProcessor } from "../../Components/common/Helpers";
+import { IncludeFirstName } from "./IncludeFirstName";
+import { IncludeLastName } from "./IncludeLastName";
+import { IncludePhone } from "./IncludePhone";
+import { SubscriptionCreateFreePlanButton } from "../SubscriptionCreate/SubscriptionCreateFreePlanButton";
 
 /**
  *
@@ -26,7 +30,8 @@ export function PaymentMethodView({
   onFailure,
   type,
   showCoupon,
-  showExternalPaymentMethods
+  showExternalPaymentMethods,
+  showSubscriptionButton
 }) {
   const { t } = useTranslation("checkoutForm");
   const cardProcessor = getSiteCardProcessor();
@@ -41,7 +46,7 @@ export function PaymentMethodView({
 
   return (
     <div className="plc-flex plc-flex-col plc-items-center plc-mt-4 sm:plc-px-8 pelcro-payment-block">
-      {cardProcessor === "stripe" && (
+      {cardProcessor === "stripe" && !showSubscriptionButton && (
         <div className="plc-flex plc-items-center plc-w-full plc-px-4 plc-py-2 plc-text-center plc-text-green-600 plc-border plc-border-green-400 plc-rounded plc-bg-green-50">
           <LockIcon className="plc-w-5 plc-h-5 plc-mr-1" />
           <span>
@@ -68,38 +73,76 @@ export function PaymentMethodView({
           onGiftRenewalSuccess={onGiftRenewalSuccess}
           onFailure={onFailure}
         >
-          <BankRedirection />
           <AlertWithContext className="plc-mb-2" />
           {/* Payment form */}
-          <div>
-            <SelectedPaymentMethod />
-            <CheckoutForm />
+          {showSubscriptionButton ? (
+            <SubscriptionCreateFreePlanButton />
+          ) : (
+            <div>
+              <BankRedirection />
+              <BankAuthenticationSuccess />
+              <SelectedPaymentMethod />
 
-            {/* Coupon section */}
-            {showCoupon && (
-              <div className="plc-mb-2">
-                <CouponCode />
-                <DiscountedPrice />
+              {supportsTap &&
+                (!isUserFirstName ||
+                  !isUserLastName ||
+                  !isUserPhone) && (
+                  <>
+                    <div className="plc-flex plc-items-start">
+                      <IncludeFirstName
+                        id="pelcro-input-first-name"
+                        label={t("labels.firstName")}
+                        errorId="pelcro-input-firstName-error"
+                        required
+                      />
+                      <IncludeLastName
+                        wrapperClassName="plc-ml-3"
+                        id="pelcro-input-last-name"
+                        label={t("labels.lastName")}
+                        errorId="pelcro-input-lastName-error"
+                        required
+                      />
+                    </div>
+
+                    <IncludePhone
+                      id="pelcro-input-phone"
+                      errorId="pelcro-input-phone-error"
+                      label={t("labels.phone")}
+                      required
+                    />
+                  </>
+                )}
+
+              <CheckoutForm />
+
+              {/* Coupon section */}
+              {showCoupon && (
+                <div className="plc-mb-2">
+                  <CouponCode />
+                  <DiscountedPrice />
+                </div>
+              )}
+
+              <TaxAmount />
+
+              {/* Payment buttons section */}
+              <div className="plc-grid plc-mt-4 plc-gap-y-2">
+                <SubmitPaymentMethod />
+                {showExternalPaymentMethods &&
+                !supportsVantiv &&
+                !supportsTap ? (
+                  <>
+                    <PelcroPaymentRequestButton />
+                    <PaypalSubscribeButton />
+                  </>
+                ) : showExternalPaymentMethods && supportsVantiv ? (
+                  <>
+                    <PaypalSubscribeButton />
+                  </>
+                ) : null}
               </div>
-            )}
-
-            <TaxAmount />
-
-            {/* Payment buttons section */}
-            <div className="plc-grid plc-mt-4 plc-gap-y-2">
-              <SubmitPaymentMethod />
-              {showExternalPaymentMethods && !supportsVantiv ? (
-                <>
-                  <PelcroPaymentRequestButton />
-                  <PaypalSubscribeButton />
-                </>
-              ) : showExternalPaymentMethods && supportsVantiv ? (
-                <>
-                  <PaypalSubscribeButton />
-                </>
-              ) : null}
             </div>
-          </div>
+          )}
         </PaymentMethodContainer>
       </form>
     </div>

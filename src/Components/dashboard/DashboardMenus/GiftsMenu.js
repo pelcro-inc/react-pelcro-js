@@ -15,7 +15,7 @@ export const GiftsMenu = (props) => {
   const giftRecipients =
     window.Pelcro.user.read()?.gift_recipients ?? [];
 
-  const renderGiftRecipients = () => {
+  const renderGiftRecipients = ({ disableSubmit }) => {
     const giftedSubscriptions = giftRecipients
       ?.sort((a, b) => a.expires_at - b.expires_at)
       ?.sort((a, b) => a.renews_at - b.renews_at)
@@ -104,8 +104,8 @@ export const GiftsMenu = (props) => {
                   variant="ghost"
                   icon={<RefreshIcon className="plc-w-4 plc-h-4" />}
                   className="plc-text-blue-400"
-                  // onClick={onRenewClick}
-                  // disabled={this.state.disableSubmit}
+                  onClick={onRenewClick}
+                  disabled={disableSubmit}
                   data-key={recipient.id}
                 >
                   {t("labels.renew")}
@@ -122,9 +122,7 @@ export const GiftsMenu = (props) => {
           <tr>
             <th className="plc-w-1/4">{t("labels.recipient")}</th>
             <th className="plc-w-1/4">{t("labels.plan")}</th>
-            <th className="plc-w-1/4">
-              {t("labels.status.title")}
-            </th>
+            <th className="plc-w-1/4">{t("labels.status.title")}</th>
             <th className="plc-w-1/4">{t("labels.actions")}</th>
           </tr>
         </thead>
@@ -143,7 +141,7 @@ export const GiftsMenu = (props) => {
       className="plc-max-w-100% md:plc-max-w-80% plc-m-auto"
       title={t("labels.gifts")}
     >
-      {renderGiftRecipients()}
+      {renderGiftRecipients(props)}
       <AddNew
         title={t("labels.addGift")}
         onClick={() => props?.displayProductSelect({ isGift: true })}

@@ -1,13 +1,17 @@
 {
   "validation": {
     "validEmail": "le courriel n’est pas valide",
+    "validUsername": "Le nom d'utilisateur n'est pas valide.",
     "enterEmail": "Un courriel est requis.",
+    "enterEmails": "Les adresses e-mail sont obligatoires.",
+    "enterUsername": "Nom d'utilisateur est nécessaire.",
     "enterPassword": "Mot de passe requis.",
     "confirmPassword": "Confirmer le mot de passe requis."
   },
   "buttons": {
     "account": "Accès abonné(e)s",
-    "login": "Se connecter"
+    "login": "Se connecter",
+    "subscribe": "S'abonner"
   },
   "dashboard": {
     "labels": {

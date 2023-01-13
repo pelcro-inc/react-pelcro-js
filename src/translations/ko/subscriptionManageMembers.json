@@ -1,0 +1,12 @@
+{
+  "labels": {
+    "inviteMembers": "회원 초대",
+    "listOfMembers": "구성원 목록",
+    "invite": "초대",
+    "remove": "제거하다",
+    "emails": "이메일 입력",
+    "status": "상태",
+    "actions": "행위",
+    "email": "이메일"
+  }
+}

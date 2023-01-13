@@ -17,6 +17,7 @@ export const initialState = {
   giftRecipient: null,
   giftCode: "",
   subscriptionIdToRenew: null,
+  subscriptionToManageMembers: null,
 
   // E-commerce
   cartItems: [],

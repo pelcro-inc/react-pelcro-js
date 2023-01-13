@@ -2,18 +2,70 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import {
   getFormattedPriceByLocal,
-  getPageOrDefaultLanguage
+  getPageOrDefaultLanguage,
+  userMustVerifyEmail
 } from "../../../utils/utils";
+import { ReactComponent as XCircleIcon } from "../../../assets/x-icon-solid.svg";
+import { ReactComponent as RefreshIcon } from "../../../assets/refresh.svg";
+import { Button } from "../../../SubComponents/Button";
+import { usePelcro } from "../../../hooks/usePelcro";
 import { AddNew } from "../AddNew";
 import { Card } from "../Card";
 
-export const DonationsMenu = (props) => {
+export const DonationsMenu = ({
+  reactivateSubscription,
+  disableSubmit,
+  cancelSubscription
+}) => {
   const { t } = useTranslation("dashboard");
+  const { switchView, setSubscriptionToCancel } = usePelcro();
 
   const subscriptions = getDonationSubs()
     .sort((a, b) => a.expires_at - b.expires_at)
     .sort((a, b) => a.renews_at - b.renews_at)
     .map((sub) => {
+      // Cancel button click handlers
+      const onCancelClick = () => {
+        const isImmediateCancelationEnabled =
+          window.Pelcro.site.read().cancel_settings.status;
+
+        if (isImmediateCancelationEnabled) {
+          setSubscriptionToCancel(sub.id);
+          return switchView("subscription-cancel");
+        }
+
+        if (userMustVerifyEmail()) {
+          return switchView("email-verify");
+        }
+
+        onClose?.();
+        notify.confirm(
+          (onSuccess, onFailure) => {
+            cancelSubscription(sub.id, onSuccess, onFailure);
+          },
+          {
+            confirmMessage: t(
+              "messages.subCancellation.isSureToCancel"
+            ),
+            loadingMessage: t("messages.subCancellation.loading"),
+            successMessage: t("messages.subCancellation.success"),
+            errorMessage: t("messages.subCancellation.error")
+          },
+          {
+            closeButtonLabel: t("labels.subCancellation.goBack")
+          }
+        );
+      };
+
+      // Reactivate button click handlers
+      const onReactivateClick = () => {
+        if (userMustVerifyEmail()) {
+          return switchView("email-verify");
+        }
+
+        reactivateSubscription(sub.id);
+      };
+
       return (
         <tr
           key={sub.id}

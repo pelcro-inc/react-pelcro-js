@@ -54,7 +54,8 @@ export function RegisterModal(props) {
 
     // If this is a redeem gift
     if (giftCode) {
-      return switchToAddressView();
+      return switchView("gift-redeem");
+      // return switchToAddressView();
     }
 
     // Check if the subscription is meant as a gift (if so, gather recipients info)

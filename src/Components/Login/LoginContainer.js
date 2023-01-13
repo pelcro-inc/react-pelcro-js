@@ -7,7 +7,9 @@ import useReducerWithSideEffects, {
 } from "use-reducer-with-side-effects";
 import {
   SET_EMAIL,
+  SET_USERNAME,
   SET_PASSWORD,
+  SET_USERNAME_ERROR,
   SET_EMAIL_ERROR,
   SET_PASSWORD_ERROR,
   RESET_LOGIN_FORM,
@@ -20,8 +22,10 @@ import { getErrorMessages } from "../common/Helpers";
 
 const initialState = {
   email: "",
+  username: "",
   password: "",
   emailError: null,
+  usernameError: null,
   passwordError: null,
   buttonDisabled: false,
   alert: {
@@ -39,21 +43,27 @@ const LoginContainer = ({
   onFailure = () => {},
   children
 }) => {
-  
-  const handleLogin = ({ email, password }, dispatch) => {
-    window.Pelcro.user.login({ email, password }, (err, res) => {
-      dispatch({ type: DISABLE_LOGIN_BUTTON, payload: false });
+  const handleLogin = ({ email, username, password }, dispatch) => {
+    window.Pelcro.user.login(
+      {
+        ...(email && { email }),
+        ...(username && { username }),
+        password
+      },
+      (err, res) => {
+        dispatch({ type: DISABLE_LOGIN_BUTTON, payload: false });
 
-      if (err) {
-        dispatch({
-          type: SHOW_ALERT,
-          payload: { type: "error", content: getErrorMessages(err) }
-        });
-        onFailure(err);
-      } else {
-        onSuccess(res);
+        if (err) {
+          dispatch({
+            type: SHOW_ALERT,
+            payload: { type: "error", content: getErrorMessages(err) }
+          });
+          onFailure(err);
+        } else {
+          onSuccess(res);
+        }
       }
-    });
+    );
   };
 
   const handleSocialLogin = ({
@@ -98,6 +108,12 @@ const LoginContainer = ({
             email: action.payload,
             emailError: null
           });
+        case SET_USERNAME:
+          return Update({
+            ...state,
+            username: action.payload,
+            usernameError: null
+          });
         case SET_PASSWORD:
           return Update({
             ...state,
@@ -109,6 +125,12 @@ const LoginContainer = ({
             ...state,
             emailError: action.payload,
             email: ""
+          });
+        case SET_USERNAME_ERROR:
+          return Update({
+            ...state,
+            usernameError: action.payload,
+            username: ""
           });
         case SET_PASSWORD_ERROR:
           return Update({

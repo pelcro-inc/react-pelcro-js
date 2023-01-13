@@ -1,0 +1,20 @@
+{
+  "title": "Ingresa tu correo para suscribirte a nuestro boletín",
+  "updateTitle": "Actualizar selecciones del boletín",
+  "subtitle": "Podríamos usar tu dirección de correo para otras comunicaciones de marketing",
+  "labels": {
+    "submit": "Enviar",
+    "firstName": "Nombre",
+    "lastName": "Apellido",
+    "email": "Correo",
+    "postalCode": "Código postal",
+    "required": "obligatorio"
+  },
+  "messages": {
+    "alreadyHaveAccount": "¿Ya tienes una cuenta?",
+    "success": "El boletín se actualizó con éxito",
+    "loginHere": "Inicia sesión aquí.",
+    "createAnAccount": " Crea una cuenta pulsando ",
+    "here": "aquí"
+  }
+}

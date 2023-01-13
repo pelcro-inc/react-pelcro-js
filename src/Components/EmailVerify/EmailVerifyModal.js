@@ -1,6 +1,5 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import Authorship from "../common/Authorship";
 import { EmailVerifyView } from "./EmailVerifyView";
 import {
   Modal,
@@ -14,6 +13,21 @@ export const EmailVerifyModal = ({
   onClose,
   ...otherProps
 }) => {
+  const { product, plan, switchToAddressView, switchToPaymentView } =
+    usePelcro();
+
+  const onSuccess = (res) => {
+    props.onSuccess?.(res);
+
+    if (product) {
+      if (product.address_required) {
+        return switchToAddressView();
+      } else {
+        return switchToPaymentView();
+      }
+    }
+  };
+
   const { t } = useTranslation("verifyEmail");
 
   return (
@@ -30,7 +44,7 @@ export const EmailVerifyModal = ({
         </div>
       </ModalHeader>
       <ModalBody>
-        <EmailVerifyView {...otherProps} />
+        <EmailVerifyView onSuccess={onSuccess} {...otherProps} />
       </ModalBody>
       <ModalFooter></ModalFooter>
     </Modal>

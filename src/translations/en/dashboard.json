@@ -16,6 +16,7 @@
       "scheduled": "Scheduled",
       "incomplete": "Incomplete"
     },
+    "manageMembers": "Manage Members",
     "shipments": "Shipments remaining",
     "logout": "Logout",
     "dashboard": "Dashboard",
@@ -47,6 +48,9 @@
     "updateProfile": "Edit profile",
     "changePassword": "Change password",
     "editNewsletters": "Edit newsletters",
+    "myQRCode": "My QR code",
+    "shipping": "Shipping",
+    "billing": "Billing",
     "Newsletters": "Newsletters",
     "edit": "Edit",
     "gifts": "Gifts",

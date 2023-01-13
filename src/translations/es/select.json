@@ -1,0 +1,29 @@
+{
+  "messages": {
+    "alreadyHaveAccount":"¿Ya tienes una cuenta?",
+    "loginHere":"Inicia sesión aquí",
+    "checkbox":"Marca esta casilla para regalar esta suscripción"
+  },
+  "labels": {
+    "plan": {
+      "title":"Suscribirse a un plan",
+      "subtitle":"Selecciona uno de los planes a continuación y pulsa en siguiente."
+    },
+    "product": {
+      "title":"Suscribirse a un producto",
+      "subtitle":"Selecciona uno de los productos a continuación y pulsa en siguiente."
+    },
+    "selectProduct":"Selecciona un producto",
+    "selectPlan":"Selecciona un plan",
+    "startingAt":"Inicia el",
+    "restrictiveArticles": {
+      "subscribeTo":"Suscríbete a una de las siguientes opciones para obtener acceso a esta página",
+      "or":"O revisa algunas de nuestras otras opciones a continuación"
+    }
+  },
+  "buttons": {
+    "next":"Siguiente",
+    "select":"Seleccionar",
+    "back":"Volver"
+  }
+}

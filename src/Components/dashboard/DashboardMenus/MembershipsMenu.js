@@ -23,11 +23,21 @@ export const MembershipsMenu = (props) => {
       <table className="plc-w-full plc-table-fixed pelcro-memberships-table plc-text-left">
         <thead className="plc-text-xs plc-font-semibold plc-tracking-wider plc-text-gray-400 plc-uppercase ">
           <tr>
-            <th className="plc-hidden md:plc-table-cell plc-w-2/12">{t("labels.product")}</th>
-            <th className="plc-w-1/3 md:plc-w-3/12">{t("labels.plan")}</th>
-            <th className="plc-hidden md:plc-table-cell plc-w-2/12">{t("labels.price")}</th>
-            <th className="plc-w-1/3 md:plc-w-2/12">{t("labels.status.title")}</th>
-            <th className="plc-w-1/3 md:plc-w-2/12">{t("labels.actions")}</th>
+            <th className="plc-hidden md:plc-table-cell plc-w-2/12">
+              {t("labels.product")}
+            </th>
+            <th className="plc-w-1/3 md:plc-w-3/12">
+              {t("labels.plan")}
+            </th>
+            <th className="plc-hidden md:plc-table-cell plc-w-2/12">
+              {t("labels.price")}
+            </th>
+            <th className="plc-w-1/3 md:plc-w-2/12">
+              {t("labels.status.title")}
+            </th>
+            <th className="plc-w-1/3 md:plc-w-2/12">
+              {t("labels.actions")}
+            </th>
             <th className="plc-w-1/3 md:plc-w-1/12"></th>
           </tr>
         </thead>
@@ -44,7 +54,7 @@ const MembershipsItems = (props) => {
   const { switchView, setSelectedMembership, switchToAddressView } =
     usePelcro();
 
-  const memberships = getActiveMemberships()
+  const memberships = getActiveMemberships();
 
   const onChangeAddressClick = (membershipId) => {
     if (userMustVerifyEmail()) {

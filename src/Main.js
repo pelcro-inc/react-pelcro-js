@@ -36,6 +36,7 @@ import { EmailVerifyModal } from "./Components/EmailVerify/EmailVerifyModal";
 import { InvoiceDetailsModal } from "./Components/InvoiceDetails/InvoiceDetailsModal";
 import { InvoicePaymentModal } from "./Components/InvoicePayment/InvoicePaymentModal";
 import { QrCodeModal } from "./Components/QrCode/QrCodeModal";
+import { SubscriptionManageMembersModal } from "./components";
 
 export const Main = () => {
   return (
@@ -70,6 +71,7 @@ export const Main = () => {
       <SubscriptionRenewModal />
       <SubscriptionCancelModal />
       <SubscriptionSuspendModal />
+      <SubscriptionManageMembersModal />
       <PaymentSuccessModal />
 
       <GiftCreateModal />

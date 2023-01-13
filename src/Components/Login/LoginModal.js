@@ -1,7 +1,5 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import Authorship from "../common/Authorship";
-import { LoginView } from "./LoginView";
 import {
   Modal,
   ModalHeader,
@@ -10,14 +8,26 @@ import {
 } from "../../SubComponents/Modal";
 import { Link } from "../../SubComponents/Link";
 import { usePelcro } from "../../hooks/usePelcro";
-import { initPaywalls } from "../PelcroModalController/PelcroModalController.service";
+import {
+  initPaywalls,
+  initViewFromURL
+} from "../PelcroModalController/PelcroModalController.service";
+import { getStableViewID } from "../../utils/utils";
+import { LoginView } from "./LoginView";
 
 /**
  *
  */
 export function LoginModal({ onDisplay, onClose, ...props }) {
   const { t } = useTranslation("login");
-  const { switchView, resetView } = usePelcro();
+  const {
+    switchView,
+    resetView,
+    product,
+    order,
+    switchToAddressView,
+    switchToPaymentView
+  } = usePelcro();
 
   const onSuccess = (res) => {
     props.onSuccess?.(res);
@@ -25,6 +35,34 @@ export function LoginModal({ onDisplay, onClose, ...props }) {
 
     if (window.Pelcro.paywall.isArticleRestricted()) {
       initPaywalls();
+    }
+
+    if (product) {
+      if (product.address_required) {
+        return switchToAddressView();
+      } else {
+        return switchToPaymentView();
+      }
+    }
+
+    if (order) {
+      return switchToAddressView();
+    }
+
+    resetView();
+
+    const viewFromURL = getStableViewID(
+      window.Pelcro.helpers.getURLParameter("view")
+    );
+
+    const viewsURLs = [
+      "invoice-details",
+      "gift-redeem",
+      "plan-select"
+    ];
+
+    if (viewsURLs.includes(viewFromURL)) {
+      initViewFromURL();
     }
   };
 

@@ -1,0 +1,66 @@
+name: Bug report
+description: File a bug report related to React components for Pelcro Elements.
+title: '[BUG]: '
+labels: ['bug']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report! In order the help our team processing your report, please fill in all the required information below.
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: Describe the bug
+      description:
+        Please include what you were trying to accomplish, the behavior which
+        you expected and what happened instead.
+    validations:
+      required: true
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: Instructions to reproduce
+      description: Detailed steps to reproduce the bug.
+      placeholder: |
+        1. I did this
+        2. Then I did that
+        3. Then I ran this command
+        4. Then it went kaboom and this error was displayed
+    validations:
+      required: true
+  - type: textarea
+    id: code-snippets
+    attributes:
+      label: Code snippets
+      description: If applicable, add code snippets to help explain your problem.
+      render: JavaScript
+    validations:
+      required: false
+  - type: input
+    id: os
+    attributes:
+      label: OS
+      placeholder: macOS
+    validations:
+      required: true
+  - type: input
+    id: language-version
+    attributes:
+      label: Node version
+      placeholder: Node v19.3.0 LTS
+    validations:
+      required: true
+  - type: input
+    id: lib-version
+    attributes:
+      label: Library version
+      placeholder: "@pelcro/react-pelcro-js v3.16.0"
+    validations:
+      required: true
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional context
+      description: Add any other context about the problem here.
+    validations:
+      required: false

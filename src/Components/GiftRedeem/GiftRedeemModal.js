@@ -22,11 +22,7 @@ export const GiftRedeemModal = ({
 
   const onSuccess = (giftCode) => {
     otherProps.onSuccess?.(giftCode);
-    if (isAuthenticated()) {
-      switchToAddressView();
-    } else {
-      switchView("register");
-    }
+    switchView("subscription-success");
   };
 
   return (

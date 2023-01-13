@@ -1,6 +1,5 @@
 import React from "react";
 import ReactGA from "react-ga";
-import { SubscriptionRenewView } from "./SubscriptionRenewView";
 import {
   Modal,
   ModalHeader,
@@ -8,6 +7,7 @@ import {
   ModalFooter
 } from "../../SubComponents/Modal";
 import { usePelcro } from "../../hooks/usePelcro";
+import { SubscriptionRenewView } from "./SubscriptionRenewView";
 
 /**
  *

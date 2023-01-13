@@ -1,0 +1,26 @@
+{
+  "title": "Ingresa tu dirección de envío",
+  "titleGifting": "Introduce tu dirección",
+  "selectAddressTitle": "Por favor, selecciona una dirección",
+  "selectAddressSubtitle": "Selecciona una de tus direcciones guardadas o añade una nueva",
+  "labels": {
+    "address": "Dirección",
+    "code": "Código Postal/Área",
+    "city": "Ciudad",
+    "region": "Estado/Provincia/Región",
+    "country": "País",
+    "firstName": "Nombre",
+    "lastName": "Apellido",
+    "required": "obligatorio",
+    "isDefault": "Configurar como dirección Principal"
+  },
+  "buttons": {
+    "submit": "Enviar",
+    "selectAddress": "Seleccionar dirección",
+    "addAddress": "Añadir nueva dirección"
+  },
+  "messages": {
+    "addressUpdated": "¡La dirección se actualizó con éxito!",
+    "subRedeemed": "Tu suscripción ha sido redimida."
+  }
+}

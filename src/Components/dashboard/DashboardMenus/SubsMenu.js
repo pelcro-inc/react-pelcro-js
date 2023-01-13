@@ -31,11 +31,21 @@ export const SubscriptionsMenu = (props) => {
       <table className="plc-w-full plc-table-fixed pelcro-subscriptions-table plc-text-left">
         <thead className="plc-text-xs plc-font-semibold plc-tracking-wider plc-text-gray-400 plc-uppercase ">
           <tr>
-            <th className="plc-hidden md:plc-table-cell plc-w-2/12">{t("labels.product")}</th>
-            <th className="plc-w-1/3 md:plc-w-3/12">{t("labels.plan")}</th>
-            <th className="plc-hidden md:plc-table-cell plc-w-2/12">{t("labels.price")}</th>
-            <th className="plc-w-1/3 md:plc-w-2/12">{t("labels.status.title")}</th>
-            <th className="plc-w-1/3 md:plc-w-2/12">{t("labels.actions")}</th>
+            <th className="plc-hidden md:plc-table-cell plc-w-2/12">
+              {t("labels.product")}
+            </th>
+            <th className="plc-w-1/3 md:plc-w-3/12">
+              {t("labels.plan")}
+            </th>
+            <th className="plc-hidden md:plc-table-cell plc-w-2/12">
+              {t("labels.price")}
+            </th>
+            <th className="plc-w-1/3 md:plc-w-2/12">
+              {t("labels.status.title")}
+            </th>
+            <th className="plc-w-1/3 md:plc-w-2/12">
+              {t("labels.actions")}
+            </th>
             <th className="plc-w-1/3 md:plc-w-1/12"></th>
           </tr>
         </thead>
@@ -49,7 +59,7 @@ export const SubscriptionsMenu = (props) => {
       </table>
       <AddNew
         title={t("labels.addSubscription")}
-        onClick={props.displayProductSelect}
+        onClick={() => props?.displayProductSelect({ isGift: false })}
       />
       <table className="plc-w-full plc-table-fixed pelcro-subscriptions-table plc-text-left">
         <tbody>
@@ -91,7 +101,7 @@ export const SubscriptionsItems = ({
     switchView,
     setSubscriptionToCancel,
     setSubscriptionToSuspend,
-    isAuthenticated
+    set
   } = usePelcro();
 
   const subs = getNonDonationSubs();
@@ -156,6 +166,14 @@ export const SubscriptionsItems = ({
         setProductAndPlan(product, plan);
         setSubscriptionIdToRenew(sub.id);
         setView("plan-select");
+      };
+
+      // Manage members click
+      const onManageMembersClick = () => {
+        const subscriptionToManageMembers = sub;
+
+        set({ subscriptionToManageMembers });
+        setView("manage-members");
       };
 
       // Suspend click
@@ -360,13 +378,26 @@ export const SubscriptionsItems = ({
                 ) : (
                   ""
                 )}
+
+                {sub?.plan?.type === "membership" && (
+                  <Button
+                    variant="ghost"
+                    className="plc-text-blue-400 pelcro-dashboard-sub-manage-members-button"
+                    icon={<RefreshIcon />}
+                    onClick={onManageMembersClick}
+                    disabled={disableSubmit}
+                    data-key={sub.id}
+                  >
+                    {t("labels.manageMembers")}
+                  </Button>
+                )}
               </td>
               <td>
                 {hasPhases && (
                   <div
-                    className={`plc-flex plc-items-center plc-justify-center plc-transition-transform plc-ease-out plc-transform plc-rounded-full plc-w-7 plc-h-7 ${
+                    className={`plc-flex plc-items-center plc-justify-center plc-transition-transform plc-ease-out plc-transform plc-rounded-full plc-h-7 ${
                       isActive
-                        ? "plc-flex plc-place-items-center plc-w-7 plc-h-7 plc-p-1 plc-bg-primary-400 plc-rounded-full"
+                        ? "plc-flex plc-place-items-center plc-h-7 plc-p-1 plc-bg-primary-400 plc-rounded-full"
                         : "accordion-chevron"
                     }`}
                   >
@@ -484,7 +515,7 @@ function getNonDonationSubs() {
 }
 
 function isDateAfterToday(date) {
-  const today = new Date().setHours(0,0,0,0);
-  const newDate = new Date(date).setHours(0,0,0,0);
+  const today = new Date().setHours(0, 0, 0, 0);
+  const newDate = new Date(date).setHours(0, 0, 0, 0);
   return newDate === today ? true : newDate > today;
 }

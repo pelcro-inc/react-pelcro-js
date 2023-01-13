@@ -109,6 +109,13 @@ class SelectModal extends Component {
       });
     }
 
+    if (
+      this.state.productList.length === 0 &&
+      !window.Pelcro.user.isAuthenticated()
+    ) {
+      this.props.setView("register");
+    }
+
     document.addEventListener("keydown", this.handleSubmit);
   };
 

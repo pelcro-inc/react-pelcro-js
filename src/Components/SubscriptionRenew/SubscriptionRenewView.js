@@ -9,7 +9,10 @@ export const SubscriptionRenewView = ({
   onFailure = () => {}
 }) => {
   const { t } = useTranslation("checkoutForm");
-  const { plan } = usePelcro();
+  const { product, plan } = usePelcro();
+  const skipPayment =
+    window.Pelcro?.uiSettings?.skipPaymentForFreePlans;
+  const showSubscriptionButton = skipPayment && plan?.amount === 0;
 
   const getPricingText = (plan) => {
     const autoRenewed = plan.auto_renew;
@@ -50,6 +53,7 @@ export const SubscriptionRenewView = ({
         onSuccess={onSuccess}
         onGiftRenewalSuccess={onGiftRenewalSuccess}
         onFailure={onFailure}
+        showSubscriptionButton={showSubscriptionButton}
       />
     </div>
   );

@@ -16,6 +16,7 @@
       "scheduled": "Programmé",
       "incomplete": "Incomplet"
     },
+    "manageMembers": "Gérer les membres",
     "shipments": "Expéditions restantes",
     "logout": "Déconnexion",
     "dashboard": "Tableau de bord",
@@ -47,6 +48,9 @@
     "updateProfile": "Mettre à jour le profil",
     "changePassword": "Changer le mot de passe",
     "editNewsletters": "Modifier les newsletters",
+    "myQRCode": "Mon code QR",
+    "shipping": "Expédition",
+    "billing": "Facturation",
     "Newsletters": "Newsletters",
     "edit": "Modifier",
     "gifts": "Cadeaux",

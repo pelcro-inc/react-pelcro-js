@@ -1,0 +1,12 @@
+{
+  "labels": {
+    "inviteMembers": "Invite Members",
+    "listOfMembers": "List of members",
+    "invite": "Invite",
+    "remove": "Remove",
+    "emails": "Enter emails",
+    "status": "Status",
+    "actions": "Actions",
+    "email": "Email"
+  }
+}

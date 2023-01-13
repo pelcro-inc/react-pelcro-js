@@ -1,8 +1,73 @@
 {
-    "validation": {
-      "validEmail": "이메일 주소가 유효하지 않습니다.",
-      "enterEmail": "이메일 주소는 필수 항목입니다.",
-      "enterPassword": "비밀번호는 필수 항목입니다."
+  "validation": {
+    "validEmail": "이메일 주소가 유효하지 않습니다.",
+    "validUsername": "사용자 이름이 유효하지 않습니다.",
+    "enterEmail": "이메일 주소는 필수 항목입니다.",
+    "enterEmails": "이메일 주소가 필요합니다.",
+    "enterUsername": "사용자 이름이 필요합니다.",
+    "enterPassword": "비밀번호는 필수 항목입니다.",
+    "enterFirstName": "이름은 필수 항목입니다.",
+    "enterLastName": "성은 필수 항목입니다.",
+    "enterPhone": "전화번호는 필수 항목입니다."
+  },
+  "buttons": {
+    "account": "내 계정",
+    "login": "로그인",
+    "subscribe": "구독하다"
+  },
+  "dashboard": {
+    "labels": {
+      "menu": "Pelcro 메뉴",
+      "name": "이름",
+      "email": "이메일",
+      "plan": "요금제",
+      "description": "설명",
+      "expiry": "만료",
+      "status": "상태",
+      "logout": "로그아웃",
+      "dashboard": "대시보드",
+      "unsubscribe": "멤버십 취소",
+      "reactivate": "재활성화",
+      "renew": "갱신",
+      "support": "지원",
+      "account": "계정",
+      "subscriptions": "유료 멤버십",
+      "updatePaymentSource": "업데이트",
+      "updateProfile": "업데이트",
+      "updateAddress": "업데이트",
+      "redeemGift": "선물 사용",
+      "address": "주소",
+      "paymentSource": "결제 카드",
+      "actions": "조치",
+      "expiresOn": "만료일:",
+      "renewsOn": "갱신일:",
+      "isSureToCancel": "정말로 유료 멤버십을 취소하시겠습니까?"
+    },
+    "messages": {
+      "yourDashboard": "내 Pelcro 대시보드"
+    },
+    "errors": {
+      "": ""
+    }
+  },
+  "select": {
+    "messages": {
+      "alreadyHaveAccount": "이미 계정이 있습니까?",
+      "loginHere": "여기에서 로그인하세요.",
+      "checkbox": "이 유료 멤버십을 선물하려면 체크하세요."
+    },
+    "labels": {
+      "plan": {
+        "title": "요금제 가입하기",
+        "subtitle": "아래 요금제 중 하나를 선택하고 다음을 클릭하세요."
+      },
+      "product": {
+        "title": "상품 가입하기",
+        "subtitle": "아래 상품 중 하나를 선택하고 다음을 클릭하세요."
+      },
+      "selectProduct": "상품 선택",
+      "selectPlan": "요금제 선택",
+      "startingAt": "시작일:"
     },
     "buttons": {
       "account": "내 계정",
@@ -80,3 +145,4 @@
       "successfully": "님께 선택하신 날짜에 발송될 예정입니다."
     }
   }
+}
