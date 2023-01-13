@@ -144,7 +144,6 @@ toast.confirm = (
     setTimeout(() => {
       notify.dismiss(id);
     }, 3000);
-
   };
 
   const onFailure = (errorValue) => {
@@ -156,7 +155,6 @@ toast.confirm = (
     setTimeout(() => {
       notify.dismiss(id);
     }, 3000);
-    
   };
 };
 

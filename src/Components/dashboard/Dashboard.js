@@ -38,10 +38,12 @@ import { PaymentCardsMenu } from "./DashboardMenus/PaymentCardsMenu";
 import { QRCodeMenu } from "./DashboardMenus/QRCodeMenu";
 import { ProfileMenu } from "./DashboardMenus/ProfileMenu";
 import { NewslettersMenu } from "./DashboardMenus/NewslettersMenu";
+import { PasswordChangeMenu } from "./DashboardMenus/PasswordChangeMenu";
 
 const SUB_MENUS = {
   PROFILE: "profile",
   QRCODE: "qr-code",
+  PASSWORDCHANGE: "passwordChange",
   SUBSCRIPTIONS: "subscriptions",
   DONATIONS: "donations",
   MEMBERSHIPS: "memberships",
@@ -505,6 +507,16 @@ class Dashboard extends Component {
                     {this.user.email}
                   </p>
                 </div>
+                <div className="lg:plc-hidden">
+                  <Button
+                    variant="ghost"
+                    type="button"
+                    className="plc-text-gray-500 plc-rounded-2xl plc-absolute plc-z-max plc-top-5 plc-right-10"
+                    onClick={this.closeDashboard}
+                  >
+                    <XIcon className="plc-fill-current" />
+                  </Button>
+                </div>
               </div>
             </header>
             <section className="plc-mt-6 plc-shadow-sm">
@@ -530,6 +542,16 @@ class Dashboard extends Component {
                   <QrCodeIcon className="plc-w-6 plc-h-6 plc-mr-2" />
                 }
                 title={"My QR code"}
+                setActiveDashboardLink={this.setActiveDashboardLink}
+                activeDashboardLink={this.state.activeDashboardLink}
+              />
+
+              <DashboardLink
+                name={SUB_MENUS.PASSWORDCHANGE}
+                icon={
+                  <KeyIcon className="plc-w-6 plc-h-6 plc-mr-2" />
+                }
+                title={"Change password"}
                 setActiveDashboardLink={this.setActiveDashboardLink}
                 activeDashboardLink={this.state.activeDashboardLink}
               />
@@ -655,6 +677,9 @@ class Dashboard extends Component {
             )}
             {this.state.activeDashboardLink === SUB_MENUS.QRCODE && (
               <QRCodeMenu />
+            )}
+            {this.state.activeDashboardLink === SUB_MENUS.PASSWORDCHANGE && (
+              <PasswordChangeMenu />
             )}
             {this.state.activeDashboardLink ===
               SUB_MENUS.SAVED_ITEMS && <SavedItemsMenu />}

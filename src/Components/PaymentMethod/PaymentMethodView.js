@@ -20,6 +20,7 @@ import { IncludeFirstName } from "./IncludeFirstName";
 import { IncludeLastName } from "./IncludeLastName";
 import { IncludePhone } from "./IncludePhone";
 import { SubscriptionCreateFreePlanButton } from "../SubscriptionCreate/SubscriptionCreateFreePlanButton";
+import { BankAuthenticationSuccess } from "./BankAuthenticationSuccess";
 
 /**
  *
@@ -43,6 +44,12 @@ export function PaymentMethodView({
   const supportsTap = Boolean(
     window.Pelcro.site.read()?.tap_gateway_settings
   );
+
+  const isUserFirstName = Boolean(
+    window.Pelcro.user.read().first_name
+  );
+  const isUserLastName = Boolean(window.Pelcro.user.read().last_name);
+  const isUserPhone = Boolean(window.Pelcro.user.read().phone);
 
   return (
     <div className="plc-flex plc-flex-col plc-items-center plc-mt-4 sm:plc-px-8 pelcro-payment-block">

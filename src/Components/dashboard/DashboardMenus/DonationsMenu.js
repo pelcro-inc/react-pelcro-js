@@ -25,37 +25,37 @@ export const DonationsMenu = ({
     .sort((a, b) => a.renews_at - b.renews_at)
     .map((sub) => {
       // Cancel button click handlers
-      const onCancelClick = () => {
-        const isImmediateCancelationEnabled =
-          window.Pelcro.site.read().cancel_settings.status;
+      // const onCancelClick = () => {
+      //   const isImmediateCancelationEnabled =
+      //     window.Pelcro.site.read().cancel_settings.status;
 
-        if (isImmediateCancelationEnabled) {
-          setSubscriptionToCancel(sub.id);
-          return switchView("subscription-cancel");
-        }
+      //   if (isImmediateCancelationEnabled) {
+      //     setSubscriptionToCancel(sub.id);
+      //     return switchView("subscription-cancel");
+      //   }
 
-        if (userMustVerifyEmail()) {
-          return switchView("email-verify");
-        }
+      //   if (userMustVerifyEmail()) {
+      //     return switchView("email-verify");
+      //   }
 
-        onClose?.();
-        notify.confirm(
-          (onSuccess, onFailure) => {
-            cancelSubscription(sub.id, onSuccess, onFailure);
-          },
-          {
-            confirmMessage: t(
-              "messages.subCancellation.isSureToCancel"
-            ),
-            loadingMessage: t("messages.subCancellation.loading"),
-            successMessage: t("messages.subCancellation.success"),
-            errorMessage: t("messages.subCancellation.error")
-          },
-          {
-            closeButtonLabel: t("labels.subCancellation.goBack")
-          }
-        );
-      };
+      //   onClose?.();
+      //   notify.confirm(
+      //     (onSuccess, onFailure) => {
+      //       cancelSubscription(sub.id, onSuccess, onFailure);
+      //     },
+      //     {
+      //       confirmMessage: t(
+      //         "messages.subCancellation.isSureToCancel"
+      //       ),
+      //       loadingMessage: t("messages.subCancellation.loading"),
+      //       successMessage: t("messages.subCancellation.success"),
+      //       errorMessage: t("messages.subCancellation.error")
+      //     },
+      //     {
+      //       closeButtonLabel: t("labels.subCancellation.goBack")
+      //     }
+      //   );
+      // };
 
       // Reactivate button click handlers
       const onReactivateClick = () => {
