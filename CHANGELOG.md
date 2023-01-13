@@ -1,3 +1,10 @@
+# [4.0.0-alpha.23](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.22...v4.0.0-alpha.23) (2023-01-13)
+
+
+### Bug Fixes
+
+* default UI redesign ([#267](https://github.com/pelcro-inc/react-pelcro-js/issues/267)) ([7be083d](https://github.com/pelcro-inc/react-pelcro-js/commit/7be083d9be2f1c9c9018c7442510519430c1f788))
+
 # [4.0.0-alpha.22](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.21...v4.0.0-alpha.22) (2023-01-13)
 
 
