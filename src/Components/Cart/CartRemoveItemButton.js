@@ -15,8 +15,14 @@ export const CartRemoveItemButton = ({
     <Button
       variant="icon"
       data-key={itemId}
-      icon={<RemoveIcon aria-hidden="true" focusable="false" />}
-      className="plc-bg-transparent plc-w-9 plc-h-9 plc-p-2"
+      icon={
+        <RemoveIcon
+          aria-hidden="true"
+          focusable="false"
+          className="plc-fill-current"
+        />
+      }
+      className="plc-bg-transparent plc-w-9 plc-h-9 plc-p-2 hover:plc-text-red-500 hover:plc-bg-transparent"
       onClick={() => {
         removeFromCart(itemId);
         onClick?.();

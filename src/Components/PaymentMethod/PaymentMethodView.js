@@ -20,6 +20,7 @@ import { IncludeFirstName } from "./IncludeFirstName";
 import { IncludeLastName } from "./IncludeLastName";
 import { IncludePhone } from "./IncludePhone";
 import { SubscriptionCreateFreePlanButton } from "../SubscriptionCreate/SubscriptionCreateFreePlanButton";
+import { BankAuthenticationSuccess } from "./BankAuthenticationSuccess";
 
 /**
  *

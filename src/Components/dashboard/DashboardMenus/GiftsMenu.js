@@ -122,9 +122,7 @@ export const GiftsMenu = (props) => {
           <tr>
             <th className="plc-w-1/4">{t("labels.recipient")}</th>
             <th className="plc-w-1/4">{t("labels.plan")}</th>
-            <th className="plc-w-1/4">
-              {t("labels.status.title")}
-            </th>
+            <th className="plc-w-1/4">{t("labels.status.title")}</th>
             <th className="plc-w-1/4">{t("labels.actions")}</th>
           </tr>
         </thead>

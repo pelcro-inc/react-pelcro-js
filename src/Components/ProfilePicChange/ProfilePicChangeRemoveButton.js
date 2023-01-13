@@ -19,7 +19,7 @@ export const ProfilePicChangeRemoveButton = ({
 
   return (
     <Button
-      icon={<XIcon className="plc-h-6 plc-w-6" />}
+      icon={<XIcon className="plc-h-6 plc-w-6 plc-fill-current" />}
       isLoading={isSubmitting}
       onClick={() => {
         dispatch({ type: REMOVE_IMAGE });
