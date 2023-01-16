@@ -1,3 +1,10 @@
+# [3.17.0-beta.11](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.17.0-beta.10...v3.17.0-beta.11) (2023-01-16)
+
+
+### Features
+
+* change the google recaptcha url to work in China ([#268](https://github.com/pelcro-inc/react-pelcro-js/issues/268)) ([34a0f5d](https://github.com/pelcro-inc/react-pelcro-js/commit/34a0f5dce24e370d6d254c46e98fdbd721b7e700))
+
 # [3.17.0-beta.10](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.17.0-beta.9...v3.17.0-beta.10) (2023-01-12)
 
 
