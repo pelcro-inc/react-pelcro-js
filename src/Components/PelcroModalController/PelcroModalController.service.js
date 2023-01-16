@@ -193,7 +193,7 @@ export const initSecuritySdk = () => {
     const securityKey = window.Pelcro.site.read()?.security_key;
     if (!securityKey) return;
     window.Pelcro.helpers.loadSDK(
-      `https://www.google.com/recaptcha/enterprise.js?render=${securityKey}`,
+      `https://www.recaptcha.net/recaptcha/enterprise.js?render=${securityKey}`,
       "pelcro-security-enteprise"
     );
   });
