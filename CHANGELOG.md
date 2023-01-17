@@ -1,3 +1,10 @@
+# [4.0.0-alpha.24](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.23...v4.0.0-alpha.24) (2023-01-17)
+
+
+### Bug Fixes
+
+* cancel button ([04689ac](https://github.com/pelcro-inc/react-pelcro-js/commit/04689acde02663a0bdf744dba9d77223c37504b5))
+
 # [4.0.0-alpha.23](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.22...v4.0.0-alpha.23) (2023-01-13)
 
 
