@@ -127,6 +127,8 @@ export const SubscriptionsItems = ({
           return switchView("email-verify");
         }
 
+        switchView(null);
+
         onClose?.();
         notify.confirm(
           (onSuccess, onFailure) => {
