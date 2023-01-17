@@ -1,3 +1,10 @@
+# [4.0.0-alpha.25](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.24...v4.0.0-alpha.25) (2023-01-17)
+
+
+### Bug Fixes
+
+* subscription cancel button ([#270](https://github.com/pelcro-inc/react-pelcro-js/issues/270)) ([c7f6f93](https://github.com/pelcro-inc/react-pelcro-js/commit/c7f6f9303a7066fd848ccf893fcf07efda84544c))
+
 # [4.0.0-alpha.24](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.23...v4.0.0-alpha.24) (2023-01-17)
 
 
