@@ -1,3 +1,10 @@
+# [3.17.0-beta.12](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.17.0-beta.11...v3.17.0-beta.12) (2023-01-19)
+
+
+### Bug Fixes
+
+* add missing import ([#271](https://github.com/pelcro-inc/react-pelcro-js/issues/271)) ([9680210](https://github.com/pelcro-inc/react-pelcro-js/commit/96802101f26594bd33ade4977b5c6577af69c24b))
+
 # [3.17.0-beta.11](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.17.0-beta.10...v3.17.0-beta.11) (2023-01-16)
 
 
