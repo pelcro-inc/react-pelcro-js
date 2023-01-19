@@ -6,17 +6,18 @@ import {
   ModalBody,
   ModalFooter
 } from "../../SubComponents/Modal";
+import { usePelcro } from "../../hooks/usePelcro";
 
 export const EmailVerifyModal = ({
   onDisplay,
   onClose,
   ...otherProps
 }) => {
-  const { product, plan, switchToAddressView, switchToPaymentView } =
+  const { product, switchToAddressView, switchToPaymentView } =
     usePelcro();
 
   const onSuccess = (res) => {
-    props.onSuccess?.(res);
+    otherProps.onSuccess?.(res);
 
     if (product) {
       if (product.address_required) {
