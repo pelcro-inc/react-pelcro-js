@@ -1,3 +1,10 @@
+# [3.17.0-beta.13](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.17.0-beta.12...v3.17.0-beta.13) (2023-01-23)
+
+
+### Bug Fixes
+
+* purchase payment flow ([#272](https://github.com/pelcro-inc/react-pelcro-js/issues/272)) ([bd6c359](https://github.com/pelcro-inc/react-pelcro-js/commit/bd6c359cebc8a14c7303134e6a221be7ff3589e6))
+
 # [3.17.0-beta.12](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.17.0-beta.11...v3.17.0-beta.12) (2023-01-19)
 
 
