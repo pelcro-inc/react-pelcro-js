@@ -289,9 +289,9 @@ class Dashboard extends Component {
         this.setState({ disableSubmit: false });
         this.props.onClose();
         if (err) {
-          notify.error(this.locale("messages.subReactivation.error"));
+          return notify.error(this.locale("messages.subReactivation.error"));
         }
-        notify.success(this.locale("messages.subReactivation.success"));
+        return notify.success(this.locale("messages.subReactivation.success"));
       }
     );
   };
