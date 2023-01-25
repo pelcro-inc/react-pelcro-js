@@ -37,6 +37,7 @@ import { SubscriptionsMenu } from "./DashboardMenus/SubsMenu";
 import { DonationsMenu } from "./DashboardMenus/DonationsMenu";
 import { InvoicesMenu } from "./DashboardMenus/InvoicesMenu";
 import { MembershipsMenu } from "./DashboardMenus/MembershipsMenu";
+import { notify } from "../../SubComponents/Notification";
 
 const SUB_MENUS = {
   PROFILE: "profile",
@@ -287,6 +288,10 @@ class Dashboard extends Component {
       (err, res) => {
         this.setState({ disableSubmit: false });
         this.props.onClose();
+        if (err) {
+          notify.error(this.locale("messages.subReactivation.error"));
+        }
+        notify.success(this.locale("messages.subReactivation.success"));
       }
     );
   };
