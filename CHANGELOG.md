@@ -1,3 +1,11 @@
+## [3.17.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.17.0...v3.17.1) (2023-01-27)
+
+
+### Bug Fixes
+
+* purchase payment flow ([#272](https://github.com/pelcro-inc/react-pelcro-js/issues/272)) ([bd6c359](https://github.com/pelcro-inc/react-pelcro-js/commit/bd6c359cebc8a14c7303134e6a221be7ff3589e6))
+* subscription after reactivation message ([#273](https://github.com/pelcro-inc/react-pelcro-js/issues/273)) ([a2331dc](https://github.com/pelcro-inc/react-pelcro-js/commit/a2331dcbd10c807ce55671986e1c49def127e407))
+
 # [3.17.0-beta.14](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.17.0-beta.13...v3.17.0-beta.14) (2023-01-25)
 
 
