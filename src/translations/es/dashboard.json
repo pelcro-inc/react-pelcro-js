@@ -93,6 +93,10 @@
       "success": "La suscripción se canceló con éxito",
       "error": "Error al cancelar tu suscripción"
     },
+    "subReactivation": {
+      "success": "La suscripción se reactivó con éxito",
+      "error": "Error al reactivar su suscripción"
+    },
     "subUnSuspend": {
       "isSureToUnSuspend": "¿Estás seguro de que quieres reanudar tu suscripción?",
       "loading": "Reanudando tu suscripción",

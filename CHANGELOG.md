@@ -1,4 +1,4 @@
-# [3.17.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.16.0...v3.17.0) (2023-01-19)
+# [3.17.0-beta.14](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.17.0-beta.13...v3.17.0-beta.14) (2023-01-25)
 
 
 ### Bug Fixes
@@ -21,6 +21,14 @@
 * Testing issue forms ([616525b](https://github.com/pelcro-inc/react-pelcro-js/commit/616525b0e3c1ab9d21fb39877e1e78268af33c28))
 * Update issue templates ([630751b](https://github.com/pelcro-inc/react-pelcro-js/commit/630751b49c69647f83efd06be474aced3b359d75))
 * update the email validation to accept upper case letters ([#252](https://github.com/pelcro-inc/react-pelcro-js/issues/252)) ([a400d67](https://github.com/pelcro-inc/react-pelcro-js/commit/a400d67018c4161f18aea3cc60b94d1a41a069c8))
+* subscription after reactivation message ([#273](https://github.com/pelcro-inc/react-pelcro-js/issues/273)) ([a2331dc](https://github.com/pelcro-inc/react-pelcro-js/commit/a2331dcbd10c807ce55671986e1c49def127e407))
+
+# [3.17.0-beta.13](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.17.0-beta.12...v3.17.0-beta.13) (2023-01-23)
+
+
+### Bug Fixes
+
+* purchase payment flow ([#272](https://github.com/pelcro-inc/react-pelcro-js/issues/272)) ([bd6c359](https://github.com/pelcro-inc/react-pelcro-js/commit/bd6c359cebc8a14c7303134e6a221be7ff3589e6))
 
 # [3.17.0-beta.12](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.17.0-beta.11...v3.17.0-beta.12) (2023-01-19)
 
