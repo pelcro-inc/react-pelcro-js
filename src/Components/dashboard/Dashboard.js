@@ -39,6 +39,7 @@ import { QRCodeMenu } from "./DashboardMenus/QRCodeMenu";
 import { ProfileMenu } from "./DashboardMenus/ProfileMenu";
 import { NewslettersMenu } from "./DashboardMenus/NewslettersMenu";
 import { PasswordChangeMenu } from "./DashboardMenus/PasswordChangeMenu";
+import { notify } from "../../SubComponents/Notification";
 
 const SUB_MENUS = {
   PROFILE: "profile",
@@ -308,6 +309,10 @@ class Dashboard extends Component {
       (err, res) => {
         this.setState({ disableSubmit: false });
         this.props.onClose();
+        if (err) {
+          return notify.error(this.locale("messages.subReactivation.error"));
+        }
+        return notify.success(this.locale("messages.subReactivation.success"));
       }
     );
   };

@@ -1,4 +1,5 @@
 # [4.0.0-alpha.22](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.21...v4.0.0-alpha.22) (2023-01-13)
+## [3.17.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.17.0...v3.17.1) (2023-01-27)
 
 
 ### Bug Fixes
@@ -25,6 +26,56 @@
 * toggleAuthenticationSuccessPendingView fix ([#247](https://github.com/pelcro-inc/react-pelcro-js/issues/247)) ([97cbf4a](https://github.com/pelcro-inc/react-pelcro-js/commit/97cbf4a7645aaedb1e7905df21be22de242b64f5))
 * update package.json and rollup config ([b75b86c](https://github.com/pelcro-inc/react-pelcro-js/commit/b75b86c89561a764a56cb86a23963a6962b3843a))
 * yarn.lock ([74c83af](https://github.com/pelcro-inc/react-pelcro-js/commit/74c83af5aaf36bfc837343f54aca070d9aa411b6))
+* purchase payment flow ([#272](https://github.com/pelcro-inc/react-pelcro-js/issues/272)) ([bd6c359](https://github.com/pelcro-inc/react-pelcro-js/commit/bd6c359cebc8a14c7303134e6a221be7ff3589e6))
+* subscription after reactivation message ([#273](https://github.com/pelcro-inc/react-pelcro-js/issues/273)) ([a2331dc](https://github.com/pelcro-inc/react-pelcro-js/commit/a2331dcbd10c807ce55671986e1c49def127e407))
+
+# [3.17.0-beta.14](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.17.0-beta.13...v3.17.0-beta.14) (2023-01-25)
+
+
+### Bug Fixes
+
+* add missing import ([#271](https://github.com/pelcro-inc/react-pelcro-js/issues/271)) ([9680210](https://github.com/pelcro-inc/react-pelcro-js/commit/96802101f26594bd33ade4977b5c6577af69c24b))
+* change class to className ([#258](https://github.com/pelcro-inc/react-pelcro-js/issues/258)) ([470d779](https://github.com/pelcro-inc/react-pelcro-js/commit/470d7795cdaf4dad63318973facc08616590c325))
+* incorrect file extension for issue forms ([529fc71](https://github.com/pelcro-inc/react-pelcro-js/commit/529fc7131a988144b88c3ff3fd30ac7b4f34008b))
+* incorrect file extension for issue forms (revert) ([af60bc4](https://github.com/pelcro-inc/react-pelcro-js/commit/af60bc47632482d75e64e33580e1757fb786410e))
+
+
+### Features
+
+* add logging to email verify ([a25b19a](https://github.com/pelcro-inc/react-pelcro-js/commit/a25b19a9e0159ec0a04150100c525787db57d159))
+* change the google recaptcha url to work in China ([#268](https://github.com/pelcro-inc/react-pelcro-js/issues/268)) ([34a0f5d](https://github.com/pelcro-inc/react-pelcro-js/commit/34a0f5dce24e370d6d254c46e98fdbd721b7e700))
+* issue forms ([d8767b2](https://github.com/pelcro-inc/react-pelcro-js/commit/d8767b2c0557675bebc8b23c7896fd1470f1a4f3))
+* issue template and config ([#255](https://github.com/pelcro-inc/react-pelcro-js/issues/255)) ([b861393](https://github.com/pelcro-inc/react-pelcro-js/commit/b8613931e5e6a7ee2bbad6f94f9ee041449355a7))
+* test issue forms ([7da0c10](https://github.com/pelcro-inc/react-pelcro-js/commit/7da0c10f0e42c1e48e35997e6c56344ed8b7b071))
+* test issue forms ([ce3078d](https://github.com/pelcro-inc/react-pelcro-js/commit/ce3078d92bf1b87d4d9e269eb5893780de2945e1))
+* test issue forms (revert) ([41f768c](https://github.com/pelcro-inc/react-pelcro-js/commit/41f768c25e32197a27bbf99ec597eae822c6dbd6))
+* Testing issue forms ([616525b](https://github.com/pelcro-inc/react-pelcro-js/commit/616525b0e3c1ab9d21fb39877e1e78268af33c28))
+* Update issue templates ([630751b](https://github.com/pelcro-inc/react-pelcro-js/commit/630751b49c69647f83efd06be474aced3b359d75))
+* update the email validation to accept upper case letters ([#252](https://github.com/pelcro-inc/react-pelcro-js/issues/252)) ([a400d67](https://github.com/pelcro-inc/react-pelcro-js/commit/a400d67018c4161f18aea3cc60b94d1a41a069c8))
+* subscription after reactivation message ([#273](https://github.com/pelcro-inc/react-pelcro-js/issues/273)) ([a2331dc](https://github.com/pelcro-inc/react-pelcro-js/commit/a2331dcbd10c807ce55671986e1c49def127e407))
+
+# [3.17.0-beta.13](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.17.0-beta.12...v3.17.0-beta.13) (2023-01-23)
+
+
+### Bug Fixes
+
+* purchase payment flow ([#272](https://github.com/pelcro-inc/react-pelcro-js/issues/272)) ([bd6c359](https://github.com/pelcro-inc/react-pelcro-js/commit/bd6c359cebc8a14c7303134e6a221be7ff3589e6))
+
+# [3.17.0-beta.12](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.17.0-beta.11...v3.17.0-beta.12) (2023-01-19)
+
+
+### Bug Fixes
+
+* add missing import ([#271](https://github.com/pelcro-inc/react-pelcro-js/issues/271)) ([9680210](https://github.com/pelcro-inc/react-pelcro-js/commit/96802101f26594bd33ade4977b5c6577af69c24b))
+
+# [3.17.0-beta.11](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.17.0-beta.10...v3.17.0-beta.11) (2023-01-16)
+
+
+### Features
+
+* change the google recaptcha url to work in China ([#268](https://github.com/pelcro-inc/react-pelcro-js/issues/268)) ([34a0f5d](https://github.com/pelcro-inc/react-pelcro-js/commit/34a0f5dce24e370d6d254c46e98fdbd721b7e700))
+
+# [3.17.0-beta.10](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.17.0-beta.9...v3.17.0-beta.10) (2023-01-12)
 
 
 ### Features

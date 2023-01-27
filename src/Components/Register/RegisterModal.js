@@ -23,6 +23,7 @@ export function RegisterModal(props) {
     switchToAddressView,
     switchToPaymentView,
     product,
+    plan,
     order,
     giftCode,
     isGift
@@ -67,12 +68,16 @@ export function RegisterModal(props) {
       return switchToAddressView();
     }
 
-    if (product) {
+    if (product && plan) {
       if (product.address_required) {
         return switchToAddressView();
       } else {
         return switchToPaymentView();
       }
+    }
+    
+    if (product && !plan) {
+      return switchView("plan-select");
     }
 
     return resetView();

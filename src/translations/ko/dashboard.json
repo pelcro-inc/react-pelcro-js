@@ -163,6 +163,10 @@
       "success": "유료 멤버십이 성공적으로 취소되었습니다.",
       "error": "유료 멤버십 취소 과정에서 오류가 발생했습니다."
     },
+    "subReactivation": {
+      "success": "구독이 성공적으로 재활성화되었습니다.",
+      "error": "구독을 재활성화하는 동안 오류가 발생했습니다."
+    },
     "subUnSuspend": {
       "isSureToUnSuspend": "구독 일시 중단을 해제하시겠습니까?",
       "loading": "구독 일시 중단 해제",

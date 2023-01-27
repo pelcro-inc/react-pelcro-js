@@ -120,6 +120,9 @@
     "react": "^16.6.1",
     "react-dom": "^16.6.1"
   },
+  "optionalDependencies": {
+    "fsevents": "2.1.2"
+  },
   "babel": {
     "presets": [
       "@babel/preset-env",

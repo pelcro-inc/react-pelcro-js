@@ -17,15 +17,21 @@ export const EmailVerifyModal = ({
   const { product, plan, switchToAddressView, switchToPaymentView } =
     usePelcro();
 
-  const onSuccess = (res) => {
-    otherProps?.onSuccess?.(res);
+  console.log("verify email");
 
-    if (product) {
+  const onSuccess = (res) => {
+    otherProps.onSuccess?.(res);
+
+    if (product && plan) {
       if (product.address_required) {
         return switchToAddressView();
       } else {
         return switchToPaymentView();
       }
+    }
+    
+    if (product && !plan) {
+      return switchView("plan-select");
     }
   };
 
