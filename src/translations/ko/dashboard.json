@@ -56,6 +56,7 @@
     "paymentSource": "결제 카드",
     "actions": "조치",
     "expiresOn": "종료",
+    "until": "까지",
     "startsOn": "시작",
     "startDate": "시작일",
     "renewsOn": "갱신",

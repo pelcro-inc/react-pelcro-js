@@ -252,6 +252,20 @@ class Dashboard extends Component {
       return `${this.locale("labels.status.incomplete")}`;
     }
 
+    if (subscription.status === "extended") {
+      // DateTime from BE is missing 3 zeros so we add them before instancing a date
+      const expiryDate = new Date(
+        Number(`${subscription.end_date}000`)
+      );
+      const formattedExpiryDate = new Intl.DateTimeFormat(
+        "en-CA"
+      ).format(expiryDate);
+
+      return `${this.locale(
+        "labels.until"
+      )} ${formattedExpiryDate}`;
+    }
+
     if (subscription.cancel_at_period_end) {
       // DateTime from BE is missing 3 zeros so we add them before instancing a date
       const expiryDate = new Date(
