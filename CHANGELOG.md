@@ -1,3 +1,10 @@
+## [3.17.2-beta.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.17.1...v3.17.2-beta.1) (2023-01-30)
+
+
+### Bug Fixes
+
+* extended subscription status ([#274](https://github.com/pelcro-inc/react-pelcro-js/issues/274)) ([b366b62](https://github.com/pelcro-inc/react-pelcro-js/commit/b366b62f6c7d940ce8062716b6245257b838326a))
+
 ## [3.17.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.17.0...v3.17.1) (2023-01-27)
 
 
