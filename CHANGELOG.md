@@ -1,3 +1,10 @@
+# [3.18.0-beta.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.17.2-beta.1...v3.18.0-beta.1) (2023-01-31)
+
+
+### Features
+
+* change vantiv stylesheet name ([db5baa6](https://github.com/pelcro-inc/react-pelcro-js/commit/db5baa63d8e751b416422d2a2e47ce7ca64c2d3f))
+
 ## [3.17.2-beta.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.17.1...v3.17.2-beta.1) (2023-01-30)
 
 
