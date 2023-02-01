@@ -1,3 +1,27 @@
+# [4.0.0-alpha.26](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.25...v4.0.0-alpha.26) (2023-02-01)
+
+
+### Bug Fixes
+
+* action-types exports ([55caea7](https://github.com/pelcro-inc/react-pelcro-js/commit/55caea7346fb0b8ab2e04de8278acd92da805e39))
+* add change password to dashboard ([b969fee](https://github.com/pelcro-inc/react-pelcro-js/commit/b969fee2babd37a015b4641e85185dda18345a7c))
+* add missing import ([#271](https://github.com/pelcro-inc/react-pelcro-js/issues/271)) ([9680210](https://github.com/pelcro-inc/react-pelcro-js/commit/96802101f26594bd33ade4977b5c6577af69c24b))
+* add Tap fields translation ([d5a96e1](https://github.com/pelcro-inc/react-pelcro-js/commit/d5a96e19a89fb349a91395be82e94f2bd3701879))
+* dashboard mobile exit button ([934e3b9](https://github.com/pelcro-inc/react-pelcro-js/commit/934e3b9385d47d3a35af8c3153e10793467720d8))
+* lint issues ([12615a3](https://github.com/pelcro-inc/react-pelcro-js/commit/12615a35fd0349e30ab6cb77b6915fc6b808687b))
+* locks ([f9b5d0d](https://github.com/pelcro-inc/react-pelcro-js/commit/f9b5d0dff69111aee9c519db6dcb40683947207d))
+* purchase payment flow ([#272](https://github.com/pelcro-inc/react-pelcro-js/issues/272)) ([bd6c359](https://github.com/pelcro-inc/react-pelcro-js/commit/bd6c359cebc8a14c7303134e6a221be7ff3589e6))
+* subscription after reactivation message ([#273](https://github.com/pelcro-inc/react-pelcro-js/issues/273)) ([a2331dc](https://github.com/pelcro-inc/react-pelcro-js/commit/a2331dcbd10c807ce55671986e1c49def127e407))
+* update package and yarn locks ([756ab3a](https://github.com/pelcro-inc/react-pelcro-js/commit/756ab3a0cae84e63f16914eb3b9b732f38e4a831))
+* usePelcro import ([0f0a233](https://github.com/pelcro-inc/react-pelcro-js/commit/0f0a233367d40a87503b831e86bf45dd81593899))
+
+
+### Features
+
+* add logging to email verify ([a25b19a](https://github.com/pelcro-inc/react-pelcro-js/commit/a25b19a9e0159ec0a04150100c525787db57d159))
+* change the google recaptcha url to work in China ([#268](https://github.com/pelcro-inc/react-pelcro-js/issues/268)) ([34a0f5d](https://github.com/pelcro-inc/react-pelcro-js/commit/34a0f5dce24e370d6d254c46e98fdbd721b7e700))
+* fix some issue with the new design ([c60f43e](https://github.com/pelcro-inc/react-pelcro-js/commit/c60f43e87bbdb2add2c98dbc8ddf2338e789108b))
+
 # [4.0.0-alpha.25](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.24...v4.0.0-alpha.25) (2023-01-17)
 
 
