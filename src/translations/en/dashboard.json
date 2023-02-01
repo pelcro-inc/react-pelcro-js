@@ -101,6 +101,10 @@
       "success": "Subscription is successfully cancelled",
       "error": "Error while cancelling your subscription"
     },
+    "subReactivation": {
+      "success": "Subscription is successfully reactivated",
+      "error": "Error while reactivating your subscription"
+    },
     "subUnSuspend": {
       "isSureToUnSuspend": "Are you sure you want to unsuspend your subscription?",
       "loading": "Unsuspending your subscription",
