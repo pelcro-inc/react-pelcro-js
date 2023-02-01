@@ -1,3 +1,16 @@
+# [3.18.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.17.1...v3.18.0) (2023-02-01)
+
+
+### Bug Fixes
+
+* clean up a console.log ([9d768a2](https://github.com/pelcro-inc/react-pelcro-js/commit/9d768a2b19ee616a44cbb8a3fb69b64353223156))
+* extended subscription status ([#274](https://github.com/pelcro-inc/react-pelcro-js/issues/274)) ([b366b62](https://github.com/pelcro-inc/react-pelcro-js/commit/b366b62f6c7d940ce8062716b6245257b838326a))
+
+
+### Features
+
+* change vantiv stylesheet name ([db5baa6](https://github.com/pelcro-inc/react-pelcro-js/commit/db5baa63d8e751b416422d2a2e47ce7ca64c2d3f))
+
 # [3.18.0-beta.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.17.2-beta.1...v3.18.0-beta.1) (2023-01-31)
 
 
