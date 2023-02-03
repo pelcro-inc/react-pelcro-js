@@ -1,3 +1,10 @@
+# [3.19.0-beta.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.19.0-beta.2...v3.19.0-beta.3) (2023-02-03)
+
+
+### Bug Fixes
+
+* comment MetaData ([#280](https://github.com/pelcro-inc/react-pelcro-js/issues/280)) ([809404a](https://github.com/pelcro-inc/react-pelcro-js/commit/809404af287376d2f977905d48cd04281b510a4e))
+
 # [3.19.0-beta.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.19.0-beta.1...v3.19.0-beta.2) (2023-02-03)
 
 
