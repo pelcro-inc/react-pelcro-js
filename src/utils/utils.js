@@ -487,5 +487,6 @@ export function notifyBugsnag(message = 'Error') {
       uiVersion: window.Pelcro?.uiSettings?.uiVersion,
       environment: window.Pelcro?.environment
     });
+    event.app.version = window.Pelcro?.uiSettings?.uiVersion
   });
 }
