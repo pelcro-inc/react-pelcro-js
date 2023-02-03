@@ -481,12 +481,12 @@ export function userMustVerifyEmail() {
 
 export function notifyBugsnag(message = 'Error') {
   Bugsnag.notify(message, (event) => {
-    event.addMetadata("MetaData", {
-      site: window.Pelcro?.site?.read(),
-      user: window.Pelcro?.user?.read(),
-      uiVersion: window.Pelcro?.uiSettings?.uiVersion,
-      environment: window.Pelcro?.environment
-    });
-    event.app.version = window.Pelcro?.uiSettings?.uiVersion
+    // event.addMetadata("MetaData", {
+    //   site: window.Pelcro?.site?.read(),
+    //   user: window.Pelcro?.user?.read(),
+    //   uiVersion: window.Pelcro?.uiSettings?.uiVersion,
+    //   environment: window.Pelcro?.environment
+    // });
+    // event.app.version = window.Pelcro?.uiSettings?.uiVersion
   });
 }
