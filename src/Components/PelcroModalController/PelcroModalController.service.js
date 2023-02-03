@@ -4,7 +4,8 @@ import ReactGA from "react-ga";
 import { usePelcro } from "../../hooks/usePelcro";
 import {
   getStableViewID,
-  isValidViewFromURL
+  isValidViewFromURL,
+  notifyBugsnag
 } from "../../utils/utils";
 import { init as initContentEntitlement } from "../common/contentEntitlement";
 import { loadStripe } from "@stripe/stripe-js/pure";
@@ -380,7 +381,11 @@ export const initSubscriptionFromURL = () => {
 
   whenSiteReady(() => {
     const productsList = window.Pelcro.product.list();
-    if (!productsList?.length) return;
+    
+    if (!productsList?.length) {
+      notifyBugsnag("initSubscriptionFromURL - Empty Products List");
+      return;
+    }
 
     const [productId, planId, isGiftParam] = [
       window.Pelcro.helpers.getURLParameter("product_id"),
