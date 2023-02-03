@@ -4,14 +4,14 @@ import ReactGA from "react-ga";
 import { usePelcro } from "../../hooks/usePelcro";
 import {
   getStableViewID,
-  isValidViewFromURL,
-  notifyBugsnag
+  isValidViewFromURL
 } from "../../utils/utils";
 import { init as initContentEntitlement } from "../common/contentEntitlement";
 import { loadStripe } from "@stripe/stripe-js/pure";
 import { notify } from "../../SubComponents/Notification";
 import { getErrorMessages } from "../common/Helpers";
 import i18n from "../../i18n";
+import Bugsnag from '@bugsnag/js';
 
 /**
  * @typedef {Object} OptionsType
@@ -383,7 +383,18 @@ export const initSubscriptionFromURL = () => {
     const productsList = window.Pelcro.product.list();
     
     if (!productsList?.length) {
-      notifyBugsnag("initSubscriptionFromURL - Empty Products List");
+      // notifyBugsnag("initSubscriptionFromURL - Empty Products List");
+
+      Bugsnag.notify("initSubscriptionFromURL - Empty Products List", (event) => {
+        event.addMetadata("MetaData", {
+          site: window.Pelcro?.site?.read(),
+          user: window.Pelcro?.user?.read(),
+          uiVersion: window.Pelcro?.uiSettings?.uiVersion,
+          environment: window.Pelcro?.environment
+        });
+        event.app.version = window.Pelcro?.uiSettings?.uiVersion
+      });
+
       return;
     }
 
