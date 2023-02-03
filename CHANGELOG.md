@@ -1,3 +1,10 @@
+# [3.19.0-beta.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.18.1-beta.1...v3.19.0-beta.1) (2023-02-03)
+
+
+### Features
+
+* add bugsnag to elements ([#277](https://github.com/pelcro-inc/react-pelcro-js/issues/277)) ([5654171](https://github.com/pelcro-inc/react-pelcro-js/commit/565417114b55d5d0f44ea4891bd686153bcb70db))
+
 ## [3.18.1-beta.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.18.0...v3.18.1-beta.1) (2023-02-01)
 
 
