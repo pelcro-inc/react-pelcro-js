@@ -1,7 +1,7 @@
 import React from "react";
 import { usePelcro } from "../hooks/usePelcro";
 import ReactGA from "react-ga";
-import Bugsnag from '@bugsnag/js'
+import Bugsnag from '@bugsnag/js';
 
 // Start Bugsnag first...
 Bugsnag.start({
