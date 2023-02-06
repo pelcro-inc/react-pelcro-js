@@ -1,3 +1,10 @@
+# [3.19.0-beta.10](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.19.0-beta.9...v3.19.0-beta.10) (2023-02-06)
+
+
+### Bug Fixes
+
+* comment bugsnag selectModal ([#286](https://github.com/pelcro-inc/react-pelcro-js/issues/286)) ([0788d59](https://github.com/pelcro-inc/react-pelcro-js/commit/0788d59ece4888a9adce2e1536a866e3a465dee8))
+
 # [3.19.0-beta.9](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.19.0-beta.8...v3.19.0-beta.9) (2023-02-06)
 
 
