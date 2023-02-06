@@ -87,8 +87,15 @@ export const initPaywalls = () => {
 export const loadPaymentSDKs = () => {
   // Lazy load stripe's SDK
   const { whenUserReady } = usePelcro.getStore();
+  const supportsVantiv = Boolean(
+    window.Pelcro.site.read().vantiv_gateway_settings
+  );
+  const supportsTap = Boolean(
+    window.Pelcro.site.read().tap_gateway_settings
+  );
+
   whenUserReady(() => {
-    if (!window.Stripe) {
+    if (!window.Stripe && !supportsVantiv && !supportsTap) {
       loadStripe(window.Pelcro.environment.stripe);
     }
   });
@@ -111,10 +118,6 @@ export const loadPaymentSDKs = () => {
   }
 
   // Load Vantiv SDKs
-  const supportsVantiv = Boolean(
-    window.Pelcro.site.read().vantiv_gateway_settings
-  );
-
   if (supportsVantiv) {
     if (!window.jQuery) {
       window.Pelcro.helpers.loadSDK(
@@ -141,10 +144,6 @@ export const loadPaymentSDKs = () => {
   }
 
   // Load Tap SDKs
-  const supportsTap = Boolean(
-    window.Pelcro.site.read().tap_gateway_settings
-  );
-
   if (supportsTap) {
     window.Pelcro.helpers.loadSDK(
       "https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.4/bluebird.min.js",
