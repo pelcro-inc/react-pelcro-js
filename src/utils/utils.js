@@ -1,7 +1,6 @@
 import React from "react";
 import { usePelcro } from "../hooks/usePelcro";
 import ReactGA from "react-ga";
-import bugsnag from '@bugsnag/js';
 
 /**
  * List of zero-decimal currencies.
@@ -478,13 +477,3 @@ export function userMustVerifyEmail() {
     !isUserEmailVerified
   );
 }
-
-// export function notifyBugsnag(message = "Error") {
-//   bugsnagClient.metaData = {
-//     site: window.Pelcro?.site?.read(),
-//     user: window.Pelcro?.user?.read(),
-//     uiVersion: window.Pelcro?.uiSettings?.uiVersion,
-//     environment: window.Pelcro?.environment
-//   }
-//   bugsnagClient.notify(message);
-// }
