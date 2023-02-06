@@ -116,19 +116,7 @@ class SelectModal extends Component {
     }
 
     document.addEventListener("keydown", this.handleSubmit);
-
-    Bugsnag.notify("SelectModalMounted", (event) => {
-      event.addMetadata("MetaData", {
-        site: JSON.stringify(window.Pelcro?.site?.read()),
-      });
-    });
-    console.log({
-      site: window.Pelcro?.site?.read(),
-      user: window.Pelcro?.user?.read(),
-      uiVersion: window.Pelcro?.uiSettings?.uiVersion,
-      environment: window.Pelcro?.environment,
-      uiVersionApp: window.Pelcro?.uiSettings?.uiVersion
-    });
+    Bugsnag.notify("SelectModalMounted")
   };
 
   componentWillUnmount = () => {
