@@ -127,7 +127,7 @@ export const loadPaymentSDKs = () => {
       const PRELIVE_URL =
         "https://request.eprotect.vantivprelive.com/eProtect/js/eProtect-iframe-client.min.js";
       const PRODUCTION_URL =
-        "https://request.eprotect.vantivcnp.com/eProtect/js/eProtect-iframe-client4.min.js";
+        "https://request.eprotect.vantivcnp.com/eProtect/js/eProtect-iframe-client3.min.js";
       const scriptUrlToUse =
         window.Pelcro.site.read().vantiv_gateway_settings
           .environment === "production"
