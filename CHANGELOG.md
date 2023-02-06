@@ -1,3 +1,10 @@
+# [3.19.0-beta.12](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.19.0-beta.11...v3.19.0-beta.12) (2023-02-06)
+
+
+### Bug Fixes
+
+* edit the stripe condition in PaymentMethodContainer ([611bd6b](https://github.com/pelcro-inc/react-pelcro-js/commit/611bd6bb221deea26b33a834101cc7f52c546e74))
+
 # [3.19.0-beta.11](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.19.0-beta.10...v3.19.0-beta.11) (2023-02-06)
 
 ## [3.18.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.18.0...v3.18.1) (2023-02-06)
