@@ -1,3 +1,10 @@
+## [3.18.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.18.0...v3.18.1) (2023-02-06)
+
+
+### Bug Fixes
+
+* change vantiv production script ([203406c](https://github.com/pelcro-inc/react-pelcro-js/commit/203406c025c4b2a78b697139e73a899b1ce62c65))
+
 # [3.18.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.17.1...v3.18.0) (2023-02-01)
 
 
