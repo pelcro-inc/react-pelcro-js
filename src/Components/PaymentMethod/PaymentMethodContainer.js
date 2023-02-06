@@ -1906,10 +1906,11 @@ const PaymentMethodContainer = (props) => {
     Boolean(window.Stripe)
   );
   const { whenUserReady } = usePelcro.getStore();
+  const cardProcessor = getSiteCardProcessor();
 
   useEffect(() => {
     whenUserReady(() => {
-      if (!window.Stripe) {
+      if (!window.Stripe && cardProcessor === "stripe") {
         document
           .querySelector('script[src="https://js.stripe.com/v3"]')
           .addEventListener("load", () => {
@@ -1930,6 +1931,10 @@ const PaymentMethodContainer = (props) => {
           <UnwrappedForm store={store} {...props} />
         </Elements>
       </StripeProvider>
+    );
+  } else {
+    return (
+      <PaymentMethodContainerWithoutStripe store={store} {...props} />
     );
   }
   return null;
