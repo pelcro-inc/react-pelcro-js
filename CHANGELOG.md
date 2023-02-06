@@ -1,3 +1,10 @@
+# [3.19.0-beta.6](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.19.0-beta.5...v3.19.0-beta.6) (2023-02-06)
+
+
+### Bug Fixes
+
+* only load stripe if no vantiv or tap support ([8e8641d](https://github.com/pelcro-inc/react-pelcro-js/commit/8e8641db86b250d055f590b43134c6a68a7197dd))
+
 # [3.19.0-beta.5](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.19.0-beta.4...v3.19.0-beta.5) (2023-02-06)
 
 
