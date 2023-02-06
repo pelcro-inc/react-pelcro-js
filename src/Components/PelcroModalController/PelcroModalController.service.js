@@ -11,6 +11,7 @@ import { loadStripe } from "@stripe/stripe-js/pure";
 import { notify } from "../../SubComponents/Notification";
 import { getErrorMessages } from "../common/Helpers";
 import i18n from "../../i18n";
+import Bugsnag from '@bugsnag/js';
 
 /**
  * @typedef {Object} OptionsType
@@ -193,7 +194,7 @@ export const initSecuritySdk = () => {
     const securityKey = window.Pelcro.site.read()?.security_key;
     if (!securityKey) return;
     window.Pelcro.helpers.loadSDK(
-      `https://www.google.com/recaptcha/enterprise.js?render=${securityKey}`,
+      `https://www.recaptcha.net/recaptcha/enterprise.js?render=${securityKey}`,
       "pelcro-security-enteprise"
     );
   });
@@ -380,7 +381,22 @@ export const initSubscriptionFromURL = () => {
 
   whenSiteReady(() => {
     const productsList = window.Pelcro.product.list();
-    if (!productsList?.length) return;
+    
+    if (!productsList?.length) {
+      // notifyBugsnag("initSubscriptionFromURL - Empty Products List");
+
+      Bugsnag.notify("initSubscriptionFromURL - Empty Products List", (event) => {
+        event.addMetadata("MetaData", {
+          site: window.Pelcro?.site?.read(),
+          user: window.Pelcro?.user?.read(),
+          uiVersion: window.Pelcro?.uiSettings?.uiVersion,
+          environment: window.Pelcro?.environment
+        });
+        event.app.version = window.Pelcro?.uiSettings?.uiVersion
+      });
+
+      return;
+    }
 
     const [productId, planId, isGiftParam] = [
       window.Pelcro.helpers.getURLParameter("product_id"),

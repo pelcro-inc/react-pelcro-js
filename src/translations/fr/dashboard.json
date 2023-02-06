@@ -56,6 +56,7 @@
     "paymentSource": "Sources de paiement",
     "actions": "Actes",
     "expiresOn": "Expire le",
+    "until": "Jusqu'à ce que",
     "startsOn": "Débute le",
     "startDate": "Date de début",
     "renewsOn": "Renouvelle le",
@@ -93,6 +94,10 @@
       "loading": "Annulation de l'abonnement",
       "success": "L'abonnement a été annulé avec succès",
       "error": "Une erreur s'est produite lors de l'annulation de l'abonnement"
+    },
+    "subReactivation": {
+      "success": "L'abonnement a été réactivé avec succès",
+      "error": "Erreur lors de la réactivation de votre abonnement"
     },
     "subUnSuspend": {
       "isSureToUnSuspend": "Êtes-vous sûr de vouloir annuler la suspension de votre abonnement ?",
