@@ -11,7 +11,6 @@ import { loadStripe } from "@stripe/stripe-js/pure";
 import { notify } from "../../SubComponents/Notification";
 import { getErrorMessages } from "../common/Helpers";
 import i18n from "../../i18n";
-import Bugsnag from '@bugsnag/js';
 
 /**
  * @typedef {Object} OptionsType
@@ -380,22 +379,8 @@ export const initSubscriptionFromURL = () => {
 
   whenSiteReady(() => {
     const productsList = window.Pelcro.product.list();
-    console.log({
-      site: window.Pelcro?.site?.read(),
-      user: window.Pelcro?.user?.read(),
-      uiVersion: window.Pelcro?.uiSettings?.uiVersion,
-      environment: window.Pelcro?.environment,
-      uiVersionApp: window.Pelcro?.uiSettings?.uiVersion
-    });
+
     if (!productsList?.length) {
-      // notifyBugsnag("initSubscriptionFromURL - Empty Products List");
-
-      Bugsnag.notify("initSubscriptionFromURL Empty Products List", (event) => {
-        event.addMetadata("MetaData", {
-          site: JSON.stringify(window.Pelcro?.site?.read()),
-        });
-      });
-
       return;
     }
 
