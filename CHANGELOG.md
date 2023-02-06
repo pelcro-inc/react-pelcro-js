@@ -1,3 +1,10 @@
+# [3.19.0-beta.5](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.19.0-beta.4...v3.19.0-beta.5) (2023-02-06)
+
+
+### Bug Fixes
+
+* move bugsnag notify ([#282](https://github.com/pelcro-inc/react-pelcro-js/issues/282)) ([d5538d4](https://github.com/pelcro-inc/react-pelcro-js/commit/d5538d4086bf51df88829d4f823798adb05eecca))
+
 # [3.19.0-beta.4](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.19.0-beta.3...v3.19.0-beta.4) (2023-02-03)
 
 
