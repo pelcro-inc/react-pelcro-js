@@ -1,3 +1,10 @@
+# [3.19.0-beta.17](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.19.0-beta.16...v3.19.0-beta.17) (2023-02-07)
+
+
+### Bug Fixes
+
+* check pelcro-selection-view to fire bugsnag ([#290](https://github.com/pelcro-inc/react-pelcro-js/issues/290)) ([4674ed6](https://github.com/pelcro-inc/react-pelcro-js/commit/4674ed6cefa1f400771d6a4a8dc717ca27d2439a))
+
 # [3.19.0-beta.16](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.19.0-beta.15...v3.19.0-beta.16) (2023-02-07)
 
 
