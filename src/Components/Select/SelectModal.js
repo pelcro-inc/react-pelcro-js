@@ -116,14 +116,17 @@ class SelectModal extends Component {
 
     document.addEventListener("keydown", this.handleSubmit);
 
-    if(document.querySelector("#pelcro-selection-modal").offsetHeight < 60) {
+    if (
+      document.querySelector("#pelcro-selection-modal").offsetHeight <
+      (window.Pelcro?.environment?.bugsnagSelectModalHeight ?? 60)
+    ) {
       notifyBugsnag(() => {
         Bugsnag.notify("SelectModal - No data viewed", (event) => {
           event.addMetadata("MetaData", {
             site: window.Pelcro?.site?.read(),
             user: window.Pelcro?.user?.read(),
             uiVersion: window.Pelcro?.uiSettings?.uiVersion,
-            environment: window.Pelcro?.environment,
+            environment: window.Pelcro?.environment
           });
         });
       });
