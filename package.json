@@ -100,7 +100,6 @@
     "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
-    "@bugsnag/js": "^7.20.0",
     "@headlessui/react": "^0.3.0",
     "@stripe/stripe-js": "^1.21.1",
     "gapi-script": "^1.2.0",

@@ -4,7 +4,8 @@ import ReactGA from "react-ga";
 import { usePelcro } from "../../hooks/usePelcro";
 import {
   getStableViewID,
-  isValidViewFromURL
+  isValidViewFromURL,
+  notifyBugsnag
 } from "../../utils/utils";
 import { init as initContentEntitlement } from "../common/contentEntitlement";
 import { loadStripe } from "@stripe/stripe-js/pure";
@@ -324,6 +325,7 @@ export const initViewFromURL = () => {
   const { switchView, whenSiteReady } = usePelcro.getStore();
   if (isValidViewFromURL(view)) {
     whenSiteReady(() => {
+
       if (view === "plan-select") {
         return initSubscriptionFromURL();
       }
@@ -381,6 +383,17 @@ export const initSubscriptionFromURL = () => {
     const productsList = window.Pelcro.product.list();
 
     if (!productsList?.length) {
+      notifyBugsnag(() => {
+        Bugsnag.notify("initSubscriptionFromURL - productsList is empty", (event) => {
+          event.addMetadata("MetaData", {
+            site: window.Pelcro?.site?.read(),
+            user: window.Pelcro?.user?.read(),
+            uiVersion: window.Pelcro?.uiSettings?.uiVersion,
+            environment: window.Pelcro?.environment,
+            uiVersionApp: window.Pelcro?.uiSettings?.uiVersion
+          });
+        });
+      });
       return;
     }
 
