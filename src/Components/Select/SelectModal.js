@@ -13,7 +13,7 @@ import { Button } from "../../SubComponents/Button";
 import { Checkbox } from "../../SubComponents/Checkbox";
 import { Radio } from "../../SubComponents/Radio";
 import { usePelcro } from "../../hooks/usePelcro";
-import { getEntitlementsFromElem } from "../../utils/utils";
+import { getEntitlementsFromElem, notifyBugsnag } from "../../utils/utils";
 
 /**
  *
@@ -115,6 +115,17 @@ class SelectModal extends Component {
     }
 
     document.addEventListener("keydown", this.handleSubmit);
+    notifyBugsnag(() => {
+      Bugsnag.notify("SelectModalMounted", (event) => {
+        event.addMetadata("MetaData", {
+          site: window.Pelcro?.site?.read(),
+          user: window.Pelcro?.user?.read(),
+          uiVersion: window.Pelcro?.uiSettings?.uiVersion,
+          environment: window.Pelcro?.environment,
+          uiVersionApp: window.Pelcro?.uiSettings?.uiVersion
+        });
+      });
+    });
   };
 
   componentWillUnmount = () => {
