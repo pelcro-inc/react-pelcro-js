@@ -1,3 +1,15 @@
+# [3.19.0-beta.15](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.19.0-beta.14...v3.19.0-beta.15) (2023-02-07)
+
+
+### Bug Fixes
+
+* edit email validation to accept all caps ([de13639](https://github.com/pelcro-inc/react-pelcro-js/commit/de13639b0c8454bb40672615be669f192635e4eb))
+
+
+### Features
+
+* update the email validation to accept upper case letters ([a411779](https://github.com/pelcro-inc/react-pelcro-js/commit/a41177987ca6a834aec54412ab5efa1dbff6f437))
+
 # [3.19.0-beta.14](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.19.0-beta.13...v3.19.0-beta.14) (2023-02-07)
 
 
