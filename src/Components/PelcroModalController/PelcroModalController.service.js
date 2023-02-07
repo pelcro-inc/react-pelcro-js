@@ -383,17 +383,6 @@ export const initSubscriptionFromURL = () => {
     const productsList = window.Pelcro.product.list();
 
     if (!productsList?.length) {
-      notifyBugsnag(() => {
-        Bugsnag.notify("initSubscriptionFromURL - productsList is empty", (event) => {
-          event.addMetadata("MetaData", {
-            site: window.Pelcro?.site?.read(),
-            user: window.Pelcro?.user?.read(),
-            uiVersion: window.Pelcro?.uiSettings?.uiVersion,
-            environment: window.Pelcro?.environment,
-            uiVersionApp: window.Pelcro?.uiSettings?.uiVersion
-          });
-        });
-      });
       return;
     }
 
