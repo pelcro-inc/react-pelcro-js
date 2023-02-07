@@ -477,3 +477,43 @@ export function userMustVerifyEmail() {
     !isUserEmailVerified
   );
 }
+
+export function notifyBugsnag(callback, startOptions) {
+  if (
+    !window.Bugsnag &&
+    !document.querySelector(
+      'script[src="https://d2wy8f7a9ursnm.cloudfront.net/v7/bugsnag.min.js"]'
+    )
+  ) {
+    //load bugsnag CDN
+    window.Pelcro.helpers.loadSDK(
+      "https://d2wy8f7a9ursnm.cloudfront.net/v7/bugsnag.min.js",
+      "bugsnag-cdn"
+    );
+
+    document
+      .querySelector(
+        'script[src="https://d2wy8f7a9ursnm.cloudfront.net/v7/bugsnag.min.js"]'
+      )
+      .addEventListener("load", () => {
+        Bugsnag.start({
+          apiKey: "e8f6852b322540e8c25386048b99ab01",
+          autoDetectErrors: false,
+          enabledReleaseStages: ["development"],
+          redactedKeys: [
+            "security_key",
+            "password",
+            "password_confirmation",
+            "auth_token",
+            "token"
+          ],
+          ...startOptions
+        });
+
+        callback();
+      });
+    return;
+  }
+
+  callback();
+}
