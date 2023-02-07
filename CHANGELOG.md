@@ -1,3 +1,10 @@
+# [3.19.0-beta.13](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.19.0-beta.12...v3.19.0-beta.13) (2023-02-07)
+
+
+### Bug Fixes
+
+* add bugsnag CDN ([#287](https://github.com/pelcro-inc/react-pelcro-js/issues/287)) ([3c8ca48](https://github.com/pelcro-inc/react-pelcro-js/commit/3c8ca481b9074384362bc221201b164de7aea217))
+
 # [3.19.0-beta.12](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.19.0-beta.11...v3.19.0-beta.12) (2023-02-06)
 
 
