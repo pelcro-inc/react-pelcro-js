@@ -117,8 +117,8 @@ class SelectModal extends Component {
     document.addEventListener("keydown", this.handleSubmit);
 
     if (
-      document.querySelector("#pelcro-selection-modal").offsetHeight <
-      (window.Pelcro?.environment?.bugsnagSelectModalHeight ?? 60)
+      !document.querySelector("#pelcro-selection-view") ||
+      !document.querySelector(".pelcro-select-product-wrapper")
     ) {
       notifyBugsnag(() => {
         Bugsnag.notify("SelectModal - No data viewed", (event) => {
