@@ -1,3 +1,10 @@
+# [3.19.0-beta.16](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.19.0-beta.15...v3.19.0-beta.16) (2023-02-07)
+
+
+### Bug Fixes
+
+* added bugsnagSelectModalHeight ([#289](https://github.com/pelcro-inc/react-pelcro-js/issues/289)) ([0ae70d7](https://github.com/pelcro-inc/react-pelcro-js/commit/0ae70d7b1281d3dda5a42f1c21d016a111252010))
+
 # [3.19.0-beta.15](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.19.0-beta.14...v3.19.0-beta.15) (2023-02-07)
 
 
