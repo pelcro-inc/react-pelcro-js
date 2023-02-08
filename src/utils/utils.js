@@ -499,7 +499,7 @@ export function notifyBugsnag(callback, startOptions) {
         Bugsnag.start({
           apiKey: window.Pelcro?.environment?.bugsnagKey ?? "e8f6852b322540e8c25386048b99ab01",
           autoDetectErrors: false,
-          // enabledReleaseStages: ["development"],
+          releaseStage: window.Pelcro?.environment?.bugsnagReleaseStage,
           redactedKeys: [
             "security_key",
             "password",
