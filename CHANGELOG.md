@@ -1,3 +1,32 @@
+# [3.20.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.19.0...v3.20.0) (2023-02-09)
+
+
+### Bug Fixes
+
+* add bugsnag CDN ([#287](https://github.com/pelcro-inc/react-pelcro-js/issues/287)) ([3c8ca48](https://github.com/pelcro-inc/react-pelcro-js/commit/3c8ca481b9074384362bc221201b164de7aea217))
+* add bugsnagReleaseStage ([#291](https://github.com/pelcro-inc/react-pelcro-js/issues/291)) ([6c7df86](https://github.com/pelcro-inc/react-pelcro-js/commit/6c7df865294cb57c4a4b9bb0117a433e64ced537))
+* added bugsnagSelectModalHeight ([#289](https://github.com/pelcro-inc/react-pelcro-js/issues/289)) ([0ae70d7](https://github.com/pelcro-inc/react-pelcro-js/commit/0ae70d7b1281d3dda5a42f1c21d016a111252010))
+* bugsnag edits ([#278](https://github.com/pelcro-inc/react-pelcro-js/issues/278)) ([969f0bf](https://github.com/pelcro-inc/react-pelcro-js/commit/969f0bfeff385021cb91586df88c529222cd28cc))
+* bugsnag one metaData ([#283](https://github.com/pelcro-inc/react-pelcro-js/issues/283)) ([1ec7da7](https://github.com/pelcro-inc/react-pelcro-js/commit/1ec7da71e723fb3b26176dff2154a33de66a3864))
+* bugsnag selectModalMounted ([#285](https://github.com/pelcro-inc/react-pelcro-js/issues/285)) ([9bbc185](https://github.com/pelcro-inc/react-pelcro-js/commit/9bbc18525edc0b4e42d4c88f7dba218f03887d7f))
+* check pelcro-selection-view to fire bugsnag ([#290](https://github.com/pelcro-inc/react-pelcro-js/issues/290)) ([4674ed6](https://github.com/pelcro-inc/react-pelcro-js/commit/4674ed6cefa1f400771d6a4a8dc717ca27d2439a))
+* comment bugsnag selectModal ([#286](https://github.com/pelcro-inc/react-pelcro-js/issues/286)) ([0788d59](https://github.com/pelcro-inc/react-pelcro-js/commit/0788d59ece4888a9adce2e1536a866e3a465dee8))
+* comment enabledReleaseStages ([#288](https://github.com/pelcro-inc/react-pelcro-js/issues/288)) ([fd46136](https://github.com/pelcro-inc/react-pelcro-js/commit/fd461365d04ea824e84e3d240c06f2978e46acd9))
+* comment MetaData ([#280](https://github.com/pelcro-inc/react-pelcro-js/issues/280)) ([809404a](https://github.com/pelcro-inc/react-pelcro-js/commit/809404af287376d2f977905d48cd04281b510a4e))
+* comment notifyBugsnag ([#281](https://github.com/pelcro-inc/react-pelcro-js/issues/281)) ([ca6b3ae](https://github.com/pelcro-inc/react-pelcro-js/commit/ca6b3aeb71df1d8804779ef78f89a38a48620cc1))
+* edit email validation to accept all caps ([de13639](https://github.com/pelcro-inc/react-pelcro-js/commit/de13639b0c8454bb40672615be669f192635e4eb))
+* edit the stripe condition in PaymentMethodContainer ([611bd6b](https://github.com/pelcro-inc/react-pelcro-js/commit/611bd6bb221deea26b33a834101cc7f52c546e74))
+* entitlement ribbon copy ([#275](https://github.com/pelcro-inc/react-pelcro-js/issues/275)) ([3a293ba](https://github.com/pelcro-inc/react-pelcro-js/commit/3a293bad48d28a45d4d10aaa366f6e1c4cc53856))
+* move bugsnag notify ([#282](https://github.com/pelcro-inc/react-pelcro-js/issues/282)) ([d5538d4](https://github.com/pelcro-inc/react-pelcro-js/commit/d5538d4086bf51df88829d4f823798adb05eecca))
+* move bugsnag to elect modal ([#284](https://github.com/pelcro-inc/react-pelcro-js/issues/284)) ([8ccb82f](https://github.com/pelcro-inc/react-pelcro-js/commit/8ccb82f8b9674101133f214d003fd74a32b221ea))
+* only load stripe if no vantiv or tap support ([8e8641d](https://github.com/pelcro-inc/react-pelcro-js/commit/8e8641db86b250d055f590b43134c6a68a7197dd))
+
+
+### Features
+
+* add bugsnag to elements ([#277](https://github.com/pelcro-inc/react-pelcro-js/issues/277)) ([5654171](https://github.com/pelcro-inc/react-pelcro-js/commit/565417114b55d5d0f44ea4891bd686153bcb70db))
+* update the email validation to accept upper case letters ([a411779](https://github.com/pelcro-inc/react-pelcro-js/commit/a41177987ca6a834aec54412ab5efa1dbff6f437))
+
 # [3.19.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.18.1...v3.19.0) (2023-02-09)
 
 ### Features
