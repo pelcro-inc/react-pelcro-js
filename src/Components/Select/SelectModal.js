@@ -13,7 +13,10 @@ import { Button } from "../../SubComponents/Button";
 import { Checkbox } from "../../SubComponents/Checkbox";
 import { Radio } from "../../SubComponents/Radio";
 import { usePelcro } from "../../hooks/usePelcro";
-import { getEntitlementsFromElem, notifyBugsnag } from "../../utils/utils";
+import {
+  getEntitlementsFromElem,
+  notifyBugsnag
+} from "../../utils/utils";
 
 /**
  *
@@ -111,7 +114,7 @@ class SelectModal extends Component {
       this.state.productList.length === 0 &&
       !window.Pelcro.user.isAuthenticated()
     ) {
-      this.props.setView('register');
+      this.props.setView("register");
     }
 
     document.addEventListener("keydown", this.handleSubmit);

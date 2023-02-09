@@ -4,7 +4,8 @@ import ReactGA from "react-ga";
 import { usePelcro } from "../../hooks/usePelcro";
 import {
   getStableViewID,
-  isValidViewFromURL
+  isValidViewFromURL,
+  notifyBugsnag
 } from "../../utils/utils";
 import { init as initContentEntitlement } from "../common/contentEntitlement";
 import { loadStripe } from "@stripe/stripe-js/pure";
@@ -87,8 +88,15 @@ export const initPaywalls = () => {
 export const loadPaymentSDKs = () => {
   // Lazy load stripe's SDK
   const { whenUserReady } = usePelcro.getStore();
+  const supportsVantiv = Boolean(
+    window.Pelcro.site.read().vantiv_gateway_settings
+  );
+  const supportsTap = Boolean(
+    window.Pelcro.site.read().tap_gateway_settings
+  );
+
   whenUserReady(() => {
-    if (!window.Stripe) {
+    if (!window.Stripe && !supportsVantiv && !supportsTap) {
       loadStripe(window.Pelcro.environment.stripe);
     }
   });
@@ -111,10 +119,6 @@ export const loadPaymentSDKs = () => {
   }
 
   // Load Vantiv SDKs
-  const supportsVantiv = Boolean(
-    window.Pelcro.site.read().vantiv_gateway_settings
-  );
-
   if (supportsVantiv) {
     if (!window.jQuery) {
       window.Pelcro.helpers.loadSDK(
@@ -141,10 +145,6 @@ export const loadPaymentSDKs = () => {
   }
 
   // Load Tap SDKs
-  const supportsTap = Boolean(
-    window.Pelcro.site.read().tap_gateway_settings
-  );
-
   if (supportsTap) {
     window.Pelcro.helpers.loadSDK(
       "https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.4/bluebird.min.js",
@@ -325,6 +325,7 @@ export const initViewFromURL = () => {
   const { switchView, whenSiteReady } = usePelcro.getStore();
   if (isValidViewFromURL(view)) {
     whenSiteReady(() => {
+
       if (view === "plan-select") {
         return initSubscriptionFromURL();
       }
@@ -380,7 +381,10 @@ export const initSubscriptionFromURL = () => {
 
   whenSiteReady(() => {
     const productsList = window.Pelcro.product.list();
-    if (!productsList?.length) return;
+
+    if (!productsList?.length) {
+      return;
+    }
 
     const [productId, planId, isGiftParam] = [
       window.Pelcro.helpers.getURLParameter("product_id"),
