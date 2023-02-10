@@ -623,6 +623,7 @@ class Dashboard extends Component {
               />
 
               <DashboardLink
+                show={hasActiveMemberships()}
                 name={SUB_MENUS.MEMBERSHIPS}
                 icon={
                   <MembershipsIcon className="plc-transform plc-scale-120 plc-w-7 plc-h-8 plc-mr-1 plc-pt-1" />
@@ -633,6 +634,7 @@ class Dashboard extends Component {
               />
 
               <DashboardLink
+                show={hasDonationSubs()}
                 name={SUB_MENUS.DONATIONS}
                 icon={
                   <DonateIcon className="plc-transform plc-scale-120 plc-w-7 plc-h-8 plc-mr-1 plc-pt-1" />
