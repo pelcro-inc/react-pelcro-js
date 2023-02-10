@@ -1,3 +1,18 @@
+# [4.0.0-alpha.27](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.26...v4.0.0-alpha.27) (2023-02-10)
+
+
+### Bug Fixes
+
+* add the close icon on the gift success modal ([d56fb05](https://github.com/pelcro-inc/react-pelcro-js/commit/d56fb05029ab72b275dfb149e701034fceb5af86))
+* carousel dots wrap and long email and username ([2b6575b](https://github.com/pelcro-inc/react-pelcro-js/commit/2b6575b86c6df09ab0158f1b0ca685f0b52aa57a))
+* hide donations and memberships if they're not enabled ([227ac57](https://github.com/pelcro-inc/react-pelcro-js/commit/227ac5789e56a5782ce99c51726ddbd349c11ef1))
+* hide orders menu if ecommerce is disabled ([6c1be38](https://github.com/pelcro-inc/react-pelcro-js/commit/6c1be38ba678f44f886b1922e1d52aa1a44f13c3))
+
+
+### Features
+
+* add the default label to address list ([4d88214](https://github.com/pelcro-inc/react-pelcro-js/commit/4d882146d9db7e148e615ab14c8a2001fb6ae623))
+
 # [4.0.0-alpha.26](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.25...v4.0.0-alpha.26) (2023-02-01)
 
 
