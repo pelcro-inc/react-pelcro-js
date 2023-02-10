@@ -39,7 +39,7 @@ export const DonationsMenu = ({
         if (userMustVerifyEmail()) {
           return switchView("email-verify");
         }
-
+        switchView(null);
         onClose?.();
         notify.confirm(
           (onSuccess, onFailure) => {
