@@ -488,7 +488,7 @@ class Dashboard extends Component {
           <div id="pelcro-view-dashboard" ref={this.menuRef}>
             <header className="plc-bg-gray-200 plc-flex plc-py-5">
               <div className="plc-flex plc-items-center">
-                <div className="plc-flex plc-justify-center plc-ml-3 sm:plc-ml-6 ">
+                <div className="plc-flex plc-justify-center plc-ml-3 sm:plc-ml-6 plc-flex-shrink-0">
                   <div className="plc-relative plc-flex-shrink-0">
                     <img
                       className="pelcro-user-profile-picture plc-bg-gray-300 plc-cursor-pointer plc-h-10 plc-rounded-md plc-w-10"
@@ -501,13 +501,13 @@ class Dashboard extends Component {
 
                 <div className="plc-flex plc-flex-col plc-justify-between plc-flex-grow plc-w-56 plc-ml-4 plc-break-words sm:plc-w-auto">
                   {userHasName && (
-                    <p className="plc-font-bold">
+                    <p className="plc-font-bold plc-break-all">
                       {this.user.first_name} {this.user.last_name}
                     </p>
                   )}
 
                   <p
-                    className={`plc-m-0 plc-text-sm ${
+                    className={`plc-m-0 plc-text-sm plc-break-all ${
                       userHasName
                         ? "plc-text-sm"
                         : "plc-text-lg plc-font-bold plc-mt-auto"
