@@ -17,8 +17,6 @@ export const EmailVerifyModal = ({
   const { product, plan, switchToAddressView, switchToPaymentView } =
     usePelcro();
 
-  console.log("verify email");
-
   const onSuccess = (res) => {
     otherProps.onSuccess?.(res);
 

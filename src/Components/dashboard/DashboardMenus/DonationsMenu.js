@@ -11,11 +11,13 @@ import { Button } from "../../../SubComponents/Button";
 import { usePelcro } from "../../../hooks/usePelcro";
 import { AddNew } from "../AddNew";
 import { Card } from "../Card";
+import { notify } from "../../../SubComponents/Notification";
 
 export const DonationsMenu = ({
   reactivateSubscription,
   disableSubmit,
-  cancelSubscription
+  cancelSubscription,
+  onClose
 }) => {
   const { t } = useTranslation("dashboard");
   const { switchView, setSubscriptionToCancel } = usePelcro();
@@ -25,37 +27,37 @@ export const DonationsMenu = ({
     .sort((a, b) => a.renews_at - b.renews_at)
     .map((sub) => {
       // Cancel button click handlers
-      // const onCancelClick = () => {
-      //   const isImmediateCancelationEnabled =
-      //     window.Pelcro.site.read().cancel_settings.status;
+      const onCancelClick = () => {
+        const isImmediateCancelationEnabled =
+          window.Pelcro.site.read().cancel_settings.status;
 
-      //   if (isImmediateCancelationEnabled) {
-      //     setSubscriptionToCancel(sub.id);
-      //     return switchView("subscription-cancel");
-      //   }
+        if (isImmediateCancelationEnabled) {
+          setSubscriptionToCancel(sub.id);
+          return switchView("subscription-cancel");
+        }
 
-      //   if (userMustVerifyEmail()) {
-      //     return switchView("email-verify");
-      //   }
-
-      //   onClose?.();
-      //   notify.confirm(
-      //     (onSuccess, onFailure) => {
-      //       cancelSubscription(sub.id, onSuccess, onFailure);
-      //     },
-      //     {
-      //       confirmMessage: t(
-      //         "messages.subCancellation.isSureToCancel"
-      //       ),
-      //       loadingMessage: t("messages.subCancellation.loading"),
-      //       successMessage: t("messages.subCancellation.success"),
-      //       errorMessage: t("messages.subCancellation.error")
-      //     },
-      //     {
-      //       closeButtonLabel: t("labels.subCancellation.goBack")
-      //     }
-      //   );
-      // };
+        if (userMustVerifyEmail()) {
+          return switchView("email-verify");
+        }
+        switchView(null);
+        onClose?.();
+        notify.confirm(
+          (onSuccess, onFailure) => {
+            cancelSubscription(sub.id, onSuccess, onFailure);
+          },
+          {
+            confirmMessage: t(
+              "messages.subCancellation.isSureToCancel"
+            ),
+            loadingMessage: t("messages.subCancellation.loading"),
+            successMessage: t("messages.subCancellation.success"),
+            errorMessage: t("messages.subCancellation.error")
+          },
+          {
+            closeButtonLabel: t("labels.subCancellation.goBack")
+          }
+        );
+      };
 
       // Reactivate button click handlers
       const onReactivateClick = () => {
@@ -95,6 +97,39 @@ export const DonationsMenu = ({
               )}
             </div>
           </td>
+          <td>
+            {sub.cancel_at_period_end === 1 &&
+              sub.plan.auto_renew &&
+              !sub.is_gift_recipient && (
+                <Button
+                  variant="ghost"
+                  className="plc-text-green-400 focus:plc-ring-green-300 pelcro-dashboard-sub-reactivate-button"
+                  icon={<RefreshIcon />}
+                  onClick={onReactivateClick}
+                  disabled={disableSubmit}
+                  data-key={sub.id}
+                >
+                  {t("labels.reactivate")}
+                </Button>
+              )}
+
+            {!sub.plan.auto_renew ||
+            (sub.plan.auto_renew &&
+              sub.cancel_at_period_end === 0) ? (
+              <Button
+                variant="ghost"
+                className="plc-text-red-500 focus:plc-ring-red-500 pelcro-dashboard-sub-cancel-button"
+                icon={<XCircleIcon />}
+                onClick={onCancelClick}
+                disabled={disableSubmit}
+                data-key={sub.id}
+              >
+                {t("labels.unsubscribe")}
+              </Button>
+            ) : (
+              ""
+            )}
+          </td>
         </tr>
       );
     });
@@ -108,8 +143,9 @@ export const DonationsMenu = ({
       <table className="plc-w-full plc-table-fixed pelcro-donations-table plc-text-left">
         <thead className="plc-text-xs plc-font-semibold plc-tracking-wider plc-text-gray-400 plc-uppercase ">
           <tr>
-            <th className="plc-w-1/4">{t("labels.plan")}</th>
-            <th className="plc-w-1/4">{t("labels.startDate")}</th>
+            <th className="plc-w-4/12">{t("labels.plan")}</th>
+            <th className="plc-w-5/12">{t("labels.startDate")}</th>
+            <th className="plc-w-3/12">{t("labels.actions")}</th>
           </tr>
         </thead>
         <tbody>{subscriptions}</tbody>

@@ -63,6 +63,7 @@
     "addCard": "Add Card",
     "actions": "Actions",
     "expiresOn": "Ends",
+    "until": "Until",
     "startsOn": "Starts",
     "startDate": "Start date",
     "renewsOn": "Renews",
