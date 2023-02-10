@@ -4,6 +4,7 @@ import { Button } from "../../SubComponents/Button";
 import { ReactComponent as CheckMark } from "../../assets/check-solid.svg";
 import { ReactComponent as GiftIcon } from "../../assets/gift.svg";
 import { usePelcro } from "../../hooks/usePelcro";
+import { ReactComponent as CloseIcon } from "../../assets/x-icon.svg";
 
 export const PaymentSuccessView = ({ onClose }) => {
   const { t } = useTranslation("success");
@@ -12,7 +13,16 @@ export const PaymentSuccessView = ({ onClose }) => {
 
   if (successTitle && successContent) {
     return (
-      <div className="plc-flex plc-flex-col plc-items-center">
+      <div className="plc-flex plc-flex-col plc-items-center plc-relative">
+        <button
+          type="button"
+          className="pelcro-modal-close plc-absolute plc-top-6 plc-right-0"
+          aria-label="close modal"
+          onClick={onClose}
+        >
+          <CloseIcon className="plc-fill-current" />
+        </button>
+
         {successIcon}
         <div className="plc-text-center plc-text-gray-900">
           <h4 className="plc-mb-4 plc-text-3xl">{successTitle}</h4>
