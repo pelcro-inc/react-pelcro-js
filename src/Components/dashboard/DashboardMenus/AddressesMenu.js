@@ -75,18 +75,25 @@ const AddressesItems = (props) => {
             `plc-border-primary-400 plc-border-2`
           }`}
         >
-          <div>
+          <div className="plc-flex-1 plc-relative">
             <p className="pelcro-address-name plc-font-semibold">
               {address.first_name} {address.last_name}
             </p>
-            <p className="pelcro-address-company">{address.company}</p>
+            <p className="pelcro-address-company">
+              {address.company}
+            </p>
             <p className="pelcro-address-line1 plc-text-sm plc-mt-2">
               {address.line1}
             </p>
             <p className="pelcro-address-country plc-text-sm">
-              {address.city}, {address.state_name} {address.postal_code}
-              , {address.country_name}
+              {address.city}, {address.state_name}{" "}
+              {address.postal_code}, {address.country_name}
             </p>
+            {address.is_default && (
+              <span className="plc-rounded-full plc-bg-gray-800 plc-text-white plc-inline-flex plc-items-start plc-py-1 plc-px-4 plc-text-sm plc-mt-4">
+                {t("labels.default")}
+              </span>
+            )}
           </div>
           <Button
             variant="icon"
