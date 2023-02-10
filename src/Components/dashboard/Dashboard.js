@@ -310,9 +310,13 @@ class Dashboard extends Component {
         this.setState({ disableSubmit: false });
         this.props.onClose();
         if (err) {
-          return notify.error(this.locale("messages.subReactivation.error"));
+          return notify.error(
+            this.locale("messages.subReactivation.error")
+          );
         }
-        return notify.success(this.locale("messages.subReactivation.success"));
+        return notify.success(
+          this.locale("messages.subReactivation.success")
+        );
       }
     );
   };
@@ -647,6 +651,7 @@ class Dashboard extends Component {
               />
 
               <DashboardLink
+                show={window.Pelcro.site.read().ecommerce_enabled}
                 name={SUB_MENUS.ORDERS}
                 icon={<ShoppingIcon />}
                 title={this.locale("labels.orders.label")}
@@ -683,9 +688,8 @@ class Dashboard extends Component {
             {this.state.activeDashboardLink === SUB_MENUS.QRCODE && (
               <QRCodeMenu />
             )}
-            {this.state.activeDashboardLink === SUB_MENUS.PASSWORDCHANGE && (
-              <PasswordChangeMenu />
-            )}
+            {this.state.activeDashboardLink ===
+              SUB_MENUS.PASSWORDCHANGE && <PasswordChangeMenu />}
             {this.state.activeDashboardLink ===
               SUB_MENUS.SAVED_ITEMS && <SavedItemsMenu />}
             {this.state.activeDashboardLink ===
