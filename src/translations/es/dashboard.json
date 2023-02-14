@@ -12,7 +12,8 @@
       "inTrial": "Prueba",
       "endingSoon": "Termina pronto",
       "scheduled": "Programada",
-      "incomplete": "Incompleta"
+      "incomplete": "Incompleta",
+      "canceled": "Cancelado"
     },
     "shipments": "Envíos restantes",
     "logout": "Cerrar sesión",

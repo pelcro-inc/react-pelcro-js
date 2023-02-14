@@ -14,7 +14,8 @@
       "inTrial": "En essai",
       "endingSoon": "Expire bientôt",
       "scheduled": "Programmé",
-      "incomplete": "Incomplet"
+      "incomplete": "Incomplet",
+      "canceled": "Annulé"
     },
     "manageMembers": "Gérer les membres",
     "shipments": "Expéditions restantes",
