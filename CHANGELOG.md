@@ -1,3 +1,71 @@
+# [4.0.0-alpha.28](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.27...v4.0.0-alpha.28) (2023-02-10)
+
+
+### Bug Fixes
+
+* default UI redesign ([#293](https://github.com/pelcro-inc/react-pelcro-js/issues/293)) ([8cd6924](https://github.com/pelcro-inc/react-pelcro-js/commit/8cd6924a0db01f26118a33fdc6f28378cf85e35f)), closes [#274](https://github.com/pelcro-inc/react-pelcro-js/issues/274) [#274](https://github.com/pelcro-inc/react-pelcro-js/issues/274) [#274](https://github.com/pelcro-inc/react-pelcro-js/issues/274) [#275](https://github.com/pelcro-inc/react-pelcro-js/issues/275) [#275](https://github.com/pelcro-inc/react-pelcro-js/issues/275) [#277](https://github.com/pelcro-inc/react-pelcro-js/issues/277) [#277](https://github.com/pelcro-inc/react-pelcro-js/issues/277) [#278](https://github.com/pelcro-inc/react-pelcro-js/issues/278) [#278](https://github.com/pelcro-inc/react-pelcro-js/issues/278) [#280](https://github.com/pelcro-inc/react-pelcro-js/issues/280) [#280](https://github.com/pelcro-inc/react-pelcro-js/issues/280) [#281](https://github.com/pelcro-inc/react-pelcro-js/issues/281) [#281](https://github.com/pelcro-inc/react-pelcro-js/issues/281) [#282](https://github.com/pelcro-inc/react-pelcro-js/issues/282) [#282](https://github.com/pelcro-inc/react-pelcro-js/issues/282) [#283](https://github.com/pelcro-inc/react-pelcro-js/issues/283) [#283](https://github.com/pelcro-inc/react-pelcro-js/issues/283) [#284](https://github.com/pelcro-inc/react-pelcro-js/issues/284) [#284](https://github.com/pelcro-inc/react-pelcro-js/issues/284) [#285](https://github.com/pelcro-inc/react-pelcro-js/issues/285) [#285](https://github.com/pelcro-inc/react-pelcro-js/issues/285) [#286](https://github.com/pelcro-inc/react-pelcro-js/issues/286) [#286](https://github.com/pelcro-inc/react-pelcro-js/issues/286) [#287](https://github.com/pelcro-inc/react-pelcro-js/issues/287) [#287](https://github.com/pelcro-inc/react-pelcro-js/issues/287) [#288](https://github.com/pelcro-inc/react-pelcro-js/issues/288) [#288](https://github.com/pelcro-inc/react-pelcro-js/issues/288) [#289](https://github.com/pelcro-inc/react-pelcro-js/issues/289) [#289](https://github.com/pelcro-inc/react-pelcro-js/issues/289) [#290](https://github.com/pelcro-inc/react-pelcro-js/issues/290) [#290](https://github.com/pelcro-inc/react-pelcro-js/issues/290) [#291](https://github.com/pelcro-inc/react-pelcro-js/issues/291) [#291](https://github.com/pelcro-inc/react-pelcro-js/issues/291) [#292](https://github.com/pelcro-inc/react-pelcro-js/issues/292) [#292](https://github.com/pelcro-inc/react-pelcro-js/issues/292) [#287](https://github.com/pelcro-inc/react-pelcro-js/issues/287) [#291](https://github.com/pelcro-inc/react-pelcro-js/issues/291) [#289](https://github.com/pelcro-inc/react-pelcro-js/issues/289) [#278](https://github.com/pelcro-inc/react-pelcro-js/issues/278) [#283](https://github.com/pelcro-inc/react-pelcro-js/issues/283) [#285](https://github.com/pelcro-inc/react-pelcro-js/issues/285) [#290](https://github.com/pelcro-inc/react-pelcro-js/issues/290) [#286](https://github.com/pelcro-inc/react-pelcro-js/issues/286) [#288](https://github.com/pelcro-inc/react-pelcro-js/issues/288) [#280](https://github.com/pelcro-inc/react-pelcro-js/issues/280) [#281](https://github.com/pelcro-inc/react-pelcro-js/issues/281) [#275](https://github.com/pelcro-inc/react-pelcro-js/issues/275) [#282](https://github.com/pelcro-inc/react-pelcro-js/issues/282) [#284](https://github.com/pelcro-inc/react-pelcro-js/issues/284) [#277](https://github.com/pelcro-inc/react-pelcro-js/issues/277)
+* remove unused siteid ([f899595](https://github.com/pelcro-inc/react-pelcro-js/commit/f89959566c9f1f627c36ed9d253dcccd6a7ea957))
+
+# [4.0.0-alpha.27](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.26...v4.0.0-alpha.27) (2023-02-10)
+
+
+### Bug Fixes
+
+* add the close icon on the gift success modal ([d56fb05](https://github.com/pelcro-inc/react-pelcro-js/commit/d56fb05029ab72b275dfb149e701034fceb5af86))
+* carousel dots wrap and long email and username ([2b6575b](https://github.com/pelcro-inc/react-pelcro-js/commit/2b6575b86c6df09ab0158f1b0ca685f0b52aa57a))
+* hide donations and memberships if they're not enabled ([227ac57](https://github.com/pelcro-inc/react-pelcro-js/commit/227ac5789e56a5782ce99c51726ddbd349c11ef1))
+* hide orders menu if ecommerce is disabled ([6c1be38](https://github.com/pelcro-inc/react-pelcro-js/commit/6c1be38ba678f44f886b1922e1d52aa1a44f13c3))
+
+
+### Features
+
+* add the default label to address list ([4d88214](https://github.com/pelcro-inc/react-pelcro-js/commit/4d882146d9db7e148e615ab14c8a2001fb6ae623))
+
+# [4.0.0-alpha.26](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.25...v4.0.0-alpha.26) (2023-02-01)
+
+
+### Bug Fixes
+
+* action-types exports ([55caea7](https://github.com/pelcro-inc/react-pelcro-js/commit/55caea7346fb0b8ab2e04de8278acd92da805e39))
+* add change password to dashboard ([b969fee](https://github.com/pelcro-inc/react-pelcro-js/commit/b969fee2babd37a015b4641e85185dda18345a7c))
+* add missing import ([#271](https://github.com/pelcro-inc/react-pelcro-js/issues/271)) ([9680210](https://github.com/pelcro-inc/react-pelcro-js/commit/96802101f26594bd33ade4977b5c6577af69c24b))
+* add Tap fields translation ([d5a96e1](https://github.com/pelcro-inc/react-pelcro-js/commit/d5a96e19a89fb349a91395be82e94f2bd3701879))
+* dashboard mobile exit button ([934e3b9](https://github.com/pelcro-inc/react-pelcro-js/commit/934e3b9385d47d3a35af8c3153e10793467720d8))
+* lint issues ([12615a3](https://github.com/pelcro-inc/react-pelcro-js/commit/12615a35fd0349e30ab6cb77b6915fc6b808687b))
+* locks ([f9b5d0d](https://github.com/pelcro-inc/react-pelcro-js/commit/f9b5d0dff69111aee9c519db6dcb40683947207d))
+* purchase payment flow ([#272](https://github.com/pelcro-inc/react-pelcro-js/issues/272)) ([bd6c359](https://github.com/pelcro-inc/react-pelcro-js/commit/bd6c359cebc8a14c7303134e6a221be7ff3589e6))
+* subscription after reactivation message ([#273](https://github.com/pelcro-inc/react-pelcro-js/issues/273)) ([a2331dc](https://github.com/pelcro-inc/react-pelcro-js/commit/a2331dcbd10c807ce55671986e1c49def127e407))
+* update package and yarn locks ([756ab3a](https://github.com/pelcro-inc/react-pelcro-js/commit/756ab3a0cae84e63f16914eb3b9b732f38e4a831))
+* usePelcro import ([0f0a233](https://github.com/pelcro-inc/react-pelcro-js/commit/0f0a233367d40a87503b831e86bf45dd81593899))
+
+
+### Features
+
+* add logging to email verify ([a25b19a](https://github.com/pelcro-inc/react-pelcro-js/commit/a25b19a9e0159ec0a04150100c525787db57d159))
+* change the google recaptcha url to work in China ([#268](https://github.com/pelcro-inc/react-pelcro-js/issues/268)) ([34a0f5d](https://github.com/pelcro-inc/react-pelcro-js/commit/34a0f5dce24e370d6d254c46e98fdbd721b7e700))
+* fix some issue with the new design ([c60f43e](https://github.com/pelcro-inc/react-pelcro-js/commit/c60f43e87bbdb2add2c98dbc8ddf2338e789108b))
+
+# [4.0.0-alpha.25](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.24...v4.0.0-alpha.25) (2023-01-17)
+
+
+### Bug Fixes
+
+* subscription cancel button ([#270](https://github.com/pelcro-inc/react-pelcro-js/issues/270)) ([c7f6f93](https://github.com/pelcro-inc/react-pelcro-js/commit/c7f6f9303a7066fd848ccf893fcf07efda84544c))
+
+# [4.0.0-alpha.24](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.23...v4.0.0-alpha.24) (2023-01-17)
+
+
+### Bug Fixes
+
+* cancel button ([04689ac](https://github.com/pelcro-inc/react-pelcro-js/commit/04689acde02663a0bdf744dba9d77223c37504b5))
+
+# [4.0.0-alpha.23](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.22...v4.0.0-alpha.23) (2023-01-13)
+
+
+### Bug Fixes
+
+* default UI redesign ([#267](https://github.com/pelcro-inc/react-pelcro-js/issues/267)) ([7be083d](https://github.com/pelcro-inc/react-pelcro-js/commit/7be083d9be2f1c9c9018c7442510519430c1f788))
+
 # [4.0.0-alpha.22](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.21...v4.0.0-alpha.22) (2023-01-13)
 ## [3.17.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.17.0...v3.17.1) (2023-01-27)
 # [3.20.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.19.0...v3.20.0) (2023-02-09)
