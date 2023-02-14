@@ -14,7 +14,8 @@
       "inTrial": "In trial",
       "endingSoon": "Ending soon",
       "scheduled": "Scheduled",
-      "incomplete": "Incomplete"
+      "incomplete": "Incomplete",
+      "canceled": "Canceled"
     },
     "manageMembers": "Manage Members",
     "shipments": "Shipments remaining",

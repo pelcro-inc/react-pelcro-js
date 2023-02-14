@@ -9,7 +9,6 @@ import { ReactComponent as XCircleIcon } from "../../../assets/x-icon-solid.svg"
 import { ReactComponent as RefreshIcon } from "../../../assets/refresh.svg";
 import { Button } from "../../../SubComponents/Button";
 import { usePelcro } from "../../../hooks/usePelcro";
-import { AddNew } from "../AddNew";
 import { Card } from "../Card";
 import { notify } from "../../../SubComponents/Notification";
 
@@ -17,6 +16,7 @@ export const DonationsMenu = ({
   reactivateSubscription,
   disableSubmit,
   cancelSubscription,
+  getSubscriptionStatus,
   onClose
 }) => {
   const { t } = useTranslation("dashboard");
@@ -97,6 +97,27 @@ export const DonationsMenu = ({
               )}
             </div>
           </td>
+          <td className="plc-py-2 truncate">
+            {/* Pill */}
+            <span
+              className={`plc-inline-flex plc-p-1 plc-text-xs plc-font-semibold ${
+                getSubscriptionStatus(sub).bgColor
+              } plc-uppercase ${
+                getSubscriptionStatus(sub).textColor
+              } plc-rounded-lg`}
+            >
+              {getSubscriptionStatus(sub).icon}
+              {getSubscriptionStatus(sub).title}
+            </span>
+            <br />
+            <div className="plc-text-xs plc-text-gray-500">
+              {sub.status && (
+                <span className="plc-inline-block plc-mt-1 plc-underline">
+                  {getSubscriptionStatus(sub).content}
+                </span>
+              )}
+            </div>
+          </td>
           <td>
             {sub.cancel_at_period_end === 1 &&
               sub.plan.auto_renew &&
@@ -113,9 +134,10 @@ export const DonationsMenu = ({
                 </Button>
               )}
 
-            {!sub.plan.auto_renew ||
-            (sub.plan.auto_renew &&
-              sub.cancel_at_period_end === 0) ? (
+            {(!sub.plan.auto_renew ||
+              (sub.plan.auto_renew &&
+                sub.cancel_at_period_end === 0)) &&
+            sub.status != "canceled" ? (
               <Button
                 variant="ghost"
                 className="plc-text-red-500 focus:plc-ring-red-500 pelcro-dashboard-sub-cancel-button"
@@ -143,9 +165,18 @@ export const DonationsMenu = ({
       <table className="plc-w-full plc-table-fixed pelcro-donations-table plc-text-left">
         <thead className="plc-text-xs plc-font-semibold plc-tracking-wider plc-text-gray-400 plc-uppercase ">
           <tr>
-            <th className="plc-w-4/12">{t("labels.plan")}</th>
-            <th className="plc-w-5/12">{t("labels.startDate")}</th>
-            <th className="plc-w-3/12">{t("labels.actions")}</th>
+            <th className="plc-hidden md:plc-table-cell plc-w-3/12">
+              {t("labels.plan")}
+            </th>
+            <th className="plc-w-1/3 md:plc-w-3/12">
+              {t("labels.startDate")}
+            </th>
+            <th className="plc-w-1/3 md:plc-w-3/12">
+              {t("labels.status.title")}
+            </th>
+            <th className="plc-w-1/3 md:plc-w-3/12">
+              {t("labels.actions")}
+            </th>
           </tr>
         </thead>
         <tbody>{subscriptions}</tbody>

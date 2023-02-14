@@ -385,6 +385,16 @@ class Dashboard extends Component {
       };
     }
 
+    if (sub.status === "canceled") {
+      return {
+        title: this.locale("labels.status.canceled"),
+        content: this.getSubscriptionStatusText(sub),
+        textColor: "plc-text-red-700",
+        bgColor: "plc-bg-red-100",
+        icon: <ExclamationIcon />
+      };
+    }
+
     return {
       title: this.locale("labels.status.active"),
       content: this.getSubscriptionStatusText(sub),
@@ -750,6 +760,9 @@ class Dashboard extends Component {
             {this.state.activeDashboardLink ===
               SUB_MENUS.DONATIONS && (
               <DonationsMenu
+                cancelSubscription={this.cancelSubscription}
+                reactivateSubscription={this.reactivateSubscription}
+                disableSubmit={this.state.disableSubmit}
                 getSubscriptionStatus={this.getSubscriptionStatus}
               />
             )}
