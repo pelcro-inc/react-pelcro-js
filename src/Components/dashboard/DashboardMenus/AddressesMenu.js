@@ -36,7 +36,6 @@ export const AddressesMenu = (props) => {
 
 const AddressesItems = (props) => {
   const { t } = useTranslation("dashboard");
-  const { switchView } = usePelcro();
   const [selectedAddressId, setSelectedAddressId] = useState(null);
   const allAddresses = window.Pelcro.user.read().addresses ?? [];
 
@@ -52,10 +51,6 @@ const AddressesItems = (props) => {
 
     return [defaultAddress, ...addressesWithoutDefault];
   };
-
-  if (!getDefaultAddress(allAddresses)) {
-    switchView("address-select");
-  }
 
   const addresses = moveDefaultAddressToStart(allAddresses);
 

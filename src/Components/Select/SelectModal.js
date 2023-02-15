@@ -229,7 +229,8 @@ class SelectModal extends Component {
               {product.description}
             </p>
           </div>
-
+        </div>
+        <div className="plc-mt-auto plc-w-full">
           <div className="plc-mt-3 plc-mb-6">
             {product.plans && (
               <>
@@ -241,9 +242,8 @@ class SelectModal extends Component {
               </>
             )}
           </div>
-        </div>
-        {isPlanMode || (
-          <div className="plc-mt-auto plc-w-full">
+
+          {isPlanMode || (
             <Button
               onClick={productButtonCallback}
               data-key={product.id}
@@ -255,13 +255,18 @@ class SelectModal extends Component {
             >
               {productButtonLabel}
             </Button>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     );
   };
 
   renderProducts = () => {
+    const isPlanMode = Boolean(this.state.mode === "plan");
+    if (isPlanMode) {
+      return this.renderProductTabs();
+    }
+
     const userDidSelectProduct = Boolean(this.state.mode === "plan");
     const productsToShow = userDidSelectProduct
       ? [this.state.product]
@@ -294,7 +299,7 @@ class SelectModal extends Component {
               <button
                 onClick={productButtonCallback}
                 data-key={product.id}
-                className="plc-px-4 plc-py-2 plc-bg-white plc-border plc-border-gray-200 plc-rounded plc-text-gray-600 focus:plc-outline-none plc-whitespace-nowrap"
+                className="plc-px-4 plc-py-2 plc-rounded plc-text-gray-600 focus:plc-outline-none plc-whitespace-nowrap"
               >
                 {product.name}
               </button>
@@ -401,18 +406,20 @@ class SelectModal extends Component {
                 {plan.description}
               </p>
             </div>
-            <div className="plc-pt-4 plc-mb-4 plc-font-semibold pelcro-select-plan-price plc-px-4 plc-text-center plc-flex plc-items-end plc-justify-center">
-              <p className="plc-font-bold plc-text-4xl">
-                {plan.amount_formatted}
-              </p>
-              <span className="plc-text-gray-400 plc-text-xs plc-flex plc-flex-col plc-font-normal">
-                <span className="plc-uppercase">{plan.currency}</span>
-                <span className="plc-capitalize">
-                  / {plan.interval}
-                </span>
-              </span>
-            </div>
             <div className="plc-mt-auto plc-px-4 plc-mb-4">
+              <div className="plc-pt-4 plc-mb-4 plc-font-semibold pelcro-select-plan-price plc-px-4 plc-text-center plc-flex plc-items-end plc-justify-center">
+                <p className="plc-font-bold plc-text-4xl">
+                  {plan.amount_formatted}
+                </p>
+                <span className="plc-text-gray-400 plc-text-xs plc-flex plc-flex-col plc-font-normal">
+                  <span className="plc-uppercase">
+                    {plan.currency}
+                  </span>
+                  <span className="plc-capitalize">
+                    / {plan.interval}
+                  </span>
+                </span>
+              </div>
               <div
                 className={`${
                   this.state?.plan.id === plan.id
@@ -563,7 +570,7 @@ class SelectModal extends Component {
                   {this.renderPlans()}
                 </div>
                 {!disableGifting && (
-                  <div className="plc-flex plc-justify-center plc-mt-8">
+                  <div className="plc-flex plc-justify-center plc-mt-4">
                     <Checkbox
                       onChange={this.onIsGiftChange}
                       checked={this.state.isGift}
