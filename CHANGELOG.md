@@ -1,3 +1,10 @@
+# [4.0.0-alpha.32](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.31...v4.0.0-alpha.32) (2023-02-16)
+
+
+### Bug Fixes
+
+* change some dashboard titles and other enhancements ([959488a](https://github.com/pelcro-inc/react-pelcro-js/commit/959488ade5ac82ad6fe6b405030124e1176a2187))
+
 # [4.0.0-alpha.31](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.30...v4.0.0-alpha.31) (2023-02-16)
 
 
