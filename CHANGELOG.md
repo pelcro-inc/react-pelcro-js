@@ -1,3 +1,10 @@
+# [4.0.0-alpha.31](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.30...v4.0.0-alpha.31) (2023-02-16)
+
+
+### Bug Fixes
+
+* reduce the width of all modal and other enhancements ([9af2edf](https://github.com/pelcro-inc/react-pelcro-js/commit/9af2edff21a2ed9c53e056e9a3a8eb9287831410))
+
 # [4.0.0-alpha.30](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.29...v4.0.0-alpha.30) (2023-02-15)
 
 
