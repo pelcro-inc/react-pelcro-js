@@ -57,7 +57,7 @@ export const FacebookLoginButton = ({
         <button
           type="button"
           onClick={renderProps.onClick}
-          className={`plc-flex plc-items-center plc-justify-center plc-h-12 plc-px-5 plc-text-gray-700 plc-rounded-md pelcro-google-login plc-shadow-md_dark shadow plc-flex-1 plc-bg-white hover:plc-bg-transparent ${className}`}
+          className={`plc-flex plc-items-center plc-justify-center plc-h-12 plc-px-1 plc-text-gray-700 plc-rounded-md pelcro-google-login plc-shadow-md_dark plc-flex-1 plc-bg-white hover:plc-bg-transparent plc-text-sm ${className}`}
         >
           <FacebookLogoIcon
             className={`plc-w-3 plc-h-auto pelcro-facebook-login-icon ${iconClassName}`}

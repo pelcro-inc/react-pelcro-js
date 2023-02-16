@@ -75,7 +75,7 @@ export function RegisterModal(props) {
         return switchToPaymentView();
       }
     }
-    
+
     if (product && !plan) {
       return switchView("plan-select");
     }
@@ -103,7 +103,7 @@ export function RegisterModal(props) {
         <RegisterView {...props} onSuccess={onSuccess} />
       </ModalBody>
       <ModalFooter>
-        <p className="plc-mb-9">
+        <p className="plc-mb-4">
           <span className="plc-font-medium">
             {t("messages.alreadyHaveAccount") + " "}
           </span>

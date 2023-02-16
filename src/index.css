@@ -28,6 +28,7 @@
 @import "./Components/UserUpdate/UserUpdateProfilePic.css";
 @import "./Components/dashboard/DashboardMenus/OrdersMenu.css";
 @import "./Components/Select/SelectModal.css";
+@import "./Components/Login/LoginModal.css";
 @import "./Components/dashboard/Dashboard.css";
 
 /* utilities */

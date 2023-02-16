@@ -47,7 +47,9 @@ export const AddressCreateModal = ({
     >
       <ModalHeader>
         <div className="plc-text-center plc-text-gray-900 pelcro-title-wrapper plc-flex-1 plc-flex plc-flex-col plc-justify-center">
-          <h4>{giftRecipient ? t("titleGifting") : t("title")}</h4>
+          <h4 className="plc-text-2xl plc-font-semibold">
+            {giftRecipient ? t("titleGifting") : t("title")}
+          </h4>
         </div>
       </ModalHeader>
       <ModalBody>
