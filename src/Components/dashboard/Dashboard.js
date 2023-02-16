@@ -282,9 +282,7 @@ class Dashboard extends Component {
         "en-CA"
       ).format(expiryDate);
 
-      return `${this.locale(
-        "labels.until"
-      )} ${formattedExpiryDate}`;
+      return `${this.locale("labels.until")} ${formattedExpiryDate}`;
     }
 
     if (subscription.cancel_at_period_end) {
@@ -555,7 +553,7 @@ class Dashboard extends Component {
             <section className="plc-mt-6 plc-shadow-sm">
               <header className="plc-pl-4 plc-mb-2 sm:plc-pl-8">
                 <p className="plc-font-bold plc-tracking-widest plc-text-gray-500">
-                  {this.locale("labels.profile")}
+                  {this.locale("labels.mySettings")}
                 </p>
               </header>
 
@@ -564,7 +562,7 @@ class Dashboard extends Component {
                 icon={
                   <UserIcon className="plc-w-6 plc-h-6 plc-mr-2" />
                 }
-                title={this.locale("labels.basicData")}
+                title={this.locale("labels.profile")}
                 setActiveDashboardLink={this.setActiveDashboardLink}
                 activeDashboardLink={this.state.activeDashboardLink}
               />
@@ -584,7 +582,7 @@ class Dashboard extends Component {
                 icon={
                   <KeyIcon className="plc-w-6 plc-h-6 plc-mr-2" />
                 }
-                title={"Change password"}
+                title={this.locale("labels.changePassword")}
                 setActiveDashboardLink={this.setActiveDashboardLink}
                 activeDashboardLink={this.state.activeDashboardLink}
               />

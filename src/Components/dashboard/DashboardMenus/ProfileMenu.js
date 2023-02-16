@@ -16,11 +16,9 @@ export const ProfileMenu = (props) => {
     <Card
       id="pelcro-dashboard-profile-menu"
       className="plc-max-w-100% md:plc-max-w-80% plc-m-auto"
-      title={t("labels.basicData")}
+      title={t("labels.profile")}
     >
-      <UserUpdateView
-        onPictureClick={onPictureClick}
-      />
+      <UserUpdateView onPictureClick={onPictureClick} />
     </Card>
   );
 };
