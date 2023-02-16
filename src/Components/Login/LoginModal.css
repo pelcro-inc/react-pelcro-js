@@ -1,0 +1,5 @@
+@layer components {
+  .pelcro-root .paswordlessButton:nth-child(2) {
+    max-width: 50%;
+  }
+}

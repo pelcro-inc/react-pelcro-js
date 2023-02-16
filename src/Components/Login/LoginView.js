@@ -41,7 +41,7 @@ export function LoginView(props) {
               <div>
                 <div className="plc-block sm:plc-flex plc-flex-col sm:plc-flex-row plc-justify-center plc-flex-wrap plc-items-center">
                   <GoogleLoginButton className="plc-block sm:plc-flex plc-w-full sm:plc-w-auto plc-mb-4 sm:plc-mb-0" />
-                  <VerticalSeparator className="plc-hidden sm:plc-inline-grid plc-mx-4 plc-h-8" />
+                  <VerticalSeparator className="plc-hidden sm:plc-inline-grid plc-mx-2 plc-h-8" />
                   <FacebookLoginButton className="plc-block sm:plc-flex plc-w-full sm:plc-w-auto" />
                 </div>
                 <div className="plc-block sm:plc-flex plc-flex-col sm:plc-flex-row plc-justify-center plc-flex-wrap plc-items-center plc-mt-4">
@@ -52,10 +52,10 @@ export function LoginView(props) {
                   />
                   {passwordlessEnabled && (
                     <>
-                      <VerticalSeparator className="plc-hidden sm:plc-inline-grid plc-mx-4 plc-h-8" />
+                      <VerticalSeparator className="plc-hidden sm:plc-inline-grid plc-mx-2 plc-h-8" />
                       <LoginRequestLoginToken
                         onClick={props.onPasswordlessRequest}
-                        className="plc-block sm:plc-flex plc-w-full sm:plc-w-auto"
+                        className="paswordlessButton plc-block sm:plc-flex plc-w-full sm:plc-w-auto"
                       />
                     </>
                   )}

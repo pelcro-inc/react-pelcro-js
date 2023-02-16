@@ -32,7 +32,7 @@ export function LoginModal({ onDisplay, onClose, ...props }) {
 
   const onSuccess = (res) => {
     props.onSuccess?.(res);
-    
+
     if (window.Pelcro.paywall.isArticleRestricted()) {
       initPaywalls();
     }
@@ -44,7 +44,7 @@ export function LoginModal({ onDisplay, onClose, ...props }) {
         return switchToPaymentView();
       }
     }
-    
+
     if (product && !plan) {
       return switchView("plan-select");
     }
@@ -104,7 +104,7 @@ export function LoginModal({ onDisplay, onClose, ...props }) {
         />
       </ModalBody>
       <ModalFooter>
-        <p className="plc-mb-9">
+        <p className="plc-mb-4">
           <span className="plc-font-medium">
             {t("messages.dontHaveAccount") + " "}
           </span>

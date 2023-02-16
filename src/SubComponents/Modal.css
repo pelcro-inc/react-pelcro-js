@@ -9,7 +9,7 @@
   }
 
   .pelcro-root .pelcro-modal {
-    @apply plc-container plc-absolute plc-top-0 plc-flex plc-flex-col plc-items-center plc-max-w-xl plc-bg-white plc-rounded-lg md:plc-mt-8 plc-overflow-hidden;
+    @apply plc-container plc-absolute plc-top-0 plc-flex plc-flex-col plc-items-center plc-max-w-lg plc-bg-white plc-rounded-lg md:plc-mt-8 plc-overflow-hidden;
   }
 
   .pelcro-root .pelcro-modal-content {

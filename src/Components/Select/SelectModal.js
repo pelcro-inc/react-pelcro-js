@@ -230,11 +230,12 @@ class SelectModal extends Component {
             </p>
           </div>
         </div>
+
         <div className="plc-mt-auto plc-w-full">
           <div className="plc-mt-3 plc-mb-6">
             {product.plans && (
               <>
-                <p className="plc-mb-2">
+                <p className="plc-mb-2 plc-text-sm plc-text-gray-400">
                   {this.locale("labels.startingAt")}
                 </p>
 
@@ -402,7 +403,7 @@ class SelectModal extends Component {
               <h4 className="pelcro-select-plan-title plc-font-medium plc-text-xl plc-break-all">
                 {plan.nickname}
               </h4>
-              <p className="plc-text-sm plc-mt-1 pelcro-select-plan-description">
+              <p className="plc-text-sm plc-mt-1 pelcro-select-plan-description plc-text-gray-400">
                 {plan.description}
               </p>
             </div>
