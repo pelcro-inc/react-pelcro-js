@@ -50,7 +50,7 @@ export function Carousel({
     prevArrow: <PrevArrow />,
     initialSlide: 0,
     customPaging: (i) => (
-      <span className="plc-w-3 plc-h-3 plc-rounded-full plc-transition-all plc-bg-primary plc-inline-flex plc-cursor-pointer hover:plc-opacity-30"></span>
+      <span className="plc-w-3 plc-h-3 plc-rounded-full plc-transition-all plc-bg-gray-400 plc-inline-flex plc-cursor-pointer hover:plc-opacity-30"></span>
     ),
     responsive: [
       {
