@@ -21,6 +21,8 @@ import {
   LOADING,
   SET_UPDATED_PRICE,
   SET_TAX_AMOUNT,
+  SET_MONTH,
+  SET_YEAR,
   SUBMIT_PAYMENT,
   HANDLE_PAYPAL_SUBSCRIPTION,
   DISABLE_COUPON_BUTTON,
@@ -99,6 +101,8 @@ const initialState = {
   firstNameError: null,
   lastNameError: null,
   phoneError: null,
+  month: "",
+  year: "",
   alert: {
     type: "error",
     content: ""
@@ -156,6 +160,74 @@ const PaymentMethodContainerWithoutStripe = ({
     dispatch({ type: INIT_CONTAINER });
     updateTotalAmountWithTax();
   }, []);
+
+  /*====== Start Cybersource integration ========*/
+
+  const submitUsingCybersource = () => {
+    
+  }
+
+  const initCybersourceScript = () => {
+    // jwk api call
+    const jwk = { /* jwk fetched on the server side */ };
+
+    // SETUP MICROFORM
+    // FLEX.microform(
+    //   {
+    //     keyId: jwk.kid,
+    //     keystore: jwk,
+    //     container: '#cybersourceCardNumber',
+    //     placeholder: 'Card Number',
+    //     styles: {
+    //       'input': {
+    //         'font-size': '14px',
+    //         'font-family': 'helvetica, tahoma, calibri, sans-serif',
+    //         'color': '#555',
+    //       },
+    //       ':focus': { 'color': 'blue' },
+    //       ':disabled': { 'cursor': 'not-allowed' },
+    //       'valid': { 'color': '#3c763d' },
+    //       'invalid': { 'color': '#a94442' },
+    //     }
+    //   },
+    //   function (setupError, microformInstance) {
+    //     if (setupError) {
+    //       // handle error
+    //       return;
+    //     }
+
+    //     // intercept the form submission and make a tokenize request instead
+    //     payButton.addEventListener('click', function () {
+
+    //       // Send in optional parameters from other parts of your payment form
+    //       var options = {
+    //         // cardExpirationMonth: /* ... */,
+    //         // cardExpirationYear:  /* ... */,
+    //       };
+
+    //       microformInstance.createToken(options, function (err, response) {
+    //         if (err) {
+    //           // handle error
+    //           return;
+    //         }
+
+    //         console.log('Token generated: ');
+    //         console.log(JSON.stringify(response));
+
+    //         // At this point the token may be added to the form
+    //         // as hidden fields and the submission continued
+    //         // form.submit();
+
+    //       });
+    //     });
+
+    //   }
+    // );
+
+  }
+
+  /*====== End Cybersource integration ========*/
+
 
   /*====== Start Tap integration ========*/
   const submitUsingTap = () => {
@@ -755,6 +827,9 @@ const PaymentMethodContainerWithoutStripe = ({
 
   useEffect(() => {
     whenUserReady(() => {
+      console.log(cardProcessor);
+      console.log(selectedPaymentMethodId);
+
       if (cardProcessor === "tap" && !window.Tapjsli) {
         window.Pelcro.helpers.loadSDK(
           "https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.4/bluebird.min.js",
@@ -782,6 +857,30 @@ const PaymentMethodContainerWithoutStripe = ({
       ) {
         initTapScript();
       }
+
+      if (cardProcessor === "cybersource") {
+        if (!window.FLEX) {
+          window.Pelcro.helpers.loadSDK(
+            "https://flex.cybersource.com/cybersource/assets/microform/0.4/flex-microform.min.js",
+            "cybersource-cdn"
+          );
+
+          document
+            .querySelector(
+              'script[src="https://flex.cybersource.com/cybersource/assets/microform/0.4/flex-microform.min.js"]'
+            )
+            .addEventListener("load", () => {
+              initCybersourceScript();
+            });
+
+          return;
+        }
+
+        if (!selectedPaymentMethodId) {
+          initCybersourceScript();
+        }
+      }
+
     });
   }, [selectedPaymentMethodId]);
 
@@ -1825,6 +1924,12 @@ const PaymentMethodContainerWithoutStripe = ({
           );
         case SET_PERCENT_OFF:
           return Update({ ...state, percentOff: action.payload });
+
+        case SET_MONTH:
+          return Update({ ...state, month: action.payload });
+
+        case SET_YEAR:
+          return Update({ ...state, year: action.payload });
 
         case SET_FIRST_NAME:
           return Update({

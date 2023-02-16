@@ -74,5 +74,9 @@ export function getSiteCardProcessor() {
     return "tap";
   }
 
+  if (window.Pelcro.site.read()?.cybersource_gateway_settings) {
+    return "cybersource";
+  }
+
   return "stripe";
 }
