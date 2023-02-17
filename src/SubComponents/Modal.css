@@ -17,7 +17,7 @@
   }
 
   .pelcro-root .pelcro-modal-header {
-    @apply plc-px-8 plc-py-3 plc-min-h-12 plc-relative plc-bg-white plc-border-b-2 plc-flex plc-flex-col;
+    @apply plc-px-12 plc-py-3 plc-min-h-12 plc-relative plc-bg-white plc-border-b-2 plc-flex plc-flex-col;
     border-bottom-width: 1px;
   }
 
