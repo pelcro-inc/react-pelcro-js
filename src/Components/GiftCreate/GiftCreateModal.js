@@ -51,7 +51,7 @@ export const GiftCreateModal = ({
         <GiftCreateView {...otherProps} onSuccess={onSuccess} />
       </ModalBody>
       <ModalFooter>
-        <p className="plc-mb-9">
+        <p className="plc-mb-4">
           <span className="plc-font-medium">
             {t("messages.selectPlan") + " "}
           </span>

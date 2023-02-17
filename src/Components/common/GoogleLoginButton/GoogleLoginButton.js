@@ -7,7 +7,7 @@ import { HANDLE_SOCIAL_LOGIN } from "../../../utils/action-types";
 import { gapi } from "gapi-script";
 
 export const GoogleLoginButton = ({
-  label = "Continue With Google",
+  label = "Google",
   className = "",
   labelClassName = "",
   iconClassName = ""

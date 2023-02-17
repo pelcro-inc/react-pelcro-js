@@ -572,7 +572,7 @@ class Dashboard extends Component {
                 icon={
                   <QrCodeIcon className="plc-w-6 plc-h-6 plc-mr-2" />
                 }
-                title={"My QR code"}
+                title={this.locale("labels.myQRCode")}
                 setActiveDashboardLink={this.setActiveDashboardLink}
                 activeDashboardLink={this.state.activeDashboardLink}
               />

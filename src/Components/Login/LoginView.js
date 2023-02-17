@@ -7,7 +7,6 @@ import { LoginRequestLoginToken } from "./LoginRequestLoginToken";
 import { LoginEmail } from "./LoginEmail";
 import { LoginUsername } from "./LoginUsername";
 import { AlertWithContext } from "../../SubComponents/AlertWithContext";
-import { VerticalSeparator } from "../../SubComponents/VerticalSeparator";
 import { FacebookLoginButton } from "../../Components/common/FacebookLoginButton/FacebookLoginButton";
 import { Link } from "../../SubComponents/Link";
 import { GoogleLoginButton } from "../common/GoogleLoginButton/GoogleLoginButton";
@@ -18,13 +17,17 @@ import { Auth0LoginButton } from "../common/Auth0LoginButton/Auth0LoginButton";
  */
 export function LoginView(props) {
   const { t } = useTranslation("login");
+  const auth0LoginEnabled =
+    window.Pelcro.site.read()?.auth0_client_id;
+
   const socialLoginEnabled =
     window.Pelcro.site.read()?.facebook_app_id ||
     window.Pelcro.site.read()?.google_app_id ||
-    window.Pelcro.site.read()?.auth0_client_id;
+    auth0LoginEnabled;
 
   const passwordlessEnabled =
     window.Pelcro.site.read()?.passwordless_enabled;
+
   const enableLoginWithUsername =
     window.Pelcro?.uiSettings?.enableLoginWithUsername;
 
@@ -39,27 +42,34 @@ export function LoginView(props) {
           {socialLoginEnabled && (
             <div className="plc-my-5">
               <div>
-                <div className="plc-block sm:plc-flex plc-flex-col sm:plc-flex-row plc-justify-center plc-flex-wrap plc-items-center">
-                  <GoogleLoginButton className="plc-block sm:plc-flex plc-w-full sm:plc-w-auto plc-mb-4 sm:plc-mb-0" />
-                  <VerticalSeparator className="plc-hidden sm:plc-inline-grid plc-mx-2 plc-h-8" />
-                  <FacebookLoginButton className="plc-block sm:plc-flex plc-w-full sm:plc-w-auto" />
-                </div>
-                <div className="plc-block sm:plc-flex plc-flex-col sm:plc-flex-row plc-justify-center plc-flex-wrap plc-items-center plc-mt-4">
-                  <Auth0LoginButton
-                    className={`plc-block sm:plc-flex plc-w-full sm:plc-w-auto plc-mb-4 sm:plc-mb-0 ${
-                      passwordlessEnabled ? "plc-flex-1" : "plc-w-1/2"
-                    }`}
-                  />
+                <ul
+                  className={`${
+                    (auth0LoginEnabled && !passwordlessEnabled) ||
+                    (!auth0LoginEnabled && passwordlessEnabled)
+                      ? "threeColumns"
+                      : "twoColumns"
+                  } loginOptions plc-block sm:plc-flex plc-flex-col sm:plc-flex-row plc-justify-center plc-flex-wrap plc-items-center`}
+                >
+                  <li>
+                    <GoogleLoginButton className="plc-flex plc-w-full" />
+                  </li>
+                  <li>
+                    <FacebookLoginButton className="plc-flex plc-w-full" />
+                  </li>
+                  {auth0LoginEnabled && (
+                    <li>
+                      <Auth0LoginButton className="plc-flex plc-w-full" />
+                    </li>
+                  )}
                   {passwordlessEnabled && (
-                    <>
-                      <VerticalSeparator className="plc-hidden sm:plc-inline-grid plc-mx-2 plc-h-8" />
+                    <li>
                       <LoginRequestLoginToken
                         onClick={props.onPasswordlessRequest}
-                        className="paswordlessButton plc-block sm:plc-flex plc-w-full sm:plc-w-auto"
+                        className="plc-flex plc-w-full"
                       />
-                    </>
+                    </li>
                   )}
-                </div>
+                </ul>
               </div>
 
               <div className="plc-flex plc-items-center plc-justify-between plc-mt-5">

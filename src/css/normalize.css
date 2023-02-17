@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap");
+
 @layer base {
   /*! modern-normalize v1.0.0 | MIT License | https://github.com/sindresorhus/modern-normalize */
 
@@ -52,7 +54,7 @@ Improve consistency of default fonts in all browsers. (https://github.com/sindre
 */
 
   .pelcro-root {
-    font-family: system-ui, -apple-system,
+    font-family: "Lato", system-ui, -apple-system,
       /* Firefox supports this but not yet `system-ui` */ "Segoe UI",
       Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji",
       "Segoe UI Emoji";
@@ -104,7 +106,7 @@ Add the correct font weight in Edge and Safari.
   .pelcro-root kbd,
   .pelcro-root samp,
   .pelcro-root pre {
-    font-family: ui-monospace, SFMono-Regular, Consolas,
+    font-family: "Lato", ui-monospace, SFMono-Regular, Consolas,
       "Liberation Mono", Menlo, monospace; /* 1 */
     font-size: 1em; /* 2 */
   }
@@ -322,7 +324,7 @@ Add the correct display in Chrome and Safari.
  */
 
   .pelcro-root {
-    font-family: ui-sans-serif, system-ui, -apple-system,
+    font-family: "Lato", ui-sans-serif, system-ui, -apple-system,
       BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
       "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
       "Segoe UI Symbol", "Noto Color Emoji"; /* 1 */
@@ -453,8 +455,8 @@ Add the correct display in Chrome and Safari.
   .pelcro-root code,
   .pelcro-root kbd,
   .pelcro-root samp {
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-      "Liberation Mono", "Courier New", monospace;
+    font-family: "Lato", ui-monospace, SFMono-Regular, Menlo, Monaco,
+      Consolas, "Liberation Mono", "Courier New", monospace;
   }
 
   /**

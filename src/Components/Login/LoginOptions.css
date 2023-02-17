@@ -1,0 +1,25 @@
+@layer components {
+  .pelcro-root .loginOptions.threeColumns {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .pelcro-root .loginOptions.threeColumns li {
+    flex: 1;
+    min-width: 140px;
+    margin-bottom: 10px;
+  }
+  .pelcro-root .loginOptions.threeColumns li:first-child {
+    margin-right: 10px;
+  }
+  .pelcro-root
+    .loginOptions.threeColumns
+    li:nth-child(2):not(:last-child) {
+    margin-right: 10px;
+  }
+  .pelcro-root .loginOptions.twoColumns {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 10px;
+  }
+}

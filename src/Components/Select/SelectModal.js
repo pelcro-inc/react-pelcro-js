@@ -285,8 +285,8 @@ class SelectModal extends Component {
     const { image, description } = this.state.product;
 
     return (
-      <div className="productTabs">
-        <ul className="tabs plc-flex plc-items-center plc-text-center plc-border-b plc-border-gray-300 plc-mb-4 plc-overflow-x-auto">
+      <div className="productTabs plc-flex plc-flex-col plc-items-center">
+        <ul className="tabs plc-w-full plc-flex plc-items-center plc-text-center plc-border-b plc-border-gray-300 plc-mb-4 plc-overflow-x-auto">
           {this.state.productList.map((product, index) => (
             <li
               key={product.id}
@@ -308,7 +308,7 @@ class SelectModal extends Component {
           ))}
         </ul>
 
-        <div className="selectedProduct plc-flex plc-flex-col plc-items-center plc-justify-center">
+        <div className="selectedProduct plc-flex plc-flex-col plc-items-center plc-justify-center plc-max-w-3xl">
           {image && (
             <figure className="plc-mb-2">
               <img src={image} alt="Product Image" />
@@ -385,7 +385,7 @@ class SelectModal extends Component {
           key={plan.id}
           className={`${
             this.state?.plan.id === plan.id
-              ? "plc-border-2 plc-border-primary-800"
+              ? "plc-border-2 plc-border-primary"
               : "plc-border plc-border-gray-300"
           } plc-h-full plc-flex plc-flex-col plc-items-start plc-text-gray-900 plc-border-solid plc-rounded-md plc-bg-white pelcro-select-plan-wrapper`}
         >
@@ -399,7 +399,7 @@ class SelectModal extends Component {
             data-key={plan.id}
             onChange={this.selectPlan}
           >
-            <div className="plc-p-4 plc-text-center plc-flex plc-flex-col plc-justify-center plc-items-center plc-w-full plc-border-b plc-border-gray-300">
+            <div className="plc-p-4 plc-text-center plc-flex plc-flex-col plc-justify-center plc-items-center plc-w-full">
               <h4 className="pelcro-select-plan-title plc-font-medium plc-text-xl plc-break-all">
                 {plan.nickname}
               </h4>
@@ -407,7 +407,8 @@ class SelectModal extends Component {
                 {plan.description}
               </p>
             </div>
-            <div className="plc-mt-auto plc-px-4 plc-mb-4">
+
+            <div className="plc-mt-auto plc-px-4 plc-mb-4 plc-border-t plc-border-gray-300">
               <div className="plc-pt-4 plc-mb-4 plc-font-semibold pelcro-select-plan-price plc-px-4 plc-text-center plc-flex plc-items-end plc-justify-center">
                 <p className="plc-font-bold plc-text-4xl">
                   {plan.amount_formatted}
@@ -424,9 +425,9 @@ class SelectModal extends Component {
               <div
                 className={`${
                   this.state?.plan.id === plan.id
-                    ? "plc-bg-primary-800 plc-text-white"
+                    ? "plc-bg-primary plc-text-white"
                     : "plc-text-primary-800"
-                } plc-flex plc-items-center plc-justify-center plc-text-center plc-py-2 plc-px-4 plc-w-full plc-border-2 plc-rounded-md plc-border-primary-800`}
+                } plc-flex plc-items-center plc-justify-center plc-text-center plc-py-2 plc-px-4 plc-w-full plc-border-2 plc-rounded-md plc-border-primary`}
               >
                 {this.locale("buttons.select")}
               </div>
@@ -537,7 +538,7 @@ class SelectModal extends Component {
               <button
                 type="button"
                 onClick={this.goBack}
-                className="plc-absolute plc-w-6 plc-text-gray-500 focus:plc-text-black plc-z-max plc-top-1/2 plc-left-5 plc-transform plc--translate-y-1/2 plc-border-0 hover:plc-text-black hover:plc-shadow-none plc-bg-transparent hover:plc-bg-transparent focus:plc-bg-transparent"
+                className="plc-absolute plc-w-6 plc-text-gray-500 focus:plc-text-black plc-z-max plc-top-1/2 plc-left-2 sm:plc-left-5 plc-transform plc--translate-y-1/2 plc-border-0 hover:plc-text-black hover:plc-shadow-none plc-bg-transparent hover:plc-bg-transparent focus:plc-bg-transparent"
               >
                 <ArrowLeft />
               </button>
@@ -585,7 +586,7 @@ class SelectModal extends Component {
                   disabled={this.state.disabled}
                   onClick={this.submitOption}
                   id="pelcro-submit"
-                  className="plc-w-full plc-mt-2"
+                  className="plc-mt-2 plc-w-full plc-max-w-sm plc-ml-auto plc-mr-auto plc-block"
                 >
                   {this.locale("buttons.next")}
                 </Button>
