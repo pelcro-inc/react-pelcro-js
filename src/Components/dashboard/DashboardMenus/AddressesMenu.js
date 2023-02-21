@@ -8,11 +8,22 @@ import { Button } from "../../../SubComponents/Button";
 
 export const AddressesMenu = (props) => {
   const { t } = useTranslation("dashboard");
+  const { switchView, set } = usePelcro();
   const [requestStates, setRequestStates] = useState({
     loading: false,
     success: false,
     failed: false
   });
+
+  const displayAddressCreate = () => {
+    return switchView("address-create");
+  };
+
+  const displayAddressEdit = (e) => {
+    const address = e.currentTarget.dataset.key;
+    set({ addressIdToEdit: address });
+    return switchView("address-edit");
+  };
 
   return (
     <Card
@@ -24,11 +35,11 @@ export const AddressesMenu = (props) => {
       <AddressesItems
         requestStates={requestStates}
         setRequestStates={setRequestStates}
-        displayAddressEdit={props?.displayAddressEdit}
+        displayAddressEdit={displayAddressEdit}
       />
       <AddNew
         title={t("labels.addAddress")}
-        onClick={() => props?.displayAddressCreate()}
+        onClick={displayAddressCreate}
       />
     </Card>
   );

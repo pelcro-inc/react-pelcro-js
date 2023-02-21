@@ -53,3 +53,46 @@ export const getPaymentCardIcon = (name) => {
     )
   );
 };
+
+export const hasInvoices = () => {
+  const invoices =
+    window.Pelcro.invoice
+      .list()
+      ?.filter((invoice) => invoice.total > 0) ?? [];
+  return invoices.length > 0;
+}
+
+export const showNewsletters = () => {
+  const showNewslettersUiSettings =
+    window.Pelcro?.uiSettings?.newsletters?.length > 0 ?? false;
+  return showNewslettersUiSettings;
+}
+
+export const hasDonationSubs = () => {
+  const donations =
+    window.Pelcro.subscription
+      ?.list()
+      ?.filter((sub) => sub.plan.is_donation && !sub.is_gift_donor) ??
+    [];
+
+  const canceledDonations =
+    window.Pelcro.user
+      .read()
+      .expired_subscriptions?.filter(
+        (sub) => sub.plan.is_donation && !sub.is_gift_donor
+      ) ?? [];
+
+  return donations.length > 0 || canceledDonations.length > 0;
+}
+
+export const hasActiveMemberships = () => {
+  return (
+    window.Pelcro.user
+      .read()
+      .memberships?.some(
+        (membership) =>
+          membership.status === "active" &&
+          membership.subscription.ended_at === null
+      ) ?? false
+  );
+}

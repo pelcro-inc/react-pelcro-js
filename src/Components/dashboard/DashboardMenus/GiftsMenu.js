@@ -9,11 +9,15 @@ import { AddNew } from "../AddNew";
 import { Card } from "../Card";
 import { ReactComponent as RefreshIcon } from "../../../assets/refresh.svg";
 import { ReactComponent as PlusIcon } from "../../../assets/plus.svg";
+import { usePelcro } from "../../../hooks/usePelcro";
 
 export const GiftsMenu = (props) => {
   const { t } = useTranslation("dashboard");
+  const { switchView, set } = usePelcro();
   const giftRecipients =
     window.Pelcro.user.read()?.gift_recipients ?? [];
+
+  const setIsRenewingGift = (isRenewingGift) => set({ isRenewingGift });
 
   const renderGiftRecipients = ({ disableSubmit }) => {
     const giftedSubscriptions = giftRecipients
@@ -28,8 +32,8 @@ export const GiftsMenu = (props) => {
           const plan = window.Pelcro.plan.getById(planId);
           props?.setProductAndPlan(product, plan);
           props?.setSubscriptionIdToRenew(recipient.id);
-          props?.setIsRenewingGift(true);
-          props?.setView("plan-select");
+          setIsRenewingGift(true);
+          switchView("plan-select");
         };
 
         return (
