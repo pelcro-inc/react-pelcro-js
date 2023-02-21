@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { notify } from "../../../SubComponents/Notification";
 import { Button } from "../../../SubComponents/Button";
 import { Accordion } from "../Accordion";
@@ -18,9 +18,16 @@ import {
 import { usePelcro } from "../../../hooks/usePelcro";
 import { Card } from "../Card";
 import { AddNew } from "../AddNew";
+import { store } from "../DashboardContainer";
+import { CANCEL_SUBSCRIPTION, REACTIVATE_SUBSCRIPTION, UNSUSPEND_SUBSCRIPTION } from "../../../utils/action-types";
 
 export const SubscriptionsMenu = (props) => {
   const { t } = useTranslation("dashboard");
+  const { switchView } = usePelcro();
+
+  const displayRedeem = () => {
+    return switchView("gift-redeem");
+  };
 
   return (
     <Card
@@ -71,7 +78,7 @@ export const SubscriptionsMenu = (props) => {
                   <GiftIcon className="plc-w-4 plc-h-4 plc-mr-1" />
                 }
                 className="plc-w-full plc-h-8 plc-font-semibold plc-tracking-wider plc-text-gray-900 plc-uppercase plc-rounded-none hover:plc-bg-gray-100"
-                onClick={props.displayRedeem}
+                onClick={displayRedeem}
               >
                 {t("labels.redeemGift")}
               </Button>
@@ -85,17 +92,16 @@ export const SubscriptionsMenu = (props) => {
 
 export const SubscriptionsItems = ({
   onClose,
-  cancelSubscription,
-  unSuspendSubscription,
-  reactivateSubscription,
   setProductAndPlan,
   setSubscriptionIdToRenew,
-  setView,
   getSubscriptionStatus,
-  disableSubmit,
   activeMenu,
   toggleActiveMenu
 }) => {
+  const {
+    state: { disableSubmit },
+    dispatch
+  } = useContext(store);
   const { t } = useTranslation("dashboard");
   const {
     switchView,
@@ -130,7 +136,14 @@ export const SubscriptionsItems = ({
         onClose?.();
         notify.confirm(
           (onSuccess, onFailure) => {
-            cancelSubscription(sub.id, onSuccess, onFailure);
+            dispatch({
+              type: CANCEL_SUBSCRIPTION,
+              payload: {
+                subscription_id: sub.id,
+                onSuccess,
+                onFailure
+              }
+            });
           },
           {
             confirmMessage: t(
@@ -152,7 +165,12 @@ export const SubscriptionsItems = ({
           return switchView("email-verify");
         }
 
-        reactivateSubscription(sub.id);
+        dispatch({
+          type: REACTIVATE_SUBSCRIPTION,
+          payload: {
+            subscription_id: sub.id
+          }
+        });
       };
 
       // Renew click
@@ -165,7 +183,7 @@ export const SubscriptionsItems = ({
 
         setProductAndPlan(product, plan);
         setSubscriptionIdToRenew(sub.id);
-        setView("plan-select");
+        switchView("plan-select");
       };
 
       // Manage members click
@@ -173,7 +191,7 @@ export const SubscriptionsItems = ({
         const subscriptionToManageMembers = sub;
 
         set({ subscriptionToManageMembers });
-        setView("manage-members");
+        switchView("manage-members");
       };
 
       // Suspend click
@@ -182,7 +200,7 @@ export const SubscriptionsItems = ({
           return switchView("email-verify");
         }
         setSubscriptionToSuspend(sub.id);
-        return setView("subscription-suspend");
+        return switchView("subscription-suspend");
       };
 
       // UnSuspend click
@@ -194,7 +212,14 @@ export const SubscriptionsItems = ({
         onClose?.();
         notify.confirm(
           (onSuccess, onFailure) => {
-            unSuspendSubscription(sub.id, onSuccess, onFailure);
+            dispatch({
+              type: UNSUSPEND_SUBSCRIPTION,
+              payload: {
+                subscription_id: sub.id,
+                onSuccess,
+                onFailure
+              }
+            });
           },
           {
             confirmMessage: t(

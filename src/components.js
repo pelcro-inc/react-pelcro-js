@@ -194,7 +194,9 @@ export { PaymentMethodSelectView } from "./Components/PaymentMethodSelect/Paymen
 export { PaymentMethodSelectSubmit } from "./Components/PaymentMethodSelect/PaymentMethodSelectSubmit";
 export { PaymentMethodSelectList } from "./Components/PaymentMethodSelect/PaymentMethodSelectList";
 
-export { DashboardWithHook as Dashboard } from "./Components/dashboard/Dashboard";
+export { Dashboard } from "./Components/dashboard/Dashboard";
+export { DashboardContainer } from "./Components/dashboard/DashboardContainer";
+export { DashboardContent } from "./Components/dashboard/DashboardContent";
 export { DashboardOpenButton } from "./Components/dashboard/DashboardOpenButton";
 
 export { ProfilePicChangeButton } from "./Components/ProfilePicChange/ProfilePicChangeButton";

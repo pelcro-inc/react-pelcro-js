@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import {
   getFormattedPriceByLocal,
@@ -11,16 +11,19 @@ import { Button } from "../../../SubComponents/Button";
 import { usePelcro } from "../../../hooks/usePelcro";
 import { Card } from "../Card";
 import { notify } from "../../../SubComponents/Notification";
+import { store } from "../DashboardContainer";
+import { CANCEL_SUBSCRIPTION, REACTIVATE_SUBSCRIPTION } from "../../../utils/action-types";
 
 export const DonationsMenu = ({
-  reactivateSubscription,
-  disableSubmit,
-  cancelSubscription,
   getSubscriptionStatus,
   onClose
 }) => {
   const { t } = useTranslation("dashboard");
   const { switchView, setSubscriptionToCancel } = usePelcro();
+  const {
+    state: { disableSubmit },
+    dispatch
+  } = useContext(store);
 
   const subscriptions = getDonationSubs()
     .sort((a, b) => a.expires_at - b.expires_at)
@@ -43,7 +46,14 @@ export const DonationsMenu = ({
         onClose?.();
         notify.confirm(
           (onSuccess, onFailure) => {
-            cancelSubscription(sub.id, onSuccess, onFailure);
+            dispatch({
+              type: CANCEL_SUBSCRIPTION,
+              payload: {
+                subscription_id: sub.id,
+                onSuccess,
+                onFailure
+              }
+            });
           },
           {
             confirmMessage: t(
@@ -64,8 +74,13 @@ export const DonationsMenu = ({
         if (userMustVerifyEmail()) {
           return switchView("email-verify");
         }
-
-        reactivateSubscription(sub.id);
+        
+        dispatch({
+          type: REACTIVATE_SUBSCRIPTION,
+          payload: {
+            subscription_id: sub.id
+          }
+        });
       };
 
       return (

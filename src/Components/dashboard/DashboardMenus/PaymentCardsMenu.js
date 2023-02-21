@@ -5,10 +5,16 @@ import { Card } from "../Card";
 import { AddNew } from "../AddNew";
 import { Button } from "../../../SubComponents/Button";
 import { getPaymentCardIcon } from "../utils";
+import { usePelcro } from "../../../hooks/usePelcro";
 
 export const PaymentCardsMenu = (props) => {
   const { t } = useTranslation("dashboard");
+  const { switchView } = usePelcro();
   const source = window.Pelcro.user.read().source;
+
+  const displaySourceCreate = () => {
+    return switchView("payment-method-update");
+  };
 
   return (
     <Card
@@ -18,13 +24,13 @@ export const PaymentCardsMenu = (props) => {
     >
       {source ? (
         <PaymentCardsItems
-          displaySourceCreate={props?.displaySourceCreate}
+          displaySourceCreate={displaySourceCreate}
           source={source}
         />
       ) : (
         <AddNew
           title={t("labels.addCard")}
-          onClick={() => props?.displaySourceCreate()}
+          onClick={displaySourceCreate}
         />
       )}
     </Card>
