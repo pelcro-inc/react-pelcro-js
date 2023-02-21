@@ -1,3 +1,10 @@
+# [4.0.0-alpha.35](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.34...v4.0.0-alpha.35) (2023-02-21)
+
+
+### Bug Fixes
+
+* dashboard container ([#296](https://github.com/pelcro-inc/react-pelcro-js/issues/296)) ([8bd1719](https://github.com/pelcro-inc/react-pelcro-js/commit/8bd17190289058394ffd35475fcbcf57db591735))
+
 # [4.0.0-alpha.34](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.33...v4.0.0-alpha.34) (2023-02-21)
 
 
