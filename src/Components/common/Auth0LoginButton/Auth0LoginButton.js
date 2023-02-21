@@ -5,7 +5,7 @@ import { HANDLE_SOCIAL_LOGIN } from "../../../utils/action-types";
 import { ReactComponent as Auth0LogoIcon } from "../../../assets/auth0-logo.svg";
 
 export const Auth0LoginButton = ({
-  label = "Continue With Auth0",
+  label = "Auth0",
   className = "",
   labelClassName = "",
   iconClassName = ""

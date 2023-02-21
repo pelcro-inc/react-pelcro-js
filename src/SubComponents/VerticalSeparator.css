@@ -1,9 +1,0 @@
-@layer components {
-  .pelcro-root .pelcro-vertical-separator {
-    @apply plc-bg-gray-200 plc-inline-block;
-    width: 1px;
-  }
-  .pelcro-root .pelcro-vertical-separator:first-child {
-    display: none;
-  }
-}

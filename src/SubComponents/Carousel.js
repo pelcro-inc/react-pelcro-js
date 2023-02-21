@@ -5,28 +5,28 @@ import { ReactComponent as ArrowThinLeft } from "../assets/arrow-thin-left.svg";
 
 const NextArrow = ({ onClick, className }) => (
   <button
-    className={`sm:plc-flex plc-hidden plc-text-white plc-w-11 plc-h-11 plc-bg-primary  plc-items-center plc-justify-center plc-rounded-full plc-text-sm plc-absolute plc-top-1/2 plc--right-16 plc-transform plc--translate-y-1/2 plc-border plc-border-primary hover:plc-bg-white hover:plc-text-primary ${className}`}
+    className={`sm:plc-flex plc-hidden plc-text-gray-500 plc-w-11 plc-h-11 plc-items-center plc-justify-center plc-rounded-full plc-text-sm plc-absolute plc-top-1/2 plc--right-12 plc-transform plc--translate-y-1/2 hover:plc-text-gray-900 ${className}`}
     onClick={onClick}
   >
     <ArrowThinRight
       stroke="currentColor"
       aria-hidden="true"
       focusable="false"
-      className="plc-h-5 plc-w-5"
+      className="plc-h-7 plc-w-7"
     />
   </button>
 );
 
 const PrevArrow = ({ onClick, className }) => (
   <button
-    className={`sm:plc-flex plc-hidden plc-text-white plc-w-11 plc-h-11 plc-bg-primary plc-items-center plc-justify-center plc-rounded-full plc-text-sm plc-absolute plc-top-1/2 plc--left-16 plc-transform plc--translate-y-1/2 plc-border plc-border-primary hover:plc-bg-white hover:plc-text-primary ${className}`}
+    className={`sm:plc-flex plc-hidden plc-text-gray-500 plc-w-11 plc-h-11 plc-items-center plc-justify-center plc-rounded-full plc-text-sm plc-absolute plc-top-1/2 plc--left-12 plc-transform plc--translate-y-1/2 hover:plc-text-gray-900 ${className}`}
     onClick={onClick}
   >
     <ArrowThinLeft
       stroke="currentColor"
       aria-hidden="true"
       focusable="false"
-      className="plc-h-5 plc-w-5"
+      className="plc-h-7 plc-w-7"
     />
   </button>
 );
@@ -69,7 +69,7 @@ export function Carousel({
   };
 
   return (
-    <div className="carousel-wrapper plc-relative sm:plc-px-16 plc-px-0">
+    <div className="carousel-wrapper plc-relative sm:plc-px-8 plc-px-0">
       <Slider ref={ref} {...settings}>
         {children}
       </Slider>

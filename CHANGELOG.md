@@ -1,3 +1,10 @@
+# [4.0.0-alpha.33](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.32...v4.0.0-alpha.33) (2023-02-17)
+
+
+### Features
+
+* complete design comments ([ddd8ec1](https://github.com/pelcro-inc/react-pelcro-js/commit/ddd8ec1aa7b921ea2cbe277fd6b02db4c1d30004))
+
 # [4.0.0-alpha.32](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.31...v4.0.0-alpha.32) (2023-02-16)
 
 

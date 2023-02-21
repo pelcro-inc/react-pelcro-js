@@ -7,7 +7,7 @@ import { HANDLE_SOCIAL_LOGIN } from "../../../utils/action-types";
 import { getPageOrDefaultLanguage } from "../../../utils/utils";
 
 export const FacebookLoginButton = ({
-  label = "Continue With Facebook",
+  label = "Facebook",
   className = "",
   labelClassName = "",
   iconClassName = ""
