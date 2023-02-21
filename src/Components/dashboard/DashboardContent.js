@@ -6,23 +6,7 @@ import { ReactComponent as ExitIcon } from "../../assets/exit.svg";
 import { ReactComponent as XIcon } from "../../assets/x-icon.svg";
 import { ReactComponent as CheckMarkIcon } from "../../assets/check-mark.svg";
 import { ReactComponent as ExclamationIcon } from "../../assets/exclamation.svg";
-import { ReactComponent as EditIcon } from "../../assets/edit.svg";
-import { ReactComponent as UserIcon } from "../../assets/user.svg";
-import { ReactComponent as NewsletterIcon } from "../../assets/newsletter.svg";
-import { ReactComponent as RefreshIcon } from "../../assets/refresh.svg";
-import { ReactComponent as InvoiceIcon } from "../../assets/document.svg";
-import { ReactComponent as PaymentCardIcon } from "../../assets/payment-card.svg";
-import { ReactComponent as LocationIcon } from "../../assets/location-pin.svg";
-import { ReactComponent as SubscriptionIcon } from "../../assets/subscription.svg";
-import { ReactComponent as GiftIcon } from "../../assets/gift.svg";
-import { ReactComponent as ShoppingIcon } from "../../assets/shopping.svg";
-import { ReactComponent as BookmarkIcon } from "../../assets/bookmark.svg";
-import { ReactComponent as PlusIcon } from "../../assets/plus.svg";
-import { ReactComponent as KeyIcon } from "../../assets/key.svg";
-import { ReactComponent as DonateIcon } from "../../assets/donate.svg";
-import { ReactComponent as MembershipsIcon } from "../../assets/memberships.svg";
 import userSolidIcon from "../../assets/user-solid.svg";
-import { ReactComponent as QrCodeIcon } from "../../assets/qrcode.svg";
 import { OrdersMenu } from "./DashboardMenus/OrdersMenu";
 import { SavedItemsMenu } from "./DashboardMenus/SavedItemsMenu";
 import { usePelcro } from "../../hooks/usePelcro";
@@ -39,25 +23,8 @@ import { ProfileMenu } from "./DashboardMenus/ProfileMenu";
 import { NewslettersMenu } from "./DashboardMenus/NewslettersMenu";
 import { PasswordChangeMenu } from "./DashboardMenus/PasswordChangeMenu";
 import { store } from "./DashboardContainer";
-import { hasActiveMemberships, hasDonationSubs, hasInvoices, showNewsletters } from "./utils";
 import { CLOSE_DASHBOARD, SET_ACTIVE_DASHBOARD_LINK } from "../../utils/action-types";
-
-const SUB_MENUS = {
-  PROFILE: "profile",
-  QRCODE: "qr-code",
-  PASSWORDCHANGE: "passwordChange",
-  SUBSCRIPTIONS: "subscriptions",
-  DONATIONS: "donations",
-  MEMBERSHIPS: "memberships",
-  NEWSLETTERS: "Newsletters",
-  PAYMENT_CARDS: "payment-cards",
-  ADDRESSES: "addresses",
-  GIFTS: "gifts",
-  ORDERS: "orders",
-  INVOICES: "invoices",
-  LOGOUT: "logout",
-  SAVED_ITEMS: "saved-items"
-};
+import { SUB_MENUS } from "./utils";
 
 export const DashboardContent = (props) => {
 
@@ -320,146 +287,11 @@ export const DashboardContent = (props) => {
               </div>
             </header>
             <section className="plc-mt-6 plc-shadow-sm">
-              <header className="plc-pl-4 plc-mb-2 sm:plc-pl-8">
-                <p className="plc-font-bold plc-tracking-widest plc-text-gray-500">
-                  {t("labels.mySettings")}
-                </p>
-              </header>
-
-              <DashboardLink
-                name={SUB_MENUS.PROFILE}
-                icon={
-                  <UserIcon className="plc-w-6 plc-h-6 plc-mr-2" />
-                }
-                title={t("labels.profile")}
-                setActiveDashboardLink={setActiveDashboardLink}
-                activeDashboardLink={activeDashboardLink}
-              />
-
-              <DashboardLink
-                name={SUB_MENUS.QRCODE}
-                icon={
-                  <QrCodeIcon className="plc-w-6 plc-h-6 plc-mr-2" />
-                }
-                title={"My QR code"}
-                setActiveDashboardLink={setActiveDashboardLink}
-                activeDashboardLink={activeDashboardLink}
-              />
-
-              <DashboardLink
-                name={SUB_MENUS.PASSWORDCHANGE}
-                icon={
-                  <KeyIcon className="plc-w-6 plc-h-6 plc-mr-2" />
-                }
-                title={t("labels.changePassword")}
-                setActiveDashboardLink={setActiveDashboardLink}
-                activeDashboardLink={activeDashboardLink}
-              />
-
-              <DashboardLink
-                name={SUB_MENUS.SAVED_ITEMS}
-                icon={<BookmarkIcon />}
-                title={t("labels.savedItems.label")}
-                setActiveDashboardLink={setActiveDashboardLink}
-                activeDashboardLink={activeDashboardLink}
-              />
-
-              <header className="plc-pl-4 plc-mb-2 sm:plc-pl-8">
-                <p className="plc-font-bold plc-tracking-widest plc-text-gray-500">
-                  {t("labels.accountSettings")}
-                </p>
-              </header>
-
-              <DashboardLink
-                name={SUB_MENUS.PAYMENT_CARDS}
-                icon={<PaymentCardIcon />}
-                title={t("labels.paymentSource")}
-                setActiveDashboardLink={setActiveDashboardLink}
-                activeDashboardLink={activeDashboardLink}
-              />
-
-              <DashboardLink
-                name={SUB_MENUS.ADDRESSES}
-                icon={<LocationIcon />}
-                title={t("labels.addresses")}
-                setActiveDashboardLink={setActiveDashboardLink}
-                activeDashboardLink={activeDashboardLink}
-              />
-
-              <header className="plc-pl-4 plc-my-2 sm:plc-pl-8">
-                <p className="plc-font-bold plc-tracking-widest plc-text-gray-500">
-                  {t("labels.purchases")}
-                </p>
-              </header>
-
-              <DashboardLink
-                name={SUB_MENUS.SUBSCRIPTIONS}
-                icon={
-                  <SubscriptionIcon className="plc-w-10 plc-h-10 plc-pt-2 plc-pr-1 plc--ml-2" />
-                }
-                title={t("labels.subscriptions")}
-                setActiveDashboardLink={setActiveDashboardLink}
-                activeDashboardLink={activeDashboardLink}
-              />
-
-              <DashboardLink
-                show={showNewsletters()}
-                name={SUB_MENUS.NEWSLETTERS}
-                icon={
-                  <NewsletterIcon className="plc-transform plc--translate-x-1 plc-scale-105 plc-w-7 plc-h-8 plc-mr-1 plc-pt-1" />
-                }
-                title={t("labels.Newsletters")}
-                setActiveDashboardLink={setActiveDashboardLink}
-                activeDashboardLink={activeDashboardLink}
-              />
-
-              <DashboardLink
-                show={hasActiveMemberships()}
-                name={SUB_MENUS.MEMBERSHIPS}
-                icon={
-                  <MembershipsIcon className="plc-transform plc-scale-120 plc-w-7 plc-h-8 plc-mr-1 plc-pt-1" />
-                }
-                title={t("labels.memberships")}
-                setActiveDashboardLink={setActiveDashboardLink}
-                activeDashboardLink={activeDashboardLink}
-              />
-
-              <DashboardLink
-                show={hasDonationSubs()}
-                name={SUB_MENUS.DONATIONS}
-                icon={
-                  <DonateIcon className="plc-transform plc-scale-120 plc-w-7 plc-h-8 plc-mr-1 plc-pt-1" />
-                }
-                title={t("labels.donations")}
-                setActiveDashboardLink={setActiveDashboardLink}
-                activeDashboardLink={activeDashboardLink}
-              />
-
-              <DashboardLink
-                name={SUB_MENUS.GIFTS}
-                icon={<GiftIcon />}
-                title={t("labels.gifts")}
-                setActiveDashboardLink={setActiveDashboardLink}
-                activeDashboardLink={activeDashboardLink}
-              />
-
-              <DashboardLink
-                show={window.Pelcro.site.read().ecommerce_enabled}
-                name={SUB_MENUS.ORDERS}
-                icon={<ShoppingIcon />}
-                title={t("labels.orders.label")}
-                setActiveDashboardLink={setActiveDashboardLink}
-                activeDashboardLink={activeDashboardLink}
-              />
-
-              <DashboardLink
-                show={hasInvoices()}
-                name={SUB_MENUS.INVOICES}
-                icon={<InvoiceIcon />}
-                title={t("labels.invoices")}
-                setActiveDashboardLink={setActiveDashboardLink}
-                activeDashboardLink={activeDashboardLink}
-              />
+              {props?.children?.length
+                ? props?.children.map((child, i) =>
+                    React.cloneElement(child, { store, key: i })
+                  )
+                : React.cloneElement(props?.children, { store })}
             </section>
             <DashboardLink
               name={SUB_MENUS.LOGOUT}
@@ -481,20 +313,19 @@ export const DashboardContent = (props) => {
             {activeDashboardLink === SUB_MENUS.QRCODE && (
               <QRCodeMenu />
             )}
-            {activeDashboardLink ===
-              SUB_MENUS.PASSWORDCHANGE && <PasswordChangeMenu />}
-            {activeDashboardLink ===
-              SUB_MENUS.SAVED_ITEMS && <SavedItemsMenu />}
-            {activeDashboardLink ===
-              SUB_MENUS.PAYMENT_CARDS && (
+            {activeDashboardLink === SUB_MENUS.PASSWORDCHANGE && (
+              <PasswordChangeMenu />
+            )}
+            {activeDashboardLink === SUB_MENUS.SAVED_ITEMS && (
+              <SavedItemsMenu />
+            )}
+            {activeDashboardLink === SUB_MENUS.PAYMENT_CARDS && (
               <PaymentCardsMenu />
             )}
-            {activeDashboardLink ===
-              SUB_MENUS.ADDRESSES && (
+            {activeDashboardLink === SUB_MENUS.ADDRESSES && (
               <AddressesMenu />
             )}
-            {activeDashboardLink ===
-              SUB_MENUS.SUBSCRIPTIONS && (
+            {activeDashboardLink === SUB_MENUS.SUBSCRIPTIONS && (
               <SubscriptionsMenu
                 displayProductSelect={displayProductSelect}
                 setProductAndPlan={setProductAndPlan}
@@ -502,16 +333,15 @@ export const DashboardContent = (props) => {
                 getSubscriptionStatus={getSubscriptionStatus}
               />
             )}
-            {activeDashboardLink ===
-              SUB_MENUS.MEMBERSHIPS && (
+            {activeDashboardLink === SUB_MENUS.MEMBERSHIPS && (
               <MembershipsMenu
                 getSubscriptionStatus={getSubscriptionStatus}
               />
             )}
-            {activeDashboardLink ===
-              SUB_MENUS.NEWSLETTERS && <NewslettersMenu />}
-            {activeDashboardLink ===
-              SUB_MENUS.DONATIONS && (
+            {activeDashboardLink === SUB_MENUS.NEWSLETTERS && (
+              <NewslettersMenu />
+            )}
+            {activeDashboardLink === SUB_MENUS.DONATIONS && (
               <DonationsMenu
                 getSubscriptionStatus={getSubscriptionStatus}
               />
@@ -528,8 +358,9 @@ export const DashboardContent = (props) => {
             {activeDashboardLink === SUB_MENUS.ORDERS && (
               <OrdersMenu />
             )}
-            {activeDashboardLink ===
-              SUB_MENUS.INVOICES && <InvoicesMenu />}
+            {activeDashboardLink === SUB_MENUS.INVOICES && (
+              <InvoicesMenu />
+            )}
             {activeDashboardLink === SUB_MENUS.LOGOUT && logout()}
 
             <Button

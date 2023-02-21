@@ -58,7 +58,7 @@ export { SubscriptionCreateFreePlanButton } from "./Components/SubscriptionCreat
 export { SubscriptionCreateView } from "./Components/SubscriptionCreate/SubscriptionCreateView";
 export { SubscriptionCreateModal } from "./Components/SubscriptionCreate/SubscriptionCreateModal";
 
-export { SubscriptionManageMembersButton } from "./Components/SubscriptionManageMembers/SubscriptionManageMembersButton"
+export { SubscriptionManageMembersButton } from "./Components/SubscriptionManageMembers/SubscriptionManageMembersButton";
 export { SubscriptionManageMembersEmails } from "./Components/SubscriptionManageMembers/SubscriptionManageMembersEmails";
 export { SubscriptionManageMembersList } from "./Components/SubscriptionManageMembers/SubscriptionManageMembersList";
 export { SubscriptionManageMembersView } from "./Components/SubscriptionManageMembers/SubscriptionManageMembersView";
@@ -201,19 +201,21 @@ export { DashboardOpenButton } from "./Components/dashboard/DashboardOpenButton"
 export { Card } from "./Components/dashboard/Card";
 export { AddNew } from "./Components/dashboard/AddNew";
 export { DashboardLink } from "./Components/dashboard/DashboardLink";
-export { AddressesMenu } from "./Components/dashboard/DashboardMenus/AddressesMenu";
-export { DonationsMenu } from "./Components/dashboard/DashboardMenus/DonationsMenu";
-export { GiftsMenu } from "./Components/dashboard/DashboardMenus/GiftsMenu";
-export { InvoicesMenu } from "./Components/dashboard/DashboardMenus/InvoicesMenu";
-export { MembershipsMenu } from "./Components/dashboard/DashboardMenus/MembershipsMenu";
-export { NewslettersMenu } from "./Components/dashboard/DashboardMenus/NewslettersMenu";
-export { OrderItems } from "./Components/dashboard/DashboardMenus/OrdersMenu";
-export { PasswordChangeMenu } from "./Components/dashboard/DashboardMenus/PasswordChangeMenu";
-export { PaymentCardsMenu } from "./Components/dashboard/DashboardMenus/PaymentCardsMenu";
-export { ProfileMenu } from "./Components/dashboard/DashboardMenus/ProfileMenu";
-export { QRCodeMenu } from "./Components/dashboard/DashboardMenus/QRCodeMenu";
-export { SavedItems } from "./Components/dashboard/DashboardMenus/SavedItemsMenu";
-export { SubscriptionsItems } from "./Components/dashboard/DashboardMenus/SubsMenu";
+export { DashboardHeading } from "./Components/dashboard/DashboardHeading";
+
+export { DashboardAddresses } from "./Components/dashboard/DashboardLinks/DashboardAddresses";
+export { DashboardDonations } from "./Components/dashboard/DashboardLinks/DashboardDonations";
+export { DashboardGifts } from "./Components/dashboard/DashboardLinks/DashboardGifts";
+export { DashboardInvoices } from "./Components/dashboard/DashboardLinks/DashboardInvoices";
+export { DashboardMemberships } from "./Components/dashboard/DashboardLinks/DashboardMemberships";
+export { DashboardNewsletters } from "./Components/dashboard/DashboardLinks/DashboardNewsletters";
+export { DashboardOrders } from "./Components/dashboard/DashboardLinks/DashboardOrders";
+export { DashboardPasswordChange } from "./Components/dashboard/DashboardLinks/DashboardPasswordChange";
+export { DashboardPaymentCards } from "./Components/dashboard/DashboardLinks/DashboardPaymentCards";
+export { DashboardProfile } from "./Components/dashboard/DashboardLinks/DashboardProfile";
+export { DashboardQRCode } from "./Components/dashboard/DashboardLinks/DashboardQRCode";
+export { DashboardSavedItems } from "./Components/dashboard/DashboardLinks/DashboardSavedItems";
+export { DashboardSubscriptions } from "./Components/dashboard/DashboardLinks/DashboardSubscriptions";
 
 export { ProfilePicChangeButton } from "./Components/ProfilePicChange/ProfilePicChangeButton";
 export { ProfilePicChangeContainer } from "./Components/ProfilePicChange/ProfilePicChangeContainer";

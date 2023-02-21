@@ -1,5 +1,22 @@
 import React from "react";
 
+export const SUB_MENUS = {
+  PROFILE: "profile",
+  QRCODE: "qr-code",
+  PASSWORDCHANGE: "passwordChange",
+  SUBSCRIPTIONS: "subscriptions",
+  DONATIONS: "donations",
+  MEMBERSHIPS: "memberships",
+  NEWSLETTERS: "Newsletters",
+  PAYMENT_CARDS: "payment-cards",
+  ADDRESSES: "addresses",
+  GIFTS: "gifts",
+  ORDERS: "orders",
+  INVOICES: "invoices",
+  LOGOUT: "logout",
+  SAVED_ITEMS: "saved-items"
+};
+
 export const getPaymentCardIcon = (name) => {
   const icons = {
     visa: (
@@ -60,13 +77,13 @@ export const hasInvoices = () => {
       .list()
       ?.filter((invoice) => invoice.total > 0) ?? [];
   return invoices.length > 0;
-}
+};
 
 export const showNewsletters = () => {
   const showNewslettersUiSettings =
     window.Pelcro?.uiSettings?.newsletters?.length > 0 ?? false;
   return showNewslettersUiSettings;
-}
+};
 
 export const hasDonationSubs = () => {
   const donations =
@@ -83,7 +100,7 @@ export const hasDonationSubs = () => {
       ) ?? [];
 
   return donations.length > 0 || canceledDonations.length > 0;
-}
+};
 
 export const hasActiveMemberships = () => {
   return (
@@ -95,4 +112,4 @@ export const hasActiveMemberships = () => {
           membership.subscription.ended_at === null
       ) ?? false
   );
-}
+};
