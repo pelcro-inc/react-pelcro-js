@@ -58,7 +58,7 @@ export { SubscriptionCreateFreePlanButton } from "./Components/SubscriptionCreat
 export { SubscriptionCreateView } from "./Components/SubscriptionCreate/SubscriptionCreateView";
 export { SubscriptionCreateModal } from "./Components/SubscriptionCreate/SubscriptionCreateModal";
 
-export { SubscriptionManageMembersButton } from "./Components/SubscriptionManageMembers/SubscriptionManageMembersButton"
+export { SubscriptionManageMembersButton } from "./Components/SubscriptionManageMembers/SubscriptionManageMembersButton";
 export { SubscriptionManageMembersEmails } from "./Components/SubscriptionManageMembers/SubscriptionManageMembersEmails";
 export { SubscriptionManageMembersList } from "./Components/SubscriptionManageMembers/SubscriptionManageMembersList";
 export { SubscriptionManageMembersView } from "./Components/SubscriptionManageMembers/SubscriptionManageMembersView";
@@ -201,6 +201,22 @@ export { DashboardOpenButton } from "./Components/dashboard/DashboardOpenButton"
 export { Card } from "./Components/dashboard/Card";
 export { AddNew } from "./Components/dashboard/AddNew";
 export { DashboardLink } from "./Components/dashboard/DashboardLink";
+export { DashboardHeading } from "./Components/dashboard/DashboardHeading";
+
+export { DashboardAddresses } from "./Components/dashboard/DashboardLinks/DashboardAddresses";
+export { DashboardDonations } from "./Components/dashboard/DashboardLinks/DashboardDonations";
+export { DashboardGifts } from "./Components/dashboard/DashboardLinks/DashboardGifts";
+export { DashboardInvoices } from "./Components/dashboard/DashboardLinks/DashboardInvoices";
+export { DashboardMemberships } from "./Components/dashboard/DashboardLinks/DashboardMemberships";
+export { DashboardNewsletters } from "./Components/dashboard/DashboardLinks/DashboardNewsletters";
+export { DashboardOrders } from "./Components/dashboard/DashboardLinks/DashboardOrders";
+export { DashboardPasswordChange } from "./Components/dashboard/DashboardLinks/DashboardPasswordChange";
+export { DashboardPaymentCards } from "./Components/dashboard/DashboardLinks/DashboardPaymentCards";
+export { DashboardProfile } from "./Components/dashboard/DashboardLinks/DashboardProfile";
+export { DashboardQRCode } from "./Components/dashboard/DashboardLinks/DashboardQRCode";
+export { DashboardSavedItems } from "./Components/dashboard/DashboardLinks/DashboardSavedItems";
+export { DashboardSubscriptions } from "./Components/dashboard/DashboardLinks/DashboardSubscriptions";
+
 export { AddressesMenu } from "./Components/dashboard/DashboardMenus/AddressesMenu";
 export { DonationsMenu } from "./Components/dashboard/DashboardMenus/DonationsMenu";
 export { GiftsMenu } from "./Components/dashboard/DashboardMenus/GiftsMenu";
