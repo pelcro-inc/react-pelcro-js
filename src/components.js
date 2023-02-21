@@ -217,20 +217,6 @@ export { DashboardQRCode } from "./Components/dashboard/DashboardLinks/Dashboard
 export { DashboardSavedItems } from "./Components/dashboard/DashboardLinks/DashboardSavedItems";
 export { DashboardSubscriptions } from "./Components/dashboard/DashboardLinks/DashboardSubscriptions";
 
-export { AddressesMenu } from "./Components/dashboard/DashboardMenus/AddressesMenu";
-export { DonationsMenu } from "./Components/dashboard/DashboardMenus/DonationsMenu";
-export { GiftsMenu } from "./Components/dashboard/DashboardMenus/GiftsMenu";
-export { InvoicesMenu } from "./Components/dashboard/DashboardMenus/InvoicesMenu";
-export { MembershipsMenu } from "./Components/dashboard/DashboardMenus/MembershipsMenu";
-export { NewslettersMenu } from "./Components/dashboard/DashboardMenus/NewslettersMenu";
-export { OrderItems } from "./Components/dashboard/DashboardMenus/OrdersMenu";
-export { PasswordChangeMenu } from "./Components/dashboard/DashboardMenus/PasswordChangeMenu";
-export { PaymentCardsMenu } from "./Components/dashboard/DashboardMenus/PaymentCardsMenu";
-export { ProfileMenu } from "./Components/dashboard/DashboardMenus/ProfileMenu";
-export { QRCodeMenu } from "./Components/dashboard/DashboardMenus/QRCodeMenu";
-export { SavedItems } from "./Components/dashboard/DashboardMenus/SavedItemsMenu";
-export { SubscriptionsItems } from "./Components/dashboard/DashboardMenus/SubsMenu";
-
 export { ProfilePicChangeButton } from "./Components/ProfilePicChange/ProfilePicChangeButton";
 export { ProfilePicChangeContainer } from "./Components/ProfilePicChange/ProfilePicChangeContainer";
 export { ProfilePicChangeCropper } from "./Components/ProfilePicChange/ProfilePicChangeCropper";
