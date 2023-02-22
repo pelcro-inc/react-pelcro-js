@@ -123,6 +123,30 @@ class SelectModal extends Component {
       !document.querySelector("#pelcro-selection-view") ||
       !document.querySelector(".pelcro-select-product-wrapper")
     ) {
+      const userCurrency = window.Pelcro?.user?.read().currency;
+      const userCountry = window.Pelcro?.user?.location.countryCode;
+      const userLanguage = window.Pelcro?.user?.read().language;
+
+      const productsWithPlansCountries = window.Pelcro?.site
+        ?.read()
+        .products.filter((product) => {
+          const filteredPlans = product.plans.filter(
+            (plan) => plan.countries && plan.countries.length > 0
+          );
+          if (filteredPlans.length) {
+            return product;
+          }
+        });
+
+      const currencyMismatch = productsWithPlansCountries.length
+        ? productsWithPlansCountries.filter((product) => {
+            const filteredPlans = product.plans.filter((plan) =>
+              plan.countries?.includes(userCountry)
+            );
+            if (filteredPlans.length) return filteredPlans;
+          }).length === 0
+        : false;
+
       notifyBugsnag(() => {
         Bugsnag.notify("SelectModal - No data viewed", (event) => {
           event.addMetadata("MetaData", {
@@ -130,39 +154,27 @@ class SelectModal extends Component {
             user: window.Pelcro?.user?.read(),
             uiVersion: window.Pelcro?.uiSettings?.uiVersion,
             environment: window.Pelcro?.environment,
-            userCurrency: window.Pelcro?.user?.read().currency,
-            userCountry: window.Pelcro?.user?.location.countryCode,
-            userLanguage: window.Pelcro?.user?.read().language,
-            siteLanguage: window.Pelcro?.helpers?.getHtmlLanguageAttribute(),
-            currenciesFromPlans: [
-              ...new Set(
-                window.Pelcro?.site
-                  ?.read()
-                  .products.map((product) => {
-                    const filteredPlans = product.plans.map(
-                      (plan) => {
-                        return plan.currency;
-                      }
-                    );
-                    return filteredPlans;
-                  })
-                  .flat()
-              )
-            ],
-            countriesFromPlans: window.Pelcro?.site
-              ?.read()
-              .products.map((product) => {
-                const filteredPlans = product.plans.map((ss) => {
-                  return ss.countries;
-                });
-                return filteredPlans;
-              })
-              .flat(),
-            languagesFromProducts: window.Pelcro?.site
-              ?.read()
-              .products.map((product) => {
-                return product.language;
-              })
+            userCurrency: userCurrency,
+            userCountry: userCountry,
+            userLanguage: userLanguage,
+            siteLanguage:
+              window.Pelcro?.helpers?.getHtmlLanguageAttribute(),
+            currency_mismatch:
+              window.Pelcro?.site
+                ?.read()
+                .products.filter((product) => {
+                  const filteredPlans = product.plans.find(
+                    (plan) => plan.currency === userCurrency
+                  );
+                  if (filteredPlans) return filteredPlans;
+                }).length === 0,
+            country_restrictions: currencyMismatch,
+            language_mismatch:
+              window.Pelcro?.site
+                ?.read()
+                .products.filter(
+                  (product) => product.language === userLanguage
+                ).length === 0
           });
         });
       });
