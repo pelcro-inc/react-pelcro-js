@@ -129,7 +129,40 @@ class SelectModal extends Component {
             site: window.Pelcro?.site?.read(),
             user: window.Pelcro?.user?.read(),
             uiVersion: window.Pelcro?.uiSettings?.uiVersion,
-            environment: window.Pelcro?.environment
+            environment: window.Pelcro?.environment,
+            userCurrency: window.Pelcro?.user?.read().currency,
+            userCountry: window.Pelcro?.user?.location.countryCode,
+            userLanguage: window.Pelcro?.user?.read().language,
+            siteLanguage: window.Pelcro?.helpers?.getHtmlLanguageAttribute(),
+            currenciesFromPlans: [
+              ...new Set(
+                window.Pelcro?.site
+                  ?.read()
+                  .products.map((product) => {
+                    const filteredPlans = product.plans.map(
+                      (plan) => {
+                        return plan.currency;
+                      }
+                    );
+                    return filteredPlans;
+                  })
+                  .flat()
+              )
+            ],
+            countriesFromPlans: window.Pelcro?.site
+              ?.read()
+              .products.map((product) => {
+                const filteredPlans = product.plans.map((ss) => {
+                  return ss.countries;
+                });
+                return filteredPlans;
+              })
+              .flat(),
+            languagesFromProducts: window.Pelcro?.site
+              ?.read()
+              .products.map((product) => {
+                return product.language;
+              })
           });
         });
       });
