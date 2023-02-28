@@ -37,6 +37,7 @@ import { SubscriptionsMenu } from "./DashboardMenus/SubsMenu";
 import { DonationsMenu } from "./DashboardMenus/DonationsMenu";
 import { InvoicesMenu } from "./DashboardMenus/InvoicesMenu";
 import { MembershipsMenu } from "./DashboardMenus/MembershipsMenu";
+import { notify } from "../../SubComponents/Notification";
 
 const SUB_MENUS = {
   PROFILE: "profile",
@@ -251,6 +252,20 @@ class Dashboard extends Component {
       return `${this.locale("labels.status.incomplete")}`;
     }
 
+    if (subscription.status === "extended") {
+      // DateTime from BE is missing 3 zeros so we add them before instancing a date
+      const expiryDate = new Date(
+        Number(`${subscription.end_date}000`)
+      );
+      const formattedExpiryDate = new Intl.DateTimeFormat(
+        "en-CA"
+      ).format(expiryDate);
+
+      return `${this.locale(
+        "labels.until"
+      )} ${formattedExpiryDate}`;
+    }
+
     if (subscription.cancel_at_period_end) {
       // DateTime from BE is missing 3 zeros so we add them before instancing a date
       const expiryDate = new Date(
@@ -287,6 +302,10 @@ class Dashboard extends Component {
       (err, res) => {
         this.setState({ disableSubmit: false });
         this.props.onClose();
+        if (err) {
+          return notify.error(this.locale("messages.subReactivation.error"));
+        }
+        return notify.success(this.locale("messages.subReactivation.success"));
       }
     );
   };

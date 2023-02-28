@@ -55,6 +55,7 @@
     "paymentSource": "Datos de pago",
     "actions": "Acciones",
     "expiresOn": "Finaliza",
+    "until": "Hasta que",
     "startsOn": "Inicia",
     "startDate": "Fecha de inicio",
     "renewsOn": "Renovación",
@@ -92,6 +93,10 @@
       "loading": "Cancelando tu suscripción",
       "success": "La suscripción se canceló con éxito",
       "error": "Error al cancelar tu suscripción"
+    },
+    "subReactivation": {
+      "success": "La suscripción se reactivó con éxito",
+      "error": "Error al reactivar su suscripción"
     },
     "subUnSuspend": {
       "isSureToUnSuspend": "¿Estás seguro de que quieres reanudar tu suscripción?",

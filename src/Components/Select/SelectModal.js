@@ -13,7 +13,10 @@ import { Button } from "../../SubComponents/Button";
 import { Checkbox } from "../../SubComponents/Checkbox";
 import { Radio } from "../../SubComponents/Radio";
 import { usePelcro } from "../../hooks/usePelcro";
-import { getEntitlementsFromElem } from "../../utils/utils";
+import {
+  getEntitlementsFromElem,
+  notifyBugsnag
+} from "../../utils/utils";
 
 /**
  *
@@ -111,10 +114,72 @@ class SelectModal extends Component {
       this.state.productList.length === 0 &&
       !window.Pelcro.user.isAuthenticated()
     ) {
-      this.props.setView('register');
+      this.props.setView("register");
     }
 
     document.addEventListener("keydown", this.handleSubmit);
+
+    if (
+      !document.querySelector("#pelcro-selection-view") ||
+      !document.querySelector(".pelcro-select-product-wrapper")
+    ) {
+      const userCurrency = window.Pelcro?.user?.read().currency;
+      const userCountry = window.Pelcro?.user?.location.countryCode;
+      const userLanguage = window.Pelcro?.user?.read().language;
+
+      const productsWithPlansCountries = window.Pelcro?.site
+        ?.read()
+        .products.filter((product) => {
+          const filteredPlans = product.plans.filter(
+            (plan) => plan.countries && plan.countries.length > 0
+          );
+          if (filteredPlans.length) {
+            return product;
+          }
+        });
+
+      const currencyMismatch = productsWithPlansCountries.length
+        ? productsWithPlansCountries.filter((product) => {
+            const filteredPlans = product.plans.filter((plan) =>
+              plan.countries?.includes(userCountry)
+            );
+            if (filteredPlans.length) return filteredPlans;
+          }).length === 0
+        : false;
+
+      notifyBugsnag(() => {
+        Bugsnag.notify("SelectModal - No data viewed", (event) => {
+          event.addMetadata("MetaData", {
+            site: window.Pelcro?.site?.read(),
+            user: window.Pelcro?.user?.read(),
+            uiVersion: window.Pelcro?.uiSettings?.uiVersion,
+            environment: window.Pelcro?.environment,
+            userCurrency: userCurrency,
+            userCountry: userCountry,
+            userLanguage: userLanguage,
+            siteLanguage:
+              window.Pelcro?.helpers?.getHtmlLanguageAttribute(),
+            currency_mismatch:
+              window.Pelcro?.site
+                ?.read()
+                .products.filter((product) => {
+                  const filteredPlans = product.plans.find(
+                    (plan) => plan.currency === userCurrency
+                  );
+                  if (filteredPlans) return filteredPlans;
+                }).length === 0,
+            country_restrictions: currencyMismatch,
+            language_mismatch:
+              window.Pelcro?.site
+                ?.read()
+                .products.filter(
+                  (product) => product.language === userLanguage
+                ).length === 0
+          });
+        });
+      });
+      console.log("bugsnag Triggered");
+    }
   };
 
   componentWillUnmount = () => {
