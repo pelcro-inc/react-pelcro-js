@@ -758,7 +758,6 @@ const PaymentMethodContainerWithoutStripe = ({
     whenUserReady(() => {
       if (skipPayment && plan?.amount === 0) return;
       if (cardProcessor === "tap" && !window.Tapjsli) {
-        debugger;
         window.Pelcro.helpers.loadSDK(
           "https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.4/bluebird.min.js",
           "tap-bluebird"
