@@ -158,111 +158,114 @@ const PaymentMethodContainerWithoutStripe = ({
   }, []);
 
   /*====== Start Tap integration ========*/
-  function createNewTapCard(gatewayToken) {
-    // window.Pelcro.payment.verify(
-    //   {
-    //     auth_token: window.Pelcro.user.read().auth_token,
-    //     first_name:
-    //       window.Pelcro.user.read().first_name || state.firstName,
-    //     last_name:
-    //       window.Pelcro.user.read().last_name || state.lastName,
-    //     phone: window.Pelcro.user.read().phone || state.phone,
-    //     site_id: window.Pelcro.siteid,
-    //     currency:
-    //       plan?.currency ||
-    //       invoice?.currency ||
-    //       window.Pelcro.site.read().default_currency,
-    //     tap_token: gatewayToken,
-    //     redirect_url: `${
-    //       window.Pelcro.environment.domain
-    //     }/webhook/tap/callback/3dsecure?auth_token=${
-    //       window.Pelcro.user.read().auth_token
-    //     }`
-    //   },
-    //   (err, res) => {
-    //     if (err) {
-    //       // Inform the user if there was an error
-    //       onFailure(err);
-    //       dispatch({ type: DISABLE_SUBMIT, payload: false });
-    //       dispatch({ type: LOADING, payload: false });
-    //       return dispatch({
-    //         type: SHOW_ALERT,
-    //         payload: {
-    //           type: "error",
-    //           content: getErrorMessages(err)
-    //         }
-    //       });
-    //     } else {
-    //       toggleAuthenticationPendingView(true, res);
+  function createNewTapCard(gatewayToken, funding = null) {
+    window.Pelcro.source.create(
+      {
+        auth_token: window.Pelcro.user.read().auth_token,
+        token: gatewayToken,
+        gateway: "tap"
+      },
+      (err, res) => {
+        
+        if (err) {
+          dispatch({ type: DISABLE_SUBMIT, payload: false });
+          dispatch({ type: LOADING, payload: false });
+          onFailure(err);
+          return dispatch({
+            type: SHOW_ALERT,
+            payload: {
+              type: "error",
+              content: getErrorMessages(err)
+            }
+          });
+        }
 
-    //       const listenFor3DSecureCompletionMessage = () => {
-    //         const retrieveSourceInfoFromIframe = (event) => {
-    //           const { data } = event;
-    //           if (data.message === "3DS-authentication-complete") {
-    //             const tapID = data.tapID;
-    //             toggleAuthenticationPendingView(false);
-    //             toggleAuthenticationSuccessPendingView(true);
+        window.Pelcro.payment.verify(
+          {
+            auth_token: window.Pelcro.user.read().auth_token,
+            first_name:
+              window.Pelcro.user.read().first_name || state.firstName,
+            last_name:
+              window.Pelcro.user.read().last_name || state.lastName,
+            phone: window.Pelcro.user.read().phone || state.phone,
+            site_id: window.Pelcro.siteid,
+            currency:
+              plan?.currency ||
+              invoice?.currency ||
+              window.Pelcro.site.read().default_currency,
+            tap_token: gatewayToken,
+            funding: funding,
+            redirect_url: `${
+              window.Pelcro.environment.domain
+            }/webhook/tap/callback/3dsecure?auth_token=${
+              window.Pelcro.user.read().auth_token
+            }&type=verify_card&site_id=${window.Pelcro.siteid}`
+          },
+          (err, res) => {
+            if (err) {
+              // Inform the user if there was an error
+              onFailure(err);
+              dispatch({ type: DISABLE_SUBMIT, payload: false });
+              dispatch({ type: LOADING, payload: false });
+              return dispatch({
+                type: SHOW_ALERT,
+                payload: {
+                  type: "error",
+                  content: getErrorMessages(err)
+                }
+              });
+            } else {
+              toggleAuthenticationPendingView(true, res);
 
-    //             window.removeEventListener(
-    //               "message",
-    //               retrieveSourceInfoFromIframe
-    //             );
+              const listenFor3DSecureCompletionMessage = () => {
+                const retrieveSourceInfoFromIframe = (event) => {
+                  const { data } = event;
+                  if (
+                    data.message === "3DS-authentication-complete"
+                  ) {
+                    const tapID = data.tapID;
+                    toggleAuthenticationPendingView(false);
+                    // toggleAuthenticationSuccessPendingView(true);
 
-    //             dispatch({
-    //               type: SHOW_ALERT,
-    //               payload: {
-    //                 type: "error",
-    //                 content: null
-    //               }
-    //             });
-                
-    //             console.log(tapID);
+                    window.removeEventListener(
+                      "message",
+                      retrieveSourceInfoFromIframe
+                    );
 
-    //             window.Pelcro.source.create(
-    //               {
-    //                 auth_token: window.Pelcro.user.read().auth_token,
-    //                 token: tapID,
-    //                 gateway: "tap"
-    //               },
-    //               (err, res) => {
-    //                 dispatch({ type: DISABLE_SUBMIT, payload: false });
-    //                 dispatch({ type: LOADING, payload: false });
-    //                 if (err) {
-    //                   onFailure(err);
-    //                   return dispatch({
-    //                     type: SHOW_ALERT,
-    //                     payload: {
-    //                       type: "error",
-    //                       content: getErrorMessages(err)
-    //                     }
-    //                   });
-    //                 }
-            
-    //                 dispatch({
-    //                   type: SHOW_ALERT,
-    //                   payload: {
-    //                     type: "success",
-    //                     content: t("messages.sourceUpdated")
-    //                   }
-    //                 });
-    //                 onSuccess(res);
-    //               }
-    //             );
+                    dispatch({
+                      type: SHOW_ALERT,
+                      payload: {
+                        type: "error",
+                        content: null
+                      }
+                    });
 
-    //           }
-    //         };
+                    dispatch({ type: DISABLE_SUBMIT, payload: false });
+                    dispatch({ type: LOADING, payload: false });
+                    dispatch({
+                      type: SHOW_ALERT,
+                      payload: {
+                        type: "success",
+                        content: t("messages.sourceUpdated")
+                      }
+                    });
+                    onSuccess(res);
+                  }
+                };
 
-    //         // listen to injected iframe for authentication complete message
-    //         window.addEventListener(
-    //           "message",
-    //           retrieveSourceInfoFromIframe
-    //         );
-    //       };
+                // listen to injected iframe for authentication complete message
+                window.addEventListener(
+                  "message",
+                  retrieveSourceInfoFromIframe
+                );
+              };
 
-    //       listenFor3DSecureCompletionMessage();
-    //     }
-    //   }
-    // );
+              listenFor3DSecureCompletionMessage();
+            }
+          }
+        );
+      }
+    );
   }
 
   function confirmTapPayment(res) {
@@ -347,12 +350,12 @@ const PaymentMethodContainerWithoutStripe = ({
             }
           });
         } else {
-          handleTapPayment(result.id);
+          handleTapPayment(result.id, result.card.funding);
         }
       });
   };
 
-  function handleTapPayment(gatewayToken) {
+  function handleTapPayment(gatewayToken, funding = null) {
     const isUsingExistingPaymentMethod = Boolean(
       selectedPaymentMethodId
     );
@@ -377,7 +380,7 @@ const PaymentMethodContainerWithoutStripe = ({
         dispatch
       );
     } else if (type === "updatePaymentSource") {
-      createNewTapCard(gatewayToken);
+      createNewTapCard(gatewayToken, funding);
     }
 
     function handleTapSubscription() {
