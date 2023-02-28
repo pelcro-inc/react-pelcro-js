@@ -1,3 +1,10 @@
+## [3.20.1-beta.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.20.1-beta.1...v3.20.1-beta.2) (2023-02-28)
+
+
+### Bug Fixes
+
+* free plan using tap and vantiv ([#300](https://github.com/pelcro-inc/react-pelcro-js/issues/300)) ([b9d086d](https://github.com/pelcro-inc/react-pelcro-js/commit/b9d086d7418a74420ba306e8aa8ead2c2b6cd97e))
+
 ## [3.20.1-beta.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.20.0...v3.20.1-beta.1) (2023-02-22)
 
 
