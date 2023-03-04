@@ -625,7 +625,8 @@ const PaymentMethodContainerWithoutStripe = ({
       const giftSubscriprition = isGift && !subscriptionIdToRenew;
       const renewGift = isRenewingGift;
 
-      const { couponCode } = state;
+      const couponCode =
+        state.couponCode || window.Pelcro.coupon.getFromUrl() || "";
 
       if (renewGift) {
         return payment.execute(
