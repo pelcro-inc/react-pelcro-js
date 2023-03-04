@@ -1,3 +1,10 @@
+## [3.20.1-beta.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.20.1-beta.2...v3.20.1-beta.3) (2023-03-04)
+
+
+### Bug Fixes
+
+* send couponCode from URL if it's not set in state ([#301](https://github.com/pelcro-inc/react-pelcro-js/issues/301)) ([30c0006](https://github.com/pelcro-inc/react-pelcro-js/commit/30c000687dc49227f4d1cfd172a34b91e8becd5f))
+
 ## [3.20.1-beta.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.20.1-beta.1...v3.20.1-beta.2) (2023-02-28)
 
 
