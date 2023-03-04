@@ -1,3 +1,12 @@
+## [3.20.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.20.1...v3.20.2) (2023-03-04)
+
+
+### Bug Fixes
+
+* edits on bugsnag ([#297](https://github.com/pelcro-inc/react-pelcro-js/issues/297)) ([feb94c5](https://github.com/pelcro-inc/react-pelcro-js/commit/feb94c5132dcb6e728e1230e78455497015e1e03))
+* free plan using tap and vantiv ([#300](https://github.com/pelcro-inc/react-pelcro-js/issues/300)) ([b9d086d](https://github.com/pelcro-inc/react-pelcro-js/commit/b9d086d7418a74420ba306e8aa8ead2c2b6cd97e))
+* send couponCode from URL if it's not set in state ([ba12396](https://github.com/pelcro-inc/react-pelcro-js/commit/ba1239677c2145843eea4b7302ba5360c103a3c2))
+
 ## [3.20.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.20.0...v3.20.1) (2023-02-22)
 
 ## [3.20.1-beta.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.20.1-beta.1...v3.20.1-beta.2) (2023-02-28)
