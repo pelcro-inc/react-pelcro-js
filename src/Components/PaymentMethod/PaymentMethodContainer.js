@@ -625,7 +625,8 @@ const PaymentMethodContainerWithoutStripe = ({
       const giftSubscriprition = isGift && !subscriptionIdToRenew;
       const renewGift = isRenewingGift;
 
-      const { couponCode } = state;
+      const couponCode =
+        state.couponCode || window.Pelcro.coupon.getFromUrl() || "";
 
       if (renewGift) {
         return payment.execute(
@@ -722,6 +723,7 @@ const PaymentMethodContainerWithoutStripe = ({
   const tapInstanceCard = React.useRef(null);
 
   useEffect(() => {
+    if (skipPayment && plan?.amount === 0) return;
     if (cardProcessor === "vantiv" && !selectedPaymentMethodId) {
       const payPageId =
         window.Pelcro.site.read()?.vantiv_gateway_settings
@@ -755,6 +757,7 @@ const PaymentMethodContainerWithoutStripe = ({
 
   useEffect(() => {
     whenUserReady(() => {
+      if (skipPayment && plan?.amount === 0) return;
       if (cardProcessor === "tap" && !window.Tapjsli) {
         window.Pelcro.helpers.loadSDK(
           "https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.4/bluebird.min.js",
