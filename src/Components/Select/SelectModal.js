@@ -154,6 +154,19 @@ class SelectModal extends Component {
             user: window.Pelcro?.user?.read(),
             uiVersion: window.Pelcro?.uiSettings?.uiVersion,
             environment: window.Pelcro?.environment,
+            matchingEntitlementsProps: props.matchingEntitlements,
+            productListState :this.state.productList,
+            methods: {
+              productsWithMatchedTaggedFirst:
+                productsWithMatchedTaggedFirst(),
+              pelcroSDKProductsListMethod:
+                window.Pelcro.product.list(),
+              pelcroSDKGetByEntitlements: props.matchingEntitlements
+                ? window.Pelcro.product.getByEntitlements(
+                    props.matchingEntitlements
+                  )
+                : null
+            },
             userCurrency: userCurrency,
             userCountry: userCountry,
             userLanguage: userLanguage,
