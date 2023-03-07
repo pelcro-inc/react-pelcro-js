@@ -1,3 +1,10 @@
+# [3.21.0-beta.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.20.3-beta.1...v3.21.0-beta.1) (2023-03-07)
+
+
+### Features
+
+* membership email depending on status ([#302](https://github.com/pelcro-inc/react-pelcro-js/issues/302)) ([7832a86](https://github.com/pelcro-inc/react-pelcro-js/commit/7832a862bd1308ee77acd192a4f4ef8493ad67c2))
+
 ## [3.20.3-beta.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.20.2...v3.20.3-beta.1) (2023-03-06)
 
 
