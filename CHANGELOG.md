@@ -1,3 +1,15 @@
+# [3.21.0-beta.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.21.0-beta.1...v3.21.0-beta.2) (2023-03-08)
+
+
+### Bug Fixes
+
+* Free Orders Creation ([#304](https://github.com/pelcro-inc/react-pelcro-js/issues/304)) ([0f5001f](https://github.com/pelcro-inc/react-pelcro-js/commit/0f5001fdb53cb585d3d3acd164ef7a510c974d89))
+
+
+### Features
+
+* edit tap flow ([#305](https://github.com/pelcro-inc/react-pelcro-js/issues/305)) ([e65aa21](https://github.com/pelcro-inc/react-pelcro-js/commit/e65aa218e34d6fb735509f137a65a052f0b4f210))
+
 # [3.21.0-beta.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.20.3-beta.1...v3.21.0-beta.1) (2023-03-07)
 
 
