@@ -1626,7 +1626,6 @@ const PaymentMethodContainerWithoutStripe = ({
     if (stripeSource && type === "createPayment") {
       subscribe(stripeSource, state, dispatch);
     } else if (stripeSource && type === "orderCreate") {
-      debugger;
       purchase(new StripeGateway(), stripeSource.id, state, dispatch);
     } else if (stripeSource && type === "invoicePayment") {
       payInvoice(new StripeGateway(), stripeSource.id, dispatch);
