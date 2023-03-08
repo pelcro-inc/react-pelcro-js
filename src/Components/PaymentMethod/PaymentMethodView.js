@@ -21,6 +21,7 @@ import { IncludeFirstName } from "./IncludeFirstName";
 import { IncludeLastName } from "./IncludeLastName";
 import { IncludePhone } from "./IncludePhone";
 import { SubscriptionCreateFreePlanButton } from "../SubscriptionCreate/SubscriptionCreateFreePlanButton";
+import { OrderCreateFreeButton } from "../OrderCreate/OrderCreateFreeButton";
 
 /**
  *
@@ -32,7 +33,8 @@ export function PaymentMethodView({
   type,
   showCoupon,
   showExternalPaymentMethods,
-  showSubscriptionButton
+  showSubscriptionButton,
+  showOrderButton
 }) {
   const { t } = useTranslation("checkoutForm");
   const cardProcessor = getSiteCardProcessor();
@@ -53,7 +55,7 @@ export function PaymentMethodView({
 
   return (
     <div className="plc-flex plc-flex-col plc-items-center plc-mt-4 sm:plc-px-8 pelcro-payment-block">
-      {cardProcessor === "stripe" && !showSubscriptionButton && (
+      {cardProcessor === "stripe" && !showSubscriptionButton && !showOrderButton && (
         <div className="plc-flex plc-items-center plc-w-full plc-px-4 plc-py-2 plc-text-center plc-text-green-600 plc-border plc-border-green-400 plc-rounded plc-bg-green-50">
           <LockIcon className="plc-w-5 plc-h-5 plc-mr-1" />
           <span>
@@ -82,9 +84,13 @@ export function PaymentMethodView({
         >
           <AlertWithContext className="plc-mb-2" />
           {/* Payment form */}
-          {showSubscriptionButton ? (
+          {showSubscriptionButton && (
             <SubscriptionCreateFreePlanButton />
-          ) : (
+          )}
+
+          {showOrderButton && <OrderCreateFreeButton />}
+
+          {!showSubscriptionButton && !showOrderButton && (
             <div>
               <BankRedirection />
               <BankAuthenticationSuccess />
