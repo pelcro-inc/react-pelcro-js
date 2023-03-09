@@ -1,3 +1,10 @@
+# [3.21.0-beta.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.21.0-beta.2...v3.21.0-beta.3) (2023-03-09)
+
+
+### Bug Fixes
+
+* fixed payment-method-update url trigger issue ([#306](https://github.com/pelcro-inc/react-pelcro-js/issues/306)) ([f5bc2e2](https://github.com/pelcro-inc/react-pelcro-js/commit/f5bc2e221e80be98d33796b054fbbdbb4ff4b2ea))
+
 # [3.21.0-beta.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.21.0-beta.1...v3.21.0-beta.2) (2023-03-08)
 
 
