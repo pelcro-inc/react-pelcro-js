@@ -1,3 +1,10 @@
+# [3.21.0-beta.5](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.21.0-beta.4...v3.21.0-beta.5) (2023-03-09)
+
+
+### Bug Fixes
+
+* metadata issue ([#308](https://github.com/pelcro-inc/react-pelcro-js/issues/308)) ([e792e99](https://github.com/pelcro-inc/react-pelcro-js/commit/e792e99bf12c7587ac7c0264153da92f1df105fa))
+
 # [3.21.0-beta.4](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.21.0-beta.3...v3.21.0-beta.4) (2023-03-09)
 
 
