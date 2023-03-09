@@ -1,3 +1,10 @@
+# [3.21.0-beta.4](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.21.0-beta.3...v3.21.0-beta.4) (2023-03-09)
+
+
+### Bug Fixes
+
+* go to payment modal after login ([#307](https://github.com/pelcro-inc/react-pelcro-js/issues/307)) ([ff5fed8](https://github.com/pelcro-inc/react-pelcro-js/commit/ff5fed813da16337c3d5f342cad5c098624fb696))
+
 # [3.21.0-beta.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.21.0-beta.2...v3.21.0-beta.3) (2023-03-09)
 
 
