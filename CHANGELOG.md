@@ -1,3 +1,10 @@
+# [3.21.0-beta.6](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.21.0-beta.5...v3.21.0-beta.6) (2023-03-10)
+
+
+### Bug Fixes
+
+* bugsnag trigger condition reset ([#309](https://github.com/pelcro-inc/react-pelcro-js/issues/309)) ([55e892e](https://github.com/pelcro-inc/react-pelcro-js/commit/55e892e6b845449011c4c0c9f52850d519e91f3d))
+
 # [3.21.0-beta.5](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.21.0-beta.4...v3.21.0-beta.5) (2023-03-09)
 
 
