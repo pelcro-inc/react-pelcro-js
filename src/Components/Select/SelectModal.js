@@ -135,9 +135,8 @@ class SelectModal extends Component {
     document.addEventListener("keydown", this.handleSubmit);
 
     if (
-      // !document.querySelector("#pelcro-selection-view") ||
-      // !document.querySelector(".pelcro-select-product-wrapper")
-      true
+      !document.querySelector("#pelcro-selection-view") ||
+      !document.querySelector(".pelcro-select-product-wrapper")
     ) {
       const userCurrency = window.Pelcro?.user?.read().currency;
       const userCountry = window.Pelcro?.user?.location.countryCode;
