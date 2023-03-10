@@ -67,6 +67,21 @@ export function SelectModalWithHook(props) {
   );
 }
 
+function productsWithMatchedTaggedFirst() {
+  const allProducts = window.Pelcro.product.list() ?? [];
+  const productsThatMatchArticleTag =
+    window.Pelcro.product.getByMatchingPageTags();
+
+  const allProductsMinusMatched = allProducts.filter(
+    (product) =>
+      !productsThatMatchArticleTag.some(
+        (matchedProduct) => matchedProduct.id === product.id
+      )
+  );
+
+  return [productsThatMatchArticleTag, allProductsMinusMatched];
+}
+
 SelectModalWithHook.viewId = "plan-select";
 class SelectModal extends Component {
   constructor(props) {
@@ -154,6 +169,19 @@ class SelectModal extends Component {
             user: window.Pelcro?.user?.read(),
             uiVersion: window.Pelcro?.uiSettings?.uiVersion,
             environment: window.Pelcro?.environment,
+            matchingEntitlementsProps: this.props?.matchingEntitlements,
+            productListState :this.state.productList,
+            methods: {
+              productsWithMatchedTaggedFirst:
+                productsWithMatchedTaggedFirst(),
+              pelcroSDKProductsListMethod:
+                window.Pelcro.product.list(),
+              pelcroSDKGetByEntitlements: this.props.matchingEntitlements
+                ? window.Pelcro.product.getByEntitlements(
+                    this.props.matchingEntitlements
+                  )
+                : null
+            },
             userCurrency: userCurrency,
             userCountry: userCountry,
             userLanguage: userLanguage,
@@ -331,21 +359,6 @@ class SelectModal extends Component {
         )}
       </div>
     );
-
-    function productsWithMatchedTaggedFirst() {
-      const allProducts = window.Pelcro.product.list() ?? [];
-      const productsThatMatchArticleTag =
-        window.Pelcro.product.getByMatchingPageTags();
-
-      const allProductsMinusMatched = allProducts.filter(
-        (product) =>
-          !productsThatMatchArticleTag.some(
-            (matchedProduct) => matchedProduct.id === product.id
-          )
-      );
-
-      return [productsThatMatchArticleTag, allProductsMinusMatched];
-    }
   };
 
   renderPlans = () => {
