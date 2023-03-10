@@ -1,3 +1,10 @@
+## [3.20.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.20.2...v3.20.3) (2023-03-10)
+
+
+### Bug Fixes
+
+* add methods and props effect products render ([#303](https://github.com/pelcro-inc/react-pelcro-js/issues/303)) ([7bd19e9](https://github.com/pelcro-inc/react-pelcro-js/commit/7bd19e9aeac278d6bfcd6bb16dfb66870273de03))
+
 ## [3.20.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.20.1...v3.20.2) (2023-03-04)
 
 
