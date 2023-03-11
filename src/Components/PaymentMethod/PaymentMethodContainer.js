@@ -216,7 +216,7 @@ const PaymentMethodContainerWithoutStripe = ({
             }
           });
         } else {
-          window.Pelcro.payment.authorize(
+          window.Pelcro.payment.verify(
             {
               auth_token: window.Pelcro.user.read().auth_token,
               first_name:
@@ -232,11 +232,12 @@ const PaymentMethodContainerWithoutStripe = ({
                 invoice?.currency ||
                 window.Pelcro.site.read().default_currency,
               tap_token: result.id,
+              funding: result.card.funding,
               redirect_url: `${
                 window.Pelcro.environment.domain
               }/webhook/tap/callback/3dsecure?auth_token=${
                 window.Pelcro.user.read().auth_token
-              }`
+              }&type=verify_card&site_id=${window.Pelcro.siteid}`
             },
             (err, res) => {
               if (err) {
@@ -334,6 +335,8 @@ const PaymentMethodContainerWithoutStripe = ({
         (err, res) => {
           dispatch({ type: DISABLE_SUBMIT, payload: false });
           dispatch({ type: LOADING, payload: false });
+          toggleAuthenticationSuccessPendingView(false);
+
           if (err) {
             onFailure(err);
             return dispatch({
@@ -353,7 +356,7 @@ const PaymentMethodContainerWithoutStripe = ({
             }
           });
           onSuccess(res);
-        }
+        } //
       );
     }
 
@@ -625,7 +628,8 @@ const PaymentMethodContainerWithoutStripe = ({
       const giftSubscriprition = isGift && !subscriptionIdToRenew;
       const renewGift = isRenewingGift;
 
-      const { couponCode } = state;
+      const couponCode =
+        state.couponCode || window.Pelcro.coupon.getFromUrl() || "";
 
       if (renewGift) {
         return payment.execute(
@@ -722,6 +726,7 @@ const PaymentMethodContainerWithoutStripe = ({
   const tapInstanceCard = React.useRef(null);
 
   useEffect(() => {
+    if (skipPayment && (plan?.amount === 0 || order?.price === 0)) return;
     if (cardProcessor === "vantiv" && !selectedPaymentMethodId) {
       const payPageId =
         window.Pelcro.site.read()?.vantiv_gateway_settings
@@ -755,6 +760,7 @@ const PaymentMethodContainerWithoutStripe = ({
 
   useEffect(() => {
     whenUserReady(() => {
+      if (skipPayment && (plan?.amount === 0 || order?.price === 0)) return;
       if (cardProcessor === "tap" && !window.Tapjsli) {
         window.Pelcro.helpers.loadSDK(
           "https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.4/bluebird.min.js",
@@ -786,7 +792,7 @@ const PaymentMethodContainerWithoutStripe = ({
   }, [selectedPaymentMethodId]);
 
   const initPaymentRequest = (state, dispatch) => {
-    if (skipPayment && plan?.amount === 0) return;
+    if (skipPayment && (plan?.amount === 0 || order?.price === 0)) return;
     try {
       const paymentRequest = stripe.paymentRequest({
         country: window.Pelcro.user.location.countryCode || "US",
@@ -841,7 +847,7 @@ const PaymentMethodContainerWithoutStripe = ({
    * Updates the total amount after adding taxes only if site taxes are enabled
    */
   const updateTotalAmountWithTax = () => {
-    if (skipPayment && plan?.amount === 0) return;
+    if (skipPayment && (plan?.amount === 0 || order?.price === 0)) return;
     const taxesEnabled = window.Pelcro.site.read()?.taxes_enabled;
 
     if (taxesEnabled && type === "createPayment") {
@@ -1463,6 +1469,30 @@ const PaymentMethodContainerWithoutStripe = ({
   };
 
   const submitPayment = (state, dispatch) => {
+    if (skipPayment && order?.price === 0) {
+      const isQuickPurchase = !Array.isArray(order);
+      const mappedOrderItems = isQuickPurchase
+        ? [{ sku_id: order.id, quantity: order.quantity }]
+        : order.map((item) => ({
+            sku_id: item.id,
+            quantity: item.quantity
+          }));
+      window.Pelcro.ecommerce.order.create(
+        {
+          items: mappedOrderItems,
+          campaign_key:
+            window.Pelcro.helpers.getURLParameter("campaign_key"),
+          ...(selectedAddressId && { address_id: selectedAddressId })
+        },
+        (err, res) => {
+          if (err) {
+            return handlePaymentError(err);
+          }
+          return onSuccess(res);
+        }
+      );
+      return;
+    }
     stripe
       .createSource({ type: "card" })
       .then(({ source, error }) => {
@@ -1888,9 +1918,11 @@ const PaymentMethodContainerWithoutStripe = ({
     >
       <Provider value={{ state, dispatch }}>
         {children.length
-          ? children.map((child, i) =>
-              React.cloneElement(child, { store, key: i })
-            )
+          ? children.map((child, i) => {
+              if (child) {
+                return React.cloneElement(child, { store, key: i });
+              }
+            })
           : React.cloneElement(children, { store })}
       </Provider>
     </div>

@@ -367,6 +367,10 @@ export const initViewFromURL = () => {
         return showSubscriptionManageMembersFromUrl();
       }
 
+      if (view === "payment-method-update") {
+        return showPaymentMethodUpdateFromUrl();
+      }
+
       switchView(view);
     });
   }
@@ -620,6 +624,56 @@ const showPasswordlessRequestFromUrl = () => {
   const { switchView } = usePelcro.getStore();
 
   return switchView("passwordless-request");
+};
+
+const showPaymentMethodUpdateFromUrl = () => {
+  const {
+    isAuthenticated,
+    whenSiteReady,
+    whenUserReady,
+    switchView
+  } = usePelcro.getStore();
+
+  whenSiteReady(() => {
+    if (!isAuthenticated()) {
+      return switchView("login");
+    }
+
+    whenUserReady(() => {
+      const supportsVantiv = Boolean(
+        window.Pelcro.site.read().vantiv_gateway_settings
+      );
+      const supportsTap = Boolean(
+        window.Pelcro.site.read().tap_gateway_settings
+      );
+        
+      if (!window.Stripe && !supportsVantiv && !supportsTap) {
+        document
+          .querySelector('script[src="https://js.stripe.com/v3"]')
+          .addEventListener("load", () => {
+            return switchView("payment-method-update");
+          });
+        return;
+      }
+
+      //vantiv
+      if (supportsVantiv) {
+        document
+          .querySelector("#vantiv-eprotect-sdk")
+          .addEventListener("load", () => {
+            return switchView("payment-method-update");
+          });
+        return;
+      }
+
+      //Tap
+      if (supportsTap && document.querySelector("#tap-sdk")) {
+        return switchView("payment-method-update");
+      }
+
+      return switchView("payment-method-update");
+    });
+  });
 };
 
 const showInvoiceDetailsFromUrl = () => {

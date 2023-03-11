@@ -69,6 +69,21 @@ export function SelectModalWithHook(props) {
   );
 }
 
+function productsWithMatchedTaggedFirst() {
+  const allProducts = window.Pelcro.product.list() ?? [];
+  const productsThatMatchArticleTag =
+    window.Pelcro.product.getByMatchingPageTags();
+
+  const allProductsMinusMatched = allProducts.filter(
+    (product) =>
+      !productsThatMatchArticleTag.some(
+        (matchedProduct) => matchedProduct.id === product.id
+      )
+  );
+
+  return [productsThatMatchArticleTag, allProductsMinusMatched];
+}
+
 SelectModalWithHook.viewId = "plan-select";
 class SelectModal extends Component {
   constructor(props) {
@@ -122,16 +137,75 @@ class SelectModal extends Component {
     document.addEventListener("keydown", this.handleSubmit);
 
     if (
-      !document.querySelector("#pelcro-selection-view") ||
-      !document.querySelector(".pelcro-select-product-wrapper")
+      // !document.querySelector("#pelcro-selection-view") ||
+      // !document.querySelector(".pelcro-select-product-wrapper")
+      true
     ) {
+      const userCurrency = window.Pelcro?.user?.read().currency;
+      const userCountry = window.Pelcro?.user?.location.countryCode;
+      const userLanguage = window.Pelcro?.user?.read().language;
+
+      const productsWithPlansCountries = window.Pelcro?.site
+        ?.read()
+        .products.filter((product) => {
+          const filteredPlans = product.plans.filter(
+            (plan) => plan.countries && plan.countries.length > 0
+          );
+          if (filteredPlans.length) {
+            return product;
+          }
+        });
+
+      const currencyMismatch = productsWithPlansCountries.length
+        ? productsWithPlansCountries.filter((product) => {
+            const filteredPlans = product.plans.filter((plan) =>
+              plan.countries?.includes(userCountry)
+            );
+            if (filteredPlans.length) return filteredPlans;
+          }).length === 0
+        : false;
+
       notifyBugsnag(() => {
         Bugsnag.notify("SelectModal - No data viewed", (event) => {
           event.addMetadata("MetaData", {
             site: window.Pelcro?.site?.read(),
             user: window.Pelcro?.user?.read(),
             uiVersion: window.Pelcro?.uiSettings?.uiVersion,
-            environment: window.Pelcro?.environment
+            environment: window.Pelcro?.environment,
+            matchingEntitlementsProps: this.props?.matchingEntitlements,
+            productListState :this.state.productList,
+            methods: {
+              productsWithMatchedTaggedFirst:
+                productsWithMatchedTaggedFirst(),
+              pelcroSDKProductsListMethod:
+                window.Pelcro.product.list(),
+              pelcroSDKGetByEntitlements: this.props.matchingEntitlements
+                ? window.Pelcro.product.getByEntitlements(
+                    this.props.matchingEntitlements
+                  )
+                : null
+            },
+            userCurrency: userCurrency,
+            userCountry: userCountry,
+            userLanguage: userLanguage,
+            siteLanguage:
+              window.Pelcro?.helpers?.getHtmlLanguageAttribute(),
+            currency_mismatch:
+              window.Pelcro?.site
+                ?.read()
+                .products.filter((product) => {
+                  const filteredPlans = product.plans.find(
+                    (plan) => plan.currency === userCurrency
+                  );
+                  if (filteredPlans) return filteredPlans;
+                }).length === 0,
+            country_restrictions: currencyMismatch,
+            language_mismatch:
+              window.Pelcro?.site
+                ?.read()
+                .products.filter(
+                  (product) => product.language === userLanguage
+                ).length === 0
           });
         });
       });
@@ -359,21 +433,6 @@ class SelectModal extends Component {
         )}
       </div>
     );
-
-    function productsWithMatchedTaggedFirst() {
-      const allProducts = window.Pelcro.product.list() ?? [];
-      const productsThatMatchArticleTag =
-        window.Pelcro.product.getByMatchingPageTags();
-
-      const allProductsMinusMatched = allProducts.filter(
-        (product) =>
-          !productsThatMatchArticleTag.some(
-            (matchedProduct) => matchedProduct.id === product.id
-          )
-      );
-
-      return [productsThatMatchArticleTag, allProductsMinusMatched];
-    }
   };
 
   renderPlans = () => {
