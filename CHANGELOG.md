@@ -1,3 +1,10 @@
+# [3.21.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.20.3...v3.21.0) (2023-03-13)
+
+
+### Features
+
+* edit tap flow ([1fd4b23](https://github.com/pelcro-inc/react-pelcro-js/commit/1fd4b23b6b6fac0cdc5a825ba2a142ceb6f98fc8))
+
 ## [3.20.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.20.2...v3.20.3) (2023-03-10)
 
 
