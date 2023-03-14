@@ -1,3 +1,10 @@
+## [3.21.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.21.0...v3.21.1) (2023-03-14)
+
+
+### Bug Fixes
+
+* bugsnag country_restrictions condition ([#310](https://github.com/pelcro-inc/react-pelcro-js/issues/310)) ([fded078](https://github.com/pelcro-inc/react-pelcro-js/commit/fded07830d8bc51b327dce65989fd7dce55aee10))
+
 # [3.21.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.20.3...v3.21.0) (2023-03-13)
 
 
