@@ -1,4 +1,5 @@
 # [3.21.0-beta.6](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.21.0-beta.5...v3.21.0-beta.6) (2023-03-10)
+## [3.21.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.21.0...v3.21.1) (2023-03-14)
 
 
 ### Bug Fixes
@@ -32,6 +33,8 @@
 ### Bug Fixes
 
 * Free Orders Creation ([#304](https://github.com/pelcro-inc/react-pelcro-js/issues/304)) ([0f5001f](https://github.com/pelcro-inc/react-pelcro-js/commit/0f5001fdb53cb585d3d3acd164ef7a510c974d89))
+* bugsnag country_restrictions condition ([#310](https://github.com/pelcro-inc/react-pelcro-js/issues/310)) ([fded078](https://github.com/pelcro-inc/react-pelcro-js/commit/fded07830d8bc51b327dce65989fd7dce55aee10))
+
 # [3.21.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.20.3...v3.21.0) (2023-03-13)
 
 
