@@ -1,3 +1,23 @@
+# [3.22.0-beta.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.21.1...v3.22.0-beta.1) (2023-03-14)
+
+
+### Bug Fixes
+
+* add methods and props effect products render ([b9e3e2b](https://github.com/pelcro-inc/react-pelcro-js/commit/b9e3e2be3c8b4d7e75224a56fbdb54e5f9bce9a4))
+* bugsnag firing condition ([20e00cc](https://github.com/pelcro-inc/react-pelcro-js/commit/20e00cc3f1b89367613a9a031ae92f20dbdfd862))
+* bugsnag trigger condition reset ([#309](https://github.com/pelcro-inc/react-pelcro-js/issues/309)) ([55e892e](https://github.com/pelcro-inc/react-pelcro-js/commit/55e892e6b845449011c4c0c9f52850d519e91f3d))
+* fixed payment-method-update url trigger issue ([#306](https://github.com/pelcro-inc/react-pelcro-js/issues/306)) ([f5bc2e2](https://github.com/pelcro-inc/react-pelcro-js/commit/f5bc2e221e80be98d33796b054fbbdbb4ff4b2ea))
+* Free Orders Creation ([#304](https://github.com/pelcro-inc/react-pelcro-js/issues/304)) ([0f5001f](https://github.com/pelcro-inc/react-pelcro-js/commit/0f5001fdb53cb585d3d3acd164ef7a510c974d89))
+* go to payment modal after login ([#307](https://github.com/pelcro-inc/react-pelcro-js/issues/307)) ([ff5fed8](https://github.com/pelcro-inc/react-pelcro-js/commit/ff5fed813da16337c3d5f342cad5c098624fb696))
+* metadata issue ([#308](https://github.com/pelcro-inc/react-pelcro-js/issues/308)) ([e792e99](https://github.com/pelcro-inc/react-pelcro-js/commit/e792e99bf12c7587ac7c0264153da92f1df105fa))
+* send couponCode from URL if it's not set in state ([#301](https://github.com/pelcro-inc/react-pelcro-js/issues/301)) ([30c0006](https://github.com/pelcro-inc/react-pelcro-js/commit/30c000687dc49227f4d1cfd172a34b91e8becd5f))
+
+
+### Features
+
+* edit tap flow ([#305](https://github.com/pelcro-inc/react-pelcro-js/issues/305)) ([e65aa21](https://github.com/pelcro-inc/react-pelcro-js/commit/e65aa218e34d6fb735509f137a65a052f0b4f210))
+* membership email depending on status ([#302](https://github.com/pelcro-inc/react-pelcro-js/issues/302)) ([7832a86](https://github.com/pelcro-inc/react-pelcro-js/commit/7832a862bd1308ee77acd192a4f4ef8493ad67c2))
+
 # [3.21.0-beta.6](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.21.0-beta.5...v3.21.0-beta.6) (2023-03-10)
 ## [3.21.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.21.0...v3.21.1) (2023-03-14)
 
