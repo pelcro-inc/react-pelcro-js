@@ -1,3 +1,10 @@
+# [3.22.0-beta.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.22.0-beta.1...v3.22.0-beta.2) (2023-03-16)
+
+
+### Bug Fixes
+
+* bugsnag matching properties changing ([#311](https://github.com/pelcro-inc/react-pelcro-js/issues/311)) ([eb5519c](https://github.com/pelcro-inc/react-pelcro-js/commit/eb5519cd304ea645f1e013309d0b430796f834f4))
+
 # [3.22.0-beta.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.21.1...v3.22.0-beta.1) (2023-03-14)
 
 
