@@ -22,6 +22,10 @@ import { IncludeLastName } from "./IncludeLastName";
 import { IncludePhone } from "./IncludePhone";
 import { SubscriptionCreateFreePlanButton } from "../SubscriptionCreate/SubscriptionCreateFreePlanButton";
 import { OrderCreateFreeButton } from "../OrderCreate/OrderCreateFreeButton";
+import {
+  getFormattedPriceByLocal,
+  getPageOrDefaultLanguage
+} from "../../utils/utils";
 
 /**
  *
@@ -34,7 +38,8 @@ export function PaymentMethodView({
   showCoupon,
   showExternalPaymentMethods,
   showSubscriptionButton,
-  showOrderButton
+  showOrderButton,
+  order
 }) {
   const { t } = useTranslation("checkoutForm");
   const cardProcessor = getSiteCardProcessor();
@@ -55,22 +60,24 @@ export function PaymentMethodView({
 
   return (
     <div className="plc-flex plc-flex-col plc-items-center plc-mt-4 sm:plc-px-8 pelcro-payment-block">
-      {cardProcessor === "stripe" && !showSubscriptionButton && !showOrderButton && (
-        <div className="plc-flex plc-items-center plc-w-full plc-px-4 plc-py-2 plc-text-center plc-text-green-600 plc-border plc-border-green-400 plc-rounded plc-bg-green-50">
-          <LockIcon className="plc-w-5 plc-h-5 plc-mr-1" />
-          <span>
-            {t("messages.youAreSafe")}
-            <Link
-              className="plc-ml-1"
-              target="_blank"
-              href="https://www.stripe.com/us/customers"
-              isButton={false}
-            >
-              Stripe
-            </Link>
-          </span>
-        </div>
-      )}
+      {cardProcessor === "stripe" &&
+        !showSubscriptionButton &&
+        !showOrderButton && (
+          <div className="plc-flex plc-items-center plc-w-full plc-px-4 plc-py-2 plc-text-center plc-text-green-600 plc-border plc-border-green-400 plc-rounded plc-bg-green-50">
+            <LockIcon className="plc-w-5 plc-h-5 plc-mr-1" />
+            <span>
+              {t("messages.youAreSafe")}
+              <Link
+                className="plc-ml-1"
+                target="_blank"
+                href="https://www.stripe.com/us/customers"
+                isButton={false}
+              >
+                Stripe
+              </Link>
+            </span>
+          </div>
+        )}
 
       <form
         action="javascript:void(0);"
@@ -88,7 +95,26 @@ export function PaymentMethodView({
             <SubscriptionCreateFreePlanButton />
           )}
 
-          {showOrderButton && <OrderCreateFreeButton />}
+          {showOrderButton && (
+            <>
+              <div className="plc-w-full plc-p-2 plc-mt-2 plc-font-semibold plc-text-center plc-text-gray-900 plc-bg-gray-100 plc-border plc-border-gray-200">
+                <p className="plc-text-gray-600">
+                  <span className="plc-tracking-wider plc-uppercase">
+                    {order?.name}
+                  </span>
+                  <br />
+                  <span className="plc-text-xl plc-font-semibold plc-text-primary-600">
+                    {getFormattedPriceByLocal(
+                      order?.price,
+                      order?.currency,
+                      getPageOrDefaultLanguage()
+                    )}
+                  </span>
+                </p>
+              </div>
+              <OrderCreateFreeButton />
+            </>
+          )}
 
           {!showSubscriptionButton && !showOrderButton && (
             <div>
