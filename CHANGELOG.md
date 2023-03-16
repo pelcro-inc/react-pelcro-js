@@ -1,3 +1,12 @@
+# [3.22.0-beta.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.22.0-beta.2...v3.22.0-beta.3) (2023-03-16)
+
+
+### Bug Fixes
+
+* free order info ([f0aafb6](https://github.com/pelcro-inc/react-pelcro-js/commit/f0aafb6caeb7460f6c08d21d6b1281da3df26365))
+* Free Orders Creation ([c9eaa5e](https://github.com/pelcro-inc/react-pelcro-js/commit/c9eaa5e640c661ad5dbd14784a8458f0797a482b))
+* remove debugger ([ceeada1](https://github.com/pelcro-inc/react-pelcro-js/commit/ceeada1a56e7c16b2899b56bc94b756e5d746e59))
+
 # [3.22.0-beta.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.22.0-beta.1...v3.22.0-beta.2) (2023-03-16)
 
 
