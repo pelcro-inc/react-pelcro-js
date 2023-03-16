@@ -1,3 +1,24 @@
+## [3.21.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.21.0...v3.21.1) (2023-03-14)
+
+
+### Bug Fixes
+
+* bugsnag country_restrictions condition ([#310](https://github.com/pelcro-inc/react-pelcro-js/issues/310)) ([fded078](https://github.com/pelcro-inc/react-pelcro-js/commit/fded07830d8bc51b327dce65989fd7dce55aee10))
+
+# [3.21.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.20.3...v3.21.0) (2023-03-13)
+
+
+### Features
+
+* edit tap flow ([1fd4b23](https://github.com/pelcro-inc/react-pelcro-js/commit/1fd4b23b6b6fac0cdc5a825ba2a142ceb6f98fc8))
+
+## [3.20.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.20.2...v3.20.3) (2023-03-10)
+
+
+### Bug Fixes
+
+* add methods and props effect products render ([#303](https://github.com/pelcro-inc/react-pelcro-js/issues/303)) ([7bd19e9](https://github.com/pelcro-inc/react-pelcro-js/commit/7bd19e9aeac278d6bfcd6bb16dfb66870273de03))
+
 ## [3.20.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.20.1...v3.20.2) (2023-03-04)
 
 

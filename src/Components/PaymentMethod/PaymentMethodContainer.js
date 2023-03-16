@@ -216,7 +216,7 @@ const PaymentMethodContainerWithoutStripe = ({
             }
           });
         } else {
-          window.Pelcro.payment.authorize(
+          window.Pelcro.payment.verify(
             {
               auth_token: window.Pelcro.user.read().auth_token,
               first_name:
@@ -232,11 +232,12 @@ const PaymentMethodContainerWithoutStripe = ({
                 invoice?.currency ||
                 window.Pelcro.site.read().default_currency,
               tap_token: result.id,
+              funding: result.card.funding,
               redirect_url: `${
                 window.Pelcro.environment.domain
               }/webhook/tap/callback/3dsecure?auth_token=${
                 window.Pelcro.user.read().auth_token
-              }`
+              }&type=verify_card&site_id=${window.Pelcro.siteid}`
             },
             (err, res) => {
               if (err) {
@@ -334,6 +335,8 @@ const PaymentMethodContainerWithoutStripe = ({
         (err, res) => {
           dispatch({ type: DISABLE_SUBMIT, payload: false });
           dispatch({ type: LOADING, payload: false });
+          toggleAuthenticationSuccessPendingView(false);
+
           if (err) {
             onFailure(err);
             return dispatch({
@@ -353,7 +356,7 @@ const PaymentMethodContainerWithoutStripe = ({
             }
           });
           onSuccess(res);
-        }
+        } //
       );
     }
 
