@@ -158,7 +158,7 @@ const PaymentMethodContainerWithoutStripe = ({
   }, []);
 
   /*====== Start Tap integration ========*/
-  const submitUsingTap = () => {
+  const submitUsingTap = (state) => {
     const isUsingExistingPaymentMethod = Boolean(
       selectedPaymentMethodId
     );
@@ -278,7 +278,7 @@ const PaymentMethodContainerWithoutStripe = ({
                         }
                       });
 
-                      handleTapPayment(tapID);
+                      handleTapPayment(tapID, state);
                     }
                   };
 
@@ -297,7 +297,7 @@ const PaymentMethodContainerWithoutStripe = ({
       });
   };
 
-  function handleTapPayment(paymentRequest) {
+  function handleTapPayment(paymentRequest, state) {
     const isUsingExistingPaymentMethod = Boolean(
       selectedPaymentMethodId
     );
@@ -518,7 +518,7 @@ const PaymentMethodContainerWithoutStripe = ({
   };
   /*====== End Tap integration ========*/
 
-  const submitUsingVantiv = () => {
+  const submitUsingVantiv = (state) => {
     const isUsingExistingPaymentMethod = Boolean(
       selectedPaymentMethodId
     );
@@ -537,13 +537,16 @@ const PaymentMethodContainerWithoutStripe = ({
     /*     
     calls handleVantivPayment to either handle a payment or update a source by simply creating a new source 
     */
-    vantivInstanceRef.current.getPaypageRegistrationId({
-      id: orderId,
-      orderId: orderId
-    });
+    handleVantivPayment(
+      vantivInstanceRef.current.getPaypageRegistrationId({
+        id: orderId,
+        orderId: orderId
+      }),
+      state
+    );
   };
 
-  function handleVantivPayment(paymentRequest) {
+  function handleVantivPayment(paymentRequest, state) {
     if (paymentRequest) {
       const SUCCESS_STATUS = "870";
       if (paymentRequest.response !== SUCCESS_STATUS) {
@@ -628,8 +631,7 @@ const PaymentMethodContainerWithoutStripe = ({
       const giftSubscriprition = isGift && !subscriptionIdToRenew;
       const renewGift = isRenewingGift;
 
-      const couponCode =
-        state.couponCode || window.Pelcro.coupon.getFromUrl() || "";
+      const { couponCode } = state;
 
       if (renewGift) {
         return payment.execute(
@@ -1754,7 +1756,7 @@ const PaymentMethodContainerWithoutStripe = ({
             { ...state, disableSubmit: true, isLoading: true },
             (state, dispatch) => {
               if (getSiteCardProcessor() === "vantiv") {
-                return submitUsingVantiv();
+                return submitUsingVantiv(state);
               }
 
               if (getSiteCardProcessor() === "tap") {
