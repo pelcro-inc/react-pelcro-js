@@ -1,3 +1,9 @@
+# [3.22.0-beta.5](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.22.0-beta.4...v3.22.0-beta.5) (2023-03-17)
+
+
+### Features
+
+* remove console.log to trigger a release ([1de5f9a](https://github.com/pelcro-inc/react-pelcro-js/commit/1de5f9a7b70368c575f9b2f01c80b91cfd360144))
 
 ## [3.21.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.21.1...v3.21.2) (2023-03-17)
 
