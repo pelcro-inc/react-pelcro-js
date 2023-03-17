@@ -91,7 +91,8 @@ function productMatchPageLanguage(product) {
     return true;
   }
 
-  const siteLanguage = window.Pelcro.helpers.getHtmlLanguageAttribute();
+  const siteLanguage =
+    window.Pelcro.helpers.getHtmlLanguageAttribute();
   return product.language === siteLanguage;
 }
 
@@ -214,7 +215,6 @@ class SelectModal extends Component {
           });
         });
       });
-      console.log("bugsnag Triggered");
     }
   };
 
