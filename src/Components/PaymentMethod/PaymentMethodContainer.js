@@ -1777,6 +1777,10 @@ const PaymentMethodContainerWithoutStripe = ({
           return UpdateWithSideEffect(
             { ...state, disableSubmit: true, isLoading: true },
             (state, dispatch) => {
+              if (skipPayment && order?.price === 0) {
+                return submitPayment(state, dispatch);
+              }
+              
               if (getSiteCardProcessor() === "vantiv") {
                 return submitUsingVantiv();
               }
