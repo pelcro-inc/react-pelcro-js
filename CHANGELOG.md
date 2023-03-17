@@ -1,3 +1,10 @@
+# [3.22.0-beta.4](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.22.0-beta.3...v3.22.0-beta.4) (2023-03-17)
+
+
+### Bug Fixes
+
+* order price 0 submitPyment ([#314](https://github.com/pelcro-inc/react-pelcro-js/issues/314)) ([585f7c6](https://github.com/pelcro-inc/react-pelcro-js/commit/585f7c6d48e26609004118a31dde98733dce7216))
+
 # [3.22.0-beta.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.22.0-beta.2...v3.22.0-beta.3) (2023-03-16)
 
 
