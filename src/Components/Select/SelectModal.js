@@ -67,6 +67,34 @@ export function SelectModalWithHook(props) {
   );
 }
 
+function productsWithMatchedTaggedFirst() {
+  const allProducts = window.Pelcro.product.list() ?? [];
+  const productsThatMatchArticleTag =
+    window.Pelcro.product.getByMatchingPageTags();
+
+  const allProductsMinusMatched = allProducts.filter(
+    (product) =>
+      !productsThatMatchArticleTag.some(
+        (matchedProduct) => matchedProduct.id === product.id
+      )
+  );
+
+  return [productsThatMatchArticleTag, allProductsMinusMatched];
+}
+
+function productMatchPageLanguage(product) {
+  if (!product) {
+    return false;
+  }
+
+  if (product.language === null) {
+    return true;
+  }
+
+  const siteLanguage = window.Pelcro.helpers.getHtmlLanguageAttribute();
+  return product.language === siteLanguage;
+}
+
 SelectModalWithHook.viewId = "plan-select";
 class SelectModal extends Component {
   constructor(props) {
@@ -127,25 +155,26 @@ class SelectModal extends Component {
       const userCountry = window.Pelcro?.user?.location.countryCode;
       const userLanguage = window.Pelcro?.user?.read().language;
 
-      const productsWithPlansCountries = window.Pelcro?.site
+      const productsMatchingUserCurrency = window.Pelcro?.site
         ?.read()
         .products.filter((product) => {
           const filteredPlans = product.plans.filter(
-            (plan) => plan.countries && plan.countries.length > 0
+            (plan) => plan.currency === userCurrency || !userCurrency
           );
-          if (filteredPlans.length) {
-            return product;
-          }
+          if (filteredPlans.length) return filteredPlans;
         });
 
-      const currencyMismatch = productsWithPlansCountries.length
-        ? productsWithPlansCountries.filter((product) => {
-            const filteredPlans = product.plans.filter((plan) =>
-              plan.countries?.includes(userCountry)
-            );
-            if (filteredPlans.length) return filteredPlans;
-          }).length === 0
-        : false;
+      const productsMatchingUserCountry =
+        productsMatchingUserCurrency.filter((product) => {
+          const filteredPlans = product.plans.filter(
+            (plan) =>
+              (plan.countries &&
+                plan.countries?.includes(userCountry)) ||
+              !plan.countries ||
+              !plan.countries.length
+          );
+          if (filteredPlans.length) return filteredPlans;
+        });
 
       notifyBugsnag(() => {
         Bugsnag.notify("SelectModal - No data viewed", (event) => {
@@ -154,27 +183,34 @@ class SelectModal extends Component {
             user: window.Pelcro?.user?.read(),
             uiVersion: window.Pelcro?.uiSettings?.uiVersion,
             environment: window.Pelcro?.environment,
+            matchingEntitlementsProps:
+              this.props?.matchingEntitlements,
+            productListState: this.state.productList,
+            methods: {
+              productsWithMatchedTaggedFirst:
+                productsWithMatchedTaggedFirst(),
+              pelcroSDKProductsListMethod:
+                window.Pelcro.product.list(),
+              pelcroSDKGetByEntitlements: this.props
+                .matchingEntitlements
+                ? window.Pelcro.product.getByEntitlements(
+                    this.props.matchingEntitlements
+                  )
+                : null
+            },
             userCurrency: userCurrency,
             userCountry: userCountry,
             userLanguage: userLanguage,
             siteLanguage:
               window.Pelcro?.helpers?.getHtmlLanguageAttribute(),
-            currency_mismatch:
-              window.Pelcro?.site
-                ?.read()
-                .products.filter((product) => {
-                  const filteredPlans = product.plans.find(
-                    (plan) => plan.currency === userCurrency
-                  );
-                  if (filteredPlans) return filteredPlans;
-                }).length === 0,
-            country_restrictions: currencyMismatch,
-            language_mismatch:
-              window.Pelcro?.site
-                ?.read()
-                .products.filter(
-                  (product) => product.language === userLanguage
-                ).length === 0
+            products: window.Pelcro?.site?.read().products.length,
+            currency_matching_filter: `${productsMatchingUserCurrency.length} Products Passed`,
+            country_matching_filter: `${productsMatchingUserCountry.length} Products Passed`,
+            language_matching_filter: `${
+              productsMatchingUserCountry.filter(
+                productMatchPageLanguage
+              ).length
+            } Products Passed`
           });
         });
       });
@@ -331,21 +367,6 @@ class SelectModal extends Component {
         )}
       </div>
     );
-
-    function productsWithMatchedTaggedFirst() {
-      const allProducts = window.Pelcro.product.list() ?? [];
-      const productsThatMatchArticleTag =
-        window.Pelcro.product.getByMatchingPageTags();
-
-      const allProductsMinusMatched = allProducts.filter(
-        (product) =>
-          !productsThatMatchArticleTag.some(
-            (matchedProduct) => matchedProduct.id === product.id
-          )
-      );
-
-      return [productsThatMatchArticleTag, allProductsMinusMatched];
-    }
   };
 
   renderPlans = () => {
