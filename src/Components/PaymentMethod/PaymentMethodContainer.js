@@ -118,6 +118,9 @@ const PaymentMethodContainerWithoutStripe = ({
   onFailure = () => {},
   ...props
 }) => {
+  const [vantivPaymentRequest, setVantivPaymentRequest] =
+    useState(null);
+  const [updatedCouponCode, setUpdatedCouponCode] = useState("");
   const { t } = useTranslation("payment");
   const pelcroStore = usePelcro();
   const { set, order, selectedPaymentMethodId, couponCode } =
@@ -546,7 +549,7 @@ const PaymentMethodContainerWithoutStripe = ({
     );
   };
 
-  function handleVantivPayment(paymentRequest, state) {
+  function handleVantivPayment(paymentRequest, couponCode) {
     if (paymentRequest) {
       const SUCCESS_STATUS = "870";
       if (paymentRequest.response !== SUCCESS_STATUS) {
@@ -631,8 +634,6 @@ const PaymentMethodContainerWithoutStripe = ({
       const giftSubscriprition = isGift && !subscriptionIdToRenew;
       const renewGift = isRenewingGift;
 
-      const { couponCode } = state;
-
       if (renewGift) {
         return payment.execute(
           {
@@ -716,6 +717,7 @@ const PaymentMethodContainerWithoutStripe = ({
             if (err) {
               return handlePaymentError(err);
             }
+
             onSuccess(res);
           }
         );
@@ -728,7 +730,8 @@ const PaymentMethodContainerWithoutStripe = ({
   const tapInstanceCard = React.useRef(null);
 
   useEffect(() => {
-    if (skipPayment && (plan?.amount === 0 || order?.price === 0)) return;
+    if (skipPayment && (plan?.amount === 0 || order?.price === 0))
+      return;
     if (cardProcessor === "vantiv" && !selectedPaymentMethodId) {
       const payPageId =
         window.Pelcro.site.read()?.vantiv_gateway_settings
@@ -744,7 +747,8 @@ const PaymentMethodContainerWithoutStripe = ({
         height: "245",
         timeout: 50000,
         div: "eProtectiframe",
-        callback: handleVantivPayment,
+        callback: (paymentRequest) =>
+          setVantivPaymentRequest(paymentRequest),
         showCvv: true,
         numYears: 8,
         placeholderText: {
@@ -760,9 +764,17 @@ const PaymentMethodContainerWithoutStripe = ({
     }
   }, [selectedPaymentMethodId]);
 
+  //Trigger the handleVantivPayment method when a vantivePaymentRequest is present
+  useEffect(() => {
+    if (vantivPaymentRequest) {
+      handleVantivPayment(vantivPaymentRequest, updatedCouponCode);
+    }
+  }, [vantivPaymentRequest]);
+
   useEffect(() => {
     whenUserReady(() => {
-      if (skipPayment && (plan?.amount === 0 || order?.price === 0)) return;
+      if (skipPayment && (plan?.amount === 0 || order?.price === 0))
+        return;
       if (cardProcessor === "tap" && !window.Tapjsli) {
         window.Pelcro.helpers.loadSDK(
           "https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.4/bluebird.min.js",
@@ -794,7 +806,8 @@ const PaymentMethodContainerWithoutStripe = ({
   }, [selectedPaymentMethodId]);
 
   const initPaymentRequest = (state, dispatch) => {
-    if (skipPayment && (plan?.amount === 0 || order?.price === 0)) return;
+    if (skipPayment && (plan?.amount === 0 || order?.price === 0))
+      return;
     try {
       const paymentRequest = stripe.paymentRequest({
         country: window.Pelcro.user.location.countryCode || "US",
@@ -849,7 +862,8 @@ const PaymentMethodContainerWithoutStripe = ({
    * Updates the total amount after adding taxes only if site taxes are enabled
    */
   const updateTotalAmountWithTax = () => {
-    if (skipPayment && (plan?.amount === 0 || order?.price === 0)) return;
+    if (skipPayment && (plan?.amount === 0 || order?.price === 0))
+      return;
     const taxesEnabled = window.Pelcro.site.read()?.taxes_enabled;
 
     if (taxesEnabled && type === "createPayment") {
@@ -888,6 +902,9 @@ const PaymentMethodContainerWithoutStripe = ({
 
       if (err) {
         onFailure(err);
+
+        //reset the coupon code in local state
+        setUpdatedCouponCode("");
 
         dispatch({
           type: SET_COUPON_ERROR,
@@ -945,6 +962,9 @@ const PaymentMethodContainerWithoutStripe = ({
         type: SET_COUPON,
         payload: res.data.coupon
       });
+
+      //set the coupon code in local state to be able to use with Vantiv
+      setUpdatedCouponCode(res.data.coupon.code);
 
       dispatch({
         type: SET_PERCENT_OFF,
@@ -1030,6 +1050,9 @@ const PaymentMethodContainerWithoutStripe = ({
 
   const removeAppliedCoupon = (state) => {
     state.couponCode = "";
+
+    //reset the coupon code in local state
+    setUpdatedCouponCode("");
 
     dispatch({ type: SET_COUPON_ERROR, payload: "" });
 
@@ -1782,7 +1805,7 @@ const PaymentMethodContainerWithoutStripe = ({
               if (skipPayment && order?.price === 0) {
                 return submitPayment(state, dispatch);
               }
-              
+
               if (getSiteCardProcessor() === "vantiv") {
                 return submitUsingVantiv(state);
               }
