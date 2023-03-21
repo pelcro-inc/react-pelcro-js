@@ -540,13 +540,10 @@ const PaymentMethodContainerWithoutStripe = ({
     /*     
     calls handleVantivPayment to either handle a payment or update a source by simply creating a new source 
     */
-    handleVantivPayment(
-      vantivInstanceRef.current.getPaypageRegistrationId({
-        id: orderId,
-        orderId: orderId
-      }),
-      state
-    );
+    vantivInstanceRef.current.getPaypageRegistrationId({
+      id: orderId,
+      orderId: orderId
+    });
   };
 
   function handleVantivPayment(paymentRequest, couponCode) {
