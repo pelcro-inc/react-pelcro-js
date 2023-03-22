@@ -1,3 +1,17 @@
+## [3.21.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.21.2...v3.21.3) (2023-03-21)
+
+
+### Bug Fixes
+
+* make sure the gateway_token is sent when using Vantiv ([8e8f847](https://github.com/pelcro-inc/react-pelcro-js/commit/8e8f8474a2fa8c8a315bf24ee2a89093ae98e870))
+
+## [3.21.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.21.1...v3.21.2) (2023-03-17)
+
+
+### Bug Fixes
+
+* bugsnag matching properties changing ([#312](https://github.com/pelcro-inc/react-pelcro-js/issues/312)) ([5e76fb2](https://github.com/pelcro-inc/react-pelcro-js/commit/5e76fb2d314b5e147506f022406798be26285119))
+
 ## [3.21.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.21.0...v3.21.1) (2023-03-14)
 
 
