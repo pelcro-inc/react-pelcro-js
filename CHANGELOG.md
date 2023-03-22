@@ -1,3 +1,15 @@
+# [3.22.0-beta.8](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.22.0-beta.7...v3.22.0-beta.8) (2023-03-22)
+
+
+### Bug Fixes
+
+* show invited user data ([b2d3d5e](https://github.com/pelcro-inc/react-pelcro-js/commit/b2d3d5e9653ab21eb1a415233e687b42c3dc750a))
+
+
+### Features
+
+* membership email depending on status ([3ae7922](https://github.com/pelcro-inc/react-pelcro-js/commit/3ae7922a33d2fe68ff031843f1fc8cabb3df4386))
+
 # [3.22.0-beta.7](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.22.0-beta.6...v3.22.0-beta.7) (2023-03-21)
 ## [3.20.1-beta.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.20.1-beta.2...v3.20.1-beta.3) (2023-03-04)
 
