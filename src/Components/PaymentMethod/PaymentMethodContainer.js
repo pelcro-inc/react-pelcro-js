@@ -1990,7 +1990,7 @@ const PaymentMethodContainer = (props) => {
         </Elements>
       </StripeProvider>
     );
-  } else {
+  } else if (cardProcessor !== "stripe") {
     return (
       <PaymentMethodContainerWithoutStripe store={store} {...props} />
     );
