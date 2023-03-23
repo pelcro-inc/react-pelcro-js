@@ -1,3 +1,12 @@
+# [3.22.0-beta.9](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.22.0-beta.8...v3.22.0-beta.9) (2023-03-23)
+
+
+### Bug Fixes
+
+* add 0 order to cart ([7fb6d97](https://github.com/pelcro-inc/react-pelcro-js/commit/7fb6d9799ab0a1375ff5a9bfe27fb3b445280c2c))
+* add orders to cart ([a0a43ee](https://github.com/pelcro-inc/react-pelcro-js/commit/a0a43ee57aa302293c4ffa9a9cf5556b416f8b97))
+* order price 0 submitPyment ([b776bce](https://github.com/pelcro-inc/react-pelcro-js/commit/b776bcef48ff8b33d1a4a5d2444847521c795fdf))
+
 # [3.22.0-beta.8](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.22.0-beta.7...v3.22.0-beta.8) (2023-03-22)
 ## [3.21.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.21.2...v3.21.3) (2023-03-21)
 
