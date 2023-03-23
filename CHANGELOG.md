@@ -1,3 +1,10 @@
+# [3.22.0-beta.10](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.22.0-beta.9...v3.22.0-beta.10) (2023-03-23)
+
+
+### Bug Fixes
+
+* cart items name ([990ddd1](https://github.com/pelcro-inc/react-pelcro-js/commit/990ddd1cf1e004e90209473582b98ad0fe7e4392))
+
 # [3.22.0-beta.9](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.22.0-beta.8...v3.22.0-beta.9) (2023-03-23)
 
 
