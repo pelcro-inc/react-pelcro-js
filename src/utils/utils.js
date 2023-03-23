@@ -174,7 +174,7 @@ export const calcAndFormatItemsTotal = (items, currency) => {
   let totalWithoutDividingBy100 = 0;
   for (const item of items) {
     totalWithoutDividingBy100 += parseFloat(
-      item.price || item.price === 0
+      item?.price || item?.price === 0
         ? isCurrencyZeroDecimal(currency)
           ? item.price * item.quantity
           : (item.price * item.quantity).toFixed(2)
