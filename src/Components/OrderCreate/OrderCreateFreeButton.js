@@ -24,7 +24,7 @@ export const OrderCreateFreeButton = ({ name, onClick, ...otherProps }) => {
 
   return (
     <Button
-      className='plc-w-full plc-mt-6'
+      className='plc-w-full'
       onClick={() => {
         dispatch({ type: DISABLE_SUBMIT, payload: true });
         dispatch({ type: SUBMIT_PAYMENT });

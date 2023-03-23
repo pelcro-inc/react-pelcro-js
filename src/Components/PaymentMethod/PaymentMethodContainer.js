@@ -1802,7 +1802,7 @@ const PaymentMethodContainerWithoutStripe = ({
               if (skipPayment && order?.price === 0) {
                 return submitPayment(state, dispatch);
               }
-
+              
               if (getSiteCardProcessor() === "vantiv") {
                 return submitUsingVantiv(state);
               }
