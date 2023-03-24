@@ -1,4 +1,13 @@
 # [3.22.0-beta.14](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.22.0-beta.13...v3.22.0-beta.14) (2023-03-24)
+## [3.21.5](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.21.4...v3.21.5) (2023-03-24)
+
+
+### Bug Fixes
+
+* send line2 in addressCreate and addressUpdate ([b3f7bd7](https://github.com/pelcro-inc/react-pelcro-js/commit/b3f7bd73a0ad1f9bd0ea1872e794ddbc185301f2))
+* send the state to vantiv and tap if payment method exist ([e923dfa](https://github.com/pelcro-inc/react-pelcro-js/commit/e923dfaa3162ff3ef22099bb6cd3fd5dee5cb817))
+
+## [3.21.4](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.21.3...v3.21.4) (2023-03-24)
 
 
 ### Bug Fixes

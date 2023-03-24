@@ -886,7 +886,7 @@ function hasInvoices() {
   const invoices =
     window.Pelcro.invoice
       .list()
-      ?.filter((invoice) => invoice.total > 0) ?? [];
+      ?.filter((invoice) => invoice.order_id || invoice.total > 0) ?? [];
   return invoices.length > 0;
 }
 
