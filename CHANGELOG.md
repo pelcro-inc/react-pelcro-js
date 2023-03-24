@@ -1,3 +1,10 @@
+# [3.22.0-beta.15](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.22.0-beta.14...v3.22.0-beta.15) (2023-03-24)
+
+
+### Bug Fixes
+
+* update user after purchase and show orders invoices ([790404b](https://github.com/pelcro-inc/react-pelcro-js/commit/790404b92d1eab11458039db47cc91a04e54e775))
+
 # [3.22.0-beta.14](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.22.0-beta.13...v3.22.0-beta.14) (2023-03-24)
 ## [3.21.5](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.21.4...v3.21.5) (2023-03-24)
 
