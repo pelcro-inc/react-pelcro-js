@@ -1,3 +1,11 @@
+# [3.22.0-beta.13](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.22.0-beta.12...v3.22.0-beta.13) (2023-03-24)
+
+
+### Bug Fixes
+
+* send the state to vantiv and tap if payment method exist ([e923dfa](https://github.com/pelcro-inc/react-pelcro-js/commit/e923dfaa3162ff3ef22099bb6cd3fd5dee5cb817))
+* ui crash after register if address is not required in selected product ([7beaa3d](https://github.com/pelcro-inc/react-pelcro-js/commit/7beaa3d89961d501b53212a7935d6790ba3e9ac6))
+
 # [3.22.0-beta.12](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.22.0-beta.11...v3.22.0-beta.12) (2023-03-24)
 
 ## [3.21.4](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.21.3...v3.21.4) (2023-03-24)
