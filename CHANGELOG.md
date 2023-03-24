@@ -1,65 +1,65 @@
 # [3.22.0-beta.12](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.22.0-beta.11...v3.22.0-beta.12) (2023-03-24)
 
+## [3.21.4](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.21.3...v3.21.4) (2023-03-24)
 
 ### Bug Fixes
 
-* purchasing 2 or more zero items ([1c61f88](https://github.com/pelcro-inc/react-pelcro-js/commit/1c61f88983fc4740cd18cf2c7703953027d1c68d))
+- purchasing 2 or more zero items ([1c61f88](https://github.com/pelcro-inc/react-pelcro-js/commit/1c61f88983fc4740cd18cf2c7703953027d1c68d))
 
 # [3.22.0-beta.11](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.22.0-beta.10...v3.22.0-beta.11) (2023-03-23)
 
-
 ### Bug Fixes
 
-* ui crash after register if address is not required in selected product ([#316](https://github.com/pelcro-inc/react-pelcro-js/issues/316)) ([9e92e37](https://github.com/pelcro-inc/react-pelcro-js/commit/9e92e37e527220ef5ae04b0825e8f1d0b419614b))
+- ui crash after register if address is not required in selected product ([#316](https://github.com/pelcro-inc/react-pelcro-js/issues/316)) ([9e92e37](https://github.com/pelcro-inc/react-pelcro-js/commit/9e92e37e527220ef5ae04b0825e8f1d0b419614b))
 
 # [3.22.0-beta.10](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.22.0-beta.9...v3.22.0-beta.10) (2023-03-23)
 
-
 ### Bug Fixes
 
-* cart items name ([990ddd1](https://github.com/pelcro-inc/react-pelcro-js/commit/990ddd1cf1e004e90209473582b98ad0fe7e4392))
+- cart items name ([990ddd1](https://github.com/pelcro-inc/react-pelcro-js/commit/990ddd1cf1e004e90209473582b98ad0fe7e4392))
 
 # [3.22.0-beta.9](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.22.0-beta.8...v3.22.0-beta.9) (2023-03-23)
 
-
 ### Bug Fixes
 
-* add 0 order to cart ([7fb6d97](https://github.com/pelcro-inc/react-pelcro-js/commit/7fb6d9799ab0a1375ff5a9bfe27fb3b445280c2c))
-* add orders to cart ([a0a43ee](https://github.com/pelcro-inc/react-pelcro-js/commit/a0a43ee57aa302293c4ffa9a9cf5556b416f8b97))
-* order price 0 submitPyment ([b776bce](https://github.com/pelcro-inc/react-pelcro-js/commit/b776bcef48ff8b33d1a4a5d2444847521c795fdf))
+- add 0 order to cart ([7fb6d97](https://github.com/pelcro-inc/react-pelcro-js/commit/7fb6d9799ab0a1375ff5a9bfe27fb3b445280c2c))
+- add orders to cart ([a0a43ee](https://github.com/pelcro-inc/react-pelcro-js/commit/a0a43ee57aa302293c4ffa9a9cf5556b416f8b97))
+- order price 0 submitPyment ([b776bce](https://github.com/pelcro-inc/react-pelcro-js/commit/b776bcef48ff8b33d1a4a5d2444847521c795fdf))
 
 # [3.22.0-beta.8](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.22.0-beta.7...v3.22.0-beta.8) (2023-03-22)
-## [3.21.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.21.2...v3.21.3) (2023-03-21)
 
+- ui crash after register if address is not required in selected product ([7beaa3d](https://github.com/pelcro-inc/react-pelcro-js/commit/7beaa3d89961d501b53212a7935d6790ba3e9ac6))
+
+## [3.21.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.21.2...v3.21.3) (2023-03-21)
 
 ### Bug Fixes
 
-* show invited user data ([b2d3d5e](https://github.com/pelcro-inc/react-pelcro-js/commit/b2d3d5e9653ab21eb1a415233e687b42c3dc750a))
-
+- show invited user data ([b2d3d5e](https://github.com/pelcro-inc/react-pelcro-js/commit/b2d3d5e9653ab21eb1a415233e687b42c3dc750a))
 
 ### Features
 
-* membership email depending on status ([3ae7922](https://github.com/pelcro-inc/react-pelcro-js/commit/3ae7922a33d2fe68ff031843f1fc8cabb3df4386))
+- membership email depending on status ([3ae7922](https://github.com/pelcro-inc/react-pelcro-js/commit/3ae7922a33d2fe68ff031843f1fc8cabb3df4386))
 
 # [3.22.0-beta.7](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.22.0-beta.6...v3.22.0-beta.7) (2023-03-21)
-## [3.20.1-beta.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.20.1-beta.2...v3.20.1-beta.3) (2023-03-04)
 
+## [3.20.1-beta.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.20.1-beta.2...v3.20.1-beta.3) (2023-03-04)
 
 ### Bug Fixes
 
-* update the new way for triggering vantiv ([3a270a6](https://github.com/pelcro-inc/react-pelcro-js/commit/3a270a609f259c1f5136a7cbe3ca40d4da227435))
+- update the new way for triggering vantiv ([3a270a6](https://github.com/pelcro-inc/react-pelcro-js/commit/3a270a609f259c1f5136a7cbe3ca40d4da227435))
 
 # [3.22.0-beta.6](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.22.0-beta.5...v3.22.0-beta.6) (2023-03-21)
+
 ## [3.20.1-beta.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.20.1-beta.1...v3.20.1-beta.2) (2023-02-28)
-* make sure the gateway_token is sent when using Vantiv ([8e8f847](https://github.com/pelcro-inc/react-pelcro-js/commit/8e8f8474a2fa8c8a315bf24ee2a89093ae98e870))
+
+- make sure the gateway_token is sent when using Vantiv ([8e8f847](https://github.com/pelcro-inc/react-pelcro-js/commit/8e8f8474a2fa8c8a315bf24ee2a89093ae98e870))
 
 ## [3.21.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.21.1...v3.21.2) (2023-03-17)
 
-
 ### Bug Fixes
 
-* bugsnag matching properties changing ([#312](https://github.com/pelcro-inc/react-pelcro-js/issues/312)) ([5e76fb2](https://github.com/pelcro-inc/react-pelcro-js/commit/5e76fb2d314b5e147506f022406798be26285119))
-* make sure the gateway_token is sent when using Vantiv ([8e8f847](https://github.com/pelcro-inc/react-pelcro-js/commit/8e8f8474a2fa8c8a315bf24ee2a89093ae98e870))
+- bugsnag matching properties changing ([#312](https://github.com/pelcro-inc/react-pelcro-js/issues/312)) ([5e76fb2](https://github.com/pelcro-inc/react-pelcro-js/commit/5e76fb2d314b5e147506f022406798be26285119))
+- make sure the gateway_token is sent when using Vantiv ([8e8f847](https://github.com/pelcro-inc/react-pelcro-js/commit/8e8f8474a2fa8c8a315bf24ee2a89093ae98e870))
 
 # [3.22.0-beta.5](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.22.0-beta.4...v3.22.0-beta.5) (2023-03-17)
 
