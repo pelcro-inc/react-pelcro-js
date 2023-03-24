@@ -8,8 +8,12 @@ export const OrderCreateView = (props) => {
   const { order } = usePelcro();
   const skipPayment =
     window.Pelcro?.uiSettings?.skipPaymentForFreePlans;
-  const showOrderButton = skipPayment && order?.price === 0;
-  
+  const showOrderButton =
+    skipPayment &&
+    (order?.price === 0 ||
+      (order?.length > 0 &&
+        order.every((item) => item?.price === 0)));
+
   return (
     <div id="pelcro-order-create-view">
       <div className="plc-mb-6 plc-text-2xl plc-font-semibold plc-text-center plc-text-gray-900 pelcro-title-wrapper">
