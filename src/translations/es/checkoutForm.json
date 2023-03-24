@@ -23,6 +23,7 @@
     "removeCoupon": "ELIMINAR",
     "firstName": "Nombre",
     "lastName": "Apellido",
-    "phone": "Teléfono"
+    "phone": "Teléfono",
+    "freeItems": "Artículos gratis"
   }
 }

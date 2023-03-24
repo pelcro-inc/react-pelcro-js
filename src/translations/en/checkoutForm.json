@@ -23,6 +23,7 @@
     "removeCoupon": "REMOVE",
     "firstName": "First name",
     "lastName": "Last name",
-    "phone": "Phone"
+    "phone": "Phone",
+    "freeItems": "Free Items"
   }
 }
