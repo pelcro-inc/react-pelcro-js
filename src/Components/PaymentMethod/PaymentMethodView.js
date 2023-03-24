@@ -22,6 +22,11 @@ import { IncludePhone } from "./IncludePhone";
 import { SubscriptionCreateFreePlanButton } from "../SubscriptionCreate/SubscriptionCreateFreePlanButton";
 import { BankAuthenticationSuccess } from "./BankAuthenticationSuccess";
 import { OrderCreateFreeButton } from "../OrderCreate/OrderCreateFreeButton";
+import {
+  calcAndFormatItemsTotal,
+  getFormattedPriceByLocal,
+  getPageOrDefaultLanguage
+} from "../../utils/utils";
 
 /**
  *
@@ -34,7 +39,8 @@ export function PaymentMethodView({
   showCoupon,
   showExternalPaymentMethods,
   showSubscriptionButton,
-  showOrderButton
+  showOrderButton,
+  order
 }) {
   const { t } = useTranslation("checkoutForm");
   const cardProcessor = getSiteCardProcessor();
@@ -55,6 +61,30 @@ export function PaymentMethodView({
 
   return (
     <div className="plc-flex plc-flex-col plc-items-center plc-mt-4 sm:plc-px-8 pelcro-payment-block">
+      {order && (
+        <div className="plc-w-full plc-p-2 plc-mb-4 plc-font-semibold plc-text-center plc-text-gray-900 plc-bg-gray-100 plc-border plc-border-gray-200">
+          <p className="plc-text-gray-600">
+            {!Array.isArray(order) ? (
+              <span className="plc-tracking-wider plc-uppercase">
+                {order?.name}
+              </span>
+            ) : (
+              <span className="plc-tracking-wider plc-uppercase">
+                {t("labels.freeItems")}
+              </span>
+            )}
+            <br />
+            <span className="plc-text-xl plc-font-semibold plc-text-primary-600">
+              {calcAndFormatItemsTotal(order, order[0]?.currency) ??
+                getFormattedPriceByLocal(
+                  order?.price,
+                  order?.currency,
+                  getPageOrDefaultLanguage()
+                )}
+            </span>
+          </p>
+        </div>
+      )}
       {cardProcessor === "stripe" &&
         !showSubscriptionButton &&
         !showOrderButton && (
@@ -83,6 +113,7 @@ export function PaymentMethodView({
           onSuccess={onSuccess}
           onGiftRenewalSuccess={onGiftRenewalSuccess}
           onFailure={onFailure}
+          freeOrders={showOrderButton}
         >
           <AlertWithContext className="plc-mb-2" />
           {/* Payment form */}

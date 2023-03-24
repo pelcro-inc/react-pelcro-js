@@ -111,6 +111,152 @@
 - only load stripe if no vantiv or tap support ([8e8641d](https://github.com/pelcro-inc/react-pelcro-js/commit/8e8641db86b250d055f590b43134c6a68a7197dd))
 - bugsnag trigger condition reset ([#309](https://github.com/pelcro-inc/react-pelcro-js/issues/309)) ([55e892e](https://github.com/pelcro-inc/react-pelcro-js/commit/55e892e6b845449011c4c0c9f52850d519e91f3d))
 
+# [3.22.0-beta.12](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.22.0-beta.11...v3.22.0-beta.12) (2023-03-24)
+
+### Bug Fixes
+
+- purchasing 2 or more zero items ([1c61f88](https://github.com/pelcro-inc/react-pelcro-js/commit/1c61f88983fc4740cd18cf2c7703953027d1c68d))
+
+# [3.22.0-beta.11](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.22.0-beta.10...v3.22.0-beta.11) (2023-03-23)
+
+### Bug Fixes
+
+- metadata issue ([#308](https://github.com/pelcro-inc/react-pelcro-js/issues/308)) ([e792e99](https://github.com/pelcro-inc/react-pelcro-js/commit/e792e99bf12c7587ac7c0264153da92f1df105fa))
+
+* ui crash after register if address is not required in selected product ([#316](https://github.com/pelcro-inc/react-pelcro-js/issues/316)) ([9e92e37](https://github.com/pelcro-inc/react-pelcro-js/commit/9e92e37e527220ef5ae04b0825e8f1d0b419614b))
+
+# [3.22.0-beta.10](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.22.0-beta.9...v3.22.0-beta.10) (2023-03-23)
+
+### Bug Fixes
+
+- go to payment modal after login ([#307](https://github.com/pelcro-inc/react-pelcro-js/issues/307)) ([ff5fed8](https://github.com/pelcro-inc/react-pelcro-js/commit/ff5fed813da16337c3d5f342cad5c098624fb696))
+
+* cart items name ([990ddd1](https://github.com/pelcro-inc/react-pelcro-js/commit/990ddd1cf1e004e90209473582b98ad0fe7e4392))
+
+# [3.22.0-beta.9](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.22.0-beta.8...v3.22.0-beta.9) (2023-03-23)
+
+### Bug Fixes
+
+- fixed payment-method-update url trigger issue ([#306](https://github.com/pelcro-inc/react-pelcro-js/issues/306)) ([f5bc2e2](https://github.com/pelcro-inc/react-pelcro-js/commit/f5bc2e221e80be98d33796b054fbbdbb4ff4b2ea))
+
+* add 0 order to cart ([7fb6d97](https://github.com/pelcro-inc/react-pelcro-js/commit/7fb6d9799ab0a1375ff5a9bfe27fb3b445280c2c))
+* add orders to cart ([a0a43ee](https://github.com/pelcro-inc/react-pelcro-js/commit/a0a43ee57aa302293c4ffa9a9cf5556b416f8b97))
+* order price 0 submitPyment ([b776bce](https://github.com/pelcro-inc/react-pelcro-js/commit/b776bcef48ff8b33d1a4a5d2444847521c795fdf))
+
+# [3.22.0-beta.8](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.22.0-beta.7...v3.22.0-beta.8) (2023-03-22)
+
+## [3.21.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.21.2...v3.21.3) (2023-03-21)
+
+### Bug Fixes
+
+- Free Orders Creation ([#304](https://github.com/pelcro-inc/react-pelcro-js/issues/304)) ([0f5001f](https://github.com/pelcro-inc/react-pelcro-js/commit/0f5001fdb53cb585d3d3acd164ef7a510c974d89))
+
+### Features
+
+- edit tap flow ([#305](https://github.com/pelcro-inc/react-pelcro-js/issues/305)) ([e65aa21](https://github.com/pelcro-inc/react-pelcro-js/commit/e65aa218e34d6fb735509f137a65a052f0b4f210))
+
+# [3.21.0-beta.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.20.3-beta.1...v3.21.0-beta.1) (2023-03-07)
+
+### Features
+
+- membership email depending on status ([#302](https://github.com/pelcro-inc/react-pelcro-js/issues/302)) ([7832a86](https://github.com/pelcro-inc/react-pelcro-js/commit/7832a862bd1308ee77acd192a4f4ef8493ad67c2))
+
+## [3.20.3-beta.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.20.2...v3.20.3-beta.1) (2023-03-06)
+
+### Bug Fixes
+
+- add methods and props effect products render ([b9e3e2b](https://github.com/pelcro-inc/react-pelcro-js/commit/b9e3e2be3c8b4d7e75224a56fbdb54e5f9bce9a4))
+- send couponCode from URL if it's not set in state ([#301](https://github.com/pelcro-inc/react-pelcro-js/issues/301)) ([30c0006](https://github.com/pelcro-inc/react-pelcro-js/commit/30c000687dc49227f4d1cfd172a34b91e8becd5f))
+
+* show invited user data ([b2d3d5e](https://github.com/pelcro-inc/react-pelcro-js/commit/b2d3d5e9653ab21eb1a415233e687b42c3dc750a))
+
+### Features
+
+- membership email depending on status ([3ae7922](https://github.com/pelcro-inc/react-pelcro-js/commit/3ae7922a33d2fe68ff031843f1fc8cabb3df4386))
+
+# [3.22.0-beta.7](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.22.0-beta.6...v3.22.0-beta.7) (2023-03-21)
+
+## [3.20.1-beta.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.20.1-beta.2...v3.20.1-beta.3) (2023-03-04)
+
+### Bug Fixes
+
+- update the new way for triggering vantiv ([3a270a6](https://github.com/pelcro-inc/react-pelcro-js/commit/3a270a609f259c1f5136a7cbe3ca40d4da227435))
+
+# [3.22.0-beta.6](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.22.0-beta.5...v3.22.0-beta.6) (2023-03-21)
+
+## [3.20.1-beta.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.20.1-beta.1...v3.20.1-beta.2) (2023-02-28)
+
+- make sure the gateway_token is sent when using Vantiv ([8e8f847](https://github.com/pelcro-inc/react-pelcro-js/commit/8e8f8474a2fa8c8a315bf24ee2a89093ae98e870))
+
+## [3.21.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.21.1...v3.21.2) (2023-03-17)
+
+### Bug Fixes
+
+- bugsnag matching properties changing ([#312](https://github.com/pelcro-inc/react-pelcro-js/issues/312)) ([5e76fb2](https://github.com/pelcro-inc/react-pelcro-js/commit/5e76fb2d314b5e147506f022406798be26285119))
+- make sure the gateway_token is sent when using Vantiv ([8e8f847](https://github.com/pelcro-inc/react-pelcro-js/commit/8e8f8474a2fa8c8a315bf24ee2a89093ae98e870))
+
+# [3.22.0-beta.5](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.22.0-beta.4...v3.22.0-beta.5) (2023-03-17)
+
+### Features
+
+- remove console.log to trigger a release ([1de5f9a](https://github.com/pelcro-inc/react-pelcro-js/commit/1de5f9a7b70368c575f9b2f01c80b91cfd360144))
+
+## [3.21.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.21.1...v3.21.2) (2023-03-17)
+
+# [3.22.0-beta.4](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.22.0-beta.3...v3.22.0-beta.4) (2023-03-17)
+
+### Bug Fixes
+
+- bugsnag matching properties changing ([#312](https://github.com/pelcro-inc/react-pelcro-js/issues/312)) ([5e76fb2](https://github.com/pelcro-inc/react-pelcro-js/commit/5e76fb2d314b5e147506f022406798be26285119))
+
+- order price 0 submitPyment ([#314](https://github.com/pelcro-inc/react-pelcro-js/issues/314)) ([585f7c6](https://github.com/pelcro-inc/react-pelcro-js/commit/585f7c6d48e26609004118a31dde98733dce7216))
+
+# [3.22.0-beta.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.22.0-beta.2...v3.22.0-beta.3) (2023-03-16)
+
+### Bug Fixes
+
+- free order info ([f0aafb6](https://github.com/pelcro-inc/react-pelcro-js/commit/f0aafb6caeb7460f6c08d21d6b1281da3df26365))
+- Free Orders Creation ([c9eaa5e](https://github.com/pelcro-inc/react-pelcro-js/commit/c9eaa5e640c661ad5dbd14784a8458f0797a482b))
+- remove debugger ([ceeada1](https://github.com/pelcro-inc/react-pelcro-js/commit/ceeada1a56e7c16b2899b56bc94b756e5d746e59))
+
+# [3.22.0-beta.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.22.0-beta.1...v3.22.0-beta.2) (2023-03-16)
+
+### Bug Fixes
+
+- bugsnag matching properties changing ([#311](https://github.com/pelcro-inc/react-pelcro-js/issues/311)) ([eb5519c](https://github.com/pelcro-inc/react-pelcro-js/commit/eb5519cd304ea645f1e013309d0b430796f834f4))
+
+# [3.22.0-beta.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.21.1...v3.22.0-beta.1) (2023-03-14)
+
+### Bug Fixes
+
+- add methods and props effect products render ([b9e3e2b](https://github.com/pelcro-inc/react-pelcro-js/commit/b9e3e2be3c8b4d7e75224a56fbdb54e5f9bce9a4))
+- bugsnag firing condition ([20e00cc](https://github.com/pelcro-inc/react-pelcro-js/commit/20e00cc3f1b89367613a9a031ae92f20dbdfd862))
+- bugsnag trigger condition reset ([#309](https://github.com/pelcro-inc/react-pelcro-js/issues/309)) ([55e892e](https://github.com/pelcro-inc/react-pelcro-js/commit/55e892e6b845449011c4c0c9f52850d519e91f3d))
+- fixed payment-method-update url trigger issue ([#306](https://github.com/pelcro-inc/react-pelcro-js/issues/306)) ([f5bc2e2](https://github.com/pelcro-inc/react-pelcro-js/commit/f5bc2e221e80be98d33796b054fbbdbb4ff4b2ea))
+- Free Orders Creation ([#304](https://github.com/pelcro-inc/react-pelcro-js/issues/304)) ([0f5001f](https://github.com/pelcro-inc/react-pelcro-js/commit/0f5001fdb53cb585d3d3acd164ef7a510c974d89))
+- go to payment modal after login ([#307](https://github.com/pelcro-inc/react-pelcro-js/issues/307)) ([ff5fed8](https://github.com/pelcro-inc/react-pelcro-js/commit/ff5fed813da16337c3d5f342cad5c098624fb696))
+- metadata issue ([#308](https://github.com/pelcro-inc/react-pelcro-js/issues/308)) ([e792e99](https://github.com/pelcro-inc/react-pelcro-js/commit/e792e99bf12c7587ac7c0264153da92f1df105fa))
+- send couponCode from URL if it's not set in state ([#301](https://github.com/pelcro-inc/react-pelcro-js/issues/301)) ([30c0006](https://github.com/pelcro-inc/react-pelcro-js/commit/30c000687dc49227f4d1cfd172a34b91e8becd5f))
+
+### Features
+
+- edit tap flow ([#305](https://github.com/pelcro-inc/react-pelcro-js/issues/305)) ([e65aa21](https://github.com/pelcro-inc/react-pelcro-js/commit/e65aa218e34d6fb735509f137a65a052f0b4f210))
+- membership email depending on status ([#302](https://github.com/pelcro-inc/react-pelcro-js/issues/302)) ([7832a86](https://github.com/pelcro-inc/react-pelcro-js/commit/7832a862bd1308ee77acd192a4f4ef8493ad67c2))
+
+# [3.21.0-beta.6](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.21.0-beta.5...v3.21.0-beta.6) (2023-03-10)
+
+## [3.21.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.21.1...v3.21.2) (2023-03-17)
+
+### Bug Fixes
+
+- bugsnag matching properties changing ([#312](https://github.com/pelcro-inc/react-pelcro-js/issues/312)) ([5e76fb2](https://github.com/pelcro-inc/react-pelcro-js/commit/5e76fb2d314b5e147506f022406798be26285119))
+
+## [3.21.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.21.0...v3.21.1) (2023-03-14)
+
+### Bug Fixes
+
+- bugsnag trigger condition reset ([#309](https://github.com/pelcro-inc/react-pelcro-js/issues/309)) ([55e892e](https://github.com/pelcro-inc/react-pelcro-js/commit/55e892e6b845449011c4c0c9f52850d519e91f3d))
+
 # [3.21.0-beta.5](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.21.0-beta.4...v3.21.0-beta.5) (2023-03-09)
 
 ### Bug Fixes
@@ -134,6 +280,9 @@
 ### Bug Fixes
 
 - Free Orders Creation ([#304](https://github.com/pelcro-inc/react-pelcro-js/issues/304)) ([0f5001f](https://github.com/pelcro-inc/react-pelcro-js/commit/0f5001fdb53cb585d3d3acd164ef7a510c974d89))
+- bugsnag country_restrictions condition ([#310](https://github.com/pelcro-inc/react-pelcro-js/issues/310)) ([fded078](https://github.com/pelcro-inc/react-pelcro-js/commit/fded07830d8bc51b327dce65989fd7dce55aee10))
+
+# [3.21.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.20.3...v3.21.0) (2023-03-13)
 
 ### Features
 
@@ -146,6 +295,10 @@
 - membership email depending on status ([#302](https://github.com/pelcro-inc/react-pelcro-js/issues/302)) ([7832a86](https://github.com/pelcro-inc/react-pelcro-js/commit/7832a862bd1308ee77acd192a4f4ef8493ad67c2))
 
 ## [3.20.3-beta.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.20.2...v3.20.3-beta.1) (2023-03-06)
+
+- edit tap flow ([1fd4b23](https://github.com/pelcro-inc/react-pelcro-js/commit/1fd4b23b6b6fac0cdc5a825ba2a142ceb6f98fc8))
+
+## [3.20.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.20.2...v3.20.3) (2023-03-10)
 
 ### Bug Fixes
 
@@ -165,6 +318,8 @@
 - free plan using tap and vantiv ([#300](https://github.com/pelcro-inc/react-pelcro-js/issues/300)) ([b9d086d](https://github.com/pelcro-inc/react-pelcro-js/commit/b9d086d7418a74420ba306e8aa8ead2c2b6cd97e))
 
 ## [3.20.1-beta.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.20.0...v3.20.1-beta.1) (2023-02-22)
+
+- add methods and props effect products render ([#303](https://github.com/pelcro-inc/react-pelcro-js/issues/303)) ([7bd19e9](https://github.com/pelcro-inc/react-pelcro-js/commit/7bd19e9aeac278d6bfcd6bb16dfb66870273de03))
 
 ## [3.20.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.20.1...v3.20.2) (2023-03-04)
 

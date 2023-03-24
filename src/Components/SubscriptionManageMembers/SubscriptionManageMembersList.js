@@ -38,6 +38,22 @@ export function SubscriptionManageMembersList(props) {
     };
   }, []);
 
+  const showMemberData = useCallback((member) => {
+    let data;
+    if (member?.status !== "active") {
+      data = member?.invitation_email;
+      return data;
+    }
+    data =
+      member?.customer?.email ||
+      member?.customer?.first_name +
+        " " +
+        member?.customer?.last_name ||
+      member?.customer?.username ||
+      "-----";
+    return data;
+  }, []);
+
   if (loading) {
     return (
       <>
@@ -93,17 +109,11 @@ export function SubscriptionManageMembersList(props) {
         >
           <td
             className="plc-truncate plc-text-left"
-            title={member?.invitation_email}
+            title={showMemberData(member)}
           >
-            {member.status === "active" ? (
-              <span className="plc-font-semibold plc-text-gray-500">
-                {member?.customer?.email}
-              </span>
-            ) : (
-              <span className="plc-font-semibold plc-text-gray-500">
-                {member?.invitation_email}
-              </span>
-            )}
+            <span className="plc-font-semibold plc-text-gray-500">
+              {showMemberData(member)}
+            </span>
           </td>
           <td className="plc-py-2">
             {/* Pill */}
