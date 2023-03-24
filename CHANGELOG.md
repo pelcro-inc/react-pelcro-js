@@ -1,3 +1,10 @@
+# [3.22.0-beta.12](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.22.0-beta.11...v3.22.0-beta.12) (2023-03-24)
+
+
+### Bug Fixes
+
+* purchasing 2 or more zero items ([1c61f88](https://github.com/pelcro-inc/react-pelcro-js/commit/1c61f88983fc4740cd18cf2c7703953027d1c68d))
+
 # [3.22.0-beta.11](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.22.0-beta.10...v3.22.0-beta.11) (2023-03-23)
 
 
