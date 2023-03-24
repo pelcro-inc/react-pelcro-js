@@ -161,6 +161,7 @@ export { ShopSelectProductButton } from "./Components/Shop/ShopSelectProductButt
 export { ShopPurchaseButton } from "./Components/Shop/ShopPurchaseButton";
 export { ShopView } from "./Components/Shop/ShopView";
 export { OrderCreateSubmitButton } from "./Components/OrderCreate/OrderCreateSubmitButton";
+export { OrderCreateFreeButton } from "./Components/OrderCreate/OrderCreateFreeButton";
 export { OrderCreateContainer } from "./Components/OrderCreate/OrderCreateContainer";
 export { OrderCreateModal } from "./Components/OrderCreate/OrderCreateModal";
 export { OrderCreateView } from "./Components/OrderCreate/OrderCreateView";

@@ -62,7 +62,8 @@ export function LoginModal({ onDisplay, onClose, ...props }) {
     const viewsURLs = [
       "invoice-details",
       "gift-redeem",
-      "plan-select"
+      "plan-select",
+      "payment-method-update"
     ];
 
     if (viewsURLs.includes(viewFromURL)) {

@@ -22,6 +22,7 @@
     "removeCoupon": "제거",
     "firstName": "이름",
     "lastName": "성",
-    "phone": "핸드폰"
+    "phone": "핸드폰",
+    "freeItems": "무료 아이템"
   }
 }
