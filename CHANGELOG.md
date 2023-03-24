@@ -1,3 +1,10 @@
+# [3.22.0-beta.14](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.22.0-beta.13...v3.22.0-beta.14) (2023-03-24)
+
+
+### Bug Fixes
+
+* send line2 in addressCreate and addressUpdate ([b3f7bd7](https://github.com/pelcro-inc/react-pelcro-js/commit/b3f7bd73a0ad1f9bd0ea1872e794ddbc185301f2))
+
 # [3.22.0-beta.13](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.22.0-beta.12...v3.22.0-beta.13) (2023-03-24)
 
 
