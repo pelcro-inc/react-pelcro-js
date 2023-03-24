@@ -1386,11 +1386,11 @@ const PaymentMethodContainerWithoutStripe = ({
         addressId: selectedAddressId,
         couponCode
       },
-      (err, res) => {
-        dispatch({ type: DISABLE_SUBMIT, payload: false });
-        dispatch({ type: LOADING, payload: false });
-
+      (err, orderResponse) => {
         if (err) {
+          toggleAuthenticationSuccessPendingView(false);
+          dispatch({ type: DISABLE_SUBMIT, payload: false });
+          dispatch({ type: LOADING, payload: false });
           onFailure(err);
           return dispatch({
             type: SHOW_ALERT,
@@ -1407,7 +1407,27 @@ const PaymentMethodContainerWithoutStripe = ({
           set({ order: null, cartItems: [] });
         }
 
-        onSuccess(res);
+        window.Pelcro.user.refresh(
+          {
+            auth_token: window.Pelcro?.user?.read()?.auth_token
+          },
+          (err, res) => {
+            dispatch({ type: DISABLE_SUBMIT, payload: false });
+            dispatch({ type: LOADING, payload: false });
+            toggleAuthenticationSuccessPendingView(false);
+            if (err) {
+              onFailure(err);
+              return dispatch({
+                type: SHOW_ALERT,
+                payload: {
+                  type: "error",
+                  content: getErrorMessages(err)
+                }
+              });
+            }
+            onSuccess(orderResponse);
+          }
+        );
       }
     );
   };
