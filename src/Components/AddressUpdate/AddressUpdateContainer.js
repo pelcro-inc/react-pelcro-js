@@ -135,6 +135,7 @@ const AddressUpdateContainer = ({
         first_name: firstName,
         last_name: lastName,
         line1: line1,
+        line2: line2,
         city: city,
         state: state,
         country: country,
