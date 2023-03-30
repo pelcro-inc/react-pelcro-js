@@ -118,6 +118,9 @@ const PaymentMethodContainerWithoutStripe = ({
   onFailure = () => {},
   ...props
 }) => {
+  const [vantivPaymentRequest, setVantivPaymentRequest] =
+    useState(null);
+  const [updatedCouponCode, setUpdatedCouponCode] = useState("");
   const { t } = useTranslation("payment");
   const pelcroStore = usePelcro();
   const { set, order, selectedPaymentMethodId, couponCode } =
@@ -158,13 +161,13 @@ const PaymentMethodContainerWithoutStripe = ({
   }, []);
 
   /*====== Start Tap integration ========*/
-  const submitUsingTap = () => {
+  const submitUsingTap = (state) => {
     const isUsingExistingPaymentMethod = Boolean(
       selectedPaymentMethodId
     );
     if (isUsingExistingPaymentMethod) {
       // no need to create a new source using tap
-      return handleTapPayment(null);
+      return handleTapPayment(null, state);
     }
 
     if (!tapInstanceRef.current) {
@@ -216,7 +219,7 @@ const PaymentMethodContainerWithoutStripe = ({
             }
           });
         } else {
-          window.Pelcro.payment.authorize(
+          window.Pelcro.payment.verify(
             {
               auth_token: window.Pelcro.user.read().auth_token,
               first_name:
@@ -232,11 +235,12 @@ const PaymentMethodContainerWithoutStripe = ({
                 invoice?.currency ||
                 window.Pelcro.site.read().default_currency,
               tap_token: result.id,
+              funding: result.card.funding,
               redirect_url: `${
                 window.Pelcro.environment.domain
               }/webhook/tap/callback/3dsecure?auth_token=${
                 window.Pelcro.user.read().auth_token
-              }`
+              }&type=verify_card&site_id=${window.Pelcro.siteid}`
             },
             (err, res) => {
               if (err) {
@@ -277,7 +281,7 @@ const PaymentMethodContainerWithoutStripe = ({
                         }
                       });
 
-                      handleTapPayment(tapID);
+                      handleTapPayment(tapID, state);
                     }
                   };
 
@@ -296,7 +300,7 @@ const PaymentMethodContainerWithoutStripe = ({
       });
   };
 
-  function handleTapPayment(paymentRequest) {
+  function handleTapPayment(paymentRequest, state) {
     const isUsingExistingPaymentMethod = Boolean(
       selectedPaymentMethodId
     );
@@ -334,6 +338,8 @@ const PaymentMethodContainerWithoutStripe = ({
         (err, res) => {
           dispatch({ type: DISABLE_SUBMIT, payload: false });
           dispatch({ type: LOADING, payload: false });
+          toggleAuthenticationSuccessPendingView(false);
+
           if (err) {
             onFailure(err);
             return dispatch({
@@ -353,7 +359,7 @@ const PaymentMethodContainerWithoutStripe = ({
             }
           });
           onSuccess(res);
-        }
+        } //
       );
     }
 
@@ -515,13 +521,13 @@ const PaymentMethodContainerWithoutStripe = ({
   };
   /*====== End Tap integration ========*/
 
-  const submitUsingVantiv = () => {
+  const submitUsingVantiv = (state) => {
     const isUsingExistingPaymentMethod = Boolean(
       selectedPaymentMethodId
     );
     if (isUsingExistingPaymentMethod) {
       // no need to create a new source using vantiv
-      return handleVantivPayment(null);
+      return handleVantivPayment(null, state.couponCode);
     }
 
     if (!vantivInstanceRef.current) {
@@ -540,7 +546,7 @@ const PaymentMethodContainerWithoutStripe = ({
     });
   };
 
-  function handleVantivPayment(paymentRequest) {
+  function handleVantivPayment(paymentRequest, couponCode) {
     if (paymentRequest) {
       const SUCCESS_STATUS = "870";
       if (paymentRequest.response !== SUCCESS_STATUS) {
@@ -625,9 +631,6 @@ const PaymentMethodContainerWithoutStripe = ({
       const giftSubscriprition = isGift && !subscriptionIdToRenew;
       const renewGift = isRenewingGift;
 
-      const couponCode =
-        state.couponCode || window.Pelcro.coupon.getFromUrl() || "";
-
       if (renewGift) {
         return payment.execute(
           {
@@ -711,6 +714,7 @@ const PaymentMethodContainerWithoutStripe = ({
             if (err) {
               return handlePaymentError(err);
             }
+
             onSuccess(res);
           }
         );
@@ -739,7 +743,8 @@ const PaymentMethodContainerWithoutStripe = ({
         height: "245",
         timeout: 50000,
         div: "eProtectiframe",
-        callback: handleVantivPayment,
+        callback: (paymentRequest) =>
+          setVantivPaymentRequest(paymentRequest),
         showCvv: true,
         numYears: 8,
         placeholderText: {
@@ -754,6 +759,13 @@ const PaymentMethodContainerWithoutStripe = ({
       });
     }
   }, [selectedPaymentMethodId]);
+
+  //Trigger the handleVantivPayment method when a vantivePaymentRequest is present
+  useEffect(() => {
+    if (vantivPaymentRequest) {
+      handleVantivPayment(vantivPaymentRequest, updatedCouponCode);
+    }
+  }, [vantivPaymentRequest]);
 
   useEffect(() => {
     whenUserReady(() => {
@@ -884,6 +896,9 @@ const PaymentMethodContainerWithoutStripe = ({
       if (err) {
         onFailure(err);
 
+        //reset the coupon code in local state
+        setUpdatedCouponCode("");
+
         dispatch({
           type: SET_COUPON_ERROR,
           payload: getErrorMessages(err)
@@ -940,6 +955,9 @@ const PaymentMethodContainerWithoutStripe = ({
         type: SET_COUPON,
         payload: res.data.coupon
       });
+
+      //set the coupon code in local state to be able to use with Vantiv
+      setUpdatedCouponCode(res.data.coupon.code);
 
       dispatch({
         type: SET_PERCENT_OFF,
@@ -1025,6 +1043,9 @@ const PaymentMethodContainerWithoutStripe = ({
 
   const removeAppliedCoupon = (state) => {
     state.couponCode = "";
+
+    //reset the coupon code in local state
+    setUpdatedCouponCode("");
 
     dispatch({ type: SET_COUPON_ERROR, payload: "" });
 
@@ -1751,7 +1772,7 @@ const PaymentMethodContainerWithoutStripe = ({
             { ...state, disableSubmit: true, isLoading: true },
             (state, dispatch) => {
               if (getSiteCardProcessor() === "vantiv") {
-                return submitUsingVantiv();
+                return submitUsingVantiv(state);
               }
 
               if (getSiteCardProcessor() === "tap") {
@@ -1935,7 +1956,7 @@ const PaymentMethodContainer = (props) => {
         </Elements>
       </StripeProvider>
     );
-  } else {
+  } else if (cardProcessor !== "stripe") {
     return (
       <PaymentMethodContainerWithoutStripe store={store} {...props} />
     );
