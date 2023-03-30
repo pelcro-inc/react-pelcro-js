@@ -1,3 +1,10 @@
+# [3.22.0-beta.16](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.22.0-beta.15...v3.22.0-beta.16) (2023-03-30)
+
+
+### Bug Fixes
+
+* iframe crash payment ([#317](https://github.com/pelcro-inc/react-pelcro-js/issues/317)) ([44c5810](https://github.com/pelcro-inc/react-pelcro-js/commit/44c5810d287fc46fb2e35df40ab608445c9d0351))
+
 # [3.22.0-beta.15](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.22.0-beta.14...v3.22.0-beta.15) (2023-03-24)
 ## [3.21.6](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.21.5...v3.21.6) (2023-03-30)
 
