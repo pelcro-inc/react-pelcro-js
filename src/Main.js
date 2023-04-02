@@ -5,6 +5,7 @@ import { VerifyLinkTokenModal } from "./Components/VerifyLinkToken/VerifyLinkTok
 import { RegisterModal } from "./Components/Register/RegisterModal";
 import { AddressUpdateModal } from "./Components/AddressUpdate/AddressUpdateModal";
 import { SelectModalWithHook as SelectModal } from "./Components/Select/SelectModal";
+import { DonationModalWithHook as DonationModal } from "./Components/Donation/DonationModal";
 import { DashboardWithHook as Dashboard } from "./Components/dashboard/Dashboard";
 import { UserUpdateModal } from "./Components/UserUpdate/UserUpdateModal";
 import { ProfilePicChangeModal } from "./Components/ProfilePicChange/ProfilePicChangeModal";
@@ -60,6 +61,7 @@ export const Main = () => {
       <PaymentMethodSelectModal />
 
       <SelectModal />
+      <DonationModal />
       <Newsletter />
       <NewsletterUpdateModal />
 

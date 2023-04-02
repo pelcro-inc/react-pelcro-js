@@ -22,17 +22,19 @@ export const init = () => {
     setSubscriptionToManageMembers
   } = usePelcro.getStore();
 
-  const pelcroDashboardButtonsByClass = document.getElementsByClassName(
-    "pelcro-dashboard-button"
-  );
+  const pelcroDashboardButtonsByClass =
+    document.getElementsByClassName("pelcro-dashboard-button");
 
   if (pelcroDashboardButtonsByClass.length !== 0) {
     for (let i = 0; i < pelcroDashboardButtonsByClass.length; i++) {
-      pelcroDashboardButtonsByClass[i].addEventListener("click", () => {
-        if (isAuthenticated()) {
-          switchView("dashboard");
+      pelcroDashboardButtonsByClass[i].addEventListener(
+        "click",
+        () => {
+          if (isAuthenticated()) {
+            switchView("dashboard");
+          }
         }
-      });
+      );
     }
   }
 
@@ -77,7 +79,11 @@ export const init = () => {
     document.getElementsByClassName("pelcro-manage-members-button");
 
   if (pelcroManageMembersButtonsByClass.length !== 0) {
-    for (let j = 0; j < pelcroManageMembersButtonsByClass.length; j++) {
+    for (
+      let j = 0;
+      j < pelcroManageMembersButtonsByClass.length;
+      j++
+    ) {
       if (
         pelcroManageMembersButtonsByClass[j].dataset &&
         "subscriptionId" in
@@ -206,6 +212,73 @@ export const init = () => {
         pelcroSubscribeButtonsByClass[j].addEventListener(
           "click",
           () => switchView("plan-select")
+        );
+      }
+    }
+  }
+
+  const pelcroDonateButtonsByClass = document.getElementsByClassName(
+    "pelcro-donate-button"
+  );
+
+  if (pelcroDonateButtonsByClass.length !== 0) {
+    for (let j = 0; j < pelcroDonateButtonsByClass.length; j++) {
+      if (
+        pelcroDonateButtonsByClass[j].dataset &&
+        "productId" in pelcroDonateButtonsByClass[j].dataset
+      ) {
+        pelcroDonateButtonsByClass[j].addEventListener(
+          "click",
+          (e) => {
+            const productsList = window.Pelcro.product.list();
+            if (!productsList?.length) return;
+
+            const [productId, planId, isGift] = [
+              e.target.dataset.productId,
+              e.target.dataset.planId,
+              e.target.dataset.isGift
+            ];
+
+            const selectedProduct = productsList.find(
+              (product) => product.id === Number(productId)
+            );
+
+            const selectedPlan = selectedProduct?.plans?.find(
+              (plan) => plan.id === Number(planId)
+            );
+
+            set({
+              product: selectedProduct,
+              plan: selectedPlan,
+              isGift: Boolean(isGift)
+            });
+
+            if (!selectedProduct || !selectedPlan) {
+              return switchView("plan-select");
+            }
+
+            if (!isAuthenticated()) {
+              return switchView("register");
+            }
+
+            if (isGift) {
+              return switchView("gift-create");
+            }
+
+            const requiresAddress = Boolean(
+              selectedProduct.address_required
+            );
+
+            if (!requiresAddress) {
+              return switchToPaymentView();
+            }
+
+            return switchToAddressView();
+          }
+        );
+      } else {
+        pelcroDonateButtonsByClass[j].addEventListener("click", () =>
+          switchView("donation-select")
         );
       }
     }

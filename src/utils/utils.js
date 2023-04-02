@@ -214,6 +214,7 @@ export const isValidViewFromURL = (viewID) => {
       "login",
       "register",
       "plan-select",
+      "donation-select",
       "gift-redeem",
       "password-forgot",
       "password-reset",

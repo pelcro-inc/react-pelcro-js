@@ -1,0 +1,29 @@
+{
+  "messages": {
+    "alreadyHaveAccount": "Vous avez déjà un compte ?",
+    "loginHere": "Connectez-vous ici",
+    "checkbox": "Cochez cette case pour offrir cet abonnement"
+  },
+  "labels": {
+    "plan": {
+      "title": "Abonnez-vous à un plan",
+      "subtitle": "Sélectionnez l’un des plans ci-dessous et cliquez sur suivant."
+    },
+    "product": {
+      "title": "Abonnez-vous à un produit",
+      "subtitle": "Sélectionnez l’un des produits ci-dessous et cliquez sur suivant."
+    },
+    "selectProduct": "Sélectionnez un produit",
+    "selectPlan": "Sélectionnez un plan",
+    "starningAt": "À partir de",
+    "restrictiveArticles": {
+      "subscribeTo": "Abonnez-vous à une des options suivantes pour accéder au contenu de cette page",
+      "or": "Sinon, jetez un coup d'oeil à d'autres offres ci-dessous"
+    }
+  },
+  "buttons": {
+    "next": "Prochain",
+    "select": "Choisir",
+    "back": "Retour"
+  }
+}
