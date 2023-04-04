@@ -13,10 +13,7 @@ import { Button } from "../../SubComponents/Button";
 import { Checkbox } from "../../SubComponents/Checkbox";
 import { Radio } from "../../SubComponents/Radio";
 import { usePelcro } from "../../hooks/usePelcro";
-import {
-  getEntitlementsFromElem,
-  notifyBugsnag
-} from "../../utils/utils";
+import { getEntitlementsFromElem } from "../../utils/utils";
 
 /**
  *
@@ -140,12 +137,12 @@ class DonationModal extends Component {
       });
     }
 
-    if (
-      this.state.productList.length === 0 &&
-      !window.Pelcro.user.isAuthenticated()
-    ) {
-      this.props.setView("register");
-    }
+    // if (
+    //   this.state.productList.length === 0 &&
+    //   !window.Pelcro.user.isAuthenticated()
+    // ) {
+    //   this.props.setView("register");
+    // }
 
     document.addEventListener("keydown", this.handleSubmit);
 
@@ -177,46 +174,6 @@ class DonationModal extends Component {
           );
           if (filteredPlans.length) return filteredPlans;
         });
-
-      notifyBugsnag(() => {
-        Bugsnag.notify("SelectModal - No data viewed", (event) => {
-          event.addMetadata("MetaData", {
-            site: window.Pelcro?.site?.read(),
-            user: window.Pelcro?.user?.read(),
-            uiVersion: window.Pelcro?.uiSettings?.uiVersion,
-            environment: window.Pelcro?.environment,
-            matchingEntitlementsProps:
-              this.props?.matchingEntitlements,
-            productListState: this.state.productList,
-            methods: {
-              productsWithMatchedTaggedFirst:
-                productsWithMatchedTaggedFirst(),
-              pelcroSDKProductsListMethod:
-                window.Pelcro.product.list(),
-              pelcroSDKGetByEntitlements: this.props
-                .matchingEntitlements
-                ? window.Pelcro.product.getByEntitlements(
-                    this.props.matchingEntitlements
-                  )
-                : null
-            },
-            userCurrency: userCurrency,
-            userCountry: userCountry,
-            userLanguage: userLanguage,
-            siteLanguage:
-              window.Pelcro?.helpers?.getHtmlLanguageAttribute(),
-            products: window.Pelcro?.site?.read().products.length,
-            currency_matching_filter: `${productsMatchingUserCurrency.length} Products Passed`,
-            country_matching_filter: `${productsMatchingUserCountry.length} Products Passed`,
-            language_matching_filter: `${
-              productsMatchingUserCountry.filter(
-                productMatchPageLanguage
-              ).length
-            } Products Passed`
-          });
-        });
-      });
-      console.log("bugsnag Triggered");
     }
   };
 
@@ -454,17 +411,17 @@ class DonationModal extends Component {
     const { switchToAddressView, switchToPaymentView } =
       usePelcro.getStore();
 
-    if (!isAuthenticated) {
-      return setView("register");
-    }
+    // if (!isAuthenticated) {
+    //   return setView("register");
+    // }
 
     if (isGift) {
       return setView("gift-create");
     }
 
-    if (product.address_required) {
-      return switchToAddressView();
-    }
+    // if (product.address_required) {
+    //   return switchToAddressView();
+    // }
 
     return switchToPaymentView();
   };

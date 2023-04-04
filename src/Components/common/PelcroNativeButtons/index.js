@@ -230,6 +230,7 @@ export const init = () => {
         pelcroDonateButtonsByClass[j].addEventListener(
           "click",
           (e) => {
+            set({ isDonation: true });
             const productsList = window.Pelcro.product.list();
             if (!productsList?.length) return;
 
@@ -257,28 +258,32 @@ export const init = () => {
               return switchView("plan-select");
             }
 
-            if (!isAuthenticated()) {
-              return switchView("register");
-            }
+            // if (!isAuthenticated()) {
+            //   return switchView("register");
+            // }
 
             if (isGift) {
               return switchView("gift-create");
             }
 
-            const requiresAddress = Boolean(
-              selectedProduct.address_required
-            );
+            // const requiresAddress = Boolean(
+            //   selectedProduct.address_required
+            // );
 
-            if (!requiresAddress) {
-              return switchToPaymentView();
-            }
+            // if (requiresAddress) {
+            //   return switchToAddressView();
+            // }
 
-            return switchToAddressView();
+            return switchToPaymentView();
           }
         );
       } else {
-        pelcroDonateButtonsByClass[j].addEventListener("click", () =>
-          switchView("donation-select")
+        pelcroDonateButtonsByClass[j].addEventListener(
+          "click",
+          () => {
+            set({ isDonation: true });
+            switchView("donation-select");
+          }
         );
       }
     }

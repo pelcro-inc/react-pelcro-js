@@ -472,6 +472,7 @@ export const initDonationFromURL = () => {
     });
 
     if (!selectedProduct || !selectedPlan) {
+      set({ isDonation: true });
       return switchView("donation-select");
     }
 
@@ -481,21 +482,21 @@ export const initDonationFromURL = () => {
       switchToPaymentView
     } = usePelcro.getStore();
 
-    if (!isAuthenticated()) {
-      return switchView("register");
-    }
+    // if (!isAuthenticated()) {
+    //   return switchView("register");
+    // }
 
-    if (isGift) {
-      return switchView("gift-create");
-    }
+    // if (isGift) {
+    //   return switchView("gift-create");
+    // }
 
-    const requiresAddress = Boolean(selectedProduct.address_required);
+    // const requiresAddress = Boolean(selectedProduct.address_required);
+    //
+    // if (requiresAddress) {
+    //   return switchToAddressView();
+    // }
 
-    if (!requiresAddress) {
-      return switchToPaymentView();
-    }
-
-    return switchToAddressView();
+    return switchToPaymentView();
   });
 };
 
