@@ -1,4 +1,5 @@
 ## [3.20.1-beta.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.20.1-beta.2...v3.20.1-beta.3) (2023-03-04)
+## [3.21.6](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.21.5...v3.21.6) (2023-03-30)
 
 
 ### Bug Fixes
@@ -6,6 +7,30 @@
 * send couponCode from URL if it's not set in state ([#301](https://github.com/pelcro-inc/react-pelcro-js/issues/301)) ([30c0006](https://github.com/pelcro-inc/react-pelcro-js/commit/30c000687dc49227f4d1cfd172a34b91e8becd5f))
 
 ## [3.20.1-beta.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.20.1-beta.1...v3.20.1-beta.2) (2023-02-28)
+* iframe crash payment ([#317](https://github.com/pelcro-inc/react-pelcro-js/issues/317)) ([44c5810](https://github.com/pelcro-inc/react-pelcro-js/commit/44c5810d287fc46fb2e35df40ab608445c9d0351))
+
+## [3.21.5](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.21.4...v3.21.5) (2023-03-24)
+
+
+### Bug Fixes
+
+* send line2 in addressCreate and addressUpdate ([b3f7bd7](https://github.com/pelcro-inc/react-pelcro-js/commit/b3f7bd73a0ad1f9bd0ea1872e794ddbc185301f2))
+* send the state to vantiv and tap if payment method exist ([e923dfa](https://github.com/pelcro-inc/react-pelcro-js/commit/e923dfaa3162ff3ef22099bb6cd3fd5dee5cb817))
+
+## [3.21.4](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.21.3...v3.21.4) (2023-03-24)
+
+
+### Bug Fixes
+
+* ui crash after register if address is not required in selected product ([7beaa3d](https://github.com/pelcro-inc/react-pelcro-js/commit/7beaa3d89961d501b53212a7935d6790ba3e9ac6))
+
+## [3.21.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.21.2...v3.21.3) (2023-03-21)
+
+
+### Bug Fixes
+
+* make sure the gateway_token is sent when using Vantiv ([8e8f847](https://github.com/pelcro-inc/react-pelcro-js/commit/8e8f8474a2fa8c8a315bf24ee2a89093ae98e870))
+
 ## [3.21.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.21.1...v3.21.2) (2023-03-17)
 
 
