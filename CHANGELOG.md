@@ -1,8 +1,12 @@
+## [3.20.1-beta.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.20.1-beta.2...v3.20.1-beta.3) (2023-03-04)
 ## [3.21.6](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.21.5...v3.21.6) (2023-03-30)
 
 
 ### Bug Fixes
 
+* send couponCode from URL if it's not set in state ([#301](https://github.com/pelcro-inc/react-pelcro-js/issues/301)) ([30c0006](https://github.com/pelcro-inc/react-pelcro-js/commit/30c000687dc49227f4d1cfd172a34b91e8becd5f))
+
+## [3.20.1-beta.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.20.1-beta.1...v3.20.1-beta.2) (2023-02-28)
 * iframe crash payment ([#317](https://github.com/pelcro-inc/react-pelcro-js/issues/317)) ([44c5810](https://github.com/pelcro-inc/react-pelcro-js/commit/44c5810d287fc46fb2e35df40ab608445c9d0351))
 
 ## [3.21.5](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.21.4...v3.21.5) (2023-03-24)
