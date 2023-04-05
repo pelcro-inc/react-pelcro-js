@@ -1,3 +1,11 @@
+## [3.21.7](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.21.6...v3.21.7) (2023-04-05)
+
+
+### Bug Fixes
+
+* allow e commerce orders for 0 ([#313](https://github.com/pelcro-inc/react-pelcro-js/issues/313)) ([ef08dd7](https://github.com/pelcro-inc/react-pelcro-js/commit/ef08dd70744bdf9212c1892dd3d24be5b2bcdafc))
+* manage members email invitation ([#318](https://github.com/pelcro-inc/react-pelcro-js/issues/318)) ([a64040e](https://github.com/pelcro-inc/react-pelcro-js/commit/a64040ec848b2239cf49ec1e785c2edc4daa737e)), closes [#301](https://github.com/pelcro-inc/react-pelcro-js/issues/301) [#301](https://github.com/pelcro-inc/react-pelcro-js/issues/301)
+
 ## [3.20.1-beta.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.20.1-beta.2...v3.20.1-beta.3) (2023-03-04)
 ## [3.21.6](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.21.5...v3.21.6) (2023-03-30)
 
