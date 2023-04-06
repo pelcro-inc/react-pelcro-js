@@ -19,6 +19,7 @@ export const initialState = {
   subscriptionIdToRenew: null,
   subscriptionToManageMembers: null,
   isDonation: false,
+  selectedDonationAmount: null,
 
   // E-commerce
   cartItems: [],

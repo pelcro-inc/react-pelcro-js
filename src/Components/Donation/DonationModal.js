@@ -53,9 +53,12 @@ export function DonationModalWithHook(props) {
         props.onClose?.();
         resetView();
       }}
-      setProductAndPlan={(product, plan, isGift) =>
-        set({ product, plan, isGift })
-      }
+      setProductAndPlan={(
+        product,
+        plan,
+        isGift,
+        selectedDonationAmount
+      ) => set({ product, plan, isGift, selectedDonationAmount })}
       setView={switchView}
       matchingEntitlements={
         view === "_plan-select-entitlements" ? entitlements : null
@@ -114,7 +117,7 @@ class DonationModal extends Component {
       disabled: true,
       mode: "product",
       productList: productList,
-      selectedDonatoinAmount: 0,
+      selectedDonationAmount: 0,
       totalDonatoinAmount: 0
     };
 
@@ -351,13 +354,13 @@ class DonationModal extends Component {
                   <button
                     className={`plc-bg-white plc-rounded-md plc-flex plc-items-center plc-justify-center plc-text-lg plc-w-full plc-min-h-20 focus:plc-outline-none ${
                       isChecked &&
-                      +this.state.selectedDonatoinAmount === +value
+                      +this.state.selectedDonationAmount === +value
                         ? "plc-border-primary-500 plc-text-primary-900 plc-border-2"
                         : "plc-border-gray-200 plc-text-gray-900 plc-border"
                     }`}
                     onClick={() => {
                       this.setState({
-                        selectedDonatoinAmount: +value
+                        selectedDonationAmount: +value
                       });
                       this.setState({
                         totalDonatoinAmount: +value * +plan.amount
@@ -434,7 +437,7 @@ class DonationModal extends Component {
 
   selectPlan = (e) => {
     this.setState({
-      selectedDonatoinAmount: 0
+      selectedDonationAmount: 0
     });
     this.setState({
       totalDonatoinAmount: 0
@@ -446,7 +449,9 @@ class DonationModal extends Component {
       if (+plan.id === +id) {
         plan.isCheked = true;
         this.setState({ plan: plan });
-        // this.setState({ disabled: false });
+        if (!plan.preset_donation_values) {
+          this.setState({ disabled: false });
+        }
       } else {
         plan.isCheked = false;
       }
@@ -462,7 +467,8 @@ class DonationModal extends Component {
     this.props.setProductAndPlan(
       this.state.product,
       this.state.plan,
-      this.state.isGift
+      this.state.isGift,
+      this.state.selectedDonationAmount
     );
 
     const { product, isGift } = this.state;

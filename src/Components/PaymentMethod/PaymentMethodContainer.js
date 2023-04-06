@@ -123,8 +123,13 @@ const PaymentMethodContainerWithoutStripe = ({
   const [updatedCouponCode, setUpdatedCouponCode] = useState("");
   const { t } = useTranslation("payment");
   const pelcroStore = usePelcro();
-  const { set, order, selectedPaymentMethodId, couponCode } =
-    usePelcro();
+  const {
+    set,
+    order,
+    selectedPaymentMethodId,
+    couponCode,
+    selectedDonationAmount
+  } = usePelcro();
   const { whenUserReady } = usePelcro.getStore();
 
   const product = props.product ?? pelcroStore.product;
@@ -143,6 +148,9 @@ const PaymentMethodContainerWithoutStripe = ({
     window.Pelcro?.uiSettings?.skipPaymentForFreePlans;
 
   const cardProcessor = getSiteCardProcessor();
+
+  console.log("Selecte Donation Amount", selectedDonationAmount);
+  console.log("Plan", plan);
 
   useEffect(() => {
     if (window.Pelcro.coupon.getFromUrl()) {
@@ -802,13 +810,25 @@ const PaymentMethodContainerWithoutStripe = ({
 
   const initPaymentRequest = (state, dispatch) => {
     if (skipPayment && plan?.amount === 0) return;
+
+    function getPlanAmount() {
+      if (state.updatedPrice) return state.updatedPrice;
+      if (plan.type === "donation" && selectedDonationAmount) {
+        return selectedDonationAmount * plan.amount;
+      } else {
+        return plan.amount;
+      }
+    }
+
+    console.log(getPlanAmount());
+
     try {
       const paymentRequest = stripe.paymentRequest({
         country: window.Pelcro.user.location.countryCode || "US",
         currency: plan.currency,
         total: {
           label: plan.nickname || plan.description,
-          amount: state.updatedPrice || plan.amount
+          amount: getPlanAmount()
         }
       });
 
@@ -1178,6 +1198,9 @@ const PaymentMethodContainerWithoutStripe = ({
     const { couponCode } = state;
 
     if (!subscriptionIdToRenew) {
+      console.log("Plan 2", plan);
+      console.log("Plan quantity", plan.quantity);
+
       window.Pelcro.subscription.create(
         {
           source_id: stripeSource?.isExistingSource
