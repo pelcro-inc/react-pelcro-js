@@ -91,7 +91,8 @@ function productMatchPageLanguage(product) {
     return true;
   }
 
-  const siteLanguage = window.Pelcro.helpers.getHtmlLanguageAttribute();
+  const siteLanguage =
+    window.Pelcro.helpers.getHtmlLanguageAttribute();
   return product.language === siteLanguage;
 }
 
@@ -408,7 +409,11 @@ class SelectModal extends Component {
     for (const product of this.state.productList) {
       if (+product.id === +id) {
         this.setState({ product: product });
-        this.setState({ planList: product.plans });
+        this.setState({
+          planList: product.plans.filter(
+            (plan) => plan.type === "regular"
+          )
+        });
         this.setState({ mode: "plan" });
         const isSelectedPlanPartOfThisProduct =
           this.state.plan?.product_id === Number(product.id);

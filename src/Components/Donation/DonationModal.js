@@ -99,17 +99,23 @@ class DonationModal extends Component {
   constructor(props) {
     super(props);
 
+    const productList = props.matchingEntitlements
+      ? window.Pelcro.product
+          .getByEntitlements(props.matchingEntitlements)
+          .filter((product) => product.has_donation_plans === true)
+      : window.Pelcro.product
+          .list()
+          .filter((product) => product.has_donation_plans === true);
+
     this.state = {
       product: {},
       plan: {},
       isGift: props.isGift,
       disabled: true,
       mode: "product",
-      productList: props.matchingEntitlements
-        ? window.Pelcro.product.getByEntitlements(
-            props.matchingEntitlements
-          )
-        : window.Pelcro.product.list()
+      productList: productList,
+      selectedDonatoinAmount: 0,
+      totalDonatoinAmount: 0
     };
 
     this.product =
@@ -331,32 +337,75 @@ class DonationModal extends Component {
   renderPlans = () => {
     return this.state.planList.map((plan) => {
       const isChecked = this.state.plan.id === plan.id ? true : false;
+
+      let presetDonationValues = null;
+      if (plan.preset_donation_values) {
+        presetDonationValues = (
+          <div className="plc-mt-3 plc-pt-3 plc-border-t plc-border-gray-200">
+            <h5 className="plc-mb-4 plc-font-medium">
+              Select amount
+            </h5>
+            <ul className="plc-grid plc-grid-cols-2 plc-gap-3">
+              {plan.preset_donation_values.map((value) => (
+                <li key={value}>
+                  <button
+                    className={`plc-bg-white plc-rounded-md plc-flex plc-items-center plc-justify-center plc-text-lg plc-w-full plc-min-h-20 focus:plc-outline-none ${
+                      isChecked &&
+                      +this.state.selectedDonatoinAmount === +value
+                        ? "plc-border-primary-500 plc-text-primary-900 plc-border-2"
+                        : "plc-border-gray-200 plc-text-gray-900 plc-border"
+                    }`}
+                    onClick={() => {
+                      this.setState({
+                        selectedDonatoinAmount: +value
+                      });
+                      this.setState({
+                        totalDonatoinAmount: +value * +plan.amount
+                      });
+                      this.setState({ disabled: false });
+                    }}
+                  >
+                    {value}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+        );
+      }
       return (
         <div
           key={plan.id}
-          className="plc-p-2 plc-mx-3 plc-mt-2 plc-text-gray-900 plc-border plc-border-gray-400 plc-border-solid plc-rounded pelcro-select-plan-wrapper"
+          className={`plc-p-2 plc-mx-3 plc-mt-2 plc-text-gray-900 plc-border-solid plc-rounded pelcro-select-plan-wrapper ${
+            isChecked
+              ? "plc-border-primary-500 plc-border-2"
+              : "plc-border-gray-400 plc-border "
+          }`}
         >
           <Radio
-            className="plc-self-start pelcro-select-plan-radio"
-            labelClassName="plc-cursor-pointer plc-w-full"
+            className="plc-self-start pelcro-select-plan-radio plc-hidden"
+            labelClassName="plc-cursor-pointer plc-w-full plc-ml-0"
             id={`pelcro-select-plan-${plan.id}`}
             name="plan"
             checked={isChecked}
             data-key={plan.id}
             onChange={this.selectPlan}
           >
-            <div>
-              <p className="plc-font-bold pelcro-select-plan-title">
-                {plan.nickname}
-              </p>
-              <p className="plc-text-xs pelcro-select-plan-description">
-                {plan.description}
+            <div className="plc-flex plc-items-center">
+              <div>
+                <p className="plc-font-bold pelcro-select-plan-title">
+                  {plan.nickname}
+                </p>
+                <p className="plc-text-xs pelcro-select-plan-description">
+                  {plan.description}
+                </p>
+              </div>
+              <p className="plc-font-bold pelcro-select-plan-price plc-flex-shrink-0 plc-ml-auto plc-pl-3">
+                {plan.amount_formatted}
               </p>
             </div>
-            <p className="plc-mt-3 plc-font-bold pelcro-select-plan-price">
-              {plan.amount_formatted}
-            </p>
           </Radio>
+          {isChecked && presetDonationValues}
         </div>
       );
     });
@@ -367,7 +416,11 @@ class DonationModal extends Component {
     for (const product of this.state.productList) {
       if (+product.id === +id) {
         this.setState({ product: product });
-        this.setState({ planList: product.plans });
+        this.setState({
+          planList: product.plans.filter(
+            (plan) => plan.type === "donation"
+          )
+        });
         this.setState({ mode: "plan" });
         const isSelectedPlanPartOfThisProduct =
           this.state.plan?.product_id === Number(product.id);
@@ -380,12 +433,20 @@ class DonationModal extends Component {
   };
 
   selectPlan = (e) => {
+    this.setState({
+      selectedDonatoinAmount: 0
+    });
+    this.setState({
+      totalDonatoinAmount: 0
+    });
+    this.setState({ disabled: true });
+
     const id = e.target.dataset.key;
     for (const plan of this.state.planList) {
       if (+plan.id === +id) {
         plan.isCheked = true;
         this.setState({ plan: plan });
-        this.setState({ disabled: false });
+        // this.setState({ disabled: false });
       } else {
         plan.isCheked = false;
       }
@@ -482,17 +543,17 @@ class DonationModal extends Component {
                 <div className="plc-overflow-y-scroll plc-max-h-72 pelcro-select-plans-wrapper">
                   {this.renderPlans()}
                 </div>
-                {!disableGifting && (
-                  <div className="plc-flex plc-justify-center plc-mt-2">
-                    <Checkbox
-                      onChange={this.onIsGiftChange}
-                      checked={this.state.isGift}
-                      id="pelcro-input-is-gift"
-                    >
-                      {this.locale("messages.checkbox")}
-                    </Checkbox>
-                  </div>
-                )}
+                {/* {!disableGifting && ( */}
+                {/*   <div className="plc-flex plc-justify-center plc-mt-2"> */}
+                {/*     <Checkbox */}
+                {/*       onChange={this.onIsGiftChange} */}
+                {/*       checked={this.state.isGift} */}
+                {/*       id="pelcro-input-is-gift" */}
+                {/*     > */}
+                {/*       {this.locale("messages.checkbox")} */}
+                {/*     </Checkbox> */}
+                {/*   </div> */}
+                {/* )} */}
                 <Button
                   disabled={this.state.disabled}
                   onClick={this.submitOption}
