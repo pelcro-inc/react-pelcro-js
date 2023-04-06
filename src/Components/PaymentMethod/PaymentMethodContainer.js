@@ -57,6 +57,7 @@ import {
   PaypalGateway,
   VantivGateway,
   TapGateway,
+  CybersourceGateway,
   PAYMENT_TYPES
 } from "../../services/Subscription/Payment.service";
 import { getPageOrDefaultLanguage } from "../../utils/utils";
@@ -165,69 +166,278 @@ const PaymentMethodContainerWithoutStripe = ({
   }, []);
 
   /*====== Start Cybersource integration ========*/
+  const cybersourceErrorHandle = (err) => {
+    const errorMessages = [];
 
-  const submitUsingCybersource = () => {
-    
+    // enumerable error (ex: validation errors)
+    Object.values(err?.details?.responseStatus?.details).forEach(
+      ({ message }) => {
+        errorMessages.push(message);
+      }
+    );
+
+    // convert to multiline string
+    return errorMessages.join("\n");
+  };
+
+  const submitUsingCybersource = (state, dispatch) => {
+    const isUsingExistingPaymentMethod = Boolean(
+      selectedPaymentMethodId
+    );
+    if (isUsingExistingPaymentMethod) {
+      // no need to create a new source using cybersrce
+      return handleCybersourcePayment(null, state);
+    }
+
+    if (!cybersourceInstanceRef.current) {
+      return console.error(
+        "Cybersource sdk script wasn't loaded, you need to load Cybersource sdk before rendering the Cybersource payment flow"
+      );
+    }
+
+    let options = {
+      cardExpirationMonth: state.month,
+      cardExpirationYear: state.year
+    };
+
+    cybersourceInstanceRef.current?.createToken(
+      options,
+      function (err, response) {
+        if (err) {
+          dispatch({ type: DISABLE_SUBMIT, payload: false });
+          dispatch({ type: LOADING, payload: false });
+          return dispatch({
+            type: SHOW_ALERT,
+            payload: {
+              type: "error",
+              content: cybersourceErrorHandle(err)
+            }
+          });
+        }
+        handleCybersourcePayment(response.token, state);
+      }
+    );
+  };
+
+  function handleCybersourcePayment(paymentRequest, state) {
+    const isUsingExistingPaymentMethod = Boolean(
+      selectedPaymentMethodId
+    );
+
+    if (type === "createPayment") {
+      handleCybersourceSubscription();
+    } else if (type === "orderCreate") {
+      purchase(
+        new CybersourceGateway(),
+        isUsingExistingPaymentMethod
+          ? selectedPaymentMethodId
+          : paymentRequest,
+        state,
+        dispatch
+      );
+    } else if (type === "invoicePayment") {
+      payInvoice(
+        new CybersourceGateway(),
+        isUsingExistingPaymentMethod
+          ? selectedPaymentMethodId
+          : paymentRequest,
+        dispatch
+      );
+    } else if (type === "updatePaymentSource") {
+      createNewCybersourceCard();
+    }
+
+    function createNewCybersourceCard() {
+      window.Pelcro.source.create(
+        {
+          auth_token: window.Pelcro.user.read().auth_token,
+          token: paymentRequest,
+          gateway: "cybersource"
+        },
+        (err, res) => {
+          dispatch({ type: DISABLE_SUBMIT, payload: false });
+          dispatch({ type: LOADING, payload: false });
+          toggleAuthenticationSuccessPendingView(false);
+
+          if (err) {
+            onFailure(err);
+            return dispatch({
+              type: SHOW_ALERT,
+              payload: {
+                type: "error",
+                content: getErrorMessages(err)
+              }
+            });
+          }
+
+          dispatch({
+            type: SHOW_ALERT,
+            payload: {
+              type: "success",
+              content: t("messages.sourceUpdated")
+            }
+          });
+          onSuccess(res);
+        } //
+      );
+    }
+
+    function handleCybersourceSubscription() {
+      const payment = new Payment(new CybersourceGateway());
+
+      const createSubscription = !isGift && !subscriptionIdToRenew;
+      const renewSubscription = !isGift && subscriptionIdToRenew;
+      const giftSubscriprition = isGift && !subscriptionIdToRenew;
+      const renewGift = isRenewingGift;
+
+      const { couponCode } = state;
+
+      if (renewGift) {
+        return payment.execute(
+          {
+            type: PAYMENT_TYPES.RENEW_GIFTED_SUBSCRIPTION,
+            token: isUsingExistingPaymentMethod
+              ? selectedPaymentMethodId
+              : paymentRequest,
+            plan,
+            couponCode,
+            product,
+            isExistingSource: isUsingExistingPaymentMethod,
+            subscriptionIdToRenew,
+            addressId: selectedAddressId
+          },
+          (err, res) => {
+            if (err) {
+              return handlePaymentError(err);
+            }
+            onSuccess(res);
+          }
+        );
+      } else if (giftSubscriprition) {
+        return payment.execute(
+          {
+            type: PAYMENT_TYPES.CREATE_GIFTED_SUBSCRIPTION,
+            token: isUsingExistingPaymentMethod
+              ? selectedPaymentMethodId
+              : paymentRequest,
+            quantity: plan.quantity,
+            plan,
+            couponCode,
+            product,
+            isExistingSource: isUsingExistingPaymentMethod,
+            giftRecipient,
+            addressId: selectedAddressId
+          },
+          (err, res) => {
+            if (err) {
+              return handlePaymentError(err);
+            }
+            onSuccess(res);
+          }
+        );
+      } else if (renewSubscription) {
+        return payment.execute(
+          {
+            type: PAYMENT_TYPES.RENEW_SUBSCRIPTION,
+            token: isUsingExistingPaymentMethod
+              ? selectedPaymentMethodId
+              : paymentRequest,
+            quantity: plan.quantity,
+            plan,
+            couponCode,
+            product,
+            isExistingSource: isUsingExistingPaymentMethod,
+            subscriptionIdToRenew,
+            addressId: selectedAddressId
+          },
+          (err, res) => {
+            if (err) {
+              return handlePaymentError(err);
+            }
+            onSuccess(res);
+          }
+        );
+      } else if (createSubscription) {
+        return payment.execute(
+          {
+            type: PAYMENT_TYPES.CREATE_SUBSCRIPTION,
+            token: isUsingExistingPaymentMethod
+              ? selectedPaymentMethodId
+              : paymentRequest,
+            quantity: plan.quantity,
+            plan,
+            couponCode,
+            product,
+            isExistingSource: isUsingExistingPaymentMethod,
+            addressId: selectedAddressId
+          },
+          (err, res) => {
+            if (err) {
+              return handlePaymentError(err);
+            }
+            onSuccess(res);
+          }
+        );
+      }
+    }
   }
+
+  const tokenizeCard = (error, microformInstance) => {
+    if (error) {
+      console.log("tokenizeCard => ", error);
+      return;
+    }
+
+    cybersourceInstanceRef.current = microformInstance;
+  };
 
   const initCybersourceScript = () => {
     // jwk api call
-    const jwk = { /* jwk fetched on the server side */ };
+    window.Pelcro.payment.getJWK(
+      {
+        auth_token: window.Pelcro.user.read().auth_token,
+        site_id: window.Pelcro.siteid
+      },
+      (err, res) => {
+        if (err) {
+          onFailure(err);
+          dispatch({ type: DISABLE_SUBMIT, payload: false });
+          dispatch({ type: LOADING, payload: false });
+          return dispatch({
+            type: SHOW_ALERT,
+            payload: {
+              type: "error",
+              content: getErrorMessages(err)
+            }
+          });
+        }
 
-    // SETUP MICROFORM
-    // FLEX.microform(
-    //   {
-    //     keyId: jwk.kid,
-    //     keystore: jwk,
-    //     container: '#cybersourceCardNumber',
-    //     placeholder: 'Card Number',
-    //     styles: {
-    //       'input': {
-    //         'font-size': '14px',
-    //         'font-family': 'helvetica, tahoma, calibri, sans-serif',
-    //         'color': '#555',
-    //       },
-    //       ':focus': { 'color': 'blue' },
-    //       ':disabled': { 'cursor': 'not-allowed' },
-    //       'valid': { 'color': '#3c763d' },
-    //       'invalid': { 'color': '#a94442' },
-    //     }
-    //   },
-    //   function (setupError, microformInstance) {
-    //     if (setupError) {
-    //       // handle error
-    //       return;
-    //     }
-
-    //     // intercept the form submission and make a tokenize request instead
-    //     payButton.addEventListener('click', function () {
-
-    //       // Send in optional parameters from other parts of your payment form
-    //       var options = {
-    //         // cardExpirationMonth: /* ... */,
-    //         // cardExpirationYear:  /* ... */,
-    //       };
-
-    //       microformInstance.createToken(options, function (err, response) {
-    //         if (err) {
-    //           // handle error
-    //           return;
-    //         }
-
-    //         console.log('Token generated: ');
-    //         console.log(JSON.stringify(response));
-
-    //         // At this point the token may be added to the form
-    //         // as hidden fields and the submission continued
-    //         // form.submit();
-
-    //       });
-    //     });
-
-    //   }
-    // );
-
-  }
+        const { key: jwk } = res;
+        // SETUP MICROFORM
+        FLEX.microform(
+          {
+            keyId: jwk.kid,
+            keystore: jwk,
+            container: "#cybersourceCardNumber",
+            placeholder: "Card Number",
+            styles: {
+              input: {
+                "font-size": "14px",
+                "font-family":
+                  "helvetica, tahoma, calibri, sans-serif",
+                color: "#555"
+              },
+              ":focus": { color: "blue" },
+              ":disabled": { cursor: "not-allowed" },
+              valid: { color: "#3c763d" },
+              invalid: { color: "#a94442" }
+            }
+          },
+          tokenizeCard
+        );
+      }
+    );
+  };
 
   /*====== End Cybersource integration ========*/
 
@@ -797,6 +1007,7 @@ const PaymentMethodContainerWithoutStripe = ({
   const vantivInstanceRef = React.useRef(null);
   const tapInstanceRef = React.useRef(null);
   const tapInstanceCard = React.useRef(null);
+  const cybersourceInstanceRef = React.useRef(null);
 
   useEffect(() => {
     if (skipPayment && plan?.amount === 0) return;
@@ -1873,6 +2084,10 @@ const PaymentMethodContainerWithoutStripe = ({
 
               if (getSiteCardProcessor() === "tap") {
                 return submitUsingTap(state, dispatch);
+              }
+
+              if (getSiteCardProcessor() === "cybersource") {
+                return submitUsingCybersource(state, dispatch);
               }
 
               if (selectedPaymentMethodId) {
