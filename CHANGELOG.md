@@ -1,3 +1,15 @@
+# [3.22.0-beta.17](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.22.0-beta.16...v3.22.0-beta.17) (2023-04-09)
+
+
+### Features
+
+* add custom donation amount ([cd295ed](https://github.com/pelcro-inc/react-pelcro-js/commit/cd295edbdd3aea7e6bb764e09dc2b7405d51a0a5))
+* add flag isDonation and edit the donation flow ([5c123fb](https://github.com/pelcro-inc/react-pelcro-js/commit/5c123fb388a82994d5319e5165d3c5bfaafbb21a))
+* add the donation modal ([6af4956](https://github.com/pelcro-inc/react-pelcro-js/commit/6af4956c0bb61b3510feec634b7b529597df0336))
+* filter the donation plans and regular plans ([83106a3](https://github.com/pelcro-inc/react-pelcro-js/commit/83106a306701f93498596426fea5b7aec36f3038))
+* register the user before sending the payment ([6fc80e1](https://github.com/pelcro-inc/react-pelcro-js/commit/6fc80e1557fe80f8139f2d729d27b2c15e25b8f6))
+* set the correct donation amount for the paymentMethodContainer ([4921f85](https://github.com/pelcro-inc/react-pelcro-js/commit/4921f8520cc393a479188295f1698404bdf6a920))
+
 # [3.22.0-beta.16](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.22.0-beta.15...v3.22.0-beta.16) (2023-03-30)
 
 
