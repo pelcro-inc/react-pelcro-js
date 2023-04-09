@@ -31,6 +31,7 @@ export { FacebookLoginButton } from "./Components/common/FacebookLoginButton/Fac
 export { GoogleLoginButton } from "./Components/common/GoogleLoginButton/GoogleLoginButton";
 export { Auth0LoginButton } from "./Components/common/Auth0LoginButton/Auth0LoginButton";
 export { SelectModalWithHook as SelectModal } from "./Components/Select/SelectModal";
+export { DonationModalWithHook as DonationModal } from "./Components/Donation/DonationModal";
 export { SubscriptionRenewModal } from "./Components/SubscriptionRenew/SubscriptionRenewModal";
 export { SubscriptionCancelModal } from "./Components/SubscriptionCancel/SubscriptionCancelModal";
 export { SubscriptionSuspendModal } from "./Components/SubscriptionSuspend/SubscriptionSuspendModal";
@@ -59,7 +60,7 @@ export { SubscriptionCreateFreePlanButton } from "./Components/SubscriptionCreat
 export { SubscriptionCreateView } from "./Components/SubscriptionCreate/SubscriptionCreateView";
 export { SubscriptionCreateModal } from "./Components/SubscriptionCreate/SubscriptionCreateModal";
 
-export { SubscriptionManageMembersButton } from "./Components/SubscriptionManageMembers/SubscriptionManageMembersButton"
+export { SubscriptionManageMembersButton } from "./Components/SubscriptionManageMembers/SubscriptionManageMembersButton";
 export { SubscriptionManageMembersEmails } from "./Components/SubscriptionManageMembers/SubscriptionManageMembersEmails";
 export { SubscriptionManageMembersList } from "./Components/SubscriptionManageMembers/SubscriptionManageMembersList";
 export { SubscriptionManageMembersView } from "./Components/SubscriptionManageMembers/SubscriptionManageMembersView";

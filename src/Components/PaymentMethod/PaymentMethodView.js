@@ -27,6 +27,8 @@ import {
   getFormattedPriceByLocal,
   getPageOrDefaultLanguage
 } from "../../utils/utils";
+import { DonationEmail } from "./DonationEmail";
+import { usePelcro } from "../../hooks/usePelcro";
 
 /**
  *
@@ -43,6 +45,7 @@ export function PaymentMethodView({
   order
 }) {
   const { t } = useTranslation("checkoutForm");
+  const { plan, isAuthenticated } = usePelcro();
   const cardProcessor = getSiteCardProcessor();
 
   const supportsVantiv = Boolean(
@@ -159,6 +162,15 @@ export function PaymentMethodView({
                   </>
                 )}
 
+              {!isAuthenticated() && plan?.type === "donation" && (
+                <DonationEmail
+                  id="pelcro-input-email"
+                  errorId="pelcro-input-email-error"
+                  label={t("labels.email")}
+                  required
+                  autoFocus={true}
+                />
+              )}
               <CheckoutForm />
 
               {/* Coupon section */}

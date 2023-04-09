@@ -1,4 +1,5 @@
 import React from "react";
+import { loadStripe } from "@stripe/stripe-js/pure";
 import { usePelcro } from "../../hooks/usePelcro";
 import {
   init as initNativeButtons,
@@ -26,7 +27,23 @@ export const PelcroModalController = ({
   options = defaultOptions,
   children
 }) => {
-  const { view, isAuthenticated, whenSiteReady } = usePelcro();
+  const { view, isAuthenticated, whenSiteReady, isDonation } =
+    usePelcro();
+
+  const supportsVantiv = Boolean(
+    window.Pelcro.site.read().vantiv_gateway_settings
+  );
+  const supportsTap = Boolean(
+    window.Pelcro.site.read().tap_gateway_settings
+  );
+
+  React.useEffect(() => {
+    if (isDonation) {
+      if (!window.Stripe && !supportsVantiv && !supportsTap) {
+        loadStripe(window.Pelcro.environment.stripe);
+      }
+    }
+  }, [isDonation]);
 
   React.useEffect(() => {
     initNativeButtons();

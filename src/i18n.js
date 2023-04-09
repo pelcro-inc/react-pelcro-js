@@ -22,6 +22,7 @@ import shop_en from "./translations/en/shop.json";
 import payment_en from "./translations/en/payment.json";
 import dashboard_en from "./translations/en/dashboard.json";
 import select_en from "./translations/en/select.json";
+import donation_en from "./translations/en/donation.json";
 import notification_en from "./translations/en/notification.json";
 import verifyEmail_en from "./translations/en/verifyEmail.json";
 import invoiceDetails_en from "./translations/en/InvoiceDetails.json";
@@ -54,6 +55,7 @@ import shop_fr from "./translations/fr/shop.json";
 import payment_fr from "./translations/fr/payment.json";
 import dashboard_fr from "./translations/fr/dashboard.json";
 import select_fr from "./translations/fr/select.json";
+import donation_fr from "./translations/fr/donation.json";
 import notification_fr from "./translations/fr/notification.json";
 import verifyEmail_fr from "./translations/fr/verifyEmail.json";
 import invoiceDetails_fr from "./translations/fr/InvoiceDetails.json";
@@ -80,6 +82,7 @@ import shop_ko from "./translations/ko/shop.json";
 import payment_ko from "./translations/ko/payment.json";
 import dashboard_ko from "./translations/ko/dashboard.json";
 import select_ko from "./translations/ko/select.json";
+import donation_ko from "./translations/ko/donation.json";
 import notification_ko from "./translations/ko/notification.json";
 import verifyEmail_ko from "./translations/ko/verifyEmail.json";
 import invoiceDetails_ko from "./translations/ko/InvoiceDetails.json";
@@ -106,6 +109,7 @@ import shop_es from "./translations/es/shop.json";
 import payment_es from "./translations/es/payment.json";
 import dashboard_es from "./translations/es/dashboard.json";
 import select_es from "./translations/es/select.json";
+import donation_es from "./translations/es/donation.json";
 import notification_es from "./translations/es/notification.json";
 import verifyEmail_es from "./translations/es/verifyEmail.json";
 import invoiceDetails_es from "./translations/es/InvoiceDetails.json";
@@ -138,6 +142,7 @@ const resources = {
     payment: payment_en,
     dashboard: dashboard_en,
     select: select_en,
+    donation: donation_en,
     notification: notification_en,
     invoiceDetails: invoiceDetails_en,
     subscriptionCancel: subscriptionCancel_en,
@@ -167,6 +172,7 @@ const resources = {
     payment: payment_fr,
     dashboard: dashboard_fr,
     select: select_fr,
+    donation: donation_fr,
     notification: notification_fr,
     invoiceDetails: invoiceDetails_fr,
     subscriptionCancel: subscriptionCancel_fr,
@@ -196,6 +202,7 @@ const resources = {
     payment: payment_ko,
     dashboard: dashboard_ko,
     select: select_ko,
+    donation: donation_ko,
     notification: notification_ko,
     invoiceDetails: invoiceDetails_ko,
     subscriptionCancel: subscriptionCancel_ko,
@@ -225,6 +232,7 @@ const resources = {
     payment: payment_es,
     dashboard: dashboard_es,
     select: select_es,
+    donation: donation_es,
     notification: notification_es,
     invoiceDetails: invoiceDetails_es,
     subscriptionCancel: subscriptionCancel_es,
