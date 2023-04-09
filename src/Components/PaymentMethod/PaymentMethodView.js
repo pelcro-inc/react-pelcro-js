@@ -21,6 +21,8 @@ import { IncludeFirstName } from "./IncludeFirstName";
 import { IncludeLastName } from "./IncludeLastName";
 import { IncludePhone } from "./IncludePhone";
 import { SubscriptionCreateFreePlanButton } from "../SubscriptionCreate/SubscriptionCreateFreePlanButton";
+import { DonationEmail } from "./DonationEmail";
+import { usePelcro } from "../../hooks/usePelcro";
 
 /**
  *
@@ -35,6 +37,7 @@ export function PaymentMethodView({
   showSubscriptionButton
 }) {
   const { t } = useTranslation("checkoutForm");
+  const { plan, isAuthenticated } = usePelcro();
   const cardProcessor = getSiteCardProcessor();
 
   const supportsVantiv = Boolean(
@@ -120,6 +123,15 @@ export function PaymentMethodView({
                   </>
                 )}
 
+              {!isAuthenticated() && plan?.type === "donation" && (
+                <DonationEmail
+                  id="pelcro-input-email"
+                  errorId="pelcro-input-email-error"
+                  label={t("labels.email")}
+                  required
+                  autoFocus={true}
+                />
+              )}
               <CheckoutForm />
 
               {/* Coupon section */}

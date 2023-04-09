@@ -23,6 +23,7 @@
     "removeCoupon": "RETIRER",
     "firstName": "Prénom",
     "lastName": "Nom de famille",
-    "phone": "Téléphoner"
+    "phone": "Téléphoner",
+    "email": "Courriel"
   }
 }

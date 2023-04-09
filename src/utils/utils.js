@@ -521,3 +521,15 @@ export function notifyBugsnag(callback, startOptions) {
 
   callback();
 }
+
+//create a safe and strong password string with special characters
+export function generatePassword() {
+  const length = 16;
+  const charset =
+    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+{}|:<>?`~";
+  let retVal = "";
+  for (let i = 0, n = charset.length; i < length; ++i) {
+    retVal += charset.charAt(Math.floor(Math.random() * n));
+  }
+  return retVal;
+}

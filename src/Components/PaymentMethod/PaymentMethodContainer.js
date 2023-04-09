@@ -42,7 +42,10 @@ import {
   SET_PHONE,
   SET_FIRST_NAME_ERROR,
   SET_LAST_NAME_ERROR,
-  SET_PHONE_ERROR
+  SET_PHONE_ERROR,
+  SET_EMAIL,
+  SET_PASSWORD,
+  SET_EMAIL_ERROR
 } from "../../utils/action-types";
 import {
   getErrorMessages,
@@ -57,7 +60,10 @@ import {
   TapGateway,
   PAYMENT_TYPES
 } from "../../services/Subscription/Payment.service";
-import { getPageOrDefaultLanguage } from "../../utils/utils";
+import {
+  getPageOrDefaultLanguage,
+  generatePassword
+} from "../../utils/utils";
 import { usePelcro } from "../../hooks/usePelcro";
 
 /**
@@ -96,9 +102,11 @@ const initialState = {
   firstName: "",
   lastName: "",
   phone: "",
+  email: "",
   firstNameError: null,
   lastNameError: null,
   phoneError: null,
+  emailError: null,
   alert: {
     type: "error",
     content: ""
@@ -129,7 +137,8 @@ const PaymentMethodContainerWithoutStripe = ({
     selectedPaymentMethodId,
     couponCode,
     selectedDonationAmount,
-    customDonationAmount
+    customDonationAmount,
+    isAuthenticated
   } = usePelcro();
   const { whenUserReady } = usePelcro.getStore();
 
@@ -149,10 +158,6 @@ const PaymentMethodContainerWithoutStripe = ({
     window.Pelcro?.uiSettings?.skipPaymentForFreePlans;
 
   const cardProcessor = getSiteCardProcessor();
-
-  console.log("Selecte Donation Amount", selectedDonationAmount);
-  console.log("Custom Donation Amount", customDonationAmount);
-  console.log("Plan", plan);
 
   useEffect(() => {
     if (window.Pelcro.coupon.getFromUrl()) {
@@ -206,9 +211,22 @@ const PaymentMethodContainerWithoutStripe = ({
       }, 0);
     };
 
+    function getPlanAmount() {
+      if (state.updatedPrice) return state.updatedPrice;
+      if (
+        plan.type === "donation" &&
+        (selectedDonationAmount || customDonationAmount)
+      ) {
+        return selectedDonationAmount
+          ? selectedDonationAmount * plan.amount
+          : customDonationAmount * plan.amount;
+      } else {
+        return plan.amount;
+      }
+    }
+
     const totalAmount =
-      state?.updatedPrice ??
-      plan?.amount ??
+      getPlanAmount() ??
       invoice?.amount_remaining ??
       getOrderItemsTotal() ??
       10;
@@ -827,8 +845,6 @@ const PaymentMethodContainerWithoutStripe = ({
       }
     }
 
-    console.log(getPlanAmount());
-
     try {
       const paymentRequest = stripe.paymentRequest({
         country: window.Pelcro.user.location.countryCode || "US",
@@ -1205,9 +1221,6 @@ const PaymentMethodContainerWithoutStripe = ({
     const { couponCode } = state;
 
     if (!subscriptionIdToRenew) {
-      console.log("Plan 2", plan);
-      console.log("Plan quantity", plan.quantity);
-
       window.Pelcro.subscription.create(
         {
           source_id: stripeSource?.isExistingSource
@@ -1516,6 +1529,34 @@ const PaymentMethodContainerWithoutStripe = ({
     });
   };
 
+  const sendRegisterRequest = (state, callback) => {
+    window.Pelcro.user.register(
+      {
+        email: state.email,
+        password: generatePassword()
+      },
+      (err, res) => {
+        if (err) {
+          let { registered_on_other_sites, ...errors } =
+            err?.response?.data?.errors;
+          err.response.data.errors = { ...errors };
+          dispatch({
+            type: SHOW_ALERT,
+            payload: {
+              type: "error",
+              content: getErrorMessages(err)
+            }
+          });
+          dispatch({ type: DISABLE_SUBMIT, payload: false });
+          dispatch({ type: LOADING, payload: false });
+          onFailure(err);
+        } else {
+          callback();
+        }
+      }
+    );
+  };
+
   const submitPayment = (state, dispatch) => {
     stripe
       .createSource({ type: "card" })
@@ -1802,27 +1843,60 @@ const PaymentMethodContainerWithoutStripe = ({
             { ...state, disableSubmit: true, isLoading: true },
             (state, dispatch) => {
               if (getSiteCardProcessor() === "vantiv") {
-                return submitUsingVantiv(state);
+                if (!isAuthenticated() && plan.type === "donation") {
+                  return sendRegisterRequest(state, () =>
+                    submitUsingVantiv(state)
+                  );
+                } else {
+                  return submitUsingVantiv(state);
+                }
               }
 
               if (getSiteCardProcessor() === "tap") {
-                return submitUsingTap(state, dispatch);
+                if (!isAuthenticated() && plan.type === "donation") {
+                  return sendRegisterRequest(state, () =>
+                    submitUsingTap(state, dispatch)
+                  );
+                } else {
+                  return submitUsingTap(state, dispatch);
+                }
               }
 
               if (selectedPaymentMethodId) {
-                // pay with selected method (source) if exists already
-                return handlePayment(
-                  {
-                    id: selectedPaymentMethodId,
-                    isExistingSource: true
-                  },
-                  state,
-                  dispatch
-                );
+                if (!isAuthenticated() && plan.type === "donation") {
+                  return sendRegisterRequest(state, () =>
+                    handlePayment(
+                      {
+                        id: selectedPaymentMethodId,
+                        isExistingSource: true
+                      },
+                      state,
+                      dispatch
+                    )
+                  );
+                } else {
+                  // pay with selected method (source) if exists already
+                  return handlePayment(
+                    {
+                      id: selectedPaymentMethodId,
+                      isExistingSource: true
+                    },
+                    state,
+                    dispatch
+                  );
+                }
               }
 
               if (type === "updatePaymentSource") {
                 return updatePaymentSource(state, dispatch);
+              }
+
+              if (!isAuthenticated() && plan.type === "donation") {
+                return sendRegisterRequest(state, () =>
+                  submitPayment(state, dispatch)
+                );
+              } else {
+                return submitPayment(state, dispatch);
               }
 
               submitPayment(state, dispatch);
@@ -1901,6 +1975,20 @@ const PaymentMethodContainerWithoutStripe = ({
             phoneError: null
           });
 
+        case SET_EMAIL:
+          return Update({
+            ...state,
+            email: action.payload,
+            emailError: null
+          });
+
+        case SET_PASSWORD:
+          return Update({
+            ...state,
+            password: action.payload,
+            passwordError: null
+          });
+
         case SET_FIRST_NAME_ERROR:
           return Update({
             ...state,
@@ -1920,6 +2008,13 @@ const PaymentMethodContainerWithoutStripe = ({
             ...state,
             phoneError: action.payload,
             phone: null
+          });
+
+        case SET_EMAIL_ERROR:
+          return Update({
+            ...state,
+            emailError: action.payload,
+            email: ""
           });
 
         case SHOW_ALERT:

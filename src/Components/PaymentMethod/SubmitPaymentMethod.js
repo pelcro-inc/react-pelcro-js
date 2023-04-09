@@ -18,6 +18,7 @@ export const SubmitPaymentMethod = ({ onClick, ...otherProps }) => {
       firstNameError,
       lastNameError,
       phoneError,
+      emailError,
       firstName,
       lastName,
       phone,
@@ -62,7 +63,8 @@ export const SubmitPaymentMethod = ({ onClick, ...otherProps }) => {
           (supportsTap && phoneError) ||
           (supportsTap && !firstName?.length) ||
           (supportsTap && !lastName?.length) ||
-          (supportsTap && !phone?.length)
+          (supportsTap && !phone?.length) ||
+          emailError
       );
     }
   }, [
@@ -72,7 +74,8 @@ export const SubmitPaymentMethod = ({ onClick, ...otherProps }) => {
     phoneError,
     firstName,
     lastName,
-    phone
+    phone,
+    emailError
   ]);
 
   return (
