@@ -128,7 +128,8 @@ const PaymentMethodContainerWithoutStripe = ({
     order,
     selectedPaymentMethodId,
     couponCode,
-    selectedDonationAmount
+    selectedDonationAmount,
+    customDonationAmount
   } = usePelcro();
   const { whenUserReady } = usePelcro.getStore();
 
@@ -150,6 +151,7 @@ const PaymentMethodContainerWithoutStripe = ({
   const cardProcessor = getSiteCardProcessor();
 
   console.log("Selecte Donation Amount", selectedDonationAmount);
+  console.log("Custom Donation Amount", customDonationAmount);
   console.log("Plan", plan);
 
   useEffect(() => {
@@ -813,8 +815,13 @@ const PaymentMethodContainerWithoutStripe = ({
 
     function getPlanAmount() {
       if (state.updatedPrice) return state.updatedPrice;
-      if (plan.type === "donation" && selectedDonationAmount) {
-        return selectedDonationAmount * plan.amount;
+      if (
+        plan.type === "donation" &&
+        (selectedDonationAmount || customDonationAmount)
+      ) {
+        return selectedDonationAmount
+          ? selectedDonationAmount * plan.amount
+          : customDonationAmount * plan.amount;
       } else {
         return plan.amount;
       }

@@ -22,7 +22,8 @@
     }
   },
   "buttons": {
-    "next": "Next",
+    "signupAndDonate": "Sign up & donate",
+    "donate": "Donate",
     "select": "Select",
     "back": "Back"
   }

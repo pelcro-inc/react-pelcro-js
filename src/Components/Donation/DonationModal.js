@@ -12,8 +12,15 @@ import { Link } from "../../SubComponents/Link";
 import { Button } from "../../SubComponents/Button";
 import { Checkbox } from "../../SubComponents/Checkbox";
 import { Radio } from "../../SubComponents/Radio";
+import { Input } from "../../SubComponents/Input";
 import { usePelcro } from "../../hooks/usePelcro";
-import { getEntitlementsFromElem } from "../../utils/utils";
+import {
+  getEntitlementsFromElem,
+  getFormattedPriceByLocal,
+  getPageOrDefaultLanguage
+} from "../../utils/utils";
+import { ReactComponent as XIcon } from "../../assets/x-icon.svg";
+import { ReactComponent as CheckIcon } from "../../assets/check.svg";
 
 /**
  *
@@ -57,8 +64,17 @@ export function DonationModalWithHook(props) {
         product,
         plan,
         isGift,
-        selectedDonationAmount
-      ) => set({ product, plan, isGift, selectedDonationAmount })}
+        selectedDonationAmount,
+        customDonationAmount
+      ) =>
+        set({
+          product,
+          plan,
+          isGift,
+          selectedDonationAmount,
+          customDonationAmount
+        })
+      }
       setView={switchView}
       matchingEntitlements={
         view === "_plan-select-entitlements" ? entitlements : null
@@ -117,8 +133,8 @@ class DonationModal extends Component {
       disabled: true,
       mode: "product",
       productList: productList,
-      selectedDonationAmount: 0,
-      totalDonatoinAmount: 0
+      selectedDonationAmount: null,
+      customDonationAmount: ""
     };
 
     this.product =
@@ -341,41 +357,96 @@ class DonationModal extends Component {
     return this.state.planList.map((plan) => {
       const isChecked = this.state.plan.id === plan.id ? true : false;
 
-      let presetDonationValues = null;
-      if (plan.preset_donation_values) {
-        presetDonationValues = (
-          <div className="plc-mt-3 plc-pt-3 plc-border-t plc-border-gray-200">
-            <h5 className="plc-mb-4 plc-font-medium">
-              Select amount
-            </h5>
-            <ul className="plc-grid plc-grid-cols-2 plc-gap-3">
-              {plan.preset_donation_values.map((value) => (
-                <li key={value}>
-                  <button
-                    className={`plc-bg-white plc-rounded-md plc-flex plc-items-center plc-justify-center plc-text-lg plc-w-full plc-min-h-20 focus:plc-outline-none ${
-                      isChecked &&
-                      +this.state.selectedDonationAmount === +value
-                        ? "plc-border-primary-500 plc-text-primary-900 plc-border-2"
-                        : "plc-border-gray-200 plc-text-gray-900 plc-border"
-                    }`}
-                    onClick={() => {
-                      this.setState({
-                        selectedDonationAmount: +value
-                      });
-                      this.setState({
-                        totalDonatoinAmount: +value * +plan.amount
-                      });
-                      this.setState({ disabled: false });
-                    }}
-                  >
-                    {value}
-                  </button>
-                </li>
-              ))}
-            </ul>
+      let planDetails = (
+        <div>
+          <div className="plc-bg-gray-100 plc-rounded-md plc-p-3 plc-mt-3 plc-text-sm plc-flex plc-items-center">
+            <div className="plc-flex plc-items-center plc-flex-1">
+              Auto renewed:{" "}
+              <span className="plc-inline-flex plc-w-6 plc-ml-1">
+                {plan.auto_renew ? (
+                  <CheckIcon className="plc-text-green-500" />
+                ) : (
+                  <XIcon className="plc-text-red-500" />
+                )}
+              </span>{" "}
+            </div>
+
+            <div className="plc-flex plc-items-center plc-flex-1">
+              Renewed every:{" "}
+              <span className="plc-inline-flex plc-w-6 plc-ml-1 plc-font-bold plc-capitalize">
+                {plan.interval || "-"}
+              </span>
+            </div>
           </div>
-        );
-      }
+          {plan.preset_donation_values && (
+            <div className="plc-mt-3 plc-pt-3 plc-border-t plc-border-gray-200">
+              <h5 className="plc-mb-4 plc-font-medium plc-text-center">
+                Select amount
+              </h5>
+              <ul className="plc-grid plc-grid-cols-2 plc-gap-3">
+                {plan.preset_donation_values.map((value) => (
+                  <li key={value}>
+                    <button
+                      className={`plc-bg-white plc-rounded-md plc-flex plc-items-center plc-justify-center plc-text-lg plc-w-full plc-min-h-20 focus:plc-outline-none ${
+                        isChecked &&
+                        +this.state.selectedDonationAmount === +value
+                          ? "plc-border-primary-500 plc-text-primary-900 plc-border-2"
+                          : "plc-border-gray-200 plc-text-gray-900 plc-border"
+                      }`}
+                      onClick={() => {
+                        this.setState({
+                          selectedDonationAmount: +value,
+                          customDonationAmount: "",
+                          disabled: false
+                        });
+                      }}
+                    >
+                      {getFormattedPriceByLocal(
+                        value,
+                        plan?.currency,
+                        getPageOrDefaultLanguage()
+                      )}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+
+              <div className="plc-relative plc-py-3 plc-mt-3">
+                <hr />{" "}
+                <span className="plc-absolute plc-top-1/2 plc-left-1/2 plc-transform plc--translate-x-1/2 plc--translate-y-1/2 plc-leading-none plc-bg-white plc-px-2">
+                  or
+                </span>
+              </div>
+            </div>
+          )}
+
+          <div className="plc-relative plc-mt-3">
+            <Input
+              type="number"
+              value={this.state.customDonationAmount}
+              onChange={(e) => {
+                if (+e.target.value > 0) {
+                  this.setState({
+                    customDonationAmount: +e.target.value,
+                    selectedDonationAmount: null,
+                    disabled: false
+                  });
+                } else {
+                  this.setState({
+                    customDonationAmount: ""
+                  });
+                  this.setState({ disabled: true });
+                }
+              }}
+              placeholder="Donate a custome amount ..."
+              className="plc-pr-14"
+            />
+            <span className="plc-absolute plc-top-1/2 plc-transform plc--translate-y-1/2 plc-right-3 plc-pl-3 plc-border-l plc-border-gray-200 plc-uppercase plc-text-sm">
+              {plan.currency}
+            </span>
+          </div>
+        </div>
+      );
       return (
         <div
           key={plan.id}
@@ -394,21 +465,16 @@ class DonationModal extends Component {
             data-key={plan.id}
             onChange={this.selectPlan}
           >
-            <div className="plc-flex plc-items-center">
-              <div>
-                <p className="plc-font-bold pelcro-select-plan-title">
-                  {plan.nickname}
-                </p>
-                <p className="plc-text-xs pelcro-select-plan-description">
-                  {plan.description}
-                </p>
-              </div>
-              <p className="plc-font-bold pelcro-select-plan-price plc-flex-shrink-0 plc-ml-auto plc-pl-3">
-                {plan.amount_formatted}
+            <div className="plc-text-center">
+              <p className="plc-font-bold pelcro-select-plan-title">
+                {plan.nickname}
+              </p>
+              <p className="plc-text-xs pelcro-select-plan-description">
+                {plan.description}
               </p>
             </div>
           </Radio>
-          {isChecked && presetDonationValues}
+          {isChecked && planDetails}
         </div>
       );
     });
@@ -437,10 +503,7 @@ class DonationModal extends Component {
 
   selectPlan = (e) => {
     this.setState({
-      selectedDonationAmount: 0
-    });
-    this.setState({
-      totalDonatoinAmount: 0
+      selectedDonationAmount: null
     });
     this.setState({ disabled: true });
 
@@ -449,9 +512,6 @@ class DonationModal extends Component {
       if (+plan.id === +id) {
         plan.isCheked = true;
         this.setState({ plan: plan });
-        if (!plan.preset_donation_values) {
-          this.setState({ disabled: false });
-        }
       } else {
         plan.isCheked = false;
       }
@@ -463,12 +523,13 @@ class DonationModal extends Component {
     this.setState({ mode: "product" });
   };
 
-  submitOption = () => {
+  submitOption = (signUpFirst) => {
     this.props.setProductAndPlan(
       this.state.product,
       this.state.plan,
       this.state.isGift,
-      this.state.selectedDonationAmount
+      this.state.selectedDonationAmount,
+      this.state.customDonationAmount
     );
 
     const { product, isGift } = this.state;
@@ -478,17 +539,20 @@ class DonationModal extends Component {
     const { switchToAddressView, switchToPaymentView } =
       usePelcro.getStore();
 
-    // if (!isAuthenticated) {
-    //   return setView("register");
-    // }
-
-    if (isGift) {
-      return setView("gift-create");
+    if (
+      (!isAuthenticated && product.address_required) ||
+      (!isAuthenticated && signUpFirst)
+    ) {
+      return setView("register");
     }
 
-    // if (product.address_required) {
-    //   return switchToAddressView();
+    // if (isGift) {
+    //   return setView("gift-create");
     // }
+
+    if (product.address_required) {
+      return switchToAddressView();
+    }
 
     return switchToPaymentView();
   };
@@ -560,30 +624,61 @@ class DonationModal extends Component {
                 {/*     </Checkbox> */}
                 {/*   </div> */}
                 {/* )} */}
-                <Button
-                  disabled={this.state.disabled}
-                  onClick={this.submitOption}
-                  id="pelcro-submit"
-                  className="plc-w-full plc-mt-2"
-                >
-                  {this.locale("buttons.next")}
-                </Button>
+                {!window.Pelcro.user.isAuthenticated() &&
+                this.state.product?.address_required ? (
+                  <Button
+                    disabled={this.state.disabled}
+                    onClick={() => this.submitOption(true)}
+                    id="pelcro-submit"
+                    className="plc-w-full plc-mt-2"
+                  >
+                    {this.locale("buttons.signupAndDonate")}
+                  </Button>
+                ) : !window.Pelcro.user.isAuthenticated() ? (
+                  <div className="plc-flex plc-items-center plc-mt-2">
+                    <Button
+                      disabled={this.state.disabled}
+                      onClick={() => this.submitOption(true)}
+                      id="pelcro-submit"
+                      className="plc-flex-1 plc-mr-2"
+                    >
+                      {this.locale("buttons.signupAndDonate")}
+                    </Button>
+                    <Button
+                      disabled={this.state.disabled}
+                      onClick={() => this.submitOption(false)}
+                      id="pelcro-submit"
+                      className="plc-flex-1 pelcro-button-outline"
+                    >
+                      {this.locale("buttons.donate")}
+                    </Button>
+                  </div>
+                ) : (
+                  <Button
+                    disabled={this.state.disabled}
+                    onClick={() => this.submitOption(false)}
+                    id="pelcro-submit"
+                    className="plc-w-full plc-mt-2"
+                  >
+                    {this.locale("buttons.donate")}
+                  </Button>
+                )}
               </>
             )}
           </div>
         </ModalBody>
         <ModalFooter>
-          {!window.Pelcro.user.isAuthenticated() && (
-            <p>
-              {this.locale("messages.alreadyHaveAccount") + " "}
-              <Link
-                id="pelcro-link-login"
-                onClick={this.displayLoginView}
-              >
-                {this.locale("messages.loginHere")}
-              </Link>
-            </p>
-          )}
+          {/* {!window.Pelcro.user.isAuthenticated() && ( */}
+          {/*   <p> */}
+          {/*     {this.locale("messages.alreadyHaveAccount") + " "} */}
+          {/*     <Link */}
+          {/*       id="pelcro-link-login" */}
+          {/*       onClick={this.displayLoginView} */}
+          {/*     > */}
+          {/*       {this.locale("messages.loginHere")} */}
+          {/*     </Link> */}
+          {/*   </p> */}
+          {/* )} */}
           <Authorship />
         </ModalFooter>
       </Modal>

@@ -20,6 +20,7 @@ export const initialState = {
   subscriptionToManageMembers: null,
   isDonation: false,
   selectedDonationAmount: null,
+  customDonationAmount: null,
 
   // E-commerce
   cartItems: [],
