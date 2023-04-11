@@ -10,7 +10,8 @@ import {
 } from "../../utils/utils";
 
 export const SubmitPaymentMethod = ({ onClick, ...otherProps }) => {
-  const { plan } = usePelcro();
+  const { plan, selectedDonationAmount, customDonationAmount } =
+    usePelcro();
   const { t } = useTranslation("checkoutForm");
   const {
     dispatch,
@@ -30,11 +31,31 @@ export const SubmitPaymentMethod = ({ onClick, ...otherProps }) => {
 
   const planQuantity = plan?.quantity ?? 1;
   const price = updatedPrice ?? plan?.amount;
-  const priceFormatted = getFormattedPriceByLocal(
-    price * planQuantity,
-    plan?.currency,
-    getPageOrDefaultLanguage()
-  );
+  // const priceFormatted = getFormattedPriceByLocal(
+  //   price * planQuantity,
+  //   plan?.currency,
+  //   getPageOrDefaultLanguage()
+  // );
+
+  const priceFormatted =
+    plan.type === "donation" &&
+    (selectedDonationAmount || customDonationAmount)
+      ? getFormattedPriceByLocal(
+          selectedDonationAmount
+            ? selectedDonationAmount *
+                plan?.amount *
+                (plan?.quantity ?? 1)
+            : customDonationAmount *
+                plan?.amount *
+                (plan?.quantity ?? 1),
+          plan?.currency,
+          getPageOrDefaultLanguage()
+        )
+      : getFormattedPriceByLocal(
+          price * planQuantity,
+          plan?.currency,
+          getPageOrDefaultLanguage()
+        );
 
   const supportsTap = Boolean(
     window.Pelcro.site.read()?.tap_gateway_settings
