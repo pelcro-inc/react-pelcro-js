@@ -120,6 +120,8 @@ class SelectModal extends Component {
       this.props.product || window.Pelcro.paywall.getProduct();
     this.locale = this.props.t;
     this.closeButton = window.Pelcro.paywall.displayCloseButton();
+
+    this.productsTabRef = React.createRef();
   }
 
   componentDidMount = () => {
@@ -224,17 +226,17 @@ class SelectModal extends Component {
     document.removeEventListener("keydown", this.handleSubmit);
   };
 
-  componentDidUpdate(prevProps, prevState) {
-    //Scroll to active tab
-    const activeElement = document.getElementById("activeTab");
-
-    if (activeElement) {
-      activeElement.parentNode.scrollLeft =
-        activeElement.offsetLeft - 80;
-    } else {
-      console.log(document.getElementById("activeTab"));
-    }
-  }
+  // componentDidUpdate(prevProps, prevState) {
+  //   //Scroll to active tab
+  //   const activeElement = document.getElementById("activeTab");
+  //
+  //   if (activeElement) {
+  //     this.productsTabRef.current.scrollLeft =
+  //       activeElement.offsetLeft;
+  //   } else {
+  //     console.log(document.getElementById("activeTab"));
+  //   }
+  // }
 
   handleSubmit = (e) => {
     if (e.key === "Enter" && !this.state.disabled)
@@ -361,13 +363,24 @@ class SelectModal extends Component {
     return <Carousel slidesCount={items.length}>{items}</Carousel>;
   };
 
+  handleScrollLeft = () => {
+    this.productsTabRef.current.scrollLeft -= 100; // Adjust the scroll value as needed
+  };
+
+  handleScrollRight = () => {
+    this.productsTabRef.current.scrollLeft += 100; // Adjust the scroll value as needed
+  };
+
   renderProductTabs = () => {
     const productButtonCallback = this.selectProduct;
     const { image, description } = this.state.product;
 
     return (
       <div className="productTabs plc-flex plc-flex-col plc-items-center">
-        <ul className="tabs plc-w-full plc-flex plc-items-center plc-text-center plc-border-b plc-border-gray-300 plc-mb-4 plc-overflow-x-auto">
+        <ul
+          ref={this.productsTabRef}
+          className="tabs plc-w-full plc-flex plc-items-center plc-text-center plc-border-b plc-border-gray-300 plc-mb-4 plc-overflow-x-auto plc-max-w-lg"
+        >
           {this.state.productList.map((product, index) => (
             <li
               key={product.id}
@@ -388,6 +401,8 @@ class SelectModal extends Component {
             </li>
           ))}
         </ul>
+        <button onClick={this.handleScrollLeft}>{"<"}</button>
+        <button onClick={this.handleScrollRight}>{">"}</button>
 
         <div className="selectedProduct plc-flex plc-flex-col plc-items-center plc-justify-center plc-max-w-3xl">
           {image && (
@@ -660,21 +675,7 @@ class SelectModal extends Component {
             )}
           </div>
         </ModalBody>
-        <ModalFooter>
-          {!window.Pelcro.user.isAuthenticated() && (
-            <p className="plc-mb-9">
-              <span className="plc-font-medium">
-                {this.locale("messages.alreadyHaveAccount") + " "}
-              </span>
-              <Link
-                id="pelcro-link-login"
-                onClick={this.displayLoginView}
-              >
-                {this.locale("messages.loginHere")}
-              </Link>
-            </p>
-          )}
-        </ModalFooter>
+        <ModalFooter></ModalFooter>
       </Modal>
     );
   }
