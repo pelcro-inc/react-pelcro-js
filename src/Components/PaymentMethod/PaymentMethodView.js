@@ -56,6 +56,10 @@ export function PaymentMethodView({
     window.Pelcro.site.read()?.tap_gateway_settings
   );
 
+  const supportsCybersource = Boolean(
+    window.Pelcro.site.read()?.cybersource_gateway_settings
+  );
+
   const isUserFirstName = Boolean(
     window.Pelcro.user.read().first_name
   );
@@ -188,6 +192,7 @@ export function PaymentMethodView({
                 <SubmitPaymentMethod />
                 {showExternalPaymentMethods &&
                 !supportsVantiv &&
+                !supportsCybersource &&
                 !supportsTap ? (
                   <>
                     <PelcroPaymentRequestButton />
