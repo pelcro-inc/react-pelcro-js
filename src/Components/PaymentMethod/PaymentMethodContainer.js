@@ -2112,15 +2112,13 @@ const PaymentMethodContainer = (props) => {
   const cardProcessor = getSiteCardProcessor();
 
   useEffect(() => {
-    whenUserReady(() => {
-      if (!window.Stripe && cardProcessor === "stripe") {
-        document
-          .querySelector('script[src="https://js.stripe.com/v3"]')
-          .addEventListener("load", () => {
-            setIsStripeLoaded(true);
-          });
-      }
-    });
+    if (!window.Stripe && cardProcessor === "stripe") {
+      document
+        .querySelector('script[src="https://js.stripe.com/v3"]')
+        .addEventListener("load", () => {
+          setIsStripeLoaded(true);
+        });
+    }
   }, []);
 
   if (isStripeLoaded) {

@@ -1,55 +1,62 @@
 # [3.22.0-beta.17](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.22.0-beta.16...v3.22.0-beta.17) (2023-04-09)
 
-
 ### Features
 
-* add custom donation amount ([cd295ed](https://github.com/pelcro-inc/react-pelcro-js/commit/cd295edbdd3aea7e6bb764e09dc2b7405d51a0a5))
-* add flag isDonation and edit the donation flow ([5c123fb](https://github.com/pelcro-inc/react-pelcro-js/commit/5c123fb388a82994d5319e5165d3c5bfaafbb21a))
-* add the donation modal ([6af4956](https://github.com/pelcro-inc/react-pelcro-js/commit/6af4956c0bb61b3510feec634b7b529597df0336))
-* filter the donation plans and regular plans ([83106a3](https://github.com/pelcro-inc/react-pelcro-js/commit/83106a306701f93498596426fea5b7aec36f3038))
-* register the user before sending the payment ([6fc80e1](https://github.com/pelcro-inc/react-pelcro-js/commit/6fc80e1557fe80f8139f2d729d27b2c15e25b8f6))
-* set the correct donation amount for the paymentMethodContainer ([4921f85](https://github.com/pelcro-inc/react-pelcro-js/commit/4921f8520cc393a479188295f1698404bdf6a920))
+- add custom donation amount ([cd295ed](https://github.com/pelcro-inc/react-pelcro-js/commit/cd295edbdd3aea7e6bb764e09dc2b7405d51a0a5))
+- add flag isDonation and edit the donation flow ([5c123fb](https://github.com/pelcro-inc/react-pelcro-js/commit/5c123fb388a82994d5319e5165d3c5bfaafbb21a))
+- add the donation modal ([6af4956](https://github.com/pelcro-inc/react-pelcro-js/commit/6af4956c0bb61b3510feec634b7b529597df0336))
+- filter the donation plans and regular plans ([83106a3](https://github.com/pelcro-inc/react-pelcro-js/commit/83106a306701f93498596426fea5b7aec36f3038))
+- register the user before sending the payment ([6fc80e1](https://github.com/pelcro-inc/react-pelcro-js/commit/6fc80e1557fe80f8139f2d729d27b2c15e25b8f6))
+- set the correct donation amount for the paymentMethodContainer ([4921f85](https://github.com/pelcro-inc/react-pelcro-js/commit/4921f8520cc393a479188295f1698404bdf6a920))
 
 # [3.22.0-beta.16](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.22.0-beta.15...v3.22.0-beta.16) (2023-03-30)
 
+## [3.21.7](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.21.6...v3.21.7) (2023-04-05)
 
 ### Bug Fixes
 
-* iframe crash payment ([#317](https://github.com/pelcro-inc/react-pelcro-js/issues/317)) ([44c5810](https://github.com/pelcro-inc/react-pelcro-js/commit/44c5810d287fc46fb2e35df40ab608445c9d0351))
+- iframe crash payment ([#317](https://github.com/pelcro-inc/react-pelcro-js/issues/317)) ([44c5810](https://github.com/pelcro-inc/react-pelcro-js/commit/44c5810d287fc46fb2e35df40ab608445c9d0351))
 
 # [3.22.0-beta.15](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.22.0-beta.14...v3.22.0-beta.15) (2023-03-24)
-## [3.21.6](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.21.5...v3.21.6) (2023-03-30)
 
+- allow e commerce orders for 0 ([#313](https://github.com/pelcro-inc/react-pelcro-js/issues/313)) ([ef08dd7](https://github.com/pelcro-inc/react-pelcro-js/commit/ef08dd70744bdf9212c1892dd3d24be5b2bcdafc))
+- manage members email invitation ([#318](https://github.com/pelcro-inc/react-pelcro-js/issues/318)) ([a64040e](https://github.com/pelcro-inc/react-pelcro-js/commit/a64040ec848b2239cf49ec1e785c2edc4daa737e)), closes [#301](https://github.com/pelcro-inc/react-pelcro-js/issues/301) [#301](https://github.com/pelcro-inc/react-pelcro-js/issues/301)
+
+## [3.20.1-beta.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.20.1-beta.2...v3.20.1-beta.3) (2023-03-04)
+
+## [3.21.6](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.21.5...v3.21.6) (2023-03-30)
 
 ### Bug Fixes
 
-* update user after purchase and show orders invoices ([790404b](https://github.com/pelcro-inc/react-pelcro-js/commit/790404b92d1eab11458039db47cc91a04e54e775))
+- update user after purchase and show orders invoices ([790404b](https://github.com/pelcro-inc/react-pelcro-js/commit/790404b92d1eab11458039db47cc91a04e54e775))
 
 # [3.22.0-beta.14](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.22.0-beta.13...v3.22.0-beta.14) (2023-03-24)
-* iframe crash payment ([#317](https://github.com/pelcro-inc/react-pelcro-js/issues/317)) ([44c5810](https://github.com/pelcro-inc/react-pelcro-js/commit/44c5810d287fc46fb2e35df40ab608445c9d0351))
+
+- send couponCode from URL if it's not set in state ([#301](https://github.com/pelcro-inc/react-pelcro-js/issues/301)) ([30c0006](https://github.com/pelcro-inc/react-pelcro-js/commit/30c000687dc49227f4d1cfd172a34b91e8becd5f))
+
+## [3.20.1-beta.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.20.1-beta.1...v3.20.1-beta.2) (2023-02-28)
+
+- iframe crash payment ([#317](https://github.com/pelcro-inc/react-pelcro-js/issues/317)) ([44c5810](https://github.com/pelcro-inc/react-pelcro-js/commit/44c5810d287fc46fb2e35df40ab608445c9d0351))
 
 ## [3.21.5](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.21.4...v3.21.5) (2023-03-24)
 
-
 ### Bug Fixes
 
-* send line2 in addressCreate and addressUpdate ([b3f7bd7](https://github.com/pelcro-inc/react-pelcro-js/commit/b3f7bd73a0ad1f9bd0ea1872e794ddbc185301f2))
-* send the state to vantiv and tap if payment method exist ([e923dfa](https://github.com/pelcro-inc/react-pelcro-js/commit/e923dfaa3162ff3ef22099bb6cd3fd5dee5cb817))
+- send line2 in addressCreate and addressUpdate ([b3f7bd7](https://github.com/pelcro-inc/react-pelcro-js/commit/b3f7bd73a0ad1f9bd0ea1872e794ddbc185301f2))
+- send the state to vantiv and tap if payment method exist ([e923dfa](https://github.com/pelcro-inc/react-pelcro-js/commit/e923dfaa3162ff3ef22099bb6cd3fd5dee5cb817))
 
 ## [3.21.4](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.21.3...v3.21.4) (2023-03-24)
 
-
 ### Bug Fixes
 
-* send line2 in addressCreate and addressUpdate ([b3f7bd7](https://github.com/pelcro-inc/react-pelcro-js/commit/b3f7bd73a0ad1f9bd0ea1872e794ddbc185301f2))
+- send line2 in addressCreate and addressUpdate ([b3f7bd7](https://github.com/pelcro-inc/react-pelcro-js/commit/b3f7bd73a0ad1f9bd0ea1872e794ddbc185301f2))
 
 # [3.22.0-beta.13](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.22.0-beta.12...v3.22.0-beta.13) (2023-03-24)
 
-
 ### Bug Fixes
 
-* send the state to vantiv and tap if payment method exist ([e923dfa](https://github.com/pelcro-inc/react-pelcro-js/commit/e923dfaa3162ff3ef22099bb6cd3fd5dee5cb817))
-* ui crash after register if address is not required in selected product ([7beaa3d](https://github.com/pelcro-inc/react-pelcro-js/commit/7beaa3d89961d501b53212a7935d6790ba3e9ac6))
+- send the state to vantiv and tap if payment method exist ([e923dfa](https://github.com/pelcro-inc/react-pelcro-js/commit/e923dfaa3162ff3ef22099bb6cd3fd5dee5cb817))
+- ui crash after register if address is not required in selected product ([7beaa3d](https://github.com/pelcro-inc/react-pelcro-js/commit/7beaa3d89961d501b53212a7935d6790ba3e9ac6))
 
 # [3.22.0-beta.12](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.22.0-beta.11...v3.22.0-beta.12) (2023-03-24)
 
