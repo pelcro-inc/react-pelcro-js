@@ -1,3 +1,12 @@
+# [3.22.0-beta.18](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.22.0-beta.17...v3.22.0-beta.18) (2023-04-11)
+
+
+### Bug Fixes
+
+* allow e commerce orders for 0 ([#313](https://github.com/pelcro-inc/react-pelcro-js/issues/313)) ([ef08dd7](https://github.com/pelcro-inc/react-pelcro-js/commit/ef08dd70744bdf9212c1892dd3d24be5b2bcdafc))
+* manage members email invitation ([#318](https://github.com/pelcro-inc/react-pelcro-js/issues/318)) ([a64040e](https://github.com/pelcro-inc/react-pelcro-js/commit/a64040ec848b2239cf49ec1e785c2edc4daa737e)), closes [#301](https://github.com/pelcro-inc/react-pelcro-js/issues/301) [#301](https://github.com/pelcro-inc/react-pelcro-js/issues/301)
+* skip whenUserReady for loading stripe ([8baeba2](https://github.com/pelcro-inc/react-pelcro-js/commit/8baeba23d06feeb3b1fa373cf9f8e3fc7261906b))
+
 # [3.22.0-beta.17](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.22.0-beta.16...v3.22.0-beta.17) (2023-04-09)
 
 ### Features
