@@ -1,3 +1,11 @@
+# [3.22.0-beta.20](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.22.0-beta.19...v3.22.0-beta.20) (2023-04-11)
+
+
+### Features
+
+* add cybersource card inputs ([a40736e](https://github.com/pelcro-inc/react-pelcro-js/commit/a40736e5afa16bf4ffec9ce2ff4c37a8ecf7df42))
+* implementing cybersource ([7e012af](https://github.com/pelcro-inc/react-pelcro-js/commit/7e012af8b52b3f2ce555280ea99ec97d5cbde89d))
+
 # [3.22.0-beta.19](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.22.0-beta.18...v3.22.0-beta.19) (2023-04-11)
 
 
