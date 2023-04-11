@@ -95,11 +95,9 @@ export const loadPaymentSDKs = () => {
     window.Pelcro.site.read().tap_gateway_settings
   );
 
-  whenUserReady(() => {
-    if (!window.Stripe && !supportsVantiv && !supportsTap) {
-      loadStripe(window.Pelcro.environment.stripe);
-    }
-  });
+  if (!window.Stripe && !supportsVantiv && !supportsTap) {
+    loadStripe(window.Pelcro.environment.stripe);
+  }
 
   // Load PayPal SDKs
   const supportsPaypal = Boolean(
@@ -325,7 +323,6 @@ export const initViewFromURL = () => {
   const { switchView, whenSiteReady } = usePelcro.getStore();
   if (isValidViewFromURL(view)) {
     whenSiteReady(() => {
-
       if (view === "plan-select") {
         return initSubscriptionFromURL();
       }
@@ -646,7 +643,7 @@ const showPaymentMethodUpdateFromUrl = () => {
       const supportsTap = Boolean(
         window.Pelcro.site.read().tap_gateway_settings
       );
-        
+
       if (!window.Stripe && !supportsVantiv && !supportsTap) {
         document
           .querySelector('script[src="https://js.stripe.com/v3"]')

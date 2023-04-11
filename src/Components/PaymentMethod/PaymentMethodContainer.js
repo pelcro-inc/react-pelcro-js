@@ -727,7 +727,8 @@ const PaymentMethodContainerWithoutStripe = ({
   const tapInstanceCard = React.useRef(null);
 
   useEffect(() => {
-    if (skipPayment && (plan?.amount === 0 || props?.freeOrders)) return;
+    if (skipPayment && (plan?.amount === 0 || props?.freeOrders))
+      return;
     if (cardProcessor === "vantiv" && !selectedPaymentMethodId) {
       const payPageId =
         window.Pelcro.site.read()?.vantiv_gateway_settings
@@ -769,7 +770,8 @@ const PaymentMethodContainerWithoutStripe = ({
 
   useEffect(() => {
     whenUserReady(() => {
-      if (skipPayment && (plan?.amount === 0 || props?.freeOrders)) return;
+      if (skipPayment && (plan?.amount === 0 || props?.freeOrders))
+        return;
       if (cardProcessor === "tap" && !window.Tapjsli) {
         window.Pelcro.helpers.loadSDK(
           "https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.4/bluebird.min.js",
@@ -801,7 +803,8 @@ const PaymentMethodContainerWithoutStripe = ({
   }, [selectedPaymentMethodId]);
 
   const initPaymentRequest = (state, dispatch) => {
-    if (skipPayment && (plan?.amount === 0 || props?.freeOrders)) return;
+    if (skipPayment && (plan?.amount === 0 || props?.freeOrders))
+      return;
     try {
       const paymentRequest = stripe.paymentRequest({
         country: window.Pelcro.user.location.countryCode || "US",
@@ -856,7 +859,8 @@ const PaymentMethodContainerWithoutStripe = ({
    * Updates the total amount after adding taxes only if site taxes are enabled
    */
   const updateTotalAmountWithTax = () => {
-    if (skipPayment && (plan?.amount === 0 || props?.freeOrders)) return;
+    if (skipPayment && (plan?.amount === 0 || props?.freeOrders))
+      return;
     const taxesEnabled = window.Pelcro.site.read()?.taxes_enabled;
 
     if (taxesEnabled && type === "createPayment") {
@@ -1818,7 +1822,7 @@ const PaymentMethodContainerWithoutStripe = ({
               if (skipPayment && props?.freeOrders) {
                 return submitPayment(state, dispatch);
               }
-              
+
               if (getSiteCardProcessor() === "vantiv") {
                 return submitUsingVantiv(state);
               }
@@ -1983,15 +1987,13 @@ const PaymentMethodContainer = (props) => {
   const cardProcessor = getSiteCardProcessor();
 
   useEffect(() => {
-    whenUserReady(() => {
-      if (!window.Stripe && cardProcessor === "stripe") {
-        document
-          .querySelector('script[src="https://js.stripe.com/v3"]')
-          .addEventListener("load", () => {
-            setIsStripeLoaded(true);
-          });
-      }
-    });
+    if (!window.Stripe && cardProcessor === "stripe") {
+      document
+        .querySelector('script[src="https://js.stripe.com/v3"]')
+        .addEventListener("load", () => {
+          setIsStripeLoaded(true);
+        });
+    }
   }, []);
 
   if (isStripeLoaded) {
