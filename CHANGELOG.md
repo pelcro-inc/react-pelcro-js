@@ -1,3 +1,11 @@
+# [3.22.0-beta.19](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.22.0-beta.18...v3.22.0-beta.19) (2023-04-11)
+
+
+### Features
+
+* add dontion menu to dashboard and other enhancements ([517c4de](https://github.com/pelcro-inc/react-pelcro-js/commit/517c4de45bf2b93c8bacd4e66480f81824dcbede))
+* edit tailwind config ([bda0795](https://github.com/pelcro-inc/react-pelcro-js/commit/bda07956997e19844dd116b61da2cfc19011b654))
+
 # [3.22.0-beta.18](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.22.0-beta.17...v3.22.0-beta.18) (2023-04-11)
 
 
