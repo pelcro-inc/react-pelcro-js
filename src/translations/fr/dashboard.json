@@ -85,6 +85,9 @@
     },
     "subCancellation": {
       "goBack": "Retourner"
+    },
+    "donationCancellation": {
+      "goBack": "Go back"
     }
   },
   "messages": {
@@ -104,6 +107,22 @@
       "loading": "Annulation de la suspension de votre abonnement",
       "success": "L'abonnement a été suspendu avec succès",
       "error": "Erreur lors de l'annulation de la suspension de votre abonnement"
+    },
+    "donationCancellation": {
+      "isSureToCancel": "Êtes-vous certain de vouloir annuler votre don?",
+      "loading": "Annulation de l'don",
+      "success": "L'don a été annulé avec succès",
+      "error": "Une erreur s'est produite lors de l'annulation de l'don"
+    },
+    "donationReactivation": {
+      "success": "L'don a été réactivé avec succès",
+      "error": "Erreur lors de la réactivation de votre don"
+    },
+    "donationUnSuspend": {
+      "isSureToUnSuspend": "Êtes-vous sûr de vouloir annuler la suspension de votre don ?",
+      "loading": "Annulation de la suspension de votre don",
+      "success": "L'don a été suspendu avec succès",
+      "error": "Erreur lors de l'annulation de la suspension de votre don"
     }
   }
 }

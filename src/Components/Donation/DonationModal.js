@@ -361,7 +361,7 @@ class DonationModal extends Component {
         <div>
           <div className="plc-bg-gray-100 plc-rounded-md plc-p-3 plc-mt-3 plc-text-sm plc-flex plc-items-center">
             <div className="plc-flex plc-items-center plc-flex-1">
-              Auto renewed:{" "}
+              Auto renew:{" "}
               <span className="plc-inline-flex plc-w-6 plc-ml-1">
                 {plan.auto_renew ? (
                   <CheckIcon className="plc-text-green-500" />
@@ -387,7 +387,7 @@ class DonationModal extends Component {
                 {plan.preset_donation_values.map((value) => (
                   <li key={value}>
                     <button
-                      className={`plc-bg-white plc-rounded-md plc-flex plc-items-center plc-justify-center plc-text-lg plc-w-full plc-min-h-20 focus:plc-outline-none ${
+                      className={`plc-bg-white plc-rounded-md plc-flex plc-items-center plc-justify-center plc-text-lg plc-w-full plc-min-h-16 focus:plc-outline-none ${
                         isChecked &&
                         +this.state.selectedDonationAmount === +value
                           ? "plc-border-primary-500 plc-text-primary-900 plc-border-2"
@@ -401,11 +401,12 @@ class DonationModal extends Component {
                         });
                       }}
                     >
-                      {getFormattedPriceByLocal(
-                        value,
-                        plan?.currency,
-                        getPageOrDefaultLanguage()
-                      )}
+                      <span className="plc-font-bold plc-mr-1">
+                        {value}
+                      </span>
+                      <span className="plc-uppercase">
+                        {plan?.currency}
+                      </span>
                     </button>
                   </li>
                 ))}
@@ -438,8 +439,9 @@ class DonationModal extends Component {
                   this.setState({ disabled: true });
                 }
               }}
-              placeholder="Donate a custome amount ..."
+              placeholder="Donate a custom amount ..."
               className="plc-pr-14"
+              wrapperClassName="plc-mb-0"
             />
             <span className="plc-absolute plc-top-1/2 plc-transform plc--translate-y-1/2 plc-right-3 plc-pl-3 plc-border-l plc-border-gray-200 plc-uppercase plc-text-sm">
               {plan.currency}
@@ -610,7 +612,7 @@ class DonationModal extends Component {
 
             {this.state.mode === "plan" && (
               <>
-                <div className="plc-overflow-y-scroll plc-max-h-72 pelcro-select-plans-wrapper">
+                <div className="plc-overflow-y-scroll pelcro-select-plans-wrapper">
                   {this.renderPlans()}
                 </div>
                 {/* {!disableGifting && ( */}

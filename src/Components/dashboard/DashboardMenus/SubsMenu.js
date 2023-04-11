@@ -136,7 +136,7 @@ export const SubscriptionsItems = ({
           return switchView("email-verify");
         }
 
-        reactivateSubscription(sub.id);
+        reactivateSubscription(sub.id, false);
       };
 
       // Renew click
@@ -350,18 +350,18 @@ export const SubscriptionsItems = ({
                   ""
                 )}
 
-                {sub?.plan?.type === 'membership' && (
-                    <Button
-                      variant="ghost"
-                      className="plc-text-blue-400 pelcro-dashboard-sub-manage-members-button"
-                      icon={<RefreshIcon />}
-                      onClick={onManageMembersClick}
-                      disabled={disableSubmit}
-                      data-key={sub.id}
-                    >
-                      {t("labels.manageMembers")}
-                    </Button>
-                  )}
+                {sub?.plan?.type === "membership" && (
+                  <Button
+                    variant="ghost"
+                    className="plc-text-blue-400 pelcro-dashboard-sub-manage-members-button"
+                    icon={<RefreshIcon />}
+                    onClick={onManageMembersClick}
+                    disabled={disableSubmit}
+                    data-key={sub.id}
+                  >
+                    {t("labels.manageMembers")}
+                  </Button>
+                )}
               </td>
 
               <td>
@@ -478,12 +478,12 @@ function getNonDonationSubs() {
   return (
     window.Pelcro.subscription
       ?.list()
-      ?.filter((sub) => !sub.plan.is_donation) ?? []
+      ?.filter((sub) => sub.plan?.type !== "donation") ?? []
   );
 }
 
 function isDateAfterToday(date) {
-  const today = new Date().setHours(0,0,0,0);
-  const newDate = new Date(date).setHours(0,0,0,0);
+  const today = new Date().setHours(0, 0, 0, 0);
+  const newDate = new Date(date).setHours(0, 0, 0, 0);
   return newDate === today ? true : newDate > today;
 }

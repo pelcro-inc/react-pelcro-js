@@ -85,6 +85,9 @@
     },
     "subCancellation": {
       "goBack": "Go back"
+    },
+    "donationCancellation": {
+      "goBack": "Go back"
     }
   },
   "messages": {
@@ -104,6 +107,22 @@
       "loading": "Unsuspending your subscription",
       "success": "Subscription is successfully unsuspended",
       "error": "Error while unsuspending your subscription"
+    },
+    "donationCancellation": {
+      "isSureToCancel": "Are you sure you want to cancel your donation?",
+      "loading": "Cancelling your donation",
+      "success": "Donation is successfully cancelled",
+      "error": "Error while cancelling your donation"
+    },
+    "donationReactivation": {
+      "success": "Donation is successfully reactivated",
+      "error": "Error while reactivating your donation"
+    },
+    "donationUnSuspend": {
+      "isSureToUnSuspend": "Are you sure you want to unsuspend your donation?",
+      "loading": "Unsuspending your donation",
+      "success": "Donation is successfully unsuspended",
+      "error": "Error while unsuspending your donation"
     }
   }
 }

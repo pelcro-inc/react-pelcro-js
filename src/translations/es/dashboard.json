@@ -84,6 +84,9 @@
     },
     "subCancellation": {
       "goBack": "Volver"
+    },
+    "donationCancellation": {
+      "goBack": "Go back"
     }
   },
   "messages": {
@@ -103,6 +106,22 @@
       "loading": "Reanudando tu suscripción",
       "success": "La suscripción se reanudó con éxito",
       "error": "Error al reanudar tu suscripción"
+    },
+    "donationCancellation": {
+      "isSureToCancel": "¿Estás seguro de que quieres cancelar tu donación?",
+      "loading": "Cancelando tu donación",
+      "success": "La donación se canceló con éxito",
+      "error": "Error al cancelar tu donación"
+    },
+    "donationReactivation": {
+      "success": "La donación se reactivó con éxito",
+      "error": "Error al reactivar su donación"
+    },
+    "donationUnSuspend": {
+      "isSureToUnSuspend": "¿Estás seguro de que quieres reanudar tu donación?",
+      "loading": "Reanudando tu donación",
+      "success": "La donación se reanudó con éxito",
+      "error": "Error al reanudar tu donación"
     }
   }
 }

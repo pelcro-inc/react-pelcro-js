@@ -175,7 +175,8 @@ module.exports = {
       64: "16rem",
       72: "18rem",
       80: "20rem",
-      96: "24rem"
+      96: "24rem",
+      100: "28rem"
     },
     animation: {
       none: "none",
@@ -613,6 +614,7 @@ module.exports = {
     minHeight: {
       0: "0px",
       12: "3rem",
+      16: "4rem",
       20: "6rem",
       40: "10rem",
       full: "100%",
