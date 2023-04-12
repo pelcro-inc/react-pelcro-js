@@ -1,3 +1,10 @@
+# [3.22.0-beta.22](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.22.0-beta.21...v3.22.0-beta.22) (2023-04-12)
+
+
+### Features
+
+* remove starging at from the donation products ([838e63d](https://github.com/pelcro-inc/react-pelcro-js/commit/838e63dba2d717ab6f40ff0fa7fc7b441528110a))
+
 # [3.22.0-beta.21](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.22.0-beta.20...v3.22.0-beta.21) (2023-04-12)
 
 
