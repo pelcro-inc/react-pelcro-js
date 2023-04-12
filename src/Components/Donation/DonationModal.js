@@ -289,12 +289,6 @@ class DonationModal extends Component {
           </div>
 
           <div className="plc-flex plc-items-end plc-w-full plc-mt-3">
-            {product.plans && (
-              <p className="plc-w-1/2 plc-text-xs pelcro-select-product-cost">
-                {this.locale("labels.startingAt")}{" "}
-                {this.countStartPrice(product.plans)}
-              </p>
-            )}
             <Button
               onClick={productButtonCallback}
               data-key={product.id}
