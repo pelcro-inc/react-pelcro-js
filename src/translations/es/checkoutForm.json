@@ -25,6 +25,7 @@
     "lastName": "Apellido",
     "phone": "Teléfono",
     "freeItems": "Artículos gratis",
-    "email": "Correo"
+    "email": "Correo",
+    "password": "Contraseña"
   }
 }

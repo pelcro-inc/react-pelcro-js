@@ -20,6 +20,7 @@ export const SubmitPaymentMethod = ({ onClick, ...otherProps }) => {
       lastNameError,
       phoneError,
       emailError,
+      passwordError,
       firstName,
       lastName,
       phone,
@@ -31,11 +32,6 @@ export const SubmitPaymentMethod = ({ onClick, ...otherProps }) => {
 
   const planQuantity = plan?.quantity ?? 1;
   const price = updatedPrice ?? plan?.amount;
-  // const priceFormatted = getFormattedPriceByLocal(
-  //   price * planQuantity,
-  //   plan?.currency,
-  //   getPageOrDefaultLanguage()
-  // );
 
   const priceFormatted =
     plan.type === "donation" &&
@@ -85,7 +81,8 @@ export const SubmitPaymentMethod = ({ onClick, ...otherProps }) => {
           (supportsTap && !firstName?.length) ||
           (supportsTap && !lastName?.length) ||
           (supportsTap && !phone?.length) ||
-          emailError
+          emailError ||
+          passwordError
       );
     }
   }, [
@@ -96,7 +93,8 @@ export const SubmitPaymentMethod = ({ onClick, ...otherProps }) => {
     firstName,
     lastName,
     phone,
-    emailError
+    emailError,
+    passwordError
   ]);
 
   return (

@@ -24,6 +24,7 @@ export const DonationsMenu = ({
     .sort((a, b) => a.expires_at - b.expires_at)
     .sort((a, b) => a.renews_at - b.renews_at)
     .map((sub) => {
+      console.log("Sub", sub);
       // Cancel button click handlers
       const onCancelClick = () => {
         const isImmediateCancelationEnabled =

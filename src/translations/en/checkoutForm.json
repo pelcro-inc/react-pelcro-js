@@ -25,6 +25,7 @@
     "lastName": "Last name",
     "phone": "Phone",
     "freeItems": "Free Items",
-    "email": "Email"
+    "email": "Email",
+    "password": "Password"
   }
 }

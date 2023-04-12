@@ -202,6 +202,15 @@ class DonationModal extends Component {
     }
   };
 
+  componentDidUpdate = (prevProps, prevState) => {
+    if (
+      this.state.planList?.length === 1 &&
+      this.state.plan !== this.state.planList[0]
+    ) {
+      this.setState({ plan: this.state.planList[0] });
+    }
+  };
+
   componentWillUnmount = () => {
     document.removeEventListener("keydown", this.handleSubmit);
   };
@@ -486,13 +495,20 @@ class DonationModal extends Component {
     const id = e.target.dataset.key;
     for (const product of this.state.productList) {
       if (+product.id === +id) {
-        this.setState({ product: product });
+        const planList = product.plans.filter(
+          (plan) => plan.type === "donation"
+        );
+
+        if (planList.length === 1) {
+          this.setState({ plan: planList[0] });
+        }
+
         this.setState({
-          planList: product.plans.filter(
-            (plan) => plan.type === "donation"
-          )
+          product: product,
+          planList: planList,
+          mode: "plan"
         });
-        this.setState({ mode: "plan" });
+
         const isSelectedPlanPartOfThisProduct =
           this.state.plan?.product_id === Number(product.id);
 
@@ -525,7 +541,7 @@ class DonationModal extends Component {
     this.setState({ mode: "product" });
   };
 
-  submitOption = (signUpFirst) => {
+  submitOption = () => {
     this.props.setProductAndPlan(
       this.state.product,
       this.state.plan,
@@ -541,10 +557,7 @@ class DonationModal extends Component {
     const { switchToAddressView, switchToPaymentView } =
       usePelcro.getStore();
 
-    if (
-      (!isAuthenticated && product.address_required) ||
-      (!isAuthenticated && signUpFirst)
-    ) {
+    if (!isAuthenticated && product.address_required) {
       return setView("register");
     }
 
@@ -626,45 +639,14 @@ class DonationModal extends Component {
                 {/*     </Checkbox> */}
                 {/*   </div> */}
                 {/* )} */}
-                {!window.Pelcro.user.isAuthenticated() &&
-                this.state.product?.address_required ? (
-                  <Button
-                    disabled={this.state.disabled}
-                    onClick={() => this.submitOption(true)}
-                    id="pelcro-submit"
-                    className="plc-w-full plc-mt-2"
-                  >
-                    {this.locale("buttons.signupAndDonate")}
-                  </Button>
-                ) : !window.Pelcro.user.isAuthenticated() ? (
-                  <div className="plc-flex plc-items-center plc-mt-2">
-                    <Button
-                      disabled={this.state.disabled}
-                      onClick={() => this.submitOption(true)}
-                      id="pelcro-submit"
-                      className="plc-flex-1 plc-mr-2"
-                    >
-                      {this.locale("buttons.signupAndDonate")}
-                    </Button>
-                    <Button
-                      disabled={this.state.disabled}
-                      onClick={() => this.submitOption(false)}
-                      id="pelcro-submit"
-                      className="plc-flex-1 pelcro-button-outline"
-                    >
-                      {this.locale("buttons.donate")}
-                    </Button>
-                  </div>
-                ) : (
-                  <Button
-                    disabled={this.state.disabled}
-                    onClick={() => this.submitOption(false)}
-                    id="pelcro-submit"
-                    className="plc-w-full plc-mt-2"
-                  >
-                    {this.locale("buttons.donate")}
-                  </Button>
-                )}
+                <Button
+                  disabled={this.state.disabled}
+                  onClick={() => this.submitOption()}
+                  id="pelcro-submit"
+                  className="plc-w-full plc-mt-2"
+                >
+                  {this.locale("buttons.donate")}
+                </Button>
               </>
             )}
           </div>

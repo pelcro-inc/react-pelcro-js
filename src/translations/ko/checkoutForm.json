@@ -25,6 +25,7 @@
     "lastName": "성",
     "phone": "핸드폰",
     "freeItems": "무료 아이템",
-    "email": "이메일"
+    "email": "이메일",
+    "password": "비밀번호"
   }
 }

@@ -47,7 +47,8 @@ import {
   SET_PHONE_ERROR,
   SET_EMAIL,
   SET_PASSWORD,
-  SET_EMAIL_ERROR
+  SET_EMAIL_ERROR,
+  SET_PASSWORD_ERROR
 } from "../../utils/action-types";
 import {
   getErrorMessages,
@@ -106,12 +107,14 @@ const initialState = {
   lastName: "",
   phone: "",
   email: "",
+  password: "",
   firstNameError: null,
   lastNameError: null,
   phoneError: null,
   emailError: null,
   month: "",
   year: "",
+  passwordError: null,
   alert: {
     type: "error",
     content: ""
@@ -143,7 +146,8 @@ const PaymentMethodContainerWithoutStripe = ({
     couponCode,
     selectedDonationAmount,
     customDonationAmount,
-    isAuthenticated
+    isAuthenticated,
+    switchView
   } = usePelcro();
   const { whenUserReady } = usePelcro.getStore();
 
@@ -455,7 +459,6 @@ const PaymentMethodContainerWithoutStripe = ({
   };
 
   /*====== End Cybersource integration ========*/
-
 
   /*====== Start Tap integration ========*/
   const submitUsingTap = (state) => {
@@ -1133,7 +1136,6 @@ const PaymentMethodContainerWithoutStripe = ({
           initCybersourceScript();
         }
       }
-
     });
   }, [selectedPaymentMethodId]);
 
@@ -1864,18 +1866,39 @@ const PaymentMethodContainerWithoutStripe = ({
     window.Pelcro.user.register(
       {
         email: state.email,
-        password: generatePassword()
+        password: state.password
       },
       (err, res) => {
         if (err) {
           let { registered_on_other_sites, ...errors } =
             err?.response?.data?.errors;
           err.response.data.errors = { ...errors };
+
+          let errorContent;
+
+          if (
+            getErrorMessages(err) === "This email is already in use."
+          ) {
+            errorContent = (
+              <p>
+                This email is already in use.{" "}
+                <button
+                  className="plc-font-bold plc-underline hover:plc-no-underline"
+                  onClick={() => switchView("login")}
+                >
+                  Login to continue
+                </button>
+              </p>
+            );
+          } else {
+            errorContent = getErrorMessages(err);
+          }
+
           dispatch({
             type: SHOW_ALERT,
             payload: {
               type: "error",
-              content: getErrorMessages(err)
+              content: errorContent
             }
           });
           dispatch({ type: DISABLE_SUBMIT, payload: false });
@@ -2384,6 +2407,13 @@ const PaymentMethodContainerWithoutStripe = ({
             ...state,
             emailError: action.payload,
             email: ""
+          });
+
+        case SET_PASSWORD_ERROR:
+          return Update({
+            ...state,
+            passwordError: action.payload,
+            password: ""
           });
 
         case SHOW_ALERT:

@@ -28,6 +28,7 @@ import {
   getPageOrDefaultLanguage
 } from "../../utils/utils";
 import { DonationEmail } from "./DonationEmail";
+import { DonationPassword } from "./DonationPassword";
 import { usePelcro } from "../../hooks/usePelcro";
 
 /**
@@ -167,13 +168,22 @@ export function PaymentMethodView({
                 )}
 
               {!isAuthenticated() && plan?.type === "donation" && (
-                <DonationEmail
-                  id="pelcro-input-email"
-                  errorId="pelcro-input-email-error"
-                  label={t("labels.email")}
-                  required
-                  autoFocus={true}
-                />
+                <>
+                  <DonationEmail
+                    id="pelcro-input-email"
+                    errorId="pelcro-input-email-error"
+                    label={t("labels.email")}
+                    required
+                    autoFocus={true}
+                  />
+
+                  <DonationPassword
+                    id="pelcro-input-password"
+                    errorId="pelcro-input-password-error"
+                    label={t("labels.password")}
+                    required
+                  />
+                </>
               )}
               <CheckoutForm />
 
