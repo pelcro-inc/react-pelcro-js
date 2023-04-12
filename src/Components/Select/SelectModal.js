@@ -327,7 +327,12 @@ class SelectModal extends Component {
       : this.state.productList;
 
     return productsToShow.map((product, index) => {
-      return this.renderOneProduct(product, index);
+      if (
+        product.plans.filter((plan) => plan.type === "regular")
+          .length > 0
+      ) {
+        return this.renderOneProduct(product, index);
+      }
     });
   };
 

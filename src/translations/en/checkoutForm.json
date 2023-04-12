@@ -24,6 +24,7 @@
     "firstName": "First name",
     "lastName": "Last name",
     "phone": "Phone",
-    "email": "Email"
+    "email": "Email",
+    "password": "Password"
   }
 }

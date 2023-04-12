@@ -24,6 +24,7 @@
     "firstName": "Nombre",
     "lastName": "Apellido",
     "phone": "Teléfono",
-    "email": "Correo"
+    "email": "Correo",
+    "password": "Contraseña"
   }
 }

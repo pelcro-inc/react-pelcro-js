@@ -24,6 +24,7 @@
     "firstName": "Prénom",
     "lastName": "Nom de famille",
     "phone": "Téléphoner",
-    "email": "Courriel"
+    "email": "Courriel",
+    "password": "Créer un mot de passe"
   }
 }
