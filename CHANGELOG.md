@@ -1,3 +1,10 @@
+# [3.22.0-beta.21](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.22.0-beta.20...v3.22.0-beta.21) (2023-04-12)
+
+
+### Features
+
+* add client comments ([3907310](https://github.com/pelcro-inc/react-pelcro-js/commit/3907310f37dd423402ad7b78127095a04e5eb512))
+
 # [3.22.0-beta.20](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.22.0-beta.19...v3.22.0-beta.20) (2023-04-11)
 
 
