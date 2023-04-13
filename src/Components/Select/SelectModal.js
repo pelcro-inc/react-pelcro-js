@@ -19,6 +19,7 @@ import {
   getEntitlementsFromElem,
   notifyBugsnag
 } from "../../utils/utils";
+import { TabsCarousel } from "./TabsCarousel";
 
 /**
  *
@@ -109,6 +110,8 @@ class SelectModal extends Component {
       isGift: props.isGift,
       disabled: true,
       mode: "product",
+      initialTabSlide: 0,
+      prodDescExpanded: false,
       productList: props.matchingEntitlements
         ? window.Pelcro.product.getByEntitlements(
             props.matchingEntitlements
@@ -371,47 +374,119 @@ class SelectModal extends Component {
     this.productsTabRef.current.scrollLeft += 100; // Adjust the scroll value as needed
   };
 
+  toggleProdDescExpanded = () => {
+    this.setState({ prodDescExpanded: !this.state.prodDescExpanded });
+  };
+
   renderProductTabs = () => {
+    const { prodDescExpanded } = this.state;
     const productButtonCallback = this.selectProduct;
     const { image, description } = this.state.product;
+    const tabs = this.state.productList.map((product, index) => {
+      if (product.id === this.state.product.id) {
+        this.setState((oldState) => {
+          if (+oldState.initialTabSlide !== +index) {
+            return { initialTabSlide: index };
+          }
+        });
+      }
+
+      return (
+        <div key={product.id}>
+          <button
+            onClick={productButtonCallback}
+            data-key={product.id}
+            data-index={index}
+            className={`plc-px-4 plc-py-2 focus:plc-outline-none plc-border-b-4 hover:plc-text-primary hover:plc-border-primary plc-transition-all plc-h-full plc-flex ${
+              product.id === this.state.product.id
+                ? "plc-border-primary plc-text-primary"
+                : "plc-border-transparent plc-font-normal plc-text-gray-500"
+            }`}
+          >
+            {product.name}
+          </button>
+        </div>
+      );
+    });
 
     return (
-      <div className="productTabs plc-flex plc-flex-col plc-items-center">
-        <ul
-          ref={this.productsTabRef}
-          className="tabs plc-w-full plc-flex plc-items-center plc-text-center plc-border-b plc-border-gray-300 plc-mb-4 plc-overflow-x-auto plc-max-w-lg"
-        >
-          {this.state.productList.map((product, index) => (
-            <li
-              key={product.id}
-              id={`${
-                product.id === this.state.product?.id
-                  ? "activeTab"
-                  : ""
-              }`}
-              className="plc-relative plc-mx-1"
-            >
-              <button
-                onClick={productButtonCallback}
-                data-key={product.id}
-                className="plc-px-4 plc-py-2 plc-rounded plc-text-gray-600 focus:plc-outline-none plc-whitespace-nowrap"
-              >
-                {product.name}
-              </button>
-            </li>
-          ))}
-        </ul>
-        <button onClick={this.handleScrollLeft}>{"<"}</button>
-        <button onClick={this.handleScrollRight}>{">"}</button>
+      <div className="plc-flex plc-flex-col">
+        {/* <ul */}
+        {/*   ref={this.productsTabRef} */}
+        {/*   className="tabs plc-w-full plc-flex plc-items-center plc-text-center plc-border-b plc-border-gray-300 plc-mb-4 plc-overflow-x-auto plc-max-w-lg" */}
+        {/* > */}
+        {/*   {this.state.productList.map((product, index) => ( */}
+        {/*     <li */}
+        {/*       key={product.id} */}
+        {/*       id={`${ */}
+        {/*         product.id === this.state.product?.id */}
+        {/*           ? "activeTab" */}
+        {/*           : "" */}
+        {/*       }`} */}
+        {/*       className="plc-relative plc-mx-1" */}
+        {/*     > */}
+        {/*       <button */}
+        {/*         onClick={productButtonCallback} */}
+        {/*         data-key={product.id} */}
+        {/*         className="plc-px-4 plc-py-2 plc-rounded plc-text-gray-600 focus:plc-outline-none plc-whitespace-nowrap" */}
+        {/*       > */}
+        {/*         {product.name} */}
+        {/*       </button> */}
+        {/*     </li> */}
+        {/*   ))} */}
+        {/* </ul> */}
+        {/* <button onClick={this.handleScrollLeft}>{"<"}</button> */}
+        {/* <button onClick={this.handleScrollRight}>{">"}</button> */}
 
-        <div className="selectedProduct plc-flex plc-flex-col plc-items-center plc-justify-center plc-max-w-3xl">
+        <div className="productTabs plc-relative plc-max-w-xl plc-mx-auto">
+          <Carousel
+            slidesCount={tabs.length}
+            initialSlide={this.state.initialTabSlide}
+            dots={false}
+            arrowsSize="small"
+          >
+            {tabs}
+          </Carousel>
+        </div>
+
+        <div className="selectedProduct plc-flex plc-flex-col plc-items-center plc-justify-center plc-max-w-3xl plc-mx-auto plc-mt-6">
           {image && (
             <figure className="plc-mb-2">
               <img src={image} alt="Product Image" />
             </figure>
           )}
           {description && (
-            <p className="plc-text-center">{description}</p>
+            <div className="plc-max-w-xl plc-text-center">
+              <div
+                className={`plc-overflow-x-hidden ${
+                  prodDescExpanded
+                    ? "plc-whitespace-normal"
+                    : "plc-whitespace-nowrap"
+                }`}
+              >
+                {prodDescExpanded ? (
+                  <span>
+                    {description}{" "}
+                    <button
+                      onClick={this.toggleProdDescExpanded}
+                      className="plc-text-primary plc-underline plc-cursor-pointer plc-outline-none focus:plc-outline-none hover:plc-no-underline"
+                    >
+                      Read less
+                    </button>
+                  </span>
+                ) : (
+                  <span>
+                    {description.slice(0, 50)}{" "}
+                    <button
+                      onClick={this.toggleProdDescExpanded}
+                      className="plc-text-primary plc-underline plc-cursor-pointer plc-outline-none focus:plc-outline-none hover:plc-no-underline"
+                    >
+                      Read more
+                    </button>
+                  </span>
+                )}
+              </div>
+            </div>
           )}
         </div>
       </div>
