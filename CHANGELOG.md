@@ -1,3 +1,16 @@
+# [4.0.0-alpha.37](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.36...v4.0.0-alpha.37) (2023-04-13)
+
+
+### Bug Fixes
+
+* change modal position and modal header size ([dc6758f](https://github.com/pelcro-inc/react-pelcro-js/commit/dc6758f19e79c029386cca1578fbc9dca05f0d51))
+
+
+### Features
+
+* add more enhancements to the selectModal ([cf9bf3c](https://github.com/pelcro-inc/react-pelcro-js/commit/cf9bf3cb5aecf1843f70d3c6002b358ebc23ad31))
+* more enhancements to the select modal ([6a1f11c](https://github.com/pelcro-inc/react-pelcro-js/commit/6a1f11c5efdce7ff7ee40b889e4073ac7205b060))
+
 # [4.0.0-alpha.36](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.35...v4.0.0-alpha.36) (2023-03-24)
 
 
