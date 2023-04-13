@@ -57,7 +57,6 @@ export function Carousel({
   const ref = useRef(null);
 
   useEffect(() => {
-    console.log("initial slide", initialSlide);
     ref.current.slickGoTo(initialSlide, true);
   }, [initialSlide]);
 

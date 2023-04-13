@@ -24,6 +24,7 @@
   "buttons": {
     "next": "Next",
     "select": "Select",
-    "back": "Back"
+    "back": "Back",
+    "gift": "Gift"
   }
 }
