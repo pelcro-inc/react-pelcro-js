@@ -24,6 +24,7 @@
   "buttons": {
     "next": "Prochain",
     "select": "Choisir",
-    "back": "Retour"
+    "back": "Retour",
+    "gift": "cadeau"
   }
 }

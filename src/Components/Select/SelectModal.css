@@ -10,46 +10,12 @@
     @apply plc-w-full plc-h-1 plc-bg-primary plc-absolute plc-top-0 plc-left-0;
   }
 
-  /* Firefox */
-  .pelcro-root .productTabs .tabs {
-    padding-bottom: 5px;
-    scrollbar-width: thin;
-    scrollbar-color: grey;
-  }
-
-  /* Chrome, Edge, and Safari */
-  .pelcro-root .productTabs .tabs::-webkit-scrollbar {
-    width: 15px;
-    height: 3px;
-  }
-
-  .pelcro-root .productTabs .tabs::-webkit-scrollbar-track {
-    background: lightGrey;
-    border-radius: 3px;
-  }
-
-  .pelcro-root .productTabs .tabs::-webkit-scrollbar-thumb {
-    @apply plc-bg-primary;
-    border-radius: 14px;
-  }
-
-  .pelcro-root .productTabs .tabs li:first-child {
-    @apply plc-ml-auto;
-  }
-
-  .pelcro-root .productTabs .tabs li:last-child {
-    @apply plc-mr-auto;
-  }
-
-  .pelcro-root .productTabs .tabs li#activeTab button {
-    @apply plc-border-primary-800 plc-bg-primary plc-text-white;
-  }
-
-  /* .pelcro-root .productTabs .tabs li#activeTab:after {
+  .pelcro-root .productTabs:before {
     content: "";
-    @apply plc-h-1 plc-bg-primary-800 plc-w-full plc-absolute plc-bottom-0 plc-left-0 plc-block;
-  } */
-
+    width: calc(100% - 5.5rem);
+    left: 2.75rem;
+    @apply plc-h-px plc-bg-gray-300 plc-absolute plc-bottom-0.5;
+  }
   .pelcro-root .selectedProduct img {
     max-width: 150px;
     height: auto;

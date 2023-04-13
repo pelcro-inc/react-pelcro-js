@@ -19,6 +19,7 @@ import {
   getEntitlementsFromElem,
   notifyBugsnag
 } from "../../utils/utils";
+import { TabsCarousel } from "./TabsCarousel";
 
 /**
  *
@@ -109,6 +110,9 @@ class SelectModal extends Component {
       isGift: props.isGift,
       disabled: true,
       mode: "product",
+      initialTabSlide: 0,
+      scrollToTab: true,
+      prodDescExpanded: false,
       productList: props.matchingEntitlements
         ? window.Pelcro.product.getByEntitlements(
             props.matchingEntitlements
@@ -120,6 +124,8 @@ class SelectModal extends Component {
       this.props.product || window.Pelcro.paywall.getProduct();
     this.locale = this.props.t;
     this.closeButton = window.Pelcro.paywall.displayCloseButton();
+
+    this.productsTabRef = React.createRef();
   }
 
   componentDidMount = () => {
@@ -224,18 +230,6 @@ class SelectModal extends Component {
     document.removeEventListener("keydown", this.handleSubmit);
   };
 
-  componentDidUpdate(prevProps, prevState) {
-    //Scroll to active tab
-    const activeElement = document.getElementById("activeTab");
-
-    if (activeElement) {
-      activeElement.parentNode.scrollLeft =
-        activeElement.offsetLeft - 80;
-    } else {
-      console.log(document.getElementById("activeTab"));
-    }
-  }
-
   handleSubmit = (e) => {
     if (e.key === "Enter" && !this.state.disabled)
       this.submitOption();
@@ -330,7 +324,7 @@ class SelectModal extends Component {
               onClick={productButtonCallback}
               data-key={product.id}
               id="pelcro-select-product-back-button"
-              className={`plc-w-full ${
+              className={`plc-w-full plc-capitalize plc-border-2 plc-border-primary hover:plc-bg-white hover:plc-text-primary plc-transition-all focus:plc-outline-none ${
                 options?.emphasize ? "plc-bg-primary-700" : ""
               }`}
               {...(index === 0 && { autoFocus: true })}
@@ -361,42 +355,134 @@ class SelectModal extends Component {
     return <Carousel slidesCount={items.length}>{items}</Carousel>;
   };
 
+  handleScrollLeft = () => {
+    this.productsTabRef.current.scrollLeft -= 100; // Adjust the scroll value as needed
+  };
+
+  handleScrollRight = () => {
+    this.productsTabRef.current.scrollLeft += 100; // Adjust the scroll value as needed
+  };
+
+  toggleProdDescExpanded = () => {
+    this.setState({ prodDescExpanded: !this.state.prodDescExpanded });
+  };
+
   renderProductTabs = () => {
-    const productButtonCallback = this.selectProduct;
+    const { prodDescExpanded } = this.state;
+    const productButtonCallback = (e) => {
+      this.setState({ scrollToTab: false });
+      this.selectProduct(e);
+    };
+
     const { image, description } = this.state.product;
+    const tabs = this.state.productList.map((product, index) => {
+      if (
+        product.id === this.state.product.id &&
+        this.state.scrollToTab
+      ) {
+        this.setState((oldState) => {
+          if (+oldState.initialTabSlide !== +index) {
+            return { initialTabSlide: index };
+          }
+        });
+      }
+
+      return (
+        <div key={product.id}>
+          <button
+            onClick={(e) => productButtonCallback(e)}
+            data-key={product.id}
+            data-index={index}
+            className={`plc-px-4 plc-py-2 focus:plc-outline-none plc-border-b-4 hover:plc-text-primary hover:plc-border-primary plc-transition-all plc-h-full plc-flex ${
+              product.id === this.state.product.id
+                ? "plc-border-primary plc-text-primary"
+                : "plc-border-transparent plc-font-normal plc-text-gray-500"
+            }`}
+          >
+            {product.name}
+          </button>
+        </div>
+      );
+    });
 
     return (
-      <div className="productTabs plc-flex plc-flex-col plc-items-center">
-        <ul className="tabs plc-w-full plc-flex plc-items-center plc-text-center plc-border-b plc-border-gray-300 plc-mb-4 plc-overflow-x-auto">
-          {this.state.productList.map((product, index) => (
-            <li
-              key={product.id}
-              id={`${
-                product.id === this.state.product?.id
-                  ? "activeTab"
-                  : ""
-              }`}
-              className="plc-relative plc-mx-1"
-            >
-              <button
-                onClick={productButtonCallback}
-                data-key={product.id}
-                className="plc-px-4 plc-py-2 plc-rounded plc-text-gray-600 focus:plc-outline-none plc-whitespace-nowrap"
-              >
-                {product.name}
-              </button>
-            </li>
-          ))}
-        </ul>
+      <div className="plc-flex plc-flex-col">
+        {/* <ul */}
+        {/*   ref={this.productsTabRef} */}
+        {/*   className="tabs plc-w-full plc-flex plc-items-center plc-text-center plc-border-b plc-border-gray-300 plc-mb-4 plc-overflow-x-auto plc-max-w-lg" */}
+        {/* > */}
+        {/*   {this.state.productList.map((product, index) => ( */}
+        {/*     <li */}
+        {/*       key={product.id} */}
+        {/*       id={`${ */}
+        {/*         product.id === this.state.product?.id */}
+        {/*           ? "activeTab" */}
+        {/*           : "" */}
+        {/*       }`} */}
+        {/*       className="plc-relative plc-mx-1" */}
+        {/*     > */}
+        {/*       <button */}
+        {/*         onClick={productButtonCallback} */}
+        {/*         data-key={product.id} */}
+        {/*         className="plc-px-4 plc-py-2 plc-rounded plc-text-gray-600 focus:plc-outline-none plc-whitespace-nowrap" */}
+        {/*       > */}
+        {/*         {product.name} */}
+        {/*       </button> */}
+        {/*     </li> */}
+        {/*   ))} */}
+        {/* </ul> */}
+        {/* <button onClick={this.handleScrollLeft}>{"<"}</button> */}
+        {/* <button onClick={this.handleScrollRight}>{">"}</button> */}
 
-        <div className="selectedProduct plc-flex plc-flex-col plc-items-center plc-justify-center plc-max-w-3xl">
+        <div className="productTabs plc-relative plc-max-w-xl plc-mx-auto">
+          <Carousel
+            slidesCount={tabs.length}
+            initialSlide={this.state.initialTabSlide}
+            dots={false}
+            arrowsSize="small"
+          >
+            {tabs}
+          </Carousel>
+        </div>
+
+        <div className="selectedProduct plc-flex plc-flex-col plc-items-center plc-justify-center plc-max-w-3xl plc-mx-auto plc-mt-6">
           {image && (
             <figure className="plc-mb-2">
               <img src={image} alt="Product Image" />
             </figure>
           )}
           {description && (
-            <p className="plc-text-center">{description}</p>
+            <div className="plc-max-w-xl plc-text-center">
+              <div
+                className={`plc-overflow-x-hidden ${
+                  prodDescExpanded
+                    ? "plc-whitespace-normal"
+                    : "plc-whitespace-nowrap"
+                }`}
+              >
+                {prodDescExpanded ? (
+                  <span>
+                    {description}{" "}
+                    <button
+                      onClick={this.toggleProdDescExpanded}
+                      className="plc-text-primary plc-underline plc-cursor-pointer plc-outline-none focus:plc-outline-none hover:plc-no-underline"
+                    >
+                      Read less
+                    </button>
+                  </span>
+                ) : (
+                  <span>
+                    {description.slice(0, 50)}{" "}
+                    <button
+                      onClick={this.toggleProdDescExpanded}
+                      className="plc-text-primary plc-underline plc-cursor-pointer plc-outline-none focus:plc-outline-none hover:plc-no-underline"
+                    >
+                      Read more
+                    </button>
+                  </span>
+                )}
+              </div>
+            </div>
           )}
         </div>
       </div>
@@ -443,6 +529,8 @@ class SelectModal extends Component {
   };
 
   renderPlans = () => {
+    const { disableGifting } = this.props;
+
     const items = this.state.planList.map((plan) => {
       const isChecked = this.state.plan.id === plan.id ? true : false;
 
@@ -455,15 +543,9 @@ class SelectModal extends Component {
               : "plc-border plc-border-gray-300"
           } plc-h-full plc-flex plc-flex-col plc-items-start plc-text-gray-900 plc-border-solid plc-rounded-md plc-bg-white pelcro-select-plan-wrapper`}
         >
-          <Radio
-            wrapperClassName="plc-w-full plc-flex plc-h-full"
-            className="plc-hidden pelcro-select-plan-radio"
-            labelClassName="plc-cursor-pointer plc-w-full plc-h-full plc-m-0 plc-flex-1 plc-flex plc-flex-col"
+          <div
+            className="plc-w-full plc-flex plc-flex-col plc-h-full"
             id={`pelcro-select-plan-${plan.id}`}
-            name="plan"
-            checked={isChecked}
-            data-key={plan.id}
-            onChange={this.selectPlan}
           >
             <div className="plc-p-4 plc-text-center plc-flex plc-flex-col plc-justify-center plc-items-center plc-w-full">
               <h4 className="pelcro-select-plan-title plc-font-medium plc-text-xl plc-break-all">
@@ -489,16 +571,32 @@ class SelectModal extends Component {
                 </span>
               </div>
               <div
-                className={`${
-                  this.state?.plan.id === plan.id
-                    ? "plc-bg-primary plc-text-white"
-                    : "plc-text-primary-800"
-                } plc-flex plc-items-center plc-justify-center plc-text-center plc-py-2 plc-px-4 plc-w-full plc-border-2 plc-rounded-md plc-border-primary`}
+                className={`plc-grid ${
+                  disableGifting
+                    ? "plc-grid-cols-1"
+                    : "plc-grid-cols-2 plc-gap-2"
+                }`}
               >
-                {this.locale("buttons.select")}
+                <button
+                  className={`plc-flex plc-items-center plc-justify-center plc-text-center plc-py-2 plc-px-4 plc-w-full plc-border-2 plc-rounded-md plc-border-primary focus:plc-outline-none plc-text-white plc-bg-primary hover:plc-bg-white hover:plc-text-primary plc-transition-all`}
+                  data-key={plan.id}
+                  onClick={(e) => this.selectPlan(e, false)}
+                >
+                  {this.locale("buttons.select")}
+                </button>
+
+                {!disableGifting && (
+                  <button
+                    className={`plc-flex plc-items-center plc-justify-center plc-text-center plc-py-2 plc-px-4 plc-w-full plc-border-2 plc-rounded-md plc-border-primary focus:plc-outline-none plc-text-primary plc-bg-white hover:plc-bg-primary hover:plc-text-white plc-transition-all`}
+                    data-key={plan.id}
+                    onClick={(e) => this.selectPlan(e, true)}
+                  >
+                    {this.locale("buttons.gift")}
+                  </button>
+                )}
               </div>
             </div>
-          </Radio>
+          </div>
         </div>
       );
     });
@@ -508,6 +606,7 @@ class SelectModal extends Component {
 
   selectProduct = (e) => {
     const id = e.target.dataset.key;
+
     for (const product of this.state.productList) {
       if (+product.id === +id) {
         this.setState({ product: product });
@@ -523,32 +622,31 @@ class SelectModal extends Component {
     }
   };
 
-  selectPlan = (e) => {
+  selectPlan = (e, isGift) => {
     const id = e.target.dataset.key;
     for (const plan of this.state.planList) {
       if (+plan.id === +id) {
-        plan.isCheked = true;
-        this.setState({ plan: plan });
-        this.setState({ disabled: false });
-      } else {
-        plan.isCheked = false;
+        this.setState({ plan: plan, isGift: isGift });
+        this.props.setProductAndPlan(
+          this.state.product,
+          plan,
+          isGift
+        );
+
+        this.submitOption(this.state.product, isGift);
       }
     }
   };
 
   goBack = () => {
-    this.setState({ disabled: true });
-    this.setState({ mode: "product" });
+    this.setState({
+      disabled: true,
+      mode: "product",
+      scrollToTab: true
+    });
   };
 
-  submitOption = () => {
-    this.props.setProductAndPlan(
-      this.state.product,
-      this.state.plan,
-      this.state.isGift
-    );
-
-    const { product, isGift } = this.state;
+  submitOption = (product, isGift) => {
     const { setView } = this.props;
     const isAuthenticated = window.Pelcro.user.isAuthenticated();
 
@@ -575,8 +673,6 @@ class SelectModal extends Component {
   };
 
   render() {
-    const { disableGifting } = this.props;
-
     if (this.state.mode === "product") {
       ReactGA?.event?.({
         category: "VIEWS",
@@ -633,48 +729,13 @@ class SelectModal extends Component {
             </div>
 
             {this.state.mode === "plan" && (
-              <>
-                <div className="pelcro-select-plans-wrapper plc-mt-4">
-                  {this.renderPlans()}
-                </div>
-                {!disableGifting && (
-                  <div className="plc-flex plc-justify-center plc-mt-4">
-                    <Checkbox
-                      onChange={this.onIsGiftChange}
-                      checked={this.state.isGift}
-                      id="pelcro-input-is-gift"
-                    >
-                      {this.locale("messages.checkbox")}
-                    </Checkbox>
-                  </div>
-                )}
-                <Button
-                  disabled={this.state.disabled}
-                  onClick={this.submitOption}
-                  id="pelcro-submit"
-                  className="plc-mt-2 plc-w-full plc-max-w-sm plc-ml-auto plc-mr-auto plc-block"
-                >
-                  {this.locale("buttons.next")}
-                </Button>
-              </>
+              <div className="pelcro-select-plans-wrapper plc-mt-4">
+                {this.renderPlans()}
+              </div>
             )}
           </div>
         </ModalBody>
-        <ModalFooter>
-          {!window.Pelcro.user.isAuthenticated() && (
-            <p className="plc-mb-9">
-              <span className="plc-font-medium">
-                {this.locale("messages.alreadyHaveAccount") + " "}
-              </span>
-              <Link
-                id="pelcro-link-login"
-                onClick={this.displayLoginView}
-              >
-                {this.locale("messages.loginHere")}
-              </Link>
-            </p>
-          )}
-        </ModalFooter>
+        <ModalFooter></ModalFooter>
       </Modal>
     );
   }

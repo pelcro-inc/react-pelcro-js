@@ -25,7 +25,7 @@ export const PaypalSubscribeButton = (props) => {
       state.updatedPrice ??
       props.plan?.amount ??
       plan?.amount ??
-      invoice.amount_remaining;
+      invoice?.amount_remaining;
     const selectedAddress = getAddressById(
       props.selectedAddressId ?? selectedAddressId
     );
