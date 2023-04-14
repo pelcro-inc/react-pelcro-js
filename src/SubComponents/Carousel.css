@@ -1,101 +1,103 @@
-@layer components {
-  /* Slider */
-  .pelcro-root .slick-slider {
-    position: relative;
-    display: block;
-    box-sizing: border-box;
-    user-select: none;
-    touch-action: pan-y;
-  }
-  .pelcro-root .slick-list {
-    position: relative;
-    display: block;
-    overflow: hidden;
-    padding: 0;
-    /* margin: 0 -10px; */
-  }
-  .pelcro-root .slick-list:focus {
-    outline: none;
-  }
-  .pelcro-root .slick-list.dragging {
-    cursor: pointer;
-  }
-  .pelcro-root .slick-slider .slick-track,
-  .pelcro-root .slick-slider .slick-list {
-    transform: translate3d(0, 0, 0);
-  }
-  .pelcro-root .slick-track {
-    position: relative;
-    top: 0;
-    left: 0;
-    display: flex;
-    align-items: stretch;
-  }
-  .pelcro-root .slick-track:before,
-  .pelcro-root .slick-track:after {
-    display: table;
-    content: "";
-  }
-  .pelcro-root .slick-track:after {
-    clear: both;
-  }
-  .pelcro-root .slick-loading .slick-track {
-    visibility: hidden;
-  }
-  .pelcro-root .slick-slide {
-    display: flex !important;
-    align-self: stretch;
-    height: unset;
-    margin: 0 10px;
-  }
-  .pelcro-root .slick-slide > div {
-    display: flex;
-    align-self: stretch;
-    width: 100%;
-    height: 100%;
-  }
-  .pelcro-root .slick-slide img {
-    display: block;
-  }
-  .pelcro-root .slick-slide.slick-loading img {
-    display: none;
-  }
-  .pelcro-root .slick-slide.dragging img {
-    pointer-events: none;
-  }
-  .pelcro-root .slick-initialized .slick-slide {
-    display: block;
-  }
-  .pelcro-root .slick-loading .slick-slide {
-    visibility: hidden;
-  }
-  .pelcro-root .slick-vertical .slick-slide {
-    display: block;
-    height: auto;
-    border: 1px solid transparent;
-  }
-  .pelcro-root .slick-arrow.slick-hidden {
-    display: none;
-  }
-  .pelcro-root .slick-disabled {
-    opacity: 0;
-    cursor: auto;
-  }
-  .pelcro-root .slick-dots {
-    margin-top: 20px;
-    display: flex !important;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-  .pelcro-root .slick-dots li {
-    margin: 0 2px;
-  }
-  .pelcro-root .slick-dots li.slick-active span {
-    border-color: grey;
-    @apply plc-bg-primary;
-  }
-  .pelcro-root .slick-arrow {
-    outline: none !important;
-  }
+/* Slider */
+.pelcro-root .slick-slider {
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+  user-select: none;
+  touch-action: pan-y;
+}
+.pelcro-root .slick-list {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  padding: 0;
+  /* margin: 0 -10px; */
+}
+.pelcro-root .slick-list:focus {
+  outline: none;
+}
+.pelcro-root .slick-list.dragging {
+  cursor: pointer;
+}
+.pelcro-root .slick-slider .slick-track,
+.pelcro-root .slick-slider .slick-list {
+  transform: translate3d(0, 0, 0);
+}
+.pelcro-root .slick-track {
+  position: relative;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: stretch;
+}
+.pelcro-root .slick-track:before,
+.pelcro-root .slick-track:after {
+  display: table;
+  content: "";
+}
+.pelcro-root .slick-track:after {
+  clear: both;
+}
+.pelcro-root .slick-loading .slick-track {
+  visibility: hidden;
+}
+.pelcro-root .slick-slide {
+  display: flex !important;
+  align-self: stretch;
+  height: unset;
+  margin: 0 10px;
+}
+.pelcro-root .slick-slide > div {
+  display: flex;
+  align-self: stretch;
+  width: 100%;
+  height: 100%;
+}
+.pelcro-root .slick-slide img {
+  display: block;
+}
+.pelcro-root .slick-slide.slick-loading img {
+  display: none;
+}
+.pelcro-root .slick-slide.dragging img {
+  pointer-events: none;
+}
+.pelcro-root .slick-initialized .slick-slide {
+  display: block;
+}
+.pelcro-root .slick-loading .slick-slide {
+  visibility: hidden;
+}
+.pelcro-root .slick-vertical .slick-slide {
+  display: block;
+  height: auto;
+  border: 1px solid transparent;
+}
+.pelcro-root .slick-arrow.slick-hidden {
+  display: none;
+}
+.pelcro-root .slick-disabled {
+  opacity: 0;
+  cursor: auto;
+}
+.pelcro-root .slick-dots {
+  margin-top: 20px;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.pelcro-root .slick-dots li {
+  margin: 0 2px;
+}
+.pelcro-root .slick-dots li.slick-active span {
+  border-color: grey;
+  background-color: hsl(
+    var(--plc-primary-hue),
+    var(--plc-primary-saturation),
+    var(--plc-primary-lightness)
+  );
+}
+.pelcro-root .slick-arrow {
+  outline: none !important;
 }
