@@ -1,3 +1,10 @@
+# [4.0.0-alpha.38](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.37...v4.0.0-alpha.38) (2023-04-14)
+
+
+### Bug Fixes
+
+* fix css issue ([82f016a](https://github.com/pelcro-inc/react-pelcro-js/commit/82f016a5369b220f6b5c35e992dc41398ed8cde7))
+
 # [4.0.0-alpha.37](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.36...v4.0.0-alpha.37) (2023-04-13)
 
 
