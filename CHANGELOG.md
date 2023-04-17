@@ -1,3 +1,10 @@
+# [4.0.0-alpha.39](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.38...v4.0.0-alpha.39) (2023-04-17)
+
+
+### Features
+
+* add more enhancements to the select modal ([d76eae4](https://github.com/pelcro-inc/react-pelcro-js/commit/d76eae4d10cb729e5b9cf08d50e7ae26cfa38c34))
+
 # [4.0.0-alpha.38](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.37...v4.0.0-alpha.38) (2023-04-14)
 
 
