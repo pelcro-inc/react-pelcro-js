@@ -19,7 +19,6 @@ import {
   getEntitlementsFromElem,
   notifyBugsnag
 } from "../../utils/utils";
-import { TabsCarousel } from "./TabsCarousel";
 
 /**
  *
@@ -259,7 +258,7 @@ class SelectModal extends Component {
       }
     }
     return (
-      <h5 className="plc-text-3xl pelcro-select-product-cost">
+      <h5 className="plc-text-2xl pelcro-select-product-cost">
         <span className="plc-font-medium">
           {startingPlan.amount_formatted}
         </span>
@@ -310,7 +309,7 @@ class SelectModal extends Component {
           <div className="plc-mt-3 plc-mb-6">
             {product.plans && (
               <>
-                <p className="plc-mb-2 plc-text-sm plc-text-gray-400">
+                <p className="plc-mb-2 plc-text-sm plc-text-gray-600 plc-font-bold">
                   {this.locale("labels.startingAt")}
                 </p>
 
@@ -324,10 +323,9 @@ class SelectModal extends Component {
               onClick={productButtonCallback}
               data-key={product.id}
               id="pelcro-select-product-back-button"
-              className={`plc-w-full plc-capitalize plc-border-2 plc-border-primary hover:plc-bg-white hover:plc-text-primary plc-transition-all focus:plc-outline-none ${
+              className={`plc-w-full plc-capitalize plc-border-2 plc-border-primary hover:plc-bg-primary-600 hover:plc-border-primary-600 plc-transition-all focus:plc-outline-none ${
                 options?.emphasize ? "plc-bg-primary-700" : ""
               }`}
-              {...(index === 0 && { autoFocus: true })}
             >
               {productButtonLabel}
             </Button>
@@ -352,7 +350,11 @@ class SelectModal extends Component {
       this.renderOneProduct(product, index)
     );
 
-    return <Carousel slidesCount={items.length}>{items}</Carousel>;
+    return (
+      <Carousel slidesCount={items.length} mobileArrowDown={true}>
+        {items}
+      </Carousel>
+    );
   };
 
   handleScrollLeft = () => {
@@ -388,12 +390,15 @@ class SelectModal extends Component {
       }
 
       return (
-        <div key={product.id}>
+        <div
+          key={product.id}
+          className="plc-flex plc-w-full plc-justify-center plc-text-center"
+        >
           <button
             onClick={(e) => productButtonCallback(e)}
             data-key={product.id}
             data-index={index}
-            className={`plc-px-4 plc-py-2 focus:plc-outline-none plc-border-b-4 hover:plc-text-primary hover:plc-border-primary plc-transition-all plc-h-full plc-flex ${
+            className={`plc-px-4 plc-py-2 focus:plc-outline-none plc-border-b-4 hover:plc-text-primary hover:plc-border-primary plc-transition-all plc-h-full plc-block plc-w-full ${
               product.id === this.state.product.id
                 ? "plc-border-primary plc-text-primary"
                 : "plc-border-transparent plc-font-normal plc-text-gray-500"
@@ -407,34 +412,7 @@ class SelectModal extends Component {
 
     return (
       <div className="plc-flex plc-flex-col">
-        {/* <ul */}
-        {/*   ref={this.productsTabRef} */}
-        {/*   className="tabs plc-w-full plc-flex plc-items-center plc-text-center plc-border-b plc-border-gray-300 plc-mb-4 plc-overflow-x-auto plc-max-w-lg" */}
-        {/* > */}
-        {/*   {this.state.productList.map((product, index) => ( */}
-        {/*     <li */}
-        {/*       key={product.id} */}
-        {/*       id={`${ */}
-        {/*         product.id === this.state.product?.id */}
-        {/*           ? "activeTab" */}
-        {/*           : "" */}
-        {/*       }`} */}
-        {/*       className="plc-relative plc-mx-1" */}
-        {/*     > */}
-        {/*       <button */}
-        {/*         onClick={productButtonCallback} */}
-        {/*         data-key={product.id} */}
-        {/*         className="plc-px-4 plc-py-2 plc-rounded plc-text-gray-600 focus:plc-outline-none plc-whitespace-nowrap" */}
-        {/*       > */}
-        {/*         {product.name} */}
-        {/*       </button> */}
-        {/*     </li> */}
-        {/*   ))} */}
-        {/* </ul> */}
-        {/* <button onClick={this.handleScrollLeft}>{"<"}</button> */}
-        {/* <button onClick={this.handleScrollRight}>{">"}</button> */}
-
-        <div className="productTabs plc-relative plc-max-w-xl plc-mx-auto">
+        <div className="productTabs plc-relative md:plc-max-w-xl md:plc-mx-auto plc-w-full">
           <Carousel
             slidesCount={tabs.length}
             initialSlide={this.state.initialTabSlide}
@@ -456,8 +434,8 @@ class SelectModal extends Component {
               <div
                 className={`plc-overflow-x-hidden ${
                   prodDescExpanded
-                    ? "plc-whitespace-normal"
-                    : "plc-whitespace-nowrap"
+                    ? "md:plc-whitespace-normal plc-whitespace-normal"
+                    : "md:plc-whitespace-nowrap plc-whitespace-normal"
                 }`}
               >
                 {prodDescExpanded ? (
@@ -472,7 +450,8 @@ class SelectModal extends Component {
                   </span>
                 ) : (
                   <span>
-                    {description.slice(0, 50)}{" "}
+                    {description.slice(0, 50)}
+                    {" ... "}
                     <button
                       onClick={this.toggleProdDescExpanded}
                       className="plc-text-primary plc-underline plc-cursor-pointer plc-outline-none focus:plc-outline-none hover:plc-no-underline"
@@ -578,7 +557,7 @@ class SelectModal extends Component {
                 }`}
               >
                 <button
-                  className={`plc-flex plc-items-center plc-justify-center plc-text-center plc-py-2 plc-px-4 plc-w-full plc-border-2 plc-rounded-md plc-border-primary focus:plc-outline-none plc-text-white plc-bg-primary hover:plc-bg-white hover:plc-text-primary plc-transition-all`}
+                  className={`plc-flex plc-items-center plc-justify-center plc-text-center plc-py-2 plc-px-4 plc-w-full plc-border-2 plc-rounded-md plc-border-primary focus:plc-outline-none plc-text-white plc-bg-primary hover:plc-bg-primary-600 hover:plc-border-primary-600 plc-transition-all`}
                   data-key={plan.id}
                   onClick={(e) => this.selectPlan(e, false)}
                 >
@@ -587,7 +566,7 @@ class SelectModal extends Component {
 
                 {!disableGifting && (
                   <button
-                    className={`plc-flex plc-items-center plc-justify-center plc-text-center plc-py-2 plc-px-4 plc-w-full plc-border-2 plc-rounded-md plc-border-primary focus:plc-outline-none plc-text-primary plc-bg-white hover:plc-bg-primary hover:plc-text-white plc-transition-all`}
+                    className={`plc-flex plc-items-center plc-justify-center plc-text-center plc-py-2 plc-px-4 plc-w-full plc-border-2 plc-rounded-md plc-border-primary focus:plc-outline-none plc-text-primary plc-bg-white hover:plc-border-primary-600 hover:plc-text-primary-600 hover:plc-shadow-sm plc-transition-all`}
                     data-key={plan.id}
                     onClick={(e) => this.selectPlan(e, true)}
                   >
@@ -601,7 +580,11 @@ class SelectModal extends Component {
       );
     });
 
-    return <Carousel slidesCount={items.length}>{items}</Carousel>;
+    return (
+      <Carousel slidesCount={items.length} mobileArrowDown={true}>
+        {items}
+      </Carousel>
+    );
   };
 
   selectProduct = (e) => {
@@ -720,7 +703,7 @@ class SelectModal extends Component {
         </ModalHeader>
 
         <ModalBody>
-          <div id="pelcro-selection-view">
+          <div id="pelcro-selection-view" className="plc-pt-4">
             <div className="pelcro-select-products-wrapper">
               {window.Pelcro.site.read()
                 ?.restrictive_paywall_metatags_enabled
