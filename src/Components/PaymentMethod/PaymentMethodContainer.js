@@ -1500,6 +1500,7 @@ const PaymentMethodContainerWithoutStripe = ({
         }
         dispatch({ type: LOADING, payload: false });
 
+        onFailure(error);
         return dispatch({
           type: SHOW_ALERT,
           payload: {
