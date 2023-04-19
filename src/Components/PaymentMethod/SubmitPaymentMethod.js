@@ -34,7 +34,7 @@ export const SubmitPaymentMethod = ({ onClick, ...otherProps }) => {
   const price = updatedPrice ?? plan?.amount;
 
   const priceFormatted =
-    plan.type === "donation" &&
+    plan?.type === "donation" &&
     (selectedDonationAmount || customDonationAmount)
       ? getFormattedPriceByLocal(
           selectedDonationAmount
