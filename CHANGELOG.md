@@ -1,3 +1,10 @@
+# [3.22.0-beta.24](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.22.0-beta.23...v3.22.0-beta.24) (2023-04-19)
+
+
+### Bug Fixes
+
+* getFormattedPriceByLocal if plan is null ([64eea74](https://github.com/pelcro-inc/react-pelcro-js/commit/64eea7455d54e802d9a8d2c664b3903b0788c06f))
+
 # [3.22.0-beta.23](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.22.0-beta.22...v3.22.0-beta.23) (2023-04-18)
 
 
