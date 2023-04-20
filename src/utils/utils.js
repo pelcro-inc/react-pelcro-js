@@ -533,3 +533,11 @@ export function generatePassword() {
   }
   return retVal;
 }
+
+export function isStringValid(str) {
+  // Define the regular expression to match only letters, numbers and spaces
+  var regex = /^[a-zA-Z0-9\s]+$/;
+
+  // Test the string against the regular expression
+  return regex.test(str);
+}
