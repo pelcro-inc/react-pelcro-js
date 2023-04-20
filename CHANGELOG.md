@@ -1,3 +1,10 @@
+# [4.0.0-alpha.40](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.39...v4.0.0-alpha.40) (2023-04-20)
+
+
+### Features
+
+* remove the product tabs ([b7a01e3](https://github.com/pelcro-inc/react-pelcro-js/commit/b7a01e31dfd4d9b0929385bc81f5ab8f2178bc39))
+
 # [4.0.0-alpha.39](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.38...v4.0.0-alpha.39) (2023-04-17)
 
 
