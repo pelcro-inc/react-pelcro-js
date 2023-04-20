@@ -1,3 +1,10 @@
+# [3.22.0-beta.25](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.22.0-beta.24...v3.22.0-beta.25) (2023-04-20)
+
+
+### Bug Fixes
+
+* gift message not allow special characters and emojis ([bac7b28](https://github.com/pelcro-inc/react-pelcro-js/commit/bac7b284a6471f06f0932cdffb1038a250dca958))
+
 # [3.22.0-beta.24](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.22.0-beta.23...v3.22.0-beta.24) (2023-04-19)
 
 
