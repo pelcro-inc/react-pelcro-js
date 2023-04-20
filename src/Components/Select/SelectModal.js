@@ -376,7 +376,7 @@ class SelectModal extends Component {
       this.selectProduct(e);
     };
 
-    const { image, description } = this.state.product;
+    const { name, image, description } = this.state.product;
     const tabs = this.state.productList.map((product, index) => {
       if (
         product.id === this.state.product.id &&
@@ -412,18 +412,19 @@ class SelectModal extends Component {
 
     return (
       <div className="plc-flex plc-flex-col">
-        <div className="productTabs plc-relative md:plc-max-w-xl md:plc-mx-auto plc-w-full">
-          <Carousel
-            slidesCount={tabs.length}
-            initialSlide={this.state.initialTabSlide}
-            dots={false}
-            arrowsSize="small"
-          >
-            {tabs}
-          </Carousel>
-        </div>
+        {/* <div className="productTabs plc-relative md:plc-max-w-xl md:plc-mx-auto plc-w-full"> */}
+        {/*   <Carousel */}
+        {/*     slidesCount={tabs.length} */}
+        {/*     initialSlide={this.state.initialTabSlide} */}
+        {/*     dots={false} */}
+        {/*     arrowsSize="small" */}
+        {/*   > */}
+        {/*     {tabs} */}
+        {/*   </Carousel> */}
+        {/* </div> */}
 
-        <div className="selectedProduct plc-flex plc-flex-col plc-items-center plc-justify-center plc-max-w-3xl plc-mx-auto plc-mt-6">
+        <div className="selectedProduct plc-flex plc-flex-col plc-items-center plc-justify-center plc-max-w-3xl plc-mx-auto">
+          <h3 className="plc-text-2xl plc-mb-3">{name}</h3>
           {image && (
             <figure className="plc-mb-2">
               <img src={image} alt="Product Image" />
@@ -537,7 +538,7 @@ class SelectModal extends Component {
 
             <div className="plc-mt-auto plc-px-4 plc-mb-4 plc-border-t plc-border-gray-300">
               <div className="plc-pt-4 plc-mb-4 plc-font-semibold pelcro-select-plan-price plc-px-4 plc-text-center plc-flex plc-items-end plc-justify-center">
-                <p className="plc-font-bold plc-text-4xl">
+                <p className="plc-font-bold plc-text-3xl">
                   {plan.amount_formatted}
                 </p>
                 <span className="plc-text-gray-400 plc-text-xs plc-flex plc-flex-col plc-font-normal">
