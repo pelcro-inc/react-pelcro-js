@@ -15,7 +15,7 @@ import {
   DISABLE_SUBMIT,
   SHOW_ALERT
 } from "../../utils/action-types";
-import { getDateWithoutTime } from "../../utils/utils";
+import { getDateWithoutTime, isStringValid } from "../../utils/utils";
 
 const initialState = {
   email: "",
@@ -84,6 +84,20 @@ const GiftCreateContainer = ({
         });
         return onFailure();
       }
+    }
+
+    if (
+      giftRecipient.giftMessage &&
+      !isStringValid(giftRecipient.giftMessage)
+    ) {
+      dispatch({
+        type: SHOW_ALERT,
+        payload: {
+          type: "error",
+          content: t("gift.messages.giftMessageAllowedCharacters")
+        }
+      });
+      return onFailure();
     }
 
     set({ giftRecipient });
