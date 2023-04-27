@@ -22,7 +22,6 @@ import { IncludeLastName } from "./IncludeLastName";
 import { IncludePhone } from "./IncludePhone";
 import { SubscriptionCreateFreePlanButton } from "../SubscriptionCreate/SubscriptionCreateFreePlanButton";
 import { DonationEmail } from "./DonationEmail";
-import { DonationPassword } from "./DonationPassword";
 import { usePelcro } from "../../hooks/usePelcro";
 
 /**
@@ -132,13 +131,6 @@ export function PaymentMethodView({
                     label={t("labels.email")}
                     required
                     autoFocus={true}
-                  />
-
-                  <DonationPassword
-                    id="pelcro-input-password"
-                    errorId="pelcro-input-password-error"
-                    label={t("labels.password")}
-                    required
                   />
                 </>
               )}
