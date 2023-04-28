@@ -1,3 +1,10 @@
+# [3.22.0-beta.26](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.22.0-beta.25...v3.22.0-beta.26) (2023-04-28)
+
+
+### Bug Fixes
+
+* check for selectedPaymentMethodId first before loading cybersource sdk ([8b311e9](https://github.com/pelcro-inc/react-pelcro-js/commit/8b311e9f912445068f6ff397765c6320a3201454))
+
 # [3.22.0-beta.25](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.22.0-beta.24...v3.22.0-beta.25) (2023-04-20)
 
 
