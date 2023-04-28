@@ -1114,27 +1114,31 @@ const PaymentMethodContainerWithoutStripe = ({
         initTapScript();
       }
 
-      if (cardProcessor === "cybersource") {
-        if (!window.FLEX) {
-          window.Pelcro.helpers.loadSDK(
-            "https://flex.cybersource.com/cybersource/assets/microform/0.4/flex-microform.min.js",
-            "cybersource-cdn"
-          );
+      if (
+        cardProcessor === "cybersource" &&
+        !selectedPaymentMethodId &&
+        !window.FLEX
+      ) {
+        window.Pelcro.helpers.loadSDK(
+          "https://flex.cybersource.com/cybersource/assets/microform/0.4/flex-microform.min.js",
+          "cybersource-cdn"
+        );
 
-          document
-            .querySelector(
-              'script[src="https://flex.cybersource.com/cybersource/assets/microform/0.4/flex-microform.min.js"]'
-            )
-            .addEventListener("load", () => {
-              initCybersourceScript();
-            });
+        document
+          .querySelector(
+            'script[src="https://flex.cybersource.com/cybersource/assets/microform/0.4/flex-microform.min.js"]'
+          )
+          .addEventListener("load", () => {
+            initCybersourceScript();
+          });
+      }
 
-          return;
-        }
-
-        if (!selectedPaymentMethodId) {
-          initCybersourceScript();
-        }
+      if (
+        cardProcessor === "cybersource" &&
+        !selectedPaymentMethodId &&
+        window.FLEX
+      ) {
+        initCybersourceScript();
       }
     });
   }, [selectedPaymentMethodId]);
