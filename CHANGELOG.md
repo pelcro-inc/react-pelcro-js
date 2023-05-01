@@ -1,3 +1,10 @@
+## [3.21.8](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.21.7...v3.21.8) (2023-05-01)
+
+
+### Bug Fixes
+
+* remove tokenizeCard console log ([cc121af](https://github.com/pelcro-inc/react-pelcro-js/commit/cc121af55b6a3dfccd9478ef97be1c763bcf9de2))
+
 ## [3.21.7](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.21.6...v3.21.7) (2023-04-05)
 
 
