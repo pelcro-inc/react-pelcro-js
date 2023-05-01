@@ -384,7 +384,6 @@ const PaymentMethodContainerWithoutStripe = ({
 
   const tokenizeCard = (error, microformInstance) => {
     if (error) {
-      console.log("tokenizeCard => ", error);
       return;
     }
 
