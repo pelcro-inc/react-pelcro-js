@@ -1,3 +1,10 @@
+# [3.22.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.21.8...v3.22.0) (2023-05-01)
+
+
+### Features
+
+* add onFailure to the payment failed ([a7552cc](https://github.com/pelcro-inc/react-pelcro-js/commit/a7552cc6b7717353f49c08a8c96c46dab274e4e3))
+
 ## [3.21.8](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.21.7...v3.21.8) (2023-05-01)
 
 
