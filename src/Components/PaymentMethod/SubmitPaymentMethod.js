@@ -23,7 +23,9 @@ export const SubmitPaymentMethod = ({ onClick, ...otherProps }) => {
       phone,
       disableSubmit,
       isLoading,
-      updatedPrice
+      updatedPrice,
+      month,
+      year
     }
   } = useContext(store);
 
@@ -38,6 +40,10 @@ export const SubmitPaymentMethod = ({ onClick, ...otherProps }) => {
   const supportsTap = Boolean(
     window.Pelcro.site.read()?.tap_gateway_settings
   );
+  const supportsCybersource = Boolean(
+    window.Pelcro.site.read()?.cybersource_gateway_settings
+  );
+
   const isUserFirstName = Boolean(
     window.Pelcro.user.read().first_name
   );
@@ -62,7 +68,9 @@ export const SubmitPaymentMethod = ({ onClick, ...otherProps }) => {
           (supportsTap && phoneError) ||
           (supportsTap && !firstName?.length) ||
           (supportsTap && !lastName?.length) ||
-          (supportsTap && !phone?.length)
+          (supportsTap && !phone?.length) ||
+          (supportsCybersource && !month?.length) ||
+          (supportsCybersource && !year?.length)
       );
     }
   }, [
@@ -72,7 +80,9 @@ export const SubmitPaymentMethod = ({ onClick, ...otherProps }) => {
     phoneError,
     firstName,
     lastName,
-    phone
+    phone,
+    month,
+    year
   ]);
 
   return (
