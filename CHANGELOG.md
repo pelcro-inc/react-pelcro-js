@@ -1,3 +1,10 @@
+# [4.0.0-alpha.41](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.40...v4.0.0-alpha.41) (2023-05-04)
+
+
+### Features
+
+* add logged in and updated address events ([dede35d](https://github.com/pelcro-inc/react-pelcro-js/commit/dede35ddeac4bb16ad6571199ee1a9d3f85dbf8f))
+
 # [4.0.0-alpha.40](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.39...v4.0.0-alpha.40) (2023-04-20)
 
 
