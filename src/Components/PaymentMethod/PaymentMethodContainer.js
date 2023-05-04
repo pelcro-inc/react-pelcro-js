@@ -2349,10 +2349,16 @@ const PaymentMethodContainerWithoutStripe = ({
           return Update({ ...state, percentOff: action.payload });
 
         case SET_MONTH:
-          return Update({ ...state, month: action.payload });
+          return Update({
+            ...state,
+            month: action.payload
+          });
 
         case SET_YEAR:
-          return Update({ ...state, year: action.payload });
+          return Update({
+            ...state,
+            year: action.payload
+          });
 
         case SET_FIRST_NAME:
           return Update({
