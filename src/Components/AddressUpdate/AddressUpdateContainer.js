@@ -162,6 +162,11 @@ const AddressUpdateContainer = ({
             }
           });
           onSuccess(res);
+          ReactGA?.event?.({
+            category: "ACTIONS",
+            action: "Updated address",
+            nonInteraction: true
+          });
         }
       }
     );
