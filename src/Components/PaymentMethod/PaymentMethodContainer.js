@@ -403,7 +403,6 @@ const PaymentMethodContainerWithoutStripe = ({
 
   const tokenizeCard = (error, microformInstance) => {
     if (error) {
-      console.log("tokenizeCard => ", error);
       return;
     }
 
@@ -2247,6 +2246,10 @@ const PaymentMethodContainerWithoutStripe = ({
                 } else {
                   return submitUsingTap(state, dispatch);
                 }
+              }
+
+              if (getSiteCardProcessor() === "cybersource") {
+                return submitUsingCybersource(state, dispatch);
               }
 
               if (getSiteCardProcessor() === "cybersource") {

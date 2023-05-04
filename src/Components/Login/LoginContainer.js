@@ -62,6 +62,11 @@ const LoginContainer = ({
           onFailure(err);
         } else {
           onSuccess(res);
+          ReactGA?.event?.({
+            category: "ACTIONS",
+            action: "Logged in",
+            nonInteraction: true
+          });
         }
       }
     );

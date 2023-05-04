@@ -20,6 +20,7 @@
 * getFormattedPriceByLocal if plan is null ([64eea74](https://github.com/pelcro-inc/react-pelcro-js/commit/64eea7455d54e802d9a8d2c664b3903b0788c06f))
 
 # [3.22.0-beta.23](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.22.0-beta.22...v3.22.0-beta.23) (2023-04-18)
+# [3.22.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.21.8...v3.22.0) (2023-05-01)
 
 
 ### Features
@@ -57,6 +58,14 @@
 * edit tailwind config ([bda0795](https://github.com/pelcro-inc/react-pelcro-js/commit/bda07956997e19844dd116b61da2cfc19011b654))
 
 # [3.22.0-beta.18](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.22.0-beta.17...v3.22.0-beta.18) (2023-04-11)
+## [3.21.8](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.21.7...v3.21.8) (2023-05-01)
+
+
+### Bug Fixes
+
+* remove tokenizeCard console log ([cc121af](https://github.com/pelcro-inc/react-pelcro-js/commit/cc121af55b6a3dfccd9478ef97be1c763bcf9de2))
+
+## [3.21.7](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.21.6...v3.21.7) (2023-04-05)
 
 
 ### Bug Fixes
