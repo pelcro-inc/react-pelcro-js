@@ -1,3 +1,10 @@
+# [3.23.0-beta.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.23.0-beta.1...v3.23.0-beta.2) (2023-05-04)
+
+
+### Bug Fixes
+
+* make the month and year required in cybersource ([4c1d724](https://github.com/pelcro-inc/react-pelcro-js/commit/4c1d724f6ec745506538766e4f5fadda9170d10d))
+
 # [3.23.0-beta.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.22.0...v3.23.0-beta.1) (2023-05-04)
 
 
