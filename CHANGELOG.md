@@ -1,3 +1,56 @@
+# [3.23.0-beta.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.22.0...v3.23.0-beta.1) (2023-05-04)
+
+
+### Bug Fixes
+
+* add 0 order to cart ([7fb6d97](https://github.com/pelcro-inc/react-pelcro-js/commit/7fb6d9799ab0a1375ff5a9bfe27fb3b445280c2c))
+* add methods and props effect products render ([b9e3e2b](https://github.com/pelcro-inc/react-pelcro-js/commit/b9e3e2be3c8b4d7e75224a56fbdb54e5f9bce9a4))
+* add orders to cart ([a0a43ee](https://github.com/pelcro-inc/react-pelcro-js/commit/a0a43ee57aa302293c4ffa9a9cf5556b416f8b97))
+* bugsnag firing condition ([20e00cc](https://github.com/pelcro-inc/react-pelcro-js/commit/20e00cc3f1b89367613a9a031ae92f20dbdfd862))
+* bugsnag matching properties changing ([#311](https://github.com/pelcro-inc/react-pelcro-js/issues/311)) ([eb5519c](https://github.com/pelcro-inc/react-pelcro-js/commit/eb5519cd304ea645f1e013309d0b430796f834f4))
+* bugsnag trigger condition reset ([#309](https://github.com/pelcro-inc/react-pelcro-js/issues/309)) ([55e892e](https://github.com/pelcro-inc/react-pelcro-js/commit/55e892e6b845449011c4c0c9f52850d519e91f3d))
+* cart items name ([990ddd1](https://github.com/pelcro-inc/react-pelcro-js/commit/990ddd1cf1e004e90209473582b98ad0fe7e4392))
+* check for selectedPaymentMethodId first before loading cybersource sdk ([8b311e9](https://github.com/pelcro-inc/react-pelcro-js/commit/8b311e9f912445068f6ff397765c6320a3201454))
+* fixed payment-method-update url trigger issue ([#306](https://github.com/pelcro-inc/react-pelcro-js/issues/306)) ([f5bc2e2](https://github.com/pelcro-inc/react-pelcro-js/commit/f5bc2e221e80be98d33796b054fbbdbb4ff4b2ea))
+* free order info ([f0aafb6](https://github.com/pelcro-inc/react-pelcro-js/commit/f0aafb6caeb7460f6c08d21d6b1281da3df26365))
+* Free Orders Creation ([c9eaa5e](https://github.com/pelcro-inc/react-pelcro-js/commit/c9eaa5e640c661ad5dbd14784a8458f0797a482b))
+* Free Orders Creation ([#304](https://github.com/pelcro-inc/react-pelcro-js/issues/304)) ([0f5001f](https://github.com/pelcro-inc/react-pelcro-js/commit/0f5001fdb53cb585d3d3acd164ef7a510c974d89))
+* getFormattedPriceByLocal if plan is null ([64eea74](https://github.com/pelcro-inc/react-pelcro-js/commit/64eea7455d54e802d9a8d2c664b3903b0788c06f))
+* gift message not allow special characters and emojis ([bac7b28](https://github.com/pelcro-inc/react-pelcro-js/commit/bac7b284a6471f06f0932cdffb1038a250dca958))
+* go to payment modal after login ([#307](https://github.com/pelcro-inc/react-pelcro-js/issues/307)) ([ff5fed8](https://github.com/pelcro-inc/react-pelcro-js/commit/ff5fed813da16337c3d5f342cad5c098624fb696))
+* metadata issue ([#308](https://github.com/pelcro-inc/react-pelcro-js/issues/308)) ([e792e99](https://github.com/pelcro-inc/react-pelcro-js/commit/e792e99bf12c7587ac7c0264153da92f1df105fa))
+* order price 0 submitPyment ([b776bce](https://github.com/pelcro-inc/react-pelcro-js/commit/b776bcef48ff8b33d1a4a5d2444847521c795fdf))
+* order price 0 submitPyment ([#314](https://github.com/pelcro-inc/react-pelcro-js/issues/314)) ([585f7c6](https://github.com/pelcro-inc/react-pelcro-js/commit/585f7c6d48e26609004118a31dde98733dce7216))
+* purchasing 2 or more zero items ([1c61f88](https://github.com/pelcro-inc/react-pelcro-js/commit/1c61f88983fc4740cd18cf2c7703953027d1c68d))
+* remove debugger ([ceeada1](https://github.com/pelcro-inc/react-pelcro-js/commit/ceeada1a56e7c16b2899b56bc94b756e5d746e59))
+* send couponCode from URL if it's not set in state ([#301](https://github.com/pelcro-inc/react-pelcro-js/issues/301)) ([30c0006](https://github.com/pelcro-inc/react-pelcro-js/commit/30c000687dc49227f4d1cfd172a34b91e8becd5f))
+* show invited user data ([b2d3d5e](https://github.com/pelcro-inc/react-pelcro-js/commit/b2d3d5e9653ab21eb1a415233e687b42c3dc750a))
+* skip whenUserReady for loading stripe ([8baeba2](https://github.com/pelcro-inc/react-pelcro-js/commit/8baeba23d06feeb3b1fa373cf9f8e3fc7261906b))
+* ui crash after register if address is not required in selected product ([#316](https://github.com/pelcro-inc/react-pelcro-js/issues/316)) ([9e92e37](https://github.com/pelcro-inc/react-pelcro-js/commit/9e92e37e527220ef5ae04b0825e8f1d0b419614b))
+* update the new way for triggering vantiv ([3a270a6](https://github.com/pelcro-inc/react-pelcro-js/commit/3a270a609f259c1f5136a7cbe3ca40d4da227435))
+* update user after purchase and show orders invoices ([790404b](https://github.com/pelcro-inc/react-pelcro-js/commit/790404b92d1eab11458039db47cc91a04e54e775))
+
+
+### Features
+
+* add client comments ([3907310](https://github.com/pelcro-inc/react-pelcro-js/commit/3907310f37dd423402ad7b78127095a04e5eb512))
+* add custom donation amount ([cd295ed](https://github.com/pelcro-inc/react-pelcro-js/commit/cd295edbdd3aea7e6bb764e09dc2b7405d51a0a5))
+* add cybersource card inputs ([a40736e](https://github.com/pelcro-inc/react-pelcro-js/commit/a40736e5afa16bf4ffec9ce2ff4c37a8ecf7df42))
+* add dontion menu to dashboard and other enhancements ([517c4de](https://github.com/pelcro-inc/react-pelcro-js/commit/517c4de45bf2b93c8bacd4e66480f81824dcbede))
+* add flag isDonation and edit the donation flow ([5c123fb](https://github.com/pelcro-inc/react-pelcro-js/commit/5c123fb388a82994d5319e5165d3c5bfaafbb21a))
+* add logged in and updated address events in beta ([a1a0ff5](https://github.com/pelcro-inc/react-pelcro-js/commit/a1a0ff5f5f908ce2b01c9d2b8f183ef0646e1aff))
+* add the donation modal ([6af4956](https://github.com/pelcro-inc/react-pelcro-js/commit/6af4956c0bb61b3510feec634b7b529597df0336))
+* edit tailwind config ([bda0795](https://github.com/pelcro-inc/react-pelcro-js/commit/bda07956997e19844dd116b61da2cfc19011b654))
+* edit tap flow ([#305](https://github.com/pelcro-inc/react-pelcro-js/issues/305)) ([e65aa21](https://github.com/pelcro-inc/react-pelcro-js/commit/e65aa218e34d6fb735509f137a65a052f0b4f210))
+* filter the donation plans and regular plans ([83106a3](https://github.com/pelcro-inc/react-pelcro-js/commit/83106a306701f93498596426fea5b7aec36f3038))
+* implementing cybersource ([7e012af](https://github.com/pelcro-inc/react-pelcro-js/commit/7e012af8b52b3f2ce555280ea99ec97d5cbde89d))
+* membership email depending on status ([3ae7922](https://github.com/pelcro-inc/react-pelcro-js/commit/3ae7922a33d2fe68ff031843f1fc8cabb3df4386))
+* membership email depending on status ([#302](https://github.com/pelcro-inc/react-pelcro-js/issues/302)) ([7832a86](https://github.com/pelcro-inc/react-pelcro-js/commit/7832a862bd1308ee77acd192a4f4ef8493ad67c2))
+* register the user before sending the payment ([6fc80e1](https://github.com/pelcro-inc/react-pelcro-js/commit/6fc80e1557fe80f8139f2d729d27b2c15e25b8f6))
+* remove console.log to trigger a release ([1de5f9a](https://github.com/pelcro-inc/react-pelcro-js/commit/1de5f9a7b70368c575f9b2f01c80b91cfd360144))
+* remove starging at from the donation products ([838e63d](https://github.com/pelcro-inc/react-pelcro-js/commit/838e63dba2d717ab6f40ff0fa7fc7b441528110a))
+* set the correct donation amount for the paymentMethodContainer ([4921f85](https://github.com/pelcro-inc/react-pelcro-js/commit/4921f8520cc393a479188295f1698404bdf6a920))
+
 # [3.22.0-beta.26](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.22.0-beta.25...v3.22.0-beta.26) (2023-04-28)
 
 
