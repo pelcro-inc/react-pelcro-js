@@ -202,7 +202,8 @@ const PaymentMethodContainerWithoutStripe = ({
       return errorMessages.join("\n");
     } else {
       console.log("Handling the error the normal way");
-      return getErrorMessages(err);
+      console.log(err);
+      return getErrorMessages(err?.details?.responseStatus);
     }
   };
 
