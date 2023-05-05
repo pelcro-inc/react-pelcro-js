@@ -167,9 +167,7 @@ const PaymentMethodContainerWithoutStripe = ({
 
   /*====== Start Cybersource integration ========*/
   const cybersourceErrorHandle = (err) => {
-    console.log("Starting handling the error");
-    if (err.details.length > 0) {
-      console.log("error.details has items");
+    if (err?.details?.responseStatus?.details?.length > 0) {
       const errorMessages = [];
 
       // enumerable error (ex: validation errors)
@@ -182,8 +180,6 @@ const PaymentMethodContainerWithoutStripe = ({
       // convert to multiline string
       return errorMessages.join("\n");
     } else {
-      console.log("Handling the error the normal way");
-      console.log(err);
       return getErrorMessages(err?.details?.responseStatus);
     }
   };
