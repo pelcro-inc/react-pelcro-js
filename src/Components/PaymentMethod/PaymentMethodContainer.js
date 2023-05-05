@@ -186,17 +186,24 @@ const PaymentMethodContainerWithoutStripe = ({
 
   /*====== Start Cybersource integration ========*/
   const cybersourceErrorHandle = (err) => {
-    const errorMessages = [];
+    console.log("Starting handling the error");
+    if (err.details.length > 0) {
+      console.log("error.details has items");
+      const errorMessages = [];
 
-    // enumerable error (ex: validation errors)
-    Object.values(err?.details?.responseStatus?.details).forEach(
-      ({ message }) => {
-        errorMessages.push(message);
-      }
-    );
+      // enumerable error (ex: validation errors)
+      Object.values(err?.details?.responseStatus?.details).forEach(
+        ({ message }) => {
+          errorMessages.push(message);
+        }
+      );
 
-    // convert to multiline string
-    return errorMessages.join("\n");
+      // convert to multiline string
+      return errorMessages.join("\n");
+    } else {
+      console.log("Handling the error the normal way");
+      return getErrorMessages(err);
+    }
   };
 
   const submitUsingCybersource = (state, dispatch) => {
