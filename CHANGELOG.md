@@ -1,3 +1,10 @@
+# [3.23.0-beta.5](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.23.0-beta.4...v3.23.0-beta.5) (2023-05-05)
+
+
+### Bug Fixes
+
+* cleanup the cybersourceErrorHandle function ([7704812](https://github.com/pelcro-inc/react-pelcro-js/commit/7704812d17e0f91ad37207a9f6fed17548b61937))
+
 # [3.23.0-beta.4](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.23.0-beta.3...v3.23.0-beta.4) (2023-05-05)
 
 
