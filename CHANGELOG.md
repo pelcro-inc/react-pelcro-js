@@ -1,3 +1,10 @@
+# [3.23.0-beta.6](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.23.0-beta.5...v3.23.0-beta.6) (2023-05-08)
+
+
+### Features
+
+* use ReactGA4 ([ec7776d](https://github.com/pelcro-inc/react-pelcro-js/commit/ec7776d5e52170a86e937fd642f36d4935f5c712))
+
 # [3.23.0-beta.5](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.23.0-beta.4...v3.23.0-beta.5) (2023-05-05)
 
 
