@@ -1,6 +1,9 @@
 import React from "react";
 import { usePelcro } from "../hooks/usePelcro";
-import ReactGA from "react-ga";
+import { default as ReactGA1 } from "react-ga";
+import { default as ReactGA4 } from "react-ga4";
+
+const ReactGA = window?.Pelcro?.uiSettings?.enableReactGA4 ? ReactGA4 : ReactGA1;
 
 /**
  * List of zero-decimal currencies.
