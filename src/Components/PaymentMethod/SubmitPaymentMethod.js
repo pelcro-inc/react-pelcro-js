@@ -10,8 +10,12 @@ import {
 } from "../../utils/utils";
 
 export const SubmitPaymentMethod = ({ onClick, ...otherProps }) => {
-  const { plan, selectedDonationAmount, customDonationAmount } =
-    usePelcro();
+  const {
+    plan,
+    selectedDonationAmount,
+    customDonationAmount,
+    selectedPaymentMethodId
+  } = usePelcro();
   const { t } = useTranslation("checkoutForm");
   const {
     dispatch,
@@ -89,8 +93,12 @@ export const SubmitPaymentMethod = ({ onClick, ...otherProps }) => {
           (supportsTap && !phone?.length) ||
           emailError ||
           passwordError ||
-          (supportsCybersource && !month?.length) ||
-          (supportsCybersource && !year?.length)
+          (supportsCybersource &&
+            !selectedPaymentMethodId &&
+            !month?.length) ||
+          (supportsCybersource &&
+            !selectedPaymentMethodId &&
+            !year?.length)
       );
     }
   }, [
