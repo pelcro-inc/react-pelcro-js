@@ -10,7 +10,7 @@ import {
 } from "../../utils/utils";
 
 export const SubmitPaymentMethod = ({ onClick, ...otherProps }) => {
-  const { plan } = usePelcro();
+  const { plan, selectedPaymentMethodId } = usePelcro();
   const { t } = useTranslation("checkoutForm");
   const {
     dispatch,
@@ -69,8 +69,12 @@ export const SubmitPaymentMethod = ({ onClick, ...otherProps }) => {
           (supportsTap && !firstName?.length) ||
           (supportsTap && !lastName?.length) ||
           (supportsTap && !phone?.length) ||
-          (supportsCybersource && !month?.length) ||
-          (supportsCybersource && !year?.length)
+          (supportsCybersource &&
+            !selectedPaymentMethodId &&
+            !month?.length) ||
+          (supportsCybersource &&
+            !selectedPaymentMethodId &&
+            !year?.length)
       );
     }
   }, [
