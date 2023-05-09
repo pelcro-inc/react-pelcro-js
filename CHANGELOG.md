@@ -1,3 +1,10 @@
+# [3.23.0-beta.9](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.23.0-beta.8...v3.23.0-beta.9) (2023-05-09)
+
+
+### Bug Fixes
+
+* import ReactGA ([e5b5498](https://github.com/pelcro-inc/react-pelcro-js/commit/e5b5498b83cd17d8e85455be2150a9828aa4f282))
+
 # [3.23.0-beta.8](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.23.0-beta.7...v3.23.0-beta.8) (2023-05-09)
 
 
