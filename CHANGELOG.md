@@ -1,3 +1,10 @@
+# [3.23.0-beta.7](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.23.0-beta.6...v3.23.0-beta.7) (2023-05-09)
+
+
+### Bug Fixes
+
+* check for selectedPaymentMethod before disabling pay button ([a02969c](https://github.com/pelcro-inc/react-pelcro-js/commit/a02969c6f23966b7c5791015a20c054d50a60414))
+
 # [3.23.0-beta.6](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.23.0-beta.5...v3.23.0-beta.6) (2023-05-08)
 
 
