@@ -1,3 +1,10 @@
+# [3.23.0-beta.8](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.23.0-beta.7...v3.23.0-beta.8) (2023-05-09)
+
+
+### Features
+
+* remove the password field from the payment modal ([1202003](https://github.com/pelcro-inc/react-pelcro-js/commit/1202003b8538af809a969619eeaf28cbc4a44c03))
+
 # [3.23.0-beta.7](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.23.0-beta.6...v3.23.0-beta.7) (2023-05-09)
 
 
