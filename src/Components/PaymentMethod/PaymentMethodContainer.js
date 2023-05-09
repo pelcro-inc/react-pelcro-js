@@ -1874,7 +1874,7 @@ const PaymentMethodContainerWithoutStripe = ({
     window.Pelcro.user.register(
       {
         email: state.email,
-        password: state.password
+        password: generatePassword()
       },
       (err, res) => {
         if (err) {
