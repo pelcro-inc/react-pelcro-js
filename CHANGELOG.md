@@ -1,3 +1,10 @@
+# [4.0.0-alpha.42](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.41...v4.0.0-alpha.42) (2023-05-10)
+
+
+### Bug Fixes
+
+* import ReactGA ([c076f72](https://github.com/pelcro-inc/react-pelcro-js/commit/c076f727594ce6c642f9b27fd56098741753554e))
+
 # [4.0.0-alpha.41](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.40...v4.0.0-alpha.41) (2023-05-04)
 
 
