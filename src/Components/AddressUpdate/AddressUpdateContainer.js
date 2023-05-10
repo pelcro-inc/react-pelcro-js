@@ -1,5 +1,6 @@
 import React, { createContext, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import ReactGA from "react-ga";
 import useReducerWithSideEffects, {
   UpdateWithSideEffect,
   Update
