@@ -86,9 +86,7 @@ const GiftRedeemContainer = ({
                   content: getErrorMessages(err)
                 }
               });
-              if (
-                getErrorMessages(err) === "Address ID is required"
-              ) {
+              if (err.response?.data?.errors?.address_id) {
                 switchToAddressView();
               } else {
                 return onFailure(err);
