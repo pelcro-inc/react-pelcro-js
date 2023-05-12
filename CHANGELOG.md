@@ -1,3 +1,10 @@
+# [3.23.0-beta.10](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.23.0-beta.9...v3.23.0-beta.10) (2023-05-12)
+
+
+### Bug Fixes
+
+* check "address_id" instead of the error message itself to fix address required in redeem gift ([d7e105c](https://github.com/pelcro-inc/react-pelcro-js/commit/d7e105c8ad1789141732b607d74487adb65b6fc5))
+
 # [3.23.0-beta.9](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.23.0-beta.8...v3.23.0-beta.9) (2023-05-09)
 
 
