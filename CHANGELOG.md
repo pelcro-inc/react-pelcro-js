@@ -1,3 +1,10 @@
+# [3.23.0-beta.12](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.23.0-beta.11...v3.23.0-beta.12) (2023-05-17)
+
+
+### Features
+
+* 3DS error logging bugsnag ([f6e4fcd](https://github.com/pelcro-inc/react-pelcro-js/commit/f6e4fcd7b6045ba13c8aae916723d087d493c16a))
+
 # [3.23.0-beta.11](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.23.0-beta.10...v3.23.0-beta.11) (2023-05-17)
 
 
