@@ -66,6 +66,7 @@ import {
 } from "../../services/Subscription/Payment.service";
 import {
   getPageOrDefaultLanguage,
+  notifyBugsnag,
   generatePassword
 } from "../../utils/utils";
 import { usePelcro } from "../../hooks/usePelcro";
@@ -183,6 +184,22 @@ const PaymentMethodContainerWithoutStripe = ({
     dispatch({ type: INIT_CONTAINER });
     updateTotalAmountWithTax();
   }, []);
+
+  const fireBugSnag = ({ error, title }) => {
+    notifyBugsnag(() => {
+      Bugsnag.notify(title ?? "ERROR", (event) => {
+        event.addMetadata("MetaData", {
+          error: error ?? "ERROR",
+          paymentModalViewed:
+            !!document.getElementById(
+              "pelcro-subscription-create-modal"
+            ) ?? false,
+          errorAppeared:
+            !!document.querySelector(".pelcro-alert-error") ?? false
+        });
+      });
+    });
+  };
 
   /*====== Start Cybersource integration ========*/
   const cybersourceErrorHandle = (err) => {
@@ -1185,7 +1202,12 @@ const PaymentMethodContainerWithoutStripe = ({
           return generate3DSecureSource(source).then(
             ({ source, error }) => {
               if (error) {
-                return handlePaymentError(error);
+                handlePaymentError(error);
+                fireBugSnag({
+                  error,
+                  title: "generate3DSecureSource - ERROR"
+                });
+                return;
               }
 
               toggleAuthenticationPendingView(true, source);
@@ -1486,7 +1508,7 @@ const PaymentMethodContainerWithoutStripe = ({
 
             if (res.error) {
               onFailure(res.error);
-              return dispatch({
+              dispatch({
                 type: SHOW_ALERT,
                 payload: {
                   type: "error",
@@ -1495,6 +1517,11 @@ const PaymentMethodContainerWithoutStripe = ({
                     : getErrorMessages(res.error)
                 }
               });
+              fireBugSnag({
+                error: getErrorMessages(res.error),
+                title: "StripeConfirmCardPayment - ERROR"
+              });
+              return;
             }
             onSuccess(res);
           });
@@ -1508,7 +1535,7 @@ const PaymentMethodContainerWithoutStripe = ({
         dispatch({ type: LOADING, payload: false });
 
         onFailure(error);
-        return dispatch({
+        dispatch({
           type: SHOW_ALERT,
           payload: {
             type: "error",
@@ -1517,6 +1544,11 @@ const PaymentMethodContainerWithoutStripe = ({
               : t("messages.cardAuthFailed")
           }
         });
+        fireBugSnag({
+          error: getErrorMessages(error),
+          title: "StripeConfirmCardPayment - ERROR"
+        });
+        return;
       } else {
         onSuccess(response);
       }
@@ -1526,13 +1558,18 @@ const PaymentMethodContainerWithoutStripe = ({
 
       if (error) {
         onFailure(error);
-        return dispatch({
+        dispatch({
           type: SHOW_ALERT,
           payload: {
             type: "error",
             content: getErrorMessages(error)
           }
         });
+        fireBugSnag({
+          error: getErrorMessages(error),
+          title: "StripeConfirmCardPayment - ERROR"
+        });
+        return;
       }
       onSuccess(response);
     }
