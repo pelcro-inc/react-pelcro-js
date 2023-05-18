@@ -535,7 +535,7 @@ export function generatePassword() {
 
 export function isStringValid(str) {
   // Define the regular expression to match only letters, numbers and spaces
-  var regex = /^[a-zA-Z0-9\s]+$/;
+  var regex = /^(?:[\p{L}\p{N}\p{Pc}\p{Zs}\n]+$|^[\\\p{Script=Hangul}\p{Pc}\p{Zs}\n]+)$/mu;
 
   // Test the string against the regular expression
   return regex.test(str);
