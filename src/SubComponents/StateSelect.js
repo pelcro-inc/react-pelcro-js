@@ -69,6 +69,7 @@ export function StateSelect({
 
   return (
     <Select
+      className="plc-pr-8"
       value={state}
       error={stateError}
       onChange={(e) => handleInputChange(e.target.value)}
