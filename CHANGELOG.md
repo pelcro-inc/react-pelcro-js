@@ -1,3 +1,10 @@
+# [3.23.0-beta.14](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.23.0-beta.13...v3.23.0-beta.14) (2023-05-18)
+
+
+### Bug Fixes
+
+* overflow select ([2dac7ec](https://github.com/pelcro-inc/react-pelcro-js/commit/2dac7ec50b4046d21423c16a727605f1fac81fd0))
+
 # [3.23.0-beta.13](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.23.0-beta.12...v3.23.0-beta.13) (2023-05-18)
 
 
