@@ -1,3 +1,10 @@
+# [3.23.0-beta.13](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.23.0-beta.12...v3.23.0-beta.13) (2023-05-18)
+
+
+### Bug Fixes
+
+* special characters korean lang ([e69c1f1](https://github.com/pelcro-inc/react-pelcro-js/commit/e69c1f143b5d288fb1aba64f07a29d9f05c9b502))
+
 # [3.23.0-beta.12](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.23.0-beta.11...v3.23.0-beta.12) (2023-05-17)
 
 
