@@ -1,3 +1,10 @@
+# [3.23.0-beta.15](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.23.0-beta.14...v3.23.0-beta.15) (2023-05-19)
+
+
+### Features
+
+* add cybersource fingerprint scripts ([079cc93](https://github.com/pelcro-inc/react-pelcro-js/commit/079cc93ffc3071269a9deaadc624e385c5fd93db))
+
 # [3.23.0-beta.14](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.23.0-beta.13...v3.23.0-beta.14) (2023-05-18)
 
 ### Bug Fixes
