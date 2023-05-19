@@ -1,3 +1,14 @@
+## [3.22.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.22.0...v3.22.1) (2023-05-19)
+
+
+### Bug Fixes
+
+* check for selectedPaymentMethod before disabling pay button ([a02969c](https://github.com/pelcro-inc/react-pelcro-js/commit/a02969c6f23966b7c5791015a20c054d50a60414))
+* cleanup the cybersourceErrorHandle function ([7704812](https://github.com/pelcro-inc/react-pelcro-js/commit/7704812d17e0f91ad37207a9f6fed17548b61937))
+* make the month and year required in cybersource ([4c1d724](https://github.com/pelcro-inc/react-pelcro-js/commit/4c1d724f6ec745506538766e4f5fadda9170d10d))
+* modifying cybersourceErrorHandle function ([f99e1b9](https://github.com/pelcro-inc/react-pelcro-js/commit/f99e1b9b9d1a81416a05cc924b976235fc8c5033))
+* update the cybersourceErrorHandle function ([a10d7f8](https://github.com/pelcro-inc/react-pelcro-js/commit/a10d7f89fac61f40785db66ad81a8747708aec20))
+
 # [3.22.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.21.8...v3.22.0) (2023-05-01)
 
 
