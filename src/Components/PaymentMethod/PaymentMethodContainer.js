@@ -187,6 +187,8 @@ const PaymentMethodContainerWithoutStripe = ({
   };
 
   const submitUsingCybersource = (state, dispatch) => {
+    console.log("State", state);
+
     const isUsingExistingPaymentMethod = Boolean(
       selectedPaymentMethodId
     );
@@ -2321,7 +2323,7 @@ const PaymentMethodContainerWithoutStripe = ({
         case UPDATE_CYBERSOURCE_SESSION_ID:
           return Update({
             ...state,
-            cybersourceSessionId: action.payload
+            cyberSourceSessionId: action.payload
           });
 
         default:
