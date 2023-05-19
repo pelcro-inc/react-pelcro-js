@@ -86,7 +86,7 @@ export class Payment {
         gateway instanceof StripeGateway ||
         gateway instanceof PaypalGateway ||
         gateway instanceof VantivGateway ||
-        gateway instanceof TapGateway || 
+        gateway instanceof TapGateway ||
         gateway instanceof CybersourceGateway
       )
     );
@@ -1014,7 +1014,9 @@ export class CybersourceGateway {
         return this.#payInvoice(options, callback);
 
       default:
-        console.error("Unsupported payment method: cybersource Gateway");
+        console.error(
+          "Unsupported payment method: cybersource Gateway"
+        );
     }
   };
 
@@ -1032,7 +1034,8 @@ export class CybersourceGateway {
       product,
       quantity = 1,
       addressId,
-      isExistingSource
+      isExistingSource,
+      fingerprint_session_id
     } = options;
 
     const params = isExistingSource
@@ -1053,6 +1056,7 @@ export class CybersourceGateway {
           window.Pelcro.helpers.getURLParameter("campaign_key"),
         coupon_code: couponCode,
         address_id: product.address_required ? addressId : null,
+        fingerprint_session_id,
         ...params
       },
       (err, res) => {
