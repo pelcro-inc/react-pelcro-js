@@ -48,7 +48,8 @@ import {
   SET_EMAIL,
   SET_PASSWORD,
   SET_EMAIL_ERROR,
-  SET_PASSWORD_ERROR
+  SET_PASSWORD_ERROR,
+  UPDATE_CYBERSOURCE_SESSION_ID
 } from "../../utils/action-types";
 import {
   getErrorMessages,
@@ -116,6 +117,7 @@ const initialState = {
   month: "",
   year: "",
   passwordError: null,
+  cyberSourceSessionId: null,
   alert: {
     type: "error",
     content: ""
@@ -260,6 +262,11 @@ const PaymentMethodContainerWithoutStripe = ({
   };
 
   function handleCybersourcePayment(paymentRequest, state) {
+    console.log(
+      "Cybersource Session ID: ",
+      state.cyberSourceSessionId
+    );
+
     const isUsingExistingPaymentMethod = Boolean(
       selectedPaymentMethodId
     );
@@ -409,7 +416,8 @@ const PaymentMethodContainerWithoutStripe = ({
             couponCode,
             product,
             isExistingSource: isUsingExistingPaymentMethod,
-            addressId: selectedAddressId
+            addressId: selectedAddressId,
+            fingerprint_session_id: state.cyberSourceSessionId
           },
           (err, res) => {
             if (err) {
@@ -428,6 +436,35 @@ const PaymentMethodContainerWithoutStripe = ({
     }
 
     cybersourceInstanceRef.current = microformInstance;
+  };
+
+  const appendCybersourceFingerprintScripts = () => {
+    const uniqueId = crypto.randomUUID();
+    const sessionID =
+      window.Pelcro.site.read()?.cybersource_gateway_settings
+        ?.merchant_id + uniqueId;
+
+    const orgID =
+      window.Pelcro.site.read()?.cybersource_gateway_settings?.org_id;
+
+    window.Pelcro.helpers.loadSDK(
+      `https://h.online-metrix.net/fp/tags.js?org_id=${orgID}&session_id=${sessionID}`,
+      "cybersource-fingerprint-script"
+    );
+
+    const body = document.getElementsByTagName("body")[0];
+    const noscript = document.createElement("noscript");
+    const iframe = document.createElement("iframe");
+    iframe.style.cssText =
+      "width: 100px; height: 100px; border: 0; position:absolute; top: -5000px;";
+    iframe.src = `https://h.online-metrix.net/fp/tags?org_id=${orgID}&session_id=${sessionID}`;
+    noscript.appendChild(iframe);
+    body.insertBefore(noscript, body.firstChild);
+
+    dispatch({
+      type: UPDATE_CYBERSOURCE_SESSION_ID,
+      payload: uniqueId
+    });
   };
 
   const initCybersourceScript = () => {
@@ -450,6 +487,8 @@ const PaymentMethodContainerWithoutStripe = ({
             }
           });
         }
+
+        appendCybersourceFingerprintScripts();
 
         const { key: jwk } = res;
         // SETUP MICROFORM
@@ -2475,6 +2514,12 @@ const PaymentMethodContainerWithoutStripe = ({
           return Update({
             ...state,
             alert: action.payload
+          });
+
+        case UPDATE_CYBERSOURCE_SESSION_ID:
+          return Update({
+            ...state,
+            cybersourceSessionId: action.payload
           });
 
         default:
