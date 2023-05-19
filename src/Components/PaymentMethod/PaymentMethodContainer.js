@@ -1417,72 +1417,34 @@ const PaymentMethodContainerWithoutStripe = ({
   const confirmStripeCardPayment = (
     response,
     error,
-    isSubCreate = false
+    isSubCreate = false,
+    stripeSource
   ) => {
-    if (response) {
-      const paymentIntent = response.data?.payment_intent;
-      if (
-        paymentIntent?.status === "requires_action" &&
-        paymentIntent?.client_secret
-      ) {
-        stripe
-          .confirmCardPayment(paymentIntent.client_secret)
-          .then((res) => {
-            if (!isSubCreate) {
-              dispatch({ type: DISABLE_SUBMIT, payload: false });
-            }
+    console.log("REsponse", response);
+    const setup_intent = response.data?.setup_intent;
+    if (setup_intent?.client_secret) {
+      stripe
+        .confirmCardSetup(setup_intent.client_secret, {
+          payment_method: response.data?.source?.object_id
+        })
+        .then((res) => {
+          if (res.error) {
             dispatch({ type: LOADING, payload: false });
-
-            if (res.error) {
-              onFailure(res.error);
-              return dispatch({
-                type: SHOW_ALERT,
-                payload: {
-                  type: "error",
-                  content: isSubCreate
-                    ? t("messages.tryAgainFromInvoice")
-                    : getErrorMessages(res.error)
-                }
-              });
-            }
-            onSuccess(res);
-          });
-      } else if (
-        paymentIntent?.status === "requires_payment_method" &&
-        paymentIntent?.client_secret
-      ) {
-        if (!isSubCreate) {
-          dispatch({ type: DISABLE_SUBMIT, payload: false });
-        }
-        dispatch({ type: LOADING, payload: false });
-
-        onFailure(error);
-        return dispatch({
-          type: SHOW_ALERT,
-          payload: {
-            type: "error",
-            content: isSubCreate
-              ? t("messages.tryAgainFromInvoice")
-              : t("messages.cardAuthFailed")
+            onFailure(res.error);
+            return dispatch({
+              type: SHOW_ALERT,
+              payload: {
+                type: "error",
+                content: isSubCreate
+                  ? t("messages.tryAgainFromInvoice")
+                  : getErrorMessages(res.error)
+              }
+            });
           }
+
+          return handlePayment(response?.data?.source);
         });
-      } else {
-        onSuccess(response);
-      }
     } else {
-      dispatch({ type: DISABLE_SUBMIT, payload: false });
-      dispatch({ type: LOADING, payload: false });
-
-      if (error) {
-        onFailure(error);
-        return dispatch({
-          type: SHOW_ALERT,
-          payload: {
-            type: "error",
-            content: getErrorMessages(error)
-          }
-        });
-      }
       onSuccess(response);
     }
   };
@@ -1493,12 +1455,7 @@ const PaymentMethodContainerWithoutStripe = ({
     if (!subscriptionIdToRenew) {
       window.Pelcro.subscription.create(
         {
-          source_id: stripeSource?.isExistingSource
-            ? stripeSource?.id
-            : undefined,
-          stripe_token: !stripeSource?.isExistingSource
-            ? stripeSource?.id
-            : undefined,
+          source_id: stripeSource?.id || undefined,
           auth_token: window.Pelcro.user.read().auth_token,
           plan_id: plan.id,
           campaign_key:
@@ -1517,19 +1474,27 @@ const PaymentMethodContainerWithoutStripe = ({
             : null
         },
         (err, res) => {
-          confirmStripeCardPayment(res, err, true);
+          dispatch({ type: DISABLE_SUBMIT, payload: false });
+          dispatch({ type: LOADING, payload: false });
+
+          if (err) {
+            onFailure(err);
+            return dispatch({
+              type: SHOW_ALERT,
+              payload: {
+                type: "error",
+                content: getErrorMessages(err)
+              }
+            });
+          }
+          onSuccess(res);
         }
       );
     } else {
       if (isRenewingGift) {
         window.Pelcro.subscription.renewGift(
           {
-            source_id: stripeSource?.isExistingSource
-              ? stripeSource?.id
-              : undefined,
-            stripe_token: !stripeSource?.isExistingSource
-              ? stripeSource?.id
-              : undefined,
+            source_id: stripeSource?.id || undefined,
             auth_token: window.Pelcro.user.read().auth_token,
             plan_id: plan.id,
             quantity: plan.quantity,
@@ -1560,12 +1525,7 @@ const PaymentMethodContainerWithoutStripe = ({
       } else {
         window.Pelcro.subscription.renew(
           {
-            source_id: stripeSource?.isExistingSource
-              ? stripeSource?.id
-              : undefined,
-            stripe_token: !stripeSource?.isExistingSource
-              ? stripeSource?.id
-              : undefined,
+            source_id: stripeSource?.id || undefined,
             auth_token: window.Pelcro.user.read().auth_token,
             plan_id: plan.id,
             campaign_key:
@@ -1747,7 +1707,6 @@ const PaymentMethodContainerWithoutStripe = ({
 
   const payInvoice = (gatewayService, gatewayToken, dispatch) => {
     const payment = new Payment(gatewayService);
-
     return payment.execute(
       {
         type: PAYMENT_TYPES.PAY_INVOICE,
@@ -1756,7 +1715,19 @@ const PaymentMethodContainerWithoutStripe = ({
         invoiceId: invoice.id
       },
       (err, res) => {
-        confirmStripeCardPayment(res, err);
+        dispatch({ type: DISABLE_SUBMIT, payload: false });
+        dispatch({ type: LOADING, payload: false });
+        if (err) {
+          onFailure(err);
+          return dispatch({
+            type: SHOW_ALERT,
+            payload: {
+              type: "error",
+              content: getErrorMessages(err)
+            }
+          });
+        }
+        onSuccess(res);
       }
     );
   };
@@ -1877,7 +1848,32 @@ const PaymentMethodContainerWithoutStripe = ({
           invoice?.amount_remaining ??
           getOrderItemsTotal();
 
-        return handlePayment(source);
+        return resolveTaxCalculation().then((res) =>
+          window.Pelcro.source.create(
+            {
+              auth_token: window.Pelcro.user.read().auth_token,
+              token: source.id
+            },
+            (err, res) => {
+              if (err) {
+                onFailure(err);
+
+                dispatch({ type: DISABLE_SUBMIT, payload: false });
+                dispatch({ type: LOADING, payload: false });
+
+                return dispatch({
+                  type: SHOW_ALERT,
+                  payload: {
+                    type: "error",
+                    content: getErrorMessages(err)
+                  }
+                });
+              }
+
+              confirmStripeCardPayment(res, err, true, source);
+            }
+          )
+        );
       })
       .catch((error) => {
         return handlePaymentError(error);
