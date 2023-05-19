@@ -1,3 +1,10 @@
+# [3.23.0-beta.17](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.23.0-beta.16...v3.23.0-beta.17) (2023-05-19)
+
+
+### Bug Fixes
+
+* console log to debug ([0e1ac9e](https://github.com/pelcro-inc/react-pelcro-js/commit/0e1ac9ea1f6f2797314fe21ca8944e13526df0b0))
+
 # [3.23.0-beta.16](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.23.0-beta.15...v3.23.0-beta.16) (2023-05-19)
 
 
