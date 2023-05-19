@@ -1,3 +1,10 @@
+# [3.23.0-beta.16](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.23.0-beta.15...v3.23.0-beta.16) (2023-05-19)
+
+
+### Bug Fixes
+
+* fix a typo in syberSourceSessionId ([8e9b22a](https://github.com/pelcro-inc/react-pelcro-js/commit/8e9b22aef9d0f903708a0e935263a2940c42a8a5))
+
 # [3.23.0-beta.15](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.23.0-beta.14...v3.23.0-beta.15) (2023-05-19)
 
 
