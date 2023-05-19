@@ -1038,6 +1038,8 @@ export class CybersourceGateway {
       fingerprint_session_id
     } = options;
 
+    console.log("Options 1", options);
+
     const params = isExistingSource
       ? {
           source_id: token
@@ -1056,7 +1058,7 @@ export class CybersourceGateway {
           window.Pelcro.helpers.getURLParameter("campaign_key"),
         coupon_code: couponCode,
         address_id: product.address_required ? addressId : null,
-        fingerprint_session_id,
+        fingerprint_session_id: fingerprint_session_id,
         ...params
       },
       (err, res) => {
@@ -1081,6 +1083,8 @@ export class CybersourceGateway {
       addressId,
       isExistingSource
     } = options;
+
+    console.log("Options 2", options);
 
     const params = isExistingSource
       ? {
@@ -1125,6 +1129,8 @@ export class CybersourceGateway {
       addressId,
       isExistingSource
     } = options;
+
+    console.log("Options 3", options);
 
     const params = isExistingSource
       ? {
@@ -1174,6 +1180,8 @@ export class CybersourceGateway {
       isExistingSource
     } = options;
 
+    console.log("Options 4", options);
+
     const params = isExistingSource
       ? {
           source_id: token
@@ -1208,6 +1216,8 @@ export class CybersourceGateway {
     const { token, items, couponCode, addressId, isExistingSource } =
       options;
 
+    console.log("Options 5", options);
+
     const params = isExistingSource
       ? {
           source_id: token
@@ -1234,6 +1244,8 @@ export class CybersourceGateway {
 
   #payInvoice = (options, callback) => {
     const { token, invoiceId } = options;
+
+    console.log("Options 6", options);
 
     const params = options.isExistingSource
       ? {
