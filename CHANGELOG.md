@@ -1,3 +1,10 @@
+# [3.23.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.22.1...v3.23.0) (2023-05-23)
+
+
+### Features
+
+* add logged in and updated address events in beta ([#322](https://github.com/pelcro-inc/react-pelcro-js/issues/322)) ([7316b12](https://github.com/pelcro-inc/react-pelcro-js/commit/7316b1221b2223c3f606972ff20aa83117767e80))
+
 ## [3.22.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.22.0...v3.22.1) (2023-05-19)
 
 
