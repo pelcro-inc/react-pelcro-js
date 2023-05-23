@@ -106,6 +106,7 @@
     "i18next": "^19.1.0",
     "react-easy-crop": "^3.3.2",
     "react-facebook-login": "^4.1.1",
+    "react-ga4": "^2.1.0",
     "react-google-login": "^5.2.2",
     "react-hot-toast": "^2.0.0",
     "react-i18next": "^11.3.3",
