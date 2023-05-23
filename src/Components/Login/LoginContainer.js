@@ -1,5 +1,6 @@
 import React, { createContext } from "react";
 import { useTranslation } from "react-i18next";
+import ReactGA from "react-ga";
 import useReducerWithSideEffects, {
   UpdateWithSideEffect,
   Update,
@@ -62,6 +63,11 @@ const LoginContainer = ({
           onFailure(err);
         } else {
           onSuccess(res);
+          ReactGA?.event?.({
+            category: "ACTIONS",
+            action: "Logged in",
+            nonInteraction: true
+          });
         }
       }
     );
