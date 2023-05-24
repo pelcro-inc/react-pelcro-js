@@ -40,7 +40,9 @@ import { notify } from "../../SubComponents/Notification";
 import { default as ReactGA1 } from "react-ga";
 import { default as ReactGA4 } from "react-ga4";
 
-const ReactGA = window?.Pelcro?.uiSettings?.enableReactGA4 ? ReactGA4 : ReactGA1;
+const ReactGA = window?.Pelcro?.uiSettings?.enableReactGA4
+  ? ReactGA4
+  : ReactGA1;
 
 const SUB_MENUS = {
   PROFILE: "profile",
@@ -574,10 +576,10 @@ class Dashboard extends Component {
       <table className="plc-w-full plc-table-fixed">
         <thead className="plc-text-xs plc-font-semibold plc-tracking-wider plc-text-gray-400 plc-uppercase ">
           <tr>
-            <th className="plc-w-10/12">
+            <th className="plc-w-9/12">
               {this.locale("labels.address")}
             </th>
-            <th className="plc-w-2/12">
+            <th className="plc-w-3/12">
               {this.locale("labels.edit")}
             </th>
           </tr>
@@ -905,7 +907,8 @@ function hasInvoices() {
   const invoices =
     window.Pelcro.invoice
       .list()
-      ?.filter((invoice) => invoice.order_id || invoice.total > 0) ?? [];
+      ?.filter((invoice) => invoice.order_id || invoice.total > 0) ??
+    [];
   return invoices.length > 0;
 }
 
