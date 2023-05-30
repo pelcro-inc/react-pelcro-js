@@ -1,3 +1,10 @@
+# [3.25.0-beta.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.25.0-beta.2...v3.25.0-beta.3) (2023-05-30)
+
+
+### Bug Fixes
+
+* load cybersouce fingerprint if cybersource enabled ([46f950d](https://github.com/pelcro-inc/react-pelcro-js/commit/46f950dc43cb601260a446da57a76437f9ea2abe))
+
 # [3.25.0-beta.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.25.0-beta.1...v3.25.0-beta.2) (2023-05-30)
 
 
