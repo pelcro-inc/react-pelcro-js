@@ -1037,9 +1037,6 @@ export class CybersourceGateway {
       isExistingSource,
       fingerprint_session_id
     } = options;
-
-    console.log("Options 1", options);
-
     const params = isExistingSource
       ? {
           source_id: token
@@ -1083,9 +1080,6 @@ export class CybersourceGateway {
       addressId,
       isExistingSource
     } = options;
-
-    console.log("Options 2", options);
-
     const params = isExistingSource
       ? {
           source_id: token
@@ -1129,9 +1123,6 @@ export class CybersourceGateway {
       addressId,
       isExistingSource
     } = options;
-
-    console.log("Options 3", options);
-
     const params = isExistingSource
       ? {
           source_id: token
@@ -1179,9 +1170,6 @@ export class CybersourceGateway {
       addressId,
       isExistingSource
     } = options;
-
-    console.log("Options 4", options);
-
     const params = isExistingSource
       ? {
           source_id: token
@@ -1215,9 +1203,6 @@ export class CybersourceGateway {
   #purchaseEcommerceOrder = (options, callback) => {
     const { token, items, couponCode, addressId, isExistingSource } =
       options;
-
-    console.log("Options 5", options);
-
     const params = isExistingSource
       ? {
           source_id: token
@@ -1244,9 +1229,6 @@ export class CybersourceGateway {
 
   #payInvoice = (options, callback) => {
     const { token, invoiceId } = options;
-
-    console.log("Options 6", options);
-
     const params = options.isExistingSource
       ? {
           source_id: token,
