@@ -229,7 +229,6 @@ const PaymentMethodContainerWithoutStripe = ({
       selectedPaymentMethodId
     );
     if (isUsingExistingPaymentMethod) {
-      appendCybersourceFingerprintScripts();
       // no need to create a new source using cybersrce
       return handleCybersourcePayment(null, state);
     }
@@ -493,8 +492,6 @@ const PaymentMethodContainerWithoutStripe = ({
             }
           });
         }
-
-        appendCybersourceFingerprintScripts();
 
         const { key: jwk } = res;
         // SETUP MICROFORM
@@ -1204,6 +1201,10 @@ const PaymentMethodContainerWithoutStripe = ({
         window.FLEX
       ) {
         initCybersourceScript();
+      }
+
+      if (cardProcessor === "cybersource") {
+        appendCybersourceFingerprintScripts();
       }
     });
   }, [selectedPaymentMethodId]);
