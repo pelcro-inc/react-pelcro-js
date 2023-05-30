@@ -229,6 +229,7 @@ const PaymentMethodContainerWithoutStripe = ({
       selectedPaymentMethodId
     );
     if (isUsingExistingPaymentMethod) {
+      appendCybersourceFingerprintScripts();
       // no need to create a new source using cybersrce
       return handleCybersourcePayment(null, state);
     }
@@ -264,11 +265,6 @@ const PaymentMethodContainerWithoutStripe = ({
   };
 
   function handleCybersourcePayment(paymentRequest, state) {
-    console.log(
-      "Cybersource Session ID: ",
-      state.cyberSourceSessionId
-    );
-
     const isUsingExistingPaymentMethod = Boolean(
       selectedPaymentMethodId
     );
@@ -445,28 +441,36 @@ const PaymentMethodContainerWithoutStripe = ({
     const sessionID =
       window.Pelcro.site.read()?.cybersource_gateway_settings
         ?.merchant_id + uniqueId;
-
     const orgID =
       window.Pelcro.site.read()?.cybersource_gateway_settings?.org_id;
 
-    window.Pelcro.helpers.loadSDK(
-      `https://h.online-metrix.net/fp/tags.js?org_id=${orgID}&session_id=${sessionID}`,
-      "cybersource-fingerprint-script"
+    const fingerPrintScript = document.querySelector(
+      `script[src="https://h.online-metrix.net/fp/tags.js?org_id=${orgID}&session_id=${sessionID}"]`
+    );
+    const fingerPringIframe = document.querySelector(
+      `iframe[src="https://h.online-metrix.net/fp/tags?org_id=${orgID}&session_id=${sessionID}"]`
     );
 
-    const body = document.getElementsByTagName("body")[0];
-    const noscript = document.createElement("noscript");
-    const iframe = document.createElement("iframe");
-    iframe.style.cssText =
-      "width: 100px; height: 100px; border: 0; position:absolute; top: -5000px;";
-    iframe.src = `https://h.online-metrix.net/fp/tags?org_id=${orgID}&session_id=${sessionID}`;
-    noscript.appendChild(iframe);
-    body.insertBefore(noscript, body.firstChild);
+    if (!fingerPrintScript && !fingerPringIframe) {
+      window.Pelcro.helpers.loadSDK(
+        `https://h.online-metrix.net/fp/tags.js?org_id=${orgID}&session_id=${sessionID}`,
+        "cybersource-fingerprint-script"
+      );
 
-    dispatch({
-      type: UPDATE_CYBERSOURCE_SESSION_ID,
-      payload: uniqueId
-    });
+      const body = document.getElementsByTagName("body")[0];
+      const noscript = document.createElement("noscript");
+      const iframe = document.createElement("iframe");
+      iframe.style.cssText =
+        "width: 100px; height: 100px; border: 0; position:absolute; top: -5000px;";
+      iframe.src = `https://h.online-metrix.net/fp/tags?org_id=${orgID}&session_id=${sessionID}`;
+      noscript.appendChild(iframe);
+      body.insertBefore(noscript, body.firstChild);
+
+      dispatch({
+        type: UPDATE_CYBERSOURCE_SESSION_ID,
+        payload: uniqueId
+      });
+    }
   };
 
   const initCybersourceScript = () => {
