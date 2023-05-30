@@ -1,3 +1,10 @@
+# [3.25.0-beta.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.25.0-beta.1...v3.25.0-beta.2) (2023-05-30)
+
+
+### Bug Fixes
+
+* append the fingerpirnt when payment method exist ([92d1933](https://github.com/pelcro-inc/react-pelcro-js/commit/92d19334649d24695ce4310abf050c96115c2ab6))
+
 # [3.25.0-beta.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.24.0...v3.25.0-beta.1) (2023-05-24)
 
 
