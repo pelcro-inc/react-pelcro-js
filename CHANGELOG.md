@@ -1,3 +1,20 @@
+# [3.25.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.24.0...v3.25.0) (2023-05-31)
+
+
+### Bug Fixes
+
+* append the fingerpirnt when payment method exist ([92d1933](https://github.com/pelcro-inc/react-pelcro-js/commit/92d19334649d24695ce4310abf050c96115c2ab6))
+* check "address_id" instead of the error message itself to fix address required in redeem gift ([d7e105c](https://github.com/pelcro-inc/react-pelcro-js/commit/d7e105c8ad1789141732b607d74487adb65b6fc5))
+* console log to debug ([0e1ac9e](https://github.com/pelcro-inc/react-pelcro-js/commit/0e1ac9ea1f6f2797314fe21ca8944e13526df0b0))
+* fix a typo in syberSourceSessionId ([8e9b22a](https://github.com/pelcro-inc/react-pelcro-js/commit/8e9b22aef9d0f903708a0e935263a2940c42a8a5))
+* increase the edit column in addresses sub-menu ([48875e1](https://github.com/pelcro-inc/react-pelcro-js/commit/48875e10f1db1443c55fce5eb773aaed3c0ed57c))
+* load cybersouce fingerprint if cybersource enabled ([46f950d](https://github.com/pelcro-inc/react-pelcro-js/commit/46f950dc43cb601260a446da57a76437f9ea2abe))
+
+
+### Features
+
+* add cybersource fingerprint scripts ([079cc93](https://github.com/pelcro-inc/react-pelcro-js/commit/079cc93ffc3071269a9deaadc624e385c5fd93db))
+
 # [3.24.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.23.0...v3.24.0) (2023-05-23)
 
 
