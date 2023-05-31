@@ -1,3 +1,10 @@
+## [3.25.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.25.0...v3.25.1) (2023-05-31)
+
+
+### Bug Fixes
+
+* US,CA sorting to top of list ([#325](https://github.com/pelcro-inc/react-pelcro-js/issues/325)) ([a9f437f](https://github.com/pelcro-inc/react-pelcro-js/commit/a9f437fc807d4306aae509ebc0f662f6f8bcf449))
+
 # [3.25.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.24.0...v3.25.0) (2023-05-31)
 
 
