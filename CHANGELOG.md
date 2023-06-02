@@ -1,3 +1,16 @@
+# [4.0.0-alpha.43](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.42...v4.0.0-alpha.43) (2023-06-02)
+
+
+### Bug Fixes
+
+* add react ga4 to more containers ([2c00e88](https://github.com/pelcro-inc/react-pelcro-js/commit/2c00e8803a72e38c689abd813ed4a20a3a29ca4a))
+* remove react-ga import duplication ([e06dd8d](https://github.com/pelcro-inc/react-pelcro-js/commit/e06dd8d61ef971a9fcd9e0f0c68e1c6288a7dfe6))
+
+
+### Features
+
+* add reactGA4 and uiSetting to use it ([a19da0a](https://github.com/pelcro-inc/react-pelcro-js/commit/a19da0a069a17924fd32622e6eda38ca353cf7c5))
+
 # [4.0.0-alpha.42](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.41...v4.0.0-alpha.42) (2023-05-10)
 
 
