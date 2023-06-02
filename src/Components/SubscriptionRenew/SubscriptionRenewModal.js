@@ -1,5 +1,4 @@
 import React from "react";
-import ReactGA from "react-ga";
 import { SubscriptionRenewView } from "./SubscriptionRenewView";
 import {
   Modal,
