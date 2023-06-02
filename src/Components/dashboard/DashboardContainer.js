@@ -1,6 +1,5 @@
 import React, { createContext, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import ReactGA from "react-ga";
 import useReducerWithSideEffects, {
   Update,
   UpdateWithSideEffect
@@ -16,18 +15,23 @@ import {
   REACTIVATE_SUBSCRIPTION,
   UNSUSPEND_SUBSCRIPTION
 } from "../../utils/action-types";
-import { getErrorMessages } from "../common/Helpers";
+import { default as ReactGA1 } from "react-ga";
+import { default as ReactGA4 } from "react-ga4";
+
+const ReactGA = window?.Pelcro?.uiSettings?.enableReactGA4
+  ? ReactGA4
+  : ReactGA1;
 
 const initialState = {
-    isOpen: false,
-    activeDashboardLink: null,
-    subscriptions: window.Pelcro.subscription.list(),
-    giftRecipients: window.Pelcro.user.read()?.gift_recipients ?? [],
-    disableSubmit: false,
-    addresses: []
-  };
-  const store = createContext(initialState);
-  const { Provider } = store;
+  isOpen: false,
+  activeDashboardLink: null,
+  subscriptions: window.Pelcro.subscription.list(),
+  giftRecipients: window.Pelcro.user.read()?.gift_recipients ?? [],
+  disableSubmit: false,
+  addresses: []
+};
+const store = createContext(initialState);
+const { Provider } = store;
 
 const DashboardContainer = ({
   onClose,
@@ -55,13 +59,13 @@ const DashboardContainer = ({
     if (addresses)
       dispatch({ type: SET_ADDRESSES, payload: addresses });
 
-    return () => {}
+    return () => {};
   }, []);
 
   /**
-   * 
-   * @param {*} payload 
-   * @param {*} dispatch 
+   *
+   * @param {*} payload
+   * @param {*} dispatch
    */
   const cancelSubscription = (
     { subscription_id, onSuccess, onFailure },
@@ -89,10 +93,10 @@ const DashboardContainer = ({
   };
 
   /**
-   * 
-   * @param {*} payload 
-   * @param {*} dispatch 
-   */  
+   *
+   * @param {*} payload
+   * @param {*} dispatch
+   */
   const unSuspendSubscription = (
     { subscription_id, onSuccess, onFailure },
     dispatch
@@ -118,11 +122,11 @@ const DashboardContainer = ({
       }
     );
   };
-  
+
   /**
-   * 
-   * @param {*} payload 
-   * @param {*} dispatch 
+   *
+   * @param {*} payload
+   * @param {*} dispatch
    */
   const reactivateSubscription = (
     { subscription_id, onSuccess, onFailure },
@@ -178,19 +182,22 @@ const DashboardContainer = ({
         case CANCEL_SUBSCRIPTION:
           return UpdateWithSideEffect(
             { ...state, disableSubmit: true },
-            (state, dispatch) => cancelSubscription(action.payload, dispatch)
+            (state, dispatch) =>
+              cancelSubscription(action.payload, dispatch)
           );
 
         case UNSUSPEND_SUBSCRIPTION:
           return UpdateWithSideEffect(
             { ...state, disableSubmit: true },
-            (state, dispatch) => unSuspendSubscription(action.payload, dispatch)
+            (state, dispatch) =>
+              unSuspendSubscription(action.payload, dispatch)
           );
 
         case REACTIVATE_SUBSCRIPTION:
           return UpdateWithSideEffect(
             { ...state, disableSubmit: true },
-            (state, dispatch) => reactivateSubscription(action.payload, dispatch)
+            (state, dispatch) =>
+              reactivateSubscription(action.payload, dispatch)
           );
 
         default:
@@ -199,7 +206,6 @@ const DashboardContainer = ({
     },
     initialState
   );
-
 
   return (
     <div

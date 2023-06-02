@@ -1,6 +1,5 @@
 import React, { createContext, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import ReactGA from "react-ga";
 import useReducerWithSideEffects, {
   UpdateWithSideEffect,
   Update
@@ -21,6 +20,12 @@ import {
 } from "../../utils/action-types";
 import { sortCountries } from "../../utils/utils";
 import { getErrorMessages } from "../common/Helpers";
+import { default as ReactGA1 } from "react-ga";
+import { default as ReactGA4 } from "react-ga4";
+
+const ReactGA = window?.Pelcro?.uiSettings?.enableReactGA4
+  ? ReactGA4
+  : ReactGA1;
 
 const initialState = {
   isSubmitting: false,
@@ -48,6 +53,7 @@ const initialState = {
     content: ""
   }
 };
+
 const store = createContext(initialState);
 const { Provider } = store;
 

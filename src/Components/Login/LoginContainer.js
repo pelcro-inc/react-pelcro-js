@@ -1,6 +1,4 @@
 import React, { createContext } from "react";
-import { useTranslation } from "react-i18next";
-import ReactGA from "react-ga";
 import useReducerWithSideEffects, {
   UpdateWithSideEffect,
   Update,
@@ -20,6 +18,12 @@ import {
   HANDLE_SOCIAL_LOGIN
 } from "../../utils/action-types";
 import { getErrorMessages } from "../common/Helpers";
+import { default as ReactGA1 } from "react-ga";
+import { default as ReactGA4 } from "react-ga4";
+
+const ReactGA = window?.Pelcro?.uiSettings?.enableReactGA4
+  ? ReactGA4
+  : ReactGA1;
 
 const initialState = {
   email: "",

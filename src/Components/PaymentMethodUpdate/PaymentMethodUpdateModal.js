@@ -1,6 +1,5 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import ReactGA from "react-ga";
 import { PaymentMethodUpdateView } from "./PaymentMethodUpdateView";
 import {
   Modal,
