@@ -3,7 +3,9 @@ import { usePelcro } from "../hooks/usePelcro";
 import { default as ReactGA1 } from "react-ga";
 import { default as ReactGA4 } from "react-ga4";
 
-const ReactGA = window?.Pelcro?.uiSettings?.enableReactGA4 ? ReactGA4 : ReactGA1;
+const ReactGA = window?.Pelcro?.uiSettings?.enableReactGA4
+  ? ReactGA4
+  : ReactGA1;
 
 /**
  * List of zero-decimal currencies.
@@ -534,12 +536,4 @@ export function generatePassword() {
     retVal += charset.charAt(Math.floor(Math.random() * n));
   }
   return retVal;
-}
-
-export function isStringValid(str) {
-  // Define the regular expression to match only letters, numbers and spaces
-  var regex = /^(?:[\p{L}\p{N}\p{Pc}\p{Zs}\n]+$|^[\\\p{Script=Hangul}\p{Pc}\p{Zs}\n]+)$/mu;
-
-  // Test the string against the regular expression
-  return regex.test(str);
 }

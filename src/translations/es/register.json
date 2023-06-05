@@ -60,8 +60,7 @@
       "enterEmail": "Por favor, ingresa el correo del destinatario del regalo",
       "invalidDate": "La fecha del regalo debe ser entre hoy y un año a partir de ahora.",
       "giftDateInfo": "El destinatario recibirá un correo de notificación del regalo con tu mensaje en la fecha que seleccionaste en la orden para redimir el regalo.",
-      "giftMessageInfo": "Deja un mensaje para el destinatario y no olvides firmar con tu nombre.",
-      "giftMessageAllowedCharacters": "No se permiten caracteres especiales ni emojis."
+      "giftMessageInfo": "Deja un mensaje para el destinatario y no olvides firmar con tu nombre."
     }
   },
   "redeem": {

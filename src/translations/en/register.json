@@ -60,8 +60,7 @@
       "enterEmail": "Please enter the gift recipient's email.",
       "invalidDate": "The gift date needs to be between today and a year from now.",
       "giftDateInfo": "The recipient will receive a gift email notification with your message on the date you select in order to redeem the gift.",
-      "giftMessageInfo": "Leave a message to the recipient and don't forget to sign your name.",
-      "giftMessageAllowedCharacters": "Special characters and emojis are not allowed."
+      "giftMessageInfo": "Leave a message to the recipient and don't forget to sign your name."
     }
   },
   "redeem": {
