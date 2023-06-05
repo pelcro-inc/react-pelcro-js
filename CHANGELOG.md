@@ -1,3 +1,10 @@
+# [3.25.0-beta.4](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.25.0-beta.3...v3.25.0-beta.4) (2023-06-05)
+
+
+### Bug Fixes
+
+* revert the giftMessage special characters validation ([e9dd8fd](https://github.com/pelcro-inc/react-pelcro-js/commit/e9dd8fd311de2dc947c81c125e094b289fdee179))
+
 # [3.25.0-beta.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.25.0-beta.2...v3.25.0-beta.3) (2023-05-30)
 
 
