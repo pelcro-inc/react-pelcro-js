@@ -15,6 +15,11 @@ export function Modal({
   children,
   ...props
 }) {
+  useEffect(() => {
+    onDisplay?.();
+    dispatchModalDisplayEvents(id);
+  }, []);
+
   return (
     <div className="pelcro-modal-overlay">
       <div
@@ -52,11 +57,6 @@ export const ModalHeader = ({
   ...props
 }) => {
   const resetView = usePelcro((state) => state.resetView);
-  useEffect(() => {
-    onDisplay?.();
-    dispatchModalDisplayEvents(id);
-  }, []);
-
   const onClose = () => {
     props?.onClose?.();
     resetView();
