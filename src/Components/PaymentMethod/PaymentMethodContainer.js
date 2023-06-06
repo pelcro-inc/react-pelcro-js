@@ -1929,22 +1929,30 @@ const PaymentMethodContainerWithoutStripe = ({
               token: source.id
             },
             (err, res) => {
-              if (err) {
-                onFailure(err);
-
+              if (
+                res.data?.setup_intent.status === "requires_action"
+              ) {
+                confirmStripeIntentSetup(res, err, true, source);
+              } else {
                 dispatch({ type: DISABLE_SUBMIT, payload: false });
                 dispatch({ type: LOADING, payload: false });
 
-                return dispatch({
-                  type: SHOW_ALERT,
-                  payload: {
-                    type: "error",
-                    content: getErrorMessages(err)
-                  }
-                });
-              }
+                if (err) {
+                  onFailure(err);
 
-              confirmStripeIntentSetup(res, err, true, source);
+                  dispatch({ type: DISABLE_SUBMIT, payload: false });
+                  dispatch({ type: LOADING, payload: false });
+
+                  return dispatch({
+                    type: SHOW_ALERT,
+                    payload: {
+                      type: "error",
+                      content: getErrorMessages(err)
+                    }
+                  });
+                }
+                onSuccess(res);
+              }
             }
           )
         );
