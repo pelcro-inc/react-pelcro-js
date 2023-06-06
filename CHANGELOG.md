@@ -1,3 +1,10 @@
+# [4.0.0-alpha.44](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.43...v4.0.0-alpha.44) (2023-06-06)
+
+
+### Bug Fixes
+
+* GA4 modal name now fixed ([19b987f](https://github.com/pelcro-inc/react-pelcro-js/commit/19b987f2e3c499b317c624def466caebfd749238))
+
 # [4.0.0-alpha.43](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.42...v4.0.0-alpha.43) (2023-06-02)
 
 
