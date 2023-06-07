@@ -1544,7 +1544,9 @@ const PaymentMethodContainerWithoutStripe = ({
             : null
         },
         (err, res) => {
-          if (res.data?.payment_intent.status === "requires_action") {
+          if (
+            res?.data?.payment_intent?.status === "requires_action"
+          ) {
             confirmStripePaymentIntent(res, err, true);
           } else {
             dispatch({ type: DISABLE_SUBMIT, payload: false });
@@ -1930,7 +1932,7 @@ const PaymentMethodContainerWithoutStripe = ({
             },
             (err, res) => {
               if (
-                res.data?.setup_intent.status === "requires_action"
+                res.data?.setup_intent?.status === "requires_action"
               ) {
                 confirmStripeIntentSetup(res, err, true, source);
               } else {
