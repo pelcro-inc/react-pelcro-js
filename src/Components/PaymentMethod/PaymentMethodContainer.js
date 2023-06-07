@@ -1934,9 +1934,6 @@ const PaymentMethodContainerWithoutStripe = ({
               ) {
                 confirmStripeIntentSetup(res, err, true, source);
               } else {
-                dispatch({ type: DISABLE_SUBMIT, payload: false });
-                dispatch({ type: LOADING, payload: false });
-
                 if (err) {
                   onFailure(err);
 
@@ -1951,7 +1948,8 @@ const PaymentMethodContainerWithoutStripe = ({
                     }
                   });
                 }
-                onSuccess(res);
+
+                return handlePayment(res.data?.source);
               }
             }
           )
