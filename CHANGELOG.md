@@ -1,3 +1,11 @@
+# [3.26.0-sandbox.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.25.1...v3.26.0-sandbox.1) (2023-06-08)
+
+
+### Features
+
+* add sandbox branch to the symantic release branches ([a736ffd](https://github.com/pelcro-inc/react-pelcro-js/commit/a736ffd80c087bfffaa295050fad67e04f637c4e))
+* add sandbox to the release branches ([1d447ea](https://github.com/pelcro-inc/react-pelcro-js/commit/1d447ea2f11b8bfdfcb3be65fcf5d7d52e6169db))
+
 ## [3.25.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.25.0...v3.25.1) (2023-05-31)
 
 
