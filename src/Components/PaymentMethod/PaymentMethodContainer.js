@@ -1826,6 +1826,8 @@ const PaymentMethodContainerWithoutStripe = ({
     );
   };
 
+  console.log("trigger release");
+
   const updatePaymentSource = (state, dispatch) => {
     return stripe
       .createSource({ type: "card" })
