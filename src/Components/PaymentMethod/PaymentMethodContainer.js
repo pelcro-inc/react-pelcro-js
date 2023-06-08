@@ -1454,6 +1454,30 @@ const PaymentMethodContainerWithoutStripe = ({
     }
   };
 
+  const confirmStripePaymentIntent = (response, error) => {
+    if (response) {
+      const paymentIntent = response.data?.payment_intent;
+      if (paymentIntent?.client_secret) {
+        stripe
+          .confirmCardPayment(paymentIntent.client_secret)
+          .then((res) => {
+            dispatch({ type: LOADING, payload: false });
+            if (res.error) {
+              onFailure(res.error);
+              return dispatch({
+                type: SHOW_ALERT,
+                payload: {
+                  type: "error",
+                  content: getErrorMessages(res.error)
+                }
+              });
+            }
+            onSuccess(res);
+          });
+      }
+    }
+  };
+
   /**
    * Attempt to confirm a Stripe card payment via it's PaymentIntent.
    * Only trigger method if PaymentIntent status is `requires_action`.
@@ -1464,75 +1488,33 @@ const PaymentMethodContainerWithoutStripe = ({
    * @param error
    * @returns {*}
    */
-  const confirmStripeCardPayment = (
+  const confirmStripeIntentSetup = (
     response,
     error,
-    isSubCreate = false
+    stripeSource
   ) => {
-    if (response) {
-      const paymentIntent = response.data?.payment_intent;
-      if (
-        paymentIntent?.status === "requires_action" &&
-        paymentIntent?.client_secret
-      ) {
-        stripe
-          .confirmCardPayment(paymentIntent.client_secret)
-          .then((res) => {
-            if (!isSubCreate) {
-              dispatch({ type: DISABLE_SUBMIT, payload: false });
-            }
+    const setup_intent = response.data?.setup_intent;
+    if (setup_intent?.client_secret) {
+      stripe
+        .confirmCardSetup(setup_intent.client_secret, {
+          payment_method: response.data?.source?.object_id
+        })
+        .then((res) => {
+          if (res.error) {
             dispatch({ type: LOADING, payload: false });
-
-            if (res.error) {
-              onFailure(res.error);
-              return dispatch({
-                type: SHOW_ALERT,
-                payload: {
-                  type: "error",
-                  content: isSubCreate
-                    ? t("messages.tryAgainFromInvoice")
-                    : getErrorMessages(res.error)
-                }
-              });
-            }
-            onSuccess(res);
-          });
-      } else if (
-        paymentIntent?.status === "requires_payment_method" &&
-        paymentIntent?.client_secret
-      ) {
-        if (!isSubCreate) {
-          dispatch({ type: DISABLE_SUBMIT, payload: false });
-        }
-        dispatch({ type: LOADING, payload: false });
-
-        onFailure(error);
-        return dispatch({
-          type: SHOW_ALERT,
-          payload: {
-            type: "error",
-            content: isSubCreate
-              ? t("messages.tryAgainFromInvoice")
-              : t("messages.cardAuthFailed")
+            onFailure(res.error);
+            return dispatch({
+              type: SHOW_ALERT,
+              payload: {
+                type: "error",
+                content: getErrorMessages(res.error)
+              }
+            });
           }
+
+          return handlePayment(response?.data?.source);
         });
-      } else {
-        onSuccess(response);
-      }
     } else {
-      dispatch({ type: DISABLE_SUBMIT, payload: false });
-      dispatch({ type: LOADING, payload: false });
-
-      if (error) {
-        onFailure(error);
-        return dispatch({
-          type: SHOW_ALERT,
-          payload: {
-            type: "error",
-            content: getErrorMessages(error)
-          }
-        });
-      }
       onSuccess(response);
     }
   };
@@ -1543,12 +1525,7 @@ const PaymentMethodContainerWithoutStripe = ({
     if (!subscriptionIdToRenew) {
       window.Pelcro.subscription.create(
         {
-          source_id: stripeSource?.isExistingSource
-            ? stripeSource?.id
-            : undefined,
-          stripe_token: !stripeSource?.isExistingSource
-            ? stripeSource?.id
-            : undefined,
+          source_id: stripeSource?.id || undefined,
           auth_token: window.Pelcro.user.read().auth_token,
           plan_id: plan.id,
           campaign_key:
@@ -1567,66 +1544,11 @@ const PaymentMethodContainerWithoutStripe = ({
             : null
         },
         (err, res) => {
-          confirmStripeCardPayment(res, err, true);
-        }
-      );
-    } else {
-      if (isRenewingGift) {
-        window.Pelcro.subscription.renewGift(
-          {
-            source_id: stripeSource?.isExistingSource
-              ? stripeSource?.id
-              : undefined,
-            stripe_token: !stripeSource?.isExistingSource
-              ? stripeSource?.id
-              : undefined,
-            auth_token: window.Pelcro.user.read().auth_token,
-            plan_id: plan.id,
-            quantity: plan.quantity,
-            coupon_code: couponCode,
-            subscription_id: subscriptionIdToRenew,
-            address_id: product.address_required
-              ? selectedAddressId
-              : null
-          },
-          (err, res) => {
-            dispatch({ type: DISABLE_SUBMIT, payload: false });
-            dispatch({ type: LOADING, payload: false });
-
-            if (err) {
-              onFailure(err);
-              return dispatch({
-                type: SHOW_ALERT,
-                payload: {
-                  type: "error",
-                  content: getErrorMessages(err)
-                }
-              });
-            }
-
-            onGiftRenewalSuccess(res);
-          }
-        );
-      } else {
-        window.Pelcro.subscription.renew(
-          {
-            source_id: stripeSource?.isExistingSource
-              ? stripeSource?.id
-              : undefined,
-            stripe_token: !stripeSource?.isExistingSource
-              ? stripeSource?.id
-              : undefined,
-            auth_token: window.Pelcro.user.read().auth_token,
-            plan_id: plan.id,
-            campaign_key:
-              window.Pelcro.helpers.getURLParameter("campaign_key"),
-            coupon_code: couponCode,
-            subscription_id: subscriptionIdToRenew,
-            address_id: product.address_required
-              ? selectedAddressId
-              : null
-          },
-          (err, res) => {
+          if (
+            res?.data?.payment_intent?.status === "requires_action"
+          ) {
+            confirmStripePaymentIntent(res, err);
+          } else {
             dispatch({ type: DISABLE_SUBMIT, payload: false });
             dispatch({ type: LOADING, payload: false });
 
@@ -1641,6 +1563,82 @@ const PaymentMethodContainerWithoutStripe = ({
               });
             }
             onSuccess(res);
+          }
+        }
+      );
+    } else {
+      if (isRenewingGift) {
+        window.Pelcro.subscription.renewGift(
+          {
+            source_id: stripeSource?.id || undefined,
+            auth_token: window.Pelcro.user.read().auth_token,
+            plan_id: plan.id,
+            quantity: plan.quantity,
+            coupon_code: couponCode,
+            subscription_id: subscriptionIdToRenew,
+            address_id: product.address_required
+              ? selectedAddressId
+              : null
+          },
+          (err, res) => {
+            if (
+              res?.data?.payment_intent?.status === "requires_action"
+            ) {
+              confirmStripePaymentIntent(res, err);
+            } else {
+              dispatch({ type: DISABLE_SUBMIT, payload: false });
+              dispatch({ type: LOADING, payload: false });
+
+              if (err) {
+                onFailure(err);
+                return dispatch({
+                  type: SHOW_ALERT,
+                  payload: {
+                    type: "error",
+                    content: getErrorMessages(err)
+                  }
+                });
+              }
+
+              onGiftRenewalSuccess(res);
+            }
+          }
+        );
+      } else {
+        window.Pelcro.subscription.renew(
+          {
+            source_id: stripeSource?.id || undefined,
+            auth_token: window.Pelcro.user.read().auth_token,
+            plan_id: plan.id,
+            campaign_key:
+              window.Pelcro.helpers.getURLParameter("campaign_key"),
+            coupon_code: couponCode,
+            subscription_id: subscriptionIdToRenew,
+            address_id: product.address_required
+              ? selectedAddressId
+              : null
+          },
+          (err, res) => {
+            if (
+              res?.data?.payment_intent?.status === "requires_action"
+            ) {
+              confirmStripePaymentIntent(res, err);
+            } else {
+              dispatch({ type: DISABLE_SUBMIT, payload: false });
+              dispatch({ type: LOADING, payload: false });
+
+              if (err) {
+                onFailure(err);
+                return dispatch({
+                  type: SHOW_ALERT,
+                  payload: {
+                    type: "error",
+                    content: getErrorMessages(err)
+                  }
+                });
+              }
+              onSuccess(res);
+            }
           }
         );
       }
@@ -1750,54 +1748,57 @@ const PaymentMethodContainerWithoutStripe = ({
         couponCode
       },
       (err, orderResponse) => {
-        if (err) {
-          toggleAuthenticationSuccessPendingView(false);
-          dispatch({ type: DISABLE_SUBMIT, payload: false });
-          dispatch({ type: LOADING, payload: false });
-          onFailure(err);
-          return dispatch({
-            type: SHOW_ALERT,
-            payload: {
-              type: "error",
-              content: getErrorMessages(err)
-            }
-          });
-        }
-
-        if (isQuickPurchase) {
-          set({ order: null });
+        if (res?.data?.payment_intent?.status === "requires_action") {
+          confirmStripePaymentIntent(res, err);
         } else {
-          set({ order: null, cartItems: [] });
-        }
-
-        window.Pelcro.user.refresh(
-          {
-            auth_token: window.Pelcro?.user?.read()?.auth_token
-          },
-          (err, res) => {
+          if (err) {
+            toggleAuthenticationSuccessPendingView(false);
             dispatch({ type: DISABLE_SUBMIT, payload: false });
             dispatch({ type: LOADING, payload: false });
-            toggleAuthenticationSuccessPendingView(false);
-            if (err) {
-              onFailure(err);
-              return dispatch({
-                type: SHOW_ALERT,
-                payload: {
-                  type: "error",
-                  content: getErrorMessages(err)
-                }
-              });
-            }
-            onSuccess(orderResponse);
+            onFailure(err);
+            return dispatch({
+              type: SHOW_ALERT,
+              payload: {
+                type: "error",
+                content: getErrorMessages(err)
+              }
+            });
           }
-        );
+
+          if (isQuickPurchase) {
+            set({ order: null });
+          } else {
+            set({ order: null, cartItems: [] });
+          }
+
+          window.Pelcro.user.refresh(
+            {
+              auth_token: window.Pelcro?.user?.read()?.auth_token
+            },
+            (err, res) => {
+              dispatch({ type: DISABLE_SUBMIT, payload: false });
+              dispatch({ type: LOADING, payload: false });
+              toggleAuthenticationSuccessPendingView(false);
+              if (err) {
+                onFailure(err);
+                return dispatch({
+                  type: SHOW_ALERT,
+                  payload: {
+                    type: "error",
+                    content: getErrorMessages(err)
+                  }
+                });
+              }
+              onSuccess(orderResponse);
+            }
+          );
+        }
       }
     );
   };
 
   const payInvoice = (gatewayService, gatewayToken, dispatch) => {
     const payment = new Payment(gatewayService);
-
     return payment.execute(
       {
         type: PAYMENT_TYPES.PAY_INVOICE,
@@ -1806,7 +1807,23 @@ const PaymentMethodContainerWithoutStripe = ({
         invoiceId: invoice.id
       },
       (err, res) => {
-        confirmStripeCardPayment(res, err);
+        if (res?.data?.payment_intent?.status === "requires_action") {
+          confirmStripePaymentIntent(res, err);
+        } else {
+          dispatch({ type: DISABLE_SUBMIT, payload: false });
+          dispatch({ type: LOADING, payload: false });
+          if (err) {
+            onFailure(err);
+            return dispatch({
+              type: SHOW_ALERT,
+              payload: {
+                type: "error",
+                content: getErrorMessages(err)
+              }
+            });
+          }
+          onSuccess(res);
+        }
       }
     );
   };
@@ -1927,7 +1944,38 @@ const PaymentMethodContainerWithoutStripe = ({
           invoice?.amount_remaining ??
           getOrderItemsTotal();
 
-        return handlePayment(source);
+        return resolveTaxCalculation().then((res) =>
+          window.Pelcro.source.create(
+            {
+              auth_token: window.Pelcro.user.read().auth_token,
+              token: source.id
+            },
+            (err, res) => {
+              if (
+                res.data?.setup_intent?.status === "requires_action"
+              ) {
+                confirmStripeIntentSetup(res, err, true, source);
+              } else {
+                if (err) {
+                  onFailure(err);
+
+                  dispatch({ type: DISABLE_SUBMIT, payload: false });
+                  dispatch({ type: LOADING, payload: false });
+
+                  return dispatch({
+                    type: SHOW_ALERT,
+                    payload: {
+                      type: "error",
+                      content: getErrorMessages(err)
+                    }
+                  });
+                }
+
+                return handlePayment(res.data?.source);
+              }
+            }
+          )
+        );
       })
       .catch((error) => {
         return handlePaymentError(error);
