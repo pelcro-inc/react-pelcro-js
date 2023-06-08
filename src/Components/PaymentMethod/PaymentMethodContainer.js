@@ -1672,7 +1672,7 @@ const PaymentMethodContainerWithoutStripe = ({
 
   const purchase = (
     gatewayService,
-    gatewayToken,
+    backendSource,
     state,
     dispatch
   ) => {
@@ -1691,8 +1691,8 @@ const PaymentMethodContainerWithoutStripe = ({
     payment.execute(
       {
         type: PAYMENT_TYPES.PURCHASE_ECOMMERCE_ORDER,
-        token: gatewayToken,
-        isExistingSource: Boolean(selectedPaymentMethodId),
+        token: backendSource,
+        isExistingSource: true,
         items: mappedOrderItems,
         addressId: selectedAddressId,
         couponCode
@@ -1747,13 +1747,13 @@ const PaymentMethodContainerWithoutStripe = ({
     );
   };
 
-  const payInvoice = (gatewayService, gatewayToken, dispatch) => {
+  const payInvoice = (gatewayService, backendSource, dispatch) => {
     const payment = new Payment(gatewayService);
     return payment.execute(
       {
         type: PAYMENT_TYPES.PAY_INVOICE,
-        token: gatewayToken,
-        isExistingSource: Boolean(selectedPaymentMethodId),
+        token: backendSource,
+        isExistingSource: true,
         invoiceId: invoice.id
       },
       (err, res) => {
@@ -2024,13 +2024,18 @@ const PaymentMethodContainerWithoutStripe = ({
     });
   };
 
-  const handlePayment = (stripeSource) => {
-    if (stripeSource && type === "createPayment") {
-      subscribe(stripeSource, state, dispatch);
-    } else if (stripeSource && type === "orderCreate") {
-      purchase(new StripeGateway(), stripeSource.id, state, dispatch);
-    } else if (stripeSource && type === "invoicePayment") {
-      payInvoice(new StripeGateway(), stripeSource.id, dispatch);
+  const handlePayment = (backendSource) => {
+    if (backendSource && type === "createPayment") {
+      subscribe(backendSource, state, dispatch);
+    } else if (backendSource && type === "orderCreate") {
+      purchase(
+        new StripeGateway(),
+        backendSource.id,
+        state,
+        dispatch
+      );
+    } else if (backendSource && type === "invoicePayment") {
+      payInvoice(new StripeGateway(), backendSource.id, dispatch);
     }
   };
 
