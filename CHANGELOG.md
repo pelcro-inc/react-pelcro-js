@@ -1,3 +1,10 @@
+# [3.26.0-sandbox.7](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-sandbox.6...v3.26.0-sandbox.7) (2023-06-08)
+
+
+### Features
+
+* add console log to trigger release ([7883eed](https://github.com/pelcro-inc/react-pelcro-js/commit/7883eed7118fb41119b4aedfa02bbc840a28e649))
+
 # [3.26.0-sandbox.6](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-sandbox.5...v3.26.0-sandbox.6) (2023-06-08)
 
 
