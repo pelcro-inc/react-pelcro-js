@@ -1404,23 +1404,13 @@ const PaymentMethodContainerWithoutStripe = ({
     }
   };
 
-  const confirmStripePaymentIntent = (
-    response,
-    error,
-    isSubCreate = false
-  ) => {
+  const confirmStripePaymentIntent = (response, error) => {
     if (response) {
       const paymentIntent = response.data?.payment_intent;
-      if (
-        paymentIntent?.status === "requires_action" &&
-        paymentIntent?.client_secret
-      ) {
+      if (paymentIntent?.client_secret) {
         stripe
           .confirmCardPayment(paymentIntent.client_secret)
           .then((res) => {
-            if (!isSubCreate) {
-              dispatch({ type: DISABLE_SUBMIT, payload: false });
-            }
             dispatch({ type: LOADING, payload: false });
             if (res.error) {
               onFailure(res.error);
@@ -1428,49 +1418,13 @@ const PaymentMethodContainerWithoutStripe = ({
                 type: SHOW_ALERT,
                 payload: {
                   type: "error",
-                  content: isSubCreate
-                    ? t("messages.tryAgainFromInvoice")
-                    : getErrorMessages(res.error)
+                  content: getErrorMessages(res.error)
                 }
               });
             }
             onSuccess(res);
           });
-      } else if (
-        paymentIntent?.status === "requires_payment_method" &&
-        paymentIntent?.client_secret
-      ) {
-        if (!isSubCreate) {
-          dispatch({ type: DISABLE_SUBMIT, payload: false });
-        }
-        dispatch({ type: LOADING, payload: false });
-        onFailure(error);
-        return dispatch({
-          type: SHOW_ALERT,
-          payload: {
-            type: "error",
-            content: isSubCreate
-              ? t("messages.tryAgainFromInvoice")
-              : t("messages.cardAuthFailed")
-          }
-        });
-      } else {
-        onSuccess(response);
       }
-    } else {
-      dispatch({ type: DISABLE_SUBMIT, payload: false });
-      dispatch({ type: LOADING, payload: false });
-      if (error) {
-        onFailure(error);
-        return dispatch({
-          type: SHOW_ALERT,
-          payload: {
-            type: "error",
-            content: getErrorMessages(error)
-          }
-        });
-      }
-      onSuccess(response);
     }
   };
 
@@ -1487,10 +1441,8 @@ const PaymentMethodContainerWithoutStripe = ({
   const confirmStripeIntentSetup = (
     response,
     error,
-    isSubCreate = false,
     stripeSource
   ) => {
-    console.log("REsponse", response);
     const setup_intent = response.data?.setup_intent;
     if (setup_intent?.client_secret) {
       stripe
@@ -1505,9 +1457,7 @@ const PaymentMethodContainerWithoutStripe = ({
               type: SHOW_ALERT,
               payload: {
                 type: "error",
-                content: isSubCreate
-                  ? t("messages.tryAgainFromInvoice")
-                  : getErrorMessages(res.error)
+                content: getErrorMessages(res.error)
               }
             });
           }
@@ -1547,7 +1497,7 @@ const PaymentMethodContainerWithoutStripe = ({
           if (
             res?.data?.payment_intent?.status === "requires_action"
           ) {
-            confirmStripePaymentIntent(res, err, true);
+            confirmStripePaymentIntent(res, err);
           } else {
             dispatch({ type: DISABLE_SUBMIT, payload: false });
             dispatch({ type: LOADING, payload: false });
@@ -1581,21 +1531,27 @@ const PaymentMethodContainerWithoutStripe = ({
               : null
           },
           (err, res) => {
-            dispatch({ type: DISABLE_SUBMIT, payload: false });
-            dispatch({ type: LOADING, payload: false });
+            if (
+              res?.data?.payment_intent?.status === "requires_action"
+            ) {
+              confirmStripePaymentIntent(res, err);
+            } else {
+              dispatch({ type: DISABLE_SUBMIT, payload: false });
+              dispatch({ type: LOADING, payload: false });
 
-            if (err) {
-              onFailure(err);
-              return dispatch({
-                type: SHOW_ALERT,
-                payload: {
-                  type: "error",
-                  content: getErrorMessages(err)
-                }
-              });
+              if (err) {
+                onFailure(err);
+                return dispatch({
+                  type: SHOW_ALERT,
+                  payload: {
+                    type: "error",
+                    content: getErrorMessages(err)
+                  }
+                });
+              }
+
+              onGiftRenewalSuccess(res);
             }
-
-            onGiftRenewalSuccess(res);
           }
         );
       } else {
@@ -1613,20 +1569,26 @@ const PaymentMethodContainerWithoutStripe = ({
               : null
           },
           (err, res) => {
-            dispatch({ type: DISABLE_SUBMIT, payload: false });
-            dispatch({ type: LOADING, payload: false });
+            if (
+              res?.data?.payment_intent?.status === "requires_action"
+            ) {
+              confirmStripePaymentIntent(res, err);
+            } else {
+              dispatch({ type: DISABLE_SUBMIT, payload: false });
+              dispatch({ type: LOADING, payload: false });
 
-            if (err) {
-              onFailure(err);
-              return dispatch({
-                type: SHOW_ALERT,
-                payload: {
-                  type: "error",
-                  content: getErrorMessages(err)
-                }
-              });
+              if (err) {
+                onFailure(err);
+                return dispatch({
+                  type: SHOW_ALERT,
+                  payload: {
+                    type: "error",
+                    content: getErrorMessages(err)
+                  }
+                });
+              }
+              onSuccess(res);
             }
-            onSuccess(res);
           }
         );
       }
@@ -1736,47 +1698,51 @@ const PaymentMethodContainerWithoutStripe = ({
         couponCode
       },
       (err, orderResponse) => {
-        if (err) {
-          toggleAuthenticationSuccessPendingView(false);
-          dispatch({ type: DISABLE_SUBMIT, payload: false });
-          dispatch({ type: LOADING, payload: false });
-          onFailure(err);
-          return dispatch({
-            type: SHOW_ALERT,
-            payload: {
-              type: "error",
-              content: getErrorMessages(err)
-            }
-          });
-        }
-
-        if (isQuickPurchase) {
-          set({ order: null });
+        if (res?.data?.payment_intent?.status === "requires_action") {
+          confirmStripePaymentIntent(res, err);
         } else {
-          set({ order: null, cartItems: [] });
-        }
-
-        window.Pelcro.user.refresh(
-          {
-            auth_token: window.Pelcro?.user?.read()?.auth_token
-          },
-          (err, res) => {
+          if (err) {
+            toggleAuthenticationSuccessPendingView(false);
             dispatch({ type: DISABLE_SUBMIT, payload: false });
             dispatch({ type: LOADING, payload: false });
-            toggleAuthenticationSuccessPendingView(false);
-            if (err) {
-              onFailure(err);
-              return dispatch({
-                type: SHOW_ALERT,
-                payload: {
-                  type: "error",
-                  content: getErrorMessages(err)
-                }
-              });
-            }
-            onSuccess(orderResponse);
+            onFailure(err);
+            return dispatch({
+              type: SHOW_ALERT,
+              payload: {
+                type: "error",
+                content: getErrorMessages(err)
+              }
+            });
           }
-        );
+
+          if (isQuickPurchase) {
+            set({ order: null });
+          } else {
+            set({ order: null, cartItems: [] });
+          }
+
+          window.Pelcro.user.refresh(
+            {
+              auth_token: window.Pelcro?.user?.read()?.auth_token
+            },
+            (err, res) => {
+              dispatch({ type: DISABLE_SUBMIT, payload: false });
+              dispatch({ type: LOADING, payload: false });
+              toggleAuthenticationSuccessPendingView(false);
+              if (err) {
+                onFailure(err);
+                return dispatch({
+                  type: SHOW_ALERT,
+                  payload: {
+                    type: "error",
+                    content: getErrorMessages(err)
+                  }
+                });
+              }
+              onSuccess(orderResponse);
+            }
+          );
+        }
       }
     );
   };
@@ -1791,19 +1757,23 @@ const PaymentMethodContainerWithoutStripe = ({
         invoiceId: invoice.id
       },
       (err, res) => {
-        dispatch({ type: DISABLE_SUBMIT, payload: false });
-        dispatch({ type: LOADING, payload: false });
-        if (err) {
-          onFailure(err);
-          return dispatch({
-            type: SHOW_ALERT,
-            payload: {
-              type: "error",
-              content: getErrorMessages(err)
-            }
-          });
+        if (res?.data?.payment_intent?.status === "requires_action") {
+          confirmStripePaymentIntent(res, err);
+        } else {
+          dispatch({ type: DISABLE_SUBMIT, payload: false });
+          dispatch({ type: LOADING, payload: false });
+          if (err) {
+            onFailure(err);
+            return dispatch({
+              type: SHOW_ALERT,
+              payload: {
+                type: "error",
+                content: getErrorMessages(err)
+              }
+            });
+          }
+          onSuccess(res);
         }
-        onSuccess(res);
       }
     );
   };
