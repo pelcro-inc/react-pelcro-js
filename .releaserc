@@ -8,6 +8,10 @@
     {
       "name": "alpha",
       "prerelease": true
+    },
+    {
+      "name": "sandbox",
+      "prerelease": true
     }
   ],
   "plugins": [
