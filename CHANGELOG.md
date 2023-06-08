@@ -1,3 +1,10 @@
+# [3.25.0-beta.5](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.25.0-beta.4...v3.25.0-beta.5) (2023-06-08)
+
+
+### Features
+
+* add sandbox branch to release branches ([85237a7](https://github.com/pelcro-inc/react-pelcro-js/commit/85237a72ce47b9da720e6eeabbe3be94cb03aa04))
+
 # [3.25.0-beta.4](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.25.0-beta.3...v3.25.0-beta.4) (2023-06-05)
 
 
