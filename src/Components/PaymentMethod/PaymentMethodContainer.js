@@ -187,8 +187,6 @@ const PaymentMethodContainerWithoutStripe = ({
   };
 
   const submitUsingCybersource = (state, dispatch) => {
-    console.log("State", state);
-
     const isUsingExistingPaymentMethod = Boolean(
       selectedPaymentMethodId
     );
