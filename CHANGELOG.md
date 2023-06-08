@@ -1,3 +1,10 @@
+# [3.26.0-sandbox.5](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-sandbox.4...v3.26.0-sandbox.5) (2023-06-08)
+
+
+### Bug Fixes
+
+* remove another console log ([a12e178](https://github.com/pelcro-inc/react-pelcro-js/commit/a12e178bd56c5ec71f962c76eb96f2f6364ad5b6))
+
 # [3.26.0-sandbox.4](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-sandbox.3...v3.26.0-sandbox.4) (2023-06-08)
 
 
