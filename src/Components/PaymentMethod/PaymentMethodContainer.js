@@ -2452,4 +2452,6 @@ const PaymentMethodContainer = (props) => {
   return null;
 };
 
+console.log("trigger");
+
 export { PaymentMethodContainer, store };
