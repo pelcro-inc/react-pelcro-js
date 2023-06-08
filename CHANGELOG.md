@@ -1,3 +1,10 @@
+# [3.26.0-sandbox.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-sandbox.2...v3.26.0-sandbox.3) (2023-06-08)
+
+
+### Bug Fixes
+
+* send existing source always ([40bb5e4](https://github.com/pelcro-inc/react-pelcro-js/commit/40bb5e44c6f8158b75bf245878d3e1dccec75fa8))
+
 # [3.26.0-sandbox.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-sandbox.1...v3.26.0-sandbox.2) (2023-06-08)
 
 
