@@ -1,3 +1,19 @@
+# [3.26.0-sandbox.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-sandbox.1...v3.26.0-sandbox.2) (2023-06-08)
+
+
+### Bug Fixes
+
+* check for setup intent and payment intent first ([3a7b0fe](https://github.com/pelcro-inc/react-pelcro-js/commit/3a7b0fef0be150a7824212ebb03e614fa23fc677))
+* fix the flow if doesn't require action ([d784f50](https://github.com/pelcro-inc/react-pelcro-js/commit/d784f5024cbd076b0f93dce629e2efcd2a2f338c))
+* fix the flow when payment intent doesn't require action ([33b880e](https://github.com/pelcro-inc/react-pelcro-js/commit/33b880ead019f0f2785a46cc455a4fbe0226a299))
+
+
+### Features
+
+* add second 3ds confirmation if payment intent requires action ([1efb87f](https://github.com/pelcro-inc/react-pelcro-js/commit/1efb87fec3bd93f1cb8ffeb7f1526bf901931458))
+* add the new flow to payInvoice and Purchase functions ([c72c088](https://github.com/pelcro-inc/react-pelcro-js/commit/c72c08880e2699f20e5cf78259062dd410208abc))
+* modify the 3ds flow ([c337ae1](https://github.com/pelcro-inc/react-pelcro-js/commit/c337ae1a50f42cabc88892da3d6e53df921fb933))
+
 # [3.26.0-sandbox.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.25.1...v3.26.0-sandbox.1) (2023-06-08)
 
 
