@@ -1,3 +1,10 @@
+# [3.26.0-sandbox.8](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-sandbox.7...v3.26.0-sandbox.8) (2023-06-12)
+
+
+### Features
+
+* add Spanish translation to manageMembers modal ([e03723f](https://github.com/pelcro-inc/react-pelcro-js/commit/e03723f364d874e6fa4ce49edc5b7c39e0428487))
+
 # [3.26.0-sandbox.7](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-sandbox.6...v3.26.0-sandbox.7) (2023-06-08)
 
 
