@@ -7,6 +7,7 @@
     "emails": "이메일 입력",
     "status": "상태",
     "actions": "행위",
-    "email": "이메일"
+    "email": "이메일",
+    "listNote": "쉼표로 구분된 목록입니다."
   }
 }
