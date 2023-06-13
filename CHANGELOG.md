@@ -1,3 +1,10 @@
+# [3.26.0-sandbox.9](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-sandbox.8...v3.26.0-sandbox.9) (2023-06-13)
+
+
+### Bug Fixes
+
+* export the es translation for the invite modal ([5e6d39f](https://github.com/pelcro-inc/react-pelcro-js/commit/5e6d39fc0fae3c3409c4249a789f63fb2b2ead66))
+
 # [3.26.0-sandbox.8](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-sandbox.7...v3.26.0-sandbox.8) (2023-06-12)
 
 
