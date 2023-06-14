@@ -1,3 +1,10 @@
+# [3.26.0-sandbox.10](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-sandbox.9...v3.26.0-sandbox.10) (2023-06-14)
+
+
+### Features
+
+* console log test ([a15a059](https://github.com/pelcro-inc/react-pelcro-js/commit/a15a059d49f4f192d639484f88c25c4bd024ae6b))
+
 # [3.26.0-sandbox.9](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-sandbox.8...v3.26.0-sandbox.9) (2023-06-13)
 
 
