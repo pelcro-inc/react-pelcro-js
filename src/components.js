@@ -59,7 +59,7 @@ export { SubscriptionCreateFreePlanButton } from "./Components/SubscriptionCreat
 export { SubscriptionCreateView } from "./Components/SubscriptionCreate/SubscriptionCreateView";
 export { SubscriptionCreateModal } from "./Components/SubscriptionCreate/SubscriptionCreateModal";
 
-export { SubscriptionManageMembersButton } from "./Components/SubscriptionManageMembers/SubscriptionManageMembersButton"
+export { SubscriptionManageMembersButton } from "./Components/SubscriptionManageMembers/SubscriptionManageMembersButton";
 export { SubscriptionManageMembersEmails } from "./Components/SubscriptionManageMembers/SubscriptionManageMembersEmails";
 export { SubscriptionManageMembersList } from "./Components/SubscriptionManageMembers/SubscriptionManageMembersList";
 export { SubscriptionManageMembersView } from "./Components/SubscriptionManageMembers/SubscriptionManageMembersView";
@@ -254,6 +254,7 @@ export { IncludeLastName } from "./Components/PaymentMethod/IncludeLastName";
 export { IncludePhone } from "./Components/PaymentMethod/IncludePhone";
 
 export { default as i18n } from "./i18n";
+console.log("test");
 
 export {
   init as initButtons,
