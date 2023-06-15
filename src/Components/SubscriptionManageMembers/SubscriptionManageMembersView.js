@@ -17,8 +17,7 @@ export function SubscriptionManageMembersView(props) {
       <div className="plc-font-semibold plc-text-center plc-text-gray-900 pelcro-title-wrapper">
         <h4 className="plc-text-2xl">{t("labels.inviteMembers")}</h4>
         <p>
-          Comma-separated list e.g.
-          'john@example.com,jane@example.com'
+          {t("labels.listNote")} 'john@example.com,jane@example.com'
         </p>
       </div>
       <form

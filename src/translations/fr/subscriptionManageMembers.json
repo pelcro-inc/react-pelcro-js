@@ -7,6 +7,7 @@
     "emails": "Saisir les e-mails",
     "status": "Statut",
     "actions": "Actions",
-    "email": "E-mail"
+    "email": "E-mail",
+    "listNote": "Liste séparée par des virgules, par ex."
   }
 }

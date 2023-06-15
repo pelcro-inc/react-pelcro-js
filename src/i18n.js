@@ -27,11 +27,7 @@ import notification_en from "./translations/en/notification.json";
 import verifyEmail_en from "./translations/en/verifyEmail.json";
 import invoiceDetails_en from "./translations/en/InvoiceDetails.json";
 import subscriptionCancel_en from "./translations/en/subscriptionCancel.json";
-import subscriptionCancel_fr from "./translations/fr/subscriptionCancel.json";
-import subscriptionCancel_ko from "./translations/ko/subscriptionCancel.json";
 import subscriptionManageMembers_en from "./translations/en/subscriptionManageMembers.json";
-import subscriptionManageMembers_fr from "./translations/fr/subscriptionManageMembers.json";
-import subscriptionManageMembers_ko from "./translations/ko/subscriptionManageMembers.json";
 import subscriptionSuspend_en from "./translations/en/subscriptionSuspend.json";
 
 import common_fr from "./translations/fr/common.json";
@@ -59,6 +55,8 @@ import donation_fr from "./translations/fr/donation.json";
 import notification_fr from "./translations/fr/notification.json";
 import verifyEmail_fr from "./translations/fr/verifyEmail.json";
 import invoiceDetails_fr from "./translations/fr/InvoiceDetails.json";
+import subscriptionCancel_fr from "./translations/fr/subscriptionCancel.json";
+import subscriptionManageMembers_fr from "./translations/fr/subscriptionManageMembers.json";
 import subscriptionSuspend_fr from "./translations/fr/subscriptionSuspend.json";
 
 import common_ko from "./translations/ko/common.json";
@@ -86,6 +84,8 @@ import donation_ko from "./translations/ko/donation.json";
 import notification_ko from "./translations/ko/notification.json";
 import verifyEmail_ko from "./translations/ko/verifyEmail.json";
 import invoiceDetails_ko from "./translations/ko/InvoiceDetails.json";
+import subscriptionCancel_ko from "./translations/ko/subscriptionCancel.json";
+import subscriptionManageMembers_ko from "./translations/ko/subscriptionManageMembers.json";
 import subscriptionSuspend_ko from "./translations/ko/subscriptionSuspend.json";
 
 import common_es from "./translations/es/common.json";
@@ -114,6 +114,7 @@ import notification_es from "./translations/es/notification.json";
 import verifyEmail_es from "./translations/es/verifyEmail.json";
 import invoiceDetails_es from "./translations/es/InvoiceDetails.json";
 import subscriptionCancel_es from "./translations/es/subscriptionCancel.json";
+import subscriptionManageMembers_es from "./translations/es/subscriptionManageMembers.json";
 import subscriptionSuspend_es from "./translations/es/subscriptionSuspend.json";
 
 import { getPageOrDefaultLanguage } from "./utils/utils";
@@ -236,7 +237,8 @@ const resources = {
     notification: notification_es,
     invoiceDetails: invoiceDetails_es,
     subscriptionCancel: subscriptionCancel_es,
-    subscriptionSuspend: subscriptionSuspend_es
+    subscriptionSuspend: subscriptionSuspend_es,
+    subscriptionManageMembers: subscriptionManageMembers_es
   }
 };
 
