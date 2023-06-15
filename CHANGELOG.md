@@ -1,3 +1,10 @@
+# [3.26.0-sandbox.11](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-sandbox.10...v3.26.0-sandbox.11) (2023-06-15)
+
+
+### Bug Fixes
+
+* listen for vantiv-sdk load event before creating EprotectIframeClient ([3c2ccf8](https://github.com/pelcro-inc/react-pelcro-js/commit/3c2ccf8881cb218b814481f675eebde0ad32250e))
+
 # [3.26.0-sandbox.10](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-sandbox.9...v3.26.0-sandbox.10) (2023-06-14)
 
 
