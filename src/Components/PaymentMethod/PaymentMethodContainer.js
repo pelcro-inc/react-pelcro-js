@@ -1064,27 +1064,33 @@ const PaymentMethodContainerWithoutStripe = ({
         window.Pelcro.site.read()?.vantiv_gateway_settings
           .report_group;
 
-      vantivInstanceRef.current = new window.EprotectIframeClient({
-        paypageId: payPageId,
-        reportGroup: reportGroup,
-        style: "enhancedStyle5",
-        height: "245",
-        timeout: 50000,
-        div: "eProtectiframe",
-        callback: (paymentRequest) =>
-          setVantivPaymentRequest(paymentRequest),
-        showCvv: true,
-        numYears: 8,
-        placeholderText: {
-          cvv: "CVV",
-          accountNumber: "1234 1234 1234 1234"
-        },
-        enhancedUxFeatures: {
-          inlineFieldValidations: true,
-          expDateValidation: true,
-          numericInputsOnly: true
-        }
-      });
+      document
+        .querySelector("#vantiv-eprotect-sdk")
+        .addEventListener("load", () => {
+          vantivInstanceRef.current = new window.EprotectIframeClient(
+            {
+              paypageId: payPageId,
+              reportGroup: reportGroup,
+              style: "enhancedStyle5",
+              height: "245",
+              timeout: 50000,
+              div: "eProtectiframe",
+              callback: (paymentRequest) =>
+                setVantivPaymentRequest(paymentRequest),
+              showCvv: true,
+              numYears: 8,
+              placeholderText: {
+                cvv: "CVV",
+                accountNumber: "1234 1234 1234 1234"
+              },
+              enhancedUxFeatures: {
+                inlineFieldValidations: true,
+                expDateValidation: true,
+                numericInputsOnly: true
+              }
+            }
+          );
+        });
     }
   }, [selectedPaymentMethodId]);
 
