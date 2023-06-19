@@ -1440,8 +1440,7 @@ const PaymentMethodContainerWithoutStripe = ({
    */
   const confirmStripeIntentSetup = (
     response,
-    error,
-    stripeSource
+    isUpdateSource = false
   ) => {
     const setup_intent = response.data?.setup_intent;
     if (setup_intent?.client_secret) {
@@ -1460,6 +1459,21 @@ const PaymentMethodContainerWithoutStripe = ({
                 content: getErrorMessages(res.error)
               }
             });
+          }
+
+          if (isUpdateSource) {
+            dispatch({ type: DISABLE_SUBMIT, payload: false });
+            dispatch({ type: LOADING, payload: false });
+
+            dispatch({
+              type: SHOW_ALERT,
+              payload: {
+                type: "success",
+                content: t("messages.sourceUpdated")
+              }
+            });
+            onSuccess(res);
+            return;
           }
 
           return handlePayment(response?.data?.source);
@@ -1495,7 +1509,9 @@ const PaymentMethodContainerWithoutStripe = ({
         },
         (err, res) => {
           if (
-            res?.data?.payment_intent?.status === "requires_action"
+            res?.data?.payment_intent?.status === "requires_action" ||
+            res?.data?.payment_intent?.status ===
+              "requires_confirmation"
           ) {
             confirmStripePaymentIntent(res, err);
           } else {
@@ -1532,7 +1548,10 @@ const PaymentMethodContainerWithoutStripe = ({
           },
           (err, res) => {
             if (
-              res?.data?.payment_intent?.status === "requires_action"
+              res?.data?.payment_intent?.status ===
+                "requires_action" ||
+              res?.data?.payment_intent?.status ===
+                "requires_confirmation"
             ) {
               confirmStripePaymentIntent(res, err);
             } else {
@@ -1570,7 +1589,10 @@ const PaymentMethodContainerWithoutStripe = ({
           },
           (err, res) => {
             if (
-              res?.data?.payment_intent?.status === "requires_action"
+              res?.data?.payment_intent?.status ===
+                "requires_action" ||
+              res?.data?.payment_intent?.status ===
+                "requires_confirmation"
             ) {
               confirmStripePaymentIntent(res, err);
             } else {
@@ -1698,7 +1720,11 @@ const PaymentMethodContainerWithoutStripe = ({
         couponCode
       },
       (err, orderResponse) => {
-        if (res?.data?.payment_intent?.status === "requires_action") {
+        if (
+          res?.data?.payment_intent?.status === "requires_action" ||
+          res?.data?.payment_intent?.status ===
+            "requires_confirmation"
+        ) {
           confirmStripePaymentIntent(res, err);
         } else {
           if (err) {
@@ -1757,7 +1783,11 @@ const PaymentMethodContainerWithoutStripe = ({
         invoiceId: invoice.id
       },
       (err, res) => {
-        if (res?.data?.payment_intent?.status === "requires_action") {
+        if (
+          res?.data?.payment_intent?.status === "requires_action" ||
+          res?.data?.payment_intent?.status ===
+            "requires_confirmation"
+        ) {
           confirmStripePaymentIntent(res, err);
         } else {
           dispatch({ type: DISABLE_SUBMIT, payload: false });
@@ -1786,42 +1816,42 @@ const PaymentMethodContainerWithoutStripe = ({
           return handlePaymentError(error);
         }
 
-        // We don't support source creation for 3D secure yet
-        if (source?.card?.three_d_secure === "required") {
-          return handlePaymentError({
-            error: {
-              message: t("messages.cardAuthNotSupported")
-            }
-          });
-        }
-
         window.Pelcro.source.create(
           {
             auth_token: window.Pelcro.user.read().auth_token,
             token: source.id
           },
           (err, res) => {
-            dispatch({ type: DISABLE_SUBMIT, payload: false });
-            dispatch({ type: LOADING, payload: false });
-            if (err) {
-              onFailure(err);
-              return dispatch({
+            if (
+              res.data?.setup_intent?.status === "requires_action" ||
+              res.data?.setup_intent?.status ===
+                "requires_confirmation"
+            ) {
+              confirmStripeIntentSetup(res, true);
+            } else {
+              dispatch({ type: DISABLE_SUBMIT, payload: false });
+              dispatch({ type: LOADING, payload: false });
+
+              if (err) {
+                onFailure(err);
+                return dispatch({
+                  type: SHOW_ALERT,
+                  payload: {
+                    type: "error",
+                    content: getErrorMessages(err)
+                  }
+                });
+              }
+
+              dispatch({
                 type: SHOW_ALERT,
                 payload: {
-                  type: "error",
-                  content: getErrorMessages(err)
+                  type: "success",
+                  content: t("messages.sourceUpdated")
                 }
               });
+              onSuccess(res);
             }
-
-            dispatch({
-              type: SHOW_ALERT,
-              payload: {
-                type: "success",
-                content: t("messages.sourceUpdated")
-              }
-            });
-            onSuccess(res);
           }
         );
       });
@@ -1902,9 +1932,12 @@ const PaymentMethodContainerWithoutStripe = ({
             },
             (err, res) => {
               if (
-                res.data?.setup_intent?.status === "requires_action"
+                res.data?.setup_intent?.status ===
+                  "requires_action" ||
+                res.data?.setup_intent?.status ===
+                  "requires_confirmation"
               ) {
-                confirmStripeIntentSetup(res, err, true, source);
+                confirmStripeIntentSetup(res);
               } else {
                 if (err) {
                   onFailure(err);
