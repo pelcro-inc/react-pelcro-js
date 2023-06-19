@@ -1,3 +1,10 @@
+# [3.26.0-sandbox.12](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-sandbox.11...v3.26.0-sandbox.12) (2023-06-19)
+
+
+### Bug Fixes
+
+* create source with 3ds ([7a8fb7f](https://github.com/pelcro-inc/react-pelcro-js/commit/7a8fb7f6da7fb93e1b63d0614294078e0c166235))
+
 # [3.26.0-sandbox.11](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-sandbox.10...v3.26.0-sandbox.11) (2023-06-15)
 
 
