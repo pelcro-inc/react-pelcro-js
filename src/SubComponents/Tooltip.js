@@ -7,7 +7,7 @@ import { ReactComponent as InfoCircleIcon } from "../assets/info-circle.svg";
 export const Tooltip = ({ value, className }) => {
   return (
     <div
-      className={`plc-flex pelcro-tooltip-container plc-text-gray-600 ${className}`}
+      className={`plc-flex pelcro-tooltip-container plc-text-gray-400 ${className}`}
     >
       <div className="pelcro-tooltip-icon">
         <InfoCircleIcon />

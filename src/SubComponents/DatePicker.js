@@ -16,6 +16,17 @@ export function DatePicker({
 }) {
   return (
     <div className={`pelcro-input-wrapper ${wrapperClassName}`}>
+      <input
+        type="date"
+        id={id}
+        className={`pelcro-input-field ${className} ${
+          error ? "pelcro-input-invalid" : ""
+        }`}
+        placeholder="placeholder"
+        aria-describedby={errorId}
+        aria-invalid={Boolean(error)}
+        {...otherProps}
+      />
       <label
         htmlFor={id}
         className={`pelcro-input-label plc-flex plc-items-center ${labelClassName}`}
@@ -26,16 +37,6 @@ export function DatePicker({
           <Tooltip value={tooltipText} className="plc-ml-1" />
         )}
       </label>
-      <input
-        type="date"
-        id={id}
-        className={`pelcro-input-field ${className} ${
-          error ? "pelcro-input-invalid" : ""
-        }`}
-        aria-describedby={errorId}
-        aria-invalid={Boolean(error)}
-        {...otherProps}
-      />
       {error && (
         <p
           id={errorId}
