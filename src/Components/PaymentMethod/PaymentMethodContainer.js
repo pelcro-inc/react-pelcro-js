@@ -1987,30 +1987,30 @@ const PaymentMethodContainerWithoutStripe = ({
               token: source.id
             },
             (err, res) => {
-              if (
-                res.data?.setup_intent?.status ===
-                  "requires_action" ||
-                res.data?.setup_intent?.status ===
-                  "requires_confirmation"
-              ) {
-                confirmStripeIntentSetup(res);
+              if (err) {
+                onFailure(err);
+
+                dispatch({ type: DISABLE_SUBMIT, payload: false });
+                dispatch({ type: LOADING, payload: false });
+
+                return dispatch({
+                  type: SHOW_ALERT,
+                  payload: {
+                    type: "error",
+                    content: getErrorMessages(err)
+                  }
+                });
               } else {
-                if (err) {
-                  onFailure(err);
-
-                  dispatch({ type: DISABLE_SUBMIT, payload: false });
-                  dispatch({ type: LOADING, payload: false });
-
-                  return dispatch({
-                    type: SHOW_ALERT,
-                    payload: {
-                      type: "error",
-                      content: getErrorMessages(err)
-                    }
-                  });
+                if (
+                  res.data?.setup_intent?.status ===
+                    "requires_action" ||
+                  res.data?.setup_intent?.status ===
+                    "requires_confirmation"
+                ) {
+                  confirmStripeIntentSetup(res);
+                } else {
+                  return handlePayment(res.data?.source);
                 }
-
-                return handlePayment(res.data?.source);
               }
             }
           )
