@@ -12,7 +12,9 @@ import { RegisterView } from "./RegisterView";
 import { default as ReactGA1 } from "react-ga";
 import { default as ReactGA4 } from "react-ga4";
 
-const ReactGA = window?.Pelcro?.uiSettings?.enableReactGA4 ? ReactGA4 : ReactGA1;
+const ReactGA = window?.Pelcro?.uiSettings?.enableReactGA4
+  ? ReactGA4
+  : ReactGA1;
 
 /**
  *
@@ -97,9 +99,9 @@ export function RegisterModal(props) {
       onClose={props?.onClose}
     >
       <ModalHeader>
-        <div className="plc-text-center plc-text-gray-900 pelcro-title-wrapper plc-flex-1 plc-flex plc-flex-col plc-justify-center">
-          <h4 className="plc-text-2xl plc-font-semibold">{title}</h4>
-          <p>{subtitle}</p>
+        <div className="plc-text-left plc-text-gray-900 pelcro-title-wrapper plc-flex-1 plc-flex plc-flex-col plc-justify-center">
+          <h4 className="plc-text-xl plc-font-bold">{title}</h4>
+          <p className="plc-text-sm">{subtitle}</p>
         </div>
       </ModalHeader>
       <ModalBody>

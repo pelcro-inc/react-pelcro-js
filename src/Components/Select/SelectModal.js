@@ -684,7 +684,7 @@ class SelectModal extends Component {
         id="pelcro-selection-modal"
       >
         <ModalHeader>
-          <div className="plc-text-center plc-text-gray-900 pelcro-title-wrapper plc-flex-1 plc-flex plc-flex-col plc-justify-center">
+          <div className="plc-text-left plc-text-gray-900 pelcro-title-wrapper plc-flex-1 plc-flex plc-flex-col plc-justify-center">
             {this.state.mode === "plan" && (
               <button
                 type="button"
@@ -695,11 +695,11 @@ class SelectModal extends Component {
               </button>
             )}
 
-            <h4 className="plc-text-2xl plc-font-semibold">
+            <h4 className="plc-text-xl plc-font-bold">
               {(this.product && this.product.paywall.select_title) ||
                 window.Pelcro.product.list()[0]?.paywall.select_title}
             </h4>
-            <p>
+            <p className="plc-text-sm">
               {(this.product &&
                 this.product.paywall.select_subtitle) ||
                 window.Pelcro.product.list()[0]?.paywall

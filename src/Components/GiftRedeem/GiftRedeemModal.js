@@ -32,11 +32,13 @@ export const GiftRedeemModal = ({
       onDisplay={onDisplay}
     >
       <ModalHeader>
-        <div className="plc-text-center plc-text-gray-900 pelcro-title-wrapper plc-flex-1 plc-flex plc-flex-col plc-justify-center">
-          <h4 className="plc-text-2xl plc-font-semibold">
+        <div className="plc-text-left plc-text-gray-900 pelcro-title-wrapper plc-flex-1 plc-flex plc-flex-col plc-justify-center">
+          <h4 className="plc-text-xl plc-font-bold">
             {t("redeem.titles.firstTitle")}
           </h4>
-          <p>{t("redeem.titles.secondTitle")}</p>
+          <p className="plc-text-sm">
+            {t("redeem.titles.secondTitle")}
+          </p>
         </div>
       </ModalHeader>
       <ModalBody>

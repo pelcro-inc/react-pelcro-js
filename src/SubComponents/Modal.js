@@ -75,10 +75,10 @@ export const ModalHeader = ({
         </button>
       )}
 
-      <div className="plc-flex plc-items-center plc-justify-center plc-w-full">
+      <div className="plc-flex plc-w-full">
         <img
           alt="business logo"
-          className={`plc-max-h-14 plc-mt-2 pelcro-modal-logo ${
+          className={`plc-max-h-14 plc-my-2 pelcro-modal-logo ${
             window.Pelcro?._showModalHeader ? "" : "plc-hidden"
           }`}
           src={window.Pelcro.site.read().logo?.url}
