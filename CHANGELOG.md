@@ -1,3 +1,10 @@
+# [3.26.0-sandbox.14](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-sandbox.13...v3.26.0-sandbox.14) (2023-06-21)
+
+
+### Bug Fixes
+
+* load payment-method-update with vantiv after login ([415eed4](https://github.com/pelcro-inc/react-pelcro-js/commit/415eed4317f3396510fb8a735a6f6f26193ad08d))
+
 # [3.26.0-sandbox.13](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-sandbox.12...v3.26.0-sandbox.13) (2023-06-20)
 
 
