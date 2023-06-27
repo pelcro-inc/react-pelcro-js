@@ -24,8 +24,8 @@ export const SubscriptionRenewView = ({
 
     return (
       <p className="plc-text-gray-600">
-        <span className="plc-tracking-wider plc-uppercase">
-          {plan.nickname}
+        <span className="plc-font-bold">
+          {product.name} - {plan.nickname}
         </span>
         <br />
         <span className="plc-text-xl plc-font-semibold plc-text-primary-600">
@@ -40,8 +40,8 @@ export const SubscriptionRenewView = ({
 
   return (
     <div id="pelcro-subscription-renew-view">
-      <div className="plc-mb-6 plc-text-center plc-text-gray-900 pelcro-title-wrapper">
-        <div className="plc-w-full plc-p-2 plc-mt-2 plc-font-semibold plc-text-center plc-text-gray-900 plc-bg-gray-100 plc-border plc-border-gray-200">
+      <div className="plc-flex plc-flex-col plc-items-center plc-mb-6 plc-text-left plc-text-gray-900 pelcro-title-wrapper">
+        <div className="plc-w-full plc-font-semibold plc-text-left plc-text-gray-900">
           {plan && getPricingText(plan)}
         </div>
       </div>

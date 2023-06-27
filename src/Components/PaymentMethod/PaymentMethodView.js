@@ -60,14 +60,12 @@ export function PaymentMethodView({
   const isUserPhone = Boolean(window.Pelcro.user.read().phone);
 
   return (
-    <div className="plc-flex plc-flex-col plc-items-center plc-mt-4 sm:plc-px-8 pelcro-payment-block">
+    <div className="plc-flex plc-flex-col plc-items-center pelcro-payment-block">
       {order && (
-        <div className="plc-w-full plc-p-2 plc-mb-4 plc-font-semibold plc-text-center plc-text-gray-900 plc-bg-gray-100 plc-border plc-border-gray-200">
+        <div className="plc-w-full plc-font-semibold plc-text-left plc-text-gray-900 plc-mb-6">
           <p className="plc-text-gray-600">
             {!Array.isArray(order) ? (
-              <span className="plc-tracking-wider plc-uppercase">
-                {order?.name}
-              </span>
+              <span className="plc-font-bold">{order?.name}</span>
             ) : (
               <span className="plc-tracking-wider plc-uppercase">
                 {t("labels.freeItems")}
