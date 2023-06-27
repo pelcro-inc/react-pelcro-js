@@ -26,4 +26,33 @@
   .pelcro-root .pelcro-input-field:disabled ~ .pelcro-input-label {
     @apply plc-hidden;
   }
+
+  .pelcro-root .pelcro-input-card-number-label,
+  .pelcro-root .pelcro-input-cvc-number-label,
+  .pelcro-root .pelcro-input-expiry-date-label {
+    @apply plc-inline-flex plc-text-gray-400 plc-font-medium plc-absolute plc--top-2 plc-left-2 plc-text-xs plc-transition-all plc-bg-white plc-px-1;
+  }
+
+  .pelcro-root
+    #pelcro-input-card-number:placeholder-shown
+    ~ .pelcro-input-card-number-label,
+  .pelcro-root
+    #pelcro-input-cvc-number:placeholder-shown
+    ~ .pelcro-input-cvc-number-label,
+  .pelcro-root
+    #pelcro-input-expiry-date:placeholder-shown
+    ~ .pelcro-input-expiry-date-label {
+    @apply plc-text-gray-400 plc-font-medium plc-top-2.5 plc-left-2 plc-text-sm;
+  }
+  .pelcro-root
+    #pelcro-input-card-number:focus
+    ~ .pelcro-input-card-number-label,
+  .pelcro-root
+    #pelcro-input-cvc-number:focus
+    ~ .pelcro-input-cvc-number-label,
+  .pelcro-root
+    #pelcro-input-expiry-date:focus
+    ~ .pelcro-input-expiry-date-label {
+    @apply plc-text-xs plc--top-2 plc-transition-all plc-bg-white plc-px-1;
+  }
 }
