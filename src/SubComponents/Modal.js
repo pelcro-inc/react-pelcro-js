@@ -52,6 +52,7 @@ export function Modal({
 export const ModalHeader = ({
   id,
   onDisplay,
+  className = "",
   hideCloseButton,
   children,
   ...props
@@ -63,7 +64,7 @@ export const ModalHeader = ({
   };
 
   return (
-    <div className="pelcro-modal-header">
+    <div className={`pelcro-modal-header ${className}`}>
       {!hideCloseButton && (
         <button
           type="button"
@@ -90,13 +91,15 @@ export const ModalHeader = ({
   );
 };
 
-export const ModalBody = ({ children }) => {
-  return <div className="pelcro-modal-body">{children}</div>;
+export const ModalBody = ({ className = "", children }) => {
+  return (
+    <div className={`pelcro-modal-body ${className}`}>{children}</div>
+  );
 };
 
-export const ModalFooter = ({ children }) => {
+export const ModalFooter = ({ className = "", children }) => {
   return (
-    <div className="pelcro-modal-footer">
+    <div className={`pelcro-modal-footer ${className}`}>
       {children}
       <Authorship />
     </div>
