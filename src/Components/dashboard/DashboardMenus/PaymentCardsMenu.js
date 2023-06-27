@@ -4,7 +4,7 @@ import { ReactComponent as EditIcon } from "../../../assets/edit.svg";
 import { Card } from "../Card";
 import { AddNew } from "../AddNew";
 import { Button } from "../../../SubComponents/Button";
-import { getPaymentCardIcon } from "../utils";
+import { getPaymentCardIcon } from "../../../utils/utils";
 import { usePelcro } from "../../../hooks/usePelcro";
 
 export const PaymentCardsMenu = (props) => {
@@ -19,7 +19,7 @@ export const PaymentCardsMenu = (props) => {
   return (
     <Card
       id="pelcro-dashboard-payment-menu"
-      className="plc-max-w-100% md:plc-max-w-80% plc-m-auto"
+      className="plc-max-w-100% md:plc-max-w-60% plc-m-auto"
       title={t("labels.paymentSource")}
     >
       {source ? (
@@ -39,10 +39,10 @@ export const PaymentCardsMenu = (props) => {
 
 const PaymentCardsItems = (props) => {
   const { t } = useTranslation("dashboard");
-  
+
   return (
     <div
-      className={`plc-py-2 plc-px-4 plc-mt-5 plc-flex plc-items-center plc-justify-between last:plc-mb-0 plc-rounded plc-text-gray-900 pelcro-address-wrapper plc-bg-white plc-shadow-md_dark`}
+      className={`plc-py-4 plc-px-6 plc-mt-5 plc-flex plc-items-center plc-justify-between last:plc-mb-0 plc-rounded plc-text-gray-900 pelcro-address-wrapper plc-bg-white plc-shadow-md_dark`}
     >
       <div className="plc-flex plc-items-center">
         <p className="plc-mr-6">

@@ -28,7 +28,7 @@ export const AddressesMenu = (props) => {
   return (
     <Card
       id="pelcro-dashboard-addresses-menu"
-      className="plc-max-w-100% md:plc-max-w-80% plc-m-auto"
+      className="plc-max-w-100% md:plc-max-w-60% plc-m-auto"
       title={t("labels.addresses")}
       requestStates={requestStates}
     >
@@ -50,6 +50,10 @@ const AddressesItems = (props) => {
   const [selectedAddressId, setSelectedAddressId] = useState(null);
   const allAddresses = window.Pelcro.user.read().addresses ?? [];
 
+  useEffect(() => {
+    setSelectedAddressId(String(getDefaultAddress(addresses)?.id));
+  }, []);
+
   const getDefaultAddress = (addresses) => {
     return addresses.find((address) => address.is_default) || false;
   };
@@ -66,10 +70,6 @@ const AddressesItems = (props) => {
   const addresses = moveDefaultAddressToStart(allAddresses);
 
   if (addresses.length === 0) return null;
-
-  useEffect(() => {
-    setSelectedAddressId(String(getDefaultAddress(addresses)?.id));
-  }, []);
 
   return addresses.map(
     (address, index) =>
@@ -95,12 +95,12 @@ const AddressesItems = (props) => {
               {address.city}, {address.state_name}{" "}
               {address.postal_code}, {address.country_name}
             </p>
-            {address.is_default && (
-              <span className="plc-rounded-full plc-bg-gray-800 plc-text-white plc-inline-flex plc-items-start plc-py-1 plc-px-4 plc-text-sm plc-mt-4">
-                {t("labels.default")}
-              </span>
-            )}
           </div>
+          {address.is_default && (
+            <span className="plc-rounded-full plc-bg-gray-800 plc-text-white plc-inline-flex plc-items-start plc-py-1 plc-px-4 plc-text-sm plc-mr-4">
+              {t("labels.default")}
+            </span>
+          )}
           <Button
             variant="icon"
             className="plc-text-gray-500"

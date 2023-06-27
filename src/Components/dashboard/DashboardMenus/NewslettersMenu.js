@@ -19,14 +19,15 @@ export const NewslettersMenu = (props) => {
     window.Pelcro.helpers.getURLParameter("email");
 
   const [newsletters, setNewsletters] = useState([]);
-  const [didSubToNewslettersBefore, setDidSubToNewslettersBefore] = useState(false);
+  const [didSubToNewslettersBefore, setDidSubToNewslettersBefore] =
+    useState(false);
   const [requestStates, setRequestStates] = useState(defaultStatues);
 
   const removeStatues = (timeout) => {
     setTimeout(() => {
-      setRequestStates(defaultStatues)
+      setRequestStates(defaultStatues);
     }, timeout);
-  }
+  };
 
   const handleChange = (id) => {
     const newNewsLetters = newsletters.map((newsletter) => {
@@ -37,26 +38,35 @@ export const NewslettersMenu = (props) => {
         };
       }
       return newsletter;
-    })
-    setNewsletters(newNewsLetters)
-  }
+    });
+    setNewsletters(newNewsLetters);
+  };
 
   const handleSubmit = () => {
-
     const callback = (err, res) => {
       if (err) {
-        setRequestStates((prev)=> ({...prev, success: false, loading: false, failed: true}))
+        setRequestStates((prev) => ({
+          ...prev,
+          success: false,
+          loading: false,
+          failed: true
+        }));
       } else {
-        setRequestStates((prev)=> ({...prev, success: true, loading: false, failed: false}))
+        setRequestStates((prev) => ({
+          ...prev,
+          success: true,
+          loading: false,
+          failed: false
+        }));
         if (!didSubToNewslettersBefore) {
-          setDidSubToNewslettersBefore(true)
+          setDidSubToNewslettersBefore(true);
         }
       }
-      removeStatues(3000)
+      removeStatues(3000);
     };
 
     const requestData = {
-      email:email,
+      email: email,
       source: "web",
       lists: newsletters
         .filter((newsletter) => newsletter.selected)
@@ -64,14 +74,19 @@ export const NewslettersMenu = (props) => {
         .join(",")
     };
 
-    setRequestStates((prev)=> ({...prev, success: false, loading: true, failed: false}))
+    setRequestStates((prev) => ({
+      ...prev,
+      success: false,
+      loading: true,
+      failed: false
+    }));
 
     if (didSubToNewslettersBefore) {
       window.Pelcro.newsletter.update(requestData, callback);
     } else {
       window.Pelcro.newsletter.create(requestData, callback);
     }
-  }
+  };
 
   useEffect(() => {
     window.Pelcro.newsletter.getByEmail(email, (err, res) => {
@@ -88,14 +103,14 @@ export const NewslettersMenu = (props) => {
         })
       );
       setNewsletters(allNewslettersWithSelectedField);
-      setDidSubToNewslettersBefore(Boolean(res.data.email))
+      setDidSubToNewslettersBefore(Boolean(res.data.email));
     });
   }, []);
 
   return (
     <Card
       id="pelcro-dashboard-newsletters-menu"
-      className="plc-max-w-100% md:plc-max-w-80% plc-m-auto"
+      className="plc-max-w-100% md:plc-max-w-60% plc-m-auto"
       title={t("labels.Newsletters")}
       requestStates={requestStates}
     >
@@ -104,7 +119,12 @@ export const NewslettersMenu = (props) => {
         newsletters={newsletters}
       />
       <div className="plc-flex plc-justify-center">
-        <Button onClick={handleSubmit} disabled={requestStates.loading}>SUBMIT</Button>
+        <Button
+          onClick={handleSubmit}
+          disabled={requestStates.loading}
+        >
+          SUBMIT
+        </Button>
       </div>
     </Card>
   );
@@ -132,7 +152,10 @@ const NewsLettersItems = ({ newsletters, handleChange }) => {
             )}
           </div>
           <div className="plc-flex plc-items-center">
-            <ToggleSwitch isActive={newsletter.selected} handleChange={() => handleChange(newsletter.id)} />
+            <ToggleSwitch
+              isActive={newsletter.selected}
+              handleChange={() => handleChange(newsletter.id)}
+            />
           </div>
         </div>
       </>
