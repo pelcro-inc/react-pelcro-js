@@ -37,7 +37,7 @@ export const CouponCode = ({ onClick, ...otherProps }) => {
           : t("labels.hideCode")}
       </Button>
       {enableCouponField && (
-        <div className="plc-flex plc-w-full plc-mt-2 pelcro-apply-coupon-wrapper">
+        <div className="plc-flex plc-w-full plc-mt-2 plc-mb-8 pelcro-apply-coupon-wrapper">
           <CouponCodeField />
           <ApplyCouponButton />
         </div>
