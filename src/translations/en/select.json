@@ -23,7 +23,8 @@
   },
   "buttons": {
     "next": "Next",
-    "select": "View Plans",
+    "view": "View Plans",
+    "select": "Select",
     "back": "Back",
     "gift": "Gift"
   }

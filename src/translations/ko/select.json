@@ -23,6 +23,7 @@
   },
   "buttons": {
     "next": "다음",
+    "view": "요금제 보기",
     "select": "플랜 보기",
     "back": "뒤로",
     "gift": "선물"

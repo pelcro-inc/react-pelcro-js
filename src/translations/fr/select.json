@@ -23,7 +23,8 @@
   },
   "buttons": {
     "next": "Prochain",
-    "select": "Voir les forfaits",
+    "view": "Voir les plans",
+    "select": "Sélectionner",
     "back": "Retour",
     "gift": "cadeau"
   }

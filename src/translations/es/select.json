@@ -23,8 +23,9 @@
   },
   "buttons": {
     "next": "Siguiente",
+    "view": "Ver planes",
     "select": "Seleccionar",
-    "back": "Ver planes",
+    "back": "Volver",
     "gift": "regalo"
   }
 }

@@ -11,6 +11,8 @@
   display: block;
   overflow: hidden;
   padding: 0;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
   /* margin: 0 -10px; */
 }
 .pelcro-root .slick-list:focus {

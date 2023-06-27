@@ -11,13 +11,13 @@ export const Card = ({
   const { t } = useTranslation("dashboard");
   return (
     <div
-      className={`plc-bg-white plc-border-2 plc-p-6 plc-rounded plc-my-11 md:plc-my-20 ${className}`}
+      className={`plc-bg-white plc-border-2 plc-p-6 md:plc-p-8 plc-rounded plc-my-11 md:plc-my-20 ${className}`}
       id="plc-dashboard-card"
     >
       {title && (
         <>
           <div className="plc-flex plc-items-end plc-justify-between">
-            <h3 className="plc-font-medium plc-text-xl">{title}</h3>
+            <h3 className="plc-font-bold plc-text-xl">{title}</h3>
             {requestStates?.loading && (
               <span className="plc-text-blue-500">Loading...</span>
             )}

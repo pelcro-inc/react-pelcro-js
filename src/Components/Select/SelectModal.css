@@ -15,4 +15,15 @@
     max-width: 150px;
     height: auto;
   }
+  .pelcro-root .pelcro-select-plan-wrapper:hover,
+  .pelcro-root .pelcro-select-product-wrapper:hover {
+    @apply plc-border-primary plc-border-2;
+    transform: scale(1.05);
+    transition: all 0.2s ease-out;
+    box-shadow: 0px 4px 8px rgba(38, 38, 38, 0.2);
+  }
+  .pelcro-root .pelcro-select-plan-wrapper,
+  .pelcro-root .pelcro-select-product-wrapper {
+    transition: all 0.2s ease-in-out;
+  }
 }
