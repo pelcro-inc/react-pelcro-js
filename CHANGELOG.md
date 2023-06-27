@@ -1,3 +1,22 @@
+# [4.0.0-alpha.45](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.44...v4.0.0-alpha.45) (2023-06-27)
+
+
+### Bug Fixes
+
+* error message overlapping bug fix ([850f5e7](https://github.com/pelcro-inc/react-pelcro-js/commit/850f5e7e1824bb3308d6167b91122995c74fa493))
+
+
+### Features
+
+* add className prop for modal components ([bc5c285](https://github.com/pelcro-inc/react-pelcro-js/commit/bc5c2853624e612b7787b627524d85286e6596ca))
+* change checkout details design ([af363c8](https://github.com/pelcro-inc/react-pelcro-js/commit/af363c8313b0c3f17892d152dc067732dc7b993f))
+* dashboard spacing changes ([cf6055d](https://github.com/pelcro-inc/react-pelcro-js/commit/cf6055d54822b14ec3e5f16f8960df0b2bd90b37))
+* enhance modals ([0090555](https://github.com/pelcro-inc/react-pelcro-js/commit/0090555896818f35ba27df3137ab6fe098ed2deb))
+* implement input field floating labels ([af1d80c](https://github.com/pelcro-inc/react-pelcro-js/commit/af1d80c79b9434e53e56e756e02811dbd11e7a3a))
+* match stripe fields with pelcro fields ([ebc5688](https://github.com/pelcro-inc/react-pelcro-js/commit/ebc5688c64e4248bd8d31c3482ef1e8fcfec73c6))
+* pelcro authorship layout change ([49e129b](https://github.com/pelcro-inc/react-pelcro-js/commit/49e129b92a9a6986924a815d95d3626d40e154db))
+* select modal enhancements ([ee61625](https://github.com/pelcro-inc/react-pelcro-js/commit/ee61625d09d699682c6bdcf016336759c82151d6))
+
 # [4.0.0-alpha.44](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.43...v4.0.0-alpha.44) (2023-06-06)
 
 
