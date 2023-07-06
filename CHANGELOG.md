@@ -1,3 +1,15 @@
+# [3.26.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.25.1...v3.26.0) (2023-07-06)
+
+
+### Bug Fixes
+
+* export the es translation for the invite modal ([5e6d39f](https://github.com/pelcro-inc/react-pelcro-js/commit/5e6d39fc0fae3c3409c4249a789f63fb2b2ead66))
+
+
+### Features
+
+* add Spanish translation to manageMembers modal ([e03723f](https://github.com/pelcro-inc/react-pelcro-js/commit/e03723f364d874e6fa4ce49edc5b7c39e0428487))
+
 ## [3.25.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.25.0...v3.25.1) (2023-05-31)
 
 
