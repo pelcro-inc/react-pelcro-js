@@ -47,10 +47,10 @@ export const AddressUpdateView = (props) => {
             />
           </div>
           <div className="plc-flex plc-space-x-3 plc-items-start">
-            <AddressUpdatePostalCode
-              id="pelcro-input-postal_code"
-              errorId="pelcro-input-postal-code-error"
-              label={t("labels.code")}
+            <AddressUpdateCountrySelect
+              id="pelcro-input-country"
+              errorId="pelcro-input-country-error"
+              label={t("labels.country")}
               required
             />
             <AddressUpdateCity
@@ -61,16 +61,16 @@ export const AddressUpdateView = (props) => {
             />
           </div>
           <div className="plc-flex plc-space-x-3 plc-items-start">
-            <AddressUpdateCountrySelect
-              id="pelcro-input-country"
-              errorId="pelcro-input-country-error"
-              label={t("labels.country")}
-              required
-            />
             <AddressUpdateStateSelect
               id="pelcro-input-state"
               errorId="pelcro-input-state-error"
               label={t("labels.region")}
+              required
+            />
+            <AddressUpdatePostalCode
+              id="pelcro-input-postal_code"
+              errorId="pelcro-input-postal-code-error"
+              label={t("labels.code")}
               required
             />
           </div>
@@ -82,9 +82,9 @@ export const AddressUpdateView = (props) => {
             />
           </div>
 
-          <p className="plc-text-gray-900 pelcro-footnote">
+          {/* <p className="plc-text-gray-900 pelcro-footnote">
             * {t("labels.required")}
-          </p>
+          </p> */}
           <AddressUpdateSubmit
             role="submit"
             className="plc-mt-2 plc-w-full"

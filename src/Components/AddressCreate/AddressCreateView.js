@@ -45,11 +45,13 @@ export const AddressCreateView = (props) => {
             />
           </div>
           <div className="plc-flex plc-space-x-3 plc-items-start">
-            <AddressCreatePostalCode
-              id="pelcro-input-postal-code"
-              errorId="pelcro-input-postal-code-error"
-              label={t("labels.code")}
+            <AddressCreateCountrySelect
+              id="pelcro-input-country"
+              errorId="pelcro-input-country-error"
+              label={t("labels.country")}
+              required
             />
+
             <AddressCreateCity
               id="pelcro-input-city"
               errorId="pelcro-input-city-error"
@@ -57,16 +59,15 @@ export const AddressCreateView = (props) => {
             />
           </div>
           <div className="plc-flex plc-space-x-3 plc-items-start">
-            <AddressCreateCountrySelect
-              id="pelcro-input-country"
-              errorId="pelcro-input-country-error"
-              label={t("labels.country")}
-              required
-            />
             <AddressCreateStateSelect
               label={t("labels.region")}
               id="pelcro-input-state"
               errorId="pelcro-input-state-error"
+            />
+            <AddressCreatePostalCode
+              id="pelcro-input-postal-code"
+              errorId="pelcro-input-postal-code-error"
+              label={t("labels.code")}
             />
           </div>
 
@@ -77,9 +78,9 @@ export const AddressCreateView = (props) => {
             />
           </div>
 
-          <p className="plc-text-gray-900 pelcro-footnote">
+          {/* <p className="plc-text-gray-900 pelcro-footnote">
             * {t("labels.required")}
-          </p>
+          </p> */}
           <AddressCreateSubmit
             role="submit"
             className="plc-mt-2 plc-w-full"
