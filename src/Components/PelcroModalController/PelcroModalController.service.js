@@ -14,7 +14,9 @@ import i18n from "../../i18n";
 import { default as ReactGA1 } from "react-ga";
 import { default as ReactGA4 } from "react-ga4";
 
-const ReactGA = window?.Pelcro?.uiSettings?.enableReactGA4 ? ReactGA4 : ReactGA1;
+const ReactGA = window?.Pelcro?.uiSettings?.enableReactGA4
+  ? ReactGA4
+  : ReactGA1;
 
 /**
  * @typedef {Object} OptionsType
@@ -203,10 +205,12 @@ export const initSecuritySdk = () => {
 };
 
 export const initGATracking = () => {
-  ReactGA?.initialize?.(
-    window.Pelcro.site.read().google_analytics_id
-  );
-  ReactGA?.plugin?.require?.("ecommerce");
+  if (window.Pelcro.site.read().google_analytics_id) {
+    ReactGA?.initialize?.(
+      window.Pelcro.site.read().google_analytics_id
+    );
+    ReactGA?.plugin?.require?.("ecommerce");
+  }
 };
 
 export const dispatchModalDisplayEvents = (modalName) => {
@@ -328,7 +332,6 @@ export const initViewFromURL = () => {
   const { switchView, whenSiteReady } = usePelcro.getStore();
   if (isValidViewFromURL(view)) {
     whenSiteReady(() => {
-
       if (view === "plan-select") {
         return initSubscriptionFromURL();
       }
@@ -649,7 +652,7 @@ const showPaymentMethodUpdateFromUrl = () => {
       const supportsTap = Boolean(
         window.Pelcro.site.read().tap_gateway_settings
       );
-        
+
       if (!window.Stripe && !supportsVantiv && !supportsTap) {
         document
           .querySelector('script[src="https://js.stripe.com/v3"]')
