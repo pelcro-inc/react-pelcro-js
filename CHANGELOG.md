@@ -1,3 +1,10 @@
+# [3.26.0-sandbox.15](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-sandbox.14...v3.26.0-sandbox.15) (2023-07-10)
+
+
+### Bug Fixes
+
+* initialise reactga bug fix ([5be05ea](https://github.com/pelcro-inc/react-pelcro-js/commit/5be05eab26a5efd93aef2bc1eff4c8ce1b113685))
+
 # [3.26.0-sandbox.14](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-sandbox.13...v3.26.0-sandbox.14) (2023-06-21)
 
 
