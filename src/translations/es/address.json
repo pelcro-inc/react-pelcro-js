@@ -12,7 +12,7 @@
     "firstName": "Nombre",
     "lastName": "Apellido",
     "required": "obligatorio",
-    "isDefault": "Configurar como dirección Principal"
+    "isDefault": "Establecer como dirección predeterminada"
   },
   "buttons": {
     "submit": "Enviar",

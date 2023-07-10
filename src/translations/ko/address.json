@@ -12,7 +12,7 @@
     "firstName": "이름",
     "lastName": "성",
     "required": "필수 항목",
-    "isDefault": "기본값으로 설정"
+    "isDefault": "기본 주소로 설정"
   },
   "buttons": {
     "submit": "제출",
