@@ -50,9 +50,17 @@ export const SubscriptionCreateView = ({
 
   return (
     <div id="pelcro-subscription-create-view">
-      <div className="plc-flex plc-flex-col plc-items-center plc-mb-6 plc-text-left plc-text-gray-900 pelcro-title-wrapper">
+      <div className="plc-flex plc-flex-row plc-items-center plc-mb-6 plc-text-left plc-text-gray-900 pelcro-title-wrapper">
         <div className="plc-w-full plc-font-semibold plc-text-left plc-text-gray-900">
           {plan && getPricingText(plan)}
+        </div>
+        <div className="plc-flex-grow"></div>
+        <div className="plc-w-1/4">
+          <img
+            src={product.image}
+            alt=""
+            className="plc-rounded-md"
+          />
         </div>
       </div>
 
