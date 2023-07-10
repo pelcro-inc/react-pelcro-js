@@ -205,10 +205,12 @@ export const initSecuritySdk = () => {
 };
 
 export const initGATracking = () => {
-  ReactGA?.initialize?.(
-    window.Pelcro.site.read().google_analytics_id
-  );
-  ReactGA?.plugin?.require?.("ecommerce");
+  if (window.Pelcro.site.read().google_analytics_id) {
+    ReactGA?.initialize?.(
+      window.Pelcro.site.read().google_analytics_id
+    );
+    ReactGA?.plugin?.require?.("ecommerce");
+  }
 };
 
 export const dispatchModalDisplayEvents = (modalName) => {
