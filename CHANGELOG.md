@@ -1,3 +1,11 @@
+# [4.0.0-alpha.46](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.45...v4.0.0-alpha.46) (2023-07-10)
+
+
+### Features
+
+* add product image to sub create modal ([8864e69](https://github.com/pelcro-inc/react-pelcro-js/commit/8864e696b735d6cabc42003bcb46896003ec4b83))
+* reorder address fields ([35e97d3](https://github.com/pelcro-inc/react-pelcro-js/commit/35e97d317da0b9c33ddb1bd6f972ac01892b2161))
+
 # [4.0.0-alpha.45](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.44...v4.0.0-alpha.45) (2023-06-27)
 
 
