@@ -261,11 +261,11 @@ class SelectModal extends Component {
       }
     }
     return (
-      <h5 className="plc-text-2xl pelcro-select-product-cost">
+      <h5 className="plc-text-3xl pelcro-select-product-cost">
         <span className="plc-font-medium">
           {startingPlan.amount_formatted}
         </span>
-        <span className="plc-text-sm plc-ml-1 plc-text-gray-400">
+        <span className="plc-text-xs plc-ml-1 plc-text-gray-400">
           /{" "}
           {startingPlan.interval_count > 1
             ? `${startingPlan.interval_count} ${startingPlan.interval}s`
@@ -319,16 +319,16 @@ class SelectModal extends Component {
 
         <div className="plc-flex plc-flex-col plc-flex-wrap plc-w-full plc-flex-1 plc-text-center">
           <div className="plc-w-full pelcro-select-product-header">
-            <h4 className="plc-font-medium plc-text-base pelcro-select-product-title">
+            <h4 className="plc-font-medium plc-text-xl pelcro-select-product-title">
               {product.name}
             </h4>
             {product?.description?.length <= 105 && (
-              <p className="plc-text-sm plc-mt-1 pelcro-select-product-description plc-px-8">
+              <p className="plc-text-xs plc-mt-1 pelcro-select-product-description plc-px-8">
                 {product.description}
               </p>
             )}
             {product?.description?.length > 105 && (
-              <div className="plc-text-sm plc-mt-1 pelcro-select-product-description plc-px-8">
+              <div className="plc-text-xs plc-mt-1 pelcro-select-product-description plc-px-8">
                 <div
                   className={`plc-overflow-x-hidden ${
                     productsDescriptionsExpanded[index].expanded
@@ -595,7 +595,7 @@ class SelectModal extends Component {
             </div>
             <div className="plc-flex plc-flex-col plc-flex-1 plc-justify-between">
               <div className="plc-px-8 plc-py-6 plc-text-center plc-w-full">
-                <p className="plc-text-sm plc-mt-1 pelcro-select-plan-description plc-text-gray-400">
+                <p className="plc-text-xs plc-mt-1 pelcro-select-plan-description plc-text-gray-500">
                   {plan.description}
                 </p>
               </div>
@@ -604,13 +604,11 @@ class SelectModal extends Component {
                 <p className="plc-font-bold plc-text-3xl">
                   {plan.amount_formatted}
                 </p>
-                <span className="plc-text-gray-400 plc-text-xs plc-flex plc-flex-col plc-font-normal">
+                <span className="plc-text-gray-400 plc-text-xs plc-flex plc-flex-col plc-font-normal plc-ml-1">
                   <span className="plc-uppercase">
                     {plan.currency}
                   </span>
-                  <span className="plc-capitalize">
-                    / {plan.interval}
-                  </span>
+                  <span>/ {plan.interval}</span>
                 </span>
               </div>
               <div
@@ -747,7 +745,7 @@ class SelectModal extends Component {
               <button
                 type="button"
                 onClick={this.goBack}
-                className="plc-absolute plc-w-6 plc-text-gray-500 focus:plc-text-black plc-z-max plc-top-1/2 plc-left-2 sm:plc-left-5 plc-transform plc--translate-y-1/2 plc-border-0 hover:plc-text-black hover:plc-shadow-none plc-bg-transparent hover:plc-bg-transparent focus:plc-bg-transparent"
+                className="plc-absolute plc-w-6 plc-text-gray-500 focus:plc-text-black plc-z-max plc-top-1/2 plc-left-6 plc-transform plc--translate-y-1/2 plc-border-0 hover:plc-text-black hover:plc-shadow-none plc-bg-transparent hover:plc-bg-transparent focus:plc-bg-transparent"
               >
                 <ArrowLeft />
               </button>

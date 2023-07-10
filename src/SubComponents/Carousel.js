@@ -12,8 +12,8 @@ const NextArrow = ({
   <button
     className={`plc-flex plc-text-gray-500 plc-w-11 plc-h-11 plc-items-center plc-justify-center plc-rounded-full plc-text-sm plc-absolute plc-transform hover:plc-text-gray-900 ${
       mobileArrowDown
-        ? "plc-right-0 plc-bottom-0 sm:plc--right-12 sm:plc-top-1/2 sm:plc--translate-y-1/2"
-        : "plc--right-12 plc-top-1/2 plc--translate-y-1/2"
+        ? "plc-right-0 plc-bottom-0 sm:plc--right-14 sm:plc-top-1/2 sm:plc--translate-y-1/2"
+        : "plc--right-14 plc-top-1/2 plc--translate-y-1/2"
     } ${className}`}
     onClick={onClick}
   >
@@ -41,8 +41,8 @@ const PrevArrow = ({
   <button
     className={`plc-flex plc-text-gray-500 plc-w-11 plc-h-11 plc-items-center plc-justify-center plc-rounded-full plc-text-sm plc-absolute plc-transform hover:plc-text-gray-900 ${
       mobileArrowDown
-        ? "plx-left-0 plc-bottom-0 sm:plc--left-12 sm:plc-top-1/2 sm:plc--translate-y-1/2"
-        : "plc--left-12 plc-top-1/2 plc--translate-y-1/2"
+        ? "plx-left-0 plc-bottom-0 sm:plc--left-14 sm:plc-top-1/2 sm:plc--translate-y-1/2"
+        : "plc--left-14 plc-top-1/2 plc--translate-y-1/2"
     } ${className}`}
     onClick={onClick}
   >

@@ -12,7 +12,7 @@
     "firstName": "First name",
     "lastName": "Last name",
     "required": "required",
-    "isDefault": "Set as default"
+    "isDefault": "Set as your default address"
   },
   "buttons": {
     "submit": "Submit",

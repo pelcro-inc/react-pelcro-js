@@ -12,7 +12,7 @@
     "firstName": "Prénom",
     "lastName": "Nom de famille",
     "required": "Champs obligatoires",
-    "isDefault": "Définir par défaut"
+    "isDefault": "Définir comme adresse par défaut"
   },
   "buttons": {
     "submit": "Valider",
