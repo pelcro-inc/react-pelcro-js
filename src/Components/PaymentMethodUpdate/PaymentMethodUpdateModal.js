@@ -15,10 +15,8 @@ export const PaymentMethodUpdateModal = (props) => {
   const onSuccess = (res) => {
     props.onSuccess?.(res);
     if (enableReactGA4) {
-      ReactGA4.gtag("event", "Updated payment card", {
-        event_category: "ACTIONS",
-        event_action: "Updated payment card",
-        non_interaction: true
+      ReactGA4.event("Updated payment card", {
+        nonInteraction: true
       });
     } else {
       ReactGA?.event?.({

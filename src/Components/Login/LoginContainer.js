@@ -66,10 +66,8 @@ const LoginContainer = ({
         } else {
           onSuccess(res);
           if (enableReactGA4) {
-            ReactGA4.gtag("event", "Logged in", {
-              event_category: "ACTIONS",
-              event_action: "Logged in",
-              non_interaction: true
+            ReactGA4.event("Logged in", {
+              nonInteraction: true
             });
           } else {
             ReactGA?.event?.({

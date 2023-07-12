@@ -94,9 +94,7 @@ export const SavedItems = ({
 
           setItems(response?.data?.metadata);
           if (enableReactGA4) {
-            ReactGA4.gtag("event", "Unsave/Unfollow", {
-              event_category: "ACTIONS",
-              event_action: "Unsave/Unfollow",
+            ReactGA4.event("Unsave/Unfollow", {
               event_label: title
             });
           } else {

@@ -39,10 +39,8 @@ export function RegisterModal(props) {
 
   const handleAfterRegistrationLogic = () => {
     if (enableReactGA4) {
-      ReactGA4.gtag("event", "Registered", {
-        event_category: "ACTIONS",
-        event_action: "Registered",
-        non_interaction: true
+      ReactGA4.event("Registered", {
+        nonInteraction: true
       });
     } else {
       ReactGA?.event?.({

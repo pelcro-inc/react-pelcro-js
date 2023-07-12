@@ -167,10 +167,8 @@ const AddressUpdateContainer = ({
           });
           onSuccess(res);
           if (enableReactGA4) {
-            ReactGA4.gtag("event", "Updated address", {
-              event_category: "ACTIONS",
-              event_action: "Updated address",
-              non_interaction: true
+            ReactGA4.event("Updated address", {
+              nonInteraction: true
             });
           } else {
             ReactGA?.event?.({

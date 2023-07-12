@@ -480,10 +480,8 @@ class SelectModal extends Component {
 
     if (this.state.mode === "product") {
       if (enableReactGA4) {
-        ReactGA4.gtag("event", "Product Modal Viewed", {
-          event_category: "VIEWS",
-          event_action: "Product Modal Viewed",
-          non_interaction: true
+        ReactGA4.event("Product Modal Viewed", {
+          nonInteraction: true
         });
       } else {
         ReactGA?.event?.({
@@ -494,10 +492,8 @@ class SelectModal extends Component {
       }
     } else if (this.state.mode === "plan") {
       if (enableReactGA4) {
-        ReactGA4.gtag("event", "Plan Modal Viewed", {
-          event_category: "VIEWS",
-          event_action: "Plan Modal Viewed",
-          non_interaction: true
+        ReactGA4.event("Plan Modal Viewed", {
+          nonInteraction: true
         });
       } else {
         ReactGA?.event?.({

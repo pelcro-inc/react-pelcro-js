@@ -25,10 +25,8 @@ export function SubscriptionRenewModal({
   const onSuccess = (res) => {
     otherProps.onSuccess?.(res);
     if (enableReactGA4) {
-      ReactGA4.gtag("event", "Renewed", {
-        event_category: "ACTIONS",
-        event_action: "Renewed",
-        non_interaction: true
+      ReactGA4.event("Renewed", {
+        nonInteraction: true
       });
     } else {
       ReactGA?.event?.({
@@ -44,10 +42,8 @@ export function SubscriptionRenewModal({
   const onGiftRenewalSuccess = () => {
     otherProps.onGiftRenewalSuccess?.();
     if (enableReactGA4) {
-      ReactGA4.gtag("event", "Renewed Gift", {
-        event_category: "ACTIONS",
-        event_action: "Renewed Gift",
-        non_interaction: true
+      ReactGA4.event("Renewed Gift", {
+        nonInteraction: true
       });
     } else {
       ReactGA?.event?.({
