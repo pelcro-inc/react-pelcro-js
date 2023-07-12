@@ -1,6 +1,7 @@
 import React, { createContext, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import ReactGA from "react-ga";
+import ReactGA4 from "react-ga4";
 import useReducerWithSideEffects, {
   UpdateWithSideEffect,
   Update
@@ -21,6 +22,8 @@ import {
 } from "../../utils/action-types";
 import { sortCountries } from "../../utils/utils";
 import { getErrorMessages } from "../common/Helpers";
+
+const enableReactGA4 = window?.Pelcro?.uiSettings?.enableReactGA4;
 
 const initialState = {
   isSubmitting: false,
@@ -163,11 +166,19 @@ const AddressUpdateContainer = ({
             }
           });
           onSuccess(res);
-          ReactGA?.event?.({
-            category: "ACTIONS",
-            action: "Updated address",
-            nonInteraction: true
-          });
+          if (enableReactGA4) {
+            ReactGA4.gtag("event", "Updated address", {
+              event_category: "ACTIONS",
+              event_action: "Updated address",
+              non_interaction: true
+            });
+          } else {
+            ReactGA?.event?.({
+              category: "ACTIONS",
+              action: "Updated address",
+              nonInteraction: true
+            });
+          }
         }
       }
     );
