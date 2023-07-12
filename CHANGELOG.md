@@ -1,3 +1,10 @@
+# [3.26.0-sandbox.16](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-sandbox.15...v3.26.0-sandbox.16) (2023-07-12)
+
+
+### Bug Fixes
+
+* change syntax for reactga4 ([406c25d](https://github.com/pelcro-inc/react-pelcro-js/commit/406c25d91ea82dac92148784bf69a308f47e1def))
+
 # [3.26.0-sandbox.15](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-sandbox.14...v3.26.0-sandbox.15) (2023-07-10)
 
 
