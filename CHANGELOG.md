@@ -1,3 +1,10 @@
+# [3.26.0-sandbox.17](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-sandbox.16...v3.26.0-sandbox.17) (2023-07-12)
+
+
+### Bug Fixes
+
+* change ga4 syntax ([978889c](https://github.com/pelcro-inc/react-pelcro-js/commit/978889c17d1bb8e30db920bf5849f6cbfc704f9b))
+
 # [3.26.0-sandbox.16](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-sandbox.15...v3.26.0-sandbox.16) (2023-07-12)
 
 
