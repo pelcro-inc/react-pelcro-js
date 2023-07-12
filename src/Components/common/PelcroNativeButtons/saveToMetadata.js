@@ -160,9 +160,7 @@ class SaveToMetadataButtonClass {
 
           this.#markButtonAsSaved(button);
           if (enableReactGA4) {
-            ReactGA4.gtag("event", "Save/Follow", {
-              event_category: "ACTIONS",
-              event_action: "Save/Follow",
+            ReactGA4.event("Save/Follow", {
               event_label: buttonMetadata?.title
             });
           } else {
@@ -206,9 +204,7 @@ class SaveToMetadataButtonClass {
 
           this.#unmarkSavedButton(button);
           if (enableReactGA4) {
-            ReactGA4.gtag("event", "Unsave/Unfollow", {
-              event_category: "ACTIONS",
-              event_action: "Unsave/Unfollow",
+            ReactGA4.event("Unsave/Unfollow", {
               event_label: title
             });
           } else {

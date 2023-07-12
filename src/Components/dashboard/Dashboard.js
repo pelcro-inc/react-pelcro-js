@@ -117,10 +117,8 @@ class Dashboard extends Component {
     });
 
     if (enableReactGA4) {
-      ReactGA4.gtag("event", "Dashboard Modal Viewed", {
-        event_category: "VIEWS",
-        event_action: "Dashboard Modal Viewed",
-        non_interaction: true
+      ReactGA4.event("Dashboard Modal Viewed", {
+        nonInteraction: true
       });
     } else {
       ReactGA?.event?.({
@@ -169,10 +167,8 @@ class Dashboard extends Component {
         }
 
         if (enableReactGA4) {
-          ReactGA4.gtag("event", "Canceled", {
-            event_category: "ACTIONS",
-            event_action: "Canceled",
-            non_interaction: true
+          ReactGA4.event("Canceled", {
+            nonInteraction: true
           });
         } else {
           ReactGA?.event?.({
@@ -199,10 +195,8 @@ class Dashboard extends Component {
         }
 
         if (enableReactGA4) {
-          ReactGA4.gtag("event", "UnSuspended", {
-            event_category: "ACTIONS",
-            event_action: "UnSuspended",
-            non_interaction: true
+          ReactGA4.event("UnSuspended", {
+            nonInteraction: true
           });
         } else {
           ReactGA?.event?.({

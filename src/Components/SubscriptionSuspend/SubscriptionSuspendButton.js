@@ -37,10 +37,8 @@ export const SubscriptionSuspendButton = ({
         }
 
         if (enableReactGA4) {
-          ReactGA4.gtag("event", "Suspended", {
-            event_category: "ACTIONS",
-            event_action: "Suspended",
-            non_interaction: true
+          ReactGA4.event("Suspended", {
+            nonInteraction: true
           });
         } else {
           ReactGA?.event?.({

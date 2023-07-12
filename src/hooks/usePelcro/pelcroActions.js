@@ -230,10 +230,8 @@ export class PelcroActions {
 
     window.Pelcro.user.logout();
     if (enableReactGA4) {
-      ReactGA4.gtag("event", "Logged out", {
-        event_category: "ACTIONS",
-        event_action: "Logged out",
-        non_interaction: true
+      ReactGA4.event("Logged out", {
+        nonInteraction: true
       });
     } else {
       ReactGA?.event?.({

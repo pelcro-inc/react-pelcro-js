@@ -210,13 +210,14 @@ export const initGATracking = () => {
         window.Pelcro.site.read().google_analytics_id
       );
       // Enable e-commerce tracking
-      ReactGA4.gtag(
-        "config",
+      ReactGA4.initialize(
         window.Pelcro.site.read().google_analytics_id,
         {
-          send_page_view: true,
-          ecommerce: {
-            enabled: true
+          gaOptions: {
+            send_page_view: true,
+            ecommerce: {
+              enabled: true
+            }
           }
         }
       );
@@ -235,10 +236,8 @@ export const dispatchModalDisplayEvents = (modalName) => {
     ?.replaceAll("-", " ");
 
   if (enableReactGA4) {
-    ReactGA4.gtag("event", `${formattedAction} viewed`, {
-      event_category: "VIEWS",
-      event_action: `${formattedAction} viewed`,
-      non_interaction: true
+    ReactGA4.event(`${formattedAction} viewed`, {
+      nonInteraction: true
     });
   } else {
     ReactGA?.event?.({

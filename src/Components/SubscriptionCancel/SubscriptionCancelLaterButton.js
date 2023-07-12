@@ -37,10 +37,8 @@ export const SubscriptionCancelLaterButton = ({
         }
 
         if (enableReactGA4) {
-          ReactGA4.gtag("event", "Canceled", {
-            event_category: "ACTIONS",
-            event_action: "Canceled",
-            non_interaction: true
+          ReactGA4.event("Canceled", {
+            nonInteraction: true
           });
         } else {
           ReactGA?.event?.({

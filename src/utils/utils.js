@@ -323,7 +323,7 @@ export const trackSubscriptionOnGA = () => {
     window.Pelcro.user.read()?.currency ?? plan.currency;
 
   if (enableReactGA4) {
-    ReactGA4.gtag("event", "purchase", {
+    ReactGA4.event("purchase", {
       transaction_id: lastSubscriptionId,
       affiliation: "Pelcro",
       currency: currencyCode,
@@ -349,10 +349,8 @@ export const trackSubscriptionOnGA = () => {
       ]
     });
 
-    ReactGA4.gtag("event", "Subscribed", {
-      event_category: "ACTIONS",
-      event_action: "Subscribed",
-      non_interaction: true
+    ReactGA4.event("Subscribed", {
+      nonInteraction: true
     });
   } else {
     ReactGA?.set?.({
