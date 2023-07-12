@@ -1,9 +1,9 @@
 import { usePelcro } from "../../../hooks/usePelcro";
 import { userMustVerifyEmail } from "../../../utils/utils";
-import { default as ReactGA1 } from "react-ga";
-import { default as ReactGA4 } from "react-ga4";
+import ReactGA from "react-ga";
+import ReactGA4 from "react-ga4";
 
-const ReactGA = window?.Pelcro?.uiSettings?.enableReactGA4 ? ReactGA4 : ReactGA1;
+const enableReactGA4 = window?.Pelcro?.uiSettings?.enableReactGA4;
 
 class SaveToMetadataButtonClass {
   init() {
@@ -159,11 +159,19 @@ class SaveToMetadataButtonClass {
           }
 
           this.#markButtonAsSaved(button);
-          ReactGA?.event?.({
-            category: "ACTIONS",
-            action: "Save/Follow",
-            label: buttonMetadata?.title
-          });
+          if (enableReactGA4) {
+            ReactGA4.gtag("event", "Save/Follow", {
+              event_category: "ACTIONS",
+              event_action: "Save/Follow",
+              event_label: buttonMetadata?.title
+            });
+          } else {
+            ReactGA?.event?.({
+              category: "ACTIONS",
+              action: "Save/Follow",
+              label: buttonMetadata?.title
+            });
+          }
         }
       );
     }
@@ -197,11 +205,19 @@ class SaveToMetadataButtonClass {
           }
 
           this.#unmarkSavedButton(button);
-          ReactGA?.event?.({
-            category: "ACTIONS",
-            action: "Unsave/Unfollow",
-            label: title
-          });
+          if (enableReactGA4) {
+            ReactGA4.gtag("event", "Unsave/Unfollow", {
+              event_category: "ACTIONS",
+              event_action: "Unsave/Unfollow",
+              event_label: title
+            });
+          } else {
+            ReactGA?.event?.({
+              category: "ACTIONS",
+              action: "Unsave/Unfollow",
+              label: title
+            });
+          }
         }
       );
     }

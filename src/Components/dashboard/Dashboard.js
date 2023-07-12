@@ -37,12 +37,10 @@ import { DonationsMenu } from "./DashboardMenus/DonationsMenu";
 import { InvoicesMenu } from "./DashboardMenus/InvoicesMenu";
 import { MembershipsMenu } from "./DashboardMenus/MembershipsMenu";
 import { notify } from "../../SubComponents/Notification";
-import { default as ReactGA1 } from "react-ga";
-import { default as ReactGA4 } from "react-ga4";
+import ReactGA from "react-ga";
+import ReactGA4 from "react-ga4";
 
-const ReactGA = window?.Pelcro?.uiSettings?.enableReactGA4
-  ? ReactGA4
-  : ReactGA1;
+const enableReactGA4 = window?.Pelcro?.uiSettings?.enableReactGA4;
 
 const SUB_MENUS = {
   PROFILE: "profile",
@@ -118,11 +116,19 @@ class Dashboard extends Component {
       name: "dashboard"
     });
 
-    ReactGA?.event?.({
-      category: "VIEWS",
-      action: "Dashboard Modal Viewed",
-      nonInteraction: true
-    });
+    if (enableReactGA4) {
+      ReactGA4.gtag("event", "Dashboard Modal Viewed", {
+        event_category: "VIEWS",
+        event_action: "Dashboard Modal Viewed",
+        non_interaction: true
+      });
+    } else {
+      ReactGA?.event?.({
+        category: "VIEWS",
+        action: "Dashboard Modal Viewed",
+        nonInteraction: true
+      });
+    }
 
     const { addresses } = window.Pelcro.user.read();
     if (addresses) this.setState({ addresses: addresses });
@@ -162,11 +168,19 @@ class Dashboard extends Component {
           return onFailure?.(err);
         }
 
-        ReactGA?.event?.({
-          category: "ACTIONS",
-          action: "Canceled",
-          nonInteraction: true
-        });
+        if (enableReactGA4) {
+          ReactGA4.gtag("event", "Canceled", {
+            event_category: "ACTIONS",
+            event_action: "Canceled",
+            non_interaction: true
+          });
+        } else {
+          ReactGA?.event?.({
+            category: "ACTIONS",
+            action: "Canceled",
+            nonInteraction: true
+          });
+        }
         onSuccess?.(res);
       }
     );
@@ -184,11 +198,19 @@ class Dashboard extends Component {
           return onFailure?.(err);
         }
 
-        ReactGA?.event?.({
-          category: "ACTIONS",
-          action: "UnSuspended",
-          nonInteraction: true
-        });
+        if (enableReactGA4) {
+          ReactGA4.gtag("event", "UnSuspended", {
+            event_category: "ACTIONS",
+            event_action: "UnSuspended",
+            non_interaction: true
+          });
+        } else {
+          ReactGA?.event?.({
+            category: "ACTIONS",
+            action: "UnSuspended",
+            nonInteraction: true
+          });
+        }
         onSuccess?.(res);
       }
     );
