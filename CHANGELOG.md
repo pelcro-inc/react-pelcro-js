@@ -1,3 +1,12 @@
+# [3.26.0-beta.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.1...v3.26.0-beta.2) (2023-07-12)
+
+
+### Bug Fixes
+
+* change ga4 syntax ([978889c](https://github.com/pelcro-inc/react-pelcro-js/commit/978889c17d1bb8e30db920bf5849f6cbfc704f9b))
+* change syntax for reactga4 ([406c25d](https://github.com/pelcro-inc/react-pelcro-js/commit/406c25d91ea82dac92148784bf69a308f47e1def))
+* initialise reactga bug fix ([5be05ea](https://github.com/pelcro-inc/react-pelcro-js/commit/5be05eab26a5efd93aef2bc1eff4c8ce1b113685))
+
 # [3.26.0-beta.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.25.1...v3.26.0-beta.1) (2023-06-15)
 
 
