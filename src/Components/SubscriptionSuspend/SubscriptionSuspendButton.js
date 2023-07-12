@@ -4,30 +4,26 @@ import { Button } from "../../SubComponents/Button";
 import { usePelcro } from "../../hooks/usePelcro";
 import { store } from "./SubscriptionSuspendContainer";
 import { notify } from "../../SubComponents/Notification";
-import { default as ReactGA1 } from "react-ga";
-import { default as ReactGA4 } from "react-ga4";
+import ReactGA from "react-ga";
+import ReactGA4 from "react-ga4";
 
-const ReactGA = window?.Pelcro?.uiSettings?.enableReactGA4 ? ReactGA4 : ReactGA1;
+const enableReactGA4 = window?.Pelcro?.uiSettings?.enableReactGA4;
 
 export const SubscriptionSuspendButton = ({
   subscription,
   onClick,
-  className,
+  className
 }) => {
-  const {switchView} = usePelcro();
-  
+  const { switchView } = usePelcro();
+
   const {
-    state: {
-      suspendDate,
-      buttonDisabled
-    },
+    state: { suspendDate, buttonDisabled },
     dispatch
   } = useContext(store);
 
   const { t } = useTranslation("subscriptionSuspend");
 
   const suspendSubscription = (payload, onSuccess, onFailure) => {
-    
     window.Pelcro.subscription.update(
       {
         auth_token: window.Pelcro.user.read().auth_token,
@@ -40,11 +36,17 @@ export const SubscriptionSuspendButton = ({
           return onFailure?.(err);
         }
 
-        ReactGA?.event?.({
-          category: "ACTIONS",
-          action: "Suspended",
-          nonInteraction: true
-        });
+        if (enableReactGA4) {
+          ReactGA4.event("Suspended", {
+            nonInteraction: true
+          });
+        } else {
+          ReactGA?.event?.({
+            category: "ACTIONS",
+            action: "Suspended",
+            nonInteraction: true
+          });
+        }
         onSuccess?.(res);
       }
     );
@@ -53,14 +55,14 @@ export const SubscriptionSuspendButton = ({
   const handleClick = () => {
     const payload = {
       subscription_id: subscription.id
-    }
+    };
 
     onClick?.();
-    
-    //Close the modal
+
+    // Close the modal
     switchView(null);
-    
-    //Show confirmation alert after closing the modal
+
+    // Show confirmation alert after closing the modal
     notify.confirm(
       (onSuccess, onFailure) => {
         suspendSubscription(payload, onSuccess, onFailure);
@@ -77,8 +79,7 @@ export const SubscriptionSuspendButton = ({
         closeButtonLabel: t("labels.subCancellation.goBack")
       }
     );
-    
-  }
+  };
 
   return (
     <Button

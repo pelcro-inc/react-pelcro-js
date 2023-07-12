@@ -16,10 +16,10 @@ import {
   getEntitlementsFromElem,
   notifyBugsnag
 } from "../../utils/utils";
-import { default as ReactGA1 } from "react-ga";
-import { default as ReactGA4 } from "react-ga4";
+import ReactGA from "react-ga";
+import ReactGA4 from "react-ga4";
 
-const ReactGA = window?.Pelcro?.uiSettings?.enableReactGA4 ? ReactGA4 : ReactGA1;
+const enableReactGA4 = window?.Pelcro?.uiSettings?.enableReactGA4;
 
 /**
  *
@@ -487,17 +487,29 @@ class SelectModal extends Component {
     const { disableGifting } = this.props;
 
     if (this.state.mode === "product") {
-      ReactGA?.event?.({
-        category: "VIEWS",
-        action: "Product Modal Viewed",
-        nonInteraction: true
-      });
+      if (enableReactGA4) {
+        ReactGA4.event("Product Modal Viewed", {
+          nonInteraction: true
+        });
+      } else {
+        ReactGA?.event?.({
+          category: "VIEWS",
+          action: "Product Modal Viewed",
+          nonInteraction: true
+        });
+      }
     } else if (this.state.mode === "plan") {
-      ReactGA?.event?.({
-        category: "VIEWS",
-        action: "Plan Modal Viewed",
-        nonInteraction: true
-      });
+      if (enableReactGA4) {
+        ReactGA4.event("Plan Modal Viewed", {
+          nonInteraction: true
+        });
+      } else {
+        ReactGA?.event?.({
+          category: "VIEWS",
+          action: "Plan Modal Viewed",
+          nonInteraction: true
+        });
+      }
     }
 
     return (

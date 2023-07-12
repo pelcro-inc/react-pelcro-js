@@ -7,10 +7,10 @@ import {
 } from "../../SubComponents/Modal";
 import Authorship from "../common/Authorship";
 import { usePelcro } from "../../hooks/usePelcro";
-import { default as ReactGA1 } from "react-ga";
-import { default as ReactGA4 } from "react-ga4";
+import ReactGA from "react-ga";
+import ReactGA4 from "react-ga4";
 
-const ReactGA = window?.Pelcro?.uiSettings?.enableReactGA4 ? ReactGA4 : ReactGA1;
+const enableReactGA4 = window?.Pelcro?.uiSettings?.enableReactGA4;
 
 /**
  *
@@ -24,22 +24,34 @@ export function SubscriptionRenewModal({
 
   const onSuccess = (res) => {
     otherProps.onSuccess?.(res);
-    ReactGA?.event?.({
-      category: "ACTIONS",
-      action: "Renewed",
-      nonInteraction: true
-    });
+    if (enableReactGA4) {
+      ReactGA4.event("Renewed", {
+        nonInteraction: true
+      });
+    } else {
+      ReactGA?.event?.({
+        category: "ACTIONS",
+        action: "Renewed",
+        nonInteraction: true
+      });
+    }
 
     return switchView("subscription-success");
   };
 
   const onGiftRenewalSuccess = () => {
     otherProps.onGiftRenewalSuccess?.();
-    ReactGA?.event?.({
-      category: "ACTIONS",
-      action: "Renewed Gift",
-      nonInteraction: true
-    });
+    if (enableReactGA4) {
+      ReactGA4.event("Renewed Gift", {
+        nonInteraction: true
+      });
+    } else {
+      ReactGA?.event?.({
+        category: "ACTIONS",
+        action: "Renewed Gift",
+        nonInteraction: true
+      });
+    }
 
     return switchView("subscription-success");
   };

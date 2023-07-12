@@ -1,11 +1,9 @@
 import React from "react";
 import { usePelcro } from "../hooks/usePelcro";
-import { default as ReactGA1 } from "react-ga";
-import { default as ReactGA4 } from "react-ga4";
+import ReactGA from "react-ga";
+import ReactGA4 from "react-ga4";
 
-const ReactGA = window?.Pelcro?.uiSettings?.enableReactGA4
-  ? ReactGA4
-  : ReactGA1;
+const enableReactGA4 = window?.Pelcro?.uiSettings?.enableReactGA4;
 
 /**
  * List of zero-decimal currencies.
@@ -325,41 +323,73 @@ export const trackSubscriptionOnGA = () => {
   const currencyCode =
     window.Pelcro.user.read()?.currency ?? plan.currency;
 
-  ReactGA?.set?.({
-    currencyCode: currencyCode
-  });
+  if (enableReactGA4) {
+    ReactGA4.event("purchase", {
+      transaction_id: lastSubscriptionId,
+      affiliation: "Pelcro",
+      currency: currencyCode,
+      value: plan?.amount
+        ? isCurrencyZeroDecimal(currencyCode)
+          ? plan.amount
+          : plan.amount / 100
+        : 0,
+      coupon: couponCode,
+      items: [
+        {
+          item_id: lastSubscriptionId,
+          item_name: product.name,
+          item_category: product.description,
+          item_variant: plan.nickname,
+          price: plan?.amount
+            ? isCurrencyZeroDecimal(currencyCode)
+              ? plan.amount
+              : plan.amount / 100
+            : 0,
+          quantity: 1
+        }
+      ]
+    });
 
-  ReactGA?.plugin?.execute?.("ecommerce", "addTransaction", {
-    id: lastSubscriptionId,
-    affiliation: "Pelcro",
-    revenue: plan?.amount
-      ? isCurrencyZeroDecimal(currencyCode)
-        ? plan.amount
-        : plan.amount / 100
-      : 0,
-    coupon: couponCode
-  });
+    ReactGA4.event("Subscribed", {
+      nonInteraction: true
+    });
+  } else {
+    ReactGA?.set?.({
+      currencyCode: currencyCode
+    });
 
-  ReactGA?.plugin?.execute?.("ecommerce", "addItem", {
-    id: lastSubscriptionId,
-    name: product.name,
-    category: product.description,
-    variant: plan.nickname,
-    price: plan?.amount
-      ? isCurrencyZeroDecimal(currencyCode)
-        ? plan.amount
-        : plan.amount / 100
-      : 0,
-    quantity: 1
-  });
+    ReactGA?.plugin?.execute?.("ecommerce", "addTransaction", {
+      id: lastSubscriptionId,
+      affiliation: "Pelcro",
+      revenue: plan?.amount
+        ? isCurrencyZeroDecimal(currencyCode)
+          ? plan.amount
+          : plan.amount / 100
+        : 0,
+      coupon: couponCode
+    });
 
-  ReactGA?.plugin?.execute?.("ecommerce", "send");
+    ReactGA?.plugin?.execute?.("ecommerce", "addItem", {
+      id: lastSubscriptionId,
+      name: product.name,
+      category: product.description,
+      variant: plan.nickname,
+      price: plan?.amount
+        ? isCurrencyZeroDecimal(currencyCode)
+          ? plan.amount
+          : plan.amount / 100
+        : 0,
+      quantity: 1
+    });
 
-  ReactGA?.event?.({
-    category: "ACTIONS",
-    action: "Subscribed",
-    nonInteraction: true
-  });
+    ReactGA?.plugin?.execute?.("ecommerce", "send");
+
+    ReactGA?.event?.({
+      category: "ACTIONS",
+      action: "Subscribed",
+      nonInteraction: true
+    });
+  }
 };
 
 /** check wether or not the user have any existing payment method
@@ -490,7 +520,7 @@ export function notifyBugsnag(callback, startOptions) {
       'script[src="https://d2wy8f7a9ursnm.cloudfront.net/v7/bugsnag.min.js"]'
     )
   ) {
-    //load bugsnag CDN
+    // load bugsnag CDN
     window.Pelcro.helpers.loadSDK(
       "https://d2wy8f7a9ursnm.cloudfront.net/v7/bugsnag.min.js",
       "bugsnag-cdn"
