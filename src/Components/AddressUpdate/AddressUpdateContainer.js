@@ -23,8 +23,6 @@ import {
 import { sortCountries } from "../../utils/utils";
 import { getErrorMessages } from "../common/Helpers";
 
-const enableReactGA4 = window?.Pelcro?.uiSettings?.enableReactGA4;
-
 const initialState = {
   isSubmitting: false,
   firstName: "",
@@ -65,6 +63,7 @@ const AddressUpdateContainer = ({
 }) => {
   const { addressIdToEdit } = usePelcro();
   const addressId = props?.addressId ?? addressIdToEdit;
+  const enableReactGA4 = window?.Pelcro?.uiSettings?.enableReactGA4;
 
   const [t] = useTranslation("address");
   useEffect(() => {

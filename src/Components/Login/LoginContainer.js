@@ -22,8 +22,6 @@ import {
 } from "../../utils/action-types";
 import { getErrorMessages } from "../common/Helpers";
 
-const enableReactGA4 = window?.Pelcro?.uiSettings?.enableReactGA4;
-
 const initialState = {
   email: "",
   username: "",
@@ -47,6 +45,7 @@ const LoginContainer = ({
   onFailure = () => {},
   children
 }) => {
+  const enableReactGA4 = window?.Pelcro?.uiSettings?.enableReactGA4;
   const handleLogin = ({ email, username, password }, dispatch) => {
     window.Pelcro.user.login(
       {
