@@ -7,8 +7,6 @@ import { notify } from "../../SubComponents/Notification";
 import ReactGA from "react-ga";
 import ReactGA4 from "react-ga4";
 
-const enableReactGA4 = window?.Pelcro?.uiSettings?.enableReactGA4;
-
 export const SubscriptionSuspendButton = ({
   subscription,
   onClick,
@@ -22,6 +20,7 @@ export const SubscriptionSuspendButton = ({
   } = useContext(store);
 
   const { t } = useTranslation("subscriptionSuspend");
+  const enableReactGA4 = window?.Pelcro?.uiSettings?.enableReactGA4;
 
   const suspendSubscription = (payload, onSuccess, onFailure) => {
     window.Pelcro.subscription.update(

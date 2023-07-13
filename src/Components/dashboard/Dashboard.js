@@ -40,8 +40,6 @@ import { notify } from "../../SubComponents/Notification";
 import ReactGA from "react-ga";
 import ReactGA4 from "react-ga4";
 
-const enableReactGA4 = window?.Pelcro?.uiSettings?.enableReactGA4;
-
 const SUB_MENUS = {
   PROFILE: "profile",
   SUBSCRIPTIONS: "subscriptions",
@@ -105,6 +103,7 @@ class Dashboard extends Component {
     this.user = window.Pelcro.user.read();
 
     this.menuRef = React.createRef();
+    this.enableReactGA4 = window?.Pelcro?.uiSettings?.enableReactGA4;
   }
 
   componentDidMount = () => {
@@ -116,7 +115,7 @@ class Dashboard extends Component {
       name: "dashboard"
     });
 
-    if (enableReactGA4) {
+    if (this.enableReactGA4) {
       ReactGA4.event("Dashboard Modal Viewed", {
         nonInteraction: true
       });
@@ -166,7 +165,7 @@ class Dashboard extends Component {
           return onFailure?.(err);
         }
 
-        if (enableReactGA4) {
+        if (this.enableReactGA4) {
           ReactGA4.event("Canceled", {
             nonInteraction: true
           });
@@ -194,7 +193,7 @@ class Dashboard extends Component {
           return onFailure?.(err);
         }
 
-        if (enableReactGA4) {
+        if (this.enableReactGA4) {
           ReactGA4.event("UnSuspended", {
             nonInteraction: true
           });

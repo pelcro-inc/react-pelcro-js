@@ -2,11 +2,10 @@ import React from "react";
 import ReactGA from "react-ga";
 import ReactGA4 from "react-ga4";
 
-const enableReactGA4 = window?.Pelcro?.uiSettings?.enableReactGA4;
-
 export const Logout = (props) => {
   const handleLogout = () => {
     window.Pelcro.user.logout();
+    const enableReactGA4 = window?.Pelcro?.uiSettings?.enableReactGA4;
 
     if (enableReactGA4) {
       ReactGA4.event("Logged out", {

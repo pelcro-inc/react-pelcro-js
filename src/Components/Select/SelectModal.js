@@ -19,8 +19,6 @@ import {
 import ReactGA from "react-ga";
 import ReactGA4 from "react-ga4";
 
-const enableReactGA4 = window?.Pelcro?.uiSettings?.enableReactGA4;
-
 /**
  *
  */
@@ -121,6 +119,7 @@ class SelectModal extends Component {
       this.props.product || window.Pelcro.paywall.getProduct();
     this.locale = this.props.t;
     this.closeButton = window.Pelcro.paywall.displayCloseButton();
+    this.enableReactGA4 = window?.Pelcro?.uiSettings?.enableReactGA4;
   }
 
   componentDidMount = () => {
@@ -487,7 +486,7 @@ class SelectModal extends Component {
     const { disableGifting } = this.props;
 
     if (this.state.mode === "product") {
-      if (enableReactGA4) {
+      if (this.enableReactGA4) {
         ReactGA4.event("Product Modal Viewed", {
           nonInteraction: true
         });
@@ -499,7 +498,7 @@ class SelectModal extends Component {
         });
       }
     } else if (this.state.mode === "plan") {
-      if (enableReactGA4) {
+      if (this.enableReactGA4) {
         ReactGA4.event("Plan Modal Viewed", {
           nonInteraction: true
         });

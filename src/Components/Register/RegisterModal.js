@@ -12,8 +12,6 @@ import { RegisterView } from "./RegisterView";
 import ReactGA from "react-ga";
 import ReactGA4 from "react-ga4";
 
-const enableReactGA4 = window?.Pelcro?.uiSettings?.enableReactGA4;
-
 /**
  *
  */
@@ -31,6 +29,8 @@ export function RegisterModal(props) {
     giftCode,
     isGift
   } = usePelcro();
+
+  const enableReactGA4 = window?.Pelcro?.uiSettings?.enableReactGA4;
 
   const onSuccess = (res) => {
     props.onSuccess?.(res);

@@ -14,8 +14,6 @@ import i18n from "../../i18n";
 import ReactGA from "react-ga";
 import ReactGA4 from "react-ga4";
 
-const enableReactGA4 = window?.Pelcro?.uiSettings?.enableReactGA4;
-
 /**
  * @typedef {Object} OptionsType
  * @property {boolean} loadPaymentSDKs
@@ -201,6 +199,7 @@ export const initSecuritySdk = () => {
 };
 
 export const initGATracking = () => {
+  const enableReactGA4 = window?.Pelcro?.uiSettings?.enableReactGA4;
   if (window.Pelcro.site.read().google_analytics_id) {
     if (enableReactGA4) {
       // Initialize ReactGA4 with your tracking ID
@@ -219,16 +218,21 @@ export const initGATracking = () => {
           }
         }
       );
+      console.log("enableReactGA4: ", enableReactGA4);
+      console.log("GA4 is initialized");
     } else {
       ReactGA?.initialize?.(
         window.Pelcro.site.read().google_analytics_id
       );
       ReactGA?.plugin?.require?.("ecommerce");
+      console.log("enableReactGA4: " + enableReactGA4);
+      console.log("GA3 is initialized");
     }
   }
 };
 
 export const dispatchModalDisplayEvents = (modalName) => {
+  const enableReactGA4 = window?.Pelcro?.uiSettings?.enableReactGA4;
   const formattedAction = modalName
     ?.replace("pelcro-", "")
     ?.replaceAll("-", " ");
@@ -237,12 +241,14 @@ export const dispatchModalDisplayEvents = (modalName) => {
     ReactGA4.event(`${formattedAction} viewed`, {
       nonInteraction: true
     });
+    console.log("GA4 view event is fired");
   } else {
     ReactGA?.event?.({
       category: "VIEWS",
       action: `${formattedAction} viewed`,
       nonInteraction: true
     });
+    console.log("GA3 view event is fired");
   }
 
   window.Pelcro.insight.track("Modal Displayed", {
