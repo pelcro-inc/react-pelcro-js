@@ -52,6 +52,7 @@ export function RegisterModal(props) {
     ReactGA4?.event("Registered", {
       nonInteraction: true
     });
+    console.log("registered GA event is fired");
 
     const isEmailVerificationEnabled =
       window.Pelcro.site.read()?.email_verify_enabled ?? false;
