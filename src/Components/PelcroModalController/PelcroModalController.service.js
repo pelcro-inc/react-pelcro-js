@@ -14,8 +14,6 @@ import i18n from "../../i18n";
 import ReactGA from "react-ga";
 import ReactGA4 from "react-ga4";
 
-const enableReactGA4 = window?.Pelcro?.uiSettings?.enableReactGA4;
-
 /**
  * @typedef {Object} OptionsType
  * @property {boolean} loadPaymentSDKs
@@ -203,6 +201,7 @@ export const initSecuritySdk = () => {
 };
 
 export const initGATracking = () => {
+  const enableReactGA4 = window?.Pelcro?.uiSettings?.enableReactGA4;
   if (window.Pelcro.site.read().google_analytics_id) {
     if (enableReactGA4) {
       // Initialize ReactGA4 with your tracking ID
@@ -235,6 +234,7 @@ export const initGATracking = () => {
 };
 
 export const dispatchModalDisplayEvents = (modalName) => {
+  const enableReactGA4 = window?.Pelcro?.uiSettings?.enableReactGA4;
   const formattedAction = modalName
     ?.replace("pelcro-", "")
     ?.replaceAll("-", " ");
