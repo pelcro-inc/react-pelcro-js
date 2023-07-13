@@ -220,11 +220,15 @@ export const initGATracking = () => {
         }
       }
     );
+    console.log("enableReactGA4: ", enableReactGA4);
+    console.log("GA4 is initialized");
   } else {
     ReactGA?.initialize?.(
       window.Pelcro.site.read().google_analytics_id
     );
     ReactGA?.plugin?.require?.("ecommerce");
+    console.log("enableReactGA4: " + enableReactGA4);
+    console.log("GA3 is initialized");
   }
 };
 
@@ -237,12 +241,14 @@ export const dispatchModalDisplayEvents = (modalName) => {
     ReactGA4.event(`${formattedAction} viewed`, {
       nonInteraction: true
     });
+    console.log("GA4 view event is fired");
   } else {
     ReactGA?.event?.({
       category: "VIEWS",
       action: `${formattedAction} viewed`,
       nonInteraction: true
     });
+    console.log("GA3 view event is fired");
   }
 
   window.Pelcro.insight.track("Modal Displayed", {
