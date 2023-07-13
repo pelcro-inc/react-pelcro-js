@@ -1,3 +1,16 @@
+# [3.26.0-beta.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.2...v3.26.0-beta.3) (2023-07-13)
+
+
+### Bug Fixes
+
+* read enableReactGA4 var inside func ([2f6da6c](https://github.com/pelcro-inc/react-pelcro-js/commit/2f6da6ce997dc7161be029afb5b85c1534ff250a))
+* read enableReactGA4 var inside the functions ([e95f92e](https://github.com/pelcro-inc/react-pelcro-js/commit/e95f92efd4a80a7bd8a585cad208ac82a01843ef))
+
+
+### Features
+
+* fire console logs for ga ([9b35666](https://github.com/pelcro-inc/react-pelcro-js/commit/9b35666631b54dab7ca5e07b01ab3454ad0acdcd))
+
 # [3.26.0-beta.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.1...v3.26.0-beta.2) (2023-07-12)
 
 
