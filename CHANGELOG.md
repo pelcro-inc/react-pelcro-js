@@ -1,3 +1,10 @@
+# [3.26.0-sandbox.18](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-sandbox.17...v3.26.0-sandbox.18) (2023-07-13)
+
+
+### Features
+
+* fire console logs for ga ([9b35666](https://github.com/pelcro-inc/react-pelcro-js/commit/9b35666631b54dab7ca5e07b01ab3454ad0acdcd))
+
 # [3.26.0-sandbox.17](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-sandbox.16...v3.26.0-sandbox.17) (2023-07-12)
 
 
