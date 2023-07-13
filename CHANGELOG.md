@@ -1,3 +1,10 @@
+# [3.26.0-sandbox.19](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-sandbox.18...v3.26.0-sandbox.19) (2023-07-13)
+
+
+### Bug Fixes
+
+* read enableReactGA4 var inside func ([2f6da6c](https://github.com/pelcro-inc/react-pelcro-js/commit/2f6da6ce997dc7161be029afb5b85c1534ff250a))
+
 # [3.26.0-sandbox.18](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-sandbox.17...v3.26.0-sandbox.18) (2023-07-13)
 
 
