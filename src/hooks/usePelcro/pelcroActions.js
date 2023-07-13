@@ -8,8 +8,6 @@ import { cartItemAdded } from "../../utils/events";
 import ReactGA from "react-ga";
 import ReactGA4 from "react-ga4";
 
-const enableReactGA4 = window?.Pelcro?.uiSettings?.enableReactGA4;
-
 export class PelcroActions {
   constructor(storeSetter, storeGetter) {
     this.set = storeSetter;
@@ -223,6 +221,7 @@ export class PelcroActions {
 
   logout = (displayLogin = true) => {
     const { switchView, resetView, isAuthenticated } = this.get();
+    const enableReactGA4 = window?.Pelcro?.uiSettings?.enableReactGA4;
     // if user is not authenticated function execution is terminated
     if (!isAuthenticated()) {
       return console.warn("You are already logged out.");

@@ -9,10 +9,8 @@ import {
 } from "../../SubComponents/Modal";
 import Authorship from "../common/Authorship";
 import { RegisterView } from "./RegisterView";
-// import ReactGA from "react-ga";
+import ReactGA from "react-ga";
 import ReactGA4 from "react-ga4";
-
-// const enableReactGA4 = window?.Pelcro?.uiSettings?.enableReactGA4;
 
 /**
  *
@@ -32,27 +30,25 @@ export function RegisterModal(props) {
     isGift
   } = usePelcro();
 
+  const enableReactGA4 = window?.Pelcro?.uiSettings?.enableReactGA4;
+
   const onSuccess = (res) => {
     props.onSuccess?.(res);
     handleAfterRegistrationLogic();
   };
 
   const handleAfterRegistrationLogic = () => {
-    // if (enableReactGA4) {
-    //   ReactGA4.event("Registered", {
-    //     nonInteraction: true
-    //   });
-    // } else {
-    //   ReactGA?.event?.({
-    //     category: "ACTIONS",
-    //     action: "Registered",
-    //     nonInteraction: true
-    //   });
-    // }
-    ReactGA4?.event("Registered", {
-      nonInteraction: true
-    });
-    console.log("registered GA event is fired");
+    if (enableReactGA4) {
+      ReactGA4.event("Registered", {
+        nonInteraction: true
+      });
+    } else {
+      ReactGA?.event?.({
+        category: "ACTIONS",
+        action: "Registered",
+        nonInteraction: true
+      });
+    }
 
     const isEmailVerificationEnabled =
       window.Pelcro.site.read()?.email_verify_enabled ?? false;

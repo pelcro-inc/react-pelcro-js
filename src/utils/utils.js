@@ -3,8 +3,6 @@ import { usePelcro } from "../hooks/usePelcro";
 import ReactGA from "react-ga";
 import ReactGA4 from "react-ga4";
 
-const enableReactGA4 = window?.Pelcro?.uiSettings?.enableReactGA4;
-
 /**
  * List of zero-decimal currencies.
  * @see https://stripe.com/docs/currencies#zero-decimal
@@ -314,6 +312,7 @@ export const trackSubscriptionOnGA = () => {
   const { invoices } = window.Pelcro.user.read();
   const lastSubscriptionId =
     invoices?.[invoices.length - 1].subscription_id;
+  const enableReactGA4 = window?.Pelcro?.uiSettings?.enableReactGA4;
 
   if (!lastSubscriptionId) {
     return;

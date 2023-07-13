@@ -3,8 +3,6 @@ import { userMustVerifyEmail } from "../../../utils/utils";
 import ReactGA from "react-ga";
 import ReactGA4 from "react-ga4";
 
-const enableReactGA4 = window?.Pelcro?.uiSettings?.enableReactGA4;
-
 class SaveToMetadataButtonClass {
   init() {
     if (window.Pelcro.user.read().metadata) {
@@ -124,6 +122,7 @@ class SaveToMetadataButtonClass {
     const user = window.Pelcro.user.read();
     const { switchView } = usePelcro.getStore();
     const { key, ...buttonMetadata } = button.dataset;
+    const enableReactGA4 = window?.Pelcro?.uiSettings?.enableReactGA4;
 
     if (userMustVerifyEmail()) {
       return switchView("email-verify");
@@ -184,6 +183,7 @@ class SaveToMetadataButtonClass {
     const user = window.Pelcro.user.read();
     const { key, title } = button.dataset;
     const oldValue = user.metadata[`metadata_saved_${key}`];
+    const enableReactGA4 = window?.Pelcro?.uiSettings?.enableReactGA4;
 
     const newMetadataValue = oldValue.filter(
       (metadata) => !(metadata?.title === title)

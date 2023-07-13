@@ -9,9 +9,8 @@ import Authorship from "../common/Authorship";
 import ReactGA from "react-ga";
 import ReactGA4 from "react-ga4";
 
-const enableReactGA4 = window?.Pelcro?.uiSettings?.enableReactGA4;
-
 export const PaymentMethodUpdateModal = (props) => {
+  const enableReactGA4 = window?.Pelcro?.uiSettings?.enableReactGA4;
   const onSuccess = (res) => {
     props.onSuccess?.(res);
     if (enableReactGA4) {

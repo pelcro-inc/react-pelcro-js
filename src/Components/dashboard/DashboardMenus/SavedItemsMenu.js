@@ -8,8 +8,6 @@ import { Accordion } from "../Accordion";
 import ReactGA from "react-ga";
 import ReactGA4 from "react-ga4";
 
-const enableReactGA4 = window?.Pelcro?.uiSettings?.enableReactGA4;
-
 export const SavedItemsMenu = () => {
   const { t } = useTranslation("dashboard");
   const [userMetadata, setUserMetadata] = useState(
@@ -73,6 +71,7 @@ export const SavedItems = ({
   const removeItemFromMetadata = (category, title) => {
     const user = window.Pelcro.user.read();
     const oldValue = user.metadata[`metadata_saved_${category}`];
+    const enableReactGA4 = window?.Pelcro?.uiSettings?.enableReactGA4;
 
     const newMetadataValue = oldValue.filter(
       (metadata) => !(metadata?.title === title)
