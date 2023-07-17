@@ -5,10 +5,8 @@ import { usePelcro } from "../../../hooks/usePelcro";
 import { Button } from "../../../SubComponents/Button";
 import { Link } from "../../../SubComponents/Link";
 import { Accordion } from "../Accordion";
-import { default as ReactGA1 } from "react-ga";
-import { default as ReactGA4 } from "react-ga4";
-
-const ReactGA = window?.Pelcro?.uiSettings?.enableReactGA4 ? ReactGA4 : ReactGA1;
+import ReactGA from "react-ga";
+import ReactGA4 from "react-ga4";
 
 export const SavedItemsMenu = () => {
   const { t } = useTranslation("dashboard");
@@ -73,6 +71,7 @@ export const SavedItems = ({
   const removeItemFromMetadata = (category, title) => {
     const user = window.Pelcro.user.read();
     const oldValue = user.metadata[`metadata_saved_${category}`];
+    const enableReactGA4 = window?.Pelcro?.uiSettings?.enableReactGA4;
 
     const newMetadataValue = oldValue.filter(
       (metadata) => !(metadata?.title === title)
@@ -93,11 +92,17 @@ export const SavedItems = ({
           }
 
           setItems(response?.data?.metadata);
-          ReactGA?.event?.({
-            category: "ACTIONS",
-            action: "Unsave/Unfollow",
-            label: title
-          });
+          if (enableReactGA4) {
+            ReactGA4.event("Unsave/Unfollow", {
+              event_label: title
+            });
+          } else {
+            ReactGA?.event?.({
+              category: "ACTIONS",
+              action: "Unsave/Unfollow",
+              label: title
+            });
+          }
         }
       );
     }

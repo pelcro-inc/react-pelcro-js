@@ -11,12 +11,8 @@ import { loadStripe } from "@stripe/stripe-js/pure";
 import { notify } from "../../SubComponents/Notification";
 import { getErrorMessages } from "../common/Helpers";
 import i18n from "../../i18n";
-import { default as ReactGA1 } from "react-ga";
-import { default as ReactGA4 } from "react-ga4";
-
-const ReactGA = window?.Pelcro?.uiSettings?.enableReactGA4
-  ? ReactGA4
-  : ReactGA1;
+import ReactGA from "react-ga";
+import ReactGA4 from "react-ga4";
 
 /**
  * @typedef {Object} OptionsType
@@ -205,22 +201,51 @@ export const initSecuritySdk = () => {
 };
 
 export const initGATracking = () => {
+  const enableReactGA4 = window?.Pelcro?.uiSettings?.enableReactGA4;
   if (window.Pelcro.site.read().google_analytics_id) {
-    ReactGA?.initialize?.(
-      window.Pelcro.site.read().google_analytics_id
-    );
-    ReactGA?.plugin?.require?.("ecommerce");
+    if (enableReactGA4) {
+      // Initialize ReactGA4 with your tracking ID
+      ReactGA4.initialize(
+        window.Pelcro.site.read().google_analytics_id
+      );
+      // Enable e-commerce tracking
+      ReactGA4.initialize(
+        window.Pelcro.site.read().google_analytics_id,
+        {
+          gaOptions: {
+            send_page_view: true,
+            ecommerce: {
+              enabled: true
+            }
+          }
+        }
+      );
+    } else {
+      ReactGA?.initialize?.(
+        window.Pelcro.site.read().google_analytics_id
+      );
+      ReactGA?.plugin?.require?.("ecommerce");
+    }
   }
 };
 
 export const dispatchModalDisplayEvents = (modalName) => {
-  ReactGA?.event?.({
-    category: "VIEWS",
-    action: `${modalName
-      ?.replace("pelcro-", "")
-      ?.replaceAll("-", " ")} viewed`,
-    nonInteraction: true
-  });
+  const enableReactGA4 = window?.Pelcro?.uiSettings?.enableReactGA4;
+  const formattedAction = modalName
+    ?.replace("pelcro-", "")
+    ?.replaceAll("-", " ");
+
+  if (enableReactGA4) {
+    ReactGA4.event(`${formattedAction} viewed`, {
+      nonInteraction: true
+    });
+  } else {
+    ReactGA?.event?.({
+      category: "VIEWS",
+      action: `${formattedAction} viewed`,
+      nonInteraction: true
+    });
+  }
 
   window.Pelcro.insight.track("Modal Displayed", {
     name: `${modalName?.replace("pelcro-", "")?.replaceAll("-", " ")}`

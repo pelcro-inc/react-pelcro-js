@@ -9,10 +9,8 @@ import {
 } from "../../SubComponents/Modal";
 import Authorship from "../common/Authorship";
 import { RegisterView } from "./RegisterView";
-import { default as ReactGA1 } from "react-ga";
-import { default as ReactGA4 } from "react-ga4";
-
-const ReactGA = window?.Pelcro?.uiSettings?.enableReactGA4 ? ReactGA4 : ReactGA1;
+import ReactGA from "react-ga";
+import ReactGA4 from "react-ga4";
 
 /**
  *
@@ -32,17 +30,25 @@ export function RegisterModal(props) {
     isGift
   } = usePelcro();
 
+  const enableReactGA4 = window?.Pelcro?.uiSettings?.enableReactGA4;
+
   const onSuccess = (res) => {
     props.onSuccess?.(res);
     handleAfterRegistrationLogic();
   };
 
   const handleAfterRegistrationLogic = () => {
-    ReactGA?.event?.({
-      category: "ACTIONS",
-      action: "Registered",
-      nonInteraction: true
-    });
+    if (enableReactGA4) {
+      ReactGA4.event("Registered", {
+        nonInteraction: true
+      });
+    } else {
+      ReactGA?.event?.({
+        category: "ACTIONS",
+        action: "Registered",
+        nonInteraction: true
+      });
+    }
 
     const isEmailVerificationEnabled =
       window.Pelcro.site.read()?.email_verify_enabled ?? false;
@@ -78,7 +84,7 @@ export function RegisterModal(props) {
         return switchToPaymentView();
       }
     }
-    
+
     if (product && !plan) {
       return switchView("plan-select");
     }

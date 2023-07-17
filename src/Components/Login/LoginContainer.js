@@ -1,6 +1,7 @@
 import React, { createContext } from "react";
 import { useTranslation } from "react-i18next";
 import ReactGA from "react-ga";
+import ReactGA4 from "react-ga4";
 import useReducerWithSideEffects, {
   UpdateWithSideEffect,
   Update,
@@ -44,7 +45,7 @@ const LoginContainer = ({
   onFailure = () => {},
   children
 }) => {
-  
+  const enableReactGA4 = window?.Pelcro?.uiSettings?.enableReactGA4;
   const handleLogin = ({ email, username, password }, dispatch) => {
     window.Pelcro.user.login(
       {
@@ -63,11 +64,17 @@ const LoginContainer = ({
           onFailure(err);
         } else {
           onSuccess(res);
-          ReactGA?.event?.({
-            category: "ACTIONS",
-            action: "Logged in",
-            nonInteraction: true
-          });
+          if (enableReactGA4) {
+            ReactGA4.event("Logged in", {
+              nonInteraction: true
+            });
+          } else {
+            ReactGA?.event?.({
+              category: "ACTIONS",
+              action: "Logged in",
+              nonInteraction: true
+            });
+          }
         }
       }
     );
