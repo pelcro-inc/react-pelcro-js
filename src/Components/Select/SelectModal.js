@@ -16,10 +16,8 @@ import {
   getEntitlementsFromElem,
   notifyBugsnag
 } from "../../utils/utils";
-import { default as ReactGA1 } from "react-ga";
-import { default as ReactGA4 } from "react-ga4";
-
-const ReactGA = window?.Pelcro?.uiSettings?.enableReactGA4 ? ReactGA4 : ReactGA1;
+import ReactGA from "react-ga";
+import ReactGA4 from "react-ga4";
 
 /**
  *
@@ -94,7 +92,8 @@ function productMatchPageLanguage(product) {
     return true;
   }
 
-  const siteLanguage = window.Pelcro.helpers.getHtmlLanguageAttribute();
+  const siteLanguage =
+    window.Pelcro.helpers.getHtmlLanguageAttribute();
   return product.language === siteLanguage;
 }
 
@@ -120,6 +119,7 @@ class SelectModal extends Component {
       this.props.product || window.Pelcro.paywall.getProduct();
     this.locale = this.props.t;
     this.closeButton = window.Pelcro.paywall.displayCloseButton();
+    this.enableReactGA4 = window?.Pelcro?.uiSettings?.enableReactGA4;
   }
 
   componentDidMount = () => {
@@ -478,17 +478,29 @@ class SelectModal extends Component {
     const { disableGifting } = this.props;
 
     if (this.state.mode === "product") {
-      ReactGA?.event?.({
-        category: "VIEWS",
-        action: "Product Modal Viewed",
-        nonInteraction: true
-      });
+      if (this.enableReactGA4) {
+        ReactGA4.event("Product Modal Viewed", {
+          nonInteraction: true
+        });
+      } else {
+        ReactGA?.event?.({
+          category: "VIEWS",
+          action: "Product Modal Viewed",
+          nonInteraction: true
+        });
+      }
     } else if (this.state.mode === "plan") {
-      ReactGA?.event?.({
-        category: "VIEWS",
-        action: "Plan Modal Viewed",
-        nonInteraction: true
-      });
+      if (this.enableReactGA4) {
+        ReactGA4.event("Plan Modal Viewed", {
+          nonInteraction: true
+        });
+      } else {
+        ReactGA?.event?.({
+          category: "VIEWS",
+          action: "Plan Modal Viewed",
+          nonInteraction: true
+        });
+      }
     }
 
     return (
