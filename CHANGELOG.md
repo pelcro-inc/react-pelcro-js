@@ -1,3 +1,10 @@
+## [3.26.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0...v3.26.1) (2023-07-17)
+
+
+### Bug Fixes
+
+* initialise reactga bug fix ([#326](https://github.com/pelcro-inc/react-pelcro-js/issues/326)) ([cd10682](https://github.com/pelcro-inc/react-pelcro-js/commit/cd106829016699fa78368dc1bf0b66ca8606a8db))
+
 # [3.26.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.25.1...v3.26.0) (2023-07-06)
 
 
