@@ -202,28 +202,30 @@ export const initSecuritySdk = () => {
 
 export const initGATracking = () => {
   const enableReactGA4 = window?.Pelcro?.uiSettings?.enableReactGA4;
-  if (enableReactGA4) {
-    // Initialize ReactGA4 with your tracking ID
-    ReactGA4.initialize(
-      window.Pelcro.site.read().google_analytics_id
-    );
-    // Enable e-commerce tracking
-    ReactGA4.initialize(
-      window.Pelcro.site.read().google_analytics_id,
-      {
-        gaOptions: {
-          send_page_view: true,
-          ecommerce: {
-            enabled: true
+  if (window.Pelcro.site.read().google_analytics_id) {
+    if (enableReactGA4) {
+      // Initialize ReactGA4 with your tracking ID
+      ReactGA4.initialize(
+        window.Pelcro.site.read().google_analytics_id
+      );
+      // Enable e-commerce tracking
+      ReactGA4.initialize(
+        window.Pelcro.site.read().google_analytics_id,
+        {
+          gaOptions: {
+            send_page_view: true,
+            ecommerce: {
+              enabled: true
+            }
           }
         }
-      }
-    );
-  } else {
-    ReactGA?.initialize?.(
-      window.Pelcro.site.read().google_analytics_id
-    );
-    ReactGA?.plugin?.require?.("ecommerce");
+      );
+    } else {
+      ReactGA?.initialize?.(
+        window.Pelcro.site.read().google_analytics_id
+      );
+      ReactGA?.plugin?.require?.("ecommerce");
+    }
   }
 };
 
