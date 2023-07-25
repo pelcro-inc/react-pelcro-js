@@ -1,3 +1,10 @@
+# [3.26.0-sandbox.22](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-sandbox.21...v3.26.0-sandbox.22) (2023-07-25)
+
+
+### Bug Fixes
+
+* add optional chaining ([da3cfbd](https://github.com/pelcro-inc/react-pelcro-js/commit/da3cfbd7e9d55368119fc1045a5ceaa2c01a546e))
+
 # [3.26.0-sandbox.21](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-sandbox.20...v3.26.0-sandbox.21) (2023-07-25)
 
 
