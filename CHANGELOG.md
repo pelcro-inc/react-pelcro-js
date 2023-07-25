@@ -1,3 +1,17 @@
+# [3.26.0-beta.4](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.3...v3.26.0-beta.4) (2023-07-25)
+
+
+### Bug Fixes
+
+* add optional chaining ([da3cfbd](https://github.com/pelcro-inc/react-pelcro-js/commit/da3cfbd7e9d55368119fc1045a5ceaa2c01a546e))
+* handle NaN exception ([4e995d1](https://github.com/pelcro-inc/react-pelcro-js/commit/4e995d1305f092752d4e46f2d5f070aa1f0bb938))
+* initialise reactga bug fix ([#326](https://github.com/pelcro-inc/react-pelcro-js/issues/326)) ([cd10682](https://github.com/pelcro-inc/react-pelcro-js/commit/cd106829016699fa78368dc1bf0b66ca8606a8db))
+
+
+### Features
+
+* future cancellation options ([3677a0a](https://github.com/pelcro-inc/react-pelcro-js/commit/3677a0a7fdd5c5c54c6c6009b5fc6733868fcd46))
+
 # [3.26.0-beta.3](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.2...v3.26.0-beta.3) (2023-07-13)
 
 
