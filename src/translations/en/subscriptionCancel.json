@@ -2,12 +2,16 @@
   "labels": {
     "title": "Cancel subscription",
     "cancelReason": "Cancellation reason",
+    "endOn": "End on",
+    "endImmediately": "End immediately",
+    "cancel": "Cancel",
     "subCancellation": {
       "goBack": "Go back"
     }
   },
   "messages": {
     "subscriptionEnd": "This subscription is set to expire on",
+    "cancelWhen": "When would you like to cancel?",
     "cancelNow": "Cancel Subscription Now",
     "cancelLater": "Cancel at Period End",
     "subCancellation": {
