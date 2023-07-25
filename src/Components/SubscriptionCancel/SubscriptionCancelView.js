@@ -36,7 +36,7 @@ export const SubscriptionCancelView = (props) => {
   const hasPhases = getPhases().length > 0;
 
   const phases = subscriptionToCancel?.schedule?.phases;
-  const lastPhase = phases[phases?.length - 1];
+  const lastPhase = !phases ? [] : phases[phases?.length - 1];
 
   return (
     <div id="pelcro-subscription-cancel-view">

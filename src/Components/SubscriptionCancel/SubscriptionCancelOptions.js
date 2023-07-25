@@ -18,7 +18,7 @@ export const SubscriptionCancelOptions = ({
   const { t } = useTranslation("subscriptionCancel");
 
   const phases = subscription?.schedule?.phases;
-  const lastPhase = phases[phases?.length - 1];
+  const lastPhase = !phases ? [] : phases[phases?.length - 1];
 
   const handleOptionSelect = (event) => {
     dispatch({
