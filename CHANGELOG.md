@@ -1,3 +1,10 @@
+# [3.26.0-sandbox.23](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-sandbox.22...v3.26.0-sandbox.23) (2023-07-25)
+
+
+### Bug Fixes
+
+* handle NaN exception ([4e995d1](https://github.com/pelcro-inc/react-pelcro-js/commit/4e995d1305f092752d4e46f2d5f070aa1f0bb938))
+
 # [3.26.0-sandbox.22](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-sandbox.21...v3.26.0-sandbox.22) (2023-07-25)
 
 
