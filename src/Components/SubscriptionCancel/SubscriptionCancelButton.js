@@ -7,7 +7,7 @@ import { notify } from "../../SubComponents/Notification";
 import ReactGA from "react-ga";
 import ReactGA4 from "react-ga4";
 
-export const SubscriptionCancelNowButton = ({
+export const SubscriptionCancelButton = ({
   subscription,
   onClick,
   className
@@ -15,8 +15,7 @@ export const SubscriptionCancelNowButton = ({
   const { switchView } = usePelcro();
 
   const {
-    state: { cancelationReason },
-    dispatch
+    state: { cancelationReason, cancelationOption }
   } = useContext(store);
 
   const { t } = useTranslation("subscriptionCancel");
@@ -51,10 +50,10 @@ export const SubscriptionCancelNowButton = ({
     );
   };
 
-  const handleCancelNowClick = () => {
+  const handleCancelClick = () => {
     const payload = {
       subscription_id: subscription.id,
-      mode: "now",
+      mode: cancelationOption,
       ...(cancelationReason && { reason: cancelationReason })
     };
 
@@ -69,9 +68,10 @@ export const SubscriptionCancelNowButton = ({
         cancelSubscription(payload, onSuccess, onFailure);
       },
       {
-        confirmMessage: t(
-          "messages.subCancellation.isSureToCancelNow"
-        ),
+        confirmMessage:
+          cancelationOption === "now"
+            ? t("messages.subCancellation.isSureToCancelNow")
+            : t("messages.subCancellation.isSureToCancel"),
         loadingMessage: t("messages.subCancellation.loading"),
         successMessage: t("messages.subCancellation.success"),
         errorMessage: t("messages.subCancellation.error")
@@ -83,8 +83,12 @@ export const SubscriptionCancelNowButton = ({
   };
 
   return (
-    <Button onClick={handleCancelNowClick} className={`${className}`}>
-      {t("messages.cancelNow")}
+    <Button
+      onClick={handleCancelClick}
+      className={`${className}`}
+      disabled={!cancelationOption}
+    >
+      {t("labels.cancel")}
     </Button>
   );
 };
