@@ -1,3 +1,15 @@
+# [3.26.0-sandbox.21](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-sandbox.20...v3.26.0-sandbox.21) (2023-07-25)
+
+
+### Bug Fixes
+
+* initialise reactga bug fix ([#326](https://github.com/pelcro-inc/react-pelcro-js/issues/326)) ([cd10682](https://github.com/pelcro-inc/react-pelcro-js/commit/cd106829016699fa78368dc1bf0b66ca8606a8db))
+
+
+### Features
+
+* future cancellation options ([3677a0a](https://github.com/pelcro-inc/react-pelcro-js/commit/3677a0a7fdd5c5c54c6c6009b5fc6733868fcd46))
+
 # [3.26.0-sandbox.20](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-sandbox.19...v3.26.0-sandbox.20) (2023-07-13)
 
 
