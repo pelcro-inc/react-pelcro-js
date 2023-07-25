@@ -1,12 +1,15 @@
 import React, { createContext } from "react";
-import { useTranslation } from "react-i18next";
 import useReducerWithSideEffects, {
   Update
 } from "use-reducer-with-side-effects";
-import {SET_CANCEL_SUBSCRIPTION_REASON} from "../../utils/action-types";
+import {
+  SET_CANCEL_SUBSCRIPTION_REASON,
+  SET_CANCEL_SUBSCRIPTION_OPTION
+} from "../../utils/action-types";
 
 const initialState = {
   cancelationReason: "",
+  cancelationOption: ""
 };
 const store = createContext(initialState);
 const { Provider } = store;
@@ -19,8 +22,6 @@ const SubscriptionCancelContainer = ({
   children,
   ...props
 }) => {
-  const { t } = useTranslation("verifyEmail");
-
   const [state, dispatch] = useReducerWithSideEffects(
     (state, action) => {
       switch (action.type) {
@@ -29,7 +30,12 @@ const SubscriptionCancelContainer = ({
             ...state,
             cancelationReason: action.payload
           });
-          
+        case SET_CANCEL_SUBSCRIPTION_OPTION:
+          return Update({
+            ...state,
+            cancelationOption: action.payload
+          });
+
         default:
           return state;
       }
