@@ -17,27 +17,26 @@ export const SubscriptionCancelView = (props) => {
     if (!subscriptionToCancel.schedule) return [];
 
     const currentPhaseStartDate =
-      subscriptionToCancel.schedule.current_phase.start_date;
+      subscriptionToCancel?.schedule?.current_phase?.start_date;
 
-    const currentPhase = subscriptionToCancel.schedule.phases.find(
+    const currentPhase = subscriptionToCancel?.schedule?.phases?.find(
       (phase) => {
-        return phase.start_date === currentPhaseStartDate;
+        return phase?.start_date === currentPhaseStartDate;
       }
     );
 
-    const futurePhases = subscriptionToCancel.schedule.phases.filter(
-      (phase) => {
-        return phase.start_date > currentPhaseStartDate;
-      }
-    );
+    const futurePhases =
+      subscriptionToCancel?.schedule?.phases?.filter((phase) => {
+        return phase?.start_date > currentPhaseStartDate;
+      });
 
     return [currentPhase, ...futurePhases];
   };
 
   const hasPhases = getPhases().length > 0;
 
-  const phases = subscriptionToCancel.schedule.phases;
-  const lastPhase = phases[phases.length - 1];
+  const phases = subscriptionToCancel?.schedule?.phases;
+  const lastPhase = phases[phases?.length - 1];
 
   return (
     <div id="pelcro-subscription-cancel-view">
@@ -45,7 +44,7 @@ export const SubscriptionCancelView = (props) => {
         <h4 className="plc-text-2xl plc-font-semibold">
           {t("labels.title")}
           <span className="plc-text-gray-400 plc-text-base plc-block">
-            ({subscriptionToCancel.plan.nickname})
+            ({subscriptionToCancel?.plan?.nickname})
           </span>
         </h4>
       </div>
@@ -56,7 +55,7 @@ export const SubscriptionCancelView = (props) => {
             {t("messages.subscriptionEnd")}{" "}
             {hasPhases
               ? new Date(
-                  Number(`${lastPhase.end_date}000`)
+                  Number(`${lastPhase?.end_date}000`)
                 ).toLocaleDateString("en-CA", {
                   year: "numeric",
                   month: "short",

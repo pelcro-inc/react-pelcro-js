@@ -17,8 +17,8 @@ export const SubscriptionCancelOptions = ({
 
   const { t } = useTranslation("subscriptionCancel");
 
-  const phases = subscription.schedule.phases;
-  const lastPhase = phases[phases.length - 1];
+  const phases = subscription?.schedule?.phases;
+  const lastPhase = phases[phases?.length - 1];
 
   const handleOptionSelect = (event) => {
     dispatch({
@@ -38,7 +38,7 @@ export const SubscriptionCancelOptions = ({
         >
           {t("labels.endOn")}{" "}
           {new Date(
-            Number(`${lastPhase.end_date}000`)
+            Number(`${lastPhase?.end_date}000`)
           ).toLocaleDateString("en-CA", {
             year: "numeric",
             month: "short",
