@@ -27,6 +27,7 @@ import {
   getFormattedPriceByLocal,
   getPageOrDefaultLanguage
 } from "../../utils/utils";
+import { ApplePayButton } from "./ApplePay";
 
 /**
  *
@@ -178,6 +179,7 @@ export function PaymentMethodView({
               {/* Payment buttons section */}
               <div className="plc-grid plc-mt-4 plc-gap-y-2">
                 <SubmitPaymentMethod />
+                <ApplePayButton />
                 {showExternalPaymentMethods &&
                 !supportsVantiv &&
                 !supportsCybersource &&

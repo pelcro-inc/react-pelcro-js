@@ -102,6 +102,11 @@ export const loadPaymentSDKs = () => {
     }
   });
 
+  window.Pelcro.helpers.loadSDK(
+    "https://applepay.cdn-apple.com/jsapi/v1/apple-pay-sdk.js",
+    "apple-pay-sdk"
+  );
+
   // Load PayPal SDKs
   const supportsPaypal = Boolean(
     window.Pelcro.site.read().braintree_tokenization

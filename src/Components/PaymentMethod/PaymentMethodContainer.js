@@ -167,7 +167,7 @@ const PaymentMethodContainerWithoutStripe = ({
     updateTotalAmountWithTax();
   }, []);
 
-  /*====== Start Cybersource integration ========*/
+  /* ====== Start Cybersource integration ======== */
   const cybersourceErrorHandle = (err) => {
     if (err?.details?.responseStatus?.details?.length > 0) {
       const errorMessages = [];
@@ -484,9 +484,9 @@ const PaymentMethodContainerWithoutStripe = ({
     );
   };
 
-  /*====== End Cybersource integration ========*/
+  /* ====== End Cybersource integration ======== */
 
-  /*====== Start Tap integration ========*/
+  /* ====== Start Tap integration ======== */
   const submitUsingTap = (state) => {
     const isUsingExistingPaymentMethod = Boolean(
       selectedPaymentMethodId
@@ -821,31 +821,31 @@ const PaymentMethodContainerWithoutStripe = ({
       cardHolder: "Card Holder Name"
     };
 
-    //payment options
+    // payment options
     let paymentOptions = {
       labels: labels,
       TextDirection: "ltr"
     };
 
-    //create element, pass style and payment options
+    // create element, pass style and payment options
     let card = elements.create(
       "card",
       { style: style },
       paymentOptions
     );
 
-    //mount element
+    // mount element
     card.mount("#tapPaymentIframe");
 
-    //card change event listener
+    // card change event listener
     card.addEventListener("change", function (event) {
-      //If needed
+      // If needed
     });
 
     tapInstanceRef.current = tapKey;
     tapInstanceCard.current = card;
   };
-  /*====== End Tap integration ========*/
+  /* ====== End Tap integration ======== */
 
   const submitUsingVantiv = (state) => {
     const isUsingExistingPaymentMethod = Boolean(
@@ -1088,7 +1088,7 @@ const PaymentMethodContainerWithoutStripe = ({
     }
   }, [selectedPaymentMethodId]);
 
-  //Trigger the handleVantivPayment method when a vantivePaymentRequest is present
+  // Trigger the handleVantivPayment method when a vantivPaymentRequest is present
   useEffect(() => {
     if (vantivPaymentRequest) {
       handleVantivPayment(vantivPaymentRequest, updatedCouponCode);
@@ -1258,7 +1258,7 @@ const PaymentMethodContainerWithoutStripe = ({
       if (err) {
         onFailure(err);
 
-        //reset the coupon code in local state
+        // reset the coupon code in local state
         setUpdatedCouponCode("");
 
         dispatch({
@@ -1318,7 +1318,7 @@ const PaymentMethodContainerWithoutStripe = ({
         payload: res.data.coupon
       });
 
-      //set the coupon code in local state to be able to use with Vantiv
+      // set the coupon code in local state to be able to use with Vantiv
       setUpdatedCouponCode(res.data.coupon.code);
 
       dispatch({
@@ -1406,7 +1406,7 @@ const PaymentMethodContainerWithoutStripe = ({
   const removeAppliedCoupon = (state) => {
     state.couponCode = "";
 
-    //reset the coupon code in local state
+    // reset the coupon code in local state
     setUpdatedCouponCode("");
 
     dispatch({ type: SET_COUPON_ERROR, payload: "" });
