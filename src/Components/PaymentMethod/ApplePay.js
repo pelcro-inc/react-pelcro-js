@@ -23,7 +23,11 @@ export const ApplePayButton = ({ onClick, props, ...otherProps }) => {
     }
 
     if (window.ApplePaySession) {
+
+      // @todo - Should not be hardcoded
       const merchantIdentifier = "merchant.pelcro.prelive";
+
+      // Indicates whether the device supports Apple Pay and whether the user has an active card in Wallet.
       const promise = ApplePaySession.canMakePaymentsWithActiveCard(
         merchantIdentifier
       );
@@ -35,9 +39,10 @@ export const ApplePayButton = ({ onClick, props, ...otherProps }) => {
     }
 
     // Define ApplePayPaymentRequest
+    // @see https://developer.apple.com/documentation/apple_pay_on_the_web/apple_pay_js_api/creating_an_apple_pay_session
     const request = {
-      countryCode: "CA",
-      currencyCode: "CAD",
+      countryCode: "US",
+      currencyCode: "USD",
       merchantCapabilities: ["supports3DS"],
       supportedNetworks: ["visa", "masterCard", "amex", "discover"],
       total: {
@@ -48,7 +53,12 @@ export const ApplePayButton = ({ onClick, props, ...otherProps }) => {
     };
 
     // Create ApplePaySession
+    // @todo - Clarify supported version parameter
+    // @odo - Apple Pay demo uses version 6 (https://applepaydemo.apple.com/)
     const session = new ApplePaySession(3, request);
+
+    // @todo - Detect whether web browser supports a particular Apple Pay version.
+    // @see https://developer.apple.com/documentation/apple_pay_on_the_web/applepaysession/1778014-supportsversion
 
     session.onvalidatemerchant = async (event) => {
       // Call your own server to request a new merchant session.
