@@ -1,3 +1,10 @@
+# [3.26.0-beta.5](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.4...v3.26.0-beta.5) (2023-07-27)
+
+
+### Bug Fixes
+
+* cancel current period if auto renew enabled ([c0edef6](https://github.com/pelcro-inc/react-pelcro-js/commit/c0edef64bb54b08972cc977d8292cb0d029b24ef))
+
 # [3.26.0-beta.4](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.3...v3.26.0-beta.4) (2023-07-25)
 
 
