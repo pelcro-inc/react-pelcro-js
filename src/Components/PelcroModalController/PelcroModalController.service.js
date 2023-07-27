@@ -67,21 +67,30 @@ export const initPaywalls = () => {
       return;
     }
 
-    const { switchView } = usePelcro.getStore();
+    const { switchView, isAuthenticated } = usePelcro.getStore();
 
-    if (paywallMethods?.displayMeterPaywall()) {
-      /* 
-        showing both the meter and the entitlements notification doesn't make sense from
-        a product prespective + they would take half the screen on mobile devies, so we're
-        not showing the meter, and only showing the entitlements notification.
-        */
-      if (!didBlurContent) {
-        switchView("meter");
+    function displayPaywalls() {
+      if (paywallMethods?.displayMeterPaywall()) {
+        /* 
+          showing both the meter and the entitlements notification doesn't make sense from
+          a product prespective + they would take half the screen on mobile devies, so we're
+          not showing the meter, and only showing the entitlements notification.
+          */
+        if (!didBlurContent) {
+          switchView("meter");
+        }
+      } else if (paywallMethods?.displayNewsletterPaywall()) {
+        switchView("newsletter");
+      } else if (paywallMethods?.displayPaywall()) {
+        switchView("plan-select");
       }
-    } else if (paywallMethods?.displayNewsletterPaywall()) {
-      switchView("newsletter");
-    } else if (paywallMethods?.displayPaywall()) {
-      switchView("plan-select");
+    }
+    if (isAuthenticated()) {
+      addEventListener("PelcroUserLoaded", function () {
+        displayPaywalls();
+      })
+    } else {
+      displayPaywalls();
     }
   }
 };
@@ -162,7 +171,7 @@ export const loadPaymentSDKs = () => {
 export const loadAuth0SDK = () => {
   const auth0Enabled = Boolean(
     window.Pelcro.site.read().auth0_client_id &&
-      window.Pelcro.site.read().auth0_base_url
+    window.Pelcro.site.read().auth0_base_url
   );
 
   if (auth0Enabled) {
@@ -176,7 +185,7 @@ export const loadAuth0SDK = () => {
 export const load = () => {
   const auth0Enabled = Boolean(
     window.Pelcro.site.read().auth0_client_id &&
-      window.Pelcro.site.read().auth0_base_url
+    window.Pelcro.site.read().auth0_base_url
   );
 
   if (auth0Enabled) {
