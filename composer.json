@@ -1,0 +1,5 @@
+{
+    "require-dev": {
+        "beyondcode/expose": "^2.0"
+    }
+}
