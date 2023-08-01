@@ -2,12 +2,16 @@
   "labels": {
     "title": "Annuler l'abonnement",
     "cancelReason": "Motif d'annulation",
+    "endOn": "Fin sur",
+    "endImmediately": "Fin immédiate",
+    "cancel": "Annuler",
     "subCancellation": {
       "goBack": "Retourner"
     }
   },
   "messages": {
     "subscriptionEnd": "Cet abonnement doit expirer le",
+    "cancelWhen": "Quand voulez-vous annuler?",
     "cancelNow": "Cancel Subscription Now",
     "cancelLater": "Annuler l'abonnement maintenant",
     "subCancellation": {
