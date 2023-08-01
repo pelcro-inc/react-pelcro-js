@@ -1,3 +1,10 @@
+# [3.27.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.1...v3.27.0) (2023-08-01)
+
+
+### Features
+
+* add comment ([#330](https://github.com/pelcro-inc/react-pelcro-js/issues/330)) ([a73796e](https://github.com/pelcro-inc/react-pelcro-js/commit/a73796ef8f03ddcdc78a30b488d9df6ce6a4d0a9))
+
 ## [3.26.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0...v3.26.1) (2023-07-17)
 
 
