@@ -45,7 +45,8 @@ import {
   SET_FIRST_NAME_ERROR,
   SET_LAST_NAME_ERROR,
   SET_PHONE_ERROR,
-  UPDATE_CYBERSOURCE_SESSION_ID
+  UPDATE_CYBERSOURCE_SESSION_ID,
+  HANDLE_APPLEPAY_SUBSCRIPTION
 } from "../../utils/action-types";
 import {
   getErrorMessages,
@@ -2225,6 +2226,11 @@ const PaymentMethodContainerWithoutStripe = ({
             } else {
               handlePaypalSubscription(state, action.payload);
             }
+          });
+
+        case HANDLE_APPLEPAY_SUBSCRIPTION:
+          return UpdateWithSideEffect(state, (state, dispatch) => {
+            setVantivPaymentRequest(action.payload);
           });
 
         case SET_UPDATED_PRICE:
