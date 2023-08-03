@@ -27,6 +27,7 @@ import {
   getFormattedPriceByLocal,
   getPageOrDefaultLanguage
 } from "../../utils/utils";
+import { ApplePayButton } from "../ApplePayButton/ApplePayButton";
 
 /**
  *
@@ -188,6 +189,7 @@ export function PaymentMethodView({
                   </>
                 ) : showExternalPaymentMethods && supportsVantiv ? (
                   <>
+                    <ApplePayButton />
                     <PaypalSubscribeButton />
                   </>
                 ) : null}
