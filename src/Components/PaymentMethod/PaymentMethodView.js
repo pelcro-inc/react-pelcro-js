@@ -29,6 +29,7 @@ import {
 } from "../../utils/utils";
 import { DonationEmail } from "./DonationEmail";
 import { usePelcro } from "../../hooks/usePelcro";
+import { ApplePayButton } from "../ApplePayButton/ApplePayButton";
 
 /**
  *
@@ -202,6 +203,7 @@ export function PaymentMethodView({
                   </>
                 ) : showExternalPaymentMethods && supportsVantiv ? (
                   <>
+                    <ApplePayButton />
                     <PaypalSubscribeButton />
                   </>
                 ) : null}

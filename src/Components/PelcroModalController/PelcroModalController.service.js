@@ -109,6 +109,11 @@ export const loadPaymentSDKs = () => {
     loadStripe(window.Pelcro.environment.stripe);
   }
 
+  window.Pelcro.helpers.loadSDK(
+    "https://applepay.cdn-apple.com/jsapi/v1/apple-pay-sdk.js",
+    "apple-pay-sdk"
+  );
+
   // Load PayPal SDKs
   const supportsPaypal = Boolean(
     window.Pelcro.site.read().braintree_tokenization
@@ -134,6 +139,15 @@ export const loadPaymentSDKs = () => {
         "vantiv-jquery-sdk"
       );
     }
+
+    window.Pelcro.helpers.loadSDK(
+      "https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js",
+      "vantiv-jquery-sdk"
+    );
+    window.Pelcro.helpers.loadSDK(
+      "https://request.eprotect.vantivprelive.com/eProtect/eProtect-api3.js",
+      "vantiv-eprotect-api"
+    );
 
     if (!window.EprotectIframeClient) {
       const PRELIVE_URL =

@@ -28,6 +28,7 @@
 @import "./Components/Select/SelectModal.css";
 @import "./Components/Donation/DonationModal.css";
 @import "./Components/dashboard/Dashboard.css";
+@import "./Components/ApplePayButton/ApplePayButton.css";
 
 /* utilities */
 @import "tailwindcss/utilities";
