@@ -1,3 +1,16 @@
+# [3.26.0-sandbox.24](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-sandbox.23...v3.26.0-sandbox.24) (2023-08-03)
+
+
+### Bug Fixes
+
+* Fix load paywalls race condition ([9ce72e7](https://github.com/pelcro-inc/react-pelcro-js/commit/9ce72e79a0720cbcd6ff60aa3cf7866cfe193b20))
+
+
+### Features
+
+* apple pay js sdk setup ([1bd2760](https://github.com/pelcro-inc/react-pelcro-js/commit/1bd2760c65499b0da6d549a73c0e140ab4103ca4))
+* init apple pay for vantiv ([aa3f376](https://github.com/pelcro-inc/react-pelcro-js/commit/aa3f376f07cc328302771cc9d49ce7c025b8f6a5))
+
 # [3.26.0-sandbox.23](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-sandbox.22...v3.26.0-sandbox.23) (2023-07-25)
 
 
