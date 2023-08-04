@@ -1,3 +1,10 @@
+# [3.26.0-sandbox.25](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-sandbox.24...v3.26.0-sandbox.25) (2023-08-04)
+
+
+### Bug Fixes
+
+* interval unit type error bug fix ([b60e195](https://github.com/pelcro-inc/react-pelcro-js/commit/b60e19538de7923e7a32fabc072af7aea21269e5))
+
 # [3.26.0-sandbox.24](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-sandbox.23...v3.26.0-sandbox.24) (2023-08-03)
 
 
