@@ -1,3 +1,11 @@
+# [3.26.0-sandbox.26](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-sandbox.25...v3.26.0-sandbox.26) (2023-08-04)
+
+
+### Features
+
+* add comment ([e5a966e](https://github.com/pelcro-inc/react-pelcro-js/commit/e5a966ec40dfb5651bc2fef363f366a26cb6eade))
+* fetch translated plan interval from server ([7fd04e4](https://github.com/pelcro-inc/react-pelcro-js/commit/7fd04e4d099ce855f606ccd8b04894604c7281a1))
+
 # [3.26.0-sandbox.25](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-sandbox.24...v3.26.0-sandbox.25) (2023-08-04)
 
 
