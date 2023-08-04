@@ -1,3 +1,10 @@
+# [3.26.0-beta.7](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.6...v3.26.0-beta.7) (2023-08-04)
+
+
+### Bug Fixes
+
+* interval unit type error bug fix ([b60e195](https://github.com/pelcro-inc/react-pelcro-js/commit/b60e19538de7923e7a32fabc072af7aea21269e5))
+
 # [3.26.0-beta.6](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.5...v3.26.0-beta.6) (2023-08-03)
 
 
