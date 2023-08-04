@@ -1,3 +1,10 @@
+# [3.26.0-sandbox.27](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-sandbox.26...v3.26.0-sandbox.27) (2023-08-04)
+
+
+### Features
+
+* remove recurring payment request ([bf538ca](https://github.com/pelcro-inc/react-pelcro-js/commit/bf538ca1978ccf8b1e615b6a08c7a9a95e946576))
+
 # [3.26.0-sandbox.26](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-sandbox.25...v3.26.0-sandbox.26) (2023-08-04)
 
 
