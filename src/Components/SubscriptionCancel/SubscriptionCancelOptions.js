@@ -4,6 +4,7 @@ import { SET_CANCEL_SUBSCRIPTION_OPTION } from "../../utils/action-types";
 import { store } from "./SubscriptionCancelContainer";
 import { useTranslation } from "react-i18next";
 
+// New cancellation option modal
 export const SubscriptionCancelOptions = ({
   subscription,
   hasPhases,
@@ -30,7 +31,7 @@ export const SubscriptionCancelOptions = ({
   return (
     <div className="plc-text-left plc-mr-auto plc-mb-6">
       <p className="plc-mb-3">{t("messages.cancelWhen")}</p>
-      {hasPhases && (
+      {subscription.cancel_at_period_end === 0 && hasPhases && (
         <Radio
           onChange={handleOptionSelect}
           checked={cancelationOption === "period_end"}
@@ -46,20 +47,22 @@ export const SubscriptionCancelOptions = ({
           })}
         </Radio>
       )}
-      <Radio
-        onChange={handleOptionSelect}
-        checked={cancelationOption === "current_period_end"}
-        value="current_period_end"
-      >
-        {t("labels.endOn")}{" "}
-        {new Date(
-          subscription?.current_period_end
-        ).toLocaleDateString("en-CA", {
-          year: "numeric",
-          month: "short",
-          day: "numeric"
-        })}
-      </Radio>
+      {subscription.cancel_at_period_end === 0 && (
+        <Radio
+          onChange={handleOptionSelect}
+          checked={cancelationOption === "current_period_end"}
+          value="current_period_end"
+        >
+          {t("labels.endOn")}{" "}
+          {new Date(
+            subscription?.current_period_end
+          ).toLocaleDateString("en-CA", {
+            year: "numeric",
+            month: "short",
+            day: "numeric"
+          })}
+        </Radio>
+      )}
       <Radio
         onChange={handleOptionSelect}
         checked={cancelationOption === "now"}

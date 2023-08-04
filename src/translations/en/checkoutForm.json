@@ -18,7 +18,7 @@
     "code": "Coupon code",
     "for": "for",
     "interval": "{{count}} {{interval}}",
-    "interval_plural": "{{count}} {{interval}}s",
+    "interval_plural": "{{count}} {{interval}}",
     "tax": "Tax",
     "removeCoupon": "REMOVE",
     "firstName": "First name",
