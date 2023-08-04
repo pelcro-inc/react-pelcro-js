@@ -18,11 +18,10 @@ export const ApplePayButton = ({ onClick, props, ...otherProps }) => {
   const { dispatch, state } = useContext(store);
   const { plan, invoice } = usePelcro();
   const {
-    payPageId,
-    reportGroup,
+    pay_page_id: payPageId,
+    report_group: reportGroup,
     apple_pay_merchant_id: ApplePayMerchantId,
-    apple_pay_enabled: ApplePayEnabled,
-    apple_pay_billing_agreement: ApplePayBillingAgreement
+    apple_pay_enabled: ApplePayEnabled
   } = window.Pelcro.site.read()?.vantiv_gateway_settings;
 
   const updatedPrice =
@@ -73,48 +72,9 @@ export const ApplePayButton = ({ onClick, props, ...otherProps }) => {
       supportedNetworks: ["visa", "masterCard", "amex", "discover"],
       total: {
         label: plan?.nickname || `invoice #${invoice.id}`,
+        type: "final",
         amount: updatedPrice / 100
-      },
-      lineItems: [
-        plan?.auto_renew
-          ? {
-              label: plan?.nickname || `invoice #${invoice.id}`,
-              amount: updatedPrice / 100,
-              paymentTiming: "recurring",
-              recurringPaymentStartDate: new Date().toISOString(),
-              recurringPaymentIntervalUnit:
-                plan?.interval === "week" ? "day" : plan?.interval,
-              recurringPaymentIntervalCount:
-                plan?.interval === "week"
-                  ? plan?.interval_count * 7
-                  : plan?.interval_count
-            }
-          : {
-              label: plan?.nickname || `invoice #${invoice.id}`,
-              amount: updatedPrice / 100
-            }
-      ],
-      ...(plan?.auto_renew && {
-        recurringPaymentRequest: {
-          paymentDescription:
-            "A description of the recurring payment to display to the user in the payment sheet.",
-          regularBilling: {
-            label: plan?.nickname || `invoice #${invoice.id}`,
-            amount: updatedPrice / 100,
-            paymentTiming: "recurring",
-            recurringPaymentStartDate: new Date().toISOString(),
-            recurringPaymentIntervalUnit:
-              plan?.interval === "week" ? "day" : plan?.interval,
-            recurringPaymentIntervalCount:
-              plan?.interval === "week"
-                ? plan?.interval_count * 7
-                : plan?.interval_count
-          },
-          billingAgreement: ApplePayBillingAgreement ?? "",
-          managementURL: "https://applepaydemo.apple.com",
-          tokenNotificationURL: "https://applepaydemo.apple.com"
-        }
-      })
+      }
     };
 
     console.log(ApplePayPaymentRequest);
@@ -163,27 +123,16 @@ export const ApplePayButton = ({ onClick, props, ...otherProps }) => {
       // No updates or errors are needed, pass an empty object.
       const newTotal = {
         label: plan?.nickname || `invoice #${invoice.id}`,
+        type: "final",
         amount: updatedPrice / 100
       };
 
       const newLineItems = [
-        plan?.auto_renew
-          ? {
-              label: plan?.nickname || `invoice #${invoice.id}`,
-              amount: updatedPrice / 100,
-              paymentTiming: "recurring",
-              recurringPaymentStartDate: new Date().toISOString(),
-              recurringPaymentIntervalUnit:
-                plan?.interval === "week" ? "day" : plan?.interval,
-              recurringPaymentIntervalCount:
-                plan?.interval === "week"
-                  ? plan?.interval_count * 7
-                  : plan?.interval_count
-            }
-          : {
-              label: plan?.nickname || `invoice #${invoice.id}`,
-              amount: updatedPrice / 100
-            }
+        {
+          label: plan?.nickname || `invoice #${invoice.id}`,
+          type: "final",
+          amount: updatedPrice / 100
+        }
       ];
 
       session.completePaymentMethodSelection(newTotal, newLineItems);
@@ -196,23 +145,16 @@ export const ApplePayButton = ({ onClick, props, ...otherProps }) => {
     //   // No updates or errors are needed, pass an empty object.
     //   const newTotal = {
     //     label: plan?.nickname || `invoice #${invoice.id}`,
+    //     type: "final",
     //     amount: updatedPrice / 100
     //   };
 
     //   const newLineItems = [
-    //     plan?.auto_renew
-    //       ? {
-    //           label: plan?.nickname || `invoice #${invoice.id}`,
-    //           amount: updatedPrice / 100,
-    //           paymentTiming: "recurring",
-    //           recurringPaymentStartDate: new Date().toISOString(),
-    //           recurringPaymentIntervalUnit: plan?.interval,
-    //           recurringPaymentIntervalCount: plan?.interval_count
-    //         }
-    //       : {
-    //           label: plan?.nickname || `invoice #${invoice.id}`,
-    //           amount: updatedPrice / 100
-    //         }
+    //     {
+    //       label: plan?.nickname || `invoice #${invoice.id}`,
+    //       type: "final",
+    //       amount: updatedPrice / 100
+    //     }
     //   ];
 
     //   session.completeShippingMethodSelection(newTotal, newLineItems);
