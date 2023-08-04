@@ -30,7 +30,6 @@ export const ApplePayButton = ({ onClick, props, ...otherProps }) => {
     plan?.amount ??
     invoice.amount_remaining;
 
-  // TODO: remove console logs
   useEffect(() => {
     if (window.ApplePaySession) {
       // Indicates whether the device supports Apple Pay and whether the user has an active card in Wallet.
