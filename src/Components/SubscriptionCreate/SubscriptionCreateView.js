@@ -25,9 +25,9 @@ export const SubscriptionCreateView = ({
 
   const getPricingText = (plan) => {
     const autoRenewed = plan.auto_renew;
-    const { interval, interval_count } = plan;
+    const { interval_translated, interval_count } = plan;
     const intervalText = t("labels.interval", {
-      interval,
+      interval: interval_translated,
       count: interval_count
     });
 
