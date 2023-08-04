@@ -17,6 +17,13 @@ import {
 export const ApplePayButton = ({ onClick, props, ...otherProps }) => {
   const { dispatch, state } = useContext(store);
   const { plan, invoice } = usePelcro();
+  const {
+    payPageId,
+    reportGroup,
+    apple_pay_merchant_id: ApplePayMerchantId,
+    apple_pay_enabled: ApplePayEnabled,
+    apple_pay_billing_agreement: ApplePayBillingAgreement
+  } = window.Pelcro.site.read()?.vantiv_gateway_settings;
 
   const updatedPrice =
     state.updatedPrice ??
@@ -26,15 +33,12 @@ export const ApplePayButton = ({ onClick, props, ...otherProps }) => {
 
   useEffect(() => {
     if (window.ApplePaySession) {
-      // TODO: Should not be hardcoded
-      const merchantIdentifier = "merchant.pelcro.prelive";
-
       // Indicates whether the device supports Apple Pay and whether the user has an active card in Wallet.
       const promise = ApplePaySession.canMakePaymentsWithActiveCard(
-        merchantIdentifier
+        ApplePayMerchantId
       );
       promise.then(function (canMakePayments) {
-        if (canMakePayments) {
+        if (canMakePayments && ApplePayEnabled) {
           // Display Apple Pay Buttons here…
           const pelcroApplyPayButton = document.getElementById(
             "pelcro-apple-pay-button"
@@ -78,8 +82,12 @@ export const ApplePayButton = ({ onClick, props, ...otherProps }) => {
               amount: updatedPrice / 100,
               paymentTiming: "recurring",
               recurringPaymentStartDate: new Date().toISOString(),
-              recurringPaymentIntervalUnit: plan?.interval,
-              recurringPaymentIntervalCount: plan?.interval_count
+              recurringPaymentIntervalUnit:
+                plan?.interval === "week" ? "day" : plan?.interval,
+              recurringPaymentIntervalCount:
+                plan?.interval === "week"
+                  ? plan?.interval_count * 7
+                  : plan?.interval_count
             }
           : {
               label: plan?.nickname || `invoice #${invoice.id}`,
@@ -95,17 +103,21 @@ export const ApplePayButton = ({ onClick, props, ...otherProps }) => {
             amount: updatedPrice / 100,
             paymentTiming: "recurring",
             recurringPaymentStartDate: new Date().toISOString(),
-            recurringPaymentIntervalUnit: plan?.interval,
-            recurringPaymentIntervalCount: plan?.interval_count
+            recurringPaymentIntervalUnit:
+              plan?.interval === "week" ? "day" : plan?.interval,
+            recurringPaymentIntervalCount:
+              plan?.interval === "week"
+                ? plan?.interval_count * 7
+                : plan?.interval_count
           },
-          billingAgreement:
-            "A localized billing agreement displayed to the user in the payment sheet prior to the payment authorization.",
+          billingAgreement: ApplePayBillingAgreement ?? "",
           managementURL: "https://applepaydemo.apple.com",
           tokenNotificationURL: "https://applepaydemo.apple.com"
         }
       })
     };
 
+    console.log(ApplePayPaymentRequest);
     // Create ApplePaySession
     // @todo - Clarify supported version parameter
     // @odo - Apple Pay demo uses version 6 (https://applepaydemo.apple.com/)
@@ -161,8 +173,12 @@ export const ApplePayButton = ({ onClick, props, ...otherProps }) => {
               amount: updatedPrice / 100,
               paymentTiming: "recurring",
               recurringPaymentStartDate: new Date().toISOString(),
-              recurringPaymentIntervalUnit: plan?.interval,
-              recurringPaymentIntervalCount: plan?.interval_count
+              recurringPaymentIntervalUnit:
+                plan?.interval === "week" ? "day" : plan?.interval,
+              recurringPaymentIntervalCount:
+                plan?.interval === "week"
+                  ? plan?.interval_count * 7
+                  : plan?.interval_count
             }
           : {
               label: plan?.nickname || `invoice #${invoice.id}`,
@@ -232,13 +248,6 @@ export const ApplePayButton = ({ onClick, props, ...otherProps }) => {
       };
 
       console.log(applePayToken);
-
-      const payPageId =
-        window.Pelcro.site.read()?.vantiv_gateway_settings
-          .pay_page_id;
-      const reportGroup =
-        window.Pelcro.site.read()?.vantiv_gateway_settings
-          .report_group;
 
       const orderId = `pelcro-${new Date().getTime()}`;
 
