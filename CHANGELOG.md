@@ -3,6 +3,14 @@
 
 ### Features
 
+* add todo ([3e1f434](https://github.com/pelcro-inc/react-pelcro-js/commit/3e1f43448b66e4ef9c217fc3137fd3c138fa1fd8))
+* remove recurring payment request ([bf538ca](https://github.com/pelcro-inc/react-pelcro-js/commit/bf538ca1978ccf8b1e615b6a08c7a9a95e946576))
+
+# [3.26.0-beta.9](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.8...v3.26.0-beta.9) (2023-08-04)
+
+
+### Features
+
 * remove recurring payment request ([bf538ca](https://github.com/pelcro-inc/react-pelcro-js/commit/bf538ca1978ccf8b1e615b6a08c7a9a95e946576))
 
 # [3.26.0-beta.8](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.7...v3.26.0-beta.8) (2023-08-04)
