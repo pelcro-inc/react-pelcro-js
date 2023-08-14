@@ -1,3 +1,10 @@
+# [3.26.0-sandbox.28](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-sandbox.27...v3.26.0-sandbox.28) (2023-08-14)
+
+
+### Features
+
+* show apple pay button on renewal modal ([46d9f83](https://github.com/pelcro-inc/react-pelcro-js/commit/46d9f83c0c2d2c9b7fc4214d326a1c481e15d156))
+
 # [3.26.0-sandbox.27](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-sandbox.26...v3.26.0-sandbox.27) (2023-08-04)
 
 
