@@ -1,3 +1,10 @@
+# [3.26.0-beta.11](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.10...v3.26.0-beta.11) (2023-08-14)
+
+
+### Bug Fixes
+
+* scope 3ds confirm stripe card in pay invoice ([d9c0c2f](https://github.com/pelcro-inc/react-pelcro-js/commit/d9c0c2f2c81068ad5c53e50a715e9792a1086046))
+
 # [3.26.0-beta.10](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.9...v3.26.0-beta.10) (2023-08-14)
 
 
