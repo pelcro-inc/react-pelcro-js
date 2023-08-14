@@ -17,6 +17,7 @@ export const InvoicePaymentView = (props) => {
           type="invoicePayment"
           showCoupon={false}
           showExternalPaymentMethods={true}
+          showApplePayButton={true}
           {...props}
         />
       </form>

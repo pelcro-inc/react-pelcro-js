@@ -13,7 +13,7 @@ export const SubscriptionRenewView = ({
   const skipPayment =
     window.Pelcro?.uiSettings?.skipPaymentForFreePlans;
   const showSubscriptionButton = skipPayment && plan?.amount === 0;
-  
+
   const getPricingText = (plan) => {
     const autoRenewed = plan.auto_renew;
     const { interval, interval_count } = plan;
@@ -58,6 +58,7 @@ export const SubscriptionRenewView = ({
         type="createPayment"
         showCoupon={true}
         showExternalPaymentMethods={false}
+        showApplePayButton={true}
         onSuccess={onSuccess}
         onGiftRenewalSuccess={onGiftRenewalSuccess}
         onFailure={onFailure}
