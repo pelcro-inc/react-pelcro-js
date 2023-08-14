@@ -1880,7 +1880,12 @@ const PaymentMethodContainerWithoutStripe = ({
     );
   };
 
-  const payInvoice = (gatewayService, gatewayToken, dispatch) => {
+  const payInvoice = (
+    gatewayService,
+    gatewayToken,
+    dispatch,
+    cb = null
+  ) => {
     const payment = new Payment(gatewayService);
 
     return payment.execute(
@@ -1891,7 +1896,25 @@ const PaymentMethodContainerWithoutStripe = ({
         invoiceId: invoice.id
       },
       (err, res) => {
-        confirmStripeCardPayment(res, err);
+        if (cb && typeof cb == "function") {
+          cb(res, err);
+        } else {
+          dispatch({ type: DISABLE_SUBMIT, payload: false });
+          dispatch({ type: LOADING, payload: false });
+
+          if (err) {
+            onFailure(err);
+            return dispatch({
+              type: SHOW_ALERT,
+              payload: {
+                type: "error",
+                content: getErrorMessages(err)
+              }
+            });
+          }
+
+          onSuccess(res);
+        }
       }
     );
   };
@@ -2166,7 +2189,12 @@ const PaymentMethodContainerWithoutStripe = ({
     } else if (stripeSource && type === "orderCreate") {
       purchase(new StripeGateway(), stripeSource.id, state, dispatch);
     } else if (stripeSource && type === "invoicePayment") {
-      payInvoice(new StripeGateway(), stripeSource.id, dispatch);
+      payInvoice(
+        new StripeGateway(),
+        stripeSource.id,
+        dispatch,
+        confirmStripeCardPayment
+      );
     }
   };
 
