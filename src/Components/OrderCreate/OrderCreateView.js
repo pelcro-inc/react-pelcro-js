@@ -27,6 +27,7 @@ export const OrderCreateView = (props) => {
           type="orderCreate"
           showCoupon={true}
           showExternalPaymentMethods={false}
+          showApplePayButton={false}
           showOrderButton={showOrderButton}
           order={order}
           {...props}

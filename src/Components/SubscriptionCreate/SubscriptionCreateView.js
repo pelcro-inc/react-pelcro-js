@@ -87,6 +87,7 @@ export const SubscriptionCreateView = ({
         type="createPayment"
         showCoupon={true}
         showExternalPaymentMethods={true}
+        showApplePayButton={true}
         onSuccess={onSuccess}
         onFailure={onFailure}
         showSubscriptionButton={showSubscriptionButton}

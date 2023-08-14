@@ -43,6 +43,7 @@ export function PaymentMethodView({
   showExternalPaymentMethods,
   showSubscriptionButton,
   showOrderButton,
+  showApplePayButton,
   order
 }) {
   const { t } = useTranslation("checkoutForm");
@@ -203,8 +204,12 @@ export function PaymentMethodView({
                   </>
                 ) : showExternalPaymentMethods && supportsVantiv ? (
                   <>
-                    <ApplePayButton />
                     <PaypalSubscribeButton />
+                  </>
+                ) : null}
+                {showApplePayButton && supportsVantiv ? (
+                  <>
+                    <ApplePayButton />
                   </>
                 ) : null}
               </div>
