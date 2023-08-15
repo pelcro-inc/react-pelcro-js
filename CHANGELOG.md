@@ -1,3 +1,10 @@
+# [3.26.0-beta.14](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.13...v3.26.0-beta.14) (2023-08-15)
+
+
+### Bug Fixes
+
+* add missing optional chaining ([cc635be](https://github.com/pelcro-inc/react-pelcro-js/commit/cc635be91d306c0acfd69891a859192904ec704a))
+
 # [3.26.0-beta.13](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.12...v3.26.0-beta.13) (2023-08-15)
 
 
