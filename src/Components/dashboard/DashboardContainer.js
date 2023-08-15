@@ -15,12 +15,8 @@ import {
   REACTIVATE_SUBSCRIPTION,
   UNSUSPEND_SUBSCRIPTION
 } from "../../utils/action-types";
-import { default as ReactGA1 } from "react-ga";
-import { default as ReactGA4 } from "react-ga4";
-
-const ReactGA = window?.Pelcro?.uiSettings?.enableReactGA4
-  ? ReactGA4
-  : ReactGA1;
+import ReactGA from "react-ga";
+import ReactGA4 from "react-ga4";
 
 const initialState = {
   isOpen: false,
@@ -41,6 +37,7 @@ const DashboardContainer = ({
   ...props
 }) => {
   const { t } = useTranslation("dashboard");
+  const enableReactGA4 = window?.Pelcro?.uiSettings?.enableReactGA4;
 
   useEffect(() => {
     dispatch({ type: SET_IS_OPEN, payload: true });
@@ -49,11 +46,17 @@ const DashboardContainer = ({
       name: "dashboard"
     });
 
-    ReactGA?.event?.({
-      category: "VIEWS",
-      action: "Dashboard Modal Viewed",
-      nonInteraction: true
-    });
+    if (enableReactGA4) {
+      ReactGA4.event("Dashboard Modal Viewed", {
+        nonInteraction: true
+      });
+    } else {
+      ReactGA?.event?.({
+        category: "VIEWS",
+        action: "Dashboard Modal Viewed",
+        nonInteraction: true
+      });
+    }
 
     const { addresses } = window.Pelcro.user.read();
     if (addresses)
@@ -82,11 +85,17 @@ const DashboardContainer = ({
           return onFailure?.(err);
         }
 
-        ReactGA?.event?.({
-          category: "ACTIONS",
-          action: "Canceled",
-          nonInteraction: true
-        });
+        if (enableReactGA4) {
+          ReactGA4.event("Canceled", {
+            nonInteraction: true
+          });
+        } else {
+          ReactGA?.event?.({
+            category: "ACTIONS",
+            action: "Canceled",
+            nonInteraction: true
+          });
+        }
         onSuccess?.(res);
       }
     );
@@ -113,11 +122,17 @@ const DashboardContainer = ({
           return onFailure?.(err);
         }
 
-        ReactGA?.event?.({
-          category: "ACTIONS",
-          action: "UnSuspended",
-          nonInteraction: true
-        });
+        if (enableReactGA4) {
+          ReactGA4.event("UnSuspended", {
+            nonInteraction: true
+          });
+        } else {
+          ReactGA?.event?.({
+            category: "ACTIONS",
+            action: "UnSuspended",
+            nonInteraction: true
+          });
+        }
         onSuccess?.(res);
       }
     );

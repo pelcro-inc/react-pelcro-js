@@ -4,10 +4,8 @@ import { Button } from "../../SubComponents/Button";
 import { usePelcro } from "../../hooks/usePelcro";
 import { store } from "./SubscriptionSuspendContainer";
 import { notify } from "../../SubComponents/Notification";
-import { default as ReactGA1 } from "react-ga";
-import { default as ReactGA4 } from "react-ga4";
-
-const ReactGA = window?.Pelcro?.uiSettings?.enableReactGA4 ? ReactGA4 : ReactGA1;
+import ReactGA from "react-ga";
+import ReactGA4 from "react-ga4";
 
 export const SubscriptionSuspendButton = ({
   subscription,
@@ -22,6 +20,7 @@ export const SubscriptionSuspendButton = ({
   } = useContext(store);
 
   const { t } = useTranslation("subscriptionSuspend");
+  const enableReactGA4 = window?.Pelcro?.uiSettings?.enableReactGA4;
 
   const suspendSubscription = (payload, onSuccess, onFailure) => {
     window.Pelcro.subscription.update(
@@ -36,11 +35,17 @@ export const SubscriptionSuspendButton = ({
           return onFailure?.(err);
         }
 
-        ReactGA?.event?.({
-          category: "ACTIONS",
-          action: "Suspended",
-          nonInteraction: true
-        });
+        if (enableReactGA4) {
+          ReactGA4.event("Suspended", {
+            nonInteraction: true
+          });
+        } else {
+          ReactGA?.event?.({
+            category: "ACTIONS",
+            action: "Suspended",
+            nonInteraction: true
+          });
+        }
         onSuccess?.(res);
       }
     );
@@ -53,10 +58,10 @@ export const SubscriptionSuspendButton = ({
 
     onClick?.();
 
-    //Close the modal
+    // Close the modal
     switchView(null);
 
-    //Show confirmation alert after closing the modal
+    // Show confirmation alert after closing the modal
     notify.confirm(
       (onSuccess, onFailure) => {
         suspendSubscription(payload, onSuccess, onFailure);

@@ -1,18 +1,23 @@
 import React from "react";
-import { default as ReactGA1 } from "react-ga";
-import { default as ReactGA4 } from "react-ga4";
-
-const ReactGA = window?.Pelcro?.uiSettings?.enableReactGA4 ? ReactGA4 : ReactGA1;
+import ReactGA from "react-ga";
+import ReactGA4 from "react-ga4";
 
 export const Logout = (props) => {
   const handleLogout = () => {
     window.Pelcro.user.logout();
+    const enableReactGA4 = window?.Pelcro?.uiSettings?.enableReactGA4;
 
-    ReactGA?.event?.({
-      category: "ACTIONS",
-      action: "Logged out",
-      nonInteraction: true
-    });
+    if (enableReactGA4) {
+      ReactGA4.event("Logged out", {
+        nonInteraction: true
+      });
+    } else {
+      ReactGA?.event?.({
+        category: "ACTIONS",
+        action: "Logged out",
+        nonInteraction: true
+      });
+    }
   };
   return (
     <button

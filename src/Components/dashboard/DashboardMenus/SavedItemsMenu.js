@@ -1,14 +1,12 @@
 import React, { useState } from "react";
-import { default as ReactGA1 } from "react-ga";
-import { default as ReactGA4 } from "react-ga4";
 import { useTranslation } from "react-i18next";
 import { ReactComponent as XIcon } from "../../../assets/x-icon.svg";
 import { usePelcro } from "../../../hooks/usePelcro";
 import { Button } from "../../../SubComponents/Button";
 import { Link } from "../../../SubComponents/Link";
 import { Card } from "../Card";
-
-const ReactGA = window?.Pelcro?.uiSettings?.enableReactGA4 ? ReactGA4 : ReactGA1;
+import ReactGA from "react-ga";
+import ReactGA4 from "react-ga4";
 
 export const SavedItemsMenu = () => {
   const { t } = useTranslation("dashboard");
@@ -50,6 +48,7 @@ export const SavedItems = ({ items, setItems }) => {
   const removeItemFromMetadata = (category, title) => {
     const user = window.Pelcro.user.read();
     const oldValue = user.metadata[`metadata_saved_${category}`];
+    const enableReactGA4 = window?.Pelcro?.uiSettings?.enableReactGA4;
 
     const newMetadataValue = oldValue.filter(
       (metadata) => !(metadata?.title === title)
@@ -70,11 +69,17 @@ export const SavedItems = ({ items, setItems }) => {
           }
 
           setItems(response?.data?.metadata);
-          ReactGA?.event?.({
-            category: "ACTIONS",
-            action: "Unsave/Unfollow",
-            label: title
-          });
+          if (enableReactGA4) {
+            ReactGA4.event("Unsave/Unfollow", {
+              event_label: title
+            });
+          } else {
+            ReactGA?.event?.({
+              category: "ACTIONS",
+              action: "Unsave/Unfollow",
+              label: title
+            });
+          }
         }
       );
     }
@@ -126,11 +131,13 @@ export const SavedItems = ({ items, setItems }) => {
                     variant="ghost"
                     type="button"
                     className="plc-text-gray-500 plc-rounded-2xl"
-                    onClick={()=> removeItemFromMetadata(
-                      categoryTitle,
-                      item.title,
-                      setItems
-                    )}
+                    onClick={() =>
+                      removeItemFromMetadata(
+                        categoryTitle,
+                        item.title,
+                        setItems
+                      )
+                    }
                   >
                     <XIcon className="plc-fill-current" />
                   </Button>
