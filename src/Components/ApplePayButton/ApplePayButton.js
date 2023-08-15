@@ -9,6 +9,7 @@ import {
   LOADING,
   DISABLE_SUBMIT
 } from "../../utils/action-types";
+import { calcOrderAmount } from "../../utils/utils";
 
 /**
  * ApplePayButton component
@@ -16,7 +17,7 @@ import {
  */
 export const ApplePayButton = ({ onClick, props, ...otherProps }) => {
   const { dispatch, state } = useContext(store);
-  const { plan, invoice } = usePelcro();
+  const { plan, invoice, order } = usePelcro();
   const {
     pay_page_id: payPageId,
     report_group: reportGroup,
@@ -24,10 +25,21 @@ export const ApplePayButton = ({ onClick, props, ...otherProps }) => {
     apple_pay_enabled: ApplePayEnabled
   } = window.Pelcro.site.read()?.vantiv_gateway_settings;
 
+  const orderPrice = !Array.isArray(order)
+    ? order?.price
+    : calcOrderAmount(order);
+
+  const orderCurrency = !Array.isArray(order)
+    ? order?.currency
+    : order[0]?.currency;
+
+  const orderLabel = !Array.isArray(order) ? order?.name : "Order";
+
   const updatedPrice =
     state.updatedPrice ??
     props?.plan?.amount ??
     plan?.amount ??
+    orderPrice ??
     invoice.amount_remaining;
 
   useEffect(() => {
@@ -67,11 +79,13 @@ export const ApplePayButton = ({ onClick, props, ...otherProps }) => {
         window?.Pelcro?.user?.location?.countryCode || "US",
       currencyCode:
         plan?.currency.toUpperCase() ||
+        orderCurrency.toUpperCase() ||
         invoice?.currency.toUpperCase(),
       merchantCapabilities: ["supports3DS"],
       supportedNetworks: ["visa", "masterCard", "amex", "discover"],
       total: {
-        label: plan?.nickname || `invoice #${invoice.id}`,
+        label:
+          plan?.nickname || orderLabel || `invoice #${invoice.id}`,
         type: "final",
         amount: updatedPrice / 100
       }
@@ -122,14 +136,16 @@ export const ApplePayButton = ({ onClick, props, ...otherProps }) => {
       // Define ApplePayPaymentMethodUpdate based on the selected payment method.
       // No updates or errors are needed, pass an empty object.
       const newTotal = {
-        label: plan?.nickname || `invoice #${invoice.id}`,
+        label:
+          plan?.nickname || orderLabel || `invoice #${invoice.id}`,
         type: "final",
         amount: updatedPrice / 100
       };
 
       const newLineItems = [
         {
-          label: plan?.nickname || `invoice #${invoice.id}`,
+          label:
+            plan?.nickname || orderLabel || `invoice #${invoice.id}`,
           type: "final",
           amount: updatedPrice / 100
         }
@@ -144,14 +160,14 @@ export const ApplePayButton = ({ onClick, props, ...otherProps }) => {
     //   // Define ApplePayShippingMethodUpdate based on the selected shipping method.
     //   // No updates or errors are needed, pass an empty object.
     //   const newTotal = {
-    //     label: plan?.nickname || `invoice #${invoice.id}`,
+    //     label: plan?.nickname || orderLabel || `invoice #${invoice.id}`,
     //     type: "final",
     //     amount: updatedPrice / 100
     //   };
 
     //   const newLineItems = [
     //     {
-    //       label: plan?.nickname || `invoice #${invoice.id}`,
+    //       label: plan?.nickname || orderLabel || `invoice #${invoice.id}`,
     //       type: "final",
     //       amount: updatedPrice / 100
     //     }
