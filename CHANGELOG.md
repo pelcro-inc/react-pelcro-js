@@ -1,3 +1,10 @@
+# [3.26.0-sandbox.30](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-sandbox.29...v3.26.0-sandbox.30) (2023-08-15)
+
+
+### Bug Fixes
+
+* handle type error exception ([76525ff](https://github.com/pelcro-inc/react-pelcro-js/commit/76525ff4884438c75c4964cbaf2671695bd2ec5d))
+
 # [3.26.0-sandbox.29](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-sandbox.28...v3.26.0-sandbox.29) (2023-08-15)
 
 
