@@ -146,8 +146,18 @@ export const loadPaymentSDKs = () => {
       "https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js",
       "vantiv-jquery-sdk"
     );
+
+    const eProtectApi3PreLiveURL =
+      "https://request.eprotect.vantivprelive.com/eProtect/eProtect-api3.js";
+    const eProtectApi3ProductionURL =
+      "https://request.eprotect.vantivcnp.com/eProtect/eProtect-api3.js";
+    const eProtectApi3scriptUrlToUse =
+      window.Pelcro.site.read().vantiv_gateway_settings
+        .environment === "production"
+        ? eProtectApi3ProductionURL
+        : eProtectApi3PreLiveURL;
     window.Pelcro.helpers.loadSDK(
-      "https://request.eprotect.vantivprelive.com/eProtect/eProtect-api3.js",
+      eProtectApi3scriptUrlToUse,
       "vantiv-eprotect-api"
     );
 
