@@ -1,3 +1,11 @@
+# [3.26.0-beta.12](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.11...v3.26.0-beta.12) (2023-08-15)
+
+
+### Features
+
+* display apply pay button for ecommerce ([a7583b1](https://github.com/pelcro-inc/react-pelcro-js/commit/a7583b15dce92ca65757bf964c8105751c8c9e77))
+* load eProtectApi3 cdn relative to environment ([f57a551](https://github.com/pelcro-inc/react-pelcro-js/commit/f57a5511d50a1a22e043a4386217886e3e3c9ea4))
+
 # [3.26.0-beta.11](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.10...v3.26.0-beta.11) (2023-08-14)
 
 
