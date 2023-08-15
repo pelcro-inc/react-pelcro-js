@@ -57,7 +57,7 @@ export const ApplePayButton = ({ onClick, props, ...otherProps }) => {
     props?.plan?.amount ??
     plan?.amount ??
     orderPrice ??
-    invoice.amount_remaining ??
+    invoice?.amount_remaining ??
     null;
 
   useEffect(() => {
@@ -103,7 +103,7 @@ export const ApplePayButton = ({ onClick, props, ...otherProps }) => {
       supportedNetworks: ["visa", "masterCard", "amex", "discover"],
       total: {
         label:
-          plan?.nickname || orderLabel || `invoice #${invoice.id}`,
+          plan?.nickname || orderLabel || `invoice #${invoice?.id}`,
         type: "final",
         amount: updatedPrice / 100
       }
@@ -155,7 +155,7 @@ export const ApplePayButton = ({ onClick, props, ...otherProps }) => {
       // No updates or errors are needed, pass an empty object.
       const newTotal = {
         label:
-          plan?.nickname || orderLabel || `invoice #${invoice.id}`,
+          plan?.nickname || orderLabel || `invoice #${invoice?.id}`,
         type: "final",
         amount: updatedPrice / 100
       };
@@ -163,7 +163,7 @@ export const ApplePayButton = ({ onClick, props, ...otherProps }) => {
       const newLineItems = [
         {
           label:
-            plan?.nickname || orderLabel || `invoice #${invoice.id}`,
+            plan?.nickname || orderLabel || `invoice #${invoice?.id}`,
           type: "final",
           amount: updatedPrice / 100
         }
@@ -178,14 +178,14 @@ export const ApplePayButton = ({ onClick, props, ...otherProps }) => {
     //   // Define ApplePayShippingMethodUpdate based on the selected shipping method.
     //   // No updates or errors are needed, pass an empty object.
     //   const newTotal = {
-    //     label: plan?.nickname || orderLabel || `invoice #${invoice.id}`,
+    //     label: plan?.nickname || orderLabel || `invoice #${invoice?.id}`,
     //     type: "final",
     //     amount: updatedPrice / 100
     //   };
 
     //   const newLineItems = [
     //     {
-    //       label: plan?.nickname || orderLabel || `invoice #${invoice.id}`,
+    //       label: plan?.nickname || orderLabel || `invoice #${invoice?.id}`,
     //       type: "final",
     //       amount: updatedPrice / 100
     //     }
