@@ -1,3 +1,10 @@
+# [4.0.0-alpha.47](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.46...v4.0.0-alpha.47) (2023-08-15)
+
+
+### Bug Fixes
+
+* change syntax for reactga4 ([6536b67](https://github.com/pelcro-inc/react-pelcro-js/commit/6536b6768c91edb35832b224302400a678aeedcd))
+
 # [4.0.0-alpha.46](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.45...v4.0.0-alpha.46) (2023-07-10)
 
 
