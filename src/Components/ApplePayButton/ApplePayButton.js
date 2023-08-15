@@ -9,7 +9,6 @@ import {
   LOADING,
   DISABLE_SUBMIT
 } from "../../utils/action-types";
-import { calcOrderAmount } from "../../utils/utils";
 
 /**
  * ApplePayButton component
@@ -25,9 +24,27 @@ export const ApplePayButton = ({ onClick, props, ...otherProps }) => {
     apple_pay_enabled: ApplePayEnabled
   } = window.Pelcro.site.read()?.vantiv_gateway_settings;
 
-  const orderPrice = !Array.isArray(order)
-    ? order?.price
-    : calcOrderAmount(order);
+  const getOrderItemsTotal = () => {
+    if (!order) {
+      return null;
+    }
+
+    const isQuickPurchase = !Array.isArray(order);
+
+    if (isQuickPurchase) {
+      return order.price * order.quantity;
+    }
+
+    if (order.length === 0) {
+      return null;
+    }
+
+    return order.reduce((total, item) => {
+      return total + item.price * item.quantity;
+    }, 0);
+  };
+
+  const orderPrice = getOrderItemsTotal();
 
   const orderCurrency = !Array.isArray(order)
     ? order?.currency
@@ -40,7 +57,8 @@ export const ApplePayButton = ({ onClick, props, ...otherProps }) => {
     props?.plan?.amount ??
     plan?.amount ??
     orderPrice ??
-    invoice.amount_remaining;
+    invoice.amount_remaining ??
+    null;
 
   useEffect(() => {
     if (window.ApplePaySession) {
