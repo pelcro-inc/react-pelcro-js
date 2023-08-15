@@ -7,23 +7,26 @@ import {
   ModalBody,
   ModalFooter
 } from "../../SubComponents/Modal";
-import { default as ReactGA1 } from "react-ga";
-import { default as ReactGA4 } from "react-ga4";
-
-const ReactGA = window?.Pelcro?.uiSettings?.enableReactGA4
-  ? ReactGA4
-  : ReactGA1;
+import ReactGA from "react-ga";
+import ReactGA4 from "react-ga4";
 
 export const PaymentMethodUpdateModal = (props) => {
   const { t } = useTranslation("paymentMethod");
 
+  const enableReactGA4 = window?.Pelcro?.uiSettings?.enableReactGA4;
   const onSuccess = (res) => {
     props.onSuccess?.(res);
-    ReactGA?.event?.({
-      category: "ACTIONS",
-      action: "Updated payment card",
-      nonInteraction: true
-    });
+    if (enableReactGA4) {
+      ReactGA4.event("Updated payment card", {
+        nonInteraction: true
+      });
+    } else {
+      ReactGA?.event?.({
+        category: "ACTIONS",
+        action: "Updated payment card",
+        nonInteraction: true
+      });
+    }
   };
 
   return (

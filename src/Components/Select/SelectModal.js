@@ -15,12 +15,8 @@ import {
   getEntitlementsFromElem,
   notifyBugsnag
 } from "../../utils/utils";
-import { default as ReactGA1 } from "react-ga";
-import { default as ReactGA4 } from "react-ga4";
-
-const ReactGA = window?.Pelcro?.uiSettings?.enableReactGA4
-  ? ReactGA4
-  : ReactGA1;
+import ReactGA from "react-ga";
+import ReactGA4 from "react-ga4";
 
 /**
  *
@@ -128,6 +124,7 @@ class SelectModal extends Component {
     this.closeButton = window.Pelcro.paywall.displayCloseButton();
 
     this.productsTabRef = React.createRef();
+    this.enableReactGA4 = window?.Pelcro?.uiSettings?.enableReactGA4;
   }
 
   componentDidMount = () => {
@@ -719,17 +716,29 @@ class SelectModal extends Component {
 
   render() {
     if (this.state.mode === "product") {
-      ReactGA?.event?.({
-        category: "VIEWS",
-        action: "Product Modal Viewed",
-        nonInteraction: true
-      });
+      if (this.enableReactGA4) {
+        ReactGA4.event("Product Modal Viewed", {
+          nonInteraction: true
+        });
+      } else {
+        ReactGA?.event?.({
+          category: "VIEWS",
+          action: "Product Modal Viewed",
+          nonInteraction: true
+        });
+      }
     } else if (this.state.mode === "plan") {
-      ReactGA?.event?.({
-        category: "VIEWS",
-        action: "Plan Modal Viewed",
-        nonInteraction: true
-      });
+      if (this.enableReactGA4) {
+        ReactGA4.event("Plan Modal Viewed", {
+          nonInteraction: true
+        });
+      } else {
+        ReactGA?.event?.({
+          category: "VIEWS",
+          action: "Plan Modal Viewed",
+          nonInteraction: true
+        });
+      }
     }
 
     return (

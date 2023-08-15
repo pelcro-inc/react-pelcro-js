@@ -1,4 +1,6 @@
 import React, { createContext } from "react";
+import ReactGA from "react-ga";
+import ReactGA4 from "react-ga4";
 import useReducerWithSideEffects, {
   UpdateWithSideEffect,
   Update,
@@ -18,12 +20,6 @@ import {
   HANDLE_SOCIAL_LOGIN
 } from "../../utils/action-types";
 import { getErrorMessages } from "../common/Helpers";
-import { default as ReactGA1 } from "react-ga";
-import { default as ReactGA4 } from "react-ga4";
-
-const ReactGA = window?.Pelcro?.uiSettings?.enableReactGA4
-  ? ReactGA4
-  : ReactGA1;
 
 const initialState = {
   email: "",
@@ -48,6 +44,7 @@ const LoginContainer = ({
   onFailure = () => {},
   children
 }) => {
+  const enableReactGA4 = window?.Pelcro?.uiSettings?.enableReactGA4;
   const handleLogin = ({ email, username, password }, dispatch) => {
     window.Pelcro.user.login(
       {
@@ -66,11 +63,17 @@ const LoginContainer = ({
           onFailure(err);
         } else {
           onSuccess(res);
-          ReactGA?.event?.({
-            category: "ACTIONS",
-            action: "Logged in",
-            nonInteraction: true
-          });
+          if (enableReactGA4) {
+            ReactGA4.event("Logged in", {
+              nonInteraction: true
+            });
+          } else {
+            ReactGA?.event?.({
+              category: "ACTIONS",
+              action: "Logged in",
+              nonInteraction: true
+            });
+          }
         }
       }
     );
