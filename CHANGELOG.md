@@ -1,3 +1,10 @@
+# [3.26.0-beta.15](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.14...v3.26.0-beta.15) (2023-08-16)
+
+
+### Features
+
+* export apple pay button ([c5ed2e5](https://github.com/pelcro-inc/react-pelcro-js/commit/c5ed2e5b933b2a17fafb1386689dfd5d8eef81d6))
+
 # [3.26.0-beta.14](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.13...v3.26.0-beta.14) (2023-08-15)
 
 
