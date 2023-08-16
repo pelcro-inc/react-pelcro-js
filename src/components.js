@@ -103,6 +103,7 @@ export {
   CheckoutForm
 } from "./SubComponents/StripeElements";
 export { PaypalSubscribeButton } from "./Components/PaypalButtons/PaypalSubscribeButton";
+export { ApplePayButton } from "./Components/ApplePayButton/ApplePayButton";
 export { AddressUpdateContainer } from "./Components/AddressUpdate/AddressUpdateContainer";
 export { AddressUpdateCountrySelect } from "./Components/AddressUpdate/AddressUpdateCountrySelect";
 export { AddressUpdateFirstName } from "./Components/AddressUpdate/AddressUpdateFirstName";
