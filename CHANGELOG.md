@@ -1,3 +1,10 @@
+# [3.26.0-sandbox.33](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-sandbox.32...v3.26.0-sandbox.33) (2023-08-17)
+
+
+### Bug Fixes
+
+* send correct updated price to apple pay sdk ([a22bbcb](https://github.com/pelcro-inc/react-pelcro-js/commit/a22bbcb41559ba80e24b9848f91bf400806544e4))
+
 # [3.26.0-sandbox.32](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-sandbox.31...v3.26.0-sandbox.32) (2023-08-16)
 
 
