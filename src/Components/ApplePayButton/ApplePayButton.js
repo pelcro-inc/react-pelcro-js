@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import React, { useEffect, useContext } from "react";
 import { store } from "../PaymentMethod/PaymentMethodContainer";
 import { getErrorMessages } from "../common/Helpers";
@@ -52,17 +51,10 @@ export const ApplePayButton = ({ onClick, props, ...otherProps }) => {
 
   const orderLabel = !Array.isArray(order) ? order?.name : "Order";
 
-  const updatedPrice =
-    state.updatedPrice ??
-    props?.plan?.amount ??
-    plan?.amount ??
-    orderPrice ??
-    invoice?.amount_remaining ??
-    null;
-
   useEffect(() => {
     if (window.ApplePaySession) {
       // Indicates whether the device supports Apple Pay and whether the user has an active card in Wallet.
+      // eslint-disable-next-line no-undef
       const promise = ApplePaySession.canMakePaymentsWithActiveCard(
         ApplePayMerchantId
       );
@@ -83,234 +75,251 @@ export const ApplePayButton = ({ onClick, props, ...otherProps }) => {
     }
   }, []);
 
-  function onApplePayButtonClicked() {
-    if (!ApplePaySession) {
-      return;
-    }
-
-    dispatch({ type: DISABLE_SUBMIT, payload: true });
-
-    // Define ApplePayPaymentRequest
-    // @see https://developer.apple.com/documentation/apple_pay_on_the_web/apple_pay_js_api/creating_an_apple_pay_session
-    const ApplePayPaymentRequest = {
-      countryCode:
-        window?.Pelcro?.user?.location?.countryCode || "US",
-      currencyCode:
-        plan?.currency.toUpperCase() ||
-        orderCurrency.toUpperCase() ||
-        invoice?.currency.toUpperCase(),
-      merchantCapabilities: ["supports3DS"],
-      supportedNetworks: ["visa", "masterCard", "amex", "discover"],
-      total: {
-        label:
-          plan?.nickname || orderLabel || `invoice #${invoice?.id}`,
-        type: "final",
-        amount: updatedPrice / 100
+  useEffect(() => {
+    function onApplePayButtonClicked() {
+      // eslint-disable-next-line no-undef
+      if (!ApplePaySession) {
+        return;
       }
-    };
 
-    console.log(ApplePayPaymentRequest);
-    // Create ApplePaySession
-    // @todo - Clarify supported version parameter
-    // @odo - Apple Pay demo uses version 6 (https://applepaydemo.apple.com/)
-    const session = new ApplePaySession(3, ApplePayPaymentRequest);
+      const updatedPrice =
+        state.updatedPrice ??
+        props?.plan?.amount ??
+        plan?.amount ??
+        orderPrice ??
+        invoice?.amount_remaining ??
+        null;
 
-    // @todo - Detect whether web browser supports a particular Apple Pay version.
-    // @see https://developer.apple.com/documentation/apple_pay_on_the_web/applepaysession/1778014-supportsversion
+      console.log(updatedPrice);
 
-    session.onvalidatemerchant = async (event) => {
-      const { validationURL } = event;
-      console.log("then merchantSession step", event);
-      // Call your own server to request a new merchant session.
-      window.Pelcro.payment.startSession(
-        {
-          auth_token: window.Pelcro.user.read().auth_token,
-          site_id: window.Pelcro.siteid,
-          validation_url: validationURL
-        },
-        (err, res) => {
-          if (err) {
-            // Handle any errors during merchant validation
-            console.error("Merchant validation SDK error: ", err);
-            session.abort();
-            return dispatch({
-              type: SHOW_ALERT,
-              payload: {
-                type: "error",
-                content: getErrorMessages(err)
-              }
-            });
-          }
-          // Complete merchant validation with the merchant session object
-          console.log("Merchant validation SDK response: ", res);
-          const merchantSession = res;
-          session.completeMerchantValidation(merchantSession);
-        }
-      );
-    };
+      dispatch({ type: DISABLE_SUBMIT, payload: true });
 
-    session.onpaymentmethodselected = (event) => {
-      console.log("payment method selected step", event);
-      // Define ApplePayPaymentMethodUpdate based on the selected payment method.
-      // No updates or errors are needed, pass an empty object.
-      const newTotal = {
-        label:
-          plan?.nickname || orderLabel || `invoice #${invoice?.id}`,
-        type: "final",
-        amount: updatedPrice / 100
-      };
-
-      const newLineItems = [
-        {
+      // Define ApplePayPaymentRequest
+      // @see https://developer.apple.com/documentation/apple_pay_on_the_web/apple_pay_js_api/creating_an_apple_pay_session
+      const ApplePayPaymentRequest = {
+        countryCode:
+          window?.Pelcro?.user?.location?.countryCode || "US",
+        currencyCode:
+          plan?.currency.toUpperCase() ||
+          orderCurrency.toUpperCase() ||
+          invoice?.currency.toUpperCase(),
+        merchantCapabilities: ["supports3DS"],
+        supportedNetworks: ["visa", "masterCard", "amex", "discover"],
+        total: {
           label:
             plan?.nickname || orderLabel || `invoice #${invoice?.id}`,
           type: "final",
           amount: updatedPrice / 100
         }
-      ];
-
-      session.completePaymentMethodSelection(newTotal, newLineItems);
-    };
-
-    // TODO: Check if onshippingmethodselected it should be implemented
-    // session.onshippingmethodselected = (event) => {
-    //   console.log("on shipping method selected step", event);
-    //   // Define ApplePayShippingMethodUpdate based on the selected shipping method.
-    //   // No updates or errors are needed, pass an empty object.
-    //   const newTotal = {
-    //     label: plan?.nickname || orderLabel || `invoice #${invoice?.id}`,
-    //     type: "final",
-    //     amount: updatedPrice / 100
-    //   };
-
-    //   const newLineItems = [
-    //     {
-    //       label: plan?.nickname || orderLabel || `invoice #${invoice?.id}`,
-    //       type: "final",
-    //       amount: updatedPrice / 100
-    //     }
-    //   ];
-
-    //   session.completeShippingMethodSelection(newTotal, newLineItems);
-    // };
-
-    // TODO: Check if onshippingcontactselected it should be implemented
-    // session.onshippingcontactselected = (event) => {
-    //   console.log("on shipping contact selected step", event);
-    //   // Define ApplePayShippingContactUpdate based on the selected shipping contact.
-    //   const update = {};
-    //   session.completeShippingContactSelection(update);
-    // };
-
-    session.onpaymentauthorized = (event) => {
-      console.log("on payment authorized step", event);
-      // Define ApplePayPaymentAuthorizationResult
-      const result = {
-        status: ApplePaySession.STATUS_SUCCESS
-      };
-      const { paymentData } = event.payment.token;
-      const { data, signature, version } = paymentData;
-      const { ephemeralPublicKey, publicKeyHash, transactionId } =
-        paymentData.header;
-      const applePayToken = {
-        data: data,
-        signature: signature,
-        version: version,
-        header: {
-          ephemeralPublicKey: ephemeralPublicKey,
-          publicKeyHash: publicKeyHash,
-          transactionId: transactionId
-        }
       };
 
-      console.log(applePayToken);
+      console.log(ApplePayPaymentRequest);
+      // Create ApplePaySession
+      // @todo - Clarify supported version parameter
+      // @odo - Apple Pay demo uses version 6 (https://applepaydemo.apple.com/)
+      const session = new ApplePaySession(3, ApplePayPaymentRequest); // eslint-disable-line no-undef
 
-      const orderId = `pelcro-${new Date().getTime()}`;
+      // @todo - Detect whether web browser supports a particular Apple Pay version.
+      // @see https://developer.apple.com/documentation/apple_pay_on_the_web/applepaysession/1778014-supportsversion
 
-      const eProtectRequest = {
-        paypageId: payPageId,
-        reportGroup: reportGroup,
-        orderId: orderId,
-        id: orderId,
-        applepay: applePayToken,
-        url: "https://request.eprotect.vantivprelive.com"
+      session.onvalidatemerchant = async (event) => {
+        const { validationURL } = event;
+        console.log("then merchantSession step", event);
+        // Call your own server to request a new merchant session.
+        window.Pelcro.payment.startSession(
+          {
+            auth_token: window.Pelcro.user.read().auth_token,
+            site_id: window.Pelcro.siteid,
+            validation_url: validationURL
+          },
+          (err, res) => {
+            if (err) {
+              // Handle any errors during merchant validation
+              console.error("Merchant validation SDK error: ", err);
+              session.abort();
+              return dispatch({
+                type: SHOW_ALERT,
+                payload: {
+                  type: "error",
+                  content: getErrorMessages(err)
+                }
+              });
+            }
+            // Complete merchant validation with the merchant session object
+            console.log("Merchant validation SDK response: ", res);
+            const merchantSession = res;
+            session.completeMerchantValidation(merchantSession);
+          }
+        );
       };
 
-      // successCallback function to handle the response from WorldPay.
-      function successCallback(vantivResponse) {
-        const { expDate } = vantivResponse;
-        console.log("Response:", vantivResponse);
-
-        const expMonth = expDate.substring(0, 2);
-        const expYear = expDate.substring(2);
-
-        const vantivPaymentRequest = {
-          ...vantivResponse,
-          expMonth: expMonth,
-          expYear: expYear
+      session.onpaymentmethodselected = (event) => {
+        console.log("payment method selected step", event);
+        // Define ApplePayPaymentMethodUpdate based on the selected payment method.
+        // No updates or errors are needed, pass an empty object.
+        const newTotal = {
+          label:
+            plan?.nickname || orderLabel || `invoice #${invoice?.id}`,
+          type: "final",
+          amount: updatedPrice / 100
         };
 
-        // Process the registrationId or continue with further payment processing.
-        dispatch({
-          type: HANDLE_APPLEPAY_SUBSCRIPTION,
-          payload: vantivPaymentRequest
-        });
-        dispatch({ type: LOADING, payload: true });
+        const newLineItems = [
+          {
+            label:
+              plan?.nickname ||
+              orderLabel ||
+              `invoice #${invoice?.id}`,
+            type: "final",
+            amount: updatedPrice / 100
+          }
+        ];
 
-        session.completePayment(result);
-      }
+        session.completePaymentMethodSelection(
+          newTotal,
+          newLineItems
+        );
+      };
 
-      // errorCallback function to handle any errors that may occur during the tokenization process.
-      function errorCallback(error) {
-        console.error("Error retrieving Registration ID:", error);
-        // Handle error appropriately.
-      }
-      // errorCallback function to handle any errors that may occur during the tokenization process.
-      function timeoutCallback() {
-        console.error("eProtect Timeout");
-        // Handle error appropriately.
-      }
+      // TODO: Check if onshippingmethodselected it should be implemented
+      // session.onshippingmethodselected = (event) => {
+      //   console.log("on shipping method selected step", event);
+      //   // Define ApplePayShippingMethodUpdate based on the selected shipping method.
+      //   // No updates or errors are needed, pass an empty object.
+      //   const newTotal = {
+      //     label: plan?.nickname || orderLabel || `invoice #${invoice?.id}`,
+      //     type: "final",
+      //     amount: updatedPrice / 100
+      //   };
 
-      new eProtect().sendToEprotect(
-        eProtectRequest,
-        {},
-        successCallback,
-        errorCallback,
-        timeoutCallback,
-        15000
-      );
-    };
+      //   const newLineItems = [
+      //     {
+      //       label: plan?.nickname || orderLabel || `invoice #${invoice?.id}`,
+      //       type: "final",
+      //       amount: updatedPrice / 100
+      //     }
+      //   ];
 
-    // TODO: Check if oncouponcodechanged it should be implemented
-    // session.oncouponcodechanged = (event) => {
-    //   console.log("on coupon code changed step", event);
-    //   // Define ApplePayCouponCodeUpdate
-    //   const newTotal = calculateNewTotal(event.couponCode);
-    //   const newLineItems = calculateNewLineItems(event.couponCode);
-    //   const newShippingMethods = calculateNewShippingMethods(
-    //     event.couponCode
-    //   );
-    //   const errors = calculateErrors(event.couponCode);
+      //   session.completeShippingMethodSelection(newTotal, newLineItems);
+      // };
 
-    //   session.completeCouponCodeChange({
-    //     newTotal: newTotal,
-    //     newLineItems: newLineItems,
-    //     newShippingMethods: newShippingMethods,
-    //     errors: errors
-    //   });
-    // };
+      // TODO: Check if onshippingcontactselected it should be implemented
+      // session.onshippingcontactselected = (event) => {
+      //   console.log("on shipping contact selected step", event);
+      //   // Define ApplePayShippingContactUpdate based on the selected shipping contact.
+      //   const update = {};
+      //   session.completeShippingContactSelection(update);
+      // };
 
-    session.oncancel = (event) => {
-      // Payment cancelled by WebKit
-      console.log("on cancel step", event);
-      dispatch({ type: LOADING, payload: false });
-      dispatch({ type: DISABLE_SUBMIT, payload: false });
-    };
+      session.onpaymentauthorized = (event) => {
+        console.log("on payment authorized step", event);
+        // Define ApplePayPaymentAuthorizationResult
+        const result = {
+          status: ApplePaySession.STATUS_SUCCESS // eslint-disable-line no-undef
+        };
+        const { paymentData } = event.payment.token;
+        const { data, signature, version } = paymentData;
+        const { ephemeralPublicKey, publicKeyHash, transactionId } =
+          paymentData.header;
+        const applePayToken = {
+          data: data,
+          signature: signature,
+          version: version,
+          header: {
+            ephemeralPublicKey: ephemeralPublicKey,
+            publicKeyHash: publicKeyHash,
+            transactionId: transactionId
+          }
+        };
 
-    session.begin();
-  }
+        console.log(applePayToken);
 
-  useEffect(() => {
+        const orderId = `pelcro-${new Date().getTime()}`;
+
+        const eProtectRequest = {
+          paypageId: payPageId,
+          reportGroup: reportGroup,
+          orderId: orderId,
+          id: orderId,
+          applepay: applePayToken,
+          url: "https://request.eprotect.vantivprelive.com"
+        };
+
+        // successCallback function to handle the response from WorldPay.
+        function successCallback(vantivResponse) {
+          const { expDate } = vantivResponse;
+          console.log("Response:", vantivResponse);
+
+          const expMonth = expDate.substring(0, 2);
+          const expYear = expDate.substring(2);
+
+          const vantivPaymentRequest = {
+            ...vantivResponse,
+            expMonth: expMonth,
+            expYear: expYear
+          };
+
+          // Process the registrationId or continue with further payment processing.
+          dispatch({
+            type: HANDLE_APPLEPAY_SUBSCRIPTION,
+            payload: vantivPaymentRequest
+          });
+          dispatch({ type: LOADING, payload: true });
+
+          session.completePayment(result);
+        }
+
+        // errorCallback function to handle any errors that may occur during the tokenization process.
+        function errorCallback(error) {
+          console.error("Error retrieving Registration ID:", error);
+          // Handle error appropriately.
+        }
+        // errorCallback function to handle any errors that may occur during the tokenization process.
+        function timeoutCallback() {
+          console.error("eProtect Timeout");
+          // Handle error appropriately.
+        }
+
+        // eslint-disable-next-line no-undef
+        new eProtect().sendToEprotect(
+          eProtectRequest,
+          {},
+          successCallback,
+          errorCallback,
+          timeoutCallback,
+          15000
+        );
+      };
+
+      // TODO: Check if oncouponcodechanged it should be implemented
+      // session.oncouponcodechanged = (event) => {
+      //   console.log("on coupon code changed step", event);
+      //   // Define ApplePayCouponCodeUpdate
+      //   const newTotal = calculateNewTotal(event.couponCode);
+      //   const newLineItems = calculateNewLineItems(event.couponCode);
+      //   const newShippingMethods = calculateNewShippingMethods(
+      //     event.couponCode
+      //   );
+      //   const errors = calculateErrors(event.couponCode);
+
+      //   session.completeCouponCodeChange({
+      //     newTotal: newTotal,
+      //     newLineItems: newLineItems,
+      //     newShippingMethods: newShippingMethods,
+      //     errors: errors
+      //   });
+      // };
+
+      session.oncancel = (event) => {
+        // Payment cancelled by WebKit
+        console.log("on cancel step", event);
+        dispatch({ type: LOADING, payload: false });
+        dispatch({ type: DISABLE_SUBMIT, payload: false });
+      };
+
+      session.begin();
+    }
+
     const pelcroApplyPayButton = document.getElementById(
       "pelcro-apple-pay-button"
     );
@@ -320,7 +329,16 @@ export const ApplePayButton = ({ onClick, props, ...otherProps }) => {
         onApplePayButtonClicked
       );
     }
-  }, []);
+
+    return () => {
+      if (pelcroApplyPayButton) {
+        pelcroApplyPayButton.removeEventListener(
+          "click",
+          onApplePayButtonClicked
+        );
+      }
+    };
+  }, [state.updatedPrice]);
 
   return (
     <apple-pay-button
