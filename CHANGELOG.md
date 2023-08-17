@@ -1,3 +1,10 @@
+# [3.26.0-beta.16](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.15...v3.26.0-beta.16) (2023-08-17)
+
+
+### Bug Fixes
+
+* send correct updated price to apple pay sdk ([a22bbcb](https://github.com/pelcro-inc/react-pelcro-js/commit/a22bbcb41559ba80e24b9848f91bf400806544e4))
+
 # [3.26.0-beta.15](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.14...v3.26.0-beta.15) (2023-08-16)
 
 
