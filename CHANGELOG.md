@@ -1,3 +1,10 @@
+# [3.26.0-sandbox.34](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-sandbox.33...v3.26.0-sandbox.34) (2023-08-21)
+
+
+### Bug Fixes
+
+* type error bug fix ([65cc749](https://github.com/pelcro-inc/react-pelcro-js/commit/65cc7497be2e6829a6fcdfa683ac3f767a819b95))
+
 # [3.26.0-sandbox.33](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-sandbox.32...v3.26.0-sandbox.33) (2023-08-17)
 
 
