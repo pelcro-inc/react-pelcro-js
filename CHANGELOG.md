@@ -1,3 +1,10 @@
+# [3.26.0-beta.17](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.16...v3.26.0-beta.17) (2023-08-21)
+
+
+### Bug Fixes
+
+* type error bug fix ([65cc749](https://github.com/pelcro-inc/react-pelcro-js/commit/65cc7497be2e6829a6fcdfa683ac3f767a819b95))
+
 # [3.26.0-beta.16](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.15...v3.26.0-beta.16) (2023-08-17)
 
 
