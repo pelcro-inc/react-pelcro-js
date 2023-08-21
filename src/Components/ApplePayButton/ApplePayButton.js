@@ -23,33 +23,50 @@ export const ApplePayButton = ({ onClick, props, ...otherProps }) => {
     apple_pay_enabled: ApplePayEnabled
   } = window.Pelcro.site.read()?.vantiv_gateway_settings;
 
-  const getOrderItemsTotal = () => {
+  const getOrderInfo = () => {
     if (!order) {
-      return null;
+      return {
+        price: null,
+        currency: null,
+        label: null
+      };
     }
 
     const isQuickPurchase = !Array.isArray(order);
 
     if (isQuickPurchase) {
-      return order.price * order.quantity;
+      return {
+        price: order.price * order.quantity,
+        currency: order.currency,
+        label: order.name
+      };
     }
 
     if (order.length === 0) {
-      return null;
+      return {
+        price: null,
+        currency: null,
+        label: null
+      };
     }
 
-    return order.reduce((total, item) => {
-      return total + item.price * item.quantity;
-    }, 0);
+    const price = order.reduce(
+      (total, item) => total + item.price * item.quantity,
+      0
+    );
+
+    return {
+      price,
+      currency: order[0].currency,
+      label: "Order"
+    };
   };
 
-  const orderPrice = getOrderItemsTotal();
+  const orderPrice = getOrderInfo().price;
 
-  const orderCurrency = !Array.isArray(order)
-    ? order?.currency
-    : order[0]?.currency;
+  const orderCurrency = getOrderInfo().currency;
 
-  const orderLabel = !Array.isArray(order) ? order?.name : "Order";
+  const orderLabel = getOrderInfo().label;
 
   useEffect(() => {
     if (window.ApplePaySession) {
@@ -90,7 +107,15 @@ export const ApplePayButton = ({ onClick, props, ...otherProps }) => {
         invoice?.amount_remaining ??
         null;
 
-      console.log(updatedPrice);
+      const getCurrencyCode = () => {
+        if (plan) {
+          return plan?.currency.toUpperCase();
+        } else if (order) {
+          return orderCurrency.toUpperCase();
+        } else if (invoice) {
+          return invoice?.currency.toUpperCase();
+        }
+      };
 
       dispatch({ type: DISABLE_SUBMIT, payload: true });
 
@@ -99,10 +124,7 @@ export const ApplePayButton = ({ onClick, props, ...otherProps }) => {
       const ApplePayPaymentRequest = {
         countryCode:
           window?.Pelcro?.user?.location?.countryCode || "US",
-        currencyCode:
-          plan?.currency.toUpperCase() ||
-          orderCurrency.toUpperCase() ||
-          invoice?.currency.toUpperCase(),
+        currencyCode: getCurrencyCode(),
         merchantCapabilities: ["supports3DS"],
         supportedNetworks: ["visa", "masterCard", "amex", "discover"],
         total: {
