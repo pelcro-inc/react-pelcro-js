@@ -1,3 +1,10 @@
+# [3.26.0-sandbox.35](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-sandbox.34...v3.26.0-sandbox.35) (2023-08-22)
+
+
+### Features
+
+* add apple pay flag to vantiv request body ([06931f2](https://github.com/pelcro-inc/react-pelcro-js/commit/06931f28812485fbf2ce48d41131c9be159502c0))
+
 # [3.26.0-sandbox.34](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-sandbox.33...v3.26.0-sandbox.34) (2023-08-21)
 
 
