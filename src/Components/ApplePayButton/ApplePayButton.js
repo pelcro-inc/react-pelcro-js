@@ -278,7 +278,8 @@ export const ApplePayButton = ({ onClick, props, ...otherProps }) => {
           const vantivPaymentRequest = {
             ...vantivResponse,
             expMonth: expMonth,
-            expYear: expYear
+            expYear: expYear,
+            applePay: true
           };
 
           // Process the registrationId or continue with further payment processing.
