@@ -1,3 +1,10 @@
+# [3.26.0-beta.18](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.17...v3.26.0-beta.18) (2023-08-22)
+
+
+### Features
+
+* add apple pay flag to vantiv request body ([06931f2](https://github.com/pelcro-inc/react-pelcro-js/commit/06931f28812485fbf2ce48d41131c9be159502c0))
+
 # [3.26.0-beta.17](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.16...v3.26.0-beta.17) (2023-08-21)
 
 
