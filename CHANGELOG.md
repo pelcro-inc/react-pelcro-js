@@ -1,3 +1,10 @@
+# [3.26.0-beta.19](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.18...v3.26.0-beta.19) (2023-08-24)
+
+
+### Bug Fixes
+
+* added latter event registeration handler ([76f8f59](https://github.com/pelcro-inc/react-pelcro-js/commit/76f8f59fba825b3edc8004a3467deb6b4fe119ba))
+
 # [3.26.0-beta.18](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.17...v3.26.0-beta.18) (2023-08-22)
 
 
