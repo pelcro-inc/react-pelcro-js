@@ -1,3 +1,11 @@
+# [3.26.0-beta.20](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.19...v3.26.0-beta.20) (2023-08-24)
+
+
+### Bug Fixes
+
+* remove console logs ([aa02814](https://github.com/pelcro-inc/react-pelcro-js/commit/aa028140e0f18c7d1b521c8faf2df1cb63ffc35c))
+* remove unwanted logs ([8b8f18e](https://github.com/pelcro-inc/react-pelcro-js/commit/8b8f18e9a81b8e2852f92f81978c4c56d977c9d7))
+
 # [3.26.0-beta.19](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.18...v3.26.0-beta.19) (2023-08-24)
 
 
