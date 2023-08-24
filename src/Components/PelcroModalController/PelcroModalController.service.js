@@ -86,16 +86,18 @@ export const initPaywalls = () => {
         switchView("plan-select");
       }
     }
-    if (isAuthenticated()) {
+
+    if ("id" in Pelcro.user.read() || !isAuthenticated()) {
+      displayPaywalls();
+    } else {
       addEventListener(
         "PelcroUserLoaded",
         function () {
+          console.log("let's see if the user will be available")
           displayPaywalls();
         },
         true
       );
-    } else {
-      displayPaywalls();
     }
   }
 };
@@ -176,7 +178,7 @@ export const loadPaymentSDKs = () => {
 export const loadAuth0SDK = () => {
   const auth0Enabled = Boolean(
     window.Pelcro.site.read().auth0_client_id &&
-      window.Pelcro.site.read().auth0_base_url
+    window.Pelcro.site.read().auth0_base_url
   );
 
   if (auth0Enabled) {
@@ -190,7 +192,7 @@ export const loadAuth0SDK = () => {
 export const load = () => {
   const auth0Enabled = Boolean(
     window.Pelcro.site.read().auth0_client_id &&
-      window.Pelcro.site.read().auth0_base_url
+    window.Pelcro.site.read().auth0_base_url
   );
 
   if (auth0Enabled) {
