@@ -69,6 +69,7 @@ export const initPaywalls = () => {
 
     const { switchView, isAuthenticated } = usePelcro.getStore();
 
+    // eslint-disable-next-line no-inner-declarations
     function displayPaywalls() {
       if (paywallMethods?.displayMeterPaywall()) {
         /* 
@@ -86,9 +87,13 @@ export const initPaywalls = () => {
       }
     }
     if (isAuthenticated()) {
-      addEventListener("PelcroUserLoaded", function () {
-        displayPaywalls();
-      })
+      addEventListener(
+        "PelcroUserLoaded",
+        function () {
+          displayPaywalls();
+        },
+        true
+      );
     } else {
       displayPaywalls();
     }
@@ -193,7 +198,7 @@ export const loadPaymentSDKs = () => {
 export const loadAuth0SDK = () => {
   const auth0Enabled = Boolean(
     window.Pelcro.site.read().auth0_client_id &&
-    window.Pelcro.site.read().auth0_base_url
+      window.Pelcro.site.read().auth0_base_url
   );
 
   if (auth0Enabled) {
@@ -207,7 +212,7 @@ export const loadAuth0SDK = () => {
 export const load = () => {
   const auth0Enabled = Boolean(
     window.Pelcro.site.read().auth0_client_id &&
-    window.Pelcro.site.read().auth0_base_url
+      window.Pelcro.site.read().auth0_base_url
   );
 
   if (auth0Enabled) {
