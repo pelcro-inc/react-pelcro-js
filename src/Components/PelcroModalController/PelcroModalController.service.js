@@ -93,7 +93,6 @@ export const initPaywalls = () => {
       addEventListener(
         "PelcroUserLoaded",
         function () {
-          console.log("let's see if the user will be available")
           displayPaywalls();
         },
         true
