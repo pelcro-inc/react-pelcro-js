@@ -1,3 +1,15 @@
+# [3.28.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.27.0...v3.28.0) (2023-08-28)
+
+
+### Bug Fixes
+
+* Fix load paywalls race condition ([#328](https://github.com/pelcro-inc/react-pelcro-js/issues/328)) ([34418f3](https://github.com/pelcro-inc/react-pelcro-js/commit/34418f365d5ad1acbb3079b5f6e9b6cc4e25bcf5))
+
+
+### Features
+
+* add comment ([e5a966e](https://github.com/pelcro-inc/react-pelcro-js/commit/e5a966ec40dfb5651bc2fef363f366a26cb6eade))
+
 # [3.27.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.1...v3.27.0) (2023-08-01)
 
 
