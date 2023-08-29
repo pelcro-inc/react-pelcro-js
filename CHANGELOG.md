@@ -1,3 +1,10 @@
+# [3.29.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.28.0...v3.29.0) (2023-08-29)
+
+
+### Features
+
+* fetch translated plan interval from server ([#331](https://github.com/pelcro-inc/react-pelcro-js/issues/331)) ([4767d38](https://github.com/pelcro-inc/react-pelcro-js/commit/4767d387c2725eeced0570c3a47a53f2a29e1431))
+
 # [3.28.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.27.0...v3.28.0) (2023-08-28)
 
 
