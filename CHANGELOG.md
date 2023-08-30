@@ -1,3 +1,16 @@
+# [3.26.0-sandbox.36](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-sandbox.35...v3.26.0-sandbox.36) (2023-08-30)
+
+
+### Bug Fixes
+
+* cart remove item button display bug on safari ([36e0209](https://github.com/pelcro-inc/react-pelcro-js/commit/36e0209e8d8d9ecf2ae93dc30a2c440c1781dd2e))
+* Fix load paywalls race condition ([#328](https://github.com/pelcro-inc/react-pelcro-js/issues/328)) ([34418f3](https://github.com/pelcro-inc/react-pelcro-js/commit/34418f365d5ad1acbb3079b5f6e9b6cc4e25bcf5))
+
+
+### Features
+
+* fetch translated plan interval from server ([#331](https://github.com/pelcro-inc/react-pelcro-js/issues/331)) ([4767d38](https://github.com/pelcro-inc/react-pelcro-js/commit/4767d387c2725eeced0570c3a47a53f2a29e1431))
+
 # [3.26.0-sandbox.35](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-sandbox.34...v3.26.0-sandbox.35) (2023-08-22)
 
 
