@@ -1,3 +1,10 @@
+## [3.29.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.29.0...v3.29.1) (2023-08-30)
+
+
+### Bug Fixes
+
+* cart remove item button display bug on safari ([#332](https://github.com/pelcro-inc/react-pelcro-js/issues/332)) ([04545c7](https://github.com/pelcro-inc/react-pelcro-js/commit/04545c71444cc076d63eb508b3940c1da5ada559))
+
 # [3.29.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.28.0...v3.29.0) (2023-08-29)
 
 
