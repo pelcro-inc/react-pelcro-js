@@ -1,3 +1,10 @@
+# [3.26.0-beta.22](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.21...v3.26.0-beta.22) (2023-09-05)
+
+
+### Features
+
+* remove console logs prep for prod ([8290a9f](https://github.com/pelcro-inc/react-pelcro-js/commit/8290a9faa28260ff466d28142b1ae807b17f26a8))
+
 # [3.26.0-beta.21](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.20...v3.26.0-beta.21) (2023-08-30)
 
 
