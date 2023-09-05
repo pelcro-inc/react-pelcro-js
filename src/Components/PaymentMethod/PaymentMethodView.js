@@ -27,6 +27,7 @@ import {
   getFormattedPriceByLocal,
   getPageOrDefaultLanguage
 } from "../../utils/utils";
+import { ApplePayButton } from "../ApplePayButton/ApplePayButton";
 
 /**
  *
@@ -40,6 +41,7 @@ export function PaymentMethodView({
   showExternalPaymentMethods,
   showSubscriptionButton,
   showOrderButton,
+  showApplePayButton,
   order
 }) {
   const { t } = useTranslation("checkoutForm");
@@ -189,6 +191,11 @@ export function PaymentMethodView({
                 ) : showExternalPaymentMethods && supportsVantiv ? (
                   <>
                     <PaypalSubscribeButton />
+                  </>
+                ) : null}
+                {showApplePayButton && supportsVantiv ? (
+                  <>
+                    <ApplePayButton />
                   </>
                 ) : null}
               </div>
