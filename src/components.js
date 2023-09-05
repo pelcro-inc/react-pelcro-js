@@ -59,7 +59,7 @@ export { SubscriptionCreateFreePlanButton } from "./Components/SubscriptionCreat
 export { SubscriptionCreateView } from "./Components/SubscriptionCreate/SubscriptionCreateView";
 export { SubscriptionCreateModal } from "./Components/SubscriptionCreate/SubscriptionCreateModal";
 
-export { SubscriptionManageMembersButton } from "./Components/SubscriptionManageMembers/SubscriptionManageMembersButton"
+export { SubscriptionManageMembersButton } from "./Components/SubscriptionManageMembers/SubscriptionManageMembersButton";
 export { SubscriptionManageMembersEmails } from "./Components/SubscriptionManageMembers/SubscriptionManageMembersEmails";
 export { SubscriptionManageMembersList } from "./Components/SubscriptionManageMembers/SubscriptionManageMembersList";
 export { SubscriptionManageMembersView } from "./Components/SubscriptionManageMembers/SubscriptionManageMembersView";
@@ -103,6 +103,7 @@ export {
   CheckoutForm
 } from "./SubComponents/StripeElements";
 export { PaypalSubscribeButton } from "./Components/PaypalButtons/PaypalSubscribeButton";
+export { ApplePayButton } from "./Components/ApplePayButton/ApplePayButton";
 export { AddressUpdateContainer } from "./Components/AddressUpdate/AddressUpdateContainer";
 export { AddressUpdateCountrySelect } from "./Components/AddressUpdate/AddressUpdateCountrySelect";
 export { AddressUpdateFirstName } from "./Components/AddressUpdate/AddressUpdateFirstName";
