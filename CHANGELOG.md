@@ -1,3 +1,10 @@
+# [3.30.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.29.1...v3.30.0) (2023-09-05)
+
+
+### Features
+
+* change console log ([f8f83a0](https://github.com/pelcro-inc/react-pelcro-js/commit/f8f83a0860180d43d4a8a57964e294039e7284d4))
+
 ## [3.29.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.29.0...v3.29.1) (2023-08-30)
 
 
