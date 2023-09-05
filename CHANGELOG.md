@@ -1,3 +1,10 @@
+# [3.26.0-sandbox.37](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-sandbox.36...v3.26.0-sandbox.37) (2023-09-05)
+
+
+### Features
+
+* remove console logs prep for prod ([8290a9f](https://github.com/pelcro-inc/react-pelcro-js/commit/8290a9faa28260ff466d28142b1ae807b17f26a8))
+
 # [3.26.0-sandbox.36](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-sandbox.35...v3.26.0-sandbox.36) (2023-08-30)
 
 
