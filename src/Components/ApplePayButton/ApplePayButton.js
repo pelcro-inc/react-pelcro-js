@@ -84,7 +84,7 @@ export const ApplePayButton = ({ onClick, props, ...otherProps }) => {
           if (pelcroApplyPayButton) {
             pelcroApplyPayButton.style.display = "block";
           }
-          console.log("canMakePayments", canMakePayments);
+          console.log("ApplePay canMakePayments: ", canMakePayments);
         }
       });
     } else {
@@ -135,7 +135,6 @@ export const ApplePayButton = ({ onClick, props, ...otherProps }) => {
         }
       };
 
-      console.log(ApplePayPaymentRequest);
       // Create ApplePaySession
       // @todo - Clarify supported version parameter
       // @odo - Apple Pay demo uses version 6 (https://applepaydemo.apple.com/)
@@ -146,7 +145,6 @@ export const ApplePayButton = ({ onClick, props, ...otherProps }) => {
 
       session.onvalidatemerchant = async (event) => {
         const { validationURL } = event;
-        console.log("then merchantSession step", event);
         // Call your own server to request a new merchant session.
         window.Pelcro.payment.startSession(
           {
@@ -157,7 +155,6 @@ export const ApplePayButton = ({ onClick, props, ...otherProps }) => {
           (err, res) => {
             if (err) {
               // Handle any errors during merchant validation
-              console.error("Merchant validation SDK error: ", err);
               session.abort();
               return dispatch({
                 type: SHOW_ALERT,
@@ -168,7 +165,6 @@ export const ApplePayButton = ({ onClick, props, ...otherProps }) => {
               });
             }
             // Complete merchant validation with the merchant session object
-            console.log("Merchant validation SDK response: ", res);
             const merchantSession = res;
             session.completeMerchantValidation(merchantSession);
           }
@@ -176,7 +172,6 @@ export const ApplePayButton = ({ onClick, props, ...otherProps }) => {
       };
 
       session.onpaymentmethodselected = (event) => {
-        console.log("payment method selected step", event);
         // Define ApplePayPaymentMethodUpdate based on the selected payment method.
         // No updates or errors are needed, pass an empty object.
         const newTotal = {
@@ -205,7 +200,6 @@ export const ApplePayButton = ({ onClick, props, ...otherProps }) => {
 
       // TODO: Check if onshippingmethodselected it should be implemented
       // session.onshippingmethodselected = (event) => {
-      //   console.log("on shipping method selected step", event);
       //   // Define ApplePayShippingMethodUpdate based on the selected shipping method.
       //   // No updates or errors are needed, pass an empty object.
       //   const newTotal = {
@@ -227,14 +221,12 @@ export const ApplePayButton = ({ onClick, props, ...otherProps }) => {
 
       // TODO: Check if onshippingcontactselected it should be implemented
       // session.onshippingcontactselected = (event) => {
-      //   console.log("on shipping contact selected step", event);
       //   // Define ApplePayShippingContactUpdate based on the selected shipping contact.
       //   const update = {};
       //   session.completeShippingContactSelection(update);
       // };
 
       session.onpaymentauthorized = (event) => {
-        console.log("on payment authorized step", event);
         // Define ApplePayPaymentAuthorizationResult
         const result = {
           status: ApplePaySession.STATUS_SUCCESS // eslint-disable-line no-undef
@@ -254,8 +246,6 @@ export const ApplePayButton = ({ onClick, props, ...otherProps }) => {
           }
         };
 
-        console.log(applePayToken);
-
         const orderId = `pelcro-${new Date().getTime()}`;
 
         const eProtectRequest = {
@@ -270,7 +260,6 @@ export const ApplePayButton = ({ onClick, props, ...otherProps }) => {
         // successCallback function to handle the response from WorldPay.
         function successCallback(vantivResponse) {
           const { expDate } = vantivResponse;
-          console.log("Response:", vantivResponse);
 
           const expMonth = expDate.substring(0, 2);
           const expYear = expDate.substring(2);
@@ -316,7 +305,6 @@ export const ApplePayButton = ({ onClick, props, ...otherProps }) => {
 
       // TODO: Check if oncouponcodechanged it should be implemented
       // session.oncouponcodechanged = (event) => {
-      //   console.log("on coupon code changed step", event);
       //   // Define ApplePayCouponCodeUpdate
       //   const newTotal = calculateNewTotal(event.couponCode);
       //   const newLineItems = calculateNewLineItems(event.couponCode);
@@ -335,7 +323,6 @@ export const ApplePayButton = ({ onClick, props, ...otherProps }) => {
 
       session.oncancel = (event) => {
         // Payment cancelled by WebKit
-        console.log("on cancel step", event);
         dispatch({ type: LOADING, payload: false });
         dispatch({ type: DISABLE_SUBMIT, payload: false });
       };
