@@ -84,7 +84,10 @@ export const ApplePayButton = ({ onClick, props, ...otherProps }) => {
           if (pelcroApplyPayButton) {
             pelcroApplyPayButton.style.display = "block";
           }
-          console.log("ApplePay canMakePayments: ", canMakePayments);
+          console.log(
+            "ApplePay canMakePayments function: ",
+            canMakePayments
+          );
         }
       });
     } else {
