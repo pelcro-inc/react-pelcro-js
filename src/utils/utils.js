@@ -203,7 +203,7 @@ export const calcOrderAmount = (items) => {
   }, 0);
 };
 
-export const getOrderInfo = (order) => {
+export const getOrderInfo = (order, i18n) => {
   if (!order) {
     return {
       price: null,
@@ -246,7 +246,8 @@ export const getOrderInfo = (order) => {
   return {
     price,
     currency: order[0].currency,
-    label: price === 0 ? "Free Items" : "Order"
+    label:
+      price === 0 ? i18n("labels.freeItems") : i18n("labels.order")
   };
 };
 
