@@ -1,3 +1,16 @@
+# [3.26.0-beta.23](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.22...v3.26.0-beta.23) (2023-09-08)
+
+
+### Bug Fixes
+
+* cart remove item button display bug on safari ([#332](https://github.com/pelcro-inc/react-pelcro-js/issues/332)) ([04545c7](https://github.com/pelcro-inc/react-pelcro-js/commit/04545c71444cc076d63eb508b3940c1da5ada559))
+* order summary label bug fix ([069e515](https://github.com/pelcro-inc/react-pelcro-js/commit/069e51585a88821a068a598486b72c6a032ebf03))
+
+
+### Features
+
+* change console log ([f8f83a0](https://github.com/pelcro-inc/react-pelcro-js/commit/f8f83a0860180d43d4a8a57964e294039e7284d4))
+
 # [3.26.0-beta.22](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.21...v3.26.0-beta.22) (2023-09-05)
 
 
