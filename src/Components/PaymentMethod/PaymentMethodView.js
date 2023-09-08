@@ -25,7 +25,8 @@ import { OrderCreateFreeButton } from "../OrderCreate/OrderCreateFreeButton";
 import {
   calcAndFormatItemsTotal,
   getFormattedPriceByLocal,
-  getPageOrDefaultLanguage
+  getPageOrDefaultLanguage,
+  getOrderInfo
 } from "../../utils/utils";
 import { ApplePayButton } from "../ApplePayButton/ApplePayButton";
 
@@ -70,15 +71,9 @@ export function PaymentMethodView({
       {order && (
         <div className="plc-w-full plc-p-2 plc-mb-4 plc-font-semibold plc-text-center plc-text-gray-900 plc-bg-gray-100 plc-border plc-border-gray-200">
           <p className="plc-text-gray-600">
-            {!Array.isArray(order) ? (
-              <span className="plc-tracking-wider plc-uppercase">
-                {order?.name}
-              </span>
-            ) : (
-              <span className="plc-tracking-wider plc-uppercase">
-                {t("labels.freeItems")}
-              </span>
-            )}
+            <span className="plc-tracking-wider plc-uppercase">
+              {getOrderInfo(order).label}
+            </span>
             <br />
             <span className="plc-text-xl plc-font-semibold plc-text-primary-600">
               {calcAndFormatItemsTotal(order, order[0]?.currency) ??
