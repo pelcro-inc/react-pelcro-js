@@ -1,3 +1,10 @@
+# [3.26.0-beta.24](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.23...v3.26.0-beta.24) (2023-09-08)
+
+
+### Features
+
+* add translations ([cee3678](https://github.com/pelcro-inc/react-pelcro-js/commit/cee3678eb0a9273ef17583dc4b2edc42023f2a53))
+
 # [3.26.0-beta.23](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.22...v3.26.0-beta.23) (2023-09-08)
 
 
