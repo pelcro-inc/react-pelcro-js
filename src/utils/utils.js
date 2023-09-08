@@ -203,6 +203,53 @@ export const calcOrderAmount = (items) => {
   }, 0);
 };
 
+export const getOrderInfo = (order) => {
+  if (!order) {
+    return {
+      price: null,
+      currency: null,
+      label: null
+    };
+  }
+
+  const isQuickPurchase = !Array.isArray(order);
+
+  if (isQuickPurchase) {
+    return {
+      price: order.price * order.quantity,
+      currency: order.currency,
+      label: order.name
+    };
+  }
+
+  if (order.length === 0) {
+    return {
+      price: null,
+      currency: null,
+      label: null
+    };
+  }
+
+  if (order.length === 1) {
+    return {
+      price: order[0].price * order[0].quantity,
+      currency: order[0].currency,
+      label: order[0].name
+    };
+  }
+
+  const price = order.reduce(
+    (total, item) => total + item.price * item.quantity,
+    0
+  );
+
+  return {
+    price,
+    currency: order[0].currency,
+    label: price === 0 ? "Free Items" : "Order"
+  };
+};
+
 /**
  * returns true if the URL contains a supported view trigger URL
  * @param {string} viewID
