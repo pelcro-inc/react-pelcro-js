@@ -72,7 +72,7 @@ export function PaymentMethodView({
         <div className="plc-w-full plc-p-2 plc-mb-4 plc-font-semibold plc-text-center plc-text-gray-900 plc-bg-gray-100 plc-border plc-border-gray-200">
           <p className="plc-text-gray-600">
             <span className="plc-tracking-wider plc-uppercase">
-              {getOrderInfo(order).label}
+              {getOrderInfo(order, t).label}
             </span>
             <br />
             <span className="plc-text-xl plc-font-semibold plc-text-primary-600">

@@ -24,6 +24,7 @@
     "firstName": "Nombre",
     "lastName": "Apellido",
     "phone": "Teléfono",
-    "freeItems": "Artículos gratis"
+    "freeItems": "Artículos gratis",
+    "order": "Pida"
   }
 }
