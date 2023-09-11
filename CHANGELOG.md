@@ -1,3 +1,10 @@
+# [3.26.0-sandbox.39](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-sandbox.38...v3.26.0-sandbox.39) (2023-09-11)
+
+
+### Features
+
+* add prod eProtectRequestURL ([c40d078](https://github.com/pelcro-inc/react-pelcro-js/commit/c40d078a88890c215f042a13421ce7064de851af))
+
 # [3.26.0-sandbox.38](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-sandbox.37...v3.26.0-sandbox.38) (2023-09-11)
 
 
