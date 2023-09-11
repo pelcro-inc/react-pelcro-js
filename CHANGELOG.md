@@ -1,3 +1,10 @@
+# [3.26.0-beta.26](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.25...v3.26.0-beta.26) (2023-09-11)
+
+
+### Features
+
+* add prod eProtectRequestURL ([c40d078](https://github.com/pelcro-inc/react-pelcro-js/commit/c40d078a88890c215f042a13421ce7064de851af))
+
 # [3.26.0-beta.25](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.24...v3.26.0-beta.25) (2023-09-11)
 
 
