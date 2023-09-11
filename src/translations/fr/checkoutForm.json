@@ -25,6 +25,7 @@
     "lastName": "Nom de famille",
     "phone": "Téléphoner",
     "freeItems": "Articles gratuits",
-    "order": "Commande"
+    "order": "Commande",
+    "amount": "Montant"
   }
 }

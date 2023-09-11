@@ -25,6 +25,7 @@
     "lastName": "Last name",
     "phone": "Phone",
     "freeItems": "Free Items",
-    "order": "Order"
+    "order": "Order",
+    "amount": "Amount"
   }
 }
