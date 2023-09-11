@@ -1,3 +1,10 @@
+# [3.26.0-beta.25](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.24...v3.26.0-beta.25) (2023-09-11)
+
+
+### Features
+
+* change order summary label ([f186b72](https://github.com/pelcro-inc/react-pelcro-js/commit/f186b72ce2b156f23a471b892ee7ab554b8f31f8))
+
 # [3.26.0-beta.24](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.23...v3.26.0-beta.24) (2023-09-08)
 
 
