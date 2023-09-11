@@ -26,6 +26,7 @@
     "phone": "Phone",
     "freeItems": "Free Items",
     "order": "Order",
+    "amount": "Amount",
     "email": "Email",
     "password": "Password"
   }
