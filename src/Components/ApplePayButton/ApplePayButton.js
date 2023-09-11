@@ -248,13 +248,23 @@ export const ApplePayButton = ({ onClick, props, ...otherProps }) => {
 
         const orderId = `pelcro-${new Date().getTime()}`;
 
+        const eProtectRequestPreLiveURL =
+          "https://request.eprotect.vantivprelive.com";
+        const eProtectRequestProductionURL =
+          "https://request.eprotect.vantivcnp.com";
+        const eProtectRequestUrlToUse =
+          window.Pelcro.site.read().vantiv_gateway_settings
+            .environment === "production"
+            ? eProtectRequestProductionURL
+            : eProtectRequestPreLiveURL;
+
         const eProtectRequest = {
           paypageId: payPageId,
           reportGroup: reportGroup,
           orderId: orderId,
           id: orderId,
           applepay: applePayToken,
-          url: "https://request.eprotect.vantivprelive.com"
+          url: eProtectRequestUrlToUse
         };
 
         // successCallback function to handle the response from WorldPay.
