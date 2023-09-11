@@ -1,3 +1,10 @@
+# [3.31.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.30.0...v3.31.0) (2023-09-11)
+
+
+### Features
+
+* add prod eProtectRequestURL ([#334](https://github.com/pelcro-inc/react-pelcro-js/issues/334)) ([6f408be](https://github.com/pelcro-inc/react-pelcro-js/commit/6f408be5a2283c62c7c879d8a678b4f43918a393))
+
 # [3.30.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.29.1...v3.30.0) (2023-09-05)
 
 
