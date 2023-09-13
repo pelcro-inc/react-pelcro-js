@@ -29,6 +29,7 @@ import { ReactComponent as DonateIcon } from "../../assets/donate.svg";
 import { ReactComponent as MembershipsIcon } from "../../assets/memberships.svg";
 import userSolidIcon from "../../assets/user-solid.svg";
 import { ReactComponent as QrCodeIcon } from "../../assets/qrcode.svg";
+import { ReactComponent as TrashCanIcon } from "../../assets/trash-can.svg";
 import { OrdersMenu } from "./DashboardMenus/OrdersMenu";
 import { SavedItemsMenu } from "./DashboardMenus/SavedItemsMenu";
 import { usePelcro } from "../../hooks/usePelcro";
@@ -95,7 +96,8 @@ class Dashboard extends Component {
       giftRecipients:
         window.Pelcro.user.read()?.gift_recipients ?? [],
       disableSubmit: false,
-      addresses: []
+      addresses: [],
+      sources: []
     };
 
     this.site = window.Pelcro.site.read();
@@ -126,6 +128,21 @@ class Dashboard extends Component {
         nonInteraction: true
       });
     }
+
+    window.Pelcro.paymentMethods.list(
+      {
+        auth_token: window.Pelcro.user.read().auth_token
+      },
+      (err, res) => {
+        if (err) {
+          return console.error(err);
+        }
+
+        if (res) {
+          this.setState({ sources: res.data });
+        }
+      }
+    );
 
     const { addresses } = window.Pelcro.user.read();
     if (addresses) this.setState({ addresses: addresses });
@@ -207,6 +224,59 @@ class Dashboard extends Component {
         onSuccess?.(res);
       }
     );
+  };
+
+  deletePaymentMethod = (paymentMethodId, onSuccess, onFailure) => {
+    // disable the Login button to prevent repeated clicks
+    window.Pelcro.paymentMethods.deletePaymentMethod(
+      {
+        auth_token: window.Pelcro.user.read().auth_token,
+        payment_method_id: paymentMethodId
+      },
+      (err, res) => {
+        if (err) {
+          return onFailure?.(err);
+        }
+        onSuccess?.(res);
+      }
+    );
+  };
+
+  onDeletePaymentMethodClick = (source) => {
+    const isDeletable = source?.deletable;
+
+    if (isDeletable) {
+      this.props.onClose();
+      notify.confirm(
+        (onSuccess, onFailure) => {
+          this.deletePaymentMethod(source.id, onSuccess, onFailure);
+        },
+        {
+          confirmMessage: this.locale(
+            "messages.paymentMethodDeletion.isSureToDelete"
+          ),
+          loadingMessage: this.locale(
+            "messages.paymentMethodDeletion.loading"
+          ),
+          successMessage: this.locale(
+            "messages.paymentMethodDeletion.success"
+          ),
+          errorMessage: this.locale(
+            "messages.paymentMethodDeletion.error"
+          )
+        },
+        {
+          closeButtonLabel: this.locale(
+            "labels.subCancellation.goBack"
+          )
+        }
+      );
+    } else {
+      this.props.onClose();
+      notify.warning(
+        this.locale("messages.paymentMethodDeletion.nonDeletable")
+      );
+    }
   };
 
   displayRedeem = () => {
@@ -608,6 +678,78 @@ class Dashboard extends Component {
     );
   };
 
+  renderSources = () => {
+    const sources =
+      this.state.sources &&
+      this.state.sources
+        .sort((a, b) =>
+          a.is_default === b.is_default ? 0 : a.is_default ? -1 : 1
+        )
+        .map((source, index) => {
+          return (
+            <div
+              key={"dashboard-source-" + source.id}
+              className="plc-flex plc-flex-row plc-pr-6"
+            >
+              <div className="plc-flex plc-flex-grow plc-items-center plc-justify-between plc-max-w-xs plc-p-4 plc-mb-2 plc-text-white plc-bg-gray-800 plc-rounded-md plc-h-14">
+                <span>
+                  {getPaymentCardIcon(source?.properties?.brand)}
+                </span>
+                <span className="plc-ml-1 plc-text-lg plc-tracking-widest plc-flex-grow plc-text-center">
+                  •••• {source?.properties?.last4}
+                </span>
+                <Button
+                  id={"pelcro-button-update-source-" + index}
+                  variant="icon"
+                  className="plc-text-white"
+                  icon={<EditIcon />}
+                  onClick={this.displaySourceCreate}
+                  disabled={this.state.disableSubmit}
+                ></Button>
+                <Button
+                  id={"pelcro-button-delete-source-" + index}
+                  variant="icon"
+                  className="plc-text-white"
+                  icon={<TrashCanIcon />}
+                  onClick={() => {
+                    this.onDeletePaymentMethodClick(source);
+                  }}
+                  // disabled={this.state.disableSubmit}
+                ></Button>
+              </div>
+              <span className="plc-flex-grow"></span>
+              {source.is_default && (
+                <span className="plc-rounded-full plc-bg-gray-800 plc-text-white plc-inline-flex plc-h-7 plc-my-auto plc-items-start plc-py-1 plc-px-4 plc-text-sm plc-ml-2">
+                  {this.locale("labels.default")}
+                </span>
+              )}
+              {/* {source.id !== this.defaultPaymentMethod.id && (
+                <Link className="plc-inline-flex plc-my-auto plc-text-sm">
+                  {this.locale("labels.setDefault")}
+                </Link>
+              )} */}
+            </div>
+          );
+        });
+
+    return (
+      <div className="plc-pr-2">
+        <div className="plc-overflow-y-scroll plc-max-h-52">
+          {sources}
+        </div>
+
+        <Button
+          variant="ghost"
+          icon={<PlusIcon className="plc-w-4 plc-mr-1" />}
+          className="plc-w-full plc-h-8 plc-font-semibold plc-tracking-wider plc-text-gray-900 plc-uppercase hover:plc-bg-gray-100 plc-my-1 plc-ml-1"
+          onClick={this.displaySourceCreate}
+        >
+          {this.locale("labels.addPaymentSource")}
+        </Button>
+      </div>
+    );
+  };
+
   closeDashboard = () => {
     this.setState({
       isOpen: false
@@ -754,40 +896,7 @@ class Dashboard extends Component {
                 name={SUB_MENUS.PAYMENT_CARDS}
                 icon={<PaymentCardIcon />}
                 title={this.locale("labels.paymentSource")}
-                content={
-                  <div className="plc-flex plc-items-center plc-justify-between plc-max-w-xs plc-p-4 plc-mb-2 plc-text-white plc-bg-gray-800 plc-rounded-md plc-h-14">
-                    {this.user.source ? (
-                      <>
-                        {getPaymentCardIcon(
-                          this.user.source?.properties?.brand
-                        )}
-                        <span className="plc-ml-1 plc-text-lg plc-tracking-widest">
-                          •••• {this.user.source?.properties?.last4}
-                        </span>
-                        <Button
-                          variant="icon"
-                          className="plc-text-white"
-                          icon={<EditIcon />}
-                          onClick={this.displaySourceCreate}
-                          disabled={this.state.disableSubmit}
-                        ></Button>
-                      </>
-                    ) : (
-                      <>
-                        <span>{this.locale("messages.noCard")}</span>
-                        <Button
-                          variant="icon"
-                          className="plc-text-white"
-                          icon={
-                            <PlusIcon className="plc-w-6 plc-h-6" />
-                          }
-                          onClick={this.displaySourceCreate}
-                          disabled={this.state.disableSubmit}
-                        />
-                      </>
-                    )}
-                  </div>
-                }
+                content={this.renderSources()}
               />
 
               <Accordion.item
