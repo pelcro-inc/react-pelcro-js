@@ -149,7 +149,7 @@ export const loadPaymentSDKs = () => {
     }
 
     window.Pelcro.helpers.loadSDK(
-      "https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js",
+      "https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js",
       "vantiv-jquery-sdk"
     );
 
