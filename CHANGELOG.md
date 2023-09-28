@@ -1,3 +1,10 @@
+# [3.32.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.31.0...v3.32.0) (2023-09-28)
+
+
+### Features
+
+* upgrade jquery to version 3.6.3 from 1.4.2 ([#336](https://github.com/pelcro-inc/react-pelcro-js/issues/336)) ([a5cf7d5](https://github.com/pelcro-inc/react-pelcro-js/commit/a5cf7d539c82284d3b51351f0f0c3b48efb79af6))
+
 # [3.31.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.30.0...v3.31.0) (2023-09-11)
 
 
