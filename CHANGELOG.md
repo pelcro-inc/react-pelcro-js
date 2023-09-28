@@ -1,3 +1,11 @@
+# [3.26.0-sandbox.40](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-sandbox.39...v3.26.0-sandbox.40) (2023-09-28)
+
+
+### Features
+
+* add prod eProtectRequestURL ([#334](https://github.com/pelcro-inc/react-pelcro-js/issues/334)) ([6f408be](https://github.com/pelcro-inc/react-pelcro-js/commit/6f408be5a2283c62c7c879d8a678b4f43918a393))
+* upgrade jquery to version 3.6.3 from 1.4.2 ([14ca563](https://github.com/pelcro-inc/react-pelcro-js/commit/14ca563a34282237fab7c70382273ede0f7129f2))
+
 # [3.26.0-sandbox.39](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-sandbox.38...v3.26.0-sandbox.39) (2023-09-11)
 
 
