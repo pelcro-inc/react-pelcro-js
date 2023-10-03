@@ -50,12 +50,15 @@ import {
   SET_EMAIL_ERROR,
   SET_PASSWORD_ERROR,
   UPDATE_CYBERSOURCE_SESSION_ID,
-  HANDLE_APPLEPAY_SUBSCRIPTION
+  HANDLE_APPLEPAY_SUBSCRIPTION,
+  HANDLE_CHECKBOX_CHANGE,
+  SET_IS_DEFAULT_PAYMENT_METHOD
 } from "../../utils/action-types";
 import {
   getErrorMessages,
   debounce,
-  getSiteCardProcessor
+  getSiteCardProcessor,
+  getFourDigitYear
 } from "../common/Helpers";
 import {
   Payment,
@@ -119,6 +122,7 @@ const initialState = {
   year: "",
   passwordError: null,
   cyberSourceSessionId: null,
+  isDefault: false,
   alert: {
     type: "error",
     content: ""
@@ -151,7 +155,9 @@ const PaymentMethodContainerWithoutStripe = ({
     selectedDonationAmount,
     customDonationAmount,
     isAuthenticated,
-    switchView
+    switchView,
+    paymentMethodToEdit,
+    paymentMethodToDelete
   } = usePelcro();
   const { whenUserReady } = usePelcro.getStore();
 
@@ -963,15 +969,125 @@ const PaymentMethodContainerWithoutStripe = ({
         dispatch
       );
     } else if (type === "updatePaymentSource") {
-      createNewVantivCard();
+      if (paymentMethodToEdit) {
+        updateVantivCard();
+      } else {
+        createNewVantivCard();
+      }
+    } else if (type === "deletePaymentSource") {
+      replaceVantivCard();
     }
 
     function createNewVantivCard() {
-      window.Pelcro.source.create(
+      window.Pelcro.paymentMethods.create(
         {
           auth_token: window.Pelcro.user.read().auth_token,
           token: paymentRequest,
           gateway: "vantiv"
+        },
+        (err, res) => {
+          dispatch({ type: DISABLE_SUBMIT, payload: false });
+          dispatch({ type: LOADING, payload: false });
+          if (err) {
+            onFailure(err);
+            return dispatch({
+              type: SHOW_ALERT,
+              payload: {
+                type: "error",
+                content: getErrorMessages(err)
+              }
+            });
+          }
+
+          dispatch({
+            type: SHOW_ALERT,
+            payload: {
+              type: "success",
+              content: t("messages.sourceUpdated")
+            }
+          });
+          onSuccess(res);
+        }
+      );
+    }
+
+    function replaceVantivCard() {
+      const { id: paymentMethodId } = paymentMethodToDelete;
+
+      window.Pelcro.paymentMethods.create(
+        {
+          auth_token: window.Pelcro.user.read().auth_token,
+          token: paymentRequest,
+          gateway: "vantiv"
+        },
+        (err, res) => {
+          dispatch({ type: DISABLE_SUBMIT, payload: false });
+          dispatch({ type: LOADING, payload: false });
+          if (err) {
+            onFailure(err);
+            return dispatch({
+              type: SHOW_ALERT,
+              payload: {
+                type: "error",
+                content: getErrorMessages(err)
+              }
+            });
+          }
+
+          window.Pelcro.paymentMethods.deletePaymentMethod(
+            {
+              auth_token: window.Pelcro.user.read().auth_token,
+              payment_method_id: paymentMethodId
+            },
+            (err, res) => {
+              if (err) {
+                return onFailure?.(err);
+              }
+              dispatch({
+                type: SHOW_ALERT,
+                payload: {
+                  type: "success",
+                  content: t("messages.sourceUpdated")
+                }
+              });
+              onSuccess(res);
+            }
+          );
+        }
+      );
+    }
+
+    function updateVantivCard() {
+      const { id: paymentMethodId } = paymentMethodToEdit;
+
+      const {
+        paypageRegistrationId,
+        bin,
+        type,
+        firstSix,
+        lastFour,
+        expMonth,
+        expYear
+      } = paymentRequest;
+
+      const { isDefault } = state;
+
+      const fourDigitExpYear = getFourDigitYear(
+        Number(expYear)
+      ).toString();
+      window.Pelcro.paymentMethods.update(
+        {
+          auth_token: window.Pelcro.user.read().auth_token,
+          payment_method_id: paymentMethodId,
+          gateway: "vantiv",
+          paypageRegistrationId: paypageRegistrationId,
+          bin: bin,
+          type: type,
+          firstSix: firstSix,
+          lastFour: lastFour,
+          exp_month: expMonth,
+          exp_year: fourDigitExpYear,
+          is_default: isDefault
         },
         (err, res) => {
           dispatch({ type: DISABLE_SUBMIT, payload: false });
@@ -1936,7 +2052,7 @@ const PaymentMethodContainerWithoutStripe = ({
           });
         }
 
-        window.Pelcro.source.create(
+        window.Pelcro.paymentMethods.create(
           {
             auth_token: window.Pelcro.user.read().auth_token,
             token: source.id
@@ -2561,6 +2677,18 @@ const PaymentMethodContainerWithoutStripe = ({
           return Update({
             ...state,
             cyberSourceSessionId: action.payload
+          });
+
+        case HANDLE_CHECKBOX_CHANGE:
+          return Update({
+            ...state,
+            ...action.payload
+          });
+
+        case SET_IS_DEFAULT_PAYMENT_METHOD:
+          return Update({
+            ...state,
+            ...action.payload
           });
 
         default:

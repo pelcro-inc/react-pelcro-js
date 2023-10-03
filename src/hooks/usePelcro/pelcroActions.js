@@ -374,4 +374,48 @@ export class PelcroActions {
     }
     switchToAddressView();
   };
+
+  /**
+   * Payment Methods Actions
+   */
+
+  setPaymentMethodToEdit = (id) => {
+    window.Pelcro.paymentMethods.getPaymentMethod(
+      {
+        auth_token: window.Pelcro.user.read().auth_token,
+        payment_method_id: id
+      },
+      (err, res) => {
+        if (err) {
+          return console.error("invalid payment method id");
+        }
+
+        if (res) {
+          const paymentMethodToEdit = res.data;
+
+          this.set({ paymentMethodToEdit });
+        }
+      }
+    );
+  };
+
+  setPaymentMethodToDelete = (id) => {
+    window.Pelcro.paymentMethods.getPaymentMethod(
+      {
+        auth_token: window.Pelcro.user.read().auth_token,
+        payment_method_id: id
+      },
+      (err, res) => {
+        if (err) {
+          return console.error("invalid payment method id");
+        }
+
+        if (res) {
+          const paymentMethodToDelete = res.data;
+
+          this.set({ paymentMethodToDelete });
+        }
+      }
+    );
+  };
 }

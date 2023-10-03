@@ -28,6 +28,7 @@
     "order": "Order",
     "amount": "Amount",
     "email": "Email",
-    "password": "Password"
+    "password": "Password",
+    "isDefault": "Set as default"
   }
 }

@@ -15,5 +15,13 @@
       "selectPaymentMethod": "Continue",
       "changePaymentMethod": "Change"
     }
+  },
+  "delete": {
+    "title": "Active subscriptions are linked to this payment method.",
+    "subtitle": "Please choose an existing card or add a new payment method.",
+    "options": {
+      "select": "Select an existing payment method",
+      "add": "Add a new payment method"
+    }
   }
 }
