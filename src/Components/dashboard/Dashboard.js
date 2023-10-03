@@ -62,7 +62,14 @@ export function DashboardWithHook(props) {
     props.onDisplay?.();
   }, []);
 
-  const { switchView, resetView, logout, set } = usePelcro();
+  const {
+    switchView,
+    resetView,
+    logout,
+    set,
+    setPaymentMethodToEdit,
+    setPaymentMethodToDelete
+  } = usePelcro();
 
   return (
     <DashboardWithTrans
@@ -80,6 +87,8 @@ export function DashboardWithHook(props) {
       setProductAndPlan={(product, plan, isGift) =>
         set({ product, plan, isGift })
       }
+      setPaymentMethodToEdit={setPaymentMethodToEdit}
+      setPaymentMethodToDelete={setPaymentMethodToDelete}
     />
   );
 }
@@ -272,10 +281,12 @@ class Dashboard extends Component {
         }
       );
     } else {
-      this.props.onClose();
-      notify.warning(
-        this.locale("messages.paymentMethodDeletion.nonDeletable")
-      );
+      this.props.setPaymentMethodToDelete(source.id);
+      return this.props.setView("payment-method-delete");
+      // this.props.onClose();
+      // notify.warning(
+      //   this.locale("messages.paymentMethodDeletion.nonDeletable")
+      // );
     }
   };
 
@@ -283,7 +294,10 @@ class Dashboard extends Component {
     return this.props.setView("gift-redeem");
   };
 
-  displaySourceCreate = () => {
+  displaySourceCreate = (e) => {
+    const source = e.currentTarget.dataset.key;
+
+    this.props.setPaymentMethodToEdit(source);
     return this.props.setView("payment-method-update");
   };
 
@@ -703,6 +717,7 @@ class Dashboard extends Component {
                   variant="icon"
                   className="plc-text-white"
                   icon={<EditIcon />}
+                  data-key={source.id}
                   onClick={this.displaySourceCreate}
                   disabled={this.state.disableSubmit}
                 ></Button>
@@ -714,7 +729,7 @@ class Dashboard extends Component {
                   onClick={() => {
                     this.onDeletePaymentMethodClick(source);
                   }}
-                  // disabled={this.state.disableSubmit}
+                  disabled={this.state.disableSubmit}
                 ></Button>
               </div>
               <span className="plc-flex-grow"></span>

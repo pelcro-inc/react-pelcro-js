@@ -126,6 +126,7 @@ export { PaymentCreateView } from "./Components/PaymentCreate/PaymentCreateView"
 export { PaymentMethodUpdateContainer } from "./Components/PaymentMethodUpdate/PaymentMethodUpdateContainer";
 export { PaymentMethodUpdateModal } from "./Components/PaymentMethodUpdate/PaymentMethodUpdateModal";
 export { PaymentMethodUpdateView } from "./Components/PaymentMethodUpdate/PaymentMethodUpdateView";
+export { PaymentMethodUpdateSetDefault } from "./Components/PaymentMethodUpdate/PaymentMethodUpdateSetDefault";
 export { PasswordResetModal } from "./Components/PasswordReset/PasswordResetModal";
 export { PasswordResetView } from "./Components/PasswordReset/PasswordResetView";
 export { PasswordResetContainer } from "./Components/PasswordReset/PasswordResetContainer";
@@ -196,6 +197,13 @@ export { PaymentMethodSelectModal } from "./Components/PaymentMethodSelect/Payme
 export { PaymentMethodSelectView } from "./Components/PaymentMethodSelect/PaymentMethodSelectView";
 export { PaymentMethodSelectSubmit } from "./Components/PaymentMethodSelect/PaymentMethodSelectSubmit";
 export { PaymentMethodSelectList } from "./Components/PaymentMethodSelect/PaymentMethodSelectList";
+
+export { PaymentMethodDeleteContainer } from "./Components/PaymentMethodDelete/PaymentMethodDeleteContainer";
+export { PaymentMethodDeleteList } from "./Components/PaymentMethodDelete/PaymentMethodDeleteList";
+export { PaymentMethodDeleteModal } from "./Components/PaymentMethodDelete/PaymentMethodDeleteModal";
+export { PaymentMethodDeleteOptions } from "./Components/PaymentMethodDelete/PaymentMethodDeleteOptions";
+export { PaymentMethodDeleteSubmit } from "./Components/PaymentMethodDelete/PaymentMethodDeleteSubmit";
+export { PaymentMethodDeleteView } from "./Components/PaymentMethodDelete/PaymentMethodDeleteView";
 
 export { DashboardWithHook as Dashboard } from "./Components/dashboard/Dashboard";
 export { DashboardOpenButton } from "./Components/dashboard/DashboardOpenButton";
