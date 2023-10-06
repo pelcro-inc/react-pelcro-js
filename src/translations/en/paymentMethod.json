@@ -17,11 +17,16 @@
     }
   },
   "delete": {
-    "title": "Active subscriptions are linked to this payment method.",
-    "subtitle": "Please choose an existing card or add a new payment method.",
+    "title": "Delete payment method",
+    "subtitle": "This payment method could be associated with active subscriptions or serve as the default payment method. Please choose from the available options below for replacement.",
     "options": {
       "select": "Select an existing payment method",
       "add": "Add a new payment method"
-    }
+    },
+    "paymentMethodReplaced": "Payment Method Successfully Deleted and Replaced"
+  },
+  "create": {
+    "title": "Add a new payment method",
+    "subtitle": "Enter the fields below to add your credit card information"
   }
 }

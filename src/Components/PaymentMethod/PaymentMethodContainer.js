@@ -262,7 +262,10 @@ const PaymentMethodContainerWithoutStripe = ({
           : paymentRequest,
         dispatch
       );
-    } else if (type === "updatePaymentSource") {
+    } else if (
+      type === "createPaymentSource" ||
+      type === "updatePaymentSource"
+    ) {
       createNewCybersourceCard();
     }
 
@@ -661,7 +664,10 @@ const PaymentMethodContainerWithoutStripe = ({
           : paymentRequest,
         dispatch
       );
-    } else if (type === "updatePaymentSource") {
+    } else if (
+      type === "createPaymentSource" ||
+      type === "updatePaymentSource"
+    ) {
       createNewTapCard();
     }
 
@@ -923,12 +929,10 @@ const PaymentMethodContainerWithoutStripe = ({
           : paymentRequest,
         dispatch
       );
+    } else if (type === "createPaymentSource") {
+      createNewVantivCard();
     } else if (type === "updatePaymentSource") {
-      if (paymentMethodToEdit) {
-        updateVantivCard();
-      } else {
-        createNewVantivCard();
-      }
+      updateVantivCard();
     } else if (type === "deletePaymentSource") {
       replaceVantivCard();
     }
@@ -996,15 +1000,16 @@ const PaymentMethodContainerWithoutStripe = ({
             },
             (err, res) => {
               if (err) {
-                return onFailure?.(err);
+                onFailure?.(err);
+                return dispatch({
+                  type: SHOW_ALERT,
+                  payload: {
+                    type: "error",
+                    content: getErrorMessages(err)
+                  }
+                });
               }
-              dispatch({
-                type: SHOW_ALERT,
-                payload: {
-                  type: "success",
-                  content: t("messages.sourceUpdated")
-                }
-              });
+
               onSuccess(res);
             }
           );
@@ -1932,7 +1937,7 @@ const PaymentMethodContainerWithoutStripe = ({
     );
   };
 
-  const updatePaymentSource = (state, dispatch) => {
+  const createPaymentSource = (state, dispatch) => {
     return stripe
       .createSource({ type: "card" })
       .then(({ source, error }) => {
@@ -1976,6 +1981,113 @@ const PaymentMethodContainerWithoutStripe = ({
               }
             });
             onSuccess(res);
+          }
+        );
+      });
+  };
+
+  const updatePaymentSource = (state, dispatch) => {
+    const { isDefault, month, year } = state;
+    const { id: paymentMethodId } = paymentMethodToEdit;
+    window.Pelcro.paymentMethods.update(
+      {
+        auth_token: window.Pelcro.user.read().auth_token,
+        payment_method_id: paymentMethodId,
+        gateway: "stripe",
+        exp_month: month,
+        exp_year: year,
+        is_default: isDefault
+      },
+      (err, res) => {
+        dispatch({ type: DISABLE_SUBMIT, payload: false });
+        dispatch({ type: LOADING, payload: false });
+        if (err) {
+          onFailure(err);
+          return dispatch({
+            type: SHOW_ALERT,
+            payload: {
+              type: "error",
+              content: getErrorMessages(err)
+            }
+          });
+        }
+
+        dispatch({
+          type: SHOW_ALERT,
+          payload: {
+            type: "success",
+            content: t("messages.sourceUpdated")
+          }
+        });
+        onSuccess(res);
+      }
+    );
+  };
+
+  const replacePaymentSource = (state, dispatch) => {
+    const { id: paymentMethodId } = paymentMethodToDelete;
+
+    return stripe
+      .createSource({ type: "card" })
+      .then(({ source, error }) => {
+        if (error) {
+          return handlePaymentError(error);
+        }
+
+        // We don't support source creation for 3D secure yet
+        if (source?.card?.three_d_secure === "required") {
+          return handlePaymentError({
+            error: {
+              message: t("messages.cardAuthNotSupported")
+            }
+          });
+        }
+
+        window.Pelcro.paymentMethods.create(
+          {
+            auth_token: window.Pelcro.user.read().auth_token,
+            token: source.id
+          },
+          (err, res) => {
+            if (err) {
+              onFailure(err);
+              return dispatch({
+                type: SHOW_ALERT,
+                payload: {
+                  type: "error",
+                  content: getErrorMessages(err)
+                }
+              });
+            }
+
+            if (res) {
+              setTimeout(() => {
+                window.Pelcro.paymentMethods.deletePaymentMethod(
+                  {
+                    auth_token: window.Pelcro.user.read().auth_token,
+                    payment_method_id: paymentMethodId
+                  },
+                  (err, res) => {
+                    dispatch({
+                      type: DISABLE_SUBMIT,
+                      payload: false
+                    });
+                    dispatch({ type: LOADING, payload: false });
+                    if (err) {
+                      onFailure?.(err);
+                      return dispatch({
+                        type: SHOW_ALERT,
+                        payload: {
+                          type: "error",
+                          content: getErrorMessages(err)
+                        }
+                      });
+                    }
+                    onSuccess(res);
+                  }
+                );
+              }, 1000);
+            }
           }
         );
       });
@@ -2327,8 +2439,16 @@ const PaymentMethodContainerWithoutStripe = ({
                 );
               }
 
+              if (type === "createPaymentSource") {
+                return createPaymentSource(state, dispatch);
+              }
+
               if (type === "updatePaymentSource") {
                 return updatePaymentSource(state, dispatch);
+              }
+
+              if (type === "deletePaymentSource") {
+                return replacePaymentSource(state, dispatch);
               }
 
               submitPayment(state, dispatch);

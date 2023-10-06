@@ -12,7 +12,7 @@ export const PaymentMethodDeleteSubmit = ({
   const { t } = useTranslation("paymentMethod");
   const {
     dispatch,
-    state: { selectedPaymentMethodId, isSubmitting }
+    state: { isLoading, isDisabled }
   } = useContext(store);
 
   return (
@@ -21,8 +21,8 @@ export const PaymentMethodDeleteSubmit = ({
         dispatch({ type: HANDLE_SUBMIT });
         onClick?.();
       }}
-      disabled={!selectedPaymentMethodId}
-      isLoading={isSubmitting}
+      disabled={isDisabled}
+      isLoading={isLoading}
       className="plc-w-full"
       {...otherProps}
     >

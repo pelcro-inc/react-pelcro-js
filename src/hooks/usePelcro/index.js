@@ -32,6 +32,10 @@ export const initialState = {
   // memberships
   selectedMembership: null,
 
+  // paymentMethods
+  paymentMethodToDelete: null,
+  paymentMethodToEdit: null,
+
   // User
   isAuthenticated: () => window.Pelcro.user.isAuthenticated(),
   selectedPaymentMethodId: null,

@@ -109,7 +109,7 @@ export const PelcroPaymentRequestButton = (props) => {
   return null;
 };
 
-export const CheckoutForm = () => {
+export const CheckoutForm = ({ type }) => {
   const { selectedPaymentMethodId } = usePelcro();
   const cardProcessor = getSiteCardProcessor();
 
@@ -145,6 +145,18 @@ export const CheckoutForm = () => {
   }
 
   if (cardProcessor === "stripe") {
+    if (type === "updatePaymentSource") {
+      return (
+        <div className="plc-flex plc-items-end plc-justify-between plc-my-2">
+          <div className="plc-w-6/12 plc-pr-4">
+            <MonthSelect store={store} placeholder="Exp Month *" />
+          </div>
+          <div className="plc-w-6/12">
+            <YearSelect store={store} placeholder="Exp Year *" />
+          </div>
+        </div>
+      );
+    }
     return (
       <div>
         <PelcroCardNumber autoFocus={true} />
