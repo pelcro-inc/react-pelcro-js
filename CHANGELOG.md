@@ -1,3 +1,10 @@
+# [3.26.0-beta.29](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.28...v3.26.0-beta.29) (2023-10-06)
+
+
+### Features
+
+* payment methods ui enhancements third iter ([9489cd9](https://github.com/pelcro-inc/react-pelcro-js/commit/9489cd94fb81c925b1daf7e7e1dc57b65bc6e07f))
+
 # [3.26.0-beta.28](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.27...v3.26.0-beta.28) (2023-10-03)
 
 
