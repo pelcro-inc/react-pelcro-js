@@ -28,6 +28,7 @@
     "order": "Pida",
     "amount": "Importe",
     "email": "Correo",
-    "password": "Contraseña"
+    "password": "Contraseña",
+    "isDefault": "Fijar por defecto"
   }
 }

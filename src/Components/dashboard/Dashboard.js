@@ -283,10 +283,6 @@ class Dashboard extends Component {
     } else {
       this.props.setPaymentMethodToDelete(source.id);
       return this.props.setView("payment-method-delete");
-      // this.props.onClose();
-      // notify.warning(
-      //   this.locale("messages.paymentMethodDeletion.nonDeletable")
-      // );
     }
   };
 
@@ -294,7 +290,11 @@ class Dashboard extends Component {
     return this.props.setView("gift-redeem");
   };
 
-  displaySourceCreate = (e) => {
+  displaySourceCreate = () => {
+    return this.props.setView("payment-method-create");
+  };
+
+  displaySourceEdit = (e) => {
     const source = e.currentTarget.dataset.key;
 
     this.props.setPaymentMethodToEdit(source);
@@ -731,7 +731,7 @@ class Dashboard extends Component {
                   className="plc-text-white"
                   icon={<EditIcon />}
                   data-key={source.id}
-                  onClick={this.displaySourceCreate}
+                  onClick={this.displaySourceEdit}
                   disabled={this.state.disableSubmit}
                 ></Button>
                 <Button
@@ -751,11 +751,6 @@ class Dashboard extends Component {
                   {this.locale("labels.default")}
                 </span>
               )}
-              {/* {source.id !== this.defaultPaymentMethod.id && (
-                <Link className="plc-inline-flex plc-my-auto plc-text-sm">
-                  {this.locale("labels.setDefault")}
-                </Link>
-              )} */}
             </div>
           );
         });

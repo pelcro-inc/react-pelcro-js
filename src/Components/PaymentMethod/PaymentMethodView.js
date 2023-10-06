@@ -174,7 +174,7 @@ export function PaymentMethodView({
                   />
                 </>
               )}
-              <CheckoutForm />
+              <CheckoutForm type={type} />
 
               {/* Coupon section */}
               {showCoupon && (

@@ -9,7 +9,10 @@ import {
   SELECT_PAYMENT_METHOD,
   SET_DELETE_PAYMENT_METHOD_OPTION,
   SHOW_ALERT,
-  SET_PAYMENT_METHODS
+  SET_PAYMENT_METHODS,
+  DISABLE_SUBMIT,
+  LOADING,
+  SKELETON_LOADER
 } from "../../utils/action-types";
 import { getErrorMessages } from "../common/Helpers";
 
@@ -17,7 +20,10 @@ const initialState = {
   paymentMethods: [],
   selectedPaymentMethodId: null,
   isSubmitting: false,
-  deleteOption: "add",
+  deleteOption: "",
+  disableSubmit: false,
+  isLoading: false,
+  skeletonLoader: true,
   alert: {
     type: "error",
     content: ""
@@ -51,29 +57,32 @@ const PaymentMethodDeleteContainer = ({
             type: SET_PAYMENT_METHODS,
             payload: res.data
           });
-          // if (res.data.length !== 1) {
-          //   dispatch({
-          //     type: SET_DELETE_PAYMENT_METHOD_OPTION,
-          //     payload: "select"
-          //   });
-          // } else {
-          //   dispatch({
-          //     type: SET_DELETE_PAYMENT_METHOD_OPTION,
-          //     payload: "add"
-          //   });
-          // }
+          dispatch({
+            type: SKELETON_LOADER,
+            payload: false
+          });
+          if (res.data.length !== 1) {
+            dispatch({
+              type: SET_DELETE_PAYMENT_METHOD_OPTION,
+              payload: "select"
+            });
+          } else {
+            dispatch({
+              type: SET_DELETE_PAYMENT_METHOD_OPTION,
+              payload: "add"
+            });
+          }
         }
       }
     );
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const setDefaultPaymentMethod = () => {
     const { selectedPaymentMethodId: paymentMethodId } = state;
-    window.Pelcro.paymentMethods.update(
+    window.Pelcro.paymentMethods.setDefaultPaymentMethod(
       {
         auth_token: window.Pelcro.user.read().auth_token,
-        payment_method_id: paymentMethodId,
-        is_default: true
+        payment_method_id: paymentMethodId
       },
       (err, res) => {
         if (err) {
@@ -87,7 +96,9 @@ const PaymentMethodDeleteContainer = ({
           });
         }
 
-        deletePaymentMethod();
+        setTimeout(() => {
+          deletePaymentMethod();
+        }, 1000);
       }
     );
   };
@@ -101,15 +112,17 @@ const PaymentMethodDeleteContainer = ({
       },
       (err, res) => {
         if (err) {
-          return onFailure?.(err);
+          onFailure?.(err);
+          return dispatch({
+            type: SHOW_ALERT,
+            payload: {
+              type: "error",
+              content: getErrorMessages(err)
+            }
+          });
         }
-        dispatch({
-          type: SHOW_ALERT,
-          payload: {
-            type: "success",
-            content: "messages.sourceUpdated"
-          }
-        });
+        dispatch({ type: DISABLE_SUBMIT, payload: false });
+        dispatch({ type: LOADING, payload: false });
         onSuccess(res);
       }
     );
@@ -126,7 +139,7 @@ const PaymentMethodDeleteContainer = ({
 
         case HANDLE_SUBMIT:
           return UpdateWithSideEffect(
-            { ...state, isSubmitting: true },
+            { ...state, disableSubmit: true, isLoading: true },
             (state, dispatch) =>
               setDefaultPaymentMethod(state, dispatch)
           );
@@ -142,6 +155,21 @@ const PaymentMethodDeleteContainer = ({
             ...state,
             paymentMethods: action.payload
           });
+
+        case SHOW_ALERT:
+          return Update({
+            ...state,
+            alert: action.payload
+          });
+
+        case DISABLE_SUBMIT:
+          return Update({ ...state, disableSubmit: action.payload });
+
+        case LOADING:
+          return Update({ ...state, isLoading: action.payload });
+
+        case SKELETON_LOADER:
+          return Update({ ...state, skeletonLoader: action.payload });
 
         default:
           return state;

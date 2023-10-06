@@ -1,19 +1,32 @@
 {
-    "update": {
-      "title": "결제 정보 업데이트",
-      "subtitle": "신용카드 정보를 업데이트하려면 아래 항목을 입력하십시오.",
-      "required": "필수 항목",
-      "success": "귀하의 결제 정보가 업데이트되었습니다.",
-      "secure": "PCI 준수 128비트 SSL 인증서로 보호됩니다. 제공: "
-    },
-    "select": {
-      "title": "결제 수단 선택",
-      "subtitle": "저장된 결제 수단 중 선택하거나 새로운 수단을 사용하십시오.",
-      "expires": "만료일:",
-      "buttons": {
-        "addPaymentMethod": "다른 결제 수단으로 결제",
-        "selectPaymentMethod": "계속",
-        "changePaymentMethod": "변경"
-      }
+  "update": {
+    "title": "결제 정보 업데이트",
+    "subtitle": "신용카드 정보를 업데이트하려면 아래 항목을 입력하십시오.",
+    "required": "필수 항목",
+    "success": "귀하의 결제 정보가 업데이트되었습니다.",
+    "secure": "PCI 준수 128비트 SSL 인증서로 보호됩니다. 제공: "
+  },
+  "select": {
+    "title": "결제 수단 선택",
+    "subtitle": "저장된 결제 수단 중 선택하거나 새로운 수단을 사용하십시오.",
+    "expires": "만료일:",
+    "buttons": {
+      "addPaymentMethod": "다른 결제 수단으로 결제",
+      "selectPaymentMethod": "계속",
+      "changePaymentMethod": "변경"
     }
+  },
+  "delete": {
+    "title": "결제 방법 삭제",
+    "subtitle": "이 결제 방법은 활성 구독과 연결되거나 기본 결제 방법으로 사용될 수 있습니다. 아래에서 사용 가능한 옵션 중에서 선택하여 대체하세요.",
+    "options": {
+      "select": "기존 결제 방법 선택",
+      "add": "새 결제 방법 추가"
+    },
+    "paymentMethodReplaced": "결제 방법 삭제 및 교체 성공"
+  },
+  "create": {
+    "title": "새 결제 방법 추가",
+    "subtitle": "신용카드 정보를 추가하려면 아래 입력란을 입력하세요."
   }
+}

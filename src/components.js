@@ -206,6 +206,10 @@ export { PaymentMethodDeleteOptions } from "./Components/PaymentMethodDelete/Pay
 export { PaymentMethodDeleteSubmit } from "./Components/PaymentMethodDelete/PaymentMethodDeleteSubmit";
 export { PaymentMethodDeleteView } from "./Components/PaymentMethodDelete/PaymentMethodDeleteView";
 
+export { PaymentMethodCreateContainer } from "./Components/PaymentMethodCreate/PaymentMethodCreateContainer";
+export { PaymentMethodCreateModal } from "./Components/PaymentMethodCreate/PaymentMethodCreateModal";
+export { PaymentMethodCreateView } from "./Components/PaymentMethodCreate/PaymentMethodCreateView";
+
 export { DashboardWithHook as Dashboard } from "./Components/dashboard/Dashboard";
 export { DashboardOpenButton } from "./Components/dashboard/DashboardOpenButton";
 
