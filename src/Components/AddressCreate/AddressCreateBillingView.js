@@ -5,23 +5,19 @@ import { AddressCreateLastName } from "./AddressCreateLastName";
 import { AddressCreateLine1 } from "./AddressCreateLine1";
 import { AddressCreateCity } from "./AddressCreateCity";
 import { AddressCreatePostalCode } from "./AddressCreatePostalCode";
-import { AddressCreateSubmit } from "./AddressCreateSubmit";
+import { AddressCreateBillingSubmit } from "./AddressCreateBillingSubmit";
 import { AddressCreateContainer } from "./AddressCreateContainer";
 import { AddressCreateCountrySelect } from "./AddressCreateCountrySelect";
 import { AddressCreateStateSelect } from "./AddressCreateStateSelect";
-import { AddressCreateSetDefault } from "./AddressCreateSetDefault";
-import { AddressCreateSetBilling } from "./AddressCreateSetBilling";
 import { AlertWithContext } from "../../SubComponents/AlertWithContext";
-import { usePelcro } from "../../hooks/usePelcro";
 
-export const AddressCreateView = (props) => {
+export const AddressCreateBillingView = (props) => {
   const { t } = useTranslation("address");
-  const { giftRecipient } = usePelcro();
 
   return (
     <div id="pelcro-address-create-view">
       <div className="plc-mb-6 plc-text-2xl plc-font-semibold plc-text-center plc-text-gray-900 pelcro-title-wrapper">
-        <h4>{giftRecipient ? t("titleGifting") : t("title")}</h4>
+        <h4>{t("titleBilling")}</h4>
       </div>
       <form
         action="javascript:void(0);"
@@ -76,24 +72,10 @@ export const AddressCreateView = (props) => {
             />
           </div>
 
-          <div className="plc-flex plc-space-x-3 plc-items-start plc-mb-3">
-            <AddressCreateSetDefault
-              id="pelcro-input-is-default"
-              label={t("labels.isDefault")}
-            />
-          </div>
-
-          <div className="plc-flex plc-space-x-3 plc-items-start plc-mb-3">
-            <AddressCreateSetBilling
-              id="pelcro-input-is-billing"
-              label={t("labels.isBilling")}
-            />
-          </div>
-
           <p className="plc-text-gray-900 pelcro-footnote">
             * {t("labels.required")}
           </p>
-          <AddressCreateSubmit
+          <AddressCreateBillingSubmit
             role="submit"
             className="plc-mt-2 plc-w-full"
             name={t("buttons.submit")}
