@@ -1,3 +1,10 @@
+# [3.26.0-beta.31](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.30...v3.26.0-beta.31) (2023-10-11)
+
+
+### Bug Fixes
+
+* add missing props ([3630575](https://github.com/pelcro-inc/react-pelcro-js/commit/363057515d1dcd04f1a199cd038d368e147aefe1))
+
 # [3.26.0-beta.30](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.29...v3.26.0-beta.30) (2023-10-11)
 
 
