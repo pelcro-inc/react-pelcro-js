@@ -1,3 +1,11 @@
+# [3.26.0-beta.30](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.29...v3.26.0-beta.30) (2023-10-11)
+
+
+### Features
+
+* add capture billing address feature ([1da7c81](https://github.com/pelcro-inc/react-pelcro-js/commit/1da7c81e1be5a568776e34800650b2110e59510d))
+* upgrade jquery to version 3.6.3 from 1.4.2 ([#336](https://github.com/pelcro-inc/react-pelcro-js/issues/336)) ([a5cf7d5](https://github.com/pelcro-inc/react-pelcro-js/commit/a5cf7d539c82284d3b51351f0f0c3b48efb79af6))
+
 # [3.26.0-beta.29](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.28...v3.26.0-beta.29) (2023-10-06)
 
 
