@@ -1,3 +1,11 @@
+# [3.26.0-beta.32](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.31...v3.26.0-beta.32) (2023-10-13)
+
+
+### Features
+
+* amend success message ([91a1097](https://github.com/pelcro-inc/react-pelcro-js/commit/91a1097c60d27b178a4a47e7740529d32fd7c51d))
+* show card last 4 digits on edit ([f24b50a](https://github.com/pelcro-inc/react-pelcro-js/commit/f24b50a877974f9a101b2475f27e7549c3eb7286))
+
 # [3.26.0-beta.31](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.30...v3.26.0-beta.31) (2023-10-11)
 
 
