@@ -2080,7 +2080,7 @@ const PaymentMethodContainerWithoutStripe = ({
               type: SHOW_ALERT,
               payload: {
                 type: "success",
-                content: t("messages.sourceUpdated")
+                content: t("messages.sourceCreated")
               }
             });
             onSuccess(res);
