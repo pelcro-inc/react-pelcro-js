@@ -1,3 +1,10 @@
+# [3.26.0-beta.33](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.32...v3.26.0-beta.33) (2023-10-16)
+
+
+### Bug Fixes
+
+* handle null exception ([ba1d16f](https://github.com/pelcro-inc/react-pelcro-js/commit/ba1d16f3f13a5894c885cebc019864a7a1cd6d58))
+
 # [3.26.0-beta.32](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.31...v3.26.0-beta.32) (2023-10-13)
 
 
