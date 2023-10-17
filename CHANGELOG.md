@@ -1,3 +1,10 @@
+# [3.26.0-beta.34](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.33...v3.26.0-beta.34) (2023-10-17)
+
+
+### Features
+
+* amend success message for vantiv ([879f5cc](https://github.com/pelcro-inc/react-pelcro-js/commit/879f5ccab11b25dfd2a567256f794812885c1aec))
+
 # [3.26.0-beta.33](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.32...v3.26.0-beta.33) (2023-10-16)
 
 
