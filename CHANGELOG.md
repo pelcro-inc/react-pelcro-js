@@ -1,3 +1,11 @@
+# [3.26.0-beta.35](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.34...v3.26.0-beta.35) (2023-10-23)
+
+
+### Reverts
+
+* Revert "feat: add capture billing address feature" ([fb10c76](https://github.com/pelcro-inc/react-pelcro-js/commit/fb10c762da21a71e069d89208c3a974d4b1a9006))
+* Revert "fix: add missing props" ([f8c5e8b](https://github.com/pelcro-inc/react-pelcro-js/commit/f8c5e8bcb55dcfe27a3e461ed7da1b6232d8e491))
+
 # [3.26.0-beta.34](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.33...v3.26.0-beta.34) (2023-10-17)
 
 
