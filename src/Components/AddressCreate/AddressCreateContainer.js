@@ -17,8 +17,7 @@ import {
   GET_COUNTRIES_SUCCESS,
   GET_STATES_SUCCESS,
   GET_COUNTRIES_FETCH,
-  GET_STATES_FETCH,
-  HANDLE_BILLING_SUBMIT
+  GET_STATES_FETCH
 } from "../../utils/action-types";
 import { sortCountries } from "../../utils/utils";
 import { getErrorMessages } from "../common/Helpers";
@@ -44,7 +43,6 @@ const initialState = {
   states: [],
   countries: [],
   isDefault: false,
-  isBilling: false,
   alert: {
     type: "error",
     content: ""
@@ -74,8 +72,7 @@ const AddressCreateContainer = ({
     product,
     order,
     set,
-    selectedMembership,
-    newShippingAddressId
+    selectedMembership
   } = usePelcro();
   const giftCode = props.giftCode ?? giftCodeFromStore;
   const subscriptionIdToRenew =
@@ -115,73 +112,7 @@ const AddressCreateContainer = ({
     };
 
     getCountries();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-  const handleAfterAddressCreationLogic = (newAddressId) => {
-    if (selectedMembership) {
-      dispatch({ type: LOADING, payload: true });
-      return window.Pelcro.membership.update(
-        {
-          auth_token: window.Pelcro.user.read().auth_token,
-          address_id: newAddressId,
-          membership_id: selectedMembership.id
-        },
-        (err, res) => {
-          dispatch({ type: LOADING, payload: false });
-
-          if (err) {
-            dispatch({
-              type: SHOW_ALERT,
-              payload: {
-                type: "error",
-                content: getErrorMessages(err)
-              }
-            });
-            return onFailure(err);
-          }
-          notify.success(t("messages.addressUpdated"));
-          return onMembershipAdressUpdateSuccess(res);
-        }
-      );
-    }
-
-    if (product || order) {
-      set({ selectedAddressId: newAddressId });
-    }
-
-    if (!giftCode) {
-      dispatch({ type: LOADING, payload: false });
-      return onSuccess(newAddressId);
-    }
-
-    if (giftCode) {
-      window.Pelcro.subscription.redeemGift(
-        {
-          auth_token: window.Pelcro.user.read().auth_token,
-          gift_code: giftCode,
-          address_id: newAddressId,
-          // redeem gift as a future phase of an existing subscription
-          subscription_id: subscriptionIdToRenew
-        },
-        (err, res) => {
-          dispatch({ type: LOADING, payload: false });
-
-          if (err) {
-            dispatch({
-              type: SHOW_ALERT,
-              payload: {
-                type: "error",
-                content: getErrorMessages(err)
-              }
-            });
-            return onFailure(err);
-          }
-
-          return onGiftRedemptionSuccess(res);
-        }
-      );
-    }
-  };
+  }, []);
 
   const submitAddress = (
     {
@@ -193,8 +124,7 @@ const AddressCreateContainer = ({
       state,
       country,
       postalCode,
-      isDefault,
-      isBilling
+      isDefault
     },
     dispatch
   ) => {
@@ -229,25 +159,17 @@ const AddressCreateContainer = ({
           getNewlyCreatedAddress(res.data.addresses).id
         );
 
-        set({ newShippingAddressId: newAddressId });
-
-        if (isBilling) {
+        if (selectedMembership) {
           dispatch({ type: LOADING, payload: true });
-          window.Pelcro.address.create(
+          return window.Pelcro.membership.update(
             {
               auth_token: window.Pelcro.user.read().auth_token,
-              type: "billing",
-              first_name: firstName,
-              last_name: lastName,
-              line1: line1,
-              line2: line2,
-              city: city,
-              state: state,
-              country: country,
-              postal_code: postalCode,
-              is_default: isDefault
+              address_id: newAddressId,
+              membership_id: selectedMembership.id
             },
             (err, res) => {
+              dispatch({ type: LOADING, payload: false });
+
               if (err) {
                 dispatch({
                   type: SHOW_ALERT,
@@ -256,66 +178,50 @@ const AddressCreateContainer = ({
                     content: getErrorMessages(err)
                   }
                 });
-                onFailure(err);
-                return dispatch({ type: LOADING, payload: false });
+                return onFailure(err);
               }
-              handleAfterAddressCreationLogic(newAddressId);
+              notify.success(t("messages.addressUpdated"));
+              return onMembershipAdressUpdateSuccess(res);
             }
           );
-        } else {
-          set({ addressView: "billing" });
         }
-      }
-    );
-  };
 
-  const submitBillingAddress = (
-    {
-      firstName,
-      lastName,
-      line1,
-      line2,
-      city,
-      state,
-      country,
-      postalCode,
-      isDefault,
-      isBilling
-    },
-    dispatch
-  ) => {
-    window.Pelcro.address.create(
-      {
-        auth_token: window.Pelcro.user.read().auth_token,
-        type: "billing",
-        first_name: firstName,
-        last_name: lastName,
-        line1: line1,
-        line2: line2,
-        city: city,
-        state: state,
-        country: country,
-        postal_code: postalCode,
-        is_default: isDefault
-      },
-      (err, res) => {
-        if (err) {
-          dispatch({
-            type: SHOW_ALERT,
-            payload: {
-              type: "error",
-              content: getErrorMessages(err)
+        if (product || order) {
+          set({ selectedAddressId: newAddressId });
+        }
+
+        if (!giftCode) {
+          dispatch({ type: LOADING, payload: false });
+          return onSuccess(newAddressId);
+        }
+
+        if (giftCode) {
+          window.Pelcro.subscription.redeemGift(
+            {
+              auth_token: window.Pelcro.user.read().auth_token,
+              gift_code: giftCode,
+              address_id: newAddressId,
+              // redeem gift as a future phase of an existing subscription
+              subscription_id: subscriptionIdToRenew
+            },
+            (err, res) => {
+              dispatch({ type: LOADING, payload: false });
+
+              if (err) {
+                dispatch({
+                  type: SHOW_ALERT,
+                  payload: {
+                    type: "error",
+                    content: getErrorMessages(err)
+                  }
+                });
+                return onFailure(err);
+              }
+
+              return onGiftRedemptionSuccess(res);
             }
-          });
-          onFailure(err);
-          return dispatch({ type: LOADING, payload: false });
+          );
         }
-
-        // const newAddressId = String(
-        //   getNewlyCreatedAddress(res.data.addresses).id
-        // );
-
-        handleAfterAddressCreationLogic(newShippingAddressId);
       }
     );
   };
@@ -395,12 +301,6 @@ const AddressCreateContainer = ({
             { ...state, isSubmitting: true },
             (state, dispatch) => submitAddress(state, dispatch)
           );
-
-        case HANDLE_BILLING_SUBMIT:
-          return UpdateWithSideEffect(
-            { ...state, isSubmitting: true },
-            (state, dispatch) => submitBillingAddress(state, dispatch)
-          );
         default:
           return state;
       }
@@ -437,7 +337,7 @@ const AddressCreateContainer = ({
     if (state.country) {
       getStates();
     }
-  }, [state.country]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [state.country]);
 
   return (
     <div
