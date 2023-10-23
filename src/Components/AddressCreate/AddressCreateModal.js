@@ -42,14 +42,7 @@ export const AddressCreateModal = ({
     >
       <ModalBody>
         {addressView === "billing" ? (
-          <AddressCreateBillingView
-            {...otherProps}
-            onSuccess={onSuccess}
-            onGiftRedemptionSuccess={onGiftRedemptionSuccess}
-            onMembershipAdressUpdateSuccess={
-              onMembershipAdressUpdateSuccess
-            }
-          />
+          <AddressCreateBillingView />
         ) : (
           <AddressCreateView
             {...otherProps}
