@@ -7,15 +7,13 @@ import {
   ModalFooter
 } from "../../SubComponents/Modal";
 import { usePelcro } from "../../hooks/usePelcro";
-import { AddressCreateBillingView } from "./AddressCreateBillingView";
 
 export const AddressCreateModal = ({
   onDisplay,
   onClose,
   ...otherProps
 }) => {
-  const { switchView, switchToPaymentView, resetView, addressView } =
-    usePelcro();
+  const { switchView, switchToPaymentView, resetView } = usePelcro();
 
   const onSuccess = (newAddressId) => {
     otherProps.onSuccess?.(newAddressId);
@@ -41,18 +39,14 @@ export const AddressCreateModal = ({
       onClose={onClose}
     >
       <ModalBody>
-        {addressView === "billing" ? (
-          <AddressCreateBillingView />
-        ) : (
-          <AddressCreateView
-            {...otherProps}
-            onSuccess={onSuccess}
-            onGiftRedemptionSuccess={onGiftRedemptionSuccess}
-            onMembershipAdressUpdateSuccess={
-              onMembershipAdressUpdateSuccess
-            }
-          />
-        )}
+        <AddressCreateView
+          {...otherProps}
+          onSuccess={onSuccess}
+          onGiftRedemptionSuccess={onGiftRedemptionSuccess}
+          onMembershipAdressUpdateSuccess={
+            onMembershipAdressUpdateSuccess
+          }
+        />
       </ModalBody>
       <ModalFooter>
         <Authorship />

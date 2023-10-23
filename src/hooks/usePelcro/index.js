@@ -36,9 +36,7 @@ export const initialState = {
   isAuthenticated: () => window.Pelcro.user.isAuthenticated(),
   selectedPaymentMethodId: null,
   selectedAddressId: null,
-  addressIdToEdit: null,
-  newShippingAddressId: null,
-  addressView: null
+  addressIdToEdit: null
 };
 
 const createPelcroStore = () =>

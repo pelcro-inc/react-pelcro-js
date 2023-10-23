@@ -1,6 +1,5 @@
 {
   "title": "Enter your shipping address",
-  "titleBilling": "Enter your billing address",
   "titleGifting": "Enter your address",
   "selectAddressTitle": "Please select an address",
   "selectAddressSubtitle": "Select one of your saved addresses, or add a new one",
@@ -13,8 +12,7 @@
     "firstName": "First name",
     "lastName": "Last name",
     "required": "required",
-    "isDefault": "Set as default",
-    "isBilling": "Set the billing address to be the same as shipping address"
+    "isDefault": "Set as default"
   },
   "buttons": {
     "submit": "Submit",

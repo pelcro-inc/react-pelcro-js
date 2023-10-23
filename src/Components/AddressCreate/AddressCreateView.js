@@ -10,7 +10,6 @@ import { AddressCreateContainer } from "./AddressCreateContainer";
 import { AddressCreateCountrySelect } from "./AddressCreateCountrySelect";
 import { AddressCreateStateSelect } from "./AddressCreateStateSelect";
 import { AddressCreateSetDefault } from "./AddressCreateSetDefault";
-import { AddressCreateSetBilling } from "./AddressCreateSetBilling";
 import { AlertWithContext } from "../../SubComponents/AlertWithContext";
 import { usePelcro } from "../../hooks/usePelcro";
 
@@ -80,13 +79,6 @@ export const AddressCreateView = (props) => {
             <AddressCreateSetDefault
               id="pelcro-input-is-default"
               label={t("labels.isDefault")}
-            />
-          </div>
-
-          <div className="plc-flex plc-space-x-3 plc-items-start plc-mb-3">
-            <AddressCreateSetBilling
-              id="pelcro-input-is-billing"
-              label={t("labels.isBilling")}
             />
           </div>
 
