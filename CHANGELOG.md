@@ -1,3 +1,10 @@
+# [3.26.0-beta.36](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.35...v3.26.0-beta.36) (2023-10-24)
+
+
+### Features
+
+* use update endpoint instead of set default ([e76885d](https://github.com/pelcro-inc/react-pelcro-js/commit/e76885dd72f850e34855436912b24ffef124b079))
+
 # [3.26.0-beta.35](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.34...v3.26.0-beta.35) (2023-10-23)
 
 
