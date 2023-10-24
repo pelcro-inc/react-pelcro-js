@@ -79,10 +79,11 @@ const PaymentMethodDeleteContainer = ({
 
   const setDefaultPaymentMethod = () => {
     const { selectedPaymentMethodId: paymentMethodId } = state;
-    window.Pelcro.paymentMethods.setDefaultPaymentMethod(
+    window.Pelcro.paymentMethods.update(
       {
         auth_token: window.Pelcro.user.read().auth_token,
-        payment_method_id: paymentMethodId
+        payment_method_id: paymentMethodId,
+        is_default: true
       },
       (err, res) => {
         if (err) {
