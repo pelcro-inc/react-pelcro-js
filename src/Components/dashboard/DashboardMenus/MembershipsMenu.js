@@ -49,61 +49,56 @@ const MembershipsItems = () => {
   return memberships
     .sort((a, b) => a.created_at - b.created_at)
     .map((membership) => {
-      const membershipAddress = window.Pelcro.address
-        .list()
-        ?.find((address) => address.id === membership.address_id);
-
       return (
-        <>
-          { membership.subscription.ended_at === null &&
-            <tr
-              key={membership.id}
-              className={`plc-w-full plc-align-top pelcro-membership-row`}
-            >
-              <td className="plc-truncate">
-                {membership.subscription.plan.nickname && (
-                  <>
-                    <span className="plc-font-semibold plc-text-gray-500 pelcro-membership-plan">
-                      {membership.subscription.plan.nickname}
-                    </span>
-                  </>
-                )}
-              </td>
-              <td>
-                <span
-                  className={`plc-inline-flex plc-p-1 plc-text-xs plc-font-semibold ${
-                    getMemberShipStatus(membership.status).bgColor
-                  } plc-uppercase ${
-                    getMemberShipStatus(membership.status).textColor
-                  } plc-rounded-lg`}
-                >
-                  {getMemberShipStatus(membership.status).icon}
-                  {getMemberShipStatus(membership.status).title}
+        <tr
+          key={membership.id}
+          className={`plc-w-full plc-align-top pelcro-membership-row`}
+        >
+          <td className="plc-truncate">
+            {membership.subscription.plan.nickname && (
+              <>
+                <span className="plc-font-semibold plc-text-gray-500 pelcro-membership-plan">
+                  {membership.subscription.plan.nickname}
                 </span>
-              </td>
-              <td>
-                <Button
-                  variant="ghost"
-                  icon={<EditIcon className="plc-w-4 plc-h-4" />}
-                  className="plc-text-blue-400 focus:plc-ring-blue-500 pelcro-dashboard-membership-address-button"
-                  onClick={() => onChangeAddressClick(membership.id)}
-                >
-                  {`${t("labels.editAddress")}`}
-                </Button>
-              </td>
-            </tr>
-          }
-        </>
+              </>
+            )}
+          </td>
+          <td>
+            <span
+              className={`plc-inline-flex plc-p-1 plc-text-xs plc-font-semibold ${
+                getMemberShipStatus(membership.status).bgColor
+              } plc-uppercase ${
+                getMemberShipStatus(membership.status).textColor
+              } plc-rounded-lg`}
+            >
+              {getMemberShipStatus(membership.status).icon}
+              {getMemberShipStatus(membership.status).title}
+            </span>
+          </td>
+          <td>
+            <Button
+              variant="ghost"
+              icon={<EditIcon className="plc-w-4 plc-h-4" />}
+              className="plc-text-blue-400 focus:plc-ring-blue-500 pelcro-dashboard-membership-address-button"
+              onClick={() => onChangeAddressClick(membership.id)}
+            >
+              {`${t("labels.editAddress")}`}
+            </Button>
+          </td>
+        </tr>
       );
     });
 };
 
 function getActiveMemberships() {
+  const subsStatuses = ["active", "extended", "trialing"];
   return (
     window.Pelcro.user
       .read()
       .memberships?.filter(
-        (membership) => membership.status === "active"
+        (membership) =>
+          membership.status === "active" &&
+          subsStatuses.includes(membership.subscription.status)
       ) ?? []
   );
 }
