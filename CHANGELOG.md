@@ -1,3 +1,10 @@
+# [3.26.0-beta.37](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.36...v3.26.0-beta.37) (2023-10-25)
+
+
+### Bug Fixes
+
+* change the filter for displaying memberships ([6ba97cf](https://github.com/pelcro-inc/react-pelcro-js/commit/6ba97cfc7736121d68d34ec886f81fe6e586c6f5))
+
 # [3.26.0-beta.36](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.35...v3.26.0-beta.36) (2023-10-24)
 
 
