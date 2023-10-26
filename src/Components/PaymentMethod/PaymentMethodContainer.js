@@ -980,9 +980,9 @@ const PaymentMethodContainerWithoutStripe = ({
           gateway: "vantiv"
         },
         (err, res) => {
-          dispatch({ type: DISABLE_SUBMIT, payload: false });
-          dispatch({ type: LOADING, payload: false });
           if (err) {
+            dispatch({ type: DISABLE_SUBMIT, payload: false });
+            dispatch({ type: LOADING, payload: false });
             onFailure(err);
             return dispatch({
               type: SHOW_ALERT,
@@ -1001,6 +1001,8 @@ const PaymentMethodContainerWithoutStripe = ({
                   payment_method_id: paymentMethodId
                 },
                 (err, res) => {
+                  dispatch({ type: DISABLE_SUBMIT, payload: false });
+                  dispatch({ type: LOADING, payload: false });
                   if (err) {
                     onFailure?.(err);
                     return dispatch({
@@ -1015,7 +1017,7 @@ const PaymentMethodContainerWithoutStripe = ({
                   onSuccess(res);
                 }
               );
-            }, 1000);
+            }, 2000);
           }
         }
       );
@@ -2090,7 +2092,7 @@ const PaymentMethodContainerWithoutStripe = ({
                     onSuccess(res);
                   }
                 );
-              }, 1000);
+              }, 2000);
             }
           }
         );
