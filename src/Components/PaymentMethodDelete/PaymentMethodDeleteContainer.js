@@ -99,7 +99,7 @@ const PaymentMethodDeleteContainer = ({
 
         setTimeout(() => {
           deletePaymentMethod();
-        }, 1000);
+        }, 2000);
       }
     );
   };
