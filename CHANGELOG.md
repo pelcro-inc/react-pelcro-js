@@ -1,3 +1,10 @@
+# [3.26.0-beta.39](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.38...v3.26.0-beta.39) (2023-10-26)
+
+
+### Bug Fixes
+
+* increase the delay for replacing a card ([d5054f4](https://github.com/pelcro-inc/react-pelcro-js/commit/d5054f40b9daff146c8598d9539f62c46828e214))
+
 # [3.26.0-beta.38](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.37...v3.26.0-beta.38) (2023-10-26)
 
 
