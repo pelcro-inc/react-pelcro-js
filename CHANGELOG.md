@@ -1,3 +1,10 @@
+# [3.26.0-beta.38](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.37...v3.26.0-beta.38) (2023-10-26)
+
+
+### Bug Fixes
+
+* delay replacing vantiv card ([a51bbe8](https://github.com/pelcro-inc/react-pelcro-js/commit/a51bbe8e52b204d6973896ba1811752914879c3d))
+
 # [3.26.0-beta.37](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.36...v3.26.0-beta.37) (2023-10-25)
 
 
