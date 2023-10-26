@@ -1038,26 +1038,30 @@ const PaymentMethodContainerWithoutStripe = ({
             });
           }
 
-          window.Pelcro.paymentMethods.deletePaymentMethod(
-            {
-              auth_token: window.Pelcro.user.read().auth_token,
-              payment_method_id: paymentMethodId
-            },
-            (err, res) => {
-              if (err) {
-                onFailure?.(err);
-                return dispatch({
-                  type: SHOW_ALERT,
-                  payload: {
-                    type: "error",
-                    content: getErrorMessages(err)
+          if (res) {
+            setTimeout(() => {
+              window.Pelcro.paymentMethods.deletePaymentMethod(
+                {
+                  auth_token: window.Pelcro.user.read().auth_token,
+                  payment_method_id: paymentMethodId
+                },
+                (err, res) => {
+                  if (err) {
+                    onFailure?.(err);
+                    return dispatch({
+                      type: SHOW_ALERT,
+                      payload: {
+                        type: "error",
+                        content: getErrorMessages(err)
+                      }
+                    });
                   }
-                });
-              }
 
-              onSuccess(res);
-            }
-          );
+                  onSuccess(res);
+                }
+              );
+            }, 1000);
+          }
         }
       );
     }
