@@ -131,7 +131,7 @@ export const ApplePayButton = ({ onClick, props, ...otherProps }) => {
           label:
             plan?.nickname || orderLabel || `invoice #${invoice?.id}`,
           type: "final",
-          amount: updatedPrice / 100
+          amount: (updatedPrice / 100).toFixed(2)
         }
       };
 
@@ -178,7 +178,7 @@ export const ApplePayButton = ({ onClick, props, ...otherProps }) => {
           label:
             plan?.nickname || orderLabel || `invoice #${invoice?.id}`,
           type: "final",
-          amount: updatedPrice / 100
+          amount: (updatedPrice / 100).toFixed(2)
         };
 
         const newLineItems = [
@@ -188,7 +188,7 @@ export const ApplePayButton = ({ onClick, props, ...otherProps }) => {
               orderLabel ||
               `invoice #${invoice?.id}`,
             type: "final",
-            amount: updatedPrice / 100
+            amount: (updatedPrice / 100).toFixed(2)
           }
         ];
 
@@ -205,14 +205,14 @@ export const ApplePayButton = ({ onClick, props, ...otherProps }) => {
       //   const newTotal = {
       //     label: plan?.nickname || orderLabel || `invoice #${invoice?.id}`,
       //     type: "final",
-      //     amount: updatedPrice / 100
+      //     amount: (updatedPrice / 100).toFixed(2)
       //   };
 
       //   const newLineItems = [
       //     {
       //       label: plan?.nickname || orderLabel || `invoice #${invoice?.id}`,
       //       type: "final",
-      //       amount: updatedPrice / 100
+      //       amount: (updatedPrice / 100).toFixed(2)
       //     }
       //   ];
 
