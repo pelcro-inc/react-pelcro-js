@@ -80,3 +80,16 @@ export function getSiteCardProcessor() {
 
   return "stripe";
 }
+
+export function getFourDigitYear(lastTwoDigits) {
+  // Get the current year
+  const currentYear = new Date().getFullYear();
+
+  // Extract the current century (first two digits)
+  const currentCentury = Math.floor(currentYear / 100);
+
+  // Combine the century and the provided last two digits
+  const fourDigitYear = currentCentury * 100 + lastTwoDigits;
+
+  return fourDigitYear;
+}

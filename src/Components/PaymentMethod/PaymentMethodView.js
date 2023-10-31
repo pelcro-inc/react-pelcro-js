@@ -28,6 +28,7 @@ import {
   getPageOrDefaultLanguage
 } from "../../utils/utils";
 import { ApplePayButton } from "../ApplePayButton/ApplePayButton";
+import { PaymentMethodUpdateSetDefault } from "../PaymentMethodUpdate/PaymentMethodUpdateSetDefault";
 
 /**
  *
@@ -165,7 +166,7 @@ export function PaymentMethodView({
                   </>
                 )}
 
-              <CheckoutForm />
+              <CheckoutForm type={type} />
 
               {/* Coupon section */}
               {showCoupon && (
@@ -176,6 +177,13 @@ export function PaymentMethodView({
               )}
 
               <TaxAmount />
+
+              {type === "updatePaymentSource" && (
+                <PaymentMethodUpdateSetDefault
+                  id="pelcro-input-is-default"
+                  label={t("labels.isDefault")}
+                />
+              )}
 
               {/* Payment buttons section */}
               <div className="plc-grid plc-mt-4 plc-gap-y-2">

@@ -24,6 +24,7 @@
     "firstName": "이름",
     "lastName": "성",
     "phone": "핸드폰",
-    "freeItems": "무료 아이템"
+    "freeItems": "무료 아이템",
+    "isDefault": "기본값으로 설정"
   }
 }
