@@ -1,3 +1,10 @@
+# [3.33.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.32.0...v3.33.0) (2023-10-31)
+
+
+### Features
+
+* payment methods ui enhancments ([#335](https://github.com/pelcro-inc/react-pelcro-js/issues/335)) ([7839c5f](https://github.com/pelcro-inc/react-pelcro-js/commit/7839c5f379b0d5c04cc77d9dceaa13f5be2beaf9))
+
 # [3.32.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.31.0...v3.32.0) (2023-09-28)
 
 
