@@ -1,3 +1,15 @@
+# [3.26.0-beta.41](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.40...v3.26.0-beta.41) (2023-11-02)
+
+
+### Bug Fixes
+
+* amend after login logic ([9ff6259](https://github.com/pelcro-inc/react-pelcro-js/commit/9ff62591703f25b0b60dc860dc2f1b57e8a7e5ac))
+
+
+### Features
+
+* payment methods ui enhancments ([#335](https://github.com/pelcro-inc/react-pelcro-js/issues/335)) ([7839c5f](https://github.com/pelcro-inc/react-pelcro-js/commit/7839c5f379b0d5c04cc77d9dceaa13f5be2beaf9))
+
 # [3.26.0-beta.40](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.39...v3.26.0-beta.40) (2023-10-27)
 
 
