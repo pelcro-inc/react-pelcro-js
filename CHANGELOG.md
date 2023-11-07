@@ -1,3 +1,10 @@
+## [3.33.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.33.0...v3.33.1) (2023-11-07)
+
+
+### Bug Fixes
+
+* round the updated price to two decimals ([#337](https://github.com/pelcro-inc/react-pelcro-js/issues/337)) ([8b04028](https://github.com/pelcro-inc/react-pelcro-js/commit/8b0402863de61d7c3ad78ed01578e14ef29ec880))
+
 # [3.33.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.32.0...v3.33.0) (2023-10-31)
 
 
