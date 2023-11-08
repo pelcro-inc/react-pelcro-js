@@ -265,8 +265,8 @@ class SelectModal extends Component {
         <span className="plc-text-xs plc-ml-1 plc-text-gray-400">
           /{" "}
           {startingPlan.interval_count > 1
-            ? `${startingPlan.interval_count} ${startingPlan.interval}s`
-            : `${startingPlan.interval}`}
+            ? `${startingPlan.interval_count} ${startingPlan.interval_translated}`
+            : `${startingPlan.interval_translated}`}
         </span>
       </h5>
     );

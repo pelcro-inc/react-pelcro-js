@@ -4,6 +4,7 @@ import { SET_CANCEL_SUBSCRIPTION_OPTION } from "../../utils/action-types";
 import { store } from "./SubscriptionCancelContainer";
 import { useTranslation } from "react-i18next";
 
+// New cancellation option modal
 export const SubscriptionCancelOptions = ({
   subscription,
   hasPhases,
