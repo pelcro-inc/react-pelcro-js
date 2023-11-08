@@ -167,7 +167,7 @@ const PaymentMethodContainerWithoutStripe = ({
     );
     if (isUsingExistingPaymentMethod) {
       // no need to create a new source using tap
-      return handleTapPayment(null);
+      return handleTapPayment(null, state);
     }
 
     if (!tapInstanceRef.current) {
@@ -527,7 +527,7 @@ const PaymentMethodContainerWithoutStripe = ({
     );
     if (isUsingExistingPaymentMethod) {
       // no need to create a new source using vantiv
-      return handleVantivPayment(null);
+      return handleVantivPayment(null, state.couponCode);
     }
 
     if (!vantivInstanceRef.current) {
