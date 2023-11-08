@@ -11,6 +11,7 @@ import { usePelcro } from "../hooks/usePelcro";
 import { getSiteCardProcessor } from "../Components/common/Helpers";
 import { MonthSelect } from "./MonthSelect";
 import { YearSelect } from "./YearSelect";
+import { Input } from "./Input";
 
 const StripeInputStyle = {
   base: "plc-w-full plc-p-3 plc-border plc-border-gray-300 plc-appearance-none plc-outline-none plc-rounded plc-bg-white pelcro-input-input",
@@ -118,8 +119,9 @@ export const PelcroPaymentRequestButton = (props) => {
   return null;
 };
 
-export const CheckoutForm = () => {
-  const { selectedPaymentMethodId } = usePelcro();
+export const CheckoutForm = ({ type }) => {
+  const { selectedPaymentMethodId, paymentMethodToEdit } =
+    usePelcro();
   const cardProcessor = getSiteCardProcessor();
 
   if (selectedPaymentMethodId) {
@@ -154,6 +156,33 @@ export const CheckoutForm = () => {
   }
 
   if (cardProcessor === "stripe") {
+    if (type === "updatePaymentSource") {
+      return (
+        <div>
+          {paymentMethodToEdit ? (
+            <div>
+              <Input
+                className="plc-tracking-widest plc-flex-grow plc-text-center"
+                value={`•••• •••• •••• ${paymentMethodToEdit?.properties?.last4}`}
+                disabled
+              />
+            </div>
+          ) : (
+            <div>
+              <Input className="plc-bg-gray-300 plc-animate-pulse" />
+            </div>
+          )}
+          <div className="plc-flex plc-items-end plc-justify-between plc-my-2">
+            <div className="plc-w-6/12 plc-pr-4">
+              <MonthSelect store={store} placeholder="Exp Month *" />
+            </div>
+            <div className="plc-w-6/12">
+              <YearSelect store={store} placeholder="Exp Year *" />
+            </div>
+          </div>
+        </div>
+      );
+    }
     return (
       <div className="plc-mt-4">
         <div className="plc-relative">

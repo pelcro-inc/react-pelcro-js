@@ -15,5 +15,18 @@
       "selectPaymentMethod": "Continuer",
       "changePaymentMethod": "Modifier"
     }
+  },
+  "delete": {
+    "title": "Supprimer un mode de paiement",
+    "subtitle": "Ce mode de paiement peut être associé à des abonnements actifs ou servir de mode de paiement par défaut. Veuillez choisir parmi les options disponibles ci-dessous pour le remplacement.",
+    "options": {
+      "select": "Sélectionner un mode de paiement existant",
+      "add": "Ajouter un nouveau mode de paiement"
+    },
+    "paymentMethodReplaced": "Méthode de paiement supprimée et remplacée avec succès"
+  },
+  "create": {
+    "title": "Ajouter un nouveau mode de paiement",
+    "subtitle": "Saisissez les champs ci-dessous pour ajouter les informations relatives à votre carte de crédit"
   }
 }

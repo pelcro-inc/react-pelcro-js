@@ -23,6 +23,7 @@
     "firstName": "Prénom",
     "lastName": "Nom de famille",
     "phone": "Téléphoner",
-    "freeItems": "Articles gratuits"
+    "freeItems": "Articles gratuits",
+    "isDefault": "Défini comme valeur par défaut"
   }
 }

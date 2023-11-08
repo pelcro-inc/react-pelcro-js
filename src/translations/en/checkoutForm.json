@@ -23,6 +23,7 @@
     "firstName": "First name",
     "lastName": "Last name",
     "phone": "Phone",
-    "freeItems": "Free Items"
+    "freeItems": "Free Items",
+    "isDefault": "Set as default"
   }
 }

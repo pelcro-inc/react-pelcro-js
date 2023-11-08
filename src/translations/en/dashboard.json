@@ -71,6 +71,8 @@
     "renewsOn": "Renews",
     "canceledOn": "Canceled on",
     "recipient": "Recipient",
+    "addPaymentSource": "Add payment method",
+    "setDefault": "Set as default",
     "addAddress": "Add address",
     "editAddress": "Edit address",
     "addSubscription": "New Subscription",
@@ -113,6 +115,13 @@
       "loading": "Unsuspending your subscription",
       "success": "Subscription is successfully unsuspended",
       "error": "Error while unsuspending your subscription"
+    },
+    "paymentMethodDeletion": {
+      "isSureToDelete": "Are you sure you want to delete this payment method?",
+      "loading": "Deleting your payment method",
+      "success": "Payment method is successfully deleted",
+      "error": "Error while deleting your payment method",
+      "nonDeletable": "This payment method can't be deleted"
     }
   }
 }

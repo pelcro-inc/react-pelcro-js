@@ -52,7 +52,7 @@ export const getPaymentCardIcon = (name) => {
   };
 
   return (
-    icons[name.toLowerCase()] ?? (
+    icons[name?.toLowerCase()] ?? (
       <svg
         xmlns="http://www.w3.org/2000/svg"
         className="plc-w-12"
