@@ -149,7 +149,7 @@ export const loadPaymentSDKs = () => {
     }
 
     window.Pelcro.helpers.loadSDK(
-      "https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js",
+      "https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js",
       "vantiv-jquery-sdk"
     );
 
@@ -201,7 +201,7 @@ export const loadPaymentSDKs = () => {
 export const loadAuth0SDK = () => {
   const auth0Enabled = Boolean(
     window.Pelcro.site.read().auth0_client_id &&
-    window.Pelcro.site.read().auth0_base_url
+      window.Pelcro.site.read().auth0_base_url
   );
 
   if (auth0Enabled) {
@@ -215,7 +215,7 @@ export const loadAuth0SDK = () => {
 export const load = () => {
   const auth0Enabled = Boolean(
     window.Pelcro.site.read().auth0_client_id &&
-    window.Pelcro.site.read().auth0_base_url
+      window.Pelcro.site.read().auth0_base_url
   );
 
   if (auth0Enabled) {
