@@ -56,11 +56,10 @@ export const formatDiscountedPrice = (
 
 export const sortCountries = (countries) => {
   const sortable = [];
-  delete countries.CA;
-  delete countries.US;
+  const { CA, US, ...rest } = countries;
 
-  for (const abbr in countries) {
-    sortable.push([abbr, countries[abbr]]);
+  for (const abbr in rest) {
+    sortable.push([abbr, rest[abbr]]);
   }
 
   sortable.sort((a, b) => {
@@ -68,7 +67,7 @@ export const sortCountries = (countries) => {
     return -1;
   });
 
-  sortable.unshift(["US", "United States"], ["CA", "Canada"]);
+  sortable.unshift(["US", US], ["CA", CA]);
 
   return sortable;
 };

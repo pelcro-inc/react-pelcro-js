@@ -47,6 +47,7 @@ export function CountrySelect({ placeholder, store, ...otherProps }) {
 
   return (
     <Select
+      className="plc-pr-8"
       value={country}
       error={countryError}
       onChange={(e) => handleInputChange(e.target.value)}
