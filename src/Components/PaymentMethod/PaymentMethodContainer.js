@@ -44,7 +44,8 @@ import {
   SET_PHONE,
   SET_FIRST_NAME_ERROR,
   SET_LAST_NAME_ERROR,
-  SET_PHONE_ERROR
+  SET_PHONE_ERROR,
+  UPDATE_CYBERSOURCE_SESSION_ID
 } from "../../utils/action-types";
 import {
   getErrorMessages,
@@ -104,6 +105,7 @@ const initialState = {
   phoneError: null,
   month: "",
   year: "",
+  cyberSourceSessionId: null,
   alert: {
     type: "error",
     content: ""
@@ -167,20 +169,26 @@ const PaymentMethodContainerWithoutStripe = ({
 
   /*====== Start Cybersource integration ========*/
   const cybersourceErrorHandle = (err) => {
-    const errorMessages = [];
+    if (err?.details?.responseStatus?.details?.length > 0) {
+      const errorMessages = [];
 
-    // enumerable error (ex: validation errors)
-    Object.values(err?.details?.responseStatus?.details).forEach(
-      ({ message }) => {
-        errorMessages.push(message);
-      }
-    );
+      // enumerable error (ex: validation errors)
+      Object.values(err?.details?.responseStatus?.details).forEach(
+        ({ message }) => {
+          errorMessages.push(message);
+        }
+      );
 
-    // convert to multiline string
-    return errorMessages.join("\n");
+      // convert to multiline string
+      return errorMessages.join("\n");
+    } else {
+      return getErrorMessages(err?.details?.responseStatus);
+    }
   };
 
   const submitUsingCybersource = (state, dispatch) => {
+    console.log("State", state);
+
     const isUsingExistingPaymentMethod = Boolean(
       selectedPaymentMethodId
     );
@@ -369,7 +377,8 @@ const PaymentMethodContainerWithoutStripe = ({
             couponCode,
             product,
             isExistingSource: isUsingExistingPaymentMethod,
-            addressId: selectedAddressId
+            addressId: selectedAddressId,
+            fingerprint_session_id: state.cyberSourceSessionId
           },
           (err, res) => {
             if (err) {
@@ -388,6 +397,43 @@ const PaymentMethodContainerWithoutStripe = ({
     }
 
     cybersourceInstanceRef.current = microformInstance;
+  };
+
+  const appendCybersourceFingerprintScripts = () => {
+    const uniqueId = crypto.randomUUID();
+    const sessionID =
+      window.Pelcro.site.read()?.cybersource_gateway_settings
+        ?.merchant_id + uniqueId;
+    const orgID =
+      window.Pelcro.site.read()?.cybersource_gateway_settings?.org_id;
+
+    const fingerPrintScript = document.querySelector(
+      `script[src="https://h.online-metrix.net/fp/tags.js?org_id=${orgID}&session_id=${sessionID}"]`
+    );
+    const fingerPringIframe = document.querySelector(
+      `iframe[src="https://h.online-metrix.net/fp/tags?org_id=${orgID}&session_id=${sessionID}"]`
+    );
+
+    if (!fingerPrintScript && !fingerPringIframe) {
+      window.Pelcro.helpers.loadSDK(
+        `https://h.online-metrix.net/fp/tags.js?org_id=${orgID}&session_id=${sessionID}`,
+        "cybersource-fingerprint-script"
+      );
+
+      const body = document.getElementsByTagName("body")[0];
+      const noscript = document.createElement("noscript");
+      const iframe = document.createElement("iframe");
+      iframe.style.cssText =
+        "width: 100px; height: 100px; border: 0; position:absolute; top: -5000px;";
+      iframe.src = `https://h.online-metrix.net/fp/tags?org_id=${orgID}&session_id=${sessionID}`;
+      noscript.appendChild(iframe);
+      body.insertBefore(noscript, body.firstChild);
+
+      dispatch({
+        type: UPDATE_CYBERSOURCE_SESSION_ID,
+        payload: uniqueId
+      });
+    }
   };
 
   const initCybersourceScript = () => {
@@ -1106,6 +1152,10 @@ const PaymentMethodContainerWithoutStripe = ({
         window.FLEX
       ) {
         initCybersourceScript();
+      }
+
+      if (cardProcessor === "cybersource") {
+        appendCybersourceFingerprintScripts();
       }
     });
   }, [selectedPaymentMethodId]);
@@ -2216,10 +2266,16 @@ const PaymentMethodContainerWithoutStripe = ({
           return Update({ ...state, percentOff: action.payload });
 
         case SET_MONTH:
-          return Update({ ...state, month: action.payload });
+          return Update({
+            ...state,
+            month: action.payload
+          });
 
         case SET_YEAR:
-          return Update({ ...state, year: action.payload });
+          return Update({
+            ...state,
+            year: action.payload
+          });
 
         case SET_FIRST_NAME:
           return Update({
@@ -2267,6 +2323,12 @@ const PaymentMethodContainerWithoutStripe = ({
           return Update({
             ...state,
             alert: action.payload
+          });
+
+        case UPDATE_CYBERSOURCE_SESSION_ID:
+          return Update({
+            ...state,
+            cyberSourceSessionId: action.payload
           });
 
         default:

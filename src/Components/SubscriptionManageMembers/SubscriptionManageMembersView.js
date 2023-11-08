@@ -14,6 +14,12 @@ export function SubscriptionManageMembersView(props) {
 
   return (
     <div id="pelcro-login-view">
+      <div className="plc-font-semibold plc-text-center plc-text-gray-900 pelcro-title-wrapper">
+        <h4 className="plc-text-2xl">{t("labels.inviteMembers")}</h4>
+        <p>
+          {t("labels.listNote")} 'john@example.com,jane@example.com'
+        </p>
+      </div>
       <form
         action="javascript:void(0);"
         className="plc-mt-2 pelcro-form"

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { usePelcro } from "../../hooks/usePelcro";
 import { useTranslation } from "react-i18next";
 import { store } from "./PaymentMethodContainer";
@@ -10,11 +10,23 @@ import {
 } from "../../utils/utils";
 
 export const SubmitPaymentMethod = ({ onClick, ...otherProps }) => {
-  const { plan } = usePelcro();
+  const { plan, selectedPaymentMethodId } = usePelcro();
   const { t } = useTranslation("checkoutForm");
   const {
     dispatch,
-    state: { disableSubmit, isLoading, updatedPrice }
+    state: {
+      firstNameError,
+      lastNameError,
+      phoneError,
+      firstName,
+      lastName,
+      phone,
+      disableSubmit,
+      isLoading,
+      updatedPrice,
+      month,
+      year
+    }
   } = useContext(store);
 
   const planQuantity = plan?.quantity ?? 1;
@@ -24,6 +36,58 @@ export const SubmitPaymentMethod = ({ onClick, ...otherProps }) => {
     plan?.currency,
     getPageOrDefaultLanguage()
   );
+
+  const supportsTap = Boolean(
+    window.Pelcro.site.read()?.tap_gateway_settings
+  );
+  const supportsCybersource = Boolean(
+    window.Pelcro.site.read()?.cybersource_gateway_settings
+  );
+
+  const isUserFirstName = Boolean(
+    window.Pelcro.user.read().first_name
+  );
+  const isUserLastName = Boolean(window.Pelcro.user.read().last_name);
+  const isUserPhone = Boolean(window.Pelcro.user.read().phone);
+
+  const [isDisabled, setDisabled] = useState(true);
+
+  useEffect(() => {
+    if (
+      supportsTap &&
+      isUserFirstName &&
+      isUserLastName &&
+      isUserPhone
+    ) {
+      setDisabled(disableSubmit);
+    } else {
+      setDisabled(
+        disableSubmit ||
+          (supportsTap && firstNameError) ||
+          (supportsTap && lastNameError) ||
+          (supportsTap && phoneError) ||
+          (supportsTap && !firstName?.length) ||
+          (supportsTap && !lastName?.length) ||
+          (supportsTap && !phone?.length) ||
+          (supportsCybersource &&
+            !selectedPaymentMethodId &&
+            !month?.length) ||
+          (supportsCybersource &&
+            !selectedPaymentMethodId &&
+            !year?.length)
+      );
+    }
+  }, [
+    disableSubmit,
+    firstNameError,
+    lastNameError,
+    phoneError,
+    firstName,
+    lastName,
+    phone,
+    month,
+    year
+  ]);
 
   return (
     <Button
