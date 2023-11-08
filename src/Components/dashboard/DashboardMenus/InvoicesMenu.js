@@ -49,7 +49,7 @@ const InvoicesItems = () => {
   const invoices =
     window.Pelcro.invoice
       .list()
-      ?.filter((invoice) => invoice.total > 0) ?? [];
+      ?.filter((invoice) => invoice.order_id || invoice.total > 0) ?? [];
 
   const showInvoiceDetails = (event) => {
     if (setInvoice(event.target.dataset.id)) {
