@@ -8,6 +8,7 @@ export function PaymentMethodUpdateView(props) {
         type="updatePaymentSource"
         showCoupon={false}
         showExternalPaymentMethods={false}
+        showApplePayButton={false}
         onDisplay={props.onDisplay}
         onFailure={props.onFailure}
         onSuccess={props.onSuccess}

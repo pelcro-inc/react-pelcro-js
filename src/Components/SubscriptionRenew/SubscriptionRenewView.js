@@ -50,6 +50,7 @@ export const SubscriptionRenewView = ({
         type="createPayment"
         showCoupon={true}
         showExternalPaymentMethods={false}
+        showApplePayButton={true}
         onSuccess={onSuccess}
         onGiftRenewalSuccess={onGiftRenewalSuccess}
         onFailure={onFailure}
