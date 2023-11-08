@@ -20,6 +20,8 @@ export const CartRemoveItemButton = ({
           aria-hidden="true"
           focusable="false"
           className="plc-fill-current"
+          height="20"
+          width="20"
         />
       }
       className="plc-bg-transparent plc-w-9 plc-h-9 plc-p-2 hover:plc-text-red-500 hover:plc-bg-transparent"
