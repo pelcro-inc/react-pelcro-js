@@ -1,3 +1,10 @@
+# [4.0.0-alpha.49](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.48...v4.0.0-alpha.49) (2023-11-09)
+
+
+### Features
+
+* add missing merge conflict code ([8f61a64](https://github.com/pelcro-inc/react-pelcro-js/commit/8f61a64663e4d0a36b47aeead2443146059782c1))
+
 # [4.0.0-alpha.48](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.47...v4.0.0-alpha.48) (2023-11-08)
 
 
