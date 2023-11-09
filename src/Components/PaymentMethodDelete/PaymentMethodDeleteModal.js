@@ -6,7 +6,6 @@ import {
   ModalBody,
   ModalFooter
 } from "../../SubComponents/Modal";
-import Authorship from "../common/Authorship";
 import ReactGA from "react-ga";
 import ReactGA4 from "react-ga4";
 import { usePelcro, notify } from "../../components";
@@ -50,9 +49,7 @@ export const PaymentMethodDeleteModal = (props) => {
       <ModalBody>
         <PaymentMethodDeleteView {...props} onSuccess={onSuccess} />
       </ModalBody>
-      <ModalFooter>
-        <Authorship />
-      </ModalFooter>
+      <ModalFooter></ModalFooter>
     </Modal>
   );
 };

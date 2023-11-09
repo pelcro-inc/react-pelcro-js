@@ -726,7 +726,7 @@ const showPaymentMethodUpdateFromUrl = () => {
         return;
       }
 
-      //vantiv
+      // vantiv
       if (supportsVantiv) {
         document
           .querySelector("#vantiv-eprotect-sdk")
@@ -736,7 +736,7 @@ const showPaymentMethodUpdateFromUrl = () => {
         return;
       }
 
-      //Tap
+      // Tap
       if (supportsTap && document.querySelector("#tap-sdk")) {
         return switchView("payment-method-update");
       }

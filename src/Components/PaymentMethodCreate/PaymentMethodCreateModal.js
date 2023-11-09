@@ -7,7 +7,6 @@ import {
   ModalBody,
   ModalFooter
 } from "../../SubComponents/Modal";
-import Authorship from "../common/Authorship";
 import ReactGA from "react-ga";
 import ReactGA4 from "react-ga4";
 
@@ -46,9 +45,7 @@ export const PaymentMethodCreateModal = (props) => {
       <ModalBody>
         <PaymentMethodCreateView {...props} onSuccess={onSuccess} />
       </ModalBody>
-      <ModalFooter>
-        <Authorship />
-      </ModalFooter>
+      <ModalFooter></ModalFooter>
     </Modal>
   );
 };
