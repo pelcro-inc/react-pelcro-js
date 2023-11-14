@@ -1,3 +1,11 @@
+# [3.26.0-beta.42](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.41...v3.26.0-beta.42) (2023-11-14)
+
+
+### Bug Fixes
+
+* coupon error message overlapping ([7a205cb](https://github.com/pelcro-inc/react-pelcro-js/commit/7a205cbcc68aae271275ae4afac8ccb944f59b1f))
+* round the updated price to two decimals ([#337](https://github.com/pelcro-inc/react-pelcro-js/issues/337)) ([8b04028](https://github.com/pelcro-inc/react-pelcro-js/commit/8b0402863de61d7c3ad78ed01578e14ef29ec880))
+
 # [3.26.0-beta.41](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.40...v3.26.0-beta.41) (2023-11-02)
 
 
