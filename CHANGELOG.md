@@ -1,3 +1,10 @@
+# [3.26.0-beta.43](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.42...v3.26.0-beta.43) (2023-11-17)
+
+
+### Bug Fixes
+
+* coupon error message overlapping iter 2 ([67c96f7](https://github.com/pelcro-inc/react-pelcro-js/commit/67c96f7c3e9967b05fb599bc113acc48dc6fa41a))
+
 # [3.26.0-beta.42](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.41...v3.26.0-beta.42) (2023-11-14)
 
 
