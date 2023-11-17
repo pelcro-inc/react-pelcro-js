@@ -25,7 +25,7 @@ export const TaxAmount = () => {
 
   if (taxAmount) {
     return (
-      <div className="plc-text-center pelcro-tax-amount plc-mt-10">
+      <div className="plc-text-center pelcro-tax-amount">
         {isTaxInclusive && "("}
         {isTaxInclusive
           ? `Includes ${t("labels.tax")}`
