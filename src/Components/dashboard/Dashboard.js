@@ -1050,13 +1050,14 @@ function hasDonationSubs() {
 }
 
 function hasActiveMemberships() {
+  const subsStatuses = ["active", "extended", "trialing"];
   return (
     window.Pelcro.user
       .read()
       .memberships?.some(
         (membership) =>
           membership.status === "active" &&
-          membership.subscription.ended_at === null
+          subsStatuses.includes(membership.subscription.status)
       ) ?? false
   );
 }
