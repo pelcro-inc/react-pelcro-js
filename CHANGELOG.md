@@ -1,3 +1,11 @@
+## [3.33.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.33.1...v3.33.2) (2023-12-06)
+
+
+### Bug Fixes
+
+* amend after login logic ([#340](https://github.com/pelcro-inc/react-pelcro-js/issues/340)) ([c310904](https://github.com/pelcro-inc/react-pelcro-js/commit/c3109044235393508d7c644a1f8f886605828a40))
+* change the filter for displaying memberships ([#341](https://github.com/pelcro-inc/react-pelcro-js/issues/341)) ([699a52c](https://github.com/pelcro-inc/react-pelcro-js/commit/699a52cf9fed9c00e2018143d250a0dfcad604c7))
+
 ## [3.33.1](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.33.0...v3.33.1) (2023-11-07)
 
 
