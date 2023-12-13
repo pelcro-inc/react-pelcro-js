@@ -67,7 +67,7 @@ export function PaymentMethodView({
   const isUserPhone = Boolean(window.Pelcro.user.read().phone);
 
   return (
-    <div className="plc-flex plc-flex-col plc-items-center plc-mt-4 sm:plc-px-8 pelcro-payment-block">
+    <div className="plc-flex plc-flex-col plc-items-center plc-mt-4 plc-px-8 md:plc-px-0 pelcro-payment-block">
       {order && (
         <div className="plc-w-full plc-p-2 plc-mb-4 plc-font-semibold plc-text-center plc-text-gray-900 plc-bg-gray-100 plc-border plc-border-gray-200">
           <p className="plc-text-gray-600">
