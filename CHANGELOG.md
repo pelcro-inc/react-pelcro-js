@@ -1,3 +1,10 @@
+# [4.0.0-alpha.52](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.51...v4.0.0-alpha.52) (2023-12-13)
+
+
+### Bug Fixes
+
+* align payment method view ([a58c72a](https://github.com/pelcro-inc/react-pelcro-js/commit/a58c72a7bf8744289cb842a23f51ecea9acab182))
+
 # [4.0.0-alpha.51](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.50...v4.0.0-alpha.51) (2023-12-13)
 
 
