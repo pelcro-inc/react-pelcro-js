@@ -27,14 +27,39 @@ export function LoginModal({ onDisplay, onClose, ...props }) {
     plan,
     order,
     switchToAddressView,
-    switchToPaymentView
+    switchToPaymentView,
+    giftCode,
+    isGift
   } = usePelcro();
 
   const onSuccess = (res) => {
     props.onSuccess?.(res);
+    handleAfterLoginLogic();
+  };
 
+  const handleAfterLoginLogic = () => {
     if (window.Pelcro.paywall.isArticleRestricted()) {
       initPaywalls();
+    }
+
+    if (!product && !order && !giftCode) {
+      // If product and plan are not selected
+      return resetView();
+    }
+
+    // If this is a redeem gift
+    if (giftCode) {
+      return switchView("gift-redeem");
+      // return switchToAddressView();
+    }
+
+    // Check if the subscription is meant as a gift (if so, gather recipients info)
+    if (isGift) {
+      return switchView("gift-create");
+    }
+
+    if (order) {
+      return switchToAddressView();
     }
 
     if (product && plan) {
@@ -49,12 +74,6 @@ export function LoginModal({ onDisplay, onClose, ...props }) {
       return switchView("plan-select");
     }
 
-    if (order) {
-      return switchToAddressView();
-    }
-
-    resetView();
-
     const viewFromURL = getStableViewID(
       window.Pelcro.helpers.getURLParameter("view")
     );
@@ -67,8 +86,10 @@ export function LoginModal({ onDisplay, onClose, ...props }) {
     ];
 
     if (viewsURLs.includes(viewFromURL)) {
-      initViewFromURL();
+      return initViewFromURL();
     }
+
+    return resetView();
   };
 
   const onCreateAccountClick = () => {
