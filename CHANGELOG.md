@@ -1,3 +1,19 @@
+# [4.0.0-alpha.50](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.49...v4.0.0-alpha.50) (2023-12-13)
+
+
+### Bug Fixes
+
+* amend after login logic ([9ff6259](https://github.com/pelcro-inc/react-pelcro-js/commit/9ff62591703f25b0b60dc860dc2f1b57e8a7e5ac))
+* change the filter for displaying memberships ([6ba97cf](https://github.com/pelcro-inc/react-pelcro-js/commit/6ba97cfc7736121d68d34ec886f81fe6e586c6f5))
+* coupon error message overlapping ([7a205cb](https://github.com/pelcro-inc/react-pelcro-js/commit/7a205cbcc68aae271275ae4afac8ccb944f59b1f))
+* coupon error message overlapping iter 2 ([67c96f7](https://github.com/pelcro-inc/react-pelcro-js/commit/67c96f7c3e9967b05fb599bc113acc48dc6fa41a))
+* round the updated price to two decimals ([#337](https://github.com/pelcro-inc/react-pelcro-js/issues/337)) ([8b04028](https://github.com/pelcro-inc/react-pelcro-js/commit/8b0402863de61d7c3ad78ed01578e14ef29ec880))
+
+
+### Features
+
+* payment methods ui enhancments ([#335](https://github.com/pelcro-inc/react-pelcro-js/issues/335)) ([7839c5f](https://github.com/pelcro-inc/react-pelcro-js/commit/7839c5f379b0d5c04cc77d9dceaa13f5be2beaf9))
+
 # [4.0.0-alpha.49](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.48...v4.0.0-alpha.49) (2023-11-09)
 
 
