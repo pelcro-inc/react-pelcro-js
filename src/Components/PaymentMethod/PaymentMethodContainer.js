@@ -1669,6 +1669,97 @@ const PaymentMethodContainerWithoutStripe = ({
     }
   };
 
+  const confirmStripeIntentSetup = (
+    response,
+    flow,
+    paymentMethodId
+  ) => {
+    const setupIntent = response.data?.setup_intent;
+    if (setupIntent?.client_secret) {
+      stripe
+        .confirmCardSetup(setupIntent.client_secret, {
+          payment_method: response.data?.source?.object_id
+        })
+        .then((res) => {
+          if (res.error) {
+            dispatch({ type: LOADING, payload: false });
+            onFailure(res.error);
+            return dispatch({
+              type: SHOW_ALERT,
+              payload: {
+                type: "error",
+                content: getErrorMessages(res.error)
+              }
+            });
+          }
+
+          if (flow === "create") {
+            dispatch({ type: DISABLE_SUBMIT, payload: false });
+            dispatch({ type: LOADING, payload: false });
+
+            dispatch({
+              type: SHOW_ALERT,
+              payload: {
+                type: "success",
+                content: t("messages.sourceCreated")
+              }
+            });
+            onSuccess(res);
+            return;
+          }
+
+          if (flow === "update") {
+            dispatch({ type: DISABLE_SUBMIT, payload: false });
+            dispatch({ type: LOADING, payload: false });
+
+            dispatch({
+              type: SHOW_ALERT,
+              payload: {
+                type: "success",
+                content: t("messages.sourceUpdated")
+              }
+            });
+            onSuccess(res);
+            return;
+          }
+
+          if (flow === "replace") {
+            setTimeout(() => {
+              window.Pelcro.paymentMethods.deletePaymentMethod(
+                {
+                  auth_token: window.Pelcro.user.read().auth_token,
+                  payment_method_id: paymentMethodId
+                },
+                (err, res) => {
+                  dispatch({
+                    type: DISABLE_SUBMIT,
+                    payload: false
+                  });
+                  dispatch({ type: LOADING, payload: false });
+                  if (err) {
+                    onFailure?.(err);
+                    return dispatch({
+                      type: SHOW_ALERT,
+                      payload: {
+                        type: "error",
+                        content: getErrorMessages(err)
+                      }
+                    });
+                  }
+                  onSuccess(res);
+                }
+              );
+            }, 2000);
+            return;
+          }
+
+          return handlePayment(response?.data?.source);
+        });
+    } else {
+      onSuccess(response);
+    }
+  };
+
   const subscribe = (stripeSource, state, dispatch) => {
     const { couponCode } = state;
 
@@ -1952,13 +2043,13 @@ const PaymentMethodContainerWithoutStripe = ({
         }
 
         // We don't support source creation for 3D secure yet
-        if (source?.card?.three_d_secure === "required") {
-          return handlePaymentError({
-            error: {
-              message: t("messages.cardAuthNotSupported")
-            }
-          });
-        }
+        // if (source?.card?.three_d_secure === "required") {
+        //   return handlePaymentError({
+        //     error: {
+        //       message: t("messages.cardAuthNotSupported")
+        //     }
+        //   });
+        // }
 
         window.Pelcro.paymentMethods.create(
           {
@@ -1979,14 +2070,22 @@ const PaymentMethodContainerWithoutStripe = ({
               });
             }
 
-            dispatch({
-              type: SHOW_ALERT,
-              payload: {
-                type: "success",
-                content: t("messages.sourceCreated")
-              }
-            });
-            onSuccess(res);
+            if (
+              res.data?.setup_intent?.status === "requires_action" ||
+              res.data?.setup_intent?.status ===
+                "requires_confirmation"
+            ) {
+              confirmStripeIntentSetup(res, "create");
+            } else {
+              dispatch({
+                type: SHOW_ALERT,
+                payload: {
+                  type: "success",
+                  content: t("messages.sourceCreated")
+                }
+              });
+              onSuccess(res);
+            }
           }
         );
       });
@@ -2018,14 +2117,21 @@ const PaymentMethodContainerWithoutStripe = ({
           });
         }
 
-        dispatch({
-          type: SHOW_ALERT,
-          payload: {
-            type: "success",
-            content: t("messages.sourceUpdated")
-          }
-        });
-        onSuccess(res);
+        if (
+          res.data?.setup_intent?.status === "requires_action" ||
+          res.data?.setup_intent?.status === "requires_confirmation"
+        ) {
+          confirmStripeIntentSetup(res, "update");
+        } else {
+          dispatch({
+            type: SHOW_ALERT,
+            payload: {
+              type: "success",
+              content: t("messages.sourceUpdated")
+            }
+          });
+          onSuccess(res);
+        }
       }
     );
   };
@@ -2041,13 +2147,13 @@ const PaymentMethodContainerWithoutStripe = ({
         }
 
         // We don't support source creation for 3D secure yet
-        if (source?.card?.three_d_secure === "required") {
-          return handlePaymentError({
-            error: {
-              message: t("messages.cardAuthNotSupported")
-            }
-          });
-        }
+        // if (source?.card?.three_d_secure === "required") {
+        //   return handlePaymentError({
+        //     error: {
+        //       message: t("messages.cardAuthNotSupported")
+        //     }
+        //   });
+        // }
 
         window.Pelcro.paymentMethods.create(
           {
@@ -2066,7 +2172,17 @@ const PaymentMethodContainerWithoutStripe = ({
               });
             }
 
-            if (res) {
+            if (
+              res.data?.setup_intent?.status === "requires_action" ||
+              res.data?.setup_intent?.status ===
+                "requires_confirmation"
+            ) {
+              confirmStripeIntentSetup(
+                res,
+                "replace",
+                paymentMethodId
+              );
+            } else {
               setTimeout(() => {
                 window.Pelcro.paymentMethods.deletePaymentMethod(
                   {
