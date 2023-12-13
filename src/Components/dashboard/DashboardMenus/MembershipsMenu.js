@@ -72,96 +72,55 @@ const MembershipsItems = (props) => {
     .sort((a, b) => a.created_at - b.created_at)
     .map((membership) => {
       return (
-        <>
-          {membership.subscription.ended_at === null && (
-            <tr
-              key={membership.id}
-              className={`plc-w-full pelcro-membership-row`}
-            >
-              <td className="plc-hidden md:plc-table-cell plc-truncate">
-                <span className="plc-font-semibold plc-text-gray-500">
-                  {membership.subscription.plan.product.name}
-                </span>
-              </td>
-              <td className="plc-truncate">
-                <span className="plc-font-semibold plc-text-gray-500">
+        <tr
+          key={membership.id}
+          className={`plc-w-full plc-align-top pelcro-membership-row`}
+        >
+          <td className="plc-truncate">
+            {membership.subscription.plan.nickname && (
+              <>
+                <span className="plc-font-semibold plc-text-gray-500 pelcro-membership-plan">
                   {membership.subscription.plan.nickname}
                 </span>
-                <div className="plc-inline md:plc-hidden">
-                  <br />
-                  <span className="plc-text-xs plc-text-gray-400">
-                    {getFormattedPriceByLocal(
-                      membership.subscription.plan.amount,
-                      membership.subscription.plan.currency,
-                      getPageOrDefaultLanguage()
-                    )}
-                  </span>
-                </div>
-              </td>
-              <td className="plc-hidden md:plc-table-cell plc-truncate">
-                <span className="plc-font-semibold plc-text-gray-500">
-                  {getFormattedPriceByLocal(
-                    membership.subscription.plan.amount,
-                    membership.subscription.plan.currency,
-                    getPageOrDefaultLanguage()
-                  )}
-                </span>
-              </td>
-              <td className="plc-truncate plc-py-2">
-                {/* Pill */}
-                <span
-                  className={`plc-inline-flex plc-p-1 plc-text-xs plc-font-semibold ${
-                    getMemberShipStatus(membership.status).bgColor
-                  } plc-uppercase ${
-                    getMemberShipStatus(membership.status).textColor
-                  } plc-rounded-lg`}
-                >
-                  {getMemberShipStatus(membership.status).icon}
-                  {getMemberShipStatus(membership.status).title}
-                </span>
-                <br />
-                <div className="plc-text-xs plc-text-gray-500">
-                  {membership.subscription.status && (
-                    <span className="plc-inline-block plc-mt-1 plc-underline">
-                      {
-                        props?.getSubscriptionStatus(
-                          membership.subscription
-                        ).content
-                      }
-                    </span>
-                  )}
-                  <br />
-                  {membership.subscription.shipments_remaining ? (
-                    <span className="plc-inline-block plc-mt-1">
-                      {membership.subscription.shipments_remaining}{" "}
-                      {t("labels.shipments")}
-                    </span>
-                  ) : null}
-                </div>
-              </td>
-              <td className="plc-truncate">
-                <Button
-                  variant="ghost"
-                  icon={<EditIcon className="plc-w-4 plc-h-4" />}
-                  className="plc-text-blue-400 focus:plc-ring-blue-500 pelcro-dashboard-membership-address-button"
-                  onClick={() => onChangeAddressClick(membership.id)}
-                >
-                  {`${t("labels.editAddress")}`}
-                </Button>
-              </td>
-            </tr>
-          )}
-        </>
+              </>
+            )}
+          </td>
+          <td>
+            <span
+              className={`plc-inline-flex plc-p-1 plc-text-xs plc-font-semibold ${
+                getMemberShipStatus(membership.status).bgColor
+              } plc-uppercase ${
+                getMemberShipStatus(membership.status).textColor
+              } plc-rounded-lg`}
+            >
+              {getMemberShipStatus(membership.status).icon}
+              {getMemberShipStatus(membership.status).title}
+            </span>
+          </td>
+          <td>
+            <Button
+              variant="ghost"
+              icon={<EditIcon className="plc-w-4 plc-h-4" />}
+              className="plc-text-blue-400 focus:plc-ring-blue-500 pelcro-dashboard-membership-address-button"
+              onClick={() => onChangeAddressClick(membership.id)}
+            >
+              {`${t("labels.editAddress")}`}
+            </Button>
+          </td>
+        </tr>
       );
     });
 };
 
 function getActiveMemberships() {
+  const subsStatuses = ["active", "extended", "trialing"];
   return (
     window.Pelcro.user
       .read()
       .memberships?.filter(
-        (membership) => membership.status === "active"
+        (membership) =>
+          membership.status === "active" &&
+          subsStatuses.includes(membership.subscription.status)
       ) ?? []
   );
 }
