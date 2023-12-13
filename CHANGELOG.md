@@ -1,3 +1,10 @@
+# [3.34.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.33.2...v3.34.0) (2023-12-13)
+
+
+### Features
+
+* support 3ds2 in payment method actions ([#342](https://github.com/pelcro-inc/react-pelcro-js/issues/342)) ([f61e184](https://github.com/pelcro-inc/react-pelcro-js/commit/f61e184839a1a1da6d13e6b9be7350419741a104))
+
 ## [3.33.2](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.33.1...v3.33.2) (2023-12-06)
 
 
