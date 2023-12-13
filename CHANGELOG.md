@@ -1,3 +1,16 @@
+# [4.0.0-alpha.51](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.50...v4.0.0-alpha.51) (2023-12-13)
+
+
+### Bug Fixes
+
+* amend after login logic ([#340](https://github.com/pelcro-inc/react-pelcro-js/issues/340)) ([c310904](https://github.com/pelcro-inc/react-pelcro-js/commit/c3109044235393508d7c644a1f8f886605828a40))
+* change the filter for displaying memberships ([#341](https://github.com/pelcro-inc/react-pelcro-js/issues/341)) ([699a52c](https://github.com/pelcro-inc/react-pelcro-js/commit/699a52cf9fed9c00e2018143d250a0dfcad604c7))
+
+
+### Features
+
+* support 3ds2 in payment method actions ([63aa6ab](https://github.com/pelcro-inc/react-pelcro-js/commit/63aa6abf4580965b60464dd8747fd8c0b9289d97))
+
 # [4.0.0-alpha.50](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.49...v4.0.0-alpha.50) (2023-12-13)
 
 
