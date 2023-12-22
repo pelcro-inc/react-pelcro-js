@@ -1,3 +1,10 @@
+# [4.0.0-alpha.53](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.52...v4.0.0-alpha.53) (2023-12-22)
+
+
+### Features
+
+* add class name for stripe compliance element ([6befd90](https://github.com/pelcro-inc/react-pelcro-js/commit/6befd90a626e69c9b9ec614b1a3d2308d047456b))
+
 # [4.0.0-alpha.52](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.51...v4.0.0-alpha.52) (2023-12-13)
 
 
