@@ -6,7 +6,8 @@
     "confirmPassword": "Confirmar la contraseña es obligatorio.",
     "enterFirstName": "El nombre es obligatorio.",
     "enterLastName": "El apellido es obligatorio.",
-    "enterPhone": "El número de teléfono es obligatorio."
+    "enterPhone": "El número de teléfono es obligatorio.",
+    "enterFieldName": "{{fieldName}} es obligatorio."
   },
   "buttons": {
     "account": "Mi cuenta",

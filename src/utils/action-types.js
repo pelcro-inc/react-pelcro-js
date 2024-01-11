@@ -8,6 +8,7 @@ export const SET_FIRST_NAME_ERROR = "SET_FIRST_NAME_ERROR";
 export const SET_LAST_NAME_ERROR = "SET_LAST_NAME_ERROR";
 export const SET_PHONE_ERROR = "SET_PHONE_ERROR";
 export const SET_TEXT_FIELD = "SET_TEXT_FIELD";
+export const SET_TEXT_FIELD_ERROR = "SET_TEXT_FIELD_ERROR";
 export const SET_MONTH = "SET_MONTH";
 export const SET_YEAR = "SET_YEAR";
 export const SET_TOKEN = "SET_TOKEN";

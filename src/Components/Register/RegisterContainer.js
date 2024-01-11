@@ -17,6 +17,7 @@ import {
   SET_LAST_NAME,
   SET_PHONE,
   SET_TEXT_FIELD,
+  SET_TEXT_FIELD_ERROR,
   SET_SELECT,
   SHOW_ALERT,
   HANDLE_SOCIAL_LOGIN
@@ -245,6 +246,11 @@ const RegisterContainer = ({
             ...state,
             phoneError: action.payload,
             phone: null
+          });
+        case SET_TEXT_FIELD_ERROR:
+          return Update({
+            ...state,
+            ...action.payload
           });
         case SET_CONFIRM_PASSWORD_ERROR:
           return Update({
