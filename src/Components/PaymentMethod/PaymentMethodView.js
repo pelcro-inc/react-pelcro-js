@@ -92,7 +92,7 @@ export function PaymentMethodView({
       {cardProcessor === "stripe" &&
         !showSubscriptionButton &&
         !showOrderButton && (
-          <div className="plc-flex plc-items-center plc-w-full plc-px-4 plc-py-2 plc-text-center plc-text-green-600 plc-border plc-border-green-400 plc-rounded plc-bg-green-50">
+          <div className="plc-flex plc-items-center plc-w-full plc-px-4 plc-py-2 plc-text-center plc-text-green-600 plc-border plc-border-green-400 plc-rounded plc-bg-green-50 pelcro-stripe-compliance">
             <LockIcon className="plc-w-5 plc-h-5 plc-mr-1" />
             <span>
               {t("messages.youAreSafe")}
