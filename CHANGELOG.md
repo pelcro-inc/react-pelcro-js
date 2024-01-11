@@ -1,3 +1,11 @@
+# [3.26.0-beta.45](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.44...v3.26.0-beta.45) (2024-01-11)
+
+
+### Features
+
+* add support for required fields ([f1db447](https://github.com/pelcro-inc/react-pelcro-js/commit/f1db44737de1eacaaa107d0a92949f227572648e))
+* support 3ds2 in payment method actions ([#342](https://github.com/pelcro-inc/react-pelcro-js/issues/342)) ([f61e184](https://github.com/pelcro-inc/react-pelcro-js/commit/f61e184839a1a1da6d13e6b9be7350419741a104))
+
 # [3.26.0-beta.44](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.43...v3.26.0-beta.44) (2023-12-11)
 
 
