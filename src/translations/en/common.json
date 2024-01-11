@@ -9,7 +9,8 @@
     "confirmPassword": "Confirm password is required.",
     "enterFirstName": "First name is required.",
     "enterLastName": "Last name is required.",
-    "enterPhone": "Phone number is required."
+    "enterPhone": "Phone number is required.",
+    "enterFieldName": "{{fieldName}} is required."
   },
   "buttons": {
     "account": "My account",
