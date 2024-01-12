@@ -1,3 +1,11 @@
+# [3.26.0-beta.47](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.46...v3.26.0-beta.47) (2024-01-12)
+
+
+### Features
+
+* export text input components ([ca5dfed](https://github.com/pelcro-inc/react-pelcro-js/commit/ca5dfed1b7ba78e4759391686f461a4692ae05f8))
+* move attributes from metadata ([5fffa8c](https://github.com/pelcro-inc/react-pelcro-js/commit/5fffa8cff9882ffcdcd249825dee0c3eab3d303f))
+
 # [3.26.0-beta.46](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.45...v3.26.0-beta.46) (2024-01-11)
 
 
