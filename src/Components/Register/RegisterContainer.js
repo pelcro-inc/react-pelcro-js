@@ -101,8 +101,10 @@ const RegisterContainer = ({
           first_name: firstName,
           last_name: lastName,
           phone: phone,
+          title: jobTitle,
+          organization: organization,
           security_token: securityToken,
-          metadata: { organization, jobTitle, ...selectFields }
+          metadata: { ...selectFields }
         },
         (err, res) => {
           dispatch({

@@ -250,6 +250,7 @@ export { Button } from "./SubComponents/Button";
 export { Checkbox } from "./SubComponents/Checkbox";
 export { DatePicker } from "./SubComponents/DatePicker";
 export { Input } from "./SubComponents/Input";
+export { TextInput } from "./SubComponents/TextInput";
 export { TextArea } from "./SubComponents/TextArea";
 export { Link } from "./SubComponents/Link";
 export { Modal } from "./SubComponents/Modal";
