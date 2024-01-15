@@ -10,6 +10,8 @@
     "enterFirstName": "First name is required.",
     "enterLastName": "Last name is required.",
     "enterPhone": "Phone number is required.",
+    "enterCompany": "Company is required.",
+    "enterTitle": "Title is required.",
     "enterFieldName": "{{fieldName}} is required."
   },
   "buttons": {

@@ -7,6 +7,8 @@
     "enterFirstName": "El nombre es obligatorio.",
     "enterLastName": "El apellido es obligatorio.",
     "enterPhone": "El número de teléfono es obligatorio.",
+    "enterCompany": "La empresa es obligatorio.",
+    "enterTitle": "El título es obligatorio.",
     "enterFieldName": "{{fieldName}} es obligatorio."
   },
   "buttons": {

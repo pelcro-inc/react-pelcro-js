@@ -12,7 +12,12 @@ import {
 } from "../utils/action-types";
 import { Input } from "./Input";
 
-export function TextInput({ store, fieldName, ...otherProps }) {
+export function TextInput({
+  initWithFieldName = true,
+  store,
+  fieldName,
+  ...otherProps
+}) {
   const { t } = useTranslation("common");
   const {
     dispatch,
@@ -69,6 +74,33 @@ export function TextInput({ store, fieldName, ...otherProps }) {
   useEffect(() => {
     handleInputChange(fieldNameState);
   }, [finishedTyping, fieldNameState, handleInputChange]);
+
+  // Initialize field name field with user's first name
+  const loadFieldNameIntoField = () => {
+    handleInputChange(
+      window.Pelcro?.user?.read()?.metadata?.[fieldName]
+    );
+    dispatch({
+      type: SET_TEXT_FIELD,
+      payload: window.Pelcro?.user?.read()?.metadata?.[fieldName]
+    });
+  };
+
+  useEffect(() => {
+    if (initWithFieldName) {
+      document.addEventListener("PelcroUserLoaded", () => {
+        loadFieldNameIntoField();
+      });
+      loadFieldNameIntoField();
+
+      return () => {
+        document.removeEventListener(
+          "PelcroUserLoaded",
+          handleInputChange
+        );
+      };
+    }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (loading) {
     return <Loader />;
