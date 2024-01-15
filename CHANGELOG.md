@@ -1,3 +1,10 @@
+# [3.26.0-beta.48](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.47...v3.26.0-beta.48) (2024-01-15)
+
+
+### Features
+
+* create company and title sub components ([ee8a368](https://github.com/pelcro-inc/react-pelcro-js/commit/ee8a3683c302e44632690c0056cc1cecfd2fae6b))
+
 # [3.26.0-beta.47](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.46...v3.26.0-beta.47) (2024-01-12)
 
 
