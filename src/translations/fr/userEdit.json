@@ -16,7 +16,9 @@
     "selectImage": "Télécharger une nouvelle photo",
     "removeImage": "supprimer la photo actuelle",
     "zoom": "Zoom",
-    "tin": "Numéro d'identification fiscale"
+    "tin": "Numéro d'identification fiscale",
+    "company": "Entreprise",
+    "userTitle": "Titre"
   },
   "messages": {
     "userUpdated": "Votre profil a été mis à jour avec succès.",

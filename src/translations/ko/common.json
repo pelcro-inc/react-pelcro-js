@@ -9,6 +9,8 @@
     "enterFirstName": "이름은 필수 항목입니다.",
     "enterLastName": "성은 필수 항목입니다.",
     "enterPhone": "전화번호는 필수 항목입니다.",
+    "enterCompany": "회사는 필수입니다.",
+    "enterTitle": "제목은 필수 입력 사항입니다.",
     "enterFieldName": "{{fieldName}} 필수."
   },
   "buttons": {

@@ -12,7 +12,9 @@
     "required": "필수 항목",
     "firstName": "이름",
     "lastName": "성",
-    "phone": "핸드폰"
+    "phone": "핸드폰",
+    "company": "회사",
+    "title": "제목"
   },
   "messages": {
     "alreadyHaveAccount": "이미 계정이 있습니까?",
