@@ -82,6 +82,8 @@ export { UserUpdatePhone } from "./Components/UserUpdate/UserUpdatePhone";
 export { UserUpdateTextInput } from "./Components/UserUpdate/UserUpdateTextInput";
 export { UserUpdateProfilePic } from "./Components/UserUpdate/UserUpdateProfilePic";
 export { UserUpdateTin } from "./Components/UserUpdate/UserUpdateTin";
+export { UserUpdateCompany } from "./Components/UserUpdate/UserUpdateCompany";
+export { UserUpdateJobTitle } from "./Components/UserUpdate/UserUpdateJobTitle";
 export { AddressCreateContainer } from "./Components/AddressCreate/AddressCreateContainer";
 export { AddressCreateModal } from "./Components/AddressCreate/AddressCreateModal";
 export { AddressCreateSubmit } from "./Components/AddressCreate/AddressCreateSubmit";
