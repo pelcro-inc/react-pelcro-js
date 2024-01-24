@@ -275,3 +275,8 @@ export {
 } from "./Components/common/PelcroNativeButtons";
 
 export { init as initContentEntitlement } from "./Components/common/contentEntitlement";
+
+export {
+  initPaywalls,
+  initViewFromURL
+} from "./Components/PelcroModalController/PelcroModalController.service";
