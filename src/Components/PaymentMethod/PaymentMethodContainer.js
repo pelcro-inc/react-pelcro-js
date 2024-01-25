@@ -1765,6 +1765,7 @@ const PaymentMethodContainerWithoutStripe = ({
         })
         .then((res) => {
           if (res.error) {
+            dispatch({ type: DISABLE_SUBMIT, payload: false });
             dispatch({ type: LOADING, payload: false });
             onFailure(res.error);
             return dispatch({
@@ -1784,7 +1785,6 @@ const PaymentMethodContainerWithoutStripe = ({
           }
 
           if (flow === "create") {
-            dispatch({ type: DISABLE_SUBMIT, payload: false });
             dispatch({ type: LOADING, payload: false });
 
             dispatch({
@@ -2173,9 +2173,9 @@ const PaymentMethodContainerWithoutStripe = ({
             token: source.id
           },
           (err, res) => {
-            dispatch({ type: DISABLE_SUBMIT, payload: false });
-            dispatch({ type: LOADING, payload: false });
             if (err) {
+              dispatch({ type: DISABLE_SUBMIT, payload: false });
+              dispatch({ type: LOADING, payload: false });
               onFailure(err);
               return dispatch({
                 type: SHOW_ALERT,
@@ -2193,6 +2193,7 @@ const PaymentMethodContainerWithoutStripe = ({
             ) {
               confirmStripeIntentSetup(res, "create");
             } else {
+              dispatch({ type: LOADING, payload: false });
               dispatch({
                 type: SHOW_ALERT,
                 payload: {
