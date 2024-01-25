@@ -1,3 +1,10 @@
+# [3.26.0-beta.52](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.51...v3.26.0-beta.52) (2024-01-25)
+
+
+### Features
+
+* persist button loading until 3ds2 success ([48db9c2](https://github.com/pelcro-inc/react-pelcro-js/commit/48db9c2cb7e8c00a353b3e457053101f63d62cfa))
+
 # [3.26.0-beta.51](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.50...v3.26.0-beta.51) (2024-01-24)
 
 
