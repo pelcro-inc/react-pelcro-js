@@ -1,3 +1,11 @@
+# [4.0.0-alpha.54](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.53...v4.0.0-alpha.54) (2024-01-29)
+
+
+### Features
+
+* persist button loading until 3ds2 success ([48db9c2](https://github.com/pelcro-inc/react-pelcro-js/commit/48db9c2cb7e8c00a353b3e457053101f63d62cfa))
+* support 3ds2 in payment method actions ([#342](https://github.com/pelcro-inc/react-pelcro-js/issues/342)) ([f61e184](https://github.com/pelcro-inc/react-pelcro-js/commit/f61e184839a1a1da6d13e6b9be7350419741a104))
+
 # [4.0.0-alpha.53](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.52...v4.0.0-alpha.53) (2023-12-22)
 
 
