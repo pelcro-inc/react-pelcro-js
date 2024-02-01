@@ -1,3 +1,10 @@
+# [3.35.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.34.0...v3.35.0) (2024-02-01)
+
+
+### Features
+
+* persist button loading until 3ds2 success ([#343](https://github.com/pelcro-inc/react-pelcro-js/issues/343)) ([665fb9b](https://github.com/pelcro-inc/react-pelcro-js/commit/665fb9b12d7334a3e86e215e13353a544bc06f12))
+
 # [3.34.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.33.2...v3.34.0) (2023-12-13)
 
 
