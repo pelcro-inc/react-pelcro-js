@@ -1,3 +1,10 @@
+# [4.0.0-alpha.55](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.54...v4.0.0-alpha.55) (2024-02-02)
+
+
+### Features
+
+* support 3ds2 in trail subs ([e84a8bb](https://github.com/pelcro-inc/react-pelcro-js/commit/e84a8bb9a72150a62956de6bb11f83515ddb4188))
+
 # [4.0.0-alpha.54](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.53...v4.0.0-alpha.54) (2024-01-29)
 
 
