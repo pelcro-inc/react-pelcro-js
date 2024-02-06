@@ -146,6 +146,35 @@ export const CheckoutForm = ({ type }) => {
     );
   }
 
+  if (cardProcessor === "braintree") {
+    return (
+      <div className="plc-max-w-[50em]">
+        <label htmlFor="card-number">Card Number</label>
+        <div
+          id="card-number"
+          className="pelcro-input-field plc-h-12 plc-bg-white"
+        ></div>
+
+        <div className="plc-flex plc-items-start plc-space-x-3 plc-mb-4">
+          <div>
+            <label htmlFor="expiration-date">Expiration Date</label>
+            <div
+              id="expiration-date"
+              className="pelcro-input-field plc-h-12 plc-bg-white"
+            ></div>
+          </div>
+          <div>
+            <label htmlFor="cvv">CVV</label>
+            <div
+              id="cvv"
+              className="pelcro-input-field plc-h-12 plc-bg-white"
+            ></div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   if (cardProcessor === "stripe") {
     if (type === "updatePaymentSource") {
       return (

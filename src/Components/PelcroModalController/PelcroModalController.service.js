@@ -110,6 +110,9 @@ export const loadPaymentSDKs = () => {
   const supportsTap = Boolean(
     window.Pelcro.site.read().tap_gateway_settings
   );
+  const supportsBraintree = Boolean(
+    window.Pelcro.site.read().braintree_gateway_settings
+  );
 
   if (!window.Stripe && !supportsVantiv && !supportsTap) {
     loadStripe(window.Pelcro.environment.stripe);
@@ -125,15 +128,24 @@ export const loadPaymentSDKs = () => {
     window.Pelcro.site.read().braintree_tokenization
   );
 
-  if (supportsPaypal) {
+  if (supportsPaypal || supportsBraintree) {
     window.Pelcro.helpers.loadSDK(
-      "https://js.braintreegateway.com/web/3.69.0/js/client.min.js",
+      "https://js.braintreegateway.com/web/3.99.0/js/client.min.js",
       "braintree-sdk"
     );
+  }
 
+  if (supportsPaypal) {
     window.Pelcro.helpers.loadSDK(
-      "https://js.braintreegateway.com/web/3.69.0/js/paypal-checkout.min.js",
+      "https://js.braintreegateway.com/web/3.99.0/js/paypal-checkout.min.js",
       "braintree-paypal-sdk"
+    );
+  }
+
+  if (supportsBraintree) {
+    window.Pelcro.helpers.loadSDK(
+      "https://js.braintreegateway.com/web/3.99.0/js/hosted-fields.min.js",
+      "braintree-histed-fields-sdk"
     );
   }
 
