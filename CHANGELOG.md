@@ -1,3 +1,11 @@
+# [3.26.0-beta.53](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.52...v3.26.0-beta.53) (2024-02-06)
+
+
+### Features
+
+* persist button loading until 3ds2 success ([#343](https://github.com/pelcro-inc/react-pelcro-js/issues/343)) ([665fb9b](https://github.com/pelcro-inc/react-pelcro-js/commit/665fb9b12d7334a3e86e215e13353a544bc06f12))
+* support braintree payment gateway ([0a5d02a](https://github.com/pelcro-inc/react-pelcro-js/commit/0a5d02ab1afa043c7179336748924fb587265748))
+
 # [3.26.0-beta.52](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.51...v3.26.0-beta.52) (2024-01-25)
 
 
