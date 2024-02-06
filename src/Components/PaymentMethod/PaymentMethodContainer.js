@@ -63,6 +63,7 @@ import {
   VantivGateway,
   TapGateway,
   CybersourceGateway,
+  BraintreeGateway,
   PAYMENT_TYPES
 } from "../../services/Subscription/Payment.service";
 import { getPageOrDefaultLanguage } from "../../utils/utils";
@@ -863,6 +864,410 @@ const PaymentMethodContainerWithoutStripe = ({
     tapInstanceCard.current = card;
   };
   /* ====== End Tap integration ======== */
+
+  /* ====== Start Braintree integration ======== */
+  const braintreeInstanceRef = React.useRef(null);
+
+  useEffect(() => {
+    if (skipPayment && (plan?.amount === 0 || props?.freeOrders))
+      return;
+    if (cardProcessor === "braintree" && !selectedPaymentMethodId) {
+      const { token: braintreeToken } =
+        window.Pelcro.site.read()?.braintree_gateway_settings;
+
+      const isBraintreeEnabled = Boolean(braintreeToken);
+
+      if (!isBraintreeEnabled) {
+        console.error(
+          "Braintree integration is currently not enabled on this site's config"
+        );
+        return;
+      }
+
+      braintreeInstanceRef.current =
+        new window.braintree.client.create({
+          authorization: braintreeToken
+        }).then((clientInstance) => {
+          const options = {
+            client: clientInstance,
+            styles: {
+              input: {
+                "font-size": "14px"
+              },
+              "input.invalid": {
+                color: "red"
+              },
+              "input.valid": {
+                color: "green"
+              }
+            },
+            fields: {
+              number: {
+                container: "#card-number",
+                placeholder: "4111 1111 1111 1111"
+              },
+              cvv: {
+                container: "#cvv",
+                placeholder: "123"
+              },
+              expirationDate: {
+                container: "#expiration-date",
+                placeholder: "10/2022"
+              }
+            }
+          };
+
+          return window.braintree.hostedFields.create(options);
+        });
+    }
+  }, [selectedPaymentMethodId]);
+
+  const braintreeErrorHandler = (tokenizeErr) => {
+    switch (tokenizeErr.code) {
+      case "HOSTED_FIELDS_FIELDS_EMPTY":
+        // occurs when none of the fields are filled in
+        return "All fields are empty! Please fill out the form.";
+      // break;
+      case "HOSTED_FIELDS_FIELDS_INVALID":
+        // occurs when certain fields do not pass client side validation
+        console.error(
+          "Some fields are invalid:",
+          tokenizeErr.details.invalidFieldKeys.toString()
+        );
+
+        // you can also programmatically access the field containers for the invalid fields
+        // tokenizeErr.details.invalidFields.forEach(function (
+        //   fieldContainer
+        // ) {
+        //   fieldContainer.className = "invalid";
+        // });
+        return `Some fields are invalid: ${tokenizeErr.details.invalidFieldKeys.toString()}`;
+      case "HOSTED_FIELDS_TOKENIZATION_FAIL_ON_DUPLICATE":
+        // occurs when:
+        //   * the client token used for client authorization was generated
+        //     with a customer ID and the fail on duplicate payment method
+        //     option is set to true
+        //   * the card being tokenized has previously been vaulted (with any customer)
+        // See: https://developer.paypal.com/braintree/docs/reference/request/client-token/generate#options.fail_on_duplicate_payment_method
+        return "This payment method already exists in your vault.";
+      case "HOSTED_FIELDS_TOKENIZATION_CVV_VERIFICATION_FAILED":
+        // occurs when:
+        //   * the client token used for client authorization was generated
+        //     with a customer ID and the verify card option is set to true
+        //     and you have credit card verification turned on in the Braintree
+        //     control panel
+        //   * the cvv does not pass verification (https://developer.paypal.com/braintree/docs/reference/general/testing#avs-and-cvv/cid-responses)
+        // See: https://developer.paypal.com/braintree/docs/reference/request/client-token/generate#options.verify_card
+        return "CVV did not pass verification";
+      case "HOSTED_FIELDS_FAILED_TOKENIZATION":
+        // occurs for any other tokenization error on the server
+        return "Tokenization failed server side. Is the card valid?";
+      case "HOSTED_FIELDS_TOKENIZATION_NETWORK_ERROR":
+        // occurs when the Braintree gateway cannot be contacted
+        return "Network error occurred when tokenizing.";
+      default:
+        console.error("Something bad happened!", tokenizeErr);
+        return "Something bad happened!";
+    }
+  };
+
+  const submitUsingBraintree = (state, dispatch) => {
+    const isUsingExistingPaymentMethod = Boolean(
+      selectedPaymentMethodId
+    );
+    if (isUsingExistingPaymentMethod) {
+      // no need to create a new source using braintree
+      return handleBraintreePayment(null, state.couponCode);
+    }
+
+    if (!braintreeInstanceRef.current) {
+      return console.error(
+        "Braintree sdk script wasn't loaded, you need to load braintree sdk before rendering the braintree payment flow"
+      );
+    }
+
+    braintreeInstanceRef.current
+      .then((hostedFieldInstance) => {
+        hostedFieldInstance.tokenize((tokenizeErr, payload) => {
+          if (tokenizeErr) {
+            dispatch({ type: DISABLE_SUBMIT, payload: false });
+            dispatch({ type: LOADING, payload: false });
+            return dispatch({
+              type: SHOW_ALERT,
+              payload: {
+                type: "error",
+                content: braintreeErrorHandler(tokenizeErr)
+              }
+            });
+          }
+          handleBraintreePayment(payload.nonce, state);
+        });
+      })
+      .catch((error) => {
+        if (error) {
+          console.error(error);
+          return;
+        }
+      });
+  };
+
+  const handleBraintreePayment = (braintreeNonce, state) => {
+    const isUsingExistingPaymentMethod = Boolean(
+      selectedPaymentMethodId
+    );
+
+    if (type === "createPayment") {
+      handleBraintreeSubscription();
+    } else if (type === "orderCreate") {
+      purchase(
+        new BraintreeGateway(),
+        isUsingExistingPaymentMethod
+          ? selectedPaymentMethodId
+          : braintreeNonce,
+        state,
+        dispatch
+      );
+    } else if (type === "invoicePayment") {
+      payInvoice(
+        new BraintreeGateway(),
+        isUsingExistingPaymentMethod
+          ? selectedPaymentMethodId
+          : braintreeNonce,
+        dispatch
+      );
+    } else if (
+      type === "createPaymentSource" ||
+      type === "updatePaymentSource"
+    ) {
+      createNewBraintreeCard();
+    } else if (type === "deletePaymentSource") {
+      replaceBraintreeCard();
+    }
+
+    function createNewBraintreeCard() {
+      window.Pelcro.paymentMethods.create(
+        {
+          auth_token: window.Pelcro.user.read().auth_token,
+          token: braintreeNonce,
+          gateway: "braintree"
+        },
+        (err, res) => {
+          dispatch({ type: DISABLE_SUBMIT, payload: false });
+          dispatch({ type: LOADING, payload: false });
+          if (err) {
+            onFailure(err);
+            return dispatch({
+              type: SHOW_ALERT,
+              payload: {
+                type: "error",
+                content: getErrorMessages(err)
+              }
+            });
+          }
+
+          dispatch({
+            type: SHOW_ALERT,
+            payload: {
+              type: "success",
+              content: t("messages.sourceCreated")
+            }
+          });
+          onSuccess(res);
+        }
+      );
+    }
+
+    function replaceBraintreeCard() {
+      const { id: paymentMethodId } = paymentMethodToDelete;
+
+      window.Pelcro.paymentMethods.create(
+        {
+          auth_token: window.Pelcro.user.read().auth_token,
+          token: braintreeNonce,
+          gateway: "braintree"
+        },
+        (err, res) => {
+          if (err) {
+            dispatch({ type: DISABLE_SUBMIT, payload: false });
+            dispatch({ type: LOADING, payload: false });
+            onFailure(err);
+            return dispatch({
+              type: SHOW_ALERT,
+              payload: {
+                type: "error",
+                content: getErrorMessages(err)
+              }
+            });
+          }
+
+          if (res) {
+            setTimeout(() => {
+              window.Pelcro.paymentMethods.deletePaymentMethod(
+                {
+                  auth_token: window.Pelcro.user.read().auth_token,
+                  payment_method_id: paymentMethodId
+                },
+                (err, res) => {
+                  dispatch({ type: DISABLE_SUBMIT, payload: false });
+                  dispatch({ type: LOADING, payload: false });
+                  if (err) {
+                    onFailure?.(err);
+                    return dispatch({
+                      type: SHOW_ALERT,
+                      payload: {
+                        type: "error",
+                        content: getErrorMessages(err)
+                      }
+                    });
+                  }
+
+                  onSuccess(res);
+                }
+              );
+            }, 2000);
+          }
+        }
+      );
+    }
+
+    // TODO: Implement card update
+    // function updateBraintreeCard() {
+    //   const { id: paymentMethodId } = paymentMethodToEdit;
+
+    //   const { isDefault } = state;
+    //   window.Pelcro.paymentMethods.update(
+    //     {
+    //       auth_token: window.Pelcro.user.read().auth_token,
+    //       payment_method_id: paymentMethodId,
+    //       gateway: "braintree",
+    //       is_default: isDefault
+    //     },
+    //     (err, res) => {
+    //       dispatch({ type: DISABLE_SUBMIT, payload: false });
+    //       dispatch({ type: LOADING, payload: false });
+    //       if (err) {
+    //         onFailure(err);
+    //         return dispatch({
+    //           type: SHOW_ALERT,
+    //           payload: {
+    //             type: "error",
+    //             content: getErrorMessages(err)
+    //           }
+    //         });
+    //       }
+
+    //       dispatch({
+    //         type: SHOW_ALERT,
+    //         payload: {
+    //           type: "success",
+    //           content: t("messages.sourceUpdated")
+    //         }
+    //       });
+    //       onSuccess(res);
+    //     }
+    //   );
+    // }
+
+    function handleBraintreeSubscription() {
+      const payment = new Payment(new BraintreeGateway());
+
+      const createSubscription = !isGift && !subscriptionIdToRenew;
+      const renewSubscription = !isGift && subscriptionIdToRenew;
+      const giftSubscriprition = isGift && !subscriptionIdToRenew;
+      const renewGift = isRenewingGift;
+
+      if (renewGift) {
+        return payment.execute(
+          {
+            type: PAYMENT_TYPES.RENEW_GIFTED_SUBSCRIPTION,
+            token: isUsingExistingPaymentMethod
+              ? selectedPaymentMethodId
+              : braintreeNonce,
+            plan,
+            couponCode,
+            product,
+            isExistingSource: isUsingExistingPaymentMethod,
+            subscriptionIdToRenew,
+            addressId: selectedAddressId
+          },
+          (err, res) => {
+            if (err) {
+              return handlePaymentError(err);
+            }
+            onSuccess(res);
+          }
+        );
+      } else if (giftSubscriprition) {
+        return payment.execute(
+          {
+            type: PAYMENT_TYPES.CREATE_GIFTED_SUBSCRIPTION,
+            token: isUsingExistingPaymentMethod
+              ? selectedPaymentMethodId
+              : braintreeNonce,
+            quantity: plan.quantity,
+            plan,
+            couponCode,
+            product,
+            isExistingSource: isUsingExistingPaymentMethod,
+            giftRecipient,
+            addressId: selectedAddressId
+          },
+          (err, res) => {
+            if (err) {
+              return handlePaymentError(err);
+            }
+            onSuccess(res);
+          }
+        );
+      } else if (renewSubscription) {
+        return payment.execute(
+          {
+            type: PAYMENT_TYPES.RENEW_SUBSCRIPTION,
+            token: isUsingExistingPaymentMethod
+              ? selectedPaymentMethodId
+              : braintreeNonce,
+            quantity: plan.quantity,
+            plan,
+            couponCode,
+            product,
+            isExistingSource: isUsingExistingPaymentMethod,
+            subscriptionIdToRenew,
+            addressId: selectedAddressId
+          },
+          (err, res) => {
+            if (err) {
+              return handlePaymentError(err);
+            }
+            onSuccess(res);
+          }
+        );
+      } else if (createSubscription) {
+        return payment.execute(
+          {
+            type: PAYMENT_TYPES.CREATE_SUBSCRIPTION,
+            token: isUsingExistingPaymentMethod
+              ? selectedPaymentMethodId
+              : braintreeNonce,
+            quantity: plan.quantity,
+            plan,
+            couponCode,
+            product,
+            isExistingSource: isUsingExistingPaymentMethod,
+            addressId: selectedAddressId
+          },
+          (err, res) => {
+            if (err) {
+              return handlePaymentError(err);
+            }
+
+            onSuccess(res);
+          }
+        );
+      }
+    }
+  };
+
+  /* ====== End Braintree integration ======== */
 
   const submitUsingVantiv = (state) => {
     const isUsingExistingPaymentMethod = Boolean(
@@ -2548,6 +2953,10 @@ const PaymentMethodContainerWithoutStripe = ({
 
               if (getSiteCardProcessor() === "cybersource") {
                 return submitUsingCybersource(state, dispatch);
+              }
+
+              if (getSiteCardProcessor() === "braintree") {
+                return submitUsingBraintree(state, dispatch);
               }
 
               if (selectedPaymentMethodId) {
