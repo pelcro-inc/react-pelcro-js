@@ -1,3 +1,10 @@
+# [3.26.0-beta.54](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.53...v3.26.0-beta.54) (2024-02-08)
+
+
+### Features
+
+* support update payment method and add skeleton loader ([c73b52c](https://github.com/pelcro-inc/react-pelcro-js/commit/c73b52ca3f0c0975a5833ace5c8b6783aa6a9c30))
+
 # [3.26.0-beta.53](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.52...v3.26.0-beta.53) (2024-02-06)
 
 
