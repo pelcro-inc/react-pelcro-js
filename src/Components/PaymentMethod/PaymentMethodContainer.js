@@ -19,6 +19,7 @@ import useReducerWithSideEffects, {
 import {
   DISABLE_SUBMIT,
   LOADING,
+  SKELETON_LOADER,
   SET_UPDATED_PRICE,
   SET_TAX_AMOUNT,
   SET_MONTH,
@@ -91,6 +92,7 @@ import { usePelcro } from "../../hooks/usePelcro";
 const initialState = {
   disableSubmit: false,
   isLoading: false,
+  isSkeletonLoaded: false,
   disableCouponButton: false,
   couponObject: null,
   couponCode: "",
@@ -916,6 +918,10 @@ const PaymentMethodContainerWithoutStripe = ({
               }
             }
           };
+          dispatch({
+            type: SKELETON_LOADER,
+            payload: true
+          });
 
           return window.braintree.hostedFields.create(options);
         });
@@ -1000,7 +1006,8 @@ const PaymentMethodContainerWithoutStripe = ({
               }
             });
           }
-          handleBraintreePayment(payload.nonce, state);
+          console.log(payload);
+          handleBraintreePayment(payload, state);
         });
       })
       .catch((error) => {
@@ -1011,10 +1018,11 @@ const PaymentMethodContainerWithoutStripe = ({
       });
   };
 
-  const handleBraintreePayment = (braintreeNonce, state) => {
+  const handleBraintreePayment = (braintreePaymentRequest, state) => {
     const isUsingExistingPaymentMethod = Boolean(
       selectedPaymentMethodId
     );
+    const braintreeNonce = braintreePaymentRequest?.nonce;
 
     if (type === "createPayment") {
       handleBraintreeSubscription();
@@ -1035,11 +1043,10 @@ const PaymentMethodContainerWithoutStripe = ({
           : braintreeNonce,
         dispatch
       );
-    } else if (
-      type === "createPaymentSource" ||
-      type === "updatePaymentSource"
-    ) {
+    } else if (type === "createPaymentSource") {
       createNewBraintreeCard();
+    } else if (type === "updatePaymentSource") {
+      updateBraintreeCard();
     } else if (type === "deletePaymentSource") {
       replaceBraintreeCard();
     }
@@ -1130,43 +1137,48 @@ const PaymentMethodContainerWithoutStripe = ({
       );
     }
 
-    // TODO: Implement card update
-    // function updateBraintreeCard() {
-    //   const { id: paymentMethodId } = paymentMethodToEdit;
+    function updateBraintreeCard() {
+      const { id: paymentMethodId } = paymentMethodToEdit;
 
-    //   const { isDefault } = state;
-    //   window.Pelcro.paymentMethods.update(
-    //     {
-    //       auth_token: window.Pelcro.user.read().auth_token,
-    //       payment_method_id: paymentMethodId,
-    //       gateway: "braintree",
-    //       is_default: isDefault
-    //     },
-    //     (err, res) => {
-    //       dispatch({ type: DISABLE_SUBMIT, payload: false });
-    //       dispatch({ type: LOADING, payload: false });
-    //       if (err) {
-    //         onFailure(err);
-    //         return dispatch({
-    //           type: SHOW_ALERT,
-    //           payload: {
-    //             type: "error",
-    //             content: getErrorMessages(err)
-    //           }
-    //         });
-    //       }
+      const { expirationMonth, expirationYear } =
+        braintreePaymentRequest?.details;
 
-    //       dispatch({
-    //         type: SHOW_ALERT,
-    //         payload: {
-    //           type: "success",
-    //           content: t("messages.sourceUpdated")
-    //         }
-    //       });
-    //       onSuccess(res);
-    //     }
-    //   );
-    // }
+      const { isDefault } = state;
+      window.Pelcro.paymentMethods.update(
+        {
+          auth_token: window.Pelcro.user.read().auth_token,
+          payment_method_id: paymentMethodId,
+          token: braintreeNonce,
+          gateway: "braintree",
+          exp_month: expirationMonth,
+          exp_year: expirationYear,
+          is_default: isDefault
+        },
+        (err, res) => {
+          dispatch({ type: DISABLE_SUBMIT, payload: false });
+          dispatch({ type: LOADING, payload: false });
+          if (err) {
+            onFailure(err);
+            return dispatch({
+              type: SHOW_ALERT,
+              payload: {
+                type: "error",
+                content: getErrorMessages(err)
+              }
+            });
+          }
+
+          dispatch({
+            type: SHOW_ALERT,
+            payload: {
+              type: "success",
+              content: t("messages.sourceUpdated")
+            }
+          });
+          onSuccess(res);
+        }
+      );
+    }
 
     function handleBraintreeSubscription() {
       const payment = new Payment(new BraintreeGateway());
@@ -2906,6 +2918,12 @@ const PaymentMethodContainerWithoutStripe = ({
 
         case LOADING:
           return Update({ ...state, isLoading: action.payload });
+
+        case SKELETON_LOADER:
+          return Update({
+            ...state,
+            isSkeletonLoaded: action.payload
+          });
 
         case SHOW_COUPON_FIELD:
           return Update({
