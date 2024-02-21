@@ -12,7 +12,9 @@
     "required": "Champs obligatoires",
     "firstName": "Prénom",
     "lastName": "Nom de famille",
-    "phone": "Téléphoner"
+    "phone": "Téléphoner",
+    "company": "Entreprise",
+    "title": "Titre"
   },
   "messages": {
     "alreadyHaveAccount": "Vous avez déjà un compte?",

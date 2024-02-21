@@ -16,7 +16,9 @@
     "selectImage": "Upload new photo",
     "removeImage": "Remove current photo",
     "zoom": "Zoom",
-    "tin": "Tax Identification Number"
+    "tin": "Tax Identification Number",
+    "company": "Company",
+    "userTitle": "Title"
   },
   "messages": {
     "userUpdated": "Thanks! Your profile was updated successfully.",
