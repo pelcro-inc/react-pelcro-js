@@ -1675,7 +1675,10 @@ const PaymentMethodContainerWithoutStripe = ({
     paymentMethodId
   ) => {
     const setupIntent = response.data?.setup_intent;
-    if (setupIntent?.client_secret) {
+    if (
+      setupIntent?.status === "requires_action" &&
+      setupIntent?.client_secret
+    ) {
       stripe
         .confirmCardSetup(setupIntent.client_secret, {
           payment_method: response.data?.source?.object_id
@@ -1692,6 +1695,13 @@ const PaymentMethodContainerWithoutStripe = ({
                 content: getErrorMessages(res.error)
               }
             });
+          }
+
+          if (flow === "subCreate") {
+            dispatch({ type: DISABLE_SUBMIT, payload: false });
+            dispatch({ type: LOADING, payload: false });
+            onSuccess(res);
+            return;
           }
 
           if (flow === "create") {
@@ -1790,6 +1800,9 @@ const PaymentMethodContainerWithoutStripe = ({
             : null
         },
         (err, res) => {
+          if (res.data.setup_intent) {
+            return confirmStripeIntentSetup(res, "subCreate");
+          }
           confirmStripeCardPayment(res, err, true);
         }
       );
