@@ -1,3 +1,10 @@
+# [3.36.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.35.0...v3.36.0) (2024-02-27)
+
+
+### Features
+
+* support 3ds2 in trail subs ([#346](https://github.com/pelcro-inc/react-pelcro-js/issues/346)) ([6777c75](https://github.com/pelcro-inc/react-pelcro-js/commit/6777c75ce2129ad45a1f0e4ade1f5aa07340686e))
+
 # [3.35.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.34.0...v3.35.0) (2024-02-01)
 
 
