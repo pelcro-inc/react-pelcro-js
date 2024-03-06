@@ -1,11 +1,9 @@
 import React, { createContext, useEffect } from "react";
-import { useTranslation } from "react-i18next";
 import useReducerWithSideEffects, {
   UpdateWithSideEffect,
-  Update,
-  SideEffect
+  Update
 } from "use-reducer-with-side-effects";
-import { usePelcro } from "../../components";
+import { usePelcro } from "../../hooks/usePelcro";
 import {
   SET_EMAILS,
   SET_EMAILS_ERROR,
@@ -16,7 +14,7 @@ import {
   UPDATE_MEMBERS,
   UPDATE_REMOVE_MEMBER_ID,
   SHOW_ALERT,
-  LOADING,
+  LOADING
 } from "../../utils/action-types";
 import { getErrorMessages } from "../common/Helpers";
 
@@ -25,7 +23,7 @@ const initialState = {
   emailsError: null,
   buttonDisabled: false,
   removeMemberId: null,
-  members:[],
+  members: [],
   loading: false,
   alert: {
     type: "error",
@@ -42,13 +40,10 @@ const SubscriptionManageMembersContainer = ({
   onFailure = () => {},
   children
 }) => {
-  
-  const {
-    subscriptionToManageMembers
-  } = usePelcro();
+  const { subscriptionToManageMembers } = usePelcro();
   const subscription_id = subscriptionToManageMembers?.id;
 
-  const handleListMembers = ({}, dispatch) => {
+  const handleListMembers = (state, dispatch) => {
     window.Pelcro.subscription.listMembers(
       {
         auth_token: window.Pelcro?.user?.read()?.auth_token,
@@ -57,7 +52,7 @@ const SubscriptionManageMembersContainer = ({
       (err, res) => {
         dispatch({ type: UPDATE_INVITE_BUTTON, payload: false });
         dispatch({ type: LOADING, payload: false });
-        
+
         if (err) {
           dispatch({
             type: SHOW_ALERT,

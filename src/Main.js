@@ -36,7 +36,7 @@ import { EmailVerifyModal } from "./Components/EmailVerify/EmailVerifyModal";
 import { InvoiceDetailsModal } from "./Components/InvoiceDetails/InvoiceDetailsModal";
 import { InvoicePaymentModal } from "./Components/InvoicePayment/InvoicePaymentModal";
 import { QrCodeModal } from "./Components/QrCode/QrCodeModal";
-import { SubscriptionManageMembersModal } from "./components";
+import { SubscriptionManageMembersModal } from "./Components/SubscriptionManageMembers/SubscriptionManageMembersModal";
 import { PaymentMethodDeleteModal } from "./Components/PaymentMethodDelete/PaymentMethodDeleteModal";
 import { PaymentMethodCreateModal } from "./Components/PaymentMethodCreate/PaymentMethodCreateModal";
 
