@@ -1,10 +1,10 @@
 @layer components {
   .pelcro-root .pelcro-alert-error {
-    @apply plc-flex plc-items-center plc-justify-between plc-px-4 plc-py-3 plc-mb-4 plc-w-full plc-font-semibold plc-text-sm plc-text-red-600  plc-bg-red-100 plc-rounded-sm;
+    @apply plc-flex plc-items-center plc-justify-between plc-px-4 plc-py-3 plc-mb-4 plc-w-full plc-font-semibold plc-text-sm plc-text-red-600  plc-bg-red-100 plc-rounded-md;
   }
 
   .pelcro-root .pelcro-alert-success {
-    @apply plc-flex plc-items-center plc-justify-between plc-px-4 plc-py-3 plc-mb-4 plc-w-full plc-font-semibold plc-text-sm plc-text-green-800 plc-bg-green-200 plc-rounded-sm;
+    @apply plc-flex plc-items-center plc-justify-between plc-px-4 plc-py-3 plc-mb-4 plc-w-full plc-font-semibold plc-text-sm plc-text-green-800 plc-bg-green-200 plc-rounded-md;
   }
 
   .pelcro-root .pelcro-alert-icon {

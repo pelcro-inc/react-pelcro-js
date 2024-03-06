@@ -9,7 +9,15 @@
   }
 
   .pelcro-root .pelcro-modal {
-    @apply plc-container plc-absolute plc-bottom-0 plc-flex plc-flex-col plc-items-center plc-max-w-lg plc-bg-white plc-rounded-lg md:plc-bottom-1/2 plc-overflow-hidden plc-transform md:plc-translate-y-1/2;
+    @apply plc-container plc-absolute plc-bottom-0 plc-flex plc-flex-col plc-items-center plc-max-w-lg plc-bg-white plc-rounded-lg md:plc-bottom-1/2 plc-transform md:plc-translate-y-1/2;
+    max-height: 100vh;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .pelcro-root .pelcro-modal::-webkit-scrollbar {
+    display: none;
   }
 
   .pelcro-root .pelcro-modal-content {

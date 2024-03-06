@@ -27,7 +27,7 @@
     @apply plc-hidden;
   }
 
-  .pelcro-root .pelcro-input-card-number-label,
+  /* .pelcro-root .pelcro-input-card-number-label,
   .pelcro-root .pelcro-input-cvc-number-label,
   .pelcro-root .pelcro-input-expiry-date-label {
     @apply plc-inline-flex plc-text-gray-400 plc-font-medium plc-absolute plc--top-2 plc-left-2 plc-text-xs plc-transition-all plc-bg-white plc-px-1;
@@ -54,5 +54,5 @@
     #pelcro-input-expiry-date:focus
     ~ .pelcro-input-expiry-date-label {
     @apply plc-text-xs plc--top-2 plc-transition-all plc-bg-white plc-px-1;
-  }
+  } */
 }
