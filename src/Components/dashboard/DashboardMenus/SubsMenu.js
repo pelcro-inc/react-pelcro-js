@@ -19,7 +19,11 @@ import { usePelcro } from "../../../hooks/usePelcro";
 import { Card } from "../Card";
 import { AddNew } from "../AddNew";
 import { store } from "../DashboardContainer";
-import { CANCEL_SUBSCRIPTION, REACTIVATE_SUBSCRIPTION, UNSUSPEND_SUBSCRIPTION } from "../../../utils/action-types";
+import {
+  CANCEL_SUBSCRIPTION,
+  REACTIVATE_SUBSCRIPTION,
+  UNSUSPEND_SUBSCRIPTION
+} from "../../../utils/action-types";
 
 export const SubscriptionsMenu = (props) => {
   const { t } = useTranslation("dashboard");
@@ -132,7 +136,6 @@ export const SubscriptionsItems = ({
         if (userMustVerifyEmail()) {
           return switchView("email-verify");
         }
-        switchView(null);
         onClose?.();
         notify.confirm(
           (onSuccess, onFailure) => {

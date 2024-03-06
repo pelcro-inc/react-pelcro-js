@@ -154,7 +154,6 @@ const DashboardContainer = ({
       },
       (err, res) => {
         dispatch({ type: SET_DISABLESUBMIT, payload: false });
-        onClose();
         if (err) {
           onFailure?.(err);
           return notify.error(t("messages.subReactivation.error"));
