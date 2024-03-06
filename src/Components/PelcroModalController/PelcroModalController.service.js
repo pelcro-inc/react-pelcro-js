@@ -3,11 +3,10 @@ import ReactDOM from "react-dom";
 import { usePelcro } from "../../hooks/usePelcro";
 import {
   getStableViewID,
-  isValidViewFromURL,
-  notifyBugsnag
+  isValidViewFromURL
 } from "../../utils/utils";
 import { init as initContentEntitlement } from "../common/contentEntitlement";
-import { loadStripe } from "@stripe/stripe-js/pure";
+// import { loadStripe } from "@stripe/stripe-js";
 import { notify } from "../../SubComponents/Notification";
 import { getErrorMessages } from "../common/Helpers";
 import i18n from "../../i18n";
@@ -103,7 +102,7 @@ export const initPaywalls = () => {
 
 export const loadPaymentSDKs = () => {
   // Lazy load stripe's SDK
-  const { whenUserReady } = usePelcro.getStore();
+  // const { whenUserReady } = usePelcro.getStore();
   const supportsVantiv = Boolean(
     window.Pelcro.site.read().vantiv_gateway_settings
   );
@@ -111,11 +110,11 @@ export const loadPaymentSDKs = () => {
     window.Pelcro.site.read().tap_gateway_settings
   );
 
-  whenUserReady(() => {
-    if (!window.Stripe && !supportsVantiv && !supportsTap) {
-      loadStripe(window.Pelcro.environment.stripe);
-    }
-  });
+  // whenUserReady(() => {
+  //   if (!window.Stripe && !supportsVantiv && !supportsTap) {
+  //     loadStripe(window.Pelcro.environment.stripe);
+  //   }
+  // });
 
   window.Pelcro.helpers.loadSDK(
     "https://applepay.cdn-apple.com/jsapi/v1/apple-pay-sdk.js",

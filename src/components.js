@@ -95,9 +95,6 @@ export { AddressCreateCountrySelect } from "./Components/AddressCreate/AddressCr
 export { AddressCreateStateSelect } from "./Components/AddressCreate/AddressCreateStateSelect";
 export { AddressCreateSetDefault } from "./Components/AddressCreate/AddressCreateSetDefault";
 export {
-  PelcroCardCVC,
-  PelcroCardExpiry,
-  PelcroCardNumber,
   PelcroPaymentRequestButton,
   CheckoutForm
 } from "./SubComponents/StripeElements";

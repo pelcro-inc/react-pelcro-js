@@ -68,14 +68,20 @@ export const PaymentMethodDeleteList = (props) => {
 
                           <div className="plc-flex plc-flex-col plc-text-lg pelcro-payment-method-details">
                             <p className="plc-font-semibold">
-                              •••• ••••{" "}
+                              {paymentMethod?.properties?.brand ===
+                              "bacs_debit"
+                                ? "••••"
+                                : "•••• •••• ••••"}{" "}
                               {paymentMethod.properties?.last4}
                             </p>
-                            <p className="plc-text-sm plc-text-gray-500">
-                              {t("select.expires")}{" "}
-                              {paymentMethod.properties?.exp_month}/
-                              {paymentMethod.properties?.exp_year}
-                            </p>
+                            {paymentMethod.properties.brand !==
+                              "bacs_debit" && (
+                              <p className="plc-text-sm plc-text-gray-500">
+                                {t("select.expires")}{" "}
+                                {paymentMethod.properties?.exp_month}/
+                                {paymentMethod.properties?.exp_year}
+                              </p>
+                            )}
                           </div>
                         </Radio>
                       </div>

@@ -5,11 +5,12 @@ import React, {
   useState
 } from "react";
 import { useTranslation } from "react-i18next";
+import { loadStripe } from "@stripe/stripe-js";
 import {
-  injectStripe,
   Elements,
-  StripeProvider
-} from "react-stripe-elements";
+  useStripe,
+  useElements
+} from "@stripe/react-stripe-js";
 import useReducerWithSideEffects, {
   UpdateWithSideEffect,
   Update,
@@ -65,8 +66,9 @@ import {
   CybersourceGateway,
   PAYMENT_TYPES
 } from "../../services/Subscription/Payment.service";
-import { getPageOrDefaultLanguage } from "../../utils/utils";
 import { usePelcro } from "../../hooks/usePelcro";
+import { Loader } from "../../SubComponents/Loader";
+import { userHasBillingAddress } from "../../utils/utils";
 
 /**
  * @typedef {Object} PaymentStateType
@@ -123,13 +125,15 @@ const PaymentMethodContainerWithoutStripe = ({
   style,
   className = "",
   children,
-  stripe,
   type,
   onSuccess = () => {},
   onGiftRenewalSuccess = () => {},
   onFailure = () => {},
   ...props
 }) => {
+  // Get a reference to Stripe or Elements using hooks.
+  const stripe = useStripe();
+  const elements = useElements();
   const [vantivPaymentRequest, setVantivPaymentRequest] =
     useState(null);
   const [updatedCouponCode, setUpdatedCouponCode] = useState("");
@@ -176,7 +180,7 @@ const PaymentMethodContainerWithoutStripe = ({
     }
     dispatch({ type: INIT_CONTAINER });
     updateTotalAmountWithTax();
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   /* ====== Start Cybersource integration ======== */
   const cybersourceErrorHandle = (err) => {
@@ -473,6 +477,7 @@ const PaymentMethodContainerWithoutStripe = ({
 
         const { key: jwk } = res;
         // SETUP MICROFORM
+        // eslint-disable-next-line no-undef
         FLEX.microform(
           {
             keyId: jwk.kid,
@@ -1218,14 +1223,14 @@ const PaymentMethodContainerWithoutStripe = ({
         }
       });
     }
-  }, [selectedPaymentMethodId]);
+  }, [selectedPaymentMethodId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Trigger the handleVantivPayment method when a vantivPaymentRequest is present
   useEffect(() => {
     if (vantivPaymentRequest) {
       handleVantivPayment(vantivPaymentRequest, updatedCouponCode);
     }
-  }, [vantivPaymentRequest]);
+  }, [vantivPaymentRequest]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     whenUserReady(() => {
@@ -1290,7 +1295,9 @@ const PaymentMethodContainerWithoutStripe = ({
         appendCybersourceFingerprintScripts();
       }
     });
-  }, [selectedPaymentMethodId]);
+  }, [selectedPaymentMethodId]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  /* ====== Start Stripe integration ======== */
 
   const initPaymentRequest = (state, dispatch) => {
     if (skipPayment && (plan?.amount === 0 || props?.freeOrders))
@@ -1346,255 +1353,15 @@ const PaymentMethodContainerWithoutStripe = ({
   };
 
   /**
-   * Updates the total amount after adding taxes only if site taxes are enabled
-   */
-  const updateTotalAmountWithTax = () => {
-    if (skipPayment && (plan?.amount === 0 || props?.freeOrders))
-      return;
-    const taxesEnabled = window.Pelcro.site.read()?.taxes_enabled;
-
-    if (taxesEnabled && type === "createPayment") {
-      dispatch({ type: DISABLE_SUBMIT, payload: true });
-
-      resolveTaxCalculation()
-        .then((res) => {
-          if (res) {
-            dispatch({
-              type: SET_TAX_AMOUNT,
-              payload: res.taxAmount
-            });
-
-            dispatch({
-              type: SET_UPDATED_PRICE,
-              payload: res.totalAmountWithTax
-            });
-
-            dispatch({ type: UPDATE_PAYMENT_REQUEST });
-          }
-        })
-        .catch((error) => {
-          handlePaymentError(error);
-        })
-        .finally(() => {
-          dispatch({ type: DISABLE_SUBMIT, payload: false });
-        });
-    }
-  };
-
-  const onApplyCouponCode = (state, dispatch) => {
-    const { couponCode } = state;
-
-    const handleCouponResponse = (err, res) => {
-      dispatch({ type: DISABLE_COUPON_BUTTON, payload: false });
-
-      if (err) {
-        onFailure(err);
-
-        // reset the coupon code in local state
-        setUpdatedCouponCode("");
-
-        dispatch({
-          type: SET_COUPON_ERROR,
-          payload: getErrorMessages(err)
-        });
-
-        // remove current coupon
-        dispatch({
-          type: SET_COUPON,
-          payload: null
-        });
-
-        dispatch({
-          type: SET_PERCENT_OFF,
-          payload: ""
-        });
-
-        dispatch({
-          type: SET_UPDATED_PRICE,
-          payload: null
-        });
-
-        dispatch({
-          type: SET_TAX_AMOUNT,
-          payload: null
-        });
-
-        const { currentPlan } = state;
-
-        if (currentPlan) {
-          const quantity = currentPlan.quantity ?? 1;
-          const price = currentPlan.amount;
-
-          dispatch({
-            type: SET_UPDATED_PRICE,
-            // set original plan price
-            payload: price * quantity
-          });
-          dispatch({ type: UPDATE_PAYMENT_REQUEST });
-
-          // update the new amount with taxes if site has taxes enabled
-          updateTotalAmountWithTax();
-        }
-
-        return;
-      }
-
-      dispatch({ type: SET_COUPON_ERROR, payload: "" });
-      dispatch({
-        type: SHOW_ALERT,
-        payload: { type: "error", content: "" }
-      });
-
-      dispatch({
-        type: SET_COUPON,
-        payload: res.data.coupon
-      });
-
-      // set the coupon code in local state to be able to use with Vantiv
-      setUpdatedCouponCode(res.data.coupon.code);
-
-      dispatch({
-        type: SET_PERCENT_OFF,
-        payload: `${res.data.coupon?.percent_off}%`
-      });
-
-      dispatch({
-        type: SET_TAX_AMOUNT,
-        payload: res.data.taxes
-      });
-
-      dispatch({
-        type: SET_UPDATED_PRICE,
-        payload: res.data.total
-      });
-
-      dispatch({ type: UPDATE_PAYMENT_REQUEST });
-    };
-
-    if (couponCode?.trim() === "") {
-      dispatch({
-        type: SET_COUPON,
-        payload: null
-      });
-
-      dispatch({
-        type: SET_PERCENT_OFF,
-        payload: ""
-      });
-
-      dispatch({
-        type: SET_UPDATED_PRICE,
-        payload: null
-      });
-
-      dispatch({
-        type: SET_TAX_AMOUNT,
-        payload: null
-      });
-
-      dispatch({ type: UPDATE_PAYMENT_REQUEST });
-      updateTotalAmountWithTax();
-    }
-
-    if (couponCode?.trim()) {
-      dispatch({ type: DISABLE_COUPON_BUTTON, payload: true });
-
-      if (type === "createPayment") {
-        window.Pelcro.order.create(
-          {
-            auth_token: window.Pelcro.user.read().auth_token,
-            plan_id: plan.id,
-            campaign_key:
-              window.Pelcro.helpers.getURLParameter("campaign_key"),
-            coupon_code: couponCode,
-            address_id: selectedAddressId
-          },
-          handleCouponResponse
-        );
-      } else if (type === "orderCreate") {
-        const isQuickPurchase = !Array.isArray(order);
-        const mappedOrderItems = isQuickPurchase
-          ? [{ sku_id: order.id, quantity: order.quantity }]
-          : order.map((item) => ({
-              sku_id: item.id,
-              quantity: item.quantity
-            }));
-
-        window.Pelcro.ecommerce.order.createSummary(
-          {
-            items: mappedOrderItems,
-            coupon_code: couponCode
-          },
-          handleCouponResponse
-        );
-      }
-    }
-  };
-
-  const debouncedApplyCouponCode = useRef(
-    debounce(onApplyCouponCode, 1000)
-  ).current;
-
-  const removeAppliedCoupon = (state) => {
-    state.couponCode = "";
-
-    // reset the coupon code in local state
-    setUpdatedCouponCode("");
-
-    dispatch({ type: SET_COUPON_ERROR, payload: "" });
-
-    dispatch({
-      type: SHOW_COUPON_FIELD,
-      payload: false
-    });
-
-    dispatch({
-      type: SET_COUPON,
-      payload: null
-    });
-
-    dispatch({
-      type: SET_PERCENT_OFF,
-      payload: ""
-    });
-
-    dispatch({
-      type: SET_UPDATED_PRICE,
-      payload: null
-    });
-
-    dispatch({
-      type: SET_TAX_AMOUNT,
-      payload: null
-    });
-
-    const { currentPlan } = state;
-
-    if (currentPlan) {
-      const quantity = currentPlan.quantity ?? 1;
-      const price = currentPlan.amount;
-
-      dispatch({
-        type: SET_UPDATED_PRICE,
-        // set original plan price
-        payload: price * quantity
-      });
-      dispatch({ type: UPDATE_PAYMENT_REQUEST });
-
-      // update the new amount with taxes if site has taxes enabled
-      updateTotalAmountWithTax();
-    }
-  };
-
-  /**
    * Attempt to confirm a Stripe card payment via it's PaymentIntent.
    * Only trigger method if PaymentIntent status is `requires_action`.
    *
    * @see https://stripe.com/docs/payments/intents#intent-statuses
    *
-   * @param response
-   * @param error
-   * @returns {*}
+   * @param {Object} response
+   * @param {Object} error
+   * @param {boolean} isSubCreate
+   * @return {*}
    */
   const confirmStripeCardPayment = (
     response,
@@ -1886,78 +1653,6 @@ const PaymentMethodContainerWithoutStripe = ({
     return false;
   };
 
-  /**
-   * Handles subscriptions from PayPal gateway
-   * @param {PaymentStateType} state
-   * @param {string} paypalNonce
-   * @return {void}
-   */
-  const handlePaypalSubscription = (state, paypalNonce) => {
-    const payment = new Payment(new PaypalGateway());
-    const { couponCode } = state;
-
-    /**
-     * @TODO: Add flags for types instead of testing by properties
-     */
-
-    if (giftRecipient) {
-      return payment.execute(
-        {
-          type: PAYMENT_TYPES.CREATE_GIFTED_SUBSCRIPTION,
-          token: paypalNonce,
-          quantity: plan.quantity,
-          plan,
-          couponCode,
-          product,
-          giftRecipient,
-          addressId: selectedAddressId
-        },
-
-        (err, res) => {
-          dispatch({ type: DISABLE_SUBMIT, payload: false });
-          dispatch({ type: LOADING, payload: false });
-
-          if (err) {
-            onFailure(err);
-            return dispatch({
-              type: SHOW_ALERT,
-              payload: {
-                type: "error",
-                content: getErrorMessages(err)
-              }
-            });
-          }
-          onSuccess(res);
-        }
-      );
-    }
-
-    return payment.execute(
-      {
-        type: PAYMENT_TYPES.CREATE_SUBSCRIPTION,
-        token: paypalNonce,
-        quantity: plan.quantity,
-        plan,
-        couponCode,
-        product,
-        addressId: selectedAddressId
-      },
-      (err, res) => {
-        dispatch({ type: DISABLE_SUBMIT, payload: false });
-        dispatch({ type: LOADING, payload: false });
-
-        if (err) {
-          onFailure(err);
-          return dispatch({
-            type: SHOW_ALERT,
-            payload: { type: "error", content: getErrorMessages(err) }
-          });
-        }
-        onSuccess(res);
-      }
-    );
-  };
-
   const purchase = (
     gatewayService,
     gatewayToken,
@@ -2047,27 +1742,25 @@ const PaymentMethodContainerWithoutStripe = ({
     );
   };
 
-  const createPaymentSource = (state, dispatch) => {
-    return stripe
-      .createSource({ type: "card" })
-      .then(({ source, error }) => {
-        if (error) {
-          return handlePaymentError(error);
-        }
+  const createPaymentSource = async (state, dispatch) => {
+    // Trigger form validation and wallet collection
+    const { error: submitError } = await elements.submit();
+    if (submitError) {
+      handlePaymentError(submitError);
+      return;
+    }
 
-        // We don't support source creation for 3D secure yet
-        // if (source?.card?.three_d_secure === "required") {
-        //   return handlePaymentError({
-        //     error: {
-        //       message: t("messages.cardAuthNotSupported")
-        //     }
-        //   });
-        // }
+    return stripe.createPaymentMethod({ elements }).then((result) => {
+      if (result.error) {
+        return handlePaymentError(result.error);
+      }
 
+      if (result.paymentMethod) {
+        console.log(result.paymentMethod);
         window.Pelcro.paymentMethods.create(
           {
             auth_token: window.Pelcro.user.read().auth_token,
-            token: source.id
+            token: result.paymentMethod.id
           },
           (err, res) => {
             if (err) {
@@ -2081,6 +1774,12 @@ const PaymentMethodContainerWithoutStripe = ({
                   content: getErrorMessages(err)
                 }
               });
+            }
+
+            if (result.paymentMethod.type == "bacs_debit") {
+              createBillingAddress(
+                result.paymentMethod.billing_details
+              );
             }
 
             if (
@@ -2102,7 +1801,8 @@ const PaymentMethodContainerWithoutStripe = ({
             }
           }
         );
-      });
+      }
+    });
   };
 
   const updatePaymentSource = (state, dispatch) => {
@@ -2150,29 +1850,25 @@ const PaymentMethodContainerWithoutStripe = ({
     );
   };
 
-  const replacePaymentSource = (state, dispatch) => {
+  const replacePaymentSource = async (state, dispatch) => {
     const { id: paymentMethodId } = paymentMethodToDelete;
+    // Trigger form validation and wallet collection
+    const { error: submitError } = await elements.submit();
+    if (submitError) {
+      handlePaymentError(submitError);
+      return;
+    }
 
-    return stripe
-      .createSource({ type: "card" })
-      .then(({ source, error }) => {
-        if (error) {
-          return handlePaymentError(error);
-        }
+    return stripe.createPaymentMethod({ elements }).then((result) => {
+      if (result.error) {
+        return handlePaymentError(result.error);
+      }
 
-        // We don't support source creation for 3D secure yet
-        // if (source?.card?.three_d_secure === "required") {
-        //   return handlePaymentError({
-        //     error: {
-        //       message: t("messages.cardAuthNotSupported")
-        //     }
-        //   });
-        // }
-
+      if (result.paymentMethod) {
         window.Pelcro.paymentMethods.create(
           {
             auth_token: window.Pelcro.user.read().auth_token,
-            token: source.id
+            token: result.paymentMethod.id
           },
           (err, res) => {
             if (err) {
@@ -2184,6 +1880,12 @@ const PaymentMethodContainerWithoutStripe = ({
                   content: getErrorMessages(err)
                 }
               });
+            }
+
+            if (result.paymentMethod.type == "bacs_debit") {
+              createBillingAddress(
+                result.paymentMethod.billing_details
+              );
             }
 
             if (
@@ -2226,7 +1928,8 @@ const PaymentMethodContainerWithoutStripe = ({
             }
           }
         );
-      });
+      }
+    });
   };
 
   const updatePaymentRequest = (state) => {
@@ -2238,7 +1941,7 @@ const PaymentMethodContainerWithoutStripe = ({
     });
   };
 
-  const submitPayment = (state, dispatch) => {
+  const submitPayment = async (state, dispatch) => {
     if (skipPayment && props?.freeOrders) {
       const isQuickPurchase = !Array.isArray(order);
       const mappedOrderItems = isQuickPurchase
@@ -2263,84 +1966,110 @@ const PaymentMethodContainerWithoutStripe = ({
       );
       return;
     }
+    // Trigger form validation and wallet collection
+    const { error: submitError } = await elements.submit();
+    if (submitError) {
+      handlePaymentError(submitError);
+      return;
+    }
+
     stripe
-      .createSource({ type: "card" })
-      .then(({ source, error }) => {
-        if (error) {
-          return handlePaymentError(error);
+      .createPaymentMethod({ elements })
+      .then((result) => {
+        if (result.error) {
+          return handlePaymentError(result.error);
         }
-
-        const getOrderItemsTotal = () => {
-          if (!order) {
-            return null;
+        if (result.paymentMethod) {
+          if (result.paymentMethod.type == "bacs_debit") {
+            createBillingAddress(
+              result.paymentMethod.billing_details
+            );
           }
-
-          const isQuickPurchase = !Array.isArray(order);
-
-          if (isQuickPurchase) {
-            return order.price * order.quantity;
-          }
-
-          if (order.length === 0) {
-            return null;
-          }
-
-          return order.reduce((total, item) => {
-            return total + item.price * item.quantity;
-          }, 0);
-        };
-
-        const totalAmount =
-          state?.updatedPrice ??
-          plan?.amount ??
-          invoice?.amount_remaining ??
-          getOrderItemsTotal();
-
-        return handlePayment(source);
+          return handlePayment(result.paymentMethod);
+        }
       })
       .catch((error) => {
         return handlePaymentError(error);
       });
   };
 
-  /**
-   * Resolves with the total & tax amount incase taxes enabled by site
-   * @return {Promise}
-   */
-  const resolveTaxCalculation = () => {
-    if (type === "invoicePayment") {
-      return new Promise((resolve) => resolve());
+  const handlePayment = (stripeSource) => {
+    if (stripeSource && type === "createPayment") {
+      subscribe(stripeSource, state, dispatch);
+    } else if (stripeSource && type === "orderCreate") {
+      purchase(new StripeGateway(), stripeSource.id, state, dispatch);
+    } else if (stripeSource && type === "invoicePayment") {
+      payInvoice(new StripeGateway(), stripeSource.id, dispatch);
+    }
+  };
+
+  const handlePaymentError = (error) => {
+    toggleAuthenticationSuccessPendingView(false);
+
+    if (
+      error.type === "validation_error" &&
+      // Subscription creation & renewal
+      type === "createPayment"
+    ) {
+      const { updatedPrice } = state;
+      // When price is 0, we allow submitting without card info
+      if (
+        updatedPrice === 0 &&
+        state.couponObject?.duration === "forever"
+      ) {
+        return subscribe({}, state, dispatch);
+      }
     }
 
-    const taxesEnabled = window.Pelcro.site.read()?.taxes_enabled;
-
-    return new Promise((resolve, reject) => {
-      // resolve early if taxes isn't enabled
-      if (!taxesEnabled) {
-        return resolve(null);
+    onFailure(error);
+    dispatch({
+      type: SHOW_ALERT,
+      payload: {
+        type: "error",
+        content: getErrorMessages(error) ?? error?.message
       }
-
-      window.Pelcro.order.create(
-        {
-          auth_token: window.Pelcro.user.read().auth_token,
-          plan_id: plan.id,
-          campaign_key:
-            window.Pelcro.helpers.getURLParameter("campaign_key"),
-          coupon_code: state?.couponCode,
-          address_id: selectedAddressId
-        },
-        (error, res) => {
-          if (error) {
-            return reject(error);
-          }
-
-          const taxAmount = res.data?.taxes;
-          const totalAmountWithTax = res.data?.total;
-          resolve({ totalAmountWithTax, taxAmount });
-        }
-      );
     });
+    dispatch({ type: DISABLE_SUBMIT, payload: false });
+    dispatch({ type: LOADING, payload: false });
   };
+
+  const createBillingAddress = (billingDetails) => {
+    const hasBillingAddress = userHasBillingAddress();
+
+    if (hasBillingAddress) return;
+
+    const { name, address } = billingDetails;
+    const [firstName, lastName] = name ? name?.split(" ") : [];
+
+    window.Pelcro.address.create(
+      {
+        auth_token: window.Pelcro.user.read().auth_token,
+        type: "billing",
+        first_name: firstName,
+        last_name: lastName,
+        line1: address?.line1,
+        line2: address?.line2,
+        city: address?.city,
+        state: address?.state,
+        country: address?.country,
+        postal_code: address?.postal_code,
+        is_default: true
+      },
+      (err, res) => {
+        if (err) {
+          console.error(err);
+        }
+
+        if (res) {
+          console.log(res);
+        }
+      }
+    );
+  };
+
+  // TODO: Refactor deprecated stripe implementation
+
+  /* Start Stripe deprecated functions */
 
   /**
    * Resolves with a generated stripe 3DSecure source
@@ -2393,46 +2122,6 @@ const PaymentMethodContainerWithoutStripe = ({
         }`
       }
     });
-  };
-
-  const handlePayment = (stripeSource) => {
-    if (stripeSource && type === "createPayment") {
-      subscribe(stripeSource, state, dispatch);
-    } else if (stripeSource && type === "orderCreate") {
-      purchase(new StripeGateway(), stripeSource.id, state, dispatch);
-    } else if (stripeSource && type === "invoicePayment") {
-      payInvoice(new StripeGateway(), stripeSource.id, dispatch);
-    }
-  };
-
-  const handlePaymentError = (error) => {
-    toggleAuthenticationSuccessPendingView(false);
-
-    if (
-      error.type === "validation_error" &&
-      // Subscription creation & renewal
-      type === "createPayment"
-    ) {
-      const { updatedPrice } = state;
-      // When price is 0, we allow submitting without card info
-      if (
-        updatedPrice === 0 &&
-        state.couponObject?.duration === "forever"
-      ) {
-        return subscribe({}, state, dispatch);
-      }
-    }
-
-    onFailure(error);
-    dispatch({
-      type: SHOW_ALERT,
-      payload: {
-        type: "error",
-        content: getErrorMessages(error) ?? error?.message
-      }
-    });
-    dispatch({ type: DISABLE_SUBMIT, payload: false });
-    dispatch({ type: LOADING, payload: false });
   };
 
   const retrieveSource = async (
@@ -2505,6 +2194,369 @@ const PaymentMethodContainerWithoutStripe = ({
 
     cardAuthContainer?.appendChild(iframe);
   };
+
+  /* End Stripe deprecated functions */
+
+  /* ====== End Stripe integration ======== */
+
+  /* ====== Start PayPal integration ======== */
+
+  /**
+   * Handles subscriptions from PayPal gateway
+   * @param {PaymentStateType} state
+   * @param {string} paypalNonce
+   * @return {void}
+   */
+  const handlePaypalSubscription = (state, paypalNonce) => {
+    const payment = new Payment(new PaypalGateway());
+    const { couponCode } = state;
+
+    /**
+     * @TODO: Add flags for types instead of testing by properties
+     */
+
+    if (giftRecipient) {
+      return payment.execute(
+        {
+          type: PAYMENT_TYPES.CREATE_GIFTED_SUBSCRIPTION,
+          token: paypalNonce,
+          quantity: plan.quantity,
+          plan,
+          couponCode,
+          product,
+          giftRecipient,
+          addressId: selectedAddressId
+        },
+
+        (err, res) => {
+          dispatch({ type: DISABLE_SUBMIT, payload: false });
+          dispatch({ type: LOADING, payload: false });
+
+          if (err) {
+            onFailure(err);
+            return dispatch({
+              type: SHOW_ALERT,
+              payload: {
+                type: "error",
+                content: getErrorMessages(err)
+              }
+            });
+          }
+          onSuccess(res);
+        }
+      );
+    }
+
+    return payment.execute(
+      {
+        type: PAYMENT_TYPES.CREATE_SUBSCRIPTION,
+        token: paypalNonce,
+        quantity: plan.quantity,
+        plan,
+        couponCode,
+        product,
+        addressId: selectedAddressId
+      },
+      (err, res) => {
+        dispatch({ type: DISABLE_SUBMIT, payload: false });
+        dispatch({ type: LOADING, payload: false });
+
+        if (err) {
+          onFailure(err);
+          return dispatch({
+            type: SHOW_ALERT,
+            payload: { type: "error", content: getErrorMessages(err) }
+          });
+        }
+        onSuccess(res);
+      }
+    );
+  };
+
+  /* ====== End PayPal integration ======== */
+
+  /* ====== General Functions Start ======== */
+
+  /**
+   * Updates the total amount after adding taxes only if site taxes are enabled
+   */
+  const updateTotalAmountWithTax = () => {
+    if (skipPayment && (plan?.amount === 0 || props?.freeOrders))
+      return;
+    const taxesEnabled = window.Pelcro.site.read()?.taxes_enabled;
+
+    if (taxesEnabled && type === "createPayment") {
+      dispatch({ type: DISABLE_SUBMIT, payload: true });
+
+      resolveTaxCalculation()
+        .then((res) => {
+          if (res) {
+            dispatch({
+              type: SET_TAX_AMOUNT,
+              payload: res.taxAmount
+            });
+
+            dispatch({
+              type: SET_UPDATED_PRICE,
+              payload: res.totalAmountWithTax
+            });
+
+            dispatch({ type: UPDATE_PAYMENT_REQUEST });
+          }
+        })
+        .catch((error) => {
+          handlePaymentError(error);
+        })
+        .finally(() => {
+          dispatch({ type: DISABLE_SUBMIT, payload: false });
+        });
+    }
+  };
+
+  const onApplyCouponCode = (state, dispatch) => {
+    const { couponCode } = state;
+
+    const handleCouponResponse = (err, res) => {
+      dispatch({ type: DISABLE_COUPON_BUTTON, payload: false });
+
+      if (err) {
+        onFailure(err);
+
+        // reset the coupon code in local state
+        setUpdatedCouponCode("");
+
+        dispatch({
+          type: SET_COUPON_ERROR,
+          payload: getErrorMessages(err)
+        });
+
+        // remove current coupon
+        dispatch({
+          type: SET_COUPON,
+          payload: null
+        });
+
+        dispatch({
+          type: SET_PERCENT_OFF,
+          payload: ""
+        });
+
+        dispatch({
+          type: SET_UPDATED_PRICE,
+          payload: null
+        });
+
+        dispatch({
+          type: SET_TAX_AMOUNT,
+          payload: null
+        });
+
+        const { currentPlan } = state;
+
+        if (currentPlan) {
+          const quantity = currentPlan.quantity ?? 1;
+          const price = currentPlan.amount;
+
+          dispatch({
+            type: SET_UPDATED_PRICE,
+            // set original plan price
+            payload: price * quantity
+          });
+          dispatch({ type: UPDATE_PAYMENT_REQUEST });
+
+          // update the new amount with taxes if site has taxes enabled
+          updateTotalAmountWithTax();
+        }
+
+        return;
+      }
+
+      dispatch({ type: SET_COUPON_ERROR, payload: "" });
+      dispatch({
+        type: SHOW_ALERT,
+        payload: { type: "error", content: "" }
+      });
+
+      dispatch({
+        type: SET_COUPON,
+        payload: res.data.coupon
+      });
+
+      // set the coupon code in local state to be able to use with Vantiv
+      setUpdatedCouponCode(res.data.coupon.code);
+
+      dispatch({
+        type: SET_PERCENT_OFF,
+        payload: `${res.data.coupon?.percent_off}%`
+      });
+
+      dispatch({
+        type: SET_TAX_AMOUNT,
+        payload: res.data.taxes
+      });
+
+      dispatch({
+        type: SET_UPDATED_PRICE,
+        payload: res.data.total
+      });
+
+      dispatch({ type: UPDATE_PAYMENT_REQUEST });
+    };
+
+    if (couponCode?.trim() === "") {
+      dispatch({
+        type: SET_COUPON,
+        payload: null
+      });
+
+      dispatch({
+        type: SET_PERCENT_OFF,
+        payload: ""
+      });
+
+      dispatch({
+        type: SET_UPDATED_PRICE,
+        payload: null
+      });
+
+      dispatch({
+        type: SET_TAX_AMOUNT,
+        payload: null
+      });
+
+      dispatch({ type: UPDATE_PAYMENT_REQUEST });
+      updateTotalAmountWithTax();
+    }
+
+    if (couponCode?.trim()) {
+      dispatch({ type: DISABLE_COUPON_BUTTON, payload: true });
+
+      if (type === "createPayment") {
+        window.Pelcro.order.create(
+          {
+            auth_token: window.Pelcro.user.read().auth_token,
+            plan_id: plan.id,
+            campaign_key:
+              window.Pelcro.helpers.getURLParameter("campaign_key"),
+            coupon_code: couponCode,
+            address_id: selectedAddressId
+          },
+          handleCouponResponse
+        );
+      } else if (type === "orderCreate") {
+        const isQuickPurchase = !Array.isArray(order);
+        const mappedOrderItems = isQuickPurchase
+          ? [{ sku_id: order.id, quantity: order.quantity }]
+          : order.map((item) => ({
+              sku_id: item.id,
+              quantity: item.quantity
+            }));
+
+        window.Pelcro.ecommerce.order.createSummary(
+          {
+            items: mappedOrderItems,
+            coupon_code: couponCode
+          },
+          handleCouponResponse
+        );
+      }
+    }
+  };
+
+  const debouncedApplyCouponCode = useRef(
+    debounce(onApplyCouponCode, 1000)
+  ).current;
+
+  const removeAppliedCoupon = (state) => {
+    state.couponCode = "";
+
+    // reset the coupon code in local state
+    setUpdatedCouponCode("");
+
+    dispatch({ type: SET_COUPON_ERROR, payload: "" });
+
+    dispatch({
+      type: SHOW_COUPON_FIELD,
+      payload: false
+    });
+
+    dispatch({
+      type: SET_COUPON,
+      payload: null
+    });
+
+    dispatch({
+      type: SET_PERCENT_OFF,
+      payload: ""
+    });
+
+    dispatch({
+      type: SET_UPDATED_PRICE,
+      payload: null
+    });
+
+    dispatch({
+      type: SET_TAX_AMOUNT,
+      payload: null
+    });
+
+    const { currentPlan } = state;
+
+    if (currentPlan) {
+      const quantity = currentPlan.quantity ?? 1;
+      const price = currentPlan.amount;
+
+      dispatch({
+        type: SET_UPDATED_PRICE,
+        // set original plan price
+        payload: price * quantity
+      });
+      dispatch({ type: UPDATE_PAYMENT_REQUEST });
+
+      // update the new amount with taxes if site has taxes enabled
+      updateTotalAmountWithTax();
+    }
+  };
+
+  /**
+   * Resolves with the total & tax amount incase taxes enabled by site
+   * @return {Promise}
+   */
+  const resolveTaxCalculation = () => {
+    if (type === "invoicePayment") {
+      return new Promise((resolve) => resolve());
+    }
+
+    const taxesEnabled = window.Pelcro.site.read()?.taxes_enabled;
+
+    return new Promise((resolve, reject) => {
+      // resolve early if taxes isn't enabled
+      if (!taxesEnabled) {
+        return resolve(null);
+      }
+
+      window.Pelcro.order.create(
+        {
+          auth_token: window.Pelcro.user.read().auth_token,
+          plan_id: plan.id,
+          campaign_key:
+            window.Pelcro.helpers.getURLParameter("campaign_key"),
+          coupon_code: state?.couponCode,
+          address_id: selectedAddressId
+        },
+        (error, res) => {
+          if (error) {
+            return reject(error);
+          }
+
+          const taxAmount = res.data?.taxes;
+          const totalAmountWithTax = res.data?.total;
+          resolve({ totalAmountWithTax, taxAmount });
+        }
+      );
+    });
+  };
+  /* ====== General Functions End ======== */
 
   const [state, dispatch] = useReducerWithSideEffects(
     (state, action) => {
@@ -2750,16 +2802,47 @@ const PaymentMethodContainerWithoutStripe = ({
   );
 };
 
-const UnwrappedForm = injectStripe(
-  PaymentMethodContainerWithoutStripe
-);
-
 const PaymentMethodContainer = (props) => {
   const [isStripeLoaded, setIsStripeLoaded] = useState(
     Boolean(window.Stripe)
   );
   const { whenUserReady } = usePelcro.getStore();
   const cardProcessor = getSiteCardProcessor();
+
+  // Create the Stripe object
+  const stripePromise =
+    cardProcessor === "stripe"
+      ? loadStripe(window.Pelcro.environment.stripe, {
+          stripeAccount: window.Pelcro.site.read().account_id
+        })
+      : null;
+  const [clientSecret, setClientSecret] = useState();
+  const appearance = {
+    theme: "stripe"
+  };
+
+  const options = {
+    clientSecret,
+    paymentMethodCreation: "manual",
+    appearance,
+    loader: "always"
+  };
+
+  useEffect(() => {
+    if (isStripeLoaded) {
+      window.Pelcro.user.createPaymentIntent(
+        { auth_token: window.Pelcro.user.read().auth_token },
+        (err, res) => {
+          if (err) {
+            console.error(err);
+          }
+          if (res) {
+            setClientSecret(res.data.client_secret);
+          }
+        }
+      );
+    }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     whenUserReady(() => {
@@ -2771,19 +2854,22 @@ const PaymentMethodContainer = (props) => {
           });
       }
     });
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (isStripeLoaded) {
     return (
-      <StripeProvider
-        apiKey={window.Pelcro.environment.stripe}
-        stripeAccount={window.Pelcro.site.read().account_id}
-        locale={getPageOrDefaultLanguage()}
-      >
-        <Elements>
-          <UnwrappedForm store={store} {...props} />
-        </Elements>
-      </StripeProvider>
+      <div>
+        {clientSecret ? (
+          <Elements options={options} stripe={stripePromise}>
+            <PaymentMethodContainerWithoutStripe
+              store={store}
+              {...props}
+            />
+          </Elements>
+        ) : (
+          <Loader />
+        )}
+      </div>
     );
   } else if (cardProcessor !== "stripe") {
     return (

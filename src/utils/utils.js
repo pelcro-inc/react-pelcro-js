@@ -168,6 +168,17 @@ export const userHasAddress = () => {
   return addresses.length > 0;
 };
 
+/** check wether or not the user have any billing addresses
+ * @return {boolean} true if the user have at least one billing address, false otherwise
+ */
+export const userHasBillingAddress = () => {
+  const addresses = window.Pelcro.user.read()?.addresses ?? [];
+  const billingAddresses = addresses.filter(
+    (address) => address.type == "billing"
+  );
+  return billingAddresses.length > 0;
+};
+
 export const calcAndFormatItemsTotal = (items, currency) => {
   if (!Array.isArray(items)) return;
 
@@ -461,6 +472,18 @@ export const getPaymentCardIcon = (name) => {
         <path
           fill="#FFF"
           d="M22.255 20l-2.113 4.683L18.039 20h-2.695v6.726L12.341 20h-2.274L7 26.981h1.815l.671-1.558h3.432l.682 1.558h3.465v-5.185l2.299 5.185h1.563l2.351-5.095v5.095H25V20H22.255zM10.135 23.915l1.026-2.44 1.066 2.44H10.135zM37.883 23.413L41 20.018h-2.217l-1.994 2.164L34.86 20H28v6.982h6.635l2.092-2.311L38.767 27h2.21L37.883 23.413zM33.728 25.516h-4.011v-1.381h3.838v-1.323h-3.838v-1.308l4.234.012 1.693 1.897L33.728 25.516z"
+        />
+      </svg>
+    ),
+    bacs_debit: (
+      <svg
+        className="plc-w-12 plc-text-gray-500"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 512 512"
+      >
+        <path
+          fill="currentColor"
+          d="M243.4 2.6l-224 96c-14 6-21.8 21-18.7 35.8S16.8 160 32 160v8c0 13.3 10.7 24 24 24H456c13.3 0 24-10.7 24-24v-8c15.2 0 28.3-10.7 31.3-25.6s-4.8-29.9-18.7-35.8l-224-96c-8-3.4-17.2-3.4-25.2 0zM128 224H64V420.3c-.6 .3-1.2 .7-1.8 1.1l-48 32c-11.7 7.8-17 22.4-12.9 35.9S17.9 512 32 512H480c14.1 0 26.5-9.2 30.6-22.7s-1.1-28.1-12.9-35.9l-48-32c-.6-.4-1.2-.7-1.8-1.1V224H384V416H344V224H280V416H232V224H168V416H128V224zM256 64a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"
         />
       </svg>
     )

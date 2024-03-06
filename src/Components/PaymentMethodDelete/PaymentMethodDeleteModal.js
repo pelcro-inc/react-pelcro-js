@@ -8,7 +8,8 @@ import {
 } from "../../SubComponents/Modal";
 import ReactGA from "react-ga";
 import ReactGA4 from "react-ga4";
-import { usePelcro, notify } from "../../components";
+import { notify } from "../../SubComponents/Notification";
+import { usePelcro } from "../../hooks/usePelcro";
 import { useTranslation } from "react-i18next";
 
 export const PaymentMethodDeleteModal = (props) => {
