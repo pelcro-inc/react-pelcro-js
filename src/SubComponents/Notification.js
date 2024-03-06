@@ -17,6 +17,7 @@ export const Notification = ({ children, ...otherProps }) => {
   return (
     <Toaster
       containerClassName="pelcro-notification-container"
+      containerStyle={{ zIndex: 9999999 }}
       toastOptions={{
         success: {
           className: "pelcro-notification-success",
@@ -102,13 +103,13 @@ toast.confirm = (
         <div className="plc-space-y-2 sm:plc-space-y-0 sm:plc-space-x-2">
           <Button
             variant="solid"
-            className="plc-text-xs plc-bg-red-500 hover:plc-bg-red-600"
+            className="plc-text-xs plc-bg-red-500 hover:plc-bg-red-600 plc-min-h-0"
             onClick={onConfirmClick}
           >
             {confirmButtonLabel ?? translations.labels.confirm}
           </Button>
           <Button
-            className="plc-text-xs"
+            className="plc-text-xs plc-min-h-0"
             variant="outline"
             onClick={() => toast.dismiss(t.id)}
           >
