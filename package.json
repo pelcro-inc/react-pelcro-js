@@ -77,8 +77,8 @@
     "postcss-import": "^14.0.0",
     "postcss-loader": "4.2.0",
     "prettier": "2.3.1",
-    "react": "^16.6.1",
-    "react-dom": "^16.6.1",
+    "react": "16.8.0",
+    "react-dom": "16.8.0",
     "react-ga": "^2.7.0",
     "react-refresh": "^0.9.0",
     "react-test-renderer": "^17.0.2",
@@ -101,7 +101,8 @@
   },
   "dependencies": {
     "@headlessui/react": "^0.3.0",
-    "@stripe/stripe-js": "^1.21.1",
+    "@stripe/react-stripe-js": "^2.5.0",
+    "@stripe/stripe-js": "^3.0.4",
     "gapi-script": "^1.2.0",
     "i18next": "^19.1.0",
     "react-easy-crop": "^3.3.2",
@@ -112,7 +113,6 @@
     "react-i18next": "^11.3.3",
     "react-qr-code": "^2.0.7",
     "react-slick": "^0.29.0",
-    "react-stripe-elements": "^6.1.2",
     "use-reducer-with-side-effects": "^2.2.0",
     "zustand": "^3.4.2"
   },
