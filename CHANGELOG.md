@@ -1,3 +1,17 @@
+# [4.0.0-alpha.56](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.55...v4.0.0-alpha.56) (2024-03-07)
+
+
+### Bug Fixes
+
+* lexical scope bug fix ([3477d3b](https://github.com/pelcro-inc/react-pelcro-js/commit/3477d3b0e2d10a35e13db2480d3e4d58761556a3))
+* notification display issue fix ([923961f](https://github.com/pelcro-inc/react-pelcro-js/commit/923961fe209548e8eab10b29b577d3d029b51c10))
+* subs action bug fix ([8f5705d](https://github.com/pelcro-inc/react-pelcro-js/commit/8f5705d94a18a1a513c88b1385186abaa097a69f))
+
+
+### Features
+
+* upgrade stripe and implement bacs ([38a6074](https://github.com/pelcro-inc/react-pelcro-js/commit/38a6074a296c1c38fc9910d4a0b4b02e93ad1288))
+
 # [4.0.0-alpha.55](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.54...v4.0.0-alpha.55) (2024-02-02)
 
 
