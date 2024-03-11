@@ -2830,7 +2830,7 @@ const PaymentMethodContainer = (props) => {
 
   useEffect(() => {
     if (isStripeLoaded) {
-      window.Pelcro.user.createPaymentIntent(
+      window.Pelcro.user.createSetupIntent(
         { auth_token: window.Pelcro.user.read().auth_token },
         (err, res) => {
           if (err) {
