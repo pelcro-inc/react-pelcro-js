@@ -1,3 +1,10 @@
+# [4.0.0-alpha.57](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.56...v4.0.0-alpha.57) (2024-03-11)
+
+
+### Features
+
+* change payment intent to setup intent ([ed11ff8](https://github.com/pelcro-inc/react-pelcro-js/commit/ed11ff82241b15f1922fe320ede5be9f56c9a003))
+
 # [4.0.0-alpha.56](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.55...v4.0.0-alpha.56) (2024-03-07)
 
 
