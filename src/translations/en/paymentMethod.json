@@ -27,6 +27,6 @@
   },
   "create": {
     "title": "Add a new payment method",
-    "subtitle": "Enter the fields below to add your credit card information"
+    "subtitle": "Enter the fields below to add your payment method information"
   }
 }
