@@ -1,3 +1,10 @@
+# [4.0.0-alpha.58](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.57...v4.0.0-alpha.58) (2024-03-11)
+
+
+### Features
+
+* text amends ([252803b](https://github.com/pelcro-inc/react-pelcro-js/commit/252803b7e57aef0de38aba535e41b86be8b6e651))
+
 # [4.0.0-alpha.57](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.56...v4.0.0-alpha.57) (2024-03-11)
 
 
