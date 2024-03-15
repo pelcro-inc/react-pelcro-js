@@ -1,3 +1,15 @@
+# [4.0.0-alpha.59](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.58...v4.0.0-alpha.59) (2024-03-15)
+
+
+### Bug Fixes
+
+* export select billing address action type ([63450ca](https://github.com/pelcro-inc/react-pelcro-js/commit/63450ca6f70271a1f9ac2871da74dff3934d853f))
+
+
+### Features
+
+* chnage bacs billing address logic ([7c8123c](https://github.com/pelcro-inc/react-pelcro-js/commit/7c8123cf5d5da365c4aca1bd99270a0304d368c9))
+
 # [4.0.0-alpha.58](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.57...v4.0.0-alpha.58) (2024-03-11)
 
 
