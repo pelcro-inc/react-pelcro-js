@@ -49,6 +49,7 @@ export { MeterView } from "./Components/Meter/MeterView";
 export { PaymentMethodContainer } from "./Components/PaymentMethod/PaymentMethodContainer";
 export { PaymentMethodView } from "./Components/PaymentMethod/PaymentMethodView";
 export { SelectedPaymentMethod } from "./Components/PaymentMethod/SelectedPaymentMethod";
+export { SelectedAddress } from "./Components/PaymentMethod/SelectedAddress";
 export { ApplyCouponButton } from "./Components/PaymentMethod/ApplyCouponButton";
 export { CouponCode } from "./Components/PaymentMethod/CouponCode";
 export { BankRedirection } from "./Components/PaymentMethod/BankRedirection";
@@ -82,6 +83,7 @@ export { UserUpdateProfilePic } from "./Components/UserUpdate/UserUpdateProfileP
 export { UserUpdateTin } from "./Components/UserUpdate/UserUpdateTin";
 export { AddressCreateContainer } from "./Components/AddressCreate/AddressCreateContainer";
 export { AddressCreateModal } from "./Components/AddressCreate/AddressCreateModal";
+export { BillingAddressCreateModal } from "./Components/AddressCreate/BillingAddressCreateModal";
 export { AddressCreateSubmit } from "./Components/AddressCreate/AddressCreateSubmit";
 export { AddressCreateFirstName } from "./Components/AddressCreate/AddressCreateFirstName";
 export { AddressCreateLastName } from "./Components/AddressCreate/AddressCreateLastName";
@@ -109,6 +111,7 @@ export { AddressUpdateLine2 } from "./Components/AddressUpdate/AddressUpdateLine
 export { AddressUpdateCity } from "./Components/AddressUpdate/AddressUpdateCity";
 export { AddressUpdatePostalCode } from "./Components/AddressUpdate/AddressUpdatePostalCode";
 export { AddressUpdateModal } from "./Components/AddressUpdate/AddressUpdateModal";
+export { BillingAddressUpdateModal } from "./Components/AddressUpdate/BillingAddressUpdateModal";
 export { AddressUpdateStateSelect } from "./Components/AddressUpdate/AddressUpdateStateSelect";
 export { AddressUpdateSubmit } from "./Components/AddressUpdate/AddressUpdateSubmit";
 export { AddressUpdateTextInput } from "./Components/AddressUpdate/AddressUpdateTextInput";
@@ -184,6 +187,7 @@ export { GiftRedeemSubmitButton } from "./Components/GiftRedeem/GiftRedeemSubmit
 
 export { AddressSelectContainer } from "./Components/AddressSelect/AddressSelectContainer";
 export { AddressSelectModal } from "./Components/AddressSelect/AddressSelectModal";
+export { BillingAddressSelectModal } from "./Components/AddressSelect/BillingAddressSelectModal";
 export { AddressSelectSubmit } from "./Components/AddressSelect/AddressSelectSubmit";
 export { AddressSelectList } from "./Components/AddressSelect/AddressSelectList";
 export { AddressSelectView } from "./Components/AddressSelect/AddressSelectView";

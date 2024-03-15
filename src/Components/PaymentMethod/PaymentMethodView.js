@@ -29,9 +29,10 @@ import {
 } from "../../utils/utils";
 import { ApplePayButton } from "../ApplePayButton/ApplePayButton";
 import { PaymentMethodUpdateSetDefault } from "../PaymentMethodUpdate/PaymentMethodUpdateSetDefault";
+import { SelectedAddress } from "./SelectedAddress";
 
 /**
- *
+ *@return {paymentMethodView}
  */
 export function PaymentMethodView({
   onSuccess,
@@ -134,6 +135,8 @@ export function PaymentMethodView({
             <div>
               <BankRedirection />
               <BankAuthenticationSuccess />
+              {/* TODO: display selected address only if stripe BACS is enabled */}
+              <SelectedAddress type={type} />
               <SelectedPaymentMethod />
 
               {supportsTap &&

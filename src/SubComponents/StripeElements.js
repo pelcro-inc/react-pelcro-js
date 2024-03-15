@@ -55,25 +55,10 @@ export const CheckoutForm = ({ type }) => {
     usePelcro();
   const cardProcessor = getSiteCardProcessor();
 
-  const defaultAddress =
-    window?.Pelcro?.user
-      ?.read()
-      ?.addresses?.find(
-        (address) => address.type == "billing" && address.is_default
-      ) ?? [];
-
   const billingDetails = {
     name: window?.Pelcro?.user?.read()?.name,
     email: window?.Pelcro?.user?.read()?.email,
-    phone: window?.Pelcro?.user?.read()?.phone,
-    address: {
-      line1: defaultAddress?.line1 ?? null,
-      line2: defaultAddress?.line2 ?? null,
-      city: defaultAddress?.city ?? null,
-      state: defaultAddress?.state ?? null,
-      country: defaultAddress?.country ?? null,
-      postal_code: defaultAddress?.postal_code ?? null
-    }
+    phone: window?.Pelcro?.user?.read()?.phone
   };
 
   const paymentElementOptions = {
@@ -83,6 +68,14 @@ export const CheckoutForm = ({ type }) => {
     },
     defaultValues: {
       billingDetails: billingDetails
+    },
+    fields: {
+      billingDetails: {
+        name: "auto",
+        email: "auto",
+        phone: "auto",
+        address: "never"
+      }
     },
     terms: {
       applePay: "never",

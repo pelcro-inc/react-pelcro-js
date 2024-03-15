@@ -29,7 +29,7 @@ export const PaymentMethodSelectList = () => {
         return (
           <div
             key={paymentMethod.id}
-            className={`plc-p-2 plc-pl-4 plc-shadow-md plc-text-gray-900 plc-rounded pelcro-payment-method-wrapper ${
+            className={`plc-p-2 plc-pl-4 plc-shadow-md plc-text-gray-900 plc-rounded plc-min-h-14 plc-flex plc-items-center pelcro-payment-method-wrapper ${
               isSelected
                 ? "plc-ring-2 plc-ring-primary-400"
                 : "plc-ring-1 plc-ring-gray-200"

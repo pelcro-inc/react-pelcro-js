@@ -18,7 +18,11 @@
       "dec": "December"
     },
     "checkout": {
-      "title": "Payment Information"
+      "title": "Payment Information",
+      "billingAddress": "Billing Address",
+      "NoBillingAddress": "No Billing Address Found",
+      "changeBillingAddress": "Change",
+      "addNewAddress": "Add New Address"
     }
   },
   "messages": {

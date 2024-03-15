@@ -40,6 +40,7 @@ export const initialState = {
   isAuthenticated: () => window.Pelcro.user.isAuthenticated(),
   selectedPaymentMethodId: null,
   selectedAddressId: null,
+  selectedBillingAddressId: null,
   addressIdToEdit: null
 };
 

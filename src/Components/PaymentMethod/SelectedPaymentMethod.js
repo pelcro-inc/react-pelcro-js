@@ -22,7 +22,7 @@ export const SelectedPaymentMethod = () => {
     selectedPaymentMethodId && (
       <div
         key={paymentMethod.id}
-        className="plc-px-2 plc-my-2 plc-text-gray-900 plc-rounded plc-shadow-md plc-ring-2 plc-ring-primary-400 pelcro-payment-method-wrapper"
+        className="plc-p-4 plc-my-4 plc-text-gray-900 plc-rounded plc-shadow-md_dark pelcro-payment-method-wrapper"
       >
         <div
           className="plc-flex plc-items-center plc-px-1"

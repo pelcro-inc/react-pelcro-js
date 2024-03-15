@@ -7,11 +7,16 @@ import { useTranslation } from "react-i18next";
 export const AddressSelectSubmit = ({
   name,
   onClick,
+  type = "shipping",
   ...otherProps
 }) => {
   const {
     dispatch,
-    state: { selectedAddressId, isSubmitting }
+    state: {
+      selectedAddressId,
+      isSubmitting,
+      selectedBillingAddressId
+    }
   } = useContext(store);
 
   const { t } = useTranslation("address");
@@ -23,9 +28,13 @@ export const AddressSelectSubmit = ({
         onClick?.();
       }}
       disabled={
-        selectedAddressId === "undefined" ||
-        selectedAddressId === null ||
-        !selectedAddressId
+        type == "shipping"
+          ? selectedAddressId === "undefined" ||
+            selectedAddressId === null ||
+            !selectedAddressId
+          : selectedBillingAddressId === "undefined" ||
+            selectedBillingAddressId === null ||
+            !selectedBillingAddressId
       }
       isLoading={isSubmitting}
       {...otherProps}
