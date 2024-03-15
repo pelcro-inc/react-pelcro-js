@@ -112,7 +112,7 @@ const AddressCreateContainer = ({
     };
 
     getCountries();
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const submitAddress = (
     {
@@ -187,7 +187,9 @@ const AddressCreateContainer = ({
         }
 
         if (product || order) {
-          set({ selectedAddressId: newAddressId });
+          type == "shipping"
+            ? set({ selectedAddressId: newAddressId })
+            : set({ selectedBillingAddressId: newAddressId });
         }
 
         if (!giftCode) {
@@ -337,7 +339,7 @@ const AddressCreateContainer = ({
     if (state.country) {
       getStates();
     }
-  }, [state.country]);
+  }, [state.country]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div

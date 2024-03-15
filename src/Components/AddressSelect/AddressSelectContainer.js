@@ -11,26 +11,40 @@ import {
   LOADING,
   LOAD_ADDRESSES,
   SELECT_ADDRESS,
+  SELECT_BILLING_ADDRESS,
   SHOW_ALERT
 } from "../../utils/action-types";
 import { getErrorMessages } from "../common/Helpers";
 
-const getDefaultAddress = (addresses) => {
-  return addresses.find((address) => address.is_default) || false;
-};
-
-const moveDefaultAddressToStart = (addresses) => {
-  const defaultAddress = getDefaultAddress(addresses);
-  const addressesWithoutDefault = addresses.filter(
-    (address) => !address.is_default
+const getDefaultShippingAddress = (addresses) => {
+  return (
+    addresses.find(
+      (address) => address.type == "shipping" && address.is_default
+    ) || false
   );
-
-  return [defaultAddress, ...addressesWithoutDefault];
 };
+
+const getDefaultBillingAddress = (addresses) => {
+  return (
+    addresses.find(
+      (address) => address.type == "billing" && address.is_default
+    ) || false
+  );
+};
+
+// const moveDefaultAddressToStart = (addresses) => {
+//   const defaultAddress = getDefaultAddress(addresses);
+//   const addressesWithoutDefault = addresses.filter(
+//     (address) => !address.is_default
+//   );
+
+//   return [defaultAddress, ...addressesWithoutDefault];
+// };
 
 const initialState = {
   addresses: [],
   selectedAddressId: null,
+  selectedBillingAddressId: null,
   isSubmitting: false,
   alert: {
     type: "error",
@@ -43,6 +57,7 @@ const { Provider } = store;
 const AddressSelectContainer = ({
   style,
   className = "",
+  type = "shipping",
   onGiftRedemptionSuccess = () => {},
   onMembershipAdressUpdateSuccess = () => {},
   onSuccess = () => {},
@@ -126,6 +141,15 @@ const AddressSelectContainer = ({
     onSuccess(selectedAddressId);
   };
 
+  const submitBillingAddress = (
+    { selectedBillingAddressId },
+    dispatch
+  ) => {
+    set({ selectedBillingAddressId });
+
+    onSuccess(selectedBillingAddressId);
+  };
+
   const [state, dispatch] = useReducerWithSideEffects(
     (state, action) => {
       switch (action.type) {
@@ -135,18 +159,36 @@ const AddressSelectContainer = ({
             selectedAddressId: action.payload
           });
 
+        case SELECT_BILLING_ADDRESS:
+          return Update({
+            ...state,
+            selectedBillingAddressId: action.payload
+          });
+
         case LOAD_ADDRESSES:
-          if (!getDefaultAddress) {
+          if (!getDefaultShippingAddress) {
             return switchView("address-select");
+          } else if (!getDefaultBillingAddress) {
+            return switchView("billing-address-select");
           } else {
-            return Update({
-              ...state,
-              addresses: moveDefaultAddressToStart(action.payload),
-              selectedAddressId: String(
-                selectedMembership?.address_id ??
-                  getDefaultAddress(action.payload).id
-              )
-            });
+            if (type == "shipping") {
+              return Update({
+                ...state,
+                addresses: action.payload,
+                selectedAddressId: String(
+                  selectedMembership?.address_id ??
+                    getDefaultShippingAddress(action.payload).id
+                )
+              });
+            } else {
+              return Update({
+                ...state,
+                addresses: action.payload,
+                selectedBillingAddressId: String(
+                  getDefaultBillingAddress(action.payload).id
+                )
+              });
+            }
           }
 
         case SHOW_ALERT:
@@ -164,7 +206,10 @@ const AddressSelectContainer = ({
         case HANDLE_SUBMIT:
           return UpdateWithSideEffect(
             { ...state, isSubmitting: true },
-            (state, dispatch) => submitAddress(state, dispatch)
+            (state, dispatch) =>
+              type == "shipping"
+                ? submitAddress(state, dispatch)
+                : submitBillingAddress(state, dispatch)
           );
 
         default:
@@ -179,7 +224,7 @@ const AddressSelectContainer = ({
       type: LOAD_ADDRESSES,
       payload: window.Pelcro.user.read().addresses ?? []
     });
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div

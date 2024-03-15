@@ -622,6 +622,7 @@ module.exports = {
       0: "0px",
       6: "1rem",
       12: "3rem",
+      14: "5rem",
       16: "6rem",
       18: "7rem",
       20: "8rem",

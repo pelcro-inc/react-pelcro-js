@@ -17,7 +17,7 @@ export const AddressSelectView = (props) => {
       >
         <AddressSelectContainer {...props}>
           <AlertWithContext />
-          <AddressSelectList />
+          <AddressSelectList type={props.type} />
           <div className="plc-flex plc-justify-center plc-mt-4">
             <Link
               id="pelcro-add-address"
@@ -28,6 +28,7 @@ export const AddressSelectView = (props) => {
             </Link>
           </div>
           <AddressSelectSubmit
+            type={props.type}
             role="submit"
             className="plc-mt-4 plc-w-full"
             name={t("buttons.selectAddress")}

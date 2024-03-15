@@ -68,7 +68,6 @@ import {
 } from "../../services/Subscription/Payment.service";
 import { usePelcro } from "../../hooks/usePelcro";
 import { Loader } from "../../SubComponents/Loader";
-import { userHasBillingAddress } from "../../utils/utils";
 
 /**
  * @typedef {Object} PaymentStateType
@@ -155,6 +154,9 @@ const PaymentMethodContainerWithoutStripe = ({
     props.subscriptionIdToRenew ?? pelcroStore.subscriptionIdToRenew;
   const selectedAddressId =
     props.selectedAddressId ?? pelcroStore.selectedAddressId;
+  const selectedBillingAddressId =
+    props.selectedBillingAddressId ??
+    pelcroStore.selectedBillingAddressId;
   const giftRecipient =
     props.giftRecipient ?? pelcroStore.giftRecipient;
   const isGift = props.isGift ?? pelcroStore.isGift;
@@ -1299,6 +1301,42 @@ const PaymentMethodContainerWithoutStripe = ({
 
   /* ====== Start Stripe integration ======== */
 
+  // useEffect(() => {
+  //   if (!selectedBillingAddressId) {
+  //     const defaultAddress = window?.Pelcro?.user
+  //       ?.read()
+  //       ?.addresses?.find(
+  //         (address) => address.type == "billing" && address.is_default
+  //       );
+  //     if (defaultAddress) {
+  //       set({ selectedBillingAddressId: defaultAddress.id });
+  //     }
+  //   }
+  // }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const billingAddress = selectedBillingAddressId
+    ? window?.Pelcro?.user
+        ?.read()
+        ?.addresses?.find(
+          (address) => address.id == selectedBillingAddressId
+        ) ?? {}
+    : window?.Pelcro?.user
+        ?.read()
+        ?.addresses?.find(
+          (address) => address.type == "billing" && address.is_default
+        ) ?? {};
+
+  const billingDetails = {
+    address: {
+      line1: billingAddress?.line1 ?? null,
+      line2: billingAddress?.line2 ?? null,
+      city: billingAddress?.city ?? null,
+      state: billingAddress?.state ?? null,
+      country: billingAddress?.country ?? null,
+      postal_code: billingAddress?.postal_code ?? null
+    }
+  };
+
   const initPaymentRequest = (state, dispatch) => {
     if (skipPayment && (plan?.amount === 0 || props?.freeOrders))
       return;
@@ -1750,59 +1788,60 @@ const PaymentMethodContainerWithoutStripe = ({
       return;
     }
 
-    return stripe.createPaymentMethod({ elements }).then((result) => {
-      if (result.error) {
-        return handlePaymentError(result.error);
-      }
+    return stripe
+      .createPaymentMethod({
+        elements,
+        params: {
+          billing_details: billingDetails
+        }
+      })
+      .then((result) => {
+        if (result.error) {
+          return handlePaymentError(result.error);
+        }
 
-      if (result.paymentMethod) {
-        console.log(result.paymentMethod);
-        window.Pelcro.paymentMethods.create(
-          {
-            auth_token: window.Pelcro.user.read().auth_token,
-            token: result.paymentMethod.id
-          },
-          (err, res) => {
-            if (err) {
-              dispatch({ type: DISABLE_SUBMIT, payload: false });
-              dispatch({ type: LOADING, payload: false });
-              onFailure(err);
-              return dispatch({
-                type: SHOW_ALERT,
-                payload: {
-                  type: "error",
-                  content: getErrorMessages(err)
-                }
-              });
-            }
+        if (result.paymentMethod) {
+          window.Pelcro.paymentMethods.create(
+            {
+              auth_token: window.Pelcro.user.read().auth_token,
+              token: result.paymentMethod.id
+            },
+            (err, res) => {
+              if (err) {
+                dispatch({ type: DISABLE_SUBMIT, payload: false });
+                dispatch({ type: LOADING, payload: false });
+                onFailure(err);
+                return dispatch({
+                  type: SHOW_ALERT,
+                  payload: {
+                    type: "error",
+                    content: getErrorMessages(err)
+                  }
+                });
+              }
 
-            if (result.paymentMethod.type == "bacs_debit") {
-              createBillingAddress(
-                result.paymentMethod.billing_details
-              );
+              if (
+                res.data?.setup_intent?.status ===
+                  "requires_action" ||
+                res.data?.setup_intent?.status ===
+                  "requires_confirmation"
+              ) {
+                confirmStripeIntentSetup(res, "create");
+              } else {
+                dispatch({ type: LOADING, payload: false });
+                dispatch({
+                  type: SHOW_ALERT,
+                  payload: {
+                    type: "success",
+                    content: t("messages.sourceCreated")
+                  }
+                });
+                onSuccess(res);
+              }
             }
-
-            if (
-              res.data?.setup_intent?.status === "requires_action" ||
-              res.data?.setup_intent?.status ===
-                "requires_confirmation"
-            ) {
-              confirmStripeIntentSetup(res, "create");
-            } else {
-              dispatch({ type: LOADING, payload: false });
-              dispatch({
-                type: SHOW_ALERT,
-                payload: {
-                  type: "success",
-                  content: t("messages.sourceCreated")
-                }
-              });
-              onSuccess(res);
-            }
-          }
-        );
-      }
-    });
+          );
+        }
+      });
   };
 
   const updatePaymentSource = (state, dispatch) => {
@@ -1859,77 +1898,80 @@ const PaymentMethodContainerWithoutStripe = ({
       return;
     }
 
-    return stripe.createPaymentMethod({ elements }).then((result) => {
-      if (result.error) {
-        return handlePaymentError(result.error);
-      }
+    return stripe
+      .createPaymentMethod({
+        elements,
+        params: {
+          billing_details: billingDetails
+        }
+      })
+      .then((result) => {
+        if (result.error) {
+          return handlePaymentError(result.error);
+        }
 
-      if (result.paymentMethod) {
-        window.Pelcro.paymentMethods.create(
-          {
-            auth_token: window.Pelcro.user.read().auth_token,
-            token: result.paymentMethod.id
-          },
-          (err, res) => {
-            if (err) {
-              onFailure(err);
-              return dispatch({
-                type: SHOW_ALERT,
-                payload: {
-                  type: "error",
-                  content: getErrorMessages(err)
-                }
-              });
-            }
-
-            if (result.paymentMethod.type == "bacs_debit") {
-              createBillingAddress(
-                result.paymentMethod.billing_details
-              );
-            }
-
-            if (
-              res.data?.setup_intent?.status === "requires_action" ||
-              res.data?.setup_intent?.status ===
-                "requires_confirmation"
-            ) {
-              confirmStripeIntentSetup(
-                res,
-                "replace",
-                paymentMethodId
-              );
-            } else {
-              setTimeout(() => {
-                window.Pelcro.paymentMethods.deletePaymentMethod(
-                  {
-                    auth_token: window.Pelcro.user.read().auth_token,
-                    payment_method_id: paymentMethodId
-                  },
-                  (err, res) => {
-                    dispatch({
-                      type: DISABLE_SUBMIT,
-                      payload: false
-                    });
-                    dispatch({ type: LOADING, payload: false });
-                    if (err) {
-                      onFailure?.(err);
-                      return dispatch({
-                        type: SHOW_ALERT,
-                        payload: {
-                          type: "error",
-                          content: getErrorMessages(err)
-                        }
-                      });
-                    }
-                    onSuccess(res);
+        if (result.paymentMethod) {
+          window.Pelcro.paymentMethods.create(
+            {
+              auth_token: window.Pelcro.user.read().auth_token,
+              token: result.paymentMethod.id
+            },
+            (err, res) => {
+              if (err) {
+                onFailure(err);
+                return dispatch({
+                  type: SHOW_ALERT,
+                  payload: {
+                    type: "error",
+                    content: getErrorMessages(err)
                   }
+                });
+              }
+
+              if (
+                res.data?.setup_intent?.status ===
+                  "requires_action" ||
+                res.data?.setup_intent?.status ===
+                  "requires_confirmation"
+              ) {
+                confirmStripeIntentSetup(
+                  res,
+                  "replace",
+                  paymentMethodId
                 );
-              }, 2000);
+              } else {
+                setTimeout(() => {
+                  window.Pelcro.paymentMethods.deletePaymentMethod(
+                    {
+                      auth_token:
+                        window.Pelcro.user.read().auth_token,
+                      payment_method_id: paymentMethodId
+                    },
+                    (err, res) => {
+                      dispatch({
+                        type: DISABLE_SUBMIT,
+                        payload: false
+                      });
+                      dispatch({ type: LOADING, payload: false });
+                      if (err) {
+                        onFailure?.(err);
+                        return dispatch({
+                          type: SHOW_ALERT,
+                          payload: {
+                            type: "error",
+                            content: getErrorMessages(err)
+                          }
+                        });
+                      }
+                      onSuccess(res);
+                    }
+                  );
+                }, 2000);
+              }
             }
-          }
-        );
-      }
-    });
+          );
+        }
+      });
   };
 
   const updatePaymentRequest = (state) => {
@@ -1974,17 +2016,17 @@ const PaymentMethodContainerWithoutStripe = ({
     }
 
     stripe
-      .createPaymentMethod({ elements })
+      .createPaymentMethod({
+        elements,
+        params: {
+          billing_details: billingDetails
+        }
+      })
       .then((result) => {
         if (result.error) {
           return handlePaymentError(result.error);
         }
         if (result.paymentMethod) {
-          if (result.paymentMethod.type == "bacs_debit") {
-            createBillingAddress(
-              result.paymentMethod.billing_details
-            );
-          }
           return handlePayment(result.paymentMethod);
         }
       })
@@ -2031,40 +2073,6 @@ const PaymentMethodContainerWithoutStripe = ({
     });
     dispatch({ type: DISABLE_SUBMIT, payload: false });
     dispatch({ type: LOADING, payload: false });
-  };
-
-  const createBillingAddress = (billingDetails) => {
-    const hasBillingAddress = userHasBillingAddress();
-
-    if (hasBillingAddress) return;
-
-    const { name, address } = billingDetails;
-    const [firstName, lastName] = name ? name?.split(" ") : [];
-
-    window.Pelcro.address.create(
-      {
-        auth_token: window.Pelcro.user.read().auth_token,
-        type: "billing",
-        first_name: firstName,
-        last_name: lastName,
-        line1: address?.line1,
-        line2: address?.line2,
-        city: address?.city,
-        state: address?.state,
-        country: address?.country,
-        postal_code: address?.postal_code,
-        is_default: true
-      },
-      (err, res) => {
-        if (err) {
-          console.error(err);
-        }
-
-        if (res) {
-          console.log(res);
-        }
-      }
-    );
   };
 
   // TODO: Refactor deprecated stripe implementation

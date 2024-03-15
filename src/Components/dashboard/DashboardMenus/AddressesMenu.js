@@ -20,9 +20,16 @@ export const AddressesMenu = (props) => {
   };
 
   const displayAddressEdit = (e) => {
-    const address = e.currentTarget.dataset.key;
-    set({ addressIdToEdit: address });
-    return switchView("address-edit");
+    const addressId = e.currentTarget.dataset.key;
+    const addressType = e.currentTarget.dataset.type;
+    set({ addressIdToEdit: addressId });
+    if (addressType === "shipping") {
+      return switchView("address-edit");
+    }
+
+    if (addressType === "billing") {
+      return switchView("billing-address-edit");
+    }
   };
 
   return (
@@ -47,69 +54,92 @@ export const AddressesMenu = (props) => {
 
 const AddressesItems = (props) => {
   const { t } = useTranslation("dashboard");
-  const [selectedAddressId, setSelectedAddressId] = useState(null);
-  const allAddresses = window.Pelcro.user.read().addresses ?? [];
+  // const [selectedAddressId, setSelectedAddressId] = useState(null);
+  const addresses = window.Pelcro.user.read().addresses ?? [];
 
-  useEffect(() => {
-    setSelectedAddressId(String(getDefaultAddress(addresses)?.id));
-  }, []);
+  // useEffect(() => {
+  //   setSelectedAddressId(
+  //     String(getDefaultShippingAddress(addresses)?.id)
+  //   );
+  // }, []);
 
-  const getDefaultAddress = (addresses) => {
-    return addresses.find((address) => address.is_default) || false;
-  };
+  // const getDefaultShippingAddress = (addresses) => {
+  //   return (
+  //     addresses.find(
+  //       (address) => address.type == "shipping" && address.is_default
+  //     ) || false
+  //   );
+  // };
 
-  const moveDefaultAddressToStart = (addresses) => {
-    const defaultAddress = getDefaultAddress(addresses);
-    const addressesWithoutDefault = addresses.filter(
-      (address) => !address.is_default
-    );
+  // const getDefaultBillingAddress = (addresses) => {
+  //   return (
+  //     addresses.find(
+  //       (address) => address.type == "billing" && address.is_default
+  //     ) || false
+  //   );
+  // };
 
-    return [defaultAddress, ...addressesWithoutDefault];
-  };
+  // const moveDefaultAddressToStart = (addresses) => {
+  //   const defaultShippingAddress =
+  //     getDefaultShippingAddress(addresses);
+  //   const defaultBillingAddress = getDefaultBillingAddress(addresses);
+  //   const addressesWithoutDefault = addresses.filter(
+  //     (address) => !address.is_default
+  //   );
 
-  const addresses = moveDefaultAddressToStart(allAddresses);
+  //   return [
+  //     defaultShippingAddress,
+  //     defaultBillingAddress,
+  //     ...addressesWithoutDefault
+  //   ];
+  // };
+
+  // const addresses = moveDefaultAddressToStart(allAddresses);
 
   if (addresses.length === 0) return null;
 
-  return addresses.map(
-    (address, index) =>
-      address.type === "shipping" && (
-        <div
-          key={address.id}
-          className={`plc-py-2 plc-px-4 plc-mt-5 plc-flex plc-items-center plc-justify-between last:plc-mb-0 plc-rounded plc-text-gray-900 pelcro-address-wrapper plc-bg-white plc-shadow-md_dark ${
-            selectedAddressId === String(address.id) &&
-            `plc-border-primary-400 plc-border-2`
-          }`}
-        >
-          <div className="plc-flex-1 plc-relative">
-            <p className="pelcro-address-name plc-font-semibold">
-              {address.first_name} {address.last_name}
-            </p>
-            <p className="pelcro-address-company">
-              {address.company}
-            </p>
-            <p className="pelcro-address-line1 plc-text-sm plc-mt-2">
-              {address.line1}
-            </p>
-            <p className="pelcro-address-country plc-text-sm">
-              {address.city}, {address.state_name}{" "}
-              {address.postal_code}, {address.country_name}
-            </p>
-          </div>
-          {address.is_default && (
-            <span className="plc-rounded-full plc-bg-gray-800 plc-text-white plc-inline-flex plc-items-start plc-py-1 plc-px-4 plc-text-sm plc-mr-4">
-              {t("labels.default")}
-            </span>
-          )}
-          <Button
-            variant="icon"
-            className="plc-text-gray-500"
-            icon={<EditIcon />}
-            id={"pelcro-button-update-address-" + index}
-            data-key={address.id}
-            onClick={props?.displayAddressEdit}
-          ></Button>
+  return addresses
+    .sort((a, b) =>
+      a.is_default === b.is_default ? 0 : a.is_default ? -1 : 1
+    )
+    .map((address, index) => (
+      <div
+        key={address.id}
+        className="plc-py-2 plc-px-4 plc-mt-5 plc-flex plc-items-center plc-justify-between last:plc-mb-0 plc-rounded plc-text-gray-900 pelcro-address-wrapper plc-bg-white plc-shadow-md_dark"
+      >
+        <div className="plc-flex-1 plc-relative">
+          <p className="pelcro-address-name plc-font-semibold">
+            {address.first_name} {address.last_name}
+          </p>
+          <p className="pelcro-address-company">{address.company}</p>
+          <p className="pelcro-address-line1 plc-text-sm plc-mt-2">
+            {address.line1}
+          </p>
+          <p className="pelcro-address-country plc-text-sm">
+            {address.city}, {address.state_name} {address.postal_code}
+            , {address.country_name}
+          </p>
         </div>
-      )
-  );
+        <span className="plc-rounded-full plc-bg-gray-200 plc-text-black plc-inline-flex plc-items-start plc-py-1 plc-px-4 plc-text-sm plc-capitalize">
+          {address.type === "shipping"
+            ? t("labels.shipping")
+            : t("labels.billing")}
+        </span>
+        {address.is_default && (
+          <span className="plc-rounded-full plc-bg-gray-800 plc-text-white plc-inline-flex plc-items-start plc-py-1 plc-px-4 plc-text-sm plc-mr-4 plc-ml-2">
+            {t("labels.default")}
+          </span>
+        )}
+
+        <Button
+          variant="icon"
+          className="plc-text-gray-500"
+          icon={<EditIcon />}
+          id={"pelcro-button-update-address-" + index}
+          data-key={address.id}
+          data-type={address.type}
+          onClick={props?.displayAddressEdit}
+        ></Button>
+      </div>
+    ));
 };
