@@ -1,3 +1,10 @@
+# [4.0.0-alpha.60](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.59...v4.0.0-alpha.60) (2024-03-21)
+
+
+### Features
+
+* change styles ([d854a11](https://github.com/pelcro-inc/react-pelcro-js/commit/d854a1123ec183e0180852bc097416ca84f51232))
+
 # [4.0.0-alpha.59](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.58...v4.0.0-alpha.59) (2024-03-15)
 
 
