@@ -31,7 +31,7 @@ export const SelectedAddress = ({ type }) => {
   };
 
   return (
-    <div className="plc-p-4 plc-my-4 last:plc-mb-0 plc-rounded plc-text-gray-900 pelcro-address-wrapper plc-bg-white plc-shadow-md_dark plc-relative">
+    <div className="plc-p-4 plc-my-4 last:plc-mb-0 plc-rounded plc-text-gray-900 pelcro-address-wrapper plc-shadow-md_dark plc-relative">
       {address && (
         <>
           <div
