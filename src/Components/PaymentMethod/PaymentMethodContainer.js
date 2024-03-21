@@ -2826,7 +2826,12 @@ const PaymentMethodContainer = (props) => {
       : null;
   const [clientSecret, setClientSecret] = useState();
   const appearance = {
-    theme: "stripe"
+    theme: "stripe",
+    labels: "floating",
+    variables: {
+      colorPrimary:
+        window?.Pelcro?.site?.read()?.design_settings?.primary_color
+    }
   };
 
   const options = {
