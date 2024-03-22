@@ -40,7 +40,7 @@
     "@babel/polyfill": "^7.2.5",
     "@babel/preset-env": "^7.14.1",
     "@babel/preset-react": "^7.13.13",
-    "@pmmmwh/react-refresh-webpack-plugin": "^0.4.3",
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.11",
     "@rollup/plugin-commonjs": "^11.1.0",
     "@rollup/plugin-json": "^4.0.3",
     "@rollup/plugin-url": "^6.0.0",
@@ -97,7 +97,7 @@
     "travis-ci-cloudfront-invalidation": "^1.1.0",
     "webpack": "^4.44.1",
     "webpack-cli": "^4.3.0",
-    "webpack-dev-server": "^3.11.2"
+    "webpack-dev-server": "^5.0.4"
   },
   "dependencies": {
     "@headlessui/react": "^0.3.0",
