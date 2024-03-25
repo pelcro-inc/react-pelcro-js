@@ -185,6 +185,7 @@ class SelectModal extends Component {
         });
 
       notifyBugsnag(() => {
+        // eslint-disable-next-line no-undef
         Bugsnag.notify("SelectModal - No data viewed", (event) => {
           event.addMetadata("MetaData", {
             site: window.Pelcro?.site?.read(),
@@ -300,9 +301,7 @@ class SelectModal extends Component {
     return (
       <div
         key={product.id}
-        className={`pelcro-product plc-relative plc-overflow-hidden plc-h-full plc-min-h-card plc-flex plc-flex-col plc-items-center plc-justify-center plc-pt-5 plc-text-gray-900 plc-border-solid plc-rounded-sm plc-border-gray-200 plc-bg-white pelcro-select-product-wrapper ${
-          options?.emphasize ? "plc-border-2" : "plc-border"
-        }`}
+        className="pelcro-product plc-relative plc-overflow-hidden plc-h-full plc-min-h-card plc-flex plc-flex-col plc-items-center plc-justify-center plc-pt-5 plc-text-gray-900 plc-border plc-border-solid plc-rounded-sm plc-border-gray-200 plc-bg-white pelcro-select-product-wrapper"
       >
         {product.image && (
           <figure className="plc-w-full plc-mb-4 plc-h-28 plc-relative plc-overflow-hidden plc-flex plc-items-stretch">
@@ -379,9 +378,7 @@ class SelectModal extends Component {
               onClick={productButtonCallback}
               data-key={product.id}
               id="pelcro-select-product-back-button"
-              className={`plc-w-full plc-capitalize plc-border-2 plc-border-primary plc-rounded-none plc-rounded-b-sm hover:plc-bg-primary-600 hover:plc-border-primary-600 plc-transition-all focus:plc-outline-none ${
-                options?.emphasize ? "plc-bg-primary-700" : ""
-              }`}
+              className="plc-w-full plc-capitalize plc-border-2 plc-border-primary plc-rounded-none plc-rounded-b-sm hover:plc-bg-primary-600 hover:plc-border-primary-600 plc-transition-all focus:plc-outline-none"
             >
               {productButtonLabel}
             </Button>
@@ -427,57 +424,61 @@ class SelectModal extends Component {
 
   renderProductTabs = () => {
     const { prodDescExpanded } = this.state;
-    const productButtonCallback = (e) => {
-      this.setState({ scrollToTab: false });
-      this.selectProduct(e);
-    };
+    // const productButtonCallback = (e) => {
+    //   this.setState({ scrollToTab: false });
+    //   this.selectProduct(e);
+    // };
 
-    const { name, image, description } = this.state.product;
-    const tabs = this.state.productList.map((product, index) => {
-      if (
-        product.id === this.state.product.id &&
-        this.state.scrollToTab
-      ) {
-        this.setState((oldState) => {
-          if (+oldState.initialTabSlide !== +index) {
-            return { initialTabSlide: index };
-          }
-        });
-      }
+    const {
+      name,
+      //  image,
+      description
+    } = this.state.product;
+    // const tabs = this.state.productList.map((product, index) => {
+    //   if (
+    //     product.id === this.state.product.id &&
+    //     this.state.scrollToTab
+    //   ) {
+    //     this.setState((oldState) => {
+    //       if (+oldState.initialTabSlide !== +index) {
+    //         return { initialTabSlide: index };
+    //       }
+    //     });
+    //   }
 
-      return (
-        <div
-          key={product.id}
-          className="plc-flex plc-w-full plc-justify-center plc-text-center"
-        >
-          <button
-            onClick={(e) => productButtonCallback(e)}
-            data-key={product.id}
-            data-index={index}
-            className={`plc-px-4 plc-py-2 focus:plc-outline-none plc-border-b-4 hover:plc-text-primary hover:plc-border-primary plc-transition-all plc-h-full plc-block plc-w-full ${
-              product.id === this.state.product.id
-                ? "plc-border-primary plc-text-primary"
-                : "plc-border-transparent plc-font-normal plc-text-gray-500"
-            }`}
-          >
-            {product.name}
-          </button>
-        </div>
-      );
-    });
+    //   return (
+    //     <div
+    //       key={product.id}
+    //       className="plc-flex plc-w-full plc-justify-center plc-text-center"
+    //     >
+    //       <button
+    //         onClick={(e) => productButtonCallback(e)}
+    //         data-key={product.id}
+    //         data-index={index}
+    //         className={`plc-px-4 plc-py-2 focus:plc-outline-none plc-border-b-4 hover:plc-text-primary hover:plc-border-primary plc-transition-all plc-h-full plc-block plc-w-full ${
+    //           product.id === this.state.product.id
+    //             ? "plc-border-primary plc-text-primary"
+    //             : "plc-border-transparent plc-font-normal plc-text-gray-500"
+    //         }`}
+    //       >
+    //         {product.name}
+    //       </button>
+    //     </div>
+    //   );
+    // });
 
     return (
       <div className="plc-flex plc-flex-col">
-        {/* <div className="productTabs plc-relative md:plc-max-w-xl md:plc-mx-auto plc-w-full"> */}
-        {/*   <Carousel */}
-        {/*     slidesCount={tabs.length} */}
-        {/*     initialSlide={this.state.initialTabSlide} */}
-        {/*     dots={false} */}
-        {/*     arrowsSize="small" */}
-        {/*   > */}
-        {/*     {tabs} */}
-        {/*   </Carousel> */}
-        {/* </div> */}
+        {/* <div className="productTabs plc-relative md:plc-max-w-xl md:plc-mx-auto plc-w-full">
+          <Carousel
+            slidesCount={tabs.length}
+            initialSlide={this.state.initialTabSlide}
+            dots={false}
+            arrowsSize="small"
+          >
+            {tabs}
+          </Carousel>
+        </div> */}
 
         <div className="selectedProduct plc-flex plc-flex-col plc-max-w-3xl plc-ml-11">
           <h3 className="plc-text-2xl plc-font-extrabold plc-mb-3">
@@ -541,14 +542,26 @@ class SelectModal extends Component {
       return this.renderProducts();
     }
 
+    const matchingItems = productsThatMatchArticleTag.map(
+      (product, index) =>
+        this.renderOneProduct(product, index, { emphasize: true })
+    );
+
+    const otherItems = allProductsMinusMatched.map((product, index) =>
+      this.renderOneProduct(product, index)
+    );
+
     return (
       <div>
         <h3 className="plc-text-sm plc-font-semibold">
           {this.locale("labels.restrictiveArticles.subscribeTo")}
         </h3>
-        {productsThatMatchArticleTag.map((product, index) =>
-          this.renderOneProduct(product, index, { emphasize: true })
-        )}
+        <Carousel
+          slidesCount={matchingItems.length}
+          mobileArrowDown={true}
+        >
+          {matchingItems}
+        </Carousel>
 
         {allProductsMinusMatched?.length > 0 && (
           <>
@@ -557,9 +570,12 @@ class SelectModal extends Component {
             <h3 className="plc-text-sm plc-font-semibold">
               {this.locale("labels.restrictiveArticles.or")}
             </h3>
-            {allProductsMinusMatched.map((product, index) =>
-              this.renderOneProduct(product, index)
-            )}
+            <Carousel
+              slidesCount={otherItems.length}
+              mobileArrowDown={true}
+            >
+              {otherItems}
+            </Carousel>
           </>
         )}
       </div>
@@ -570,7 +586,7 @@ class SelectModal extends Component {
     const { disableGifting } = this.props;
 
     const items = this.state.planList.map((plan) => {
-      const isChecked = this.state.plan.id === plan.id ? true : false;
+      // const isChecked = this.state.plan.id === plan.id ? true : false;
 
       return (
         <div
