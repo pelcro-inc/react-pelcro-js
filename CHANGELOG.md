@@ -1,3 +1,10 @@
+# [4.0.0-alpha.61](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.60...v4.0.0-alpha.61) (2024-03-25)
+
+
+### Bug Fixes
+
+* select modal paywall view style fix ([3b7afcc](https://github.com/pelcro-inc/react-pelcro-js/commit/3b7afcc8e32966488a97bb0b28e6b276f246e6b4))
+
 # [4.0.0-alpha.60](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.59...v4.0.0-alpha.60) (2024-03-21)
 
 
