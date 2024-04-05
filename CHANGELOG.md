@@ -1,3 +1,11 @@
+# [3.26.0-beta.55](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.54...v3.26.0-beta.55) (2024-04-05)
+
+
+### Features
+
+* payment method delete enhancement ([6aa0ca5](https://github.com/pelcro-inc/react-pelcro-js/commit/6aa0ca51cb376a559fba420e8f6a28dbb1722ac3))
+* support 3ds2 in trail subs ([#346](https://github.com/pelcro-inc/react-pelcro-js/issues/346)) ([6777c75](https://github.com/pelcro-inc/react-pelcro-js/commit/6777c75ce2129ad45a1f0e4ade1f5aa07340686e))
+
 # [3.26.0-beta.54](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.53...v3.26.0-beta.54) (2024-02-08)
 
 
