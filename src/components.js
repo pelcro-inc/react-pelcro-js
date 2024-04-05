@@ -204,7 +204,6 @@ export { PaymentMethodSelectList } from "./Components/PaymentMethodSelect/Paymen
 export { PaymentMethodDeleteContainer } from "./Components/PaymentMethodDelete/PaymentMethodDeleteContainer";
 export { PaymentMethodDeleteList } from "./Components/PaymentMethodDelete/PaymentMethodDeleteList";
 export { PaymentMethodDeleteModal } from "./Components/PaymentMethodDelete/PaymentMethodDeleteModal";
-export { PaymentMethodDeleteOptions } from "./Components/PaymentMethodDelete/PaymentMethodDeleteOptions";
 export { PaymentMethodDeleteSubmit } from "./Components/PaymentMethodDelete/PaymentMethodDeleteSubmit";
 export { PaymentMethodDeleteView } from "./Components/PaymentMethodDelete/PaymentMethodDeleteView";
 
