@@ -34,7 +34,8 @@
     "sourceUpdated": "Your payment information has been updated",
     "cardAuthFailed": "We are unable to authenticate your payment method. Please choose a different payment method and try again.",
     "cardAuthNotSupported": "Updating your payment method to one that requires authentication is currently not possible. Please use a different payment method or contact customer service.",
-    "tryAgainFromInvoice": "We were unable to authenticate your payment, however your subscription was created. Please attempt to pay for the invoice using another payment method from the dashboard."
+    "tryAgainFromInvoice": "We were unable to authenticate your payment, however your subscription was created. Please attempt to pay for the invoice using another payment method from the dashboard.",
+    "paymentProcessing": "Invoice payment is currently being processed."
   },
   "errors": {
     "": ""

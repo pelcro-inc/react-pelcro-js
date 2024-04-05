@@ -1453,6 +1453,22 @@ const PaymentMethodContainerWithoutStripe = ({
               : t("messages.cardAuthFailed")
           }
         });
+      } else if (
+        paymentIntent?.status === "processing" &&
+        paymentIntent?.client_secret
+      ) {
+        if (!isSubCreate) {
+          dispatch({ type: DISABLE_SUBMIT, payload: false });
+        }
+        dispatch({ type: LOADING, payload: false });
+
+        return dispatch({
+          type: SHOW_ALERT,
+          payload: {
+            type: "success",
+            content: t("messages.paymentProcessing")
+          }
+        });
       } else {
         onSuccess(response);
       }
