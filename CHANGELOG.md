@@ -1,3 +1,10 @@
+# [4.0.0-alpha.62](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.61...v4.0.0-alpha.62) (2024-04-05)
+
+
+### Features
+
+* check for processing invoice payment ([791afef](https://github.com/pelcro-inc/react-pelcro-js/commit/791afef600807db2ed45b65f6fd6b16a2d957dbf))
+
 # [4.0.0-alpha.61](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.60...v4.0.0-alpha.61) (2024-03-25)
 
 
