@@ -1,3 +1,10 @@
+# [3.26.0-beta.56](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.55...v3.26.0-beta.56) (2024-04-17)
+
+
+### Features
+
+* add referer attribute to password endpoints ([581f8c3](https://github.com/pelcro-inc/react-pelcro-js/commit/581f8c371779190044c1907b688faa0e840cbc41))
+
 # [3.26.0-beta.55](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.54...v3.26.0-beta.55) (2024-04-05)
 
 
