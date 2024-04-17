@@ -51,7 +51,8 @@ const PasswordResetContainer = ({
         email,
         password,
         password_confirmation: confirmPassword,
-        token
+        token,
+        referer: window.location.origin
       },
       (err, res) => {
         dispatch({ type: DISABLE_SUBMIT, payload: false });
