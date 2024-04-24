@@ -21,7 +21,7 @@ import { DashboardInvoices } from "./DashboardLinks/DashboardInvoices";
 /**
  *
  */
-export function Dashboard(props) {
+export function Dashboard({ dashboardLayout = "left", ...props }) {
   React.useEffect(() => {
     props.onDisplay?.();
   }, []);
@@ -36,6 +36,7 @@ export function Dashboard(props) {
           props.onClose?.();
           resetView();
         }}
+        dashboardLayout={dashboardLayout}
         {...props}
       >
         <DashboardHeading title={t("labels.mySettings")} />

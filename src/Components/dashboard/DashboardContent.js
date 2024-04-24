@@ -39,6 +39,8 @@ export const DashboardContent = (props) => {
 
   const { t } = useTranslation("dashboard");
 
+  const { dashboardLayout } = props;
+
   const menuRef = useRef(null);
   const user = window.Pelcro.user.read();
   const userHasName = user.first_name || user.last_name;
@@ -226,15 +228,25 @@ export const DashboardContent = (props) => {
   return (
     <>
       <Transition
-        className="plc-fixed plc-inset-y-0 plc-left-0 plc-h-full lg:plc-w-3/12 plc-w-full plc-overflow-y-auto plc-text-left plc-bg-white plc-shadow-xl plc-z-max"
+        className={`plc-fixed plc-inset-y-0 plc-h-full lg:plc-w-3/12 plc-w-full plc-overflow-y-auto plc-text-left plc-bg-white plc-shadow-xl plc-z-max ${
+          dashboardLayout == "left" ? "plc-left-0" : "plc-right-0"
+        }`}
         show={isOpen}
         enter="plc-transform plc-transition plc-duration-500"
-        enterFrom="plc--translate-x-full"
+        enterFrom={`${
+          dashboardLayout == "left"
+            ? "plc--translate-x-full"
+            : "plc-translate-x-full"
+        }`}
         enterTo="plc-translate-x-0"
         afterEnter={initializeHideMenuHandler}
         leave="plc-transform plc-transition plc-duration-500"
         leaveFrom="plc-translate-x-0"
-        leaveTo="plc--translate-x-full"
+        leaveTo={`${
+          dashboardLayout == "left"
+            ? "plc--translate-x-full"
+            : "plc-translate-x-full"
+        }`}
         afterLeave={props?.onClose}
       >
         <div id="pelcro-view-dashboard" ref={menuRef}>
@@ -299,7 +311,9 @@ export const DashboardContent = (props) => {
       {activeDashboardLink && isOpen && (
         <div
           id="pelcro-view-dashboard-submenus"
-          className="plc-fixed plc-inset-y-0 plc-right-0 plc-h-full lg:plc-w-9/12 plc-w-full plc-bg-gray-100 plc-z-max plc-overflow-auto"
+          className={`plc-fixed plc-inset-y-0 plc-h-full lg:plc-w-9/12 plc-w-full plc-bg-gray-100 plc-z-max plc-overflow-auto ${
+            dashboardLayout == "left" ? "plc-right-0" : "plc-left-0"
+          }`}
         >
           {activeDashboardLink === SUB_MENUS.PROFILE && (
             <ProfileMenu />
