@@ -1,3 +1,15 @@
+# [4.0.0-alpha.63](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.62...v4.0.0-alpha.63) (2024-04-24)
+
+
+### Bug Fixes
+
+* add optional chaining sub create callback check ([b704263](https://github.com/pelcro-inc/react-pelcro-js/commit/b7042636cfa5ec73054ef2c8ca868bdf25ad175b))
+
+
+### Features
+
+* add optional dashboard layout rendering ([0448d76](https://github.com/pelcro-inc/react-pelcro-js/commit/0448d76c57eb8aee2d5ea32bdb62c73f61061b4a))
+
 # [4.0.0-alpha.62](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.61...v4.0.0-alpha.62) (2024-04-05)
 
 
