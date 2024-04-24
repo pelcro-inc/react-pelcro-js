@@ -3,11 +3,15 @@
 import React from "react";
 import { usePelcro } from "../../hooks/usePelcro";
 
-export const DashboardOpenButton = () => {
+export const DashboardOpenButton = ({ layout = "left" }) => {
   const { switchView } = usePelcro();
 
   return (
-    <div className="plc-fixed plc-left-4 plc-bottom-4 pelcro-open-dashboard-btn">
+    <div
+      className={`plc-fixed plc-bottom-4 pelcro-open-dashboard-btn ${
+        layout == "left" ? "plc-left-4" : "plc-right-4"
+      }`}
+    >
       <button
         className="plc-bg-white plc-border-2 plc-rounded-full focus:plc-outline-none plc-border-primary-300 hover:plc-bg-white"
         name="menu"
