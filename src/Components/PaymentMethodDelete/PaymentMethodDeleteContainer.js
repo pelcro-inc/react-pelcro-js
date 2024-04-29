@@ -20,7 +20,7 @@ const initialState = {
   paymentMethods: [],
   selectedPaymentMethodId: null,
   isSubmitting: false,
-  disableSubmit: false,
+  disableSubmit: true,
   isLoading: false,
   skeletonLoader: true,
   showPaymentMethodSelect: false,
@@ -71,6 +71,7 @@ const PaymentMethodDeleteContainer = ({
               payload: true
             });
           }
+          dispatch({ type: DISABLE_SUBMIT, payload: false });
         }
       }
     );
@@ -85,9 +86,9 @@ const PaymentMethodDeleteContainer = ({
         is_default: true
       },
       (err, res) => {
-        dispatch({ type: DISABLE_SUBMIT, payload: false });
-        dispatch({ type: LOADING, payload: false });
         if (err) {
+          dispatch({ type: DISABLE_SUBMIT, payload: false });
+          dispatch({ type: LOADING, payload: false });
           console.log(err);
           onFailure(err);
           return dispatch({
