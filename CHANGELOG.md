@@ -1,3 +1,10 @@
+# [3.26.0-beta.58](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.57...v3.26.0-beta.58) (2024-04-29)
+
+
+### Bug Fixes
+
+* fire refresh method after adding new payment methods ([be96666](https://github.com/pelcro-inc/react-pelcro-js/commit/be96666f95a67615174e60883335cbb99f892e19))
+
 # [3.26.0-beta.57](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.56...v3.26.0-beta.57) (2024-04-29)
 
 
