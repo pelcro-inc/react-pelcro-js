@@ -14,7 +14,7 @@ export const PaymentMethodDeleteSubmit = ({
     dispatch,
     state: {
       isLoading,
-      isDisabled,
+      disableSubmit,
       showPaymentMethodSelect,
       selectedPaymentMethodId
     }
@@ -28,8 +28,8 @@ export const PaymentMethodDeleteSubmit = ({
       }}
       disabled={
         showPaymentMethodSelect
-          ? isDisabled || !selectedPaymentMethodId
-          : isDisabled
+          ? !selectedPaymentMethodId
+          : disableSubmit
       }
       isLoading={isLoading}
       className="plc-w-full"

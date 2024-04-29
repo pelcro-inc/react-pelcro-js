@@ -1800,7 +1800,7 @@ const PaymentMethodContainerWithoutStripe = ({
             : null
         },
         (err, res) => {
-          if (res.data.setup_intent) {
+          if (res?.data?.setup_intent) {
             return confirmStripeIntentSetup(res, "subCreate");
           }
           confirmStripeCardPayment(res, err, true);
