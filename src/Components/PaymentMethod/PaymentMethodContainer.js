@@ -74,7 +74,8 @@ import {
 import {
   getPageOrDefaultLanguage,
   notifyBugsnag,
-  generatePassword
+  generatePassword,
+  refreshUser
 } from "../../utils/utils";
 import { usePelcro } from "../../hooks/usePelcro";
 
@@ -1427,6 +1428,7 @@ const PaymentMethodContainerWithoutStripe = ({
               content: t("messages.sourceCreated")
             }
           });
+          refreshUser();
           onSuccess(res);
         }
       );
@@ -1476,6 +1478,7 @@ const PaymentMethodContainerWithoutStripe = ({
                     });
                   }
 
+                  refreshUser();
                   onSuccess(res);
                 }
               );
@@ -1538,6 +1541,7 @@ const PaymentMethodContainerWithoutStripe = ({
               content: t("messages.sourceUpdated")
             }
           });
+          refreshUser();
           onSuccess(res);
         }
       );
@@ -2197,6 +2201,7 @@ const PaymentMethodContainerWithoutStripe = ({
           if (flow === "subCreate") {
             dispatch({ type: DISABLE_SUBMIT, payload: false });
             dispatch({ type: LOADING, payload: false });
+            refreshUser();
             onSuccess(res);
             return;
           }
@@ -2211,6 +2216,7 @@ const PaymentMethodContainerWithoutStripe = ({
                 content: t("messages.sourceCreated")
               }
             });
+            refreshUser();
             onSuccess(res);
             return;
           }
@@ -2226,6 +2232,7 @@ const PaymentMethodContainerWithoutStripe = ({
                 content: t("messages.sourceUpdated")
               }
             });
+            refreshUser();
             onSuccess(res);
             return;
           }
@@ -2253,6 +2260,7 @@ const PaymentMethodContainerWithoutStripe = ({
                       }
                     });
                   }
+                  refreshUser();
                   onSuccess(res);
                 }
               );
@@ -2618,6 +2626,7 @@ const PaymentMethodContainerWithoutStripe = ({
                   content: t("messages.sourceCreated")
                 }
               });
+              refreshUser();
               onSuccess(res);
             }
           }
@@ -2664,6 +2673,7 @@ const PaymentMethodContainerWithoutStripe = ({
               content: t("messages.sourceUpdated")
             }
           });
+          refreshUser();
           onSuccess(res);
         }
       }
@@ -2739,6 +2749,7 @@ const PaymentMethodContainerWithoutStripe = ({
                         }
                       });
                     }
+                    refreshUser();
                     onSuccess(res);
                   }
                 );
