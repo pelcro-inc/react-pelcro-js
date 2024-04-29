@@ -1,3 +1,10 @@
+# [3.26.0-beta.57](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.56...v3.26.0-beta.57) (2024-04-29)
+
+
+### Bug Fixes
+
+* load feedback to user and real time cards update ([2117766](https://github.com/pelcro-inc/react-pelcro-js/commit/2117766f51c1424a80e9fa20ffdf75300f595e3c))
+
 # [3.26.0-beta.56](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.55...v3.26.0-beta.56) (2024-04-17)
 
 
