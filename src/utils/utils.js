@@ -569,3 +569,19 @@ export function notifyBugsnag(callback, startOptions) {
 
   callback();
 }
+
+export const refreshUser = () => {
+  window.Pelcro.user.refresh(
+    {
+      auth_token: window.Pelcro?.user?.read()?.auth_token
+    },
+    (err, res) => {
+      if (err) {
+        console.error(err);
+      }
+      if (res) {
+        return res.data;
+      }
+    }
+  );
+};
