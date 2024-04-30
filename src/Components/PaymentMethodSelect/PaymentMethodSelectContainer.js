@@ -7,11 +7,13 @@ import { usePelcro } from "../../hooks/usePelcro";
 import {
   HANDLE_SUBMIT,
   LOAD_PAYMENT_METHODS,
-  SELECT_PAYMENT_METHOD
+  SELECT_PAYMENT_METHOD,
+  SKELETON_LOADER
 } from "../../utils/action-types";
 
 const moveDefaultPaymentMethodToStart = (paymentMethods) => {
-  const defaultPaymentMethod = window.Pelcro.user.read()?.source;
+  const defaultPaymentMethod =
+    getDefaultPaymentMethod(paymentMethods);
   const paymentMethodsWithoutDefault = paymentMethods.filter(
     (paymentMethod) => paymentMethod.id !== defaultPaymentMethod.id
   );
@@ -23,9 +25,17 @@ const moveDefaultPaymentMethodToStart = (paymentMethods) => {
   return [defaultPaymentMethod, ...paymentMethodsWithoutDefault];
 };
 
+const getDefaultPaymentMethod = (paymentMethods) => {
+  const defaultPaymentMethod = paymentMethods.find(
+    (paymentMethod) => paymentMethod.is_default
+  );
+  return defaultPaymentMethod;
+};
+
 const initialState = {
   paymentMethods: [],
   selectedPaymentMethodId: null,
+  skeletonLoader: true,
   isSubmitting: false,
   alert: {
     type: "error",
@@ -53,12 +63,12 @@ const PaymentMethodSelectContainer = ({
     return onSuccess(selectedPaymentMethodId);
   };
 
-  const getInitialSelectedMethodId = () => {
+  const getInitialSelectedMethodId = (paymentMethods) => {
     if (selectedPaymentMethodIdFromStore) {
       return selectedPaymentMethodIdFromStore;
     }
 
-    const defaultMethod = window.Pelcro.user.read()?.source;
+    const defaultMethod = getDefaultPaymentMethod(paymentMethods);
     if (defaultMethod && defaultMethod.status === "chargeable") {
       return String(defaultMethod.id);
     }
@@ -80,8 +90,13 @@ const PaymentMethodSelectContainer = ({
             paymentMethods: moveDefaultPaymentMethodToStart(
               action.payload
             ),
-            selectedPaymentMethodId: getInitialSelectedMethodId()
+            selectedPaymentMethodId: getInitialSelectedMethodId(
+              action.payload
+            )
           });
+
+        case SKELETON_LOADER:
+          return Update({ ...state, skeletonLoader: action.payload });
 
         case HANDLE_SUBMIT:
           return UpdateWithSideEffect(
@@ -97,10 +112,27 @@ const PaymentMethodSelectContainer = ({
   );
 
   useEffect(() => {
-    dispatch({
-      type: LOAD_PAYMENT_METHODS,
-      payload: window.Pelcro.user.read().sources ?? []
-    });
+    window.Pelcro.paymentMethods.list(
+      {
+        auth_token: window.Pelcro.user.read().auth_token
+      },
+      (err, res) => {
+        if (err) {
+          return console.error(err);
+        }
+
+        if (res) {
+          dispatch({
+            type: LOAD_PAYMENT_METHODS,
+            payload: res.data ?? []
+          });
+          dispatch({
+            type: SKELETON_LOADER,
+            payload: false
+          });
+        }
+      }
+    );
   }, []);
 
   return (

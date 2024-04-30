@@ -18,12 +18,19 @@
   },
   "delete": {
     "title": "Delete payment method",
-    "subtitle": "This payment method could be associated with active subscriptions or serve as the default payment method. Please choose from the available options below for replacement.",
+    "subtitle": "Are you sure you want to delete the selected payment method?",
+    "details": "Payment method details",
+    "message": "This action is irreversible and will permanently remove the payment method from the system. Please ensure that there are no pending transactions or subscriptions associated with this payment method.",
+    "buttons": {
+      "delete": "Delete payment method",
+      "back": "Go back"
+    },
     "options": {
-      "select": "Select an existing payment method",
+      "select": "Select a payment method to be the default",
       "add": "Add a new payment method"
     },
-    "paymentMethodReplaced": "Payment Method Successfully Deleted and Replaced"
+    "paymentMethodReplaced": "Payment Method Successfully Deleted and Replaced",
+    "deletedSuccessfully": "Payment Method Successfully Deleted"
   },
   "create": {
     "title": "Add a new payment method",

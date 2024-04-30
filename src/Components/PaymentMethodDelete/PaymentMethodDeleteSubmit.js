@@ -12,7 +12,12 @@ export const PaymentMethodDeleteSubmit = ({
   const { t } = useTranslation("paymentMethod");
   const {
     dispatch,
-    state: { isLoading, isDisabled }
+    state: {
+      isLoading,
+      disableSubmit,
+      showPaymentMethodSelect,
+      selectedPaymentMethodId
+    }
   } = useContext(store);
 
   return (
@@ -21,12 +26,16 @@ export const PaymentMethodDeleteSubmit = ({
         dispatch({ type: HANDLE_SUBMIT });
         onClick?.();
       }}
-      disabled={isDisabled}
+      disabled={
+        showPaymentMethodSelect
+          ? !selectedPaymentMethodId
+          : disableSubmit
+      }
       isLoading={isLoading}
       className="plc-w-full"
       {...otherProps}
     >
-      {name ?? t("select.buttons.selectPaymentMethod")}
+      {name ?? t("delete.buttons.delete")}
     </Button>
   );
 };

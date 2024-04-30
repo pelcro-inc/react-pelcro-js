@@ -10,7 +10,7 @@ export const PaymentMethodSelectList = () => {
 
   const {
     dispatch,
-    state: { paymentMethods, selectedPaymentMethodId }
+    state: { paymentMethods, selectedPaymentMethodId, skeletonLoader }
   } = useContext(store);
 
   const handlePaymentMethodSelect = (event) => {
@@ -21,50 +21,60 @@ export const PaymentMethodSelectList = () => {
   };
 
   return (
-    <div className="plc-px-3 plc-py-2 plc-space-y-4 plc-overflow-y-scroll plc-max-h-80 pelcro-payment-method-select-wrapper">
-      {paymentMethods.map((paymentMethod) => {
-        const isSelected =
-          selectedPaymentMethodId === String(paymentMethod.id);
+    <div>
+      {skeletonLoader ? (
+        <div className="plc-w-full plc-h-20 plc-bg-gray-300 plc-rounded-md plc-animate-pulse"></div>
+      ) : (
+        <div className="plc-px-3 plc-py-2 plc-space-y-4 plc-overflow-y-scroll plc-max-h-80 pelcro-payment-method-select-wrapper">
+          {paymentMethods.map((paymentMethod) => {
+            const isSelected =
+              selectedPaymentMethodId === String(paymentMethod.id);
 
-        return (
-          <div
-            key={paymentMethod.id}
-            className={`plc-p-2 plc-pl-4 plc-shadow-md plc-text-gray-900 plc-rounded plc-min-h-14 plc-flex plc-items-center pelcro-payment-method-wrapper ${
-              isSelected
-                ? "plc-ring-2 plc-ring-primary-400"
-                : "plc-ring-1 plc-ring-gray-200"
-            }`}
-          >
-            <Radio
-              className="plc-flex plc-items-center pelcro-select-payment-method-radio"
-              labelClassName="plc-flex plc-items-center plc-space-x-2 plc-cursor-pointer plc-w-full"
-              id={`pelcro-payment-method-select-${paymentMethod.id}`}
-              name="paymentMethod"
-              checked={isSelected}
-              value={paymentMethod.id}
-              onChange={handlePaymentMethodSelect}
-            >
-              {getPaymentCardIcon(paymentMethod.properties?.brand)}
+            return (
+              <div
+                key={paymentMethod.id}
+                className={`plc-p-2 plc-pl-4 plc-shadow-md plc-text-gray-900 plc-rounded plc-min-h-14 plc-flex plc-items-center pelcro-payment-method-wrapper ${
+                  isSelected
+                    ? "plc-ring-2 plc-ring-primary-400"
+                    : "plc-ring-1 plc-ring-gray-200"
+                }`}
+              >
+                <Radio
+                  className="plc-flex plc-items-center pelcro-select-payment-method-radio"
+                  labelClassName="plc-flex plc-items-center plc-space-x-2 plc-cursor-pointer plc-w-full"
+                  id={`pelcro-payment-method-select-${paymentMethod.id}`}
+                  name="paymentMethod"
+                  checked={isSelected}
+                  value={paymentMethod.id}
+                  onChange={handlePaymentMethodSelect}
+                >
+                  {getPaymentCardIcon(
+                    paymentMethod.properties?.brand
+                  )}
 
-              <div className="plc-flex plc-flex-col plc-text-lg pelcro-payment-method-details">
-                <p className="plc-font-semibold">
-                  {paymentMethod?.properties?.brand === "bacs_debit"
-                    ? "••••"
-                    : "•••• •••• ••••"}{" "}
-                  {paymentMethod?.properties?.last4}
-                </p>
-                {paymentMethod.properties.brand !== "bacs_debit" && (
-                  <p className="plc-text-sm plc-text-gray-500">
-                    {t("select.expires")}{" "}
-                    {paymentMethod.properties?.exp_month}/
-                    {paymentMethod.properties?.exp_year}
-                  </p>
-                )}
+                  <div className="plc-flex plc-flex-col plc-text-lg pelcro-payment-method-details">
+                    <p className="plc-font-semibold">
+                      {paymentMethod?.properties?.brand ===
+                      "bacs_debit"
+                        ? "••••"
+                        : "•••• •••• ••••"}{" "}
+                      {paymentMethod?.properties?.last4}
+                    </p>
+                    {paymentMethod.properties.brand !==
+                      "bacs_debit" && (
+                      <p className="plc-text-sm plc-text-gray-500">
+                        {t("select.expires")}{" "}
+                        {paymentMethod.properties?.exp_month}/
+                        {paymentMethod.properties?.exp_year}
+                      </p>
+                    )}
+                  </div>
+                </Radio>
               </div>
-            </Radio>
-          </div>
-        );
-      })}
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 };

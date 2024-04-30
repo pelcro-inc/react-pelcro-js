@@ -50,50 +50,9 @@ export const PaymentCardsMenu = (props) => {
     return switchView("payment-method-update");
   };
 
-  const deletePaymentMethod = (
-    paymentMethodId,
-    onSuccess,
-    onFailure
-  ) => {
-    // disable the Login button to prevent repeated clicks
-    window.Pelcro.paymentMethods.deletePaymentMethod(
-      {
-        auth_token: window.Pelcro.user.read().auth_token,
-        payment_method_id: paymentMethodId
-      },
-      (err, res) => {
-        if (err) {
-          return onFailure?.(err);
-        }
-        onSuccess?.(res);
-      }
-    );
-  };
-
   const onDeletePaymentMethodClick = (source) => {
-    const isDeletable = source?.deletable;
-
-    if (isDeletable) {
-      notify.confirm(
-        (onSuccess, onFailure) => {
-          deletePaymentMethod(source.id, onSuccess, onFailure);
-        },
-        {
-          confirmMessage: t(
-            "messages.paymentMethodDeletion.isSureToDelete"
-          ),
-          loadingMessage: t("messages.paymentMethodDeletion.loading"),
-          successMessage: t("messages.paymentMethodDeletion.success"),
-          errorMessage: t("messages.paymentMethodDeletion.error")
-        },
-        {
-          closeButtonLabel: t("labels.subCancellation.goBack")
-        }
-      );
-    } else {
-      setPaymentMethodToDelete(source.id);
-      return switchView("payment-method-delete");
-    }
+    setPaymentMethodToDelete(source.id);
+    return switchView("payment-method-delete");
   };
 
   return (

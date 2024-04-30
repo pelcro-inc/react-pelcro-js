@@ -29,7 +29,7 @@ export const PaymentMethodDeleteModal = (props) => {
         nonInteraction: true
       });
     }
-    notify.success(t("delete.paymentMethodReplaced"));
+    notify.success(t("delete.deletedSuccessfully"));
     resetView();
   };
 
