@@ -252,38 +252,8 @@ class Dashboard extends Component {
   };
 
   onDeletePaymentMethodClick = (source) => {
-    const isDeletable = source?.deletable;
-
-    if (isDeletable) {
-      this.props.onClose();
-      notify.confirm(
-        (onSuccess, onFailure) => {
-          this.deletePaymentMethod(source.id, onSuccess, onFailure);
-        },
-        {
-          confirmMessage: this.locale(
-            "messages.paymentMethodDeletion.isSureToDelete"
-          ),
-          loadingMessage: this.locale(
-            "messages.paymentMethodDeletion.loading"
-          ),
-          successMessage: this.locale(
-            "messages.paymentMethodDeletion.success"
-          ),
-          errorMessage: this.locale(
-            "messages.paymentMethodDeletion.error"
-          )
-        },
-        {
-          closeButtonLabel: this.locale(
-            "labels.subCancellation.goBack"
-          )
-        }
-      );
-    } else {
-      this.props.setPaymentMethodToDelete(source.id);
-      return this.props.setView("payment-method-delete");
-    }
+    this.props.setPaymentMethodToDelete(source.id);
+    return this.props.setView("payment-method-delete");
   };
 
   displayRedeem = () => {
