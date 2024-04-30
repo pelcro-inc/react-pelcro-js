@@ -1,3 +1,18 @@
+# [4.0.0-alpha.64](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.63...v4.0.0-alpha.64) (2024-04-30)
+
+
+### Bug Fixes
+
+* fire refresh method after adding new payment methods ([be96666](https://github.com/pelcro-inc/react-pelcro-js/commit/be96666f95a67615174e60883335cbb99f892e19))
+* load feedback to user and real time cards update ([2117766](https://github.com/pelcro-inc/react-pelcro-js/commit/2117766f51c1424a80e9fa20ffdf75300f595e3c))
+
+
+### Features
+
+* payment method delete enhancement ([6aa0ca5](https://github.com/pelcro-inc/react-pelcro-js/commit/6aa0ca51cb376a559fba420e8f6a28dbb1722ac3))
+* persist button loading until 3ds2 success ([#343](https://github.com/pelcro-inc/react-pelcro-js/issues/343)) ([665fb9b](https://github.com/pelcro-inc/react-pelcro-js/commit/665fb9b12d7334a3e86e215e13353a544bc06f12))
+* support 3ds2 in trail subs ([#346](https://github.com/pelcro-inc/react-pelcro-js/issues/346)) ([6777c75](https://github.com/pelcro-inc/react-pelcro-js/commit/6777c75ce2129ad45a1f0e4ade1f5aa07340686e))
+
 # [4.0.0-alpha.63](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.62...v4.0.0-alpha.63) (2024-04-24)
 
 
