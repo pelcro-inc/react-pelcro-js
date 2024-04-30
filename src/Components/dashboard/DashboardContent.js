@@ -47,29 +47,29 @@ export const DashboardContent = (props) => {
   const profilePicture =
     window.Pelcro.user.read().profile_photo ?? userSolidIcon;
 
-  const newsletters = window.Pelcro?.uiSettings?.newsletters;
-  const siteHasNewslettersDefined =
-    Array.isArray(newsletters) && newsletters.length > 0;
+  // const newsletters = window.Pelcro?.uiSettings?.newsletters;
+  // const siteHasNewslettersDefined =
+  //   Array.isArray(newsletters) && newsletters.length > 0;
 
-  const initializeHideMenuHandler = () => {
-    document.addEventListener("click", hideMenuIfClickedOutside);
-  };
+  // const initializeHideMenuHandler = () => {
+  //   document.addEventListener("click", hideMenuIfClickedOutside);
+  // };
 
-  const hideMenuIfClickedOutside = (event) => {
-    const dashboardSubmenus = document.getElementById(
-      "pelcro-view-dashboard-submenus"
-    );
+  // const hideMenuIfClickedOutside = (event) => {
+  //   const dashboardSubmenus = document.getElementById(
+  //     "pelcro-view-dashboard-submenus"
+  //   );
 
-    const didClickOutsideMenu =
-      isOpen &&
-      menuRef.current &&
-      !menuRef.current.contains(event.target) &&
-      !dashboardSubmenus?.contains(event.target);
+  //   const didClickOutsideMenu =
+  //     isOpen &&
+  //     menuRef.current &&
+  //     !menuRef.current.contains(event.target) &&
+  //     !dashboardSubmenus?.contains(event.target);
 
-    if (didClickOutsideMenu) {
-      dispatch({ type: CLOSE_DASHBOARD });
-    }
-  };
+  //   if (didClickOutsideMenu) {
+  //     dispatch({ type: CLOSE_DASHBOARD });
+  //   }
+  // };
 
   const setActiveDashboardLink = (submenuName) => {
     dispatch({
@@ -219,11 +219,18 @@ export const DashboardContent = (props) => {
     dispatch({ type: CLOSE_DASHBOARD });
   };
 
-  useEffect(() => {
-    return () => {
-      document.removeEventListener("click", hideMenuIfClickedOutside);
-    };
-  }, []);
+  const closeSubMenusTab = () => {
+    dispatch({
+      type: SET_ACTIVE_DASHBOARD_LINK,
+      payload: null
+    });
+  };
+
+  // useEffect(() => {
+  //   return () => {
+  //     document.removeEventListener("click", hideMenuIfClickedOutside);
+  //   };
+  // }, []);
 
   return (
     <>
@@ -239,7 +246,7 @@ export const DashboardContent = (props) => {
             : "plc-translate-x-full"
         }`}
         enterTo="plc-translate-x-0"
-        afterEnter={initializeHideMenuHandler}
+        // afterEnter={initializeHideMenuHandler}
         leave="plc-transform plc-transition plc-duration-500"
         leaveFrom="plc-translate-x-0"
         leaveTo={`${
@@ -280,11 +287,11 @@ export const DashboardContent = (props) => {
                   {user.email}
                 </p>
               </div>
-              <div className="lg:plc-hidden">
+              <div>
                 <Button
                   variant="ghost"
                   type="button"
-                  className="plc-text-gray-500 plc-rounded-2xl plc-absolute plc-z-max plc-top-5 plc-right-10"
+                  className="plc-text-gray-500 plc-rounded-2xl plc-absolute plc-z-max plc-top-5 plc-right-5"
                   onClick={closeDashboard}
                 >
                   <XIcon className="plc-fill-current" />
@@ -370,8 +377,12 @@ export const DashboardContent = (props) => {
           <Button
             variant="ghost"
             type="button"
-            className="plc-text-gray-500 plc-rounded-2xl plc-absolute plc-z-max plc-top-2 plc-right-2 md:plc-top-5 md:plc-right-10"
-            onClick={closeDashboard}
+            className={`plc-text-gray-500 plc-rounded-2xl plc-absolute plc-z-max plc-top-2 md:plc-top-5 ${
+              dashboardLayout == "left"
+                ? "plc-right-2 md:plc-right-10"
+                : "plc-left-2 md:plc-left-10"
+            }`}
+            onClick={closeSubMenusTab}
           >
             <XIcon className="plc-fill-current" />
           </Button>
