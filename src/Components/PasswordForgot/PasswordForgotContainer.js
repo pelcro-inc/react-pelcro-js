@@ -37,7 +37,8 @@ const PasswordForgotContainer = ({
   const handleSubmit = ({ email }, dispatch) => {
     window.Pelcro.password.forgot(
       {
-        email
+        email,
+        referer: window.location.origin
       },
       (err, res) => {
         dispatch({ type: DISABLE_SUBMIT, payload: false });
