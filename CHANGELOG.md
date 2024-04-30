@@ -1,3 +1,10 @@
+# [4.0.0-alpha.65](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.64...v4.0.0-alpha.65) (2024-04-30)
+
+
+### Features
+
+* disable hideMenuIfClickedOutside ([34601b1](https://github.com/pelcro-inc/react-pelcro-js/commit/34601b1ff49fd9e749307bad45fe99f16de93de2))
+
 # [4.0.0-alpha.64](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.63...v4.0.0-alpha.64) (2024-04-30)
 
 
