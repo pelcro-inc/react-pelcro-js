@@ -242,7 +242,7 @@ export { PaymentMethodDeleteMenu } from "./Components/dashboard/DashboardMenus/P
 export { AddressesMenu } from "./Components/dashboard/DashboardMenus/AddressesMenu/AddressesMenu";
 export { AddressCreateMenu } from "./Components/dashboard/DashboardMenus/AddressesMenu/AddressCreateMenu";
 export { AddressEditMenu } from "./Components/dashboard/DashboardMenus/AddressesMenu/AddressEditMenu";
-export { SubsMenu } from "./Components/dashboard/DashboardMenus/SubsMenu";
+export { SubscriptionsMenu } from "./Components/dashboard/DashboardMenus/SubsMenu";
 export { MembershipsMenu } from "./Components/dashboard/DashboardMenus/MembershipsMenu";
 export { NewslettersMenu } from "./Components/dashboard/DashboardMenus/NewslettersMenu";
 export { DonationsMenu } from "./Components/dashboard/DashboardMenus/DonationsMenu";
