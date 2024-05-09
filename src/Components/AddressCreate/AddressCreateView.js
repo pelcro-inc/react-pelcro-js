@@ -11,6 +11,7 @@ import { AddressCreateCountrySelect } from "./AddressCreateCountrySelect";
 import { AddressCreateStateSelect } from "./AddressCreateStateSelect";
 import { AddressCreateSetDefault } from "./AddressCreateSetDefault";
 import { AlertWithContext } from "../../SubComponents/AlertWithContext";
+import { AddressCreatePhone } from "./AddressCreatePhone";
 
 export const AddressCreateView = (props) => {
   const { t } = useTranslation("address");
@@ -68,6 +69,13 @@ export const AddressCreateView = (props) => {
               id="pelcro-input-postal-code"
               errorId="pelcro-input-postal-code-error"
               label={t("labels.code")}
+            />
+          </div>
+          <div className="plc-flex plc-space-x-3 plc-items-start">
+            <AddressCreatePhone
+              id="pelcro-input-phone"
+              errorId="pelcro-input-phone-error"
+              label={t("labels.phone")}
             />
           </div>
 

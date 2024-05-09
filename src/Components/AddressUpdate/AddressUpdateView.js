@@ -11,6 +11,7 @@ import { AddressUpdateCountrySelect } from "./AddressUpdateCountrySelect";
 import { AddressUpdateStateSelect } from "./AddressUpdateStateSelect";
 import { AddressUpdateSetDefault } from "./AddressUpdateSetDefault";
 import { AlertWithContext } from "../../SubComponents/AlertWithContext";
+import { AddressUpdatePhone } from "./AddressUpdatePhone";
 
 export const AddressUpdateView = (props) => {
   const { t } = useTranslation("address");
@@ -71,6 +72,14 @@ export const AddressUpdateView = (props) => {
               id="pelcro-input-postal_code"
               errorId="pelcro-input-postal-code-error"
               label={t("labels.code")}
+              required
+            />
+          </div>
+          <div className="plc-flex plc-space-x-3 plc-items-start">
+            <AddressUpdatePhone
+              id="pelcro-input-phone"
+              errorId="pelcro-input-phone-error"
+              label={t("labels.phone")}
               required
             />
           </div>

@@ -29,6 +29,7 @@ import { PaymentMethodDeleteMenu } from "./DashboardMenus/PaymentMethodsMenu/Pay
 import { AddressesMenu } from "./DashboardMenus/AddressesMenu/AddressesMenu";
 import { AddressCreateMenu } from "./DashboardMenus/AddressesMenu/AddressCreateMenu";
 import { AddressEditMenu } from "./DashboardMenus/AddressesMenu/AddressEditMenu";
+import { BillingAddressEditMenu } from "./DashboardMenus/AddressesMenu/BillingAddressEditMenu";
 import { SubscriptionsMenu } from "./DashboardMenus/SubsMenu";
 import { MembershipsMenu } from "./DashboardMenus/MembershipsMenu";
 import { NewslettersMenu } from "./DashboardMenus/NewslettersMenu";
@@ -227,7 +228,8 @@ export function Dashboard({ dashboardLayout = "left", ...props }) {
             setSubscriptionIdToRenew={setSubscriptionIdToRenew}
           />,
           <OrdersMenu key={18} />,
-          <InvoicesMenu key={19} />
+          <InvoicesMenu key={19} />,
+          <BillingAddressEditMenu key={20} />
         ]}
         {...props}
       >

@@ -52,6 +52,9 @@ export const SelectedAddress = ({ type }) => {
               {address.city}, {address.state_name}{" "}
               {address.postal_code}, {address.country_name}
             </p>
+            <p className="pelcro-address-phone plc-text-sm">
+              {address?.phone}
+            </p>
           </div>
           <Button
             onClick={onAddNewAddress}

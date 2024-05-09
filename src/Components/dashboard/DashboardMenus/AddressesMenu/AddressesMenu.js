@@ -119,6 +119,9 @@ const AddressesItems = (props) => {
             {address.city}, {address.state_name} {address.postal_code}
             , {address.country_name}
           </p>
+          <p className="pelcro-address-phone plc-text-sm">
+            {address?.phone}
+          </p>
         </div>
         <span className="plc-rounded-full plc-bg-gray-200 plc-text-black plc-inline-flex plc-items-start plc-py-1 plc-px-4 plc-text-sm plc-capitalize">
           {address.type === "shipping"

@@ -12,6 +12,7 @@
     "country": "Country",
     "firstName": "First name",
     "lastName": "Last name",
+    "phone": "Phone Number",
     "required": "required",
     "isDefault": "Set as your default address"
   },

@@ -40,6 +40,8 @@ const initialState = {
   isCountryLoading: false,
   postalCode: "",
   postalCodeError: "",
+  phone: "",
+  phoneError: "",
   states: [],
   countries: [],
   isDefault: false,
@@ -124,6 +126,7 @@ const AddressCreateContainer = ({
       state,
       country,
       postalCode,
+      phone,
       isDefault
     },
     dispatch
@@ -140,6 +143,7 @@ const AddressCreateContainer = ({
         state: state,
         country: country,
         postal_code: postalCode,
+        phone: phone,
         is_default: isDefault
       },
       (err, res) => {
