@@ -4,6 +4,7 @@ import { SET_ACTIVE_DASHBOARD_LINK } from "../../../utils/action-types";
 import { SUB_MENUS } from "../utils";
 import { ReactComponent as GiftIcon } from "../../../assets/gift.svg";
 import { useTranslation } from "react-i18next";
+import { usePelcro } from "../../../hooks/usePelcro";
 
 export const DashboardGifts = ({ title, icon, store }) => {
   const {
@@ -11,9 +12,12 @@ export const DashboardGifts = ({ title, icon, store }) => {
     dispatch
   } = useContext(store);
 
+  const { switchDashboardView } = usePelcro();
+
   const { t } = useTranslation("dashboard");
 
   const setActiveDashboardLink = (submenuName) => {
+    switchDashboardView("gifts");
     dispatch({
       type: SET_ACTIVE_DASHBOARD_LINK,
       payload: submenuName ?? null

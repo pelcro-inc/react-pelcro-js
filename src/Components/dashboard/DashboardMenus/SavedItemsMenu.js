@@ -150,3 +150,5 @@ export const SavedItems = ({ items, setItems }) => {
     })
   );
 };
+
+SavedItemsMenu.viewId = "saved-items";

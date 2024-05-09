@@ -7,7 +7,7 @@ import { ReactComponent as XCircleIcon } from "../../../assets/x-icon-solid.svg"
 import { ReactComponent as RefreshIcon } from "../../../assets/refresh.svg";
 import { ReactComponent as CalendarIcon } from "../../../assets/calendar.svg";
 import { ReactComponent as GiftIcon } from "../../../assets/gift.svg";
-import { ReactComponent as PlusIcon } from "../../../assets/plus.svg";
+// import { ReactComponent as PlusIcon } from "../../../assets/plus.svg";
 import { ReactComponent as ChevronRightIcon } from "../../../assets/chevron-right.svg";
 import { ReactComponent as CheckMarkIcon } from "../../../assets/check-mark.svg";
 import {
@@ -547,3 +547,5 @@ function isDateAfterToday(date) {
   const newDate = new Date(date).setHours(0, 0, 0, 0);
   return newDate === today ? true : newDate > today;
 }
+
+SubscriptionsMenu.viewId = "subscriptions";

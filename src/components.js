@@ -230,6 +230,25 @@ export { DashboardProfile } from "./Components/dashboard/DashboardLinks/Dashboar
 export { DashboardQRCode } from "./Components/dashboard/DashboardLinks/DashboardQRCode";
 export { DashboardSavedItems } from "./Components/dashboard/DashboardLinks/DashboardSavedItems";
 export { DashboardSubscriptions } from "./Components/dashboard/DashboardLinks/DashboardSubscriptions";
+export { ProfileMenu } from "./Components/dashboard/DashboardMenus/ProfileMenu/ProfileMenu";
+export { ProfilePicChangeMenu } from "./Components/dashboard/DashboardMenus/ProfileMenu/ProfilePicChangeMenu";
+export { QRCodeMenu } from "./Components/dashboard/DashboardMenus/QRCodeMenu";
+export { PasswordChangeMenu } from "./Components/dashboard/DashboardMenus/PasswordChangeMenu";
+export { SavedItemsMenu } from "./Components/dashboard/DashboardMenus/SavedItemsMenu";
+export { PaymentCardsMenu } from "./Components/dashboard/DashboardMenus/PaymentMethodsMenu/PaymentCardsMenu";
+export { PaymentMethodCreateMenu } from "./Components/dashboard/DashboardMenus/PaymentMethodsMenu/PaymentMethodCreateMenu";
+export { PaymentMethodUpdateMenu } from "./Components/dashboard/DashboardMenus/PaymentMethodsMenu/PaymentMethodUpdateMenu";
+export { PaymentMethodDeleteMenu } from "./Components/dashboard/DashboardMenus/PaymentMethodsMenu/PaymentMethodDeleteMenu";
+export { AddressesMenu } from "./Components/dashboard/DashboardMenus/AddressesMenu/AddressesMenu";
+export { AddressCreateMenu } from "./Components/dashboard/DashboardMenus/AddressesMenu/AddressCreateMenu";
+export { AddressEditMenu } from "./Components/dashboard/DashboardMenus/AddressesMenu/AddressEditMenu";
+export { SubsMenu } from "./Components/dashboard/DashboardMenus/SubsMenu";
+export { MembershipsMenu } from "./Components/dashboard/DashboardMenus/MembershipsMenu";
+export { NewslettersMenu } from "./Components/dashboard/DashboardMenus/NewslettersMenu";
+export { DonationsMenu } from "./Components/dashboard/DashboardMenus/DonationsMenu";
+export { GiftsMenu } from "./Components/dashboard/DashboardMenus/GiftsMenu";
+export { OrdersMenu } from "./Components/dashboard/DashboardMenus/OrdersMenu";
+export { InvoicesMenu } from "./Components/dashboard/DashboardMenus/InvoicesMenu";
 
 export { ProfilePicChangeButton } from "./Components/ProfilePicChange/ProfilePicChangeButton";
 export { ProfilePicChangeContainer } from "./Components/ProfilePicChange/ProfilePicChangeContainer";

@@ -21,3 +21,5 @@ export const QRCodeMenu = (props) => {
     </Card>
   );
 };
+
+QRCodeMenu.viewId = "qr-code";

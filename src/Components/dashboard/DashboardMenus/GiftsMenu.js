@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "../../../SubComponents/Button";
 import {
@@ -8,16 +8,21 @@ import {
 import { AddNew } from "../AddNew";
 import { Card } from "../Card";
 import { ReactComponent as RefreshIcon } from "../../../assets/refresh.svg";
-import { ReactComponent as PlusIcon } from "../../../assets/plus.svg";
+// import { ReactComponent as PlusIcon } from "../../../assets/plus.svg";
 import { usePelcro } from "../../../hooks/usePelcro";
+import { store } from "../DashboardContainer";
 
 export const GiftsMenu = (props) => {
+  const {
+    state: { disableSubmit }
+  } = useContext(store);
   const { t } = useTranslation("dashboard");
   const { switchView, set } = usePelcro();
   const giftRecipients =
     window.Pelcro.user.read()?.gift_recipients ?? [];
 
-  const setIsRenewingGift = (isRenewingGift) => set({ isRenewingGift });
+  const setIsRenewingGift = (isRenewingGift) =>
+    set({ isRenewingGift });
 
   const renderGiftRecipients = ({ disableSubmit }) => {
     const giftedSubscriptions = giftRecipients
@@ -145,7 +150,10 @@ export const GiftsMenu = (props) => {
       className="plc-max-w-100% md:plc-max-w-80% plc-m-auto"
       title={t("labels.gifts")}
     >
-      {renderGiftRecipients(props)}
+      {renderGiftRecipients({
+        disableSubmit: disableSubmit,
+        ...props
+      })}
       <AddNew
         title={t("labels.addGift")}
         onClick={() => props?.displayProductSelect({ isGift: true })}
@@ -153,3 +161,5 @@ export const GiftsMenu = (props) => {
     </Card>
   );
 };
+
+GiftsMenu.viewId = "gifts";

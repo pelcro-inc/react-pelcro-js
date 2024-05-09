@@ -16,3 +16,5 @@ export const PasswordChangeMenu = () => {
     </Card>
   );
 };
+
+PasswordChangeMenu.viewId = "password-change";

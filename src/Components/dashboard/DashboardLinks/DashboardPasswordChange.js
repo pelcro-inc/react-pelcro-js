@@ -4,6 +4,7 @@ import { SET_ACTIVE_DASHBOARD_LINK } from "../../../utils/action-types";
 import { SUB_MENUS } from "../utils";
 import { ReactComponent as KeyIcon } from "../../../assets/key.svg";
 import { useTranslation } from "react-i18next";
+import { usePelcro } from "../../../hooks/usePelcro";
 
 export const DashboardPasswordChange = ({ title, icon, store }) => {
   const {
@@ -13,7 +14,10 @@ export const DashboardPasswordChange = ({ title, icon, store }) => {
 
   const { t } = useTranslation("dashboard");
 
+  const { switchDashboardView } = usePelcro();
+
   const setActiveDashboardLink = (submenuName) => {
+    switchDashboardView("password-change");
     dispatch({
       type: SET_ACTIVE_DASHBOARD_LINK,
       payload: submenuName ?? null

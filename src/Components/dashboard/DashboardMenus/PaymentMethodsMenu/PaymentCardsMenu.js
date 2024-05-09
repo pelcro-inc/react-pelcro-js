@@ -1,20 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { ReactComponent as EditIcon } from "../../../assets/edit.svg";
-import { ReactComponent as TrashCanIcon } from "../../../assets/trash-can.svg";
-import { Card } from "../Card";
-import { AddNew } from "../AddNew";
-import { Button } from "../../../SubComponents/Button";
-import { getPaymentCardIcon } from "../../../utils/utils";
-import { usePelcro } from "../../../hooks/usePelcro";
-import { notify } from "../../../SubComponents/Notification";
-import { Loader } from "../../../SubComponents/Loader";
+import { ReactComponent as EditIcon } from "../../../../assets/edit.svg";
+import { ReactComponent as TrashCanIcon } from "../../../../assets/trash-can.svg";
+import { Card } from "../../Card";
+import { AddNew } from "../../AddNew";
+import { Button } from "../../../../SubComponents/Button";
+import { getPaymentCardIcon } from "../../../../utils/utils";
+import { usePelcro } from "../../../../hooks/usePelcro";
+// import { notify } from "../../../SubComponents/Notification";
+import { Loader } from "../../../../SubComponents/Loader";
 
 // TODO: clean up the code
 export const PaymentCardsMenu = (props) => {
   const { t } = useTranslation("dashboard");
   const {
     switchView,
+    switchDashboardView,
     setPaymentMethodToEdit,
     setPaymentMethodToDelete
   } = usePelcro();
@@ -39,20 +40,23 @@ export const PaymentCardsMenu = (props) => {
     );
   }, []);
 
+  // const displaySourceCreate = () => {
+  //   return switchView("payment-method-create");
+  // };
   const displaySourceCreate = () => {
-    return switchView("payment-method-create");
+    return switchDashboardView("payment-method-create");
   };
 
   const displaySourceEdit = (e) => {
     const source = e.currentTarget.dataset.key;
 
     setPaymentMethodToEdit(source);
-    return switchView("payment-method-update");
+    return switchDashboardView("payment-method-update");
   };
 
   const onDeletePaymentMethodClick = (source) => {
     setPaymentMethodToDelete(source.id);
-    return switchView("payment-method-delete");
+    return switchDashboardView("payment-method-delete");
   };
 
   return (
@@ -134,3 +138,5 @@ const PaymentCardsItems = (props) => {
     return <div>you didn't add payment methods yet</div>;
   }
 };
+
+PaymentCardsMenu.viewId = "payment-cards";

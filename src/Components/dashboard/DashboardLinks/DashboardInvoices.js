@@ -4,6 +4,7 @@ import { SET_ACTIVE_DASHBOARD_LINK } from "../../../utils/action-types";
 import { hasInvoices, SUB_MENUS } from "../utils";
 import { ReactComponent as InvoiceIcon } from "../../../assets/document.svg";
 import { useTranslation } from "react-i18next";
+import { usePelcro } from "../../../hooks/usePelcro";
 
 export const DashboardInvoices = ({ title, icon, store }) => {
   const {
@@ -11,9 +12,12 @@ export const DashboardInvoices = ({ title, icon, store }) => {
     dispatch
   } = useContext(store);
 
+  const { switchDashboardView } = usePelcro();
+
   const { t } = useTranslation("dashboard");
 
   const setActiveDashboardLink = (submenuName) => {
+    switchDashboardView("invoices");
     dispatch({
       type: SET_ACTIVE_DASHBOARD_LINK,
       payload: submenuName ?? null

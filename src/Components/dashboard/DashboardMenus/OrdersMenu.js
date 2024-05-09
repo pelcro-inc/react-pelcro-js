@@ -59,116 +59,122 @@ export const OrderItems = ({
   const { t } = useTranslation("dashboard");
 
   if (orders?.length === 0) return null;
-  
-  return !orders?.length ? null : (
-    orders?.map((order) => {
-      const isActive = activeMenu === order.id;
 
-      return (
-        <React.Fragment key={order.id}>
-          {/* Accordion header */}
-          <tbody>
-            <tr
-              onClick={() => toggleActiveMenu(order.id)}
-              key={"dashboard-order-" + order.id}
-              className={`plc-w-full plc-text-gray-500 plc-align-middle plc-cursor-pointer accordion-header ${
-                isActive ? "plc-bg-gray-100" : "hover:plc-bg-gray-50"
-              }`}
-            >
-              <td className="plc-py-4 plc-pl-2">
-                <span className="plc-text-xl plc-font-semibold ">
-                  {getFormattedPriceByLocal(
-                    order.amount,
-                    order.currency,
-                    getPageOrDefaultLanguage()
-                  )}
-                </span>
-                <br />
-                <span className="plc-text-xs plc-text-gray-400 plc-uppercase">
-                  {t("labels.orders.itemsAmount", {
-                    count: getItemsAmount(order.id)
-                  })}
-                </span>
-              </td>
-              <td>
-                <p className="plc-font-semibold ">{order?.items?.[0].created_at}</p>
-              </td>
+  return !orders?.length
+    ? null
+    : orders?.map((order) => {
+        const isActive = activeMenu === order.id;
 
-              <td>
-                <div
-                  className={`plc-flex plc-items-center plc-justify-center plc-transition-transform plc-ease-out plc-transform plc-rounded-full plc-w-7 plc-h-7 ${
-                    isActive
-                      ? "plc-flex plc-place-items-center plc-w-7 plc-h-7 plc-p-1 plc-bg-primary-400 plc-rounded-full"
-                      : "accordion-chevron"
-                  }`}
-                >
-                  <span
-                    className={`plc-transition plc-ease-out  ${
-                      isActive &&
-                      "plc-text-white plc-transform plc-rotate-90"
+        return (
+          <React.Fragment key={order.id}>
+            {/* Accordion header */}
+            <tbody>
+              <tr
+                onClick={() => toggleActiveMenu(order.id)}
+                key={"dashboard-order-" + order.id}
+                className={`plc-w-full plc-text-gray-500 plc-align-middle plc-cursor-pointer accordion-header ${
+                  isActive
+                    ? "plc-bg-gray-100"
+                    : "hover:plc-bg-gray-50"
+                }`}
+              >
+                <td className="plc-py-4 plc-pl-2">
+                  <span className="plc-text-xl plc-font-semibold ">
+                    {getFormattedPriceByLocal(
+                      order.amount,
+                      order.currency,
+                      getPageOrDefaultLanguage()
+                    )}
+                  </span>
+                  <br />
+                  <span className="plc-text-xs plc-text-gray-400 plc-uppercase">
+                    {t("labels.orders.itemsAmount", {
+                      count: getItemsAmount(order.id)
+                    })}
+                  </span>
+                </td>
+                <td>
+                  <p className="plc-font-semibold ">
+                    {order?.items?.[0].created_at}
+                  </p>
+                </td>
+
+                <td>
+                  <div
+                    className={`plc-flex plc-items-center plc-justify-center plc-transition-transform plc-ease-out plc-transform plc-rounded-full plc-w-7 plc-h-7 ${
+                      isActive
+                        ? "plc-flex plc-place-items-center plc-w-7 plc-h-7 plc-p-1 plc-bg-primary-400 plc-rounded-full"
+                        : "accordion-chevron"
                     }`}
                   >
-                    <ChevronRightIcon />
-                  </span>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-
-          {/* Accordion active menu */}
-          <tbody>
-            {isActive && (
-              <>
-                {order.items.map((item) => {
-                  const productSku =
-                    window.Pelcro.ecommerce.products.getBySkuId(
-                      item.product_sku_id
-                    );
-
-                  return (
-                    <tr
-                      key={item.id}
-                      className="plc-text-lg plc-text-gray-500 pelcro-order-details-row "
+                    <span
+                      className={`plc-transition plc-ease-out  ${
+                        isActive &&
+                        "plc-text-white plc-transform plc-rotate-90"
+                      }`}
                     >
-                      <td colSpan="2">
-                        <div className="plc-flex plc-items-center plc-py-2 plc-space-x-2 sm:plc-p-2">
-                          {productSku?.image && (
-                            <img
-                              className="plc-w-12 plc-h-12 pelcro-orders-product-image"
-                              alt={`image of ${item.product_sku_name}`}
-                              src={productSku?.image}
-                            />
-                          )}
+                      <ChevronRightIcon />
+                    </span>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+
+            {/* Accordion active menu */}
+            <tbody>
+              {isActive && (
+                <>
+                  {order.items.map((item) => {
+                    const productSku =
+                      window.Pelcro.ecommerce.products.getBySkuId(
+                        item.product_sku_id
+                      );
+
+                    return (
+                      <tr
+                        key={item.id}
+                        className="plc-text-lg plc-text-gray-500 pelcro-order-details-row "
+                      >
+                        <td colSpan="2">
+                          <div className="plc-flex plc-items-center plc-py-2 plc-space-x-2 sm:plc-p-2">
+                            {productSku?.image && (
+                              <img
+                                className="plc-w-12 plc-h-12 pelcro-orders-product-image"
+                                alt={`image of ${item.product_sku_name}`}
+                                src={productSku?.image}
+                              />
+                            )}
+                            <span className="plc-font-semibold">
+                              {item.quantity}×{" "}
+                            </span>
+                            <span className="">
+                              {item.product_sku_name}
+                            </span>
+                          </div>
+                        </td>
+                        <td>
                           <span className="plc-font-semibold">
-                            {item.quantity}×{" "}
+                            {getFormattedPriceByLocal(
+                              item.amount,
+                              order.currency,
+                              getPageOrDefaultLanguage()
+                            )}
                           </span>
-                          <span className="">
-                            {item.product_sku_name}
-                          </span>
-                        </div>
-                      </td>
-                      <td>
-                        <span className="plc-font-semibold">
-                          {getFormattedPriceByLocal(
-                            item.amount,
-                            order.currency,
-                            getPageOrDefaultLanguage()
-                          )}
-                        </span>
-                      </td>
-                    </tr>
-                  );
-                })}
-                <tr>
-                  <td colSpan="3">
-                    <hr className="plc-mt-4" />
-                  </td>
-                </tr>
-              </>
-            )}
-          </tbody>
-        </React.Fragment>
-      );
-    })
-  );
+                        </td>
+                      </tr>
+                    );
+                  })}
+                  <tr>
+                    <td colSpan="3">
+                      <hr className="plc-mt-4" />
+                    </td>
+                  </tr>
+                </>
+              )}
+            </tbody>
+          </React.Fragment>
+        );
+      });
 };
+
+OrdersMenu.viewId = "orders";

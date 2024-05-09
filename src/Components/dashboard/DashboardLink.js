@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-
+import React from "react";
 
 /**
  * @typedef {Object} DashboardLinkType
@@ -23,7 +22,6 @@ export const DashboardLink = ({
   title,
   setActiveDashboardLink
 }) => {
-
   const isActive = activeDashboardLink === name;
 
   return show ? (

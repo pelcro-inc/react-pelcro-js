@@ -1,15 +1,15 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { usePelcro } from "../../../hooks/usePelcro";
-import { UserUpdateView } from "../../UserUpdate/UserUpdateView";
-import { Card } from "../Card";
+import { usePelcro } from "../../../../hooks/usePelcro";
+import { UserUpdateView } from "../../../UserUpdate/UserUpdateView";
+import { Card } from "../../Card";
 
 export const ProfileMenu = (props) => {
   const { t } = useTranslation("dashboard");
-  const { switchView } = usePelcro();
+  const { switchDashboardView } = usePelcro();
 
   const onPictureClick = () => {
-    switchView("profile-picture");
+    switchDashboardView("profile-picture");
   };
 
   return (
@@ -22,3 +22,5 @@ export const ProfileMenu = (props) => {
     </Card>
   );
 };
+
+ProfileMenu.viewId = "profile";

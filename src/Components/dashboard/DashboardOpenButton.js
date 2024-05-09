@@ -16,7 +16,9 @@ export const DashboardOpenButton = ({ layout = "left" }) => {
         className="plc-bg-white plc-border-2 plc-rounded-full focus:plc-outline-none plc-border-primary-300 hover:plc-bg-white"
         name="menu"
         id="pelcro-view-menu"
-        onClick={() => switchView("dashboard")}
+        onClick={() => {
+          switchView("dashboard");
+        }}
       >
         <svg
           className="plc-w-10 plc-h-10 plc-text-primary-400 hover:plc-text-primary-500"

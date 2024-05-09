@@ -162,3 +162,5 @@ const NewsLettersItems = ({ newsletters, handleChange }) => {
     );
   });
 };
+
+NewslettersMenu.viewId = "newsletters";

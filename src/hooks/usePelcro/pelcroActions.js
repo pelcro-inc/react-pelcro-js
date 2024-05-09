@@ -60,6 +60,10 @@ export class PelcroActions {
     this.set({ view });
   };
 
+  switchDashboardView = (dashboardView) => {
+    this.set({ dashboardView });
+  };
+
   resetView = () => {
     const { switchView, resetState } = this.get();
 

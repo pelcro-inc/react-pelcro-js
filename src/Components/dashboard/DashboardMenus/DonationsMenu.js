@@ -12,12 +12,12 @@ import { usePelcro } from "../../../hooks/usePelcro";
 import { Card } from "../Card";
 import { notify } from "../../../SubComponents/Notification";
 import { store } from "../DashboardContainer";
-import { CANCEL_SUBSCRIPTION, REACTIVATE_SUBSCRIPTION } from "../../../utils/action-types";
+import {
+  CANCEL_SUBSCRIPTION,
+  REACTIVATE_SUBSCRIPTION
+} from "../../../utils/action-types";
 
-export const DonationsMenu = ({
-  getSubscriptionStatus,
-  onClose
-}) => {
+export const DonationsMenu = ({ getSubscriptionStatus, onClose }) => {
   const { t } = useTranslation("dashboard");
   const { switchView, setSubscriptionToCancel } = usePelcro();
   const {
@@ -74,7 +74,7 @@ export const DonationsMenu = ({
         if (userMustVerifyEmail()) {
           return switchView("email-verify");
         }
-        
+
         dispatch({
           type: REACTIVATE_SUBSCRIPTION,
           payload: {
@@ -221,3 +221,5 @@ function formatStartDate(date) {
   const startDate = new Date(date);
   return new Intl.DateTimeFormat("en-CA").format(startDate);
 }
+
+DonationsMenu.viewId = "donations";

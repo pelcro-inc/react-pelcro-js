@@ -4,6 +4,7 @@ import { SET_ACTIVE_DASHBOARD_LINK } from "../../../utils/action-types";
 import { SUB_MENUS } from "../utils";
 import { ReactComponent as BookmarkIcon } from "../../../assets/bookmark.svg";
 import { useTranslation } from "react-i18next";
+import { usePelcro } from "../../../hooks/usePelcro";
 
 export const DashboardSavedItems = ({ title, icon, store }) => {
   const {
@@ -11,9 +12,12 @@ export const DashboardSavedItems = ({ title, icon, store }) => {
     dispatch
   } = useContext(store);
 
+  const { switchDashboardView } = usePelcro();
+
   const { t } = useTranslation("dashboard");
 
   const setActiveDashboardLink = (submenuName) => {
+    switchDashboardView("saved-items");
     dispatch({
       type: SET_ACTIVE_DASHBOARD_LINK,
       payload: submenuName ?? null

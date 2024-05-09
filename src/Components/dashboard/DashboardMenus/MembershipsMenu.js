@@ -133,3 +133,5 @@ function getMemberShipStatus(status) {
     icon: <CheckMarkIcon />
   };
 }
+
+MembershipsMenu.viewId = "memberships";

@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { ReactComponent as EditIcon } from "../../../assets/edit.svg";
-import { usePelcro } from "../../../hooks/usePelcro";
-import { Card } from "../Card";
-import { AddNew } from "../AddNew";
-import { Button } from "../../../SubComponents/Button";
+import { ReactComponent as EditIcon } from "../../../../assets/edit.svg";
+import { usePelcro } from "../../../../hooks/usePelcro";
+import { Card } from "../../Card";
+import { AddNew } from "../../AddNew";
+import { Button } from "../../../../SubComponents/Button";
 
 export const AddressesMenu = (props) => {
   const { t } = useTranslation("dashboard");
-  const { switchView, set } = usePelcro();
+  const { switchDashboardView, set } = usePelcro();
   const [requestStates, setRequestStates] = useState({
     loading: false,
     success: false,
@@ -16,7 +16,7 @@ export const AddressesMenu = (props) => {
   });
 
   const displayAddressCreate = () => {
-    return switchView("address-create");
+    return switchDashboardView("address-create");
   };
 
   const displayAddressEdit = (e) => {
@@ -24,11 +24,11 @@ export const AddressesMenu = (props) => {
     const addressType = e.currentTarget.dataset.type;
     set({ addressIdToEdit: addressId });
     if (addressType === "shipping") {
-      return switchView("address-edit");
+      return switchDashboardView("address-edit");
     }
 
     if (addressType === "billing") {
-      return switchView("billing-address-edit");
+      return switchDashboardView("billing-address-edit");
     }
   };
 
@@ -143,3 +143,5 @@ const AddressesItems = (props) => {
       </div>
     ));
 };
+
+AddressesMenu.viewId = "addresses";

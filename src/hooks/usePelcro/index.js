@@ -8,6 +8,7 @@ import { PelcroCallbacks } from "./pelcroCallbacks";
 export const initialState = {
   // View
   view: null,
+  dashboardView: null,
 
   // Plans
   product: null,

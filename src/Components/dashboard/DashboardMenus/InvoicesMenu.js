@@ -27,11 +27,21 @@ export const InvoicesMenu = (props) => {
       <table className="plc-w-full plc-table-fixed pelcro-invoices-table plc-text-left">
         <thead className="plc-text-xs plc-font-semibold plc-tracking-wider plc-text-gray-400 plc-uppercase ">
           <tr>
-            <th className="plc-w-1/3 md:plc-w-1/5">{t("labels.details")}</th>
-            <th className="plc-hidden md:plc-table-cell plc-w-1/5">{t("labels.orders.date")}</th>
-            <th className="plc-hidden md:plc-table-cell plc-w-1/5">{t("labels.orders.total")}</th>
-            <th className="plc-w-1/3 md:plc-w-1/5">{t("labels.status.title")}</th>
-            <th className="plc-w-1/3 md:plc-w-1/5">{t("labels.actions")}</th>
+            <th className="plc-w-1/3 md:plc-w-1/5">
+              {t("labels.details")}
+            </th>
+            <th className="plc-hidden md:plc-table-cell plc-w-1/5">
+              {t("labels.orders.date")}
+            </th>
+            <th className="plc-hidden md:plc-table-cell plc-w-1/5">
+              {t("labels.orders.total")}
+            </th>
+            <th className="plc-w-1/3 md:plc-w-1/5">
+              {t("labels.status.title")}
+            </th>
+            <th className="plc-w-1/3 md:plc-w-1/5">
+              {t("labels.actions")}
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -49,7 +59,8 @@ const InvoicesItems = () => {
   const invoices =
     window.Pelcro.invoice
       .list()
-      ?.filter((invoice) => invoice.order_id || invoice.total > 0) ?? [];
+      ?.filter((invoice) => invoice.order_id || invoice.total > 0) ??
+    [];
 
   const showInvoiceDetails = (event) => {
     if (setInvoice(event.target.dataset.id)) {
@@ -201,3 +212,5 @@ function getInvoiceStatus(invoice) {
       };
   }
 }
+
+InvoicesMenu.viewId = "invoices";
