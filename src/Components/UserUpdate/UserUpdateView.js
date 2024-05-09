@@ -11,6 +11,7 @@ import { AlertWithContext } from "../../SubComponents/AlertWithContext";
 import { UserUpdateProfilePic } from "./UserUpdateProfilePic";
 import { UserUpdateTin } from "./UserUpdateTin";
 import { UserUpdateDisplayName } from "./UserUpdateDisplayName";
+import { UserUpdateDateOfBirth } from "./UserUpdateDateOfBirth";
 
 export const UserUpdateView = (props) => {
   const { t } = useTranslation("userEdit");
@@ -19,6 +20,9 @@ export const UserUpdateView = (props) => {
   );
   const showUsernameInput =
     window.Pelcro?.uiSettings?.enableLoginWithUsername;
+
+  const showDateOfBirth =
+    window.Pelcro?.uiSettings?.enableDateOfBirth;
 
   return (
     <div id="pelcro-user-update-view">
@@ -72,6 +76,16 @@ export const UserUpdateView = (props) => {
               required={supportsTap ? true : false}
             />
           </div>
+          {showDateOfBirth && (
+            <div className="plc-flex plc-items-start">
+              <UserUpdateDateOfBirth
+                id="pelcro-input-date-of-birth"
+                autoComplete="date-of-birth"
+                errorId="pelcro-input-date-of-birth-error"
+                label={t("labels.dateOfBirth")}
+              />
+            </div>
+          )}
           <UserUpdateButton
             role="submit"
             className="plc-w-full plc-mt-2"

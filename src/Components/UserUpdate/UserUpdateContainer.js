@@ -15,6 +15,7 @@ import {
   SET_DISPLAY_NAME,
   SET_PHONE,
   SET_TEXT_FIELD,
+  SET_DATE_OF_BIRTH,
   HANDLE_USER_UPDATE,
   DISABLE_USER_UPDATE_BUTTON,
   SHOW_ALERT
@@ -31,6 +32,7 @@ const initialState = {
   usernameError: null,
   displayName: window.Pelcro.user.read()?.display_name,
   phone: window.Pelcro.user.read()?.phone,
+  dateOfBirth: window.Pelcro.user.read()?.metadata?.customer_dob,
   buttonDisabled: false,
   textFields: {},
   alert: {
@@ -84,6 +86,10 @@ const UserUpdateContainer = ({
       {
         type: SET_PHONE,
         payload: window.Pelcro.user.read()?.phone
+      },
+      {
+        type: SET_DATE_OF_BIRTH,
+        payload: window.Pelcro.user.read()?.metadata?.customer_dob
       }
     ];
 
@@ -103,7 +109,8 @@ const UserUpdateContainer = ({
       phone,
       tin,
       textFields,
-      displayName
+      displayName,
+      dateOfBirth
     },
     dispatch
   ) => {
@@ -116,7 +123,11 @@ const UserUpdateContainer = ({
         ...(username && { username }),
         display_name: displayName,
         phone: phone,
-        metadata: { updated: "updated", ...textFields }
+        metadata: {
+          updated: "updated",
+          customer_dob: dateOfBirth,
+          ...textFields
+        }
       },
       (err, res) => {
         dispatch({
@@ -204,6 +215,12 @@ const UserUpdateContainer = ({
           return Update({
             ...state,
             phone: action.payload
+          });
+
+        case SET_DATE_OF_BIRTH:
+          return Update({
+            ...state,
+            dateOfBirth: action.payload
           });
 
         case SHOW_ALERT:

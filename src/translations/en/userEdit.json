@@ -15,6 +15,7 @@
     "save": "Upload Photo",
     "selectImage": "Upload new photo",
     "removeImage": "Remove current photo",
+    "dateOfBirth": "Date of birth",
     "zoom": "Zoom"
   },
   "messages": {

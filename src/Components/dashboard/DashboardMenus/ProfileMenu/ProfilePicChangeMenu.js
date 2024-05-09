@@ -14,11 +14,7 @@ export const ProfilePicChangeMenu = (props) => {
       title={t("labels.profile")}
       back={{ target: "profile" }}
     >
-      <ProfilePicChangeView
-        onChangeSuccess={() => {
-          console.log("Success");
-        }}
-      />
+      <ProfilePicChangeView />
     </Card>
   );
 };
