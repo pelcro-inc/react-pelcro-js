@@ -1,3 +1,10 @@
+# [4.0.0-alpha.67](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.66...v4.0.0-alpha.67) (2024-05-09)
+
+
+### Features
+
+* add phone attribute to address ([b472d14](https://github.com/pelcro-inc/react-pelcro-js/commit/b472d14379638c7978347f29d7a9324bae99bd79))
+
 # [4.0.0-alpha.66](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.65...v4.0.0-alpha.66) (2024-05-09)
 
 
