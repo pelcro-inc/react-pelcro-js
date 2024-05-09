@@ -1,3 +1,15 @@
+# [4.0.0-alpha.66](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.65...v4.0.0-alpha.66) (2024-05-09)
+
+
+### Bug Fixes
+
+* export path fix for SubscriptionsMenu ([6c5cbff](https://github.com/pelcro-inc/react-pelcro-js/commit/6c5cbffd3cd39edc34ddb0ded3c929e167fb2d1c))
+
+
+### Features
+
+* dashboard enhancements ([d7e14f1](https://github.com/pelcro-inc/react-pelcro-js/commit/d7e14f11f004818c8aec83a7ed92e11ef1afd501))
+
 # [4.0.0-alpha.65](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.64...v4.0.0-alpha.65) (2024-04-30)
 
 
