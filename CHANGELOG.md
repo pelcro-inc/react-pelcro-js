@@ -1,3 +1,10 @@
+# [4.0.0-alpha.68](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.67...v4.0.0-alpha.68) (2024-05-09)
+
+
+### Features
+
+* add dob attribute to user edit ([8fa54d1](https://github.com/pelcro-inc/react-pelcro-js/commit/8fa54d1350f051eea7c75afc39f2fe2f42bb37e8))
+
 # [4.0.0-alpha.67](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.66...v4.0.0-alpha.67) (2024-05-09)
 
 
