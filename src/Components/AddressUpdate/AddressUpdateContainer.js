@@ -41,6 +41,8 @@ const initialState = {
   isCountryLoading: false,
   postalCode: "",
   postalCodeError: "",
+  phone: "",
+  phoneError: "",
   states: [],
   countries: [],
   isDefault: false,
@@ -110,6 +112,7 @@ const AddressUpdateContainer = ({
           state: thisAddress.state,
           country: thisAddress.country,
           postalCode: thisAddress.postal_code,
+          phone: thisAddress.phone,
           isDefault: thisAddress.is_default
         };
         dispatch({ type: SET_TEXT_FIELD, payload: newState });
@@ -127,6 +130,7 @@ const AddressUpdateContainer = ({
       state,
       country,
       postalCode,
+      phone,
       isDefault
     },
     dispatch
@@ -144,6 +148,7 @@ const AddressUpdateContainer = ({
         state: state,
         country: country,
         postal_code: postalCode,
+        phone: phone,
         is_default: isDefault
       },
       (err, res) => {

@@ -63,6 +63,9 @@ export const AddressSelectList = ({ type = "shipping" }) => {
                     {address.city}, {address.state_name}{" "}
                     {address.postal_code}, {address.country_name}
                   </p>
+                  <p className="pelcro-address-phone plc-text-sm">
+                    {address?.phone}
+                  </p>
                 </Radio>
               </div>
             )
