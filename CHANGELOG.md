@@ -1,3 +1,10 @@
+# [4.0.0-alpha.70](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.69...v4.0.0-alpha.70) (2024-05-13)
+
+
+### Bug Fixes
+
+* dashboard logout bug fix ([c7fe80a](https://github.com/pelcro-inc/react-pelcro-js/commit/c7fe80a0dad754260de179260ba22cafdbaca5de))
+
 # [4.0.0-alpha.69](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.68...v4.0.0-alpha.69) (2024-05-13)
 
 
