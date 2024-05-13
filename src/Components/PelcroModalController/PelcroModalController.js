@@ -18,6 +18,9 @@ const defaultOptions = {
   enableTheme: true,
   enablePaywalls: true,
   loadSecuritySDK: true,
+  enableNativeButtons: true,
+  enableAuthenticatedButtons: true,
+  enableUnAuthenticatedButtons: true,
   enableGoogleAnalytics: false
 };
 
@@ -28,17 +31,19 @@ export const PelcroModalController = ({
 }) => {
   const { view, isAuthenticated, whenSiteReady } = usePelcro();
 
+  // default options are overridable by consumer's options
+  const mergedOptions = { ...defaultOptions, ...options };
+
   React.useEffect(() => {
-    initNativeButtons();
+    if (mergedOptions.enableNativeButtons) {
+      initNativeButtons();
+    }
     renderShopView(
       React.Children.map(children, (child) => child).find(
         ({ type }) => type?.viewId === "shop"
       )
     );
   }, []);
-
-  // default options are overridable by consumer's options
-  const mergedOptions = { ...defaultOptions, ...options };
 
   React.useEffect(() => {
     whenSiteReady(() => {
@@ -48,9 +53,13 @@ export const PelcroModalController = ({
 
   React.useEffect(() => {
     if (window.Pelcro.user.isAuthenticated()) {
-      authenticatedButtons();
+      if (mergedOptions.enableAuthenticatedButtons) {
+        authenticatedButtons();
+      }
     } else {
-      unauthenticatedButtons();
+      if (mergedOptions.enableUnAuthenticatedButtons) {
+        unauthenticatedButtons();
+      }
     }
   }, [window.Pelcro.user.isAuthenticated()]);
 
