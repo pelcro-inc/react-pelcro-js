@@ -21,7 +21,7 @@ export const DashboardContent = ({ children, subView, ...props }) => {
     dispatch
   } = useContext(store);
 
-  const { switchView, dashboardView, switchDashboardView } =
+  const { switchView, dashboardView, switchDashboardView, logout } =
     usePelcro();
 
   const { t } = useTranslation("dashboard");
@@ -59,6 +59,10 @@ export const DashboardContent = ({ children, subView, ...props }) => {
   // };
 
   const setActiveDashboardLink = (submenuName) => {
+    console.log(submenuName);
+    if (submenuName == "logout") {
+      logout();
+    }
     dispatch({
       type: SET_ACTIVE_DASHBOARD_LINK,
       payload: submenuName ?? null
