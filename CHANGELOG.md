@@ -1,3 +1,10 @@
+# [4.0.0-alpha.69](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.68...v4.0.0-alpha.69) (2024-05-13)
+
+
+### Features
+
+* error message amends ([57c8fb8](https://github.com/pelcro-inc/react-pelcro-js/commit/57c8fb84a74ce859518bb0147ecbca26dadb8a9e))
+
 # [4.0.0-alpha.68](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.67...v4.0.0-alpha.68) (2024-05-09)
 
 
