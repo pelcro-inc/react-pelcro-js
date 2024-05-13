@@ -2079,16 +2079,32 @@ const PaymentMethodContainerWithoutStripe = ({
       }
     }
 
-    onFailure(error);
-    dispatch({
-      type: SHOW_ALERT,
-      payload: {
-        type: "error",
-        content: getErrorMessages(error) ?? error?.message
-      }
-    });
+    if (
+      error.type == "invalid_request_error" &&
+      error.param == "billing_details[address]" &&
+      error.code == "parameter_missing"
+    ) {
+      dispatch({
+        type: SHOW_ALERT,
+        payload: {
+          type: "error",
+          content:
+            "Billing address is required to complete your purchase. Please provide your billing address."
+        }
+      });
+    } else {
+      dispatch({
+        type: SHOW_ALERT,
+        payload: {
+          type: "error",
+          content: getErrorMessages(error) ?? error?.message
+        }
+      });
+    }
+
     dispatch({ type: DISABLE_SUBMIT, payload: false });
     dispatch({ type: LOADING, payload: false });
+    onFailure(error);
   };
 
   // TODO: Refactor deprecated stripe implementation
