@@ -1,3 +1,11 @@
+# [3.26.0-beta.59](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.58...v3.26.0-beta.59) (2024-05-13)
+
+
+### Features
+
+* add referer attribute to password endpoints ([#354](https://github.com/pelcro-inc/react-pelcro-js/issues/354)) ([613370b](https://github.com/pelcro-inc/react-pelcro-js/commit/613370b51aaa8993b15cebb3b77146ce2541430b))
+* support override for native buttons functions ([068e4b2](https://github.com/pelcro-inc/react-pelcro-js/commit/068e4b2b04b33e242fc787a06106c980431372f7))
+
 # [3.26.0-beta.58](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.57...v3.26.0-beta.58) (2024-04-29)
 
 
