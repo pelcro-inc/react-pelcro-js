@@ -2,8 +2,7 @@ import React, { useContext } from "react";
 import { Input } from "../../SubComponents/Input";
 import {
   RESET_FIELD_ERROR,
-  SET_TEXT_FIELD,
-  VALIDATE_FIELD
+  SET_TEXT_FIELD
 } from "../../utils/action-types";
 import { store } from "./AddressUpdateContainer";
 
@@ -12,13 +11,6 @@ export function AddressUpdatePhone(props) {
     dispatch,
     state: { phone, phoneError }
   } = useContext(store);
-
-  const handleBlur = () => {
-    return dispatch({
-      type: VALIDATE_FIELD,
-      payload: "phone"
-    });
-  };
 
   const handleInputChange = (value) => {
     dispatch({
@@ -40,7 +32,6 @@ export function AddressUpdatePhone(props) {
       value={phone}
       error={phoneError}
       onChange={(e) => handleInputChange(e.target.value)}
-      onBlur={handleBlur}
       onFocus={handleFocus}
       {...props}
     />

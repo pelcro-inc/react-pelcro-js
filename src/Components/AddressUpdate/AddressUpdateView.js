@@ -80,7 +80,6 @@ export const AddressUpdateView = (props) => {
               id="pelcro-input-phone"
               errorId="pelcro-input-phone-error"
               label={t("labels.phone")}
-              required
             />
           </div>
 
