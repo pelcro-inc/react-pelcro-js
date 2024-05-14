@@ -29,7 +29,7 @@ export const UserUpdateDateOfBirth = (props) => {
     <DatePicker
       min={hundredYearsFromNowDateISO}
       max={nowDateISO}
-      value={state.dateOfBirth ?? nowDateISO}
+      value={state.dateOfBirth}
       onChange={(e) => handleInputChange(e.target.value)}
       //   tooltipText={t("labels.dateOfBirth")}
       {...props}
