@@ -1,3 +1,13 @@
+# [4.0.0-alpha.71](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.70...v4.0.0-alpha.71) (2024-05-14)
+
+
+### Features
+
+* add checkout summary ([314ffb4](https://github.com/pelcro-inc/react-pelcro-js/commit/314ffb4a427dd95a2afd2224640188c4fae05529))
+* add support for required first and last names fields ([979ba6c](https://github.com/pelcro-inc/react-pelcro-js/commit/979ba6cfcf6c02e76c90247f81ad936a21074a8c))
+* make phone field optional ([a5a8a3d](https://github.com/pelcro-inc/react-pelcro-js/commit/a5a8a3dcd200077eb3e474745ca8812dce3af8ab))
+* remove dob placeholder ([469ef60](https://github.com/pelcro-inc/react-pelcro-js/commit/469ef6087e818112112f6b7bb6e663baaaf9cec7))
+
 # [4.0.0-alpha.70](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.69...v4.0.0-alpha.70) (2024-05-13)
 
 
