@@ -170,13 +170,13 @@ export const DashboardContent = ({ children, subView, ...props }) => {
           />
         </div>
       </Transition>
-      {dashboardView && isOpen && (
-        <div
-          id="pelcro-view-dashboard-submenus"
-          className={`plc-fixed plc-inset-y-0 plc-h-full lg:plc-w-9/12 plc-w-full plc-bg-gray-100 plc-z-max plc-overflow-auto ${
-            dashboardLayout == "left" ? "plc-right-0" : "plc-left-0"
-          }`}
-        >
+      <div
+        id="pelcro-view-dashboard-submenus"
+        className={`plc-fixed plc-inset-y-0 plc-h-full lg:plc-w-9/12 plc-w-full plc-bg-gray-100 plc-z-max plc-overflow-auto ${
+          dashboardLayout == "left" ? "plc-right-0" : "plc-left-0"
+        }`}
+      >
+        {dashboardView && isOpen && (
           <DashboardViewController>
             {subView?.length
               ? subView.map((child, i) =>
@@ -184,20 +184,8 @@ export const DashboardContent = ({ children, subView, ...props }) => {
                 )
               : React.cloneElement(subView, { store })}
           </DashboardViewController>
-          <Button
-            variant="ghost"
-            type="button"
-            className={`plc-text-gray-500 plc-rounded-2xl plc-absolute plc-z-max plc-top-2 md:plc-top-5 ${
-              dashboardLayout == "left"
-                ? "plc-right-2 md:plc-right-10"
-                : "plc-left-2 md:plc-left-10"
-            }`}
-            onClick={closeSubMenusTab}
-          >
-            <XIcon className="plc-fill-current" />
-          </Button>
-        </div>
-      )}
+        )}
+      </div>
     </>
   );
 };
