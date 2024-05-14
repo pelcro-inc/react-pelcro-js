@@ -4,6 +4,8 @@ import {
   SET_PASSWORD,
   SET_EMAIL_ERROR,
   SET_PASSWORD_ERROR,
+  SET_FIRST_NAME_ERROR,
+  SET_LAST_NAME_ERROR,
   RESET_LOGIN_FORM,
   SET_CONFIRM_PASSWORD,
   CONFIRM_PASSWORD_USED,
@@ -30,6 +32,8 @@ const initialState = {
   password: "",
   emailError: null,
   passwordError: null,
+  firstNameError: null,
+  lastNameError: null,
   confirmPassword: "",
   confirmPasswordError: null,
   confirmPasswordUsed: false,
@@ -180,13 +184,14 @@ const RegisterContainer = ({
         case SET_FIRST_NAME:
           return Update({
             ...state,
-            firstName: action.payload
+            firstName: action.payload,
+            firstNameError: null
           });
-
         case SET_LAST_NAME:
           return Update({
             ...state,
-            lastName: action.payload
+            lastName: action.payload,
+            lastNameError: null
           });
 
         case SET_TEXT_FIELD:
@@ -212,6 +217,18 @@ const RegisterContainer = ({
             ...state,
             passwordError: action.payload,
             password: ""
+          });
+        case SET_FIRST_NAME_ERROR:
+          return Update({
+            ...state,
+            firstNameError: action.payload,
+            firstName: ""
+          });
+        case SET_LAST_NAME_ERROR:
+          return Update({
+            ...state,
+            lastNameError: action.payload,
+            lastName: ""
           });
         case SET_CONFIRM_PASSWORD_ERROR:
           return Update({

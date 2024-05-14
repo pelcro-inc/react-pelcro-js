@@ -8,6 +8,7 @@ import {
   SET_EMAIL,
   SET_EMAIL_ERROR,
   SET_FIRST_NAME,
+  SET_FIRST_NAME_ERROR,
   SET_LAST_NAME,
   SET_LAST_NAME_ERROR,
   SET_USERNAME,
@@ -26,6 +27,7 @@ const initialState = {
   email: window.Pelcro.user.read()?.email,
   emailError: null,
   firstName: window.Pelcro.user.read()?.first_name,
+  firstNameError: null,
   lastName: window.Pelcro.user.read()?.last_name,
   lastNameError: null,
   username: window.Pelcro.user.read()?.username,
@@ -170,19 +172,29 @@ const UserUpdateContainer = ({
         case SET_EMAIL:
           return Update({
             ...state,
-            email: action.payload
+            email: action.payload,
+            emailError: null
           });
 
         case SET_EMAIL_ERROR:
           return Update({
             ...state,
-            emailError: action.payload
+            emailError: action.payload,
+            email: ""
           });
 
         case SET_FIRST_NAME:
           return Update({
             ...state,
-            firstName: action.payload
+            firstName: action.payload,
+            firstNameError: null
+          });
+
+        case SET_FIRST_NAME_ERROR:
+          return Update({
+            ...state,
+            firstNameError: action.payload,
+            firstName: ""
           });
 
         case SET_DISPLAY_NAME:
@@ -194,7 +206,15 @@ const UserUpdateContainer = ({
         case SET_LAST_NAME:
           return Update({
             ...state,
-            lastName: action.payload
+            lastName: action.payload,
+            lastNameError: null
+          });
+
+        case SET_LAST_NAME_ERROR:
+          return Update({
+            ...state,
+            lastNameError: action.payload,
+            lastName: ""
           });
 
         case SET_USERNAME:
