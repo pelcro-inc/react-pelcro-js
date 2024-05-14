@@ -19,6 +19,7 @@
     },
     "checkout": {
       "title": "Payment Information",
+      "shippingAddress": "Shipping Address",
       "billingAddress": "Billing Address",
       "NoBillingAddress": "No Billing Address Found",
       "changeBillingAddress": "Change",

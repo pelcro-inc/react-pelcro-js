@@ -24,6 +24,8 @@
     "lastName": "Last name",
     "phone": "Phone",
     "freeItems": "Free Items",
-    "isDefault": "Set as default"
+    "isDefault": "Set as default",
+    "shippingAddress": "Shipping Address",
+    "contactDetails": "Contact Details"
   }
 }

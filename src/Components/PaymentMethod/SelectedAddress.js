@@ -34,28 +34,28 @@ export const SelectedAddress = ({ type }) => {
     <div className="plc-p-4 plc-my-4 last:plc-mb-0 plc-rounded plc-text-gray-900 pelcro-address-wrapper plc-shadow-md_dark plc-relative">
       {address && (
         <>
-          <div
-            className="pelcro-select-address-radio plc-order-2"
-            id={`pelcro-address-select-${address.id}`}
-            name="address"
-          >
+          <div name="address">
             <p className="pelcro-address-name plc-font-semibold">
               {t("labels.checkout.billingAddress")}
             </p>
-            <p className="pelcro-address-company">
-              {address.company}
-            </p>
-            <p className="pelcro-address-line1 plc-text-sm plc-mt-2">
-              {address.line1}
-            </p>
-            <p className="pelcro-address-country plc-text-sm">
-              {address.city}, {address.state_name}{" "}
-              {address.postal_code}, {address.country_name}
-            </p>
-            <p className="pelcro-address-phone plc-text-sm">
-              {address?.phone}
-            </p>
+
+            <div>
+              <p className="pelcro-address-company">
+                {address.company}
+              </p>
+              <p className="pelcro-address-name plc-text-sm plc-mt-2">
+                {address.first_name} {address.last_name}
+              </p>
+              <p className="pelcro-address-line1 plc-text-sm">
+                {address.line1}
+              </p>
+              <p className="pelcro-address-country plc-text-sm">
+                {address.city}, {address.state} {address.postal_code},{" "}
+                {address.country}, {address?.phone}
+              </p>
+            </div>
           </div>
+
           <Button
             onClick={onAddNewAddress}
             disabled={isLoading}
