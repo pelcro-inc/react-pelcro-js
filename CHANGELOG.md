@@ -1,3 +1,10 @@
+# [4.0.0-alpha.72](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.71...v4.0.0-alpha.72) (2024-05-14)
+
+
+### Features
+
+* start tinting on dashboard open and move close button on card ([10e55d9](https://github.com/pelcro-inc/react-pelcro-js/commit/10e55d9e6417a8a4493c308fd9df48b968f3c08a))
+
 # [4.0.0-alpha.71](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.70...v4.0.0-alpha.71) (2024-05-14)
 
 
