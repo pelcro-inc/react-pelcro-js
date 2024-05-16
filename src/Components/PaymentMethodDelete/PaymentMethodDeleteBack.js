@@ -9,13 +9,13 @@ export const PaymentMethodDeleteBack = ({
   ...otherProps
 }) => {
   const { t } = useTranslation("paymentMethod");
-  const { switchView } = usePelcro();
+  const { switchDashboardView } = usePelcro();
 
   return (
     <Button
       variant="outline"
       onClick={() => {
-        switchView("dashboard");
+        switchDashboardView("payment-cards");
         onClick?.();
       }}
       className="plc-w-full"
