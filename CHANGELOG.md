@@ -1,3 +1,11 @@
+# [4.0.0-alpha.73](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.72...v4.0.0-alpha.73) (2024-05-16)
+
+
+### Bug Fixes
+
+* back button redirect fix ([1c94fd6](https://github.com/pelcro-inc/react-pelcro-js/commit/1c94fd6f0f15e13a275ef73ae9f5455c385f5646))
+* dashboard overlay view fix ([f5fdaf5](https://github.com/pelcro-inc/react-pelcro-js/commit/f5fdaf51b8edf00e2fea17ba90dd24a6945116e0))
+
 # [4.0.0-alpha.72](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.71...v4.0.0-alpha.72) (2024-05-14)
 
 
