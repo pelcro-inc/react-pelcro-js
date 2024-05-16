@@ -21,8 +21,7 @@ export const DashboardContent = ({ children, subView, ...props }) => {
     dispatch
   } = useContext(store);
 
-  const { switchView, dashboardView, switchDashboardView, logout } =
-    usePelcro();
+  const { switchView, dashboardView, logout } = usePelcro();
 
   const { t } = useTranslation("dashboard");
 
@@ -77,10 +76,6 @@ export const DashboardContent = ({ children, subView, ...props }) => {
     dispatch({ type: CLOSE_DASHBOARD });
   };
 
-  const closeSubMenusTab = () => {
-    switchDashboardView(null);
-  };
-
   // useEffect(() => {
   //   return () => {
   //     document.removeEventListener("click", hideMenuIfClickedOutside);
@@ -88,7 +83,7 @@ export const DashboardContent = ({ children, subView, ...props }) => {
   // }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <>
+    <div className="pelcro-modal-overlay">
       <Transition
         className={`plc-fixed plc-inset-y-0 plc-h-full lg:plc-w-3/12 plc-w-full plc-overflow-y-auto plc-text-left plc-bg-white plc-shadow-xl plc-z-max ${
           dashboardLayout == "left" ? "plc-left-0" : "plc-right-0"
@@ -133,10 +128,10 @@ export const DashboardContent = ({ children, subView, ...props }) => {
                 )}
 
                 <p
-                  className={`plc-m-0 plc-text-sm plc-break-all ${
+                  className={`plc-m-0 plc-break-all ${
                     userHasName
                       ? "plc-text-sm"
-                      : "plc-text-lg plc-font-bold plc-mt-auto"
+                      : "plc-text-sm plc-font-bold plc-mt-auto"
                   }`}
                 >
                   {user.email}
@@ -170,13 +165,13 @@ export const DashboardContent = ({ children, subView, ...props }) => {
           />
         </div>
       </Transition>
-      <div
-        id="pelcro-view-dashboard-submenus"
-        className={`plc-fixed plc-inset-y-0 plc-h-full lg:plc-w-9/12 plc-w-full plc-bg-gray-100 plc-z-max plc-overflow-auto ${
-          dashboardLayout == "left" ? "plc-right-0" : "plc-left-0"
-        }`}
-      >
-        {dashboardView && isOpen && (
+      {dashboardView && isOpen && (
+        <div
+          id="pelcro-view-dashboard-submenus"
+          className={`plc-fixed plc-inset-y-0 plc-h-full lg:plc-w-9/12 plc-w-full plc-bg-gray-100 plc-z-max plc-overflow-auto ${
+            dashboardLayout == "left" ? "plc-right-0" : "plc-left-0"
+          }`}
+        >
           <DashboardViewController>
             {subView?.length
               ? subView.map((child, i) =>
@@ -184,8 +179,8 @@ export const DashboardContent = ({ children, subView, ...props }) => {
                 )
               : React.cloneElement(subView, { store })}
           </DashboardViewController>
-        )}
-      </div>
-    </>
+        </div>
+      )}
+    </div>
   );
 };
