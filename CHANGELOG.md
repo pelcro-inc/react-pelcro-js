@@ -1,3 +1,10 @@
+# [4.0.0-alpha.77](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.76...v4.0.0-alpha.77) (2024-05-21)
+
+
+### Features
+
+* change active dashboard highlight color ([c73aa86](https://github.com/pelcro-inc/react-pelcro-js/commit/c73aa86c864e9bbb9f980279825795c3a1afef27))
+
 # [4.0.0-alpha.76](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.75...v4.0.0-alpha.76) (2024-05-21)
 
 
