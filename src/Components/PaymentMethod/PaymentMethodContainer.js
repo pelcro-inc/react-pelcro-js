@@ -2860,7 +2860,8 @@ const PaymentMethodContainer = (props) => {
   const [isStripeLoaded, setIsStripeLoaded] = useState(
     Boolean(window.Stripe)
   );
-  const { whenUserReady } = usePelcro.getStore();
+  const { whenUserReady, selectedPaymentMethodId } =
+    usePelcro.getStore();
   const cardProcessor = getSiteCardProcessor();
 
   // Create the Stripe object
@@ -2888,7 +2889,7 @@ const PaymentMethodContainer = (props) => {
   };
 
   useEffect(() => {
-    if (isStripeLoaded) {
+    if (isStripeLoaded && !selectedPaymentMethodId) {
       window.Pelcro.user.createSetupIntent(
         { auth_token: window.Pelcro.user.read().auth_token },
         (err, res) => {
@@ -2918,7 +2919,7 @@ const PaymentMethodContainer = (props) => {
   if (isStripeLoaded) {
     return (
       <div>
-        {clientSecret ? (
+        {clientSecret || selectedPaymentMethodId ? (
           <Elements options={options} stripe={stripePromise}>
             <PaymentMethodContainerWithoutStripe
               store={store}
