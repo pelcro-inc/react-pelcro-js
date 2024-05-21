@@ -1,3 +1,10 @@
+# [4.0.0-alpha.74](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.73...v4.0.0-alpha.74) (2024-05-21)
+
+
+### Bug Fixes
+
+* fire setup intent requets on demand ([62c8fb8](https://github.com/pelcro-inc/react-pelcro-js/commit/62c8fb80a80b27598358a2d2629f866a754555bd))
+
 # [4.0.0-alpha.73](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.72...v4.0.0-alpha.73) (2024-05-16)
 
 
