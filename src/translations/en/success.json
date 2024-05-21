@@ -21,7 +21,8 @@
     },
     "invoicePayment": {
       "title": "Invoice paid successfully",
-      "content": "Please contact us if you have any questions or concerns."
+      "content": "Please contact us if you have any questions or concerns.",
+      "paymentProcessing": "Invoice payment is currently being processed"
     }
   },
   "errors": {
