@@ -1,3 +1,10 @@
+# [4.0.0-alpha.75](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.74...v4.0.0-alpha.75) (2024-05-21)
+
+
+### Features
+
+* processing invoice success flow change ([b9d2383](https://github.com/pelcro-inc/react-pelcro-js/commit/b9d2383ec798cf3e3289cbe3ac002011f1458f44))
+
 # [4.0.0-alpha.74](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.73...v4.0.0-alpha.74) (2024-05-21)
 
 
