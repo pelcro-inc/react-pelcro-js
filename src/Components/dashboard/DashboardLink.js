@@ -30,7 +30,7 @@ export const DashboardLink = ({
       className={`plc-border-l-4 plc-border-transparent plc-border-solid plc-group
         ${
           isActive
-            ? "plc-border-solid plc-bg-grey-200 plc-border-primary-400"
+            ? "plc-border-solid plc-bg-grey-200 plc-border-primary"
             : "hover:plc-bg-gray-100"
         }`}
     >
@@ -40,7 +40,7 @@ export const DashboardLink = ({
       >
         <span
           className={`plc-flex plc-text-lg plc-items-center ${
-            isActive ? "plc-text-primary-400" : "plc-text-gray-500"
+            isActive ? "plc-text-primary" : "plc-text-gray-500"
           }`}
         >
           {icon}
