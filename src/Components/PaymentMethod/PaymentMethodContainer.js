@@ -1468,14 +1468,8 @@ const PaymentMethodContainerWithoutStripe = ({
           dispatch({ type: DISABLE_SUBMIT, payload: false });
         }
         dispatch({ type: LOADING, payload: false });
-
-        return dispatch({
-          type: SHOW_ALERT,
-          payload: {
-            type: "success",
-            content: t("messages.paymentProcessing")
-          }
-        });
+        set({ isProcessingInvoice: true });
+        return onSuccess(response);
       } else {
         onSuccess(response);
       }

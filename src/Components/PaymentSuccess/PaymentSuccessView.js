@@ -58,7 +58,7 @@ const getCurrentFlow = () => {
 
 const getSuccessContent = (i18n) => {
   const flow = getCurrentFlow();
-  const { product } = usePelcro.getStore();
+  const { product, isProcessingInvoice } = usePelcro.getStore();
 
   const wordingDictionary = {
     subscriptionSuccess: {
@@ -86,7 +86,9 @@ const getSuccessContent = (i18n) => {
       successIcon: (
         <CheckMark className="plc-w-32 plc-my-4 plc-text-green-500" />
       ),
-      successTitle: i18n("messages.invoicePayment.title"),
+      successTitle: isProcessingInvoice
+        ? i18n("messages.invoicePayment.paymentProcessing")
+        : i18n("messages.invoicePayment.title"),
       successContent: i18n("messages.invoicePayment.content")
     }
   };

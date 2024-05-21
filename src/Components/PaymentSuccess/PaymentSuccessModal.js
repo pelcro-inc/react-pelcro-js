@@ -25,7 +25,7 @@ export function PaymentSuccessModal({ onDisplay, ...props }) {
       onDisplay={onDisplay}
       onClose={onClose}
     >
-      <ModalBody>
+      <ModalBody className="plc-rounded-t-lg">
         <PaymentSuccessView onClose={onClose} />
       </ModalBody>
       <ModalFooter></ModalFooter>
