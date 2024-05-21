@@ -7,6 +7,7 @@ import {
   ModalBody,
   ModalFooter
 } from "../../SubComponents/Modal";
+import { ReactComponent as ArrowLeft } from "../../assets/arrow-left.svg";
 import { usePelcro } from "../../hooks/usePelcro";
 
 export const PaymentMethodSelectModal = ({
@@ -15,7 +16,15 @@ export const PaymentMethodSelectModal = ({
   ...otherProps
 }) => {
   const { t } = useTranslation("paymentMethod");
-  const { switchToCheckoutForm, set, plan, order } = usePelcro();
+  const {
+    switchToCheckoutForm,
+    set,
+    plan,
+    order,
+    product,
+    switchView,
+    giftRecipient
+  } = usePelcro();
 
   const skipPayment =
     window.Pelcro?.uiSettings?.skipPaymentForFreePlans;
@@ -37,6 +46,30 @@ export const PaymentMethodSelectModal = ({
     switchToCheckoutForm();
   };
 
+  const showBackButton = Boolean(product && plan && !giftRecipient);
+
+  const userHasAddress = () => {
+    const addresses = window.Pelcro.user.read()?.addresses ?? [];
+    return addresses.length > 0;
+  };
+
+  const isUserHasAddress = userHasAddress();
+
+  const goBack = () => {
+    if (
+      product &&
+      plan &&
+      product.address_required &&
+      isUserHasAddress
+    ) {
+      return switchView("address-select");
+    }
+
+    if (product && plan) {
+      return switchView("plan-select");
+    }
+  };
+
   return (
     <Modal
       onDisplay={onDisplay}
@@ -45,6 +78,15 @@ export const PaymentMethodSelectModal = ({
     >
       <ModalHeader>
         <div className="plc-text-left plc-text-gray-900 pelcro-title-wrapper plc-flex-1 plc-flex plc-flex-col plc-justify-center">
+          {showBackButton && (
+            <button
+              type="button"
+              onClick={goBack}
+              className="plc-absolute plc-w-6 plc-text-gray-500 focus:plc-text-black plc-z-max plc-top-1/2 plc-left-2 plc-transform plc--translate-y-1/2 plc-border-0 hover:plc-text-black hover:plc-shadow-none plc-bg-transparent hover:plc-bg-transparent focus:plc-bg-transparent"
+            >
+              <ArrowLeft />
+            </button>
+          )}
           <h4 className="plc-text-xl plc-font-bold">
             {t("select.title")}
           </h4>

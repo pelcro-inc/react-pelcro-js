@@ -7,6 +7,7 @@ import {
   ModalBody,
   ModalFooter
 } from "../../SubComponents/Modal";
+import { ReactComponent as ArrowLeft } from "../../assets/arrow-left.svg";
 import { usePelcro } from "../../hooks/usePelcro";
 
 export const AddressSelectModal = ({
@@ -14,7 +15,14 @@ export const AddressSelectModal = ({
   onClose,
   ...otherProps
 }) => {
-  const { switchView, switchToPaymentView, resetView } = usePelcro();
+  const {
+    switchView,
+    switchToPaymentView,
+    resetView,
+    product,
+    plan,
+    giftRecipient
+  } = usePelcro();
   const { t } = useTranslation("address");
 
   const onSuccess = (selectedAddressId) => {
@@ -38,6 +46,14 @@ export const AddressSelectModal = ({
     resetView();
   };
 
+  const showBackButton = Boolean(product && plan && !giftRecipient);
+
+  const goBack = () => {
+    if (product && plan) {
+      switchView("plan-select");
+    }
+  };
+
   return (
     <Modal
       onDisplay={onDisplay}
@@ -46,6 +62,15 @@ export const AddressSelectModal = ({
     >
       <ModalHeader>
         <div className="plc-text-left plc-text-gray-900 pelcro-title-wrapper plc-flex-1 plc-flex plc-flex-col plc-justify-center">
+          {showBackButton && (
+            <button
+              type="button"
+              onClick={goBack}
+              className="plc-absolute plc-w-6 plc-text-gray-500 focus:plc-text-black plc-z-max plc-top-1/2 plc-left-2 plc-transform plc--translate-y-1/2 plc-border-0 hover:plc-text-black hover:plc-shadow-none plc-bg-transparent hover:plc-bg-transparent focus:plc-bg-transparent"
+            >
+              <ArrowLeft />
+            </button>
+          )}
           <h4 className="plc-text-xl plc-font-bold">
             {t("selectAddressTitle")}
           </h4>
