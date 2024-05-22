@@ -9,7 +9,7 @@
   }
 
   .pelcro-root .pelcro-modal {
-    @apply plc-container plc-absolute plc-flex plc-flex-col plc-items-center plc-max-w-lg plc-bg-white plc-rounded-lg;
+    @apply plc-container plc-absolute plc-flex plc-flex-col plc-items-center plc-max-w-xl plc-bg-white plc-rounded-lg;
     max-height: 100vh;
   }
 
@@ -18,7 +18,7 @@
   }
 
   .pelcro-root .pelcro-modal-header {
-    @apply plc-px-10 plc-py-3 plc-min-h-16 plc-relative plc-bg-white plc-border-b-2 plc-border-primary-400 plc-flex plc-flex-col plc-rounded-t-lg;
+    @apply plc-px-14 plc-py-3 plc-min-h-16 plc-relative plc-bg-white plc-border-b-2 plc-border-primary-400 plc-flex plc-flex-col plc-rounded-t-lg;
     border-bottom-width: 1.5px;
   }
 
@@ -27,7 +27,7 @@
   }
 
   .pelcro-root .pelcro-modal-body {
-    @apply plc-px-4 md:plc-px-10 plc-pt-6 plc-bg-white;
+    @apply plc-px-4 md:plc-px-14 plc-pt-6 plc-bg-white;
   }
 
   .pelcro-root .pelcro-modal-footer {
