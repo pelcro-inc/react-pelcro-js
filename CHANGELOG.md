@@ -1,3 +1,10 @@
+# [3.26.0-beta.60](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.59...v3.26.0-beta.60) (2024-05-23)
+
+
+### Features
+
+* export components ([5f4bc76](https://github.com/pelcro-inc/react-pelcro-js/commit/5f4bc76d82b21c49a5e80e33a693f06c0371df1c))
+
 # [3.26.0-beta.59](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.58...v3.26.0-beta.59) (2024-05-13)
 
 
