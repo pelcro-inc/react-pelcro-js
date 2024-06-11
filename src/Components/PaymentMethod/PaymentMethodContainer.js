@@ -46,12 +46,15 @@ import {
   SET_LAST_NAME_ERROR,
   SET_PHONE_ERROR,
   UPDATE_CYBERSOURCE_SESSION_ID,
-  HANDLE_APPLEPAY_SUBSCRIPTION
+  HANDLE_APPLEPAY_SUBSCRIPTION,
+  HANDLE_CHECKBOX_CHANGE,
+  SET_IS_DEFAULT_PAYMENT_METHOD
 } from "../../utils/action-types";
 import {
   getErrorMessages,
   debounce,
-  getSiteCardProcessor
+  getSiteCardProcessor,
+  getFourDigitYear
 } from "../common/Helpers";
 import {
   Payment,
@@ -62,7 +65,10 @@ import {
   CybersourceGateway,
   PAYMENT_TYPES
 } from "../../services/Subscription/Payment.service";
-import { getPageOrDefaultLanguage } from "../../utils/utils";
+import {
+  getPageOrDefaultLanguage,
+  refreshUser
+} from "../../utils/utils";
 import { usePelcro } from "../../hooks/usePelcro";
 
 /**
@@ -107,6 +113,7 @@ const initialState = {
   month: "",
   year: "",
   cyberSourceSessionId: null,
+  isDefault: false,
   alert: {
     type: "error",
     content: ""
@@ -131,8 +138,14 @@ const PaymentMethodContainerWithoutStripe = ({
   const [updatedCouponCode, setUpdatedCouponCode] = useState("");
   const { t } = useTranslation("payment");
   const pelcroStore = usePelcro();
-  const { set, order, selectedPaymentMethodId, couponCode } =
-    usePelcro();
+  const {
+    set,
+    order,
+    selectedPaymentMethodId,
+    couponCode,
+    paymentMethodToEdit,
+    paymentMethodToDelete
+  } = usePelcro();
   const { whenUserReady } = usePelcro.getStore();
 
   const product = props.product ?? pelcroStore.product;
@@ -252,7 +265,10 @@ const PaymentMethodContainerWithoutStripe = ({
           : paymentRequest,
         dispatch
       );
-    } else if (type === "updatePaymentSource") {
+    } else if (
+      type === "createPaymentSource" ||
+      type === "updatePaymentSource"
+    ) {
       createNewCybersourceCard();
     }
 
@@ -651,7 +667,10 @@ const PaymentMethodContainerWithoutStripe = ({
           : paymentRequest,
         dispatch
       );
-    } else if (type === "updatePaymentSource") {
+    } else if (
+      type === "createPaymentSource" ||
+      type === "updatePaymentSource"
+    ) {
       createNewTapCard();
     }
 
@@ -913,12 +932,16 @@ const PaymentMethodContainerWithoutStripe = ({
           : paymentRequest,
         dispatch
       );
-    } else if (type === "updatePaymentSource") {
+    } else if (type === "createPaymentSource") {
       createNewVantivCard();
+    } else if (type === "updatePaymentSource") {
+      updateVantivCard();
+    } else if (type === "deletePaymentSource") {
+      replaceVantivCard();
     }
 
     function createNewVantivCard() {
-      window.Pelcro.source.create(
+      window.Pelcro.paymentMethods.create(
         {
           auth_token: window.Pelcro.user.read().auth_token,
           token: paymentRequest,
@@ -942,9 +965,123 @@ const PaymentMethodContainerWithoutStripe = ({
             type: SHOW_ALERT,
             payload: {
               type: "success",
+              content: t("messages.sourceCreated")
+            }
+          });
+          refreshUser();
+          onSuccess(res);
+        }
+      );
+    }
+
+    function replaceVantivCard() {
+      const { id: paymentMethodId } = paymentMethodToDelete;
+
+      window.Pelcro.paymentMethods.create(
+        {
+          auth_token: window.Pelcro.user.read().auth_token,
+          token: paymentRequest,
+          gateway: "vantiv"
+        },
+        (err, res) => {
+          if (err) {
+            dispatch({ type: DISABLE_SUBMIT, payload: false });
+            dispatch({ type: LOADING, payload: false });
+            onFailure(err);
+            return dispatch({
+              type: SHOW_ALERT,
+              payload: {
+                type: "error",
+                content: getErrorMessages(err)
+              }
+            });
+          }
+
+          if (res) {
+            setTimeout(() => {
+              window.Pelcro.paymentMethods.deletePaymentMethod(
+                {
+                  auth_token: window.Pelcro.user.read().auth_token,
+                  payment_method_id: paymentMethodId
+                },
+                (err, res) => {
+                  dispatch({ type: DISABLE_SUBMIT, payload: false });
+                  dispatch({ type: LOADING, payload: false });
+                  if (err) {
+                    onFailure?.(err);
+                    return dispatch({
+                      type: SHOW_ALERT,
+                      payload: {
+                        type: "error",
+                        content: getErrorMessages(err)
+                      }
+                    });
+                  }
+
+                  refreshUser();
+                  onSuccess(res);
+                }
+              );
+            }, 2000);
+          }
+        }
+      );
+    }
+
+    function updateVantivCard() {
+      const { id: paymentMethodId } = paymentMethodToEdit;
+
+      const {
+        paypageRegistrationId,
+        bin,
+        type,
+        firstSix,
+        lastFour,
+        expMonth,
+        expYear
+      } = paymentRequest;
+
+      const { isDefault } = state;
+
+      const fourDigitExpYear = getFourDigitYear(
+        Number(expYear)
+      ).toString();
+      window.Pelcro.paymentMethods.update(
+        {
+          auth_token: window.Pelcro.user.read().auth_token,
+          payment_method_id: paymentMethodId,
+          gateway: "vantiv",
+          paypageRegistrationId: paypageRegistrationId,
+          bin: bin,
+          type: type,
+          firstSix: firstSix,
+          lastFour: lastFour,
+          exp_month: expMonth,
+          exp_year: fourDigitExpYear,
+          is_default: isDefault
+        },
+        (err, res) => {
+          dispatch({ type: DISABLE_SUBMIT, payload: false });
+          dispatch({ type: LOADING, payload: false });
+          if (err) {
+            onFailure(err);
+            return dispatch({
+              type: SHOW_ALERT,
+              payload: {
+                type: "error",
+                content: getErrorMessages(err)
+              }
+            });
+          }
+
+          dispatch({
+            type: SHOW_ALERT,
+            payload: {
+              type: "success",
               content: t("messages.sourceUpdated")
             }
           });
+          refreshUser();
           onSuccess(res);
         }
       );
@@ -1538,6 +1675,111 @@ const PaymentMethodContainerWithoutStripe = ({
     }
   };
 
+  const confirmStripeIntentSetup = (
+    response,
+    flow,
+    paymentMethodId
+  ) => {
+    const setupIntent = response.data?.setup_intent;
+    if (
+      setupIntent?.status === "requires_action" &&
+      setupIntent?.client_secret
+    ) {
+      stripe
+        .confirmCardSetup(setupIntent.client_secret, {
+          payment_method: response.data?.source?.object_id
+        })
+        .then((res) => {
+          if (res.error) {
+            dispatch({ type: DISABLE_SUBMIT, payload: false });
+            dispatch({ type: LOADING, payload: false });
+            onFailure(res.error);
+            return dispatch({
+              type: SHOW_ALERT,
+              payload: {
+                type: "error",
+                content: getErrorMessages(res.error)
+              }
+            });
+          }
+
+          if (flow === "subCreate") {
+            dispatch({ type: DISABLE_SUBMIT, payload: false });
+            dispatch({ type: LOADING, payload: false });
+            refreshUser();
+            onSuccess(res);
+            return;
+          }
+
+          if (flow === "create") {
+            dispatch({ type: LOADING, payload: false });
+
+            dispatch({
+              type: SHOW_ALERT,
+              payload: {
+                type: "success",
+                content: t("messages.sourceCreated")
+              }
+            });
+            refreshUser();
+            onSuccess(res);
+            return;
+          }
+
+          if (flow === "update") {
+            dispatch({ type: DISABLE_SUBMIT, payload: false });
+            dispatch({ type: LOADING, payload: false });
+
+            dispatch({
+              type: SHOW_ALERT,
+              payload: {
+                type: "success",
+                content: t("messages.sourceUpdated")
+              }
+            });
+            refreshUser();
+            onSuccess(res);
+            return;
+          }
+
+          if (flow === "replace") {
+            setTimeout(() => {
+              window.Pelcro.paymentMethods.deletePaymentMethod(
+                {
+                  auth_token: window.Pelcro.user.read().auth_token,
+                  payment_method_id: paymentMethodId
+                },
+                (err, res) => {
+                  dispatch({
+                    type: DISABLE_SUBMIT,
+                    payload: false
+                  });
+                  dispatch({ type: LOADING, payload: false });
+                  if (err) {
+                    onFailure?.(err);
+                    return dispatch({
+                      type: SHOW_ALERT,
+                      payload: {
+                        type: "error",
+                        content: getErrorMessages(err)
+                      }
+                    });
+                  }
+                  refreshUser();
+                  onSuccess(res);
+                }
+              );
+            }, 2000);
+            return;
+          }
+
+          return handlePayment(response?.data?.source);
+        });
+    } else {
+      onSuccess(response);
+    }
+  };
+
   const subscribe = (stripeSource, state, dispatch) => {
     const { couponCode } = state;
 
@@ -1568,6 +1810,9 @@ const PaymentMethodContainerWithoutStripe = ({
             : null
         },
         (err, res) => {
+          if (res?.data?.setup_intent) {
+            return confirmStripeIntentSetup(res, "subCreate");
+          }
           confirmStripeCardPayment(res, err, true);
         }
       );
@@ -1812,7 +2057,7 @@ const PaymentMethodContainerWithoutStripe = ({
     );
   };
 
-  const updatePaymentSource = (state, dispatch) => {
+  const createPaymentSource = (state, dispatch) => {
     return stripe
       .createSource({ type: "card" })
       .then(({ source, error }) => {
@@ -1821,22 +2066,127 @@ const PaymentMethodContainerWithoutStripe = ({
         }
 
         // We don't support source creation for 3D secure yet
-        if (source?.card?.three_d_secure === "required") {
-          return handlePaymentError({
-            error: {
-              message: t("messages.cardAuthNotSupported")
-            }
-          });
-        }
+        // if (source?.card?.three_d_secure === "required") {
+        //   return handlePaymentError({
+        //     error: {
+        //       message: t("messages.cardAuthNotSupported")
+        //     }
+        //   });
+        // }
 
-        window.Pelcro.source.create(
+        window.Pelcro.paymentMethods.create(
           {
             auth_token: window.Pelcro.user.read().auth_token,
             token: source.id
           },
           (err, res) => {
-            dispatch({ type: DISABLE_SUBMIT, payload: false });
-            dispatch({ type: LOADING, payload: false });
+            if (err) {
+              dispatch({ type: DISABLE_SUBMIT, payload: false });
+              dispatch({ type: LOADING, payload: false });
+              onFailure(err);
+              return dispatch({
+                type: SHOW_ALERT,
+                payload: {
+                  type: "error",
+                  content: getErrorMessages(err)
+                }
+              });
+            }
+
+            if (
+              res.data?.setup_intent?.status === "requires_action" ||
+              res.data?.setup_intent?.status ===
+                "requires_confirmation"
+            ) {
+              confirmStripeIntentSetup(res, "create");
+            } else {
+              dispatch({ type: LOADING, payload: false });
+              dispatch({
+                type: SHOW_ALERT,
+                payload: {
+                  type: "success",
+                  content: t("messages.sourceCreated")
+                }
+              });
+              refreshUser();
+              onSuccess(res);
+            }
+          }
+        );
+      });
+  };
+
+  const updatePaymentSource = (state, dispatch) => {
+    const { isDefault, month, year } = state;
+    const { id: paymentMethodId } = paymentMethodToEdit;
+    window.Pelcro.paymentMethods.update(
+      {
+        auth_token: window.Pelcro.user.read().auth_token,
+        payment_method_id: paymentMethodId,
+        gateway: "stripe",
+        exp_month: month,
+        exp_year: year,
+        is_default: isDefault
+      },
+      (err, res) => {
+        dispatch({ type: DISABLE_SUBMIT, payload: false });
+        dispatch({ type: LOADING, payload: false });
+        if (err) {
+          onFailure(err);
+          return dispatch({
+            type: SHOW_ALERT,
+            payload: {
+              type: "error",
+              content: getErrorMessages(err)
+            }
+          });
+        }
+
+        if (
+          res.data?.setup_intent?.status === "requires_action" ||
+          res.data?.setup_intent?.status === "requires_confirmation"
+        ) {
+          confirmStripeIntentSetup(res, "update");
+        } else {
+          dispatch({
+            type: SHOW_ALERT,
+            payload: {
+              type: "success",
+              content: t("messages.sourceUpdated")
+            }
+          });
+          refreshUser();
+          onSuccess(res);
+        }
+      }
+    );
+  };
+
+  const replacePaymentSource = (state, dispatch) => {
+    const { id: paymentMethodId } = paymentMethodToDelete;
+
+    return stripe
+      .createSource({ type: "card" })
+      .then(({ source, error }) => {
+        if (error) {
+          return handlePaymentError(error);
+        }
+
+        // We don't support source creation for 3D secure yet
+        // if (source?.card?.three_d_secure === "required") {
+        //   return handlePaymentError({
+        //     error: {
+        //       message: t("messages.cardAuthNotSupported")
+        //     }
+        //   });
+        // }
+
+        window.Pelcro.paymentMethods.create(
+          {
+            auth_token: window.Pelcro.user.read().auth_token,
+            token: source.id
+          },
+          (err, res) => {
             if (err) {
               onFailure(err);
               return dispatch({
@@ -1848,14 +2198,45 @@ const PaymentMethodContainerWithoutStripe = ({
               });
             }
 
-            dispatch({
-              type: SHOW_ALERT,
-              payload: {
-                type: "success",
-                content: t("messages.sourceUpdated")
-              }
-            });
-            onSuccess(res);
+            if (
+              res.data?.setup_intent?.status === "requires_action" ||
+              res.data?.setup_intent?.status ===
+                "requires_confirmation"
+            ) {
+              confirmStripeIntentSetup(
+                res,
+                "replace",
+                paymentMethodId
+              );
+            } else {
+              setTimeout(() => {
+                window.Pelcro.paymentMethods.deletePaymentMethod(
+                  {
+                    auth_token: window.Pelcro.user.read().auth_token,
+                    payment_method_id: paymentMethodId
+                  },
+                  (err, res) => {
+                    dispatch({
+                      type: DISABLE_SUBMIT,
+                      payload: false
+                    });
+                    dispatch({ type: LOADING, payload: false });
+                    if (err) {
+                      onFailure?.(err);
+                      return dispatch({
+                        type: SHOW_ALERT,
+                        payload: {
+                          type: "error",
+                          content: getErrorMessages(err)
+                        }
+                      });
+                    }
+                    refreshUser();
+                    onSuccess(res);
+                  }
+                );
+              }, 2000);
+            }
           }
         );
       });
@@ -2207,8 +2588,16 @@ const PaymentMethodContainerWithoutStripe = ({
                 );
               }
 
+              if (type === "createPaymentSource") {
+                return createPaymentSource(state, dispatch);
+              }
+
               if (type === "updatePaymentSource") {
                 return updatePaymentSource(state, dispatch);
+              }
+
+              if (type === "deletePaymentSource") {
+                return replacePaymentSource(state, dispatch);
               }
 
               submitPayment(state, dispatch);
@@ -2335,6 +2724,18 @@ const PaymentMethodContainerWithoutStripe = ({
           return Update({
             ...state,
             cyberSourceSessionId: action.payload
+          });
+
+        case HANDLE_CHECKBOX_CHANGE:
+          return Update({
+            ...state,
+            ...action.payload
+          });
+
+        case SET_IS_DEFAULT_PAYMENT_METHOD:
+          return Update({
+            ...state,
+            ...action.payload
           });
 
         default:

@@ -1,19 +1,32 @@
 {
   "update": {
-    "title":"Actualiza tu información de pago",
-    "subtitle":"Rellena los campos a continuación para actualizar la información de tu tarjeta de crédito",
-    "required":"Obligatorio",
-    "success":"Tu información de pago se ha actualizado",
-    "secure":"Estás seguro - PCI compliance 128 SSL por"
+    "title": "Actualiza tu información de pago",
+    "subtitle": "Rellena los campos a continuación para actualizar la información de tu tarjeta de crédito",
+    "required": "Obligatorio",
+    "success": "Tu información de pago se ha actualizado",
+    "secure": "Estás seguro - PCI compliance 128 SSL por"
   },
   "select": {
-    "title":"Selecciona un método de pago",
-    "subtitle":"Selecciona uno de tus métodos guardados o paga con uno nuevo",
-    "expires":"Expira",
+    "title": "Selecciona un método de pago",
+    "subtitle": "Selecciona uno de tus métodos guardados o paga con uno nuevo",
+    "expires": "Expira",
     "buttons": {
-      "addPaymentMethod":"Paga con otro método de pago",
-      "selectPaymentMethod":"Continuar",
-      "changePaymentMethod":"Cambiar"
+      "addPaymentMethod": "Paga con otro método de pago",
+      "selectPaymentMethod": "Continuar",
+      "changePaymentMethod": "Cambiar"
     }
+  },
+  "delete": {
+    "title": "Eliminar método de pago",
+    "subtitle": "Este método de pago podría estar asociado a suscripciones activas o servir como método de pago predeterminado. Elija entre las opciones disponibles a continuación para sustituirlo.",
+    "options": {
+      "select": "Seleccione un método de pago existente",
+      "add": "Añadir un nuevo método de pago"
+    },
+    "paymentMethodReplaced": "Método de pago eliminado y sustituido correctamente"
+  },
+  "create": {
+    "title": "Añadir un nuevo método de pago",
+    "subtitle": "Introduzca los campos siguientes para añadir los datos de su tarjeta de crédito"
   }
 }

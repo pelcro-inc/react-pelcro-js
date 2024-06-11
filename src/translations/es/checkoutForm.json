@@ -26,6 +26,7 @@
     "phone": "Teléfono",
     "freeItems": "Artículos gratis",
     "order": "Pida",
-    "amount": "Importe"
+    "amount": "Importe",
+    "isDefault": "Fijar por defecto"
   }
 }

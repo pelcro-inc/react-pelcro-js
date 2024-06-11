@@ -134,7 +134,7 @@ export const ApplePayButton = ({ onClick, props, ...otherProps }) => {
           label:
             plan?.nickname || orderLabel || `invoice #${invoice?.id}`,
           type: "final",
-          amount: updatedPrice / 100
+          amount: (updatedPrice / 100).toFixed(2)
         }
       };
 
@@ -181,7 +181,7 @@ export const ApplePayButton = ({ onClick, props, ...otherProps }) => {
           label:
             plan?.nickname || orderLabel || `invoice #${invoice?.id}`,
           type: "final",
-          amount: updatedPrice / 100
+          amount: (updatedPrice / 100).toFixed(2)
         };
 
         const newLineItems = [
@@ -191,7 +191,7 @@ export const ApplePayButton = ({ onClick, props, ...otherProps }) => {
               orderLabel ||
               `invoice #${invoice?.id}`,
             type: "final",
-            amount: updatedPrice / 100
+            amount: (updatedPrice / 100).toFixed(2)
           }
         ];
 
@@ -208,14 +208,14 @@ export const ApplePayButton = ({ onClick, props, ...otherProps }) => {
       //   const newTotal = {
       //     label: plan?.nickname || orderLabel || `invoice #${invoice?.id}`,
       //     type: "final",
-      //     amount: updatedPrice / 100
+      //     amount: (updatedPrice / 100).toFixed(2)
       //   };
 
       //   const newLineItems = [
       //     {
       //       label: plan?.nickname || orderLabel || `invoice #${invoice?.id}`,
       //       type: "final",
-      //       amount: updatedPrice / 100
+      //       amount: (updatedPrice / 100).toFixed(2)
       //     }
       //   ];
 
@@ -251,13 +251,23 @@ export const ApplePayButton = ({ onClick, props, ...otherProps }) => {
 
         const orderId = `pelcro-${new Date().getTime()}`;
 
+        const eProtectRequestPreLiveURL =
+          "https://request.eprotect.vantivprelive.com";
+        const eProtectRequestProductionURL =
+          "https://request.eprotect.vantivcnp.com";
+        const eProtectRequestUrlToUse =
+          window.Pelcro.site.read().vantiv_gateway_settings
+            .environment === "production"
+            ? eProtectRequestProductionURL
+            : eProtectRequestPreLiveURL;
+
         const eProtectRequest = {
           paypageId: payPageId,
           reportGroup: reportGroup,
           orderId: orderId,
           id: orderId,
           applepay: applePayToken,
-          url: "https://request.eprotect.vantivprelive.com"
+          url: eProtectRequestUrlToUse
         };
 
         // successCallback function to handle the response from WorldPay.

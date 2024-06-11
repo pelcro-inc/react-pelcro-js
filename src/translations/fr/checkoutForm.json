@@ -26,6 +26,7 @@
     "phone": "Téléphoner",
     "freeItems": "Articles gratuits",
     "order": "Commande",
-    "amount": "Montant"
+    "amount": "Montant",
+    "isDefault": "Défini comme valeur par défaut"
   }
 }

@@ -15,5 +15,25 @@
       "selectPaymentMethod": "Continue",
       "changePaymentMethod": "Change"
     }
+  },
+  "delete": {
+    "title": "Delete payment method",
+    "subtitle": "Are you sure you want to delete the selected payment method?",
+    "details": "Payment method details",
+    "message": "This action is irreversible and will permanently remove the payment method from the system. Please ensure that there are no pending transactions or subscriptions associated with this payment method.",
+    "buttons": {
+      "delete": "Delete payment method",
+      "back": "Go back"
+    },
+    "options": {
+      "select": "Select a payment method to be the default",
+      "add": "Add a new payment method"
+    },
+    "paymentMethodReplaced": "Payment Method Successfully Deleted and Replaced",
+    "deletedSuccessfully": "Payment Method Successfully Deleted"
+  },
+  "create": {
+    "title": "Add a new payment method",
+    "subtitle": "Enter the fields below to add your credit card information"
   }
 }
