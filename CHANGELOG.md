@@ -1,3 +1,16 @@
+# [4.0.0-alpha.79](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.78...v4.0.0-alpha.79) (2024-06-12)
+
+
+### Bug Fixes
+
+* order summary label bug fix ([069e515](https://github.com/pelcro-inc/react-pelcro-js/commit/069e51585a88821a068a598486b72c6a032ebf03))
+
+
+### Features
+
+* add translations ([cee3678](https://github.com/pelcro-inc/react-pelcro-js/commit/cee3678eb0a9273ef17583dc4b2edc42023f2a53))
+* change order summary label ([f186b72](https://github.com/pelcro-inc/react-pelcro-js/commit/f186b72ce2b156f23a471b892ee7ab554b8f31f8))
+
 # [4.0.0-alpha.78](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.77...v4.0.0-alpha.78) (2024-05-22)
 
 
