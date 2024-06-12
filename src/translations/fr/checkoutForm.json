@@ -24,6 +24,8 @@
     "lastName": "Nom de famille",
     "phone": "Téléphoner",
     "freeItems": "Articles gratuits",
+    "order": "Commande",
+    "amount": "Montant",
     "isDefault": "Défini comme valeur par défaut"
   }
 }

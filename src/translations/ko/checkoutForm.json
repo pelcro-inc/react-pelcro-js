@@ -24,6 +24,8 @@
     "lastName": "성",
     "phone": "핸드폰",
     "freeItems": "무료 아이템",
+    "order": "주문",
+    "amount": "금액",
     "isDefault": "기본값으로 설정"
   }
 }

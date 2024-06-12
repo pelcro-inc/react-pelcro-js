@@ -25,6 +25,8 @@
     "lastName": "Apellido",
     "phone": "Teléfono",
     "freeItems": "Artículos gratis",
+    "order": "Pida",
+    "amount": "Importe",
     "isDefault": "Fijar por defecto"
   }
 }
