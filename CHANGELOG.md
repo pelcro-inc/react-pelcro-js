@@ -1,3 +1,10 @@
+# [3.26.0-beta.61](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.60...v3.26.0-beta.61) (2024-06-20)
+
+
+### Bug Fixes
+
+* modal id name fix ([ccb5b8f](https://github.com/pelcro-inc/react-pelcro-js/commit/ccb5b8f7a8ceca3193b1066a0c4f3f0817469cf6))
+
 # [3.26.0-beta.60](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.59...v3.26.0-beta.60) (2024-05-23)
 
 
