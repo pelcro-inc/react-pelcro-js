@@ -14,7 +14,7 @@ export const PasswordlessRequestModal = ({
 }) => {
   return (
     <Modal
-      id="pelcro-password-forgot-modal"
+      id="pelcro-passwordless-request-modal"
       onDisplay={onDisplay}
       onClose={onClose}
     >
