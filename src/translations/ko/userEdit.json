@@ -16,7 +16,9 @@
     "selectImage": "새로운 사진 업로드",
     "removeImage": "기존 사진 제거",
     "zoom": "확대",
-    "tin": "세금 식별 번호"
+    "tin": "세금 식별 번호",
+    "company": "회사",
+    "userTitle": "제목"
   },
   "messages": {
     "userUpdated": "감사합니다! 프로필이 성공적으로 업데이트되었습니다.",

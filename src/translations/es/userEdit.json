@@ -1,26 +1,28 @@
 {
   "labels": {
-    "title":"¿Quieres actualizar tu perfil?",
-    "subtitle":"Ingresa tu información a continuación para actualizar tu perfil",
-    "email":"Correo",
-    "firstName":"Nombre",
-    "lastName":"Apellido",
+    "title": "¿Quieres actualizar tu perfil?",
+    "subtitle": "Ingresa tu información a continuación para actualizar tu perfil",
+    "email": "Correo",
+    "firstName": "Nombre",
+    "lastName": "Apellido",
     "username": "Nombre de usuario",
     "displayname": "Nombre para mostrar",
-    "phone":"Teléfono",
-    "submit":"Enviar",
-    "required":"Obligatorio",
-    "cropperTitle":"Actualizar Foto de Perfil",
-    "cropperSubtitle":"Sube una foto, luego ajústala a tu gusto",
-    "save":"Subir Foto",
-    "selectImage":"Subir nueva foto",
-    "removeImage":"Eliminar foto actual",
-    "zoom":"Acercar",
-    "tin":"Número de Identificación Fiscal"
+    "phone": "Teléfono",
+    "submit": "Enviar",
+    "required": "Obligatorio",
+    "cropperTitle": "Actualizar Foto de Perfil",
+    "cropperSubtitle": "Sube una foto, luego ajústala a tu gusto",
+    "save": "Subir Foto",
+    "selectImage": "Subir nueva foto",
+    "removeImage": "Eliminar foto actual",
+    "zoom": "Acercar",
+    "tin": "Número de Identificación Fiscal",
+    "company": "Empresa",
+    "userTitle": "Título"
   },
   "messages": {
-    "userUpdated":"¡Gracias! Tu perfil se actualizó con éxito.",
-    "pictureRemoved":"Tu foto de perfil se eliminó con éxito.",
-    "pictureUpdated":"Tu foto de perfil se actualizó con éxito."
+    "userUpdated": "¡Gracias! Tu perfil se actualizó con éxito.",
+    "pictureRemoved": "Tu foto de perfil se eliminó con éxito.",
+    "pictureUpdated": "Tu foto de perfil se actualizó con éxito."
   }
 }

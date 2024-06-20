@@ -13,6 +13,10 @@ import {
   SET_LAST_NAME_ERROR,
   SET_USERNAME,
   SET_USERNAME_ERROR,
+  SET_COMPANY,
+  SET_COMPANY_ERROR,
+  SET_TITLE,
+  SET_TITLE_ERROR,
   SET_DISPLAY_NAME,
   SET_PHONE,
   SET_TIN,
@@ -33,6 +37,10 @@ const initialState = {
   lastNameError: null,
   username: window.Pelcro.user.read()?.username,
   usernameError: null,
+  company: window.Pelcro.user.read()?.organization?.name,
+  companyError: null,
+  title: window.Pelcro.user.read()?.title,
+  titleError: null,
   displayName: window.Pelcro.user.read()?.display_name,
   phone: window.Pelcro.user.read()?.phone,
   phoneError: null,
@@ -94,6 +102,14 @@ const UserUpdateContainer = ({
       {
         type: SET_TIN,
         payload: window.Pelcro.user.read()?.tin
+      },
+      {
+        type: SET_COMPANY,
+        payload: window.Pelcro.user.read()?.organization?.name
+      },
+      {
+        type: SET_TITLE,
+        payload: window.Pelcro.user.read()?.title
       }
     ];
 
@@ -113,7 +129,9 @@ const UserUpdateContainer = ({
       phone,
       tin,
       textFields,
-      displayName
+      displayName,
+      company,
+      title
     },
     dispatch
   ) => {
@@ -127,6 +145,8 @@ const UserUpdateContainer = ({
         display_name: displayName,
         phone: phone,
         tin: tin,
+        organization: company,
+        title: title,
         metadata: { updated: "updated", ...textFields }
       },
       (err, res) => {
@@ -227,6 +247,32 @@ const UserUpdateContainer = ({
             ...state,
             usernameError: action.payload,
             username: ""
+          });
+        case SET_COMPANY:
+          return Update({
+            ...state,
+            company: action.payload,
+            companyError: null
+          });
+
+        case SET_COMPANY_ERROR:
+          return Update({
+            ...state,
+            companyError: action.payload,
+            company: ""
+          });
+        case SET_TITLE:
+          return Update({
+            ...state,
+            title: action.payload,
+            titleError: null
+          });
+
+        case SET_TITLE_ERROR:
+          return Update({
+            ...state,
+            titleError: action.payload,
+            title: ""
           });
 
         case SET_PHONE:

@@ -7,6 +7,8 @@ import {
   SET_FIRST_NAME_ERROR,
   SET_LAST_NAME_ERROR,
   SET_PHONE_ERROR,
+  SET_COMPANY_ERROR,
+  SET_TITLE_ERROR,
   RESET_LOGIN_FORM,
   SET_CONFIRM_PASSWORD,
   CONFIRM_PASSWORD_USED,
@@ -16,7 +18,10 @@ import {
   SET_FIRST_NAME,
   SET_LAST_NAME,
   SET_PHONE,
+  SET_COMPANY,
+  SET_TITLE,
   SET_TEXT_FIELD,
+  SET_TEXT_FIELD_ERROR,
   SET_SELECT,
   SHOW_ALERT,
   HANDLE_SOCIAL_LOGIN
@@ -35,6 +40,8 @@ const initialState = {
   firstName: "",
   lastName: "",
   phone: "",
+  company: "",
+  title: "",
   emailError: null,
   passwordError: null,
   confirmPassword: "",
@@ -44,6 +51,8 @@ const initialState = {
   firstNameError: null,
   lastNameError: null,
   phoneError: null,
+  companyError: null,
+  titleError: null,
   selectFields: {},
   alert: {
     type: "error",
@@ -72,8 +81,8 @@ const RegisterContainer = ({
       firstName,
       lastName,
       phone,
-      organization,
-      jobTitle,
+      company,
+      title,
       selectFields
     } = filteredData;
 
@@ -100,8 +109,10 @@ const RegisterContainer = ({
           first_name: firstName,
           last_name: lastName,
           phone: phone,
+          title: title,
+          organization: company,
           security_token: securityToken,
-          metadata: { organization, jobTitle, ...selectFields }
+          metadata: { ...selectFields }
         },
         (err, res) => {
           dispatch({
@@ -203,6 +214,18 @@ const RegisterContainer = ({
             phone: action.payload,
             phoneError: null
           });
+        case SET_COMPANY:
+          return Update({
+            ...state,
+            company: action.payload,
+            companyError: null
+          });
+        case SET_TITLE:
+          return Update({
+            ...state,
+            title: action.payload,
+            titleError: null
+          });
 
         case SET_TEXT_FIELD:
           return Update({
@@ -245,6 +268,23 @@ const RegisterContainer = ({
             ...state,
             phoneError: action.payload,
             phone: null
+          });
+        case SET_COMPANY_ERROR:
+          return Update({
+            ...state,
+            companyError: action.payload,
+            company: null
+          });
+        case SET_TITLE_ERROR:
+          return Update({
+            ...state,
+            titleError: action.payload,
+            title: null
+          });
+        case SET_TEXT_FIELD_ERROR:
+          return Update({
+            ...state,
+            ...action.payload
           });
         case SET_CONFIRM_PASSWORD_ERROR:
           return Update({
