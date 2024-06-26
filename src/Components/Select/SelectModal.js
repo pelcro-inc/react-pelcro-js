@@ -561,29 +561,41 @@ class SelectModal extends Component {
 
     return (
       <div>
-        <h3 className="plc-text-sm plc-font-semibold">
+        <h3 className="plc-text-sm plc-font-semibold plc-mb-6">
           {this.locale("labels.restrictiveArticles.subscribeTo")}
         </h3>
-        <Carousel
-          slidesCount={matchingItems.length}
-          mobileArrowDown={true}
-        >
-          {matchingItems}
-        </Carousel>
+        {matchingItems.length > 3 ? (
+          <Carousel
+            slidesCount={matchingItems.length}
+            mobileArrowDown={true}
+          >
+            {matchingItems}
+          </Carousel>
+        ) : (
+          <div className="plc-flex plc-flex-col md:plc-flex-row plc-gap-4 plc-items-center sm:plc-px-8 plc-px-0">
+            {matchingItems}
+          </div>
+        )}
 
         {allProductsMinusMatched?.length > 0 && (
           <>
             <hr className="plc-my-4" />
 
-            <h3 className="plc-text-sm plc-font-semibold">
+            <h3 className="plc-text-sm plc-font-semibold plc-mb-6">
               {this.locale("labels.restrictiveArticles.or")}
             </h3>
-            <Carousel
-              slidesCount={otherItems.length}
-              mobileArrowDown={true}
-            >
-              {otherItems}
-            </Carousel>
+            {otherItems.length > 3 ? (
+              <Carousel
+                slidesCount={otherItems.length}
+                mobileArrowDown={true}
+              >
+                {otherItems}
+              </Carousel>
+            ) : (
+              <div className="plc-flex plc-flex-col md:plc-flex-row plc-gap-4 plc-items-center sm:plc-px-8 plc-px-0">
+                {otherItems}
+              </div>
+            )}
           </>
         )}
       </div>
