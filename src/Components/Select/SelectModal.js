@@ -301,7 +301,7 @@ class SelectModal extends Component {
     return (
       <div
         key={product.id}
-        className="pelcro-product plc-relative plc-overflow-hidden plc-h-full plc-min-h-card plc-flex plc-flex-col plc-items-center plc-justify-center plc-pt-5 plc-text-gray-900 plc-border plc-border-solid plc-rounded-sm plc-border-gray-200 plc-bg-white pelcro-select-product-wrapper"
+        className="pelcro-product plc-w-84 plc-relative plc-overflow-hidden plc-h-full plc-min-h-card plc-flex plc-flex-col plc-items-center plc-justify-center plc-pt-5 plc-text-gray-900 plc-border plc-border-solid plc-rounded-sm plc-border-gray-200 plc-bg-white pelcro-select-product-wrapper"
       >
         {product.image && (
           <figure className="plc-w-full plc-mb-4 plc-h-28 plc-relative plc-overflow-hidden plc-flex plc-items-stretch">
@@ -403,11 +403,19 @@ class SelectModal extends Component {
       this.renderOneProduct(product, index)
     );
 
-    return (
-      <Carousel slidesCount={items.length} mobileArrowDown={true}>
-        {items}
-      </Carousel>
-    );
+    if (items.length > 3) {
+      return (
+        <Carousel slidesCount={items.length} mobileArrowDown={true}>
+          {items}
+        </Carousel>
+      );
+    } else {
+      return (
+        <div className="plc-flex plc-flex-col md:plc-flex-row plc-gap-4 plc-items-center sm:plc-px-8 plc-px-0">
+          {items}
+        </div>
+      );
+    }
   };
 
   handleScrollLeft = () => {
@@ -595,7 +603,7 @@ class SelectModal extends Component {
             this.state?.plan.id === plan.id
               ? "plc-border-2 plc-border-primary"
               : "plc-border plc-border-gray-300"
-          } plc-h-full plc-min-h-card plc-flex plc-flex-col plc-items-start plc-text-gray-900 plc-border-solid plc-rounded-sm plc-bg-white pelcro-select-plan-wrapper`}
+          } plc-h-full plc-w-84 plc-min-h-card plc-flex plc-flex-col plc-items-start plc-text-gray-900 plc-border-solid plc-rounded-sm plc-bg-white pelcro-select-plan-wrapper`}
         >
           <div
             className="plc-w-full plc-flex plc-flex-col plc-flex-1 plc-h-full plc-justify-between"
@@ -659,11 +667,19 @@ class SelectModal extends Component {
       );
     });
 
-    return (
-      <Carousel slidesCount={items.length} mobileArrowDown={true}>
-        {items}
-      </Carousel>
-    );
+    if (items.length > 3) {
+      return (
+        <Carousel slidesCount={items.length} mobileArrowDown={true}>
+          {items}
+        </Carousel>
+      );
+    } else {
+      return (
+        <div className="plc-flex plc-flex-col md:plc-flex-row plc-gap-4 plc-items-center sm:plc-px-8 plc-px-0">
+          {items}
+        </div>
+      );
+    }
   };
 
   selectProduct = (e) => {
@@ -763,7 +779,7 @@ class SelectModal extends Component {
 
     return (
       <Modal
-        className="plc-max-w-full sm:plc-max-w-90% md:plc-max-w-70%"
+        className="plc-max-w-full sm:plc-max-w-90% md:plc-max-w-70% plc-w-auto"
         hideCloseButton={!this.closeButton}
         onClose={this.props.onClose}
         id="pelcro-selection-modal"
