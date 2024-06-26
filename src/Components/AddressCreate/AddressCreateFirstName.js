@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Input } from "../../SubComponents/Input";
 import {
   RESET_FIELD_ERROR,
@@ -6,7 +6,10 @@ import {
 } from "../../utils/action-types";
 import { store } from "./AddressCreateContainer";
 
-export function AddressCreateFirstName(props) {
+export function AddressCreateFirstName({
+  initWithUserFirstName = true,
+  ...props
+}) {
   const {
     dispatch,
     state: { firstName, firstNameError }
@@ -19,6 +22,17 @@ export function AddressCreateFirstName(props) {
   const handleFocus = () => {
     dispatch({ type: RESET_FIELD_ERROR, payload: "firstNameError" });
   };
+
+  // Initialize first name field with user's first name
+  const loadFirstNameIntoField = () => {
+    handleInputChange(window.Pelcro?.user?.read()?.first_name);
+  };
+
+  useEffect(() => {
+    if (initWithUserFirstName) {
+      loadFirstNameIntoField();
+    }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <Input
