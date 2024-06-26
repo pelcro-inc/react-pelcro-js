@@ -1,3 +1,16 @@
+# [4.0.0-alpha.80](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.79...v4.0.0-alpha.80) (2024-06-26)
+
+
+### Bug Fixes
+
+* show the interval count and interval for auto renew plans ([d5ad5f6](https://github.com/pelcro-inc/react-pelcro-js/commit/d5ad5f6b6ca99b5f6f2f60f5ef3823f1d7ad7806))
+
+
+### Features
+
+* make select modal width dynamic based on elements inside ([8004cfe](https://github.com/pelcro-inc/react-pelcro-js/commit/8004cfe2d6e83fd00636aa0ea55b04587c43f0c5))
+* prepopulate name in address create ([6d2a128](https://github.com/pelcro-inc/react-pelcro-js/commit/6d2a128349d24a55e4b3963a2d54b1ce843c52ba))
+
 # [4.0.0-alpha.79](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.78...v4.0.0-alpha.79) (2024-06-12)
 
 
