@@ -621,7 +621,11 @@ class SelectModal extends Component {
                   <span className="plc-uppercase">
                     {plan.currency}
                   </span>
-                  <span>/ {plan.interval}</span>
+                  {plan.auto_renew && (
+                    <span>
+                      / {plan.interval_count} {plan.interval}
+                    </span>
+                  )}
                 </span>
               </div>
               <div
