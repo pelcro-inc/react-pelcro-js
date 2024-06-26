@@ -1,3 +1,10 @@
+# [4.0.0-alpha.81](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.80...v4.0.0-alpha.81) (2024-06-26)
+
+
+### Features
+
+* handle missing select modal view ([7966525](https://github.com/pelcro-inc/react-pelcro-js/commit/79665253395d452dad31429f15abd65098f8cf4c))
+
 # [4.0.0-alpha.80](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.79...v4.0.0-alpha.80) (2024-06-26)
 
 
