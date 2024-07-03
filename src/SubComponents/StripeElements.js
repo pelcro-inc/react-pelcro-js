@@ -150,20 +150,59 @@ export const CheckoutForm = ({ type }) => {
   }
 
   if (cardProcessor === "braintree") {
+    if (type === "updatePaymentSource") {
+      return (
+        <div>
+          {isSkeletonLoaded && paymentMethodToEdit ? (
+            <div>
+              <label htmlFor="card-number">Card Number *</label>
+              <Input
+                id="card-number"
+                className="plc-tracking-widest plc-flex-grow plc-h-12 plc-text-center"
+                value={`•••• •••• •••• ${paymentMethodToEdit?.properties?.last4}`}
+                disabled
+              />
+              <div className="plc-flex plc-items-start plc-space-x-8 plc-my-6">
+                <div>
+                  <label htmlFor="expiration-month">
+                    Expiration Month *
+                  </label>
+                  <div
+                    id="expiration-month"
+                    className="pelcro-input-field plc-h-12 plc-bg-white"
+                  ></div>
+                </div>
+                <div>
+                  <label htmlFor="expiration-year">
+                    Expiration Year *
+                  </label>
+                  <div
+                    id="expiration-year"
+                    className="pelcro-input-field plc-h-12 plc-bg-white"
+                  ></div>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div className="plc-w-full plc-h-40 plc-bg-gray-300 plc-rounded plc-animate-pulse"></div>
+          )}
+        </div>
+      );
+    }
     return (
       <div>
         {isSkeletonLoaded ? (
           <div className="plc-max-w-[50em]">
-            <label htmlFor="card-number">Card Number</label>
+            <label htmlFor="card-number">Card Number *</label>
             <div
               id="card-number"
               className="pelcro-input-field plc-h-12 plc-bg-white"
             ></div>
 
-            <div className="plc-flex plc-items-start plc-space-x-3 plc-mb-4">
+            <div className="plc-flex plc-items-start plc-space-x-8 plc-my-6">
               <div>
                 <label htmlFor="expiration-date">
-                  Expiration Date
+                  Expiration Date *
                 </label>
                 <div
                   id="expiration-date"
@@ -171,7 +210,7 @@ export const CheckoutForm = ({ type }) => {
                 ></div>
               </div>
               <div>
-                <label htmlFor="cvv">CVV</label>
+                <label htmlFor="cvv">CVC *</label>
                 <div
                   id="cvv"
                   className="pelcro-input-field plc-h-12 plc-bg-white"
@@ -180,7 +219,7 @@ export const CheckoutForm = ({ type }) => {
             </div>
           </div>
         ) : (
-          <div className="plc-w-full plc-h-36 plc-bg-gray-300 plc-rounded plc-animate-pulse"></div>
+          <div className="plc-w-full plc-h-40 plc-bg-gray-300 plc-rounded plc-animate-pulse"></div>
         )}
       </div>
     );

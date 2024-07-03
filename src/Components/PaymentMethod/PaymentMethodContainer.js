@@ -886,52 +886,161 @@ const PaymentMethodContainerWithoutStripe = ({
         return;
       }
 
-      braintreeInstanceRef.current =
-        new window.braintree.client.create({
-          authorization: braintreeToken
-        }).then((clientInstance) => {
-          const options = {
-            client: clientInstance,
-            styles: {
-              input: {
-                "font-size": "14px"
+      if (type !== "updatePaymentSource") {
+        braintreeInstanceRef.current =
+          new window.braintree.client.create({
+            authorization: braintreeToken
+          }).then((clientInstance) => {
+            const options = {
+              client: clientInstance,
+              styles: {
+                input: {
+                  "font-size": "14px"
+                },
+                "input.invalid": {
+                  color: "red"
+                },
+                "input.valid": {
+                  color: "green"
+                }
               },
-              "input.invalid": {
-                color: "red"
-              },
-              "input.valid": {
-                color: "green"
+              fields: {
+                number: {
+                  container: "#card-number",
+                  placeholder: "4111 1111 1111 1111"
+                },
+                cvv: {
+                  container: "#cvv",
+                  placeholder: "123"
+                },
+                expirationDate: {
+                  container: "#expiration-date",
+                  placeholder: "10/2022"
+                }
               }
-            },
-            fields: {
-              number: {
-                container: "#card-number",
-                placeholder: "4111 1111 1111 1111"
-              },
-              cvv: {
-                container: "#cvv",
-                placeholder: "123"
-              },
-              expirationDate: {
-                container: "#expiration-date",
-                placeholder: "10/2022"
-              }
-            }
-          };
-          dispatch({
-            type: SKELETON_LOADER,
-            payload: true
+            };
+            dispatch({
+              type: SKELETON_LOADER,
+              payload: true
+            });
+
+            return window.braintree.hostedFields.create(options);
           });
 
-          return window.braintree.hostedFields.create(options);
+        braintreeInstanceRef.current.then((hostedFieldInstance) => {
+          hostedFieldInstance.on("notEmpty", function (event) {
+            const field = event.fields[event.emittedBy];
+            if (field.isPotentiallyValid) {
+              field.container.classList.remove(
+                "pelcro-input-invalid"
+              );
+            }
+          });
+
+          hostedFieldInstance.on("validityChange", function (event) {
+            const field = event.fields[event.emittedBy];
+
+            // Remove any previously applied error or warning classes
+            field.container.classList.remove("is-valid");
+            field.container.classList.remove("pelcro-input-invalid");
+
+            if (field.isValid) {
+              field.container.classList.add("is-valid");
+            } else if (field.isPotentiallyValid) {
+              // skip adding classes if the field is
+              // not valid, but is potentially valid
+            } else {
+              field.container.classList.add("pelcro-input-invalid");
+            }
+          });
         });
+      } else if (
+        type == "updatePaymentSource" &&
+        paymentMethodToEdit
+      ) {
+        const { properties } = paymentMethodToEdit ?? {};
+        const { exp_month: expMonth, exp_year: expYear } =
+          properties ?? {};
+        braintreeInstanceRef.current =
+          new window.braintree.client.create({
+            authorization: braintreeToken
+          }).then((clientInstance) => {
+            const options = {
+              client: clientInstance,
+              styles: {
+                input: {
+                  "font-size": "14px"
+                },
+                "input.invalid": {
+                  color: "red"
+                },
+                "input.valid": {
+                  color: "green"
+                }
+              },
+              fields: {
+                expirationMonth: {
+                  container: "#expiration-month",
+                  prefill: expMonth
+                },
+                expirationYear: {
+                  container: "#expiration-year",
+                  prefill: expYear
+                }
+              }
+            };
+            dispatch({
+              type: SKELETON_LOADER,
+              payload: true
+            });
+
+            return window.braintree.hostedFields.create(options);
+          });
+
+        braintreeInstanceRef.current.then((hostedFieldInstance) => {
+          hostedFieldInstance.on("notEmpty", function (event) {
+            const field = event.fields[event.emittedBy];
+            if (field.isPotentiallyValid) {
+              field.container.classList.remove(
+                "pelcro-input-invalid"
+              );
+            }
+          });
+
+          hostedFieldInstance.on("validityChange", function (event) {
+            const field = event.fields[event.emittedBy];
+
+            // Remove any previously applied error or warning classes
+            field.container.classList.remove("is-valid");
+            field.container.classList.remove("pelcro-input-invalid");
+
+            if (field.isValid) {
+              field.container.classList.add("is-valid");
+            } else if (field.isPotentiallyValid) {
+              // skip adding classes if the field is
+              // not valid, but is potentially valid
+            } else {
+              field.container.classList.add("pelcro-input-invalid");
+            }
+          });
+        });
+      }
     }
-  }, [selectedPaymentMethodId]);
+  }, [selectedPaymentMethodId, paymentMethodToEdit]);
 
   const braintreeErrorHandler = (tokenizeErr) => {
+    const cardNumber = document.querySelector("#card-number");
+    const expirationDate = document.querySelector("#expiration-date");
+    const cvv = document.querySelector("#cvv");
+    const fields = tokenizeErr?.details?.invalidFields
+      ? Object.values(tokenizeErr?.details?.invalidFields)
+      : null;
     switch (tokenizeErr.code) {
       case "HOSTED_FIELDS_FIELDS_EMPTY":
         // occurs when none of the fields are filled in
+        cardNumber.classList.add("pelcro-input-invalid");
+        expirationDate.classList.add("pelcro-input-invalid");
+        cvv.classList.add("pelcro-input-invalid");
         return "All fields are empty! Please fill out the form.";
       // break;
       case "HOSTED_FIELDS_FIELDS_INVALID":
@@ -947,6 +1056,9 @@ const PaymentMethodContainerWithoutStripe = ({
         // ) {
         //   fieldContainer.className = "invalid";
         // });
+        fields.forEach((field) => {
+          field.classList.add("pelcro-input-invalid");
+        });
         return `Some fields are invalid: ${tokenizeErr.details.invalidFieldKeys.toString()}`;
       case "HOSTED_FIELDS_TOKENIZATION_FAIL_ON_DUPLICATE":
         // occurs when:
