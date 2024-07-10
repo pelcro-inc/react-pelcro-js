@@ -1,3 +1,11 @@
+# [3.26.0-beta.62](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.61...v3.26.0-beta.62) (2024-07-10)
+
+
+### Features
+
+* handle card update and field validation ([3597f99](https://github.com/pelcro-inc/react-pelcro-js/commit/3597f99830164d04f597f16dca007ec141bcc03f))
+* support 3ds in braintree ([cb08bcf](https://github.com/pelcro-inc/react-pelcro-js/commit/cb08bcf305b1d9500dd9acb3e911a2a4a2d326c1))
+
 # [3.26.0-beta.61](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.60...v3.26.0-beta.61) (2024-06-20)
 
 
