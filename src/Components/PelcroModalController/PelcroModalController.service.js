@@ -144,8 +144,12 @@ export const loadPaymentSDKs = () => {
 
   if (supportsBraintree) {
     window.Pelcro.helpers.loadSDK(
+      "https://js.braintreegateway.com/web/3.99.0/js/three-d-secure.min.js",
+      "braintree-3D-secure-sdk"
+    );
+    window.Pelcro.helpers.loadSDK(
       "https://js.braintreegateway.com/web/3.99.0/js/hosted-fields.min.js",
-      "braintree-histed-fields-sdk"
+      "braintree-hosted-fields-sdk"
     );
   }
 

@@ -915,13 +915,32 @@ const PaymentMethodContainerWithoutStripe = ({
 
   /* ====== Start Braintree integration ======== */
   const braintreeInstanceRef = React.useRef(null);
+  const braintree3DSecureInstanceRef = React.useRef(null);
 
-  useEffect(() => {
+  function getClientToken() {
+    return new Promise((resolve, reject) => {
+      window.Pelcro.payment.generateClientToken(
+        {
+          auth_token: window.Pelcro.user.read().auth_token,
+          site_id: window.Pelcro.siteid
+        },
+        (error, response) => {
+          if (error) {
+            reject(error);
+          }
+          if (response) {
+            resolve(response.client_token);
+          }
+        }
+      );
+    });
+  }
+
+  async function initializeBraintree() {
     if (skipPayment && (plan?.amount === 0 || props?.freeOrders))
       return;
     if (cardProcessor === "braintree" && !selectedPaymentMethodId) {
-      const { token: braintreeToken } =
-        window.Pelcro.site.read()?.braintree_gateway_settings;
+      const braintreeToken = await getClientToken();
 
       const isBraintreeEnabled = Boolean(braintreeToken);
 
@@ -932,52 +951,173 @@ const PaymentMethodContainerWithoutStripe = ({
         return;
       }
 
-      braintreeInstanceRef.current =
-        new window.braintree.client.create({
-          authorization: braintreeToken
-        }).then((clientInstance) => {
-          const options = {
-            client: clientInstance,
-            styles: {
-              input: {
-                "font-size": "14px"
+      if (type !== "updatePaymentSource") {
+        braintreeInstanceRef.current =
+          new window.braintree.client.create({
+            authorization: braintreeToken
+          }).then((clientInstance) => {
+            const options = {
+              authorization: braintreeToken,
+              styles: {
+                input: {
+                  "font-size": "14px"
+                },
+                "input.invalid": {
+                  color: "red"
+                },
+                "input.valid": {
+                  color: "green"
+                }
               },
-              "input.invalid": {
-                color: "red"
-              },
-              "input.valid": {
-                color: "green"
+              fields: {
+                number: {
+                  container: "#card-number",
+                  placeholder: "4111 1111 1111 1111"
+                },
+                cvv: {
+                  container: "#cvv",
+                  placeholder: "123"
+                },
+                expirationDate: {
+                  container: "#expiration-date",
+                  placeholder: "10/2022"
+                }
               }
-            },
-            fields: {
-              number: {
-                container: "#card-number",
-                placeholder: "4111 1111 1111 1111"
-              },
-              cvv: {
-                container: "#cvv",
-                placeholder: "123"
-              },
-              expirationDate: {
-                container: "#expiration-date",
-                placeholder: "10/2022"
-              }
-            }
-          };
-          dispatch({
-            type: SKELETON_LOADER,
-            payload: true
+            };
+            dispatch({
+              type: SKELETON_LOADER,
+              payload: true
+            });
+
+            braintree3DSecureInstanceRef.current =
+              new window.braintree.threeDSecure.create({
+                version: 2,
+                authorization: braintreeToken
+              }).then((threeDSecureInstance) => {
+                return threeDSecureInstance;
+              });
+
+            return window.braintree.hostedFields.create(options);
           });
 
-          return window.braintree.hostedFields.create(options);
+        braintreeInstanceRef.current.then((hostedFieldInstance) => {
+          hostedFieldInstance.on("notEmpty", function (event) {
+            const field = event.fields[event.emittedBy];
+            if (field.isPotentiallyValid) {
+              field.container.classList.remove(
+                "pelcro-input-invalid"
+              );
+            }
+          });
+
+          hostedFieldInstance.on("validityChange", function (event) {
+            const field = event.fields[event.emittedBy];
+
+            // Remove any previously applied error or warning classes
+            field.container.classList.remove("is-valid");
+            field.container.classList.remove("pelcro-input-invalid");
+
+            if (field.isValid) {
+              field.container.classList.add("is-valid");
+            } else if (field.isPotentiallyValid) {
+              // skip adding classes if the field is
+              // not valid, but is potentially valid
+            } else {
+              field.container.classList.add("pelcro-input-invalid");
+            }
+          });
         });
+      } else if (
+        type == "updatePaymentSource" &&
+        paymentMethodToEdit
+      ) {
+        const { properties } = paymentMethodToEdit ?? {};
+        const { exp_month: expMonth, exp_year: expYear } =
+          properties ?? {};
+        braintreeInstanceRef.current =
+          new window.braintree.client.create({
+            authorization: braintreeToken
+          }).then((clientInstance) => {
+            const options = {
+              client: clientInstance,
+              styles: {
+                input: {
+                  "font-size": "14px"
+                },
+                "input.invalid": {
+                  color: "red"
+                },
+                "input.valid": {
+                  color: "green"
+                }
+              },
+              fields: {
+                expirationMonth: {
+                  container: "#expiration-month",
+                  prefill: expMonth
+                },
+                expirationYear: {
+                  container: "#expiration-year",
+                  prefill: expYear
+                }
+              }
+            };
+            dispatch({
+              type: SKELETON_LOADER,
+              payload: true
+            });
+
+            return window.braintree.hostedFields.create(options);
+          });
+
+        braintreeInstanceRef.current.then((hostedFieldInstance) => {
+          hostedFieldInstance.on("notEmpty", function (event) {
+            const field = event.fields[event.emittedBy];
+            if (field.isPotentiallyValid) {
+              field.container.classList.remove(
+                "pelcro-input-invalid"
+              );
+            }
+          });
+
+          hostedFieldInstance.on("validityChange", function (event) {
+            const field = event.fields[event.emittedBy];
+
+            // Remove any previously applied error or warning classes
+            field.container.classList.remove("is-valid");
+            field.container.classList.remove("pelcro-input-invalid");
+
+            if (field.isValid) {
+              field.container.classList.add("is-valid");
+            } else if (field.isPotentiallyValid) {
+              // skip adding classes if the field is
+              // not valid, but is potentially valid
+            } else {
+              field.container.classList.add("pelcro-input-invalid");
+            }
+          });
+        });
+      }
     }
-  }, [selectedPaymentMethodId]);
+  }
+
+  useEffect(() => {
+    initializeBraintree();
+  }, [selectedPaymentMethodId, paymentMethodToEdit]);
 
   const braintreeErrorHandler = (tokenizeErr) => {
+    const cardNumber = document.querySelector("#card-number");
+    const expirationDate = document.querySelector("#expiration-date");
+    const cvv = document.querySelector("#cvv");
+    const fields = tokenizeErr?.details?.invalidFields
+      ? Object.values(tokenizeErr?.details?.invalidFields)
+      : null;
     switch (tokenizeErr.code) {
       case "HOSTED_FIELDS_FIELDS_EMPTY":
         // occurs when none of the fields are filled in
+        cardNumber.classList.add("pelcro-input-invalid");
+        expirationDate.classList.add("pelcro-input-invalid");
+        cvv.classList.add("pelcro-input-invalid");
         return "All fields are empty! Please fill out the form.";
       // break;
       case "HOSTED_FIELDS_FIELDS_INVALID":
@@ -993,6 +1133,9 @@ const PaymentMethodContainerWithoutStripe = ({
         // ) {
         //   fieldContainer.className = "invalid";
         // });
+        fields.forEach((field) => {
+          field.classList.add("pelcro-input-invalid");
+        });
         return `Some fields are invalid: ${tokenizeErr.details.invalidFieldKeys.toString()}`;
       case "HOSTED_FIELDS_TOKENIZATION_FAIL_ON_DUPLICATE":
         // occurs when:
@@ -1038,6 +1181,32 @@ const PaymentMethodContainerWithoutStripe = ({
       );
     }
 
+    const getOrderItemsTotal = () => {
+      if (!order) {
+        return null;
+      }
+
+      const isQuickPurchase = !Array.isArray(order);
+
+      if (isQuickPurchase) {
+        return order.price * order.quantity;
+      }
+
+      if (order.length === 0) {
+        return null;
+      }
+
+      return order.reduce((total, item) => {
+        return total + item.price * item.quantity;
+      }, 0);
+    };
+
+    const totalAmount =
+      state?.updatedPrice ??
+      plan?.amount ??
+      invoice?.amount_remaining ??
+      getOrderItemsTotal();
+
     braintreeInstanceRef.current
       .then((hostedFieldInstance) => {
         hostedFieldInstance.tokenize((tokenizeErr, payload) => {
@@ -1052,8 +1221,78 @@ const PaymentMethodContainerWithoutStripe = ({
               }
             });
           }
-          console.log(payload);
-          handleBraintreePayment(payload, state);
+
+          if (
+            type == "createPaymentSource" ||
+            type == "updatePaymentSource" ||
+            type == "deletePaymentSource"
+          ) {
+            handleBraintreePayment(payload, state);
+          } else {
+            braintree3DSecureInstanceRef.current.then(
+              (threeDSecureInstance) => {
+                threeDSecureInstance
+                  .verifyCard({
+                    onLookupComplete: function (data, next) {
+                      next();
+                    },
+                    amount: totalAmount,
+                    nonce: payload.nonce,
+                    bin: payload.details.bin
+                  })
+                  .then((payload) => {
+                    if (payload.liabilityShifted) {
+                      handleBraintreePayment(payload, state);
+                    } else if (payload.liabilityShiftPossible) {
+                      dispatch({
+                        type: DISABLE_SUBMIT,
+                        payload: false
+                      });
+                      dispatch({ type: LOADING, payload: false });
+                      return dispatch({
+                        type: SHOW_ALERT,
+                        payload: {
+                          type: "error",
+                          content:
+                            "We encountered an issue verifying your transaction with 3D Secure, please try again."
+                        }
+                      });
+                    } else {
+                      // Liability has not shifted and will not shift
+                      dispatch({
+                        type: DISABLE_SUBMIT,
+                        payload: false
+                      });
+                      dispatch({ type: LOADING, payload: false });
+                      return dispatch({
+                        type: SHOW_ALERT,
+                        payload: {
+                          type: "error",
+                          content:
+                            "We encountered an issue verifying your transaction with 3D Secure, please try another payment method."
+                        }
+                      });
+                    }
+                  })
+                  .catch((error) => {
+                    console.error(error);
+                    dispatch({
+                      type: DISABLE_SUBMIT,
+                      payload: false
+                    });
+                    dispatch({ type: LOADING, payload: false });
+                    return dispatch({
+                      type: SHOW_ALERT,
+                      payload: {
+                        type: "error",
+                        content:
+                          "There was a problem with your request."
+                      }
+                    });
+                  });
+              }
+            );
+          }
         });
       })
       .catch((error) => {
