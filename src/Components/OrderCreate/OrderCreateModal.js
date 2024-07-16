@@ -25,6 +25,7 @@ export const OrderCreateModal = ({
   return (
     <Modal
       id="pelcro-order-create-modal"
+      className="plc-max-w-7xl"
       onDisplay={onDisplay}
       onClose={onClose}
     >
