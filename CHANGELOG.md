@@ -1,3 +1,10 @@
+# [4.0.0-alpha.82](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.81...v4.0.0-alpha.82) (2024-07-16)
+
+
+### Features
+
+* create order checkout summary ([7f2efea](https://github.com/pelcro-inc/react-pelcro-js/commit/7f2efea9313217f16aa0ccde01e67bdcc808af97))
+
 # [4.0.0-alpha.81](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.80...v4.0.0-alpha.81) (2024-06-26)
 
 
