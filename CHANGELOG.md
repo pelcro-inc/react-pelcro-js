@@ -1,3 +1,10 @@
+# [3.26.0-beta.63](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.62...v3.26.0-beta.63) (2024-07-17)
+
+
+### Features
+
+* support 3ds verify card on payment method create ([37ed8f9](https://github.com/pelcro-inc/react-pelcro-js/commit/37ed8f90f3c7bc6b102a1f38932447fdc3b4a635))
+
 # [3.26.0-beta.62](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.61...v3.26.0-beta.62) (2024-07-10)
 
 
