@@ -1177,7 +1177,6 @@ const PaymentMethodContainerWithoutStripe = ({
           }
 
           if (
-            type == "createPaymentSource" ||
             type == "updatePaymentSource" ||
             type == "deletePaymentSource"
           ) {
@@ -1190,7 +1189,7 @@ const PaymentMethodContainerWithoutStripe = ({
                     onLookupComplete: function (data, next) {
                       next();
                     },
-                    amount: totalAmount,
+                    amount: totalAmount ?? "0.00",
                     nonce: payload.nonce,
                     bin: payload.details.bin
                   })
