@@ -1226,7 +1226,7 @@ const PaymentMethodContainerWithoutStripe = ({
             type == "updatePaymentSource" ||
             type == "deletePaymentSource"
           ) {
-            handleBraintreePayment(payload, state);
+            handleBraintreePayment(payload, state.couponCode);
           } else {
             braintree3DSecureInstanceRef.current.then(
               (threeDSecureInstance) => {
@@ -1241,7 +1241,10 @@ const PaymentMethodContainerWithoutStripe = ({
                   })
                   .then((payload) => {
                     if (payload.liabilityShifted) {
-                      handleBraintreePayment(payload, state);
+                      handleBraintreePayment(
+                        payload,
+                        state.couponCode
+                      );
                     } else if (payload.liabilityShiftPossible) {
                       dispatch({
                         type: DISABLE_SUBMIT,
@@ -1302,7 +1305,10 @@ const PaymentMethodContainerWithoutStripe = ({
       });
   };
 
-  const handleBraintreePayment = (braintreePaymentRequest, state) => {
+  const handleBraintreePayment = (
+    braintreePaymentRequest,
+    couponCode
+  ) => {
     const isUsingExistingPaymentMethod = Boolean(
       selectedPaymentMethodId
     );
