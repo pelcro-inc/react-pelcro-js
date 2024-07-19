@@ -1,3 +1,10 @@
+# [3.26.0-beta.64](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.63...v3.26.0-beta.64) (2024-07-19)
+
+
+### Bug Fixes
+
+* use container state for coupon code instead of store ([d8a609b](https://github.com/pelcro-inc/react-pelcro-js/commit/d8a609b12a53eeb260968775408a1c83bb64200c))
+
 # [3.26.0-beta.63](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.62...v3.26.0-beta.63) (2024-07-17)
 
 
