@@ -1,3 +1,11 @@
+# [4.0.0-alpha.83](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.82...v4.0.0-alpha.83) (2024-07-23)
+
+
+### Bug Fixes
+
+* on close prop drilling bug fix ([a45be46](https://github.com/pelcro-inc/react-pelcro-js/commit/a45be4615b19967e64cee1fb18f59cc76b605b5d))
+* order mapping type error ([596bb5f](https://github.com/pelcro-inc/react-pelcro-js/commit/596bb5f11b54c6f9cbee74c622061f154199cfff))
+
 # [4.0.0-alpha.82](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.81...v4.0.0-alpha.82) (2024-07-16)
 
 
