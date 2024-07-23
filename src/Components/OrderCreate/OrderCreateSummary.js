@@ -6,7 +6,7 @@ import {
 } from "../../utils/utils";
 
 export const OrderCreateSummary = ({ order }) => {
-  const items = order?.length > 1 ? order : [order];
+  const items = order?.length > 0 ? order : [];
 
   return (
     <div className="plc-px-8 md:plc-px-0">
@@ -42,6 +42,7 @@ export const OrderCreateSummary = ({ order }) => {
                       <div className="plc-flex plc-flex-none plc-space-x-4">
                         <p className="plc-text-gray-900">
                           {item &&
+                            item.currency &&
                             calcAndFormatItemsTotal(
                               [item],
                               item?.currency
