@@ -27,9 +27,8 @@ export const OrderCreateModal = ({
       id="pelcro-order-create-modal"
       className="plc-max-w-7xl"
       onDisplay={onDisplay}
-      onClose={onClose}
     >
-      <ModalHeader>
+      <ModalHeader onCloseModal={onClose}>
         <div className="plc-text-left plc-text-gray-900 pelcro-title-wrapper plc-flex-1 plc-flex plc-flex-col plc-justify-center">
           <h4 className="plc-text-xl plc-font-bold ">
             {t("labels.checkout.title")}
