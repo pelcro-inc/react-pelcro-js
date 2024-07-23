@@ -52,6 +52,7 @@ export function Modal({
 export const ModalHeader = ({
   id,
   onDisplay,
+  onCloseModal,
   className = "",
   hideCloseButton,
   children,
@@ -59,7 +60,7 @@ export const ModalHeader = ({
 }) => {
   const resetView = usePelcro((state) => state.resetView);
   const onClose = () => {
-    props?.onClose?.();
+    onCloseModal?.();
     resetView();
   };
 
