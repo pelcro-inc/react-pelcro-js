@@ -1,3 +1,10 @@
+# [4.0.0-alpha.84](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.83...v4.0.0-alpha.84) (2024-07-29)
+
+
+### Bug Fixes
+
+* on close prop drilling bug on sub create ([0596173](https://github.com/pelcro-inc/react-pelcro-js/commit/05961731dd2617c9d0259512a51c97edb5332eb6))
+
 # [4.0.0-alpha.83](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.82...v4.0.0-alpha.83) (2024-07-23)
 
 
