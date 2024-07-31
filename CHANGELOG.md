@@ -1,3 +1,11 @@
+# [4.0.0-alpha.85](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.84...v4.0.0-alpha.85) (2024-07-31)
+
+
+### Bug Fixes
+
+* interval not being display bug fix ([16c31ad](https://github.com/pelcro-inc/react-pelcro-js/commit/16c31ad9e7ed9c2bf36a99abd8a043db8d552a4a))
+* order summary disappear bug fix ([8a952b9](https://github.com/pelcro-inc/react-pelcro-js/commit/8a952b9f979c1b04809923ce1817012908a2e436))
+
 # [4.0.0-alpha.84](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.83...v4.0.0-alpha.84) (2024-07-29)
 
 
