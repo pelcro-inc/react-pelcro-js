@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   calcAndFormatItemsTotal,
   getFormattedPriceByLocal,
@@ -6,7 +6,22 @@ import {
 } from "../../utils/utils";
 
 export const OrderCreateSummary = ({ order }) => {
-  const items = order?.length > 0 ? order : [];
+  const [items, setItems] = useState([]);
+  const [orderTotal, setOrderTotal] = useState("");
+
+  useEffect(() => {
+    if (order?.length > 0) {
+      setItems(order);
+      setOrderTotal(
+        calcAndFormatItemsTotal(order, order[0]?.currency) ??
+          getFormattedPriceByLocal(
+            order?.price,
+            order?.currency,
+            getPageOrDefaultLanguage()
+          )
+      );
+    }
+  }, []);
 
   return (
     <div className="plc-px-8 md:plc-px-0">
@@ -61,15 +76,7 @@ export const OrderCreateSummary = ({ order }) => {
       <dl className="plc-mt-6 plc-space-y-6 plc-text-sm plc-font-medium plc-text-gray-500">
         <div className="plc-flex plc-justify-between plc-border-t plc-border-gray-200 plc-pt-6 plc-text-gray-900">
           <dt className="plc-text-base">Total</dt>
-          <dd className="plc-text-base">
-            {order &&
-              (calcAndFormatItemsTotal(order, order[0]?.currency) ??
-                getFormattedPriceByLocal(
-                  order?.price,
-                  order?.currency,
-                  getPageOrDefaultLanguage()
-                ))}
-          </dd>
+          <dd className="plc-text-base">{orderTotal}</dd>
         </div>
       </dl>
     </div>
