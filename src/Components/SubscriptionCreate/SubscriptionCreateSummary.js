@@ -24,10 +24,11 @@ export const SubscriptionCreateSummary = () => {
     const autoRenewed = plan.auto_renew;
     const {
       interval_translated: intervalTranslated,
-      interval_count: intervalCount
+      interval_count: intervalCount,
+      interval
     } = plan;
     const intervalText = t("labels.interval", {
-      interval: intervalTranslated,
+      interval: intervalTranslated ?? interval,
       count: intervalCount
     });
 
