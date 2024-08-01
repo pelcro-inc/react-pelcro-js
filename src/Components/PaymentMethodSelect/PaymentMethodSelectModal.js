@@ -46,7 +46,9 @@ export const PaymentMethodSelectModal = ({
     switchToCheckoutForm();
   };
 
-  const showBackButton = Boolean(product && plan && !giftRecipient);
+  const showBackButton = Boolean(
+    (product && plan && !giftRecipient) || order
+  );
 
   const userHasAddress = () => {
     const addresses = window.Pelcro.user.read()?.addresses ?? [];
@@ -57,9 +59,7 @@ export const PaymentMethodSelectModal = ({
 
   const goBack = () => {
     if (
-      product &&
-      plan &&
-      product.address_required &&
+      ((product && plan && product.address_required) || order) &&
       isUserHasAddress
     ) {
       return switchView("address-select");
@@ -67,6 +67,10 @@ export const PaymentMethodSelectModal = ({
 
     if (product && plan) {
       return switchView("plan-select");
+    }
+
+    if (order) {
+      return switchView("cart");
     }
   };
 
