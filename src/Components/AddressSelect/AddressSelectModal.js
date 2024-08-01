@@ -21,7 +21,8 @@ export const AddressSelectModal = ({
     resetView,
     product,
     plan,
-    giftRecipient
+    giftRecipient,
+    order
   } = usePelcro();
   const { t } = useTranslation("address");
 
@@ -46,11 +47,16 @@ export const AddressSelectModal = ({
     resetView();
   };
 
-  const showBackButton = Boolean(product && plan && !giftRecipient);
+  const showBackButton = Boolean(
+    (product && plan && !giftRecipient) || order
+  );
 
   const goBack = () => {
     if (product && plan) {
-      switchView("plan-select");
+      return switchView("plan-select");
+    }
+    if (order) {
+      return switchView("cart");
     }
   };
 
