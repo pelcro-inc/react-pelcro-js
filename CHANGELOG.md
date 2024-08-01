@@ -1,3 +1,10 @@
+# [4.0.0-alpha.86](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.85...v4.0.0-alpha.86) (2024-08-01)
+
+
+### Features
+
+* support back button on ecommerce flow ([c08c58b](https://github.com/pelcro-inc/react-pelcro-js/commit/c08c58bfb9ea0d1fa4d0bc6e92f9da9fe666418b))
+
 # [4.0.0-alpha.85](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.84...v4.0.0-alpha.85) (2024-07-31)
 
 
