@@ -1,3 +1,10 @@
+# [4.0.0-alpha.87](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.86...v4.0.0-alpha.87) (2024-08-02)
+
+
+### Bug Fixes
+
+* support quick purchase in order summary ([3084cda](https://github.com/pelcro-inc/react-pelcro-js/commit/3084cdac98cddda3294d16ce1c4595fe5b1061c0))
+
 # [4.0.0-alpha.86](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.85...v4.0.0-alpha.86) (2024-08-01)
 
 
