@@ -10,6 +10,18 @@ export const OrderCreateSummary = ({ order }) => {
   const [orderTotal, setOrderTotal] = useState("");
 
   useEffect(() => {
+    const isQuickPurchase = !Array.isArray(order);
+    if (isQuickPurchase) {
+      setItems([order]);
+      setOrderTotal(
+        calcAndFormatItemsTotal(order, order[0]?.currency) ??
+          getFormattedPriceByLocal(
+            order?.price,
+            order?.currency,
+            getPageOrDefaultLanguage()
+          )
+      );
+    }
     if (order?.length > 0) {
       setItems(order);
       setOrderTotal(
