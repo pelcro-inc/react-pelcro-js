@@ -21,7 +21,8 @@ export const AddressCreateModal = ({
     resetView,
     giftRecipient,
     product,
-    plan
+    plan,
+    order
   } = usePelcro();
   const { t } = useTranslation("address");
 
@@ -42,7 +43,9 @@ export const AddressCreateModal = ({
     resetView();
   };
 
-  const showBackButton = Boolean(product && plan && !giftRecipient);
+  const showBackButton = Boolean(
+    (product && plan && !giftRecipient) || order
+  );
 
   const userHasAddress = () => {
     const addresses = window.Pelcro.user.read()?.addresses ?? [];
@@ -55,8 +58,14 @@ export const AddressCreateModal = ({
     if (product && plan && isUserHasAddress) {
       return switchView("address-select");
     }
+    if (order && isUserHasAddress) {
+      return switchView("address-select");
+    }
     if (product && plan) {
       return switchView("plan-select");
+    }
+    if (order) {
+      return switchView("cart");
     }
   };
 
