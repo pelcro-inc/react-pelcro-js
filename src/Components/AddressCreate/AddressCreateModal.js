@@ -52,6 +52,8 @@ export const AddressCreateModal = ({
     return addresses.length > 0;
   };
 
+  const view = window.Pelcro.helpers.getURLParameter("view");
+
   const isUserHasAddress = userHasAddress();
 
   const goBack = () => {
@@ -60,6 +62,9 @@ export const AddressCreateModal = ({
     }
     if (order && isUserHasAddress) {
       return switchView("address-select");
+    }
+    if (product && plan && view == "offer") {
+      return switchView("offer");
     }
     if (product && plan) {
       return switchView("plan-select");

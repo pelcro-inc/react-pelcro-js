@@ -51,7 +51,12 @@ export const AddressSelectModal = ({
     (product && plan && !giftRecipient) || order
   );
 
+  const view = window.Pelcro.helpers.getURLParameter("view");
+
   const goBack = () => {
+    if (product && plan && view == "offer") {
+      return switchView("offer");
+    }
     if (product && plan) {
       return switchView("plan-select");
     }
