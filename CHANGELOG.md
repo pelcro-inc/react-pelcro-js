@@ -1,3 +1,10 @@
+# [4.0.0-alpha.89](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.88...v4.0.0-alpha.89) (2024-08-08)
+
+
+### Features
+
+* update back button logic ([6c2e983](https://github.com/pelcro-inc/react-pelcro-js/commit/6c2e9836688177dbd5cb427598bba2aeac47a267))
+
 # [4.0.0-alpha.88](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.87...v4.0.0-alpha.88) (2024-08-06)
 
 
