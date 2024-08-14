@@ -43,6 +43,8 @@ export function SubscriptionCreateModal({
 
   const isUserHasAddress = userHasAddress();
 
+  const view = window.Pelcro.helpers.getURLParameter("view");
+
   const goBack = () => {
     if (product && plan && isUserHasPaymentMethod) {
       return switchView("payment-method-select");
@@ -55,6 +57,10 @@ export function SubscriptionCreateModal({
       isUserHasAddress
     ) {
       return switchView("address-select");
+    }
+
+    if (product && plan && view == "offer") {
+      return switchView("offer");
     }
 
     if (product && plan) {
