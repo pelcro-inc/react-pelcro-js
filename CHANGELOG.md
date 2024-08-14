@@ -1,3 +1,10 @@
+# [4.0.0-alpha.90](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.89...v4.0.0-alpha.90) (2024-08-14)
+
+
+### Features
+
+* add missing go back logic ([696a9c1](https://github.com/pelcro-inc/react-pelcro-js/commit/696a9c1d36b150505774262ddcce133f907f77d5))
+
 # [4.0.0-alpha.89](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.88...v4.0.0-alpha.89) (2024-08-08)
 
 
