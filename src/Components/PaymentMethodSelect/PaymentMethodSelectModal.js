@@ -57,12 +57,18 @@ export const PaymentMethodSelectModal = ({
 
   const isUserHasAddress = userHasAddress();
 
+  const view = window.Pelcro.helpers.getURLParameter("view");
+
   const goBack = () => {
     if (
       ((product && plan && product.address_required) || order) &&
       isUserHasAddress
     ) {
       return switchView("address-select");
+    }
+
+    if (product && plan && view == "offer") {
+      return switchView("offer");
     }
 
     if (product && plan) {
