@@ -75,12 +75,8 @@ export const AddressCreateModal = ({
   };
 
   return (
-    <Modal
-      id="pelcro-address-create-modal"
-      onDisplay={onDisplay}
-      onClose={onClose}
-    >
-      <ModalHeader>
+    <Modal id="pelcro-address-create-modal" onDisplay={onDisplay}>
+      <ModalHeader onCloseModal={onClose}>
         <div className="plc-text-left plc-text-gray-900 pelcro-title-wrapper plc-flex-1 plc-flex plc-flex-col plc-justify-center">
           {showBackButton && (
             <button
