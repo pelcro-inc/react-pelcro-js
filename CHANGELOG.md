@@ -1,3 +1,10 @@
+# [4.0.0-alpha.92](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.91...v4.0.0-alpha.92) (2024-08-20)
+
+
+### Bug Fixes
+
+* on close prop drilling bug for checkout modals ([4717f48](https://github.com/pelcro-inc/react-pelcro-js/commit/4717f48a650d7038f1b531fd7296c873e4324f9e))
+
 # [4.0.0-alpha.91](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.90...v4.0.0-alpha.91) (2024-08-14)
 
 
