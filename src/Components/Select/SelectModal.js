@@ -793,10 +793,12 @@ class SelectModal extends Component {
       <Modal
         className="plc-max-w-full sm:plc-max-w-90% md:plc-max-w-70% plc-w-auto"
         hideCloseButton={!this.closeButton}
-        onClose={this.props.onClose}
         id="pelcro-selection-modal"
       >
-        <ModalHeader className="plc-pl-20">
+        <ModalHeader
+          className="plc-pl-20"
+          onCloseModal={this.props.onClose}
+        >
           <div className="plc-text-left plc-text-gray-900 pelcro-title-wrapper plc-flex-1 plc-flex plc-flex-col plc-justify-center">
             {this.state.mode === "plan" && (
               <button

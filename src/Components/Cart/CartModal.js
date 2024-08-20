@@ -29,10 +29,9 @@ export const CartModal = ({ onDisplay, onClose, ...otherProps }) => {
     <Modal
       id="pelcro-cart-modal"
       onDisplay={onDisplay}
-      onClose={onClose}
       hideCloseButton={false}
     >
-      <ModalHeader>
+      <ModalHeader onCloseModal={onClose}>
         <div className="plc-text-left plc-text-gray-900 pelcro-title-wrapper plc-flex-1 plc-flex plc-flex-col plc-justify-center">
           <h4 className="plc-text-xl plc-font-bold ">{t("title")}</h4>
         </div>
