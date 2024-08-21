@@ -1,3 +1,10 @@
+# [3.26.0-beta.65](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.64...v3.26.0-beta.65) (2024-08-21)
+
+
+### Features
+
+* support accepting metadata in sub create ([a4ae61e](https://github.com/pelcro-inc/react-pelcro-js/commit/a4ae61ebd699620c3feaa7aef4b151e082d0abe3))
+
 # [3.26.0-beta.64](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.63...v3.26.0-beta.64) (2024-07-19)
 
 
