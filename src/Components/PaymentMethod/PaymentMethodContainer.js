@@ -2546,7 +2546,8 @@ const PaymentMethodContainerWithoutStripe = ({
           gift_message: giftRecipient?.giftMessage,
           address_id: product.address_required
             ? selectedAddressId
-            : null
+            : null,
+          metadata: props?.subCreateMetadata
         },
         (err, res) => {
           if (res?.data?.setup_intent) {

@@ -10,7 +10,8 @@ import { PaymentMethodView } from "../PaymentMethod/PaymentMethodView";
 
 export const SubscriptionCreateView = ({
   onSuccess = () => {},
-  onFailure = () => {}
+  onFailure = () => {},
+  ...otherProps
 }) => {
   const { t } = useTranslation("checkoutForm");
   const {
@@ -91,6 +92,7 @@ export const SubscriptionCreateView = ({
         onSuccess={onSuccess}
         onFailure={onFailure}
         showSubscriptionButton={showSubscriptionButton}
+        {...otherProps}
       />
     </div>
   );
