@@ -78,6 +78,10 @@ export function getSiteCardProcessor() {
     return "cybersource";
   }
 
+  if (window.Pelcro.site.read()?.braintree_gateway_settings) {
+    return "braintree";
+  }
+
   return "stripe";
 }
 
