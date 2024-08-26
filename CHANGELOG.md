@@ -1,3 +1,10 @@
+# [3.38.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.37.0...v3.38.0) (2024-08-26)
+
+
+### Features
+
+* trigger release ([8094cc6](https://github.com/pelcro-inc/react-pelcro-js/commit/8094cc6af53b25ee0f935af1510fdfcae307c655))
+
 # [3.37.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.36.0...v3.37.0) (2024-04-30)
 
 
