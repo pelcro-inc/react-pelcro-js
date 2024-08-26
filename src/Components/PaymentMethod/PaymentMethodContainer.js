@@ -870,7 +870,7 @@ const PaymentMethodContainerWithoutStripe = ({
   };
   /* ====== End Tap integration ======== */
 
-  /* ====== Start Braintree integration ======== */
+  /* ====== Start Braintree integration  ======== */
   const braintreeInstanceRef = React.useRef(null);
   const braintree3DSecureInstanceRef = React.useRef(null);
 
