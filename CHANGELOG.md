@@ -1,3 +1,10 @@
+# [4.0.0-alpha.93](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.92...v4.0.0-alpha.93) (2024-09-05)
+
+
+### Features
+
+* add items gift in select modal ([29cfd96](https://github.com/pelcro-inc/react-pelcro-js/commit/29cfd96a7ff91206d743f8a6a2c4593f9a85e918))
+
 # [4.0.0-alpha.92](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.91...v4.0.0-alpha.92) (2024-08-20)
 
 
