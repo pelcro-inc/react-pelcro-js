@@ -8,6 +8,7 @@ import {
   ModalFooter
 } from "../../SubComponents/Modal";
 import { Button } from "../../SubComponents/Button";
+import ImageSelect from "../../SubComponents/ImageSelect";
 import { Carousel } from "../../SubComponents/Carousel";
 import { usePelcro } from "../../hooks/usePelcro";
 import { ReactComponent as ArrowLeft } from "../../assets/arrow-left.svg";
@@ -59,6 +60,7 @@ export function SelectModalWithHook(props) {
       setProductAndPlan={(product, plan, isGift) =>
         set({ product, plan, isGift })
       }
+      setItem={(itemId) => set({ itemId })}
       setView={switchView}
       matchingEntitlements={
         view === "_plan-select-entitlements" ? entitlements : null
@@ -104,6 +106,7 @@ class SelectModal extends Component {
     this.state = {
       product: {},
       plan: {},
+      itemId: "",
       isGift: props.isGift,
       disabled: true,
       mode: "product",
@@ -249,6 +252,10 @@ class SelectModal extends Component {
 
   onIsGiftChange = (e) => {
     this.setState({ isGift: e.target.checked });
+  };
+
+  onItemChange = (e) => {
+    this.setState({ itemId: e.value });
   };
 
   countStartPrice = (arr) => {
@@ -607,6 +614,14 @@ class SelectModal extends Component {
 
     const items = this.state.planList.map((plan) => {
       // const isChecked = this.state.plan.id === plan.id ? true : false;
+      let itemsArray = [];
+      if (plan.entitlements && plan.entitlements?.length > 0) {
+        itemsArray = plan.entitlements.map((itemSkuId) =>
+          window.Pelcro.ecommerce.products.getBySkuId(
+            Number(itemSkuId)
+          )
+        );
+      }
 
       return (
         <div
@@ -633,6 +648,16 @@ class SelectModal extends Component {
                 </p>
               </div>
 
+              {plan.entitlements && (
+                <ImageSelect
+                  optionsArray={itemsArray}
+                  onChange={(e) => {
+                    console.log(e.value);
+                    this.onItemChange(e);
+                  }}
+                />
+              )}
+
               <div className="plc-pt-4 plc-mb-4 plc-font-semibold pelcro-select-plan-price plc-px-4 plc-text-center plc-flex plc-items-end plc-justify-center">
                 <p className="plc-font-bold plc-text-3xl">
                   {plan.amount_formatted}
@@ -658,7 +683,16 @@ class SelectModal extends Component {
                 <button
                   className={`plc-flex plc-items-center plc-justify-center plc-text-center plc-py-2 plc-px-4 plc-w-full plc-border-2 plc-rounded-sm plc-border-primary focus:plc-outline-none plc-text-white plc-bg-primary hover:plc-bg-primary-600 hover:plc-border-primary-600 plc-transition-all`}
                   data-key={plan.id}
-                  onClick={(e) => this.selectPlan(e, false)}
+                  onClick={(e) => {
+                    this.selectPlan(e, false);
+                    if (
+                      itemsArray.some(
+                        (item) => item.id === this.state.itemId
+                      )
+                    ) {
+                      this.props.setItem(this.state.itemId);
+                    }
+                  }}
                 >
                   {this.locale("buttons.select")}
                 </button>
