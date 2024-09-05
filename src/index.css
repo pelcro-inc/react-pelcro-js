@@ -20,6 +20,7 @@
 @import "./SubComponents/Notification.css";
 @import "./SubComponents/Tooltip.css";
 @import "./SubComponents/Carousel.css";
+@import "./SubComponents/ImageSelect.css";
 
 @import "./Components/Shop/ShopView.css";
 @import "./Components/ProfilePicChange/ProfilePicChangeCropper.css";

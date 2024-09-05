@@ -1,0 +1,18 @@
+.custom-single-value {
+  display: flex;
+  align-items: center;
+}
+
+.custom-option {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+}
+
+.custom-option img {
+  margin-right: 10px;
+}
+
+.css-hlgwow {
+  display: flex !important;
+}
