@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useEffect } from "react";
 import PropTypes from "prop-types";
 import Authorship from "../common/Authorship";
 import { withTranslation } from "react-i18next";
@@ -18,6 +18,7 @@ import {
 } from "../../utils/utils";
 import ReactGA from "react-ga";
 import ReactGA4 from "react-ga4";
+import { displaySelect, submitSelect } from "../../utils/events";
 
 /**
  *
@@ -46,6 +47,10 @@ export function SelectModalWithHook(props) {
     entitlementsProtectedElements.length > 0
       ? getEntitlementsFromElem(entitlementsProtectedElements[0])
       : null;
+
+  useEffect(() => {
+    document.dispatchEvent(displaySelect({ product, plan }));
+  }, []);
 
   return (
     <SelectModalWithTrans
@@ -448,12 +453,16 @@ class SelectModal extends Component {
       this.state.isGift
     );
 
-    const { product, isGift } = this.state;
+    const { product, isGift, plan } = this.state;
     const { setView } = this.props;
     const isAuthenticated = window.Pelcro.user.isAuthenticated();
 
     const { switchToAddressView, switchToPaymentView } =
       usePelcro.getStore();
+
+    document.dispatchEvent(
+      submitSelect({ submissionSuccess: true, product, plan })
+    );
 
     if (!isAuthenticated) {
       return setView("register");

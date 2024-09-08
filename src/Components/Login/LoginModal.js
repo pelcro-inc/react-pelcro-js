@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import Authorship from "../common/Authorship";
 import { LoginView } from "./LoginView";
@@ -14,6 +14,7 @@ import {
   initViewFromURL
 } from "../PelcroModalController/PelcroModalController.service";
 import { getStableViewID } from "../../utils/utils";
+import { displayLogin } from "../../utils/events";
 
 /**
  *
@@ -103,6 +104,10 @@ export function LoginModal({ onDisplay, onClose, ...props }) {
   const onPasswordlessRequest = () => {
     switchView("passwordless-request");
   };
+
+  useEffect(() => {
+    document.dispatchEvent(displayLogin({ product, plan }));
+  }, []);
 
   return (
     <Modal

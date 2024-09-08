@@ -28,6 +28,7 @@ import useReducerWithSideEffects, {
 } from "use-reducer-with-side-effects";
 import { getErrorMessages } from "../common/Helpers";
 import { cleanObjectNullValues } from "../../utils/utils";
+import { submitRegister } from "../../utils/events";
 
 const initialState = {
   email: "",
@@ -120,8 +121,14 @@ const RegisterContainer = ({
                 content: getErrorMessages(err)
               }
             });
+            document.dispatchEvent(
+              submitRegister({ submissionSuccess: false })
+            );
             onFailure(err);
           } else {
+            document.dispatchEvent(
+              submitRegister({ submissionSuccess: true })
+            );
             onSuccess(res);
           }
         }
