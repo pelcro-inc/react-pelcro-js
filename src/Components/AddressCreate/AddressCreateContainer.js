@@ -21,6 +21,7 @@ import {
 } from "../../utils/action-types";
 import { sortCountries } from "../../utils/utils";
 import { getErrorMessages } from "../common/Helpers";
+import { submitAddressCreate } from "../../utils/events";
 
 const initialState = {
   isSubmitting: false,
@@ -151,9 +152,16 @@ const AddressCreateContainer = ({
               content: getErrorMessages(err)
             }
           });
+          document.dispatchEvent(
+            submitAddressCreate({ submissionSuccess: false })
+          );
           onFailure(err);
           return dispatch({ type: LOADING, payload: false });
         }
+
+        document.dispatchEvent(
+          submitAddressCreate({ submissionSuccess: true })
+        );
 
         const newAddressId = String(
           getNewlyCreatedAddress(res.data.addresses).id

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Authorship from "../common/Authorship";
 import { AddressCreateView } from "./AddressCreateView";
 import {
@@ -7,13 +7,20 @@ import {
   ModalFooter
 } from "../../SubComponents/Modal";
 import { usePelcro } from "../../hooks/usePelcro";
+import { displayAddressCreate } from "../../utils/events";
 
 export const AddressCreateModal = ({
   onDisplay,
   onClose,
   ...otherProps
 }) => {
-  const { switchView, switchToPaymentView, resetView } = usePelcro();
+  const {
+    switchView,
+    switchToPaymentView,
+    resetView,
+    product,
+    plan
+  } = usePelcro();
 
   const onSuccess = (newAddressId) => {
     otherProps.onSuccess?.(newAddressId);
@@ -31,6 +38,10 @@ export const AddressCreateModal = ({
     otherProps.onMembershipAdressUpdateSuccess?.();
     resetView();
   };
+
+  useEffect(() => {
+    document.dispatchEvent(displayAddressCreate({ product, plan }));
+  }, []);
 
   return (
     <Modal

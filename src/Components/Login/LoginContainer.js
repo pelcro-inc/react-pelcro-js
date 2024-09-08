@@ -21,6 +21,7 @@ import {
   HANDLE_SOCIAL_LOGIN
 } from "../../utils/action-types";
 import { getErrorMessages } from "../common/Helpers";
+import { submitLogin } from "../../utils/events";
 
 const initialState = {
   email: "",
@@ -61,8 +62,14 @@ const LoginContainer = ({
             type: SHOW_ALERT,
             payload: { type: "error", content: getErrorMessages(err) }
           });
+          document.dispatchEvent(
+            submitLogin({ submissionSuccess: false })
+          );
           onFailure(err);
         } else {
+          document.dispatchEvent(
+            submitLogin({ submissionSuccess: true })
+          );
           onSuccess(res);
           if (enableReactGA4) {
             ReactGA4.event("Logged in", {
