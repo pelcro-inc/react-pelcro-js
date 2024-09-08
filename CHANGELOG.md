@@ -1,3 +1,11 @@
+# [3.26.0-beta.66](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.65...v3.26.0-beta.66) (2024-09-08)
+
+
+### Features
+
+* add custom js events ([4c0cbc9](https://github.com/pelcro-inc/react-pelcro-js/commit/4c0cbc98b70225adcd65e5dd4f54489ae869a68d))
+* trigger release ([8094cc6](https://github.com/pelcro-inc/react-pelcro-js/commit/8094cc6af53b25ee0f935af1510fdfcae307c655))
+
 # [3.26.0-beta.65](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.64...v3.26.0-beta.65) (2024-08-21)
 
 
