@@ -615,12 +615,17 @@ class SelectModal extends Component {
     const items = this.state.planList.map((plan) => {
       // const isChecked = this.state.plan.id === plan.id ? true : false;
       let itemsArray = [];
-      if (plan.entitlements && plan.entitlements?.length > 0) {
-        itemsArray = plan.entitlements.map((itemSkuId) =>
-          window.Pelcro.ecommerce.products.getBySkuId(
-            Number(itemSkuId)
-          )
-        );
+      if (plan.entitlements && plan.entitlements.length > 0) {
+        itemsArray = plan.entitlements
+          .map((itemSkuId) => {
+            const skuNumber = Number(itemSkuId);
+            return isNaN(skuNumber)
+              ? null
+              : window.Pelcro.ecommerce.products.getBySkuId(
+                  skuNumber
+                );
+          })
+          .filter((item) => item !== null);
       }
 
       return (
@@ -648,15 +653,17 @@ class SelectModal extends Component {
                 </p>
               </div>
 
-              {plan.entitlements && (
-                <ImageSelect
-                  optionsArray={itemsArray}
-                  onChange={(e) => {
-                    console.log(e.value);
-                    this.onItemChange(e);
-                  }}
-                />
-              )}
+              {plan.entitlements &&
+                itemsArray &&
+                itemsArray.length > 0 && (
+                  <ImageSelect
+                    optionsArray={itemsArray}
+                    onChange={(e) => {
+                      console.log(e.value);
+                      this.onItemChange(e);
+                    }}
+                  />
+                )}
 
               <div className="plc-pt-4 plc-mb-4 plc-font-semibold pelcro-select-plan-price plc-px-4 plc-text-center plc-flex plc-items-end plc-justify-center">
                 <p className="plc-font-bold plc-text-3xl">
