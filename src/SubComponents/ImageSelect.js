@@ -34,9 +34,9 @@ const customOption = (props) => {
 
 const ImageSelect = ({ optionsArray, ...props }) => {
   const options = optionsArray.map((option) => ({
-    value: option.id,
-    label: option.name,
-    image: option.image
+    value: option?.id,
+    label: option?.name,
+    image: option?.image
   }));
   return (
     <Select
