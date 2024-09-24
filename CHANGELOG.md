@@ -1,3 +1,10 @@
+# [4.0.0-alpha.94](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.93...v4.0.0-alpha.94) (2024-09-24)
+
+
+### Features
+
+* handle itemsArray when rendering the ImageSelect component in the plan select modal ([683c688](https://github.com/pelcro-inc/react-pelcro-js/commit/683c68863ee9904ea6339f1a45bdfa3e38a33ccd))
+
 # [4.0.0-alpha.93](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.92...v4.0.0-alpha.93) (2024-09-05)
 
 
