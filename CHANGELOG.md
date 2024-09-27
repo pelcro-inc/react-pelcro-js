@@ -1,3 +1,10 @@
+# [4.0.0-alpha.95](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.94...v4.0.0-alpha.95) (2024-09-27)
+
+
+### Features
+
+* update image select component css ([7da5295](https://github.com/pelcro-inc/react-pelcro-js/commit/7da5295f121ab66766f74435b0e5a1bef1c0a6dd))
+
 # [4.0.0-alpha.94](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.93...v4.0.0-alpha.94) (2024-09-24)
 
 
