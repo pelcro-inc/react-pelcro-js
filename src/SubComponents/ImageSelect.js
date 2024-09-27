@@ -1,5 +1,6 @@
 import React from "react";
 import Select from "react-select";
+import "./ImageSelect.css"; // Import your CSS file for styles
 
 // Custom option component to show images and labels
 const customSingleValue = ({ data }) => (
@@ -16,12 +17,7 @@ const customSingleValue = ({ data }) => (
 const customOption = (props) => {
   const { data, innerRef, innerProps } = props;
   return (
-    <div
-      ref={innerRef}
-      {...innerProps}
-      className="custom-option"
-      style={{ display: "flex", alignItems: "center" }}
-    >
+    <div ref={innerRef} {...innerProps} className="custom-option">
       <img
         src={data.image}
         alt={data.label}

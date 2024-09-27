@@ -16,3 +16,19 @@
 .css-hlgwow {
   display: flex !important;
 }
+
+.custom-option {
+  display: flex;
+  align-items: center;
+  cursor: pointer; /* Show pointer cursor on hover */
+  padding: 10px; /* Add padding for better hover area */
+}
+
+.custom-option:hover {
+  background-color: #f0f0f0; /* Highlight background on hover */
+}
+
+.custom-single-value {
+  display: flex;
+  align-items: center;
+}
