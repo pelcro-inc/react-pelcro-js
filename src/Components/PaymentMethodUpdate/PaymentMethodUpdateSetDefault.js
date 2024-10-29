@@ -13,16 +13,16 @@ export function PaymentMethodUpdateSetDefault(props) {
     state: { isDefault }
   } = useContext(store);
 
-  const { paymentMethodToEdit } = usePelcro();
+  const { paymentMethodToEdit, paymentMethodDefaultChecked } = usePelcro();
 
   useEffect(() => {
-    if (paymentMethodToEdit?.is_default) {
+    if (paymentMethodToEdit?.is_default || paymentMethodDefaultChecked) {
       dispatch({
         type: SET_IS_DEFAULT_PAYMENT_METHOD,
         payload: { isDefault: true }
       });
     }
-  }, [paymentMethodToEdit]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [paymentMethodToEdit, paymentMethodDefaultChecked]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleCheckboxChange = (e) => {
     dispatch({
