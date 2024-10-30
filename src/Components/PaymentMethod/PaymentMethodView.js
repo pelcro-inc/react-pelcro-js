@@ -46,7 +46,8 @@ export function PaymentMethodView({
   showOrderButton,
   showApplePayButton,
   order,
-  subCreateMetadata
+  subCreateMetadata,
+  ...props
 }) {
   const { t } = useTranslation("checkoutForm");
   const { plan, isAuthenticated } = usePelcro();
@@ -192,6 +193,7 @@ export function PaymentMethodView({
                 <PaymentMethodUpdateSetDefault
                   id="pelcro-input-is-default"
                   label={t("labels.isDefault")}
+                  {...props}
                 />
               )}
 
