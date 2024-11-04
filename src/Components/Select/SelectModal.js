@@ -628,6 +628,13 @@ class SelectModal extends Component {
           .filter((item) => item !== null);
       }
 
+      if (itemsArray.length > 0) {
+        itemsArray.push({
+          id: "",
+          name: this.locale("labels.noGiftWanted")
+        });
+      }
+
       return (
         <div
           key={plan.id}
@@ -694,7 +701,7 @@ class SelectModal extends Component {
                     this.selectPlan(e, false);
                     if (
                       itemsArray.some(
-                        (item) => item.id === this.state.itemId
+                        (item) => item?.id === this.state.itemId
                       )
                     ) {
                       this.props.setItem(this.state.itemId);
