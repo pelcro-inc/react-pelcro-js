@@ -619,11 +619,18 @@ class SelectModal extends Component {
         itemsArray = plan.entitlements
           .map((itemSkuId) => {
             const skuNumber = Number(itemSkuId);
-            return isNaN(skuNumber)
-              ? null
-              : window.Pelcro.ecommerce.products.getBySkuId(
-                  skuNumber
-                );
+
+            if (isNaN(skuNumber)) {
+              return null;
+            }
+            const item =
+              window.Pelcro.ecommerce.products.getBySkuId(skuNumber);
+
+            if (!item) {
+              return null;
+            }
+
+            return item.inventory_quantity > 0 ? item : null;
           })
           .filter((item) => item !== null);
       }
