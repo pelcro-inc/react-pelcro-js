@@ -619,13 +619,27 @@ class SelectModal extends Component {
         itemsArray = plan.entitlements
           .map((itemSkuId) => {
             const skuNumber = Number(itemSkuId);
-            return isNaN(skuNumber)
-              ? null
-              : window.Pelcro.ecommerce.products.getBySkuId(
-                  skuNumber
-                );
+
+            if (isNaN(skuNumber)) {
+              return null;
+            }
+            const item =
+              window.Pelcro.ecommerce.products.getBySkuId(skuNumber);
+
+            if (!item) {
+              return null;
+            }
+
+            return item.inventory_quantity > 0 ? item : null;
           })
           .filter((item) => item !== null);
+      }
+
+      if (itemsArray.length > 0) {
+        itemsArray.push({
+          id: "",
+          name: this.locale("labels.noGiftWanted")
+        });
       }
 
       return (
@@ -694,7 +708,7 @@ class SelectModal extends Component {
                     this.selectPlan(e, false);
                     if (
                       itemsArray.some(
-                        (item) => item.id === this.state.itemId
+                        (item) => item?.id === this.state.itemId
                       )
                     ) {
                       this.props.setItem(this.state.itemId);

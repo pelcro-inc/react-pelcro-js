@@ -19,7 +19,8 @@
     "restrictiveArticles": {
       "subscribeTo": "Subscribe to one of the following options to get access to this page",
       "or": "Or take a look at some of our other options below"
-    }
+    },
+    "noGiftWanted": "No Gift Wanted"
   },
   "buttons": {
     "next": "Next",
