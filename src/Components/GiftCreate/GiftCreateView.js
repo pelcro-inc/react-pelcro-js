@@ -35,6 +35,7 @@ export const GiftCreateView = (props) => {
               id="pelcro-input-first-name"
               errorId="pelcro-input-first-name-error"
               label={t("gift.labels.firstName")}
+              initWithUserFirstName={false}
             />
             <GiftCreateLastName
               wrapperClassName="plc-ml-3"
@@ -42,6 +43,7 @@ export const GiftCreateView = (props) => {
               id="pelcro-input-last-name"
               errorId="pelcro-input-last-name-error"
               label={t("gift.labels.lastName")}
+              initWithUserLastName={false}
             />
           </div>
           <div className="plc-flex plc-items-start">

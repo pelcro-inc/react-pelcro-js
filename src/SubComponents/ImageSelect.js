@@ -5,11 +5,13 @@ import "./ImageSelect.css"; // Import your CSS file for styles
 // Custom option component to show images and labels
 const customSingleValue = ({ data }) => (
   <div className="custom-single-value">
-    <img
-      src={data.image}
-      alt={data.label}
-      style={{ width: 60, marginRight: 10, borderRadius: 4 }}
-    />
+    {data.image && (
+      <img
+        src={data.image}
+        alt={data.label}
+        style={{ width: 60, marginRight: 10, borderRadius: 4 }}
+      />
+    )}
     {data.label}
   </div>
 );
@@ -18,11 +20,13 @@ const customOption = (props) => {
   const { data, innerRef, innerProps } = props;
   return (
     <div ref={innerRef} {...innerProps} className="custom-option">
-      <img
-        src={data.image}
-        alt={data.label}
-        style={{ width: 60, marginRight: 10 }}
-      />
+      {data.image && (
+        <img
+          src={data.image}
+          alt={data.label}
+          style={{ width: 60, marginRight: 10 }}
+        />
+      )}
       {data.label}
     </div>
   );
