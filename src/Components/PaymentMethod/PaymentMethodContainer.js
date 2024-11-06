@@ -69,7 +69,8 @@ import {
 } from "../../services/Subscription/Payment.service";
 import {
   getPageOrDefaultLanguage,
-  refreshUser
+  refreshUser,
+  notifyBugsnag
 } from "../../utils/utils";
 import { usePelcro } from "../../hooks/usePelcro";
 
@@ -479,6 +480,7 @@ const PaymentMethodContainerWithoutStripe = ({
 
         const { key: jwk } = res;
         // SETUP MICROFORM
+        // eslint-disable-next-line no-undef
         FLEX.microform(
           {
             keyId: jwk.kid,
@@ -2263,76 +2265,139 @@ const PaymentMethodContainerWithoutStripe = ({
    * @param error
    * @returns {*}
    */
-  const confirmStripeCardPayment = (
+  const confirmStripeCardPayment = async (
     response,
     error,
     isSubCreate = false
   ) => {
-    if (response) {
-      const paymentIntent = response.data?.payment_intent;
-      if (
-        paymentIntent?.status === "requires_action" &&
-        paymentIntent?.client_secret
-      ) {
-        stripe
-          .confirmCardPayment(paymentIntent.client_secret)
-          .then((res) => {
-            if (!isSubCreate) {
-              dispatch({ type: DISABLE_SUBMIT, payload: false });
-            }
-            dispatch({ type: LOADING, payload: false });
+    try {
+      if (response) {
+        const paymentIntent = response.data?.payment_intent;
 
-            if (res.error) {
-              onFailure(res.error);
-              return dispatch({
-                type: SHOW_ALERT,
-                payload: {
-                  type: "error",
-                  content: isSubCreate
-                    ? t("messages.tryAgainFromInvoice")
-                    : getErrorMessages(res.error)
-                }
+        if (
+          paymentIntent?.status === "requires_action" &&
+          paymentIntent?.client_secret
+        ) {
+          const res = await stripe.confirmCardPayment(
+            paymentIntent.client_secret
+          );
+
+          if (!isSubCreate) {
+            dispatch({ type: DISABLE_SUBMIT, payload: false });
+          }
+          dispatch({ type: LOADING, payload: false });
+
+          if (res.error) {
+            notifyBugsnag(() => {
+              // eslint-disable-next-line no-undef
+              Bugsnag.notify(`Payment ${res.error}`, (event) => {
+                event.addMetadata("Stripe Error MetaData", {
+                  message: res.error.message,
+                  type: res.error.type,
+                  code: res.error.code,
+                  error_message:
+                    error?.response?.data?.error?.message,
+                  site: window.Pelcro?.site?.read(),
+                  user: window.Pelcro?.user?.read(),
+                  environment: window.Pelcro?.environment
+                });
               });
+            });
+
+            onFailure(res.error);
+            return dispatch({
+              type: SHOW_ALERT,
+              payload: {
+                type: "error",
+                content: isSubCreate
+                  ? t("messages.tryAgainFromInvoice")
+                  : getErrorMessages(res.error)
+              }
+            });
+          }
+
+          onSuccess(res);
+        } else if (
+          paymentIntent?.status === "requires_payment_method" &&
+          paymentIntent?.client_secret
+        ) {
+          if (!isSubCreate) {
+            dispatch({ type: DISABLE_SUBMIT, payload: false });
+          }
+          dispatch({ type: LOADING, payload: false });
+
+          onFailure(error);
+          return dispatch({
+            type: SHOW_ALERT,
+            payload: {
+              type: "error",
+              content: isSubCreate
+                ? t("messages.tryAgainFromInvoice")
+                : t("messages.cardAuthFailed")
             }
-            onSuccess(res);
           });
-      } else if (
-        paymentIntent?.status === "requires_payment_method" &&
-        paymentIntent?.client_secret
-      ) {
-        if (!isSubCreate) {
-          dispatch({ type: DISABLE_SUBMIT, payload: false });
+        } else {
+          onSuccess(response);
         }
+      } else {
+        dispatch({ type: DISABLE_SUBMIT, payload: false });
         dispatch({ type: LOADING, payload: false });
 
-        onFailure(error);
-        return dispatch({
-          type: SHOW_ALERT,
-          payload: {
-            type: "error",
-            content: isSubCreate
-              ? t("messages.tryAgainFromInvoice")
-              : t("messages.cardAuthFailed")
-          }
-        });
-      } else {
+        if (error) {
+          notifyBugsnag(() => {
+            // eslint-disable-next-line no-undef
+            Bugsnag.notify(`Payment ${error}`, (event) => {
+              event.addMetadata("MetaData", {
+                name: error?.name,
+                message: error?.message,
+                type: error?.type,
+                code: error?.code,
+                status: error?.response?.status,
+                error_message: error?.response?.data?.error?.message,
+                site: window.Pelcro?.site?.read(),
+                user: window.Pelcro?.user?.read(),
+                environment: window.Pelcro?.environment
+              });
+            });
+          });
+
+          onFailure(error);
+          return dispatch({
+            type: SHOW_ALERT,
+            payload: {
+              type: "error",
+              content: getErrorMessages(error)
+            }
+          });
+        }
         onSuccess(response);
       }
-    } else {
+    } catch (error) {
+      notifyBugsnag(() => {
+        // eslint-disable-next-line no-undef
+        Bugsnag.notify(`Payment ${error}`, (event) => {
+          event.addMetadata("UnexpectedError", {
+            message: error.message,
+            stack: error.stack,
+            error_message: error?.response?.data?.error?.message,
+            site: window.Pelcro?.site?.read(),
+            user: window.Pelcro?.user?.read(),
+            environment: window.Pelcro?.environment
+          });
+        });
+      });
+
       dispatch({ type: DISABLE_SUBMIT, payload: false });
       dispatch({ type: LOADING, payload: false });
 
-      if (error) {
-        onFailure(error);
-        return dispatch({
-          type: SHOW_ALERT,
-          payload: {
-            type: "error",
-            content: getErrorMessages(error)
-          }
-        });
-      }
-      onSuccess(response);
+      onFailure(error);
+      return dispatch({
+        type: SHOW_ALERT,
+        payload: {
+          type: "error",
+          content: t("messages.unexpectedError")
+        }
+      });
     }
   };
 
