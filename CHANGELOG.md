@@ -1,3 +1,10 @@
+# [4.0.0-alpha.97](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.96...v4.0.0-alpha.97) (2024-11-07)
+
+
+### Features
+
+* **payment:** add error logging for payment ([#360](https://github.com/pelcro-inc/react-pelcro-js/issues/360)) ([e8f59c4](https://github.com/pelcro-inc/react-pelcro-js/commit/e8f59c4cbc1716cc754df644d10826470a3b4b3a))
+
 # [4.0.0-alpha.96](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.95...v4.0.0-alpha.96) (2024-11-06)
 
 
