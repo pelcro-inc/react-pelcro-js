@@ -1,3 +1,10 @@
+# [4.0.0-alpha.96](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.95...v4.0.0-alpha.96) (2024-11-06)
+
+
+### Bug Fixes
+
+* create gift view which set initial values for signed in user ([#357](https://github.com/pelcro-inc/react-pelcro-js/issues/357)) ([83cfb16](https://github.com/pelcro-inc/react-pelcro-js/commit/83cfb16fb8e65cc8b9681d735856846225fac09c))
+
 # [4.0.0-alpha.95](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.94...v4.0.0-alpha.95) (2024-09-27)
 
 
