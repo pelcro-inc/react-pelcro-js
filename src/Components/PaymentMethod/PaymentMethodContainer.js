@@ -2046,7 +2046,17 @@ const PaymentMethodContainerWithoutStripe = ({
                 handlePaymentError(error);
                 fireBugSnag({
                   error,
-                  title: "generate3DSecureSource - ERROR"
+                  title: "generate3DSecureSource - ERROR",
+                  name: error?.name,
+                  message: error?.message,
+                  type: error?.type,
+                  code: error?.code,
+                  status: error?.response?.status,
+                  error_message:
+                    error?.response?.data?.error?.message,
+                  site: window.Pelcro?.site?.read(),
+                  user: window.Pelcro?.user?.read(),
+                  environment: window.Pelcro?.environment
                 });
                 return;
               }
