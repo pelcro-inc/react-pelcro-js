@@ -1,3 +1,10 @@
+# [4.0.0-alpha.98](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.97...v4.0.0-alpha.98) (2024-11-08)
+
+
+### Bug Fixes
+
+* **payment:** removed unused if condition ([a29c3db](https://github.com/pelcro-inc/react-pelcro-js/commit/a29c3db5a515385688fb112bbfa68ca29b4f84f8))
+
 # [4.0.0-alpha.97](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.96...v4.0.0-alpha.97) (2024-11-07)
 
 
