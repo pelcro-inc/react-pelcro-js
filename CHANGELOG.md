@@ -1,3 +1,10 @@
+# [3.26.0-beta.70](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.69...v3.26.0-beta.70) (2024-11-08)
+
+
+### Features
+
+* **payment:** corrected logging place ([6c23b26](https://github.com/pelcro-inc/react-pelcro-js/commit/6c23b26256ef7a53d00c03ede037efbca96403ff))
+
 # [3.26.0-beta.69](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.68...v3.26.0-beta.69) (2024-11-08)
 
 
