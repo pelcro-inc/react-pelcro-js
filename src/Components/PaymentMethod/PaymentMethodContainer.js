@@ -1435,7 +1435,11 @@ const PaymentMethodContainerWithoutStripe = ({
                   message: res.error.message,
                   type: res.error.type,
                   code: res.error.code,
-                  error_message: error?.response?.data?.error?.message
+                  error_message:
+                    error?.response?.data?.error?.message,
+                  site: window.Pelcro?.site?.read(),
+                  user: window.Pelcro?.user?.read(),
+                  environment: window.Pelcro?.environment
                 });
               });
             });
@@ -1472,16 +1476,6 @@ const PaymentMethodContainerWithoutStripe = ({
                 : t("messages.cardAuthFailed")
             }
           });
-        } else if (
-          paymentIntent?.status === "processing" &&
-          paymentIntent?.client_secret
-        ) {
-          if (!isSubCreate) {
-            dispatch({ type: DISABLE_SUBMIT, payload: false });
-          }
-          dispatch({ type: LOADING, payload: false });
-          set({ isProcessingInvoice: true });
-          onSuccess(response);
         } else {
           onSuccess(response);
         }
@@ -1499,7 +1493,10 @@ const PaymentMethodContainerWithoutStripe = ({
                 type: error?.type,
                 code: error?.code,
                 status: error?.response?.status,
-                error_message: error?.response?.data?.error?.message
+                error_message: error?.response?.data?.error?.message,
+                site: window.Pelcro?.site?.read(),
+                user: window.Pelcro?.user?.read(),
+                environment: window.Pelcro?.environment
               });
             });
           });
@@ -1522,7 +1519,10 @@ const PaymentMethodContainerWithoutStripe = ({
           event.addMetadata("UnexpectedError", {
             message: error.message,
             stack: error.stack,
-            error_message: error?.response?.data?.error?.message
+            error_message: error?.response?.data?.error?.message,
+            site: window.Pelcro?.site?.read(),
+            user: window.Pelcro?.user?.read(),
+            environment: window.Pelcro?.environment
           });
         });
       });
