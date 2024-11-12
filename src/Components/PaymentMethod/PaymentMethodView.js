@@ -45,7 +45,7 @@ export function PaymentMethodView({
   showOrderButton,
   showApplePayButton,
   order,
-  ...props
+
 }) {
   const { t } = useTranslation("checkoutForm");
   const cardProcessor = getSiteCardProcessor();
