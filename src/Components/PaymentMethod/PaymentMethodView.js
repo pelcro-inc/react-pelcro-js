@@ -44,7 +44,8 @@ export function PaymentMethodView({
   showSubscriptionButton,
   showOrderButton,
   showApplePayButton,
-  order
+  order,
+  ...props
 }) {
   const { t } = useTranslation("checkoutForm");
   const cardProcessor = getSiteCardProcessor();
@@ -116,6 +117,7 @@ export function PaymentMethodView({
           onGiftRenewalSuccess={onGiftRenewalSuccess}
           onFailure={onFailure}
           freeOrders={showOrderButton}
+          {...props}
         >
           <AlertWithContext className="plc-mb-2" />
           {/* Payment form */}

@@ -15,6 +15,7 @@ export function PaymentMethodCreateView(props) {
         onDisplay={props.onDisplay}
         onFailure={props.onFailure}
         onSuccess={props.onSuccess}
+        {...props}
       />
     </div>
   );
