@@ -16,7 +16,10 @@ export function PaymentMethodUpdateSetDefault(props) {
   const { paymentMethodToEdit } = usePelcro();
 
   useEffect(() => {
-    if (paymentMethodToEdit?.is_default) {
+    if (
+      paymentMethodToEdit?.is_default ||
+      props?.hiddenSetAsDefault
+    ) {
       dispatch({
         type: SET_IS_DEFAULT_PAYMENT_METHOD,
         payload: { isDefault: true }
@@ -31,7 +34,9 @@ export function PaymentMethodUpdateSetDefault(props) {
     });
   };
 
-  return (
+  return props?.hiddenSetAsDefault ? (
+    <></>
+  ) : (
     <Checkbox
       onChange={(e) => handleCheckboxChange(e)}
       id={props.id}

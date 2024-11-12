@@ -1875,7 +1875,8 @@ const PaymentMethodContainerWithoutStripe = ({
           window.Pelcro.paymentMethods.create(
             {
               auth_token: window.Pelcro.user.read().auth_token,
-              token: result.paymentMethod.id
+              token: result.paymentMethod.id,
+              is_default: props?.hiddenSetAsDefault ? true : false
             },
             (err, res) => {
               if (err) {
