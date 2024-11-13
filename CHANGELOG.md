@@ -1,3 +1,10 @@
+# [3.26.0-beta.71](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.70...v3.26.0-beta.71) (2024-11-13)
+
+
+### Features
+
+* display list of payment methods on the payment-method-update view ([#364](https://github.com/pelcro-inc/react-pelcro-js/issues/364)) ([ad80ad6](https://github.com/pelcro-inc/react-pelcro-js/commit/ad80ad67fb41ba5a4f1a3085bdd9e0cc1bb393b3))
+
 # [3.26.0-beta.70](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.69...v3.26.0-beta.70) (2024-11-08)
 
 
