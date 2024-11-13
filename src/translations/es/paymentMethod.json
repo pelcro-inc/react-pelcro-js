@@ -2,6 +2,7 @@
   "update": {
     "title": "Actualiza tu información de pago",
     "subtitle": "Rellena los campos a continuación para actualizar la información de tu tarjeta de crédito",
+    "selectSubtitle": "Selecciona un método de pago para actualizar",
     "required": "Obligatorio",
     "success": "Tu información de pago se ha actualizado",
     "secure": "Estás seguro - PCI compliance 128 SSL por"

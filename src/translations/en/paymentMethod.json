@@ -2,6 +2,7 @@
   "update": {
     "title": "Update your payment information",
     "subtitle": "Enter the fields below to update your credit card information",
+    "selectSubtitle": "Select a payment method to update",
     "required": "Required",
     "success": "Your payment information has been updated",
     "secure": "You're safe - PCI compliant 128 SSL by"
