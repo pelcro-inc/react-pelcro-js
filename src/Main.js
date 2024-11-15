@@ -60,7 +60,6 @@ export const Main = () => {
       <PasswordlessRequestModal />
       <PasswordChangeModal />
       <PasswordResetModal />
-
       <PaymentMethodCreateModal />
       <PaymentMethodUpdateModal />
       <PaymentMethodSelectModal />
