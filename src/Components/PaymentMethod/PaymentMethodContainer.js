@@ -1875,8 +1875,7 @@ const PaymentMethodContainerWithoutStripe = ({
           window.Pelcro.paymentMethods.create(
             {
               auth_token: window.Pelcro.user.read().auth_token,
-              token: result.paymentMethod.id,
-              is_default: props?.hiddenSetAsDefault ? true : false
+              token: result.paymentMethod.id
             },
             (err, res) => {
               if (err) {
@@ -1900,16 +1899,67 @@ const PaymentMethodContainerWithoutStripe = ({
               ) {
                 confirmStripeIntentSetup(res, "create");
               } else {
-                dispatch({ type: LOADING, payload: false });
-                dispatch({
-                  type: SHOW_ALERT,
-                  payload: {
-                    type: "success",
-                    content: t("messages.sourceCreated")
-                  }
-                });
-                refreshUser();
-                onSuccess(res);
+                if (props?.hiddenSetAsDefault) {
+                  window.Pelcro.paymentMethods.update(
+                    {
+                      auth_token:
+                        window.Pelcro.user.read().auth_token,
+                      payment_method_id: res.data?.id,
+                      gateway: "stripe",
+                      exp_month: res.data?.properties.exp_month,
+                      exp_year: res.data?.properties.exp_year,
+                      is_default: true
+                    },
+                    (err, res) => {
+                      dispatch({
+                        type: DISABLE_SUBMIT,
+                        payload: false
+                      });
+                      dispatch({ type: LOADING, payload: false });
+                      if (err) {
+                        onFailure(err);
+                        return dispatch({
+                          type: SHOW_ALERT,
+                          payload: {
+                            type: "error",
+                            content: getErrorMessages(err)
+                          }
+                        });
+                      }
+
+                      if (
+                        res.data?.setup_intent?.status ===
+                          "requires_action" ||
+                        res.data?.setup_intent?.status ===
+                          "requires_confirmation"
+                      ) {
+                        confirmStripeIntentSetup(res, "update");
+                      } else {
+                        dispatch({ type: LOADING, payload: false });
+                        dispatch({
+                          type: SHOW_ALERT,
+                          payload: {
+                            type: "success",
+                            content: t("messages.sourceCreated")
+                          }
+                        });
+                        refreshUser();
+                        onSuccess(res);
+                      }
+                    }
+                  );
+                } else {
+                  dispatch({ type: LOADING, payload: false });
+                  dispatch({
+                    type: SHOW_ALERT,
+                    payload: {
+                      type: "success",
+                      content: t("messages.sourceCreated")
+                    }
+                  });
+                  refreshUser();
+                  onSuccess(res);
+                }
               }
             }
           );

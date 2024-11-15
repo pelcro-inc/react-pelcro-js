@@ -17,8 +17,7 @@ export function PaymentMethodUpdateSetDefault(props) {
 
   useEffect(() => {
     if (
-      paymentMethodToEdit?.is_default ||
-      props?.hiddenSetAsDefault
+      paymentMethodToEdit?.is_default
     ) {
       dispatch({
         type: SET_IS_DEFAULT_PAYMENT_METHOD,
