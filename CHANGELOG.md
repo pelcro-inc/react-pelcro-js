@@ -1,3 +1,10 @@
+# [4.0.0-alpha.100](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.99...v4.0.0-alpha.100) (2024-11-15)
+
+
+### Features
+
+* hiddenSetAsDefault prop for PaymentMethodCreateModal ([beca97b](https://github.com/pelcro-inc/react-pelcro-js/commit/beca97b3a2882391e129eb4e40f4348a25f33b2c))
+
 # [4.0.0-alpha.99](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.98...v4.0.0-alpha.99) (2024-11-12)
 
 
