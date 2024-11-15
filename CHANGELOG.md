@@ -1,3 +1,10 @@
+# [4.0.0-alpha.99](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.98...v4.0.0-alpha.99) (2024-11-12)
+
+
+### Features
+
+* Add hidden setAsDefault ([#362](https://github.com/pelcro-inc/react-pelcro-js/issues/362)) ([2cbe6e8](https://github.com/pelcro-inc/react-pelcro-js/commit/2cbe6e8652613fbe294ddc2406a3cd76a23b016e))
+
 # [4.0.0-alpha.98](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.97...v4.0.0-alpha.98) (2024-11-08)
 
 

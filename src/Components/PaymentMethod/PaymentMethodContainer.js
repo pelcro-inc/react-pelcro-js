@@ -1899,7 +1899,10 @@ const PaymentMethodContainerWithoutStripe = ({
               ) {
                 confirmStripeIntentSetup(res, "create");
               } else {
-                if (props?.hiddenSetAsDefault|| pelcroStore.hiddenSetAsDefault) {
+                if (
+                  props?.hiddenSetAsDefault ||
+                  pelcroStore.hiddenSetAsDefault
+                ) {
                   window.Pelcro.paymentMethods.update(
                     {
                       auth_token:
