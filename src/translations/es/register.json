@@ -12,7 +12,9 @@
     "required": "obligatorio",
     "firstName": "Nombre",
     "lastName": "Apellido",
-    "phone": "Teléfono"
+    "phone": "Teléfono",
+    "company": "Empresa",
+    "title": "Título"
   },
   "messages": {
     "alreadyHaveAccount": " ¿Ya tienes una cuenta?",
