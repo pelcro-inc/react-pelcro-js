@@ -1,3 +1,10 @@
+# [4.0.0-alpha.102](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.101...v4.0.0-alpha.102) (2024-11-26)
+
+
+### Features
+
+* display shipping rate in order confirmation ([#368](https://github.com/pelcro-inc/react-pelcro-js/issues/368)) ([65e8edf](https://github.com/pelcro-inc/react-pelcro-js/commit/65e8edf8ab0ae0fbfa5dc208942a913bcb9be97b))
+
 # [4.0.0-alpha.101](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.100...v4.0.0-alpha.101) (2024-11-26)
 
 
