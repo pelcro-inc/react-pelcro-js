@@ -4,8 +4,12 @@ import {
   getFormattedPriceByLocal,
   getPageOrDefaultLanguage
 } from "../../utils/utils";
+import { Loader } from "../../SubComponents/Loader";
+import { useTranslation } from "react-i18next";
 
 export const OrderCreateSummary = ({ order }) => {
+  const { t } = useTranslation("shop");
+
   const [items, setItems] = useState([]);
   const [paymentInfo, setPaymentInfo] = useState({});
 
@@ -119,23 +123,27 @@ export const OrderCreateSummary = ({ order }) => {
           </ul>
         </div>
       </div>
-      {paymentInfo?.total && (
+      {paymentInfo?.total ? (
         <dl className="plc-mt-6 plc-space-y-6 plc-text-sm plc-font-medium plc-text-gray-500">
           <div className="plc-flex plc-justify-between plc-border-t plc-border-gray-200 plc-pt-6 plc-text-gray-900">
-            <dt className="plc-text-base">Subtotal</dt>
+            <dt className="plc-text-base">{t("labels.subtotal")}</dt>
             <dd className="plc-text-base">{subtotal}</dd>
           </div>
 
           <div className="plc-flex plc-justify-between plc-text-gray-900">
-            <dt className="plc-text-base">Shipping Rate</dt>
+            <dt className="plc-text-base">
+              {t("labels.shippingRate")}
+            </dt>
             <dd className="plc-text-base">{shippingRate}</dd>
           </div>
 
           <div className="plc-flex plc-justify-between plc-border-t plc-border-gray-200 plc-pt-6 plc-text-gray-900">
-            <dt className="plc-text-base">Total</dt>
+            <dt className="plc-text-base">{t("labels.total")}</dt>
             <dd className="plc-text-base">{total}</dd>
           </div>
         </dl>
+      ) : (
+        <Loader width={60} height={100} />
       )}
     </div>
   );

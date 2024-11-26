@@ -88,19 +88,30 @@ export const OrderConfirmModal = (props) => {
                 </div>
               );
             })}
-
-            <div className="plc-flex plc-items-center plc-justify-end plc-pt-2 plc-mt-2 plc-font-bold plc-border-t plc-border-gray-400 pelcro-summary-total-wrapper">
-              <p className="plc-mr-1 pelcro-summary-total-text">
+            <div className="plc-flex plc-items-center plc-justify-between plc-pt-2 plc-mt-2 plc-font-bold">
+              <dt className="plc-mr-1 pelcro-summary-total-text">
+                {t("labels.shippingRate")}
+              </dt>
+              <dd className="pelcro-summary-total">
+                {getFormattedPriceByLocal(
+                  latestOrder.shipping_rate,
+                  latestOrder?.currency,
+                  getPageOrDefaultLanguage()
+                )}
+              </dd>
+            </div>
+            <div className="plc-flex plc-items-center plc-justify-between plc-pt-2 plc-mt-2 plc-font-bold plc-border-t plc-border-gray-400 pelcro-summary-total-wrapper">
+              <dt className="plc-mr-1 pelcro-summary-total-text">
                 {t("labels.total")}
-              </p>
-              <p className="pelcro-summary-total">
+              </dt>
+              <dd className="pelcro-summary-total">
                 {latestOrderDiscount && `(-${latestOrderDiscount}%) `}
                 {getFormattedPriceByLocal(
                   latestOrder?.amount,
                   latestOrder?.currency,
                   getPageOrDefaultLanguage()
                 )}
-              </p>
+              </dd>
             </div>
           </div>
           <div className="plc-flex plc-justify-center plc-mt-6">

@@ -16,6 +16,8 @@
   },
   "labels": {
     "summary": "Order summary",
-    "total": "total"
+    "total": "Total",
+    "subtotal": "Subtotal",
+    "shippingRate": "Shipping Rate"
   }
 }
