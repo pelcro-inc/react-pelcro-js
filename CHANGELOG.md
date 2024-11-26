@@ -1,3 +1,10 @@
+# [4.0.0-alpha.101](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.100...v4.0.0-alpha.101) (2024-11-26)
+
+
+### Features
+
+* display shipping rate in eccomerce summary ([#367](https://github.com/pelcro-inc/react-pelcro-js/issues/367)) ([15901f0](https://github.com/pelcro-inc/react-pelcro-js/commit/15901f0e7023dfd3384db041b62d9daac6c23904))
+
 # [4.0.0-alpha.100](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.99...v4.0.0-alpha.100) (2024-11-15)
 
 
