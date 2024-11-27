@@ -39,17 +39,18 @@ const ImageSelect = ({ optionsArray, ...props }) => {
     image: option?.image
   }));
   return (
-    <Select
-      className="plc-px-5"
-      isSearchable={false} // Disable search feature
-      options={options}
-      placeholder="Select Gift"
-      components={{
-        Option: customOption,
-        SingleValue: customSingleValue
-      }}
-      {...props}
-    />
+    <div className="plc-px-5">
+      <Select
+        isSearchable={false} // Disable search feature
+        options={options}
+        placeholder="Select Gift"
+        components={{
+          Option: customOption,
+          SingleValue: customSingleValue
+        }}
+        {...props}
+      />
+    </div>
   );
 };
 
