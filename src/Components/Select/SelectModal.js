@@ -62,6 +62,7 @@ export function SelectModalWithHook(props) {
       }
       setItem={(itemId) => set({ itemId })}
       setView={switchView}
+      hideGiftSelection={props.hideGiftSelection}
       matchingEntitlements={
         view === "_plan-select-entitlements" ? entitlements : null
       }
@@ -610,7 +611,7 @@ class SelectModal extends Component {
   };
 
   renderPlans = () => {
-    const { disableGifting } = this.props;
+    const { disableGifting, hideGiftSelection } = this.props;
 
     const items = this.state.planList.map((plan) => {
       // const isChecked = this.state.plan.id === plan.id ? true : false;
@@ -666,8 +667,8 @@ class SelectModal extends Component {
                   {plan.description}
                 </p>
               </div>
-
-              {plan.entitlements &&
+              {!hideGiftSelection &&
+                plan.entitlements &&
                 itemsArray &&
                 itemsArray.length > 0 && (
                   <ImageSelect
@@ -678,7 +679,6 @@ class SelectModal extends Component {
                     }}
                   />
                 )}
-
               <div className="plc-pt-4 plc-mb-4 plc-font-semibold pelcro-select-plan-price plc-px-4 plc-text-center plc-flex plc-items-end plc-justify-center">
                 <p className="plc-font-bold plc-text-3xl">
                   {plan.amount_formatted}
@@ -904,6 +904,7 @@ SelectModal.propTypes = {
   plan: PropTypes.object,
   product: PropTypes.object,
   iaGift: PropTypes.bool,
+  hideGiftSelection: PropTypes.bool,
   disableGifting: PropTypes.bool,
   setView: PropTypes.func,
   onClose: PropTypes.func,
