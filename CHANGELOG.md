@@ -1,3 +1,10 @@
+# [4.0.0-alpha.103](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.102...v4.0.0-alpha.103) (2024-11-27)
+
+
+### Features
+
+* add hideGiftSelection prop to SelectModal ([#369](https://github.com/pelcro-inc/react-pelcro-js/issues/369)) ([cff9caa](https://github.com/pelcro-inc/react-pelcro-js/commit/cff9caa4b02615597ba52a91aa38821cb0915b65))
+
 # [4.0.0-alpha.102](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.101...v4.0.0-alpha.102) (2024-11-26)
 
 
