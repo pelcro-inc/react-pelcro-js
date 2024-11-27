@@ -227,6 +227,11 @@ export const CheckoutForm = ({ type }) => {
 
   if (cardProcessor === "stripe") {
     if (type === "updatePaymentSource") {
+      const currentProcessor = getSiteCardProcessor();
+      if (currentProcessor !== "stripe") {
+        return null;
+      }
+      
       return (
         <div>
           {paymentMethodToEdit ? (

@@ -3447,6 +3447,7 @@ const PaymentMethodContainer = (props) => {
 
   useEffect(() => {
     whenUserReady(() => {
+      // Only load Stripe if it's the configured processor
       if (!window.Stripe && cardProcessor === "stripe") {
         document
           .querySelector('script[src="https://js.stripe.com/v3"]')
@@ -3457,7 +3458,8 @@ const PaymentMethodContainer = (props) => {
     });
   }, []);
 
-  if (isStripeLoaded) {
+  // Ensure we only render Stripe components when Stripe is the processor
+  if (isStripeLoaded && cardProcessor === "stripe") {
     return (
       <StripeProvider
         apiKey={window.Pelcro.environment.stripe}

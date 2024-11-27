@@ -726,35 +726,29 @@ const showPaymentMethodUpdateFromUrl = () => {
     }
 
     whenUserReady(() => {
-      const supportsVantiv = Boolean(
-        window.Pelcro.site.read().vantiv_gateway_settings
-      );
-      const supportsTap = Boolean(
-        window.Pelcro.site.read().tap_gateway_settings
-      );
+      const cardProcessor = getSiteCardProcessor();
+      
+      // Only load appropriate SDK based on processor
+      if (cardProcessor === "braintree" && document.querySelector("#braintree-hosted-fields-sdk")) {
+        return switchView("payment-method-update");
+      }
 
-      if (!window.Stripe && !supportsVantiv && !supportsTap) {
+      if (cardProcessor === "vantiv" && document.querySelector("#vantiv-eprotect-sdk")) {
+        return switchView("payment-method-update");
+      }
+
+      if (cardProcessor === "tap" && document.querySelector("#tap-sdk")) {
+        return switchView("payment-method-update");
+      }
+
+      // Only load Stripe if it's the configured processor
+      if (cardProcessor === "stripe" && !window.Stripe) {
         document
           .querySelector('script[src="https://js.stripe.com/v3"]')
           .addEventListener("load", () => {
             return switchView("payment-method-update");
           });
         return;
-      }
-
-      //vantiv
-      if (supportsVantiv) {
-        document
-          .querySelector("#vantiv-eprotect-sdk")
-          .addEventListener("load", () => {
-            return switchView("payment-method-update");
-          });
-        return;
-      }
-
-      //Tap
-      if (supportsTap && document.querySelector("#tap-sdk")) {
-        return switchView("payment-method-update");
       }
 
       return switchView("payment-method-update");
