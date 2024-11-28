@@ -1,7 +1,7 @@
-import React, { useRef, useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import Slider from "react-slick";
-import { ReactComponent as ArrowThinRight } from "../assets/arrow-thin-right.svg";
 import { ReactComponent as ArrowThinLeft } from "../assets/arrow-thin-left.svg";
+import { ReactComponent as ArrowThinRight } from "../assets/arrow-thin-right.svg";
 
 const NextArrow = ({
   onClick,
@@ -80,7 +80,6 @@ export function Carousel({
   }, [initialSlide]);
 
   const settings = {
-    dots: true,
     infinite: false,
     speed: 200,
     slidesToShow: slidesToShow,

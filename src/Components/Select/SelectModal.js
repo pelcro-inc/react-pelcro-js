@@ -1,23 +1,23 @@
-import React, { Component } from "react";
 import PropTypes from "prop-types";
+import React, { Component } from "react";
+import ReactGA from "react-ga";
+import ReactGA4 from "react-ga4";
 import { withTranslation } from "react-i18next";
+import { Button } from "../../SubComponents/Button";
+import { Carousel } from "../../SubComponents/Carousel";
+import ImageSelect from "../../SubComponents/ImageSelect";
 import {
   Modal,
-  ModalHeader,
   ModalBody,
-  ModalFooter
+  ModalFooter,
+  ModalHeader
 } from "../../SubComponents/Modal";
-import { Button } from "../../SubComponents/Button";
-import ImageSelect from "../../SubComponents/ImageSelect";
-import { Carousel } from "../../SubComponents/Carousel";
-import { usePelcro } from "../../hooks/usePelcro";
 import { ReactComponent as ArrowLeft } from "../../assets/arrow-left.svg";
+import { usePelcro } from "../../hooks/usePelcro";
 import {
   getEntitlementsFromElem,
   notifyBugsnag
 } from "../../utils/utils";
-import ReactGA from "react-ga";
-import ReactGA4 from "react-ga4";
 
 /**
  *
@@ -119,7 +119,8 @@ class SelectModal extends Component {
         ? window.Pelcro.product.getByEntitlements(
             props.matchingEntitlements
           )
-        : window.Pelcro.product.list()
+        : window.Pelcro.product.list(),
+      windowWidth: window.innerWidth
     };
 
     this.product =
@@ -131,7 +132,13 @@ class SelectModal extends Component {
     this.enableReactGA4 = window?.Pelcro?.uiSettings?.enableReactGA4;
   }
 
+  updateWindowWidth = () => {
+    this.setState({ windowWidth: window.innerWidth });
+  };
+
   componentDidMount = () => {
+    window.addEventListener("resize", this.updateWindowWidth);
+
     if (this.props.product) {
       const { product } = this.props;
       const planList = product.plans;
@@ -232,6 +239,7 @@ class SelectModal extends Component {
 
   componentWillUnmount = () => {
     document.removeEventListener("keydown", this.handleSubmit);
+    window.removeEventListener("resize", this.updateWindowWidth);
   };
 
   handleSubmit = (e) => {
@@ -411,19 +419,26 @@ class SelectModal extends Component {
       this.renderOneProduct(product, index)
     );
 
-    if (items.length > 3) {
+    const isMobile = this.state.windowWidth < 768;
+    const shouldRenderCarousel =
+      items.length >= 2 && (isMobile || items.length > 2);
+
+    if (shouldRenderCarousel) {
       return (
-        <Carousel slidesCount={items.length} mobileArrowDown={true}>
+        <Carousel
+          slidesCount={items.length}
+          mobileArrowDown={isMobile}
+        >
           {items}
         </Carousel>
       );
-    } else {
-      return (
-        <div className="plc-flex plc-flex-col md:plc-flex-row plc-gap-4 plc-items-center sm:plc-px-8 plc-px-0">
-          {items}
-        </div>
-      );
     }
+
+    return (
+      <div className="plc-flex plc-flex-col md:plc-flex-row plc-gap-4 plc-items-center sm:plc-px-8 plc-px-0">
+        {items}
+      </div>
+    );
   };
 
   handleScrollLeft = () => {
