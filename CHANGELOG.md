@@ -1,3 +1,10 @@
+# [4.0.0-alpha.104](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.103...v4.0.0-alpha.104) (2024-11-28)
+
+
+### Features
+
+* display carousel for items length at least 2 ([#371](https://github.com/pelcro-inc/react-pelcro-js/issues/371)) ([#372](https://github.com/pelcro-inc/react-pelcro-js/issues/372)) ([886b482](https://github.com/pelcro-inc/react-pelcro-js/commit/886b4829c3302a9be0aaceed08dbd1197971851d))
+
 # [4.0.0-alpha.103](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.102...v4.0.0-alpha.103) (2024-11-27)
 
 
