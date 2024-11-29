@@ -1,3 +1,10 @@
+# [4.0.0-alpha.105](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.104...v4.0.0-alpha.105) (2024-11-29)
+
+
+### Reverts
+
+* Revert "Feat/select modal carousel for plans (#374)" (#375) ([f0a8f80](https://github.com/pelcro-inc/react-pelcro-js/commit/f0a8f80210e31ad4f41c7db2b565bc50ea03f591)), closes [#374](https://github.com/pelcro-inc/react-pelcro-js/issues/374) [#375](https://github.com/pelcro-inc/react-pelcro-js/issues/375)
+
 # [4.0.0-alpha.104](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.103...v4.0.0-alpha.104) (2024-11-28)
 
 
