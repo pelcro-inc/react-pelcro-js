@@ -749,26 +749,19 @@ class SelectModal extends Component {
       );
     });
 
-    const isMobile = this.state.windowWidth < 768;
-    const shouldRenderCarousel =
-      items.length >= 2 && (isMobile || items.length > 2);
-
-    if (shouldRenderCarousel) {
+    if (items.length > 3) {
       return (
-        <Carousel
-          slidesCount={items.length}
-          mobileArrowDown={isMobile}
-        >
+        <Carousel slidesCount={items.length} mobileArrowDown={true}>
           {items}
         </Carousel>
       );
+    } else {
+      return (
+        <div className="plc-flex plc-flex-col md:plc-flex-row plc-gap-4 plc-items-center sm:plc-px-8 plc-px-0">
+          {items}
+        </div>
+      );
     }
-
-    return (
-      <div className="plc-flex plc-flex-col md:plc-flex-row plc-gap-4 plc-items-center sm:plc-px-8 plc-px-0">
-        {items}
-      </div>
-    );
   };
 
   selectProduct = (e) => {
