@@ -47,7 +47,6 @@ export function PaymentMethodView({
 }) {
   const { t } = useTranslation("checkoutForm");
   const cardProcessor = getSiteCardProcessor();
-  const show3DSWarning = window.Pelcro?.uiSettings?.show3DSWarning;
   const supportsVantiv = Boolean(
     window.Pelcro.site.read()?.vantiv_gateway_settings
   );
@@ -110,11 +109,9 @@ export function PaymentMethodView({
             </span>
           </div>
         )}
-      {show3DSWarning && (
+      {window.Pelcro?.uiSettings?.warningMessage && (
         <div className="plc-flex plc-items-center plc-w-full plc-px-4 plc-py-2 plc-text-center plc-text-yellow-600 plc-border plc-border-yellow-400 plc-rounded plc-bg-yellow-50 plc-mt-4">
-          Note: If your card or bank requires 3D Secure (3DS)
-          authentication, your payment might not go through at the
-          moment. We are actively working on resolving this issue.
+          {window.Pelcro?.uiSettings?.warningMessage}
         </div>
       )}
 
