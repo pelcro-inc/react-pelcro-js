@@ -1,3 +1,10 @@
+# [3.39.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.38.0...v3.39.0) (2024-12-02)
+
+
+### Features
+
+* Fixing Braintree/Stripe Bug ([#370](https://github.com/pelcro-inc/react-pelcro-js/issues/370)) ([e04a204](https://github.com/pelcro-inc/react-pelcro-js/commit/e04a204dd9ab684c6a5dece0fa8759a7cb34c3a0))
+
 # [3.38.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.37.0...v3.38.0) (2024-08-26)
 
 
