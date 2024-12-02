@@ -1,3 +1,10 @@
+# [3.40.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.39.0...v3.40.0) (2024-12-02)
+
+
+### Features
+
+* fixing brain tree bug and adding general warning message ([#380](https://github.com/pelcro-inc/react-pelcro-js/issues/380)) ([2cc2ea5](https://github.com/pelcro-inc/react-pelcro-js/commit/2cc2ea5314fd22abd9d3b35b4f0a135ace077a66))
+
 # [3.39.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.38.0...v3.39.0) (2024-12-02)
 
 
