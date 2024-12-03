@@ -1,3 +1,10 @@
+# [4.0.0-alpha.107](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.106...v4.0.0-alpha.107) (2024-12-03)
+
+
+### Features
+
+* react portal for image select in order to better position inside dom ([#381](https://github.com/pelcro-inc/react-pelcro-js/issues/381)) ([#382](https://github.com/pelcro-inc/react-pelcro-js/issues/382)) ([258adff](https://github.com/pelcro-inc/react-pelcro-js/commit/258adff2386329f0cc0c371d63e442308b82053d))
+
 # [4.0.0-alpha.106](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.105...v4.0.0-alpha.106) (2024-11-29)
 
 
