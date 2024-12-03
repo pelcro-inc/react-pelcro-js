@@ -38,6 +38,7 @@ const ImageSelect = ({ optionsArray, ...props }) => {
     label: option?.name,
     image: option?.image
   }));
+
   return (
     <div className="plc-px-5">
       <Select
@@ -49,6 +50,13 @@ const ImageSelect = ({ optionsArray, ...props }) => {
           SingleValue: customSingleValue
         }}
         {...props}
+        menuPortalTarget={document.body}
+        styles={{
+          menuPortal: (base) => ({
+            ...base,
+            zIndex: 9999999
+          })
+        }}
       />
     </div>
   );
