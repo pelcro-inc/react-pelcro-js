@@ -1,3 +1,15 @@
+# [4.0.0-alpha.108](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.107...v4.0.0-alpha.108) (2024-12-04)
+
+
+### Bug Fixes
+
+* image select options font change ([#383](https://github.com/pelcro-inc/react-pelcro-js/issues/383)) ([a41caec](https://github.com/pelcro-inc/react-pelcro-js/commit/a41caecd4ced009737fed9ce3a0b04df4f6b6dfd))
+
+
+### Features
+
+* react portal for image select in order to better position inside dom ([#381](https://github.com/pelcro-inc/react-pelcro-js/issues/381)) ([ac3dd47](https://github.com/pelcro-inc/react-pelcro-js/commit/ac3dd47f2645f23cb32e11f6f3da34c12514ab0b))
+
 # [4.0.0-alpha.107](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.106...v4.0.0-alpha.107) (2024-12-03)
 
 
