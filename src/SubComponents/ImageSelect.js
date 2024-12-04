@@ -49,6 +49,9 @@ const ImageSelect = ({ optionsArray, ...props }) => {
           Option: customOption,
           SingleValue: customSingleValue
         }}
+        classNames={{
+          menuList: () => "menu-list"
+        }}
         {...props}
         menuPortalTarget={document.body}
         styles={{
