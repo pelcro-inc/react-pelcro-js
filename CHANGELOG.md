@@ -1,3 +1,10 @@
+# [3.26.0-beta.72](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.71...v3.26.0-beta.72) (2024-12-05)
+
+
+### Features
+
+* add onNewSubscriptionClick prop to dashboard for handling new subscription click ([#385](https://github.com/pelcro-inc/react-pelcro-js/issues/385)) ([c64869f](https://github.com/pelcro-inc/react-pelcro-js/commit/c64869f6e07e87ff549cb6e139284788b5e0ebd2))
+
 # [3.26.0-beta.71](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.70...v3.26.0-beta.71) (2024-11-13)
 
 
