@@ -89,6 +89,8 @@ export function DashboardWithHook(props) {
       }
       setPaymentMethodToEdit={setPaymentMethodToEdit}
       setPaymentMethodToDelete={setPaymentMethodToDelete}
+      // used for custom event when clicking on the new subscription button
+      onNewSubscriptionClick={props.onNewSubscriptionClick}
     />
   );
 }
@@ -288,6 +290,10 @@ class Dashboard extends Component {
   };
 
   displayProductSelect = ({ isGift }) => {
+    if (this.props.onNewSubscriptionClick && !isGift) {
+      return this.props.onNewSubscriptionClick();
+    }
+
     if (isGift) {
       this.props.setProductAndPlan(null, null, true);
     }
