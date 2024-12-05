@@ -1,3 +1,10 @@
+# [3.41.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.40.0...v3.41.0) (2024-12-05)
+
+
+### Features
+
+* remove 3D secure in briantree payment ([6e30275](https://github.com/pelcro-inc/react-pelcro-js/commit/6e302751e49bbd08464cd206abc8f34332172891))
+
 # [3.40.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.39.0...v3.40.0) (2024-12-02)
 
 
