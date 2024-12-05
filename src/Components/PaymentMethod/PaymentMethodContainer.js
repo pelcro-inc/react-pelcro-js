@@ -872,7 +872,6 @@ const PaymentMethodContainerWithoutStripe = ({
 
   /* ====== Start Braintree integration  ======== */
   const braintreeInstanceRef = React.useRef(null);
-  const braintree3DSecureInstanceRef = React.useRef(null);
 
   function getClientToken() {
     return new Promise((resolve, reject) => {
@@ -945,14 +944,6 @@ const PaymentMethodContainerWithoutStripe = ({
               type: SKELETON_LOADER,
               payload: true
             });
-
-            braintree3DSecureInstanceRef.current =
-              new window.braintree.threeDSecure.create({
-                version: 2,
-                authorization: braintreeToken
-              }).then((threeDSecureInstance) => {
-                return threeDSecureInstance;
-              });
 
             return window.braintree.hostedFields.create(options);
           });
@@ -1158,12 +1149,6 @@ const PaymentMethodContainerWithoutStripe = ({
       }, 0);
     };
 
-    const totalAmount =
-      state?.updatedPrice ??
-      plan?.amount ??
-      invoice?.amount_remaining ??
-      getOrderItemsTotal();
-
     braintreeInstanceRef.current
       .then((hostedFieldInstance) => {
         hostedFieldInstance.tokenize((tokenizeErr, payload) => {
@@ -1179,85 +1164,22 @@ const PaymentMethodContainerWithoutStripe = ({
             });
           }
 
-          if (
-            type == "updatePaymentSource" ||
-            type == "deletePaymentSource"
-          ) {
-            handleBraintreePayment(payload, state.couponCode);
-          } else {
-            braintree3DSecureInstanceRef.current.then(
-              (threeDSecureInstance) => {
-                threeDSecureInstance
-                  .verifyCard({
-                    onLookupComplete: function (data, next) {
-                      next();
-                    },
-                    amount: totalAmount ?? "0.00",
-                    nonce: payload.nonce,
-                    bin: payload.details.bin
-                  })
-                  .then((payload) => {
-                    if (payload.liabilityShifted) {
-                      handleBraintreePayment(
-                        payload,
-                        state.couponCode
-                      );
-                    } else if (payload.liabilityShiftPossible) {
-                      dispatch({
-                        type: DISABLE_SUBMIT,
-                        payload: false
-                      });
-                      dispatch({ type: LOADING, payload: false });
-                      return dispatch({
-                        type: SHOW_ALERT,
-                        payload: {
-                          type: "error",
-                          content:
-                            "We encountered an issue verifying your transaction with 3D Secure, please try again."
-                        }
-                      });
-                    } else {
-                      // Liability has not shifted and will not shift
-                      dispatch({
-                        type: DISABLE_SUBMIT,
-                        payload: false
-                      });
-                      dispatch({ type: LOADING, payload: false });
-                      return dispatch({
-                        type: SHOW_ALERT,
-                        payload: {
-                          type: "error",
-                          content:
-                            "We encountered an issue verifying your transaction with 3D Secure, please try another payment method."
-                        }
-                      });
-                    }
-                  })
-                  .catch((error) => {
-                    console.error(error);
-                    dispatch({
-                      type: DISABLE_SUBMIT,
-                      payload: false
-                    });
-                    dispatch({ type: LOADING, payload: false });
-                    return dispatch({
-                      type: SHOW_ALERT,
-                      payload: {
-                        type: "error",
-                        content:
-                          "There was a problem with your request."
-                      }
-                    });
-                  });
-              }
-            );
-          }
+          // Directly handle the payment with the tokenized payload
+          handleBraintreePayment(payload, state.couponCode);
         });
       })
       .catch((error) => {
         if (error) {
           console.error(error);
-          return;
+          dispatch({ type: DISABLE_SUBMIT, payload: false });
+          dispatch({ type: LOADING, payload: false });
+          return dispatch({
+            type: SHOW_ALERT,
+            payload: {
+              type: "error",
+              content: "There was a problem with your request."
+            }
+          });
         }
       });
   };

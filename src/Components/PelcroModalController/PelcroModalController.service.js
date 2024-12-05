@@ -145,10 +145,10 @@ export const loadPaymentSDKs = () => {
   }
 
   if (supportsBraintree) {
-    window.Pelcro.helpers.loadSDK(
-      "https://js.braintreegateway.com/web/3.99.0/js/three-d-secure.min.js",
-      "braintree-3D-secure-sdk"
-    );
+    // window.Pelcro.helpers.loadSDK(
+    //   "https://js.braintreegateway.com/web/3.99.0/js/three-d-secure.min.js",
+    //   "braintree-3D-secure-sdk"
+    // );
     window.Pelcro.helpers.loadSDK(
       "https://js.braintreegateway.com/web/3.99.0/js/hosted-fields.min.js",
       "braintree-hosted-fields-sdk"
@@ -727,17 +727,26 @@ const showPaymentMethodUpdateFromUrl = () => {
 
     whenUserReady(() => {
       const cardProcessor = getSiteCardProcessor();
-      
+
       // Only load appropriate SDK based on processor
-      if (cardProcessor === "braintree" && document.querySelector("#braintree-hosted-fields-sdk")) {
+      if (
+        cardProcessor === "braintree" &&
+        document.querySelector("#braintree-hosted-fields-sdk")
+      ) {
         return switchView("payment-method-update");
       }
 
-      if (cardProcessor === "vantiv" && document.querySelector("#vantiv-eprotect-sdk")) {
+      if (
+        cardProcessor === "vantiv" &&
+        document.querySelector("#vantiv-eprotect-sdk")
+      ) {
         return switchView("payment-method-update");
       }
 
-      if (cardProcessor === "tap" && document.querySelector("#tap-sdk")) {
+      if (
+        cardProcessor === "tap" &&
+        document.querySelector("#tap-sdk")
+      ) {
         return switchView("payment-method-update");
       }
 
