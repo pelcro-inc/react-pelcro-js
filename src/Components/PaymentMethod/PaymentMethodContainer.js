@@ -873,6 +873,7 @@ const PaymentMethodContainerWithoutStripe = ({
   /* ====== Start Braintree integration  ======== */
   const braintreeInstanceRef = React.useRef(null);
 
+  
   function getClientToken() {
     return new Promise((resolve, reject) => {
       window.Pelcro.payment.generateClientToken(
