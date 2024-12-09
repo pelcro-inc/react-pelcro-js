@@ -19,7 +19,8 @@ export const SelectedPaymentMethod = () => {
     });
 
   return (
-    selectedPaymentMethodId && (
+    selectedPaymentMethodId &&
+    paymentMethod && (
       <div
         key={paymentMethod.id}
         className="plc-px-2 plc-my-2 plc-text-gray-900 plc-rounded plc-shadow-md plc-ring-2 plc-ring-primary-400 pelcro-payment-method-wrapper"
