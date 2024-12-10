@@ -18,10 +18,6 @@ export const SelectedPaymentMethod = () => {
       return source.id == selectedPaymentMethodId;
     });
 
-  if (!selectedPaymentMethodId || !paymentMethod) {
-    return null;
-  }
-
   return (
     <div
       key={paymentMethod.id}

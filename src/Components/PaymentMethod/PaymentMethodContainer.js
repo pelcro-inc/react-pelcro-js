@@ -1249,6 +1249,7 @@ const PaymentMethodContainerWithoutStripe = ({
               content: t("messages.sourceCreated")
             }
           });
+          refreshUser();
           onSuccess(res);
         }
       );
