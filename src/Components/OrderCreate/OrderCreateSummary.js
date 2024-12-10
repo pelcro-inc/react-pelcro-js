@@ -2,43 +2,79 @@ import React, { useEffect, useMemo, useState } from "react";
 import {
   calcAndFormatItemsTotal,
   getFormattedPriceByLocal,
-  getPageOrDefaultLanguage
+  getPageOrDefaultLanguage,
+  isStagingEnvironment
 } from "../../utils/utils";
 import { Loader } from "../../SubComponents/Loader";
 import { useTranslation } from "react-i18next";
+import { usePelcro } from "../../hooks/usePelcro";
 
 export const OrderCreateSummary = ({ order }) => {
   const { t } = useTranslation("shop");
 
   const [items, setItems] = useState([]);
   const [paymentInfo, setPaymentInfo] = useState({});
+  const { selectedAddressId } = usePelcro();
+
+  async function fetchOrderSummary(orderSummaryPaylod) {
+    try {
+      const domain = isStagingEnvironment()
+        ? "https://staging.pelcro.com"
+        : "https://www.pelcro.com";
+      const url = `${domain}/api/v1/sdk/ecommerce/order-summary`;
+
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${
+            window.Pelcro.user.read().auth_token
+          }`
+        },
+        body: JSON.stringify(orderSummaryPaylod)
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+
+        console.log("data", data);
+
+        setPaymentInfo({
+          total: data?.data.total,
+          shippingRate: data?.data.shipping_rate,
+          subtotal: data?.data.subtotal,
+          taxes: data?.data?.tax_rate
+        });
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   useEffect(() => {
     if (!order?.length || paymentInfo?.total) {
       return;
     }
 
-    window.Pelcro.ecommerce.order.createSummary(
-      {
-        items: order.map((item) => {
-          return {
-            sku_id: item.id,
-            quantity: item.quantity
-          };
-        })
-      },
-      (err, res) => {
-        if (err) {
-          console.error(err);
-        }
-        setPaymentInfo({
-          total: res.data.total,
-          shippingRate: res.data.shipping_rate,
-          subtotal: res.data.subtotal
-        });
-      }
-    );
-  }, [order, paymentInfo?.total]);
+    const orderSummaryPaylod = {
+      items: order.map((item) => {
+        return {
+          sku_id: item.id,
+          quantity: item.quantity
+        };
+      })
+    };
+
+    if (window.Pelcro.site.read()?.taxes_enabled) {
+      orderSummaryPaylod.address_id = selectedAddressId;
+    }
+
+    orderSummaryPaylod.site_id = window.Pelcro.siteid;
+
+    console.log("orderSummaryPaylod", orderSummaryPaylod);
+
+    fetchOrderSummary(orderSummaryPaylod);
+  }, [order, paymentInfo?.total, selectedAddressId]);
 
   useEffect(() => {
     const isQuickPurchase = !Array.isArray(order);
@@ -65,6 +101,17 @@ export const OrderCreateSummary = ({ order }) => {
       getPageOrDefaultLanguage()
     );
   }, [paymentInfo?.shippingRate, order]);
+
+  const taxRate = useMemo(() => {
+    if (!paymentInfo?.taxes) {
+      return "0";
+    }
+    return getFormattedPriceByLocal(
+      paymentInfo?.taxes || 0,
+      order?.[0]?.currency,
+      getPageOrDefaultLanguage()
+    );
+  }, [paymentInfo?.taxes, order]);
 
   const total = useMemo(() => {
     return getFormattedPriceByLocal(
@@ -136,6 +183,13 @@ export const OrderCreateSummary = ({ order }) => {
             </dt>
             <dd className="plc-text-base">{shippingRate}</dd>
           </div>
+
+          {taxRate !== "0" && (
+            <div className="plc-flex plc-justify-between plc-text-gray-900">
+              <dt className="plc-text-base">{t("labels.tax")}</dt>
+              <dd className="plc-text-base">{taxRate}</dd>
+            </div>
+          )}
 
           <div className="plc-flex plc-justify-between plc-border-t plc-border-gray-200 plc-pt-6 plc-text-gray-900">
             <dt className="plc-text-base">{t("labels.total")}</dt>
