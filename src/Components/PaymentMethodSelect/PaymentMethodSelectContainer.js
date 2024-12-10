@@ -18,7 +18,7 @@ const moveDefaultPaymentMethodToStart = (paymentMethods) => {
     (paymentMethod) => paymentMethod.id !== defaultPaymentMethod.id
   );
 
-  if (defaultPaymentMethod.status !== "chargeable") {
+  if (defaultPaymentMethod?.status !== "chargeable") {
     return paymentMethodsWithoutDefault;
   }
 

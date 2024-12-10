@@ -204,7 +204,7 @@ export const calcAndFormatItemsTotal = (items, currency) => {
 
 /**
  * @param {object[]} items
- * @returns {number} the total order price
+ * @return {number} the total order price
  */
 export const calcOrderAmount = (items) => {
   if (!Array.isArray(items)) return;
@@ -364,7 +364,7 @@ export const disableScroll = () => {
 export const trackSubscriptionOnGA = () => {
   const { product, plan, couponCode } = usePelcro.getStore();
 
-  /*   
+  /*
   getting the latest subscription id from invoices instead of subscriptions
   to handle gifted subs which are not added to subs list
   */
@@ -666,4 +666,8 @@ export const refreshUser = () => {
       }
     }
   );
+};
+
+export const isStagingEnvironment = () => {
+  return window.Pelcro.environment?.domain.includes("staging");
 };
