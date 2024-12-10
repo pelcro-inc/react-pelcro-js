@@ -1,3 +1,10 @@
+# [4.0.0-alpha.109](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.108...v4.0.0-alpha.109) (2024-12-10)
+
+
+### Features
+
+* add tax to order summary ([#390](https://github.com/pelcro-inc/react-pelcro-js/issues/390)) ([a53fdf0](https://github.com/pelcro-inc/react-pelcro-js/commit/a53fdf0414f0a8b7ea370dd4bce53809edeb4a71))
+
 # [4.0.0-alpha.108](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.107...v4.0.0-alpha.108) (2024-12-04)
 
 
