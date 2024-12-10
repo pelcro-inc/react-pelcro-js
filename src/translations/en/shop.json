@@ -18,6 +18,7 @@
     "summary": "Order summary",
     "total": "Total",
     "subtotal": "Subtotal",
-    "shippingRate": "Shipping Rate"
+    "shippingRate": "Shipping Rate",
+    "tax": "Tax"
   }
 }
