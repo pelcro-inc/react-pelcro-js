@@ -1,3 +1,10 @@
+# [3.42.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.41.0...v3.42.0) (2024-12-10)
+
+
+### Features
+
+* New Card Handling  ([9d5d80d](https://github.com/pelcro-inc/react-pelcro-js/commit/9d5d80d615a941000c0f9466a25b7401d71a0c8d))
+
 # [3.41.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.40.0...v3.41.0) (2024-12-05)
 
 
