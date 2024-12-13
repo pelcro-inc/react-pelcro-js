@@ -9,7 +9,11 @@ import {
   getPageOrDefaultLanguage
 } from "../../utils/utils";
 
-export const SubmitPaymentMethod = ({ onClick, ...otherProps }) => {
+export const SubmitPaymentMethod = ({
+  onClick,
+  isSubmitDisabled,
+  ...otherProps
+}) => {
   const { plan, selectedPaymentMethodId } = usePelcro();
   const { t } = useTranslation("checkoutForm");
   const {
@@ -99,7 +103,7 @@ export const SubmitPaymentMethod = ({ onClick, ...otherProps }) => {
         dispatch({ type: SUBMIT_PAYMENT });
         onClick?.();
       }}
-      disabled={disableSubmit}
+      disabled={disableSubmit || isSubmitDisabled}
       {...otherProps}
     >
       {/* Show price on button only if there's a selected plan */}

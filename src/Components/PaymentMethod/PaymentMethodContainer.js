@@ -66,10 +66,9 @@ import {
   CybersourceGateway,
   PAYMENT_TYPES
 } from "../../services/Subscription/Payment.service";
-import { refreshUser, isStagingEnvironment } from "../../utils/utils";
+import { refreshUser, orderSummaryRequest } from "../../utils/utils";
 import { usePelcro } from "../../hooks/usePelcro";
 import { Loader } from "../../SubComponents/Loader";
-import axios from "axios";
 
 /**
  * @typedef {Object} PaymentStateType
@@ -2498,12 +2497,6 @@ const PaymentMethodContainerWithoutStripe = ({
               quantity: item.quantity
             }));
 
-        // https://github.com/pelcro-inc/pelcro-client-sdk/blob/62e80cae05846919fff3f13e11981e00c15bdb66/src/models/ecommerce.js#L114 doesn't support passing address_id so we need to call API directly here
-        const domain = isStagingEnvironment()
-          ? "https://staging.pelcro.com"
-          : "https://www.pelcro.com";
-        const url = `${domain}/api/v1/sdk/ecommerce/order-summary`;
-
         const orderSummaryParams = {
           items: mappedOrderItems,
           coupon_code: couponCode
@@ -2513,25 +2506,14 @@ const PaymentMethodContainerWithoutStripe = ({
           orderSummaryParams.address_id = selectedAddressId;
         }
 
-        const defaultParams = {
-          site_id: window.Pelcro.siteid,
-          language:
-            window.Pelcro.helpers.getHtmlLanguageAttribute() ??
-            window.Pelcro.language,
-          device_hash: window.Pelcro.deviceHash,
-          device_components: window.Pelcro.deviceComponents
+        const onSuccess = (res) => {
+          handleCouponResponse(null, res);
+        };
+        const onFailure = (err) => {
+          handleCouponResponse(err, null);
         };
 
-        axios.defaults.headers.common["Authorization"] =
-          "Bearer " + window.Pelcro.user.read().auth_token;
-
-        axios
-          .post(url, {
-            ...defaultParams,
-            ...orderSummaryParams
-          })
-          .then((resp) => handleCouponResponse(null, resp.data))
-          .catch((err) => handleCouponResponse(err, null));
+        orderSummaryRequest(orderSummaryParams, onSuccess, onFailure);
       }
     }
   };

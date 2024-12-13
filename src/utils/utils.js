@@ -2,6 +2,7 @@ import React from "react";
 import { usePelcro } from "../hooks/usePelcro";
 import ReactGA from "react-ga";
 import ReactGA4 from "react-ga4";
+import axios from "axios";
 
 /**
  * List of zero-decimal currencies.
@@ -670,4 +671,40 @@ export const refreshUser = () => {
 
 export const isStagingEnvironment = () => {
   return window.Pelcro.environment?.domain.includes("staging");
+};
+
+// https://github.com/pelcro-inc/pelcro-client-sdk/blob/62e80cae05846919fff3f13e11981e00c15bdb66/src/models/ecommerce.js#L114 doesn't support passing address_id so we need to call API directly here
+export const orderSummaryRequest = (
+  orderSummaryPayload,
+  onSuccess,
+  onError
+) => {
+  const domain = isStagingEnvironment()
+    ? "https://staging.pelcro.com"
+    : "https://www.pelcro.com";
+  const url = `${domain}/api/v1/sdk/ecommerce/order-summary`;
+
+  const defaultParams = {
+    site_id: window.Pelcro.siteid,
+    language:
+      window.Pelcro.helpers.getHtmlLanguageAttribute() ??
+      window.Pelcro.language,
+    device_hash: window.Pelcro.deviceHash,
+    device_components: window.Pelcro.deviceComponents
+  };
+
+  axios.defaults.headers.common["Authorization"] =
+    "Bearer " + window.Pelcro.user.read().auth_token;
+
+  axios
+    .post(url, {
+      ...defaultParams,
+      ...orderSummaryPayload
+    })
+    .then((resp) => {
+      onSuccess(resp.data);
+    })
+    .catch((err) => {
+      onError(err);
+    });
 };
