@@ -71,8 +71,6 @@ export const OrderCreateSummary = ({ order }) => {
 
     orderSummaryPaylod.site_id = window.Pelcro.siteid;
 
-    console.log("orderSummaryPaylod", orderSummaryPaylod);
-
     fetchOrderSummary(orderSummaryPaylod);
   }, [order, paymentInfo?.total, selectedAddressId]);
 
