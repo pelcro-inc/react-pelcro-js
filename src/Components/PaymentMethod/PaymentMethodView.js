@@ -45,6 +45,7 @@ export function PaymentMethodView({
   showOrderButton,
   showApplePayButton,
   order,
+  isSubmitDisabled,
   ...props
 }) {
   const { t } = useTranslation("checkoutForm");
@@ -186,7 +187,9 @@ export function PaymentMethodView({
 
               {/* Payment buttons section */}
               <div className="plc-grid plc-mt-4 plc-gap-y-2">
-                <SubmitPaymentMethod />
+                <SubmitPaymentMethod
+                  isSubmitDisabled={isSubmitDisabled}
+                />
                 {showExternalPaymentMethods &&
                 !supportsVantiv &&
                 !supportsCybersource &&

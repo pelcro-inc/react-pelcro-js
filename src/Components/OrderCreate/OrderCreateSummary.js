@@ -2,79 +2,15 @@ import React, { useEffect, useMemo, useState } from "react";
 import {
   calcAndFormatItemsTotal,
   getFormattedPriceByLocal,
-  getPageOrDefaultLanguage,
-  isStagingEnvironment
+  getPageOrDefaultLanguage
 } from "../../utils/utils";
 import { Loader } from "../../SubComponents/Loader";
 import { useTranslation } from "react-i18next";
-import { usePelcro } from "../../hooks/usePelcro";
 
-export const OrderCreateSummary = ({ order }) => {
+export const OrderCreateSummary = ({ order, paymentInfo }) => {
   const { t } = useTranslation("shop");
 
   const [items, setItems] = useState([]);
-  const [paymentInfo, setPaymentInfo] = useState({});
-  const { selectedAddressId } = usePelcro();
-
-  async function fetchOrderSummary(orderSummaryPaylod) {
-    try {
-      const domain = isStagingEnvironment()
-        ? "https://staging.pelcro.com"
-        : "https://www.pelcro.com";
-      const url = `${domain}/api/v1/sdk/ecommerce/order-summary`;
-
-      const response = await fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${
-            window.Pelcro.user.read().auth_token
-          }`
-        },
-        body: JSON.stringify(orderSummaryPaylod)
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-
-        console.log("data", data);
-
-        setPaymentInfo({
-          total: data?.data.total,
-          shippingRate: data?.data.shipping_rate,
-          subtotal: data?.data.subtotal,
-          taxes: data?.data?.tax_rate
-        });
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  useEffect(() => {
-    if (!order?.length || paymentInfo?.total) {
-      return;
-    }
-
-    const orderSummaryPaylod = {
-      items: order.map((item) => {
-        return {
-          sku_id: item.id,
-          quantity: item.quantity
-        };
-      })
-    };
-
-    if (window.Pelcro.site.read()?.taxes_enabled) {
-      orderSummaryPaylod.address_id = selectedAddressId;
-    }
-
-    orderSummaryPaylod.site_id = window.Pelcro.siteid;
-
-    console.log("orderSummaryPaylod", orderSummaryPaylod);
-
-    fetchOrderSummary(orderSummaryPaylod);
-  }, [order, paymentInfo?.total, selectedAddressId]);
 
   useEffect(() => {
     const isQuickPurchase = !Array.isArray(order);

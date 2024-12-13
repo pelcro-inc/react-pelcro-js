@@ -69,6 +69,7 @@ import {
 import { refreshUser, notifyBugsnag } from "../../utils/utils";
 import { usePelcro } from "../../hooks/usePelcro";
 import { Loader } from "../../SubComponents/Loader";
+import { orderSummaryRequest } from "../OrderCreate/OrderCreateView";
 
 /**
  * @typedef {Object} PaymentStateType
@@ -221,7 +222,7 @@ const PaymentMethodContainerWithoutStripe = ({
       );
     }
 
-    let options = {
+    const options = {
       cardExpirationMonth: state.month,
       cardExpirationYear: state.year
     };
@@ -612,7 +613,7 @@ const PaymentMethodContainerWithoutStripe = ({
                     if (
                       data.message === "3DS-authentication-complete"
                     ) {
-                      const tapID = data.tapID;
+                      const { tapID } = data;
                       toggleAuthenticationPendingView(false);
                       toggleAuthenticationSuccessPendingView(true);
 
@@ -819,9 +820,9 @@ const PaymentMethodContainerWithoutStripe = ({
       window.Pelcro.site.read()?.tap_gateway_settings.publishable_key
     );
 
-    let elements = tapKey.elements({});
+    const elements = tapKey.elements({});
 
-    let style = {
+    const style = {
       base: {
         color: "#535353",
         lineHeight: "18px",
@@ -839,7 +840,7 @@ const PaymentMethodContainerWithoutStripe = ({
     };
 
     // input labels/placeholders
-    let labels = {
+    const labels = {
       cardNumber: "Card Number",
       expirationDate: "MM/YY",
       cvv: "CVV",
@@ -847,13 +848,13 @@ const PaymentMethodContainerWithoutStripe = ({
     };
 
     // payment options
-    let paymentOptions = {
+    const paymentOptions = {
       labels: labels,
       TextDirection: "ltr"
     };
 
     // create element, pass style and payment options
-    let card = elements.create(
+    const card = elements.create(
       "card",
       { style: style },
       paymentOptions
@@ -888,8 +889,8 @@ const PaymentMethodContainerWithoutStripe = ({
     }
 
     const orderId = `pelcro-${new Date().getTime()}`;
-    /*     
-    calls handleVantivPayment to either handle a payment or update a source by simply creating a new source 
+    /*
+    calls handleVantivPayment to either handle a payment or update a source by simply creating a new source
     */
     vantivInstanceRef.current.getPaypageRegistrationId({
       id: orderId,
@@ -2601,13 +2602,23 @@ const PaymentMethodContainerWithoutStripe = ({
               quantity: item.quantity
             }));
 
-        window.Pelcro.ecommerce.order.createSummary(
-          {
-            items: mappedOrderItems,
-            coupon_code: couponCode
-          },
-          handleCouponResponse
-        );
+        const orderSummaryParams = {
+          items: mappedOrderItems,
+          coupon_code: couponCode
+        };
+
+        if (window.Pelcro.site.read()?.taxes_enabled) {
+          orderSummaryParams.address_id = selectedAddressId;
+        }
+
+        const onSuccess = (res) => {
+          handleCouponResponse(null, res);
+        };
+        const onFailure = (err) => {
+          handleCouponResponse(err, null);
+        };
+
+        orderSummaryRequest(orderSummaryParams, onSuccess, onFailure);
       }
     }
   };
