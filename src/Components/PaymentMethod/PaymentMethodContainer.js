@@ -66,9 +66,10 @@ import {
   CybersourceGateway,
   PAYMENT_TYPES
 } from "../../services/Subscription/Payment.service";
-import { refreshUser, orderSummaryRequest } from "../../utils/utils";
+import { refreshUser } from "../../utils/utils";
 import { usePelcro } from "../../hooks/usePelcro";
 import { Loader } from "../../SubComponents/Loader";
+import { orderSummaryRequest } from "../OrderCreate/OrderCreateView";
 
 /**
  * @typedef {Object} PaymentStateType

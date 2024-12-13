@@ -3,8 +3,9 @@ import { useTranslation } from "react-i18next";
 import { usePelcro } from "../../hooks/usePelcro";
 import { PaymentMethodView } from "../PaymentMethod/PaymentMethodView";
 import { OrderCreateSummary } from "./OrderCreateSummary";
-import { orderSummaryRequest } from "../../utils/utils";
 import { notify } from "../../SubComponents/Notification";
+import { isStagingEnvironment } from "../../utils/utils";
+import axios from "axios";
 
 export const OrderCreateView = (props) => {
   const { t } = useTranslation("checkoutForm");
@@ -132,4 +133,40 @@ export const OrderCreateView = (props) => {
       </form>
     </div>
   );
+};
+
+// https://github.com/pelcro-inc/pelcro-client-sdk/blob/62e80cae05846919fff3f13e11981e00c15bdb66/src/models/ecommerce.js#L114 doesn't support passing address_id so we need to call API directly here
+export const orderSummaryRequest = (
+  orderSummaryPayload,
+  onSuccess,
+  onError
+) => {
+  const domain = isStagingEnvironment()
+    ? "https://staging.pelcro.com"
+    : "https://www.pelcro.com";
+  const url = `${domain}/api/v1/sdk/ecommerce/order-summary`;
+
+  const defaultParams = {
+    site_id: window.Pelcro.siteid,
+    language:
+      window.Pelcro.helpers.getHtmlLanguageAttribute() ??
+      window.Pelcro.language,
+    device_hash: window.Pelcro.deviceHash,
+    device_components: window.Pelcro.deviceComponents
+  };
+
+  axios.defaults.headers.common["Authorization"] =
+    "Bearer " + window.Pelcro.user.read().auth_token;
+
+  axios
+    .post(url, {
+      ...defaultParams,
+      ...orderSummaryPayload
+    })
+    .then((resp) => {
+      onSuccess(resp.data);
+    })
+    .catch((err) => {
+      onError(err);
+    });
 };
