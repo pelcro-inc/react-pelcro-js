@@ -29,5 +29,8 @@
     "isDefault": "Set as default",
     "shippingAddress": "Shipping Address",
     "contactDetails": "Contact Details"
+  },
+  "errors": {
+    "orderSummaryFailed": "Something went wrong while fetching the order summary. Please try again later."
   }
 }

@@ -66,12 +66,10 @@ import {
   CybersourceGateway,
   PAYMENT_TYPES
 } from "../../services/Subscription/Payment.service";
-import {
-  getPageOrDefaultLanguage,
-  refreshUser
-} from "../../utils/utils";
+import { refreshUser } from "../../utils/utils";
 import { usePelcro } from "../../hooks/usePelcro";
 import { Loader } from "../../SubComponents/Loader";
+import { orderSummaryRequest } from "../OrderCreate/OrderCreateView";
 
 /**
  * @typedef {Object} PaymentStateType
@@ -224,7 +222,7 @@ const PaymentMethodContainerWithoutStripe = ({
       );
     }
 
-    let options = {
+    const options = {
       cardExpirationMonth: state.month,
       cardExpirationYear: state.year
     };
@@ -891,8 +889,8 @@ const PaymentMethodContainerWithoutStripe = ({
     }
 
     const orderId = `pelcro-${new Date().getTime()}`;
-    /*     
-    calls handleVantivPayment to either handle a payment or update a source by simply creating a new source 
+    /*
+    calls handleVantivPayment to either handle a payment or update a source by simply creating a new source
     */
     vantivInstanceRef.current.getPaypageRegistrationId({
       id: orderId,
@@ -2500,13 +2498,23 @@ const PaymentMethodContainerWithoutStripe = ({
               quantity: item.quantity
             }));
 
-        window.Pelcro.ecommerce.order.createSummary(
-          {
-            items: mappedOrderItems,
-            coupon_code: couponCode
-          },
-          handleCouponResponse
-        );
+        const orderSummaryParams = {
+          items: mappedOrderItems,
+          coupon_code: couponCode
+        };
+
+        if (window.Pelcro.site.read()?.taxes_enabled) {
+          orderSummaryParams.address_id = selectedAddressId;
+        }
+
+        const onSuccess = (res) => {
+          handleCouponResponse(null, res);
+        };
+        const onFailure = (err) => {
+          handleCouponResponse(err, null);
+        };
+
+        orderSummaryRequest(orderSummaryParams, onSuccess, onFailure);
       }
     }
   };

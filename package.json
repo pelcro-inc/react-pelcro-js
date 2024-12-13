@@ -103,6 +103,7 @@
     "@headlessui/react": "^0.3.0",
     "@stripe/react-stripe-js": "^2.8.1",
     "@stripe/stripe-js": "^3.5.0",
+    "axios": "^1.7.9",
     "gapi-script": "^1.2.0",
     "i18next": "^19.1.0",
     "react-easy-crop": "^3.3.2",
