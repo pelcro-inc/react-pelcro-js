@@ -1,3 +1,10 @@
+# [4.0.0-alpha.113](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.112...v4.0.0-alpha.113) (2024-12-13)
+
+
+### Features
+
+* downgrade axios again ([0ed279e](https://github.com/pelcro-inc/react-pelcro-js/commit/0ed279e6b1d5609b5dbd686332e0e449e2cc34d6))
+
 # [4.0.0-alpha.112](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.111...v4.0.0-alpha.112) (2024-12-13)
 
 
