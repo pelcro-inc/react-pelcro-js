@@ -1,3 +1,10 @@
+# [4.0.0-alpha.110](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.109...v4.0.0-alpha.110) (2024-12-13)
+
+
+### Features
+
+* fixes for order-summary ([f29f095](https://github.com/pelcro-inc/react-pelcro-js/commit/f29f0953b9d49adc806ee793ab39bb0c5b125135))
+
 # [4.0.0-alpha.109](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.108...v4.0.0-alpha.109) (2024-12-10)
 
 
