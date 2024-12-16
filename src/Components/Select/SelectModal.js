@@ -721,13 +721,8 @@ class SelectModal extends Component {
                   data-key={plan.id}
                   onClick={(e) => {
                     this.selectPlan(e, false);
-                    if (
-                      itemsArray.some(
-                        (item) => item?.id === this.state.itemId
-                      )
-                    ) {
-                      this.props.setItem(this.state.itemId);
-                    }
+
+                    this.props.setItem(this.state.itemId);
                   }}
                 >
                   {this.locale("buttons.select")}
