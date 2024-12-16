@@ -2996,7 +2996,7 @@ const PaymentMethodContainer = (props) => {
 
   useEffect(() => {
     if (isStripeLoaded && !selectedPaymentMethodId) {
-      window.Pelcro.user.createSetupIntent(
+      window.Pelcro.user.createSetupIntent?.(
         { auth_token: window.Pelcro.user.read().auth_token },
         (err, res) => {
           if (err) {
