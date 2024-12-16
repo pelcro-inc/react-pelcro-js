@@ -1,3 +1,10 @@
+# [4.0.0-alpha.115](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.114...v4.0.0-alpha.115) (2024-12-16)
+
+
+### Features
+
+* add guard ([beda67f](https://github.com/pelcro-inc/react-pelcro-js/commit/beda67ff8f3d6bd8a1b9b7e6eb61a3fbfaa34aa2))
+
 # [4.0.0-alpha.114](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.113...v4.0.0-alpha.114) (2024-12-16)
 
 
