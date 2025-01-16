@@ -1,3 +1,10 @@
+# [4.0.0-alpha.116](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.115...v4.0.0-alpha.116) (2025-01-16)
+
+
+### Features
+
+* allow to disable page view events ([#394](https://github.com/pelcro-inc/react-pelcro-js/issues/394)) ([f643dbf](https://github.com/pelcro-inc/react-pelcro-js/commit/f643dbff7168864d05cfea38b736d473c3dc887c))
+
 # [4.0.0-alpha.115](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.114...v4.0.0-alpha.115) (2024-12-16)
 
 
