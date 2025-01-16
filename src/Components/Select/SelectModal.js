@@ -50,7 +50,7 @@ export function SelectModalWithHook(props) {
   return (
     <SelectModalWithTrans
       isGift={isGift}
-      disableGifting={isRenewingGift}
+      disableGifting={isRenewingGift || props.hideGiftButton}
       plan={plan}
       product={product}
       onClose={() => {
