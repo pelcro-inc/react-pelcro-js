@@ -1,3 +1,10 @@
+# [4.0.0-alpha.117](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.116...v4.0.0-alpha.117) (2025-01-16)
+
+
+### Features
+
+* add prop for hiding gift button ([#395](https://github.com/pelcro-inc/react-pelcro-js/issues/395)) ([7db0dc1](https://github.com/pelcro-inc/react-pelcro-js/commit/7db0dc1fedb1fbe62b2511a2fce9632b01d091e2))
+
 # [4.0.0-alpha.116](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.115...v4.0.0-alpha.116) (2025-01-16)
 
 
