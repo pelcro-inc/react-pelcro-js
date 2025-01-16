@@ -53,12 +53,14 @@ export function RegisterView(props) {
                 id="pelcro-input-first-name"
                 label={`${t("labels.firstName")}${nameFieldsRequired ? " *" : ""}`}
                 errorId="pelcro-input-firstName-error"
+                required={showNameFields}
               />
               <RegisterLastName
                 wrapperClassName="plc-ml-3"
                 id="pelcro-input-last-name"
                 label={`${t("labels.lastName")}${nameFieldsRequired ? " *" : ""}`}
                 errorId="pelcro-input-lastName-error"
+                required={showNameFields}
               />
             </div>
           )}
