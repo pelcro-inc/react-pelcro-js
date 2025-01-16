@@ -20,6 +20,7 @@ import ReactGA4 from "react-ga4";
  * @property {boolean} enableTheme
  * @property {boolean} enablePaywalls
  * @property {boolean} enableGoogleAnalytics
+ * @property {boolean} disablePageViewEvents
  */
 
 /**
@@ -39,7 +40,9 @@ export const optionsController = (options) => {
     enableTheme: applyPelcroTheme,
     enablePaywalls: initPaywalls,
     loadSecuritySDK: initSecuritySdk,
-    enableGoogleAnalytics: initGATracking
+    enableGoogleAnalytics: initGATracking(
+      options.disablePageViewEvents
+    )
   };
 
   // Only execute enabled options
@@ -238,20 +241,16 @@ export const initSecuritySdk = () => {
   });
 };
 
-export const initGATracking = () => {
+export const initGATracking = (disablePageViewEvents = false) => {
   const enableReactGA4 = window?.Pelcro?.uiSettings?.enableReactGA4;
   if (window.Pelcro.site.read().google_analytics_id) {
     if (enableReactGA4) {
-      // Initialize ReactGA4 with your tracking ID
-      ReactGA4.initialize(
-        window.Pelcro.site.read().google_analytics_id
-      );
       // Enable e-commerce tracking
       ReactGA4.initialize(
         window.Pelcro.site.read().google_analytics_id,
         {
           gaOptions: {
-            send_page_view: true,
+            send_page_view: !disablePageViewEvents,
             ecommerce: {
               enabled: true
             }
