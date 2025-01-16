@@ -1,3 +1,10 @@
+# [3.43.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.42.0...v3.43.0) (2025-01-16)
+
+
+### Features
+
+* require  name fields ([#397](https://github.com/pelcro-inc/react-pelcro-js/issues/397)) ([d677bf6](https://github.com/pelcro-inc/react-pelcro-js/commit/d677bf6a97ec879818e9519f6a5976592126aa4e))
+
 # [3.42.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.41.0...v3.42.0) (2024-12-10)
 
 
