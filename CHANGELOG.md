@@ -1,3 +1,10 @@
+# [3.26.0-beta.73](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.72...v3.26.0-beta.73) (2025-01-16)
+
+
+### Features
+
+* uisetting for requiring name fields ([#396](https://github.com/pelcro-inc/react-pelcro-js/issues/396)) ([7bc117b](https://github.com/pelcro-inc/react-pelcro-js/commit/7bc117bf3a59839f63426febb35ac0225c5b93d6))
+
 # [3.26.0-beta.72](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.71...v3.26.0-beta.72) (2024-12-05)
 
 
