@@ -18,7 +18,8 @@ const defaultOptions = {
   enableTheme: true,
   enablePaywalls: true,
   loadSecuritySDK: true,
-  enableGoogleAnalytics: false
+  enableGoogleAnalytics: false,
+  disablePageViewEvents: false
 };
 
 export const PelcroModalController = ({
