@@ -31,6 +31,9 @@ export function RegisterView(props) {
   const showNameFields =
     window.Pelcro?.uiSettings?.enableNameFieldsInRegister;
 
+  const nameFieldsRequired = 
+    window.Pelcro?.uiSettings?.requireNameFieldsInRegister;
+
   return (
     <div id="pelcro-register-view">
       <form
@@ -75,12 +78,16 @@ export function RegisterView(props) {
             <div className="plc-flex plc-items-start">
               <RegisterFirstName
                 id="pelcro-input-first-name"
-                label={t("labels.firstName")}
+                label={`${t("labels.firstName")}${nameFieldsRequired ? " *" : ""}`}
+                errorId="pelcro-input-firstName-error"
+                required={nameFieldsRequired}
               />
               <RegisterLastName
                 wrapperClassName="plc-ml-3"
                 id="pelcro-input-last-name"
-                label={t("labels.lastName")}
+                label={`${t("labels.lastName")}${nameFieldsRequired ? " *" : ""}`}
+                errorId="pelcro-input-lastName-error"
+                required={nameFieldsRequired}
               />
             </div>
           )}
