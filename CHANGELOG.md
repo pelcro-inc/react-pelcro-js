@@ -1,3 +1,10 @@
+# [4.0.0-alpha.118](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.117...v4.0.0-alpha.118) (2025-01-27)
+
+
+### Features
+
+* alpha_register_required_field_ui_settings ([#399](https://github.com/pelcro-inc/react-pelcro-js/issues/399)) ([1f40272](https://github.com/pelcro-inc/react-pelcro-js/commit/1f4027229aaa5e787a8e5b5f2454e9ccd2ca06c7))
+
 # [4.0.0-alpha.117](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.116...v4.0.0-alpha.117) (2025-01-16)
 
 
