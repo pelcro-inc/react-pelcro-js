@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import {
   PaymentRequestButtonElement,
   PaymentElement
@@ -50,10 +50,31 @@ export const PelcroPaymentRequestButton = (props) => {
   return null;
 };
 
+export const ApplePayButtonElement = (props) => {
+  const {
+    state: { updatedPrice, currentPlan }
+  } = useContext(store);
+
+  useEffect(() => {
+    const button = document.getElementById("pelcro-apple-pay-button");
+    if (button) {
+      button.addEventListener("click", (event) => {
+        if (!event.isTrusted) return;
+        // Apple Pay session initialization will be handled by ApplePayButton component
+      });
+    }
+  }, []);
+
+  return null;
+};
+
 export const CheckoutForm = ({ type }) => {
   const { selectedPaymentMethodId, paymentMethodToEdit } =
     usePelcro();
   const cardProcessor = getSiteCardProcessor();
+  const vantivSettings = window.Pelcro?.site?.read()?.vantiv_gateway_settings;
+  const isApplePayEnabled = Boolean(vantivSettings?.apple_pay_enabled);
+  const hasApplePayMerchantId = Boolean(vantivSettings?.apple_pay_merchant_id);
 
   const billingDetails = {
     name: window?.Pelcro?.user?.read()?.name,
@@ -63,11 +84,11 @@ export const CheckoutForm = ({ type }) => {
 
   const paymentElementOptions = {
     layout: {
-      type: "tabs", // or accordion
+      type: "tabs",
       defaultCollapsed: false
     },
     defaultValues: {
-      billingDetails: billingDetails
+      billingDetails
     },
     fields: {
       billingDetails: {
@@ -78,7 +99,7 @@ export const CheckoutForm = ({ type }) => {
       }
     },
     terms: {
-      applePay: "never",
+      applePay: isApplePayEnabled ? "auto" : "never",
       card: "never",
       googlePay: "never",
       paypal: "never"
@@ -90,7 +111,14 @@ export const CheckoutForm = ({ type }) => {
   }
 
   if (cardProcessor === "vantiv") {
-    return <div id="eProtectiframe"></div>;
+    return (
+      <>
+        <div id="eProtectiframe"></div>
+        {isApplePayEnabled && hasApplePayMerchantId && (
+          <ApplePayButtonElement />
+        )}
+      </>
+    );
   }
 
   if (cardProcessor === "tap") {

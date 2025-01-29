@@ -51,9 +51,10 @@ export function PaymentMethodView({
   const { t } = useTranslation("checkoutForm");
   const cardProcessor = getSiteCardProcessor();
 
-  const supportsVantiv = Boolean(
-    window.Pelcro.site.read()?.vantiv_gateway_settings
-  );
+  const vantivSettings = window.Pelcro.site.read()?.vantiv_gateway_settings;
+  const supportsVantiv = Boolean(vantivSettings);
+  const isApplePayEnabled = Boolean(vantivSettings?.apple_pay_enabled);
+  const hasApplePayMerchantId = Boolean(vantivSettings?.apple_pay_merchant_id);
 
   const supportsTap = Boolean(
     window.Pelcro.site.read()?.tap_gateway_settings
@@ -203,10 +204,20 @@ export function PaymentMethodView({
                     <PaypalSubscribeButton />
                   </>
                 ) : null}
-                {showApplePayButton && supportsVantiv ? (
-                  <>
-                    <ApplePayButton />
-                  </>
+                {showApplePayButton && supportsVantiv && isApplePayEnabled && hasApplePayMerchantId ? (
+                  <div className="plc-w-full">
+                    <ApplePayButton
+                      onError={(error) => {
+                        dispatch({
+                          type: SHOW_ALERT,
+                          payload: {
+                            type: "error",
+                            content: error.message || t("messages.applePayError")
+                          }
+                        });
+                      }}
+                    />
+                  </div>
                 ) : null}
               </div>
             </div>

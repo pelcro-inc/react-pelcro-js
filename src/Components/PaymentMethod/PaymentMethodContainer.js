@@ -2817,9 +2817,19 @@ const PaymentMethodContainerWithoutStripe = ({
           });
 
         case HANDLE_APPLEPAY_SUBSCRIPTION:
-          return UpdateWithSideEffect(state, (state, dispatch) => {
-            setVantivPaymentRequest(action.payload);
-          });
+          return UpdateWithSideEffect(
+            { ...state, applePaySource: action.payload },
+            (state, dispatch) => {
+              const gateway = new VantivGateway();
+              if (type === "createPayment") {
+                subscribe(gateway, action.payload, state, dispatch);
+              } else if (type === "orderCreate") {
+                purchase(gateway, action.payload, state, dispatch);
+              } else if (type === "invoicePayment") {
+                payInvoice(gateway, action.payload, dispatch);
+              }
+            }
+          );
 
         case SET_UPDATED_PRICE:
           return Update({ ...state, updatedPrice: action.payload });

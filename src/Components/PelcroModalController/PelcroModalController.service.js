@@ -223,6 +223,9 @@ export const load = () => {
       "auth0-sdk"
     );
   }
+
+  // Initialize Apple Pay if enabled
+  loadApplePaySDK();
 };
 
 export const initSecuritySdk = () => {
@@ -808,5 +811,23 @@ const showSubscriptionManageMembersFromUrl = () => {
 
       return switchView("manage-members");
     });
+  });
+};
+
+export const loadApplePaySDK = () => {
+  const { whenSiteReady } = usePelcro.getStore();
+  
+  whenSiteReady(() => {
+    const vantivSettings = window.Pelcro.site.read()?.vantiv_gateway_settings;
+    const isApplePayEnabled = Boolean(vantivSettings?.apple_pay_enabled);
+    const hasApplePayMerchantId = Boolean(vantivSettings?.apple_pay_merchant_id);
+
+    if (isApplePayEnabled && hasApplePayMerchantId) {
+      // Load Vantiv eProtect for Apple Pay
+      window.Pelcro.helpers.loadSDK(
+        "https://request.eprotect.vantivprelive.com/eProtect/js/eProtect-iframe-client.min.js",
+        "vantiv-eprotect-sdk"
+      );
+    }
   });
 };
