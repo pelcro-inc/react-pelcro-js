@@ -3,7 +3,8 @@
     "youAreSafe": "You're safe - PCI compliant 128 SSL by",
     "bankRedirection": "Please hold, redirecting you to your bank.",
     "applePayNotAvailable": "Apple Pay is not available. Please use a different payment method.",
-    "applePayError": "Something went wrong with Apple Pay. Please try again or use a different payment method."
+    "applePayError": "Something went wrong with Apple Pay. Please try again or use a different payment method.",
+    "generalError": "An error occurred. Please try again or contact support."
   },
   "labels": {
     "card": "Enter card number",

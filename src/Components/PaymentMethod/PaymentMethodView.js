@@ -31,6 +31,7 @@ import { ApplePayButton } from "../ApplePayButton/ApplePayButton";
 import { PaymentMethodUpdateSetDefault } from "../PaymentMethodUpdate/PaymentMethodUpdateSetDefault";
 import { SelectedAddress } from "./SelectedAddress";
 import { HANDLE_APPLEPAY_SHOW } from "../../utils/action-types";
+import { usePelcro } from "../../hooks/usePelcro";
 
 /**
  *@return {paymentMethodView}
@@ -51,6 +52,7 @@ export function PaymentMethodView({
 }) {
   const { t } = useTranslation("checkoutForm");
   const cardProcessor = getSiteCardProcessor();
+  const { site, user } = usePelcro();
 
   const vantivSettings = window.Pelcro.site.read()?.vantiv_gateway_settings;
   const supportsVantiv = Boolean(vantivSettings);
@@ -82,6 +84,25 @@ export function PaymentMethodView({
         label: currentPlan?.nickname || 'Subscription'
       }
     });
+  };
+
+  const handleAddressCreated = (data) => {
+    if (!data) return;
+    
+    try {
+      window.Pelcro.insight.track("Customer Address Created", {
+        platform: "views"
+      });
+      
+      if (window.Pelcro.user.set && typeof window.Pelcro.user.set === 'function') {
+        window.Pelcro.user.set(data);
+      }
+      
+      const event = new CustomEvent('addressCreated', { detail: { data } });
+      document.dispatchEvent(event);
+    } catch (error) {
+      console.error('Error handling address creation:', error);
+    }
   };
 
   return (

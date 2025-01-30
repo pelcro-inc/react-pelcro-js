@@ -118,7 +118,8 @@ const initialState = {
   alert: {
     type: "error",
     content: ""
-  }
+  },
+  userCurrency: window.Pelcro.site.read()?.default_currency || 'USD'
 };
 const store = createContext(initialState);
 const { Provider } = store;
@@ -2954,43 +2955,66 @@ const PaymentMethodContainerWithoutStripe = ({
             (state, dispatch) => {
               const { amount, currency, label } = action.payload;
               
-              // Initialize Apple Pay session directly from click handler
-              const session = new ApplePaySession(3, {
-                countryCode: 'US',
-                currencyCode: currency.toUpperCase(),
-                supportedNetworks: ['visa', 'masterCard', 'amex'],
-                merchantCapabilities: ['supports3DS'],
-                total: {
-                  label: label,
-                  amount: amount
-                }
-              });
-
-              session.onvalidatemerchant = (event) => {
-                window.Pelcro.payment.validateApplePayMerchant(
-                  {
-                    validationURL: event.validationURL
-                  },
-                  (err, res) => {
-                    if (err) {
-                      session.abort();
-                      return;
-                    }
-                    session.completeMerchantValidation(res.merchantSession);
+              // Add safety checks for currency
+              const currencyCode = currency?.toUpperCase() || 'USD';
+              
+              try {
+                const session = new ApplePaySession(3, {
+                  countryCode: window.Pelcro.site.read()?.country_code || 'US',
+                  currencyCode,
+                  supportedNetworks: ['visa', 'masterCard', 'amex'],
+                  merchantCapabilities: ['supports3DS'],
+                  total: {
+                    label: label || 'Payment',
+                    amount: amount || 0
                   }
-                );
-              };
-
-              session.onpaymentauthorized = (event) => {
-                const token = event.payment.token;
-                dispatch({
-                  type: HANDLE_APPLEPAY_SUBSCRIPTION,
-                  payload: token
                 });
-                session.completePayment(ApplePaySession.STATUS_SUCCESS);
-              };
 
-              session.begin();
+                // Rest of the session setup...
+                session.onvalidatemerchant = (event) => {
+                  window.Pelcro.payment.validateApplePayMerchant(
+                    {
+                      validationURL: event.validationURL
+                    },
+                    (err, res) => {
+                      if (err) {
+                        session.abort();
+                        handleApplePayError(err);
+                        return;
+                      }
+                      try {
+                        session.completeMerchantValidation(res.merchantSession);
+                      } catch (error) {
+                        handleApplePayError(error);
+                        session.abort();
+                      }
+                    }
+                  );
+                };
+
+                session.onpaymentauthorized = (event) => {
+                  try {
+                    const token = event.payment.token;
+                    dispatch({
+                      type: HANDLE_APPLEPAY_SUBSCRIPTION,
+                      payload: token
+                    });
+                    session.completePayment(ApplePaySession.STATUS_SUCCESS);
+                  } catch (error) {
+                    handleApplePayError(error);
+                    session.completePayment(ApplePaySession.STATUS_FAILURE);
+                  }
+                };
+
+                session.oncancel = () => {
+                  // Handle cancel silently
+                  console.log("Apple Pay session cancelled by user");
+                };
+
+                session.begin();
+              } catch (error) {
+                handleApplePayError(error);
+              }
             }
           );
 
@@ -3013,10 +3037,27 @@ const PaymentMethodContainerWithoutStripe = ({
     console.error("Apple Pay error:", error);
   };
 
-  // Update the Apple Pay session error handler
-  session.oncancel = () => {
-    handleApplePayError(new Error("Apple Pay session cancelled"));
-  };
+  // Add error boundary
+  useEffect(() => {
+    const handleUnhandledRejection = (event) => {
+      event.preventDefault();
+      console.error('Unhandled promise rejection:', event.reason);
+      
+      dispatch({
+        type: SHOW_ALERT,
+        payload: {
+          type: "error",
+          content: t("messages.generalError")
+        }
+      });
+    };
+
+    window.addEventListener('unhandledrejection', handleUnhandledRejection);
+    
+    return () => {
+      window.removeEventListener('unhandledrejection', handleUnhandledRejection);
+    };
+  }, []);
 
   return (
     <div
