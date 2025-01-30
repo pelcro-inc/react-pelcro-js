@@ -49,7 +49,8 @@ import {
   UPDATE_CYBERSOURCE_SESSION_ID,
   HANDLE_APPLEPAY_SUBSCRIPTION,
   HANDLE_CHECKBOX_CHANGE,
-  SET_IS_DEFAULT_PAYMENT_METHOD
+  SET_IS_DEFAULT_PAYMENT_METHOD,
+  HANDLE_APPLEPAY_SHOW
 } from "../../utils/action-types";
 import {
   getErrorMessages,
@@ -117,7 +118,8 @@ const initialState = {
   alert: {
     type: "error",
     content: ""
-  }
+  },
+  userCurrency: window.Pelcro.site.read()?.default_currency || 'USD'
 };
 const store = createContext(initialState);
 const { Provider } = store;
@@ -2817,9 +2819,19 @@ const PaymentMethodContainerWithoutStripe = ({
           });
 
         case HANDLE_APPLEPAY_SUBSCRIPTION:
-          return UpdateWithSideEffect(state, (state, dispatch) => {
-            setVantivPaymentRequest(action.payload);
-          });
+          return UpdateWithSideEffect(
+            { ...state, applePaySource: action.payload },
+            (state, dispatch) => {
+              const gateway = new VantivGateway();
+              if (type === "createPayment") {
+                subscribe(gateway, action.payload, state, dispatch);
+              } else if (type === "orderCreate") {
+                purchase(gateway, action.payload, state, dispatch);
+              } else if (type === "invoicePayment") {
+                payInvoice(gateway, action.payload, dispatch);
+              }
+            }
+          );
 
         case SET_UPDATED_PRICE:
           return Update({ ...state, updatedPrice: action.payload });
@@ -2937,12 +2949,151 @@ const PaymentMethodContainerWithoutStripe = ({
             ...action.payload
           });
 
+        case HANDLE_APPLEPAY_SHOW:
+          return UpdateWithSideEffect(
+            { ...state },
+            async (state, dispatch) => {
+              // Add WordPress compatibility check
+              const wpCompatibility = checkWordPressCompatibility();
+              if (!wpCompatibility.isValid) {
+                return dispatch({
+                  type: SHOW_ALERT,
+                  payload: {
+                    type: "error",
+                    content: t("messages.applePayNotConfigured")
+                  }
+                });
+              }
+
+              const { amount, currency, label } = action.payload;
+              const site = window.Pelcro.site.read();
+              
+              // Check if Apple Pay is available
+              if (!window.ApplePaySession || !ApplePaySession.canMakePayments()) {
+                return dispatch({
+                  type: SHOW_ALERT,
+                  payload: {
+                    type: "error",
+                    content: t("messages.applePayNotAvailable")
+                  }
+                });
+              }
+
+              // Get merchant ID from site settings
+              const merchantId = site?.vantiv_gateway_settings?.apple_pay_merchant_id;
+              if (!merchantId) {
+                return dispatch({
+                  type: SHOW_ALERT,
+                  payload: {
+                    type: "error",
+                    content: t("messages.applePayNotConfigured")
+                  }
+                });
+              }
+
+              const paymentRequest = {
+                countryCode: site?.country_code || 'US',
+                currencyCode: (currency || site?.default_currency || 'USD').toUpperCase(),
+                merchantCapabilities: ['supports3DS'],
+                supportedNetworks: ['visa', 'masterCard', 'amex'],
+                total: {
+                  label: label || site?.name || 'Payment',
+                  amount: (amount / 100).toFixed(2) // Convert cents to dollars
+                }
+              };
+
+              try {
+                // Create and begin session immediately on user interaction
+                const session = new ApplePaySession(3, paymentRequest);
+                
+                session.onvalidatemerchant = (event) => {
+                  window.Pelcro.payment.validateApplePayMerchant(
+                    { validationURL: event.validationURL },
+                    (err, res) => {
+                      if (err) {
+                        console.error('Merchant validation error:', err);
+                        session.abort();
+                        return dispatch({
+                          type: SHOW_ALERT,
+                          payload: {
+                            type: "error",
+                            content: t("messages.applePayError")
+                          }
+                        });
+                      }
+                      session.completeMerchantValidation(res.merchantSession);
+                    }
+                  );
+                };
+
+                session.onpaymentauthorized = (event) => {
+                  const token = event.payment.token;
+                  dispatch({
+                    type: HANDLE_APPLEPAY_SUBSCRIPTION,
+                    payload: token
+                  });
+                  session.completePayment(ApplePaySession.STATUS_SUCCESS);
+                };
+
+                session.oncancel = () => {
+                  console.log("Apple Pay session cancelled by user");
+                };
+
+                // Begin the session immediately
+                session.begin();
+              } catch (error) {
+                console.error('Apple Pay session error:', error);
+                dispatch({
+                  type: SHOW_ALERT,
+                  payload: {
+                    type: "error",
+                    content: t("messages.applePayError")
+                  }
+                });
+              }
+            }
+          );
+
         default:
           return state;
       }
     },
     initialState
   );
+
+  // Add to the error handling section
+  const handleApplePayError = (error) => {
+    dispatch({
+      type: SHOW_ALERT,
+      payload: {
+        type: "error",
+        content: t("messages.applePayError")
+      }
+    });
+    console.error("Apple Pay error:", error);
+  };
+
+  // Add error boundary
+  useEffect(() => {
+    const handleUnhandledRejection = (event) => {
+      event.preventDefault();
+      console.error('Unhandled promise rejection:', event.reason);
+      
+      dispatch({
+        type: SHOW_ALERT,
+        payload: {
+          type: "error",
+          content: t("messages.generalError")
+        }
+      });
+    };
+
+    window.addEventListener('unhandledrejection', handleUnhandledRejection);
+    
+    return () => {
+      window.removeEventListener('unhandledrejection', handleUnhandledRejection);
+    };
+  }, []);
 
   return (
     <div
@@ -3046,3 +3197,23 @@ const PaymentMethodContainer = (props) => {
 };
 
 export { PaymentMethodContainer, store };
+
+// Add WordPress specific checks
+const checkWordPressCompatibility = () => {
+  // Check if we're in WordPress environment
+  const isWordPress = window?.Pelcro?.uiSettings?.platform === 'wordpress';
+  
+  if (isWordPress) {
+    // Ensure WordPress specific settings are loaded
+    const wpSettings = window?.Pelcro?.uiSettings?.wordpressSettings;
+    const vantivSettings = window?.Pelcro?.site?.read()?.vantiv_gateway_settings;
+    
+    return {
+      isValid: Boolean(wpSettings && vantivSettings?.apple_pay_enabled),
+      merchantId: vantivSettings?.apple_pay_merchant_id,
+      environment: vantivSettings?.environment
+    };
+  }
+  
+  return { isValid: true }; // Non-WordPress environment
+};

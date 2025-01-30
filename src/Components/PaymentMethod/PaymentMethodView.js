@@ -30,6 +30,8 @@ import {
 import { ApplePayButton } from "../ApplePayButton/ApplePayButton";
 import { PaymentMethodUpdateSetDefault } from "../PaymentMethodUpdate/PaymentMethodUpdateSetDefault";
 import { SelectedAddress } from "./SelectedAddress";
+import { HANDLE_APPLEPAY_SHOW } from "../../utils/action-types";
+import { usePelcro } from "../../hooks/usePelcro";
 
 /**
  *@return {paymentMethodView}
@@ -50,10 +52,12 @@ export function PaymentMethodView({
 }) {
   const { t } = useTranslation("checkoutForm");
   const cardProcessor = getSiteCardProcessor();
+  const { site, user } = usePelcro();
 
-  const supportsVantiv = Boolean(
-    window.Pelcro.site.read()?.vantiv_gateway_settings
-  );
+  const vantivSettings = window.Pelcro.site.read()?.vantiv_gateway_settings;
+  const supportsVantiv = Boolean(vantivSettings);
+  const isApplePayEnabled = Boolean(vantivSettings?.apple_pay_enabled);
+  const hasApplePayMerchantId = Boolean(vantivSettings?.apple_pay_merchant_id);
 
   const supportsTap = Boolean(
     window.Pelcro.site.read()?.tap_gateway_settings
@@ -68,6 +72,53 @@ export function PaymentMethodView({
   );
   const isUserLastName = Boolean(window.Pelcro.user.read().last_name);
   const isUserPhone = Boolean(window.Pelcro.user.read().phone);
+
+  const handleApplePayButtonClick = (event) => {
+    if (!event.isTrusted) return;
+    
+    event.preventDefault();
+    
+    dispatch({
+      type: HANDLE_APPLEPAY_SHOW,
+      payload: {
+        amount: updatedPrice ?? currentPlan?.amount ?? 0,
+        currency: currentPlan?.currency,
+        label: currentPlan?.nickname || currentPlan?.description || 'Subscription'
+      }
+    });
+  };
+
+  const handleAddressCreated = (data) => {
+    if (!data) return;
+    
+    try {
+      window.Pelcro.insight.track("Customer Address Created", {
+        platform: "views"
+      });
+      
+      if (window.Pelcro.user.set && typeof window.Pelcro.user.set === 'function') {
+        window.Pelcro.user.set(data);
+      }
+      
+      const event = new CustomEvent('addressCreated', { detail: { data } });
+      document.dispatchEvent(event);
+    } catch (error) {
+      console.error('Error handling address creation:', error);
+    }
+  };
+
+  // Add WordPress specific checks
+  const isApplePayAvailableForWordPress = () => {
+    const isWordPress = window?.Pelcro?.uiSettings?.platform === 'wordpress';
+    if (!isWordPress) return true; // Not WordPress, proceed normally
+
+    const vantivSettings = window?.Pelcro?.site?.read()?.vantiv_gateway_settings;
+    return Boolean(
+      vantivSettings?.apple_pay_enabled &&
+      vantivSettings?.apple_pay_merchant_id &&
+      window.ApplePaySession?.canMakePayments()
+    );
+  };
 
   return (
     <div className="plc-flex plc-flex-col plc-items-center plc-mt-4 plc-px-8 md:plc-px-0 pelcro-payment-block">
@@ -203,11 +254,18 @@ export function PaymentMethodView({
                     <PaypalSubscribeButton />
                   </>
                 ) : null}
-                {showApplePayButton && supportsVantiv ? (
-                  <>
-                    <ApplePayButton />
-                  </>
-                ) : null}
+                {showApplePayButton && isApplePayAvailableForWordPress() && (
+                  <div className="plc-mt-4">
+                    <button
+                      id="pelcro-apple-pay-button"
+                      onClick={handleApplePayButtonClick}
+                      className="plc-w-full plc-py-3 plc-bg-black plc-text-white plc-rounded"
+                      type="button"
+                    >
+                      Pay with Apple Pay
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
           )}

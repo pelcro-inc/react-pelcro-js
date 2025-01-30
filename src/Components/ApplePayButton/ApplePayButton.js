@@ -69,29 +69,22 @@ export const ApplePayButton = ({ onClick, props, ...otherProps }) => {
   const orderLabel = getOrderInfo().label;
 
   useEffect(() => {
+    if (!ApplePayMerchantId) {
+      console.error("Apple Pay Merchant ID is not configured");
+      return;
+    }
+
     if (window.ApplePaySession) {
-      // Indicates whether the device supports Apple Pay and whether the user has an active card in Wallet.
-      // eslint-disable-next-line no-undef
-      const promise = ApplePaySession.canMakePaymentsWithActiveCard(
-        ApplePayMerchantId
-      );
-      promise.then(function (canMakePayments) {
-        if (canMakePayments && ApplePayEnabled) {
-          // Display Apple Pay Buttons here…
-          const pelcroApplyPayButton = document.getElementById(
-            "pelcro-apple-pay-button"
-          );
-          if (pelcroApplyPayButton) {
+      ApplePaySession.canMakePaymentsWithActiveCard(ApplePayMerchantId)
+        .then((canMakePayments) => {
+          const pelcroApplyPayButton = document.getElementById("pelcro-apple-pay-button");
+          if (canMakePayments && ApplePayEnabled && pelcroApplyPayButton) {
             pelcroApplyPayButton.style.display = "block";
           }
-          console.log(
-            "ApplePay canMakePayments function: ",
-            canMakePayments
-          );
-        }
-      });
-    } else {
-      console.error("ApplePay is not available on this browser");
+        })
+        .catch((error) => {
+          console.error("Error checking Apple Pay availability:", error);
+        });
     }
   }, []);
 
