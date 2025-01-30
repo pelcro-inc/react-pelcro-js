@@ -30,6 +30,7 @@ import {
 import { ApplePayButton } from "../ApplePayButton/ApplePayButton";
 import { PaymentMethodUpdateSetDefault } from "../PaymentMethodUpdate/PaymentMethodUpdateSetDefault";
 import { SelectedAddress } from "./SelectedAddress";
+import { HANDLE_APPLEPAY_SHOW } from "../../utils/action-types";
 
 /**
  *@return {paymentMethodView}
@@ -69,6 +70,19 @@ export function PaymentMethodView({
   );
   const isUserLastName = Boolean(window.Pelcro.user.read().last_name);
   const isUserPhone = Boolean(window.Pelcro.user.read().phone);
+
+  const handleApplePayButtonClick = (event) => {
+    if (!event.isTrusted) return;
+    
+    dispatch({
+      type: HANDLE_APPLEPAY_SHOW,
+      payload: {
+        amount: updatedPrice ?? currentPlan?.amount,
+        currency: currentPlan?.currency,
+        label: currentPlan?.nickname || 'Subscription'
+      }
+    });
+  };
 
   return (
     <div className="plc-flex plc-flex-col plc-items-center plc-mt-4 plc-px-8 md:plc-px-0 pelcro-payment-block">
@@ -204,21 +218,17 @@ export function PaymentMethodView({
                     <PaypalSubscribeButton />
                   </>
                 ) : null}
-                {showApplePayButton && supportsVantiv && isApplePayEnabled && hasApplePayMerchantId ? (
-                  <div className="plc-w-full">
-                    <ApplePayButton
-                      onError={(error) => {
-                        dispatch({
-                          type: SHOW_ALERT,
-                          payload: {
-                            type: "error",
-                            content: error.message || t("messages.applePayError")
-                          }
-                        });
-                      }}
-                    />
+                {showApplePayButton && (
+                  <div className="plc-mt-4">
+                    <button
+                      id="pelcro-apple-pay-button"
+                      onClick={handleApplePayButtonClick}
+                      className="plc-w-full plc-py-3 plc-bg-black plc-text-white plc-rounded"
+                    >
+                      Pay with Apple Pay
+                    </button>
                   </div>
-                ) : null}
+                )}
               </div>
             </div>
           )}

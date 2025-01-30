@@ -49,7 +49,8 @@ import {
   UPDATE_CYBERSOURCE_SESSION_ID,
   HANDLE_APPLEPAY_SUBSCRIPTION,
   HANDLE_CHECKBOX_CHANGE,
-  SET_IS_DEFAULT_PAYMENT_METHOD
+  SET_IS_DEFAULT_PAYMENT_METHOD,
+  HANDLE_APPLEPAY_SHOW
 } from "../../utils/action-types";
 import {
   getErrorMessages,
@@ -2947,12 +2948,75 @@ const PaymentMethodContainerWithoutStripe = ({
             ...action.payload
           });
 
+        case HANDLE_APPLEPAY_SHOW:
+          return UpdateWithSideEffect(
+            { ...state },
+            (state, dispatch) => {
+              const { amount, currency, label } = action.payload;
+              
+              // Initialize Apple Pay session directly from click handler
+              const session = new ApplePaySession(3, {
+                countryCode: 'US',
+                currencyCode: currency.toUpperCase(),
+                supportedNetworks: ['visa', 'masterCard', 'amex'],
+                merchantCapabilities: ['supports3DS'],
+                total: {
+                  label: label,
+                  amount: amount
+                }
+              });
+
+              session.onvalidatemerchant = (event) => {
+                window.Pelcro.payment.validateApplePayMerchant(
+                  {
+                    validationURL: event.validationURL
+                  },
+                  (err, res) => {
+                    if (err) {
+                      session.abort();
+                      return;
+                    }
+                    session.completeMerchantValidation(res.merchantSession);
+                  }
+                );
+              };
+
+              session.onpaymentauthorized = (event) => {
+                const token = event.payment.token;
+                dispatch({
+                  type: HANDLE_APPLEPAY_SUBSCRIPTION,
+                  payload: token
+                });
+                session.completePayment(ApplePaySession.STATUS_SUCCESS);
+              };
+
+              session.begin();
+            }
+          );
+
         default:
           return state;
       }
     },
     initialState
   );
+
+  // Add to the error handling section
+  const handleApplePayError = (error) => {
+    dispatch({
+      type: SHOW_ALERT,
+      payload: {
+        type: "error",
+        content: t("messages.applePayError")
+      }
+    });
+    console.error("Apple Pay error:", error);
+  };
+
+  // Update the Apple Pay session error handler
+  session.oncancel = () => {
+    handleApplePayError(new Error("Apple Pay session cancelled"));
+  };
 
   return (
     <div
