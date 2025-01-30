@@ -2952,68 +2952,104 @@ const PaymentMethodContainerWithoutStripe = ({
         case HANDLE_APPLEPAY_SHOW:
           return UpdateWithSideEffect(
             { ...state },
-            (state, dispatch) => {
-              const { amount, currency, label } = action.payload;
-              
-              // Add safety checks for currency
-              const currencyCode = currency?.toUpperCase() || 'USD';
-              
-              try {
-                const session = new ApplePaySession(3, {
-                  countryCode: window.Pelcro.site.read()?.country_code || 'US',
-                  currencyCode,
-                  supportedNetworks: ['visa', 'masterCard', 'amex'],
-                  merchantCapabilities: ['supports3DS'],
-                  total: {
-                    label: label || 'Payment',
-                    amount: amount || 0
+            async (state, dispatch) => {
+              // Add WordPress compatibility check
+              const wpCompatibility = checkWordPressCompatibility();
+              if (!wpCompatibility.isValid) {
+                return dispatch({
+                  type: SHOW_ALERT,
+                  payload: {
+                    type: "error",
+                    content: t("messages.applePayNotConfigured")
                   }
                 });
+              }
 
-                // Rest of the session setup...
+              const { amount, currency, label } = action.payload;
+              const site = window.Pelcro.site.read();
+              
+              // Check if Apple Pay is available
+              if (!window.ApplePaySession || !ApplePaySession.canMakePayments()) {
+                return dispatch({
+                  type: SHOW_ALERT,
+                  payload: {
+                    type: "error",
+                    content: t("messages.applePayNotAvailable")
+                  }
+                });
+              }
+
+              // Get merchant ID from site settings
+              const merchantId = site?.vantiv_gateway_settings?.apple_pay_merchant_id;
+              if (!merchantId) {
+                return dispatch({
+                  type: SHOW_ALERT,
+                  payload: {
+                    type: "error",
+                    content: t("messages.applePayNotConfigured")
+                  }
+                });
+              }
+
+              const paymentRequest = {
+                countryCode: site?.country_code || 'US',
+                currencyCode: (currency || site?.default_currency || 'USD').toUpperCase(),
+                merchantCapabilities: ['supports3DS'],
+                supportedNetworks: ['visa', 'masterCard', 'amex'],
+                total: {
+                  label: label || site?.name || 'Payment',
+                  amount: (amount / 100).toFixed(2) // Convert cents to dollars
+                }
+              };
+
+              try {
+                // Create and begin session immediately on user interaction
+                const session = new ApplePaySession(3, paymentRequest);
+                
                 session.onvalidatemerchant = (event) => {
                   window.Pelcro.payment.validateApplePayMerchant(
-                    {
-                      validationURL: event.validationURL
-                    },
+                    { validationURL: event.validationURL },
                     (err, res) => {
                       if (err) {
+                        console.error('Merchant validation error:', err);
                         session.abort();
-                        handleApplePayError(err);
-                        return;
+                        return dispatch({
+                          type: SHOW_ALERT,
+                          payload: {
+                            type: "error",
+                            content: t("messages.applePayError")
+                          }
+                        });
                       }
-                      try {
-                        session.completeMerchantValidation(res.merchantSession);
-                      } catch (error) {
-                        handleApplePayError(error);
-                        session.abort();
-                      }
+                      session.completeMerchantValidation(res.merchantSession);
                     }
                   );
                 };
 
                 session.onpaymentauthorized = (event) => {
-                  try {
-                    const token = event.payment.token;
-                    dispatch({
-                      type: HANDLE_APPLEPAY_SUBSCRIPTION,
-                      payload: token
-                    });
-                    session.completePayment(ApplePaySession.STATUS_SUCCESS);
-                  } catch (error) {
-                    handleApplePayError(error);
-                    session.completePayment(ApplePaySession.STATUS_FAILURE);
-                  }
+                  const token = event.payment.token;
+                  dispatch({
+                    type: HANDLE_APPLEPAY_SUBSCRIPTION,
+                    payload: token
+                  });
+                  session.completePayment(ApplePaySession.STATUS_SUCCESS);
                 };
 
                 session.oncancel = () => {
-                  // Handle cancel silently
                   console.log("Apple Pay session cancelled by user");
                 };
 
+                // Begin the session immediately
                 session.begin();
               } catch (error) {
-                handleApplePayError(error);
+                console.error('Apple Pay session error:', error);
+                dispatch({
+                  type: SHOW_ALERT,
+                  payload: {
+                    type: "error",
+                    content: t("messages.applePayError")
+                  }
+                });
               }
             }
           );
@@ -3161,3 +3197,23 @@ const PaymentMethodContainer = (props) => {
 };
 
 export { PaymentMethodContainer, store };
+
+// Add WordPress specific checks
+const checkWordPressCompatibility = () => {
+  // Check if we're in WordPress environment
+  const isWordPress = window?.Pelcro?.uiSettings?.platform === 'wordpress';
+  
+  if (isWordPress) {
+    // Ensure WordPress specific settings are loaded
+    const wpSettings = window?.Pelcro?.uiSettings?.wordpressSettings;
+    const vantivSettings = window?.Pelcro?.site?.read()?.vantiv_gateway_settings;
+    
+    return {
+      isValid: Boolean(wpSettings && vantivSettings?.apple_pay_enabled),
+      merchantId: vantivSettings?.apple_pay_merchant_id,
+      environment: vantivSettings?.environment
+    };
+  }
+  
+  return { isValid: true }; // Non-WordPress environment
+};

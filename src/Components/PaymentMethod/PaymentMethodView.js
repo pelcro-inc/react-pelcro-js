@@ -76,12 +76,14 @@ export function PaymentMethodView({
   const handleApplePayButtonClick = (event) => {
     if (!event.isTrusted) return;
     
+    event.preventDefault();
+    
     dispatch({
       type: HANDLE_APPLEPAY_SHOW,
       payload: {
-        amount: updatedPrice ?? currentPlan?.amount,
+        amount: updatedPrice ?? currentPlan?.amount ?? 0,
         currency: currentPlan?.currency,
-        label: currentPlan?.nickname || 'Subscription'
+        label: currentPlan?.nickname || currentPlan?.description || 'Subscription'
       }
     });
   };
@@ -103,6 +105,19 @@ export function PaymentMethodView({
     } catch (error) {
       console.error('Error handling address creation:', error);
     }
+  };
+
+  // Add WordPress specific checks
+  const isApplePayAvailableForWordPress = () => {
+    const isWordPress = window?.Pelcro?.uiSettings?.platform === 'wordpress';
+    if (!isWordPress) return true; // Not WordPress, proceed normally
+
+    const vantivSettings = window?.Pelcro?.site?.read()?.vantiv_gateway_settings;
+    return Boolean(
+      vantivSettings?.apple_pay_enabled &&
+      vantivSettings?.apple_pay_merchant_id &&
+      window.ApplePaySession?.canMakePayments()
+    );
   };
 
   return (
@@ -239,12 +254,13 @@ export function PaymentMethodView({
                     <PaypalSubscribeButton />
                   </>
                 ) : null}
-                {showApplePayButton && (
+                {showApplePayButton && isApplePayAvailableForWordPress() && (
                   <div className="plc-mt-4">
                     <button
                       id="pelcro-apple-pay-button"
                       onClick={handleApplePayButtonClick}
                       className="plc-w-full plc-py-3 plc-bg-black plc-text-white plc-rounded"
+                      type="button"
                     >
                       Pay with Apple Pay
                     </button>
