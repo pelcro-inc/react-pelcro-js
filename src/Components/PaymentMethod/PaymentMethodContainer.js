@@ -1384,6 +1384,25 @@ const PaymentMethodContainerWithoutStripe = ({
         dispatch({ type: SET_CAN_MAKE_PAYMENT, payload: !!result });
       });
 
+      // Bind the payment request to the user action
+      document
+        .querySelector(".pelcro-button-solid")
+        .addEventListener("click", () => {
+          paymentRequest
+            .show()
+            .then((result) => {
+              if (result.error) {
+                console.error(
+                  "Error showing payment sheet:",
+                  result.error
+                );
+              }
+            })
+            .catch((error) => {
+              console.error("Error with payment request:", error);
+            });
+        });
+
       dispatch({
         type: SET_PAYMENT_REQUEST,
         payload: paymentRequest
