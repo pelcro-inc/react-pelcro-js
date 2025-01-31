@@ -1347,15 +1347,29 @@ const PaymentMethodContainerWithoutStripe = ({
       return;
     try {
       const paymentRequest = stripe.paymentRequest({
-        country: window.Pelcro.user.location.countryCode || "US",
+        country: "US", // Make sure the country is correct
         currency: plan.currency,
         total: {
           label: plan.nickname || plan.description,
           amount: state.updatedPrice || plan.amount
+        },
+        requestPayerName: true,
+        requestPayerEmail: true,
+        requestPayerPhone: true,
+      });
+  
+      // Check if the payment request can be made (supports Apple Pay)
+      paymentRequest.canMakePayment().then((result) => {
+        if (result) {
+          dispatch({ type: SET_CAN_MAKE_PAYMENT, payload: true });
+          // Show Apple Pay as an option if available
+        } else {
+          dispatch({ type: SET_CAN_MAKE_PAYMENT, payload: false });
+          console.log('Apple Pay is not available on this device');
         }
       });
-
-      // When Google pay / Apple pay source created
+  
+      // Handle the source when it's created (when user selects Apple Pay)
       paymentRequest.on("source", ({ complete, source, ...data }) => {
         dispatch({ type: DISABLE_COUPON_BUTTON, payload: true });
         dispatch({ type: DISABLE_SUBMIT, payload: true });
@@ -1379,40 +1393,33 @@ const PaymentMethodContainerWithoutStripe = ({
           payload: source
         });
       });
-
-      paymentRequest.canMakePayment().then((result) => {
-        dispatch({ type: SET_CAN_MAKE_PAYMENT, payload: !!result });
-      });
-
+  
       // Bind the payment request to the user action
       document
         .querySelector(".pelcro-button-solid")
         .addEventListener("click", () => {
+          // Only show the Apple Pay sheet if it can make payments
           paymentRequest
             .show()
             .then((result) => {
               if (result.error) {
-                console.error(
-                  "Error showing payment sheet:",
-                  result.error
-                );
+                console.error("Error showing payment sheet:", result.error);
               }
             })
             .catch((error) => {
               console.error("Error with payment request:", error);
             });
         });
-
+  
       dispatch({
         type: SET_PAYMENT_REQUEST,
         payload: paymentRequest
       });
-    } catch {
-      console.log(
-        "Google Pay/Apple pay isn't available/supported in this country"
-      );
+    } catch (error) {
+      console.error("Google Pay/Apple Pay isn't available/supported in this country", error);
     }
   };
+  
 
   /**
    * Attempt to confirm a Stripe card payment via it's PaymentIntent.
