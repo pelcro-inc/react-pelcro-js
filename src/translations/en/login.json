@@ -1,8 +1,8 @@
 {
   "labels": {
-    "email": "Enter email",
-    "username": "Enter username",
-    "password": "Enter password",
+    "email": "Email",
+    "username": "Username",
+    "password": "Password",
     "required": "required",
     "emailPlaceholder": "Email",
     "passwordPlaceholder": "Password",

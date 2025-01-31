@@ -75,7 +75,7 @@ export function TextInput({
     handleInputChange(fieldNameState);
   }, [finishedTyping, fieldNameState, handleInputChange]);
 
-  // Initialize field name field with user's first name
+  // Initialize field name field with user's First Name
   const loadFieldNameIntoField = () => {
     handleInputChange(
       window.Pelcro?.user?.read()?.metadata?.[fieldName]

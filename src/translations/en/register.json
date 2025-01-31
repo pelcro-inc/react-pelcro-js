@@ -8,9 +8,9 @@
     "password": "Password",
     "email": "Email",
     "passwordPlaceholder": "Create password",
-    "emailPlaceholder": "Enter email",
+    "emailPlaceholder": "Email",
     "required": "required",
-    "firstName": "First name",
+    "firstName": "First Name",
     "lastName": "Last name",
     "phone": "Phone",
     "company": "Company",
@@ -45,13 +45,13 @@
       "firstTitle": "Enter the recipient's information below"
     },
     "labels": {
-      "firstName": "First name",
+      "firstName": "First Name",
       "lastName": "Last name",
       "email": "Email",
       "startDate": "Gift date",
       "giftMessage": "Gift message ({{count}} characters remaining)",
       "required": "required",
-      "firstNamePlaceholder": "First name",
+      "firstNamePlaceholder": "First Name",
       "lastNamePlaceholder": "Last name",
       "emailPlaceholder": "Email Address"
     },

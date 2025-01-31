@@ -54,7 +54,7 @@ export function FirstName({
     handleInputChange(firstName);
   }, [finishedTyping, firstName, handleInputChange]);
 
-  // Initialize first name field with user's first name
+  // Initialize First Name field with user's First Name
   const loadFirstNameIntoField = () => {
     handleInputChange(window.Pelcro.user.read().first_name);
     dispatch({

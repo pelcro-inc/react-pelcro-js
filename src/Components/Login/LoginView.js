@@ -59,6 +59,12 @@ export function LoginView(props) {
             required
             label={t("labels.password")}
           />
+          <LoginButton
+            role="submit"
+            className="plc-w-full plc-mt-2"
+            name={t("labels.login")}
+            id="pelcro-submit"
+          />
           <div className="plc-flex plc-flex-row-reverse">
             <Link
               className="plc-inline-flex plc-items-end plc-text-sm plc-cursor-default plc-h-9"
@@ -70,12 +76,6 @@ export function LoginView(props) {
               </span>
             </Link>
           </div>
-          <LoginButton
-            role="submit"
-            className="plc-w-full plc-mt-2"
-            name={t("labels.login")}
-            id="pelcro-submit"
-          />
           {socialLoginEnabled && (
             <div className="plc-mt-5">
               <div className="plc-flex plc-items-center plc-justify-between ">

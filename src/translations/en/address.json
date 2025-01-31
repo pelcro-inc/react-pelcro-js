@@ -9,7 +9,7 @@
     "city": "City",
     "region": "State/Province/Region",
     "country": "Country",
-    "firstName": "First name",
+    "firstName": "First Name",
     "lastName": "Last name",
     "required": "required",
     "isDefault": "Set as default"
