@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import {
   PaymentRequestButtonElement,
   PaymentElement,
@@ -11,18 +11,22 @@ import { getSiteCardProcessor } from "../Components/common/Helpers";
 import { MonthSelect } from "./MonthSelect";
 import { YearSelect } from "./YearSelect";
 import { Input } from "./Input";
+import { useTranslation } from "react-i18next";
 
-// Add formatPrice helper function
-const formatPrice = (amount, currency = "USD") => {
+// Add this utility function at the top of the file
+const formatAmount = (amount, currency = "USD") => {
   if (!amount) return "0.00";
 
-  const formatter = new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: currency,
-    minimumFractionDigits: 2
-  });
-
-  return formatter.format(amount / 100); // Stripe uses cents
+  try {
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: currency?.toUpperCase() || "USD",
+      minimumFractionDigits: 2
+    }).format(amount / 100);
+  } catch (error) {
+    console.error("Price formatting error:", error);
+    return `${amount / 100} ${currency?.toUpperCase() || "USD"}`;
+  }
 };
 
 export const PelcroPaymentRequestButton = (props) => {
@@ -71,14 +75,41 @@ export const CheckoutForm = ({ type }) => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [walletError, setWalletError] = useState(null);
   const { plan } = usePelcro();
+  const { t } = useTranslation("checkoutForm");
+
+  // Add initialization check
+  useEffect(() => {
+    if (!stripe || !elements) {
+      console.warn("Stripe or Elements not initialized");
+    }
+  }, [stripe, elements]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (!stripe || !elements) return;
 
-    setIsProcessing(true);
+    if (!stripe || !elements) {
+      console.error("Stripe not initialized");
+      setWalletError(
+        "Payment system not initialized. Please try again."
+      );
+      return;
+    }
+
+    if (!plan?.amount) {
+      console.error("Plan amount not found");
+      setWalletError("Invalid plan amount");
+      return;
+    }
+
     try {
+      setIsProcessing(true);
+      setWalletError(null);
+
       const paymentElement = elements.getElement("payment");
+      if (!paymentElement) {
+        throw new Error("Payment element not initialized");
+      }
+
       const { paymentMethod } = await paymentElement.getValue();
 
       if (paymentMethod?.type === "apple_pay") {
@@ -104,7 +135,9 @@ export const CheckoutForm = ({ type }) => {
       if (confirmError) throw confirmError;
     } catch (error) {
       console.error("Payment error:", error);
-      setWalletError(error.message);
+      setWalletError(
+        error.message || "Payment failed. Please try again."
+      );
     } finally {
       setIsProcessing(false);
     }
@@ -149,9 +182,7 @@ export const CheckoutForm = ({ type }) => {
     <div className="pelcro-payment-container">
       {walletError && (
         <div className="pelcro-alert-error plc-mb-2">
-          <div className="plc-inline-flex plc-items-center">
-            <div className="pelcro-alert-content">{walletError}</div>
-          </div>
+          <div className="pelcro-alert-content">{walletError}</div>
         </div>
       )}
 
@@ -163,13 +194,18 @@ export const CheckoutForm = ({ type }) => {
 
         <button
           type="submit"
-          disabled={isProcessing || !stripe || !elements}
+          disabled={
+            isProcessing || !stripe || !elements || !plan?.amount
+          }
           className="pelcro-button-solid plc-w-full plc-py-3 plc-mt-4"
         >
           <span className="plc-capitalize">
             {isProcessing
-              ? "Processing..."
-              : `Pay ${formatPrice(plan?.amount, plan?.currency)}`}
+              ? t("processing") || "Processing..."
+              : `${t("pay")} ${formatAmount(
+                  plan?.amount,
+                  plan?.currency
+                )}`}
           </span>
         </button>
       </form>
