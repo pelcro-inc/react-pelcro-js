@@ -2,7 +2,9 @@ import React, {
   createContext,
   useEffect,
   useRef,
-  useState
+  useState,
+  useMemo,
+  useContext
 } from "react";
 import { useTranslation } from "react-i18next";
 import { loadStripe } from "@stripe/stripe-js";
@@ -2963,86 +2965,92 @@ const PaymentMethodContainerWithoutStripe = ({
 };
 
 const PaymentMethodContainer = (props) => {
-  const [isStripeLoaded, setIsStripeLoaded] = useState(
-    Boolean(window.Stripe)
-  );
-  const { whenUserReady, selectedPaymentMethodId } =
-    usePelcro.getStore();
-  const cardProcessor = getSiteCardProcessor();
+  const [clientSecret, setClientSecret] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const { dispatch } = useContext(store);
 
-  // Create the Stripe object
-  const stripePromise =
-    cardProcessor === "stripe"
-      ? loadStripe(window.Pelcro.environment.stripe, {
-          stripeAccount: window.Pelcro.site.read().account_id
-        })
-      : null;
-  const [clientSecret, setClientSecret] = useState();
-  const appearance = {
-    theme: "stripe",
-    labels: "floating",
-    variables: {
-      colorPrimary:
-        window?.Pelcro?.site?.read()?.design_settings?.primary_color
-    }
-  };
+  useEffect(() => {
+    const initializePayment = async () => {
+      try {
+        const key =
+          window?.Pelcro?.environment?.stripe?.publishableKey;
+        if (!key) {
+          throw new Error("Stripe key missing");
+        }
+
+        // Wait for Pelcro to be ready
+        if (!window?.Pelcro?.user?.read()) {
+          throw new Error("User not initialized");
+        }
+
+        setIsLoading(false);
+      } catch (err) {
+        console.error("Payment initialization error:", err);
+        setError(err.message);
+        setIsLoading(false);
+        dispatch({
+          type: SHOW_ALERT,
+          payload: {
+            type: "error",
+            content: err.message
+          }
+        });
+      }
+    };
+
+    initializePayment();
+  }, [dispatch]);
+
+  if (isLoading) {
+    return <div className="pelcro-loading">Loading payment...</div>;
+  }
+
+  if (error) {
+    return <div className="pelcro-alert-error">{error}</div>;
+  }
 
   const options = {
     clientSecret,
-    paymentMethodCreation: "manual",
-    appearance,
-    loader: "always"
+    appearance: {
+      theme: "stripe",
+      variables: {
+        colorPrimary: "#0A2540",
+        colorBackground: "#ffffff",
+        colorText: "#30313d"
+      }
+    },
+    loader: "auto",
+    paymentMethodConfiguration: {
+      applePay: {
+        merchantCountryCode:
+          window.Pelcro.site.read()?.country || "US",
+        merchantCapabilities: ["supports3DS"],
+        buttonType: "buy",
+        buttonStyle: "black"
+      }
+    },
+    fields: {
+      billingDetails: {
+        name: "auto",
+        email: "auto",
+        phone: "auto",
+        address: "never"
+      }
+    },
+    terms: {
+      card: "never",
+      applePay: "never"
+    }
   };
 
-  useEffect(() => {
-    if (isStripeLoaded && !selectedPaymentMethodId) {
-      window.Pelcro.user.createSetupIntent?.(
-        { auth_token: window.Pelcro.user.read().auth_token },
-        (err, res) => {
-          if (err) {
-            console.error(err);
-          }
-          if (res) {
-            setClientSecret(res.data.client_secret);
-          }
-        }
-      );
-    }
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-  useEffect(() => {
-    whenUserReady(() => {
-      if (!window.Stripe && cardProcessor === "stripe") {
-        document
-          .querySelector('script[src="https://js.stripe.com/v3"]')
-          .addEventListener("load", () => {
-            setIsStripeLoaded(true);
-          });
-      }
-    });
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-  if (isStripeLoaded) {
-    return (
-      <div>
-        {clientSecret || selectedPaymentMethodId ? (
-          <Elements options={options} stripe={stripePromise}>
-            <PaymentMethodContainerWithoutStripe
-              store={store}
-              {...props}
-            />
-          </Elements>
-        ) : (
-          <Loader />
-        )}
-      </div>
-    );
-  } else if (cardProcessor !== "stripe") {
-    return (
-      <PaymentMethodContainerWithoutStripe store={store} {...props} />
-    );
-  }
-  return null;
+  return (
+    <div className="pelcro-payment-wrapper">
+      <Elements options={options} stripe={stripePromise}>
+        <PaymentMethodView {...props} />
+      </Elements>
+    </div>
+  );
 };
 
 export { PaymentMethodContainer, store };
