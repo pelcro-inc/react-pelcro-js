@@ -73,14 +73,15 @@ export const CheckoutForm = ({ type }) => {
   const elements = useElements();
   const [isProcessing, setIsProcessing] = useState(false);
   const [walletError, setWalletError] = useState(null);
+  const [isChecked, setIsChecked] = useState(false);
   const { plan } = usePelcro();
   const { t } = useTranslation("checkoutForm");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (!stripe || !elements) {
-      console.error("Stripe not initialized");
+    if (!stripe || !elements || !isChecked) {
+      console.error("Payment requirements not met");
       return;
     }
 
@@ -88,7 +89,6 @@ export const CheckoutForm = ({ type }) => {
       setIsProcessing(true);
       setWalletError(null);
 
-      // Just submit directly - no getValue needed
       const { error: submitError } = await elements.submit();
       if (submitError) {
         throw submitError;
@@ -129,16 +129,55 @@ export const CheckoutForm = ({ type }) => {
       <PaymentElement
         id="payment-element"
         options={{
+          layout: "tabs",
           paymentMethodOrder: ["apple_pay", "card"],
           wallets: {
             applePay: "auto"
+          },
+          defaultValues: {
+            billingDetails: {
+              name: window?.Pelcro?.user?.read()?.name,
+              email: window?.Pelcro?.user?.read()?.email
+            }
           }
         }}
       />
 
+      <div className="ms-mt-8 ms-mb-6">
+        <div className="plc-flex plc-items-center">
+          <input
+            type="checkbox"
+            className="pelcro-checkbox ms-w-[1.3rem] ms-h-[1.3rem] ms-rounded ms-border-gray-300 ms-mb-3"
+            checked={isChecked}
+            onChange={(e) => setIsChecked(e.target.checked)}
+          />
+          <label className="pelcro-checkbox-label ms-text-xs ms-text-[#6D6E78] ms-font-normal">
+            Please check to confirm you've read and accepted Motor
+            Sport magazine's{" "}
+            <a
+              className="pelcro-link ms-underline"
+              href="https://www.motorsportmagazine.com/terms/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              terms and conditions
+            </a>{" "}
+            and agree to our{" "}
+            <a
+              className="pelcro-link ms-underline"
+              href="https://www.motorsportmagazine.com/privacy-cookies/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              privacy policy
+            </a>
+          </label>
+        </div>
+      </div>
+
       <button
         type="submit"
-        disabled={isProcessing || !stripe || !elements}
+        disabled={isProcessing || !stripe || !elements || !isChecked}
         className="pelcro-button-solid plc-w-full plc-py-3 plc-mt-4"
       >
         <span className="plc-capitalize">
