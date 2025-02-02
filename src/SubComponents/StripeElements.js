@@ -12,7 +12,7 @@ import { MonthSelect } from "./MonthSelect";
 import { YearSelect } from "./YearSelect";
 import { Input } from "./Input";
 import { useTranslation } from "react-i18next";
-import { Loader } from "../Components/Loader";
+import { Loader } from "../SubComponents/Loader";
 
 export const PelcroPaymentRequestButton = (props) => {
   const {
