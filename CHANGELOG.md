@@ -1,3 +1,10 @@
+# [3.44.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.43.0...v3.44.0) (2025-02-02)
+
+
+### Features
+
+* show password eye icon ([#402](https://github.com/pelcro-inc/react-pelcro-js/issues/402)) ([c9123dd](https://github.com/pelcro-inc/react-pelcro-js/commit/c9123dd435328113b3878b3a79f4b28b434db351))
+
 # [3.43.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.42.0...v3.43.0) (2025-01-16)
 
 
