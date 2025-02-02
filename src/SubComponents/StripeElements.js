@@ -12,7 +12,21 @@ import { MonthSelect } from "./MonthSelect";
 import { YearSelect } from "./YearSelect";
 import { Input } from "./Input";
 import { useTranslation } from "react-i18next";
-import { formatAmount } from "../utils/formatAmount";
+
+const formatAmount = (amount, currency = "USD") => {
+  if (!amount) return "0.00";
+
+  try {
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: currency?.toUpperCase() || "USD",
+      minimumFractionDigits: 2
+    }).format(amount / 100);
+  } catch (error) {
+    console.error("Price formatting error:", error);
+    return `${amount / 100} ${currency?.toUpperCase() || "USD"}`;
+  }
+};
 
 export const PelcroPaymentRequestButton = (props) => {
   const {
