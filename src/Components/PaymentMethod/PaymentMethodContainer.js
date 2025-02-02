@@ -2143,60 +2143,66 @@ const PaymentMethodContainerWithoutStripe = ({
 
   const submitPayment = async (state, dispatch) => {
     try {
-      if (skipPayment && props?.freeOrders) {
-        const isQuickPurchase = !Array.isArray(order);
-        const mappedOrderItems = isQuickPurchase
-          ? [{ sku_id: order.id, quantity: order.quantity }]
-          : order.map((item) => ({
-              sku_id: item.id,
-              quantity: item.quantity
-            }));
-        window.Pelcro.ecommerce.order.create(
-          {
-            items: mappedOrderItems,
-            campaign_key:
-              window.Pelcro.helpers.getURLParameter("campaign_key"),
-            ...(selectedAddressId && {
-              address_id: selectedAddressId
-            })
-          },
-          (err, res) => {
-            if (err) {
-              return handlePaymentError(err);
-            }
-            return onSuccess(res);
-          }
-        );
+      // Handle free orders after payment confirmation
+      if (!elements) {
         return;
       }
 
-      // 1. Submit the form immediately on button click
+      // Required by Stripe - must be called first
       const { error: submitError } = await elements.submit();
       if (submitError) {
         handlePaymentError(submitError);
         return;
       }
 
-      // 2. Confirm the payment - this handles all payment methods including Apple Pay
-      const { error: confirmError } = await stripe.confirmPayment({
-        elements,
-        confirmParams: {
-          return_url: `${
-            window.Pelcro.environment.domain
-          }/webhook/stripe/callback/3dsecure?auth_token=${
-            window.Pelcro.user.read().auth_token
-          }`,
-          payment_method_data: {
+      // Create payment method for standard payments
+      stripe
+        .createPaymentMethod({
+          elements,
+          params: {
             billing_details: billingDetails
           }
-        }
-      });
+        })
+        .then((result) => {
+          if (result.error) {
+            return handlePaymentError(result.error);
+          }
+          if (result.paymentMethod) {
+            // Handle order creation after payment success
+            if (skipPayment && props?.freeOrders) {
+              const isQuickPurchase = !Array.isArray(order);
+              const mappedOrderItems = isQuickPurchase
+                ? [{ sku_id: order.id, quantity: order.quantity }]
+                : order.map((item) => ({
+                    sku_id: item.id,
+                    quantity: item.quantity
+                  }));
 
-      if (confirmError) {
-        return handlePaymentError(confirmError);
-      }
-
-      return handlePayment();
+              window.Pelcro.ecommerce.order.create(
+                {
+                  items: mappedOrderItems,
+                  campaign_key:
+                    window.Pelcro.helpers.getURLParameter(
+                      "campaign_key"
+                    ),
+                  ...(selectedAddressId && {
+                    address_id: selectedAddressId
+                  })
+                },
+                (err, res) => {
+                  if (err) {
+                    return handlePaymentError(err);
+                  }
+                  return onSuccess(res);
+                }
+              );
+            }
+            return handlePayment(result.paymentMethod);
+          }
+        })
+        .catch((error) => {
+          return handlePaymentError(error);
+        });
     } catch (error) {
       return handlePaymentError(error);
     } finally {
