@@ -2,7 +2,8 @@ import React, {
   createContext,
   useEffect,
   useRef,
-  useState
+  useState,
+  useMemo
 } from "react";
 import { useTranslation } from "react-i18next";
 import { loadStripe } from "@stripe/stripe-js";
@@ -2110,42 +2111,55 @@ const PaymentMethodContainerWithoutStripe = ({
   };
 
   const submitPayment = async (state, dispatch) => {
-    try {
-      dispatch({ type: LOADING, payload: true });
-
-      // Check if it's an Apple Pay payment
-      const { paymentRequest, paymentMethod } = state;
-      if (paymentMethod?.type === "apple_pay" && paymentRequest) {
-        // Let Stripe handle the Apple Pay flow directly
-        dispatch({ type: LOADING, payload: false });
-        return;
-      }
-
-      // Regular payment flow
-      const result = await window.Pelcro.payment.submit({
-        auth_token: window.Pelcro.user.read().auth_token,
-        payment_method_id: state.selectedPaymentMethodId
-        // ... other payment params
-      });
-
-      if (result.error) {
-        throw new Error(result.error.message);
-      }
-
-      dispatch({ type: SUBMIT_PAYMENT, payload: result });
-    } catch (error) {
-      console.error("Payment submission error:", error);
-      dispatch({
-        type: SHOW_ALERT,
-        payload: {
-          type: "error",
-          content:
-            error.message || "Payment failed. Please try again."
+    if (skipPayment && props?.freeOrders) {
+      const isQuickPurchase = !Array.isArray(order);
+      const mappedOrderItems = isQuickPurchase
+        ? [{ sku_id: order.id, quantity: order.quantity }]
+        : order.map((item) => ({
+            sku_id: item.id,
+            quantity: item.quantity
+          }));
+      window.Pelcro.ecommerce.order.create(
+        {
+          items: mappedOrderItems,
+          campaign_key:
+            window.Pelcro.helpers.getURLParameter("campaign_key"),
+          ...(selectedAddressId && { address_id: selectedAddressId })
+        },
+        (err, res) => {
+          if (err) {
+            return handlePaymentError(err);
+          }
+          return onSuccess(res);
         }
-      });
-    } finally {
-      dispatch({ type: LOADING, payload: false });
+      );
+      return;
     }
+    // Trigger form validation and wallet collection
+    const { error: submitError } = await elements.submit();
+    if (submitError) {
+      handlePaymentError(submitError);
+      return;
+    }
+
+    stripe
+      .createPaymentMethod({
+        elements,
+        params: {
+          billing_details: billingDetails
+        }
+      })
+      .then((result) => {
+        if (result.error) {
+          return handlePaymentError(result.error);
+        }
+        if (result.paymentMethod) {
+          return handlePayment(result.paymentMethod);
+        }
+      })
+      .catch((error) => {
+        return handlePaymentError(error);
+      });
   };
 
   const handlePayment = (stripeSource) => {
@@ -2949,58 +2963,54 @@ const PaymentMethodContainerWithoutStripe = ({
   );
 };
 
-export const PaymentMethodContainer = () => {
-  const stripe = useStripe();
-  const elements = useElements();
+const PaymentMethodContainer = (props) => {
+  const [clientSecret, setClientSecret] = useState(null);
+  const cardProcessor = getSiteCardProcessor();
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const stripePromise = useMemo(() => {
+    const key = window?.Pelcro?.environment?.stripe?.publishableKey;
+    if (!key) return null;
+    return loadStripe(key);
+  }, []);
 
-    if (!stripe || !elements) {
-      return;
-    }
-
-    try {
-      const { error: submitError } = await elements.submit();
-      if (submitError) {
-        throw submitError;
+  const options = {
+    clientSecret,
+    appearance: {
+      theme: "stripe",
+      variables: {
+        colorPrimary: "#0A2540",
+        colorBackground: "#ffffff",
+        colorText: "#30313d"
       }
-
-      const { error: paymentError } = await stripe.confirmPayment({
-        elements,
-        confirmParams: {
-          return_url: `${window.location.origin}/payment-complete`
-        }
-      });
-
-      if (paymentError) {
-        // Handle specific Apple Pay errors
-        if (
-          paymentError.code === "payment_intent_unexpected_state" &&
-          paymentError.type === "validation_error" &&
-          paymentError.message.includes("Apple Pay")
-        ) {
-          console.error("Apple Pay specific error:", paymentError);
-          // Show user-friendly error message
-          setError(
-            "Apple Pay is currently unavailable. Please try another payment method."
-          );
-        } else {
-          setError(paymentError.message);
+    },
+    paymentMethodConfiguration: {
+      applePay: {
+        merchantCountryCode:
+          window.Pelcro.site.read()?.country || "US",
+        merchantCapabilities: ["supports3DS"],
+        buttonType: "buy",
+        buttonStyle: "black",
+        // Add proper validation
+        validate: async () => {
+          const canMakePayment =
+            await stripePromise?.paymentRequest.canMakePayment();
+          return canMakePayment?.applePay === true;
         }
       }
-    } catch (error) {
-      console.error("Payment error:", error);
-      setError(
-        "An error occurred while processing your payment. Please try again."
-      );
-    }
+    },
+    allowedDomains: [window.location.origin, "https://js.stripe.com"],
+    locale: 'auto'
   };
 
+  if (cardProcessor !== "stripe" || !stripePromise) {
+    return null;
+  }
+
   return (
-    <form onSubmit={handleSubmit}>
-      <PaymentElement />
-      <button type="submit">Pay</button>
-    </form>
+    <Elements options={options} stripe={stripePromise}>
+      <PaymentMethodContainerWithoutStripe store={store} {...props} />
+    </Elements>
   );
 };
+
+export { PaymentMethodContainer, store };
