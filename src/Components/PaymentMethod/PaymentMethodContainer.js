@@ -2170,25 +2170,33 @@ const PaymentMethodContainerWithoutStripe = ({
         return;
       }
 
-      // Standard payment flow without any Apple Pay checks
-      stripe
-        .createPaymentMethod({
-          elements,
-          params: {
+      // 1. Submit the form immediately on button click
+      const { error: submitError } = await elements.submit();
+      if (submitError) {
+        handlePaymentError(submitError);
+        return;
+      }
+
+      // 2. Confirm the payment - this handles all payment methods including Apple Pay
+      const { error: confirmError } = await stripe.confirmPayment({
+        elements,
+        confirmParams: {
+          return_url: `${
+            window.Pelcro.environment.domain
+          }/webhook/stripe/callback/3dsecure?auth_token=${
+            window.Pelcro.user.read().auth_token
+          }`,
+          payment_method_data: {
             billing_details: billingDetails
           }
-        })
-        .then((result) => {
-          if (result.error) {
-            return handlePaymentError(result.error);
-          }
-          if (result.paymentMethod) {
-            return handlePayment(result.paymentMethod);
-          }
-        })
-        .catch((error) => {
-          return handlePaymentError(error);
-        });
+        }
+      });
+
+      if (confirmError) {
+        return handlePaymentError(confirmError);
+      }
+
+      return handlePayment();
     } catch (error) {
       return handlePaymentError(error);
     } finally {
