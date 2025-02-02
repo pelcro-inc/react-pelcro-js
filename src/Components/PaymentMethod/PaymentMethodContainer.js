@@ -9,7 +9,8 @@ import { loadStripe } from "@stripe/stripe-js";
 import {
   Elements,
   useStripe,
-  useElements
+  useElements,
+  PaymentElement
 } from "@stripe/react-stripe-js";
 import useReducerWithSideEffects, {
   UpdateWithSideEffect,
@@ -1355,9 +1356,9 @@ const PaymentMethodContainerWithoutStripe = ({
         },
         requestPayerName: true,
         requestPayerEmail: true,
-        requestPayerPhone: true,
+        requestPayerPhone: true
       });
-  
+
       // Check if the payment request can be made (supports Apple Pay)
       paymentRequest.canMakePayment().then((result) => {
         if (result) {
@@ -1365,10 +1366,10 @@ const PaymentMethodContainerWithoutStripe = ({
           // Show Apple Pay as an option if available
         } else {
           dispatch({ type: SET_CAN_MAKE_PAYMENT, payload: false });
-          console.log('Apple Pay is not available on this device');
+          console.log("Apple Pay is not available on this device");
         }
       });
-  
+
       // Handle the source when it's created (when user selects Apple Pay)
       paymentRequest.on("source", ({ complete, source, ...data }) => {
         dispatch({ type: DISABLE_COUPON_BUTTON, payload: true });
@@ -1393,7 +1394,7 @@ const PaymentMethodContainerWithoutStripe = ({
           payload: source
         });
       });
-  
+
       // Bind the payment request to the user action
       document
         .querySelector(".pelcro-button-solid")
@@ -1403,23 +1404,28 @@ const PaymentMethodContainerWithoutStripe = ({
             .show()
             .then((result) => {
               if (result.error) {
-                console.error("Error showing payment sheet:", result.error);
+                console.error(
+                  "Error showing payment sheet:",
+                  result.error
+                );
               }
             })
             .catch((error) => {
               console.error("Error with payment request:", error);
             });
         });
-  
+
       dispatch({
         type: SET_PAYMENT_REQUEST,
         payload: paymentRequest
       });
     } catch (error) {
-      console.error("Google Pay/Apple Pay isn't available/supported in this country", error);
+      console.error(
+        "Google Pay/Apple Pay isn't available/supported in this country",
+        error
+      );
     }
   };
-  
 
   /**
    * Attempt to confirm a Stripe card payment via it's PaymentIntent.
@@ -2136,55 +2142,88 @@ const PaymentMethodContainerWithoutStripe = ({
   };
 
   const submitPayment = async (state, dispatch) => {
-    if (skipPayment && props?.freeOrders) {
-      const isQuickPurchase = !Array.isArray(order);
-      const mappedOrderItems = isQuickPurchase
-        ? [{ sku_id: order.id, quantity: order.quantity }]
-        : order.map((item) => ({
-            sku_id: item.id,
-            quantity: item.quantity
-          }));
-      window.Pelcro.ecommerce.order.create(
-        {
-          items: mappedOrderItems,
-          campaign_key:
-            window.Pelcro.helpers.getURLParameter("campaign_key"),
-          ...(selectedAddressId && { address_id: selectedAddressId })
-        },
-        (err, res) => {
-          if (err) {
-            return handlePaymentError(err);
+    try {
+      if (skipPayment && props?.freeOrders) {
+        const isQuickPurchase = !Array.isArray(order);
+        const mappedOrderItems = isQuickPurchase
+          ? [{ sku_id: order.id, quantity: order.quantity }]
+          : order.map((item) => ({
+              sku_id: item.id,
+              quantity: item.quantity
+            }));
+        window.Pelcro.ecommerce.order.create(
+          {
+            items: mappedOrderItems,
+            campaign_key:
+              window.Pelcro.helpers.getURLParameter("campaign_key"),
+            ...(selectedAddressId && {
+              address_id: selectedAddressId
+            })
+          },
+          (err, res) => {
+            if (err) {
+              return handlePaymentError(err);
+            }
+            return onSuccess(res);
           }
-          return onSuccess(res);
-        }
-      );
-      return;
-    }
-    // Trigger form validation and wallet collection
-    const { error: submitError } = await elements.submit();
-    if (submitError) {
-      handlePaymentError(submitError);
-      return;
-    }
+        );
+        return;
+      }
 
-    stripe
-      .createPaymentMethod({
-        elements,
-        params: {
-          billing_details: billingDetails
+      // For Apple Pay, show payment sheet immediately
+      const paymentElement = elements.getElement(PaymentElement);
+      const { paymentMethod } = await paymentElement.getValue();
+
+      if (paymentMethod?.type === "apple_pay") {
+        const { error: confirmError } = await stripe.confirmPayment({
+          elements,
+          confirmParams: {
+            return_url: `${
+              window.Pelcro.environment.domain
+            }/webhook/stripe/callback/3dsecure?auth_token=${
+              window.Pelcro.user.read().auth_token
+            }`
+          },
+          redirect: "if_required"
+        });
+
+        if (confirmError) {
+          return handlePaymentError(confirmError);
         }
-      })
-      .then((result) => {
-        if (result.error) {
-          return handlePaymentError(result.error);
-        }
-        if (result.paymentMethod) {
-          return handlePayment(result.paymentMethod);
-        }
-      })
-      .catch((error) => {
-        return handlePaymentError(error);
-      });
+        return;
+      }
+
+      // For other payment methods, keep existing flow
+      const { error: submitError } = await elements.submit();
+      if (submitError) {
+        handlePaymentError(submitError);
+        return;
+      }
+
+      stripe
+        .createPaymentMethod({
+          elements,
+          params: {
+            billing_details: billingDetails
+          }
+        })
+        .then((result) => {
+          if (result.error) {
+            return handlePaymentError(result.error);
+          }
+          if (result.paymentMethod) {
+            return handlePayment(result.paymentMethod);
+          }
+        })
+        .catch((error) => {
+          return handlePaymentError(error);
+        });
+    } catch (error) {
+      return handlePaymentError(error);
+    } finally {
+      dispatch({ type: LOADING, payload: false });
+      dispatch({ type: DISABLE_SUBMIT, payload: false });
+    }
   };
 
   const handlePayment = (stripeSource) => {

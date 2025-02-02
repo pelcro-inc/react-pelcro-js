@@ -30,6 +30,7 @@ import {
 import { ApplePayButton } from "../ApplePayButton/ApplePayButton";
 import { PaymentMethodUpdateSetDefault } from "../PaymentMethodUpdate/PaymentMethodUpdateSetDefault";
 import { SelectedAddress } from "./SelectedAddress";
+import { PaymentElement } from "../../SubComponents/StripeElements";
 
 /**
  *@return {paymentMethodView}
@@ -68,6 +69,18 @@ export function PaymentMethodView({
   );
   const isUserLastName = Boolean(window.Pelcro.user.read().last_name);
   const isUserPhone = Boolean(window.Pelcro.user.read().phone);
+
+  const paymentElementOptions = {
+    layout: {
+      type: "tabs",
+      defaultCollapsed: false
+    },
+    paymentMethodOrder: ["apple_pay", "card"], // Put Apple Pay first if you want
+    wallets: {
+      applePay: "auto", // Enable Apple Pay when available
+      googlePay: "auto"
+    }
+  };
 
   return (
     <div className="plc-flex plc-flex-col plc-items-center plc-mt-4 plc-px-8 md:plc-px-0 pelcro-payment-block">
@@ -165,6 +178,11 @@ export function PaymentMethodView({
                     />
                   </>
                 )}
+
+              <PaymentElement
+                id="payment-element"
+                options={paymentElementOptions}
+              />
 
               <CheckoutForm type={type} />
 
