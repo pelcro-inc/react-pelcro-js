@@ -77,7 +77,6 @@ export const CheckoutForm = ({ type }) => {
   const { t } = useTranslation("checkoutForm");
 
   const handleSubmit = async (event) => {
-    // CRITICAL: Must be first, directly after user interaction
     event.preventDefault();
 
     if (!stripe || !elements) {
@@ -89,25 +88,11 @@ export const CheckoutForm = ({ type }) => {
       setIsProcessing(true);
       setWalletError(null);
 
-      // Get payment element FIRST - per documentation
-      const paymentElement = elements.getElement(PaymentElement);
-      if (!paymentElement) {
-        throw new Error("Payment element not initialized");
-      }
-
-      // Handle Apple Pay immediately - must be near top of handler
-      const { paymentMethod } = await paymentElement.getValue();
-      if (paymentMethod?.type === "apple_pay") {
-        const { error: submitError } = await elements.submit();
-        if (submitError) {
-          throw new Error("Apple Pay submission failed");
-        }
-        return; // Let Stripe handle Apple Pay flow
-      }
-
-      // Regular payment flow
+      // Just submit directly - no getValue needed
       const { error: submitError } = await elements.submit();
-      if (submitError) throw submitError;
+      if (submitError) {
+        throw submitError;
+      }
 
       const { error: confirmError } = await stripe.confirmPayment({
         elements,
@@ -122,7 +107,9 @@ export const CheckoutForm = ({ type }) => {
         }
       });
 
-      if (confirmError) throw confirmError;
+      if (confirmError) {
+        throw confirmError;
+      }
     } catch (error) {
       console.error("Payment error:", error);
       setWalletError(error.message || "Payment failed");
@@ -142,6 +129,7 @@ export const CheckoutForm = ({ type }) => {
       <PaymentElement
         id="payment-element"
         options={{
+          paymentMethodOrder: ["apple_pay", "card"],
           wallets: {
             applePay: "auto"
           }
