@@ -2110,55 +2110,42 @@ const PaymentMethodContainerWithoutStripe = ({
   };
 
   const submitPayment = async (state, dispatch) => {
-    if (skipPayment && props?.freeOrders) {
-      const isQuickPurchase = !Array.isArray(order);
-      const mappedOrderItems = isQuickPurchase
-        ? [{ sku_id: order.id, quantity: order.quantity }]
-        : order.map((item) => ({
-            sku_id: item.id,
-            quantity: item.quantity
-          }));
-      window.Pelcro.ecommerce.order.create(
-        {
-          items: mappedOrderItems,
-          campaign_key:
-            window.Pelcro.helpers.getURLParameter("campaign_key"),
-          ...(selectedAddressId && { address_id: selectedAddressId })
-        },
-        (err, res) => {
-          if (err) {
-            return handlePaymentError(err);
-          }
-          return onSuccess(res);
-        }
-      );
-      return;
-    }
-    // Trigger form validation and wallet collection
-    const { error: submitError } = await elements.submit();
-    if (submitError) {
-      handlePaymentError(submitError);
-      return;
-    }
+    try {
+      dispatch({ type: LOADING, payload: true });
 
-    stripe
-      .createPaymentMethod({
-        elements,
-        params: {
-          billing_details: billingDetails
-        }
-      })
-      .then((result) => {
-        if (result.error) {
-          return handlePaymentError(result.error);
-        }
-        if (result.paymentMethod) {
-          return handlePayment(result.paymentMethod);
-        }
-      })
-      .catch((error) => {
-        return handlePaymentError(error);
+      // Check if it's an Apple Pay payment
+      const { paymentRequest, paymentMethod } = state;
+      if (paymentMethod?.type === "apple_pay" && paymentRequest) {
+        // Let Stripe handle the Apple Pay flow directly
+        dispatch({ type: LOADING, payload: false });
+        return;
+      }
+
+      // Regular payment flow
+      const result = await window.Pelcro.payment.submit({
+        auth_token: window.Pelcro.user.read().auth_token,
+        payment_method_id: state.selectedPaymentMethodId
+        // ... other payment params
       });
+
+      if (result.error) {
+        throw new Error(result.error.message);
+      }
+
+      dispatch({ type: SUBMIT_PAYMENT, payload: result });
+    } catch (error) {
+      console.error("Payment submission error:", error);
+      dispatch({
+        type: SHOW_ALERT,
+        payload: {
+          type: "error",
+          content:
+            error.message || "Payment failed. Please try again."
+        }
+      });
+    } finally {
+      dispatch({ type: LOADING, payload: false });
+    }
   };
 
   const handlePayment = (stripeSource) => {
@@ -2963,35 +2950,33 @@ const PaymentMethodContainerWithoutStripe = ({
 };
 
 const PaymentMethodContainer = (props) => {
-  const [isStripeLoaded, setIsStripeLoaded] = useState(
-    Boolean(window.Stripe)
-  );
-  const { whenUserReady, selectedPaymentMethodId } =
-    usePelcro.getStore();
+  const [clientSecret, setClientSecret] = useState(null);
+  const [isStripeLoaded, setIsStripeLoaded] = useState(false);
   const cardProcessor = getSiteCardProcessor();
-
-  // Create the Stripe object
-  const stripePromise =
-    cardProcessor === "stripe"
-      ? loadStripe(window.Pelcro.environment.stripe, {
-          stripeAccount: window.Pelcro.site.read().account_id
-        })
-      : null;
-  const [clientSecret, setClientSecret] = useState();
-  const appearance = {
-    theme: "stripe",
-    labels: "floating",
-    variables: {
-      colorPrimary:
-        window?.Pelcro?.site?.read()?.design_settings?.primary_color
-    }
-  };
+  const stripePromise = loadStripe(
+    window.Pelcro.environment.stripe.publishableKey
+  );
 
   const options = {
     clientSecret,
-    paymentMethodCreation: "manual",
-    appearance,
-    loader: "always"
+    appearance: {
+      theme: "stripe",
+      variables: {
+        colorPrimary: "#0A2540",
+        colorBackground: "#ffffff",
+        colorText: "#30313d",
+        colorDanger: "#df1b41"
+      }
+    },
+    paymentMethodConfiguration: {
+      applePay: {
+        buttonType: "buy",
+        buttonStyle: "black",
+        merchantCountryCode:
+          window.Pelcro.site.read()?.country || "US",
+        merchantCapabilities: ["supports3DS"]
+      }
+    }
   };
 
   useEffect(() => {
