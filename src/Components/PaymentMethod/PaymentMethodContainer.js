@@ -9,7 +9,8 @@ import { loadStripe } from "@stripe/stripe-js";
 import {
   Elements,
   useStripe,
-  useElements
+  useElements,
+  PaymentElement
 } from "@stripe/react-stripe-js";
 import useReducerWithSideEffects, {
   UpdateWithSideEffect,
@@ -2943,6 +2944,37 @@ const PaymentMethodContainerWithoutStripe = ({
     },
     initialState
   );
+
+  const handleSubmit = async (event) => {
+    // CRITICAL: Must be at the top of the handler
+    event.preventDefault();
+
+    if (!stripe || !elements) {
+      console.error("Stripe not initialized");
+      return;
+    }
+
+    try {
+      // Get payment element FIRST before any async operations
+      const paymentElement = elements.getElement(PaymentElement);
+      if (!paymentElement) {
+        throw new Error("Payment element not initialized");
+      }
+
+      // Handle Apple Pay immediately after user interaction
+      const { paymentMethod } = await paymentElement.getValue();
+      if (paymentMethod?.type === "apple_pay") {
+        const { error: submitError } = await elements.submit();
+        if (submitError) throw submitError;
+        return; // Let Stripe handle Apple Pay flow
+      }
+
+      // ... rest of existing payment handling code ...
+    } catch (error) {
+      console.error("Payment error:", error);
+      setError(error.message || "Payment failed");S
+    }
+  };
 
   return (
     <div

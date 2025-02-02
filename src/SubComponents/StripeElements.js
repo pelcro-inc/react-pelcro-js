@@ -1,7 +1,9 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import {
   PaymentRequestButtonElement,
-  PaymentElement
+  PaymentElement,
+  useStripe,
+  useElements
 } from "@stripe/react-stripe-js";
 import { store } from "../Components/PaymentMethod/PaymentMethodContainer";
 import { usePelcro } from "../hooks/usePelcro";
@@ -9,6 +11,8 @@ import { getSiteCardProcessor } from "../Components/common/Helpers";
 import { MonthSelect } from "./MonthSelect";
 import { YearSelect } from "./YearSelect";
 import { Input } from "./Input";
+import { useTranslation } from "react-i18next";
+import { formatAmount } from "../utils/formatAmount";
 
 export const PelcroPaymentRequestButton = (props) => {
   const {
@@ -51,106 +55,99 @@ export const PelcroPaymentRequestButton = (props) => {
 };
 
 export const CheckoutForm = ({ type }) => {
-  const { selectedPaymentMethodId, paymentMethodToEdit } =
-    usePelcro();
-  const cardProcessor = getSiteCardProcessor();
+  const stripe = useStripe();
+  const elements = useElements();
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [walletError, setWalletError] = useState(null);
+  const { plan } = usePelcro();
+  const { t } = useTranslation("checkoutForm");
 
-  const billingDetails = {
-    name: window?.Pelcro?.user?.read()?.name,
-    email: window?.Pelcro?.user?.read()?.email,
-    phone: window?.Pelcro?.user?.read()?.phone
-  };
+  const handleSubmit = async (event) => {
+    // CRITICAL: Must be first, directly after user interaction
+    event.preventDefault();
 
-  const paymentElementOptions = {
-    layout: {
-      type: "tabs", // or accordion
-      defaultCollapsed: false
-    },
-    defaultValues: {
-      billingDetails: billingDetails
-    },
-    fields: {
-      billingDetails: {
-        name: "auto",
-        email: "auto",
-        phone: "auto",
-        address: "never"
+    if (!stripe || !elements) {
+      console.error("Stripe not initialized");
+      return;
+    }
+
+    try {
+      setIsProcessing(true);
+      setWalletError(null);
+
+      // Get payment element FIRST - per documentation
+      const paymentElement = elements.getElement(PaymentElement);
+      if (!paymentElement) {
+        throw new Error("Payment element not initialized");
       }
-    },
-    terms: {
-      applePay: "never",
-      card: "never",
-      googlePay: "never",
-      paypal: "never"
+
+      // Handle Apple Pay immediately - must be near top of handler
+      const { paymentMethod } = await paymentElement.getValue();
+      if (paymentMethod?.type === "apple_pay") {
+        const { error: submitError } = await elements.submit();
+        if (submitError) {
+          throw new Error("Apple Pay submission failed");
+        }
+        return; // Let Stripe handle Apple Pay flow
+      }
+
+      // Regular payment flow
+      const { error: submitError } = await elements.submit();
+      if (submitError) throw submitError;
+
+      const { error: confirmError } = await stripe.confirmPayment({
+        elements,
+        confirmParams: {
+          return_url: window.location.href,
+          payment_method_data: {
+            billing_details: {
+              name: window?.Pelcro?.user?.read()?.name,
+              email: window?.Pelcro?.user?.read()?.email
+            }
+          }
+        }
+      });
+
+      if (confirmError) throw confirmError;
+    } catch (error) {
+      console.error("Payment error:", error);
+      setWalletError(error.message || "Payment failed");
+    } finally {
+      setIsProcessing(false);
     }
   };
 
-  if (selectedPaymentMethodId) {
-    return null;
-  }
-
-  if (cardProcessor === "vantiv") {
-    return <div id="eProtectiframe"></div>;
-  }
-
-  if (cardProcessor === "tap") {
-    return <div id="tapPaymentIframe"></div>;
-  }
-
-  if (cardProcessor === "cybersource") {
-    return (
-      <div>
-        <div
-          id="cybersourceCardNumber"
-          className="pelcro-input-field plc-h-12"
-        ></div>
-        <div className="plc-flex plc-items-end plc-justify-between plc-my-2">
-          <div className="plc-w-6/12 plc-pr-4">
-            <MonthSelect store={store} placeholder="Exp Month *" />
-          </div>
-          <div className="plc-w-6/12">
-            <YearSelect store={store} placeholder="Exp Year *" />
-          </div>
+  return (
+    <form onSubmit={handleSubmit} className="pelcro-payment-form">
+      {walletError && (
+        <div className="pelcro-alert-error plc-mb-2">
+          <div className="pelcro-alert-content">{walletError}</div>
         </div>
-      </div>
-    );
-  }
+      )}
 
-  if (cardProcessor === "stripe") {
-    if (type === "updatePaymentSource") {
-      return (
-        <div>
-          {paymentMethodToEdit ? (
-            <div>
-              <Input
-                className="plc-tracking-widest plc-flex-grow plc-text-center"
-                value={`•••• •••• •••• ${paymentMethodToEdit?.properties?.last4}`}
-                disabled
-              />
-            </div>
-          ) : (
-            <div>
-              <Input className="plc-bg-gray-300 plc-animate-pulse" />
-            </div>
-          )}
-          <div className="plc-flex plc-items-end plc-justify-between plc-my-2">
-            <div className="plc-w-6/12 plc-pr-4">
-              <MonthSelect store={store} placeholder="Exp Month *" />
-            </div>
-            <div className="plc-w-6/12">
-              <YearSelect store={store} placeholder="Exp Year *" />
-            </div>
-          </div>
-        </div>
-      );
-    }
-    return (
       <PaymentElement
         id="payment-element"
-        options={paymentElementOptions}
+        options={{
+          wallets: {
+            applePay: "auto"
+          }
+        }}
       />
-    );
-  }
 
-  return null;
+      <button
+        type="submit"
+        disabled={isProcessing || !stripe || !elements}
+        className="pelcro-button-solid plc-w-full plc-py-3 plc-mt-4"
+      >
+        <span className="plc-capitalize">
+          {isProcessing
+            ? t("processing")
+            : `${t("pay")} ${formatAmount(
+                plan?.amount,
+                plan?.currency
+              )}`}
+        </span>
+      </button>
+    </form>
+  );
 };
