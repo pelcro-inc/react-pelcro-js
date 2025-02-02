@@ -2170,36 +2170,7 @@ const PaymentMethodContainerWithoutStripe = ({
         return;
       }
 
-      // For Apple Pay, show payment sheet immediately
-      const paymentElement = elements.getElement(PaymentElement);
-      const { paymentMethod } = await paymentElement.getValue();
-
-      if (paymentMethod?.type === "apple_pay") {
-        const { error: confirmError } = await stripe.confirmPayment({
-          elements,
-          confirmParams: {
-            return_url: `${
-              window.Pelcro.environment.domain
-            }/webhook/stripe/callback/3dsecure?auth_token=${
-              window.Pelcro.user.read().auth_token
-            }`
-          },
-          redirect: "if_required"
-        });
-
-        if (confirmError) {
-          return handlePaymentError(confirmError);
-        }
-        return;
-      }
-
-      // For other payment methods, keep existing flow
-      const { error: submitError } = await elements.submit();
-      if (submitError) {
-        handlePaymentError(submitError);
-        return;
-      }
-
+      // Standard payment flow without any Apple Pay checks
       stripe
         .createPaymentMethod({
           elements,
