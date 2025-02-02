@@ -2969,7 +2969,10 @@ const PaymentMethodContainer = (props) => {
 
   const stripePromise = useMemo(() => {
     const key = window?.Pelcro?.environment?.stripe?.publishableKey;
-    if (!key) return null;
+    if (!key) {
+      console.error("Stripe key missing");
+      return null;
+    }
     return loadStripe(key);
   }, []);
 
@@ -3007,10 +3010,7 @@ const PaymentMethodContainer = (props) => {
     }
   };
 
-  if (cardProcessor !== "stripe" || !stripePromise) {
-    return null;
-  }
-
+  // Remove the cardProcessor check since it's not needed
   return (
     <div className="pelcro-payment-wrapper">
       <Elements options={options} stripe={stripePromise}>
