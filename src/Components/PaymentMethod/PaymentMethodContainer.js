@@ -1243,7 +1243,7 @@ const PaymentMethodContainerWithoutStripe = ({
     whenUserReady(() => {
       if (skipPayment && (plan?.amount === 0 || props?.freeOrders))
         return;
-      if (cardProcessor === "tap" && !selectedPaymentMethodId) {
+      if (cardProcessor === "tap" && !window.Tapjsli) {
         window.Pelcro.helpers.loadSDK(
           "https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.4/bluebird.min.js",
           "tap-bluebird"
@@ -2949,8 +2949,6 @@ const PaymentMethodContainerWithoutStripe = ({
   );
 };
 
-import { useStripe, useElements } from "@stripe/react-stripe-js";
-
 export const PaymentMethodContainer = () => {
   const stripe = useStripe();
   const elements = useElements();
@@ -3006,5 +3004,3 @@ export const PaymentMethodContainer = () => {
     </form>
   );
 };
-
-
