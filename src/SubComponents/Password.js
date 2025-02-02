@@ -10,6 +10,8 @@ import {
   SET_PASSWORD_ERROR
 } from "../utils/action-types";
 import { Input } from "./Input";
+import { ReactComponent as EyeShowIcon } from "../assets/eye-password-hide.svg";
+import { ReactComponent as EyeIcon } from "../assets/eye-password-show.svg";
 
 export function Password({ store, ...otherProps }) {
   const { t } = useTranslation("common");
@@ -20,6 +22,7 @@ export function Password({ store, ...otherProps }) {
   } = useContext(store);
   const [password, setPassword] = useState(statePassword);
   const [finishedTyping, setFinishedTyping] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleInputChange = useCallback(
     (value) => {
@@ -42,14 +45,31 @@ export function Password({ store, ...otherProps }) {
   }, [finishedTyping, password, handleInputChange]);
 
   return (
-    <Input
-      type="password"
-      error={passwordError}
-      value={password}
-      onChange={(e) => handleInputChange(e.target.value)}
-      onBlur={() => setFinishedTyping(true)}
-      onFocus={() => setFinishedTyping(false)}
-      {...otherProps}
-    />
+    <div className="plc-relative">
+      <Input
+        type={showPassword ? "text" : "password"}
+        error={passwordError}
+        value={password}
+        onChange={(e) => handleInputChange(e.target.value)}
+        onBlur={() => setFinishedTyping(true)}
+        onFocus={() => setFinishedTyping(false)}
+        {...otherProps}
+      />
+      {window?.Pelcro?.uiSettings?.showPassword && (
+        <span
+          onClick={() => setShowPassword(!showPassword)}
+          className="plc-absolute plc-right-2  plc-transform plc--translate-y-1/2 plc-cursor-pointer plc-opacity-50 plc-w-6 plc-h-6"
+          style={{
+            top: "70%"
+          }}
+        >
+          {showPassword ? (
+            <EyeShowIcon className="plc-w-full plc-h-full" />
+          ) : (
+            <EyeIcon className="plc-w-full plc-h-full" />
+          )}
+        </span>
+      )}
+    </div>
   );
 }
