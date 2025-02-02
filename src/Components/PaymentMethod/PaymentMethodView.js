@@ -3,6 +3,7 @@ import {
   PelcroPaymentRequestButton,
   CheckoutForm
 } from "../../SubComponents/StripeElements";
+import { PaymentElement } from "@stripe/react-stripe-js";
 import { useTranslation } from "react-i18next";
 import { DiscountedPrice } from "./DiscountedPrice";
 import { PaymentMethodContainer } from "./PaymentMethodContainer";
@@ -30,7 +31,6 @@ import {
 import { ApplePayButton } from "../ApplePayButton/ApplePayButton";
 import { PaymentMethodUpdateSetDefault } from "../PaymentMethodUpdate/PaymentMethodUpdateSetDefault";
 import { SelectedAddress } from "./SelectedAddress";
-import { PaymentElement } from "../../SubComponents/StripeElements";
 
 /**
  *@return {paymentMethodView}
