@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import {
   PaymentRequestButtonElement,
   PaymentElement,
@@ -12,6 +12,7 @@ import { MonthSelect } from "./MonthSelect";
 import { YearSelect } from "./YearSelect";
 import { Input } from "./Input";
 import { useTranslation } from "react-i18next";
+import { Loader } from "../Components/Loader";
 
 export const PelcroPaymentRequestButton = (props) => {
   const {
@@ -58,14 +59,22 @@ export const CheckoutForm = ({ type }) => {
   const elements = useElements();
   const [isProcessing, setIsProcessing] = useState(false);
   const { t } = useTranslation("checkoutForm");
-  const { selectedPaymentMethodId, paymentMethodToEdit } =
+  const { selectedPaymentMethodId, paymentMethodToEdit, user } =
     usePelcro();
   const cardProcessor = getSiteCardProcessor();
+
+  useEffect(() => {
+    // Ensure user is ready before proceeding
+    if (!window?.Pelcro?.user?.read()) {
+      console.error("User not initialized");
+      return;
+    }
+  }, []);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (!stripe || !elements) {
+    if (!stripe || !elements || !window?.Pelcro?.user?.read()) {
       return;
     }
 
@@ -152,6 +161,11 @@ export const CheckoutForm = ({ type }) => {
       card: "never"
     }
   };
+
+  // Only render when everything is ready
+  if (!stripe || !elements || !window?.Pelcro?.user?.read()) {
+    return <Loader />;
+  }
 
   if (selectedPaymentMethodId) {
     return null;
