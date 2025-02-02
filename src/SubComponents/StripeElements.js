@@ -12,6 +12,19 @@ import { MonthSelect } from "./MonthSelect";
 import { YearSelect } from "./YearSelect";
 import { Input } from "./Input";
 
+// Add formatPrice helper function
+const formatPrice = (amount, currency = "USD") => {
+  if (!amount) return "0.00";
+
+  const formatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: currency,
+    minimumFractionDigits: 2
+  });
+
+  return formatter.format(amount / 100); // Stripe uses cents
+};
+
 export const PelcroPaymentRequestButton = (props) => {
   const {
     state: {
@@ -156,7 +169,7 @@ export const CheckoutForm = ({ type }) => {
           <span className="plc-capitalize">
             {isProcessing
               ? "Processing..."
-              : `pay ${formatPrice(plan?.amount)}`}
+              : `Pay ${formatPrice(plan?.amount, plan?.currency)}`}
           </span>
         </button>
       </form>

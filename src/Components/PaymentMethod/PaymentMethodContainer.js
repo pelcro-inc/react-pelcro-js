@@ -3,7 +3,8 @@ import React, {
   useEffect,
   useRef,
   useState,
-  useMemo
+  useMemo,
+  useContext
 } from "react";
 import { useTranslation } from "react-i18next";
 import { loadStripe } from "@stripe/stripe-js";
@@ -2965,16 +2966,49 @@ const PaymentMethodContainerWithoutStripe = ({
 
 const PaymentMethodContainer = (props) => {
   const [clientSecret, setClientSecret] = useState(null);
-  const cardProcessor = getSiteCardProcessor();
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const { dispatch } = useContext(store);
 
-  const stripePromise = useMemo(() => {
-    const key = window?.Pelcro?.environment?.stripe?.publishableKey;
-    if (!key) {
-      console.error("Stripe key missing");
-      return null;
-    }
-    return loadStripe(key);
-  }, []);
+  useEffect(() => {
+    const initializePayment = async () => {
+      try {
+        const key =
+          window?.Pelcro?.environment?.stripe?.publishableKey;
+        if (!key) {
+          throw new Error("Stripe key missing");
+        }
+
+        // Wait for Pelcro to be ready
+        if (!window?.Pelcro?.user?.read()) {
+          throw new Error("User not initialized");
+        }
+
+        setIsLoading(false);
+      } catch (err) {
+        console.error("Payment initialization error:", err);
+        setError(err.message);
+        setIsLoading(false);
+        dispatch({
+          type: SHOW_ALERT,
+          payload: {
+            type: "error",
+            content: err.message
+          }
+        });
+      }
+    };
+
+    initializePayment();
+  }, [dispatch]);
+
+  if (isLoading) {
+    return <div className="pelcro-loading">Loading payment...</div>;
+  }
+
+  if (error) {
+    return <div className="pelcro-alert-error">{error}</div>;
+  }
 
   const options = {
     clientSecret,
@@ -3010,14 +3044,10 @@ const PaymentMethodContainer = (props) => {
     }
   };
 
-  // Remove the cardProcessor check since it's not needed
   return (
     <div className="pelcro-payment-wrapper">
       <Elements options={options} stripe={stripePromise}>
-        <PaymentMethodContainerWithoutStripe
-          store={store}
-          {...props}
-        />
+        <PaymentMethodView {...props} />
       </Elements>
     </div>
   );
