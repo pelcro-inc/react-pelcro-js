@@ -2983,23 +2983,28 @@ const PaymentMethodContainer = (props) => {
         colorText: "#30313d"
       }
     },
+    loader: "auto",
     paymentMethodConfiguration: {
       applePay: {
         merchantCountryCode:
           window.Pelcro.site.read()?.country || "US",
         merchantCapabilities: ["supports3DS"],
         buttonType: "buy",
-        buttonStyle: "black",
-        // Add proper validation
-        validate: async () => {
-          const canMakePayment =
-            await stripePromise?.paymentRequest.canMakePayment();
-          return canMakePayment?.applePay === true;
-        }
+        buttonStyle: "black"
       }
     },
-    allowedDomains: [window.location.origin, "https://js.stripe.com"],
-    locale: 'auto'
+    fields: {
+      billingDetails: {
+        name: "auto",
+        email: "auto",
+        phone: "auto",
+        address: "never"
+      }
+    },
+    terms: {
+      card: "never",
+      applePay: "never"
+    }
   };
 
   if (cardProcessor !== "stripe" || !stripePromise) {
@@ -3007,9 +3012,14 @@ const PaymentMethodContainer = (props) => {
   }
 
   return (
-    <Elements options={options} stripe={stripePromise}>
-      <PaymentMethodContainerWithoutStripe store={store} {...props} />
-    </Elements>
+    <div className="pelcro-payment-wrapper">
+      <Elements options={options} stripe={stripePromise}>
+        <PaymentMethodContainerWithoutStripe
+          store={store}
+          {...props}
+        />
+      </Elements>
+    </div>
   );
 };
 

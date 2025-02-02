@@ -65,25 +65,26 @@ export const CheckoutForm = ({ type }) => {
 
     setIsProcessing(true);
     try {
-      // Submit form first to validate
-      const { error: submitError } = await elements.submit();
-      if (submitError) throw submitError;
-
-      // Get payment element and method
       const paymentElement = elements.getElement("payment");
       const { paymentMethod } = await paymentElement.getValue();
 
-      // Special handling for Apple Pay
       if (paymentMethod?.type === "apple_pay") {
-        // Let the Payment Element handle the flow
         return;
       }
 
-      // Regular payment flow
+      const { error: submitError } = await elements.submit();
+      if (submitError) throw submitError;
+
       const { error: confirmError } = await stripe.confirmPayment({
         elements,
         confirmParams: {
-          return_url: window.location.href
+          return_url: window.location.href,
+          payment_method_data: {
+            billing_details: {
+              name: window?.Pelcro?.user?.read()?.name,
+              email: window?.Pelcro?.user?.read()?.email
+            }
+          }
         }
       });
 
@@ -102,12 +103,23 @@ export const CheckoutForm = ({ type }) => {
       defaultCollapsed: false
     },
     paymentMethodOrder: ["card", "apple_pay"],
+    fields: {
+      billingDetails: {
+        name: "auto",
+        email: "auto",
+        phone: "auto",
+        address: "never"
+      }
+    },
+    terms: {
+      card: "never",
+      applePay: "never"
+    },
     wallets: {
       applePay: {
         onlyShowIfAvailable: true,
         buttonType: "buy",
         buttonStyle: "black",
-        // Remove buttonInit delay as it causes timing issues
         paymentRequest: {
           country: window.Pelcro.site.read()?.country || "US",
           currency: plan?.currency?.toLowerCase() || "usd",
@@ -121,32 +133,33 @@ export const CheckoutForm = ({ type }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <div className="pelcro-payment-container">
       {walletError && (
         <div className="pelcro-alert-error plc-mb-2">
           <div className="plc-inline-flex plc-items-center">
-            {/* ... error icon ... */}
             <div className="pelcro-alert-content">{walletError}</div>
           </div>
         </div>
       )}
 
-      <PaymentElement
-        id="payment-element"
-        options={paymentElementOptions}
-      />
+      <form onSubmit={handleSubmit}>
+        <PaymentElement
+          id="payment-element"
+          options={paymentElementOptions}
+        />
 
-      <button
-        type="submit"
-        disabled={isProcessing || !stripe || !elements}
-        className="pelcro-button-solid plc-w-full plc-py-3"
-      >
-        <span className="plc-capitalize">
-          {isProcessing
-            ? "Processing..."
-            : `pay ${formatPrice(plan?.amount)}`}
-        </span>
-      </button>
-    </form>
+        <button
+          type="submit"
+          disabled={isProcessing || !stripe || !elements}
+          className="pelcro-button-solid plc-w-full plc-py-3 plc-mt-4"
+        >
+          <span className="plc-capitalize">
+            {isProcessing
+              ? "Processing..."
+              : `pay ${formatPrice(plan?.amount)}`}
+          </span>
+        </button>
+      </form>
+    </div>
   );
 };
