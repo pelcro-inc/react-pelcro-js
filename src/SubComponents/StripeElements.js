@@ -89,6 +89,7 @@ export const CheckoutForm = ({ type }) => {
       setIsProcessing(true);
       setWalletError(null);
 
+      // Submit for both Apple Pay and card payments
       const { error: submitError } = await elements.submit();
       if (submitError) {
         throw submitError;
@@ -119,7 +120,7 @@ export const CheckoutForm = ({ type }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="pelcro-payment-form">
+    <form onSubmit={handleSubmit}>
       {walletError && (
         <div className="pelcro-alert-error plc-mb-2">
           <div className="pelcro-alert-content">{walletError}</div>
@@ -139,6 +140,10 @@ export const CheckoutForm = ({ type }) => {
               name: window?.Pelcro?.user?.read()?.name,
               email: window?.Pelcro?.user?.read()?.email
             }
+          },
+          terms: {
+            card: "never", // Don't show Stripe's terms for cards
+            applePay: "never" // Don't show Stripe's terms for Apple Pay
           }
         }}
       />
