@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import {
   PaymentRequestButtonElement,
   PaymentElement,
@@ -119,6 +119,61 @@ export const CheckoutForm = ({ type }) => {
     }
   };
 
+  useEffect(() => {
+    const showCorrectButtons = () => {
+      // Get only the payment button within this form
+      const regularButtons = document.querySelectorAll(
+        "form .pelcro-button-solid"
+      );
+      const applePayButton = document.querySelector(
+        ".StripeElement.stripe-payment-request-btn"
+      );
+      const paymentRequestButton = document.querySelector(
+        ".PaymentRequestButton"
+      );
+
+      console.log("Regular buttons found:", regularButtons.length);
+
+      // First, hide all regular buttons in this form
+      regularButtons.forEach((button) => {
+        if (button.closest("form")) {
+          button.style.display = "none";
+        }
+      });
+
+      // If Apple Pay exists, make sure it's visible
+      if (applePayButton) {
+        applePayButton.style.display = "";
+      }
+      if (paymentRequestButton) {
+        paymentRequestButton.style.display = "";
+      }
+
+      // If no Apple Pay, show the regular button
+      if (
+        !applePayButton &&
+        !paymentRequestButton &&
+        regularButtons.length > 0
+      ) {
+        regularButtons[0].style.display = "";
+      }
+    };
+
+    // Run immediately
+    showCorrectButtons();
+
+    // Run again after a short delay
+    const timeoutId = setTimeout(showCorrectButtons, 500);
+
+    // Also set up an interval to keep checking
+    const intervalId = setInterval(showCorrectButtons, 1000);
+
+    return () => {
+      clearTimeout(timeoutId);
+      clearInterval(intervalId);
+    };
+  }, []);
+
   return (
     <form onSubmit={handleSubmit}>
       {walletError && (
@@ -142,8 +197,8 @@ export const CheckoutForm = ({ type }) => {
             }
           },
           terms: {
-            card: "never", // Don't show Stripe's terms for cards
-            applePay: "never" // Don't show Stripe's terms for Apple Pay
+            card: "never",
+            applePay: "never"
           }
         }}
       />
@@ -180,20 +235,27 @@ export const CheckoutForm = ({ type }) => {
         </div>
       </div>
 
-      <button
-        type="submit"
-        disabled={isProcessing || !stripe || !elements || !isChecked}
-        className="pelcro-button-solid plc-w-full plc-py-3 plc-mt-4"
-      >
-        <span className="plc-capitalize">
-          {isProcessing
-            ? t("processing")
-            : `${t("pay")} ${formatAmount(
-                plan?.amount,
-                plan?.currency
-              )}`}
-        </span>
-      </button>
+      {!document.querySelector(
+        ".StripeElement.stripe-payment-request-btn"
+      ) &&
+        !document.querySelector(".PaymentRequestButton") && (
+          <button
+            type="submit"
+            disabled={
+              isProcessing || !stripe || !elements || !isChecked
+            }
+            className="pelcro-button-solid plc-w-full plc-py-3 plc-mt-4"
+          >
+            <span className="plc-capitalize">
+              {isProcessing
+                ? t("processing")
+                : `${t("pay")} ${formatAmount(
+                    plan?.amount,
+                    plan?.currency
+                  )}`}
+            </span>
+          </button>
+        )}
     </form>
   );
 };
