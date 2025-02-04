@@ -11,10 +11,9 @@ import {
 } from "@stripe/react-stripe-js";
 import {
   getFormattedPriceByLocal,
-  getPageOrDefaultLanguage,
-  getSiteCardProcessor
+  getPageOrDefaultLanguage
 } from "../../utils/utils";
-
+import { getSiteCardProcessor } from "../common/Helpers";
 export const SubmitPaymentMethod = ({
   onClick,
   isSubmitDisabled,
@@ -24,6 +23,8 @@ export const SubmitPaymentMethod = ({
   const elements = useElements();
   const { plan, selectedPaymentMethodId } = usePelcro();
   const { t } = useTranslation("checkoutForm");
+  const cardProcessor = getSiteCardProcessor();
+
   const {
     dispatch,
     state: {
@@ -84,7 +85,7 @@ export const SubmitPaymentMethod = ({
   };
 
   const handleSubmit = async () => {
-    if (!stripe || !elements) {
+    if (cardProcessor === "stripe" && (!stripe || !elements)) {
       return;
     }
 
@@ -92,7 +93,7 @@ export const SubmitPaymentMethod = ({
     onClick?.();
 
     // If using Stripe, handle the payment confirmation
-    if (elements) {
+    if (cardProcessor === "stripe" && elements) {
       const { error: submitError } = await elements.submit();
       if (submitError) {
         console.error("Submit error:", submitError);
@@ -140,33 +141,59 @@ export const SubmitPaymentMethod = ({
 
   return (
     <>
-      {!selectedPaymentMethodId && (
-        <PaymentElement
-          id="payment-element"
-          options={paymentElementOptions}
-        />
-      )}
+      {/* Show PaymentElement only for Stripe */}
+      {cardProcessor === "stripe" ? (
+        <>
+          {!selectedPaymentMethodId && (
+            <PaymentElement
+              id="payment-element"
+              options={paymentElementOptions}
+            />
+          )}
 
-      <Button
-        role="submit"
-        className="plc-w-full plc-py-3 plc-mt-4"
-        variant="solid"
-        isLoading={isLoading}
-        onClick={handleSubmit}
-        disabled={
-          disableSubmit || isSubmitDisabled || !stripe || !elements
-        }
-        {...otherProps}
-      >
-        {/* Show price on button only if there's a selected plan */}
-        {plan ? (
-          <span className="plc-capitalize ">
-            {t("labels.pay")} {priceFormatted && priceFormatted}
-          </span>
-        ) : (
-          t("labels.submit")
-        )}
-      </Button>
+          <Button
+            role="submit"
+            className="plc-w-full plc-py-3 plc-mt-4"
+            variant="solid"
+            isLoading={isLoading}
+            onClick={handleSubmit}
+            disabled={
+              disableSubmit ||
+              isSubmitDisabled ||
+              !stripe ||
+              !elements
+            }
+            {...otherProps}
+          >
+            {plan ? (
+              <span className="plc-capitalize">
+                {t("labels.pay")} {priceFormatted && priceFormatted}
+              </span>
+            ) : (
+              t("labels.submit")
+            )}
+          </Button>
+        </>
+      ) : (
+        // Show only button for non-Stripe processors
+        <Button
+          role="submit"
+          className="plc-w-full plc-py-3 plc-mt-4"
+          variant="solid"
+          isLoading={isLoading}
+          onClick={handleSubmit}
+          disabled={disableSubmit || isSubmitDisabled}
+          {...otherProps}
+        >
+          {plan ? (
+            <span className="plc-capitalize">
+              {t("labels.pay")} {priceFormatted && priceFormatted}
+            </span>
+          ) : (
+            t("labels.submit")
+          )}
+        </Button>
+      )}
     </>
   );
 };
