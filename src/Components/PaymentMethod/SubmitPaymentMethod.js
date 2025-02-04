@@ -6,7 +6,8 @@ import { SUBMIT_PAYMENT } from "../../utils/action-types";
 import { Button } from "../../SubComponents/Button";
 import {
   getFormattedPriceByLocal,
-  getPageOrDefaultLanguage
+  getPageOrDefaultLanguage,
+  getSiteCardProcessor
 } from "../../utils/utils";
 
 export const SubmitPaymentMethod = ({
@@ -55,6 +56,13 @@ export const SubmitPaymentMethod = ({
   const isUserPhone = Boolean(window.Pelcro.user.read().phone);
 
   const [isDisabled, setDisabled] = useState(true);
+
+  const cardProcessor = getSiteCardProcessor();
+
+  // If using Stripe, don't render this button
+  if (cardProcessor === "stripe") {
+    return null;
+  }
 
   useEffect(() => {
     if (

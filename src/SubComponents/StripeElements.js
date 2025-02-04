@@ -1,7 +1,9 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import {
   PaymentRequestButtonElement,
-  PaymentElement
+  PaymentElement,
+  useStripe,
+  useElements
 } from "@stripe/react-stripe-js";
 import { store } from "../Components/PaymentMethod/PaymentMethodContainer";
 import { usePelcro } from "../hooks/usePelcro";
@@ -9,7 +11,12 @@ import { getSiteCardProcessor } from "../Components/common/Helpers";
 import { MonthSelect } from "./MonthSelect";
 import { YearSelect } from "./YearSelect";
 import { Input } from "./Input";
-
+import { SUBMIT_PAYMENT, LOADING } from "../utils/action-types";
+import { useTranslation } from "react-i18next";
+import {
+  getFormattedPriceByLocal,
+  getPageOrDefaultLanguage
+} from "../utils/utils";
 export const PelcroPaymentRequestButton = (props) => {
   const {
     state: {
@@ -51,9 +58,61 @@ export const PelcroPaymentRequestButton = (props) => {
 };
 
 export const CheckoutForm = ({ type }) => {
-  const { selectedPaymentMethodId, paymentMethodToEdit } =
-    usePelcro();
+  const { plan, selectedPaymentMethodId, paymentMethodToEdit } =
+  usePelcro();
+  const stripe = useStripe();
+  const elements = useElements();
+  const [walletError, setWalletError] = useState(null);
+  const { t } = useTranslation("checkoutForm");
   const cardProcessor = getSiteCardProcessor();
+
+  const {
+    dispatch,
+    state: { disableSubmit }
+  } = useContext(store);
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    if (!stripe || !elements) {
+      console.error("Payment requirements not met");
+      return;
+    }
+
+    dispatch({ type: LOADING, payload: true });
+    setWalletError(null);
+
+    try {
+      const { error: submitError } = await elements.submit();
+      if (submitError) {
+        throw submitError;
+      }
+
+      const { error: confirmError } = await stripe.confirmPayment({
+        elements,
+        confirmParams: {
+          return_url: window.location.href,
+          payment_method_data: {
+            billing_details: {
+              name: window?.Pelcro?.user?.read()?.name,
+              email: window?.Pelcro?.user?.read()?.email
+            }
+          }
+        }
+      });
+
+      if (confirmError) {
+        throw confirmError;
+      }
+
+      // If payment confirmation succeeds, trigger the regular payment flow
+      dispatch({ type: SUBMIT_PAYMENT });
+    } catch (error) {
+      console.error("Payment error:", error);
+      setWalletError(error.message || "Payment failed");
+      dispatch({ type: LOADING, payload: false });
+    }
+  };
 
   const billingDetails = {
     name: window?.Pelcro?.user?.read()?.name,
@@ -63,12 +122,16 @@ export const CheckoutForm = ({ type }) => {
 
   const paymentElementOptions = {
     layout: {
-      type: "tabs", // or accordion
+      type: "tabs",
       defaultCollapsed: false
     },
     defaultValues: {
       billingDetails: billingDetails
     },
+    wallets: {
+      applePay: "auto"
+    },
+    paymentMethodOrder: ["apple_pay", "card"],
     fields: {
       billingDetails: {
         name: "auto",
@@ -144,11 +207,38 @@ export const CheckoutForm = ({ type }) => {
         </div>
       );
     }
+    const priceFormatted = getFormattedPriceByLocal(
+      price * planQuantity,
+      plan?.currency,
+      getPageOrDefaultLanguage()
+    );
     return (
-      <PaymentElement
-        id="payment-element"
-        options={paymentElementOptions}
-      />
+      <form onSubmit={handleSubmit}>
+        {walletError && (
+          <div className="pelcro-alert-error plc-mb-2">
+            <div className="pelcro-alert-content">{walletError}</div>
+          </div>
+        )}
+        <PaymentElement
+          id="payment-element"
+          options={paymentElementOptions}
+        />
+        <button
+          type="submit"
+          disabled={disableSubmit || !stripe || !elements}
+          className="pelcro-button-solid plc-w-full plc-py-3 plc-mt-4"
+        >
+          <span className="plc-capitalize">
+            {plan ? (
+              <span className="plc-capitalize ">
+                {t("labels.pay")} {priceFormatted && priceFormatted}
+              </span>
+            ) : (
+              t("labels.submit")
+            )}
+          </span>
+        </button>
+      </form>
     );
   }
 
