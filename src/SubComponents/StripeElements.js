@@ -207,11 +207,7 @@ export const CheckoutForm = ({ type }) => {
         </div>
       );
     }
-    const priceFormatted = getFormattedPriceByLocal(
-      price * planQuantity,
-      plan?.currency,
-      getPageOrDefaultLanguage()
-    );
+
     return (
       // <PaymentElement
       //   id="payment-element"
