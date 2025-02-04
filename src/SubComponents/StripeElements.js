@@ -59,7 +59,7 @@ export const PelcroPaymentRequestButton = (props) => {
 
 export const CheckoutForm = ({ type }) => {
   const { plan, selectedPaymentMethodId, paymentMethodToEdit } =
-  usePelcro();
+    usePelcro();
   const stripe = useStripe();
   const elements = useElements();
   const [walletError, setWalletError] = useState(null);
@@ -213,32 +213,11 @@ export const CheckoutForm = ({ type }) => {
       getPageOrDefaultLanguage()
     );
     return (
-      <form onSubmit={handleSubmit}>
-        {walletError && (
-          <div className="pelcro-alert-error plc-mb-2">
-            <div className="pelcro-alert-content">{walletError}</div>
-          </div>
-        )}
-        <PaymentElement
-          id="payment-element"
-          options={paymentElementOptions}
-        />
-        <button
-          type="submit"
-          disabled={disableSubmit || !stripe || !elements}
-          className="pelcro-button-solid plc-w-full plc-py-3 plc-mt-4"
-        >
-          <span className="plc-capitalize">
-            {plan ? (
-              <span className="plc-capitalize ">
-                {t("labels.pay")} {priceFormatted && priceFormatted}
-              </span>
-            ) : (
-              t("labels.submit")
-            )}
-          </span>
-        </button>
-      </form>
+      // <PaymentElement
+      //   id="payment-element"
+      //   options={paymentElementOptions}
+      // />
+      <></>
     );
   }
 
