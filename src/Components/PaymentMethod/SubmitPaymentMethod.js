@@ -89,16 +89,27 @@ export const SubmitPaymentMethod = ({
       return;
     }
 
-    dispatch({ type: SUBMIT_PAYMENT });
-    onClick?.();
+    // For non-Stripe processors, dispatch immediately
+    if (cardProcessor !== "stripe") {
+      dispatch({ type: SUBMIT_PAYMENT });
+      onClick?.();
+      return;
+    }
 
-    // If using Stripe, handle the payment confirmation
-    if (cardProcessor === "stripe" && elements) {
+    // For Stripe, ensure elements are ready before dispatching
+    try {
+      // Submit the PaymentElement first
       const { error: submitError } = await elements.submit();
       if (submitError) {
         console.error("Submit error:", submitError);
         return;
       }
+
+      // Only dispatch after successful element submission
+      dispatch({ type: SUBMIT_PAYMENT });
+      onClick?.();
+    } catch (error) {
+      console.error("Payment error:", error);
     }
   };
 
