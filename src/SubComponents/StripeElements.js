@@ -1,7 +1,9 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import {
   PaymentRequestButtonElement,
-  PaymentElement
+  PaymentElement,
+  useStripe,
+  useElements
 } from "@stripe/react-stripe-js";
 import { store } from "../Components/PaymentMethod/PaymentMethodContainer";
 import { usePelcro } from "../hooks/usePelcro";
@@ -9,6 +11,22 @@ import { getSiteCardProcessor } from "../Components/common/Helpers";
 import { MonthSelect } from "./MonthSelect";
 import { YearSelect } from "./YearSelect";
 import { Input } from "./Input";
+import { useTranslation } from "react-i18next";
+
+const formatAmount = (amount, currency = "USD") => {
+  if (!amount) return "0.00";
+
+  try {
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: currency?.toUpperCase() || "USD",
+      minimumFractionDigits: 2
+    }).format(amount / 100);
+  } catch (error) {
+    console.error("Price formatting error:", error);
+    return `${amount / 100} ${currency?.toUpperCase() || "USD"}`;
+  }
+};
 
 export const PelcroPaymentRequestButton = (props) => {
   const {
@@ -51,106 +69,28 @@ export const PelcroPaymentRequestButton = (props) => {
 };
 
 export const CheckoutForm = ({ type }) => {
-  const { selectedPaymentMethodId, paymentMethodToEdit } =
-    usePelcro();
-  const cardProcessor = getSiteCardProcessor();
-
-  const billingDetails = {
-    name: window?.Pelcro?.user?.read()?.name,
-    email: window?.Pelcro?.user?.read()?.email,
-    phone: window?.Pelcro?.user?.read()?.phone
-  };
-
-  const paymentElementOptions = {
-    layout: {
-      type: "tabs", // or accordion
-      defaultCollapsed: false
-    },
-    defaultValues: {
-      billingDetails: billingDetails
-    },
-    fields: {
-      billingDetails: {
-        name: "auto",
-        email: "auto",
-        phone: "auto",
-        address: "never"
-      }
-    },
-    terms: {
-      applePay: "never",
-      card: "never",
-      googlePay: "never",
-      paypal: "never"
-    }
-  };
-
-  if (selectedPaymentMethodId) {
-    return null;
-  }
-
-  if (cardProcessor === "vantiv") {
-    return <div id="eProtectiframe"></div>;
-  }
-
-  if (cardProcessor === "tap") {
-    return <div id="tapPaymentIframe"></div>;
-  }
-
-  if (cardProcessor === "cybersource") {
-    return (
-      <div>
-        <div
-          id="cybersourceCardNumber"
-          className="pelcro-input-field plc-h-12"
-        ></div>
-        <div className="plc-flex plc-items-end plc-justify-between plc-my-2">
-          <div className="plc-w-6/12 plc-pr-4">
-            <MonthSelect store={store} placeholder="Exp Month *" />
-          </div>
-          <div className="plc-w-6/12">
-            <YearSelect store={store} placeholder="Exp Year *" />
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  if (cardProcessor === "stripe") {
-    if (type === "updatePaymentSource") {
-      return (
-        <div>
-          {paymentMethodToEdit ? (
-            <div>
-              <Input
-                className="plc-tracking-widest plc-flex-grow plc-text-center"
-                value={`•••• •••• •••• ${paymentMethodToEdit?.properties?.last4}`}
-                disabled
-              />
-            </div>
-          ) : (
-            <div>
-              <Input className="plc-bg-gray-300 plc-animate-pulse" />
-            </div>
-          )}
-          <div className="plc-flex plc-items-end plc-justify-between plc-my-2">
-            <div className="plc-w-6/12 plc-pr-4">
-              <MonthSelect store={store} placeholder="Exp Month *" />
-            </div>
-            <div className="plc-w-6/12">
-              <YearSelect store={store} placeholder="Exp Year *" />
-            </div>
-          </div>
-        </div>
-      );
-    }
-    return (
+  return (
+    <form>
       <PaymentElement
         id="payment-element"
-        options={paymentElementOptions}
+        options={{
+          layout: "tabs",
+          paymentMethodOrder: ["apple_pay", "card"],
+          wallets: {
+            applePay: "auto"
+          },
+          defaultValues: {
+            billingDetails: {
+              name: window?.Pelcro?.user?.read()?.name,
+              email: window?.Pelcro?.user?.read()?.email
+            }
+          },
+          terms: {
+            card: "never",
+            applePay: "never"
+          }
+        }}
       />
-    );
-  }
-
-  return null;
+    </form>
+  );
 };
