@@ -81,6 +81,15 @@ export const SubmitPaymentMethod = ({
         email: window?.Pelcro?.user?.read()?.email,
         phone: window?.Pelcro?.user?.read()?.phone
       }
+    },
+    payment_request: {
+      country: "US",
+      currency: plan?.currency,
+      total: {
+        label: plan?.nickname || "Payment",
+        amount: price,
+        pending: false
+      }
     }
   };
 
@@ -149,6 +158,24 @@ export const SubmitPaymentMethod = ({
     month,
     year
   ]);
+
+  useEffect(() => {
+    if (elements) {
+      const element = elements.getElement(PaymentElement);
+      if (element) {
+        element.update({
+          payment_request: {
+            currency: plan?.currency?.toLowerCase(),
+            total: {
+              label: plan?.nickname || "Payment",
+              amount: price,
+              pending: false
+            }
+          }
+        });
+      }
+    }
+  }, [price, plan, elements]);
 
   return (
     <>
