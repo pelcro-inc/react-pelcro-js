@@ -92,46 +92,83 @@ export const SubmitPaymentMethod = ({
       }
     }
   };
+  useEffect(() => {
+    if (!elements) return;
+    const element = elements.getElement(PaymentElement);
+    if (element) {
+      element.update({
+        payment_request: {
+          currency: plan?.currency?.toLowerCase(),
+          total: {
+            label: plan?.nickname || "Payment",
+            amount: price,
+            pending: false
+          }
+        }
+      });
+    }
+  }, [price, plan?.currency, plan?.nickname, elements]);
+
+  useEffect(() => {
+    if (!stripe || !plan) return;
+
+    try {
+      const paymentRequest = stripe.paymentRequest({
+        country: "US",
+        currency: plan.currency,
+        total: {
+          label: plan.nickname || "Payment",
+          amount: price,
+          pending: false
+        }
+      });
+
+      paymentRequest.canMakePayment().then((result) => {
+        dispatch({
+          type: "SET_CAN_MAKE_PAYMENT",
+          payload: !!result
+        });
+      });
+
+      dispatch({
+        type: "SET_PAYMENT_REQUEST",
+        payload: paymentRequest
+      });
+    } catch (error) {
+      console.error("Payment request error:", error);
+    }
+  }, [stripe, plan?.currency, plan?.nickname, price, dispatch]);
 
   const handleSubmit = async () => {
-    if (cardProcessor === "stripe" && (!stripe || !elements)) {
-      return;
-    }
-  
     if (cardProcessor !== "stripe") {
       dispatch({ type: SUBMIT_PAYMENT });
       onClick?.();
       return;
     }
-    // Apple Pay flow: Ensure elements are submitted first
+
+    if (!stripe || !elements) return;
+
     try {
-      // const { error: submitError } = await elements.submit();
-      // if (submitError) {
-      //   console.error("Submit error:", submitError);
-      //   return;
-      // }
-  
-      // Confirm payment for Apple Pay
       const { paymentIntent, error } = await stripe.confirmPayment({
         elements,
         confirmParams: {
           return_url: window.location.href,
         },
       });
-  
+
       if (error) {
-        console.error("Apple Pay confirmation error:", error);
+        console.error("Payment error:", error);
         return;
       }
-  
-      console.log("Apple Pay payment successful:", paymentIntent);
+
+      console.log("Payment successful:", paymentIntent);
       dispatch({ type: SUBMIT_PAYMENT });
       onClick?.();
     } catch (error) {
       console.error("Payment error:", error);
     }
   };
-  
+   
   
   useEffect(() => {
     if (
@@ -169,24 +206,6 @@ export const SubmitPaymentMethod = ({
     month,
     year
   ]);
-
-  useEffect(() => {
-    if (elements) {
-      const element = elements.getElement(PaymentElement);
-      if (element) {
-        element.update({
-          payment_request: {
-            currency: plan?.currency?.toLowerCase(),
-            total: {
-              label: plan?.nickname || "Payment",
-              amount: price,
-              pending: false
-            }
-          }
-        });
-      }
-    }
-  }, [price, plan, elements]);
 
   return (
     <>
