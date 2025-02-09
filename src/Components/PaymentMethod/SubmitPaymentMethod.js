@@ -105,11 +105,11 @@ export const SubmitPaymentMethod = ({
     }
     // Apple Pay flow: Ensure elements are submitted first
     try {
-      const { error: submitError } = await elements.submit();
-      if (submitError) {
-        console.error("Submit error:", submitError);
-        return;
-      }
+      // const { error: submitError } = await elements.submit();
+      // if (submitError) {
+      //   console.error("Submit error:", submitError);
+      //   return;
+      // }
   
       // Confirm payment for Apple Pay
       const { paymentIntent, error } = await stripe.confirmPayment({
