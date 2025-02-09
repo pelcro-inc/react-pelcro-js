@@ -97,31 +97,42 @@ export const SubmitPaymentMethod = ({
     if (cardProcessor === "stripe" && (!stripe || !elements)) {
       return;
     }
-
-    // For non-Stripe processors, dispatch immediately
+  
     if (cardProcessor !== "stripe") {
       dispatch({ type: SUBMIT_PAYMENT });
       onClick?.();
       return;
     }
-
-    // For Stripe, ensure elements are ready before dispatching
+    // Apple Pay flow: Ensure elements are submitted first
     try {
-      // Submit the PaymentElement first
       const { error: submitError } = await elements.submit();
       if (submitError) {
         console.error("Submit error:", submitError);
         return;
       }
-
-      // Only dispatch after successful element submission
+  
+      // Confirm payment for Apple Pay
+      const { paymentIntent, error } = await stripe.confirmPayment({
+        elements,
+        confirmParams: {
+          return_url: window.location.href,
+        },
+      });
+  
+      if (error) {
+        console.error("Apple Pay confirmation error:", error);
+        return;
+      }
+  
+      console.log("Apple Pay payment successful:", paymentIntent);
       dispatch({ type: SUBMIT_PAYMENT });
       onClick?.();
     } catch (error) {
       console.error("Payment error:", error);
     }
   };
-
+  
+  
   useEffect(() => {
     if (
       supportsTap &&
