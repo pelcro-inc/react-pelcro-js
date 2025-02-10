@@ -84,24 +84,28 @@ export const SubmitPaymentMethod = ({
     },
     payment_request: {
       country: "US",
-      currency: plan?.currency,
+      currency: plan?.currency?.toLowerCase(),
       total: {
         label: plan?.nickname || "Payment",
-        amount: price,
+        amount: Math.round(price * 100),
         pending: false
       }
     }
   };
   useEffect(() => {
-    if (!elements) return;
+    if (!elements || !price) return;
     const element = elements.getElement(PaymentElement);
     if (element) {
+      console.log(
+        "Updating PaymentElement amount:",
+        Math.round(price * 100)
+      );
       element.update({
         payment_request: {
           currency: plan?.currency?.toLowerCase(),
           total: {
             label: plan?.nickname || "Payment",
-            amount: price,
+            amount: Math.round(price * 100),
             pending: false
           }
         }
@@ -110,34 +114,96 @@ export const SubmitPaymentMethod = ({
   }, [price, plan?.currency, plan?.nickname, elements]);
 
   useEffect(() => {
-    if (!stripe || !plan) return;
+    console.log("Price debug info:", {
+      updatedPrice,
+      planAmount: plan?.amount,
+      finalPrice: price,
+      planCurrency: plan?.currency,
+      priceInCents: Math.round(price * 100),
+      planDetails: plan,
+      rawPriceFromPelcro: window.Pelcro?.plan?.read()?.amount
+    });
+
+    if (!price || price <= 0) {
+      console.error("Invalid price detected:", {
+        price,
+        updatedPrice,
+        planAmount: plan?.amount
+      });
+    }
+  }, [price, updatedPrice, plan]);
+
+  useEffect(() => {
+    if (!stripe || !plan || !price) {
+      console.log("Payment request prerequisites not met:", {
+        hasStripe: !!stripe,
+        hasPlan: !!plan,
+        hasPrice: !!price,
+        priceValue: price,
+        planDetails: plan
+      });
+      return;
+    }
 
     try {
+      const priceInCents = Math.round(price * 100);
+      console.log("Creating payment request:", {
+        amount: priceInCents,
+        currency: plan.currency?.toLowerCase(),
+        originalPrice: price,
+        planQuantity,
+        totalAmount: price * planQuantity
+      });
+
       const paymentRequest = stripe.paymentRequest({
         country: "US",
-        currency: plan.currency,
+        currency: plan.currency.toLowerCase(),
         total: {
           label: plan.nickname || "Payment",
-          amount: price,
+          amount: Math.round(price * 100),
           pending: false
         }
       });
+
+      const element = elements?.getElement(PaymentElement);
+      if (element) {
+        console.log(
+          "Updating element with amount:",
+          Math.round(price * 100)
+        );
+        element.update({
+          payment_request: {
+            currency: plan.currency.toLowerCase(),
+            total: {
+              label: plan.nickname || "Payment",
+              amount: Math.round(price * 100),
+              pending: false
+            }
+          }
+        });
+      }
 
       paymentRequest.canMakePayment().then((result) => {
         dispatch({
           type: "SET_CAN_MAKE_PAYMENT",
           payload: !!result
         });
-      });
-
-      dispatch({
-        type: "SET_PAYMENT_REQUEST",
-        payload: paymentRequest
+        dispatch({
+          type: "SET_PAYMENT_REQUEST",
+          payload: paymentRequest
+        });
       });
     } catch (error) {
       console.error("Payment request error:", error);
     }
-  }, [stripe, plan?.currency, plan?.nickname, price, dispatch]);
+  }, [
+    stripe,
+    plan?.currency,
+    plan?.nickname,
+    price,
+    dispatch,
+    elements
+  ]);
 
   const handleSubmit = async () => {
     if (cardProcessor !== "stripe") {
@@ -152,8 +218,8 @@ export const SubmitPaymentMethod = ({
       const { paymentIntent, error } = await stripe.confirmPayment({
         elements,
         confirmParams: {
-          return_url: window.location.href,
-        },
+          return_url: window.location.href
+        }
       });
 
       if (error) {
@@ -168,8 +234,7 @@ export const SubmitPaymentMethod = ({
       console.error("Payment error:", error);
     }
   };
-   
-  
+
   useEffect(() => {
     if (
       supportsTap &&
