@@ -101,12 +101,15 @@ export const SubmitPaymentMethod = ({
         Math.round(price * 100)
       );
       element.update({
-        payment_request: {
-          currency: plan?.currency?.toLowerCase(),
-          total: {
-            label: plan?.nickname || "Payment",
-            amount: Math.round(price * 100),
-            pending: false
+        business: {
+          name: plan?.nickname || "Payment"
+        },
+        paymentMethodOrder: ["apple_pay", "card"],
+        defaultValues: {
+          billingDetails: {
+            name: window?.Pelcro?.user?.read()?.name,
+            email: window?.Pelcro?.user?.read()?.email,
+            phone: window?.Pelcro?.user?.read()?.phone
           }
         }
       });
@@ -118,10 +121,18 @@ export const SubmitPaymentMethod = ({
       updatedPrice,
       planAmount: plan?.amount,
       finalPrice: price,
-      planCurrency: plan?.currency,
       priceInCents: Math.round(price * 100),
-      planDetails: plan,
-      rawPriceFromPelcro: window.Pelcro?.plan?.read()?.amount
+      formattedPrice: priceFormatted,
+      planCurrency: plan?.currency,
+      planNickname: plan?.nickname,
+      planQuantity,
+      pelcroUser: window.Pelcro?.user?.read(),
+      pelcroSite: window.Pelcro?.site?.read(),
+      stripeReady: !!stripe,
+      elementsReady: !!elements,
+      isDisabled,
+      disableSubmit,
+      isLoading
     });
 
     if (!price || price <= 0) {
@@ -131,7 +142,32 @@ export const SubmitPaymentMethod = ({
         planAmount: plan?.amount
       });
     }
-  }, [price, updatedPrice, plan]);
+
+    if (plan?.currency && !/^[A-Za-z]{3}$/.test(plan.currency)) {
+      console.error("Invalid currency format:", plan.currency);
+    }
+
+    if (price && Math.round(price * 100) <= 0) {
+      console.error(
+        "Price conversion to cents resulted in zero or negative:",
+        {
+          originalPrice: price,
+          inCents: Math.round(price * 100)
+        }
+      );
+    }
+  }, [
+    price,
+    updatedPrice,
+    plan,
+    stripe,
+    elements,
+    isDisabled,
+    disableSubmit,
+    isLoading,
+    priceFormatted,
+    planQuantity
+  ]);
 
   useEffect(() => {
     if (!stripe || !plan || !price) {
@@ -140,19 +176,28 @@ export const SubmitPaymentMethod = ({
         hasPlan: !!plan,
         hasPrice: !!price,
         priceValue: price,
-        planDetails: plan
+        planDetails: plan,
+        stripeElement: !!elements?.getElement(PaymentElement)
       });
       return;
     }
 
     try {
       const priceInCents = Math.round(price * 100);
+      const totalAmount = price * planQuantity;
+      const totalAmountInCents = Math.round(totalAmount * 100);
+
       console.log("Creating payment request:", {
         amount: priceInCents,
+        totalAmount: totalAmountInCents,
         currency: plan.currency?.toLowerCase(),
         originalPrice: price,
         planQuantity,
-        totalAmount: price * planQuantity
+        label: plan.nickname || "Payment",
+        billingDetails: {
+          name: window?.Pelcro?.user?.read()?.name,
+          email: window?.Pelcro?.user?.read()?.email
+        }
       });
 
       const paymentRequest = stripe.paymentRequest({
@@ -160,23 +205,37 @@ export const SubmitPaymentMethod = ({
         currency: plan.currency.toLowerCase(),
         total: {
           label: plan.nickname || "Payment",
-          amount: Math.round(price * 100),
+          amount: totalAmountInCents,
           pending: false
         }
+      });
+
+      paymentRequest.on("paymentmethod", (event) => {
+        console.log(
+          "Payment method selected:",
+          event.paymentMethod.type
+        );
+      });
+
+      paymentRequest.on("shippingaddresschange", (event) => {
+        console.log(
+          "Shipping address changed:",
+          event.shippingAddress
+        );
       });
 
       const element = elements?.getElement(PaymentElement);
       if (element) {
         console.log(
           "Updating element with amount:",
-          Math.round(price * 100)
+          totalAmountInCents
         );
         element.update({
           payment_request: {
             currency: plan.currency.toLowerCase(),
             total: {
               label: plan.nickname || "Payment",
-              amount: Math.round(price * 100),
+              amount: totalAmountInCents,
               pending: false
             }
           }
@@ -184,6 +243,12 @@ export const SubmitPaymentMethod = ({
       }
 
       paymentRequest.canMakePayment().then((result) => {
+        console.log("Can make payment result:", {
+          canMakePayment: !!result,
+          applePay: result?.applePay,
+          googlePay: result?.googlePay
+        });
+
         dispatch({
           type: "SET_CAN_MAKE_PAYMENT",
           payload: !!result
@@ -194,7 +259,16 @@ export const SubmitPaymentMethod = ({
         });
       });
     } catch (error) {
-      console.error("Payment request error:", error);
+      console.error("Payment request error:", {
+        error,
+        message: error.message,
+        code: error.code,
+        type: error.type,
+        stripeState: {
+          hasStripe: !!stripe,
+          hasElements: !!elements
+        }
+      });
     }
   }, [
     stripe,
@@ -202,7 +276,8 @@ export const SubmitPaymentMethod = ({
     plan?.nickname,
     price,
     dispatch,
-    elements
+    elements,
+    planQuantity
   ]);
 
   const handleSubmit = async () => {
@@ -215,21 +290,51 @@ export const SubmitPaymentMethod = ({
     if (!stripe || !elements) return;
 
     try {
-      const { paymentIntent, error } = await stripe.confirmPayment({
-        elements,
-        confirmParams: {
-          return_url: window.location.href
-        }
-      });
-
-      if (error) {
-        console.error("Payment error:", error);
+      // Trigger form validation and wallet collection
+      const { error: submitError } = await elements.submit();
+      if (submitError) {
+        console.error("Submit error:", submitError);
         return;
       }
 
-      console.log("Payment successful:", paymentIntent);
-      dispatch({ type: SUBMIT_PAYMENT });
-      onClick?.();
+      // Create the payment method
+      const { error: paymentMethodError, paymentMethod } =
+        await stripe.createPaymentMethod({
+          elements,
+          params: {
+            billing_details: {
+              name: window?.Pelcro?.user?.read()?.name,
+              email: window?.Pelcro?.user?.read()?.email,
+              phone: window?.Pelcro?.user?.read()?.phone
+            }
+          }
+        });
+
+      if (paymentMethodError) {
+        console.error("Payment method error:", paymentMethodError);
+        return;
+      }
+
+      // Create payment source with Pelcro
+      window.Pelcro.paymentMethods.create(
+        {
+          auth_token: window.Pelcro.user.read().auth_token,
+          token: paymentMethod.id
+        },
+        (err, res) => {
+          if (err) {
+            console.error(
+              "Pelcro payment method creation error:",
+              err
+            );
+            return;
+          }
+
+          console.log("Payment source created successfully:", res);
+          dispatch({ type: SUBMIT_PAYMENT });
+          onClick?.();
+        }
+      );
     } catch (error) {
       console.error("Payment error:", error);
     }
