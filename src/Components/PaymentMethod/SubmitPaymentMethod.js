@@ -140,27 +140,13 @@ export const SubmitPaymentMethod = ({
     if (element) {
       console.group("🔄 APPLE PAY PAYMENT FLOW");
 
-      // Initial state logging
-      console.log("Initial State:", {
-        price,
-        planQuantity,
-        plan,
-        updatedPrice,
-        selectedPaymentMethodId,
-        stripeReady: !!stripe,
-        elementsReady: !!elements,
-        domain: window.location.hostname
-      });
-
       // Price calculation verification
-      console.group("💰 Apple Pay Amount Debug");
-      console.log("Raw Values:", {
+      console.group("💰 Amount Verification");
+      console.log("Initial Amount Setup:", {
         price,
         planQuantity,
-        isInCents: true,
-        planAmount: plan?.amount,
-        updatedPrice,
-        currency: plan?.currency
+        currency: plan?.currency,
+        finalAmount: price * planQuantity
       });
 
       const finalAmount = price * planQuantity;
@@ -168,7 +154,7 @@ export const SubmitPaymentMethod = ({
 
       // Validate amount and currency before proceeding
       if (!finalAmount || finalAmount <= 0) {
-        console.error("❌ Invalid amount for payment request:", {
+        console.error("❌ Amount Error:", {
           finalAmount,
           price,
           planQuantity
@@ -176,37 +162,12 @@ export const SubmitPaymentMethod = ({
         return;
       }
 
-      if (!currency || currency.length !== 3) {
-        console.error("❌ Invalid currency for payment request:", {
-          currency,
-          originalCurrency: plan?.currency
-        });
-        return;
-      }
-
-      const formattedAmount = new Intl.NumberFormat(
-        navigator.language || "en",
-        {
-          style: "currency",
-          currency
-        }
-      ).format(finalAmount / 100);
-
-      console.log("Final Amount:", {
-        calculatedAmount: finalAmount,
+      console.log("✅ Final Amount Ready:", {
+        amount: finalAmount,
         currency,
-        formattedDisplay: formattedAmount,
-        inCents: true
-      });
-      console.groupEnd();
-
-      // Verify final amount before payment request
-      console.log("🔍 Payment Request Amount Verification:", {
-        finalAmount,
-        willDisplay: formattedAmount,
-        isAmountValid: finalAmount > 0,
         isPending: false
       });
+      console.groupEnd();
 
       // Create payment request with validated values
       const paymentRequest = stripe.paymentRequest({
@@ -214,269 +175,59 @@ export const SubmitPaymentMethod = ({
         currency,
         total: {
           label: plan?.nickname || "Payment",
-          amount: finalAmount,
-          pending: false
+          amount: finalAmount
         },
+        displayItems: [
+          {
+            amount: finalAmount,
+            label: plan?.nickname || "Payment",
+            pending: false
+          }
+        ],
         requestPayerName: true,
         requestPayerEmail: true,
         requestShipping: false,
         disableWallets: ["googlePay"]
       });
 
-      // Validate payment request was created
-      if (!paymentRequest) {
-        console.error("❌ Failed to create payment request");
-        return;
-      }
-
       // Add immediate update to ensure amount is set
       try {
-        // First update to ensure amount is set
         paymentRequest.update({
+          currency,
           total: {
-            label: plan?.nickname || "Payment",
             amount: finalAmount,
+            label: plan?.nickname || "Payment",
             pending: false
-          }
+          },
+          displayItems: [
+            {
+              amount: finalAmount,
+              label: plan?.nickname || "Payment",
+              pending: false
+            }
+          ]
         });
 
-        // Second update with final status
-        setTimeout(() => {
-          paymentRequest.update({
-            total: {
-              label: plan?.nickname || "Payment",
-              amount: finalAmount,
-              pending: false
-            },
-            status: "final"
-          });
-        }, 0);
-
-        console.log("✅ Payment request updated successfully:", {
+        console.log("✅ Payment Request Status:", {
           amount: finalAmount,
           currency,
-          label: plan?.nickname || "Payment",
-          amountFormatted: formattedAmount,
+          isUpdated: true,
           isPending: false
         });
       } catch (updateError) {
         console.error(
-          "❌ Failed to update payment request:",
+          "❌ Payment Request Update Failed:",
           updateError
         );
-
-        // Attempt recovery update
-        try {
-          paymentRequest.update({
-            total: {
-              label: plan?.nickname || "Payment",
-              amount: finalAmount,
-              pending: false
-            }
-          });
-        } catch (recoveryError) {
-          console.error("❌ Recovery update failed:", recoveryError);
-        }
       }
-
-      // Add amount change listener
-      paymentRequest.on("shippingaddresschange", (event) => {
-        // Ensure amount stays fixed even if shipping address changes
-        event.updateWith({
-          status: "success",
-          total: {
-            label: plan?.nickname || "Payment",
-            amount: finalAmount,
-            pending: false
-          }
-        });
-      });
-
-      // Add amount validation before payment
-      paymentRequest.on("paymentmethod", async (event) => {
-        // Verify amount hasn't changed
-        const currentAmount = event.paymentMethod?.amount;
-        if (currentAmount && currentAmount !== finalAmount) {
-          console.error("❌ Amount mismatch detected:", {
-            expected: finalAmount,
-            received: currentAmount
-          });
-          event.complete("fail");
-          return;
-        }
-
-        console.group("💳 Payment Method Event");
-        try {
-          if (!event.paymentMethod?.id) {
-            console.error("❌ Invalid payment method received");
-            event.complete("fail");
-            dispatch({
-              type: "SHOW_ALERT",
-              payload: {
-                type: "error",
-                content: "Invalid payment method"
-              }
-            });
-            return;
-          }
-
-          console.log("Payment Method Details:", {
-            type: event.paymentMethod.type,
-            id: event.paymentMethod.id,
-            complete: !!event.complete,
-            billingDetails: event.paymentMethod.billing_details
-          });
-
-          console.log("🔄 Creating Pelcro Payment Source...");
-          window.Pelcro.paymentMethods.create(
-            {
-              auth_token: window.Pelcro.user.read().auth_token,
-              token: event.paymentMethod.id
-            },
-            (err, res) => {
-              if (err) {
-                console.error("❌ Payment Source Creation Failed:", {
-                  error: err,
-                  message: err.message,
-                  code: err.code,
-                  type: err.type,
-                  details: err.details
-                });
-                event.complete("fail");
-                dispatch({
-                  type: "SHOW_ALERT",
-                  payload: {
-                    type: "error",
-                    content: getErrorMessages(err)
-                  }
-                });
-                console.groupEnd();
-                return;
-              }
-
-              console.log("✅ Payment Source Created:", {
-                sourceId: res.data.id,
-                response: res
-              });
-
-              const sourceId = res.data.id;
-
-              if (type === "createPayment") {
-                console.log("🔄 Creating Subscription:", {
-                  sourceId,
-                  planId: plan.id,
-                  quantity: plan?.quantity || 1,
-                  hasAddress: !!selectedAddressId
-                });
-                // Handle subscription creation
-                window.Pelcro.subscription.create(
-                  {
-                    source_id: sourceId,
-                    auth_token: window.Pelcro.user.read().auth_token,
-                    plan_id: plan.id,
-                    quantity: plan?.quantity || 1,
-                    coupon_code: state?.couponCode,
-                    campaign_key:
-                      window.Pelcro.helpers.getURLParameter(
-                        "campaign_key"
-                      ),
-                    address_id: product?.address_required
-                      ? selectedAddressId
-                      : null
-                  },
-                  (subErr, subRes) => {
-                    if (subErr) {
-                      console.error(
-                        "❌ Subscription Creation Failed:",
-                        {
-                          error: subErr,
-                          message: subErr.message,
-                          code: subErr.code,
-                          type: subErr.type,
-                          raw: subErr
-                        }
-                      );
-                      event.complete("fail");
-                      dispatch({
-                        type: "SHOW_ALERT",
-                        payload: {
-                          type: "error",
-                          content: getErrorMessages(subErr)
-                        }
-                      });
-                      console.groupEnd();
-                      return;
-                    }
-
-                    console.log(
-                      "✅ Subscription Created Successfully:",
-                      {
-                        subscriptionId: subRes.data?.id,
-                        paymentIntent: subRes.data?.payment_intent,
-                        setupIntent: subRes.data?.setup_intent,
-                        status: subRes.data?.status,
-                        response: subRes
-                      }
-                    );
-
-                    event.complete("success");
-                    dispatch({ type: SUBMIT_PAYMENT });
-                    onClick?.();
-                    console.groupEnd();
-                    console.groupEnd();
-                  }
-                );
-              } else if (type === "orderCreate") {
-                console.log("Creating Order with Source:", {
-                  sourceId,
-                  gateway: "stripe"
-                });
-                // Handle order creation
-                purchase(
-                  new StripeGateway(),
-                  sourceId,
-                  state,
-                  dispatch,
-                  () => {
-                    console.log("Order Creation Successful");
-                    event.complete("success");
-                  },
-                  () => {
-                    console.error("Order Creation Failed");
-                    event.complete("fail");
-                  }
-                );
-              }
-            }
-          );
-        } catch (error) {
-          console.error("Payment Flow Error:", error);
-          event.complete("fail");
-          dispatch({
-            type: "SHOW_ALERT",
-            payload: {
-              type: "error",
-              content: getErrorMessages(error)
-            }
-          });
-        }
-      });
 
       paymentRequest
         .canMakePayment()
         .then((result) => {
-          console.log("🔍 Can Make Payment Check:", {
-            canMakePayment: !!result,
-            applePay: result?.applePay,
-            googlePay: result?.googlePay,
-            rawResult: result
+          console.log("🔍 Apple Pay Availability:", {
+            isAvailable: !!result?.applePay,
+            canMakePayment: !!result
           });
-
-          if (result) {
-            console.log("✅ Payment Method Available");
-          } else {
-            console.log("❌ Payment Method Not Available");
-          }
 
           dispatch({
             type: "SET_CAN_MAKE_PAYMENT",
@@ -491,12 +242,7 @@ export const SubmitPaymentMethod = ({
           console.groupEnd();
         })
         .catch((err) => {
-          console.error("❌ Can Make Payment Check Failed:", {
-            error: err,
-            message: err.message,
-            code: err.code,
-            type: err.type
-          });
+          console.error("❌ Apple Pay Check Failed:", err);
           console.groupEnd();
         });
     }
@@ -750,7 +496,7 @@ export const SubmitPaymentMethod = ({
         if (canMakePaymentResult?.applePay) {
           try {
             const response = await fetch(
-              `${window.Pelcro.environment.domain}/api/v1/stripe/apple-pay/domains`,
+              `${window.Pelcro.environment.domain}/api/v1/stripe/register-domain`,
               {
                 method: "POST",
                 headers: {
