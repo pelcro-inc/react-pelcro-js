@@ -78,26 +78,12 @@ export const SubmitPaymentMethod = ({
   const paymentElementOptions = {
     layout: {
       type: "tabs",
-      defaultCollapsed: false,
-      radios: true,
-      spacedAccordionItems: true
+      defaultCollapsed: false
     },
     paymentMethodOrder: ["apple_pay", "card"],
     wallets: {
       applePay: "auto",
       googlePay: "never"
-    },
-    appearance: {
-      theme: "stripe",
-      variables: {
-        colorPrimary: "#0570de",
-        colorBackground: "#ffffff",
-        colorText: "#30313d",
-        colorDanger: "#df1b41",
-        fontFamily: "system-ui, sans-serif",
-        spacingUnit: "4px",
-        borderRadius: "4px"
-      }
     },
     fields: {
       billingDetails: {
@@ -166,31 +152,6 @@ export const SubmitPaymentMethod = ({
         domain: window.location.hostname
       });
 
-      // Add domain verification check for Apple Pay
-      const verifyDomain = async () => {
-        try {
-          const result = await stripe.applePayDomain.verify();
-          console.log("✅ Apple Pay Domain Verification:", {
-            verified: result.verified,
-            domain: window.location.hostname
-          });
-        } catch (err) {
-          console.error("❌ Apple Pay Domain Verification Failed:", {
-            error: err,
-            domain: window.location.hostname
-          });
-        }
-      };
-
-      verifyDomain();
-
-      // Get the site's default currency and country
-      const siteDefaultCurrency =
-        window.Pelcro.site.read()?.default_currency?.toLowerCase() ||
-        "usd";
-      const userCountry =
-        window.Pelcro.user.read()?.addresses?.[0]?.country || "US";
-
       // Price calculation verification
       console.group("💰 Apple Pay Amount Debug");
       console.log("Raw Values:", {
@@ -198,44 +159,59 @@ export const SubmitPaymentMethod = ({
         planQuantity,
         isInCents: true,
         planAmount: plan?.amount,
-        updatedPrice
+        updatedPrice,
+        currency: plan?.currency
       });
 
+      const finalAmount = price * planQuantity;
+      const currency = plan?.currency?.toLowerCase() || "gbp";
+
+      // Validate amount and currency before proceeding
+      if (!finalAmount || finalAmount <= 0) {
+        console.error("❌ Invalid amount for payment request:", {
+          finalAmount,
+          price,
+          planQuantity
+        });
+        return;
+      }
+
+      if (!currency || currency.length !== 3) {
+        console.error("❌ Invalid currency for payment request:", {
+          currency,
+          originalCurrency: plan?.currency
+        });
+        return;
+      }
+
+      const formattedAmount = new Intl.NumberFormat(
+        navigator.language || "en",
+        {
+          style: "currency",
+          currency
+        }
+      ).format(finalAmount / 100);
+
       console.log("Final Amount:", {
-        calculatedAmount: price * planQuantity,
-        currency:
-          plan?.currency?.toLowerCase() || siteDefaultCurrency,
-        formattedDisplay: new Intl.NumberFormat(
-          navigator.language || "en",
-          {
-            style: "currency",
-            currency:
-              plan?.currency?.toLowerCase() || siteDefaultCurrency
-          }
-        ).format((price * planQuantity) / 100)
+        calculatedAmount: finalAmount,
+        currency,
+        formattedDisplay: formattedAmount,
+        inCents: true
       });
       console.groupEnd();
 
       // Verify final amount before payment request
-      const finalAmount = price * planQuantity;
       console.log("🔍 Payment Request Amount Verification:", {
         finalAmount,
-        willDisplay: new Intl.NumberFormat(
-          navigator.language || "en",
-          {
-            style: "currency",
-            currency:
-              plan?.currency?.toLowerCase() || siteDefaultCurrency
-          }
-        ).format(finalAmount / 100),
+        willDisplay: formattedAmount,
         isAmountValid: finalAmount > 0,
         isPending: false
       });
 
+      // Create payment request with validated values
       const paymentRequest = stripe.paymentRequest({
-        country: "US",
-        currency:
-          plan?.currency?.toLowerCase() || siteDefaultCurrency,
+        country: "GB",
+        currency,
         total: {
           label: plan?.nickname || "Payment",
           amount: finalAmount,
@@ -244,32 +220,91 @@ export const SubmitPaymentMethod = ({
         requestPayerName: true,
         requestPayerEmail: true,
         requestShipping: false,
-        disableWallets: ["googlePay"],
-        merchantCapabilities: ["supports3DS"]
+        disableWallets: ["googlePay"]
       });
 
-      // Payment Request verification with more details
-      console.log("🔐 Payment Request Configuration:", {
-        currency:
-          plan?.currency?.toLowerCase() || siteDefaultCurrency,
-        country: "US",
-        originalAmount: price,
-        finalAmount: price * planQuantity,
-        amountInUserFormat: new Intl.NumberFormat(
-          navigator.language || "en",
-          {
-            style: "currency",
-            currency:
-              plan?.currency?.toLowerCase() || siteDefaultCurrency
+      // Validate payment request was created
+      if (!paymentRequest) {
+        console.error("❌ Failed to create payment request");
+        return;
+      }
+
+      // Add immediate update to ensure amount is set
+      try {
+        // First update to ensure amount is set
+        paymentRequest.update({
+          total: {
+            label: plan?.nickname || "Payment",
+            amount: finalAmount,
+            pending: false
           }
-        ).format((price * planQuantity) / 100),
-        label: plan?.nickname || "Payment",
-        pending: false,
-        merchantIdentifier: window.Pelcro.site.read()?.account_id,
-        domain: window.location.hostname
+        });
+
+        // Second update with final status
+        setTimeout(() => {
+          paymentRequest.update({
+            total: {
+              label: plan?.nickname || "Payment",
+              amount: finalAmount,
+              pending: false
+            },
+            status: "final"
+          });
+        }, 0);
+
+        console.log("✅ Payment request updated successfully:", {
+          amount: finalAmount,
+          currency,
+          label: plan?.nickname || "Payment",
+          amountFormatted: formattedAmount,
+          isPending: false
+        });
+      } catch (updateError) {
+        console.error(
+          "❌ Failed to update payment request:",
+          updateError
+        );
+
+        // Attempt recovery update
+        try {
+          paymentRequest.update({
+            total: {
+              label: plan?.nickname || "Payment",
+              amount: finalAmount,
+              pending: false
+            }
+          });
+        } catch (recoveryError) {
+          console.error("❌ Recovery update failed:", recoveryError);
+        }
+      }
+
+      // Add amount change listener
+      paymentRequest.on("shippingaddresschange", (event) => {
+        // Ensure amount stays fixed even if shipping address changes
+        event.updateWith({
+          status: "success",
+          total: {
+            label: plan?.nickname || "Payment",
+            amount: finalAmount,
+            pending: false
+          }
+        });
       });
 
+      // Add amount validation before payment
       paymentRequest.on("paymentmethod", async (event) => {
+        // Verify amount hasn't changed
+        const currentAmount = event.paymentMethod?.amount;
+        if (currentAmount && currentAmount !== finalAmount) {
+          console.error("❌ Amount mismatch detected:", {
+            expected: finalAmount,
+            received: currentAmount
+          });
+          event.complete("fail");
+          return;
+        }
+
         console.group("💳 Payment Method Event");
         try {
           if (!event.paymentMethod?.id) {
@@ -674,6 +709,120 @@ export const SubmitPaymentMethod = ({
       });
     }
   };
+
+  // Add this before the main useEffect
+  useEffect(() => {
+    if (!stripe) return;
+
+    let mounted = true;
+    let currentPaymentRequest = null;
+
+    const verifyApplePayDomain = async () => {
+      if (!mounted) return;
+
+      try {
+        // First check if we can make Apple Pay payments
+        const paymentRequest = stripe.paymentRequest({
+          country: "GB",
+          currency: plan?.currency?.toLowerCase() || "gbp",
+          total: {
+            label: "Verification",
+            amount: 1,
+            pending: false
+          },
+          requestPayerName: true,
+          requestPayerEmail: true
+        });
+
+        currentPaymentRequest = paymentRequest;
+
+        const canMakePaymentResult =
+          await paymentRequest.canMakePayment();
+
+        if (!mounted) return;
+
+        console.log("🍎 Apple Pay Initial Check:", {
+          isAvailable: !!canMakePaymentResult?.applePay,
+          details: canMakePaymentResult,
+          domain: window.location.hostname
+        });
+
+        if (canMakePaymentResult?.applePay) {
+          try {
+            const response = await fetch(
+              `${window.Pelcro.environment.domain}/api/v1/stripe/apple-pay/domains`,
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: `Bearer ${
+                    window.Pelcro.user.read().auth_token
+                  }`
+                },
+                body: JSON.stringify({
+                  domain: window.location.hostname,
+                  stripe_account: window.Pelcro.site.read().account_id
+                })
+              }
+            );
+
+            if (!mounted) return;
+
+            if (!response.ok) {
+              throw new Error(
+                `Domain registration failed: ${response.statusText}`
+              );
+            }
+
+            const result = await response.json();
+            console.log("✅ Apple Pay Domain Registration:", {
+              success: true,
+              domain: window.location.hostname,
+              response: result
+            });
+
+            if (mounted) {
+              dispatch({
+                type: "SET_APPLE_PAY_READY",
+                payload: true
+              });
+            }
+          } catch (regError) {
+            if (!mounted) return;
+            console.error("❌ Domain Registration Failed:", {
+              error: regError,
+              domain: window.location.hostname
+            });
+          }
+        } else {
+          console.log(
+            "⚠️ Apple Pay not available on this device/browser"
+          );
+        }
+      } catch (err) {
+        if (!mounted) return;
+        console.error("❌ Apple Pay Setup Failed:", {
+          error: err,
+          domain: window.location.hostname
+        });
+      }
+    };
+
+    verifyApplePayDomain();
+
+    // Cleanup function
+    return () => {
+      mounted = false;
+      if (currentPaymentRequest) {
+        try {
+          // Clean up any listeners or state
+          currentPaymentRequest = null;
+        } catch (err) {
+          console.error("Cleanup error:", err);
+        }
+      }
+    };
+  }, [stripe, plan?.currency, dispatch]);
 
   return (
     <>
