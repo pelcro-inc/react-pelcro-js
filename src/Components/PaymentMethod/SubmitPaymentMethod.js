@@ -79,11 +79,25 @@ export const SubmitPaymentMethod = ({
     layout: {
       type: "tabs",
       defaultCollapsed: false,
-      spacing: "10px"
+      radios: true,
+      spacedAccordionItems: true
     },
     paymentMethodOrder: ["apple_pay", "card"],
     wallets: {
-      applePay: "auto"
+      applePay: "auto",
+      googlePay: "never"
+    },
+    appearance: {
+      theme: "stripe",
+      variables: {
+        colorPrimary: "#0570de",
+        colorBackground: "#ffffff",
+        colorText: "#30313d",
+        colorDanger: "#df1b41",
+        fontFamily: "system-ui, sans-serif",
+        spacingUnit: "4px",
+        borderRadius: "4px"
+      }
     },
     fields: {
       billingDetails: {
@@ -148,62 +162,136 @@ export const SubmitPaymentMethod = ({
         updatedPrice,
         selectedPaymentMethodId,
         stripeReady: !!stripe,
-        elementsReady: !!elements
+        elementsReady: !!elements,
+        domain: window.location.hostname
       });
+
+      // Add domain verification check for Apple Pay
+      const verifyDomain = async () => {
+        try {
+          const result = await stripe.applePayDomain.verify();
+          console.log("✅ Apple Pay Domain Verification:", {
+            verified: result.verified,
+            domain: window.location.hostname
+          });
+        } catch (err) {
+          console.error("❌ Apple Pay Domain Verification Failed:", {
+            error: err,
+            domain: window.location.hostname
+          });
+        }
+      };
+
+      verifyDomain();
+
+      // Get the site's default currency and country
+      const siteDefaultCurrency =
+        window.Pelcro.site.read()?.default_currency?.toLowerCase() ||
+        "usd";
+      const userCountry =
+        window.Pelcro.user.read()?.addresses?.[0]?.country || "US";
 
       // Price calculation verification
-      console.log("💰 Price Calculation:", {
-        originalPrice: price,
-        quantity: planQuantity,
-        rawCalculation: price * planQuantity,
-        inCents: Math.round(price * planQuantity * 100),
-        formattedForUser: new Intl.NumberFormat("en-US", {
-          style: "currency",
-          currency: plan?.currency?.toLowerCase() || "usd"
-        }).format(price * planQuantity)
+      console.group("💰 Apple Pay Amount Debug");
+      console.log("Raw Values:", {
+        price,
+        planQuantity,
+        isInCents: true,
+        planAmount: plan?.amount,
+        updatedPrice
       });
 
-      // Plan details verification
-      console.log("📋 Plan Details:", {
-        id: plan?.id,
-        nickname: plan?.nickname,
-        amount: plan?.amount,
-        currency: plan?.currency,
-        currencyLowerCase: plan?.currency?.toLowerCase(),
-        quantity: plan?.quantity
+      console.log("Final Amount:", {
+        calculatedAmount: price * planQuantity,
+        currency:
+          plan?.currency?.toLowerCase() || siteDefaultCurrency,
+        formattedDisplay: new Intl.NumberFormat(
+          navigator.language || "en",
+          {
+            style: "currency",
+            currency:
+              plan?.currency?.toLowerCase() || siteDefaultCurrency
+          }
+        ).format((price * planQuantity) / 100)
+      });
+      console.groupEnd();
+
+      // Verify final amount before payment request
+      const finalAmount = price * planQuantity;
+      console.log("🔍 Payment Request Amount Verification:", {
+        finalAmount,
+        willDisplay: new Intl.NumberFormat(
+          navigator.language || "en",
+          {
+            style: "currency",
+            currency:
+              plan?.currency?.toLowerCase() || siteDefaultCurrency
+          }
+        ).format(finalAmount / 100),
+        isAmountValid: finalAmount > 0,
+        isPending: false
       });
 
       const paymentRequest = stripe.paymentRequest({
         country: "US",
-        currency: plan?.currency?.toLowerCase() || "usd",
+        currency:
+          plan?.currency?.toLowerCase() || siteDefaultCurrency,
         total: {
           label: plan?.nickname || "Payment",
-          amount: Math.round(price * planQuantity * 100),
+          amount: finalAmount,
           pending: false
         },
         requestPayerName: true,
-        requestPayerEmail: true
+        requestPayerEmail: true,
+        requestShipping: false,
+        disableWallets: ["googlePay"],
+        merchantCapabilities: ["supports3DS"]
       });
 
-      // Payment Request verification
+      // Payment Request verification with more details
       console.log("🔐 Payment Request Configuration:", {
-        currency: plan?.currency?.toLowerCase() || "usd",
-        amount: Math.round(price * planQuantity * 100),
+        currency:
+          plan?.currency?.toLowerCase() || siteDefaultCurrency,
+        country: "US",
+        originalAmount: price,
+        finalAmount: price * planQuantity,
+        amountInUserFormat: new Intl.NumberFormat(
+          navigator.language || "en",
+          {
+            style: "currency",
+            currency:
+              plan?.currency?.toLowerCase() || siteDefaultCurrency
+          }
+        ).format((price * planQuantity) / 100),
         label: plan?.nickname || "Payment",
         pending: false,
-        requestConfig: paymentRequest
+        merchantIdentifier: window.Pelcro.site.read()?.account_id,
+        domain: window.location.hostname
       });
 
       paymentRequest.on("paymentmethod", async (event) => {
         console.group("💳 Payment Method Event");
-        console.log("Event Details:", {
-          type: event.paymentMethod.type,
-          id: event.paymentMethod.id,
-          complete: !!event.complete,
-          paymentMethod: event.paymentMethod
-        });
-
         try {
+          if (!event.paymentMethod?.id) {
+            console.error("❌ Invalid payment method received");
+            event.complete("fail");
+            dispatch({
+              type: "SHOW_ALERT",
+              payload: {
+                type: "error",
+                content: "Invalid payment method"
+              }
+            });
+            return;
+          }
+
+          console.log("Payment Method Details:", {
+            type: event.paymentMethod.type,
+            id: event.paymentMethod.id,
+            complete: !!event.complete,
+            billingDetails: event.paymentMethod.billing_details
+          });
+
           console.log("🔄 Creating Pelcro Payment Source...");
           window.Pelcro.paymentMethods.create(
             {
