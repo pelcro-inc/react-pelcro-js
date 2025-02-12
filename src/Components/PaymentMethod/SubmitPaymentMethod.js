@@ -13,10 +13,18 @@ import {
   getFormattedPriceByLocal,
   getPageOrDefaultLanguage
 } from "../../utils/utils";
-import { getSiteCardProcessor } from "../common/Helpers";
+import {
+  getSiteCardProcessor,
+  getErrorMessages
+} from "../common/Helpers";
+import { StripeGateway } from "../../services/Subscription/Payment.service";
+
 export const SubmitPaymentMethod = ({
   onClick,
   isSubmitDisabled,
+  type = "createPaymentSource",
+  product,
+  selectedAddressId,
   ...otherProps
 }) => {
   const stripe = useStripe();
@@ -64,60 +72,315 @@ export const SubmitPaymentMethod = ({
   const isUserPhone = Boolean(window.Pelcro.user.read().phone);
 
   const [isDisabled, setDisabled] = useState(true);
+  const [error, setError] = useState(null);
 
   // Payment Element options
   const paymentElementOptions = {
     layout: {
       type: "tabs",
-      defaultCollapsed: false
+      defaultCollapsed: false,
+      spacing: "10px"
     },
     paymentMethodOrder: ["apple_pay", "card"],
     wallets: {
       applePay: "auto"
     },
-    defaultValues: {
+    fields: {
       billingDetails: {
-        name: window?.Pelcro?.user?.read()?.name,
-        email: window?.Pelcro?.user?.read()?.email,
-        phone: window?.Pelcro?.user?.read()?.phone
-      }
-    },
-    payment_request: {
-      country: "US",
-      currency: plan?.currency?.toLowerCase(),
-      total: {
-        label: plan?.nickname || "Payment",
-        amount: Math.round(price * 100),
-        pending: false
+        name: "auto",
+        email: "auto",
+        phone: "auto",
+        address: {
+          country: "auto",
+          postalCode: "auto",
+          state: "auto",
+          city: "auto",
+          line1: "auto",
+          line2: "auto"
+        }
       }
     }
   };
-  useEffect(() => {
-    if (!elements || !price) return;
-    const element = elements.getElement(PaymentElement);
-    if (element) {
-      console.log(
-        "Updating PaymentElement amount:",
-        Math.round(price * 100)
-      );
-      element.update({
-        business: {
-          name: plan?.nickname || "Payment"
-        },
-        paymentMethodOrder: ["apple_pay", "card"],
-        defaultValues: {
-          billingDetails: {
-            name: window?.Pelcro?.user?.read()?.name,
-            email: window?.Pelcro?.user?.read()?.email,
-            phone: window?.Pelcro?.user?.read()?.phone
-          }
-        }
-      });
-    }
-  }, [price, plan?.currency, plan?.nickname, elements]);
 
   useEffect(() => {
-    console.log("Price debug info:", {
+    if (error) {
+      console.error("Payment component error:", error);
+    }
+  }, [error]);
+
+  const handleError = (err) => {
+    setError(err);
+    console.error("Payment error:", err);
+  };
+
+  useEffect(() => {
+    console.log("Component mounted with:", {
+      cardProcessor,
+      stripeLoaded: !!stripe,
+      elementsLoaded: !!elements,
+      selectedPaymentMethodId,
+      plan,
+      price
+    });
+
+    if (!elements || !price) {
+      console.log("Missing required elements:", {
+        hasElements: !!elements,
+        hasPrice: !!price
+      });
+      return;
+    }
+
+    const element = elements.getElement(PaymentElement);
+    console.log("PaymentElement status:", {
+      elementFound: !!element,
+      elementType: element?.type
+    });
+
+    if (element) {
+      console.group("🔄 APPLE PAY PAYMENT FLOW");
+
+      // Initial state logging
+      console.log("Initial State:", {
+        price,
+        planQuantity,
+        plan,
+        updatedPrice,
+        selectedPaymentMethodId,
+        stripeReady: !!stripe,
+        elementsReady: !!elements
+      });
+
+      // Price calculation verification
+      console.log("💰 Price Calculation:", {
+        originalPrice: price,
+        quantity: planQuantity,
+        rawCalculation: price * planQuantity,
+        inCents: Math.round(price * planQuantity * 100),
+        formattedForUser: new Intl.NumberFormat("en-US", {
+          style: "currency",
+          currency: plan?.currency?.toLowerCase() || "usd"
+        }).format(price * planQuantity)
+      });
+
+      // Plan details verification
+      console.log("📋 Plan Details:", {
+        id: plan?.id,
+        nickname: plan?.nickname,
+        amount: plan?.amount,
+        currency: plan?.currency,
+        currencyLowerCase: plan?.currency?.toLowerCase(),
+        quantity: plan?.quantity
+      });
+
+      const paymentRequest = stripe.paymentRequest({
+        country: "US",
+        currency: plan?.currency?.toLowerCase() || "usd",
+        total: {
+          label: plan?.nickname || "Payment",
+          amount: Math.round(price * planQuantity * 100),
+          pending: false
+        },
+        requestPayerName: true,
+        requestPayerEmail: true
+      });
+
+      // Payment Request verification
+      console.log("🔐 Payment Request Configuration:", {
+        currency: plan?.currency?.toLowerCase() || "usd",
+        amount: Math.round(price * planQuantity * 100),
+        label: plan?.nickname || "Payment",
+        pending: false,
+        requestConfig: paymentRequest
+      });
+
+      paymentRequest.on("paymentmethod", async (event) => {
+        console.group("💳 Payment Method Event");
+        console.log("Event Details:", {
+          type: event.paymentMethod.type,
+          id: event.paymentMethod.id,
+          complete: !!event.complete,
+          paymentMethod: event.paymentMethod
+        });
+
+        try {
+          console.log("🔄 Creating Pelcro Payment Source...");
+          window.Pelcro.paymentMethods.create(
+            {
+              auth_token: window.Pelcro.user.read().auth_token,
+              token: event.paymentMethod.id
+            },
+            (err, res) => {
+              if (err) {
+                console.error("❌ Payment Source Creation Failed:", {
+                  error: err,
+                  message: err.message,
+                  code: err.code,
+                  type: err.type,
+                  details: err.details
+                });
+                event.complete("fail");
+                dispatch({
+                  type: "SHOW_ALERT",
+                  payload: {
+                    type: "error",
+                    content: getErrorMessages(err)
+                  }
+                });
+                console.groupEnd();
+                return;
+              }
+
+              console.log("✅ Payment Source Created:", {
+                sourceId: res.data.id,
+                response: res
+              });
+
+              const sourceId = res.data.id;
+
+              if (type === "createPayment") {
+                console.log("🔄 Creating Subscription:", {
+                  sourceId,
+                  planId: plan.id,
+                  quantity: plan?.quantity || 1,
+                  hasAddress: !!selectedAddressId
+                });
+                // Handle subscription creation
+                window.Pelcro.subscription.create(
+                  {
+                    source_id: sourceId,
+                    auth_token: window.Pelcro.user.read().auth_token,
+                    plan_id: plan.id,
+                    quantity: plan?.quantity || 1,
+                    coupon_code: state?.couponCode,
+                    campaign_key:
+                      window.Pelcro.helpers.getURLParameter(
+                        "campaign_key"
+                      ),
+                    address_id: product?.address_required
+                      ? selectedAddressId
+                      : null
+                  },
+                  (subErr, subRes) => {
+                    if (subErr) {
+                      console.error(
+                        "❌ Subscription Creation Failed:",
+                        {
+                          error: subErr,
+                          message: subErr.message,
+                          code: subErr.code,
+                          type: subErr.type,
+                          raw: subErr
+                        }
+                      );
+                      event.complete("fail");
+                      dispatch({
+                        type: "SHOW_ALERT",
+                        payload: {
+                          type: "error",
+                          content: getErrorMessages(subErr)
+                        }
+                      });
+                      console.groupEnd();
+                      return;
+                    }
+
+                    console.log(
+                      "✅ Subscription Created Successfully:",
+                      {
+                        subscriptionId: subRes.data?.id,
+                        paymentIntent: subRes.data?.payment_intent,
+                        setupIntent: subRes.data?.setup_intent,
+                        status: subRes.data?.status,
+                        response: subRes
+                      }
+                    );
+
+                    event.complete("success");
+                    dispatch({ type: SUBMIT_PAYMENT });
+                    onClick?.();
+                    console.groupEnd();
+                    console.groupEnd();
+                  }
+                );
+              } else if (type === "orderCreate") {
+                console.log("Creating Order with Source:", {
+                  sourceId,
+                  gateway: "stripe"
+                });
+                // Handle order creation
+                purchase(
+                  new StripeGateway(),
+                  sourceId,
+                  state,
+                  dispatch,
+                  () => {
+                    console.log("Order Creation Successful");
+                    event.complete("success");
+                  },
+                  () => {
+                    console.error("Order Creation Failed");
+                    event.complete("fail");
+                  }
+                );
+              }
+            }
+          );
+        } catch (error) {
+          console.error("Payment Flow Error:", error);
+          event.complete("fail");
+          dispatch({
+            type: "SHOW_ALERT",
+            payload: {
+              type: "error",
+              content: getErrorMessages(error)
+            }
+          });
+        }
+      });
+
+      paymentRequest
+        .canMakePayment()
+        .then((result) => {
+          console.log("🔍 Can Make Payment Check:", {
+            canMakePayment: !!result,
+            applePay: result?.applePay,
+            googlePay: result?.googlePay,
+            rawResult: result
+          });
+
+          if (result) {
+            console.log("✅ Payment Method Available");
+          } else {
+            console.log("❌ Payment Method Not Available");
+          }
+
+          dispatch({
+            type: "SET_CAN_MAKE_PAYMENT",
+            payload: !!result
+          });
+          if (result) {
+            dispatch({
+              type: "SET_PAYMENT_REQUEST",
+              payload: paymentRequest
+            });
+          }
+          console.groupEnd();
+        })
+        .catch((err) => {
+          console.error("❌ Can Make Payment Check Failed:", {
+            error: err,
+            message: err.message,
+            code: err.code,
+            type: err.type
+          });
+          console.groupEnd();
+        });
+    }
+  }, [stripe, elements, price, plan?.currency, planQuantity]);
+
+  useEffect(() => {
+    console.log("Price/Plan Debug Info:", {
       updatedPrice,
       planAmount: plan?.amount,
       finalPrice: price,
@@ -170,177 +433,6 @@ export const SubmitPaymentMethod = ({
   ]);
 
   useEffect(() => {
-    if (!stripe || !plan || !price) {
-      console.log("Payment request prerequisites not met:", {
-        hasStripe: !!stripe,
-        hasPlan: !!plan,
-        hasPrice: !!price,
-        priceValue: price,
-        planDetails: plan,
-        stripeElement: !!elements?.getElement(PaymentElement)
-      });
-      return;
-    }
-
-    try {
-      const priceInCents = Math.round(price * 100);
-      const totalAmount = price * planQuantity;
-      const totalAmountInCents = Math.round(totalAmount * 100);
-
-      console.log("Creating payment request:", {
-        amount: priceInCents,
-        totalAmount: totalAmountInCents,
-        currency: plan.currency?.toLowerCase(),
-        originalPrice: price,
-        planQuantity,
-        label: plan.nickname || "Payment",
-        billingDetails: {
-          name: window?.Pelcro?.user?.read()?.name,
-          email: window?.Pelcro?.user?.read()?.email
-        }
-      });
-
-      const paymentRequest = stripe.paymentRequest({
-        country: "US",
-        currency: plan.currency.toLowerCase(),
-        total: {
-          label: plan.nickname || "Payment",
-          amount: totalAmountInCents,
-          pending: false
-        }
-      });
-
-      paymentRequest.on("paymentmethod", (event) => {
-        console.log(
-          "Payment method selected:",
-          event.paymentMethod.type
-        );
-      });
-
-      paymentRequest.on("shippingaddresschange", (event) => {
-        console.log(
-          "Shipping address changed:",
-          event.shippingAddress
-        );
-      });
-
-      const element = elements?.getElement(PaymentElement);
-      if (element) {
-        console.log(
-          "Updating element with amount:",
-          totalAmountInCents
-        );
-        element.update({
-          payment_request: {
-            currency: plan.currency.toLowerCase(),
-            total: {
-              label: plan.nickname || "Payment",
-              amount: totalAmountInCents,
-              pending: false
-            }
-          }
-        });
-      }
-
-      paymentRequest.canMakePayment().then((result) => {
-        console.log("Can make payment result:", {
-          canMakePayment: !!result,
-          applePay: result?.applePay,
-          googlePay: result?.googlePay
-        });
-
-        dispatch({
-          type: "SET_CAN_MAKE_PAYMENT",
-          payload: !!result
-        });
-        dispatch({
-          type: "SET_PAYMENT_REQUEST",
-          payload: paymentRequest
-        });
-      });
-    } catch (error) {
-      console.error("Payment request error:", {
-        error,
-        message: error.message,
-        code: error.code,
-        type: error.type,
-        stripeState: {
-          hasStripe: !!stripe,
-          hasElements: !!elements
-        }
-      });
-    }
-  }, [
-    stripe,
-    plan?.currency,
-    plan?.nickname,
-    price,
-    dispatch,
-    elements,
-    planQuantity
-  ]);
-
-  const handleSubmit = async () => {
-    if (cardProcessor !== "stripe") {
-      dispatch({ type: SUBMIT_PAYMENT });
-      onClick?.();
-      return;
-    }
-
-    if (!stripe || !elements) return;
-
-    try {
-      // Trigger form validation and wallet collection
-      const { error: submitError } = await elements.submit();
-      if (submitError) {
-        console.error("Submit error:", submitError);
-        return;
-      }
-
-      // Create the payment method
-      const { error: paymentMethodError, paymentMethod } =
-        await stripe.createPaymentMethod({
-          elements,
-          params: {
-            billing_details: {
-              name: window?.Pelcro?.user?.read()?.name,
-              email: window?.Pelcro?.user?.read()?.email,
-              phone: window?.Pelcro?.user?.read()?.phone
-            }
-          }
-        });
-
-      if (paymentMethodError) {
-        console.error("Payment method error:", paymentMethodError);
-        return;
-      }
-
-      // Create payment source with Pelcro
-      window.Pelcro.paymentMethods.create(
-        {
-          auth_token: window.Pelcro.user.read().auth_token,
-          token: paymentMethod.id
-        },
-        (err, res) => {
-          if (err) {
-            console.error(
-              "Pelcro payment method creation error:",
-              err
-            );
-            return;
-          }
-
-          console.log("Payment source created successfully:", res);
-          dispatch({ type: SUBMIT_PAYMENT });
-          onClick?.();
-        }
-      );
-    } catch (error) {
-      console.error("Payment error:", error);
-    }
-  };
-
-  useEffect(() => {
     if (
       supportsTap &&
       isUserFirstName &&
@@ -377,21 +469,142 @@ export const SubmitPaymentMethod = ({
     year
   ]);
 
+  const handleSubmit = async () => {
+    if (cardProcessor !== "stripe") {
+      dispatch({ type: SUBMIT_PAYMENT });
+      onClick?.();
+      return;
+    }
+
+    if (!stripe || !elements) return;
+
+    try {
+      // Trigger form validation and wallet collection
+      const { error: submitError } = await elements.submit();
+      if (submitError) {
+        console.error("Submit error:", submitError);
+        return;
+      }
+
+      // Create the payment method
+      const { error: paymentMethodError, paymentMethod } =
+        await stripe.createPaymentMethod({
+          elements
+        });
+
+      if (paymentMethodError) {
+        console.error("Payment method error:", paymentMethodError);
+        return;
+      }
+
+      // Create payment source with Pelcro
+      window.Pelcro.paymentMethods.create(
+        {
+          auth_token: window.Pelcro.user.read().auth_token,
+          token: paymentMethod.id
+        },
+        (err, res) => {
+          if (err) {
+            console.error(
+              "Pelcro payment method creation error:",
+              err
+            );
+            dispatch({
+              type: "SHOW_ALERT",
+              payload: {
+                type: "error",
+                content: getErrorMessages(err)
+              }
+            });
+            return;
+          }
+
+          console.log("Payment source created successfully:", res);
+          const sourceId = res.data.id;
+
+          if (type === "createPayment") {
+            // Handle subscription creation
+            window.Pelcro.subscription.create(
+              {
+                source_id: sourceId,
+                auth_token: window.Pelcro.user.read().auth_token,
+                plan_id: plan.id,
+                quantity: plan?.quantity || 1,
+                coupon_code: state?.couponCode,
+                campaign_key:
+                  window.Pelcro.helpers.getURLParameter(
+                    "campaign_key"
+                  ),
+                address_id: product?.address_required
+                  ? selectedAddressId
+                  : null
+              },
+              (subErr, subRes) => {
+                if (subErr) {
+                  dispatch({
+                    type: "SHOW_ALERT",
+                    payload: {
+                      type: "error",
+                      content: getErrorMessages(subErr)
+                    }
+                  });
+                  return;
+                }
+                dispatch({ type: SUBMIT_PAYMENT });
+                onClick?.();
+              }
+            );
+          } else if (type === "orderCreate") {
+            // Handle order creation
+            purchase(
+              new StripeGateway(),
+              sourceId,
+              state,
+              dispatch,
+              () => {
+                dispatch({ type: SUBMIT_PAYMENT });
+                onClick?.();
+              },
+              () => {
+                console.error("Order Creation Failed");
+              }
+            );
+          } else {
+            dispatch({ type: SUBMIT_PAYMENT });
+            onClick?.();
+          }
+        }
+      );
+    } catch (error) {
+      console.error("Payment error:", error);
+      dispatch({
+        type: "SHOW_ALERT",
+        payload: {
+          type: "error",
+          content: getErrorMessages(error)
+        }
+      });
+    }
+  };
+
   return (
     <>
       {/* Show PaymentElement only for Stripe */}
-      {cardProcessor === "stripe" ? (
-        <>
+      {cardProcessor === "stripe" && (
+        <div className="plc-space-y-4">
           {!selectedPaymentMethodId && (
-            <PaymentElement
-              id="payment-element"
-              options={paymentElementOptions}
-            />
+            <div className="plc-p-4 plc-bg-white plc-rounded-lg plc-shadow">
+              <PaymentElement
+                id="payment-element"
+                options={paymentElementOptions}
+                className="plc-w-full"
+              />
+            </div>
           )}
 
           <Button
             role="submit"
-            className="plc-w-full plc-py-3 plc-mt-4"
+            className="plc-w-full plc-py-3"
             variant="solid"
             isLoading={isLoading}
             onClick={handleSubmit}
@@ -411,9 +624,11 @@ export const SubmitPaymentMethod = ({
               t("labels.submit")
             )}
           </Button>
-        </>
-      ) : (
-        // Show only button for non-Stripe processors
+        </div>
+      )}
+
+      {/* Show only button for non-Stripe processors */}
+      {cardProcessor !== "stripe" && (
         <Button
           role="submit"
           className="plc-w-full plc-py-3 plc-mt-4"
