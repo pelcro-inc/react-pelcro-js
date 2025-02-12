@@ -78,7 +78,8 @@ export const SubmitPaymentMethod = ({
   const paymentElementOptions = {
     layout: {
       type: "tabs",
-      defaultCollapsed: false
+      defaultCollapsed: false,
+      radios: false
     },
     paymentMethodOrder: ["apple_pay", "card"],
     wallets: {
@@ -94,18 +95,6 @@ export const SubmitPaymentMethod = ({
     },
     business: {
       name: "Motor Sport Magazine"
-    },
-    amount: {
-      currency: plan?.currency?.toLowerCase() || "gbp",
-      value: Math.round(price * planQuantity),
-      breakdown: {
-        items: [
-          {
-            label: plan?.nickname || "Payment",
-            amount: Math.round(price * planQuantity)
-          }
-        ]
-      }
     },
     fields: {
       billingDetails: {
@@ -181,14 +170,17 @@ export const SubmitPaymentMethod = ({
                 Authorization: `Bearer ${
                   window.Pelcro.user.read().auth_token
                 }`,
-                "Content-Type": "application/json"
-              }
+                "Content-Type": "application/json",
+                Origin: window.location.origin
+              },
+              credentials: "include",
+              mode: "cors"
             }
           );
 
           if (!response.ok) {
             throw new Error(
-              `Domain registration failed: ${response.statusText}`
+              `Domain registration failed: ${response.status} - ${response.statusText}`
             );
           }
         } catch (err) {
@@ -209,6 +201,13 @@ export const SubmitPaymentMethod = ({
             label: plan?.nickname || "Payment",
             pending: false
           },
+          displayItems: [
+            {
+              amount: finalAmount,
+              label: plan?.nickname || "Payment",
+              pending: false
+            }
+          ],
           requestPayerName: true,
           requestPayerEmail: true,
           requestShipping: false,
@@ -221,6 +220,11 @@ export const SubmitPaymentMethod = ({
         if (result?.applePay) {
           console.log("✅ Apple Pay Setup Complete:", {
             amount: finalAmount,
+            formattedAmount: getFormattedPriceByLocal(
+              finalAmount / 100,
+              currency,
+              getPageOrDefaultLanguage()
+            ),
             currency,
             label: plan?.nickname || "Payment"
           });
@@ -239,7 +243,8 @@ export const SubmitPaymentMethod = ({
               window.Pelcro.paymentMethods.create(
                 {
                   auth_token: window.Pelcro.user.read().auth_token,
-                  token: paymentMethod.id
+                  token: paymentMethod.id,
+                  gateway: "stripe"
                 },
                 (err, res) => {
                   if (err) {
@@ -248,7 +253,8 @@ export const SubmitPaymentMethod = ({
                       {
                         error: err.message,
                         code: err.code,
-                        type: paymentMethod.type
+                        type: paymentMethod.type,
+                        details: err.details
                       }
                     );
                     event.complete("fail");
@@ -262,7 +268,8 @@ export const SubmitPaymentMethod = ({
             } catch (error) {
               console.error("❌ Payment Processing Error:", {
                 error: error.message,
-                code: error.code
+                code: error.code,
+                stack: error.stack
               });
               event.complete("fail");
             }
@@ -270,14 +277,16 @@ export const SubmitPaymentMethod = ({
         } else {
           console.log("⚠️ Apple Pay Not Available:", {
             device: navigator.platform,
-            browser: navigator.userAgent
+            browser: navigator.userAgent,
+            location: window.location.hostname
           });
         }
       } catch (error) {
         console.error("❌ Payment Setup Error:", {
           error: error.message,
           code: error.code,
-          type: error.type
+          type: error.type,
+          stack: error.stack
         });
       }
     };
