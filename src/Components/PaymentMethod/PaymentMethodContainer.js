@@ -1347,7 +1347,7 @@ const PaymentMethodContainerWithoutStripe = ({
       return;
     try {
       const paymentRequest = stripe.paymentRequest({
-        country: window.Pelcro.user.location.countryCode || "US",
+        country: "US",
         currency: plan.currency,
         total: {
           label: plan.nickname || plan.description,
