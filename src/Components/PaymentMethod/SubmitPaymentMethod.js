@@ -148,100 +148,141 @@ export const SubmitPaymentMethod = ({
       return;
     }
 
-    // Calculate final amount in smallest currency unit (e.g., cents)
-    const rawAmount = price * planQuantity;
-    const finalAmount = Math.round(rawAmount);
-    const currency = plan?.currency?.toLowerCase() || "gbp";
-
-    console.log("💰 Amount Calculation:", {
-      rawAmount,
-      finalAmount,
-      currency,
-      planQuantity,
-      price
-    });
-
-    // Strict amount validation
-    if (
-      !finalAmount ||
-      finalAmount <= 0 ||
-      !Number.isInteger(finalAmount)
-    ) {
-      console.error("❌ Amount Error:", { finalAmount, currency });
-      return;
-    }
-
-    // Single payment request initialization
-    const paymentRequest = stripe.paymentRequest({
-      country: "GB",
-      currency,
-      total: {
-        amount: finalAmount,
-        label: plan?.nickname || "Payment",
-        pending: false
-      },
-      requestPayerName: true,
-      requestPayerEmail: true,
-      requestShipping: false,
-      disableWallets: ["googlePay"]
-    });
-
-    console.log("🔄 Payment Request Created:", {
-      amount: finalAmount,
-      currency,
-      label: plan?.nickname || "Payment"
-    });
-
-    // Set up payment request handler
-    paymentRequest.on("paymentmethod", async (event) => {
+    const setupApplePay = async () => {
       try {
-        const { paymentMethod } = event;
-        console.log("💳 Payment Method Received:", paymentMethod);
+        // Calculate final amount in smallest currency unit (e.g., cents)
+        const rawAmount = price * planQuantity;
+        const finalAmount = Math.round(rawAmount);
+        const currency = plan?.currency?.toLowerCase() || "gbp";
 
-        window.Pelcro.paymentMethods.create(
-          {
-            auth_token: window.Pelcro.user.read().auth_token,
-            token: paymentMethod.id
-          },
-          (err, res) => {
-            if (err) {
-              console.error(
-                "❌ Payment Method Creation Failed:",
-                err
-              );
-              event.complete("fail");
-              return;
+        // Strict amount validation
+        if (
+          !finalAmount ||
+          finalAmount <= 0 ||
+          !Number.isInteger(finalAmount)
+        ) {
+          console.error("❌ Payment Validation Failed:", {
+            finalAmount,
+            currency,
+            rawAmount,
+            price,
+            planQuantity
+          });
+          return;
+        }
+
+        // Register domain with Stripe for Apple Pay
+        try {
+          const response = await fetch(
+            `${window.Pelcro.environment.domain}/api/v1/stripe/apple-domains/register`,
+            {
+              method: "POST",
+              headers: {
+                Authorization: `Bearer ${
+                  window.Pelcro.user.read().auth_token
+                }`,
+                "Content-Type": "application/json"
+              }
             }
-            console.log("✅ Payment Method Created:", res.data);
-            event.complete("success");
-            handlePayment(res.data);
+          );
+
+          if (!response.ok) {
+            throw new Error(
+              `Domain registration failed: ${response.statusText}`
+            );
           }
-        );
+        } catch (err) {
+          console.error("❌ Apple Pay Domain Registration Failed:", {
+            error: err.message,
+            status: err.response?.status,
+            domain: window.location.hostname
+          });
+          // Continue anyway as domain might be already registered
+        }
+
+        // Single payment request initialization
+        const paymentRequest = stripe.paymentRequest({
+          country: "GB",
+          currency,
+          total: {
+            amount: finalAmount,
+            label: plan?.nickname || "Payment",
+            pending: false
+          },
+          requestPayerName: true,
+          requestPayerEmail: true,
+          requestShipping: false,
+          disableWallets: ["googlePay"]
+        });
+
+        // Check if Apple Pay is available
+        const result = await paymentRequest.canMakePayment();
+
+        if (result?.applePay) {
+          console.log("✅ Apple Pay Setup Complete:", {
+            amount: finalAmount,
+            currency,
+            label: plan?.nickname || "Payment"
+          });
+
+          dispatch({ type: "SET_CAN_MAKE_PAYMENT", payload: true });
+          dispatch({
+            type: "SET_PAYMENT_REQUEST",
+            payload: paymentRequest
+          });
+
+          // Set up payment request handler
+          paymentRequest.on("paymentmethod", async (event) => {
+            try {
+              const { paymentMethod } = event;
+
+              window.Pelcro.paymentMethods.create(
+                {
+                  auth_token: window.Pelcro.user.read().auth_token,
+                  token: paymentMethod.id
+                },
+                (err, res) => {
+                  if (err) {
+                    console.error(
+                      "❌ Payment Method Creation Failed:",
+                      {
+                        error: err.message,
+                        code: err.code,
+                        type: paymentMethod.type
+                      }
+                    );
+                    event.complete("fail");
+                    return;
+                  }
+
+                  event.complete("success");
+                  handlePayment(res.data);
+                }
+              );
+            } catch (error) {
+              console.error("❌ Payment Processing Error:", {
+                error: error.message,
+                code: error.code
+              });
+              event.complete("fail");
+            }
+          });
+        } else {
+          console.log("⚠️ Apple Pay Not Available:", {
+            device: navigator.platform,
+            browser: navigator.userAgent
+          });
+        }
       } catch (error) {
-        console.error("❌ Payment Method Error:", error);
-        event.complete("fail");
-      }
-    });
-
-    // Check if payment method is available
-    paymentRequest.canMakePayment().then((result) => {
-      console.log("🔍 Payment Method Check:", {
-        applePay: result?.applePay,
-        googlePay: result?.googlePay
-      });
-
-      if (result?.applePay) {
-        dispatch({ type: "SET_CAN_MAKE_PAYMENT", payload: true });
-        dispatch({
-          type: "SET_PAYMENT_REQUEST",
-          payload: paymentRequest
+        console.error("❌ Payment Setup Error:", {
+          error: error.message,
+          code: error.code,
+          type: error.type
         });
       }
-    });
-
-    return () => {
-      console.log("🧹 Cleaning up payment request");
     };
+
+    setupApplePay();
   }, [stripe, elements, price, plan?.currency, planQuantity]);
 
   useEffect(() => {
