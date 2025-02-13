@@ -1395,6 +1395,14 @@ const PaymentMethodContainerWithoutStripe = ({
     }
   };
 
+  // Call initPaymentRequest from useEffect when stripe is ready
+  useEffect(() => {
+    if (stripe) {
+      console.log(stripe, state, dispatch);
+      initPaymentRequest(state, dispatch);
+    }
+  }, [stripe]); // Add necessary dependencies
+
   /**
    * Attempt to confirm a Stripe card payment via it's PaymentIntent.
    * Only trigger method if PaymentIntent status is `requires_action`.
