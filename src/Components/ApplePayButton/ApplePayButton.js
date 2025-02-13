@@ -125,8 +125,7 @@ export const ApplePayButton = ({ onClick, props, ...otherProps }) => {
       // Define ApplePayPaymentRequest
       // @see https://developer.apple.com/documentation/apple_pay_on_the_web/apple_pay_js_api/creating_an_apple_pay_session
       const ApplePayPaymentRequest = {
-        countryCode:
-          window?.Pelcro?.user?.location?.countryCode || "US",
+        countryCode: "US",
         currencyCode: getCurrencyCode(),
         merchantCapabilities: ["supports3DS"],
         supportedNetworks: ["visa", "masterCard", "amex", "discover"],
