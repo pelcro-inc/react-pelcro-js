@@ -1394,14 +1394,74 @@ const PaymentMethodContainerWithoutStripe = ({
       );
     }
   };
-
-  // Call initPaymentRequest from useEffect when stripe is ready
   useEffect(() => {
     if (stripe) {
-      console.log(stripe, state, dispatch);
-      initPaymentRequest(state, dispatch);
+      const pr = stripe.paymentRequest({
+        country: window.Pelcro.user.location.countryCode || "US",
+        currency: plan.currency,
+        total: {
+          label: plan.nickname || plan.description,
+          amount: state.updatedPrice || plan.amount
+        }
+      });
+      // When Google pay / Apple pay source created
+      pr.on("source", ({ complete, source, ...data }) => {
+        dispatch({ type: DISABLE_COUPON_BUTTON, payload: true });
+        dispatch({ type: DISABLE_SUBMIT, payload: true });
+        dispatch({ type: LOADING, payload: true });
+        complete("success");
+
+        if (source?.card?.three_d_secure === "required") {
+          return generate3DSecureSource(source).then(
+            ({ source, error }) => {
+              if (error) {
+                return handlePaymentError(error);
+              }
+
+              toggleAuthenticationPendingView(true, source);
+            }
+          );
+        }
+
+        dispatch({
+          type: SUBSCRIBE,
+          payload: source
+        });
+      });
+      pr.on("paymentmethod", ({ complete, source, ...data }) => {
+        dispatch({ type: DISABLE_COUPON_BUTTON, payload: true });
+        dispatch({ type: DISABLE_SUBMIT, payload: true });
+        dispatch({ type: LOADING, payload: true });
+        complete("success");
+
+        if (source?.card?.three_d_secure === "required") {
+          return generate3DSecureSource(source).then(
+            ({ source, error }) => {
+              if (error) {
+                return handlePaymentError(error);
+              }
+
+              toggleAuthenticationPendingView(true, source);
+            }
+          );
+        }
+
+        dispatch({
+          type: SUBSCRIBE,
+          payload: source
+        });
+      });
+      pr.canMakePayment().then((result) => {
+        if (result) {
+          dispatch({
+            type: SET_PAYMENT_REQUEST,
+            payload: pr
+          });
+          dispatch({ type: SET_CAN_MAKE_PAYMENT, payload: !!result });
+        }
+      });
     }
-  }, [stripe]); // Add necessary dependencies
+  }, [stripe]);
 
   /**
    * Attempt to confirm a Stripe card payment via it's PaymentIntent.
