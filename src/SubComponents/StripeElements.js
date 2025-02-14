@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   PaymentRequestButtonElement,
   PaymentElement,
@@ -21,20 +21,20 @@ import {
 
 export const PelcroPaymentRequestButton = (props) => {
   const stripe = useStripe();
+  const [isInitializing, setIsInitializing] = useState(true);
+  const [localPaymentRequest, setLocalPaymentRequest] =
+    useState(null);
   const {
-    state: {
-      canMakePayment,
-      paymentRequest,
-      currentPlan,
-      updatedPrice
-    },
+    state: { canMakePayment, currentPlan, updatedPrice },
     dispatch
   } = useContext(store);
 
   useEffect(() => {
-    if (stripe) {
+    if (!stripe || !currentPlan?.currency) return;
+
+    const initializePaymentRequest = async () => {
       try {
-        const paymentRequest = stripe.paymentRequest({
+        const pr = stripe.paymentRequest({
           country: window.Pelcro.user.location.countryCode || "US",
           currency: currentPlan.currency,
           total: {
@@ -43,83 +43,75 @@ export const PelcroPaymentRequestButton = (props) => {
           }
         });
 
-        // When Google pay / Apple pay source created
-        paymentRequest.on(
-          "source",
-          ({ complete, source, ...data }) => {
-            dispatch({ type: DISABLE_COUPON_BUTTON, payload: true });
-            dispatch({ type: DISABLE_SUBMIT, payload: true });
-            dispatch({ type: LOADING, payload: true });
-            complete("success");
+        pr.on("source", ({ complete, source }) => {
+          dispatch({ type: DISABLE_COUPON_BUTTON, payload: true });
+          dispatch({ type: DISABLE_SUBMIT, payload: true });
+          dispatch({ type: LOADING, payload: true });
+          complete("success");
 
-            if (source?.card?.three_d_secure === "required") {
-              return generate3DSecureSource(source).then(
-                ({ source, error }) => {
-                  if (error) {
-                    return handlePaymentError(error);
-                  }
-
-                  toggleAuthenticationPendingView(true, source);
+          if (source?.card?.three_d_secure === "required") {
+            return generate3DSecureSource(source).then(
+              ({ source, error }) => {
+                if (error) {
+                  return handlePaymentError(error);
                 }
-              );
-            }
 
-            dispatch({
-              type: SUBSCRIBE,
-              payload: source
-            });
+                toggleAuthenticationPendingView(true, source);
+              }
+            );
           }
-        );
 
-        paymentRequest.canMakePayment().then((result) => {
-          dispatch({ type: SET_CAN_MAKE_PAYMENT, payload: !!result });
+          dispatch({
+            type: SUBSCRIBE,
+            payload: source
+          });
         });
 
-        dispatch({
-          type: SET_PAYMENT_REQUEST,
-          payload: paymentRequest
-        });
-      } catch {
-        console.log(
-          "Google Pay/Apple pay isn't available/supported in this country"
-        );
+        const result = await pr.canMakePayment();
+        if (result) {
+          setLocalPaymentRequest(pr);
+          dispatch({ type: SET_CAN_MAKE_PAYMENT, payload: true });
+        }
+      } catch (error) {
+        console.error("Payment request initialization error:", error);
+      } finally {
+        setIsInitializing(false);
       }
-    }
-  }, [stripe]);
+    };
 
-  // Don't render anything if payment request is not initialized
-  // or if the device cannot make payments
-  if (!paymentRequest || !canMakePayment) {
+    initializePaymentRequest();
+  }, [stripe, currentPlan, dispatch]);
+
+  // Don't render anything while initializing or if can't make payment
+  if (isInitializing || !localPaymentRequest || !canMakePayment) {
     return null;
   }
 
   const updatePaymentRequest = () => {
-    if (!paymentRequest) return;
+    if (!localPaymentRequest) return;
 
-    paymentRequest.update({
+    localPaymentRequest.update({
       total: {
         label: currentPlan?.nickname || currentPlan?.description,
         amount: updatedPrice ?? currentPlan?.amount
       }
     });
   };
-  if (paymentRequest) {
-    return (
-      <PaymentRequestButtonElement
-        className="StripeElement stripe-payment-request-btn"
-        onClick={updatePaymentRequest}
-        paymentRequest={paymentRequest}
-        style={{
-          paymentRequestButton: {
-            theme: "dark",
-            height: "40px"
-          }
-        }}
-        {...props}
-      />
-    );
-  }
-  return null;
+
+  return (
+    <PaymentRequestButtonElement
+      className="StripeElement stripe-payment-request-btn"
+      onClick={updatePaymentRequest}
+      paymentRequest={localPaymentRequest}
+      style={{
+        paymentRequestButton: {
+          theme: "dark",
+          height: "40px"
+        }
+      }}
+      {...props}
+    />
+  );
 };
 
 export const CheckoutForm = ({ type }) => {
