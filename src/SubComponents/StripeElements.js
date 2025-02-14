@@ -1,7 +1,8 @@
 import React, { useContext, useEffect } from "react";
 import {
   PaymentRequestButtonElement,
-  PaymentElement
+  PaymentElement,
+  useStripe
 } from "@stripe/react-stripe-js";
 import { store } from "../Components/PaymentMethod/PaymentMethodContainer";
 import { usePelcro } from "../hooks/usePelcro";
@@ -9,7 +10,6 @@ import { getSiteCardProcessor } from "../Components/common/Helpers";
 import { MonthSelect } from "./MonthSelect";
 import { YearSelect } from "./YearSelect";
 import { Input } from "./Input";
-import { useStripe } from "../hooks/useStripe";
 import {
   DISABLE_COUPON_BUTTON,
   DISABLE_SUBMIT,
