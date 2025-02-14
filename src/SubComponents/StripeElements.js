@@ -20,17 +20,23 @@ export const PelcroPaymentRequestButton = (props) => {
     }
   } = useContext(store);
 
+  // Don't render anything if payment request is not initialized
+  // or if the device cannot make payments
+  if (!paymentRequest || !canMakePayment) {
+    return null;
+  }
+
   const updatePaymentRequest = () => {
-    // Make sure payment request is up to date, eg. user added a coupon code.
-    paymentRequest?.update({
+    if (!paymentRequest) return;
+
+    paymentRequest.update({
       total: {
         label: currentPlan?.nickname || currentPlan?.description,
         amount: updatedPrice ?? currentPlan?.amount
       }
     });
   };
-
-  if (canMakePayment) {
+  if (paymentRequest) {
     return (
       <PaymentRequestButtonElement
         className="StripeElement stripe-payment-request-btn"
