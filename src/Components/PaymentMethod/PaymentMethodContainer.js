@@ -1428,7 +1428,7 @@ const PaymentMethodContainerWithoutStripe = ({
           payload: source
         });
       });
-      pr.on("paymentmethod", ({ complete, source, ...data }) => {
+      pr.on("source", ({ complete, source, ...data }) => {
         dispatch({ type: DISABLE_COUPON_BUTTON, payload: true });
         dispatch({ type: DISABLE_SUBMIT, payload: true });
         dispatch({ type: LOADING, payload: true });
