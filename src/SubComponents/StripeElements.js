@@ -31,19 +31,7 @@ export const PelcroPaymentRequestButton = (props) => {
   } = useContext(store);
 
   useEffect(() => {
-    // Log initial conditions
-    console.log("[Apple Pay] Initialization:", {
-      hasStripe: !!stripe,
-      plan: currentPlan,
-      price: updatedPrice,
-      currency: currentPlan?.currency
-    });
-
     if (!stripe || !currentPlan?.currency) {
-      console.log("[Apple Pay] Missing required data:", {
-        stripe: !!stripe,
-        currency: currentPlan?.currency
-      });
       setIsInitializing(false);
       return;
     }
@@ -52,12 +40,6 @@ export const PelcroPaymentRequestButton = (props) => {
 
     const initializePaymentRequest = async () => {
       try {
-        console.log("[Apple Pay] Creating payment request with:", {
-          country: window.Pelcro.user.location.countryCode || "US",
-          currency: currentPlan.currency.toLowerCase(),
-          amount: updatedPrice ?? currentPlan?.amount ?? 0
-        });
-
         const pr = stripe.paymentRequest({
           country: window.Pelcro.user.location.countryCode || "US",
           currency: currentPlan.currency.toLowerCase(),
@@ -74,67 +56,35 @@ export const PelcroPaymentRequestButton = (props) => {
           requestShipping: false
         });
 
-        // Handle source event for Apple Pay
         pr.on("source", async (event) => {
           try {
-            console.log("[Apple Pay] Source event received:", {
-              type: event.source.type,
-              id: event.source.id,
-              card: event.source.card
-            });
-
             dispatch({ type: DISABLE_COUPON_BUTTON, payload: true });
             dispatch({ type: DISABLE_SUBMIT, payload: true });
             dispatch({ type: LOADING, payload: true });
 
             event.complete("success");
 
-            // Check if 3D Secure is required
             if (event.source?.card?.three_d_secure === "required") {
-              console.log(
-                "[Apple Pay] 3D Secure authentication required"
-              );
               return generate3DSecureSource(event.source).then(
                 ({ source, error }) => {
                   if (error) {
-                    console.error(
-                      "[Apple Pay] 3D Secure error:",
-                      error
-                    );
                     return handlePaymentError(error);
                   }
-
-                  console.log(
-                    "[Apple Pay] 3D Secure source generated:",
-                    source
-                  );
                   toggleAuthenticationPendingView(true, source);
                 }
               );
             }
 
-            // Format source data to match subscription requirements
             const sourceData = {
               id: event.source.id,
               isExistingSource: false
             };
-
-            console.log(
-              "[Apple Pay] Formatted source data:",
-              sourceData
-            );
 
             dispatch({
               type: SUBSCRIBE,
               payload: sourceData
             });
           } catch (error) {
-            console.error("[Apple Pay] Source error:", {
-              message: error.message,
-              code: error.code,
-              type: error.type
-            });
-
             dispatch({
               type: SHOW_ALERT,
               payload: {
@@ -146,69 +96,37 @@ export const PelcroPaymentRequestButton = (props) => {
 
             event.complete("fail");
 
-            // Reset loading states
             dispatch({ type: DISABLE_COUPON_BUTTON, payload: false });
             dispatch({ type: DISABLE_SUBMIT, payload: false });
             dispatch({ type: LOADING, payload: false });
           }
         });
 
-        // Handle cancel event
         pr.on("cancel", () => {
-          console.log("[Apple Pay] Payment cancelled by user");
           dispatch({ type: DISABLE_COUPON_BUTTON, payload: false });
           dispatch({ type: DISABLE_SUBMIT, payload: false });
           dispatch({ type: LOADING, payload: false });
         });
 
         const result = await pr.canMakePayment();
-        console.log("[Apple Pay] Can make payment result:", result);
 
         if (mounted && result) {
           setLocalPaymentRequest(pr);
           dispatch({ type: SET_PAYMENT_REQUEST, payload: pr });
           dispatch({ type: SET_CAN_MAKE_PAYMENT, payload: true });
-          console.log(
-            "[Apple Pay] Payment request initialized successfully"
-          );
-        } else {
-          console.log(
-            "[Apple Pay] Cannot make payment or component unmounted",
-            {
-              mounted,
-              canMakePayment: !!result
-            }
-          );
-
-          if (mounted) {
-            dispatch({
-              type: SHOW_ALERT,
-              payload: {
-                type: "error",
-                content:
-                  "Apple Pay is not available. Please use a different payment method."
-              }
-            });
-          }
-        }
-      } catch (error) {
-        console.error("[Apple Pay] Initialization error:", {
-          message: error.message,
-          code: error.code,
-          type: error.type,
-          stack: error.stack
-        });
-
-        if (mounted) {
-          dispatch({ type: SET_CAN_MAKE_PAYMENT, payload: false });
+        } else if (mounted) {
           dispatch({
             type: SHOW_ALERT,
             payload: {
               type: "error",
               content:
-                "Failed to initialize Apple Pay. Please try again or use a different payment method."
+                "Apple Pay is not available. Please use a different payment method."
             }
           });
+        }
+      } catch (error) {
+        if (mounted) {
+          dispatch({ type: SET_CAN_MAKE_PAYMENT, payload: false });
         }
       } finally {
         if (mounted) {
@@ -221,16 +139,8 @@ export const PelcroPaymentRequestButton = (props) => {
 
     return () => {
       mounted = false;
-      console.log("[Apple Pay] Component cleanup");
     };
   }, [stripe, currentPlan, updatedPrice, dispatch]);
-
-  // Log render conditions
-  console.log("[Apple Pay] Render state:", {
-    isInitializing,
-    canMakePayment,
-    hasPaymentRequest: !!localPaymentRequest
-  });
 
   if (isInitializing || !canMakePayment || !localPaymentRequest) {
     return null;
@@ -245,7 +155,7 @@ export const PelcroPaymentRequestButton = (props) => {
           paymentRequestButton: {
             theme: "dark",
             height: "40px",
-            type: "buy" // Use 'buy' type for clearer user intent
+            buttonType: "plain"
           }
         }
       }}
@@ -267,7 +177,7 @@ export const CheckoutForm = ({ type }) => {
 
   const paymentElementOptions = {
     layout: {
-      type: "tabs", // or accordion
+      type: "tabs",
       defaultCollapsed: false
     },
     defaultValues: {
@@ -281,11 +191,8 @@ export const CheckoutForm = ({ type }) => {
         address: "never"
       }
     },
-    terms: {
-      applePay: "never",
-      card: "never",
-      googlePay: "never",
-      paypal: "never"
+    wallets: {
+      applePay: "never"
     }
   };
 
