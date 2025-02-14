@@ -17,7 +17,7 @@ import {
   SUBSCRIBE,
   SET_PAYMENT_REQUEST,
   SET_CAN_MAKE_PAYMENT
-} from "../redux/actions/paymentActions";
+} from "../utils/action-types";
 
 export const PelcroPaymentRequestButton = (props) => {
   const stripe = useStripe();
@@ -33,48 +33,57 @@ export const PelcroPaymentRequestButton = (props) => {
 
   useEffect(() => {
     if (stripe) {
-      const pr = stripe.paymentRequest({
-        country: window.Pelcro.user.location.countryCode || "US",
-        currency: currentPlan.currency,
-        total: {
-          label: currentPlan?.nickname || currentPlan?.description,
-          amount: updatedPrice ?? currentPlan?.amount
-        }
-      });
+      try {
+        const paymentRequest = stripe.paymentRequest({
+          country: window.Pelcro.user.location.countryCode || "US",
+          currency: plan.currency,
+          total: {
+            label: plan.nickname || plan.description,
+            amount: state.updatedPrice || plan.amount
+          }
+        });
 
-      paymentRequest.on("source", ({ complete, source, ...data }) => {
-        dispatch({ type: DISABLE_COUPON_BUTTON, payload: true });
-        dispatch({ type: DISABLE_SUBMIT, payload: true });
-        dispatch({ type: LOADING, payload: true });
-        complete("success");
+        // When Google pay / Apple pay source created
+        paymentRequest.on(
+          "source",
+          ({ complete, source, ...data }) => {
+            dispatch({ type: DISABLE_COUPON_BUTTON, payload: true });
+            dispatch({ type: DISABLE_SUBMIT, payload: true });
+            dispatch({ type: LOADING, payload: true });
+            complete("success");
 
-        if (source?.card?.three_d_secure === "required") {
-          return generate3DSecureSource(source).then(
-            ({ source, error }) => {
-              if (error) {
-                return handlePaymentError(error);
-              }
+            if (source?.card?.three_d_secure === "required") {
+              return generate3DSecureSource(source).then(
+                ({ source, error }) => {
+                  if (error) {
+                    return handlePaymentError(error);
+                  }
 
-              toggleAuthenticationPendingView(true, source);
+                  toggleAuthenticationPendingView(true, source);
+                }
+              );
             }
-          );
-        }
+
+            dispatch({
+              type: SUBSCRIBE,
+              payload: source
+            });
+          }
+        );
+
+        paymentRequest.canMakePayment().then((result) => {
+          dispatch({ type: SET_CAN_MAKE_PAYMENT, payload: !!result });
+        });
 
         dispatch({
-          type: SUBSCRIBE,
-          payload: source
+          type: SET_PAYMENT_REQUEST,
+          payload: paymentRequest
         });
-      });
-
-      pr.canMakePayment().then((result) => {
-        if (result) {
-          dispatch({
-            type: SET_PAYMENT_REQUEST,
-            payload: pr
-          });
-          dispatch({ type: SET_CAN_MAKE_PAYMENT, payload: true });
-        }
-      });
+      } catch {
+        console.log(
+          "Google Pay/Apple pay isn't available/supported in this country"
+        );
+      }
     }
   }, [stripe]);
 
