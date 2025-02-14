@@ -16,7 +16,8 @@ import {
   LOADING,
   SUBSCRIBE,
   SET_PAYMENT_REQUEST,
-  SET_CAN_MAKE_PAYMENT
+  SET_CAN_MAKE_PAYMENT,
+  SHOW_ALERT
 } from "../utils/action-types";
 
 export const PelcroPaymentRequestButton = (props) => {
@@ -30,83 +31,222 @@ export const PelcroPaymentRequestButton = (props) => {
   } = useContext(store);
 
   useEffect(() => {
-    if (!stripe || !currentPlan?.currency) return;
+    // Log initial conditions
+    console.log("[Apple Pay] Initialization:", {
+      hasStripe: !!stripe,
+      plan: currentPlan,
+      price: updatedPrice,
+      currency: currentPlan?.currency
+    });
+
+    if (!stripe || !currentPlan?.currency) {
+      console.log("[Apple Pay] Missing required data:", {
+        stripe: !!stripe,
+        currency: currentPlan?.currency
+      });
+      setIsInitializing(false);
+      return;
+    }
+
+    let mounted = true;
 
     const initializePaymentRequest = async () => {
       try {
+        console.log("[Apple Pay] Creating payment request with:", {
+          country: window.Pelcro.user.location.countryCode || "US",
+          currency: currentPlan.currency.toLowerCase(),
+          amount: updatedPrice ?? currentPlan?.amount ?? 0
+        });
+
         const pr = stripe.paymentRequest({
           country: window.Pelcro.user.location.countryCode || "US",
-          currency: currentPlan.currency,
+          currency: currentPlan.currency.toLowerCase(),
           total: {
-            label: currentPlan?.nickname || currentPlan?.description,
-            amount: updatedPrice ?? currentPlan?.amount
+            label:
+              currentPlan?.nickname ||
+              currentPlan?.description ||
+              "Payment",
+            amount: updatedPrice ?? currentPlan?.amount ?? 0,
+            pending: false
+          },
+          requestPayerEmail: false,
+          requestPayerName: false,
+          requestShipping: false
+        });
+
+        // Handle source event for Apple Pay
+        pr.on("source", async (event) => {
+          try {
+            console.log("[Apple Pay] Source event received:", {
+              type: event.source.type,
+              id: event.source.id,
+              card: event.source.card
+            });
+
+            dispatch({ type: DISABLE_COUPON_BUTTON, payload: true });
+            dispatch({ type: DISABLE_SUBMIT, payload: true });
+            dispatch({ type: LOADING, payload: true });
+
+            event.complete("success");
+
+            // Check if 3D Secure is required
+            if (event.source?.card?.three_d_secure === "required") {
+              console.log(
+                "[Apple Pay] 3D Secure authentication required"
+              );
+              return generate3DSecureSource(event.source).then(
+                ({ source, error }) => {
+                  if (error) {
+                    console.error(
+                      "[Apple Pay] 3D Secure error:",
+                      error
+                    );
+                    return handlePaymentError(error);
+                  }
+
+                  console.log(
+                    "[Apple Pay] 3D Secure source generated:",
+                    source
+                  );
+                  toggleAuthenticationPendingView(true, source);
+                }
+              );
+            }
+
+            // Format source data to match subscription requirements
+            const sourceData = {
+              id: event.source.id,
+              isExistingSource: false
+            };
+
+            console.log(
+              "[Apple Pay] Formatted source data:",
+              sourceData
+            );
+
+            dispatch({
+              type: SUBSCRIBE,
+              payload: sourceData
+            });
+          } catch (error) {
+            console.error("[Apple Pay] Source error:", {
+              message: error.message,
+              code: error.code,
+              type: error.type
+            });
+
+            dispatch({
+              type: SHOW_ALERT,
+              payload: {
+                type: "error",
+                content:
+                  error.message || "Payment failed. Please try again."
+              }
+            });
+
+            event.complete("fail");
+
+            // Reset loading states
+            dispatch({ type: DISABLE_COUPON_BUTTON, payload: false });
+            dispatch({ type: DISABLE_SUBMIT, payload: false });
+            dispatch({ type: LOADING, payload: false });
           }
         });
 
-        pr.on("source", ({ complete, source }) => {
-          dispatch({ type: DISABLE_COUPON_BUTTON, payload: true });
-          dispatch({ type: DISABLE_SUBMIT, payload: true });
-          dispatch({ type: LOADING, payload: true });
-          complete("success");
-
-          if (source?.card?.three_d_secure === "required") {
-            return generate3DSecureSource(source).then(
-              ({ source, error }) => {
-                if (error) {
-                  return handlePaymentError(error);
-                }
-
-                toggleAuthenticationPendingView(true, source);
-              }
-            );
-          }
-
-          dispatch({
-            type: SUBSCRIBE,
-            payload: source
-          });
+        // Handle cancel event
+        pr.on("cancel", () => {
+          console.log("[Apple Pay] Payment cancelled by user");
+          dispatch({ type: DISABLE_COUPON_BUTTON, payload: false });
+          dispatch({ type: DISABLE_SUBMIT, payload: false });
+          dispatch({ type: LOADING, payload: false });
         });
 
         const result = await pr.canMakePayment();
-        if (result) {
+        console.log("[Apple Pay] Can make payment result:", result);
+
+        if (mounted && result) {
           setLocalPaymentRequest(pr);
+          dispatch({ type: SET_PAYMENT_REQUEST, payload: pr });
           dispatch({ type: SET_CAN_MAKE_PAYMENT, payload: true });
+          console.log(
+            "[Apple Pay] Payment request initialized successfully"
+          );
+        } else {
+          console.log(
+            "[Apple Pay] Cannot make payment or component unmounted",
+            {
+              mounted,
+              canMakePayment: !!result
+            }
+          );
+
+          if (mounted) {
+            dispatch({
+              type: SHOW_ALERT,
+              payload: {
+                type: "error",
+                content:
+                  "Apple Pay is not available. Please use a different payment method."
+              }
+            });
+          }
         }
       } catch (error) {
-        console.error("Payment request initialization error:", error);
+        console.error("[Apple Pay] Initialization error:", {
+          message: error.message,
+          code: error.code,
+          type: error.type,
+          stack: error.stack
+        });
+
+        if (mounted) {
+          dispatch({ type: SET_CAN_MAKE_PAYMENT, payload: false });
+          dispatch({
+            type: SHOW_ALERT,
+            payload: {
+              type: "error",
+              content:
+                "Failed to initialize Apple Pay. Please try again or use a different payment method."
+            }
+          });
+        }
       } finally {
-        setIsInitializing(false);
+        if (mounted) {
+          setIsInitializing(false);
+        }
       }
     };
 
     initializePaymentRequest();
-  }, [stripe, currentPlan, dispatch]);
 
-  // Don't render anything while initializing or if can't make payment
-  if (isInitializing || !localPaymentRequest || !canMakePayment) {
+    return () => {
+      mounted = false;
+      console.log("[Apple Pay] Component cleanup");
+    };
+  }, [stripe, currentPlan, updatedPrice, dispatch]);
+
+  // Log render conditions
+  console.log("[Apple Pay] Render state:", {
+    isInitializing,
+    canMakePayment,
+    hasPaymentRequest: !!localPaymentRequest
+  });
+
+  if (isInitializing || !canMakePayment || !localPaymentRequest) {
     return null;
   }
-
-  const updatePaymentRequest = () => {
-    if (!localPaymentRequest) return;
-
-    localPaymentRequest.update({
-      total: {
-        label: currentPlan?.nickname || currentPlan?.description,
-        amount: updatedPrice ?? currentPlan?.amount
-      }
-    });
-  };
 
   return (
     <PaymentRequestButtonElement
       className="StripeElement stripe-payment-request-btn"
-      onClick={updatePaymentRequest}
-      paymentRequest={localPaymentRequest}
-      style={{
-        paymentRequestButton: {
-          theme: "dark",
-          height: "40px"
+      options={{
+        paymentRequest: localPaymentRequest,
+        style: {
+          paymentRequestButton: {
+            theme: "dark",
+            height: "40px",
+            type: "buy" // Use 'buy' type for clearer user intent
+          }
         }
       }}
       {...props}
