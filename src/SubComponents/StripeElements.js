@@ -36,10 +36,10 @@ export const PelcroPaymentRequestButton = (props) => {
       try {
         const paymentRequest = stripe.paymentRequest({
           country: window.Pelcro.user.location.countryCode || "US",
-          currency: plan.currency,
+          currency: currentPlan.currency,
           total: {
-            label: plan.nickname || plan.description,
-            amount: state.updatedPrice || plan.amount
+            label: currentPlan?.nickname || currentPlan?.description,
+            amount: updatedPrice ?? currentPlan?.amount
           }
         });
 
