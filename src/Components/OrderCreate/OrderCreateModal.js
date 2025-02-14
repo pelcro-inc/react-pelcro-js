@@ -13,6 +13,7 @@ import { ReactComponent as ArrowLeft } from "../../assets/arrow-left.svg";
 export const OrderCreateModal = ({
   onDisplay,
   onClose,
+  showExternalPaymentMethods = false,
   ...otherProps
 }) => {
   const { switchView, order } = usePelcro();
@@ -76,7 +77,11 @@ export const OrderCreateModal = ({
         </div>
       </ModalHeader>
       <ModalBody>
-        <OrderCreateView {...otherProps} onSuccess={onSuccess} />
+        <OrderCreateView
+          {...otherProps}
+          onSuccess={onSuccess}
+          showExternalPaymentMethods={showExternalPaymentMethods}
+        />
       </ModalBody>
       <ModalFooter></ModalFooter>
     </Modal>
