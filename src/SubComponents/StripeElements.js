@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import {
   PaymentRequestButtonElement,
   PaymentElement
@@ -9,16 +9,74 @@ import { getSiteCardProcessor } from "../Components/common/Helpers";
 import { MonthSelect } from "./MonthSelect";
 import { YearSelect } from "./YearSelect";
 import { Input } from "./Input";
+import { useStripe } from "../hooks/useStripe";
+import {
+  DISABLE_COUPON_BUTTON,
+  DISABLE_SUBMIT,
+  LOADING,
+  SUBSCRIBE,
+  SET_PAYMENT_REQUEST,
+  SET_CAN_MAKE_PAYMENT
+} from "../redux/actions/paymentActions";
 
 export const PelcroPaymentRequestButton = (props) => {
+  const stripe = useStripe();
   const {
     state: {
       canMakePayment,
       paymentRequest,
       currentPlan,
       updatedPrice
-    }
+    },
+    dispatch
   } = useContext(store);
+
+  useEffect(() => {
+    if (stripe) {
+      const pr = stripe.paymentRequest({
+        country: window.Pelcro.user.location.countryCode || "US",
+        currency: currentPlan.currency,
+        total: {
+          label: currentPlan?.nickname || currentPlan?.description,
+          amount: updatedPrice ?? currentPlan?.amount
+        }
+      });
+
+      paymentRequest.on("source", ({ complete, source, ...data }) => {
+        dispatch({ type: DISABLE_COUPON_BUTTON, payload: true });
+        dispatch({ type: DISABLE_SUBMIT, payload: true });
+        dispatch({ type: LOADING, payload: true });
+        complete("success");
+
+        if (source?.card?.three_d_secure === "required") {
+          return generate3DSecureSource(source).then(
+            ({ source, error }) => {
+              if (error) {
+                return handlePaymentError(error);
+              }
+
+              toggleAuthenticationPendingView(true, source);
+            }
+          );
+        }
+
+        dispatch({
+          type: SUBSCRIBE,
+          payload: source
+        });
+      });
+
+      pr.canMakePayment().then((result) => {
+        if (result) {
+          dispatch({
+            type: SET_PAYMENT_REQUEST,
+            payload: pr
+          });
+          dispatch({ type: SET_CAN_MAKE_PAYMENT, payload: true });
+        }
+      });
+    }
+  }, [stripe]);
 
   // Don't render anything if payment request is not initialized
   // or if the device cannot make payments
@@ -52,7 +110,6 @@ export const PelcroPaymentRequestButton = (props) => {
       />
     );
   }
-
   return null;
 };
 
