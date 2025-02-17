@@ -169,9 +169,6 @@ export const PelcroPaymentRequestButton = ({
     console.log("localPaymentRequest", localPaymentRequest);
     console.log("all", {
       country: window.Pelcro.user.location.countryCode || "US",
-      currency: (
-        currentPlan?.currency || orderCurrency
-      ).toLowerCase(),
       total: {
         label:
           currentPlan?.nickname ||
