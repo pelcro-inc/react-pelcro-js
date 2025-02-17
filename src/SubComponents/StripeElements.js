@@ -119,16 +119,6 @@ export const PelcroPaymentRequestButton = ({
       return;
     }
 
-    if (type === "createPayment" && !currentPlan?.currency) {
-      setIsInitializing(false);
-      return;
-    }
-
-    if (type === "orderCreate" && !order?.currency) {
-      setIsInitializing(false);
-      return;
-    }
-
     let mounted = true;
 
     const initializePaymentRequest = async () => {
