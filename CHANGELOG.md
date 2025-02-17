@@ -1,3 +1,10 @@
+# [3.26.0-beta.74](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.73...v3.26.0-beta.74) (2025-02-17)
+
+
+### Features
+
+* fix_validation ([b9f6f80](https://github.com/pelcro-inc/react-pelcro-js/commit/b9f6f80475fd51567915e42b1399d723e86fcd9b))
+
 # [3.26.0-beta.73](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.72...v3.26.0-beta.73) (2025-01-16)
 
 
