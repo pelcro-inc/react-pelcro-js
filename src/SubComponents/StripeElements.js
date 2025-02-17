@@ -156,32 +156,6 @@ export const PelcroPaymentRequestButton = ({
   };
 
   useEffect(() => {
-    console.log("updatedPrice", updatedPrice);
-    console.log("order", order);
-    console.log("order Currency", orderCurrency);
-    console.log("order Price", orderPrice);
-    console.log("order Label", orderLabel);
-    console.log("type", type);
-    console.log("state", state);
-    console.log("dispatch", dispatch);
-    console.log("stripe", stripe);
-    console.log("canMakePayment", canMakePayment);
-    console.log("localPaymentRequest", localPaymentRequest);
-    console.log("all", {
-      country: window.Pelcro.user.location.countryCode || "US",
-      total: {
-        label:
-          currentPlan?.nickname ||
-          currentPlan?.description ||
-          orderLabel ||
-          "Payment",
-        amount: updatedPrice ?? currentPlan?.amount ?? orderPrice,
-        pending: false
-      },
-      requestPayerEmail: false,
-      requestPayerName: false,
-      requestShipping: false
-    });
     if (!stripe) {
       setIsInitializing(false);
       return;
