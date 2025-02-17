@@ -2,6 +2,7 @@
   "update": {
     "title": "Mettre à jour vos informations de paiement",
     "subtitle": "Entrez les champs ci-dessous pour mettre à jour les informations de votre carte de crédit",
+    "selectSubtitle": "Sélectionnez un mode de paiement à mettre à jour",
     "required": "Champs obligatoires",
     "success": "Vos informations de paiement ont été mises à jour",
     "secure": "Vous êtes en sécurité - 128 SSL conforme à la norme PCI"

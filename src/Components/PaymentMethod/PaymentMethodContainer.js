@@ -46,6 +46,10 @@ import {
   SET_FIRST_NAME_ERROR,
   SET_LAST_NAME_ERROR,
   SET_PHONE_ERROR,
+  SET_EMAIL,
+  SET_PASSWORD,
+  SET_EMAIL_ERROR,
+  SET_PASSWORD_ERROR,
   UPDATE_CYBERSOURCE_SESSION_ID,
   HANDLE_APPLEPAY_SUBSCRIPTION,
   HANDLE_CHECKBOX_CHANGE,
@@ -69,6 +73,8 @@ import {
 } from "../../services/Subscription/Payment.service";
 import {
   getPageOrDefaultLanguage,
+  notifyBugsnag,
+  generatePassword,
   refreshUser
 } from "../../utils/utils";
 import { usePelcro } from "../../hooks/usePelcro";
@@ -110,11 +116,15 @@ const initialState = {
   firstName: "",
   lastName: "",
   phone: "",
+  email: "",
+  password: "",
   firstNameError: null,
   lastNameError: null,
   phoneError: null,
+  emailError: null,
   month: "",
   year: "",
+  passwordError: null,
   cyberSourceSessionId: null,
   isDefault: false,
   alert: {
@@ -146,6 +156,10 @@ const PaymentMethodContainerWithoutStripe = ({
     order,
     selectedPaymentMethodId,
     couponCode,
+    selectedDonationAmount,
+    customDonationAmount,
+    isAuthenticated,
+    switchView,
     paymentMethodToEdit,
     paymentMethodToDelete
   } = usePelcro();
@@ -183,6 +197,32 @@ const PaymentMethodContainerWithoutStripe = ({
     dispatch({ type: INIT_CONTAINER });
     updateTotalAmountWithTax();
   }, []);
+
+  const fireBugSnag = ({ error, title }) => {
+    notifyBugsnag(() => {
+      // eslint-disable-next-line no-undef
+      Bugsnag.notify(title ?? "ERROR", (event) => {
+        event.addMetadata("MetaData", {
+          error: error ?? "ERROR",
+          paymentModalViewed:
+            !!document.getElementById(
+              "pelcro-subscription-create-modal"
+            ) ?? false,
+          errorAppeared:
+            !!document.querySelector(".pelcro-alert-error") ?? false,
+          name: error?.name,
+          message: error?.message,
+          type: error?.type,
+          code: error?.code,
+          status: error?.response?.status,
+          error_message: error?.response?.data?.error?.message,
+          site: window.Pelcro?.site?.read(),
+          user: window.Pelcro?.user?.read(),
+          environment: window.Pelcro?.environment
+        });
+      });
+    });
+  };
 
   /* ====== Start Cybersource integration ======== */
   const cybersourceErrorHandle = (err) => {
@@ -479,6 +519,7 @@ const PaymentMethodContainerWithoutStripe = ({
 
         const { key: jwk } = res;
         // SETUP MICROFORM
+        // eslint-disable-next-line no-undef
         FLEX.microform(
           {
             keyId: jwk.kid,
@@ -542,9 +583,22 @@ const PaymentMethodContainerWithoutStripe = ({
       }, 0);
     };
 
+    function getPlanAmount() {
+      if (state.updatedPrice) return state.updatedPrice;
+      if (
+        plan.type === "donation" &&
+        (selectedDonationAmount || customDonationAmount)
+      ) {
+        return selectedDonationAmount
+          ? selectedDonationAmount * plan.amount
+          : customDonationAmount * plan.amount;
+      } else {
+        return plan.amount;
+      }
+    }
+
     const totalAmount =
-      state?.updatedPrice ??
-      plan?.amount ??
+      getPlanAmount() ??
       invoice?.amount_remaining ??
       getOrderItemsTotal() ??
       10;
@@ -870,7 +924,7 @@ const PaymentMethodContainerWithoutStripe = ({
   };
   /* ====== End Tap integration ======== */
 
-  /* ====== Start Braintree integration  ======== */
+  /* ====== Start Braintree integration ======== */
   const braintreeInstanceRef = React.useRef(null);
   const braintree3DSecureInstanceRef = React.useRef(null);
 
@@ -1962,13 +2016,28 @@ const PaymentMethodContainerWithoutStripe = ({
   const initPaymentRequest = (state, dispatch) => {
     if (skipPayment && (plan?.amount === 0 || props?.freeOrders))
       return;
+
+    function getPlanAmount() {
+      if (state.updatedPrice) return state.updatedPrice;
+      if (
+        plan.type === "donation" &&
+        (selectedDonationAmount || customDonationAmount)
+      ) {
+        return selectedDonationAmount
+          ? selectedDonationAmount * plan.amount
+          : customDonationAmount * plan.amount;
+      } else {
+        return plan.amount;
+      }
+    }
+
     try {
       const paymentRequest = stripe.paymentRequest({
         country: window.Pelcro.user.location.countryCode || "US",
         currency: plan.currency,
         total: {
           label: plan.nickname || plan.description,
-          amount: state.updatedPrice || plan.amount
+          amount: getPlanAmount()
         }
       });
 
@@ -1983,7 +2052,12 @@ const PaymentMethodContainerWithoutStripe = ({
           return generate3DSecureSource(source).then(
             ({ source, error }) => {
               if (error) {
-                return handlePaymentError(error);
+                handlePaymentError(error);
+                fireBugSnag({
+                  error,
+                  title: "generate3DSecureSource - ERROR"
+                });
+                return;
               }
 
               toggleAuthenticationPendingView(true, source);
@@ -2263,76 +2337,139 @@ const PaymentMethodContainerWithoutStripe = ({
    * @param error
    * @returns {*}
    */
-  const confirmStripeCardPayment = (
+  const confirmStripeCardPayment = async (
     response,
     error,
     isSubCreate = false
   ) => {
-    if (response) {
-      const paymentIntent = response.data?.payment_intent;
-      if (
-        paymentIntent?.status === "requires_action" &&
-        paymentIntent?.client_secret
-      ) {
-        stripe
-          .confirmCardPayment(paymentIntent.client_secret)
-          .then((res) => {
-            if (!isSubCreate) {
-              dispatch({ type: DISABLE_SUBMIT, payload: false });
-            }
-            dispatch({ type: LOADING, payload: false });
+    try {
+      if (response) {
+        const paymentIntent = response.data?.payment_intent;
 
-            if (res.error) {
-              onFailure(res.error);
-              return dispatch({
-                type: SHOW_ALERT,
-                payload: {
-                  type: "error",
-                  content: isSubCreate
-                    ? t("messages.tryAgainFromInvoice")
-                    : getErrorMessages(res.error)
-                }
+        if (
+          paymentIntent?.status === "requires_action" &&
+          paymentIntent?.client_secret
+        ) {
+          const res = await stripe.confirmCardPayment(
+            paymentIntent.client_secret
+          );
+
+          if (!isSubCreate) {
+            dispatch({ type: DISABLE_SUBMIT, payload: false });
+          }
+          dispatch({ type: LOADING, payload: false });
+
+          if (res.error) {
+            notifyBugsnag(() => {
+              // eslint-disable-next-line no-undef
+              Bugsnag.notify(`Payment ${res.error}`, (event) => {
+                event.addMetadata("Stripe Error MetaData", {
+                  message: res.error.message,
+                  type: res.error.type,
+                  code: res.error.code,
+                  error_message:
+                    error?.response?.data?.error?.message,
+                  site: window.Pelcro?.site?.read(),
+                  user: window.Pelcro?.user?.read(),
+                  environment: window.Pelcro?.environment
+                });
               });
+            });
+
+            onFailure(res.error);
+            return dispatch({
+              type: SHOW_ALERT,
+              payload: {
+                type: "error",
+                content: isSubCreate
+                  ? t("messages.tryAgainFromInvoice")
+                  : getErrorMessages(res.error)
+              }
+            });
+          }
+
+          onSuccess(res);
+        } else if (
+          paymentIntent?.status === "requires_payment_method" &&
+          paymentIntent?.client_secret
+        ) {
+          if (!isSubCreate) {
+            dispatch({ type: DISABLE_SUBMIT, payload: false });
+          }
+          dispatch({ type: LOADING, payload: false });
+
+          onFailure(error);
+          return dispatch({
+            type: SHOW_ALERT,
+            payload: {
+              type: "error",
+              content: isSubCreate
+                ? t("messages.tryAgainFromInvoice")
+                : t("messages.cardAuthFailed")
             }
-            onSuccess(res);
           });
-      } else if (
-        paymentIntent?.status === "requires_payment_method" &&
-        paymentIntent?.client_secret
-      ) {
-        if (!isSubCreate) {
-          dispatch({ type: DISABLE_SUBMIT, payload: false });
+        } else {
+          onSuccess(response);
         }
+      } else {
+        dispatch({ type: DISABLE_SUBMIT, payload: false });
         dispatch({ type: LOADING, payload: false });
 
-        onFailure(error);
-        return dispatch({
-          type: SHOW_ALERT,
-          payload: {
-            type: "error",
-            content: isSubCreate
-              ? t("messages.tryAgainFromInvoice")
-              : t("messages.cardAuthFailed")
-          }
-        });
-      } else {
+        if (error) {
+          notifyBugsnag(() => {
+            // eslint-disable-next-line no-undef
+            Bugsnag.notify(`Payment ${error}`, (event) => {
+              event.addMetadata("MetaData", {
+                name: error?.name,
+                message: error?.message,
+                type: error?.type,
+                code: error?.code,
+                status: error?.response?.status,
+                error_message: error?.response?.data?.error?.message,
+                site: window.Pelcro?.site?.read(),
+                user: window.Pelcro?.user?.read(),
+                environment: window.Pelcro?.environment
+              });
+            });
+          });
+
+          onFailure(error);
+          return dispatch({
+            type: SHOW_ALERT,
+            payload: {
+              type: "error",
+              content: getErrorMessages(error)
+            }
+          });
+        }
         onSuccess(response);
       }
-    } else {
+    } catch (error) {
+      notifyBugsnag(() => {
+        // eslint-disable-next-line no-undef
+        Bugsnag.notify(`Payment ${error}`, (event) => {
+          event.addMetadata("UnexpectedError", {
+            message: error.message,
+            stack: error.stack,
+            error_message: error?.response?.data?.error?.message,
+            site: window.Pelcro?.site?.read(),
+            user: window.Pelcro?.user?.read(),
+            environment: window.Pelcro?.environment
+          });
+        });
+      });
+
       dispatch({ type: DISABLE_SUBMIT, payload: false });
       dispatch({ type: LOADING, payload: false });
 
-      if (error) {
-        onFailure(error);
-        return dispatch({
-          type: SHOW_ALERT,
-          payload: {
-            type: "error",
-            content: getErrorMessages(error)
-          }
-        });
-      }
-      onSuccess(response);
+      onFailure(error);
+      return dispatch({
+        type: SHOW_ALERT,
+        payload: {
+          type: "error",
+          content: t("messages.unexpectedError")
+        }
+      });
     }
   };
 
@@ -2468,7 +2605,8 @@ const PaymentMethodContainerWithoutStripe = ({
           gift_message: giftRecipient?.giftMessage,
           address_id: product.address_required
             ? selectedAddressId
-            : null
+            : null,
+          metadata: props?.subCreateMetadata
         },
         (err, res) => {
           if (res?.data?.setup_intent) {
@@ -2702,7 +2840,12 @@ const PaymentMethodContainerWithoutStripe = ({
     );
   };
 
-  const payInvoice = (gatewayService, gatewayToken, dispatch) => {
+  const payInvoice = (
+    gatewayService,
+    gatewayToken,
+    dispatch,
+    cb = null
+  ) => {
     const payment = new Payment(gatewayService);
 
     return payment.execute(
@@ -2713,7 +2856,25 @@ const PaymentMethodContainerWithoutStripe = ({
         invoiceId: invoice.id
       },
       (err, res) => {
-        confirmStripeCardPayment(res, err);
+        if (cb && typeof cb == "function") {
+          cb(res, err);
+        } else {
+          dispatch({ type: DISABLE_SUBMIT, payload: false });
+          dispatch({ type: LOADING, payload: false });
+
+          if (err) {
+            onFailure(err);
+            return dispatch({
+              type: SHOW_ALERT,
+              payload: {
+                type: "error",
+                content: getErrorMessages(err)
+              }
+            });
+          }
+
+          onSuccess(res);
+        }
       }
     );
   };
@@ -2912,6 +3073,55 @@ const PaymentMethodContainerWithoutStripe = ({
     });
   };
 
+  const sendRegisterRequest = (state, callback) => {
+    window.Pelcro.user.register(
+      {
+        email: state.email,
+        password: generatePassword()
+      },
+      (err, res) => {
+        if (err) {
+          let { registered_on_other_sites, ...errors } =
+            err?.response?.data?.errors;
+          err.response.data.errors = { ...errors };
+
+          let errorContent;
+
+          if (
+            getErrorMessages(err) === "This email is already in use."
+          ) {
+            errorContent = (
+              <p>
+                This email is already in use.{" "}
+                <button
+                  className="plc-font-bold plc-underline hover:plc-no-underline"
+                  onClick={() => switchView("login")}
+                >
+                  Login to continue
+                </button>
+              </p>
+            );
+          } else {
+            errorContent = getErrorMessages(err);
+          }
+
+          dispatch({
+            type: SHOW_ALERT,
+            payload: {
+              type: "error",
+              content: errorContent
+            }
+          });
+          dispatch({ type: DISABLE_SUBMIT, payload: false });
+          dispatch({ type: LOADING, payload: false });
+          onFailure(err);
+        } else {
+          callback();
+        }
+      }
+    );
+  };
+
   const submitPayment = (state, dispatch) => {
     if (skipPayment && props?.freeOrders) {
       const isQuickPurchase = !Array.isArray(order);
@@ -3075,7 +3285,12 @@ const PaymentMethodContainerWithoutStripe = ({
     } else if (stripeSource && type === "orderCreate") {
       purchase(new StripeGateway(), stripeSource.id, state, dispatch);
     } else if (stripeSource && type === "invoicePayment") {
-      payInvoice(new StripeGateway(), stripeSource.id, dispatch);
+      payInvoice(
+        new StripeGateway(),
+        stripeSource.id,
+        dispatch,
+        confirmStripeCardPayment
+      );
     }
   };
 
@@ -3232,11 +3447,23 @@ const PaymentMethodContainerWithoutStripe = ({
               }
 
               if (getSiteCardProcessor() === "vantiv") {
-                return submitUsingVantiv(state);
+                if (!isAuthenticated() && plan.type === "donation") {
+                  return sendRegisterRequest(state, () =>
+                    submitUsingVantiv(state)
+                  );
+                } else {
+                  return submitUsingVantiv(state);
+                }
               }
 
               if (getSiteCardProcessor() === "tap") {
-                return submitUsingTap(state, dispatch);
+                if (!isAuthenticated() && plan.type === "donation") {
+                  return sendRegisterRequest(state, () =>
+                    submitUsingTap(state, dispatch)
+                  );
+                } else {
+                  return submitUsingTap(state, dispatch);
+                }
               }
 
               if (getSiteCardProcessor() === "cybersource") {
@@ -3248,15 +3475,28 @@ const PaymentMethodContainerWithoutStripe = ({
               }
 
               if (selectedPaymentMethodId) {
-                // pay with selected method (source) if exists already
-                return handlePayment(
-                  {
-                    id: selectedPaymentMethodId,
-                    isExistingSource: true
-                  },
-                  state,
-                  dispatch
-                );
+                if (!isAuthenticated() && plan.type === "donation") {
+                  return sendRegisterRequest(state, () =>
+                    handlePayment(
+                      {
+                        id: selectedPaymentMethodId,
+                        isExistingSource: true
+                      },
+                      state,
+                      dispatch
+                    )
+                  );
+                } else {
+                  // pay with selected method (source) if exists already
+                  return handlePayment(
+                    {
+                      id: selectedPaymentMethodId,
+                      isExistingSource: true
+                    },
+                    state,
+                    dispatch
+                  );
+                }
               }
 
               if (type === "createPaymentSource") {
@@ -3271,6 +3511,15 @@ const PaymentMethodContainerWithoutStripe = ({
                 return replacePaymentSource(state, dispatch);
               }
 
+              if (!isAuthenticated() && plan.type === "donation") {
+                return sendRegisterRequest(state, () =>
+                  submitPayment(state, dispatch)
+                );
+              } else {
+                return submitPayment(state, dispatch);
+              }
+
+              // eslint-disable-next-line no-unreachable
               submitPayment(state, dispatch);
             }
           );
@@ -3364,6 +3613,20 @@ const PaymentMethodContainerWithoutStripe = ({
             phoneError: null
           });
 
+        case SET_EMAIL:
+          return Update({
+            ...state,
+            email: action.payload,
+            emailError: null
+          });
+
+        case SET_PASSWORD:
+          return Update({
+            ...state,
+            password: action.payload,
+            passwordError: null
+          });
+
         case SET_FIRST_NAME_ERROR:
           return Update({
             ...state,
@@ -3383,6 +3646,20 @@ const PaymentMethodContainerWithoutStripe = ({
             ...state,
             phoneError: action.payload,
             phone: null
+          });
+
+        case SET_EMAIL_ERROR:
+          return Update({
+            ...state,
+            emailError: action.payload,
+            email: ""
+          });
+
+        case SET_PASSWORD_ERROR:
+          return Update({
+            ...state,
+            passwordError: action.payload,
+            password: ""
           });
 
         case SHOW_ALERT:
@@ -3446,15 +3723,13 @@ const PaymentMethodContainer = (props) => {
   const cardProcessor = getSiteCardProcessor();
 
   useEffect(() => {
-    whenUserReady(() => {
-      if (!window.Stripe && cardProcessor === "stripe") {
-        document
-          .querySelector('script[src="https://js.stripe.com/v3"]')
-          .addEventListener("load", () => {
-            setIsStripeLoaded(true);
-          });
-      }
-    });
+    if (!window.Stripe && cardProcessor === "stripe") {
+      document
+        .querySelector('script[src="https://js.stripe.com/v3"]')
+        .addEventListener("load", () => {
+          setIsStripeLoaded(true);
+        });
+    }
   }, []);
 
   if (isStripeLoaded) {

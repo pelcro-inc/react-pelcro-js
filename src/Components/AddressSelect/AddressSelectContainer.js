@@ -14,6 +14,7 @@ import {
   SHOW_ALERT
 } from "../../utils/action-types";
 import { getErrorMessages } from "../common/Helpers";
+import { submitAddressSelect } from "../../utils/events";
 
 const getDefaultAddress = (addresses) => {
   return addresses.find((address) => address.is_default) || false;
@@ -122,6 +123,10 @@ const AddressSelectContainer = ({
         }
       );
     }
+
+    document.dispatchEvent(
+      submitAddressSelect({ submissionSuccess: true })
+    );
 
     onSuccess(selectedAddressId);
   };

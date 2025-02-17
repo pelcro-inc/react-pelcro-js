@@ -9,7 +9,10 @@
     "confirmPassword": "Confirmer le mot de passe requis.",
     "enterFirstName": "Le prénom est requis.",
     "enterLastName": "Le nom de famille est requis.",
-    "enterPhone": "Le numéro de téléphone est requis."
+    "enterPhone": "Le numéro de téléphone est requis.",
+    "enterCompany": "L'entreprise est obligatoire.",
+    "enterTitle": "Le titre est obligatoire.",
+    "enterFieldName": "{{fieldName}} est requis."
   },
   "buttons": {
     "account": "Accès abonné(e)s",

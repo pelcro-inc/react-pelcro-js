@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { usePelcro } from "../../hooks/usePelcro";
 import { Link } from "../../SubComponents/Link";
@@ -11,6 +11,7 @@ import Authorship from "../common/Authorship";
 import { RegisterView } from "./RegisterView";
 import ReactGA from "react-ga";
 import ReactGA4 from "react-ga4";
+import { displayRegister } from "../../utils/events";
 
 /**
  *
@@ -91,6 +92,10 @@ export function RegisterModal(props) {
 
     return resetView();
   };
+
+  useEffect(() => {
+    document.dispatchEvent(displayRegister({ product, plan }));
+  }, []);
 
   return (
     <Modal

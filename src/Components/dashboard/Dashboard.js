@@ -89,6 +89,8 @@ export function DashboardWithHook(props) {
       }
       setPaymentMethodToEdit={setPaymentMethodToEdit}
       setPaymentMethodToDelete={setPaymentMethodToDelete}
+      // used for custom event when clicking on the new subscription button
+      onNewSubscriptionClick={props.onNewSubscriptionClick}
     />
   );
 }
@@ -288,6 +290,10 @@ class Dashboard extends Component {
   };
 
   displayProductSelect = ({ isGift }) => {
+    if (this.props.onNewSubscriptionClick && !isGift) {
+      return this.props.onNewSubscriptionClick();
+    }
+
     if (isGift) {
       this.props.setProductAndPlan(null, null, true);
     }
@@ -362,7 +368,7 @@ class Dashboard extends Component {
     return `${this.locale("labels.renewsOn")} ${formattedRenewDate}`;
   };
 
-  reactivateSubscription = (subscription_id) => {
+  reactivateSubscription = (subscription_id, isDonation) => {
     // disable the Login button to prevent repeated clicks
     this.setState({ disableSubmit: true });
 
@@ -375,13 +381,26 @@ class Dashboard extends Component {
         this.setState({ disableSubmit: false });
         this.props.onClose();
         if (err) {
-          return notify.error(
-            this.locale("messages.subReactivation.error")
+          if (isDonation) {
+            return notify.error(
+              this.locale("messages.donationReactivation.error")
+            );
+          } else {
+            return notify.error(
+              this.locale("messages.subReactivation.error")
+            );
+          }
+        }
+
+        if (isDonation) {
+          return notify.success(
+            this.locale("messages.donationReactivation.success")
+          );
+        } else {
+          return notify.success(
+            this.locale("messages.subReactivation.success")
           );
         }
-        return notify.success(
-          this.locale("messages.subReactivation.success")
-        );
       }
     );
   };
@@ -938,6 +957,7 @@ class Dashboard extends Component {
                 title={this.locale("labels.donations")}
                 content={
                   <DonationsMenu
+                    onClose={this.props.onClose}
                     reactivateSubscription={
                       this.reactivateSubscription
                     }
@@ -1006,14 +1026,13 @@ function hasDonationSubs() {
   const donations =
     window.Pelcro.subscription
       ?.list()
-      ?.filter((sub) => sub.plan.is_donation && !sub.is_gift_donor) ??
-    [];
+      ?.filter((sub) => sub.plan?.type === "donation") ?? [];
 
   const canceledDonations =
     window.Pelcro.user
       .read()
       .expired_subscriptions?.filter(
-        (sub) => sub.plan.is_donation && !sub.is_gift_donor
+        (sub) => sub.plan?.type === "donation"
       ) ?? [];
 
   return donations.length > 0 || canceledDonations.length > 0;

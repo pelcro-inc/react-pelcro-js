@@ -149,6 +149,9 @@
   "subCancellation": {
     "goBack": "뒤로 가기"
   },
+  "donationCancellation": {
+    "goBack": "뒤로 가기"
+  },
   "messages": {
     "noCard": "등록된 카드가 없습니다.",
     "subCancellation": {
@@ -162,6 +165,22 @@
       "error": "구독을 재활성화하는 동안 오류가 발생했습니다."
     },
     "subUnSuspend": {
+      "isSureToUnSuspend": "구독 일시 중단을 해제하시겠습니까?",
+      "loading": "구독 일시 중단 해제",
+      "success": "구독이 성공적으로 일시 중단 해제되었습니다",
+      "error": "구독 일시 중단을 해제하는 동안 오류가 발생했습니다."
+    },
+    "donationCancellation": {
+      "isSureToCancel": "정말로 유료 멤버십을 취소하시겠습니까?",
+      "loading": "귀하의 유료 멤버십을 취소합니다.",
+      "success": "유료 멤버십이 성공적으로 취소되었습니다.",
+      "error": "유료 멤버십 취소 과정에서 오류가 발생했습니다."
+    },
+    "donationReactivation": {
+      "success": "구독이 성공적으로 재활성화되었습니다.",
+      "error": "구독을 재활성화하는 동안 오류가 발생했습니다."
+    },
+    "donationUnSuspend": {
       "isSureToUnSuspend": "구독 일시 중단을 해제하시겠습니까?",
       "loading": "구독 일시 중단 해제",
       "success": "구독이 성공적으로 일시 중단 해제되었습니다",

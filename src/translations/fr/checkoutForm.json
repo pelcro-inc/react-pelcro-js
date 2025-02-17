@@ -25,6 +25,10 @@
     "lastName": "Nom de famille",
     "phone": "Téléphoner",
     "freeItems": "Articles gratuits",
-    "isDefault": "Défini comme valeur par défaut"
+    "isDefault": "Défini comme valeur par défaut",
+    "order": "Commande",
+    "amount": "Montant",
+    "email": "Courriel",
+    "password": "Créer un mot de passe"
   }
 }

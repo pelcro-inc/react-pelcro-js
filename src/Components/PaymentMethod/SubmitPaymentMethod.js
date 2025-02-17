@@ -10,7 +10,12 @@ import {
 } from "../../utils/utils";
 
 export const SubmitPaymentMethod = ({ onClick, ...otherProps }) => {
-  const { plan, selectedPaymentMethodId } = usePelcro();
+  const {
+    plan,
+    selectedDonationAmount,
+    customDonationAmount,
+    selectedPaymentMethodId
+  } = usePelcro();
   const { t } = useTranslation("checkoutForm");
   const {
     dispatch,
@@ -18,6 +23,8 @@ export const SubmitPaymentMethod = ({ onClick, ...otherProps }) => {
       firstNameError,
       lastNameError,
       phoneError,
+      emailError,
+      passwordError,
       firstName,
       lastName,
       phone,
@@ -31,11 +38,26 @@ export const SubmitPaymentMethod = ({ onClick, ...otherProps }) => {
 
   const planQuantity = plan?.quantity ?? 1;
   const price = updatedPrice ?? plan?.amount;
-  const priceFormatted = getFormattedPriceByLocal(
-    price * planQuantity,
-    plan?.currency,
-    getPageOrDefaultLanguage()
-  );
+
+  const priceFormatted =
+    plan?.type === "donation" &&
+    (selectedDonationAmount || customDonationAmount)
+      ? getFormattedPriceByLocal(
+          selectedDonationAmount
+            ? selectedDonationAmount *
+                plan?.amount *
+                (plan?.quantity ?? 1)
+            : customDonationAmount *
+                plan?.amount *
+                (plan?.quantity ?? 1),
+          plan?.currency,
+          getPageOrDefaultLanguage()
+        )
+      : getFormattedPriceByLocal(
+          price * planQuantity,
+          plan?.currency,
+          getPageOrDefaultLanguage()
+        );
 
   const supportsTap = Boolean(
     window.Pelcro.site.read()?.tap_gateway_settings
@@ -69,6 +91,8 @@ export const SubmitPaymentMethod = ({ onClick, ...otherProps }) => {
           (supportsTap && !firstName?.length) ||
           (supportsTap && !lastName?.length) ||
           (supportsTap && !phone?.length) ||
+          emailError ||
+          passwordError ||
           (supportsCybersource &&
             !selectedPaymentMethodId &&
             !month?.length) ||
@@ -85,6 +109,8 @@ export const SubmitPaymentMethod = ({ onClick, ...otherProps }) => {
     firstName,
     lastName,
     phone,
+    emailError,
+    passwordError,
     month,
     year
   ]);

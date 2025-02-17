@@ -114,11 +114,9 @@ export const loadPaymentSDKs = () => {
     window.Pelcro.site.read().braintree_gateway_settings
   );
 
-  whenUserReady(() => {
-    if (!window.Stripe && !supportsVantiv && !supportsTap) {
-      loadStripe(window.Pelcro.environment.stripe);
-    }
-  });
+  if (!window.Stripe && !supportsVantiv && !supportsTap) {
+    loadStripe(window.Pelcro.environment.stripe);
+  }
 
   window.Pelcro.helpers.loadSDK(
     "https://applepay.cdn-apple.com/jsapi/v1/apple-pay-sdk.js",
@@ -416,6 +414,10 @@ export const initViewFromURL = () => {
         return initSubscriptionFromURL();
       }
 
+      if (view === "donation-select") {
+        return initDonationFromURL();
+      }
+
       if (view === "register") {
         const offlinePlanId =
           window.Pelcro.helpers.getURLParameter("plan_id");
@@ -521,6 +523,69 @@ export const initSubscriptionFromURL = () => {
     }
 
     return switchToAddressView();
+  });
+};
+
+/**
+ * Initializes the donation flow if 'product_id' & 'plan_id' params exist
+ * with valid IDs. Otherwise, switches to the donation selection flow
+ */
+export const initDonationFromURL = () => {
+  const { switchView, whenSiteReady, set } = usePelcro.getStore();
+
+  whenSiteReady(() => {
+    const productsList = window.Pelcro.product.list();
+
+    if (!productsList?.length) {
+      return;
+    }
+
+    const [productId, planId, isGiftParam] = [
+      window.Pelcro.helpers.getURLParameter("product_id"),
+      window.Pelcro.helpers.getURLParameter("plan_id"),
+      window.Pelcro.helpers.getURLParameter("is_gift")
+    ];
+    const isGift = isGiftParam?.toLowerCase() === "true";
+
+    const selectedProduct = productsList.find(
+      (product) => product.id === Number(productId)
+    );
+    const selectedPlan = selectedProduct?.plans?.find(
+      (plan) => plan.id === Number(planId)
+    );
+
+    set({
+      product: selectedProduct,
+      plan: selectedPlan,
+      isGift
+    });
+
+    if (!selectedProduct || !selectedPlan) {
+      set({ isDonation: true });
+      return switchView("donation-select");
+    }
+
+    const {
+      isAuthenticated,
+      switchToAddressView,
+      switchToPaymentView
+    } = usePelcro.getStore();
+
+    // if (!isAuthenticated()) {
+    //   return switchView("register");
+    // }
+
+    // if (isGift) {
+    //   return switchView("gift-create");
+    // }
+
+    // const requiresAddress = Boolean(selectedProduct.address_required);
+    //
+    // if (requiresAddress) {
+    //   return switchToAddressView();
+    // }
+
+    return switchToPaymentView();
   });
 };
 

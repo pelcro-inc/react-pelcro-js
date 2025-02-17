@@ -10,10 +10,16 @@ import { PaymentMethodView } from "../PaymentMethod/PaymentMethodView";
 
 export const SubscriptionCreateView = ({
   onSuccess = () => {},
-  onFailure = () => {}
+  onFailure = () => {},
+  ...otherProps
 }) => {
   const { t } = useTranslation("checkoutForm");
-  const { product, plan } = usePelcro();
+  const {
+    product,
+    plan,
+    selectedDonationAmount,
+    customDonationAmount
+  } = usePelcro();
   const skipPayment =
     window.Pelcro?.uiSettings?.skipPaymentForFreePlans;
   const showSubscriptionButton = skipPayment && plan?.amount === 0;
@@ -26,11 +32,25 @@ export const SubscriptionCreateView = ({
       count: interval_count
     });
 
-    const priceFormatted = getFormattedPriceByLocal(
-      plan?.amount * (plan?.quantity ?? 1),
-      plan?.currency,
-      getPageOrDefaultLanguage()
-    );
+    const priceFormatted =
+      plan.type === "donation" &&
+      (selectedDonationAmount || customDonationAmount)
+        ? getFormattedPriceByLocal(
+            selectedDonationAmount
+              ? selectedDonationAmount *
+                  plan?.amount *
+                  (plan?.quantity ?? 1)
+              : customDonationAmount *
+                  plan?.amount *
+                  (plan?.quantity ?? 1),
+            plan?.currency,
+            getPageOrDefaultLanguage()
+          )
+        : getFormattedPriceByLocal(
+            plan?.amount * (plan?.quantity ?? 1),
+            plan?.currency,
+            getPageOrDefaultLanguage()
+          );
 
     return (
       <p className="plc-text-gray-600">
@@ -72,6 +92,7 @@ export const SubscriptionCreateView = ({
         onSuccess={onSuccess}
         onFailure={onFailure}
         showSubscriptionButton={showSubscriptionButton}
+        {...otherProps}
       />
     </div>
   );

@@ -203,6 +203,54 @@ export const calcOrderAmount = (items) => {
   }, 0);
 };
 
+export const getOrderInfo = (order, i18n) => {
+  if (!order) {
+    return {
+      price: null,
+      currency: null,
+      label: null
+    };
+  }
+
+  const isQuickPurchase = !Array.isArray(order);
+
+  if (isQuickPurchase) {
+    return {
+      price: order.price * order.quantity,
+      currency: order.currency,
+      label: order.name
+    };
+  }
+
+  if (order.length === 0) {
+    return {
+      price: null,
+      currency: null,
+      label: null
+    };
+  }
+
+  if (order.length === 1) {
+    return {
+      price: order[0].price * order[0].quantity,
+      currency: order[0].currency,
+      label: order[0].name
+    };
+  }
+
+  const price = order.reduce(
+    (total, item) => total + item.price * item.quantity,
+    0
+  );
+
+  return {
+    price,
+    currency: order[0].currency,
+    label:
+      price === 0 ? i18n("labels.freeItems") : i18n("labels.order")
+  };
+};
+
 /**
  * returns true if the URL contains a supported view trigger URL
  * @param {string} viewID
@@ -214,6 +262,7 @@ export const isValidViewFromURL = (viewID) => {
       "login",
       "register",
       "plan-select",
+      "donation-select",
       "gift-redeem",
       "password-forgot",
       "password-reset",
@@ -568,6 +617,18 @@ export function notifyBugsnag(callback, startOptions) {
   }
 
   callback();
+}
+
+//create a safe and strong password string with special characters
+export function generatePassword() {
+  const length = 16;
+  const charset =
+    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+{}|:<>?`~";
+  let retVal = "";
+  for (let i = 0, n = charset.length; i < length; ++i) {
+    retVal += charset.charAt(Math.floor(Math.random() * n));
+  }
+  return retVal;
 }
 
 export const refreshUser = () => {

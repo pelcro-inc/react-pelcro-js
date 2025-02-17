@@ -1,4 +1,5 @@
-import React, { Component, useEffect } from "react";
+import React, { Component } from "react";
+import ReactGA from "react-ga";
 import PropTypes from "prop-types";
 import Authorship from "../common/Authorship";
 import { withTranslation } from "react-i18next";
@@ -11,19 +12,20 @@ import { Link } from "../../SubComponents/Link";
 import { Button } from "../../SubComponents/Button";
 import { Checkbox } from "../../SubComponents/Checkbox";
 import { Radio } from "../../SubComponents/Radio";
+import { Input } from "../../SubComponents/Input";
 import { usePelcro } from "../../hooks/usePelcro";
 import {
   getEntitlementsFromElem,
-  notifyBugsnag
+  getFormattedPriceByLocal,
+  getPageOrDefaultLanguage
 } from "../../utils/utils";
-import ReactGA from "react-ga";
-import ReactGA4 from "react-ga4";
-import { displaySelect, submitSelect } from "../../utils/events";
+import { ReactComponent as XIcon } from "../../assets/x-icon.svg";
+import { ReactComponent as CheckIcon } from "../../assets/check.svg";
 
 /**
  *
  */
-export function SelectModalWithHook(props) {
+export function DonationModalWithHook(props) {
   React.useEffect(() => {
     props.onDisplay?.();
   }, []);
@@ -48,12 +50,8 @@ export function SelectModalWithHook(props) {
       ? getEntitlementsFromElem(entitlementsProtectedElements[0])
       : null;
 
-  useEffect(() => {
-    document.dispatchEvent(displaySelect({ product, plan }));
-  }, []);
-
   return (
-    <SelectModalWithTrans
+    <DonationModalWithTrans
       isGift={isGift}
       disableGifting={isRenewingGift}
       plan={plan}
@@ -62,8 +60,20 @@ export function SelectModalWithHook(props) {
         props.onClose?.();
         resetView();
       }}
-      setProductAndPlan={(product, plan, isGift) =>
-        set({ product, plan, isGift })
+      setProductAndPlan={(
+        product,
+        plan,
+        isGift,
+        selectedDonationAmount,
+        customDonationAmount
+      ) =>
+        set({
+          product,
+          plan,
+          isGift,
+          selectedDonationAmount,
+          customDonationAmount
+        })
       }
       setView={switchView}
       matchingEntitlements={
@@ -102,10 +112,19 @@ function productMatchPageLanguage(product) {
   return product.language === siteLanguage;
 }
 
-SelectModalWithHook.viewId = "plan-select";
-class SelectModal extends Component {
+DonationModalWithHook.viewId = "donation-select";
+
+class DonationModal extends Component {
   constructor(props) {
     super(props);
+
+    const productList = props.matchingEntitlements
+      ? window.Pelcro.product
+          .getByEntitlements(props.matchingEntitlements)
+          .filter((product) => product.has_donation_plans === true)
+      : window.Pelcro.product
+          .list()
+          .filter((product) => product.has_donation_plans === true);
 
     this.state = {
       product: {},
@@ -113,18 +132,15 @@ class SelectModal extends Component {
       isGift: props.isGift,
       disabled: true,
       mode: "product",
-      productList: props.matchingEntitlements
-        ? window.Pelcro.product.getByEntitlements(
-            props.matchingEntitlements
-          )
-        : window.Pelcro.product.list()
+      productList: productList,
+      selectedDonationAmount: null,
+      customDonationAmount: ""
     };
 
     this.product =
       this.props.product || window.Pelcro.paywall.getProduct();
     this.locale = this.props.t;
     this.closeButton = window.Pelcro.paywall.displayCloseButton();
-    this.enableReactGA4 = window?.Pelcro?.uiSettings?.enableReactGA4;
   }
 
   componentDidMount = () => {
@@ -146,12 +162,12 @@ class SelectModal extends Component {
       });
     }
 
-    if (
-      this.state.productList.length === 0 &&
-      !window.Pelcro.user.isAuthenticated()
-    ) {
-      this.props.setView("register");
-    }
+    // if (
+    //   this.state.productList.length === 0 &&
+    //   !window.Pelcro.user.isAuthenticated()
+    // ) {
+    //   this.props.setView("register");
+    // }
 
     document.addEventListener("keydown", this.handleSubmit);
 
@@ -183,45 +199,15 @@ class SelectModal extends Component {
           );
           if (filteredPlans.length) return filteredPlans;
         });
+    }
+  };
 
-      notifyBugsnag(() => {
-        Bugsnag.notify("SelectModal - No data viewed", (event) => {
-          event.addMetadata("MetaData", {
-            site: window.Pelcro?.site?.read(),
-            user: window.Pelcro?.user?.read(),
-            uiVersion: window.Pelcro?.uiSettings?.uiVersion,
-            environment: window.Pelcro?.environment,
-            matchingEntitlementsProps:
-              this.props?.matchingEntitlements,
-            productListState: this.state.productList,
-            methods: {
-              productsWithMatchedTaggedFirst:
-                productsWithMatchedTaggedFirst(),
-              pelcroSDKProductsListMethod:
-                window.Pelcro.product.list(),
-              pelcroSDKGetByEntitlements: this.props
-                .matchingEntitlements
-                ? window.Pelcro.product.getByEntitlements(
-                    this.props.matchingEntitlements
-                  )
-                : null
-            },
-            userCurrency: userCurrency,
-            userCountry: userCountry,
-            userLanguage: userLanguage,
-            siteLanguage:
-              window.Pelcro?.helpers?.getHtmlLanguageAttribute(),
-            products: window.Pelcro?.site?.read().products.length,
-            currency_matching_filter: `${productsMatchingUserCurrency.length} Products Passed`,
-            country_matching_filter: `${productsMatchingUserCountry.length} Products Passed`,
-            language_matching_filter: `${
-              productsMatchingUserCountry.filter(
-                productMatchPageLanguage
-              ).length
-            } Products Passed`
-          });
-        });
-      });
+  componentDidUpdate = (prevProps, prevState) => {
+    if (
+      this.state.planList?.length === 1 &&
+      this.state.plan !== this.state.planList[0]
+    ) {
+      this.setState({ plan: this.state.planList[0] });
     }
   };
 
@@ -259,8 +245,8 @@ class SelectModal extends Component {
     }
     return `${startingPlan.amount_formatted}/${
       startingPlan.interval_count > 1
-        ? `${startingPlan.interval_count} ${startingPlan.interval_translated}`
-        : `${startingPlan.interval_translated}`
+        ? `${startingPlan.interval_count} ${startingPlan.interval}s`
+        : `${startingPlan.interval}`
     }`;
   };
 
@@ -303,12 +289,6 @@ class SelectModal extends Component {
           </div>
 
           <div className="plc-flex plc-items-end plc-w-full plc-mt-3">
-            {product.plans && (
-              <p className="plc-w-1/2 plc-text-xs pelcro-select-product-cost">
-                {this.locale("labels.startingAt")}{" "}
-                {this.countStartPrice(product.plans)}
-              </p>
-            )}
             <Button
               onClick={productButtonCallback}
               data-key={product.id}
@@ -333,12 +313,7 @@ class SelectModal extends Component {
       : this.state.productList;
 
     return productsToShow.map((product, index) => {
-      if (
-        product.plans.filter((plan) => plan.type === "regular")
-          .length > 0
-      ) {
-        return this.renderOneProduct(product, index);
-      }
+      return this.renderOneProduct(product, index);
     });
   };
 
@@ -384,21 +359,118 @@ class SelectModal extends Component {
   renderPlans = () => {
     return this.state.planList.map((plan) => {
       const isChecked = this.state.plan.id === plan.id ? true : false;
+
+      let planDetails = (
+        <div>
+          <div className="plc-bg-gray-100 plc-rounded-md plc-p-3 plc-mt-3 plc-text-sm plc-flex plc-items-center">
+            <div className="plc-flex plc-items-center plc-flex-1">
+              Auto renew:{" "}
+              <span className="plc-inline-flex plc-w-6 plc-ml-1">
+                {plan.auto_renew ? (
+                  <CheckIcon className="plc-text-green-500" />
+                ) : (
+                  <XIcon className="plc-text-red-500" />
+                )}
+              </span>{" "}
+            </div>
+
+            <div className="plc-flex plc-items-center plc-flex-1">
+              Renewed every:{" "}
+              <span className="plc-inline-flex plc-w-6 plc-ml-1 plc-font-bold plc-capitalize">
+                {plan.interval || "-"}
+              </span>
+            </div>
+          </div>
+          {plan.preset_donation_values && (
+            <div className="plc-mt-3 plc-pt-3 plc-border-t plc-border-gray-200">
+              <h5 className="plc-mb-4 plc-font-medium plc-text-center">
+                Select amount
+              </h5>
+              <ul className="plc-grid plc-grid-cols-2 plc-gap-3">
+                {plan.preset_donation_values.map((value) => (
+                  <li key={value}>
+                    <button
+                      className={`plc-bg-white plc-rounded-md plc-flex plc-items-center plc-justify-center plc-text-lg plc-w-full plc-min-h-16 focus:plc-outline-none ${
+                        isChecked &&
+                        +this.state.selectedDonationAmount === +value
+                          ? "plc-border-primary-500 plc-text-primary-900 plc-border-2"
+                          : "plc-border-gray-200 plc-text-gray-900 plc-border"
+                      }`}
+                      onClick={() => {
+                        this.setState({
+                          selectedDonationAmount: +value,
+                          customDonationAmount: "",
+                          disabled: false
+                        });
+                      }}
+                    >
+                      <span className="plc-font-bold plc-mr-1">
+                        {value}
+                      </span>
+                      <span className="plc-uppercase">
+                        {plan?.currency}
+                      </span>
+                    </button>
+                  </li>
+                ))}
+              </ul>
+
+              <div className="plc-relative plc-py-3 plc-mt-3">
+                <hr />{" "}
+                <span className="plc-absolute plc-top-1/2 plc-left-1/2 plc-transform plc--translate-x-1/2 plc--translate-y-1/2 plc-leading-none plc-bg-white plc-px-2">
+                  or
+                </span>
+              </div>
+            </div>
+          )}
+
+          <div className="plc-relative plc-mt-3">
+            <Input
+              type="number"
+              value={this.state.customDonationAmount}
+              onChange={(e) => {
+                if (+e.target.value > 0) {
+                  this.setState({
+                    customDonationAmount: +e.target.value,
+                    selectedDonationAmount: null,
+                    disabled: false
+                  });
+                } else {
+                  this.setState({
+                    customDonationAmount: ""
+                  });
+                  this.setState({ disabled: true });
+                }
+              }}
+              placeholder="Donate a custom amount ..."
+              className="plc-pr-14"
+              wrapperClassName="plc-mb-0"
+            />
+            <span className="plc-absolute plc-top-1/2 plc-transform plc--translate-y-1/2 plc-right-3 plc-pl-3 plc-border-l plc-border-gray-200 plc-uppercase plc-text-sm">
+              {plan.currency}
+            </span>
+          </div>
+        </div>
+      );
       return (
         <div
           key={plan.id}
-          className="plc-p-2 plc-mx-3 plc-mt-2 plc-text-gray-900 plc-border plc-border-gray-400 plc-border-solid plc-rounded pelcro-select-plan-wrapper"
+          className={`plc-p-2 plc-mx-3 plc-mt-2 plc-text-gray-900 plc-border-solid plc-rounded pelcro-select-plan-wrapper ${
+            isChecked
+              ? "plc-border-primary-500 plc-border-2"
+              : "plc-border-gray-400 plc-border "
+          }`}
         >
           <Radio
-            className="plc-self-start pelcro-select-plan-radio"
-            labelClassName="plc-cursor-pointer plc-w-full"
+            className="plc-self-start pelcro-select-plan-radio plc-hidden"
+            labelClassName="plc-cursor-pointer plc-w-full plc-ml-0"
             id={`pelcro-select-plan-${plan.id}`}
             name="plan"
             checked={isChecked}
             data-key={plan.id}
             onChange={this.selectPlan}
           >
-            <div>
+            <div className="plc-text-center">
               <p className="plc-font-bold pelcro-select-plan-title">
                 {plan.nickname}
               </p>
@@ -406,10 +478,8 @@ class SelectModal extends Component {
                 {plan.description}
               </p>
             </div>
-            <p className="plc-mt-3 plc-font-bold pelcro-select-plan-price">
-              {plan.amount_formatted}
-            </p>
           </Radio>
+          {isChecked && planDetails}
         </div>
       );
     });
@@ -419,13 +489,20 @@ class SelectModal extends Component {
     const id = e.target.dataset.key;
     for (const product of this.state.productList) {
       if (+product.id === +id) {
-        this.setState({ product: product });
+        const planList = product.plans.filter(
+          (plan) => plan.type === "donation"
+        );
+
+        if (planList.length === 1) {
+          this.setState({ plan: planList[0] });
+        }
+
         this.setState({
-          planList: product.plans.filter(
-            (plan) => plan.type === "regular"
-          )
+          product: product,
+          planList: planList,
+          mode: "plan"
         });
-        this.setState({ mode: "plan" });
+
         const isSelectedPlanPartOfThisProduct =
           this.state.plan?.product_id === Number(product.id);
 
@@ -437,12 +514,16 @@ class SelectModal extends Component {
   };
 
   selectPlan = (e) => {
+    this.setState({
+      selectedDonationAmount: null
+    });
+    this.setState({ disabled: true });
+
     const id = e.target.dataset.key;
     for (const plan of this.state.planList) {
       if (+plan.id === +id) {
         plan.isCheked = true;
         this.setState({ plan: plan });
-        this.setState({ disabled: false });
       } else {
         plan.isCheked = false;
       }
@@ -458,27 +539,25 @@ class SelectModal extends Component {
     this.props.setProductAndPlan(
       this.state.product,
       this.state.plan,
-      this.state.isGift
+      this.state.isGift,
+      this.state.selectedDonationAmount,
+      this.state.customDonationAmount
     );
 
-    const { product, isGift, plan } = this.state;
+    const { product, isGift } = this.state;
     const { setView } = this.props;
     const isAuthenticated = window.Pelcro.user.isAuthenticated();
 
     const { switchToAddressView, switchToPaymentView } =
       usePelcro.getStore();
 
-    document.dispatchEvent(
-      submitSelect({ submissionSuccess: true, product, plan })
-    );
-
-    if (!isAuthenticated) {
+    if (!isAuthenticated && product.address_required) {
       return setView("register");
     }
 
-    if (isGift) {
-      return setView("gift-create");
-    }
+    // if (isGift) {
+    //   return setView("gift-create");
+    // }
 
     if (product.address_required) {
       return switchToAddressView();
@@ -495,29 +574,17 @@ class SelectModal extends Component {
     const { disableGifting } = this.props;
 
     if (this.state.mode === "product") {
-      if (this.enableReactGA4) {
-        ReactGA4.event("Product Modal Viewed", {
-          nonInteraction: true
-        });
-      } else {
-        ReactGA?.event?.({
-          category: "VIEWS",
-          action: "Product Modal Viewed",
-          nonInteraction: true
-        });
-      }
+      ReactGA?.event?.({
+        category: "VIEWS",
+        action: "Product Modal Viewed",
+        nonInteraction: true
+      });
     } else if (this.state.mode === "plan") {
-      if (this.enableReactGA4) {
-        ReactGA4.event("Plan Modal Viewed", {
-          nonInteraction: true
-        });
-      } else {
-        ReactGA?.event?.({
-          category: "VIEWS",
-          action: "Plan Modal Viewed",
-          nonInteraction: true
-        });
-      }
+      ReactGA?.event?.({
+        category: "VIEWS",
+        action: "Plan Modal Viewed",
+        nonInteraction: true
+      });
     }
 
     return (
@@ -552,44 +619,44 @@ class SelectModal extends Component {
 
             {this.state.mode === "plan" && (
               <>
-                <div className="plc-overflow-y-scroll plc-max-h-72 pelcro-select-plans-wrapper">
+                <div className="plc-overflow-y-scroll pelcro-select-plans-wrapper">
                   {this.renderPlans()}
                 </div>
-                {!disableGifting && (
-                  <div className="plc-flex plc-justify-center plc-mt-2">
-                    <Checkbox
-                      onChange={this.onIsGiftChange}
-                      checked={this.state.isGift}
-                      id="pelcro-input-is-gift"
-                    >
-                      {this.locale("messages.checkbox")}
-                    </Checkbox>
-                  </div>
-                )}
+                {/* {!disableGifting && ( */}
+                {/*   <div className="plc-flex plc-justify-center plc-mt-2"> */}
+                {/*     <Checkbox */}
+                {/*       onChange={this.onIsGiftChange} */}
+                {/*       checked={this.state.isGift} */}
+                {/*       id="pelcro-input-is-gift" */}
+                {/*     > */}
+                {/*       {this.locale("messages.checkbox")} */}
+                {/*     </Checkbox> */}
+                {/*   </div> */}
+                {/* )} */}
                 <Button
                   disabled={this.state.disabled}
-                  onClick={this.submitOption}
+                  onClick={() => this.submitOption()}
                   id="pelcro-submit"
                   className="plc-w-full plc-mt-2"
                 >
-                  {this.locale("buttons.next")}
+                  {this.locale("buttons.donate")}
                 </Button>
               </>
             )}
           </div>
         </ModalBody>
         <ModalFooter>
-          {!window.Pelcro.user.isAuthenticated() && (
-            <p>
-              {this.locale("messages.alreadyHaveAccount") + " "}
-              <Link
-                id="pelcro-link-login"
-                onClick={this.displayLoginView}
-              >
-                {this.locale("messages.loginHere")}
-              </Link>
-            </p>
-          )}
+          {/* {!window.Pelcro.user.isAuthenticated() && ( */}
+          {/*   <p> */}
+          {/*     {this.locale("messages.alreadyHaveAccount") + " "} */}
+          {/*     <Link */}
+          {/*       id="pelcro-link-login" */}
+          {/*       onClick={this.displayLoginView} */}
+          {/*     > */}
+          {/*       {this.locale("messages.loginHere")} */}
+          {/*     </Link> */}
+          {/*   </p> */}
+          {/* )} */}
           <Authorship />
         </ModalFooter>
       </Modal>
@@ -597,7 +664,7 @@ class SelectModal extends Component {
   }
 }
 
-SelectModal.propTypes = {
+DonationModal.propTypes = {
   plan: PropTypes.object,
   product: PropTypes.object,
   iaGift: PropTypes.bool,
@@ -607,5 +674,5 @@ SelectModal.propTypes = {
   subscribe: PropTypes.func
 };
 
-export const SelectModalWithTrans =
-  withTranslation("select")(SelectModal);
+export const DonationModalWithTrans =
+  withTranslation("donation")(DonationModal);

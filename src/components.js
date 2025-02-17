@@ -31,8 +31,17 @@ export { FacebookLoginButton } from "./Components/common/FacebookLoginButton/Fac
 export { GoogleLoginButton } from "./Components/common/GoogleLoginButton/GoogleLoginButton";
 export { Auth0LoginButton } from "./Components/common/Auth0LoginButton/Auth0LoginButton";
 export { SelectModalWithHook as SelectModal } from "./Components/Select/SelectModal";
+export { DonationModalWithHook as DonationModal } from "./Components/Donation/DonationModal";
 export { SubscriptionRenewModal } from "./Components/SubscriptionRenew/SubscriptionRenewModal";
+
 export { SubscriptionCancelModal } from "./Components/SubscriptionCancel/SubscriptionCancelModal";
+export { SubscriptionCancelView } from "./Components/SubscriptionCancel/SubscriptionCancelView";
+export { SubscriptionCancelContainer } from "./Components/SubscriptionCancel/SubscriptionCancelContainer";
+export { SubscriptionCancelButton } from "./Components/SubscriptionCancel/SubscriptionCancelButton";
+export { SubscriptionCancelLaterButton } from "./Components/SubscriptionCancel/SubscriptionCancelLaterButton";
+export { SubscriptionCancelOptions } from "./Components/SubscriptionCancel/SubscriptionCancelOptions";
+export { SubscriptionCancelReason } from "./Components/SubscriptionCancel/SubscriptionCancelReason";
+
 export { SubscriptionSuspendModal } from "./Components/SubscriptionSuspend/SubscriptionSuspendModal";
 export { SubscriptionSuspendView } from "./Components/SubscriptionSuspend/SubscriptionSuspendView";
 export { SubscriptionRenewView } from "./Components/SubscriptionRenew/SubscriptionRenewView";
@@ -81,6 +90,8 @@ export { UserUpdatePhone } from "./Components/UserUpdate/UserUpdatePhone";
 export { UserUpdateTextInput } from "./Components/UserUpdate/UserUpdateTextInput";
 export { UserUpdateProfilePic } from "./Components/UserUpdate/UserUpdateProfilePic";
 export { UserUpdateTin } from "./Components/UserUpdate/UserUpdateTin";
+export { UserUpdateCompany } from "./Components/UserUpdate/UserUpdateCompany";
+export { UserUpdateJobTitle } from "./Components/UserUpdate/UserUpdateJobTitle";
 export { AddressCreateContainer } from "./Components/AddressCreate/AddressCreateContainer";
 export { AddressCreateModal } from "./Components/AddressCreate/AddressCreateModal";
 export { AddressCreateSubmit } from "./Components/AddressCreate/AddressCreateSubmit";
@@ -248,6 +259,7 @@ export { Button } from "./SubComponents/Button";
 export { Checkbox } from "./SubComponents/Checkbox";
 export { DatePicker } from "./SubComponents/DatePicker";
 export { Input } from "./SubComponents/Input";
+export { TextInput } from "./SubComponents/TextInput";
 export { TextArea } from "./SubComponents/TextArea";
 export { Link } from "./SubComponents/Link";
 export { Modal } from "./SubComponents/Modal";
@@ -274,3 +286,8 @@ export {
 } from "./Components/common/PelcroNativeButtons";
 
 export { init as initContentEntitlement } from "./Components/common/contentEntitlement";
+
+export {
+  initPaywalls,
+  initViewFromURL
+} from "./Components/PelcroModalController/PelcroModalController.service";

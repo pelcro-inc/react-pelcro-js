@@ -27,6 +27,8 @@ import {
   getFormattedPriceByLocal,
   getPageOrDefaultLanguage
 } from "../../utils/utils";
+import { DonationEmail } from "./DonationEmail";
+import { usePelcro } from "../../hooks/usePelcro";
 import { ApplePayButton } from "../ApplePayButton/ApplePayButton";
 import { PaymentMethodUpdateSetDefault } from "../PaymentMethodUpdate/PaymentMethodUpdateSetDefault";
 
@@ -43,9 +45,12 @@ export function PaymentMethodView({
   showSubscriptionButton,
   showOrderButton,
   showApplePayButton,
-  order
+  order,
+  subCreateMetadata,
+  ...props
 }) {
   const { t } = useTranslation("checkoutForm");
+  const { plan, isAuthenticated } = usePelcro();
   const cardProcessor = getSiteCardProcessor();
 
   const supportsVantiv = Boolean(
@@ -71,15 +76,9 @@ export function PaymentMethodView({
       {order && (
         <div className="plc-w-full plc-p-2 plc-mb-4 plc-font-semibold plc-text-center plc-text-gray-900 plc-bg-gray-100 plc-border plc-border-gray-200">
           <p className="plc-text-gray-600">
-            {!Array.isArray(order) ? (
-              <span className="plc-tracking-wider plc-uppercase">
-                {order?.name}
-              </span>
-            ) : (
-              <span className="plc-tracking-wider plc-uppercase">
-                {t("labels.freeItems")}
-              </span>
-            )}
+            <span className="plc-tracking-wider plc-uppercase">
+              {t("labels.amount")}
+            </span>
             <br />
             <span className="plc-text-xl plc-font-semibold plc-text-primary-600">
               {calcAndFormatItemsTotal(order, order[0]?.currency) ??
@@ -95,7 +94,7 @@ export function PaymentMethodView({
       {cardProcessor === "stripe" &&
         !showSubscriptionButton &&
         !showOrderButton && (
-          <div className="plc-flex plc-items-center plc-w-full plc-px-4 plc-py-2 plc-text-center plc-text-green-600 plc-border plc-border-green-400 plc-rounded plc-bg-green-50">
+          <div className="plc-flex plc-items-center plc-w-full plc-px-4 plc-py-2 plc-text-center plc-text-green-600 plc-border plc-border-green-400 plc-rounded plc-bg-green-50 pelcro-stripe-compliance">
             <LockIcon className="plc-w-5 plc-h-5 plc-mr-1" />
             <span>
               {t("messages.youAreSafe")}
@@ -121,6 +120,7 @@ export function PaymentMethodView({
           onGiftRenewalSuccess={onGiftRenewalSuccess}
           onFailure={onFailure}
           freeOrders={showOrderButton}
+          subCreateMetadata={subCreateMetadata}
         >
           <AlertWithContext className="plc-mb-2" />
           {/* Payment form */}
@@ -166,6 +166,17 @@ export function PaymentMethodView({
                   </>
                 )}
 
+              {!isAuthenticated() && plan?.type === "donation" && (
+                <>
+                  <DonationEmail
+                    id="pelcro-input-email"
+                    errorId="pelcro-input-email-error"
+                    label={t("labels.email")}
+                    required
+                    autoFocus={true}
+                  />
+                </>
+              )}
               <CheckoutForm type={type} />
 
               {/* Coupon section */}
@@ -182,6 +193,7 @@ export function PaymentMethodView({
                 <PaymentMethodUpdateSetDefault
                   id="pelcro-input-is-default"
                   label={t("labels.isDefault")}
+                  {...props}
                 />
               )}
 

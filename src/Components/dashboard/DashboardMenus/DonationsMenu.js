@@ -9,18 +9,22 @@ import { ReactComponent as XCircleIcon } from "../../../assets/x-icon-solid.svg"
 import { ReactComponent as RefreshIcon } from "../../../assets/refresh.svg";
 import { Button } from "../../../SubComponents/Button";
 import { usePelcro } from "../../../hooks/usePelcro";
+import { notify } from "../../../SubComponents/Notification";
 
-export const DonationsMenu = ({ reactivateSubscription, disableSubmit, cancelSubscription }) => {
+export const DonationsMenu = ({
+  onClose,
+  reactivateSubscription,
+  disableSubmit,
+  cancelSubscription
+}) => {
   const { t } = useTranslation("dashboard");
-  const {
-    switchView,
-    setSubscriptionToCancel
-  } = usePelcro();
+  const { switchView, setSubscriptionToCancel } = usePelcro();
 
-  const subscriptions = getDonationSubs()
+  const donations = getDonationSubs()
     .sort((a, b) => a.expires_at - b.expires_at)
     .sort((a, b) => a.renews_at - b.renews_at)
     .map((sub) => {
+      console.log("Sub", sub);
       // Cancel button click handlers
       const onCancelClick = () => {
         const isImmediateCancelationEnabled =
@@ -42,14 +46,18 @@ export const DonationsMenu = ({ reactivateSubscription, disableSubmit, cancelSub
           },
           {
             confirmMessage: t(
-              "messages.subCancellation.isSureToCancel"
+              "messages.donationCancellation.isSureToCancel"
             ),
-            loadingMessage: t("messages.subCancellation.loading"),
-            successMessage: t("messages.subCancellation.success"),
-            errorMessage: t("messages.subCancellation.error")
+            loadingMessage: t(
+              "messages.donationCancellation.loading"
+            ),
+            successMessage: t(
+              "messages.donationCancellation.success"
+            ),
+            errorMessage: t("messages.donationCancellation.error")
           },
           {
-            closeButtonLabel: t("labels.subCancellation.goBack")
+            closeButtonLabel: t("labels.donationCancellation.goBack")
           }
         );
       };
@@ -60,7 +68,7 @@ export const DonationsMenu = ({ reactivateSubscription, disableSubmit, cancelSub
           return switchView("email-verify");
         }
 
-        reactivateSubscription(sub.id);
+        reactivateSubscription(sub.id, true);
       };
 
       return (
@@ -141,7 +149,7 @@ export const DonationsMenu = ({ reactivateSubscription, disableSubmit, cancelSub
       <tbody>
         {/* Spacer */}
         <tr className="plc-h-4"></tr>
-        {subscriptions}
+        {donations}
       </tbody>
     </table>
   );
@@ -151,14 +159,13 @@ function getDonationSubs() {
   const donations =
     window.Pelcro.subscription
       ?.list()
-      ?.filter((sub) => sub.plan.is_donation && !sub.is_gift_donor) ??
-    [];
+      ?.filter((sub) => sub.plan?.type === "donation") ?? [];
 
   const canceledDonations =
     window.Pelcro.user
       .read()
       .expired_subscriptions?.filter(
-        (sub) => sub.plan.is_donation && !sub.is_gift_donor
+        (sub) => sub.plan?.type === "donation"
       ) ?? [];
 
   return [...donations, ...canceledDonations];

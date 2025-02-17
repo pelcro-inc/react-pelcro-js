@@ -1,4 +1,5 @@
 import React from "react";
+import { loadStripe } from "@stripe/stripe-js/pure";
 import { usePelcro } from "../../hooks/usePelcro";
 import {
   init as initNativeButtons,
@@ -18,6 +19,9 @@ const defaultOptions = {
   enableTheme: true,
   enablePaywalls: true,
   loadSecuritySDK: true,
+  enableNativeButtons: true,
+  enableAuthenticatedButtons: true,
+  enableUnAuthenticatedButtons: true,
   enableGoogleAnalytics: false
 };
 
@@ -26,19 +30,37 @@ export const PelcroModalController = ({
   options = defaultOptions,
   children
 }) => {
-  const { view, isAuthenticated, whenSiteReady } = usePelcro();
+  const { view, isAuthenticated, whenSiteReady, isDonation } =
+    usePelcro();
+
+  const supportsVantiv = Boolean(
+    window.Pelcro.site.read().vantiv_gateway_settings
+  );
+  const supportsTap = Boolean(
+    window.Pelcro.site.read().tap_gateway_settings
+  );
 
   React.useEffect(() => {
-    initNativeButtons();
+    if (isDonation) {
+      if (!window.Stripe && !supportsVantiv && !supportsTap) {
+        loadStripe(window.Pelcro.environment.stripe);
+      }
+    }
+  }, [isDonation]);
+
+  // default options are overridable by consumer's options
+  const mergedOptions = { ...defaultOptions, ...options };
+
+  React.useEffect(() => {
+    if (mergedOptions.enableNativeButtons) {
+      initNativeButtons();
+    }
     renderShopView(
       React.Children.map(children, (child) => child).find(
         ({ type }) => type?.viewId === "shop"
       )
     );
   }, []);
-
-  // default options are overridable by consumer's options
-  const mergedOptions = { ...defaultOptions, ...options };
 
   React.useEffect(() => {
     whenSiteReady(() => {
@@ -48,9 +70,13 @@ export const PelcroModalController = ({
 
   React.useEffect(() => {
     if (window.Pelcro.user.isAuthenticated()) {
-      authenticatedButtons();
+      if (mergedOptions.enableAuthenticatedButtons) {
+        authenticatedButtons();
+      }
     } else {
-      unauthenticatedButtons();
+      if (mergedOptions.enableUnAuthenticatedButtons) {
+        unauthenticatedButtons();
+      }
     }
   }, [window.Pelcro.user.isAuthenticated()]);
 

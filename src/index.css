@@ -26,6 +26,7 @@
 @import "./Components/UserUpdate/UserUpdateProfilePic.css";
 @import "./Components/dashboard/DashboardMenus/OrdersMenu.css";
 @import "./Components/Select/SelectModal.css";
+@import "./Components/Donation/DonationModal.css";
 @import "./Components/dashboard/Dashboard.css";
 @import "./Components/ApplePayButton/ApplePayButton.css";
 

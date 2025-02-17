@@ -1,7 +1,7 @@
 import React from "react";
-import { store } from "./RegisterContainer";
+import { store } from "./UserUpdateContainer";
 import { Company } from "../../SubComponents/Company";
 
-export const RegisterCompany = (props) => (
+export const UserUpdateCompany = (props) => (
   <Company store={store} {...props} />
 );

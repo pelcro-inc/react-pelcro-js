@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { usePelcro } from "../../hooks/usePelcro";
 import {
@@ -9,6 +9,10 @@ import {
 import { trackSubscriptionOnGA } from "../../utils/utils";
 import Authorship from "../common/Authorship";
 import { SubscriptionCreateView } from "./SubscriptionCreateView";
+import {
+  displayPaymentForm,
+  submitPaymentForm
+} from "../../utils/events";
 
 /**
  *
@@ -19,14 +23,28 @@ export function SubscriptionCreateModal({
   ...otherProps
 }) {
   const { t } = useTranslation("common");
-  const { switchView } = usePelcro();
+  const { switchView, product, plan } = usePelcro();
 
   const onSuccess = (res) => {
     otherProps.onSuccess?.(res);
     trackSubscriptionOnGA();
 
+    document.dispatchEvent(
+      submitPaymentForm({ submissionSuccess: true })
+    );
+
     return switchView("subscription-success");
   };
+
+  const onFailure = () => {
+    return document.dispatchEvent(
+      submitPaymentForm({ submissionSuccess: false })
+    );
+  };
+
+  useEffect(() => {
+    document.dispatchEvent(displayPaymentForm({ product, plan }));
+  }, []);
 
   return (
     <Modal
@@ -38,6 +56,7 @@ export function SubscriptionCreateModal({
         <SubscriptionCreateView
           {...otherProps}
           onSuccess={onSuccess}
+          onFailure={onFailure}
         />
       </ModalBody>
       <ModalFooter>
