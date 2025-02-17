@@ -39,7 +39,25 @@ export const PelcroPaymentRequestButton = ({
   const { state, dispatch } = useContext(store);
   const { canMakePayment, currentPlan, updatedPrice } = state;
   const { order, set, selectedPaymentMethodId } = usePelcro();
+  const getOrderItemsTotal = () => {
+    if (!order) {
+      return null;
+    }
 
+    const isQuickPurchase = !Array.isArray(order);
+
+    if (isQuickPurchase) {
+      return order.price * order.quantity;
+    }
+
+    if (order.length === 0) {
+      return null;
+    }
+
+    return order.reduce((total, item) => {
+      return total + item.price * item.quantity;
+    }, 0);
+  };
   const purchase = (
     gatewayService,
     gatewayToken,
@@ -135,7 +153,9 @@ export const PelcroPaymentRequestButton = ({
               order?.description ||
               "Payment",
             amount:
-              updatedPrice ?? currentPlan?.amount ?? order?.price,
+              updatedPrice ??
+              currentPlan?.amount ??
+              getOrderItemsTotal(),
             pending: false
           },
           requestPayerEmail: false,
