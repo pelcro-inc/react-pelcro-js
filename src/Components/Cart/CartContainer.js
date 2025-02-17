@@ -62,18 +62,18 @@ const CartContainer = ({
       const userCurrency = window.Pelcro.user.read().currency;
       const itemsCurrency = cartItems[0].currency;
 
-      if (userCurrency && userCurrency !== itemsCurrency) {
-        dispatch({ type: DISABLE_SUBMIT, payload: true });
-        dispatch({
-          type: SHOW_ALERT,
-          payload: {
-            type: "error",
-            content: t("messages.currencyMismatch", {
-              currency: userCurrency.toUpperCase()
-            })
-          }
-        });
-      }
+      // if (userCurrency && userCurrency !== itemsCurrency) {
+      //   dispatch({ type: DISABLE_SUBMIT, payload: true });
+      //   dispatch({
+      //     type: SHOW_ALERT,
+      //     payload: {
+      //       type: "error",
+      //       content: t("messages.currencyMismatch", {
+      //         currency: userCurrency.toUpperCase()
+      //       })
+      //     }
+      //   });
+      // }
     }
   }, [cartItems]);
 
