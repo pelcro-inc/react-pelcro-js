@@ -1,3 +1,10 @@
+# [3.45.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.44.0...v3.45.0) (2025-02-17)
+
+
+### Features
+
+* currency-mismatch ([15f9cc5](https://github.com/pelcro-inc/react-pelcro-js/commit/15f9cc5902051c6bbdebf9bc1ad63b1c0f5045c5))
+
 # [3.44.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.43.0...v3.44.0) (2025-02-02)
 
 
