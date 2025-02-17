@@ -39,25 +39,49 @@ export const PelcroPaymentRequestButton = ({
   const { state, dispatch } = useContext(store);
   const { canMakePayment, currentPlan, updatedPrice } = state;
   const { order, set, selectedPaymentMethodId } = usePelcro();
-  const getOrderItemsTotal = () => {
+  const getOrderInfo = () => {
     if (!order) {
-      return null;
+      return {
+        price: null,
+        currency: null,
+        label: null
+      };
     }
 
     const isQuickPurchase = !Array.isArray(order);
 
     if (isQuickPurchase) {
-      return order.price * order.quantity;
+      return {
+        price: order.price * order.quantity,
+        currency: order.currency,
+        label: order.name
+      };
     }
 
     if (order.length === 0) {
-      return null;
+      return {
+        price: null,
+        currency: null,
+        label: null
+      };
     }
 
-    return order.reduce((total, item) => {
-      return total + item.price * item.quantity;
-    }, 0);
+    const price = order.reduce(
+      (total, item) => total + item.price * item.quantity,
+      0
+    );
+
+    return {
+      price,
+      currency: order[0].currency,
+      label: "Order"
+    };
   };
+  const orderPrice = getOrderInfo().price;
+
+  const orderCurrency = getOrderInfo().currency;
+
+  const orderLabel = getOrderInfo().label;
   const purchase = (
     gatewayService,
     gatewayToken,
@@ -135,7 +159,9 @@ export const PelcroPaymentRequestButton = ({
     console.log("getOrderItemsTotal", getOrderItemsTotal());
     console.log("updatedPrice", updatedPrice);
     console.log("order", order);
-    console.log("order Currency", order?.currency);
+    console.log("order Currency", orderCurrency);
+    console.log("order Price", orderPrice);
+    console.log("order Label", orderLabel);
     console.log("type", type);
     console.log("state", state);
     console.log("dispatch", dispatch);
@@ -145,16 +171,15 @@ export const PelcroPaymentRequestButton = ({
     console.log("all", {
       country: window.Pelcro.user.location.countryCode || "US",
       currency: (
-        currentPlan?.currency || order?.currency
+        currentPlan?.currency || orderCurrency
       ).toLowerCase(),
       total: {
         label:
           currentPlan?.nickname ||
           currentPlan?.description ||
-          order?.description ||
+          orderLabel ||
           "Payment",
-        amount:
-          updatedPrice ?? currentPlan?.amount ?? getOrderItemsTotal(),
+        amount: updatedPrice ?? currentPlan?.amount ?? orderPrice,
         pending: false
       },
       requestPayerEmail: false,
@@ -173,18 +198,15 @@ export const PelcroPaymentRequestButton = ({
         const pr = stripe.paymentRequest({
           country: window.Pelcro.user.location.countryCode || "US",
           currency: (
-            currentPlan?.currency || order?.currency
+            currentPlan?.currency || orderCurrency
           ).toLowerCase(),
           total: {
             label:
               currentPlan?.nickname ||
               currentPlan?.description ||
-              order?.description ||
+              orderLabel ||
               "Payment",
-            amount:
-              updatedPrice ??
-              currentPlan?.amount ??
-              getOrderItemsTotal(),
+            amount: updatedPrice ?? currentPlan?.amount ?? orderPrice,
             pending: false
           },
           requestPayerEmail: false,
