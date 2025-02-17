@@ -156,7 +156,6 @@ export const PelcroPaymentRequestButton = ({
   };
 
   useEffect(() => {
-    console.log("getOrderItemsTotal", getOrderItemsTotal());
     console.log("updatedPrice", updatedPrice);
     console.log("order", order);
     console.log("order Currency", orderCurrency);
