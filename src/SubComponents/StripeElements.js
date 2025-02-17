@@ -11,6 +11,12 @@ import { MonthSelect } from "./MonthSelect";
 import { YearSelect } from "./YearSelect";
 import { Input } from "./Input";
 import {
+  StripeGateway,
+  Payment,
+  PAYMENT_TYPES
+} from "../services/Subscription/Payment.service";
+import { getErrorMessages } from "../Components/common/Helpers";
+import {
   DISABLE_COUPON_BUTTON,
   DISABLE_SUBMIT,
   LOADING,
@@ -20,18 +26,105 @@ import {
   SHOW_ALERT
 } from "../utils/action-types";
 
-export const PelcroPaymentRequestButton = (props) => {
+export const PelcroPaymentRequestButton = ({
+  type,
+  onSuccess,
+  onFailure,
+  ...props
+}) => {
   const stripe = useStripe();
   const [isInitializing, setIsInitializing] = useState(true);
   const [localPaymentRequest, setLocalPaymentRequest] =
     useState(null);
-  const {
-    state: { canMakePayment, currentPlan, updatedPrice },
+  const { state, dispatch } = useContext(store);
+  const { canMakePayment, currentPlan, updatedPrice } = state;
+  const { order, set, selectedPaymentMethodId } = usePelcro();
+
+  const purchase = (
+    gatewayService,
+    gatewayToken,
+    state,
     dispatch
-  } = useContext(store);
+  ) => {
+    const isQuickPurchase = !Array.isArray(order);
+    const mappedOrderItems = isQuickPurchase
+      ? [{ sku_id: order.id, quantity: order.quantity }]
+      : order.map((item) => ({
+          sku_id: item.id,
+          quantity: item.quantity
+        }));
+
+    const { couponCode } = state;
+
+    const payment = new Payment(gatewayService);
+
+    payment.execute(
+      {
+        type: PAYMENT_TYPES.PURCHASE_ECOMMERCE_ORDER,
+        token: gatewayToken,
+        isExistingSource: Boolean(selectedPaymentMethodId),
+        items: mappedOrderItems,
+        addressId: state.selectedAddressId,
+        couponCode
+      },
+      (err, orderResponse) => {
+        if (err) {
+          toggleAuthenticationSuccessPendingView(false);
+          dispatch({ type: DISABLE_SUBMIT, payload: false });
+          dispatch({ type: LOADING, payload: false });
+          onFailure?.(err);
+          return dispatch({
+            type: SHOW_ALERT,
+            payload: {
+              type: "error",
+              content: getErrorMessages(err)
+            }
+          });
+        }
+
+        if (isQuickPurchase) {
+          set({ order: null });
+        } else {
+          set({ order: null, cartItems: [] });
+        }
+
+        window.Pelcro.user.refresh(
+          {
+            auth_token: window.Pelcro?.user?.read()?.auth_token
+          },
+          (err, res) => {
+            dispatch({ type: DISABLE_SUBMIT, payload: false });
+            dispatch({ type: LOADING, payload: false });
+            toggleAuthenticationSuccessPendingView(false);
+            if (err) {
+              onFailure?.(err);
+              return dispatch({
+                type: SHOW_ALERT,
+                payload: {
+                  type: "error",
+                  content: getErrorMessages(err)
+                }
+              });
+            }
+            onSuccess?.(orderResponse);
+          }
+        );
+      }
+    );
+  };
 
   useEffect(() => {
-    if (!stripe || !currentPlan?.currency) {
+    if (!stripe) {
+      setIsInitializing(false);
+      return;
+    }
+
+    if (type === "createPayment" && !currentPlan?.currency) {
+      setIsInitializing(false);
+      return;
+    }
+
+    if (type === "orderCreate" && !order?.currency) {
       setIsInitializing(false);
       return;
     }
@@ -42,13 +135,17 @@ export const PelcroPaymentRequestButton = (props) => {
       try {
         const pr = stripe.paymentRequest({
           country: window.Pelcro.user.location.countryCode || "US",
-          currency: currentPlan.currency.toLowerCase(),
+          currency: (
+            currentPlan?.currency || order?.currency
+          ).toLowerCase(),
           total: {
             label:
               currentPlan?.nickname ||
               currentPlan?.description ||
+              order?.description ||
               "Payment",
-            amount: updatedPrice ?? currentPlan?.amount ?? 0,
+            amount:
+              updatedPrice ?? currentPlan?.amount ?? order?.price,
             pending: false
           },
           requestPayerEmail: false,
@@ -75,15 +172,23 @@ export const PelcroPaymentRequestButton = (props) => {
               );
             }
 
-            const sourceData = {
-              id: event.source.id,
-              isExistingSource: false
-            };
-
-            dispatch({
-              type: SUBSCRIBE,
-              payload: sourceData
-            });
+            // Handle different payment types
+            if (type === "orderCreate") {
+              purchase(
+                new StripeGateway(),
+                event.source.id,
+                state,
+                dispatch
+              );
+            } else {
+              dispatch({
+                type: SUBSCRIBE,
+                payload: {
+                  id: event.source.id,
+                  isExistingSource: false
+                }
+              });
+            }
           } catch (error) {
             dispatch({
               type: SHOW_ALERT,
@@ -115,14 +220,7 @@ export const PelcroPaymentRequestButton = (props) => {
           dispatch({ type: SET_PAYMENT_REQUEST, payload: pr });
           dispatch({ type: SET_CAN_MAKE_PAYMENT, payload: true });
         } else if (mounted) {
-          dispatch({
-            type: SHOW_ALERT,
-            payload: {
-              type: "error",
-              content:
-                "Apple Pay is not available. Please use a different payment method."
-            }
-          });
+          dispatch({ type: SET_CAN_MAKE_PAYMENT, payload: false });
         }
       } catch (error) {
         if (mounted) {
@@ -140,7 +238,7 @@ export const PelcroPaymentRequestButton = (props) => {
     return () => {
       mounted = false;
     };
-  }, [stripe, currentPlan, updatedPrice, dispatch]);
+  }, [stripe, currentPlan, updatedPrice, dispatch, order, type]);
 
   if (isInitializing || !canMakePayment || !localPaymentRequest) {
     return null;
