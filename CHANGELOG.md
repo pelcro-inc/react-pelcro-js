@@ -1,3 +1,10 @@
+# [4.0.0-alpha.120](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.119...v4.0.0-alpha.120) (2025-02-19)
+
+
+### Features
+
+* currency-bug-validatioin ([#410](https://github.com/pelcro-inc/react-pelcro-js/issues/410)) ([76cee37](https://github.com/pelcro-inc/react-pelcro-js/commit/76cee3795b8fe512165226b54d492a0dc22b494e))
+
 # [4.0.0-alpha.119](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.118...v4.0.0-alpha.119) (2025-02-19)
 
 
