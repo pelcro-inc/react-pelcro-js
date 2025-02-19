@@ -1,3 +1,10 @@
+# [4.0.0-alpha.119](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.118...v4.0.0-alpha.119) (2025-02-19)
+
+
+### Features
+
+* init payment request when stripe is loaded ([#409](https://github.com/pelcro-inc/react-pelcro-js/issues/409)) ([f87226e](https://github.com/pelcro-inc/react-pelcro-js/commit/f87226e15aa457ac7be21ece49b548cf8cd2db4f))
+
 # [4.0.0-alpha.118](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.117...v4.0.0-alpha.118) (2025-01-27)
 
 
