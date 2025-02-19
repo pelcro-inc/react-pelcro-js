@@ -7,7 +7,10 @@ import { notify } from "../../SubComponents/Notification";
 import { isStagingEnvironment } from "../../utils/utils";
 import axios from "axios";
 
-export const OrderCreateView = (props) => {
+export const OrderCreateView = ({
+  showExternalPaymentMethods = false,
+  ...props
+}) => {
   const { t } = useTranslation("checkoutForm");
   const { order, selectedAddressId } = usePelcro();
   const skipPayment =
@@ -123,7 +126,7 @@ export const OrderCreateView = (props) => {
         <PaymentMethodView
           type="orderCreate"
           showCoupon={true}
-          showExternalPaymentMethods={false}
+          showExternalPaymentMethods={showExternalPaymentMethods}
           showApplePayButton={true}
           showOrderButton={showOrderButton}
           order={order}

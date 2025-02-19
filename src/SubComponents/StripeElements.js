@@ -1,7 +1,8 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   PaymentRequestButtonElement,
-  PaymentElement
+  PaymentElement,
+  useStripe
 } from "@stripe/react-stripe-js";
 import { store } from "../Components/PaymentMethod/PaymentMethodContainer";
 import { usePelcro } from "../hooks/usePelcro";
@@ -9,45 +10,287 @@ import { getSiteCardProcessor } from "../Components/common/Helpers";
 import { MonthSelect } from "./MonthSelect";
 import { YearSelect } from "./YearSelect";
 import { Input } from "./Input";
+import {
+  StripeGateway,
+  Payment,
+  PAYMENT_TYPES
+} from "../services/Subscription/Payment.service";
+import { getErrorMessages } from "../Components/common/Helpers";
+import {
+  DISABLE_COUPON_BUTTON,
+  DISABLE_SUBMIT,
+  LOADING,
+  SUBSCRIBE,
+  SET_PAYMENT_REQUEST,
+  SET_CAN_MAKE_PAYMENT,
+  SHOW_ALERT
+} from "../utils/action-types";
 
-export const PelcroPaymentRequestButton = (props) => {
-  const {
-    state: {
-      canMakePayment,
-      paymentRequest,
-      currentPlan,
-      updatedPrice
+export const PelcroPaymentRequestButton = ({
+  type,
+  onSuccess,
+  onFailure,
+  ...props
+}) => {
+  const stripe = useStripe();
+  const [isInitializing, setIsInitializing] = useState(true);
+  const [localPaymentRequest, setLocalPaymentRequest] =
+    useState(null);
+  const { state, dispatch } = useContext(store);
+  const { canMakePayment, currentPlan, updatedPrice } = state;
+  const { order, set, selectedPaymentMethodId } = usePelcro();
+  const getOrderInfo = () => {
+    if (!order) {
+      return {
+        price: null,
+        currency: null,
+        label: null
+      };
     }
-  } = useContext(store);
 
-  const updatePaymentRequest = () => {
-    // Make sure payment request is up to date, eg. user added a coupon code.
-    paymentRequest?.update({
-      total: {
-        label: currentPlan?.nickname || currentPlan?.description,
-        amount: updatedPrice ?? currentPlan?.amount
+    const isQuickPurchase = !Array.isArray(order);
+
+    if (isQuickPurchase) {
+      return {
+        price: order.price * order.quantity,
+        currency: order.currency,
+        label: order.name
+      };
+    }
+
+    if (order.length === 0) {
+      return {
+        price: null,
+        currency: null,
+        label: null
+      };
+    }
+
+    const price = order.reduce(
+      (total, item) => total + item.price * item.quantity,
+      0
+    );
+
+    return {
+      price,
+      currency: order[0].currency,
+      label: "Order"
+    };
+  };
+  const orderPrice = getOrderInfo().price;
+
+  const orderCurrency = getOrderInfo().currency;
+
+  const orderLabel = getOrderInfo().label;
+  const purchase = (
+    gatewayService,
+    gatewayToken,
+    state,
+    dispatch
+  ) => {
+    const isQuickPurchase = !Array.isArray(order);
+    const mappedOrderItems = isQuickPurchase
+      ? [{ sku_id: order.id, quantity: order.quantity }]
+      : order.map((item) => ({
+          sku_id: item.id,
+          quantity: item.quantity
+        }));
+
+    const { couponCode } = state;
+
+    const payment = new Payment(gatewayService);
+
+    payment.execute(
+      {
+        type: PAYMENT_TYPES.PURCHASE_ECOMMERCE_ORDER,
+        token: gatewayToken,
+        isExistingSource: Boolean(selectedPaymentMethodId),
+        items: mappedOrderItems,
+        addressId: state.selectedAddressId,
+        couponCode
+      },
+      (err, orderResponse) => {
+        if (err) {
+          toggleAuthenticationSuccessPendingView(false);
+          dispatch({ type: DISABLE_SUBMIT, payload: false });
+          dispatch({ type: LOADING, payload: false });
+          onFailure?.(err);
+          return dispatch({
+            type: SHOW_ALERT,
+            payload: {
+              type: "error",
+              content: getErrorMessages(err)
+            }
+          });
+        }
+
+        if (isQuickPurchase) {
+          set({ order: null });
+        } else {
+          set({ order: null, cartItems: [] });
+        }
+
+        window.Pelcro.user.refresh(
+          {
+            auth_token: window.Pelcro?.user?.read()?.auth_token
+          },
+          (err, res) => {
+            dispatch({ type: DISABLE_SUBMIT, payload: false });
+            dispatch({ type: LOADING, payload: false });
+            toggleAuthenticationSuccessPendingView(false);
+            if (err) {
+              onFailure?.(err);
+              return dispatch({
+                type: SHOW_ALERT,
+                payload: {
+                  type: "error",
+                  content: getErrorMessages(err)
+                }
+              });
+            }
+            onSuccess?.(orderResponse);
+          }
+        );
       }
-    });
+    );
   };
 
-  if (canMakePayment) {
-    return (
-      <PaymentRequestButtonElement
-        className="StripeElement stripe-payment-request-btn"
-        onClick={updatePaymentRequest}
-        paymentRequest={paymentRequest}
-        style={{
-          paymentRequestButton: {
-            theme: "dark",
-            height: "40px"
+  useEffect(() => {
+    if (!stripe) {
+      setIsInitializing(false);
+      return;
+    }
+
+    let mounted = true;
+
+    const initializePaymentRequest = async () => {
+      try {
+        const pr = stripe.paymentRequest({
+          country: window.Pelcro.user.location.countryCode || "US",
+          currency: (
+            currentPlan?.currency || orderCurrency
+          ).toLowerCase(),
+          total: {
+            label:
+              currentPlan?.nickname ||
+              currentPlan?.description ||
+              orderLabel ||
+              "Payment",
+            amount: updatedPrice ?? currentPlan?.amount ?? orderPrice,
+            pending: false
+          },
+          requestPayerEmail: false,
+          requestPayerName: false,
+          requestShipping: false
+        });
+
+        pr.on("source", async (event) => {
+          try {
+            dispatch({ type: DISABLE_COUPON_BUTTON, payload: true });
+            dispatch({ type: DISABLE_SUBMIT, payload: true });
+            dispatch({ type: LOADING, payload: true });
+
+            event.complete("success");
+
+            if (event.source?.card?.three_d_secure === "required") {
+              return generate3DSecureSource(event.source).then(
+                ({ source, error }) => {
+                  if (error) {
+                    return handlePaymentError(error);
+                  }
+                  toggleAuthenticationPendingView(true, source);
+                }
+              );
+            }
+
+            // Handle different payment types
+            if (type === "orderCreate") {
+              purchase(
+                new StripeGateway(),
+                event.source.id,
+                state,
+                dispatch
+              );
+            } else {
+              dispatch({
+                type: SUBSCRIBE,
+                payload: {
+                  id: event.source.id,
+                  isExistingSource: false
+                }
+              });
+            }
+          } catch (error) {
+            dispatch({
+              type: SHOW_ALERT,
+              payload: {
+                type: "error",
+                content:
+                  error.message || "Payment failed. Please try again."
+              }
+            });
+
+            event.complete("fail");
+
+            dispatch({ type: DISABLE_COUPON_BUTTON, payload: false });
+            dispatch({ type: DISABLE_SUBMIT, payload: false });
+            dispatch({ type: LOADING, payload: false });
           }
-        }}
-        {...props}
-      />
-    );
+        });
+
+        pr.on("cancel", () => {
+          dispatch({ type: DISABLE_COUPON_BUTTON, payload: false });
+          dispatch({ type: DISABLE_SUBMIT, payload: false });
+          dispatch({ type: LOADING, payload: false });
+        });
+
+        const result = await pr.canMakePayment();
+
+        if (mounted && result) {
+          setLocalPaymentRequest(pr);
+          dispatch({ type: SET_PAYMENT_REQUEST, payload: pr });
+          dispatch({ type: SET_CAN_MAKE_PAYMENT, payload: true });
+        } else if (mounted) {
+          dispatch({ type: SET_CAN_MAKE_PAYMENT, payload: false });
+        }
+      } catch (error) {
+        if (mounted) {
+          dispatch({ type: SET_CAN_MAKE_PAYMENT, payload: false });
+        }
+      } finally {
+        if (mounted) {
+          setIsInitializing(false);
+        }
+      }
+    };
+
+    initializePaymentRequest();
+
+    return () => {
+      mounted = false;
+    };
+  }, [stripe, currentPlan, updatedPrice, dispatch, order, type]);
+
+  if (isInitializing || !canMakePayment || !localPaymentRequest) {
+    return null;
   }
 
-  return null;
+  return (
+    <PaymentRequestButtonElement
+      className="StripeElement stripe-payment-request-btn"
+      options={{
+        paymentRequest: localPaymentRequest,
+        style: {
+          paymentRequestButton: {
+            theme: "dark",
+            height: "40px",
+            buttonType: "plain"
+          }
+        }
+      }}
+      {...props}
+    />
+  );
 };
 
 export const CheckoutForm = ({ type }) => {
@@ -63,7 +306,7 @@ export const CheckoutForm = ({ type }) => {
 
   const paymentElementOptions = {
     layout: {
-      type: "tabs", // or accordion
+      type: "tabs",
       defaultCollapsed: false
     },
     defaultValues: {
@@ -77,11 +320,8 @@ export const CheckoutForm = ({ type }) => {
         address: "never"
       }
     },
-    terms: {
-      applePay: "never",
-      card: "never",
-      googlePay: "never",
-      paypal: "never"
+    wallets: {
+      applePay: "never"
     }
   };
 
