@@ -1,3 +1,10 @@
+# [3.26.0-beta.75](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.74...v3.26.0-beta.75) (2025-02-19)
+
+
+### Features
+
+* fix match user account ([#415](https://github.com/pelcro-inc/react-pelcro-js/issues/415)) ([ae8884e](https://github.com/pelcro-inc/react-pelcro-js/commit/ae8884ea0dfd7d631f4af1c5e1e61c8b7eb1030e))
+
 # [3.26.0-beta.74](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.73...v3.26.0-beta.74) (2025-02-17)
 
 
