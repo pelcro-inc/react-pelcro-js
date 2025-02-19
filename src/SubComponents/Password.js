@@ -58,7 +58,7 @@ export function Password({ store, ...otherProps }) {
       {window?.Pelcro?.uiSettings?.showPassword && (
         <span
           onClick={() => setShowPassword(!showPassword)}
-          className="plc-absolute plc-right-2  plc-transform plc--translate-y-1/2 plc-cursor-pointer plc-opacity-50 plc-w-6 plc-h-6"
+          className="plc-absolute plc-right-2 plc-transform plc--translate-y-1/2 plc-cursor-pointer plc-opacity-50 plc-w-9 plc-h-9"
           style={{
             top: "70%"
           }}
