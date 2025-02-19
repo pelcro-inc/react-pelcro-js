@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 import { usePelcro } from "../../hooks/usePelcro";
 import {
   getStableViewID,
@@ -17,7 +17,7 @@ import ReactGA4 from "react-ga4";
  * @typedef {Object} OptionsType
  * @property {boolean} loadPaymentSDKs
  * @property {boolean} enableURLTriggers
- * @property {boolean} enableTheme
+ * @property {boolean} enableTheme 
  * @property {boolean} enablePaywalls
  * @property {boolean} enableGoogleAnalytics
  * @property {boolean} disablePageViewEvents
@@ -203,7 +203,7 @@ export const loadPaymentSDKs = () => {
 export const loadAuth0SDK = () => {
   const auth0Enabled = Boolean(
     window.Pelcro.site.read().auth0_client_id &&
-      window.Pelcro.site.read().auth0_base_url
+    window.Pelcro.site.read().auth0_base_url
   );
 
   if (auth0Enabled) {
@@ -217,7 +217,7 @@ export const loadAuth0SDK = () => {
 export const load = () => {
   const auth0Enabled = Boolean(
     window.Pelcro.site.read().auth0_client_id &&
-      window.Pelcro.site.read().auth0_base_url
+    window.Pelcro.site.read().auth0_base_url
   );
 
   if (auth0Enabled) {
@@ -301,9 +301,12 @@ export const renderShopView = (shopComponent) => {
     const shopElement = document.getElementById("pelcro-shop");
 
     if (shopElement) {
-      ReactDOM.render(
-        <div className="pelcro-root">{shopComponent}</div>,
-        shopElement
+      if (!shopElement._pelcroRoot) {
+        shopElement._pelcroRoot = createRoot(shopElement);
+      }
+
+      shopElement._pelcroRoot.render(
+        <div className="pelcro-root">{shopComponent}</div>
       );
     }
   });

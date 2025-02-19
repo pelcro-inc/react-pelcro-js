@@ -67,6 +67,38 @@ export const PelcroModalController = ({
 
   return (
     <div id={rootId} className="pelcro-root">
+       <div className="min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-gray-100 via-gray-300 to-gray-100 animate-gradient-xy relative overflow-hidden">
+      {/* Background pattern overlay */}
+      <div className="absolute inset-0 bg-grid-slate-200 [mask-image:linear-gradient(0deg,transparent,black,transparent)] pointer-events-none" />
+
+      {/* Animated background circles */}
+      {/* <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -left-4 -top-4 w-72 h-72 bg-primary-500 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob" />
+        <div className="absolute -right-4 -top-4 w-72 h-72 bg-primary-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000" />
+        <div className="absolute -bottom-8 left-20 w-72 h-72 bg-primary-900 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000" />
+      </div> */}
+
+      {/* Buttons container with backdrop blur */}
+      <div className="relative flex flex-wrap items-center justify-center gap-4 p-8 rounded-xl backdrop-blur-sm bg-white/10">
+        <button
+          className="pelcro-login-button min-w-[120px] px-4 py-2 bg-gray-900 text-white rounded-lg font-medium transition-all hover:bg-gray-800 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 shadow-lg"
+          data-login-text="Sign in"
+          data-dashboard-text="My Dashboard"
+        >
+          Login
+        </button>
+
+        <button className="pelcro-register-button min-w-[120px] px-4 py-2 bg-transparent text-gray-900 rounded-lg font-medium border border-gray-900 transition-all hover:bg-gray-900 hover:text-white hover:scale-105 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 shadow-lg">
+          Register
+        </button>
+
+        <button className="pelcro-subscribe-button min-w-[120px] px-4 py-2 bg-white text-gray-900 rounded-lg font-medium border border-gray-200 transition-all hover:bg-gray-50 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 shadow-lg">
+          Subscribe
+        </button>
+
+      </div>
+    </div>
+      
       {isAuthenticated() &&
         React.Children.map(children, (child) => child).find(
           ({ type }) => type?.viewId === "dashboard-open"

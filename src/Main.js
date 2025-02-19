@@ -42,15 +42,21 @@ import { QrCodeModal } from "./Components/QrCode/QrCodeModal";
 import { SubscriptionManageMembersModal } from "./Components/SubscriptionManageMembers/SubscriptionManageMembersModal";
 import { PaymentMethodDeleteModal } from "./Components/PaymentMethodDelete/PaymentMethodDeleteModal";
 import { PaymentMethodCreateModal } from "./Components/PaymentMethodCreate/PaymentMethodCreateModal";
+import { SubscriptionModal } from "./Components/Login/subscriptionModal";
 
 export const Main = () => {
   return (
     <PelcroModalController>
-      <MeterModal />
-      <EmailVerifyModal />
+      
       <LoginModal />
-      <VerifyLinkTokenModal />
       <RegisterModal />
+      <SubscriptionModal />
+
+
+      {/* <MeterModal />
+      <EmailVerifyModal />
+      
+      <VerifyLinkTokenModal />
 
       <UserUpdateModal />
       <Dashboard />
@@ -65,7 +71,6 @@ export const Main = () => {
       <PaymentMethodSelectModal />
       <PaymentMethodDeleteModal />
 
-      <SelectModal />
       <Newsletter />
       <NewsletterUpdateModal />
 
@@ -96,7 +101,7 @@ export const Main = () => {
 
       <QrCodeModal />
 
-      <Notification />
+      <Notification /> */}
     </PelcroModalController>
   );
 };

@@ -1,36 +1,3 @@
-/* globals */
-@import "./css/normalize.css";
-@import "./css/forms.css";
-@import "./css/variables.css";
-@import "./css/recaptcha.css";
-
-/* sub-components and components */
-@import "tailwindcss/components";
-@import "./SubComponents/Badge.css";
-@import "./SubComponents/Modal.css";
-@import "./SubComponents/Input.css";
-@import "./SubComponents/DatePicker.css";
-@import "./SubComponents/Select.css";
-@import "./SubComponents/Checkbox.css";
-@import "./SubComponents/Loader.css";
-@import "./SubComponents/Button.css";
-@import "./SubComponents/Link.css";
-@import "./SubComponents/Radio.css";
-@import "./SubComponents/Alert.css";
-@import "./SubComponents/Notification.css";
-@import "./SubComponents/Tooltip.css";
-@import "./SubComponents/Carousel.css";
-@import "./SubComponents/ImageSelect.css";
-
-@import "./Components/Shop/ShopView.css";
-@import "./Components/ProfilePicChange/ProfilePicChangeCropper.css";
-@import "./Components/ProfilePicChange/ProfilePicChangeZoom.css";
-@import "./Components/UserUpdate/UserUpdateProfilePic.css";
-@import "./Components/dashboard/DashboardMenus/OrdersMenu.css";
-@import "./Components/Select/SelectModal.css";
-@import "./Components/Login/LoginOptions.css";
-@import "./Components/dashboard/Dashboard.css";
-@import "./Components/ApplePayButton/ApplePayButton.css";
-
-/* utilities */
-@import "tailwindcss/utilities";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
