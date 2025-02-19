@@ -1,3 +1,10 @@
+# [3.46.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.45.0...v3.46.0) (2025-02-19)
+
+
+### Features
+
+* styling icon ([#416](https://github.com/pelcro-inc/react-pelcro-js/issues/416)) ([bc06acd](https://github.com/pelcro-inc/react-pelcro-js/commit/bc06acdf75f37a8a80bc39a76ba55c51e6fbf1dc))
+
 # [3.45.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.44.0...v3.45.0) (2025-02-17)
 
 
