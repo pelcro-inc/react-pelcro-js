@@ -1,5 +1,5 @@
 module.exports = {
-  purge: ["./src/**/*.html", "./src/**/*.js", "./src/**/*.jsx"],
+  content: ["./src/**/*.{html,js,jsx}"],
   presets: [],
   important: ".pelcro-root",
   prefix: "plc-",
