@@ -12,6 +12,7 @@ import { getErrorMessages } from "../common/Helpers";
 import i18n from "../../i18n";
 import ReactGA from "react-ga";
 import ReactGA4 from "react-ga4";
+import { createRoot } from "react-dom/client";
 
 /**
  * @typedef {Object} OptionsType
@@ -301,9 +302,12 @@ export const renderShopView = (shopComponent) => {
     const shopElement = document.getElementById("pelcro-shop");
 
     if (shopElement) {
-      ReactDOM.render(
-        <div className="pelcro-root">{shopComponent}</div>,
-        shopElement
+      if (!shopElement._pelcroRoot) {
+        shopElement._pelcroRoot = createRoot(shopElement);
+      }
+
+      shopElement._pelcroRoot.render(
+        <div className="pelcro-root">{shopComponent}</div>
       );
     }
   });
