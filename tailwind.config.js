@@ -1,14 +1,8 @@
 module.exports = {
   content: ["./src/**/*.{html,js,jsx}"],
-  presets: [],
-  important: ".pelcro-root",
-  // prefix: "plc-",
-  darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
       colors: {
-        transparent: "transparent",
-        current: "currentColor",
         primary: {
           DEFAULT:
             "hsl(var(--plc-primary-hue), var(--plc-primary-saturation), var(--plc-primary-lightness))",
