@@ -1,12 +1,15 @@
-/* globals */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
 @import "./css/normalize.css";
 @import "./css/forms.css";
 @import "./css/variables.css";
 @import "./css/recaptcha.css";
 
 /* sub-components and components */
-@import "tailwindcss/components";
-@import "./SubComponents/Badge.css";
+/* @import "./SubComponents/Badge.css";
 @import "./SubComponents/Modal.css";
 @import "./SubComponents/Input.css";
 @import "./SubComponents/DatePicker.css";
@@ -30,7 +33,4 @@
 @import "./Components/Select/SelectModal.css";
 @import "./Components/Login/LoginOptions.css";
 @import "./Components/dashboard/Dashboard.css";
-@import "./Components/ApplePayButton/ApplePayButton.css";
-
-/* utilities */
-@import "tailwindcss/utilities";
+@import "./Components/ApplePayButton/ApplePayButton.css"; */
