@@ -178,7 +178,7 @@ const LoginContainer = ({
   return (
     <div
       style={{ ...style }}
-      className={`pelcro-container pelcro-login-container ${className}`}
+      className={`w-full max-w-lg overflow-hidden rounded-2xl bg-white p-6 shadow-xl ${className}`}
     >
       <Provider value={{ state, dispatch }}>
         {children.length

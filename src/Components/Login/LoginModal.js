@@ -5,7 +5,7 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter
-} from "../../SubComponents/Modal";
+} from "../ui/Modal"
 import { Link } from "../../SubComponents/Link";
 import { usePelcro } from "../../hooks/usePelcro";
 import {
@@ -109,13 +109,13 @@ export function LoginModal({ onDisplay, onClose, ...props }) {
       id="pelcro-login-modal"
       onDisplay={onDisplay}
       onClose={onClose}
+      
     >
-      <ModalHeader>
-        <div className="plc-text-left plc-text-gray-900 pelcro-title-wrapper plc-flex-1 plc-flex plc-flex-col plc-justify-center">
-          <h4 className="plc-text-xl plc-font-bold">
-            {t("messages.loginTo")}
-          </h4>
-        </div>
+       <ModalHeader hideCloseButton={true}
+          title={t("messages.loginTo")}
+          description={t("messages.loginToDescription")}
+        >
+      
       </ModalHeader>
       <ModalBody>
         <LoginView

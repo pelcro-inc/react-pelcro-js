@@ -3,7 +3,8 @@ import { ReactComponent as CloseIcon } from "../../assets/x-icon.svg";
 import { dispatchModalDisplayEvents } from "../../Components/PelcroModalController/PelcroModalController.service";
 import { usePelcro } from "../../hooks/usePelcro";
 import Authorship from "../../Components/common/Authorship";
-import { Dialog, DialogBackdrop, DialogPanel } from "@headlessui/react";
+import { Dialog, DialogBackdrop } from "@headlessui/react";
+import { Transition } from "@headlessui/react";
 
 export function Modal({
   id,
@@ -11,44 +12,63 @@ export function Modal({
   className = "",
   hideCloseButton = !window.Pelcro.paywall.displayCloseButton(),
   children,
+  title,
+  description,
   ...props
 }) {
+  const [open, setOpen] = useState(true);
+
   useEffect(() => {
     onDisplay?.();
     dispatchModalDisplayEvents(id);
   }, []);
 
-  const [open, setOpen] = useState(true)
-
-  const onClose = () => {
-    setOpen(false)
-  }
-
   return (
-    <Dialog open={open} onClose={onClose} className="relative z-50">
-      <DialogBackdrop
-        transition
-        className="fixed inset-0 bg-gray-500/75 backdrop-blur-sm transition-opacity data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in"
-      />
-      <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
-        <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-          <DialogPanel
-            transition
-            className={`relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all data-[closed]:translate-y-4 data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in sm:my-8 sm:w-full sm:max-w-[480px] sm:px-6 w-full ${className}`}
-            role="dialog"
-            aria-modal="true"
-            id={id}
-            {...props}
-          >
-            <div className="pelcro-modal-content">
-              {children.find(({ type }) => type === ModalHeader)}
-              {children.find(({ type }) => type === ModalBody)}
-              {children.find(({ type }) => type === ModalFooter)}
-            </div>
-          </DialogPanel>
+    <>
+      <Dialog open={open} onClose={() => { }} className="relative z-50">
+        <DialogBackdrop
+          transition
+          className="fixed inset-0 bg-gray-500/75 backdrop-blur-sm transition-opacity data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in"
+        />
+        <Transition.Child
+          as={React.Fragment}
+          enter="ease-out duration-300"
+          enterFrom="opacity-0"
+          enterTo="opacity-100"
+          leave="ease-in duration-200"
+          leaveFrom="opacity-100"
+          leaveTo="opacity-0"
+        >
+          <div className="fixed inset-0 bg-black/20 backdrop-blur-sm" />
+        </Transition.Child>
+
+        <div className="fixed inset-0 overflow-y-auto">
+          <div className="flex min-h-full items-center justify-center p-4">
+            <Transition.Child
+              as={React.Fragment}
+              enter="ease-out duration-300"
+              enterFrom="opacity-0 scale-95"
+              enterTo="opacity-100 scale-100"
+              leave="ease-in duration-200"
+              leaveFrom="opacity-100 scale-100"
+              leaveTo="opacity-0 scale-95"
+            >
+              <Dialog.Panel
+                className={`w-full max-w-lg overflow-hidden rounded-2xl bg-white p-6 shadow-xl ${className}`}
+                id={id}
+                {...props}
+              >
+                <div className="">
+                  {children.find(({ type }) => type === ModalHeader)}
+                  {children.find(({ type }) => type === ModalBody)}
+                  {children.find(({ type }) => type === ModalFooter)}
+                </div>
+              </Dialog.Panel>
+            </Transition.Child>
+          </div>
         </div>
-      </div>
-    </Dialog>
+      </Dialog>
+    </>
   );
 }
 
@@ -58,6 +78,8 @@ export const ModalHeader = ({
   onCloseModal,
   className = "",
   hideCloseButton,
+  title,
+  description,
   children,
   ...props
 }) => {
@@ -76,17 +98,18 @@ export const ModalHeader = ({
           aria-label="close modal"
           onClick={onClose}
         >
-          <CloseIcon className="plc-fill-current" />
+          <CloseIcon className="fill-current" />
         </button>
       )}
 
-      <div className="plc-flex plc-w-full">
-        <img
+      <div className="">
+        {/* <img
           alt="business logo"
-          className={`plc-max-h-14 plc-my-2 pelcro-modal-logo ${window.Pelcro?._showModalHeader ? "" : "plc-hidden"
-            }`}
+          className={`plc-max-h-14 plc-my-2 pelcro-modal-logo ${window.Pelcro?._showModalHeader ? "" : "plc-hidden"}`}
           src={window.Pelcro.site.read().logo?.url}
-        />
+        /> */}
+        {title && <Dialog.Title className="text-2xl font-bold text-gray-900">{title}</Dialog.Title>}
+        {description && <Dialog.Description className="mt-2 text-gray-500">{description}</Dialog.Description>}
       </div>
 
       {children}
@@ -102,7 +125,7 @@ export const ModalBody = ({ className = "", children }) => {
 
 export const ModalFooter = ({ className = "", children }) => {
   return (
-    <div className={`pelcro-modal-footer ${className}`}>
+    <div className={`mt-6 flex justify-center ${className}`}>
       {children}
       <Authorship />
     </div>

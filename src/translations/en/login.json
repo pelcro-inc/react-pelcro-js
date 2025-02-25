@@ -10,6 +10,7 @@
   },
   "messages": {
     "loginTo": "Login to your account",
+    "loginToDescription": "Enter your credentials to access your account",
     "welcome": "Welcome back, sign in with your existing account.",
     "dontHaveAccount": "Don't have an account yet?",
     "createAccount": "Create an account.",

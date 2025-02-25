@@ -10,8 +10,9 @@
   },
   "messages": {
     "loginTo": "Connectez-vous à votre compte",
+    "loginToDescription": "Entrez vos identifiants pour accéder à votre compte",
     "welcome": "Bienvenue, connectez-vous avec votre compte existant.",
-    "dontHaveAccount": "Vous n’avez pas encore de compte ?",
+    "dontHaveAccount": "Vous n'avez pas encore de compte ?",
     "createAccount": "Créer un compte",
     "forgotPassword": "Mot de passe oublié ?",
     "reset": {

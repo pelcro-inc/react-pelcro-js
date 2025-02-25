@@ -35,10 +35,15 @@ export function LoginView(props) {
     <div id="pelcro-login-view">
       <form
         action="javascript:void(0);"
-        className="plc-mt-2 pelcro-form"
+        className="space-y-4"
       >
         <LoginContainer {...props}>
           <AlertWithContext />
+
+
+        
+
+
           {socialLoginEnabled && (
             <div className="plc-my-5">
               <div>
