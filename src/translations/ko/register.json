@@ -15,14 +15,14 @@
   },
   "messages": {
     "alreadyHaveAccount": "이미 계정이 있습니까?",
-    "createAccount": "계정 만들기",
-    "loginHere": "여기에서 로그인하세요.",
+    "createAccount": "계정 만들기", 
+    "loginHere": "로그인",
     "selectPlan": "다른 요금제를 선택하세요.",
     "here": "여기",
     "iAgree": {
       "iAgree": "본인은",
       "terms": "서비스 약관",
-      "and": "및",
+      "and": "및", 
       "privacy": "개인정보 보호정책에 동의합니다."
     },
     "preferDisable": {

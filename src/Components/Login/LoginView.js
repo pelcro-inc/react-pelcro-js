@@ -39,94 +39,95 @@ export function LoginView(props) {
       >
         <LoginContainer {...props}>
           <AlertWithContext />
-
-
-        
-
-
           {socialLoginEnabled && (
-            <div className="plc-my-5">
-              <div>
-                <ul
-                  className={`${
-                    (auth0LoginEnabled && !passwordlessEnabled) ||
-                    (!auth0LoginEnabled && passwordlessEnabled)
-                      ? "threeColumns"
-                      : "twoColumns"
-                  } loginOptions plc-block sm:plc-flex plc-flex-col sm:plc-flex-row plc-justify-center plc-flex-wrap plc-items-center`}
-                >
-                  <li>
-                    <GoogleLoginButton className="plc-flex plc-w-full" />
-                  </li>
-                  <li>
-                    <FacebookLoginButton className="plc-flex plc-w-full" />
-                  </li>
-                  {auth0LoginEnabled && (
-                    <li>
-                      <Auth0LoginButton className="plc-flex plc-w-full" />
-                    </li>
-                  )}
-                  {passwordlessEnabled && (
-                    <li>
-                      <LoginRequestLoginToken
-                        onClick={props.onPasswordlessRequest}
-                        className="plc-flex plc-w-full"
-                      />
-                    </li>
-                  )}
-                </ul>
-              </div>
+            <div className="mt-6 grid grid-cols-2 gap-4">
+              <FacebookLoginButton className="" />
+              <GoogleLoginButton className="" />
+              {/* {auth0LoginEnabled && (
+                <>
+                  <Auth0LoginButton className="plc-flex plc-w-full" />
+                </>
+              )}
+              {passwordlessEnabled && (
+                <>
+                  <LoginRequestLoginToken
+                    onClick={props.onPasswordlessRequest}
+                    className="plc-flex plc-w-full"
+                  />
+                </>
+              )} */}
 
-              <div className="plc-flex plc-items-center plc-justify-between plc-mt-5">
-                <hr className="plc-w-full plc-border-gray-300" />
-                <span className="plc-flex-shrink-0 plc-px-2 plc-text-sm plc-text-gray-700 plc-uppercase">
-                  {t("messages.socialLogin.label")}
-                </span>
-                <hr className="plc-w-full plc-border-gray-300" />
-              </div>
+
             </div>
           )}
-
-          {enableLoginWithUsername ? (
-            <LoginUsername
-              id="pelcro-input-username"
-              errorId="pelcro-input-username-error"
-              required
-              label={t("labels.username")}
-              autoFocus={true}
-            />
-          ) : (
-            <LoginEmail
-              id="pelcro-input-email"
-              errorId="pelcro-input-email-error"
-              required
-              label={t("labels.email")}
-              autoFocus={true}
-            />
-          )}
-          <LoginPassword
-            id="pelcro-input-password"
-            errorId="pelcro-input-password-error"
-            required
-            label={t("labels.password")}
-          />
-          <div className="plc-flex plc-flex-row-reverse">
-            <Link
-              className="plc-inline-flex plc-text-sm plc-cursor-default plc-h-9"
-              id="pelcro-link-forgot-password"
-              onClick={props.onForgotPassword}
-            >
-              <span className="plc-cursor-pointer">
-                {t("messages.forgotPassword")}
+          <div className="relative my-6">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t border-gray-200" />
+            </div>
+            <div className="relative flex justify-center text-sm uppercase">
+              <span className="bg-white px-2 text-gray-500">
+                {t("messages.socialLogin.label")}
               </span>
-            </Link>
+            </div>
           </div>
-          <LoginButton
-            role="submit"
-            className="plc-w-full plc-mt-2"
-            name={t("labels.login")}
-            id="pelcro-submit"
-          />
+
+          <div className="space-y-4">
+            {enableLoginWithUsername ? (
+              <div className="relative">
+
+                <LoginUsername
+                  id="pelcro-input-username"
+                  errorId="pelcro-input-username-error"
+                  required
+                  label={t("labels.username")}
+                  placeholder={t("labels.username")}
+                  autoFocus={true}
+                />
+              </div>
+            ) : (
+              <div className="relative">
+
+                <LoginEmail
+                  id="pelcro-input-email"
+                  errorId="pelcro-input-email-error"
+                  required
+                  label={t("labels.email")}
+                  placeholder={t("labels.emailPlaceholder")}
+                  autoFocus={true}
+                />
+              </div>
+            )}
+            <div className="relative">
+
+              <LoginPassword
+                id="pelcro-input-password"
+                errorId="pelcro-input-password-error"
+                required
+                label={t("labels.password")}
+                placeholder={t("labels.passwordPlaceholder")}
+              />
+              <div className="mt-2 flex items-center justify-end">
+                <Link
+                  onClick={props.onForgotPassword}
+                  id="pelcro-link-forgot-password"
+                  className="text-sm text-gray-600 transition-colors hover:text-gray-900 hover:underline"
+                >
+                  {t("messages.forgotPassword")}
+                </Link>
+              </div>
+
+            </div>
+
+            <LoginButton
+              role="submit"
+              className="relative w-full rounded-lg bg-gray-900 px-4 py-3 text-sm font-medium text-white transition-all hover:bg-gray-800 disabled:bg-gray-300 disabled:cursor-not-allowed"
+              name={t("labels.login")}
+              id="pelcro-submit"
+            />
+
+          </div>
+
+          
         </LoginContainer>
       </form>
     </div>

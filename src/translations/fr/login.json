@@ -9,12 +9,13 @@
     "login": "Connexion"
   },
   "messages": {
-    "loginTo": "Connectez-vous à votre compte",
-    "loginToDescription": "Entrez vos identifiants pour accéder à votre compte",
+    "loginTo": "Bienvenue à nouveau",
+    "loginToDescription": "Connectez-vous à votre compte",
     "welcome": "Bienvenue, connectez-vous avec votre compte existant.",
     "dontHaveAccount": "Vous n'avez pas encore de compte ?",
-    "createAccount": "Créer un compte",
+    "createAccount": "S'inscrire",
     "forgotPassword": "Mot de passe oublié ?",
+    "or": "Ou continuer avec",
     "reset": {
       "click": "Cliquez",
       "here": "ici",

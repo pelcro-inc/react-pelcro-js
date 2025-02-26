@@ -132,13 +132,13 @@ export const Auth0LoginButton = ({
       <button
         type="button"
         onClick={handleClick}
-        className={`plc-flex plc-items-center plc-justify-center plc-h-12 plc-px-1 plc-text-gray-700 plc-rounded-md pelcro-google-login plc-shadow-md_dark plc-bg-white hover:plc-bg-transparent plc-text-sm ${className}`}
-      >
+        className="group  flex items-center justify-center gap-2 rounded-lg border border-gray-200 bg-white px-4 py-3 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50 active:bg-gray-100"
+        >
         <Auth0LogoIcon
-          className={`plc-w-5 plc-h-auto pelcro-auth0-login-icon" ${iconClassName}`}
+          className={`h-5 w-5" ${iconClassName}`}
         />
         <p
-          className={`pelcro-auth0-login-label plc-ml-2 ${labelClassName}`}
+          className={`h-5 w-5" ${labelClassName}`}
         >
           {label}
         </p>

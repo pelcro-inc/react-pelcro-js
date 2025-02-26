@@ -10,22 +10,22 @@ export function Input({
   labelClassName = "",
   errorClassName = "",
   wrapperClassName = "",
+  placeholder = "",
   ...otherProps
 }) {
   return (
-    <div className={`pelcro-input-wrapper ${wrapperClassName}`}>
+    <div className={`relative ${wrapperClassName}`}>
       <input
         type="text"
         id={id}
-        className={`pelcro-input-field ${className} ${
-          error ? "pelcro-input-invalid" : ""
-        }`}
-        placeholder="placeholder"
+        placeholder={placeholder}
+        className={`w-full rounded-lg  border border-gray-200 bg-gray-50/30 px-4 py-3 text-sm text-gray-800 outline-none transition-all placeholder:text-gray-400 focus:border-gray-800 focus:border focus:bg-white focus:shadow-sm focus:placeholder:text-gray-500 ${className} ${error ? "border-red-500" : ""
+          }`}
         aria-describedby={errorId}
         aria-invalid={Boolean(error)}
         {...otherProps}
       />
-      <label
+      {/* <label
         htmlFor={id}
         className={`pelcro-input-label ${labelClassName}`}
       >
@@ -37,16 +37,17 @@ export function Input({
         ) : (
           ""
         )}
-      </label>
-      {error && (
-        <p
+      </label> */}
+        {error && (
+        <div
           id={errorId}
           aria-live="assertive"
-          className={`pelcro-input-error ${errorClassName}`}
+          className={`text-red-500 text-sm  mt-1 mx-1`}
         >
           {error}
-        </p>
+        </div>
       )}
+     
     </div>
   );
 }

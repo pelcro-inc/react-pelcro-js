@@ -53,7 +53,7 @@
   "select": {
     "messages": {
       "alreadyHaveAccount": "Already have an account?",
-      "loginHere": "Login here",
+      "loginHere": "Sign in",
       "checkbox": "Check this box to gift this subscription"
     },
     "labels": {

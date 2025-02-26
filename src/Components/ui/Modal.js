@@ -90,15 +90,15 @@ export const ModalHeader = ({
   };
 
   return (
-    <div className={`pelcro-modal-header ${className}`}>
+    <div className={`relative ${className}`}>
       {!hideCloseButton && (
         <button
           type="button"
-          className="pelcro-modal-close"
+          className="absolute right-0 top-0"
           aria-label="close modal"
           onClick={onClose}
         >
-          <CloseIcon className="fill-current" />
+          <CloseIcon className="h-4 w-4 fill-current text-gray-500 hover:text-gray-700" />
         </button>
       )}
 
@@ -125,7 +125,7 @@ export const ModalBody = ({ className = "", children }) => {
 
 export const ModalFooter = ({ className = "", children }) => {
   return (
-    <div className={`mt-6 flex justify-center ${className}`}>
+    <div className={` flex flex-col items-center space-y-5 ${className}`}>
       {children}
       <Authorship />
     </div>

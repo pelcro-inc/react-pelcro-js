@@ -93,7 +93,7 @@ export function LoginModal({ onDisplay, onClose, ...props }) {
   };
 
   const onCreateAccountClick = () => {
-    switchView("plan-select");
+    switchView("register");
   };
 
   const onForgotPassword = () => {
@@ -109,13 +109,13 @@ export function LoginModal({ onDisplay, onClose, ...props }) {
       id="pelcro-login-modal"
       onDisplay={onDisplay}
       onClose={onClose}
-      
+
     >
-       <ModalHeader hideCloseButton={true}
-          title={t("messages.loginTo")}
-          description={t("messages.loginToDescription")}
-        >
-      
+      <ModalHeader hideCloseButton={false}
+        title={t("messages.loginTo")}
+        description={t("messages.loginToDescription")}
+      >
+
       </ModalHeader>
       <ModalBody>
         <LoginView
@@ -126,13 +126,12 @@ export function LoginModal({ onDisplay, onClose, ...props }) {
         />
       </ModalBody>
       <ModalFooter>
-        <p className="plc-mb-4">
-          <span className="plc-font-medium">
-            {t("messages.dontHaveAccount") + " "}
-          </span>
+        <p className="text-center text-sm text-gray-500 mt-8">
+          {t("messages.dontHaveAccount") + " "}
           <Link
             id="pelcro-link-create-account"
             onClick={onCreateAccountClick}
+            className="font-medium text-gray-900 transition-colors hover:underline"
           >
             {t("messages.createAccount")}
           </Link>

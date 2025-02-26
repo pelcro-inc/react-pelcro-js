@@ -15,30 +15,29 @@ export function Alert({
 }) {
   return (
     <div
-      className={`${
-        type === "error"
-          ? "pelcro-alert-error"
-          : "pelcro-alert-success"
-      } ${className}`}
+      className={`flex items-center justify-between p-2 mt-4 rounded-lg border ${type === "error"
+          ? "bg-red-50 border-red-200 text-red-800"
+          : "bg-green-50 border-green-200 text-green-800"
+        } ${className}`}
       {...otherProps}
     >
-      <div className="plc-inline-flex plc-items-center">
+      <div className="flex items-center gap-3">
         {type === "error" && (
-          <ErrorIcon className="pelcro-alert-icon" />
+          <ErrorIcon className="w-5 h-5 text-red-600" />
         )}
         {type === "success" && (
-          <SuccessIcon className="pelcro-alert-icon" />
+          <SuccessIcon className="w-5 h-5 text-green-600" />
         )}
-        <div className="pelcro-alert-content">{children}</div>
+        <div className="text-sm font-medium">{children}</div>
       </div>
       {onClose && (
         <button
           type="button"
-          className="pelcro-alert-close"
+          className="p-1.5 rounded-lg hover:bg-opacity-20 hover:bg-gray-600 transition-colors"
           aria-label="close alert"
           onClick={onClose}
         >
-          <CloseIcon />
+          <CloseIcon className="w-4 h-4" />
         </button>
       )}
     </div>

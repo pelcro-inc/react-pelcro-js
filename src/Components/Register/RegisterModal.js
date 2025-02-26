@@ -2,21 +2,22 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { usePelcro } from "../../hooks/usePelcro";
 import { Link } from "../../SubComponents/Link";
+import { RegisterView } from "./RegisterView";
+import ReactGA from "react-ga";
+import ReactGA4 from "react-ga4";
+import Authorship from "../common/Authorship";
 import {
   Modal,
   ModalHeader,
   ModalBody,
   ModalFooter
-} from "../../SubComponents/Modal";
-import { RegisterView } from "./RegisterView";
-import ReactGA from "react-ga";
-import ReactGA4 from "react-ga4";
-
+} from "../ui/Modal"
 /**
  *
  */
 export function RegisterModal(props) {
   const { t } = useTranslation("register");
+  const [open, setOpen] = React.useState(true);
 
   const {
     switchView,
@@ -97,26 +98,23 @@ export function RegisterModal(props) {
     product?.paywall?.register_subtitle ?? t("subtitle");
 
   return (
-    <Modal
-      id="pelcro-register-modal"
-      onDisplay={props?.onDisplay}
-      onClose={props?.onClose}
-    >
+    <Modal isOpen={open} onClose={() => setOpen(false)}>
       <ModalHeader>
-        <div className="plc-text-left plc-text-gray-900 pelcro-title-wrapper plc-flex-1 plc-flex plc-flex-col plc-justify-center">
-          <h4 className="plc-text-xl plc-font-bold">{title}</h4>
-          <p className="plc-text-sm">{subtitle}</p>
-        </div>
+        <h2 className="text-2xl font-bold text-gray-900">{title}</h2>
+        <p className="mt-2 text-gray-500">{subtitle}</p>
       </ModalHeader>
+
       <ModalBody>
         <RegisterView {...props} onSuccess={onSuccess} />
       </ModalBody>
+
       <ModalFooter>
-        <p className="plc-mb-4">
-          <span className="plc-font-medium">
-            {t("messages.alreadyHaveAccount") + " "}
-          </span>
-          <Link onClick={() => switchView("login")}>
+        <p className="text-center text-sm text-gray-500  mt-8">
+          {t("messages.alreadyHaveAccount") + " "}
+          <Link
+            onClick={() => switchView("login")}
+            className="font-medium text-gray-900 transition-colors hover:underline"
+          >
             {t("messages.loginHere")}
           </Link>
         </p>

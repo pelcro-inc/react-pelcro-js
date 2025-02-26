@@ -31,99 +31,105 @@ export function RegisterView(props) {
   const showNameFields =
     window.Pelcro?.uiSettings?.enableNameFieldsInRegister;
 
-  const nameFieldsRequired = 
+  const nameFieldsRequired =
     window.Pelcro?.uiSettings?.requireNameFieldsInRegister;
 
   return (
     <div id="pelcro-register-view">
       <form
         action="javascript:void(0);"
-        className="plc-mt-2 pelcro-form"
+        className="space-y-4"
       >
         <RegisterContainer {...props}>
           <AlertWithContext />
           {socialLoginEnabled && (
-            <div className="plc-my-5">
-              <div>
-                <ul
-                  className={`${
-                    auth0LoginEnabled ? "threeColumns" : "twoColumns"
-                  } loginOptions plc-block sm:plc-flex plc-flex-col sm:plc-flex-row plc-justify-center plc-flex-wrap plc-items-center`}
-                >
-                  <li>
-                    <GoogleLoginButton className="plc-flex plc-w-full" />
-                  </li>
-                  <li>
-                    <FacebookLoginButton className="plc-flex plc-w-full" />
-                  </li>
-                  {auth0LoginEnabled && (
-                    <li>
-                      <Auth0LoginButton className="plc-flex plc-w-full" />
-                    </li>
-                  )}
-                </ul>
-              </div>
-
-              <div className="plc-flex plc-items-center plc-justify-between plc-mt-5">
-                <hr className="plc-w-full plc-border-gray-300" />
-                <span className="plc-flex-shrink-0 plc-px-2 plc-text-sm plc-text-gray-700 plc-uppercase">
-                  {t("messages.socialLogin.label")}
-                </span>
-                <hr className="plc-w-full plc-border-gray-300" />
-              </div>
+            <div className="mt-6 grid gap-4" style={{gridTemplateColumns: auth0LoginEnabled ? 'repeat(3, 1fr)' : 'repeat(2, 1fr)'}}>
+              <FacebookLoginButton className="" />
+              <GoogleLoginButton className="" />
+              {auth0LoginEnabled && (
+                <Auth0LoginButton className="" />
+              )}
             </div>
           )}
 
-          {showNameFields && (
-            <div className="plc-flex plc-items-start">
-              <RegisterFirstName
-                id="pelcro-input-first-name"
-                label={`${t("labels.firstName")}${nameFieldsRequired ? " *" : ""}`}
-                errorId="pelcro-input-firstName-error"
-                required={nameFieldsRequired}
-              />
-              <RegisterLastName
-                wrapperClassName="plc-ml-3"
-                id="pelcro-input-last-name"
-                label={`${t("labels.lastName")}${nameFieldsRequired ? " *" : ""}`}
-                errorId="pelcro-input-lastName-error"
-                required={nameFieldsRequired}
+          <div className="relative my-6">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t border-gray-200" />
+            </div>
+            <div className="relative flex justify-center text-sm uppercase">
+              <span className="bg-white px-2 text-gray-500">
+                {t("messages.socialLogin.label")}
+              </span>
+            </div>
+          </div>
+
+          <div className="space-y-4">
+            {showNameFields && (
+              <div className="grid grid-cols-2 gap-4">
+                <RegisterFirstName
+                  id="pelcro-input-first-name"
+                  placeholder={t("labels.firstName")}
+                  label={`${t("labels.firstName")}${nameFieldsRequired ? " *" : ""}`}
+                  errorId="pelcro-input-firstName-error"
+                  required={nameFieldsRequired}
+                  className="w-full rounded-lg  border border-gray-200 bg-gray-50/30 px-4 py-3 text-sm text-gray-800 outline-none transition-all placeholder:text-gray-400 focus:border-gray-800 focus:border-2 focus:bg-white focus:shadow-sm"
+                />
+                <RegisterLastName
+                  id="pelcro-input-last-name"
+                  placeholder={t("labels.lastName")}
+                  label={`${t("labels.lastName")}${nameFieldsRequired ? " *" : ""}`}
+                  errorId="pelcro-input-lastName-error"
+                  required={nameFieldsRequired}
+                  className="w-full rounded-lg border border-gray-200 bg-gray-50/30 px-4 py-3 text-sm text-gray-800 outline-none transition-all placeholder:text-gray-400 focus:border-gray-800 focus:border-2 focus:bg-white focus:shadow-sm"
+                />
+              </div>
+            )}
+
+            <div className="relative">
+              <RegisterEmail
+                id="pelcro-input-email"
+                placeholder={t("labels.email")}
+                errorId="pelcro-input-email-error"
+                label={t("labels.email")}
+                required
+                autoFocus={true}
+                className="w-full rounded-lg border-2 border-gray-200 bg-gray-50/30 px-4 py-3 text-sm text-gray-800 outline-none transition-all placeholder:text-gray-400 focus:border-gray-800 focus:border-2 focus:bg-white focus:shadow-sm"
               />
             </div>
-          )}
-          <RegisterEmail
-            id="pelcro-input-email"
-            errorId="pelcro-input-email-error"
-            label={t("labels.email")}
-            required
-            autoFocus={true}
-          />
-          <RegisterPassword
-            id="pelcro-input-password"
-            errorId="pelcro-input-password-error"
-            label={t("labels.password")}
-            required
-          />
-          <RegisterButton
-            role="submit"
-            className="plc-w-full plc-mt-2"
-            id="pelcro-submit"
-            name={t("messages.createAccount")}
-          />
+
+            <div className="relative">
+              <RegisterPassword
+                id="pelcro-input-password"
+                placeholder={t("labels.password")}
+                errorId="pelcro-input-password-error"
+                label={t("labels.password")}
+                required
+                className="w-full rounded-lg border-2 border-gray-200 bg-gray-50/30 px-4 py-3 text-sm text-gray-800 outline-none transition-all placeholder:text-gray-400 focus:border-gray-800 focus:border-2 focus:bg-white focus:shadow-sm"
+              />
+            </div>
+
+            <RegisterButton
+              role="submit"
+              className="relative w-full rounded-lg bg-gray-900 px-4 py-3 text-sm font-medium text-white transition-all hover:bg-gray-800 disabled:bg-gray-300 disabled:cursor-not-allowed"
+              id="pelcro-submit"
+              name={t("messages.createAccount")}
+            />
+          </div>
+
           {hasSecurityTokenEnabled() && (
-            <p className="plc-text-sm plc-text-gray-500 plc-mt-1">
+            <p className="text-sm text-gray-500 mt-1">
               <Trans i18nKey="messages:recaptcha">
                 This site is protected by reCAPTCHA and the Google
                 <Link
                   href="https://policies.google.com/privacy"
-                  className="plc-text-sm plc-text-gray-500"
+                  className="text-sm text-gray-600 transition-colors hover:text-gray-900 hover:underline"
                 >
                   Privacy Policy
                 </Link>
                 and
                 <Link
                   href="https://policies.google.com/terms"
-                  className="plc-text-sm plc-text-gray-500"
+                  className="text-sm text-gray-600 transition-colors hover:text-gray-900 hover:underline"
                 >
                   Terms of Service
                 </Link>
