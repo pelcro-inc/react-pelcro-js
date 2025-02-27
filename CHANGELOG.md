@@ -1,3 +1,10 @@
+# [3.47.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.46.0...v3.47.0) (2025-02-27)
+
+
+### Features
+
+* remove-sku-currency-mismatch-validation ([#419](https://github.com/pelcro-inc/react-pelcro-js/issues/419)) ([2dad1af](https://github.com/pelcro-inc/react-pelcro-js/commit/2dad1afa17331f57024699cd0e3c2e1e575e0c1b))
+
 # [3.46.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.45.0...v3.46.0) (2025-02-19)
 
 
