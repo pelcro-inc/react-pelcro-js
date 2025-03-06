@@ -30,7 +30,7 @@
     "sourceUpdated": "Vos informations de paiement ont été mises à jour",
     "cardAuthFailed": "Nous ne parvenons pas à authentifier votre mode de paiement. Veuillez choisir un autre mode de paiement et essayer à nouveau.",
     "cardAuthNotSupported": "Votre carte ne peut être mise à jour puisqu'elle nécessite une authentification. Veuillez utiliser un autre mode de paiement ou contacter le service client.",
-    "tryAgainFromInvoice": "Nous n'avons pas pu authentifier votre paiement, mais votre abonnement a été créé. Veuillez essayer de payer la facture en utilisant un autre mode de paiement depuis le tableau de bord."
+    "tryAgainFromInvoice": "Votre abonnement a été créé avec succès. Votre paiement est en attente de vérification. Cette procédure peut prendre jusqu'à 4 jours. Vous recevrez une confirmation une fois votre paiement vérifié."
   },
   "errors": {
     "": ""

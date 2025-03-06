@@ -1449,7 +1449,7 @@ const PaymentMethodContainerWithoutStripe = ({
             return dispatch({
               type: SHOW_ALERT,
               payload: {
-                type: "error",
+                type: "success",
                 content: isSubCreate
                   ? t("messages.tryAgainFromInvoice")
                   : getErrorMessages(res.error)
@@ -1471,7 +1471,7 @@ const PaymentMethodContainerWithoutStripe = ({
           return dispatch({
             type: SHOW_ALERT,
             payload: {
-              type: "error",
+              type: "success",
               content: isSubCreate
                 ? t("messages.tryAgainFromInvoice")
                 : t("messages.cardAuthFailed")
