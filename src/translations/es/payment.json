@@ -30,7 +30,7 @@
     "sourceUpdated": "Tu información de pago se ha actualizado",
     "cardAuthFailed": "No pudimos autenticar tu método de pago. Por favor, elige un método de pago diferente e intenta de nuevo.",
     "cardAuthNotSupported": "Actualmente no es posible actualizar tu método de pago a uno que requiere autenticación. Por favor, utiliza un método de pago diferente o contacta a atención al cliente.",
-    "tryAgainFromInvoice": "No nos fue posible autenticar tu pago, sin embargo, tu suscripción fue creada. Por favor, intenta pagar la factura utilizando otro método de pago desde el panel."
+    "tryAgainFromInvoice": "Tu suscripción ha sido creada con éxito. Tu pago está pendiente de verificación. Este proceso puede tomar hasta 4 días. Recibirás una confirmación una vez que tu pago haya sido verificado."
   },
   "errors": {
     "": ""
