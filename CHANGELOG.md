@@ -1,3 +1,10 @@
+# [4.0.0-alpha.121](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.120...v4.0.0-alpha.121) (2025-03-06)
+
+
+### Features
+
+* add payment processing message and update translations for ACH ([#420](https://github.com/pelcro-inc/react-pelcro-js/issues/420)) ([e70640c](https://github.com/pelcro-inc/react-pelcro-js/commit/e70640c8270074a83a04084854b84897ffe94fef))
+
 # [4.0.0-alpha.120](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.119...v4.0.0-alpha.120) (2025-02-19)
 
 
