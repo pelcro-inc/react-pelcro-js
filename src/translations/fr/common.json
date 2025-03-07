@@ -8,7 +8,8 @@
     "enterPassword": "Mot de passe requis.",
     "confirmPassword": "Confirmer le mot de passe requis.",
     "enterFirstName": "Le prénom est requis.",
-    "enterLastName": "Le nom de famille est requis."
+    "enterLastName": "Le nom de famille est requis.",
+    "passwordRequirements": "Le mot de passe doit être fort."
   },
   "buttons": {
     "account": "Accès abonné(e)s",

@@ -35,6 +35,7 @@ export function RegisterModal(props) {
 
   const onSuccess = (res) => {
     props.onSuccess?.(res);
+
     handleAfterRegistrationLogic();
   };
 
@@ -99,21 +100,21 @@ export function RegisterModal(props) {
 
   return (
     <Modal isOpen={open} onClose={() => setOpen(false)}>
-      <ModalHeader>
-        <h2 className="text-2xl font-bold text-gray-900">{title}</h2>
-        <p className="mt-2 text-gray-500">{subtitle}</p>
-      </ModalHeader>
+      <ModalHeader
+        title={title}
+        description={subtitle}
+      />
 
       <ModalBody>
         <RegisterView {...props} onSuccess={onSuccess} />
       </ModalBody>
 
       <ModalFooter>
-        <p className="text-center text-sm text-gray-500  mt-8">
+        <p className="plc-text-center plc-text-sm plc-text-gray-500 plc-mt-8">
           {t("messages.alreadyHaveAccount") + " "}
           <Link
             onClick={() => switchView("login")}
-            className="font-medium text-gray-900 transition-colors hover:underline"
+            className="plc-font-medium plc-text-gray-900 plc-transition-colors plc-hover:underline"
           >
             {t("messages.loginHere")}
           </Link>

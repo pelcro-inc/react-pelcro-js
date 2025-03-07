@@ -9,6 +9,7 @@
     "login": "Connexion"
   },
   "messages": {
+    "loginSuccess": "Connexion réussie",
     "loginTo": "Bienvenue à nouveau",
     "loginToDescription": "Connectez-vous à votre compte",
     "welcome": "Bienvenue, connectez-vous avec votre compte existant.",

@@ -12,7 +12,7 @@ export const Auth0LoginButton = ({
 }) => {
   const auth0Enabled = Boolean(
     window.Pelcro.site.read().auth0_client_id &&
-      window.Pelcro.site.read().auth0_base_url
+    window.Pelcro.site.read().auth0_base_url
   );
 
   const auth0Script = document.querySelector("#auth0-sdk");
@@ -130,15 +130,13 @@ export const Auth0LoginButton = ({
   if (auth0Enabled) {
     return (
       <button
-        type="button"
         onClick={handleClick}
-        className="group  flex items-center justify-center gap-2 rounded-lg border border-gray-200 bg-white px-4 py-3 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50 active:bg-gray-100"
-        >
+        className={`plc-group plc-flex plc-items-center plc-justify-center plc-gap-2 plc-rounded-lg plc-border plc-border-gray-200 plc-bg-white plc-px-4 plc-py-3 plc-text-sm plc-font-medium plc-text-gray-700 plc-transition-colors hover:plc-bg-gray-50 active:plc-bg-gray-100 ${className}`}>
         <Auth0LogoIcon
-          className={`h-5 w-5" ${iconClassName}`}
+          className={`plc-h-5 plc-w-5" ${iconClassName}`}
         />
         <p
-          className={`h-5 w-5" ${labelClassName}`}
+          className={`plc-h-5 plc-w-5" ${labelClassName}`}
         >
           {label}
         </p>

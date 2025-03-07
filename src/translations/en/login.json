@@ -9,6 +9,7 @@
     "login": "Login"
   },
   "messages": {
+    "loginSuccess": "Login successful",
     "loginTo": "Welcome back",
     "loginToDescription": "Sign in to your account",
     "welcome": "Welcome back, sign in with your existing account.",

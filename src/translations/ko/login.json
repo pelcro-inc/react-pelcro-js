@@ -9,6 +9,7 @@
     "login": "로그인"
   },
   "messages": {
+    "loginSuccess": "로그인 성공",
     "loginTo": "다시 환영합니다",
     "loginToDescription": "귀하의 계정에 로그인",
     "welcome": "반갑습니다. 귀하의 기존 계정으로 로그인하세요.",

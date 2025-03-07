@@ -8,7 +8,8 @@
     "enterPassword": "Password is required.",
     "confirmPassword": "Confirm password is required.",
     "enterFirstName": "First name is required.",
-    "enterLastName": "Last name is required."
+    "enterLastName": "Last name is required.",
+    "passwordRequirements": "Password must be strong."
   },
   "buttons": {
     "account": "My account",

@@ -8,6 +8,7 @@
     "login": "Iniciar Sesión"
   },
   "messages": {
+    "loginSuccess": "Inicio de sesión exitoso",
     "loginTo": "Bienvenido de nuevo",
     "loginToDescription": "Inicia sesión en tu cuenta",
     "welcome": "Bienvenido de vuelta, inicia sesión con tu cuenta existente.",

@@ -10,15 +10,15 @@ const VARIANTS = {
 const getClassName = (variant) => {
   switch (variant) {
     case VARIANTS.SOLID:
-      return "w-full px-4 py-2 text-sm font-medium text-white bg-primary-600 rounded-lg hover:bg-primary-700 disabled:bg-primary-300";
+      return "plc-w-full plc-px-4 plc-py-2 plc-text-sm plc-font-medium plc-text-white plc-bg-primary-600 plc-rounded-lg hover:plc-bg-primary-700 disabled:plc-bg-primary-300";
     case VARIANTS.OUTLINE:
-      return "w-full px-4 py-2 text-sm font-medium text-primary-600 border border-primary-600 rounded-lg hover:bg-primary-50 disabled:border-primary-300 disabled:text-primary-300";
+      return "plc-w-full plc-px-4 plc-py-2 plc-text-sm plc-font-medium plc-text-primary-600 plc-border plc-border-primary-600 plc-rounded-lg hover:plc-bg-primary-50 disabled:plc-border-primary-300 disabled:plc-text-primary-200";
     case VARIANTS.ICON:
-        return "p-2 text-primary-600 rounded-full hover:bg-primary-100";
+      return "plc-p-2 plc-text-primary-600 plc-rounded-full hover:plc-bg-primary-100";
     case VARIANTS.GHOST:
-      return "w-full px-4 py-2 text-sm font-medium text-primary-700 rounded-lg hover:bg-primary-50 disabled:text-primary-400";
+      return "plc-w-full plc-px-4 plc-py-2 plc-text-sm plc-font-medium plc-text-primary-700 plc-rounded-lg hover:plc-bg-primary-50 disabled:plc-text-primary-400";
     default:
-      return "w-full px-4 py-2 text-sm font-medium text-white bg-primary-600 rounded-lg hover:bg-primary-700 disabled:bg-primary-300";
+      return "plc-w-full plc-px-4 plc-py-2 plc-text-sm plc-font-medium plc-text-white plc-bg-primary-600 plc-rounded-lg hover:plc-bg-primary-700 disabled:plc-bg-primary-300";
   }
 };
 
@@ -33,17 +33,17 @@ export function Button({
 }) {
   return (
     <button
-      className={`inline-flex items-center justify-center transition-all duration-200 disabled:cursor-not-allowed ${getClassName(
+      className={`plc-inline-flex plc-items-center plc-justify-center plc-transition-all plc-duration-200 disabled:plc-cursor-not-allowed ${getClassName(
         variant
-      )} ${className}`}
+      )} ${className}`} 
       disabled={disabled || isLoading}
       {...otherProps}
     >
       {isLoading ? (
-        <div className="flex items-center justify-center gap-2">
-          <svg className="w-4 h-4 animate-spin" viewBox="0 0 24 24">
+        <div className="plc-flex plc-items-center plc-justify-center plc-gap-2">
+          <svg className="plc-w-4 plc-h-4 plc-animate-spin" viewBox="0 0 24 24">
             <circle
-              className="opacity-25"
+              className="plc-opacity-25"
               cx="12"
               cy="12"
               r="10"
@@ -51,7 +51,7 @@ export function Button({
               strokeWidth="4"
             />
             <path
-              className="opacity-75"
+              className="plc-opacity-75"
               fill="currentColor"
               d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
             />
@@ -63,9 +63,9 @@ export function Button({
           {icon && (
             <div
               className={`${variant === "icon"
-                  ? "flex items-center justify-center w-full"
-                  : "mr-2"
-                } pointer-events-none`}
+                  ? "plc-flex plc-items-center plc-justify-center plc-w-full"
+                  : "plc-mr-2"
+                } plc-pointer-events-none`}
             >
               {icon}
             </div>

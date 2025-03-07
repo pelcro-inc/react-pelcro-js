@@ -1,47 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0"
-    />
-    <title>Pelcro Examples</title>
-  </head>
-  <body>
-    <noscript>
-      You need to enable JavaScript to run this app.
-    </noscript>
-    <script>
-      var Pelcro = window.Pelcro || (window.Pelcro = {});
-      Pelcro.siteid = "85";
-      // Pelcro.siteid = "165";
-      // Pelcro.siteid = "813";
-      Pelcro.environment = {};
-      Pelcro.environment.stripe = "pk_test_aThAAdvPHgIdAziZweywBWNk";
-      Pelcro.environment.domain = "https://staging.pelcro.com";
-      Pelcro.environment.ui = "-";
-      window.Pelcro.ENABLE_ECOMMERCE = true;
-      window.Pelcro.uiSettings = {
-        enableNameFieldsInRegister: true,
-        newsletters: [
-          { label: "news 1", id: 12 },
-          { label: "default", id: "default" }
-        ],
-        skipPaymentForFreePlans: true,
-        enableReactGA4: true,
-        enableLoginWithUsername: false
-      };
-    </script>
-    <script src="https://js.pelcro.com/sdk/staging/main.min.js"></script>
 
-    <div>
-      <h2>Class Buttons</h2>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pelcro Examples</title>
+</head>
 
-      <select
-        id="language-picker"
-        onchange="document.documentElement.lang = this.value"
-      >
+<body>
+  <noscript>
+    You need to enable JavaScript to run this app.
+  </noscript>
+  <script>
+    var Pelcro = window.Pelcro || (window.Pelcro = {});
+    Pelcro.siteid = "85";
+    // Pelcro.siteid = "165";
+    // Pelcro.siteid = "813";
+    Pelcro.environment = {};
+    Pelcro.environment.stripe = "pk_test_aThAAdvPHgIdAziZweywBWNk";
+    Pelcro.environment.domain = "https://staging.pelcro.com";
+    Pelcro.environment.ui = "-";
+    window.Pelcro.ENABLE_ECOMMERCE = true;
+    window.Pelcro.uiSettings = {
+      enableNameFieldsInRegister: true,
+      newsletters: [
+        { label: "news 1", id: 12 },
+        { label: "default", id: "default" }
+      ],
+      skipPaymentForFreePlans: true,
+      enableReactGA4: true,
+      enableLoginWithUsername: false
+    };
+  </script>
+  <script src="https://js.pelcro.com/sdk/staging/main.min.js"></script>
+  <div
+    style="font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; max-width: 1200px; margin: 0 auto; padding: 20px; background-color: #f5f5f5;">
+    <div style="background-color: white; padding: 15px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+      <h2 style="color: #2d3748; margin-bottom: 24px; font-weight: 600;">Actiions Buttons</h2>
+
+      <select id="language-picker" onchange="document.documentElement.lang = this.value"
+        style="padding: 8px 12px; border-radius: 6px; border: 1px solid #e2e8f0; margin-bottom: 20px; font-size: 14px;">
         <option value="en" selected>English</option>
         <option value="fr">French</option>
         <option value="it">Italian</option>
@@ -51,166 +49,166 @@
       <br />
       <br />
 
-      <button
-        class="pelcro-login-button"
-        data-login-text="Sign in"
-        data-dashboard-text="My Dashboard"
-      >
-        Sherif
-      </button>
-      <button class="pelcro-subscribe-button">Subscribe</button>
-      <button class="pelcro-register-button">Register</button>
-      <button
-        class="pelcro-subscribe-button"
-        data-product-id="834"
-        class="btn"
-      >
+      <div
+        style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; padding: 20px; background-color: #f7f7f7; border-radius: 12px;">
+        <!-- Button 1 -->
+        <button class="pelcro-login-button"
+          style="background-color: #3B82F6; color: white; padding: 14px 24px; border: none; border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 8px rgba(59, 130, 246, 0.2);"
+          onmouseover="this.style.backgroundColor='#2563EB'; this.style.transform='translateY(-2px)'"
+          onmouseout="this.style.backgroundColor='#3B82F6'; this.style.transform='translateY(0)'">
+          Sherif
+        </button>
+
+        <!-- Button 2 -->
+        <button class="pelcro-subscribe-button"
+          style="background-color: #10B981; color: white; padding: 14px 24px; border: none; border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 8px rgba(16, 185, 129, 0.2);"
+          onmouseover="this.style.backgroundColor='#059669'; this.style.transform='translateY(-2px)'"
+          onmouseout="this.style.backgroundColor='#10B981'; this.style.transform='translateY(0)'">
+          Subscribe
+        </button>
+
+        <!-- Button 3 -->
+        <button class="pelcro-register-button"
+          style="background-color: #8B5CF6; color: white; padding: 14px 24px; border: none; border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 8px rgba(139, 92, 246, 0.2);"
+          onmouseover="this.style.backgroundColor='#7C3AED'; this.style.transform='translateY(-2px)'"
+          onmouseout="this.style.backgroundColor='#8B5CF6'; this.style.transform='translateY(0)'">
+          Register
+        </button>
+
+        <!-- Button 4 -->
+        <!-- <button class="pelcro-subscribe-button" data-product-id="834"
+        style="background-color: #F59E0B; color: white; padding: 14px 24px; border: none; border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 8px rgba(245, 158, 11, 0.2);"
+        onmouseover="this.style.backgroundColor='#D97706'; this.style.transform='translateY(-2px)'"
+        onmouseout="this.style.backgroundColor='#F59E0B'; this.style.transform='translateY(0)'">
         Product ID = 834
-      </button>
-      <button
-        class="pelcro-subscribe-button"
-        data-product-id="83"
-        class="btn"
-      >
-        Product ID = 83
-      </button>
-      <button
-        class="pelcro-subscribe-button"
-        data-is-gift="true"
-        data-product-id="834"
-        data-plan-id="22033"
-      >
+      </button> -->
+
+        <!-- Button 5 -->
+        <!-- <button class="pelcro-subscribe-button" data-is-gift="true" data-product-id="834" data-plan-id="22033"
+        style="background-color: #9333EA; color: white; padding: 14px 24px; border: none; border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"
+        onmouseover="this.style.backgroundColor='#7E22CE'; this.style.transform='translateY(-2px)'"
+        onmouseout="this.style.backgroundColor='#9333EA'; this.style.transform='translateY(0)'">
         Product ID = 47, Plan ID = 22033, GIFT = TRUE
-      </button>
-      <button class="pelcro-subscribe-button" data-product-id="83">
+      </button> -->
+
+        <!-- Button 6 -->
+        <!-- <button class="pelcro-subscribe-button" data-product-id="83"
+        style="background-color: #0EA5E9; color: white; padding: 14px 24px; border: none; border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"
+        onmouseover="this.style.backgroundColor='#0284C7'; this.style.transform='translateY(-2px)'"
+        onmouseout="this.style.backgroundColor='#0EA5E9'; this.style.transform='translateY(0)'">
         Product ID = 83
-      </button>
-      <button class="pelcro-gift-button" data-is-gift="true">
+      </button> -->
+
+        <!-- Button 7 -->
+        <!-- <button class="pelcro-gift-button" data-is-gift="true"
+        style="background-color: #EC4899; color: white; padding: 14px 24px; border: none; border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 8px rgba(236, 72, 153, 0.2);"
+        onmouseover="this.style.backgroundColor='#DB2777'; this.style.transform='translateY(-2px)'"
+        onmouseout="this.style.backgroundColor='#EC4899'; this.style.transform='translateY(0)'">
         GIFT
-      </button>
-      <br />
-      <br />
-      <button
-        class="pelcro-manage-members-button"
-        data-subscription-id="2556180"
-      >
+      </button> -->
+
+        <!-- Button 8 -->
+        <!-- <button class="pelcro-manage-members-button" data-subscription-id="2556180"
+        style="background-color: #4299e1; color: white; padding: 14px 24px; border: none; border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer; transition: background-color 0.3s ease; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"
+        onmouseover="this.style.backgroundColor='#3182ce'; this.style.transform='translateY(-2px)'"
+        onmouseout="this.style.backgroundColor='#4299e1'; this.style.transform='translateY(0)'">
         Manage Members
-      </button>
-      <button
-        class="pelcro-manage-members-button"
-        data-subscription-id="2556180"
-      >
-        Manage Members
-      </button>
-      <button
-        class="pelcro-subscribe-button"
-        data-product-id="834"
-        data-plan-id="45184"
-      >
-        PLAN ID = 45184
-      </button>
-      <button
-        class="pelcro-subscribe-button"
-        data-product-id="84"
-        data-plan-id="2102"
-      >
-        PLAN ID = 2102
-      </button>
-      <button
-        class="pelcro-subscribe-button"
-        data-product-id="83"
-        data-plan-id="1200"
-      >
-        PLAN ID = 1200
-      </button>
-      <button
-        class="pelcro-subscribe-button"
-        data-product-id="83"
-        data-plan-id="1199"
-      >
-        PLAN ID = 1199
-      </button>
-      <button
-        class="pelcro-subscribe-button"
-        data-product-id="83"
-        data-plan-id="1199"
-      >
-        PLAN ID = 1199
-      </button>
+      </button> -->
 
-      <button
-        class="pelcro-offline-subscribe-button"
-        data-product-id="834"
-        data-plan-id="22033"
-      >
-        Subscribe to offline plan
-      </button>
+        <!-- Button 9 -->
+        <!-- <button class="pelcro-save-button"
+        style="background-color: #6366F1; color: white; padding: 14px 24px; border: none; border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 8px rgba(99, 102, 241, 0.2);"
+        onmouseover="this.style.backgroundColor='#4F46E5'; this.style.transform='translateY(-2px)'"
+        onmouseout="this.style.backgroundColor='#6366F1'; this.style.transform='translateY(0)'">
+        Save without key
+      </button> -->
 
-      <button class="pelcro-save-button">Save without key</button>
-      <button class="pelcro-save-button">Save without key</button>
-
-      <button
-        class="pelcro-save-button"
-        data-key="newss"
-        data-title="news title 1"
-        data-link="https://www.example.com"
-        data-title="Test link"
-        data-tag="test tag"
-      >
+        <!-- Button 10 -->
+        <!-- <button class="pelcro-save-button" data-key="newss" data-title="news title 1" data-link="https://www.example.com"
+        style="background-color: #7C3AED; color: white; padding: 14px 24px; border: none; border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"
+        onmouseover="this.style.backgroundColor='#6D28D9'; this.style.transform='translateY(-2px)'"
+        onmouseout="this.style.backgroundColor='#7C3AED'; this.style.transform='translateY(0)'">
         Save news
-      </button>
+      </button> -->
 
-      <button
-        class="pelcro-save-button"
-        data-key="newss"
-        data-title="news title 2"
-        data-link="https://www.example.com"
-        data-title="Test link"
-        data-tag="test tag 2"
-      >
+        <!-- Button 11 -->
+        <!-- <button class="pelcro-save-button" data-key="newss" data-title="news title 2" data-link="https://www.example.com"
+        style="background-color: #2563EB; color: white; padding: 14px 24px; border: none; border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"
+        onmouseover="this.style.backgroundColor='#1D4ED8'; this.style.transform='translateY(-2px)'"
+        onmouseout="this.style.backgroundColor='#2563EB'; this.style.transform='translateY(0)'">
         Save news 2
-      </button>
+      </button> -->
 
-      <button
-        class="pelcro-save-button"
-        data-key="article"
-        data-title="article title 1"
+        <!-- Button 12 -->
+        <!-- <button class="pelcro-save-button" data-key="article" data-title="article title 1"
         data-link="https://www.example.com"
-      >
+        style="background-color: #EA580C; color: white; padding: 14px 24px; border: none; border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"
+        onmouseover="this.style.backgroundColor='#C2410C'; this.style.transform='translateY(-2px)'"
+        onmouseout="this.style.backgroundColor='#EA580C'; this.style.transform='translateY(0)'">
         Save article 1
-      </button>
+      </button> -->
 
-      <button class="pelcro-cart-button" class="btn">
+        <!-- Button 13 -->
+        <!-- <button class="pelcro-cart-button"
+        style="background-color: #14B8A6; color: white; padding: 14px 24px; border: none; border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 8px rgba(20, 184, 166, 0.2);"
+        onmouseover="this.style.backgroundColor='#0D9488'; this.style.transform='translateY(-2px)'"
+        onmouseout="this.style.backgroundColor='#14B8A6'; this.style.transform='translateY(0)'">
         View Cart
-      </button>
+      </button> -->
 
-      <button class="pelcro-add-to-cart-button" data-sku-id="4">
+        <!-- Button 14 -->
+        <!-- <button class="pelcro-add-to-cart-button" data-sku-id="4"
+        style="background-color: #4299e1; color: white; padding: 14px 24px; border: none; border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"
+        onmouseover="this.style.backgroundColor='#3182ce'; this.style.transform='translateY(-2px)'"
+        onmouseout="this.style.backgroundColor='#4299e1'; this.style.transform='translateY(0)'">
         Add to cart
       </button>
-      <button class="pelcro-add-to-cart-button" data-sku-id="3">
+     -->
+        <!-- Button 15 -->
+        <!-- <button class="pelcro-add-to-cart-button" data-sku-id="3"
+        style="background-color: #4299e1; color: white; padding: 14px 24px; border: none; border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"
+        onmouseover="this.style.backgroundColor='#3182ce'; this.style.transform='translateY(-2px)'"
+        onmouseout="this.style.backgroundColor='#4299e1'; this.style.transform='translateY(0)'">
         Add to cart
-      </button>
-      <button class="pelcro-add-to-cart-button" data-sku-id="2">
-        Add to cart
-      </button>
+      </button> -->
 
-      <button class="pelcro-purchase-button" data-sku-id="4">
+        <!-- Button 16 -->
+        <!-- <button class="pelcro-add-to-cart-button" data-sku-id="2"
+        style="background-color: #4299e1; color: white; padding: 14px 24px; border: none; border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"
+        onmouseover="this.style.backgroundColor='#3182ce'; this.style.transform='translateY(-2px)'"
+        onmouseout="this.style.backgroundColor='#4299e1'; this.style.transform='translateY(0)'">
+        Add to cart
+      </button> -->
+
+        <!-- Button 17 -->
+        <!-- <button class="pelcro-purchase-button" data-sku-id="4"
+        style="background-color: #4299e1; color: white; padding: 14px 24px; border: none; border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"
+        onmouseover="this.style.backgroundColor='#3182ce'; this.style.transform='translateY(-2px)'"
+        onmouseout="this.style.backgroundColor='#4299e1'; this.style.transform='translateY(0)'">
         Purchase Product with ID 4
-      </button>
-      <button class="pelcro-update-newsletters-button">
-        update newsletters
-      </button>
-      <button onclick="window.Pelcro.user.logout()">Logout</button>
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-    </div>
+      </button> -->
 
-    <div id="pelcro-shop"></div>
-  </body>
+        <!-- Button 18 -->
+        <!-- <button class="pelcro-update-newsletters-button"
+        style="background-color: #4299e1; color: white; padding: 14px 24px; border: none; border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"
+        onmouseover="this.style.backgroundColor='#3182ce'; this.style.transform='translateY(-2px)'"
+        onmouseout="this.style.backgroundColor='#4299e1'; this.style.transform='translateY(0)'">
+        update newsletters
+      </button> -->
+
+        <!-- Button 19 (Logout) -->
+        <button onclick="window.Pelcro.user.logout()"
+          style="background-color: #EF4444; color: white; padding: 14px 24px; border: none; border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 8px rgba(239, 68, 68, 0.2);"
+          onmouseover="this.style.backgroundColor='#DC2626'; this.style.transform='translateY(-2px)'"
+          onmouseout="this.style.backgroundColor='#EF4444'; this.style.transform='translateY(0)'">
+          Logout
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- <div id="pelcro-shop"></div> -->
+</body>
+
 </html>

@@ -28,10 +28,10 @@ export const RegisterButton = ({
   useEffect(() => {
     setDisabled(
       buttonDisabled ||
-        emailError ||
-        passwordError ||
-        !email.length ||
-        !password.length
+      emailError ||
+      passwordError ||
+      !email.length ||
+      !password.length
     );
   }, [buttonDisabled, emailError, passwordError, email, password]);
 

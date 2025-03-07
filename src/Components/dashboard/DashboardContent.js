@@ -84,26 +84,27 @@ export const DashboardContent = ({ children, subView, ...props }) => {
 
   return (
     <div className="pelcro-modal-overlay">
+      <div
+        className="plc-fixed plc-inset-0 plc-bg-black plc-bg-opacity-60"
+        onClick={closeDashboard}
+      />
       <Transition
-        className={`plc-fixed plc-inset-y-0 plc-h-full lg:plc-w-3/12 plc-w-full plc-overflow-y-auto plc-text-left plc-bg-white plc-shadow-xl plc-z-max ${
-          dashboardLayout == "left" ? "plc-left-0" : "plc-right-0"
-        }`}
+        className={`plc-fixed plc-inset-y-0 plc-h-full lg:plc-w-3/12 plc-w-full plc-overflow-y-auto plc-text-left plc-bg-white plc-shadow-xl plc-z-max ${dashboardLayout == "left" ? "plc-left-0" : "plc-right-0"
+          }`}
         show={isOpen}
         enter="plc-transform plc-transition plc-duration-500"
-        enterFrom={`${
-          dashboardLayout == "left"
+        enterFrom={`${dashboardLayout == "left"
             ? "plc--translate-x-full"
             : "plc-translate-x-full"
-        }`}
+          }`}
         enterTo="plc-translate-x-0"
         // afterEnter={initializeHideMenuHandler}
         leave="plc-transform plc-transition plc-duration-500"
         leaveFrom="plc-translate-x-0"
-        leaveTo={`${
-          dashboardLayout == "left"
+        leaveTo={`${dashboardLayout == "left"
             ? "plc--translate-x-full"
             : "plc-translate-x-full"
-        }`}
+          }`}
         afterLeave={props?.onClose}
       >
         <div id="pelcro-view-dashboard" ref={menuRef}>
@@ -128,32 +129,31 @@ export const DashboardContent = ({ children, subView, ...props }) => {
                 )}
 
                 <p
-                  className={`plc-m-0 plc-break-all ${
-                    userHasName
+                  className={`plc-m-0 plc-break-all ${userHasName
                       ? "plc-text-sm"
                       : "plc-text-sm plc-font-bold plc-mt-auto"
-                  }`}
+                    }`}
                 >
                   {user.email}
                 </p>
               </div>
               <div>
-                <Button
-                  variant="ghost"
+                <button
                   type="button"
-                  className="plc-text-gray-500 plc-rounded-2xl plc-absolute plc-z-max plc-top-5 plc-right-5"
+                  className="plc-absolute plc-right-5 plc-top-5 plc-rounded-full plc-bg-gray-200 plc-p-2 plc-cursor-pointer plc-transition-colors plc-duration-200 hover:plc-bg-gray-300"
+                  aria-label="close modal"
                   onClick={closeDashboard}
                 >
-                  <XIcon className="plc-fill-current" />
-                </Button>
+                  <XIcon className="plc-h-5 plc-w-5 plc-fill-current plc-text-gray-500 hover:plc-text-gray-700" />
+                </button>
               </div>
             </div>
           </header>
           <section className="plc-mt-6 plc-shadow-sm">
             {children?.length
               ? children.map((child, i) =>
-                  React.cloneElement(child, { store, key: i })
-                )
+                React.cloneElement(child, { store, key: i })
+              )
               : React.cloneElement(children, { store })}
           </section>
           <DashboardLink
@@ -168,15 +168,14 @@ export const DashboardContent = ({ children, subView, ...props }) => {
       {dashboardView && isOpen && (
         <div
           id="pelcro-view-dashboard-submenus"
-          className={`plc-fixed plc-inset-y-0 plc-h-full lg:plc-w-9/12 plc-w-full plc-bg-gray-100 plc-z-max plc-overflow-auto ${
-            dashboardLayout == "left" ? "plc-right-0" : "plc-left-0"
-          }`}
+          className={`plc-fixed plc-inset-y-0 plc-h-full lg:plc-w-9/12 plc-w-full plc-bg-gray-100 plc-z-max plc-overflow-auto ${dashboardLayout == "left" ? "plc-right-0" : "plc-left-0"
+            }`}
         >
           <DashboardViewController>
             {subView?.length
               ? subView.map((child, i) =>
-                  React.cloneElement(child, { store, key: i })
-                )
+                React.cloneElement(child, { store, key: i })
+              )
               : React.cloneElement(subView, { store })}
           </DashboardViewController>
         </div>

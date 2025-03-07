@@ -1,4 +1,5 @@
 module.exports = {
+  prefix: 'plc-',
   content: ["./src/**/*.{html,js,jsx}"],
   theme: {
     extend: {

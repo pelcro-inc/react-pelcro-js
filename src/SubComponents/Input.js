@@ -14,12 +14,12 @@ export function Input({
   ...otherProps
 }) {
   return (
-    <div className={`relative ${wrapperClassName}`}>
+    <div className={`plc-relative ${wrapperClassName}`}>
       <input
         type="text"
         id={id}
         placeholder={placeholder}
-        className={`w-full rounded-lg  border border-gray-200 bg-gray-50/30 px-4 py-3 text-sm text-gray-800 outline-none transition-all placeholder:text-gray-400 focus:border-gray-800 focus:border focus:bg-white focus:shadow-sm focus:placeholder:text-gray-500 ${className} ${error ? "border-red-500" : ""
+        className={`plc-w-full plc-rounded-lg plc-border plc-border-gray-200 plc-bg-gray-50/30 plc-px-4 plc-py-3 plc-text-sm plc-text-gray-800 plc-outline-none plc-transition-all placeholder:plc-text-gray-400 focus:plc-border-gray-800 focus:plc-border focus:plc-bg-white focus:plc-shadow-sm focus:placeholder:plc-text-gray-500 ${className} ${error ? "plc-border-red-500" : ""
           }`}
         aria-describedby={errorId}
         aria-invalid={Boolean(error)}
@@ -38,16 +38,16 @@ export function Input({
           ""
         )}
       </label> */}
-        {error && (
+      {error && (
         <div
           id={errorId}
           aria-live="assertive"
-          className={`text-red-500 text-sm  mt-1 mx-1`}
+          className={`plc-text-red-500 plc-text-xs plc-mt-1 plc-mx-1`}
         >
           {error}
         </div>
       )}
-     
+
     </div>
   );
 }
