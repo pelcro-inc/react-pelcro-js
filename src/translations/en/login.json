@@ -9,11 +9,14 @@
     "login": "Login"
   },
   "messages": {
-    "loginTo": "Login to your account",
+    "loginSuccess": "Login successful",
+    "loginTo": "Welcome back",
+    "loginToDescription": "Sign in to your account",
     "welcome": "Welcome back, sign in with your existing account.",
-    "dontHaveAccount": "Don't have an account yet?",
-    "createAccount": "Create an account.",
+    "dontHaveAccount": "Don't have an account?",
+    "createAccount": "Sign up",
     "forgotPassword": "Forgot your password?",
+    "or": "Or continue with",
     "reset": {
       "click": "Click",
       "here": "here",

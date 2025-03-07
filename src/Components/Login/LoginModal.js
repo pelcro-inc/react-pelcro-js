@@ -5,7 +5,7 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter
-} from "../../SubComponents/Modal";
+} from "../ui/Modal"
 import { Link } from "../../SubComponents/Link";
 import { usePelcro } from "../../hooks/usePelcro";
 import {
@@ -14,6 +14,7 @@ import {
 } from "../PelcroModalController/PelcroModalController.service";
 import { getStableViewID } from "../../utils/utils";
 import { LoginView } from "./LoginView";
+import { notify } from "../../SubComponents/Notification";
 
 /**
  *
@@ -34,6 +35,7 @@ export function LoginModal({ onDisplay, onClose, ...props }) {
 
   const onSuccess = (res) => {
     props.onSuccess?.(res);
+    notify.success(t("messages.loginSuccess"));
     handleAfterLoginLogic();
   };
 
@@ -93,7 +95,7 @@ export function LoginModal({ onDisplay, onClose, ...props }) {
   };
 
   const onCreateAccountClick = () => {
-    switchView("plan-select");
+    switchView("register");
   };
 
   const onForgotPassword = () => {
@@ -109,13 +111,13 @@ export function LoginModal({ onDisplay, onClose, ...props }) {
       id="pelcro-login-modal"
       onDisplay={onDisplay}
       onClose={onClose}
+
     >
-      <ModalHeader>
-        <div className="plc-text-left plc-text-gray-900 pelcro-title-wrapper plc-flex-1 plc-flex plc-flex-col plc-justify-center">
-          <h4 className="plc-text-xl plc-font-bold">
-            {t("messages.loginTo")}
-          </h4>
-        </div>
+      <ModalHeader hideCloseButton={false}
+        title={t("messages.loginTo")}
+        description={t("messages.loginToDescription")}
+      >
+
       </ModalHeader>
       <ModalBody>
         <LoginView
@@ -126,13 +128,12 @@ export function LoginModal({ onDisplay, onClose, ...props }) {
         />
       </ModalBody>
       <ModalFooter>
-        <p className="plc-mb-4">
-          <span className="plc-font-medium">
-            {t("messages.dontHaveAccount") + " "}
-          </span>
+        <p className="plc-text-center plc-text-sm plc-text-gray-500 plc-mt-8">
+          {t("messages.dontHaveAccount") + " "}
           <Link
             id="pelcro-link-create-account"
             onClick={onCreateAccountClick}
+            className="plc-font-medium plc-text-gray-900 plc-transition-colors hover:plc-underline"
           >
             {t("messages.createAccount")}
           </Link>

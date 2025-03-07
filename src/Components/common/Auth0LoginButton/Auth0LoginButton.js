@@ -12,7 +12,7 @@ export const Auth0LoginButton = ({
 }) => {
   const auth0Enabled = Boolean(
     window.Pelcro.site.read().auth0_client_id &&
-      window.Pelcro.site.read().auth0_base_url
+    window.Pelcro.site.read().auth0_base_url
   );
 
   const auth0Script = document.querySelector("#auth0-sdk");
@@ -130,15 +130,13 @@ export const Auth0LoginButton = ({
   if (auth0Enabled) {
     return (
       <button
-        type="button"
         onClick={handleClick}
-        className={`plc-flex plc-items-center plc-justify-center plc-h-12 plc-px-1 plc-text-gray-700 plc-rounded-md pelcro-google-login plc-shadow-md_dark plc-bg-white hover:plc-bg-transparent plc-text-sm ${className}`}
-      >
+        className={`plc-group plc-flex plc-items-center plc-justify-center plc-gap-2 plc-rounded-lg plc-border plc-border-gray-200 plc-bg-white plc-px-4 plc-py-3 plc-text-sm plc-font-medium plc-text-gray-700 plc-transition-colors hover:plc-bg-gray-50 active:plc-bg-gray-100 ${className}`}>
         <Auth0LogoIcon
-          className={`plc-w-5 plc-h-auto pelcro-auth0-login-icon" ${iconClassName}`}
+          className={`plc-h-5 plc-w-5" ${iconClassName}`}
         />
         <p
-          className={`pelcro-auth0-login-label plc-ml-2 ${labelClassName}`}
+          className={`plc-h-5 plc-w-5" ${labelClassName}`}
         >
           {label}
         </p>

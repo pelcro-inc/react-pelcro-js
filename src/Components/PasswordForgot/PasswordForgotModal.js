@@ -7,40 +7,32 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter
-} from "../../SubComponents/Modal";
-import Authorship from "../common/Authorship";
+} from "../ui/Modal";
 import { PasswordForgotView } from "./PasswordForgotView";
 
-export const PasswordForgotModal = ({
-  onDisplay,
-  onClose,
-  ...otherProps
-}) => {
+export function PasswordForgotModal({ onDisplay, onClose, ...props }) {
   const { t } = useTranslation("passwordForgot");
   const { switchView } = usePelcro();
+  const [open, setOpen] = React.useState(true);
 
   return (
-    <Modal
-      id="pelcro-password-forgot-modal"
-      onDisplay={onDisplay}
-      onClose={onClose}
-    >
-      <ModalHeader>
-        <div className="plc-text-left plc-text-gray-900 pelcro-title-wrapper plc-flex-1 plc-flex plc-flex-col plc-justify-center">
-          <h4 className="plc-text-xl plc-font-bold">{t("title")}</h4>
-        </div>
-      </ModalHeader>
+    <Modal isOpen={open} onClose={() => setOpen(false)}>
+      <ModalHeader
+        hideCloseButton={false}
+        title={t("title")}
+        description={t("subtitle")}
+      />
+
       <ModalBody>
-        <PasswordForgotView {...otherProps} />
+        <PasswordForgotView {...props} />
       </ModalBody>
+
       <ModalFooter>
-        <p className="plc-mb-9">
-          <span className="plc-font-medium">
-            {t("messages.alreadyHaveAccount") + " "}
-          </span>
+        <p className="plc-text-center plc-text-sm plc-text-gray-500 plc-mt-8">
+          {t("messages.alreadyHaveAccount") + " "}
           <Link
-            id="pelcro-link-login"
             onClick={() => switchView("login")}
+            className="plc-font-medium plc-text-gray-900 plc-transition-colors hover:plc-underline"
           >
             {t("messages.loginHere")}
           </Link>
@@ -48,6 +40,6 @@ export const PasswordForgotModal = ({
       </ModalFooter>
     </Modal>
   );
-};
+}
 
 PasswordForgotModal.viewId = "password-forgot";

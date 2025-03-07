@@ -13,7 +13,7 @@
     "messages": {
       "alreadyHaveAccount": "이미 계정이 있습니까?",
       "success": "뉴스레터가 성공적으로 업데이트되었습니다.",
-      "loginHere": "여기에서 로그인하세요.",
+      "loginHere": "로그인",
       "createAnAccount": " 계정을 만들려면 여기를 ",
       "here": "클릭하세요."
     }

@@ -7,10 +7,10 @@
 @import "./css/forms.css";
 @import "./css/variables.css";
 @import "./css/recaptcha.css";
-
+/* @import "./SubComponents/Modal.css"; */
 /* sub-components and components */
 /* @import "./SubComponents/Badge.css";
-@import "./SubComponents/Modal.css";
+
 @import "./SubComponents/Input.css";
 @import "./SubComponents/DatePicker.css";
 @import "./SubComponents/Select.css";
