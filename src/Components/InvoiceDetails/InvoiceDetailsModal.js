@@ -6,7 +6,7 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter
-} from "../../SubComponents/Modal";
+} from "../ui/Modal";
 import { usePelcro } from "../../hooks/usePelcro";
 
 export const InvoiceDetailsModal = ({
@@ -24,20 +24,19 @@ export const InvoiceDetailsModal = ({
 
   return (
     <Modal
+      id="pelcro-invoice-details-modal"
       onDisplay={onDisplay}
       onClose={onClose}
-      id="pelcro-invoice-details-modal"
     >
-      <ModalHeader>
-        <div className="plc-text-left plc-text-gray-900 pelcro-title-wrapper plc-flex-1 plc-flex plc-flex-col plc-justify-center">
-          <h4 className="plc-text-xl plc-font-bold">{t("title")}</h4>
-        </div>
-      </ModalHeader>
+      <ModalHeader
+        hideCloseButton={false}
+        title={t("title")}
+      />
 
       <ModalBody>
         <InvoiceDetailsView {...otherProps} onSuccess={onSuccess} />
       </ModalBody>
-      <ModalFooter></ModalFooter>
+      <ModalFooter />
     </Modal>
   );
 };

@@ -33,6 +33,7 @@
       "support": "Soutien",
       "account": "Compte",
       "subscriptions": "Abonnements",
+      "subscriptionsDescription": "Voir et gérer votre historique d'abonnements.",
       "updatePaymentSource": "Mettre à jour le mode de paiement",
       "updateProfile": "Mettre à jour le profil",
       "updateAddress": "Modifier",

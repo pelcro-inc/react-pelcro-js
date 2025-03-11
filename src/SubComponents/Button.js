@@ -7,23 +7,47 @@ const VARIANTS = {
   GHOST: "ghost"
 };
 
-const getClassName = (variant) => {
+const SIZES = {
+  SMALL: "small",
+  MEDIUM: "medium",
+  LARGE: "large"
+};
+
+const getClassName = (variant, size) => {
+  let baseClasses = "";
+
+  // Size classes
+  switch (size) {
+    case SIZES.SMALL:
+      baseClasses = "plc-text-xs plc-px-2 plc-py-1";
+      break;
+    case SIZES.LARGE:
+      baseClasses = "plc-text-base plc-px-6 plc-py-3";
+      break;
+    case SIZES.MEDIUM:
+    default:
+      baseClasses = "plc-text-sm plc-px-4 plc-py-2";
+      break;
+  }
+
+  // Variant classes
   switch (variant) {
     case VARIANTS.SOLID:
-      return "plc-w-full plc-px-4 plc-py-2 plc-text-sm plc-font-medium plc-text-white plc-bg-primary-600 plc-rounded-lg hover:plc-bg-primary-700 disabled:plc-bg-primary-300";
+      return `plc-w-full ${baseClasses} plc-font-medium plc-text-white plc-bg-primary-600 plc-rounded-lg hover:plc-bg-primary-700 disabled:plc-bg-primary-300`;
     case VARIANTS.OUTLINE:
-      return "plc-w-full plc-px-4 plc-py-2 plc-text-sm plc-font-medium plc-text-primary-600 plc-border plc-border-primary-600 plc-rounded-lg hover:plc-bg-primary-50 disabled:plc-border-primary-300 disabled:plc-text-primary-200";
+      return `plc-w-full ${baseClasses} plc-font-medium plc-text-primary-600 plc-border plc-border-primary-600 plc-rounded-lg hover:plc-bg-primary-50 disabled:plc-border-primary-300 disabled:plc-text-primary-200`;
     case VARIANTS.ICON:
-      return "plc-p-2 plc-text-primary-600 plc-rounded-full hover:plc-bg-primary-100";
+      return `${size === SIZES.SMALL ? 'plc-p-1' : size === SIZES.LARGE ? 'plc-p-3' : 'plc-p-2'} plc-text-primary-600 plc-rounded-full hover:plc-bg-primary-100`;
     case VARIANTS.GHOST:
-      return "plc-w-full plc-px-4 plc-py-2 plc-text-sm plc-font-medium plc-text-primary-700 plc-rounded-lg hover:plc-bg-primary-50 disabled:plc-text-primary-400";
+      return `plc-w-full ${baseClasses} plc-font-medium plc-rounded-lg hover:plc-text-amber-800 hover:plc-underline disabled:plc-text-primary-400`;
     default:
-      return "plc-w-full plc-px-4 plc-py-2 plc-text-sm plc-font-medium plc-text-white plc-bg-primary-600 plc-rounded-lg hover:plc-bg-primary-700 disabled:plc-bg-primary-300";
+      return `plc-w-full ${baseClasses} plc-font-medium plc-text-white plc-bg-primary-600 plc-rounded-lg hover:plc-bg-primary-700 disabled:plc-bg-primary-300`;
   }
 };
 
 export function Button({
   variant = "solid",
+  size = "medium",
   isLoading,
   icon,
   className = "",
@@ -34,8 +58,9 @@ export function Button({
   return (
     <button
       className={`plc-inline-flex plc-items-center plc-justify-center plc-transition-all plc-duration-200 disabled:plc-cursor-not-allowed ${getClassName(
-        variant
-      )} ${className}`} 
+        variant,
+        size
+      )} ${className}`}
       disabled={disabled || isLoading}
       {...otherProps}
     >
@@ -63,8 +88,8 @@ export function Button({
           {icon && (
             <div
               className={`${variant === "icon"
-                  ? "plc-flex plc-items-center plc-justify-center plc-w-full"
-                  : "plc-mr-2"
+                ? "plc-flex plc-items-center plc-justify-center plc-w-full"
+                : "plc-mr-2"
                 } plc-pointer-events-none`}
             >
               {icon}

@@ -83,7 +83,7 @@ export const DashboardContent = ({ children, subView, ...props }) => {
   // }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <div className="pelcro-modal-overlay">
+    <div>
       <div
         className="plc-fixed plc-inset-0 plc-bg-black plc-bg-opacity-60"
         onClick={closeDashboard}
@@ -94,16 +94,16 @@ export const DashboardContent = ({ children, subView, ...props }) => {
         show={isOpen}
         enter="plc-transform plc-transition plc-duration-500"
         enterFrom={`${dashboardLayout == "left"
-            ? "plc--translate-x-full"
-            : "plc-translate-x-full"
+          ? "plc--translate-x-full"
+          : "plc-translate-x-full"
           }`}
         enterTo="plc-translate-x-0"
         // afterEnter={initializeHideMenuHandler}
         leave="plc-transform plc-transition plc-duration-500"
         leaveFrom="plc-translate-x-0"
         leaveTo={`${dashboardLayout == "left"
-            ? "plc--translate-x-full"
-            : "plc-translate-x-full"
+          ? "plc--translate-x-full"
+          : "plc-translate-x-full"
           }`}
         afterLeave={props?.onClose}
       >
@@ -130,8 +130,8 @@ export const DashboardContent = ({ children, subView, ...props }) => {
 
                 <p
                   className={`plc-m-0 plc-break-all ${userHasName
-                      ? "plc-text-sm"
-                      : "plc-text-sm plc-font-bold plc-mt-auto"
+                    ? "plc-text-sm"
+                    : "plc-text-sm plc-font-bold plc-mt-auto"
                     }`}
                 >
                   {user.email}
@@ -165,21 +165,23 @@ export const DashboardContent = ({ children, subView, ...props }) => {
           />
         </div>
       </Transition>
-      {dashboardView && isOpen && (
-        <div
-          id="pelcro-view-dashboard-submenus"
-          className={`plc-fixed plc-inset-y-0 plc-h-full lg:plc-w-9/12 plc-w-full plc-bg-gray-100 plc-z-max plc-overflow-auto ${dashboardLayout == "left" ? "plc-right-0" : "plc-left-0"
-            }`}
-        >
-          <DashboardViewController>
-            {subView?.length
-              ? subView.map((child, i) =>
-                React.cloneElement(child, { store, key: i })
-              )
-              : React.cloneElement(subView, { store })}
-          </DashboardViewController>
-        </div>
-      )}
-    </div>
+      {
+    dashboardView && isOpen && (
+      <div
+      id="pelcro-view-dashboard-submenus"
+      className={`plc-fixed plc-inset-y-0 plc-h-full lg:plc-w-9/12 plc-w-full  plc-overflow-auto ${dashboardLayout == "left" ? "plc-right-0" : "plc-left-0"
+        }`}
+    >
+        <DashboardViewController>
+          {subView?.length
+            ? subView.map((child, i) =>
+              React.cloneElement(child, { store, key: i })
+            )
+            : React.cloneElement(subView, { store })}
+        </DashboardViewController>
+      </div>
+    )
+  }
+    </div >
   );
 };

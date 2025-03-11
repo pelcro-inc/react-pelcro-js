@@ -18,7 +18,8 @@
       "canceled": "Canceled"
     },
     "manageMembers": "Manage Members",
-    "shipments": "Shipments Remaining",
+    "shipments": "Shipments",
+    "remaining": "Remaining",
     "logout": "Logout",
     "dashboard": "Dashboard",
     "unsubscribe": "Cancel",
@@ -32,12 +33,14 @@
     "accountSettings": "Account Settings",
     "purchases": "Purchases",
     "subscriptions": "Subscriptions",
+    "subscriptionsDescription": "View and manage your subscription history.",
     "donations": "Donations",
     "newDonations": "New Donations",
     "memberships": "Memberships",
     "invoices": "Invoices",
+    "invoicesDescription": "View and manage your invoice history.",
     "details": "Details",
-    "view": "View",
+    "viewInvoice": "View invoice",
     "paid": "Paid",
     "open": "Open",
     "draft": "Draft",
@@ -76,6 +79,7 @@
     "addAddress": "Add address",
     "editAddress": "Edit address",
     "addSubscription": "New Subscription",
+    "noSubscriptions": "You have no subscriptions",
     "addGift": "New Gift",
     "default": "Default",
     "orders": {
@@ -100,6 +104,7 @@
   },
   "messages": {
     "noCard": "You don't have a card",
+    "noPaymentMethods": "You don't have any payment methods",
     "subCancellation": {
       "isSureToCancel": "Are you sure you want to cancel your subscription?",
       "loading": "Cancelling your subscription",

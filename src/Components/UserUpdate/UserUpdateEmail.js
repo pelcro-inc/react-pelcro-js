@@ -30,12 +30,13 @@ export const UserUpdateEmail = (props) => {
 
   return (
     <div>
-      <div className="plc-flex plc-items-start plc-relative">
+      <div className="plc-w-full">
         <Email
           disabled={!enableEmailEdit}
           store={store}
           label={t("labels.email")}
           enableEmailEdit={enableEmailEdit}
+          className={`plc-w-full ${!enableEmailEdit ? "plc-text-gray-500" : ""}`}
           {...props}
         />
         <Button

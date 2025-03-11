@@ -9,12 +9,12 @@ export const PaymentMethodUpdateMenu = (props) => {
   return (
     <Card
       id="pelcro-dashboard-profile-menu"
-      className="plc-max-w-100% md:plc-max-w-60% plc-m-auto"
+      className="plc-profile-menu-width"
       // title={t("labels.profile")}
       title="Payment Method Update"
       back={{ target: "payment-cards" }}
     >
-      <PaymentMethodUpdateView onSuccess={() => {}} />
+      <PaymentMethodUpdateView onSuccess={() => { }} />
     </Card>
   );
 };

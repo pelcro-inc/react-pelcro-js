@@ -10,6 +10,7 @@ import { ReactComponent as GiftIcon } from "../../../assets/gift.svg";
 // import { ReactComponent as PlusIcon } from "../../../assets/plus.svg";
 import { ReactComponent as ChevronRightIcon } from "../../../assets/chevron-right.svg";
 import { ReactComponent as CheckMarkIcon } from "../../../assets/check-mark.svg";
+import { ReactComponent as PackageIcon } from "../../../assets/package.svg";
 import {
   getFormattedPriceByLocal,
   getPageOrDefaultLanguage,
@@ -24,72 +25,112 @@ import {
   REACTIVATE_SUBSCRIPTION,
   UNSUSPEND_SUBSCRIPTION
 } from "../../../utils/action-types";
+import { TableEmptyState } from "../../../SubComponents/TableEmptyState";
+
+
 
 export const SubscriptionsMenu = (props) => {
   const { t } = useTranslation("dashboard");
   const { switchView } = usePelcro();
+  const subs = getNonDonationSubs();
 
   const displayRedeem = () => {
     return switchView("gift-redeem");
   };
 
+  if (subs.length === 0) {
+    return (
+      <Card
+        id="pelcro-dashboard-subscriptions-menu"
+        title={t("labels.subscriptions")}
+        description={t("labels.subscriptionsDescription")}
+        className="plc-subscriptions-menu-width"
+      >
+        <TableEmptyState
+          message={t("labels.noSubscriptions")}
+          colSpan={6}
+          className="plc-bg-white plc-my-5"
+          hideHeader={true}
+        />
+        <div className="plc-mt-6 plc-flex plc-justify-end plc-items-center plc-gap-2">
+          <AddNew
+            title={t("labels.addSubscription")}
+            onClick={() => props?.displayProductSelect({ isGift: false })}
+          />
+          <Button
+            variant="outline"
+            icon={<GiftIcon className="plc-w-4 plc-h-4 plc-mr-1" />}
+            className='plc-w-full plc-overflow-hidden sm:plc-w-auto'
+            onClick={displayRedeem}
+          >
+            {t("labels.redeemGift")}
+          </Button>
+        </div>
+      </Card>
+    );
+  }
+
   return (
     <Card
       id="pelcro-dashboard-subscriptions-menu"
-      className="plc-max-w-100% md:plc-max-w-80% plc-m-auto"
       title={t("labels.subscriptions")}
+      description={t("labels.subscriptionsDescription")}
+      className="plc-subscriptions-menu-width"
     >
-      <table className="plc-w-full plc-table-fixed pelcro-subscriptions-table plc-text-left">
-        <thead className="plc-text-xs plc-font-semibold plc-tracking-wider plc-text-gray-400 plc-uppercase ">
-          <tr>
-            <th className="plc-hidden md:plc-table-cell plc-w-2/12">
-              {t("labels.product")}
-            </th>
-            <th className="plc-w-1/3 md:plc-w-3/12">
-              {t("labels.plan")}
-            </th>
-            <th className="plc-hidden md:plc-table-cell plc-w-2/12">
-              {t("labels.price")}
-            </th>
-            <th className="plc-w-1/3 md:plc-w-2/12">
-              {t("labels.status.title")}
-            </th>
-            <th className="plc-w-1/3 md:plc-w-2/12">
-              {t("labels.actions")}
-            </th>
-            <th className="plc-w-1/3 md:plc-w-1/12"></th>
-          </tr>
-        </thead>
-        <tbody>
-          {/* Spacer */}
-          <tr className="plc-h-4"></tr>
-        </tbody>
-        <Accordion>
-          <SubscriptionsItems {...props} />
-        </Accordion>
-      </table>
-      <AddNew
-        title={t("labels.addSubscription")}
-        onClick={() => props?.displayProductSelect({ isGift: false })}
-      />
-      <table className="plc-w-full plc-table-fixed pelcro-subscriptions-table plc-text-left">
-        <tbody>
-          <tr>
-            <td colSpan="5" className="plc-p-1">
-              <Button
-                variant="ghost"
-                icon={
-                  <GiftIcon className="plc-w-4 plc-h-4 plc-mr-1" />
-                }
-                className="plc-w-full plc-h-8 plc-font-semibold plc-tracking-wider plc-text-gray-900 plc-uppercase plc-rounded-none hover:plc-bg-gray-100"
-                onClick={displayRedeem}
-              >
-                {t("labels.redeemGift")}
-              </Button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div className=" plc-flow-root">
+        <div className="plc--mx-4 plc--my-2 plc-overflow-x-auto plc-sm:-mx-6 plc-lg:-mx-8">
+          <div className="plc-inline-block plc-min-w-full plc-py-2 plc-align-middle">
+            <table className="plc-min-w-full plc-divide-y plc-divide-gray-300">
+              <thead>
+                <tr>
+                  <th
+                    scope="col"
+                    className="plc-py-3.5 plc-pr-3 plc-pl-4 plc-text-left plc-text-sm plc-font-semibold plc-text-gray-900 plc-sm:pl-6 plc-lg:pl-8
+                     plc-uppercase
+                    "
+                  >
+                    {t("labels.product")}
+                  </th>
+                  <th scope="col" className="plc-px-3 plc-py-3.5 plc-text-left plc-text-sm plc-font-semibold plc-text-gray-900 plc-uppercase">
+                    {t("labels.plan")}
+                  </th>
+                  <th scope="col" className="plc-px-3 plc-py-3.5 plc-text-left plc-text-sm plc-font-semibold plc-text-gray-900 plc-uppercase">
+                    {t("labels.price")}
+                  </th>
+                  <th scope="col" className="plc-px-3 plc-py-3.5 plc-text-left plc-text-sm plc-font-semibold plc-text-gray-900 plc-uppercase">
+                    {t("labels.status.title")}
+                  </th>
+                  <th scope="col" className="plc-px-3 plc-py-3.5 plc-text-left plc-text-sm plc-font-semibold plc-text-gray-900 plc-uppercase">
+                    {t("labels.shipments")}
+                  </th>
+                  {/* <th scope="col" className="plc-relative plc-py-3.5 plc-pr-4  plc-text-sm plc-font-semibold plc-pl-3 plc-sm:pr-6 plc-lg:pr-8 plc-text-gray-900
+                   plc-text-right
+                  ">
+                    {t("labels.actions")}
+                  </th> */}
+                </tr>
+              </thead>
+              <Accordion>
+                <SubscriptionsItems {...props} />
+              </Accordion>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div className="plc-mt-6 plc-flex plc-justify-end plc-items-center plc-gap-2" >
+        <AddNew title={t("labels.addSubscription")} onClick={() => props?.displayProductSelect({ isGift: false })}
+        />
+        <Button
+          variant="outline"
+          icon={
+            <GiftIcon className="plc-w-4 plc-h-4 plc-mr-1" />
+          }
+          className='plc-w-full plc-overflow-hidden sm:plc-w-auto'
+          onClick={displayRedeem}
+        >
+          {t("labels.redeemGift")}
+        </Button>
+      </div>
     </Card>
   );
 };
@@ -116,7 +157,15 @@ export const SubscriptionsItems = ({
 
   const subs = getNonDonationSubs();
 
-  if (subs.length === 0) return null;
+  if (subs.length === 0) {
+    return (
+      <TableEmptyState
+        message={t("labels.noSubscriptions")}
+        colSpan={6}
+        className="plc-bg-white my-6"
+      />
+    );
+  }
 
   return subs
     .sort((a, b) => a.expires_at - b.expires_at)
@@ -259,25 +308,24 @@ export const SubscriptionsItems = ({
 
       return (
         <React.Fragment key={sub.id}>
-          <tbody>
+          <tbody className="plc-divide-y plc-divide-gray-200 plc-bg-white">
             <tr
               onClick={() => {
                 if (hasPhases) toggleActiveMenu(sub.id);
               }}
               key={sub.id}
-              className={`plc-w-full plc-align-middle plc-cursor-pointer accordion-header ${
-                isActive ? "plc-bg-gray-100" : "hover:plc-bg-gray-50"
-              }`}
+              className={`${isActive ? "plc-bg-gray-100" : "hover:plc-bg-gray-50"
+                }`}
             >
-              <td className="plc-hidden md:plc-table-cell plc-truncate">
+              <td className="plc-py-4 plc-pr-3 plc-pl-4 plc-text-sm plc-font-medium plc-whitespace-nowrap plc-text-gray-900 plc-sm:pl-6 plc-lg:pl-8">
                 {sub.plan.product.name && (
-                  <span className="plc-font-semibold plc-text-gray-500">
+                  <span className="">
                     {sub.plan.product.name}
                   </span>
                 )}
               </td>
-              <td className="plc-truncate">
-                <span className="plc-font-semibold plc-text-gray-500">
+              <td className="plc-px-3 plc-py-4 plc-text-sm plc-whitespace-nowrap plc-text-gray-500">
+                <span className=" plc-text-gray-500">
                   {sub.plan.nickname}
                 </span>
                 <div className="plc-inline md:plc-hidden">
@@ -291,8 +339,8 @@ export const SubscriptionsItems = ({
                   </span>
                 </div>
               </td>
-              <td className="plc-hidden md:plc-table-cell plc-truncate">
-                <span className="plc-font-semibold plc-text-gray-500">
+              <td className="plc-px-3 plc-py-4 plc-text-sm plc-whitespace-nowrap plc-text-gray-900">
+                <span className="">
                   {getFormattedPriceByLocal(
                     sub.plan.amount,
                     sub.plan.currency,
@@ -300,140 +348,159 @@ export const SubscriptionsItems = ({
                   )}
                 </span>
               </td>
-              <td className="plc-py-2 truncate">
+              <td className="plc-px-3 plc-py-4 plc-text-sm plc-whitespace-nowrap plc-text-gray-900">
                 {/* Pill */}
-                <span
-                  className={`plc-inline-flex plc-p-1 plc-text-xs plc-font-semibold ${
-                    getSubscriptionStatus(sub).bgColor
-                  } plc-uppercase ${
-                    getSubscriptionStatus(sub).textColor
-                  } plc-rounded-lg`}
-                >
-                  {getSubscriptionStatus(sub).icon}
-                  {getSubscriptionStatus(sub).title}
-                </span>
-                <br />
-                <div className="plc-text-xs plc-text-gray-500">
-                  {sub.status && (
-                    <span className="plc-inline-block plc-mt-1 plc-underline">
-                      {getSubscriptionStatus(sub).content}
+                <div className="plc-flex plc-items-center">
+                  <span
+                    className={`plc-inline-flex plc-text-xs plc-font-medium  plc-capitalize
+                      
+                    ${getSubscriptionStatus(sub).textColor} plc-rounded-lg`}
+                  >
+                    {getSubscriptionStatus(sub).icon}
+                    {getSubscriptionStatus(sub).title}
+                  </span>
+                </div>
+                {getSubscriptionStatus(sub).content && (
+                  <span className="plc-text-xs plc-text-gray-500 ml-1">
+                    {getSubscriptionStatus(sub).content}
+                  </span>
+                )}
+              </td>
+              <td className="plc-px-3 plc-py-4 plc-text-sm plc-whitespace-nowrap plc-text-gray-900">
+                <div className="">
+                  {sub.shipments_remaining ? (
+                    <div className="">
+                      <span className="plc-inline-block">
+                        {sub.shipments_remaining}{" "}
+                        <span className="plc-text-gray-500">
+                          {t("labels.remaining")}
+                        </span>
+                      </span>
+
+                    </div>
+                  ) : (
+                    <span className="plc-inline-block">
+                      -
                     </span>
                   )}
-                  <br />
-                  {sub.shipments_remaining ? (
-                    <span className="plc-inline-block plc-mt-1">
-                      {sub.shipments_remaining}{" "}
-                      {t("labels.shipments")}
-                    </span>
-                  ) : null}
                 </div>
               </td>
-              <td>
-                {sub.cancel_at_period_end === 1 &&
-                  sub.plan.auto_renew &&
-                  !sub.is_gift_recipient && (
-                    <Button
-                      variant="ghost"
-                      className="plc-text-green-400 focus:plc-ring-green-300 pelcro-dashboard-sub-reactivate-button"
-                      icon={<RefreshIcon />}
-                      onClick={onReactivateClick}
-                      disabled={disableSubmit}
-                      data-key={sub.id}
-                    >
-                      {t("labels.reactivate")}
-                    </Button>
-                  )}
-                {sub.cancel_at_period_end === 1 &&
-                  sub.status !== "incomplete" && (
-                    <Button
-                      variant="ghost"
-                      className="plc-text-blue-400 pelcro-dashboard-sub-renew-button"
-                      icon={<RefreshIcon />}
-                      onClick={onRenewClick}
-                      disabled={disableSubmit}
-                      data-key={sub.id}
-                    >
-                      {t("labels.renew")}
-                    </Button>
+              <td className="plc-text-right plc-justify-end">
+                <div className="plc-flex plc-items-center plc-justify-end plc-w-full  plc-text-right">
+                  {sub.cancel_at_period_end === 1 && sub.plan.auto_renew && !sub.is_gift_recipient && (
+                    <>
+                      <Button
+                        variant="ghost"
+                        className="plc-text-green-400 focus:plc-ring-green-300 pelcro-dashboard-sub-reactivate-button"
+                        icon={<RefreshIcon />}
+                        onClick={onReactivateClick}
+                        disabled={disableSubmit}
+                        data-key={sub.id}
+                      >
+                        {t("labels.reactivate")}
+                      </Button>
+                      <div className="plc-h-3 plc-w-px plc-bg-gray-300"></div>
+                    </>
                   )}
 
-                {sub.shipments_suspended_until &&
-                  isDateAfterToday(sub.shipments_suspended_until) &&
-                  sub.shipments_remaining > 0 && (
-                    <Button
-                      variant="ghost"
-                      className="plc-text-blue-400 pelcro-dashboard-sub-suspend-button"
-                      icon={<XCircleIcon />}
-                      onClick={onUnSuspendClick}
-                      disabled={disableSubmit}
-                      data-key={sub.id}
-                    >
-                      {t("labels.unsuspend")}
-                    </Button>
+                  {sub.cancel_at_period_end === 1 && sub.status !== "incomplete" && (
+                    <>
+                      <Button
+                        variant="ghost"
+                        className="plc-text-blue-400 pelcro-dashboard-sub-renew-button"
+                        icon={<RefreshIcon />}
+                        onClick={onRenewClick}
+                        disabled={disableSubmit}
+                        data-key={sub.id}
+                      >
+                        {t("labels.renew")}
+                      </Button>
+                      <div className="plc-h-3 plc-w-px plc-bg-gray-300"></div>
+                    </>
                   )}
 
-                {((!sub.shipments_suspended_until &&
-                  sub.shipments_remaining > 0) ||
-                  (sub.shipments_suspended_until &&
-                    !isDateAfterToday(
-                      sub.shipments_suspended_until
-                    ))) && (
-                  <Button
-                    variant="ghost"
-                    className="plc-text-red-500 focus:plc-ring-red-500 pelcro-dashboard-sub-suspend-button"
-                    icon={<CalendarIcon />}
-                    onClick={onSuspendClick}
-                    disabled={disableSubmit}
-                    data-key={sub.id}
-                  >
-                    {t("labels.suspend")}
-                  </Button>
-                )}
+                  {sub.shipments_suspended_until && isDateAfterToday(sub.shipments_suspended_until) && sub.shipments_remaining > 0 && (
+                    <>
+                      <Button
+                        variant="ghost"
+                        className="plc-text-blue-400 pelcro-dashboard-sub-suspend-button"
+                        icon={<XCircleIcon />}
+                        onClick={onUnSuspendClick}
+                        disabled={disableSubmit}
+                        data-key={sub.id}
+                      >
+                        {t("labels.unsuspend")}
+                      </Button>
+                      <div className="plc-h-3 plc-w-px plc-bg-gray-300"></div>
+                    </>
+                  )}
 
-                {!sub.plan.auto_renew ||
-                (sub.plan.auto_renew &&
-                  sub.cancel_at_period_end === 0) ? (
-                  <Button
-                    variant="ghost"
-                    className="plc-text-red-500 focus:plc-ring-red-500 pelcro-dashboard-sub-cancel-button"
-                    icon={<XCircleIcon />}
-                    onClick={onCancelClick}
-                    disabled={disableSubmit}
-                    data-key={sub.id}
-                  >
-                    {t("labels.unsubscribe")}
-                  </Button>
-                ) : (
-                  ""
-                )}
+                  {((!sub.shipments_suspended_until && sub.shipments_remaining > 0) ||
+                    (sub.shipments_suspended_until && !isDateAfterToday(sub.shipments_suspended_until))) && (
+                      <>
+                        <Button
+                          variant="ghost"
+                          className="plc-text-amber-700 focus:plc-ring-amber-500 pelcro-dashboard-sub-suspend-button"
+                          icon={<CalendarIcon />}
+                          onClick={onSuspendClick}
+                          disabled={disableSubmit}
+                          data-key={sub.id}
+                        >
+                          {t("labels.suspend")}
+                        </Button>
+                        <div className="plc-h-3 plc-w-px plc-bg-gray-300"></div>
+                      </>
+                    )}
 
-                {sub?.plan?.type === "membership" && (
-                  <Button
-                    variant="ghost"
-                    className="plc-text-blue-400 pelcro-dashboard-sub-manage-members-button"
-                    icon={<RefreshIcon />}
-                    onClick={onManageMembersClick}
-                    disabled={disableSubmit}
-                    data-key={sub.id}
-                  >
-                    {t("labels.manageMembers")}
-                  </Button>
-                )}
+
+
+                  {sub?.plan?.type === "membership" && (
+                    <>
+                      <Button
+                        variant="ghost"
+                        className="plc-text-blue-400 pelcro-dashboard-sub-manage-members-button"
+                        icon={<RefreshIcon />}
+                        onClick={onManageMembersClick}
+                        disabled={disableSubmit}
+                        data-key={sub.id}
+                      >
+                        {t("labels.manageMembers")}
+                      </Button>
+                      <div className="plc-h-3 plc-w-px plc-bg-gray-300"></div>
+                    </>
+                  )}
+                  {!sub.plan.auto_renew || (sub.plan.auto_renew && sub.cancel_at_period_end === 0) ? (
+                    <>
+                      <Button
+                        variant="ghost"
+                        className="plc-text-red-500 focus:plc-ring-red-500 pelcro-dashboard-sub-cancel-button"
+                        icon={<XCircleIcon />}
+                        onClick={onCancelClick}
+                        disabled={disableSubmit}
+                        data-key={sub.id}
+                      >
+                        {t("labels.unsubscribe")}
+                      </Button>
+                    </>
+                  ) : (
+                    ""
+                  )}
+
+                </div>
               </td>
+
               <td>
                 {hasPhases && (
                   <div
-                    className={`plc-flex plc-items-center plc-justify-center plc-transition-transform plc-ease-out plc-transform plc-rounded-full plc-h-7 ${
-                      isActive
-                        ? "plc-flex plc-place-items-center plc-h-7 plc-p-1 plc-bg-primary-400 plc-rounded-full"
-                        : "accordion-chevron"
-                    }`}
+                    className={`plc-flex plc-items-center plc-justify-center plc-transition-transform plc-ease-out plc-transform plc-rounded-full plc-h-7 ${isActive
+                      ? "plc-flex plc-place-items-center plc-h-7 plc-p-1 plc-bg-primary-400 plc-rounded-full"
+                      : "accordion-chevron"
+                      }`}
                   >
                     <span
-                      className={`plc-transition plc-ease-out  ${
-                        isActive &&
+                      className={`plc-transition plc-ease-out  ${isActive &&
                         "plc-text-white plc-transform plc-rotate-90"
-                      }`}
+                        }`}
                     >
                       <ChevronRightIcon />
                     </span>
@@ -493,11 +560,10 @@ export const SubscriptionsItems = ({
 
                       <td className="plc-py-2">
                         <span
-                          className={`plc-inline-flex plc-p-1 plc-text-xs plc-font-semibold plc-uppercase plc-rounded-lg ${
-                            isCurrentPhase
-                              ? "plc-text-green-700 plc-bg-green-100"
-                              : "plc-text-blue-700 plc-bg-blue-100"
-                          }
+                          className={`plc-inline-flex plc-p-1 plc-text-xs plc-font-semibold plc-uppercase plc-rounded-lg ${isCurrentPhase
+                            ? "plc-text-green-700 plc-bg-green-100"
+                            : "plc-text-blue-700 plc-bg-blue-100"
+                            }
                              `}
                         >
                           {isCurrentPhase ? (

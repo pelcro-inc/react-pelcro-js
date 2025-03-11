@@ -43,7 +43,7 @@ export function RegisterView(props) {
         <RegisterContainer {...props}>
           <AlertWithContext />
           {socialLoginEnabled && (
-            <div className="plc-mt-6 plc-grid plc-gap-4 plc-grid-cols-2 plc-sm:grid-cols-3">
+            <div className={`plc-mt-6 plc-grid plc-gap-4 ${auth0LoginEnabled ? 'plc-grid-cols-2 plc-sm:grid-cols-3' : 'plc-grid-cols-1'}`}>
               {/* <FacebookLoginButton className="" /> */}
               <GoogleLoginButton className="" />
               {auth0LoginEnabled && (
@@ -57,9 +57,11 @@ export function RegisterView(props) {
               <div className="plc-w-full plc-border-t plc-border-gray-200" />
             </div>
             <div className="plc-relative plc-flex plc-justify-center plc-text-sm plc-uppercase">
+            {socialLoginEnabled && (
               <span className="plc-bg-white plc-px-2 plc-text-gray-500">
                 {t("messages.socialLogin.label")}
               </span>
+            )}
             </div>
           </div>
 
@@ -118,7 +120,7 @@ export function RegisterView(props) {
           </div>
 
           {hasSecurityTokenEnabled() && (
-            <p className="plc-text-sm plc-text-gray-500 plc-mt-1">
+            <div className="plc-text-sm plc-text-gray-500 plc-mt-8">
               <Trans i18nKey="messages:recaptcha">
                 This site is protected by reCAPTCHA and the Google
                 <Link
@@ -136,7 +138,7 @@ export function RegisterView(props) {
                 </Link>
                 apply.
               </Trans>
-            </p>
+            </div>
           )}
         </RegisterContainer>
       </form>

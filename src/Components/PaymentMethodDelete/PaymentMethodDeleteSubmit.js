@@ -32,7 +32,7 @@ export const PaymentMethodDeleteSubmit = ({
           : disableSubmit
       }
       isLoading={isLoading}
-      className="plc-w-full"
+      className="plc-w-full plc-bg-red-500 plc-text-white hover:plc-bg-red-600"
       {...otherProps}
     >
       {name ?? t("delete.buttons.delete")}
