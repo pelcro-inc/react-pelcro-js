@@ -13,8 +13,13 @@ export const DashboardSubscriptions = ({ title, icon, store }) => {
   } = useContext(store);
 
   const { switchDashboardView } = usePelcro();
-
   const { t } = useTranslation("dashboard");
+
+  // Check if user has active subscriptions
+  const hasActiveSubscription = () => {
+    const subs = window.Pelcro.user.read().subscriptions || [];
+    return subs.some(sub => sub.status === "active");
+  };
 
   const setActiveDashboardLink = (submenuName) => {
     switchDashboardView("subscriptions");
@@ -27,12 +32,9 @@ export const DashboardSubscriptions = ({ title, icon, store }) => {
   return (
     <DashboardLink
       name={SUB_MENUS.SUBSCRIPTIONS}
-      icon={
-        icon ?? (
-          <SubscriptionIcon className="plc-w-10 plc-h-10 plc-pt-2 plc-pr-1 plc--ml-2" />
-        )
-      }
+      icon={icon ?? <SubscriptionIcon className="plc-w-5 plc-h-5" />}
       title={title ?? t("labels.subscriptions")}
+      badge={hasActiveSubscription() ? "Active" : null}
       setActiveDashboardLink={setActiveDashboardLink}
       activeDashboardLink={activeDashboardLink}
     />

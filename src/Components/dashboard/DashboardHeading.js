@@ -4,8 +4,8 @@ export const DashboardHeading = ({ title }) => {
   return (
     <>
       {title && (
-        <header className="plc-pl-4 plc-my-2 sm:plc-pl-8">
-          <p className="plc-font-bold plc-tracking-widest plc-text-gray-500">
+        <header className="plc-pl-6 plc-my-4">
+          <p className="plc-font-medium plc-tracking-wide plc-text-gray-500 plc-text-sm plc-uppercase">
             {title}
           </p>
         </header>

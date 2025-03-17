@@ -108,12 +108,12 @@ export const DashboardContent = ({ children, subView, ...props }) => {
         afterLeave={props?.onClose}
       >
         <div id="pelcro-view-dashboard" ref={menuRef}>
-          <header className="plc-bg-gray-200 plc-flex plc-py-5">
+          <header className="plc-bg-white plc-flex plc-py-5 plc-border-b plc-border-gray-200">
             <div className="plc-flex plc-items-center">
-              <div className="plc-flex plc-justify-center plc-ml-3 sm:plc-ml-6 plc-flex-shrink-0">
+              <div className="plc-flex plc-justify-center plc-ml-5 sm:plc-ml-6 plc-flex-shrink-0">
                 <div className="plc-relative plc-flex-shrink-0">
                   <img
-                    className="pelcro-user-profile-picture plc-bg-gray-300 plc-cursor-pointer plc-h-10 plc-rounded-md plc-w-10"
+                    className="pelcro-user-profile-picture plc-bg-gray-200 plc-cursor-pointer plc-h-12 plc-w-12 plc-rounded-full plc-object-cover"
                     src={profilePicture}
                     alt="profile picture"
                     onClick={displayProfilePicChange}
@@ -123,15 +123,15 @@ export const DashboardContent = ({ children, subView, ...props }) => {
 
               <div className="plc-flex plc-flex-col plc-justify-between plc-flex-grow plc-w-56 plc-ml-4 plc-break-words sm:plc-w-auto">
                 {userHasName && (
-                  <p className="plc-font-bold plc-break-all">
+                  <p className="plc-font-bold plc-text-lg plc-break-all">
                     {user.first_name} {user.last_name}
                   </p>
                 )}
 
                 <p
                   className={`plc-m-0 plc-break-all ${userHasName
-                    ? "plc-text-sm"
-                    : "plc-text-sm plc-font-bold plc-mt-auto"
+                    ? "plc-text-sm plc-text-gray-500"
+                    : "plc-text-base plc-font-medium plc-mt-auto"
                     }`}
                 >
                   {user.email}
@@ -140,7 +140,7 @@ export const DashboardContent = ({ children, subView, ...props }) => {
               <div>
                 <button
                   type="button"
-                  className="plc-absolute plc-right-5 plc-top-5 plc-rounded-full plc-bg-gray-200 plc-p-2 plc-cursor-pointer plc-transition-colors plc-duration-200 hover:plc-bg-gray-300"
+                  className="plc-absolute plc-right-5 plc-top-5 plc-rounded-full plc-bg-gray-100 plc-p-2 plc-cursor-pointer plc-transition-colors plc-duration-200 hover:plc-bg-gray-200"
                   aria-label="close modal"
                   onClick={closeDashboard}
                 >
@@ -149,7 +149,7 @@ export const DashboardContent = ({ children, subView, ...props }) => {
               </div>
             </div>
           </header>
-          <section className="plc-mt-6 plc-shadow-sm">
+          <section className="plc-mt-3 plc-shadow-sm">
             {children?.length
               ? children.map((child, i) =>
                 React.cloneElement(child, { store, key: i })
@@ -166,22 +166,24 @@ export const DashboardContent = ({ children, subView, ...props }) => {
         </div>
       </Transition>
       {
-    dashboardView && isOpen && (
-      <div
-      id="pelcro-view-dashboard-submenus"
-      className={`plc-fixed plc-inset-y-0 plc-h-full lg:plc-w-9/12 plc-w-full  plc-overflow-auto ${dashboardLayout == "left" ? "plc-right-0" : "plc-left-0"
-        }`}
-    >
-        <DashboardViewController>
-          {subView?.length
-            ? subView.map((child, i) =>
-              React.cloneElement(child, { store, key: i })
-            )
-            : React.cloneElement(subView, { store })}
-        </DashboardViewController>
-      </div>
-    )
-  }
+        dashboardView && isOpen && (
+          <div
+            id="pelcro-view-dashboard-submenus"
+            className={`plc-fixed plc-inset-y-0 plc-h-full
+              
+              lg:plc-w-9/12 plc-w-full  plc-overflow-auto ${dashboardLayout == "left" ? "plc-right-0" : "plc-left-0"
+              }`}
+          >
+            <DashboardViewController>
+              {subView?.length
+                ? subView.map((child, i) =>
+                  React.cloneElement(child, { store, key: i })
+                )
+                : React.cloneElement(subView, { store })}
+            </DashboardViewController>
+          </div>
+        )
+      }
     </div >
   );
 };

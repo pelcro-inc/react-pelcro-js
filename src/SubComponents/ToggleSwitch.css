@@ -39,5 +39,5 @@
 }
 
 .toggle-switch input[type="checkbox"]:checked+.switch {
-    /* background-color: #336699; */
+    background-color: theme('colors.primary.600');
 }

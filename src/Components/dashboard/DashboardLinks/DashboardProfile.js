@@ -27,7 +27,7 @@ export const DashboardProfile = ({ title, icon, store }) => {
   return (
     <DashboardLink
       name={SUB_MENUS.PROFILE}
-      icon={icon ?? <UserIcon className="plc-w-6 plc-h-6 plc-mr-2" />}
+      icon={icon ?? <UserIcon className="plc-w-5 plc-h-5" />}
       title={title ?? t("labels.profile")}
       setActiveDashboardLink={setActiveDashboardLink}
       activeDashboardLink={activeDashboardLink}

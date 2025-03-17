@@ -17,8 +17,15 @@
   "labels": {
     "summary": "Order summary",
     "total": "Total",
+    "number": "Number",
+    "date": "Date",
     "subtotal": "Subtotal",
     "shippingRate": "Shipping Rate",
+    "items": "Items",
+    "itemsAmount": "{{count}} items",
+    "status": "Status",
+    "details": "Details",
+
     "tax": "Tax"
   }
 }

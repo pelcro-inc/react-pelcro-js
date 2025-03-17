@@ -25,6 +25,7 @@ export const InvoiceDetailsModal = ({
   return (
     <Modal
       id="pelcro-invoice-details-modal"
+      className="plc-subscriptions-menu-width"
       onDisplay={onDisplay}
       onClose={onClose}
     >

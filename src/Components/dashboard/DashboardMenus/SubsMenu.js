@@ -77,7 +77,7 @@ export const SubscriptionsMenu = (props) => {
       description={t("labels.subscriptionsDescription")}
       className="plc-subscriptions-menu-width"
     >
-      <div className=" plc-flow-root">
+      <div className="plc-flow-root">
         <div className="plc--mx-4 plc--my-2 plc-overflow-x-auto plc-sm:-mx-6 plc-lg:-mx-8">
           <div className="plc-inline-block plc-min-w-full plc-py-2 plc-align-middle">
             <table className="plc-min-w-full plc-divide-y plc-divide-gray-300">

@@ -78,6 +78,14 @@
   }
 }
 
+/* // make plc-subscriptions-menu-width responsive in mobile width 95% */
+@media (max-width: 768px) {
+  .plc-subscriptions-menu-width {
+    width: 95%;
+  }
+}
+
+
 /* sub-components and components */
 /* @import "./SubComponents/Badge.css";
 
