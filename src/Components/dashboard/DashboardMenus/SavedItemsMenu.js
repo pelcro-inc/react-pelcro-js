@@ -32,7 +32,7 @@ export const SavedItemsMenu = () => {
   return (
     <Card
       id="pelcro-dashboard-saved-menu"
-      className="plc-max-w-100% md:plc-max-w-80% plc-m-auto"
+      className="plc-profile-menu-width"
       title={t("labels.savedItems.label")}
     >
       <SavedItems items={userSavedItems} setItems={setUserMetadata} />

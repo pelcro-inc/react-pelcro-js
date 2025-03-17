@@ -27,27 +27,27 @@ export function Password({ store, showStrength = false, ...otherProps }) {
 
   // Password validation checks
   const passwordChecks = {
-    minLength: password?.length >= 8,
-    hasNumber: /\d/.test(password),
-    hasUppercase: /[A-Z]/.test(password),
-    hasLowercase: /[a-z]/.test(password),
-    hasSpecial: /[!@#$%^&*(),.?":{}|<>]/.test(password)
+    minLength: password ? password.length >= 8 : otherProps?.value?.length >= 8,
+    hasNumber: password ? /\d/.test(password) : /\d/.test(otherProps?.value ?? ""),
+    hasUppercase: password ? /[A-Z]/.test(password) : /[A-Z]/.test(otherProps?.value ?? ""),
+    hasLowercase: password ? /[a-z]/.test(password) : /[a-z]/.test(otherProps?.value ?? ""),
+    hasSpecial: password ? /[!@#$%^&*(),.?":{}|<>]/.test(password) : /[!@#$%^&*(),.?":{}|<>]/.test(otherProps?.value ?? "")
   };
 
-  const onRequirementsMet = (isValid) => {
-    if (!isValid && password.length) {
+  const onRequirementsMet = useCallback((isValid) => {
+    if (!isValid && password?.length) {
       dispatch({
         type: SET_PASSWORD_ERROR,
         payload: ''
       });
     }
-    else if (password.length) {
+    else if (password?.length) {
       dispatch({
         type: SET_PASSWORD,
         payload: password || ""
       });
     }
-  };
+  }, [dispatch, password]);
 
   // Calculate password strength (0-5)
   const passwordStrength = Object.values(passwordChecks).filter(Boolean).length;
@@ -64,9 +64,8 @@ export function Password({ store, showStrength = false, ...otherProps }) {
   const handleInputChange = useCallback(
     (value) => {
       setPassword(value);
-
-      if (password.length) {
-        dispatch({ type: SET_PASSWORD, payload: password });
+      if (value?.length) {
+        dispatch({ type: SET_PASSWORD, payload: value });
       } else if (finishedTyping) {
         dispatch({
           type: SET_PASSWORD_ERROR,
@@ -74,18 +73,19 @@ export function Password({ store, showStrength = false, ...otherProps }) {
         });
       }
     },
-    [dispatch, password, finishedTyping]
+    [dispatch, finishedTyping, t]
   );
 
   useEffect(() => {
-    handleInputChange(password);
-  }, [finishedTyping, password, handleInputChange]);
+    handleInputChange(password ?? otherProps?.value);
+  }, [finishedTyping, password, otherProps?.value]);
 
   useEffect(() => {
     if (showStrength) {
       onRequirementsMet(allRequirementsMet);
     }
-  }, [passwordStrength, allRequirementsMet, onRequirementsMet]);
+  }, [passwordStrength, allRequirementsMet, password, otherProps?.value]);
+
 
   return (
     <div>

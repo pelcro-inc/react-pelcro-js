@@ -8,6 +8,7 @@ import { Transition } from "@headlessui/react";
 
 export function Modal({
   id,
+  bg = "plc-bg-white",
   onDisplay,
   className = "",
   hideCloseButton = !window.Pelcro.paywall.displayCloseButton(),
@@ -51,12 +52,14 @@ export function Modal({
               leaveTo="plc-opacity-0 plc-scale-95"
             >
               <Dialog.Panel
-                className={`plc-w-full plc-max-w-lg plc-overflow-hidden plc-rounded-2xl plc-bg-white plc-p-6 plc-shadow-xl ${className} plc-relative`}
+                className={`${className ? className : 'plc-w-full plc-max-w-lg'}   plc-overflow-hidden plc-rounded-2xl 
+                ${bg}
+                plc-p-6 plc-shadow-xl plc-relative  z-50`}
                 id={id}
                 {...props}
               >
                 {isLoading ? (
-                  <div className="plc-absolute plc-inset-0 plc-flex plc-items-center plc-justify-center plc-bg-white/80 plc-backdrop-blur-sm plc-z-50">
+                  <div className="plc-absolute plc-inset-0 plc-flex plc-items-center plc-justify-center plc-bg-white/80 plc-backdrop-blur-sm plc-">
                     <svg className="plc-w-10 plc-h-10 plc-animate-spin" viewBox="0 0 24 24">
                       <circle className="plc-opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                       <path
@@ -91,12 +94,16 @@ export const ModalHeader = ({
   title,
   description,
   children,
+  fromDashboard,
   ...props
 }) => {
   const resetView = usePelcro((state) => state.resetView);
   const onClose = () => {
+
     onCloseModal?.();
-    resetView();
+    if (!fromDashboard) {
+      resetView();
+    }
   };
 
   return (

@@ -10,74 +10,59 @@ import { Button } from "../../SubComponents/Button";
 
 export const SubscriptionCancelView = (props) => {
   const { subscriptionToCancel, switchView } = usePelcro();
-
   const { t } = useTranslation("subscriptionCancel");
 
-  const getPhases = () => {
-    if (!subscriptionToCancel.schedule) return [];
-
-    const currentPhaseStartDate =
-      subscriptionToCancel?.schedule?.current_phase?.start_date;
-
-    const currentPhase = subscriptionToCancel?.schedule?.phases?.find(
-      (phase) => {
-        return phase?.start_date === currentPhaseStartDate;
-      }
-    );
-
-    const futurePhases =
-      subscriptionToCancel?.schedule?.phases?.filter((phase) => {
-        return phase?.start_date > currentPhaseStartDate;
-      });
-
-    return [currentPhase, ...futurePhases];
+  const formatDate = (timestamp) => {
+    return new Date(timestamp).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric"
+    });
   };
 
-  const hasPhases = getPhases().length > 0;
-
-  const phases = subscriptionToCancel?.schedule?.phases;
-  const lastPhase = !phases ? [] : phases[phases?.length - 1];
+  const expiryDate = formatDate(subscriptionToCancel?.current_period_end);
 
   return (
     <div id="pelcro-subscription-cancel-view">
       <SubscriptionCancelContainer {...props}>
-        <div className="plc-flex plc-flex-col plc-items-center plc-justify-center plc-mt-4">
-          <SubscriptionIcon className="plc-w-32 plc-h-32" />
-          <p className="plc-mb-3 plc-text-gray-900 plc-text-left plc-mr-auto plc-whitespace-pre-line">
-            {t("messages.subscriptionEnd")}{" "}
-            {hasPhases
-              ? new Date(
-                  Number(`${lastPhase?.end_date}000`)
-                ).toLocaleDateString("en-CA", {
-                  year: "numeric",
-                  month: "short",
-                  day: "numeric"
-                })
-              : new Date(
-                  subscriptionToCancel?.current_period_end
-                ).toLocaleDateString("en-CA", {
-                  year: "numeric",
-                  month: "short",
-                  day: "numeric"
-                })}
-            .
-          </p>
+        <div className="plc-flex plc-flex-col plc-items-start plc-justify-cente r">
+          {/* Centered subscription icon */}
+          <p className="pl-text-lg plc-my-6
+           plc-text-red-500
+          ">{t("messages.subscriptionEnd")} <span className="plc-font-bold">{expiryDate}</span>.</p>
 
-          <SubscriptionCancelOptions
-            subscription={subscriptionToCancel}
-            hasPhases={hasPhases}
-          />
-          <SubscriptionCancelReason />
 
-          <div className="plc-space-x-0 plc-space-y-3 md:plc-space-x-3 md:plc-space-y-0 plc-w-full plc-flex plc-flex-col md:plc-flex-row plc-items-center plc-justify-center">
-            <SubscriptionCancelButton
-              className="plc-w-3/4 md:plc-w-2/5"
+          {/* Cancel options section */}
+          <div className="plc-w-full plc-mb-6">
+            <h3 className="plc-text-lg plc-font-medium plc-text-gray-900 plc-mb-3">
+              {t("messages.cancelWhen")}
+            </h3>
+
+            <SubscriptionCancelOptions
               subscription={subscriptionToCancel}
             />
+          </div>
+
+          {/* Cancellation reason section */}
+          <div className="plc-w-full plc-mb-6">
+            <h3 className="plc-text-lg plc-font-medium plc-text-gray-900 plc-mb-3">
+              {t("labels.cancelReason")}
+            </h3>
+            <SubscriptionCancelReason />
+          </div>
+
+          {/* Action buttons */}
+          <div className="plc-grid plc-grid-cols-1 md:plc-grid-cols-2 plc-gap-4 plc-w-full plc-mb-4">
+            <SubscriptionCancelButton
+              className="plc-relative plc-w-full plc-rounded-lg plc-bg-gray-900 plc-px-4 plc-py-3 plc-text-sm plc-font-medium plc-text-white plc-transition-all plc-hover:bg-gray-800 plc-disabled:bg-gray-300 plc-disabled:cursor-not-allowed"
+              subscription={subscriptionToCancel}
+            >
+              {t("labels.cancel")}
+            </SubscriptionCancelButton>
 
             <Button
               variant="outline"
-              className="plc-w-3/4 md:plc-w-2/5"
+              className="plc-border plc-border-gray-300 plc-text-gray-700 plc-font-medium  plc-rounded-lg hover:plc-bg-gray-50 plc-transition-colors"
               onClick={() => {
                 switchView("dashboard");
               }}

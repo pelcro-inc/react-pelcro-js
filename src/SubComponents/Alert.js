@@ -15,29 +15,29 @@ export function Alert({
 }) {
   return (
     <div
-      className={`flex items-center justify-between p-2 mt-4 rounded-lg border ${type === "error"
-          ? "bg-red-50 border-red-200 text-red-800"
-          : "bg-green-50 border-green-200 text-green-800"
+      className={`plc-flex plc-items-center plc-justify-between plc-p-2 plc-mt-4 plc-rounded-lg plc-border ${type === "error"
+        ? "plc-bg-red-50 plc-border-red-200 plc-text-red-800"
+        : "plc-bg-green-50 plc-border-green-200 plc-text-green-800"
         } ${className}`}
       {...otherProps}
     >
-      <div className="flex items-center gap-3">
+      <div className="plc-flex plc-items-center plc-gap-3">
         {type === "error" && (
-          <ErrorIcon className="w-5 h-5 text-red-600" />
+          <ErrorIcon className="plc-w-5 plc-h-5 plc-text-red-600" />
         )}
         {type === "success" && (
-          <SuccessIcon className="w-5 h-5 text-green-600" />
+          <SuccessIcon className="plc-w-5 plc-h-5 plc-text-green-600" />
         )}
-        <div className="text-sm font-medium">{children}</div>
+        <div className="plc-text-sm plc-font-medium">{children}</div>
       </div>
       {onClose && (
         <button
           type="button"
-          className="p-1.5 rounded-lg hover:bg-opacity-20 hover:bg-gray-600 transition-colors"
+          className="plc-p-1.5 plc-rounded-lg plc-hover:bg-opacity-20 plc-hover:bg-gray-600 plc-transition-colors"
           aria-label="close alert"
           onClick={onClose}
         >
-          <CloseIcon className="w-4 h-4" />
+          <CloseIcon className="plc-w-4 plc-h-4" />
         </button>
       )}
     </div>

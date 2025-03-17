@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { PaymentMethodDeleteView } from "./PaymentMethodDeleteView";
 import {
   Modal,
   ModalHeader,
   ModalBody,
   ModalFooter
-} from "../../SubComponents/Modal";
+} from "../ui/Modal";
 import ReactGA from "react-ga";
 import ReactGA4 from "react-ga4";
 import { notify } from "../../SubComponents/Notification";
@@ -16,6 +16,8 @@ export const PaymentMethodDeleteModal = (props) => {
   const { t } = useTranslation("paymentMethod");
   const enableReactGA4 = window?.Pelcro?.uiSettings?.enableReactGA4;
   const { resetView } = usePelcro();
+  const [open, setOpen] = useState(true);
+
   const onSuccess = (res) => {
     props.onSuccess?.(res);
     if (enableReactGA4) {
@@ -35,22 +37,21 @@ export const PaymentMethodDeleteModal = (props) => {
 
   return (
     <Modal
+      isOpen={open}
+      onClose={() => setOpen(false)}
       id="pelcro-payment-method-delete-modal"
+      className="plc-profile-menu-width"
       onDisplay={props.onDisplay}
-      onClose={props.onClose}
     >
-      <ModalHeader>
-        <div className="plc-text-left plc-text-gray-900 pelcro-title-wrapper plc-flex-1 plc-flex plc-flex-col plc-justify-center">
-          <h4 className="plc-text-xl plc-font-bold">
-            {t("delete.title")}
-          </h4>
-          <p className="plc-text-sm">{t("delete.subtitle")}</p>
-        </div>
-      </ModalHeader>
+      <ModalHeader
+        hideCloseButton={false}
+        title={t("delete.title")}
+        description={t("delete.subtitle")}
+      />
       <ModalBody>
         <PaymentMethodDeleteView {...props} onSuccess={onSuccess} />
       </ModalBody>
-      <ModalFooter></ModalFooter>
+      <ModalFooter />
     </Modal>
   );
 };

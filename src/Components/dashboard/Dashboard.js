@@ -134,9 +134,9 @@ export function Dashboard({ dashboardLayout = "left", ...props }) {
       return {
         title: t("labels.status.endingSoon"),
         content: getSubscriptionStatusText(sub),
-        textColor: "plc-text-orange-700",
-        bgColor: "plc-bg-orange-100",
-        icon: <ExclamationIcon />
+        textColor: "plc-text-amber-700",
+        bgColor: "plc-bg-amber-100",
+        icon: <ExclamationIcon  />
       };
     }
 
@@ -153,9 +153,9 @@ export function Dashboard({ dashboardLayout = "left", ...props }) {
     if (sub.status === "incomplete") {
       return {
         title: t("labels.status.incomplete"),
-        content: getSubscriptionStatusText(sub),
-        textColor: "plc-text-orange-700",
-        bgColor: "plc-bg-orange-100",
+        content: '',
+        textColor: "plc-text-amber-600",
+        bgColor: "plc-bg-amber-100",
         icon: <ExclamationIcon />
       };
     }
@@ -173,7 +173,7 @@ export function Dashboard({ dashboardLayout = "left", ...props }) {
     return {
       title: t("labels.status.active"),
       content: getSubscriptionStatusText(sub),
-      textColor: "plc-text-green-700",
+      textColor: "plc-text-green-500",
       bgColor: "plc-bg-green-100",
       icon: <CheckMarkIcon />
     };

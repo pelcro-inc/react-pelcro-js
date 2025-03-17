@@ -6,6 +6,7 @@ import {
   RESET_NEW_PASSWORD_ERROR
 } from "../../utils/action-types";
 import { store } from "./PasswordChangeContainer";
+import { Password } from "../../SubComponents/Password";
 
 export function PasswordChangeNewPassword(props) {
   const {
@@ -28,10 +29,27 @@ export function PasswordChangeNewPassword(props) {
     dispatch({ type: RESET_NEW_PASSWORD_ERROR });
   }, [dispatch]);
 
+  // Use the Password component if showStrength is true
+  if (props.showStrength) {
+    return (
+      <Password
+        store={store}
+        showStrength={true}
+        value={newPassword ?? ""}
+        error={newPasswordError}
+        onChange={(e) => handleInputChange(e.target.value)}
+        onBlur={handleBlur}
+        onFocus={handleFocus}
+        {...props}
+      />
+    );
+  }
+
+  // Otherwise use the regular Input component
   return (
     <Input
       type="password"
-      value={newPassword}
+      value={newPassword ?? ""}
       error={newPasswordError}
       onChange={(e) => handleInputChange(e.target.value)}
       onBlur={handleBlur}

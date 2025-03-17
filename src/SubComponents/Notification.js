@@ -101,7 +101,7 @@ toast.confirm = (
     (t) => (
       <div className="plc-space-y-4">
         <p className="plc-font-semibold">{confirmMessage}</p>
-        <div className="plc-space-y-2 plc-sm:space-y-0 plc-sm:space-x-2">
+        <div className="plc-flex plc-space-x-2">
           <Button
             variant="solid"
             className="plc-text-xs plc-bg-red-500 plc-hover:bg-red-600 plc-min-h-0"

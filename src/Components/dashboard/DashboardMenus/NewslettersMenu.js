@@ -110,21 +110,32 @@ export const NewslettersMenu = (props) => {
   return (
     <Card
       id="pelcro-dashboard-newsletters-menu"
-      className="plc-max-w-100% md:plc-max-w-60% plc-m-auto"
+      className="plc-profile-menu-width"
       title={t("labels.Newsletters")}
+      description={t("descriptions.newsletterPreferences", "Select which newsletters you'd like to receive")}
       requestStates={requestStates}
     >
-      <NewsLettersItems
-        handleChange={handleChange}
-        newsletters={newsletters}
-      />
-      <div className="plc-flex plc-justify-center">
-        <Button
-          onClick={handleSubmit}
-          disabled={requestStates.loading}
-        >
-          SUBMIT
-        </Button>
+      <div className="">
+        <NewsLettersItems
+          handleChange={handleChange}
+          newsletters={newsletters}
+        />
+        <div className="plc-flex plc-justify-center plc-mt-8">
+          <Button
+            onClick={handleSubmit}
+            disabled={requestStates.loading}
+            className="plc-bg-primary plc-text-white plc-px-8 plc-py-2 plc-rounded-full plc-font-medium plc-transition-all plc-hover:plc-bg-primary-dark plc-flex plc-items-center plc-gap-2"
+          >
+            {requestStates.loading ? (
+              <>
+                <span className="plc-animate-spin plc-inline-block plc-h-4 plc-w-4 plc-border-2 plc-border-white plc-border-t-transparent plc-rounded-full"></span>
+                <span>{t("buttons.processing", "Processing...")}</span>
+              </>
+            ) : (
+              t("buttons.saveChanges", "Save Changes")
+            )}
+          </Button>
+        </div>
       </div>
     </Card>
   );
@@ -135,32 +146,37 @@ const NewsLettersItems = ({ newsletters, handleChange }) => {
 
   if (newsletters.length === 0) return null;
 
-  return newsletters.map((newsletter) => {
-    return (
-      <>
+  return (
+    <div className="plc-space-y-4">
+      {newsletters.map((newsletter) => (
         <div
           key={newsletter.id}
-          className={`plc-border-b-2 plc-flex plc-items-center plc-justify-between plc-w-full plc-pb-4 plc-mb-4`}
+          className="plc-bg-gray-50 plc-rounded-lg plc-p-4 plc-transition-all plc-hover:plc-bg-gray-100 plc-flex plc-items-center plc-justify-between plc-w-full"
         >
-          <div>
+          <div className="plc-flex-1">
             {newsletter.label && (
-              <>
-                <span className="plc-font-semibold plc-text-gray-500 pelcro-newsletters-plan">
+              <div className="plc-flex plc-flex-col">
+                <span className="plc-font-medium plc-text-gray-800 pelcro-newsletters-plan">
                   {newsletter.label}
                 </span>
-              </>
+                {newsletter.description && (
+                  <span className="plc-text-sm plc-text-gray-500 plc-mt-1">
+                    {newsletter.description}
+                  </span>
+                )}
+              </div>
             )}
           </div>
-          <div className="plc-flex plc-items-center">
+          <div className="plc-ml-4">
             <ToggleSwitch
               isActive={newsletter.selected}
               handleChange={() => handleChange(newsletter.id)}
             />
           </div>
         </div>
-      </>
-    );
-  });
+      ))}
+    </div>
+  );
 };
 
 NewslettersMenu.viewId = "newsletters";

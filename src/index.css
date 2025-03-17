@@ -7,7 +7,85 @@
 @import "./css/forms.css";
 @import "./css/variables.css";
 @import "./css/recaptcha.css";
-/* @import "./SubComponents/Modal.css"; */
+
+
+.plc-subscriptions-menu-width {
+  width: 70%;
+}
+
+.plc-profile-menu-width {
+  width: 90%;
+  max-height: 80vh !important;
+  max-width: 600px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  overflow-y: auto !important;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(155, 155, 155, 0.5) transparent;
+  will-change: transform, opacity;
+  animation: fadeIn 0.4s ease-out;
+}
+
+
+
+/* For Webkit browsers (Chrome, Safari) */
+.plc-profile-menu-width::-webkit-scrollbar {
+  width: 6px;
+  transition: width 0.2s ease;
+}
+
+.plc-profile-menu-width:hover::-webkit-scrollbar {
+  width: 8px;
+}
+
+.plc-profile-menu-width::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 4px;
+}
+
+.plc-profile-menu-width::-webkit-scrollbar-thumb {
+  background-color: rgba(155, 155, 155, 0.5);
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.plc-profile-menu-width::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(125, 125, 125, 0.7);
+}
+
+/* Smooth content loading animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(2px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (min-width: 768px) {
+  .plc-profile-menu-width {
+    width: 97%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .plc-profile-menu-width {
+    width: 40%;
+  }
+}
+
+/* // make plc-subscriptions-menu-width responsive in mobile width 95% */
+@media (max-width: 768px) {
+  .plc-subscriptions-menu-width {
+    width: 95%;
+  }
+}
+
+
 /* sub-components and components */
 /* @import "./SubComponents/Badge.css";
 

@@ -6,7 +6,7 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter
-} from "../../SubComponents/Modal";
+} from "../ui/Modal";
 import { usePelcro } from "../../hooks/usePelcro";
 
 export const SubscriptionCancelModal = ({
@@ -23,22 +23,17 @@ export const SubscriptionCancelModal = ({
       onClose={onClose}
       id="pelcro-subscription-cancel-modal"
     >
-      <ModalHeader>
-        <div className="plc-text-left plc-text-gray-900 pelcro-title-wrapper plc-flex-1 plc-flex plc-flex-col plc-justify-center">
-          <h4 className="plc-text-xl plc-font-bold">
-            {t("labels.title")}
-            <span className="plc-text-gray-400 plc-text-base plc-block">
-              ({subscriptionToCancel.plan.nickname})
-            </span>
-          </h4>
-        </div>
-      </ModalHeader>
+      <ModalHeader
+        hideCloseButton={false}
+        title={t("labels.title")}
+        description={`(${subscriptionToCancel.plan.nickname})`}
+      />
 
-      <ModalBody>
+      <ModalBody >
         <SubscriptionCancelView {...otherProps} />
       </ModalBody>
 
-      <ModalFooter></ModalFooter>
+      <ModalFooter/>
     </Modal>
   );
 };

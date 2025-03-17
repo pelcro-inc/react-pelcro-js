@@ -2,9 +2,14 @@
   "labels": {
     "title": "Cancel subscription",
     "cancelReason": "Cancellation reason",
+    "cancelReasonPlaceholder": "Please tell us why you're cancelling (optional)",
+    "cancelReasonHelp": "Your feedback helps us improve our service",
     "endOn": "End on",
     "endImmediately": "End immediately",
-    "cancel": "Cancel",
+    "endOnDescription": "You'll have access until the end of your billing period",
+    "endImmediatelyDescription": "Your access will be revoked right away",
+    "currentPeriodEndDescription": "You'll have access until the end of your current billing period",
+    "cancel": "Cancel subscription",
     "subCancellation": {
       "goBack": "Go back"
     }

@@ -33,6 +33,7 @@
       "support": "Support",
       "account": "Account",
       "subscriptions": "Subscriptions",
+      "subscriptionsDescription": "View and manage your subscription history.",
       "updatePaymentSource": "Update",
       "updateProfile": "Update",
       "updateAddress": "Update",

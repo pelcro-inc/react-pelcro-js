@@ -42,7 +42,7 @@ export function LoginView(props) {
           {socialLoginEnabled && (
             <div className={`plc-mt-6 plc-grid plc-gap-4 ${auth0LoginEnabled && passwordlessEnabled
               ? 'plc-grid-cols-2'
-              : 'plc-grid-cols-1 plc-sm:grid-cols-3'
+              : 'plc-grid-cols-2 plc-sm:grid-cols-3'
               }`}>
               {/* <FacebookLoginButton className="" /> */}
               <GoogleLoginButton className="" />
