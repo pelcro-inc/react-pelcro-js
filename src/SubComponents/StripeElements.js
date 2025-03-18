@@ -176,7 +176,7 @@ export const PelcroPaymentRequestButton = ({
               currentPlan?.description ||
               orderLabel ||
               "Payment",
-            amount: updatedPrice ?? currentPlan?.amount ?? orderPrice,
+            amount: Math.round(updatedPrice ?? currentPlan?.amount ?? orderPrice),
             pending: false
           },
           requestPayerEmail: false,

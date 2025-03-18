@@ -2104,7 +2104,7 @@ const PaymentMethodContainerWithoutStripe = ({
     state?.paymentRequest?.update({
       total: {
         label: plan.nickname || plan.description,
-        amount: state.updatedPrice
+        amount: Math.round(state.updatedPrice)
       }
     });
   };
