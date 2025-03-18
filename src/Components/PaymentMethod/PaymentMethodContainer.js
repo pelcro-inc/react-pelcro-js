@@ -127,9 +127,9 @@ const PaymentMethodContainerWithoutStripe = ({
   className = "",
   children,
   type,
-  onSuccess = () => {},
-  onGiftRenewalSuccess = () => {},
-  onFailure = () => {},
+  onSuccess = () => { },
+  onGiftRenewalSuccess = () => { },
+  onFailure = () => { },
   ...props
 }) => {
   // Get a reference to Stripe or Elements using hooks.
@@ -585,11 +585,9 @@ const PaymentMethodContainerWithoutStripe = ({
                 window.Pelcro.site.read().default_currency,
               tap_token: result.id,
               funding: result.card.funding,
-              redirect_url: `${
-                window.Pelcro.environment.domain
-              }/webhook/tap/callback/3dsecure?auth_token=${
-                window.Pelcro.user.read().auth_token
-              }&type=verify_card&site_id=${window.Pelcro.siteid}`
+              redirect_url: `${window.Pelcro.environment.domain
+                }/webhook/tap/callback/3dsecure?auth_token=${window.Pelcro.user.read().auth_token
+                }&type=verify_card&site_id=${window.Pelcro.siteid}`
             },
             (err, res) => {
               if (err) {
@@ -1321,15 +1319,15 @@ const PaymentMethodContainerWithoutStripe = ({
 
   const billingAddress = selectedBillingAddressId
     ? window?.Pelcro?.user
-        ?.read()
-        ?.addresses?.find(
-          (address) => address.id == selectedBillingAddressId
-        ) ?? {}
+      ?.read()
+      ?.addresses?.find(
+        (address) => address.id == selectedBillingAddressId
+      ) ?? {}
     : window?.Pelcro?.user
-        ?.read()
-        ?.addresses?.find(
-          (address) => address.type == "billing" && address.is_default
-        ) ?? {};
+      ?.read()
+      ?.addresses?.find(
+        (address) => address.type == "billing" && address.is_default
+      ) ?? {};
 
   const billingDetails = {
     address: {
@@ -1545,7 +1543,8 @@ const PaymentMethodContainerWithoutStripe = ({
   const confirmStripeIntentSetup = (
     response,
     flow,
-    paymentMethodId
+    paymentMethodId,
+    hiddenSetAsDefault = false
   ) => {
     const setupIntent = response.data?.setup_intent;
     if (
@@ -1575,6 +1574,21 @@ const PaymentMethodContainerWithoutStripe = ({
             dispatch({ type: LOADING, payload: false });
             refreshUser();
             onSuccess(res);
+            // if success, set as default if hiddenSetAsDefault is true
+            if (hiddenSetAsDefault) {
+              window.Pelcro.paymentMethods.update(
+                {
+                  auth_token: window.Pelcro.user.read().auth_token,
+                  payment_method_id: paymentMethodId,
+                  is_default: true
+                },
+                (err, res) => {
+                  if (err) {
+                    onFailure(err);
+                  }
+                }
+              );
+            }
             return;
           }
 
@@ -1588,6 +1602,21 @@ const PaymentMethodContainerWithoutStripe = ({
                 content: t("messages.sourceCreated")
               }
             });
+            // if success, set as default if hiddenSetAsDefault is true
+            if (hiddenSetAsDefault) {
+              window.Pelcro.paymentMethods.update(
+                {
+                  auth_token: window.Pelcro.user.read().auth_token,
+                  payment_method_id: paymentMethodId,
+                  is_default: true
+                },
+                (err, res) => {
+                  if (err) {
+                    onFailure(err);
+                  }
+                }
+              );
+            }
             refreshUser();
             onSuccess(res);
             return;
@@ -1640,6 +1669,8 @@ const PaymentMethodContainerWithoutStripe = ({
             return;
           }
 
+
+
           return handlePayment(response?.data?.source);
         });
     } else {
@@ -1678,7 +1709,9 @@ const PaymentMethodContainerWithoutStripe = ({
         },
         (err, res) => {
           if (res?.data?.setup_intent) {
-            return confirmStripeIntentSetup(res, "subCreate");
+            return confirmStripeIntentSetup(res, "subCreate",
+              res.data?.id,
+              props?.hiddenSetAsDefault);
           }
           confirmStripeCardPayment(res, err, true);
         }
@@ -1773,9 +1806,9 @@ const PaymentMethodContainerWithoutStripe = ({
     const mappedOrderItems = isQuickPurchase
       ? [{ sku_id: order.id, quantity: order.quantity }]
       : order.map((item) => ({
-          sku_id: item.id,
-          quantity: item.quantity
-        }));
+        sku_id: item.id,
+        quantity: item.quantity
+      }));
 
     const { couponCode } = state;
 
@@ -1894,11 +1927,13 @@ const PaymentMethodContainerWithoutStripe = ({
 
               if (
                 res.data?.setup_intent?.status ===
-                  "requires_action" ||
+                "requires_action" ||
                 res.data?.setup_intent?.status ===
-                  "requires_confirmation"
+                "requires_confirmation"
               ) {
-                confirmStripeIntentSetup(res, "create");
+                confirmStripeIntentSetup(res, "create",
+                  res.data?.id,
+                  props?.hiddenSetAsDefault);
               } else {
                 if (props?.hiddenSetAsDefault) {
                   window.Pelcro.paymentMethods.update(
@@ -1930,11 +1965,13 @@ const PaymentMethodContainerWithoutStripe = ({
 
                       if (
                         res.data?.setup_intent?.status ===
-                          "requires_action" ||
+                        "requires_action" ||
                         res.data?.setup_intent?.status ===
-                          "requires_confirmation"
+                        "requires_confirmation"
                       ) {
-                        confirmStripeIntentSetup(res, "update");
+                        confirmStripeIntentSetup(res, "update",
+                          res.data?.id,
+                          props?.hiddenSetAsDefault);
                       } else {
                         dispatch({ type: LOADING, payload: false });
                         dispatch({
@@ -1998,7 +2035,9 @@ const PaymentMethodContainerWithoutStripe = ({
           res.data?.setup_intent?.status === "requires_action" ||
           res.data?.setup_intent?.status === "requires_confirmation"
         ) {
-          confirmStripeIntentSetup(res, "update");
+          confirmStripeIntentSetup(res, "update",
+            res.data?.id,
+            props?.hiddenSetAsDefault);
         } else {
           dispatch({
             type: SHOW_ALERT,
@@ -2055,14 +2094,15 @@ const PaymentMethodContainerWithoutStripe = ({
 
               if (
                 res.data?.setup_intent?.status ===
-                  "requires_action" ||
+                "requires_action" ||
                 res.data?.setup_intent?.status ===
-                  "requires_confirmation"
+                "requires_confirmation"
               ) {
                 confirmStripeIntentSetup(
                   res,
                   "replace",
-                  paymentMethodId
+                  paymentMethodId,
+                  props?.hiddenSetAsDefault
                 );
               } else {
                 setTimeout(() => {
@@ -2115,9 +2155,9 @@ const PaymentMethodContainerWithoutStripe = ({
       const mappedOrderItems = isQuickPurchase
         ? [{ sku_id: order.id, quantity: order.quantity }]
         : order.map((item) => ({
-            sku_id: item.id,
-            quantity: item.quantity
-          }));
+          sku_id: item.id,
+          quantity: item.quantity
+        }));
       window.Pelcro.ecommerce.order.create(
         {
           items: mappedOrderItems,
@@ -2265,11 +2305,9 @@ const PaymentMethodContainerWithoutStripe = ({
         card: source?.id
       },
       redirect: {
-        return_url: `${
-          window.Pelcro.environment.domain
-        }/webhook/stripe/callback/3dsecure?auth_token=${
-          window.Pelcro.user.read().auth_token
-        }`
+        return_url: `${window.Pelcro.environment.domain
+          }/webhook/stripe/callback/3dsecure?auth_token=${window.Pelcro.user.read().auth_token
+          }`
       }
     });
   };
@@ -2598,9 +2636,9 @@ const PaymentMethodContainerWithoutStripe = ({
         const mappedOrderItems = isQuickPurchase
           ? [{ sku_id: order.id, quantity: order.quantity }]
           : order.map((item) => ({
-              sku_id: item.id,
-              quantity: item.quantity
-            }));
+            sku_id: item.id,
+            quantity: item.quantity
+          }));
 
         const orderSummaryParams = {
           items: mappedOrderItems,
@@ -2952,10 +2990,10 @@ const PaymentMethodContainerWithoutStripe = ({
       <Provider value={{ state, dispatch }}>
         {children.length
           ? children.map((child, i) => {
-              if (child) {
-                return React.cloneElement(child, { store, key: i });
-              }
-            })
+            if (child) {
+              return React.cloneElement(child, { store, key: i });
+            }
+          })
           : React.cloneElement(children, { store })}
       </Provider>
     </div>
@@ -2974,8 +3012,8 @@ const PaymentMethodContainer = (props) => {
   const stripePromise =
     cardProcessor === "stripe"
       ? loadStripe(window.Pelcro.environment.stripe, {
-          stripeAccount: window.Pelcro.site.read().account_id
-        })
+        stripeAccount: window.Pelcro.site.read().account_id
+      })
       : null;
   const [clientSecret, setClientSecret] = useState();
   const appearance = {
