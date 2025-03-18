@@ -1556,7 +1556,6 @@ const PaymentMethodContainerWithoutStripe = ({
           payment_method: response.data?.source?.object_id
         })
         .then((res) => {
-          console.log("res", res, flow, "hiddenSetAsDefault", hiddenSetAsDefault);
           if (res.error) {
             dispatch({ type: DISABLE_SUBMIT, payload: false });
             dispatch({ type: LOADING, payload: false });
