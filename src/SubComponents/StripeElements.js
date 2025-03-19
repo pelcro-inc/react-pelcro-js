@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useCallback } from "react";
 import {
   PaymentRequestButtonElement,
   PaymentElement,
@@ -39,6 +39,8 @@ export const PelcroPaymentRequestButton = ({
   const { state, dispatch } = useContext(store);
   const { canMakePayment, currentPlan, updatedPrice } = state;
   const { order, set, selectedPaymentMethodId } = usePelcro();
+  
+  // Get order info first
   const getOrderInfo = () => {
     if (!order) {
       return {
@@ -77,11 +79,11 @@ export const PelcroPaymentRequestButton = ({
       label: "Order"
     };
   };
-  const orderPrice = getOrderInfo().price;
-
-  const orderCurrency = getOrderInfo().currency;
-
-  const orderLabel = getOrderInfo().label;
+  const orderInfo = getOrderInfo();
+  const orderPrice = orderInfo.price;
+  const orderCurrency = orderInfo.currency;
+  const orderLabel = orderInfo.label;
+  
   const purchase = (
     gatewayService,
     gatewayToken,
@@ -165,6 +167,9 @@ export const PelcroPaymentRequestButton = ({
 
     const initializePaymentRequest = async () => {
       try {
+        // Get the current price for initialization
+        const currentAmount = Math.round(updatedPrice ?? currentPlan?.amount ?? orderPrice);
+        
         const pr = stripe.paymentRequest({
           country: window.Pelcro.user.location.countryCode || "US",
           currency: (
@@ -176,7 +181,7 @@ export const PelcroPaymentRequestButton = ({
               currentPlan?.description ||
               orderLabel ||
               "Payment",
-            amount: Math.round(updatedPrice ?? currentPlan?.amount ?? orderPrice),
+            amount: currentAmount,
             pending: false
           },
           requestPayerEmail: false,
@@ -269,7 +274,34 @@ export const PelcroPaymentRequestButton = ({
     return () => {
       mounted = false;
     };
-  }, [stripe, currentPlan, updatedPrice, dispatch, order, type]);
+  }, [stripe, currentPlan, dispatch, order, type]); // Removed updatedPrice to prevent reinitializing
+
+  // Simple effect to update the payment request when price changes
+  useEffect(() => {
+    // Only update if we have a valid payment request and are not initializing
+    if (localPaymentRequest && !isInitializing) {
+      try {
+        // Get the current price to update
+        const currentAmount = Math.round(updatedPrice ?? currentPlan?.amount ?? orderPrice);
+        
+        // Update the payment request with the new price
+        localPaymentRequest.update({
+          total: {
+            label: currentPlan?.nickname || 
+                  currentPlan?.description || 
+                  orderLabel || 
+                  "Payment",
+            amount: currentAmount,
+            pending: false
+          }
+        });
+        
+        console.log("Updated payment request with price:", currentAmount);
+      } catch (error) {
+        console.error("Failed to update payment request:", error);
+      }
+    }
+  }, [updatedPrice, localPaymentRequest, isInitializing]); // Added localPaymentRequest and isInitializing because we use them in the condition
 
   if (isInitializing || !canMakePayment || !localPaymentRequest) {
     return null;
