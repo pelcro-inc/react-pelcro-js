@@ -49,7 +49,8 @@ import {
   UPDATE_CYBERSOURCE_SESSION_ID,
   HANDLE_APPLEPAY_SUBSCRIPTION,
   HANDLE_CHECKBOX_CHANGE,
-  SET_IS_DEFAULT_PAYMENT_METHOD
+  SET_IS_DEFAULT_PAYMENT_METHOD,
+  CREATE_ORDER
 } from "../../utils/action-types";
 import {
   getErrorMessages,
@@ -2104,7 +2105,7 @@ const PaymentMethodContainerWithoutStripe = ({
     state?.paymentRequest?.update({
       total: {
         label: plan.nickname || plan.description,
-        amount: state.updatedPrice
+        amount: Math.round(state.updatedPrice)
       }
     });
   };
@@ -2936,6 +2937,16 @@ const PaymentMethodContainerWithoutStripe = ({
             ...state,
             ...action.payload
           });
+
+        case CREATE_ORDER:
+          return SideEffect((state, dispatch) =>
+            purchase(
+              new StripeGateway(),
+              action.payload.id,
+              state,
+              dispatch
+            )
+          );
 
         default:
           return state;

@@ -23,8 +23,11 @@ import {
   SUBSCRIBE,
   SET_PAYMENT_REQUEST,
   SET_CAN_MAKE_PAYMENT,
-  SHOW_ALERT
+  SHOW_ALERT,
+  SUBMIT_PAYMENT,
+  CREATE_ORDER
 } from "../utils/action-types";
+import { useTranslation } from "react-i18next";
 
 export const PelcroPaymentRequestButton = ({
   type,
@@ -38,7 +41,91 @@ export const PelcroPaymentRequestButton = ({
     useState(null);
   const { state, dispatch } = useContext(store);
   const { canMakePayment, currentPlan, updatedPrice } = state;
-  const { order, set, selectedPaymentMethodId } = usePelcro();
+  const { order, selectedAddressId } = usePelcro();
+  const { t } = useTranslation("payment");
+
+  // Error handler following the same pattern as in PaymentMethodContainer
+  const handlePaymentError = (error) => {
+    console.error("Payment error:", error);
+
+    // Handle specific error types
+    if (
+      error.type === "invalid_request_error" &&
+      error.param === "billing_details[address]" &&
+      error.code === "parameter_missing"
+    ) {
+      dispatch({
+        type: SHOW_ALERT,
+        payload: {
+          type: "error",
+          content:
+            "Billing address is required to complete your purchase. Please provide your billing address."
+        }
+      });
+    } else {
+      dispatch({
+        type: SHOW_ALERT,
+        payload: {
+          type: "error",
+          content:
+            getErrorMessages(error) ||
+            error?.message ||
+            "Payment failed. Please try again."
+        }
+      });
+    }
+
+    // Reset UI state
+    dispatch({ type: DISABLE_SUBMIT, payload: false });
+    dispatch({ type: LOADING, payload: false });
+    dispatch({ type: DISABLE_COUPON_BUTTON, payload: false });
+
+    // Call the failure callback if provided
+    if (onFailure) {
+      onFailure(error);
+    }
+  };
+
+  // Get user's address ID for order processing
+  const getAddressId = () => {
+    const userAddresses =
+      window?.Pelcro?.user?.read()?.addresses || [];
+    const selectedShippingAddress = userAddresses.find((addr) => {
+      return (
+        addr.id === selectedAddressId ||
+        (addr.type === "shipping" && addr.is_default)
+      );
+    });
+    const fallbackAddress =
+      userAddresses.length > 0 ? userAddresses[0] : null;
+
+    return (
+      selectedAddressId ||
+      selectedShippingAddress?.id ||
+      fallbackAddress?.id
+    );
+  };
+
+  // Check if address exists for order creation
+  const validateAddressForOrder = () => {
+    const addressId = getAddressId();
+
+    if (!addressId && type === "orderCreate") {
+      dispatch({
+        type: SHOW_ALERT,
+        payload: {
+          type: "error",
+          content:
+            "Address is required to complete the order. Please add a shipping address."
+        }
+      });
+      return false;
+    }
+
+    return true;
+  };
+
+  // Get order info first
   const getOrderInfo = () => {
     if (!order) {
       return {
@@ -77,84 +164,131 @@ export const PelcroPaymentRequestButton = ({
       label: "Order"
     };
   };
-  const orderPrice = getOrderInfo().price;
+  const orderInfo = getOrderInfo();
+  const orderPrice = orderInfo.price;
+  const orderCurrency = orderInfo.currency;
+  const orderLabel = orderInfo.label;
 
-  const orderCurrency = getOrderInfo().currency;
+  // Add these functions at the component level
+  const generate3DSecureSource = (source) => {
+    const listenFor3DSecureCompletionMessage = () => {
+      const retrieveSourceInfoFromIframe = (event) => {
+        const { data } = event;
+        if (data.message === "3DS-authentication-complete") {
+          toggleAuthenticationPendingView(false);
+          retrieveSource(
+            data.sourceId,
+            data.clientSecret,
+            handlePayment
+          );
+          window.removeEventListener(
+            "message",
+            retrieveSourceInfoFromIframe
+          );
+        }
+      };
 
-  const orderLabel = getOrderInfo().label;
-  const purchase = (
-    gatewayService,
-    gatewayToken,
-    state,
-    dispatch
-  ) => {
-    const isQuickPurchase = !Array.isArray(order);
-    const mappedOrderItems = isQuickPurchase
-      ? [{ sku_id: order.id, quantity: order.quantity }]
-      : order.map((item) => ({
-          sku_id: item.id,
-          quantity: item.quantity
-        }));
+      window.addEventListener(
+        "message",
+        retrieveSourceInfoFromIframe
+      );
+    };
 
-    const { couponCode } = state;
+    listenFor3DSecureCompletionMessage();
 
-    const payment = new Payment(gatewayService);
-
-    payment.execute(
-      {
-        type: PAYMENT_TYPES.PURCHASE_ECOMMERCE_ORDER,
-        token: gatewayToken,
-        isExistingSource: Boolean(selectedPaymentMethodId),
-        items: mappedOrderItems,
-        addressId: state.selectedAddressId,
-        couponCode
+    return stripe.createSource({
+      type: "three_d_secure",
+      amount: Math.round(
+        updatedPrice ?? currentPlan?.amount ?? orderPrice
+      ),
+      currency: (
+        currentPlan?.currency || orderCurrency
+      ).toLowerCase(),
+      three_d_secure: {
+        card: source?.id
       },
-      (err, orderResponse) => {
-        if (err) {
-          toggleAuthenticationSuccessPendingView(false);
-          dispatch({ type: DISABLE_SUBMIT, payload: false });
-          dispatch({ type: LOADING, payload: false });
-          onFailure?.(err);
-          return dispatch({
-            type: SHOW_ALERT,
-            payload: {
-              type: "error",
-              content: getErrorMessages(err)
-            }
-          });
-        }
-
-        if (isQuickPurchase) {
-          set({ order: null });
-        } else {
-          set({ order: null, cartItems: [] });
-        }
-
-        window.Pelcro.user.refresh(
-          {
-            auth_token: window.Pelcro?.user?.read()?.auth_token
-          },
-          (err, res) => {
-            dispatch({ type: DISABLE_SUBMIT, payload: false });
-            dispatch({ type: LOADING, payload: false });
-            toggleAuthenticationSuccessPendingView(false);
-            if (err) {
-              onFailure?.(err);
-              return dispatch({
-                type: SHOW_ALERT,
-                payload: {
-                  type: "error",
-                  content: getErrorMessages(err)
-                }
-              });
-            }
-            onSuccess?.(orderResponse);
-          }
-        );
+      redirect: {
+        return_url: `${
+          window.Pelcro.environment.domain
+        }/webhook/stripe/callback/3dsecure?auth_token=${
+          window.Pelcro.user.read().auth_token
+        }`
       }
-    );
+    });
   };
 
+  const retrieveSource = async (
+    sourceId,
+    clientSecret,
+    paymentHandler
+  ) => {
+    try {
+      const { source } = await stripe.retrieveSource({
+        id: sourceId,
+        client_secret: clientSecret
+      });
+
+      if (source?.status === "failed") {
+        return handlePaymentError({
+          error: {
+            message: t("messages.cardAuthFailed")
+          }
+        });
+      }
+
+      if (source?.status === "chargeable") {
+        paymentHandler(source);
+      }
+    } catch (error) {
+      handlePaymentError(error);
+    }
+  };
+  const toggleAuthenticationPendingView = (show, source) => {
+    const cardAuthContainer = document.querySelector(
+      ".card-authentication-container"
+    );
+
+    if (show) {
+      injectCardAuthenticationIframe(source);
+      cardAuthContainer?.classList.remove("plc-hidden");
+      cardAuthContainer?.classList.add("plc-flex");
+    } else {
+      cardAuthContainer?.classList.add("plc-hidden");
+      cardAuthContainer?.classList.remove("plc-flex");
+    }
+  };
+
+  const injectCardAuthenticationIframe = (source) => {
+    const cardAuthContainer = document.querySelector(
+      ".card-authentication-container"
+    );
+
+    const iframe = document.createElement("iframe");
+    iframe.src = source?.redirect?.url;
+    iframe.style =
+      "position: absolute; width: 100%; height: 100%; left: 0; top: 0; bottom: 0; z-index: 10;";
+
+    cardAuthContainer?.appendChild(iframe);
+  };
+  const handlePayment = (source) => {
+    if (type === "orderCreate") {
+      dispatch({
+        type: CREATE_ORDER,
+        payload: {
+          id: source.id,
+          isExistingSource: false
+        }
+      });
+    } else {
+      dispatch({
+        type: SUBSCRIBE,
+        payload: {
+          id: source.id,
+          isExistingSource: false
+        }
+      });
+    }
+  };
   useEffect(() => {
     if (!stripe) {
       setIsInitializing(false);
@@ -165,6 +299,11 @@ export const PelcroPaymentRequestButton = ({
 
     const initializePaymentRequest = async () => {
       try {
+        // Get the current price for initialization
+        const currentAmount = Math.round(
+          updatedPrice ?? currentPlan?.amount ?? orderPrice
+        );
+
         const pr = stripe.paymentRequest({
           country: window.Pelcro.user.location.countryCode || "US",
           currency: (
@@ -176,7 +315,7 @@ export const PelcroPaymentRequestButton = ({
               currentPlan?.description ||
               orderLabel ||
               "Payment",
-            amount: updatedPrice ?? currentPlan?.amount ?? orderPrice,
+            amount: currentAmount,
             pending: false
           },
           requestPayerEmail: false,
@@ -186,32 +325,53 @@ export const PelcroPaymentRequestButton = ({
 
         pr.on("source", async (event) => {
           try {
+            // Set loading states
             dispatch({ type: DISABLE_COUPON_BUTTON, payload: true });
             dispatch({ type: DISABLE_SUBMIT, payload: true });
             dispatch({ type: LOADING, payload: true });
 
-            event.complete("success");
+            // For order creation, validate address
+            if (
+              type === "orderCreate" &&
+              !validateAddressForOrder()
+            ) {
+              event.complete("fail");
+              dispatch({
+                type: DISABLE_COUPON_BUTTON,
+                payload: false
+              });
+              dispatch({ type: DISABLE_SUBMIT, payload: false });
+              dispatch({ type: LOADING, payload: false });
+              return;
+            }
 
+            // Add 3D Secure check here
             if (event.source?.card?.three_d_secure === "required") {
               return generate3DSecureSource(event.source).then(
                 ({ source, error }) => {
                   if (error) {
                     return handlePaymentError(error);
                   }
+
                   toggleAuthenticationPendingView(true, source);
                 }
               );
             }
 
+            event.complete("success");
+
             // Handle different payment types
             if (type === "orderCreate") {
-              purchase(
-                new StripeGateway(),
-                event.source.id,
-                state,
-                dispatch
-              );
+              // Dispatch to CREATE_ORDER with the source ID to use common order payment logic
+              dispatch({
+                type: CREATE_ORDER,
+                payload: {
+                  id: event.source.id,
+                  isExistingSource: false
+                }
+              });
             } else {
+              // For subscriptions, use the SUBSCRIBE action
               dispatch({
                 type: SUBSCRIBE,
                 payload: {
@@ -221,20 +381,8 @@ export const PelcroPaymentRequestButton = ({
               });
             }
           } catch (error) {
-            dispatch({
-              type: SHOW_ALERT,
-              payload: {
-                type: "error",
-                content:
-                  error.message || "Payment failed. Please try again."
-              }
-            });
-
             event.complete("fail");
-
-            dispatch({ type: DISABLE_COUPON_BUTTON, payload: false });
-            dispatch({ type: DISABLE_SUBMIT, payload: false });
-            dispatch({ type: LOADING, payload: false });
+            handlePaymentError(error);
           }
         });
 
@@ -269,8 +417,42 @@ export const PelcroPaymentRequestButton = ({
     return () => {
       mounted = false;
     };
-  }, [stripe, currentPlan, updatedPrice, dispatch, order, type]);
+  }, [stripe, currentPlan, dispatch, order, type]);
 
+  // Simple effect to update the payment request when price changes
+  useEffect(() => {
+    // Only update if we have a valid payment request and are not initializing
+    if (localPaymentRequest && !isInitializing) {
+      try {
+        // Get the current price to update
+        const currentAmount = Math.round(
+          updatedPrice ?? currentPlan?.amount ?? orderPrice
+        );
+
+        // Update the payment request with the new price
+        localPaymentRequest.update({
+          total: {
+            label:
+              currentPlan?.nickname ||
+              currentPlan?.description ||
+              orderLabel ||
+              "Payment",
+            amount: currentAmount,
+            pending: false
+          }
+        });
+
+        console.log(
+          "Updated payment request with price:",
+          currentAmount
+        );
+      } catch (error) {
+        console.error("Failed to update payment request:", error);
+      }
+    }
+  }, [updatedPrice, localPaymentRequest, isInitializing]);
+
+  // If we have no payment request or Apple Pay is not available, return nothing
   if (isInitializing || !canMakePayment || !localPaymentRequest) {
     return null;
   }
