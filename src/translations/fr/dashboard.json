@@ -8,6 +8,7 @@
     "price": "Prix",
     "description": "Description",
     "expiry": "Expiration",
+    "paymentMethodCreate": "Créer un moyen de paiement",
     "status": {
       "title": "Statut",
       "active": "Active",

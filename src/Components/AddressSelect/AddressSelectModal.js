@@ -6,7 +6,7 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter
-} from "../../SubComponents/Modal";
+} from "../ui/Modal";
 import { ReactComponent as ArrowLeft } from "../../assets/arrow-left.svg";
 import { usePelcro } from "../../hooks/usePelcro";
 
@@ -66,9 +66,17 @@ export const AddressSelectModal = ({
   };
 
   return (
-    <Modal onDisplay={onDisplay} id="pelcro-address-select-modal">
-      <ModalHeader onCloseModal={onClose}>
-        <div className="plc-text-left plc-text-gray-900 pelcro-title-wrapper plc-flex-1 plc-flex plc-flex-col plc-justify-center">
+    <Modal
+      onDisplay={onDisplay}
+      onClose={onClose}
+      id="pelcro-address-select-modal"
+      className="plc-profile-menu-width"
+    >
+      <ModalHeader
+        hideCloseButton={false}
+        onCloseModal={onClose}
+      >
+        <div className="plc-relative plc-w-full">
           {showBackButton && (
             <button
               type="button"
@@ -78,11 +86,17 @@ export const AddressSelectModal = ({
               <ArrowLeft />
             </button>
           )}
-          <h4 className="plc-text-xl plc-font-bold">
-            {t("selectAddressTitle")}
-          </h4>
-          <p className="plc-text-sm">{t("selectAddressSubtitle")}</p>
+          <div className="plc-flex plc-flex-col plc-items-center plc-justify-center plc-w-full">
+            <h4 className="plc-text-2xl plc-font-bold plc-text-gray-800">
+              {t("selectAddressTitle")}
+            </h4>
+            <p className="plc-mt-1 plc-text-gray-500 ">
+              {t("selectAddressSubtitle")}
+            </p>
+          </div>
         </div>
+
+
       </ModalHeader>
       <ModalBody>
         <AddressSelectView
@@ -95,7 +109,7 @@ export const AddressSelectModal = ({
           }
         />
       </ModalBody>
-      <ModalFooter></ModalFooter>
+      <ModalFooter />
     </Modal>
   );
 };

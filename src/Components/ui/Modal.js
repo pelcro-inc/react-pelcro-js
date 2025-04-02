@@ -5,7 +5,7 @@ import { usePelcro } from "../../hooks/usePelcro";
 import Authorship from "../../Components/common/Authorship";
 import { Dialog, DialogBackdrop } from "@headlessui/react";
 import { Transition } from "@headlessui/react";
-
+import { ReactComponent as ArrowLeft } from "../../assets/arrow-left.svg";
 export function Modal({
   id,
   bg = "plc-bg-white",
@@ -95,6 +95,8 @@ export const ModalHeader = ({
   description,
   children,
   fromDashboard,
+  showBackButton = false,
+  handleBackButton,
   ...props
 }) => {
   const resetView = usePelcro((state) => state.resetView);
@@ -119,16 +121,25 @@ export const ModalHeader = ({
         </button>
       )}
 
-      <div className="">
-        {/* <img
-          alt="business logo"
-          className={`plc-max-h-14 plc-my-2 pelcro-modal-logo ${window.Pelcro?._showModalHeader ? "" : "plc-hidden"}`}
-          src={window.Pelcro.site.read().logo?.url}
-        /> */}
-        {title && <Dialog.Title className="plc-text-2xl plc-font-bold plc-text-gray-800">{title}</Dialog.Title>}
-        {description && <Dialog.Description className="plc-mt-2 plc-text-gray-500">{description}</Dialog.Description>}
-      </div>
-
+      <div className="plc-relative plc-w-full">
+          {showBackButton && (
+            <button
+              type="button"
+              onClick={handleBackButton}
+              className="plc-absolute plc-w-6 plc-text-gray-500 focus:plc-text-black plc-z-max plc-top-1/2 plc-left-6 plc-transform plc--translate-y-1/2 plc-border-0 hover:plc-text-black hover:plc-shadow-none plc-bg-transparent hover:plc-bg-transparent focus:plc-bg-transparent"
+            >
+              <ArrowLeft />
+            </button>
+          )}
+          <div className="plc-flex plc-flex-col plc-items-center plc-justify-center plc-w-full">
+            <h4 className="plc-text-2xl plc-font-bold plc-text-gray-800">
+            {title}
+            </h4>
+            <p className="plc-mt-1 plc-text-gray-500 ">
+              {description}
+            </p>
+          </div>
+        </div>
       {children}
     </div>
   );
@@ -142,7 +153,7 @@ export const ModalBody = ({ className = "", children }) => {
 
 export const ModalFooter = ({ className = "", children }) => {
   return (
-    <div className={`plc-flex plc-flex-col plc-items-center plc-space-y-5 ${className}`}>
+    <div className={`plc-flex plc-flex-col plc-items-center plc-space-y-5 plc-mt-8 ${className}`}>
       {children}
       <Authorship />
     </div>

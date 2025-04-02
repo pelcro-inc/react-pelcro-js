@@ -18,8 +18,8 @@
   },
   "buttons": {
     "submit": "Submit",
-    "selectAddress": "Select address",
-    "addAddress": "Add new address"
+    "selectAddress": "Select Address",
+    "addAddress": "Add New Address"
   },
   "messages": {
     "addressUpdated": "The address was successfully updated!",

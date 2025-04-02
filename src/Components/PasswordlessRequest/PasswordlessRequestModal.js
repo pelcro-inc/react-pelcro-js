@@ -48,7 +48,7 @@ export function PasswordlessRequestModal({ onDisplay, onClose, ...props }) {
       </ModalBody>
 
       <ModalFooter>
-        <p className="plc-text-center plc-text-sm plc-text-gray-500 plc-mt-8">
+        <p className="plc-text-center plc-text-sm plc-text-gray-500 ">
           {t("messages.backToLogin") + " "}
           <Link
             onClick={onLoginClick}

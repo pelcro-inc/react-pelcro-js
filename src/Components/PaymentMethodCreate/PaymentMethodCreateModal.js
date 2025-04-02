@@ -6,13 +6,15 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter
-} from "../../SubComponents/Modal";
+} from "../ui/Modal";
 import ReactGA from "react-ga";
 import ReactGA4 from "react-ga4";
 
 export const PaymentMethodCreateModal = (props) => {
-  const [t] = useTranslation("paymentMethod");
+  const { t } = useTranslation("paymentMethod");
+  const [open, setOpen] = React.useState(true);
   const enableReactGA4 = window?.Pelcro?.uiSettings?.enableReactGA4;
+
   const onSuccess = (res) => {
     props.onSuccess?.(res);
     if (enableReactGA4) {
@@ -30,21 +32,21 @@ export const PaymentMethodCreateModal = (props) => {
 
   return (
     <Modal
+      isOpen={open}
+      onClose={() => setOpen(false)}
       id="pelcro-payment-method-create-modal"
       onDisplay={props.onDisplay}
-      onClose={props.onClose}
+      className="plc-profile-menu-width"
     >
-      <ModalHeader>
-        <div className="plc-text-left plc-text-gray-900 pelcro-title-wrapper plc-flex-1 plc-flex plc-flex-col plc-justify-center">
-          <h4 className="plc-text-xl plc-font-bold">
-            {t("create.title")}
-          </h4>
-          <p className="plc-text-sm">{t("create.subtitle")}</p>
-        </div>
-      </ModalHeader>
+      <ModalHeader
+        title={t("create.title")}
+        description={t("create.subtitle")}
+      />
+
       <ModalBody>
         <PaymentMethodCreateView {...props} onSuccess={onSuccess} />
       </ModalBody>
+
       <ModalFooter></ModalFooter>
     </Modal>
   );

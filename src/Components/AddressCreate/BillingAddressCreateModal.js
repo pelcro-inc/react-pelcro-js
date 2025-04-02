@@ -6,7 +6,7 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter
-} from "../../SubComponents/Modal";
+} from "../../Components/ui/Modal";
 import { ReactComponent as ArrowLeft } from "../../assets/arrow-left.svg";
 import { usePelcro } from "../../hooks/usePelcro";
 
@@ -89,33 +89,33 @@ export const BillingAddressCreateModal = ({
       id="pelcro-address-create-modal"
       onDisplay={onDisplay}
       onClose={onClose}
+      className="pelcro-modal-wrapper"
     >
-      <ModalHeader>
-        <div className="plc-text-left plc-text-gray-900 pelcro-title-wrapper plc-flex-1 plc-flex plc-flex-col plc-justify-center">
+      <ModalHeader className="pelcro-modal-header">
+        <div className="plc-flex plc-items-center plc-justify-between plc-w-full">
           <button
             type="button"
             onClick={goBack}
-            className="plc-absolute plc-w-6 plc-text-gray-500 focus:plc-text-black plc-z-max plc-top-1/2 plc-left-6 plc-transform plc--translate-y-1/2 plc-border-0 hover:plc-text-black hover:plc-shadow-none plc-bg-transparent hover:plc-bg-transparent focus:plc-bg-transparent"
+            className="plc-flex plc-items-center plc-justify-center plc-p-2 plc-text-gray-500 hover:plc-text-black focus:plc-outline-none"
           >
-            <ArrowLeft />
+            <ArrowLeft className="plc-w-5 plc-h-5" />
           </button>
-          <h4 className="plc-text-xl plc-font-bold">
+          <h4 className="plc-text-xl plc-font-semibold plc-text-center plc-flex-1">
             {t("titleBilling")}
           </h4>
+          <div className="plc-w-8"></div>
         </div>
       </ModalHeader>
-      <ModalBody>
+      <ModalBody className="plc-pt-6">
         <AddressCreateView
           {...otherProps}
           type="billing"
           onSuccess={onSuccess}
-          // onGiftRedemptionSuccess={onGiftRedemptionSuccess}
-          // onMembershipAdressUpdateSuccess={
-          //   onMembershipAdressUpdateSuccess
-          // }
         />
       </ModalBody>
-      <ModalFooter></ModalFooter>
+      <ModalFooter className="pelcro-modal-footer ">
+        {/* You can add footer content here if needed */}
+      </ModalFooter>
     </Modal>
   );
 };

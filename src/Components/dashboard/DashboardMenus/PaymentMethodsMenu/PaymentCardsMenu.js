@@ -71,7 +71,7 @@ export const PaymentCardsMenu = (props) => {
       <AddNew
         title={t("labels.addCard")}
         onClick={displaySourceCreate}
-        className="plc-mt-6 plc-w-full sm:plc-w-full plc-max-w-full plc-min-w-full"
+        className="plc-mt-6 plc-w-full sm:plc-w-full plc-max-w-full plc-min-w-full plc-flex plc-justify-center plc-items-center plc-rounded-lg plc-border plc-border-gray-200 plc-bg-gray-50/30 plc-px-4 plc-py-3 plc-text-sm plc-text-gray-800 plc-transition-all hover:plc-bg-white hover:plc-border-gray-800 hover:plc-shadow-sm"
       />
     </Card>
   );

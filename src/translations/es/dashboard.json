@@ -6,6 +6,7 @@
     "plan": "Plan",
     "description": "Descripción",
     "expiry": "Expiración",
+    "paymentMethodCreate": "Crear método de pago",
     "status": {
       "title": "Estado",
       "active": "Activa",

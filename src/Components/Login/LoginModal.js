@@ -128,7 +128,7 @@ export function LoginModal({ onDisplay, onClose, ...props }) {
         />
       </ModalBody>
       <ModalFooter>
-        <p className="plc-text-center plc-text-sm plc-text-gray-500 plc-mt-8">
+        <p className="plc-text-center plc-text-sm plc-text-gray-500">
           {t("messages.dontHaveAccount") + " "}
           <Link
             id="pelcro-link-create-account"

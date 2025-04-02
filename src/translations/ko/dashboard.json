@@ -8,6 +8,7 @@
     "price": "가격",
     "description": "설명",
     "expiry": "만료",
+    "paymentMethodCreate": "결제 방법 생성",
     "status": {
       "title": "상태",
       "active": "활성화",
