@@ -12,7 +12,8 @@
     "firstName": "Nombre",
     "lastName": "Apellido",
     "required": "obligatorio",
-    "isDefault": "Establecer como dirección predeterminada"
+    "isDefault": "Establecer como dirección predeterminada",
+    "haveCoupon": "¿Tienes un cupón?"
   },
   "buttons": {
     "submit": "Enviar",

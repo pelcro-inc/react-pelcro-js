@@ -10,6 +10,7 @@
     "title": "Selecciona un método de pago",
     "subtitle": "Selecciona uno de tus métodos guardados o paga con uno nuevo",
     "expires": "Expira",
+    "paymentMethod": "Método de pago",
     "buttons": {
       "addPaymentMethod": "Paga con otro método de pago",
       "selectPaymentMethod": "Continuar",

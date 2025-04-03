@@ -70,7 +70,7 @@ export function PaymentMethodView({
   const isUserPhone = Boolean(window.Pelcro.user.read().phone);
 
   return (
-    <div className="plc-flex plc-flex-col plc-items-center plc-mt-4 plc-px-8 md:plc-px-0 pelcro-payment-block">
+    <div className="plc-flex plc-flex-col plc-items-center plc-mt-3 plc-px-8 md:plc-px-0 pelcro-payment-block">
       {/* {order && (
         <div className="plc-w-full plc-p-2 plc-mb-4 plc-font-semibold plc-text-center plc-text-gray-900 plc-bg-gray-100 plc-border plc-border-gray-200">
           <p className="plc-text-gray-600">
@@ -170,12 +170,13 @@ export function PaymentMethodView({
 
               {/* Coupon section */}
               {showCoupon && (
-                <div className="plc-mb-2">
+                <div className="plc-text-left plc-text-sm plc-text-gray-900 plc-mt-2">
                   <CouponCode />
-                  <DiscountedPrice />
+                  <DiscountedPrice className="plc-text-gray-900" />
                 </div>
               )}
 
+              
               <TaxAmount />
 
               {type === "updatePaymentSource" && (
@@ -191,9 +192,9 @@ export function PaymentMethodView({
                   isSubmitDisabled={isSubmitDisabled}
                 />
                 {showExternalPaymentMethods &&
-                !supportsVantiv &&
-                !supportsCybersource &&
-                !supportsTap ? (
+                  !supportsVantiv &&
+                  !supportsCybersource &&
+                  !supportsTap ? (
                   <>
                     <PelcroPaymentRequestButton
                       type={type}

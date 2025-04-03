@@ -3,9 +3,10 @@ import Authorship from "../common/Authorship";
 import { useTranslation } from "react-i18next";
 import {
   Modal,
+  ModalHeader,
   ModalBody,
   ModalFooter
-} from "../../SubComponents/Modal";
+} from "../ui/Modal";
 import { Button } from "../../SubComponents/Button";
 import { ReactComponent as CheckMark } from "../../assets/check-solid.svg";
 import { Badge } from "../../SubComponents/Badge";
@@ -22,8 +23,8 @@ export const OrderConfirmModal = (props) => {
   const latestOrderDiscount = latestOrder?.coupon?.percent_off;
 
   const { t } = useTranslation("shop");
-
   const { resetView } = usePelcro();
+  const [open, setOpen] = React.useState(true);
 
   const onClose = () => {
     props?.onClose?.();
@@ -33,66 +34,71 @@ export const OrderConfirmModal = (props) => {
   return (
     <Modal
       id="pelcro-order-confirm-modal"
-      className="plc-border-t-8 plc-border-primary-500"
-      onClose={props.onClose}
+      className="plc-max-w-2xl plc-border-t-8 plc-border-primary-500"
+      onClose={onClose}
       onDisplay={props.onDisplay}
+      isOpen={open}
+      onCloseModal={() => setOpen(false)}
     >
-      <ModalBody>
+      <ModalHeader
+        hideCloseButton={false}
+        title={t("messages.orderConfirmed.title")}
+        description={t("messages.orderConfirmed.body")}
+        showTitleInLeft={false}
+      >
+        <div className="plc-flex plc-justify-center plc-mt-4">
+          <CheckMark className="plc-w-24 plc-h-24 plc-text-green-500" />
+        </div>
+      </ModalHeader>
+
+      <ModalBody className="plc-mt-4">
         <div id="pelcro-order-confirm-view">
-          <div className="plc-flex plc-flex-col plc-items-center">
-            <CheckMark className="plc-w-32 plc-my-4 plc-text-green-500" />
-            <div className="plc-text-center plc-text-gray-900">
-              <h4 className="plc-mb-4 plc-text-3xl">
-                {t("messages.orderConfirmed.title")}
-              </h4>
-              <p>{t("messages.orderConfirmed.body")}</p>
-              <p>{t("messages.haveQuestions")}</p>
-            </div>
+          <div className="plc-text-center plc-text-gray-600 plc-mb-6">
+            <p>{t("messages.haveQuestions")}</p>
           </div>
-          <div className="plc-mt-5 pelcro-order-summary-wrapper">
-            <p className="plc-font-bold pelcro-order-summary-title">
+
+          <div className="plc-mt-5 plc-bg-gray-50 plc-p-4 plc-rounded-lg plc-shadow-sm">
+            <p className="plc-font-bold plc-text-gray-800 plc-mb-3 plc-text-lg">
               {t("labels.summary")}
             </p>
+
             {latestOrder?.items.map((item) => {
-              const itemImage =
-                window.Pelcro.ecommerce.products.getBySkuId(
-                  item.product_sku_id
-                ).image;
+              const itemImage = window.Pelcro.ecommerce.products.getBySkuId(
+                item.product_sku_id
+              ).image;
 
               return (
                 <div
                   key={item.product_sku_id}
                   id={`pelcro-summary-product-${item.product_sku_id}`}
-                  className="plc-flex plc-items-center plc-pt-2 plc-mt-2 plc-border-t plc-border-gray-400 plc-min-h-12 plc-justify-evenly pelcro-summary-product-wrapper"
+                  className="plc-flex plc-items-center plc-pt-3 plc-mt-3 plc-border-b plc-border-gray-200 plc-min-h-12 plc-justify-between plc-pb-6"
                 >
-                  <div className="plc-w-1/4 pelcro-summary-image-wrapper">
-                    {itemImage && (
-                      <Badge content={item.quantity}>
-                        <img
-                          className="plc-object-contain plc-w-20 plc-h-20 pelcro-summary-product-image"
-                          alt={`image of ${item.product_sku_name}`}
-                          src={itemImage}
-                        />
-                      </Badge>
-                    )}
+                  <div className="plc-flex plc-items-center plc-gap-4">
+                    <div className="pelcro-summary-image-wrapper">
+                      {itemImage && (
+                        <Badge content={item.quantity}>
+                          <img
+                            className="plc-object-contain plc-w-16 plc-h-16 plc-rounded-md"
+                            alt={`image of ${item.product_sku_name}`}
+                            src={itemImage}
+                          />
+                        </Badge>
+                      )}
+                    </div>
+                    <div className="plc-break-words plc-text-gray-700">
+                      {item.product_sku_name}
+                    </div>
                   </div>
-                  <div className="plc-w-1/2 plc-break-words pelcro-summary-product-name">
-                    {item.product_sku_name}
-                  </div>
-                  <div className="plc-w-1/5 plc-text-center pelcro-summary-product-price">
-                    {calcAndFormatItemsTotal(
-                      [item],
-                      latestOrder?.currency
-                    )}
+                  <div className="plc-text-right plc-font-medium plc-text-gray-900">
+                    {calcAndFormatItemsTotal([item], latestOrder?.currency)}
                   </div>
                 </div>
               );
             })}
-            <div className="plc-flex plc-items-center plc-justify-between plc-pt-2 plc-mt-2 plc-font-bold">
-              <dt className="plc-mr-1 pelcro-summary-total-text">
-                {t("labels.shippingRate")}
-              </dt>
-              <dd className="pelcro-summary-total">
+
+            <div className="plc-flex plc-items-center plc-justify-between plc-pt-3 plc-mt-3 plc-font-medium plc-text-gray-600 ">
+              <dt>{t("labels.shippingRate")}</dt>
+              <dd className="plc-text-gray-900">
                 {getFormattedPriceByLocal(
                   latestOrder.shipping_rate,
                   latestOrder?.currency,
@@ -100,12 +106,15 @@ export const OrderConfirmModal = (props) => {
                 )}
               </dd>
             </div>
-            <div className="plc-flex plc-items-center plc-justify-between plc-pt-2 plc-mt-2 plc-font-bold plc-border-t plc-border-gray-400 pelcro-summary-total-wrapper">
-              <dt className="plc-mr-1 pelcro-summary-total-text">
-                {t("labels.total")}
-              </dt>
-              <dd className="pelcro-summary-total">
-                {latestOrderDiscount && `(-${latestOrderDiscount}%) `}
+
+            <div className="plc-flex plc-items-center plc-justify-between plc-pt-4 plc-mt-4 plc-font-bold plc-border-t plc-border-gray-300 plc-text-lg">
+              <dt>{t("labels.total")}</dt>
+              <dd className="plc-text-primary-600">
+                {latestOrderDiscount && (
+                  <span className="plc-text-green-600 plc-text-sm plc-font-medium plc-mr-2">
+                    (-{latestOrderDiscount}%)
+                  </span>
+                )}
                 {getFormattedPriceByLocal(
                   latestOrder?.amount,
                   latestOrder?.currency,
@@ -114,11 +123,13 @@ export const OrderConfirmModal = (props) => {
               </dd>
             </div>
           </div>
-          <div className="plc-flex plc-justify-center plc-mt-6">
+
+          <div className="plc-flex plc-justify-center plc-mt-8">
             <Button
               id="pelcro-submit"
               onClick={onClose}
               autoFocus={true}
+              className="plc-w-full plc-max-w-xs plc-py-3"
             >
               {t("buttons.continue")}
             </Button>

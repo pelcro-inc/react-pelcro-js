@@ -12,7 +12,8 @@
     "firstName": "이름",
     "lastName": "성",
     "required": "필수 항목",
-    "isDefault": "기본 주소로 설정"
+    "isDefault": "기본 주소로 설정",
+    "haveCoupon": "쿠폰이 있습니까?"
   },
   "buttons": {
     "submit": "제출",

@@ -6,18 +6,19 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter
-} from "../../SubComponents/Modal";
+} from "../ui/Modal";
 import { usePelcro } from "../../hooks/usePelcro";
 import { ReactComponent as ArrowLeft } from "../../assets/arrow-left.svg";
 
-export const OrderCreateModal = ({
+export function OrderCreateModal({
   onDisplay,
   onClose,
   showExternalPaymentMethods = false,
   ...otherProps
-}) => {
+}) {
   const { switchView, order } = usePelcro();
   const { t } = useTranslation("payment");
+  const [open, setOpen] = React.useState(true);
 
   const onSuccess = () => {
     otherProps.onSuccess?.();
@@ -59,23 +60,15 @@ export const OrderCreateModal = ({
       id="pelcro-order-create-modal"
       className="plc-max-w-7xl"
       onDisplay={onDisplay}
+      onClose={onClose}
     >
-      <ModalHeader onCloseModal={onClose}>
-        <div className="plc-text-left plc-text-gray-900 pelcro-title-wrapper plc-flex-1 plc-flex plc-flex-col plc-justify-center">
-          {showBackButton && (
-            <button
-              type="button"
-              onClick={goBack}
-              className="plc-absolute plc-w-6 plc-text-gray-500 focus:plc-text-black plc-z-max plc-top-1/2 plc-left-6 plc-transform plc--translate-y-1/2 plc-border-0 hover:plc-text-black hover:plc-shadow-none plc-bg-transparent hover:plc-bg-transparent focus:plc-bg-transparent"
-            >
-              <ArrowLeft />
-            </button>
-          )}
-          <h4 className="plc-text-xl plc-font-bold plc-text-center">
-            {t("labels.checkout.title")}
-          </h4>
-        </div>
-      </ModalHeader>
+      <ModalHeader
+        hideCloseButton={false}
+        title={t("labels.checkout.title")}
+        showBackButton={showBackButton}
+        handleBackButton={goBack}
+        showTitleInLeft={false}
+      />
       <ModalBody>
         <OrderCreateView
           {...otherProps}
@@ -86,6 +79,6 @@ export const OrderCreateModal = ({
       <ModalFooter></ModalFooter>
     </Modal>
   );
-};
+}
 
 OrderCreateModal.viewId = "order-create";

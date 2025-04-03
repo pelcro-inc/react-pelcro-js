@@ -40,7 +40,10 @@ export const NewslettersMenu = (props) => {
       return newsletter;
     });
     setNewsletters(newNewsLetters);
+    // Automatically submit after toggling
+    handleSubmit();
   };
+  
 
   const handleSubmit = () => {
     const callback = (err, res) => {
@@ -120,7 +123,7 @@ export const NewslettersMenu = (props) => {
           handleChange={handleChange}
           newsletters={newsletters}
         />
-        <div className="plc-flex plc-justify-center plc-mt-8">
+        {/* <div className="plc-flex plc-justify-center plc-mt-8">
           <Button
             onClick={handleSubmit}
             disabled={requestStates.loading}
@@ -135,7 +138,7 @@ export const NewslettersMenu = (props) => {
               t("buttons.saveChanges", "Save Changes")
             )}
           </Button>
-        </div>
+        </div> */}
       </div>
     </Card>
   );

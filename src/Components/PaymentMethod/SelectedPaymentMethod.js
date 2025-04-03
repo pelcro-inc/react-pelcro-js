@@ -4,6 +4,7 @@ import { store } from "./PaymentMethodContainer";
 import { usePelcro } from "../../hooks/usePelcro";
 import { Button } from "../../SubComponents/Button";
 import { getPaymentCardIcon } from "../../utils/utils";
+import { ReactComponent as EditIcon } from "../../assets/edit.svg";
 
 export const SelectedPaymentMethod = () => {
   const { t } = useTranslation("paymentMethod");
@@ -22,41 +23,42 @@ export const SelectedPaymentMethod = () => {
     selectedPaymentMethodId && (
       <div
         key={paymentMethod.id}
-        className="plc-p-4 plc-my-4 plc-text-gray-900 plc-rounded plc-shadow-md_dark pelcro-payment-method-wrapper"
+        className=" pelcro-payment-method-wrapper"
       >
-        <div
-          className="plc-flex plc-items-center plc-px-1"
-          id={`pelcro-payment-method-select-${paymentMethod.id}`}
-        >
-          <div className="plc-flex plc-items-center plc-justify-between plc-w-full">
-            <div className="plc-flex plc-items-center plc-space-x-2">
+        <div>
+          <div className="plc-flex plc-justify-between plc-items-center plc-mb-2">
+            <h3 className="plc-font-semibold plc-text-gray-900">
+              {t("select.paymentMethod")}
+            </h3>
+            <button 
+              disabled={isLoading}
+              onClick={() => switchView("payment-method-select")}
+              className="plc-h-8 plc-text-primary-600 plc-flex plc-items-center plc-gap-1 plc-text-sm plc-font-medium">
+              <EditIcon className="plc-w-4 plc-h-4" />
+              Change
+            </button>
+          </div>
+          <div className="plc-bg-gray-50 plc-p-4 plc-rounded-lg plc-flex plc-items-center plc-gap-3">
+            <div className="plc-w-10 plc-h-6 plc-flex plc-items-center plc-justify-center">
               {getPaymentCardIcon(paymentMethod.properties?.brand)}
-
-              <div className="plc-flex plc-flex-col plc-text-lg pelcro-payment-method-details">
-                <p className="plc-font-semibold">
+            </div>
+            <div>
+              <div className="plc-font-medium plc-flex plc-items-center plc-gap-2">
+                <span className="plc-font-semibold plc-text-gray-900">
                   {paymentMethod?.properties?.brand === "bacs_debit"
                     ? "••••"
                     : "•••• •••• ••••"}{" "}
                   {paymentMethod.properties?.last4}
-                </p>
-                {paymentMethod.properties.brand !== "bacs_debit" && (
-                  <p className="plc-text-sm plc-text-gray-500">
-                    {t("select.expires")}{" "}
-                    {paymentMethod.properties?.exp_month}/
-                    {paymentMethod.properties?.exp_year}
-                  </p>
-                )}
+                </span>
               </div>
+              {paymentMethod.properties.brand !== "bacs_debit" && (
+                <p className="plc-text-sm plc-text-gray-500">
+                  {t("select.expires")}{" "}
+                  {paymentMethod.properties?.exp_month}/
+                  {paymentMethod.properties?.exp_year}
+                </p>
+              )}
             </div>
-
-            <Button
-              onClick={() => switchView("payment-method-select")}
-              disabled={isLoading}
-              variant="ghost"
-              className="plc-text-primary-500"
-            >
-              {t("select.buttons.changePaymentMethod")}
-            </Button>
           </div>
         </div>
       </div>

@@ -52,15 +52,18 @@ export function Modal({
               leaveTo="plc-opacity-0 plc-scale-95"
             >
               <Dialog.Panel
-                className={`${className ? className : 'plc-w-full plc-max-w-lg'}   plc-overflow-hidden plc-rounded-2xl 
-                ${bg}
-                plc-p-6 plc-shadow-xl plc-relative  z-50`}
+                className={`${className ? className : 'plc-w-full plc-max-w-lg'}   
+                  plc-overflow-hidden plc-rounded-lg 
+                  ${bg}
+                  plc-p-6 plc-shadow-xl plc-relative z-50
+                  plc-transition-all plc-duration-300 plc-ease-out
+                  plc-border plc-border-gray-100`}
                 id={id}
                 {...props}
               >
                 {isLoading ? (
-                  <div className="plc-absolute plc-inset-0 plc-flex plc-items-center plc-justify-center plc-bg-white/80 plc-backdrop-blur-sm plc-">
-                    <svg className="plc-w-10 plc-h-10 plc-animate-spin" viewBox="0 0 24 24">
+                  <div className="plc-absolute plc-inset-0 plc-flex plc-items-center plc-justify-center plc-bg-white/90 plc-backdrop-blur-sm">
+                    <svg className="plc-w-8 plc-h-8 plc-animate-spin plc-text-primary" viewBox="0 0 24 24">
                       <circle className="plc-opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                       <path
                         className="plc-opacity-75"
@@ -97,6 +100,7 @@ export const ModalHeader = ({
   fromDashboard,
   showBackButton = false,
   handleBackButton,
+  showTitleInLeft = false,
   ...props
 }) => {
   const resetView = usePelcro((state) => state.resetView);
@@ -121,25 +125,25 @@ export const ModalHeader = ({
         </button>
       )}
 
-      <div className="plc-relative plc-w-full">
-          {showBackButton && (
-            <button
-              type="button"
-              onClick={handleBackButton}
-              className="plc-absolute plc-w-6 plc-text-gray-500 focus:plc-text-black plc-z-max plc-top-1/2 plc-left-6 plc-transform plc--translate-y-1/2 plc-border-0 hover:plc-text-black hover:plc-shadow-none plc-bg-transparent hover:plc-bg-transparent focus:plc-bg-transparent"
-            >
-              <ArrowLeft />
-            </button>
-          )}
-          <div className="plc-flex plc-flex-col plc-items-center plc-justify-center plc-w-full">
-            <h4 className="plc-text-2xl plc-font-bold plc-text-gray-800">
+      <div className="plc-w-full">
+        {showBackButton && (
+          <button
+            type="button"
+            onClick={handleBackButton}
+            className="plc-absolute plc-w-6 plc-text-gray-500 focus:plc-text-black plc-z-max plc-top-1/2 plc-left-6 plc-transform plc--translate-y-1/2 plc-border-0 hover:plc-text-black hover:plc-shadow-none plc-bg-transparent hover:plc-bg-transparent focus:plc-bg-transparent"
+          >
+            <ArrowLeft />
+          </button>
+        )}
+        <div className={`plc-flex plc-flex-col ${showTitleInLeft ? 'plc-items-start' : 'plc-items-center'} plc-justify-center plc-w-full`}>
+          <div className="plc-text-lg plc-font-medium plc-text-gray-900">
             {title}
-            </h4>
-            <p className="plc-mt-1 plc-text-gray-500 ">
-              {description}
-            </p>
           </div>
+          <p className="plc-mt-1 plc-text-gray-500 ">
+            {description}
+          </p>
         </div>
+      </div>
       {children}
     </div>
   );
@@ -153,7 +157,7 @@ export const ModalBody = ({ className = "", children }) => {
 
 export const ModalFooter = ({ className = "", children }) => {
   return (
-    <div className={`plc-flex plc-flex-col plc-items-center plc-space-y-5 plc-mt-8 ${className}`}>
+    <div className={`plc-flex plc-flex-col plc-items-center plc-space-y-5 plc-mt-4 ${className}`}>
       {children}
       <Authorship />
     </div>

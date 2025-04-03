@@ -24,11 +24,11 @@ export const CouponCode = ({ onClick, ...otherProps }) => {
   };
 
   return (
-    <div className="plc-mt-4 plc-mb-6">
+    <div className="plc-text-left">
       <Button
-        className="plc-mb-2 plc-text-base plc-text-gray-500"
+        className="plc-text-base plc-text-gray-900  plc-underline"
         variant="ghost"
-        icon={<TicketIcon className="plc-w-5 plc-h-5 plc-mr-2" />}
+        icon={<TicketIcon className="plc-w-5 plc-h-5 plc-mr-2  plc-underline"  />}
         onClick={showCouponField}
         {...otherProps}
       >
@@ -37,9 +37,11 @@ export const CouponCode = ({ onClick, ...otherProps }) => {
           : t("labels.hideCode")}
       </Button>
       {enableCouponField && (
-        <div className="plc-flex plc-w-full plc-mt-2 plc-mb-8 pelcro-apply-coupon-wrapper">
+        <div className="plc-flex plc-max-w-full pelcro-apply-coupon-wrapper plc-px-8">
           <CouponCodeField />
-          <ApplyCouponButton />
+          <ApplyCouponButton >
+            {t('labels.applyCouponCode')}
+          </ApplyCouponButton>
         </div>
       )}
     </div>

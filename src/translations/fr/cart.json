@@ -9,5 +9,12 @@
     "total": "Total",
     "confirm": "Passer à la caisse",
     "empty": "Votre panier est vide.",
-    "removeAll": "Vider"
+    "removeAll": "Vider",
+    "continueShopping": "Continuer vos achats",
+    "shippingAndTaxes": "Livraison et taxes calculées à la caisse.",
+    "or": "Ou",
+    "checkout": "Passer à la caisse",
+    "subtotal": "Sous-total",
+    "shipping": "Livraison",
+    "taxes": "Taxes"
 }

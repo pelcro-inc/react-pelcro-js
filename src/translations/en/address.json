@@ -14,7 +14,8 @@
     "lastName": "Last name",
     "phone": "Phone Number",
     "required": "required",
-    "isDefault": "Set as your default address"
+    "isDefault": "Set as your default address",
+    "haveCoupon": "Have a coupon?"
   },
   "buttons": {
     "submit": "Submit",

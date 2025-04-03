@@ -9,5 +9,12 @@
     "total": "총계",
     "confirm": "체크아웃",
     "empty": "장바구니가 비었습니다.",
-    "removeAll": "모두 제거"
+    "removeAll": "모두 제거",
+    "continueShopping": "계속 구매",
+    "shippingAndTaxes": "결제 시 배송 및 세금이 계산됩니다.",
+    "or": "또는",
+    "checkout": "체크아웃",
+    "subtotal": "소계",
+    "shipping": "배송",
+    "taxes": "세금"
 }

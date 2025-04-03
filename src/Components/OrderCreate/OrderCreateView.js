@@ -25,10 +25,10 @@ export const OrderCreateView = ({
 
   const address = selectedAddressId
     ? addresses?.find((address) => address.id == selectedAddressId) ??
-      null
+    null
     : addresses?.find(
-        (address) => address.type == "shipping" && address.is_default
-      ) ?? null;
+      (address) => address.type == "shipping" && address.is_default
+    ) ?? null;
 
   const [paymentInfo, setPaymentInfo] = useState({});
 
@@ -80,49 +80,49 @@ export const OrderCreateView = ({
         action="javascript:void(0);"
         className="plc-mt-2 pelcro-form"
       >
-        <div className="plc-flex plc-flex-row plc-justify-between plc-px-8 md:plc-px-0">
+
+        <div className="plc-grid plc-grid-cols-2 plc-gap-2  plc-text-sm">
           {address && (
-            <>
-              <div
-                className="pelcro-select-address-radio plc-order-2"
-                id={`pelcro-address-select-${address?.id}`}
-                name="address"
-              >
-                <p className="pelcro-address-name plc-font-semibold">
+            <div
+              className="pelcro-select-address-radio"
+              id={`pelcro-address-select-${address?.id}`}
+              name="address"
+            >
+              <div className="plc-bg-gray-50 plc-py-2 plc-px-3 plc-rounded-md">
+                <p className="pelcro-address-name plc-font-semibold plc-text-primary-600 plc-mb-1">
                   {t("labels.shippingAddress")}
                 </p>
-                <p className="pelcro-address-company">
-                  {address?.company}
-                </p>
-                <p className="pelcro-address-name plc-text-sm plc-mt-1">
+                {address?.company && (
+                  <p className="pelcro-address-company plc-mb-1">{address.company}</p>
+                )}
+                <p className="plc-mb-1">
                   {address?.first_name} {address?.last_name}
                 </p>
-                <p className="pelcro-address-line1 plc-text-sm">
-                  {address?.line1}
-                </p>
-                <p className="pelcro-address-country plc-text-sm">
+                <p className="plc-mb-1">{address?.line1}</p>
+                <p>
                   {address?.city}, {address?.state}{" "}
                   {address?.postal_code}, {address?.country}
                 </p>
               </div>
-            </>
+            </div>
           )}
-          <div
-            className="pelcro-select-address-radio plc-order-2"
-            id={`pelcro-address-select-${address?.id}`}
-            name="address"
-          >
-            <p className="pelcro-address-name plc-font-semibold">
-              {t("labels.contactDetails")}
-            </p>
-            <p className="pelcro-address-name plc-text-sm plc-mt-1">
-              {user.email}
-            </p>
-            <p className="pelcro-address-line1 plc-text-sm">
-              {address?.phone}
-            </p>
+
+          <div className="plc-bg-gray-50 plc-p-3 plc-rounded-md">
+            <div
+              className="pelcro-select-address-radio "
+              id={`pelcro-address-select-${address?.id}`}
+              name="address"
+            >
+              <p className="plc-font-semibold plc-text-primary-600 plc-mb-1">
+                {t("labels.contactDetails")}
+              </p>
+              <p className="plc-mb-1">{user.email}</p>
+              {address?.phone && <p>{address.phone}</p>}
+            </div>
           </div>
         </div>
+
+
         <PaymentMethodView
           type="orderCreate"
           showCoupon={true}

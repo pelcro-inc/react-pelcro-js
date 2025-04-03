@@ -9,5 +9,12 @@
   "total": "Total",
   "confirm": "Pago",
   "empty": "Tu carrito está vacío.",
-  "removeAll": "Eliminar todo"
+  "removeAll": "Eliminar todo",
+  "continueShopping": "Continuar comprando",
+  "shippingAndTaxes": "Envío y tasas de impuestos calculadas en el pago.",
+  "or": "O",
+  "checkout": "Pago",
+  "subtotal": "Subtotal",
+  "shipping": "Envío",
+  "taxes": "Impuestos"
 }
