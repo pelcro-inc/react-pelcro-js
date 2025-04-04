@@ -3,16 +3,19 @@ import { usePelcro } from "../../hooks/usePelcro";
 import {
   Modal,
   ModalBody,
+  ModalHeader,
   ModalFooter
-} from "../../SubComponents/Modal";
+} from "../ui/Modal";
 import Authorship from "../common/Authorship";
 import { PaymentSuccessView } from "./PaymentSuccessView";
+import { useTranslation } from "react-i18next";
 
 /**
  *
  */
 export function PaymentSuccessModal({ onDisplay, ...props }) {
   const { resetView } = usePelcro();
+  const { t } = useTranslation("payment");
 
   const onClose = () => {
     props.onClose?.();
@@ -23,9 +26,13 @@ export function PaymentSuccessModal({ onDisplay, ...props }) {
     <Modal
       id="pelcro-subscription-success-modal"
       onDisplay={onDisplay}
-      onClose={onClose}
     >
-      <ModalBody className="plc-rounded-t-lg">
+      <ModalHeader
+        title={t("success.title", "Payment Successful")}
+        description={t("success.description", "Your payment has been processed successfully.")}
+        onCloseModal={onClose}
+      />
+      <ModalBody className="plc-mt-4">
         <PaymentSuccessView onClose={onClose} />
       </ModalBody>
       <ModalFooter></ModalFooter>

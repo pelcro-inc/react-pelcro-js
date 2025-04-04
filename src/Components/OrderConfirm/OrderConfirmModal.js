@@ -71,7 +71,7 @@ export const OrderConfirmModal = (props) => {
                 <div
                   key={item.product_sku_id}
                   id={`pelcro-summary-product-${item.product_sku_id}`}
-                  className="plc-flex plc-items-center plc-pt-3 plc-mt-3 plc-border-b plc-border-gray-200 plc-min-h-12 plc-justify-between plc-pb-6"
+                  className="plc-flex plc-items-center  plc-mt-3 plc-border-b plc-border-gray-200 plc-min-h-8 plc-justify-between plc-pb-2"
                 >
                   <div className="plc-flex plc-items-center plc-gap-4">
                     <div className="pelcro-summary-image-wrapper">
@@ -124,7 +124,7 @@ export const OrderConfirmModal = (props) => {
             </div>
           </div>
 
-          <div className="plc-flex plc-justify-center plc-mt-8">
+          {/* <div className="plc-flex plc-justify-center plc-mt-8">
             <Button
               id="pelcro-submit"
               onClick={onClose}
@@ -133,7 +133,7 @@ export const OrderConfirmModal = (props) => {
             >
               {t("buttons.continue")}
             </Button>
-          </div>
+          </div> */}
         </div>
       </ModalBody>
       <ModalFooter></ModalFooter>

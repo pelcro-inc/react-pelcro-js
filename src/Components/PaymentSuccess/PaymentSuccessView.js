@@ -14,27 +14,18 @@ export const PaymentSuccessView = ({ onClose }) => {
   if (successTitle && successContent) {
     return (
       <div className="plc-flex plc-flex-col plc-items-center plc-relative">
-        <button
-          type="button"
-          className="pelcro-modal-close plc-absolute plc-top-6 plc-right-0"
-          aria-label="close modal"
-          onClick={onClose}
-        >
-          <CloseIcon className="plc-fill-current" />
-        </button>
-
         {successIcon}
         <div className="plc-text-center plc-text-gray-900">
           <h4 className="plc-mb-4 plc-text-3xl">{successTitle}</h4>
           <p>{successContent}</p>
         </div>
-        <Button
+        {/* <Button
           className="plc-mt-6"
           onClick={onClose}
           autoFocus={true}
         >
           {t("continue")}
-        </Button>
+        </Button> */}
       </div>
     );
   }
