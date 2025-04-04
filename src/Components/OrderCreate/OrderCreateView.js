@@ -50,22 +50,29 @@ export const OrderCreateView = ({
   }
 
   useEffect(() => {
-    if (!order?.length) {
+
+    if (!order) {
       return;
     }
 
     const orderSummaryPayload = {
-      items: order.map((item) => {
-        return {
-          sku_id: item.id,
-          quantity: item.quantity
-        };
-      })
+      items: Array.isArray(order) 
+        ? order.map((item) => {
+            return {
+              sku_id: item.id,
+              quantity: item.quantity
+            };
+          })
+        : [{ 
+            sku_id: order.id,
+            quantity: order.quantity
+          }]
     };
 
     if (window.Pelcro.site.read()?.taxes_enabled) {
       orderSummaryPayload.address_id = selectedAddressId;
     }
+    
 
     fetchOrderSummary(orderSummaryPayload);
   }, [order, selectedAddressId]);
