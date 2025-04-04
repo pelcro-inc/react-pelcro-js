@@ -22,6 +22,8 @@ export const InvoiceDetailsView = (props) => {
     "en-CA"
   ).format(creationDate);
 
+  console.log(invoice);
+
   return (
     <div id="pelcro-invoice-details-view">
       <form

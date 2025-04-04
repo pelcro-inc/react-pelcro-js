@@ -17,10 +17,10 @@ export const CartTotalPrice = () => {
   if (!alert.content) {
     return (
       <>
-        <p className="plc-mr-1 pelcro-cart-total-text">
+        <p className="">
           {t("total")}:
         </p>
-        <p className="pelcro-cart-total">
+        <p className="">
           {calcAndFormatItemsTotal(cartItems, totalPriceCurrency)}
         </p>
       </>

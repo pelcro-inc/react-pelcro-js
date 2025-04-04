@@ -46,6 +46,7 @@ import { PaymentMethodCreateModal } from "./Components/PaymentMethodCreate/Payme
 export const Main = () => {
   return (
     <PelcroModalController>
+   
       <MeterModal />
       <EmailVerifyModal />
       <LoginModal />

@@ -11,6 +11,7 @@
     "submit": "제출",
     "pay": "결제",
     "addCode": "쿠폰 코드 추가",
+    "couponCode": "쿠폰 코드",
     "hideCode": "숨기기",
     "codePlaceholder": "쿠폰 코드 입력",
     "applyCouponCode": "적용",
@@ -26,6 +27,7 @@
     "freeItems": "무료 아이템",
     "order": "주문",
     "amount": "금액",
-    "isDefault": "기본값으로 설정"
+    "isDefault": "기본값으로 설정",
+    "haveCoupon": "쿠폰이 있습니까?"
   }
 }

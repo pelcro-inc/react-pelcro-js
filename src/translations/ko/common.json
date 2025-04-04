@@ -8,7 +8,8 @@
     "enterPassword": "비밀번호는 필수 항목입니다.",
     "enterFirstName": "이름은 필수 항목입니다.",
     "enterLastName": "성은 필수 항목입니다.",
-    "enterPhone": "전화번호는 필수 항목입니다."
+    "enterPhone": "전화번호는 필수 항목입니다.",
+    "passwordRequirements": "비밀번호는 강해야 합니다."
   },
   "buttons": {
     "account": "내 계정",
@@ -32,6 +33,7 @@
       "support": "지원",
       "account": "계정",
       "subscriptions": "유료 멤버십",
+      "subscriptionsDescription": "유료 멤버십 이력을 보고 관리할 수 있습니다.",
       "updatePaymentSource": "업데이트",
       "updateProfile": "업데이트",
       "updateAddress": "업데이트",
@@ -90,6 +92,7 @@
         "support": "지원",
         "account": "계정",
         "subscriptions": "유료 멤버십",
+        "subscriptionsDescription": "유료 멤버십 이력을 보고 관리할 수 있습니다.",
         "updatePaymentSource": "업데이트",
         "updateProfile": "업데이트",
         "updateAddress": "업데이트",

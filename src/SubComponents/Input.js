@@ -10,22 +10,22 @@ export function Input({
   labelClassName = "",
   errorClassName = "",
   wrapperClassName = "",
+  placeholder = "",
   ...otherProps
 }) {
   return (
-    <div className={`pelcro-input-wrapper ${wrapperClassName}`}>
+    <div className={`plc-relative ${wrapperClassName}`}>
       <input
         type="text"
         id={id}
-        className={`pelcro-input-field ${className} ${
-          error ? "pelcro-input-invalid" : ""
-        }`}
-        placeholder="placeholder"
+        placeholder={placeholder}
+        className={`plc-w-full plc-rounded-lg plc-border plc-border-gray-200 plc-bg-gray-50/30 plc-px-4 plc-py-3 plc-text-sm plc-text-gray-800 plc-outline-none plc-transition-all placeholder:plc-text-gray-400 focus:plc-border-gray-800 focus:plc-border focus:plc-bg-white focus:plc-shadow-sm focus:placeholder:plc-text-gray-500 ${className} ${error ? "plc-border-red-500" : ""
+          } ${otherProps.disabled ? "plc-bg-gray-500" : ""}`}
         aria-describedby={errorId}
         aria-invalid={Boolean(error)}
         {...otherProps}
       />
-      <label
+      {/* <label
         htmlFor={id}
         className={`pelcro-input-label ${labelClassName}`}
       >
@@ -37,16 +37,17 @@ export function Input({
         ) : (
           ""
         )}
-      </label>
+      </label> */}
       {error && (
-        <p
+        <div
           id={errorId}
           aria-live="assertive"
-          className={`pelcro-input-error ${errorClassName}`}
+          className={`plc-text-red-500 plc-text-xs plc-mt-1 plc-mx-1`}
         >
           {error}
-        </p>
+        </div>
       )}
+
     </div>
   );
 }

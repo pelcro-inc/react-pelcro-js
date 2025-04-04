@@ -11,6 +11,7 @@
     "submit": "Soumettre",
     "pay": "Payer",
     "addCode": "Ajouter un code promo",
+    "couponCode": "Code promo",
     "hideCode": "Cacher",
     "codePlaceholder": "Entrez votre code de coupon",
     "applyCouponCode": "Appliquer",
@@ -26,6 +27,7 @@
     "freeItems": "Articles gratuits",
     "order": "Commande",
     "amount": "Montant",
-    "isDefault": "Défini comme valeur par défaut"
+    "isDefault": "Défini comme valeur par défaut",
+    "haveCoupon": "Vous avez un coupon ?"
   }
 }

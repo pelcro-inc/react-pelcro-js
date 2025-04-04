@@ -8,7 +8,8 @@
     "enterPassword": "Password is required.",
     "confirmPassword": "Confirm password is required.",
     "enterFirstName": "First name is required.",
-    "enterLastName": "Last name is required."
+    "enterLastName": "Last name is required.",
+    "passwordRequirements": "Password must be strong."
   },
   "buttons": {
     "account": "My account",
@@ -32,6 +33,7 @@
       "support": "Support",
       "account": "Account",
       "subscriptions": "Subscriptions",
+      "subscriptionsDescription": "View and manage your subscription history.",
       "updatePaymentSource": "Update",
       "updateProfile": "Update",
       "updateAddress": "Update",
@@ -53,7 +55,7 @@
   "select": {
     "messages": {
       "alreadyHaveAccount": "Already have an account?",
-      "loginHere": "Login here",
+      "loginHere": "Sign in",
       "checkbox": "Check this box to gift this subscription"
     },
     "labels": {

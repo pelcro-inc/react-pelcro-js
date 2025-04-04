@@ -8,11 +8,14 @@
     "login": "Iniciar Sesión"
   },
   "messages": {
-    "loginTo": "Inicia sesión en tu cuenta",
+    "loginSuccess": "Inicio de sesión exitoso",
+    "loginTo": "Bienvenido de nuevo",
+    "loginToDescription": "Inicia sesión en tu cuenta",
     "welcome": "Bienvenido de vuelta, inicia sesión con tu cuenta existente.",
-    "dontHaveAccount": "¿Aún no tienes una cuenta?",
-    "createAccount": "Crear una cuenta.",
+    "dontHaveAccount": "¿No tienes una cuenta?",
+    "createAccount": "Registrarse",
     "forgotPassword": "¿Olvidaste tu contraseña?",
+    "or": "O continúa con",
     "reset": {
       "click": "Pulsa",
       "here": "aquí",

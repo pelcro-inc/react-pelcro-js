@@ -16,13 +16,12 @@ export const LoginRequestLoginToken = ({
     <button
       type="button"
       onClick={() => onClick?.()}
-      className={`plc-flex plc-items-center plc-justify-center plc-h-12 plc-px-1 plc-text-gray-700 plc-rounded-md pelcro-google-login plc-shadow-md_dark plc-flex-1 plc-bg-white hover:plc-bg-transparent plc-text-sm ${className}`}
-    >
+      className="plc-group plc-flex plc-items-center plc-justify-center plc-gap-2 plc-rounded-lg plc-border plc-border-gray-200 plc-bg-white plc-px-4 plc-py-3 plc-text-sm plc-font-medium plc-text-gray-700 plc-transition-colors hover:plc-bg-gray-50 active:plc-bg-gray-100">
       <PasswordlessLogoIcon
-        className={`plc-w-6 plc-h-auto pelcro-paswordless-login-icon" ${iconClassName}`}
+        className={`plc-h-6 plc-w-6 plc-mt-1" ${iconClassName}`}
       />
       <p
-        className={`pelcro-paswordless-login-label plc-ml-2 ${labelClassName}`}
+        className={`plc-h-5 plc-w-5" ${labelClassName}`}
       >
         {name ?? t("title")}
       </p>

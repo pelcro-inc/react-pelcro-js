@@ -6,7 +6,7 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter
-} from "../../SubComponents/Modal";
+} from "../ui/Modal";
 import { CartView } from "./CartView";
 
 export const CartModal = ({ onDisplay, onClose, ...otherProps }) => {
@@ -29,19 +29,21 @@ export const CartModal = ({ onDisplay, onClose, ...otherProps }) => {
     <Modal
       id="pelcro-cart-modal"
       onDisplay={onDisplay}
-      hideCloseButton={false}
+      onClose={onClose}
     >
-      <ModalHeader onCloseModal={onClose}>
-        <div className="plc-text-left plc-text-gray-900 pelcro-title-wrapper plc-flex-1 plc-flex plc-flex-col plc-justify-center">
-          <h4 className="plc-text-xl plc-font-bold ">{t("title")}</h4>
-        </div>
-      </ModalHeader>
+      <ModalHeader
+        hideCloseButton={false}
+        title={t("title")}
+        showTitleInLeft={true}
+        // description={t("subtitle")}
+      />
 
       <ModalBody>
         <CartView {...otherProps} onSuccess={onSuccess} />
       </ModalBody>
-
-      <ModalFooter></ModalFooter>
+{/* 
+      <ModalFooter>
+      </ModalFooter> */}
     </Modal>
   );
 };

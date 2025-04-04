@@ -1,13 +1,51 @@
-@layer components {
-  .pelcro-user-profile-picture:hover {
-    filter: brightness(0.8);
-  }
-  #pelcro-view-dashboard-submenus {
-    /* From https://css.glass */
-    background: rgba(255, 255, 255, 0.12);
-    /* border-radius: 16px; */
-    /* box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); */
-    backdrop-filter: blur(3.5px);
-    -webkit-backdrop-filter: blur(3.5px);
-  }
+.pelcro-user-profile-picture:hover {
+  filter: brightness(0.9);
+  transition: filter 0.2s ease;
+}
+
+#pelcro-view-dashboard-submenus {
+  /* From https://css.glass */
+  background: rgba(255, 255, 255, 0.12);
+  /* border-radius: 16px; */
+  /* box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); */
+  backdrop-filter: blur(3.5px);
+  -webkit-backdrop-filter: blur(3.5px);
+}
+
+/* Dashboard sidebar styling */
+#pelcro-view-dashboard {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+/* Improve logout button styling */
+#logout {
+  margin-top: 2rem;
+  border-top: 1px solid #f0f0f0;
+  padding-top: 0.5rem;
+}
+
+/* Badge styling */
+.plc-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.plc-badge-active {
+  background-color: #ecfdf5;
+  color: #047857;
+}
+
+/* Bottom buttons styling */
+.pelcro-dashboard-bottom-buttons {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  padding: 1rem;
+  background-color: white;
+  border-top: 1px solid #f0f0f0;
+  z-index: 10;
 }

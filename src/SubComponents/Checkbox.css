@@ -1,13 +1,11 @@
-@layer components {
-  .pelcro-root .pelcro-checkbox-label {
-    @apply plc-pl-2 plc-text-gray-900;
-  }
+.pelcro-checkbox-label
+{
+   background-color: theme('colors.primary.600');
+   border-color: theme('colors.primary.600');
+   
+}
 
-  .pelcro-root .pelcro-checkbox {
-    @apply plc-w-5 plc-h-5 plc-text-primary-500 checked:plc-border-transparent plc-rounded-sm focus:plc-outline-none focus:plc-ring-1 focus:plc-ring-offset-1 focus:plc-ring-primary-300 disabled:plc-cursor-not-allowed disabled:plc-text-gray-300 plc-cursor-pointer;
-  }
-
-  .pelcro-root .pelcro-checkbox::before {
-    @apply plc-hidden;
-  }
+.pelcro-checkbox
+{
+  background-color: theme('colors.primary.600');
 }

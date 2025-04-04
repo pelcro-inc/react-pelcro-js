@@ -6,7 +6,7 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter
-} from "../../SubComponents/Modal";
+} from "../ui/Modal";
 import { ReactComponent as ArrowLeft } from "../../assets/arrow-left.svg";
 import { usePelcro } from "../../hooks/usePelcro";
 
@@ -75,35 +75,29 @@ export const AddressCreateModal = ({
   };
 
   return (
-    <Modal id="pelcro-address-create-modal" onDisplay={onDisplay}>
-      <ModalHeader onCloseModal={onClose}>
-        <div className="plc-text-left plc-text-gray-900 pelcro-title-wrapper plc-flex-1 plc-flex plc-flex-col plc-justify-center">
-          {showBackButton && (
-            <button
-              type="button"
-              onClick={goBack}
-              className="plc-absolute plc-w-6 plc-text-gray-500 focus:plc-text-black plc-z-max plc-top-1/2 plc-left-6 plc-transform plc--translate-y-1/2 plc-border-0 hover:plc-text-black hover:plc-shadow-none plc-bg-transparent hover:plc-bg-transparent focus:plc-bg-transparent"
-            >
-              <ArrowLeft />
-            </button>
-          )}
-
-          <h4 className="plc-text-xl plc-font-bold">
-            {giftRecipient ? t("titleGifting") : t("title")}
-          </h4>
-        </div>
-      </ModalHeader>
-      <ModalBody>
+    <Modal
+      id="pelcro-address-create-modal"
+      onDisplay={onDisplay}
+      onClose={onClose}
+      showBackButton={showBackButton}
+      handleBackButton={goBack}
+      showTitleInLeft={true}
+    >
+      <ModalHeader
+        hideCloseButton={false}
+        title={giftRecipient ? t("titleGifting") : t("title")}
+        showTitleInLeft={true}
+        // description={t("subtitle")}
+      />
+      <ModalBody className="plc-mt-4">
         <AddressCreateView
           {...otherProps}
           onSuccess={onSuccess}
           onGiftRedemptionSuccess={onGiftRedemptionSuccess}
-          onMembershipAdressUpdateSuccess={
-            onMembershipAdressUpdateSuccess
-          }
+          onMembershipAdressUpdateSuccess={onMembershipAdressUpdateSuccess}
         />
       </ModalBody>
-      <ModalFooter></ModalFooter>
+      <ModalFooter />
     </Modal>
   );
 };

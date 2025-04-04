@@ -99,7 +99,7 @@ const PasswordForgotContainer = ({
   return (
     <div
       style={{ ...style }}
-      className={`pelcro-container pelcro-password-forgot-container ${className}`}
+      className={`${className}`}
     >
       <Provider value={{ state, dispatch }}>
         {children.length

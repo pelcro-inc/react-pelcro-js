@@ -27,9 +27,10 @@ export function Select({
       >
         {children}
       </select>
-      <label
-        htmlFor={id}
-        className={`pelcro-input-label ${labelClassName}`}
+      {otherProps.showLabel && (
+        <label
+          htmlFor={id}
+          className={`pelcro-input-label ${labelClassName}`}
       >
         {`${label}`}
         {required ? (
@@ -38,8 +39,9 @@ export function Select({
           </span>
         ) : (
           ""
-        )}
-      </label>
+          )}
+        </label>
+      )}
       {error && (
         <p
           id={errorId}

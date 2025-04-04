@@ -107,23 +107,23 @@ export const OrderCreateSummary = ({ order, paymentInfo }) => {
         </div>
       </div>
       {paymentInfo?.total ? (
-        <dl className="plc-mt-6 plc-space-y-6 plc-text-sm plc-font-medium plc-text-gray-500">
-          <div className="plc-flex plc-justify-between plc-border-t plc-border-gray-200 plc-pt-6 plc-text-gray-900">
+        <dl className="plc-mt-6 plc-space-y-4 plc-text-sm plc-font-medium plc-text-gray-500">
+          <div className="plc-flex plc-justify-between plc-border-t plc-border-gray-200 plc-pt-6 plc-text-gray-600">
             <dt className="plc-text-base">{t("labels.subtotal")}</dt>
-            <dd className="plc-text-base">{subtotal}</dd>
+            <dd className="plc-text-base plc-text-gray-900">{subtotal}</dd>
           </div>
 
-          <div className="plc-flex plc-justify-between plc-text-gray-900">
+          <div className="plc-flex plc-justify-between plc-text-gray-600">
             <dt className="plc-text-base">
               {t("labels.shippingRate")}
             </dt>
-            <dd className="plc-text-base">{shippingRate}</dd>
+            <dd className="plc-text-base plc-text-gray-900">{shippingRate}</dd>
           </div>
 
           {taxRate !== "0" && (
-            <div className="plc-flex plc-justify-between plc-text-gray-900">
+            <div className="plc-flex plc-justify-between plc-text-gray-600">
               <dt className="plc-text-base">{t("labels.tax")}</dt>
-              <dd className="plc-text-base">{taxRate}</dd>
+              <dd className="plc-text-base plc-text-gray-900">{taxRate}</dd>
             </div>
           )}
 

@@ -13,7 +13,7 @@ export const SubscriptionCreateView = ({
   const showSubscriptionButton = skipPayment && plan?.amount === 0;
 
   return (
-    <div id="pelcro-subscription-create-view">
+    <div id="pelcro-subscription-create-view ">
       <SubscriptionCreateSummary />
 
       <PaymentMethodView

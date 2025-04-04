@@ -22,18 +22,14 @@ export const ApplyCouponButton = ({
   };
 
   return (
-    <Button
-      className="plc-h-12 plc-ml-4"
-      variant="solid"
-      aria-label={t("labels.applyCouponCode")}
-      icon={
-        <ArrowLeftIcon className="plc-w-5 plc-h-5 plc-transform plc-rotate-180" />
-      }
+    <button
+      className="plc-h-10 plc-ml-4 plc-w-24 
+       plc-bg-primary-600 plc-text-white plc-rounded-lg plc-font-medium plc-transition-all plc-duration-200 plc-hover:plc-bg-primary-600 plc-disabled:plc-bg-gray-300 plc-disabled:plc-text-gray-900"
       onClick={onApplyCouponCode}
       disabled={!couponCode || disableCouponButton}
       {...otherProps}
     >
       {children}
-    </Button>
+    </button>
   );
 };

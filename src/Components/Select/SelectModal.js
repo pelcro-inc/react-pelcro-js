@@ -7,17 +7,18 @@ import { Button } from "../../SubComponents/Button";
 import { Carousel } from "../../SubComponents/Carousel";
 import ImageSelect from "../../SubComponents/ImageSelect";
 import {
-  Modal,
-  ModalBody,
-  ModalFooter,
-  ModalHeader
-} from "../../SubComponents/Modal";
-import { ReactComponent as ArrowLeft } from "../../assets/arrow-left.svg";
-import { usePelcro } from "../../hooks/usePelcro";
-import {
   getEntitlementsFromElem,
   notifyBugsnag
 } from "../../utils/utils";
+import {
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter
+} from "../ui/Modal";
+import { ReactComponent as ArrowLeft } from "../../assets/arrow-left.svg";
+import { usePelcro } from "../../hooks/usePelcro";
+import "./SelectModal.css";
 
 /**
  *
@@ -117,8 +118,8 @@ class SelectModal extends Component {
       productsDescriptionsExpanded: [],
       productList: props.matchingEntitlements
         ? window.Pelcro.product.getByEntitlements(
-            props.matchingEntitlements
-          )
+          props.matchingEntitlements
+        )
         : window.Pelcro.product.list(),
       windowWidth: window.innerWidth
     };
@@ -197,42 +198,43 @@ class SelectModal extends Component {
 
       notifyBugsnag(() => {
         // eslint-disable-next-line no-undef
-        Bugsnag.notify("SelectModal - No data viewed", (event) => {
-          event.addMetadata("MetaData", {
-            site: window.Pelcro?.site?.read(),
-            user: window.Pelcro?.user?.read(),
-            uiVersion: window.Pelcro?.uiSettings?.uiVersion,
-            environment: window.Pelcro?.environment,
-            matchingEntitlementsProps:
-              this.props?.matchingEntitlements,
-            productListState: this.state.productList,
-            methods: {
-              productsWithMatchedTaggedFirst:
-                productsWithMatchedTaggedFirst(),
-              pelcroSDKProductsListMethod:
-                window.Pelcro.product.list(),
-              pelcroSDKGetByEntitlements: this.props
-                .matchingEntitlements
-                ? window.Pelcro.product.getByEntitlements(
+        if (window?.Bugsnag) {
+          Bugsnag?.notify("SelectModal - No data viewed", (event) => {
+            event.addMetadata("MetaData", {
+              site: window.Pelcro?.site?.read(),
+              user: window.Pelcro?.user?.read(),
+              uiVersion: window.Pelcro?.uiSettings?.uiVersion,
+              environment: window.Pelcro?.environment,
+              matchingEntitlementsProps:
+                this.props?.matchingEntitlements,
+              productListState: this.state.productList,
+              methods: {
+                productsWithMatchedTaggedFirst:
+                  productsWithMatchedTaggedFirst(),
+                pelcroSDKProductsListMethod:
+                  window.Pelcro.product.list(),
+                pelcroSDKGetByEntitlements: this.props
+                  .matchingEntitlements
+                  ? window.Pelcro.product.getByEntitlements(
                     this.props.matchingEntitlements
                   )
-                : null
-            },
-            userCurrency: userCurrency,
-            userCountry: userCountry,
-            userLanguage: userLanguage,
-            siteLanguage:
-              window.Pelcro?.helpers?.getHtmlLanguageAttribute(),
-            products: window.Pelcro?.site?.read().products.length,
-            currency_matching_filter: `${productsMatchingUserCurrency.length} Products Passed`,
-            country_matching_filter: `${productsMatchingUserCountry.length} Products Passed`,
-            language_matching_filter: `${
-              productsMatchingUserCountry.filter(
+                  : null
+              },
+              userCurrency: userCurrency,
+              userCountry: userCountry,
+              userLanguage: userLanguage,
+              siteLanguage:
+                window.Pelcro?.helpers?.getHtmlLanguageAttribute(),
+              products: window.Pelcro?.site?.read().products.length,
+              currency_matching_filter: `${productsMatchingUserCurrency.length} Products Passed`,
+              country_matching_filter: `${productsMatchingUserCountry.length} Products Passed`,
+              language_matching_filter: `${productsMatchingUserCountry.filter(
                 productMatchPageLanguage
               ).length
-            } Products Passed`
+                } Products Passed`
+            });
           });
-        });
+        }
       });
     }
   };
@@ -275,17 +277,13 @@ class SelectModal extends Component {
       }
     }
     return (
-      <h5 className="plc-text-3xl pelcro-select-product-cost">
-        <span className="plc-font-medium">
-          {startingPlan.amount_formatted}
-        </span>
-        <span className="plc-text-xs plc-ml-1 plc-text-gray-400">
-          /{" "}
-          {startingPlan.interval_count > 1
-            ? `${startingPlan.interval_count} ${startingPlan.interval_translated}`
-            : `${startingPlan.interval_translated}`}
-        </span>
-      </h5>
+      <>
+        {startingPlan.amount_formatted}/{" "}
+        {startingPlan.interval_count > 1
+          ? `${startingPlan.interval_count} ${startingPlan.interval_translated}`
+          : `${startingPlan.interval_translated}`}
+      </>
+
     );
   };
 
@@ -317,9 +315,63 @@ class SelectModal extends Component {
     return (
       <div
         key={product.id}
-        className="pelcro-product plc-w-84 plc-relative plc-overflow-hidden plc-h-full plc-min-h-card plc-flex plc-flex-col plc-items-center plc-justify-center plc-pt-5 plc-text-gray-900 plc-border plc-border-solid plc-rounded-sm plc-border-gray-200 plc-bg-white pelcro-select-product-wrapper"
+        onClick={() => this.selectProduct({
+          target: {
+            dataset: {
+              key: product.id
+            }
+          }
+        })} 
+        className="pelcro-product plc-group plc-relative plc-rounded-xl plc-border plc-border-gray-200
+         plc-bg-white plc-p-6 hover:plc-border-primary-600
+         hover:plc-shadow-lg plc-transition-all plc-duration-300 plc-cursor-pointer pelcro-select-product-wrapper"
       >
-        {product.image && (
+
+        <div className="plc-flex plc-items-center plc-gap-6">
+          {product.image && (
+            <div className="plc-h-20 plc-w-20 plc-flex-shrink-0 plc-overflow-hidden plc-rounded-xl plc-border plc-border-gray-100 plc-bg-gray-50/50 plc-p-2 group-hover:plc-border-[#33AEA2]/20 group-hover:plc-bg-[#33AEA2]/5 plc-transition-colors plc-duration-300">
+              <img
+                src={product.image}
+                alt=""
+                className="plc-h-full plc-w-full plc-object-cover plc-object-center"
+              />
+            </div>
+          )}
+          <div className="plc-flex-1 plc-min-w-0">
+            <h3 className="plc-text-lg plc-font-semibold plc-text-gray-900 hover:plc-text-primary-600 plc-transition-colors plc-duration-300">
+              {product.name}
+            </h3>
+            <p className="plc-mt-1 plc-text-sm plc-text-gray-500">
+              {
+                product?.description?.length <= 105 ? product?.description : product?.description?.slice(0, 105) + "..."
+              }
+            </p>
+            <p className="plc-mt-2 plc-inline-flex plc-items-center plc-text-sm plc-font-medium plc-text-gray-900 plc-bg-gray-50 plc-rounded-full plc-px-3 plc-py-1 group-hover:plc-bg-[#33AEA2]/5 plc-transition-colors plc-duration-300">
+              {product.plans && (
+                <>
+                  Starting at {this.countStartPrice(product.plans)}
+                </>
+              )}
+            </p>
+          </div>
+          <div className="plc-shrink-0">
+            {isPlanMode || (
+              <Button
+                onClick={productButtonCallback}
+                data-key={product.id}
+                variant="icon"
+                icon={<ArrowLeft className="plc-h-6 plc-w-6 plc-rotate-180" />}
+                id="pelcro-select-product-back-button"
+                className="plc-inline-flex plc-items-center plc-justify-center
+                 plc-rounded-lg plc-bg-[#e0f4f2] plc-p-3 plc-text-primary-400 group-hover:plc-bg-[#33AEA2]/10 plc-transition-colors plc-duration-300 plc-capitalize "
+              >
+              </Button>
+            )}
+          </div>
+        </div>
+
+
+        {/* {product.image && (
           <figure className="plc-w-full plc-mb-4 plc-h-28 plc-relative plc-overflow-hidden plc-flex plc-items-stretch">
             <img
               alt={`image of ${product.name}`}
@@ -342,11 +394,10 @@ class SelectModal extends Component {
             {product?.description?.length > 105 && (
               <div className="plc-text-xs plc-mt-1 pelcro-select-product-description plc-px-8">
                 <div
-                  className={`plc-overflow-x-hidden ${
-                    productsDescriptionsExpanded[index].expanded
-                      ? "md:plc-whitespace-normal plc-whitespace-normal"
-                      : "plc-whitespace-normal"
-                  }`}
+                  className={`plc-overflow-x-hidden ${productsDescriptionsExpanded[index].expanded
+                    ? "md:plc-whitespace-normal plc-whitespace-normal"
+                    : "plc-whitespace-normal"
+                    }`}
                 >
                   {productsDescriptionsExpanded[index].expanded ? (
                     <span>
@@ -380,9 +431,6 @@ class SelectModal extends Component {
           <div className="plc-mt-3 plc-mb-6">
             {product.plans && (
               <>
-                {/* <p className="plc-mb-2 plc-text-sm plc-text-gray-600 plc-font-bold">
-                  {this.locale("labels.startingAt")}
-                </p> */}
 
                 {this.countStartPrice(product.plans)}
               </>
@@ -399,7 +447,7 @@ class SelectModal extends Component {
               {productButtonLabel}
             </Button>
           )}
-        </div>
+        </div> */}
       </div>
     );
   };
@@ -419,23 +467,23 @@ class SelectModal extends Component {
       this.renderOneProduct(product, index)
     );
 
-    const isMobile = this.state.windowWidth < 768;
-    const shouldRenderCarousel =
-      items.length >= 2 && (isMobile || items.length > 2);
+    // const isMobile = this.state.windowWidth < 768;
+    // const shouldRenderCarousel =
+    //   items.length >= 2 && (isMobile || items.length > 2);
 
-    if (shouldRenderCarousel) {
-      return (
-        <Carousel
-          slidesCount={items.length}
-          mobileArrowDown={isMobile}
-        >
-          {items}
-        </Carousel>
-      );
-    }
+    // if (shouldRenderCarousel) {
+    //   return (
+    //     <Carousel
+    //       slidesCount={items.length}
+    //       mobileArrowDown={isMobile}
+    //     >
+    //       {items}
+    //     </Carousel>
+    //   );
+    // }
 
     return (
-      <div className="plc-flex plc-flex-col md:plc-flex-row plc-gap-4 plc-items-center sm:plc-px-8 plc-px-0">
+      <div className="plc-grid plc-grid-cols-1 plc-gap-3 plc-max-plan-width plc-mt-4">
         {items}
       </div>
     );
@@ -523,11 +571,10 @@ class SelectModal extends Component {
           {description && (
             <div className="plc-text-left plc-text-sm">
               <div
-                className={`plc-overflow-x-hidden ${
-                  prodDescExpanded
-                    ? "md:plc-whitespace-normal plc-whitespace-normal"
-                    : "md:plc-whitespace-nowrap plc-whitespace-normal"
-                }`}
+                className={`plc-overflow-x-hidden ${prodDescExpanded
+                  ? "md:plc-whitespace-normal plc-whitespace-normal"
+                  : "md:plc-whitespace-nowrap plc-whitespace-normal"
+                  }`}
               >
                 {prodDescExpanded ? (
                   <span>
@@ -595,7 +642,7 @@ class SelectModal extends Component {
             {matchingItems}
           </Carousel>
         ) : (
-          <div className="plc-flex plc-flex-col md:plc-flex-row plc-gap-4 plc-items-center sm:plc-px-8 plc-px-0">
+          <div className="plc-flex plc-flex-col md:plc-flex-row plc-gap-4 plc-items-center plc-px-8 ">
             {matchingItems}
           </div>
         )}
@@ -615,7 +662,7 @@ class SelectModal extends Component {
                 {otherItems}
               </Carousel>
             ) : (
-              <div className="plc-flex plc-flex-col md:plc-flex-row plc-gap-4 plc-items-center sm:plc-px-8 plc-px-0">
+              <div className="plc-flex plc-flex-col md:plc-flex-row plc-gap-4 plc-items-center plc-px-8 ">
                 {otherItems}
               </div>
             )}
@@ -661,11 +708,10 @@ class SelectModal extends Component {
       return (
         <div
           key={plan.id}
-          className={`${
-            this.state?.plan.id === plan.id
-              ? "plc-border-2 plc-border-primary"
-              : "plc-border plc-border-gray-300"
-          } plc-h-full plc-w-84 plc-min-h-card plc-flex plc-flex-col plc-items-start plc-text-gray-900 plc-border-solid plc-rounded-sm plc-bg-white pelcro-select-plan-wrapper`}
+          className={`${this.state?.plan.id === plan.id
+            ? "plc-border-2 plc-border-primary"
+            : "plc-border plc-border-gray-300"
+            } plc-h-full plc-w-84 plc-min-h-card plc-flex plc-flex-col plc-items-start plc-text-gray-900 plc-border-solid plc-rounded-sm plc-bg-white pelcro-select-plan-wrapper`}
         >
           <div
             className="plc-w-full plc-flex plc-flex-col plc-flex-1 plc-h-full plc-justify-between"
@@ -710,14 +756,17 @@ class SelectModal extends Component {
                 </span>
               </div>
               <div
-                className={`plc-grid plc-bg-primary ${
-                  disableGifting
-                    ? "plc-grid-cols-1"
-                    : "plc-grid-cols-2"
-                }`}
+                className={`plc-grid plc-bg-primary ${disableGifting
+                  ? "plc-grid-cols-1"
+                  : "plc-grid-cols-2"
+                  }`}
               >
                 <button
-                  className={`plc-flex plc-items-center plc-justify-center plc-text-center plc-py-2 plc-px-4 plc-w-full plc-border-2 plc-rounded-sm plc-border-primary focus:plc-outline-none plc-text-white plc-bg-primary hover:plc-bg-primary-600 hover:plc-border-primary-600 plc-transition-all`}
+                  className={`plc-flex plc-items-center 
+                    plc-justify-center plc-text-center 
+                    plc-py-2 plc-px-4 plc-w-full plc-border-2 plc-rounded-sm plc-border-primary 
+                    focus:plc-outline-none plc-text-white plc-bg-primary 
+                    hover:plc-bg-primary-600 hover:plc-border-primary-600 plc-transition-all`}
                   data-key={plan.id}
                   onClick={(e) => {
                     this.selectPlan(e, false);
@@ -760,7 +809,7 @@ class SelectModal extends Component {
     }
 
     return (
-      <div className="plc-flex plc-flex-col md:plc-flex-row plc-gap-4 plc-items-center sm:plc-px-8 plc-px-0">
+      <div className="plc-flex plc-flex-col md:plc-flex-row plc-gap-4 plc-items-center plc-px-8 ">
         {items}
       </div>
     );
@@ -863,43 +912,34 @@ class SelectModal extends Component {
 
     return (
       <Modal
-        className="plc-max-w-full sm:plc-max-w-90% md:plc-max-w-70% plc-w-auto"
+        bg="plc-bg-[#F9F9FA]"
+        className="plc-w-fit plc-max-w-[90vw] plc-p-2  plc-rounded-3xl plc-border-0"
         hideCloseButton={!this.closeButton}
         id="pelcro-selection-modal"
       >
         <ModalHeader
-          className="plc-pl-20"
+          className=""
           onCloseModal={this.props.onClose}
+          title={(this.product && this.product.paywall.select_title) ||
+            window.Pelcro.product.list()[0]?.paywall.select_title}
+          description={(this.product && this.product.paywall.select_subtitle) ||
+            window.Pelcro.product.list()[0]?.paywall.select_subtitle}
         >
-          <div className="plc-text-left plc-text-gray-900 pelcro-title-wrapper plc-flex-1 plc-flex plc-flex-col plc-justify-center">
-            {this.state.mode === "plan" && (
-              <button
-                type="button"
-                onClick={this.goBack}
-                className="plc-absolute plc-w-6 plc-text-gray-500 focus:plc-text-black plc-z-max plc-top-1/2 plc-left-6 plc-transform plc--translate-y-1/2 plc-border-0 hover:plc-text-black hover:plc-shadow-none plc-bg-transparent hover:plc-bg-transparent focus:plc-bg-transparent"
-              >
-                <ArrowLeft />
-              </button>
-            )}
-
-            <h4 className="plc-text-xl plc-font-bold">
-              {(this.product && this.product.paywall.select_title) ||
-                window.Pelcro.product.list()[0]?.paywall.select_title}
-            </h4>
-            <p className="plc-text-sm">
-              {(this.product &&
-                this.product.paywall.select_subtitle) ||
-                window.Pelcro.product.list()[0]?.paywall
-                  .select_subtitle}
-            </p>
-          </div>
+          {this.state.mode === "plan" && (
+            <button
+              type="button"
+              onClick={this.goBack}
+              className="plc-absolute plc-w-6 plc-text-gray-500 focus:plc-text-black plc-z-max plc-top-1/2 plc-left-6 plc-transform plc--translate-y-1/2 plc-border-0 hover:plc-text-black hover:plc-shadow-none plc-bg-transparent hover:plc-bg-transparent focus:plc-bg-transparent"
+            >
+              <ArrowLeft />
+            </button>
+          )}
         </ModalHeader>
 
         <ModalBody>
-          <div id="pelcro-selection-view">
+          <div id="pelcro-selection-view" className="plc-py-4 " >
             <div className="pelcro-select-products-wrapper">
-              {window.Pelcro.site.read()
-                ?.restrictive_paywall_metatags_enabled
+              {window.Pelcro.site.read()?.restrictive_paywall_metatags_enabled
                 ? this.renderMatchingProductsFirst()
                 : this.renderProducts()}
             </div>
@@ -911,7 +951,8 @@ class SelectModal extends Component {
             )}
           </div>
         </ModalBody>
-        <ModalFooter></ModalFooter>
+
+        <ModalFooter />
       </Modal>
     );
   }

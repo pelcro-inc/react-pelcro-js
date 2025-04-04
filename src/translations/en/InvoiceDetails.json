@@ -5,7 +5,18 @@
     "total": "Total",
     "amountPaid": "Amount paid",
     "amountDue": "Amount due",
-    "creationDate": "Created on:"
+    "creationDate": "Created on:",
+    "shippedTo": "Shipped to",
+    "invoiceNumber": "Invoice #",
+    "invoiceStatus": "Invoice status",
+    "invoiceDate": "Invoice date",
+    "paymentMethod": "Payment method",
+    "currency": "Currency",
+    "description": "Description",
+    "quantity": "Quantity",
+    "unitPrice": "Unit price",
+    "amount": "Amount",
+    "subtotal": "Subtotal"
   },
   "buttons": {
     "download": "Download",

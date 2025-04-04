@@ -12,19 +12,9 @@ export const CartRemoveItemButton = ({
   const { removeFromCart } = usePelcro();
 
   return (
-    <Button
-      variant="icon"
+    <button
       data-key={itemId}
-      icon={
-        <RemoveIcon
-          aria-hidden="true"
-          focusable="false"
-          className="plc-fill-current"
-          height="20"
-          width="20"
-        />
-      }
-      className="plc-bg-transparent plc-w-9 plc-h-9 plc-p-2 hover:plc-text-red-500 hover:plc-bg-transparent"
+      className="hover:plc-text-red-500 hover:plc-bg-transparent plc-font-medium plc-text-sm plc-text-gray-500"
       onClick={() => {
         removeFromCart(itemId);
         onClick?.();
@@ -32,6 +22,7 @@ export const CartRemoveItemButton = ({
       {...otherProps}
     >
       {children}
-    </Button>
+      Remove
+    </button>
   );
 };

@@ -178,7 +178,7 @@ const LoginContainer = ({
   return (
     <div
       style={{ ...style }}
-      className={`pelcro-container pelcro-login-container ${className}`}
+      className={` ${className}`}
     >
       <Provider value={{ state, dispatch }}>
         {children.length

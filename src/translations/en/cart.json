@@ -9,5 +9,13 @@
     "total": "Total",
     "confirm": "Checkout",
     "empty": "Your cart is empty.",
-    "removeAll": "Remove all"
+    "removeAll": "Remove all",
+    "continueShopping": "Continue Shopping",
+    "shippingAndTaxes": "Shipping and taxes calculated at checkout.",
+    "or": "Or",
+    "checkout": "Checkout",
+    "subtotal": "Subtotal",
+    "shipping": "Shipping",
+    "taxes": "Taxes"
+    
 }

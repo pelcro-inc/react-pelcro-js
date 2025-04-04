@@ -8,7 +8,10 @@ export const ToggleSwitch = ({ label, isActive, handleChange }) => {
     handleChange?.();
   };
 
-  
+  useEffect(() => {
+    setIsToggled(isActive ?? false);
+  }, [isActive]);
+
   return (
     <label className="toggle-switch">
       <input
@@ -16,7 +19,7 @@ export const ToggleSwitch = ({ label, isActive, handleChange }) => {
         checked={isToggled}
         onChange={onToggle}
       />
-      <span className={`switch ${isToggled ? 'plc-bg-primary-200' : ''}`} />
+      <span className={`switch ${isToggled ? 'plc-bg-primary-600' : ''}`} />
     </label>
   );
 };

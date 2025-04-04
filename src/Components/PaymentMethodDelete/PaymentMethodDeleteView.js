@@ -15,12 +15,9 @@ export function PaymentMethodDeleteView(props) {
         <AlertWithContext />
         <PaymentMethodDetails />
         <PaymentMethodDeleteList />
-        <p className="plc-text-sm plc-text-justify">
-          {t("delete.message")}
-        </p>
-        <div className="plc-space-x-0 plc-space-y-3 plc-w-full plc-flex plc-flex-col plc-items-center plc-justify-center plc-mt-4">
-          <PaymentMethodDeleteSubmit />
+        <div className="plc-space-x-3 plc-flex plc-flex-row plc-items-center plc-justify-center plc-mt-4">
           <PaymentMethodDeleteBack />
+          <PaymentMethodDeleteSubmit />
         </div>
       </PaymentMethodDeleteContainer>
     </div>

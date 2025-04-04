@@ -1,4 +1,3 @@
-@layer components {
   .pelcro-root .pelcro-notification-error {
     @apply plc-text-sm plc-font-semibold plc-text-white plc-bg-red-500;
   }
@@ -30,4 +29,3 @@
   .pelcro-root .pelcro-notification-entitlement {
     @apply plc-font-semibold plc-text-sm plc-bg-white plc-text-gray-600 plc-border-t-8 plc-border-primary-500;
   }
-}

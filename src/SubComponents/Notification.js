@@ -12,6 +12,7 @@ import { ReactComponent as SolidExclamationIcon } from "../assets/exclamation.sv
 import { ReactComponent as SpinnerIcon } from "../assets/spinner.svg";
 import { Button } from "./Button";
 import i18n from "../i18n";
+import "./Notification.css";
 
 export const Notification = ({ children, ...otherProps }) => {
   return (
@@ -100,10 +101,10 @@ toast.confirm = (
     (t) => (
       <div className="plc-space-y-4">
         <p className="plc-font-semibold">{confirmMessage}</p>
-        <div className="plc-space-y-2 sm:plc-space-y-0 sm:plc-space-x-2">
+        <div className="plc-flex plc-space-x-2">
           <Button
             variant="solid"
-            className="plc-text-xs plc-bg-red-500 hover:plc-bg-red-600 plc-min-h-0"
+            className="plc-text-xs plc-bg-red-500 plc-hover:bg-red-600 plc-min-h-0"
             onClick={onConfirmClick}
           >
             {confirmButtonLabel ?? translations.labels.confirm}

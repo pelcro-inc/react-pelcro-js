@@ -35,116 +35,94 @@ export const AddressesMenu = (props) => {
   return (
     <Card
       id="pelcro-dashboard-addresses-menu"
-      className="plc-max-w-100% md:plc-max-w-60% plc-m-auto"
+      className="plc-profile-menu-width"
       title={t("labels.addresses")}
       requestStates={requestStates}
     >
-      <AddressesItems
-        requestStates={requestStates}
-        setRequestStates={setRequestStates}
-        displayAddressEdit={displayAddressEdit}
-      />
-      <AddNew
-        title={t("labels.addAddress")}
-        onClick={displayAddressCreate}
-      />
+      <div className="plc-space-y-4">
+        <AddressesItems
+          requestStates={requestStates}
+          setRequestStates={setRequestStates}
+          displayAddressEdit={displayAddressEdit}
+        />
+        <AddNew
+          title={t("labels.addAddress")}
+          onClick={displayAddressCreate}
+          className="plc-mt-4"
+        />
+      </div>
     </Card>
   );
 };
 
 const AddressesItems = (props) => {
   const { t } = useTranslation("dashboard");
-  // const [selectedAddressId, setSelectedAddressId] = useState(null);
   const addresses = window.Pelcro.user.read().addresses ?? [];
-
-  // useEffect(() => {
-  //   setSelectedAddressId(
-  //     String(getDefaultShippingAddress(addresses)?.id)
-  //   );
-  // }, []);
-
-  // const getDefaultShippingAddress = (addresses) => {
-  //   return (
-  //     addresses.find(
-  //       (address) => address.type == "shipping" && address.is_default
-  //     ) || false
-  //   );
-  // };
-
-  // const getDefaultBillingAddress = (addresses) => {
-  //   return (
-  //     addresses.find(
-  //       (address) => address.type == "billing" && address.is_default
-  //     ) || false
-  //   );
-  // };
-
-  // const moveDefaultAddressToStart = (addresses) => {
-  //   const defaultShippingAddress =
-  //     getDefaultShippingAddress(addresses);
-  //   const defaultBillingAddress = getDefaultBillingAddress(addresses);
-  //   const addressesWithoutDefault = addresses.filter(
-  //     (address) => !address.is_default
-  //   );
-
-  //   return [
-  //     defaultShippingAddress,
-  //     defaultBillingAddress,
-  //     ...addressesWithoutDefault
-  //   ];
-  // };
-
-  // const addresses = moveDefaultAddressToStart(allAddresses);
 
   if (addresses.length === 0) return null;
 
-  return addresses
-    .sort((a, b) =>
-      a.is_default === b.is_default ? 0 : a.is_default ? -1 : 1
-    )
-    .map((address, index) => (
-      <div
-        key={address.id}
-        className="plc-py-2 plc-px-4 plc-mt-5 plc-flex plc-items-center plc-justify-between last:plc-mb-0 plc-rounded plc-text-gray-900 pelcro-address-wrapper plc-bg-white plc-shadow-md_dark"
-      >
-        <div className="plc-flex-1 plc-relative">
-          <p className="pelcro-address-name plc-font-semibold">
-            {address.first_name} {address.last_name}
-          </p>
-          <p className="pelcro-address-company">{address.company}</p>
-          <p className="pelcro-address-line1 plc-text-sm plc-mt-2">
-            {address.line1}
-          </p>
-          <p className="pelcro-address-country plc-text-sm">
-            {address.city}, {address.state_name} {address.postal_code}
-            , {address.country_name}
-          </p>
-          <p className="pelcro-address-phone plc-text-sm">
-            {address?.phone}
-          </p>
-        </div>
-        <span className="plc-rounded-full plc-bg-gray-200 plc-text-black plc-inline-flex plc-items-start plc-py-1 plc-px-4 plc-text-sm plc-capitalize">
-          {address.type === "shipping"
-            ? t("labels.shipping")
-            : t("labels.billing")}
-        </span>
-        {address.is_default && (
-          <span className="plc-rounded-full plc-bg-gray-800 plc-text-white plc-inline-flex plc-items-start plc-py-1 plc-px-4 plc-text-sm plc-mr-4 plc-ml-2">
-            {t("labels.default")}
-          </span>
-        )}
+  return (
+    <div className="plc-space-y-4">
+      {addresses
+        .sort((a, b) =>
+          a.is_default === b.is_default ? 0 : a.is_default ? -1 : 1
+        )
+        .map((address, index) => (
+          <div
+            key={address.id}
+            className={`plc-p-4 plc-rounded-lg plc-bg-white plc-shadow-sm plc-border ${address.is_default
+              ? "plc-ring-2 plc-ring-primary-400"
+              : "plc-border-gray-200"
+              } plc-transition-all hover:plc-shadow-md`}
+          >
+            <div className="plc-flex plc-items-start plc-justify-between">
+              <div className="plc-flex-1">
+                <p className="plc-font-semibold plc-text-gray-900">
+                  {address.first_name} {address.last_name}
+                </p>
+                {address.company && (
+                  <p className="plc-text-sm plc-text-gray-600">
+                    {address.company}
+                  </p>
+                )}
+                <div className="plc-mt-2 plc-space-y-1 plc-text-sm plc-text-gray-500">
+                  <p>{address.line1}</p>
+                  <p>
+                    {address.city}, {address.state_name} {address.postal_code}
+                  </p>
+                  <p>{address.country_name}</p>
+                  {address.phone && <p>{address.phone}</p>}
+                </div>
+              </div>
 
-        <Button
-          variant="icon"
-          className="plc-text-gray-500"
-          icon={<EditIcon />}
-          id={"pelcro-button-update-address-" + index}
-          data-key={address.id}
-          data-type={address.type}
-          onClick={props?.displayAddressEdit}
-        ></Button>
-      </div>
-    ));
+              <div className="plc-flex plc-flex-col plc-items-end plc-space-y-2">
+                <div className="plc-flex plc-items-center plc-space-x-2">
+                  <span className="plc-px-3 plc-py-1 plc-text-xs plc-font-medium plc-rounded-full plc-bg-gray-100 plc-text-gray-600">
+                    {address.type === "shipping"
+                      ? t("labels.shipping")
+                      : t("labels.billing")}
+                  </span>
+                  {address.is_default && (
+                    <span className="plc-px-3 plc-py-1 plc-text-xs plc-font-medium plc-rounded-full plc-bg-gray-800 plc-text-white">
+                      {t("labels.default")}
+                    </span>
+                  )}
+                </div>
+                <Button
+                  variant="icon"
+                  className="plc-text-gray-400 hover:plc-text-gray-600 plc-transition-colors"
+                  icon={<EditIcon className="plc-w-5 plc-h-5" />}
+                  id={`pelcro-button-update-address-${index}`}
+                  data-key={address.id}
+                  data-type={address.type}
+                  onClick={props?.displayAddressEdit}
+                />
+              </div>
+            </div>
+          </div>
+        ))}
+    </div>
+  );
 };
 
 AddressesMenu.viewId = "addresses";

@@ -21,11 +21,11 @@ export const PaymentMethodSelectList = () => {
   };
 
   return (
-    <div>
+    <div className="plc-w-full plc-my-6">
       {skeletonLoader ? (
         <div className="plc-w-full plc-h-20 plc-bg-gray-300 plc-rounded-md plc-animate-pulse"></div>
       ) : (
-        <div className="plc-px-3 plc-py-2 plc-space-y-4 plc-overflow-y-scroll plc-max-h-80 pelcro-payment-method-select-wrapper">
+        <div className=" plc-space-y-4  pelcro-payment-method-select-wrapper">
           {paymentMethods.map((paymentMethod) => {
             const isSelected =
               selectedPaymentMethodId === String(paymentMethod.id);
@@ -33,11 +33,10 @@ export const PaymentMethodSelectList = () => {
             return (
               <div
                 key={paymentMethod.id}
-                className={`plc-p-2 plc-pl-4 plc-shadow-md plc-text-gray-900 plc-rounded plc-min-h-14 plc-flex plc-items-center pelcro-payment-method-wrapper ${
-                  isSelected
-                    ? "plc-ring-2 plc-ring-primary-400"
-                    : "plc-ring-1 plc-ring-gray-200"
+                className={`plc-p-4 plc-mb-4 last:plc-mb-0 plc-rounded-lg plc-text-gray-900 pelcro-address-wrapper plc-bg-white plc-shadow-sm plc-border-2 plc-border-gray-200 hover:plc-border-primary-600 hover:plc-shadow-md transition-all plc-w-full ${
+                  isSelected ? "plc-border-primary-600" : ""
                 }`}
+
               >
                 <Radio
                   className="plc-flex plc-items-center pelcro-select-payment-method-radio"

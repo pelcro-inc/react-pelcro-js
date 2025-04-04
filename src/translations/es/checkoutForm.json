@@ -12,6 +12,7 @@
     "submit": "Enviar",
     "pay": "Pagar",
     "addCode": "Agregar un código de cupón",
+    "couponCode": "Código de cupón",
     "hideCode": "Ocultar",
     "codePlaceholder": "Ingresa tu código de cupón",
     "applyCouponCode": "Aplicar",

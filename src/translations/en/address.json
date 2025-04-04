@@ -14,12 +14,13 @@
     "lastName": "Last name",
     "phone": "Phone Number",
     "required": "required",
-    "isDefault": "Set as your default address"
+    "isDefault": "Set as your default address",
+    "haveCoupon": "Have a coupon?"
   },
   "buttons": {
     "submit": "Submit",
-    "selectAddress": "Select address",
-    "addAddress": "Add new address"
+    "selectAddress": "Select Address",
+    "addAddress": "Add New Address"
   },
   "messages": {
     "addressUpdated": "The address was successfully updated!",

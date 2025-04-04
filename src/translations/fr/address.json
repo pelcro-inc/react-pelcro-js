@@ -12,7 +12,8 @@
     "firstName": "Prénom",
     "lastName": "Nom de famille",
     "required": "Champs obligatoires",
-    "isDefault": "Définir comme adresse par défaut"
+    "isDefault": "Définir comme adresse par défaut",
+    "haveCoupon": "Vous avez un coupon ?"
   },
   "buttons": {
     "submit": "Valider",
