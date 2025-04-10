@@ -68,7 +68,6 @@ export const Main = () => {
       <SelectModal />
       <Newsletter />
       <NewsletterUpdateModal />
-
       <AddressCreateModal />
       <BillingAddressCreateModal />
       <AddressSelectModal />
