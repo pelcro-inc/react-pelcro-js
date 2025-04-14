@@ -152,7 +152,10 @@ export const orderSummaryRequest = (
   onSuccess,
   onError
 ) => {
-  const domain = window.Pelcro.environment?.domain 
+  const domain = window.Pelcro.environment?.domain ||
+    (isStagingEnvironment()
+      ? "https://staging.pelcro.com"
+      : "https://www.pelcro.com");
   const url = `${domain}/api/v1/sdk/ecommerce/order-summary`;
 
   const defaultParams = {
