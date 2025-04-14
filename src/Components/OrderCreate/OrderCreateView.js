@@ -25,10 +25,10 @@ export const OrderCreateView = ({
 
   const address = selectedAddressId
     ? addresses?.find((address) => address.id == selectedAddressId) ??
-      null
+    null
     : addresses?.find(
-        (address) => address.type == "shipping" && address.is_default
-      ) ?? null;
+      (address) => address.type == "shipping" && address.is_default
+    ) ?? null;
 
   const [paymentInfo, setPaymentInfo] = useState({});
 
@@ -48,7 +48,7 @@ export const OrderCreateView = ({
     };
     orderSummaryRequest(orderSummaryPaylod, onSuccess, onError);
   }
-  
+
 
   useEffect(() => {
 
@@ -57,23 +57,23 @@ export const OrderCreateView = ({
     }
 
     const orderSummaryPayload = {
-      items: Array.isArray(order) 
+      items: Array.isArray(order)
         ? order.map((item) => {
-            return {
-              sku_id: item.id,
-              quantity: item.quantity
-            };
-          })
-        : [{ 
-            sku_id: order.id,
-            quantity: order.quantity
-          }]
+          return {
+            sku_id: item.id,
+            quantity: item.quantity
+          };
+        })
+        : [{
+          sku_id: order.id,
+          quantity: order.quantity
+        }]
     };
 
     if (window.Pelcro.site.read()?.taxes_enabled) {
       orderSummaryPayload.address_id = selectedAddressId;
     }
-    
+
 
     fetchOrderSummary(orderSummaryPayload);
   }, [order, selectedAddressId]);
@@ -152,9 +152,10 @@ export const orderSummaryRequest = (
   onSuccess,
   onError
 ) => {
-  const domain = isStagingEnvironment()
-    ? "https://staging.pelcro.com"
-    : "https://www.pelcro.com";
+  const domain = window.Pelcro.environment?.domain ||
+    (isStagingEnvironment()
+      ? "https://staging.pelcro.com"
+      : "https://www.pelcro.com");
   const url = `${domain}/api/v1/sdk/ecommerce/order-summary`;
 
   const defaultParams = {
