@@ -2272,6 +2272,7 @@ const PaymentMethodContainerWithoutStripe = ({
           orderSummaryParams,
           handleCouponResponse
         );
+        
       }
     }
   };
