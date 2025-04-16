@@ -141,9 +141,9 @@ const PaymentMethodContainerWithoutStripe = ({
   children,
   stripe,
   type,
-  onSuccess = () => {},
-  onGiftRenewalSuccess = () => {},
-  onFailure = () => {},
+  onSuccess = () => { },
+  onGiftRenewalSuccess = () => { },
+  onFailure = () => { },
   ...props
 }) => {
   const [vantivPaymentRequest, setVantivPaymentRequest] =
@@ -636,11 +636,9 @@ const PaymentMethodContainerWithoutStripe = ({
                 window.Pelcro.site.read().default_currency,
               tap_token: result.id,
               funding: result.card.funding,
-              redirect_url: `${
-                window.Pelcro.environment.domain
-              }/webhook/tap/callback/3dsecure?auth_token=${
-                window.Pelcro.user.read().auth_token
-              }&type=verify_card&site_id=${window.Pelcro.siteid}`
+              redirect_url: `${window.Pelcro.environment.domain
+                }/webhook/tap/callback/3dsecure?auth_token=${window.Pelcro.user.read().auth_token
+                }&type=verify_card&site_id=${window.Pelcro.siteid}`
             },
             (err, res) => {
               if (err) {
@@ -2257,15 +2255,21 @@ const PaymentMethodContainerWithoutStripe = ({
         const mappedOrderItems = isQuickPurchase
           ? [{ sku_id: order.id, quantity: order.quantity }]
           : order.map((item) => ({
-              sku_id: item.id,
-              quantity: item.quantity
-            }));
+            sku_id: item.id,
+            quantity: item.quantity
+          }));
+
+        const orderSummaryParams = {
+          items: mappedOrderItems,
+          coupon_code: couponCode
+        };
+
+        if (window.Pelcro.site.read()?.taxes_enabled) {
+          orderSummaryParams.address_id = selectedAddressId;
+        }
 
         window.Pelcro.ecommerce.order.createSummary(
-          {
-            items: mappedOrderItems,
-            coupon_code: couponCode
-          },
+          orderSummaryParams,
           handleCouponResponse
         );
       }
@@ -2777,9 +2781,9 @@ const PaymentMethodContainerWithoutStripe = ({
     const mappedOrderItems = isQuickPurchase
       ? [{ sku_id: order.id, quantity: order.quantity }]
       : order.map((item) => ({
-          sku_id: item.id,
-          quantity: item.quantity
-        }));
+        sku_id: item.id,
+        quantity: item.quantity
+      }));
 
     const { couponCode } = state;
 
@@ -2918,7 +2922,7 @@ const PaymentMethodContainerWithoutStripe = ({
             if (
               res.data?.setup_intent?.status === "requires_action" ||
               res.data?.setup_intent?.status ===
-                "requires_confirmation"
+              "requires_confirmation"
             ) {
               confirmStripeIntentSetup(res, "create");
             } else {
@@ -3023,7 +3027,7 @@ const PaymentMethodContainerWithoutStripe = ({
             if (
               res.data?.setup_intent?.status === "requires_action" ||
               res.data?.setup_intent?.status ===
-                "requires_confirmation"
+              "requires_confirmation"
             ) {
               confirmStripeIntentSetup(
                 res,
@@ -3128,9 +3132,9 @@ const PaymentMethodContainerWithoutStripe = ({
       const mappedOrderItems = isQuickPurchase
         ? [{ sku_id: order.id, quantity: order.quantity }]
         : order.map((item) => ({
-            sku_id: item.id,
-            quantity: item.quantity
-          }));
+          sku_id: item.id,
+          quantity: item.quantity
+        }));
       window.Pelcro.ecommerce.order.create(
         {
           items: mappedOrderItems,
@@ -3270,11 +3274,9 @@ const PaymentMethodContainerWithoutStripe = ({
         card: source?.id
       },
       redirect: {
-        return_url: `${
-          window.Pelcro.environment.domain
-        }/webhook/stripe/callback/3dsecure?auth_token=${
-          window.Pelcro.user.read().auth_token
-        }`
+        return_url: `${window.Pelcro.environment.domain
+          }/webhook/stripe/callback/3dsecure?auth_token=${window.Pelcro.user.read().auth_token
+          }`
       }
     });
   };
@@ -3701,10 +3703,10 @@ const PaymentMethodContainerWithoutStripe = ({
       <Provider value={{ state, dispatch }}>
         {children.length
           ? children.map((child, i) => {
-              if (child) {
-                return React.cloneElement(child, { store, key: i });
-              }
-            })
+            if (child) {
+              return React.cloneElement(child, { store, key: i });
+            }
+          })
           : React.cloneElement(children, { store })}
       </Provider>
     </div>
