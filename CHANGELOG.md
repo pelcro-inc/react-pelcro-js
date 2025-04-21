@@ -1,3 +1,10 @@
+# [3.26.0-beta.76](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.75...v3.26.0-beta.76) (2025-04-21)
+
+
+### Features
+
+* Feature/restore tax breakdown in api response ([#433](https://github.com/pelcro-inc/react-pelcro-js/issues/433)) ([852720b](https://github.com/pelcro-inc/react-pelcro-js/commit/852720b233c6ce88e503be111dfa92c6c1614d34))
+
 # [3.26.0-beta.75](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.74...v3.26.0-beta.75) (2025-02-19)
 
 
