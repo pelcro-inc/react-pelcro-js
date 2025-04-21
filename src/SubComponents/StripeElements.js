@@ -486,6 +486,8 @@ export const CheckoutForm = ({ type }) => {
     phone: window?.Pelcro?.user?.read()?.phone
   };
 
+  let isUsBank = paymentMethodToEdit?.properties?.brand === "us_bank_account";
+
   const paymentElementOptions = {
     layout: {
       type: "tabs",
@@ -538,7 +540,7 @@ export const CheckoutForm = ({ type }) => {
     );
   }
 
-  if (cardProcessor === "stripe") {
+  if (cardProcessor === "stripe" && !isUsBank) {
     if (type === "updatePaymentSource") {
       return (
         <div>

@@ -2013,9 +2013,9 @@ const PaymentMethodContainerWithoutStripe = ({
       {
         auth_token: window.Pelcro.user.read().auth_token,
         payment_method_id: paymentMethodId,
-        gateway: "stripe",
-        exp_month: month,
-        exp_year: year,
+        ...(month && year && { gateway: "stripe" }),
+        ...(month && { exp_month: month }),
+        ...(year && { exp_year: year }),
         is_default: isDefault
       },
       (err, res) => {
