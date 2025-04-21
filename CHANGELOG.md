@@ -1,3 +1,13 @@
+# [4.0.0-alpha.121](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.120...v4.0.0-alpha.121) (2025-04-21)
+
+
+### Features
+
+* applepay coupon fix ([#424](https://github.com/pelcro-inc/react-pelcro-js/issues/424)) ([c9a96f9](https://github.com/pelcro-inc/react-pelcro-js/commit/c9a96f98f0203f748707a8777c71abfdd3ba9cad))
+* applepay coupon fix ([#431](https://github.com/pelcro-inc/react-pelcro-js/issues/431)) ([be0e908](https://github.com/pelcro-inc/react-pelcro-js/commit/be0e9081a9753c5556ab6117b72f81d354bfe8ce))
+* credit-cart-not-updated ([f5ee997](https://github.com/pelcro-inc/react-pelcro-js/commit/f5ee997128c3bf7084b3f9f0d9f447cef129798a))
+* Release/support ach payment on stripe bugs and restore tax breakdown in api response ([#434](https://github.com/pelcro-inc/react-pelcro-js/issues/434)) ([2c1c043](https://github.com/pelcro-inc/react-pelcro-js/commit/2c1c0436cef6d81681411c76b95acc21b9b82f47))
+
 # [4.0.0-alpha.121](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.120...v4.0.0-alpha.121) (2025-04-11)
 
 
