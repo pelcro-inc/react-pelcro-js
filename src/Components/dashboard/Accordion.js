@@ -26,6 +26,8 @@ export const Accordion = ({ children, initialActiveMenu = "" }) => {
   };
 
   return React.Children.map(children, (child, i) => {
+    if (!child) return null;
+
     if (
       child.type === Accordion.item ||
       child.type === OrderItems ||
