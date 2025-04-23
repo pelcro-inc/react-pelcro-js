@@ -745,6 +745,8 @@ class Dashboard extends Component {
     const newsletters = window.Pelcro?.uiSettings?.newsletters;
     const siteHasNewslettersDefined =
       Array.isArray(newsletters) && newsletters.length > 0;
+    const separateNewsletter =
+      window.Pelcro?.uiSettings?.separateNewsletter;
 
     return (
       <Transition
@@ -846,18 +848,19 @@ class Dashboard extends Component {
                       {this.locale("labels.changePassword")}
                     </Button>
 
-                    {siteHasNewslettersDefined && (
-                      <Button
-                        variant="ghost"
-                        icon={
-                          <NewsletterIcon className="plc-w-5 plc-h-5 plc-mr-1" />
-                        }
-                        className="plc-text-sm plc-text-gray-500 hover:plc-text-primary-700"
-                        onClick={this.displayNewsletterUpdate}
-                      >
-                        {this.locale("labels.editNewsletters")}
-                      </Button>
-                    )}
+                    {siteHasNewslettersDefined &&
+                      !separateNewsletter && (
+                        <Button
+                          variant="ghost"
+                          icon={
+                            <NewsletterIcon className="plc-w-5 plc-h-5 plc-mr-1" />
+                          }
+                          className="plc-text-sm plc-text-gray-500 hover:plc-text-primary-700"
+                          onClick={this.displayNewsletterUpdate}
+                        >
+                          {this.locale("labels.editNewsletters")}
+                        </Button>
+                      )}
                     <Button
                       variant="ghost"
                       icon={
@@ -885,6 +888,30 @@ class Dashboard extends Component {
                 title={this.locale("labels.addresses")}
                 content={this.renderAddresses()}
               />
+
+              {siteHasNewslettersDefined && separateNewsletter ? (
+                <Accordion.item
+                  name="newsletter"
+                  icon={
+                    <NewsletterIcon className="plc-w-6 plc-h-6 plc-mr-2" />
+                  }
+                  title={this.locale("labels.newsletter")}
+                  content={
+                    <div className="plc-flex plc-flex-col plc-my-2 plc-ml-2 plc-space-y-4">
+                      <Button
+                        variant="ghost"
+                        icon={
+                          <NewsletterIcon className="plc-w-5 plc-h-5 plc-mr-1" />
+                        }
+                        className="plc-text-sm plc-text-gray-500 hover:plc-text-primary-700"
+                        onClick={this.displayNewsletterUpdate}
+                      >
+                        {this.locale("labels.editNewsletters")}
+                      </Button>
+                    </div>
+                  }
+                />
+              ) : null}
 
               <header className="plc-pl-4 plc-my-2 sm:plc-pl-8">
                 <p className="plc-text-xs plc-font-bold plc-tracking-widest plc-text-gray-500 plc-uppercase">
