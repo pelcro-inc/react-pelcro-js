@@ -627,6 +627,8 @@ class SelectModal extends Component {
 
   renderPlans = () => {
     const { disableGifting, hideGiftSelection } = this.props;
+    const hideGiftForAutoRenew =
+      window?.Pelcro?.uiSettings?.hideGiftForAutoRenew ?? false;
 
     const items = this.state.planList.map((plan) => {
       // const isChecked = this.state.plan.id === plan.id ? true : false;
@@ -711,7 +713,9 @@ class SelectModal extends Component {
               </div>
               <div
                 className={`plc-grid plc-bg-primary ${
-                  disableGifting
+                  disableGifting ||
+                  (hideGiftForAutoRenew &&
+                    (plan?.auto_renew ?? false))
                     ? "plc-grid-cols-1"
                     : "plc-grid-cols-2"
                 }`}
@@ -728,15 +732,17 @@ class SelectModal extends Component {
                   {this.locale("buttons.select")}
                 </button>
 
-                {!disableGifting && (
-                  <button
-                    className={`plc-flex plc-items-center plc-justify-center plc-text-center plc-py-2 plc-px-4 plc-w-full plc-border-2 plc-rounded-sm plc-border-primary focus:plc-outline-none plc-text-primary plc-bg-white hover:plc-border-primary-600 hover:plc-text-primary-600 hover:plc-shadow-sm plc-transition-all`}
-                    data-key={plan.id}
-                    onClick={(e) => this.selectPlan(e, true)}
-                  >
-                    {this.locale("buttons.gift")}
-                  </button>
-                )}
+                {!disableGifting &&
+                  (!hideGiftForAutoRenew ||
+                    !(plan?.auto_renew ?? false)) && (
+                    <button
+                      className={`plc-flex plc-items-center plc-justify-center plc-text-center plc-py-2 plc-px-4 plc-w-full plc-border-2 plc-rounded-sm plc-border-primary focus:plc-outline-none plc-text-primary plc-bg-white hover:plc-border-primary-600 hover:plc-text-primary-600 hover:plc-shadow-sm plc-transition-all`}
+                      data-key={plan.id}
+                      onClick={(e) => this.selectPlan(e, true)}
+                    >
+                      {this.locale("buttons.gift")}
+                    </button>
+                  )}
               </div>
             </div>
           </div>
