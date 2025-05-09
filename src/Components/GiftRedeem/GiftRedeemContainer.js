@@ -66,6 +66,7 @@ const GiftRedeemContainer = ({
     } else {
       set({ giftCode });
       if (!isAuthenticated()) {
+        set({ pendingGiftCode: giftCode });
         switchView("register");
       } else {
         window.Pelcro.subscription.redeemGift(
