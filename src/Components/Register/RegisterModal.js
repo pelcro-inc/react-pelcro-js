@@ -27,7 +27,8 @@ export function RegisterModal(props) {
     plan,
     order,
     giftCode,
-    isGift
+    isGift,
+    set
   } = usePelcro();
 
   const enableReactGA4 = window?.Pelcro?.uiSettings?.enableReactGA4;
@@ -57,6 +58,14 @@ export function RegisterModal(props) {
       return switchView("email-verify");
     }
 
+    // Check for pending gift code first
+    const pendingGiftCode = window.Pelcro.getStore()?.pendingGiftCode;
+    if (pendingGiftCode) {
+      // Set the gift code and clear the pending one
+      set({ giftCode: pendingGiftCode, pendingGiftCode: null });
+      return switchView("gift-redeem");
+    }
+
     if (!product && !order && !giftCode) {
       // If product and plan are not selected
       return resetView();
@@ -65,7 +74,6 @@ export function RegisterModal(props) {
     // If this is a redeem gift
     if (giftCode) {
       return switchView("gift-redeem");
-      // return switchToAddressView();
     }
 
     // Check if the subscription is meant as a gift (if so, gather recipients info)
