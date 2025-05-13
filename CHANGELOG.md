@@ -1,3 +1,10 @@
+# [3.48.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.47.0...v3.48.0) (2025-05-13)
+
+
+### Features
+
+* Add multiple brands post-ecommerce product purchase messaging ([#439](https://github.com/pelcro-inc/react-pelcro-js/issues/439)) ([1abe84d](https://github.com/pelcro-inc/react-pelcro-js/commit/1abe84d27f3f6d97e1d5ff71be9867e0de5d79a8))
+
 # [3.47.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.46.0...v3.47.0) (2025-02-27)
 
 
