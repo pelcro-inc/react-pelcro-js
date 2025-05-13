@@ -30,6 +30,12 @@ export const OrderConfirmModal = (props) => {
     resetView();
   };
 
+  // Check if any items in the order are shippable
+  const hasShippableItems = latestOrder?.items.some(item => {
+    const product = window.Pelcro.ecommerce.products.getBySkuId(item.product_sku_id);
+    return product?.shippable;
+  });
+
   return (
     <Modal
       id="pelcro-order-confirm-modal"
@@ -45,7 +51,11 @@ export const OrderConfirmModal = (props) => {
               <h4 className="plc-mb-4 plc-text-3xl">
                 {t("messages.orderConfirmed.title")}
               </h4>
-              <p>{t("messages.orderConfirmed.body")}</p>
+              <p>
+                {hasShippableItems
+                  ? t("messages.orderConfirmed.body")
+                  : t("messages.orderConfirmed.bodyDigital")}
+              </p>
               <p>{t("messages.haveQuestions")}</p>
             </div>
           </div>

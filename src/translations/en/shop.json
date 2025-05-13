@@ -8,7 +8,8 @@
   "messages": {
     "orderConfirmed": {
       "title": "Order confirmed!",
-      "body": "Your order has been confirmed and will be shipped within the next few days. You'll shortly receive an email confirmation of this order."
+      "body": "Your order has been confirmed and will be shipped within the next few days. You'll shortly receive an email confirmation of this order.",
+      "bodyDigital": "Your order has been confirmed. You'll shortly receive an email confirmation of this order."
     },
     "haveQuestions": "If you have any queries please don't hesitate to contact us!",
     "multipleCurrencies": "Your cart currently contains items which are available in different currencies. In order to proceed with the checkout, please make sure that all items have the same currency.",
