@@ -1,3 +1,10 @@
+# [3.26.0-beta.77](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.76...v3.26.0-beta.77) (2025-05-13)
+
+
+### Features
+
+* add conditional order confirmation message for digital products ([#437](https://github.com/pelcro-inc/react-pelcro-js/issues/437)) ([39d0458](https://github.com/pelcro-inc/react-pelcro-js/commit/39d045817fc035640a3896048add786b41380b9b))
+
 # [3.26.0-beta.76](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.75...v3.26.0-beta.76) (2025-04-21)
 
 
