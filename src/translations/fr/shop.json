@@ -8,7 +8,8 @@
   "messages": {
     "orderConfirmed": {
       "title": "Votre commande est confirmée !",
-      "body": "Votre commande a été confirmée et vous sera expédiée dans les prochains jours. Vous recevrez un courriel de confirmation sous peu."
+      "body": "Votre commande a été confirmée et vous sera expédiée dans les prochains jours. Vous recevrez un courriel de confirmation sous peu.",
+      "bodyDigital": "Votre commande a été confirmée et vous sera disponible pour téléchargement sous peu. Vous recevrez un courriel de confirmation sous peu."
     },
     "haveQuestions": "N’hésitez pas à nous contacter pour toute question !",
     "multipleCurrencies": "Votre panier contient des articles disponibles dans différentes devises. Avant de passer à la caisse, veuillez vous assurer que tous les articles ont la même devise.",

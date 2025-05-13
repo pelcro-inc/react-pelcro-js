@@ -30,6 +30,8 @@ export const OrderConfirmModal = (props) => {
     resetView();
   };
 
+  const hasShippableItems = latestOrder?.shipping_rate !== null;
+
   return (
     <Modal
       id="pelcro-order-confirm-modal"
@@ -45,7 +47,11 @@ export const OrderConfirmModal = (props) => {
               <h4 className="plc-mb-4 plc-text-3xl">
                 {t("messages.orderConfirmed.title")}
               </h4>
-              <p>{t("messages.orderConfirmed.body")}</p>
+              <p>
+                {hasShippableItems
+                  ? t("messages.orderConfirmed.body")
+                  : t("messages.orderConfirmed.bodyDigital")}
+              </p>
               <p>{t("messages.haveQuestions")}</p>
             </div>
           </div>
