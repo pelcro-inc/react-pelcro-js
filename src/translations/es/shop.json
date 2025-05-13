@@ -8,7 +8,8 @@
   "messages": {
     "orderConfirmed": {
       "title":"¡Orden confirmada!",
-      "body":"Tu orden ha sido confirmada y será enviada en los próximos días. En breve recibirás un correo electrónico de confirmación de esta orden."
+      "body":"Tu orden ha sido confirmada y será enviada en los próximos días. En breve recibirás un correo electrónico de confirmación de esta orden.",
+      "bodyDigital":"Tu orden ha sido confirmada y estará disponible para descargar en breve. En breve recibirás un correo electrónico de confirmación de esta orden."
     },
     "haveQuestions":"¡Si tienes alguna pregunta, no dudes en contactarnos!",
     "multipleCurrencies":"Tu carrito actualmente contiene artículos que están disponibles en diferentes divisas. Para proceder a la compra, asegúrate de que todos los artículos tengan la misma divisa.",
