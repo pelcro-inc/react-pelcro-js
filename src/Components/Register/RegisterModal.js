@@ -28,7 +28,8 @@ export function RegisterModal(props) {
     order,
     giftCode,
     isGift,
-    set
+    set,
+    pendingGiftCode
   } = usePelcro();
 
   const enableReactGA4 = window?.Pelcro?.uiSettings?.enableReactGA4;
@@ -58,8 +59,6 @@ export function RegisterModal(props) {
       return switchView("email-verify");
     }
 
-    // Check for pending gift code first
-    const pendingGiftCode = window.Pelcro.getStore()?.pendingGiftCode;
     if (pendingGiftCode) {
       // Set the gift code and clear the pending one
       set({ giftCode: pendingGiftCode, pendingGiftCode: null });
