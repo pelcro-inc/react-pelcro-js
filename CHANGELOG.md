@@ -1,3 +1,19 @@
+# [4.0.0-alpha.121](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.120...v4.0.0-alpha.121) (2025-05-14)
+
+
+### Bug Fixes
+
+* preserve gift code during registration flow to prevent re-entry ([#438](https://github.com/pelcro-inc/react-pelcro-js/issues/438)) ([745c2ed](https://github.com/pelcro-inc/react-pelcro-js/commit/745c2ed9cde1126450e4c73de1014aab37ed10ba))
+
+
+### Features
+
+* applepay coupon fix ([#424](https://github.com/pelcro-inc/react-pelcro-js/issues/424)) ([c9a96f9](https://github.com/pelcro-inc/react-pelcro-js/commit/c9a96f98f0203f748707a8777c71abfdd3ba9cad))
+* applepay coupon fix ([#431](https://github.com/pelcro-inc/react-pelcro-js/issues/431)) ([be0e908](https://github.com/pelcro-inc/react-pelcro-js/commit/be0e9081a9753c5556ab6117b72f81d354bfe8ce))
+* credit-cart-not-updated ([f5ee997](https://github.com/pelcro-inc/react-pelcro-js/commit/f5ee997128c3bf7084b3f9f0d9f447cef129798a))
+* hideGiftForAutoRenew prop ([#436](https://github.com/pelcro-inc/react-pelcro-js/issues/436)) ([644240c](https://github.com/pelcro-inc/react-pelcro-js/commit/644240c4bf881b158988fbd9af164b57c33c5bbd))
+* Release/support ach payment on stripe bugs and restore tax breakdown in api response ([#434](https://github.com/pelcro-inc/react-pelcro-js/issues/434)) ([2c1c043](https://github.com/pelcro-inc/react-pelcro-js/commit/2c1c0436cef6d81681411c76b95acc21b9b82f47))
+
 # [4.0.0-alpha.121](https://github.com/pelcro-inc/react-pelcro-js/compare/v4.0.0-alpha.120...v4.0.0-alpha.121) (2025-05-09)
 
 
