@@ -391,7 +391,8 @@ export const initViewFromURL = () => {
     window.Pelcro.helpers.getURLParameter("view")
   );
 
-  const { switchView, whenSiteReady } = usePelcro.getStore();
+  const { switchView, whenSiteReady, isAuthenticated } =
+    usePelcro.getStore();
   if (isValidViewFromURL(view)) {
     whenSiteReady(() => {
       if (view === "plan-select") {
@@ -404,6 +405,27 @@ export const initViewFromURL = () => {
 
         if (offlinePlanId) {
           return initOfflineSubscriptionFromURL(offlinePlanId);
+        }
+      }
+
+      if (view === "gift-redeem" || view === "redeem") {
+        // If not authenticated, redirect to register first
+        if (!isAuthenticated()) {
+          const giftCode =
+            window.Pelcro.helpers.getURLParameter("gift_code");
+          if (giftCode) {
+            usePelcro.getStore().set({ pendingGiftCode: giftCode });
+          }
+          return switchView("register");
+        } else {
+          // If authenticated, set the gift code in the store if it exists
+          const giftCode =
+            window.Pelcro.helpers.getURLParameter("gift_code");
+          if (giftCode) {
+            usePelcro.getStore().set({ giftCode });
+          }
+          // Always show the gift redemption modal, even if no code is provided
+          return switchView("gift-redeem");
         }
       }
 

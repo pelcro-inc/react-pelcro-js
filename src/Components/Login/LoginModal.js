@@ -42,6 +42,21 @@ export function LoginModal({ onDisplay, onClose, ...props }) {
       initPaywalls();
     }
 
+    const viewFromURL = getStableViewID(
+      window.Pelcro.helpers.getURLParameter("view")
+    );
+
+    // If this is a gift redemption flow
+    if (viewFromURL === "gift-redeem" || viewFromURL === "redeem") {
+      const giftCode =
+        window.Pelcro.helpers.getURLParameter("gift_code");
+      if (giftCode) {
+        usePelcro.getStore().set({ giftCode });
+      }
+      // Always show the gift redemption modal, even if no code is provided
+      return switchView("gift-redeem");
+    }
+
     if (!product && !order && !giftCode) {
       // If product and plan are not selected
       return resetView();
@@ -50,7 +65,6 @@ export function LoginModal({ onDisplay, onClose, ...props }) {
     // If this is a redeem gift
     if (giftCode) {
       return switchView("gift-redeem");
-      // return switchToAddressView();
     }
 
     // Check if the subscription is meant as a gift (if so, gather recipients info)
@@ -73,10 +87,6 @@ export function LoginModal({ onDisplay, onClose, ...props }) {
     if (product && !plan) {
       return switchView("plan-select");
     }
-
-    const viewFromURL = getStableViewID(
-      window.Pelcro.helpers.getURLParameter("view")
-    );
 
     const viewsURLs = [
       "invoice-details",
