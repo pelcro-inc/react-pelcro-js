@@ -40,6 +40,7 @@ import { MembershipsMenu } from "./DashboardMenus/MembershipsMenu";
 import { notify } from "../../SubComponents/Notification";
 import ReactGA from "react-ga";
 import ReactGA4 from "react-ga4";
+import { EmailPreferencesMenu } from "./EmailPreferencesMenu";
 
 const SUB_MENUS = {
   PROFILE: "profile",
@@ -51,7 +52,8 @@ const SUB_MENUS = {
   GIFTS: "gifts",
   ORDERS: "orders",
   INVOICES: "invoices",
-  SAVED_ITEMS: "saved-items"
+  SAVED_ITEMS: "saved-items",
+  EMAIL_PREFERENCES: "email-preferences"
 };
 
 /**
@@ -743,6 +745,8 @@ class Dashboard extends Component {
       window.Pelcro.user.read().profile_photo ?? userSolidIcon;
 
     const newsletters = window.Pelcro?.uiSettings?.newsletters;
+    const emailNotifications =
+      window.Pelcro?.uiSettings?.emailNotifications;
     const siteHasNewslettersDefined =
       Array.isArray(newsletters) && newsletters.length > 0;
 
@@ -846,18 +850,19 @@ class Dashboard extends Component {
                       {this.locale("labels.changePassword")}
                     </Button>
 
-                    {siteHasNewslettersDefined && (
-                      <Button
-                        variant="ghost"
-                        icon={
-                          <NewsletterIcon className="plc-w-5 plc-h-5 plc-mr-1" />
-                        }
-                        className="plc-text-sm plc-text-gray-500 hover:plc-text-primary-700"
-                        onClick={this.displayNewsletterUpdate}
-                      >
-                        {this.locale("labels.editNewsletters")}
-                      </Button>
-                    )}
+                    {siteHasNewslettersDefined &&
+                      emailNotifications !== true && (
+                        <Button
+                          variant="ghost"
+                          icon={
+                            <NewsletterIcon className="plc-w-5 plc-h-5 plc-mr-1" />
+                          }
+                          className="plc-text-sm plc-text-gray-500 hover:plc-text-primary-700"
+                          onClick={this.displayNewsletterUpdate}
+                        >
+                          {this.locale("labels.editNewsletters")}
+                        </Button>
+                      )}
                     <Button
                       variant="ghost"
                       icon={
@@ -975,6 +980,14 @@ class Dashboard extends Component {
                 icon={<BookmarkIcon />}
                 title={this.locale("labels.savedItems.label")}
                 content={<SavedItemsMenu />}
+              />
+
+              <Accordion.item
+                show={emailNotifications === true}
+                name={SUB_MENUS.EMAIL_PREFERENCES}
+                icon={<BookmarkIcon />}
+                title={this.locale("labels.emailPreferences.label")}
+                content={<EmailPreferencesMenu />}
               />
 
               <Button
