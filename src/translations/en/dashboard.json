@@ -90,7 +90,7 @@
     },
     "emailPreferences": {
       "label": "Email Notifications",
-      "description": "Select which email updates you would like to receive from InvesTech:"
+      "description": "Select which email updates you would like to receive:"
     }
   },
   "messages": {

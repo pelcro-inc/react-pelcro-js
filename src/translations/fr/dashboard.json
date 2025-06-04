@@ -88,7 +88,7 @@
     },
     "emailPreferences": {
       "label": "Notifications par courriel",
-      "description": "Sélectionnez les mises à jour par courriel que vous souhaitez recevoir"
+      "description": "Sélectionnez les mises à jour par courriel que vous souhaitez recevoir:"
     }
   },
   "messages": {
