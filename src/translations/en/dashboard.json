@@ -89,8 +89,8 @@
       "goBack": "Go back"
     },
     "emailPreferences": {
-      "label": "Email notifications",
-      "description": "Select which email updates you would like to receive"
+      "label": "Email Notifications",
+      "description": "Select which email updates you would like to receive from InvesTech:"
     }
   },
   "messages": {
