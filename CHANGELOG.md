@@ -1,3 +1,10 @@
+# [3.49.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.48.0...v3.49.0) (2025-06-04)
+
+
+### Features
+
+* email notifcations dropdown in dashboard ([#441](https://github.com/pelcro-inc/react-pelcro-js/issues/441)) ([1c5baee](https://github.com/pelcro-inc/react-pelcro-js/commit/1c5baee5ed160cdca0308804875151f8ef2fedb5))
+
 # [3.48.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.47.0...v3.48.0) (2025-05-13)
 
 
