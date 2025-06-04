@@ -87,8 +87,8 @@
       "goBack": "Retourner"
     },
     "emailPreferences": {
-      "label": "Préférences de courriel",
-      "description": "Sélectionnez les mises à jour de courriel que vous souhaitez recevoir."
+      "label": "Notifications par courriel",
+      "description": "Sélectionnez les mises à jour par courriel que vous souhaitez recevoir"
     }
   },
   "messages": {
