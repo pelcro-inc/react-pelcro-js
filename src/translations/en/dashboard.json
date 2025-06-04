@@ -87,6 +87,10 @@
     },
     "subCancellation": {
       "goBack": "Go back"
+    },
+    "emailPreferences": {
+      "label": "Email Preferences",
+      "description": "Select which email updates you would like to receive from InvesTech:"
     }
   },
   "messages": {
