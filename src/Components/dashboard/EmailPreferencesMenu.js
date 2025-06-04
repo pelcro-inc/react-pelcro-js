@@ -50,22 +50,43 @@ export const EmailPreferencesMenu = (props) => {
       const selectedIds = newOptions
         .filter((opt) => opt.selected)
         .map((opt) => opt.id);
-      window.Pelcro.newsletter.update(
-        {
-          email:
-            window.Pelcro.user.read()?.email ??
-            window.Pelcro.helpers.getURLParameter("email"),
-          source: "web",
-          lists: selectedIds.join(",")
-        },
-        (err) => {
+
+      const email =
+        window.Pelcro.user.read()?.email ??
+        window.Pelcro.helpers.getURLParameter("email");
+      const requestData = {
+        email,
+        source: "web",
+        lists: selectedIds.join(",")
+      };
+
+      // Check if this is a new subscription
+      window.Pelcro.newsletter.getByEmail(email, (err, res) => {
+        if (err) {
+          setLoading((prev) => ({ ...prev, [id]: false }));
+          setAlert((prev) => ({
+            ...prev,
+            [id]: "Error checking subscription status"
+          }));
+          return;
+        }
+
+        const didSubToNewslettersBefore = Boolean(res.data.email);
+        const callback = (err) => {
           setLoading((prev) => ({ ...prev, [id]: false }));
           setAlert((prev) => ({
             ...prev,
             [id]: err ? "Error saving" : "Saved!"
           }));
+        };
+
+        if (didSubToNewslettersBefore) {
+          window.Pelcro.newsletter.update(requestData, callback);
+        } else {
+          window.Pelcro.newsletter.create(requestData, callback);
         }
-      );
+      });
+
       return newOptions;
     });
   };
