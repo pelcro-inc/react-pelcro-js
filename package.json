@@ -95,7 +95,7 @@
     "style-loader": "^2.0.0",
     "tailwindcss": "^2.0.2",
     "travis-ci-cloudfront-invalidation": "^1.1.0",
-    "webpack": "^4.44.1",
+    "webpack": "^5.97.1",
     "webpack-cli": "^4.3.0",
     "webpack-dev-server": "^3.11.2"
   },
