@@ -60,9 +60,26 @@ export function RegisterModal(props) {
     }
 
     if (pendingGiftCode) {
-      // Set the gift code and clear the pending one
+      // Set the gift code and clear the pending one, then process redemption automatically
       set({ giftCode: pendingGiftCode, pendingGiftCode: null });
-      return switchView("gift-redeem");
+      
+      // Process gift redemption automatically without showing the modal again
+      window.Pelcro.subscription.redeemGift(
+        {
+          auth_token: window.Pelcro.user.read().auth_token,
+          gift_code: pendingGiftCode
+        },
+        (err, res) => {
+          if (err) {
+            // If there's an error, show the redeem modal to handle it
+            return switchView("gift-redeem");
+          } else {
+            // Success - go to success view
+            return switchView("subscription-success");
+          }
+        }
+      );
+      return; // Exit early to prevent other logic from running
     }
 
     if (!product && !order && !giftCode) {
