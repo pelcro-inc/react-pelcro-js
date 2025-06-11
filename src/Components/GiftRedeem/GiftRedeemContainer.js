@@ -64,11 +64,11 @@ const GiftRedeemContainer = ({
       });
       onFailure();
     } else {
-      set({ giftCode });
       if (!isAuthenticated()) {
-        set({ pendingGiftCode: giftCode });
+        set({ pendingGiftCode: giftCode, giftCode: null });
         switchView("register");
       } else {
+        set({ giftCode });
         window.Pelcro.subscription.redeemGift(
           {
             auth_token: window.Pelcro.user.read().auth_token,
