@@ -409,24 +409,13 @@ export const initViewFromURL = () => {
       }
 
       if (view === "gift-redeem" || view === "redeem") {
-        // If not authenticated, redirect to register first
-        if (!isAuthenticated()) {
-          const giftCode =
-            window.Pelcro.helpers.getURLParameter("gift_code");
-          if (giftCode) {
-            usePelcro.getStore().set({ pendingGiftCode: giftCode });
-          }
-          return switchView("register");
-        } else {
-          // If authenticated, set the gift code in the store if it exists
-          const giftCode =
-            window.Pelcro.helpers.getURLParameter("gift_code");
-          if (giftCode) {
-            usePelcro.getStore().set({ giftCode });
-          }
-          // Always show the gift redemption modal, even if no code is provided
-          return switchView("gift-redeem");
+        // Always show the gift redemption modal first, regardless of authentication
+        const giftCode =
+          window.Pelcro.helpers.getURLParameter("gift_code");
+        if (giftCode) {
+          usePelcro.getStore().set({ giftCode });
         }
+        return switchView("gift-redeem");
       }
 
       if (view === "order-create") {
