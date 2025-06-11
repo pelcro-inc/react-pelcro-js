@@ -12,8 +12,17 @@ import {
 } from "../../utils/action-types";
 
 const moveDefaultPaymentMethodToStart = (paymentMethods) => {
-  const defaultPaymentMethod =
-    getDefaultPaymentMethod(paymentMethods);
+  if (!paymentMethods || !Array.isArray(paymentMethods)) {
+    return [];
+  }
+
+  const defaultPaymentMethod = getDefaultPaymentMethod(paymentMethods);
+  
+  // If no default payment method exists, return the original array
+  if (!defaultPaymentMethod) {
+    return paymentMethods;
+  }
+
   const paymentMethodsWithoutDefault = paymentMethods.filter(
     (paymentMethod) => paymentMethod.id !== defaultPaymentMethod.id
   );
@@ -26,9 +35,22 @@ const moveDefaultPaymentMethodToStart = (paymentMethods) => {
 };
 
 const getDefaultPaymentMethod = (paymentMethods) => {
+  if (!paymentMethods || !Array.isArray(paymentMethods)) {
+    return null;
+  }
+  
+  // First try to find a payment method marked as default
   const defaultPaymentMethod = paymentMethods.find(
     (paymentMethod) => paymentMethod.is_default
   );
+
+  // If no default is found, return the first chargeable payment method
+  if (!defaultPaymentMethod) {
+    return paymentMethods.find(
+      (paymentMethod) => paymentMethod.status === "chargeable"
+    );
+  }
+
   return defaultPaymentMethod;
 };
 
