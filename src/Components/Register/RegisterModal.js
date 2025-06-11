@@ -61,8 +61,6 @@ export function RegisterModal(props) {
 
     if (pendingGiftCode) {
       // Clear all gift-related state and process redemption
-      set({ giftCode: null, pendingGiftCode: null });
-      
       // Automatically redeem the gift without showing the modal again
       window.Pelcro.subscription.redeemGift(
         {
@@ -71,14 +69,19 @@ export function RegisterModal(props) {
         },
         (err, res) => {
           if (err) {
-            // If error, store the error info and go to success view to show the error there
-            set({ 
-              giftRedemptionError: {
-                code: pendingGiftCode,
-                error: err
-              }
-            });
-            return switchView("subscription-success");
+            if (err.response?.data?.errors?.address_id) {
+              switchToAddressView();
+            } else {
+              // If error, store the error info and go to success view to show the error there
+              set({
+                giftRedemptionError: {
+                  code: pendingGiftCode,
+                  error: err
+                }
+              });
+              set({ giftCode: null, pendingGiftCode: null });
+              return switchView("subscription-success");
+            }
           } else {
             // Success - go directly to success view
             set({ giftRedemptionSuccess: true });

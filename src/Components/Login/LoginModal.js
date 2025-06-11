@@ -46,15 +46,37 @@ export function LoginModal({ onDisplay, onClose, ...props }) {
       window.Pelcro.helpers.getURLParameter("view")
     );
 
-    // If this is a gift redemption flow
-    if (viewFromURL === "gift-redeem" || viewFromURL === "redeem") {
-      const giftCode =
-        window.Pelcro.helpers.getURLParameter("gift_code");
-      if (giftCode) {
-        usePelcro.getStore().set({ giftCode });
-      }
-      // Always show the gift redemption modal, even if no code is provided
-      return switchView("gift-redeem");
+    if (pendingGiftCode) {
+      // Clear all gift-related state and process redemption
+      // Automatically redeem the gift without showing the modal again
+      window.Pelcro.subscription.redeemGift(
+        {
+          auth_token: window.Pelcro.user.read().auth_token,
+          gift_code: pendingGiftCode
+        },
+        (err, res) => {
+          if (err) {
+            if (err.response?.data?.errors?.address_id) {
+              switchToAddressView();
+            } else {
+              // If error, store the error info and go to success view to show the error there
+              set({
+                giftRedemptionError: {
+                  code: pendingGiftCode,
+                  error: err
+                }
+              });
+              set({ giftCode: null, pendingGiftCode: null });
+              return switchView("subscription-success");
+            }
+          } else {
+            // Success - go directly to success view
+            set({ giftRedemptionSuccess: true });
+            return switchView("subscription-success");
+          }
+        }
+      );
+      return; // Exit early to prevent other logic
     }
 
     if (!product && !order && !giftCode) {
