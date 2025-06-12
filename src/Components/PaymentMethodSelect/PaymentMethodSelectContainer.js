@@ -12,8 +12,12 @@ import {
 } from "../../utils/action-types";
 
 const moveDefaultPaymentMethodToStart = (paymentMethods) => {
-  const defaultPaymentMethod =
-    getDefaultPaymentMethod(paymentMethods);
+  const defaultPaymentMethod = getDefaultPaymentMethod(paymentMethods);
+  
+  if (!defaultPaymentMethod) {
+    return paymentMethods;
+  }
+
   const paymentMethodsWithoutDefault = paymentMethods.filter(
     (paymentMethod) => paymentMethod.id !== defaultPaymentMethod.id
   );
