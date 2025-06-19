@@ -55,6 +55,7 @@ const GiftRedeemContainer = ({
 
   const handleRedeem = ({ giftCode }, dispatch) => {
     if (!giftCode) {
+      dispatch({ type: LOADING, payload: false });
       dispatch({
         type: SHOW_ALERT,
         payload: {
