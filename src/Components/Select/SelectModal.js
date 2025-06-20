@@ -721,7 +721,8 @@ class SelectModal extends Component {
                 className={`plc-grid plc-bg-primary ${
                   disableGifting ||
                   (hideGiftForAutoRenew &&
-                    (plan?.auto_renew ?? false))
+                    (plan?.auto_renew ?? false)) ||
+                  (subscriptionIdToRenew && hideGiftForAutoRenew)
                     ? "plc-grid-cols-1"
                     : "plc-grid-cols-2"
                 }`}
