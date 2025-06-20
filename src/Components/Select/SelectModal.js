@@ -32,6 +32,7 @@ export function SelectModalWithHook(props) {
     plan,
     product,
     isRenewingGift,
+    subscriptionIdToRenew,
     switchView,
     resetView,
     view,
@@ -51,6 +52,7 @@ export function SelectModalWithHook(props) {
     <SelectModalWithTrans
       isGift={isGift}
       disableGifting={isRenewingGift || props.hideGiftButton}
+      subscriptionIdToRenew={subscriptionIdToRenew}
       plan={plan}
       product={product}
       onClose={() => {
@@ -626,7 +628,11 @@ class SelectModal extends Component {
   };
 
   renderPlans = () => {
-    const { disableGifting, hideGiftSelection } = this.props;
+    const {
+      disableGifting,
+      hideGiftSelection,
+      subscriptionIdToRenew
+    } = this.props;
     const hideGiftForAutoRenew =
       window?.Pelcro?.uiSettings?.hideGiftForAutoRenew ?? false;
 
@@ -715,7 +721,8 @@ class SelectModal extends Component {
                 className={`plc-grid plc-bg-primary ${
                   disableGifting ||
                   (hideGiftForAutoRenew &&
-                    (plan?.auto_renew ?? false))
+                    (plan?.auto_renew ?? false)) ||
+                  (subscriptionIdToRenew && hideGiftForAutoRenew)
                     ? "plc-grid-cols-1"
                     : "plc-grid-cols-2"
                 }`}
@@ -734,7 +741,10 @@ class SelectModal extends Component {
 
                 {!disableGifting &&
                   (!hideGiftForAutoRenew ||
-                    !(plan?.auto_renew ?? false)) && (
+                    !(plan?.auto_renew ?? false)) &&
+                  !(
+                    subscriptionIdToRenew && hideGiftForAutoRenew
+                  ) && (
                     <button
                       className={`plc-flex plc-items-center plc-justify-center plc-text-center plc-py-2 plc-px-4 plc-w-full plc-border-2 plc-rounded-sm plc-border-primary focus:plc-outline-none plc-text-primary plc-bg-white hover:plc-border-primary-600 hover:plc-text-primary-600 hover:plc-shadow-sm plc-transition-all`}
                       data-key={plan.id}
@@ -929,6 +939,10 @@ SelectModal.propTypes = {
   iaGift: PropTypes.bool,
   hideGiftSelection: PropTypes.bool,
   disableGifting: PropTypes.bool,
+  subscriptionIdToRenew: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number
+  ]),
   setView: PropTypes.func,
   onClose: PropTypes.func,
   subscribe: PropTypes.func
