@@ -552,7 +552,6 @@ const PaymentMethodContainerWithoutStripe = ({
 
             // Load the number field into the container
             numberField.load("#cybersourceCardNumber");
-            
 
             // Store microform instance for later use
             cybersourceInstanceRef.current = microform;
@@ -1998,27 +1997,7 @@ const PaymentMethodContainerWithoutStripe = ({
 
       if (
         cardProcessor === "cybersource" &&
-        !selectedPaymentMethodId &&
-        !window.FLEX
-      ) {
-        window.Pelcro.helpers.loadSDK(
-          "https://flex.cybersource.com/cybersource/assets/microform/0.4/flex-microform.min.js",
-          "cybersource-cdn"
-        );
-
-        document
-          .querySelector(
-            'script[src="https://flex.cybersource.com/cybersource/assets/microform/0.4/flex-microform.min.js"]'
-          )
-          .addEventListener("load", () => {
-            initCybersourceScript();
-          });
-      }
-
-      if (
-        cardProcessor === "cybersource" &&
-        !selectedPaymentMethodId &&
-        window.FLEX
+        !selectedPaymentMethodId
       ) {
         initCybersourceScript();
       }
