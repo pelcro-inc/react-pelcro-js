@@ -249,6 +249,7 @@ const PaymentMethodContainerWithoutStripe = ({
     const isUsingExistingPaymentMethod = Boolean(
       selectedPaymentMethodId
     );
+
     if (isUsingExistingPaymentMethod) {
       // no need to create a new source using cybersrce
       return handleCybersourcePayment(null, state);
@@ -279,7 +280,7 @@ const PaymentMethodContainerWithoutStripe = ({
             }
           });
         }
-        handleCybersourcePayment(response.token, state);
+        handleCybersourcePayment(response, state);
       }
     );
   };
@@ -438,7 +439,7 @@ const PaymentMethodContainerWithoutStripe = ({
             product,
             isExistingSource: isUsingExistingPaymentMethod,
             addressId: selectedAddressId,
-            fingerprint_session_id: state.cyberSourceSessionId
+            fingerprint_session_id: state.cyberSourceSessionId,
           },
           (err, res) => {
             if (err) {
@@ -451,13 +452,7 @@ const PaymentMethodContainerWithoutStripe = ({
     }
   }
 
-  const tokenizeCard = (error, microformInstance) => {
-    if (error) {
-      return;
-    }
-
-    cybersourceInstanceRef.current = microformInstance;
-  };
+  // No longer needed - microform instance is stored directly in initCybersourceScript
 
   const appendCybersourceFingerprintScripts = () => {
     const uniqueId = crypto.randomUUID();
@@ -522,7 +517,7 @@ const PaymentMethodContainerWithoutStripe = ({
         // Load the SDK from the dynamic URL
         window.Pelcro.helpers.loadSDK(
           js_client,
-          "cybersource-microform-sdk"
+          "cybersource-cdn"
         );
 
         // Wait for SDK to load then initialize microform
