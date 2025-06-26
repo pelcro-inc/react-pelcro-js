@@ -552,6 +552,7 @@ const PaymentMethodContainerWithoutStripe = ({
 
             // Load the number field into the container
             numberField.load("#cybersourceCardNumber");
+            
 
             // Store microform instance for later use
             cybersourceInstanceRef.current = microform;
