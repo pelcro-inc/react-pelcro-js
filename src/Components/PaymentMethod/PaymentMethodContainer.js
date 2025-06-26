@@ -517,31 +517,43 @@ const PaymentMethodContainerWithoutStripe = ({
           });
         }
 
-        const { key: jwk, captureContext } = res;
-        // SETUP MICROFORM
-        // eslint-disable-next-line no-undef
-        FLEX.microform(
-          {
-            captureContext,
-            keyId: jwk.kid,
-            keystore: jwk,
-            container: "#cybersourceCardNumber",
-            placeholder: "Card Number",
-            styles: {
-              input: {
-                "font-size": "14px",
-                "font-family":
-                  "helvetica, tahoma, calibri, sans-serif",
-                color: "#555"
-              },
-              ":focus": { color: "blue" },
-              ":disabled": { cursor: "not-allowed" },
-              valid: { color: "#3c763d" },
-              invalid: { color: "#a94442" }
-            }
-          },
-          tokenizeCard
+        const { key: jwk, captureContext, js_client } = res;
+
+        // Load the SDK from the dynamic URL
+        window.Pelcro.helpers.loadSDK(
+          js_client,
+          "cybersource-microform-sdk"
         );
+
+        // Wait for SDK to load then initialize microform
+        document
+          .querySelector(`script[src="${js_client}"]`)
+          .addEventListener("load", () => {
+            // SETUP MICROFORM
+            // eslint-disable-next-line no-undef
+            const flex = new Flex(captureContext);
+            const microform = flex.microform({
+              styles: {
+                input: {
+                  "font-size": "14px",
+                  "font-family":
+                    "helvetica, tahoma, calibri, sans-serif",
+                  color: "#555"
+                },
+                ":focus": { color: "blue" },
+                ":disabled": { cursor: "not-allowed" },
+                valid: { color: "#3c763d" },
+                invalid: { color: "#a94442" }
+              }
+            });
+
+            const number = microform.createField("number", {
+              placeholder: "Enter your card number"
+            });
+            number.load("#cybersourceCardNumber");
+
+            cybersourceInstanceRef.current = microform;
+          });
       }
     );
   };
@@ -1983,27 +1995,7 @@ const PaymentMethodContainerWithoutStripe = ({
 
       if (
         cardProcessor === "cybersource" &&
-        !selectedPaymentMethodId &&
-        !window.FLEX
-      ) {
-        window.Pelcro.helpers.loadSDK(
-          "https://flex.cybersource.com/cybersource/assets/microform/0.4/flex-microform.min.js",
-          "cybersource-cdn"
-        );
-
-        document
-          .querySelector(
-            'script[src="https://flex.cybersource.com/cybersource/assets/microform/0.4/flex-microform.min.js"]'
-          )
-          .addEventListener("load", () => {
-            initCybersourceScript();
-          });
-      }
-
-      if (
-        cardProcessor === "cybersource" &&
-        !selectedPaymentMethodId &&
-        window.FLEX
+        !selectedPaymentMethodId
       ) {
         initCybersourceScript();
       }
