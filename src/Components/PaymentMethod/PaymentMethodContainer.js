@@ -517,20 +517,17 @@ const PaymentMethodContainerWithoutStripe = ({
           });
         }
 
-        const { captureContext, js_client } = res;
-
-        // Load the Flex SDK from the returned js_client URL
-        window.Pelcro.helpers.loadSDK(
-          js_client,
-          "cybersource-flex-sdk"
-        );
-
-        // Wait for SDK to load then initialize
-        document
-          .querySelector(`script[src="${js_client}"]`)
-          .addEventListener("load", () => {
-            // SETUP MICROFORM with new Flex API
-            const myStyles = {
+        const { key: jwk, captureContext } = res;
+        // SETUP MICROFORM
+        // eslint-disable-next-line no-undef
+        FLEX.microform(
+          {
+            captureContext,
+            keyId: jwk.kid,
+            keystore: jwk,
+            container: "#cybersourceCardNumber",
+            placeholder: "Card Number",
+            styles: {
               input: {
                 "font-size": "14px",
                 "font-family":
@@ -541,21 +538,10 @@ const PaymentMethodContainerWithoutStripe = ({
               ":disabled": { cursor: "not-allowed" },
               valid: { color: "#3c763d" },
               invalid: { color: "#a94442" }
-            };
-
-            // eslint-disable-next-line no-undef
-            const flex = new Flex(captureContext);
-            const microform = flex.microform({ styles: myStyles });
-            const numberField = microform.createField("number", {
-              placeholder: "Enter your card number"
-            });
-
-            // Load the number field into the container
-            numberField.load("#cybersourceCardNumber");
-
-            // Store microform instance for later use
-            cybersourceInstanceRef.current = microform;
-          });
+            }
+          },
+          tokenizeCard
+        );
       }
     );
   };
@@ -1997,7 +1983,27 @@ const PaymentMethodContainerWithoutStripe = ({
 
       if (
         cardProcessor === "cybersource" &&
-        !selectedPaymentMethodId
+        !selectedPaymentMethodId &&
+        !window.FLEX
+      ) {
+        window.Pelcro.helpers.loadSDK(
+          "https://flex.cybersource.com/cybersource/assets/microform/0.4/flex-microform.min.js",
+          "cybersource-cdn"
+        );
+
+        document
+          .querySelector(
+            'script[src="https://flex.cybersource.com/cybersource/assets/microform/0.4/flex-microform.min.js"]'
+          )
+          .addEventListener("load", () => {
+            initCybersourceScript();
+          });
+      }
+
+      if (
+        cardProcessor === "cybersource" &&
+        !selectedPaymentMethodId &&
+        window.FLEX
       ) {
         initCybersourceScript();
       }
