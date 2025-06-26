@@ -141,9 +141,9 @@ const PaymentMethodContainerWithoutStripe = ({
   children,
   stripe,
   type,
-  onSuccess = () => { },
-  onGiftRenewalSuccess = () => { },
-  onFailure = () => { },
+  onSuccess = () => {},
+  onGiftRenewalSuccess = () => {},
+  onFailure = () => {},
   ...props
 }) => {
   const [vantivPaymentRequest, setVantivPaymentRequest] =
@@ -517,16 +517,20 @@ const PaymentMethodContainerWithoutStripe = ({
           });
         }
 
-        const { key: jwk } = res;
-        // SETUP MICROFORM
-        // eslint-disable-next-line no-undef
-        FLEX.microform(
-          {
-            keyId: jwk.kid,
-            keystore: jwk,
-            container: "#cybersourceCardNumber",
-            placeholder: "Card Number",
-            styles: {
+        const { captureContext, js_client } = res;
+
+        // Load the Flex SDK from the returned js_client URL
+        window.Pelcro.helpers.loadSDK(
+          js_client,
+          "cybersource-flex-sdk"
+        );
+
+        // Wait for SDK to load then initialize
+        document
+          .querySelector(`script[src="${js_client}"]`)
+          .addEventListener("load", () => {
+            // SETUP MICROFORM with new Flex API
+            const myStyles = {
               input: {
                 "font-size": "14px",
                 "font-family":
@@ -537,10 +541,21 @@ const PaymentMethodContainerWithoutStripe = ({
               ":disabled": { cursor: "not-allowed" },
               valid: { color: "#3c763d" },
               invalid: { color: "#a94442" }
-            }
-          },
-          tokenizeCard
-        );
+            };
+
+            // eslint-disable-next-line no-undef
+            const flex = new Flex(captureContext);
+            const microform = flex.microform({ styles: myStyles });
+            const numberField = microform.createField("number", {
+              placeholder: "Enter your card number"
+            });
+
+            // Load the number field into the container
+            numberField.load("#cybersourceCardNumber");
+
+            // Store microform instance for later use
+            cybersourceInstanceRef.current = microform;
+          });
       }
     );
   };
@@ -636,9 +651,11 @@ const PaymentMethodContainerWithoutStripe = ({
                 window.Pelcro.site.read().default_currency,
               tap_token: result.id,
               funding: result.card.funding,
-              redirect_url: `${window.Pelcro.environment.domain
-                }/webhook/tap/callback/3dsecure?auth_token=${window.Pelcro.user.read().auth_token
-                }&type=verify_card&site_id=${window.Pelcro.siteid}`
+              redirect_url: `${
+                window.Pelcro.environment.domain
+              }/webhook/tap/callback/3dsecure?auth_token=${
+                window.Pelcro.user.read().auth_token
+              }&type=verify_card&site_id=${window.Pelcro.siteid}`
             },
             (err, res) => {
               if (err) {
@@ -2255,9 +2272,9 @@ const PaymentMethodContainerWithoutStripe = ({
         const mappedOrderItems = isQuickPurchase
           ? [{ sku_id: order.id, quantity: order.quantity }]
           : order.map((item) => ({
-            sku_id: item.id,
-            quantity: item.quantity
-          }));
+              sku_id: item.id,
+              quantity: item.quantity
+            }));
 
         const orderSummaryParams = {
           items: mappedOrderItems,
@@ -2272,7 +2289,6 @@ const PaymentMethodContainerWithoutStripe = ({
           orderSummaryParams,
           handleCouponResponse
         );
-        
       }
     }
   };
@@ -2782,9 +2798,9 @@ const PaymentMethodContainerWithoutStripe = ({
     const mappedOrderItems = isQuickPurchase
       ? [{ sku_id: order.id, quantity: order.quantity }]
       : order.map((item) => ({
-        sku_id: item.id,
-        quantity: item.quantity
-      }));
+          sku_id: item.id,
+          quantity: item.quantity
+        }));
 
     const { couponCode } = state;
 
@@ -2923,7 +2939,7 @@ const PaymentMethodContainerWithoutStripe = ({
             if (
               res.data?.setup_intent?.status === "requires_action" ||
               res.data?.setup_intent?.status ===
-              "requires_confirmation"
+                "requires_confirmation"
             ) {
               confirmStripeIntentSetup(res, "create");
             } else {
@@ -3028,7 +3044,7 @@ const PaymentMethodContainerWithoutStripe = ({
             if (
               res.data?.setup_intent?.status === "requires_action" ||
               res.data?.setup_intent?.status ===
-              "requires_confirmation"
+                "requires_confirmation"
             ) {
               confirmStripeIntentSetup(
                 res,
@@ -3133,9 +3149,9 @@ const PaymentMethodContainerWithoutStripe = ({
       const mappedOrderItems = isQuickPurchase
         ? [{ sku_id: order.id, quantity: order.quantity }]
         : order.map((item) => ({
-          sku_id: item.id,
-          quantity: item.quantity
-        }));
+            sku_id: item.id,
+            quantity: item.quantity
+          }));
       window.Pelcro.ecommerce.order.create(
         {
           items: mappedOrderItems,
@@ -3275,9 +3291,11 @@ const PaymentMethodContainerWithoutStripe = ({
         card: source?.id
       },
       redirect: {
-        return_url: `${window.Pelcro.environment.domain
-          }/webhook/stripe/callback/3dsecure?auth_token=${window.Pelcro.user.read().auth_token
-          }`
+        return_url: `${
+          window.Pelcro.environment.domain
+        }/webhook/stripe/callback/3dsecure?auth_token=${
+          window.Pelcro.user.read().auth_token
+        }`
       }
     });
   };
@@ -3704,10 +3722,10 @@ const PaymentMethodContainerWithoutStripe = ({
       <Provider value={{ state, dispatch }}>
         {children.length
           ? children.map((child, i) => {
-            if (child) {
-              return React.cloneElement(child, { store, key: i });
-            }
-          })
+              if (child) {
+                return React.cloneElement(child, { store, key: i });
+              }
+            })
           : React.cloneElement(children, { store })}
       </Provider>
     </div>
