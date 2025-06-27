@@ -2851,7 +2851,9 @@ const PaymentMethodContainerWithoutStripe = ({
         isExistingSource: Boolean(selectedPaymentMethodId),
         items: mappedOrderItems,
         addressId: selectedAddressId,
-        couponCode
+        couponCode,
+        cardExpirationMonth: state?.month,
+        cardExpirationYear: state?.year
       },
       (err, orderResponse) => {
         if (err) {
@@ -3195,7 +3197,9 @@ const PaymentMethodContainerWithoutStripe = ({
           items: mappedOrderItems,
           campaign_key:
             window.Pelcro.helpers.getURLParameter("campaign_key"),
-          ...(selectedAddressId && { address_id: selectedAddressId })
+          ...(selectedAddressId && { address_id: selectedAddressId }),
+          card_expiration_month: state?.month,
+          card_expiration_year: state?.year
         },
         (err, res) => {
           if (err) {

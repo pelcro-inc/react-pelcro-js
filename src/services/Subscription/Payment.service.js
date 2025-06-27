@@ -1084,7 +1084,9 @@ export class CybersourceGateway {
       couponCode,
       product,
       addressId,
-      isExistingSource
+      isExistingSource,
+      cardExpirationMonth,
+      cardExpirationYear
     } = options;
     const params = isExistingSource
       ? {
@@ -1104,6 +1106,8 @@ export class CybersourceGateway {
           window.Pelcro.helpers.getURLParameter("campaign_key"),
         subscription_id: subscriptionIdToRenew,
         address_id: product.address_required ? addressId : null,
+        card_expiration_month: cardExpirationMonth,
+        card_expiration_year: cardExpirationYear,
         ...params
       },
       (err, res) => {
@@ -1178,7 +1182,9 @@ export class CybersourceGateway {
       plan,
       couponCode,
       addressId,
-      isExistingSource
+      isExistingSource,
+      cardExpirationMonth,
+      cardExpirationYear
     } = options;
     const params = isExistingSource
       ? {
@@ -1196,6 +1202,8 @@ export class CybersourceGateway {
         coupon_code: couponCode,
         subscription_id: subscriptionIdToRenew,
         address_id: product.address_required ? addressId : null,
+        card_expiration_month: cardExpirationMonth,
+        card_expiration_year: cardExpirationYear,
         ...params
       },
       (err, res) => {
@@ -1211,8 +1219,15 @@ export class CybersourceGateway {
    * @return {void}
    */
   #purchaseEcommerceOrder = (options, callback) => {
-    const { token, items, couponCode, addressId, isExistingSource } =
-      options;
+    const {
+      token,
+      items,
+      couponCode,
+      addressId,
+      isExistingSource,
+      cardExpirationMonth,
+      cardExpirationYear
+    } = options;
     const params = isExistingSource
       ? {
           source_id: token
@@ -1229,7 +1244,9 @@ export class CybersourceGateway {
         campaign_key:
           window.Pelcro.helpers.getURLParameter("campaign_key"),
         ...params,
-        ...(addressId && { address_id: addressId })
+        ...(addressId && { address_id: addressId }),
+        card_expiration_month: cardExpirationMonth,
+        card_expiration_year: cardExpirationYear
       },
       (err, res) => {
         callback(err, res);
