@@ -1037,7 +1037,9 @@ export class CybersourceGateway {
       quantity = 1,
       addressId,
       isExistingSource,
-      fingerprint_session_id
+      fingerprint_session_id,
+      cardExpirationMonth,
+      cardExpirationYear
     } = options;
     const params = isExistingSource
       ? {
@@ -1058,6 +1060,8 @@ export class CybersourceGateway {
         coupon_code: couponCode,
         address_id: product.address_required ? addressId : null,
         fingerprint_session_id: fingerprint_session_id,
+        card_expiration_month: cardExpirationMonth,
+        card_expiration_year: cardExpirationYear,
         ...params
       },
       (err, res) => {
@@ -1123,7 +1127,9 @@ export class CybersourceGateway {
       giftRecipient,
       quantity = 1,
       addressId,
-      isExistingSource
+      isExistingSource,
+      cardExpirationMonth,
+      cardExpirationYear
     } = options;
     const params = isExistingSource
       ? {
@@ -1148,6 +1154,8 @@ export class CybersourceGateway {
         gift_start_date: giftRecipient?.startDate,
         gift_message: giftRecipient?.giftMessage,
         address_id: product.address_required ? addressId : null,
+        card_expiration_month: cardExpirationMonth,
+        card_expiration_year: cardExpirationYear,
         ...params
       },
       (err, res) => {

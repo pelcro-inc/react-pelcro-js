@@ -2607,7 +2607,9 @@ const PaymentMethodContainerWithoutStripe = ({
           address_id: product.address_required
             ? selectedAddressId
             : null,
-          metadata: props?.subCreateMetadata
+          metadata: props?.subCreateMetadata,
+          cardExpirationMonth: state.month,
+          cardExpirationYear: state.year
         },
         (err, res) => {
           if (res?.data?.setup_intent) {
