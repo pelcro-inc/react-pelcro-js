@@ -243,31 +243,6 @@ const PaymentMethodContainerWithoutStripe = ({
     }
   };
 
-  const resetCybersourceMicroform = () => {
-    // Clean up existing microform instance
-    if (cybersourceInstanceRef.current) {
-      cybersourceInstanceRef.current = null;
-    }
-
-    // Clear the card number field
-    const cardNumberField = document.querySelector(
-      "#cybersourceCardNumber"
-    );
-    if (cardNumberField) {
-      cardNumberField.innerHTML = "";
-    }
-
-    // Reinitialize the microform after a short delay
-    setTimeout(() => {
-      if (
-        cardProcessor === "cybersource" &&
-        !selectedPaymentMethodId
-      ) {
-        initCybersourceScript();
-      }
-    }, 1000);
-  };
-
   const submitUsingCybersource = (state, dispatch) => {
     console.log("State", state);
 
@@ -297,7 +272,6 @@ const PaymentMethodContainerWithoutStripe = ({
         if (err) {
           dispatch({ type: DISABLE_SUBMIT, payload: false });
           dispatch({ type: LOADING, payload: false });
-          resetCybersourceMicroform();
           return dispatch({
             type: SHOW_ALERT,
             payload: {
@@ -387,14 +361,6 @@ const PaymentMethodContainerWithoutStripe = ({
 
       const { couponCode } = state;
 
-      // Common payment data for all Cybersource payment types
-      const commonPaymentData = {
-        cardExpirationMonth: state.month,
-        cardExpirationYear: state.year,
-        fingerprint_session_id: state.cyberSourceSessionId
-      };
-
-      
       if (renewGift) {
         return payment.execute(
           {
@@ -407,14 +373,12 @@ const PaymentMethodContainerWithoutStripe = ({
             product,
             isExistingSource: isUsingExistingPaymentMethod,
             subscriptionIdToRenew,
-            addressId: selectedAddressId,
-            ...commonPaymentData
+            addressId: selectedAddressId
           },
           (err, res) => {
             if (err) {
               return handlePaymentError(err);
             }
-            resetCybersourceMicroform();
             onSuccess(res);
           }
         );
@@ -431,14 +395,12 @@ const PaymentMethodContainerWithoutStripe = ({
             product,
             isExistingSource: isUsingExistingPaymentMethod,
             giftRecipient,
-            addressId: selectedAddressId,
-            ...commonPaymentData
+            addressId: selectedAddressId
           },
           (err, res) => {
             if (err) {
               return handlePaymentError(err);
             }
-            resetCybersourceMicroform();
             onSuccess(res);
           }
         );
@@ -455,14 +417,12 @@ const PaymentMethodContainerWithoutStripe = ({
             product,
             isExistingSource: isUsingExistingPaymentMethod,
             subscriptionIdToRenew,
-            addressId: selectedAddressId,
-            ...commonPaymentData
+            addressId: selectedAddressId
           },
           (err, res) => {
             if (err) {
               return handlePaymentError(err);
             }
-            resetCybersourceMicroform();
             onSuccess(res);
           }
         );
@@ -479,13 +439,12 @@ const PaymentMethodContainerWithoutStripe = ({
             product,
             isExistingSource: isUsingExistingPaymentMethod,
             addressId: selectedAddressId,
-            ...commonPaymentData
+            fingerprint_session_id: state.cyberSourceSessionId,
           },
           (err, res) => {
             if (err) {
               return handlePaymentError(err);
             }
-            resetCybersourceMicroform();
             onSuccess(res);
           }
         );
@@ -553,10 +512,13 @@ const PaymentMethodContainerWithoutStripe = ({
           });
         }
 
-        const { key: jwk, captureContext, js_client } = res;
+        const { key: jwk, ahmed , captureContext, js_client } = res;
 
         // Load the SDK from the dynamic URL
-        window.Pelcro.helpers.loadSDK(js_client, "cybersource-cdn");
+        window.Pelcro.helpers.loadSDK(
+          js_client,
+          "cybersource-cdn"
+        );
 
         // Wait for SDK to load then initialize microform
         document
@@ -3328,11 +3290,6 @@ const PaymentMethodContainerWithoutStripe = ({
 
   const handlePaymentError = (error) => {
     toggleAuthenticationSuccessPendingView(false);
-
-    // Reset Cybersource microform on payment error
-    if (cardProcessor === "cybersource") {
-      resetCybersourceMicroform();
-    }
 
     if (
       error.type === "validation_error" &&
