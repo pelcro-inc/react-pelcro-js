@@ -321,7 +321,9 @@ const PaymentMethodContainerWithoutStripe = ({
         {
           auth_token: window.Pelcro.user.read().auth_token,
           token: paymentRequest,
-          gateway: "cybersource"
+          gateway: "cybersource",
+          cardExpirationMonth: state.month,
+          cardExpirationYear: state.year
         },
         (err, res) => {
           dispatch({ type: DISABLE_SUBMIT, payload: false });
