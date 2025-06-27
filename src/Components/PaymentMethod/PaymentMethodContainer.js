@@ -394,6 +394,7 @@ const PaymentMethodContainerWithoutStripe = ({
         fingerprint_session_id: state.cyberSourceSessionId
       };
 
+      
       if (renewGift) {
         return payment.execute(
           {
