@@ -348,6 +348,13 @@ const PaymentMethodContainerWithoutStripe = ({
               content: t("messages.sourceUpdated")
             }
           });
+
+          // Reinitialize Cybersource microform after successful payment
+          setTimeout(() => {
+            cybersourceInstanceRef.current = null;
+            initCybersourceScript();
+          }, 1000);
+
           onSuccess(res);
         } //
       );
@@ -383,6 +390,13 @@ const PaymentMethodContainerWithoutStripe = ({
             if (err) {
               return handlePaymentError(err);
             }
+
+            // Reinitialize Cybersource microform after successful payment
+            setTimeout(() => {
+              cybersourceInstanceRef.current = null;
+              initCybersourceScript();
+            }, 1000);
+
             onSuccess(res);
           }
         );
@@ -407,6 +421,13 @@ const PaymentMethodContainerWithoutStripe = ({
             if (err) {
               return handlePaymentError(err);
             }
+
+            // Reinitialize Cybersource microform after successful payment
+            setTimeout(() => {
+              cybersourceInstanceRef.current = null;
+              initCybersourceScript();
+            }, 1000);
+
             onSuccess(res);
           }
         );
@@ -431,6 +452,13 @@ const PaymentMethodContainerWithoutStripe = ({
             if (err) {
               return handlePaymentError(err);
             }
+
+            // Reinitialize Cybersource microform after successful payment
+            setTimeout(() => {
+              cybersourceInstanceRef.current = null;
+              initCybersourceScript();
+            }, 1000);
+
             onSuccess(res);
           }
         );
@@ -455,6 +483,13 @@ const PaymentMethodContainerWithoutStripe = ({
             if (err) {
               return handlePaymentError(err);
             }
+
+            // Reinitialize Cybersource microform after successful payment
+            setTimeout(() => {
+              cybersourceInstanceRef.current = null;
+              initCybersourceScript();
+            }, 1000);
+
             onSuccess(res);
           }
         );
@@ -502,6 +537,14 @@ const PaymentMethodContainerWithoutStripe = ({
   };
 
   const initCybersourceScript = () => {
+    // Clear existing card number field before reinitializing
+    const cardNumberElement = document.querySelector(
+      "#cybersourceCardNumber"
+    );
+    if (cardNumberElement) {
+      cardNumberElement.innerHTML = "";
+    }
+
     // jwk api call
     window.Pelcro.payment.getJWK(
       {
@@ -522,40 +565,53 @@ const PaymentMethodContainerWithoutStripe = ({
           });
         }
 
-        const { key: jwk, ahmed, captureContext, js_client } = res;
+        const { key: jwk, captureContext, js_client } = res;
 
-        // Load the SDK from the dynamic URL
-        window.Pelcro.helpers.loadSDK(js_client, "cybersource-cdn");
+        // Load the SDK from the dynamic URL (if not already loaded)
+        const existingScript = document.querySelector(
+          `script[src="${js_client}"]`
+        );
+        if (!existingScript) {
+          window.Pelcro.helpers.loadSDK(js_client, "cybersource-cdn");
+        }
+
+        const initializeMicroform = () => {
+          // SETUP MICROFORM
+          // eslint-disable-next-line no-undef
+          const flex = new Flex(captureContext);
+          const microform = flex.microform({
+            styles: {
+              input: {
+                "font-size": "14px",
+                "font-family":
+                  "helvetica, tahoma, calibri, sans-serif",
+                color: "#555"
+              },
+              ":focus": { color: "blue" },
+              ":disabled": { cursor: "not-allowed" },
+              valid: { color: "#3c763d" },
+              invalid: { color: "#a94442" }
+            }
+          });
+
+          const number = microform.createField("number", {
+            placeholder: "Enter your card number"
+          });
+          number.load("#cybersourceCardNumber");
+
+          cybersourceInstanceRef.current = microform;
+        };
 
         // Wait for SDK to load then initialize microform
-        document
-          .querySelector(`script[src="${js_client}"]`)
-          .addEventListener("load", () => {
-            // SETUP MICROFORM
-            // eslint-disable-next-line no-undef
-            const flex = new Flex(captureContext);
-            const microform = flex.microform({
-              styles: {
-                input: {
-                  "font-size": "14px",
-                  "font-family":
-                    "helvetica, tahoma, calibri, sans-serif",
-                  color: "#555"
-                },
-                ":focus": { color: "blue" },
-                ":disabled": { cursor: "not-allowed" },
-                valid: { color: "#3c763d" },
-                invalid: { color: "#a94442" }
-              }
-            });
-
-            const number = microform.createField("number", {
-              placeholder: "Enter your card number"
-            });
-            number.load("#cybersourceCardNumber");
-
-            cybersourceInstanceRef.current = microform;
-          });
+        if (existingScript) {
+          // Script already loaded, initialize immediately
+          initializeMicroform();
+        } else {
+          // Wait for new script to load
+          document
+            .querySelector(`script[src="${js_client}"]`)
+            .addEventListener("load", initializeMicroform);
+        }
       }
     );
   };
@@ -2608,8 +2664,8 @@ const PaymentMethodContainerWithoutStripe = ({
             ? selectedAddressId
             : null,
           metadata: props?.subCreateMetadata,
-          cardExpirationMonth: state.month,
-          cardExpirationYear: state.year
+          cardExpirationMonth: state?.month,
+          cardExpirationYear: state?.year
         },
         (err, res) => {
           if (res?.data?.setup_intent) {
