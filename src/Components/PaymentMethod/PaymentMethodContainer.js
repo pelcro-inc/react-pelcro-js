@@ -373,7 +373,9 @@ const PaymentMethodContainerWithoutStripe = ({
             product,
             isExistingSource: isUsingExistingPaymentMethod,
             subscriptionIdToRenew,
-            addressId: selectedAddressId
+            addressId: selectedAddressId,
+            cardExpirationMonth: state.month,
+            cardExpirationYear: state.year
           },
           (err, res) => {
             if (err) {
@@ -395,7 +397,9 @@ const PaymentMethodContainerWithoutStripe = ({
             product,
             isExistingSource: isUsingExistingPaymentMethod,
             giftRecipient,
-            addressId: selectedAddressId
+            addressId: selectedAddressId,
+            cardExpirationMonth: state.month,
+            cardExpirationYear: state.year
           },
           (err, res) => {
             if (err) {
@@ -417,7 +421,9 @@ const PaymentMethodContainerWithoutStripe = ({
             product,
             isExistingSource: isUsingExistingPaymentMethod,
             subscriptionIdToRenew,
-            addressId: selectedAddressId
+            addressId: selectedAddressId,
+            cardExpirationMonth: state.month,
+            cardExpirationYear: state.year
           },
           (err, res) => {
             if (err) {
@@ -440,6 +446,8 @@ const PaymentMethodContainerWithoutStripe = ({
             isExistingSource: isUsingExistingPaymentMethod,
             addressId: selectedAddressId,
             fingerprint_session_id: state.cyberSourceSessionId,
+            cardExpirationMonth: state.month,
+            cardExpirationYear: state.year
           },
           (err, res) => {
             if (err) {
@@ -512,13 +520,10 @@ const PaymentMethodContainerWithoutStripe = ({
           });
         }
 
-        const { key: jwk, ahmed , captureContext, js_client } = res;
+        const { key: jwk, ahmed, captureContext, js_client } = res;
 
         // Load the SDK from the dynamic URL
-        window.Pelcro.helpers.loadSDK(
-          js_client,
-          "cybersource-cdn"
-        );
+        window.Pelcro.helpers.loadSDK(js_client, "cybersource-cdn");
 
         // Wait for SDK to load then initialize microform
         document
