@@ -209,6 +209,7 @@ const PaymentMethodContainerWithoutStripe = ({
     const isUsingExistingPaymentMethod = Boolean(
       selectedPaymentMethodId
     );
+
     if (isUsingExistingPaymentMethod) {
       // no need to create a new source using cybersrce
       return handleCybersourcePayment(null, state);
@@ -239,7 +240,7 @@ const PaymentMethodContainerWithoutStripe = ({
             }
           });
         }
-        handleCybersourcePayment(response.token, state);
+        handleCybersourcePayment(response, state);
       }
     );
   };
@@ -280,7 +281,9 @@ const PaymentMethodContainerWithoutStripe = ({
         {
           auth_token: window.Pelcro.user.read().auth_token,
           token: paymentRequest,
-          gateway: "cybersource"
+          gateway: "cybersource",
+          cardExpirationMonth: state.month,
+          cardExpirationYear: state.year
         },
         (err, res) => {
           dispatch({ type: DISABLE_SUBMIT, payload: false });
@@ -305,6 +308,13 @@ const PaymentMethodContainerWithoutStripe = ({
               content: t("messages.sourceUpdated")
             }
           });
+
+          // Reinitialize Cybersource microform after successful payment
+          setTimeout(() => {
+            cybersourceInstanceRef.current = null;
+            initCybersourceScript();
+          }, 1000);
+
           onSuccess(res);
         } //
       );
@@ -332,12 +342,21 @@ const PaymentMethodContainerWithoutStripe = ({
             product,
             isExistingSource: isUsingExistingPaymentMethod,
             subscriptionIdToRenew,
-            addressId: selectedAddressId
+            addressId: selectedAddressId,
+            cardExpirationMonth: state.month,
+            cardExpirationYear: state.year
           },
           (err, res) => {
             if (err) {
               return handlePaymentError(err);
             }
+
+            // Reinitialize Cybersource microform after successful payment
+            setTimeout(() => {
+              cybersourceInstanceRef.current = null;
+              initCybersourceScript();
+            }, 1000);
+
             onSuccess(res);
           }
         );
@@ -354,12 +373,21 @@ const PaymentMethodContainerWithoutStripe = ({
             product,
             isExistingSource: isUsingExistingPaymentMethod,
             giftRecipient,
-            addressId: selectedAddressId
+            addressId: selectedAddressId,
+            cardExpirationMonth: state.month,
+            cardExpirationYear: state.year
           },
           (err, res) => {
             if (err) {
               return handlePaymentError(err);
             }
+
+            // Reinitialize Cybersource microform after successful payment
+            setTimeout(() => {
+              cybersourceInstanceRef.current = null;
+              initCybersourceScript();
+            }, 1000);
+
             onSuccess(res);
           }
         );
@@ -376,12 +404,21 @@ const PaymentMethodContainerWithoutStripe = ({
             product,
             isExistingSource: isUsingExistingPaymentMethod,
             subscriptionIdToRenew,
-            addressId: selectedAddressId
+            addressId: selectedAddressId,
+            cardExpirationMonth: state.month,
+            cardExpirationYear: state.year
           },
           (err, res) => {
             if (err) {
               return handlePaymentError(err);
             }
+
+            // Reinitialize Cybersource microform after successful payment
+            setTimeout(() => {
+              cybersourceInstanceRef.current = null;
+              initCybersourceScript();
+            }, 1000);
+
             onSuccess(res);
           }
         );
@@ -398,12 +435,21 @@ const PaymentMethodContainerWithoutStripe = ({
             product,
             isExistingSource: isUsingExistingPaymentMethod,
             addressId: selectedAddressId,
-            fingerprint_session_id: state.cyberSourceSessionId
+            fingerprint_session_id: state.cyberSourceSessionId,
+            cardExpirationMonth: state.month,
+            cardExpirationYear: state.year
           },
           (err, res) => {
             if (err) {
               return handlePaymentError(err);
             }
+
+            // Reinitialize Cybersource microform after successful payment
+            setTimeout(() => {
+              cybersourceInstanceRef.current = null;
+              initCybersourceScript();
+            }, 1000);
+
             onSuccess(res);
           }
         );
@@ -411,13 +457,7 @@ const PaymentMethodContainerWithoutStripe = ({
     }
   }
 
-  const tokenizeCard = (error, microformInstance) => {
-    if (error) {
-      return;
-    }
-
-    cybersourceInstanceRef.current = microformInstance;
-  };
+  // No longer needed - microform instance is stored directly in initCybersourceScript
 
   const appendCybersourceFingerprintScripts = () => {
     const uniqueId = crypto.randomUUID();
@@ -457,6 +497,14 @@ const PaymentMethodContainerWithoutStripe = ({
   };
 
   const initCybersourceScript = () => {
+    // Clear existing card number field before reinitializing
+    const cardNumberElement = document.querySelector(
+      "#cybersourceCardNumber"
+    );
+    if (cardNumberElement) {
+      cardNumberElement.innerHTML = "";
+    }
+
     // jwk api call
     window.Pelcro.payment.getJWK(
       {
@@ -477,14 +525,21 @@ const PaymentMethodContainerWithoutStripe = ({
           });
         }
 
-        const { key: jwk } = res;
-        // SETUP MICROFORM
-        FLEX.microform(
-          {
-            keyId: jwk.kid,
-            keystore: jwk,
-            container: "#cybersourceCardNumber",
-            placeholder: "Card Number",
+        const { key: jwk, captureContext, js_client } = res;
+
+        // Load the SDK from the dynamic URL (if not already loaded)
+        const existingScript = document.querySelector(
+          `script[src="${js_client}"]`
+        );
+        if (!existingScript) {
+          window.Pelcro.helpers.loadSDK(js_client, "cybersource-cdn");
+        }
+
+        const initializeMicroform = () => {
+          // SETUP MICROFORM
+          // eslint-disable-next-line no-undef
+          const flex = new Flex(captureContext);
+          const microform = flex.microform({
             styles: {
               input: {
                 "font-size": "14px",
@@ -497,9 +552,26 @@ const PaymentMethodContainerWithoutStripe = ({
               valid: { color: "#3c763d" },
               invalid: { color: "#a94442" }
             }
-          },
-          tokenizeCard
-        );
+          });
+
+          const number = microform.createField("number", {
+            placeholder: "Enter your card number"
+          });
+          number.load("#cybersourceCardNumber");
+
+          cybersourceInstanceRef.current = microform;
+        };
+
+        // Wait for SDK to load then initialize microform
+        if (existingScript) {
+          // Script already loaded, initialize immediately
+          initializeMicroform();
+        } else {
+          // Wait for new script to load
+          document
+            .querySelector(`script[src="${js_client}"]`)
+            .addEventListener("load", initializeMicroform);
+        }
       }
     );
   };
@@ -873,7 +945,6 @@ const PaymentMethodContainerWithoutStripe = ({
   /* ====== Start Braintree integration  ======== */
   const braintreeInstanceRef = React.useRef(null);
 
-  
   function getClientToken() {
     return new Promise((resolve, reject) => {
       window.Pelcro.payment.generateClientToken(
@@ -1852,27 +1923,7 @@ const PaymentMethodContainerWithoutStripe = ({
 
       if (
         cardProcessor === "cybersource" &&
-        !selectedPaymentMethodId &&
-        !window.FLEX
-      ) {
-        window.Pelcro.helpers.loadSDK(
-          "https://flex.cybersource.com/cybersource/assets/microform/0.4/flex-microform.min.js",
-          "cybersource-cdn"
-        );
-
-        document
-          .querySelector(
-            'script[src="https://flex.cybersource.com/cybersource/assets/microform/0.4/flex-microform.min.js"]'
-          )
-          .addEventListener("load", () => {
-            initCybersourceScript();
-          });
-      }
-
-      if (
-        cardProcessor === "cybersource" &&
-        !selectedPaymentMethodId &&
-        window.FLEX
+        !selectedPaymentMethodId
       ) {
         initCybersourceScript();
       }
@@ -2392,7 +2443,10 @@ const PaymentMethodContainerWithoutStripe = ({
           gift_message: giftRecipient?.giftMessage,
           address_id: product.address_required
             ? selectedAddressId
-            : null
+            : null,
+          metadata: props?.subCreateMetadata,
+          cardExpirationMonth: state?.month,
+          cardExpirationYear: state?.year
         },
         (err, res) => {
           if (res?.data?.setup_intent) {
@@ -2578,7 +2632,9 @@ const PaymentMethodContainerWithoutStripe = ({
         isExistingSource: Boolean(selectedPaymentMethodId),
         items: mappedOrderItems,
         addressId: selectedAddressId,
-        couponCode
+        couponCode,
+        cardExpirationMonth: state?.month,
+        cardExpirationYear: state?.year
       },
       (err, orderResponse) => {
         if (err) {
@@ -2850,7 +2906,9 @@ const PaymentMethodContainerWithoutStripe = ({
           items: mappedOrderItems,
           campaign_key:
             window.Pelcro.helpers.getURLParameter("campaign_key"),
-          ...(selectedAddressId && { address_id: selectedAddressId })
+          ...(selectedAddressId && { address_id: selectedAddressId }),
+          cardExpirationMonth: state?.month,
+          cardExpirationYear: state?.year
         },
         (err, res) => {
           if (err) {
