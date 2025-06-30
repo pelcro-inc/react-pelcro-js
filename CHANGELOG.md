@@ -1,3 +1,10 @@
+# [3.50.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.49.0...v3.50.0) (2025-06-30)
+
+
+### Features
+
+* add_cybersource ([#449](https://github.com/pelcro-inc/react-pelcro-js/issues/449)) ([7c05476](https://github.com/pelcro-inc/react-pelcro-js/commit/7c05476fa3d4fe8f5820546558817a59c7edde5b))
+
 # [3.49.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.48.0...v3.49.0) (2025-06-04)
 
 
