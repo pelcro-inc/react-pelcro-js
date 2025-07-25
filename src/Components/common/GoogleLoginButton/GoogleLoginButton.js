@@ -5,6 +5,8 @@ import { store as registerStore } from "../../Register/RegisterContainer";
 import { ReactComponent as GoogleLogoIcon } from "../../../assets/google-logo.svg";
 import { HANDLE_SOCIAL_LOGIN } from "../../../utils/action-types";
 import { gapi } from 'gapi-script';
+import { notify } from "../../../SubComponents/Notification";
+import { getErrorMessages } from "../Helpers";
 
 export const GoogleLoginButton = ({
   label = "Google",
@@ -52,6 +54,8 @@ export const GoogleLoginButton = ({
 
   const onFailure = (error) => {
     console.error(error);
+    const errorMessage = getErrorMessages(error) || "Google login failed. Please try again.";
+    notify.error(errorMessage);
   };
 
   return googleClientId ? (
