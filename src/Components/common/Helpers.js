@@ -97,3 +97,93 @@ export function getFourDigitYear(lastTwoDigits) {
 
   return fourDigitYear;
 }
+
+/**
+ * Loads Braintree Drop-in UI script
+ * @returns {Promise} Promise that resolves when script is loaded
+ */
+export function loadBraintreeScript() {
+  return new Promise((resolve, reject) => {
+    // Check if script is already loaded
+    if (window.braintree) {
+      console.log("Braintree script already loaded");
+      resolve(window.braintree);
+      return;
+    }
+
+    console.log("Loading Braintree script...");
+    const script = document.createElement("script");
+    script.src =
+      "https://js.braintreegateway.com/web/dropin/1.45.1/js/dropin.js";
+    script.onload = () => {
+      console.log("Braintree script loaded successfully");
+      resolve(window.braintree);
+    };
+    script.onerror = (error) => {
+      console.error("Failed to load Braintree script:", error);
+      reject(new Error("Failed to load Braintree script"));
+    };
+    document.head.appendChild(script);
+  });
+}
+
+/**
+ * Creates Braintree Drop-in UI instance
+ * @param {string} authorization - Braintree authorization token
+ * @param {string} selector - CSS selector for the container
+ * @param {Object} options - Additional options for dropin creation
+ * @returns {Promise} Promise that resolves with the dropin instance
+ */
+export function createBraintreeDropin(
+  authorization,
+  selector,
+  options = {}
+) {
+  console.log("Creating Braintree Drop-in with:", {
+    authorization: authorization ? "present" : "missing",
+    selector,
+    options
+  });
+
+  return loadBraintreeScript().then(() => {
+    console.log("Braintree script loaded, creating dropin...");
+    return new Promise((resolve, reject) => {
+      window.braintree.dropin.create(
+        {
+          authorization,
+          selector,
+          ...options
+        },
+        (err, instance) => {
+          if (err) {
+            console.error("Braintree dropin creation failed:", err);
+            reject(err);
+          } else {
+            console.log(
+              "Braintree dropin created successfully:",
+              instance
+            );
+            resolve(instance);
+          }
+        }
+      );
+    });
+  });
+}
+
+/**
+ * Requests payment method from Braintree Drop-in UI
+ * @param {Object} instance - Braintree dropin instance
+ * @returns {Promise} Promise that resolves with payment method payload
+ */
+export function requestBraintreePaymentMethod(instance) {
+  return new Promise((resolve, reject) => {
+    instance.requestPaymentMethod((err, payload) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(payload);
+      }
+    });
+  });
+}
