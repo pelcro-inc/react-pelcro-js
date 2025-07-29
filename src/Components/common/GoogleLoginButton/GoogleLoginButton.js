@@ -76,26 +76,29 @@ export const GoogleLoginButton = ({
       userAgent: navigator.userAgent
     });
     
-    // Show simple error notification
-    notify.error("Google login failed. Please try again. Error: " + error.message);
+    // Show simple error notification with fallback for missing error message
+    const errorMessage = error.message || error.error || 'Unknown error';
+    notify.error("Google login failed. Please try again. Error: " + errorMessage);
     
     // Enhanced failure logging with debugging info
     notifyBugsnag(() => {
-      Bugsnag.notify(new Error(`react-pelcro-js: Google login failed - ${error.message}`), (event) => {
+      Bugsnag.notify(new Error(`react-pelcro-js: Google login failed - ${errorMessage}`), (event) => {
         event.addMetadata('react-pelcro-js: GoogleLogin', {
           source: 'react-pelcro-js',
           component: 'GoogleLoginButton',
-          error: error.message,
-          errorCode: error.error,
-          errorDetails: error.details,
+          error: error.message || 'No error message',
+          errorCode: error.error || 'No error code',
+          errorDetails: error.details || 'No details',
           timestamp: new Date().toISOString(),
           userAgent: navigator.userAgent,
           googleClientId: googleClientId ? 'configured' : 'not-configured',
           site: window.Pelcro?.site?.read()?.id,
           user: window.Pelcro?.user?.read()?.id,
           environment: window.Pelcro?.environment,
-          uiVersion: window.Pelcro?.uiSettings?.uiVersion
+          uiVersion: window.Pelcro?.uiSettings?.uiVersion,
+          googleClientId: googleClientId ? 'configured ' + googleClientId : 'not-configured',
         });
+    
       });
     });
   };
