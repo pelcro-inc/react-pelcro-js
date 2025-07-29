@@ -97,6 +97,7 @@ export const GoogleLoginButton = ({
           environment: window.Pelcro?.environment,
           uiVersion: window.Pelcro?.uiSettings?.uiVersion,
           googleClientId: googleClientId ? 'configured ' + googleClientId : 'not-configured',
+          allErrors: error,
         });
     
       });
