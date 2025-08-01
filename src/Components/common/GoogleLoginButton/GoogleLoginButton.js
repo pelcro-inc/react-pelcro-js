@@ -232,6 +232,33 @@ export const GoogleLoginButton = ({
       type: HANDLE_SOCIAL_LOGIN,
       payload
     });
+    
+    // Step 4.5: Send immediate success notification since the flow will be handled by container
+    try {
+      if (window.Bugsnag) {
+        console.log('Sending immediate Bugsnag success notification for flow:', flowId);
+        window.Bugsnag.notify("Pelcro-React-Elements: Google Login Flow - Authentication Success", (event) => {
+          event.addMetadata("GoogleLoginFlow", {
+            flow_id: flowId,
+            flow_type: "authentication_success",
+            source: "Pelcro-React-Elements",
+            component: "GoogleLoginButton",
+            user_data: {
+              email: profile.getEmail?.(),
+              first_name: profile.getGivenName?.(),
+              last_name: profile.getFamilyName?.()
+            },
+            site_id: window.Pelcro?.site?.read()?.id,
+            environment: window.Pelcro?.environment,
+            ui_version: window.Pelcro?.uiSettings?.uiVersion,
+            note: "Flow will be completed by container handlers",
+            total_steps: 4
+          });
+        });
+      }
+    } catch (error) {
+      console.warn('Failed to send immediate success notification:', error);
+    }
 
     // Step 5: Flow completed successfully
     try {
@@ -248,29 +275,9 @@ export const GoogleLoginButton = ({
           site_id: window.Pelcro?.site?.read()?.id,
           timestamp: new Date().toISOString()
         });
-        
-        // Send final notification for successful flow
-        console.log('Sending Bugsnag success notification for flow:', flowId);
-        window.Bugsnag.notify("Pelcro-React-Elements: Google Login Flow - Complete Success", (event) => {
-          event.addMetadata("GoogleLoginFlow", {
-            flow_id: flowId,
-            flow_type: "complete_success",
-            source: "Pelcro-React-Elements",
-            component: "GoogleLoginButton",
-            user_data: {
-              email: profile.getEmail?.(),
-              first_name: profile.getGivenName?.(),
-              last_name: profile.getFamilyName?.()
-            },
-            site_id: window.Pelcro?.site?.read()?.id,
-            environment: window.Pelcro?.environment,
-            ui_version: window.Pelcro?.uiSettings?.uiVersion,
-            total_steps: 5
-          });
-        });
       }
     } catch (error) {
-      console.warn('Failed to add completion breadcrumb or send notification:', error);
+      console.warn('Failed to add completion breadcrumb:', error);
     }
     
     // Track successful Google login with ReactGA4
