@@ -1,6 +1,6 @@
 @layer components {
   .pelcro-root .pelcro-notification-container {
-    @apply plc-z-[9999];
+    z-index: 9999;
   }
 
   .pelcro-root .pelcro-notification-error {
