@@ -250,6 +250,7 @@ export const GoogleLoginButton = ({
         });
         
         // Send final notification for successful flow
+        console.log('Sending Bugsnag success notification for flow:', flowId);
         window.Bugsnag.notify("Pelcro-React-Elements: Google Login Flow - Complete Success", (event) => {
           event.addMetadata("GoogleLoginFlow", {
             flow_id: flowId,
@@ -407,6 +408,21 @@ export const GoogleLoginButton = ({
           url: window.location.href,
           user_agent: navigator.userAgent,
           timestamp: new Date().toISOString()
+        });
+        
+        // Send notification for flow start
+        window.Bugsnag.notify("Pelcro-React-Elements: Google Login Flow - Started", (event) => {
+          event.addMetadata("GoogleLoginFlow", {
+            flow_id: flowId,
+            flow_type: "started",
+            source: "Pelcro-React-Elements",
+            component: "GoogleLoginButton",
+            google_client_id: googleClientId ? 'configured' : 'not-configured',
+            site_id: window.Pelcro?.site?.read()?.id,
+            url: window.location.href,
+            user_agent: navigator.userAgent,
+            total_steps: 0
+          });
         });
       }
     } catch (error) {
