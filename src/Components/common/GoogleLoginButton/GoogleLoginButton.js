@@ -360,26 +360,30 @@ export const GoogleLoginButton = ({
       console.warn('Failed to send Bugsnag notification for failure:', error);
     }
     
-    // Track Google login failure with ReactGA4
-    try {
-      const errorMessage = error.message || error.error || 'Unknown error';
-      ReactGA4.event('pelcro_google_login_failure', {
-        method: 'google',
-        source: 'Pelcro-React-Elements',
-        component: 'GoogleLoginButton',
-        failure_type: failureType,
-        error: errorMessage,
-        error_code: error.error || 'No error code',
-        site_id: window.Pelcro?.site?.read()?.id
-      });
-    } catch (error) {
-      console.warn('GA4 pelcro_google_login_failure event failed:', error);
+    // Track Google login failure with ReactGA4 (skip for user-initiated popup close)
+    if (failureType !== 'popup_closed_by_user') {
+      try {
+        const errorMessage = error.message || error.error || 'Unknown error';
+        ReactGA4.event('pelcro_google_login_failure', {
+          method: 'google',
+          source: 'Pelcro-React-Elements',
+          component: 'GoogleLoginButton',
+          failure_type: failureType,
+          error: errorMessage,
+          error_code: error.error || 'No error code',
+          site_id: window.Pelcro?.site?.read()?.id
+        });
+      } catch (error) {
+        console.warn('GA4 pelcro_google_login_failure event failed:', error);
+      }
     }
     
-    // Show appropriate error notification based on failure type
-    const errorMessage = error.message || error.error || 'Unknown error';
-    const userFriendlyMessage = getFailureMessage(failureType, errorMessage);
-    notify.error(userFriendlyMessage);
+    // Show appropriate error notification based on failure type (skip for user-initiated popup close)
+    if (failureType !== 'popup_closed_by_user') {
+      const errorMessage = error.message || error.error || 'Unknown error';
+      const userFriendlyMessage = getFailureMessage(failureType, errorMessage);
+      notify.error(userFriendlyMessage);
+    }
   };
 
   const handleButtonClick = (renderProps) => {
