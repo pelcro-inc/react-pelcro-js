@@ -127,41 +127,49 @@ export const GoogleLoginButton = ({
     // Generate a unique flow ID for this session
     const flowId = `google_flow_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
     
-    notifyBugsnag(() => {
-      // Set context for this flow
-      window.Bugsnag.setContext(`Google Login Flow - ${flowId}`);
-      window.Bugsnag.setUser(flowId, null, null);
-      
-      // Step 1: Google authentication successful
-      window.Bugsnag.leaveBreadcrumb("Google Authentication Successful", {
-        step: 1,
-        flow_id: flowId,
-        source: "Pelcro-React-Elements",
-        component: "GoogleLoginButton",
-        site_id: window.Pelcro?.site?.read()?.id,
-        google_client_id: googleClientId ? 'configured' : 'not-configured',
-        timestamp: new Date().toISOString()
+    try {
+      notifyBugsnag(() => {
+        // Set context for this flow
+        window.Bugsnag.setContext(`Google Login Flow - ${flowId}`);
+        window.Bugsnag.setUser(flowId, null, null);
+        
+        // Step 1: Google authentication successful
+        window.Bugsnag.leaveBreadcrumb("Google Authentication Successful", {
+          step: 1,
+          flow_id: flowId,
+          source: "Pelcro-React-Elements",
+          component: "GoogleLoginButton",
+          site_id: window.Pelcro?.site?.read()?.id,
+          google_client_id: googleClientId ? 'configured' : 'not-configured',
+          timestamp: new Date().toISOString()
+        });
       });
-    });
+    } catch (error) {
+      console.warn('Failed to send Bugsnag notification for authentication success:', error);
+    }
 
     const profile = response.getBasicProfile();
     const accessToken = response.getAuthResponse()?.id_token;
 
     // Step 2: Profile data extracted
-    notifyBugsnag(() => {
-      window.Bugsnag.leaveBreadcrumb("Profile Data Extracted", {
-        step: 2,
-        flow_id: flowId,
-        source: "Pelcro-React-Elements",
-        component: "GoogleLoginButton",
-        email: profile.getEmail?.()?.substring(0, 10) + '...',
-        first_name: profile.getGivenName?.(),
-        last_name: profile.getFamilyName?.(),
-        has_access_token: !!accessToken,
-        site_id: window.Pelcro?.site?.read()?.id,
-        timestamp: new Date().toISOString()
+    try {
+      notifyBugsnag(() => {
+        window.Bugsnag.leaveBreadcrumb("Profile Data Extracted", {
+          step: 2,
+          flow_id: flowId,
+          source: "Pelcro-React-Elements",
+          component: "GoogleLoginButton",
+          email: profile.getEmail?.()?.substring(0, 10) + '...',
+          first_name: profile.getGivenName?.(),
+          last_name: profile.getFamilyName?.(),
+          has_access_token: !!accessToken,
+          site_id: window.Pelcro?.site?.read()?.id,
+          timestamp: new Date().toISOString()
+        });
       });
-    });
+    } catch (error) {
+      console.warn('Failed to send Bugsnag notification for profile data extraction:', error);
+    }
 
     const payload = {
       idpName: "google",
@@ -172,19 +180,23 @@ export const GoogleLoginButton = ({
     };
 
     // Step 3: Dispatching to login store
-    notifyBugsnag(() => {
-      window.Bugsnag.leaveBreadcrumb("Dispatching to Login Store", {
-        step: 3,
-        flow_id: flowId,
-        source: "Pelcro-React-Elements",
-        component: "GoogleLoginButton",
-        action_type: HANDLE_SOCIAL_LOGIN,
-        idp_name: payload.idpName,
-        email: payload.email?.substring(0, 10) + '...',
-        site_id: window.Pelcro?.site?.read()?.id,
-        timestamp: new Date().toISOString()
+    try {
+      notifyBugsnag(() => {
+        window.Bugsnag.leaveBreadcrumb("Dispatching to Login Store", {
+          step: 3,
+          flow_id: flowId,
+          source: "Pelcro-React-Elements",
+          component: "GoogleLoginButton",
+          action_type: HANDLE_SOCIAL_LOGIN,
+          idp_name: payload.idpName,
+          email: payload.email?.substring(0, 10) + '...',
+          site_id: window.Pelcro?.site?.read()?.id,
+          timestamp: new Date().toISOString()
+        });
       });
-    });
+    } catch (error) {
+      console.warn('Failed to send Bugsnag notification for login store dispatch:', error);
+    }
 
     loginDispatch?.({
       type: HANDLE_SOCIAL_LOGIN,
@@ -192,19 +204,23 @@ export const GoogleLoginButton = ({
     });
 
     // Step 4: Dispatching to register store
-    notifyBugsnag(() => {
-      window.Bugsnag.leaveBreadcrumb("Dispatching to Register Store", {
-        step: 4,
-        flow_id: flowId,
-        source: "Pelcro-React-Elements",
-        component: "GoogleLoginButton",
-        action_type: HANDLE_SOCIAL_LOGIN,
-        idp_name: payload.idpName,
-        email: payload.email?.substring(0, 10) + '...',
-        site_id: window.Pelcro?.site?.read()?.id,
-        timestamp: new Date().toISOString()
+    try {
+      notifyBugsnag(() => {
+        window.Bugsnag.leaveBreadcrumb("Dispatching to Register Store", {
+          step: 4,
+          flow_id: flowId,
+          source: "Pelcro-React-Elements",
+          component: "GoogleLoginButton",
+          action_type: HANDLE_SOCIAL_LOGIN,
+          idp_name: payload.idpName,
+          email: payload.email?.substring(0, 10) + '...',
+          site_id: window.Pelcro?.site?.read()?.id,
+          timestamp: new Date().toISOString()
+        });
       });
-    });
+    } catch (error) {
+      console.warn('Failed to send Bugsnag notification for register store dispatch:', error);
+    }
 
     registerDispatch?.({
       type: HANDLE_SOCIAL_LOGIN,
@@ -212,43 +228,51 @@ export const GoogleLoginButton = ({
     });
     
     // Step 4.5: Send immediate success notification since the flow will be handled by container
-    notifyBugsnag(() => {
-      console.log('Sending immediate Bugsnag success notification for flow:', flowId);
-      window.Bugsnag.notify("Pelcro-React-Elements: Google Login Flow - Authentication Success", (event) => {
-        event.addMetadata("GoogleLoginFlow", {
-          flow_id: flowId,
-          flow_type: "authentication_success",
-          source: "Pelcro-React-Elements",
-          component: "GoogleLoginButton",
-          user_data: {
-            email: profile.getEmail?.(),
-            first_name: profile.getGivenName?.(),
-            last_name: profile.getFamilyName?.()
-          },
-          site_id: window.Pelcro?.site?.read()?.id,
-          environment: window.Pelcro?.environment,
-          ui_version: window.Pelcro?.uiSettings?.uiVersion,
-          note: "Flow will be completed by container handlers",
-          total_steps: 4
+    try {
+      notifyBugsnag(() => {
+        console.log('Sending immediate Bugsnag success notification for flow:', flowId);
+        window.Bugsnag.notify("Pelcro-React-Elements: Google Login Flow - Authentication Success", (event) => {
+          event.addMetadata("GoogleLoginFlow", {
+            flow_id: flowId,
+            flow_type: "authentication_success",
+            source: "Pelcro-React-Elements",
+            component: "GoogleLoginButton",
+            user_data: {
+              email: profile.getEmail?.(),
+              first_name: profile.getGivenName?.(),
+              last_name: profile.getFamilyName?.()
+            },
+            site_id: window.Pelcro?.site?.read()?.id,
+            environment: window.Pelcro?.environment,
+            ui_version: window.Pelcro?.uiSettings?.uiVersion,
+            note: "Flow will be completed by container handlers",
+            total_steps: 4
+          });
         });
       });
-    });
+    } catch (error) {
+      console.warn('Failed to send Bugsnag notification for authentication success:', error);
+    }
 
     // Step 5: Flow completed successfully
-    notifyBugsnag(() => {
-      window.Bugsnag.leaveBreadcrumb("Google Login Flow Completed", {
-        step: 5,
-        flow_id: flowId,
-        source: "Pelcro-React-Elements",
-        component: "GoogleLoginButton",
-        status: 'success',
-        email: profile.getEmail?.()?.substring(0, 10) + '...',
-        first_name: profile.getGivenName?.(),
-        last_name: profile.getFamilyName?.(),
-        site_id: window.Pelcro?.site?.read()?.id,
-        timestamp: new Date().toISOString()
+    try {
+      notifyBugsnag(() => {
+        window.Bugsnag.leaveBreadcrumb("Google Login Flow Completed", {
+          step: 5,
+          flow_id: flowId,
+          source: "Pelcro-React-Elements",
+          component: "GoogleLoginButton",
+          status: 'success',
+          email: profile.getEmail?.()?.substring(0, 10) + '...',
+          first_name: profile.getGivenName?.(),
+          last_name: profile.getFamilyName?.(),
+          site_id: window.Pelcro?.site?.read()?.id,
+          timestamp: new Date().toISOString()
+        });
       });
-    });
+    } catch (error) {
+      console.warn('Failed to send Bugsnag notification for flow completion:', error);
+    }
     
     // Track successful Google login with ReactGA4
     try {
@@ -284,41 +308,26 @@ export const GoogleLoginButton = ({
     });
     
     // Set Bugsnag context for this failed flow
-    notifyBugsnag(() => {
-      window.Bugsnag.setContext(`Google Login Flow - ${flowId} (Failed)`);
-      window.Bugsnag.setUser(flowId, null, null);
-      
-      // Step 1: Flow started
-      window.Bugsnag.leaveBreadcrumb("Google Login Flow Started", {
-        step: 1,
-        flow_id: flowId,
-        source: "Pelcro-React-Elements",
-        component: "GoogleLoginButton",
-        site_id: window.Pelcro?.site?.read()?.id,
-        google_client_id: googleClientId ? 'configured' : 'not-configured',
-        timestamp: new Date().toISOString()
-      });
-      
-      // Step 2: Authentication failed
-      window.Bugsnag.leaveBreadcrumb("Google Authentication Failed", {
-        step: 2,
-        flow_id: flowId,
-        source: "Pelcro-React-Elements",
-        component: "GoogleLoginButton",
-        failure_type: failureType,
-        error: error.message || 'No error message',
-        error_code: error.error || 'No error code',
-        error_details: error.details || 'No details',
-        site_id: window.Pelcro?.site?.read()?.id,
-        user_agent: navigator.userAgent,
-        timestamp: new Date().toISOString()
-      });
-      
-      // Send final notification for failed flow
-      window.Bugsnag.notify(`Pelcro-React-Elements: Google Login Flow - ${failureType}`, (event) => {
-        event.addMetadata("GoogleLoginFlow", {
+    try {
+      notifyBugsnag(() => {
+        window.Bugsnag.setContext(`Google Login Flow - ${flowId} (Failed)`);
+        window.Bugsnag.setUser(flowId, null, null);
+        
+        // Step 1: Flow started
+        window.Bugsnag.leaveBreadcrumb("Google Login Flow Started", {
+          step: 1,
           flow_id: flowId,
-          flow_type: failureType,
+          source: "Pelcro-React-Elements",
+          component: "GoogleLoginButton",
+          site_id: window.Pelcro?.site?.read()?.id,
+          google_client_id: googleClientId ? 'configured' : 'not-configured',
+          timestamp: new Date().toISOString()
+        });
+        
+        // Step 2: Authentication failed
+        window.Bugsnag.leaveBreadcrumb("Google Authentication Failed", {
+          step: 2,
+          flow_id: flowId,
           source: "Pelcro-React-Elements",
           component: "GoogleLoginButton",
           failure_type: failureType,
@@ -326,13 +335,32 @@ export const GoogleLoginButton = ({
           error_code: error.error || 'No error code',
           error_details: error.details || 'No details',
           site_id: window.Pelcro?.site?.read()?.id,
-          environment: window.Pelcro?.environment,
-          ui_version: window.Pelcro?.uiSettings?.uiVersion,
           user_agent: navigator.userAgent,
-          total_steps: 2
+          timestamp: new Date().toISOString()
+        });
+        
+        // Send final notification for failed flow
+        window.Bugsnag.notify(`Pelcro-React-Elements: Google Login Flow - ${failureType}`, (event) => {
+          event.addMetadata("GoogleLoginFlow", {
+            flow_id: flowId,
+            flow_type: failureType,
+            source: "Pelcro-React-Elements",
+            component: "GoogleLoginButton",
+            failure_type: failureType,
+            error: error.message || 'No error message',
+            error_code: error.error || 'No error code',
+            error_details: error.details || 'No details',
+            site_id: window.Pelcro?.site?.read()?.id,
+            environment: window.Pelcro?.environment,
+            ui_version: window.Pelcro?.uiSettings?.uiVersion,
+            user_agent: navigator.userAgent,
+            total_steps: 2
+          });
         });
       });
-    });
+    } catch (error) {
+      console.warn('Failed to send Bugsnag notification for authentication failure:', error);
+    }
     
     // Track Google login failure with ReactGA4 (skip for user-initiated popup close)
     if (failureType !== 'popup_closed_by_user') {
@@ -364,39 +392,43 @@ export const GoogleLoginButton = ({
     // Step 0: Button clicked
     const flowId = `google_flow_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
     
-    notifyBugsnag(() => {
-      // Set context for this flow
-      window.Bugsnag.setContext(`Google Login Flow - ${flowId}`);
-      window.Bugsnag.setUser(flowId, null, null);
-      
-      // Add breadcrumb for button click
-      window.Bugsnag.leaveBreadcrumb("Google Button Clicked", {
-        step: 0,
-        flow_id: flowId,
-        source: "Pelcro-React-Elements",
-        component: "GoogleLoginButton",
-        google_client_id: googleClientId ? 'configured' : 'not-configured',
-        site_id: window.Pelcro?.site?.read()?.id,
-        url: window.location.href,
-        user_agent: navigator.userAgent,
-        timestamp: new Date().toISOString()
-      });
-      
-      // Send notification for flow start
-      window.Bugsnag.notify("Pelcro-React-Elements: Google Login Flow - Started", (event) => {
-        event.addMetadata("GoogleLoginFlow", {
+    try {
+      notifyBugsnag(() => {
+        // Set context for this flow
+        window.Bugsnag.setContext(`Google Login Flow - ${flowId}`);
+        window.Bugsnag.setUser(flowId, null, null);
+        
+        // Add breadcrumb for button click
+        window.Bugsnag.leaveBreadcrumb("Google Button Clicked", {
+          step: 0,
           flow_id: flowId,
-          flow_type: "started",
           source: "Pelcro-React-Elements",
           component: "GoogleLoginButton",
           google_client_id: googleClientId ? 'configured' : 'not-configured',
           site_id: window.Pelcro?.site?.read()?.id,
           url: window.location.href,
           user_agent: navigator.userAgent,
-          total_steps: 0
+          timestamp: new Date().toISOString()
+        });
+        
+        // Send notification for flow start
+        window.Bugsnag.notify("Pelcro-React-Elements: Google Login Flow - Started", (event) => {
+          event.addMetadata("GoogleLoginFlow", {
+            flow_id: flowId,
+            flow_type: "started",
+            source: "Pelcro-React-Elements",
+            component: "GoogleLoginButton",
+            google_client_id: googleClientId ? 'configured' : 'not-configured',
+            site_id: window.Pelcro?.site?.read()?.id,
+            url: window.location.href,
+            user_agent: navigator.userAgent,
+            total_steps: 0
+          });
         });
       });
-    });
+    } catch (error) {
+      console.warn('Failed to send Bugsnag notification for button click:', error);
+    }
     
     // Track Google button click with ReactGA4
     try {
