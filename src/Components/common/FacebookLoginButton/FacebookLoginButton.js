@@ -51,7 +51,7 @@ export const FacebookLoginButton = ({
       appId={window.Pelcro.site.read().facebook_app_id}
       language={getPageOrDefaultLanguage()}
       fields="first_name,last_name,email,picture"
-      scope="first_name,last_name,email,picture"
+      scope="email"
       callback={onSuccess}
       onFailure={onFailure}
       render={(renderProps) => (
