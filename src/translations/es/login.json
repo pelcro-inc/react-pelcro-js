@@ -23,6 +23,8 @@
     }
   },
   "errors": {
-    "": ""
+    "facebookNoEmail": "Tu cuenta de Facebook no tiene una dirección de correo electrónico. Por favor, usa un método de inicio de sesión diferente o agrega un correo electrónico a tu cuenta de Facebook.",
+    "auth0NoEmail": "Tu cuenta de Auth0 no tiene una dirección de correo electrónico. Por favor, usa un método de inicio de sesión diferente o agrega un correo electrónico a tu cuenta de Auth0.",
+    "googleNoEmail": "Tu cuenta de Google no tiene una dirección de correo electrónico. Por favor, usa un método de inicio de sesión diferente o agrega un correo electrónico a tu cuenta de Google."
   }
 }

@@ -36,7 +36,9 @@
     }
   },
   "errors": {
-    "": ""
+    "facebookNoEmail": "Votre compte Facebook n'a pas d'adresse e-mail. Veuillez utiliser une autre méthode de connexion ou ajouter une adresse e-mail à votre compte Facebook.",
+    "auth0NoEmail": "Votre compte Auth0 n'a pas d'adresse e-mail. Veuillez utiliser une autre méthode de connexion ou ajouter une adresse e-mail à votre compte Auth0.",
+    "googleNoEmail": "Votre compte Google n'a pas d'adresse e-mail. Veuillez utiliser une autre méthode de connexion ou ajouter une adresse e-mail à votre compte Google."
   },
 
   "gift": {

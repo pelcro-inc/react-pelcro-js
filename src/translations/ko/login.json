@@ -24,6 +24,8 @@
       }
     },
     "errors": {
-      "": ""
+      "facebookNoEmail": "Facebook 계정에 이메일 주소가 없습니다. 다른 로그인 방법을 사용하거나 Facebook 계정에 이메일을 추가해 주세요.",
+      "auth0NoEmail": "Auth0 계정에 이메일 주소가 없습니다. 다른 로그인 방법을 사용하거나 Auth0 계정에 이메일을 추가해 주세요.",
+      "googleNoEmail": "Google 계정에 이메일 주소가 없습니다. 다른 로그인 방법을 사용하거나 Google 계정에 이메일을 추가해 주세요."
     }
   }
