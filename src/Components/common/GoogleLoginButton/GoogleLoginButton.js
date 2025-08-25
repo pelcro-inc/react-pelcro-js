@@ -1,9 +1,10 @@
 import React, { useContext, useEffect  } from "react";
 import { GoogleLogin } from "react-google-login";
+import { useTranslation } from "react-i18next";
 import { store as loginStore } from "../../Login/LoginContainer";
 import { store as registerStore } from "../../Register/RegisterContainer";
 import { ReactComponent as GoogleLogoIcon } from "../../../assets/google-logo.svg";
-import { HANDLE_SOCIAL_LOGIN } from "../../../utils/action-types";
+import { HANDLE_SOCIAL_LOGIN, SHOW_ALERT } from "../../../utils/action-types";
 import { gapi } from 'gapi-script';
 
 export const GoogleLoginButton = ({
@@ -12,6 +13,7 @@ export const GoogleLoginButton = ({
   labelClassName = "",
   iconClassName = ""
 }) => {
+  const { t } = useTranslation("login");
   const googleClientId = window.Pelcro.site.read()?.google_app_id;
 
   const { dispatch: loginDispatch } = useContext(loginStore);
@@ -26,13 +28,36 @@ export const GoogleLoginButton = ({
   const onSuccess = (response) => {
     const profile = response.getBasicProfile();
     const accessToken = response.getAuthResponse()?.id_token;
+    const email = profile.getEmail?.();
 
+    // Check if email is provided by Google
+    if (!email) {
+      // Show error message for both login and register stores
+      loginDispatch?.({
+        type: SHOW_ALERT,
+        payload: {
+          type: "error",
+          content: t("errors.googleNoEmail")
+        }
+      });
+
+      registerDispatch?.({
+        type: SHOW_ALERT,
+        payload: {
+          type: "error",
+          content: t("errors.googleNoEmail")
+        }
+      });
+      return;
+    }
+
+    // Proceed with social login if email is available
     loginDispatch?.({
       type: HANDLE_SOCIAL_LOGIN,
       payload: {
         idpName: "google",
         idpToken: accessToken,
-        email: profile.getEmail?.(),
+        email: email,
         firstName: profile.getGivenName?.(),
         lastName: profile.getFamilyName?.()
       }
@@ -43,7 +68,7 @@ export const GoogleLoginButton = ({
       payload: {
         idpName: "google",
         idpToken: accessToken,
-        email: profile.getEmail?.(),
+        email: email,
         firstName: profile.getGivenName?.(),
         lastName: profile.getFamilyName?.()
       }

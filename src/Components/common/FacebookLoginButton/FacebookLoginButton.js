@@ -1,9 +1,10 @@
 import React, { useContext } from "react";
 import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
+import { useTranslation } from "react-i18next";
 import { store as loginStore } from "../../Login/LoginContainer";
 import { store as registerStore } from "../../Register/RegisterContainer";
 import { ReactComponent as FacebookLogoIcon } from "../../../assets/facebook-logo.svg";
-import { HANDLE_SOCIAL_LOGIN } from "../../../utils/action-types";
+import { HANDLE_SOCIAL_LOGIN, SHOW_ALERT } from "../../../utils/action-types";
 import { getPageOrDefaultLanguage } from "../../../utils/utils";
 
 export const FacebookLoginButton = ({
@@ -12,6 +13,7 @@ export const FacebookLoginButton = ({
   labelClassName = "",
   iconClassName = ""
 }) => {
+  const { t } = useTranslation("login");
   const facebookLoginEnabled =
     window.Pelcro.site.read()?.facebook_app_id;
 
@@ -19,6 +21,28 @@ export const FacebookLoginButton = ({
   const { dispatch: registerDispatch } = useContext(registerStore);
 
   const onSuccess = (facebookUser) => {
+    // Check if email is provided by Facebook
+    if (!facebookUser?.email) {
+      // Show error message for both login and register stores
+      loginDispatch?.({
+        type: SHOW_ALERT,
+        payload: {
+          type: "error",
+          content: t("errors.facebookNoEmail")
+        }
+      });
+
+      registerDispatch?.({
+        type: SHOW_ALERT,
+        payload: {
+          type: "error",
+          content: t("errors.facebookNoEmail")
+        }
+      });
+      return;
+    }
+
+    // Proceed with social login if email is available
     loginDispatch?.({
       type: HANDLE_SOCIAL_LOGIN,
       payload: {

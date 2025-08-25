@@ -1,8 +1,9 @@
 import React, { useContext, useState } from "react";
 import { store as loginStore } from "../../Login/LoginContainer";
 import { store as registerStore } from "../../Register/RegisterContainer";
-import { HANDLE_SOCIAL_LOGIN } from "../../../utils/action-types";
+import { HANDLE_SOCIAL_LOGIN, SHOW_ALERT } from "../../../utils/action-types";
 import { ReactComponent as Auth0LogoIcon } from "../../../assets/auth0-logo.svg";
+import { useTranslation } from "react-i18next";
 
 export const Auth0LoginButton = ({
   label = "Auth0",
@@ -50,6 +51,7 @@ export const Auth0LoginButton = ({
 
   const { dispatch: loginDispatch } = useContext(loginStore);
   const { dispatch: registerDispatch } = useContext(registerStore);
+  const { t } = useTranslation("login");
 
   function handleClick() {
     if (!auth0Loaded) {
@@ -84,6 +86,28 @@ export const Auth0LoginButton = ({
 
         const { email, first_name, last_name, given_name, family_name } = user;
 
+        // Check if email is provided by Auth0
+        if (!email) {
+          // Show error message for both login and register stores
+          loginDispatch?.({
+            type: SHOW_ALERT,
+            payload: {
+              type: "error",
+              content: t("errors.auth0NoEmail")
+            }
+          });
+
+          registerDispatch?.({
+            type: SHOW_ALERT,
+            payload: {
+              type: "error",
+              content: t("errors.auth0NoEmail")
+            }
+          });
+          return;
+        }
+
+        // Proceed with social login if email is available
         loginDispatch?.({
           type: HANDLE_SOCIAL_LOGIN,
           payload: {
