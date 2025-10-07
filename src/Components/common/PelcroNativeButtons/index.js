@@ -403,16 +403,16 @@ export const init = () => {
             const itemDidntMatchUserCurrency =
               purchaseResult === false;
 
-            if (itemDidntMatchUserCurrency) {
-              const userCurrency = window.Pelcro.user
-                .read()
-                .currency?.toUpperCase();
-              const errorMsg = i18n.t(
-                "shop:messages.currencyMismatch",
-                { currency: userCurrency }
-              );
-              notify.error(errorMsg);
-            }
+            // if (itemDidntMatchUserCurrency) {
+            //   const userCurrency = window.Pelcro.user
+            //     .read()
+            //     .currency?.toUpperCase();
+            //   const errorMsg = i18n.t(
+            //     "shop:messages.currencyMismatch",
+            //     { currency: userCurrency }
+            //   );
+            //   notify.error(errorMsg);
+            // }
           }
         );
       }

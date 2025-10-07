@@ -38,7 +38,9 @@
     }
   },
   "errors": {
-    "": ""
+    "facebookNoEmail": "Your Facebook account doesn't have an email address. Please use a different login method or add an email to your Facebook account.",
+    "googleNoEmail": "Your Google account doesn't have an email address. Please use a different login method or add an email to your Google account.",
+    "auth0NoEmail": "Your Auth0 account doesn't have an email address. Please use a different login method or add an email to your Auth0 account."
   },
   "gift": {
     "titles": {

@@ -1,3 +1,45 @@
+# [3.26.0-beta.79](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.78...v3.26.0-beta.79) (2025-08-25)
+
+
+### Features
+
+* fix ([#456](https://github.com/pelcro-inc/react-pelcro-js/issues/456)) ([e5032ca](https://github.com/pelcro-inc/react-pelcro-js/commit/e5032cae0d2a039c8a8b3b6822e3fdebe938d29e))
+
+# [3.26.0-beta.78](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.77...v3.26.0-beta.78) (2025-06-30)
+
+
+### Features
+
+* increase version ([1e90ee8](https://github.com/pelcro-inc/react-pelcro-js/commit/1e90ee8771060c1d84f06f52e3009df2c742833f))
+
+# [3.26.0-beta.77](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.76...v3.26.0-beta.77) (2025-05-13)
+
+
+### Features
+
+* add conditional order confirmation message for digital products ([#437](https://github.com/pelcro-inc/react-pelcro-js/issues/437)) ([39d0458](https://github.com/pelcro-inc/react-pelcro-js/commit/39d045817fc035640a3896048add786b41380b9b))
+
+# [3.26.0-beta.76](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.75...v3.26.0-beta.76) (2025-04-21)
+
+
+### Features
+
+* Feature/restore tax breakdown in api response ([#433](https://github.com/pelcro-inc/react-pelcro-js/issues/433)) ([852720b](https://github.com/pelcro-inc/react-pelcro-js/commit/852720b233c6ce88e503be111dfa92c6c1614d34))
+
+# [3.26.0-beta.75](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.74...v3.26.0-beta.75) (2025-02-19)
+
+
+### Features
+
+* fix match user account ([#415](https://github.com/pelcro-inc/react-pelcro-js/issues/415)) ([ae8884e](https://github.com/pelcro-inc/react-pelcro-js/commit/ae8884ea0dfd7d631f4af1c5e1e61c8b7eb1030e))
+
+# [3.26.0-beta.74](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.73...v3.26.0-beta.74) (2025-02-17)
+
+
+### Features
+
+* fix_validation ([b9f6f80](https://github.com/pelcro-inc/react-pelcro-js/commit/b9f6f80475fd51567915e42b1399d723e86fcd9b))
+
 # [3.26.0-beta.73](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.72...v3.26.0-beta.73) (2025-01-16)
 
 
