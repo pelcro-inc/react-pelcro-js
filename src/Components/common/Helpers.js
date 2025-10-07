@@ -187,3 +187,20 @@ export function requestBraintreePaymentMethod(instance) {
     });
   });
 }
+
+/**
+ * Requests payment method from Braintree Hosted Fields
+ * @param {Object} hostedFieldsInstance - Braintree hosted fields instance
+ * @returns {Promise} Promise that resolves with payment method payload
+ */
+export function requestBraintreeHostedFieldsPaymentMethod(hostedFieldsInstance) {
+  return new Promise((resolve, reject) => {
+    hostedFieldsInstance.tokenize((err, payload) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(payload);
+      }
+    });
+  });
+}

@@ -61,7 +61,8 @@ import {
   getSiteCardProcessor,
   getFourDigitYear,
   createBraintreeDropin,
-  requestBraintreePaymentMethod
+  requestBraintreePaymentMethod,
+  requestBraintreeHostedFieldsPaymentMethod
 } from "../common/Helpers";
 import {
   Payment,
@@ -1064,6 +1065,10 @@ const PaymentMethodContainerWithoutStripe = ({
     if (skipPayment && (plan?.amount === 0 || props?.freeOrders))
       return;
     if (cardProcessor === "braintree" && !selectedPaymentMethodId) {
+      // Clear container before initializing
+      const dropinContainer = document.getElementById("dropin-container");
+      if (dropinContainer) dropinContainer.innerHTML = "";
+      
       const braintreeToken = await getClientToken();
 
       const isBraintreeEnabled = Boolean(braintreeToken);
@@ -1101,9 +1106,14 @@ const PaymentMethodContainerWithoutStripe = ({
             });
             return;
           }
-
+          
           // Small delay to ensure DOM is fully rendered
           await new Promise((resolve) => setTimeout(resolve, 100));
+
+          // Calculate Google Pay amount (PayPal-style approach)
+          const updatedPrice = state.updatedPrice ?? plan?.amount ?? invoice?.amount_remaining;
+          const currency = getCurrencyFromPaymentType(plan, order, invoice);
+          const googlePayAmount = formatPaymentAmount(updatedPrice, currency, "Google Pay");
 
           // Create Braintree Drop-in UI instance
           braintreeDropinRef.current = await createBraintreeDropin(
@@ -1161,24 +1171,7 @@ const PaymentMethodContainerWithoutStripe = ({
                   window.Pelcro.site.read()?.google_merchant_id,
                 transactionInfo: {
                   totalPriceStatus: "FINAL",
-                  totalPrice: (() => {
-                    const totalAmount = calculateTotalAmount(
-                      state,
-                      plan,
-                      invoice,
-                      order
-                    );
-                    const currency = getCurrencyFromPaymentType(
-                      plan,
-                      order,
-                      invoice
-                    );
-                    return formatPaymentAmount(
-                      totalAmount,
-                      currency,
-                      "Google Pay"
-                    );
-                  })(),
+                  totalPrice: googlePayAmount,
                   currencyCode: (() => {
                     const currency = getCurrencyFromPaymentType(
                       plan,
@@ -1301,10 +1294,10 @@ const PaymentMethodContainerWithoutStripe = ({
           braintreeDropinRef.current =
             await window.braintree.hostedFields.create(options);
 
-          dispatch({
-            type: SKELETON_LOADER,
-            payload: false
-          });
+          // dispatch({
+          //   type: SKELETON_LOADER,
+          //   payload: false
+          // });
         } catch (error) {
           console.error(
             "Failed to initialize Braintree hosted fields:",
@@ -1319,9 +1312,6 @@ const PaymentMethodContainerWithoutStripe = ({
     }
   }
 
-  useEffect(() => {
-    initializeBraintree();
-  }, [selectedPaymentMethodId, paymentMethodToEdit]);
 
   const braintreeErrorHandler = (tokenizeErr) => {
     const cardNumber = document.querySelector("#card-number");
@@ -1441,8 +1431,12 @@ const PaymentMethodContainerWithoutStripe = ({
     dispatch({ type: LOADING, payload: true });
     dispatch({ type: DISABLE_SUBMIT, payload: true });
 
-    // Use Drop-in UI for payment method request
-    requestBraintreePaymentMethod(braintreeDropinRef.current)
+    // Use appropriate method based on payment type
+    const paymentMethodPromise = type === "updatePaymentSource" 
+      ? requestBraintreeHostedFieldsPaymentMethod(braintreeDropinRef.current)
+      : requestBraintreePaymentMethod(braintreeDropinRef.current);
+
+    paymentMethodPromise
       .then((payload) => {
         if (
           type == "updatePaymentSource" ||
@@ -1459,7 +1453,7 @@ const PaymentMethodContainerWithoutStripe = ({
                     onLookupComplete: function (data, next) {
                       next();
                     },
-                    amount: totalAmount ?? "0.00",
+                    amount: totalAmount ? (totalAmount / 100).toFixed(2) : "0.00",
                     nonce: payload.nonce,
                     bin: payload.details.bin
                   })
@@ -3914,6 +3908,10 @@ const PaymentMethodContainerWithoutStripe = ({
     },
     initialState
   );
+
+  useEffect(() => {
+    initializeBraintree();
+  }, [selectedPaymentMethodId, paymentMethodToEdit, state.updatedPrice]);
 
   return (
     <div
