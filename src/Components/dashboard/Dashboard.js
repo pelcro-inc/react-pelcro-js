@@ -68,7 +68,8 @@ export function DashboardWithHook(props) {
     logout,
     set,
     setPaymentMethodToEdit,
-    setPaymentMethodToDelete
+    setPaymentMethodToDelete,
+    setPaymentMethodToVerify
   } = usePelcro();
 
   return (
@@ -89,6 +90,7 @@ export function DashboardWithHook(props) {
       }
       setPaymentMethodToEdit={setPaymentMethodToEdit}
       setPaymentMethodToDelete={setPaymentMethodToDelete}
+      setPaymentMethodToVerify={setPaymentMethodToVerify}
       // used for custom event when clicking on the new subscription button
       onNewSubscriptionClick={props.onNewSubscriptionClick}
     />
@@ -119,6 +121,23 @@ class Dashboard extends Component {
     this.enableReactGA4 = window?.Pelcro?.uiSettings?.enableReactGA4;
   }
 
+  loadPaymentMethods = () => {
+    window.Pelcro.paymentMethods.list(
+      {
+        auth_token: window.Pelcro.user.read().auth_token
+      },
+      (err, res) => {
+        if (err) {
+          return console.error(err);
+        }
+
+        if (res) {
+          this.setState({ sources: res.data });
+        }
+      }
+    );
+  };
+
   componentDidMount = () => {
     this.setState({
       isOpen: true
@@ -140,29 +159,26 @@ class Dashboard extends Component {
       });
     }
 
-    window.Pelcro.paymentMethods.list(
-      {
-        auth_token: window.Pelcro.user.read().auth_token
-      },
-      (err, res) => {
-        if (err) {
-          return console.error(err);
-        }
-
-        if (res) {
-          this.setState({ sources: res.data });
-        }
-      }
-    );
+    this.loadPaymentMethods();
 
     const { addresses } = window.Pelcro.user.read();
     if (addresses) this.setState({ addresses: addresses });
+
+    // Refresh payment methods when updated
+    document.addEventListener(
+      "PelcroPaymentMethodUpdated",
+      this.loadPaymentMethods
+    );
   };
 
   componentWillUnmount = () => {
     document.removeEventListener(
       "click",
       this.hideMenuIfClickedOutside
+    );
+    document.removeEventListener(
+      "PelcroPaymentMethodUpdated",
+      this.loadPaymentMethods
     );
   };
 
@@ -689,6 +705,8 @@ class Dashboard extends Component {
           a.is_default === b.is_default ? 0 : a.is_default ? -1 : 1
         )
         .map((source, index) => {
+          const needsVerification = source.status === "pending";
+
           return (
             <div
               key={"dashboard-source-" + source.id}
@@ -701,15 +719,29 @@ class Dashboard extends Component {
                 <span className="plc-ml-1 plc-text-lg plc-tracking-widest plc-flex-grow plc-text-center">
                   •••• {source?.properties?.last4}
                 </span>
-                <Button
-                  id={"pelcro-button-update-source-" + index}
-                  variant="icon"
-                  className="plc-text-white"
-                  icon={<EditIcon />}
-                  data-key={source.id}
-                  onClick={this.displaySourceEdit}
-                  disabled={this.state.disableSubmit}
-                ></Button>
+                {needsVerification ? (
+                  <Button
+                    id={"pelcro-button-verify-ach-" + index}
+                    className="plc-bg-yellow-500 plc-text-white plc-text-xs plc-px-3 plc-py-1 plc-h-8"
+                    onClick={() => {
+                      this.props.setPaymentMethodToVerify(source);
+                      this.props.setView("payment-method-verify-ach");
+                    }}
+                    disabled={this.state.disableSubmit}
+                  >
+                    Verify
+                  </Button>
+                ) : (
+                  <Button
+                    id={"pelcro-button-update-source-" + index}
+                    variant="icon"
+                    className="plc-text-white"
+                    icon={<EditIcon />}
+                    data-key={source.id}
+                    onClick={this.displaySourceEdit}
+                    disabled={this.state.disableSubmit}
+                  ></Button>
+                )}
                 <Button
                   id={"pelcro-button-delete-source-" + index}
                   variant="icon"
@@ -725,6 +757,11 @@ class Dashboard extends Component {
               {source.is_default && (
                 <span className="plc-rounded-full plc-bg-gray-800 plc-text-white plc-inline-flex plc-h-7 plc-my-auto plc-items-start plc-py-1 plc-px-4 plc-text-sm plc-ml-2">
                   {this.locale("labels.default")}
+                </span>
+              )}
+              {needsVerification && (
+                <span className="plc-rounded-full plc-bg-yellow-500 plc-text-white plc-inline-flex plc-h-7 plc-my-auto plc-items-start plc-py-1 plc-px-4 plc-text-sm plc-ml-2">
+                  {this.locale("labels.pending")}
                 </span>
               )}
             </div>

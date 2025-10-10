@@ -11,6 +11,9 @@
     "title": "Sélectionnez un mode de paiement",
     "subtitle": "Sélectionnez un mode de paiement existant ou choisissez-en un nouveau",
     "expires": "Date d'expiration",
+    "pending": "En attente",
+    "verify": "Vérifier",
+    "verifyACH": "Vérifier ACH",
     "buttons": {
       "addPaymentMethod": "Choisir un autre mode de paiement",
       "selectPaymentMethod": "Continuer",

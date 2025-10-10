@@ -215,6 +215,13 @@ export { PaymentMethodDeleteModal } from "./Components/PaymentMethodDelete/Payme
 export { PaymentMethodDeleteSubmit } from "./Components/PaymentMethodDelete/PaymentMethodDeleteSubmit";
 export { PaymentMethodDeleteView } from "./Components/PaymentMethodDelete/PaymentMethodDeleteView";
 
+export { PaymentMethodVerifyACHContainer } from "./Components/PaymentMethodVerifyACH/PaymentMethodVerifyACHContainer";
+export { PaymentMethodVerifyACHModal } from "./Components/PaymentMethodVerifyACH/PaymentMethodVerifyACHModal";
+export { PaymentMethodVerifyACHView } from "./Components/PaymentMethodVerifyACH/PaymentMethodVerifyACHView";
+export { PaymentMethodVerifyACHInput } from "./Components/PaymentMethodVerifyACH/PaymentMethodVerifyACHInput";
+export { PaymentMethodVerifyACHSubmit } from "./Components/PaymentMethodVerifyACH/PaymentMethodVerifyACHSubmit";
+export { PaymentMethodVerifyACHBack } from "./Components/PaymentMethodVerifyACH/PaymentMethodVerifyACHBack";
+
 export { PaymentMethodCreateContainer } from "./Components/PaymentMethodCreate/PaymentMethodCreateContainer";
 export { PaymentMethodCreateModal } from "./Components/PaymentMethodCreate/PaymentMethodCreateModal";
 export { PaymentMethodCreateView } from "./Components/PaymentMethodCreate/PaymentMethodCreateView";

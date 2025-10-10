@@ -5,12 +5,16 @@
     "selectSubtitle": "Select a payment method to update",
     "required": "Required",
     "success": "Your payment information has been updated",
-    "secure": "You're safe - PCI compliant 128 SSL by"
+    "secure": "You're safe - PCI compliant 128 SSL by",
+    "pending": "Pending"
   },
   "select": {
     "title": "Select a payment method",
     "subtitle": "Select one of your saved methods, or pay with a new one",
     "expires": "Expires",
+    "pending": "Pending",
+    "verify": "Verify",
+    "verifyACH": "Verify ACH",
     "buttons": {
       "addPaymentMethod": "Pay with another payment method",
       "selectPaymentMethod": "Continue",
@@ -36,5 +40,14 @@
   "create": {
     "title": "Add a new payment method",
     "subtitle": "Enter the fields below to add your credit card information"
+  },
+  "verifyACH": {
+    "title": "Verify ACH Payment Method",
+    "subtitle": "Enter the 6-character verification code from your bank statement",
+    "codeLabel": "Verification Code",
+    "codeHelp": "Enter the 6-character code (e.g., SM11AB) that appears on your bank statement",
+    "submit": "Verify ACH",
+    "cancel": "Cancel",
+    "verifiedSuccessfully": "ACH Payment Method Successfully Verified"
   }
 }

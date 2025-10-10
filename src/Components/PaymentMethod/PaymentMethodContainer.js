@@ -5,11 +5,12 @@ import React, {
   useState
 } from "react";
 import { useTranslation } from "react-i18next";
+import { loadStripe } from "@stripe/stripe-js";
 import {
-  injectStripe,
   Elements,
-  StripeProvider
-} from "react-stripe-elements";
+  useStripe,
+  useElements
+} from "@stripe/react-stripe-js";
 import useReducerWithSideEffects, {
   UpdateWithSideEffect,
   Update,
@@ -78,6 +79,7 @@ import {
   refreshUser
 } from "../../utils/utils";
 import { usePelcro } from "../../hooks/usePelcro";
+import { Loader } from "../../SubComponents/Loader";
 
 /**
  * @typedef {Object} PaymentStateType
@@ -139,13 +141,14 @@ const PaymentMethodContainerWithoutStripe = ({
   style,
   className = "",
   children,
-  stripe,
   type,
   onSuccess = () => {},
   onGiftRenewalSuccess = () => {},
   onFailure = () => {},
   ...props
 }) => {
+  const stripe = useStripe();
+  const elements = useElements();
   const [vantivPaymentRequest, setVantivPaymentRequest] =
     useState(null);
   const [updatedCouponCode, setUpdatedCouponCode] = useState("");
@@ -2940,63 +2943,83 @@ const PaymentMethodContainerWithoutStripe = ({
     );
   };
 
-  const createPaymentSource = (state, dispatch) => {
-    return stripe
-      .createSource({ type: "card" })
-      .then(({ source, error }) => {
-        if (error) {
-          return handlePaymentError(error);
-        }
-
-        // We don't support source creation for 3D secure yet
-        // if (source?.card?.three_d_secure === "required") {
-        //   return handlePaymentError({
-        //     error: {
-        //       message: t("messages.cardAuthNotSupported")
-        //     }
-        //   });
-        // }
-
-        window.Pelcro.paymentMethods.create(
-          {
-            auth_token: window.Pelcro.user.read().auth_token,
-            token: source.id
-          },
-          (err, res) => {
-            if (err) {
-              dispatch({ type: DISABLE_SUBMIT, payload: false });
-              dispatch({ type: LOADING, payload: false });
-              onFailure(err);
-              return dispatch({
-                type: SHOW_ALERT,
-                payload: {
-                  type: "error",
-                  content: getErrorMessages(err)
-                }
-              });
-            }
-
-            if (
-              res.data?.setup_intent?.status === "requires_action" ||
-              res.data?.setup_intent?.status ===
-                "requires_confirmation"
-            ) {
-              confirmStripeIntentSetup(res, "create");
-            } else {
-              dispatch({ type: LOADING, payload: false });
-              dispatch({
-                type: SHOW_ALERT,
-                payload: {
-                  type: "success",
-                  content: t("messages.sourceCreated")
-                }
-              });
-              refreshUser();
-              onSuccess(res);
-            }
-          }
-        );
+  const createPaymentSource = async (state, dispatch) => {
+    if (!stripe || !elements) {
+      return handlePaymentError({
+        message: "Stripe has not loaded yet. Please try again."
       });
+    }
+
+    try {
+      // Submit the form to validate
+      const { error: submitError } = await elements.submit();
+      if (submitError) {
+        return handlePaymentError(submitError);
+      }
+
+      // Create payment method using the modern API
+      const { error, setupIntent } = await stripe.confirmSetup({
+        elements,
+        confirmParams: {
+          return_url: window.location.href
+        },
+        redirect: "if_required"
+      });
+
+      if (error) {
+        return handlePaymentError(error);
+      }
+
+      // Get the payment method ID from the setup intent
+      const paymentMethodId = setupIntent?.payment_method;
+
+      if (!paymentMethodId) {
+        return handlePaymentError({
+          message: "Failed to create payment method"
+        });
+      }
+
+      window.Pelcro.paymentMethods.create(
+        {
+          auth_token: window.Pelcro.user.read().auth_token,
+          token: paymentMethodId
+        },
+        (err, res) => {
+          if (err) {
+            dispatch({ type: DISABLE_SUBMIT, payload: false });
+            dispatch({ type: LOADING, payload: false });
+            onFailure(err);
+            return dispatch({
+              type: SHOW_ALERT,
+              payload: {
+                type: "error",
+                content: getErrorMessages(err)
+              }
+            });
+          }
+
+          if (
+            res.data?.setup_intent?.status === "requires_action" ||
+            res.data?.setup_intent?.status === "requires_confirmation"
+          ) {
+            confirmStripeIntentSetup(res, "create");
+          } else {
+            dispatch({ type: LOADING, payload: false });
+            dispatch({
+              type: SHOW_ALERT,
+              payload: {
+                type: "success",
+                content: t("messages.sourceCreated")
+              }
+            });
+            refreshUser();
+            onSuccess(res);
+          }
+        }
+      );
+    } catch (error) {
+      return handlePaymentError(error);
+    }
   };
 
   const updatePaymentSource = (state, dispatch) => {
@@ -3045,84 +3068,100 @@ const PaymentMethodContainerWithoutStripe = ({
     );
   };
 
-  const replacePaymentSource = (state, dispatch) => {
+  const replacePaymentSource = async (state, dispatch) => {
     const { id: paymentMethodId } = paymentMethodToDelete;
 
-    return stripe
-      .createSource({ type: "card" })
-      .then(({ source, error }) => {
-        if (error) {
-          return handlePaymentError(error);
-        }
-
-        // We don't support source creation for 3D secure yet
-        // if (source?.card?.three_d_secure === "required") {
-        //   return handlePaymentError({
-        //     error: {
-        //       message: t("messages.cardAuthNotSupported")
-        //     }
-        //   });
-        // }
-
-        window.Pelcro.paymentMethods.create(
-          {
-            auth_token: window.Pelcro.user.read().auth_token,
-            token: source.id
-          },
-          (err, res) => {
-            if (err) {
-              onFailure(err);
-              return dispatch({
-                type: SHOW_ALERT,
-                payload: {
-                  type: "error",
-                  content: getErrorMessages(err)
-                }
-              });
-            }
-
-            if (
-              res.data?.setup_intent?.status === "requires_action" ||
-              res.data?.setup_intent?.status ===
-                "requires_confirmation"
-            ) {
-              confirmStripeIntentSetup(
-                res,
-                "replace",
-                paymentMethodId
-              );
-            } else {
-              setTimeout(() => {
-                window.Pelcro.paymentMethods.deletePaymentMethod(
-                  {
-                    auth_token: window.Pelcro.user.read().auth_token,
-                    payment_method_id: paymentMethodId
-                  },
-                  (err, res) => {
-                    dispatch({
-                      type: DISABLE_SUBMIT,
-                      payload: false
-                    });
-                    dispatch({ type: LOADING, payload: false });
-                    if (err) {
-                      onFailure?.(err);
-                      return dispatch({
-                        type: SHOW_ALERT,
-                        payload: {
-                          type: "error",
-                          content: getErrorMessages(err)
-                        }
-                      });
-                    }
-                    refreshUser();
-                    onSuccess(res);
-                  }
-                );
-              }, 2000);
-            }
-          }
-        );
+    if (!stripe || !elements) {
+      return handlePaymentError({
+        message: "Stripe has not loaded yet. Please try again."
       });
+    }
+
+    try {
+      // Submit the form to validate
+      const { error: submitError } = await elements.submit();
+      if (submitError) {
+        return handlePaymentError(submitError);
+      }
+
+      // Create payment method using the modern API
+      const { error, setupIntent } = await stripe.confirmSetup({
+        elements,
+        confirmParams: {
+          return_url: window.location.href
+        },
+        redirect: "if_required"
+      });
+
+      if (error) {
+        return handlePaymentError(error);
+      }
+
+      // Get the payment method ID from the setup intent
+      const newPaymentMethodId = setupIntent?.payment_method;
+
+      if (!newPaymentMethodId) {
+        return handlePaymentError({
+          message: "Failed to create payment method"
+        });
+      }
+
+      window.Pelcro.paymentMethods.create(
+        {
+          auth_token: window.Pelcro.user.read().auth_token,
+          token: newPaymentMethodId
+        },
+        (err, res) => {
+          if (err) {
+            onFailure(err);
+            return dispatch({
+              type: SHOW_ALERT,
+              payload: {
+                type: "error",
+                content: getErrorMessages(err)
+              }
+            });
+          }
+
+          if (
+            res.data?.setup_intent?.status === "requires_action" ||
+            res.data?.setup_intent?.status === "requires_confirmation"
+          ) {
+            confirmStripeIntentSetup(res, "replace", paymentMethodId);
+          } else {
+            setTimeout(() => {
+              window.Pelcro.paymentMethods.deletePaymentMethod(
+                {
+                  auth_token: window.Pelcro.user.read().auth_token,
+                  payment_method_id: paymentMethodId
+                },
+                (err, res) => {
+                  dispatch({
+                    type: DISABLE_SUBMIT,
+                    payload: false
+                  });
+                  dispatch({ type: LOADING, payload: false });
+                  if (err) {
+                    onFailure?.(err);
+                    return dispatch({
+                      type: SHOW_ALERT,
+                      payload: {
+                        type: "error",
+                        content: getErrorMessages(err)
+                      }
+                    });
+                  }
+                  refreshUser();
+                  onSuccess(res);
+                }
+              );
+            }, 2000);
+          }
+        }
+      );
+    } catch (error) {
+      return handlePaymentError(error);
+    }
   };
 
   const updatePaymentRequest = (state) => {
@@ -3183,7 +3222,7 @@ const PaymentMethodContainerWithoutStripe = ({
     );
   };
 
-  const submitPayment = (state, dispatch) => {
+  const submitPayment = async (state, dispatch) => {
     if (skipPayment && props?.freeOrders) {
       const isQuickPurchase = !Array.isArray(order);
       const mappedOrderItems = isQuickPurchase
@@ -3210,44 +3249,53 @@ const PaymentMethodContainerWithoutStripe = ({
       );
       return;
     }
-    stripe
-      .createSource({ type: "card" })
-      .then(({ source, error }) => {
-        if (error) {
-          return handlePaymentError(error);
-        }
 
-        const getOrderItemsTotal = () => {
-          if (!order) {
-            return null;
-          }
-
-          const isQuickPurchase = !Array.isArray(order);
-
-          if (isQuickPurchase) {
-            return order.price * order.quantity;
-          }
-
-          if (order.length === 0) {
-            return null;
-          }
-
-          return order.reduce((total, item) => {
-            return total + item.price * item.quantity;
-          }, 0);
-        };
-
-        const totalAmount =
-          state?.updatedPrice ??
-          plan?.amount ??
-          invoice?.amount_remaining ??
-          getOrderItemsTotal();
-
-        return handlePayment(source);
-      })
-      .catch((error) => {
-        return handlePaymentError(error);
+    // Modern Stripe Elements API
+    if (!stripe || !elements) {
+      return handlePaymentError({
+        message: "Stripe has not loaded yet. Please try again."
       });
+    }
+
+    try {
+      // Submit the form to validate
+      const { error: submitError } = await elements.submit();
+      if (submitError) {
+        return handlePaymentError(submitError);
+      }
+
+      // Create payment method using the modern API
+      const { error, setupIntent } = await stripe.confirmSetup({
+        elements,
+        confirmParams: {
+          return_url: window.location.href
+        },
+        redirect: "if_required"
+      });
+
+      if (error) {
+        return handlePaymentError(error);
+      }
+
+      // Get the payment method ID from the setup intent
+      const paymentMethodId = setupIntent?.payment_method;
+
+      if (!paymentMethodId) {
+        return handlePaymentError({
+          message: "Failed to create payment method"
+        });
+      }
+
+      // Create a source-like object for compatibility with existing code
+      const source = {
+        id: paymentMethodId,
+        type: "card"
+      };
+
+      return handlePayment(source);
+    } catch (error) {
+      return handlePaymentError(error);
+    }
   };
 
   /**
@@ -3774,38 +3822,83 @@ const PaymentMethodContainerWithoutStripe = ({
   );
 };
 
-const UnwrappedForm = injectStripe(
-  PaymentMethodContainerWithoutStripe
-);
-
 const PaymentMethodContainer = (props) => {
   const [isStripeLoaded, setIsStripeLoaded] = useState(
     Boolean(window.Stripe)
   );
-  const { whenUserReady } = usePelcro.getStore();
+  const { whenUserReady, selectedPaymentMethodId } =
+    usePelcro.getStore();
   const cardProcessor = getSiteCardProcessor();
 
-  useEffect(() => {
-    if (!window.Stripe && cardProcessor === "stripe") {
-      document
-        .querySelector('script[src="https://js.stripe.com/v3"]')
-        .addEventListener("load", () => {
-          setIsStripeLoaded(true);
-        });
+  // Create the Stripe object
+  const stripePromise =
+    cardProcessor === "stripe"
+      ? loadStripe(window.Pelcro.environment.stripe, {
+          stripeAccount: window.Pelcro.site.read().account_id,
+          locale: getPageOrDefaultLanguage()
+        })
+      : null;
+
+  const [clientSecret, setClientSecret] = useState();
+
+  const appearance = {
+    theme: "stripe",
+    labels: "floating",
+    variables: {
+      colorPrimary:
+        window?.Pelcro?.site?.read()?.design_settings?.primary_color
     }
-  }, []);
+  };
+
+  const options = {
+    clientSecret,
+    paymentMethodCreation: "manual",
+    appearance,
+    loader: "always"
+  };
+
+  useEffect(() => {
+    if (isStripeLoaded && !selectedPaymentMethodId) {
+      window.Pelcro.user.createSetupIntent?.(
+        { auth_token: window.Pelcro.user.read().auth_token },
+        (err, res) => {
+          if (err) {
+            console.error(err);
+          }
+          if (res) {
+            setClientSecret(res.data.client_secret);
+          }
+        }
+      );
+    }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    whenUserReady(() => {
+      if (!window.Stripe && cardProcessor === "stripe") {
+        document
+          .querySelector('script[src="https://js.stripe.com/v3"]')
+          .addEventListener("load", () => {
+            setIsStripeLoaded(true);
+          });
+      }
+    });
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (isStripeLoaded) {
     return (
-      <StripeProvider
-        apiKey={window.Pelcro.environment.stripe}
-        stripeAccount={window.Pelcro.site.read().account_id}
-        locale={getPageOrDefaultLanguage()}
-      >
-        <Elements>
-          <UnwrappedForm store={store} {...props} />
-        </Elements>
-      </StripeProvider>
+      <div>
+        {clientSecret || selectedPaymentMethodId ? (
+          <Elements options={options} stripe={stripePromise}>
+            <PaymentMethodContainerWithoutStripe
+              store={store}
+              {...props}
+            />
+          </Elements>
+        ) : (
+          <Loader />
+        )}
+      </div>
     );
   } else if (cardProcessor !== "stripe") {
     return (

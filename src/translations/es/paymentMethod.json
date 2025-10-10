@@ -11,6 +11,9 @@
     "title": "Selecciona un método de pago",
     "subtitle": "Selecciona uno de tus métodos guardados o paga con uno nuevo",
     "expires": "Expira",
+    "pending": "Pendiente",
+    "verify": "Verificar",
+    "verifyACH": "Verificar ACH",
     "buttons": {
       "addPaymentMethod": "Paga con otro método de pago",
       "selectPaymentMethod": "Continuar",

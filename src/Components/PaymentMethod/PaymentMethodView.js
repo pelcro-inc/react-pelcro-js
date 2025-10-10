@@ -205,7 +205,11 @@ export function PaymentMethodView({
                 !supportsCybersource &&
                 !supportsTap ? (
                   <>
-                    <PelcroPaymentRequestButton />
+                    <PelcroPaymentRequestButton
+                      type={type}
+                      onSuccess={onSuccess}
+                      onFailure={onFailure}
+                    />
                     <PaypalSubscribeButton />
                   </>
                 ) : showExternalPaymentMethods && supportsVantiv ? (

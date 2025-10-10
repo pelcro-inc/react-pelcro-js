@@ -11,6 +11,9 @@
     "title": "결제 수단 선택",
     "subtitle": "저장된 결제 수단 중 선택하거나 새로운 수단을 사용하십시오.",
     "expires": "만료일:",
+    "pending": "대기 중",
+    "verify": "확인",
+    "verifyACH": "ACH 확인",
     "buttons": {
       "addPaymentMethod": "다른 결제 수단으로 결제",
       "selectPaymentMethod": "계속",

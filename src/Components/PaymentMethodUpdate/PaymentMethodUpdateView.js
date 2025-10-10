@@ -45,11 +45,14 @@ export function PaymentMethodUpdateView(props) {
     return (
       <div className="plc-flex plc-flex-col plc-items-center">
         {sources.map((source, index) => {
+          const needsVerification = source.status === "pending";
+
           return (
             <div
               key={source.id}
               className="plc-flex plc-flex-grow plc-items-center plc-justify-between plc-max-w-xs plc-p-4 plc-mb-2 plc-text-white plc-bg-gray-800 plc-rounded-md plc-h-14 plc-w-full plc-cursor-pointer"
-              onClick={() => handleEditPaymentMethod(source)}
+              onClick={() => !needsVerification && handleEditPaymentMethod(source)}
+              style={{ opacity: needsVerification ? 0.6 : 1, cursor: needsVerification ? "not-allowed" : "pointer" }}
             >
               <span>
                 {getPaymentCardIcon(source?.properties?.brand)}
@@ -57,14 +60,20 @@ export function PaymentMethodUpdateView(props) {
               <span className="plc-ml-1 plc-text-lg plc-tracking-widest plc-flex-grow plc-text-center">
                 •••• {source?.properties?.last4}
               </span>
-              <Button
-                id={"pelcro-button-update-source-" + index}
-                variant="icon"
-                className="plc-text-white"
-                icon={<EditIcon />}
-                data-key={source.id}
-                onClick={() => handleEditPaymentMethod(source)}
-              ></Button>
+              {needsVerification ? (
+                <span className="plc-text-yellow-400 plc-text-xs plc-font-semibold">
+                  {t("update.pending")}
+                </span>
+              ) : (
+                <Button
+                  id={"pelcro-button-update-source-" + index}
+                  variant="icon"
+                  className="plc-text-white"
+                  icon={<EditIcon />}
+                  data-key={source.id}
+                  onClick={() => handleEditPaymentMethod(source)}
+                ></Button>
+              )}
             </div>
           );
         })}
