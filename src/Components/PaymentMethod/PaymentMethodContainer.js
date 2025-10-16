@@ -1181,10 +1181,10 @@ const PaymentMethodContainerWithoutStripe = ({
           // Small delay to ensure DOM is fully rendered
           await new Promise((resolve) => setTimeout(resolve, 100));
 
-          // Calculate Google Pay amount (PayPal-style approach)
-          const updatedPrice = state.updatedPrice ?? plan?.amount ?? invoice?.amount_remaining;
+          // Calculate Google Pay amount using the same logic as Apple Pay
+          const totalAmount = calculateTotalAmount(state, plan, invoice, order);
           const currency = getCurrencyFromPaymentType(plan, order, invoice);
-          const googlePayAmount = formatPaymentAmount(updatedPrice, currency, "Google Pay");
+          const googlePayAmount = formatPaymentAmount(totalAmount, currency, "Google Pay");
 
           // Create Braintree Drop-in UI instance
           braintreeDropinRef.current = await createBraintreeDropin(
@@ -1277,6 +1277,15 @@ const PaymentMethodContainerWithoutStripe = ({
             type: SKELETON_LOADER,
             payload: false
           });
+
+          // Clear any error alerts that were shown during initialization
+          dispatch({
+            type: SHOW_ALERT,
+            payload: {
+              type: "error",
+              content: ""
+            }
+          });
         } catch (error) {
           console.error(
             "Failed to initialize Braintree Drop-in UI:",
@@ -1302,7 +1311,7 @@ const PaymentMethodContainerWithoutStripe = ({
 
           // Don't show error to user for Google Pay configuration issues
           // as it's expected for subscriptions
-          if (!error?.message?.includes("OR_BIBED_06")) {
+          if (!error?.message?.includes("OR_BIBED_06") && !error?.message?.includes("Google Pay")) {
             dispatch({
               type: SHOW_ALERT,
               payload: {
