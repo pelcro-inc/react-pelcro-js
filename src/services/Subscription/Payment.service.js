@@ -3,6 +3,12 @@
  * to this service, and out of react components.
  */
 
+import {
+  loadBraintreeScript,
+  createBraintreeDropin,
+  requestBraintreePaymentMethod
+} from "../../Components/common/Helpers";
+
 /**
  * Enum for payment types
  * @readonly
@@ -151,6 +157,34 @@ export class StripeGateway {
       default:
         console.error("Unsupported payment method: Stripe Gateway");
     }
+  };
+
+  /**
+   * Creates Braintree Drop-in UI instance
+   * @param {string} authorization - Braintree authorization token
+   * @param {string} selector - CSS selector for the container
+   * @param {Object} options - Additional options for dropin creation
+   * @returns {Promise} Promise that resolves with the dropin instance
+   */
+  createDropin = (authorization, selector, options = {}) => {
+    return createBraintreeDropin(authorization, selector, options);
+  };
+
+  /**
+   * Requests payment method from Braintree Drop-in UI
+   * @param {Object} instance - Braintree dropin instance
+   * @returns {Promise} Promise that resolves with payment method payload
+   */
+  requestPaymentMethod = (instance) => {
+    return requestBraintreePaymentMethod(instance);
+  };
+
+  /**
+   * Loads Braintree Drop-in UI script
+   * @returns {Promise} Promise that resolves when script is loaded
+   */
+  loadScript = () => {
+    return loadBraintreeScript();
   };
 
   /**
