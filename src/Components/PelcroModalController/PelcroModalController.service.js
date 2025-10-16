@@ -153,6 +153,10 @@ export const loadPaymentSDKs = () => {
       "https://js.braintreegateway.com/web/3.99.0/js/hosted-fields.min.js",
       "braintree-hosted-fields-sdk"
     );
+    window.Pelcro.helpers.loadSDK(
+      "https://js.braintreegateway.com/web/dropin/1.45.1/js/dropin.js",
+      "braintree-dropin-sdk"
+    );
   }
 
   // Load Vantiv SDKs

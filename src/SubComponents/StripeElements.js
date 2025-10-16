@@ -181,6 +181,13 @@ export const CheckoutForm = ({ type }) => {
                     className="pelcro-input-field plc-h-12 plc-bg-white"
                   ></div>
                 </div>
+                <div>
+                  <label htmlFor="cvv">CVV *</label>
+                  <div
+                    id="cvv"
+                    className="pelcro-input-field plc-h-12 plc-bg-white"
+                  ></div>
+                </div>
               </div>
             </div>
           ) : (
@@ -191,36 +198,13 @@ export const CheckoutForm = ({ type }) => {
     }
     return (
       <div>
-        {isSkeletonLoaded ? (
-          <div className="plc-max-w-[50em]">
-            <label htmlFor="card-number">Card Number *</label>
-            <div
-              id="card-number"
-              className="pelcro-input-field plc-h-12 plc-bg-white"
-            ></div>
-
-            <div className="plc-flex plc-items-start plc-space-x-8 plc-my-6">
-              <div>
-                <label htmlFor="expiration-date">
-                  Expiration Date *
-                </label>
-                <div
-                  id="expiration-date"
-                  className="pelcro-input-field plc-h-12 plc-bg-white"
-                ></div>
-              </div>
-              <div>
-                <label htmlFor="cvv">CVC *</label>
-                <div
-                  id="cvv"
-                  className="pelcro-input-field plc-h-12 plc-bg-white"
-                ></div>
-              </div>
-            </div>
-          </div>
-        ) : (
-          <div className="plc-w-full plc-h-40 plc-bg-gray-300 plc-rounded plc-animate-pulse"></div>
-        )}
+        <div className="plc-max-w-[50em]">
+          {/* Braintree Drop-in UI container */}
+          <div
+            id="dropin-container"
+            className="plc-w-full plc-min-h-[300px]"
+          ></div>
+        </div>
       </div>
     );
   }
