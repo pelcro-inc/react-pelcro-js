@@ -148,6 +148,11 @@ export const loadPaymentSDKs = () => {
       "braintree-3D-secure-sdk"
     );
     window.Pelcro.helpers.loadSDK(
+      "https://js.braintreegateway.com/web/dropin/1.45.1/js/dropin.js",
+      "braintree-dropin-sdk"
+    );
+    // Keep hosted fields for payment method updates
+    window.Pelcro.helpers.loadSDK(
       "https://js.braintreegateway.com/web/3.99.0/js/hosted-fields.min.js",
       "braintree-hosted-fields-sdk"
     );
