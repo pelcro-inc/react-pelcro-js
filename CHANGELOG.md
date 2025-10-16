@@ -1,3 +1,10 @@
+# [3.51.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.50.0...v3.51.0) (2025-10-16)
+
+
+### Features
+
+* Braintree-GooglePay ([#460](https://github.com/pelcro-inc/react-pelcro-js/issues/460)) ([ee6aea8](https://github.com/pelcro-inc/react-pelcro-js/commit/ee6aea86267f200f710de141e1094da262e0ed47))
+
 # [3.50.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.49.0...v3.50.0) (2025-06-30)
 
 
