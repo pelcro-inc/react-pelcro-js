@@ -60,7 +60,10 @@ import {
   getErrorMessages,
   debounce,
   getSiteCardProcessor,
-  getFourDigitYear
+  getFourDigitYear,
+  createBraintreeDropin,
+  requestBraintreePaymentMethod,
+  requestBraintreeHostedFieldsPaymentMethod
 } from "../common/Helpers";
 import {
   Payment,
@@ -225,6 +228,117 @@ const PaymentMethodContainerWithoutStripe = ({
         });
       });
     });
+  };
+
+  // Helper function to calculate total amount for payment methods
+  const calculateTotalAmount = (state, plan, invoice, order) => {
+    const getOrderItemsTotal = () => {
+      if (!order) {
+        return null;
+      }
+
+      const isQuickPurchase = !Array.isArray(order);
+
+      if (isQuickPurchase) {
+        return order.price * order.quantity;
+      }
+
+      if (order.length === 0) {
+        return null;
+      }
+
+      return order.reduce((total, item) => {
+        return total + item.price * item.quantity;
+      }, 0);
+    };
+
+    return (
+      state?.updatedPrice ??
+      plan?.amount ??
+      invoice?.amount_remaining ??
+      getOrderItemsTotal()
+    );
+  };
+
+  // Helper function to get currency from the appropriate source
+  const getCurrencyFromPaymentType = (plan, order, invoice) => {
+    if (plan) {
+      return plan.currency;
+    } else if (order) {
+      // Handle both single order and array of orders
+      const isQuickPurchase = !Array.isArray(order);
+      return isQuickPurchase ? order.currency : order[0]?.currency;
+    } else if (invoice) {
+      return invoice.currency;
+    }
+    return "USD"; // Default fallback
+  };
+
+  // Helper function to get payment label
+  const getPaymentLabel = (plan, order, invoice) => {
+    if (plan) {
+      return plan.nickname || plan.description || "Subscription";
+    } else if (order) {
+      // Handle both single order and array of orders
+      const isQuickPurchase = !Array.isArray(order);
+      if (isQuickPurchase) {
+        return order.name || "Order";
+      } else {
+        return order.length === 1 ? order[0].name : "Order";
+      }
+    } else if (invoice) {
+      return `Invoice #${invoice.id}`;
+    }
+    return window.Pelcro.site.read()?.name || "Payment";
+  };
+
+  // Helper function to format amount for payment methods (Apple Pay, Google Pay)
+  const formatPaymentAmount = (
+    totalAmount,
+    currency,
+    paymentMethod = ""
+  ) => {
+    if (!totalAmount) return "0.00";
+
+    const isZeroDecimal =
+      window.Pelcro?.utils?.isCurrencyZeroDecimal?.(currency) ||
+      [
+        "BIF",
+        "CLP",
+        "DJF",
+        "GNF",
+        "JPY",
+        "KMF",
+        "KRW",
+        "MGA",
+        "PYG",
+        "RWF",
+        "UGX",
+        "VND",
+        "VUV",
+        "XAF",
+        "XOF",
+        "XPF"
+      ].includes(currency?.toUpperCase?.());
+
+    // Payment methods expect amount in major currency unit (dollars, not cents)
+    let finalAmount;
+    if (isZeroDecimal) {
+      finalAmount = Math.round(totalAmount).toString();
+    } else {
+      // Convert from cents to dollars and format with 2 decimal places
+      finalAmount = (totalAmount / 100).toFixed(2);
+    }
+
+    console.log(
+      `${paymentMethod} amount:`,
+      finalAmount,
+      "currency:",
+      currency,
+      "type:",
+      type
+    );
+    return String(finalAmount);
   };
 
   /* ====== Start Cybersource integration ======== */
@@ -998,8 +1112,8 @@ const PaymentMethodContainerWithoutStripe = ({
   };
   /* ====== End Tap integration ======== */
 
-  /* ====== Start Braintree integration ======== */
-  const braintreeInstanceRef = React.useRef(null);
+  /* ====== Start Braintree Drop-in UI integration ======== */
+  const braintreeDropinRef = React.useRef(null);
   const braintree3DSecureInstanceRef = React.useRef(null);
 
   function getClientToken() {
@@ -1025,6 +1139,10 @@ const PaymentMethodContainerWithoutStripe = ({
     if (skipPayment && (plan?.amount === 0 || props?.freeOrders))
       return;
     if (cardProcessor === "braintree" && !selectedPaymentMethodId) {
+      // Clear container before initializing
+      const dropinContainer = document.getElementById("dropin-container");
+      if (dropinContainer) dropinContainer.innerHTML = "";
+      
       const braintreeToken = await getClientToken();
 
       const isBraintreeEnabled = Boolean(braintreeToken);
@@ -1036,13 +1154,47 @@ const PaymentMethodContainerWithoutStripe = ({
         return;
       }
 
+      console.log("braintreeToken", plan);
+
       if (type !== "updatePaymentSource") {
-        braintreeInstanceRef.current =
-          new window.braintree.client.create({
-            authorization: braintreeToken
-          }).then((clientInstance) => {
-            const options = {
-              authorization: braintreeToken,
+        console.log(
+          "Setting skeleton loader to true at start of Braintree initialization"
+        );
+        dispatch({
+          type: SKELETON_LOADER,
+          payload: true
+        });
+
+        try {
+          // Ensure the DOM element exists before creating Drop-in UI
+          const dropinContainer = document.querySelector(
+            "#dropin-container"
+          );
+          if (!dropinContainer) {
+            console.error(
+              "Drop-in container not found. Waiting for DOM to be ready..."
+            );
+            dispatch({
+              type: SKELETON_LOADER,
+              payload: false
+            });
+            return;
+          }
+          
+          // Small delay to ensure DOM is fully rendered
+          await new Promise((resolve) => setTimeout(resolve, 100));
+
+          // Calculate Google Pay amount using the same logic as Apple Pay
+          const totalAmount = calculateTotalAmount(state, plan, invoice, order);
+          const currency = getCurrencyFromPaymentType(plan, order, invoice);
+          const googlePayAmount = formatPaymentAmount(totalAmount, currency, "Google Pay");
+
+          // Create Braintree Drop-in UI instance
+          braintreeDropinRef.current = await createBraintreeDropin(
+            braintreeToken,
+            "#dropin-container",
+            {
+              // Customize the Drop-in UI appearance
               styles: {
                 input: {
                   "font-size": "14px"
@@ -1054,141 +1206,195 @@ const PaymentMethodContainerWithoutStripe = ({
                   color: "green"
                 }
               },
-              fields: {
-                number: {
-                  container: "#card-number",
-                  placeholder: "4111 1111 1111 1111"
+              // Disable PayPal to avoid conflicts with existing PayPal SDK
+              // paypal: {
+              //   flow: "vault"
+              // },
+              // Enable Apple Pay if available
+              applePay: {
+                displayName:
+                  window.Pelcro.site.read()?.name || "Pelcro",
+                paymentRequest: {
+                  total: {
+                    label: getPaymentLabel(plan, order, invoice),
+                    amount: (() => {
+                      const totalAmount = calculateTotalAmount(
+                        state,
+                        plan,
+                        invoice,
+                        order
+                      );
+                      const currency = getCurrencyFromPaymentType(
+                        plan,
+                        order,
+                        invoice
+                      );
+                      return formatPaymentAmount(
+                        totalAmount,
+                        currency,
+                        "Apple Pay"
+                      );
+                    })()
+                  }
+                }
+              },
+              // Enable Google Pay for both orders and subscriptions
+              googlePay: {
+                googlePayVersion: 2,
+                merchantId:
+                  window.Pelcro.site.read()?.google_merchant_id,
+                transactionInfo: {
+                  totalPriceStatus: "FINAL",
+                  totalPrice: googlePayAmount,
+                  currencyCode: (() => {
+                    const currency = getCurrencyFromPaymentType(
+                      plan,
+                      order,
+                      invoice
+                    );
+                    return currency?.toUpperCase() || "USD";
+                  })()
                 },
-                cvv: {
-                  container: "#cvv",
-                  placeholder: "123"
-                },
-                expirationDate: {
-                  container: "#expiration-date",
-                  placeholder: "10/2022"
+                // Add button configuration
+                button: {
+                  color: "black",
+                  type: type === "createPayment" ? "subscribe" : "buy"
                 }
               }
-            };
-            dispatch({
-              type: SKELETON_LOADER,
-              payload: true
+            }
+          );
+
+          // Initialize 3D Secure for additional security
+          braintree3DSecureInstanceRef.current =
+            new window.braintree.threeDSecure.create({
+              version: 2,
+              authorization: braintreeToken
+            }).then((threeDSecureInstance) => {
+              return threeDSecureInstance;
             });
 
-            braintree3DSecureInstanceRef.current =
-              new window.braintree.threeDSecure.create({
-                version: 2,
-                authorization: braintreeToken
-              }).then((threeDSecureInstance) => {
-                return threeDSecureInstance;
-              });
-
-            return window.braintree.hostedFields.create(options);
+          console.log(
+            "Setting skeleton loader to false after successful Braintree initialization"
+          );
+          dispatch({
+            type: SKELETON_LOADER,
+            payload: false
           });
 
-        braintreeInstanceRef.current.then((hostedFieldInstance) => {
-          hostedFieldInstance.on("notEmpty", function (event) {
-            const field = event.fields[event.emittedBy];
-            if (field.isPotentiallyValid) {
-              field.container.classList.remove(
-                "pelcro-input-invalid"
-              );
+          // Clear any error alerts that were shown during initialization
+          dispatch({
+            type: SHOW_ALERT,
+            payload: {
+              type: "error",
+              content: ""
             }
           });
+        } catch (error) {
+          console.error(
+            "Failed to initialize Braintree Drop-in UI:",
+            error
+          );
 
-          hostedFieldInstance.on("validityChange", function (event) {
-            const field = event.fields[event.emittedBy];
+          // Check if it's a Google Pay specific error
+          if (
+            error?.message?.includes("OR_BIBED_06") ||
+            error?.message?.includes("Google Pay")
+          ) {
+            console.warn(
+              "Google Pay configuration issue detected. " +
+                `Transaction type: ${type}. ` +
+                "This might be due to merchant settings or unsupported payment flow."
+            );
+          }
 
-            // Remove any previously applied error or warning classes
-            field.container.classList.remove("is-valid");
-            field.container.classList.remove("pelcro-input-invalid");
-
-            if (field.isValid) {
-              field.container.classList.add("is-valid");
-            } else if (field.isPotentiallyValid) {
-              // skip adding classes if the field is
-              // not valid, but is potentially valid
-            } else {
-              field.container.classList.add("pelcro-input-invalid");
-            }
+          dispatch({
+            type: SKELETON_LOADER,
+            payload: false
           });
-        });
+
+          // Don't show error to user for Google Pay configuration issues
+          // as it's expected for subscriptions
+          if (!error?.message?.includes("OR_BIBED_06") && !error?.message?.includes("Google Pay")) {
+            dispatch({
+              type: SHOW_ALERT,
+              payload: {
+                type: "error",
+                content:
+                  "Failed to initialize payment form. Please refresh and try again."
+              }
+            });
+          }
+        }
       } else if (
         type == "updatePaymentSource" &&
         paymentMethodToEdit
       ) {
+        // For updating payment methods, we still use hosted fields
+        // as Drop-in UI doesn't support partial updates
         const { properties } = paymentMethodToEdit ?? {};
         const { exp_month: expMonth, exp_year: expYear } =
           properties ?? {};
-        braintreeInstanceRef.current =
-          new window.braintree.client.create({
-            authorization: braintreeToken
-          }).then((clientInstance) => {
-            const options = {
-              client: clientInstance,
-              styles: {
-                input: {
-                  "font-size": "14px"
-                },
-                "input.invalid": {
-                  color: "red"
-                },
-                "input.valid": {
-                  color: "green"
-                }
-              },
-              fields: {
-                expirationMonth: {
-                  container: "#expiration-month",
-                  prefill: expMonth
-                },
-                expirationYear: {
-                  container: "#expiration-year",
-                  prefill: expYear
-                }
-              }
-            };
-            dispatch({
-              type: SKELETON_LOADER,
-              payload: true
+
+        dispatch({
+          type: SKELETON_LOADER,
+          payload: true
+        });
+
+        try {
+          const clientInstance =
+            await new window.braintree.client.create({
+              authorization: braintreeToken
             });
 
-            return window.braintree.hostedFields.create(options);
-          });
-
-        braintreeInstanceRef.current.then((hostedFieldInstance) => {
-          hostedFieldInstance.on("notEmpty", function (event) {
-            const field = event.fields[event.emittedBy];
-            if (field.isPotentiallyValid) {
-              field.container.classList.remove(
-                "pelcro-input-invalid"
-              );
+          const options = {
+            client: clientInstance,
+            styles: {
+              input: {
+                "font-size": "14px"
+              },
+              "input.invalid": {
+                color: "red"
+              },
+              "input.valid": {
+                color: "green"
+              }
+            },
+            fields: {
+              expirationMonth: {
+                container: "#expiration-month",
+                prefill: expMonth
+              },
+              expirationYear: {
+                container: "#expiration-year",
+                prefill: expYear
+              },
+              cvv: {
+                container: "#cvv"
+              }
             }
+          };
+
+          braintreeDropinRef.current =
+            await window.braintree.hostedFields.create(options);
+
+          // dispatch({
+          //   type: SKELETON_LOADER,
+          //   payload: false
+          // });
+        } catch (error) {
+          console.error(
+            "Failed to initialize Braintree hosted fields:",
+            error
+          );
+          dispatch({
+            type: SKELETON_LOADER,
+            payload: false
           });
-
-          hostedFieldInstance.on("validityChange", function (event) {
-            const field = event.fields[event.emittedBy];
-
-            // Remove any previously applied error or warning classes
-            field.container.classList.remove("is-valid");
-            field.container.classList.remove("pelcro-input-invalid");
-
-            if (field.isValid) {
-              field.container.classList.add("is-valid");
-            } else if (field.isPotentiallyValid) {
-              // skip adding classes if the field is
-              // not valid, but is potentially valid
-            } else {
-              field.container.classList.add("pelcro-input-invalid");
-            }
-          });
-        });
+        }
       }
     }
   }
 
-  useEffect(() => {
-    initializeBraintree();
-  }, [selectedPaymentMethodId, paymentMethodToEdit]);
 
   const braintreeErrorHandler = (tokenizeErr) => {
     const cardNumber = document.querySelector("#card-number");
@@ -1260,10 +1466,23 @@ const PaymentMethodContainerWithoutStripe = ({
       return handleBraintreePayment(null, state.couponCode);
     }
 
-    if (!braintreeInstanceRef.current) {
-      return console.error(
-        "Braintree sdk script wasn't loaded, you need to load braintree sdk before rendering the braintree payment flow"
+    if (!braintreeDropinRef.current) {
+      console.error(
+        "Braintree Drop-in UI wasn't initialized, please try again"
       );
+      dispatch({
+        type: DISABLE_SUBMIT,
+        payload: false
+      });
+      dispatch({ type: LOADING, payload: false });
+      return dispatch({
+        type: SHOW_ALERT,
+        payload: {
+          type: "error",
+          content:
+            "Braintree Drop-in UI wasn't initialized, please try again"
+        }
+      });
     }
 
     const getOrderItemsTotal = () => {
@@ -1292,27 +1511,24 @@ const PaymentMethodContainerWithoutStripe = ({
       invoice?.amount_remaining ??
       getOrderItemsTotal();
 
-    braintreeInstanceRef.current
-      .then((hostedFieldInstance) => {
-        hostedFieldInstance.tokenize((tokenizeErr, payload) => {
-          if (tokenizeErr) {
-            dispatch({ type: DISABLE_SUBMIT, payload: false });
-            dispatch({ type: LOADING, payload: false });
-            return dispatch({
-              type: SHOW_ALERT,
-              payload: {
-                type: "error",
-                content: braintreeErrorHandler(tokenizeErr)
-              }
-            });
-          }
+    dispatch({ type: LOADING, payload: true });
+    dispatch({ type: DISABLE_SUBMIT, payload: true });
 
-          if (
-            type == "updatePaymentSource" ||
-            type == "deletePaymentSource"
-          ) {
-            handleBraintreePayment(payload, state.couponCode);
-          } else {
+    // Use appropriate method based on payment type
+    const paymentMethodPromise = type === "updatePaymentSource" 
+      ? requestBraintreeHostedFieldsPaymentMethod(braintreeDropinRef.current)
+      : requestBraintreePaymentMethod(braintreeDropinRef.current);
+
+    paymentMethodPromise
+      .then((payload) => {
+        if (
+          type == "updatePaymentSource" ||
+          type == "deletePaymentSource"
+        ) {
+          handleBraintreePayment(payload, state.couponCode);
+        } else {
+          // For new payments, use 3D Secure if available
+          if (braintree3DSecureInstanceRef.current) {
             braintree3DSecureInstanceRef.current.then(
               (threeDSecureInstance) => {
                 threeDSecureInstance
@@ -1320,17 +1536,17 @@ const PaymentMethodContainerWithoutStripe = ({
                     onLookupComplete: function (data, next) {
                       next();
                     },
-                    amount: totalAmount ?? "0.00",
+                    amount: totalAmount ? (totalAmount / 100).toFixed(2) : "0.00",
                     nonce: payload.nonce,
                     bin: payload.details.bin
                   })
-                  .then((payload) => {
-                    if (payload.liabilityShifted) {
+                  .then((securePayload) => {
+                    if (securePayload.liabilityShifted) {
                       handleBraintreePayment(
-                        payload,
+                        securePayload,
                         state.couponCode
                       );
-                    } else if (payload.liabilityShiftPossible) {
+                    } else if (securePayload.liabilityShiftPossible) {
                       dispatch({
                         type: DISABLE_SUBMIT,
                         payload: false
@@ -1379,14 +1595,23 @@ const PaymentMethodContainerWithoutStripe = ({
                   });
               }
             );
+          } else {
+            // If 3D Secure is not available, proceed with regular payment
+            handleBraintreePayment(payload, state.couponCode);
           }
-        });
+        }
       })
       .catch((error) => {
-        if (error) {
-          console.error(error);
-          return;
-        }
+        console.error("Braintree payment error:", error);
+        dispatch({ type: DISABLE_SUBMIT, payload: false });
+        dispatch({ type: LOADING, payload: false });
+        return dispatch({
+          type: SHOW_ALERT,
+          payload: {
+            type: "error",
+            content: braintreeErrorHandler(error)
+          }
+        });
       });
   };
 
@@ -3803,6 +4028,10 @@ const PaymentMethodContainerWithoutStripe = ({
     },
     initialState
   );
+
+  useEffect(() => {
+    initializeBraintree();
+  }, [selectedPaymentMethodId, paymentMethodToEdit, state.updatedPrice]);
 
   return (
     <div

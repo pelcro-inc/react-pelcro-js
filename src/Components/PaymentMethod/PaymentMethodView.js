@@ -201,27 +201,23 @@ export function PaymentMethodView({
               <div className="plc-grid plc-mt-4 plc-gap-y-2">
                 <SubmitPaymentMethod />
                 {showExternalPaymentMethods &&
-                !supportsVantiv &&
-                !supportsCybersource &&
-                !supportsTap ? (
-                  <>
-                    <PelcroPaymentRequestButton
-                      type={type}
-                      onSuccess={onSuccess}
-                      onFailure={onFailure}
-                    />
-                    <PaypalSubscribeButton />
-                  </>
-                ) : showExternalPaymentMethods && supportsVantiv ? (
-                  <>
-                    <PaypalSubscribeButton />
-                  </>
-                ) : null}
-                {showApplePayButton && supportsVantiv ? (
-                  <>
-                    <ApplePayButton />
-                  </>
-                ) : null}
+                  cardProcessor === "braintree" && (
+                    <>
+                      {!supportsVantiv &&
+                        !supportsCybersource &&
+                        !supportsTap && (
+                          <PelcroPaymentRequestButton
+                            type={type}
+                            onSuccess={onSuccess}
+                            onFailure={onFailure}
+                          />
+                        )}
+                      <PaypalSubscribeButton />
+                    </>
+                  )}
+                {showApplePayButton && supportsVantiv && (
+                  <ApplePayButton />
+                )}
               </div>
             </div>
           )}
