@@ -14,6 +14,7 @@
     "pending": "대기 중",
     "verify": "확인",
     "verifyACH": "ACH 확인",
+    "ach_debit": "ACH 디비트",
     "buttons": {
       "addPaymentMethod": "다른 결제 수단으로 결제",
       "selectPaymentMethod": "계속",

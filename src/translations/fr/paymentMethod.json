@@ -14,6 +14,7 @@
     "pending": "En attente",
     "verify": "Vérifier",
     "verifyACH": "Vérifier ACH",
+    "ach_debit": "ACH Débit",
     "buttons": {
       "addPaymentMethod": "Choisir un autre mode de paiement",
       "selectPaymentMethod": "Continuer",

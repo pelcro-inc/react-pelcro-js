@@ -14,6 +14,7 @@
     "pending": "Pendiente",
     "verify": "Verificar",
     "verifyACH": "Verificar ACH",
+    "ach_debit": "Transferencia electrónica",
     "buttons": {
       "addPaymentMethod": "Paga con otro método de pago",
       "selectPaymentMethod": "Continuar",
