@@ -418,4 +418,8 @@ export class PelcroActions {
       }
     );
   };
+
+  setPaymentMethodToVerify = (paymentMethod) => {
+    this.set({ paymentMethodToVerify: paymentMethod });
+  };
 }

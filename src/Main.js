@@ -39,6 +39,7 @@ import { InvoicePaymentModal } from "./Components/InvoicePayment/InvoicePaymentM
 import { QrCodeModal } from "./Components/QrCode/QrCodeModal";
 import { SubscriptionManageMembersModal } from "./components";
 import { PaymentMethodDeleteModal } from "./Components/PaymentMethodDelete/PaymentMethodDeleteModal";
+import { PaymentMethodVerifyACHModal } from "./Components/PaymentMethodVerifyACH/PaymentMethodVerifyACHModal";
 import { PaymentMethodCreateModal } from "./Components/PaymentMethodCreate/PaymentMethodCreateModal";
 
 export const Main = () => {
@@ -63,6 +64,7 @@ export const Main = () => {
       <PaymentMethodUpdateModal />
       <PaymentMethodSelectModal />
       <PaymentMethodDeleteModal />
+      <PaymentMethodVerifyACHModal />
 
       <SelectModal />
       <DonationModal />

@@ -107,9 +107,6 @@ export { AddressCreateCountrySelect } from "./Components/AddressCreate/AddressCr
 export { AddressCreateStateSelect } from "./Components/AddressCreate/AddressCreateStateSelect";
 export { AddressCreateSetDefault } from "./Components/AddressCreate/AddressCreateSetDefault";
 export {
-  PelcroCardCVC,
-  PelcroCardExpiry,
-  PelcroCardNumber,
   PelcroPaymentRequestButton,
   CheckoutForm
 } from "./SubComponents/StripeElements";
@@ -214,6 +211,13 @@ export { PaymentMethodDeleteList } from "./Components/PaymentMethodDelete/Paymen
 export { PaymentMethodDeleteModal } from "./Components/PaymentMethodDelete/PaymentMethodDeleteModal";
 export { PaymentMethodDeleteSubmit } from "./Components/PaymentMethodDelete/PaymentMethodDeleteSubmit";
 export { PaymentMethodDeleteView } from "./Components/PaymentMethodDelete/PaymentMethodDeleteView";
+
+export { PaymentMethodVerifyACHContainer } from "./Components/PaymentMethodVerifyACH/PaymentMethodVerifyACHContainer";
+export { PaymentMethodVerifyACHModal } from "./Components/PaymentMethodVerifyACH/PaymentMethodVerifyACHModal";
+export { PaymentMethodVerifyACHView } from "./Components/PaymentMethodVerifyACH/PaymentMethodVerifyACHView";
+export { PaymentMethodVerifyACHInput } from "./Components/PaymentMethodVerifyACH/PaymentMethodVerifyACHInput";
+export { PaymentMethodVerifyACHSubmit } from "./Components/PaymentMethodVerifyACH/PaymentMethodVerifyACHSubmit";
+export { PaymentMethodVerifyACHBack } from "./Components/PaymentMethodVerifyACH/PaymentMethodVerifyACHBack";
 
 export { PaymentMethodCreateContainer } from "./Components/PaymentMethodCreate/PaymentMethodCreateContainer";
 export { PaymentMethodCreateModal } from "./Components/PaymentMethodCreate/PaymentMethodCreateModal";

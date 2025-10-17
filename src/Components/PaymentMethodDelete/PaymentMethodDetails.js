@@ -39,11 +39,18 @@ export const PaymentMethodDetails = () => {
                     •••• ••••{" "}
                     {paymentMethodToDelete.properties?.last4}
                   </p>
-                  <p className="plc-text-sm plc-text-gray-500">
-                    {t("select.expires")}{" "}
-                    {paymentMethodToDelete.properties?.exp_month}/
-                    {paymentMethodToDelete.properties?.exp_year}
-                  </p>
+                  {paymentMethodToDelete.properties?.exp_year && (
+                    <p className="plc-text-sm plc-text-gray-500">
+                      {t("select.expires")}{" "}
+                      {paymentMethodToDelete.properties?.exp_month}/
+                      {paymentMethodToDelete.properties?.exp_year}
+                    </p>
+                  )}
+                  {!paymentMethodToDelete.properties?.exp_year && (
+                    <p className="plc-text-sm plc-text-gray-500">
+                      {t("select.ach_debit") || "ACH Debit"}
+                    </p>
+                  )}
                 </div>
               </div>
             </div>
