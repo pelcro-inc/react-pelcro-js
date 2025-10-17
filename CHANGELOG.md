@@ -1,3 +1,10 @@
+# [3.26.0-beta.81](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.80...v3.26.0-beta.81) (2025-10-17)
+
+
+### Features
+
+* update stripe and add ach verify flow ([#457](https://github.com/pelcro-inc/react-pelcro-js/issues/457)) ([740480c](https://github.com/pelcro-inc/react-pelcro-js/commit/740480c9376e4aa00968e70bc58b2dfcf8fb56a4))
+
 # [3.26.0-beta.80](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.26.0-beta.79...v3.26.0-beta.80) (2025-10-16)
 
 
