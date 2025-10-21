@@ -2,9 +2,14 @@
   "labels": {
     "title": "Annuler l'abonnement",
     "cancelReason": "Motif d'annulation",
+    "selectReason": "Sélectionner un motif",
+    "otherReason": "Veuillez préciser votre motif",
     "endOn": "Fin sur",
     "endImmediately": "Fin immédiate",
     "cancel": "Annuler",
+    "cancelReasons": {
+      "other": "Autre"
+    },
     "subCancellation": {
       "goBack": "Retourner"
     }
