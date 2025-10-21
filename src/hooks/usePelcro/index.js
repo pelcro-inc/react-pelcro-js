@@ -1,6 +1,6 @@
 import createHook from "zustand";
 import createStore from "zustand/vanilla";
-import { mountStoreDevtool } from "simple-zustand-devtools";
+// import { mountStoreDevtool } from "simple-zustand-devtools";
 import { persist } from "zustand/middleware";
 import { PelcroActions } from "./pelcroActions";
 import { PelcroCallbacks } from "./pelcroCallbacks";
@@ -87,5 +87,6 @@ export const usePelcro = createPelcroHook(pelcroStore);
 
 /* istanbul ignore next */
 if (process.env.NODE_ENV === "development") {
-  mountStoreDevtool("Pelcro Store", usePelcro);
+  // mountStoreDevtool("Pelcro Store", usePelcro);
+  console.log("Pelcro Store devtools disabled - simple-zustand-devtools incompatible with React 16");
 }

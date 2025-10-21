@@ -137,6 +137,7 @@ const PaymentMethodContainerWithoutStripe = ({
   onSuccess = () => {},
   onGiftRenewalSuccess = () => {},
   onFailure = () => {},
+  onPriceUpdate = () => {},
   ...props
 }) => {
   const [vantivPaymentRequest, setVantivPaymentRequest] =
@@ -3464,7 +3465,10 @@ const formatPaymentAmount = (
           });
 
         case SET_UPDATED_PRICE:
-          return Update({ ...state, updatedPrice: action.payload });
+          return UpdateWithSideEffect(
+            { ...state, updatedPrice: action.payload },
+            () => onPriceUpdate(action.payload)
+          );
 
         case SET_TAX_AMOUNT:
           return Update({ ...state, taxAmount: action.payload });
