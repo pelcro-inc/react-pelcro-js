@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { SubscriptionCreateFreePlanButton } from "./SubscriptionCreateFreePlanButton";
 import { usePelcro } from "../../hooks/usePelcro";
@@ -14,9 +14,15 @@ export const SubscriptionCreateView = ({
 }) => {
   const { t } = useTranslation("checkoutForm");
   const { product, plan } = usePelcro();
+  const [updatedPrice, setUpdatedPrice] = useState(null);
   const skipPayment =
     window.Pelcro?.uiSettings?.skipPaymentForFreePlans;
-  const showSubscriptionButton = skipPayment && plan?.amount === 0;
+  
+  // Check both original plan amount and final amount after coupon
+  const showSubscriptionButton = skipPayment && (
+    plan?.amount === 0 || 
+    updatedPrice === 0
+  );
 
   const getPricingText = (plan) => {
     const autoRenewed = plan.auto_renew;
@@ -72,6 +78,7 @@ export const SubscriptionCreateView = ({
         onSuccess={onSuccess}
         onFailure={onFailure}
         showSubscriptionButton={showSubscriptionButton}
+        onPriceUpdate={setUpdatedPrice}
       />
     </div>
   );
