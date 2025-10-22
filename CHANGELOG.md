@@ -1,3 +1,10 @@
+# [3.52.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.51.0...v3.52.0) (2025-10-22)
+
+
+### Features
+
+* remove credit card requirement for 100 discounted checkouts ([#464](https://github.com/pelcro-inc/react-pelcro-js/issues/464)) ([2977c4a](https://github.com/pelcro-inc/react-pelcro-js/commit/2977c4a9535c70bea499f694860b09f3cd6a3c4b))
+
 # [3.51.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.50.0...v3.51.0) (2025-10-16)
 
 
