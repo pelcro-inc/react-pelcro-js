@@ -88,7 +88,7 @@ export const usePelcro = createPelcroHook(pelcroStore);
 /* istanbul ignore next */
 if (process.env.NODE_ENV === "development") {
   // mountStoreDevtool("Pelcro Store", usePelcro);
-  console.log("Pelcro Store devtools disabled - simple-zustand-devtools incompatible with React 16");
+  console.log(
+    "Pelcro Store devtools disabled - simple-zustand-devtools incompatible with React 16"
+  );
 }
-
-
