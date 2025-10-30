@@ -702,20 +702,44 @@ class SelectModal extends Component {
                     }}
                   />
                 )}
-              <div className="plc-pt-4 plc-mb-4 plc-font-semibold pelcro-select-plan-price plc-px-4 plc-text-center plc-flex plc-items-end plc-justify-center">
-                <p className="plc-font-bold plc-text-3xl">
-                  {plan.amount_formatted}
-                </p>
-                <span className="plc-text-gray-400 plc-text-xs plc-flex plc-flex-col plc-font-normal plc-ml-1">
-                  <span className="plc-uppercase">
-                    {plan.currency}
+              <div className="plc-pt-4 plc-mb-4 plc-font-semibold pelcro-select-plan-price plc-px-4 plc-text-center plc-flex plc-flex-col plc-items-center plc-justify-center">
+                {/* Discount Badge */}
+                {this.hasValidDiscount(plan) && (
+                  <span 
+                    className="plc-bg-green-500 plc-text-white plc-text-xs plc-font-bold plc-px-2 plc-py-1 plc-rounded plc-mb-2"
+                    aria-label={`${plan.metadata.original_discount_percentage} percent discount`}
+                    role="status"
+                  >
+                    {plan.metadata.original_discount_percentage}% OFF
                   </span>
-                  {plan.auto_renew && (
-                    <span>
-                      / {plan.interval_count} {plan.interval}
+                )}
+                
+                {/* Original Price (Strikethrough) */}
+                {this.hasValidDiscount(plan) && (
+                  <span 
+                    className="plc-text-gray-400 plc-line-through plc-text-sm plc-mb-1"
+                    aria-label={`Original price ${this.formatOriginalAmount(plan)}`}
+                  >
+                    {this.formatOriginalAmount(plan)}
+                  </span>
+                )}
+                
+                {/* Current Price */}
+                <div className="plc-flex plc-items-end plc-justify-center">
+                  <p className="plc-font-bold plc-text-3xl">
+                    {plan.amount_formatted}
+                  </p>
+                  <span className="plc-text-gray-400 plc-text-xs plc-flex plc-flex-col plc-font-normal plc-ml-1">
+                    <span className="plc-uppercase">
+                      {plan.currency}
                     </span>
-                  )}
-                </span>
+                    {plan.auto_renew && (
+                      <span>
+                        / {plan.interval_count} {plan.interval}
+                      </span>
+                    )}
+                  </span>
+                </div>
               </div>
               <div
                 className={`plc-grid plc-bg-primary ${
@@ -798,6 +822,34 @@ class SelectModal extends Component {
         }
       }
     }
+  };
+
+  // Discount helper methods
+  hasValidDiscount = (plan) => {
+    if (!plan?.metadata) return false;
+    
+    const discountPercentage = Number(plan.metadata.original_discount_percentage);
+    const originalAmount = plan.metadata.original_amount;
+    
+    return (
+      !isNaN(discountPercentage) && 
+      discountPercentage > 0 && 
+      discountPercentage <= 100 &&
+      originalAmount && 
+      String(originalAmount).trim().length > 0
+    );
+  };
+
+  formatOriginalAmount = (plan) => {
+    if (!this.hasValidDiscount(plan)) return null;
+    
+    const originalAmount = plan.metadata.original_amount;
+    const currencySymbol = plan.amount_formatted?.match(/[^\d.,\s]+/)?.[0] || "";
+    const numericAmount = typeof originalAmount === "string" ? parseFloat(originalAmount) : originalAmount;
+    
+    if (isNaN(numericAmount)) return null;
+    
+    return `${currencySymbol}${numericAmount.toFixed(2)}`;
   };
 
   selectPlan = (e, isGift) => {
