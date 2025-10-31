@@ -51,7 +51,7 @@ export function SelectModalWithHook(props) {
   return (
     <SelectModalWithTrans
       isGift={isGift}
-      disableGifting={isRenewingGift || props.hideGiftButton}
+      disableGifting={isRenewingGift || subscriptionIdToRenew || props.hideGiftButton}
       subscriptionIdToRenew={subscriptionIdToRenew}
       plan={plan}
       product={product}
@@ -705,7 +705,7 @@ class SelectModal extends Component {
               <div className="plc-pt-4 plc-mb-4 plc-font-semibold pelcro-select-plan-price plc-px-4 plc-text-center plc-flex plc-flex-col plc-items-center plc-justify-center">
                 {/* Discount Badge */}
                 {this.hasValidDiscount(plan) && (
-                  <span 
+                  <span
                     className="plc-bg-green-500 plc-text-white plc-text-xs plc-font-bold plc-px-2 plc-py-1 plc-rounded plc-mb-2"
                     aria-label={`${plan.metadata.original_discount_percentage} percent discount`}
                     role="status"
@@ -713,17 +713,19 @@ class SelectModal extends Component {
                     {plan.metadata.original_discount_percentage}% OFF
                   </span>
                 )}
-                
+
                 {/* Original Price (Strikethrough) */}
                 {this.hasValidDiscount(plan) && (
-                  <span 
+                  <span
                     className="plc-text-gray-400 plc-line-through plc-text-sm plc-mb-1"
-                    aria-label={`Original price ${this.formatOriginalAmount(plan)}`}
+                    aria-label={`Original price ${this.formatOriginalAmount(
+                      plan
+                    )}`}
                   >
                     {this.formatOriginalAmount(plan)}
                   </span>
                 )}
-                
+
                 {/* Current Price */}
                 <div className="plc-flex plc-items-end plc-justify-center">
                   <p className="plc-font-bold plc-text-3xl">
@@ -756,7 +758,6 @@ class SelectModal extends Component {
                   data-key={plan.id}
                   onClick={(e) => {
                     this.selectPlan(e, false);
-
                     this.props.setItem(this.state.itemId);
                   }}
                 >
@@ -772,7 +773,10 @@ class SelectModal extends Component {
                     <button
                       className={`plc-flex plc-items-center plc-justify-center plc-text-center plc-py-2 plc-px-4 plc-w-full plc-border-2 plc-rounded-sm plc-border-primary focus:plc-outline-none plc-text-primary plc-bg-white hover:plc-border-primary-600 hover:plc-text-primary-600 hover:plc-shadow-sm plc-transition-all`}
                       data-key={plan.id}
-                      onClick={(e) => this.selectPlan(e, true)}
+                      onClick={(e) => {
+                        this.selectPlan(e, true);
+                        this.props.setItem(this.state.itemId);
+                      }}
                     >
                       {this.locale("buttons.gift")}
                     </button>
@@ -827,28 +831,34 @@ class SelectModal extends Component {
   // Discount helper methods
   hasValidDiscount = (plan) => {
     if (!plan?.metadata) return false;
-    
-    const discountPercentage = Number(plan.metadata.original_discount_percentage);
+
+    const discountPercentage = Number(
+      plan.metadata.original_discount_percentage
+    );
     const originalAmount = plan.metadata.original_amount;
-    
+
     return (
-      !isNaN(discountPercentage) && 
-      discountPercentage > 0 && 
+      !isNaN(discountPercentage) &&
+      discountPercentage > 0 &&
       discountPercentage <= 100 &&
-      originalAmount && 
+      originalAmount &&
       String(originalAmount).trim().length > 0
     );
   };
 
   formatOriginalAmount = (plan) => {
     if (!this.hasValidDiscount(plan)) return null;
-    
+
     const originalAmount = plan.metadata.original_amount;
-    const currencySymbol = plan.amount_formatted?.match(/[^\d.,\s]+/)?.[0] || "";
-    const numericAmount = typeof originalAmount === "string" ? parseFloat(originalAmount) : originalAmount;
-    
+    const currencySymbol =
+      plan.amount_formatted?.match(/[^\d.,\s]+/)?.[0] || "";
+    const numericAmount =
+      typeof originalAmount === "string"
+        ? parseFloat(originalAmount)
+        : originalAmount;
+
     if (isNaN(numericAmount)) return null;
-    
+
     return `${currencySymbol}${numericAmount.toFixed(2)}`;
   };
 

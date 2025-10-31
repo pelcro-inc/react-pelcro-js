@@ -8,7 +8,7 @@ import {
 
 export const SubscriptionCreateSummary = () => {
   const { t } = useTranslation("checkoutForm");
-  const { product, plan, selectedAddressId } = usePelcro();
+  const { product, plan, selectedAddressId, itemId } = usePelcro();
 
   const { addresses } = window?.Pelcro?.user?.read() ?? [];
   const user = window?.Pelcro?.user?.read() ?? [];
@@ -19,6 +19,11 @@ export const SubscriptionCreateSummary = () => {
     : addresses?.find(
         (address) => address.type == "shipping" && address.is_default
       ) ?? null;
+
+  // Get gift item if itemId is present
+  const item = itemId 
+    ? window.Pelcro.ecommerce.products.getBySkuId(Number(itemId)) ?? null
+    : null;
 
   // Discount helper methods
   const hasValidDiscount = (plan) => {
@@ -116,6 +121,23 @@ export const SubscriptionCreateSummary = () => {
           />
         </div>
       </div>
+      {item && (
+        <div className="plc-flex plc-flex-row plc-items-center plc-mb-6 plc-text-left plc-text-gray-900 pelcro-title-wrapper">
+          <div className="plc-w-full plc-font-semibold plc-text-left plc-text-gray-900">
+            <p className="plc-text-gray-600">
+              <span className="plc-font-bold">Gift</span>
+              <br />
+              <span className="plc-text-xl plc-font-semibold plc-text-primary-600">
+                {item.name}
+              </span>
+            </p>
+          </div>
+          <div className="plc-flex-grow"></div>
+          <div className="plc-w-1/4">
+            <img src={item.image} alt="" className="plc-rounded-md" />
+          </div>
+        </div>
+      )}
       <div className="plc-flex plc-flex-row plc-justify-between">
         {address && (
           <>
