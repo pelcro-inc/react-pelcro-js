@@ -33,7 +33,9 @@ export default [
       babel({
         presets: ["react-app"],
         plugins: [
-          "@babel/plugin-proposal-class-properties",
+          ["@babel/plugin-proposal-class-properties", { "loose": true }],
+          ["@babel/plugin-transform-private-methods", { "loose": true }],
+          ["@babel/plugin-transform-private-property-in-object", { "loose": true }],
           "transform-react-remove-prop-types"
         ],
         exclude: "node_modules/**",

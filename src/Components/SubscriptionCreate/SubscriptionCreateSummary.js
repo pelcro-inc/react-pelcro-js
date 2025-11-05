@@ -8,7 +8,7 @@ import {
 
 export const SubscriptionCreateSummary = () => {
   const { t } = useTranslation("checkoutForm");
-  const { product, plan, selectedAddressId, itemId } = usePelcro();
+  const { product, plan, selectedAddressId, itemId, specialOffer } = usePelcro();
 
   const { addresses } = window?.Pelcro?.user?.read() ?? [];
   const user = window?.Pelcro?.user?.read() ?? [];
@@ -77,31 +77,66 @@ export const SubscriptionCreateSummary = () => {
           {product.name} - {plan.nickname}
         </span>
         <br />
-        {/* Discount Badge */}
-        {hasValidDiscount(plan) && (
-          <span 
-            className="plc-bg-green-500 plc-text-white plc-text-xs plc-font-bold plc-px-2 plc-py-1 plc-rounded plc-mr-2"
-            aria-label={`${plan.metadata.original_discount_percentage} percent discount`}
-            role="status"
-          >
-            {plan.metadata.original_discount_percentage}% OFF
-          </span>
+        {/* Show special offer pricing if available (from coupon codes) */}
+        {!specialOffer && !hasValidDiscount(plan) && (
+          <>
+            <span className="plc-text-xl plc-font-semibold plc-text-primary-600">
+              {priceFormatted}{" "}
+            </span>
+            <span className="plc-font-thin">
+              {autoRenewed ? "/" : t("labels.for")} {intervalText}
+            </span>
+          </>
         )}
-        {/* Original Price (Strikethrough) */}
-        {hasValidDiscount(plan) && (
-          <span 
-            className="plc-text-gray-400 plc-line-through plc-text-sm plc-mr-2"
-            aria-label={`Original price ${formatOriginalAmount(plan)}`}
-          >
-            {formatOriginalAmount(plan)}
-          </span>
+        {/* Show special offer from coupon code */}
+        {specialOffer && (
+          <>
+            <span className="plc-flex plc-text-xl plc-mb-1">
+              <span className="plc-mr-1 plc-text-xl plc-font-semibold plc-text-primary-600">
+                {specialOffer.priceFormatted}
+              </span>
+              {specialOffer.percentOff && (
+                <span>({specialOffer.percentOff} off)</span>
+              )}
+            </span>
+            <p className="plc-text-gray-900 plc-text-sm">
+              {t("Original Price")} {priceFormatted}{" "}
+              {autoRenewed ? (
+                <span>
+                  / {plan.interval_count} {plan.interval}
+                </span>
+              ) : (
+                `for ${intervalText}`
+              )}
+            </p>
+          </>
         )}
-        <span className="plc-text-xl plc-font-semibold plc-text-primary-600">
-          {priceFormatted}{" "}
-        </span>
-        <span className="plc-font-thin">
-          {autoRenewed ? "/" : t("labels.for")} {intervalText}
-        </span>
+        {/* Show plan metadata discount (existing functionality) */}
+        {!specialOffer && hasValidDiscount(plan) && (
+          <>
+            {/* Discount Badge */}
+            <span 
+              className="plc-bg-green-500 plc-text-white plc-text-xs plc-font-bold plc-px-2 plc-py-1 plc-rounded plc-mr-2"
+              aria-label={`${plan.metadata.original_discount_percentage} percent discount`}
+              role="status"
+            >
+              {plan.metadata.original_discount_percentage}% OFF
+            </span>
+            {/* Original Price (Strikethrough) */}
+            <span 
+              className="plc-text-gray-400 plc-line-through plc-text-sm plc-mr-2"
+              aria-label={`Original price ${formatOriginalAmount(plan)}`}
+            >
+              {formatOriginalAmount(plan)}
+            </span>
+            <span className="plc-text-xl plc-font-semibold plc-text-primary-600">
+              {priceFormatted}{" "}
+            </span>
+            <span className="plc-font-thin">
+              {autoRenewed ? "/" : t("labels.for")} {intervalText}
+            </span>
+          </>
+        )}
       </p>
     );
   };

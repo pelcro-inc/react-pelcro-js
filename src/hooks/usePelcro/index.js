@@ -1,6 +1,6 @@
 import createHook from "zustand";
 import createStore from "zustand/vanilla";
-import { mountStoreDevtool } from "simple-zustand-devtools";
+// import { mountStoreDevtool } from "simple-zustand-devtools"; // Commented out - requires React 18
 import { persist } from "zustand/middleware";
 import { PelcroActions } from "./pelcroActions";
 import { PelcroCallbacks } from "./pelcroCallbacks";
@@ -91,6 +91,7 @@ const pelcroStore = createPelcroStore();
 export const usePelcro = createPelcroHook(pelcroStore);
 
 /* istanbul ignore next */
-if (process.env.NODE_ENV === "development") {
-  mountStoreDevtool("Pelcro Store", usePelcro);
-}
+// Devtools disabled - requires React 18
+// if (process.env.NODE_ENV === "development") {
+//   mountStoreDevtool("Pelcro Store", usePelcro);
+// }

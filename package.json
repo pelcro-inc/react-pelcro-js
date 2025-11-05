@@ -128,11 +128,11 @@
   },
   "babel": {
     "presets": [
-      "@babel/preset-env",
+      ["@babel/preset-env", { "loose": true }],
       "@babel/preset-react"
     ],
     "plugins": [
-      "@babel/plugin-proposal-class-properties",
+      ["@babel/plugin-proposal-class-properties", { "loose": true }],
       "@babel/plugin-proposal-optional-chaining",
       "@babel/plugin-proposal-nullish-coalescing-operator"
     ]
@@ -148,5 +148,6 @@
     "commitizen": {
       "path": "cz-conventional-changelog"
     }
-  }
+  },
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }
