@@ -80,7 +80,7 @@ export const SubscriptionCreateSummary = () => {
         {/* Discount Badge */}
         {hasValidDiscount(plan) && (
           <span 
-            className="plc-bg-green-500 plc-text-white plc-text-xs plc-font-bold plc-px-2 plc-py-1 plc-rounded plc-mr-2"
+            className="plc-bg-red-500 plc-text-white plc-text-xs plc-font-bold plc-px-2 plc-py-1 plc-rounded plc-mr-2"
             aria-label={`${plan.metadata.original_discount_percentage} percent discount`}
             role="status"
           >
