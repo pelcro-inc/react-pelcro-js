@@ -14,6 +14,34 @@ export const SubscriptionRenewView = ({
     window.Pelcro?.uiSettings?.skipPaymentForFreePlans;
   const showSubscriptionButton = skipPayment && plan?.amount === 0;
 
+  // Discount helper methods
+  const hasValidDiscount = (plan) => {
+    if (!plan?.metadata) return false;
+    
+    const discountPercentage = Number(plan.metadata.original_discount_percentage);
+    const originalAmount = plan.metadata.original_amount;
+    
+    return (
+      !isNaN(discountPercentage) && 
+      discountPercentage > 0 && 
+      discountPercentage <= 100 &&
+      originalAmount && 
+      String(originalAmount).trim().length > 0
+    );
+  };
+
+  const formatOriginalAmount = (plan) => {
+    if (!hasValidDiscount(plan)) return null;
+    
+    const originalAmount = plan.metadata.original_amount;
+    const currencySymbol = plan.amount_formatted?.match(/[^\d.,\s]+/)?.[0] || "";
+    const numericAmount = typeof originalAmount === "string" ? parseFloat(originalAmount) : originalAmount;
+    
+    if (isNaN(numericAmount)) return null;
+    
+    return `${currencySymbol}${numericAmount.toFixed(2)}`;
+  };
+
   const getPricingText = (plan) => {
     const autoRenewed = plan.auto_renew;
     const { interval_translated, interval_count } = plan;
@@ -28,6 +56,25 @@ export const SubscriptionRenewView = ({
           {product.name} - {plan.nickname}
         </span>
         <br />
+        {/* Discount Badge */}
+        {hasValidDiscount(plan) && (
+          <span 
+            className="plc-bg-red-500 plc-text-white plc-text-xs plc-font-bold plc-px-2 plc-py-1 plc-rounded plc-mr-2"
+            aria-label={`${plan.metadata.original_discount_percentage} percent discount`}
+            role="status"
+          >
+            {plan.metadata.original_discount_percentage}% OFF
+          </span>
+        )}
+        {/* Original Price (Strikethrough) */}
+        {hasValidDiscount(plan) && (
+          <span 
+            className="plc-text-gray-400 plc-line-through plc-text-sm plc-mr-2"
+            aria-label={`Original price ${formatOriginalAmount(plan)}`}
+          >
+            {formatOriginalAmount(plan)}
+          </span>
+        )}
         <span className="plc-text-xl plc-font-semibold plc-text-primary-600">
           {plan.amount_formatted}{" "}
         </span>

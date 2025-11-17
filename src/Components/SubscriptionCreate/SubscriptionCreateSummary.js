@@ -8,7 +8,7 @@ import {
 
 export const SubscriptionCreateSummary = () => {
   const { t } = useTranslation("checkoutForm");
-  const { product, plan, selectedAddressId } = usePelcro();
+  const { product, plan, selectedAddressId, itemId } = usePelcro();
 
   const { addresses } = window?.Pelcro?.user?.read() ?? [];
   const user = window?.Pelcro?.user?.read() ?? [];
@@ -19,6 +19,39 @@ export const SubscriptionCreateSummary = () => {
     : addresses?.find(
         (address) => address.type == "shipping" && address.is_default
       ) ?? null;
+
+  // Get gift item if itemId is present
+  const item = itemId 
+    ? window.Pelcro.ecommerce.products.getBySkuId(Number(itemId)) ?? null
+    : null;
+
+  // Discount helper methods
+  const hasValidDiscount = (plan) => {
+    if (!plan?.metadata) return false;
+    
+    const discountPercentage = Number(plan.metadata.original_discount_percentage);
+    const originalAmount = plan.metadata.original_amount;
+    
+    return (
+      !isNaN(discountPercentage) && 
+      discountPercentage > 0 && 
+      discountPercentage <= 100 &&
+      originalAmount && 
+      String(originalAmount).trim().length > 0
+    );
+  };
+
+  const formatOriginalAmount = (plan) => {
+    if (!hasValidDiscount(plan)) return null;
+    
+    const originalAmount = plan.metadata.original_amount;
+    const currencySymbol = plan.amount_formatted?.match(/[^\d.,\s]+/)?.[0] || "";
+    const numericAmount = typeof originalAmount === "string" ? parseFloat(originalAmount) : originalAmount;
+    
+    if (isNaN(numericAmount)) return null;
+    
+    return `${currencySymbol}${numericAmount.toFixed(2)}`;
+  };
 
   const getPricingText = (plan) => {
     const autoRenewed = plan.auto_renew;
@@ -44,6 +77,25 @@ export const SubscriptionCreateSummary = () => {
           {product.name} - {plan.nickname}
         </span>
         <br />
+        {/* Discount Badge */}
+        {hasValidDiscount(plan) && (
+          <span 
+            className="plc-bg-red-500 plc-text-white plc-text-xs plc-font-bold plc-px-2 plc-py-1 plc-rounded plc-mr-2"
+            aria-label={`${plan.metadata.original_discount_percentage} percent discount`}
+            role="status"
+          >
+            {plan.metadata.original_discount_percentage}% OFF
+          </span>
+        )}
+        {/* Original Price (Strikethrough) */}
+        {hasValidDiscount(plan) && (
+          <span 
+            className="plc-text-gray-400 plc-line-through plc-text-sm plc-mr-2"
+            aria-label={`Original price ${formatOriginalAmount(plan)}`}
+          >
+            {formatOriginalAmount(plan)}
+          </span>
+        )}
         <span className="plc-text-xl plc-font-semibold plc-text-primary-600">
           {priceFormatted}{" "}
         </span>
@@ -69,6 +121,23 @@ export const SubscriptionCreateSummary = () => {
           />
         </div>
       </div>
+      {item && (
+        <div className="plc-flex plc-flex-row plc-items-center plc-mb-6 plc-text-left plc-text-gray-900 pelcro-title-wrapper">
+          <div className="plc-w-full plc-font-semibold plc-text-left plc-text-gray-900">
+            <p className="plc-text-gray-600">
+              <span className="plc-font-bold">Gift</span>
+              <br />
+              <span className="plc-text-xl plc-font-semibold plc-text-primary-600">
+                {item.name}
+              </span>
+            </p>
+          </div>
+          <div className="plc-flex-grow"></div>
+          <div className="plc-w-1/4">
+            <img src={item.image} alt="" className="plc-rounded-md" />
+          </div>
+        </div>
+      )}
       <div className="plc-flex plc-flex-row plc-justify-between">
         {address && (
           <>
