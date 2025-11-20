@@ -29,22 +29,16 @@ export const GiftsMenu = (props) => {
       ?.sort((a, b) => a.expires_at - b.expires_at)
       ?.sort((a, b) => a.renews_at - b.renews_at)
       ?.map((recipient) => {
-        // Renew click - can be overridden via props
+        // Renew click
         const onRenewClick = () => {
-          if (props?.onGiftRenewClick) {
-            // Allow custom UI to override the behavior
-            props.onGiftRenewClick(recipient);
-          } else {
-            // Default behavior
-            const productId = recipient.plan?.product?.id;
-            const planId = recipient.plan?.id;
-            const product = window.Pelcro.product.getById(productId);
-            const plan = window.Pelcro.plan.getById(planId);
-            props?.setProductAndPlan(product, plan);
-            props?.setSubscriptionIdToRenew(recipient.id);
-            setIsRenewingGift(true);
-            switchView("plan-select");
-          }
+          const productId = recipient.plan?.product?.id;
+          const planId = recipient.plan?.id;
+          const product = window.Pelcro.product.getById(productId);
+          const plan = window.Pelcro.plan.getById(planId);
+          props?.setProductAndPlan(product, plan);
+          props?.setSubscriptionIdToRenew(recipient.id);
+          setIsRenewingGift(true);
+          switchView("plan-select");
         };
 
         return (
@@ -118,12 +112,12 @@ export const GiftsMenu = (props) => {
                 <Button
                   variant="ghost"
                   icon={<RefreshIcon className="plc-w-4 plc-h-4" />}
-                  className={props?.onGiftRenewClick ? "plc-text-red-500" : "plc-text-blue-400"}
+                  className="plc-text-blue-400"
                   onClick={onRenewClick}
                   disabled={disableSubmit}
                   data-key={recipient.id}
                 >
-                  {props?.onGiftRenewClick ? "Contact Us" : t("labels.renew")}
+                  {t("labels.renew")}
                 </Button>
               </td>
             )}
