@@ -144,6 +144,7 @@ const PaymentMethodContainerWithoutStripe = ({
   onSuccess = () => {},
   onGiftRenewalSuccess = () => {},
   onFailure = () => {},
+  beforeCreate,
   ...props
 }) => {
   const [vantivPaymentRequest, setVantivPaymentRequest] =
@@ -2578,8 +2579,32 @@ const PaymentMethodContainerWithoutStripe = ({
     }
   };
 
-  const subscribe = (stripeSource, state, dispatch) => {
+  const subscribe = async (stripeSource, state, dispatch) => {
     const { couponCode } = state;
+
+    // Execute beforeCreate hook if provided
+    if (beforeCreate && typeof beforeCreate === 'function') {
+      try {
+        await beforeCreate();
+      } catch (error) {
+        console.error("[Pelcro SDK] beforeCreate hook failed:", error);
+
+        // Stop subscription creation
+        dispatch({ type: DISABLE_SUBMIT, payload: false });
+        dispatch({ type: LOADING, payload: false });
+
+        // Call onFailure with the error
+        onFailure(error);
+
+        return dispatch({
+          type: SHOW_ALERT,
+          payload: {
+            type: "error",
+            content: error.message || "Failed to process request. Please try again."
+          }
+        });
+      }
+    }
 
     if (!subscriptionIdToRenew) {
       window.Pelcro.subscription.create(
@@ -3279,9 +3304,9 @@ const PaymentMethodContainerWithoutStripe = ({
     });
   };
 
-  const handlePayment = (stripeSource) => {
+  const handlePayment = async (stripeSource) => {
     if (stripeSource && type === "createPayment") {
-      subscribe(stripeSource, state, dispatch);
+      await subscribe(stripeSource, state, dispatch);
     } else if (stripeSource && type === "orderCreate") {
       purchase(new StripeGateway(), stripeSource.id, state, dispatch);
     } else if (stripeSource && type === "invoicePayment") {
@@ -3294,7 +3319,7 @@ const PaymentMethodContainerWithoutStripe = ({
     }
   };
 
-  const handlePaymentError = (error) => {
+  const handlePaymentError = async (error) => {
     toggleAuthenticationSuccessPendingView(false);
 
     if (
@@ -3308,7 +3333,7 @@ const PaymentMethodContainerWithoutStripe = ({
         updatedPrice === 0 &&
         state.couponObject?.duration === "forever"
       ) {
-        return subscribe({}, state, dispatch);
+        return await subscribe({}, state, dispatch);
       }
     }
 
@@ -3423,8 +3448,8 @@ const PaymentMethodContainerWithoutStripe = ({
           });
 
         case SUBSCRIBE:
-          return SideEffect((state, dispatch) =>
-            subscribe(action.payload, state, dispatch)
+          return SideEffect(async (state, dispatch) =>
+            await subscribe(action.payload, state, dispatch)
           );
 
         case INIT_CONTAINER:
