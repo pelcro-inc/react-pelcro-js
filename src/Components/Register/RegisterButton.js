@@ -35,12 +35,20 @@ export const RegisterButton = ({
     );
   }, [buttonDisabled, emailError, passwordError, email, password]);
 
+  const handleClick = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (buttonDisabled) return;
+
+    dispatch({ type: HANDLE_REGISTRATION });
+    onClick?.();
+  };
+
   return (
     <Button
-      onClick={() => {
-        dispatch({ type: HANDLE_REGISTRATION });
-        onClick?.();
-      }}
+      type="button"
+      onClick={handleClick}
       disabled={isDisabled}
       isLoading={buttonDisabled}
       className={`${className} g-recaptcha`}
