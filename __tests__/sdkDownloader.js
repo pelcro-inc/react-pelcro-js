@@ -3,7 +3,7 @@ const request = require("request");
 const path = require("path");
 
 const locallyUpdatePelcroSDK = () => {
-  const url = "https://js.pelcro.com/sdk/staging/main.min.js";
+  const url = "https://js.pelcro.com/sdk/sandbox/main.min.js";
   const dirPath = path.resolve(__dirname, "./downloads");
   const downloadPath = dirPath + "/pelcro-sdk.js";
 

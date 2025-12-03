@@ -3,6 +3,12 @@
  * to this service, and out of react components.
  */
 
+import {
+  loadBraintreeScript,
+  createBraintreeDropin,
+  requestBraintreePaymentMethod
+} from "../../Components/common/Helpers";
+
 /**
  * Enum for payment types
  * @readonly
@@ -1037,7 +1043,9 @@ export class CybersourceGateway {
       quantity = 1,
       addressId,
       isExistingSource,
-      fingerprint_session_id
+      fingerprint_session_id,
+      cardExpirationMonth,
+      cardExpirationYear
     } = options;
     const params = isExistingSource
       ? {
@@ -1058,6 +1066,8 @@ export class CybersourceGateway {
         coupon_code: couponCode,
         address_id: product.address_required ? addressId : null,
         fingerprint_session_id: fingerprint_session_id,
+        card_expiration_month: cardExpirationMonth,
+        card_expiration_year: cardExpirationYear,
         ...params
       },
       (err, res) => {
@@ -1080,7 +1090,9 @@ export class CybersourceGateway {
       couponCode,
       product,
       addressId,
-      isExistingSource
+      isExistingSource,
+      cardExpirationMonth,
+      cardExpirationYear
     } = options;
     const params = isExistingSource
       ? {
@@ -1100,6 +1112,8 @@ export class CybersourceGateway {
           window.Pelcro.helpers.getURLParameter("campaign_key"),
         subscription_id: subscriptionIdToRenew,
         address_id: product.address_required ? addressId : null,
+        card_expiration_month: cardExpirationMonth,
+        card_expiration_year: cardExpirationYear,
         ...params
       },
       (err, res) => {
@@ -1123,7 +1137,9 @@ export class CybersourceGateway {
       giftRecipient,
       quantity = 1,
       addressId,
-      isExistingSource
+      isExistingSource,
+      cardExpirationMonth,
+      cardExpirationYear
     } = options;
     const params = isExistingSource
       ? {
@@ -1148,6 +1164,8 @@ export class CybersourceGateway {
         gift_start_date: giftRecipient?.startDate,
         gift_message: giftRecipient?.giftMessage,
         address_id: product.address_required ? addressId : null,
+        card_expiration_month: cardExpirationMonth,
+        card_expiration_year: cardExpirationYear,
         ...params
       },
       (err, res) => {
@@ -1170,7 +1188,9 @@ export class CybersourceGateway {
       plan,
       couponCode,
       addressId,
-      isExistingSource
+      isExistingSource,
+      cardExpirationMonth,
+      cardExpirationYear
     } = options;
     const params = isExistingSource
       ? {
@@ -1188,6 +1208,8 @@ export class CybersourceGateway {
         coupon_code: couponCode,
         subscription_id: subscriptionIdToRenew,
         address_id: product.address_required ? addressId : null,
+        card_expiration_month: cardExpirationMonth,
+        card_expiration_year: cardExpirationYear,
         ...params
       },
       (err, res) => {
@@ -1203,8 +1225,15 @@ export class CybersourceGateway {
    * @return {void}
    */
   #purchaseEcommerceOrder = (options, callback) => {
-    const { token, items, couponCode, addressId, isExistingSource } =
-      options;
+    const {
+      token,
+      items,
+      couponCode,
+      addressId,
+      isExistingSource,
+      cardExpirationMonth,
+      cardExpirationYear
+    } = options;
     const params = isExistingSource
       ? {
           source_id: token
@@ -1221,7 +1250,9 @@ export class CybersourceGateway {
         campaign_key:
           window.Pelcro.helpers.getURLParameter("campaign_key"),
         ...params,
-        ...(addressId && { address_id: addressId })
+        ...(addressId && { address_id: addressId }),
+        card_expiration_month: cardExpirationMonth,
+        card_expiration_year: cardExpirationYear
       },
       (err, res) => {
         callback(err, res);
@@ -1279,6 +1310,34 @@ export class BraintreeGateway {
           "Unsupported payment method: braintree Gateway"
         );
     }
+  };
+
+  /**
+   * Creates Braintree Drop-in UI instance
+   * @param {string} authorization - Braintree authorization token
+   * @param {string} selector - CSS selector for the container
+   * @param {Object} options - Additional options for dropin creation
+   * @returns {Promise} Promise that resolves with the dropin instance
+   */
+  createDropin = (authorization, selector, options = {}) => {
+    return createBraintreeDropin(authorization, selector, options);
+  };
+
+  /**
+   * Requests payment method from Braintree Drop-in UI
+   * @param {Object} instance - Braintree dropin instance
+   * @returns {Promise} Promise that resolves with payment method payload
+   */
+  requestPaymentMethod = (instance) => {
+    return requestBraintreePaymentMethod(instance);
+  };
+
+  /**
+   * Loads Braintree Drop-in UI script
+   * @returns {Promise} Promise that resolves when script is loaded
+   */
+  loadScript = () => {
+    return loadBraintreeScript();
   };
 
   /**

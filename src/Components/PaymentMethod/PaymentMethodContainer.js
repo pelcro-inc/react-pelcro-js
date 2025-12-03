@@ -5,11 +5,12 @@ import React, {
   useState
 } from "react";
 import { useTranslation } from "react-i18next";
+import { loadStripe } from "@stripe/stripe-js";
 import {
-  injectStripe,
   Elements,
-  StripeProvider
-} from "react-stripe-elements";
+  useStripe,
+  useElements
+} from "@stripe/react-stripe-js";
 import useReducerWithSideEffects, {
   UpdateWithSideEffect,
   Update,
@@ -59,7 +60,10 @@ import {
   getErrorMessages,
   debounce,
   getSiteCardProcessor,
-  getFourDigitYear
+  getFourDigitYear,
+  createBraintreeDropin,
+  requestBraintreePaymentMethod,
+  requestBraintreeHostedFieldsPaymentMethod
 } from "../common/Helpers";
 import {
   Payment,
@@ -78,6 +82,7 @@ import {
   refreshUser
 } from "../../utils/utils";
 import { usePelcro } from "../../hooks/usePelcro";
+import { Loader } from "../../SubComponents/Loader";
 
 /**
  * @typedef {Object} PaymentStateType
@@ -139,13 +144,14 @@ const PaymentMethodContainerWithoutStripe = ({
   style,
   className = "",
   children,
-  stripe,
   type,
   onSuccess = () => {},
   onGiftRenewalSuccess = () => {},
   onFailure = () => {},
   ...props
 }) => {
+  const stripe = useStripe();
+  const elements = useElements();
   const [vantivPaymentRequest, setVantivPaymentRequest] =
     useState(null);
   const [updatedCouponCode, setUpdatedCouponCode] = useState("");
@@ -224,6 +230,117 @@ const PaymentMethodContainerWithoutStripe = ({
     });
   };
 
+  // Helper function to calculate total amount for payment methods
+  const calculateTotalAmount = (state, plan, invoice, order) => {
+    const getOrderItemsTotal = () => {
+      if (!order) {
+        return null;
+      }
+
+      const isQuickPurchase = !Array.isArray(order);
+
+      if (isQuickPurchase) {
+        return order.price * order.quantity;
+      }
+
+      if (order.length === 0) {
+        return null;
+      }
+
+      return order.reduce((total, item) => {
+        return total + item.price * item.quantity;
+      }, 0);
+    };
+
+    return (
+      state?.updatedPrice ??
+      plan?.amount ??
+      invoice?.amount_remaining ??
+      getOrderItemsTotal()
+    );
+  };
+
+  // Helper function to get currency from the appropriate source
+  const getCurrencyFromPaymentType = (plan, order, invoice) => {
+    if (plan) {
+      return plan.currency;
+    } else if (order) {
+      // Handle both single order and array of orders
+      const isQuickPurchase = !Array.isArray(order);
+      return isQuickPurchase ? order.currency : order[0]?.currency;
+    } else if (invoice) {
+      return invoice.currency;
+    }
+    return "USD"; // Default fallback
+  };
+
+  // Helper function to get payment label
+  const getPaymentLabel = (plan, order, invoice) => {
+    if (plan) {
+      return plan.nickname || plan.description || "Subscription";
+    } else if (order) {
+      // Handle both single order and array of orders
+      const isQuickPurchase = !Array.isArray(order);
+      if (isQuickPurchase) {
+        return order.name || "Order";
+      } else {
+        return order.length === 1 ? order[0].name : "Order";
+      }
+    } else if (invoice) {
+      return `Invoice #${invoice.id}`;
+    }
+    return window.Pelcro.site.read()?.name || "Payment";
+  };
+
+  // Helper function to format amount for payment methods (Apple Pay, Google Pay)
+  const formatPaymentAmount = (
+    totalAmount,
+    currency,
+    paymentMethod = ""
+  ) => {
+    if (!totalAmount) return "0.00";
+
+    const isZeroDecimal =
+      window.Pelcro?.utils?.isCurrencyZeroDecimal?.(currency) ||
+      [
+        "BIF",
+        "CLP",
+        "DJF",
+        "GNF",
+        "JPY",
+        "KMF",
+        "KRW",
+        "MGA",
+        "PYG",
+        "RWF",
+        "UGX",
+        "VND",
+        "VUV",
+        "XAF",
+        "XOF",
+        "XPF"
+      ].includes(currency?.toUpperCase?.());
+
+    // Payment methods expect amount in major currency unit (dollars, not cents)
+    let finalAmount;
+    if (isZeroDecimal) {
+      finalAmount = Math.round(totalAmount).toString();
+    } else {
+      // Convert from cents to dollars and format with 2 decimal places
+      finalAmount = (totalAmount / 100).toFixed(2);
+    }
+
+    console.log(
+      `${paymentMethod} amount:`,
+      finalAmount,
+      "currency:",
+      currency,
+      "type:",
+      type
+    );
+    return String(finalAmount);
+  };
+
   /* ====== Start Cybersource integration ======== */
   const cybersourceErrorHandle = (err) => {
     if (err?.details?.responseStatus?.details?.length > 0) {
@@ -249,6 +366,7 @@ const PaymentMethodContainerWithoutStripe = ({
     const isUsingExistingPaymentMethod = Boolean(
       selectedPaymentMethodId
     );
+
     if (isUsingExistingPaymentMethod) {
       // no need to create a new source using cybersrce
       return handleCybersourcePayment(null, state);
@@ -279,7 +397,7 @@ const PaymentMethodContainerWithoutStripe = ({
             }
           });
         }
-        handleCybersourcePayment(response.token, state);
+        handleCybersourcePayment(response, state);
       }
     );
   };
@@ -320,7 +438,9 @@ const PaymentMethodContainerWithoutStripe = ({
         {
           auth_token: window.Pelcro.user.read().auth_token,
           token: paymentRequest,
-          gateway: "cybersource"
+          gateway: "cybersource",
+          cardExpirationMonth: state.month,
+          cardExpirationYear: state.year
         },
         (err, res) => {
           dispatch({ type: DISABLE_SUBMIT, payload: false });
@@ -345,6 +465,13 @@ const PaymentMethodContainerWithoutStripe = ({
               content: t("messages.sourceUpdated")
             }
           });
+
+          // Reinitialize Cybersource microform after successful payment
+          setTimeout(() => {
+            cybersourceInstanceRef.current = null;
+            initCybersourceScript();
+          }, 1000);
+
           onSuccess(res);
         } //
       );
@@ -372,12 +499,21 @@ const PaymentMethodContainerWithoutStripe = ({
             product,
             isExistingSource: isUsingExistingPaymentMethod,
             subscriptionIdToRenew,
-            addressId: selectedAddressId
+            addressId: selectedAddressId,
+            cardExpirationMonth: state.month,
+            cardExpirationYear: state.year
           },
           (err, res) => {
             if (err) {
               return handlePaymentError(err);
             }
+
+            // Reinitialize Cybersource microform after successful payment
+            setTimeout(() => {
+              cybersourceInstanceRef.current = null;
+              initCybersourceScript();
+            }, 1000);
+
             onSuccess(res);
           }
         );
@@ -394,12 +530,21 @@ const PaymentMethodContainerWithoutStripe = ({
             product,
             isExistingSource: isUsingExistingPaymentMethod,
             giftRecipient,
-            addressId: selectedAddressId
+            addressId: selectedAddressId,
+            cardExpirationMonth: state.month,
+            cardExpirationYear: state.year
           },
           (err, res) => {
             if (err) {
               return handlePaymentError(err);
             }
+
+            // Reinitialize Cybersource microform after successful payment
+            setTimeout(() => {
+              cybersourceInstanceRef.current = null;
+              initCybersourceScript();
+            }, 1000);
+
             onSuccess(res);
           }
         );
@@ -416,12 +561,21 @@ const PaymentMethodContainerWithoutStripe = ({
             product,
             isExistingSource: isUsingExistingPaymentMethod,
             subscriptionIdToRenew,
-            addressId: selectedAddressId
+            addressId: selectedAddressId,
+            cardExpirationMonth: state.month,
+            cardExpirationYear: state.year
           },
           (err, res) => {
             if (err) {
               return handlePaymentError(err);
             }
+
+            // Reinitialize Cybersource microform after successful payment
+            setTimeout(() => {
+              cybersourceInstanceRef.current = null;
+              initCybersourceScript();
+            }, 1000);
+
             onSuccess(res);
           }
         );
@@ -438,12 +592,21 @@ const PaymentMethodContainerWithoutStripe = ({
             product,
             isExistingSource: isUsingExistingPaymentMethod,
             addressId: selectedAddressId,
-            fingerprint_session_id: state.cyberSourceSessionId
+            fingerprint_session_id: state.cyberSourceSessionId,
+            cardExpirationMonth: state.month,
+            cardExpirationYear: state.year
           },
           (err, res) => {
             if (err) {
               return handlePaymentError(err);
             }
+
+            // Reinitialize Cybersource microform after successful payment
+            setTimeout(() => {
+              cybersourceInstanceRef.current = null;
+              initCybersourceScript();
+            }, 1000);
+
             onSuccess(res);
           }
         );
@@ -451,13 +614,7 @@ const PaymentMethodContainerWithoutStripe = ({
     }
   }
 
-  const tokenizeCard = (error, microformInstance) => {
-    if (error) {
-      return;
-    }
-
-    cybersourceInstanceRef.current = microformInstance;
-  };
+  // No longer needed - microform instance is stored directly in initCybersourceScript
 
   const appendCybersourceFingerprintScripts = () => {
     const uniqueId = crypto.randomUUID();
@@ -497,6 +654,14 @@ const PaymentMethodContainerWithoutStripe = ({
   };
 
   const initCybersourceScript = () => {
+    // Clear existing card number field before reinitializing
+    const cardNumberElement = document.querySelector(
+      "#cybersourceCardNumber"
+    );
+    if (cardNumberElement) {
+      cardNumberElement.innerHTML = "";
+    }
+
     // jwk api call
     window.Pelcro.payment.getJWK(
       {
@@ -517,15 +682,21 @@ const PaymentMethodContainerWithoutStripe = ({
           });
         }
 
-        const { key: jwk } = res;
-        // SETUP MICROFORM
-        // eslint-disable-next-line no-undef
-        FLEX.microform(
-          {
-            keyId: jwk.kid,
-            keystore: jwk,
-            container: "#cybersourceCardNumber",
-            placeholder: "Card Number",
+        const { key: jwk, captureContext, js_client } = res;
+
+        // Load the SDK from the dynamic URL (if not already loaded)
+        const existingScript = document.querySelector(
+          `script[src="${js_client}"]`
+        );
+        if (!existingScript) {
+          window.Pelcro.helpers.loadSDK(js_client, "cybersource-cdn");
+        }
+
+        const initializeMicroform = () => {
+          // SETUP MICROFORM
+          // eslint-disable-next-line no-undef
+          const flex = new Flex(captureContext);
+          const microform = flex.microform({
             styles: {
               input: {
                 "font-size": "14px",
@@ -538,9 +709,26 @@ const PaymentMethodContainerWithoutStripe = ({
               valid: { color: "#3c763d" },
               invalid: { color: "#a94442" }
             }
-          },
-          tokenizeCard
-        );
+          });
+
+          const number = microform.createField("number", {
+            placeholder: "Enter your card number"
+          });
+          number.load("#cybersourceCardNumber");
+
+          cybersourceInstanceRef.current = microform;
+        };
+
+        // Wait for SDK to load then initialize microform
+        if (existingScript) {
+          // Script already loaded, initialize immediately
+          initializeMicroform();
+        } else {
+          // Wait for new script to load
+          document
+            .querySelector(`script[src="${js_client}"]`)
+            .addEventListener("load", initializeMicroform);
+        }
       }
     );
   };
@@ -924,8 +1112,8 @@ const PaymentMethodContainerWithoutStripe = ({
   };
   /* ====== End Tap integration ======== */
 
-  /* ====== Start Braintree integration ======== */
-  const braintreeInstanceRef = React.useRef(null);
+  /* ====== Start Braintree Drop-in UI integration ======== */
+  const braintreeDropinRef = React.useRef(null);
   const braintree3DSecureInstanceRef = React.useRef(null);
 
   function getClientToken() {
@@ -951,6 +1139,10 @@ const PaymentMethodContainerWithoutStripe = ({
     if (skipPayment && (plan?.amount === 0 || props?.freeOrders))
       return;
     if (cardProcessor === "braintree" && !selectedPaymentMethodId) {
+      // Clear container before initializing
+      const dropinContainer = document.getElementById("dropin-container");
+      if (dropinContainer) dropinContainer.innerHTML = "";
+      
       const braintreeToken = await getClientToken();
 
       const isBraintreeEnabled = Boolean(braintreeToken);
@@ -962,13 +1154,47 @@ const PaymentMethodContainerWithoutStripe = ({
         return;
       }
 
+      console.log("braintreeToken", plan);
+
       if (type !== "updatePaymentSource") {
-        braintreeInstanceRef.current =
-          new window.braintree.client.create({
-            authorization: braintreeToken
-          }).then((clientInstance) => {
-            const options = {
-              authorization: braintreeToken,
+        console.log(
+          "Setting skeleton loader to true at start of Braintree initialization"
+        );
+        dispatch({
+          type: SKELETON_LOADER,
+          payload: true
+        });
+
+        try {
+          // Ensure the DOM element exists before creating Drop-in UI
+          const dropinContainer = document.querySelector(
+            "#dropin-container"
+          );
+          if (!dropinContainer) {
+            console.error(
+              "Drop-in container not found. Waiting for DOM to be ready..."
+            );
+            dispatch({
+              type: SKELETON_LOADER,
+              payload: false
+            });
+            return;
+          }
+          
+          // Small delay to ensure DOM is fully rendered
+          await new Promise((resolve) => setTimeout(resolve, 100));
+
+          // Calculate Google Pay amount using the same logic as Apple Pay
+          const totalAmount = calculateTotalAmount(state, plan, invoice, order);
+          const currency = getCurrencyFromPaymentType(plan, order, invoice);
+          const googlePayAmount = formatPaymentAmount(totalAmount, currency, "Google Pay");
+
+          // Create Braintree Drop-in UI instance
+          braintreeDropinRef.current = await createBraintreeDropin(
+            braintreeToken,
+            "#dropin-container",
+            {
+              // Customize the Drop-in UI appearance
               styles: {
                 input: {
                   "font-size": "14px"
@@ -980,141 +1206,195 @@ const PaymentMethodContainerWithoutStripe = ({
                   color: "green"
                 }
               },
-              fields: {
-                number: {
-                  container: "#card-number",
-                  placeholder: "4111 1111 1111 1111"
+              // Disable PayPal to avoid conflicts with existing PayPal SDK
+              // paypal: {
+              //   flow: "vault"
+              // },
+              // Enable Apple Pay if available
+              applePay: {
+                displayName:
+                  window.Pelcro.site.read()?.name || "Pelcro",
+                paymentRequest: {
+                  total: {
+                    label: getPaymentLabel(plan, order, invoice),
+                    amount: (() => {
+                      const totalAmount = calculateTotalAmount(
+                        state,
+                        plan,
+                        invoice,
+                        order
+                      );
+                      const currency = getCurrencyFromPaymentType(
+                        plan,
+                        order,
+                        invoice
+                      );
+                      return formatPaymentAmount(
+                        totalAmount,
+                        currency,
+                        "Apple Pay"
+                      );
+                    })()
+                  }
+                }
+              },
+              // Enable Google Pay for both orders and subscriptions
+              googlePay: {
+                googlePayVersion: 2,
+                merchantId:
+                  window.Pelcro.site.read()?.google_merchant_id,
+                transactionInfo: {
+                  totalPriceStatus: "FINAL",
+                  totalPrice: googlePayAmount,
+                  currencyCode: (() => {
+                    const currency = getCurrencyFromPaymentType(
+                      plan,
+                      order,
+                      invoice
+                    );
+                    return currency?.toUpperCase() || "USD";
+                  })()
                 },
-                cvv: {
-                  container: "#cvv",
-                  placeholder: "123"
-                },
-                expirationDate: {
-                  container: "#expiration-date",
-                  placeholder: "10/2022"
+                // Add button configuration
+                button: {
+                  color: "black",
+                  type: type === "createPayment" ? "subscribe" : "buy"
                 }
               }
-            };
-            dispatch({
-              type: SKELETON_LOADER,
-              payload: true
+            }
+          );
+
+          // Initialize 3D Secure for additional security
+          braintree3DSecureInstanceRef.current =
+            new window.braintree.threeDSecure.create({
+              version: 2,
+              authorization: braintreeToken
+            }).then((threeDSecureInstance) => {
+              return threeDSecureInstance;
             });
 
-            braintree3DSecureInstanceRef.current =
-              new window.braintree.threeDSecure.create({
-                version: 2,
-                authorization: braintreeToken
-              }).then((threeDSecureInstance) => {
-                return threeDSecureInstance;
-              });
-
-            return window.braintree.hostedFields.create(options);
+          console.log(
+            "Setting skeleton loader to false after successful Braintree initialization"
+          );
+          dispatch({
+            type: SKELETON_LOADER,
+            payload: false
           });
 
-        braintreeInstanceRef.current.then((hostedFieldInstance) => {
-          hostedFieldInstance.on("notEmpty", function (event) {
-            const field = event.fields[event.emittedBy];
-            if (field.isPotentiallyValid) {
-              field.container.classList.remove(
-                "pelcro-input-invalid"
-              );
+          // Clear any error alerts that were shown during initialization
+          dispatch({
+            type: SHOW_ALERT,
+            payload: {
+              type: "error",
+              content: ""
             }
           });
+        } catch (error) {
+          console.error(
+            "Failed to initialize Braintree Drop-in UI:",
+            error
+          );
 
-          hostedFieldInstance.on("validityChange", function (event) {
-            const field = event.fields[event.emittedBy];
+          // Check if it's a Google Pay specific error
+          if (
+            error?.message?.includes("OR_BIBED_06") ||
+            error?.message?.includes("Google Pay")
+          ) {
+            console.warn(
+              "Google Pay configuration issue detected. " +
+                `Transaction type: ${type}. ` +
+                "This might be due to merchant settings or unsupported payment flow."
+            );
+          }
 
-            // Remove any previously applied error or warning classes
-            field.container.classList.remove("is-valid");
-            field.container.classList.remove("pelcro-input-invalid");
-
-            if (field.isValid) {
-              field.container.classList.add("is-valid");
-            } else if (field.isPotentiallyValid) {
-              // skip adding classes if the field is
-              // not valid, but is potentially valid
-            } else {
-              field.container.classList.add("pelcro-input-invalid");
-            }
+          dispatch({
+            type: SKELETON_LOADER,
+            payload: false
           });
-        });
+
+          // Don't show error to user for Google Pay configuration issues
+          // as it's expected for subscriptions
+          if (!error?.message?.includes("OR_BIBED_06") && !error?.message?.includes("Google Pay")) {
+            dispatch({
+              type: SHOW_ALERT,
+              payload: {
+                type: "error",
+                content:
+                  "Failed to initialize payment form. Please refresh and try again."
+              }
+            });
+          }
+        }
       } else if (
         type == "updatePaymentSource" &&
         paymentMethodToEdit
       ) {
+        // For updating payment methods, we still use hosted fields
+        // as Drop-in UI doesn't support partial updates
         const { properties } = paymentMethodToEdit ?? {};
         const { exp_month: expMonth, exp_year: expYear } =
           properties ?? {};
-        braintreeInstanceRef.current =
-          new window.braintree.client.create({
-            authorization: braintreeToken
-          }).then((clientInstance) => {
-            const options = {
-              client: clientInstance,
-              styles: {
-                input: {
-                  "font-size": "14px"
-                },
-                "input.invalid": {
-                  color: "red"
-                },
-                "input.valid": {
-                  color: "green"
-                }
-              },
-              fields: {
-                expirationMonth: {
-                  container: "#expiration-month",
-                  prefill: expMonth
-                },
-                expirationYear: {
-                  container: "#expiration-year",
-                  prefill: expYear
-                }
-              }
-            };
-            dispatch({
-              type: SKELETON_LOADER,
-              payload: true
+
+        dispatch({
+          type: SKELETON_LOADER,
+          payload: true
+        });
+
+        try {
+          const clientInstance =
+            await new window.braintree.client.create({
+              authorization: braintreeToken
             });
 
-            return window.braintree.hostedFields.create(options);
-          });
-
-        braintreeInstanceRef.current.then((hostedFieldInstance) => {
-          hostedFieldInstance.on("notEmpty", function (event) {
-            const field = event.fields[event.emittedBy];
-            if (field.isPotentiallyValid) {
-              field.container.classList.remove(
-                "pelcro-input-invalid"
-              );
+          const options = {
+            client: clientInstance,
+            styles: {
+              input: {
+                "font-size": "14px"
+              },
+              "input.invalid": {
+                color: "red"
+              },
+              "input.valid": {
+                color: "green"
+              }
+            },
+            fields: {
+              expirationMonth: {
+                container: "#expiration-month",
+                prefill: expMonth
+              },
+              expirationYear: {
+                container: "#expiration-year",
+                prefill: expYear
+              },
+              cvv: {
+                container: "#cvv"
+              }
             }
+          };
+
+          braintreeDropinRef.current =
+            await window.braintree.hostedFields.create(options);
+
+          // dispatch({
+          //   type: SKELETON_LOADER,
+          //   payload: false
+          // });
+        } catch (error) {
+          console.error(
+            "Failed to initialize Braintree hosted fields:",
+            error
+          );
+          dispatch({
+            type: SKELETON_LOADER,
+            payload: false
           });
-
-          hostedFieldInstance.on("validityChange", function (event) {
-            const field = event.fields[event.emittedBy];
-
-            // Remove any previously applied error or warning classes
-            field.container.classList.remove("is-valid");
-            field.container.classList.remove("pelcro-input-invalid");
-
-            if (field.isValid) {
-              field.container.classList.add("is-valid");
-            } else if (field.isPotentiallyValid) {
-              // skip adding classes if the field is
-              // not valid, but is potentially valid
-            } else {
-              field.container.classList.add("pelcro-input-invalid");
-            }
-          });
-        });
+        }
       }
     }
   }
 
-  useEffect(() => {
-    initializeBraintree();
-  }, [selectedPaymentMethodId, paymentMethodToEdit]);
 
   const braintreeErrorHandler = (tokenizeErr) => {
     const cardNumber = document.querySelector("#card-number");
@@ -1186,10 +1466,23 @@ const PaymentMethodContainerWithoutStripe = ({
       return handleBraintreePayment(null, state.couponCode);
     }
 
-    if (!braintreeInstanceRef.current) {
-      return console.error(
-        "Braintree sdk script wasn't loaded, you need to load braintree sdk before rendering the braintree payment flow"
+    if (!braintreeDropinRef.current) {
+      console.error(
+        "Braintree Drop-in UI wasn't initialized, please try again"
       );
+      dispatch({
+        type: DISABLE_SUBMIT,
+        payload: false
+      });
+      dispatch({ type: LOADING, payload: false });
+      return dispatch({
+        type: SHOW_ALERT,
+        payload: {
+          type: "error",
+          content:
+            "Braintree Drop-in UI wasn't initialized, please try again"
+        }
+      });
     }
 
     const getOrderItemsTotal = () => {
@@ -1218,27 +1511,24 @@ const PaymentMethodContainerWithoutStripe = ({
       invoice?.amount_remaining ??
       getOrderItemsTotal();
 
-    braintreeInstanceRef.current
-      .then((hostedFieldInstance) => {
-        hostedFieldInstance.tokenize((tokenizeErr, payload) => {
-          if (tokenizeErr) {
-            dispatch({ type: DISABLE_SUBMIT, payload: false });
-            dispatch({ type: LOADING, payload: false });
-            return dispatch({
-              type: SHOW_ALERT,
-              payload: {
-                type: "error",
-                content: braintreeErrorHandler(tokenizeErr)
-              }
-            });
-          }
+    dispatch({ type: LOADING, payload: true });
+    dispatch({ type: DISABLE_SUBMIT, payload: true });
 
-          if (
-            type == "updatePaymentSource" ||
-            type == "deletePaymentSource"
-          ) {
-            handleBraintreePayment(payload, state.couponCode);
-          } else {
+    // Use appropriate method based on payment type
+    const paymentMethodPromise = type === "updatePaymentSource" 
+      ? requestBraintreeHostedFieldsPaymentMethod(braintreeDropinRef.current)
+      : requestBraintreePaymentMethod(braintreeDropinRef.current);
+
+    paymentMethodPromise
+      .then((payload) => {
+        if (
+          type == "updatePaymentSource" ||
+          type == "deletePaymentSource"
+        ) {
+          handleBraintreePayment(payload, state.couponCode);
+        } else {
+          // For new payments, use 3D Secure if available
+          if (braintree3DSecureInstanceRef.current) {
             braintree3DSecureInstanceRef.current.then(
               (threeDSecureInstance) => {
                 threeDSecureInstance
@@ -1246,17 +1536,17 @@ const PaymentMethodContainerWithoutStripe = ({
                     onLookupComplete: function (data, next) {
                       next();
                     },
-                    amount: totalAmount ?? "0.00",
+                    amount: totalAmount ? (totalAmount / 100).toFixed(2) : "0.00",
                     nonce: payload.nonce,
                     bin: payload.details.bin
                   })
-                  .then((payload) => {
-                    if (payload.liabilityShifted) {
+                  .then((securePayload) => {
+                    if (securePayload.liabilityShifted) {
                       handleBraintreePayment(
-                        payload,
+                        securePayload,
                         state.couponCode
                       );
-                    } else if (payload.liabilityShiftPossible) {
+                    } else if (securePayload.liabilityShiftPossible) {
                       dispatch({
                         type: DISABLE_SUBMIT,
                         payload: false
@@ -1305,14 +1595,23 @@ const PaymentMethodContainerWithoutStripe = ({
                   });
               }
             );
+          } else {
+            // If 3D Secure is not available, proceed with regular payment
+            handleBraintreePayment(payload, state.couponCode);
           }
-        });
+        }
       })
       .catch((error) => {
-        if (error) {
-          console.error(error);
-          return;
-        }
+        console.error("Braintree payment error:", error);
+        dispatch({ type: DISABLE_SUBMIT, payload: false });
+        dispatch({ type: LOADING, payload: false });
+        return dispatch({
+          type: SHOW_ALERT,
+          payload: {
+            type: "error",
+            content: braintreeErrorHandler(error)
+          }
+        });
       });
   };
 
@@ -1982,27 +2281,7 @@ const PaymentMethodContainerWithoutStripe = ({
 
       if (
         cardProcessor === "cybersource" &&
-        !selectedPaymentMethodId &&
-        !window.FLEX
-      ) {
-        window.Pelcro.helpers.loadSDK(
-          "https://flex.cybersource.com/cybersource/assets/microform/0.4/flex-microform.min.js",
-          "cybersource-cdn"
-        );
-
-        document
-          .querySelector(
-            'script[src="https://flex.cybersource.com/cybersource/assets/microform/0.4/flex-microform.min.js"]'
-          )
-          .addEventListener("load", () => {
-            initCybersourceScript();
-          });
-      }
-
-      if (
-        cardProcessor === "cybersource" &&
-        !selectedPaymentMethodId &&
-        window.FLEX
+        !selectedPaymentMethodId
       ) {
         initCybersourceScript();
       }
@@ -2261,11 +2540,17 @@ const PaymentMethodContainerWithoutStripe = ({
               quantity: item.quantity
             }));
 
+        const orderSummaryParams = {
+          items: mappedOrderItems,
+          coupon_code: couponCode
+        };
+
+        if (window.Pelcro.site.read()?.taxes_enabled) {
+          orderSummaryParams.address_id = selectedAddressId;
+        }
+
         window.Pelcro.ecommerce.order.createSummary(
-          {
-            items: mappedOrderItems,
-            coupon_code: couponCode
-          },
+          orderSummaryParams,
           handleCouponResponse
         );
       }
@@ -2606,7 +2891,9 @@ const PaymentMethodContainerWithoutStripe = ({
           address_id: product.address_required
             ? selectedAddressId
             : null,
-          metadata: props?.subCreateMetadata
+          metadata: props?.subCreateMetadata,
+          cardExpirationMonth: state?.month,
+          cardExpirationYear: state?.year
         },
         (err, res) => {
           if (res?.data?.setup_intent) {
@@ -2792,7 +3079,9 @@ const PaymentMethodContainerWithoutStripe = ({
         isExistingSource: Boolean(selectedPaymentMethodId),
         items: mappedOrderItems,
         addressId: selectedAddressId,
-        couponCode
+        couponCode,
+        cardExpirationMonth: state?.month,
+        cardExpirationYear: state?.year
       },
       (err, orderResponse) => {
         if (err) {
@@ -2879,63 +3168,83 @@ const PaymentMethodContainerWithoutStripe = ({
     );
   };
 
-  const createPaymentSource = (state, dispatch) => {
-    return stripe
-      .createSource({ type: "card" })
-      .then(({ source, error }) => {
-        if (error) {
-          return handlePaymentError(error);
-        }
-
-        // We don't support source creation for 3D secure yet
-        // if (source?.card?.three_d_secure === "required") {
-        //   return handlePaymentError({
-        //     error: {
-        //       message: t("messages.cardAuthNotSupported")
-        //     }
-        //   });
-        // }
-
-        window.Pelcro.paymentMethods.create(
-          {
-            auth_token: window.Pelcro.user.read().auth_token,
-            token: source.id
-          },
-          (err, res) => {
-            if (err) {
-              dispatch({ type: DISABLE_SUBMIT, payload: false });
-              dispatch({ type: LOADING, payload: false });
-              onFailure(err);
-              return dispatch({
-                type: SHOW_ALERT,
-                payload: {
-                  type: "error",
-                  content: getErrorMessages(err)
-                }
-              });
-            }
-
-            if (
-              res.data?.setup_intent?.status === "requires_action" ||
-              res.data?.setup_intent?.status ===
-                "requires_confirmation"
-            ) {
-              confirmStripeIntentSetup(res, "create");
-            } else {
-              dispatch({ type: LOADING, payload: false });
-              dispatch({
-                type: SHOW_ALERT,
-                payload: {
-                  type: "success",
-                  content: t("messages.sourceCreated")
-                }
-              });
-              refreshUser();
-              onSuccess(res);
-            }
-          }
-        );
+  const createPaymentSource = async (state, dispatch) => {
+    if (!stripe || !elements) {
+      return handlePaymentError({
+        message: "Stripe has not loaded yet. Please try again."
       });
+    }
+
+    try {
+      // Submit the form to validate
+      const { error: submitError } = await elements.submit();
+      if (submitError) {
+        return handlePaymentError(submitError);
+      }
+
+      // Create payment method using the modern API
+      const { error, setupIntent } = await stripe.confirmSetup({
+        elements,
+        confirmParams: {
+          return_url: window.location.href
+        },
+        redirect: "if_required"
+      });
+
+      if (error) {
+        return handlePaymentError(error);
+      }
+
+      // Get the payment method ID from the setup intent
+      const paymentMethodId = setupIntent?.payment_method;
+
+      if (!paymentMethodId) {
+        return handlePaymentError({
+          message: "Failed to create payment method"
+        });
+      }
+
+      window.Pelcro.paymentMethods.create(
+        {
+          auth_token: window.Pelcro.user.read().auth_token,
+          token: paymentMethodId
+        },
+        (err, res) => {
+          if (err) {
+            dispatch({ type: DISABLE_SUBMIT, payload: false });
+            dispatch({ type: LOADING, payload: false });
+            onFailure(err);
+            return dispatch({
+              type: SHOW_ALERT,
+              payload: {
+                type: "error",
+                content: getErrorMessages(err)
+              }
+            });
+          }
+
+          if (
+            res.data?.setup_intent?.status === "requires_action" ||
+            res.data?.setup_intent?.status === "requires_confirmation"
+          ) {
+            confirmStripeIntentSetup(res, "create");
+          } else {
+            dispatch({ type: LOADING, payload: false });
+            dispatch({
+              type: SHOW_ALERT,
+              payload: {
+                type: "success",
+                content: t("messages.sourceCreated")
+              }
+            });
+            refreshUser();
+            onSuccess(res);
+          }
+        }
+      );
+    } catch (error) {
+      return handlePaymentError(error);
+    }
   };
 
   const updatePaymentSource = (state, dispatch) => {
@@ -2984,84 +3293,100 @@ const PaymentMethodContainerWithoutStripe = ({
     );
   };
 
-  const replacePaymentSource = (state, dispatch) => {
+  const replacePaymentSource = async (state, dispatch) => {
     const { id: paymentMethodId } = paymentMethodToDelete;
 
-    return stripe
-      .createSource({ type: "card" })
-      .then(({ source, error }) => {
-        if (error) {
-          return handlePaymentError(error);
-        }
-
-        // We don't support source creation for 3D secure yet
-        // if (source?.card?.three_d_secure === "required") {
-        //   return handlePaymentError({
-        //     error: {
-        //       message: t("messages.cardAuthNotSupported")
-        //     }
-        //   });
-        // }
-
-        window.Pelcro.paymentMethods.create(
-          {
-            auth_token: window.Pelcro.user.read().auth_token,
-            token: source.id
-          },
-          (err, res) => {
-            if (err) {
-              onFailure(err);
-              return dispatch({
-                type: SHOW_ALERT,
-                payload: {
-                  type: "error",
-                  content: getErrorMessages(err)
-                }
-              });
-            }
-
-            if (
-              res.data?.setup_intent?.status === "requires_action" ||
-              res.data?.setup_intent?.status ===
-                "requires_confirmation"
-            ) {
-              confirmStripeIntentSetup(
-                res,
-                "replace",
-                paymentMethodId
-              );
-            } else {
-              setTimeout(() => {
-                window.Pelcro.paymentMethods.deletePaymentMethod(
-                  {
-                    auth_token: window.Pelcro.user.read().auth_token,
-                    payment_method_id: paymentMethodId
-                  },
-                  (err, res) => {
-                    dispatch({
-                      type: DISABLE_SUBMIT,
-                      payload: false
-                    });
-                    dispatch({ type: LOADING, payload: false });
-                    if (err) {
-                      onFailure?.(err);
-                      return dispatch({
-                        type: SHOW_ALERT,
-                        payload: {
-                          type: "error",
-                          content: getErrorMessages(err)
-                        }
-                      });
-                    }
-                    refreshUser();
-                    onSuccess(res);
-                  }
-                );
-              }, 2000);
-            }
-          }
-        );
+    if (!stripe || !elements) {
+      return handlePaymentError({
+        message: "Stripe has not loaded yet. Please try again."
       });
+    }
+
+    try {
+      // Submit the form to validate
+      const { error: submitError } = await elements.submit();
+      if (submitError) {
+        return handlePaymentError(submitError);
+      }
+
+      // Create payment method using the modern API
+      const { error, setupIntent } = await stripe.confirmSetup({
+        elements,
+        confirmParams: {
+          return_url: window.location.href
+        },
+        redirect: "if_required"
+      });
+
+      if (error) {
+        return handlePaymentError(error);
+      }
+
+      // Get the payment method ID from the setup intent
+      const newPaymentMethodId = setupIntent?.payment_method;
+
+      if (!newPaymentMethodId) {
+        return handlePaymentError({
+          message: "Failed to create payment method"
+        });
+      }
+
+      window.Pelcro.paymentMethods.create(
+        {
+          auth_token: window.Pelcro.user.read().auth_token,
+          token: newPaymentMethodId
+        },
+        (err, res) => {
+          if (err) {
+            onFailure(err);
+            return dispatch({
+              type: SHOW_ALERT,
+              payload: {
+                type: "error",
+                content: getErrorMessages(err)
+              }
+            });
+          }
+
+          if (
+            res.data?.setup_intent?.status === "requires_action" ||
+            res.data?.setup_intent?.status === "requires_confirmation"
+          ) {
+            confirmStripeIntentSetup(res, "replace", paymentMethodId);
+          } else {
+            setTimeout(() => {
+              window.Pelcro.paymentMethods.deletePaymentMethod(
+                {
+                  auth_token: window.Pelcro.user.read().auth_token,
+                  payment_method_id: paymentMethodId
+                },
+                (err, res) => {
+                  dispatch({
+                    type: DISABLE_SUBMIT,
+                    payload: false
+                  });
+                  dispatch({ type: LOADING, payload: false });
+                  if (err) {
+                    onFailure?.(err);
+                    return dispatch({
+                      type: SHOW_ALERT,
+                      payload: {
+                        type: "error",
+                        content: getErrorMessages(err)
+                      }
+                    });
+                  }
+                  refreshUser();
+                  onSuccess(res);
+                }
+              );
+            }, 2000);
+          }
+        }
+      );
+    } catch (error) {
+      return handlePaymentError(error);
+    }
   };
 
   const updatePaymentRequest = (state) => {
@@ -3122,7 +3447,7 @@ const PaymentMethodContainerWithoutStripe = ({
     );
   };
 
-  const submitPayment = (state, dispatch) => {
+  const submitPayment = async (state, dispatch) => {
     if (skipPayment && props?.freeOrders) {
       const isQuickPurchase = !Array.isArray(order);
       const mappedOrderItems = isQuickPurchase
@@ -3136,7 +3461,9 @@ const PaymentMethodContainerWithoutStripe = ({
           items: mappedOrderItems,
           campaign_key:
             window.Pelcro.helpers.getURLParameter("campaign_key"),
-          ...(selectedAddressId && { address_id: selectedAddressId })
+          ...(selectedAddressId && { address_id: selectedAddressId }),
+          card_expiration_month: state?.month,
+          card_expiration_year: state?.year
         },
         (err, res) => {
           if (err) {
@@ -3147,44 +3474,53 @@ const PaymentMethodContainerWithoutStripe = ({
       );
       return;
     }
-    stripe
-      .createSource({ type: "card" })
-      .then(({ source, error }) => {
-        if (error) {
-          return handlePaymentError(error);
-        }
 
-        const getOrderItemsTotal = () => {
-          if (!order) {
-            return null;
-          }
-
-          const isQuickPurchase = !Array.isArray(order);
-
-          if (isQuickPurchase) {
-            return order.price * order.quantity;
-          }
-
-          if (order.length === 0) {
-            return null;
-          }
-
-          return order.reduce((total, item) => {
-            return total + item.price * item.quantity;
-          }, 0);
-        };
-
-        const totalAmount =
-          state?.updatedPrice ??
-          plan?.amount ??
-          invoice?.amount_remaining ??
-          getOrderItemsTotal();
-
-        return handlePayment(source);
-      })
-      .catch((error) => {
-        return handlePaymentError(error);
+    // Modern Stripe Elements API
+    if (!stripe || !elements) {
+      return handlePaymentError({
+        message: "Stripe has not loaded yet. Please try again."
       });
+    }
+
+    try {
+      // Submit the form to validate
+      const { error: submitError } = await elements.submit();
+      if (submitError) {
+        return handlePaymentError(submitError);
+      }
+
+      // Create payment method using the modern API
+      const { error, setupIntent } = await stripe.confirmSetup({
+        elements,
+        confirmParams: {
+          return_url: window.location.href
+        },
+        redirect: "if_required"
+      });
+
+      if (error) {
+        return handlePaymentError(error);
+      }
+
+      // Get the payment method ID from the setup intent
+      const paymentMethodId = setupIntent?.payment_method;
+
+      if (!paymentMethodId) {
+        return handlePaymentError({
+          message: "Failed to create payment method"
+        });
+      }
+
+      // Create a source-like object for compatibility with existing code
+      const source = {
+        id: paymentMethodId,
+        type: "card"
+      };
+
+      return handlePayment(source);
+    } catch (error) {
+      return handlePaymentError(error);
+    }
   };
 
   /**
@@ -3693,6 +4029,10 @@ const PaymentMethodContainerWithoutStripe = ({
     initialState
   );
 
+  useEffect(() => {
+    initializeBraintree();
+  }, [selectedPaymentMethodId, paymentMethodToEdit, state.updatedPrice]);
+
   return (
     <div
       style={{ ...style }}
@@ -3711,38 +4051,83 @@ const PaymentMethodContainerWithoutStripe = ({
   );
 };
 
-const UnwrappedForm = injectStripe(
-  PaymentMethodContainerWithoutStripe
-);
-
 const PaymentMethodContainer = (props) => {
   const [isStripeLoaded, setIsStripeLoaded] = useState(
     Boolean(window.Stripe)
   );
-  const { whenUserReady } = usePelcro.getStore();
+  const { whenUserReady, selectedPaymentMethodId } =
+    usePelcro.getStore();
   const cardProcessor = getSiteCardProcessor();
 
-  useEffect(() => {
-    if (!window.Stripe && cardProcessor === "stripe") {
-      document
-        .querySelector('script[src="https://js.stripe.com/v3"]')
-        .addEventListener("load", () => {
-          setIsStripeLoaded(true);
-        });
+  // Create the Stripe object
+  const stripePromise =
+    cardProcessor === "stripe"
+      ? loadStripe(window.Pelcro.environment.stripe, {
+          stripeAccount: window.Pelcro.site.read().account_id,
+          locale: getPageOrDefaultLanguage()
+        })
+      : null;
+
+  const [clientSecret, setClientSecret] = useState();
+
+  const appearance = {
+    theme: "stripe",
+    labels: "floating",
+    variables: {
+      colorPrimary:
+        window?.Pelcro?.site?.read()?.design_settings?.primary_color
     }
-  }, []);
+  };
+
+  const options = {
+    clientSecret,
+    paymentMethodCreation: "manual",
+    appearance,
+    loader: "always"
+  };
+
+  useEffect(() => {
+    if (isStripeLoaded && !selectedPaymentMethodId) {
+      window.Pelcro.user.createSetupIntent?.(
+        { auth_token: window.Pelcro.user.read().auth_token },
+        (err, res) => {
+          if (err) {
+            console.error(err);
+          }
+          if (res) {
+            setClientSecret(res.data.client_secret);
+          }
+        }
+      );
+    }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    whenUserReady(() => {
+      if (!window.Stripe && cardProcessor === "stripe") {
+        document
+          .querySelector('script[src="https://js.stripe.com/v3"]')
+          .addEventListener("load", () => {
+            setIsStripeLoaded(true);
+          });
+      }
+    });
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (isStripeLoaded) {
     return (
-      <StripeProvider
-        apiKey={window.Pelcro.environment.stripe}
-        stripeAccount={window.Pelcro.site.read().account_id}
-        locale={getPageOrDefaultLanguage()}
-      >
-        <Elements>
-          <UnwrappedForm store={store} {...props} />
-        </Elements>
-      </StripeProvider>
+      <div>
+        {clientSecret || selectedPaymentMethodId ? (
+          <Elements options={options} stripe={stripePromise}>
+            <PaymentMethodContainerWithoutStripe
+              store={store}
+              {...props}
+            />
+          </Elements>
+        ) : (
+          <Loader />
+        )}
+      </div>
     );
   } else if (cardProcessor !== "stripe") {
     return (

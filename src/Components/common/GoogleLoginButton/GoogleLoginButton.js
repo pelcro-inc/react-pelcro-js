@@ -11,6 +11,7 @@ export const GoogleLoginButton = ({
   labelClassName = "",
   iconClassName = ""
 }) => {
+  const { t } = useTranslation("login");
   const googleClientId = window.Pelcro.site.read()?.google_app_id;
 
   const { dispatch: loginDispatch } = useContext(loginStore);
