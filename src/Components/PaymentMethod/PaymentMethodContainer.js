@@ -1109,18 +1109,6 @@ const formatPaymentAmount = (
          });
  
          try {
-           // Tear down existing instance if it exists
-           if (braintreeDropinRef.current) {
-             console.log("Tearing down existing Braintree Drop-in instance");
-             try {
-               await braintreeDropinRef.current.teardown();
-               braintreeDropinRef.current = null;
-             } catch (teardownError) {
-               console.warn("Error tearing down Braintree Drop-in:", teardownError);
-               braintreeDropinRef.current = null;
-             }
-           }
-
            // Ensure the DOM element exists before creating Drop-in UI
            const dropinContainer = document.querySelector(
              "#dropin-container"
@@ -1135,10 +1123,7 @@ const formatPaymentAmount = (
              });
              return;
            }
-
-           // Clear the container to ensure it's empty (required by Braintree)
-           dropinContainer.innerHTML = '';
-
+           
            // Small delay to ensure DOM is fully rendered
            await new Promise((resolve) => setTimeout(resolve, 100));
  
