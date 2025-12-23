@@ -1185,7 +1185,7 @@ const formatPaymentAmount = (
                googlePay: {
                  googlePayVersion: 2,
                  merchantId:
-                   window.Pelcro.site.read()?.google_merchant_id,
+                   window.Pelcro.site.read()?.braintree_gateway_settings?.google_pay_merchant_id,
                  transactionInfo: {
                    totalPriceStatus: "FINAL",
                    totalPrice: googlePayAmount,
@@ -1196,12 +1196,13 @@ const formatPaymentAmount = (
                        invoice
                      );
                      return currency?.toUpperCase() || "USD";
-                   })()
+                   })(),
+                   countryCode: "US"  // Required for production Google Pay
                  },
                  // Add button configuration
                  button: {
                    color: "black",
-                   type: type === "createPayment" ? "subscribe" : "buy"
+                   type: "buy"  // Always use "buy" - "subscribe" type causes OR_BIBED_11 error
                  }
                }
              }
@@ -1232,6 +1233,7 @@ const formatPaymentAmount = (
            // Check if it's a Google Pay specific error
            if (
              error?.message?.includes("OR_BIBED_06") ||
+             error?.message?.includes("OR_BIBED_11") ||
              error?.message?.includes("Google Pay")
            ) {
              console.warn(
@@ -1248,7 +1250,7 @@ const formatPaymentAmount = (
  
            // Don't show error to user for Google Pay configuration issues
            // as it's expected for subscriptions
-           if (!error?.message?.includes("OR_BIBED_06") && !error?.message?.includes("Google Pay")) {
+           if (!error?.message?.includes("OR_BIBED_06") && !error?.message?.includes("OR_BIBED_11") && !error?.message?.includes("Google Pay")) {
              dispatch({
                type: SHOW_ALERT,
                payload: {
