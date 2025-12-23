@@ -1,3 +1,10 @@
+# [3.54.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.53.0...v3.54.0) (2025-12-23)
+
+
+### Features
+
+* Braintree Production Checklist ([4bead43](https://github.com/pelcro-inc/react-pelcro-js/commit/4bead4381f6d4bb7ba89ae02c777ef8794bae558))
+
 # [3.52.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.51.0...v3.52.0) (2025-10-22)
 
 
