@@ -13,6 +13,7 @@ const config = {
   coverageReporters: ["text", "json", "html"],
   verbose: true,
   testPathIgnorePatterns: ["<rootDir>/__tests__"],
-  testTimeout: 20_000
+  testTimeout: 20_000,
+  setupFiles: ["<rootDir>/jest.setup.js"]
 };
 module.exports = config;
