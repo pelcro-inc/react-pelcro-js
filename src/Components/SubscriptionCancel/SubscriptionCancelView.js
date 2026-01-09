@@ -77,15 +77,15 @@ export const SubscriptionCancelView = (props) => {
           />
           <SubscriptionCancelReason />
 
-          <div className="plc-space-x-0 plc-space-y-3 md:plc-space-x-3 md:plc-space-y-0 plc-w-full plc-flex plc-flex-col md:plc-flex-row plc-items-center plc-justify-center">
+          <div className="plc-gap-3 plc-w-full plc-flex plc-flex-row plc-items-center plc-justify-center">
             <SubscriptionCancelButton
-              className="plc-w-3/4 md:plc-w-2/5"
+              className="plc-whitespace-nowrap"
               subscription={subscriptionToCancel}
             />
 
             <Button
               variant="outline"
-              className="plc-w-3/4 md:plc-w-2/5"
+              className="plc-whitespace-nowrap"
               onClick={() => {
                 switchView("dashboard");
               }}
