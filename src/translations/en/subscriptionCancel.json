@@ -4,7 +4,7 @@
     "cancelReason": "Cancellation reason",
     "endOn": "End on",
     "endImmediately": "End immediately",
-    "cancel": "Cancel",
+    "cancel": "Cancel subscription",
     "subCancellation": {
       "goBack": "Go back"
     }
