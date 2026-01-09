@@ -1,3 +1,10 @@
+# [3.55.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.54.0...v3.55.0) (2026-01-09)
+
+
+### Features
+
+* update button name ([#471](https://github.com/pelcro-inc/react-pelcro-js/issues/471)) ([babda91](https://github.com/pelcro-inc/react-pelcro-js/commit/babda91ff3a1c179d7dad47521a031076b353ee6))
+
 # [3.54.0](https://github.com/pelcro-inc/react-pelcro-js/compare/v3.53.0...v3.54.0) (2025-12-23)
 
 
