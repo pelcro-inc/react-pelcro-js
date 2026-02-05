@@ -170,6 +170,8 @@ const PaymentMethodContainerWithoutStripe = ({
   const plan = props.plan ?? pelcroStore.plan;
   const subscriptionIdToRenew =
     props.subscriptionIdToRenew ?? pelcroStore.subscriptionIdToRenew;
+  const renewalOptions =
+    props.renewalOptions ?? pelcroStore.renewalOptions;
   const selectedAddressId =
     props.selectedAddressId ?? pelcroStore.selectedAddressId;
   const giftRecipient =
@@ -417,7 +419,8 @@ const PaymentMethodContainerWithoutStripe = ({
             product,
             isExistingSource: isUsingExistingPaymentMethod,
             subscriptionIdToRenew,
-            addressId: selectedAddressId
+            addressId: selectedAddressId,
+            renewalOptions
           },
           (err, res) => {
             if (err) {
@@ -833,7 +836,8 @@ const PaymentMethodContainerWithoutStripe = ({
             product,
             isExistingSource: isUsingExistingPaymentMethod,
             subscriptionIdToRenew,
-            addressId: selectedAddressId
+            addressId: selectedAddressId,
+            renewalOptions
           },
           (err, res) => {
             if (err) {
@@ -1546,7 +1550,8 @@ const PaymentMethodContainerWithoutStripe = ({
             product,
             isExistingSource: isUsingExistingPaymentMethod,
             subscriptionIdToRenew,
-            addressId: selectedAddressId
+            addressId: selectedAddressId,
+            renewalOptions
           },
           (err, res) => {
             if (err) {
@@ -1867,7 +1872,8 @@ const PaymentMethodContainerWithoutStripe = ({
             product,
             isExistingSource: isUsingExistingPaymentMethod,
             subscriptionIdToRenew,
-            addressId: selectedAddressId
+            addressId: selectedAddressId,
+            renewalOptions
           },
           (err, res) => {
             if (err) {
@@ -2694,7 +2700,8 @@ const PaymentMethodContainerWithoutStripe = ({
             subscription_id: subscriptionIdToRenew,
             address_id: product.address_required
               ? selectedAddressId
-              : null
+              : null,
+            ...(renewalOptions?.replace_upcoming_phases && { replace_upcoming_phases: true })
           },
           (err, res) => {
             dispatch({ type: DISABLE_SUBMIT, payload: false });

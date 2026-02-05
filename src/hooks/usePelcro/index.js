@@ -17,6 +17,7 @@ export const initialState = {
   giftRecipient: null,
   giftCode: "",
   subscriptionIdToRenew: null,
+  renewalOptions: null,
   subscriptionToManageMembers: null,
   isDonation: false,
   selectedDonationAmount: null,

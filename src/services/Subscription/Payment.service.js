@@ -39,6 +39,7 @@ export class Payment {
    * @property {object} [couponCode]
    * @property {object} [giftRecipient]
    * @property {number} [subscriptionIdToRenew]
+   * @property {object} [renewalOptions]
    * @property {number} [quantity]
    * @property {string} addressId
    * @property {number} invoiceId
@@ -240,7 +241,8 @@ export class StripeGateway {
       plan,
       couponCode,
       product,
-      addressId
+      addressId,
+      renewalOptions = {}
     } = options;
 
     window.Pelcro.subscription.renew(
@@ -252,7 +254,8 @@ export class StripeGateway {
           window.Pelcro.helpers.getURLParameter("campaign_key"),
         coupon_code: couponCode,
         subscription_id: subscriptionIdToRenew,
-        address_id: product.address_required ? addressId : null
+        address_id: product.address_required ? addressId : null,
+        ...(renewalOptions?.replace_upcoming_phases && { replace_upcoming_phases: true })
       },
       (err, res) => {
         callback(err, res);
@@ -553,7 +556,8 @@ export class VantivGateway {
       couponCode,
       product,
       addressId,
-      isExistingSource
+      isExistingSource,
+      renewalOptions = {}
     } = options;
 
     const params = isExistingSource
@@ -574,6 +578,7 @@ export class VantivGateway {
           window.Pelcro.helpers.getURLParameter("campaign_key"),
         subscription_id: subscriptionIdToRenew,
         address_id: product.address_required ? addressId : null,
+        ...(renewalOptions?.replace_upcoming_phases && { replace_upcoming_phases: true }),
         ...params
       },
       (err, res) => {
@@ -813,7 +818,8 @@ export class TapGateway {
       couponCode,
       product,
       addressId,
-      isExistingSource
+      isExistingSource,
+      renewalOptions = {}
     } = options;
 
     const params = isExistingSource
@@ -834,6 +840,7 @@ export class TapGateway {
           window.Pelcro.helpers.getURLParameter("campaign_key"),
         subscription_id: subscriptionIdToRenew,
         address_id: product.address_required ? addressId : null,
+        ...(renewalOptions?.replace_upcoming_phases && { replace_upcoming_phases: true }),
         ...params
       },
       (err, res) => {
@@ -1080,7 +1087,8 @@ export class CybersourceGateway {
       couponCode,
       product,
       addressId,
-      isExistingSource
+      isExistingSource,
+      renewalOptions = {}
     } = options;
     const params = isExistingSource
       ? {
@@ -1100,6 +1108,7 @@ export class CybersourceGateway {
           window.Pelcro.helpers.getURLParameter("campaign_key"),
         subscription_id: subscriptionIdToRenew,
         address_id: product.address_required ? addressId : null,
+        ...(renewalOptions?.replace_upcoming_phases && { replace_upcoming_phases: true }),
         ...params
       },
       (err, res) => {
@@ -1338,7 +1347,8 @@ export class BraintreeGateway {
       couponCode,
       product,
       addressId,
-      isExistingSource
+      isExistingSource,
+      renewalOptions = {}
     } = options;
 
     const params = isExistingSource
@@ -1359,6 +1369,7 @@ export class BraintreeGateway {
           window.Pelcro.helpers.getURLParameter("campaign_key"),
         subscription_id: subscriptionIdToRenew,
         address_id: product.address_required ? addressId : null,
+        ...(renewalOptions?.replace_upcoming_phases && { replace_upcoming_phases: true }),
         ...params
       },
       (err, res) => {
