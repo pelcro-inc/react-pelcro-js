@@ -1,4 +1,4 @@
-import React, { createContext, useEffect } from "react";
+import React, { createContext, useEffect, useRef } from "react";
 import {
   SET_EMAIL,
   SET_PASSWORD,
@@ -64,7 +64,17 @@ const RegisterContainer = ({
   useEffect(() => {
     onDisplay();
   }, []);
+
+  // Guard against duplicate side-effect execution.
+  // React 18 concurrent mode (used by Next.js) can commit through
+  // two scheduling paths on Safari mobile, causing the useEffect in
+  // use-reducer-with-side-effects to fire twice for a single dispatch.
+  const registerInProgress = useRef(false);
+
   const handleRegister = (userData, dispatch) => {
+    if (registerInProgress.current) return;
+    registerInProgress.current = true;
+
     const filteredData = cleanObjectNullValues(userData);
     const {
       email,
@@ -104,6 +114,8 @@ const RegisterContainer = ({
           metadata: { organization, jobTitle, ...selectFields }
         },
         (err, res) => {
+          registerInProgress.current = false;
+
           dispatch({
             type: DISABLE_REGISTRATION_BUTTON,
             payload: false
