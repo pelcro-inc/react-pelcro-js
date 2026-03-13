@@ -75,6 +75,7 @@ import {
   refreshUser
 } from "../../utils/utils";
 import { usePelcro } from "../../hooks/usePelcro";
+import { isBraintreeSDKBlocked } from "../PelcroModalController/PelcroModalController.service";
 
 /**
  * @typedef {Object} PaymentStateType
@@ -3621,8 +3622,44 @@ const PaymentMethodContainer = (props) => {
   const [isStripeLoaded, setIsStripeLoaded] = useState(
     Boolean(window.Stripe)
   );
+  const [sdkBlocked, setSdkBlocked] = useState(false);
   const { whenUserReady } = usePelcro.getStore();
+  const { t } = useTranslation("payment");
   const cardProcessor = getSiteCardProcessor();
+
+  useEffect(() => {
+    const siteUsesBraintree =
+      cardProcessor === "braintree" ||
+      Boolean(window.Pelcro?.site?.read()?.braintree_tokenization);
+
+    if (!siteUsesBraintree) return;
+
+    // Check persistent flag for blocks that fired before this component mounted
+    if (isBraintreeSDKBlocked()) {
+      setSdkBlocked(true);
+      return;
+    }
+
+    // Listen for blocks that may fire after mount (e.g., lazy-loaded scripts)
+    const handleSdkBlocked = (event) => {
+      const blockedId = event?.detail?.scriptId ?? "";
+      if (blockedId.startsWith("braintree")) {
+        setSdkBlocked(true);
+      }
+    };
+
+    document.addEventListener(
+      "PelcroCriticalSDKBlocked",
+      handleSdkBlocked
+    );
+
+    return () => {
+      document.removeEventListener(
+        "PelcroCriticalSDKBlocked",
+        handleSdkBlocked
+      );
+    };
+  }, [cardProcessor]);
 
   useEffect(() => {
     whenUserReady(() => {
@@ -3636,6 +3673,17 @@ const PaymentMethodContainer = (props) => {
       }
     });
   }, []);
+
+  if (sdkBlocked) {
+    return (
+      <div
+        className="plc-p-4 plc-mb-4 plc-text-sm plc-text-red-700 plc-bg-red-50 plc-border plc-border-red-200 plc-rounded pelcro-sdk-blocked-banner"
+        role="alert"
+      >
+        {t("messages.sdkBlocked")}
+      </div>
+    );
+  }
 
   // Ensure we only render Stripe components when Stripe is the processor
   if (isStripeLoaded && cardProcessor === "stripe") {

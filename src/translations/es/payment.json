@@ -30,7 +30,8 @@
     "sourceUpdated": "Tu información de pago se ha actualizado",
     "cardAuthFailed": "No pudimos autenticar tu método de pago. Por favor, elige un método de pago diferente e intenta de nuevo.",
     "cardAuthNotSupported": "Actualmente no es posible actualizar tu método de pago a uno que requiere autenticación. Por favor, utiliza un método de pago diferente o contacta a atención al cliente.",
-    "tryAgainFromInvoice": "No nos fue posible autenticar tu pago, sin embargo, tu suscripción fue creada. Por favor, intenta pagar la factura utilizando otro método de pago desde el panel."
+    "tryAgainFromInvoice": "No nos fue posible autenticar tu pago, sin embargo, tu suscripción fue creada. Por favor, intenta pagar la factura utilizando otro método de pago desde el panel.",
+    "sdkBlocked": "No se pudo cargar el formulario de pago. Por favor, desactiva tu bloqueador de anuncios o extensiones de privacidad y actualiza la página."
   },
   "errors": {
     "": ""
