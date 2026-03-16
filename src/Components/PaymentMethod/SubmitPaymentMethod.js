@@ -141,7 +141,7 @@ export const SubmitPaymentMethod = ({ onClick, ...otherProps }) => {
     >
       {/* Show price on button only if there's a selected plan */}
       {plan ? (
-        <span ref={buttonRef} className="plc-capitalize ">
+        <span key={priceFormatted} ref={buttonRef} className="plc-capitalize ">
           {t("labels.pay")} {priceFormatted && priceFormatted}
         </span>
       ) : (
