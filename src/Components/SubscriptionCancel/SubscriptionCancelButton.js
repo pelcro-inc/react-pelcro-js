@@ -86,7 +86,7 @@ export const SubscriptionCancelButton = ({
     <Button
       onClick={handleCancelClick}
       className={`${className}`}
-      disabled={!cancelationOption}
+      disabled={!cancelationOption || !cancelationReason}
     >
       {t("labels.cancel")}
     </Button>

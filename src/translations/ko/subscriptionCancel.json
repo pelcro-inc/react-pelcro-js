@@ -2,9 +2,14 @@
   "labels": {
     "title": "구독 취소",
     "cancelReason": "취소 사유",
+    "selectReason": "사유 선택",
+    "otherReason": "사유를 구체적으로 설명해 주세요",
     "endOn": "종료",
     "endImmediately": "즉시 종료",
     "cancel": "취소",
+    "cancelReasons": {
+      "other": "기타"
+    },
     "subCancellation": {
       "goBack": "돌아가기"
     }
