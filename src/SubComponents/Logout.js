@@ -4,9 +4,7 @@ import ReactGA4 from "react-ga4";
 
 export const Logout = (props) => {
   const handleLogout = () => {
-    Promise.resolve(window.Pelcro.user.logout()).catch((err) => {
-      console.warn("Logout API call failed:", err);
-    });
+    window.Pelcro.user.logout();
     const enableReactGA4 = window?.Pelcro?.uiSettings?.enableReactGA4;
 
     if (enableReactGA4) {

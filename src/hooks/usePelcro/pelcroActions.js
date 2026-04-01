@@ -227,9 +227,7 @@ export class PelcroActions {
       return console.warn("You are already logged out.");
     }
 
-    Promise.resolve(window.Pelcro.user.logout()).catch((err) => {
-      console.warn("Logout API call failed:", err);
-    });
+    window.Pelcro.user.logout();
     if (enableReactGA4) {
       ReactGA4.event("Logged out", {
         nonInteraction: true
