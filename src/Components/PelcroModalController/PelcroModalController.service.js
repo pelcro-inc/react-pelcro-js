@@ -101,6 +101,38 @@ export const initPaywalls = () => {
   }
 };
 
+/**
+ * Persistent flag indicating whether any Braintree script failed to load.
+ * This survives the timing gap between script loading (app init) and
+ * PaymentMethodContainer mounting (user opens payment view).
+ */
+let _braintreeSDKBlocked = false;
+
+export const isBraintreeSDKBlocked = () => _braintreeSDKBlocked;
+
+/**
+ * Attaches an error listener to a Braintree script element immediately
+ * after loadSDK inserts it. On failure, sets the persistent flag and
+ * dispatches PelcroCriticalSDKBlocked for any already-mounted listeners.
+ */
+const attachBraintreeErrorListener = (scriptId) => {
+  const scriptEl = document.getElementById(scriptId);
+  if (!scriptEl || scriptEl.dataset.pelcroErrorListenerAttached) return;
+  scriptEl.dataset.pelcroErrorListenerAttached = "true";
+
+  scriptEl.addEventListener("error", () => {
+    _braintreeSDKBlocked = true;
+    console.error(
+      `[Pelcro] Critical SDK blocked: ${scriptId}. This is likely caused by an ad blocker or privacy extension.`
+    );
+    document.dispatchEvent(
+      new CustomEvent("PelcroCriticalSDKBlocked", {
+        detail: { scriptId }
+      })
+    );
+  });
+};
+
 export const loadPaymentSDKs = () => {
   // Lazy load stripe's SDK
   const { whenUserReady } = usePelcro.getStore();
@@ -120,10 +152,12 @@ export const loadPaymentSDKs = () => {
     }
   });
 
-  window.Pelcro.helpers.loadSDK(
-    "https://applepay.cdn-apple.com/jsapi/v1/apple-pay-sdk.js",
-    "apple-pay-sdk"
-  );
+  if (window.ApplePaySession) {
+    window.Pelcro.helpers.loadSDK(
+      "https://applepay.cdn-apple.com/jsapi/v1/apple-pay-sdk.js",
+      "apple-pay-sdk"
+    );
+  }
 
   // Load PayPal SDKs
   const supportsPaypal = Boolean(
@@ -135,6 +169,7 @@ export const loadPaymentSDKs = () => {
       "https://js.braintreegateway.com/web/3.99.0/js/client.min.js",
       "braintree-sdk"
     );
+    attachBraintreeErrorListener("braintree-sdk");
   }
 
   if (supportsPaypal) {
@@ -142,21 +177,21 @@ export const loadPaymentSDKs = () => {
       "https://js.braintreegateway.com/web/3.99.0/js/paypal-checkout.min.js",
       "braintree-paypal-sdk"
     );
+    attachBraintreeErrorListener("braintree-paypal-sdk");
   }
 
   if (supportsBraintree) {
-    // window.Pelcro.helpers.loadSDK(
-    //   "https://js.braintreegateway.com/web/3.99.0/js/three-d-secure.min.js",
-    //   "braintree-3D-secure-sdk"
-    // );
     window.Pelcro.helpers.loadSDK(
       "https://js.braintreegateway.com/web/3.99.0/js/hosted-fields.min.js",
       "braintree-hosted-fields-sdk"
     );
+    attachBraintreeErrorListener("braintree-hosted-fields-sdk");
+
     window.Pelcro.helpers.loadSDK(
       "https://js.braintreegateway.com/web/dropin/1.45.1/js/dropin.js",
       "braintree-dropin-sdk"
     );
+    attachBraintreeErrorListener("braintree-dropin-sdk");
   }
 
   // Load Vantiv SDKs

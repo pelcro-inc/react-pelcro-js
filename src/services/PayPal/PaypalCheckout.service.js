@@ -48,6 +48,14 @@ export class PaypalClient {
       return;
     }
 
+    // Guard: check that the Braintree SDK loaded successfully
+    if (!window.braintree?.client) {
+      console.error(
+        "[Pelcro] Braintree SDK is not available. It may have been blocked by an ad blocker or privacy extension, or has not finished loading."
+      );
+      return;
+    }
+
     // initialize braintree/paypal clients
     const braintreeClient = await window.braintree.client.create({
       authorization: this.braintreeToken

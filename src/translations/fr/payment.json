@@ -30,7 +30,8 @@
     "sourceUpdated": "Vos informations de paiement ont été mises à jour",
     "cardAuthFailed": "Nous ne parvenons pas à authentifier votre mode de paiement. Veuillez choisir un autre mode de paiement et essayer à nouveau.",
     "cardAuthNotSupported": "Votre carte ne peut être mise à jour puisqu'elle nécessite une authentification. Veuillez utiliser un autre mode de paiement ou contacter le service client.",
-    "tryAgainFromInvoice": "Nous n'avons pas pu authentifier votre paiement, mais votre abonnement a été créé. Veuillez essayer de payer la facture en utilisant un autre mode de paiement depuis le tableau de bord."
+    "tryAgainFromInvoice": "Nous n'avons pas pu authentifier votre paiement, mais votre abonnement a été créé. Veuillez essayer de payer la facture en utilisant un autre mode de paiement depuis le tableau de bord.",
+    "sdkBlocked": "Le formulaire de paiement n'a pas pu se charger. Veuillez désactiver votre bloqueur de publicités ou vos extensions de confidentialité et actualiser la page."
   },
   "errors": {
     "": ""
