@@ -63,7 +63,8 @@ import {
   getFourDigitYear,
   createBraintreeDropin,
   requestBraintreePaymentMethod,
-  requestBraintreeHostedFieldsPaymentMethod
+  requestBraintreeHostedFieldsPaymentMethod,
+  whenBraintreeReady
 } from "../common/Helpers";
 import {
   Payment,
@@ -1265,6 +1266,7 @@ const PaymentMethodContainerWithoutStripe = ({
           );
 
           // Initialize 3D Secure for additional security
+          await whenBraintreeReady(["threeDSecure"]);
           braintree3DSecureInstanceRef.current =
             new window.braintree.threeDSecure.create({
               version: 2,
@@ -1341,6 +1343,7 @@ const PaymentMethodContainerWithoutStripe = ({
         });
 
         try {
+          await whenBraintreeReady(["client", "hostedFields"]);
           const clientInstance =
             await new window.braintree.client.create({
               authorization: braintreeToken
