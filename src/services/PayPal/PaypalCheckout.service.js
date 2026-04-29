@@ -2,6 +2,7 @@ import {
   getFormattedPriceByLocal,
   getPageOrDefaultLanguage
 } from "../../utils/utils";
+import { whenBraintreeReady } from "../../Components/common/Helpers";
 
 /**
  * @typedef {Object} paypalConstructorOptions
@@ -45,6 +46,13 @@ export class PaypalClient {
         "Braintree/Paypal integration is currently not enabled on this site's config"
       );
 
+      return;
+    }
+
+    try {
+      await whenBraintreeReady(["client", "paypalCheckout"]);
+    } catch (err) {
+      console.error("Braintree SDK failed to load for PayPal", err);
       return;
     }
 
