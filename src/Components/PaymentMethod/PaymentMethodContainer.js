@@ -4103,15 +4103,21 @@ const PaymentMethodContainer = (props) => {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
+    let cancelled = false;
     whenUserReady(() => {
       if (!window.Stripe && cardProcessor === "stripe") {
-        document
-          .querySelector('script[src="https://js.stripe.com/v3"]')
-          .addEventListener("load", () => {
-            setIsStripeLoaded(true);
-          });
+        loadStripe(window.Pelcro.environment.stripe)
+          .then(() => {
+            if (!cancelled) setIsStripeLoaded(true);
+          })
+          .catch((err) =>
+            console.error("Failed to load Stripe.js", err)
+          );
       }
     });
+    return () => {
+      cancelled = true;
+    };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (isStripeLoaded) {
