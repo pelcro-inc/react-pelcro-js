@@ -8,6 +8,7 @@ import {
   ModalFooter
 } from "../../SubComponents/Modal";
 import { Link } from "../../SubComponents/Link";
+import { Alert } from "../../SubComponents/Alert";
 import { usePelcro } from "../../hooks/usePelcro";
 import {
   initPaywalls,
@@ -32,6 +33,20 @@ export function LoginModal({ onDisplay, onClose, ...props }) {
     giftCode,
     isGift
   } = usePelcro();
+
+  const passwordResetSuccessMessage = usePelcro(
+    (state) => state.passwordResetSuccessMessage
+  );
+
+  const clearPasswordResetSuccessMessage = () =>
+    usePelcro.setState({ passwordResetSuccessMessage: null });
+
+  useEffect(() => {
+    return () => {
+      // Clear on unmount so a future login-modal open doesn't show a stale message
+      clearPasswordResetSuccessMessage();
+    };
+  }, []);
 
   const onSuccess = (res) => {
     props.onSuccess?.(res);
@@ -116,6 +131,14 @@ export function LoginModal({ onDisplay, onClose, ...props }) {
       onClose={onClose}
     >
       <ModalBody>
+        {passwordResetSuccessMessage && (
+          <Alert
+            type="success"
+            onClose={clearPasswordResetSuccessMessage}
+          >
+            {passwordResetSuccessMessage}
+          </Alert>
+        )}
         <LoginView
           onForgotPassword={onForgotPassword}
           {...props}

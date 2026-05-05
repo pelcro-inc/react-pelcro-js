@@ -17,7 +17,6 @@ import {
 } from "../../utils/action-types";
 import { getErrorMessages } from "../common/Helpers";
 import { usePelcro } from "../../hooks/usePelcro";
-import { notify } from "../../SubComponents/Notification";
 
 const initialState = {
   email: "",
@@ -65,7 +64,9 @@ const PasswordResetContainer = ({
           });
           onFailure(err);
         } else {
-          notify.success(t("passwordUpdated"));
+          usePelcro.setState({
+            passwordResetSuccessMessage: t("passwordUpdated")
+          });
           usePelcro.getStore().switchView("login");
           onSuccess(res);
         }
