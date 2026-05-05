@@ -59,7 +59,21 @@ export function LoginModal({ onDisplay, onClose, ...props }) {
     }
 
     if (!product && !order && !giftCode) {
-      // If product and plan are not selected
+      // No subscribe/order/gift context — but the user may have come in
+      // via a URL trigger view (e.g. ?view=payment-method-update).
+      // Honor that before falling back to closing the modal.
+      const viewFromURL = getStableViewID(
+        window.Pelcro.helpers.getURLParameter("view")
+      );
+      const viewsURLs = [
+        "invoice-details",
+        "gift-redeem",
+        "plan-select",
+        "payment-method-update"
+      ];
+      if (viewsURLs.includes(viewFromURL)) {
+        return initViewFromURL();
+      }
       return resetView();
     }
 
@@ -88,21 +102,6 @@ export function LoginModal({ onDisplay, onClose, ...props }) {
 
     if (product && !plan) {
       return switchView("plan-select");
-    }
-
-    const viewFromURL = getStableViewID(
-      window.Pelcro.helpers.getURLParameter("view")
-    );
-
-    const viewsURLs = [
-      "invoice-details",
-      "gift-redeem",
-      "plan-select",
-      "payment-method-update"
-    ];
-
-    if (viewsURLs.includes(viewFromURL)) {
-      return initViewFromURL();
     }
 
     return resetView();
