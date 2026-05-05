@@ -16,6 +16,7 @@ import {
   SET_CONFIRM_PASSWORD_ERROR
 } from "../../utils/action-types";
 import { getErrorMessages } from "../common/Helpers";
+import { usePelcro } from "../../hooks/usePelcro";
 
 const initialState = {
   email: "",
@@ -55,22 +56,18 @@ const PasswordResetContainer = ({
         referer: window.location.origin
       },
       (err, res) => {
-        dispatch({ type: DISABLE_SUBMIT, payload: false });
-
         if (err) {
+          dispatch({ type: DISABLE_SUBMIT, payload: false });
           dispatch({
             type: SHOW_ALERT,
             payload: { type: "error", content: getErrorMessages(err) }
           });
           onFailure(err);
         } else {
-          dispatch({
-            type: SHOW_ALERT,
-            payload: {
-              type: "success",
-              content: t("passwordUpdated")
-            }
+          usePelcro.setState({
+            passwordResetSuccessMessage: t("passwordUpdated")
           });
+          usePelcro.getStore().switchView("login");
           onSuccess(res);
         }
       }

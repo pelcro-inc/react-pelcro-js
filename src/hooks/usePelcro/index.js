@@ -43,7 +43,10 @@ export const initialState = {
   isAuthenticated: () => window.Pelcro.user.isAuthenticated(),
   selectedPaymentMethodId: null,
   selectedAddressId: null,
-  addressIdToEdit: null
+  addressIdToEdit: null,
+
+  // Password reset → shown as a banner inside the next mount of LoginModal
+  passwordResetSuccessMessage: null
 };
 
 const createPelcroStore = () =>
