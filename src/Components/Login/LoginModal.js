@@ -47,10 +47,9 @@ export function LoginModal({ onDisplay, onClose, ...props }) {
       return resetView();
     }
 
-    // If this is a redeem gift
+    // If this is a redeem gift, proceed to address (where redeemGift API is called)
     if (giftCode) {
-      return switchView("gift-redeem");
-      // return switchToAddressView();
+      return switchToAddressView();
     }
 
     // Check if the subscription is meant as a gift (if so, gather recipients info)
