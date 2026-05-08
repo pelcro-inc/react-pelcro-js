@@ -8,6 +8,7 @@ import {
   ModalFooter
 } from "../../SubComponents/Modal";
 import { Link } from "../../SubComponents/Link";
+import { Alert } from "../../SubComponents/Alert";
 import { usePelcro } from "../../hooks/usePelcro";
 import {
   initPaywalls,
@@ -33,6 +34,20 @@ export function LoginModal({ onDisplay, onClose, ...props }) {
     isGift
   } = usePelcro();
 
+  const passwordResetSuccessMessage = usePelcro(
+    (state) => state.passwordResetSuccessMessage
+  );
+
+  const clearPasswordResetSuccessMessage = () =>
+    usePelcro.setState({ passwordResetSuccessMessage: null });
+
+  useEffect(() => {
+    return () => {
+      // Clear on unmount so a future login-modal open doesn't show a stale message
+      clearPasswordResetSuccessMessage();
+    };
+  }, []);
+
   const onSuccess = (res) => {
     props.onSuccess?.(res);
     handleAfterLoginLogic();
@@ -44,7 +59,21 @@ export function LoginModal({ onDisplay, onClose, ...props }) {
     }
 
     if (!product && !order && !giftCode) {
-      // If product and plan are not selected
+      // No subscribe/order/gift context — but the user may have come in
+      // via a URL trigger view (e.g. ?view=payment-method-update).
+      // Honor that before falling back to closing the modal.
+      const viewFromURL = getStableViewID(
+        window.Pelcro.helpers.getURLParameter("view")
+      );
+      const viewsURLs = [
+        "invoice-details",
+        "gift-redeem",
+        "plan-select",
+        "payment-method-update"
+      ];
+      if (viewsURLs.includes(viewFromURL)) {
+        return initViewFromURL();
+      }
       return resetView();
     }
 
@@ -75,21 +104,6 @@ export function LoginModal({ onDisplay, onClose, ...props }) {
       return switchView("plan-select");
     }
 
-    const viewFromURL = getStableViewID(
-      window.Pelcro.helpers.getURLParameter("view")
-    );
-
-    const viewsURLs = [
-      "invoice-details",
-      "gift-redeem",
-      "plan-select",
-      "payment-method-update"
-    ];
-
-    if (viewsURLs.includes(viewFromURL)) {
-      return initViewFromURL();
-    }
-
     return resetView();
   };
 
@@ -116,6 +130,14 @@ export function LoginModal({ onDisplay, onClose, ...props }) {
       onClose={onClose}
     >
       <ModalBody>
+        {passwordResetSuccessMessage && (
+          <Alert
+            type="success"
+            onClose={clearPasswordResetSuccessMessage}
+          >
+            {passwordResetSuccessMessage}
+          </Alert>
+        )}
         <LoginView
           onForgotPassword={onForgotPassword}
           {...props}

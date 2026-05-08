@@ -204,3 +204,37 @@ export function requestBraintreeHostedFieldsPaymentMethod(hostedFieldsInstance) 
     });
   });
 }
+
+/**
+ * Waits until the requested Braintree SDK modules are available on
+ * window.braintree. The Braintree scripts (client, hostedFields,
+ * threeDSecure, paypalCheckout, dropin) are loaded fire-and-forget by
+ * loadPaymentSDKs(), so consumers must defer access until each module
+ * finishes loading to avoid TypeError on slow connections.
+ *
+ * @param {string[]} modules - module names that must exist on window.braintree
+ * @param {number} [timeout=30000] - max wait in ms before rejecting
+ * @returns {Promise<typeof window.braintree>}
+ */
+export function whenBraintreeReady(modules, timeout = 30000) {
+  return new Promise((resolve, reject) => {
+    const start = Date.now();
+    const check = () => {
+      if (
+        window.braintree &&
+        modules.every((m) => window.braintree[m])
+      ) {
+        return resolve(window.braintree);
+      }
+      if (Date.now() - start >= timeout) {
+        return reject(
+          new Error(
+            `Braintree SDK modules not ready after ${timeout}ms: ${modules.join(", ")}`
+          )
+        );
+      }
+      setTimeout(check, 100);
+    };
+    check();
+  });
+}

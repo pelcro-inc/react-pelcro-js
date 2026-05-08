@@ -804,11 +804,9 @@ const showPaymentMethodUpdateFromUrl = () => {
       );
 
       if (!window.Stripe && !supportsVantiv && !supportsTap) {
-        document
-          .querySelector('script[src="https://js.stripe.com/v3"]')
-          .addEventListener("load", () => {
-            return switchView("payment-method-update");
-          });
+        loadStripe(window.Pelcro.environment.stripe)
+          .then(() => switchView("payment-method-update"))
+          .catch((err) => console.error("Failed to load Stripe.js", err));
         return;
       }
 

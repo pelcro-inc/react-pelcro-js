@@ -25,10 +25,14 @@ export const PaypalSubscribeButton = (props) => {
       state.updatedPrice ??
       props.plan?.amount ??
       plan?.amount ??
-      invoice.amount_remaining;
+      invoice?.amount_remaining;
     const selectedAddress = getAddressById(
       props.selectedAddressId ?? selectedAddressId
     );
+
+    // No plan/invoice context (e.g. ?view=payment-method-update URL trigger):
+    // bail out before initializing PayPal so we don't crash on null product/amount.
+    if (updatedPrice == null) return;
 
     // initialize paypal client, then render paypal button.
     const initializePaypal = async () => {
