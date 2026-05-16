@@ -1,4 +1,8 @@
 @layer components {
+  .pelcro-root .pelcro-notification-container {
+    z-index: 9999;
+  }
+
   .pelcro-root .pelcro-notification-error {
     @apply plc-text-sm plc-font-semibold plc-text-white plc-bg-red-500;
   }
