@@ -1,0 +1,28 @@
+{
+  "labels": {
+    "title": "Möchten Sie Ihr Profil aktualisieren?",
+    "subtitle": "Geben Sie unten Ihre Informationen ein, um Ihr Profil zu aktualisieren",
+    "email": "E-Mail",
+    "firstName": "Vorname",
+    "lastName": "Nachname",
+    "username": "Benutzername",
+    "displayname": "Anzeigename",
+    "phone": "Telefon",
+    "submit": "Absenden",
+    "required": "Erforderlich",
+    "cropperTitle": "Profilbild aktualisieren",
+    "cropperSubtitle": "Laden Sie ein Foto hoch und passen Sie es nach Ihren Wünschen an",
+    "save": "Foto hochladen",
+    "selectImage": "Neues Foto hochladen",
+    "removeImage": "Aktuelles Foto entfernen",
+    "zoom": "Zoom",
+    "tin": "Steueridentifikationsnummer",
+    "company": "Firma",
+    "userTitle": "Titel"
+  },
+  "messages": {
+    "userUpdated": "Vielen Dank! Ihr Profil wurde erfolgreich aktualisiert.",
+    "pictureRemoved": "Ihr Profilbild wurde erfolgreich entfernt.",
+    "pictureUpdated": "Ihr Profilbild wurde erfolgreich aktualisiert."
+  }
+}

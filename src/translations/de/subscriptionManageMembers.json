@@ -1,0 +1,13 @@
+{
+  "labels": {
+    "inviteMembers": "Mitglieder einladen",
+    "listOfMembers": "Mitgliederliste",
+    "invite": "Einladen",
+    "remove": "Entfernen",
+    "emails": "E-Mail-Adressen eingeben",
+    "status": "Status",
+    "actions": "Aktionen",
+    "email": "E-Mail",
+    "listNote": "Kommagetrennte Liste, z. B."
+  }
+}

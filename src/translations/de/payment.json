@@ -1,0 +1,38 @@
+{
+  "labels": {
+    "cardNumber": "Kartennummer",
+    "securityCode": "Sicherheitscode",
+    "submit": "Absenden",
+    "months": {
+      "jan": "Januar",
+      "feb": "Februar",
+      "mar": "März",
+      "apr": "April",
+      "may": "Mai",
+      "jun": "Juni",
+      "jul": "Juli",
+      "aug": "August",
+      "sep": "September",
+      "oct": "Oktober",
+      "nov": "November",
+      "dec": "Dezember"
+    },
+    "checkout": {
+      "title": "Zahlungsinformationen"
+    }
+  },
+  "messages": {
+    "youAreSafe": "Sie sind sicher - PCI-konform 128 SSL von",
+    "cancel": "Kündigen Sie Ihr Abonnement jederzeit online.",
+    "giftSent": "Das Abonnementgeschenk wurde gesendet an",
+    "successfully": "erfolgreich",
+    "sourceCreated": "Zahlungsinformationen wurden hinzugefügt",
+    "sourceUpdated": "Ihre Zahlungsinformationen wurden aktualisiert",
+    "cardAuthFailed": "Wir können Ihre Zahlungsmethode nicht authentifizieren. Bitte wählen Sie eine andere Zahlungsmethode und versuchen Sie es erneut.",
+    "cardAuthNotSupported": "Die Aktualisierung Ihrer Zahlungsmethode auf eine, die eine Authentifizierung erfordert, ist derzeit nicht möglich. Bitte verwenden Sie eine andere Zahlungsmethode oder wenden Sie sich an den Kundendienst.",
+    "tryAgainFromInvoice": "Wir konnten Ihre Zahlung nicht authentifizieren, Ihr Abonnement wurde jedoch erstellt. Bitte versuchen Sie, die Rechnung mit einer anderen Zahlungsmethode aus dem Dashboard zu bezahlen."
+  },
+  "errors": {
+    "": ""
+  }
+}

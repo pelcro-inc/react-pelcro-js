@@ -1,0 +1,93 @@
+{
+  "validation": {
+    "validEmail": "Die E-Mail-Adresse ist ungültig.",
+    "validUsername": "Der Benutzername ist ungültig.",
+    "enterEmail": "E-Mail-Adresse ist erforderlich.",
+    "enterEmails": "E-Mail-Adressen sind erforderlich.",
+    "enterUsername": "Benutzername ist erforderlich.",
+    "enterPassword": "Passwort ist erforderlich.",
+    "confirmPassword": "Passwortbestätigung ist erforderlich.",
+    "enterFirstName": "Vorname ist erforderlich.",
+    "enterLastName": "Nachname ist erforderlich.",
+    "enterPhone": "Telefonnummer ist erforderlich.",
+    "enterCompany": "Firma ist erforderlich.",
+    "enterTitle": "Titel ist erforderlich.",
+    "enterFieldName": "{{fieldName}} ist erforderlich."
+  },
+  "buttons": {
+    "account": "Mein Konto",
+    "login": "Anmelden",
+    "subscribe": "Abonnieren"
+  },
+  "dashboard": {
+    "labels": {
+      "menu": "Pelcro-Menü",
+      "name": "Name",
+      "email": "E-Mail",
+      "plan": "Tarif",
+      "description": "Beschreibung",
+      "expiry": "Ablauf",
+      "status": "Status",
+      "logout": "Abmelden",
+      "dashboard": "Dashboard",
+      "unsubscribe": "Kündigen",
+      "reactivate": "Reaktivieren",
+      "renew": "Verlängern",
+      "support": "Support",
+      "account": "Konto",
+      "subscriptions": "Abonnements",
+      "updatePaymentSource": "Aktualisieren",
+      "updateProfile": "Aktualisieren",
+      "updateAddress": "Aktualisieren",
+      "redeemGift": "Geschenk einlösen",
+      "address": "Adresse",
+      "paymentSource": "Zahlungskarte",
+      "actions": "Aktionen",
+      "expiresOn": "Läuft ab am",
+      "renewsOn": "Verlängert sich am",
+      "isSureToCancel": "Sind Sie sicher, dass Sie Ihr Abonnement kündigen möchten?"
+    },
+    "messages": {
+      "yourDashboard": "Ihr Pelcro-Dashboard"
+    },
+    "errors": {
+      "": ""
+    }
+  },
+  "select": {
+    "messages": {
+      "alreadyHaveAccount": "Haben Sie bereits ein Konto?",
+      "loginHere": "Hier anmelden",
+      "checkbox": "Aktivieren Sie dieses Kästchen, um dieses Abonnement zu verschenken"
+    },
+    "labels": {
+      "plan": {
+        "title": "Einen Tarif abonnieren",
+        "subtitle": "Wählen Sie einen der untenstehenden Tarife aus und klicken Sie auf Weiter."
+      },
+      "product": {
+        "title": "Ein Produkt abonnieren",
+        "subtitle": "Wählen Sie eines der untenstehenden Produkte aus und klicken Sie auf Weiter."
+      },
+      "selectProduct": "Produkt auswählen",
+      "selectPlan": "Tarif auswählen",
+      "startingAt": "Ab"
+    },
+    "buttons": {
+      "next": "Weiter",
+      "select": "Auswählen",
+      "back": "Zurück"
+    }
+  },
+  "confirm": {
+    "buttons": {
+      "continue": "Weiter zum Inhalt"
+    },
+    "labels": {
+      "title": "Vielen Dank für Ihre Bestellung!",
+      "subtitle": "Ihre Artikel sind in Kürze unterwegs."
+    },
+    "giftSent": "Das Geschenk wird gesendet an",
+    "successfully": "am von Ihnen angegebenen Datum."
+  }
+}

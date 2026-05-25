@@ -1,0 +1,34 @@
+{
+  "messages": {
+    "youAreSafe": "Sie sind sicher - PCI-konform 128 SSL von",
+    "bankRedirection": "Bitte warten Sie, Sie werden zu Ihrer Bank weitergeleitet.",
+    "bankAuthenticationSuccess": "Bitte warten Sie, während wir Ihre Anfrage bearbeiten."
+  },
+  "labels": {
+    "card": "Kartennummer eingeben",
+    "date": "Ablaufdatum",
+    "CVC": "CVC",
+    "required": "erforderlich",
+    "submit": "Absenden",
+    "pay": "bezahlen",
+    "addCode": "Gutscheincode hinzufügen",
+    "hideCode": "Ausblenden",
+    "codePlaceholder": "Geben Sie Ihren Gutscheincode ein",
+    "applyCouponCode": "Anwenden",
+    "code": "Gutscheincode",
+    "for": "für",
+    "interval": "{{count}} {{interval}}",
+    "interval_plural": "{{count}} {{interval}}",
+    "tax": "Steuer",
+    "removeCoupon": "ENTFERNEN",
+    "firstName": "Vorname",
+    "lastName": "Nachname",
+    "phone": "Telefon",
+    "freeItems": "Kostenlose Artikel",
+    "order": "Bestellung",
+    "amount": "Betrag",
+    "email": "E-Mail",
+    "password": "Passwort",
+    "isDefault": "Als Standard festlegen"
+  }
+}

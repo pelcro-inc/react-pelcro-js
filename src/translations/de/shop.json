@@ -1,0 +1,21 @@
+{
+  "buttons": {
+    "select": "Auswählen",
+    "added": "In den Warenkorb gelegt",
+    "purchase": "Kaufen",
+    "continue": "Weiter"
+  },
+  "messages": {
+    "orderConfirmed": {
+      "title": "Bestellung bestätigt!",
+      "body": "Ihre Bestellung wurde bestätigt und wird in den nächsten Tagen versandt. Sie erhalten in Kürze eine E-Mail-Bestätigung dieser Bestellung."
+    },
+    "haveQuestions": "Wenn Sie Fragen haben, zögern Sie nicht, uns zu kontaktieren!",
+    "multipleCurrencies": "Ihr Warenkorb enthält derzeit Artikel, die in verschiedenen Währungen verfügbar sind. Um mit dem Bezahlvorgang fortzufahren, stellen Sie bitte sicher, dass alle Artikel die gleiche Währung haben.",
+    "currencyMismatch": "Die ausgewählten Artikel stimmen nicht mit Ihrer aktuellen Standardwährung ({{currency}}) überein. Bitte wählen Sie nur Artikel aus, die dieser Währung entsprechen."
+  },
+  "labels": {
+    "summary": "Bestellübersicht",
+    "total": "Gesamt"
+  }
+}

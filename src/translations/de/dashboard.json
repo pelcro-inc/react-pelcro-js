@@ -1,0 +1,137 @@
+{
+  "labels": {
+    "menu": "Pelcro-Menü",
+    "name": "Name",
+    "email": "E-Mail",
+    "plan": "Tarif",
+    "description": "Beschreibung",
+    "expiry": "Ablauf",
+    "status": {
+      "title": "Status",
+      "active": "Aktiv",
+      "inTrial": "In Testphase",
+      "endingSoon": "Endet bald",
+      "scheduled": "Geplant",
+      "incomplete": "Unvollständig"
+    },
+    "manageMembers": "Mitglieder verwalten",
+    "shipments": "Verbleibende Lieferungen",
+    "logout": "Abmelden",
+    "dashboard": "Dashboard",
+    "unsubscribe": "Kündigen",
+    "reactivate": "Reaktivieren",
+    "renew": "Verlängern",
+    "suspend": "Aussetzen",
+    "unsuspend": "Fortsetzen",
+    "support": "Support",
+    "account": "Konto",
+    "purchases": "Käufe",
+    "subscriptions": "Abonnements",
+    "donations": "Spenden",
+    "memberships": "Mitgliedschaften",
+    "invoices": "Rechnungen",
+    "details": "Details",
+    "view": "Ansehen",
+    "paid": "Bezahlt",
+    "open": "Offen",
+    "draft": "Entwurf",
+    "scheduled": "Geplant",
+    "uncollectible": "Uneinbringlich",
+    "void": "Storniert",
+    "pastDue": "Überfällig",
+    "updatePaymentSource": "Aktualisieren",
+    "profile": "Profil",
+    "updateProfile": "Profil bearbeiten",
+    "changePassword": "Passwort ändern",
+    "editNewsletters": "Newsletter bearbeiten",
+    "myQRCode": "Mein QR-Code",
+    "shipping": "Versand",
+    "billing": "Abrechnung",
+    "edit": "Bearbeiten",
+    "gifts": "Geschenke",
+    "redeemGift": "Geschenk einlösen",
+    "address": "Adresse",
+    "addresses": "Adressen",
+    "myProfile": "Mein Profil",
+    "paymentSource": "Zahlungskarten",
+    "actions": "Aktionen",
+    "expiresOn": "Endet",
+    "until": "Bis",
+    "startsOn": "Beginnt",
+    "startDate": "Startdatum",
+    "renewsOn": "Verlängert sich",
+    "canceledOn": "Gekündigt am",
+    "recipient": "Empfänger",
+    "addPaymentSource": "Zahlungsmethode hinzufügen",
+    "setDefault": "Als Standard festlegen",
+    "addAddress": "Adresse hinzufügen",
+    "editAddress": "Adresse bearbeiten",
+    "addSubscription": "Neues Abonnement",
+    "addGift": "Neues Geschenk",
+    "default": "Standard",
+    "orders": {
+      "label": "Bestellungen",
+      "noOrders": "Sie haben noch keine Bestellungen aufgegeben",
+      "total": "Gesamt",
+      "date": "Datum",
+      "details": "Details",
+      "itemsAmount": "{{count}} Artikel",
+      "itemsAmount_plural": "{{count}} Artikel"
+    },
+    "savedItems": {
+      "label": "Gespeichert & Gefolgt",
+      "noSavedItems": "Sie haben keine gespeicherten Artikel",
+      "categories": "Kategorien",
+      "details": "Details",
+      "removeItem": "Entfernen"
+    },
+    "subCancellation": {
+      "goBack": "Zurück"
+    },
+    "donationCancellation": {
+      "goBack": "Zurück"
+    }
+  },
+  "messages": {
+    "noCard": "Sie haben keine Karte",
+    "subCancellation": {
+      "isSureToCancel": "Sind Sie sicher, dass Sie Ihr Abonnement kündigen möchten?",
+      "loading": "Ihr Abonnement wird gekündigt",
+      "success": "Abonnement wurde erfolgreich gekündigt",
+      "error": "Fehler beim Kündigen Ihres Abonnements"
+    },
+    "subReactivation": {
+      "success": "Abonnement wurde erfolgreich reaktiviert",
+      "error": "Fehler beim Reaktivieren Ihres Abonnements"
+    },
+    "subUnSuspend": {
+      "isSureToUnSuspend": "Sind Sie sicher, dass Sie Ihr Abonnement fortsetzen möchten?",
+      "loading": "Ihr Abonnement wird fortgesetzt",
+      "success": "Abonnement wurde erfolgreich fortgesetzt",
+      "error": "Fehler beim Fortsetzen Ihres Abonnements"
+    },
+    "donationCancellation": {
+      "isSureToCancel": "Sind Sie sicher, dass Sie Ihre Spende stornieren möchten?",
+      "loading": "Ihre Spende wird storniert",
+      "success": "Spende wurde erfolgreich storniert",
+      "error": "Fehler beim Stornieren Ihrer Spende"
+    },
+    "donationReactivation": {
+      "success": "Spende wurde erfolgreich reaktiviert",
+      "error": "Fehler beim Reaktivieren Ihrer Spende"
+    },
+    "donationUnSuspend": {
+      "isSureToUnSuspend": "Sind Sie sicher, dass Sie Ihre Spende fortsetzen möchten?",
+      "loading": "Ihre Spende wird fortgesetzt",
+      "success": "Spende wurde erfolgreich fortgesetzt",
+      "error": "Fehler beim Fortsetzen Ihrer Spende"
+    },
+    "paymentMethodDeletion": {
+      "isSureToDelete": "Sind Sie sicher, dass Sie diese Zahlungsmethode löschen möchten?",
+      "loading": "Ihre Zahlungsmethode wird gelöscht",
+      "success": "Zahlungsmethode wurde erfolgreich gelöscht",
+      "error": "Fehler beim Löschen Ihrer Zahlungsmethode",
+      "nonDeletable": "Diese Zahlungsmethode kann nicht gelöscht werden"
+    }
+  }
+}

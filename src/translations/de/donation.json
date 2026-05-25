@@ -1,0 +1,30 @@
+{
+  "messages": {
+    "alreadyHaveAccount": "Haben Sie bereits ein Konto?",
+    "loginHere": "Hier anmelden",
+    "checkbox": "Aktivieren Sie dieses Kästchen, um dieses Abonnement zu verschenken"
+  },
+  "labels": {
+    "plan": {
+      "title": "Einen Tarif abonnieren",
+      "subtitle": "Wählen Sie einen der untenstehenden Tarife aus und klicken Sie auf Weiter."
+    },
+    "product": {
+      "title": "Ein Produkt abonnieren",
+      "subtitle": "Wählen Sie eines der untenstehenden Produkte aus und klicken Sie auf Weiter."
+    },
+    "selectProduct": "Produkt auswählen",
+    "selectPlan": "Tarif auswählen",
+    "startingAt": "Ab",
+    "restrictiveArticles": {
+      "subscribeTo": "Abonnieren Sie eine der folgenden Optionen, um Zugriff auf diese Seite zu erhalten",
+      "or": "Oder werfen Sie einen Blick auf einige unserer anderen Optionen unten"
+    }
+  },
+  "buttons": {
+    "signupAndDonate": "Registrieren & spenden",
+    "donate": "Spenden",
+    "select": "Auswählen",
+    "back": "Zurück"
+  }
+}

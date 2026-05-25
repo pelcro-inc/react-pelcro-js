@@ -1,0 +1,14 @@
+{
+  "title": "Rechnungsdetails",
+  "labels": {
+    "summary": "Zusammenfassung",
+    "total": "Gesamt",
+    "amountPaid": "Bezahlter Betrag",
+    "amountDue": "Fälliger Betrag",
+    "creationDate": "Erstellt am:"
+  },
+  "buttons": {
+    "download": "Herunterladen",
+    "pay": "Jetzt bezahlen"
+  }
+}
