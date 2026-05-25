@@ -1,0 +1,13 @@
+{
+    "title": "Ihr Warenkorb",
+    "subtitle": "Schließen Sie Ihren Kauf unten ab",
+    "name": "Name",
+    "quantity": "Menge",
+    "price": "Preis",
+    "actions": "Aktionen",
+    "remove": "Entfernen",
+    "total": "Gesamt",
+    "confirm": "Zur Kasse",
+    "empty": "Ihr Warenkorb ist leer.",
+    "removeAll": "Alle entfernen"
+}

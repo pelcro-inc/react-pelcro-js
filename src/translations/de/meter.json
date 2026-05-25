@@ -1,0 +1,11 @@
+{
+  "messages": {
+    "freeVisits": "Verbleibende kostenlose Besuche:",
+    "subscribeNow": "Abonnieren",
+    "alreadyHaveAccount": "Haben Sie bereits ein Konto?",
+    "loginHere": "Hier anmelden"
+  },
+  "errors": {
+    "": ""
+  }
+}

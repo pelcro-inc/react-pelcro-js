@@ -1,0 +1,30 @@
+{
+  "labels": {
+    "continue": "Weiter zum Inhalt"
+  },
+  "messages": {
+    "yourFreeTrial": "Abonnement erfolgreich!",
+    "youHaveAccess": "Wir hoffen, Sie genießen das Abonnement. Bitte kontaktieren Sie uns, wenn Sie Fragen oder Bedenken haben.",
+    "clickToLearn": {
+      "click": "Klicken Sie",
+      "here": "hier",
+      "toLearn": ", um mehr zu erfahren, oder kontaktieren Sie uns unter",
+      "forQuestion": "bei Fragen."
+    },
+    "giftCreate": {
+      "title": "Ihr Geschenk wurde gesendet",
+      "content": "Ihr Empfänger erhält in Kürze eine E-Mail mit Anweisungen zum Einlösen seines Geschenks."
+    },
+    "giftRedeem": {
+      "title": "Herzlichen Glückwunsch",
+      "content": "Sie haben Ihr Geschenkabonnement erfolgreich eingelöst. Viel Spaß!"
+    },
+    "invoicePayment": {
+      "title": "Rechnung erfolgreich bezahlt",
+      "content": "Bitte kontaktieren Sie uns, wenn Sie Fragen oder Bedenken haben."
+    }
+  },
+  "errors": {
+    "": ""
+  }
+}

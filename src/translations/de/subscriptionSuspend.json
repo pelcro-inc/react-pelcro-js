@@ -1,0 +1,21 @@
+{
+  "labels": {
+    "title": "Abonnement aussetzen",
+    "suspensionDate": "Aussetzungsdatum",
+    "subCancellation": {
+      "goBack": "Zurück"
+    }
+  },
+  "messages": {
+    "suspensionEnd": "Die Aussetzung läuft am folgenden Datum ab",
+    "suspendNow": "Abonnement jetzt aussetzen",
+    "suspendLater": "Zum Ende des Zeitraums aussetzen",
+    "subCancellation": {
+      "isSureToSuspendNow": "Sind Sie sicher, dass Sie Ihr Abonnement sofort aussetzen möchten?",
+      "isSureToSuspend": "Sind Sie sicher, dass Sie Ihr Abonnement aussetzen möchten?",
+      "loading": "Ihr Abonnement wird ausgesetzt",
+      "success": "Abonnement wurde erfolgreich ausgesetzt",
+      "error": "Fehler beim Aussetzen Ihres Abonnements"
+    }
+  }
+}

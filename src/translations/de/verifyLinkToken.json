@@ -1,0 +1,11 @@
+{
+  "labels": {
+    "title": "Passwortlosen Link bestätigen",
+    "instructions": "Sie sind auf dem Weg!\nLassen Sie uns Ihre E-Mail-Adresse bestätigen.\nKlicken Sie auf den Bestätigungslink, den wir an Ihre E-Mail-Adresse gesendet haben:",
+    "resend": "E-Mail erneut senden"
+  },
+  "messages": {
+    "resent": "Erfolgreich erneut gesendet",
+    "success": "Sie haben sich erfolgreich angemeldet"
+  }
+}

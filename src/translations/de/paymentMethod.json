@@ -1,0 +1,40 @@
+{
+  "update": {
+    "title": "Aktualisieren Sie Ihre Zahlungsinformationen",
+    "subtitle": "Geben Sie die untenstehenden Felder ein, um Ihre Kreditkarteninformationen zu aktualisieren",
+    "selectSubtitle": "Wählen Sie eine Zahlungsmethode zum Aktualisieren aus",
+    "required": "Erforderlich",
+    "success": "Ihre Zahlungsinformationen wurden aktualisiert",
+    "secure": "Sie sind sicher - PCI-konform 128 SSL von"
+  },
+  "select": {
+    "title": "Zahlungsmethode auswählen",
+    "subtitle": "Wählen Sie eine Ihrer gespeicherten Methoden aus oder bezahlen Sie mit einer neuen",
+    "expires": "Läuft ab",
+    "buttons": {
+      "addPaymentMethod": "Mit einer anderen Zahlungsmethode bezahlen",
+      "selectPaymentMethod": "Weiter",
+      "changePaymentMethod": "Ändern"
+    }
+  },
+  "delete": {
+    "title": "Zahlungsmethode löschen",
+    "subtitle": "Sind Sie sicher, dass Sie die ausgewählte Zahlungsmethode löschen möchten?",
+    "details": "Details zur Zahlungsmethode",
+    "message": "Diese Aktion ist unwiderruflich und entfernt die Zahlungsmethode dauerhaft aus dem System. Bitte stellen Sie sicher, dass keine ausstehenden Transaktionen oder Abonnements mit dieser Zahlungsmethode verknüpft sind.",
+    "buttons": {
+      "delete": "Zahlungsmethode löschen",
+      "back": "Zurück"
+    },
+    "options": {
+      "select": "Wählen Sie eine Zahlungsmethode als Standard aus",
+      "add": "Eine neue Zahlungsmethode hinzufügen"
+    },
+    "paymentMethodReplaced": "Zahlungsmethode erfolgreich gelöscht und ersetzt",
+    "deletedSuccessfully": "Zahlungsmethode erfolgreich gelöscht"
+  },
+  "create": {
+    "title": "Neue Zahlungsmethode hinzufügen",
+    "subtitle": "Geben Sie die untenstehenden Felder ein, um Ihre Kreditkarteninformationen hinzuzufügen"
+  }
+}

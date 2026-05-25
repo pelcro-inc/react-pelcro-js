@@ -1,0 +1,20 @@
+{
+  "title": "Geben Sie Ihre E-Mail-Adresse ein, um unseren Newsletter zu abonnieren",
+  "updateTitle": "Newsletter-Auswahl aktualisieren",
+  "subtitle": "Wir können Ihre E-Mail-Adresse für weitere Marketingkommunikation verwenden",
+  "labels": {
+    "submit": "Absenden",
+    "firstName": "Vorname",
+    "lastName": "Nachname",
+    "email": "E-Mail",
+    "postalCode": "Postleitzahl",
+    "required": "erforderlich"
+  },
+  "messages": {
+    "alreadyHaveAccount": "Haben Sie bereits ein Konto?",
+    "success": "Newsletter wurden erfolgreich aktualisiert",
+    "loginHere": "Hier anmelden.",
+    "createAnAccount": " Konto erstellen, indem Sie ",
+    "here": "hier"
+  }
+}
