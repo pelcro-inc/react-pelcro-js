@@ -146,35 +146,6 @@ import subscriptionCancel_es from "./translations/es/subscriptionCancel.json";
 import subscriptionManageMembers_es from "./translations/es/subscriptionManageMembers.json";
 import subscriptionSuspend_es from "./translations/es/subscriptionSuspend.json";
 
-import common_de from "./translations/de/common.json";
-import paymentMethod_de from "./translations/de/paymentMethod.json";
-import newsletter_de from "./translations/de/newsletter.json";
-import success_de from "./translations/de/success.json";
-import meter_de from "./translations/de/meter.json";
-import checkoutForm_de from "./translations/de/checkoutForm.json";
-import messages_de from "./translations/de/messages.json";
-import login_de from "./translations/de/login.json";
-import verifyLinkToken_de from "./translations/de/verifyLinkToken.json";
-import register_de from "./translations/de/register.json";
-import userEdit_de from "./translations/de/userEdit.json";
-import address_de from "./translations/de/address.json";
-import passwordReset_de from "./translations/de/passwordReset.json";
-import passwordForgot_de from "./translations/de/passwordForgot.json";
-import passwordChange_de from "./translations/de/passwordChange.json";
-import passwordlessRequest_de from "./translations/de/passwordlessRequest.json";
-import cart_de from "./translations/de/cart.json";
-import shop_de from "./translations/de/shop.json";
-import payment_de from "./translations/de/payment.json";
-import dashboard_de from "./translations/de/dashboard.json";
-import select_de from "./translations/de/select.json";
-import donation_de from "./translations/de/donation.json";
-import notification_de from "./translations/de/notification.json";
-import verifyEmail_de from "./translations/de/verifyEmail.json";
-import invoiceDetails_de from "./translations/de/InvoiceDetails.json";
-import subscriptionCancel_de from "./translations/de/subscriptionCancel.json";
-import subscriptionManageMembers_de from "./translations/de/subscriptionManageMembers.json";
-import subscriptionSuspend_de from "./translations/de/subscriptionSuspend.json";
-
 import { getPageOrDefaultLanguage } from "./utils/utils";
 
 const resources = {
