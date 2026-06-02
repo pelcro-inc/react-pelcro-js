@@ -1,0 +1,25 @@
+{
+  "labels": {
+    "title": "Abonnement kündigen",
+    "cancelReason": "Kündigungsgrund",
+    "endOn": "Beenden am",
+    "endImmediately": "Sofort beenden",
+    "cancel": "Kündigen",
+    "subCancellation": {
+      "goBack": "Zurück"
+    }
+  },
+  "messages": {
+    "subscriptionEnd": "Dieses Abonnement läuft am folgenden Datum ab",
+    "cancelWhen": "Wann möchten Sie kündigen?",
+    "cancelNow": "Abonnement jetzt kündigen",
+    "cancelLater": "Zum Ende des Zeitraums kündigen",
+    "subCancellation": {
+      "isSureToCancelNow": "Sind Sie sicher, dass Sie Ihr Abonnement sofort kündigen möchten?",
+      "isSureToCancel": "Sind Sie sicher, dass Sie Ihr Abonnement kündigen möchten?",
+      "loading": "Ihr Abonnement wird gekündigt",
+      "success": "Abonnement wurde erfolgreich gekündigt",
+      "error": "Fehler beim Kündigen Ihres Abonnements"
+    }
+  }
+}

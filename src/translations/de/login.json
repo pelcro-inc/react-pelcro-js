@@ -1,0 +1,29 @@
+{
+  "labels": {
+    "email": "E-Mail eingeben",
+    "username": "Benutzernamen eingeben",
+    "password": "Passwort eingeben",
+    "required": "erforderlich",
+    "emailPlaceholder": "E-Mail",
+    "passwordPlaceholder": "Passwort",
+    "login": "Anmelden"
+  },
+  "messages": {
+    "loginTo": "Melden Sie sich bei Ihrem Konto an",
+    "welcome": "Willkommen zurück, melden Sie sich mit Ihrem bestehenden Konto an.",
+    "dontHaveAccount": "Haben Sie noch kein Konto?",
+    "createAccount": "Konto erstellen.",
+    "forgotPassword": "Passwort vergessen?",
+    "reset": {
+      "click": "Klicken Sie",
+      "here": "hier",
+      "toReset": ", um es zurückzusetzen."
+    },
+    "socialLogin": {
+      "label": "Oder fortfahren mit"
+    }
+  },
+  "errors": {
+    "": ""
+  }
+}

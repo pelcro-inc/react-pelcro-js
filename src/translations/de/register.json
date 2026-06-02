@@ -1,0 +1,90 @@
+{
+  "title": "Konto erstellen",
+  "subtitle": "Geben Sie unten Ihre E-Mail-Adresse und Ihr Passwort ein",
+  "labels": {
+    "signUpFacebook": "Mit Facebook registrieren",
+    "signUpGoogle": "Mit Google registrieren",
+    "signUpEmail": "Mit E-Mail registrieren",
+    "password": "Passwort",
+    "email": "E-Mail",
+    "passwordPlaceholder": "Passwort erstellen",
+    "emailPlaceholder": "E-Mail eingeben",
+    "required": "erforderlich",
+    "firstName": "Vorname",
+    "lastName": "Nachname",
+    "phone": "Telefon",
+    "company": "Firma",
+    "title": "Titel"
+  },
+  "messages": {
+    "alreadyHaveAccount": "Haben Sie bereits ein Konto?",
+    "createAccount": "Konto erstellen",
+    "loginHere": "hier anmelden. ",
+    "selectPlan": "Einen anderen Tarif auswählen ",
+    "here": "hier",
+    "iAgree": {
+      "iAgree": "Ich stimme den",
+      "terms": "Nutzungsbedingungen",
+      "and": "und",
+      "privacy": "Datenschutzbestimmungen zu."
+    },
+    "preferDisable": {
+      "click": "Klicken Sie",
+      "here": "hier",
+      "ifPrefer": ", wenn Sie Ihren Werbeblocker deaktivieren möchten."
+    },
+    "socialLogin": {
+      "label": "Oder fortfahren mit"
+    }
+  },
+  "errors": {
+    "": ""
+  },
+  "gift": {
+    "titles": {
+      "firstTitle": "Geben Sie unten die Informationen des Empfängers ein"
+    },
+    "labels": {
+      "firstName": "Vorname",
+      "lastName": "Nachname",
+      "email": "E-Mail",
+      "startDate": "Geschenkdatum",
+      "giftMessage": "Geschenknachricht ({{count}} Zeichen verbleibend)",
+      "required": "erforderlich",
+      "firstNamePlaceholder": "Vorname",
+      "lastNamePlaceholder": "Nachname",
+      "emailPlaceholder": "E-Mail-Adresse"
+    },
+    "buttons": {
+      "gift": "verschenken"
+    },
+    "messages": {
+      "enterEmail": "Bitte geben Sie die E-Mail-Adresse des Geschenkempfängers ein.",
+      "invalidDate": "Das Geschenkdatum muss zwischen heute und einem Jahr ab heute liegen.",
+      "giftDateInfo": "Der Empfänger erhält eine Geschenk-E-Mail-Benachrichtigung mit Ihrer Nachricht an dem von Ihnen ausgewählten Datum, um das Geschenk einzulösen.",
+      "giftMessageInfo": "Hinterlassen Sie dem Empfänger eine Nachricht und vergessen Sie nicht, Ihren Namen zu unterschreiben."
+    }
+  },
+  "redeem": {
+    "titles": {
+      "firstTitle": "Lösen Sie Ihr Geschenk ein",
+      "secondTitle": "Geben Sie unten den Geschenkcode ein"
+    },
+    "labels": {
+      "code": "Geschenkcode eingeben",
+      "codePlaceholder": "Geschenkcode",
+      "required": "erforderlich"
+    },
+    "buttons": {
+      "redeem": "Geschenk einlösen"
+    },
+    "footer": {
+      "click": "Klicken Sie",
+      "here": "hier",
+      "toAdd": ", um eine Adresse hinzuzufügen"
+    },
+    "messages": {
+      "enterGiftCode": "Bitte geben Sie einen Geschenkcode ein."
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "title": "Geben Sie Ihre Lieferadresse ein",
+  "titleGifting": "Geben Sie Ihre Adresse ein",
+  "selectAddressTitle": "Bitte wählen Sie eine Adresse aus",
+  "selectAddressSubtitle": "Wählen Sie eine Ihrer gespeicherten Adressen aus oder fügen Sie eine neue hinzu",
+  "labels": {
+    "address": "Adresse",
+    "code": "Postleitzahl",
+    "city": "Stadt",
+    "region": "Bundesland/Provinz/Region",
+    "country": "Land",
+    "firstName": "Vorname",
+    "lastName": "Nachname",
+    "required": "erforderlich",
+    "isDefault": "Als Standard festlegen"
+  },
+  "buttons": {
+    "submit": "Absenden",
+    "selectAddress": "Adresse auswählen",
+    "addAddress": "Neue Adresse hinzufügen"
+  },
+  "messages": {
+    "addressUpdated": "Die Adresse wurde erfolgreich aktualisiert!",
+    "subRedeemed": "Ihr Abonnement wurde eingelöst."
+  }
+}
