@@ -27,10 +27,44 @@ export function RegisterModal(props) {
     plan,
     order,
     giftCode,
-    isGift
+    isGift,
+    set
   } = usePelcro();
 
   const enableReactGA4 = window?.Pelcro?.uiSettings?.enableReactGA4;
+
+  // Auto-redeem gift if user is now authenticated and a pendingGiftCode
+  // is in the store (e.g. they verified email or came back via deep link).
+  // Same mechanism as pelcro-react-elements.
+  const pendingGiftCode = window?.Pelcro?.store?.pendingGiftCode;
+  if (pendingGiftCode && window.Pelcro.user.isAuthenticated()) {
+    window.Pelcro.subscription.redeemGift(
+      {
+        auth_token: window.Pelcro.user.read().auth_token,
+        gift_code: pendingGiftCode
+      },
+      (err, res) => {
+        if (err) {
+          if (err.response?.data?.errors?.address_id) {
+            switchToAddressView();
+          } else {
+            set({
+              giftRedemptionError: {
+                code: pendingGiftCode,
+                error: err
+              }
+            });
+          }
+          set({ giftCode: null, pendingGiftCode: null });
+          return switchView("subscription-success");
+        } else {
+          set({ giftRedemptionSuccess: true, giftCode: null, pendingGiftCode: null });
+          return switchView("subscription-success");
+        }
+      }
+    );
+    return null; // Exit early to prevent rendering the registration form
+  }
 
   const onSuccess = (res) => {
     props.onSuccess?.(res);

@@ -64,10 +64,14 @@ const GiftRedeemContainer = ({
       });
       onFailure();
     } else {
-      set({ giftCode });
       if (!isAuthenticated()) {
+        // Store as pendingGiftCode so the Login/Register modals can
+        // auto-redeem after the user authenticates, instead of requiring
+        // them to manually re-enter the code or navigate through address.
+        set({ pendingGiftCode: giftCode, giftCode: null });
         switchView("register");
       } else {
+        set({ giftCode });
         window.Pelcro.subscription.redeemGift(
           {
             auth_token: window.Pelcro.user.read().auth_token,

@@ -16,6 +16,7 @@ export const initialState = {
   isRenewingGift: false,
   giftRecipient: null,
   giftCode: "",
+  pendingGiftCode: null,
   subscriptionIdToRenew: null,
   subscriptionToManageMembers: null,
 
