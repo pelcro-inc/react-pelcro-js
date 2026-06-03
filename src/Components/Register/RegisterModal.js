@@ -27,44 +27,12 @@ export function RegisterModal(props) {
     plan,
     order,
     giftCode,
+    pendingGiftCode,
     isGift,
     set
   } = usePelcro();
 
   const enableReactGA4 = window?.Pelcro?.uiSettings?.enableReactGA4;
-
-  // Auto-redeem gift if user is now authenticated and a pendingGiftCode
-  // is in the store (e.g. they verified email or came back via deep link).
-  // Same mechanism as pelcro-react-elements.
-  const pendingGiftCode = window?.Pelcro?.store?.pendingGiftCode;
-  if (pendingGiftCode && window.Pelcro.user.isAuthenticated()) {
-    window.Pelcro.subscription.redeemGift(
-      {
-        auth_token: window.Pelcro.user.read().auth_token,
-        gift_code: pendingGiftCode
-      },
-      (err, res) => {
-        if (err) {
-          if (err.response?.data?.errors?.address_id) {
-            switchToAddressView();
-          } else {
-            set({
-              giftRedemptionError: {
-                code: pendingGiftCode,
-                error: err
-              }
-            });
-          }
-          set({ giftCode: null, pendingGiftCode: null });
-          return switchView("subscription-success");
-        } else {
-          set({ giftRedemptionSuccess: true, giftCode: null, pendingGiftCode: null });
-          return switchView("subscription-success");
-        }
-      }
-    );
-    return null; // Exit early to prevent rendering the registration form
-  }
 
   const onSuccess = (res) => {
     props.onSuccess?.(res);
@@ -91,12 +59,50 @@ export function RegisterModal(props) {
       return switchView("email-verify");
     }
 
+    // If user came in via a gift link (?view=gift-redeem&gift_code=...),
+    // auto-redeem the pending gift code immediately after registration.
+    // The GiftRedeemContainer stores it as pendingGiftCode (and clears giftCode)
+    // when an unauthenticated user submits the code.
+    if (pendingGiftCode) {
+      window.Pelcro.subscription.redeemGift(
+        {
+          auth_token: window.Pelcro.user.read().auth_token,
+          gift_code: pendingGiftCode
+        },
+        (err, res) => {
+          if (err) {
+            if (err.response?.data?.errors?.address_id) {
+              switchToAddressView();
+            } else {
+              set({
+                giftRedemptionError: {
+                  code: pendingGiftCode,
+                  error: err
+                }
+              });
+            }
+            set({ giftCode: null, pendingGiftCode: null });
+            return switchView("subscription-success");
+          } else {
+            set({
+              giftRedemptionSuccess: true,
+              giftCode: null,
+              pendingGiftCode: null
+            });
+            return switchView("subscription-success");
+          }
+        }
+      );
+      return;
+    }
+
     if (!product && !order && !giftCode) {
       // If product and plan are not selected
       return resetView();
     }
 
-    // If this is a redeem gift, proceed to address (where redeemGift API is called)
+    // Legacy gift flow: user entered code while already authenticated.
+    // Proceed to address where the library calls redeemGift() automatically.
     if (giftCode) {
       return switchToAddressView();
     }
