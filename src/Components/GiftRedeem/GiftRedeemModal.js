@@ -34,7 +34,7 @@ export const GiftRedeemModal = ({
         <GiftRedeemView {...otherProps} onSuccess={onSuccess} />
       </ModalBody>
       <ModalFooter>
-        {isAuthenticated() && (
+        {isAuthenticated() ? (
           <p>
             {t("redeem.footer.click")}{" "}
             <Link
@@ -44,6 +44,16 @@ export const GiftRedeemModal = ({
               {t("redeem.footer.here")}
             </Link>{" "}
             {t("redeem.footer.toAdd")}
+          </p>
+        ) : (
+          <p>
+            {t("messages.alreadyHaveAccount") + " "}
+            <Link
+              id="pelcro-link-gift-redeem-login"
+              onClick={() => switchView("login")}
+            >
+              {t("messages.loginHere")}
+            </Link>
           </p>
         )}
         <Authorship />

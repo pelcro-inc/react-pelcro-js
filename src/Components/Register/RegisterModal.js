@@ -27,7 +27,9 @@ export function RegisterModal(props) {
     plan,
     order,
     giftCode,
-    isGift
+    pendingGiftCode,
+    isGift,
+    set
   } = usePelcro();
 
   const enableReactGA4 = window?.Pelcro?.uiSettings?.enableReactGA4;
@@ -57,12 +59,50 @@ export function RegisterModal(props) {
       return switchView("email-verify");
     }
 
+    // If user came in via a gift link (?view=gift-redeem&gift_code=...),
+    // auto-redeem the pending gift code immediately after registration.
+    // The GiftRedeemContainer stores it as pendingGiftCode (and clears giftCode)
+    // when an unauthenticated user submits the code.
+    if (pendingGiftCode) {
+      window.Pelcro.subscription.redeemGift(
+        {
+          auth_token: window.Pelcro.user.read().auth_token,
+          gift_code: pendingGiftCode
+        },
+        (err, res) => {
+          if (err) {
+            if (err.response?.data?.errors?.address_id) {
+              switchToAddressView();
+            } else {
+              set({
+                giftRedemptionError: {
+                  code: pendingGiftCode,
+                  error: err
+                }
+              });
+            }
+            set({ giftCode: null, pendingGiftCode: null });
+            return switchView("subscription-success");
+          } else {
+            set({
+              giftRedemptionSuccess: true,
+              giftCode: null,
+              pendingGiftCode: null
+            });
+            return switchView("subscription-success");
+          }
+        }
+      );
+      return;
+    }
+
     if (!product && !order && !giftCode) {
       // If product and plan are not selected
       return resetView();
     }
 
-    // If this is a redeem gift, proceed to address (where redeemGift API is called)
+    // Legacy gift flow: user entered code while already authenticated.
+    // Proceed to address where the library calls redeemGift() automatically.
     if (giftCode) {
       return switchToAddressView();
     }

@@ -29,7 +29,9 @@ export function LoginModal({ onDisplay, onClose, ...props }) {
     switchToAddressView,
     switchToPaymentView,
     giftCode,
-    isGift
+    isGift,
+    pendingGiftCode,
+    set
   } = usePelcro();
 
   const onSuccess = (res) => {
@@ -40,6 +42,38 @@ export function LoginModal({ onDisplay, onClose, ...props }) {
   const handleAfterLoginLogic = () => {
     if (window.Pelcro.paywall.isArticleRestricted()) {
       initPaywalls();
+    }
+
+    // If user came in via a gift link, auto-redeem the pending gift code
+    // after successful authentication, instead of forcing them through
+    // address/payment flows. Same mechanism as pelcro-react-elements.
+    if (pendingGiftCode) {
+      window.Pelcro.subscription.redeemGift(
+        {
+          auth_token: window.Pelcro.user.read().auth_token,
+          gift_code: pendingGiftCode
+        },
+        (err, res) => {
+          if (err) {
+            if (err.response?.data?.errors?.address_id) {
+              switchToAddressView();
+            } else {
+              set({
+                giftRedemptionError: {
+                  code: pendingGiftCode,
+                  error: err
+                }
+              });
+            }
+            set({ giftCode: null, pendingGiftCode: null });
+            return switchView("subscription-success");
+          } else {
+            set({ giftRedemptionSuccess: true, giftCode: null, pendingGiftCode: null });
+            return switchView("subscription-success");
+          }
+        }
+      );
+      return; // Exit early to prevent other logic
     }
 
     if (!product && !order && !giftCode) {
