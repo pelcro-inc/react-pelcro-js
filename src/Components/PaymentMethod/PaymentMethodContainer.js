@@ -1490,7 +1490,8 @@ const formatPaymentAmount = (
          {
            auth_token: window.Pelcro.user.read().auth_token,
            token: braintreeNonce,
-           gateway: "braintree"
+           gateway: "braintree",
+           is_default: state.isDefault
          },
          (err, res) => {
            dispatch({ type: DISABLE_SUBMIT, payload: false });
@@ -1505,7 +1506,7 @@ const formatPaymentAmount = (
                }
              });
            }
- 
+
            dispatch({
              type: SHOW_ALERT,
              payload: {
@@ -1517,7 +1518,7 @@ const formatPaymentAmount = (
          }
        );
      }
- 
+
      function replaceBraintreeCard() {
        const { id: paymentMethodId } = paymentMethodToDelete;
  
@@ -1793,7 +1794,8 @@ const formatPaymentAmount = (
         {
           auth_token: window.Pelcro.user.read().auth_token,
           token: paymentRequest,
-          gateway: "vantiv"
+          gateway: "vantiv",
+          is_default: state.isDefault
         },
         (err, res) => {
           dispatch({ type: DISABLE_SUBMIT, payload: false });
@@ -2910,7 +2912,8 @@ const formatPaymentAmount = (
         window.Pelcro.paymentMethods.create(
           {
             auth_token: window.Pelcro.user.read().auth_token,
-            token: source.id
+            token: source.id,
+            is_default: state.isDefault
           },
           (err, res) => {
             if (err) {

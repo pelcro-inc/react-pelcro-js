@@ -29,6 +29,7 @@ import {
 } from "../../utils/utils";
 import { ApplePayButton } from "../ApplePayButton/ApplePayButton";
 import { PaymentMethodUpdateSetDefault } from "../PaymentMethodUpdate/PaymentMethodUpdateSetDefault";
+import { PaymentMethodCreateSetDefault } from "../PaymentMethodCreate/PaymentMethodCreateSetDefault";
 
 /**
  *
@@ -190,6 +191,15 @@ export function PaymentMethodView({
                   label={t("labels.isDefault")}
                 />
               )}
+
+              {type === "createPaymentSource" &&
+                window.Pelcro?.uiSettings
+                  ?.showSetAsDefaultOnCreate === true && (
+                  <PaymentMethodCreateSetDefault
+                    id="pelcro-input-is-default"
+                    label={t("labels.isDefault")}
+                  />
+                )}
 
               {/* Payment buttons section */}
               <div className="plc-grid plc-mt-4 plc-gap-y-2">
