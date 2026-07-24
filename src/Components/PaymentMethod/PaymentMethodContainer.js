@@ -143,6 +143,7 @@ const PaymentMethodContainerWithoutStripe = ({
   const pelcroStore = usePelcro();
   const {
     set,
+    switchView,
     order,
     selectedPaymentMethodId,
     couponCode,
@@ -160,6 +161,8 @@ const PaymentMethodContainerWithoutStripe = ({
   const selectedBillingAddressId =
     props.selectedBillingAddressId ??
     pelcroStore.selectedBillingAddressId;
+  const selectedPaymentMethodType =
+    pelcroStore.selectedPaymentMethodType;
   const giftRecipient =
     props.giftRecipient ?? pelcroStore.giftRecipient;
   const isGift = props.isGift ?? pelcroStore.isGift;
@@ -1368,6 +1371,78 @@ const PaymentMethodContainerWithoutStripe = ({
       : {})
   };
 
+  // BACS needs a complete address to raise the Direct Debit mandate, and migrated
+  // customer records frequently have a required field (most often `city`) missing —
+  // the address is there, it is simply incomplete. Left alone, Stripe rejects the
+  // confirm with an opaque `parameter_missing: billing_details[address][city]`.
+  // Instead, validate before touching Stripe and route the customer straight to the
+  // billing-address form, prefilled with the address we already have, so they only
+  // fill the missing field and are returned to checkout.
+  const BACS_REQUIRED_ADDRESS_FIELDS = [
+    { key: "line1", label: "street address" },
+    { key: "city", label: "city" },
+    { key: "postal_code", label: "postal code" },
+    { key: "country", label: "country" }
+  ];
+
+  const getMissingBacsAddressFields = (address) => {
+    const missing = BACS_REQUIRED_ADDRESS_FIELDS.filter(
+      (field) => !address?.[field.key]
+    ).map((field) => field.label);
+
+    // Mirrors the backend rule `required_unless:address.country,GB`.
+    if (
+      address?.country &&
+      address.country !== "GB" &&
+      !address?.state
+    ) {
+      missing.push("state");
+    }
+
+    return missing;
+  };
+
+  /**
+   * When BACS is the selected method and the billing address we would send is
+   * incomplete, stop before Stripe and send the customer to complete it.
+   *
+   * @param {Function} dispatch payment container dispatch
+   * @return {boolean} true when the submit was blocked
+   */
+  const isBlockedByIncompleteBacsAddress = (dispatch) => {
+    if (selectedPaymentMethodType !== "bacs_debit") {
+      return false;
+    }
+
+    const missingFields = getMissingBacsAddressFields(billingAddress);
+
+    if (!missingFields.length) {
+      return false;
+    }
+
+    dispatch({
+      type: SHOW_ALERT,
+      payload: {
+        type: "error",
+        content: `Direct Debit requires a complete billing address. Please add your ${missingFields.join(
+          ", "
+        )} to continue.`
+      }
+    });
+    // Release the button before navigating so checkout is usable on return.
+    dispatch({ type: DISABLE_SUBMIT, payload: false });
+    dispatch({ type: LOADING, payload: false });
+
+    if (billingAddress?.id) {
+      set({ addressIdToEdit: billingAddress.id });
+      switchView("billing-address-edit");
+    } else {
+      switchView("billing-address-create");
+    }
+
+    return true;
+  };
+
   const initPaymentRequest = (state, dispatch) => {
     if (skipPayment && (plan?.amount === 0 || props?.freeOrders))
       return;
@@ -1914,6 +1989,10 @@ const PaymentMethodContainerWithoutStripe = ({
   };
 
   const createPaymentSource = async (state, dispatch) => {
+    if (isBlockedByIncompleteBacsAddress(dispatch)) {
+      return;
+    }
+
     // Trigger form validation and wallet collection
     const { error: submitError } = await elements.submit();
     if (submitError) {
@@ -2202,6 +2281,11 @@ const PaymentMethodContainerWithoutStripe = ({
       );
       return;
     }
+
+    if (isBlockedByIncompleteBacsAddress(dispatch)) {
+      return;
+    }
+
     // Trigger form validation and wallet collection
     const { error: submitError } = await elements.submit();
     if (submitError) {

@@ -476,7 +476,7 @@ export const PelcroPaymentRequestButton = ({
 };
 
 export const CheckoutForm = ({ type }) => {
-  const { selectedPaymentMethodId, paymentMethodToEdit } =
+  const { selectedPaymentMethodId, paymentMethodToEdit, set } =
     usePelcro();
   const cardProcessor = getSiteCardProcessor();
 
@@ -572,6 +572,14 @@ export const CheckoutForm = ({ type }) => {
       <PaymentElement
         id="payment-element"
         options={paymentElementOptions}
+        onChange={(event) => {
+          // Track the selected method (card / bacs_debit / ...) so the payment
+          // container can enforce method-specific rules — BACS requires a
+          // complete billing address — before confirming with Stripe.
+          if (event?.value?.type) {
+            set({ selectedPaymentMethodType: event.value.type });
+          }
+        }}
       />
     );
   }
