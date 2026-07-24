@@ -1363,8 +1363,17 @@ const PaymentMethodContainerWithoutStripe = ({
   );
 
   const billingUser = window?.Pelcro?.user?.read();
+  // BACS requires a name too. Migrated records often have no name on the user but
+  // do carry first/last name on the address itself, so fall back to that before
+  // giving up.
+  const billingName =
+    billingUser?.name ||
+    [billingAddress?.first_name, billingAddress?.last_name]
+      .filter(Boolean)
+      .join(" ");
+
   const billingDetails = {
-    ...(billingUser?.name ? { name: billingUser.name } : {}),
+    ...(billingName ? { name: billingName } : {}),
     ...(billingUser?.email ? { email: billingUser.email } : {}),
     ...(Object.keys(cleanBillingAddress).length
       ? { address: cleanBillingAddress }
@@ -1402,6 +1411,15 @@ const PaymentMethodContainerWithoutStripe = ({
     return missing;
   };
 
+  const formatFieldList = (fields) => {
+    if (fields.length < 2) {
+      return fields[0];
+    }
+
+    const last = fields[fields.length - 1];
+    return `${fields.slice(0, -1).join(", ")} and ${last}`;
+  };
+
   /**
    * When BACS is the selected method and the billing address we would send is
    * incomplete, stop before Stripe and send the customer to complete it.
@@ -1414,7 +1432,22 @@ const PaymentMethodContainerWithoutStripe = ({
       return false;
     }
 
-    const missingFields = getMissingBacsAddressFields(billingAddress);
+    // Fields the billing-address form can fix — the address itself plus the
+    // first/last name it carries.
+    const missingAddressFields =
+      getMissingBacsAddressFields(billingAddress);
+    if (!billingName) {
+      missingAddressFields.push("name");
+    }
+
+    // Stripe also requires an email to send the BACS advance notice, but that
+    // lives on the profile, not the address form — report it, never route the
+    // customer to a form that cannot fix it.
+    const missingProfileFields = billingUser?.email ? [] : ["email"];
+    const missingFields = [
+      ...missingAddressFields,
+      ...missingProfileFields
+    ];
 
     if (!missingFields.length) {
       return false;
@@ -1424,14 +1457,20 @@ const PaymentMethodContainerWithoutStripe = ({
       type: SHOW_ALERT,
       payload: {
         type: "error",
-        content: `Direct Debit requires a complete billing address. Please add your ${missingFields.join(
-          ", "
+        content: `Direct Debit requires a complete billing address. Please add your ${formatFieldList(
+          missingFields
         )} to continue.`
       }
     });
     // Release the button before navigating so checkout is usable on return.
     dispatch({ type: DISABLE_SUBMIT, payload: false });
     dispatch({ type: LOADING, payload: false });
+
+    if (!missingAddressFields.length) {
+      // Only the email is missing — the address form cannot fix that, so surface
+      // the message without sending the customer somewhere useless.
+      return true;
+    }
 
     // Only edit a record that is ALREADY a billing address. The billing edit view
     // saves with type "billing", so pointing it at a shipping record would silently
