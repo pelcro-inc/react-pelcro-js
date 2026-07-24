@@ -45,7 +45,11 @@ export const initialState = {
   selectedPaymentMethodId: null,
   selectedAddressId: null,
   selectedBillingAddressId: null,
-  addressIdToEdit: null
+  addressIdToEdit: null,
+  // Payment method type currently selected inside the Stripe Payment Element
+  // (e.g. "card", "bacs_debit"). Kept in sync by the Element's onChange so the
+  // payment container can apply method-specific rules before confirming.
+  selectedPaymentMethodType: null
 };
 
 const createPelcroStore = () =>

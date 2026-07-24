@@ -476,9 +476,24 @@ export const PelcroPaymentRequestButton = ({
 };
 
 export const CheckoutForm = ({ type }) => {
-  const { selectedPaymentMethodId, paymentMethodToEdit } =
-    usePelcro();
+  const {
+    selectedPaymentMethodId,
+    paymentMethodToEdit,
+    selectedPaymentMethodType,
+    set
+  } = usePelcro();
   const cardProcessor = getSiteCardProcessor();
+
+  // Clear the tracked method on mount and unmount. This component returns null
+  // when a saved payment method is selected, so the Element does not always
+  // remount to re-report its type — without this, a stale "bacs_debit" from an
+  // earlier checkout could apply the BACS rules to a later card payment.
+  useEffect(() => {
+    set({ selectedPaymentMethodType: null });
+    return () => {
+      set({ selectedPaymentMethodType: null });
+    };
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const billingDetails = {
     name: window?.Pelcro?.user?.read()?.name,
@@ -572,6 +587,19 @@ export const CheckoutForm = ({ type }) => {
       <PaymentElement
         id="payment-element"
         options={paymentElementOptions}
+        onChange={(event) => {
+          // Track the selected method (card / bacs_debit / ...) so the payment
+          // container can enforce method-specific rules — BACS requires a
+          // complete billing address — before confirming with Stripe.
+          // Only write when it actually changes: `set` always produces a new
+          // store object and most consumers subscribe without a selector, so an
+          // unconditional write would re-render the whole modal tree on every
+          // Element change event, card flow included.
+          const nextType = event?.value?.type;
+          if (nextType && nextType !== selectedPaymentMethodType) {
+            set({ selectedPaymentMethodType: nextType });
+          }
+        }}
       />
     );
   }

@@ -5,6 +5,7 @@ import React, {
   useState
 } from "react";
 import { useTranslation } from "react-i18next";
+import toast from "react-hot-toast";
 import { loadStripe } from "@stripe/stripe-js";
 import {
   Elements,
@@ -143,6 +144,7 @@ const PaymentMethodContainerWithoutStripe = ({
   const pelcroStore = usePelcro();
   const {
     set,
+    switchView,
     order,
     selectedPaymentMethodId,
     couponCode,
@@ -160,6 +162,8 @@ const PaymentMethodContainerWithoutStripe = ({
   const selectedBillingAddressId =
     props.selectedBillingAddressId ??
     pelcroStore.selectedBillingAddressId;
+  const selectedPaymentMethodType =
+    pelcroStore.selectedPaymentMethodType;
   const giftRecipient =
     props.giftRecipient ?? pelcroStore.giftRecipient;
   const isGift = props.isGift ?? pelcroStore.isGift;
@@ -1318,27 +1322,167 @@ const PaymentMethodContainerWithoutStripe = ({
   //   }
   // }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const billingAddress = selectedBillingAddressId
-    ? window?.Pelcro?.user
-      ?.read()
-      ?.addresses?.find(
-        (address) => address.id == selectedBillingAddressId
-      ) ?? {}
-    : window?.Pelcro?.user
-      ?.read()
-      ?.addresses?.find(
-        (address) => address.type == "billing" && address.is_default
-      ) ?? {};
+  // #216009 — BACS Direct Debit requires a COMPLETE billing address (name, email,
+  // line1, city, postal_code, country; state unless GB) to create the Direct Debit
+  // mandate. The previous lookup returned {} whenever `selectedBillingAddressId` was
+  // unset AND no address happened to be flagged (type "billing" + is_default), so we
+  // sent `city: null` (and every other field null) and Stripe rejected the BACS
+  // payment method with `parameter_missing: billing_details[address][city]`. Card was
+  // unaffected because Stripe does not require an address for cards — which is exactly
+  // why this stayed invisible until BACS.
+  //
+  // Fix, scoped to keep the card flow visually identical (StripeElements stays
+  // `address: "never"`): resolve the user's real address through a widening fallback,
+  // and never emit explicit nulls (Stripe treats a present-but-null subfield as
+  // missing). If no usable address exists at all, `address` is omitted entirely and
+  // BACS surfaces the existing "billing address is required" error instead of a
+  // cryptic Stripe failure.
+  const userAddresses = window?.Pelcro?.user?.read()?.addresses ?? [];
 
+  // The original resolution, unchanged. EVERY non-BACS payment keeps using this.
+  // Widening it for card would change which address Stripe receives for AVS on a
+  // path that previously sent nothing at all, risking declines on cards that used
+  // to succeed — and it could send a shipping or unrelated record as "billing".
+  const designatedBillingAddress = selectedBillingAddressId
+    ? userAddresses.find((a) => a.id == selectedBillingAddressId) ?? {}
+    : userAddresses.find(
+      (a) => a.type == "billing" && a.is_default
+    ) ?? {};
+
+  // BACS is the only method Stripe demands a complete address for, so only BACS
+  // widens the search — and only when no address was explicitly designated.
+  const billingAddress =
+    selectedPaymentMethodType === "bacs_debit" &&
+      !designatedBillingAddress?.id
+      ? userAddresses.find((a) => a.type == "billing") ??
+      userAddresses.find((a) => a.id == selectedAddressId) ??
+      userAddresses.find((a) => a.is_default) ??
+      userAddresses[0] ??
+      {}
+      : designatedBillingAddress;
+
+  // Only pass fields that actually have a value — an explicit `null` is rejected by
+  // Stripe for methods (BACS) where the field is required.
+  const billingAddressFields = {
+    line1: billingAddress?.line1,
+    line2: billingAddress?.line2,
+    city: billingAddress?.city,
+    state: billingAddress?.state,
+    country: billingAddress?.country,
+    postal_code: billingAddress?.postal_code
+  };
+  const cleanBillingAddress = Object.fromEntries(
+    Object.entries(billingAddressFields).filter(
+      ([, value]) => value != null && value !== ""
+    )
+  );
+
+  // ONLY `address` is passed here. `name`, `email` and `phone` are deliberately
+  // left to the Payment Element, which is configured to collect them
+  // (`fields.billingDetails.{name,email,phone}: "auto"` in StripeElements.js).
+  // Stripe.js raises an IntegrationError when you supply a billing field the
+  // Element is collecting: "never" means *you* must pass it, "auto" means you must
+  // not. The pre-existing pairing of `address` in params with `address: "never"`
+  // in fields is the correct contract — passing name/email alongside "auto" would
+  // break EVERY Stripe payment, card included.
+  //
+  // It is also unnecessary: at "auto" the Element collects and requires name and
+  // email itself for BACS, prefilled from `defaultValues.billingDetails`.
   const billingDetails = {
-    address: {
-      line1: billingAddress?.line1 ?? null,
-      line2: billingAddress?.line2 ?? null,
-      city: billingAddress?.city ?? null,
-      state: billingAddress?.state ?? null,
-      country: billingAddress?.country ?? null,
-      postal_code: billingAddress?.postal_code ?? null
+    ...(Object.keys(cleanBillingAddress).length
+      ? { address: cleanBillingAddress }
+      : {})
+  };
+
+  // BACS needs a complete address to raise the Direct Debit mandate, and migrated
+  // customer records frequently have a required field (most often `city`) missing —
+  // the address is there, it is simply incomplete. Left alone, Stripe rejects the
+  // confirm with an opaque `parameter_missing: billing_details[address][city]`.
+  // Instead, validate before touching Stripe and route the customer straight to the
+  // billing-address form, prefilled with the address we already have, so they only
+  // fill the missing field and are returned to checkout.
+  const BACS_REQUIRED_ADDRESS_FIELDS = [
+    { key: "line1", label: "street address" },
+    { key: "city", label: "city" },
+    { key: "postal_code", label: "postal code" },
+    { key: "country", label: "country" }
+  ];
+
+  const getMissingBacsAddressFields = (address) => {
+    // NOTE: `state` is deliberately NOT required. Stripe does not require it for
+    // bacs_debit; the earlier rule here was copied from a backend validator
+    // (`required_unless:address.country,GB`) and produced false-positive blocks —
+    // worse, a case-sensitive ISO-2 comparison against migrated data holding
+    // "United Kingdom" or "gb" would demand a state that UK addresses do not have,
+    // trapping the customer in a loop they cannot escape.
+    return BACS_REQUIRED_ADDRESS_FIELDS.filter(
+      (field) => !address?.[field.key]
+    ).map((field) => field.label);
+  };
+
+  const formatFieldList = (fields) => {
+    if (fields.length < 2) {
+      return fields[0];
     }
+
+    const last = fields[fields.length - 1];
+    return `${fields.slice(0, -1).join(", ")} and ${last}`;
+  };
+
+  /**
+   * When BACS is the selected method and the billing address we would send is
+   * incomplete, stop before Stripe and send the customer to complete it.
+   *
+   * @param {Function} dispatch payment container dispatch
+   * @return {boolean} true when the submit was blocked
+   */
+  const isBlockedByIncompleteBacsAddress = (dispatch) => {
+    if (selectedPaymentMethodType !== "bacs_debit") {
+      return false;
+    }
+
+    // Only the ADDRESS is validated here. Stripe also requires name and email for
+    // the mandate, but those are collected by the Payment Element itself (they are
+    // "auto" in fields.billingDetails) and enforced by elements.submit(). Blocking
+    // because the stored user record has no name would reject a shopper who is
+    // about to type a perfectly good one — the same false-positive class as the
+    // removed `state` rule. The address is the only required piece the Element is
+    // told never to collect, which is exactly why it is the one that can be
+    // missing.
+    const missingFields =
+      getMissingBacsAddressFields(billingAddress);
+
+    if (!missingFields.length) {
+      return false;
+    }
+
+    // Use a toast, NOT the container's SHOW_ALERT: the alert renders inside this
+    // container, and switchView() below unmounts it in the same React batch, so an
+    // alert would never paint — the customer would be moved to the address form
+    // with no explanation of why. The Toaster is mounted at the app root and
+    // survives the view change.
+    toast.error(
+      `Direct Debit requires a complete billing address. Please add your ${formatFieldList(
+        missingFields
+      )} to continue.`,
+      { duration: 8000 }
+    );
+    dispatch({ type: DISABLE_SUBMIT, payload: false });
+    dispatch({ type: LOADING, payload: false });
+
+    // Only edit a record that is ALREADY a billing address. The billing edit view
+    // saves with type "billing", so pointing it at a shipping record would silently
+    // convert that record and the customer would lose their shipping address.
+    // Anything else — shipping-only, or no address at all — creates a new billing
+    // address instead of mutating an existing one.
+    if (billingAddress?.id && billingAddress?.type === "billing") {
+      set({ addressIdToEdit: billingAddress.id });
+      switchView("billing-address-edit");
+    } else {
+      switchView("billing-address-create");
+    }
+
+    return true;
   };
 
   const initPaymentRequest = (state, dispatch) => {
@@ -1887,6 +2031,10 @@ const PaymentMethodContainerWithoutStripe = ({
   };
 
   const createPaymentSource = async (state, dispatch) => {
+    if (isBlockedByIncompleteBacsAddress(dispatch)) {
+      return;
+    }
+
     // Trigger form validation and wallet collection
     const { error: submitError } = await elements.submit();
     if (submitError) {
@@ -2055,6 +2203,12 @@ const PaymentMethodContainerWithoutStripe = ({
   };
 
   const replacePaymentSource = async (state, dispatch) => {
+    // CheckoutForm renders the full Payment Element (including the Direct Debit
+    // tab) for type "deletePaymentSource", so BACS is reachable here too.
+    if (isBlockedByIncompleteBacsAddress(dispatch)) {
+      return;
+    }
+
     const { id: paymentMethodId } = paymentMethodToDelete;
     // Trigger form validation and wallet collection
     const { error: submitError } = await elements.submit();
@@ -2175,6 +2329,11 @@ const PaymentMethodContainerWithoutStripe = ({
       );
       return;
     }
+
+    if (isBlockedByIncompleteBacsAddress(dispatch)) {
+      return;
+    }
+
     // Trigger form validation and wallet collection
     const { error: submitError } = await elements.submit();
     if (submitError) {
