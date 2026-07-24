@@ -1338,14 +1338,28 @@ const PaymentMethodContainerWithoutStripe = ({
   // BACS surfaces the existing "billing address is required" error instead of a
   // cryptic Stripe failure.
   const userAddresses = window?.Pelcro?.user?.read()?.addresses ?? [];
+
+  // The original resolution, unchanged. EVERY non-BACS payment keeps using this.
+  // Widening it for card would change which address Stripe receives for AVS on a
+  // path that previously sent nothing at all, risking declines on cards that used
+  // to succeed — and it could send a shipping or unrelated record as "billing".
+  const designatedBillingAddress = selectedBillingAddressId
+    ? userAddresses.find((a) => a.id == selectedBillingAddressId) ?? {}
+    : userAddresses.find(
+      (a) => a.type == "billing" && a.is_default
+    ) ?? {};
+
+  // BACS is the only method Stripe demands a complete address for, so only BACS
+  // widens the search — and only when no address was explicitly designated.
   const billingAddress =
-    userAddresses.find((a) => a.id == selectedBillingAddressId) ??
-    userAddresses.find((a) => a.type == "billing" && a.is_default) ??
-    userAddresses.find((a) => a.type == "billing") ??
-    userAddresses.find((a) => a.id == selectedAddressId) ??
-    userAddresses.find((a) => a.is_default) ??
-    userAddresses[0] ??
-    {};
+    selectedPaymentMethodType === "bacs_debit" &&
+      !designatedBillingAddress?.id
+      ? userAddresses.find((a) => a.type == "billing") ??
+      userAddresses.find((a) => a.id == selectedAddressId) ??
+      userAddresses.find((a) => a.is_default) ??
+      userAddresses[0] ??
+      {}
+      : designatedBillingAddress;
 
   // Only pass fields that actually have a value — an explicit `null` is rejected by
   // Stripe for methods (BACS) where the field is required.
@@ -1363,19 +1377,18 @@ const PaymentMethodContainerWithoutStripe = ({
     )
   );
 
-  const billingUser = window?.Pelcro?.user?.read();
-  // BACS requires a name too. Migrated records often have no name on the user but
-  // do carry first/last name on the address itself, so fall back to that before
-  // giving up.
-  const billingName =
-    billingUser?.name ||
-    [billingAddress?.first_name, billingAddress?.last_name]
-      .filter(Boolean)
-      .join(" ");
-
+  // ONLY `address` is passed here. `name`, `email` and `phone` are deliberately
+  // left to the Payment Element, which is configured to collect them
+  // (`fields.billingDetails.{name,email,phone}: "auto"` in StripeElements.js).
+  // Stripe.js raises an IntegrationError when you supply a billing field the
+  // Element is collecting: "never" means *you* must pass it, "auto" means you must
+  // not. The pre-existing pairing of `address` in params with `address: "never"`
+  // in fields is the correct contract — passing name/email alongside "auto" would
+  // break EVERY Stripe payment, card included.
+  //
+  // It is also unnecessary: at "auto" the Element collects and requires name and
+  // email itself for BACS, prefilled from `defaultValues.billingDetails`.
   const billingDetails = {
-    ...(billingName ? { name: billingName } : {}),
-    ...(billingUser?.email ? { email: billingUser.email } : {}),
     ...(Object.keys(cleanBillingAddress).length
       ? { address: cleanBillingAddress }
       : {})
@@ -1396,20 +1409,15 @@ const PaymentMethodContainerWithoutStripe = ({
   ];
 
   const getMissingBacsAddressFields = (address) => {
-    const missing = BACS_REQUIRED_ADDRESS_FIELDS.filter(
+    // NOTE: `state` is deliberately NOT required. Stripe does not require it for
+    // bacs_debit; the earlier rule here was copied from a backend validator
+    // (`required_unless:address.country,GB`) and produced false-positive blocks —
+    // worse, a case-sensitive ISO-2 comparison against migrated data holding
+    // "United Kingdom" or "gb" would demand a state that UK addresses do not have,
+    // trapping the customer in a loop they cannot escape.
+    return BACS_REQUIRED_ADDRESS_FIELDS.filter(
       (field) => !address?.[field.key]
     ).map((field) => field.label);
-
-    // Mirrors the backend rule `required_unless:address.country,GB`.
-    if (
-      address?.country &&
-      address.country !== "GB" &&
-      !address?.state
-    ) {
-      missing.push("state");
-    }
-
-    return missing;
   };
 
   const formatFieldList = (fields) => {
@@ -1433,22 +1441,16 @@ const PaymentMethodContainerWithoutStripe = ({
       return false;
     }
 
-    // Fields the billing-address form can fix — the address itself plus the
-    // first/last name it carries.
-    const missingAddressFields =
+    // Only the ADDRESS is validated here. Stripe also requires name and email for
+    // the mandate, but those are collected by the Payment Element itself (they are
+    // "auto" in fields.billingDetails) and enforced by elements.submit(). Blocking
+    // because the stored user record has no name would reject a shopper who is
+    // about to type a perfectly good one — the same false-positive class as the
+    // removed `state` rule. The address is the only required piece the Element is
+    // told never to collect, which is exactly why it is the one that can be
+    // missing.
+    const missingFields =
       getMissingBacsAddressFields(billingAddress);
-    if (!billingName) {
-      missingAddressFields.push("name");
-    }
-
-    // Stripe also requires an email to send the BACS advance notice, but that
-    // lives on the profile, not the address form — report it, never route the
-    // customer to a form that cannot fix it.
-    const missingProfileFields = billingUser?.email ? [] : ["email"];
-    const missingFields = [
-      ...missingAddressFields,
-      ...missingProfileFields
-    ];
 
     if (!missingFields.length) {
       return false;
@@ -1467,12 +1469,6 @@ const PaymentMethodContainerWithoutStripe = ({
     );
     dispatch({ type: DISABLE_SUBMIT, payload: false });
     dispatch({ type: LOADING, payload: false });
-
-    if (!missingAddressFields.length) {
-      // Only the email is missing — the address form cannot fix that, so surface
-      // the message without sending the customer somewhere useless.
-      return true;
-    }
 
     // Only edit a record that is ALREADY a billing address. The billing edit view
     // saves with type "billing", so pointing it at a shipping record would silently
