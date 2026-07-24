@@ -5,6 +5,7 @@ import React, {
   useState
 } from "react";
 import { useTranslation } from "react-i18next";
+import toast from "react-hot-toast";
 import { loadStripe } from "@stripe/stripe-js";
 import {
   Elements,
@@ -1453,16 +1454,17 @@ const PaymentMethodContainerWithoutStripe = ({
       return false;
     }
 
-    dispatch({
-      type: SHOW_ALERT,
-      payload: {
-        type: "error",
-        content: `Direct Debit requires a complete billing address. Please add your ${formatFieldList(
-          missingFields
-        )} to continue.`
-      }
-    });
-    // Release the button before navigating so checkout is usable on return.
+    // Use a toast, NOT the container's SHOW_ALERT: the alert renders inside this
+    // container, and switchView() below unmounts it in the same React batch, so an
+    // alert would never paint — the customer would be moved to the address form
+    // with no explanation of why. The Toaster is mounted at the app root and
+    // survives the view change.
+    toast.error(
+      `Direct Debit requires a complete billing address. Please add your ${formatFieldList(
+        missingFields
+      )} to continue.`,
+      { duration: 8000 }
+    );
     dispatch({ type: DISABLE_SUBMIT, payload: false });
     dispatch({ type: LOADING, payload: false });
 
@@ -2205,6 +2207,12 @@ const PaymentMethodContainerWithoutStripe = ({
   };
 
   const replacePaymentSource = async (state, dispatch) => {
+    // CheckoutForm renders the full Payment Element (including the Direct Debit
+    // tab) for type "deletePaymentSource", so BACS is reachable here too.
+    if (isBlockedByIncompleteBacsAddress(dispatch)) {
+      return;
+    }
+
     const { id: paymentMethodId } = paymentMethodToDelete;
     // Trigger form validation and wallet collection
     const { error: submitError } = await elements.submit();
