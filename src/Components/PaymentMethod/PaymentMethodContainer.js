@@ -1433,7 +1433,12 @@ const PaymentMethodContainerWithoutStripe = ({
     dispatch({ type: DISABLE_SUBMIT, payload: false });
     dispatch({ type: LOADING, payload: false });
 
-    if (billingAddress?.id) {
+    // Only edit a record that is ALREADY a billing address. The billing edit view
+    // saves with type "billing", so pointing it at a shipping record would silently
+    // convert that record and the customer would lose their shipping address.
+    // Anything else — shipping-only, or no address at all — creates a new billing
+    // address instead of mutating an existing one.
+    if (billingAddress?.id && billingAddress?.type === "billing") {
       set({ addressIdToEdit: billingAddress.id });
       switchView("billing-address-edit");
     } else {
