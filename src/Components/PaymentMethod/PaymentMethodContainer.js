@@ -1318,27 +1318,54 @@ const PaymentMethodContainerWithoutStripe = ({
   //   }
   // }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const billingAddress = selectedBillingAddressId
-    ? window?.Pelcro?.user
-      ?.read()
-      ?.addresses?.find(
-        (address) => address.id == selectedBillingAddressId
-      ) ?? {}
-    : window?.Pelcro?.user
-      ?.read()
-      ?.addresses?.find(
-        (address) => address.type == "billing" && address.is_default
-      ) ?? {};
+  // #216009 — BACS Direct Debit requires a COMPLETE billing address (name, email,
+  // line1, city, postal_code, country; state unless GB) to create the Direct Debit
+  // mandate. The previous lookup returned {} whenever `selectedBillingAddressId` was
+  // unset AND no address happened to be flagged (type "billing" + is_default), so we
+  // sent `city: null` (and every other field null) and Stripe rejected the BACS
+  // payment method with `parameter_missing: billing_details[address][city]`. Card was
+  // unaffected because Stripe does not require an address for cards — which is exactly
+  // why this stayed invisible until BACS.
+  //
+  // Fix, scoped to keep the card flow visually identical (StripeElements stays
+  // `address: "never"`): resolve the user's real address through a widening fallback,
+  // and never emit explicit nulls (Stripe treats a present-but-null subfield as
+  // missing). If no usable address exists at all, `address` is omitted entirely and
+  // BACS surfaces the existing "billing address is required" error instead of a
+  // cryptic Stripe failure.
+  const userAddresses = window?.Pelcro?.user?.read()?.addresses ?? [];
+  const billingAddress =
+    userAddresses.find((a) => a.id == selectedBillingAddressId) ??
+    userAddresses.find((a) => a.type == "billing" && a.is_default) ??
+    userAddresses.find((a) => a.type == "billing") ??
+    userAddresses.find((a) => a.id == selectedAddressId) ??
+    userAddresses.find((a) => a.is_default) ??
+    userAddresses[0] ??
+    {};
 
+  // Only pass fields that actually have a value — an explicit `null` is rejected by
+  // Stripe for methods (BACS) where the field is required.
+  const billingAddressFields = {
+    line1: billingAddress?.line1,
+    line2: billingAddress?.line2,
+    city: billingAddress?.city,
+    state: billingAddress?.state,
+    country: billingAddress?.country,
+    postal_code: billingAddress?.postal_code
+  };
+  const cleanBillingAddress = Object.fromEntries(
+    Object.entries(billingAddressFields).filter(
+      ([, value]) => value != null && value !== ""
+    )
+  );
+
+  const billingUser = window?.Pelcro?.user?.read();
   const billingDetails = {
-    address: {
-      line1: billingAddress?.line1 ?? null,
-      line2: billingAddress?.line2 ?? null,
-      city: billingAddress?.city ?? null,
-      state: billingAddress?.state ?? null,
-      country: billingAddress?.country ?? null,
-      postal_code: billingAddress?.postal_code ?? null
-    }
+    ...(billingUser?.name ? { name: billingUser.name } : {}),
+    ...(billingUser?.email ? { email: billingUser.email } : {}),
+    ...(Object.keys(cleanBillingAddress).length
+      ? { address: cleanBillingAddress }
+      : {})
   };
 
   const initPaymentRequest = (state, dispatch) => {
