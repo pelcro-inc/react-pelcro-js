@@ -12,9 +12,15 @@ import {
 } from "../../utils/action-types";
 
 const moveDefaultPaymentMethodToStart = (paymentMethods) => {
+  const validPaymentMethods = paymentMethods.filter(Boolean);
   const defaultPaymentMethod =
-    getDefaultPaymentMethod(paymentMethods);
-  const paymentMethodsWithoutDefault = paymentMethods.filter(
+    getDefaultPaymentMethod(validPaymentMethods);
+
+  if (!defaultPaymentMethod) {
+    return validPaymentMethods;
+  }
+
+  const paymentMethodsWithoutDefault = validPaymentMethods.filter(
     (paymentMethod) => paymentMethod.id !== defaultPaymentMethod.id
   );
 
@@ -26,9 +32,9 @@ const moveDefaultPaymentMethodToStart = (paymentMethods) => {
 };
 
 const getDefaultPaymentMethod = (paymentMethods) => {
-  const defaultPaymentMethod = paymentMethods.find(
-    (paymentMethod) => paymentMethod.is_default
-  );
+  const defaultPaymentMethod = paymentMethods
+    .filter(Boolean)
+    .find((paymentMethod) => paymentMethod.is_default);
   return defaultPaymentMethod;
 };
 
