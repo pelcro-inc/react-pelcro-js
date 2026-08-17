@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, useRef } from "react";
 import { usePelcro } from "../../hooks/usePelcro";
 import { useTranslation } from "react-i18next";
 import { store } from "./PaymentMethodContainer";
@@ -35,6 +35,17 @@ export const SubmitPaymentMethod = ({ onClick, ...otherProps }) => {
       year
     }
   } = useContext(store);
+
+  const buttonRef = useRef(null);
+
+  // Force browser repaint when price updates after coupon application.
+  // Fixes Safari not repainting the button label on sites with heavy
+  // third-party scripts (e.g. GTM, Facebook Pixel, Braze).
+  useEffect(() => {
+    if (buttonRef.current) {
+      void buttonRef.current.offsetHeight;
+    }
+  }, [updatedPrice]);
 
   const planQuantity = plan?.quantity ?? 1;
   const price = updatedPrice ?? plan?.amount;
@@ -130,7 +141,7 @@ export const SubmitPaymentMethod = ({ onClick, ...otherProps }) => {
     >
       {/* Show price on button only if there's a selected plan */}
       {plan ? (
-        <span className="plc-capitalize ">
+        <span key={priceFormatted} ref={buttonRef} className="plc-capitalize ">
           {t("labels.pay")} {priceFormatted && priceFormatted}
         </span>
       ) : (
