@@ -2,9 +2,14 @@
   "labels": {
     "title": "Cancel subscription",
     "cancelReason": "Cancellation reason",
+    "selectReason": "Select a reason",
+    "otherReason": "Please specify your reason",
     "endOn": "End on",
     "endImmediately": "End immediately",
     "cancel": "Cancel",
+    "cancelReasons": {
+      "other": "Other"
+    },
     "subCancellation": {
       "goBack": "Go back"
     }
