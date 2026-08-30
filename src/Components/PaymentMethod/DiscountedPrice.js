@@ -13,7 +13,7 @@ export const DiscountedPrice = (props) => {
   const { t } = useTranslation("checkoutForm");
   const {
     dispatch,
-    state: { updatedPrice, taxAmount, percentOff }
+    state: { updatedPrice, taxAmount, percentOff, couponObject }
   } = useContext(store);
   const { order, plan } = usePelcro();
 
@@ -37,12 +37,23 @@ export const DiscountedPrice = (props) => {
   };
 
   if (percentOff) {
+    // For fixed amount coupons, percent_off is 0 so percentOff is "0%"
+    // Display the actual discount amount instead
+    const isFixedCoupon = couponObject?.amount_off && couponObject?.percent_off === 0;
+    const discountLabel = isFixedCoupon
+      ? getFormattedPriceByLocal(
+          couponObject.amount_off,
+          plan?.currency ?? ecommOrderCurrency,
+          getPageOrDefaultLanguage()
+        )
+      : percentOff;
+
     return (
       <div
         className="plc-flex plc-items-center plc-justify-center plc-mt-2 pelcro-discount"
         {...props}
       >
-        (-{percentOff})
+        (-{discountLabel})
         <span className="plc-ml-1 plc-font-bold pelcro-discounted-price">
           {priceFormatted}
         </span>
