@@ -29,6 +29,8 @@
     "amount": "Importe",
     "email": "Correo",
     "password": "Contraseña",
-    "isDefault": "Fijar por defecto"
+    "isDefault": "Fijar por defecto",
+    "expMonth": "Mes de vencimiento",
+    "expYear": "Año de vencimiento"
   }
 }

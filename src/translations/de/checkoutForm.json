@@ -29,6 +29,8 @@
     "amount": "Betrag",
     "email": "E-Mail",
     "password": "Passwort",
-    "isDefault": "Als Standard festlegen"
+    "isDefault": "Als Standard festlegen",
+    "expMonth": "Ablaufmonat",
+    "expYear": "Ablaufjahr"
   }
 }
