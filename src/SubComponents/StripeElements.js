@@ -114,6 +114,7 @@ export const CheckoutForm = ({ type }) => {
   const { selectedPaymentMethodId, paymentMethodToEdit } =
     usePelcro();
   const cardProcessor = getSiteCardProcessor();
+  const { t } = useTranslation("checkoutForm");
   const {
     state: { isSkeletonLoaded }
   } = useContext(store);
@@ -139,10 +140,16 @@ export const CheckoutForm = ({ type }) => {
         ></div>
         <div className="plc-flex plc-items-end plc-justify-between plc-my-2">
           <div className="plc-w-6/12 plc-pr-4">
-            <MonthSelect store={store} placeholder="Exp Month *" />
+            <MonthSelect
+              store={store}
+              placeholder={`${t("labels.expMonth")} *`}
+            />
           </div>
           <div className="plc-w-6/12">
-            <YearSelect store={store} placeholder="Exp Year *" />
+            <YearSelect
+              store={store}
+              placeholder={`${t("labels.expYear")} *`}
+            />
           </div>
         </div>
       </div>
@@ -244,10 +251,16 @@ export const CheckoutForm = ({ type }) => {
           )}
           <div className="plc-flex plc-items-end plc-justify-between plc-my-2">
             <div className="plc-w-6/12 plc-pr-4">
-              <MonthSelect store={store} placeholder="Exp Month *" />
+              <MonthSelect
+                store={store}
+                placeholder={`${t("labels.expMonth")} *`}
+              />
             </div>
             <div className="plc-w-6/12">
-              <YearSelect store={store} placeholder="Exp Year *" />
+              <YearSelect
+                store={store}
+                placeholder={`${t("labels.expYear")} *`}
+              />
             </div>
           </div>
         </div>

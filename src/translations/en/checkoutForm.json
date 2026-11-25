@@ -29,6 +29,8 @@
     "amount": "Amount",
     "email": "Email",
     "password": "Password",
-    "isDefault": "Set as default"
+    "isDefault": "Set as default",
+    "expMonth": "Exp Month",
+    "expYear": "Exp Year"
   }
 }

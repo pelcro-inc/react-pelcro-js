@@ -29,6 +29,8 @@
     "order": "Commande",
     "amount": "Montant",
     "email": "Courriel",
-    "password": "Créer un mot de passe"
+    "password": "Créer un mot de passe",
+    "expMonth": "Mois d'expiration",
+    "expYear": "Année d'expiration"
   }
 }
